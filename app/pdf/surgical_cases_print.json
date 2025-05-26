@@ -1,0 +1,7584 @@
+
+pdfDocument = {
+{BEGIN backgroundImage}
+	background: {
+		image: {$backgroundImage},
+		{BEGIN bgWidth}
+		imgWidth: {$bgWidth},
+		imgHeight: {$bgHeight},
+		{END bgWidth}
+	},
+{END backgroundImage}
+	styles: {
+				bodycell: {
+			fontSize:12,
+		},
+		headcell: {
+			fontSize:12,
+			bold: true
+		},
+
+	
+			},
+	defaultStyle: {
+		fontSize: 14,
+	},
+	"content": [
+		{BEGIN body}
+		{BEGIN embedded_grid_caption}
+			{
+				text: '{$jscaption public_surgical_cases}',
+			},
+		{END embedded_grid_caption}
+		{BEGIN embedded_page_title}
+			{
+				text: '{$jspagetitlelabel public_surgical_cases print}',
+			},
+		{END embedded_page_title}		
+		{ 
+			{BEGIN standalone_page}
+			pageBreak: 'before',
+			standAlonePage: true,
+			{END standalone_page}
+			{BEGIN embedded_grid}
+			embeddedPage: true,
+			{END embedded_grid}
+			layout: {
+				hLineWidth: function(i, node) { return 0.1; },
+				vLineWidth: function(i, node) { 
+					return 0.1; 
+				},
+				hLineColor: function(i, node) { return 'lightgray'; },
+				vLineColor: function(i, node) { return 'lightgray'; },
+			},
+			table: {
+				{BEGIN embedded_grid}
+				embeddedPage: true,
+				{END embedded_grid}
+				
+				tableForm: true,
+				headerRows: 1 
+															{BEGIN row_grid_0}
+							+1
+						{END row_grid_0}
+													{BEGIN embedded_grid} -1 {END embedded_grid} ,
+
+				widths: [
+														{BEGIN col_grid_0}
+					"%",
+					{END col_grid_0}
+										{BEGIN col_grid_1}
+					"%",
+					{END col_grid_1}
+										{BEGIN col_grid_2}
+					"%",
+					{END col_grid_2}
+										{BEGIN col_grid_3}
+					"%",
+					{END col_grid_3}
+										{BEGIN col_grid_4}
+					"%",
+					{END col_grid_4}
+										{BEGIN col_grid_5}
+					"%",
+					{END col_grid_5}
+										{BEGIN col_grid_6}
+					"%",
+					{END col_grid_6}
+										{BEGIN col_grid_7}
+					"%",
+					{END col_grid_7}
+										{BEGIN col_grid_8}
+					"%",
+					{END col_grid_8}
+										{BEGIN col_grid_9}
+					"%",
+					{END col_grid_9}
+										{BEGIN col_grid_10}
+					"%",
+					{END col_grid_10}
+										{BEGIN col_grid_11}
+					"%",
+					{END col_grid_11}
+										{BEGIN col_grid_12}
+					"%",
+					{END col_grid_12}
+										{BEGIN col_grid_13}
+					"%",
+					{END col_grid_13}
+										{BEGIN col_grid_14}
+					"%",
+					{END col_grid_14}
+										{BEGIN col_grid_15}
+					"%",
+					{END col_grid_15}
+										{BEGIN col_grid_16}
+					"%",
+					{END col_grid_16}
+										{BEGIN col_grid_17}
+					"%",
+					{END col_grid_17}
+										{BEGIN col_grid_18}
+					"%",
+					{END col_grid_18}
+										{BEGIN col_grid_19}
+					"%",
+					{END col_grid_19}
+										{BEGIN col_grid_20}
+					"%",
+					{END col_grid_20}
+										{BEGIN col_grid_21}
+					"%",
+					{END col_grid_21}
+										{BEGIN col_grid_22}
+					"%",
+					{END col_grid_22}
+										{BEGIN col_grid_23}
+					"%",
+					{END col_grid_23}
+										{BEGIN col_grid_24}
+					"%",
+					{END col_grid_24}
+										{BEGIN col_grid_25}
+					"%",
+					{END col_grid_25}
+										{BEGIN col_grid_26}
+					"%",
+					{END col_grid_26}
+										{BEGIN col_grid_27}
+					"%",
+					{END col_grid_27}
+										{BEGIN col_grid_28}
+					"%",
+					{END col_grid_28}
+										{BEGIN col_grid_29}
+					"%",
+					{END col_grid_29}
+										{BEGIN col_grid_30}
+					"%",
+					{END col_grid_30}
+										{BEGIN col_grid_31}
+					"%",
+					{END col_grid_31}
+										{BEGIN col_grid_32}
+					"%",
+					{END col_grid_32}
+										{BEGIN col_grid_33}
+					"%",
+					{END col_grid_33}
+										{BEGIN col_grid_34}
+					"%",
+					{END col_grid_34}
+										{BEGIN col_grid_35}
+					"%",
+					{END col_grid_35}
+										{BEGIN col_grid_36}
+					"%",
+					{END col_grid_36}
+										{BEGIN col_grid_37}
+					"%",
+					{END col_grid_37}
+										{BEGIN col_grid_38}
+					"%",
+					{END col_grid_38}
+										{BEGIN col_grid_39}
+					"%",
+					{END col_grid_39}
+										{BEGIN col_grid_40}
+					"%",
+					{END col_grid_40}
+										{BEGIN col_grid_41}
+					"%",
+					{END col_grid_41}
+										{BEGIN col_grid_42}
+					"%",
+					{END col_grid_42}
+										{BEGIN col_grid_43}
+					"%",
+					{END col_grid_43}
+										{BEGIN col_grid_44}
+					"%",
+					{END col_grid_44}
+										{BEGIN col_grid_45}
+					"%",
+					{END col_grid_45}
+										{BEGIN col_grid_46}
+					"%",
+					{END col_grid_46}
+										{BEGIN col_grid_47}
+					"%",
+					{END col_grid_47}
+										{BEGIN col_grid_48}
+					"%",
+					{END col_grid_48}
+										{BEGIN col_grid_49}
+					"%",
+					{END col_grid_49}
+										{BEGIN col_grid_50}
+					"%",
+					{END col_grid_50}
+										{BEGIN col_grid_51}
+					"%",
+					{END col_grid_51}
+										{BEGIN col_grid_52}
+					"%",
+					{END col_grid_52}
+										{BEGIN col_grid_53}
+					"%",
+					{END col_grid_53}
+										{BEGIN col_grid_54}
+					"%",
+					{END col_grid_54}
+										{BEGIN col_grid_55}
+					"%",
+					{END col_grid_55}
+										{BEGIN col_grid_56}
+					"%",
+					{END col_grid_56}
+										{BEGIN col_grid_57}
+					"%",
+					{END col_grid_57}
+										{BEGIN col_grid_58}
+					"%",
+					{END col_grid_58}
+										{BEGIN col_grid_59}
+					"%",
+					{END col_grid_59}
+										{BEGIN col_grid_60}
+					"%",
+					{END col_grid_60}
+										{BEGIN col_grid_61}
+					"%",
+					{END col_grid_61}
+										{BEGIN col_grid_62}
+					"%",
+					{END col_grid_62}
+										{BEGIN col_grid_63}
+					"%",
+					{END col_grid_63}
+										{BEGIN col_grid_64}
+					"%",
+					{END col_grid_64}
+										{BEGIN col_grid_65}
+					"%",
+					{END col_grid_65}
+										{BEGIN col_grid_66}
+					"%",
+					{END col_grid_66}
+										{BEGIN col_grid_67}
+					"%",
+					{END col_grid_67}
+										{BEGIN col_grid_68}
+					"%",
+					{END col_grid_68}
+										{BEGIN col_grid_69}
+					"%",
+					{END col_grid_69}
+										{BEGIN col_grid_70}
+					"%",
+					{END col_grid_70}
+										{BEGIN col_grid_71}
+					"%",
+					{END col_grid_71}
+										{BEGIN col_grid_72}
+					"%",
+					{END col_grid_72}
+										{BEGIN col_grid_73}
+					"%",
+					{END col_grid_73}
+										{BEGIN col_grid_74}
+					"%",
+					{END col_grid_74}
+										{BEGIN col_grid_75}
+					"%",
+					{END col_grid_75}
+										{BEGIN col_grid_76}
+					"%",
+					{END col_grid_76}
+															],
+											heights: [ // first height for header part
+					"%",
+																		{BEGIN row_grid_0}
+							"%",
+							{END row_grid_0}
+																							 	{BEGIN grid_row}
+													{BEGIN row_grid_1}
+							"%",
+							{END row_grid_1}
+																								{BEGIN row_grid_2}
+							"%",
+							{END row_grid_2}
+													{END grid_row}
+																								{BEGIN row_grid_3}
+							"%",
+							{END row_grid_3}
+															],
+							
+				body: [
+				{BEGIN standalone_page}
+					[
+						{
+							colSpan: {$formwidth_grid},
+							border:[false, false,false,false],
+							stack: [
+
+																										
+{
+	table: {
+	
+				
+		location: 'top',
+		
+		
+		widths: [
+								"*", 
+					 ],	
+		
+	
+		body: [
+				
+				[
+																{
+	cellId: 'c2',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+		
+			
+			
+	
+			"stack": [
+		
+				
+			{"text":"{$jspagetitlelabel public_surgical_cases print}","hidden":"{$item_hide_print_header}","fontSize":30},
+				
+				
+			{"text":"{$printtabheader_text}","hidden":"{$item_hide_print_subheader}"},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+											],
+						[
+																{
+	cellId: 'c4',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+		
+			
+			
+	
+			"stack": [
+		
+				
+			{BEGIN mastertable_block}
+			{$showmasterfile}
+		{END mastertable_block},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+											],
+		
+		]
+	}
+}
+,
+								
+																										
+{
+	table: {
+	
+				
+		location: 'above-grid',
+		
+		
+		widths: [
+								"*", 
+					 ],	
+		
+	
+		body: [
+				
+				[
+																{
+	cellId: 'c1',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+		
+			
+			
+	
+			"text": [
+		
+				
+			{"text":"Page %current% of %total%","hidden":"{$item_hide_print_pages}","isHtml":true,"page_indicator":true},
+				
+				
+			{"text":"","hidden":"{$item_hide_grid_inline_cancel}"},
+				
+				
+			{"text":"","hidden":"{$item_hide_inline_add}"},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+											],
+		
+		]
+	}
+}
+,
+															]
+						},
+					],
+				{END standalone_page}
+
+																	
+
+				
+				{BEGIN row_grid_0}
+				[
+																{BEGIN cellblock_grid_headcell_field}
+{
+	cellId: 'headcell_field',
+	col:0,
+	row:0,
+			fieldName: 'case_id',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases case_id }","hidden":"{$item_hide_simple_grid_field77}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$case_id_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field}
+																							{BEGIN cellblock_grid_headcell_field1}
+{
+	cellId: 'headcell_field1',
+	col:0,
+	row:0,
+			fieldName: 'facility_id',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases facility_id }","hidden":"{$item_hide_simple_grid_field78}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$facility_id_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field1}
+																							{BEGIN cellblock_grid_headcell_field2}
+{
+	cellId: 'headcell_field2',
+	col:0,
+	row:0,
+			fieldName: 'country_id',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases country_id }","hidden":"{$item_hide_simple_grid_field79}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$country_id_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field2}
+																							{BEGIN cellblock_grid_headcell_field3}
+{
+	cellId: 'headcell_field3',
+	col:0,
+	row:0,
+			fieldName: 'surgery_date',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases surgery_date }","hidden":"{$item_hide_simple_grid_field80}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$surgery_date_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field3}
+																							{BEGIN cellblock_grid_headcell_field4}
+{
+	cellId: 'headcell_field4',
+	col:0,
+	row:0,
+			fieldName: 'data_type',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases data_type }","hidden":"{$item_hide_simple_grid_field81}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$data_type_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field4}
+																							{BEGIN cellblock_grid_headcell_field5}
+{
+	cellId: 'headcell_field5',
+	col:0,
+	row:0,
+			fieldName: 'data_collector_name',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases data_collector_name }","hidden":"{$item_hide_simple_grid_field82}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$data_collector_name_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field5}
+																							{BEGIN cellblock_grid_headcell_field6}
+{
+	cellId: 'headcell_field6',
+	col:0,
+	row:0,
+			fieldName: 'location_of_surgery',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases location_of_surgery }","hidden":"{$item_hide_simple_grid_field83}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$location_of_surgery_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field6}
+																							{BEGIN cellblock_grid_headcell_field7}
+{
+	cellId: 'headcell_field7',
+	col:0,
+	row:0,
+			fieldName: 'patient_sex',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases patient_sex }","hidden":"{$item_hide_simple_grid_field84}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$patient_sex_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field7}
+																							{BEGIN cellblock_grid_headcell_field8}
+{
+	cellId: 'headcell_field8',
+	col:0,
+	row:0,
+			fieldName: 'patient_asa_classification',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases patient_asa_classification }","hidden":"{$item_hide_simple_grid_field85}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$patient_asa_classification_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field8}
+																							{BEGIN cellblock_grid_headcell_field9}
+{
+	cellId: 'headcell_field9',
+	col:0,
+	row:0,
+			fieldName: 'patient_dob',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases patient_dob }","hidden":"{$item_hide_simple_grid_field86}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$patient_dob_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field9}
+																							{BEGIN cellblock_grid_headcell_field10}
+{
+	cellId: 'headcell_field10',
+	col:0,
+	row:0,
+			fieldName: 'patient_age',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases patient_age }","hidden":"{$item_hide_simple_grid_field87}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$patient_age_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field10}
+																							{BEGIN cellblock_grid_headcell_field11}
+{
+	cellId: 'headcell_field11',
+	col:0,
+	row:0,
+			fieldName: 'diabetes',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases diabetes }","hidden":"{$item_hide_simple_grid_field88}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$diabetes_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field11}
+																							{BEGIN cellblock_grid_headcell_field12}
+{
+	cellId: 'headcell_field12',
+	col:0,
+	row:0,
+			fieldName: 'hypertension',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases hypertension }","hidden":"{$item_hide_simple_grid_field89}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$hypertension_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field12}
+																							{BEGIN cellblock_grid_headcell_field13}
+{
+	cellId: 'headcell_field13',
+	col:0,
+	row:0,
+			fieldName: 'obese',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases obese }","hidden":"{$item_hide_simple_grid_field90}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$obese_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field13}
+																							{BEGIN cellblock_grid_headcell_field14}
+{
+	cellId: 'headcell_field14',
+	col:0,
+	row:0,
+			fieldName: 'malnourished',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases malnourished }","hidden":"{$item_hide_simple_grid_field91}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$malnourished_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field14}
+																							{BEGIN cellblock_grid_headcell_field15}
+{
+	cellId: 'headcell_field15',
+	col:0,
+	row:0,
+			fieldName: 'smoker',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases smoker }","hidden":"{$item_hide_simple_grid_field92}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$smoker_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field15}
+																							{BEGIN cellblock_grid_headcell_field16}
+{
+	cellId: 'headcell_field16',
+	col:0,
+	row:0,
+			fieldName: 'on_steroids',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases on_steroids }","hidden":"{$item_hide_simple_grid_field93}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$on_steroids_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field16}
+																							{BEGIN cellblock_grid_headcell_field17}
+{
+	cellId: 'headcell_field17',
+	col:0,
+	row:0,
+			fieldName: 'admitted_to_icu',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases admitted_to_icu }","hidden":"{$item_hide_simple_grid_field94}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$admitted_to_icu_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field17}
+																							{BEGIN cellblock_grid_headcell_field18}
+{
+	cellId: 'headcell_field18',
+	col:0,
+	row:0,
+			fieldName: 'hypothermic',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases hypothermic }","hidden":"{$item_hide_simple_grid_field95}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$hypothermic_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field18}
+																							{BEGIN cellblock_grid_headcell_field19}
+{
+	cellId: 'headcell_field19',
+	col:0,
+	row:0,
+			fieldName: 'preoperative_diagnosis_id',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases preoperative_diagnosis_id }","hidden":"{$item_hide_simple_grid_field96}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$preoperative_diagnosis_id_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field19}
+																							{BEGIN cellblock_grid_headcell_field20}
+{
+	cellId: 'headcell_field20',
+	col:0,
+	row:0,
+			fieldName: 'hours_since_injury',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases hours_since_injury }","hidden":"{$item_hide_simple_grid_field97}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$hours_since_injury_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field20}
+																							{BEGIN cellblock_grid_headcell_field21}
+{
+	cellId: 'headcell_field21',
+	col:0,
+	row:0,
+			fieldName: 'sterilizable_drill_used',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases sterilizable_drill_used }","hidden":"{$item_hide_simple_grid_field98}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$sterilizable_drill_used_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field21}
+																							{BEGIN cellblock_grid_headcell_field22}
+{
+	cellId: 'headcell_field22',
+	col:0,
+	row:0,
+			fieldName: 'drill_sterile_cover_used',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases drill_sterile_cover_used }","hidden":"{$item_hide_simple_grid_field99}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$drill_sterile_cover_used_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field22}
+																							{BEGIN cellblock_grid_headcell_field23}
+{
+	cellId: 'headcell_field23',
+	col:0,
+	row:0,
+			fieldName: 'holes_in_sterile_cover',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases holes_in_sterile_cover }","hidden":"{$item_hide_simple_grid_field100}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$holes_in_sterile_cover_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field23}
+																							{BEGIN cellblock_grid_headcell_field24}
+{
+	cellId: 'headcell_field24',
+	col:0,
+	row:0,
+			fieldName: 'sign_in_read_aloud',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases sign_in_read_aloud }","hidden":"{$item_hide_simple_grid_field101}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$sign_in_read_aloud_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field24}
+																							{BEGIN cellblock_grid_headcell_field25}
+{
+	cellId: 'headcell_field25',
+	col:0,
+	row:0,
+			fieldName: 'sign_in_completed_before_anesthesia',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases sign_in_completed_before_anesthesia }","hidden":"{$item_hide_simple_grid_field102}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$sign_in_completed_before_anesthesia_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field25}
+																							{BEGIN cellblock_grid_headcell_field26}
+{
+	cellId: 'headcell_field26',
+	col:0,
+	row:0,
+			fieldName: 'sterility_indicator_in_tray',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases sterility_indicator_in_tray }","hidden":"{$item_hide_simple_grid_field103}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$sterility_indicator_in_tray_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field26}
+																							{BEGIN cellblock_grid_headcell_field27}
+{
+	cellId: 'headcell_field27',
+	col:0,
+	row:0,
+			fieldName: 'sterility_indicator_color_changed',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases sterility_indicator_color_changed }","hidden":"{$item_hide_simple_grid_field104}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$sterility_indicator_color_changed_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field27}
+																							{BEGIN cellblock_grid_headcell_field28}
+{
+	cellId: 'headcell_field28',
+	col:0,
+	row:0,
+			fieldName: 'tray_wet_prior_to_operation',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases tray_wet_prior_to_operation }","hidden":"{$item_hide_simple_grid_field105}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$tray_wet_prior_to_operation_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field28}
+																							{BEGIN cellblock_grid_headcell_field29}
+{
+	cellId: 'headcell_field29',
+	col:0,
+	row:0,
+			fieldName: 'tray_replaced',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases tray_replaced }","hidden":"{$item_hide_simple_grid_field106}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$tray_replaced_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field29}
+																							{BEGIN cellblock_grid_headcell_field30}
+{
+	cellId: 'headcell_field30',
+	col:0,
+	row:0,
+			fieldName: 'gauze_count_performed',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases gauze_count_performed }","hidden":"{$item_hide_simple_grid_field107}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$gauze_count_performed_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field30}
+																							{BEGIN cellblock_grid_headcell_field31}
+{
+	cellId: 'headcell_field31',
+	col:0,
+	row:0,
+			fieldName: 'gauze_count_total',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases gauze_count_total }","hidden":"{$item_hide_simple_grid_field108}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$gauze_count_total_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field31}
+																							{BEGIN cellblock_grid_headcell_field32}
+{
+	cellId: 'headcell_field32',
+	col:0,
+	row:0,
+			fieldName: 'surgeon_scrubbed_hands',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases surgeon_scrubbed_hands }","hidden":"{$item_hide_simple_grid_field109}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$surgeon_scrubbed_hands_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field32}
+																							{BEGIN cellblock_grid_headcell_field33}
+{
+	cellId: 'headcell_field33',
+	col:0,
+	row:0,
+			fieldName: 'handwashing_available',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases handwashing_available }","hidden":"{$item_hide_simple_grid_field110}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$handwashing_available_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field33}
+																							{BEGIN cellblock_grid_headcell_field34}
+{
+	cellId: 'headcell_field34',
+	col:0,
+	row:0,
+			fieldName: 'alcohol_solution_applied',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases alcohol_solution_applied }","hidden":"{$item_hide_simple_grid_field111}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$alcohol_solution_applied_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field34}
+																							{BEGIN cellblock_grid_headcell_field35}
+{
+	cellId: 'headcell_field35',
+	col:0,
+	row:0,
+			fieldName: 'new_surgical_gloves_used',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases new_surgical_gloves_used }","hidden":"{$item_hide_simple_grid_field112}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$new_surgical_gloves_used_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field35}
+																							{BEGIN cellblock_grid_headcell_field36}
+{
+	cellId: 'headcell_field36',
+	col:0,
+	row:0,
+			fieldName: 'gown_sterility_indicator',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases gown_sterility_indicator }","hidden":"{$item_hide_simple_grid_field113}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$gown_sterility_indicator_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field36}
+																							{BEGIN cellblock_grid_headcell_field37}
+{
+	cellId: 'headcell_field37',
+	col:0,
+	row:0,
+			fieldName: 'gown_indicator_color_changed',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases gown_indicator_color_changed }","hidden":"{$item_hide_simple_grid_field114}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$gown_indicator_color_changed_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field37}
+																							{BEGIN cellblock_grid_headcell_field38}
+{
+	cellId: 'headcell_field38',
+	col:0,
+	row:0,
+			fieldName: 'gown_pack_replaced',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases gown_pack_replaced }","hidden":"{$item_hide_simple_grid_field115}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$gown_pack_replaced_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field38}
+																							{BEGIN cellblock_grid_headcell_field39}
+{
+	cellId: 'headcell_field39',
+	col:0,
+	row:0,
+			fieldName: 'gowns_or_drapes_wet',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases gowns_or_drapes_wet }","hidden":"{$item_hide_simple_grid_field116}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$gowns_or_drapes_wet_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field39}
+																							{BEGIN cellblock_grid_headcell_field40}
+{
+	cellId: 'headcell_field40',
+	col:0,
+	row:0,
+			fieldName: 'wet_gowns_replaced',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases wet_gowns_replaced }","hidden":"{$item_hide_simple_grid_field117}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$wet_gowns_replaced_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field40}
+																							{BEGIN cellblock_grid_headcell_field41}
+{
+	cellId: 'headcell_field41',
+	col:0,
+	row:0,
+			fieldName: 'holes_in_gowns',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases holes_in_gowns }","hidden":"{$item_hide_simple_grid_field118}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$holes_in_gowns_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field41}
+																							{BEGIN cellblock_grid_headcell_field42}
+{
+	cellId: 'headcell_field42',
+	col:0,
+	row:0,
+			fieldName: 'torn_gowns_replaced',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases torn_gowns_replaced }","hidden":"{$item_hide_simple_grid_field119}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$torn_gowns_replaced_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field42}
+																							{BEGIN cellblock_grid_headcell_field43}
+{
+	cellId: 'headcell_field43',
+	col:0,
+	row:0,
+			fieldName: 'holes_in_drapes',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases holes_in_drapes }","hidden":"{$item_hide_simple_grid_field120}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$holes_in_drapes_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field43}
+																							{BEGIN cellblock_grid_headcell_field44}
+{
+	cellId: 'headcell_field44',
+	col:0,
+	row:0,
+			fieldName: 'drapes_replaced',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases drapes_replaced }","hidden":"{$item_hide_simple_grid_field121}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$drapes_replaced_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field44}
+																							{BEGIN cellblock_grid_headcell_field45}
+{
+	cellId: 'headcell_field45',
+	col:0,
+	row:0,
+			fieldName: 'surgical_site_prep_method',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases surgical_site_prep_method }","hidden":"{$item_hide_simple_grid_field122}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$surgical_site_prep_method_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field45}
+																							{BEGIN cellblock_grid_headcell_field46}
+{
+	cellId: 'headcell_field46',
+	col:0,
+	row:0,
+			fieldName: 'vaginal_preparation',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases vaginal_preparation }","hidden":"{$item_hide_simple_grid_field123}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$vaginal_preparation_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field46}
+																							{BEGIN cellblock_grid_headcell_field47}
+{
+	cellId: 'headcell_field47',
+	col:0,
+	row:0,
+			fieldName: 'antibiotics_given',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases antibiotics_given }","hidden":"{$item_hide_simple_grid_field124}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$antibiotics_given_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field47}
+																							{BEGIN cellblock_grid_headcell_field48}
+{
+	cellId: 'headcell_field48',
+	col:0,
+	row:0,
+			fieldName: 'antibiotics_admin_location',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases antibiotics_admin_location }","hidden":"{$item_hide_simple_grid_field125}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$antibiotics_admin_location_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field48}
+																							{BEGIN cellblock_grid_headcell_field49}
+{
+	cellId: 'headcell_field49',
+	col:0,
+	row:0,
+			fieldName: 'antibiotics_time',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases antibiotics_time }","hidden":"{$item_hide_simple_grid_field126}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$antibiotics_time_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field49}
+																							{BEGIN cellblock_grid_headcell_field50}
+{
+	cellId: 'headcell_field50',
+	col:0,
+	row:0,
+			fieldName: 'on_scheduled_antibiotics',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases on_scheduled_antibiotics }","hidden":"{$item_hide_simple_grid_field127}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$on_scheduled_antibiotics_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field50}
+																							{BEGIN cellblock_grid_headcell_field51}
+{
+	cellId: 'headcell_field51',
+	col:0,
+	row:0,
+			fieldName: 'antibiotic_type',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases antibiotic_type }","hidden":"{$item_hide_simple_grid_field128}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$antibiotic_type_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field51}
+																							{BEGIN cellblock_grid_headcell_field52}
+{
+	cellId: 'headcell_field52',
+	col:0,
+	row:0,
+			fieldName: 'timeout_read_aloud',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases timeout_read_aloud }","hidden":"{$item_hide_simple_grid_field129}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$timeout_read_aloud_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field52}
+																							{BEGIN cellblock_grid_headcell_field53}
+{
+	cellId: 'headcell_field53',
+	col:0,
+	row:0,
+			fieldName: 'operation_type_announced',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases operation_type_announced }","hidden":"{$item_hide_simple_grid_field130}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$operation_type_announced_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field53}
+																							{BEGIN cellblock_grid_headcell_field54}
+{
+	cellId: 'headcell_field54',
+	col:0,
+	row:0,
+			fieldName: 'blood_loss_announced',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases blood_loss_announced }","hidden":"{$item_hide_simple_grid_field131}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$blood_loss_announced_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field54}
+																							{BEGIN cellblock_grid_headcell_field55}
+{
+	cellId: 'headcell_field55',
+	col:0,
+	row:0,
+			fieldName: 'estimated_blood_loss',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases estimated_blood_loss }","hidden":"{$item_hide_simple_grid_field132}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$estimated_blood_loss_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field55}
+																							{BEGIN cellblock_grid_headcell_field56}
+{
+	cellId: 'headcell_field56',
+	col:0,
+	row:0,
+			fieldName: 'time_of_incision',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases time_of_incision }","hidden":"{$item_hide_simple_grid_field133}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$time_of_incision_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field56}
+																							{BEGIN cellblock_grid_headcell_field57}
+{
+	cellId: 'headcell_field57',
+	col:0,
+	row:0,
+			fieldName: 'gauze_count_end_performed',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases gauze_count_end_performed }","hidden":"{$item_hide_simple_grid_field134}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$gauze_count_end_performed_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field57}
+																							{BEGIN cellblock_grid_headcell_field58}
+{
+	cellId: 'headcell_field58',
+	col:0,
+	row:0,
+			fieldName: 'gauze_count_end_total',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases gauze_count_end_total }","hidden":"{$item_hide_simple_grid_field135}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$gauze_count_end_total_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field58}
+																							{BEGIN cellblock_grid_headcell_field59}
+{
+	cellId: 'headcell_field59',
+	col:0,
+	row:0,
+			fieldName: 'time_dressing_applied',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases time_dressing_applied }","hidden":"{$item_hide_simple_grid_field136}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$time_dressing_applied_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field59}
+																							{BEGIN cellblock_grid_headcell_field60}
+{
+	cellId: 'headcell_field60',
+	col:0,
+	row:0,
+			fieldName: 'procedure_id',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases procedure_id }","hidden":"{$item_hide_simple_grid_field137}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$procedure_id_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field60}
+																							{BEGIN cellblock_grid_headcell_field61}
+{
+	cellId: 'headcell_field61',
+	col:0,
+	row:0,
+			fieldName: 'hardware_or_bioprosthetic_used',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases hardware_or_bioprosthetic_used }","hidden":"{$item_hide_simple_grid_field138}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$hardware_or_bioprosthetic_used_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field61}
+																							{BEGIN cellblock_grid_headcell_field62}
+{
+	cellId: 'headcell_field62',
+	col:0,
+	row:0,
+			fieldName: 'cesarean_indication',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases cesarean_indication }","hidden":"{$item_hide_simple_grid_field139}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$cesarean_indication_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field62}
+																							{BEGIN cellblock_grid_headcell_field63}
+{
+	cellId: 'headcell_field63',
+	col:0,
+	row:0,
+			fieldName: 'wound_closed_primarily',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases wound_closed_primarily }","hidden":"{$item_hide_simple_grid_field140}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$wound_closed_primarily_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field63}
+																							{BEGIN cellblock_grid_headcell_field64}
+{
+	cellId: 'headcell_field64',
+	col:0,
+	row:0,
+			fieldName: 'wound_classification',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases wound_classification }","hidden":"{$item_hide_simple_grid_field141}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$wound_classification_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field64}
+																							{BEGIN cellblock_grid_headcell_field65}
+{
+	cellId: 'headcell_field65',
+	col:0,
+	row:0,
+			fieldName: 'case_type',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases case_type }","hidden":"{$item_hide_simple_grid_field142}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$case_type_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field65}
+																							{BEGIN cellblock_grid_headcell_field66}
+{
+	cellId: 'headcell_field66',
+	col:0,
+	row:0,
+			fieldName: 'sign_out_read_aloud',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases sign_out_read_aloud }","hidden":"{$item_hide_simple_grid_field143}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$sign_out_read_aloud_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field66}
+																							{BEGIN cellblock_grid_headcell_field67}
+{
+	cellId: 'headcell_field67',
+	col:0,
+	row:0,
+			fieldName: 'sign_out_in_theatre',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases sign_out_in_theatre }","hidden":"{$item_hide_simple_grid_field144}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$sign_out_in_theatre_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field67}
+																							{BEGIN cellblock_grid_headcell_field68}
+{
+	cellId: 'headcell_field68',
+	col:0,
+	row:0,
+			fieldName: 'unplanned_intubation',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases unplanned_intubation }","hidden":"{$item_hide_simple_grid_field145}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$unplanned_intubation_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field68}
+																							{BEGIN cellblock_grid_headcell_field69}
+{
+	cellId: 'headcell_field69',
+	col:0,
+	row:0,
+			fieldName: 'urgent_tracheostomy',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases urgent_tracheostomy }","hidden":"{$item_hide_simple_grid_field146}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$urgent_tracheostomy_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field69}
+																							{BEGIN cellblock_grid_headcell_field70}
+{
+	cellId: 'headcell_field70',
+	col:0,
+	row:0,
+			fieldName: 'urgent_central_access',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases urgent_central_access }","hidden":"{$item_hide_simple_grid_field147}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$urgent_central_access_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field70}
+																							{BEGIN cellblock_grid_headcell_field71}
+{
+	cellId: 'headcell_field71',
+	col:0,
+	row:0,
+			fieldName: 'other_crisis_occurred',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases other_crisis_occurred }","hidden":"{$item_hide_simple_grid_field148}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$other_crisis_occurred_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field71}
+																							{BEGIN cellblock_grid_headcell_field72}
+{
+	cellId: 'headcell_field72',
+	col:0,
+	row:0,
+			fieldName: 'crisis_description',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases crisis_description }","hidden":"{$item_hide_simple_grid_field149}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$crisis_description_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field72}
+																							{BEGIN cellblock_grid_headcell_field73}
+{
+	cellId: 'headcell_field73',
+	col:0,
+	row:0,
+			fieldName: 'death_in_or',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases death_in_or }","hidden":"{$item_hide_simple_grid_field150}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$death_in_or_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field73}
+																							{BEGIN cellblock_grid_headcell_field74}
+{
+	cellId: 'headcell_field74',
+	col:0,
+	row:0,
+			fieldName: 'fetal_death',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases fetal_death }","hidden":"{$item_hide_simple_grid_field151}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$fetal_death_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field74}
+																							{BEGIN cellblock_grid_headcell_field75}
+{
+	cellId: 'headcell_field75',
+	col:0,
+	row:0,
+			fieldName: 'created_at',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases created_at }","hidden":"{$item_hide_simple_grid_field152}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$created_at_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field75}
+																							{BEGIN cellblock_grid_headcell_field76}
+{
+	cellId: 'headcell_field76',
+	col:0,
+	row:0,
+			fieldName: 'updated_at',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_surgical_cases updated_at }","hidden":"{$item_hide_simple_grid_field153}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$updated_at_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field76}
+											],
+				{END row_grid_0}
+		
+			
+		{BEGIN grid_row}
+	{BEGIN grid_record}
+				
+				{BEGIN row_grid_1}
+				[
+																{BEGIN cellblock_grid_cell_field}
+{
+	cellId: 'cell_field',
+	col:0,
+	row:0,
+			fieldName: 'case_id',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$case_id_pdfvalue},"hidden":"{$item_hide_simple_grid_field}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$case_id_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field}
+																							{BEGIN cellblock_grid_cell_field1}
+{
+	cellId: 'cell_field1',
+	col:0,
+	row:0,
+			fieldName: 'facility_id',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$facility_id_pdfvalue},"hidden":"{$item_hide_simple_grid_field1}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$facility_id_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field1}
+																							{BEGIN cellblock_grid_cell_field2}
+{
+	cellId: 'cell_field2',
+	col:0,
+	row:0,
+			fieldName: 'country_id',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$country_id_pdfvalue},"hidden":"{$item_hide_simple_grid_field2}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$country_id_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field2}
+																							{BEGIN cellblock_grid_cell_field3}
+{
+	cellId: 'cell_field3',
+	col:0,
+	row:0,
+			fieldName: 'surgery_date',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$surgery_date_pdfvalue},"hidden":"{$item_hide_simple_grid_field3}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$surgery_date_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field3}
+																							{BEGIN cellblock_grid_cell_field4}
+{
+	cellId: 'cell_field4',
+	col:0,
+	row:0,
+			fieldName: 'data_type',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$data_type_pdfvalue},"hidden":"{$item_hide_simple_grid_field4}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$data_type_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field4}
+																							{BEGIN cellblock_grid_cell_field5}
+{
+	cellId: 'cell_field5',
+	col:0,
+	row:0,
+			fieldName: 'data_collector_name',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$data_collector_name_pdfvalue},"hidden":"{$item_hide_simple_grid_field5}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$data_collector_name_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field5}
+																							{BEGIN cellblock_grid_cell_field6}
+{
+	cellId: 'cell_field6',
+	col:0,
+	row:0,
+			fieldName: 'location_of_surgery',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$location_of_surgery_pdfvalue},"hidden":"{$item_hide_simple_grid_field6}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$location_of_surgery_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field6}
+																							{BEGIN cellblock_grid_cell_field7}
+{
+	cellId: 'cell_field7',
+	col:0,
+	row:0,
+			fieldName: 'patient_sex',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$patient_sex_pdfvalue},"hidden":"{$item_hide_simple_grid_field7}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$patient_sex_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field7}
+																							{BEGIN cellblock_grid_cell_field8}
+{
+	cellId: 'cell_field8',
+	col:0,
+	row:0,
+			fieldName: 'patient_asa_classification',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$patient_asa_classification_pdfvalue},"hidden":"{$item_hide_simple_grid_field8}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$patient_asa_classification_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field8}
+																							{BEGIN cellblock_grid_cell_field9}
+{
+	cellId: 'cell_field9',
+	col:0,
+	row:0,
+			fieldName: 'patient_dob',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$patient_dob_pdfvalue},"hidden":"{$item_hide_simple_grid_field9}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$patient_dob_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field9}
+																							{BEGIN cellblock_grid_cell_field10}
+{
+	cellId: 'cell_field10',
+	col:0,
+	row:0,
+			fieldName: 'patient_age',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$patient_age_pdfvalue},"hidden":"{$item_hide_simple_grid_field10}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$patient_age_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field10}
+																							{BEGIN cellblock_grid_cell_field11}
+{
+	cellId: 'cell_field11',
+	col:0,
+	row:0,
+			fieldName: 'diabetes',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$diabetes_pdfvalue},"hidden":"{$item_hide_simple_grid_field11}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$diabetes_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field11}
+																							{BEGIN cellblock_grid_cell_field12}
+{
+	cellId: 'cell_field12',
+	col:0,
+	row:0,
+			fieldName: 'hypertension',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$hypertension_pdfvalue},"hidden":"{$item_hide_simple_grid_field12}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$hypertension_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field12}
+																							{BEGIN cellblock_grid_cell_field13}
+{
+	cellId: 'cell_field13',
+	col:0,
+	row:0,
+			fieldName: 'obese',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$obese_pdfvalue},"hidden":"{$item_hide_simple_grid_field13}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$obese_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field13}
+																							{BEGIN cellblock_grid_cell_field14}
+{
+	cellId: 'cell_field14',
+	col:0,
+	row:0,
+			fieldName: 'malnourished',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$malnourished_pdfvalue},"hidden":"{$item_hide_simple_grid_field14}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$malnourished_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field14}
+																							{BEGIN cellblock_grid_cell_field15}
+{
+	cellId: 'cell_field15',
+	col:0,
+	row:0,
+			fieldName: 'smoker',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$smoker_pdfvalue},"hidden":"{$item_hide_simple_grid_field15}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$smoker_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field15}
+																							{BEGIN cellblock_grid_cell_field16}
+{
+	cellId: 'cell_field16',
+	col:0,
+	row:0,
+			fieldName: 'on_steroids',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$on_steroids_pdfvalue},"hidden":"{$item_hide_simple_grid_field16}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$on_steroids_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field16}
+																							{BEGIN cellblock_grid_cell_field17}
+{
+	cellId: 'cell_field17',
+	col:0,
+	row:0,
+			fieldName: 'admitted_to_icu',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$admitted_to_icu_pdfvalue},"hidden":"{$item_hide_simple_grid_field17}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$admitted_to_icu_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field17}
+																							{BEGIN cellblock_grid_cell_field18}
+{
+	cellId: 'cell_field18',
+	col:0,
+	row:0,
+			fieldName: 'hypothermic',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$hypothermic_pdfvalue},"hidden":"{$item_hide_simple_grid_field18}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$hypothermic_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field18}
+																							{BEGIN cellblock_grid_cell_field19}
+{
+	cellId: 'cell_field19',
+	col:0,
+	row:0,
+			fieldName: 'preoperative_diagnosis_id',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$preoperative_diagnosis_id_pdfvalue},"hidden":"{$item_hide_simple_grid_field19}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$preoperative_diagnosis_id_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field19}
+																							{BEGIN cellblock_grid_cell_field20}
+{
+	cellId: 'cell_field20',
+	col:0,
+	row:0,
+			fieldName: 'hours_since_injury',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$hours_since_injury_pdfvalue},"hidden":"{$item_hide_simple_grid_field20}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$hours_since_injury_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field20}
+																							{BEGIN cellblock_grid_cell_field21}
+{
+	cellId: 'cell_field21',
+	col:0,
+	row:0,
+			fieldName: 'sterilizable_drill_used',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$sterilizable_drill_used_pdfvalue},"hidden":"{$item_hide_simple_grid_field21}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$sterilizable_drill_used_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field21}
+																							{BEGIN cellblock_grid_cell_field22}
+{
+	cellId: 'cell_field22',
+	col:0,
+	row:0,
+			fieldName: 'drill_sterile_cover_used',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$drill_sterile_cover_used_pdfvalue},"hidden":"{$item_hide_simple_grid_field22}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$drill_sterile_cover_used_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field22}
+																							{BEGIN cellblock_grid_cell_field23}
+{
+	cellId: 'cell_field23',
+	col:0,
+	row:0,
+			fieldName: 'holes_in_sterile_cover',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$holes_in_sterile_cover_pdfvalue},"hidden":"{$item_hide_simple_grid_field23}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$holes_in_sterile_cover_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field23}
+																							{BEGIN cellblock_grid_cell_field24}
+{
+	cellId: 'cell_field24',
+	col:0,
+	row:0,
+			fieldName: 'sign_in_read_aloud',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$sign_in_read_aloud_pdfvalue},"hidden":"{$item_hide_simple_grid_field24}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$sign_in_read_aloud_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field24}
+																							{BEGIN cellblock_grid_cell_field25}
+{
+	cellId: 'cell_field25',
+	col:0,
+	row:0,
+			fieldName: 'sign_in_completed_before_anesthesia',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$sign_in_completed_before_anesthesia_pdfvalue},"hidden":"{$item_hide_simple_grid_field25}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$sign_in_completed_before_anesthesia_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field25}
+																							{BEGIN cellblock_grid_cell_field26}
+{
+	cellId: 'cell_field26',
+	col:0,
+	row:0,
+			fieldName: 'sterility_indicator_in_tray',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$sterility_indicator_in_tray_pdfvalue},"hidden":"{$item_hide_simple_grid_field26}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$sterility_indicator_in_tray_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field26}
+																							{BEGIN cellblock_grid_cell_field27}
+{
+	cellId: 'cell_field27',
+	col:0,
+	row:0,
+			fieldName: 'sterility_indicator_color_changed',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$sterility_indicator_color_changed_pdfvalue},"hidden":"{$item_hide_simple_grid_field27}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$sterility_indicator_color_changed_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field27}
+																							{BEGIN cellblock_grid_cell_field28}
+{
+	cellId: 'cell_field28',
+	col:0,
+	row:0,
+			fieldName: 'tray_wet_prior_to_operation',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$tray_wet_prior_to_operation_pdfvalue},"hidden":"{$item_hide_simple_grid_field28}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$tray_wet_prior_to_operation_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field28}
+																							{BEGIN cellblock_grid_cell_field29}
+{
+	cellId: 'cell_field29',
+	col:0,
+	row:0,
+			fieldName: 'tray_replaced',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$tray_replaced_pdfvalue},"hidden":"{$item_hide_simple_grid_field29}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$tray_replaced_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field29}
+																							{BEGIN cellblock_grid_cell_field30}
+{
+	cellId: 'cell_field30',
+	col:0,
+	row:0,
+			fieldName: 'gauze_count_performed',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$gauze_count_performed_pdfvalue},"hidden":"{$item_hide_simple_grid_field30}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$gauze_count_performed_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field30}
+																							{BEGIN cellblock_grid_cell_field31}
+{
+	cellId: 'cell_field31',
+	col:0,
+	row:0,
+			fieldName: 'gauze_count_total',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$gauze_count_total_pdfvalue},"hidden":"{$item_hide_simple_grid_field31}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$gauze_count_total_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field31}
+																							{BEGIN cellblock_grid_cell_field32}
+{
+	cellId: 'cell_field32',
+	col:0,
+	row:0,
+			fieldName: 'surgeon_scrubbed_hands',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$surgeon_scrubbed_hands_pdfvalue},"hidden":"{$item_hide_simple_grid_field32}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$surgeon_scrubbed_hands_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field32}
+																							{BEGIN cellblock_grid_cell_field33}
+{
+	cellId: 'cell_field33',
+	col:0,
+	row:0,
+			fieldName: 'handwashing_available',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$handwashing_available_pdfvalue},"hidden":"{$item_hide_simple_grid_field33}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$handwashing_available_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field33}
+																							{BEGIN cellblock_grid_cell_field34}
+{
+	cellId: 'cell_field34',
+	col:0,
+	row:0,
+			fieldName: 'alcohol_solution_applied',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$alcohol_solution_applied_pdfvalue},"hidden":"{$item_hide_simple_grid_field34}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$alcohol_solution_applied_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field34}
+																							{BEGIN cellblock_grid_cell_field35}
+{
+	cellId: 'cell_field35',
+	col:0,
+	row:0,
+			fieldName: 'new_surgical_gloves_used',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$new_surgical_gloves_used_pdfvalue},"hidden":"{$item_hide_simple_grid_field35}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$new_surgical_gloves_used_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field35}
+																							{BEGIN cellblock_grid_cell_field36}
+{
+	cellId: 'cell_field36',
+	col:0,
+	row:0,
+			fieldName: 'gown_sterility_indicator',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$gown_sterility_indicator_pdfvalue},"hidden":"{$item_hide_simple_grid_field36}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$gown_sterility_indicator_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field36}
+																							{BEGIN cellblock_grid_cell_field37}
+{
+	cellId: 'cell_field37',
+	col:0,
+	row:0,
+			fieldName: 'gown_indicator_color_changed',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$gown_indicator_color_changed_pdfvalue},"hidden":"{$item_hide_simple_grid_field37}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$gown_indicator_color_changed_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field37}
+																							{BEGIN cellblock_grid_cell_field38}
+{
+	cellId: 'cell_field38',
+	col:0,
+	row:0,
+			fieldName: 'gown_pack_replaced',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$gown_pack_replaced_pdfvalue},"hidden":"{$item_hide_simple_grid_field38}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$gown_pack_replaced_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field38}
+																							{BEGIN cellblock_grid_cell_field39}
+{
+	cellId: 'cell_field39',
+	col:0,
+	row:0,
+			fieldName: 'gowns_or_drapes_wet',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$gowns_or_drapes_wet_pdfvalue},"hidden":"{$item_hide_simple_grid_field39}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$gowns_or_drapes_wet_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field39}
+																							{BEGIN cellblock_grid_cell_field40}
+{
+	cellId: 'cell_field40',
+	col:0,
+	row:0,
+			fieldName: 'wet_gowns_replaced',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$wet_gowns_replaced_pdfvalue},"hidden":"{$item_hide_simple_grid_field40}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$wet_gowns_replaced_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field40}
+																							{BEGIN cellblock_grid_cell_field41}
+{
+	cellId: 'cell_field41',
+	col:0,
+	row:0,
+			fieldName: 'holes_in_gowns',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$holes_in_gowns_pdfvalue},"hidden":"{$item_hide_simple_grid_field41}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$holes_in_gowns_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field41}
+																							{BEGIN cellblock_grid_cell_field42}
+{
+	cellId: 'cell_field42',
+	col:0,
+	row:0,
+			fieldName: 'torn_gowns_replaced',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$torn_gowns_replaced_pdfvalue},"hidden":"{$item_hide_simple_grid_field42}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$torn_gowns_replaced_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field42}
+																							{BEGIN cellblock_grid_cell_field43}
+{
+	cellId: 'cell_field43',
+	col:0,
+	row:0,
+			fieldName: 'holes_in_drapes',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$holes_in_drapes_pdfvalue},"hidden":"{$item_hide_simple_grid_field43}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$holes_in_drapes_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field43}
+																							{BEGIN cellblock_grid_cell_field44}
+{
+	cellId: 'cell_field44',
+	col:0,
+	row:0,
+			fieldName: 'drapes_replaced',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$drapes_replaced_pdfvalue},"hidden":"{$item_hide_simple_grid_field44}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$drapes_replaced_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field44}
+																							{BEGIN cellblock_grid_cell_field45}
+{
+	cellId: 'cell_field45',
+	col:0,
+	row:0,
+			fieldName: 'surgical_site_prep_method',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$surgical_site_prep_method_pdfvalue},"hidden":"{$item_hide_simple_grid_field45}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$surgical_site_prep_method_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field45}
+																							{BEGIN cellblock_grid_cell_field46}
+{
+	cellId: 'cell_field46',
+	col:0,
+	row:0,
+			fieldName: 'vaginal_preparation',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$vaginal_preparation_pdfvalue},"hidden":"{$item_hide_simple_grid_field46}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$vaginal_preparation_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field46}
+																							{BEGIN cellblock_grid_cell_field47}
+{
+	cellId: 'cell_field47',
+	col:0,
+	row:0,
+			fieldName: 'antibiotics_given',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$antibiotics_given_pdfvalue},"hidden":"{$item_hide_simple_grid_field47}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$antibiotics_given_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field47}
+																							{BEGIN cellblock_grid_cell_field48}
+{
+	cellId: 'cell_field48',
+	col:0,
+	row:0,
+			fieldName: 'antibiotics_admin_location',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$antibiotics_admin_location_pdfvalue},"hidden":"{$item_hide_simple_grid_field48}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$antibiotics_admin_location_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field48}
+																							{BEGIN cellblock_grid_cell_field49}
+{
+	cellId: 'cell_field49',
+	col:0,
+	row:0,
+			fieldName: 'antibiotics_time',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$antibiotics_time_pdfvalue},"hidden":"{$item_hide_simple_grid_field49}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$antibiotics_time_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field49}
+																							{BEGIN cellblock_grid_cell_field50}
+{
+	cellId: 'cell_field50',
+	col:0,
+	row:0,
+			fieldName: 'on_scheduled_antibiotics',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$on_scheduled_antibiotics_pdfvalue},"hidden":"{$item_hide_simple_grid_field50}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$on_scheduled_antibiotics_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field50}
+																							{BEGIN cellblock_grid_cell_field51}
+{
+	cellId: 'cell_field51',
+	col:0,
+	row:0,
+			fieldName: 'antibiotic_type',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$antibiotic_type_pdfvalue},"hidden":"{$item_hide_simple_grid_field51}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$antibiotic_type_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field51}
+																							{BEGIN cellblock_grid_cell_field52}
+{
+	cellId: 'cell_field52',
+	col:0,
+	row:0,
+			fieldName: 'timeout_read_aloud',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$timeout_read_aloud_pdfvalue},"hidden":"{$item_hide_simple_grid_field52}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$timeout_read_aloud_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field52}
+																							{BEGIN cellblock_grid_cell_field53}
+{
+	cellId: 'cell_field53',
+	col:0,
+	row:0,
+			fieldName: 'operation_type_announced',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$operation_type_announced_pdfvalue},"hidden":"{$item_hide_simple_grid_field53}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$operation_type_announced_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field53}
+																							{BEGIN cellblock_grid_cell_field54}
+{
+	cellId: 'cell_field54',
+	col:0,
+	row:0,
+			fieldName: 'blood_loss_announced',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$blood_loss_announced_pdfvalue},"hidden":"{$item_hide_simple_grid_field54}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$blood_loss_announced_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field54}
+																							{BEGIN cellblock_grid_cell_field55}
+{
+	cellId: 'cell_field55',
+	col:0,
+	row:0,
+			fieldName: 'estimated_blood_loss',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$estimated_blood_loss_pdfvalue},"hidden":"{$item_hide_simple_grid_field55}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$estimated_blood_loss_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field55}
+																							{BEGIN cellblock_grid_cell_field56}
+{
+	cellId: 'cell_field56',
+	col:0,
+	row:0,
+			fieldName: 'time_of_incision',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$time_of_incision_pdfvalue},"hidden":"{$item_hide_simple_grid_field56}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$time_of_incision_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field56}
+																							{BEGIN cellblock_grid_cell_field57}
+{
+	cellId: 'cell_field57',
+	col:0,
+	row:0,
+			fieldName: 'gauze_count_end_performed',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$gauze_count_end_performed_pdfvalue},"hidden":"{$item_hide_simple_grid_field57}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$gauze_count_end_performed_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field57}
+																							{BEGIN cellblock_grid_cell_field58}
+{
+	cellId: 'cell_field58',
+	col:0,
+	row:0,
+			fieldName: 'gauze_count_end_total',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$gauze_count_end_total_pdfvalue},"hidden":"{$item_hide_simple_grid_field58}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$gauze_count_end_total_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field58}
+																							{BEGIN cellblock_grid_cell_field59}
+{
+	cellId: 'cell_field59',
+	col:0,
+	row:0,
+			fieldName: 'time_dressing_applied',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$time_dressing_applied_pdfvalue},"hidden":"{$item_hide_simple_grid_field59}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$time_dressing_applied_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field59}
+																							{BEGIN cellblock_grid_cell_field60}
+{
+	cellId: 'cell_field60',
+	col:0,
+	row:0,
+			fieldName: 'procedure_id',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$procedure_id_pdfvalue},"hidden":"{$item_hide_simple_grid_field60}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$procedure_id_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field60}
+																							{BEGIN cellblock_grid_cell_field61}
+{
+	cellId: 'cell_field61',
+	col:0,
+	row:0,
+			fieldName: 'hardware_or_bioprosthetic_used',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$hardware_or_bioprosthetic_used_pdfvalue},"hidden":"{$item_hide_simple_grid_field61}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$hardware_or_bioprosthetic_used_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field61}
+																							{BEGIN cellblock_grid_cell_field62}
+{
+	cellId: 'cell_field62',
+	col:0,
+	row:0,
+			fieldName: 'cesarean_indication',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$cesarean_indication_pdfvalue},"hidden":"{$item_hide_simple_grid_field62}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$cesarean_indication_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field62}
+																							{BEGIN cellblock_grid_cell_field63}
+{
+	cellId: 'cell_field63',
+	col:0,
+	row:0,
+			fieldName: 'wound_closed_primarily',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$wound_closed_primarily_pdfvalue},"hidden":"{$item_hide_simple_grid_field63}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$wound_closed_primarily_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field63}
+																							{BEGIN cellblock_grid_cell_field64}
+{
+	cellId: 'cell_field64',
+	col:0,
+	row:0,
+			fieldName: 'wound_classification',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$wound_classification_pdfvalue},"hidden":"{$item_hide_simple_grid_field64}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$wound_classification_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field64}
+																							{BEGIN cellblock_grid_cell_field65}
+{
+	cellId: 'cell_field65',
+	col:0,
+	row:0,
+			fieldName: 'case_type',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$case_type_pdfvalue},"hidden":"{$item_hide_simple_grid_field65}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$case_type_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field65}
+																							{BEGIN cellblock_grid_cell_field66}
+{
+	cellId: 'cell_field66',
+	col:0,
+	row:0,
+			fieldName: 'sign_out_read_aloud',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$sign_out_read_aloud_pdfvalue},"hidden":"{$item_hide_simple_grid_field66}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$sign_out_read_aloud_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field66}
+																							{BEGIN cellblock_grid_cell_field67}
+{
+	cellId: 'cell_field67',
+	col:0,
+	row:0,
+			fieldName: 'sign_out_in_theatre',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$sign_out_in_theatre_pdfvalue},"hidden":"{$item_hide_simple_grid_field67}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$sign_out_in_theatre_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field67}
+																							{BEGIN cellblock_grid_cell_field68}
+{
+	cellId: 'cell_field68',
+	col:0,
+	row:0,
+			fieldName: 'unplanned_intubation',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$unplanned_intubation_pdfvalue},"hidden":"{$item_hide_simple_grid_field68}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$unplanned_intubation_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field68}
+																							{BEGIN cellblock_grid_cell_field69}
+{
+	cellId: 'cell_field69',
+	col:0,
+	row:0,
+			fieldName: 'urgent_tracheostomy',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$urgent_tracheostomy_pdfvalue},"hidden":"{$item_hide_simple_grid_field69}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$urgent_tracheostomy_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field69}
+																							{BEGIN cellblock_grid_cell_field70}
+{
+	cellId: 'cell_field70',
+	col:0,
+	row:0,
+			fieldName: 'urgent_central_access',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$urgent_central_access_pdfvalue},"hidden":"{$item_hide_simple_grid_field70}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$urgent_central_access_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field70}
+																							{BEGIN cellblock_grid_cell_field71}
+{
+	cellId: 'cell_field71',
+	col:0,
+	row:0,
+			fieldName: 'other_crisis_occurred',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$other_crisis_occurred_pdfvalue},"hidden":"{$item_hide_simple_grid_field71}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$other_crisis_occurred_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field71}
+																							{BEGIN cellblock_grid_cell_field72}
+{
+	cellId: 'cell_field72',
+	col:0,
+	row:0,
+			fieldName: 'crisis_description',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$crisis_description_pdfvalue},"hidden":"{$item_hide_simple_grid_field72}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$crisis_description_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field72}
+																							{BEGIN cellblock_grid_cell_field73}
+{
+	cellId: 'cell_field73',
+	col:0,
+	row:0,
+			fieldName: 'death_in_or',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$death_in_or_pdfvalue},"hidden":"{$item_hide_simple_grid_field73}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$death_in_or_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field73}
+																							{BEGIN cellblock_grid_cell_field74}
+{
+	cellId: 'cell_field74',
+	col:0,
+	row:0,
+			fieldName: 'fetal_death',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$fetal_death_pdfvalue},"hidden":"{$item_hide_simple_grid_field74}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$fetal_death_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field74}
+																							{BEGIN cellblock_grid_cell_field75}
+{
+	cellId: 'cell_field75',
+	col:0,
+	row:0,
+			fieldName: 'created_at',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$created_at_pdfvalue},"hidden":"{$item_hide_simple_grid_field75}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$created_at_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field75}
+																							{BEGIN cellblock_grid_cell_field76}
+{
+	cellId: 'cell_field76',
+	col:0,
+	row:0,
+			fieldName: 'updated_at',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$updated_at_pdfvalue},"hidden":"{$item_hide_simple_grid_field76}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$updated_at_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field76}
+											],
+				{END row_grid_1}
+						{BEGIN row_grid_2}
+				[
+																{BEGIN cellblock_grid_cell_dpreview}
+{
+	cellId: 'cell_dpreview',
+	col:0,
+	row:0,
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+					{BEGIN colspan_grid_cell_dpreview}
+			colSpan: {$colspan_grid_cell_dpreview},
+			{END colspan_grid_cell_dpreview}
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			 {BEGIN details_case_antibiotics}
+			{$displayDetailTable_case_antibiotics }
+		{END details_case_antibiotics},
+				
+				
+			 {BEGIN details_follow_ups}
+			{$displayDetailTable_follow_ups }
+		{END details_follow_ups},
+				
+				
+			 {BEGIN details_ward_rounds}
+			{$displayDetailTable_ward_rounds }
+		{END details_ward_rounds},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_cell_dpreview}
+																		{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  2,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  3,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  4,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  5,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  6,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  7,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  8,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  9,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  10,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  11,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  12,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  13,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  14,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  15,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  16,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  17,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  18,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  19,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  20,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  21,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  22,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  23,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  24,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  25,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  26,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  27,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  28,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  29,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  30,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  31,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  32,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  33,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  34,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  35,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  36,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  37,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  38,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  39,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  40,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  41,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  42,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  43,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  44,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  45,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  46,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  47,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  48,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  49,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  50,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  51,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  52,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  53,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  54,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  55,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  56,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  57,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  58,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  59,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  60,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  61,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  62,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  63,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  64,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  65,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  66,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  67,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  68,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  69,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  70,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  71,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  72,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  73,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  74,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  75,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  76,
+				text: '',
+				compensateColspan: true
+			},
+							],
+				{END row_grid_2}
+		
+		{END grid_record}
+	{END grid_row}
+			
+					
+				{BEGIN row_grid_3}
+				[
+																{BEGIN cellblock_grid_footcell_field}
+{
+	cellId: 'footcell_field',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field}
+																							{BEGIN cellblock_grid_footcell_field1}
+{
+	cellId: 'footcell_field1',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field1}
+																							{BEGIN cellblock_grid_footcell_field2}
+{
+	cellId: 'footcell_field2',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field2}
+																							{BEGIN cellblock_grid_footcell_field3}
+{
+	cellId: 'footcell_field3',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field3}
+																							{BEGIN cellblock_grid_footcell_field4}
+{
+	cellId: 'footcell_field4',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field4}
+																							{BEGIN cellblock_grid_footcell_field5}
+{
+	cellId: 'footcell_field5',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field5}
+																							{BEGIN cellblock_grid_footcell_field6}
+{
+	cellId: 'footcell_field6',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field6}
+																							{BEGIN cellblock_grid_footcell_field7}
+{
+	cellId: 'footcell_field7',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field7}
+																							{BEGIN cellblock_grid_footcell_field8}
+{
+	cellId: 'footcell_field8',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field8}
+																							{BEGIN cellblock_grid_footcell_field9}
+{
+	cellId: 'footcell_field9',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field9}
+																							{BEGIN cellblock_grid_footcell_field10}
+{
+	cellId: 'footcell_field10',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field10}
+																							{BEGIN cellblock_grid_footcell_field11}
+{
+	cellId: 'footcell_field11',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field11}
+																							{BEGIN cellblock_grid_footcell_field12}
+{
+	cellId: 'footcell_field12',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field12}
+																							{BEGIN cellblock_grid_footcell_field13}
+{
+	cellId: 'footcell_field13',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field13}
+																							{BEGIN cellblock_grid_footcell_field14}
+{
+	cellId: 'footcell_field14',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field14}
+																							{BEGIN cellblock_grid_footcell_field15}
+{
+	cellId: 'footcell_field15',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field15}
+																							{BEGIN cellblock_grid_footcell_field16}
+{
+	cellId: 'footcell_field16',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field16}
+																							{BEGIN cellblock_grid_footcell_field17}
+{
+	cellId: 'footcell_field17',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field17}
+																							{BEGIN cellblock_grid_footcell_field18}
+{
+	cellId: 'footcell_field18',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field18}
+																							{BEGIN cellblock_grid_footcell_field19}
+{
+	cellId: 'footcell_field19',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field19}
+																							{BEGIN cellblock_grid_footcell_field20}
+{
+	cellId: 'footcell_field20',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field20}
+																							{BEGIN cellblock_grid_footcell_field21}
+{
+	cellId: 'footcell_field21',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field21}
+																							{BEGIN cellblock_grid_footcell_field22}
+{
+	cellId: 'footcell_field22',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field22}
+																							{BEGIN cellblock_grid_footcell_field23}
+{
+	cellId: 'footcell_field23',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field23}
+																							{BEGIN cellblock_grid_footcell_field24}
+{
+	cellId: 'footcell_field24',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field24}
+																							{BEGIN cellblock_grid_footcell_field25}
+{
+	cellId: 'footcell_field25',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field25}
+																							{BEGIN cellblock_grid_footcell_field26}
+{
+	cellId: 'footcell_field26',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field26}
+																							{BEGIN cellblock_grid_footcell_field27}
+{
+	cellId: 'footcell_field27',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field27}
+																							{BEGIN cellblock_grid_footcell_field28}
+{
+	cellId: 'footcell_field28',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field28}
+																							{BEGIN cellblock_grid_footcell_field29}
+{
+	cellId: 'footcell_field29',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field29}
+																							{BEGIN cellblock_grid_footcell_field30}
+{
+	cellId: 'footcell_field30',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field30}
+																							{BEGIN cellblock_grid_footcell_field31}
+{
+	cellId: 'footcell_field31',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field31}
+																							{BEGIN cellblock_grid_footcell_field32}
+{
+	cellId: 'footcell_field32',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field32}
+																							{BEGIN cellblock_grid_footcell_field33}
+{
+	cellId: 'footcell_field33',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field33}
+																							{BEGIN cellblock_grid_footcell_field34}
+{
+	cellId: 'footcell_field34',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field34}
+																							{BEGIN cellblock_grid_footcell_field35}
+{
+	cellId: 'footcell_field35',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field35}
+																							{BEGIN cellblock_grid_footcell_field36}
+{
+	cellId: 'footcell_field36',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field36}
+																							{BEGIN cellblock_grid_footcell_field37}
+{
+	cellId: 'footcell_field37',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field37}
+																							{BEGIN cellblock_grid_footcell_field38}
+{
+	cellId: 'footcell_field38',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field38}
+																							{BEGIN cellblock_grid_footcell_field39}
+{
+	cellId: 'footcell_field39',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field39}
+																							{BEGIN cellblock_grid_footcell_field40}
+{
+	cellId: 'footcell_field40',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field40}
+																							{BEGIN cellblock_grid_footcell_field41}
+{
+	cellId: 'footcell_field41',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field41}
+																							{BEGIN cellblock_grid_footcell_field42}
+{
+	cellId: 'footcell_field42',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field42}
+																							{BEGIN cellblock_grid_footcell_field43}
+{
+	cellId: 'footcell_field43',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field43}
+																							{BEGIN cellblock_grid_footcell_field44}
+{
+	cellId: 'footcell_field44',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field44}
+																							{BEGIN cellblock_grid_footcell_field45}
+{
+	cellId: 'footcell_field45',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field45}
+																							{BEGIN cellblock_grid_footcell_field46}
+{
+	cellId: 'footcell_field46',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field46}
+																							{BEGIN cellblock_grid_footcell_field47}
+{
+	cellId: 'footcell_field47',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field47}
+																							{BEGIN cellblock_grid_footcell_field48}
+{
+	cellId: 'footcell_field48',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field48}
+																							{BEGIN cellblock_grid_footcell_field49}
+{
+	cellId: 'footcell_field49',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field49}
+																							{BEGIN cellblock_grid_footcell_field50}
+{
+	cellId: 'footcell_field50',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field50}
+																							{BEGIN cellblock_grid_footcell_field51}
+{
+	cellId: 'footcell_field51',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field51}
+																							{BEGIN cellblock_grid_footcell_field52}
+{
+	cellId: 'footcell_field52',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field52}
+																							{BEGIN cellblock_grid_footcell_field53}
+{
+	cellId: 'footcell_field53',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field53}
+																							{BEGIN cellblock_grid_footcell_field54}
+{
+	cellId: 'footcell_field54',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field54}
+																							{BEGIN cellblock_grid_footcell_field55}
+{
+	cellId: 'footcell_field55',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field55}
+																							{BEGIN cellblock_grid_footcell_field56}
+{
+	cellId: 'footcell_field56',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field56}
+																							{BEGIN cellblock_grid_footcell_field57}
+{
+	cellId: 'footcell_field57',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field57}
+																							{BEGIN cellblock_grid_footcell_field58}
+{
+	cellId: 'footcell_field58',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field58}
+																							{BEGIN cellblock_grid_footcell_field59}
+{
+	cellId: 'footcell_field59',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field59}
+																							{BEGIN cellblock_grid_footcell_field60}
+{
+	cellId: 'footcell_field60',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field60}
+																							{BEGIN cellblock_grid_footcell_field61}
+{
+	cellId: 'footcell_field61',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field61}
+																							{BEGIN cellblock_grid_footcell_field62}
+{
+	cellId: 'footcell_field62',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field62}
+																							{BEGIN cellblock_grid_footcell_field63}
+{
+	cellId: 'footcell_field63',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field63}
+																							{BEGIN cellblock_grid_footcell_field64}
+{
+	cellId: 'footcell_field64',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field64}
+																							{BEGIN cellblock_grid_footcell_field65}
+{
+	cellId: 'footcell_field65',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field65}
+																							{BEGIN cellblock_grid_footcell_field66}
+{
+	cellId: 'footcell_field66',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field66}
+																							{BEGIN cellblock_grid_footcell_field67}
+{
+	cellId: 'footcell_field67',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field67}
+																							{BEGIN cellblock_grid_footcell_field68}
+{
+	cellId: 'footcell_field68',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field68}
+																							{BEGIN cellblock_grid_footcell_field69}
+{
+	cellId: 'footcell_field69',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field69}
+																							{BEGIN cellblock_grid_footcell_field70}
+{
+	cellId: 'footcell_field70',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field70}
+																							{BEGIN cellblock_grid_footcell_field71}
+{
+	cellId: 'footcell_field71',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field71}
+																							{BEGIN cellblock_grid_footcell_field72}
+{
+	cellId: 'footcell_field72',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field72}
+																							{BEGIN cellblock_grid_footcell_field73}
+{
+	cellId: 'footcell_field73',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field73}
+																							{BEGIN cellblock_grid_footcell_field74}
+{
+	cellId: 'footcell_field74',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field74}
+																							{BEGIN cellblock_grid_footcell_field75}
+{
+	cellId: 'footcell_field75',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field75}
+																							{BEGIN cellblock_grid_footcell_field76}
+{
+	cellId: 'footcell_field76',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field76}
+											],
+				{END row_grid_3}
+		
+				
+									]
+			
+			}
+		},
+		{END body}
+	],
+	footer: [
+								
+{
+	table: {
+	
+				
+		location: 'below-grid',
+		
+		
+		widths: [
+								"*", 
+					 ],	
+		
+	
+		body: [
+				
+				[
+																{
+	cellId: 'c1',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+		
+			
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+											],
+		
+		]
+	}
+}
+			],
+	};
+
+
+pdfFonts = {$pdfFonts};

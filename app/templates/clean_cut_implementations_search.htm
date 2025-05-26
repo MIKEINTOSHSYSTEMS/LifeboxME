@@ -1,0 +1,524 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
+	{BEGIN rtlCSS}
+	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
+	{END rtlCSS}
+	{BEGIN styleCSSFiles}
+	<link REL="stylesheet" href="{$stylepath}" type="text/css">
+	{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-search" >
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		{$locking}
+		<div class="r-small-page" 
+			data-body-align="center"
+			data-body-width="standard"
+		>
+							{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="small" {$form_top} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="top_c1" data-pageid="{$pageid}"	{$cell_top_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	 
+		<h2 data-itemtype="search_header" data-itemid="search_header" {$item_search_header} data-pageid="{$pageid}" >{$pagetitlelabel public_clean_cut_implementations search}</h2>
+	</div>					</div>
+	</div>		
+{END top_block}
+									{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="small" {$form_above-grid} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	</div>					</div>
+	</div>		
+{END above-grid_block}
+									{BEGIN grid_block}
+
+
+
+
+ 
+	 
+												<table 
+	data-body-align="center"
+	data-location="grid" id="form_grid_{$pageid}" data-makeup="small" {$form_grid} data-pageid="{$pageid}" 
+	class="r-edit-form" cellpadding="0" cellspacing="0" 
+	{$grid_hiddenattr} 
+		data-form-width="1"
+		
+		data-v-width="6"
+	>
+	<tbody>
+										<tr {$row_grid_0} >
+										
+
+{BEGIN cellblock_grid_c3}
+<td
+	{$cell_grid_c3}
+	class=" r-ori-vert"
+	
+				data-fullwidth
+		
+			data-cellId="grid_c3" data-pageid="{$pageid}"
+		data-v-cell="6"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN implementation_id_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_implementation_id}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="implementation_id{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field" {$item_integrated_search_field} data-pageid="{$pageid}" data-field="implementation_id" data-fieldname="implementation_id" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_implementation_id}">
+		{$label public_clean_cut_implementations implementation_id }	</label>
+	<div class="r-search-option">
+		{$searchtype_implementation_id}
+	</div>
+	<div class="r-search-field">
+		{$implementation_id_editcontrol}	</div>
+	<div class="r-search-field">
+		{$implementation_id_editcontrol1}
+	</div>
+	
+</div>
+
+{END implementation_id_fieldblock}
+											
+{BEGIN facility_id_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_facility_id}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="facility_id{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field1" {$item_integrated_search_field1} data-pageid="{$pageid}" data-field="facility_id" data-fieldname="facility_id" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_facility_id}">
+		{$label public_clean_cut_implementations facility_id }	</label>
+	<div class="r-search-option">
+		{$searchtype_facility_id}
+	</div>
+	<div class="r-search-field">
+		{$facility_id_editcontrol}	</div>
+	<div class="r-search-field">
+		{$facility_id_editcontrol1}
+	</div>
+	
+</div>
+
+{END facility_id_fieldblock}
+											
+{BEGIN country_id_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_country_id}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="country_id{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field2" {$item_integrated_search_field2} data-pageid="{$pageid}" data-field="country_id" data-fieldname="country_id" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_country_id}">
+		{$label public_clean_cut_implementations country_id }	</label>
+	<div class="r-search-option">
+		{$searchtype_country_id}
+	</div>
+	<div class="r-search-field">
+		{$country_id_editcontrol}	</div>
+	<div class="r-search-field">
+		{$country_id_editcontrol1}
+	</div>
+	
+</div>
+
+{END country_id_fieldblock}
+											
+{BEGIN implementation_year_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_implementation_year}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="implementation_year{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field3" {$item_integrated_search_field3} data-pageid="{$pageid}" data-field="implementation_year" data-fieldname="implementation_year" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_implementation_year}">
+		{$label public_clean_cut_implementations implementation_year }	</label>
+	<div class="r-search-option">
+		{$searchtype_implementation_year}
+	</div>
+	<div class="r-search-field">
+		{$implementation_year_editcontrol}	</div>
+	<div class="r-search-field">
+		{$implementation_year_editcontrol1}
+	</div>
+	
+</div>
+
+{END implementation_year_fieldblock}
+											
+{BEGIN start_date_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_start_date}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="start_date{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field4" {$item_integrated_search_field4} data-pageid="{$pageid}" data-field="start_date" data-fieldname="start_date" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_start_date}">
+		{$label public_clean_cut_implementations start_date }	</label>
+	<div class="r-search-option">
+		{$searchtype_start_date}
+	</div>
+	<div class="r-search-field">
+		{$start_date_editcontrol}	</div>
+	<div class="r-search-field">
+		{$start_date_editcontrol1}
+	</div>
+	
+</div>
+
+{END start_date_fieldblock}
+											
+{BEGIN end_date_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_end_date}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="end_date{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field5" {$item_integrated_search_field5} data-pageid="{$pageid}" data-field="end_date" data-fieldname="end_date" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_end_date}">
+		{$label public_clean_cut_implementations end_date }	</label>
+	<div class="r-search-option">
+		{$searchtype_end_date}
+	</div>
+	<div class="r-search-field">
+		{$end_date_editcontrol}	</div>
+	<div class="r-search-field">
+		{$end_date_editcontrol1}
+	</div>
+	
+</div>
+
+{END end_date_fieldblock}
+											
+{BEGIN implementation_months_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_implementation_months}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="implementation_months{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field6" {$item_integrated_search_field6} data-pageid="{$pageid}" data-field="implementation_months" data-fieldname="implementation_months" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_implementation_months}">
+		{$label public_clean_cut_implementations implementation_months }	</label>
+	<div class="r-search-option">
+		{$searchtype_implementation_months}
+	</div>
+	<div class="r-search-field">
+		{$implementation_months_editcontrol}	</div>
+	<div class="r-search-field">
+		{$implementation_months_editcontrol1}
+	</div>
+	
+</div>
+
+{END implementation_months_fieldblock}
+											
+{BEGIN avg_monthly_surgical_volume_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_avg_monthly_surgical_volume}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="avg_monthly_surgical_volume{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field7" {$item_integrated_search_field7} data-pageid="{$pageid}" data-field="avg_monthly_surgical_volume" data-fieldname="avg_monthly_surgical_volume" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_avg_monthly_surgical_volume}">
+		{$label public_clean_cut_implementations avg_monthly_surgical_volume }	</label>
+	<div class="r-search-option">
+		{$searchtype_avg_monthly_surgical_volume}
+	</div>
+	<div class="r-search-field">
+		{$avg_monthly_surgical_volume_editcontrol}	</div>
+	<div class="r-search-field">
+		{$avg_monthly_surgical_volume_editcontrol1}
+	</div>
+	
+</div>
+
+{END avg_monthly_surgical_volume_fieldblock}
+											
+{BEGIN estimated_operations_impacted_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_estimated_operations_impacted}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="estimated_operations_impacted{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field8" {$item_integrated_search_field8} data-pageid="{$pageid}" data-field="estimated_operations_impacted" data-fieldname="estimated_operations_impacted" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_estimated_operations_impacted}">
+		{$label public_clean_cut_implementations estimated_operations_impacted }	</label>
+	<div class="r-search-option">
+		{$searchtype_estimated_operations_impacted}
+	</div>
+	<div class="r-search-field">
+		{$estimated_operations_impacted_editcontrol}	</div>
+	<div class="r-search-field">
+		{$estimated_operations_impacted_editcontrol1}
+	</div>
+	
+</div>
+
+{END estimated_operations_impacted_fieldblock}
+											
+{BEGIN general_surgery_volume_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_general_surgery_volume}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="general_surgery_volume{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field9" {$item_integrated_search_field9} data-pageid="{$pageid}" data-field="general_surgery_volume" data-fieldname="general_surgery_volume" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_general_surgery_volume}">
+		{$label public_clean_cut_implementations general_surgery_volume }	</label>
+	<div class="r-search-option">
+		{$searchtype_general_surgery_volume}
+	</div>
+	<div class="r-search-field">
+		{$general_surgery_volume_editcontrol}	</div>
+	<div class="r-search-field">
+		{$general_surgery_volume_editcontrol1}
+	</div>
+	
+</div>
+
+{END general_surgery_volume_fieldblock}
+											
+{BEGIN ob_gyn_volume_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_ob_gyn_volume}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="ob_gyn_volume{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field10" {$item_integrated_search_field10} data-pageid="{$pageid}" data-field="ob_gyn_volume" data-fieldname="ob_gyn_volume" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_ob_gyn_volume}">
+		{$label public_clean_cut_implementations ob_gyn_volume }	</label>
+	<div class="r-search-option">
+		{$searchtype_ob_gyn_volume}
+	</div>
+	<div class="r-search-field">
+		{$ob_gyn_volume_editcontrol}	</div>
+	<div class="r-search-field">
+		{$ob_gyn_volume_editcontrol1}
+	</div>
+	
+</div>
+
+{END ob_gyn_volume_fieldblock}
+											
+{BEGIN pediatrics_volume_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_pediatrics_volume}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="pediatrics_volume{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field11" {$item_integrated_search_field11} data-pageid="{$pageid}" data-field="pediatrics_volume" data-fieldname="pediatrics_volume" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_pediatrics_volume}">
+		{$label public_clean_cut_implementations pediatrics_volume }	</label>
+	<div class="r-search-option">
+		{$searchtype_pediatrics_volume}
+	</div>
+	<div class="r-search-field">
+		{$pediatrics_volume_editcontrol}	</div>
+	<div class="r-search-field">
+		{$pediatrics_volume_editcontrol1}
+	</div>
+	
+</div>
+
+{END pediatrics_volume_fieldblock}
+											
+{BEGIN ortho_volume_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_ortho_volume}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="ortho_volume{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field12" {$item_integrated_search_field12} data-pageid="{$pageid}" data-field="ortho_volume" data-fieldname="ortho_volume" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_ortho_volume}">
+		{$label public_clean_cut_implementations ortho_volume }	</label>
+	<div class="r-search-option">
+		{$searchtype_ortho_volume}
+	</div>
+	<div class="r-search-field">
+		{$ortho_volume_editcontrol}	</div>
+	<div class="r-search-field">
+		{$ortho_volume_editcontrol1}
+	</div>
+	
+</div>
+
+{END ortho_volume_fieldblock}
+											
+{BEGIN total_volume_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_total_volume}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="total_volume{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field13" {$item_integrated_search_field13} data-pageid="{$pageid}" data-field="total_volume" data-fieldname="total_volume" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_total_volume}">
+		{$label public_clean_cut_implementations total_volume }	</label>
+	<div class="r-search-option">
+		{$searchtype_total_volume}
+	</div>
+	<div class="r-search-field">
+		{$total_volume_editcontrol}	</div>
+	<div class="r-search-field">
+		{$total_volume_editcontrol1}
+	</div>
+	
+</div>
+
+{END total_volume_fieldblock}
+											
+{BEGIN remarks_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_remarks}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="remarks{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field14" {$item_integrated_search_field14} data-pageid="{$pageid}" data-field="remarks" data-fieldname="remarks" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_remarks}">
+		{$label public_clean_cut_implementations remarks }	</label>
+	<div class="r-search-option">
+		{$searchtype_remarks}
+	</div>
+	<div class="r-search-field">
+		{$remarks_editcontrol}	</div>
+	<div class="r-search-field">
+		{$remarks_editcontrol1}
+	</div>
+	
+</div>
+
+{END remarks_fieldblock}
+											
+{BEGIN created_at_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_created_at}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="created_at{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field15" {$item_integrated_search_field15} data-pageid="{$pageid}" data-field="created_at" data-fieldname="created_at" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_created_at}">
+		{$label public_clean_cut_implementations created_at }	</label>
+	<div class="r-search-option">
+		{$searchtype_created_at}
+	</div>
+	<div class="r-search-field">
+		{$created_at_editcontrol}	</div>
+	<div class="r-search-field">
+		{$created_at_editcontrol1}
+	</div>
+	
+</div>
+
+{END created_at_fieldblock}
+											
+{BEGIN updated_at_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_updated_at}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="updated_at{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field16" {$item_integrated_search_field16} data-pageid="{$pageid}" data-field="updated_at" data-fieldname="updated_at" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_updated_at}">
+		{$label public_clean_cut_implementations updated_at }	</label>
+	<div class="r-search-option">
+		{$searchtype_updated_at}
+	</div>
+	<div class="r-search-field">
+		{$updated_at_editcontrol}	</div>
+	<div class="r-search-field">
+		{$updated_at_editcontrol1}
+	</div>
+	
+</div>
+
+{END updated_at_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c3}
+								</tr>
+			</tbody></table>
+{END grid_block}
+									{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="small" {$form_below-grid} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class="			col-md-12
+	">
+	 
+		<span data-itemtype="search_search" data-itemid="search_search" {$item_search_search} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" {$searchbutton_attrs} data-page=undefined >
+							Search			</a>
+</span>
+	 
+		<span data-itemtype="search_reset" data-itemid="search_reset" {$item_search_reset} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$resetbutton_attrs} >
+							Reset			</a>
+</span>
+	 
+		{BEGIN back_button}
+<span data-itemtype="search_back_list" data-itemid="search_back_list" {$item_search_back_list} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$backbutton_attrs} >
+							Back to list			</a>
+</span>
+{END back_button}
+	 
+		{BEGIN cancel_button}
+<span data-itemtype="search_cancel" data-itemid="search_cancel" {$item_search_cancel} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" id="cancelButton{$id}" >
+							Cancel			</a>
+</span>
+{END cancel_button}
+	</div>					</div>
+	</div>		
+{END below-grid_block}
+			</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

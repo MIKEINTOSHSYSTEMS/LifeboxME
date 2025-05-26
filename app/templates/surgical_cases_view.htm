@@ -1,0 +1,1849 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
+	{BEGIN rtlCSS}
+	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
+	{END rtlCSS}
+	{BEGIN styleCSSFiles}
+	<link REL="stylesheet" href="{$stylepath}" type="text/css">
+	{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-view"   
+		>
+	{BEGIN body}
+		<style>
+		{$containerCss}
+		</style>
+		<div class="r-vbar-page">
+			<div data-width="300px" data-fixed class="r-left clearfix {$leftbar_class}" >
+								<div data-location="left" id="form_left_{$pageid}" data-makeup="leftbar" {$form_left} data-pageid="{$pageid}">
+{BEGIN left_block}
+ 
+     
+         
+
+			<div data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell class="clearfix " data-itemid="logo" {$item_logo}>
+				{BEGIN logo_block}
+	<A data-itemtype="logo" data-itemid="logo" {$item_logo} data-pageid="{$pageid}" class="navbar-brand" href="{$home_link}" data-pageid="{$pageid}" {$logo_hiddenattr}>
+		{$logo}
+	</A>
+{END logo_block}
+				<button data-pageid="1" type="button" class="navbar-toggle collapsed" data-runner-toggle="collapse" data-target="[data-mobile-controlled]">	
+					<span class="sr-only">Toggle navigation</span>	
+					<span class="icon-bar"></span>					
+				</button>				
+			</div>
+		
+ 
+
+			<div class="clearfix " data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell data-itemid="expand_button" {$item_expand_button} data-topcell-item-type="expand_button" >
+				<span data-itemtype="expand_button" data-itemid="expand_button" {$item_expand_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Expand" class="btn btn-link   
+	" href="#" >
+					<span class="glyphicon glyphicon-triangle-right"></span>
+										</a>
+</span>
+			</div>
+		
+     
+     
+         
+
+			<div data-cellId="left_c1" data-pageid="{$pageid}" class="clearfix  r-ori-vert " data-itemtype="menu" data-itemid="menu" {$item_menu} data-pageid="{$pageid}">
+				{BEGIN menuitems_main}
+<ul data-itemtype="menu" data-itemid="menu" {$item_menu} data-pageid="{$pageid}"	class="r-menu nav menu-treelike" 
+	data-menulevel="1"
+>
+
+{BEGIN item_children1}
+<li class="
+	{$item_current}">
+<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline data-menu-top >
+	{$item_separator}
+	<span class="r-menu-link r-menu-expanded "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren2}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren2}
+	</span>
+		<span class="r-menu-collapsed">{$item_collicon}{$item_firstcap}</span>
+	</a>
+{BEGIN item_showchildren2}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="2">
+	{BEGIN item_children2}
+		{BEGIN item_menulink2}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren2}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren2}
+	</span>
+	</a>
+			{BEGIN item_showchildren3}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="3">
+	{BEGIN item_children3}
+		{BEGIN item_menulink3}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren3}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren3}
+	</span>
+	</a>
+			{BEGIN item_showchildren4}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="4">
+	{BEGIN item_children4}
+		{BEGIN item_menulink4}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren4}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren4}
+	</span>
+	</a>
+			{BEGIN item_showchildren5}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="5">
+	{BEGIN item_children5}
+		{BEGIN item_menulink5}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren5}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren5}
+	</span>
+	</a>
+					</li>
+		{END item_menulink5}
+	{END item_children5}
+</ul>
+{END item_showchildren5}
+		</li>
+		{END item_menulink4}
+	{END item_children4}
+</ul>
+{END item_showchildren4}
+		</li>
+		{END item_menulink3}
+	{END item_children3}
+</ul>
+{END item_showchildren3}
+		</li>
+		{END item_menulink2}
+	{END item_children2}
+</ul>
+{END item_showchildren2}
+</li>
+{END item_children1}
+</ul>
+{END menuitems_main}
+			</div>
+		
+    {END left_block}
+</div>				</div>
+			<div class="r-content-col" data-resize-left="leftbar">
+				<div data-resize-left="leftbar"  data-fixed class="r-topheader" data-resize-name="topbar">
+									{BEGIN supertop_block}
+<nav class="navbar navbar-default" 
+	data-location="supertop" id="form_supertop_{$pageid}" data-makeup="leftbar" {$form_supertop} data-pageid="{$pageid}" >
+			 
+							 
+				<span class="navbar-form  navbar-header" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="expand_menu_button" {$item_expand_menu_button} data-topcell-item-type="expand_menu_button" >
+				<span data-itemtype="expand_menu_button" data-itemid="expand_menu_button" {$item_expand_menu_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Show menu" class="btn-link   
+	 glyphicon glyphicon-menu-hamburger" href="#" >		
+				
+								</a>
+</span>
+			</span>
+		 
+				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="collapse_button" {$item_collapse_button} data-topcell-item-type="collapse_button" >
+				<span data-itemtype="collapse_button" data-itemid="collapse_button" {$item_collapse_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Collapse" class="btn-link   
+	 glyphicon glyphicon-triangle-left" href="#" >		
+				
+								</a>
+</span>
+			</span>
+							 
+													</nav>
+{END supertop_block}
+						{$locking}
+				</div>
+				<div class="r-body" data-resize-top="topbar" data-body-width="standard">
+					{$header}
+					<div class="r-top">
+									{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="leftbar" {$form_top} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="top_c1" data-pageid="{$pageid}"	{$cell_top_c1}
+	class=" r-ori-vert			col-md-12
+	
+">
+		 
+		<h2 data-itemtype="view_header" data-itemid="view_header" {$item_view_header} data-pageid="{$pageid}" >{$pagetitlelabel public_surgical_cases view}</h2>
+		</div>					</div>
+			</div>		
+{END top_block}
+						</div>
+											<div class="r-above">
+					{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="leftbar" {$form_above-grid} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-12
+	
+">
+		{BEGIN firstAboveGridCell}
+				{END firstAboveGridCell}	
+	</div>					</div>
+			</div>		
+{END above-grid_block}
+	</div>
+<div class="r-grid">
+	{BEGIN grid_tabs}
+  <ul class="nav nav-tabs bsgrid_tabs">
+	{$grid_tabs_content}
+  </ul>
+{END grid_tabs}
+					{BEGIN grid_block}
+
+
+
+
+ 
+	 
+												<table 
+	data-body-align="left"
+	data-location="grid" id="form_grid_{$pageid}" data-makeup="leftbar" {$form_grid} data-pageid="{$pageid}" 
+	class="r-edit-form" cellpadding="0" cellspacing="0" 
+	{$grid_hiddenattr} 
+		data-form-width="1"
+		
+		data-v-width="4"
+	>
+	<tbody>
+										<tr {$row_grid_0} >
+										
+
+{BEGIN cellblock_grid_c3}
+<td
+	{$cell_grid_c3}
+	class=" r-ori-vert"
+	
+				data-fullwidth
+		
+			data-cellId="grid_c3" data-pageid="{$pageid}"
+		data-v-cell="4"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN case_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_case_id}  r-vertical-field" data-fieldname="case_id" data-signal-error-for="case_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="case_id" data-fieldname="case_id" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_case_id}">
+		
+		{BEGIN case_id_label}{$label public_surgical_cases case_id }{END case_id_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$case_id_value}	</div>
+
+		
+</div>
+
+
+{END case_id_fieldblock}
+											
+{BEGIN facility_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_facility_id}  r-vertical-field" data-fieldname="facility_id" data-signal-error-for="facility_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="facility_id" data-fieldname="facility_id" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_facility_id}">
+		
+		{BEGIN facility_id_label}{$label public_surgical_cases facility_id }{END facility_id_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$facility_id_value}	</div>
+
+		
+</div>
+
+
+{END facility_id_fieldblock}
+											
+{BEGIN country_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_country_id}  r-vertical-field" data-fieldname="country_id" data-signal-error-for="country_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="country_id" data-fieldname="country_id" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_country_id}">
+		
+		{BEGIN country_id_label}{$label public_surgical_cases country_id }{END country_id_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$country_id_value}	</div>
+
+		
+</div>
+
+
+{END country_id_fieldblock}
+											
+{BEGIN surgery_date_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_surgery_date}  r-vertical-field" data-fieldname="surgery_date" data-signal-error-for="surgery_date{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="surgery_date" data-fieldname="surgery_date" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_surgery_date}">
+		
+		{BEGIN surgery_date_label}{$label public_surgical_cases surgery_date }{END surgery_date_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$surgery_date_value}	</div>
+
+		
+</div>
+
+
+{END surgery_date_fieldblock}
+											
+{BEGIN data_type_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_data_type}  r-vertical-field" data-fieldname="data_type" data-signal-error-for="data_type{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="data_type" data-fieldname="data_type" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_data_type}">
+		
+		{BEGIN data_type_label}{$label public_surgical_cases data_type }{END data_type_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$data_type_value}	</div>
+
+		
+</div>
+
+
+{END data_type_fieldblock}
+											
+{BEGIN data_collector_name_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_data_collector_name}  r-vertical-field" data-fieldname="data_collector_name" data-signal-error-for="data_collector_name{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="data_collector_name" data-fieldname="data_collector_name" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_data_collector_name}">
+		
+		{BEGIN data_collector_name_label}{$label public_surgical_cases data_collector_name }{END data_collector_name_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$data_collector_name_value}	</div>
+
+		
+</div>
+
+
+{END data_collector_name_fieldblock}
+											
+{BEGIN location_of_surgery_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_location_of_surgery}  r-vertical-field" data-fieldname="location_of_surgery" data-signal-error-for="location_of_surgery{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="location_of_surgery" data-fieldname="location_of_surgery" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_location_of_surgery}">
+		
+		{BEGIN location_of_surgery_label}{$label public_surgical_cases location_of_surgery }{END location_of_surgery_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$location_of_surgery_value}	</div>
+
+		
+</div>
+
+
+{END location_of_surgery_fieldblock}
+											
+{BEGIN patient_sex_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_patient_sex}  r-vertical-field" data-fieldname="patient_sex" data-signal-error-for="patient_sex{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="patient_sex" data-fieldname="patient_sex" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_patient_sex}">
+		
+		{BEGIN patient_sex_label}{$label public_surgical_cases patient_sex }{END patient_sex_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$patient_sex_value}	</div>
+
+		
+</div>
+
+
+{END patient_sex_fieldblock}
+											
+{BEGIN patient_asa_classification_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_patient_asa_classification}  r-vertical-field" data-fieldname="patient_asa_classification" data-signal-error-for="patient_asa_classification{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="patient_asa_classification" data-fieldname="patient_asa_classification" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_patient_asa_classification}">
+		
+		{BEGIN patient_asa_classification_label}{$label public_surgical_cases patient_asa_classification }{END patient_asa_classification_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$patient_asa_classification_value}	</div>
+
+		
+</div>
+
+
+{END patient_asa_classification_fieldblock}
+											
+{BEGIN patient_dob_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_patient_dob}  r-vertical-field" data-fieldname="patient_dob" data-signal-error-for="patient_dob{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="patient_dob" data-fieldname="patient_dob" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_patient_dob}">
+		
+		{BEGIN patient_dob_label}{$label public_surgical_cases patient_dob }{END patient_dob_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$patient_dob_value}	</div>
+
+		
+</div>
+
+
+{END patient_dob_fieldblock}
+											
+{BEGIN patient_age_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_patient_age}  r-vertical-field" data-fieldname="patient_age" data-signal-error-for="patient_age{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="patient_age" data-fieldname="patient_age" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_patient_age}">
+		
+		{BEGIN patient_age_label}{$label public_surgical_cases patient_age }{END patient_age_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$patient_age_value}	</div>
+
+		
+</div>
+
+
+{END patient_age_fieldblock}
+											
+{BEGIN diabetes_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_diabetes}  r-vertical-field" data-fieldname="diabetes" data-signal-error-for="diabetes{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="diabetes" data-fieldname="diabetes" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_diabetes}">
+		
+		{BEGIN diabetes_label}{$label public_surgical_cases diabetes }{END diabetes_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$diabetes_value}	</div>
+
+		
+</div>
+
+
+{END diabetes_fieldblock}
+											
+{BEGIN hypertension_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_hypertension}  r-vertical-field" data-fieldname="hypertension" data-signal-error-for="hypertension{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="hypertension" data-fieldname="hypertension" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_hypertension}">
+		
+		{BEGIN hypertension_label}{$label public_surgical_cases hypertension }{END hypertension_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$hypertension_value}	</div>
+
+		
+</div>
+
+
+{END hypertension_fieldblock}
+											
+{BEGIN obese_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_obese}  r-vertical-field" data-fieldname="obese" data-signal-error-for="obese{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field13" {$item_integrated_edit_field13} data-pageid="{$pageid}" data-field="obese" data-fieldname="obese" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_obese}">
+		
+		{BEGIN obese_label}{$label public_surgical_cases obese }{END obese_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$obese_value}	</div>
+
+		
+</div>
+
+
+{END obese_fieldblock}
+											
+{BEGIN malnourished_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_malnourished}  r-vertical-field" data-fieldname="malnourished" data-signal-error-for="malnourished{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field14" {$item_integrated_edit_field14} data-pageid="{$pageid}" data-field="malnourished" data-fieldname="malnourished" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_malnourished}">
+		
+		{BEGIN malnourished_label}{$label public_surgical_cases malnourished }{END malnourished_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$malnourished_value}	</div>
+
+		
+</div>
+
+
+{END malnourished_fieldblock}
+											
+{BEGIN smoker_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_smoker}  r-vertical-field" data-fieldname="smoker" data-signal-error-for="smoker{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field15" {$item_integrated_edit_field15} data-pageid="{$pageid}" data-field="smoker" data-fieldname="smoker" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_smoker}">
+		
+		{BEGIN smoker_label}{$label public_surgical_cases smoker }{END smoker_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$smoker_value}	</div>
+
+		
+</div>
+
+
+{END smoker_fieldblock}
+											
+{BEGIN on_steroids_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_on_steroids}  r-vertical-field" data-fieldname="on_steroids" data-signal-error-for="on_steroids{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field16" {$item_integrated_edit_field16} data-pageid="{$pageid}" data-field="on_steroids" data-fieldname="on_steroids" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_on_steroids}">
+		
+		{BEGIN on_steroids_label}{$label public_surgical_cases on_steroids }{END on_steroids_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$on_steroids_value}	</div>
+
+		
+</div>
+
+
+{END on_steroids_fieldblock}
+											
+{BEGIN admitted_to_icu_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_admitted_to_icu}  r-vertical-field" data-fieldname="admitted_to_icu" data-signal-error-for="admitted_to_icu{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field17" {$item_integrated_edit_field17} data-pageid="{$pageid}" data-field="admitted_to_icu" data-fieldname="admitted_to_icu" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_admitted_to_icu}">
+		
+		{BEGIN admitted_to_icu_label}{$label public_surgical_cases admitted_to_icu }{END admitted_to_icu_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$admitted_to_icu_value}	</div>
+
+		
+</div>
+
+
+{END admitted_to_icu_fieldblock}
+											
+{BEGIN hypothermic_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_hypothermic}  r-vertical-field" data-fieldname="hypothermic" data-signal-error-for="hypothermic{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field18" {$item_integrated_edit_field18} data-pageid="{$pageid}" data-field="hypothermic" data-fieldname="hypothermic" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_hypothermic}">
+		
+		{BEGIN hypothermic_label}{$label public_surgical_cases hypothermic }{END hypothermic_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$hypothermic_value}	</div>
+
+		
+</div>
+
+
+{END hypothermic_fieldblock}
+											
+{BEGIN preoperative_diagnosis_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_preoperative_diagnosis_id}  r-vertical-field" data-fieldname="preoperative_diagnosis_id" data-signal-error-for="preoperative_diagnosis_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field19" {$item_integrated_edit_field19} data-pageid="{$pageid}" data-field="preoperative_diagnosis_id" data-fieldname="preoperative_diagnosis_id" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_preoperative_diagnosis_id}">
+		
+		{BEGIN preoperative_diagnosis_id_label}{$label public_surgical_cases preoperative_diagnosis_id }{END preoperative_diagnosis_id_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$preoperative_diagnosis_id_value}	</div>
+
+		
+</div>
+
+
+{END preoperative_diagnosis_id_fieldblock}
+											
+{BEGIN hours_since_injury_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_hours_since_injury}  r-vertical-field" data-fieldname="hours_since_injury" data-signal-error-for="hours_since_injury{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field20" {$item_integrated_edit_field20} data-pageid="{$pageid}" data-field="hours_since_injury" data-fieldname="hours_since_injury" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_hours_since_injury}">
+		
+		{BEGIN hours_since_injury_label}{$label public_surgical_cases hours_since_injury }{END hours_since_injury_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$hours_since_injury_value}	</div>
+
+		
+</div>
+
+
+{END hours_since_injury_fieldblock}
+											
+{BEGIN sterilizable_drill_used_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_sterilizable_drill_used}  r-vertical-field" data-fieldname="sterilizable_drill_used" data-signal-error-for="sterilizable_drill_used{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field21" {$item_integrated_edit_field21} data-pageid="{$pageid}" data-field="sterilizable_drill_used" data-fieldname="sterilizable_drill_used" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_sterilizable_drill_used}">
+		
+		{BEGIN sterilizable_drill_used_label}{$label public_surgical_cases sterilizable_drill_used }{END sterilizable_drill_used_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$sterilizable_drill_used_value}	</div>
+
+		
+</div>
+
+
+{END sterilizable_drill_used_fieldblock}
+											
+{BEGIN drill_sterile_cover_used_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_drill_sterile_cover_used}  r-vertical-field" data-fieldname="drill_sterile_cover_used" data-signal-error-for="drill_sterile_cover_used{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field22" {$item_integrated_edit_field22} data-pageid="{$pageid}" data-field="drill_sterile_cover_used" data-fieldname="drill_sterile_cover_used" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_drill_sterile_cover_used}">
+		
+		{BEGIN drill_sterile_cover_used_label}{$label public_surgical_cases drill_sterile_cover_used }{END drill_sterile_cover_used_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$drill_sterile_cover_used_value}	</div>
+
+		
+</div>
+
+
+{END drill_sterile_cover_used_fieldblock}
+											
+{BEGIN holes_in_sterile_cover_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_holes_in_sterile_cover}  r-vertical-field" data-fieldname="holes_in_sterile_cover" data-signal-error-for="holes_in_sterile_cover{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field23" {$item_integrated_edit_field23} data-pageid="{$pageid}" data-field="holes_in_sterile_cover" data-fieldname="holes_in_sterile_cover" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_holes_in_sterile_cover}">
+		
+		{BEGIN holes_in_sterile_cover_label}{$label public_surgical_cases holes_in_sterile_cover }{END holes_in_sterile_cover_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$holes_in_sterile_cover_value}	</div>
+
+		
+</div>
+
+
+{END holes_in_sterile_cover_fieldblock}
+											
+{BEGIN sign_in_read_aloud_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_sign_in_read_aloud}  r-vertical-field" data-fieldname="sign_in_read_aloud" data-signal-error-for="sign_in_read_aloud{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field24" {$item_integrated_edit_field24} data-pageid="{$pageid}" data-field="sign_in_read_aloud" data-fieldname="sign_in_read_aloud" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_sign_in_read_aloud}">
+		
+		{BEGIN sign_in_read_aloud_label}{$label public_surgical_cases sign_in_read_aloud }{END sign_in_read_aloud_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$sign_in_read_aloud_value}	</div>
+
+		
+</div>
+
+
+{END sign_in_read_aloud_fieldblock}
+											
+{BEGIN sign_in_completed_before_anesthesia_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_sign_in_completed_before_anesthesia}  r-vertical-field" data-fieldname="sign_in_completed_before_anesthesia" data-signal-error-for="sign_in_completed_before_anesthesia{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field25" {$item_integrated_edit_field25} data-pageid="{$pageid}" data-field="sign_in_completed_before_anesthesia" data-fieldname="sign_in_completed_before_anesthesia" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_sign_in_completed_before_anesthesia}">
+		
+		{BEGIN sign_in_completed_before_anesthesia_label}{$label public_surgical_cases sign_in_completed_before_anesthesia }{END sign_in_completed_before_anesthesia_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$sign_in_completed_before_anesthesia_value}	</div>
+
+		
+</div>
+
+
+{END sign_in_completed_before_anesthesia_fieldblock}
+											
+{BEGIN sterility_indicator_in_tray_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_sterility_indicator_in_tray}  r-vertical-field" data-fieldname="sterility_indicator_in_tray" data-signal-error-for="sterility_indicator_in_tray{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field26" {$item_integrated_edit_field26} data-pageid="{$pageid}" data-field="sterility_indicator_in_tray" data-fieldname="sterility_indicator_in_tray" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_sterility_indicator_in_tray}">
+		
+		{BEGIN sterility_indicator_in_tray_label}{$label public_surgical_cases sterility_indicator_in_tray }{END sterility_indicator_in_tray_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$sterility_indicator_in_tray_value}	</div>
+
+		
+</div>
+
+
+{END sterility_indicator_in_tray_fieldblock}
+											
+{BEGIN sterility_indicator_color_changed_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_sterility_indicator_color_changed}  r-vertical-field" data-fieldname="sterility_indicator_color_changed" data-signal-error-for="sterility_indicator_color_changed{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field27" {$item_integrated_edit_field27} data-pageid="{$pageid}" data-field="sterility_indicator_color_changed" data-fieldname="sterility_indicator_color_changed" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_sterility_indicator_color_changed}">
+		
+		{BEGIN sterility_indicator_color_changed_label}{$label public_surgical_cases sterility_indicator_color_changed }{END sterility_indicator_color_changed_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$sterility_indicator_color_changed_value}	</div>
+
+		
+</div>
+
+
+{END sterility_indicator_color_changed_fieldblock}
+											
+{BEGIN tray_wet_prior_to_operation_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tray_wet_prior_to_operation}  r-vertical-field" data-fieldname="tray_wet_prior_to_operation" data-signal-error-for="tray_wet_prior_to_operation{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field28" {$item_integrated_edit_field28} data-pageid="{$pageid}" data-field="tray_wet_prior_to_operation" data-fieldname="tray_wet_prior_to_operation" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_tray_wet_prior_to_operation}">
+		
+		{BEGIN tray_wet_prior_to_operation_label}{$label public_surgical_cases tray_wet_prior_to_operation }{END tray_wet_prior_to_operation_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$tray_wet_prior_to_operation_value}	</div>
+
+		
+</div>
+
+
+{END tray_wet_prior_to_operation_fieldblock}
+											
+{BEGIN tray_replaced_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tray_replaced}  r-vertical-field" data-fieldname="tray_replaced" data-signal-error-for="tray_replaced{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field29" {$item_integrated_edit_field29} data-pageid="{$pageid}" data-field="tray_replaced" data-fieldname="tray_replaced" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_tray_replaced}">
+		
+		{BEGIN tray_replaced_label}{$label public_surgical_cases tray_replaced }{END tray_replaced_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$tray_replaced_value}	</div>
+
+		
+</div>
+
+
+{END tray_replaced_fieldblock}
+											
+{BEGIN gauze_count_performed_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_gauze_count_performed}  r-vertical-field" data-fieldname="gauze_count_performed" data-signal-error-for="gauze_count_performed{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field30" {$item_integrated_edit_field30} data-pageid="{$pageid}" data-field="gauze_count_performed" data-fieldname="gauze_count_performed" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_gauze_count_performed}">
+		
+		{BEGIN gauze_count_performed_label}{$label public_surgical_cases gauze_count_performed }{END gauze_count_performed_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$gauze_count_performed_value}	</div>
+
+		
+</div>
+
+
+{END gauze_count_performed_fieldblock}
+											
+{BEGIN gauze_count_total_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_gauze_count_total}  r-vertical-field" data-fieldname="gauze_count_total" data-signal-error-for="gauze_count_total{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field31" {$item_integrated_edit_field31} data-pageid="{$pageid}" data-field="gauze_count_total" data-fieldname="gauze_count_total" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_gauze_count_total}">
+		
+		{BEGIN gauze_count_total_label}{$label public_surgical_cases gauze_count_total }{END gauze_count_total_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$gauze_count_total_value}	</div>
+
+		
+</div>
+
+
+{END gauze_count_total_fieldblock}
+											
+{BEGIN surgeon_scrubbed_hands_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_surgeon_scrubbed_hands}  r-vertical-field" data-fieldname="surgeon_scrubbed_hands" data-signal-error-for="surgeon_scrubbed_hands{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field32" {$item_integrated_edit_field32} data-pageid="{$pageid}" data-field="surgeon_scrubbed_hands" data-fieldname="surgeon_scrubbed_hands" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_surgeon_scrubbed_hands}">
+		
+		{BEGIN surgeon_scrubbed_hands_label}{$label public_surgical_cases surgeon_scrubbed_hands }{END surgeon_scrubbed_hands_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$surgeon_scrubbed_hands_value}	</div>
+
+		
+</div>
+
+
+{END surgeon_scrubbed_hands_fieldblock}
+											
+{BEGIN handwashing_available_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_handwashing_available}  r-vertical-field" data-fieldname="handwashing_available" data-signal-error-for="handwashing_available{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field33" {$item_integrated_edit_field33} data-pageid="{$pageid}" data-field="handwashing_available" data-fieldname="handwashing_available" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_handwashing_available}">
+		
+		{BEGIN handwashing_available_label}{$label public_surgical_cases handwashing_available }{END handwashing_available_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$handwashing_available_value}	</div>
+
+		
+</div>
+
+
+{END handwashing_available_fieldblock}
+											
+{BEGIN alcohol_solution_applied_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_alcohol_solution_applied}  r-vertical-field" data-fieldname="alcohol_solution_applied" data-signal-error-for="alcohol_solution_applied{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field34" {$item_integrated_edit_field34} data-pageid="{$pageid}" data-field="alcohol_solution_applied" data-fieldname="alcohol_solution_applied" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_alcohol_solution_applied}">
+		
+		{BEGIN alcohol_solution_applied_label}{$label public_surgical_cases alcohol_solution_applied }{END alcohol_solution_applied_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$alcohol_solution_applied_value}	</div>
+
+		
+</div>
+
+
+{END alcohol_solution_applied_fieldblock}
+											
+{BEGIN new_surgical_gloves_used_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_new_surgical_gloves_used}  r-vertical-field" data-fieldname="new_surgical_gloves_used" data-signal-error-for="new_surgical_gloves_used{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field35" {$item_integrated_edit_field35} data-pageid="{$pageid}" data-field="new_surgical_gloves_used" data-fieldname="new_surgical_gloves_used" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_new_surgical_gloves_used}">
+		
+		{BEGIN new_surgical_gloves_used_label}{$label public_surgical_cases new_surgical_gloves_used }{END new_surgical_gloves_used_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$new_surgical_gloves_used_value}	</div>
+
+		
+</div>
+
+
+{END new_surgical_gloves_used_fieldblock}
+											
+{BEGIN gown_sterility_indicator_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_gown_sterility_indicator}  r-vertical-field" data-fieldname="gown_sterility_indicator" data-signal-error-for="gown_sterility_indicator{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field36" {$item_integrated_edit_field36} data-pageid="{$pageid}" data-field="gown_sterility_indicator" data-fieldname="gown_sterility_indicator" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_gown_sterility_indicator}">
+		
+		{BEGIN gown_sterility_indicator_label}{$label public_surgical_cases gown_sterility_indicator }{END gown_sterility_indicator_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$gown_sterility_indicator_value}	</div>
+
+		
+</div>
+
+
+{END gown_sterility_indicator_fieldblock}
+											
+{BEGIN gown_indicator_color_changed_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_gown_indicator_color_changed}  r-vertical-field" data-fieldname="gown_indicator_color_changed" data-signal-error-for="gown_indicator_color_changed{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field37" {$item_integrated_edit_field37} data-pageid="{$pageid}" data-field="gown_indicator_color_changed" data-fieldname="gown_indicator_color_changed" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_gown_indicator_color_changed}">
+		
+		{BEGIN gown_indicator_color_changed_label}{$label public_surgical_cases gown_indicator_color_changed }{END gown_indicator_color_changed_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$gown_indicator_color_changed_value}	</div>
+
+		
+</div>
+
+
+{END gown_indicator_color_changed_fieldblock}
+											
+{BEGIN gown_pack_replaced_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_gown_pack_replaced}  r-vertical-field" data-fieldname="gown_pack_replaced" data-signal-error-for="gown_pack_replaced{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field38" {$item_integrated_edit_field38} data-pageid="{$pageid}" data-field="gown_pack_replaced" data-fieldname="gown_pack_replaced" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_gown_pack_replaced}">
+		
+		{BEGIN gown_pack_replaced_label}{$label public_surgical_cases gown_pack_replaced }{END gown_pack_replaced_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$gown_pack_replaced_value}	</div>
+
+		
+</div>
+
+
+{END gown_pack_replaced_fieldblock}
+											
+{BEGIN gowns_or_drapes_wet_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_gowns_or_drapes_wet}  r-vertical-field" data-fieldname="gowns_or_drapes_wet" data-signal-error-for="gowns_or_drapes_wet{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field39" {$item_integrated_edit_field39} data-pageid="{$pageid}" data-field="gowns_or_drapes_wet" data-fieldname="gowns_or_drapes_wet" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_gowns_or_drapes_wet}">
+		
+		{BEGIN gowns_or_drapes_wet_label}{$label public_surgical_cases gowns_or_drapes_wet }{END gowns_or_drapes_wet_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$gowns_or_drapes_wet_value}	</div>
+
+		
+</div>
+
+
+{END gowns_or_drapes_wet_fieldblock}
+											
+{BEGIN wet_gowns_replaced_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_wet_gowns_replaced}  r-vertical-field" data-fieldname="wet_gowns_replaced" data-signal-error-for="wet_gowns_replaced{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field40" {$item_integrated_edit_field40} data-pageid="{$pageid}" data-field="wet_gowns_replaced" data-fieldname="wet_gowns_replaced" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_wet_gowns_replaced}">
+		
+		{BEGIN wet_gowns_replaced_label}{$label public_surgical_cases wet_gowns_replaced }{END wet_gowns_replaced_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$wet_gowns_replaced_value}	</div>
+
+		
+</div>
+
+
+{END wet_gowns_replaced_fieldblock}
+											
+{BEGIN holes_in_gowns_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_holes_in_gowns}  r-vertical-field" data-fieldname="holes_in_gowns" data-signal-error-for="holes_in_gowns{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field41" {$item_integrated_edit_field41} data-pageid="{$pageid}" data-field="holes_in_gowns" data-fieldname="holes_in_gowns" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_holes_in_gowns}">
+		
+		{BEGIN holes_in_gowns_label}{$label public_surgical_cases holes_in_gowns }{END holes_in_gowns_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$holes_in_gowns_value}	</div>
+
+		
+</div>
+
+
+{END holes_in_gowns_fieldblock}
+											
+{BEGIN torn_gowns_replaced_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_torn_gowns_replaced}  r-vertical-field" data-fieldname="torn_gowns_replaced" data-signal-error-for="torn_gowns_replaced{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field42" {$item_integrated_edit_field42} data-pageid="{$pageid}" data-field="torn_gowns_replaced" data-fieldname="torn_gowns_replaced" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_torn_gowns_replaced}">
+		
+		{BEGIN torn_gowns_replaced_label}{$label public_surgical_cases torn_gowns_replaced }{END torn_gowns_replaced_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$torn_gowns_replaced_value}	</div>
+
+		
+</div>
+
+
+{END torn_gowns_replaced_fieldblock}
+											
+{BEGIN holes_in_drapes_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_holes_in_drapes}  r-vertical-field" data-fieldname="holes_in_drapes" data-signal-error-for="holes_in_drapes{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field43" {$item_integrated_edit_field43} data-pageid="{$pageid}" data-field="holes_in_drapes" data-fieldname="holes_in_drapes" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_holes_in_drapes}">
+		
+		{BEGIN holes_in_drapes_label}{$label public_surgical_cases holes_in_drapes }{END holes_in_drapes_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$holes_in_drapes_value}	</div>
+
+		
+</div>
+
+
+{END holes_in_drapes_fieldblock}
+											
+{BEGIN drapes_replaced_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_drapes_replaced}  r-vertical-field" data-fieldname="drapes_replaced" data-signal-error-for="drapes_replaced{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field44" {$item_integrated_edit_field44} data-pageid="{$pageid}" data-field="drapes_replaced" data-fieldname="drapes_replaced" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_drapes_replaced}">
+		
+		{BEGIN drapes_replaced_label}{$label public_surgical_cases drapes_replaced }{END drapes_replaced_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$drapes_replaced_value}	</div>
+
+		
+</div>
+
+
+{END drapes_replaced_fieldblock}
+											
+{BEGIN surgical_site_prep_method_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_surgical_site_prep_method}  r-vertical-field" data-fieldname="surgical_site_prep_method" data-signal-error-for="surgical_site_prep_method{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field45" {$item_integrated_edit_field45} data-pageid="{$pageid}" data-field="surgical_site_prep_method" data-fieldname="surgical_site_prep_method" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_surgical_site_prep_method}">
+		
+		{BEGIN surgical_site_prep_method_label}{$label public_surgical_cases surgical_site_prep_method }{END surgical_site_prep_method_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$surgical_site_prep_method_value}	</div>
+
+		
+</div>
+
+
+{END surgical_site_prep_method_fieldblock}
+											
+{BEGIN vaginal_preparation_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_vaginal_preparation}  r-vertical-field" data-fieldname="vaginal_preparation" data-signal-error-for="vaginal_preparation{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field46" {$item_integrated_edit_field46} data-pageid="{$pageid}" data-field="vaginal_preparation" data-fieldname="vaginal_preparation" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_vaginal_preparation}">
+		
+		{BEGIN vaginal_preparation_label}{$label public_surgical_cases vaginal_preparation }{END vaginal_preparation_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$vaginal_preparation_value}	</div>
+
+		
+</div>
+
+
+{END vaginal_preparation_fieldblock}
+											
+{BEGIN antibiotics_given_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_antibiotics_given}  r-vertical-field" data-fieldname="antibiotics_given" data-signal-error-for="antibiotics_given{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field47" {$item_integrated_edit_field47} data-pageid="{$pageid}" data-field="antibiotics_given" data-fieldname="antibiotics_given" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_antibiotics_given}">
+		
+		{BEGIN antibiotics_given_label}{$label public_surgical_cases antibiotics_given }{END antibiotics_given_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$antibiotics_given_value}	</div>
+
+		
+</div>
+
+
+{END antibiotics_given_fieldblock}
+											
+{BEGIN antibiotics_admin_location_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_antibiotics_admin_location}  r-vertical-field" data-fieldname="antibiotics_admin_location" data-signal-error-for="antibiotics_admin_location{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field48" {$item_integrated_edit_field48} data-pageid="{$pageid}" data-field="antibiotics_admin_location" data-fieldname="antibiotics_admin_location" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_antibiotics_admin_location}">
+		
+		{BEGIN antibiotics_admin_location_label}{$label public_surgical_cases antibiotics_admin_location }{END antibiotics_admin_location_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$antibiotics_admin_location_value}	</div>
+
+		
+</div>
+
+
+{END antibiotics_admin_location_fieldblock}
+											
+{BEGIN antibiotics_time_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_antibiotics_time}  r-vertical-field" data-fieldname="antibiotics_time" data-signal-error-for="antibiotics_time{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field49" {$item_integrated_edit_field49} data-pageid="{$pageid}" data-field="antibiotics_time" data-fieldname="antibiotics_time" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_antibiotics_time}">
+		
+		{BEGIN antibiotics_time_label}{$label public_surgical_cases antibiotics_time }{END antibiotics_time_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$antibiotics_time_value}	</div>
+
+		
+</div>
+
+
+{END antibiotics_time_fieldblock}
+											
+{BEGIN on_scheduled_antibiotics_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_on_scheduled_antibiotics}  r-vertical-field" data-fieldname="on_scheduled_antibiotics" data-signal-error-for="on_scheduled_antibiotics{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field50" {$item_integrated_edit_field50} data-pageid="{$pageid}" data-field="on_scheduled_antibiotics" data-fieldname="on_scheduled_antibiotics" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_on_scheduled_antibiotics}">
+		
+		{BEGIN on_scheduled_antibiotics_label}{$label public_surgical_cases on_scheduled_antibiotics }{END on_scheduled_antibiotics_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$on_scheduled_antibiotics_value}	</div>
+
+		
+</div>
+
+
+{END on_scheduled_antibiotics_fieldblock}
+											
+{BEGIN antibiotic_type_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_antibiotic_type}  r-vertical-field" data-fieldname="antibiotic_type" data-signal-error-for="antibiotic_type{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field51" {$item_integrated_edit_field51} data-pageid="{$pageid}" data-field="antibiotic_type" data-fieldname="antibiotic_type" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_antibiotic_type}">
+		
+		{BEGIN antibiotic_type_label}{$label public_surgical_cases antibiotic_type }{END antibiotic_type_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$antibiotic_type_value}	</div>
+
+		
+</div>
+
+
+{END antibiotic_type_fieldblock}
+											
+{BEGIN timeout_read_aloud_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_timeout_read_aloud}  r-vertical-field" data-fieldname="timeout_read_aloud" data-signal-error-for="timeout_read_aloud{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field52" {$item_integrated_edit_field52} data-pageid="{$pageid}" data-field="timeout_read_aloud" data-fieldname="timeout_read_aloud" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_timeout_read_aloud}">
+		
+		{BEGIN timeout_read_aloud_label}{$label public_surgical_cases timeout_read_aloud }{END timeout_read_aloud_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$timeout_read_aloud_value}	</div>
+
+		
+</div>
+
+
+{END timeout_read_aloud_fieldblock}
+											
+{BEGIN operation_type_announced_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_operation_type_announced}  r-vertical-field" data-fieldname="operation_type_announced" data-signal-error-for="operation_type_announced{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field53" {$item_integrated_edit_field53} data-pageid="{$pageid}" data-field="operation_type_announced" data-fieldname="operation_type_announced" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_operation_type_announced}">
+		
+		{BEGIN operation_type_announced_label}{$label public_surgical_cases operation_type_announced }{END operation_type_announced_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$operation_type_announced_value}	</div>
+
+		
+</div>
+
+
+{END operation_type_announced_fieldblock}
+											
+{BEGIN blood_loss_announced_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_blood_loss_announced}  r-vertical-field" data-fieldname="blood_loss_announced" data-signal-error-for="blood_loss_announced{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field54" {$item_integrated_edit_field54} data-pageid="{$pageid}" data-field="blood_loss_announced" data-fieldname="blood_loss_announced" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_blood_loss_announced}">
+		
+		{BEGIN blood_loss_announced_label}{$label public_surgical_cases blood_loss_announced }{END blood_loss_announced_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$blood_loss_announced_value}	</div>
+
+		
+</div>
+
+
+{END blood_loss_announced_fieldblock}
+											
+{BEGIN estimated_blood_loss_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_estimated_blood_loss}  r-vertical-field" data-fieldname="estimated_blood_loss" data-signal-error-for="estimated_blood_loss{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field55" {$item_integrated_edit_field55} data-pageid="{$pageid}" data-field="estimated_blood_loss" data-fieldname="estimated_blood_loss" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_estimated_blood_loss}">
+		
+		{BEGIN estimated_blood_loss_label}{$label public_surgical_cases estimated_blood_loss }{END estimated_blood_loss_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$estimated_blood_loss_value}	</div>
+
+		
+</div>
+
+
+{END estimated_blood_loss_fieldblock}
+											
+{BEGIN time_of_incision_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_time_of_incision}  r-vertical-field" data-fieldname="time_of_incision" data-signal-error-for="time_of_incision{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field56" {$item_integrated_edit_field56} data-pageid="{$pageid}" data-field="time_of_incision" data-fieldname="time_of_incision" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_time_of_incision}">
+		
+		{BEGIN time_of_incision_label}{$label public_surgical_cases time_of_incision }{END time_of_incision_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$time_of_incision_value}	</div>
+
+		
+</div>
+
+
+{END time_of_incision_fieldblock}
+											
+{BEGIN gauze_count_end_performed_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_gauze_count_end_performed}  r-vertical-field" data-fieldname="gauze_count_end_performed" data-signal-error-for="gauze_count_end_performed{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field57" {$item_integrated_edit_field57} data-pageid="{$pageid}" data-field="gauze_count_end_performed" data-fieldname="gauze_count_end_performed" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_gauze_count_end_performed}">
+		
+		{BEGIN gauze_count_end_performed_label}{$label public_surgical_cases gauze_count_end_performed }{END gauze_count_end_performed_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$gauze_count_end_performed_value}	</div>
+
+		
+</div>
+
+
+{END gauze_count_end_performed_fieldblock}
+											
+{BEGIN gauze_count_end_total_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_gauze_count_end_total}  r-vertical-field" data-fieldname="gauze_count_end_total" data-signal-error-for="gauze_count_end_total{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field58" {$item_integrated_edit_field58} data-pageid="{$pageid}" data-field="gauze_count_end_total" data-fieldname="gauze_count_end_total" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_gauze_count_end_total}">
+		
+		{BEGIN gauze_count_end_total_label}{$label public_surgical_cases gauze_count_end_total }{END gauze_count_end_total_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$gauze_count_end_total_value}	</div>
+
+		
+</div>
+
+
+{END gauze_count_end_total_fieldblock}
+											
+{BEGIN time_dressing_applied_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_time_dressing_applied}  r-vertical-field" data-fieldname="time_dressing_applied" data-signal-error-for="time_dressing_applied{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field59" {$item_integrated_edit_field59} data-pageid="{$pageid}" data-field="time_dressing_applied" data-fieldname="time_dressing_applied" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_time_dressing_applied}">
+		
+		{BEGIN time_dressing_applied_label}{$label public_surgical_cases time_dressing_applied }{END time_dressing_applied_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$time_dressing_applied_value}	</div>
+
+		
+</div>
+
+
+{END time_dressing_applied_fieldblock}
+											
+{BEGIN procedure_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_procedure_id}  r-vertical-field" data-fieldname="procedure_id" data-signal-error-for="procedure_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field60" {$item_integrated_edit_field60} data-pageid="{$pageid}" data-field="procedure_id" data-fieldname="procedure_id" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_procedure_id}">
+		
+		{BEGIN procedure_id_label}{$label public_surgical_cases procedure_id }{END procedure_id_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$procedure_id_value}	</div>
+
+		
+</div>
+
+
+{END procedure_id_fieldblock}
+											
+{BEGIN hardware_or_bioprosthetic_used_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_hardware_or_bioprosthetic_used}  r-vertical-field" data-fieldname="hardware_or_bioprosthetic_used" data-signal-error-for="hardware_or_bioprosthetic_used{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field61" {$item_integrated_edit_field61} data-pageid="{$pageid}" data-field="hardware_or_bioprosthetic_used" data-fieldname="hardware_or_bioprosthetic_used" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_hardware_or_bioprosthetic_used}">
+		
+		{BEGIN hardware_or_bioprosthetic_used_label}{$label public_surgical_cases hardware_or_bioprosthetic_used }{END hardware_or_bioprosthetic_used_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$hardware_or_bioprosthetic_used_value}	</div>
+
+		
+</div>
+
+
+{END hardware_or_bioprosthetic_used_fieldblock}
+											
+{BEGIN cesarean_indication_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_cesarean_indication}  r-vertical-field" data-fieldname="cesarean_indication" data-signal-error-for="cesarean_indication{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field62" {$item_integrated_edit_field62} data-pageid="{$pageid}" data-field="cesarean_indication" data-fieldname="cesarean_indication" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_cesarean_indication}">
+		
+		{BEGIN cesarean_indication_label}{$label public_surgical_cases cesarean_indication }{END cesarean_indication_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$cesarean_indication_value}	</div>
+
+		
+</div>
+
+
+{END cesarean_indication_fieldblock}
+											
+{BEGIN wound_closed_primarily_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_wound_closed_primarily}  r-vertical-field" data-fieldname="wound_closed_primarily" data-signal-error-for="wound_closed_primarily{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field63" {$item_integrated_edit_field63} data-pageid="{$pageid}" data-field="wound_closed_primarily" data-fieldname="wound_closed_primarily" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_wound_closed_primarily}">
+		
+		{BEGIN wound_closed_primarily_label}{$label public_surgical_cases wound_closed_primarily }{END wound_closed_primarily_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$wound_closed_primarily_value}	</div>
+
+		
+</div>
+
+
+{END wound_closed_primarily_fieldblock}
+											
+{BEGIN wound_classification_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_wound_classification}  r-vertical-field" data-fieldname="wound_classification" data-signal-error-for="wound_classification{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field64" {$item_integrated_edit_field64} data-pageid="{$pageid}" data-field="wound_classification" data-fieldname="wound_classification" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_wound_classification}">
+		
+		{BEGIN wound_classification_label}{$label public_surgical_cases wound_classification }{END wound_classification_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$wound_classification_value}	</div>
+
+		
+</div>
+
+
+{END wound_classification_fieldblock}
+											
+{BEGIN case_type_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_case_type}  r-vertical-field" data-fieldname="case_type" data-signal-error-for="case_type{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field65" {$item_integrated_edit_field65} data-pageid="{$pageid}" data-field="case_type" data-fieldname="case_type" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_case_type}">
+		
+		{BEGIN case_type_label}{$label public_surgical_cases case_type }{END case_type_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$case_type_value}	</div>
+
+		
+</div>
+
+
+{END case_type_fieldblock}
+											
+{BEGIN sign_out_read_aloud_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_sign_out_read_aloud}  r-vertical-field" data-fieldname="sign_out_read_aloud" data-signal-error-for="sign_out_read_aloud{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field66" {$item_integrated_edit_field66} data-pageid="{$pageid}" data-field="sign_out_read_aloud" data-fieldname="sign_out_read_aloud" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_sign_out_read_aloud}">
+		
+		{BEGIN sign_out_read_aloud_label}{$label public_surgical_cases sign_out_read_aloud }{END sign_out_read_aloud_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$sign_out_read_aloud_value}	</div>
+
+		
+</div>
+
+
+{END sign_out_read_aloud_fieldblock}
+											
+{BEGIN sign_out_in_theatre_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_sign_out_in_theatre}  r-vertical-field" data-fieldname="sign_out_in_theatre" data-signal-error-for="sign_out_in_theatre{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field67" {$item_integrated_edit_field67} data-pageid="{$pageid}" data-field="sign_out_in_theatre" data-fieldname="sign_out_in_theatre" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_sign_out_in_theatre}">
+		
+		{BEGIN sign_out_in_theatre_label}{$label public_surgical_cases sign_out_in_theatre }{END sign_out_in_theatre_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$sign_out_in_theatre_value}	</div>
+
+		
+</div>
+
+
+{END sign_out_in_theatre_fieldblock}
+											
+{BEGIN unplanned_intubation_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_unplanned_intubation}  r-vertical-field" data-fieldname="unplanned_intubation" data-signal-error-for="unplanned_intubation{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field68" {$item_integrated_edit_field68} data-pageid="{$pageid}" data-field="unplanned_intubation" data-fieldname="unplanned_intubation" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_unplanned_intubation}">
+		
+		{BEGIN unplanned_intubation_label}{$label public_surgical_cases unplanned_intubation }{END unplanned_intubation_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$unplanned_intubation_value}	</div>
+
+		
+</div>
+
+
+{END unplanned_intubation_fieldblock}
+											
+{BEGIN urgent_tracheostomy_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_urgent_tracheostomy}  r-vertical-field" data-fieldname="urgent_tracheostomy" data-signal-error-for="urgent_tracheostomy{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field69" {$item_integrated_edit_field69} data-pageid="{$pageid}" data-field="urgent_tracheostomy" data-fieldname="urgent_tracheostomy" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_urgent_tracheostomy}">
+		
+		{BEGIN urgent_tracheostomy_label}{$label public_surgical_cases urgent_tracheostomy }{END urgent_tracheostomy_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$urgent_tracheostomy_value}	</div>
+
+		
+</div>
+
+
+{END urgent_tracheostomy_fieldblock}
+											
+{BEGIN urgent_central_access_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_urgent_central_access}  r-vertical-field" data-fieldname="urgent_central_access" data-signal-error-for="urgent_central_access{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field70" {$item_integrated_edit_field70} data-pageid="{$pageid}" data-field="urgent_central_access" data-fieldname="urgent_central_access" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_urgent_central_access}">
+		
+		{BEGIN urgent_central_access_label}{$label public_surgical_cases urgent_central_access }{END urgent_central_access_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$urgent_central_access_value}	</div>
+
+		
+</div>
+
+
+{END urgent_central_access_fieldblock}
+											
+{BEGIN other_crisis_occurred_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_other_crisis_occurred}  r-vertical-field" data-fieldname="other_crisis_occurred" data-signal-error-for="other_crisis_occurred{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field71" {$item_integrated_edit_field71} data-pageid="{$pageid}" data-field="other_crisis_occurred" data-fieldname="other_crisis_occurred" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_other_crisis_occurred}">
+		
+		{BEGIN other_crisis_occurred_label}{$label public_surgical_cases other_crisis_occurred }{END other_crisis_occurred_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$other_crisis_occurred_value}	</div>
+
+		
+</div>
+
+
+{END other_crisis_occurred_fieldblock}
+											
+{BEGIN crisis_description_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_crisis_description}  r-vertical-field" data-fieldname="crisis_description" data-signal-error-for="crisis_description{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field72" {$item_integrated_edit_field72} data-pageid="{$pageid}" data-field="crisis_description" data-fieldname="crisis_description" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_crisis_description}">
+		
+		{BEGIN crisis_description_label}{$label public_surgical_cases crisis_description }{END crisis_description_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$crisis_description_value}	</div>
+
+		
+</div>
+
+
+{END crisis_description_fieldblock}
+											
+{BEGIN death_in_or_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_death_in_or}  r-vertical-field" data-fieldname="death_in_or" data-signal-error-for="death_in_or{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field73" {$item_integrated_edit_field73} data-pageid="{$pageid}" data-field="death_in_or" data-fieldname="death_in_or" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_death_in_or}">
+		
+		{BEGIN death_in_or_label}{$label public_surgical_cases death_in_or }{END death_in_or_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$death_in_or_value}	</div>
+
+		
+</div>
+
+
+{END death_in_or_fieldblock}
+											
+{BEGIN fetal_death_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_fetal_death}  r-vertical-field" data-fieldname="fetal_death" data-signal-error-for="fetal_death{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field74" {$item_integrated_edit_field74} data-pageid="{$pageid}" data-field="fetal_death" data-fieldname="fetal_death" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_fetal_death}">
+		
+		{BEGIN fetal_death_label}{$label public_surgical_cases fetal_death }{END fetal_death_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$fetal_death_value}	</div>
+
+		
+</div>
+
+
+{END fetal_death_fieldblock}
+											
+{BEGIN created_at_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_created_at}  r-vertical-field" data-fieldname="created_at" data-signal-error-for="created_at{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field75" {$item_integrated_edit_field75} data-pageid="{$pageid}" data-field="created_at" data-fieldname="created_at" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_created_at}">
+		
+		{BEGIN created_at_label}{$label public_surgical_cases created_at }{END created_at_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$created_at_value}	</div>
+
+		
+</div>
+
+
+{END created_at_fieldblock}
+											
+{BEGIN updated_at_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_updated_at}  r-vertical-field" data-fieldname="updated_at" data-signal-error-for="updated_at{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field76" {$item_integrated_edit_field76} data-pageid="{$pageid}" data-field="updated_at" data-fieldname="updated_at" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_updated_at}">
+		
+		{BEGIN updated_at_label}{$label public_surgical_cases updated_at }{END updated_at_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$updated_at_value}	</div>
+
+		
+</div>
+
+
+{END updated_at_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c3}
+								</tr>
+			</tbody></table>
+{END grid_block}
+	</div>
+<div class="r-below">
+					{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="leftbar" {$form_below-grid} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class="			col-md-6
+	
+">
+		 
+		{BEGIN back_button}
+<span data-itemtype="view_back_list" data-itemid="view_back_list" {$item_view_back_list} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$backbutton_attrs} >
+							Back to list			</a>
+</span>
+{END back_button}
+	 
+		{BEGIN close_button}
+<span data-itemtype="view_close" data-itemid="view_close" {$item_view_close} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" href="#" {$closebutton_attrs} >
+							Close window			</a>
+</span>
+{END close_button}
+		</div>			 
+				<div 
+	data-cellId="below-grid_c2" data-pageid="{$pageid}"	{$cell_below-grid_c2}
+	class="r-align-right r-ori-vert			col-md-6
+	
+">
+		 
+		<span data-itemtype="hamburger" data-itemid="hamburger" {$item_hamburger} data-pageid="{$pageid}" data-small data-button-item>
+	<span class="dropdown dropup">
+		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
+										<span class="glyphicon glyphicon-menu-hamburger"></span>
+												<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+							{BEGIN edit_page_button}
+	<li data-itemtype="view_edit" data-itemid="view_edit" {$item_view_edit} data-pageid="{$pageid}" data-small >
+				<a  href="surgical_cases_edit.php?{$editlink}" {$edit_page_button_attrs}  title="" >
+				
+		Edit		
+		</a>
+	</li>
+{END edit_page_button}
+					</ul>
+	</span>
+</span>
+		</div>					</div>
+			</div>		
+{END below-grid_block}
+	</div>
+
+
+
+
+										{$footer}
+				</div>
+			</div>
+			<div class="r-body-shadow">
+			</div>
+		</div>
+	{END body}
+	</body>
+</html>

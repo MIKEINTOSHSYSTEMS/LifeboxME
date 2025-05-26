@@ -1,0 +1,492 @@
+
+pdfDocument = {
+{BEGIN backgroundImage}
+	background: {
+		image: {$backgroundImage},
+		{BEGIN bgWidth}
+		imgWidth: {$bgWidth},
+		imgHeight: {$bgHeight},
+		{END bgWidth}
+	},
+{END backgroundImage}
+	styles: {
+				bodycell: {
+			fontSize:12,
+		},
+		headcell: {
+			fontSize:12,
+			bold: true
+		},
+
+	
+	},
+	defaultStyle: {
+		fontSize: 14,
+	},
+	"content": [
+								
+{
+	table: {
+	
+				
+		location: 'top',
+		
+		
+		widths: [
+								"*", 
+					 ],	
+		
+	
+		body: [
+				
+				[
+																{
+	cellId: 'c1',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+		
+			
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jspagetitlelabel public_surgical_cases view}","hidden":"{$item_hide_view_header}","fontSize":30},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+											],
+		
+		]
+	}
+}
+,
+		
+								
+{
+	table: {
+	
+				
+		location: 'above-grid',
+		
+		
+		widths: [
+								"*", 
+											"*", 
+					 ],	
+		
+	
+		body: [
+				
+				[
+																{
+	cellId: 'c1',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+					colSpan: 2,
+		
+			
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+																		{ 
+				cellId: 'c1',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+							],
+		
+		]
+	}
+}
+,
+		
+								
+{
+	table: {
+	
+				tableForm: true,
+				
+		location: 'grid',
+		
+		
+		widths: [
+									{BEGIN col_grid_0}
+						"*", 
+							{END col_grid_0}
+					 ],	
+		
+			heights: [
+								{BEGIN row_grid_0}
+						
+			"%",
+						{END row_grid_0}
+			 
+				],
+	
+		body: [
+				
+				{BEGIN row_grid_0}
+				[
+																{BEGIN cellblock_grid_c3}
+{
+	cellId: 'c3',
+	col:0,
+	row:0,
+			
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			{"hidden":"{$item_hide_integrated_edit_field}","stack":[{"text":"{$jslabel public_surgical_cases case_id }","bold":true},{"text":{$case_id_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field1}","stack":[{"text":"{$jslabel public_surgical_cases facility_id }","bold":true},{"text":{$facility_id_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field2}","stack":[{"text":"{$jslabel public_surgical_cases country_id }","bold":true},{"text":{$country_id_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field3}","stack":[{"text":"{$jslabel public_surgical_cases surgery_date }","bold":true},{"text":{$surgery_date_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field4}","stack":[{"text":"{$jslabel public_surgical_cases data_type }","bold":true},{"text":{$data_type_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field5}","stack":[{"text":"{$jslabel public_surgical_cases data_collector_name }","bold":true},{"text":{$data_collector_name_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field6}","stack":[{"text":"{$jslabel public_surgical_cases location_of_surgery }","bold":true},{"text":{$location_of_surgery_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field7}","stack":[{"text":"{$jslabel public_surgical_cases patient_sex }","bold":true},{"text":{$patient_sex_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field8}","stack":[{"text":"{$jslabel public_surgical_cases patient_asa_classification }","bold":true},{"text":{$patient_asa_classification_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field9}","stack":[{"text":"{$jslabel public_surgical_cases patient_dob }","bold":true},{"text":{$patient_dob_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field10}","stack":[{"text":"{$jslabel public_surgical_cases patient_age }","bold":true},{"text":{$patient_age_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field11}","stack":[{"text":"{$jslabel public_surgical_cases diabetes }","bold":true},{"text":{$diabetes_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field12}","stack":[{"text":"{$jslabel public_surgical_cases hypertension }","bold":true},{"text":{$hypertension_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field13}","stack":[{"text":"{$jslabel public_surgical_cases obese }","bold":true},{"text":{$obese_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field14}","stack":[{"text":"{$jslabel public_surgical_cases malnourished }","bold":true},{"text":{$malnourished_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field15}","stack":[{"text":"{$jslabel public_surgical_cases smoker }","bold":true},{"text":{$smoker_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field16}","stack":[{"text":"{$jslabel public_surgical_cases on_steroids }","bold":true},{"text":{$on_steroids_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field17}","stack":[{"text":"{$jslabel public_surgical_cases admitted_to_icu }","bold":true},{"text":{$admitted_to_icu_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field18}","stack":[{"text":"{$jslabel public_surgical_cases hypothermic }","bold":true},{"text":{$hypothermic_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field19}","stack":[{"text":"{$jslabel public_surgical_cases preoperative_diagnosis_id }","bold":true},{"text":{$preoperative_diagnosis_id_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field20}","stack":[{"text":"{$jslabel public_surgical_cases hours_since_injury }","bold":true},{"text":{$hours_since_injury_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field21}","stack":[{"text":"{$jslabel public_surgical_cases sterilizable_drill_used }","bold":true},{"text":{$sterilizable_drill_used_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field22}","stack":[{"text":"{$jslabel public_surgical_cases drill_sterile_cover_used }","bold":true},{"text":{$drill_sterile_cover_used_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field23}","stack":[{"text":"{$jslabel public_surgical_cases holes_in_sterile_cover }","bold":true},{"text":{$holes_in_sterile_cover_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field24}","stack":[{"text":"{$jslabel public_surgical_cases sign_in_read_aloud }","bold":true},{"text":{$sign_in_read_aloud_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field25}","stack":[{"text":"{$jslabel public_surgical_cases sign_in_completed_before_anesthesia }","bold":true},{"text":{$sign_in_completed_before_anesthesia_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field26}","stack":[{"text":"{$jslabel public_surgical_cases sterility_indicator_in_tray }","bold":true},{"text":{$sterility_indicator_in_tray_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field27}","stack":[{"text":"{$jslabel public_surgical_cases sterility_indicator_color_changed }","bold":true},{"text":{$sterility_indicator_color_changed_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field28}","stack":[{"text":"{$jslabel public_surgical_cases tray_wet_prior_to_operation }","bold":true},{"text":{$tray_wet_prior_to_operation_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field29}","stack":[{"text":"{$jslabel public_surgical_cases tray_replaced }","bold":true},{"text":{$tray_replaced_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field30}","stack":[{"text":"{$jslabel public_surgical_cases gauze_count_performed }","bold":true},{"text":{$gauze_count_performed_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field31}","stack":[{"text":"{$jslabel public_surgical_cases gauze_count_total }","bold":true},{"text":{$gauze_count_total_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field32}","stack":[{"text":"{$jslabel public_surgical_cases surgeon_scrubbed_hands }","bold":true},{"text":{$surgeon_scrubbed_hands_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field33}","stack":[{"text":"{$jslabel public_surgical_cases handwashing_available }","bold":true},{"text":{$handwashing_available_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field34}","stack":[{"text":"{$jslabel public_surgical_cases alcohol_solution_applied }","bold":true},{"text":{$alcohol_solution_applied_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field35}","stack":[{"text":"{$jslabel public_surgical_cases new_surgical_gloves_used }","bold":true},{"text":{$new_surgical_gloves_used_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field36}","stack":[{"text":"{$jslabel public_surgical_cases gown_sterility_indicator }","bold":true},{"text":{$gown_sterility_indicator_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field37}","stack":[{"text":"{$jslabel public_surgical_cases gown_indicator_color_changed }","bold":true},{"text":{$gown_indicator_color_changed_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field38}","stack":[{"text":"{$jslabel public_surgical_cases gown_pack_replaced }","bold":true},{"text":{$gown_pack_replaced_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field39}","stack":[{"text":"{$jslabel public_surgical_cases gowns_or_drapes_wet }","bold":true},{"text":{$gowns_or_drapes_wet_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field40}","stack":[{"text":"{$jslabel public_surgical_cases wet_gowns_replaced }","bold":true},{"text":{$wet_gowns_replaced_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field41}","stack":[{"text":"{$jslabel public_surgical_cases holes_in_gowns }","bold":true},{"text":{$holes_in_gowns_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field42}","stack":[{"text":"{$jslabel public_surgical_cases torn_gowns_replaced }","bold":true},{"text":{$torn_gowns_replaced_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field43}","stack":[{"text":"{$jslabel public_surgical_cases holes_in_drapes }","bold":true},{"text":{$holes_in_drapes_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field44}","stack":[{"text":"{$jslabel public_surgical_cases drapes_replaced }","bold":true},{"text":{$drapes_replaced_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field45}","stack":[{"text":"{$jslabel public_surgical_cases surgical_site_prep_method }","bold":true},{"text":{$surgical_site_prep_method_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field46}","stack":[{"text":"{$jslabel public_surgical_cases vaginal_preparation }","bold":true},{"text":{$vaginal_preparation_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field47}","stack":[{"text":"{$jslabel public_surgical_cases antibiotics_given }","bold":true},{"text":{$antibiotics_given_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field48}","stack":[{"text":"{$jslabel public_surgical_cases antibiotics_admin_location }","bold":true},{"text":{$antibiotics_admin_location_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field49}","stack":[{"text":"{$jslabel public_surgical_cases antibiotics_time }","bold":true},{"text":{$antibiotics_time_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field50}","stack":[{"text":"{$jslabel public_surgical_cases on_scheduled_antibiotics }","bold":true},{"text":{$on_scheduled_antibiotics_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field51}","stack":[{"text":"{$jslabel public_surgical_cases antibiotic_type }","bold":true},{"text":{$antibiotic_type_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field52}","stack":[{"text":"{$jslabel public_surgical_cases timeout_read_aloud }","bold":true},{"text":{$timeout_read_aloud_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field53}","stack":[{"text":"{$jslabel public_surgical_cases operation_type_announced }","bold":true},{"text":{$operation_type_announced_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field54}","stack":[{"text":"{$jslabel public_surgical_cases blood_loss_announced }","bold":true},{"text":{$blood_loss_announced_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field55}","stack":[{"text":"{$jslabel public_surgical_cases estimated_blood_loss }","bold":true},{"text":{$estimated_blood_loss_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field56}","stack":[{"text":"{$jslabel public_surgical_cases time_of_incision }","bold":true},{"text":{$time_of_incision_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field57}","stack":[{"text":"{$jslabel public_surgical_cases gauze_count_end_performed }","bold":true},{"text":{$gauze_count_end_performed_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field58}","stack":[{"text":"{$jslabel public_surgical_cases gauze_count_end_total }","bold":true},{"text":{$gauze_count_end_total_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field59}","stack":[{"text":"{$jslabel public_surgical_cases time_dressing_applied }","bold":true},{"text":{$time_dressing_applied_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field60}","stack":[{"text":"{$jslabel public_surgical_cases procedure_id }","bold":true},{"text":{$procedure_id_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field61}","stack":[{"text":"{$jslabel public_surgical_cases hardware_or_bioprosthetic_used }","bold":true},{"text":{$hardware_or_bioprosthetic_used_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field62}","stack":[{"text":"{$jslabel public_surgical_cases cesarean_indication }","bold":true},{"text":{$cesarean_indication_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field63}","stack":[{"text":"{$jslabel public_surgical_cases wound_closed_primarily }","bold":true},{"text":{$wound_closed_primarily_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field64}","stack":[{"text":"{$jslabel public_surgical_cases wound_classification }","bold":true},{"text":{$wound_classification_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field65}","stack":[{"text":"{$jslabel public_surgical_cases case_type }","bold":true},{"text":{$case_type_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field66}","stack":[{"text":"{$jslabel public_surgical_cases sign_out_read_aloud }","bold":true},{"text":{$sign_out_read_aloud_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field67}","stack":[{"text":"{$jslabel public_surgical_cases sign_out_in_theatre }","bold":true},{"text":{$sign_out_in_theatre_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field68}","stack":[{"text":"{$jslabel public_surgical_cases unplanned_intubation }","bold":true},{"text":{$unplanned_intubation_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field69}","stack":[{"text":"{$jslabel public_surgical_cases urgent_tracheostomy }","bold":true},{"text":{$urgent_tracheostomy_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field70}","stack":[{"text":"{$jslabel public_surgical_cases urgent_central_access }","bold":true},{"text":{$urgent_central_access_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field71}","stack":[{"text":"{$jslabel public_surgical_cases other_crisis_occurred }","bold":true},{"text":{$other_crisis_occurred_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field72}","stack":[{"text":"{$jslabel public_surgical_cases crisis_description }","bold":true},{"text":{$crisis_description_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field73}","stack":[{"text":"{$jslabel public_surgical_cases death_in_or }","bold":true},{"text":{$death_in_or_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field74}","stack":[{"text":"{$jslabel public_surgical_cases fetal_death }","bold":true},{"text":{$fetal_death_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field75}","stack":[{"text":"{$jslabel public_surgical_cases created_at }","bold":true},{"text":{$created_at_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field76}","stack":[{"text":"{$jslabel public_surgical_cases updated_at }","bold":true},{"text":{$updated_at_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_c3}
+											],
+				{END row_grid_0}
+		
+		]
+	}
+}
+,
+		
+								
+{
+	table: {
+	
+				
+		location: 'below-grid',
+		
+		
+		widths: [
+								"*", 
+											"*", 
+					 ],	
+		
+	
+		body: [
+				
+				[
+																{
+	cellId: 'c1',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+		
+			
+			
+	
+			"text": [
+		
+				
+			{"text":"","hidden":"{$item_hide_view_back_list}"},
+				
+				
+			{"text":"","hidden":"{$item_hide_view_close}"},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+																							{
+	cellId: 'c2',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+		
+			
+			
+	
+			"text": [
+		
+				
+			{"text":""},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'right',
+     
+      
+      },
+
+											],
+		
+		]
+	}
+}
+,
+			]
+};
+
+pdfFonts = {$pdfFonts};
+  

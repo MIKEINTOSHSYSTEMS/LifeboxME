@@ -1,0 +1,1127 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
+	{BEGIN rtlCSS}
+	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
+	{END rtlCSS}
+	{BEGIN styleCSSFiles}
+	<link REL="stylesheet" href="{$stylepath}" type="text/css">
+	{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-view"   
+		>
+	{BEGIN body}
+		<style>
+		{$containerCss}
+		</style>
+		<div class="r-vbar-page">
+			<div data-width="300px" data-fixed class="r-left clearfix {$leftbar_class}" >
+								<div data-location="left" id="form_left_{$pageid}" data-makeup="leftbar" {$form_left} data-pageid="{$pageid}">
+{BEGIN left_block}
+ 
+     
+         
+
+			<div data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell class="clearfix " data-itemid="logo" {$item_logo}>
+				{BEGIN logo_block}
+	<A data-itemtype="logo" data-itemid="logo" {$item_logo} data-pageid="{$pageid}" class="navbar-brand" href="{$home_link}" data-pageid="{$pageid}" {$logo_hiddenattr}>
+		{$logo}
+	</A>
+{END logo_block}
+				<button data-pageid="1" type="button" class="navbar-toggle collapsed" data-runner-toggle="collapse" data-target="[data-mobile-controlled]">	
+					<span class="sr-only">Toggle navigation</span>	
+					<span class="icon-bar"></span>					
+				</button>				
+			</div>
+		
+ 
+
+			<div class="clearfix " data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell data-itemid="expand_button" {$item_expand_button} data-topcell-item-type="expand_button" >
+				<span data-itemtype="expand_button" data-itemid="expand_button" {$item_expand_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Expand" class="btn btn-link   
+	" href="#" >
+					<span class="glyphicon glyphicon-triangle-right"></span>
+										</a>
+</span>
+			</div>
+		
+     
+     
+         
+
+			<div data-cellId="left_c1" data-pageid="{$pageid}" class="clearfix  r-ori-vert " data-itemtype="menu" data-itemid="menu" {$item_menu} data-pageid="{$pageid}">
+				{BEGIN menuitems_main}
+<ul data-itemtype="menu" data-itemid="menu" {$item_menu} data-pageid="{$pageid}"	class="r-menu nav menu-treelike" 
+	data-menulevel="1"
+>
+
+{BEGIN item_children1}
+<li class="
+	{$item_current}">
+<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline data-menu-top >
+	{$item_separator}
+	<span class="r-menu-link r-menu-expanded "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren2}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren2}
+	</span>
+		<span class="r-menu-collapsed">{$item_collicon}{$item_firstcap}</span>
+	</a>
+{BEGIN item_showchildren2}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="2">
+	{BEGIN item_children2}
+		{BEGIN item_menulink2}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren2}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren2}
+	</span>
+	</a>
+			{BEGIN item_showchildren3}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="3">
+	{BEGIN item_children3}
+		{BEGIN item_menulink3}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren3}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren3}
+	</span>
+	</a>
+			{BEGIN item_showchildren4}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="4">
+	{BEGIN item_children4}
+		{BEGIN item_menulink4}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren4}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren4}
+	</span>
+	</a>
+			{BEGIN item_showchildren5}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="5">
+	{BEGIN item_children5}
+		{BEGIN item_menulink5}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren5}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren5}
+	</span>
+	</a>
+					</li>
+		{END item_menulink5}
+	{END item_children5}
+</ul>
+{END item_showchildren5}
+		</li>
+		{END item_menulink4}
+	{END item_children4}
+</ul>
+{END item_showchildren4}
+		</li>
+		{END item_menulink3}
+	{END item_children3}
+</ul>
+{END item_showchildren3}
+		</li>
+		{END item_menulink2}
+	{END item_children2}
+</ul>
+{END item_showchildren2}
+</li>
+{END item_children1}
+</ul>
+{END menuitems_main}
+			</div>
+		
+    {END left_block}
+</div>				</div>
+			<div class="r-content-col" data-resize-left="leftbar">
+				<div data-resize-left="leftbar"  data-fixed class="r-topheader" data-resize-name="topbar">
+									{BEGIN supertop_block}
+<nav class="navbar navbar-default" 
+	data-location="supertop" id="form_supertop_{$pageid}" data-makeup="leftbar" {$form_supertop} data-pageid="{$pageid}" >
+			 
+							 
+				<span class="navbar-form  navbar-header" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="expand_menu_button" {$item_expand_menu_button} data-topcell-item-type="expand_menu_button" >
+				<span data-itemtype="expand_menu_button" data-itemid="expand_menu_button" {$item_expand_menu_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Show menu" class="btn-link   
+	 glyphicon glyphicon-menu-hamburger" href="#" >		
+				
+								</a>
+</span>
+			</span>
+		 
+				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="collapse_button" {$item_collapse_button} data-topcell-item-type="collapse_button" >
+				<span data-itemtype="collapse_button" data-itemid="collapse_button" {$item_collapse_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Collapse" class="btn-link   
+	 glyphicon glyphicon-triangle-left" href="#" >		
+				
+								</a>
+</span>
+			</span>
+							 
+													</nav>
+{END supertop_block}
+						{$locking}
+				</div>
+				<div class="r-body" data-resize-top="topbar" data-body-width="standard">
+					{$header}
+					<div class="r-top">
+									{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="leftbar" {$form_top} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="top_c1" data-pageid="{$pageid}"	{$cell_top_c1}
+	class=" r-ori-vert			col-md-12
+	
+">
+		 
+		<h2 data-itemtype="view_header" data-itemid="view_header" {$item_view_header} data-pageid="{$pageid}" >{$pagetitlelabel public_ward_rounds view}</h2>
+		</div>					</div>
+			</div>		
+{END top_block}
+						</div>
+											<div class="r-above">
+					{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="leftbar" {$form_above-grid} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-12
+	
+">
+		{BEGIN firstAboveGridCell}
+				{END firstAboveGridCell}	
+	</div>					</div>
+			</div>		
+{END above-grid_block}
+	</div>
+<div class="r-grid">
+	{BEGIN grid_tabs}
+  <ul class="nav nav-tabs bsgrid_tabs">
+	{$grid_tabs_content}
+  </ul>
+{END grid_tabs}
+					{BEGIN grid_block}
+
+
+
+
+ 
+	 
+												<table 
+	data-body-align="left"
+	data-location="grid" id="form_grid_{$pageid}" data-makeup="leftbar" {$form_grid} data-pageid="{$pageid}" 
+	class="r-edit-form" cellpadding="0" cellspacing="0" 
+	{$grid_hiddenattr} 
+		data-form-width="1"
+		
+		data-v-width="4"
+	>
+	<tbody>
+										<tr {$row_grid_0} >
+										
+
+{BEGIN cellblock_grid_c3}
+<td
+	{$cell_grid_c3}
+	class=" r-ori-vert"
+	
+				data-fullwidth
+		
+			data-cellId="grid_c3" data-pageid="{$pageid}"
+		data-v-cell="4"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN ward_round_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_ward_round_id}  r-vertical-field" data-fieldname="ward_round_id" data-signal-error-for="ward_round_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="ward_round_id" data-fieldname="ward_round_id" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_ward_round_id}">
+		
+		{BEGIN ward_round_id_label}{$label public_ward_rounds ward_round_id }{END ward_round_id_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$ward_round_id_value}	</div>
+
+		
+</div>
+
+
+{END ward_round_id_fieldblock}
+											
+{BEGIN case_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_case_id}  r-vertical-field" data-fieldname="case_id" data-signal-error-for="case_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="case_id" data-fieldname="case_id" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_case_id}">
+		
+		{BEGIN case_id_label}{$label public_ward_rounds case_id }{END case_id_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$case_id_value}	</div>
+
+		
+</div>
+
+
+{END case_id_fieldblock}
+											
+{BEGIN facility_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_facility_id}  r-vertical-field" data-fieldname="facility_id" data-signal-error-for="facility_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="facility_id" data-fieldname="facility_id" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_facility_id}">
+		
+		{BEGIN facility_id_label}{$label public_ward_rounds facility_id }{END facility_id_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$facility_id_value}	</div>
+
+		
+</div>
+
+
+{END facility_id_fieldblock}
+											
+{BEGIN admission_date_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_admission_date}  r-vertical-field" data-fieldname="admission_date" data-signal-error-for="admission_date{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="admission_date" data-fieldname="admission_date" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_admission_date}">
+		
+		{BEGIN admission_date_label}{$label public_ward_rounds admission_date }{END admission_date_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$admission_date_value}	</div>
+
+		
+</div>
+
+
+{END admission_date_fieldblock}
+											
+{BEGIN rounding_date_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_rounding_date}  r-vertical-field" data-fieldname="rounding_date" data-signal-error-for="rounding_date{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="rounding_date" data-fieldname="rounding_date" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_rounding_date}">
+		
+		{BEGIN rounding_date_label}{$label public_ward_rounds rounding_date }{END rounding_date_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$rounding_date_value}	</div>
+
+		
+</div>
+
+
+{END rounding_date_fieldblock}
+											
+{BEGIN data_collector_name_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_data_collector_name}  r-vertical-field" data-fieldname="data_collector_name" data-signal-error-for="data_collector_name{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="data_collector_name" data-fieldname="data_collector_name" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_data_collector_name}">
+		
+		{BEGIN data_collector_name_label}{$label public_ward_rounds data_collector_name }{END data_collector_name_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$data_collector_name_value}	</div>
+
+		
+</div>
+
+
+{END data_collector_name_fieldblock}
+											
+{BEGIN ward_name_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_ward_name}  r-vertical-field" data-fieldname="ward_name" data-signal-error-for="ward_name{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="ward_name" data-fieldname="ward_name" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_ward_name}">
+		
+		{BEGIN ward_name_label}{$label public_ward_rounds ward_name }{END ward_name_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$ward_name_value}	</div>
+
+		
+</div>
+
+
+{END ward_name_fieldblock}
+											
+{BEGIN ward_transfer_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_ward_transfer}  r-vertical-field" data-fieldname="ward_transfer" data-signal-error-for="ward_transfer{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="ward_transfer" data-fieldname="ward_transfer" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_ward_transfer}">
+		
+		{BEGIN ward_transfer_label}{$label public_ward_rounds ward_transfer }{END ward_transfer_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$ward_transfer_value}	</div>
+
+		
+</div>
+
+
+{END ward_transfer_fieldblock}
+											
+{BEGIN postop_day_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_postop_day}  r-vertical-field" data-fieldname="postop_day" data-signal-error-for="postop_day{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="postop_day" data-fieldname="postop_day" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_postop_day}">
+		
+		{BEGIN postop_day_label}{$label public_ward_rounds postop_day }{END postop_day_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$postop_day_value}	</div>
+
+		
+</div>
+
+
+{END postop_day_fieldblock}
+											
+{BEGIN dressing_not_removed_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_dressing_not_removed}  r-vertical-field" data-fieldname="dressing_not_removed" data-signal-error-for="dressing_not_removed{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="dressing_not_removed" data-fieldname="dressing_not_removed" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_dressing_not_removed}">
+		
+		{BEGIN dressing_not_removed_label}{$label public_ward_rounds dressing_not_removed }{END dressing_not_removed_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$dressing_not_removed_value}	</div>
+
+		
+</div>
+
+
+{END dressing_not_removed_fieldblock}
+											
+{BEGIN wound_clean_and_healthy_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_wound_clean_and_healthy}  r-vertical-field" data-fieldname="wound_clean_and_healthy" data-signal-error-for="wound_clean_and_healthy{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="wound_clean_and_healthy" data-fieldname="wound_clean_and_healthy" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_wound_clean_and_healthy}">
+		
+		{BEGIN wound_clean_and_healthy_label}{$label public_ward_rounds wound_clean_and_healthy }{END wound_clean_and_healthy_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$wound_clean_and_healthy_value}	</div>
+
+		
+</div>
+
+
+{END wound_clean_and_healthy_fieldblock}
+											
+{BEGIN stitches_removed_or_wound_opened_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_stitches_removed_or_wound_opened}  r-vertical-field" data-fieldname="stitches_removed_or_wound_opened" data-signal-error-for="stitches_removed_or_wound_opened{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="stitches_removed_or_wound_opened" data-fieldname="stitches_removed_or_wound_opened" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_stitches_removed_or_wound_opened}">
+		
+		{BEGIN stitches_removed_or_wound_opened_label}{$label public_ward_rounds stitches_removed_or_wound_opened }{END stitches_removed_or_wound_opened_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$stitches_removed_or_wound_opened_value}	</div>
+
+		
+</div>
+
+
+{END stitches_removed_or_wound_opened_fieldblock}
+											
+{BEGIN wound_opened_spontaneously_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_wound_opened_spontaneously}  r-vertical-field" data-fieldname="wound_opened_spontaneously" data-signal-error-for="wound_opened_spontaneously{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="wound_opened_spontaneously" data-fieldname="wound_opened_spontaneously" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_wound_opened_spontaneously}">
+		
+		{BEGIN wound_opened_spontaneously_label}{$label public_ward_rounds wound_opened_spontaneously }{END wound_opened_spontaneously_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$wound_opened_spontaneously_value}	</div>
+
+		
+</div>
+
+
+{END wound_opened_spontaneously_fieldblock}
+											
+{BEGIN pus_draining_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_pus_draining}  r-vertical-field" data-fieldname="pus_draining" data-signal-error-for="pus_draining{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field13" {$item_integrated_edit_field13} data-pageid="{$pageid}" data-field="pus_draining" data-fieldname="pus_draining" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_pus_draining}">
+		
+		{BEGIN pus_draining_label}{$label public_ward_rounds pus_draining }{END pus_draining_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$pus_draining_value}	</div>
+
+		
+</div>
+
+
+{END pus_draining_fieldblock}
+											
+{BEGIN abscess_present_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_abscess_present}  r-vertical-field" data-fieldname="abscess_present" data-signal-error-for="abscess_present{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field14" {$item_integrated_edit_field14} data-pageid="{$pageid}" data-field="abscess_present" data-fieldname="abscess_present" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_abscess_present}">
+		
+		{BEGIN abscess_present_label}{$label public_ward_rounds abscess_present }{END abscess_present_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$abscess_present_value}	</div>
+
+		
+</div>
+
+
+{END abscess_present_fieldblock}
+											
+{BEGIN redness_around_wound_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_redness_around_wound}  r-vertical-field" data-fieldname="redness_around_wound" data-signal-error-for="redness_around_wound{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field15" {$item_integrated_edit_field15} data-pageid="{$pageid}" data-field="redness_around_wound" data-fieldname="redness_around_wound" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_redness_around_wound}">
+		
+		{BEGIN redness_around_wound_label}{$label public_ward_rounds redness_around_wound }{END redness_around_wound_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$redness_around_wound_value}	</div>
+
+		
+</div>
+
+
+{END redness_around_wound_fieldblock}
+											
+{BEGIN bleeding_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_bleeding}  r-vertical-field" data-fieldname="bleeding" data-signal-error-for="bleeding{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field16" {$item_integrated_edit_field16} data-pageid="{$pageid}" data-field="bleeding" data-fieldname="bleeding" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_bleeding}">
+		
+		{BEGIN bleeding_label}{$label public_ward_rounds bleeding }{END bleeding_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$bleeding_value}	</div>
+
+		
+</div>
+
+
+{END bleeding_fieldblock}
+											
+{BEGIN new_dressing_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_new_dressing}  r-vertical-field" data-fieldname="new_dressing" data-signal-error-for="new_dressing{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field17" {$item_integrated_edit_field17} data-pageid="{$pageid}" data-field="new_dressing" data-fieldname="new_dressing" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_new_dressing}">
+		
+		{BEGIN new_dressing_label}{$label public_ward_rounds new_dressing }{END new_dressing_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$new_dressing_value}	</div>
+
+		
+</div>
+
+
+{END new_dressing_fieldblock}
+											
+{BEGIN new_dressing_type_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_new_dressing_type}  r-vertical-field" data-fieldname="new_dressing_type" data-signal-error-for="new_dressing_type{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field18" {$item_integrated_edit_field18} data-pageid="{$pageid}" data-field="new_dressing_type" data-fieldname="new_dressing_type" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_new_dressing_type}">
+		
+		{BEGIN new_dressing_type_label}{$label public_ward_rounds new_dressing_type }{END new_dressing_type_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$new_dressing_type_value}	</div>
+
+		
+</div>
+
+
+{END new_dressing_type_fieldblock}
+											
+{BEGIN fever_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_fever}  r-vertical-field" data-fieldname="fever" data-signal-error-for="fever{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field19" {$item_integrated_edit_field19} data-pageid="{$pageid}" data-field="fever" data-fieldname="fever" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_fever}">
+		
+		{BEGIN fever_label}{$label public_ward_rounds fever }{END fever_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$fever_value}	</div>
+
+		
+</div>
+
+
+{END fever_fieldblock}
+											
+{BEGIN on_antibiotics_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_on_antibiotics}  r-vertical-field" data-fieldname="on_antibiotics" data-signal-error-for="on_antibiotics{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field20" {$item_integrated_edit_field20} data-pageid="{$pageid}" data-field="on_antibiotics" data-fieldname="on_antibiotics" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_on_antibiotics}">
+		
+		{BEGIN on_antibiotics_label}{$label public_ward_rounds on_antibiotics }{END on_antibiotics_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$on_antibiotics_value}	</div>
+
+		
+</div>
+
+
+{END on_antibiotics_fieldblock}
+											
+{BEGIN antibiotics_prescribed_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_antibiotics_prescribed}  r-vertical-field" data-fieldname="antibiotics_prescribed" data-signal-error-for="antibiotics_prescribed{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field21" {$item_integrated_edit_field21} data-pageid="{$pageid}" data-field="antibiotics_prescribed" data-fieldname="antibiotics_prescribed" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_antibiotics_prescribed}">
+		
+		{BEGIN antibiotics_prescribed_label}{$label public_ward_rounds antibiotics_prescribed }{END antibiotics_prescribed_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$antibiotics_prescribed_value}	</div>
+
+		
+</div>
+
+
+{END antibiotics_prescribed_fieldblock}
+											
+{BEGIN ssi_diagnosed_on_reoperation_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_ssi_diagnosed_on_reoperation}  r-vertical-field" data-fieldname="ssi_diagnosed_on_reoperation" data-signal-error-for="ssi_diagnosed_on_reoperation{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field22" {$item_integrated_edit_field22} data-pageid="{$pageid}" data-field="ssi_diagnosed_on_reoperation" data-fieldname="ssi_diagnosed_on_reoperation" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_ssi_diagnosed_on_reoperation}">
+		
+		{BEGIN ssi_diagnosed_on_reoperation_label}{$label public_ward_rounds ssi_diagnosed_on_reoperation }{END ssi_diagnosed_on_reoperation_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$ssi_diagnosed_on_reoperation_value}	</div>
+
+		
+</div>
+
+
+{END ssi_diagnosed_on_reoperation_fieldblock}
+											
+{BEGIN returned_to_or_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_returned_to_or}  r-vertical-field" data-fieldname="returned_to_or" data-signal-error-for="returned_to_or{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field23" {$item_integrated_edit_field23} data-pageid="{$pageid}" data-field="returned_to_or" data-fieldname="returned_to_or" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_returned_to_or}">
+		
+		{BEGIN returned_to_or_label}{$label public_ward_rounds returned_to_or }{END returned_to_or_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$returned_to_or_value}	</div>
+
+		
+</div>
+
+
+{END returned_to_or_fieldblock}
+											
+{BEGIN return_or_procedure_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_return_or_procedure}  r-vertical-field" data-fieldname="return_or_procedure" data-signal-error-for="return_or_procedure{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field24" {$item_integrated_edit_field24} data-pageid="{$pageid}" data-field="return_or_procedure" data-fieldname="return_or_procedure" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_return_or_procedure}">
+		
+		{BEGIN return_or_procedure_label}{$label public_ward_rounds return_or_procedure }{END return_or_procedure_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$return_or_procedure_value}	</div>
+
+		
+</div>
+
+
+{END return_or_procedure_fieldblock}
+											
+{BEGIN disposition_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_disposition}  r-vertical-field" data-fieldname="disposition" data-signal-error-for="disposition{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field25" {$item_integrated_edit_field25} data-pageid="{$pageid}" data-field="disposition" data-fieldname="disposition" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_disposition}">
+		
+		{BEGIN disposition_label}{$label public_ward_rounds disposition }{END disposition_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$disposition_value}	</div>
+
+		
+</div>
+
+
+{END disposition_fieldblock}
+											
+{BEGIN planned_reoperation_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_planned_reoperation}  r-vertical-field" data-fieldname="planned_reoperation" data-signal-error-for="planned_reoperation{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field26" {$item_integrated_edit_field26} data-pageid="{$pageid}" data-field="planned_reoperation" data-fieldname="planned_reoperation" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_planned_reoperation}">
+		
+		{BEGIN planned_reoperation_label}{$label public_ward_rounds planned_reoperation }{END planned_reoperation_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$planned_reoperation_value}	</div>
+
+		
+</div>
+
+
+{END planned_reoperation_fieldblock}
+											
+{BEGIN other_complications_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_other_complications}  r-vertical-field" data-fieldname="other_complications" data-signal-error-for="other_complications{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field27" {$item_integrated_edit_field27} data-pageid="{$pageid}" data-field="other_complications" data-fieldname="other_complications" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_other_complications}">
+		
+		{BEGIN other_complications_label}{$label public_ward_rounds other_complications }{END other_complications_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$other_complications_value}	</div>
+
+		
+</div>
+
+
+{END other_complications_fieldblock}
+											
+{BEGIN endometritis_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_endometritis}  r-vertical-field" data-fieldname="endometritis" data-signal-error-for="endometritis{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field28" {$item_integrated_edit_field28} data-pageid="{$pageid}" data-field="endometritis" data-fieldname="endometritis" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_endometritis}">
+		
+		{BEGIN endometritis_label}{$label public_ward_rounds endometritis }{END endometritis_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$endometritis_value}	</div>
+
+		
+</div>
+
+
+{END endometritis_fieldblock}
+											
+{BEGIN urinary_tract_infection_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_urinary_tract_infection}  r-vertical-field" data-fieldname="urinary_tract_infection" data-signal-error-for="urinary_tract_infection{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field29" {$item_integrated_edit_field29} data-pageid="{$pageid}" data-field="urinary_tract_infection" data-fieldname="urinary_tract_infection" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_urinary_tract_infection}">
+		
+		{BEGIN urinary_tract_infection_label}{$label public_ward_rounds urinary_tract_infection }{END urinary_tract_infection_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$urinary_tract_infection_value}	</div>
+
+		
+</div>
+
+
+{END urinary_tract_infection_fieldblock}
+											
+{BEGIN pneumonia_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_pneumonia}  r-vertical-field" data-fieldname="pneumonia" data-signal-error-for="pneumonia{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field30" {$item_integrated_edit_field30} data-pageid="{$pageid}" data-field="pneumonia" data-fieldname="pneumonia" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_pneumonia}">
+		
+		{BEGIN pneumonia_label}{$label public_ward_rounds pneumonia }{END pneumonia_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$pneumonia_value}	</div>
+
+		
+</div>
+
+
+{END pneumonia_fieldblock}
+											
+{BEGIN other_complication_description_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_other_complication_description}  r-vertical-field" data-fieldname="other_complication_description" data-signal-error-for="other_complication_description{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field31" {$item_integrated_edit_field31} data-pageid="{$pageid}" data-field="other_complication_description" data-fieldname="other_complication_description" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_other_complication_description}">
+		
+		{BEGIN other_complication_description_label}{$label public_ward_rounds other_complication_description }{END other_complication_description_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$other_complication_description_value}	</div>
+
+		
+</div>
+
+
+{END other_complication_description_fieldblock}
+											
+{BEGIN eschar_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_eschar}  r-vertical-field" data-fieldname="eschar" data-signal-error-for="eschar{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field32" {$item_integrated_edit_field32} data-pageid="{$pageid}" data-field="eschar" data-fieldname="eschar" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_eschar}">
+		
+		{BEGIN eschar_label}{$label public_ward_rounds eschar }{END eschar_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$eschar_value}	</div>
+
+		
+</div>
+
+
+{END eschar_fieldblock}
+											
+{BEGIN discharged_today_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_discharged_today}  r-vertical-field" data-fieldname="discharged_today" data-signal-error-for="discharged_today{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field33" {$item_integrated_edit_field33} data-pageid="{$pageid}" data-field="discharged_today" data-fieldname="discharged_today" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_discharged_today}">
+		
+		{BEGIN discharged_today_label}{$label public_ward_rounds discharged_today }{END discharged_today_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$discharged_today_value}	</div>
+
+		
+</div>
+
+
+{END discharged_today_fieldblock}
+											
+{BEGIN discharge_date_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_discharge_date}  r-vertical-field" data-fieldname="discharge_date" data-signal-error-for="discharge_date{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field34" {$item_integrated_edit_field34} data-pageid="{$pageid}" data-field="discharge_date" data-fieldname="discharge_date" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_discharge_date}">
+		
+		{BEGIN discharge_date_label}{$label public_ward_rounds discharge_date }{END discharge_date_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$discharge_date_value}	</div>
+
+		
+</div>
+
+
+{END discharge_date_fieldblock}
+											
+{BEGIN death_in_ward_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_death_in_ward}  r-vertical-field" data-fieldname="death_in_ward" data-signal-error-for="death_in_ward{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field35" {$item_integrated_edit_field35} data-pageid="{$pageid}" data-field="death_in_ward" data-fieldname="death_in_ward" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_death_in_ward}">
+		
+		{BEGIN death_in_ward_label}{$label public_ward_rounds death_in_ward }{END death_in_ward_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$death_in_ward_value}	</div>
+
+		
+</div>
+
+
+{END death_in_ward_fieldblock}
+											
+{BEGIN neonatal_death_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_neonatal_death}  r-vertical-field" data-fieldname="neonatal_death" data-signal-error-for="neonatal_death{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field36" {$item_integrated_edit_field36} data-pageid="{$pageid}" data-field="neonatal_death" data-fieldname="neonatal_death" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_neonatal_death}">
+		
+		{BEGIN neonatal_death_label}{$label public_ward_rounds neonatal_death }{END neonatal_death_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$neonatal_death_value}	</div>
+
+		
+</div>
+
+
+{END neonatal_death_fieldblock}
+											
+{BEGIN created_at_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_created_at}  r-vertical-field" data-fieldname="created_at" data-signal-error-for="created_at{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field37" {$item_integrated_edit_field37} data-pageid="{$pageid}" data-field="created_at" data-fieldname="created_at" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_created_at}">
+		
+		{BEGIN created_at_label}{$label public_ward_rounds created_at }{END created_at_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$created_at_value}	</div>
+
+		
+</div>
+
+
+{END created_at_fieldblock}
+											
+{BEGIN updated_at_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_updated_at}  r-vertical-field" data-fieldname="updated_at" data-signal-error-for="updated_at{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field38" {$item_integrated_edit_field38} data-pageid="{$pageid}" data-field="updated_at" data-fieldname="updated_at" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_updated_at}">
+		
+		{BEGIN updated_at_label}{$label public_ward_rounds updated_at }{END updated_at_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$updated_at_value}	</div>
+
+		
+</div>
+
+
+{END updated_at_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c3}
+								</tr>
+			</tbody></table>
+{END grid_block}
+	</div>
+<div class="r-below">
+					{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="leftbar" {$form_below-grid} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class="			col-md-6
+	
+">
+		 
+		{BEGIN back_button}
+<span data-itemtype="view_back_list" data-itemid="view_back_list" {$item_view_back_list} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$backbutton_attrs} >
+							Back to list			</a>
+</span>
+{END back_button}
+	 
+		{BEGIN close_button}
+<span data-itemtype="view_close" data-itemid="view_close" {$item_view_close} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" href="#" {$closebutton_attrs} >
+							Close window			</a>
+</span>
+{END close_button}
+		</div>			 
+				<div 
+	data-cellId="below-grid_c2" data-pageid="{$pageid}"	{$cell_below-grid_c2}
+	class="r-align-right r-ori-vert			col-md-6
+	
+">
+		 
+		<span data-itemtype="hamburger" data-itemid="hamburger" {$item_hamburger} data-pageid="{$pageid}" data-small data-button-item>
+	<span class="dropdown dropup">
+		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
+										<span class="glyphicon glyphicon-menu-hamburger"></span>
+												<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+							{BEGIN edit_page_button}
+	<li data-itemtype="view_edit" data-itemid="view_edit" {$item_view_edit} data-pageid="{$pageid}" data-small >
+				<a  href="ward_rounds_edit.php?{$editlink}" {$edit_page_button_attrs}  title="" >
+				
+		Edit		
+		</a>
+	</li>
+{END edit_page_button}
+					</ul>
+	</span>
+</span>
+		</div>					</div>
+			</div>		
+{END below-grid_block}
+	</div>
+
+
+
+
+										{$footer}
+				</div>
+			</div>
+			<div class="r-body-shadow">
+			</div>
+		</div>
+	{END body}
+	</body>
+</html>

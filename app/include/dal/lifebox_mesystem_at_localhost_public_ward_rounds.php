@@ -1,0 +1,45 @@
+<?php
+$dalTableward_rounds = array();
+$dalTableward_rounds["ward_round_id"] = array("type"=>3,"varname"=>"ward_round_id", "name" => "ward_round_id", "autoInc" => "1");
+$dalTableward_rounds["case_id"] = array("type"=>13,"varname"=>"case_id", "name" => "case_id", "autoInc" => "0");
+$dalTableward_rounds["facility_id"] = array("type"=>3,"varname"=>"facility_id", "name" => "facility_id", "autoInc" => "0");
+$dalTableward_rounds["admission_date"] = array("type"=>7,"varname"=>"admission_date", "name" => "admission_date", "autoInc" => "0");
+$dalTableward_rounds["rounding_date"] = array("type"=>7,"varname"=>"rounding_date", "name" => "rounding_date", "autoInc" => "0");
+$dalTableward_rounds["data_collector_name"] = array("type"=>200,"varname"=>"data_collector_name", "name" => "data_collector_name", "autoInc" => "0");
+$dalTableward_rounds["ward_name"] = array("type"=>200,"varname"=>"ward_name", "name" => "ward_name", "autoInc" => "0");
+$dalTableward_rounds["ward_transfer"] = array("type"=>11,"varname"=>"ward_transfer", "name" => "ward_transfer", "autoInc" => "0");
+$dalTableward_rounds["postop_day"] = array("type"=>3,"varname"=>"postop_day", "name" => "postop_day", "autoInc" => "0");
+$dalTableward_rounds["dressing_not_removed"] = array("type"=>11,"varname"=>"dressing_not_removed", "name" => "dressing_not_removed", "autoInc" => "0");
+$dalTableward_rounds["wound_clean_and_healthy"] = array("type"=>11,"varname"=>"wound_clean_and_healthy", "name" => "wound_clean_and_healthy", "autoInc" => "0");
+$dalTableward_rounds["stitches_removed_or_wound_opened"] = array("type"=>11,"varname"=>"stitches_removed_or_wound_opened", "name" => "stitches_removed_or_wound_opened", "autoInc" => "0");
+$dalTableward_rounds["wound_opened_spontaneously"] = array("type"=>11,"varname"=>"wound_opened_spontaneously", "name" => "wound_opened_spontaneously", "autoInc" => "0");
+$dalTableward_rounds["pus_draining"] = array("type"=>11,"varname"=>"pus_draining", "name" => "pus_draining", "autoInc" => "0");
+$dalTableward_rounds["abscess_present"] = array("type"=>11,"varname"=>"abscess_present", "name" => "abscess_present", "autoInc" => "0");
+$dalTableward_rounds["redness_around_wound"] = array("type"=>11,"varname"=>"redness_around_wound", "name" => "redness_around_wound", "autoInc" => "0");
+$dalTableward_rounds["bleeding"] = array("type"=>11,"varname"=>"bleeding", "name" => "bleeding", "autoInc" => "0");
+$dalTableward_rounds["new_dressing"] = array("type"=>11,"varname"=>"new_dressing", "name" => "new_dressing", "autoInc" => "0");
+$dalTableward_rounds["new_dressing_type"] = array("type"=>200,"varname"=>"new_dressing_type", "name" => "new_dressing_type", "autoInc" => "0");
+$dalTableward_rounds["fever"] = array("type"=>11,"varname"=>"fever", "name" => "fever", "autoInc" => "0");
+$dalTableward_rounds["on_antibiotics"] = array("type"=>11,"varname"=>"on_antibiotics", "name" => "on_antibiotics", "autoInc" => "0");
+$dalTableward_rounds["antibiotics_prescribed"] = array("type"=>11,"varname"=>"antibiotics_prescribed", "name" => "antibiotics_prescribed", "autoInc" => "0");
+$dalTableward_rounds["ssi_diagnosed_on_reoperation"] = array("type"=>11,"varname"=>"ssi_diagnosed_on_reoperation", "name" => "ssi_diagnosed_on_reoperation", "autoInc" => "0");
+$dalTableward_rounds["returned_to_or"] = array("type"=>11,"varname"=>"returned_to_or", "name" => "returned_to_or", "autoInc" => "0");
+$dalTableward_rounds["return_or_procedure"] = array("type"=>200,"varname"=>"return_or_procedure", "name" => "return_or_procedure", "autoInc" => "0");
+$dalTableward_rounds["disposition"] = array("type"=>13,"varname"=>"disposition", "name" => "disposition", "autoInc" => "0");
+$dalTableward_rounds["planned_reoperation"] = array("type"=>11,"varname"=>"planned_reoperation", "name" => "planned_reoperation", "autoInc" => "0");
+$dalTableward_rounds["other_complications"] = array("type"=>11,"varname"=>"other_complications", "name" => "other_complications", "autoInc" => "0");
+$dalTableward_rounds["endometritis"] = array("type"=>11,"varname"=>"endometritis", "name" => "endometritis", "autoInc" => "0");
+$dalTableward_rounds["urinary_tract_infection"] = array("type"=>11,"varname"=>"urinary_tract_infection", "name" => "urinary_tract_infection", "autoInc" => "0");
+$dalTableward_rounds["pneumonia"] = array("type"=>11,"varname"=>"pneumonia", "name" => "pneumonia", "autoInc" => "0");
+$dalTableward_rounds["other_complication_description"] = array("type"=>201,"varname"=>"other_complication_description", "name" => "other_complication_description", "autoInc" => "0");
+$dalTableward_rounds["eschar"] = array("type"=>11,"varname"=>"eschar", "name" => "eschar", "autoInc" => "0");
+$dalTableward_rounds["discharged_today"] = array("type"=>11,"varname"=>"discharged_today", "name" => "discharged_today", "autoInc" => "0");
+$dalTableward_rounds["discharge_date"] = array("type"=>7,"varname"=>"discharge_date", "name" => "discharge_date", "autoInc" => "0");
+$dalTableward_rounds["death_in_ward"] = array("type"=>11,"varname"=>"death_in_ward", "name" => "death_in_ward", "autoInc" => "0");
+$dalTableward_rounds["neonatal_death"] = array("type"=>11,"varname"=>"neonatal_death", "name" => "neonatal_death", "autoInc" => "0");
+$dalTableward_rounds["created_at"] = array("type"=>135,"varname"=>"created_at", "name" => "created_at", "autoInc" => "0");
+$dalTableward_rounds["updated_at"] = array("type"=>135,"varname"=>"updated_at", "name" => "updated_at", "autoInc" => "0");
+$dalTableward_rounds["ward_round_id"]["key"]=true;
+
+$dal_info["lifebox_mesystem_at_localhost_public_ward_rounds"] = &$dalTableward_rounds;
+?>

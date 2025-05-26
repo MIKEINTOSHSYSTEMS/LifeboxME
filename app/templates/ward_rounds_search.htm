@@ -1,0 +1,1008 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
+	{BEGIN rtlCSS}
+	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
+	{END rtlCSS}
+	{BEGIN styleCSSFiles}
+	<link REL="stylesheet" href="{$stylepath}" type="text/css">
+	{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-search" >
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		{$locking}
+		<div class="r-small-page" 
+			data-body-align="center"
+			data-body-width="standard"
+		>
+							{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="small" {$form_top} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="top_c1" data-pageid="{$pageid}"	{$cell_top_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	 
+		<h2 data-itemtype="search_header" data-itemid="search_header" {$item_search_header} data-pageid="{$pageid}" >{$pagetitlelabel public_ward_rounds search}</h2>
+	</div>					</div>
+	</div>		
+{END top_block}
+									{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="small" {$form_above-grid} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	</div>					</div>
+	</div>		
+{END above-grid_block}
+									{BEGIN grid_block}
+
+
+
+
+ 
+	 
+												<table 
+	data-body-align="center"
+	data-location="grid" id="form_grid_{$pageid}" data-makeup="small" {$form_grid} data-pageid="{$pageid}" 
+	class="r-edit-form" cellpadding="0" cellspacing="0" 
+	{$grid_hiddenattr} 
+		data-form-width="1"
+		
+		data-v-width="6"
+	>
+	<tbody>
+										<tr {$row_grid_0} >
+										
+
+{BEGIN cellblock_grid_c3}
+<td
+	{$cell_grid_c3}
+	class=" r-ori-vert"
+	
+				data-fullwidth
+		
+			data-cellId="grid_c3" data-pageid="{$pageid}"
+		data-v-cell="6"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN ward_round_id_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_ward_round_id}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="ward_round_id{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field" {$item_integrated_search_field} data-pageid="{$pageid}" data-field="ward_round_id" data-fieldname="ward_round_id" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_ward_round_id}">
+		{$label public_ward_rounds ward_round_id }	</label>
+	<div class="r-search-option">
+		{$searchtype_ward_round_id}
+	</div>
+	<div class="r-search-field">
+		{$ward_round_id_editcontrol}	</div>
+	<div class="r-search-field">
+		{$ward_round_id_editcontrol1}
+	</div>
+	
+</div>
+
+{END ward_round_id_fieldblock}
+											
+{BEGIN case_id_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_case_id}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="case_id{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field1" {$item_integrated_search_field1} data-pageid="{$pageid}" data-field="case_id" data-fieldname="case_id" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_case_id}">
+		{$label public_ward_rounds case_id }	</label>
+	<div class="r-search-option">
+		{$searchtype_case_id}
+	</div>
+	<div class="r-search-field">
+		{$case_id_editcontrol}	</div>
+	<div class="r-search-field">
+		{$case_id_editcontrol1}
+	</div>
+	
+</div>
+
+{END case_id_fieldblock}
+											
+{BEGIN facility_id_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_facility_id}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="facility_id{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field2" {$item_integrated_search_field2} data-pageid="{$pageid}" data-field="facility_id" data-fieldname="facility_id" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_facility_id}">
+		{$label public_ward_rounds facility_id }	</label>
+	<div class="r-search-option">
+		{$searchtype_facility_id}
+	</div>
+	<div class="r-search-field">
+		{$facility_id_editcontrol}	</div>
+	<div class="r-search-field">
+		{$facility_id_editcontrol1}
+	</div>
+	
+</div>
+
+{END facility_id_fieldblock}
+											
+{BEGIN admission_date_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_admission_date}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="admission_date{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field3" {$item_integrated_search_field3} data-pageid="{$pageid}" data-field="admission_date" data-fieldname="admission_date" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_admission_date}">
+		{$label public_ward_rounds admission_date }	</label>
+	<div class="r-search-option">
+		{$searchtype_admission_date}
+	</div>
+	<div class="r-search-field">
+		{$admission_date_editcontrol}	</div>
+	<div class="r-search-field">
+		{$admission_date_editcontrol1}
+	</div>
+	
+</div>
+
+{END admission_date_fieldblock}
+											
+{BEGIN rounding_date_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_rounding_date}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="rounding_date{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field4" {$item_integrated_search_field4} data-pageid="{$pageid}" data-field="rounding_date" data-fieldname="rounding_date" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_rounding_date}">
+		{$label public_ward_rounds rounding_date }	</label>
+	<div class="r-search-option">
+		{$searchtype_rounding_date}
+	</div>
+	<div class="r-search-field">
+		{$rounding_date_editcontrol}	</div>
+	<div class="r-search-field">
+		{$rounding_date_editcontrol1}
+	</div>
+	
+</div>
+
+{END rounding_date_fieldblock}
+											
+{BEGIN data_collector_name_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_data_collector_name}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="data_collector_name{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field5" {$item_integrated_search_field5} data-pageid="{$pageid}" data-field="data_collector_name" data-fieldname="data_collector_name" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_data_collector_name}">
+		{$label public_ward_rounds data_collector_name }	</label>
+	<div class="r-search-option">
+		{$searchtype_data_collector_name}
+	</div>
+	<div class="r-search-field">
+		{$data_collector_name_editcontrol}	</div>
+	<div class="r-search-field">
+		{$data_collector_name_editcontrol1}
+	</div>
+	
+</div>
+
+{END data_collector_name_fieldblock}
+											
+{BEGIN ward_name_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_ward_name}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="ward_name{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field6" {$item_integrated_search_field6} data-pageid="{$pageid}" data-field="ward_name" data-fieldname="ward_name" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_ward_name}">
+		{$label public_ward_rounds ward_name }	</label>
+	<div class="r-search-option">
+		{$searchtype_ward_name}
+	</div>
+	<div class="r-search-field">
+		{$ward_name_editcontrol}	</div>
+	<div class="r-search-field">
+		{$ward_name_editcontrol1}
+	</div>
+	
+</div>
+
+{END ward_name_fieldblock}
+											
+{BEGIN ward_transfer_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_ward_transfer}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="ward_transfer{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field7" {$item_integrated_search_field7} data-pageid="{$pageid}" data-field="ward_transfer" data-fieldname="ward_transfer" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_ward_transfer}">
+		{$label public_ward_rounds ward_transfer }	</label>
+	<div class="r-search-option">
+		{$searchtype_ward_transfer}
+	</div>
+	<div class="r-search-field">
+		{$ward_transfer_editcontrol}	</div>
+	<div class="r-search-field">
+		{$ward_transfer_editcontrol1}
+	</div>
+	
+</div>
+
+{END ward_transfer_fieldblock}
+											
+{BEGIN postop_day_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_postop_day}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="postop_day{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field8" {$item_integrated_search_field8} data-pageid="{$pageid}" data-field="postop_day" data-fieldname="postop_day" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_postop_day}">
+		{$label public_ward_rounds postop_day }	</label>
+	<div class="r-search-option">
+		{$searchtype_postop_day}
+	</div>
+	<div class="r-search-field">
+		{$postop_day_editcontrol}	</div>
+	<div class="r-search-field">
+		{$postop_day_editcontrol1}
+	</div>
+	
+</div>
+
+{END postop_day_fieldblock}
+											
+{BEGIN dressing_not_removed_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_dressing_not_removed}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="dressing_not_removed{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field9" {$item_integrated_search_field9} data-pageid="{$pageid}" data-field="dressing_not_removed" data-fieldname="dressing_not_removed" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_dressing_not_removed}">
+		{$label public_ward_rounds dressing_not_removed }	</label>
+	<div class="r-search-option">
+		{$searchtype_dressing_not_removed}
+	</div>
+	<div class="r-search-field">
+		{$dressing_not_removed_editcontrol}	</div>
+	<div class="r-search-field">
+		{$dressing_not_removed_editcontrol1}
+	</div>
+	
+</div>
+
+{END dressing_not_removed_fieldblock}
+											
+{BEGIN wound_clean_and_healthy_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_wound_clean_and_healthy}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="wound_clean_and_healthy{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field10" {$item_integrated_search_field10} data-pageid="{$pageid}" data-field="wound_clean_and_healthy" data-fieldname="wound_clean_and_healthy" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_wound_clean_and_healthy}">
+		{$label public_ward_rounds wound_clean_and_healthy }	</label>
+	<div class="r-search-option">
+		{$searchtype_wound_clean_and_healthy}
+	</div>
+	<div class="r-search-field">
+		{$wound_clean_and_healthy_editcontrol}	</div>
+	<div class="r-search-field">
+		{$wound_clean_and_healthy_editcontrol1}
+	</div>
+	
+</div>
+
+{END wound_clean_and_healthy_fieldblock}
+											
+{BEGIN stitches_removed_or_wound_opened_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_stitches_removed_or_wound_opened}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="stitches_removed_or_wound_opened{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field11" {$item_integrated_search_field11} data-pageid="{$pageid}" data-field="stitches_removed_or_wound_opened" data-fieldname="stitches_removed_or_wound_opened" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_stitches_removed_or_wound_opened}">
+		{$label public_ward_rounds stitches_removed_or_wound_opened }	</label>
+	<div class="r-search-option">
+		{$searchtype_stitches_removed_or_wound_opened}
+	</div>
+	<div class="r-search-field">
+		{$stitches_removed_or_wound_opened_editcontrol}	</div>
+	<div class="r-search-field">
+		{$stitches_removed_or_wound_opened_editcontrol1}
+	</div>
+	
+</div>
+
+{END stitches_removed_or_wound_opened_fieldblock}
+											
+{BEGIN wound_opened_spontaneously_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_wound_opened_spontaneously}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="wound_opened_spontaneously{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field12" {$item_integrated_search_field12} data-pageid="{$pageid}" data-field="wound_opened_spontaneously" data-fieldname="wound_opened_spontaneously" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_wound_opened_spontaneously}">
+		{$label public_ward_rounds wound_opened_spontaneously }	</label>
+	<div class="r-search-option">
+		{$searchtype_wound_opened_spontaneously}
+	</div>
+	<div class="r-search-field">
+		{$wound_opened_spontaneously_editcontrol}	</div>
+	<div class="r-search-field">
+		{$wound_opened_spontaneously_editcontrol1}
+	</div>
+	
+</div>
+
+{END wound_opened_spontaneously_fieldblock}
+											
+{BEGIN pus_draining_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_pus_draining}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="pus_draining{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field13" {$item_integrated_search_field13} data-pageid="{$pageid}" data-field="pus_draining" data-fieldname="pus_draining" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_pus_draining}">
+		{$label public_ward_rounds pus_draining }	</label>
+	<div class="r-search-option">
+		{$searchtype_pus_draining}
+	</div>
+	<div class="r-search-field">
+		{$pus_draining_editcontrol}	</div>
+	<div class="r-search-field">
+		{$pus_draining_editcontrol1}
+	</div>
+	
+</div>
+
+{END pus_draining_fieldblock}
+											
+{BEGIN abscess_present_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_abscess_present}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="abscess_present{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field14" {$item_integrated_search_field14} data-pageid="{$pageid}" data-field="abscess_present" data-fieldname="abscess_present" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_abscess_present}">
+		{$label public_ward_rounds abscess_present }	</label>
+	<div class="r-search-option">
+		{$searchtype_abscess_present}
+	</div>
+	<div class="r-search-field">
+		{$abscess_present_editcontrol}	</div>
+	<div class="r-search-field">
+		{$abscess_present_editcontrol1}
+	</div>
+	
+</div>
+
+{END abscess_present_fieldblock}
+											
+{BEGIN redness_around_wound_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_redness_around_wound}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="redness_around_wound{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field15" {$item_integrated_search_field15} data-pageid="{$pageid}" data-field="redness_around_wound" data-fieldname="redness_around_wound" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_redness_around_wound}">
+		{$label public_ward_rounds redness_around_wound }	</label>
+	<div class="r-search-option">
+		{$searchtype_redness_around_wound}
+	</div>
+	<div class="r-search-field">
+		{$redness_around_wound_editcontrol}	</div>
+	<div class="r-search-field">
+		{$redness_around_wound_editcontrol1}
+	</div>
+	
+</div>
+
+{END redness_around_wound_fieldblock}
+											
+{BEGIN bleeding_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_bleeding}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="bleeding{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field16" {$item_integrated_search_field16} data-pageid="{$pageid}" data-field="bleeding" data-fieldname="bleeding" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_bleeding}">
+		{$label public_ward_rounds bleeding }	</label>
+	<div class="r-search-option">
+		{$searchtype_bleeding}
+	</div>
+	<div class="r-search-field">
+		{$bleeding_editcontrol}	</div>
+	<div class="r-search-field">
+		{$bleeding_editcontrol1}
+	</div>
+	
+</div>
+
+{END bleeding_fieldblock}
+											
+{BEGIN new_dressing_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_new_dressing}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="new_dressing{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field17" {$item_integrated_search_field17} data-pageid="{$pageid}" data-field="new_dressing" data-fieldname="new_dressing" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_new_dressing}">
+		{$label public_ward_rounds new_dressing }	</label>
+	<div class="r-search-option">
+		{$searchtype_new_dressing}
+	</div>
+	<div class="r-search-field">
+		{$new_dressing_editcontrol}	</div>
+	<div class="r-search-field">
+		{$new_dressing_editcontrol1}
+	</div>
+	
+</div>
+
+{END new_dressing_fieldblock}
+											
+{BEGIN new_dressing_type_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_new_dressing_type}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="new_dressing_type{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field18" {$item_integrated_search_field18} data-pageid="{$pageid}" data-field="new_dressing_type" data-fieldname="new_dressing_type" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_new_dressing_type}">
+		{$label public_ward_rounds new_dressing_type }	</label>
+	<div class="r-search-option">
+		{$searchtype_new_dressing_type}
+	</div>
+	<div class="r-search-field">
+		{$new_dressing_type_editcontrol}	</div>
+	<div class="r-search-field">
+		{$new_dressing_type_editcontrol1}
+	</div>
+	
+</div>
+
+{END new_dressing_type_fieldblock}
+											
+{BEGIN fever_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_fever}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="fever{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field19" {$item_integrated_search_field19} data-pageid="{$pageid}" data-field="fever" data-fieldname="fever" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_fever}">
+		{$label public_ward_rounds fever }	</label>
+	<div class="r-search-option">
+		{$searchtype_fever}
+	</div>
+	<div class="r-search-field">
+		{$fever_editcontrol}	</div>
+	<div class="r-search-field">
+		{$fever_editcontrol1}
+	</div>
+	
+</div>
+
+{END fever_fieldblock}
+											
+{BEGIN on_antibiotics_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_on_antibiotics}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="on_antibiotics{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field20" {$item_integrated_search_field20} data-pageid="{$pageid}" data-field="on_antibiotics" data-fieldname="on_antibiotics" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_on_antibiotics}">
+		{$label public_ward_rounds on_antibiotics }	</label>
+	<div class="r-search-option">
+		{$searchtype_on_antibiotics}
+	</div>
+	<div class="r-search-field">
+		{$on_antibiotics_editcontrol}	</div>
+	<div class="r-search-field">
+		{$on_antibiotics_editcontrol1}
+	</div>
+	
+</div>
+
+{END on_antibiotics_fieldblock}
+											
+{BEGIN antibiotics_prescribed_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_antibiotics_prescribed}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="antibiotics_prescribed{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field21" {$item_integrated_search_field21} data-pageid="{$pageid}" data-field="antibiotics_prescribed" data-fieldname="antibiotics_prescribed" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_antibiotics_prescribed}">
+		{$label public_ward_rounds antibiotics_prescribed }	</label>
+	<div class="r-search-option">
+		{$searchtype_antibiotics_prescribed}
+	</div>
+	<div class="r-search-field">
+		{$antibiotics_prescribed_editcontrol}	</div>
+	<div class="r-search-field">
+		{$antibiotics_prescribed_editcontrol1}
+	</div>
+	
+</div>
+
+{END antibiotics_prescribed_fieldblock}
+											
+{BEGIN ssi_diagnosed_on_reoperation_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_ssi_diagnosed_on_reoperation}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="ssi_diagnosed_on_reoperation{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field22" {$item_integrated_search_field22} data-pageid="{$pageid}" data-field="ssi_diagnosed_on_reoperation" data-fieldname="ssi_diagnosed_on_reoperation" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_ssi_diagnosed_on_reoperation}">
+		{$label public_ward_rounds ssi_diagnosed_on_reoperation }	</label>
+	<div class="r-search-option">
+		{$searchtype_ssi_diagnosed_on_reoperation}
+	</div>
+	<div class="r-search-field">
+		{$ssi_diagnosed_on_reoperation_editcontrol}	</div>
+	<div class="r-search-field">
+		{$ssi_diagnosed_on_reoperation_editcontrol1}
+	</div>
+	
+</div>
+
+{END ssi_diagnosed_on_reoperation_fieldblock}
+											
+{BEGIN returned_to_or_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_returned_to_or}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="returned_to_or{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field23" {$item_integrated_search_field23} data-pageid="{$pageid}" data-field="returned_to_or" data-fieldname="returned_to_or" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_returned_to_or}">
+		{$label public_ward_rounds returned_to_or }	</label>
+	<div class="r-search-option">
+		{$searchtype_returned_to_or}
+	</div>
+	<div class="r-search-field">
+		{$returned_to_or_editcontrol}	</div>
+	<div class="r-search-field">
+		{$returned_to_or_editcontrol1}
+	</div>
+	
+</div>
+
+{END returned_to_or_fieldblock}
+											
+{BEGIN return_or_procedure_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_return_or_procedure}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="return_or_procedure{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field24" {$item_integrated_search_field24} data-pageid="{$pageid}" data-field="return_or_procedure" data-fieldname="return_or_procedure" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_return_or_procedure}">
+		{$label public_ward_rounds return_or_procedure }	</label>
+	<div class="r-search-option">
+		{$searchtype_return_or_procedure}
+	</div>
+	<div class="r-search-field">
+		{$return_or_procedure_editcontrol}	</div>
+	<div class="r-search-field">
+		{$return_or_procedure_editcontrol1}
+	</div>
+	
+</div>
+
+{END return_or_procedure_fieldblock}
+											
+{BEGIN disposition_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_disposition}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="disposition{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field25" {$item_integrated_search_field25} data-pageid="{$pageid}" data-field="disposition" data-fieldname="disposition" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_disposition}">
+		{$label public_ward_rounds disposition }	</label>
+	<div class="r-search-option">
+		{$searchtype_disposition}
+	</div>
+	<div class="r-search-field">
+		{$disposition_editcontrol}	</div>
+	<div class="r-search-field">
+		{$disposition_editcontrol1}
+	</div>
+	
+</div>
+
+{END disposition_fieldblock}
+											
+{BEGIN planned_reoperation_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_planned_reoperation}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="planned_reoperation{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field26" {$item_integrated_search_field26} data-pageid="{$pageid}" data-field="planned_reoperation" data-fieldname="planned_reoperation" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_planned_reoperation}">
+		{$label public_ward_rounds planned_reoperation }	</label>
+	<div class="r-search-option">
+		{$searchtype_planned_reoperation}
+	</div>
+	<div class="r-search-field">
+		{$planned_reoperation_editcontrol}	</div>
+	<div class="r-search-field">
+		{$planned_reoperation_editcontrol1}
+	</div>
+	
+</div>
+
+{END planned_reoperation_fieldblock}
+											
+{BEGIN other_complications_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_other_complications}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="other_complications{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field27" {$item_integrated_search_field27} data-pageid="{$pageid}" data-field="other_complications" data-fieldname="other_complications" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_other_complications}">
+		{$label public_ward_rounds other_complications }	</label>
+	<div class="r-search-option">
+		{$searchtype_other_complications}
+	</div>
+	<div class="r-search-field">
+		{$other_complications_editcontrol}	</div>
+	<div class="r-search-field">
+		{$other_complications_editcontrol1}
+	</div>
+	
+</div>
+
+{END other_complications_fieldblock}
+											
+{BEGIN endometritis_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_endometritis}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="endometritis{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field28" {$item_integrated_search_field28} data-pageid="{$pageid}" data-field="endometritis" data-fieldname="endometritis" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_endometritis}">
+		{$label public_ward_rounds endometritis }	</label>
+	<div class="r-search-option">
+		{$searchtype_endometritis}
+	</div>
+	<div class="r-search-field">
+		{$endometritis_editcontrol}	</div>
+	<div class="r-search-field">
+		{$endometritis_editcontrol1}
+	</div>
+	
+</div>
+
+{END endometritis_fieldblock}
+											
+{BEGIN urinary_tract_infection_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_urinary_tract_infection}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="urinary_tract_infection{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field29" {$item_integrated_search_field29} data-pageid="{$pageid}" data-field="urinary_tract_infection" data-fieldname="urinary_tract_infection" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_urinary_tract_infection}">
+		{$label public_ward_rounds urinary_tract_infection }	</label>
+	<div class="r-search-option">
+		{$searchtype_urinary_tract_infection}
+	</div>
+	<div class="r-search-field">
+		{$urinary_tract_infection_editcontrol}	</div>
+	<div class="r-search-field">
+		{$urinary_tract_infection_editcontrol1}
+	</div>
+	
+</div>
+
+{END urinary_tract_infection_fieldblock}
+											
+{BEGIN pneumonia_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_pneumonia}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="pneumonia{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field30" {$item_integrated_search_field30} data-pageid="{$pageid}" data-field="pneumonia" data-fieldname="pneumonia" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_pneumonia}">
+		{$label public_ward_rounds pneumonia }	</label>
+	<div class="r-search-option">
+		{$searchtype_pneumonia}
+	</div>
+	<div class="r-search-field">
+		{$pneumonia_editcontrol}	</div>
+	<div class="r-search-field">
+		{$pneumonia_editcontrol1}
+	</div>
+	
+</div>
+
+{END pneumonia_fieldblock}
+											
+{BEGIN other_complication_description_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_other_complication_description}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="other_complication_description{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field31" {$item_integrated_search_field31} data-pageid="{$pageid}" data-field="other_complication_description" data-fieldname="other_complication_description" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_other_complication_description}">
+		{$label public_ward_rounds other_complication_description }	</label>
+	<div class="r-search-option">
+		{$searchtype_other_complication_description}
+	</div>
+	<div class="r-search-field">
+		{$other_complication_description_editcontrol}	</div>
+	<div class="r-search-field">
+		{$other_complication_description_editcontrol1}
+	</div>
+	
+</div>
+
+{END other_complication_description_fieldblock}
+											
+{BEGIN eschar_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_eschar}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="eschar{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field32" {$item_integrated_search_field32} data-pageid="{$pageid}" data-field="eschar" data-fieldname="eschar" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_eschar}">
+		{$label public_ward_rounds eschar }	</label>
+	<div class="r-search-option">
+		{$searchtype_eschar}
+	</div>
+	<div class="r-search-field">
+		{$eschar_editcontrol}	</div>
+	<div class="r-search-field">
+		{$eschar_editcontrol1}
+	</div>
+	
+</div>
+
+{END eschar_fieldblock}
+											
+{BEGIN discharged_today_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_discharged_today}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="discharged_today{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field33" {$item_integrated_search_field33} data-pageid="{$pageid}" data-field="discharged_today" data-fieldname="discharged_today" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_discharged_today}">
+		{$label public_ward_rounds discharged_today }	</label>
+	<div class="r-search-option">
+		{$searchtype_discharged_today}
+	</div>
+	<div class="r-search-field">
+		{$discharged_today_editcontrol}	</div>
+	<div class="r-search-field">
+		{$discharged_today_editcontrol1}
+	</div>
+	
+</div>
+
+{END discharged_today_fieldblock}
+											
+{BEGIN discharge_date_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_discharge_date}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="discharge_date{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field34" {$item_integrated_search_field34} data-pageid="{$pageid}" data-field="discharge_date" data-fieldname="discharge_date" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_discharge_date}">
+		{$label public_ward_rounds discharge_date }	</label>
+	<div class="r-search-option">
+		{$searchtype_discharge_date}
+	</div>
+	<div class="r-search-field">
+		{$discharge_date_editcontrol}	</div>
+	<div class="r-search-field">
+		{$discharge_date_editcontrol1}
+	</div>
+	
+</div>
+
+{END discharge_date_fieldblock}
+											
+{BEGIN death_in_ward_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_death_in_ward}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="death_in_ward{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field35" {$item_integrated_search_field35} data-pageid="{$pageid}" data-field="death_in_ward" data-fieldname="death_in_ward" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_death_in_ward}">
+		{$label public_ward_rounds death_in_ward }	</label>
+	<div class="r-search-option">
+		{$searchtype_death_in_ward}
+	</div>
+	<div class="r-search-field">
+		{$death_in_ward_editcontrol}	</div>
+	<div class="r-search-field">
+		{$death_in_ward_editcontrol1}
+	</div>
+	
+</div>
+
+{END death_in_ward_fieldblock}
+											
+{BEGIN neonatal_death_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_neonatal_death}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="neonatal_death{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field36" {$item_integrated_search_field36} data-pageid="{$pageid}" data-field="neonatal_death" data-fieldname="neonatal_death" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_neonatal_death}">
+		{$label public_ward_rounds neonatal_death }	</label>
+	<div class="r-search-option">
+		{$searchtype_neonatal_death}
+	</div>
+	<div class="r-search-field">
+		{$neonatal_death_editcontrol}	</div>
+	<div class="r-search-field">
+		{$neonatal_death_editcontrol1}
+	</div>
+	
+</div>
+
+{END neonatal_death_fieldblock}
+											
+{BEGIN created_at_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_created_at}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="created_at{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field37" {$item_integrated_search_field37} data-pageid="{$pageid}" data-field="created_at" data-fieldname="created_at" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_created_at}">
+		{$label public_ward_rounds created_at }	</label>
+	<div class="r-search-option">
+		{$searchtype_created_at}
+	</div>
+	<div class="r-search-field">
+		{$created_at_editcontrol}	</div>
+	<div class="r-search-field">
+		{$created_at_editcontrol1}
+	</div>
+	
+</div>
+
+{END created_at_fieldblock}
+											
+{BEGIN updated_at_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_updated_at}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="updated_at{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field38" {$item_integrated_search_field38} data-pageid="{$pageid}" data-field="updated_at" data-fieldname="updated_at" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_updated_at}">
+		{$label public_ward_rounds updated_at }	</label>
+	<div class="r-search-option">
+		{$searchtype_updated_at}
+	</div>
+	<div class="r-search-field">
+		{$updated_at_editcontrol}	</div>
+	<div class="r-search-field">
+		{$updated_at_editcontrol1}
+	</div>
+	
+</div>
+
+{END updated_at_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c3}
+								</tr>
+			</tbody></table>
+{END grid_block}
+									{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="small" {$form_below-grid} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class="			col-md-12
+	">
+	 
+		<span data-itemtype="search_search" data-itemid="search_search" {$item_search_search} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" {$searchbutton_attrs} data-page=undefined >
+							Search			</a>
+</span>
+	 
+		<span data-itemtype="search_reset" data-itemid="search_reset" {$item_search_reset} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$resetbutton_attrs} >
+							Reset			</a>
+</span>
+	 
+		{BEGIN back_button}
+<span data-itemtype="search_back_list" data-itemid="search_back_list" {$item_search_back_list} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$backbutton_attrs} >
+							Back to list			</a>
+</span>
+{END back_button}
+	 
+		{BEGIN cancel_button}
+<span data-itemtype="search_cancel" data-itemid="search_cancel" {$item_search_cancel} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" id="cancelButton{$id}" >
+							Cancel			</a>
+</span>
+{END cancel_button}
+	</div>					</div>
+	</div>		
+{END below-grid_block}
+			</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

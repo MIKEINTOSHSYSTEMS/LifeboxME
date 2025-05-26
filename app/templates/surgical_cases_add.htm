@@ -1,0 +1,2084 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
+	{BEGIN rtlCSS}
+	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
+	{END rtlCSS}
+	{BEGIN styleCSSFiles}
+	<link REL="stylesheet" href="{$stylepath}" type="text/css">
+	{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-add"   
+		>
+	{BEGIN body}
+		<style>
+		{$containerCss}
+		</style>
+		<div class="r-vbar-page">
+			<div data-width="300px" data-fixed class="r-left clearfix {$leftbar_class}" >
+								<div data-location="left" id="form_left_{$pageid}" data-makeup="leftbar" {$form_left} data-pageid="{$pageid}">
+{BEGIN left_block}
+ 
+     
+         
+
+			<div data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell class="clearfix " data-itemid="logo" {$item_logo}>
+				{BEGIN logo_block}
+	<A data-itemtype="logo" data-itemid="logo" {$item_logo} data-pageid="{$pageid}" class="navbar-brand" href="{$home_link}" data-pageid="{$pageid}" {$logo_hiddenattr}>
+		{$logo}
+	</A>
+{END logo_block}
+				<button data-pageid="1" type="button" class="navbar-toggle collapsed" data-runner-toggle="collapse" data-target="[data-mobile-controlled]">	
+					<span class="sr-only">Toggle navigation</span>	
+					<span class="icon-bar"></span>					
+				</button>				
+			</div>
+		
+ 
+
+			<div class="clearfix " data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell data-itemid="expand_button" {$item_expand_button} data-topcell-item-type="expand_button" >
+				<span data-itemtype="expand_button" data-itemid="expand_button" {$item_expand_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Expand" class="btn btn-link   
+	" href="#" >
+					<span class="glyphicon glyphicon-triangle-right"></span>
+										</a>
+</span>
+			</div>
+		
+     
+     
+         
+
+			<div data-cellId="left_c1" data-pageid="{$pageid}" class="clearfix  r-ori-vert " data-itemtype="menu" data-itemid="menu" {$item_menu} data-pageid="{$pageid}">
+				{BEGIN menuitems_main}
+<ul data-itemtype="menu" data-itemid="menu" {$item_menu} data-pageid="{$pageid}"	class="r-menu nav menu-treelike" 
+	data-menulevel="1"
+>
+
+{BEGIN item_children1}
+<li class="
+	{$item_current}">
+<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline data-menu-top >
+	{$item_separator}
+	<span class="r-menu-link r-menu-expanded "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren2}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren2}
+	</span>
+		<span class="r-menu-collapsed">{$item_collicon}{$item_firstcap}</span>
+	</a>
+{BEGIN item_showchildren2}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="2">
+	{BEGIN item_children2}
+		{BEGIN item_menulink2}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren2}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren2}
+	</span>
+	</a>
+			{BEGIN item_showchildren3}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="3">
+	{BEGIN item_children3}
+		{BEGIN item_menulink3}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren3}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren3}
+	</span>
+	</a>
+			{BEGIN item_showchildren4}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="4">
+	{BEGIN item_children4}
+		{BEGIN item_menulink4}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren4}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren4}
+	</span>
+	</a>
+			{BEGIN item_showchildren5}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="5">
+	{BEGIN item_children5}
+		{BEGIN item_menulink5}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren5}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren5}
+	</span>
+	</a>
+					</li>
+		{END item_menulink5}
+	{END item_children5}
+</ul>
+{END item_showchildren5}
+		</li>
+		{END item_menulink4}
+	{END item_children4}
+</ul>
+{END item_showchildren4}
+		</li>
+		{END item_menulink3}
+	{END item_children3}
+</ul>
+{END item_showchildren3}
+		</li>
+		{END item_menulink2}
+	{END item_children2}
+</ul>
+{END item_showchildren2}
+</li>
+{END item_children1}
+</ul>
+{END menuitems_main}
+			</div>
+		
+    {END left_block}
+</div>				</div>
+			<div class="r-content-col" data-resize-left="leftbar">
+				<div data-resize-left="leftbar"  data-fixed class="r-topheader" data-resize-name="topbar">
+									{BEGIN supertop_block}
+<nav class="navbar navbar-default" 
+	data-location="supertop" id="form_supertop_{$pageid}" data-makeup="leftbar" {$form_supertop} data-pageid="{$pageid}" >
+			 
+							 
+				<span class="navbar-form  navbar-header" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="expand_menu_button" {$item_expand_menu_button} data-topcell-item-type="expand_menu_button" >
+				<span data-itemtype="expand_menu_button" data-itemid="expand_menu_button" {$item_expand_menu_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Show menu" class="btn-link   
+	 glyphicon glyphicon-menu-hamburger" href="#" >		
+				
+								</a>
+</span>
+			</span>
+		 
+				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="collapse_button" {$item_collapse_button} data-topcell-item-type="collapse_button" >
+				<span data-itemtype="collapse_button" data-itemid="collapse_button" {$item_collapse_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Collapse" class="btn-link   
+	 glyphicon glyphicon-triangle-left" href="#" >		
+				
+								</a>
+</span>
+			</span>
+							 
+													</nav>
+{END supertop_block}
+						{$locking}
+				</div>
+				<div class="r-body" data-resize-top="topbar" data-body-width="standard">
+					{$header}
+					<div class="r-top">
+									{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="leftbar" {$form_top} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="top_c1" data-pageid="{$pageid}"	{$cell_top_c1}
+	class=" r-ori-vert			col-md-12
+	
+">
+		 
+		<h2 data-itemtype="add_header" data-itemid="add_header" {$item_add_header} data-pageid="{$pageid}" >{$pagetitlelabel public_surgical_cases add}</h2>
+		</div>					</div>
+			</div>		
+{END top_block}
+						</div>
+											<div class="r-above">
+					{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="leftbar" {$form_above-grid} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-12
+	
+">
+		{BEGIN firstAboveGridCell}
+		 
+		{BEGIN message_block}
+<div data-itemtype="add_message" data-itemid="add_message" {$item_add_message} data-pageid="{$pageid}" class="alert {$message_class}" role="alert">
+<h5>{$message}</h5>
+<div>
+{BEGIN message_back_button}
+		
+	<button class="btn btn-sm btn-default" {$backbutton_attrs}>Back to list</button>
+	{END message_back_button}
+{BEGIN view_page_button}
+	<button class="btn btn-sm btn-default" {$view_page_button_attrs}>View</button>
+{END view_page_button}
+{BEGIN edit_page_button}
+	<button class="btn btn-sm btn-default" {$edit_page_button_attrs}>Edit</button>
+{END edit_page_button}
+</div>
+</div>
+{END message_block}			{END firstAboveGridCell}	
+	</div>					</div>
+			</div>		
+{END above-grid_block}
+	</div>
+<div class="r-grid">
+	{BEGIN grid_tabs}
+  <ul class="nav nav-tabs bsgrid_tabs">
+	{$grid_tabs_content}
+  </ul>
+{END grid_tabs}
+					{BEGIN grid_block}
+
+
+
+
+ 
+	 
+												<table 
+	data-body-align="left"
+	data-location="grid" id="form_grid_{$pageid}" data-makeup="leftbar" {$form_grid} data-pageid="{$pageid}" 
+	class="r-edit-form" cellpadding="0" cellspacing="0" 
+	{$grid_hiddenattr} 
+		data-form-width="1"
+		
+		data-v-width="4"
+	>
+	<tbody>
+										<tr {$row_grid_0} >
+										
+
+{BEGIN cellblock_grid_c3}
+<td
+	{$cell_grid_c3}
+	class=" r-ori-vert"
+	
+				data-fullwidth
+		
+			data-cellId="grid_c3" data-pageid="{$pageid}"
+		data-v-cell="4"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN case_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_case_id}  r-vertical-field" 
+	data-signal-error-for="case_id{$id}" {$required_attr_case_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="case_id" data-fieldname="case_id" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_case_id}">
+		{BEGIN case_id_label}{$label public_surgical_cases case_id }{END case_id_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$case_id_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="case_id" {$tooltipAttr public_surgical_cases case_id } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases case_id }		</div>
+	</div>
+</div>
+
+
+{END case_id_fieldblock}
+											
+{BEGIN facility_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_facility_id}  r-vertical-field" 
+	data-signal-error-for="facility_id{$id}" {$required_attr_facility_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="facility_id" data-fieldname="facility_id" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_facility_id}">
+		{BEGIN facility_id_label}{$label public_surgical_cases facility_id }{END facility_id_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$facility_id_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="facility_id" {$tooltipAttr public_surgical_cases facility_id } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases facility_id }		</div>
+	</div>
+</div>
+
+
+{END facility_id_fieldblock}
+											
+{BEGIN country_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_country_id}  r-vertical-field" 
+	data-signal-error-for="country_id{$id}" {$required_attr_country_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="country_id" data-fieldname="country_id" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_country_id}">
+		{BEGIN country_id_label}{$label public_surgical_cases country_id }{END country_id_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$country_id_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="country_id" {$tooltipAttr public_surgical_cases country_id } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases country_id }		</div>
+	</div>
+</div>
+
+
+{END country_id_fieldblock}
+											
+{BEGIN surgery_date_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_surgery_date}  r-vertical-field" 
+	data-signal-error-for="surgery_date{$id}" {$required_attr_surgery_date}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="surgery_date" data-fieldname="surgery_date" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_surgery_date}">
+		{BEGIN surgery_date_label}{$label public_surgical_cases surgery_date }{END surgery_date_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$surgery_date_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="surgery_date" {$tooltipAttr public_surgical_cases surgery_date } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases surgery_date }		</div>
+	</div>
+</div>
+
+
+{END surgery_date_fieldblock}
+											
+{BEGIN data_type_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_data_type}  r-vertical-field" 
+	data-signal-error-for="data_type{$id}" {$required_attr_data_type}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="data_type" data-fieldname="data_type" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_data_type}">
+		{BEGIN data_type_label}{$label public_surgical_cases data_type }{END data_type_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$data_type_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="data_type" {$tooltipAttr public_surgical_cases data_type } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases data_type }		</div>
+	</div>
+</div>
+
+
+{END data_type_fieldblock}
+											
+{BEGIN data_collector_name_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_data_collector_name}  r-vertical-field" 
+	data-signal-error-for="data_collector_name{$id}" {$required_attr_data_collector_name}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="data_collector_name" data-fieldname="data_collector_name" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_data_collector_name}">
+		{BEGIN data_collector_name_label}{$label public_surgical_cases data_collector_name }{END data_collector_name_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$data_collector_name_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="data_collector_name" {$tooltipAttr public_surgical_cases data_collector_name } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases data_collector_name }		</div>
+	</div>
+</div>
+
+
+{END data_collector_name_fieldblock}
+											
+{BEGIN location_of_surgery_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_location_of_surgery}  r-vertical-field" 
+	data-signal-error-for="location_of_surgery{$id}" {$required_attr_location_of_surgery}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="location_of_surgery" data-fieldname="location_of_surgery" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_location_of_surgery}">
+		{BEGIN location_of_surgery_label}{$label public_surgical_cases location_of_surgery }{END location_of_surgery_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$location_of_surgery_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="location_of_surgery" {$tooltipAttr public_surgical_cases location_of_surgery } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases location_of_surgery }		</div>
+	</div>
+</div>
+
+
+{END location_of_surgery_fieldblock}
+											
+{BEGIN patient_sex_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_patient_sex}  r-vertical-field" 
+	data-signal-error-for="patient_sex{$id}" {$required_attr_patient_sex}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="patient_sex" data-fieldname="patient_sex" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_patient_sex}">
+		{BEGIN patient_sex_label}{$label public_surgical_cases patient_sex }{END patient_sex_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$patient_sex_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="patient_sex" {$tooltipAttr public_surgical_cases patient_sex } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases patient_sex }		</div>
+	</div>
+</div>
+
+
+{END patient_sex_fieldblock}
+											
+{BEGIN patient_asa_classification_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_patient_asa_classification}  r-vertical-field" 
+	data-signal-error-for="patient_asa_classification{$id}" {$required_attr_patient_asa_classification}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="patient_asa_classification" data-fieldname="patient_asa_classification" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_patient_asa_classification}">
+		{BEGIN patient_asa_classification_label}{$label public_surgical_cases patient_asa_classification }{END patient_asa_classification_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$patient_asa_classification_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="patient_asa_classification" {$tooltipAttr public_surgical_cases patient_asa_classification } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases patient_asa_classification }		</div>
+	</div>
+</div>
+
+
+{END patient_asa_classification_fieldblock}
+											
+{BEGIN patient_dob_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_patient_dob}  r-vertical-field" 
+	data-signal-error-for="patient_dob{$id}" {$required_attr_patient_dob}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="patient_dob" data-fieldname="patient_dob" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_patient_dob}">
+		{BEGIN patient_dob_label}{$label public_surgical_cases patient_dob }{END patient_dob_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$patient_dob_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="patient_dob" {$tooltipAttr public_surgical_cases patient_dob } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases patient_dob }		</div>
+	</div>
+</div>
+
+
+{END patient_dob_fieldblock}
+											
+{BEGIN patient_age_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_patient_age}  r-vertical-field" 
+	data-signal-error-for="patient_age{$id}" {$required_attr_patient_age}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="patient_age" data-fieldname="patient_age" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_patient_age}">
+		{BEGIN patient_age_label}{$label public_surgical_cases patient_age }{END patient_age_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$patient_age_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="patient_age" {$tooltipAttr public_surgical_cases patient_age } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases patient_age }		</div>
+	</div>
+</div>
+
+
+{END patient_age_fieldblock}
+											
+{BEGIN diabetes_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_diabetes}  r-vertical-field" 
+	data-signal-error-for="diabetes{$id}" {$required_attr_diabetes}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="diabetes" data-fieldname="diabetes" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_diabetes}">
+		{BEGIN diabetes_label}{$label public_surgical_cases diabetes }{END diabetes_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$diabetes_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="diabetes" {$tooltipAttr public_surgical_cases diabetes } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases diabetes }		</div>
+	</div>
+</div>
+
+
+{END diabetes_fieldblock}
+											
+{BEGIN hypertension_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_hypertension}  r-vertical-field" 
+	data-signal-error-for="hypertension{$id}" {$required_attr_hypertension}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="hypertension" data-fieldname="hypertension" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_hypertension}">
+		{BEGIN hypertension_label}{$label public_surgical_cases hypertension }{END hypertension_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$hypertension_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="hypertension" {$tooltipAttr public_surgical_cases hypertension } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases hypertension }		</div>
+	</div>
+</div>
+
+
+{END hypertension_fieldblock}
+											
+{BEGIN obese_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_obese}  r-vertical-field" 
+	data-signal-error-for="obese{$id}" {$required_attr_obese}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field13" {$item_integrated_edit_field13} data-pageid="{$pageid}" data-field="obese" data-fieldname="obese" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_obese}">
+		{BEGIN obese_label}{$label public_surgical_cases obese }{END obese_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$obese_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="obese" {$tooltipAttr public_surgical_cases obese } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases obese }		</div>
+	</div>
+</div>
+
+
+{END obese_fieldblock}
+											
+{BEGIN malnourished_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_malnourished}  r-vertical-field" 
+	data-signal-error-for="malnourished{$id}" {$required_attr_malnourished}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field14" {$item_integrated_edit_field14} data-pageid="{$pageid}" data-field="malnourished" data-fieldname="malnourished" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_malnourished}">
+		{BEGIN malnourished_label}{$label public_surgical_cases malnourished }{END malnourished_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$malnourished_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="malnourished" {$tooltipAttr public_surgical_cases malnourished } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases malnourished }		</div>
+	</div>
+</div>
+
+
+{END malnourished_fieldblock}
+											
+{BEGIN smoker_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_smoker}  r-vertical-field" 
+	data-signal-error-for="smoker{$id}" {$required_attr_smoker}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field15" {$item_integrated_edit_field15} data-pageid="{$pageid}" data-field="smoker" data-fieldname="smoker" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_smoker}">
+		{BEGIN smoker_label}{$label public_surgical_cases smoker }{END smoker_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$smoker_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="smoker" {$tooltipAttr public_surgical_cases smoker } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases smoker }		</div>
+	</div>
+</div>
+
+
+{END smoker_fieldblock}
+											
+{BEGIN on_steroids_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_on_steroids}  r-vertical-field" 
+	data-signal-error-for="on_steroids{$id}" {$required_attr_on_steroids}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field16" {$item_integrated_edit_field16} data-pageid="{$pageid}" data-field="on_steroids" data-fieldname="on_steroids" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_on_steroids}">
+		{BEGIN on_steroids_label}{$label public_surgical_cases on_steroids }{END on_steroids_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$on_steroids_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="on_steroids" {$tooltipAttr public_surgical_cases on_steroids } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases on_steroids }		</div>
+	</div>
+</div>
+
+
+{END on_steroids_fieldblock}
+											
+{BEGIN admitted_to_icu_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_admitted_to_icu}  r-vertical-field" 
+	data-signal-error-for="admitted_to_icu{$id}" {$required_attr_admitted_to_icu}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field17" {$item_integrated_edit_field17} data-pageid="{$pageid}" data-field="admitted_to_icu" data-fieldname="admitted_to_icu" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_admitted_to_icu}">
+		{BEGIN admitted_to_icu_label}{$label public_surgical_cases admitted_to_icu }{END admitted_to_icu_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$admitted_to_icu_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="admitted_to_icu" {$tooltipAttr public_surgical_cases admitted_to_icu } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases admitted_to_icu }		</div>
+	</div>
+</div>
+
+
+{END admitted_to_icu_fieldblock}
+											
+{BEGIN hypothermic_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_hypothermic}  r-vertical-field" 
+	data-signal-error-for="hypothermic{$id}" {$required_attr_hypothermic}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field18" {$item_integrated_edit_field18} data-pageid="{$pageid}" data-field="hypothermic" data-fieldname="hypothermic" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_hypothermic}">
+		{BEGIN hypothermic_label}{$label public_surgical_cases hypothermic }{END hypothermic_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$hypothermic_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="hypothermic" {$tooltipAttr public_surgical_cases hypothermic } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases hypothermic }		</div>
+	</div>
+</div>
+
+
+{END hypothermic_fieldblock}
+											
+{BEGIN preoperative_diagnosis_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_preoperative_diagnosis_id}  r-vertical-field" 
+	data-signal-error-for="preoperative_diagnosis_id{$id}" {$required_attr_preoperative_diagnosis_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field19" {$item_integrated_edit_field19} data-pageid="{$pageid}" data-field="preoperative_diagnosis_id" data-fieldname="preoperative_diagnosis_id" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_preoperative_diagnosis_id}">
+		{BEGIN preoperative_diagnosis_id_label}{$label public_surgical_cases preoperative_diagnosis_id }{END preoperative_diagnosis_id_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$preoperative_diagnosis_id_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="preoperative_diagnosis_id" {$tooltipAttr public_surgical_cases preoperative_diagnosis_id } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases preoperative_diagnosis_id }		</div>
+	</div>
+</div>
+
+
+{END preoperative_diagnosis_id_fieldblock}
+											
+{BEGIN hours_since_injury_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_hours_since_injury}  r-vertical-field" 
+	data-signal-error-for="hours_since_injury{$id}" {$required_attr_hours_since_injury}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field20" {$item_integrated_edit_field20} data-pageid="{$pageid}" data-field="hours_since_injury" data-fieldname="hours_since_injury" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_hours_since_injury}">
+		{BEGIN hours_since_injury_label}{$label public_surgical_cases hours_since_injury }{END hours_since_injury_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$hours_since_injury_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="hours_since_injury" {$tooltipAttr public_surgical_cases hours_since_injury } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases hours_since_injury }		</div>
+	</div>
+</div>
+
+
+{END hours_since_injury_fieldblock}
+											
+{BEGIN sterilizable_drill_used_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_sterilizable_drill_used}  r-vertical-field" 
+	data-signal-error-for="sterilizable_drill_used{$id}" {$required_attr_sterilizable_drill_used}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field21" {$item_integrated_edit_field21} data-pageid="{$pageid}" data-field="sterilizable_drill_used" data-fieldname="sterilizable_drill_used" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_sterilizable_drill_used}">
+		{BEGIN sterilizable_drill_used_label}{$label public_surgical_cases sterilizable_drill_used }{END sterilizable_drill_used_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$sterilizable_drill_used_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="sterilizable_drill_used" {$tooltipAttr public_surgical_cases sterilizable_drill_used } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases sterilizable_drill_used }		</div>
+	</div>
+</div>
+
+
+{END sterilizable_drill_used_fieldblock}
+											
+{BEGIN drill_sterile_cover_used_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_drill_sterile_cover_used}  r-vertical-field" 
+	data-signal-error-for="drill_sterile_cover_used{$id}" {$required_attr_drill_sterile_cover_used}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field22" {$item_integrated_edit_field22} data-pageid="{$pageid}" data-field="drill_sterile_cover_used" data-fieldname="drill_sterile_cover_used" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_drill_sterile_cover_used}">
+		{BEGIN drill_sterile_cover_used_label}{$label public_surgical_cases drill_sterile_cover_used }{END drill_sterile_cover_used_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$drill_sterile_cover_used_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="drill_sterile_cover_used" {$tooltipAttr public_surgical_cases drill_sterile_cover_used } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases drill_sterile_cover_used }		</div>
+	</div>
+</div>
+
+
+{END drill_sterile_cover_used_fieldblock}
+											
+{BEGIN holes_in_sterile_cover_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_holes_in_sterile_cover}  r-vertical-field" 
+	data-signal-error-for="holes_in_sterile_cover{$id}" {$required_attr_holes_in_sterile_cover}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field23" {$item_integrated_edit_field23} data-pageid="{$pageid}" data-field="holes_in_sterile_cover" data-fieldname="holes_in_sterile_cover" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_holes_in_sterile_cover}">
+		{BEGIN holes_in_sterile_cover_label}{$label public_surgical_cases holes_in_sterile_cover }{END holes_in_sterile_cover_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$holes_in_sterile_cover_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="holes_in_sterile_cover" {$tooltipAttr public_surgical_cases holes_in_sterile_cover } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases holes_in_sterile_cover }		</div>
+	</div>
+</div>
+
+
+{END holes_in_sterile_cover_fieldblock}
+											
+{BEGIN sign_in_read_aloud_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_sign_in_read_aloud}  r-vertical-field" 
+	data-signal-error-for="sign_in_read_aloud{$id}" {$required_attr_sign_in_read_aloud}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field24" {$item_integrated_edit_field24} data-pageid="{$pageid}" data-field="sign_in_read_aloud" data-fieldname="sign_in_read_aloud" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_sign_in_read_aloud}">
+		{BEGIN sign_in_read_aloud_label}{$label public_surgical_cases sign_in_read_aloud }{END sign_in_read_aloud_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$sign_in_read_aloud_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="sign_in_read_aloud" {$tooltipAttr public_surgical_cases sign_in_read_aloud } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases sign_in_read_aloud }		</div>
+	</div>
+</div>
+
+
+{END sign_in_read_aloud_fieldblock}
+											
+{BEGIN sign_in_completed_before_anesthesia_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_sign_in_completed_before_anesthesia}  r-vertical-field" 
+	data-signal-error-for="sign_in_completed_before_anesthesia{$id}" {$required_attr_sign_in_completed_before_anesthesia}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field25" {$item_integrated_edit_field25} data-pageid="{$pageid}" data-field="sign_in_completed_before_anesthesia" data-fieldname="sign_in_completed_before_anesthesia" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_sign_in_completed_before_anesthesia}">
+		{BEGIN sign_in_completed_before_anesthesia_label}{$label public_surgical_cases sign_in_completed_before_anesthesia }{END sign_in_completed_before_anesthesia_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$sign_in_completed_before_anesthesia_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="sign_in_completed_before_anesthesia" {$tooltipAttr public_surgical_cases sign_in_completed_before_anesthesia } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases sign_in_completed_before_anesthesia }		</div>
+	</div>
+</div>
+
+
+{END sign_in_completed_before_anesthesia_fieldblock}
+											
+{BEGIN sterility_indicator_in_tray_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_sterility_indicator_in_tray}  r-vertical-field" 
+	data-signal-error-for="sterility_indicator_in_tray{$id}" {$required_attr_sterility_indicator_in_tray}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field26" {$item_integrated_edit_field26} data-pageid="{$pageid}" data-field="sterility_indicator_in_tray" data-fieldname="sterility_indicator_in_tray" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_sterility_indicator_in_tray}">
+		{BEGIN sterility_indicator_in_tray_label}{$label public_surgical_cases sterility_indicator_in_tray }{END sterility_indicator_in_tray_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$sterility_indicator_in_tray_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="sterility_indicator_in_tray" {$tooltipAttr public_surgical_cases sterility_indicator_in_tray } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases sterility_indicator_in_tray }		</div>
+	</div>
+</div>
+
+
+{END sterility_indicator_in_tray_fieldblock}
+											
+{BEGIN sterility_indicator_color_changed_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_sterility_indicator_color_changed}  r-vertical-field" 
+	data-signal-error-for="sterility_indicator_color_changed{$id}" {$required_attr_sterility_indicator_color_changed}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field27" {$item_integrated_edit_field27} data-pageid="{$pageid}" data-field="sterility_indicator_color_changed" data-fieldname="sterility_indicator_color_changed" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_sterility_indicator_color_changed}">
+		{BEGIN sterility_indicator_color_changed_label}{$label public_surgical_cases sterility_indicator_color_changed }{END sterility_indicator_color_changed_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$sterility_indicator_color_changed_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="sterility_indicator_color_changed" {$tooltipAttr public_surgical_cases sterility_indicator_color_changed } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases sterility_indicator_color_changed }		</div>
+	</div>
+</div>
+
+
+{END sterility_indicator_color_changed_fieldblock}
+											
+{BEGIN tray_wet_prior_to_operation_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tray_wet_prior_to_operation}  r-vertical-field" 
+	data-signal-error-for="tray_wet_prior_to_operation{$id}" {$required_attr_tray_wet_prior_to_operation}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field28" {$item_integrated_edit_field28} data-pageid="{$pageid}" data-field="tray_wet_prior_to_operation" data-fieldname="tray_wet_prior_to_operation" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_tray_wet_prior_to_operation}">
+		{BEGIN tray_wet_prior_to_operation_label}{$label public_surgical_cases tray_wet_prior_to_operation }{END tray_wet_prior_to_operation_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$tray_wet_prior_to_operation_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="tray_wet_prior_to_operation" {$tooltipAttr public_surgical_cases tray_wet_prior_to_operation } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases tray_wet_prior_to_operation }		</div>
+	</div>
+</div>
+
+
+{END tray_wet_prior_to_operation_fieldblock}
+											
+{BEGIN tray_replaced_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_tray_replaced}  r-vertical-field" 
+	data-signal-error-for="tray_replaced{$id}" {$required_attr_tray_replaced}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field29" {$item_integrated_edit_field29} data-pageid="{$pageid}" data-field="tray_replaced" data-fieldname="tray_replaced" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_tray_replaced}">
+		{BEGIN tray_replaced_label}{$label public_surgical_cases tray_replaced }{END tray_replaced_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$tray_replaced_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="tray_replaced" {$tooltipAttr public_surgical_cases tray_replaced } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases tray_replaced }		</div>
+	</div>
+</div>
+
+
+{END tray_replaced_fieldblock}
+											
+{BEGIN gauze_count_performed_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_gauze_count_performed}  r-vertical-field" 
+	data-signal-error-for="gauze_count_performed{$id}" {$required_attr_gauze_count_performed}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field30" {$item_integrated_edit_field30} data-pageid="{$pageid}" data-field="gauze_count_performed" data-fieldname="gauze_count_performed" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_gauze_count_performed}">
+		{BEGIN gauze_count_performed_label}{$label public_surgical_cases gauze_count_performed }{END gauze_count_performed_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$gauze_count_performed_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="gauze_count_performed" {$tooltipAttr public_surgical_cases gauze_count_performed } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases gauze_count_performed }		</div>
+	</div>
+</div>
+
+
+{END gauze_count_performed_fieldblock}
+											
+{BEGIN gauze_count_total_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_gauze_count_total}  r-vertical-field" 
+	data-signal-error-for="gauze_count_total{$id}" {$required_attr_gauze_count_total}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field31" {$item_integrated_edit_field31} data-pageid="{$pageid}" data-field="gauze_count_total" data-fieldname="gauze_count_total" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_gauze_count_total}">
+		{BEGIN gauze_count_total_label}{$label public_surgical_cases gauze_count_total }{END gauze_count_total_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$gauze_count_total_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="gauze_count_total" {$tooltipAttr public_surgical_cases gauze_count_total } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases gauze_count_total }		</div>
+	</div>
+</div>
+
+
+{END gauze_count_total_fieldblock}
+											
+{BEGIN surgeon_scrubbed_hands_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_surgeon_scrubbed_hands}  r-vertical-field" 
+	data-signal-error-for="surgeon_scrubbed_hands{$id}" {$required_attr_surgeon_scrubbed_hands}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field32" {$item_integrated_edit_field32} data-pageid="{$pageid}" data-field="surgeon_scrubbed_hands" data-fieldname="surgeon_scrubbed_hands" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_surgeon_scrubbed_hands}">
+		{BEGIN surgeon_scrubbed_hands_label}{$label public_surgical_cases surgeon_scrubbed_hands }{END surgeon_scrubbed_hands_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$surgeon_scrubbed_hands_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="surgeon_scrubbed_hands" {$tooltipAttr public_surgical_cases surgeon_scrubbed_hands } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases surgeon_scrubbed_hands }		</div>
+	</div>
+</div>
+
+
+{END surgeon_scrubbed_hands_fieldblock}
+											
+{BEGIN handwashing_available_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_handwashing_available}  r-vertical-field" 
+	data-signal-error-for="handwashing_available{$id}" {$required_attr_handwashing_available}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field33" {$item_integrated_edit_field33} data-pageid="{$pageid}" data-field="handwashing_available" data-fieldname="handwashing_available" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_handwashing_available}">
+		{BEGIN handwashing_available_label}{$label public_surgical_cases handwashing_available }{END handwashing_available_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$handwashing_available_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="handwashing_available" {$tooltipAttr public_surgical_cases handwashing_available } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases handwashing_available }		</div>
+	</div>
+</div>
+
+
+{END handwashing_available_fieldblock}
+											
+{BEGIN alcohol_solution_applied_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_alcohol_solution_applied}  r-vertical-field" 
+	data-signal-error-for="alcohol_solution_applied{$id}" {$required_attr_alcohol_solution_applied}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field34" {$item_integrated_edit_field34} data-pageid="{$pageid}" data-field="alcohol_solution_applied" data-fieldname="alcohol_solution_applied" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_alcohol_solution_applied}">
+		{BEGIN alcohol_solution_applied_label}{$label public_surgical_cases alcohol_solution_applied }{END alcohol_solution_applied_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$alcohol_solution_applied_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="alcohol_solution_applied" {$tooltipAttr public_surgical_cases alcohol_solution_applied } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases alcohol_solution_applied }		</div>
+	</div>
+</div>
+
+
+{END alcohol_solution_applied_fieldblock}
+											
+{BEGIN new_surgical_gloves_used_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_new_surgical_gloves_used}  r-vertical-field" 
+	data-signal-error-for="new_surgical_gloves_used{$id}" {$required_attr_new_surgical_gloves_used}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field35" {$item_integrated_edit_field35} data-pageid="{$pageid}" data-field="new_surgical_gloves_used" data-fieldname="new_surgical_gloves_used" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_new_surgical_gloves_used}">
+		{BEGIN new_surgical_gloves_used_label}{$label public_surgical_cases new_surgical_gloves_used }{END new_surgical_gloves_used_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$new_surgical_gloves_used_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="new_surgical_gloves_used" {$tooltipAttr public_surgical_cases new_surgical_gloves_used } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases new_surgical_gloves_used }		</div>
+	</div>
+</div>
+
+
+{END new_surgical_gloves_used_fieldblock}
+											
+{BEGIN gown_sterility_indicator_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_gown_sterility_indicator}  r-vertical-field" 
+	data-signal-error-for="gown_sterility_indicator{$id}" {$required_attr_gown_sterility_indicator}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field36" {$item_integrated_edit_field36} data-pageid="{$pageid}" data-field="gown_sterility_indicator" data-fieldname="gown_sterility_indicator" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_gown_sterility_indicator}">
+		{BEGIN gown_sterility_indicator_label}{$label public_surgical_cases gown_sterility_indicator }{END gown_sterility_indicator_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$gown_sterility_indicator_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="gown_sterility_indicator" {$tooltipAttr public_surgical_cases gown_sterility_indicator } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases gown_sterility_indicator }		</div>
+	</div>
+</div>
+
+
+{END gown_sterility_indicator_fieldblock}
+											
+{BEGIN gown_indicator_color_changed_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_gown_indicator_color_changed}  r-vertical-field" 
+	data-signal-error-for="gown_indicator_color_changed{$id}" {$required_attr_gown_indicator_color_changed}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field37" {$item_integrated_edit_field37} data-pageid="{$pageid}" data-field="gown_indicator_color_changed" data-fieldname="gown_indicator_color_changed" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_gown_indicator_color_changed}">
+		{BEGIN gown_indicator_color_changed_label}{$label public_surgical_cases gown_indicator_color_changed }{END gown_indicator_color_changed_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$gown_indicator_color_changed_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="gown_indicator_color_changed" {$tooltipAttr public_surgical_cases gown_indicator_color_changed } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases gown_indicator_color_changed }		</div>
+	</div>
+</div>
+
+
+{END gown_indicator_color_changed_fieldblock}
+											
+{BEGIN gown_pack_replaced_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_gown_pack_replaced}  r-vertical-field" 
+	data-signal-error-for="gown_pack_replaced{$id}" {$required_attr_gown_pack_replaced}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field38" {$item_integrated_edit_field38} data-pageid="{$pageid}" data-field="gown_pack_replaced" data-fieldname="gown_pack_replaced" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_gown_pack_replaced}">
+		{BEGIN gown_pack_replaced_label}{$label public_surgical_cases gown_pack_replaced }{END gown_pack_replaced_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$gown_pack_replaced_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="gown_pack_replaced" {$tooltipAttr public_surgical_cases gown_pack_replaced } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases gown_pack_replaced }		</div>
+	</div>
+</div>
+
+
+{END gown_pack_replaced_fieldblock}
+											
+{BEGIN gowns_or_drapes_wet_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_gowns_or_drapes_wet}  r-vertical-field" 
+	data-signal-error-for="gowns_or_drapes_wet{$id}" {$required_attr_gowns_or_drapes_wet}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field39" {$item_integrated_edit_field39} data-pageid="{$pageid}" data-field="gowns_or_drapes_wet" data-fieldname="gowns_or_drapes_wet" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_gowns_or_drapes_wet}">
+		{BEGIN gowns_or_drapes_wet_label}{$label public_surgical_cases gowns_or_drapes_wet }{END gowns_or_drapes_wet_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$gowns_or_drapes_wet_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="gowns_or_drapes_wet" {$tooltipAttr public_surgical_cases gowns_or_drapes_wet } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases gowns_or_drapes_wet }		</div>
+	</div>
+</div>
+
+
+{END gowns_or_drapes_wet_fieldblock}
+											
+{BEGIN wet_gowns_replaced_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_wet_gowns_replaced}  r-vertical-field" 
+	data-signal-error-for="wet_gowns_replaced{$id}" {$required_attr_wet_gowns_replaced}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field40" {$item_integrated_edit_field40} data-pageid="{$pageid}" data-field="wet_gowns_replaced" data-fieldname="wet_gowns_replaced" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_wet_gowns_replaced}">
+		{BEGIN wet_gowns_replaced_label}{$label public_surgical_cases wet_gowns_replaced }{END wet_gowns_replaced_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$wet_gowns_replaced_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="wet_gowns_replaced" {$tooltipAttr public_surgical_cases wet_gowns_replaced } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases wet_gowns_replaced }		</div>
+	</div>
+</div>
+
+
+{END wet_gowns_replaced_fieldblock}
+											
+{BEGIN holes_in_gowns_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_holes_in_gowns}  r-vertical-field" 
+	data-signal-error-for="holes_in_gowns{$id}" {$required_attr_holes_in_gowns}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field41" {$item_integrated_edit_field41} data-pageid="{$pageid}" data-field="holes_in_gowns" data-fieldname="holes_in_gowns" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_holes_in_gowns}">
+		{BEGIN holes_in_gowns_label}{$label public_surgical_cases holes_in_gowns }{END holes_in_gowns_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$holes_in_gowns_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="holes_in_gowns" {$tooltipAttr public_surgical_cases holes_in_gowns } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases holes_in_gowns }		</div>
+	</div>
+</div>
+
+
+{END holes_in_gowns_fieldblock}
+											
+{BEGIN torn_gowns_replaced_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_torn_gowns_replaced}  r-vertical-field" 
+	data-signal-error-for="torn_gowns_replaced{$id}" {$required_attr_torn_gowns_replaced}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field42" {$item_integrated_edit_field42} data-pageid="{$pageid}" data-field="torn_gowns_replaced" data-fieldname="torn_gowns_replaced" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_torn_gowns_replaced}">
+		{BEGIN torn_gowns_replaced_label}{$label public_surgical_cases torn_gowns_replaced }{END torn_gowns_replaced_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$torn_gowns_replaced_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="torn_gowns_replaced" {$tooltipAttr public_surgical_cases torn_gowns_replaced } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases torn_gowns_replaced }		</div>
+	</div>
+</div>
+
+
+{END torn_gowns_replaced_fieldblock}
+											
+{BEGIN holes_in_drapes_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_holes_in_drapes}  r-vertical-field" 
+	data-signal-error-for="holes_in_drapes{$id}" {$required_attr_holes_in_drapes}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field43" {$item_integrated_edit_field43} data-pageid="{$pageid}" data-field="holes_in_drapes" data-fieldname="holes_in_drapes" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_holes_in_drapes}">
+		{BEGIN holes_in_drapes_label}{$label public_surgical_cases holes_in_drapes }{END holes_in_drapes_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$holes_in_drapes_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="holes_in_drapes" {$tooltipAttr public_surgical_cases holes_in_drapes } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases holes_in_drapes }		</div>
+	</div>
+</div>
+
+
+{END holes_in_drapes_fieldblock}
+											
+{BEGIN drapes_replaced_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_drapes_replaced}  r-vertical-field" 
+	data-signal-error-for="drapes_replaced{$id}" {$required_attr_drapes_replaced}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field44" {$item_integrated_edit_field44} data-pageid="{$pageid}" data-field="drapes_replaced" data-fieldname="drapes_replaced" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_drapes_replaced}">
+		{BEGIN drapes_replaced_label}{$label public_surgical_cases drapes_replaced }{END drapes_replaced_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$drapes_replaced_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="drapes_replaced" {$tooltipAttr public_surgical_cases drapes_replaced } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases drapes_replaced }		</div>
+	</div>
+</div>
+
+
+{END drapes_replaced_fieldblock}
+											
+{BEGIN surgical_site_prep_method_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_surgical_site_prep_method}  r-vertical-field" 
+	data-signal-error-for="surgical_site_prep_method{$id}" {$required_attr_surgical_site_prep_method}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field45" {$item_integrated_edit_field45} data-pageid="{$pageid}" data-field="surgical_site_prep_method" data-fieldname="surgical_site_prep_method" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_surgical_site_prep_method}">
+		{BEGIN surgical_site_prep_method_label}{$label public_surgical_cases surgical_site_prep_method }{END surgical_site_prep_method_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$surgical_site_prep_method_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="surgical_site_prep_method" {$tooltipAttr public_surgical_cases surgical_site_prep_method } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases surgical_site_prep_method }		</div>
+	</div>
+</div>
+
+
+{END surgical_site_prep_method_fieldblock}
+											
+{BEGIN vaginal_preparation_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_vaginal_preparation}  r-vertical-field" 
+	data-signal-error-for="vaginal_preparation{$id}" {$required_attr_vaginal_preparation}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field46" {$item_integrated_edit_field46} data-pageid="{$pageid}" data-field="vaginal_preparation" data-fieldname="vaginal_preparation" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_vaginal_preparation}">
+		{BEGIN vaginal_preparation_label}{$label public_surgical_cases vaginal_preparation }{END vaginal_preparation_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$vaginal_preparation_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="vaginal_preparation" {$tooltipAttr public_surgical_cases vaginal_preparation } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases vaginal_preparation }		</div>
+	</div>
+</div>
+
+
+{END vaginal_preparation_fieldblock}
+											
+{BEGIN antibiotics_given_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_antibiotics_given}  r-vertical-field" 
+	data-signal-error-for="antibiotics_given{$id}" {$required_attr_antibiotics_given}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field47" {$item_integrated_edit_field47} data-pageid="{$pageid}" data-field="antibiotics_given" data-fieldname="antibiotics_given" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_antibiotics_given}">
+		{BEGIN antibiotics_given_label}{$label public_surgical_cases antibiotics_given }{END antibiotics_given_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$antibiotics_given_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="antibiotics_given" {$tooltipAttr public_surgical_cases antibiotics_given } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases antibiotics_given }		</div>
+	</div>
+</div>
+
+
+{END antibiotics_given_fieldblock}
+											
+{BEGIN antibiotics_admin_location_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_antibiotics_admin_location}  r-vertical-field" 
+	data-signal-error-for="antibiotics_admin_location{$id}" {$required_attr_antibiotics_admin_location}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field48" {$item_integrated_edit_field48} data-pageid="{$pageid}" data-field="antibiotics_admin_location" data-fieldname="antibiotics_admin_location" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_antibiotics_admin_location}">
+		{BEGIN antibiotics_admin_location_label}{$label public_surgical_cases antibiotics_admin_location }{END antibiotics_admin_location_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$antibiotics_admin_location_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="antibiotics_admin_location" {$tooltipAttr public_surgical_cases antibiotics_admin_location } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases antibiotics_admin_location }		</div>
+	</div>
+</div>
+
+
+{END antibiotics_admin_location_fieldblock}
+											
+{BEGIN antibiotics_time_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_antibiotics_time}  r-vertical-field" 
+	data-signal-error-for="antibiotics_time{$id}" {$required_attr_antibiotics_time}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field49" {$item_integrated_edit_field49} data-pageid="{$pageid}" data-field="antibiotics_time" data-fieldname="antibiotics_time" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_antibiotics_time}">
+		{BEGIN antibiotics_time_label}{$label public_surgical_cases antibiotics_time }{END antibiotics_time_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$antibiotics_time_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="antibiotics_time" {$tooltipAttr public_surgical_cases antibiotics_time } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases antibiotics_time }		</div>
+	</div>
+</div>
+
+
+{END antibiotics_time_fieldblock}
+											
+{BEGIN on_scheduled_antibiotics_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_on_scheduled_antibiotics}  r-vertical-field" 
+	data-signal-error-for="on_scheduled_antibiotics{$id}" {$required_attr_on_scheduled_antibiotics}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field50" {$item_integrated_edit_field50} data-pageid="{$pageid}" data-field="on_scheduled_antibiotics" data-fieldname="on_scheduled_antibiotics" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_on_scheduled_antibiotics}">
+		{BEGIN on_scheduled_antibiotics_label}{$label public_surgical_cases on_scheduled_antibiotics }{END on_scheduled_antibiotics_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$on_scheduled_antibiotics_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="on_scheduled_antibiotics" {$tooltipAttr public_surgical_cases on_scheduled_antibiotics } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases on_scheduled_antibiotics }		</div>
+	</div>
+</div>
+
+
+{END on_scheduled_antibiotics_fieldblock}
+											
+{BEGIN antibiotic_type_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_antibiotic_type}  r-vertical-field" 
+	data-signal-error-for="antibiotic_type{$id}" {$required_attr_antibiotic_type}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field51" {$item_integrated_edit_field51} data-pageid="{$pageid}" data-field="antibiotic_type" data-fieldname="antibiotic_type" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_antibiotic_type}">
+		{BEGIN antibiotic_type_label}{$label public_surgical_cases antibiotic_type }{END antibiotic_type_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$antibiotic_type_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="antibiotic_type" {$tooltipAttr public_surgical_cases antibiotic_type } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases antibiotic_type }		</div>
+	</div>
+</div>
+
+
+{END antibiotic_type_fieldblock}
+											
+{BEGIN timeout_read_aloud_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_timeout_read_aloud}  r-vertical-field" 
+	data-signal-error-for="timeout_read_aloud{$id}" {$required_attr_timeout_read_aloud}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field52" {$item_integrated_edit_field52} data-pageid="{$pageid}" data-field="timeout_read_aloud" data-fieldname="timeout_read_aloud" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_timeout_read_aloud}">
+		{BEGIN timeout_read_aloud_label}{$label public_surgical_cases timeout_read_aloud }{END timeout_read_aloud_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$timeout_read_aloud_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="timeout_read_aloud" {$tooltipAttr public_surgical_cases timeout_read_aloud } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases timeout_read_aloud }		</div>
+	</div>
+</div>
+
+
+{END timeout_read_aloud_fieldblock}
+											
+{BEGIN operation_type_announced_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_operation_type_announced}  r-vertical-field" 
+	data-signal-error-for="operation_type_announced{$id}" {$required_attr_operation_type_announced}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field53" {$item_integrated_edit_field53} data-pageid="{$pageid}" data-field="operation_type_announced" data-fieldname="operation_type_announced" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_operation_type_announced}">
+		{BEGIN operation_type_announced_label}{$label public_surgical_cases operation_type_announced }{END operation_type_announced_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$operation_type_announced_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="operation_type_announced" {$tooltipAttr public_surgical_cases operation_type_announced } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases operation_type_announced }		</div>
+	</div>
+</div>
+
+
+{END operation_type_announced_fieldblock}
+											
+{BEGIN blood_loss_announced_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_blood_loss_announced}  r-vertical-field" 
+	data-signal-error-for="blood_loss_announced{$id}" {$required_attr_blood_loss_announced}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field54" {$item_integrated_edit_field54} data-pageid="{$pageid}" data-field="blood_loss_announced" data-fieldname="blood_loss_announced" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_blood_loss_announced}">
+		{BEGIN blood_loss_announced_label}{$label public_surgical_cases blood_loss_announced }{END blood_loss_announced_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$blood_loss_announced_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="blood_loss_announced" {$tooltipAttr public_surgical_cases blood_loss_announced } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases blood_loss_announced }		</div>
+	</div>
+</div>
+
+
+{END blood_loss_announced_fieldblock}
+											
+{BEGIN estimated_blood_loss_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_estimated_blood_loss}  r-vertical-field" 
+	data-signal-error-for="estimated_blood_loss{$id}" {$required_attr_estimated_blood_loss}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field55" {$item_integrated_edit_field55} data-pageid="{$pageid}" data-field="estimated_blood_loss" data-fieldname="estimated_blood_loss" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_estimated_blood_loss}">
+		{BEGIN estimated_blood_loss_label}{$label public_surgical_cases estimated_blood_loss }{END estimated_blood_loss_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$estimated_blood_loss_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="estimated_blood_loss" {$tooltipAttr public_surgical_cases estimated_blood_loss } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases estimated_blood_loss }		</div>
+	</div>
+</div>
+
+
+{END estimated_blood_loss_fieldblock}
+											
+{BEGIN time_of_incision_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_time_of_incision}  r-vertical-field" 
+	data-signal-error-for="time_of_incision{$id}" {$required_attr_time_of_incision}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field56" {$item_integrated_edit_field56} data-pageid="{$pageid}" data-field="time_of_incision" data-fieldname="time_of_incision" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_time_of_incision}">
+		{BEGIN time_of_incision_label}{$label public_surgical_cases time_of_incision }{END time_of_incision_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$time_of_incision_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="time_of_incision" {$tooltipAttr public_surgical_cases time_of_incision } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases time_of_incision }		</div>
+	</div>
+</div>
+
+
+{END time_of_incision_fieldblock}
+											
+{BEGIN gauze_count_end_performed_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_gauze_count_end_performed}  r-vertical-field" 
+	data-signal-error-for="gauze_count_end_performed{$id}" {$required_attr_gauze_count_end_performed}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field57" {$item_integrated_edit_field57} data-pageid="{$pageid}" data-field="gauze_count_end_performed" data-fieldname="gauze_count_end_performed" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_gauze_count_end_performed}">
+		{BEGIN gauze_count_end_performed_label}{$label public_surgical_cases gauze_count_end_performed }{END gauze_count_end_performed_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$gauze_count_end_performed_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="gauze_count_end_performed" {$tooltipAttr public_surgical_cases gauze_count_end_performed } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases gauze_count_end_performed }		</div>
+	</div>
+</div>
+
+
+{END gauze_count_end_performed_fieldblock}
+											
+{BEGIN gauze_count_end_total_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_gauze_count_end_total}  r-vertical-field" 
+	data-signal-error-for="gauze_count_end_total{$id}" {$required_attr_gauze_count_end_total}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field58" {$item_integrated_edit_field58} data-pageid="{$pageid}" data-field="gauze_count_end_total" data-fieldname="gauze_count_end_total" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_gauze_count_end_total}">
+		{BEGIN gauze_count_end_total_label}{$label public_surgical_cases gauze_count_end_total }{END gauze_count_end_total_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$gauze_count_end_total_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="gauze_count_end_total" {$tooltipAttr public_surgical_cases gauze_count_end_total } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases gauze_count_end_total }		</div>
+	</div>
+</div>
+
+
+{END gauze_count_end_total_fieldblock}
+											
+{BEGIN time_dressing_applied_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_time_dressing_applied}  r-vertical-field" 
+	data-signal-error-for="time_dressing_applied{$id}" {$required_attr_time_dressing_applied}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field59" {$item_integrated_edit_field59} data-pageid="{$pageid}" data-field="time_dressing_applied" data-fieldname="time_dressing_applied" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_time_dressing_applied}">
+		{BEGIN time_dressing_applied_label}{$label public_surgical_cases time_dressing_applied }{END time_dressing_applied_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$time_dressing_applied_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="time_dressing_applied" {$tooltipAttr public_surgical_cases time_dressing_applied } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases time_dressing_applied }		</div>
+	</div>
+</div>
+
+
+{END time_dressing_applied_fieldblock}
+											
+{BEGIN procedure_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_procedure_id}  r-vertical-field" 
+	data-signal-error-for="procedure_id{$id}" {$required_attr_procedure_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field60" {$item_integrated_edit_field60} data-pageid="{$pageid}" data-field="procedure_id" data-fieldname="procedure_id" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_procedure_id}">
+		{BEGIN procedure_id_label}{$label public_surgical_cases procedure_id }{END procedure_id_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$procedure_id_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="procedure_id" {$tooltipAttr public_surgical_cases procedure_id } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases procedure_id }		</div>
+	</div>
+</div>
+
+
+{END procedure_id_fieldblock}
+											
+{BEGIN hardware_or_bioprosthetic_used_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_hardware_or_bioprosthetic_used}  r-vertical-field" 
+	data-signal-error-for="hardware_or_bioprosthetic_used{$id}" {$required_attr_hardware_or_bioprosthetic_used}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field61" {$item_integrated_edit_field61} data-pageid="{$pageid}" data-field="hardware_or_bioprosthetic_used" data-fieldname="hardware_or_bioprosthetic_used" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_hardware_or_bioprosthetic_used}">
+		{BEGIN hardware_or_bioprosthetic_used_label}{$label public_surgical_cases hardware_or_bioprosthetic_used }{END hardware_or_bioprosthetic_used_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$hardware_or_bioprosthetic_used_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="hardware_or_bioprosthetic_used" {$tooltipAttr public_surgical_cases hardware_or_bioprosthetic_used } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases hardware_or_bioprosthetic_used }		</div>
+	</div>
+</div>
+
+
+{END hardware_or_bioprosthetic_used_fieldblock}
+											
+{BEGIN cesarean_indication_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_cesarean_indication}  r-vertical-field" 
+	data-signal-error-for="cesarean_indication{$id}" {$required_attr_cesarean_indication}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field62" {$item_integrated_edit_field62} data-pageid="{$pageid}" data-field="cesarean_indication" data-fieldname="cesarean_indication" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_cesarean_indication}">
+		{BEGIN cesarean_indication_label}{$label public_surgical_cases cesarean_indication }{END cesarean_indication_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$cesarean_indication_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="cesarean_indication" {$tooltipAttr public_surgical_cases cesarean_indication } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases cesarean_indication }		</div>
+	</div>
+</div>
+
+
+{END cesarean_indication_fieldblock}
+											
+{BEGIN wound_closed_primarily_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_wound_closed_primarily}  r-vertical-field" 
+	data-signal-error-for="wound_closed_primarily{$id}" {$required_attr_wound_closed_primarily}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field63" {$item_integrated_edit_field63} data-pageid="{$pageid}" data-field="wound_closed_primarily" data-fieldname="wound_closed_primarily" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_wound_closed_primarily}">
+		{BEGIN wound_closed_primarily_label}{$label public_surgical_cases wound_closed_primarily }{END wound_closed_primarily_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$wound_closed_primarily_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="wound_closed_primarily" {$tooltipAttr public_surgical_cases wound_closed_primarily } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases wound_closed_primarily }		</div>
+	</div>
+</div>
+
+
+{END wound_closed_primarily_fieldblock}
+											
+{BEGIN wound_classification_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_wound_classification}  r-vertical-field" 
+	data-signal-error-for="wound_classification{$id}" {$required_attr_wound_classification}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field64" {$item_integrated_edit_field64} data-pageid="{$pageid}" data-field="wound_classification" data-fieldname="wound_classification" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_wound_classification}">
+		{BEGIN wound_classification_label}{$label public_surgical_cases wound_classification }{END wound_classification_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$wound_classification_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="wound_classification" {$tooltipAttr public_surgical_cases wound_classification } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases wound_classification }		</div>
+	</div>
+</div>
+
+
+{END wound_classification_fieldblock}
+											
+{BEGIN case_type_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_case_type}  r-vertical-field" 
+	data-signal-error-for="case_type{$id}" {$required_attr_case_type}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field65" {$item_integrated_edit_field65} data-pageid="{$pageid}" data-field="case_type" data-fieldname="case_type" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_case_type}">
+		{BEGIN case_type_label}{$label public_surgical_cases case_type }{END case_type_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$case_type_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="case_type" {$tooltipAttr public_surgical_cases case_type } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases case_type }		</div>
+	</div>
+</div>
+
+
+{END case_type_fieldblock}
+											
+{BEGIN sign_out_read_aloud_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_sign_out_read_aloud}  r-vertical-field" 
+	data-signal-error-for="sign_out_read_aloud{$id}" {$required_attr_sign_out_read_aloud}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field66" {$item_integrated_edit_field66} data-pageid="{$pageid}" data-field="sign_out_read_aloud" data-fieldname="sign_out_read_aloud" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_sign_out_read_aloud}">
+		{BEGIN sign_out_read_aloud_label}{$label public_surgical_cases sign_out_read_aloud }{END sign_out_read_aloud_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$sign_out_read_aloud_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="sign_out_read_aloud" {$tooltipAttr public_surgical_cases sign_out_read_aloud } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases sign_out_read_aloud }		</div>
+	</div>
+</div>
+
+
+{END sign_out_read_aloud_fieldblock}
+											
+{BEGIN sign_out_in_theatre_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_sign_out_in_theatre}  r-vertical-field" 
+	data-signal-error-for="sign_out_in_theatre{$id}" {$required_attr_sign_out_in_theatre}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field67" {$item_integrated_edit_field67} data-pageid="{$pageid}" data-field="sign_out_in_theatre" data-fieldname="sign_out_in_theatre" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_sign_out_in_theatre}">
+		{BEGIN sign_out_in_theatre_label}{$label public_surgical_cases sign_out_in_theatre }{END sign_out_in_theatre_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$sign_out_in_theatre_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="sign_out_in_theatre" {$tooltipAttr public_surgical_cases sign_out_in_theatre } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases sign_out_in_theatre }		</div>
+	</div>
+</div>
+
+
+{END sign_out_in_theatre_fieldblock}
+											
+{BEGIN unplanned_intubation_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_unplanned_intubation}  r-vertical-field" 
+	data-signal-error-for="unplanned_intubation{$id}" {$required_attr_unplanned_intubation}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field68" {$item_integrated_edit_field68} data-pageid="{$pageid}" data-field="unplanned_intubation" data-fieldname="unplanned_intubation" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_unplanned_intubation}">
+		{BEGIN unplanned_intubation_label}{$label public_surgical_cases unplanned_intubation }{END unplanned_intubation_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$unplanned_intubation_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="unplanned_intubation" {$tooltipAttr public_surgical_cases unplanned_intubation } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases unplanned_intubation }		</div>
+	</div>
+</div>
+
+
+{END unplanned_intubation_fieldblock}
+											
+{BEGIN urgent_tracheostomy_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_urgent_tracheostomy}  r-vertical-field" 
+	data-signal-error-for="urgent_tracheostomy{$id}" {$required_attr_urgent_tracheostomy}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field69" {$item_integrated_edit_field69} data-pageid="{$pageid}" data-field="urgent_tracheostomy" data-fieldname="urgent_tracheostomy" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_urgent_tracheostomy}">
+		{BEGIN urgent_tracheostomy_label}{$label public_surgical_cases urgent_tracheostomy }{END urgent_tracheostomy_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$urgent_tracheostomy_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="urgent_tracheostomy" {$tooltipAttr public_surgical_cases urgent_tracheostomy } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases urgent_tracheostomy }		</div>
+	</div>
+</div>
+
+
+{END urgent_tracheostomy_fieldblock}
+											
+{BEGIN urgent_central_access_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_urgent_central_access}  r-vertical-field" 
+	data-signal-error-for="urgent_central_access{$id}" {$required_attr_urgent_central_access}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field70" {$item_integrated_edit_field70} data-pageid="{$pageid}" data-field="urgent_central_access" data-fieldname="urgent_central_access" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_urgent_central_access}">
+		{BEGIN urgent_central_access_label}{$label public_surgical_cases urgent_central_access }{END urgent_central_access_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$urgent_central_access_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="urgent_central_access" {$tooltipAttr public_surgical_cases urgent_central_access } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases urgent_central_access }		</div>
+	</div>
+</div>
+
+
+{END urgent_central_access_fieldblock}
+											
+{BEGIN other_crisis_occurred_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_other_crisis_occurred}  r-vertical-field" 
+	data-signal-error-for="other_crisis_occurred{$id}" {$required_attr_other_crisis_occurred}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field71" {$item_integrated_edit_field71} data-pageid="{$pageid}" data-field="other_crisis_occurred" data-fieldname="other_crisis_occurred" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_other_crisis_occurred}">
+		{BEGIN other_crisis_occurred_label}{$label public_surgical_cases other_crisis_occurred }{END other_crisis_occurred_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$other_crisis_occurred_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="other_crisis_occurred" {$tooltipAttr public_surgical_cases other_crisis_occurred } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases other_crisis_occurred }		</div>
+	</div>
+</div>
+
+
+{END other_crisis_occurred_fieldblock}
+											
+{BEGIN crisis_description_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_crisis_description}  r-vertical-field" 
+	data-signal-error-for="crisis_description{$id}" {$required_attr_crisis_description}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field72" {$item_integrated_edit_field72} data-pageid="{$pageid}" data-field="crisis_description" data-fieldname="crisis_description" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_crisis_description}">
+		{BEGIN crisis_description_label}{$label public_surgical_cases crisis_description }{END crisis_description_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$crisis_description_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="crisis_description" {$tooltipAttr public_surgical_cases crisis_description } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases crisis_description }		</div>
+	</div>
+</div>
+
+
+{END crisis_description_fieldblock}
+											
+{BEGIN death_in_or_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_death_in_or}  r-vertical-field" 
+	data-signal-error-for="death_in_or{$id}" {$required_attr_death_in_or}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field73" {$item_integrated_edit_field73} data-pageid="{$pageid}" data-field="death_in_or" data-fieldname="death_in_or" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_death_in_or}">
+		{BEGIN death_in_or_label}{$label public_surgical_cases death_in_or }{END death_in_or_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$death_in_or_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="death_in_or" {$tooltipAttr public_surgical_cases death_in_or } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases death_in_or }		</div>
+	</div>
+</div>
+
+
+{END death_in_or_fieldblock}
+											
+{BEGIN fetal_death_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_fetal_death}  r-vertical-field" 
+	data-signal-error-for="fetal_death{$id}" {$required_attr_fetal_death}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field74" {$item_integrated_edit_field74} data-pageid="{$pageid}" data-field="fetal_death" data-fieldname="fetal_death" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_fetal_death}">
+		{BEGIN fetal_death_label}{$label public_surgical_cases fetal_death }{END fetal_death_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$fetal_death_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="fetal_death" {$tooltipAttr public_surgical_cases fetal_death } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases fetal_death }		</div>
+	</div>
+</div>
+
+
+{END fetal_death_fieldblock}
+											
+{BEGIN created_at_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_created_at}  r-vertical-field" 
+	data-signal-error-for="created_at{$id}" {$required_attr_created_at}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field75" {$item_integrated_edit_field75} data-pageid="{$pageid}" data-field="created_at" data-fieldname="created_at" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_created_at}">
+		{BEGIN created_at_label}{$label public_surgical_cases created_at }{END created_at_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$created_at_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="created_at" {$tooltipAttr public_surgical_cases created_at } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases created_at }		</div>
+	</div>
+</div>
+
+
+{END created_at_fieldblock}
+											
+{BEGIN updated_at_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_updated_at}  r-vertical-field" 
+	data-signal-error-for="updated_at{$id}" {$required_attr_updated_at}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field76" {$item_integrated_edit_field76} data-pageid="{$pageid}" data-field="updated_at" data-fieldname="updated_at" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_updated_at}">
+		{BEGIN updated_at_label}{$label public_surgical_cases updated_at }{END updated_at_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$updated_at_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="updated_at" {$tooltipAttr public_surgical_cases updated_at } >
+		<div class="text-muted" >
+		{$tooltip public_surgical_cases updated_at }		</div>
+	</div>
+</div>
+
+
+{END updated_at_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c3}
+								</tr>
+			</tbody></table>
+{END grid_block}
+	</div>
+<div class="r-below">
+					{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="leftbar" {$form_below-grid} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class="			col-md-12
+	
+">
+		 
+		<span data-itemtype="add_save" data-itemid="add_save" {$item_add_save} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" {$savebutton_attrs} >
+							Save			</a>
+</span>
+	 
+		<span data-itemtype="add_reset" data-itemid="add_reset" {$item_add_reset} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" id="resetButton{$id}" >
+							Reset			</a>
+</span>
+	 
+		{BEGIN back_button}
+<span data-itemtype="add_back_list" data-itemid="add_back_list" {$item_add_back_list} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" id="backButton{$id}" >
+							Back to list			</a>
+</span>
+{END back_button}
+	 
+		{BEGIN cancel_button}
+<span data-itemtype="add_cancel" data-itemid="add_cancel" {$item_add_cancel} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" id="cancelButton{$id}" >
+							Cancel			</a>
+</span>
+{END cancel_button}
+		</div>					</div>
+			</div>		
+{END below-grid_block}
+	</div>
+
+
+
+
+										{$footer}
+				</div>
+			</div>
+			<div class="r-body-shadow">
+			</div>
+		</div>
+	{END body}
+	</body>
+</html>

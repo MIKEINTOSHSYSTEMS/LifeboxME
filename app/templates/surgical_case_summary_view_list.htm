@@ -1,0 +1,2193 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
+	{BEGIN rtlCSS}
+	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
+	{END rtlCSS}
+	{BEGIN styleCSSFiles}
+	<link REL="stylesheet" href="{$stylepath}" type="text/css">
+	{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-list"   
+			data-panel-bg
+		>
+	{BEGIN body}
+		<style>
+		{$containerCss}
+		</style>
+		<div class="r-vbar-page">
+			<div data-width="300px" data-fixed class="r-left clearfix {$leftbar_class}" >
+								<div data-location="left" id="form_left_{$pageid}" data-makeup="leftbar" {$form_left} data-pageid="{$pageid}">
+{BEGIN left_block}
+ 
+     
+         
+
+			<div data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell class="clearfix " data-itemid="logo" {$item_logo}>
+				{BEGIN logo_block}
+	<A data-itemtype="logo" data-itemid="logo" {$item_logo} data-pageid="{$pageid}" class="navbar-brand" href="{$home_link}" data-pageid="{$pageid}" {$logo_hiddenattr}>
+		{$logo}
+	</A>
+{END logo_block}
+				<button data-pageid="1" type="button" class="navbar-toggle collapsed" data-runner-toggle="collapse" data-target="[data-mobile-controlled]">	
+					<span class="sr-only">Toggle navigation</span>	
+					<span class="icon-bar"></span>					
+				</button>				
+			</div>
+		
+ 
+
+			<div class="clearfix " data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell data-itemid="expand_button" {$item_expand_button} data-topcell-item-type="expand_button" >
+				<span data-itemtype="expand_button" data-itemid="expand_button" {$item_expand_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Expand" class="btn btn-link   
+	" href="#" >
+					<span class="glyphicon glyphicon-triangle-right"></span>
+										</a>
+</span>
+			</div>
+		
+     
+     
+         
+
+			<div data-cellId="left_c1" data-pageid="{$pageid}" class="clearfix  r-ori-vert " data-itemtype="menu" data-itemid="menu" {$item_menu} data-pageid="{$pageid}">
+				{BEGIN menuitems_main}
+<ul data-itemtype="menu" data-itemid="menu" {$item_menu} data-pageid="{$pageid}"	class="r-menu nav menu-treelike" 
+	data-menulevel="1"
+>
+
+{BEGIN item_children1}
+<li class="
+	{$item_current}">
+<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline data-menu-top >
+	{$item_separator}
+	<span class="r-menu-link r-menu-expanded "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren2}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren2}
+	</span>
+		<span class="r-menu-collapsed">{$item_collicon}{$item_firstcap}</span>
+	</a>
+{BEGIN item_showchildren2}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="2">
+	{BEGIN item_children2}
+		{BEGIN item_menulink2}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren2}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren2}
+	</span>
+	</a>
+			{BEGIN item_showchildren3}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="3">
+	{BEGIN item_children3}
+		{BEGIN item_menulink3}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren3}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren3}
+	</span>
+	</a>
+			{BEGIN item_showchildren4}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="4">
+	{BEGIN item_children4}
+		{BEGIN item_menulink4}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren4}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren4}
+	</span>
+	</a>
+			{BEGIN item_showchildren5}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="5">
+	{BEGIN item_children5}
+		{BEGIN item_menulink5}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren5}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren5}
+	</span>
+	</a>
+					</li>
+		{END item_menulink5}
+	{END item_children5}
+</ul>
+{END item_showchildren5}
+		</li>
+		{END item_menulink4}
+	{END item_children4}
+</ul>
+{END item_showchildren4}
+		</li>
+		{END item_menulink3}
+	{END item_children3}
+</ul>
+{END item_showchildren3}
+		</li>
+		{END item_menulink2}
+	{END item_children2}
+</ul>
+{END item_showchildren2}
+</li>
+{END item_children1}
+</ul>
+{END menuitems_main}
+			</div>
+		
+ 
+
+			<div class="clearfix  r-ori-vert" data-cellId="left_c1" data-pageid="{$pageid}" data-itemid="search_panel" {$item_search_panel} data-topcell-item-type="search_panel" >
+				<!-- Begin Search panel content -->
+<div class="searchOptions panel panel-primary searchPanelContainer " {$srchOpt_attrs} data-itemtype="search_panel" data-itemid="search_panel" {$item_search_panel} data-pageid="{$pageid}"	 >
+
+	<div class="panel-heading">
+		<div class="btn-group r-sp-addfield" id="addSearchFieldButton{$id}">
+			<button id="showHideControlChooseMenu{$id}" type="button" class="btn btn-default dropdown-toggle btn-sm )" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			Search in			<span class="caret"></span>
+			</button>
+		</div>
+
+
+		<div class="btn-group r-sp-options" id="searchPanelOptions{$id}">
+			<button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<span class="glyphicon glyphicon glyphicon-option-vertical"></span>
+			</button>
+			<ul class="dropdown-menu dropdown-left">
+				<li id="showHideSearchType{$id}" {$showHideCtrlsOpt_attrs}><a>Show options</a></li>
+				<li role="separator" class="divider"></li>
+				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAll" {$all_checkbox}><label for="radioAll"><span class="glyphicon">&nbsp;</span>all conditions</label></a></li>
+				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAny" {$any_checkbox}><label for="radioAny"><span class="glyphicon">&nbsp;</span>any condition</label></a></li>
+				<li role="separator" class="divider"></li>
+				<li><a class="close-button"><span class="glyphicon glyphicon-remove">&nbsp;</span>hide</a></li>
+			</ul>
+		</div>
+
+
+		</div>
+	<div class="panel-body controlsBlock" {$bottomSearchButt_attrs} >
+
+
+		
+		{BEGIN searchCtrlBlock}
+		<div class="srchPanelRow form-group" {$filterRow_attrs}>
+			<label>{$fLabel}</label>	{$delCtrlButt}
+				<span class="rnr-searchtype">{$searchtype}</span>
+				<span class="rnr-searchcontrol">{$searchcontrol}</span>
+				<span class="rnr-searchcontrol">{$searchcontrol1}</span>
+		</div>
+		{END searchCtrlBlock}
+																		{BEGIN searchCtrlBlock_case_id}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_case_id}" {$filterRow_attrs_case_id}>
+			<label>{$label public_surgical_case_summary_view case_id }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_case_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_case_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_case_id}</span>
+						</div>
+		{END searchCtrlBlock_case_id}
+																{BEGIN searchCtrlBlock_wound_classification}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_wound_classification}" {$filterRow_attrs_wound_classification}>
+			<label>{$label public_surgical_case_summary_view wound_classification }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_wound_classification}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_wound_classification}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_wound_classification}</span>
+						</div>
+		{END searchCtrlBlock_wound_classification}
+																{BEGIN searchCtrlBlock_surgery_date}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_surgery_date}" {$filterRow_attrs_surgery_date}>
+			<label>{$label public_surgical_case_summary_view surgery_date }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_surgery_date}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_surgery_date}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_surgery_date}</span>
+						</div>
+		{END searchCtrlBlock_surgery_date}
+																{BEGIN searchCtrlBlock_procedure_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_procedure_name}" {$filterRow_attrs_procedure_name}>
+			<label>{$label public_surgical_case_summary_view procedure_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_procedure_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_procedure_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_procedure_name}</span>
+						</div>
+		{END searchCtrlBlock_procedure_name}
+																{BEGIN searchCtrlBlock_patient_sex}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_patient_sex}" {$filterRow_attrs_patient_sex}>
+			<label>{$label public_surgical_case_summary_view patient_sex }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_patient_sex}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_patient_sex}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_patient_sex}</span>
+						</div>
+		{END searchCtrlBlock_patient_sex}
+																{BEGIN searchCtrlBlock_patient_age}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_patient_age}" {$filterRow_attrs_patient_age}>
+			<label>{$label public_surgical_case_summary_view patient_age }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_patient_age}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_patient_age}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_patient_age}</span>
+						</div>
+		{END searchCtrlBlock_patient_age}
+																{BEGIN searchCtrlBlock_neonatal_death}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_neonatal_death}" {$filterRow_attrs_neonatal_death}>
+			<label>{$label public_surgical_case_summary_view neonatal_death }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_neonatal_death}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_neonatal_death}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_neonatal_death}</span>
+						</div>
+		{END searchCtrlBlock_neonatal_death}
+																{BEGIN searchCtrlBlock_location_of_surgery}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_location_of_surgery}" {$filterRow_attrs_location_of_surgery}>
+			<label>{$label public_surgical_case_summary_view location_of_surgery }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_location_of_surgery}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_location_of_surgery}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_location_of_surgery}</span>
+						</div>
+		{END searchCtrlBlock_location_of_surgery}
+																{BEGIN searchCtrlBlock_follow_up_status}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_follow_up_status}" {$filterRow_attrs_follow_up_status}>
+			<label>{$label public_surgical_case_summary_view follow_up_status }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_follow_up_status}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_follow_up_status}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_follow_up_status}</span>
+						</div>
+		{END searchCtrlBlock_follow_up_status}
+																{BEGIN searchCtrlBlock_fetal_death}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_fetal_death}" {$filterRow_attrs_fetal_death}>
+			<label>{$label public_surgical_case_summary_view fetal_death }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_fetal_death}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_fetal_death}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_fetal_death}</span>
+						</div>
+		{END searchCtrlBlock_fetal_death}
+																{BEGIN searchCtrlBlock_facility_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_facility_name}" {$filterRow_attrs_facility_name}>
+			<label>{$label public_surgical_case_summary_view facility_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_facility_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_facility_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_facility_name}</span>
+						</div>
+		{END searchCtrlBlock_facility_name}
+																{BEGIN searchCtrlBlock_diagnosis_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_diagnosis_name}" {$filterRow_attrs_diagnosis_name}>
+			<label>{$label public_surgical_case_summary_view diagnosis_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_diagnosis_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_diagnosis_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_diagnosis_name}</span>
+						</div>
+		{END searchCtrlBlock_diagnosis_name}
+																{BEGIN searchCtrlBlock_death_in_ward}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_death_in_ward}" {$filterRow_attrs_death_in_ward}>
+			<label>{$label public_surgical_case_summary_view death_in_ward }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_death_in_ward}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_death_in_ward}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_death_in_ward}</span>
+						</div>
+		{END searchCtrlBlock_death_in_ward}
+																{BEGIN searchCtrlBlock_death_in_or}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_death_in_or}" {$filterRow_attrs_death_in_or}>
+			<label>{$label public_surgical_case_summary_view death_in_or }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_death_in_or}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_death_in_or}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_death_in_or}</span>
+						</div>
+		{END searchCtrlBlock_death_in_or}
+																{BEGIN searchCtrlBlock_data_type}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_data_type}" {$filterRow_attrs_data_type}>
+			<label>{$label public_surgical_case_summary_view data_type }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_data_type}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_data_type}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_data_type}</span>
+						</div>
+		{END searchCtrlBlock_data_type}
+																{BEGIN searchCtrlBlock_data_collector_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_data_collector_name}" {$filterRow_attrs_data_collector_name}>
+			<label>{$label public_surgical_case_summary_view data_collector_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_data_collector_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_data_collector_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_data_collector_name}</span>
+						</div>
+		{END searchCtrlBlock_data_collector_name}
+																{BEGIN searchCtrlBlock_country_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_country_name}" {$filterRow_attrs_country_name}>
+			<label>{$label public_surgical_case_summary_view country_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_country_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_country_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_country_name}</span>
+						</div>
+		{END searchCtrlBlock_country_name}
+																{BEGIN searchCtrlBlock_case_type}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_case_type}" {$filterRow_attrs_case_type}>
+			<label>{$label public_surgical_case_summary_view case_type }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_case_type}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_case_type}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_case_type}</span>
+						</div>
+		{END searchCtrlBlock_case_type}
+		
+
+	</div>
+
+	<div class="panel-footer bottomSearchButt" {$bottomSearchButt_attrs}>
+		<button class="btn btn-primary btn-sm" id="searchButton{$id}" {$searchbutton_attrs}>Search</button>
+
+				<button class="btn btn-default btn-sm" {$showAllCont_attrs} {$showallbutton_attrs}>Show all</button>
+	</div>
+</div>
+<!-- End Search panel content -->
+			</div>
+		
+    {END left_block}
+</div>				</div>
+			<div class="r-content-col" data-resize-left="leftbar">
+				<div data-resize-left="leftbar"  data-fixed class="r-topheader" data-resize-name="topbar">
+									{BEGIN supertop_block}
+<nav class="navbar navbar-default" 
+	data-location="supertop" id="form_supertop_{$pageid}" data-makeup="leftbar" {$form_supertop} data-pageid="{$pageid}" >
+			 
+							 
+				<span class="navbar-form  navbar-header" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="expand_menu_button" {$item_expand_menu_button} data-topcell-item-type="expand_menu_button" >
+				<span data-itemtype="expand_menu_button" data-itemid="expand_menu_button" {$item_expand_menu_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Show menu" class="btn-link   
+	 glyphicon glyphicon-menu-hamburger" href="#" >		
+				
+								</a>
+</span>
+			</span>
+		 
+				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="collapse_button" {$item_collapse_button} data-topcell-item-type="collapse_button" >
+				<span data-itemtype="collapse_button" data-itemid="collapse_button" {$item_collapse_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Collapse" class="btn-link   
+	 glyphicon glyphicon-triangle-left" href="#" >		
+				
+								</a>
+</span>
+			</span>
+		 
+				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="breadcrumb" {$item_breadcrumb} data-topcell-item-type="breadcrumb" >
+				{BEGIN breadcrumb}
+<ol class="breadcrumb" data-itemtype="breadcrumb" data-itemid="breadcrumb" {$item_breadcrumb} data-pageid="{$pageid}">
+<li ><a href="{$crumb_home_link}"><span class="glyphicon glyphicon-home"></span></a>{$crumb_dropdown}</li>
+{BEGIN crumb}
+  <li class="{$crumb_item_class}">
+{BEGIN crumb_title_link}
+	<a {$crumb_attrs}>{$crumb_title}</a>
+{END crumb_title_link}
+{BEGIN crumb_title_span}
+	<span {$crumb_attrs}>{$crumb_title}</span>
+{END crumb_title_span}	
+	{$crumb_dropdown}
+  </li>
+{END crumb}
+</ol>
+{END breadcrumb}			</span>
+							 
+							 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="simple_search" {$item_simple_search} data-topcell-item-type="simple_search" >
+				<span data-itemtype="simple_search" data-itemid="simple_search" {$item_simple_search} data-pageid="{$pageid}" class="form-group">
+
+<div  class="input-group">
+{BEGIN searchform_text}
+	<input type="search" class="form-control" {$searchfor_attrs} size="25">
+{END searchform_text}
+	<span class="input-group-btn">
+	{BEGIN searchform_showall}
+				<button class="btn btn-default" {$showAllCont_attrs} {$showallbutton_attrs} title="Show all">
+			<span class="glyphicon glyphicon-remove"></span>
+		</button>
+	{END searchform_showall}
+
+	{BEGIN searchform_search}
+	<button {$searchbutton_attrs} class="btn btn-primary" >
+		<span class="glyphicon glyphicon-search"></span>
+	</button>
+	{END searchform_search}
+	</span>
+</div>
+		
+</span>			</span>
+		 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="list_options" {$item_list_options} data-topcell-item-type="list_options" >
+				<span data-itemtype="list_options" data-itemid="list_options" {$item_list_options} data-pageid="{$pageid}" data-small data-button-item>
+	<span class="dropdown ">
+		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
+										<span class="glyphicon glyphicon-cog"></span>
+												<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+								<li data-itemtype="advsearch_link" data-itemid="advsearch_link" {$item_advsearch_link} data-pageid="{$pageid}" data-small >
+				<a   href="surgical_case_summary_view_search.php{$stateLink_full}" {$advsearchlink_attrs}  title="" >
+				
+		Advanced search		
+		</a>
+	</li>
+							{BEGIN searchPanelTopButtons}
+	<li data-itemtype="show_search_panel" data-itemid="show_search_panel" {$item_show_search_panel} data-pageid="{$pageid}" data-small >
+				<a  id="showOptPanel{$id}"  title="" >
+				
+		Show search panel		
+		</a>
+	</li>
+{END searchPanelTopButtons}
+							{BEGIN searchPanelTopButtons}
+	<li data-itemtype="hide_search_panel" data-itemid="hide_search_panel" {$item_hide_search_panel} data-pageid="{$pageid}" data-small >
+				<a  id="hideOptPanel{$id}"  title="" >
+				
+		Hide search panel		
+		</a>
+	</li>
+{END searchPanelTopButtons}
+							<li role="separator" class="divider"></li>							{BEGIN export_link}
+	<li data-itemtype="export" data-itemid="export" {$item_export} data-pageid="{$pageid}" data-small >
+				<a  href="#" {$exportlink_attrs}  title="" >
+				
+		Export results		
+		</a>
+	</li>
+{END export_link}
+							<li role="separator" class="divider"></li>							{BEGIN import_link}
+	<li data-itemtype="import" data-itemid="import" {$item_import} data-pageid="{$pageid}" data-small >
+				<a  {$importlink_attrs} href="surgical_case_summary_view_import.php{$stateLink_full}"  title="" >
+				
+		Import		
+		</a>
+	</li>
+{END import_link}
+					</ul>
+	</span>
+</span>
+			</span>
+								</nav>
+{END supertop_block}
+						{$locking}
+				</div>
+				<div class="r-body" data-resize-top="topbar" data-body-width="standard">
+					{$header}
+					<div class="r-top">
+									{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="leftbar" {$form_top} data-pageid="{$pageid}" >		
+	</div>		
+{END top_block}
+						</div>
+											<div class="r-grid"
+			data-responsive
+	>
+	{BEGIN grid_tabs}
+  <ul class="nav nav-tabs bsgrid_tabs">
+	{$grid_tabs_content}
+  </ul>
+{END grid_tabs}
+	<div class="panel panel-default"
+	>
+		<div class="panel-heading">
+							{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="leftbar" {$form_above-grid} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-6
+	
+">
+		{BEGIN firstAboveGridCell}
+				{END firstAboveGridCell}	
+	</div>			 
+				<div 
+	data-cellId="above-grid_c2" data-pageid="{$pageid}"	{$cell_above-grid_c2}
+	class="r-align-right			col-md-6
+	
+">
+		 
+		<span data-itemtype="details_found" data-itemid="details_found" {$item_details_found} data-pageid="{$pageid}" data-small >
+{$mlp_push}{$mlparam first var first_shown}{$mlparam last var last_shown}{$mlparam total var records_found}{mlang_message DISPLAYING}{$mlp_pop}</span>	 
+		<span data-itemtype="page_size" data-itemid="page_size" {$item_page_size} data-pageid="{$pageid}" >
+		{$recsPerPage}
+</span>	 
+		{BEGIN print_friendly}
+<span id="printpanelblock{$id}"  data-pageid="{$pageid}" {$printpanel_hiddenattr} data-itemtype="print_panel" data-itemid="print_panel" {$item_print_panel} data-pageid="{$pageid}">
+	<button title="Print-friendly page" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					<span class="glyphicon glyphicon-print"></span>
+				<span class="caret"></span>
+	</button>
+	<ul class="dropdown-menu pull-right">
+										 
+				 
+					<li class="container-fluid 
+										">
+									<div id="print_friendly_scope{$id}">
+	<div class="row">
+		<div class="col-md-4">
+			Scope:		</div>
+
+			 
+		{BEGIN print_friendly_all}
+		<div class="col-md-8">
+			<label for="printAll{$id}">
+				<input type="radio" id="printAll{$id}" data-href="surgical_case_summary_view_print.php?all=1&amp;{$crosstable_attrs}" name="printScope" >
+									Print all pages							</label>
+		</div>
+		{END print_friendly_all}
+		</div>
+		<div class="row">
+		<div class="col-md-4">&nbsp;</div>
+		<div class="col-md-8">
+			<label for="printPage{$id}">
+				<input name="printScope" id="printPage{$id}" type="radio" checked data-href="surgical_case_summary_view_print.php?{$crosstable_attrs}">
+				Print this page			</label>
+		</div>
+	</div>
+		
+	</div>
+				 
+					</li>
+											<li class="divider" role="separator"></li>
+																				 
+				 
+					<li class="container-fluid 
+										">
+									<div>
+	<label for="printPerPage{$id}">
+					Records Per Page							
+	</label>
+	<input type="number" id="printPerPage{$id}" value="{$print_recspp}" class="rnr-printrecspp">		
+</div>
+				 
+					</li>
+											<li class="divider" role="separator"></li>
+																				 
+				 
+					<li class="container-fluid 
+					 text-center 					">
+									<span data-itemtype="print_button" data-itemid="print_button" {$item_print_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" id="print_friendly_button{$id}" >
+							Print			</a>
+</span>
+				 
+					</li>
+															</ul>
+</span>
+{END print_friendly}
+		</div>					</div>
+			</div>		
+{END above-grid_block}
+			</div>
+
+					{BEGIN grid_block}
+{BEGIN message_block}
+<div data-grid-message data-pageid="{$pageid}" class="alert {$message_class}" role="alert" {$grid_message_attrs}>{$message}</div>
+{END message_block}	<style>
+@media screen and (max-width: 767px) {
+		[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="case_id"]:before {
+		content: "{$label public_surgical_case_summary_view case_id}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="facility_name"]:before {
+		content: "{$label public_surgical_case_summary_view facility_name}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="country_name"]:before {
+		content: "{$label public_surgical_case_summary_view country_name}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="surgery_date"]:before {
+		content: "{$label public_surgical_case_summary_view surgery_date}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="data_type"]:before {
+		content: "{$label public_surgical_case_summary_view data_type}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="data_collector_name"]:before {
+		content: "{$label public_surgical_case_summary_view data_collector_name}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="location_of_surgery"]:before {
+		content: "{$label public_surgical_case_summary_view location_of_surgery}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="patient_sex"]:before {
+		content: "{$label public_surgical_case_summary_view patient_sex}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="patient_age"]:before {
+		content: "{$label public_surgical_case_summary_view patient_age}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="procedure_name"]:before {
+		content: "{$label public_surgical_case_summary_view procedure_name}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="diagnosis_name"]:before {
+		content: "{$label public_surgical_case_summary_view diagnosis_name}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="wound_classification"]:before {
+		content: "{$label public_surgical_case_summary_view wound_classification}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="case_type"]:before {
+		content: "{$label public_surgical_case_summary_view case_type}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="death_in_or"]:before {
+		content: "{$label public_surgical_case_summary_view death_in_or}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="fetal_death"]:before {
+		content: "{$label public_surgical_case_summary_view fetal_death}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="death_in_ward"]:before {
+		content: "{$label public_surgical_case_summary_view death_in_ward}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="neonatal_death"]:before {
+		content: "{$label public_surgical_case_summary_view neonatal_death}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="follow_up_status"]:before {
+		content: "{$label public_surgical_case_summary_view follow_up_status}";
+	}
+	}
+</style>
+<table data-location="grid" id="form_grid_{$pageid}" data-makeup="leftbar" {$form_grid} data-pageid="{$pageid}" class=" table table-condensed table-striped table-hover table-bordered r-horizontal-grid  r-flexgrid rnr-b-grid rnr-gridtable"
+	cellpadding="0"
+	data-body-height="1"
+>
+						<thead>
+			{BEGIN grid_header}
+			
+																									<tr {$rowattrs} {$row_grid_0} class="{$rowclass}
+									{$gridHeader_class}
+					
+								r-gridrow
+							">
+									{BEGIN cellblock_grid_headcell_checkbox}
+	<th
+	
+	{$cell_grid_headcell_checkbox}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_headcell_checkbox" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="surgical_case_summary_view_list"	
+		data-checkbox-cell
+	>
+
+	 
+		{BEGIN checkbox_column}
+<span data-itemtype="grid_checkbox_head" data-itemid="grid_checkbox_head" {$item_grid_checkbox_head} data-pageid="{$pageid}" data-record-id="{$recId}" >
+	<input type="checkbox" {$checkboxheader_attrs}>
+</span>
+{END checkbox_column}
+	
+	</th>
+	{END cellblock_grid_headcell_checkbox}
+									{BEGIN cellblock_grid_headcell_field}
+	<th
+	
+	{$cell_grid_headcell_field}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$case_id_class}	"
+
+			data-field="case_id"
+	
+	data-cellId="grid_headcell_field" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN case_id_fieldheadercolumn}
+	{BEGIN case_id_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field18" {$item_simple_grid_field18} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="case_id" data-fieldname="case_id" 
+
+			{$case_id_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_surgical_case_summary_view case_id }</span>
+					{$arrow_icon_case_id}
+			</span>
+	</span>
+	{END case_id_fieldheader}
+{END case_id_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field}
+									{BEGIN cellblock_grid_headcell_field1}
+	<th
+	
+	{$cell_grid_headcell_field1}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$facility_name_class}	"
+
+			data-field="facility_name"
+	
+	data-cellId="grid_headcell_field1" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN facility_name_fieldheadercolumn}
+	{BEGIN facility_name_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field19" {$item_simple_grid_field19} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="facility_name" data-fieldname="facility_name" 
+
+			{$facility_name_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_surgical_case_summary_view facility_name }</span>
+					{$arrow_icon_facility_name}
+			</span>
+	</span>
+	{END facility_name_fieldheader}
+{END facility_name_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field1}
+									{BEGIN cellblock_grid_headcell_field2}
+	<th
+	
+	{$cell_grid_headcell_field2}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$country_name_class}	"
+
+			data-field="country_name"
+	
+	data-cellId="grid_headcell_field2" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN country_name_fieldheadercolumn}
+	{BEGIN country_name_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field20" {$item_simple_grid_field20} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="country_name" data-fieldname="country_name" 
+
+			{$country_name_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_surgical_case_summary_view country_name }</span>
+					{$arrow_icon_country_name}
+			</span>
+	</span>
+	{END country_name_fieldheader}
+{END country_name_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field2}
+									{BEGIN cellblock_grid_headcell_field3}
+	<th
+	
+	{$cell_grid_headcell_field3}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$surgery_date_class}	"
+
+			data-field="surgery_date"
+	
+	data-cellId="grid_headcell_field3" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN surgery_date_fieldheadercolumn}
+	{BEGIN surgery_date_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field21" {$item_simple_grid_field21} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="surgery_date" data-fieldname="surgery_date" 
+
+			{$surgery_date_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_surgical_case_summary_view surgery_date }</span>
+					{$arrow_icon_surgery_date}
+			</span>
+	</span>
+	{END surgery_date_fieldheader}
+{END surgery_date_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field3}
+									{BEGIN cellblock_grid_headcell_field4}
+	<th
+	
+	{$cell_grid_headcell_field4}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$data_type_class}	"
+
+			data-field="data_type"
+	
+	data-cellId="grid_headcell_field4" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN data_type_fieldheadercolumn}
+	{BEGIN data_type_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field22" {$item_simple_grid_field22} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="data_type" data-fieldname="data_type" 
+
+			{$data_type_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_surgical_case_summary_view data_type }</span>
+					{$arrow_icon_data_type}
+			</span>
+	</span>
+	{END data_type_fieldheader}
+{END data_type_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field4}
+									{BEGIN cellblock_grid_headcell_field5}
+	<th
+	
+	{$cell_grid_headcell_field5}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$data_collector_name_class}	"
+
+			data-field="data_collector_name"
+	
+	data-cellId="grid_headcell_field5" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN data_collector_name_fieldheadercolumn}
+	{BEGIN data_collector_name_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field23" {$item_simple_grid_field23} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="data_collector_name" data-fieldname="data_collector_name" 
+
+			{$data_collector_name_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_surgical_case_summary_view data_collector_name }</span>
+					{$arrow_icon_data_collector_name}
+			</span>
+	</span>
+	{END data_collector_name_fieldheader}
+{END data_collector_name_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field5}
+									{BEGIN cellblock_grid_headcell_field6}
+	<th
+	
+	{$cell_grid_headcell_field6}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$location_of_surgery_class}	"
+
+			data-field="location_of_surgery"
+	
+	data-cellId="grid_headcell_field6" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN location_of_surgery_fieldheadercolumn}
+	{BEGIN location_of_surgery_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field24" {$item_simple_grid_field24} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="location_of_surgery" data-fieldname="location_of_surgery" 
+
+			{$location_of_surgery_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_surgical_case_summary_view location_of_surgery }</span>
+					{$arrow_icon_location_of_surgery}
+			</span>
+	</span>
+	{END location_of_surgery_fieldheader}
+{END location_of_surgery_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field6}
+									{BEGIN cellblock_grid_headcell_field7}
+	<th
+	
+	{$cell_grid_headcell_field7}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$patient_sex_class}	"
+
+			data-field="patient_sex"
+	
+	data-cellId="grid_headcell_field7" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN patient_sex_fieldheadercolumn}
+	{BEGIN patient_sex_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field25" {$item_simple_grid_field25} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="patient_sex" data-fieldname="patient_sex" 
+
+			{$patient_sex_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_surgical_case_summary_view patient_sex }</span>
+					{$arrow_icon_patient_sex}
+			</span>
+	</span>
+	{END patient_sex_fieldheader}
+{END patient_sex_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field7}
+									{BEGIN cellblock_grid_headcell_field8}
+	<th
+	
+	{$cell_grid_headcell_field8}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$patient_age_class}	"
+
+			data-field="patient_age"
+	
+	data-cellId="grid_headcell_field8" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN patient_age_fieldheadercolumn}
+	{BEGIN patient_age_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field26" {$item_simple_grid_field26} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="patient_age" data-fieldname="patient_age" 
+
+			{$patient_age_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_surgical_case_summary_view patient_age }</span>
+					{$arrow_icon_patient_age}
+			</span>
+	</span>
+	{END patient_age_fieldheader}
+{END patient_age_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field8}
+									{BEGIN cellblock_grid_headcell_field9}
+	<th
+	
+	{$cell_grid_headcell_field9}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$procedure_name_class}	"
+
+			data-field="procedure_name"
+	
+	data-cellId="grid_headcell_field9" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN procedure_name_fieldheadercolumn}
+	{BEGIN procedure_name_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field27" {$item_simple_grid_field27} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="procedure_name" data-fieldname="procedure_name" 
+
+			{$procedure_name_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_surgical_case_summary_view procedure_name }</span>
+					{$arrow_icon_procedure_name}
+			</span>
+	</span>
+	{END procedure_name_fieldheader}
+{END procedure_name_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field9}
+									{BEGIN cellblock_grid_headcell_field10}
+	<th
+	
+	{$cell_grid_headcell_field10}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$diagnosis_name_class}	"
+
+			data-field="diagnosis_name"
+	
+	data-cellId="grid_headcell_field10" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN diagnosis_name_fieldheadercolumn}
+	{BEGIN diagnosis_name_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field28" {$item_simple_grid_field28} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="diagnosis_name" data-fieldname="diagnosis_name" 
+
+			{$diagnosis_name_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_surgical_case_summary_view diagnosis_name }</span>
+					{$arrow_icon_diagnosis_name}
+			</span>
+	</span>
+	{END diagnosis_name_fieldheader}
+{END diagnosis_name_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field10}
+									{BEGIN cellblock_grid_headcell_field11}
+	<th
+	
+	{$cell_grid_headcell_field11}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$wound_classification_class}	"
+
+			data-field="wound_classification"
+	
+	data-cellId="grid_headcell_field11" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN wound_classification_fieldheadercolumn}
+	{BEGIN wound_classification_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field29" {$item_simple_grid_field29} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="wound_classification" data-fieldname="wound_classification" 
+
+			{$wound_classification_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_surgical_case_summary_view wound_classification }</span>
+					{$arrow_icon_wound_classification}
+			</span>
+	</span>
+	{END wound_classification_fieldheader}
+{END wound_classification_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field11}
+									{BEGIN cellblock_grid_headcell_field12}
+	<th
+	
+	{$cell_grid_headcell_field12}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$case_type_class}	"
+
+			data-field="case_type"
+	
+	data-cellId="grid_headcell_field12" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN case_type_fieldheadercolumn}
+	{BEGIN case_type_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field30" {$item_simple_grid_field30} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="case_type" data-fieldname="case_type" 
+
+			{$case_type_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_surgical_case_summary_view case_type }</span>
+					{$arrow_icon_case_type}
+			</span>
+	</span>
+	{END case_type_fieldheader}
+{END case_type_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field12}
+									{BEGIN cellblock_grid_headcell_field13}
+	<th
+	
+	{$cell_grid_headcell_field13}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$death_in_or_class}	"
+
+			data-field="death_in_or"
+	
+	data-cellId="grid_headcell_field13" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN death_in_or_fieldheadercolumn}
+	{BEGIN death_in_or_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field31" {$item_simple_grid_field31} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="death_in_or" data-fieldname="death_in_or" 
+
+			{$death_in_or_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_surgical_case_summary_view death_in_or }</span>
+					{$arrow_icon_death_in_or}
+			</span>
+	</span>
+	{END death_in_or_fieldheader}
+{END death_in_or_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field13}
+									{BEGIN cellblock_grid_headcell_field14}
+	<th
+	
+	{$cell_grid_headcell_field14}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$fetal_death_class}	"
+
+			data-field="fetal_death"
+	
+	data-cellId="grid_headcell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN fetal_death_fieldheadercolumn}
+	{BEGIN fetal_death_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field32" {$item_simple_grid_field32} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="fetal_death" data-fieldname="fetal_death" 
+
+			{$fetal_death_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_surgical_case_summary_view fetal_death }</span>
+					{$arrow_icon_fetal_death}
+			</span>
+	</span>
+	{END fetal_death_fieldheader}
+{END fetal_death_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field14}
+									{BEGIN cellblock_grid_headcell_field15}
+	<th
+	
+	{$cell_grid_headcell_field15}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$death_in_ward_class}	"
+
+			data-field="death_in_ward"
+	
+	data-cellId="grid_headcell_field15" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN death_in_ward_fieldheadercolumn}
+	{BEGIN death_in_ward_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field33" {$item_simple_grid_field33} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="death_in_ward" data-fieldname="death_in_ward" 
+
+			{$death_in_ward_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_surgical_case_summary_view death_in_ward }</span>
+					{$arrow_icon_death_in_ward}
+			</span>
+	</span>
+	{END death_in_ward_fieldheader}
+{END death_in_ward_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field15}
+									{BEGIN cellblock_grid_headcell_field16}
+	<th
+	
+	{$cell_grid_headcell_field16}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$neonatal_death_class}	"
+
+			data-field="neonatal_death"
+	
+	data-cellId="grid_headcell_field16" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN neonatal_death_fieldheadercolumn}
+	{BEGIN neonatal_death_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field34" {$item_simple_grid_field34} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="neonatal_death" data-fieldname="neonatal_death" 
+
+			{$neonatal_death_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_surgical_case_summary_view neonatal_death }</span>
+					{$arrow_icon_neonatal_death}
+			</span>
+	</span>
+	{END neonatal_death_fieldheader}
+{END neonatal_death_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field16}
+									{BEGIN cellblock_grid_headcell_field17}
+	<th
+	
+	{$cell_grid_headcell_field17}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$follow_up_status_class}	"
+
+			data-field="follow_up_status"
+	
+	data-cellId="grid_headcell_field17" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN follow_up_status_fieldheadercolumn}
+	{BEGIN follow_up_status_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field35" {$item_simple_grid_field35} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="follow_up_status" data-fieldname="follow_up_status" 
+
+			{$follow_up_status_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_surgical_case_summary_view follow_up_status }</span>
+					{$arrow_icon_follow_up_status}
+			</span>
+	</span>
+	{END follow_up_status_fieldheader}
+{END follow_up_status_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field17}
+							</tr>
+															
+					{END grid_header}
+			</thead>
+															<tbody>
+					{BEGIN grid_row}
+							
+																														<tr {$rowattrs} {$row_grid_1} class="{$rowclass}
+				
+								r-gridrow
+							">
+									{BEGIN cellblock_grid_cell_checkbox}
+	<td
+	
+	{$cell_grid_cell_checkbox}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_cell_checkbox" data-pageid="{$pageid}" data-record-id="{$recId}"		data-control-cell
+	
+		data-checkbox-cell
+	>
+
+	 
+		{BEGIN checkbox_column}
+<span data-itemtype="grid_checkbox" data-itemid="grid_checkbox" {$item_grid_checkbox} data-pageid="{$pageid}" data-record-id="{$recId}" >
+	<input type="checkbox" {$checkbox_attrs}
+		>
+</span>	
+{END checkbox_column}
+	
+	</td>
+	{END cellblock_grid_cell_checkbox}
+									{BEGIN cellblock_grid_cell_field}
+	<td
+	
+	{$cell_grid_cell_field}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$case_id_class}	"
+
+			data-field="case_id"
+	
+	data-cellId="grid_cell_field" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN case_id_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field" {$item_simple_grid_field} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="case_id" data-fieldname="case_id" data-default-width >
+{$case_id_value}
+</span>
+{END case_id_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field}
+									{BEGIN cellblock_grid_cell_field1}
+	<td
+	
+	{$cell_grid_cell_field1}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$facility_name_class}	"
+
+			data-field="facility_name"
+	
+	data-cellId="grid_cell_field1" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN facility_name_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field1" {$item_simple_grid_field1} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="facility_name" data-fieldname="facility_name" data-default-width >
+{$facility_name_value}
+</span>
+{END facility_name_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field1}
+									{BEGIN cellblock_grid_cell_field2}
+	<td
+	
+	{$cell_grid_cell_field2}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$country_name_class}	"
+
+			data-field="country_name"
+	
+	data-cellId="grid_cell_field2" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN country_name_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field2" {$item_simple_grid_field2} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="country_name" data-fieldname="country_name" data-default-width >
+{$country_name_value}
+</span>
+{END country_name_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field2}
+									{BEGIN cellblock_grid_cell_field3}
+	<td
+	
+	{$cell_grid_cell_field3}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$surgery_date_class}	"
+
+			data-field="surgery_date"
+	
+	data-cellId="grid_cell_field3" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN surgery_date_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field3" {$item_simple_grid_field3} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="surgery_date" data-fieldname="surgery_date" data-default-width >
+{$surgery_date_value}
+</span>
+{END surgery_date_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field3}
+									{BEGIN cellblock_grid_cell_field4}
+	<td
+	
+	{$cell_grid_cell_field4}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$data_type_class}	"
+
+			data-field="data_type"
+	
+	data-cellId="grid_cell_field4" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN data_type_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field4" {$item_simple_grid_field4} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="data_type" data-fieldname="data_type" data-default-width >
+{$data_type_value}
+</span>
+{END data_type_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field4}
+									{BEGIN cellblock_grid_cell_field5}
+	<td
+	
+	{$cell_grid_cell_field5}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$data_collector_name_class}	"
+
+			data-field="data_collector_name"
+	
+	data-cellId="grid_cell_field5" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN data_collector_name_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field5" {$item_simple_grid_field5} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="data_collector_name" data-fieldname="data_collector_name" data-default-width >
+{$data_collector_name_value}
+</span>
+{END data_collector_name_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field5}
+									{BEGIN cellblock_grid_cell_field6}
+	<td
+	
+	{$cell_grid_cell_field6}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$location_of_surgery_class}	"
+
+			data-field="location_of_surgery"
+	
+	data-cellId="grid_cell_field6" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN location_of_surgery_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field6" {$item_simple_grid_field6} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="location_of_surgery" data-fieldname="location_of_surgery" data-default-width >
+{$location_of_surgery_value}
+</span>
+{END location_of_surgery_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field6}
+									{BEGIN cellblock_grid_cell_field7}
+	<td
+	
+	{$cell_grid_cell_field7}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$patient_sex_class}	"
+
+			data-field="patient_sex"
+	
+	data-cellId="grid_cell_field7" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN patient_sex_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field7" {$item_simple_grid_field7} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="patient_sex" data-fieldname="patient_sex" data-default-width >
+{$patient_sex_value}
+</span>
+{END patient_sex_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field7}
+									{BEGIN cellblock_grid_cell_field8}
+	<td
+	
+	{$cell_grid_cell_field8}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$patient_age_class}	"
+
+			data-field="patient_age"
+	
+	data-cellId="grid_cell_field8" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN patient_age_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field8" {$item_simple_grid_field8} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="patient_age" data-fieldname="patient_age" data-default-width >
+{$patient_age_value}
+</span>
+{END patient_age_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field8}
+									{BEGIN cellblock_grid_cell_field9}
+	<td
+	
+	{$cell_grid_cell_field9}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$procedure_name_class}	"
+
+			data-field="procedure_name"
+	
+	data-cellId="grid_cell_field9" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN procedure_name_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field9" {$item_simple_grid_field9} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="procedure_name" data-fieldname="procedure_name" data-default-width >
+{$procedure_name_value}
+</span>
+{END procedure_name_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field9}
+									{BEGIN cellblock_grid_cell_field10}
+	<td
+	
+	{$cell_grid_cell_field10}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$diagnosis_name_class}	"
+
+			data-field="diagnosis_name"
+	
+	data-cellId="grid_cell_field10" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN diagnosis_name_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field10" {$item_simple_grid_field10} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="diagnosis_name" data-fieldname="diagnosis_name" data-default-width >
+{$diagnosis_name_value}
+</span>
+{END diagnosis_name_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field10}
+									{BEGIN cellblock_grid_cell_field11}
+	<td
+	
+	{$cell_grid_cell_field11}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$wound_classification_class}	"
+
+			data-field="wound_classification"
+	
+	data-cellId="grid_cell_field11" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN wound_classification_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field11" {$item_simple_grid_field11} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="wound_classification" data-fieldname="wound_classification" data-default-width >
+{$wound_classification_value}
+</span>
+{END wound_classification_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field11}
+									{BEGIN cellblock_grid_cell_field12}
+	<td
+	
+	{$cell_grid_cell_field12}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$case_type_class}	"
+
+			data-field="case_type"
+	
+	data-cellId="grid_cell_field12" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN case_type_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field12" {$item_simple_grid_field12} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="case_type" data-fieldname="case_type" data-default-width >
+{$case_type_value}
+</span>
+{END case_type_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field12}
+									{BEGIN cellblock_grid_cell_field13}
+	<td
+	
+	{$cell_grid_cell_field13}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$death_in_or_class}	"
+
+			data-field="death_in_or"
+	
+	data-cellId="grid_cell_field13" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN death_in_or_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field13" {$item_simple_grid_field13} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="death_in_or" data-fieldname="death_in_or" data-default-width >
+{$death_in_or_value}
+</span>
+{END death_in_or_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field13}
+									{BEGIN cellblock_grid_cell_field14}
+	<td
+	
+	{$cell_grid_cell_field14}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$fetal_death_class}	"
+
+			data-field="fetal_death"
+	
+	data-cellId="grid_cell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN fetal_death_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field14" {$item_simple_grid_field14} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="fetal_death" data-fieldname="fetal_death" data-default-width >
+{$fetal_death_value}
+</span>
+{END fetal_death_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field14}
+									{BEGIN cellblock_grid_cell_field15}
+	<td
+	
+	{$cell_grid_cell_field15}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$death_in_ward_class}	"
+
+			data-field="death_in_ward"
+	
+	data-cellId="grid_cell_field15" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN death_in_ward_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field15" {$item_simple_grid_field15} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="death_in_ward" data-fieldname="death_in_ward" data-default-width >
+{$death_in_ward_value}
+</span>
+{END death_in_ward_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field15}
+									{BEGIN cellblock_grid_cell_field16}
+	<td
+	
+	{$cell_grid_cell_field16}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$neonatal_death_class}	"
+
+			data-field="neonatal_death"
+	
+	data-cellId="grid_cell_field16" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN neonatal_death_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field16" {$item_simple_grid_field16} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="neonatal_death" data-fieldname="neonatal_death" data-default-width >
+{$neonatal_death_value}
+</span>
+{END neonatal_death_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field16}
+									{BEGIN cellblock_grid_cell_field17}
+	<td
+	
+	{$cell_grid_cell_field17}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$follow_up_status_class}	"
+
+			data-field="follow_up_status"
+	
+	data-cellId="grid_cell_field17" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN follow_up_status_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field17" {$item_simple_grid_field17} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="follow_up_status" data-fieldname="follow_up_status" data-default-width >
+{$follow_up_status_value}
+</span>
+{END follow_up_status_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field17}
+							</tr>
+										
+											{END grid_row}
+					</tbody>
+													<tfoot>
+			
+																																			<tr {$rowattrs} {$row_grid_2} class="{$rowclass}
+									{$gridFooter_class}
+					
+								r-gridrow
+							">
+									{BEGIN cellblock_grid_footcell_checkbox}
+	<td
+	
+	{$cell_grid_footcell_checkbox}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_footcell_checkbox" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_checkbox}
+									{BEGIN cellblock_grid_footcell_field}
+	<td
+	
+	{$cell_grid_footcell_field}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$case_id_class}	"
+
+	
+	data-cellId="grid_footcell_field" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="surgical_case_summary_view_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field}
+									{BEGIN cellblock_grid_footcell_field1}
+	<td
+	
+	{$cell_grid_footcell_field1}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$facility_name_class}	"
+
+	
+	data-cellId="grid_footcell_field1" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="surgical_case_summary_view_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field1}
+									{BEGIN cellblock_grid_footcell_field2}
+	<td
+	
+	{$cell_grid_footcell_field2}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$country_name_class}	"
+
+	
+	data-cellId="grid_footcell_field2" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="surgical_case_summary_view_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field2}
+									{BEGIN cellblock_grid_footcell_field3}
+	<td
+	
+	{$cell_grid_footcell_field3}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$surgery_date_class}	"
+
+	
+	data-cellId="grid_footcell_field3" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="surgical_case_summary_view_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field3}
+									{BEGIN cellblock_grid_footcell_field4}
+	<td
+	
+	{$cell_grid_footcell_field4}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$data_type_class}	"
+
+	
+	data-cellId="grid_footcell_field4" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="surgical_case_summary_view_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field4}
+									{BEGIN cellblock_grid_footcell_field5}
+	<td
+	
+	{$cell_grid_footcell_field5}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$data_collector_name_class}	"
+
+	
+	data-cellId="grid_footcell_field5" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="surgical_case_summary_view_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field5}
+									{BEGIN cellblock_grid_footcell_field6}
+	<td
+	
+	{$cell_grid_footcell_field6}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$location_of_surgery_class}	"
+
+	
+	data-cellId="grid_footcell_field6" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="surgical_case_summary_view_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field6}
+									{BEGIN cellblock_grid_footcell_field7}
+	<td
+	
+	{$cell_grid_footcell_field7}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$patient_sex_class}	"
+
+	
+	data-cellId="grid_footcell_field7" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="surgical_case_summary_view_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field7}
+									{BEGIN cellblock_grid_footcell_field8}
+	<td
+	
+	{$cell_grid_footcell_field8}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$patient_age_class}	"
+
+	
+	data-cellId="grid_footcell_field8" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="surgical_case_summary_view_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field8}
+									{BEGIN cellblock_grid_footcell_field9}
+	<td
+	
+	{$cell_grid_footcell_field9}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$procedure_name_class}	"
+
+	
+	data-cellId="grid_footcell_field9" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="surgical_case_summary_view_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field9}
+									{BEGIN cellblock_grid_footcell_field10}
+	<td
+	
+	{$cell_grid_footcell_field10}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$diagnosis_name_class}	"
+
+	
+	data-cellId="grid_footcell_field10" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="surgical_case_summary_view_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field10}
+									{BEGIN cellblock_grid_footcell_field11}
+	<td
+	
+	{$cell_grid_footcell_field11}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$wound_classification_class}	"
+
+	
+	data-cellId="grid_footcell_field11" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="surgical_case_summary_view_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field11}
+									{BEGIN cellblock_grid_footcell_field12}
+	<td
+	
+	{$cell_grid_footcell_field12}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$case_type_class}	"
+
+	
+	data-cellId="grid_footcell_field12" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="surgical_case_summary_view_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field12}
+									{BEGIN cellblock_grid_footcell_field13}
+	<td
+	
+	{$cell_grid_footcell_field13}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$death_in_or_class}	"
+
+	
+	data-cellId="grid_footcell_field13" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="surgical_case_summary_view_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field13}
+									{BEGIN cellblock_grid_footcell_field14}
+	<td
+	
+	{$cell_grid_footcell_field14}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$fetal_death_class}	"
+
+	
+	data-cellId="grid_footcell_field14" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="surgical_case_summary_view_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field14}
+									{BEGIN cellblock_grid_footcell_field15}
+	<td
+	
+	{$cell_grid_footcell_field15}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$death_in_ward_class}	"
+
+	
+	data-cellId="grid_footcell_field15" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="surgical_case_summary_view_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field15}
+									{BEGIN cellblock_grid_footcell_field16}
+	<td
+	
+	{$cell_grid_footcell_field16}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$neonatal_death_class}	"
+
+	
+	data-cellId="grid_footcell_field16" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="surgical_case_summary_view_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field16}
+									{BEGIN cellblock_grid_footcell_field17}
+	<td
+	
+	{$cell_grid_footcell_field17}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$follow_up_status_class}	"
+
+	
+	data-cellId="grid_footcell_field17" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="surgical_case_summary_view_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field17}
+							</tr>
+					
+					</tfoot>
+				</table>
+{END grid_block}
+	
+			{BEGIN below-grid_outerblock}
+		<div class="panel-footer">
+			{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="leftbar" {$form_below-grid} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class="r-align-center r-ori-vert			col-md-12
+	
+">
+		 
+		{BEGIN pagination_block}
+<span data-itemtype="pagination" data-itemid="pagination" {$item_pagination} data-pageid="{$pageid}" >
+{$pagination}
+</span>
+{END pagination_block}
+		</div>					</div>
+			</div>		
+{END below-grid_block}
+		</div>
+	{END below-grid_outerblock}
+		</div>
+
+</div>
+
+
+
+
+										{$footer}
+				</div>
+			</div>
+			<div class="r-body-shadow">
+			</div>
+		</div>
+	{END body}
+	</body>
+</html>
