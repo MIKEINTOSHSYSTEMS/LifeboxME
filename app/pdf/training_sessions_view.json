@@ -173,15 +173,6 @@ pdfDocument = {
 			{"hidden":"{$item_hide_integrated_edit_field1}","stack":[{"text":"{$jslabel public_training_sessions course_id }","bold":true},{"text":{$course_id_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
-			{"hidden":"{$item_hide_integrated_edit_field2}","stack":[{"text":"{$jslabel public_training_sessions training_type }","bold":true},{"text":{$training_type_pdfvalue}}],"margin":[0,0,0,15]},
-				
-				
-			{"hidden":"{$item_hide_integrated_edit_field3}","stack":[{"text":"{$jslabel public_training_sessions training_approach }","bold":true},{"text":{$training_approach_pdfvalue}}],"margin":[0,0,0,15]},
-				
-				
-			{"hidden":"{$item_hide_integrated_edit_field4}","stack":[{"text":"{$jslabel public_training_sessions program }","bold":true},{"text":{$program_pdfvalue}}],"margin":[0,0,0,15]},
-				
-				
 			{"hidden":"{$item_hide_integrated_edit_field5}","stack":[{"text":"{$jslabel public_training_sessions quarter }","bold":true},{"text":{$quarter_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
@@ -216,6 +207,15 @@ pdfDocument = {
 				
 				
 			{"hidden":"{$item_hide_integrated_edit_field16}","stack":[{"text":"{$jslabel public_training_sessions updated_at }","bold":true},{"text":{$updated_at_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field17}","stack":[{"text":"{$jslabel public_training_sessions training_type_id }","bold":true},{"text":{$training_type_id_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field18}","stack":[{"text":"{$jslabel public_training_sessions approach_id }","bold":true},{"text":{$approach_id_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field19}","stack":[{"text":"{$jslabel public_training_sessions program_id }","bold":true},{"text":{$program_id_pdfvalue}}],"margin":[0,0,0,15]},
 				
 		  ],
   "border": [ false, false, false, false ],

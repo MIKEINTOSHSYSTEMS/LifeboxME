@@ -749,9 +749,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "2_1748271686";
+$projectBuildKey = "7_1748287834";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "2";
+$projectBuildNumber = "7";
 
 $mlang_messages = array();
 $mlang_charsets = array();
@@ -804,6 +804,10 @@ $tableCaptions["English"]["public_clean_cut_implementation_summary_view"] = "Cle
 $tableCaptions["English"]["public_device_distribution_summary_view"] = "Device Distribution Summary View";
 $tableCaptions["English"]["public_surgical_case_summary_view"] = "Surgical Case Summary View";
 $tableCaptions["English"]["public_training_summary_view"] = "Training Summary View";
+$tableCaptions["English"]["public_programs"] = "Programs";
+$tableCaptions["English"]["public_training_approaches"] = "Training Approaches";
+$tableCaptions["English"]["public_training_types"] = "Training Types";
+$tableCaptions["English"]["public_quarters"] = "Quarters";
 
 
 $globalEvents = new class_GlobalEvents;

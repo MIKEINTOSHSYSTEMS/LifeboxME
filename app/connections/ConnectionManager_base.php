@@ -270,6 +270,10 @@ class ConnectionManager_Base
 		$connectionsIds["public.device_distribution_summary_view"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["public.surgical_case_summary_view"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["public.training_summary_view"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.programs"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.training_approaches"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.training_types"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.quarters"] = "lifebox_mesystem_at_localhost";
 
 		$this->_tablesConnectionIds = &$connectionsIds;
 	}

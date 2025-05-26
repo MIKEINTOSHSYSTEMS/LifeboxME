@@ -259,6 +259,45 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_avg_post_test_score}</span>
 						</div>
 		{END searchCtrlBlock_avg_post_test_score}
+																{BEGIN searchCtrlBlock_program_id}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_program_id}" {$filterRow_attrs_program_id}>
+			<label>{$label public_training_sessions program_id }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_program_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_program_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_program_id}</span>
+						</div>
+		{END searchCtrlBlock_program_id}
+																{BEGIN searchCtrlBlock_approach_id}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_approach_id}" {$filterRow_attrs_approach_id}>
+			<label>{$label public_training_sessions approach_id }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_approach_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_approach_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_approach_id}</span>
+						</div>
+		{END searchCtrlBlock_approach_id}
+																{BEGIN searchCtrlBlock_training_type_id}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_training_type_id}" {$filterRow_attrs_training_type_id}>
+			<label>{$label public_training_sessions training_type_id }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_training_type_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_training_type_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_training_type_id}</span>
+						</div>
+		{END searchCtrlBlock_training_type_id}
 																{BEGIN searchCtrlBlock_updated_at}
 
 
@@ -272,19 +311,6 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_updated_at}</span>
 						</div>
 		{END searchCtrlBlock_updated_at}
-																{BEGIN searchCtrlBlock_training_type}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_training_type}" {$filterRow_attrs_training_type}>
-			<label>{$label public_training_sessions training_type }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_training_type}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_training_type}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_training_type}</span>
-						</div>
-		{END searchCtrlBlock_training_type}
 																{BEGIN searchCtrlBlock_training_id}
 
 
@@ -298,19 +324,6 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_training_id}</span>
 						</div>
 		{END searchCtrlBlock_training_id}
-																{BEGIN searchCtrlBlock_training_approach}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_training_approach}" {$filterRow_attrs_training_approach}>
-			<label>{$label public_training_sessions training_approach }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_training_approach}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_training_approach}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_training_approach}</span>
-						</div>
-		{END searchCtrlBlock_training_approach}
 																{BEGIN searchCtrlBlock_start_date}
 
 
@@ -350,19 +363,6 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_quarter}</span>
 						</div>
 		{END searchCtrlBlock_quarter}
-																{BEGIN searchCtrlBlock_program}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_program}" {$filterRow_attrs_program}>
-			<label>{$label public_training_sessions program }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_program}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_program}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_program}</span>
-						</div>
-		{END searchCtrlBlock_program}
 																{BEGIN searchCtrlBlock_num_participants}
 
 
@@ -837,14 +837,14 @@
 			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="course_id"]:before {
 		content: "{$label public_training_sessions course_id}";
 	}
-			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="training_type"]:before {
-		content: "{$label public_training_sessions training_type}";
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="training_type_id"]:before {
+		content: "{$label public_training_sessions training_type_id}";
 	}
-			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="training_approach"]:before {
-		content: "{$label public_training_sessions training_approach}";
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="approach_id"]:before {
+		content: "{$label public_training_sessions approach_id}";
 	}
-			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="program"]:before {
-		content: "{$label public_training_sessions program}";
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="program_id"]:before {
+		content: "{$label public_training_sessions program_id}";
 	}
 			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="quarter"]:before {
 		content: "{$label public_training_sessions quarter}";
@@ -966,7 +966,7 @@
 		{BEGIN training_id_fieldheadercolumn}
 	{BEGIN training_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field17" {$item_simple_grid_field17} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_id" data-fieldname="training_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field2" {$item_simple_grid_field2} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_id" data-fieldname="training_id" 
 
 			{$training_id_orderlinkattrs}
 	
@@ -1000,7 +1000,7 @@
 		{BEGIN course_id_fieldheadercolumn}
 	{BEGIN course_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field18" {$item_simple_grid_field18} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="course_id" data-fieldname="course_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field3" {$item_simple_grid_field3} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="course_id" data-fieldname="course_id" 
 
 			{$course_id_orderlinkattrs}
 	
@@ -1023,30 +1023,30 @@
 	{$cell_grid_headcell_field2}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$training_type_class}	"
+		 r-ori-vert		 {$training_type_id_class}	"
 
-			data-field="training_type"
+			data-field="training_type_id"
 	
 	data-cellId="grid_headcell_field2" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
-		{BEGIN training_type_fieldheadercolumn}
-	{BEGIN training_type_fieldheader}
+		{BEGIN training_type_id_fieldheadercolumn}
+	{BEGIN training_type_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field19" {$item_simple_grid_field19} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_type" data-fieldname="training_type" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field20" {$item_simple_grid_field20} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_type_id" data-fieldname="training_type_id" 
 
-			{$training_type_orderlinkattrs}
+			{$training_type_id_orderlinkattrs}
 	
 	
 	>
 	<span class="text-label">
-		<span>{$label public_training_sessions training_type }</span>
-					{$arrow_icon_training_type}
+		<span>{$label public_training_sessions training_type_id }</span>
+					{$arrow_icon_training_type_id}
 			</span>
 	</span>
-	{END training_type_fieldheader}
-{END training_type_fieldheadercolumn}
+	{END training_type_id_fieldheader}
+{END training_type_id_fieldheadercolumn}
 
 	
 	</th>
@@ -1057,30 +1057,30 @@
 	{$cell_grid_headcell_field3}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$training_approach_class}	"
+		 r-ori-vert		 {$approach_id_class}	"
 
-			data-field="training_approach"
+			data-field="approach_id"
 	
 	data-cellId="grid_headcell_field3" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
-		{BEGIN training_approach_fieldheadercolumn}
-	{BEGIN training_approach_fieldheader}
+		{BEGIN approach_id_fieldheadercolumn}
+	{BEGIN approach_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field20" {$item_simple_grid_field20} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_approach" data-fieldname="training_approach" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field21" {$item_simple_grid_field21} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="approach_id" data-fieldname="approach_id" 
 
-			{$training_approach_orderlinkattrs}
+			{$approach_id_orderlinkattrs}
 	
 	
 	>
 	<span class="text-label">
-		<span>{$label public_training_sessions training_approach }</span>
-					{$arrow_icon_training_approach}
+		<span>{$label public_training_sessions approach_id }</span>
+					{$arrow_icon_approach_id}
 			</span>
 	</span>
-	{END training_approach_fieldheader}
-{END training_approach_fieldheadercolumn}
+	{END approach_id_fieldheader}
+{END approach_id_fieldheadercolumn}
 
 	
 	</th>
@@ -1091,30 +1091,30 @@
 	{$cell_grid_headcell_field4}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$program_class}	"
+		 r-ori-vert		 {$program_id_class}	"
 
-			data-field="program"
+			data-field="program_id"
 	
 	data-cellId="grid_headcell_field4" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
-		{BEGIN program_fieldheadercolumn}
-	{BEGIN program_fieldheader}
+		{BEGIN program_id_fieldheadercolumn}
+	{BEGIN program_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field21" {$item_simple_grid_field21} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="program" data-fieldname="program" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field22" {$item_simple_grid_field22} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="program_id" data-fieldname="program_id" 
 
-			{$program_orderlinkattrs}
+			{$program_id_orderlinkattrs}
 	
 	
 	>
 	<span class="text-label">
-		<span>{$label public_training_sessions program }</span>
-					{$arrow_icon_program}
+		<span>{$label public_training_sessions program_id }</span>
+					{$arrow_icon_program_id}
 			</span>
 	</span>
-	{END program_fieldheader}
-{END program_fieldheadercolumn}
+	{END program_id_fieldheader}
+{END program_id_fieldheadercolumn}
 
 	
 	</th>
@@ -1125,45 +1125,11 @@
 	{$cell_grid_headcell_field5}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$quarter_class}	"
-
-			data-field="quarter"
-	
-	data-cellId="grid_headcell_field5" data-pageid="{$pageid}" data-record-id="{$recId}"	
-	>
-
-	 
-		{BEGIN quarter_fieldheadercolumn}
-	{BEGIN quarter_fieldheader}
-<span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field22" {$item_simple_grid_field22} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="quarter" data-fieldname="quarter" 
-
-			{$quarter_orderlinkattrs}
-	
-	
-	>
-	<span class="text-label">
-		<span>{$label public_training_sessions quarter }</span>
-					{$arrow_icon_quarter}
-			</span>
-	</span>
-	{END quarter_fieldheader}
-{END quarter_fieldheadercolumn}
-
-	
-	</th>
-	{END cellblock_grid_headcell_field5}
-									{BEGIN cellblock_grid_headcell_field6}
-	<th
-	
-	{$cell_grid_headcell_field6}
-	{$recordattrs}
-	class="
 		 r-ori-vert		 {$start_date_class}	"
 
 			data-field="start_date"
 	
-	data-cellId="grid_headcell_field6" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field5" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -1186,18 +1152,18 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field6}
-									{BEGIN cellblock_grid_headcell_field7}
+	{END cellblock_grid_headcell_field5}
+									{BEGIN cellblock_grid_headcell_field6}
 	<th
 	
-	{$cell_grid_headcell_field7}
+	{$cell_grid_headcell_field6}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$end_date_class}	"
 
 			data-field="end_date"
 	
-	data-cellId="grid_headcell_field7" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field6" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -1220,6 +1186,40 @@
 
 	
 	</th>
+	{END cellblock_grid_headcell_field6}
+									{BEGIN cellblock_grid_headcell_field7}
+	<th
+	
+	{$cell_grid_headcell_field7}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$quarter_class}	"
+
+			data-field="quarter"
+	
+	data-cellId="grid_headcell_field7" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN quarter_fieldheadercolumn}
+	{BEGIN quarter_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field25" {$item_simple_grid_field25} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="quarter" data-fieldname="quarter" 
+
+			{$quarter_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_training_sessions quarter }</span>
+					{$arrow_icon_quarter}
+			</span>
+	</span>
+	{END quarter_fieldheader}
+{END quarter_fieldheadercolumn}
+
+	
+	</th>
 	{END cellblock_grid_headcell_field7}
 									{BEGIN cellblock_grid_headcell_field8}
 	<th
@@ -1238,7 +1238,7 @@
 		{BEGIN facility_id_fieldheadercolumn}
 	{BEGIN facility_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field25" {$item_simple_grid_field25} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="facility_id" data-fieldname="facility_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field26" {$item_simple_grid_field26} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="facility_id" data-fieldname="facility_id" 
 
 			{$facility_id_orderlinkattrs}
 	
@@ -1272,7 +1272,7 @@
 		{BEGIN host_country_id_fieldheadercolumn}
 	{BEGIN host_country_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field26" {$item_simple_grid_field26} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="host_country_id" data-fieldname="host_country_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field27" {$item_simple_grid_field27} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="host_country_id" data-fieldname="host_country_id" 
 
 			{$host_country_id_orderlinkattrs}
 	
@@ -1306,7 +1306,7 @@
 		{BEGIN ceu_points_fieldheadercolumn}
 	{BEGIN ceu_points_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field27" {$item_simple_grid_field27} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="ceu_points" data-fieldname="ceu_points" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field28" {$item_simple_grid_field28} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="ceu_points" data-fieldname="ceu_points" 
 
 			{$ceu_points_orderlinkattrs}
 	
@@ -1340,7 +1340,7 @@
 		{BEGIN num_participants_fieldheadercolumn}
 	{BEGIN num_participants_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field28" {$item_simple_grid_field28} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="num_participants" data-fieldname="num_participants" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field29" {$item_simple_grid_field29} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="num_participants" data-fieldname="num_participants" 
 
 			{$num_participants_orderlinkattrs}
 	
@@ -1374,7 +1374,7 @@
 		{BEGIN avg_pre_test_score_fieldheadercolumn}
 	{BEGIN avg_pre_test_score_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field29" {$item_simple_grid_field29} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="avg_pre_test_score" data-fieldname="avg_pre_test_score" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field30" {$item_simple_grid_field30} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="avg_pre_test_score" data-fieldname="avg_pre_test_score" 
 
 			{$avg_pre_test_score_orderlinkattrs}
 	
@@ -1408,7 +1408,7 @@
 		{BEGIN avg_post_test_score_fieldheadercolumn}
 	{BEGIN avg_post_test_score_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field30" {$item_simple_grid_field30} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="avg_post_test_score" data-fieldname="avg_post_test_score" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field31" {$item_simple_grid_field31} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="avg_post_test_score" data-fieldname="avg_post_test_score" 
 
 			{$avg_post_test_score_orderlinkattrs}
 	
@@ -1442,7 +1442,7 @@
 		{BEGIN remarks_fieldheadercolumn}
 	{BEGIN remarks_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field31" {$item_simple_grid_field31} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="remarks" data-fieldname="remarks" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field32" {$item_simple_grid_field32} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="remarks" data-fieldname="remarks" 
 
 			{$remarks_orderlinkattrs}
 	
@@ -1476,7 +1476,7 @@
 		{BEGIN created_at_fieldheadercolumn}
 	{BEGIN created_at_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field32" {$item_simple_grid_field32} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="created_at" data-fieldname="created_at" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field33" {$item_simple_grid_field33} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="created_at" data-fieldname="created_at" 
 
 			{$created_at_orderlinkattrs}
 	
@@ -1510,7 +1510,7 @@
 		{BEGIN updated_at_fieldheadercolumn}
 	{BEGIN updated_at_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field33" {$item_simple_grid_field33} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="updated_at" data-fieldname="updated_at" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field34" {$item_simple_grid_field34} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="updated_at" data-fieldname="updated_at" 
 
 			{$updated_at_orderlinkattrs}
 	
@@ -1761,19 +1761,19 @@
 	{$cell_grid_cell_field2}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$training_type_class}	"
+		 r-ori-vert		 {$training_type_id_class}	"
 
-			data-field="training_type"
+			data-field="training_type_id"
 	
 	data-cellId="grid_cell_field2" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
-		{BEGIN training_type_fieldcolumn}
-<span data-itemtype="grid_field" data-itemid="simple_grid_field2" {$item_simple_grid_field2} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_type" data-fieldname="training_type" data-default-width >
-{$training_type_value}
+		{BEGIN training_type_id_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field17" {$item_simple_grid_field17} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_type_id" data-fieldname="training_type_id" data-default-width >
+{$training_type_id_value}
 </span>
-{END training_type_fieldcolumn}	
+{END training_type_id_fieldcolumn}	
 	</td>
 	{END cellblock_grid_cell_field2}
 									{BEGIN cellblock_grid_cell_field3}
@@ -1782,19 +1782,19 @@
 	{$cell_grid_cell_field3}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$training_approach_class}	"
+		 r-ori-vert		 {$approach_id_class}	"
 
-			data-field="training_approach"
+			data-field="approach_id"
 	
 	data-cellId="grid_cell_field3" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
-		{BEGIN training_approach_fieldcolumn}
-<span data-itemtype="grid_field" data-itemid="simple_grid_field3" {$item_simple_grid_field3} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_approach" data-fieldname="training_approach" data-default-width >
-{$training_approach_value}
+		{BEGIN approach_id_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field18" {$item_simple_grid_field18} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="approach_id" data-fieldname="approach_id" data-default-width >
+{$approach_id_value}
 </span>
-{END training_approach_fieldcolumn}	
+{END approach_id_fieldcolumn}	
 	</td>
 	{END cellblock_grid_cell_field3}
 									{BEGIN cellblock_grid_cell_field4}
@@ -1803,19 +1803,19 @@
 	{$cell_grid_cell_field4}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$program_class}	"
+		 r-ori-vert		 {$program_id_class}	"
 
-			data-field="program"
+			data-field="program_id"
 	
 	data-cellId="grid_cell_field4" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
-		{BEGIN program_fieldcolumn}
-<span data-itemtype="grid_field" data-itemid="simple_grid_field4" {$item_simple_grid_field4} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="program" data-fieldname="program" data-default-width >
-{$program_value}
+		{BEGIN program_id_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field19" {$item_simple_grid_field19} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="program_id" data-fieldname="program_id" data-default-width >
+{$program_id_value}
 </span>
-{END program_fieldcolumn}	
+{END program_id_fieldcolumn}	
 	</td>
 	{END cellblock_grid_cell_field4}
 									{BEGIN cellblock_grid_cell_field5}
@@ -1824,32 +1824,11 @@
 	{$cell_grid_cell_field5}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$quarter_class}	"
-
-			data-field="quarter"
-	
-	data-cellId="grid_cell_field5" data-pageid="{$pageid}" data-record-id="{$recId}"	
-	>
-
-	 
-		{BEGIN quarter_fieldcolumn}
-<span data-itemtype="grid_field" data-itemid="simple_grid_field5" {$item_simple_grid_field5} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="quarter" data-fieldname="quarter" data-default-width >
-{$quarter_value}
-</span>
-{END quarter_fieldcolumn}	
-	</td>
-	{END cellblock_grid_cell_field5}
-									{BEGIN cellblock_grid_cell_field6}
-	<td
-	
-	{$cell_grid_cell_field6}
-	{$recordattrs}
-	class="
 		 r-ori-vert		 {$start_date_class}	"
 
 			data-field="start_date"
 	
-	data-cellId="grid_cell_field6" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field5" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -1859,18 +1838,18 @@
 </span>
 {END start_date_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field6}
-									{BEGIN cellblock_grid_cell_field7}
+	{END cellblock_grid_cell_field5}
+									{BEGIN cellblock_grid_cell_field6}
 	<td
 	
-	{$cell_grid_cell_field7}
+	{$cell_grid_cell_field6}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$end_date_class}	"
 
 			data-field="end_date"
 	
-	data-cellId="grid_cell_field7" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field6" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -1879,6 +1858,27 @@
 {$end_date_value}
 </span>
 {END end_date_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field6}
+									{BEGIN cellblock_grid_cell_field7}
+	<td
+	
+	{$cell_grid_cell_field7}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$quarter_class}	"
+
+			data-field="quarter"
+	
+	data-cellId="grid_cell_field7" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN quarter_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field5" {$item_simple_grid_field5} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="quarter" data-fieldname="quarter" data-default-width >
+{$quarter_value}
+</span>
+{END quarter_fieldcolumn}	
 	</td>
 	{END cellblock_grid_cell_field7}
 									{BEGIN cellblock_grid_cell_field8}
@@ -2199,7 +2199,7 @@
 	{$cell_grid_footcell_field2}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$training_type_class}	"
+		 r-ori-vert		 {$training_type_id_class}	"
 
 	
 	data-cellId="grid_footcell_field2" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_sessions_list"	
@@ -2214,7 +2214,7 @@
 	{$cell_grid_footcell_field3}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$training_approach_class}	"
+		 r-ori-vert		 {$approach_id_class}	"
 
 	
 	data-cellId="grid_footcell_field3" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_sessions_list"	
@@ -2229,7 +2229,7 @@
 	{$cell_grid_footcell_field4}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$program_class}	"
+		 r-ori-vert		 {$program_id_class}	"
 
 	
 	data-cellId="grid_footcell_field4" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_sessions_list"	
@@ -2244,7 +2244,7 @@
 	{$cell_grid_footcell_field5}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$quarter_class}	"
+		 r-ori-vert		 {$start_date_class}	"
 
 	
 	data-cellId="grid_footcell_field5" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_sessions_list"	
@@ -2259,7 +2259,7 @@
 	{$cell_grid_footcell_field6}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$start_date_class}	"
+		 r-ori-vert		 {$end_date_class}	"
 
 	
 	data-cellId="grid_footcell_field6" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_sessions_list"	
@@ -2274,7 +2274,7 @@
 	{$cell_grid_footcell_field7}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$end_date_class}	"
+		 r-ori-vert		 {$quarter_class}	"
 
 	
 	data-cellId="grid_footcell_field7" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_sessions_list"	

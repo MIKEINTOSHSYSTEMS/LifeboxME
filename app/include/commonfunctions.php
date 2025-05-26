@@ -257,6 +257,14 @@ function checkTableName($shortTName )
 		return true;
 	if ("training_summary_view" == $shortTName )
 		return true;
+	if ("programs" == $shortTName )
+		return true;
+	if ("training_approaches" == $shortTName )
+		return true;
+	if ("training_types" == $shortTName )
+		return true;
+	if ("quarters" == $shortTName )
+		return true;
 	return false;
 }
 
@@ -550,6 +558,42 @@ function GetTablesList($pdfMode = false)
 	if( $tableAvailable ) {
 		$arr[]="public.training_summary_view";
 	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.programs");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.programs";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.training_approaches");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.training_approaches";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.training_types");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.training_types";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.quarters");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.quarters";
+	}
 	return $arr;
 }
 
@@ -586,6 +630,10 @@ function GetTablesListWithoutSecurity()
 	$arr[]="public.device_distribution_summary_view";
 	$arr[]="public.surgical_case_summary_view";
 	$arr[]="public.training_summary_view";
+	$arr[]="public.programs";
+	$arr[]="public.training_approaches";
+	$arr[]="public.training_types";
+	$arr[]="public.quarters";
 	return $arr;
 }
 
@@ -1364,6 +1412,30 @@ function GetUserPermissionsStatic( $table )
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.training_summary_view" )
+	{
+//	default permissions
+		// grant all by default
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.programs" )
+	{
+//	default permissions
+		// grant all by default
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.training_approaches" )
+	{
+//	default permissions
+		// grant all by default
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.training_types" )
+	{
+//	default permissions
+		// grant all by default
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.quarters" )
 	{
 //	default permissions
 		// grant all by default

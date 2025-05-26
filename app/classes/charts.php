@@ -432,6 +432,14 @@ class Chart
 			return true;
 		if("public.training_summary_view" == $this->chrt_array['tables'][0])
 			return true;
+		if("public.programs" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.training_approaches" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.training_types" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.quarters" == $this->chrt_array['tables'][0])
+			return true;
 		return false;
 	}
 

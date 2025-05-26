@@ -464,6 +464,22 @@ class AuditTrailTable
 		{
 			return false;
 		}
+		if($table=="public.programs")
+		{
+			return false;
+		}
+		if($table=="public.training_approaches")
+		{
+			return false;
+		}
+		if($table=="public.training_types")
+		{
+			return false;
+		}
+		if($table=="public.quarters")
+		{
+			return false;
+		}
 	}
 
 	protected function insert($datetime, $ip, $user, $table, $action, $description)
@@ -877,6 +893,22 @@ class AuditTrailFile
 			return false;
 		}
 		if($table=="public.training_summary_view")
+		{
+			return false;
+		}
+		if($table=="public.programs")
+		{
+			return false;
+		}
+		if($table=="public.training_approaches")
+		{
+			return false;
+		}
+		if($table=="public.training_types")
+		{
+			return false;
+		}
+		if($table=="public.quarters")
 		{
 			return false;
 		}

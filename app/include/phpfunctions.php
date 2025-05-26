@@ -1150,6 +1150,18 @@ function GetDefaultValue($field, $ptype, $table="")
 	{
 		return strftime("%Y-%m-%d");
 	}
+				if($table=="public.programs" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d");
+	}
+				if($table=="public.training_approaches" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d");
+	}
+				if($table=="public.training_types" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d");
+	}
 	return "";
 }
 
@@ -1210,6 +1222,18 @@ function GetAutoUpdateValue($field, $ptype, $table="")
 		return strftime("%Y-%m-%d");
 	}
 				if($table=="public.ward_rounds" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d");
+	}
+				if($table=="public.programs" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d");
+	}
+				if($table=="public.training_approaches" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d");
+	}
+				if($table=="public.training_types" && $field=="updated_at")
 	{
 		return strftime("%Y-%m-%d");
 	}

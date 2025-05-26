@@ -28,18 +28,9 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelstraining_sessions["English"]["training_id"] = "Training Id";
 	$fieldToolTipstraining_sessions["English"]["training_id"] = "";
 	$placeHolderstraining_sessions["English"]["training_id"] = "";
-	$fieldLabelstraining_sessions["English"]["course_id"] = "Course Id";
+	$fieldLabelstraining_sessions["English"]["course_id"] = "Course";
 	$fieldToolTipstraining_sessions["English"]["course_id"] = "";
 	$placeHolderstraining_sessions["English"]["course_id"] = "";
-	$fieldLabelstraining_sessions["English"]["training_type"] = "Training Type";
-	$fieldToolTipstraining_sessions["English"]["training_type"] = "";
-	$placeHolderstraining_sessions["English"]["training_type"] = "";
-	$fieldLabelstraining_sessions["English"]["training_approach"] = "Training Approach";
-	$fieldToolTipstraining_sessions["English"]["training_approach"] = "";
-	$placeHolderstraining_sessions["English"]["training_approach"] = "";
-	$fieldLabelstraining_sessions["English"]["program"] = "Program";
-	$fieldToolTipstraining_sessions["English"]["program"] = "";
-	$placeHolderstraining_sessions["English"]["program"] = "";
 	$fieldLabelstraining_sessions["English"]["quarter"] = "Quarter";
 	$fieldToolTipstraining_sessions["English"]["quarter"] = "";
 	$placeHolderstraining_sessions["English"]["quarter"] = "";
@@ -52,7 +43,7 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelstraining_sessions["English"]["facility_id"] = "Facility Id";
 	$fieldToolTipstraining_sessions["English"]["facility_id"] = "";
 	$placeHolderstraining_sessions["English"]["facility_id"] = "";
-	$fieldLabelstraining_sessions["English"]["host_country_id"] = "Host Country Id";
+	$fieldLabelstraining_sessions["English"]["host_country_id"] = "Host Country";
 	$fieldToolTipstraining_sessions["English"]["host_country_id"] = "";
 	$placeHolderstraining_sessions["English"]["host_country_id"] = "";
 	$fieldLabelstraining_sessions["English"]["ceu_points"] = "Ceu Points";
@@ -76,6 +67,15 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelstraining_sessions["English"]["updated_at"] = "Updated At";
 	$fieldToolTipstraining_sessions["English"]["updated_at"] = "";
 	$placeHolderstraining_sessions["English"]["updated_at"] = "";
+	$fieldLabelstraining_sessions["English"]["training_type_id"] = "Training Type";
+	$fieldToolTipstraining_sessions["English"]["training_type_id"] = "";
+	$placeHolderstraining_sessions["English"]["training_type_id"] = "";
+	$fieldLabelstraining_sessions["English"]["approach_id"] = "Training Approach";
+	$fieldToolTipstraining_sessions["English"]["approach_id"] = "";
+	$placeHolderstraining_sessions["English"]["approach_id"] = "";
+	$fieldLabelstraining_sessions["English"]["program_id"] = "Program";
+	$fieldToolTipstraining_sessions["English"]["program_id"] = "";
+	$placeHolderstraining_sessions["English"]["program_id"] = "";
 	if (count($fieldToolTipstraining_sessions["English"]))
 		$tdatatraining_sessions[".isUseToolTips"] = true;
 }
@@ -195,9 +195,9 @@ $tdatatraining_sessions[".requiredSearchFields"] = array();
 $tdatatraining_sessions[".googleLikeFields"] = array();
 $tdatatraining_sessions[".googleLikeFields"][] = "training_id";
 $tdatatraining_sessions[".googleLikeFields"][] = "course_id";
-$tdatatraining_sessions[".googleLikeFields"][] = "training_type";
-$tdatatraining_sessions[".googleLikeFields"][] = "training_approach";
-$tdatatraining_sessions[".googleLikeFields"][] = "program";
+$tdatatraining_sessions[".googleLikeFields"][] = "training_type_id";
+$tdatatraining_sessions[".googleLikeFields"][] = "approach_id";
+$tdatatraining_sessions[".googleLikeFields"][] = "program_id";
 $tdatatraining_sessions[".googleLikeFields"][] = "quarter";
 $tdatatraining_sessions[".googleLikeFields"][] = "start_date";
 $tdatatraining_sessions[".googleLikeFields"][] = "end_date";
@@ -243,7 +243,7 @@ $tdatatraining_sessions[".strOrderBy"] = $tstrOrderBy;
 $tdatatraining_sessions[".orderindexes"] = array();
 
 
-$tdatatraining_sessions[".sqlHead"] = "SELECT training_id,  	course_id,  	training_type,  	training_approach,  	program,  	quarter,  	start_date,  	end_date,  	facility_id,  	host_country_id,  	ceu_points,  	num_participants,  	avg_pre_test_score,  	avg_post_test_score,  	remarks,  	created_at,  	updated_at";
+$tdatatraining_sessions[".sqlHead"] = "SELECT training_id,  	course_id,  	training_type_id,  	approach_id,  	program_id,  	quarter,  	start_date,  	end_date,  	facility_id,  	host_country_id,  	ceu_points,  	num_participants,  	avg_pre_test_score,  	avg_post_test_score,  	remarks,  	created_at,  	updated_at";
 $tdatatraining_sessions[".sqlFrom"] = "FROM \"public\".training_sessions";
 $tdatatraining_sessions[".sqlWhereExpr"] = "";
 $tdatatraining_sessions[".sqlTail"] = "";
@@ -597,28 +597,28 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 	$tdatatraining_sessions["course_id"] = $fdata;
 		$tdatatraining_sessions[".searchableFields"][] = "course_id";
-//	training_type
+//	training_type_id
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 3;
-	$fdata["strName"] = "training_type";
-	$fdata["GoodName"] = "training_type";
+	$fdata["strName"] = "training_type_id";
+	$fdata["GoodName"] = "training_type_id";
 	$fdata["ownerTable"] = "public.training_sessions";
-	$fdata["Label"] = GetFieldLabel("public_training_sessions","training_type");
-	$fdata["FieldType"] = 13;
+	$fdata["Label"] = GetFieldLabel("public_training_sessions","training_type_id");
+	$fdata["FieldType"] = 3;
 
 
 	
 	
 			
 
-		$fdata["strField"] = "training_type";
+		$fdata["strField"] = "training_type_id";
 
-		$fdata["sourceSingle"] = "training_type";
+		$fdata["sourceSingle"] = "training_type_id";
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "training_type";
+	$fdata["FullName"] = "training_type_id";
 
 	
 	
@@ -655,7 +655,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Text field");
+	$edata = array("EditFormat" => "Lookup wizard");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -665,10 +665,37 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 	
 	
 
+// Begin Lookup settings
+				$edata["LookupType"] = 2;
+	$edata["LookupTable"] = "public.training_types";
+			$edata["autoCompleteFieldsOnEdit"] = 0;
+	$edata["autoCompleteFields"] = array();
+		$edata["LCType"] = 0;
+
+	
+		
+	$edata["LinkField"] = "training_type_id";
+	$edata["LinkFieldType"] = 3;
+	$edata["DisplayField"] = "type_name";
+
+	
+
+	
+	$edata["LookupOrderBy"] = "";
+
+	
+	
+	
+	
+
+	
+	
+		$edata["SelectSize"] = 1;
+
+// End Lookup Settings
 
 
-		$edata["IsRequired"] = true;
-
+	
 	
 	
 	
@@ -680,18 +707,15 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 	
 	
 	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-		
+	
+	
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
 	$edata["validateAs"] = array();
 	$edata["validateAs"]["basicValidate"] = array();
 	$edata["validateAs"]["customMessages"] = array();
-						$edata["validateAs"]["basicValidate"][] = "IsRequired";
-		
+							
 	
 //	End validation
 
@@ -710,7 +734,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "Equals";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
@@ -735,30 +759,30 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 //end of Filters settings
 
 
-	$tdatatraining_sessions["training_type"] = $fdata;
-		$tdatatraining_sessions[".searchableFields"][] = "training_type";
-//	training_approach
+	$tdatatraining_sessions["training_type_id"] = $fdata;
+		$tdatatraining_sessions[".searchableFields"][] = "training_type_id";
+//	approach_id
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 4;
-	$fdata["strName"] = "training_approach";
-	$fdata["GoodName"] = "training_approach";
+	$fdata["strName"] = "approach_id";
+	$fdata["GoodName"] = "approach_id";
 	$fdata["ownerTable"] = "public.training_sessions";
-	$fdata["Label"] = GetFieldLabel("public_training_sessions","training_approach");
-	$fdata["FieldType"] = 13;
+	$fdata["Label"] = GetFieldLabel("public_training_sessions","approach_id");
+	$fdata["FieldType"] = 3;
 
 
 	
 	
 			
 
-		$fdata["strField"] = "training_approach";
+		$fdata["strField"] = "approach_id";
 
-		$fdata["sourceSingle"] = "training_approach";
+		$fdata["sourceSingle"] = "approach_id";
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "training_approach";
+	$fdata["FullName"] = "approach_id";
 
 	
 	
@@ -795,7 +819,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Text field");
+	$edata = array("EditFormat" => "Lookup wizard");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -805,10 +829,37 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 	
 	
 
+// Begin Lookup settings
+				$edata["LookupType"] = 2;
+	$edata["LookupTable"] = "public.training_approaches";
+			$edata["autoCompleteFieldsOnEdit"] = 0;
+	$edata["autoCompleteFields"] = array();
+		$edata["LCType"] = 0;
+
+	
+		
+	$edata["LinkField"] = "approach_id";
+	$edata["LinkFieldType"] = 3;
+	$edata["DisplayField"] = "approach_name";
+
+	
+
+	
+	$edata["LookupOrderBy"] = "";
+
+	
+	
+	
+	
+
+	
+	
+		$edata["SelectSize"] = 1;
+
+// End Lookup Settings
 
 
-		$edata["IsRequired"] = true;
-
+	
 	
 	
 	
@@ -820,18 +871,15 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 	
 	
 	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-		
+	
+	
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
 	$edata["validateAs"] = array();
 	$edata["validateAs"]["basicValidate"] = array();
 	$edata["validateAs"]["customMessages"] = array();
-						$edata["validateAs"]["basicValidate"][] = "IsRequired";
-		
+							
 	
 //	End validation
 
@@ -850,7 +898,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "Equals";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
@@ -875,30 +923,30 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 //end of Filters settings
 
 
-	$tdatatraining_sessions["training_approach"] = $fdata;
-		$tdatatraining_sessions[".searchableFields"][] = "training_approach";
-//	program
+	$tdatatraining_sessions["approach_id"] = $fdata;
+		$tdatatraining_sessions[".searchableFields"][] = "approach_id";
+//	program_id
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 5;
-	$fdata["strName"] = "program";
-	$fdata["GoodName"] = "program";
+	$fdata["strName"] = "program_id";
+	$fdata["GoodName"] = "program_id";
 	$fdata["ownerTable"] = "public.training_sessions";
-	$fdata["Label"] = GetFieldLabel("public_training_sessions","program");
-	$fdata["FieldType"] = 13;
+	$fdata["Label"] = GetFieldLabel("public_training_sessions","program_id");
+	$fdata["FieldType"] = 3;
 
 
 	
 	
 			
 
-		$fdata["strField"] = "program";
+		$fdata["strField"] = "program_id";
 
-		$fdata["sourceSingle"] = "program";
+		$fdata["sourceSingle"] = "program_id";
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "program";
+	$fdata["FullName"] = "program_id";
 
 	
 	
@@ -935,7 +983,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Text field");
+	$edata = array("EditFormat" => "Lookup wizard");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -945,10 +993,37 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 	
 	
 
+// Begin Lookup settings
+				$edata["LookupType"] = 2;
+	$edata["LookupTable"] = "public.programs";
+			$edata["autoCompleteFieldsOnEdit"] = 0;
+	$edata["autoCompleteFields"] = array();
+		$edata["LCType"] = 0;
+
+	
+		
+	$edata["LinkField"] = "program_id";
+	$edata["LinkFieldType"] = 3;
+	$edata["DisplayField"] = "program_name";
+
+	
+
+	
+	$edata["LookupOrderBy"] = "";
+
+	
+	
+	
+	
+
+	
+	
+		$edata["SelectSize"] = 1;
+
+// End Lookup Settings
 
 
-		$edata["IsRequired"] = true;
-
+	
 	
 	
 	
@@ -960,18 +1035,15 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 	
 	
 	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-		
+	
+	
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
 	$edata["validateAs"] = array();
 	$edata["validateAs"]["basicValidate"] = array();
 	$edata["validateAs"]["customMessages"] = array();
-						$edata["validateAs"]["basicValidate"][] = "IsRequired";
-		
+							
 	
 //	End validation
 
@@ -990,7 +1062,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "Equals";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
@@ -1015,8 +1087,8 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 //end of Filters settings
 
 
-	$tdatatraining_sessions["program"] = $fdata;
-		$tdatatraining_sessions[".searchableFields"][] = "program";
+	$tdatatraining_sessions["program_id"] = $fdata;
+		$tdatatraining_sessions[".searchableFields"][] = "program_id";
 //	quarter
 //	Custom field settings
 	$fdata = array();
@@ -1075,7 +1147,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Text field");
+	$edata = array("EditFormat" => "Lookup wizard");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -1085,6 +1157,35 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 	
 	
 
+// Begin Lookup settings
+				$edata["LookupType"] = 2;
+	$edata["LookupTable"] = "public.quarters";
+			$edata["autoCompleteFieldsOnEdit"] = 0;
+	$edata["autoCompleteFields"] = array();
+		$edata["LCType"] = 0;
+
+	
+		
+	$edata["LinkField"] = "quarter_id";
+	$edata["LinkFieldType"] = 0;
+	$edata["DisplayField"] = "quarter_name";
+
+	
+
+	
+	$edata["LookupOrderBy"] = "";
+
+	
+	
+	
+	
+
+	
+		$edata["Multiselect"] = true;
+
+		$edata["SelectSize"] = 1;
+
+// End Lookup Settings
 
 
 		$edata["IsRequired"] = true;
@@ -1100,10 +1201,8 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 	
 	
 	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-		
+	
+	
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
@@ -1130,7 +1229,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "Equals";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
@@ -2944,6 +3043,60 @@ $masterTablesData["public.training_sessions"] = array();
 	$masterTablesData["public.training_sessions"][2]["detailKeys"][]="host_country_id";
 		
 	//endif
+	
+	//if !@t.bReportCrossTab
+			$strOriginalDetailsTable="public.programs";
+	$masterParams = array();
+	$masterParams["mDataSourceTable"]="public.programs";
+	$masterParams["mOriginalTable"]= $strOriginalDetailsTable;
+	$masterParams["mShortTable"]= "programs";
+	$masterParams["masterKeys"]= array();
+	$masterParams["detailKeys"]= array();
+
+	$masterParams["type"] = PAGE_LIST;
+					$masterTablesData["public.training_sessions"][3] = $masterParams;
+				$masterTablesData["public.training_sessions"][3]["masterKeys"] = array();
+	$masterTablesData["public.training_sessions"][3]["masterKeys"][]="program_id";
+				$masterTablesData["public.training_sessions"][3]["detailKeys"] = array();
+	$masterTablesData["public.training_sessions"][3]["detailKeys"][]="program_id";
+		
+	//endif
+	
+	//if !@t.bReportCrossTab
+			$strOriginalDetailsTable="public.training_approaches";
+	$masterParams = array();
+	$masterParams["mDataSourceTable"]="public.training_approaches";
+	$masterParams["mOriginalTable"]= $strOriginalDetailsTable;
+	$masterParams["mShortTable"]= "training_approaches";
+	$masterParams["masterKeys"]= array();
+	$masterParams["detailKeys"]= array();
+
+	$masterParams["type"] = PAGE_LIST;
+					$masterTablesData["public.training_sessions"][4] = $masterParams;
+				$masterTablesData["public.training_sessions"][4]["masterKeys"] = array();
+	$masterTablesData["public.training_sessions"][4]["masterKeys"][]="approach_id";
+				$masterTablesData["public.training_sessions"][4]["detailKeys"] = array();
+	$masterTablesData["public.training_sessions"][4]["detailKeys"][]="approach_id";
+		
+	//endif
+	
+	//if !@t.bReportCrossTab
+			$strOriginalDetailsTable="public.training_types";
+	$masterParams = array();
+	$masterParams["mDataSourceTable"]="public.training_types";
+	$masterParams["mOriginalTable"]= $strOriginalDetailsTable;
+	$masterParams["mShortTable"]= "training_types";
+	$masterParams["masterKeys"]= array();
+	$masterParams["detailKeys"]= array();
+
+	$masterParams["type"] = PAGE_LIST;
+					$masterTablesData["public.training_sessions"][5] = $masterParams;
+				$masterTablesData["public.training_sessions"][5]["masterKeys"] = array();
+	$masterTablesData["public.training_sessions"][5]["masterKeys"][]="training_type_id";
+				$masterTablesData["public.training_sessions"][5]["detailKeys"] = array();
+	$masterTablesData["public.training_sessions"][5]["detailKeys"][]="training_type_id";
+		
+	//endif
 // -----------------end  prepare master-details data arrays ------------------------------//
 
 
@@ -2964,7 +3117,7 @@ function createSqlQuery_training_sessions()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "training_id,  	course_id,  	training_type,  	training_approach,  	program,  	quarter,  	start_date,  	end_date,  	facility_id,  	host_country_id,  	ceu_points,  	num_participants,  	avg_pre_test_score,  	avg_post_test_score,  	remarks,  	created_at,  	updated_at";
+$proto0["m_strFieldList"] = "training_id,  	course_id,  	training_type_id,  	approach_id,  	program_id,  	quarter,  	start_date,  	end_date,  	facility_id,  	host_country_id,  	ceu_points,  	num_participants,  	avg_pre_test_score,  	avg_post_test_score,  	remarks,  	created_at,  	updated_at";
 $proto0["m_strFrom"] = "FROM \"public\".training_sessions";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
@@ -3034,12 +3187,12 @@ $obj = new SQLFieldListItem($proto8);
 $proto0["m_fieldlist"][]=$obj;
 						$proto10=array();
 			$obj = new SQLField(array(
-	"m_strName" => "training_type",
+	"m_strName" => "training_type_id",
 	"m_strTable" => "public.training_sessions",
 	"m_srcTableName" => "public.training_sessions"
 ));
 
-$proto10["m_sql"] = "training_type";
+$proto10["m_sql"] = "training_type_id";
 $proto10["m_srcTableName"] = "public.training_sessions";
 $proto10["m_expr"]=$obj;
 $proto10["m_alias"] = "";
@@ -3048,12 +3201,12 @@ $obj = new SQLFieldListItem($proto10);
 $proto0["m_fieldlist"][]=$obj;
 						$proto12=array();
 			$obj = new SQLField(array(
-	"m_strName" => "training_approach",
+	"m_strName" => "approach_id",
 	"m_strTable" => "public.training_sessions",
 	"m_srcTableName" => "public.training_sessions"
 ));
 
-$proto12["m_sql"] = "training_approach";
+$proto12["m_sql"] = "approach_id";
 $proto12["m_srcTableName"] = "public.training_sessions";
 $proto12["m_expr"]=$obj;
 $proto12["m_alias"] = "";
@@ -3062,12 +3215,12 @@ $obj = new SQLFieldListItem($proto12);
 $proto0["m_fieldlist"][]=$obj;
 						$proto14=array();
 			$obj = new SQLField(array(
-	"m_strName" => "program",
+	"m_strName" => "program_id",
 	"m_strTable" => "public.training_sessions",
 	"m_srcTableName" => "public.training_sessions"
 ));
 
-$proto14["m_sql"] = "program";
+$proto14["m_sql"] = "program_id";
 $proto14["m_srcTableName"] = "public.training_sessions";
 $proto14["m_expr"]=$obj;
 $proto14["m_alias"] = "";
@@ -3266,6 +3419,9 @@ $proto41["m_columns"][] = "avg_post_test_score";
 $proto41["m_columns"][] = "remarks";
 $proto41["m_columns"][] = "created_at";
 $proto41["m_columns"][] = "updated_at";
+$proto41["m_columns"][] = "training_type_id";
+$proto41["m_columns"][] = "approach_id";
+$proto41["m_columns"][] = "program_id";
 $obj = new SQLTable($proto41);
 
 $proto40["m_table"] = $obj;

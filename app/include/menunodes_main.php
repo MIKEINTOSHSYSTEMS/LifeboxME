@@ -174,9 +174,9 @@
 	$menuNode["pageId"] = "";
 	$menuNode["openType"] = "None";
 
-	$menuNode["icon"] = "glyphicon-bed";
-	$menuNode["iconType"] = "2";
-	$menuNode["iconShow"] = "2";
+	$menuNode["icon"] = "fa-odnoklassniki";
+	$menuNode["iconType"] = "3";
+	$menuNode["iconShow"] = "1";
 
 		$menuNode["color"] = "";
 
@@ -472,6 +472,58 @@
 
 	$menuNodes[] = $menuNode;
 	$menuNode = array();
+	$menuNode["id"] = "39";
+	$menuNode["name"] = "";
+	$menuNode["href"] = "mypage.htm";
+	$menuNode["type"] = "Leaf";
+	$menuNode["table"] = "public.training_approaches";
+	$menuNode["style"] = "";
+	$menuNode["params"] = "";
+	$menuNode["parent"] = "33";
+	$menuNode["nameType"] = "Text";
+	$menuNode["linkType"] = "Internal";
+	$menuNode["pageType"] = strtolower("List");//
+	$menuNode["pageId"] = "";
+	$menuNode["openType"] = "None";
+
+	$menuNode["icon"] = "fa-random";
+	$menuNode["iconType"] = "3";
+	$menuNode["iconShow"] = "1";
+
+		$menuNode["color"] = "";
+
+	$menuNode["title"] = "Training Approaches";
+
+
+
+	$menuNodes[] = $menuNode;
+	$menuNode = array();
+	$menuNode["id"] = "40";
+	$menuNode["name"] = "";
+	$menuNode["href"] = "mypage.htm";
+	$menuNode["type"] = "Leaf";
+	$menuNode["table"] = "public.training_types";
+	$menuNode["style"] = "";
+	$menuNode["params"] = "";
+	$menuNode["parent"] = "33";
+	$menuNode["nameType"] = "Text";
+	$menuNode["linkType"] = "Internal";
+	$menuNode["pageType"] = strtolower("List");//
+	$menuNode["pageId"] = "";
+	$menuNode["openType"] = "None";
+
+	$menuNode["icon"] = "fa-list-ol";
+	$menuNode["iconType"] = "3";
+	$menuNode["iconShow"] = "1";
+
+		$menuNode["color"] = "";
+
+	$menuNode["title"] = "Training Types";
+
+
+
+	$menuNodes[] = $menuNode;
+	$menuNode = array();
 	$menuNode["id"] = "31";
 	$menuNode["name"] = "-------";
 	$menuNode["href"] = "";
@@ -538,9 +590,9 @@
 	$menuNode["pageId"] = "";
 	$menuNode["openType"] = "None";
 
-	$menuNode["icon"] = "glyphicon-tree-conifer";
-	$menuNode["iconType"] = "2";
-	$menuNode["iconShow"] = "2";
+	$menuNode["icon"] = "fa-deviantart";
+	$menuNode["iconType"] = "3";
+	$menuNode["iconShow"] = "1";
 
 		$menuNode["color"] = "";
 
@@ -566,7 +618,7 @@
 
 	$menuNode["icon"] = "fa-xing";
 	$menuNode["iconType"] = "3";
-	$menuNode["iconShow"] = "2";
+	$menuNode["iconShow"] = "1";
 
 		$menuNode["color"] = "";
 
@@ -668,8 +720,8 @@
 	$menuNode["pageId"] = "";
 	$menuNode["openType"] = "None";
 
-	$menuNode["icon"] = "";
-	$menuNode["iconType"] = "0";
+	$menuNode["icon"] = "fa-id-badge";
+	$menuNode["iconType"] = "3";
 	$menuNode["iconShow"] = "1";
 
 		$menuNode["color"] = "";
@@ -696,7 +748,7 @@
 
 	$menuNode["icon"] = "fa-globe";
 	$menuNode["iconType"] = "3";
-	$menuNode["iconShow"] = "2";
+	$menuNode["iconShow"] = "1";
 
 		$menuNode["color"] = "";
 
@@ -722,7 +774,7 @@
 
 	$menuNode["icon"] = "fa-hospital-o";
 	$menuNode["iconType"] = "3";
-	$menuNode["iconShow"] = "2";
+	$menuNode["iconShow"] = "1";
 
 		$menuNode["color"] = "";
 
@@ -805,6 +857,58 @@
 		$menuNode["color"] = "";
 
 	$menuNode["title"] = "Regions";
+
+
+
+	$menuNodes[] = $menuNode;
+	$menuNode = array();
+	$menuNode["id"] = "38";
+	$menuNode["name"] = "";
+	$menuNode["href"] = "mypage.htm";
+	$menuNode["type"] = "Leaf";
+	$menuNode["table"] = "public.programs";
+	$menuNode["style"] = "";
+	$menuNode["params"] = "";
+	$menuNode["parent"] = "35";
+	$menuNode["nameType"] = "Text";
+	$menuNode["linkType"] = "Internal";
+	$menuNode["pageType"] = strtolower("List");//
+	$menuNode["pageId"] = "";
+	$menuNode["openType"] = "None";
+
+	$menuNode["icon"] = "fa-get-pocket";
+	$menuNode["iconType"] = "3";
+	$menuNode["iconShow"] = "1";
+
+		$menuNode["color"] = "";
+
+	$menuNode["title"] = "Programs";
+
+
+
+	$menuNodes[] = $menuNode;
+	$menuNode = array();
+	$menuNode["id"] = "41";
+	$menuNode["name"] = "";
+	$menuNode["href"] = "mypage.htm";
+	$menuNode["type"] = "Leaf";
+	$menuNode["table"] = "public.quarters";
+	$menuNode["style"] = "";
+	$menuNode["params"] = "";
+	$menuNode["parent"] = "35";
+	$menuNode["nameType"] = "Text";
+	$menuNode["linkType"] = "Internal";
+	$menuNode["pageType"] = strtolower("List");//
+	$menuNode["pageId"] = "";
+	$menuNode["openType"] = "None";
+
+	$menuNode["icon"] = "fa-quora";
+	$menuNode["iconType"] = "3";
+	$menuNode["iconShow"] = "1";
+
+		$menuNode["color"] = "";
+
+	$menuNode["title"] = "Quarters";
 
 
 

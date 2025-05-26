@@ -3632,6 +3632,14 @@ function fillProjectEntites()
 	$projectEntitiesReverse[ "surgical_case_summary_view" ] = "public.surgical_case_summary_view";
 	$projectEntities[ "public.training_summary_view" ] = array( "url" => "training_summary_view", "type" => 0 );
 	$projectEntitiesReverse[ "training_summary_view" ] = "public.training_summary_view";
+	$projectEntities[ "public.programs" ] = array( "url" => "programs", "type" => 0 );
+	$projectEntitiesReverse[ "programs" ] = "public.programs";
+	$projectEntities[ "public.training_approaches" ] = array( "url" => "training_approaches", "type" => 0 );
+	$projectEntitiesReverse[ "training_approaches" ] = "public.training_approaches";
+	$projectEntities[ "public.training_types" ] = array( "url" => "training_types", "type" => 0 );
+	$projectEntitiesReverse[ "training_types" ] = "public.training_types";
+	$projectEntities[ "public.quarters" ] = array( "url" => "quarters", "type" => 0 );
+	$projectEntitiesReverse[ "quarters" ] = "public.quarters";
 }
 
 function findTable( $table ) {

@@ -17,6 +17,9 @@ $dalTabletraining_sessions["avg_post_test_score"] = array("type"=>14,"varname"=>
 $dalTabletraining_sessions["remarks"] = array("type"=>201,"varname"=>"remarks", "name" => "remarks", "autoInc" => "0");
 $dalTabletraining_sessions["created_at"] = array("type"=>135,"varname"=>"created_at", "name" => "created_at", "autoInc" => "0");
 $dalTabletraining_sessions["updated_at"] = array("type"=>135,"varname"=>"updated_at", "name" => "updated_at", "autoInc" => "0");
+$dalTabletraining_sessions["training_type_id"] = array("type"=>3,"varname"=>"training_type_id", "name" => "training_type_id", "autoInc" => "0");
+$dalTabletraining_sessions["approach_id"] = array("type"=>3,"varname"=>"approach_id", "name" => "approach_id", "autoInc" => "0");
+$dalTabletraining_sessions["program_id"] = array("type"=>3,"varname"=>"program_id", "name" => "program_id", "autoInc" => "0");
 $dalTabletraining_sessions["training_id"]["key"]=true;
 
 $dal_info["lifebox_mesystem_at_localhost_public_training_sessions"] = &$dalTabletraining_sessions;

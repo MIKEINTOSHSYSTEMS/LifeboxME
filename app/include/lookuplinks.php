@@ -201,6 +201,34 @@ function InitLookupLinks()
 			$lookupTableLinks["public.training_courses"]["training_sessions.course_id"] = array();
 		}
 		$lookupTableLinks["public.training_courses"]["training_sessions.course_id"]["edit"] = array("table" => "public.training_sessions", "field" => "course_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.training_types"] ) ) {
+			$lookupTableLinks["public.training_types"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.training_types"]["training_sessions.training_type_id"] )) {
+			$lookupTableLinks["public.training_types"]["training_sessions.training_type_id"] = array();
+		}
+		$lookupTableLinks["public.training_types"]["training_sessions.training_type_id"]["edit"] = array("table" => "public.training_sessions", "field" => "training_type_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.training_approaches"] ) ) {
+			$lookupTableLinks["public.training_approaches"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.training_approaches"]["training_sessions.approach_id"] )) {
+			$lookupTableLinks["public.training_approaches"]["training_sessions.approach_id"] = array();
+		}
+		$lookupTableLinks["public.training_approaches"]["training_sessions.approach_id"]["edit"] = array("table" => "public.training_sessions", "field" => "approach_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.programs"] ) ) {
+			$lookupTableLinks["public.programs"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.programs"]["training_sessions.program_id"] )) {
+			$lookupTableLinks["public.programs"]["training_sessions.program_id"] = array();
+		}
+		$lookupTableLinks["public.programs"]["training_sessions.program_id"]["edit"] = array("table" => "public.training_sessions", "field" => "program_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.quarters"] ) ) {
+			$lookupTableLinks["public.quarters"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.quarters"]["training_sessions.quarter"] )) {
+			$lookupTableLinks["public.quarters"]["training_sessions.quarter"] = array();
+		}
+		$lookupTableLinks["public.quarters"]["training_sessions.quarter"]["edit"] = array("table" => "public.training_sessions", "field" => "quarter", "page" => "edit");
 		if( !isset( $lookupTableLinks["public.facilities"] ) ) {
 			$lookupTableLinks["public.facilities"] = array();
 		}

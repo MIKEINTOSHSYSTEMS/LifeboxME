@@ -389,7 +389,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_sessions training_id }","hidden":"{$item_hide_simple_grid_field17}","bold":true},
+			{"text":"{$jslabel public_training_sessions training_id }","hidden":"{$item_hide_simple_grid_field2}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -418,7 +418,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_sessions course_id }","hidden":"{$item_hide_simple_grid_field18}","bold":true},
+			{"text":"{$jslabel public_training_sessions course_id }","hidden":"{$item_hide_simple_grid_field3}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -433,7 +433,7 @@ pdfDocument = {
 	cellId: 'headcell_field2',
 	col:0,
 	row:0,
-			fieldName: 'training_type',
+			fieldName: 'training_type_id',
 				style: 'headcell',
 		
 		
@@ -447,11 +447,11 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_sessions training_type }","hidden":"{$item_hide_simple_grid_field19}","bold":true},
+			{"text":"{$jslabel public_training_sessions training_type_id }","hidden":"{$item_hide_simple_grid_field20}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$training_type_align}',
+              "alignment": '{$training_type_id_align}',
      
       
       },
@@ -462,7 +462,7 @@ pdfDocument = {
 	cellId: 'headcell_field3',
 	col:0,
 	row:0,
-			fieldName: 'training_approach',
+			fieldName: 'approach_id',
 				style: 'headcell',
 		
 		
@@ -476,11 +476,11 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_sessions training_approach }","hidden":"{$item_hide_simple_grid_field20}","bold":true},
+			{"text":"{$jslabel public_training_sessions approach_id }","hidden":"{$item_hide_simple_grid_field21}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$training_approach_align}',
+              "alignment": '{$approach_id_align}',
      
       
       },
@@ -491,7 +491,7 @@ pdfDocument = {
 	cellId: 'headcell_field4',
 	col:0,
 	row:0,
-			fieldName: 'program',
+			fieldName: 'program_id',
 				style: 'headcell',
 		
 		
@@ -505,11 +505,11 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_sessions program }","hidden":"{$item_hide_simple_grid_field21}","bold":true},
+			{"text":"{$jslabel public_training_sessions program_id }","hidden":"{$item_hide_simple_grid_field22}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$program_align}',
+              "alignment": '{$program_id_align}',
      
       
       },
@@ -518,35 +518,6 @@ pdfDocument = {
 																							{BEGIN cellblock_grid_headcell_field5}
 {
 	cellId: 'headcell_field5',
-	col:0,
-	row:0,
-			fieldName: 'quarter',
-				style: 'headcell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":"{$jslabel public_training_sessions quarter }","hidden":"{$item_hide_simple_grid_field22}","bold":true},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$quarter_align}',
-     
-      
-      },
-
-{END cellblock_grid_headcell_field5}
-																							{BEGIN cellblock_grid_headcell_field6}
-{
-	cellId: 'headcell_field6',
 	col:0,
 	row:0,
 			fieldName: 'start_date',
@@ -572,10 +543,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field6}
-																							{BEGIN cellblock_grid_headcell_field7}
+{END cellblock_grid_headcell_field5}
+																							{BEGIN cellblock_grid_headcell_field6}
 {
-	cellId: 'headcell_field7',
+	cellId: 'headcell_field6',
 	col:0,
 	row:0,
 			fieldName: 'end_date',
@@ -601,6 +572,35 @@ pdfDocument = {
       
       },
 
+{END cellblock_grid_headcell_field6}
+																							{BEGIN cellblock_grid_headcell_field7}
+{
+	cellId: 'headcell_field7',
+	col:0,
+	row:0,
+			fieldName: 'quarter',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_training_sessions quarter }","hidden":"{$item_hide_simple_grid_field25}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$quarter_align}',
+     
+      
+      },
+
 {END cellblock_grid_headcell_field7}
 																							{BEGIN cellblock_grid_headcell_field8}
 {
@@ -621,7 +621,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_sessions facility_id }","hidden":"{$item_hide_simple_grid_field25}","bold":true},
+			{"text":"{$jslabel public_training_sessions facility_id }","hidden":"{$item_hide_simple_grid_field26}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -650,7 +650,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_sessions host_country_id }","hidden":"{$item_hide_simple_grid_field26}","bold":true},
+			{"text":"{$jslabel public_training_sessions host_country_id }","hidden":"{$item_hide_simple_grid_field27}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -679,7 +679,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_sessions ceu_points }","hidden":"{$item_hide_simple_grid_field27}","bold":true},
+			{"text":"{$jslabel public_training_sessions ceu_points }","hidden":"{$item_hide_simple_grid_field28}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -708,7 +708,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_sessions num_participants }","hidden":"{$item_hide_simple_grid_field28}","bold":true},
+			{"text":"{$jslabel public_training_sessions num_participants }","hidden":"{$item_hide_simple_grid_field29}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -737,7 +737,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_sessions avg_pre_test_score }","hidden":"{$item_hide_simple_grid_field29}","bold":true},
+			{"text":"{$jslabel public_training_sessions avg_pre_test_score }","hidden":"{$item_hide_simple_grid_field30}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -766,7 +766,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_sessions avg_post_test_score }","hidden":"{$item_hide_simple_grid_field30}","bold":true},
+			{"text":"{$jslabel public_training_sessions avg_post_test_score }","hidden":"{$item_hide_simple_grid_field31}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -795,7 +795,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_sessions remarks }","hidden":"{$item_hide_simple_grid_field31}","bold":true},
+			{"text":"{$jslabel public_training_sessions remarks }","hidden":"{$item_hide_simple_grid_field32}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -824,7 +824,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_sessions created_at }","hidden":"{$item_hide_simple_grid_field32}","bold":true},
+			{"text":"{$jslabel public_training_sessions created_at }","hidden":"{$item_hide_simple_grid_field33}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -853,7 +853,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_sessions updated_at }","hidden":"{$item_hide_simple_grid_field33}","bold":true},
+			{"text":"{$jslabel public_training_sessions updated_at }","hidden":"{$item_hide_simple_grid_field34}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1037,7 +1037,7 @@ pdfDocument = {
 	cellId: 'cell_field2',
 	col:0,
 	row:0,
-			fieldName: 'training_type',
+			fieldName: 'training_type_id',
 				style: 'bodycell',
 		
 		
@@ -1051,11 +1051,11 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":{$training_type_pdfvalue},"hidden":"{$item_hide_simple_grid_field2}"},
+			{"text":{$training_type_id_pdfvalue},"hidden":"{$item_hide_simple_grid_field17}"},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$training_type_align}',
+              "alignment": '{$training_type_id_align}',
      
       
       },
@@ -1066,7 +1066,7 @@ pdfDocument = {
 	cellId: 'cell_field3',
 	col:0,
 	row:0,
-			fieldName: 'training_approach',
+			fieldName: 'approach_id',
 				style: 'bodycell',
 		
 		
@@ -1080,11 +1080,11 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":{$training_approach_pdfvalue},"hidden":"{$item_hide_simple_grid_field3}"},
+			{"text":{$approach_id_pdfvalue},"hidden":"{$item_hide_simple_grid_field18}"},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$training_approach_align}',
+              "alignment": '{$approach_id_align}',
      
       
       },
@@ -1095,7 +1095,7 @@ pdfDocument = {
 	cellId: 'cell_field4',
 	col:0,
 	row:0,
-			fieldName: 'program',
+			fieldName: 'program_id',
 				style: 'bodycell',
 		
 		
@@ -1109,11 +1109,11 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":{$program_pdfvalue},"hidden":"{$item_hide_simple_grid_field4}"},
+			{"text":{$program_id_pdfvalue},"hidden":"{$item_hide_simple_grid_field19}"},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$program_align}',
+              "alignment": '{$program_id_align}',
      
       
       },
@@ -1122,35 +1122,6 @@ pdfDocument = {
 																							{BEGIN cellblock_grid_cell_field5}
 {
 	cellId: 'cell_field5',
-	col:0,
-	row:0,
-			fieldName: 'quarter',
-				style: 'bodycell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":{$quarter_pdfvalue},"hidden":"{$item_hide_simple_grid_field5}"},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$quarter_align}',
-     
-      
-      },
-
-{END cellblock_grid_cell_field5}
-																							{BEGIN cellblock_grid_cell_field6}
-{
-	cellId: 'cell_field6',
 	col:0,
 	row:0,
 			fieldName: 'start_date',
@@ -1176,10 +1147,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field6}
-																							{BEGIN cellblock_grid_cell_field7}
+{END cellblock_grid_cell_field5}
+																							{BEGIN cellblock_grid_cell_field6}
 {
-	cellId: 'cell_field7',
+	cellId: 'cell_field6',
 	col:0,
 	row:0,
 			fieldName: 'end_date',
@@ -1201,6 +1172,35 @@ pdfDocument = {
 		  ],
   "border": [ true, true, true, true ],
               "alignment": '{$end_date_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field6}
+																							{BEGIN cellblock_grid_cell_field7}
+{
+	cellId: 'cell_field7',
+	col:0,
+	row:0,
+			fieldName: 'quarter',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$quarter_pdfvalue},"hidden":"{$item_hide_simple_grid_field5}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$quarter_align}',
      
       
       },
