@@ -115,6 +115,9 @@ pdfDocument = {
 										{BEGIN col_grid_16}
 					"%",
 					{END col_grid_16}
+										{BEGIN col_grid_17}
+					"%",
+					{END col_grid_17}
 															],
 											heights: [ // first height for header part
 					"%",
@@ -298,7 +301,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_sessions training_id }","hidden":"{$item_hide_simple_grid_field2}","bold":true},
+			{"text":"{$jslabel public_training_sessions training_id }","hidden":"{$item_hide_simple_grid_field3}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -327,7 +330,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_sessions course_id }","hidden":"{$item_hide_simple_grid_field3}","bold":true},
+			{"text":"{$jslabel public_training_sessions course_id }","hidden":"{$item_hide_simple_grid_field4}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -772,6 +775,35 @@ pdfDocument = {
       },
 
 {END cellblock_grid_headcell_field16}
+																							{BEGIN cellblock_grid_headcell_field17}
+{
+	cellId: 'headcell_field17',
+	col:0,
+	row:0,
+			fieldName: 'training_details',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_training_sessions training_details }","hidden":"{$item_hide_simple_grid_field35}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$training_details_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field17}
 											],
 				{END row_grid_0}
 		
@@ -1274,6 +1306,35 @@ pdfDocument = {
       },
 
 {END cellblock_grid_cell_field16}
+																							{BEGIN cellblock_grid_cell_field17}
+{
+	cellId: 'cell_field17',
+	col:0,
+	row:0,
+			fieldName: 'training_details',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$training_details_pdfvalue},"hidden":"{$item_hide_simple_grid_field2}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$training_details_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field17}
 											],
 				{END row_grid_1}
 						{BEGIN row_grid_2}
@@ -1435,6 +1496,13 @@ pdfDocument = {
 				cellId: 'cell_dpreview',
 				row:  0,
 				col:  16,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  17,
 				text: '',
 				compensateColspan: true
 			},
@@ -1889,6 +1957,32 @@ pdfDocument = {
       },
 
 {END cellblock_grid_footcell_field16}
+																							{BEGIN cellblock_grid_footcell_field17}
+{
+	cellId: 'footcell_field17',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field17}
 											],
 				{END row_grid_3}
 		

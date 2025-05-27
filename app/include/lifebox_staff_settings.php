@@ -40,7 +40,7 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelslifebox_staff["English"]["role"] = "Role";
 	$fieldToolTipslifebox_staff["English"]["role"] = "";
 	$placeHolderslifebox_staff["English"]["role"] = "";
-	$fieldLabelslifebox_staff["English"]["region_id"] = "Region Id";
+	$fieldLabelslifebox_staff["English"]["region_id"] = "Region";
 	$fieldToolTipslifebox_staff["English"]["region_id"] = "";
 	$placeHolderslifebox_staff["English"]["region_id"] = "";
 	$fieldLabelslifebox_staff["English"]["is_active"] = "Is Active";
@@ -52,6 +52,9 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelslifebox_staff["English"]["updated_at"] = "Updated At";
 	$fieldToolTipslifebox_staff["English"]["updated_at"] = "";
 	$placeHolderslifebox_staff["English"]["updated_at"] = "";
+	$fieldLabelslifebox_staff["English"]["lifebox_staff_details"] = "Lifebox Staff Details";
+	$fieldToolTipslifebox_staff["English"]["lifebox_staff_details"] = "";
+	$placeHolderslifebox_staff["English"]["lifebox_staff_details"] = "";
 	if (count($fieldToolTipslifebox_staff["English"]))
 		$tdatalifebox_staff[".isUseToolTips"] = true;
 }
@@ -176,6 +179,7 @@ $tdatalifebox_staff[".googleLikeFields"][] = "email";
 $tdatalifebox_staff[".googleLikeFields"][] = "role";
 $tdatalifebox_staff[".googleLikeFields"][] = "region_id";
 $tdatalifebox_staff[".googleLikeFields"][] = "is_active";
+$tdatalifebox_staff[".googleLikeFields"][] = "lifebox_staff_details";
 $tdatalifebox_staff[".googleLikeFields"][] = "created_at";
 $tdatalifebox_staff[".googleLikeFields"][] = "updated_at";
 
@@ -211,8 +215,8 @@ $tdatalifebox_staff[".strOrderBy"] = $tstrOrderBy;
 $tdatalifebox_staff[".orderindexes"] = array();
 
 
-$tdatalifebox_staff[".sqlHead"] = "SELECT staff_id,  	first_name,  	last_name,  	email,  	\"role\",  	region_id,  	is_active,  	created_at,  	updated_at";
-$tdatalifebox_staff[".sqlFrom"] = "FROM \"public\".lifebox_staff";
+$tdatalifebox_staff[".sqlHead"] = "SELECT staff_id,      first_name,      last_name,      email,      \"role\",      region_id,      is_active,      CONCAT(          first_name, ' ', last_name, ' | ', email      ) AS lifebox_staff_details,  -- Concatenating first name, last name, and email      created_at,      updated_at";
+$tdatalifebox_staff[".sqlFrom"] = "FROM       \"public\".lifebox_staff";
 $tdatalifebox_staff[".sqlWhereExpr"] = "";
 $tdatalifebox_staff[".sqlTail"] = "";
 
@@ -1049,7 +1053,8 @@ $tdatalifebox_staff[".hideMobileList"] = array();
 	
 
 	
-	
+		$edata["Multiselect"] = true;
+
 		$edata["SelectSize"] = 1;
 
 // End Lookup Settings
@@ -1094,7 +1099,7 @@ $tdatalifebox_staff[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "Equals";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
@@ -1254,10 +1259,147 @@ $tdatalifebox_staff[".hideMobileList"] = array();
 
 	$tdatalifebox_staff["is_active"] = $fdata;
 		$tdatalifebox_staff[".searchableFields"][] = "is_active";
-//	created_at
+//	lifebox_staff_details
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 8;
+	$fdata["strName"] = "lifebox_staff_details";
+	$fdata["GoodName"] = "lifebox_staff_details";
+	$fdata["ownerTable"] = "";
+	$fdata["Label"] = GetFieldLabel("public_lifebox_staff","lifebox_staff_details");
+	$fdata["FieldType"] = 201;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "lifebox_staff_details";
+
+	
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "CONCAT(          first_name, ' ', last_name, ' | ', email      )";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text area");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+				$edata["nRows"] = 100;
+			$edata["nCols"] = 200;
+
+	
+	
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatalifebox_staff["lifebox_staff_details"] = $fdata;
+		$tdatalifebox_staff[".searchableFields"][] = "lifebox_staff_details";
+//	created_at
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 9;
 	$fdata["strName"] = "created_at";
 	$fdata["GoodName"] = "created_at";
 	$fdata["ownerTable"] = "public.lifebox_staff";
@@ -1396,7 +1538,7 @@ $tdatalifebox_staff[".hideMobileList"] = array();
 //	updated_at
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 9;
+	$fdata["Index"] = 10;
 	$fdata["strName"] = "updated_at";
 	$fdata["GoodName"] = "updated_at";
 	$fdata["ownerTable"] = "public.lifebox_staff";
@@ -1625,8 +1767,8 @@ function createSqlQuery_lifebox_staff()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "staff_id,  	first_name,  	last_name,  	email,  	\"role\",  	region_id,  	is_active,  	created_at,  	updated_at";
-$proto0["m_strFrom"] = "FROM \"public\".lifebox_staff";
+$proto0["m_strFieldList"] = "staff_id,      first_name,      last_name,      email,      \"role\",      region_id,      is_active,      CONCAT(          first_name, ' ', last_name, ' | ', email      ) AS lifebox_staff_details,  -- Concatenating first name, last name, and email      created_at,      updated_at";
+$proto0["m_strFrom"] = "FROM       \"public\".lifebox_staff";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
 	
@@ -1764,72 +1906,111 @@ $obj = new SQLFieldListItem($proto18);
 
 $proto0["m_fieldlist"][]=$obj;
 						$proto20=array();
+			$proto21=array();
+$proto21["m_functiontype"] = "SQLF_CUSTOM";
+$proto21["m_arguments"] = array();
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "first_name"
+));
+
+$proto21["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "' '"
+));
+
+$proto21["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "last_name"
+));
+
+$proto21["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "' | '"
+));
+
+$proto21["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "email"
+));
+
+$proto21["m_arguments"][]=$obj;
+$proto21["m_strFunctionName"] = "CONCAT";
+$obj = new SQLFunctionCall($proto21);
+
+$proto20["m_sql"] = "CONCAT(          first_name, ' ', last_name, ' | ', email      )";
+$proto20["m_srcTableName"] = "public.lifebox_staff";
+$proto20["m_expr"]=$obj;
+$proto20["m_alias"] = "lifebox_staff_details";
+$obj = new SQLFieldListItem($proto20);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto27=array();
 			$obj = new SQLField(array(
 	"m_strName" => "created_at",
 	"m_strTable" => "public.lifebox_staff",
 	"m_srcTableName" => "public.lifebox_staff"
 ));
 
-$proto20["m_sql"] = "created_at";
-$proto20["m_srcTableName"] = "public.lifebox_staff";
-$proto20["m_expr"]=$obj;
-$proto20["m_alias"] = "";
-$obj = new SQLFieldListItem($proto20);
+$proto27["m_sql"] = "created_at";
+$proto27["m_srcTableName"] = "public.lifebox_staff";
+$proto27["m_expr"]=$obj;
+$proto27["m_alias"] = "";
+$obj = new SQLFieldListItem($proto27);
 
 $proto0["m_fieldlist"][]=$obj;
-						$proto22=array();
+						$proto29=array();
 			$obj = new SQLField(array(
 	"m_strName" => "updated_at",
 	"m_strTable" => "public.lifebox_staff",
 	"m_srcTableName" => "public.lifebox_staff"
 ));
 
-$proto22["m_sql"] = "updated_at";
-$proto22["m_srcTableName"] = "public.lifebox_staff";
-$proto22["m_expr"]=$obj;
-$proto22["m_alias"] = "";
-$obj = new SQLFieldListItem($proto22);
+$proto29["m_sql"] = "updated_at";
+$proto29["m_srcTableName"] = "public.lifebox_staff";
+$proto29["m_expr"]=$obj;
+$proto29["m_alias"] = "";
+$obj = new SQLFieldListItem($proto29);
 
 $proto0["m_fieldlist"][]=$obj;
 $proto0["m_fromlist"] = array();
-												$proto24=array();
-$proto24["m_link"] = "SQLL_MAIN";
-			$proto25=array();
-$proto25["m_strName"] = "public.lifebox_staff";
-$proto25["m_srcTableName"] = "public.lifebox_staff";
-$proto25["m_columns"] = array();
-$proto25["m_columns"][] = "staff_id";
-$proto25["m_columns"][] = "first_name";
-$proto25["m_columns"][] = "last_name";
-$proto25["m_columns"][] = "email";
-$proto25["m_columns"][] = "role";
-$proto25["m_columns"][] = "region_id";
-$proto25["m_columns"][] = "is_active";
-$proto25["m_columns"][] = "created_at";
-$proto25["m_columns"][] = "updated_at";
-$obj = new SQLTable($proto25);
+												$proto31=array();
+$proto31["m_link"] = "SQLL_MAIN";
+			$proto32=array();
+$proto32["m_strName"] = "public.lifebox_staff";
+$proto32["m_srcTableName"] = "public.lifebox_staff";
+$proto32["m_columns"] = array();
+$proto32["m_columns"][] = "staff_id";
+$proto32["m_columns"][] = "first_name";
+$proto32["m_columns"][] = "last_name";
+$proto32["m_columns"][] = "email";
+$proto32["m_columns"][] = "role";
+$proto32["m_columns"][] = "region_id";
+$proto32["m_columns"][] = "is_active";
+$proto32["m_columns"][] = "created_at";
+$proto32["m_columns"][] = "updated_at";
+$obj = new SQLTable($proto32);
 
-$proto24["m_table"] = $obj;
-$proto24["m_sql"] = "\"public\".lifebox_staff";
-$proto24["m_alias"] = "";
-$proto24["m_srcTableName"] = "public.lifebox_staff";
-$proto26=array();
-$proto26["m_sql"] = "";
-$proto26["m_uniontype"] = "SQLL_UNKNOWN";
+$proto31["m_table"] = $obj;
+$proto31["m_sql"] = "\"public\".lifebox_staff";
+$proto31["m_alias"] = "";
+$proto31["m_srcTableName"] = "public.lifebox_staff";
+$proto33=array();
+$proto33["m_sql"] = "";
+$proto33["m_uniontype"] = "SQLL_UNKNOWN";
 	$obj = new SQLNonParsed(array(
 	"m_sql" => ""
 ));
 
-$proto26["m_column"]=$obj;
-$proto26["m_contained"] = array();
-$proto26["m_strCase"] = "";
-$proto26["m_havingmode"] = false;
-$proto26["m_inBrackets"] = false;
-$proto26["m_useAlias"] = false;
-$obj = new SQLLogicalExpr($proto26);
+$proto33["m_column"]=$obj;
+$proto33["m_contained"] = array();
+$proto33["m_strCase"] = "";
+$proto33["m_havingmode"] = false;
+$proto33["m_inBrackets"] = false;
+$proto33["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto33);
 
-$proto24["m_joinon"] = $obj;
-$obj = new SQLFromListItem($proto24);
+$proto31["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto31);
 
 $proto0["m_fromlist"][]=$obj;
 $proto0["m_groupby"] = array();
@@ -1845,7 +2026,7 @@ $queryData_lifebox_staff = createSqlQuery_lifebox_staff();
 	
 		;
 
-									
+										
 
 $tdatalifebox_staff[".sqlquery"] = $queryData_lifebox_staff;
 

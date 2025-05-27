@@ -269,6 +269,28 @@
 </div>
 
 {END updated_at_fieldblock}
+											
+{BEGIN trainer_details_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_trainer_details}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="trainer_details{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field8" {$item_integrated_search_field8} data-pageid="{$pageid}" data-field="trainer_details" data-fieldname="trainer_details" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_trainer_details}">
+		{$label public_trainers trainer_details }	</label>
+	<div class="r-search-option">
+		{$searchtype_trainer_details}
+	</div>
+	<div class="r-search-field">
+		{$trainer_details_editcontrol}	</div>
+	<div class="r-search-field">
+		{$trainer_details_editcontrol1}
+	</div>
+	
+</div>
+
+{END trainer_details_fieldblock}
 	
 								</td>
 			{END cellblock_grid_c3}

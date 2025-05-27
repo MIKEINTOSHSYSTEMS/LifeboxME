@@ -4,11 +4,11 @@
 	$menuNodes = array();
 
 	$menuNode = array();
-	$menuNode["id"] = "15";
+	$menuNode["id"] = "20";
 	$menuNode["name"] = "";
 	$menuNode["href"] = "mypage.htm";
 	$menuNode["type"] = "Leaf";
-	$menuNode["table"] = "public.trainers";
+	$menuNode["table"] = "public.training_sessions";
 	$menuNode["style"] = "";
 	$menuNode["params"] = "";
 	$menuNode["parent"] = "0";
@@ -18,13 +18,13 @@
 	$menuNode["pageId"] = "";
 	$menuNode["openType"] = "None";
 
-	$menuNode["icon"] = "fa-group";
+	$menuNode["icon"] = "fa-slideshare";
 	$menuNode["iconType"] = "3";
 	$menuNode["iconShow"] = "1";
 
 		$menuNode["color"] = "";
 
-	$menuNode["title"] = "Trainers";
+	$menuNode["title"] = "Training Sessions";
 
 
 
@@ -420,11 +420,11 @@
 
 	$menuNodes[] = $menuNode;
 	$menuNode = array();
-	$menuNode["id"] = "20";
-	$menuNode["name"] = "";
+	$menuNode["id"] = "15";
+	$menuNode["name"] = "Training Session Trainers";
 	$menuNode["href"] = "mypage.htm";
 	$menuNode["type"] = "Leaf";
-	$menuNode["table"] = "public.training_sessions";
+	$menuNode["table"] = "public.trainers";
 	$menuNode["style"] = "";
 	$menuNode["params"] = "";
 	$menuNode["parent"] = "33";
@@ -434,20 +434,20 @@
 	$menuNode["pageId"] = "";
 	$menuNode["openType"] = "None";
 
-	$menuNode["icon"] = "fa-calendar-times-o";
+	$menuNode["icon"] = "fa-group";
 	$menuNode["iconType"] = "3";
 	$menuNode["iconShow"] = "1";
 
 		$menuNode["color"] = "";
 
-	$menuNode["title"] = "Training Sessions";
+	$menuNode["title"] = "Training Session Trainers";
 
 
 
 	$menuNodes[] = $menuNode;
 	$menuNode = array();
 	$menuNode["id"] = "21";
-	$menuNode["name"] = "";
+	$menuNode["name"] = "Trainers Assignment Alloc";
 	$menuNode["href"] = "mypage.htm";
 	$menuNode["type"] = "Leaf";
 	$menuNode["table"] = "public.training_trainers";
@@ -460,13 +460,13 @@
 	$menuNode["pageId"] = "";
 	$menuNode["openType"] = "None";
 
-	$menuNode["icon"] = "fa-id-card-o";
+	$menuNode["icon"] = "fa-sitemap";
 	$menuNode["iconType"] = "3";
 	$menuNode["iconShow"] = "1";
 
 		$menuNode["color"] = "";
 
-	$menuNode["title"] = "Training Trainers";
+	$menuNode["title"] = "Trainers Assignment Alloc";
 
 
 
@@ -941,7 +941,7 @@
 	$menuNodes[] = $menuNode;
 	$menuNode = array();
 	$menuNode["id"] = "37";
-	$menuNode["name"] = "Summary Views";
+	$menuNode["name"] = "Summaries";
 	$menuNode["href"] = "";
 	$menuNode["type"] = "Group";
 	$menuNode["table"] = "";
@@ -960,92 +960,14 @@
 
 		$menuNode["color"] = "";
 
-	$menuNode["title"] = "Summary Views";
-
-
-
-	$menuNodes[] = $menuNode;
-	$menuNode = array();
-	$menuNode["id"] = "24";
-	$menuNode["name"] = "";
-	$menuNode["href"] = "mypage.htm";
-	$menuNode["type"] = "Leaf";
-	$menuNode["table"] = "public.clean_cut_implementation_summary_view";
-	$menuNode["style"] = "";
-	$menuNode["params"] = "";
-	$menuNode["parent"] = "37";
-	$menuNode["nameType"] = "Text";
-	$menuNode["linkType"] = "Internal";
-	$menuNode["pageType"] = strtolower("List");//
-	$menuNode["pageId"] = "";
-	$menuNode["openType"] = "None";
-
-	$menuNode["icon"] = "";
-	$menuNode["iconType"] = "0";
-	$menuNode["iconShow"] = "1";
-
-		$menuNode["color"] = "";
-
-	$menuNode["title"] = "Clean Cut Implementation Summary View";
-
-
-
-	$menuNodes[] = $menuNode;
-	$menuNode = array();
-	$menuNode["id"] = "25";
-	$menuNode["name"] = "";
-	$menuNode["href"] = "mypage.htm";
-	$menuNode["type"] = "Leaf";
-	$menuNode["table"] = "public.device_distribution_summary_view";
-	$menuNode["style"] = "";
-	$menuNode["params"] = "";
-	$menuNode["parent"] = "37";
-	$menuNode["nameType"] = "Text";
-	$menuNode["linkType"] = "Internal";
-	$menuNode["pageType"] = strtolower("List");//
-	$menuNode["pageId"] = "";
-	$menuNode["openType"] = "None";
-
-	$menuNode["icon"] = "";
-	$menuNode["iconType"] = "0";
-	$menuNode["iconShow"] = "1";
-
-		$menuNode["color"] = "";
-
-	$menuNode["title"] = "Device Distribution Summary View";
-
-
-
-	$menuNodes[] = $menuNode;
-	$menuNode = array();
-	$menuNode["id"] = "26";
-	$menuNode["name"] = "";
-	$menuNode["href"] = "mypage.htm";
-	$menuNode["type"] = "Leaf";
-	$menuNode["table"] = "public.surgical_case_summary_view";
-	$menuNode["style"] = "";
-	$menuNode["params"] = "";
-	$menuNode["parent"] = "37";
-	$menuNode["nameType"] = "Text";
-	$menuNode["linkType"] = "Internal";
-	$menuNode["pageType"] = strtolower("List");//
-	$menuNode["pageId"] = "";
-	$menuNode["openType"] = "None";
-
-	$menuNode["icon"] = "";
-	$menuNode["iconType"] = "0";
-	$menuNode["iconShow"] = "1";
-
-		$menuNode["color"] = "";
-
-	$menuNode["title"] = "Surgical Case Summary View";
+	$menuNode["title"] = "Summaries";
 
 
 
 	$menuNodes[] = $menuNode;
 	$menuNode = array();
 	$menuNode["id"] = "27";
-	$menuNode["name"] = "";
+	$menuNode["name"] = "Training Summary";
 	$menuNode["href"] = "mypage.htm";
 	$menuNode["type"] = "Leaf";
 	$menuNode["table"] = "public.training_summary_view";
@@ -1058,13 +980,91 @@
 	$menuNode["pageId"] = "";
 	$menuNode["openType"] = "None";
 
-	$menuNode["icon"] = "";
-	$menuNode["iconType"] = "0";
+	$menuNode["icon"] = "fa-list-alt";
+	$menuNode["iconType"] = "3";
 	$menuNode["iconShow"] = "1";
 
 		$menuNode["color"] = "";
 
-	$menuNode["title"] = "Training Summary View";
+	$menuNode["title"] = "Training Summary";
+
+
+
+	$menuNodes[] = $menuNode;
+	$menuNode = array();
+	$menuNode["id"] = "26";
+	$menuNode["name"] = "Surgical Case Summary";
+	$menuNode["href"] = "mypage.htm";
+	$menuNode["type"] = "Leaf";
+	$menuNode["table"] = "public.surgical_case_summary_view";
+	$menuNode["style"] = "";
+	$menuNode["params"] = "";
+	$menuNode["parent"] = "37";
+	$menuNode["nameType"] = "Text";
+	$menuNode["linkType"] = "Internal";
+	$menuNode["pageType"] = strtolower("List");//
+	$menuNode["pageId"] = "";
+	$menuNode["openType"] = "None";
+
+	$menuNode["icon"] = "fa-scribd";
+	$menuNode["iconType"] = "3";
+	$menuNode["iconShow"] = "1";
+
+		$menuNode["color"] = "";
+
+	$menuNode["title"] = "Surgical Case Summary";
+
+
+
+	$menuNodes[] = $menuNode;
+	$menuNode = array();
+	$menuNode["id"] = "25";
+	$menuNode["name"] = "Device Distribution Summary";
+	$menuNode["href"] = "mypage.htm";
+	$menuNode["type"] = "Leaf";
+	$menuNode["table"] = "public.device_distribution_summary_view";
+	$menuNode["style"] = "";
+	$menuNode["params"] = "";
+	$menuNode["parent"] = "37";
+	$menuNode["nameType"] = "Text";
+	$menuNode["linkType"] = "Internal";
+	$menuNode["pageType"] = strtolower("List");//
+	$menuNode["pageId"] = "";
+	$menuNode["openType"] = "None";
+
+	$menuNode["icon"] = "fa-mobile-phone";
+	$menuNode["iconType"] = "3";
+	$menuNode["iconShow"] = "1";
+
+		$menuNode["color"] = "";
+
+	$menuNode["title"] = "Device Distribution Summary";
+
+
+
+	$menuNodes[] = $menuNode;
+	$menuNode = array();
+	$menuNode["id"] = "24";
+	$menuNode["name"] = "Clean Cut Implementation Summary";
+	$menuNode["href"] = "mypage.htm";
+	$menuNode["type"] = "Leaf";
+	$menuNode["table"] = "public.clean_cut_implementation_summary_view";
+	$menuNode["style"] = "";
+	$menuNode["params"] = "";
+	$menuNode["parent"] = "37";
+	$menuNode["nameType"] = "Text";
+	$menuNode["linkType"] = "Internal";
+	$menuNode["pageType"] = strtolower("List");//
+	$menuNode["pageId"] = "";
+	$menuNode["openType"] = "None";
+
+	$menuNode["icon"] = "fa-hand-scissors-o";
+	$menuNode["iconType"] = "3";
+	$menuNode["iconShow"] = "1";
+
+		$menuNode["color"] = "";
+
+	$menuNode["title"] = "Clean Cut Implementation Summary";
 
 
 

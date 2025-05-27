@@ -49,6 +49,9 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelstrainers["English"]["updated_at"] = "Updated At";
 	$fieldToolTipstrainers["English"]["updated_at"] = "";
 	$placeHolderstrainers["English"]["updated_at"] = "";
+	$fieldLabelstrainers["English"]["trainer_details"] = "Trainer Details";
+	$fieldToolTipstrainers["English"]["trainer_details"] = "";
+	$placeHolderstrainers["English"]["trainer_details"] = "";
 	if (count($fieldToolTipstrainers["English"]))
 		$tdatatrainers[".isUseToolTips"] = true;
 }
@@ -171,6 +174,7 @@ $tdatatrainers[".googleLikeFields"][] = "first_name";
 $tdatatrainers[".googleLikeFields"][] = "last_name";
 $tdatatrainers[".googleLikeFields"][] = "email";
 $tdatatrainers[".googleLikeFields"][] = "organization";
+$tdatatrainers[".googleLikeFields"][] = "trainer_details";
 $tdatatrainers[".googleLikeFields"][] = "is_active";
 $tdatatrainers[".googleLikeFields"][] = "created_at";
 $tdatatrainers[".googleLikeFields"][] = "updated_at";
@@ -207,8 +211,8 @@ $tdatatrainers[".strOrderBy"] = $tstrOrderBy;
 $tdatatrainers[".orderindexes"] = array();
 
 
-$tdatatrainers[".sqlHead"] = "SELECT trainer_id,  	first_name,  	last_name,  	email,  	\"organization\",  	is_active,  	created_at,  	updated_at";
-$tdatatrainers[".sqlFrom"] = "FROM \"public\".trainers";
+$tdatatrainers[".sqlHead"] = "SELECT trainer_id,      first_name,      last_name,      email,      \"organization\",      -- Add the concatenated trainer details as a new column      CONCAT(first_name, ' ', last_name, ' | ', email, ' | ', \"organization\") AS trainer_details,      is_active,      created_at,      updated_at";
+$tdatatrainers[".sqlFrom"] = "FROM      \"public\".trainers";
 $tdatatrainers[".sqlWhereExpr"] = "";
 $tdatatrainers[".sqlTail"] = "";
 
@@ -953,10 +957,147 @@ $tdatatrainers[".hideMobileList"] = array();
 
 	$tdatatrainers["organization"] = $fdata;
 		$tdatatrainers[".searchableFields"][] = "organization";
-//	is_active
+//	trainer_details
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 6;
+	$fdata["strName"] = "trainer_details";
+	$fdata["GoodName"] = "trainer_details";
+	$fdata["ownerTable"] = "";
+	$fdata["Label"] = GetFieldLabel("public_trainers","trainer_details");
+	$fdata["FieldType"] = 201;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "trainer_details";
+
+	
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "CONCAT(first_name, ' ', last_name, ' | ', email, ' | ', \"organization\")";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text area");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+				$edata["nRows"] = 100;
+			$edata["nCols"] = 200;
+
+	
+	
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatatrainers["trainer_details"] = $fdata;
+		$tdatatrainers[".searchableFields"][] = "trainer_details";
+//	is_active
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 7;
 	$fdata["strName"] = "is_active";
 	$fdata["GoodName"] = "is_active";
 	$fdata["ownerTable"] = "public.trainers";
@@ -1089,7 +1230,7 @@ $tdatatrainers[".hideMobileList"] = array();
 //	created_at
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 7;
+	$fdata["Index"] = 8;
 	$fdata["strName"] = "created_at";
 	$fdata["GoodName"] = "created_at";
 	$fdata["ownerTable"] = "public.trainers";
@@ -1228,7 +1369,7 @@ $tdatatrainers[".hideMobileList"] = array();
 //	updated_at
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 8;
+	$fdata["Index"] = 9;
 	$fdata["strName"] = "updated_at";
 	$fdata["GoodName"] = "updated_at";
 	$fdata["ownerTable"] = "public.trainers";
@@ -1439,8 +1580,8 @@ function createSqlQuery_trainers()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "trainer_id,  	first_name,  	last_name,  	email,  	\"organization\",  	is_active,  	created_at,  	updated_at";
-$proto0["m_strFrom"] = "FROM \"public\".trainers";
+$proto0["m_strFieldList"] = "trainer_id,      first_name,      last_name,      email,      \"organization\",      -- Add the concatenated trainer details as a new column      CONCAT(first_name, ' ', last_name, ' | ', email, ' | ', \"organization\") AS trainer_details,      is_active,      created_at,      updated_at";
+$proto0["m_strFrom"] = "FROM      \"public\".trainers";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
 	
@@ -1550,85 +1691,134 @@ $obj = new SQLFieldListItem($proto14);
 
 $proto0["m_fieldlist"][]=$obj;
 						$proto16=array();
+			$proto17=array();
+$proto17["m_functiontype"] = "SQLF_CUSTOM";
+$proto17["m_arguments"] = array();
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "first_name"
+));
+
+$proto17["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "' '"
+));
+
+$proto17["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "last_name"
+));
+
+$proto17["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "' | '"
+));
+
+$proto17["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "email"
+));
+
+$proto17["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "' | '"
+));
+
+$proto17["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "\"organization\""
+));
+
+$proto17["m_arguments"][]=$obj;
+$proto17["m_strFunctionName"] = "CONCAT";
+$obj = new SQLFunctionCall($proto17);
+
+$proto16["m_sql"] = "CONCAT(first_name, ' ', last_name, ' | ', email, ' | ', \"organization\")";
+$proto16["m_srcTableName"] = "public.trainers";
+$proto16["m_expr"]=$obj;
+$proto16["m_alias"] = "trainer_details";
+$obj = new SQLFieldListItem($proto16);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto25=array();
 			$obj = new SQLField(array(
 	"m_strName" => "is_active",
 	"m_strTable" => "public.trainers",
 	"m_srcTableName" => "public.trainers"
 ));
 
-$proto16["m_sql"] = "is_active";
-$proto16["m_srcTableName"] = "public.trainers";
-$proto16["m_expr"]=$obj;
-$proto16["m_alias"] = "";
-$obj = new SQLFieldListItem($proto16);
+$proto25["m_sql"] = "is_active";
+$proto25["m_srcTableName"] = "public.trainers";
+$proto25["m_expr"]=$obj;
+$proto25["m_alias"] = "";
+$obj = new SQLFieldListItem($proto25);
 
 $proto0["m_fieldlist"][]=$obj;
-						$proto18=array();
+						$proto27=array();
 			$obj = new SQLField(array(
 	"m_strName" => "created_at",
 	"m_strTable" => "public.trainers",
 	"m_srcTableName" => "public.trainers"
 ));
 
-$proto18["m_sql"] = "created_at";
-$proto18["m_srcTableName"] = "public.trainers";
-$proto18["m_expr"]=$obj;
-$proto18["m_alias"] = "";
-$obj = new SQLFieldListItem($proto18);
+$proto27["m_sql"] = "created_at";
+$proto27["m_srcTableName"] = "public.trainers";
+$proto27["m_expr"]=$obj;
+$proto27["m_alias"] = "";
+$obj = new SQLFieldListItem($proto27);
 
 $proto0["m_fieldlist"][]=$obj;
-						$proto20=array();
+						$proto29=array();
 			$obj = new SQLField(array(
 	"m_strName" => "updated_at",
 	"m_strTable" => "public.trainers",
 	"m_srcTableName" => "public.trainers"
 ));
 
-$proto20["m_sql"] = "updated_at";
-$proto20["m_srcTableName"] = "public.trainers";
-$proto20["m_expr"]=$obj;
-$proto20["m_alias"] = "";
-$obj = new SQLFieldListItem($proto20);
+$proto29["m_sql"] = "updated_at";
+$proto29["m_srcTableName"] = "public.trainers";
+$proto29["m_expr"]=$obj;
+$proto29["m_alias"] = "";
+$obj = new SQLFieldListItem($proto29);
 
 $proto0["m_fieldlist"][]=$obj;
 $proto0["m_fromlist"] = array();
-												$proto22=array();
-$proto22["m_link"] = "SQLL_MAIN";
-			$proto23=array();
-$proto23["m_strName"] = "public.trainers";
-$proto23["m_srcTableName"] = "public.trainers";
-$proto23["m_columns"] = array();
-$proto23["m_columns"][] = "trainer_id";
-$proto23["m_columns"][] = "first_name";
-$proto23["m_columns"][] = "last_name";
-$proto23["m_columns"][] = "email";
-$proto23["m_columns"][] = "organization";
-$proto23["m_columns"][] = "is_active";
-$proto23["m_columns"][] = "created_at";
-$proto23["m_columns"][] = "updated_at";
-$obj = new SQLTable($proto23);
+												$proto31=array();
+$proto31["m_link"] = "SQLL_MAIN";
+			$proto32=array();
+$proto32["m_strName"] = "public.trainers";
+$proto32["m_srcTableName"] = "public.trainers";
+$proto32["m_columns"] = array();
+$proto32["m_columns"][] = "trainer_id";
+$proto32["m_columns"][] = "first_name";
+$proto32["m_columns"][] = "last_name";
+$proto32["m_columns"][] = "email";
+$proto32["m_columns"][] = "organization";
+$proto32["m_columns"][] = "is_active";
+$proto32["m_columns"][] = "created_at";
+$proto32["m_columns"][] = "updated_at";
+$obj = new SQLTable($proto32);
 
-$proto22["m_table"] = $obj;
-$proto22["m_sql"] = "\"public\".trainers";
-$proto22["m_alias"] = "";
-$proto22["m_srcTableName"] = "public.trainers";
-$proto24=array();
-$proto24["m_sql"] = "";
-$proto24["m_uniontype"] = "SQLL_UNKNOWN";
+$proto31["m_table"] = $obj;
+$proto31["m_sql"] = "\"public\".trainers";
+$proto31["m_alias"] = "";
+$proto31["m_srcTableName"] = "public.trainers";
+$proto33=array();
+$proto33["m_sql"] = "";
+$proto33["m_uniontype"] = "SQLL_UNKNOWN";
 	$obj = new SQLNonParsed(array(
 	"m_sql" => ""
 ));
 
-$proto24["m_column"]=$obj;
-$proto24["m_contained"] = array();
-$proto24["m_strCase"] = "";
-$proto24["m_havingmode"] = false;
-$proto24["m_inBrackets"] = false;
-$proto24["m_useAlias"] = false;
-$obj = new SQLLogicalExpr($proto24);
+$proto33["m_column"]=$obj;
+$proto33["m_contained"] = array();
+$proto33["m_strCase"] = "";
+$proto33["m_havingmode"] = false;
+$proto33["m_inBrackets"] = false;
+$proto33["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto33);
 
-$proto22["m_joinon"] = $obj;
-$obj = new SQLFromListItem($proto22);
+$proto31["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto31);
 
 $proto0["m_fromlist"][]=$obj;
 $proto0["m_groupby"] = array();
@@ -1644,7 +1834,7 @@ $queryData_trainers = createSqlQuery_trainers();
 	
 		;
 
-								
+									
 
 $tdatatrainers[".sqlquery"] = $queryData_trainers;
 

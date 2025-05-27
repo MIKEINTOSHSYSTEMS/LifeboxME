@@ -155,7 +155,7 @@ $tdatatraining_courses[".addPageEvents"] = false;
 $tdatatraining_courses[".isUseTimeForSearch"] = false;
 
 
-$tdatatraining_courses[".badgeColor"] = "3CB371";
+$tdatatraining_courses[".badgeColor"] = "3cb371";
 
 
 $tdatatraining_courses[".allSearchFields"] = array();

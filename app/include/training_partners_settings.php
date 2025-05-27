@@ -6,11 +6,11 @@ $tdatatraining_partners[".OwnerID"] = "";
 $tdatatraining_partners[".OriginalTable"] = "public.training_partners";
 
 
-$tdatatraining_partners[".pagesByType"] = my_json_decode( "{\"add\":[\"add\"],\"edit\":[\"edit\"],\"export\":[\"export\"],\"import\":[\"import\"],\"list\":[\"list\"],\"print\":[\"print\"],\"search\":[\"search\"],\"view\":[\"view\"]}" );
+$tdatatraining_partners[".pagesByType"] = my_json_decode( "{\"add\":[\"add\"],\"edit\":[\"edit\"],\"export\":[\"export\"],\"import\":[\"import\"],\"list\":[\"list\"],\"masterlist\":[\"masterlist\"],\"masterprint\":[\"masterprint\"],\"print\":[\"print\"],\"search\":[\"search\"],\"view\":[\"view\"]}" );
 $tdatatraining_partners[".originalPagesByType"] = $tdatatraining_partners[".pagesByType"];
-$tdatatraining_partners[".pages"] = types2pages( my_json_decode( "{\"add\":[\"add\"],\"edit\":[\"edit\"],\"export\":[\"export\"],\"import\":[\"import\"],\"list\":[\"list\"],\"print\":[\"print\"],\"search\":[\"search\"],\"view\":[\"view\"]}" ) );
+$tdatatraining_partners[".pages"] = types2pages( my_json_decode( "{\"add\":[\"add\"],\"edit\":[\"edit\"],\"export\":[\"export\"],\"import\":[\"import\"],\"list\":[\"list\"],\"masterlist\":[\"masterlist\"],\"masterprint\":[\"masterprint\"],\"print\":[\"print\"],\"search\":[\"search\"],\"view\":[\"view\"]}" ) );
 $tdatatraining_partners[".originalPages"] = $tdatatraining_partners[".pages"];
-$tdatatraining_partners[".defaultPages"] = my_json_decode( "{\"add\":\"add\",\"edit\":\"edit\",\"export\":\"export\",\"import\":\"import\",\"list\":\"list\",\"print\":\"print\",\"search\":\"search\",\"view\":\"view\"}" );
+$tdatatraining_partners[".defaultPages"] = my_json_decode( "{\"add\":\"add\",\"edit\":\"edit\",\"export\":\"export\",\"import\":\"import\",\"list\":\"list\",\"masterlist\":\"masterlist\",\"masterprint\":\"masterprint\",\"print\":\"print\",\"search\":\"search\",\"view\":\"view\"}" );
 $tdatatraining_partners[".originalDefaultPages"] = $tdatatraining_partners[".defaultPages"];
 
 //	field labels
@@ -28,10 +28,10 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelstraining_partners["English"]["training_partner_id"] = "Training Partner Id";
 	$fieldToolTipstraining_partners["English"]["training_partner_id"] = "";
 	$placeHolderstraining_partners["English"]["training_partner_id"] = "";
-	$fieldLabelstraining_partners["English"]["training_id"] = "Training Id";
+	$fieldLabelstraining_partners["English"]["training_id"] = "Training Session";
 	$fieldToolTipstraining_partners["English"]["training_id"] = "";
 	$placeHolderstraining_partners["English"]["training_id"] = "";
-	$fieldLabelstraining_partners["English"]["partner_id"] = "Partner Id";
+	$fieldLabelstraining_partners["English"]["partner_id"] = "Partner";
 	$fieldToolTipstraining_partners["English"]["partner_id"] = "";
 	$placeHolderstraining_partners["English"]["partner_id"] = "";
 	$fieldLabelstraining_partners["English"]["created_at"] = "Created At";
@@ -146,7 +146,7 @@ $tdatatraining_partners[".addPageEvents"] = false;
 $tdatatraining_partners[".isUseTimeForSearch"] = false;
 
 
-$tdatatraining_partners[".badgeColor"] = "2F4F4F";
+$tdatatraining_partners[".badgeColor"] = "2f4f4f";
 
 
 $tdatatraining_partners[".allSearchFields"] = array();
@@ -452,15 +452,16 @@ $tdatatraining_partners[".hideMobileList"] = array();
 // Begin Lookup settings
 				$edata["LookupType"] = 2;
 	$edata["LookupTable"] = "public.training_sessions";
-			$edata["autoCompleteFieldsOnEdit"] = 0;
+		$edata["listPageId"] = "list";
+		$edata["autoCompleteFieldsOnEdit"] = 0;
 	$edata["autoCompleteFields"] = array();
-		$edata["LCType"] = 0;
+		$edata["LCType"] = 2;
 
 	
 		
 	$edata["LinkField"] = "training_id";
 	$edata["LinkFieldType"] = 3;
-	$edata["DisplayField"] = "remarks";
+	$edata["DisplayField"] = "training_details";
 
 	
 
@@ -474,8 +475,7 @@ $tdatatraining_partners[".hideMobileList"] = array();
 
 	
 	
-		$edata["SelectSize"] = 1;
-
+	
 // End Lookup Settings
 
 
@@ -518,7 +518,7 @@ $tdatatraining_partners[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "Equals";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);

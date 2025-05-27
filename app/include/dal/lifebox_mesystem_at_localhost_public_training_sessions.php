@@ -2,10 +2,10 @@
 $dalTabletraining_sessions = array();
 $dalTabletraining_sessions["training_id"] = array("type"=>3,"varname"=>"training_id", "name" => "training_id", "autoInc" => "1");
 $dalTabletraining_sessions["course_id"] = array("type"=>3,"varname"=>"course_id", "name" => "course_id", "autoInc" => "0");
-$dalTabletraining_sessions["training_type"] = array("type"=>13,"varname"=>"training_type", "name" => "training_type", "autoInc" => "0");
-$dalTabletraining_sessions["training_approach"] = array("type"=>13,"varname"=>"training_approach", "name" => "training_approach", "autoInc" => "0");
-$dalTabletraining_sessions["program"] = array("type"=>13,"varname"=>"program", "name" => "program", "autoInc" => "0");
-$dalTabletraining_sessions["quarter"] = array("type"=>13,"varname"=>"quarter", "name" => "quarter", "autoInc" => "0");
+$dalTabletraining_sessions["training_type"] = array("type"=>201,"varname"=>"training_type", "name" => "training_type", "autoInc" => "0");
+$dalTabletraining_sessions["training_approach"] = array("type"=>201,"varname"=>"training_approach", "name" => "training_approach", "autoInc" => "0");
+$dalTabletraining_sessions["program"] = array("type"=>201,"varname"=>"program", "name" => "program", "autoInc" => "0");
+$dalTabletraining_sessions["quarter"] = array("type"=>201,"varname"=>"quarter", "name" => "quarter", "autoInc" => "0");
 $dalTabletraining_sessions["start_date"] = array("type"=>7,"varname"=>"start_date", "name" => "start_date", "autoInc" => "0");
 $dalTabletraining_sessions["end_date"] = array("type"=>7,"varname"=>"end_date", "name" => "end_date", "autoInc" => "0");
 $dalTabletraining_sessions["facility_id"] = array("type"=>3,"varname"=>"facility_id", "name" => "facility_id", "autoInc" => "0");

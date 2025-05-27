@@ -631,6 +631,25 @@
 
 
 {END program_id_fieldblock}
+											
+{BEGIN training_details_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_training_details}  r-vertical-field" data-fieldname="training_details" data-signal-error-for="training_details{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="training_details" data-fieldname="training_details" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_training_details}">
+		
+		{BEGIN training_details_label}{$label public_training_sessions training_details }{END training_details_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$training_details_value}	</div>
+
+		
+</div>
+
+
+{END training_details_fieldblock}
 	
 								</td>
 			{END cellblock_grid_c3}

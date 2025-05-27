@@ -28,10 +28,10 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelstraining_trainers["English"]["training_trainer_id"] = "Training Trainer Id";
 	$fieldToolTipstraining_trainers["English"]["training_trainer_id"] = "";
 	$placeHolderstraining_trainers["English"]["training_trainer_id"] = "";
-	$fieldLabelstraining_trainers["English"]["training_id"] = "Training Id";
+	$fieldLabelstraining_trainers["English"]["training_id"] = "Training Session";
 	$fieldToolTipstraining_trainers["English"]["training_id"] = "";
 	$placeHolderstraining_trainers["English"]["training_id"] = "";
-	$fieldLabelstraining_trainers["English"]["trainer_id"] = "Trainer Id";
+	$fieldLabelstraining_trainers["English"]["trainer_id"] = "Assigned Trainer";
 	$fieldToolTipstraining_trainers["English"]["trainer_id"] = "";
 	$placeHolderstraining_trainers["English"]["trainer_id"] = "";
 	$fieldLabelstraining_trainers["English"]["created_at"] = "Created At";
@@ -452,15 +452,16 @@ $tdatatraining_trainers[".hideMobileList"] = array();
 // Begin Lookup settings
 				$edata["LookupType"] = 2;
 	$edata["LookupTable"] = "public.training_sessions";
-			$edata["autoCompleteFieldsOnEdit"] = 0;
+		$edata["listPageId"] = "list";
+		$edata["autoCompleteFieldsOnEdit"] = 0;
 	$edata["autoCompleteFields"] = array();
-		$edata["LCType"] = 0;
+		$edata["LCType"] = 2;
 
 	
 		
 	$edata["LinkField"] = "training_id";
-	$edata["LinkFieldType"] = 3;
-	$edata["DisplayField"] = "remarks";
+	$edata["LinkFieldType"] = 0;
+	$edata["DisplayField"] = "training_details";
 
 	
 
@@ -474,8 +475,7 @@ $tdatatraining_trainers[".hideMobileList"] = array();
 
 	
 	
-		$edata["SelectSize"] = 1;
-
+	
 // End Lookup Settings
 
 
@@ -518,7 +518,7 @@ $tdatatraining_trainers[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "Equals";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
@@ -616,30 +616,31 @@ $tdatatraining_trainers[".hideMobileList"] = array();
 // Begin Lookup settings
 				$edata["LookupType"] = 2;
 	$edata["LookupTable"] = "public.trainers";
-			$edata["autoCompleteFieldsOnEdit"] = 0;
+		$edata["listPageId"] = "list";
+		$edata["autoCompleteFieldsOnEdit"] = 0;
 	$edata["autoCompleteFields"] = array();
-		$edata["LCType"] = 0;
+		$edata["LCType"] = 2;
 
 	
 		
 	$edata["LinkField"] = "trainer_id";
 	$edata["LinkFieldType"] = 3;
-	$edata["DisplayField"] = "first_name";
+	$edata["DisplayField"] = "trainer_details";
 
 	
 
 	
-	$edata["LookupOrderBy"] = "";
+	$edata["LookupOrderBy"] = "first_name";
+
+		$edata["LookupDesc"] = true;
 
 	
 	
 	
-	
 
 	
 	
-		$edata["SelectSize"] = 1;
-
+	
 // End Lookup Settings
 
 
@@ -682,7 +683,7 @@ $tdatatraining_trainers[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "Equals";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);

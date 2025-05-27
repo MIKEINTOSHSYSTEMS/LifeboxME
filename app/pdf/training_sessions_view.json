@@ -217,6 +217,9 @@ pdfDocument = {
 				
 			{"hidden":"{$item_hide_integrated_edit_field19}","stack":[{"text":"{$jslabel public_training_sessions program_id }","bold":true},{"text":{$program_id_pdfvalue}}],"margin":[0,0,0,15]},
 				
+				
+			{"hidden":"{$item_hide_integrated_edit_field2}","stack":[{"text":"{$jslabel public_training_sessions training_details }","bold":true},{"text":{$training_details_pdfvalue}}],"margin":[0,0,0,15]},
+				
 		  ],
   "border": [ false, false, false, false ],
               "alignment": 'left',

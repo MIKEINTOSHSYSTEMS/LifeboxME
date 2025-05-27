@@ -193,6 +193,9 @@ pdfDocument = {
 				
 			{"hidden":"{$item_hide_integrated_edit_field8}","stack":[{"text":"{$jslabel public_lifebox_staff updated_at }","bold":true},{"text":{$updated_at_pdfvalue}}],"margin":[0,0,0,15]},
 				
+				
+			{"hidden":"{$item_hide_integrated_edit_field9}","stack":[{"text":"{$jslabel public_lifebox_staff lifebox_staff_details }","bold":true},{"text":{$lifebox_staff_details_pdfvalue}}],"margin":[0,0,0,15]},
+				
 		  ],
   "border": [ false, false, false, false ],
               "alignment": 'left',

@@ -584,7 +584,7 @@ $tdatatraining_summary_view[".hideMobileList"] = array();
 	$fdata["GoodName"] = "training_type";
 	$fdata["ownerTable"] = "public.training_summary_view";
 	$fdata["Label"] = GetFieldLabel("public_training_summary_view","training_type");
-	$fdata["FieldType"] = 13;
+	$fdata["FieldType"] = 200;
 
 
 	
@@ -722,7 +722,7 @@ $tdatatraining_summary_view[".hideMobileList"] = array();
 	$fdata["GoodName"] = "training_approach";
 	$fdata["ownerTable"] = "public.training_summary_view";
 	$fdata["Label"] = GetFieldLabel("public_training_summary_view","training_approach");
-	$fdata["FieldType"] = 13;
+	$fdata["FieldType"] = 200;
 
 
 	
@@ -860,7 +860,7 @@ $tdatatraining_summary_view[".hideMobileList"] = array();
 	$fdata["GoodName"] = "program";
 	$fdata["ownerTable"] = "public.training_summary_view";
 	$fdata["Label"] = GetFieldLabel("public_training_summary_view","program");
-	$fdata["FieldType"] = 13;
+	$fdata["FieldType"] = 200;
 
 
 	
@@ -998,7 +998,7 @@ $tdatatraining_summary_view[".hideMobileList"] = array();
 	$fdata["GoodName"] = "quarter";
 	$fdata["ownerTable"] = "public.training_summary_view";
 	$fdata["Label"] = GetFieldLabel("public_training_summary_view","quarter");
-	$fdata["FieldType"] = 13;
+	$fdata["FieldType"] = 201;
 
 
 	
@@ -1048,7 +1048,7 @@ $tdatatraining_summary_view[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Text field");
+	$edata = array("EditFormat" => "Text area");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -1066,16 +1066,16 @@ $tdatatraining_summary_view[".hideMobileList"] = array();
 	
 			$edata["acceptFileTypesHtml"] = "";
 
-		$edata["maxNumberOfFiles"] = 1;
+		$edata["maxNumberOfFiles"] = 0;
 
 	
 	
 	
-	
-			$edata["HTML5InuptType"] = "text";
+				$edata["nRows"] = 100;
+			$edata["nCols"] = 200;
 
-		$edata["EditParams"] = "";
-		
+	
+	
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
@@ -1086,7 +1086,10 @@ $tdatatraining_summary_view[".hideMobileList"] = array();
 	
 //	End validation
 
-	
+		$edata["CreateThumbnail"] = true;
+	$edata["StrThumbnail"] = "th";
+			$edata["ThumbnailSize"] = 600;
+
 			
 	
 	

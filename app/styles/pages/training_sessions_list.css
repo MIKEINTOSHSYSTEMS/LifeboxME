@@ -49,6 +49,9 @@
 [data-cellid="grid_footcell_field16"][data-page="training_sessions_list"][data-cellid="grid_footcell_field16"][data-page="training_sessions_list"][data-cellid="grid_footcell_field16"][data-page="training_sessions_list"] {
   white-space: nowrap;
 }
+[data-cellid="grid_footcell_field17"][data-page="training_sessions_list"][data-cellid="grid_footcell_field17"][data-page="training_sessions_list"][data-cellid="grid_footcell_field17"][data-page="training_sessions_list"] {
+  white-space: nowrap;
+}
 [data-cellid="grid_headcell_checkbox"][data-page="training_sessions_list"][data-cellid="grid_headcell_checkbox"][data-page="training_sessions_list"][data-cellid="grid_headcell_checkbox"][data-page="training_sessions_list"] {
   width: 30px;
 }

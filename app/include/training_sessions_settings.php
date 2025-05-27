@@ -76,6 +76,9 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelstraining_sessions["English"]["program_id"] = "Program";
 	$fieldToolTipstraining_sessions["English"]["program_id"] = "";
 	$placeHolderstraining_sessions["English"]["program_id"] = "";
+	$fieldLabelstraining_sessions["English"]["training_details"] = "Training Details";
+	$fieldToolTipstraining_sessions["English"]["training_details"] = "";
+	$placeHolderstraining_sessions["English"]["training_details"] = "";
 	if (count($fieldToolTipstraining_sessions["English"]))
 		$tdatatraining_sessions[".isUseToolTips"] = true;
 }
@@ -185,7 +188,7 @@ $tdatatraining_sessions[".addPageEvents"] = false;
 $tdatatraining_sessions[".isUseTimeForSearch"] = false;
 
 
-$tdatatraining_sessions[".badgeColor"] = "2F4F4F";
+$tdatatraining_sessions[".badgeColor"] = "2f4f4f";
 
 
 $tdatatraining_sessions[".allSearchFields"] = array();
@@ -208,6 +211,7 @@ $tdatatraining_sessions[".googleLikeFields"][] = "num_participants";
 $tdatatraining_sessions[".googleLikeFields"][] = "avg_pre_test_score";
 $tdatatraining_sessions[".googleLikeFields"][] = "avg_post_test_score";
 $tdatatraining_sessions[".googleLikeFields"][] = "remarks";
+$tdatatraining_sessions[".googleLikeFields"][] = "training_details";
 $tdatatraining_sessions[".googleLikeFields"][] = "created_at";
 $tdatatraining_sessions[".googleLikeFields"][] = "updated_at";
 
@@ -243,8 +247,8 @@ $tdatatraining_sessions[".strOrderBy"] = $tstrOrderBy;
 $tdatatraining_sessions[".orderindexes"] = array();
 
 
-$tdatatraining_sessions[".sqlHead"] = "SELECT training_id,  	course_id,  	training_type_id,  	approach_id,  	program_id,  	quarter,  	start_date,  	end_date,  	facility_id,  	host_country_id,  	ceu_points,  	num_participants,  	avg_pre_test_score,  	avg_post_test_score,  	remarks,  	created_at,  	updated_at";
-$tdatatraining_sessions[".sqlFrom"] = "FROM \"public\".training_sessions";
+$tdatatraining_sessions[".sqlHead"] = "SELECT ts.training_id,  ts.course_id,  ts.training_type_id,  ts.approach_id,  ts.program_id,  ts.quarter,  ts.start_date,  ts.end_date,  ts.facility_id,  ts.host_country_id,  ts.ceu_points,  ts.num_participants,  ts.avg_pre_test_score,  ts.avg_post_test_score,  ts.remarks,  CONCAT('Training ID: ', ts.training_id, ' | ', 'Course Name: ', tc.course_name, ' | ', 'Program Name: ', p.program_name, ' | ', 'Program ID: ', ts.program_id, ' | ', 'Quarter: ', ts.quarter, ' | ', 'Start Date: ', ts.start_date, ' | ', 'End Date: ', ts.end_date) AS training_details,  ts.created_at,  ts.updated_at";
+$tdatatraining_sessions[".sqlFrom"] = "FROM \"public\".training_sessions AS ts  INNER JOIN \"public\".training_courses AS tc ON ts.course_id = tc.course_id  INNER JOIN \"public\".programs AS p ON ts.program_id = p.program_id";
 $tdatatraining_sessions[".sqlWhereExpr"] = "";
 $tdatatraining_sessions[".sqlTail"] = "";
 
@@ -313,7 +317,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "training_id";
+	$fdata["FullName"] = "ts.training_id";
 
 	
 	
@@ -454,7 +458,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "course_id";
+	$fdata["FullName"] = "ts.course_id";
 
 	
 	
@@ -618,7 +622,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "training_type_id";
+	$fdata["FullName"] = "ts.training_type_id";
 
 	
 	
@@ -782,7 +786,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "approach_id";
+	$fdata["FullName"] = "ts.approach_id";
 
 	
 	
@@ -946,7 +950,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "program_id";
+	$fdata["FullName"] = "ts.program_id";
 
 	
 	
@@ -1097,7 +1101,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 	$fdata["GoodName"] = "quarter";
 	$fdata["ownerTable"] = "public.training_sessions";
 	$fdata["Label"] = GetFieldLabel("public_training_sessions","quarter");
-	$fdata["FieldType"] = 13;
+	$fdata["FieldType"] = 201;
 
 
 	
@@ -1110,7 +1114,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "quarter";
+	$fdata["FullName"] = "ts.quarter";
 
 	
 	
@@ -1277,7 +1281,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "start_date";
+	$fdata["FullName"] = "ts.start_date";
 
 	
 	
@@ -1418,7 +1422,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "end_date";
+	$fdata["FullName"] = "ts.end_date";
 
 	
 	
@@ -1559,7 +1563,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "facility_id";
+	$fdata["FullName"] = "ts.facility_id";
 
 	
 	
@@ -1630,7 +1634,8 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 	
 
 	
-	
+		$edata["Multiselect"] = true;
+
 		$edata["SelectSize"] = 1;
 
 // End Lookup Settings
@@ -1675,7 +1680,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "Equals";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
@@ -1723,7 +1728,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "host_country_id";
+	$fdata["FullName"] = "ts.host_country_id";
 
 	
 	
@@ -1794,7 +1799,8 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 	
 
 	
-	
+		$edata["Multiselect"] = true;
+
 		$edata["SelectSize"] = 1;
 
 // End Lookup Settings
@@ -1839,7 +1845,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "Equals";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
@@ -1887,7 +1893,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "ceu_points";
+	$fdata["FullName"] = "ts.ceu_points";
 
 	
 	
@@ -2027,7 +2033,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "num_participants";
+	$fdata["FullName"] = "ts.num_participants";
 
 	
 	
@@ -2166,7 +2172,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "avg_pre_test_score";
+	$fdata["FullName"] = "ts.avg_pre_test_score";
 
 	
 	
@@ -2306,7 +2312,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "avg_post_test_score";
+	$fdata["FullName"] = "ts.avg_post_test_score";
 
 	
 	
@@ -2446,7 +2452,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "remarks";
+	$fdata["FullName"] = "ts.remarks";
 
 	
 	
@@ -2566,10 +2572,147 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 	$tdatatraining_sessions["remarks"] = $fdata;
 		$tdatatraining_sessions[".searchableFields"][] = "remarks";
-//	created_at
+//	training_details
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 16;
+	$fdata["strName"] = "training_details";
+	$fdata["GoodName"] = "training_details";
+	$fdata["ownerTable"] = "";
+	$fdata["Label"] = GetFieldLabel("public_training_sessions","training_details");
+	$fdata["FieldType"] = 201;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "training_details";
+
+	
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "CONCAT('Training ID: ', ts.training_id, ' | ', 'Course Name: ', tc.course_name, ' | ', 'Program Name: ', p.program_name, ' | ', 'Program ID: ', ts.program_id, ' | ', 'Quarter: ', ts.quarter, ' | ', 'Start Date: ', ts.start_date, ' | ', 'End Date: ', ts.end_date)";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text area");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+				$edata["nRows"] = 100;
+			$edata["nCols"] = 200;
+
+	
+	
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatatraining_sessions["training_details"] = $fdata;
+		$tdatatraining_sessions[".searchableFields"][] = "training_details";
+//	created_at
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 17;
 	$fdata["strName"] = "created_at";
 	$fdata["GoodName"] = "created_at";
 	$fdata["ownerTable"] = "public.training_sessions";
@@ -2587,7 +2730,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "created_at";
+	$fdata["FullName"] = "ts.created_at";
 
 	
 	
@@ -2708,7 +2851,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 //	updated_at
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 17;
+	$fdata["Index"] = 18;
 	$fdata["strName"] = "updated_at";
 	$fdata["GoodName"] = "updated_at";
 	$fdata["ownerTable"] = "public.training_sessions";
@@ -2726,7 +2869,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "updated_at";
+	$fdata["FullName"] = "ts.updated_at";
 
 	
 	
@@ -3117,8 +3260,8 @@ function createSqlQuery_training_sessions()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "training_id,  	course_id,  	training_type_id,  	approach_id,  	program_id,  	quarter,  	start_date,  	end_date,  	facility_id,  	host_country_id,  	ceu_points,  	num_participants,  	avg_pre_test_score,  	avg_post_test_score,  	remarks,  	created_at,  	updated_at";
-$proto0["m_strFrom"] = "FROM \"public\".training_sessions";
+$proto0["m_strFieldList"] = "ts.training_id,  ts.course_id,  ts.training_type_id,  ts.approach_id,  ts.program_id,  ts.quarter,  ts.start_date,  ts.end_date,  ts.facility_id,  ts.host_country_id,  ts.ceu_points,  ts.num_participants,  ts.avg_pre_test_score,  ts.avg_post_test_score,  ts.remarks,  CONCAT('Training ID: ', ts.training_id, ' | ', 'Course Name: ', tc.course_name, ' | ', 'Program Name: ', p.program_name, ' | ', 'Program ID: ', ts.program_id, ' | ', 'Quarter: ', ts.quarter, ' | ', 'Start Date: ', ts.start_date, ' | ', 'End Date: ', ts.end_date) AS training_details,  ts.created_at,  ts.updated_at";
+$proto0["m_strFrom"] = "FROM \"public\".training_sessions AS ts  INNER JOIN \"public\".training_courses AS tc ON ts.course_id = tc.course_id  INNER JOIN \"public\".programs AS p ON ts.program_id = p.program_id";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
 	
@@ -3160,11 +3303,11 @@ $proto0["m_fieldlist"] = array();
 						$proto6=array();
 			$obj = new SQLField(array(
 	"m_strName" => "training_id",
-	"m_strTable" => "public.training_sessions",
+	"m_strTable" => "ts",
 	"m_srcTableName" => "public.training_sessions"
 ));
 
-$proto6["m_sql"] = "training_id";
+$proto6["m_sql"] = "ts.training_id";
 $proto6["m_srcTableName"] = "public.training_sessions";
 $proto6["m_expr"]=$obj;
 $proto6["m_alias"] = "";
@@ -3174,11 +3317,11 @@ $proto0["m_fieldlist"][]=$obj;
 						$proto8=array();
 			$obj = new SQLField(array(
 	"m_strName" => "course_id",
-	"m_strTable" => "public.training_sessions",
+	"m_strTable" => "ts",
 	"m_srcTableName" => "public.training_sessions"
 ));
 
-$proto8["m_sql"] = "course_id";
+$proto8["m_sql"] = "ts.course_id";
 $proto8["m_srcTableName"] = "public.training_sessions";
 $proto8["m_expr"]=$obj;
 $proto8["m_alias"] = "";
@@ -3188,11 +3331,11 @@ $proto0["m_fieldlist"][]=$obj;
 						$proto10=array();
 			$obj = new SQLField(array(
 	"m_strName" => "training_type_id",
-	"m_strTable" => "public.training_sessions",
+	"m_strTable" => "ts",
 	"m_srcTableName" => "public.training_sessions"
 ));
 
-$proto10["m_sql"] = "training_type_id";
+$proto10["m_sql"] = "ts.training_type_id";
 $proto10["m_srcTableName"] = "public.training_sessions";
 $proto10["m_expr"]=$obj;
 $proto10["m_alias"] = "";
@@ -3202,11 +3345,11 @@ $proto0["m_fieldlist"][]=$obj;
 						$proto12=array();
 			$obj = new SQLField(array(
 	"m_strName" => "approach_id",
-	"m_strTable" => "public.training_sessions",
+	"m_strTable" => "ts",
 	"m_srcTableName" => "public.training_sessions"
 ));
 
-$proto12["m_sql"] = "approach_id";
+$proto12["m_sql"] = "ts.approach_id";
 $proto12["m_srcTableName"] = "public.training_sessions";
 $proto12["m_expr"]=$obj;
 $proto12["m_alias"] = "";
@@ -3216,11 +3359,11 @@ $proto0["m_fieldlist"][]=$obj;
 						$proto14=array();
 			$obj = new SQLField(array(
 	"m_strName" => "program_id",
-	"m_strTable" => "public.training_sessions",
+	"m_strTable" => "ts",
 	"m_srcTableName" => "public.training_sessions"
 ));
 
-$proto14["m_sql"] = "program_id";
+$proto14["m_sql"] = "ts.program_id";
 $proto14["m_srcTableName"] = "public.training_sessions";
 $proto14["m_expr"]=$obj;
 $proto14["m_alias"] = "";
@@ -3230,11 +3373,11 @@ $proto0["m_fieldlist"][]=$obj;
 						$proto16=array();
 			$obj = new SQLField(array(
 	"m_strName" => "quarter",
-	"m_strTable" => "public.training_sessions",
+	"m_strTable" => "ts",
 	"m_srcTableName" => "public.training_sessions"
 ));
 
-$proto16["m_sql"] = "quarter";
+$proto16["m_sql"] = "ts.quarter";
 $proto16["m_srcTableName"] = "public.training_sessions";
 $proto16["m_expr"]=$obj;
 $proto16["m_alias"] = "";
@@ -3244,11 +3387,11 @@ $proto0["m_fieldlist"][]=$obj;
 						$proto18=array();
 			$obj = new SQLField(array(
 	"m_strName" => "start_date",
-	"m_strTable" => "public.training_sessions",
+	"m_strTable" => "ts",
 	"m_srcTableName" => "public.training_sessions"
 ));
 
-$proto18["m_sql"] = "start_date";
+$proto18["m_sql"] = "ts.start_date";
 $proto18["m_srcTableName"] = "public.training_sessions";
 $proto18["m_expr"]=$obj;
 $proto18["m_alias"] = "";
@@ -3258,11 +3401,11 @@ $proto0["m_fieldlist"][]=$obj;
 						$proto20=array();
 			$obj = new SQLField(array(
 	"m_strName" => "end_date",
-	"m_strTable" => "public.training_sessions",
+	"m_strTable" => "ts",
 	"m_srcTableName" => "public.training_sessions"
 ));
 
-$proto20["m_sql"] = "end_date";
+$proto20["m_sql"] = "ts.end_date";
 $proto20["m_srcTableName"] = "public.training_sessions";
 $proto20["m_expr"]=$obj;
 $proto20["m_alias"] = "";
@@ -3272,11 +3415,11 @@ $proto0["m_fieldlist"][]=$obj;
 						$proto22=array();
 			$obj = new SQLField(array(
 	"m_strName" => "facility_id",
-	"m_strTable" => "public.training_sessions",
+	"m_strTable" => "ts",
 	"m_srcTableName" => "public.training_sessions"
 ));
 
-$proto22["m_sql"] = "facility_id";
+$proto22["m_sql"] = "ts.facility_id";
 $proto22["m_srcTableName"] = "public.training_sessions";
 $proto22["m_expr"]=$obj;
 $proto22["m_alias"] = "";
@@ -3286,11 +3429,11 @@ $proto0["m_fieldlist"][]=$obj;
 						$proto24=array();
 			$obj = new SQLField(array(
 	"m_strName" => "host_country_id",
-	"m_strTable" => "public.training_sessions",
+	"m_strTable" => "ts",
 	"m_srcTableName" => "public.training_sessions"
 ));
 
-$proto24["m_sql"] = "host_country_id";
+$proto24["m_sql"] = "ts.host_country_id";
 $proto24["m_srcTableName"] = "public.training_sessions";
 $proto24["m_expr"]=$obj;
 $proto24["m_alias"] = "";
@@ -3300,11 +3443,11 @@ $proto0["m_fieldlist"][]=$obj;
 						$proto26=array();
 			$obj = new SQLField(array(
 	"m_strName" => "ceu_points",
-	"m_strTable" => "public.training_sessions",
+	"m_strTable" => "ts",
 	"m_srcTableName" => "public.training_sessions"
 ));
 
-$proto26["m_sql"] = "ceu_points";
+$proto26["m_sql"] = "ts.ceu_points";
 $proto26["m_srcTableName"] = "public.training_sessions";
 $proto26["m_expr"]=$obj;
 $proto26["m_alias"] = "";
@@ -3314,11 +3457,11 @@ $proto0["m_fieldlist"][]=$obj;
 						$proto28=array();
 			$obj = new SQLField(array(
 	"m_strName" => "num_participants",
-	"m_strTable" => "public.training_sessions",
+	"m_strTable" => "ts",
 	"m_srcTableName" => "public.training_sessions"
 ));
 
-$proto28["m_sql"] = "num_participants";
+$proto28["m_sql"] = "ts.num_participants";
 $proto28["m_srcTableName"] = "public.training_sessions";
 $proto28["m_expr"]=$obj;
 $proto28["m_alias"] = "";
@@ -3328,11 +3471,11 @@ $proto0["m_fieldlist"][]=$obj;
 						$proto30=array();
 			$obj = new SQLField(array(
 	"m_strName" => "avg_pre_test_score",
-	"m_strTable" => "public.training_sessions",
+	"m_strTable" => "ts",
 	"m_srcTableName" => "public.training_sessions"
 ));
 
-$proto30["m_sql"] = "avg_pre_test_score";
+$proto30["m_sql"] = "ts.avg_pre_test_score";
 $proto30["m_srcTableName"] = "public.training_sessions";
 $proto30["m_expr"]=$obj;
 $proto30["m_alias"] = "";
@@ -3342,11 +3485,11 @@ $proto0["m_fieldlist"][]=$obj;
 						$proto32=array();
 			$obj = new SQLField(array(
 	"m_strName" => "avg_post_test_score",
-	"m_strTable" => "public.training_sessions",
+	"m_strTable" => "ts",
 	"m_srcTableName" => "public.training_sessions"
 ));
 
-$proto32["m_sql"] = "avg_post_test_score";
+$proto32["m_sql"] = "ts.avg_post_test_score";
 $proto32["m_srcTableName"] = "public.training_sessions";
 $proto32["m_expr"]=$obj;
 $proto32["m_alias"] = "";
@@ -3356,11 +3499,11 @@ $proto0["m_fieldlist"][]=$obj;
 						$proto34=array();
 			$obj = new SQLField(array(
 	"m_strName" => "remarks",
-	"m_strTable" => "public.training_sessions",
+	"m_strTable" => "ts",
 	"m_srcTableName" => "public.training_sessions"
 ));
 
-$proto34["m_sql"] = "remarks";
+$proto34["m_sql"] = "ts.remarks";
 $proto34["m_srcTableName"] = "public.training_sessions";
 $proto34["m_expr"]=$obj;
 $proto34["m_alias"] = "";
@@ -3368,83 +3511,276 @@ $obj = new SQLFieldListItem($proto34);
 
 $proto0["m_fieldlist"][]=$obj;
 						$proto36=array();
-			$obj = new SQLField(array(
-	"m_strName" => "created_at",
-	"m_strTable" => "public.training_sessions",
-	"m_srcTableName" => "public.training_sessions"
+			$proto37=array();
+$proto37["m_functiontype"] = "SQLF_CUSTOM";
+$proto37["m_arguments"] = array();
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "'Training ID: '"
 ));
 
-$proto36["m_sql"] = "created_at";
+$proto37["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "ts.training_id"
+));
+
+$proto37["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "' | '"
+));
+
+$proto37["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "'Course Name: '"
+));
+
+$proto37["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "tc.course_name"
+));
+
+$proto37["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "' | '"
+));
+
+$proto37["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "'Program Name: '"
+));
+
+$proto37["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "p.program_name"
+));
+
+$proto37["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "' | '"
+));
+
+$proto37["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "'Program ID: '"
+));
+
+$proto37["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "ts.program_id"
+));
+
+$proto37["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "' | '"
+));
+
+$proto37["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "'Quarter: '"
+));
+
+$proto37["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "ts.quarter"
+));
+
+$proto37["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "' | '"
+));
+
+$proto37["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "'Start Date: '"
+));
+
+$proto37["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "ts.start_date"
+));
+
+$proto37["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "' | '"
+));
+
+$proto37["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "'End Date: '"
+));
+
+$proto37["m_arguments"][]=$obj;
+						$obj = new SQLNonParsed(array(
+	"m_sql" => "ts.end_date"
+));
+
+$proto37["m_arguments"][]=$obj;
+$proto37["m_strFunctionName"] = "CONCAT";
+$obj = new SQLFunctionCall($proto37);
+
+$proto36["m_sql"] = "CONCAT('Training ID: ', ts.training_id, ' | ', 'Course Name: ', tc.course_name, ' | ', 'Program Name: ', p.program_name, ' | ', 'Program ID: ', ts.program_id, ' | ', 'Quarter: ', ts.quarter, ' | ', 'Start Date: ', ts.start_date, ' | ', 'End Date: ', ts.end_date)";
 $proto36["m_srcTableName"] = "public.training_sessions";
 $proto36["m_expr"]=$obj;
-$proto36["m_alias"] = "";
+$proto36["m_alias"] = "training_details";
 $obj = new SQLFieldListItem($proto36);
 
 $proto0["m_fieldlist"][]=$obj;
-						$proto38=array();
+						$proto58=array();
 			$obj = new SQLField(array(
-	"m_strName" => "updated_at",
-	"m_strTable" => "public.training_sessions",
+	"m_strName" => "created_at",
+	"m_strTable" => "ts",
 	"m_srcTableName" => "public.training_sessions"
 ));
 
-$proto38["m_sql"] = "updated_at";
-$proto38["m_srcTableName"] = "public.training_sessions";
-$proto38["m_expr"]=$obj;
-$proto38["m_alias"] = "";
-$obj = new SQLFieldListItem($proto38);
+$proto58["m_sql"] = "ts.created_at";
+$proto58["m_srcTableName"] = "public.training_sessions";
+$proto58["m_expr"]=$obj;
+$proto58["m_alias"] = "";
+$obj = new SQLFieldListItem($proto58);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto60=array();
+			$obj = new SQLField(array(
+	"m_strName" => "updated_at",
+	"m_strTable" => "ts",
+	"m_srcTableName" => "public.training_sessions"
+));
+
+$proto60["m_sql"] = "ts.updated_at";
+$proto60["m_srcTableName"] = "public.training_sessions";
+$proto60["m_expr"]=$obj;
+$proto60["m_alias"] = "";
+$obj = new SQLFieldListItem($proto60);
 
 $proto0["m_fieldlist"][]=$obj;
 $proto0["m_fromlist"] = array();
-												$proto40=array();
-$proto40["m_link"] = "SQLL_MAIN";
-			$proto41=array();
-$proto41["m_strName"] = "public.training_sessions";
-$proto41["m_srcTableName"] = "public.training_sessions";
-$proto41["m_columns"] = array();
-$proto41["m_columns"][] = "training_id";
-$proto41["m_columns"][] = "course_id";
-$proto41["m_columns"][] = "training_type";
-$proto41["m_columns"][] = "training_approach";
-$proto41["m_columns"][] = "program";
-$proto41["m_columns"][] = "quarter";
-$proto41["m_columns"][] = "start_date";
-$proto41["m_columns"][] = "end_date";
-$proto41["m_columns"][] = "facility_id";
-$proto41["m_columns"][] = "host_country_id";
-$proto41["m_columns"][] = "ceu_points";
-$proto41["m_columns"][] = "num_participants";
-$proto41["m_columns"][] = "avg_pre_test_score";
-$proto41["m_columns"][] = "avg_post_test_score";
-$proto41["m_columns"][] = "remarks";
-$proto41["m_columns"][] = "created_at";
-$proto41["m_columns"][] = "updated_at";
-$proto41["m_columns"][] = "training_type_id";
-$proto41["m_columns"][] = "approach_id";
-$proto41["m_columns"][] = "program_id";
-$obj = new SQLTable($proto41);
+												$proto62=array();
+$proto62["m_link"] = "SQLL_MAIN";
+			$proto63=array();
+$proto63["m_strName"] = "public.training_sessions";
+$proto63["m_srcTableName"] = "public.training_sessions";
+$proto63["m_columns"] = array();
+$proto63["m_columns"][] = "training_id";
+$proto63["m_columns"][] = "course_id";
+$proto63["m_columns"][] = "training_type";
+$proto63["m_columns"][] = "training_approach";
+$proto63["m_columns"][] = "program";
+$proto63["m_columns"][] = "quarter";
+$proto63["m_columns"][] = "start_date";
+$proto63["m_columns"][] = "end_date";
+$proto63["m_columns"][] = "facility_id";
+$proto63["m_columns"][] = "host_country_id";
+$proto63["m_columns"][] = "ceu_points";
+$proto63["m_columns"][] = "num_participants";
+$proto63["m_columns"][] = "avg_pre_test_score";
+$proto63["m_columns"][] = "avg_post_test_score";
+$proto63["m_columns"][] = "remarks";
+$proto63["m_columns"][] = "created_at";
+$proto63["m_columns"][] = "updated_at";
+$proto63["m_columns"][] = "training_type_id";
+$proto63["m_columns"][] = "approach_id";
+$proto63["m_columns"][] = "program_id";
+$obj = new SQLTable($proto63);
 
-$proto40["m_table"] = $obj;
-$proto40["m_sql"] = "\"public\".training_sessions";
-$proto40["m_alias"] = "";
-$proto40["m_srcTableName"] = "public.training_sessions";
-$proto42=array();
-$proto42["m_sql"] = "";
-$proto42["m_uniontype"] = "SQLL_UNKNOWN";
+$proto62["m_table"] = $obj;
+$proto62["m_sql"] = "\"public\".training_sessions AS ts";
+$proto62["m_alias"] = "ts";
+$proto62["m_srcTableName"] = "public.training_sessions";
+$proto64=array();
+$proto64["m_sql"] = "";
+$proto64["m_uniontype"] = "SQLL_UNKNOWN";
 	$obj = new SQLNonParsed(array(
 	"m_sql" => ""
 ));
 
-$proto42["m_column"]=$obj;
-$proto42["m_contained"] = array();
-$proto42["m_strCase"] = "";
-$proto42["m_havingmode"] = false;
-$proto42["m_inBrackets"] = false;
-$proto42["m_useAlias"] = false;
-$obj = new SQLLogicalExpr($proto42);
+$proto64["m_column"]=$obj;
+$proto64["m_contained"] = array();
+$proto64["m_strCase"] = "";
+$proto64["m_havingmode"] = false;
+$proto64["m_inBrackets"] = false;
+$proto64["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto64);
 
-$proto40["m_joinon"] = $obj;
-$obj = new SQLFromListItem($proto40);
+$proto62["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto62);
+
+$proto0["m_fromlist"][]=$obj;
+												$proto66=array();
+$proto66["m_link"] = "SQLL_INNERJOIN";
+			$proto67=array();
+$proto67["m_strName"] = "public.training_courses";
+$proto67["m_srcTableName"] = "public.training_sessions";
+$proto67["m_columns"] = array();
+$proto67["m_columns"][] = "course_id";
+$proto67["m_columns"][] = "course_name";
+$proto67["m_columns"][] = "description";
+$proto67["m_columns"][] = "duration_hours";
+$proto67["m_columns"][] = "is_active";
+$proto67["m_columns"][] = "created_at";
+$proto67["m_columns"][] = "updated_at";
+$obj = new SQLTable($proto67);
+
+$proto66["m_table"] = $obj;
+$proto66["m_sql"] = "INNER JOIN \"public\".training_courses AS tc ON ts.course_id = tc.course_id";
+$proto66["m_alias"] = "tc";
+$proto66["m_srcTableName"] = "public.training_sessions";
+$proto68=array();
+$proto68["m_sql"] = "tc.course_id = ts.course_id";
+$proto68["m_uniontype"] = "SQLL_UNKNOWN";
+						$obj = new SQLField(array(
+	"m_strName" => "course_id",
+	"m_strTable" => "tc",
+	"m_srcTableName" => "public.training_sessions"
+));
+
+$proto68["m_column"]=$obj;
+$proto68["m_contained"] = array();
+$proto68["m_strCase"] = "= ts.course_id";
+$proto68["m_havingmode"] = false;
+$proto68["m_inBrackets"] = false;
+$proto68["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto68);
+
+$proto66["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto66);
+
+$proto0["m_fromlist"][]=$obj;
+												$proto70=array();
+$proto70["m_link"] = "SQLL_INNERJOIN";
+			$proto71=array();
+$proto71["m_strName"] = "public.programs";
+$proto71["m_srcTableName"] = "public.training_sessions";
+$proto71["m_columns"] = array();
+$proto71["m_columns"][] = "program_id";
+$proto71["m_columns"][] = "program_name";
+$proto71["m_columns"][] = "description";
+$proto71["m_columns"][] = "is_active";
+$proto71["m_columns"][] = "created_at";
+$proto71["m_columns"][] = "updated_at";
+$obj = new SQLTable($proto71);
+
+$proto70["m_table"] = $obj;
+$proto70["m_sql"] = "INNER JOIN \"public\".programs AS p ON ts.program_id = p.program_id";
+$proto70["m_alias"] = "p";
+$proto70["m_srcTableName"] = "public.training_sessions";
+$proto72=array();
+$proto72["m_sql"] = "p.program_id = ts.program_id";
+$proto72["m_uniontype"] = "SQLL_UNKNOWN";
+						$obj = new SQLField(array(
+	"m_strName" => "program_id",
+	"m_strTable" => "p",
+	"m_srcTableName" => "public.training_sessions"
+));
+
+$proto72["m_column"]=$obj;
+$proto72["m_contained"] = array();
+$proto72["m_strCase"] = "= ts.program_id";
+$proto72["m_havingmode"] = false;
+$proto72["m_inBrackets"] = false;
+$proto72["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto72);
+
+$proto70["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto70);
 
 $proto0["m_fromlist"][]=$obj;
 $proto0["m_groupby"] = array();
@@ -3460,7 +3796,7 @@ $queryData_training_sessions = createSqlQuery_training_sessions();
 	
 		;
 
-																	
+																		
 
 $tdatatraining_sessions[".sqlquery"] = $queryData_training_sessions;
 

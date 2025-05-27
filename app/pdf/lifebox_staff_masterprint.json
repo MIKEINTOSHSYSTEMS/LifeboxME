@@ -94,6 +94,9 @@ pdfDocument = {
 										{BEGIN col_grid_9}
 					"%",
 					{END col_grid_9}
+										{BEGIN col_grid_10}
+					"%",
+					{END col_grid_10}
 															],
 											heights: [ // first height for header part
 					"%",
@@ -264,7 +267,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lifebox_staff staff_id }","hidden":"{$item_hide_simple_grid_field9}","bold":true},
+			{"text":"{$jslabel public_lifebox_staff staff_id }","hidden":"{$item_hide_simple_grid_field10}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -293,7 +296,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lifebox_staff first_name }","hidden":"{$item_hide_simple_grid_field10}","bold":true},
+			{"text":"{$jslabel public_lifebox_staff first_name }","hidden":"{$item_hide_simple_grid_field11}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -322,7 +325,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lifebox_staff last_name }","hidden":"{$item_hide_simple_grid_field11}","bold":true},
+			{"text":"{$jslabel public_lifebox_staff last_name }","hidden":"{$item_hide_simple_grid_field12}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -351,7 +354,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lifebox_staff email }","hidden":"{$item_hide_simple_grid_field12}","bold":true},
+			{"text":"{$jslabel public_lifebox_staff email }","hidden":"{$item_hide_simple_grid_field13}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -380,7 +383,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lifebox_staff role }","hidden":"{$item_hide_simple_grid_field13}","bold":true},
+			{"text":"{$jslabel public_lifebox_staff role }","hidden":"{$item_hide_simple_grid_field14}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -409,7 +412,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lifebox_staff region_id }","hidden":"{$item_hide_simple_grid_field14}","bold":true},
+			{"text":"{$jslabel public_lifebox_staff region_id }","hidden":"{$item_hide_simple_grid_field15}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -438,7 +441,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lifebox_staff is_active }","hidden":"{$item_hide_simple_grid_field15}","bold":true},
+			{"text":"{$jslabel public_lifebox_staff is_active }","hidden":"{$item_hide_simple_grid_field16}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -467,7 +470,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lifebox_staff created_at }","hidden":"{$item_hide_simple_grid_field16}","bold":true},
+			{"text":"{$jslabel public_lifebox_staff created_at }","hidden":"{$item_hide_simple_grid_field17}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -496,7 +499,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lifebox_staff updated_at }","hidden":"{$item_hide_simple_grid_field17}","bold":true},
+			{"text":"{$jslabel public_lifebox_staff updated_at }","hidden":"{$item_hide_simple_grid_field18}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -506,6 +509,35 @@ pdfDocument = {
       },
 
 {END cellblock_grid_headcell_field8}
+																							{BEGIN cellblock_grid_headcell_field9}
+{
+	cellId: 'headcell_field9',
+	col:0,
+	row:0,
+			fieldName: 'lifebox_staff_details',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_lifebox_staff lifebox_staff_details }","hidden":"{$item_hide_simple_grid_field19}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$lifebox_staff_details_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field9}
 											],
 				{END row_grid_0}
 		
@@ -804,6 +836,35 @@ pdfDocument = {
       },
 
 {END cellblock_grid_cell_field8}
+																							{BEGIN cellblock_grid_cell_field9}
+{
+	cellId: 'cell_field9',
+	col:0,
+	row:0,
+			fieldName: 'lifebox_staff_details',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$lifebox_staff_details_pdfvalue},"hidden":"{$item_hide_simple_grid_field9}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$lifebox_staff_details_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field9}
 											],
 				{END row_grid_1}
 		
@@ -1073,6 +1134,32 @@ pdfDocument = {
       },
 
 {END cellblock_grid_footcell_field8}
+																							{BEGIN cellblock_grid_footcell_field9}
+{
+	cellId: 'footcell_field9',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field9}
 											],
 				{END row_grid_2}
 		

@@ -61,7 +61,7 @@
 	 
 		{BEGIN trainer_id_fieldheadercolumn}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field8" {$item_simple_grid_field8} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="trainer_id" data-fieldname="trainer_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field9" {$item_simple_grid_field9} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="trainer_id" data-fieldname="trainer_id" 
 
 	
 	
@@ -91,7 +91,7 @@
 	 
 		{BEGIN first_name_fieldheadercolumn}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field9" {$item_simple_grid_field9} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="first_name" data-fieldname="first_name" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field10" {$item_simple_grid_field10} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="first_name" data-fieldname="first_name" 
 
 	
 	
@@ -121,7 +121,7 @@
 	 
 		{BEGIN last_name_fieldheadercolumn}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field10" {$item_simple_grid_field10} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="last_name" data-fieldname="last_name" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field11" {$item_simple_grid_field11} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="last_name" data-fieldname="last_name" 
 
 	
 	
@@ -151,7 +151,7 @@
 	 
 		{BEGIN email_fieldheadercolumn}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field11" {$item_simple_grid_field11} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="email" data-fieldname="email" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field12" {$item_simple_grid_field12} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="email" data-fieldname="email" 
 
 	
 	
@@ -181,7 +181,7 @@
 	 
 		{BEGIN organization_fieldheadercolumn}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field12" {$item_simple_grid_field12} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="organization" data-fieldname="organization" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field13" {$item_simple_grid_field13} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="organization" data-fieldname="organization" 
 
 	
 	
@@ -211,7 +211,7 @@
 	 
 		{BEGIN is_active_fieldheadercolumn}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field13" {$item_simple_grid_field13} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="is_active" data-fieldname="is_active" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field14" {$item_simple_grid_field14} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="is_active" data-fieldname="is_active" 
 
 	
 	
@@ -241,7 +241,7 @@
 	 
 		{BEGIN created_at_fieldheadercolumn}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field14" {$item_simple_grid_field14} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="created_at" data-fieldname="created_at" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field15" {$item_simple_grid_field15} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="created_at" data-fieldname="created_at" 
 
 	
 	
@@ -271,7 +271,7 @@
 	 
 		{BEGIN updated_at_fieldheadercolumn}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field15" {$item_simple_grid_field15} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="updated_at" data-fieldname="updated_at" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field16" {$item_simple_grid_field16} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="updated_at" data-fieldname="updated_at" 
 
 	
 	
@@ -285,6 +285,36 @@
 	
 	</th>
 	{END cellblock_grid_headcell_field7}
+									{BEGIN cellblock_grid_headcell_field8}
+	<th
+	
+	{$cell_grid_headcell_field8}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$trainer_details_class}	"
+
+			data-field="trainer_details"
+	
+	data-cellId="grid_headcell_field8" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN trainer_details_fieldheadercolumn}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field17" {$item_simple_grid_field17} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="trainer_details" data-fieldname="trainer_details" 
+
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_trainers trainer_details }</span>
+			</span>
+	</span>
+{END trainer_details_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field8}
 							</tr>
 															
 					{END grid_header}
@@ -464,6 +494,27 @@
 {END updated_at_fieldcolumn}	
 	</td>
 	{END cellblock_grid_cell_field7}
+									{BEGIN cellblock_grid_cell_field8}
+	<td
+	
+	{$cell_grid_cell_field8}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$trainer_details_class}	"
+
+			data-field="trainer_details"
+	
+	data-cellId="grid_cell_field8" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN trainer_details_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field8" {$item_simple_grid_field8} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="trainer_details" data-fieldname="trainer_details" data-default-width >
+{$trainer_details_value}
+</span>
+{END trainer_details_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field8}
 							</tr>
 										
 											{END grid_row}
@@ -595,6 +646,21 @@
 	
 	</td>
 	{END cellblock_grid_footcell_field7}
+									{BEGIN cellblock_grid_footcell_field8}
+	<td
+	
+	{$cell_grid_footcell_field8}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$trainer_details_class}	"
+
+	
+	data-cellId="grid_footcell_field8" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="trainers_masterprint"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field8}
 							</tr>
 					
 					</tfoot>

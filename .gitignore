@@ -1,3 +1,4 @@
 settings.xml
 *.code-workspace
 /schema
+app/templates_c/

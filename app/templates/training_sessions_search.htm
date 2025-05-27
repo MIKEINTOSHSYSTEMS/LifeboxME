@@ -467,6 +467,28 @@
 </div>
 
 {END program_id_fieldblock}
+											
+{BEGIN training_details_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_training_details}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="training_details{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field2" {$item_integrated_search_field2} data-pageid="{$pageid}" data-field="training_details" data-fieldname="training_details" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_training_details}">
+		{$label public_training_sessions training_details }	</label>
+	<div class="r-search-option">
+		{$searchtype_training_details}
+	</div>
+	<div class="r-search-field">
+		{$training_details_editcontrol}	</div>
+	<div class="r-search-field">
+		{$training_details_editcontrol1}
+	</div>
+	
+</div>
+
+{END training_details_fieldblock}
 	
 								</td>
 			{END cellblock_grid_c3}

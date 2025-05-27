@@ -128,7 +128,7 @@
 	 
 		{BEGIN training_id_fieldheadercolumn}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field2" {$item_simple_grid_field2} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_id" data-fieldname="training_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field3" {$item_simple_grid_field3} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_id" data-fieldname="training_id" 
 
 	
 	
@@ -158,7 +158,7 @@
 	 
 		{BEGIN course_id_fieldheadercolumn}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field3" {$item_simple_grid_field3} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="course_id" data-fieldname="course_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field4" {$item_simple_grid_field4} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="course_id" data-fieldname="course_id" 
 
 	
 	
@@ -622,6 +622,36 @@
 	
 	</th>
 	{END cellblock_grid_headcell_field16}
+									{BEGIN cellblock_grid_headcell_field17}
+	<th
+	
+	{$cell_grid_headcell_field17}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_details_class}	"
+
+			data-field="training_details"
+	
+	data-cellId="grid_headcell_field17" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN training_details_fieldheadercolumn}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field35" {$item_simple_grid_field35} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_details" data-fieldname="training_details" 
+
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_training_sessions training_details }</span>
+			</span>
+	</span>
+{END training_details_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field17}
 							</tr>
 																				
 					{END grid_header}
@@ -990,6 +1020,27 @@
 {END program_id_fieldcolumn}	
 	</td>
 	{END cellblock_grid_cell_field16}
+									{BEGIN cellblock_grid_cell_field17}
+	<td
+	
+	{$cell_grid_cell_field17}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_details_class}	"
+
+			data-field="training_details"
+	
+	data-cellId="grid_cell_field17" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN training_details_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field2" {$item_simple_grid_field2} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_details" data-fieldname="training_details" data-default-width >
+{$training_details_value}
+</span>
+{END training_details_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field17}
 							</tr>
 											<tr {$rowattrs} {$row_grid_2} class="{$rowclass}
 				
@@ -1291,6 +1342,21 @@
 	
 	</td>
 	{END cellblock_grid_footcell_field16}
+									{BEGIN cellblock_grid_footcell_field17}
+	<td
+	
+	{$cell_grid_footcell_field17}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_details_class}	"
+
+	
+	data-cellId="grid_footcell_field17" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_sessions_print"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field17}
 							</tr>
 					
 					</tfoot>

@@ -495,7 +495,16 @@
 					<div class="r-top">
 									{BEGIN top_block}
 <div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="leftbar" {$form_top} data-pageid="{$pageid}" >		
-	</div>		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="top_c2" data-pageid="{$pageid}"	{$cell_top_c2}
+	class=" r-ori-vert			col-md-12
+	
+">
+			</div>					</div>
+			</div>		
 {END top_block}
 						</div>
 											<div class="r-grid"
@@ -536,6 +545,14 @@
 							Delete			</a>
 </span>
 {END deleteselected_link}
+	 
+		{BEGIN updateselected_link}
+<span data-itemtype="update_selected" data-itemid="update_selected" {$item_update_selected} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" href="training_courses_edit.php{$stateLink_full}" {$updateselectedlink_attrs} disabled >
+							Update selected			</a>
+</span>
+{END updateselected_link}
 			{END firstAboveGridCell}	
 	</div>			 
 				<div 

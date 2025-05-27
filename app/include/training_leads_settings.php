@@ -28,10 +28,10 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelstraining_leads["English"]["training_lead_id"] = "Training Lead Id";
 	$fieldToolTipstraining_leads["English"]["training_lead_id"] = "";
 	$placeHolderstraining_leads["English"]["training_lead_id"] = "";
-	$fieldLabelstraining_leads["English"]["training_id"] = "Training Id";
+	$fieldLabelstraining_leads["English"]["training_id"] = "Training Session";
 	$fieldToolTipstraining_leads["English"]["training_id"] = "";
 	$placeHolderstraining_leads["English"]["training_id"] = "";
-	$fieldLabelstraining_leads["English"]["staff_id"] = "Staff Id";
+	$fieldLabelstraining_leads["English"]["staff_id"] = "Lifebox Staff";
 	$fieldToolTipstraining_leads["English"]["staff_id"] = "";
 	$placeHolderstraining_leads["English"]["staff_id"] = "";
 	$fieldLabelstraining_leads["English"]["created_at"] = "Created At";
@@ -452,15 +452,16 @@ $tdatatraining_leads[".hideMobileList"] = array();
 // Begin Lookup settings
 				$edata["LookupType"] = 2;
 	$edata["LookupTable"] = "public.training_sessions";
-			$edata["autoCompleteFieldsOnEdit"] = 0;
+		$edata["listPageId"] = "list";
+		$edata["autoCompleteFieldsOnEdit"] = 0;
 	$edata["autoCompleteFields"] = array();
-		$edata["LCType"] = 0;
+		$edata["LCType"] = 2;
 
 	
 		
 	$edata["LinkField"] = "training_id";
-	$edata["LinkFieldType"] = 3;
-	$edata["DisplayField"] = "remarks";
+	$edata["LinkFieldType"] = 0;
+	$edata["DisplayField"] = "training_details";
 
 	
 
@@ -474,8 +475,7 @@ $tdatatraining_leads[".hideMobileList"] = array();
 
 	
 	
-		$edata["SelectSize"] = 1;
-
+	
 // End Lookup Settings
 
 
@@ -518,7 +518,7 @@ $tdatatraining_leads[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "Equals";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
@@ -616,15 +616,16 @@ $tdatatraining_leads[".hideMobileList"] = array();
 // Begin Lookup settings
 				$edata["LookupType"] = 2;
 	$edata["LookupTable"] = "public.lifebox_staff";
-			$edata["autoCompleteFieldsOnEdit"] = 0;
+		$edata["listPageId"] = "list";
+		$edata["autoCompleteFieldsOnEdit"] = 0;
 	$edata["autoCompleteFields"] = array();
-		$edata["LCType"] = 0;
+		$edata["LCType"] = 2;
 
 	
 		
 	$edata["LinkField"] = "staff_id";
 	$edata["LinkFieldType"] = 3;
-	$edata["DisplayField"] = "first_name";
+	$edata["DisplayField"] = "lifebox_staff_details";
 
 	
 
@@ -638,8 +639,7 @@ $tdatatraining_leads[".hideMobileList"] = array();
 
 	
 	
-		$edata["SelectSize"] = 1;
-
+	
 // End Lookup Settings
 
 
@@ -682,7 +682,7 @@ $tdatatraining_leads[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "Equals";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
