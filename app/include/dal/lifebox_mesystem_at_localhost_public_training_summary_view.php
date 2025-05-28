@@ -10,6 +10,7 @@ $dalTabletraining_summary_view["start_date"] = array("type"=>7,"varname"=>"start
 $dalTabletraining_summary_view["end_date"] = array("type"=>7,"varname"=>"end_date", "name" => "end_date", "autoInc" => "0");
 $dalTabletraining_summary_view["facility_name"] = array("type"=>200,"varname"=>"facility_name", "name" => "facility_name", "autoInc" => "0");
 $dalTabletraining_summary_view["country_name"] = array("type"=>200,"varname"=>"country_name", "name" => "country_name", "autoInc" => "0");
+$dalTabletraining_summary_view["venue_name"] = array("type"=>200,"varname"=>"venue_name", "name" => "venue_name", "autoInc" => "0");
 $dalTabletraining_summary_view["region_name"] = array("type"=>200,"varname"=>"region_name", "name" => "region_name", "autoInc" => "0");
 $dalTabletraining_summary_view["ceu_points"] = array("type"=>14,"varname"=>"ceu_points", "name" => "ceu_points", "autoInc" => "0");
 $dalTabletraining_summary_view["num_participants"] = array("type"=>3,"varname"=>"num_participants", "name" => "num_participants", "autoInc" => "0");

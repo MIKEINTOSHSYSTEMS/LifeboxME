@@ -218,7 +218,16 @@ pdfDocument = {
 			{"text":"","hidden":"{$item_hide_inline_add}"},
 				
 				
+			{"text":"","hidden":"{$item_hide_inline_save_all}"},
+				
+				
+			{"text":"","hidden":"{$item_hide_inline_cancel_all}"},
+				
+				
 			{"text":"","hidden":"{$item_hide_delete}"},
+				
+				
+			{"text":"","hidden":"{$item_hide_update_selected}"},
 				
 		  ],
   "border": [ false, false, false, false ],
@@ -701,6 +710,12 @@ pdfDocument = {
 			{"text":"","hidden":"{$item_hide_grid_edit}"},
 				
 				
+			{"text":"","hidden":"{$item_hide_grid_inline_edit}"},
+				
+				
+			{"text":"","hidden":"{$item_hide_grid_inline_save}"},
+				
+				
 			{"text":"","hidden":"{$item_hide_grid_inline_cancel}"},
 				
 				
@@ -779,6 +794,12 @@ pdfDocument = {
 				
 				
 			{"text":"","hidden":"{$item_hide_grid_details_link5}"},
+				
+				
+			{"text":"","hidden":"{$item_hide_grid_details_link6}"},
+				
+				
+			{"text":"","hidden":"{$item_hide_grid_details_link7}"},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1160,6 +1181,16 @@ pdfDocument = {
 			 {BEGIN details_ward_rounds}
 			{$displayDetailTable_ward_rounds }
 		{END details_ward_rounds},
+				
+				
+			 {BEGIN details_training_participants}
+			{$displayDetailTable_training_participants }
+		{END details_training_participants},
+				
+				
+			 {BEGIN details_venues}
+			{$displayDetailTable_venues }
+		{END details_venues},
 				
 		  ],
   "border": [ true, true, true, true ],

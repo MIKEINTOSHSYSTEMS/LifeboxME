@@ -1277,6 +1277,66 @@ $detailsTablesData["public.countries"] = array();
 				$detailsTablesData["public.countries"][$dIndex]["detailKeys"] = array();
 
 	$detailsTablesData["public.countries"][$dIndex]["detailKeys"][]="host_country_id";
+//	public.training_participants
+	
+	
+
+		$dIndex = 5;
+	$detailsParam = array();
+	$detailsParam["dDataSourceTable"]="public.training_participants";
+		$detailsParam["dOriginalTable"] = "public.training_participants";
+
+
+
+		
+		$detailsParam["dType"]=PAGE_LIST;
+	$detailsParam["dShortTable"] = "training_participants";
+	$detailsParam["dCaptionTable"] = GetTableCaption("public_training_participants");
+	$detailsParam["masterKeys"] =array();
+	$detailsParam["detailKeys"] =array();
+
+
+		
+	$detailsTablesData["public.countries"][$dIndex] = $detailsParam;
+
+	
+		$detailsTablesData["public.countries"][$dIndex]["masterKeys"] = array();
+
+	$detailsTablesData["public.countries"][$dIndex]["masterKeys"][]="country_id";
+
+				$detailsTablesData["public.countries"][$dIndex]["detailKeys"] = array();
+
+	$detailsTablesData["public.countries"][$dIndex]["detailKeys"][]="country_id";
+//	public.venues
+	
+	
+
+		$dIndex = 6;
+	$detailsParam = array();
+	$detailsParam["dDataSourceTable"]="public.venues";
+		$detailsParam["dOriginalTable"] = "public.venues";
+
+
+
+		
+		$detailsParam["dType"]=PAGE_LIST;
+	$detailsParam["dShortTable"] = "venues";
+	$detailsParam["dCaptionTable"] = GetTableCaption("public_venues");
+	$detailsParam["masterKeys"] =array();
+	$detailsParam["detailKeys"] =array();
+
+
+		
+	$detailsTablesData["public.countries"][$dIndex] = $detailsParam;
+
+	
+		$detailsTablesData["public.countries"][$dIndex]["masterKeys"] = array();
+
+	$detailsTablesData["public.countries"][$dIndex]["masterKeys"][]="country_id";
+
+				$detailsTablesData["public.countries"][$dIndex]["detailKeys"] = array();
+
+	$detailsTablesData["public.countries"][$dIndex]["detailKeys"][]="country_id";
 //endif
 
 // tables which are master tables for current table (detail)

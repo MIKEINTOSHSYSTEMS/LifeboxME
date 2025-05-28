@@ -91,6 +91,30 @@
 [data-page="_global_menu"][data-itemid="welcome_item30"] > .bs-welcome-header {
   background-color: #4682B4;
 }
+[data-page="_global_menu"][data-itemid="welcome_item31"] > .bs-welcome-header {
+  background-color: #B22222;
+}
+[data-page="_global_menu"][data-itemid="welcome_item32"] > .bs-welcome-header {
+  background-color: #7B68EE;
+}
+[data-page="_global_menu"][data-itemid="welcome_item33"] > .bs-welcome-header {
+  background-color: #DB7093;
+}
+[data-page="_global_menu"][data-itemid="welcome_item34"] > .bs-welcome-header {
+  background-color: #008B8B;
+}
+[data-page="_global_menu"][data-itemid="welcome_item35"] > .bs-welcome-header {
+  background-color: #E67349;
+}
+[data-page="_global_menu"][data-itemid="welcome_item36"] > .bs-welcome-header {
+  background-color: #CD853F;
+}
+[data-page="_global_menu"][data-itemid="welcome_item37"] > .bs-welcome-header {
+  background-color: #BC8F8F;
+}
+[data-page="_global_menu"][data-itemid="welcome_item38"] > .bs-welcome-header {
+  background-color: #2F4F4F;
+}
 [data-page="_global_menu"][data-itemid="page_image_ash8f23hr"] {
   width: 400px;
 }

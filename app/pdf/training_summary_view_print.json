@@ -121,6 +121,9 @@ pdfDocument = {
 										{BEGIN col_grid_18}
 					"%",
 					{END col_grid_18}
+										{BEGIN col_grid_19}
+					"%",
+					{END col_grid_19}
 															],
 											heights: [ // first height for header part
 					"%",
@@ -268,7 +271,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_summary_view training_id }","hidden":"{$item_hide_simple_grid_field19}","bold":true},
+			{"text":"{$jslabel public_training_summary_view training_id }","hidden":"{$item_hide_simple_grid_field20}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -297,7 +300,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_summary_view course_name }","hidden":"{$item_hide_simple_grid_field20}","bold":true},
+			{"text":"{$jslabel public_training_summary_view course_name }","hidden":"{$item_hide_simple_grid_field21}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -326,7 +329,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_summary_view training_type }","hidden":"{$item_hide_simple_grid_field21}","bold":true},
+			{"text":"{$jslabel public_training_summary_view training_type }","hidden":"{$item_hide_simple_grid_field22}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -355,7 +358,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_summary_view training_approach }","hidden":"{$item_hide_simple_grid_field22}","bold":true},
+			{"text":"{$jslabel public_training_summary_view training_approach }","hidden":"{$item_hide_simple_grid_field23}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -384,7 +387,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_summary_view program }","hidden":"{$item_hide_simple_grid_field23}","bold":true},
+			{"text":"{$jslabel public_training_summary_view program }","hidden":"{$item_hide_simple_grid_field24}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -413,7 +416,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_summary_view quarter }","hidden":"{$item_hide_simple_grid_field24}","bold":true},
+			{"text":"{$jslabel public_training_summary_view quarter }","hidden":"{$item_hide_simple_grid_field25}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -442,7 +445,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_summary_view start_date }","hidden":"{$item_hide_simple_grid_field25}","bold":true},
+			{"text":"{$jslabel public_training_summary_view start_date }","hidden":"{$item_hide_simple_grid_field26}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -471,7 +474,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_summary_view end_date }","hidden":"{$item_hide_simple_grid_field26}","bold":true},
+			{"text":"{$jslabel public_training_summary_view end_date }","hidden":"{$item_hide_simple_grid_field27}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -500,7 +503,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_summary_view facility_name }","hidden":"{$item_hide_simple_grid_field27}","bold":true},
+			{"text":"{$jslabel public_training_summary_view facility_name }","hidden":"{$item_hide_simple_grid_field28}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -529,7 +532,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_summary_view country_name }","hidden":"{$item_hide_simple_grid_field28}","bold":true},
+			{"text":"{$jslabel public_training_summary_view country_name }","hidden":"{$item_hide_simple_grid_field29}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -558,7 +561,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_summary_view region_name }","hidden":"{$item_hide_simple_grid_field29}","bold":true},
+			{"text":"{$jslabel public_training_summary_view region_name }","hidden":"{$item_hide_simple_grid_field30}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -587,7 +590,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_summary_view ceu_points }","hidden":"{$item_hide_simple_grid_field30}","bold":true},
+			{"text":"{$jslabel public_training_summary_view ceu_points }","hidden":"{$item_hide_simple_grid_field31}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -616,7 +619,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_summary_view num_participants }","hidden":"{$item_hide_simple_grid_field31}","bold":true},
+			{"text":"{$jslabel public_training_summary_view num_participants }","hidden":"{$item_hide_simple_grid_field32}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -645,7 +648,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_summary_view avg_pre_test_score }","hidden":"{$item_hide_simple_grid_field32}","bold":true},
+			{"text":"{$jslabel public_training_summary_view avg_pre_test_score }","hidden":"{$item_hide_simple_grid_field33}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -674,7 +677,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_summary_view avg_post_test_score }","hidden":"{$item_hide_simple_grid_field33}","bold":true},
+			{"text":"{$jslabel public_training_summary_view avg_post_test_score }","hidden":"{$item_hide_simple_grid_field34}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -703,7 +706,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_summary_view trainers }","hidden":"{$item_hide_simple_grid_field34}","bold":true},
+			{"text":"{$jslabel public_training_summary_view trainers }","hidden":"{$item_hide_simple_grid_field35}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -732,7 +735,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_summary_view partners }","hidden":"{$item_hide_simple_grid_field35}","bold":true},
+			{"text":"{$jslabel public_training_summary_view partners }","hidden":"{$item_hide_simple_grid_field36}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -761,7 +764,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_summary_view languages }","hidden":"{$item_hide_simple_grid_field36}","bold":true},
+			{"text":"{$jslabel public_training_summary_view languages }","hidden":"{$item_hide_simple_grid_field37}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -790,7 +793,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_training_summary_view remarks }","hidden":"{$item_hide_simple_grid_field37}","bold":true},
+			{"text":"{$jslabel public_training_summary_view remarks }","hidden":"{$item_hide_simple_grid_field38}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -800,6 +803,35 @@ pdfDocument = {
       },
 
 {END cellblock_grid_headcell_field18}
+																							{BEGIN cellblock_grid_headcell_field19}
+{
+	cellId: 'headcell_field19',
+	col:0,
+	row:0,
+			fieldName: 'venue_name',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_training_summary_view venue_name }","hidden":"{$item_hide_simple_grid_field39}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$venue_name_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field19}
 											],
 				{END row_grid_0}
 		
@@ -1360,6 +1392,35 @@ pdfDocument = {
       },
 
 {END cellblock_grid_cell_field18}
+																							{BEGIN cellblock_grid_cell_field19}
+{
+	cellId: 'cell_field19',
+	col:0,
+	row:0,
+			fieldName: 'venue_name',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$venue_name_pdfvalue},"hidden":"{$item_hide_simple_grid_field19}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$venue_name_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field19}
 											],
 				{END row_grid_1}
 		
@@ -1863,6 +1924,32 @@ pdfDocument = {
       },
 
 {END cellblock_grid_footcell_field18}
+																							{BEGIN cellblock_grid_footcell_field19}
+{
+	cellId: 'footcell_field19',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field19}
 											],
 				{END row_grid_2}
 		

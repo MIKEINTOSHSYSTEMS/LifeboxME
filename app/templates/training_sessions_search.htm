@@ -489,6 +489,28 @@
 </div>
 
 {END training_details_fieldblock}
+											
+{BEGIN venue_id_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_venue_id}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="venue_id{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field3" {$item_integrated_search_field3} data-pageid="{$pageid}" data-field="venue_id" data-fieldname="venue_id" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_venue_id}">
+		{$label public_training_sessions venue_id }	</label>
+	<div class="r-search-option">
+		{$searchtype_venue_id}
+	</div>
+	<div class="r-search-field">
+		{$venue_id_editcontrol}	</div>
+	<div class="r-search-field">
+		{$venue_id_editcontrol1}
+	</div>
+	
+</div>
+
+{END venue_id_fieldblock}
 	
 								</td>
 			{END cellblock_grid_c3}

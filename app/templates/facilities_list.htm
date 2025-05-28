@@ -480,6 +480,14 @@
 												<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu">
+							{BEGIN editselected_link}
+	<li data-itemtype="edit_selected" data-itemid="edit_selected" {$item_edit_selected} data-pageid="{$pageid}" data-small >
+				<a  href="#" {$editselectedlink_attrs} {$editselectedlink_span}  title="" >
+				
+		Edit selected		
+		</a>
+	</li>
+{END editselected_link}
 							{BEGIN exportselected_link}
 	<li data-itemtype="export_selected" data-itemid="export_selected" {$item_export_selected} data-pageid="{$pageid}" data-small >
 				<a  href="#" {$exportselectedlink_attrs} {$exportselectedlink_span}  title="" >
@@ -603,6 +611,22 @@
 </span>
 {END inlineadd_link}
 	 
+		{BEGIN saveall_link}
+<span data-itemtype="inline_save_all" data-itemid="inline_save_all" {$item_inline_save_all} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" {$savealllink_attrs} {$savealllink_span} >
+							Save all			</a>
+</span>
+{END saveall_link}
+	 
+		{BEGIN cancelall_link}
+<span data-itemtype="inline_cancel_all" data-itemid="inline_cancel_all" {$item_inline_cancel_all} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$cancelalllink_attrs} {$cancelalllink_span} >
+							Cancel			</a>
+</span>
+{END cancelall_link}
+	 
 		{BEGIN deleteselected_link}
 <span data-itemtype="delete" data-itemid="delete" {$item_delete} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-default   
@@ -610,6 +634,14 @@
 							Delete			</a>
 </span>
 {END deleteselected_link}
+	 
+		{BEGIN updateselected_link}
+<span data-itemtype="update_selected" data-itemid="update_selected" {$item_update_selected} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" href="facilities_edit.php{$stateLink_full}" {$updateselectedlink_attrs} disabled >
+							Update selected			</a>
+</span>
+{END updateselected_link}
 			{END firstAboveGridCell}	
 	</div>			 
 				<div 
@@ -724,6 +756,20 @@
 					Ward Rounds				</label>
 			</div>
 			{END print_details_ward_rounds}
+														{BEGIN print_details_training_participants}
+			<div>
+				<label for="printDetailstraining_participants{$id}">
+					<input type="checkbox" value="training_participants" id="printDetailstraining_participants{$id}" checked>
+					Training Participants				</label>
+			</div>
+			{END print_details_training_participants}
+														{BEGIN print_details_venues}
+			<div>
+				<label for="printDetailsvenues{$id}">
+					<input type="checkbox" value="venues" id="printDetailsvenues{$id}" checked>
+					Venues				</label>
+			</div>
+			{END print_details_venues}
 						</div>
 </div>
 {END print_details}
@@ -1277,6 +1323,26 @@
 {END edit_link}
 {END edit_column}
 	 
+		{BEGIN inlineedit_column}
+{BEGIN inlineedit_link}
+<span data-itemtype="grid_inline_edit" data-itemid="grid_inline_edit" {$item_grid_inline_edit} data-pageid="{$pageid}" data-record-id="{$recId}" data-small data-button-item>
+	<a type="button" title="Inline Edit" class="btn-link   
+	 glyphicon glyphicon-edit" {$inlineeditlink_attrs} title="Inline Edit" >		
+				
+								</a>
+</span>
+{END inlineedit_link}
+{END inlineedit_column}
+	 
+		{BEGIN inline_save}
+<span data-itemtype="grid_inline_save" data-itemid="grid_inline_save" {$item_grid_inline_save} data-pageid="{$pageid}" data-record-id="{$recId}" data-small data-button-item>
+	<a type="button" title="Save" class="btn-link   
+	 glyphicon glyphicon-ok" {$inlinesavelink_attrs} title="Save" >		
+				
+								</a>
+</span>
+{END inline_save}
+	 
 		{BEGIN inline_cancel}
 <span data-itemtype="grid_inline_cancel" data-itemid="grid_inline_cancel" {$item_grid_inline_cancel} data-pageid="{$pageid}" data-record-id="{$recId}" data-small data-button-item>
 	<a type="button" title="Cancel" class="btn-link   
@@ -1460,6 +1526,44 @@
 						</a>
 	</span>
 	{END ward_rounds_dtable_link}
+
+
+	 
+		
+		
+	{BEGIN training_participants_dtable_link}
+	<span data-itemtype="grid_details_link" data-itemid="grid_details_link6" {$item_grid_details_link6} data-pageid="{$pageid}" data-record-id="{$recId}">
+	<a  {$training_participants_link_attrs} data-short-details="training_participants"
+		class="{$training_participants_dlink_class}" 
+		title="{$caption public_training_participants }"			>
+								
+									{BEGIN training_participants_childcount}
+				<span class="details-badge badge training_participants_badge" {$training_participants_childnumber_attr}>
+					{$training_participants_childnumber}				
+				</span>
+				{END training_participants_childcount}
+						</a>
+	</span>
+	{END training_participants_dtable_link}
+
+
+	 
+		
+		
+	{BEGIN venues_dtable_link}
+	<span data-itemtype="grid_details_link" data-itemid="grid_details_link7" {$item_grid_details_link7} data-pageid="{$pageid}" data-record-id="{$recId}">
+	<a  {$venues_link_attrs} data-short-details="venues"
+		class="{$venues_dlink_class}" 
+		title="{$caption public_venues }"			>
+								
+									{BEGIN venues_childcount}
+				<span class="details-badge badge venues_badge" {$venues_childnumber_attr}>
+					{$venues_childnumber}				
+				</span>
+				{END venues_childcount}
+						</a>
+	</span>
+	{END venues_dtable_link}
 
 
 	
@@ -1713,9 +1817,9 @@
 	>
 
 	 
-								<div data-itemtype="details_preview" data-itemid="details_preview" {$item_details_preview} data-pageid="{$pageid}" data-record-id="{$recId}" 
-	data-orders="clean_cut_implementations,device_distributions,follow_ups,surgical_cases,training_sessions,ward_rounds"
-			data-details-clean_cut_implementations			data-details-device_distributions			data-details-follow_ups			data-details-surgical_cases			data-details-training_sessions			data-details-ward_rounds	>
+										<div data-itemtype="details_preview" data-itemid="details_preview" {$item_details_preview} data-pageid="{$pageid}" data-record-id="{$recId}" 
+	data-orders="clean_cut_implementations,device_distributions,follow_ups,surgical_cases,training_sessions,ward_rounds,training_participants,venues"
+			data-details-clean_cut_implementations			data-details-device_distributions			data-details-follow_ups			data-details-surgical_cases			data-details-training_sessions			data-details-ward_rounds			data-details-training_participants			data-details-venues	>
 		<span data-details-inside data-short-table="clean_cut_implementations">
 			</span>
 		<span data-details-inside data-short-table="device_distributions">
@@ -1728,10 +1832,16 @@
 			</span>
 		<span data-details-inside data-short-table="ward_rounds">
 			</span>
+		<span data-details-inside data-short-table="training_participants">
+			</span>
+		<span data-details-inside data-short-table="venues">
+			</span>
 		<div data-details-preview>
 	</div>
 </div>
 	 
+			 
+			 
 			 
 			 
 			 

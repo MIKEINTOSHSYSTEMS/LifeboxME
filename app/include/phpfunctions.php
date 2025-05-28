@@ -1162,6 +1162,30 @@ function GetDefaultValue($field, $ptype, $table="")
 	{
 		return strftime("%Y-%m-%d");
 	}
+				if($table=="public.participant_role" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d");
+	}
+				if($table=="public.sex" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d");
+	}
+				if($table=="public.training_participants" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d");
+	}
+				if($table=="public.venues" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d");
+	}
+				if($table=="public.training_attendance" && $field=="attendance_date")
+	{
+		return strftime("%Y-%m-%d");
+	}
+				if($table=="public.training_attendance" && $field=="recorded_at")
+	{
+		return strftime("%Y-%m-%d");
+	}
 	return "";
 }
 
@@ -1234,6 +1258,22 @@ function GetAutoUpdateValue($field, $ptype, $table="")
 		return strftime("%Y-%m-%d");
 	}
 				if($table=="public.training_types" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d");
+	}
+				if($table=="public.participant_role" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d");
+	}
+				if($table=="public.sex" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d");
+	}
+				if($table=="public.training_participants" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d");
+	}
+				if($table=="public.venues" && $field=="updated_at")
 	{
 		return strftime("%Y-%m-%d");
 	}

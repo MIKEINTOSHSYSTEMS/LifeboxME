@@ -749,9 +749,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "27_1748359375";
+$projectBuildKey = "34_1748454649";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "27";
+$projectBuildNumber = "34";
 
 $mlang_messages = array();
 $mlang_charsets = array();
@@ -808,6 +808,14 @@ $tableCaptions["English"]["public_programs"] = "Programs";
 $tableCaptions["English"]["public_training_approaches"] = "Training Approaches";
 $tableCaptions["English"]["public_training_types"] = "Training Types";
 $tableCaptions["English"]["public_quarters"] = "Quarters";
+$tableCaptions["English"]["public_participant_role"] = "Participant Role";
+$tableCaptions["English"]["public_sex"] = "Sex";
+$tableCaptions["English"]["public_training_participants"] = "Training Participants";
+$tableCaptions["English"]["public_venues"] = "Venues";
+$tableCaptions["English"]["public_training_attendance"] = "Training Attendance";
+$tableCaptions["English"]["public_daily_attendance_view"] = "Daily Attendance View";
+$tableCaptions["English"]["public_participant_attendance_detail"] = "Participant Attendance Detail";
+$tableCaptions["English"]["public_participant_attendance_summary"] = "Participant Attendance Summary";
 
 
 $globalEvents = new class_GlobalEvents;

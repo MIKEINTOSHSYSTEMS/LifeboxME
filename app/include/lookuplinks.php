@@ -243,6 +243,13 @@ function InitLookupLinks()
 			$lookupTableLinks["public.countries"]["training_sessions.host_country_id"] = array();
 		}
 		$lookupTableLinks["public.countries"]["training_sessions.host_country_id"]["edit"] = array("table" => "public.training_sessions", "field" => "host_country_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.venues"] ) ) {
+			$lookupTableLinks["public.venues"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.venues"]["training_sessions.venue_id"] )) {
+			$lookupTableLinks["public.venues"]["training_sessions.venue_id"] = array();
+		}
+		$lookupTableLinks["public.venues"]["training_sessions.venue_id"]["edit"] = array("table" => "public.training_sessions", "field" => "venue_id", "page" => "edit");
 		if( !isset( $lookupTableLinks["public.training_sessions"] ) ) {
 			$lookupTableLinks["public.training_sessions"] = array();
 		}
@@ -285,6 +292,146 @@ function InitLookupLinks()
 			$lookupTableLinks["public.facilities"]["ward_rounds.facility_id"] = array();
 		}
 		$lookupTableLinks["public.facilities"]["ward_rounds.facility_id"]["edit"] = array("table" => "public.ward_rounds", "field" => "facility_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.training_sessions"] ) ) {
+			$lookupTableLinks["public.training_sessions"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.training_sessions"]["training_participants.training_id"] )) {
+			$lookupTableLinks["public.training_sessions"]["training_participants.training_id"] = array();
+		}
+		$lookupTableLinks["public.training_sessions"]["training_participants.training_id"]["edit"] = array("table" => "public.training_participants", "field" => "training_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.sex"] ) ) {
+			$lookupTableLinks["public.sex"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.sex"]["training_participants.sex_id"] )) {
+			$lookupTableLinks["public.sex"]["training_participants.sex_id"] = array();
+		}
+		$lookupTableLinks["public.sex"]["training_participants.sex_id"]["edit"] = array("table" => "public.training_participants", "field" => "sex_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.participant_role"] ) ) {
+			$lookupTableLinks["public.participant_role"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.participant_role"]["training_participants.role_id"] )) {
+			$lookupTableLinks["public.participant_role"]["training_participants.role_id"] = array();
+		}
+		$lookupTableLinks["public.participant_role"]["training_participants.role_id"]["edit"] = array("table" => "public.training_participants", "field" => "role_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.facilities"] ) ) {
+			$lookupTableLinks["public.facilities"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.facilities"]["training_participants.facility_id"] )) {
+			$lookupTableLinks["public.facilities"]["training_participants.facility_id"] = array();
+		}
+		$lookupTableLinks["public.facilities"]["training_participants.facility_id"]["edit"] = array("table" => "public.training_participants", "field" => "facility_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.countries"] ) ) {
+			$lookupTableLinks["public.countries"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.countries"]["training_participants.country_id"] )) {
+			$lookupTableLinks["public.countries"]["training_participants.country_id"] = array();
+		}
+		$lookupTableLinks["public.countries"]["training_participants.country_id"]["edit"] = array("table" => "public.training_participants", "field" => "country_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.training_sessions"] ) ) {
+			$lookupTableLinks["public.training_sessions"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.training_sessions"]["training_participants.training_date"] )) {
+			$lookupTableLinks["public.training_sessions"]["training_participants.training_date"] = array();
+		}
+		$lookupTableLinks["public.training_sessions"]["training_participants.training_date"]["edit"] = array("table" => "public.training_participants", "field" => "training_date", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.daily_attendance_view"] ) ) {
+			$lookupTableLinks["public.daily_attendance_view"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.daily_attendance_view"]["training_participants.day_number"] )) {
+			$lookupTableLinks["public.daily_attendance_view"]["training_participants.day_number"] = array();
+		}
+		$lookupTableLinks["public.daily_attendance_view"]["training_participants.day_number"]["edit"] = array("table" => "public.training_participants", "field" => "day_number", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.venues"] ) ) {
+			$lookupTableLinks["public.venues"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.venues"]["training_participants.venue_id"] )) {
+			$lookupTableLinks["public.venues"]["training_participants.venue_id"] = array();
+		}
+		$lookupTableLinks["public.venues"]["training_participants.venue_id"]["edit"] = array("table" => "public.training_participants", "field" => "venue_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.facilities"] ) ) {
+			$lookupTableLinks["public.facilities"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.facilities"]["venues.facility_id"] )) {
+			$lookupTableLinks["public.facilities"]["venues.facility_id"] = array();
+		}
+		$lookupTableLinks["public.facilities"]["venues.facility_id"]["edit"] = array("table" => "public.venues", "field" => "facility_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.countries"] ) ) {
+			$lookupTableLinks["public.countries"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.countries"]["venues.country_id"] )) {
+			$lookupTableLinks["public.countries"]["venues.country_id"] = array();
+		}
+		$lookupTableLinks["public.countries"]["venues.country_id"]["edit"] = array("table" => "public.venues", "field" => "country_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.training_participants"] ) ) {
+			$lookupTableLinks["public.training_participants"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.training_participants"]["training_attendance.participant_id"] )) {
+			$lookupTableLinks["public.training_participants"]["training_attendance.participant_id"] = array();
+		}
+		$lookupTableLinks["public.training_participants"]["training_attendance.participant_id"]["edit"] = array("table" => "public.training_attendance", "field" => "participant_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.participant_attendance_summary"] ) ) {
+			$lookupTableLinks["public.participant_attendance_summary"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.participant_attendance_summary"]["training_attendance.day_number"] )) {
+			$lookupTableLinks["public.participant_attendance_summary"]["training_attendance.day_number"] = array();
+		}
+		$lookupTableLinks["public.participant_attendance_summary"]["training_attendance.day_number"]["edit"] = array("table" => "public.training_attendance", "field" => "day_number", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.training_sessions"] ) ) {
+			$lookupTableLinks["public.training_sessions"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.training_sessions"]["daily_attendance_view.training_id"] )) {
+			$lookupTableLinks["public.training_sessions"]["daily_attendance_view.training_id"] = array();
+		}
+		$lookupTableLinks["public.training_sessions"]["daily_attendance_view.training_id"]["edit"] = array("table" => "public.daily_attendance_view", "field" => "training_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.training_sessions"] ) ) {
+			$lookupTableLinks["public.training_sessions"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.training_sessions"]["daily_attendance_view.training_name"] )) {
+			$lookupTableLinks["public.training_sessions"]["daily_attendance_view.training_name"] = array();
+		}
+		$lookupTableLinks["public.training_sessions"]["daily_attendance_view.training_name"]["edit"] = array("table" => "public.daily_attendance_view", "field" => "training_name", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.training_participants"] ) ) {
+			$lookupTableLinks["public.training_participants"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.training_participants"]["participant_attendance_detail.participant_id"] )) {
+			$lookupTableLinks["public.training_participants"]["participant_attendance_detail.participant_id"] = array();
+		}
+		$lookupTableLinks["public.training_participants"]["participant_attendance_detail.participant_id"]["edit"] = array("table" => "public.participant_attendance_detail", "field" => "participant_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.training_sessions"] ) ) {
+			$lookupTableLinks["public.training_sessions"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.training_sessions"]["participant_attendance_detail.training_id"] )) {
+			$lookupTableLinks["public.training_sessions"]["participant_attendance_detail.training_id"] = array();
+		}
+		$lookupTableLinks["public.training_sessions"]["participant_attendance_detail.training_id"]["edit"] = array("table" => "public.participant_attendance_detail", "field" => "training_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.training_sessions"] ) ) {
+			$lookupTableLinks["public.training_sessions"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.training_sessions"]["participant_attendance_detail.training_name"] )) {
+			$lookupTableLinks["public.training_sessions"]["participant_attendance_detail.training_name"] = array();
+		}
+		$lookupTableLinks["public.training_sessions"]["participant_attendance_detail.training_name"]["edit"] = array("table" => "public.participant_attendance_detail", "field" => "training_name", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.participant_attendance_summary"] ) ) {
+			$lookupTableLinks["public.participant_attendance_summary"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.participant_attendance_summary"]["participant_attendance_detail.day_number"] )) {
+			$lookupTableLinks["public.participant_attendance_summary"]["participant_attendance_detail.day_number"] = array();
+		}
+		$lookupTableLinks["public.participant_attendance_summary"]["participant_attendance_detail.day_number"]["edit"] = array("table" => "public.participant_attendance_detail", "field" => "day_number", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.training_sessions"] ) ) {
+			$lookupTableLinks["public.training_sessions"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.training_sessions"]["participant_attendance_summary.training_id"] )) {
+			$lookupTableLinks["public.training_sessions"]["participant_attendance_summary.training_id"] = array();
+		}
+		$lookupTableLinks["public.training_sessions"]["participant_attendance_summary.training_id"]["edit"] = array("table" => "public.participant_attendance_summary", "field" => "training_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.training_sessions"] ) ) {
+			$lookupTableLinks["public.training_sessions"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.training_sessions"]["participant_attendance_summary.training_name"] )) {
+			$lookupTableLinks["public.training_sessions"]["participant_attendance_summary.training_name"] = array();
+		}
+		$lookupTableLinks["public.training_sessions"]["participant_attendance_summary.training_name"]["edit"] = array("table" => "public.participant_attendance_summary", "field" => "training_name", "page" => "edit");
 }
 
 ?>

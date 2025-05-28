@@ -652,6 +652,20 @@
 					Training Sessions				</label>
 			</div>
 			{END print_details_training_sessions}
+														{BEGIN print_details_training_participants}
+			<div>
+				<label for="printDetailstraining_participants{$id}">
+					<input type="checkbox" value="training_participants" id="printDetailstraining_participants{$id}" checked>
+					Training Participants				</label>
+			</div>
+			{END print_details_training_participants}
+														{BEGIN print_details_venues}
+			<div>
+				<label for="printDetailsvenues{$id}">
+					<input type="checkbox" value="venues" id="printDetailsvenues{$id}" checked>
+					Venues				</label>
+			</div>
+			{END print_details_venues}
 						</div>
 </div>
 {END print_details}
@@ -1186,6 +1200,44 @@
 	{END training_sessions_dtable_link}
 
 
+	 
+		
+		
+	{BEGIN training_participants_dtable_link}
+	<span data-itemtype="grid_details_link" data-itemid="grid_details_link5" {$item_grid_details_link5} data-pageid="{$pageid}" data-record-id="{$recId}">
+	<a  {$training_participants_link_attrs} data-short-details="training_participants"
+		class="{$training_participants_dlink_class}" 
+		title="{$caption public_training_participants }"			>
+								
+									{BEGIN training_participants_childcount}
+				<span class="details-badge badge training_participants_badge" {$training_participants_childnumber_attr}>
+					{$training_participants_childnumber}				
+				</span>
+				{END training_participants_childcount}
+						</a>
+	</span>
+	{END training_participants_dtable_link}
+
+
+	 
+		
+		
+	{BEGIN venues_dtable_link}
+	<span data-itemtype="grid_details_link" data-itemid="grid_details_link6" {$item_grid_details_link6} data-pageid="{$pageid}" data-record-id="{$recId}">
+	<a  {$venues_link_attrs} data-short-details="venues"
+		class="{$venues_dlink_class}" 
+		title="{$caption public_venues }"			>
+								
+									{BEGIN venues_childcount}
+				<span class="details-badge badge venues_badge" {$venues_childnumber_attr}>
+					{$venues_childnumber}				
+				</span>
+				{END venues_childcount}
+						</a>
+	</span>
+	{END venues_dtable_link}
+
+
 	
 	</td>
 	{END cellblock_grid_cell_details}
@@ -1332,9 +1384,9 @@
 	>
 
 	 
-							<div data-itemtype="details_preview" data-itemid="details_preview" {$item_details_preview} data-pageid="{$pageid}" data-record-id="{$recId}" 
-	data-orders="clean_cut_implementations,device_distributions,facilities,surgical_cases,training_sessions"
-			data-details-clean_cut_implementations			data-details-device_distributions			data-details-facilities			data-details-surgical_cases			data-details-training_sessions	>
+									<div data-itemtype="details_preview" data-itemid="details_preview" {$item_details_preview} data-pageid="{$pageid}" data-record-id="{$recId}" 
+	data-orders="clean_cut_implementations,device_distributions,facilities,surgical_cases,training_sessions,training_participants,venues"
+			data-details-clean_cut_implementations			data-details-device_distributions			data-details-facilities			data-details-surgical_cases			data-details-training_sessions			data-details-training_participants			data-details-venues	>
 		<span data-details-inside data-short-table="clean_cut_implementations">
 			</span>
 		<span data-details-inside data-short-table="device_distributions">
@@ -1345,10 +1397,16 @@
 			</span>
 		<span data-details-inside data-short-table="training_sessions">
 			</span>
+		<span data-details-inside data-short-table="training_participants">
+			</span>
+		<span data-details-inside data-short-table="venues">
+			</span>
 		<div data-details-preview>
 	</div>
 </div>
 	 
+			 
+			 
 			 
 			 
 			 

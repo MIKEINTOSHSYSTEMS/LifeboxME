@@ -480,6 +480,38 @@ class AuditTrailTable
 		{
 			return false;
 		}
+		if($table=="public.participant_role")
+		{
+			return false;
+		}
+		if($table=="public.sex")
+		{
+			return false;
+		}
+		if($table=="public.training_participants")
+		{
+			return false;
+		}
+		if($table=="public.venues")
+		{
+			return false;
+		}
+		if($table=="public.training_attendance")
+		{
+			return false;
+		}
+		if($table=="public.daily_attendance_view")
+		{
+			return false;
+		}
+		if($table=="public.participant_attendance_detail")
+		{
+			return false;
+		}
+		if($table=="public.participant_attendance_summary")
+		{
+			return false;
+		}
 	}
 
 	protected function insert($datetime, $ip, $user, $table, $action, $description)
@@ -909,6 +941,38 @@ class AuditTrailFile
 			return false;
 		}
 		if($table=="public.quarters")
+		{
+			return false;
+		}
+		if($table=="public.participant_role")
+		{
+			return false;
+		}
+		if($table=="public.sex")
+		{
+			return false;
+		}
+		if($table=="public.training_participants")
+		{
+			return false;
+		}
+		if($table=="public.venues")
+		{
+			return false;
+		}
+		if($table=="public.training_attendance")
+		{
+			return false;
+		}
+		if($table=="public.daily_attendance_view")
+		{
+			return false;
+		}
+		if($table=="public.participant_attendance_detail")
+		{
+			return false;
+		}
+		if($table=="public.participant_attendance_summary")
 		{
 			return false;
 		}
