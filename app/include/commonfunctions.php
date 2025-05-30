@@ -275,11 +275,13 @@ function checkTableName($shortTName )
 		return true;
 	if ("training_attendance" == $shortTName )
 		return true;
-	if ("daily_attendance_view" == $shortTName )
-		return true;
 	if ("participant_attendance_detail" == $shortTName )
 		return true;
 	if ("participant_attendance_summary" == $shortTName )
+		return true;
+	if ("training_participation" == $shortTName )
+		return true;
+	if ("daily_attendance_view" == $shortTName )
 		return true;
 	return false;
 }
@@ -657,15 +659,6 @@ function GetTablesList($pdfMode = false)
 	}
 	$tableAvailable = true;
 	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.daily_attendance_view");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.daily_attendance_view";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
 		$strPerm = GetUserPermissions("public.participant_attendance_detail");
 		$tableAvailable = ( strpos($strPerm, "P") !== false
 			|| $pdfMode && strpos($strPerm, "S") !== false );
@@ -681,6 +674,24 @@ function GetTablesList($pdfMode = false)
 	}
 	if( $tableAvailable ) {
 		$arr[]="public.participant_attendance_summary";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.training_participation");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.training_participation";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.daily_attendance_view");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.daily_attendance_view";
 	}
 	return $arr;
 }
@@ -727,9 +738,10 @@ function GetTablesListWithoutSecurity()
 	$arr[]="public.training_participants";
 	$arr[]="public.venues";
 	$arr[]="public.training_attendance";
-	$arr[]="public.daily_attendance_view";
 	$arr[]="public.participant_attendance_detail";
 	$arr[]="public.participant_attendance_summary";
+	$arr[]="public.training_participation";
+	$arr[]="public.daily_attendance_view";
 	return $arr;
 }
 
@@ -1567,12 +1579,6 @@ function GetUserPermissionsStatic( $table )
 		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
-	if( $table=="public.daily_attendance_view" )
-	{
-//	default permissions
-		// grant all by default
-		return "ADESPI".$extraPerm;
-	}
 	if( $table=="public.participant_attendance_detail" )
 	{
 //	default permissions
@@ -1580,6 +1586,18 @@ function GetUserPermissionsStatic( $table )
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.participant_attendance_summary" )
+	{
+//	default permissions
+		// grant all by default
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.training_participation" )
+	{
+//	default permissions
+		// grant all by default
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.daily_attendance_view" )
 	{
 //	default permissions
 		// grant all by default

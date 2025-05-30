@@ -450,11 +450,13 @@ class Chart
 			return true;
 		if("public.training_attendance" == $this->chrt_array['tables'][0])
 			return true;
-		if("public.daily_attendance_view" == $this->chrt_array['tables'][0])
-			return true;
 		if("public.participant_attendance_detail" == $this->chrt_array['tables'][0])
 			return true;
 		if("public.participant_attendance_summary" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.training_participation" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.daily_attendance_view" == $this->chrt_array['tables'][0])
 			return true;
 		return false;
 	}

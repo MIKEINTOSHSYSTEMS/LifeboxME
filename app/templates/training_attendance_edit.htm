@@ -321,28 +321,6 @@
 >
 	<div edit-form-cell class="clearfix">
 				
-{BEGIN participant_id_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_participant_id}  r-vertical-field" 
-	data-signal-error-for="participant_id{$id}" {$required_attr_participant_id}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="participant_id" data-fieldname="participant_id" >
-
-	<label class="r-edit-label control-label" for="{$labelfor_participant_id}">
-		{BEGIN participant_id_label}{$label public_training_attendance participant_id }{END participant_id_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$participant_id_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="participant_id" {$tooltipAttr public_training_attendance participant_id } >
-		<div class="text-muted" >
-		{$tooltip public_training_attendance participant_id }		</div>
-	</div>
-</div>
-
-
-{END participant_id_fieldblock}
-											
 {BEGIN day_number_fieldblock}
 
 
@@ -474,6 +452,28 @@
 
 
 {END recorded_by_fieldblock}
+											
+{BEGIN participation_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_participation_id}  r-vertical-field" 
+	data-signal-error-for="participation_id{$id}" {$required_attr_participation_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="participation_id" data-fieldname="participation_id" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_participation_id}">
+		{BEGIN participation_id_label}{$label public_training_attendance participation_id }{END participation_id_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$participation_id_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="participation_id" {$tooltipAttr public_training_attendance participation_id } >
+		<div class="text-muted" >
+		{$tooltip public_training_attendance participation_id }		</div>
+	</div>
+</div>
+
+
+{END participation_id_fieldblock}
 	
 								</td>
 			{END cellblock_grid_c3}
@@ -501,6 +501,16 @@
 </span>
 {END save_edit}
 	 
+		{BEGIN save_update}
+<span data-itemtype="update_records" data-itemid="update_records" {$item_update_records} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" {$savebutton_attrs} >
+				 
+			{$update_records_label}	
+			</a>
+</span>
+{END save_update}
+	 
 		{BEGIN back_button}
 <span data-itemtype="edit_back_list" data-itemid="edit_back_list" {$item_edit_back_list} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-default   
@@ -519,10 +529,24 @@
 		</div>			 
 				<div 
 	data-cellId="below-grid_c2" data-pageid="{$pageid}"	{$cell_below-grid_c2}
-	class="r-align-right r-ori-vert			col-md-6
+	class="r-align-right			col-md-6
 	
 ">
 		 
+		<span data-itemtype="prev" data-itemid="prev" {$item_prev} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	{$prevbutton_class}" {$prevbutton_attrs} >
+					<span class="glyphicon glyphicon-menu-left"></span>
+										</a>
+</span>
+	 
+		<span data-itemtype="next" data-itemid="next" {$item_next} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	{$nextbutton_class}" {$nextbutton_attrs} >
+					<span class="glyphicon glyphicon-menu-right"></span>
+										</a>
+</span>
+	 
 		<span data-itemtype="hamburger" data-itemid="hamburger" {$item_hamburger} data-pageid="{$pageid}" data-small data-button-item>
 	<span class="dropdown dropup">
 		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		

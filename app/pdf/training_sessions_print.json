@@ -1445,6 +1445,11 @@ pdfDocument = {
 			{$displayDetailTable_training_participants }
 		{END details_training_participants},
 				
+				
+			 {BEGIN details_training_participation}
+			{$displayDetailTable_training_participation }
+		{END details_training_participation},
+				
 		  ],
   "border": [ true, true, true, true ],
               "alignment": 'left',

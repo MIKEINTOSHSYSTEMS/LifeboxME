@@ -500,15 +500,19 @@ class AuditTrailTable
 		{
 			return false;
 		}
-		if($table=="public.daily_attendance_view")
-		{
-			return false;
-		}
 		if($table=="public.participant_attendance_detail")
 		{
 			return false;
 		}
 		if($table=="public.participant_attendance_summary")
+		{
+			return false;
+		}
+		if($table=="public.training_participation")
+		{
+			return false;
+		}
+		if($table=="public.daily_attendance_view")
 		{
 			return false;
 		}
@@ -964,15 +968,19 @@ class AuditTrailFile
 		{
 			return false;
 		}
-		if($table=="public.daily_attendance_view")
-		{
-			return false;
-		}
 		if($table=="public.participant_attendance_detail")
 		{
 			return false;
 		}
 		if($table=="public.participant_attendance_summary")
+		{
+			return false;
+		}
+		if($table=="public.training_participation")
+		{
+			return false;
+		}
+		if($table=="public.daily_attendance_view")
 		{
 			return false;
 		}

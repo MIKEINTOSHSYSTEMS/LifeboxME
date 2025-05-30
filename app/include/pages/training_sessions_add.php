@@ -7,7 +7,7 @@
 'previewPageId' => '' ),
 'public.training_trainers' => array( 'displayPreview' => 2,
 'previewPageId' => '' ),
-'public.training_participants' => array( 'displayPreview' => 2,
+'public.training_participation' => array( 'displayPreview' => 2,
 'previewPageId' => '' ) ),
 'master' => array( 'public.training_courses' => array( 'preview' => false ),
 'public.facilities' => array( 'preview' => false ),

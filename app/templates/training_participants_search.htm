@@ -116,28 +116,6 @@
 
 {END participant_id_fieldblock}
 											
-{BEGIN training_id_fieldblock}
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_training_id}  r-horizontal-field form-horizontal" 	
-	data-signal-error-for="training_id{$id}" 
-	data-itemtype="integrated_search_field" data-itemid="integrated_search_field1" {$item_integrated_search_field1} data-pageid="{$pageid}" data-field="training_id" data-fieldname="training_id" >
-
-
-	<label class="r-search-label control-label" for="{$labelfor_training_id}">
-		{$label public_training_participants training_id }	</label>
-	<div class="r-search-option">
-		{$searchtype_training_id}
-	</div>
-	<div class="r-search-field">
-		{$training_id_editcontrol}	</div>
-	<div class="r-search-field">
-		{$training_id_editcontrol1}
-	</div>
-	
-</div>
-
-{END training_id_fieldblock}
-											
 {BEGIN first_name_fieldblock}
 
 <div class="r-integrated-field form-group clearfix {$fielddispclass_first_name}  r-horizontal-field form-horizontal" 	
@@ -336,28 +314,6 @@
 
 {END training_date_fieldblock}
 											
-{BEGIN day_number_fieldblock}
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_day_number}  r-horizontal-field form-horizontal" 	
-	data-signal-error-for="day_number{$id}" 
-	data-itemtype="integrated_search_field" data-itemid="integrated_search_field12" {$item_integrated_search_field12} data-pageid="{$pageid}" data-field="day_number" data-fieldname="day_number" >
-
-
-	<label class="r-search-label control-label" for="{$labelfor_day_number}">
-		{$label public_training_participants day_number }	</label>
-	<div class="r-search-option">
-		{$searchtype_day_number}
-	</div>
-	<div class="r-search-field">
-		{$day_number_editcontrol}	</div>
-	<div class="r-search-field">
-		{$day_number_editcontrol1}
-	</div>
-	
-</div>
-
-{END day_number_fieldblock}
-											
 {BEGIN ceu_points_fieldblock}
 
 <div class="r-integrated-field form-group clearfix {$fielddispclass_ceu_points}  r-horizontal-field form-horizontal" 	
@@ -489,6 +445,50 @@
 </div>
 
 {END venue_id_fieldblock}
+											
+{BEGIN title_salutation_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_title_salutation}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="title_salutation{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field18" {$item_integrated_search_field18} data-pageid="{$pageid}" data-field="title_salutation" data-fieldname="title_salutation" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_title_salutation}">
+		{$label public_training_participants title_salutation }	</label>
+	<div class="r-search-option">
+		{$searchtype_title_salutation}
+	</div>
+	<div class="r-search-field">
+		{$title_salutation_editcontrol}	</div>
+	<div class="r-search-field">
+		{$title_salutation_editcontrol1}
+	</div>
+	
+</div>
+
+{END title_salutation_fieldblock}
+											
+{BEGIN middle_name_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_middle_name}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="middle_name{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field19" {$item_integrated_search_field19} data-pageid="{$pageid}" data-field="middle_name" data-fieldname="middle_name" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_middle_name}">
+		{$label public_training_participants middle_name }	</label>
+	<div class="r-search-option">
+		{$searchtype_middle_name}
+	</div>
+	<div class="r-search-field">
+		{$middle_name_editcontrol}	</div>
+	<div class="r-search-field">
+		{$middle_name_editcontrol1}
+	</div>
+	
+</div>
+
+{END middle_name_fieldblock}
 	
 								</td>
 			{END cellblock_grid_c3}

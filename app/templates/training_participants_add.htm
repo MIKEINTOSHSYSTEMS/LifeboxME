@@ -326,27 +326,27 @@
 >
 	<div edit-form-cell class="clearfix">
 				
-{BEGIN training_id_fieldblock}
+{BEGIN title_salutation_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_training_id}  r-vertical-field" 
-	data-signal-error-for="training_id{$id}" {$required_attr_training_id}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="training_id" data-fieldname="training_id" >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_title_salutation}  r-vertical-field" 
+	data-signal-error-for="title_salutation{$id}" {$required_attr_title_salutation}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="title_salutation" data-fieldname="title_salutation" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_training_id}">
-		{BEGIN training_id_label}{$label public_training_participants training_id }{END training_id_label}
+	<label class="r-edit-label control-label" for="{$labelfor_title_salutation}">
+		{BEGIN title_salutation_label}{$label public_training_participants title_salutation }{END title_salutation_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
-		{$training_id_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="training_id" {$tooltipAttr public_training_participants training_id } >
+		{$title_salutation_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="title_salutation" {$tooltipAttr public_training_participants title_salutation } >
 		<div class="text-muted" >
-		{$tooltip public_training_participants training_id }		</div>
+		{$tooltip public_training_participants title_salutation }		</div>
 	</div>
 </div>
 
 
-{END training_id_fieldblock}
+{END title_salutation_fieldblock}
 											
 {BEGIN first_name_fieldblock}
 
@@ -369,6 +369,28 @@
 
 
 {END first_name_fieldblock}
+											
+{BEGIN middle_name_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_middle_name}  r-vertical-field" 
+	data-signal-error-for="middle_name{$id}" {$required_attr_middle_name}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field17" {$item_integrated_edit_field17} data-pageid="{$pageid}" data-field="middle_name" data-fieldname="middle_name" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_middle_name}">
+		{BEGIN middle_name_label}{$label public_training_participants middle_name }{END middle_name_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$middle_name_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="middle_name" {$tooltipAttr public_training_participants middle_name } >
+		<div class="text-muted" >
+		{$tooltip public_training_participants middle_name }		</div>
+	</div>
+</div>
+
+
+{END middle_name_fieldblock}
 											
 {BEGIN last_name_fieldblock}
 
@@ -567,28 +589,6 @@
 
 
 {END training_date_fieldblock}
-											
-{BEGIN day_number_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_day_number}  r-vertical-field" 
-	data-signal-error-for="day_number{$id}" {$required_attr_day_number}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="day_number" data-fieldname="day_number" >
-
-	<label class="r-edit-label control-label" for="{$labelfor_day_number}">
-		{BEGIN day_number_label}{$label public_training_participants day_number }{END day_number_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$day_number_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="day_number" {$tooltipAttr public_training_participants day_number } >
-		<div class="text-muted" >
-		{$tooltip public_training_participants day_number }		</div>
-	</div>
-</div>
-
-
-{END day_number_fieldblock}
 											
 {BEGIN ceu_points_fieldblock}
 

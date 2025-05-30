@@ -233,6 +233,7 @@ $tdatatraining_sessions[".geocodingEnabled"] = false;
 
 
 
+$tdatatraining_sessions[".isDisplayLoading"] = true;
 
 
 
@@ -3295,21 +3296,21 @@ $detailsTablesData["public.training_sessions"] = array();
 				$detailsTablesData["public.training_sessions"][$dIndex]["detailKeys"] = array();
 
 	$detailsTablesData["public.training_sessions"][$dIndex]["detailKeys"][]="training_id";
-//	public.training_participants
+//	public.training_participation
 	
 	
 
 		$dIndex = 4;
 	$detailsParam = array();
-	$detailsParam["dDataSourceTable"]="public.training_participants";
-		$detailsParam["dOriginalTable"] = "public.training_participants";
+	$detailsParam["dDataSourceTable"]="public.training_participation";
+		$detailsParam["dOriginalTable"] = "public.training_participation";
 
 
 
 		
 		$detailsParam["dType"]=PAGE_LIST;
-	$detailsParam["dShortTable"] = "training_participants";
-	$detailsParam["dCaptionTable"] = GetTableCaption("public_training_participants");
+	$detailsParam["dShortTable"] = "training_participation";
+	$detailsParam["dCaptionTable"] = GetTableCaption("public_training_participation");
 	$detailsParam["masterKeys"] =array();
 	$detailsParam["detailKeys"] =array();
 

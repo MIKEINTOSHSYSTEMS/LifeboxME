@@ -164,7 +164,7 @@ $tdatadaily_attendance_view[".addPageEvents"] = false;
 $tdatadaily_attendance_view[".isUseTimeForSearch"] = false;
 
 
-$tdatadaily_attendance_view[".badgeColor"] = "CD853F";
+$tdatadaily_attendance_view[".badgeColor"] = "E07878";
 
 
 $tdatadaily_attendance_view[".allSearchFields"] = array();
@@ -320,7 +320,7 @@ $tdatadaily_attendance_view[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Lookup wizard");
+	$edata = array("EditFormat" => "Text field");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -330,37 +330,6 @@ $tdatadaily_attendance_view[".hideMobileList"] = array();
 	
 	
 
-// Begin Lookup settings
-				$edata["LookupType"] = 2;
-	$edata["LookupTable"] = "public.training_sessions";
-			$edata["autoCompleteFieldsOnEdit"] = 0;
-	$edata["autoCompleteFields"] = array();
-		$edata["LCType"] = 0;
-
-	
-		
-	$edata["LinkField"] = "training_id";
-	$edata["LinkFieldType"] = 0;
-	$edata["DisplayField"] = "training_id";
-
-	
-
-	
-	$edata["LookupOrderBy"] = "";
-
-	
-	
-	
-	
-				//dependent dropdowns @deprecated data ?
-	$edata["DependentLookups"] = array();
-	$edata["DependentLookups"][] = "training_name";
-
-	
-	
-		$edata["SelectSize"] = 1;
-
-// End Lookup Settings
 
 
 	
@@ -375,14 +344,17 @@ $tdatadaily_attendance_view[".hideMobileList"] = array();
 	
 	
 	
-	
-	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
 	$edata["validateAs"] = array();
 	$edata["validateAs"]["basicValidate"] = array();
 	$edata["validateAs"]["customMessages"] = array();
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
 							
 	
 //	End validation
@@ -402,7 +374,7 @@ $tdatadaily_attendance_view[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Equals";
+		$fdata["defaultSearchOption"] = "Contains";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
@@ -487,7 +459,7 @@ $tdatadaily_attendance_view[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Lookup wizard");
+	$edata = array("EditFormat" => "Text area");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -497,37 +469,6 @@ $tdatadaily_attendance_view[".hideMobileList"] = array();
 	
 	
 
-// Begin Lookup settings
-				$edata["LookupType"] = 2;
-	$edata["LookupTable"] = "public.training_sessions";
-			$edata["autoCompleteFieldsOnEdit"] = 0;
-	$edata["autoCompleteFields"] = array();
-		$edata["LCType"] = 0;
-
-	
-		
-	$edata["LinkField"] = "training_id";
-	$edata["LinkFieldType"] = 0;
-	$edata["DisplayField"] = "training_details";
-
-	
-
-	
-	$edata["LookupOrderBy"] = "";
-
-	
-		$edata["UseCategory"] = true;
-	$edata["categoryFields"] = array();
-	$edata["categoryFields"][] = array( "main" => "training_id", "lookup" => "training_id" );
-
-	
-	
-
-	
-	
-		$edata["SelectSize"] = 1;
-
-// End Lookup Settings
 
 
 	
@@ -541,7 +482,9 @@ $tdatadaily_attendance_view[".hideMobileList"] = array();
 	
 	
 	
-	
+				$edata["nRows"] = 100;
+			$edata["nCols"] = 200;
+
 	
 	
 		$edata["controlWidth"] = 200;
@@ -572,7 +515,7 @@ $tdatadaily_attendance_view[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Equals";
+		$fdata["defaultSearchOption"] = "Contains";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);

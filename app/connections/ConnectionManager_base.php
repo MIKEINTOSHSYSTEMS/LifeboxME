@@ -279,9 +279,10 @@ class ConnectionManager_Base
 		$connectionsIds["public.training_participants"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["public.venues"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["public.training_attendance"] = "lifebox_mesystem_at_localhost";
-		$connectionsIds["public.daily_attendance_view"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["public.participant_attendance_detail"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["public.participant_attendance_summary"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.training_participation"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.daily_attendance_view"] = "lifebox_mesystem_at_localhost";
 
 		$this->_tablesConnectionIds = &$connectionsIds;
 	}

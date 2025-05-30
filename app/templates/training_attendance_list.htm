@@ -58,6 +58,399 @@
      
          
 
+			<div class="clearfix  r-ori-vert" data-cellId="left_c1" data-pageid="{$pageid}" data-itemid="search_panel" {$item_search_panel} data-topcell-item-type="search_panel" >
+				<!-- Begin Search panel content -->
+<div class="searchOptions panel panel-primary searchPanelContainer " {$srchOpt_attrs} data-itemtype="search_panel" data-itemid="search_panel" {$item_search_panel} data-pageid="{$pageid}"	 >
+
+	<div class="panel-heading">
+		<div class="btn-group r-sp-addfield" id="addSearchFieldButton{$id}">
+			<button id="showHideControlChooseMenu{$id}" type="button" class="btn btn-default dropdown-toggle btn-sm )" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			Search in			<span class="caret"></span>
+			</button>
+		</div>
+
+
+		<div class="btn-group r-sp-options" id="searchPanelOptions{$id}">
+			<button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<span class="glyphicon glyphicon glyphicon-option-vertical"></span>
+			</button>
+			<ul class="dropdown-menu dropdown-left">
+				<li id="showHideSearchType{$id}" {$showHideCtrlsOpt_attrs}><a>Show options</a></li>
+				<li role="separator" class="divider"></li>
+				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAll" {$all_checkbox}><label for="radioAll"><span class="glyphicon">&nbsp;</span>all conditions</label></a></li>
+				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAny" {$any_checkbox}><label for="radioAny"><span class="glyphicon">&nbsp;</span>any condition</label></a></li>
+				<li role="separator" class="divider"></li>
+				<li><a class="close-button"><span class="glyphicon glyphicon-remove">&nbsp;</span>hide</a></li>
+			</ul>
+		</div>
+
+
+		</div>
+	<div class="panel-body controlsBlock" {$bottomSearchButt_attrs} >
+
+
+		
+		{BEGIN searchCtrlBlock}
+		<div class="srchPanelRow form-group" {$filterRow_attrs}>
+			<label>{$fLabel}</label>	{$delCtrlButt}
+				<span class="rnr-searchtype">{$searchtype}</span>
+				<span class="rnr-searchcontrol">{$searchcontrol}</span>
+				<span class="rnr-searchcontrol">{$searchcontrol1}</span>
+		</div>
+		{END searchCtrlBlock}
+																		{BEGIN searchCtrlBlock_course_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_course_name}" {$filterRow_attrs_course_name}>
+			<label>{$label public_training_attendance course_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_course_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_course_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_course_name}</span>
+						</div>
+		{END searchCtrlBlock_course_name}
+																{BEGIN searchCtrlBlock_training_id}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_training_id}" {$filterRow_attrs_training_id}>
+			<label>{$label public_training_attendance training_id }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_training_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_training_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_training_id}</span>
+						</div>
+		{END searchCtrlBlock_training_id}
+																{BEGIN searchCtrlBlock_attended}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_attended}" {$filterRow_attrs_attended}>
+			<label>{$label public_training_attendance attended }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_attended}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_attended}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_attended}</span>
+						</div>
+		{END searchCtrlBlock_attended}
+																{BEGIN searchCtrlBlock_day_number}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_day_number}" {$filterRow_attrs_day_number}>
+			<label>{$label public_training_attendance day_number }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_day_number}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_day_number}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_day_number}</span>
+						</div>
+		{END searchCtrlBlock_day_number}
+																{BEGIN searchCtrlBlock_participant_full_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_participant_full_name}" {$filterRow_attrs_participant_full_name}>
+			<label>{$label public_training_attendance participant_full_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_participant_full_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_participant_full_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_participant_full_name}</span>
+						</div>
+		{END searchCtrlBlock_participant_full_name}
+																{BEGIN searchCtrlBlock_sex_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_sex_name}" {$filterRow_attrs_sex_name}>
+			<label>{$label public_training_attendance sex_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_sex_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_sex_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_sex_name}</span>
+						</div>
+		{END searchCtrlBlock_sex_name}
+																{BEGIN searchCtrlBlock_role_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_role_name}" {$filterRow_attrs_role_name}>
+			<label>{$label public_training_attendance role_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_role_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_role_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_role_name}</span>
+						</div>
+		{END searchCtrlBlock_role_name}
+																{BEGIN searchCtrlBlock_facility_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_facility_name}" {$filterRow_attrs_facility_name}>
+			<label>{$label public_training_attendance facility_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_facility_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_facility_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_facility_name}</span>
+						</div>
+		{END searchCtrlBlock_facility_name}
+																{BEGIN searchCtrlBlock_training_lead_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_training_lead_name}" {$filterRow_attrs_training_lead_name}>
+			<label>{$label public_training_attendance training_lead_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_training_lead_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_training_lead_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_training_lead_name}</span>
+						</div>
+		{END searchCtrlBlock_training_lead_name}
+																{BEGIN searchCtrlBlock_training_type}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_training_type}" {$filterRow_attrs_training_type}>
+			<label>{$label public_training_attendance training_type }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_training_type}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_training_type}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_training_type}</span>
+						</div>
+		{END searchCtrlBlock_training_type}
+																{BEGIN searchCtrlBlock_training_approach}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_training_approach}" {$filterRow_attrs_training_approach}>
+			<label>{$label public_training_attendance training_approach }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_training_approach}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_training_approach}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_training_approach}</span>
+						</div>
+		{END searchCtrlBlock_training_approach}
+																{BEGIN searchCtrlBlock_program_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_program_name}" {$filterRow_attrs_program_name}>
+			<label>{$label public_training_attendance program_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_program_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_program_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_program_name}</span>
+						</div>
+		{END searchCtrlBlock_program_name}
+																{BEGIN searchCtrlBlock_partner_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_partner_name}" {$filterRow_attrs_partner_name}>
+			<label>{$label public_training_attendance partner_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_partner_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_partner_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_partner_name}</span>
+						</div>
+		{END searchCtrlBlock_partner_name}
+																{BEGIN searchCtrlBlock_host_region}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_host_region}" {$filterRow_attrs_host_region}>
+			<label>{$label public_training_attendance host_region }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_host_region}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_host_region}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_host_region}</span>
+						</div>
+		{END searchCtrlBlock_host_region}
+																{BEGIN searchCtrlBlock_host_country}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_host_country}" {$filterRow_attrs_host_country}>
+			<label>{$label public_training_attendance host_country }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_host_country}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_host_country}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_host_country}</span>
+						</div>
+		{END searchCtrlBlock_host_country}
+																{BEGIN searchCtrlBlock_venue_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_venue_name}" {$filterRow_attrs_venue_name}>
+			<label>{$label public_training_attendance venue_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_venue_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_venue_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_venue_name}</span>
+						</div>
+		{END searchCtrlBlock_venue_name}
+																{BEGIN searchCtrlBlock_attendance_date}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_attendance_date}" {$filterRow_attrs_attendance_date}>
+			<label>{$label public_training_attendance attendance_date }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_attendance_date}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_attendance_date}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_attendance_date}</span>
+						</div>
+		{END searchCtrlBlock_attendance_date}
+																{BEGIN searchCtrlBlock_quarter}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_quarter}" {$filterRow_attrs_quarter}>
+			<label>{$label public_training_attendance quarter }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_quarter}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_quarter}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_quarter}</span>
+						</div>
+		{END searchCtrlBlock_quarter}
+																{BEGIN searchCtrlBlock_start_date}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_start_date}" {$filterRow_attrs_start_date}>
+			<label>{$label public_training_attendance start_date }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_start_date}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_start_date}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_start_date}</span>
+						</div>
+		{END searchCtrlBlock_start_date}
+																{BEGIN searchCtrlBlock_end_date}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_end_date}" {$filterRow_attrs_end_date}>
+			<label>{$label public_training_attendance end_date }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_end_date}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_end_date}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_end_date}</span>
+						</div>
+		{END searchCtrlBlock_end_date}
+																{BEGIN searchCtrlBlock_notes}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_notes}" {$filterRow_attrs_notes}>
+			<label>{$label public_training_attendance notes }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_notes}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_notes}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_notes}</span>
+						</div>
+		{END searchCtrlBlock_notes}
+																{BEGIN searchCtrlBlock_recorded_at}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_recorded_at}" {$filterRow_attrs_recorded_at}>
+			<label>{$label public_training_attendance recorded_at }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_recorded_at}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_recorded_at}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_recorded_at}</span>
+						</div>
+		{END searchCtrlBlock_recorded_at}
+																{BEGIN searchCtrlBlock_recorded_by}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_recorded_by}" {$filterRow_attrs_recorded_by}>
+			<label>{$label public_training_attendance recorded_by }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_recorded_by}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_recorded_by}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_recorded_by}</span>
+						</div>
+		{END searchCtrlBlock_recorded_by}
+																{BEGIN searchCtrlBlock_program_id}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_program_id}" {$filterRow_attrs_program_id}>
+			<label>{$label public_training_attendance program_id }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_program_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_program_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_program_id}</span>
+						</div>
+		{END searchCtrlBlock_program_id}
+																{BEGIN searchCtrlBlock_attendance_id}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_attendance_id}" {$filterRow_attrs_attendance_id}>
+			<label>{$label public_training_attendance attendance_id }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_attendance_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_attendance_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_attendance_id}</span>
+						</div>
+		{END searchCtrlBlock_attendance_id}
+																{BEGIN searchCtrlBlock_participation_id}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_participation_id}" {$filterRow_attrs_participation_id}>
+			<label>{$label public_training_attendance participation_id }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_participation_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_participation_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_participation_id}</span>
+						</div>
+		{END searchCtrlBlock_participation_id}
+		
+
+	</div>
+
+	<div class="panel-footer bottomSearchButt" {$bottomSearchButt_attrs}>
+		<button class="btn btn-primary btn-sm" id="searchButton{$id}" {$searchbutton_attrs}>Search</button>
+
+				<button class="btn btn-default btn-sm" {$showAllCont_attrs} {$showallbutton_attrs}>Show all</button>
+	</div>
+</div>
+<!-- End Search panel content -->
+			</div>
+		
+ 
+
 			<div data-cellId="left_c1" data-pageid="{$pageid}" class="clearfix  r-ori-vert " data-itemtype="menu" data-itemid="menu" {$item_menu} data-pageid="{$pageid}">
 				{BEGIN menuitems_main}
 <ul data-itemtype="menu" data-itemid="menu" {$item_menu} data-pageid="{$pageid}"	class="r-menu nav menu-treelike" 
@@ -204,165 +597,6 @@
 {END menuitems_main}
 			</div>
 		
- 
-
-			<div class="clearfix  r-ori-vert" data-cellId="left_c1" data-pageid="{$pageid}" data-itemid="search_panel" {$item_search_panel} data-topcell-item-type="search_panel" >
-				<!-- Begin Search panel content -->
-<div class="searchOptions panel panel-primary searchPanelContainer " {$srchOpt_attrs} data-itemtype="search_panel" data-itemid="search_panel" {$item_search_panel} data-pageid="{$pageid}"	 >
-
-	<div class="panel-heading">
-		<div class="btn-group r-sp-addfield" id="addSearchFieldButton{$id}">
-			<button id="showHideControlChooseMenu{$id}" type="button" class="btn btn-default dropdown-toggle btn-sm )" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			Search in			<span class="caret"></span>
-			</button>
-		</div>
-
-
-		<div class="btn-group r-sp-options" id="searchPanelOptions{$id}">
-			<button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<span class="glyphicon glyphicon glyphicon-option-vertical"></span>
-			</button>
-			<ul class="dropdown-menu dropdown-left">
-				<li id="showHideSearchType{$id}" {$showHideCtrlsOpt_attrs}><a>Show options</a></li>
-				<li role="separator" class="divider"></li>
-				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAll" {$all_checkbox}><label for="radioAll"><span class="glyphicon">&nbsp;</span>all conditions</label></a></li>
-				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAny" {$any_checkbox}><label for="radioAny"><span class="glyphicon">&nbsp;</span>any condition</label></a></li>
-				<li role="separator" class="divider"></li>
-				<li><a class="close-button"><span class="glyphicon glyphicon-remove">&nbsp;</span>hide</a></li>
-			</ul>
-		</div>
-
-
-		</div>
-	<div class="panel-body controlsBlock" {$bottomSearchButt_attrs} >
-
-
-		
-		{BEGIN searchCtrlBlock}
-		<div class="srchPanelRow form-group" {$filterRow_attrs}>
-			<label>{$fLabel}</label>	{$delCtrlButt}
-				<span class="rnr-searchtype">{$searchtype}</span>
-				<span class="rnr-searchcontrol">{$searchcontrol}</span>
-				<span class="rnr-searchcontrol">{$searchcontrol1}</span>
-		</div>
-		{END searchCtrlBlock}
-																		{BEGIN searchCtrlBlock_attendance_date}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_attendance_date}" {$filterRow_attrs_attendance_date}>
-			<label>{$label public_training_attendance attendance_date }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_attendance_date}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_attendance_date}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_attendance_date}</span>
-						</div>
-		{END searchCtrlBlock_attendance_date}
-																{BEGIN searchCtrlBlock_recorded_by}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_recorded_by}" {$filterRow_attrs_recorded_by}>
-			<label>{$label public_training_attendance recorded_by }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_recorded_by}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_recorded_by}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_recorded_by}</span>
-						</div>
-		{END searchCtrlBlock_recorded_by}
-																{BEGIN searchCtrlBlock_recorded_at}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_recorded_at}" {$filterRow_attrs_recorded_at}>
-			<label>{$label public_training_attendance recorded_at }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_recorded_at}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_recorded_at}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_recorded_at}</span>
-						</div>
-		{END searchCtrlBlock_recorded_at}
-																{BEGIN searchCtrlBlock_participant_id}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_participant_id}" {$filterRow_attrs_participant_id}>
-			<label>{$label public_training_attendance participant_id }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_participant_id}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_participant_id}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_participant_id}</span>
-						</div>
-		{END searchCtrlBlock_participant_id}
-																{BEGIN searchCtrlBlock_notes}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_notes}" {$filterRow_attrs_notes}>
-			<label>{$label public_training_attendance notes }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_notes}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_notes}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_notes}</span>
-						</div>
-		{END searchCtrlBlock_notes}
-																{BEGIN searchCtrlBlock_day_number}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_day_number}" {$filterRow_attrs_day_number}>
-			<label>{$label public_training_attendance day_number }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_day_number}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_day_number}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_day_number}</span>
-						</div>
-		{END searchCtrlBlock_day_number}
-																{BEGIN searchCtrlBlock_attended}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_attended}" {$filterRow_attrs_attended}>
-			<label>{$label public_training_attendance attended }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_attended}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_attended}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_attended}</span>
-						</div>
-		{END searchCtrlBlock_attended}
-																{BEGIN searchCtrlBlock_attendance_id}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_attendance_id}" {$filterRow_attrs_attendance_id}>
-			<label>{$label public_training_attendance attendance_id }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_attendance_id}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_attendance_id}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_attendance_id}</span>
-						</div>
-		{END searchCtrlBlock_attendance_id}
-		
-
-	</div>
-
-	<div class="panel-footer bottomSearchButt" {$bottomSearchButt_attrs}>
-		<button class="btn btn-primary btn-sm" id="searchButton{$id}" {$searchbutton_attrs}>Search</button>
-
-				<button class="btn btn-default btn-sm" {$showAllCont_attrs} {$showallbutton_attrs}>Show all</button>
-	</div>
-</div>
-<!-- End Search panel content -->
-			</div>
-		
     {END left_block}
 </div>				</div>
 			<div class="r-content-col" data-resize-left="leftbar">
@@ -441,6 +675,14 @@
 												<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu">
+							{BEGIN editselected_link}
+	<li data-itemtype="edit_selected" data-itemid="edit_selected" {$item_edit_selected} data-pageid="{$pageid}" data-small >
+				<a  href="#" {$editselectedlink_attrs} {$editselectedlink_span}  title="" >
+				
+		Edit selected		
+		</a>
+	</li>
+{END editselected_link}
 							{BEGIN exportselected_link}
 	<li data-itemtype="export_selected" data-itemid="export_selected" {$item_export_selected} data-pageid="{$pageid}" data-small >
 				<a  href="#" {$exportselectedlink_attrs} {$exportselectedlink_span}  title="" >
@@ -512,6 +754,15 @@
 				<div class="row">
 			 
 				<div 
+	data-cellId="top_c3" data-pageid="{$pageid}"	{$cell_top_c3}
+	class=" r-ori-vert			col-md-12
+	
+">
+			</div>					</div>
+			 
+				<div class="row">
+			 
+				<div 
 	data-cellId="top_c2" data-pageid="{$pageid}"	{$cell_top_c2}
 	class=" r-ori-vert			col-md-12
 	
@@ -522,6 +773,1221 @@
 	{$showmasterfile}
 </div>
 {END mastertable_block}		</div>					</div>
+			 
+				<div class="row">
+			 
+				<div 
+	data-cellId="top_c" data-pageid="{$pageid}"	{$cell_top_c}
+	class=" r-ori-vert			col-md-12
+	
+">
+		 
+		<div data-itemtype="filter_panel" data-itemid="filter_panel" {$item_filter_panel} data-pageid="{$pageid}">
+	<div class="filterPanelContainer {$filterPanelStateClass}" 
+					data-horizontal
+			>
+	<!-- Begin Filter panel content -->
+
+
+
+
+
+
+{BEGIN filter_control_course_name}
+
+	<div class="dropdown filter-field filter-course_name-container" {BEGIN filter_selected_course_name} data-selected {END filter_selected_course_name}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-course_name" type="checkbox" name="selectAll" {$selectAll_attrs_course_name} />
+						{BEGIN clearLink_course_name}
+			<a href="#" class="filter-clear filter-clear-course_name" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_course_name}
+			<span class="r-filter-field">{$label public_training_attendance course_name }				{BEGIN filter_selected_course_name}:{END filter_selected_course_name}
+			</span>
+			{BEGIN filter_selected_course_name}
+			<span class="r-filter-value">{$filtervalue_course_name}</span>
+			{END filter_selected_course_name}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_course_name}
+		<li class=" filter-values filter-values-course_name  {$visibilityClass_course_name}">
+			{$course_name_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_course_name}
+
+			{BEGIN filter_button_showmore_course_name}
+		<li class=" filter-show-more {$collapsedClass_course_name} {$showMoreBtnClass_course_name}">
+			<a class="filter-show-more-link filterShowMore_course_name" href="#">{$show_n_more_course_name}</a>
+		</li>
+		{END filter_button_showmore_course_name}
+	
+
+
+			{BEGIN filter_button_apply_course_name}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_course_name}">
+			<a href="#" class="filter-btn-apply filter-apply-course_name" {$filterbutton_attrs_course_name}>Apply</a>
+		</li>
+		{END filter_button_apply_course_name}
+	
+
+			</ul>
+	</div>
+
+{END filter_control_course_name}
+
+
+
+
+
+
+{BEGIN filter_control_training_id}
+
+	<div class="dropdown filter-field filter-training_id-container" {BEGIN filter_selected_training_id} data-selected {END filter_selected_training_id}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-training_id" type="checkbox" name="selectAll" {$selectAll_attrs_training_id} />
+						{BEGIN clearLink_training_id}
+			<a href="#" class="filter-clear filter-clear-training_id" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_training_id}
+			<span class="r-filter-field">{$label public_training_attendance training_id }				{BEGIN filter_selected_training_id}:{END filter_selected_training_id}
+			</span>
+			{BEGIN filter_selected_training_id}
+			<span class="r-filter-value">{$filtervalue_training_id}</span>
+			{END filter_selected_training_id}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_training_id}
+		<li class=" filter-values filter-values-training_id  {$visibilityClass_training_id}">
+			{$training_id_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_training_id}
+
+			{BEGIN filter_button_showmore_training_id}
+		<li class=" filter-show-more {$collapsedClass_training_id} {$showMoreBtnClass_training_id}">
+			<a class="filter-show-more-link filterShowMore_training_id" href="#">{$show_n_more_training_id}</a>
+		</li>
+		{END filter_button_showmore_training_id}
+	
+
+
+	
+
+			{BEGIN filter_button_multiselect_training_id}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_training_id}">
+			<a href="#" class="filter-training_id-btn-multiselect filter-apply-training_id" {$filterbutton_attrs_training_id}>Multiselect</a>
+		</li>
+		{END filter_button_multiselect_training_id}
+			</ul>
+	</div>
+
+{END filter_control_training_id}
+
+
+
+
+
+
+{BEGIN filter_control_attended}
+
+	<div class="dropdown filter-field filter-attended-container" {BEGIN filter_selected_attended} data-selected {END filter_selected_attended}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_attended}
+			<a href="#" class="filter-clear filter-clear-attended" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_attended}
+			<span class="r-filter-field">{$label public_training_attendance attended }				{BEGIN filter_selected_attended}:{END filter_selected_attended}
+			</span>
+			{BEGIN filter_selected_attended}
+			<span class="r-filter-value">{$filtervalue_attended}</span>
+			{END filter_selected_attended}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_attended}
+		<li class=" filter-values filter-values-attended  {$visibilityClass_attended}">
+			{$attended_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_attended}
+
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_attended}
+
+
+
+
+
+
+{BEGIN filter_control_day_number}
+
+	<div class="dropdown filter-field filter-day_number-container" {BEGIN filter_selected_day_number} data-selected {END filter_selected_day_number}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_day_number}
+			<a href="#" class="filter-clear filter-clear-day_number" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_day_number}
+			<span class="r-filter-field">{$label public_training_attendance day_number }				{BEGIN filter_selected_day_number}:{END filter_selected_day_number}
+			</span>
+			{BEGIN filter_selected_day_number}
+			<span class="r-filter-value">{$filtervalue_day_number}</span>
+			{END filter_selected_day_number}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_day_number}
+		<li class=" filter-values filter-values-day_number  {$visibilityClass_day_number}">
+			{$day_number_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_day_number}
+
+			{BEGIN filter_button_showmore_day_number}
+		<li class=" filter-show-more {$collapsedClass_day_number} {$showMoreBtnClass_day_number}">
+			<a class="filter-show-more-link filterShowMore_day_number" href="#">{$show_n_more_day_number}</a>
+		</li>
+		{END filter_button_showmore_day_number}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_day_number}
+
+
+
+
+
+
+{BEGIN filter_control_sex_name}
+
+	<div class="dropdown filter-field filter-sex_name-container" {BEGIN filter_selected_sex_name} data-selected {END filter_selected_sex_name}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-sex_name" type="checkbox" name="selectAll" {$selectAll_attrs_sex_name} />
+						{BEGIN clearLink_sex_name}
+			<a href="#" class="filter-clear filter-clear-sex_name" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_sex_name}
+			<span class="r-filter-field">{$label public_training_attendance sex_name }				{BEGIN filter_selected_sex_name}:{END filter_selected_sex_name}
+			</span>
+			{BEGIN filter_selected_sex_name}
+			<span class="r-filter-value">{$filtervalue_sex_name}</span>
+			{END filter_selected_sex_name}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_sex_name}
+		<li class=" filter-values filter-values-sex_name  {$visibilityClass_sex_name}">
+			{$sex_name_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_sex_name}
+
+			{BEGIN filter_button_showmore_sex_name}
+		<li class=" filter-show-more {$collapsedClass_sex_name} {$showMoreBtnClass_sex_name}">
+			<a class="filter-show-more-link filterShowMore_sex_name" href="#">{$show_n_more_sex_name}</a>
+		</li>
+		{END filter_button_showmore_sex_name}
+	
+
+
+			{BEGIN filter_button_apply_sex_name}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_sex_name}">
+			<a href="#" class="filter-btn-apply filter-apply-sex_name" {$filterbutton_attrs_sex_name}>Apply</a>
+		</li>
+		{END filter_button_apply_sex_name}
+	
+
+			</ul>
+	</div>
+
+{END filter_control_sex_name}
+
+
+
+
+
+
+{BEGIN filter_control_role_name}
+
+	<div class="dropdown filter-field filter-role_name-container" {BEGIN filter_selected_role_name} data-selected {END filter_selected_role_name}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-role_name" type="checkbox" name="selectAll" {$selectAll_attrs_role_name} />
+						{BEGIN clearLink_role_name}
+			<a href="#" class="filter-clear filter-clear-role_name" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_role_name}
+			<span class="r-filter-field">{$label public_training_attendance role_name }				{BEGIN filter_selected_role_name}:{END filter_selected_role_name}
+			</span>
+			{BEGIN filter_selected_role_name}
+			<span class="r-filter-value">{$filtervalue_role_name}</span>
+			{END filter_selected_role_name}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_role_name}
+		<li class=" filter-values filter-values-role_name  {$visibilityClass_role_name}">
+			{$role_name_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_role_name}
+
+			{BEGIN filter_button_showmore_role_name}
+		<li class=" filter-show-more {$collapsedClass_role_name} {$showMoreBtnClass_role_name}">
+			<a class="filter-show-more-link filterShowMore_role_name" href="#">{$show_n_more_role_name}</a>
+		</li>
+		{END filter_button_showmore_role_name}
+	
+
+
+			{BEGIN filter_button_apply_role_name}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_role_name}">
+			<a href="#" class="filter-btn-apply filter-apply-role_name" {$filterbutton_attrs_role_name}>Apply</a>
+		</li>
+		{END filter_button_apply_role_name}
+	
+
+			</ul>
+	</div>
+
+{END filter_control_role_name}
+
+
+
+
+
+
+{BEGIN filter_control_facility_name}
+
+	<div class="dropdown filter-field filter-facility_name-container" {BEGIN filter_selected_facility_name} data-selected {END filter_selected_facility_name}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-facility_name" type="checkbox" name="selectAll" {$selectAll_attrs_facility_name} />
+						{BEGIN clearLink_facility_name}
+			<a href="#" class="filter-clear filter-clear-facility_name" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_facility_name}
+			<span class="r-filter-field">{$label public_training_attendance facility_name }				{BEGIN filter_selected_facility_name}:{END filter_selected_facility_name}
+			</span>
+			{BEGIN filter_selected_facility_name}
+			<span class="r-filter-value">{$filtervalue_facility_name}</span>
+			{END filter_selected_facility_name}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_facility_name}
+		<li class=" filter-values filter-values-facility_name  {$visibilityClass_facility_name}">
+			{$facility_name_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_facility_name}
+
+			{BEGIN filter_button_showmore_facility_name}
+		<li class=" filter-show-more {$collapsedClass_facility_name} {$showMoreBtnClass_facility_name}">
+			<a class="filter-show-more-link filterShowMore_facility_name" href="#">{$show_n_more_facility_name}</a>
+		</li>
+		{END filter_button_showmore_facility_name}
+	
+
+
+			{BEGIN filter_button_apply_facility_name}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_facility_name}">
+			<a href="#" class="filter-btn-apply filter-apply-facility_name" {$filterbutton_attrs_facility_name}>Apply</a>
+		</li>
+		{END filter_button_apply_facility_name}
+	
+
+			</ul>
+	</div>
+
+{END filter_control_facility_name}
+
+
+
+
+
+
+{BEGIN filter_control_training_lead_name}
+
+	<div class="dropdown filter-field filter-training_lead_name-container" {BEGIN filter_selected_training_lead_name} data-selected {END filter_selected_training_lead_name}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-training_lead_name" type="checkbox" name="selectAll" {$selectAll_attrs_training_lead_name} />
+						{BEGIN clearLink_training_lead_name}
+			<a href="#" class="filter-clear filter-clear-training_lead_name" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_training_lead_name}
+			<span class="r-filter-field">{$label public_training_attendance training_lead_name }				{BEGIN filter_selected_training_lead_name}:{END filter_selected_training_lead_name}
+			</span>
+			{BEGIN filter_selected_training_lead_name}
+			<span class="r-filter-value">{$filtervalue_training_lead_name}</span>
+			{END filter_selected_training_lead_name}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_training_lead_name}
+		<li class=" filter-values filter-values-training_lead_name  {$visibilityClass_training_lead_name}">
+			{$training_lead_name_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_training_lead_name}
+
+			{BEGIN filter_button_showmore_training_lead_name}
+		<li class=" filter-show-more {$collapsedClass_training_lead_name} {$showMoreBtnClass_training_lead_name}">
+			<a class="filter-show-more-link filterShowMore_training_lead_name" href="#">{$show_n_more_training_lead_name}</a>
+		</li>
+		{END filter_button_showmore_training_lead_name}
+	
+
+
+			{BEGIN filter_button_apply_training_lead_name}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_training_lead_name}">
+			<a href="#" class="filter-btn-apply filter-apply-training_lead_name" {$filterbutton_attrs_training_lead_name}>Apply</a>
+		</li>
+		{END filter_button_apply_training_lead_name}
+	
+
+			</ul>
+	</div>
+
+{END filter_control_training_lead_name}
+
+
+
+
+
+
+{BEGIN filter_control_training_type}
+
+	<div class="dropdown filter-field filter-training_type-container" {BEGIN filter_selected_training_type} data-selected {END filter_selected_training_type}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-training_type" type="checkbox" name="selectAll" {$selectAll_attrs_training_type} />
+						{BEGIN clearLink_training_type}
+			<a href="#" class="filter-clear filter-clear-training_type" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_training_type}
+			<span class="r-filter-field">{$label public_training_attendance training_type }				{BEGIN filter_selected_training_type}:{END filter_selected_training_type}
+			</span>
+			{BEGIN filter_selected_training_type}
+			<span class="r-filter-value">{$filtervalue_training_type}</span>
+			{END filter_selected_training_type}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_training_type}
+		<li class=" filter-values filter-values-training_type  {$visibilityClass_training_type}">
+			{$training_type_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_training_type}
+
+			{BEGIN filter_button_showmore_training_type}
+		<li class=" filter-show-more {$collapsedClass_training_type} {$showMoreBtnClass_training_type}">
+			<a class="filter-show-more-link filterShowMore_training_type" href="#">{$show_n_more_training_type}</a>
+		</li>
+		{END filter_button_showmore_training_type}
+	
+
+
+			{BEGIN filter_button_apply_training_type}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_training_type}">
+			<a href="#" class="filter-btn-apply filter-apply-training_type" {$filterbutton_attrs_training_type}>Apply</a>
+		</li>
+		{END filter_button_apply_training_type}
+	
+
+			</ul>
+	</div>
+
+{END filter_control_training_type}
+
+
+
+
+
+
+{BEGIN filter_control_training_approach}
+
+	<div class="dropdown filter-field filter-training_approach-container" {BEGIN filter_selected_training_approach} data-selected {END filter_selected_training_approach}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-training_approach" type="checkbox" name="selectAll" {$selectAll_attrs_training_approach} />
+						{BEGIN clearLink_training_approach}
+			<a href="#" class="filter-clear filter-clear-training_approach" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_training_approach}
+			<span class="r-filter-field">{$label public_training_attendance training_approach }				{BEGIN filter_selected_training_approach}:{END filter_selected_training_approach}
+			</span>
+			{BEGIN filter_selected_training_approach}
+			<span class="r-filter-value">{$filtervalue_training_approach}</span>
+			{END filter_selected_training_approach}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_training_approach}
+		<li class=" filter-values filter-values-training_approach  {$visibilityClass_training_approach}">
+			{$training_approach_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_training_approach}
+
+			{BEGIN filter_button_showmore_training_approach}
+		<li class=" filter-show-more {$collapsedClass_training_approach} {$showMoreBtnClass_training_approach}">
+			<a class="filter-show-more-link filterShowMore_training_approach" href="#">{$show_n_more_training_approach}</a>
+		</li>
+		{END filter_button_showmore_training_approach}
+	
+
+
+			{BEGIN filter_button_apply_training_approach}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_training_approach}">
+			<a href="#" class="filter-btn-apply filter-apply-training_approach" {$filterbutton_attrs_training_approach}>Apply</a>
+		</li>
+		{END filter_button_apply_training_approach}
+	
+
+			</ul>
+	</div>
+
+{END filter_control_training_approach}
+
+
+
+
+
+
+{BEGIN filter_control_program_name}
+
+	<div class="dropdown filter-field filter-program_name-container" {BEGIN filter_selected_program_name} data-selected {END filter_selected_program_name}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-program_name" type="checkbox" name="selectAll" {$selectAll_attrs_program_name} />
+						{BEGIN clearLink_program_name}
+			<a href="#" class="filter-clear filter-clear-program_name" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_program_name}
+			<span class="r-filter-field">{$label public_training_attendance program_name }				{BEGIN filter_selected_program_name}:{END filter_selected_program_name}
+			</span>
+			{BEGIN filter_selected_program_name}
+			<span class="r-filter-value">{$filtervalue_program_name}</span>
+			{END filter_selected_program_name}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_program_name}
+		<li class=" filter-values filter-values-program_name  {$visibilityClass_program_name}">
+			{$program_name_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_program_name}
+
+			{BEGIN filter_button_showmore_program_name}
+		<li class=" filter-show-more {$collapsedClass_program_name} {$showMoreBtnClass_program_name}">
+			<a class="filter-show-more-link filterShowMore_program_name" href="#">{$show_n_more_program_name}</a>
+		</li>
+		{END filter_button_showmore_program_name}
+	
+
+
+			{BEGIN filter_button_apply_program_name}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_program_name}">
+			<a href="#" class="filter-btn-apply filter-apply-program_name" {$filterbutton_attrs_program_name}>Apply</a>
+		</li>
+		{END filter_button_apply_program_name}
+	
+
+			</ul>
+	</div>
+
+{END filter_control_program_name}
+
+
+
+
+
+
+{BEGIN filter_control_partner_name}
+
+	<div class="dropdown filter-field filter-partner_name-container" {BEGIN filter_selected_partner_name} data-selected {END filter_selected_partner_name}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-partner_name" type="checkbox" name="selectAll" {$selectAll_attrs_partner_name} />
+						{BEGIN clearLink_partner_name}
+			<a href="#" class="filter-clear filter-clear-partner_name" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_partner_name}
+			<span class="r-filter-field">{$label public_training_attendance partner_name }				{BEGIN filter_selected_partner_name}:{END filter_selected_partner_name}
+			</span>
+			{BEGIN filter_selected_partner_name}
+			<span class="r-filter-value">{$filtervalue_partner_name}</span>
+			{END filter_selected_partner_name}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_partner_name}
+		<li class=" filter-values filter-values-partner_name  {$visibilityClass_partner_name}">
+			{$partner_name_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_partner_name}
+
+			{BEGIN filter_button_showmore_partner_name}
+		<li class=" filter-show-more {$collapsedClass_partner_name} {$showMoreBtnClass_partner_name}">
+			<a class="filter-show-more-link filterShowMore_partner_name" href="#">{$show_n_more_partner_name}</a>
+		</li>
+		{END filter_button_showmore_partner_name}
+	
+
+
+			{BEGIN filter_button_apply_partner_name}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_partner_name}">
+			<a href="#" class="filter-btn-apply filter-apply-partner_name" {$filterbutton_attrs_partner_name}>Apply</a>
+		</li>
+		{END filter_button_apply_partner_name}
+	
+
+			</ul>
+	</div>
+
+{END filter_control_partner_name}
+
+
+
+
+
+
+{BEGIN filter_control_host_region}
+
+	<div class="dropdown filter-field filter-host_region-container" {BEGIN filter_selected_host_region} data-selected {END filter_selected_host_region}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-host_region" type="checkbox" name="selectAll" {$selectAll_attrs_host_region} />
+						{BEGIN clearLink_host_region}
+			<a href="#" class="filter-clear filter-clear-host_region" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_host_region}
+			<span class="r-filter-field">{$label public_training_attendance host_region }				{BEGIN filter_selected_host_region}:{END filter_selected_host_region}
+			</span>
+			{BEGIN filter_selected_host_region}
+			<span class="r-filter-value">{$filtervalue_host_region}</span>
+			{END filter_selected_host_region}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_host_region}
+		<li class=" filter-values filter-values-host_region  {$visibilityClass_host_region}">
+			{$host_region_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_host_region}
+
+			{BEGIN filter_button_showmore_host_region}
+		<li class=" filter-show-more {$collapsedClass_host_region} {$showMoreBtnClass_host_region}">
+			<a class="filter-show-more-link filterShowMore_host_region" href="#">{$show_n_more_host_region}</a>
+		</li>
+		{END filter_button_showmore_host_region}
+	
+
+
+			{BEGIN filter_button_apply_host_region}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_host_region}">
+			<a href="#" class="filter-btn-apply filter-apply-host_region" {$filterbutton_attrs_host_region}>Apply</a>
+		</li>
+		{END filter_button_apply_host_region}
+	
+
+			</ul>
+	</div>
+
+{END filter_control_host_region}
+
+
+
+
+
+
+{BEGIN filter_control_host_country}
+
+	<div class="dropdown filter-field filter-host_country-container" {BEGIN filter_selected_host_country} data-selected {END filter_selected_host_country}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-host_country" type="checkbox" name="selectAll" {$selectAll_attrs_host_country} />
+						{BEGIN clearLink_host_country}
+			<a href="#" class="filter-clear filter-clear-host_country" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_host_country}
+			<span class="r-filter-field">{$label public_training_attendance host_country }				{BEGIN filter_selected_host_country}:{END filter_selected_host_country}
+			</span>
+			{BEGIN filter_selected_host_country}
+			<span class="r-filter-value">{$filtervalue_host_country}</span>
+			{END filter_selected_host_country}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_host_country}
+		<li class=" filter-values filter-values-host_country  {$visibilityClass_host_country}">
+			{$host_country_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_host_country}
+
+			{BEGIN filter_button_showmore_host_country}
+		<li class=" filter-show-more {$collapsedClass_host_country} {$showMoreBtnClass_host_country}">
+			<a class="filter-show-more-link filterShowMore_host_country" href="#">{$show_n_more_host_country}</a>
+		</li>
+		{END filter_button_showmore_host_country}
+	
+
+
+			{BEGIN filter_button_apply_host_country}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_host_country}">
+			<a href="#" class="filter-btn-apply filter-apply-host_country" {$filterbutton_attrs_host_country}>Apply</a>
+		</li>
+		{END filter_button_apply_host_country}
+	
+
+			</ul>
+	</div>
+
+{END filter_control_host_country}
+
+
+
+
+
+
+{BEGIN filter_control_venue_name}
+
+	<div class="dropdown filter-field filter-venue_name-container" {BEGIN filter_selected_venue_name} data-selected {END filter_selected_venue_name}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-venue_name" type="checkbox" name="selectAll" {$selectAll_attrs_venue_name} />
+						{BEGIN clearLink_venue_name}
+			<a href="#" class="filter-clear filter-clear-venue_name" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_venue_name}
+			<span class="r-filter-field">{$label public_training_attendance venue_name }				{BEGIN filter_selected_venue_name}:{END filter_selected_venue_name}
+			</span>
+			{BEGIN filter_selected_venue_name}
+			<span class="r-filter-value">{$filtervalue_venue_name}</span>
+			{END filter_selected_venue_name}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_venue_name}
+		<li class=" filter-values filter-values-venue_name  {$visibilityClass_venue_name}">
+			{$venue_name_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_venue_name}
+
+			{BEGIN filter_button_showmore_venue_name}
+		<li class=" filter-show-more {$collapsedClass_venue_name} {$showMoreBtnClass_venue_name}">
+			<a class="filter-show-more-link filterShowMore_venue_name" href="#">{$show_n_more_venue_name}</a>
+		</li>
+		{END filter_button_showmore_venue_name}
+	
+
+
+			{BEGIN filter_button_apply_venue_name}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_venue_name}">
+			<a href="#" class="filter-btn-apply filter-apply-venue_name" {$filterbutton_attrs_venue_name}>Apply</a>
+		</li>
+		{END filter_button_apply_venue_name}
+	
+
+			</ul>
+	</div>
+
+{END filter_control_venue_name}
+
+
+
+
+
+
+{BEGIN filter_control_quarter}
+
+	<div class="dropdown filter-field filter-quarter-container" {BEGIN filter_selected_quarter} data-selected {END filter_selected_quarter}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-quarter" type="checkbox" name="selectAll" {$selectAll_attrs_quarter} />
+						{BEGIN clearLink_quarter}
+			<a href="#" class="filter-clear filter-clear-quarter" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_quarter}
+			<span class="r-filter-field">{$label public_training_attendance quarter }				{BEGIN filter_selected_quarter}:{END filter_selected_quarter}
+			</span>
+			{BEGIN filter_selected_quarter}
+			<span class="r-filter-value">{$filtervalue_quarter}</span>
+			{END filter_selected_quarter}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_quarter}
+		<li class=" filter-values filter-values-quarter  {$visibilityClass_quarter}">
+			{$quarter_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_quarter}
+
+			{BEGIN filter_button_showmore_quarter}
+		<li class=" filter-show-more {$collapsedClass_quarter} {$showMoreBtnClass_quarter}">
+			<a class="filter-show-more-link filterShowMore_quarter" href="#">{$show_n_more_quarter}</a>
+		</li>
+		{END filter_button_showmore_quarter}
+	
+
+
+			{BEGIN filter_button_apply_quarter}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_quarter}">
+			<a href="#" class="filter-btn-apply filter-apply-quarter" {$filterbutton_attrs_quarter}>Apply</a>
+		</li>
+		{END filter_button_apply_quarter}
+	
+
+			</ul>
+	</div>
+
+{END filter_control_quarter}
+
+
+
+
+
+
+{BEGIN filter_control_start_date}
+
+	<div class="dropdown filter-field filter-start_date-container" {BEGIN filter_selected_start_date} data-selected {END filter_selected_start_date}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_start_date}
+			<a href="#" class="filter-clear filter-clear-start_date" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_start_date}
+			<span class="r-filter-field">{$label public_training_attendance start_date }				{BEGIN filter_selected_start_date}:{END filter_selected_start_date}
+			</span>
+			{BEGIN filter_selected_start_date}
+			<span class="r-filter-value">{$filtervalue_start_date}</span>
+			{END filter_selected_start_date}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_start_date}
+		<li class=" filter-values filter-values-start_date  {$visibilityClass_start_date}">
+			{$start_date_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_start_date}
+
+			{BEGIN filter_button_showmore_start_date}
+		<li class=" filter-show-more {$collapsedClass_start_date} {$showMoreBtnClass_start_date}">
+			<a class="filter-show-more-link filterShowMore_start_date" href="#">{$show_n_more_start_date}</a>
+		</li>
+		{END filter_button_showmore_start_date}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_start_date}
+
+
+
+
+
+
+{BEGIN filter_control_end_date}
+
+	<div class="dropdown filter-field filter-end_date-container" {BEGIN filter_selected_end_date} data-selected {END filter_selected_end_date}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_end_date}
+			<a href="#" class="filter-clear filter-clear-end_date" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_end_date}
+			<span class="r-filter-field">{$label public_training_attendance end_date }				{BEGIN filter_selected_end_date}:{END filter_selected_end_date}
+			</span>
+			{BEGIN filter_selected_end_date}
+			<span class="r-filter-value">{$filtervalue_end_date}</span>
+			{END filter_selected_end_date}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_end_date}
+		<li class=" filter-values filter-values-end_date  {$visibilityClass_end_date}">
+			{$end_date_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_end_date}
+
+			{BEGIN filter_button_showmore_end_date}
+		<li class=" filter-show-more {$collapsedClass_end_date} {$showMoreBtnClass_end_date}">
+			<a class="filter-show-more-link filterShowMore_end_date" href="#">{$show_n_more_end_date}</a>
+		</li>
+		{END filter_button_showmore_end_date}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_end_date}
+
+
+
+	<!-- End Filter panel content -->
+	</div>
+</div>		</div>					</div>
 			</div>		
 {END top_block}
 						</div>
@@ -564,6 +2030,22 @@
 </span>
 {END inlineadd_link}
 	 
+		{BEGIN saveall_link}
+<span data-itemtype="inline_save_all" data-itemid="inline_save_all" {$item_inline_save_all} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" {$savealllink_attrs} {$savealllink_span} >
+							Save all			</a>
+</span>
+{END saveall_link}
+	 
+		{BEGIN cancelall_link}
+<span data-itemtype="inline_cancel_all" data-itemid="inline_cancel_all" {$item_inline_cancel_all} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$cancelalllink_attrs} {$cancelalllink_span} >
+							Cancel			</a>
+</span>
+{END cancelall_link}
+	 
 		{BEGIN deleteselected_link}
 <span data-itemtype="delete" data-itemid="delete" {$item_delete} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-default   
@@ -571,6 +2053,14 @@
 							Delete			</a>
 </span>
 {END deleteselected_link}
+	 
+		{BEGIN updateselected_link}
+<span data-itemtype="update_selected" data-itemid="update_selected" {$item_update_selected} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" href="training_attendance_edit.php{$stateLink_full}" {$updateselectedlink_attrs} disabled >
+							Update selected			</a>
+</span>
+{END updateselected_link}
 			{END firstAboveGridCell}	
 	</div>			 
 				<div 
@@ -673,9 +2163,6 @@
 		[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="attendance_id"]:before {
 		content: "{$label public_training_attendance attendance_id}";
 	}
-			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="participant_id"]:before {
-		content: "{$label public_training_attendance participant_id}";
-	}
 			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="day_number"]:before {
 		content: "{$label public_training_attendance day_number}";
 	}
@@ -693,6 +2180,63 @@
 	}
 			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="recorded_by"]:before {
 		content: "{$label public_training_attendance recorded_by}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="participation_id"]:before {
+		content: "{$label public_training_attendance participation_id}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="participant_full_name"]:before {
+		content: "{$label public_training_attendance participant_full_name}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="sex_name"]:before {
+		content: "{$label public_training_attendance sex_name}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="facility_name"]:before {
+		content: "{$label public_training_attendance facility_name}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="role_name"]:before {
+		content: "{$label public_training_attendance role_name}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="training_id"]:before {
+		content: "{$label public_training_attendance training_id}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="course_name"]:before {
+		content: "{$label public_training_attendance course_name}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="program_name"]:before {
+		content: "{$label public_training_attendance program_name}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="program_id"]:before {
+		content: "{$label public_training_attendance program_id}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="quarter"]:before {
+		content: "{$label public_training_attendance quarter}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="start_date"]:before {
+		content: "{$label public_training_attendance start_date}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="end_date"]:before {
+		content: "{$label public_training_attendance end_date}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="training_type"]:before {
+		content: "{$label public_training_attendance training_type}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="training_approach"]:before {
+		content: "{$label public_training_attendance training_approach}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="host_country"]:before {
+		content: "{$label public_training_attendance host_country}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="host_region"]:before {
+		content: "{$label public_training_attendance host_region}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="venue_name"]:before {
+		content: "{$label public_training_attendance venue_name}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="partner_name"]:before {
+		content: "{$label public_training_attendance partner_name}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="training_lead_name"]:before {
+		content: "{$label public_training_attendance training_lead_name}";
 	}
 	}
 </style>
@@ -763,7 +2307,7 @@
 		{BEGIN attendance_id_fieldheadercolumn}
 	{BEGIN attendance_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field8" {$item_simple_grid_field8} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="attendance_id" data-fieldname="attendance_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field26" {$item_simple_grid_field26} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="attendance_id" data-fieldname="attendance_id" 
 
 			{$attendance_id_orderlinkattrs}
 	
@@ -786,30 +2330,30 @@
 	{$cell_grid_headcell_field1}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$participant_id_class}	"
+		 r-ori-vert		 {$course_name_class}	"
 
-			data-field="participant_id"
+			data-field="course_name"
 	
 	data-cellId="grid_headcell_field1" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
-		{BEGIN participant_id_fieldheadercolumn}
-	{BEGIN participant_id_fieldheader}
+		{BEGIN course_name_fieldheadercolumn}
+	{BEGIN course_name_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field9" {$item_simple_grid_field9} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="participant_id" data-fieldname="participant_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field27" {$item_simple_grid_field27} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="course_name" data-fieldname="course_name" 
 
-			{$participant_id_orderlinkattrs}
+			{$course_name_orderlinkattrs}
 	
 	
 	>
 	<span class="text-label">
-		<span>{$label public_training_attendance participant_id }</span>
-					{$arrow_icon_participant_id}
+		<span>{$label public_training_attendance course_name }</span>
+					{$arrow_icon_course_name}
 			</span>
 	</span>
-	{END participant_id_fieldheader}
-{END participant_id_fieldheadercolumn}
+	{END course_name_fieldheader}
+{END course_name_fieldheadercolumn}
 
 	
 	</th>
@@ -820,30 +2364,30 @@
 	{$cell_grid_headcell_field2}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$day_number_class}	"
+		 r-ori-vert		 {$training_id_class}	"
 
-			data-field="day_number"
+			data-field="training_id"
 	
 	data-cellId="grid_headcell_field2" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
-		{BEGIN day_number_fieldheadercolumn}
-	{BEGIN day_number_fieldheader}
+		{BEGIN training_id_fieldheadercolumn}
+	{BEGIN training_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field10" {$item_simple_grid_field10} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="day_number" data-fieldname="day_number" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field28" {$item_simple_grid_field28} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_id" data-fieldname="training_id" 
 
-			{$day_number_orderlinkattrs}
+			{$training_id_orderlinkattrs}
 	
 	
 	>
 	<span class="text-label">
-		<span>{$label public_training_attendance day_number }</span>
-					{$arrow_icon_day_number}
+		<span>{$label public_training_attendance training_id }</span>
+					{$arrow_icon_training_id}
 			</span>
 	</span>
-	{END day_number_fieldheader}
-{END day_number_fieldheadercolumn}
+	{END training_id_fieldheader}
+{END training_id_fieldheadercolumn}
 
 	
 	</th>
@@ -854,18 +2398,86 @@
 	{$cell_grid_headcell_field3}
 	{$recordattrs}
 	class="
+		 r-ori-vert		 {$participant_full_name_class}	"
+
+			data-field="participant_full_name"
+	
+	data-cellId="grid_headcell_field3" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN participant_full_name_fieldheadercolumn}
+	{BEGIN participant_full_name_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field29" {$item_simple_grid_field29} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="participant_full_name" data-fieldname="participant_full_name" 
+
+			{$participant_full_name_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_training_attendance participant_full_name }</span>
+					{$arrow_icon_participant_full_name}
+			</span>
+	</span>
+	{END participant_full_name_fieldheader}
+{END participant_full_name_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field3}
+									{BEGIN cellblock_grid_headcell_field4}
+	<th
+	
+	{$cell_grid_headcell_field4}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$sex_name_class}	"
+
+			data-field="sex_name"
+	
+	data-cellId="grid_headcell_field4" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN sex_name_fieldheadercolumn}
+	{BEGIN sex_name_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field30" {$item_simple_grid_field30} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="sex_name" data-fieldname="sex_name" 
+
+			{$sex_name_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_training_attendance sex_name }</span>
+					{$arrow_icon_sex_name}
+			</span>
+	</span>
+	{END sex_name_fieldheader}
+{END sex_name_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field4}
+									{BEGIN cellblock_grid_headcell_field5}
+	<th
+	
+	{$cell_grid_headcell_field5}
+	{$recordattrs}
+	class="
 		 r-ori-vert		 {$attended_class}	"
 
 			data-field="attended"
 	
-	data-cellId="grid_headcell_field3" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field5" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN attended_fieldheadercolumn}
 	{BEGIN attended_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field11" {$item_simple_grid_field11} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="attended" data-fieldname="attended" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field31" {$item_simple_grid_field31} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="attended" data-fieldname="attended" 
 
 			{$attended_orderlinkattrs}
 	
@@ -881,25 +2493,59 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field3}
-									{BEGIN cellblock_grid_headcell_field4}
+	{END cellblock_grid_headcell_field5}
+									{BEGIN cellblock_grid_headcell_field6}
 	<th
 	
-	{$cell_grid_headcell_field4}
+	{$cell_grid_headcell_field6}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$day_number_class}	"
+
+			data-field="day_number"
+	
+	data-cellId="grid_headcell_field6" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN day_number_fieldheadercolumn}
+	{BEGIN day_number_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field32" {$item_simple_grid_field32} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="day_number" data-fieldname="day_number" 
+
+			{$day_number_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_training_attendance day_number }</span>
+					{$arrow_icon_day_number}
+			</span>
+	</span>
+	{END day_number_fieldheader}
+{END day_number_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field6}
+									{BEGIN cellblock_grid_headcell_field7}
+	<th
+	
+	{$cell_grid_headcell_field7}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$attendance_date_class}	"
 
 			data-field="attendance_date"
 	
-	data-cellId="grid_headcell_field4" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field7" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN attendance_date_fieldheadercolumn}
 	{BEGIN attendance_date_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field12" {$item_simple_grid_field12} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="attendance_date" data-fieldname="attendance_date" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field33" {$item_simple_grid_field33} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="attendance_date" data-fieldname="attendance_date" 
 
 			{$attendance_date_orderlinkattrs}
 	
@@ -915,25 +2561,467 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field4}
-									{BEGIN cellblock_grid_headcell_field5}
+	{END cellblock_grid_headcell_field7}
+									{BEGIN cellblock_grid_headcell_field8}
 	<th
 	
-	{$cell_grid_headcell_field5}
+	{$cell_grid_headcell_field8}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$role_name_class}	"
+
+			data-field="role_name"
+	
+	data-cellId="grid_headcell_field8" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN role_name_fieldheadercolumn}
+	{BEGIN role_name_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field34" {$item_simple_grid_field34} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="role_name" data-fieldname="role_name" 
+
+			{$role_name_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_training_attendance role_name }</span>
+					{$arrow_icon_role_name}
+			</span>
+	</span>
+	{END role_name_fieldheader}
+{END role_name_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field8}
+									{BEGIN cellblock_grid_headcell_field9}
+	<th
+	
+	{$cell_grid_headcell_field9}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$facility_name_class}	"
+
+			data-field="facility_name"
+	
+	data-cellId="grid_headcell_field9" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN facility_name_fieldheadercolumn}
+	{BEGIN facility_name_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field35" {$item_simple_grid_field35} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="facility_name" data-fieldname="facility_name" 
+
+			{$facility_name_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_training_attendance facility_name }</span>
+					{$arrow_icon_facility_name}
+			</span>
+	</span>
+	{END facility_name_fieldheader}
+{END facility_name_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field9}
+									{BEGIN cellblock_grid_headcell_field10}
+	<th
+	
+	{$cell_grid_headcell_field10}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_lead_name_class}	"
+
+			data-field="training_lead_name"
+	
+	data-cellId="grid_headcell_field10" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN training_lead_name_fieldheadercolumn}
+	{BEGIN training_lead_name_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field36" {$item_simple_grid_field36} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_lead_name" data-fieldname="training_lead_name" 
+
+			{$training_lead_name_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_training_attendance training_lead_name }</span>
+					{$arrow_icon_training_lead_name}
+			</span>
+	</span>
+	{END training_lead_name_fieldheader}
+{END training_lead_name_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field10}
+									{BEGIN cellblock_grid_headcell_field11}
+	<th
+	
+	{$cell_grid_headcell_field11}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_type_class}	"
+
+			data-field="training_type"
+	
+	data-cellId="grid_headcell_field11" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN training_type_fieldheadercolumn}
+	{BEGIN training_type_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field37" {$item_simple_grid_field37} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_type" data-fieldname="training_type" 
+
+			{$training_type_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_training_attendance training_type }</span>
+					{$arrow_icon_training_type}
+			</span>
+	</span>
+	{END training_type_fieldheader}
+{END training_type_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field11}
+									{BEGIN cellblock_grid_headcell_field12}
+	<th
+	
+	{$cell_grid_headcell_field12}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_approach_class}	"
+
+			data-field="training_approach"
+	
+	data-cellId="grid_headcell_field12" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN training_approach_fieldheadercolumn}
+	{BEGIN training_approach_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field38" {$item_simple_grid_field38} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_approach" data-fieldname="training_approach" 
+
+			{$training_approach_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_training_attendance training_approach }</span>
+					{$arrow_icon_training_approach}
+			</span>
+	</span>
+	{END training_approach_fieldheader}
+{END training_approach_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field12}
+									{BEGIN cellblock_grid_headcell_field13}
+	<th
+	
+	{$cell_grid_headcell_field13}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$program_name_class}	"
+
+			data-field="program_name"
+	
+	data-cellId="grid_headcell_field13" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN program_name_fieldheadercolumn}
+	{BEGIN program_name_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field39" {$item_simple_grid_field39} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="program_name" data-fieldname="program_name" 
+
+			{$program_name_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_training_attendance program_name }</span>
+					{$arrow_icon_program_name}
+			</span>
+	</span>
+	{END program_name_fieldheader}
+{END program_name_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field13}
+									{BEGIN cellblock_grid_headcell_field14}
+	<th
+	
+	{$cell_grid_headcell_field14}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$partner_name_class}	"
+
+			data-field="partner_name"
+	
+	data-cellId="grid_headcell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN partner_name_fieldheadercolumn}
+	{BEGIN partner_name_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field40" {$item_simple_grid_field40} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="partner_name" data-fieldname="partner_name" 
+
+			{$partner_name_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_training_attendance partner_name }</span>
+					{$arrow_icon_partner_name}
+			</span>
+	</span>
+	{END partner_name_fieldheader}
+{END partner_name_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field14}
+									{BEGIN cellblock_grid_headcell_field15}
+	<th
+	
+	{$cell_grid_headcell_field15}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$host_region_class}	"
+
+			data-field="host_region"
+	
+	data-cellId="grid_headcell_field15" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN host_region_fieldheadercolumn}
+	{BEGIN host_region_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field41" {$item_simple_grid_field41} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="host_region" data-fieldname="host_region" 
+
+			{$host_region_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_training_attendance host_region }</span>
+					{$arrow_icon_host_region}
+			</span>
+	</span>
+	{END host_region_fieldheader}
+{END host_region_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field15}
+									{BEGIN cellblock_grid_headcell_field16}
+	<th
+	
+	{$cell_grid_headcell_field16}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$host_country_class}	"
+
+			data-field="host_country"
+	
+	data-cellId="grid_headcell_field16" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN host_country_fieldheadercolumn}
+	{BEGIN host_country_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field42" {$item_simple_grid_field42} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="host_country" data-fieldname="host_country" 
+
+			{$host_country_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_training_attendance host_country }</span>
+					{$arrow_icon_host_country}
+			</span>
+	</span>
+	{END host_country_fieldheader}
+{END host_country_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field16}
+									{BEGIN cellblock_grid_headcell_field17}
+	<th
+	
+	{$cell_grid_headcell_field17}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$venue_name_class}	"
+
+			data-field="venue_name"
+	
+	data-cellId="grid_headcell_field17" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN venue_name_fieldheadercolumn}
+	{BEGIN venue_name_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field43" {$item_simple_grid_field43} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="venue_name" data-fieldname="venue_name" 
+
+			{$venue_name_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_training_attendance venue_name }</span>
+					{$arrow_icon_venue_name}
+			</span>
+	</span>
+	{END venue_name_fieldheader}
+{END venue_name_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field17}
+									{BEGIN cellblock_grid_headcell_field18}
+	<th
+	
+	{$cell_grid_headcell_field18}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$quarter_class}	"
+
+			data-field="quarter"
+	
+	data-cellId="grid_headcell_field18" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN quarter_fieldheadercolumn}
+	{BEGIN quarter_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field44" {$item_simple_grid_field44} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="quarter" data-fieldname="quarter" 
+
+			{$quarter_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_training_attendance quarter }</span>
+					{$arrow_icon_quarter}
+			</span>
+	</span>
+	{END quarter_fieldheader}
+{END quarter_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field18}
+									{BEGIN cellblock_grid_headcell_field19}
+	<th
+	
+	{$cell_grid_headcell_field19}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$start_date_class}	"
+
+			data-field="start_date"
+	
+	data-cellId="grid_headcell_field19" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN start_date_fieldheadercolumn}
+	{BEGIN start_date_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field45" {$item_simple_grid_field45} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="start_date" data-fieldname="start_date" 
+
+			{$start_date_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_training_attendance start_date }</span>
+					{$arrow_icon_start_date}
+			</span>
+	</span>
+	{END start_date_fieldheader}
+{END start_date_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field19}
+									{BEGIN cellblock_grid_headcell_field20}
+	<th
+	
+	{$cell_grid_headcell_field20}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$end_date_class}	"
+
+			data-field="end_date"
+	
+	data-cellId="grid_headcell_field20" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN end_date_fieldheadercolumn}
+	{BEGIN end_date_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field46" {$item_simple_grid_field46} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="end_date" data-fieldname="end_date" 
+
+			{$end_date_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_training_attendance end_date }</span>
+					{$arrow_icon_end_date}
+			</span>
+	</span>
+	{END end_date_fieldheader}
+{END end_date_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field20}
+									{BEGIN cellblock_grid_headcell_field21}
+	<th
+	
+	{$cell_grid_headcell_field21}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$notes_class}	"
 
 			data-field="notes"
 	
-	data-cellId="grid_headcell_field5" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field21" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN notes_fieldheadercolumn}
 	{BEGIN notes_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field13" {$item_simple_grid_field13} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="notes" data-fieldname="notes" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field47" {$item_simple_grid_field47} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="notes" data-fieldname="notes" 
 
 			{$notes_orderlinkattrs}
 	
@@ -949,59 +3037,25 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field5}
-									{BEGIN cellblock_grid_headcell_field6}
+	{END cellblock_grid_headcell_field21}
+									{BEGIN cellblock_grid_headcell_field22}
 	<th
 	
-	{$cell_grid_headcell_field6}
-	{$recordattrs}
-	class="
-		 r-ori-vert		 {$recorded_at_class}	"
-
-			data-field="recorded_at"
-	
-	data-cellId="grid_headcell_field6" data-pageid="{$pageid}" data-record-id="{$recId}"	
-	>
-
-	 
-		{BEGIN recorded_at_fieldheadercolumn}
-	{BEGIN recorded_at_fieldheader}
-<span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field14" {$item_simple_grid_field14} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="recorded_at" data-fieldname="recorded_at" 
-
-			{$recorded_at_orderlinkattrs}
-	
-	
-	>
-	<span class="text-label">
-		<span>{$label public_training_attendance recorded_at }</span>
-					{$arrow_icon_recorded_at}
-			</span>
-	</span>
-	{END recorded_at_fieldheader}
-{END recorded_at_fieldheadercolumn}
-
-	
-	</th>
-	{END cellblock_grid_headcell_field6}
-									{BEGIN cellblock_grid_headcell_field7}
-	<th
-	
-	{$cell_grid_headcell_field7}
+	{$cell_grid_headcell_field22}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$recorded_by_class}	"
 
 			data-field="recorded_by"
 	
-	data-cellId="grid_headcell_field7" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field22" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN recorded_by_fieldheadercolumn}
 	{BEGIN recorded_by_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field15" {$item_simple_grid_field15} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="recorded_by" data-fieldname="recorded_by" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field48" {$item_simple_grid_field48} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="recorded_by" data-fieldname="recorded_by" 
 
 			{$recorded_by_orderlinkattrs}
 	
@@ -1017,7 +3071,109 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field7}
+	{END cellblock_grid_headcell_field22}
+									{BEGIN cellblock_grid_headcell_field23}
+	<th
+	
+	{$cell_grid_headcell_field23}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$recorded_at_class}	"
+
+			data-field="recorded_at"
+	
+	data-cellId="grid_headcell_field23" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN recorded_at_fieldheadercolumn}
+	{BEGIN recorded_at_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field49" {$item_simple_grid_field49} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="recorded_at" data-fieldname="recorded_at" 
+
+			{$recorded_at_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_training_attendance recorded_at }</span>
+					{$arrow_icon_recorded_at}
+			</span>
+	</span>
+	{END recorded_at_fieldheader}
+{END recorded_at_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field23}
+									{BEGIN cellblock_grid_headcell_field24}
+	<th
+	
+	{$cell_grid_headcell_field24}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$program_id_class}	"
+
+			data-field="program_id"
+	
+	data-cellId="grid_headcell_field24" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN program_id_fieldheadercolumn}
+	{BEGIN program_id_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field50" {$item_simple_grid_field50} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="program_id" data-fieldname="program_id" 
+
+			{$program_id_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_training_attendance program_id }</span>
+					{$arrow_icon_program_id}
+			</span>
+	</span>
+	{END program_id_fieldheader}
+{END program_id_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field24}
+									{BEGIN cellblock_grid_headcell_field25}
+	<th
+	
+	{$cell_grid_headcell_field25}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$participation_id_class}	"
+
+			data-field="participation_id"
+	
+	data-cellId="grid_headcell_field25" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN participation_id_fieldheadercolumn}
+	{BEGIN participation_id_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field51" {$item_simple_grid_field51} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="participation_id" data-fieldname="participation_id" 
+
+			{$participation_id_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_training_attendance participation_id }</span>
+					{$arrow_icon_participation_id}
+			</span>
+	</span>
+	{END participation_id_fieldheader}
+{END participation_id_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field25}
 							</tr>
 															
 					{END grid_header}
@@ -1053,6 +3209,26 @@
 </span>
 {END edit_link}
 {END edit_column}
+	 
+		{BEGIN inlineedit_column}
+{BEGIN inlineedit_link}
+<span data-itemtype="grid_inline_edit" data-itemid="grid_inline_edit" {$item_grid_inline_edit} data-pageid="{$pageid}" data-record-id="{$recId}" data-small data-button-item>
+	<a type="button" title="Inline Edit" class="btn-link   
+	 glyphicon glyphicon-edit" {$inlineeditlink_attrs} title="Inline Edit" >		
+				
+								</a>
+</span>
+{END inlineedit_link}
+{END inlineedit_column}
+	 
+		{BEGIN inline_save}
+<span data-itemtype="grid_inline_save" data-itemid="grid_inline_save" {$item_grid_inline_save} data-pageid="{$pageid}" data-record-id="{$recId}" data-small data-button-item>
+	<a type="button" title="Save" class="btn-link   
+	 glyphicon glyphicon-ok" {$inlinesavelink_attrs} title="Save" >		
+				
+								</a>
+</span>
+{END inline_save}
 	 
 		{BEGIN inline_cancel}
 <span data-itemtype="grid_inline_cancel" data-itemid="grid_inline_cancel" {$item_grid_inline_cancel} data-pageid="{$pageid}" data-record-id="{$recId}" data-small data-button-item>
@@ -1127,19 +3303,19 @@
 	{$cell_grid_cell_field1}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$participant_id_class}	"
+		 r-ori-vert		 {$course_name_class}	"
 
-			data-field="participant_id"
+			data-field="course_name"
 	
 	data-cellId="grid_cell_field1" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
-		{BEGIN participant_id_fieldcolumn}
-<span data-itemtype="grid_field" data-itemid="simple_grid_field1" {$item_simple_grid_field1} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="participant_id" data-fieldname="participant_id" data-default-width >
-{$participant_id_value}
+		{BEGIN course_name_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field13" {$item_simple_grid_field13} data-pageid="{$pageid}" data-page="training_attendance_list" data-record-id="{$recId}" data-field="course_name" data-fieldname="course_name" data-default-width >
+{$course_name_value}
 </span>
-{END participant_id_fieldcolumn}	
+{END course_name_fieldcolumn}	
 	</td>
 	{END cellblock_grid_cell_field1}
 									{BEGIN cellblock_grid_cell_field2}
@@ -1148,19 +3324,19 @@
 	{$cell_grid_cell_field2}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$day_number_class}	"
+		 r-ori-vert		 {$training_id_class}	"
 
-			data-field="day_number"
+			data-field="training_id"
 	
 	data-cellId="grid_cell_field2" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
-		{BEGIN day_number_fieldcolumn}
-<span data-itemtype="grid_field" data-itemid="simple_grid_field2" {$item_simple_grid_field2} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="day_number" data-fieldname="day_number" data-default-width >
-{$day_number_value}
+		{BEGIN training_id_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field12" {$item_simple_grid_field12} data-pageid="{$pageid}" data-page="training_attendance_list" data-record-id="{$recId}" data-field="training_id" data-fieldname="training_id" data-default-width >
+{$training_id_value}
 </span>
-{END day_number_fieldcolumn}	
+{END training_id_fieldcolumn}	
 	</td>
 	{END cellblock_grid_cell_field2}
 									{BEGIN cellblock_grid_cell_field3}
@@ -1169,11 +3345,53 @@
 	{$cell_grid_cell_field3}
 	{$recordattrs}
 	class="
+		 r-ori-vert		 {$participant_full_name_class}	"
+
+			data-field="participant_full_name"
+	
+	data-cellId="grid_cell_field3" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN participant_full_name_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field8" {$item_simple_grid_field8} data-pageid="{$pageid}" data-page="training_attendance_list" data-record-id="{$recId}" data-field="participant_full_name" data-fieldname="participant_full_name" data-default-width >
+{$participant_full_name_value}
+</span>
+{END participant_full_name_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field3}
+									{BEGIN cellblock_grid_cell_field4}
+	<td
+	
+	{$cell_grid_cell_field4}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$sex_name_class}	"
+
+			data-field="sex_name"
+	
+	data-cellId="grid_cell_field4" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN sex_name_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field9" {$item_simple_grid_field9} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="sex_name" data-fieldname="sex_name" data-default-width >
+{$sex_name_value}
+</span>
+{END sex_name_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field4}
+									{BEGIN cellblock_grid_cell_field5}
+	<td
+	
+	{$cell_grid_cell_field5}
+	{$recordattrs}
+	class="
 		 r-ori-vert		 {$attended_class}	"
 
 			data-field="attended"
 	
-	data-cellId="grid_cell_field3" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field5" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -1183,18 +3401,39 @@
 </span>
 {END attended_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field3}
-									{BEGIN cellblock_grid_cell_field4}
+	{END cellblock_grid_cell_field5}
+									{BEGIN cellblock_grid_cell_field6}
 	<td
 	
-	{$cell_grid_cell_field4}
+	{$cell_grid_cell_field6}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$day_number_class}	"
+
+			data-field="day_number"
+	
+	data-cellId="grid_cell_field6" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN day_number_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field2" {$item_simple_grid_field2} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="day_number" data-fieldname="day_number" data-default-width >
+{$day_number_value}
+</span>
+{END day_number_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field6}
+									{BEGIN cellblock_grid_cell_field7}
+	<td
+	
+	{$cell_grid_cell_field7}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$attendance_date_class}	"
 
 			data-field="attendance_date"
 	
-	data-cellId="grid_cell_field4" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field7" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -1204,18 +3443,291 @@
 </span>
 {END attendance_date_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field4}
-									{BEGIN cellblock_grid_cell_field5}
+	{END cellblock_grid_cell_field7}
+									{BEGIN cellblock_grid_cell_field8}
 	<td
 	
-	{$cell_grid_cell_field5}
+	{$cell_grid_cell_field8}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$role_name_class}	"
+
+			data-field="role_name"
+	
+	data-cellId="grid_cell_field8" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN role_name_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field11" {$item_simple_grid_field11} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="role_name" data-fieldname="role_name" data-default-width >
+{$role_name_value}
+</span>
+{END role_name_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field8}
+									{BEGIN cellblock_grid_cell_field9}
+	<td
+	
+	{$cell_grid_cell_field9}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$facility_name_class}	"
+
+			data-field="facility_name"
+	
+	data-cellId="grid_cell_field9" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN facility_name_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field10" {$item_simple_grid_field10} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="facility_name" data-fieldname="facility_name" data-default-width >
+{$facility_name_value}
+</span>
+{END facility_name_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field9}
+									{BEGIN cellblock_grid_cell_field10}
+	<td
+	
+	{$cell_grid_cell_field10}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_lead_name_class}	"
+
+			data-field="training_lead_name"
+	
+	data-cellId="grid_cell_field10" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN training_lead_name_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field25" {$item_simple_grid_field25} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_lead_name" data-fieldname="training_lead_name" data-default-width >
+{$training_lead_name_value}
+</span>
+{END training_lead_name_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field10}
+									{BEGIN cellblock_grid_cell_field11}
+	<td
+	
+	{$cell_grid_cell_field11}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_type_class}	"
+
+			data-field="training_type"
+	
+	data-cellId="grid_cell_field11" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN training_type_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field19" {$item_simple_grid_field19} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_type" data-fieldname="training_type" data-default-width >
+{$training_type_value}
+</span>
+{END training_type_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field11}
+									{BEGIN cellblock_grid_cell_field12}
+	<td
+	
+	{$cell_grid_cell_field12}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_approach_class}	"
+
+			data-field="training_approach"
+	
+	data-cellId="grid_cell_field12" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN training_approach_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field20" {$item_simple_grid_field20} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_approach" data-fieldname="training_approach" data-default-width >
+{$training_approach_value}
+</span>
+{END training_approach_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field12}
+									{BEGIN cellblock_grid_cell_field13}
+	<td
+	
+	{$cell_grid_cell_field13}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$program_name_class}	"
+
+			data-field="program_name"
+	
+	data-cellId="grid_cell_field13" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN program_name_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field14" {$item_simple_grid_field14} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="program_name" data-fieldname="program_name" data-default-width >
+{$program_name_value}
+</span>
+{END program_name_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field13}
+									{BEGIN cellblock_grid_cell_field14}
+	<td
+	
+	{$cell_grid_cell_field14}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$partner_name_class}	"
+
+			data-field="partner_name"
+	
+	data-cellId="grid_cell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN partner_name_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field24" {$item_simple_grid_field24} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="partner_name" data-fieldname="partner_name" data-default-width >
+{$partner_name_value}
+</span>
+{END partner_name_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field14}
+									{BEGIN cellblock_grid_cell_field15}
+	<td
+	
+	{$cell_grid_cell_field15}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$host_region_class}	"
+
+			data-field="host_region"
+	
+	data-cellId="grid_cell_field15" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN host_region_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field22" {$item_simple_grid_field22} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="host_region" data-fieldname="host_region" data-default-width >
+{$host_region_value}
+</span>
+{END host_region_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field15}
+									{BEGIN cellblock_grid_cell_field16}
+	<td
+	
+	{$cell_grid_cell_field16}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$host_country_class}	"
+
+			data-field="host_country"
+	
+	data-cellId="grid_cell_field16" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN host_country_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field21" {$item_simple_grid_field21} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="host_country" data-fieldname="host_country" data-default-width >
+{$host_country_value}
+</span>
+{END host_country_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field16}
+									{BEGIN cellblock_grid_cell_field17}
+	<td
+	
+	{$cell_grid_cell_field17}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$venue_name_class}	"
+
+			data-field="venue_name"
+	
+	data-cellId="grid_cell_field17" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN venue_name_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field23" {$item_simple_grid_field23} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="venue_name" data-fieldname="venue_name" data-default-width >
+{$venue_name_value}
+</span>
+{END venue_name_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field17}
+									{BEGIN cellblock_grid_cell_field18}
+	<td
+	
+	{$cell_grid_cell_field18}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$quarter_class}	"
+
+			data-field="quarter"
+	
+	data-cellId="grid_cell_field18" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN quarter_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field16" {$item_simple_grid_field16} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="quarter" data-fieldname="quarter" data-default-width >
+{$quarter_value}
+</span>
+{END quarter_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field18}
+									{BEGIN cellblock_grid_cell_field19}
+	<td
+	
+	{$cell_grid_cell_field19}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$start_date_class}	"
+
+			data-field="start_date"
+	
+	data-cellId="grid_cell_field19" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN start_date_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field17" {$item_simple_grid_field17} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="start_date" data-fieldname="start_date" data-default-width >
+{$start_date_value}
+</span>
+{END start_date_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field19}
+									{BEGIN cellblock_grid_cell_field20}
+	<td
+	
+	{$cell_grid_cell_field20}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$end_date_class}	"
+
+			data-field="end_date"
+	
+	data-cellId="grid_cell_field20" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN end_date_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field18" {$item_simple_grid_field18} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="end_date" data-fieldname="end_date" data-default-width >
+{$end_date_value}
+</span>
+{END end_date_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field20}
+									{BEGIN cellblock_grid_cell_field21}
+	<td
+	
+	{$cell_grid_cell_field21}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$notes_class}	"
 
 			data-field="notes"
 	
-	data-cellId="grid_cell_field5" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field21" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -1225,39 +3737,18 @@
 </span>
 {END notes_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field5}
-									{BEGIN cellblock_grid_cell_field6}
+	{END cellblock_grid_cell_field21}
+									{BEGIN cellblock_grid_cell_field22}
 	<td
 	
-	{$cell_grid_cell_field6}
-	{$recordattrs}
-	class="
-		 r-ori-vert		 {$recorded_at_class}	"
-
-			data-field="recorded_at"
-	
-	data-cellId="grid_cell_field6" data-pageid="{$pageid}" data-record-id="{$recId}"	
-	>
-
-	 
-		{BEGIN recorded_at_fieldcolumn}
-<span data-itemtype="grid_field" data-itemid="simple_grid_field6" {$item_simple_grid_field6} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="recorded_at" data-fieldname="recorded_at" data-default-width >
-{$recorded_at_value}
-</span>
-{END recorded_at_fieldcolumn}	
-	</td>
-	{END cellblock_grid_cell_field6}
-									{BEGIN cellblock_grid_cell_field7}
-	<td
-	
-	{$cell_grid_cell_field7}
+	{$cell_grid_cell_field22}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$recorded_by_class}	"
 
 			data-field="recorded_by"
 	
-	data-cellId="grid_cell_field7" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field22" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -1267,7 +3758,70 @@
 </span>
 {END recorded_by_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field7}
+	{END cellblock_grid_cell_field22}
+									{BEGIN cellblock_grid_cell_field23}
+	<td
+	
+	{$cell_grid_cell_field23}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$recorded_at_class}	"
+
+			data-field="recorded_at"
+	
+	data-cellId="grid_cell_field23" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN recorded_at_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field6" {$item_simple_grid_field6} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="recorded_at" data-fieldname="recorded_at" data-default-width >
+{$recorded_at_value}
+</span>
+{END recorded_at_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field23}
+									{BEGIN cellblock_grid_cell_field24}
+	<td
+	
+	{$cell_grid_cell_field24}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$program_id_class}	"
+
+			data-field="program_id"
+	
+	data-cellId="grid_cell_field24" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN program_id_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field15" {$item_simple_grid_field15} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="program_id" data-fieldname="program_id" data-default-width >
+{$program_id_value}
+</span>
+{END program_id_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field24}
+									{BEGIN cellblock_grid_cell_field25}
+	<td
+	
+	{$cell_grid_cell_field25}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$participation_id_class}	"
+
+			data-field="participation_id"
+	
+	data-cellId="grid_cell_field25" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN participation_id_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field1" {$item_simple_grid_field1} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="participation_id" data-fieldname="participation_id" data-default-width >
+{$participation_id_value}
+</span>
+{END participation_id_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field25}
 							</tr>
 										
 											{END grid_row}
@@ -1330,7 +3884,7 @@
 	{$cell_grid_footcell_field1}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$participant_id_class}	"
+		 r-ori-vert		 {$course_name_class}	"
 
 	
 	data-cellId="grid_footcell_field1" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
@@ -1345,7 +3899,7 @@
 	{$cell_grid_footcell_field2}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$day_number_class}	"
+		 r-ori-vert		 {$training_id_class}	"
 
 	
 	data-cellId="grid_footcell_field2" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
@@ -1360,7 +3914,7 @@
 	{$cell_grid_footcell_field3}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$attended_class}	"
+		 r-ori-vert		 {$participant_full_name_class}	"
 
 	
 	data-cellId="grid_footcell_field3" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
@@ -1375,7 +3929,7 @@
 	{$cell_grid_footcell_field4}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$attendance_date_class}	"
+		 r-ori-vert		 {$sex_name_class}	"
 
 	
 	data-cellId="grid_footcell_field4" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
@@ -1390,7 +3944,7 @@
 	{$cell_grid_footcell_field5}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$notes_class}	"
+		 r-ori-vert		 {$attended_class}	"
 
 	
 	data-cellId="grid_footcell_field5" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
@@ -1405,7 +3959,7 @@
 	{$cell_grid_footcell_field6}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$recorded_at_class}	"
+		 r-ori-vert		 {$day_number_class}	"
 
 	
 	data-cellId="grid_footcell_field6" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
@@ -1420,7 +3974,7 @@
 	{$cell_grid_footcell_field7}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$recorded_by_class}	"
+		 r-ori-vert		 {$attendance_date_class}	"
 
 	
 	data-cellId="grid_footcell_field7" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
@@ -1429,6 +3983,276 @@
 	
 	</td>
 	{END cellblock_grid_footcell_field7}
+									{BEGIN cellblock_grid_footcell_field8}
+	<td
+	
+	{$cell_grid_footcell_field8}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$role_name_class}	"
+
+	
+	data-cellId="grid_footcell_field8" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field8}
+									{BEGIN cellblock_grid_footcell_field9}
+	<td
+	
+	{$cell_grid_footcell_field9}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$facility_name_class}	"
+
+	
+	data-cellId="grid_footcell_field9" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field9}
+									{BEGIN cellblock_grid_footcell_field10}
+	<td
+	
+	{$cell_grid_footcell_field10}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_lead_name_class}	"
+
+	
+	data-cellId="grid_footcell_field10" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field10}
+									{BEGIN cellblock_grid_footcell_field11}
+	<td
+	
+	{$cell_grid_footcell_field11}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_type_class}	"
+
+	
+	data-cellId="grid_footcell_field11" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field11}
+									{BEGIN cellblock_grid_footcell_field12}
+	<td
+	
+	{$cell_grid_footcell_field12}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_approach_class}	"
+
+	
+	data-cellId="grid_footcell_field12" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field12}
+									{BEGIN cellblock_grid_footcell_field13}
+	<td
+	
+	{$cell_grid_footcell_field13}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$program_name_class}	"
+
+	
+	data-cellId="grid_footcell_field13" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field13}
+									{BEGIN cellblock_grid_footcell_field14}
+	<td
+	
+	{$cell_grid_footcell_field14}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$partner_name_class}	"
+
+	
+	data-cellId="grid_footcell_field14" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field14}
+									{BEGIN cellblock_grid_footcell_field15}
+	<td
+	
+	{$cell_grid_footcell_field15}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$host_region_class}	"
+
+	
+	data-cellId="grid_footcell_field15" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field15}
+									{BEGIN cellblock_grid_footcell_field16}
+	<td
+	
+	{$cell_grid_footcell_field16}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$host_country_class}	"
+
+	
+	data-cellId="grid_footcell_field16" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field16}
+									{BEGIN cellblock_grid_footcell_field17}
+	<td
+	
+	{$cell_grid_footcell_field17}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$venue_name_class}	"
+
+	
+	data-cellId="grid_footcell_field17" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field17}
+									{BEGIN cellblock_grid_footcell_field18}
+	<td
+	
+	{$cell_grid_footcell_field18}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$quarter_class}	"
+
+	
+	data-cellId="grid_footcell_field18" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field18}
+									{BEGIN cellblock_grid_footcell_field19}
+	<td
+	
+	{$cell_grid_footcell_field19}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$start_date_class}	"
+
+	
+	data-cellId="grid_footcell_field19" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field19}
+									{BEGIN cellblock_grid_footcell_field20}
+	<td
+	
+	{$cell_grid_footcell_field20}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$end_date_class}	"
+
+	
+	data-cellId="grid_footcell_field20" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field20}
+									{BEGIN cellblock_grid_footcell_field21}
+	<td
+	
+	{$cell_grid_footcell_field21}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$notes_class}	"
+
+	
+	data-cellId="grid_footcell_field21" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field21}
+									{BEGIN cellblock_grid_footcell_field22}
+	<td
+	
+	{$cell_grid_footcell_field22}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$recorded_by_class}	"
+
+	
+	data-cellId="grid_footcell_field22" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field22}
+									{BEGIN cellblock_grid_footcell_field23}
+	<td
+	
+	{$cell_grid_footcell_field23}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$recorded_at_class}	"
+
+	
+	data-cellId="grid_footcell_field23" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field23}
+									{BEGIN cellblock_grid_footcell_field24}
+	<td
+	
+	{$cell_grid_footcell_field24}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$program_id_class}	"
+
+	
+	data-cellId="grid_footcell_field24" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field24}
+									{BEGIN cellblock_grid_footcell_field25}
+	<td
+	
+	{$cell_grid_footcell_field25}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$participation_id_class}	"
+
+	
+	data-cellId="grid_footcell_field25" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_attendance_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field25}
 							</tr>
 					
 					</tfoot>

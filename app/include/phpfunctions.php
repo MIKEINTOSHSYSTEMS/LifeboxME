@@ -1170,6 +1170,10 @@ function GetDefaultValue($field, $ptype, $table="")
 	{
 		return strftime("%Y-%m-%d");
 	}
+				if($table=="public.training_participants" && $field=="training_date")
+	{
+		return strftime("%Y-%m-%d");
+	}
 				if($table=="public.training_participants" && $field=="created_at")
 	{
 		return strftime("%Y-%m-%d");
@@ -1183,6 +1187,10 @@ function GetDefaultValue($field, $ptype, $table="")
 		return strftime("%Y-%m-%d");
 	}
 				if($table=="public.training_attendance" && $field=="recorded_at")
+	{
+		return strftime("%Y-%m-%d");
+	}
+				if($table=="public.training_participation" && $field=="created_at")
 	{
 		return strftime("%Y-%m-%d");
 	}

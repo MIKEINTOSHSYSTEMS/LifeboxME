@@ -328,24 +328,24 @@
 
 {END participant_id_fieldblock}
 											
-{BEGIN training_id_fieldblock}
+{BEGIN title_salutation_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_training_id}  r-vertical-field" data-fieldname="training_id" data-signal-error-for="training_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="training_id" data-fieldname="training_id" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_title_salutation}  r-vertical-field" data-fieldname="title_salutation" data-signal-error-for="title_salutation{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="title_salutation" data-fieldname="title_salutation" data-compact >
 
 	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_training_id}">
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_title_salutation}">
 		
-		{BEGIN training_id_label}{$label public_training_participants training_id }{END training_id_label}
+		{BEGIN title_salutation_label}{$label public_training_participants title_salutation }{END title_salutation_label}
 	</label>
 	<div class="col-md-offset-3 col-md-6" >
-		{$training_id_value}	</div>
+		{$title_salutation_value}	</div>
 
 		
 </div>
 
 
-{END training_id_fieldblock}
+{END title_salutation_fieldblock}
 											
 {BEGIN first_name_fieldblock}
 
@@ -365,6 +365,25 @@
 
 
 {END first_name_fieldblock}
+											
+{BEGIN middle_name_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_middle_name}  r-vertical-field" data-fieldname="middle_name" data-signal-error-for="middle_name{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field18" {$item_integrated_edit_field18} data-pageid="{$pageid}" data-field="middle_name" data-fieldname="middle_name" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_middle_name}">
+		
+		{BEGIN middle_name_label}{$label public_training_participants middle_name }{END middle_name_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$middle_name_value}	</div>
+
+		
+</div>
+
+
+{END middle_name_fieldblock}
 											
 {BEGIN last_name_fieldblock}
 
@@ -536,25 +555,6 @@
 
 
 {END training_date_fieldblock}
-											
-{BEGIN day_number_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_day_number}  r-vertical-field" data-fieldname="day_number" data-signal-error-for="day_number{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="day_number" data-fieldname="day_number" data-compact >
-
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_day_number}">
-		
-		{BEGIN day_number_label}{$label public_training_participants day_number }{END day_number_label}
-	</label>
-	<div class="col-md-offset-3 col-md-6" >
-		{$day_number_value}	</div>
-
-		
-</div>
-
-
-{END day_number_fieldblock}
 											
 {BEGIN ceu_points_fieldblock}
 

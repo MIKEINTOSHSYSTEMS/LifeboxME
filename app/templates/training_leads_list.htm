@@ -688,18 +688,52 @@
 	{$cell_grid_headcell_field}
 	{$recordattrs}
 	class="
+		 r-ori-vert		 {$staff_id_class}	"
+
+			data-field="staff_id"
+	
+	data-cellId="grid_headcell_field" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN staff_id_fieldheadercolumn}
+	{BEGIN staff_id_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field4" {$item_simple_grid_field4} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="staff_id" data-fieldname="staff_id" 
+
+			{$staff_id_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_training_leads staff_id }</span>
+					{$arrow_icon_staff_id}
+			</span>
+	</span>
+	{END staff_id_fieldheader}
+{END staff_id_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field}
+									{BEGIN cellblock_grid_headcell_field1}
+	<th
+	
+	{$cell_grid_headcell_field1}
+	{$recordattrs}
+	class="
 		 r-ori-vert		 {$training_lead_id_class}	"
 
 			data-field="training_lead_id"
 	
-	data-cellId="grid_headcell_field" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field1" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN training_lead_id_fieldheadercolumn}
 	{BEGIN training_lead_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field4" {$item_simple_grid_field4} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_lead_id" data-fieldname="training_lead_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field5" {$item_simple_grid_field5} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_lead_id" data-fieldname="training_lead_id" 
 
 			{$training_lead_id_orderlinkattrs}
 	
@@ -715,25 +749,25 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field}
-									{BEGIN cellblock_grid_headcell_field1}
+	{END cellblock_grid_headcell_field1}
+									{BEGIN cellblock_grid_headcell_field2}
 	<th
 	
-	{$cell_grid_headcell_field1}
+	{$cell_grid_headcell_field2}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$training_id_class}	"
 
 			data-field="training_id"
 	
-	data-cellId="grid_headcell_field1" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field2" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN training_id_fieldheadercolumn}
 	{BEGIN training_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field5" {$item_simple_grid_field5} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_id" data-fieldname="training_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field6" {$item_simple_grid_field6} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_id" data-fieldname="training_id" 
 
 			{$training_id_orderlinkattrs}
 	
@@ -746,40 +780,6 @@
 	</span>
 	{END training_id_fieldheader}
 {END training_id_fieldheadercolumn}
-
-	
-	</th>
-	{END cellblock_grid_headcell_field1}
-									{BEGIN cellblock_grid_headcell_field2}
-	<th
-	
-	{$cell_grid_headcell_field2}
-	{$recordattrs}
-	class="
-		 r-ori-vert		 {$staff_id_class}	"
-
-			data-field="staff_id"
-	
-	data-cellId="grid_headcell_field2" data-pageid="{$pageid}" data-record-id="{$recId}"	
-	>
-
-	 
-		{BEGIN staff_id_fieldheadercolumn}
-	{BEGIN staff_id_fieldheader}
-<span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field6" {$item_simple_grid_field6} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="staff_id" data-fieldname="staff_id" 
-
-			{$staff_id_orderlinkattrs}
-	
-	
-	>
-	<span class="text-label">
-		<span>{$label public_training_leads staff_id }</span>
-					{$arrow_icon_staff_id}
-			</span>
-	</span>
-	{END staff_id_fieldheader}
-{END staff_id_fieldheadercolumn}
 
 	
 	</th>
@@ -906,11 +906,32 @@
 	{$cell_grid_cell_field}
 	{$recordattrs}
 	class="
+		 r-ori-vert		 {$staff_id_class}	"
+
+			data-field="staff_id"
+	
+	data-cellId="grid_cell_field" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN staff_id_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field2" {$item_simple_grid_field2} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="staff_id" data-fieldname="staff_id" data-default-width >
+{$staff_id_value}
+</span>
+{END staff_id_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field}
+									{BEGIN cellblock_grid_cell_field1}
+	<td
+	
+	{$cell_grid_cell_field1}
+	{$recordattrs}
+	class="
 		 r-ori-vert		 {$training_lead_id_class}	"
 
 			data-field="training_lead_id"
 	
-	data-cellId="grid_cell_field" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field1" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -920,18 +941,18 @@
 </span>
 {END training_lead_id_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field}
-									{BEGIN cellblock_grid_cell_field1}
+	{END cellblock_grid_cell_field1}
+									{BEGIN cellblock_grid_cell_field2}
 	<td
 	
-	{$cell_grid_cell_field1}
+	{$cell_grid_cell_field2}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$training_id_class}	"
 
 			data-field="training_id"
 	
-	data-cellId="grid_cell_field1" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field2" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -940,27 +961,6 @@
 {$training_id_value}
 </span>
 {END training_id_fieldcolumn}	
-	</td>
-	{END cellblock_grid_cell_field1}
-									{BEGIN cellblock_grid_cell_field2}
-	<td
-	
-	{$cell_grid_cell_field2}
-	{$recordattrs}
-	class="
-		 r-ori-vert		 {$staff_id_class}	"
-
-			data-field="staff_id"
-	
-	data-cellId="grid_cell_field2" data-pageid="{$pageid}" data-record-id="{$recId}"	
-	>
-
-	 
-		{BEGIN staff_id_fieldcolumn}
-<span data-itemtype="grid_field" data-itemid="simple_grid_field2" {$item_simple_grid_field2} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="staff_id" data-fieldname="staff_id" data-default-width >
-{$staff_id_value}
-</span>
-{END staff_id_fieldcolumn}	
 	</td>
 	{END cellblock_grid_cell_field2}
 									{BEGIN cellblock_grid_cell_field3}
@@ -1031,7 +1031,7 @@
 	{$cell_grid_footcell_field}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$training_lead_id_class}	"
+		 r-ori-vert		 {$staff_id_class}	"
 
 	
 	data-cellId="grid_footcell_field" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_leads_list"	
@@ -1046,7 +1046,7 @@
 	{$cell_grid_footcell_field1}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$training_id_class}	"
+		 r-ori-vert		 {$training_lead_id_class}	"
 
 	
 	data-cellId="grid_footcell_field1" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_leads_list"	
@@ -1061,7 +1061,7 @@
 	{$cell_grid_footcell_field2}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$staff_id_class}	"
+		 r-ori-vert		 {$training_id_class}	"
 
 	
 	data-cellId="grid_footcell_field2" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_leads_list"	

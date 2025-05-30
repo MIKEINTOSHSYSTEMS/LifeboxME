@@ -3650,12 +3650,14 @@ function fillProjectEntites()
 	$projectEntitiesReverse[ "venues" ] = "public.venues";
 	$projectEntities[ "public.training_attendance" ] = array( "url" => "training_attendance", "type" => 0 );
 	$projectEntitiesReverse[ "training_attendance" ] = "public.training_attendance";
-	$projectEntities[ "public.daily_attendance_view" ] = array( "url" => "daily_attendance_view", "type" => 0 );
-	$projectEntitiesReverse[ "daily_attendance_view" ] = "public.daily_attendance_view";
 	$projectEntities[ "public.participant_attendance_detail" ] = array( "url" => "participant_attendance_detail", "type" => 0 );
 	$projectEntitiesReverse[ "participant_attendance_detail" ] = "public.participant_attendance_detail";
 	$projectEntities[ "public.participant_attendance_summary" ] = array( "url" => "participant_attendance_summary", "type" => 0 );
 	$projectEntitiesReverse[ "participant_attendance_summary" ] = "public.participant_attendance_summary";
+	$projectEntities[ "public.training_participation" ] = array( "url" => "training_participation", "type" => 0 );
+	$projectEntitiesReverse[ "training_participation" ] = "public.training_participation";
+	$projectEntities[ "public.daily_attendance_view" ] = array( "url" => "daily_attendance_view", "type" => 0 );
+	$projectEntitiesReverse[ "daily_attendance_view" ] = "public.daily_attendance_view";
 }
 
 function findTable( $table ) {

@@ -348,9 +348,6 @@ $tdataparticipant_attendance_detail[".hideMobileList"] = array();
 	
 	
 	
-				//dependent dropdowns @deprecated data ?
-	$edata["DependentLookups"] = array();
-	$edata["DependentLookups"][] = "day_number";
 
 	
 	
@@ -646,7 +643,7 @@ $tdataparticipant_attendance_detail[".hideMobileList"] = array();
 		
 	$edata["LinkField"] = "training_id";
 	$edata["LinkFieldType"] = 0;
-	$edata["DisplayField"] = "training_id";
+	$edata["DisplayField"] = "training_details";
 
 	
 
@@ -962,7 +959,7 @@ $tdataparticipant_attendance_detail[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Lookup wizard");
+	$edata = array("EditFormat" => "Text field");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -972,37 +969,6 @@ $tdataparticipant_attendance_detail[".hideMobileList"] = array();
 	
 	
 
-// Begin Lookup settings
-				$edata["LookupType"] = 2;
-	$edata["LookupTable"] = "public.participant_attendance_summary";
-			$edata["autoCompleteFieldsOnEdit"] = 0;
-	$edata["autoCompleteFields"] = array();
-		$edata["LCType"] = 0;
-
-	
-		
-	$edata["LinkField"] = "participant_id";
-	$edata["LinkFieldType"] = 0;
-	$edata["DisplayField"] = "total_days";
-
-	
-
-	
-	$edata["LookupOrderBy"] = "";
-
-	
-		$edata["UseCategory"] = true;
-	$edata["categoryFields"] = array();
-	$edata["categoryFields"][] = array( "main" => "participant_id", "lookup" => "participant_id" );
-
-	
-	
-
-	
-	
-		$edata["SelectSize"] = 1;
-
-// End Lookup Settings
 
 
 	
@@ -1017,14 +983,17 @@ $tdataparticipant_attendance_detail[".hideMobileList"] = array();
 	
 	
 	
-	
-	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
 	$edata["validateAs"] = array();
 	$edata["validateAs"]["basicValidate"] = array();
 	$edata["validateAs"]["customMessages"] = array();
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
 							
 	
 //	End validation

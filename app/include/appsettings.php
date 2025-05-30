@@ -749,9 +749,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "34_1748454649";
+$projectBuildKey = "64_1748550476";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "34";
+$projectBuildNumber = "64";
 
 $mlang_messages = array();
 $mlang_charsets = array();
@@ -813,9 +813,10 @@ $tableCaptions["English"]["public_sex"] = "Sex";
 $tableCaptions["English"]["public_training_participants"] = "Training Participants";
 $tableCaptions["English"]["public_venues"] = "Venues";
 $tableCaptions["English"]["public_training_attendance"] = "Training Attendance";
-$tableCaptions["English"]["public_daily_attendance_view"] = "Daily Attendance View";
 $tableCaptions["English"]["public_participant_attendance_detail"] = "Participant Attendance Detail";
 $tableCaptions["English"]["public_participant_attendance_summary"] = "Participant Attendance Summary";
+$tableCaptions["English"]["public_training_participation"] = "Training Participation";
+$tableCaptions["English"]["public_daily_attendance_view"] = "Daily Attendance View";
 
 
 $globalEvents = new class_GlobalEvents;

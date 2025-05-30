@@ -328,43 +328,81 @@
 
 {END attendance_id_fieldblock}
 											
-{BEGIN participant_id_fieldblock}
+{BEGIN participant_full_name_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_participant_id}  r-vertical-field" data-fieldname="participant_id" data-signal-error-for="participant_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="participant_id" data-fieldname="participant_id" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_participant_full_name}  r-vertical-field" data-fieldname="participant_full_name" data-signal-error-for="participant_full_name{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="participant_full_name" data-fieldname="participant_full_name" data-compact >
 
 	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_participant_id}">
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_participant_full_name}">
 		
-		{BEGIN participant_id_label}{$label public_training_attendance participant_id }{END participant_id_label}
+		{BEGIN participant_full_name_label}{$label public_training_attendance participant_full_name }{END participant_full_name_label}
 	</label>
 	<div class="col-md-offset-3 col-md-6" >
-		{$participant_id_value}	</div>
+		{$participant_full_name_value}	</div>
 
 		
 </div>
 
 
-{END participant_id_fieldblock}
+{END participant_full_name_fieldblock}
 											
-{BEGIN day_number_fieldblock}
+{BEGIN sex_name_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_day_number}  r-vertical-field" data-fieldname="day_number" data-signal-error-for="day_number{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="day_number" data-fieldname="day_number" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_sex_name}  r-vertical-field" data-fieldname="sex_name" data-signal-error-for="sex_name{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="sex_name" data-fieldname="sex_name" data-compact >
 
 	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_day_number}">
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_sex_name}">
 		
-		{BEGIN day_number_label}{$label public_training_attendance day_number }{END day_number_label}
+		{BEGIN sex_name_label}{$label public_training_attendance sex_name }{END sex_name_label}
 	</label>
 	<div class="col-md-offset-3 col-md-6" >
-		{$day_number_value}	</div>
+		{$sex_name_value}	</div>
 
 		
 </div>
 
 
-{END day_number_fieldblock}
+{END sex_name_fieldblock}
+											
+{BEGIN role_name_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_role_name}  r-vertical-field" data-fieldname="role_name" data-signal-error-for="role_name{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="role_name" data-fieldname="role_name" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_role_name}">
+		
+		{BEGIN role_name_label}{$label public_training_attendance role_name }{END role_name_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$role_name_value}	</div>
+
+		
+</div>
+
+
+{END role_name_fieldblock}
+											
+{BEGIN facility_name_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_facility_name}  r-vertical-field" data-fieldname="facility_name" data-signal-error-for="facility_name{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="facility_name" data-fieldname="facility_name" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_facility_name}">
+		
+		{BEGIN facility_name_label}{$label public_training_attendance facility_name }{END facility_name_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$facility_name_value}	</div>
+
+		
+</div>
+
+
+{END facility_name_fieldblock}
 											
 {BEGIN attended_fieldblock}
 
@@ -385,6 +423,63 @@
 
 {END attended_fieldblock}
 											
+{BEGIN day_number_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_day_number}  r-vertical-field" data-fieldname="day_number" data-signal-error-for="day_number{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="day_number" data-fieldname="day_number" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_day_number}">
+		
+		{BEGIN day_number_label}{$label public_training_attendance day_number }{END day_number_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$day_number_value}	</div>
+
+		
+</div>
+
+
+{END day_number_fieldblock}
+											
+{BEGIN course_name_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_course_name}  r-vertical-field" data-fieldname="course_name" data-signal-error-for="course_name{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field13" {$item_integrated_edit_field13} data-pageid="{$pageid}" data-field="course_name" data-fieldname="course_name" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_course_name}">
+		
+		{BEGIN course_name_label}{$label public_training_attendance course_name }{END course_name_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$course_name_value}	</div>
+
+		
+</div>
+
+
+{END course_name_fieldblock}
+											
+{BEGIN program_name_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_program_name}  r-vertical-field" data-fieldname="program_name" data-signal-error-for="program_name{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field14" {$item_integrated_edit_field14} data-pageid="{$pageid}" data-field="program_name" data-fieldname="program_name" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_program_name}">
+		
+		{BEGIN program_name_label}{$label public_training_attendance program_name }{END program_name_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$program_name_value}	</div>
+
+		
+</div>
+
+
+{END program_name_fieldblock}
+											
 {BEGIN attendance_date_fieldblock}
 
 
@@ -403,6 +498,63 @@
 
 
 {END attendance_date_fieldblock}
+											
+{BEGIN quarter_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_quarter}  r-vertical-field" data-fieldname="quarter" data-signal-error-for="quarter{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field16" {$item_integrated_edit_field16} data-pageid="{$pageid}" data-field="quarter" data-fieldname="quarter" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_quarter}">
+		
+		{BEGIN quarter_label}{$label public_training_attendance quarter }{END quarter_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$quarter_value}	</div>
+
+		
+</div>
+
+
+{END quarter_fieldblock}
+											
+{BEGIN start_date_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_start_date}  r-vertical-field" data-fieldname="start_date" data-signal-error-for="start_date{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field17" {$item_integrated_edit_field17} data-pageid="{$pageid}" data-field="start_date" data-fieldname="start_date" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_start_date}">
+		
+		{BEGIN start_date_label}{$label public_training_attendance start_date }{END start_date_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$start_date_value}	</div>
+
+		
+</div>
+
+
+{END start_date_fieldblock}
+											
+{BEGIN end_date_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_end_date}  r-vertical-field" data-fieldname="end_date" data-signal-error-for="end_date{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field18" {$item_integrated_edit_field18} data-pageid="{$pageid}" data-field="end_date" data-fieldname="end_date" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_end_date}">
+		
+		{BEGIN end_date_label}{$label public_training_attendance end_date }{END end_date_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$end_date_value}	</div>
+
+		
+</div>
+
+
+{END end_date_fieldblock}
 											
 {BEGIN notes_fieldblock}
 
@@ -460,6 +612,196 @@
 
 
 {END recorded_by_fieldblock}
+											
+{BEGIN training_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_training_id}  r-vertical-field" data-fieldname="training_id" data-signal-error-for="training_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="training_id" data-fieldname="training_id" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_training_id}">
+		
+		{BEGIN training_id_label}{$label public_training_attendance training_id }{END training_id_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$training_id_value}	</div>
+
+		
+</div>
+
+
+{END training_id_fieldblock}
+											
+{BEGIN program_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_program_id}  r-vertical-field" data-fieldname="program_id" data-signal-error-for="program_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field15" {$item_integrated_edit_field15} data-pageid="{$pageid}" data-field="program_id" data-fieldname="program_id" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_program_id}">
+		
+		{BEGIN program_id_label}{$label public_training_attendance program_id }{END program_id_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$program_id_value}	</div>
+
+		
+</div>
+
+
+{END program_id_fieldblock}
+											
+{BEGIN participation_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_participation_id}  r-vertical-field" data-fieldname="participation_id" data-signal-error-for="participation_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="participation_id" data-fieldname="participation_id" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_participation_id}">
+		
+		{BEGIN participation_id_label}{$label public_training_attendance participation_id }{END participation_id_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$participation_id_value}	</div>
+
+		
+</div>
+
+
+{END participation_id_fieldblock}
+											
+{BEGIN training_type_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_training_type}  r-vertical-field" data-fieldname="training_type" data-signal-error-for="training_type{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field19" {$item_integrated_edit_field19} data-pageid="{$pageid}" data-field="training_type" data-fieldname="training_type" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_training_type}">
+		
+		{BEGIN training_type_label}{$label public_training_attendance training_type }{END training_type_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$training_type_value}	</div>
+
+		
+</div>
+
+
+{END training_type_fieldblock}
+											
+{BEGIN training_approach_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_training_approach}  r-vertical-field" data-fieldname="training_approach" data-signal-error-for="training_approach{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field20" {$item_integrated_edit_field20} data-pageid="{$pageid}" data-field="training_approach" data-fieldname="training_approach" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_training_approach}">
+		
+		{BEGIN training_approach_label}{$label public_training_attendance training_approach }{END training_approach_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$training_approach_value}	</div>
+
+		
+</div>
+
+
+{END training_approach_fieldblock}
+											
+{BEGIN host_country_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_host_country}  r-vertical-field" data-fieldname="host_country" data-signal-error-for="host_country{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field21" {$item_integrated_edit_field21} data-pageid="{$pageid}" data-field="host_country" data-fieldname="host_country" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_host_country}">
+		
+		{BEGIN host_country_label}{$label public_training_attendance host_country }{END host_country_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$host_country_value}	</div>
+
+		
+</div>
+
+
+{END host_country_fieldblock}
+											
+{BEGIN host_region_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_host_region}  r-vertical-field" data-fieldname="host_region" data-signal-error-for="host_region{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field22" {$item_integrated_edit_field22} data-pageid="{$pageid}" data-field="host_region" data-fieldname="host_region" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_host_region}">
+		
+		{BEGIN host_region_label}{$label public_training_attendance host_region }{END host_region_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$host_region_value}	</div>
+
+		
+</div>
+
+
+{END host_region_fieldblock}
+											
+{BEGIN venue_name_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_venue_name}  r-vertical-field" data-fieldname="venue_name" data-signal-error-for="venue_name{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field23" {$item_integrated_edit_field23} data-pageid="{$pageid}" data-field="venue_name" data-fieldname="venue_name" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_venue_name}">
+		
+		{BEGIN venue_name_label}{$label public_training_attendance venue_name }{END venue_name_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$venue_name_value}	</div>
+
+		
+</div>
+
+
+{END venue_name_fieldblock}
+											
+{BEGIN partner_name_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_partner_name}  r-vertical-field" data-fieldname="partner_name" data-signal-error-for="partner_name{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field24" {$item_integrated_edit_field24} data-pageid="{$pageid}" data-field="partner_name" data-fieldname="partner_name" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_partner_name}">
+		
+		{BEGIN partner_name_label}{$label public_training_attendance partner_name }{END partner_name_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$partner_name_value}	</div>
+
+		
+</div>
+
+
+{END partner_name_fieldblock}
+											
+{BEGIN training_lead_name_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_training_lead_name}  r-vertical-field" data-fieldname="training_lead_name" data-signal-error-for="training_lead_name{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field25" {$item_integrated_edit_field25} data-pageid="{$pageid}" data-field="training_lead_name" data-fieldname="training_lead_name" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_training_lead_name}">
+		
+		{BEGIN training_lead_name_label}{$label public_training_attendance training_lead_name }{END training_lead_name_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$training_lead_name_value}	</div>
+
+		
+</div>
+
+
+{END training_lead_name_fieldblock}
 	
 								</td>
 			{END cellblock_grid_c3}
@@ -497,10 +839,24 @@
 		</div>			 
 				<div 
 	data-cellId="below-grid_c2" data-pageid="{$pageid}"	{$cell_below-grid_c2}
-	class="r-align-right r-ori-vert			col-md-6
+	class="r-align-right			col-md-6
 	
 ">
 		 
+		<span data-itemtype="prev" data-itemid="prev" {$item_prev} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	{$prevbutton_class}" {$prevbutton_attrs} >
+					<span class="glyphicon glyphicon-menu-left"></span>
+										</a>
+</span>
+	 
+		<span data-itemtype="next" data-itemid="next" {$item_next} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	{$nextbutton_class}" {$nextbutton_attrs} >
+					<span class="glyphicon glyphicon-menu-right"></span>
+										</a>
+</span>
+	 
 		<span data-itemtype="hamburger" data-itemid="hamburger" {$item_hamburger} data-pageid="{$pageid}" data-small data-button-item>
 	<span class="dropdown dropup">
 		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		

@@ -1037,16 +1037,19 @@ pdfDocument = {
 			{"text":"","hidden":"{$item_hide_grid_details_link4}"},
 				
 				
-			{"text":"","hidden":"{$item_hide_grid_details_link}"},
+			{"text":"","hidden":"{$item_hide_grid_details_link5}"},
+				
+				
+			{"text":"","hidden":"{$item_hide_grid_details_link3}"},
 				
 				
 			{"text":"","hidden":"{$item_hide_grid_details_link1}"},
 				
 				
+			{"text":"","hidden":"{$item_hide_grid_details_link}"},
+				
+				
 			{"text":"","hidden":"{$item_hide_grid_details_link2}"},
-				
-				
-			{"text":"","hidden":"{$item_hide_grid_details_link3}"},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1637,9 +1640,14 @@ pdfDocument = {
 		{END details_training_participants},
 				
 				
-			 {BEGIN details_training_languages}
-			{$displayDetailTable_training_languages }
-		{END details_training_languages},
+			 {BEGIN details_training_participation}
+			{$displayDetailTable_training_participation }
+		{END details_training_participation},
+				
+				
+			 {BEGIN details_training_trainers}
+			{$displayDetailTable_training_trainers }
+		{END details_training_trainers},
 				
 				
 			 {BEGIN details_training_leads}
@@ -1647,14 +1655,14 @@ pdfDocument = {
 		{END details_training_leads},
 				
 				
+			 {BEGIN details_training_languages}
+			{$displayDetailTable_training_languages }
+		{END details_training_languages},
+				
+				
 			 {BEGIN details_training_partners}
 			{$displayDetailTable_training_partners }
 		{END details_training_partners},
-				
-				
-			 {BEGIN details_training_trainers}
-			{$displayDetailTable_training_trainers }
-		{END details_training_trainers},
 				
 		  ],
   "border": [ true, true, true, true ],

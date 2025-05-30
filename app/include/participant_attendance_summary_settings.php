@@ -28,7 +28,7 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelsparticipant_attendance_summary["English"]["participant_id"] = "Participant Id";
 	$fieldToolTipsparticipant_attendance_summary["English"]["participant_id"] = "";
 	$placeHoldersparticipant_attendance_summary["English"]["participant_id"] = "";
-	$fieldLabelsparticipant_attendance_summary["English"]["training_id"] = "Training Id";
+	$fieldLabelsparticipant_attendance_summary["English"]["training_id"] = "Training Session";
 	$fieldToolTipsparticipant_attendance_summary["English"]["training_id"] = "";
 	$placeHoldersparticipant_attendance_summary["English"]["training_id"] = "";
 	$fieldLabelsparticipant_attendance_summary["English"]["first_name"] = "First Name";
@@ -58,7 +58,7 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelsparticipant_attendance_summary["English"]["days_attended"] = "Days Attended";
 	$fieldToolTipsparticipant_attendance_summary["English"]["days_attended"] = "";
 	$placeHoldersparticipant_attendance_summary["English"]["days_attended"] = "";
-	$fieldLabelsparticipant_attendance_summary["English"]["attendance_percentage"] = "Attendance Percentage";
+	$fieldLabelsparticipant_attendance_summary["English"]["attendance_percentage"] = "Attendance Percentage (%)";
 	$fieldToolTipsparticipant_attendance_summary["English"]["attendance_percentage"] = "";
 	$placeHoldersparticipant_attendance_summary["English"]["attendance_percentage"] = "";
 	$fieldLabelsparticipant_attendance_summary["English"]["attendance_status"] = "Attendance Status";
@@ -503,9 +503,6 @@ $tdataparticipant_attendance_summary[".hideMobileList"] = array();
 	
 	
 	
-				//dependent dropdowns @deprecated data ?
-	$edata["DependentLookups"] = array();
-	$edata["DependentLookups"][] = "training_name";
 
 	
 	
@@ -1054,7 +1051,7 @@ $tdataparticipant_attendance_summary[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Lookup wizard");
+	$edata = array("EditFormat" => "Text area");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -1064,37 +1061,6 @@ $tdataparticipant_attendance_summary[".hideMobileList"] = array();
 	
 	
 
-// Begin Lookup settings
-				$edata["LookupType"] = 2;
-	$edata["LookupTable"] = "public.training_sessions";
-			$edata["autoCompleteFieldsOnEdit"] = 0;
-	$edata["autoCompleteFields"] = array();
-		$edata["LCType"] = 0;
-
-	
-		
-	$edata["LinkField"] = "training_id";
-	$edata["LinkFieldType"] = 0;
-	$edata["DisplayField"] = "training_details";
-
-	
-
-	
-	$edata["LookupOrderBy"] = "";
-
-	
-		$edata["UseCategory"] = true;
-	$edata["categoryFields"] = array();
-	$edata["categoryFields"][] = array( "main" => "training_id", "lookup" => "training_id" );
-
-	
-	
-
-	
-	
-		$edata["SelectSize"] = 1;
-
-// End Lookup Settings
 
 
 	
@@ -1108,7 +1074,9 @@ $tdataparticipant_attendance_summary[".hideMobileList"] = array();
 	
 	
 	
-	
+				$edata["nRows"] = 100;
+			$edata["nCols"] = 200;
+
 	
 	
 		$edata["controlWidth"] = 200;

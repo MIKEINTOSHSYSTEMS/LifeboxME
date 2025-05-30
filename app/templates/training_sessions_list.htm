@@ -853,6 +853,13 @@
 					Training Participants				</label>
 			</div>
 			{END print_details_training_participants}
+														{BEGIN print_details_training_participation}
+			<div>
+				<label for="printDetailstraining_participation{$id}">
+					<input type="checkbox" value="training_participation" id="printDetailstraining_participation{$id}" checked>
+					Training Participation				</label>
+			</div>
+			{END print_details_training_participation}
 						</div>
 </div>
 {END print_details}
@@ -1815,20 +1822,39 @@
 	 
 		
 		
-	{BEGIN training_languages_dtable_link}
-	<span data-itemtype="grid_details_link" data-itemid="grid_details_link" {$item_grid_details_link} data-pageid="{$pageid}" data-record-id="{$recId}">
-	<a  {$training_languages_link_attrs} data-short-details="training_languages"
-		class="{$training_languages_dlink_class}" 
-		title="{$caption public_training_languages }"			>
+	{BEGIN training_participation_dtable_link}
+	<span data-itemtype="grid_details_link" data-itemid="grid_details_link5" {$item_grid_details_link5} data-pageid="{$pageid}" data-record-id="{$recId}">
+	<a  {$training_participation_link_attrs} data-short-details="training_participation"
+		class="{$training_participation_dlink_class}" 
+		title="{$caption public_training_participation }"			>
 								
-									{BEGIN training_languages_childcount}
-				<span class="details-badge badge training_languages_badge" {$training_languages_childnumber_attr}>
-					{$training_languages_childnumber}				
+									{BEGIN training_participation_childcount}
+				<span class="details-badge badge training_participation_badge" {$training_participation_childnumber_attr}>
+					{$training_participation_childnumber}				
 				</span>
-				{END training_languages_childcount}
+				{END training_participation_childcount}
 						</a>
 	</span>
-	{END training_languages_dtable_link}
+	{END training_participation_dtable_link}
+
+
+	 
+		
+		
+	{BEGIN training_trainers_dtable_link}
+	<span data-itemtype="grid_details_link" data-itemid="grid_details_link3" {$item_grid_details_link3} data-pageid="{$pageid}" data-record-id="{$recId}">
+	<a  {$training_trainers_link_attrs} data-short-details="training_trainers"
+		class="{$training_trainers_dlink_class}" 
+		title="{$caption public_training_trainers }"			>
+								
+									{BEGIN training_trainers_childcount}
+				<span class="details-badge badge training_trainers_badge" {$training_trainers_childnumber_attr}>
+					{$training_trainers_childnumber}				
+				</span>
+				{END training_trainers_childcount}
+						</a>
+	</span>
+	{END training_trainers_dtable_link}
 
 
 	 
@@ -1853,6 +1879,25 @@
 	 
 		
 		
+	{BEGIN training_languages_dtable_link}
+	<span data-itemtype="grid_details_link" data-itemid="grid_details_link" {$item_grid_details_link} data-pageid="{$pageid}" data-record-id="{$recId}">
+	<a  {$training_languages_link_attrs} data-short-details="training_languages"
+		class="{$training_languages_dlink_class}" 
+		title="{$caption public_training_languages }"			>
+								
+									{BEGIN training_languages_childcount}
+				<span class="details-badge badge training_languages_badge" {$training_languages_childnumber_attr}>
+					{$training_languages_childnumber}				
+				</span>
+				{END training_languages_childcount}
+						</a>
+	</span>
+	{END training_languages_dtable_link}
+
+
+	 
+		
+		
 	{BEGIN training_partners_dtable_link}
 	<span data-itemtype="grid_details_link" data-itemid="grid_details_link2" {$item_grid_details_link2} data-pageid="{$pageid}" data-record-id="{$recId}">
 	<a  {$training_partners_link_attrs} data-short-details="training_partners"
@@ -1867,25 +1912,6 @@
 						</a>
 	</span>
 	{END training_partners_dtable_link}
-
-
-	 
-		
-		
-	{BEGIN training_trainers_dtable_link}
-	<span data-itemtype="grid_details_link" data-itemid="grid_details_link3" {$item_grid_details_link3} data-pageid="{$pageid}" data-record-id="{$recId}">
-	<a  {$training_trainers_link_attrs} data-short-details="training_trainers"
-		class="{$training_trainers_dlink_class}" 
-		title="{$caption public_training_trainers }"			>
-								
-									{BEGIN training_trainers_childcount}
-				<span class="details-badge badge training_trainers_badge" {$training_trainers_childnumber_attr}>
-					{$training_trainers_childnumber}				
-				</span>
-				{END training_trainers_childcount}
-						</a>
-	</span>
-	{END training_trainers_dtable_link}
 
 
 	
@@ -2307,23 +2333,26 @@
 	>
 
 	 
-							<div data-itemtype="details_preview" data-itemid="details_preview4" {$item_details_preview4} data-pageid="{$pageid}" data-record-id="{$recId}" 
-	data-orders="training_participants,training_languages,training_leads,training_partners,training_trainers"
-			data-details-training_participants			data-details-training_languages			data-details-training_leads			data-details-training_partners			data-details-training_trainers	>
+								<div data-itemtype="details_preview" data-itemid="details_preview4" {$item_details_preview4} data-pageid="{$pageid}" data-record-id="{$recId}" 
+	data-orders="training_participants,training_participation,training_trainers,training_leads,training_languages,training_partners"
+			data-details-training_participants			data-details-training_participation			data-details-training_trainers			data-details-training_leads			data-details-training_languages			data-details-training_partners	>
 		<span data-details-inside data-short-table="training_participants">
 			</span>
-		<span data-details-inside data-short-table="training_languages">
+		<span data-details-inside data-short-table="training_participation">
+			</span>
+		<span data-details-inside data-short-table="training_trainers">
 			</span>
 		<span data-details-inside data-short-table="training_leads">
 			</span>
-		<span data-details-inside data-short-table="training_partners">
+		<span data-details-inside data-short-table="training_languages">
 			</span>
-		<span data-details-inside data-short-table="training_trainers">
+		<span data-details-inside data-short-table="training_partners">
 			</span>
 		<div data-details-preview>
 	</div>
 </div>
 	 
+			 
 			 
 			 
 			 

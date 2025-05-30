@@ -170,10 +170,13 @@ pdfDocument = {
 			{"hidden":"{$item_hide_integrated_edit_field}","stack":[{"text":"{$jslabel public_training_participants participant_id }","bold":true},{"text":{$participant_id_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
-			{"hidden":"{$item_hide_integrated_edit_field1}","stack":[{"text":"{$jslabel public_training_participants training_id }","bold":true},{"text":{$training_id_pdfvalue}}],"margin":[0,0,0,15]},
+			{"hidden":"{$item_hide_integrated_edit_field12}","stack":[{"text":"{$jslabel public_training_participants title_salutation }","bold":true},{"text":{$title_salutation_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
 			{"hidden":"{$item_hide_integrated_edit_field2}","stack":[{"text":"{$jslabel public_training_participants first_name }","bold":true},{"text":{$first_name_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field18}","stack":[{"text":"{$jslabel public_training_participants middle_name }","bold":true},{"text":{$middle_name_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
 			{"hidden":"{$item_hide_integrated_edit_field3}","stack":[{"text":"{$jslabel public_training_participants last_name }","bold":true},{"text":{$last_name_pdfvalue}}],"margin":[0,0,0,15]},
@@ -201,9 +204,6 @@ pdfDocument = {
 				
 				
 			{"hidden":"{$item_hide_integrated_edit_field11}","stack":[{"text":"{$jslabel public_training_participants training_date }","bold":true},{"text":{$training_date_pdfvalue}}],"margin":[0,0,0,15]},
-				
-				
-			{"hidden":"{$item_hide_integrated_edit_field12}","stack":[{"text":"{$jslabel public_training_participants day_number }","bold":true},{"text":{$day_number_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
 			{"hidden":"{$item_hide_integrated_edit_field13}","stack":[{"text":"{$jslabel public_training_participants ceu_points }","bold":true},{"text":{$ceu_points_pdfvalue}}],"margin":[0,0,0,15]},

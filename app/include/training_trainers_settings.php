@@ -619,7 +619,7 @@ $tdatatraining_trainers[".hideMobileList"] = array();
 		$edata["listPageId"] = "list";
 		$edata["autoCompleteFieldsOnEdit"] = 0;
 	$edata["autoCompleteFields"] = array();
-		$edata["LCType"] = 2;
+		$edata["LCType"] = 0;
 
 	
 		
@@ -635,12 +635,15 @@ $tdatatraining_trainers[".hideMobileList"] = array();
 		$edata["LookupDesc"] = true;
 
 	
-	
+		$edata["AllowToAdd"] = true;
+			$edata["addPageId"] = "add";
+
 	
 
 	
 	
-	
+		$edata["SelectSize"] = 1;
+
 // End Lookup Settings
 
 
