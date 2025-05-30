@@ -1703,12 +1703,12 @@
 
                     <div class="alert alert-warning">
                         <h5><i class="fas fa-exclamation-triangle me-2"></i> Scheduled Maintenance</h5>
-                        <p>There will be a scheduled system maintenance on <strong>October 15, 2023 from 2:00 AM to 4:00 AM GMT</strong>. The system may be unavailable during this period.</p>
+                        <p>There will be a scheduled system maintenance on <strong>October 15, 2025 from 2:00 AM to 4:00 AM GMT</strong>. The system may be unavailable during this period.</p>
                     </div>
 
                     <div class="alert alert-primary">
                         <h5><i class="fas fa-bullhorn me-2"></i> Training Opportunity</h5>
-                        <p>We're offering a free online training session on advanced reporting features on <strong>October 20, 2023</strong>. <a href="#" class="alert-link">Click here to register</a>.</p>
+                        <p>We're offering a free online training session on advanced reporting features on <strong>October 20, 2025</strong>. <a href="#" class="alert-link">Click here to register</a>.</p>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -1821,7 +1821,7 @@
 
         // Countdown Timer
         function updateCountdown() {
-            const launchDate = new Date('October 7, 2023 00:00:00').getTime();
+            const launchDate = new Date('October 7, 2025 00:00:00').getTime();
             const now = new Date().getTime();
             const distance = launchDate - now;
 
