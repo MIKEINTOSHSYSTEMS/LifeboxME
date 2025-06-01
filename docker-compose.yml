@@ -23,7 +23,7 @@ services:
       POSTGRES_DB: lifebox_mesystem
       POSTGRES_USER: postgres  # lifebox_me
       POSTGRES_PASSWORD: mikeintosh
-      POSTGRES_ROOT_PASSWORD: mikeintosh
+      POSTGRES_ROOT_PASSWORD: lifeboxme@sys
       TZ: UTC
     networks:
       lifeboxnet:
