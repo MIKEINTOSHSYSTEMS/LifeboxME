@@ -6,8 +6,9 @@
             "Host": "192.168.47.2",
             "Port": 5432,
             "MaintenanceDB": "lifebox_mesystem",
-            "Username": "lifebox_me",
-            "SSLMode": "prefer"
+            "Username": "postgres",
+            "SSLMode": "prefer",
+            "Password": "mikeintosh"
         }
     }
 }
