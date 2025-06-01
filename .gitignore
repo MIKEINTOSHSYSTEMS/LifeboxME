@@ -3,3 +3,6 @@ settings.xml
 /schema
 app/templates_c/
 demo.php
+data/pgadmin-data/
+data/postgres-data/
+data/pgadmin-init/
