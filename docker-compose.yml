@@ -1,5 +1,19 @@
 version: '3.8'
 
+# docker-compose -p lifebox up -d
+# docker-compose -p lifebox -f docker-compose.yml up -d
+# docker-compose -p lifebox down --volumes --rmi all
+# docker-compose -p lifebox -f docker-compose.yml down --volumes --rmi all
+##########################################################################
+# docker-compose -p lifebox logs -f
+# docker-compose -p lifebox exec -it lifeboxme_db psql -U lifebox_me -d lifebox_mesystem
+# docker-compose -p lifebox exec -it lifeboxme_pgadmin bash
+# docker-compose -p lifebox exec -it lifeboxme_pgadmin python3 /pgadmin4/servers.py
+# docker-compose -p lifebox exec -it lifeboxme_pgadmin python3 /pgadmin4/servers.py --load-servers /pgadmin4/servers.json
+
+# docker-compose up -d
+# docker-compose down --volumes --rmi all
+
 services:
   lifeboxme_db:
     container_name: lifeboxme_db
@@ -32,9 +46,9 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: dev@merqconsultancy.org
       PGADMIN_DEFAULT_PASSWORD: lifeboxme@sys
-      PGADMIN_CONFIG_SERVER_MODE: False
-      PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: True
-      PGADMIN_CONFIG_CONSOLE_LOG_LEVEL: 10
+      PGADMIN_CONFIG_SERVER_MODE: 'False'  
+      PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: 'True'
+      PGADMIN_CONFIG_CONSOLE_LOG_LEVEL: '10'
     networks:
       lifeboxnet:
         ipv4_address: 192.168.47.3
