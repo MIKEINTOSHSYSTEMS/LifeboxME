@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  lifeboxme_db:
+    container_name: lifeboxme_db
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: lifebox_mesystem
+      POSTGRES_USER: lifebox_me
+      POSTGRES_PASSWORD: lifebox_me
+      POSTGRES_ROOT_PASSWORD: mikeintosh
+      TZ: UTC
+    networks:
+      lifeboxnet:
+        ipv4_address: 192.168.47.2
+    volumes:
+      - lifeboxme_db_data:/var/lib/postgresql/data
+      - ./data/postgres-init:/docker-entrypoint-initdb.d
+    ports:
+      - "127.0.0.1:5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  lifeboxme_pgadmin:
+    container_name: lifeboxme_pgadmin
+    image: dpage/pgadmin4:7.3
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: dev@merqconsultancy.org
+      PGADMIN_DEFAULT_PASSWORD: lifeboxme@sys
+      PGADMIN_CONFIG_SERVER_MODE: False
+      PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: True
+      PGADMIN_CONFIG_CONSOLE_LOG_LEVEL: 10
+    networks:
+      lifeboxnet:
+        ipv4_address: 192.168.47.3
+    volumes:
+      - lifeboxme_pgadmin_data:/var/lib/pgadmin
+      - ./pgadmin-servers.json:/pgadmin4/servers.json
+    ports:
+      - "5445:80"
+    depends_on:
+      lifeboxme_db:
+        condition: service_healthy
+
+networks:
+  lifeboxnet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.47.0/24
+          gateway: 192.168.47.1
+
+volumes:
+  lifeboxme_db_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data/postgres-data
+  lifeboxme_pgadmin_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data/pgadmin-data
