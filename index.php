@@ -12,913 +12,33 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
-    <style>
-        :root {
-            --primary-color: #0079a5;
-            --secondary-color: #1e6a7d;
-            --accent-color: #ff6b35;
-            --light-color: #f8f9fa;
-            --dark-color: #343a40;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow-x: hidden;
-        }
-
-        /* Preloader Styles */
-
-        /*
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: white;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .preloader-logo {
-            width: 150px;
-            height: 150px;
-            margin-bottom: 20px;
-            animation: pulse 2s infinite;
-        }
-
-        .preloader-text {
-            font-size: 24px;
-            font-weight: bold;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .preloader-text span {
-            display: inline-block;
-            opacity: 0;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.1);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        */
-
-        /* Preloader Styles */
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: white;
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        .preloader-container {
-            text-align: center;
-        }
-
-        .preloader-logo {
-            width: 200px;
-            height: auto;
-            margin-bottom: 20px;
-        }
-
-        .preloader-text {
-            font-size: 24px;
-            font-weight: bold;
-            color: #078ca7;
-            margin-top: 20px;
-        }
-
-        .preloader-text span {
-            display: inline-block;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        /* Animation for logo elements */
-        .preloader-logo #Lifebox_Yellow {
-            animation: fadeIn 0.5s 0.1s forwards, float 3s 0.1s infinite ease-in-out;
-        }
-
-        .preloader-logo #Lifebox_Light_Red {
-            animation: fadeIn 0.5s 0.2s forwards, float 3s 0.2s infinite ease-in-out;
-        }
-
-        .preloader-logo #Lifebox_Dark_Green {
-            animation: fadeIn 0.5s 0.3s forwards, float 3s 0.3s infinite ease-in-out;
-        }
-
-        .preloader-logo #Lifebox_Light_Green {
-            animation: fadeIn 0.5s 0.4s forwards, float 3s 0.4s infinite ease-in-out;
-        }
-
-        .preloader-logo #Lifebox_Red {
-            animation: fadeIn 0.5s 0.5s forwards, float 3s 0.5s infinite ease-in-out;
-        }
-
-        .preloader-logo #X1,
-        .preloader-logo #X2 {
-            animation: fadeIn 0.5s 0.6s forwards;
-        }
-
-        .preloader-logo #L {
-            animation: fadeIn 0.5s 0.7s forwards;
-        }
-
-        .preloader-logo #I {
-            animation: fadeIn 0.5s 0.8s forwards;
-        }
-
-        .preloader-logo #F {
-            animation: fadeIn 0.5s 0.9s forwards;
-        }
-
-        .preloader-logo #E {
-            animation: fadeIn 0.5s 1.0s forwards;
-        }
-
-        .preloader-logo #B {
-            animation: fadeIn 0.5s 1.1s forwards;
-        }
-
-        .preloader-logo #O {
-            animation: fadeIn 0.5s 1.2s forwards;
-        }
-
-        .preloader-logo #Lifebox_Strapline path {
-            animation: fadeIn 0.5s 1.3s forwards;
-        }
-
-        /* Text animation */
-        .preloader-text span:nth-child(1) {
-            color: #ec3627;
-            animation: fadeInUp 0.5s 1.4s forwards;
-        }
-
-        .preloader-text span:nth-child(2) {
-            color: #078ca7;
-            animation: fadeInUp 0.5s 1.5s forwards;
-        }
-
-        .preloader-text span:nth-child(3) {
-            color: #f2ea60;
-            animation: fadeInUp 0.5s 1.6s forwards;
-        }
-
-        .preloader-text span:nth-child(4) {
-            color: #078ca7;
-            animation: fadeInUp 0.5s 1.7s forwards;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-
-            100% {
-                transform: translateY(0px);
-            }
-        }
-
-        /* Navbar Styles */
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background-color: var(--primary-color) !important;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .navbar.scrolled {
-            padding-top: 5px;
-            padding-bottom: 5px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .navbar-brand {
-            display: flex;
-            align-items: center;
-            font-weight: 600;
-        }
-
-        .navbar-brand .logo-text {
-            margin-left: 10px;
-            font-size: 1.2rem;
-        }
-
-        .logo-text span {
-            color: white;
-        }
-
-        .logo-text span:first-child {
-            color: #ff6b35;
-        }
-
-        .logo-text span:nth-child(3) {
-            color: #ffd166;
-        }
-
-        .nav-link {
-            font-weight: 500;
-            margin: 0 8px;
-            position: relative;
-        }
-
-        .nav-link:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: white;
-            bottom: 0;
-            left: 0;
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover:after {
-            width: 100%;
-        }
-
-        .navbar-toggler {
-            border: none;
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0, 121, 165, 0.8), rgba(0, 121, 165, 0.0)),
-                url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
-            display: flex;
-            align-items: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            max-width: 700px;
-        }
-
-        .hero-buttons .btn {
-            margin-right: 15px;
-            margin-bottom: 15px;
-            padding: 12px 25px;
-            font-weight: 500;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary {
-            background-color: var(--accent-color);
-            border-color: var(--accent-color);
-        }
-
-        .btn-primary:hover {
-            background-color: #e05a2b;
-            border-color: #e05a2b;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-outline-light:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Animated Elements */
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-
-        @keyframes floating {
-            0% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-15px);
-            }
-
-            100% {
-                transform: translateY(0px);
-            }
-        }
-
-        /* Features Section */
-        .features {
-            padding: 100px 0;
-            background-color: white;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-            position: relative;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #001b24;
-            margin-bottom: 15px;
-        }
-
-        .section-title p {
-            color: #001b24;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .section-title:after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: var(--accent-color);
-            margin: 20px auto;
-        }
-
-        .feature-card {
-            background: white;
-            border-radius: 10px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            height: 100%;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin: 0 auto 20px;
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-        }
-
-        /* About Section */
-        .about {
-            padding: 100px 0;
-            background-color: var(--light-color);
-        }
-
-        .about-img {
-            position: relative;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-content {
-            padding-left: 30px;
-        }
-
-        .about-content h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-
-        .about-content p {
-            margin-bottom: 20px;
-            color: #6c757d;
-        }
-
-        /* System Components Section */
-        .components {
-            padding: 100px 0;
-            background: white;
-        }
-
-        .component-tabs {
-            margin-bottom: 40px;
-        }
-
-        .nav-pills .nav-link {
-            padding: 12px 25px;
-            margin: 0 10px 10px 0;
-            border-radius: 50px;
-            font-weight: 500;
-            color: var(--dark-color);
-            background: var(--light-color);
-            transition: all 0.3s ease;
-        }
-
-        .nav-pills .nav-link.active {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .nav-pills .nav-link:hover:not(.active) {
-            background: rgba(0, 121, 165, 0.1);
-        }
-
-        .tab-content {
-            padding: 30px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .component-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .component-item:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-
-        .component-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            margin-right: 20px;
-            flex-shrink: 0;
-        }
-
-        .component-text h4 {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-            color: var(--primary-color);
-        }
-
-        .component-text p {
-            color: #6c757d;
-            margin-bottom: 0;
-        }
-
-        /* Screenshots Slider */
-        .screenshots {
-            padding: 100px 0;
-            background: var(--light-color);
-        }
-
-        .swiper {
-            width: 100%;
-            padding-top: 50px;
-            padding-bottom: 50px;
-        }
-
-        .swiper-slide {
-            background-position: center;
-            background-size: cover;
-            width: 400px;
-            height: 400px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .swiper-slide img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .swiper-slide:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Countdown Section */
-        .countdown-section {
-            padding: 100px 0;
-            background: linear-gradient(rgba(0, 121, 165, 0.0), rgba(0, 121, 165, 0.9)),
-                url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
-            color: white;
-            text-align: center;
-        }
-
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 40px 0;
-        }
-
-        .countdown-item {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            padding: 20px;
-            min-width: 100px;
-            backdrop-filter: blur(5px);
-        }
-
-        .countdown-number {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .countdown-label {
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 100px 0;
-            background: #f4eb60;
-        }
-
-        .contact-info {
-            margin-bottom: 40px;
-        }
-
-        .contact-info-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 20px;
-        }
-
-        .contact-info-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            margin-right: 20px;
-            flex-shrink: 0;
-        }
-
-        .contact-info-text h4 {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-            color: var(--primary-color);
-        }
-
-        .contact-info-text p {
-            color: #6c757d;
-            margin-bottom: 0;
-        }
-
-        .contact-form {
-            background: var(--light-color);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .form-control {
-            height: 50px;
-            border-radius: 5px;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-
-        textarea.form-control {
-            height: auto;
-            min-height: 150px;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--primary-color);
-            color: white;
-            padding: 70px 0 20px;
-        }
-
-        .footer-logo {
-            margin-bottom: 20px;
-        }
-
-        .footer-logo img {
-            height: 50px;
-        }
-
-        .footer-logo-text {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        .footer-logo-text span:first-child {
-            color: #ff6b35;
-        }
-
-        .footer-logo-text span:nth-child(3) {
-            color: #ffd166;
-        }
-
-        .footer-links h4 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-links h4:after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 40px;
-            height: 2px;
-            background: var(--accent-color);
-        }
-
-        .footer-links ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .footer-links a:hover {
-            color: white;
-            padding-left: 5px;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: white;
-            margin-right: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background: var(--accent-color);
-            transform: translateY(-3px);
-        }
-
-        .footer-bottom {
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-        }
-
-        .footer-bottom p {
-            margin-bottom: 0;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* Modal Styles */
-        .modal-notice {
-            border-radius: 10px;
-            overflow: hidden;
-            border: none;
-        }
-
-        .modal-notice .modal-header {
-            background: var(--primary-color);
-            color: white;
-            border-bottom: none;
-        }
-
-        .modal-notice .modal-title {
-            font-weight: 600;
-        }
-
-        .modal-notice .modal-body {
-            padding: 30px;
-        }
-
-        .modal-notice .modal-footer {
-            border-top: none;
-            background: #f8f9fa;
-        }
-
-        /* Cookie Consent */
-        .cookie-consent {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--dark-color);
-            color: white;
-            padding: 20px;
-            z-index: 999;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-        }
-
-        .cookie-consent.show {
-            transform: translateY(0);
-        }
-
-        .cookie-consent p {
-            margin-bottom: 15px;
-        }
-
-        .cookie-consent .btn {
-            margin-right: 10px;
-        }
-
-        .row {
-            --bs-gutter-x: 1.5rem;
-            --bs-gutter-y: 1.5rem;
-            display: flex;
-            flex-wrap: wrap;
-            margin-top: calc(-1 * var(--bs-gutter-y));
-            margin-right: calc(-.5 * var(--bs-gutter-x));
-            margin-left: calc(-.5 * var(--bs-gutter-x));
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 991.98px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-            }
-
-            .about-content {
-                padding-left: 0;
-                margin-top: 30px;
-            }
-
-            .footer-links {
-                margin-bottom: 30px;
-            }
-        }
-
-        @media (max-width: 767.98px) {
-            .hero {
-                height: auto;
-                padding: 100px 0;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .section-title h2 {
-                font-size: 2rem;
-            }
-
-            .countdown {
-                flex-wrap: wrap;
-            }
-
-            .countdown-item {
-                min-width: 80px;
-                padding: 15px;
-            }
-
-            .countdown-number {
-                font-size: 2rem;
-            }
-        }
-
-        @media (max-width: 575.98px) {
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-
-            .hero-buttons .btn {
-                display: block;
-                width: 100%;
-                margin-right: 0;
-            }
-
-            .nav-pills .nav-link {
-                display: block;
-                width: 100%;
-                margin-right: 0;
-                margin-bottom: 10px;
-            }
-
-            .swiper-slide {
-                width: 280px;
-                height: 280px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="./assets/style/styles.css">
+    <link
+        rel="stylesheet"
+        href="./assets/style/icons/all.css">
+
+    <link
+        rel="stylesheet"
+        href="./assets/style/icons/sharp-solid.css">
+
+    <link
+        rel="stylesheet"
+        href="./assets/style/icons/sharp-regular.css">
+
+    <link
+        rel="stylesheet"
+        href="./assets/style/icons/sharp-light.css">
+    <link
+        rel="stylesheet"
+        href="./assets/style/icons/duotone.css" />
+    <link
+        rel="stylesheet"
+        href="https://site-assets.fontawesome.com/releases/v6.7.2/css/brands.css" />
+
+    <link rel="icon" type="image/svg+xml" href="./assets/img/lb_favicon.svg">
+    <link rel="alternate icon" href="./assets/img/lb_favicon.ico">
+    <link rel="mask-icon" href="./assets/img/lb_favicon.svg" color="#038DA9">
+    <style></style>
 </head>
 
 <body>
@@ -1042,6 +162,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
                     <li class="nav-item"><a class="nav-link" href="#components">Components</a></li>
                     <li class="nav-item"><a class="nav-link" href="#screenshots">Screenshots</a></li>
@@ -1067,7 +188,7 @@
                 </div>
                 <div class="col-lg-6 d-none d-lg-block animate__animated animate__fadeInRight animate__delay-1s">
                     <!--<img src="./assets/img/LifeBox-X.svg" class="img-fluid rounded shadow floating">-->
-                    <img src="./assets/img/LifeBox-X.svg" class="img-fluid floating">
+                    <img src="./assets/img/lifebox.svg" color="#038DA9" class=" img-fluid floating">
                 </div>
             </div>
         </div>
@@ -1177,7 +298,7 @@
                             </div>
                             <div class="component-item">
                                 <div class="component-icon">
-                                    <i class="fas fa-user-md"></i>
+                                    <i class="fa-regular fa-users-medical"></i>
                                 </div>
                                 <div class="component-text">
                                     <h4>Patient Impact Tracker</h4>
@@ -1186,7 +307,7 @@
                             </div>
                             <div class="component-item">
                                 <div class="component-icon">
-                                    <i class="fas fa-notes-medical"></i>
+                                    <i class="fas fa-scissors"></i>
                                 </div>
                                 <div class="component-text">
                                     <h4>Clean Cut Implementation</h4>
@@ -1197,7 +318,7 @@
                         <div class="col-md-6">
                             <div class="component-item">
                                 <div class="component-icon">
-                                    <i class="fas fa-truck-medical"></i>
+                                    <i class="fa-solid fa-chart-network"></i>
                                 </div>
                                 <div class="component-text">
                                     <h4>Device Distribution Tracker</h4>
@@ -1206,7 +327,7 @@
                             </div>
                             <div class="component-item">
                                 <div class="component-icon">
-                                    <i class="fas fa-flag"></i>
+                                    <i class="fa-regular fa-chart-mixed"></i>
                                 </div>
                                 <div class="component-text">
                                     <h4>Performance Analytics</h4>
@@ -1215,7 +336,7 @@
                             </div>
                             <div class="component-item">
                                 <div class="component-icon">
-                                    <i class="fas fa-antibody"></i>
+                                    <i class="fa-solid fa-prescription-bottle-pill"></i>
                                 </div>
                                 <div class="component-text">
                                     <h4>Antibiotics Usage</h4>
@@ -1469,7 +590,7 @@
                         <div class="col-md-6">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="me-3 text-primary">
-                                    <i class="fas fa-check-circle fa-2x"></i>
+                                    <i class="fa-solid fa-monitor-waveform fa-2x"></i>
                                 </div>
                                 <div>
                                     <h5 class="mb-0">Real-time Data</h5>
@@ -1480,7 +601,7 @@
                         <div class="col-md-6">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="me-3 text-primary">
-                                    <i class="fas fa-check-circle fa-2x"></i>
+                                    <i class="fa-solid fa-globe fa-2x"></i>
                                 </div>
                                 <div>
                                     <h5 class="mb-0">Global Standards</h5>
@@ -1491,7 +612,7 @@
                         <div class="col-md-6">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="me-3 text-primary">
-                                    <i class="fas fa-check-circle fa-2x"></i>
+                                    <i class="fa-solid fa-face-sunglasses fa-2x"></i>
                                 </div>
                                 <div>
                                     <h5 class="mb-0">User-Friendly</h5>
@@ -1502,7 +623,7 @@
                         <div class="col-md-6">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="me-3 text-primary">
-                                    <i class="fas fa-check-circle fa-2x"></i>
+                                    <i class="fa-solid fa-shield-check fa-2x"></i>
                                 </div>
                                 <div>
                                     <h5 class="mb-0">Secure</h5>
@@ -1541,7 +662,7 @@
                     <div class="countdown-label">Seconds</div>
                 </div>
             </div>
-            <a href="app/index.htm" class="btn btn-light btn-lg mt-4">Explore Current Features</a>
+            <a href="#features" class="btn btn-light btn-lg mt-4"><i class="fa-solid fa-compass"></i> Explore Current Features</a>
         </div>
     </section>
 
@@ -1549,6 +670,7 @@
     <section class="contact" id="contact">
         <div class="container">
             <div class="section-title">
+                <i class="fa-solid fa-message-middle fa-2x"></i>
                 <h2>Contact Us</h2>
                 <p>Have questions about our M&E System? Get in touch with our team.</p>
             </div>
@@ -1676,7 +798,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; <span id="year"></span> <a href="https://lifebox.org" style="color: white;">Lifebox</a> M&E System. Designed & Developed by <a href="https://merqconsultancy.org" style="color: white;">MERQ Consultancy</a>.</p>
+                <p>All Rights Reserved &copy; <span id="year"></span> <a href="https://lifebox.org" style="color: white;"><b>Lifebox</b></a> M&E System. | <b>Build V0.7</b> | Designed & Developed by <a href="https://merqconsultancy.org" style="color: white;"><b>MERQ Consultancy</b></a>.</p>
             </div>
         </div>
     </footer>
@@ -1719,6 +841,11 @@
         </div>
     </div>
 
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" style="display:none;position:fixed;bottom:30px;right:30px;z-index:9999;" class="btn btn-primary rounded-circle">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <!-- Cookie Consent -->
     <div class="cookie-consent" id="cookieConsent">
         <div class="container">
@@ -1738,162 +865,9 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="./assets/js/scripts.js"></script>
     <script>
-        // Preloader
-        /*
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.getElementById('preloader').style.opacity = '0';
-                setTimeout(function() {
-                    document.getElementById('preloader').style.display = 'none';
-                }, 500);
-            }, 1500);
-        });
 
-        */
-
-        // Preloader
-        window.addEventListener('load', function() {
-            // Animate the logo and text first
-            setTimeout(function() {
-                // After animations complete, fade out
-                setTimeout(function() {
-                    document.getElementById('preloader').style.opacity = '0';
-                    setTimeout(function() {
-                        document.getElementById('preloader').style.display = 'none';
-                    }, 500);
-                }, 1000); // Additional time to see the complete animation
-            }, 1800); // Total animation duration (1.8s)
-        });
-
-
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 50) {
-                document.querySelector('.navbar').classList.add('scrolled');
-            } else {
-                document.querySelector('.navbar').classList.remove('scrolled');
-            }
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 70,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Initialize Swiper
-        var swiper = new Swiper(".mySwiper", {
-            effect: "coverflow",
-            grabCursor: true,
-            centeredSlides: true,
-            slidesPerView: "auto",
-            coverflowEffect: {
-                rotate: 0,
-                stretch: 0,
-                depth: 100,
-                modifier: 2,
-                slideShadows: true,
-            },
-            loop: true,
-            autoplay: {
-                delay: 3000,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-        });
-
-        // Countdown Timer
-        function updateCountdown() {
-            const launchDate = new Date('October 7, 2025 00:00:00').getTime();
-            const now = new Date().getTime();
-            const distance = launchDate - now;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-        }
-
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-
-        // Set footer year
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Show notice modal after page loads
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                // Only show if cookies are accepted
-                if (!localStorage.getItem('cookiesDeclined')) {
-                    var noticeModal = new bootstrap.Modal(document.getElementById('noticeModal'));
-                    noticeModal.show();
-                }
-            }, 2000);
-        });
-
-        // Cookie consent
-        if (!localStorage.getItem('cookiesAccepted') && !localStorage.getItem('cookiesDeclined')) {
-            setTimeout(function() {
-                document.getElementById('cookieConsent').classList.add('show');
-            }, 3000);
-        }
-
-        document.getElementById('acceptCookies').addEventListener('click', function() {
-            localStorage.setItem('cookiesAccepted', 'true');
-            document.getElementById('cookieConsent').classList.remove('show');
-        });
-
-        document.getElementById('declineCookies').addEventListener('click', function() {
-            localStorage.setItem('cookiesDeclined', 'true');
-            document.getElementById('cookieConsent').classList.remove('show');
-        });
-
-        // Animate elements on scroll
-        function animateOnScroll() {
-            const elements = document.querySelectorAll('.feature-card, .about-img, .component-item, .countdown-item');
-
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.2;
-
-                if (elementPosition < screenPosition) {
-                    element.style.opacity = '1';
-                    element.style.transform = 'translateY(0)';
-                }
-            });
-        }
-
-        // Set initial styles for animated elements
-        document.querySelectorAll('.feature-card, .about-img, .component-item, .countdown-item').forEach(element => {
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(20px)';
-            element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        });
-
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
     </script>
 </body>
 
