@@ -21,7 +21,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_DB: lifebox_mesystem
-      POSTGRES_USER: lifebox_me
+      POSTGRES_USER: postgres  # lifebox_me
       POSTGRES_PASSWORD: lifebox_me
       POSTGRES_ROOT_PASSWORD: mikeintosh
       TZ: UTC
@@ -41,7 +41,7 @@ services:
 
   lifeboxme_pgadmin:
     container_name: lifeboxme_pgadmin
-    image: dpage/pgadmin4:7.3
+    image: dpage/pgadmin4:latest # 7.3
     restart: unless-stopped
     environment:
       PGADMIN_DEFAULT_EMAIL: dev@merqconsultancy.org
