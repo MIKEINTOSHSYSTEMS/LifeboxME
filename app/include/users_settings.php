@@ -255,7 +255,7 @@ $tdatausers[".strOrderBy"] = $tstrOrderBy;
 $tdatausers[".orderindexes"] = array();
 
 
-$tdatausers[".sqlHead"] = "SELECT \"ID\",  username,  password,  email,  fullname,  groupid,  active,  ext_security_id,  userpic,  reset_token,  reset_date,  first_name,  middle_name,  last_name,  sex,  designation_role,  region,  country,  phone,  prefix_title,  apikey";
+$tdatausers[".sqlHead"] = "SELECT \"ID\",  	username,  	password,  	email,  	fullname,  	groupid,  	active,  	ext_security_id,  	userpic,  	reset_token,  	reset_date,  	first_name,  	middle_name,  	last_name,  	sex,  	designation_role,  	region,  	country,  	phone,  	prefix_title,  	apikey";
 $tdatausers[".sqlFrom"] = "FROM \"public\".users";
 $tdatausers[".sqlWhereExpr"] = "";
 $tdatausers[".sqlTail"] = "";
@@ -1164,7 +1164,7 @@ $tdatausers[".hideMobileList"] = array();
 //  Begin View Formats
 	$fdata["ViewFormats"] = array();
 
-	$vdata = array("ViewFormat" => "");
+	$vdata = array("ViewFormat" => "Checkbox");
 
 	
 	
@@ -1180,8 +1180,7 @@ $tdatausers[".hideMobileList"] = array();
 	
 	
 	
-		$vdata["NeedEncode"] = true;
-
+	
 	
 		$vdata["truncateText"] = true;
 	$vdata["NumberOfChars"] = 80;
@@ -1192,7 +1191,7 @@ $tdatausers[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Text field");
+	$edata = array("EditFormat" => "Checkbox");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -1216,17 +1215,14 @@ $tdatausers[".hideMobileList"] = array();
 	
 	
 	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-		
+	
+	
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
 	$edata["validateAs"] = array();
 	$edata["validateAs"]["basicValidate"] = array();
 	$edata["validateAs"]["customMessages"] = array();
-				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
 							
 	
 //	End validation
@@ -1246,7 +1242,7 @@ $tdatausers[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "Equals";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
@@ -1256,7 +1252,8 @@ $tdatausers[".hideMobileList"] = array();
 //Filters settings
 	$fdata["filterTotals"] = 0;
 		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
+		$fdata["filterTotalFields"] = "ID";
+		$fdata["filterFormat"] = "Values list";
 		$fdata["showCollapsed"] = false;
 
 		$fdata["sortValueType"] = 0;
@@ -2804,7 +2801,7 @@ $tdatausers[".hideMobileList"] = array();
 
 	
 		
-	$edata["LinkField"] = "country_id";
+	$edata["LinkField"] = "region_id";
 	$edata["LinkFieldType"] = 0;
 	$edata["DisplayField"] = "country_name";
 
@@ -2954,7 +2951,7 @@ $tdatausers[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Text field");
+	$edata = array("EditFormat" => "Telephone");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -2979,17 +2976,14 @@ $tdatausers[".hideMobileList"] = array();
 	
 	
 	
-			$edata["HTML5InuptType"] = "tel";
-
-		$edata["EditParams"] = "";
-		
+	
+	
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
 	$edata["validateAs"] = array();
 	$edata["validateAs"]["basicValidate"] = array();
 	$edata["validateAs"]["customMessages"] = array();
-				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("US Phone Number");
 						$edata["validateAs"]["basicValidate"][] = "IsRequired";
 		
 	
@@ -3010,7 +3004,7 @@ $tdatausers[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "Equals";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
@@ -3195,7 +3189,8 @@ $tdatausers[".hideMobileList"] = array();
 		$fdata["sourceSingle"] = "apikey";
 
 	
-		$fdata["FullName"] = "apikey";
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "apikey";
 
 	
 	
@@ -3232,7 +3227,7 @@ $tdatausers[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Readonly");
+	$edata = array("EditFormat" => "Text field");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -3256,8 +3251,10 @@ $tdatausers[".hideMobileList"] = array();
 	
 	
 	
-	
-	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
@@ -3293,7 +3290,8 @@ $tdatausers[".hideMobileList"] = array();
 //Filters settings
 	$fdata["filterTotals"] = 0;
 		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
+		$fdata["filterTotalFields"] = "ID";
+		$fdata["filterFormat"] = "Values list";
 		$fdata["showCollapsed"] = false;
 
 		$fdata["sortValueType"] = 0;
@@ -3354,7 +3352,7 @@ function createSqlQuery_users()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "\"ID\",  username,  password,  email,  fullname,  groupid,  active,  ext_security_id,  userpic,  reset_token,  reset_date,  first_name,  middle_name,  last_name,  sex,  designation_role,  region,  country,  phone,  prefix_title,  apikey";
+$proto0["m_strFieldList"] = "\"ID\",  	username,  	password,  	email,  	fullname,  	groupid,  	active,  	ext_security_id,  	userpic,  	reset_token,  	reset_date,  	first_name,  	middle_name,  	last_name,  	sex,  	designation_role,  	region,  	country,  	phone,  	prefix_title,  	apikey";
 $proto0["m_strFrom"] = "FROM \"public\".users";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";

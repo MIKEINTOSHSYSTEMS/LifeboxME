@@ -35,6 +35,42 @@ class UserControl extends EditControl
 	
 	function init()
 	{
+	$tName = $this->pageObject->tName;
+	$field = $this->field;
+	if( $this->pageObject->pSet ) {
+		if($this->pageObject->pageType == PAGE_SEARCH && $this->pageObject->pSet->getTableType() == PAGE_DASHBOARD)
+		{
+			$dashFields = $this->pageObject->pSet->getDashboardSearchFields();
+			$tName = $dashFields[$field][0]["table"];
+			$field = $dashFields[$field][0]["field"];
+		}
+	}
+				if($tName=="public.users" && $field=="phone")
+	{
+		$this->settings["required"] = true;                    // Wether is mandatory
+$this->settings["tooltip"] = "Click here to enter telephone"; // Information tooltip
+$this->settings["initialCountry"] = "et";               // Country default
+$this->settings["preferredCountries"] = "et";           // Preferred Country;
+		return;
+	}	
+	$tName = $this->pageObject->tName;
+	$field = $this->field;
+	if( $this->pageObject->pSet ) {
+		if($this->pageObject->pageType == PAGE_SEARCH && $this->pageObject->pSet->getTableType() == PAGE_DASHBOARD)
+		{
+			$dashFields = $this->pageObject->pSet->getDashboardSearchFields();
+			$tName = $dashFields[$field][0]["table"];
+			$field = $dashFields[$field][0]["field"];
+		}
+	}
+				if($tName=="admin_users" && $field=="phone")
+	{
+		$this->settings["required"] = true;                    // Wether is mandatory
+$this->settings["tooltip"] = "Click here to enter telephone"; // Information tooltip
+$this->settings["initialCountry"] = "et";               // Country default
+$this->settings["preferredCountries"] = "et";           // Preferred Country;
+		return;
+	}	
 	}
 }
 ?>

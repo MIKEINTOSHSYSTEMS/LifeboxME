@@ -1,7 +1,7 @@
 <?php
 class AuditTrailTable
 {
-	var $logTableName="";
+	var $logTableName="public.lifeboxme__audit";
 	var $params;
 
 	var $strLogin="login";
@@ -40,6 +40,8 @@ class AuditTrailTable
 		global $auditMaxFieldLength;
 
 		$this->connection = $cman->getForAudit();
+		$this->attLogin=3;
+		$this->timeLogin=5;
 		$userid="";
 		if( Security::getUserName())
 			$userid = Security::getUserName();
@@ -51,18 +53,70 @@ class AuditTrailTable
 
     function LogLogin($pUsername)
     {
+		global $globalEvents;
+		$retval=true;
+		$table=Security::loginTable();
+		$this->params[1]=$pUsername;
+		$arr=array();
+		$this->params=array($_SERVER["REMOTE_ADDR"], Security::getUserName() );
+		if($globalEvents->exists("OnAuditLog"))
+			$retval=$globalEvents->OnAuditLog($this->strLogin, $this->params, $table, $arr, $arr, $arr);
+		if($retval)
+		{
+			$this->insert(now(), $this->params[0], $this->params[1], $table, $this->strLogin, "");
+		}
+		return $retval;
     }
 
     function LogLoginFailed($pUsername)
     {
+		global $globalEvents;
+		$retval=true;
+		$table=Security::loginTable();
+		$this->params[1]=$pUsername;
+		$arr=array();
+		if($globalEvents->exists("OnAuditLog"))
+			$retval=$globalEvents->OnAuditLog($this->strFailLogin, $this->params, $table, $arr, $arr, $arr);
+		if($retval)
+		{
+			$this->insert(now(), $this->params[0], $this->params[1], $table, $this->strFailLogin, "");
+		}
+		$this->params=array($_SERVER["REMOTE_ADDR"],"");
+		return $retval;
     }
 
     function LogLogout()
     {
+	global $globalEvents;
+	if( Security::getUserName() !="" )
+	{
+		$retval=true;
+		$table=Security::loginTable();
+		$arr=array();
+		if($globalEvents->exists("OnAuditLog"))
+			$retval=$globalEvents->OnAuditLog($this->strLogout, $this->params, $table, $arr, $arr, $arr);
+		if($retval)
+		{
+			$this->insert(now(), $this->params[0], $this->params[1], $table, $this->strLogout, "");
+		}
+		return $retval;
+	}
     }
 
     function LogChPassword( $username )
     {
+		global $globalEvents;
+		$retval=true;
+		$table=Security::loginTable();
+		$arr=array();
+		$this->params[ 1 ] = $username;
+		if($globalEvents->exists("OnAuditLog"))
+			$retval=$globalEvents->OnAuditLog($this->strChPass, $this->params, $table, $arr, $arr, $arr);
+		if($retval)
+		{
+			$this->insert(now(), $this->params[0], $this->params[1], $table, $this->strChPass, "");
+		}
+		return $retval;
     }
 
     function LogAdd($str_table,$values,$keys)
@@ -604,18 +658,72 @@ class AuditTrailFile
 
     function LogLogin($pUsername)
     {
-		    }
+				global $globalEvents;
+		$retval=true;
+		$table=Security::loginTable();
+		$this->params[1]=$pUsername;
+		$arr=array();
+		if($globalEvents->exists("OnAuditLog"))
+			$retval=$globalEvents->OnAuditLog($this->strLogin, $this->params, $table, $arr, $arr, $arr);
+		if($retval)
+		{
+			$str=format_datetime_custom(db2time(now()),"MMM dd,yyyy").chr(9).format_datetime_custom(db2time(now()),"HH:mm:ss").chr(9).$this->params[0].chr(9).$this->params[1].chr(9).$table.chr(9).$this->strLogin."\r\n";
+			$this->writeToLogFile( $str );
+		}
+		return $retval;
+    }
 
     function LogLoginFailed($pUsername)
     {
-		    }
+				global $globalEvents;
+		$retval=true;
+		$table=Security::loginTable();
+		$this->params[1]=$pUsername;
+		$arr=array();
+		if($globalEvents->exists("OnAuditLog"))
+			$retval=$globalEvents->OnAuditLog($this->strFailLogin, $this->params, $table, $arr, $arr, $arr);
+		if($retval)
+		{
+			$str=format_datetime_custom(db2time(now()),"MMM dd,yyyy").chr(9).format_datetime_custom(db2time(now()),"HH:mm:ss").chr(9).$this->params[0].chr(9).$this->params[1].chr(9).$table.chr(9).$this->strFailLogin."\r\n";
+			$this->writeToLogFile( $str );
+		}
+		return $retval;
+    }
 
     function LogLogout()
     {
+		global $globalEvents;
+		if(Security::getUserName() != "" )
+		{
+			$retval=true;
+			$table=Security::loginTable();
+			$arr=array();
+			if($globalEvents->exists("OnAuditLog"))
+				$retval=$globalEvents->OnAuditLog($this->strLogout, $this->params, $table, $arr, $arr, $arr);
+			if($retval)
+			{
+				$str=format_datetime_custom(db2time(now()),"MMM dd,yyyy").chr(9).format_datetime_custom(db2time(now()),"HH:mm:ss").chr(9).$this->params[0].chr(9).$this->params[1].chr(9).$table.chr(9).$this->strLogout."\r\n";
+				$this->writeToLogFile( $str );
+			}
+			return $retval;
+		}
     }
 
     function LogChPassword( $username )
     {
+		global $globalEvents;
+		$retval=true;
+		$table=Security::loginTable();
+		$arr=array();
+		$this->params[ 1 ] = $username;
+		if($globalEvents->exists("OnAuditLog"))
+			$retval=$globalEvents->OnAuditLog($this->strChPass, $this->params, $table, $arr, $arr, $arr);
+		if($retval)
+		{
+			$str=format_datetime_custom(db2time(now()),"MMM dd,yyyy").chr(9).format_datetime_custom(db2time(now()),"HH:mm:ss").chr(9).$this->params[0].chr(9).$this->params[1].chr(9).$table.chr(9).$this->strChPass."\r\n";
+			$this->writeToLogFile( $str );
+		}
+		return $retval;
     }
 
     function LogAdd($str_table,$values,$keys)

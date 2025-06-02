@@ -149,7 +149,7 @@ class ConnectionManager_Base
 	 */
 	public function getForAudit()
 	{
-		return $this->getDefault();
+		return $this->byId( "lifebox_mesystem_at_localhost" );
 	}
 
 	/**
@@ -158,7 +158,7 @@ class ConnectionManager_Base
 	 */
 	public function getForLocking()
 	{
-		return $this->getDefault();
+		return $this->byId( "lifebox_mesystem_at_localhost" );
 	}
 
 	/**

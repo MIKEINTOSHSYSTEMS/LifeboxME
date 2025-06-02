@@ -1,0 +1,21 @@
+Notification on registering
+
+User registered at %url%
+
+ID: %ID_value%
+Username: %username_value%
+Email: %email_value%
+Full Name: %fullname_value%
+Groupid: %groupid_value%
+Ext Security Id: %ext_security_id_value%
+Userpic: %userpic_value%
+First Name: %first_name_value%
+Middle Name: %middle_name_value%
+Last Name: %last_name_value%
+Sex: %sex_value%
+Designation Role: %designation_role_value%
+Region: %region_value%
+Country: %country_value%
+Phone: %phone_value%
+Prefix Title: %prefix_title_value%
+API Key: %apikey_value%

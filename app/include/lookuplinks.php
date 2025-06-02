@@ -502,6 +502,20 @@ function InitLookupLinks()
 			$lookupTableLinks["public.countries"]["users.country"] = array();
 		}
 		$lookupTableLinks["public.countries"]["users.country"]["edit"] = array("table" => "public.users", "field" => "country", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.regions"] ) ) {
+			$lookupTableLinks["public.regions"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.regions"]["admin_users.region"] )) {
+			$lookupTableLinks["public.regions"]["admin_users.region"] = array();
+		}
+		$lookupTableLinks["public.regions"]["admin_users.region"]["edit"] = array("table" => "admin_users", "field" => "region", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.countries"] ) ) {
+			$lookupTableLinks["public.countries"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.countries"]["admin_users.country"] )) {
+			$lookupTableLinks["public.countries"]["admin_users.country"] = array();
+		}
+		$lookupTableLinks["public.countries"]["admin_users.country"]["edit"] = array("table" => "admin_users", "field" => "country", "page" => "edit");
 }
 
 ?>

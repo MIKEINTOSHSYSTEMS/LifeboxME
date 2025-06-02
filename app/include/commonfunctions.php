@@ -2364,7 +2364,6 @@ function GetFullSiteUrl()
  */
 function GetAuditObject($table="")
 {
-	return NULL;
 
 	$linkAudit = false;
 	if(!$table)
@@ -2379,6 +2378,7 @@ function GetAuditObject($table="")
 	if ($linkAudit)
 	{
 		require_once(getabspath("include/audit.php"));
+		return new AuditTrailTable();
 	}
 	else
 	{
@@ -2391,7 +2391,6 @@ function GetAuditObject($table="")
  */
 function GetLockingObject($table="")
 {
-	return NULL;
 
 	if(!$table)
 	{

@@ -600,11 +600,11 @@ $globalSettings["useBuiltInMailer"] = false;
 
 $globalSettings["useCustomSMTPSettings"] = true;
 
-$globalSettings["strSMTPUser"] = "";
-$globalSettings["strSMTPServer"] = "localhost";
-$globalSettings["strSMTPPort"] = "25";
-$globalSettings["strSMTPPassword"] = "";
-$globalSettings["strFromEmail"] = "";
+$globalSettings["strSMTPUser"] = "lifebox@cloud.merqconsultancy.org";
+$globalSettings["strSMTPServer"] = "cloud.merqconsultancy.org";
+$globalSettings["strSMTPPort"] = "587";
+$globalSettings["strSMTPPassword"] = "LifeboxCloud";
+$globalSettings["strFromEmail"] = "lifebox@cloud.merqconsultancy.org";
 
 //
 
@@ -702,9 +702,9 @@ $styleOverrides = array();
 $globalSettings["mapProvider"]=0;
 
 $globalSettings["CaptchaSettings"] = array();
-$globalSettings["CaptchaSettings"]["type"] = 0;
-$globalSettings["CaptchaSettings"]["siteKey"] = "";
-$globalSettings["CaptchaSettings"]["secretKey"] = "";
+$globalSettings["CaptchaSettings"]["type"] = 1;
+$globalSettings["CaptchaSettings"]["siteKey"] = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
+$globalSettings["CaptchaSettings"]["secretKey"] = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe";
 $globalSettings["CaptchaSettings"]["captchaPassesCount"] = "5";
 
 
@@ -745,8 +745,10 @@ $cKeyFields = $loginKeyFields;
 
 $globalSettings["usersDatasourceTable"] = "public.users";
 
+$globalSettings["userRequireActivation"] = true;
+$globalSettings["userActivationField"] = "active";
 
-$globalSettings["jwtSecret"] = "DitcnFQP4ALeKPICzn1H";
+$globalSettings["jwtSecret"] = "KgDg763op72JzHiH0yQY";
 
 
 $arrCustomPages = array();
@@ -764,9 +766,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "72_1748886184";
+$projectBuildKey = "75_1748893416";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "72";
+$projectBuildNumber = "75";
 
 $mlang_messages = array();
 $mlang_charsets = array();
