@@ -744,7 +744,7 @@ class ListPage extends RunnerPage
 					//	TODO - delete plugin user
 					$dc = new DsCommand();
 					$dc->filter = DataCondition::FieldEquals( 
-						"", 
+						"UserName", 
 						$user, 
 						0, 
 						Security::caseInsensitiveUsername() ? dsCASE_INSENSITIVE : dsCASE_STRICT 
@@ -2599,6 +2599,8 @@ class ListPage extends RunnerPage
 
 	protected static function readMainTableSettingsFromRequest( $table )
 	{
+		if( postvalue("pageType") == "register" && postvalue("table") == "public.users" )
+			return new ProjectSettings( "public.users", PAGE_REGISTER, "", GLOBAL_PAGES);
 		$mainTableShortName = GetTableURL( postvalue("table") );
 		return getLookupMainTableSettings($table, $mainTableShortName, postvalue("field"));
 	}
@@ -2616,6 +2618,11 @@ class ListPage extends RunnerPage
 			return true;
 
 		//	otherwise check if the page is called from the register page
+		if( $mainTable == "public.users" )
+		{
+			if( $lookupMainSettings->appearOnPage( postvalue("field") ) !== FALSE )
+				return true;
+		}
 		return false;
 	}
 

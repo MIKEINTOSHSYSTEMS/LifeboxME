@@ -592,11 +592,13 @@ $editTextAsDate = false;
  */
 $globalSettings["keepLoggedIn"] = true;
 
+$globalSettings["bEncryptPasswords"] = true;
+$globalSettings["nEncryptPasswordMethod"] = "0";
 
 //mail settings
 $globalSettings["useBuiltInMailer"] = false;
 
-$globalSettings["useCustomSMTPSettings"] = false;
+$globalSettings["useCustomSMTPSettings"] = true;
 
 $globalSettings["strSMTPUser"] = "";
 $globalSettings["strSMTPServer"] = "localhost";
@@ -609,7 +611,7 @@ $globalSettings["strFromEmail"] = "";
 /*
 $globalSettings["ADDomain"] = "";
 $globalSettings["ADServer"] = "";
-$globalSettings["ADFollowRefs"] = 0;
+$globalSettings["ADFollowRefs"] = ;
 $globalSettings["ADBaseDN"] = "";
 if( !$globalSettings["ADBaseDN"] ) {
 	$globalSettings["ADBaseDN"] = ldap_Domain2DN( $globalSettings["ADDomain"] );
@@ -652,6 +654,8 @@ $globalSettings["useCookieBanner"] = 0 != 0;
 $globalSettings["htmlEmailTemplates"] = array();
 
 
+$globalSettings["createLoginPage"] = true;
+$globalSettings["userGroupCount"] = 1;
 
 
 $globalSettings["apiGoogleMapsCode"] = "";
@@ -721,17 +725,28 @@ $WRAdminPagePassword = "";
  * Legacy variables for pre-10.6 business templates only.
  * DEPRECATED
  */
-$cLoginTable = "";
-$cDisplayNameField = "";
-$cUserNameField	= "";
-$cPasswordField	= "";
-$cUserGroupField = "";
-$cEmailField = "";
-$cUserpicField = "";
+$cLoginTable = "public.users";
+$cDisplayNameField = "fullname";
+$cUserNameField	= "username";
+$cPasswordField	= "password";
+$cUserGroupField = "username";
+$cEmailField = "email";
+$cUserpicField = "userpic";
 $loginKeyFields= array();
+$loginKeyFields[] = "ID";
+
+//	legacy use only
+$cKeyFields = $loginKeyFields;
+
+/**
+ * End Legacy csection
+ */
 
 
-$globalSettings["jwtSecret"] = "eYwXvSc7ujctErtowm24";
+$globalSettings["usersDatasourceTable"] = "public.users";
+
+
+$globalSettings["jwtSecret"] = "DitcnFQP4ALeKPICzn1H";
 
 
 $arrCustomPages = array();
@@ -749,9 +764,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "64_1748550476";
+$projectBuildKey = "72_1748886184";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "64";
+$projectBuildNumber = "72";
 
 $mlang_messages = array();
 $mlang_charsets = array();
@@ -817,6 +832,10 @@ $tableCaptions["English"]["public_participant_attendance_detail"] = "Participant
 $tableCaptions["English"]["public_participant_attendance_summary"] = "Participant Attendance Summary";
 $tableCaptions["English"]["public_training_participation"] = "Training Participation";
 $tableCaptions["English"]["public_daily_attendance_view"] = "Daily Attendance View";
+$tableCaptions["English"]["public_users"] = "Users";
+$tableCaptions["English"]["admin_rights"] = "Admin Rights";
+$tableCaptions["English"]["admin_members"] = "Admin Members";
+$tableCaptions["English"]["admin_users"] = "Admin Users";
 
 
 $globalEvents = new class_GlobalEvents;
@@ -902,6 +921,12 @@ if(mlang_getcurrentlang()=="English")
 $globalSettings["showDetailedError"] = true;
 
 
+$globalSettings["restCreate"] = true;
+$globalSettings["restReturnEncodedBinary"] = 1 != 0;
+$globalSettings["restAcceptEncodedBinary"] = 1 != 0;
+$globalSettings["restAuth"] = REST_APIKEY;
+$globalSettings["APIkey"] = "";
+$globalSettings["APIkeyField"] = "apikey";
 
 $globalSettings["mapMarkerCount"] = 50;
 
@@ -938,6 +963,18 @@ $fieldFilterValueShrinkPostfix = "...";
 
 // default connection link #9875
 $conn = $cman->getDefault()->conn;
+
+
+//	delete old username & password cookies
+if( $_COOKIE["password"] ) {
+	runner_setcookie("username", "", time() - 1, "", "", false, false);
+	runner_setcookie("password", "", time() - 1, "", "", false, false);
+}
+
+
+$logoutPerformed = false;
+Security::autoLoginAsGuest();
+Security::updateCSRFCookie();
 
 
 $isUseRTEBasic = true;

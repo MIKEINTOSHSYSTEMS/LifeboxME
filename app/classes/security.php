@@ -376,8 +376,8 @@ class Security
 		global $cman;
 		$grConnection = $cman->getForUserGroups();
 
-		$sql = "select ". $grConnection->addFieldWrappers( "" )
-			." from ". $grConnection->addTableWrappers( "" ) . " WHERE " . $grConnection->addFieldWrappers( "" )
+		$sql = "select ". $grConnection->addFieldWrappers( "Label" )
+			." from ". $grConnection->addTableWrappers( "public.lifeboxme_uggroups" ) . " WHERE " . $grConnection->addFieldWrappers( "GroupID" )
 			." in ( " . implode( ",", array_keys( $groupIds ) ) . ")";
 
 		$qResult = $grConnection->query( $sql );
@@ -1182,7 +1182,7 @@ class Security
 			return null;
 		}
 		global $cman;
-		return getDbTableDataSource( "", $cman->getUserGroupsConnId() );
+		return getDbTableDataSource( "public.lifeboxme_ugmembers", $cman->getUserGroupsConnId() );
 	}
 
 	/**
@@ -1194,7 +1194,7 @@ class Security
 			return null;
 		}
 		global $cman;
-		return getDbTableDataSource( "", $cman->getUserGroupsConnId() );
+		return getDbTableDataSource( "public.lifeboxme_uggroups", $cman->getUserGroupsConnId() );
 	}
 
 	/**
@@ -1206,7 +1206,7 @@ class Security
 			return null;
 		}
 		global $cman;
-		return getDbTableDataSource( "", $cman->getUserGroupsConnId() );
+		return getDbTableDataSource( "public.lifeboxme_ugrights", $cman->getUserGroupsConnId() );
 	}
 
 
@@ -1582,9 +1582,9 @@ class Security
 		$qResult = $dataSource->getList( $dc );
 
 		$groups = array();
-		$providerField = "";
+		$providerField = "Provider";
 		while( $data = $qResult->fetchAssoc() ) {
-			$groups[] = $data[""];
+			$groups[] = $data["GroupID"];
 		}
 		storageSet( "members_provider_field", $qResult->fieldExists( $providerField ) );
 		return $groups;
@@ -1599,7 +1599,7 @@ class Security
 		}
 		$dc = new DsCommand();
 		$usernameFilter = DataCondition::FieldEquals(
-			"",
+			"UserName",
 			$userId,
 			0,
 			Security::caseInsensitiveUsername() ? dsCASE_INSENSITIVE : dsCASE_STRICT);
@@ -1609,7 +1609,7 @@ class Security
 			$dc->filter = $usernameFilter;
 		} else {
 			$providerFilter = DataCondition::FieldEquals(
-				"",
+				"Provider",
 				$provider["code"],
 				0 );
 			$dc->filter = DataCondition::_And( array( $usernameFilter, $providerFilter ) );
@@ -1636,11 +1636,11 @@ class Security
 		//	prepare command
 		$dataSource = Security::getUgGroupsDatasource();
 
-		$providerField = "";
+		$providerField = "Provider";
 
 		$dc = new DsCommand();
 		$dc->filter = DataCondition::FieldInList(
-			"",
+			"Label",
 			$userGroups,
 			Security::caseInsensitiveUsername() ? dsCASE_INSENSITIVE : dsCASE_STRICT);
 
@@ -1654,7 +1654,7 @@ class Security
 			if( $verifyProvider && $data[ $providerField ] != $provider["code"] ) {
 				continue;
 			}
-			$groups[] = $data[""];
+			$groups[] = $data["GroupID"];
 		}
 		return $groups;
 	}
@@ -1725,10 +1725,10 @@ class Security
 		$dc = new DsCommand();
 		$dc->filter = DataCondition::_And( array(
 			DataCondition::FieldInList(
-				"",
+				"GroupID",
 				$groups ),
 			DataCondition::_Not(
-				DataCondition::FieldIs( "", dsopEMPTY, "" )
+				DataCondition::FieldIs( "AccessMask", dsopEMPTY, "" )
 			)
 		));
 		$dataSource = Security::getUgRightsDatasource();
@@ -1799,10 +1799,10 @@ class Security
 		//	read table permissions
 		while( $data = $qResult->fetchAssoc() )
 		{
-			$table = $data[ "" ];
-			$mask = $data[ "" ];
-			$group = $data[ "" ];
-			$restrictedPages = my_json_decode( $data[ "" ] );
+			$table = $data[ "TableName" ];
+			$mask = $data[ "AccessMask" ];
+			$group = $data[ "GroupID" ];
+			$restrictedPages = my_json_decode( $data[ "Page" ] );
 			if( !is_array( $restrictedPages )) {
 				$restrictedPages = array();
 			}
@@ -1853,7 +1853,7 @@ class Security
 		//	the database may have irrelevant records
 		$tables =& GetTablesListWithoutSecurity();
 		while( $data = $result->fetchAssoc() ) {
-			if( in_array( $data[ "" ], $tables ) ) {
+			if( in_array( $data[ "TableName" ], $tables ) ) {
 				return true;
 			}
 		}

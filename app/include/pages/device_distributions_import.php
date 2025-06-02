@@ -93,6 +93,7 @@
 'import_field14',
 'import_field15' ) ),
 'cellMaps' => array(  ) ),
+'loginForm' => array( 'loginForm' => 3 ),
 'page' => array( 'verticalBar' => false,
 'labeledButtons' => array( 'update_records' => array(  ),
 'print_pages' => array(  ),

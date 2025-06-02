@@ -3002,7 +3002,7 @@ class ProjectSettings
 	public static function getForLogin()
 	{
 		return !!Security::dbProvider()
-			? new ProjectSettings("", PAGE_LIST)
+			? new ProjectSettings("public.users", PAGE_LIST)
 			: null;
 	}
 
@@ -3658,6 +3658,14 @@ function fillProjectEntites()
 	$projectEntitiesReverse[ "training_participation" ] = "public.training_participation";
 	$projectEntities[ "public.daily_attendance_view" ] = array( "url" => "daily_attendance_view", "type" => 0 );
 	$projectEntitiesReverse[ "daily_attendance_view" ] = "public.daily_attendance_view";
+	$projectEntities[ "public.users" ] = array( "url" => "users", "type" => 0 );
+	$projectEntitiesReverse[ "users" ] = "public.users";
+	$projectEntities[ "admin_rights" ] = array( "url" => "admin_rights", "type" => 1 );
+	$projectEntitiesReverse[ "admin_rights" ] = "admin_rights";
+	$projectEntities[ "admin_members" ] = array( "url" => "admin_members", "type" => 1 );
+	$projectEntitiesReverse[ "admin_members" ] = "admin_members";
+	$projectEntities[ "admin_users" ] = array( "url" => "admin_users", "type" => 1 );
+	$projectEntitiesReverse[ "admin_users" ] = "admin_users";
 }
 
 function findTable( $table ) {

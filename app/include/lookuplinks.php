@@ -481,6 +481,27 @@ function InitLookupLinks()
 			$lookupTableLinks["public.training_sessions"]["training_participation.training_id"] = array();
 		}
 		$lookupTableLinks["public.training_sessions"]["training_participation.training_id"]["edit"] = array("table" => "public.training_participation", "field" => "training_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.sex"] ) ) {
+			$lookupTableLinks["public.sex"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.sex"]["users.sex"] )) {
+			$lookupTableLinks["public.sex"]["users.sex"] = array();
+		}
+		$lookupTableLinks["public.sex"]["users.sex"]["edit"] = array("table" => "public.users", "field" => "sex", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.regions"] ) ) {
+			$lookupTableLinks["public.regions"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.regions"]["users.region"] )) {
+			$lookupTableLinks["public.regions"]["users.region"] = array();
+		}
+		$lookupTableLinks["public.regions"]["users.region"]["edit"] = array("table" => "public.users", "field" => "region", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.countries"] ) ) {
+			$lookupTableLinks["public.countries"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.countries"]["users.country"] )) {
+			$lookupTableLinks["public.countries"]["users.country"] = array();
+		}
+		$lookupTableLinks["public.countries"]["users.country"]["edit"] = array("table" => "public.users", "field" => "country", "page" => "edit");
 }
 
 ?>

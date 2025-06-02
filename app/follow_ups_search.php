@@ -12,6 +12,19 @@ require_once("classes/advancedsearchcontrol.php");
 require_once("classes/panelsearchcontrol.php");
 
 
+Security::processLogoutRequest();
+
+if( !isLogged() )
+{ 
+	Security::saveRedirectURL();
+	redirectToLogin();
+}
+
+$accessGranted = CheckTablePermissions($strTableName, "S");
+if(!$accessGranted)
+{
+	HeaderRedirect("menu");
+}
 
 
 require_once('include/xtempl.php');

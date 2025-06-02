@@ -398,6 +398,7 @@
 'import_field75',
 'import_field76' ) ),
 'cellMaps' => array(  ) ),
+'loginForm' => array( 'loginForm' => 3 ),
 'page' => array( 'verticalBar' => false,
 'labeledButtons' => array( 'update_records' => array(  ),
 'print_pages' => array(  ),

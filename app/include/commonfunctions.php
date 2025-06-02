@@ -283,6 +283,14 @@ function checkTableName($shortTName )
 		return true;
 	if ("daily_attendance_view" == $shortTName )
 		return true;
+	if ("users" == $shortTName )
+		return true;
+	if ("admin_rights" == $shortTName )
+		return true;
+	if ("admin_members" == $shortTName )
+		return true;
+	if ("admin_users" == $shortTName )
+		return true;
 	return false;
 }
 
@@ -693,6 +701,42 @@ function GetTablesList($pdfMode = false)
 	if( $tableAvailable ) {
 		$arr[]="public.daily_attendance_view";
 	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.users");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.users";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("admin_rights");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="admin_rights";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("admin_members");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="admin_members";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("admin_users");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="admin_users";
+	}
 	return $arr;
 }
 
@@ -742,6 +786,10 @@ function GetTablesListWithoutSecurity()
 	$arr[]="public.participant_attendance_summary";
 	$arr[]="public.training_participation";
 	$arr[]="public.daily_attendance_view";
+	$arr[]="public.users";
+	$arr[]="admin_rights";
+	$arr[]="admin_members";
+	$arr[]="admin_users";
 	return $arr;
 }
 
@@ -1346,6 +1394,12 @@ function GetUserPermissionsDynamic( $table )
 	global $gPermissionsRefreshTime,$gPermissionsRead;
 	if( Security::isAdmin() )
 	{
+		if($table=="admin_rights")
+			return "ADESPIM";
+		if($table=="admin_members")
+			return "ADESPIM";
+		if($table=="admin_users")
+			return "ADESPIM";
 	}
 
 	$userRights = &Security::dynamicUserRights();
@@ -1366,242 +1420,222 @@ function GetUserPermissionsStatic( $table )
 	if( $table=="public.antibiotics" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.case_antibiotics" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.clean_cut_implementations" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.countries" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.device_distributions" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.diagnoses" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.facilities" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.follow_ups" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.languages" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.lifebox_staff" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.partners" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.procedures" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.regions" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.surgical_cases" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.trainers" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.training_courses" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.training_languages" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.training_leads" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.training_partners" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.training_sessions" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.training_trainers" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.ward_antibiotics" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.ward_rounds" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.clean_cut_implementation_summary_view" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.device_distribution_summary_view" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.surgical_case_summary_view" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.training_summary_view" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.programs" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.training_approaches" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.training_types" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.quarters" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.participant_role" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.sex" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.training_participants" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.venues" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.training_attendance" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.participant_attendance_detail" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.participant_attendance_summary" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.training_participation" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.daily_attendance_view" )
 	{
 //	default permissions
-		// grant all by default
 		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.users" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="admin_rights" )
+	{
+//	default permissions
+		return "".$extraPerm;
+	}
+	if( $table=="admin_members" )
+	{
+//	default permissions
+		return "".$extraPerm;
+	}
+	if( $table=="admin_users" )
+	{
+//	default permissions
+		return "".$extraPerm;
 	}
 	// grant nothing by default
 	return "";

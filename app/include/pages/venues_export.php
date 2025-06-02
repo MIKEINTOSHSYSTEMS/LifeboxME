@@ -124,6 +124,7 @@
 'export_field13',
 'export_field14' ) ),
 'cellMaps' => array(  ) ),
+'loginForm' => array( 'loginForm' => 3 ),
 'page' => array( 'verticalBar' => false,
 'labeledButtons' => array( 'update_records' => array(  ),
 'print_pages' => array(  ),

@@ -53,6 +53,7 @@
 'import_field6',
 'import_field7' ) ),
 'cellMaps' => array(  ) ),
+'loginForm' => array( 'loginForm' => 3 ),
 'page' => array( 'verticalBar' => false,
 'labeledButtons' => array( 'update_records' => array(  ),
 'print_pages' => array(  ),
