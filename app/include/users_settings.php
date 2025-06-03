@@ -2802,7 +2802,7 @@ $tdatausers[".hideMobileList"] = array();
 
 	
 		
-	$edata["LinkField"] = "country_id";
+	$edata["LinkField"] = "region_id";
 	$edata["LinkFieldType"] = 0;
 	$edata["DisplayField"] = "country_name";
 
@@ -3228,7 +3228,7 @@ $tdatausers[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Text field");
+	$edata = array("EditFormat" => "Readonly");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -3252,10 +3252,8 @@ $tdatausers[".hideMobileList"] = array();
 	
 	
 	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-		
+	
+	
 		$edata["controlWidth"] = 200;
 
 //	Begin validation

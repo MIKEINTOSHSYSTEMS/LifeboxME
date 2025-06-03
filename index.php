@@ -808,7 +808,7 @@
         <div class="modal-dialog modal-lg modal-notice">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">System Updates & Notices</h5>
+                    <h5 class="modal-title"><i class="fa-solid fa-hexagon-exclamation"></i> [TEST - DEVENV] System Updates & Notices</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -832,6 +832,7 @@
                         <h5><i class="fas fa-bullhorn me-2"></i> Training Opportunity</h5>
                         <p>We're offering a free online training session on advanced reporting features on <strong>October 20, 2025</strong>. <a href="#" class="alert-link">Click here to register</a>.</p>
                     </div>
+                    <a href="./app/login.php" class="btn btn btn-secondary"><i class="fa-solid fa-arrow-right-to-arc"></i> Login</a>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

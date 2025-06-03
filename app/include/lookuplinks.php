@@ -502,6 +502,13 @@ function InitLookupLinks()
 			$lookupTableLinks["public.countries"]["users.country"] = array();
 		}
 		$lookupTableLinks["public.countries"]["users.country"]["edit"] = array("table" => "public.users", "field" => "country", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.sex"] ) ) {
+			$lookupTableLinks["public.sex"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.sex"]["admin_users.sex"] )) {
+			$lookupTableLinks["public.sex"]["admin_users.sex"] = array();
+		}
+		$lookupTableLinks["public.sex"]["admin_users.sex"]["edit"] = array("table" => "admin_users", "field" => "sex", "page" => "edit");
 		if( !isset( $lookupTableLinks["public.regions"] ) ) {
 			$lookupTableLinks["public.regions"] = array();
 		}

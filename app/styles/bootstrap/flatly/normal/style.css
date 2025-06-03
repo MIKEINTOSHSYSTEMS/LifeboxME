@@ -4563,10 +4563,74 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     margin-right: 0;
   }
 }
+
+/*
 .navbar-default {
-  background-color: #17a2b8;
+  background-color: #078ca9e7;
   border-color: transparent;
 }
+*/
+
+.navbar-default {
+  /*background-color: rgba(23, 162, 184, 0.85);*/
+  background-color: #078ca9e7;
+  /* Adding opacity to the background */
+  border-color: transparent;
+  /* Remove border color */
+  
+  /* 
+  position: sticky;
+  Make the navbar sticky */
+
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: white;
+  /* Text color */
+  font-family: 'Arial', sans-serif;
+  /* Modern font */
+  font-size: 16px;
+  /* Appropriate font size */
+  font-weight: 600;
+  /* Bold text for contrast */
+  transition: color 0.3s ease-in-out;
+  /* Smooth color transition */
+}
+
+/* Hover effect for links */
+.navbar-default .navbar-nav>li>a:hover {
+  color: #f7f9fc;
+  /* Light color on hover */
+  text-decoration: underline;
+  /* Underline on hover for a modern touch */
+}
+
+/* Optional: On scroll, you can add a more solid background to the navbar */
+.navbar-default.sticky-active {
+  background-color: rgba(23, 162, 184, 1);
+  /* Solid background when scrolling */
+}
+
+/* Make the navbar items center aligned */
+.navbar-default .navbar-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.navbar-default .navbar-nav>li {
+  margin: 0 15px;
+  /* Horizontal spacing between navbar items */
+}
+
+/* Optional: Add a hover effect for the entire navbar when the user hovers over it */
+.navbar-default:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  /* More pronounced shadow on hover */
+}
+
+
 .navbar-default .navbar-brand {
   color: rgba(255, 255, 255, 0.75);
 }
@@ -6867,7 +6931,7 @@ button.close {
 }
 table a:not(.btn),
 .table a:not(.btn) {
-  text-decoration: underline;
+  text-decoration: none;
 }
 table .dropdown-menu a,
 .table .dropdown-menu a {
@@ -7178,10 +7242,81 @@ select.form-control[size="1"] {
   border-color: #e5e5e5;
 }
 .bs-welcome-item.bs-welcome-item {
-  border-color: #d8d8d8;
+  width: 280px;
+  /* Set a fixed width */
+  height: 200px;
+  /* Set a fixed height */
   background: white;
   color: #2C3E50;
-  border-radius: 4px;
+  font-family: 'Arial', sans-serif;
+  /* Modern font */
+  font-weight: 600;
+  /* Slightly bold */
+  font-size: 16px;
+  line-height: 1.5;
+  border-radius: 15px;
+  /* Rounded corners for box */
+  padding: 10px;
+  /* Smaller padding to shrink the white background */
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+  position: relative;
+  /* Position relative to allow inner elements */
+  overflow: hidden;
+  /* Prevent anything from going outside rounded corners */
+  cursor: pointer;
+}
+
+.bs-welcome-item.bs-welcome-item .inner-content {
+  background: white;
+  /* White background for inner content */
+  padding: 12px;
+  /* Add padding inside to reduce white background area */
+  border-radius: 8px;
+  /* Smaller rounded corners for inner box */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Slight shadow inside the box */
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  /* Ensure padding is included in width/height calculation */
+}
+
+.bs-welcome-item.bs-welcome-item:hover {
+  transform: translateY(-6px);
+  /* Slight hover lift */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  border-color: #17a2b8;
+  background-color: #f7f9fc;
+}
+
+/* Hover animation */
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+
+  30% {
+    transform: translateY(-5px);
+  }
+
+  50% {
+    transform: translateY(0);
+  }
+
+  70% {
+    transform: translateY(-2px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Optional: Bounce on hover */
+.bs-welcome-item.bs-welcome-item:hover {
+  animation: bounce 0.5s ease-in-out;
 }
 .bs-admin-header.bs-admin-header:first-child > th {
   background-color: #f8f8f8;
@@ -7979,7 +8114,7 @@ table.indenttables > * > .rightsindent5 > td.rightscell.rightscell.rightscell.ri
     right: 0;
     top: 0;
     bottom: 0;
-    background: #888;
+    background: #4792a9;
     opacity: 0.35;
   }
   .r-left-collapsed ~ .r-body-shadow {
@@ -9335,7 +9470,7 @@ table.indenttables > * > .rightsindent5 > td.rightscell.rightscell.rightscell.ri
 }
 .bs-welcome-item[data-comment-len="0"] > .bs-welcome-header,
 .bs-welcome-header:last-child {
-  border-radius: 4px;
+  border-radius: 11px;
   border-bottom: solid #d8d8d8 1px;
 }
 .welcome-group {
@@ -11963,7 +12098,7 @@ However there might have been the case where dropdown showed up where it shouldn
     transform: rotate(-0.25turn);
   }
   [data-location="supertop"] .open > .dropdown-menu {
-    background-color: #1ab6cf;
+    background-color: #f7f7f7;
     padding-top: 0;
     padding-bottom: 0;
   }

@@ -1,6 +1,9 @@
 [data-cellid="grid_buttons"][data-page="_global_userinfo"][data-cellid="grid_buttons"][data-page="_global_userinfo"][data-cellid="grid_buttons"][data-page="_global_userinfo"] {
   padding: 15px;
 }
+[data-cellid="grid_fields15"][data-page="_global_userinfo"][data-cellid="grid_fields15"][data-page="_global_userinfo"][data-cellid="grid_fields15"][data-page="_global_userinfo"] {
+  background-color: #c7ffe7;
+}
 [data-page="_global_userinfo"][data-itemid="user_fields_title"] {
   font-size: 24px;
 }
