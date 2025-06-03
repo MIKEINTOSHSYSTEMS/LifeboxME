@@ -20,7 +20,7 @@ $dalTableusers["region"] = array("type"=>200,"varname"=>"region", "name" => "reg
 $dalTableusers["country"] = array("type"=>200,"varname"=>"country", "name" => "country", "autoInc" => "0");
 $dalTableusers["phone"] = array("type"=>200,"varname"=>"phone", "name" => "phone", "autoInc" => "0");
 $dalTableusers["prefix_title"] = array("type"=>200,"varname"=>"prefix_title", "name" => "prefix_title", "autoInc" => "0");
-$dalTableusers["apikey"] = array("type"=>200,"varname"=>"apikey", "name" => "apikey", "autoInc" => "0");
+$dalTableusers["api_key"] = array("type"=>200,"varname"=>"api_key", "name" => "api_key", "autoInc" => "0");
 $dalTableusers["ID"]["key"]=true;
 
 $dal_info["lifebox_mesystem_at_localhost_public_users"] = &$dalTableusers;

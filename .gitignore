@@ -6,3 +6,5 @@ demo.php
 data/pgadmin-data/
 data/postgres-data/
 data/pgadmin-init/
+api/gen
+api/dhis2

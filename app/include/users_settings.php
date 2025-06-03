@@ -85,9 +85,9 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelsusers["English"]["prefix_title"] = "Prefix Title";
 	$fieldToolTipsusers["English"]["prefix_title"] = "";
 	$placeHoldersusers["English"]["prefix_title"] = "";
-	$fieldLabelsusers["English"]["apikey"] = "API Key";
-	$fieldToolTipsusers["English"]["apikey"] = "";
-	$placeHoldersusers["English"]["apikey"] = "";
+	$fieldLabelsusers["English"]["api_key"] = "API Key";
+	$fieldToolTipsusers["English"]["api_key"] = "";
+	$placeHoldersusers["English"]["api_key"] = "";
 	if (count($fieldToolTipsusers["English"]))
 		$tdatausers[".isUseToolTips"] = true;
 }
@@ -222,6 +222,7 @@ $tdatausers[".googleLikeFields"][] = "region";
 $tdatausers[".googleLikeFields"][] = "country";
 $tdatausers[".googleLikeFields"][] = "phone";
 $tdatausers[".googleLikeFields"][] = "prefix_title";
+$tdatausers[".googleLikeFields"][] = "api_key";
 
 
 
@@ -255,7 +256,7 @@ $tdatausers[".strOrderBy"] = $tstrOrderBy;
 $tdatausers[".orderindexes"] = array();
 
 
-$tdatausers[".sqlHead"] = "SELECT \"ID\",  	username,  	password,  	email,  	fullname,  	groupid,  	active,  	ext_security_id,  	userpic,  	reset_token,  	reset_date,  	first_name,  	middle_name,  	last_name,  	sex,  	designation_role,  	region,  	country,  	phone,  	prefix_title,  	apikey";
+$tdatausers[".sqlHead"] = "SELECT \"ID\",  	username,  	password,  	email,  	fullname,  	groupid,  	active,  	ext_security_id,  	userpic,  	reset_token,  	reset_date,  	first_name,  	middle_name,  	last_name,  	sex,  	designation_role,  	region,  	country,  	phone,  	prefix_title,  	api_key";
 $tdatausers[".sqlFrom"] = "FROM \"public\".users";
 $tdatausers[".sqlWhereExpr"] = "";
 $tdatausers[".sqlTail"] = "";
@@ -2801,7 +2802,7 @@ $tdatausers[".hideMobileList"] = array();
 
 	
 		
-	$edata["LinkField"] = "region_id";
+	$edata["LinkField"] = "country_id";
 	$edata["LinkFieldType"] = 0;
 	$edata["DisplayField"] = "country_name";
 
@@ -3169,14 +3170,14 @@ $tdatausers[".hideMobileList"] = array();
 
 	$tdatausers["prefix_title"] = $fdata;
 		$tdatausers[".searchableFields"][] = "prefix_title";
-//	apikey
+//	api_key
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 21;
-	$fdata["strName"] = "apikey";
-	$fdata["GoodName"] = "apikey";
+	$fdata["strName"] = "api_key";
+	$fdata["GoodName"] = "api_key";
 	$fdata["ownerTable"] = "public.users";
-	$fdata["Label"] = GetFieldLabel("public_users","apikey");
+	$fdata["Label"] = GetFieldLabel("public_users","api_key");
 	$fdata["FieldType"] = 200;
 
 
@@ -3184,13 +3185,13 @@ $tdatausers[".hideMobileList"] = array();
 	
 			
 
-		$fdata["strField"] = "apikey";
+		$fdata["strField"] = "api_key";
 
-		$fdata["sourceSingle"] = "apikey";
+		$fdata["sourceSingle"] = "api_key";
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "apikey";
+	$fdata["FullName"] = "api_key";
 
 	
 	
@@ -3290,8 +3291,7 @@ $tdatausers[".hideMobileList"] = array();
 //Filters settings
 	$fdata["filterTotals"] = 0;
 		$fdata["filterMultiSelect"] = 0;
-		$fdata["filterTotalFields"] = "ID";
-		$fdata["filterFormat"] = "Values list";
+			$fdata["filterFormat"] = "Values list";
 		$fdata["showCollapsed"] = false;
 
 		$fdata["sortValueType"] = 0;
@@ -3306,8 +3306,8 @@ $tdatausers[".hideMobileList"] = array();
 //end of Filters settings
 
 
-	$tdatausers["apikey"] = $fdata;
-		$tdatausers[".searchableFields"][] = "apikey";
+	$tdatausers["api_key"] = $fdata;
+		$tdatausers[".searchableFields"][] = "api_key";
 
 
 $tables_data["public.users"]=&$tdatausers;
@@ -3352,7 +3352,7 @@ function createSqlQuery_users()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "\"ID\",  	username,  	password,  	email,  	fullname,  	groupid,  	active,  	ext_security_id,  	userpic,  	reset_token,  	reset_date,  	first_name,  	middle_name,  	last_name,  	sex,  	designation_role,  	region,  	country,  	phone,  	prefix_title,  	apikey";
+$proto0["m_strFieldList"] = "\"ID\",  	username,  	password,  	email,  	fullname,  	groupid,  	active,  	ext_security_id,  	userpic,  	reset_token,  	reset_date,  	first_name,  	middle_name,  	last_name,  	sex,  	designation_role,  	region,  	country,  	phone,  	prefix_title,  	api_key";
 $proto0["m_strFrom"] = "FROM \"public\".users";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
@@ -3674,12 +3674,12 @@ $obj = new SQLFieldListItem($proto44);
 $proto0["m_fieldlist"][]=$obj;
 						$proto46=array();
 			$obj = new SQLField(array(
-	"m_strName" => "apikey",
+	"m_strName" => "api_key",
 	"m_strTable" => "public.users",
 	"m_srcTableName" => "public.users"
 ));
 
-$proto46["m_sql"] = "apikey";
+$proto46["m_sql"] = "api_key";
 $proto46["m_srcTableName"] = "public.users";
 $proto46["m_expr"]=$obj;
 $proto46["m_alias"] = "";
@@ -3713,7 +3713,7 @@ $proto49["m_columns"][] = "region";
 $proto49["m_columns"][] = "country";
 $proto49["m_columns"][] = "phone";
 $proto49["m_columns"][] = "prefix_title";
-$proto49["m_columns"][] = "apikey";
+$proto49["m_columns"][] = "api_key";
 $obj = new SQLTable($proto49);
 
 $proto48["m_table"] = $obj;

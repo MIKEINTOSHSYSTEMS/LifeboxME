@@ -22,4 +22,4 @@ Region: %region_value%
 Country: %country_value%
 Phone: %phone_value%
 Prefix Title: %prefix_title_value%
-API Key: %apikey_value%
+API Key: %api_key_value%

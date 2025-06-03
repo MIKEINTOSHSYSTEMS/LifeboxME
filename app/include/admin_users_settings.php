@@ -3524,7 +3524,7 @@ $proto47["m_columns"][] = "region";
 $proto47["m_columns"][] = "country";
 $proto47["m_columns"][] = "phone";
 $proto47["m_columns"][] = "prefix_title";
-$proto47["m_columns"][] = "apikey";
+$proto47["m_columns"][] = "api_key";
 $obj = new SQLTable($proto47);
 
 $proto46["m_table"] = $obj;

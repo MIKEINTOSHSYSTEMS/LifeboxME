@@ -766,9 +766,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "75_1748893416";
+$projectBuildKey = "79_1748960568";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "75";
+$projectBuildNumber = "79";
 
 $mlang_messages = array();
 $mlang_charsets = array();
@@ -925,10 +925,10 @@ $globalSettings["showDetailedError"] = true;
 
 $globalSettings["restCreate"] = true;
 $globalSettings["restReturnEncodedBinary"] = 1 != 0;
-$globalSettings["restAcceptEncodedBinary"] = 1 != 0;
+$globalSettings["restAcceptEncodedBinary"] = 0 != 0;
 $globalSettings["restAuth"] = REST_APIKEY;
 $globalSettings["APIkey"] = "";
-$globalSettings["APIkeyField"] = "apikey";
+$globalSettings["APIkeyField"] = "api_key";
 
 $globalSettings["mapMarkerCount"] = 50;
 
