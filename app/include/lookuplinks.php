@@ -250,6 +250,13 @@ function InitLookupLinks()
 			$lookupTableLinks["public.venues"]["training_sessions.venue_id"] = array();
 		}
 		$lookupTableLinks["public.venues"]["training_sessions.venue_id"]["edit"] = array("table" => "public.training_sessions", "field" => "venue_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.training_summary_view"] ) ) {
+			$lookupTableLinks["public.training_summary_view"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.training_summary_view"]["training_sessions.num_participants"] )) {
+			$lookupTableLinks["public.training_summary_view"]["training_sessions.num_participants"] = array();
+		}
+		$lookupTableLinks["public.training_summary_view"]["training_sessions.num_participants"]["edit"] = array("table" => "public.training_sessions", "field" => "num_participants", "page" => "edit");
 		if( !isset( $lookupTableLinks["public.training_sessions"] ) ) {
 			$lookupTableLinks["public.training_sessions"] = array();
 		}

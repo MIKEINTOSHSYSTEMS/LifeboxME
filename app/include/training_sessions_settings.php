@@ -252,8 +252,8 @@ $tdatatraining_sessions[".strOrderBy"] = $tstrOrderBy;
 $tdatatraining_sessions[".orderindexes"] = array();
 
 
-$tdatatraining_sessions[".sqlHead"] = "SELECT ts.training_id,  ts.course_id,  ts.training_type_id,  ts.approach_id,  ts.program_id,  ts.quarter,  ts.start_date,  ts.end_date,  ts.facility_id,  ts.host_country_id,  ts.venue_id,  ts.ceu_points,  ts.num_participants,  ts.avg_pre_test_score,  ts.avg_post_test_score,  ts.remarks,  CONCAT('Training ID: ', ts.training_id, ' | ', 'Course Name: ', tc.course_name, ' | ', 'Program Name: ', p.program_name, ' | ', 'Program ID: ', ts.program_id, ' | ', 'Quarter: ', ts.quarter, ' | ', 'Start Date: ', ts.start_date, ' | ', 'End Date: ', ts.end_date) AS training_details,  ts.created_at,  ts.updated_at";
-$tdatatraining_sessions[".sqlFrom"] = "FROM \"public\".training_sessions AS ts  INNER JOIN \"public\".training_courses AS tc ON ts.course_id = tc.course_id  INNER JOIN \"public\".programs AS p ON ts.program_id = p.program_id";
+$tdatatraining_sessions[".sqlHead"] = "SELECT ts.training_id,  ts.course_id,  ts.training_type_id,  ts.approach_id,  ts.program_id,  ts.quarter,  ts.start_date,  ts.end_date,  ts.facility_id,  ts.host_country_id,  ts.venue_id,  ts.ceu_points,  tsv.num_participants,  ts.avg_pre_test_score,  ts.avg_post_test_score,  ts.remarks,  CONCAT('Training ID: ', ts.training_id, ' | ', 'Course Name: ', tc.course_name, ' | ', 'Program Name: ', p.program_name, ' | ', 'Program ID: ', ts.program_id, ' | ', 'Quarter: ', ts.quarter, ' | ', 'Start Date: ', ts.start_date, ' | ', 'End Date: ', ts.end_date) AS training_details,  ts.created_at,  ts.updated_at";
+$tdatatraining_sessions[".sqlFrom"] = "FROM \"public\".training_sessions AS ts  INNER JOIN \"public\".training_courses AS tc ON ts.course_id = tc.course_id  INNER JOIN \"public\".programs AS p ON ts.program_id = p.program_id  INNER JOIN \"public\".training_summary_view AS tsv ON ts.training_id = tsv.training_id";
 $tdatatraining_sessions[".sqlWhereExpr"] = "";
 $tdatatraining_sessions[".sqlTail"] = "";
 
@@ -2189,7 +2189,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 	$fdata["Index"] = 13;
 	$fdata["strName"] = "num_participants";
 	$fdata["GoodName"] = "num_participants";
-	$fdata["ownerTable"] = "public.training_sessions";
+	$fdata["ownerTable"] = "public.training_summary_view";
 	$fdata["Label"] = GetFieldLabel("public_training_sessions","num_participants");
 	$fdata["FieldType"] = 3;
 
@@ -2204,7 +2204,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "ts.num_participants";
+	$fdata["FullName"] = "tsv.num_participants";
 
 	
 	
@@ -3461,8 +3461,8 @@ function createSqlQuery_training_sessions()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "ts.training_id,  ts.course_id,  ts.training_type_id,  ts.approach_id,  ts.program_id,  ts.quarter,  ts.start_date,  ts.end_date,  ts.facility_id,  ts.host_country_id,  ts.venue_id,  ts.ceu_points,  ts.num_participants,  ts.avg_pre_test_score,  ts.avg_post_test_score,  ts.remarks,  CONCAT('Training ID: ', ts.training_id, ' | ', 'Course Name: ', tc.course_name, ' | ', 'Program Name: ', p.program_name, ' | ', 'Program ID: ', ts.program_id, ' | ', 'Quarter: ', ts.quarter, ' | ', 'Start Date: ', ts.start_date, ' | ', 'End Date: ', ts.end_date) AS training_details,  ts.created_at,  ts.updated_at";
-$proto0["m_strFrom"] = "FROM \"public\".training_sessions AS ts  INNER JOIN \"public\".training_courses AS tc ON ts.course_id = tc.course_id  INNER JOIN \"public\".programs AS p ON ts.program_id = p.program_id";
+$proto0["m_strFieldList"] = "ts.training_id,  ts.course_id,  ts.training_type_id,  ts.approach_id,  ts.program_id,  ts.quarter,  ts.start_date,  ts.end_date,  ts.facility_id,  ts.host_country_id,  ts.venue_id,  ts.ceu_points,  tsv.num_participants,  ts.avg_pre_test_score,  ts.avg_post_test_score,  ts.remarks,  CONCAT('Training ID: ', ts.training_id, ' | ', 'Course Name: ', tc.course_name, ' | ', 'Program Name: ', p.program_name, ' | ', 'Program ID: ', ts.program_id, ' | ', 'Quarter: ', ts.quarter, ' | ', 'Start Date: ', ts.start_date, ' | ', 'End Date: ', ts.end_date) AS training_details,  ts.created_at,  ts.updated_at";
+$proto0["m_strFrom"] = "FROM \"public\".training_sessions AS ts  INNER JOIN \"public\".training_courses AS tc ON ts.course_id = tc.course_id  INNER JOIN \"public\".programs AS p ON ts.program_id = p.program_id  INNER JOIN \"public\".training_summary_view AS tsv ON ts.training_id = tsv.training_id";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
 	
@@ -3672,11 +3672,11 @@ $proto0["m_fieldlist"][]=$obj;
 						$proto30=array();
 			$obj = new SQLField(array(
 	"m_strName" => "num_participants",
-	"m_strTable" => "ts",
+	"m_strTable" => "tsv",
 	"m_srcTableName" => "public.training_sessions"
 ));
 
-$proto30["m_sql"] = "ts.num_participants";
+$proto30["m_sql"] = "tsv.num_participants";
 $proto30["m_srcTableName"] = "public.training_sessions";
 $proto30["m_expr"]=$obj;
 $proto30["m_alias"] = "";
@@ -3997,6 +3997,58 @@ $obj = new SQLLogicalExpr($proto74);
 
 $proto72["m_joinon"] = $obj;
 $obj = new SQLFromListItem($proto72);
+
+$proto0["m_fromlist"][]=$obj;
+												$proto76=array();
+$proto76["m_link"] = "SQLL_INNERJOIN";
+			$proto77=array();
+$proto77["m_strName"] = "public.training_summary_view";
+$proto77["m_srcTableName"] = "public.training_sessions";
+$proto77["m_columns"] = array();
+$proto77["m_columns"][] = "training_id";
+$proto77["m_columns"][] = "course_name";
+$proto77["m_columns"][] = "training_type";
+$proto77["m_columns"][] = "training_approach";
+$proto77["m_columns"][] = "program";
+$proto77["m_columns"][] = "quarter";
+$proto77["m_columns"][] = "start_date";
+$proto77["m_columns"][] = "end_date";
+$proto77["m_columns"][] = "facility_name";
+$proto77["m_columns"][] = "country_name";
+$proto77["m_columns"][] = "region_name";
+$proto77["m_columns"][] = "ceu_points";
+$proto77["m_columns"][] = "num_participants";
+$proto77["m_columns"][] = "avg_pre_test_score";
+$proto77["m_columns"][] = "avg_post_test_score";
+$proto77["m_columns"][] = "trainers";
+$proto77["m_columns"][] = "partners";
+$proto77["m_columns"][] = "languages";
+$proto77["m_columns"][] = "remarks";
+$obj = new SQLTable($proto77);
+
+$proto76["m_table"] = $obj;
+$proto76["m_sql"] = "INNER JOIN \"public\".training_summary_view AS tsv ON ts.training_id = tsv.training_id";
+$proto76["m_alias"] = "tsv";
+$proto76["m_srcTableName"] = "public.training_sessions";
+$proto78=array();
+$proto78["m_sql"] = "tsv.training_id = ts.training_id";
+$proto78["m_uniontype"] = "SQLL_UNKNOWN";
+						$obj = new SQLField(array(
+	"m_strName" => "training_id",
+	"m_strTable" => "tsv",
+	"m_srcTableName" => "public.training_sessions"
+));
+
+$proto78["m_column"]=$obj;
+$proto78["m_contained"] = array();
+$proto78["m_strCase"] = "= ts.training_id";
+$proto78["m_havingmode"] = false;
+$proto78["m_inBrackets"] = false;
+$proto78["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto78);
+
+$proto76["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto76);
 
 $proto0["m_fromlist"][]=$obj;
 $proto0["m_groupby"] = array();

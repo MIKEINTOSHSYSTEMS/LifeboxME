@@ -600,7 +600,7 @@ $tdatatraining_participation[".hideMobileList"] = array();
 
 	
 		$vdata["truncateText"] = true;
-	$vdata["NumberOfChars"] = 80;
+	$vdata["NumberOfChars"] = 170;
 
 	$fdata["ViewFormats"]["view"] = $vdata;
 //  End View Formats
