@@ -1,9 +1,12 @@
 <!-- Footer Section -->
 <footer class="">
+    <!--
     <link
         rel="stylesheet"
         href="../../assets/style/icons/all.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    
+    -->
     <div align="center" style="margin: 30px 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #078ca9e7; border: 1px solid 1e97b1; border-radius: 8px; padding: 20px; box-shadow: 0 3px 10px #0079a7cc;">
         <p style="font-size: 16px; color: white; margin: 0;">
 
@@ -18,7 +21,7 @@
             <span style="color: #ff6b35;">Designed &amp; Developed By</span>
             <a href="https://merqconsultancy.org" style="text-decoration: none; color: white; font-weight: bold;">MERQ Consultancy</a>
             <br></br>
-            <a href="../../" class="btn btn btn-warning"><i class="fa-solid fa-home"></i></a>
+            <a href="../../" class="btn btn btn-warning"><i class="fa fa-home"></i></a>
         </p>
     </div>
 </footer>
