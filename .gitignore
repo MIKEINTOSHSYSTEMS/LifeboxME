@@ -8,4 +8,5 @@ data/postgres-data/
 data/pgadmin-init/
 api/gen
 api/dhis2
-api/database/
+api/database/main/backup
+api/database/main/test.php
