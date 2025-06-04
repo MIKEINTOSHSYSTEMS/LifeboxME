@@ -8,3 +8,4 @@ data/postgres-data/
 data/pgadmin-init/
 api/gen
 api/dhis2
+api/database/
