@@ -466,6 +466,10 @@ class Chart
 			return true;
 		if("public.users" == $this->chrt_array['tables'][0])
 			return true;
+		if("public.lifeboxme__audit" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lifeboxme__locking" == $this->chrt_array['tables'][0])
+			return true;
 		return false;
 	}
 

@@ -586,6 +586,14 @@ class AuditTrailTable
 		{
 			return false;
 		}
+		if($table=="public.lifeboxme__audit")
+		{
+			return false;
+		}
+		if($table=="public.lifeboxme__locking")
+		{
+			return false;
+		}
 	}
 
 	protected function insert($datetime, $ip, $user, $table, $action, $description)
@@ -1121,6 +1129,14 @@ class AuditTrailFile
 			return false;
 		}
 		if($table=="admin_users")
+		{
+			return false;
+		}
+		if($table=="public.lifeboxme__audit")
+		{
+			return false;
+		}
+		if($table=="public.lifeboxme__locking")
 		{
 			return false;
 		}

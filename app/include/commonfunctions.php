@@ -291,6 +291,10 @@ function checkTableName($shortTName )
 		return true;
 	if ("admin_users" == $shortTName )
 		return true;
+	if ("lifeboxme__audit" == $shortTName )
+		return true;
+	if ("lifeboxme__locking" == $shortTName )
+		return true;
 	return false;
 }
 
@@ -737,6 +741,24 @@ function GetTablesList($pdfMode = false)
 	if( $tableAvailable ) {
 		$arr[]="admin_users";
 	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lifeboxme__audit");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lifeboxme__audit";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lifeboxme__locking");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lifeboxme__locking";
+	}
 	return $arr;
 }
 
@@ -790,6 +812,8 @@ function GetTablesListWithoutSecurity()
 	$arr[]="admin_rights";
 	$arr[]="admin_members";
 	$arr[]="admin_users";
+	$arr[]="public.lifeboxme__audit";
+	$arr[]="public.lifeboxme__locking";
 	return $arr;
 }
 
@@ -1636,6 +1660,16 @@ function GetUserPermissionsStatic( $table )
 	{
 //	default permissions
 		return "".$extraPerm;
+	}
+	if( $table=="public.lifeboxme__audit" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lifeboxme__locking" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
 	}
 	// grant nothing by default
 	return "";

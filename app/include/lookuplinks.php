@@ -250,13 +250,6 @@ function InitLookupLinks()
 			$lookupTableLinks["public.venues"]["training_sessions.venue_id"] = array();
 		}
 		$lookupTableLinks["public.venues"]["training_sessions.venue_id"]["edit"] = array("table" => "public.training_sessions", "field" => "venue_id", "page" => "edit");
-		if( !isset( $lookupTableLinks["public.training_summary_view"] ) ) {
-			$lookupTableLinks["public.training_summary_view"] = array();
-		}
-		if( !isset( $lookupTableLinks["public.training_summary_view"]["training_sessions.num_participants"] )) {
-			$lookupTableLinks["public.training_summary_view"]["training_sessions.num_participants"] = array();
-		}
-		$lookupTableLinks["public.training_summary_view"]["training_sessions.num_participants"]["edit"] = array("table" => "public.training_sessions", "field" => "num_participants", "page" => "edit");
 		if( !isset( $lookupTableLinks["public.training_sessions"] ) ) {
 			$lookupTableLinks["public.training_sessions"] = array();
 		}
@@ -530,6 +523,55 @@ function InitLookupLinks()
 			$lookupTableLinks["public.countries"]["admin_users.country"] = array();
 		}
 		$lookupTableLinks["public.countries"]["admin_users.country"]["edit"] = array("table" => "admin_users", "field" => "country", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lifeboxme__audit"] ) ) {
+			$lookupTableLinks["public.lifeboxme__audit"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lifeboxme__audit"]["lifeboxme__audit.ip"] )) {
+			$lookupTableLinks["public.lifeboxme__audit"]["lifeboxme__audit.ip"] = array();
+		}
+		$lookupTableLinks["public.lifeboxme__audit"]["lifeboxme__audit.ip"]["edit"] = array("table" => "public.lifeboxme__audit", "field" => "ip", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lifeboxme__audit"] ) ) {
+			$lookupTableLinks["public.lifeboxme__audit"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lifeboxme__audit"]["lifeboxme__audit.user"] )) {
+			$lookupTableLinks["public.lifeboxme__audit"]["lifeboxme__audit.user"] = array();
+		}
+		$lookupTableLinks["public.lifeboxme__audit"]["lifeboxme__audit.user"]["edit"] = array("table" => "public.lifeboxme__audit", "field" => "user", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lifeboxme__audit"] ) ) {
+			$lookupTableLinks["public.lifeboxme__audit"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lifeboxme__audit"]["lifeboxme__audit.table"] )) {
+			$lookupTableLinks["public.lifeboxme__audit"]["lifeboxme__audit.table"] = array();
+		}
+		$lookupTableLinks["public.lifeboxme__audit"]["lifeboxme__audit.table"]["edit"] = array("table" => "public.lifeboxme__audit", "field" => "table", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lifeboxme__audit"] ) ) {
+			$lookupTableLinks["public.lifeboxme__audit"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lifeboxme__audit"]["lifeboxme__audit.action"] )) {
+			$lookupTableLinks["public.lifeboxme__audit"]["lifeboxme__audit.action"] = array();
+		}
+		$lookupTableLinks["public.lifeboxme__audit"]["lifeboxme__audit.action"]["edit"] = array("table" => "public.lifeboxme__audit", "field" => "action", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lifeboxme__locking"] ) ) {
+			$lookupTableLinks["public.lifeboxme__locking"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lifeboxme__locking"]["lifeboxme__locking.table"] )) {
+			$lookupTableLinks["public.lifeboxme__locking"]["lifeboxme__locking.table"] = array();
+		}
+		$lookupTableLinks["public.lifeboxme__locking"]["lifeboxme__locking.table"]["edit"] = array("table" => "public.lifeboxme__locking", "field" => "table", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lifeboxme__locking"] ) ) {
+			$lookupTableLinks["public.lifeboxme__locking"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lifeboxme__locking"]["lifeboxme__locking.userid"] )) {
+			$lookupTableLinks["public.lifeboxme__locking"]["lifeboxme__locking.userid"] = array();
+		}
+		$lookupTableLinks["public.lifeboxme__locking"]["lifeboxme__locking.userid"]["edit"] = array("table" => "public.lifeboxme__locking", "field" => "userid", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lifeboxme__locking"] ) ) {
+			$lookupTableLinks["public.lifeboxme__locking"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lifeboxme__locking"]["lifeboxme__locking.action"] )) {
+			$lookupTableLinks["public.lifeboxme__locking"]["lifeboxme__locking.action"] = array();
+		}
+		$lookupTableLinks["public.lifeboxme__locking"]["lifeboxme__locking.action"]["edit"] = array("table" => "public.lifeboxme__locking", "field" => "action", "page" => "edit");
 }
 
 ?>

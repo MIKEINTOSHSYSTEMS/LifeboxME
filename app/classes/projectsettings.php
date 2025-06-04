@@ -3666,6 +3666,10 @@ function fillProjectEntites()
 	$projectEntitiesReverse[ "admin_members" ] = "admin_members";
 	$projectEntities[ "admin_users" ] = array( "url" => "admin_users", "type" => 1 );
 	$projectEntitiesReverse[ "admin_users" ] = "admin_users";
+	$projectEntities[ "public.lifeboxme__audit" ] = array( "url" => "lifeboxme__audit", "type" => 0 );
+	$projectEntitiesReverse[ "lifeboxme__audit" ] = "public.lifeboxme__audit";
+	$projectEntities[ "public.lifeboxme__locking" ] = array( "url" => "lifeboxme__locking", "type" => 0 );
+	$projectEntitiesReverse[ "lifeboxme__locking" ] = "public.lifeboxme__locking";
 }
 
 function findTable( $table ) {

@@ -287,6 +287,8 @@ class ConnectionManager_Base
 		$connectionsIds["admin_rights"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["admin_members"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["admin_users"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lifeboxme__audit"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lifeboxme__locking"] = "lifebox_mesystem_at_localhost";
 
 		$this->_tablesConnectionIds = &$connectionsIds;
 	}
