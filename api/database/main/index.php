@@ -19,9 +19,8 @@ $message = '';
 $error = '';
 
 // Database connection function
-function connectDB()
-{
-    $connString = "host=" . DB_HOST . " port=" . DB_PORT . " dbname=" . DB_NAME . " user=" . DB_USER . " password=" . DB_PASS;
+function connectDB() {
+    $connString = "host=".DB_HOST." port=".DB_PORT." dbname=".DB_NAME." user=".DB_USER." password=".DB_PASS;
     $conn = pg_connect($connString);
     if (!$conn) {
         die("Connection failed: " . pg_last_error());
@@ -33,10 +32,10 @@ function connectDB()
 if ($action === 'backup') {
     $backupName = 'lifeboxme_db_bak_' . date('Y-m-d_H-i-s') . '.sql';
     $backupPath = BACKUP_DIR . '/' . $backupName;
-
+    
     // Try both methods - first system command, then PHP fallback
     $backupSuccess = false;
-
+    
     // Method 1: System command (preferred)
     $pgDumpPaths = [
         '/usr/bin/pg_dump',
@@ -44,7 +43,7 @@ if ($action === 'backup') {
         '/opt/homebrew/bin/pg_dump', // For macOS Homebrew
         'pg_dump' // Try system PATH
     ];
-
+    
     $foundPgDump = null;
     foreach ($pgDumpPaths as $path) {
         if (is_executable($path)) {
@@ -52,7 +51,7 @@ if ($action === 'backup') {
             break;
         }
     }
-
+    
     if ($foundPgDump) {
         // Build the command with full path to pg_dump
         $command = sprintf(
@@ -64,15 +63,15 @@ if ($action === 'backup') {
             escapeshellarg($backupPath),
             escapeshellarg(DB_NAME)
         );
-
+        
         // Set PGPASSWORD in environment
-        putenv("PGPASSWORD=" . DB_PASS);
-
+        putenv("PGPASSWORD=".DB_PASS);
+        
         // Execute and capture output and return code
         $output = [];
         $returnCode = 0;
         exec($command . ' 2>&1', $output, $returnCode);
-
+        
         if ($returnCode === 0) {
             $message = "Backup created successfully (system command): " . $backupName;
             $backupSuccess = true;
@@ -80,7 +79,7 @@ if ($action === 'backup') {
             $errorDetails = "Backup command failed with error code: " . $returnCode . "<br>";
             $errorDetails .= "Command: " . htmlspecialchars($command) . "<br>";
             $errorDetails .= "Output: " . htmlspecialchars(implode("\n", $output));
-
+            
             // Clean up failed backup file if it was partially created
             if (file_exists($backupPath)) {
                 unlink($backupPath);
@@ -89,30 +88,30 @@ if ($action === 'backup') {
     } else {
         $errorDetails = "pg_dump command not found in common locations. Trying PHP fallback method.";
     }
-
+    
     // Method 2: PHP fallback if system command failed
     if (!$backupSuccess) {
         try {
             $conn = connectDB();
-
+            
             // Begin building SQL dump
             $dump = "";
-
+            
             // Add header
             $dump .= "-- PostgreSQL database dump\n";
             $dump .= "-- Generated at " . date('Y-m-d H:i:s') . "\n";
             $dump .= "-- Database: " . DB_NAME . "\n\n";
-
+            
             // Set search path
             $dump .= "SET search_path = public;\n\n";
-
+            
             // Add extensions
             $result = pg_query($conn, "SELECT extname FROM pg_extension");
             while ($row = pg_fetch_assoc($result)) {
                 $dump .= "CREATE EXTENSION IF NOT EXISTS \"{$row['extname']}\";\n";
             }
             $dump .= "\n";
-
+            
             // Add custom types
             $result = pg_query($conn, "SELECT t.typname, t.typbasetype, t.typtype, pg_catalog.format_type(t.typbasetype, t.typtypmod) as basetype 
                                       FROM pg_catalog.pg_type t 
@@ -134,20 +133,20 @@ if ($action === 'backup') {
                 }
             }
             $dump .= "\n";
-
+            
             // Get all tables in the database
             $result = pg_query($conn, "SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_type = 'BASE TABLE'");
             $tables = [];
             while ($row = pg_fetch_assoc($result)) {
                 $tables[] = $row['table_name'];
             }
-
+            
             // Add DROP statements for all objects
             foreach ($tables as $table) {
                 $dump .= "DROP TABLE IF EXISTS \"$table\" CASCADE;\n";
             }
             $dump .= "\n";
-
+            
             // Add CREATE TABLE statements and data
             foreach ($tables as $table) {
                 // Get table structure
@@ -159,43 +158,43 @@ if ($action === 'backup') {
                 if (!$result) {
                     throw new Exception("Failed to get table structure for $table: " . pg_last_error($conn));
                 }
-
+                
                 $columns = [];
                 while ($row = pg_fetch_assoc($result)) {
                     $columns[] = $row;
                 }
-
+                
                 // Build CREATE TABLE statement
                 $dump .= "CREATE TABLE \"$table\" (\n";
                 $columnDefs = [];
                 foreach ($columns as $col) {
                     $colDef = "  \"{$col['column_name']}\" ";
-
+                    
                     // Handle custom types (USER-DEFINED)
                     if ($col['data_type'] === 'USER-DEFINED') {
                         $colDef .= $col['udt_name'];
                     } else {
                         $colDef .= $col['data_type'];
                     }
-
+                    
                     // Add length for character types
                     if ($col['character_maximum_length']) {
                         $colDef .= "({$col['character_maximum_length']})";
                     }
-
+                    
                     // Add NOT NULL constraint
                     if ($col['is_nullable'] === 'NO') {
                         $colDef .= " NOT NULL";
                     }
-
+                    
                     // Add default value
                     if ($col['column_default']) {
                         $colDef .= " DEFAULT {$col['column_default']}";
                     }
-
+                    
                     $columnDefs[] = $colDef;
                 }
-
+                
                 // Add primary key
                 $pk_result = pg_query($conn, "SELECT kcu.column_name 
                                              FROM information_schema.table_constraints tc 
@@ -210,15 +209,15 @@ if ($action === 'backup') {
                 if (!empty($pk_columns)) {
                     $columnDefs[] = "PRIMARY KEY (" . implode(", ", $pk_columns) . ")";
                 }
-
+                
                 $dump .= implode(",\n", $columnDefs) . "\n);\n\n";
-
+                
                 // Get table data
                 $result = pg_query($conn, "SELECT * FROM \"$table\"");
                 if (!$result) {
                     throw new Exception("Failed to get data for $table: " . pg_last_error($conn));
                 }
-
+                
                 // Add INSERT statements
                 while ($row = pg_fetch_assoc($result)) {
                     $cols = [];
@@ -231,7 +230,7 @@ if ($action === 'backup') {
                 }
                 $dump .= "\n";
             }
-
+            
             // Add foreign key constraints
             foreach ($tables as $table) {
                 $result = pg_query($conn, "SELECT tc.constraint_name, 
@@ -247,12 +246,12 @@ if ($action === 'backup') {
                                           AND tc.constraint_type = 'FOREIGN KEY'");
                 while ($row = pg_fetch_assoc($result)) {
                     $dump .= "ALTER TABLE \"$table\" ADD CONSTRAINT \"{$row['constraint_name']}\" " .
-                        "FOREIGN KEY (\"{$row['column_name']}\") " .
-                        "REFERENCES \"{$row['foreign_table_name']}\" (\"{$row['foreign_column_name']}\");\n";
+                            "FOREIGN KEY (\"{$row['column_name']}\") " .
+                            "REFERENCES \"{$row['foreign_table_name']}\" (\"{$row['foreign_column_name']}\");\n";
                 }
             }
             $dump .= "\n";
-
+            
             // Add indexes
             foreach ($tables as $table) {
                 $result = pg_query($conn, "SELECT indexname, indexdef 
@@ -264,7 +263,7 @@ if ($action === 'backup') {
                 }
             }
             $dump .= "\n";
-
+            
             // Add functions
             $result = pg_query($conn, "SELECT proname, pg_get_functiondef(p.oid) AS functiondef 
                                       FROM pg_proc p 
@@ -273,7 +272,7 @@ if ($action === 'backup') {
             while ($row = pg_fetch_assoc($result)) {
                 $dump .= $row['functiondef'] . ";\n\n";
             }
-
+            
             // Add views
             $result = pg_query($conn, "SELECT table_name, view_definition 
                                       FROM information_schema.views 
@@ -281,7 +280,7 @@ if ($action === 'backup') {
             while ($row = pg_fetch_assoc($result)) {
                 $dump .= "CREATE OR REPLACE VIEW \"{$row['table_name']}\" AS {$row['view_definition']};\n\n";
             }
-
+            
             // Add triggers
             $result = pg_query($conn, "SELECT tgname, pg_get_triggerdef(t.oid) AS triggerdef 
                                       FROM pg_trigger t 
@@ -292,7 +291,7 @@ if ($action === 'backup') {
             while ($row = pg_fetch_assoc($result)) {
                 $dump .= $row['triggerdef'] . ";\n\n";
             }
-
+            
             // Write to file
             if (file_put_contents($backupPath, $dump) !== false) {
                 $message = "Backup created successfully (PHP fallback): " . $backupName;
@@ -300,13 +299,13 @@ if ($action === 'backup') {
             } else {
                 $errorDetails = "Failed to write backup file. Check directory permissions.";
             }
-
+            
             pg_close($conn);
         } catch (Exception $e) {
             $errorDetails = "Backup failed (PHP method): " . $e->getMessage();
         }
     }
-
+    
     if (!$backupSuccess) {
         $error = $errorDetails;
     }
@@ -316,11 +315,11 @@ if ($action === 'backup') {
 if ($action === 'restore' && isset($_POST['backup_file'])) {
     $backupFile = $_POST['backup_file'];
     $backupPath = BACKUP_DIR . '/' . $backupFile;
-
+    
     if (file_exists($backupPath)) {
         // Try system command first
         $restoreSuccess = false;
-
+        
         // Method 1: System command (preferred)
         $pgRestorePaths = [
             '/usr/bin/pg_restore',
@@ -328,7 +327,7 @@ if ($action === 'restore' && isset($_POST['backup_file'])) {
             '/opt/homebrew/bin/pg_restore', // For macOS Homebrew
             'pg_restore' // Try system PATH
         ];
-
+        
         $foundPgRestore = null;
         foreach ($pgRestorePaths as $path) {
             if (is_executable($path)) {
@@ -336,13 +335,13 @@ if ($action === 'restore' && isset($_POST['backup_file'])) {
                 break;
             }
         }
-
+        
         if ($foundPgRestore) {
             // Drop all existing connections first
             $conn = connectDB();
-            pg_query($conn, "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '" . DB_NAME . "' AND pid <> pg_backend_pid();");
+            pg_query($conn, "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '".DB_NAME."' AND pid <> pg_backend_pid();");
             pg_close($conn);
-
+            
             // Build restore command
             $command = sprintf(
                 '%s -h %s -p %s -U %s -d %s -c -v %s',
@@ -353,15 +352,15 @@ if ($action === 'restore' && isset($_POST['backup_file'])) {
                 escapeshellarg(DB_NAME),
                 escapeshellarg($backupPath)
             );
-
+            
             // Set PGPASSWORD in environment
-            putenv("PGPASSWORD=" . DB_PASS);
-
+            putenv("PGPASSWORD=".DB_PASS);
+            
             // Execute and capture output and return code
             $output = [];
             $returnCode = 0;
             exec($command . ' 2>&1', $output, $returnCode);
-
+            
             if ($returnCode === 0) {
                 $message = "Database restored successfully (system command) from: " . $backupFile;
                 $restoreSuccess = true;
@@ -373,24 +372,24 @@ if ($action === 'restore' && isset($_POST['backup_file'])) {
         } else {
             $errorDetails = "pg_restore command not found in common locations. Trying PHP fallback method.";
         }
-
+        
         // Method 2: PHP fallback if system command failed
         if (!$restoreSuccess) {
             try {
                 $conn = connectDB();
-
+                
                 // Drop all existing connections first
-                pg_query($conn, "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '" . DB_NAME . "' AND pid <> pg_backend_pid();");
-
+                pg_query($conn, "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '".DB_NAME."' AND pid <> pg_backend_pid();");
+                
                 // Read the backup file
                 $backupContent = file_get_contents($backupPath);
                 if ($backupContent === false) {
                     throw new Exception("Failed to read backup file");
                 }
-
+                
                 // Split into individual statements (more robust splitting)
                 $statements = preg_split('/;\s*\n/', $backupContent);
-
+                
                 // Execute each statement
                 foreach ($statements as $statement) {
                     $statement = trim($statement);
@@ -399,7 +398,7 @@ if ($action === 'restore' && isset($_POST['backup_file'])) {
                         if (strpos($statement, '--') === 0) {
                             continue;
                         }
-
+                        
                         // Handle multi-line statements (like CREATE FUNCTION)
                         if (preg_match('/\bCREATE\s+(OR\s+REPLACE\s+)?(FUNCTION|TRIGGER|VIEW)\b/i', $statement)) {
                             // Execute as-is (already ends with semicolon)
@@ -411,7 +410,7 @@ if ($action === 'restore' && isset($_POST['backup_file'])) {
                             }
                             $result = pg_query($conn, $statement);
                         }
-
+                        
                         if (!$result) {
                             $error = pg_last_error($conn);
                             // Skip certain errors that might be non-critical
@@ -421,7 +420,7 @@ if ($action === 'restore' && isset($_POST['backup_file'])) {
                         }
                     }
                 }
-
+                
                 $message = "Database restored successfully (PHP fallback) from: " . $backupFile;
                 $restoreSuccess = true;
                 pg_close($conn);
@@ -429,7 +428,7 @@ if ($action === 'restore' && isset($_POST['backup_file'])) {
                 $errorDetails = "Restore failed (PHP method): " . $e->getMessage();
             }
         }
-
+        
         if (!$restoreSuccess) {
             $error = $errorDetails;
         }
