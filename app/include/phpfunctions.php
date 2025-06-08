@@ -1074,6 +1074,10 @@ function GetDefaultValue($field, $ptype, $table="")
 	{
 		return strftime("%Y-%m-%d");
 	}
+				if($table=="public.device_distributions" && $field=="distribution_year")
+	{
+		return strftime("%Y");
+	}
 				if($table=="public.device_distributions" && $field=="created_at")
 	{
 		return strftime("%Y-%m-%d");
@@ -1194,6 +1198,10 @@ function GetDefaultValue($field, $ptype, $table="")
 	{
 		return strftime("%Y-%m-%d");
 	}
+				if($table=="public.devices" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d");
+	}
 	return "";
 }
 
@@ -1282,6 +1290,10 @@ function GetAutoUpdateValue($field, $ptype, $table="")
 		return strftime("%Y-%m-%d");
 	}
 				if($table=="public.venues" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d");
+	}
+				if($table=="public.devices" && $field=="updated_at")
 	{
 		return strftime("%Y-%m-%d");
 	}

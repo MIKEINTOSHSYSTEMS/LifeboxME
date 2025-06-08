@@ -124,6 +124,21 @@
 [data-page="_global_menu"][data-itemid="welcome_item41"] > .bs-welcome-header {
   background-color: #E07878;
 }
+[data-page="_global_menu"][data-itemid="welcome_item42"] > .bs-welcome-header {
+  background-color: #BC8F8F;
+}
+[data-page="_global_menu"][data-itemid="welcome_item43"] > .bs-welcome-header {
+  background-color: #CFAE83;
+}
+[data-page="_global_menu"][data-itemid="welcome_item44"] > .bs-welcome-header {
+  background-color: #D2691E;
+}
+[data-page="_global_menu"][data-itemid="welcome_item45"] > .bs-welcome-header {
+  background-color: #4169E1;
+}
+[data-page="_global_menu"][data-itemid="welcome_item46"] > .bs-welcome-header {
+  background-color: #DAA520;
+}
 [data-page="_global_menu"][data-itemid="page_image_ash8f23hr"] {
   width: 400px;
 }

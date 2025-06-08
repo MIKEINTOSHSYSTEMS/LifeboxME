@@ -11,6 +11,7 @@ $dalTablefacilities["longitude"] = array("type"=>14,"varname"=>"longitude", "nam
 $dalTablefacilities["is_active"] = array("type"=>11,"varname"=>"is_active", "name" => "is_active", "autoInc" => "0");
 $dalTablefacilities["created_at"] = array("type"=>135,"varname"=>"created_at", "name" => "created_at", "autoInc" => "0");
 $dalTablefacilities["updated_at"] = array("type"=>135,"varname"=>"updated_at", "name" => "updated_at", "autoInc" => "0");
+$dalTablefacilities["region_id"] = array("type"=>3,"varname"=>"region_id", "name" => "region_id", "autoInc" => "0");
 $dalTablefacilities["facility_id"]["key"]=true;
 
 $dal_info["lifebox_mesystem_at_localhost_public_facilities"] = &$dalTablefacilities;

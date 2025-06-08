@@ -423,6 +423,25 @@
 
 {END country_id_fieldblock}
 											
+{BEGIN facility_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_facility_id}  r-vertical-field" data-fieldname="facility_id" data-signal-error-for="facility_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="facility_id" data-fieldname="facility_id" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_facility_id}">
+		
+		{BEGIN facility_id_label}{$label public_device_distributions facility_id }{END facility_id_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$facility_id_value}	</div>
+
+		
+</div>
+
+
+{END facility_id_fieldblock}
+											
 {BEGIN device_type_fieldblock}
 
 
@@ -460,25 +479,6 @@
 
 
 {END order_reference_fieldblock}
-											
-{BEGIN facility_id_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_facility_id}  r-vertical-field" data-fieldname="facility_id" data-signal-error-for="facility_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="facility_id" data-fieldname="facility_id" data-compact >
-
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_facility_id}">
-		
-		{BEGIN facility_id_label}{$label public_device_distributions facility_id }{END facility_id_label}
-	</label>
-	<div class="col-md-offset-3 col-md-6" >
-		{$facility_id_value}	</div>
-
-		
-</div>
-
-
-{END facility_id_fieldblock}
 											
 {BEGIN monthly_surgical_volume_fieldblock}
 
@@ -575,6 +575,25 @@
 
 {END distribution_year_fieldblock}
 											
+{BEGIN transaction_type_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_transaction_type}  r-vertical-field" data-fieldname="transaction_type" data-signal-error-for="transaction_type{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field16" {$item_integrated_edit_field16} data-pageid="{$pageid}" data-field="transaction_type" data-fieldname="transaction_type" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_transaction_type}">
+		
+		{BEGIN transaction_type_label}{$label public_device_distributions transaction_type }{END transaction_type_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$transaction_type_value}	</div>
+
+		
+</div>
+
+
+{END transaction_type_fieldblock}
+											
 {BEGIN payment_method_fieldblock}
 
 
@@ -593,6 +612,25 @@
 
 
 {END payment_method_fieldblock}
+											
+{BEGIN donor_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_donor}  r-vertical-field" data-fieldname="donor" data-signal-error-for="donor{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field17" {$item_integrated_edit_field17} data-pageid="{$pageid}" data-field="donor" data-fieldname="donor" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_donor}">
+		
+		{BEGIN donor_label}{$label public_device_distributions donor }{END donor_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$donor_value}	</div>
+
+		
+</div>
+
+
+{END donor_fieldblock}
 											
 {BEGIN quantity_fieldblock}
 
@@ -706,10 +744,24 @@
 		</div>			 
 				<div 
 	data-cellId="below-grid_c2" data-pageid="{$pageid}"	{$cell_below-grid_c2}
-	class="r-align-right r-ori-vert			col-md-6
+	class="r-align-right			col-md-6
 	
 ">
 		 
+		<span data-itemtype="prev" data-itemid="prev" {$item_prev} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	{$prevbutton_class}" {$prevbutton_attrs} >
+					<span class="glyphicon glyphicon-menu-left"></span>
+										</a>
+</span>
+	 
+		<span data-itemtype="next" data-itemid="next" {$item_next} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	{$nextbutton_class}" {$nextbutton_attrs} >
+					<span class="glyphicon glyphicon-menu-right"></span>
+										</a>
+</span>
+	 
 		<span data-itemtype="hamburger" data-itemid="hamburger" {$item_hamburger} data-pageid="{$pageid}" data-small data-button-item>
 	<span class="dropdown dropup">
 		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		

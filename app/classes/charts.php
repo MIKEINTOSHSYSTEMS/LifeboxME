@@ -470,6 +470,16 @@ class Chart
 			return true;
 		if("public.lifeboxme__locking" == $this->chrt_array['tables'][0])
 			return true;
+		if("public.months" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.devices" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.payment_methods" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.transaction_types" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.donors" == $this->chrt_array['tables'][0])
+			return true;
 		return false;
 	}
 

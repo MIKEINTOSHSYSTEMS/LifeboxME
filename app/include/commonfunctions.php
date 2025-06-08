@@ -295,6 +295,16 @@ function checkTableName($shortTName )
 		return true;
 	if ("lifeboxme__locking" == $shortTName )
 		return true;
+	if ("months" == $shortTName )
+		return true;
+	if ("devices" == $shortTName )
+		return true;
+	if ("payment_methods" == $shortTName )
+		return true;
+	if ("transaction_types" == $shortTName )
+		return true;
+	if ("donors" == $shortTName )
+		return true;
 	return false;
 }
 
@@ -759,6 +769,51 @@ function GetTablesList($pdfMode = false)
 	if( $tableAvailable ) {
 		$arr[]="public.lifeboxme__locking";
 	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.months");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.months";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.devices");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.devices";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.payment_methods");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.payment_methods";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.transaction_types");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.transaction_types";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.donors");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.donors";
+	}
 	return $arr;
 }
 
@@ -814,6 +869,11 @@ function GetTablesListWithoutSecurity()
 	$arr[]="admin_users";
 	$arr[]="public.lifeboxme__audit";
 	$arr[]="public.lifeboxme__locking";
+	$arr[]="public.months";
+	$arr[]="public.devices";
+	$arr[]="public.payment_methods";
+	$arr[]="public.transaction_types";
+	$arr[]="public.donors";
 	return $arr;
 }
 
@@ -1667,6 +1727,31 @@ function GetUserPermissionsStatic( $table )
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.lifeboxme__locking" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.months" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.devices" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.payment_methods" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.transaction_types" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.donors" )
 	{
 //	default permissions
 		return "ADESPI".$extraPerm;

@@ -55,7 +55,9 @@ class tDAL
 	var $tbllifebox_mesystem_at_localhost_public_daily_attendance_view;
 	var $tbllifebox_mesystem_at_localhost_public_device_distribution_summary_view;
 	var $tbllifebox_mesystem_at_localhost_public_device_distributions;
+	var $tbllifebox_mesystem_at_localhost_public_devices;
 	var $tbllifebox_mesystem_at_localhost_public_diagnoses;
+	var $tbllifebox_mesystem_at_localhost_public_donors;
 	var $tbllifebox_mesystem_at_localhost_public_facilities;
 	var $tbllifebox_mesystem_at_localhost_public_follow_ups;
 	var $tbllifebox_mesystem_at_localhost_public_languages;
@@ -65,10 +67,12 @@ class tDAL
 	var $tbllifebox_mesystem_at_localhost_public_lifeboxme_uggroups;
 	var $tbllifebox_mesystem_at_localhost_public_lifeboxme_ugmembers;
 	var $tbllifebox_mesystem_at_localhost_public_lifeboxme_ugrights;
+	var $tbllifebox_mesystem_at_localhost_public_months;
 	var $tbllifebox_mesystem_at_localhost_public_participant_attendance_detail;
 	var $tbllifebox_mesystem_at_localhost_public_participant_attendance_summary;
 	var $tbllifebox_mesystem_at_localhost_public_participant_role;
 	var $tbllifebox_mesystem_at_localhost_public_partners;
+	var $tbllifebox_mesystem_at_localhost_public_payment_methods;
 	var $tbllifebox_mesystem_at_localhost_public_procedures;
 	var $tbllifebox_mesystem_at_localhost_public_programs;
 	var $tbllifebox_mesystem_at_localhost_public_quarters;
@@ -89,6 +93,7 @@ class tDAL
 	var $tbllifebox_mesystem_at_localhost_public_training_summary_view;
 	var $tbllifebox_mesystem_at_localhost_public_training_trainers;
 	var $tbllifebox_mesystem_at_localhost_public_training_types;
+	var $tbllifebox_mesystem_at_localhost_public_transaction_types;
 	var $tbllifebox_mesystem_at_localhost_public_users;
 	var $tbllifebox_mesystem_at_localhost_public_venues;
 	var $tbllifebox_mesystem_at_localhost_public_ward_antibiotics;
@@ -108,7 +113,9 @@ class tDAL
 		$this->lstTables[] = array("name" => "daily_attendance_view", "varname" => "lifebox_mesystem_at_localhost_public_daily_attendance_view", "altvarname" => "daily_attendance_view", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "device_distribution_summary_view", "varname" => "lifebox_mesystem_at_localhost_public_device_distribution_summary_view", "altvarname" => "device_distribution_summary_view", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "device_distributions", "varname" => "lifebox_mesystem_at_localhost_public_device_distributions", "altvarname" => "device_distributions", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "devices", "varname" => "lifebox_mesystem_at_localhost_public_devices", "altvarname" => "devices", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "diagnoses", "varname" => "lifebox_mesystem_at_localhost_public_diagnoses", "altvarname" => "diagnoses", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "donors", "varname" => "lifebox_mesystem_at_localhost_public_donors", "altvarname" => "donors", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "facilities", "varname" => "lifebox_mesystem_at_localhost_public_facilities", "altvarname" => "facilities", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "follow_ups", "varname" => "lifebox_mesystem_at_localhost_public_follow_ups", "altvarname" => "follow_ups", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "languages", "varname" => "lifebox_mesystem_at_localhost_public_languages", "altvarname" => "languages", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
@@ -118,10 +125,12 @@ class tDAL
 		$this->lstTables[] = array("name" => "lifeboxme_uggroups", "varname" => "lifebox_mesystem_at_localhost_public_lifeboxme_uggroups", "altvarname" => "lifeboxme_uggroups", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "lifeboxme_ugmembers", "varname" => "lifebox_mesystem_at_localhost_public_lifeboxme_ugmembers", "altvarname" => "lifeboxme_ugmembers", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "lifeboxme_ugrights", "varname" => "lifebox_mesystem_at_localhost_public_lifeboxme_ugrights", "altvarname" => "lifeboxme_ugrights", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "months", "varname" => "lifebox_mesystem_at_localhost_public_months", "altvarname" => "months", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "participant_attendance_detail", "varname" => "lifebox_mesystem_at_localhost_public_participant_attendance_detail", "altvarname" => "participant_attendance_detail", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "participant_attendance_summary", "varname" => "lifebox_mesystem_at_localhost_public_participant_attendance_summary", "altvarname" => "participant_attendance_summary", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "participant_role", "varname" => "lifebox_mesystem_at_localhost_public_participant_role", "altvarname" => "participant_role", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "partners", "varname" => "lifebox_mesystem_at_localhost_public_partners", "altvarname" => "partners", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "payment_methods", "varname" => "lifebox_mesystem_at_localhost_public_payment_methods", "altvarname" => "payment_methods", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "procedures", "varname" => "lifebox_mesystem_at_localhost_public_procedures", "altvarname" => "procedures", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "programs", "varname" => "lifebox_mesystem_at_localhost_public_programs", "altvarname" => "programs", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "quarters", "varname" => "lifebox_mesystem_at_localhost_public_quarters", "altvarname" => "quarters", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
@@ -142,6 +151,7 @@ class tDAL
 		$this->lstTables[] = array("name" => "training_summary_view", "varname" => "lifebox_mesystem_at_localhost_public_training_summary_view", "altvarname" => "training_summary_view", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "training_trainers", "varname" => "lifebox_mesystem_at_localhost_public_training_trainers", "altvarname" => "training_trainers", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "training_types", "varname" => "lifebox_mesystem_at_localhost_public_training_types", "altvarname" => "training_types", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "transaction_types", "varname" => "lifebox_mesystem_at_localhost_public_transaction_types", "altvarname" => "transaction_types", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "users", "varname" => "lifebox_mesystem_at_localhost_public_users", "altvarname" => "users", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "venues", "varname" => "lifebox_mesystem_at_localhost_public_venues", "altvarname" => "venues", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "ward_antibiotics", "varname" => "lifebox_mesystem_at_localhost_public_ward_antibiotics", "altvarname" => "ward_antibiotics", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");

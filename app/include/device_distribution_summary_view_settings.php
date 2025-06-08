@@ -25,7 +25,7 @@ if(mlang_getcurrentlang()=="English")
 	$fieldToolTipsdevice_distribution_summary_view["English"] = array();
 	$placeHoldersdevice_distribution_summary_view["English"] = array();
 	$pageTitlesdevice_distribution_summary_view["English"] = array();
-	$fieldLabelsdevice_distribution_summary_view["English"]["distribution_id"] = "Distribution Id";
+	$fieldLabelsdevice_distribution_summary_view["English"]["distribution_id"] = "D_ID";
 	$fieldToolTipsdevice_distribution_summary_view["English"]["distribution_id"] = "";
 	$placeHoldersdevice_distribution_summary_view["English"]["distribution_id"] = "";
 	$fieldLabelsdevice_distribution_summary_view["English"]["device_type"] = "Device Type";
@@ -425,7 +425,7 @@ $tdatadevice_distribution_summary_view[".hideMobileList"] = array();
 	$fdata["GoodName"] = "device_type";
 	$fdata["ownerTable"] = "public.device_distribution_summary_view";
 	$fdata["Label"] = GetFieldLabel("public_device_distribution_summary_view","device_type");
-	$fdata["FieldType"] = 13;
+	$fdata["FieldType"] = 3;
 
 
 	
@@ -475,7 +475,7 @@ $tdatadevice_distribution_summary_view[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Text field");
+	$edata = array("EditFormat" => "Lookup wizard");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -485,6 +485,34 @@ $tdatadevice_distribution_summary_view[".hideMobileList"] = array();
 	
 	
 
+// Begin Lookup settings
+				$edata["LookupType"] = 2;
+	$edata["LookupTable"] = "public.devices";
+			$edata["autoCompleteFieldsOnEdit"] = 0;
+	$edata["autoCompleteFields"] = array();
+		$edata["LCType"] = 0;
+
+	
+		
+	$edata["LinkField"] = "device_id";
+	$edata["LinkFieldType"] = 0;
+	$edata["DisplayField"] = "device_type";
+
+	
+
+	
+	$edata["LookupOrderBy"] = "";
+
+	
+	
+	
+	
+
+	
+	
+		$edata["SelectSize"] = 1;
+
+// End Lookup Settings
 
 
 	
@@ -499,17 +527,15 @@ $tdatadevice_distribution_summary_view[".hideMobileList"] = array();
 	
 	
 	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-		
+	
+	
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
 	$edata["validateAs"] = array();
 	$edata["validateAs"]["basicValidate"] = array();
 	$edata["validateAs"]["customMessages"] = array();
-	
+							
 	
 //	End validation
 
@@ -528,7 +554,7 @@ $tdatadevice_distribution_summary_view[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "Equals";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
@@ -1586,7 +1612,7 @@ $tdatadevice_distribution_summary_view[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Text field");
+	$edata = array("EditFormat" => "Lookup wizard");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -1596,6 +1622,34 @@ $tdatadevice_distribution_summary_view[".hideMobileList"] = array();
 	
 	
 
+// Begin Lookup settings
+				$edata["LookupType"] = 2;
+	$edata["LookupTable"] = "public.months";
+			$edata["autoCompleteFieldsOnEdit"] = 0;
+	$edata["autoCompleteFields"] = array();
+		$edata["LCType"] = 0;
+
+	
+		
+	$edata["LinkField"] = "id";
+	$edata["LinkFieldType"] = 0;
+	$edata["DisplayField"] = "month";
+
+	
+
+	
+	$edata["LookupOrderBy"] = "";
+
+	
+	
+	
+	
+
+	
+	
+		$edata["SelectSize"] = 1;
+
+// End Lookup Settings
 
 
 	
@@ -1610,17 +1664,14 @@ $tdatadevice_distribution_summary_view[".hideMobileList"] = array();
 	
 	
 	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-		
+	
+	
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
 	$edata["validateAs"] = array();
 	$edata["validateAs"]["basicValidate"] = array();
 	$edata["validateAs"]["customMessages"] = array();
-				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
 							
 	
 //	End validation
@@ -1640,7 +1691,7 @@ $tdatadevice_distribution_summary_view[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "Equals";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
@@ -1814,7 +1865,7 @@ $tdatadevice_distribution_summary_view[".hideMobileList"] = array();
 	$fdata["GoodName"] = "payment_method";
 	$fdata["ownerTable"] = "public.device_distribution_summary_view";
 	$fdata["Label"] = GetFieldLabel("public_device_distribution_summary_view","payment_method");
-	$fdata["FieldType"] = 13;
+	$fdata["FieldType"] = 3;
 
 
 	
@@ -1898,7 +1949,8 @@ $tdatadevice_distribution_summary_view[".hideMobileList"] = array();
 	$edata["validateAs"] = array();
 	$edata["validateAs"]["basicValidate"] = array();
 	$edata["validateAs"]["customMessages"] = array();
-	
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
+							
 	
 //	End validation
 

@@ -3670,6 +3670,16 @@ function fillProjectEntites()
 	$projectEntitiesReverse[ "lifeboxme__audit" ] = "public.lifeboxme__audit";
 	$projectEntities[ "public.lifeboxme__locking" ] = array( "url" => "lifeboxme__locking", "type" => 0 );
 	$projectEntitiesReverse[ "lifeboxme__locking" ] = "public.lifeboxme__locking";
+	$projectEntities[ "public.months" ] = array( "url" => "months", "type" => 0 );
+	$projectEntitiesReverse[ "months" ] = "public.months";
+	$projectEntities[ "public.devices" ] = array( "url" => "devices", "type" => 0 );
+	$projectEntitiesReverse[ "devices" ] = "public.devices";
+	$projectEntities[ "public.payment_methods" ] = array( "url" => "payment_methods", "type" => 0 );
+	$projectEntitiesReverse[ "payment_methods" ] = "public.payment_methods";
+	$projectEntities[ "public.transaction_types" ] = array( "url" => "transaction_types", "type" => 0 );
+	$projectEntitiesReverse[ "transaction_types" ] = "public.transaction_types";
+	$projectEntities[ "public.donors" ] = array( "url" => "donors", "type" => 0 );
+	$projectEntitiesReverse[ "donors" ] = "public.donors";
 }
 
 function findTable( $table ) {

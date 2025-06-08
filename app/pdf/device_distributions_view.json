@@ -176,13 +176,13 @@ pdfDocument = {
 			{"hidden":"{$item_hide_integrated_edit_field2}","stack":[{"text":"{$jslabel public_device_distributions country_id }","bold":true},{"text":{$country_id_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
+			{"hidden":"{$item_hide_integrated_edit_field5}","stack":[{"text":"{$jslabel public_device_distributions facility_id }","bold":true},{"text":{$facility_id_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
 			{"hidden":"{$item_hide_integrated_edit_field3}","stack":[{"text":"{$jslabel public_device_distributions device_type }","bold":true},{"text":{$device_type_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
 			{"hidden":"{$item_hide_integrated_edit_field4}","stack":[{"text":"{$jslabel public_device_distributions order_reference }","bold":true},{"text":{$order_reference_pdfvalue}}],"margin":[0,0,0,15]},
-				
-				
-			{"hidden":"{$item_hide_integrated_edit_field5}","stack":[{"text":"{$jslabel public_device_distributions facility_id }","bold":true},{"text":{$facility_id_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
 			{"hidden":"{$item_hide_integrated_edit_field6}","stack":[{"text":"{$jslabel public_device_distributions monthly_surgical_volume }","bold":true},{"text":{$monthly_surgical_volume_pdfvalue}}],"margin":[0,0,0,15]},
@@ -200,7 +200,13 @@ pdfDocument = {
 			{"hidden":"{$item_hide_integrated_edit_field10}","stack":[{"text":"{$jslabel public_device_distributions distribution_year }","bold":true},{"text":{$distribution_year_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
+			{"hidden":"{$item_hide_integrated_edit_field16}","stack":[{"text":"{$jslabel public_device_distributions transaction_type }","bold":true},{"text":{$transaction_type_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
 			{"hidden":"{$item_hide_integrated_edit_field11}","stack":[{"text":"{$jslabel public_device_distributions payment_method }","bold":true},{"text":{$payment_method_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field17}","stack":[{"text":"{$jslabel public_device_distributions donor }","bold":true},{"text":{$donor_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
 			{"hidden":"{$item_hide_integrated_edit_field12}","stack":[{"text":"{$jslabel public_device_distributions quantity }","bold":true},{"text":{$quantity_pdfvalue}}],"margin":[0,0,0,15]},
@@ -286,6 +292,12 @@ pdfDocument = {
 	
 			"text": [
 		
+				
+			{"text":""},
+				
+				
+			{"text":""},
+				
 				
 			{"text":""},
 				

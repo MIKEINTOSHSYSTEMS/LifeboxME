@@ -766,9 +766,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "91_1748960568";
+$projectBuildKey = "102_1749408009";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "91";
+$projectBuildNumber = "102";
 
 $mlang_messages = array();
 $mlang_charsets = array();
@@ -840,6 +840,11 @@ $tableCaptions["English"]["admin_members"] = "Admin Members";
 $tableCaptions["English"]["admin_users"] = "Admin Users";
 $tableCaptions["English"]["public_lifeboxme__audit"] = "Lifeboxme  Audit";
 $tableCaptions["English"]["public_lifeboxme__locking"] = "Lifeboxme  Locking";
+$tableCaptions["English"]["public_months"] = "Months";
+$tableCaptions["English"]["public_devices"] = "Devices";
+$tableCaptions["English"]["public_payment_methods"] = "Payment Methods";
+$tableCaptions["English"]["public_transaction_types"] = "Transaction Types";
+$tableCaptions["English"]["public_donors"] = "Donors";
 
 
 $globalEvents = new class_GlobalEvents;

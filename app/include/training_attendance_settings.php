@@ -5013,6 +5013,7 @@ $proto84["m_columns"][] = "longitude";
 $proto84["m_columns"][] = "is_active";
 $proto84["m_columns"][] = "created_at";
 $proto84["m_columns"][] = "updated_at";
+$proto84["m_columns"][] = "region_id";
 $obj = new SQLTable($proto84);
 
 $proto83["m_table"] = $obj;

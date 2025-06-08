@@ -31,7 +31,7 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelsfacilities["English"]["facility_name"] = "Facility Name";
 	$fieldToolTipsfacilities["English"]["facility_name"] = "";
 	$placeHoldersfacilities["English"]["facility_name"] = "";
-	$fieldLabelsfacilities["English"]["country_id"] = "Country Id";
+	$fieldLabelsfacilities["English"]["country_id"] = "Country";
 	$fieldToolTipsfacilities["English"]["country_id"] = "";
 	$placeHoldersfacilities["English"]["country_id"] = "";
 	$fieldLabelsfacilities["English"]["facility_type"] = "Facility Type";
@@ -58,6 +58,9 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelsfacilities["English"]["updated_at"] = "Updated At";
 	$fieldToolTipsfacilities["English"]["updated_at"] = "";
 	$placeHoldersfacilities["English"]["updated_at"] = "";
+	$fieldLabelsfacilities["English"]["region_id"] = "Region";
+	$fieldToolTipsfacilities["English"]["region_id"] = "";
+	$placeHoldersfacilities["English"]["region_id"] = "";
 	if (count($fieldToolTipsfacilities["English"]))
 		$tdatafacilities[".isUseToolTips"] = true;
 }
@@ -186,6 +189,7 @@ $tdatafacilities[".googleLikeFields"][] = "longitude";
 $tdatafacilities[".googleLikeFields"][] = "is_active";
 $tdatafacilities[".googleLikeFields"][] = "created_at";
 $tdatafacilities[".googleLikeFields"][] = "updated_at";
+$tdatafacilities[".googleLikeFields"][] = "region_id";
 
 
 
@@ -201,6 +205,7 @@ $tdatafacilities[".geocodingEnabled"] = false;
 
 
 
+$tdatafacilities[".isDisplayLoading"] = true;
 
 
 
@@ -219,7 +224,7 @@ $tdatafacilities[".strOrderBy"] = $tstrOrderBy;
 $tdatafacilities[".orderindexes"] = array();
 
 
-$tdatafacilities[".sqlHead"] = "SELECT facility_id,  	facility_name,  	country_id,  	facility_type,  	address,  	city,  	latitude,  	longitude,  	is_active,  	created_at,  	updated_at";
+$tdatafacilities[".sqlHead"] = "SELECT facility_id,  	facility_name,  	country_id,  	facility_type,  	address,  	city,  	latitude,  	longitude,  	is_active,  	created_at,  	updated_at,  	region_id";
 $tdatafacilities[".sqlFrom"] = "FROM \"public\".facilities";
 $tdatafacilities[".sqlWhereExpr"] = "";
 $tdatafacilities[".sqlTail"] = "";
@@ -635,7 +640,10 @@ $tdatafacilities[".hideMobileList"] = array();
 	$edata["LookupOrderBy"] = "";
 
 	
-	
+		$edata["UseCategory"] = true;
+	$edata["categoryFields"] = array();
+	$edata["categoryFields"][] = array( "main" => "region_id", "lookup" => "region_id" );
+
 	
 	
 
@@ -685,7 +693,7 @@ $tdatafacilities[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "Equals";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
@@ -1823,6 +1831,173 @@ $tdatafacilities[".hideMobileList"] = array();
 
 	$tdatafacilities["updated_at"] = $fdata;
 		$tdatafacilities[".searchableFields"][] = "updated_at";
+//	region_id
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 12;
+	$fdata["strName"] = "region_id";
+	$fdata["GoodName"] = "region_id";
+	$fdata["ownerTable"] = "public.facilities";
+	$fdata["Label"] = GetFieldLabel("public_facilities","region_id");
+	$fdata["FieldType"] = 3;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "region_id";
+
+		$fdata["sourceSingle"] = "region_id";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "region_id";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Lookup wizard");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+// Begin Lookup settings
+				$edata["LookupType"] = 2;
+	$edata["LookupTable"] = "public.regions";
+			$edata["autoCompleteFieldsOnEdit"] = 0;
+	$edata["autoCompleteFields"] = array();
+		$edata["LCType"] = 0;
+
+	
+		
+	$edata["LinkField"] = "region_id";
+	$edata["LinkFieldType"] = 0;
+	$edata["DisplayField"] = "region_name";
+
+	
+
+	
+	$edata["LookupOrderBy"] = "";
+
+	
+	
+	
+	
+				//dependent dropdowns @deprecated data ?
+	$edata["DependentLookups"] = array();
+	$edata["DependentLookups"][] = "country_id";
+
+	
+	
+		$edata["SelectSize"] = 1;
+
+// End Lookup Settings
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+	
+	
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+							
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Equals";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatafacilities["region_id"] = $fdata;
+		$tdatafacilities[".searchableFields"][] = "region_id";
 
 
 $tables_data["public.facilities"]=&$tdatafacilities;
@@ -2125,7 +2300,7 @@ function createSqlQuery_facilities()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "facility_id,  	facility_name,  	country_id,  	facility_type,  	address,  	city,  	latitude,  	longitude,  	is_active,  	created_at,  	updated_at";
+$proto0["m_strFieldList"] = "facility_id,  	facility_name,  	country_id,  	facility_type,  	address,  	city,  	latitude,  	longitude,  	is_active,  	created_at,  	updated_at,  	region_id";
 $proto0["m_strFrom"] = "FROM \"public\".facilities";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
@@ -2319,47 +2494,62 @@ $proto26["m_alias"] = "";
 $obj = new SQLFieldListItem($proto26);
 
 $proto0["m_fieldlist"][]=$obj;
-$proto0["m_fromlist"] = array();
-												$proto28=array();
-$proto28["m_link"] = "SQLL_MAIN";
-			$proto29=array();
-$proto29["m_strName"] = "public.facilities";
-$proto29["m_srcTableName"] = "public.facilities";
-$proto29["m_columns"] = array();
-$proto29["m_columns"][] = "facility_id";
-$proto29["m_columns"][] = "facility_name";
-$proto29["m_columns"][] = "country_id";
-$proto29["m_columns"][] = "facility_type";
-$proto29["m_columns"][] = "address";
-$proto29["m_columns"][] = "city";
-$proto29["m_columns"][] = "latitude";
-$proto29["m_columns"][] = "longitude";
-$proto29["m_columns"][] = "is_active";
-$proto29["m_columns"][] = "created_at";
-$proto29["m_columns"][] = "updated_at";
-$obj = new SQLTable($proto29);
+						$proto28=array();
+			$obj = new SQLField(array(
+	"m_strName" => "region_id",
+	"m_strTable" => "public.facilities",
+	"m_srcTableName" => "public.facilities"
+));
 
-$proto28["m_table"] = $obj;
-$proto28["m_sql"] = "\"public\".facilities";
-$proto28["m_alias"] = "";
+$proto28["m_sql"] = "region_id";
 $proto28["m_srcTableName"] = "public.facilities";
-$proto30=array();
-$proto30["m_sql"] = "";
-$proto30["m_uniontype"] = "SQLL_UNKNOWN";
+$proto28["m_expr"]=$obj;
+$proto28["m_alias"] = "";
+$obj = new SQLFieldListItem($proto28);
+
+$proto0["m_fieldlist"][]=$obj;
+$proto0["m_fromlist"] = array();
+												$proto30=array();
+$proto30["m_link"] = "SQLL_MAIN";
+			$proto31=array();
+$proto31["m_strName"] = "public.facilities";
+$proto31["m_srcTableName"] = "public.facilities";
+$proto31["m_columns"] = array();
+$proto31["m_columns"][] = "facility_id";
+$proto31["m_columns"][] = "facility_name";
+$proto31["m_columns"][] = "country_id";
+$proto31["m_columns"][] = "facility_type";
+$proto31["m_columns"][] = "address";
+$proto31["m_columns"][] = "city";
+$proto31["m_columns"][] = "latitude";
+$proto31["m_columns"][] = "longitude";
+$proto31["m_columns"][] = "is_active";
+$proto31["m_columns"][] = "created_at";
+$proto31["m_columns"][] = "updated_at";
+$proto31["m_columns"][] = "region_id";
+$obj = new SQLTable($proto31);
+
+$proto30["m_table"] = $obj;
+$proto30["m_sql"] = "\"public\".facilities";
+$proto30["m_alias"] = "";
+$proto30["m_srcTableName"] = "public.facilities";
+$proto32=array();
+$proto32["m_sql"] = "";
+$proto32["m_uniontype"] = "SQLL_UNKNOWN";
 	$obj = new SQLNonParsed(array(
 	"m_sql" => ""
 ));
 
-$proto30["m_column"]=$obj;
-$proto30["m_contained"] = array();
-$proto30["m_strCase"] = "";
-$proto30["m_havingmode"] = false;
-$proto30["m_inBrackets"] = false;
-$proto30["m_useAlias"] = false;
-$obj = new SQLLogicalExpr($proto30);
+$proto32["m_column"]=$obj;
+$proto32["m_contained"] = array();
+$proto32["m_strCase"] = "";
+$proto32["m_havingmode"] = false;
+$proto32["m_inBrackets"] = false;
+$proto32["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto32);
 
-$proto28["m_joinon"] = $obj;
-$obj = new SQLFromListItem($proto28);
+$proto30["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto30);
 
 $proto0["m_fromlist"][]=$obj;
 $proto0["m_groupby"] = array();
@@ -2375,7 +2565,7 @@ $queryData_facilities = createSqlQuery_facilities();
 	
 		;
 
-											
+												
 
 $tdatafacilities[".sqlquery"] = $queryData_facilities;
 

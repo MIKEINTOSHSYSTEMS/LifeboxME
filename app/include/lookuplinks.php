@@ -96,6 +96,41 @@ function InitLookupLinks()
 			$lookupTableLinks["public.facilities"]["device_distributions.facility_id"] = array();
 		}
 		$lookupTableLinks["public.facilities"]["device_distributions.facility_id"]["edit"] = array("table" => "public.device_distributions", "field" => "facility_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.months"] ) ) {
+			$lookupTableLinks["public.months"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.months"]["device_distributions.distribution_month"] )) {
+			$lookupTableLinks["public.months"]["device_distributions.distribution_month"] = array();
+		}
+		$lookupTableLinks["public.months"]["device_distributions.distribution_month"]["edit"] = array("table" => "public.device_distributions", "field" => "distribution_month", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.devices"] ) ) {
+			$lookupTableLinks["public.devices"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.devices"]["device_distributions.device_type"] )) {
+			$lookupTableLinks["public.devices"]["device_distributions.device_type"] = array();
+		}
+		$lookupTableLinks["public.devices"]["device_distributions.device_type"]["edit"] = array("table" => "public.device_distributions", "field" => "device_type", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.payment_methods"] ) ) {
+			$lookupTableLinks["public.payment_methods"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.payment_methods"]["device_distributions.payment_method"] )) {
+			$lookupTableLinks["public.payment_methods"]["device_distributions.payment_method"] = array();
+		}
+		$lookupTableLinks["public.payment_methods"]["device_distributions.payment_method"]["edit"] = array("table" => "public.device_distributions", "field" => "payment_method", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.transaction_types"] ) ) {
+			$lookupTableLinks["public.transaction_types"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.transaction_types"]["device_distributions.transaction_type"] )) {
+			$lookupTableLinks["public.transaction_types"]["device_distributions.transaction_type"] = array();
+		}
+		$lookupTableLinks["public.transaction_types"]["device_distributions.transaction_type"]["edit"] = array("table" => "public.device_distributions", "field" => "transaction_type", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.donors"] ) ) {
+			$lookupTableLinks["public.donors"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.donors"]["device_distributions.donor"] )) {
+			$lookupTableLinks["public.donors"]["device_distributions.donor"] = array();
+		}
+		$lookupTableLinks["public.donors"]["device_distributions.donor"]["edit"] = array("table" => "public.device_distributions", "field" => "donor", "page" => "edit");
 		if( !isset( $lookupTableLinks["public.countries"] ) ) {
 			$lookupTableLinks["public.countries"] = array();
 		}
@@ -103,6 +138,13 @@ function InitLookupLinks()
 			$lookupTableLinks["public.countries"]["facilities.country_id"] = array();
 		}
 		$lookupTableLinks["public.countries"]["facilities.country_id"]["edit"] = array("table" => "public.facilities", "field" => "country_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.regions"] ) ) {
+			$lookupTableLinks["public.regions"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.regions"]["facilities.region_id"] )) {
+			$lookupTableLinks["public.regions"]["facilities.region_id"] = array();
+		}
+		$lookupTableLinks["public.regions"]["facilities.region_id"]["edit"] = array("table" => "public.facilities", "field" => "region_id", "page" => "edit");
 		if( !isset( $lookupTableLinks["public.surgical_cases"] ) ) {
 			$lookupTableLinks["public.surgical_cases"] = array();
 		}
@@ -292,6 +334,20 @@ function InitLookupLinks()
 			$lookupTableLinks["public.facilities"]["ward_rounds.facility_id"] = array();
 		}
 		$lookupTableLinks["public.facilities"]["ward_rounds.facility_id"]["edit"] = array("table" => "public.ward_rounds", "field" => "facility_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.devices"] ) ) {
+			$lookupTableLinks["public.devices"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.devices"]["device_distribution_summary_view.device_type"] )) {
+			$lookupTableLinks["public.devices"]["device_distribution_summary_view.device_type"] = array();
+		}
+		$lookupTableLinks["public.devices"]["device_distribution_summary_view.device_type"]["edit"] = array("table" => "public.device_distribution_summary_view", "field" => "device_type", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.months"] ) ) {
+			$lookupTableLinks["public.months"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.months"]["device_distribution_summary_view.distribution_month"] )) {
+			$lookupTableLinks["public.months"]["device_distribution_summary_view.distribution_month"] = array();
+		}
+		$lookupTableLinks["public.months"]["device_distribution_summary_view.distribution_month"]["edit"] = array("table" => "public.device_distribution_summary_view", "field" => "distribution_month", "page" => "edit");
 		if( !isset( $lookupTableLinks["public.sex"] ) ) {
 			$lookupTableLinks["public.sex"] = array();
 		}
@@ -572,6 +628,13 @@ function InitLookupLinks()
 			$lookupTableLinks["public.lifeboxme__locking"]["lifeboxme__locking.action"] = array();
 		}
 		$lookupTableLinks["public.lifeboxme__locking"]["lifeboxme__locking.action"]["edit"] = array("table" => "public.lifeboxme__locking", "field" => "action", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.countries"] ) ) {
+			$lookupTableLinks["public.countries"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.countries"]["donors.country_id"] )) {
+			$lookupTableLinks["public.countries"]["donors.country_id"] = array();
+		}
+		$lookupTableLinks["public.countries"]["donors.country_id"]["edit"] = array("table" => "public.donors", "field" => "country_id", "page" => "edit");
 }
 
 ?>

@@ -1,0 +1,480 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
+	{BEGIN rtlCSS}
+	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
+	{END rtlCSS}
+	{BEGIN styleCSSFiles}
+	<link REL="stylesheet" href="{$stylepath}" type="text/css">
+	{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-search" >
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		{$locking}
+		<div class="r-small-page" 
+			data-body-align="center"
+			data-body-width="standard"
+		>
+							{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="small" {$form_top} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="top_c1" data-pageid="{$pageid}"	{$cell_top_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	 
+		<h2 data-itemtype="search_header" data-itemid="search_header" {$item_search_header} data-pageid="{$pageid}" >{$pagetitlelabel public_devices search}</h2>
+	</div>					</div>
+	</div>		
+{END top_block}
+									{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="small" {$form_above-grid} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	</div>					</div>
+	</div>		
+{END above-grid_block}
+									{BEGIN grid_block}
+
+
+
+
+ 
+	 
+												<table 
+	data-body-align="center"
+	data-location="grid" id="form_grid_{$pageid}" data-makeup="small" {$form_grid} data-pageid="{$pageid}" 
+	class="r-edit-form" cellpadding="0" cellspacing="0" 
+	{$grid_hiddenattr} 
+		data-form-width="1"
+		
+		data-v-width="6"
+	>
+	<tbody>
+										<tr {$row_grid_0} >
+										
+
+{BEGIN cellblock_grid_c3}
+<td
+	{$cell_grid_c3}
+	class=" r-ori-vert"
+	
+				data-fullwidth
+		
+			data-cellId="grid_c3" data-pageid="{$pageid}"
+		data-v-cell="6"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN device_id_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_device_id}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="device_id{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field" {$item_integrated_search_field} data-pageid="{$pageid}" data-field="device_id" data-fieldname="device_id" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_device_id}">
+		{$label public_devices device_id }	</label>
+	<div class="r-search-option">
+		{$searchtype_device_id}
+	</div>
+	<div class="r-search-field">
+		{$device_id_editcontrol}	</div>
+	<div class="r-search-field">
+		{$device_id_editcontrol1}
+	</div>
+	
+</div>
+
+{END device_id_fieldblock}
+											
+{BEGIN device_type_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_device_type}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="device_type{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field1" {$item_integrated_search_field1} data-pageid="{$pageid}" data-field="device_type" data-fieldname="device_type" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_device_type}">
+		{$label public_devices device_type }	</label>
+	<div class="r-search-option">
+		{$searchtype_device_type}
+	</div>
+	<div class="r-search-field">
+		{$device_type_editcontrol}	</div>
+	<div class="r-search-field">
+		{$device_type_editcontrol1}
+	</div>
+	
+</div>
+
+{END device_type_fieldblock}
+											
+{BEGIN model_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_model}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="model{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field2" {$item_integrated_search_field2} data-pageid="{$pageid}" data-field="model" data-fieldname="model" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_model}">
+		{$label public_devices model }	</label>
+	<div class="r-search-option">
+		{$searchtype_model}
+	</div>
+	<div class="r-search-field">
+		{$model_editcontrol}	</div>
+	<div class="r-search-field">
+		{$model_editcontrol1}
+	</div>
+	
+</div>
+
+{END model_fieldblock}
+											
+{BEGIN description_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_description}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="description{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field3" {$item_integrated_search_field3} data-pageid="{$pageid}" data-field="description" data-fieldname="description" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_description}">
+		{$label public_devices description }	</label>
+	<div class="r-search-option">
+		{$searchtype_description}
+	</div>
+	<div class="r-search-field">
+		{$description_editcontrol}	</div>
+	<div class="r-search-field">
+		{$description_editcontrol1}
+	</div>
+	
+</div>
+
+{END description_fieldblock}
+											
+{BEGIN serial_number_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_serial_number}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="serial_number{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field4" {$item_integrated_search_field4} data-pageid="{$pageid}" data-field="serial_number" data-fieldname="serial_number" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_serial_number}">
+		{$label public_devices serial_number }	</label>
+	<div class="r-search-option">
+		{$searchtype_serial_number}
+	</div>
+	<div class="r-search-field">
+		{$serial_number_editcontrol}	</div>
+	<div class="r-search-field">
+		{$serial_number_editcontrol1}
+	</div>
+	
+</div>
+
+{END serial_number_fieldblock}
+											
+{BEGIN manufacturer_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_manufacturer}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="manufacturer{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field5" {$item_integrated_search_field5} data-pageid="{$pageid}" data-field="manufacturer" data-fieldname="manufacturer" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_manufacturer}">
+		{$label public_devices manufacturer }	</label>
+	<div class="r-search-option">
+		{$searchtype_manufacturer}
+	</div>
+	<div class="r-search-field">
+		{$manufacturer_editcontrol}	</div>
+	<div class="r-search-field">
+		{$manufacturer_editcontrol1}
+	</div>
+	
+</div>
+
+{END manufacturer_fieldblock}
+											
+{BEGIN production_date_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_production_date}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="production_date{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field6" {$item_integrated_search_field6} data-pageid="{$pageid}" data-field="production_date" data-fieldname="production_date" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_production_date}">
+		{$label public_devices production_date }	</label>
+	<div class="r-search-option">
+		{$searchtype_production_date}
+	</div>
+	<div class="r-search-field">
+		{$production_date_editcontrol}	</div>
+	<div class="r-search-field">
+		{$production_date_editcontrol1}
+	</div>
+	
+</div>
+
+{END production_date_fieldblock}
+											
+{BEGIN warranty_expiry_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_warranty_expiry}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="warranty_expiry{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field7" {$item_integrated_search_field7} data-pageid="{$pageid}" data-field="warranty_expiry" data-fieldname="warranty_expiry" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_warranty_expiry}">
+		{$label public_devices warranty_expiry }	</label>
+	<div class="r-search-option">
+		{$searchtype_warranty_expiry}
+	</div>
+	<div class="r-search-field">
+		{$warranty_expiry_editcontrol}	</div>
+	<div class="r-search-field">
+		{$warranty_expiry_editcontrol1}
+	</div>
+	
+</div>
+
+{END warranty_expiry_fieldblock}
+											
+{BEGIN unit_price_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_unit_price}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="unit_price{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field8" {$item_integrated_search_field8} data-pageid="{$pageid}" data-field="unit_price" data-fieldname="unit_price" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_unit_price}">
+		{$label public_devices unit_price }	</label>
+	<div class="r-search-option">
+		{$searchtype_unit_price}
+	</div>
+	<div class="r-search-field">
+		{$unit_price_editcontrol}	</div>
+	<div class="r-search-field">
+		{$unit_price_editcontrol1}
+	</div>
+	
+</div>
+
+{END unit_price_fieldblock}
+											
+{BEGIN total_quantity_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_total_quantity}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="total_quantity{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field9" {$item_integrated_search_field9} data-pageid="{$pageid}" data-field="total_quantity" data-fieldname="total_quantity" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_total_quantity}">
+		{$label public_devices total_quantity }	</label>
+	<div class="r-search-option">
+		{$searchtype_total_quantity}
+	</div>
+	<div class="r-search-field">
+		{$total_quantity_editcontrol}	</div>
+	<div class="r-search-field">
+		{$total_quantity_editcontrol1}
+	</div>
+	
+</div>
+
+{END total_quantity_fieldblock}
+											
+{BEGIN available_quantity_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_available_quantity}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="available_quantity{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field10" {$item_integrated_search_field10} data-pageid="{$pageid}" data-field="available_quantity" data-fieldname="available_quantity" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_available_quantity}">
+		{$label public_devices available_quantity }	</label>
+	<div class="r-search-option">
+		{$searchtype_available_quantity}
+	</div>
+	<div class="r-search-field">
+		{$available_quantity_editcontrol}	</div>
+	<div class="r-search-field">
+		{$available_quantity_editcontrol1}
+	</div>
+	
+</div>
+
+{END available_quantity_fieldblock}
+											
+{BEGIN status_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_status}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="status{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field11" {$item_integrated_search_field11} data-pageid="{$pageid}" data-field="status" data-fieldname="status" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_status}">
+		{$label public_devices status }	</label>
+	<div class="r-search-option">
+		{$searchtype_status}
+	</div>
+	<div class="r-search-field">
+		{$status_editcontrol}	</div>
+	<div class="r-search-field">
+		{$status_editcontrol1}
+	</div>
+	
+</div>
+
+{END status_fieldblock}
+											
+{BEGIN warehouse_location_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_warehouse_location}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="warehouse_location{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field13" {$item_integrated_search_field13} data-pageid="{$pageid}" data-field="warehouse_location" data-fieldname="warehouse_location" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_warehouse_location}">
+		{$label public_devices warehouse_location }	</label>
+	<div class="r-search-option">
+		{$searchtype_warehouse_location}
+	</div>
+	<div class="r-search-field">
+		{$warehouse_location_editcontrol}	</div>
+	<div class="r-search-field">
+		{$warehouse_location_editcontrol1}
+	</div>
+	
+</div>
+
+{END warehouse_location_fieldblock}
+											
+{BEGIN created_at_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_created_at}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="created_at{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field14" {$item_integrated_search_field14} data-pageid="{$pageid}" data-field="created_at" data-fieldname="created_at" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_created_at}">
+		{$label public_devices created_at }	</label>
+	<div class="r-search-option">
+		{$searchtype_created_at}
+	</div>
+	<div class="r-search-field">
+		{$created_at_editcontrol}	</div>
+	<div class="r-search-field">
+		{$created_at_editcontrol1}
+	</div>
+	
+</div>
+
+{END created_at_fieldblock}
+											
+{BEGIN updated_at_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_updated_at}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="updated_at{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field15" {$item_integrated_search_field15} data-pageid="{$pageid}" data-field="updated_at" data-fieldname="updated_at" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_updated_at}">
+		{$label public_devices updated_at }	</label>
+	<div class="r-search-option">
+		{$searchtype_updated_at}
+	</div>
+	<div class="r-search-field">
+		{$updated_at_editcontrol}	</div>
+	<div class="r-search-field">
+		{$updated_at_editcontrol1}
+	</div>
+	
+</div>
+
+{END updated_at_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c3}
+								</tr>
+			</tbody></table>
+{END grid_block}
+									{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="small" {$form_below-grid} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class="			col-md-12
+	">
+	 
+		<span data-itemtype="search_search" data-itemid="search_search" {$item_search_search} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" {$searchbutton_attrs} data-page=undefined >
+							Search			</a>
+</span>
+	 
+		<span data-itemtype="search_reset" data-itemid="search_reset" {$item_search_reset} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$resetbutton_attrs} >
+							Reset			</a>
+</span>
+	 
+		{BEGIN back_button}
+<span data-itemtype="search_back_list" data-itemid="search_back_list" {$item_search_back_list} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$backbutton_attrs} >
+							Back to list			</a>
+</span>
+{END back_button}
+	 
+		{BEGIN cancel_button}
+<span data-itemtype="search_cancel" data-itemid="search_cancel" {$item_search_cancel} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" id="cancelButton{$id}" >
+							Cancel			</a>
+</span>
+{END cancel_button}
+	</div>					</div>
+	</div>		
+{END below-grid_block}
+			</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

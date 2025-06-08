@@ -594,6 +594,26 @@ class AuditTrailTable
 		{
 			return false;
 		}
+		if($table=="public.months")
+		{
+			return false;
+		}
+		if($table=="public.devices")
+		{
+			return false;
+		}
+		if($table=="public.payment_methods")
+		{
+			return false;
+		}
+		if($table=="public.transaction_types")
+		{
+			return false;
+		}
+		if($table=="public.donors")
+		{
+			return false;
+		}
 	}
 
 	protected function insert($datetime, $ip, $user, $table, $action, $description)
@@ -1137,6 +1157,26 @@ class AuditTrailFile
 			return false;
 		}
 		if($table=="public.lifeboxme__locking")
+		{
+			return false;
+		}
+		if($table=="public.months")
+		{
+			return false;
+		}
+		if($table=="public.devices")
+		{
+			return false;
+		}
+		if($table=="public.payment_methods")
+		{
+			return false;
+		}
+		if($table=="public.transaction_types")
+		{
+			return false;
+		}
+		if($table=="public.donors")
 		{
 			return false;
 		}

@@ -173,6 +173,9 @@ pdfDocument = {
 			{"hidden":"{$item_hide_integrated_edit_field1}","stack":[{"text":"{$jslabel public_facilities facility_name }","bold":true},{"text":{$facility_name_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
+			{"hidden":"{$item_hide_integrated_edit_field11}","stack":[{"text":"{$jslabel public_facilities region_id }","bold":true},{"text":{$region_id_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
 			{"hidden":"{$item_hide_integrated_edit_field2}","stack":[{"text":"{$jslabel public_facilities country_id }","bold":true},{"text":{$country_id_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
@@ -271,6 +274,12 @@ pdfDocument = {
 	
 			"text": [
 		
+				
+			{"text":""},
+				
+				
+			{"text":""},
+				
 				
 			{"text":""},
 				

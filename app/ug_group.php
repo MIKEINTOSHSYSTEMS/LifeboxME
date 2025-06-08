@@ -61,6 +61,11 @@ $nonAdminTablesArr[] = "public.daily_attendance_view";
 $nonAdminTablesArr[] = "public.users";
 $nonAdminTablesArr[] = "public.lifeboxme__audit";
 $nonAdminTablesArr[] = "public.lifeboxme__locking";
+$nonAdminTablesArr[] = "public.months";
+$nonAdminTablesArr[] = "public.devices";
+$nonAdminTablesArr[] = "public.payment_methods";
+$nonAdminTablesArr[] = "public.transaction_types";
+$nonAdminTablesArr[] = "public.donors";
 
 $ug_connection = $cman->getForUserGroups();
 

@@ -82,6 +82,32 @@
 
 	$menuNodes[] = $menuNode;
 	$menuNode = array();
+	$menuNode["id"] = "63";
+	$menuNode["name"] = "";
+	$menuNode["href"] = "mypage.htm";
+	$menuNode["type"] = "Leaf";
+	$menuNode["table"] = "public.devices";
+	$menuNode["style"] = "";
+	$menuNode["params"] = "";
+	$menuNode["parent"] = "0";
+	$menuNode["nameType"] = "Text";
+	$menuNode["linkType"] = "Internal";
+	$menuNode["pageType"] = strtolower("List");//
+	$menuNode["pageId"] = "";
+	$menuNode["openType"] = "None";
+
+	$menuNode["icon"] = "fa-laptop";
+	$menuNode["iconType"] = "3";
+	$menuNode["iconShow"] = "1";
+
+		$menuNode["color"] = "";
+
+	$menuNode["title"] = "Devices";
+
+
+
+	$menuNodes[] = $menuNode;
+	$menuNode = array();
 	$menuNode["id"] = "3";
 	$menuNode["name"] = "";
 	$menuNode["href"] = "mypage.htm";
@@ -1356,6 +1382,32 @@
 
 	$menuNodes[] = $menuNode;
 	$menuNode = array();
+	$menuNode["id"] = "66";
+	$menuNode["name"] = "";
+	$menuNode["href"] = "mypage.htm";
+	$menuNode["type"] = "Leaf";
+	$menuNode["table"] = "public.donors";
+	$menuNode["style"] = "";
+	$menuNode["params"] = "";
+	$menuNode["parent"] = "35";
+	$menuNode["nameType"] = "Text";
+	$menuNode["linkType"] = "Internal";
+	$menuNode["pageType"] = strtolower("List");//
+	$menuNode["pageId"] = "";
+	$menuNode["openType"] = "None";
+
+	$menuNode["icon"] = "fa-diamond";
+	$menuNode["iconType"] = "3";
+	$menuNode["iconShow"] = "1";
+
+		$menuNode["color"] = "";
+
+	$menuNode["title"] = "Donors";
+
+
+
+	$menuNodes[] = $menuNode;
+	$menuNode = array();
 	$menuNode["id"] = "38";
 	$menuNode["name"] = "";
 	$menuNode["href"] = "mypage.htm";
@@ -1408,6 +1460,32 @@
 
 	$menuNodes[] = $menuNode;
 	$menuNode = array();
+	$menuNode["id"] = "62";
+	$menuNode["name"] = "";
+	$menuNode["href"] = "mypage.htm";
+	$menuNode["type"] = "Leaf";
+	$menuNode["table"] = "public.months";
+	$menuNode["style"] = "";
+	$menuNode["params"] = "";
+	$menuNode["parent"] = "35";
+	$menuNode["nameType"] = "Text";
+	$menuNode["linkType"] = "Internal";
+	$menuNode["pageType"] = strtolower("List");//
+	$menuNode["pageId"] = "";
+	$menuNode["openType"] = "None";
+
+	$menuNode["icon"] = "fa-calendar";
+	$menuNode["iconType"] = "3";
+	$menuNode["iconShow"] = "1";
+
+		$menuNode["color"] = "";
+
+	$menuNode["title"] = "Months";
+
+
+
+	$menuNodes[] = $menuNode;
+	$menuNode = array();
 	$menuNode["id"] = "43";
 	$menuNode["name"] = "";
 	$menuNode["href"] = "mypage.htm";
@@ -1455,6 +1533,58 @@
 		$menuNode["color"] = "";
 
 	$menuNode["title"] = "Lifebox Staff";
+
+
+
+	$menuNodes[] = $menuNode;
+	$menuNode = array();
+	$menuNode["id"] = "64";
+	$menuNode["name"] = "";
+	$menuNode["href"] = "mypage.htm";
+	$menuNode["type"] = "Leaf";
+	$menuNode["table"] = "public.payment_methods";
+	$menuNode["style"] = "";
+	$menuNode["params"] = "";
+	$menuNode["parent"] = "35";
+	$menuNode["nameType"] = "Text";
+	$menuNode["linkType"] = "Internal";
+	$menuNode["pageType"] = strtolower("List");//
+	$menuNode["pageId"] = "";
+	$menuNode["openType"] = "None";
+
+	$menuNode["icon"] = "fa-money";
+	$menuNode["iconType"] = "3";
+	$menuNode["iconShow"] = "1";
+
+		$menuNode["color"] = "";
+
+	$menuNode["title"] = "Payment Methods";
+
+
+
+	$menuNodes[] = $menuNode;
+	$menuNode = array();
+	$menuNode["id"] = "65";
+	$menuNode["name"] = "";
+	$menuNode["href"] = "mypage.htm";
+	$menuNode["type"] = "Leaf";
+	$menuNode["table"] = "public.transaction_types";
+	$menuNode["style"] = "";
+	$menuNode["params"] = "";
+	$menuNode["parent"] = "35";
+	$menuNode["nameType"] = "Text";
+	$menuNode["linkType"] = "Internal";
+	$menuNode["pageType"] = strtolower("List");//
+	$menuNode["pageId"] = "";
+	$menuNode["openType"] = "None";
+
+	$menuNode["icon"] = "fa-trademark";
+	$menuNode["iconType"] = "3";
+	$menuNode["iconShow"] = "1";
+
+		$menuNode["color"] = "";
+
+	$menuNode["title"] = "Transaction Types";
 
 
 

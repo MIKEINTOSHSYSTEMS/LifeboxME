@@ -289,6 +289,11 @@ class ConnectionManager_Base
 		$connectionsIds["admin_users"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["public.lifeboxme__audit"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["public.lifeboxme__locking"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.months"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.devices"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.payment_methods"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.transaction_types"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.donors"] = "lifebox_mesystem_at_localhost";
 
 		$this->_tablesConnectionIds = &$connectionsIds;
 	}
