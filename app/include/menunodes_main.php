@@ -30,32 +30,6 @@
 
 	$menuNodes[] = $menuNode;
 	$menuNode = array();
-	$menuNode["id"] = "14";
-	$menuNode["name"] = "";
-	$menuNode["href"] = "mypage.htm";
-	$menuNode["type"] = "Leaf";
-	$menuNode["table"] = "public.surgical_cases";
-	$menuNode["style"] = "";
-	$menuNode["params"] = "";
-	$menuNode["parent"] = "0";
-	$menuNode["nameType"] = "Text";
-	$menuNode["linkType"] = "Internal";
-	$menuNode["pageType"] = strtolower("List");//
-	$menuNode["pageId"] = "";
-	$menuNode["openType"] = "None";
-
-	$menuNode["icon"] = "fa-stethoscope";
-	$menuNode["iconType"] = "3";
-	$menuNode["iconShow"] = "1";
-
-		$menuNode["color"] = "";
-
-	$menuNode["title"] = "Surgical Cases";
-
-
-
-	$menuNodes[] = $menuNode;
-	$menuNode = array();
 	$menuNode["id"] = "5";
 	$menuNode["name"] = "";
 	$menuNode["href"] = "mypage.htm";
@@ -82,11 +56,11 @@
 
 	$menuNodes[] = $menuNode;
 	$menuNode = array();
-	$menuNode["id"] = "63";
+	$menuNode["id"] = "14";
 	$menuNode["name"] = "";
 	$menuNode["href"] = "mypage.htm";
 	$menuNode["type"] = "Leaf";
-	$menuNode["table"] = "public.devices";
+	$menuNode["table"] = "public.surgical_cases";
 	$menuNode["style"] = "";
 	$menuNode["params"] = "";
 	$menuNode["parent"] = "0";
@@ -96,13 +70,13 @@
 	$menuNode["pageId"] = "";
 	$menuNode["openType"] = "None";
 
-	$menuNode["icon"] = "fa-laptop";
+	$menuNode["icon"] = "fa-stethoscope";
 	$menuNode["iconType"] = "3";
 	$menuNode["iconShow"] = "1";
 
 		$menuNode["color"] = "";
 
-	$menuNode["title"] = "Devices";
+	$menuNode["title"] = "Surgical Cases";
 
 
 
@@ -888,6 +862,84 @@
 
 	$menuNodes[] = $menuNode;
 	$menuNode = array();
+	$menuNode["id"] = "67";
+	$menuNode["name"] = "Devices Management";
+	$menuNode["href"] = "";
+	$menuNode["type"] = "Group";
+	$menuNode["table"] = "";
+	$menuNode["style"] = "";
+	$menuNode["params"] = "";
+	$menuNode["parent"] = "0";
+	$menuNode["nameType"] = "Text";
+	$menuNode["linkType"] = "None";
+	$menuNode["pageType"] = strtolower("");//
+	$menuNode["pageId"] = "";
+	$menuNode["openType"] = "None";
+
+	$menuNode["icon"] = "fa-desktop";
+	$menuNode["iconType"] = "3";
+	$menuNode["iconShow"] = "1";
+
+		$menuNode["color"] = "";
+
+	$menuNode["title"] = "Devices Management";
+
+
+
+	$menuNodes[] = $menuNode;
+	$menuNode = array();
+	$menuNode["id"] = "63";
+	$menuNode["name"] = "";
+	$menuNode["href"] = "mypage.htm";
+	$menuNode["type"] = "Leaf";
+	$menuNode["table"] = "public.devices";
+	$menuNode["style"] = "";
+	$menuNode["params"] = "";
+	$menuNode["parent"] = "67";
+	$menuNode["nameType"] = "Text";
+	$menuNode["linkType"] = "Internal";
+	$menuNode["pageType"] = strtolower("List");//
+	$menuNode["pageId"] = "";
+	$menuNode["openType"] = "None";
+
+	$menuNode["icon"] = "fa-laptop";
+	$menuNode["iconType"] = "3";
+	$menuNode["iconShow"] = "1";
+
+		$menuNode["color"] = "";
+
+	$menuNode["title"] = "Devices";
+
+
+
+	$menuNodes[] = $menuNode;
+	$menuNode = array();
+	$menuNode["id"] = "31";
+	$menuNode["name"] = "-------";
+	$menuNode["href"] = "";
+	$menuNode["type"] = "Separator";
+	$menuNode["table"] = "";
+	$menuNode["style"] = "";
+	$menuNode["params"] = "";
+	$menuNode["parent"] = "0";
+	$menuNode["nameType"] = "Text";
+	$menuNode["linkType"] = "None";
+	$menuNode["pageType"] = strtolower("");//
+	$menuNode["pageId"] = "";
+	$menuNode["openType"] = "None";
+
+	$menuNode["icon"] = "";
+	$menuNode["iconType"] = "0";
+	$menuNode["iconShow"] = "1";
+
+		$menuNode["color"] = "";
+
+	$menuNode["title"] = "-------";
+
+
+
+	$menuNodes[] = $menuNode;
+	$menuNode = array();
 	$menuNode["id"] = "36";
 	$menuNode["name"] = "Cases & Procedures";
 	$menuNode["href"] = "";
@@ -1019,32 +1071,6 @@
 	$menuNodes[] = $menuNode;
 	$menuNode = array();
 	$menuNode["id"] = "30";
-	$menuNode["name"] = "-------";
-	$menuNode["href"] = "";
-	$menuNode["type"] = "Separator";
-	$menuNode["table"] = "";
-	$menuNode["style"] = "";
-	$menuNode["params"] = "";
-	$menuNode["parent"] = "0";
-	$menuNode["nameType"] = "Text";
-	$menuNode["linkType"] = "None";
-	$menuNode["pageType"] = strtolower("");//
-	$menuNode["pageId"] = "";
-	$menuNode["openType"] = "None";
-
-	$menuNode["icon"] = "";
-	$menuNode["iconType"] = "0";
-	$menuNode["iconShow"] = "1";
-
-		$menuNode["color"] = "";
-
-	$menuNode["title"] = "-------";
-
-
-
-	$menuNodes[] = $menuNode;
-	$menuNode = array();
-	$menuNode["id"] = "31";
 	$menuNode["name"] = "-------";
 	$menuNode["href"] = "";
 	$menuNode["type"] = "Separator";

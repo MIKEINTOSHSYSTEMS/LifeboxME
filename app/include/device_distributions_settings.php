@@ -689,7 +689,7 @@ $tdatadevice_distributions[".hideMobileList"] = array();
 	
 
 	
-	$edata["LookupOrderBy"] = "";
+	$edata["LookupOrderBy"] = "country_name";
 
 	
 		$edata["UseCategory"] = true;
@@ -985,9 +985,10 @@ $tdatadevice_distributions[".hideMobileList"] = array();
 // Begin Lookup settings
 				$edata["LookupType"] = 2;
 	$edata["LookupTable"] = "public.facilities";
-			$edata["autoCompleteFieldsOnEdit"] = 0;
+		$edata["listPageId"] = "list";
+		$edata["autoCompleteFieldsOnEdit"] = 0;
 	$edata["autoCompleteFields"] = array();
-		$edata["LCType"] = 0;
+		$edata["LCType"] = 2;
 
 	
 		
@@ -998,7 +999,7 @@ $tdatadevice_distributions[".hideMobileList"] = array();
 	
 
 	
-	$edata["LookupOrderBy"] = "";
+	$edata["LookupOrderBy"] = "facility_name";
 
 	
 		$edata["UseCategory"] = true;
@@ -1012,8 +1013,7 @@ $tdatadevice_distributions[".hideMobileList"] = array();
 
 	
 	
-		$edata["SelectSize"] = 1;
-
+	
 // End Lookup Settings
 
 
