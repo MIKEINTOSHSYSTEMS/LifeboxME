@@ -305,6 +305,10 @@ function checkTableName($shortTName )
 		return true;
 	if ("donors" == $shortTName )
 		return true;
+	if ("device_distribution_log" == $shortTName )
+		return true;
+	if ("device_inventory_changes" == $shortTName )
+		return true;
 	return false;
 }
 
@@ -814,6 +818,24 @@ function GetTablesList($pdfMode = false)
 	if( $tableAvailable ) {
 		$arr[]="public.donors";
 	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.device_distribution_log");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.device_distribution_log";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.device_inventory_changes");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.device_inventory_changes";
+	}
 	return $arr;
 }
 
@@ -874,6 +896,8 @@ function GetTablesListWithoutSecurity()
 	$arr[]="public.payment_methods";
 	$arr[]="public.transaction_types";
 	$arr[]="public.donors";
+	$arr[]="public.device_distribution_log";
+	$arr[]="public.device_inventory_changes";
 	return $arr;
 }
 
@@ -1752,6 +1776,16 @@ function GetUserPermissionsStatic( $table )
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.donors" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.device_distribution_log" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.device_inventory_changes" )
 	{
 //	default permissions
 		return "ADESPI".$extraPerm;

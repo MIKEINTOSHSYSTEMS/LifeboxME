@@ -6,11 +6,11 @@ $tdatadevice_distributions[".OwnerID"] = "";
 $tdatadevice_distributions[".OriginalTable"] = "public.device_distributions";
 
 
-$tdatadevice_distributions[".pagesByType"] = my_json_decode( "{\"add\":[\"add\"],\"edit\":[\"edit\"],\"export\":[\"export\"],\"import\":[\"import\"],\"list\":[\"list\"],\"print\":[\"print\"],\"search\":[\"search\"],\"view\":[\"view\"]}" );
+$tdatadevice_distributions[".pagesByType"] = my_json_decode( "{\"add\":[\"add\"],\"edit\":[\"edit\"],\"export\":[\"export\"],\"import\":[\"import\"],\"list\":[\"list\"],\"masterlist\":[\"masterlist\"],\"masterprint\":[\"masterprint\"],\"print\":[\"print\"],\"search\":[\"search\"],\"view\":[\"view\"]}" );
 $tdatadevice_distributions[".originalPagesByType"] = $tdatadevice_distributions[".pagesByType"];
-$tdatadevice_distributions[".pages"] = types2pages( my_json_decode( "{\"add\":[\"add\"],\"edit\":[\"edit\"],\"export\":[\"export\"],\"import\":[\"import\"],\"list\":[\"list\"],\"print\":[\"print\"],\"search\":[\"search\"],\"view\":[\"view\"]}" ) );
+$tdatadevice_distributions[".pages"] = types2pages( my_json_decode( "{\"add\":[\"add\"],\"edit\":[\"edit\"],\"export\":[\"export\"],\"import\":[\"import\"],\"list\":[\"list\"],\"masterlist\":[\"masterlist\"],\"masterprint\":[\"masterprint\"],\"print\":[\"print\"],\"search\":[\"search\"],\"view\":[\"view\"]}" ) );
 $tdatadevice_distributions[".originalPages"] = $tdatadevice_distributions[".pages"];
-$tdatadevice_distributions[".defaultPages"] = my_json_decode( "{\"add\":\"add\",\"edit\":\"edit\",\"export\":\"export\",\"import\":\"import\",\"list\":\"list\",\"print\":\"print\",\"search\":\"search\",\"view\":\"view\"}" );
+$tdatadevice_distributions[".defaultPages"] = my_json_decode( "{\"add\":\"add\",\"edit\":\"edit\",\"export\":\"export\",\"import\":\"import\",\"list\":\"list\",\"masterlist\":\"masterlist\",\"masterprint\":\"masterprint\",\"print\":\"print\",\"search\":\"search\",\"view\":\"view\"}" );
 $tdatadevice_distributions[".originalDefaultPages"] = $tdatadevice_distributions[".defaultPages"];
 
 //	field labels
@@ -188,7 +188,7 @@ $tdatadevice_distributions[".addPageEvents"] = false;
 $tdatadevice_distributions[".isUseTimeForSearch"] = false;
 
 
-$tdatadevice_distributions[".badgeColor"] = "CD853F";
+$tdatadevice_distributions[".badgeColor"] = "22b1ce";
 
 
 $tdatadevice_distributions[".allSearchFields"] = array();
@@ -3049,6 +3049,36 @@ changeTextControlsToDate( "public.device_distributions" );
 //if !@TABLE.bReportCrossTab
 
 $detailsTablesData["public.device_distributions"] = array();
+//	public.device_distribution_log
+	
+	
+
+		$dIndex = 0;
+	$detailsParam = array();
+	$detailsParam["dDataSourceTable"]="public.device_distribution_log";
+		$detailsParam["dOriginalTable"] = "public.device_distribution_log";
+
+
+
+		
+		$detailsParam["dType"]=PAGE_LIST;
+	$detailsParam["dShortTable"] = "device_distribution_log";
+	$detailsParam["dCaptionTable"] = GetTableCaption("public_device_distribution_log");
+	$detailsParam["masterKeys"] =array();
+	$detailsParam["detailKeys"] =array();
+
+
+		
+	$detailsTablesData["public.device_distributions"][$dIndex] = $detailsParam;
+
+	
+		$detailsTablesData["public.device_distributions"][$dIndex]["masterKeys"] = array();
+
+	$detailsTablesData["public.device_distributions"][$dIndex]["masterKeys"][]="distribution_id";
+
+				$detailsTablesData["public.device_distributions"][$dIndex]["detailKeys"] = array();
+
+	$detailsTablesData["public.device_distributions"][$dIndex]["detailKeys"][]="distribution_id";
 //endif
 
 // tables which are master tables for current table (detail)
@@ -3108,6 +3138,24 @@ $masterTablesData["public.device_distributions"] = array();
 	$masterTablesData["public.device_distributions"][2]["masterKeys"][]="region_id";
 				$masterTablesData["public.device_distributions"][2]["detailKeys"] = array();
 	$masterTablesData["public.device_distributions"][2]["detailKeys"][]="region_id";
+		
+	//endif
+	
+	//if !@t.bReportCrossTab
+			$strOriginalDetailsTable="public.devices";
+	$masterParams = array();
+	$masterParams["mDataSourceTable"]="public.devices";
+	$masterParams["mOriginalTable"]= $strOriginalDetailsTable;
+	$masterParams["mShortTable"]= "devices";
+	$masterParams["masterKeys"]= array();
+	$masterParams["detailKeys"]= array();
+
+	$masterParams["type"] = PAGE_LIST;
+					$masterTablesData["public.device_distributions"][3] = $masterParams;
+				$masterTablesData["public.device_distributions"][3]["masterKeys"] = array();
+	$masterTablesData["public.device_distributions"][3]["masterKeys"][]="device_id";
+				$masterTablesData["public.device_distributions"][3]["detailKeys"] = array();
+	$masterTablesData["public.device_distributions"][3]["detailKeys"][]="device_type";
 		
 	//endif
 // -----------------end  prepare master-details data arrays ------------------------------//

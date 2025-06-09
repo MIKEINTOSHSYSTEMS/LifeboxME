@@ -480,6 +480,10 @@ class Chart
 			return true;
 		if("public.donors" == $this->chrt_array['tables'][0])
 			return true;
+		if("public.device_distribution_log" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.device_inventory_changes" == $this->chrt_array['tables'][0])
+			return true;
 		return false;
 	}
 

@@ -1,7 +1,10 @@
 <?php
-			$optionsArray = array( 'master' => array( 'public.countries' => array( 'preview' => false ),
+			$optionsArray = array( 'details' => array( 'public.device_distribution_log' => array( 'displayPreview' => 2,
+'previewPageId' => '' ) ),
+'master' => array( 'public.countries' => array( 'preview' => false ),
 'public.facilities' => array( 'preview' => false ),
-'public.regions' => array( 'preview' => false ) ),
+'public.regions' => array( 'preview' => false ),
+'public.devices' => array( 'preview' => false ) ),
 'captcha' => array( 'captcha' => false ),
 'fields' => array( 'gridFields' => array( 'region_id',
 'country_id',

@@ -522,6 +522,14 @@ function testAdvSearch($table)
 		{
 			return 1;
 		}
+		if($table=="public.device_distribution_log")
+		{
+			return 1;
+		}
+		if($table=="public.device_inventory_changes")
+		{
+			return 1;
+		}
 	}
 	elseif(is_wr_db())
 	{
@@ -978,6 +986,14 @@ function getCaptionTable($table)
 	if($table=="public.donors")
 	{
 		return "Donors";
+	}
+	if($table=="public.device_distribution_log")
+	{
+		return "Device Distribution Log";
+	}
+	if($table=="public.device_inventory_changes")
+	{
+		return "Device Inventory Changes";
 	}
 	return $table;
 }
@@ -2452,6 +2468,30 @@ function GetTablesListReport()
 		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
 		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
 			$arr[]="public.donors";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.device_distribution_log");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.device_distribution_log";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.device_distribution_log";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.device_inventory_changes");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.device_inventory_changes";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.device_inventory_changes";
 	}
 	return $arr;
 }

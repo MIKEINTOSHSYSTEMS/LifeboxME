@@ -1483,6 +1483,10 @@ class CrossTableWebReport
 			$isDB = true;
 		if("public.donors" == $this->xml_array['tables'][0])
 			$isDB = true;
+		if("public.device_distribution_log" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.device_inventory_changes" == $this->xml_array['tables'][0])
+			$isDB = true;
 		return $isDB;
 	}
 	

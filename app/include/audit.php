@@ -614,6 +614,14 @@ class AuditTrailTable
 		{
 			return false;
 		}
+		if($table=="public.device_distribution_log")
+		{
+			return false;
+		}
+		if($table=="public.device_inventory_changes")
+		{
+			return false;
+		}
 	}
 
 	protected function insert($datetime, $ip, $user, $table, $action, $description)
@@ -1177,6 +1185,14 @@ class AuditTrailFile
 			return false;
 		}
 		if($table=="public.donors")
+		{
+			return false;
+		}
+		if($table=="public.device_distribution_log")
+		{
+			return false;
+		}
+		if($table=="public.device_inventory_changes")
 		{
 			return false;
 		}

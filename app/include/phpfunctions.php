@@ -1202,6 +1202,14 @@ function GetDefaultValue($field, $ptype, $table="")
 	{
 		return strftime("%Y-%m-%d");
 	}
+				if($table=="public.device_distribution_log" && $field=="performed_by")
+	{
+		return $_SESSION["UserID"];
+	}
+				if($table=="public.device_distribution_log" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d");
+	}
 	return "";
 }
 

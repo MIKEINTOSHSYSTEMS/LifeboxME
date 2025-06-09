@@ -66,6 +66,8 @@ $nonAdminTablesArr[] = "public.devices";
 $nonAdminTablesArr[] = "public.payment_methods";
 $nonAdminTablesArr[] = "public.transaction_types";
 $nonAdminTablesArr[] = "public.donors";
+$nonAdminTablesArr[] = "public.device_distribution_log";
+$nonAdminTablesArr[] = "public.device_inventory_changes";
 
 $ug_connection = $cman->getForUserGroups();
 

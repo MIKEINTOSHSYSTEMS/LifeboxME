@@ -6,11 +6,11 @@ $tdatadevices[".OwnerID"] = "";
 $tdatadevices[".OriginalTable"] = "public.devices";
 
 
-$tdatadevices[".pagesByType"] = my_json_decode( "{\"add\":[\"add\"],\"edit\":[\"edit\"],\"export\":[\"export\"],\"import\":[\"import\"],\"list\":[\"list\"],\"print\":[\"print\"],\"search\":[\"search\"],\"view\":[\"view\"]}" );
+$tdatadevices[".pagesByType"] = my_json_decode( "{\"add\":[\"add\"],\"edit\":[\"edit\"],\"export\":[\"export\"],\"import\":[\"import\"],\"list\":[\"list\"],\"masterlist\":[\"masterlist\"],\"masterprint\":[\"masterprint\"],\"print\":[\"print\"],\"search\":[\"search\"],\"view\":[\"view\"]}" );
 $tdatadevices[".originalPagesByType"] = $tdatadevices[".pagesByType"];
-$tdatadevices[".pages"] = types2pages( my_json_decode( "{\"add\":[\"add\"],\"edit\":[\"edit\"],\"export\":[\"export\"],\"import\":[\"import\"],\"list\":[\"list\"],\"print\":[\"print\"],\"search\":[\"search\"],\"view\":[\"view\"]}" ) );
+$tdatadevices[".pages"] = types2pages( my_json_decode( "{\"add\":[\"add\"],\"edit\":[\"edit\"],\"export\":[\"export\"],\"import\":[\"import\"],\"list\":[\"list\"],\"masterlist\":[\"masterlist\"],\"masterprint\":[\"masterprint\"],\"print\":[\"print\"],\"search\":[\"search\"],\"view\":[\"view\"]}" ) );
 $tdatadevices[".originalPages"] = $tdatadevices[".pages"];
-$tdatadevices[".defaultPages"] = my_json_decode( "{\"add\":\"add\",\"edit\":\"edit\",\"export\":\"export\",\"import\":\"import\",\"list\":\"list\",\"print\":\"print\",\"search\":\"search\",\"view\":\"view\"}" );
+$tdatadevices[".defaultPages"] = my_json_decode( "{\"add\":\"add\",\"edit\":\"edit\",\"export\":\"export\",\"import\":\"import\",\"list\":\"list\",\"masterlist\":\"masterlist\",\"masterprint\":\"masterprint\",\"print\":\"print\",\"search\":\"search\",\"view\":\"view\"}" );
 $tdatadevices[".originalDefaultPages"] = $tdatadevices[".defaultPages"];
 
 //	field labels
@@ -2386,6 +2386,36 @@ changeTextControlsToDate( "public.devices" );
 //if !@TABLE.bReportCrossTab
 
 $detailsTablesData["public.devices"] = array();
+//	public.device_distributions
+	
+	
+
+		$dIndex = 0;
+	$detailsParam = array();
+	$detailsParam["dDataSourceTable"]="public.device_distributions";
+		$detailsParam["dOriginalTable"] = "public.device_distributions";
+
+
+
+		
+		$detailsParam["dType"]=PAGE_LIST;
+	$detailsParam["dShortTable"] = "device_distributions";
+	$detailsParam["dCaptionTable"] = GetTableCaption("public_device_distributions");
+	$detailsParam["masterKeys"] =array();
+	$detailsParam["detailKeys"] =array();
+
+
+		
+	$detailsTablesData["public.devices"][$dIndex] = $detailsParam;
+
+	
+		$detailsTablesData["public.devices"][$dIndex]["masterKeys"] = array();
+
+	$detailsTablesData["public.devices"][$dIndex]["masterKeys"][]="device_id";
+
+				$detailsTablesData["public.devices"][$dIndex]["detailKeys"] = array();
+
+	$detailsTablesData["public.devices"][$dIndex]["detailKeys"][]="device_type";
 //endif
 
 // tables which are master tables for current table (detail)

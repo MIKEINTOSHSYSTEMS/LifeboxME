@@ -294,6 +294,8 @@ class ConnectionManager_Base
 		$connectionsIds["public.payment_methods"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["public.transaction_types"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["public.donors"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.device_distribution_log"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.device_inventory_changes"] = "lifebox_mesystem_at_localhost";
 
 		$this->_tablesConnectionIds = &$connectionsIds;
 	}

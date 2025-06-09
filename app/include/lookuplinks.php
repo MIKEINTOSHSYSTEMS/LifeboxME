@@ -635,6 +635,27 @@ function InitLookupLinks()
 			$lookupTableLinks["public.countries"]["donors.country_id"] = array();
 		}
 		$lookupTableLinks["public.countries"]["donors.country_id"]["edit"] = array("table" => "public.donors", "field" => "country_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.device_distributions"] ) ) {
+			$lookupTableLinks["public.device_distributions"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.device_distributions"]["device_distribution_log.distribution_id"] )) {
+			$lookupTableLinks["public.device_distributions"]["device_distribution_log.distribution_id"] = array();
+		}
+		$lookupTableLinks["public.device_distributions"]["device_distribution_log.distribution_id"]["edit"] = array("table" => "public.device_distribution_log", "field" => "distribution_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.devices"] ) ) {
+			$lookupTableLinks["public.devices"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.devices"]["device_distribution_log.device_type"] )) {
+			$lookupTableLinks["public.devices"]["device_distribution_log.device_type"] = array();
+		}
+		$lookupTableLinks["public.devices"]["device_distribution_log.device_type"]["edit"] = array("table" => "public.device_distribution_log", "field" => "device_type", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.device_distributions"] ) ) {
+			$lookupTableLinks["public.device_distributions"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.device_distributions"]["device_distribution_log.previous_quantity"] )) {
+			$lookupTableLinks["public.device_distributions"]["device_distribution_log.previous_quantity"] = array();
+		}
+		$lookupTableLinks["public.device_distributions"]["device_distribution_log.previous_quantity"]["edit"] = array("table" => "public.device_distribution_log", "field" => "previous_quantity", "page" => "edit");
 }
 
 ?>

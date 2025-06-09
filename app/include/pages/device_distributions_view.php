@@ -1,8 +1,11 @@
 <?php
 			$optionsArray = array( 'pdf' => array( 'pdfView' => false ),
+'details' => array( 'public.device_distribution_log' => array( 'displayPreview' => 2,
+'previewPageId' => '' ) ),
 'master' => array( 'public.countries' => array( 'preview' => false ),
 'public.facilities' => array( 'preview' => false ),
-'public.regions' => array( 'preview' => false ) ),
+'public.regions' => array( 'preview' => false ),
+'public.devices' => array( 'preview' => false ) ),
 'fields' => array( 'gridFields' => array( 'distribution_id',
 'region_id',
 'country_id',
