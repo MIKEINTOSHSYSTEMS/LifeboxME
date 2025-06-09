@@ -10,9 +10,6 @@ $dalTabletraining_participants["phone"] = array("type"=>200,"varname"=>"phone", 
 $dalTabletraining_participants["email"] = array("type"=>200,"varname"=>"email", "name" => "email", "autoInc" => "0");
 $dalTabletraining_participants["country_id"] = array("type"=>3,"varname"=>"country_id", "name" => "country_id", "autoInc" => "0");
 $dalTabletraining_participants["training_date"] = array("type"=>7,"varname"=>"training_date", "name" => "training_date", "autoInc" => "0");
-$dalTabletraining_participants["ceu_points"] = array("type"=>14,"varname"=>"ceu_points", "name" => "ceu_points", "autoInc" => "0");
-$dalTabletraining_participants["pre_test_score"] = array("type"=>14,"varname"=>"pre_test_score", "name" => "pre_test_score", "autoInc" => "0");
-$dalTabletraining_participants["post_test_score"] = array("type"=>14,"varname"=>"post_test_score", "name" => "post_test_score", "autoInc" => "0");
 $dalTabletraining_participants["created_at"] = array("type"=>135,"varname"=>"created_at", "name" => "created_at", "autoInc" => "0");
 $dalTabletraining_participants["updated_at"] = array("type"=>135,"varname"=>"updated_at", "name" => "updated_at", "autoInc" => "0");
 $dalTabletraining_participants["venue_id"] = array("type"=>3,"varname"=>"venue_id", "name" => "venue_id", "autoInc" => "0");

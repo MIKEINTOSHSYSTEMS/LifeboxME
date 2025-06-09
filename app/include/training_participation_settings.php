@@ -37,6 +37,15 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelstraining_participation["English"]["created_at"] = "Created At";
 	$fieldToolTipstraining_participation["English"]["created_at"] = "";
 	$placeHolderstraining_participation["English"]["created_at"] = "";
+	$fieldLabelstraining_participation["English"]["pre_test_score"] = "Pre Test Score";
+	$fieldToolTipstraining_participation["English"]["pre_test_score"] = "";
+	$placeHolderstraining_participation["English"]["pre_test_score"] = "";
+	$fieldLabelstraining_participation["English"]["post_test_score"] = "Post Test Score";
+	$fieldToolTipstraining_participation["English"]["post_test_score"] = "";
+	$placeHolderstraining_participation["English"]["post_test_score"] = "";
+	$fieldLabelstraining_participation["English"]["ceu_points"] = "Ceu Points";
+	$fieldToolTipstraining_participation["English"]["ceu_points"] = "";
+	$placeHolderstraining_participation["English"]["ceu_points"] = "";
 	if (count($fieldToolTipstraining_participation["English"]))
 		$tdatatraining_participation[".isUseToolTips"] = true;
 }
@@ -158,6 +167,9 @@ $tdatatraining_participation[".googleLikeFields"][] = "participation_id";
 $tdatatraining_participation[".googleLikeFields"][] = "participant_id";
 $tdatatraining_participation[".googleLikeFields"][] = "training_id";
 $tdatatraining_participation[".googleLikeFields"][] = "created_at";
+$tdatatraining_participation[".googleLikeFields"][] = "pre_test_score";
+$tdatatraining_participation[".googleLikeFields"][] = "post_test_score";
+$tdatatraining_participation[".googleLikeFields"][] = "ceu_points";
 
 
 
@@ -192,7 +204,7 @@ $tdatatraining_participation[".strOrderBy"] = $tstrOrderBy;
 $tdatatraining_participation[".orderindexes"] = array();
 
 
-$tdatatraining_participation[".sqlHead"] = "SELECT participation_id,  	participant_id,  	training_id,  	created_at";
+$tdatatraining_participation[".sqlHead"] = "SELECT participation_id,  	participant_id,  	training_id,  	created_at,  	pre_test_score,  	post_test_score,  	ceu_points";
 $tdatatraining_participation[".sqlFrom"] = "FROM \"public\".training_participation";
 $tdatatraining_participation[".sqlWhereExpr"] = "";
 $tdatatraining_participation[".sqlTail"] = "";
@@ -855,6 +867,426 @@ $tdatatraining_participation[".hideMobileList"] = array();
 
 	$tdatatraining_participation["created_at"] = $fdata;
 		$tdatatraining_participation[".searchableFields"][] = "created_at";
+//	pre_test_score
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 5;
+	$fdata["strName"] = "pre_test_score";
+	$fdata["GoodName"] = "pre_test_score";
+	$fdata["ownerTable"] = "public.training_participation";
+	$fdata["Label"] = GetFieldLabel("public_training_participation","pre_test_score");
+	$fdata["FieldType"] = 14;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "pre_test_score";
+
+		$fdata["sourceSingle"] = "pre_test_score";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "pre_test_score";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "Number");
+
+	
+	
+	
+	
+	
+	
+	
+		$vdata["DecimalDigits"] = 2;
+
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
+							
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatatraining_participation["pre_test_score"] = $fdata;
+		$tdatatraining_participation[".searchableFields"][] = "pre_test_score";
+//	post_test_score
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 6;
+	$fdata["strName"] = "post_test_score";
+	$fdata["GoodName"] = "post_test_score";
+	$fdata["ownerTable"] = "public.training_participation";
+	$fdata["Label"] = GetFieldLabel("public_training_participation","post_test_score");
+	$fdata["FieldType"] = 14;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "post_test_score";
+
+		$fdata["sourceSingle"] = "post_test_score";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "post_test_score";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "Number");
+
+	
+	
+	
+	
+	
+	
+	
+		$vdata["DecimalDigits"] = 2;
+
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
+							
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatatraining_participation["post_test_score"] = $fdata;
+		$tdatatraining_participation[".searchableFields"][] = "post_test_score";
+//	ceu_points
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 7;
+	$fdata["strName"] = "ceu_points";
+	$fdata["GoodName"] = "ceu_points";
+	$fdata["ownerTable"] = "public.training_participation";
+	$fdata["Label"] = GetFieldLabel("public_training_participation","ceu_points");
+	$fdata["FieldType"] = 14;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "ceu_points";
+
+		$fdata["sourceSingle"] = "ceu_points";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "ceu_points";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "Number");
+
+	
+	
+	
+	
+	
+	
+	
+		$vdata["DecimalDigits"] = 2;
+
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
+							
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatatraining_participation["ceu_points"] = $fdata;
+		$tdatatraining_participation[".searchableFields"][] = "ceu_points";
 
 
 $tables_data["public.training_participation"]=&$tdatatraining_participation;
@@ -965,7 +1397,7 @@ function createSqlQuery_training_participation()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "participation_id,  	participant_id,  	training_id,  	created_at";
+$proto0["m_strFieldList"] = "participation_id,  	participant_id,  	training_id,  	created_at,  	pre_test_score,  	post_test_score,  	ceu_points";
 $proto0["m_strFrom"] = "FROM \"public\".training_participation";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
@@ -1061,40 +1493,85 @@ $proto12["m_alias"] = "";
 $obj = new SQLFieldListItem($proto12);
 
 $proto0["m_fieldlist"][]=$obj;
-$proto0["m_fromlist"] = array();
-												$proto14=array();
-$proto14["m_link"] = "SQLL_MAIN";
-			$proto15=array();
-$proto15["m_strName"] = "public.training_participation";
-$proto15["m_srcTableName"] = "public.training_participation";
-$proto15["m_columns"] = array();
-$proto15["m_columns"][] = "participation_id";
-$proto15["m_columns"][] = "participant_id";
-$proto15["m_columns"][] = "training_id";
-$proto15["m_columns"][] = "created_at";
-$obj = new SQLTable($proto15);
+						$proto14=array();
+			$obj = new SQLField(array(
+	"m_strName" => "pre_test_score",
+	"m_strTable" => "public.training_participation",
+	"m_srcTableName" => "public.training_participation"
+));
 
-$proto14["m_table"] = $obj;
-$proto14["m_sql"] = "\"public\".training_participation";
-$proto14["m_alias"] = "";
+$proto14["m_sql"] = "pre_test_score";
 $proto14["m_srcTableName"] = "public.training_participation";
-$proto16=array();
-$proto16["m_sql"] = "";
-$proto16["m_uniontype"] = "SQLL_UNKNOWN";
+$proto14["m_expr"]=$obj;
+$proto14["m_alias"] = "";
+$obj = new SQLFieldListItem($proto14);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto16=array();
+			$obj = new SQLField(array(
+	"m_strName" => "post_test_score",
+	"m_strTable" => "public.training_participation",
+	"m_srcTableName" => "public.training_participation"
+));
+
+$proto16["m_sql"] = "post_test_score";
+$proto16["m_srcTableName"] = "public.training_participation";
+$proto16["m_expr"]=$obj;
+$proto16["m_alias"] = "";
+$obj = new SQLFieldListItem($proto16);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto18=array();
+			$obj = new SQLField(array(
+	"m_strName" => "ceu_points",
+	"m_strTable" => "public.training_participation",
+	"m_srcTableName" => "public.training_participation"
+));
+
+$proto18["m_sql"] = "ceu_points";
+$proto18["m_srcTableName"] = "public.training_participation";
+$proto18["m_expr"]=$obj;
+$proto18["m_alias"] = "";
+$obj = new SQLFieldListItem($proto18);
+
+$proto0["m_fieldlist"][]=$obj;
+$proto0["m_fromlist"] = array();
+												$proto20=array();
+$proto20["m_link"] = "SQLL_MAIN";
+			$proto21=array();
+$proto21["m_strName"] = "public.training_participation";
+$proto21["m_srcTableName"] = "public.training_participation";
+$proto21["m_columns"] = array();
+$proto21["m_columns"][] = "participation_id";
+$proto21["m_columns"][] = "participant_id";
+$proto21["m_columns"][] = "training_id";
+$proto21["m_columns"][] = "created_at";
+$proto21["m_columns"][] = "pre_test_score";
+$proto21["m_columns"][] = "post_test_score";
+$proto21["m_columns"][] = "ceu_points";
+$obj = new SQLTable($proto21);
+
+$proto20["m_table"] = $obj;
+$proto20["m_sql"] = "\"public\".training_participation";
+$proto20["m_alias"] = "";
+$proto20["m_srcTableName"] = "public.training_participation";
+$proto22=array();
+$proto22["m_sql"] = "";
+$proto22["m_uniontype"] = "SQLL_UNKNOWN";
 	$obj = new SQLNonParsed(array(
 	"m_sql" => ""
 ));
 
-$proto16["m_column"]=$obj;
-$proto16["m_contained"] = array();
-$proto16["m_strCase"] = "";
-$proto16["m_havingmode"] = false;
-$proto16["m_inBrackets"] = false;
-$proto16["m_useAlias"] = false;
-$obj = new SQLLogicalExpr($proto16);
+$proto22["m_column"]=$obj;
+$proto22["m_contained"] = array();
+$proto22["m_strCase"] = "";
+$proto22["m_havingmode"] = false;
+$proto22["m_inBrackets"] = false;
+$proto22["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto22);
 
-$proto14["m_joinon"] = $obj;
-$obj = new SQLFromListItem($proto14);
+$proto20["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto20);
 
 $proto0["m_fromlist"][]=$obj;
 $proto0["m_groupby"] = array();
@@ -1110,7 +1587,7 @@ $queryData_training_participation = createSqlQuery_training_participation();
 	
 		;
 
-				
+							
 
 $tdatatraining_participation[".sqlquery"] = $queryData_training_participation;
 

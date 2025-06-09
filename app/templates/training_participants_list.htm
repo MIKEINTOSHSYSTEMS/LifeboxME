@@ -486,20 +486,7 @@
 				<span class="rnr-searchcontrol">{$searchcontrol1}</span>
 		</div>
 		{END searchCtrlBlock}
-																		{BEGIN searchCtrlBlock_ceu_points}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_ceu_points}" {$filterRow_attrs_ceu_points}>
-			<label>{$label public_training_participants ceu_points }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_ceu_points}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_ceu_points}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_ceu_points}</span>
-						</div>
-		{END searchCtrlBlock_ceu_points}
-																{BEGIN searchCtrlBlock_middle_name}
+																		{BEGIN searchCtrlBlock_middle_name}
 
 
 		<div class="form-group srchPanelRow {$filterRow_class_middle_name}" {$filterRow_attrs_middle_name}>
@@ -590,32 +577,6 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_role_id}</span>
 						</div>
 		{END searchCtrlBlock_role_id}
-																{BEGIN searchCtrlBlock_pre_test_score}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_pre_test_score}" {$filterRow_attrs_pre_test_score}>
-			<label>{$label public_training_participants pre_test_score }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_pre_test_score}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_pre_test_score}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_pre_test_score}</span>
-						</div>
-		{END searchCtrlBlock_pre_test_score}
-																{BEGIN searchCtrlBlock_post_test_score}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_post_test_score}" {$filterRow_attrs_post_test_score}>
-			<label>{$label public_training_participants post_test_score }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_post_test_score}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_post_test_score}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_post_test_score}</span>
-						</div>
-		{END searchCtrlBlock_post_test_score}
 																{BEGIN searchCtrlBlock_phone}
 
 
@@ -973,15 +934,6 @@
 			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="training_date"]:before {
 		content: "{$label public_training_participants training_date}";
 	}
-			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="ceu_points"]:before {
-		content: "{$label public_training_participants ceu_points}";
-	}
-			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="pre_test_score"]:before {
-		content: "{$label public_training_participants pre_test_score}";
-	}
-			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="post_test_score"]:before {
-		content: "{$label public_training_participants post_test_score}";
-	}
 			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="created_at"]:before {
 		content: "{$label public_training_participants created_at}";
 	}
@@ -1106,7 +1058,7 @@
 		{BEGIN title_salutation_fieldheadercolumn}
 	{BEGIN title_salutation_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field19" {$item_simple_grid_field19} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="title_salutation" data-fieldname="title_salutation" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field13" {$item_simple_grid_field13} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="title_salutation" data-fieldname="title_salutation" 
 
 			{$title_salutation_orderlinkattrs}
 	
@@ -1140,7 +1092,7 @@
 		{BEGIN first_name_fieldheadercolumn}
 	{BEGIN first_name_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field20" {$item_simple_grid_field20} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="first_name" data-fieldname="first_name" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field14" {$item_simple_grid_field14} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="first_name" data-fieldname="first_name" 
 
 			{$first_name_orderlinkattrs}
 	
@@ -1174,7 +1126,7 @@
 		{BEGIN middle_name_fieldheadercolumn}
 	{BEGIN middle_name_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field21" {$item_simple_grid_field21} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="middle_name" data-fieldname="middle_name" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field19" {$item_simple_grid_field19} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="middle_name" data-fieldname="middle_name" 
 
 			{$middle_name_orderlinkattrs}
 	
@@ -1208,7 +1160,7 @@
 		{BEGIN last_name_fieldheadercolumn}
 	{BEGIN last_name_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field22" {$item_simple_grid_field22} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="last_name" data-fieldname="last_name" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field15" {$item_simple_grid_field15} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="last_name" data-fieldname="last_name" 
 
 			{$last_name_orderlinkattrs}
 	
@@ -1242,7 +1194,7 @@
 		{BEGIN sex_id_fieldheadercolumn}
 	{BEGIN sex_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field23" {$item_simple_grid_field23} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="sex_id" data-fieldname="sex_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field20" {$item_simple_grid_field20} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="sex_id" data-fieldname="sex_id" 
 
 			{$sex_id_orderlinkattrs}
 	
@@ -1276,7 +1228,7 @@
 		{BEGIN role_id_fieldheadercolumn}
 	{BEGIN role_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field24" {$item_simple_grid_field24} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="role_id" data-fieldname="role_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field21" {$item_simple_grid_field21} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="role_id" data-fieldname="role_id" 
 
 			{$role_id_orderlinkattrs}
 	
@@ -1310,7 +1262,7 @@
 		{BEGIN facility_id_fieldheadercolumn}
 	{BEGIN facility_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field25" {$item_simple_grid_field25} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="facility_id" data-fieldname="facility_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field22" {$item_simple_grid_field22} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="facility_id" data-fieldname="facility_id" 
 
 			{$facility_id_orderlinkattrs}
 	
@@ -1344,7 +1296,7 @@
 		{BEGIN phone_fieldheadercolumn}
 	{BEGIN phone_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field26" {$item_simple_grid_field26} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="phone" data-fieldname="phone" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field23" {$item_simple_grid_field23} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="phone" data-fieldname="phone" 
 
 			{$phone_orderlinkattrs}
 	
@@ -1378,7 +1330,7 @@
 		{BEGIN email_fieldheadercolumn}
 	{BEGIN email_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field27" {$item_simple_grid_field27} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="email" data-fieldname="email" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field24" {$item_simple_grid_field24} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="email" data-fieldname="email" 
 
 			{$email_orderlinkattrs}
 	
@@ -1412,7 +1364,7 @@
 		{BEGIN country_id_fieldheadercolumn}
 	{BEGIN country_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field28" {$item_simple_grid_field28} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="country_id" data-fieldname="country_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field25" {$item_simple_grid_field25} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="country_id" data-fieldname="country_id" 
 
 			{$country_id_orderlinkattrs}
 	
@@ -1446,7 +1398,7 @@
 		{BEGIN venue_id_fieldheadercolumn}
 	{BEGIN venue_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field29" {$item_simple_grid_field29} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="venue_id" data-fieldname="venue_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field26" {$item_simple_grid_field26} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="venue_id" data-fieldname="venue_id" 
 
 			{$venue_id_orderlinkattrs}
 	
@@ -1480,7 +1432,7 @@
 		{BEGIN training_date_fieldheadercolumn}
 	{BEGIN training_date_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field30" {$item_simple_grid_field30} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_date" data-fieldname="training_date" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field27" {$item_simple_grid_field27} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_date" data-fieldname="training_date" 
 
 			{$training_date_orderlinkattrs}
 	
@@ -1503,120 +1455,18 @@
 	{$cell_grid_headcell_field13}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$ceu_points_class}	"
-
-			data-field="ceu_points"
-	
-	data-cellId="grid_headcell_field13" data-pageid="{$pageid}" data-record-id="{$recId}"	
-	>
-
-	 
-		{BEGIN ceu_points_fieldheadercolumn}
-	{BEGIN ceu_points_fieldheader}
-<span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field31" {$item_simple_grid_field31} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="ceu_points" data-fieldname="ceu_points" 
-
-			{$ceu_points_orderlinkattrs}
-	
-	
-	>
-	<span class="text-label">
-		<span>{$label public_training_participants ceu_points }</span>
-					{$arrow_icon_ceu_points}
-			</span>
-	</span>
-	{END ceu_points_fieldheader}
-{END ceu_points_fieldheadercolumn}
-
-	
-	</th>
-	{END cellblock_grid_headcell_field13}
-									{BEGIN cellblock_grid_headcell_field14}
-	<th
-	
-	{$cell_grid_headcell_field14}
-	{$recordattrs}
-	class="
-		 r-ori-vert		 {$pre_test_score_class}	"
-
-			data-field="pre_test_score"
-	
-	data-cellId="grid_headcell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
-	>
-
-	 
-		{BEGIN pre_test_score_fieldheadercolumn}
-	{BEGIN pre_test_score_fieldheader}
-<span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field32" {$item_simple_grid_field32} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="pre_test_score" data-fieldname="pre_test_score" 
-
-			{$pre_test_score_orderlinkattrs}
-	
-	
-	>
-	<span class="text-label">
-		<span>{$label public_training_participants pre_test_score }</span>
-					{$arrow_icon_pre_test_score}
-			</span>
-	</span>
-	{END pre_test_score_fieldheader}
-{END pre_test_score_fieldheadercolumn}
-
-	
-	</th>
-	{END cellblock_grid_headcell_field14}
-									{BEGIN cellblock_grid_headcell_field15}
-	<th
-	
-	{$cell_grid_headcell_field15}
-	{$recordattrs}
-	class="
-		 r-ori-vert		 {$post_test_score_class}	"
-
-			data-field="post_test_score"
-	
-	data-cellId="grid_headcell_field15" data-pageid="{$pageid}" data-record-id="{$recId}"	
-	>
-
-	 
-		{BEGIN post_test_score_fieldheadercolumn}
-	{BEGIN post_test_score_fieldheader}
-<span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field33" {$item_simple_grid_field33} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="post_test_score" data-fieldname="post_test_score" 
-
-			{$post_test_score_orderlinkattrs}
-	
-	
-	>
-	<span class="text-label">
-		<span>{$label public_training_participants post_test_score }</span>
-					{$arrow_icon_post_test_score}
-			</span>
-	</span>
-	{END post_test_score_fieldheader}
-{END post_test_score_fieldheadercolumn}
-
-	
-	</th>
-	{END cellblock_grid_headcell_field15}
-									{BEGIN cellblock_grid_headcell_field16}
-	<th
-	
-	{$cell_grid_headcell_field16}
-	{$recordattrs}
-	class="
 		 r-ori-vert		 {$created_at_class}	"
 
 			data-field="created_at"
 	
-	data-cellId="grid_headcell_field16" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field13" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN created_at_fieldheadercolumn}
 	{BEGIN created_at_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field34" {$item_simple_grid_field34} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="created_at" data-fieldname="created_at" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field28" {$item_simple_grid_field28} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="created_at" data-fieldname="created_at" 
 
 			{$created_at_orderlinkattrs}
 	
@@ -1632,25 +1482,25 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field16}
-									{BEGIN cellblock_grid_headcell_field17}
+	{END cellblock_grid_headcell_field13}
+									{BEGIN cellblock_grid_headcell_field14}
 	<th
 	
-	{$cell_grid_headcell_field17}
+	{$cell_grid_headcell_field14}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$updated_at_class}	"
 
 			data-field="updated_at"
 	
-	data-cellId="grid_headcell_field17" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN updated_at_fieldheadercolumn}
 	{BEGIN updated_at_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field35" {$item_simple_grid_field35} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="updated_at" data-fieldname="updated_at" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field29" {$item_simple_grid_field29} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="updated_at" data-fieldname="updated_at" 
 
 			{$updated_at_orderlinkattrs}
 	
@@ -1666,7 +1516,7 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field17}
+	{END cellblock_grid_headcell_field14}
 							</tr>
 																				
 					{END grid_header}
@@ -2114,74 +1964,11 @@
 	{$cell_grid_cell_field13}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$ceu_points_class}	"
-
-			data-field="ceu_points"
-	
-	data-cellId="grid_cell_field13" data-pageid="{$pageid}" data-record-id="{$recId}"	
-	>
-
-	 
-		{BEGIN ceu_points_fieldcolumn}
-<span data-itemtype="grid_field" data-itemid="simple_grid_field13" {$item_simple_grid_field13} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="ceu_points" data-fieldname="ceu_points" data-default-width >
-{$ceu_points_value}
-</span>
-{END ceu_points_fieldcolumn}	
-	</td>
-	{END cellblock_grid_cell_field13}
-									{BEGIN cellblock_grid_cell_field14}
-	<td
-	
-	{$cell_grid_cell_field14}
-	{$recordattrs}
-	class="
-		 r-ori-vert		 {$pre_test_score_class}	"
-
-			data-field="pre_test_score"
-	
-	data-cellId="grid_cell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
-	>
-
-	 
-		{BEGIN pre_test_score_fieldcolumn}
-<span data-itemtype="grid_field" data-itemid="simple_grid_field14" {$item_simple_grid_field14} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="pre_test_score" data-fieldname="pre_test_score" data-default-width >
-{$pre_test_score_value}
-</span>
-{END pre_test_score_fieldcolumn}	
-	</td>
-	{END cellblock_grid_cell_field14}
-									{BEGIN cellblock_grid_cell_field15}
-	<td
-	
-	{$cell_grid_cell_field15}
-	{$recordattrs}
-	class="
-		 r-ori-vert		 {$post_test_score_class}	"
-
-			data-field="post_test_score"
-	
-	data-cellId="grid_cell_field15" data-pageid="{$pageid}" data-record-id="{$recId}"	
-	>
-
-	 
-		{BEGIN post_test_score_fieldcolumn}
-<span data-itemtype="grid_field" data-itemid="simple_grid_field15" {$item_simple_grid_field15} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="post_test_score" data-fieldname="post_test_score" data-default-width >
-{$post_test_score_value}
-</span>
-{END post_test_score_fieldcolumn}	
-	</td>
-	{END cellblock_grid_cell_field15}
-									{BEGIN cellblock_grid_cell_field16}
-	<td
-	
-	{$cell_grid_cell_field16}
-	{$recordattrs}
-	class="
 		 r-ori-vert		 {$created_at_class}	"
 
 			data-field="created_at"
 	
-	data-cellId="grid_cell_field16" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field13" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -2191,18 +1978,18 @@
 </span>
 {END created_at_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field16}
-									{BEGIN cellblock_grid_cell_field17}
+	{END cellblock_grid_cell_field13}
+									{BEGIN cellblock_grid_cell_field14}
 	<td
 	
-	{$cell_grid_cell_field17}
+	{$cell_grid_cell_field14}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$updated_at_class}	"
 
 			data-field="updated_at"
 	
-	data-cellId="grid_cell_field17" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -2212,7 +1999,7 @@
 </span>
 {END updated_at_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field17}
+	{END cellblock_grid_cell_field14}
 							</tr>
 											<tr {$rowattrs} {$row_grid_2} class="{$rowclass}
 				
@@ -2501,7 +2288,7 @@
 	{$cell_grid_footcell_field13}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$ceu_points_class}	"
+		 r-ori-vert		 {$created_at_class}	"
 
 	
 	data-cellId="grid_footcell_field13" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_participants_list"	
@@ -2516,7 +2303,7 @@
 	{$cell_grid_footcell_field14}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$pre_test_score_class}	"
+		 r-ori-vert		 {$updated_at_class}	"
 
 	
 	data-cellId="grid_footcell_field14" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_participants_list"	
@@ -2525,51 +2312,6 @@
 	
 	</td>
 	{END cellblock_grid_footcell_field14}
-									{BEGIN cellblock_grid_footcell_field15}
-	<td
-	
-	{$cell_grid_footcell_field15}
-	{$recordattrs}
-	class="
-		 r-ori-vert		 {$post_test_score_class}	"
-
-	
-	data-cellId="grid_footcell_field15" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_participants_list"	
-	>
-
-	
-	</td>
-	{END cellblock_grid_footcell_field15}
-									{BEGIN cellblock_grid_footcell_field16}
-	<td
-	
-	{$cell_grid_footcell_field16}
-	{$recordattrs}
-	class="
-		 r-ori-vert		 {$created_at_class}	"
-
-	
-	data-cellId="grid_footcell_field16" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_participants_list"	
-	>
-
-	
-	</td>
-	{END cellblock_grid_footcell_field16}
-									{BEGIN cellblock_grid_footcell_field17}
-	<td
-	
-	{$cell_grid_footcell_field17}
-	{$recordattrs}
-	class="
-		 r-ori-vert		 {$updated_at_class}	"
-
-	
-	data-cellId="grid_footcell_field17" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="training_participants_list"	
-	>
-
-	
-	</td>
-	{END cellblock_grid_footcell_field17}
 							</tr>
 					
 					</tfoot>

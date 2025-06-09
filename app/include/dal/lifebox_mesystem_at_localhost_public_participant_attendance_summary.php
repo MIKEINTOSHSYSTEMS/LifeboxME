@@ -13,6 +13,9 @@ $dalTableparticipant_attendance_summary["days_recorded"] = array("type"=>20,"var
 $dalTableparticipant_attendance_summary["days_attended"] = array("type"=>20,"varname"=>"days_attended", "name" => "days_attended", "autoInc" => "0");
 $dalTableparticipant_attendance_summary["attendance_percentage"] = array("type"=>14,"varname"=>"attendance_percentage", "name" => "attendance_percentage", "autoInc" => "0");
 $dalTableparticipant_attendance_summary["attendance_status"] = array("type"=>201,"varname"=>"attendance_status", "name" => "attendance_status", "autoInc" => "0");
+$dalTableparticipant_attendance_summary["pre_test_score"] = array("type"=>14,"varname"=>"pre_test_score", "name" => "pre_test_score", "autoInc" => "0");
+$dalTableparticipant_attendance_summary["post_test_score"] = array("type"=>14,"varname"=>"post_test_score", "name" => "post_test_score", "autoInc" => "0");
+$dalTableparticipant_attendance_summary["ceu_points"] = array("type"=>14,"varname"=>"ceu_points", "name" => "ceu_points", "autoInc" => "0");
 
 $dal_info["lifebox_mesystem_at_localhost_public_participant_attendance_summary"] = &$dalTableparticipant_attendance_summary;
 ?>

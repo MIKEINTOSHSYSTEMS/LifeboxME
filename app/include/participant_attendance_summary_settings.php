@@ -64,6 +64,15 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelsparticipant_attendance_summary["English"]["attendance_status"] = "Attendance Status";
 	$fieldToolTipsparticipant_attendance_summary["English"]["attendance_status"] = "";
 	$placeHoldersparticipant_attendance_summary["English"]["attendance_status"] = "";
+	$fieldLabelsparticipant_attendance_summary["English"]["pre_test_score"] = "Pre Test Score";
+	$fieldToolTipsparticipant_attendance_summary["English"]["pre_test_score"] = "";
+	$placeHoldersparticipant_attendance_summary["English"]["pre_test_score"] = "";
+	$fieldLabelsparticipant_attendance_summary["English"]["post_test_score"] = "Post Test Score";
+	$fieldToolTipsparticipant_attendance_summary["English"]["post_test_score"] = "";
+	$placeHoldersparticipant_attendance_summary["English"]["post_test_score"] = "";
+	$fieldLabelsparticipant_attendance_summary["English"]["ceu_points"] = "Ceu Points";
+	$fieldToolTipsparticipant_attendance_summary["English"]["ceu_points"] = "";
+	$placeHoldersparticipant_attendance_summary["English"]["ceu_points"] = "";
 	if (count($fieldToolTipsparticipant_attendance_summary["English"]))
 		$tdataparticipant_attendance_summary[".isUseToolTips"] = true;
 }
@@ -194,6 +203,9 @@ $tdataparticipant_attendance_summary[".googleLikeFields"][] = "days_recorded";
 $tdataparticipant_attendance_summary[".googleLikeFields"][] = "days_attended";
 $tdataparticipant_attendance_summary[".googleLikeFields"][] = "attendance_percentage";
 $tdataparticipant_attendance_summary[".googleLikeFields"][] = "attendance_status";
+$tdataparticipant_attendance_summary[".googleLikeFields"][] = "pre_test_score";
+$tdataparticipant_attendance_summary[".googleLikeFields"][] = "post_test_score";
+$tdataparticipant_attendance_summary[".googleLikeFields"][] = "ceu_points";
 
 
 
@@ -227,7 +239,7 @@ $tdataparticipant_attendance_summary[".strOrderBy"] = $tstrOrderBy;
 $tdataparticipant_attendance_summary[".orderindexes"] = array();
 
 
-$tdataparticipant_attendance_summary[".sqlHead"] = "SELECT participant_id,  	training_id,  	first_name,  	last_name,  	email,  	training_name,  	start_date,  	end_date,  	total_days,  	days_recorded,  	days_attended,  	attendance_percentage,  	attendance_status";
+$tdataparticipant_attendance_summary[".sqlHead"] = "SELECT participant_id,  	training_id,  	first_name,  	last_name,  	email,  	training_name,  	start_date,  	end_date,  	total_days,  	days_recorded,  	days_attended,  	attendance_percentage,  	attendance_status,  	pre_test_score,  	post_test_score,  	ceu_points";
 $tdataparticipant_attendance_summary[".sqlFrom"] = "FROM \"public\".participant_attendance_summary";
 $tdataparticipant_attendance_summary[".sqlWhereExpr"] = "";
 $tdataparticipant_attendance_summary[".sqlTail"] = "";
@@ -2110,6 +2122,426 @@ $tdataparticipant_attendance_summary[".hideMobileList"] = array();
 
 	$tdataparticipant_attendance_summary["attendance_status"] = $fdata;
 		$tdataparticipant_attendance_summary[".searchableFields"][] = "attendance_status";
+//	pre_test_score
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 14;
+	$fdata["strName"] = "pre_test_score";
+	$fdata["GoodName"] = "pre_test_score";
+	$fdata["ownerTable"] = "public.participant_attendance_summary";
+	$fdata["Label"] = GetFieldLabel("public_participant_attendance_summary","pre_test_score");
+	$fdata["FieldType"] = 14;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "pre_test_score";
+
+		$fdata["sourceSingle"] = "pre_test_score";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "pre_test_score";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "Number");
+
+	
+	
+	
+	
+	
+	
+	
+		$vdata["DecimalDigits"] = 2;
+
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
+							
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdataparticipant_attendance_summary["pre_test_score"] = $fdata;
+		$tdataparticipant_attendance_summary[".searchableFields"][] = "pre_test_score";
+//	post_test_score
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 15;
+	$fdata["strName"] = "post_test_score";
+	$fdata["GoodName"] = "post_test_score";
+	$fdata["ownerTable"] = "public.participant_attendance_summary";
+	$fdata["Label"] = GetFieldLabel("public_participant_attendance_summary","post_test_score");
+	$fdata["FieldType"] = 14;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "post_test_score";
+
+		$fdata["sourceSingle"] = "post_test_score";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "post_test_score";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "Number");
+
+	
+	
+	
+	
+	
+	
+	
+		$vdata["DecimalDigits"] = 2;
+
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
+							
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdataparticipant_attendance_summary["post_test_score"] = $fdata;
+		$tdataparticipant_attendance_summary[".searchableFields"][] = "post_test_score";
+//	ceu_points
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 16;
+	$fdata["strName"] = "ceu_points";
+	$fdata["GoodName"] = "ceu_points";
+	$fdata["ownerTable"] = "public.participant_attendance_summary";
+	$fdata["Label"] = GetFieldLabel("public_participant_attendance_summary","ceu_points");
+	$fdata["FieldType"] = 14;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "ceu_points";
+
+		$fdata["sourceSingle"] = "ceu_points";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "ceu_points";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "Number");
+
+	
+	
+	
+	
+	
+	
+	
+		$vdata["DecimalDigits"] = 2;
+
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
+							
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdataparticipant_attendance_summary["ceu_points"] = $fdata;
+		$tdataparticipant_attendance_summary[".searchableFields"][] = "ceu_points";
 
 
 $tables_data["public.participant_attendance_summary"]=&$tdataparticipant_attendance_summary;
@@ -2154,7 +2586,7 @@ function createSqlQuery_participant_attendance_summary()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "participant_id,  	training_id,  	first_name,  	last_name,  	email,  	training_name,  	start_date,  	end_date,  	total_days,  	days_recorded,  	days_attended,  	attendance_percentage,  	attendance_status";
+$proto0["m_strFieldList"] = "participant_id,  	training_id,  	first_name,  	last_name,  	email,  	training_name,  	start_date,  	end_date,  	total_days,  	days_recorded,  	days_attended,  	attendance_percentage,  	attendance_status,  	pre_test_score,  	post_test_score,  	ceu_points";
 $proto0["m_strFrom"] = "FROM \"public\".participant_attendance_summary";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
@@ -2376,49 +2808,94 @@ $proto30["m_alias"] = "";
 $obj = new SQLFieldListItem($proto30);
 
 $proto0["m_fieldlist"][]=$obj;
-$proto0["m_fromlist"] = array();
-												$proto32=array();
-$proto32["m_link"] = "SQLL_MAIN";
-			$proto33=array();
-$proto33["m_strName"] = "public.participant_attendance_summary";
-$proto33["m_srcTableName"] = "public.participant_attendance_summary";
-$proto33["m_columns"] = array();
-$proto33["m_columns"][] = "participant_id";
-$proto33["m_columns"][] = "training_id";
-$proto33["m_columns"][] = "first_name";
-$proto33["m_columns"][] = "last_name";
-$proto33["m_columns"][] = "email";
-$proto33["m_columns"][] = "training_name";
-$proto33["m_columns"][] = "start_date";
-$proto33["m_columns"][] = "end_date";
-$proto33["m_columns"][] = "total_days";
-$proto33["m_columns"][] = "days_recorded";
-$proto33["m_columns"][] = "days_attended";
-$proto33["m_columns"][] = "attendance_percentage";
-$proto33["m_columns"][] = "attendance_status";
-$obj = new SQLTable($proto33);
+						$proto32=array();
+			$obj = new SQLField(array(
+	"m_strName" => "pre_test_score",
+	"m_strTable" => "public.participant_attendance_summary",
+	"m_srcTableName" => "public.participant_attendance_summary"
+));
 
-$proto32["m_table"] = $obj;
-$proto32["m_sql"] = "\"public\".participant_attendance_summary";
-$proto32["m_alias"] = "";
+$proto32["m_sql"] = "pre_test_score";
 $proto32["m_srcTableName"] = "public.participant_attendance_summary";
-$proto34=array();
-$proto34["m_sql"] = "";
-$proto34["m_uniontype"] = "SQLL_UNKNOWN";
+$proto32["m_expr"]=$obj;
+$proto32["m_alias"] = "";
+$obj = new SQLFieldListItem($proto32);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto34=array();
+			$obj = new SQLField(array(
+	"m_strName" => "post_test_score",
+	"m_strTable" => "public.participant_attendance_summary",
+	"m_srcTableName" => "public.participant_attendance_summary"
+));
+
+$proto34["m_sql"] = "post_test_score";
+$proto34["m_srcTableName"] = "public.participant_attendance_summary";
+$proto34["m_expr"]=$obj;
+$proto34["m_alias"] = "";
+$obj = new SQLFieldListItem($proto34);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto36=array();
+			$obj = new SQLField(array(
+	"m_strName" => "ceu_points",
+	"m_strTable" => "public.participant_attendance_summary",
+	"m_srcTableName" => "public.participant_attendance_summary"
+));
+
+$proto36["m_sql"] = "ceu_points";
+$proto36["m_srcTableName"] = "public.participant_attendance_summary";
+$proto36["m_expr"]=$obj;
+$proto36["m_alias"] = "";
+$obj = new SQLFieldListItem($proto36);
+
+$proto0["m_fieldlist"][]=$obj;
+$proto0["m_fromlist"] = array();
+												$proto38=array();
+$proto38["m_link"] = "SQLL_MAIN";
+			$proto39=array();
+$proto39["m_strName"] = "public.participant_attendance_summary";
+$proto39["m_srcTableName"] = "public.participant_attendance_summary";
+$proto39["m_columns"] = array();
+$proto39["m_columns"][] = "participant_id";
+$proto39["m_columns"][] = "training_id";
+$proto39["m_columns"][] = "first_name";
+$proto39["m_columns"][] = "last_name";
+$proto39["m_columns"][] = "email";
+$proto39["m_columns"][] = "training_name";
+$proto39["m_columns"][] = "start_date";
+$proto39["m_columns"][] = "end_date";
+$proto39["m_columns"][] = "total_days";
+$proto39["m_columns"][] = "days_recorded";
+$proto39["m_columns"][] = "days_attended";
+$proto39["m_columns"][] = "attendance_percentage";
+$proto39["m_columns"][] = "attendance_status";
+$proto39["m_columns"][] = "pre_test_score";
+$proto39["m_columns"][] = "post_test_score";
+$proto39["m_columns"][] = "ceu_points";
+$obj = new SQLTable($proto39);
+
+$proto38["m_table"] = $obj;
+$proto38["m_sql"] = "\"public\".participant_attendance_summary";
+$proto38["m_alias"] = "";
+$proto38["m_srcTableName"] = "public.participant_attendance_summary";
+$proto40=array();
+$proto40["m_sql"] = "";
+$proto40["m_uniontype"] = "SQLL_UNKNOWN";
 	$obj = new SQLNonParsed(array(
 	"m_sql" => ""
 ));
 
-$proto34["m_column"]=$obj;
-$proto34["m_contained"] = array();
-$proto34["m_strCase"] = "";
-$proto34["m_havingmode"] = false;
-$proto34["m_inBrackets"] = false;
-$proto34["m_useAlias"] = false;
-$obj = new SQLLogicalExpr($proto34);
+$proto40["m_column"]=$obj;
+$proto40["m_contained"] = array();
+$proto40["m_strCase"] = "";
+$proto40["m_havingmode"] = false;
+$proto40["m_inBrackets"] = false;
+$proto40["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto40);
 
-$proto32["m_joinon"] = $obj;
-$obj = new SQLFromListItem($proto32);
+$proto38["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto38);
 
 $proto0["m_fromlist"][]=$obj;
 $proto0["m_groupby"] = array();
@@ -2434,7 +2911,7 @@ $queryData_participant_attendance_summary = createSqlQuery_participant_attendanc
 	
 		;
 
-													
+																
 
 $tdataparticipant_attendance_summary[".sqlquery"] = $queryData_participant_attendance_summary;
 

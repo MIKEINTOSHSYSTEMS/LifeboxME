@@ -55,15 +55,6 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelstraining_participants["English"]["training_date"] = "Registration Date";
 	$fieldToolTipstraining_participants["English"]["training_date"] = "";
 	$placeHolderstraining_participants["English"]["training_date"] = "";
-	$fieldLabelstraining_participants["English"]["ceu_points"] = "CEU Points";
-	$fieldToolTipstraining_participants["English"]["ceu_points"] = "";
-	$placeHolderstraining_participants["English"]["ceu_points"] = "";
-	$fieldLabelstraining_participants["English"]["pre_test_score"] = "Pre Test Score";
-	$fieldToolTipstraining_participants["English"]["pre_test_score"] = "";
-	$placeHolderstraining_participants["English"]["pre_test_score"] = "";
-	$fieldLabelstraining_participants["English"]["post_test_score"] = "Post Test Score";
-	$fieldToolTipstraining_participants["English"]["post_test_score"] = "";
-	$placeHolderstraining_participants["English"]["post_test_score"] = "";
 	$fieldLabelstraining_participants["English"]["created_at"] = "Created At";
 	$fieldToolTipstraining_participants["English"]["created_at"] = "";
 	$placeHolderstraining_participants["English"]["created_at"] = "";
@@ -209,9 +200,6 @@ $tdatatraining_participants[".googleLikeFields"][] = "email";
 $tdatatraining_participants[".googleLikeFields"][] = "country_id";
 $tdatatraining_participants[".googleLikeFields"][] = "venue_id";
 $tdatatraining_participants[".googleLikeFields"][] = "training_date";
-$tdatatraining_participants[".googleLikeFields"][] = "ceu_points";
-$tdatatraining_participants[".googleLikeFields"][] = "pre_test_score";
-$tdatatraining_participants[".googleLikeFields"][] = "post_test_score";
 $tdatatraining_participants[".googleLikeFields"][] = "created_at";
 $tdatatraining_participants[".googleLikeFields"][] = "updated_at";
 
@@ -248,7 +236,7 @@ $tdatatraining_participants[".strOrderBy"] = $tstrOrderBy;
 $tdatatraining_participants[".orderindexes"] = array();
 
 
-$tdatatraining_participants[".sqlHead"] = "SELECT participant_id,  title_salutation,  first_name,  middle_name,  last_name,  sex_id,  role_id,  facility_id,  phone,  email,  country_id,  venue_id,  training_date,  ceu_points,  pre_test_score,  post_test_score,  created_at,  updated_at";
+$tdatatraining_participants[".sqlHead"] = "SELECT participant_id,  title_salutation,  first_name,  middle_name,  last_name,  sex_id,  role_id,  facility_id,  phone,  email,  country_id,  venue_id,  training_date,  created_at,  updated_at";
 $tdatatraining_participants[".sqlFrom"] = "FROM \"public\".training_participants";
 $tdatatraining_participants[".sqlWhereExpr"] = "";
 $tdatatraining_participants[".sqlTail"] = "";
@@ -2236,430 +2224,10 @@ $tdatatraining_participants[".hideMobileList"] = array();
 
 	$tdatatraining_participants["training_date"] = $fdata;
 		$tdatatraining_participants[".searchableFields"][] = "training_date";
-//	ceu_points
-//	Custom field settings
-	$fdata = array();
-	$fdata["Index"] = 14;
-	$fdata["strName"] = "ceu_points";
-	$fdata["GoodName"] = "ceu_points";
-	$fdata["ownerTable"] = "public.training_participants";
-	$fdata["Label"] = GetFieldLabel("public_training_participants","ceu_points");
-	$fdata["FieldType"] = 14;
-
-
-	
-	
-			
-
-		$fdata["strField"] = "ceu_points";
-
-		$fdata["sourceSingle"] = "ceu_points";
-
-	
-		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "ceu_points";
-
-	
-	
-				$fdata["UploadFolder"] = "files";
-
-//  Begin View Formats
-	$fdata["ViewFormats"] = array();
-
-	$vdata = array("ViewFormat" => "Number");
-
-	
-	
-	
-	
-	
-	
-	
-		$vdata["DecimalDigits"] = 2;
-
-	
-	
-	
-	
-	
-	
-		$vdata["NeedEncode"] = true;
-
-	
-		$vdata["truncateText"] = true;
-	$vdata["NumberOfChars"] = 80;
-
-	$fdata["ViewFormats"]["view"] = $vdata;
-//  End View Formats
-
-//	Begin Edit Formats
-	$fdata["EditFormats"] = array();
-
-	$edata = array("EditFormat" => "Text field");
-
-	
-		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
-	$edata["weekdays"] = "[]";
-
-
-	
-	
-
-
-
-	
-	
-	
-	
-			$edata["acceptFileTypesHtml"] = "";
-
-		$edata["maxNumberOfFiles"] = 1;
-
-	
-	
-	
-	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-		
-		$edata["controlWidth"] = 200;
-
-//	Begin validation
-	$edata["validateAs"] = array();
-	$edata["validateAs"]["basicValidate"] = array();
-	$edata["validateAs"]["customMessages"] = array();
-				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
-							
-	
-//	End validation
-
-	
-			
-	
-	
-	
-	$fdata["EditFormats"]["edit"] = $edata;
-//	End Edit Formats
-
-
-	$fdata["isSeparate"] = false;
-
-
-
-
-// the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
-
-			// the default search options list
-				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
-// the end of search options settings
-
-
-//Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
-		$fdata["showCollapsed"] = false;
-
-		$fdata["sortValueType"] = 0;
-		$fdata["numberOfVisibleItems"] = 10;
-
-		$fdata["filterBy"] = 0;
-
-	
-
-	
-	
-//end of Filters settings
-
-
-	$tdatatraining_participants["ceu_points"] = $fdata;
-		$tdatatraining_participants[".searchableFields"][] = "ceu_points";
-//	pre_test_score
-//	Custom field settings
-	$fdata = array();
-	$fdata["Index"] = 15;
-	$fdata["strName"] = "pre_test_score";
-	$fdata["GoodName"] = "pre_test_score";
-	$fdata["ownerTable"] = "public.training_participants";
-	$fdata["Label"] = GetFieldLabel("public_training_participants","pre_test_score");
-	$fdata["FieldType"] = 14;
-
-
-	
-	
-			
-
-		$fdata["strField"] = "pre_test_score";
-
-		$fdata["sourceSingle"] = "pre_test_score";
-
-	
-		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "pre_test_score";
-
-	
-	
-				$fdata["UploadFolder"] = "files";
-
-//  Begin View Formats
-	$fdata["ViewFormats"] = array();
-
-	$vdata = array("ViewFormat" => "Number");
-
-	
-	
-	
-	
-	
-	
-	
-		$vdata["DecimalDigits"] = 2;
-
-	
-	
-	
-	
-	
-	
-		$vdata["NeedEncode"] = true;
-
-	
-		$vdata["truncateText"] = true;
-	$vdata["NumberOfChars"] = 80;
-
-	$fdata["ViewFormats"]["view"] = $vdata;
-//  End View Formats
-
-//	Begin Edit Formats
-	$fdata["EditFormats"] = array();
-
-	$edata = array("EditFormat" => "Text field");
-
-	
-		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
-	$edata["weekdays"] = "[]";
-
-
-	
-	
-
-
-
-	
-	
-	
-	
-			$edata["acceptFileTypesHtml"] = "";
-
-		$edata["maxNumberOfFiles"] = 1;
-
-	
-	
-	
-	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-		
-		$edata["controlWidth"] = 200;
-
-//	Begin validation
-	$edata["validateAs"] = array();
-	$edata["validateAs"]["basicValidate"] = array();
-	$edata["validateAs"]["customMessages"] = array();
-				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
-							
-	
-//	End validation
-
-	
-			
-	
-	
-	
-	$fdata["EditFormats"]["edit"] = $edata;
-//	End Edit Formats
-
-
-	$fdata["isSeparate"] = false;
-
-
-
-
-// the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
-
-			// the default search options list
-				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
-// the end of search options settings
-
-
-//Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
-		$fdata["showCollapsed"] = false;
-
-		$fdata["sortValueType"] = 0;
-		$fdata["numberOfVisibleItems"] = 10;
-
-		$fdata["filterBy"] = 0;
-
-	
-
-	
-	
-//end of Filters settings
-
-
-	$tdatatraining_participants["pre_test_score"] = $fdata;
-		$tdatatraining_participants[".searchableFields"][] = "pre_test_score";
-//	post_test_score
-//	Custom field settings
-	$fdata = array();
-	$fdata["Index"] = 16;
-	$fdata["strName"] = "post_test_score";
-	$fdata["GoodName"] = "post_test_score";
-	$fdata["ownerTable"] = "public.training_participants";
-	$fdata["Label"] = GetFieldLabel("public_training_participants","post_test_score");
-	$fdata["FieldType"] = 14;
-
-
-	
-	
-			
-
-		$fdata["strField"] = "post_test_score";
-
-		$fdata["sourceSingle"] = "post_test_score";
-
-	
-		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "post_test_score";
-
-	
-	
-				$fdata["UploadFolder"] = "files";
-
-//  Begin View Formats
-	$fdata["ViewFormats"] = array();
-
-	$vdata = array("ViewFormat" => "Number");
-
-	
-	
-	
-	
-	
-	
-	
-		$vdata["DecimalDigits"] = 2;
-
-	
-	
-	
-	
-	
-	
-		$vdata["NeedEncode"] = true;
-
-	
-		$vdata["truncateText"] = true;
-	$vdata["NumberOfChars"] = 80;
-
-	$fdata["ViewFormats"]["view"] = $vdata;
-//  End View Formats
-
-//	Begin Edit Formats
-	$fdata["EditFormats"] = array();
-
-	$edata = array("EditFormat" => "Text field");
-
-	
-		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
-	$edata["weekdays"] = "[]";
-
-
-	
-	
-
-
-
-	
-	
-	
-	
-			$edata["acceptFileTypesHtml"] = "";
-
-		$edata["maxNumberOfFiles"] = 1;
-
-	
-	
-	
-	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-		
-		$edata["controlWidth"] = 200;
-
-//	Begin validation
-	$edata["validateAs"] = array();
-	$edata["validateAs"]["basicValidate"] = array();
-	$edata["validateAs"]["customMessages"] = array();
-				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
-							
-	
-//	End validation
-
-	
-			
-	
-	
-	
-	$fdata["EditFormats"]["edit"] = $edata;
-//	End Edit Formats
-
-
-	$fdata["isSeparate"] = false;
-
-
-
-
-// the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
-
-			// the default search options list
-				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
-// the end of search options settings
-
-
-//Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
-		$fdata["showCollapsed"] = false;
-
-		$fdata["sortValueType"] = 0;
-		$fdata["numberOfVisibleItems"] = 10;
-
-		$fdata["filterBy"] = 0;
-
-	
-
-	
-	
-//end of Filters settings
-
-
-	$tdatatraining_participants["post_test_score"] = $fdata;
-		$tdatatraining_participants[".searchableFields"][] = "post_test_score";
 //	created_at
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 17;
+	$fdata["Index"] = 14;
 	$fdata["strName"] = "created_at";
 	$fdata["GoodName"] = "created_at";
 	$fdata["ownerTable"] = "public.training_participants";
@@ -2798,7 +2366,7 @@ $tdatatraining_participants[".hideMobileList"] = array();
 //	updated_at
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 18;
+	$fdata["Index"] = 15;
 	$fdata["strName"] = "updated_at";
 	$fdata["GoodName"] = "updated_at";
 	$fdata["ownerTable"] = "public.training_participants";
@@ -3099,7 +2667,7 @@ function createSqlQuery_training_participants()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "participant_id,  title_salutation,  first_name,  middle_name,  last_name,  sex_id,  role_id,  facility_id,  phone,  email,  country_id,  venue_id,  training_date,  ceu_points,  pre_test_score,  post_test_score,  created_at,  updated_at";
+$proto0["m_strFieldList"] = "participant_id,  title_salutation,  first_name,  middle_name,  last_name,  sex_id,  role_id,  facility_id,  phone,  email,  country_id,  venue_id,  training_date,  created_at,  updated_at";
 $proto0["m_strFrom"] = "FROM \"public\".training_participants";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
@@ -3323,12 +2891,12 @@ $obj = new SQLFieldListItem($proto30);
 $proto0["m_fieldlist"][]=$obj;
 						$proto32=array();
 			$obj = new SQLField(array(
-	"m_strName" => "ceu_points",
+	"m_strName" => "created_at",
 	"m_strTable" => "public.training_participants",
 	"m_srcTableName" => "public.training_participants"
 ));
 
-$proto32["m_sql"] = "ceu_points";
+$proto32["m_sql"] = "created_at";
 $proto32["m_srcTableName"] = "public.training_participants";
 $proto32["m_expr"]=$obj;
 $proto32["m_alias"] = "";
@@ -3337,108 +2905,63 @@ $obj = new SQLFieldListItem($proto32);
 $proto0["m_fieldlist"][]=$obj;
 						$proto34=array();
 			$obj = new SQLField(array(
-	"m_strName" => "pre_test_score",
+	"m_strName" => "updated_at",
 	"m_strTable" => "public.training_participants",
 	"m_srcTableName" => "public.training_participants"
 ));
 
-$proto34["m_sql"] = "pre_test_score";
+$proto34["m_sql"] = "updated_at";
 $proto34["m_srcTableName"] = "public.training_participants";
 $proto34["m_expr"]=$obj;
 $proto34["m_alias"] = "";
 $obj = new SQLFieldListItem($proto34);
 
 $proto0["m_fieldlist"][]=$obj;
-						$proto36=array();
-			$obj = new SQLField(array(
-	"m_strName" => "post_test_score",
-	"m_strTable" => "public.training_participants",
-	"m_srcTableName" => "public.training_participants"
-));
-
-$proto36["m_sql"] = "post_test_score";
-$proto36["m_srcTableName"] = "public.training_participants";
-$proto36["m_expr"]=$obj;
-$proto36["m_alias"] = "";
-$obj = new SQLFieldListItem($proto36);
-
-$proto0["m_fieldlist"][]=$obj;
-						$proto38=array();
-			$obj = new SQLField(array(
-	"m_strName" => "created_at",
-	"m_strTable" => "public.training_participants",
-	"m_srcTableName" => "public.training_participants"
-));
-
-$proto38["m_sql"] = "created_at";
-$proto38["m_srcTableName"] = "public.training_participants";
-$proto38["m_expr"]=$obj;
-$proto38["m_alias"] = "";
-$obj = new SQLFieldListItem($proto38);
-
-$proto0["m_fieldlist"][]=$obj;
-						$proto40=array();
-			$obj = new SQLField(array(
-	"m_strName" => "updated_at",
-	"m_strTable" => "public.training_participants",
-	"m_srcTableName" => "public.training_participants"
-));
-
-$proto40["m_sql"] = "updated_at";
-$proto40["m_srcTableName"] = "public.training_participants";
-$proto40["m_expr"]=$obj;
-$proto40["m_alias"] = "";
-$obj = new SQLFieldListItem($proto40);
-
-$proto0["m_fieldlist"][]=$obj;
 $proto0["m_fromlist"] = array();
-												$proto42=array();
-$proto42["m_link"] = "SQLL_MAIN";
-			$proto43=array();
-$proto43["m_strName"] = "public.training_participants";
-$proto43["m_srcTableName"] = "public.training_participants";
-$proto43["m_columns"] = array();
-$proto43["m_columns"][] = "participant_id";
-$proto43["m_columns"][] = "first_name";
-$proto43["m_columns"][] = "last_name";
-$proto43["m_columns"][] = "sex_id";
-$proto43["m_columns"][] = "role_id";
-$proto43["m_columns"][] = "facility_id";
-$proto43["m_columns"][] = "phone";
-$proto43["m_columns"][] = "email";
-$proto43["m_columns"][] = "country_id";
-$proto43["m_columns"][] = "training_date";
-$proto43["m_columns"][] = "ceu_points";
-$proto43["m_columns"][] = "pre_test_score";
-$proto43["m_columns"][] = "post_test_score";
-$proto43["m_columns"][] = "created_at";
-$proto43["m_columns"][] = "updated_at";
-$proto43["m_columns"][] = "venue_id";
-$proto43["m_columns"][] = "title_salutation";
-$proto43["m_columns"][] = "middle_name";
-$obj = new SQLTable($proto43);
+												$proto36=array();
+$proto36["m_link"] = "SQLL_MAIN";
+			$proto37=array();
+$proto37["m_strName"] = "public.training_participants";
+$proto37["m_srcTableName"] = "public.training_participants";
+$proto37["m_columns"] = array();
+$proto37["m_columns"][] = "participant_id";
+$proto37["m_columns"][] = "first_name";
+$proto37["m_columns"][] = "last_name";
+$proto37["m_columns"][] = "sex_id";
+$proto37["m_columns"][] = "role_id";
+$proto37["m_columns"][] = "facility_id";
+$proto37["m_columns"][] = "phone";
+$proto37["m_columns"][] = "email";
+$proto37["m_columns"][] = "country_id";
+$proto37["m_columns"][] = "training_date";
+$proto37["m_columns"][] = "created_at";
+$proto37["m_columns"][] = "updated_at";
+$proto37["m_columns"][] = "venue_id";
+$proto37["m_columns"][] = "title_salutation";
+$proto37["m_columns"][] = "middle_name";
+$obj = new SQLTable($proto37);
 
-$proto42["m_table"] = $obj;
-$proto42["m_sql"] = "\"public\".training_participants";
-$proto42["m_alias"] = "";
-$proto42["m_srcTableName"] = "public.training_participants";
-$proto44=array();
-$proto44["m_sql"] = "";
-$proto44["m_uniontype"] = "SQLL_UNKNOWN";
+$proto36["m_table"] = $obj;
+$proto36["m_sql"] = "\"public\".training_participants";
+$proto36["m_alias"] = "";
+$proto36["m_srcTableName"] = "public.training_participants";
+$proto38=array();
+$proto38["m_sql"] = "";
+$proto38["m_uniontype"] = "SQLL_UNKNOWN";
 	$obj = new SQLNonParsed(array(
 	"m_sql" => ""
 ));
 
-$proto44["m_column"]=$obj;
-$proto44["m_contained"] = array();
-$proto44["m_strCase"] = "";
-$proto44["m_havingmode"] = false;
-$proto44["m_inBrackets"] = false;
-$proto44["m_useAlias"] = false;
-$obj = new SQLLogicalExpr($proto44);
+$proto38["m_column"]=$obj;
+$proto38["m_contained"] = array();
+$proto38["m_strCase"] = "";
+$proto38["m_havingmode"] = false;
+$proto38["m_inBrackets"] = false;
+$proto38["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto38);
 
-$proto42["m_joinon"] = $obj;
-$obj = new SQLFromListItem($proto42);
+$proto36["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto36);
 
 $proto0["m_fromlist"][]=$obj;
 $proto0["m_groupby"] = array();
@@ -3454,7 +2977,7 @@ $queryData_training_participants = createSqlQuery_training_participants();
 	
 		;
 
-																		
+															
 
 $tdatatraining_participants[".sqlquery"] = $queryData_training_participants;
 

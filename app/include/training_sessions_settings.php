@@ -252,7 +252,7 @@ $tdatatraining_sessions[".strOrderBy"] = $tstrOrderBy;
 $tdatatraining_sessions[".orderindexes"] = array();
 
 
-$tdatatraining_sessions[".sqlHead"] = "SELECT ts.training_id,  ts.course_id,  ts.training_type_id,  ts.approach_id,  ts.program_id,  ts.quarter,  ts.start_date,  ts.end_date,  ts.facility_id,  ts.host_country_id,  ts.venue_id,  ts.ceu_points,  tsv.num_participants,  ts.avg_pre_test_score,  ts.avg_post_test_score,  ts.remarks,  CONCAT('Training ID: ', ts.training_id, ' | ', 'Course Name: ', tc.course_name, ' | ', 'Program Name: ', p.program_name, ' | ', 'Program ID: ', ts.program_id, ' | ', 'Quarter: ', ts.quarter, ' | ', 'Start Date: ', ts.start_date, ' | ', 'End Date: ', ts.end_date) AS training_details,  ts.created_at,  ts.updated_at";
+$tdatatraining_sessions[".sqlHead"] = "SELECT ts.training_id,  ts.course_id,  ts.training_type_id,  ts.approach_id,  ts.program_id,  ts.quarter,  ts.start_date,  ts.end_date,  ts.facility_id,  ts.host_country_id,  ts.venue_id,  ts.ceu_points,  tsv.num_participants,  tsv.avg_pre_test_score,  tsv.avg_post_test_score,  ts.remarks,  CONCAT('Training ID: ', ts.training_id, ' | ', 'Course Name: ', tc.course_name, ' | ', 'Program Name: ', p.program_name, ' | ', 'Program ID: ', ts.program_id, ' | ', 'Quarter: ', ts.quarter, ' | ', 'Start Date: ', ts.start_date, ' | ', 'End Date: ', ts.end_date) AS training_details,  ts.created_at,  ts.updated_at";
 $tdatatraining_sessions[".sqlFrom"] = "FROM \"public\".training_sessions AS ts  INNER JOIN \"public\".training_courses AS tc ON ts.course_id = tc.course_id  INNER JOIN \"public\".programs AS p ON ts.program_id = p.program_id  INNER JOIN \"public\".training_summary_view AS tsv ON ts.training_id = tsv.training_id";
 $tdatatraining_sessions[".sqlWhereExpr"] = "";
 $tdatatraining_sessions[".sqlTail"] = "";
@@ -2328,7 +2328,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 	$fdata["Index"] = 14;
 	$fdata["strName"] = "avg_pre_test_score";
 	$fdata["GoodName"] = "avg_pre_test_score";
-	$fdata["ownerTable"] = "public.training_sessions";
+	$fdata["ownerTable"] = "public.training_summary_view";
 	$fdata["Label"] = GetFieldLabel("public_training_sessions","avg_pre_test_score");
 	$fdata["FieldType"] = 14;
 
@@ -2343,7 +2343,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "ts.avg_pre_test_score";
+	$fdata["FullName"] = "tsv.avg_pre_test_score";
 
 	
 	
@@ -2381,7 +2381,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Text field");
+	$edata = array("EditFormat" => "Readonly");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -2405,17 +2405,14 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 	
 	
 	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-		
+	
+	
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
 	$edata["validateAs"] = array();
 	$edata["validateAs"]["basicValidate"] = array();
 	$edata["validateAs"]["customMessages"] = array();
-				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
 							
 	
 //	End validation
@@ -2468,7 +2465,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 	$fdata["Index"] = 15;
 	$fdata["strName"] = "avg_post_test_score";
 	$fdata["GoodName"] = "avg_post_test_score";
-	$fdata["ownerTable"] = "public.training_sessions";
+	$fdata["ownerTable"] = "public.training_summary_view";
 	$fdata["Label"] = GetFieldLabel("public_training_sessions","avg_post_test_score");
 	$fdata["FieldType"] = 14;
 
@@ -2483,7 +2480,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "ts.avg_post_test_score";
+	$fdata["FullName"] = "tsv.avg_post_test_score";
 
 	
 	
@@ -2521,7 +2518,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Text field");
+	$edata = array("EditFormat" => "Readonly");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -2545,17 +2542,14 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 	
 	
 	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-		
+	
+	
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
 	$edata["validateAs"] = array();
 	$edata["validateAs"]["basicValidate"] = array();
 	$edata["validateAs"]["customMessages"] = array();
-				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
 							
 	
 //	End validation
@@ -3461,7 +3455,7 @@ function createSqlQuery_training_sessions()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "ts.training_id,  ts.course_id,  ts.training_type_id,  ts.approach_id,  ts.program_id,  ts.quarter,  ts.start_date,  ts.end_date,  ts.facility_id,  ts.host_country_id,  ts.venue_id,  ts.ceu_points,  tsv.num_participants,  ts.avg_pre_test_score,  ts.avg_post_test_score,  ts.remarks,  CONCAT('Training ID: ', ts.training_id, ' | ', 'Course Name: ', tc.course_name, ' | ', 'Program Name: ', p.program_name, ' | ', 'Program ID: ', ts.program_id, ' | ', 'Quarter: ', ts.quarter, ' | ', 'Start Date: ', ts.start_date, ' | ', 'End Date: ', ts.end_date) AS training_details,  ts.created_at,  ts.updated_at";
+$proto0["m_strFieldList"] = "ts.training_id,  ts.course_id,  ts.training_type_id,  ts.approach_id,  ts.program_id,  ts.quarter,  ts.start_date,  ts.end_date,  ts.facility_id,  ts.host_country_id,  ts.venue_id,  ts.ceu_points,  tsv.num_participants,  tsv.avg_pre_test_score,  tsv.avg_post_test_score,  ts.remarks,  CONCAT('Training ID: ', ts.training_id, ' | ', 'Course Name: ', tc.course_name, ' | ', 'Program Name: ', p.program_name, ' | ', 'Program ID: ', ts.program_id, ' | ', 'Quarter: ', ts.quarter, ' | ', 'Start Date: ', ts.start_date, ' | ', 'End Date: ', ts.end_date) AS training_details,  ts.created_at,  ts.updated_at";
 $proto0["m_strFrom"] = "FROM \"public\".training_sessions AS ts  INNER JOIN \"public\".training_courses AS tc ON ts.course_id = tc.course_id  INNER JOIN \"public\".programs AS p ON ts.program_id = p.program_id  INNER JOIN \"public\".training_summary_view AS tsv ON ts.training_id = tsv.training_id";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
@@ -3686,11 +3680,11 @@ $proto0["m_fieldlist"][]=$obj;
 						$proto32=array();
 			$obj = new SQLField(array(
 	"m_strName" => "avg_pre_test_score",
-	"m_strTable" => "ts",
+	"m_strTable" => "tsv",
 	"m_srcTableName" => "public.training_sessions"
 ));
 
-$proto32["m_sql"] = "ts.avg_pre_test_score";
+$proto32["m_sql"] = "tsv.avg_pre_test_score";
 $proto32["m_srcTableName"] = "public.training_sessions";
 $proto32["m_expr"]=$obj;
 $proto32["m_alias"] = "";
@@ -3700,11 +3694,11 @@ $proto0["m_fieldlist"][]=$obj;
 						$proto34=array();
 			$obj = new SQLField(array(
 	"m_strName" => "avg_post_test_score",
-	"m_strTable" => "ts",
+	"m_strTable" => "tsv",
 	"m_srcTableName" => "public.training_sessions"
 ));
 
-$proto34["m_sql"] = "ts.avg_post_test_score";
+$proto34["m_sql"] = "tsv.avg_post_test_score";
 $proto34["m_srcTableName"] = "public.training_sessions";
 $proto34["m_expr"]=$obj;
 $proto34["m_alias"] = "";

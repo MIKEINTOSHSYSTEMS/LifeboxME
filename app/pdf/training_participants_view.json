@@ -206,15 +206,6 @@ pdfDocument = {
 			{"hidden":"{$item_hide_integrated_edit_field11}","stack":[{"text":"{$jslabel public_training_participants training_date }","bold":true},{"text":{$training_date_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
-			{"hidden":"{$item_hide_integrated_edit_field13}","stack":[{"text":"{$jslabel public_training_participants ceu_points }","bold":true},{"text":{$ceu_points_pdfvalue}}],"margin":[0,0,0,15]},
-				
-				
-			{"hidden":"{$item_hide_integrated_edit_field14}","stack":[{"text":"{$jslabel public_training_participants pre_test_score }","bold":true},{"text":{$pre_test_score_pdfvalue}}],"margin":[0,0,0,15]},
-				
-				
-			{"hidden":"{$item_hide_integrated_edit_field15}","stack":[{"text":"{$jslabel public_training_participants post_test_score }","bold":true},{"text":{$post_test_score_pdfvalue}}],"margin":[0,0,0,15]},
-				
-				
 			{"hidden":"{$item_hide_integrated_edit_field16}","stack":[{"text":"{$jslabel public_training_participants created_at }","bold":true},{"text":{$created_at_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				

@@ -178,6 +178,15 @@ pdfDocument = {
 				
 			{"hidden":"{$item_hide_integrated_edit_field3}","stack":[{"text":"{$jslabel public_training_participation created_at }","bold":true},{"text":{$created_at_pdfvalue}}],"margin":[0,0,0,15]},
 				
+				
+			{"hidden":"{$item_hide_integrated_edit_field4}","stack":[{"text":"{$jslabel public_training_participation pre_test_score }","bold":true},{"text":{$pre_test_score_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field5}","stack":[{"text":"{$jslabel public_training_participation post_test_score }","bold":true},{"text":{$post_test_score_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field6}","stack":[{"text":"{$jslabel public_training_participation ceu_points }","bold":true},{"text":{$ceu_points_pdfvalue}}],"margin":[0,0,0,15]},
+				
 		  ],
   "border": [ false, false, false, false ],
               "alignment": 'left',
