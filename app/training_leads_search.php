@@ -20,7 +20,18 @@ if( !isLogged() )
 	redirectToLogin();
 }
 
-$accessGranted = CheckTablePermissions($strTableName, "S");
+require_once( "include/reportfunctions.php" );
+$cname = postvalue("cname");
+$rname = postvalue("rname");
+if( $rname || $cname ) {
+	$rpt_array = wrGetEntityArray( 
+		$rname ? $rname : $cname, 
+		$rname ? WR_REPORT : WR_CHART
+	);
+	$accessGranted = @$rpt_array['status'] != "private" || @$rpt_array['owner'] != Security::getUserName();
+} else {
+	$accessGranted = CheckTablePermissions( $strTableName, "S" );
+}
 if(!$accessGranted)
 {
 	HeaderRedirect("menu");
