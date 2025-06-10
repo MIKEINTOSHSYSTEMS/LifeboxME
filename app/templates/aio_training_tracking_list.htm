@@ -345,6 +345,19 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_training_lead}</span>
 						</div>
 		{END searchCtrlBlock_training_lead}
+																{BEGIN searchCtrlBlock_quarter}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_quarter}" {$filterRow_attrs_quarter}>
+			<label>{$label aio_training_tracking quarter }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_quarter}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_quarter}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_quarter}</span>
+						</div>
+		{END searchCtrlBlock_quarter}
 																{BEGIN searchCtrlBlock_start_date}
 
 
@@ -1175,6 +1188,16 @@ Sort by&nbsp;{$sortByDropdown}
 		<a>
 					  	<div class="checkbox">
 				<label>
+					<input type="checkbox" id="hide_quarter" checked="checked" value="1" data-field="quarter" data-fieldname="quarter">
+					<span>{$label aio_training_tracking quarter }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
 					<input type="checkbox" id="hide_start_date" checked="checked" value="1" data-field="start_date" data-fieldname="start_date">
 					<span>{$label aio_training_tracking start_date }</span>
 				</label>
@@ -1330,6 +1353,7 @@ Sort by&nbsp;{$sortByDropdown}
 					
 					
 					
+					
 					</li>
 		{END filterCtrlBlock_gender}
 
@@ -1375,6 +1399,7 @@ Sort by&nbsp;{$sortByDropdown}
 		<li class=" filter-values filter-values-participant_role  {$visibilityClass_participant_role}">
 			{$participant_role_filter}
 						
+					
 					
 					
 					
@@ -1448,6 +1473,7 @@ Sort by&nbsp;{$sortByDropdown}
 					
 					
 					
+					
 					</li>
 		{END filterCtrlBlock_country}
 
@@ -1493,6 +1519,7 @@ Sort by&nbsp;{$sortByDropdown}
 		<li class=" filter-values filter-values-facility  {$visibilityClass_facility}">
 			{$facility_filter}
 						
+					
 					
 					
 					
@@ -1566,6 +1593,7 @@ Sort by&nbsp;{$sortByDropdown}
 					
 					
 					
+					
 					</li>
 		{END filterCtrlBlock_training_id}
 
@@ -1611,6 +1639,7 @@ Sort by&nbsp;{$sortByDropdown}
 		<li class=" filter-values filter-values-training_name  {$visibilityClass_training_name}">
 			{$training_name_filter}
 						
+					
 					
 					
 					
@@ -1684,6 +1713,7 @@ Sort by&nbsp;{$sortByDropdown}
 					
 					
 					
+					
 					</li>
 		{END filterCtrlBlock_attendance_status}
 
@@ -1729,6 +1759,7 @@ Sort by&nbsp;{$sortByDropdown}
 		<li class=" filter-values filter-values-program  {$visibilityClass_program}">
 			{$program_filter}
 						
+					
 					
 					
 					
@@ -1802,6 +1833,7 @@ Sort by&nbsp;{$sortByDropdown}
 					
 					
 					
+					
 					</li>
 		{END filterCtrlBlock_partners}
 
@@ -1847,6 +1879,7 @@ Sort by&nbsp;{$sortByDropdown}
 		<li class=" filter-values filter-values-training_type  {$visibilityClass_training_type}">
 			{$training_type_filter}
 						
+					
 					
 					
 					
@@ -1920,6 +1953,7 @@ Sort by&nbsp;{$sortByDropdown}
 					
 					
 					
+					
 					</li>
 		{END filterCtrlBlock_training_approach}
 
@@ -1965,6 +1999,7 @@ Sort by&nbsp;{$sortByDropdown}
 		<li class=" filter-values filter-values-training_language  {$visibilityClass_training_language}">
 			{$training_language_filter}
 						
+					
 					
 					
 					
@@ -2038,6 +2073,7 @@ Sort by&nbsp;{$sortByDropdown}
 					
 					
 					
+					
 					</li>
 		{END filterCtrlBlock_training_lead}
 
@@ -2055,6 +2091,66 @@ Sort by&nbsp;{$sortByDropdown}
 	</div>
 
 {END filter_control_training_lead}
+
+
+
+
+
+
+{BEGIN filter_control_quarter}
+
+	<div class="dropdown filter-field filter-quarter-container" {BEGIN filter_selected_quarter} data-selected {END filter_selected_quarter}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_quarter}
+			<a href="#" class="filter-clear filter-clear-quarter" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_quarter}
+			<span class="r-filter-field">{$label aio_training_tracking quarter }				{BEGIN filter_selected_quarter}:{END filter_selected_quarter}
+			</span>
+			{BEGIN filter_selected_quarter}
+			<span class="r-filter-value">{$filtervalue_quarter}</span>
+			{END filter_selected_quarter}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_quarter}
+		<li class=" filter-values filter-values-quarter  {$visibilityClass_quarter}">
+			{$quarter_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_quarter}
+
+			{BEGIN filter_button_showmore_quarter}
+		<li class=" filter-show-more {$collapsedClass_quarter} {$showMoreBtnClass_quarter}">
+			<a class="filter-show-more-link filterShowMore_quarter" href="#">{$show_n_more_quarter}</a>
+		</li>
+		{END filter_button_showmore_quarter}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_quarter}
 
 
 
@@ -2083,6 +2179,7 @@ Sort by&nbsp;{$sortByDropdown}
 		<li class=" filter-values filter-values-end_date  {$visibilityClass_end_date}">
 			{$end_date_filter}
 						
+					
 					
 					
 					
@@ -2142,6 +2239,7 @@ Sort by&nbsp;{$sortByDropdown}
 		<li class=" filter-values filter-values-start_date  {$visibilityClass_start_date}">
 			{$start_date_filter}
 						
+					
 					
 					
 					
@@ -2244,6 +2342,9 @@ Sort by&nbsp;{$sortByDropdown}
 	}
 			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="training_lead"]:before {
 		content: "{$label aio_training_tracking training_lead}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="quarter"]:before {
+		content: "{$label aio_training_tracking quarter}";
 	}
 			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="start_date"]:before {
 		content: "{$label aio_training_tracking start_date}";
@@ -2957,6 +3058,40 @@ Sort by&nbsp;{$sortByDropdown}
 	
 	</th>
 	{END cellblock_grid_headcell_field18}
+									{BEGIN cellblock_grid_headcell_field30}
+	<th
+	
+	{$cell_grid_headcell_field30}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$quarter_class}	"
+
+			data-field="quarter"
+	
+	data-cellId="grid_headcell_field30" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN quarter_fieldheadercolumn}
+	{BEGIN quarter_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="grid_field_label" {$item_grid_field_label} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="quarter" data-fieldname="quarter" 
+
+			{$quarter_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking quarter }</span>
+					{$arrow_icon_quarter}
+			</span>
+	</span>
+	{END quarter_fieldheader}
+{END quarter_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field30}
 									{BEGIN cellblock_grid_headcell_field19}
 	<th
 	
@@ -3731,6 +3866,27 @@ Sort by&nbsp;{$sortByDropdown}
 {END training_lead_fieldcolumn}	
 	</td>
 	{END cellblock_grid_cell_field18}
+									{BEGIN cellblock_grid_headcell_field31}
+	<td
+	
+	{$cell_grid_headcell_field31}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$quarter_class}	"
+
+			data-field="quarter"
+	
+	data-cellId="grid_headcell_field31" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN quarter_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="grid_field" {$item_grid_field} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="quarter" data-fieldname="quarter" data-default-width >
+{$quarter_value}
+</span>
+{END quarter_fieldcolumn}	
+	</td>
+	{END cellblock_grid_headcell_field31}
 									{BEGIN cellblock_grid_cell_field19}
 	<td
 	
@@ -4252,6 +4408,21 @@ Sort by&nbsp;{$sortByDropdown}
 	
 	</td>
 	{END cellblock_grid_footcell_field18}
+									{BEGIN cellblock_grid_headcell_field32}
+	<td
+	
+	{$cell_grid_headcell_field32}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$quarter_class}	"
+
+	
+	data-cellId="grid_headcell_field32" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_headcell_field32}
 									{BEGIN cellblock_grid_footcell_field19}
 	<td
 	

@@ -151,6 +151,9 @@ pdfDocument = {
 										{BEGIN col_grid_28}
 					"%",
 					{END col_grid_28}
+										{BEGIN col_grid_29}
+					"%",
+					{END col_grid_29}
 															],
 											heights: [ // first height for header part
 					"%",
@@ -298,7 +301,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking participant_id }","hidden":"{$item_hide_simple_grid_field29}","bold":true},
+			{"text":"{$jslabel aio_training_tracking participant_id }","hidden":"{$item_hide_simple_grid_field30}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -327,7 +330,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking title }","hidden":"{$item_hide_simple_grid_field30}","bold":true},
+			{"text":"{$jslabel aio_training_tracking title }","hidden":"{$item_hide_simple_grid_field31}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -356,7 +359,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking first_name }","hidden":"{$item_hide_simple_grid_field31}","bold":true},
+			{"text":"{$jslabel aio_training_tracking first_name }","hidden":"{$item_hide_simple_grid_field32}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -385,7 +388,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking middle_name }","hidden":"{$item_hide_simple_grid_field32}","bold":true},
+			{"text":"{$jslabel aio_training_tracking middle_name }","hidden":"{$item_hide_simple_grid_field33}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -414,7 +417,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking last_name }","hidden":"{$item_hide_simple_grid_field33}","bold":true},
+			{"text":"{$jslabel aio_training_tracking last_name }","hidden":"{$item_hide_simple_grid_field34}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -443,7 +446,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking gender }","hidden":"{$item_hide_simple_grid_field34}","bold":true},
+			{"text":"{$jslabel aio_training_tracking gender }","hidden":"{$item_hide_simple_grid_field35}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -472,7 +475,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking participant_role }","hidden":"{$item_hide_simple_grid_field35}","bold":true},
+			{"text":"{$jslabel aio_training_tracking participant_role }","hidden":"{$item_hide_simple_grid_field36}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -501,7 +504,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking country }","hidden":"{$item_hide_simple_grid_field36}","bold":true},
+			{"text":"{$jslabel aio_training_tracking country }","hidden":"{$item_hide_simple_grid_field37}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -530,7 +533,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking facility }","hidden":"{$item_hide_simple_grid_field37}","bold":true},
+			{"text":"{$jslabel aio_training_tracking facility }","hidden":"{$item_hide_simple_grid_field38}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -559,7 +562,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking phone }","hidden":"{$item_hide_simple_grid_field38}","bold":true},
+			{"text":"{$jslabel aio_training_tracking phone }","hidden":"{$item_hide_simple_grid_field39}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -588,7 +591,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking email }","hidden":"{$item_hide_simple_grid_field39}","bold":true},
+			{"text":"{$jslabel aio_training_tracking email }","hidden":"{$item_hide_simple_grid_field40}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -617,7 +620,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking training_id }","hidden":"{$item_hide_simple_grid_field40}","bold":true},
+			{"text":"{$jslabel aio_training_tracking training_id }","hidden":"{$item_hide_simple_grid_field41}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -646,7 +649,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking training_name }","hidden":"{$item_hide_simple_grid_field41}","bold":true},
+			{"text":"{$jslabel aio_training_tracking training_name }","hidden":"{$item_hide_simple_grid_field42}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -675,7 +678,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking program }","hidden":"{$item_hide_simple_grid_field42}","bold":true},
+			{"text":"{$jslabel aio_training_tracking program }","hidden":"{$item_hide_simple_grid_field43}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -704,7 +707,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking partners }","hidden":"{$item_hide_simple_grid_field43}","bold":true},
+			{"text":"{$jslabel aio_training_tracking partners }","hidden":"{$item_hide_simple_grid_field44}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -733,7 +736,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking training_type }","hidden":"{$item_hide_simple_grid_field44}","bold":true},
+			{"text":"{$jslabel aio_training_tracking training_type }","hidden":"{$item_hide_simple_grid_field45}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -762,7 +765,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking training_approach }","hidden":"{$item_hide_simple_grid_field45}","bold":true},
+			{"text":"{$jslabel aio_training_tracking training_approach }","hidden":"{$item_hide_simple_grid_field46}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -791,7 +794,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking training_language }","hidden":"{$item_hide_simple_grid_field46}","bold":true},
+			{"text":"{$jslabel aio_training_tracking training_language }","hidden":"{$item_hide_simple_grid_field47}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -820,7 +823,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking training_lead }","hidden":"{$item_hide_simple_grid_field47}","bold":true},
+			{"text":"{$jslabel aio_training_tracking training_lead }","hidden":"{$item_hide_simple_grid_field48}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -833,6 +836,35 @@ pdfDocument = {
 																							{BEGIN cellblock_grid_headcell_field19}
 {
 	cellId: 'headcell_field19',
+	col:0,
+	row:0,
+			fieldName: 'quarter',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel aio_training_tracking quarter }","hidden":"{$item_hide_simple_grid_field49}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$quarter_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field19}
+																							{BEGIN cellblock_grid_headcell_field20}
+{
+	cellId: 'headcell_field20',
 	col:0,
 	row:0,
 			fieldName: 'start_date',
@@ -849,7 +881,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking start_date }","hidden":"{$item_hide_simple_grid_field48}","bold":true},
+			{"text":"{$jslabel aio_training_tracking start_date }","hidden":"{$item_hide_simple_grid_field50}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -858,10 +890,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field19}
-																							{BEGIN cellblock_grid_headcell_field20}
+{END cellblock_grid_headcell_field20}
+																							{BEGIN cellblock_grid_headcell_field21}
 {
-	cellId: 'headcell_field20',
+	cellId: 'headcell_field21',
 	col:0,
 	row:0,
 			fieldName: 'end_date',
@@ -878,7 +910,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking end_date }","hidden":"{$item_hide_simple_grid_field49}","bold":true},
+			{"text":"{$jslabel aio_training_tracking end_date }","hidden":"{$item_hide_simple_grid_field51}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -887,10 +919,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field20}
-																							{BEGIN cellblock_grid_headcell_field21}
+{END cellblock_grid_headcell_field21}
+																							{BEGIN cellblock_grid_headcell_field22}
 {
-	cellId: 'headcell_field21',
+	cellId: 'headcell_field22',
 	col:0,
 	row:0,
 			fieldName: 'total_days',
@@ -907,7 +939,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking total_days }","hidden":"{$item_hide_simple_grid_field50}","bold":true},
+			{"text":"{$jslabel aio_training_tracking total_days }","hidden":"{$item_hide_simple_grid_field52}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -916,10 +948,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field21}
-																							{BEGIN cellblock_grid_headcell_field22}
+{END cellblock_grid_headcell_field22}
+																							{BEGIN cellblock_grid_headcell_field23}
 {
-	cellId: 'headcell_field22',
+	cellId: 'headcell_field23',
 	col:0,
 	row:0,
 			fieldName: 'days_recorded',
@@ -936,7 +968,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking days_recorded }","hidden":"{$item_hide_simple_grid_field51}","bold":true},
+			{"text":"{$jslabel aio_training_tracking days_recorded }","hidden":"{$item_hide_simple_grid_field53}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -945,10 +977,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field22}
-																							{BEGIN cellblock_grid_headcell_field23}
+{END cellblock_grid_headcell_field23}
+																							{BEGIN cellblock_grid_headcell_field24}
 {
-	cellId: 'headcell_field23',
+	cellId: 'headcell_field24',
 	col:0,
 	row:0,
 			fieldName: 'days_attended',
@@ -965,7 +997,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking days_attended }","hidden":"{$item_hide_simple_grid_field52}","bold":true},
+			{"text":"{$jslabel aio_training_tracking days_attended }","hidden":"{$item_hide_simple_grid_field54}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -974,10 +1006,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field23}
-																							{BEGIN cellblock_grid_headcell_field24}
+{END cellblock_grid_headcell_field24}
+																							{BEGIN cellblock_grid_headcell_field25}
 {
-	cellId: 'headcell_field24',
+	cellId: 'headcell_field25',
 	col:0,
 	row:0,
 			fieldName: 'attendance_percentage',
@@ -994,7 +1026,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking attendance_percentage }","hidden":"{$item_hide_simple_grid_field53}","bold":true},
+			{"text":"{$jslabel aio_training_tracking attendance_percentage }","hidden":"{$item_hide_simple_grid_field55}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1003,10 +1035,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field24}
-																							{BEGIN cellblock_grid_headcell_field25}
+{END cellblock_grid_headcell_field25}
+																							{BEGIN cellblock_grid_headcell_field26}
 {
-	cellId: 'headcell_field25',
+	cellId: 'headcell_field26',
 	col:0,
 	row:0,
 			fieldName: 'attendance_status',
@@ -1023,7 +1055,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking attendance_status }","hidden":"{$item_hide_simple_grid_field54}","bold":true},
+			{"text":"{$jslabel aio_training_tracking attendance_status }","hidden":"{$item_hide_simple_grid_field56}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1032,10 +1064,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field25}
-																							{BEGIN cellblock_grid_headcell_field26}
+{END cellblock_grid_headcell_field26}
+																							{BEGIN cellblock_grid_headcell_field27}
 {
-	cellId: 'headcell_field26',
+	cellId: 'headcell_field27',
 	col:0,
 	row:0,
 			fieldName: 'pre_test_score',
@@ -1052,7 +1084,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking pre_test_score }","hidden":"{$item_hide_simple_grid_field55}","bold":true},
+			{"text":"{$jslabel aio_training_tracking pre_test_score }","hidden":"{$item_hide_simple_grid_field57}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1061,10 +1093,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field26}
-																							{BEGIN cellblock_grid_headcell_field27}
+{END cellblock_grid_headcell_field27}
+																							{BEGIN cellblock_grid_headcell_field28}
 {
-	cellId: 'headcell_field27',
+	cellId: 'headcell_field28',
 	col:0,
 	row:0,
 			fieldName: 'post_test_score',
@@ -1081,7 +1113,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking post_test_score }","hidden":"{$item_hide_simple_grid_field56}","bold":true},
+			{"text":"{$jslabel aio_training_tracking post_test_score }","hidden":"{$item_hide_simple_grid_field58}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1090,10 +1122,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field27}
-																							{BEGIN cellblock_grid_headcell_field28}
+{END cellblock_grid_headcell_field28}
+																							{BEGIN cellblock_grid_headcell_field29}
 {
-	cellId: 'headcell_field28',
+	cellId: 'headcell_field29',
 	col:0,
 	row:0,
 			fieldName: 'ceu_points',
@@ -1110,7 +1142,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel aio_training_tracking ceu_points }","hidden":"{$item_hide_simple_grid_field57}","bold":true},
+			{"text":"{$jslabel aio_training_tracking ceu_points }","hidden":"{$item_hide_simple_grid_field59}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -1119,7 +1151,7 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field28}
+{END cellblock_grid_headcell_field29}
 											],
 				{END row_grid_0}
 		
@@ -1685,6 +1717,35 @@ pdfDocument = {
 	cellId: 'cell_field19',
 	col:0,
 	row:0,
+			fieldName: 'quarter',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$quarter_pdfvalue},"hidden":"{$item_hide_simple_grid_field29}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$quarter_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field19}
+																							{BEGIN cellblock_grid_cell_field20}
+{
+	cellId: 'cell_field20',
+	col:0,
+	row:0,
 			fieldName: 'start_date',
 				style: 'bodycell',
 		
@@ -1708,10 +1769,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field19}
-																							{BEGIN cellblock_grid_cell_field20}
+{END cellblock_grid_cell_field20}
+																							{BEGIN cellblock_grid_cell_field21}
 {
-	cellId: 'cell_field20',
+	cellId: 'cell_field21',
 	col:0,
 	row:0,
 			fieldName: 'end_date',
@@ -1737,10 +1798,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field20}
-																							{BEGIN cellblock_grid_cell_field21}
+{END cellblock_grid_cell_field21}
+																							{BEGIN cellblock_grid_cell_field22}
 {
-	cellId: 'cell_field21',
+	cellId: 'cell_field22',
 	col:0,
 	row:0,
 			fieldName: 'total_days',
@@ -1766,10 +1827,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field21}
-																							{BEGIN cellblock_grid_cell_field22}
+{END cellblock_grid_cell_field22}
+																							{BEGIN cellblock_grid_cell_field23}
 {
-	cellId: 'cell_field22',
+	cellId: 'cell_field23',
 	col:0,
 	row:0,
 			fieldName: 'days_recorded',
@@ -1795,10 +1856,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field22}
-																							{BEGIN cellblock_grid_cell_field23}
+{END cellblock_grid_cell_field23}
+																							{BEGIN cellblock_grid_cell_field24}
 {
-	cellId: 'cell_field23',
+	cellId: 'cell_field24',
 	col:0,
 	row:0,
 			fieldName: 'days_attended',
@@ -1824,10 +1885,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field23}
-																							{BEGIN cellblock_grid_cell_field24}
+{END cellblock_grid_cell_field24}
+																							{BEGIN cellblock_grid_cell_field25}
 {
-	cellId: 'cell_field24',
+	cellId: 'cell_field25',
 	col:0,
 	row:0,
 			fieldName: 'attendance_percentage',
@@ -1853,10 +1914,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field24}
-																							{BEGIN cellblock_grid_cell_field25}
+{END cellblock_grid_cell_field25}
+																							{BEGIN cellblock_grid_cell_field26}
 {
-	cellId: 'cell_field25',
+	cellId: 'cell_field26',
 	col:0,
 	row:0,
 			fieldName: 'attendance_status',
@@ -1882,10 +1943,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field25}
-																							{BEGIN cellblock_grid_cell_field26}
+{END cellblock_grid_cell_field26}
+																							{BEGIN cellblock_grid_cell_field27}
 {
-	cellId: 'cell_field26',
+	cellId: 'cell_field27',
 	col:0,
 	row:0,
 			fieldName: 'pre_test_score',
@@ -1911,10 +1972,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field26}
-																							{BEGIN cellblock_grid_cell_field27}
+{END cellblock_grid_cell_field27}
+																							{BEGIN cellblock_grid_cell_field28}
 {
-	cellId: 'cell_field27',
+	cellId: 'cell_field28',
 	col:0,
 	row:0,
 			fieldName: 'post_test_score',
@@ -1940,10 +2001,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field27}
-																							{BEGIN cellblock_grid_cell_field28}
+{END cellblock_grid_cell_field28}
+																							{BEGIN cellblock_grid_cell_field29}
 {
-	cellId: 'cell_field28',
+	cellId: 'cell_field29',
 	col:0,
 	row:0,
 			fieldName: 'ceu_points',
@@ -1969,7 +2030,7 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field28}
+{END cellblock_grid_cell_field29}
 											],
 				{END row_grid_1}
 		
@@ -2733,6 +2794,32 @@ pdfDocument = {
       },
 
 {END cellblock_grid_footcell_field28}
+																							{BEGIN cellblock_grid_footcell_field29}
+{
+	cellId: 'footcell_field29',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field29}
 											],
 				{END row_grid_2}
 		

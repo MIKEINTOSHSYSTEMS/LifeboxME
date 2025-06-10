@@ -88,6 +88,9 @@
 [data-cellid="grid_headcell_checkbox"][data-page="aio_training_tracking_list"][data-cellid="grid_headcell_checkbox"][data-page="aio_training_tracking_list"][data-cellid="grid_headcell_checkbox"][data-page="aio_training_tracking_list"] {
   width: 30px;
 }
+[data-cellid="grid_headcell_field32"][data-page="aio_training_tracking_list"][data-cellid="grid_headcell_field32"][data-page="aio_training_tracking_list"][data-cellid="grid_headcell_field32"][data-page="aio_training_tracking_list"] {
+  white-space: nowrap;
+}
 [data-page="aio_training_tracking_list"][data-itemid="simple_grid_field"] {
   font-weight: bold;
 }

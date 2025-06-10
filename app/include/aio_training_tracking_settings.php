@@ -112,6 +112,9 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelsaio_training_tracking["English"]["training_lead"] = "Training Lead";
 	$fieldToolTipsaio_training_tracking["English"]["training_lead"] = "";
 	$placeHoldersaio_training_tracking["English"]["training_lead"] = "";
+	$fieldLabelsaio_training_tracking["English"]["quarter"] = "Quarter";
+	$fieldToolTipsaio_training_tracking["English"]["quarter"] = "";
+	$placeHoldersaio_training_tracking["English"]["quarter"] = "";
 	if (count($fieldToolTipsaio_training_tracking["English"]))
 		$tdataaio_training_tracking[".isUseToolTips"] = true;
 }
@@ -248,6 +251,7 @@ $tdataaio_training_tracking[".googleLikeFields"][] = "training_type";
 $tdataaio_training_tracking[".googleLikeFields"][] = "training_approach";
 $tdataaio_training_tracking[".googleLikeFields"][] = "training_language";
 $tdataaio_training_tracking[".googleLikeFields"][] = "training_lead";
+$tdataaio_training_tracking[".googleLikeFields"][] = "quarter";
 $tdataaio_training_tracking[".googleLikeFields"][] = "start_date";
 $tdataaio_training_tracking[".googleLikeFields"][] = "end_date";
 $tdataaio_training_tracking[".googleLikeFields"][] = "total_days";
@@ -2930,10 +2934,146 @@ $tdataaio_training_tracking[".hideMobileList"] = array();
 
 	$tdataaio_training_tracking["training_lead"] = $fdata;
 		$tdataaio_training_tracking[".searchableFields"][] = "training_lead";
-//	start_date
+//	quarter
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 20;
+	$fdata["strName"] = "quarter";
+	$fdata["GoodName"] = "quarter";
+	$fdata["ownerTable"] = "";
+	$fdata["Label"] = GetFieldLabel("aio_training_tracking","quarter");
+	$fdata["FieldType"] = 201;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "quarter";
+
+	
+	
+		$fdata["FullName"] = "quarter";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text area");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+				$edata["nRows"] = 100;
+			$edata["nCols"] = 200;
+
+	
+	
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdataaio_training_tracking["quarter"] = $fdata;
+		$tdataaio_training_tracking[".searchableFields"][] = "quarter";
+//	start_date
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 21;
 	$fdata["strName"] = "start_date";
 	$fdata["GoodName"] = "start_date";
 	$fdata["ownerTable"] = "";
@@ -3072,7 +3212,7 @@ $tdataaio_training_tracking[".hideMobileList"] = array();
 //	end_date
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 21;
+	$fdata["Index"] = 22;
 	$fdata["strName"] = "end_date";
 	$fdata["GoodName"] = "end_date";
 	$fdata["ownerTable"] = "";
@@ -3211,7 +3351,7 @@ $tdataaio_training_tracking[".hideMobileList"] = array();
 //	total_days
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 22;
+	$fdata["Index"] = 23;
 	$fdata["strName"] = "total_days";
 	$fdata["GoodName"] = "total_days";
 	$fdata["ownerTable"] = "";
@@ -3350,7 +3490,7 @@ $tdataaio_training_tracking[".hideMobileList"] = array();
 //	days_recorded
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 23;
+	$fdata["Index"] = 24;
 	$fdata["strName"] = "days_recorded";
 	$fdata["GoodName"] = "days_recorded";
 	$fdata["ownerTable"] = "";
@@ -3489,7 +3629,7 @@ $tdataaio_training_tracking[".hideMobileList"] = array();
 //	days_attended
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 24;
+	$fdata["Index"] = 25;
 	$fdata["strName"] = "days_attended";
 	$fdata["GoodName"] = "days_attended";
 	$fdata["ownerTable"] = "";
@@ -3628,7 +3768,7 @@ $tdataaio_training_tracking[".hideMobileList"] = array();
 //	attendance_percentage
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 25;
+	$fdata["Index"] = 26;
 	$fdata["strName"] = "attendance_percentage";
 	$fdata["GoodName"] = "attendance_percentage";
 	$fdata["ownerTable"] = "";
@@ -3768,7 +3908,7 @@ $tdataaio_training_tracking[".hideMobileList"] = array();
 //	attendance_status
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 26;
+	$fdata["Index"] = 27;
 	$fdata["strName"] = "attendance_status";
 	$fdata["GoodName"] = "attendance_status";
 	$fdata["ownerTable"] = "";
@@ -3904,7 +4044,7 @@ $tdataaio_training_tracking[".hideMobileList"] = array();
 //	pre_test_score
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 27;
+	$fdata["Index"] = 28;
 	$fdata["strName"] = "pre_test_score";
 	$fdata["GoodName"] = "pre_test_score";
 	$fdata["ownerTable"] = "";
@@ -4044,7 +4184,7 @@ $tdataaio_training_tracking[".hideMobileList"] = array();
 //	post_test_score
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 28;
+	$fdata["Index"] = 29;
 	$fdata["strName"] = "post_test_score";
 	$fdata["GoodName"] = "post_test_score";
 	$fdata["ownerTable"] = "";
@@ -4184,7 +4324,7 @@ $tdataaio_training_tracking[".hideMobileList"] = array();
 //	ceu_points
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 29;
+	$fdata["Index"] = 30;
 	$fdata["strName"] = "ceu_points";
 	$fdata["GoodName"] = "ceu_points";
 	$fdata["ownerTable"] = "";
@@ -4355,7 +4495,7 @@ require_once( getabspath( "include/aio_training_tracking_ops.php" ) );
 	
 		;
 
-																													
+																														
 
 $tdataaio_training_tracking[".sqlquery"] = $queryData_aio_training_tracking;
 

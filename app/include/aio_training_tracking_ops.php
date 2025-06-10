@@ -26,9 +26,10 @@ $topsaio_training_tracking = array();
   tt.\"type_name\" AS \"training_type\",
   ta.\"approach_name\" AS \"training_approach\",
   lang.\"language_name\" AS \"training_language\",
-  ls.lifebox_staff_details AS \"training_lead\",  -- Added training lead here
+  ls.lifebox_staff_details AS \"training_lead\",
   
   -- Training Dates
+  ts.\"quarter\" AS \"quarter\",  
   ts.\"start_date\" AS \"start_date\",
   ts.\"end_date\" AS \"end_date\",
   
@@ -110,12 +111,13 @@ GROUP BY
   tp.\"phone\",
   pas.\"email\",
   pas.\"training_id\",
+  ts.\"quarter\", 
   tc.\"course_name\",
   p.\"program_name\",
   lang.\"language_name\",
   tt.\"type_name\",
   ta.\"approach_name\",
-  ls.lifebox_staff_details,  -- Added to GROUP BY
+  ls.lifebox_staff_details,
   ts.\"start_date\",
   ts.\"end_date\",
   pas.\"total_days\",
@@ -127,6 +129,7 @@ GROUP BY
   pas.\"post_test_score\",
   pas.\"ceu_points\"
 ORDER BY
+  pas.\"participant_id\",
   pas.\"last_name\",
   pas.\"first_name\",
   ts.\"start_date\";",
