@@ -368,6 +368,32 @@
 
 	$menuNodes[] = $menuNode;
 	$menuNode = array();
+	$menuNode["id"] = "71";
+	$menuNode["name"] = "AIO Training Tracking";
+	$menuNode["href"] = "mypage.htm";
+	$menuNode["type"] = "Leaf";
+	$menuNode["table"] = "aio_training_tracking";
+	$menuNode["style"] = "";
+	$menuNode["params"] = "";
+	$menuNode["parent"] = "33";
+	$menuNode["nameType"] = "Text";
+	$menuNode["linkType"] = "Internal";
+	$menuNode["pageType"] = strtolower("List");//
+	$menuNode["pageId"] = "";
+	$menuNode["openType"] = "None";
+
+	$menuNode["icon"] = "fa-dedent";
+	$menuNode["iconType"] = "3";
+	$menuNode["iconShow"] = "1";
+
+		$menuNode["color"] = "";
+
+	$menuNode["title"] = "AIO Training Tracking";
+
+
+
+	$menuNodes[] = $menuNode;
+	$menuNode = array();
 	$menuNode["id"] = "58";
 	$menuNode["name"] = "-------";
 	$menuNode["href"] = "";

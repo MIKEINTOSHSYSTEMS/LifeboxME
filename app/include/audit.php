@@ -622,6 +622,10 @@ class AuditTrailTable
 		{
 			return false;
 		}
+		if($table=="aio_training_tracking")
+		{
+			return false;
+		}
 	}
 
 	protected function insert($datetime, $ip, $user, $table, $action, $description)
@@ -1193,6 +1197,10 @@ class AuditTrailFile
 			return false;
 		}
 		if($table=="public.device_inventory_changes")
+		{
+			return false;
+		}
+		if($table=="aio_training_tracking")
 		{
 			return false;
 		}

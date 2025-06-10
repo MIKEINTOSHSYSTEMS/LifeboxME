@@ -145,6 +145,9 @@
 [data-page="_global_menu"][data-itemid="welcome_item49"] > .bs-welcome-header {
   background-color: #6B8E23;
 }
+[data-page="_global_menu"][data-itemid="welcome_item50"] > .bs-welcome-header {
+  background-color: #E8926F;
+}
 [data-page="_global_menu"][data-itemid="page_image_ash8f23hr"] {
   width: 400px;
 }

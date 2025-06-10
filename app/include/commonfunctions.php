@@ -309,6 +309,8 @@ function checkTableName($shortTName )
 		return true;
 	if ("device_inventory_changes" == $shortTName )
 		return true;
+	if ("aio_training_tracking" == $shortTName )
+		return true;
 	return false;
 }
 
@@ -836,6 +838,15 @@ function GetTablesList($pdfMode = false)
 	if( $tableAvailable ) {
 		$arr[]="public.device_inventory_changes";
 	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("aio_training_tracking");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="aio_training_tracking";
+	}
 	return $arr;
 }
 
@@ -898,6 +909,7 @@ function GetTablesListWithoutSecurity()
 	$arr[]="public.donors";
 	$arr[]="public.device_distribution_log";
 	$arr[]="public.device_inventory_changes";
+	$arr[]="aio_training_tracking";
 	return $arr;
 }
 
@@ -1786,6 +1798,11 @@ function GetUserPermissionsStatic( $table )
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.device_inventory_changes" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="aio_training_tracking" )
 	{
 //	default permissions
 		return "ADESPI".$extraPerm;

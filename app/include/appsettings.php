@@ -768,9 +768,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "110_1749499236";
+$projectBuildKey = "115_1749499236";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "110";
+$projectBuildNumber = "115";
 
 $mlang_messages = array();
 $mlang_charsets = array();
@@ -849,6 +849,7 @@ $tableCaptions["English"]["public_transaction_types"] = "Transaction Types";
 $tableCaptions["English"]["public_donors"] = "Donors";
 $tableCaptions["English"]["public_device_distribution_log"] = "Device Distribution Log";
 $tableCaptions["English"]["public_device_inventory_changes"] = "Device Inventory Changes";
+$tableCaptions["English"]["aio_training_tracking"] = "Aio Training Tracking";
 
 
 $globalEvents = new class_GlobalEvents;

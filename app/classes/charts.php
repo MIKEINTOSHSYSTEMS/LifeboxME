@@ -484,6 +484,8 @@ class Chart
 			return true;
 		if("public.device_inventory_changes" == $this->chrt_array['tables'][0])
 			return true;
+		if("" == $this->chrt_array['tables'][0])
+			return true;
 		return false;
 	}
 

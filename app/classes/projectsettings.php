@@ -3684,6 +3684,8 @@ function fillProjectEntites()
 	$projectEntitiesReverse[ "device_distribution_log" ] = "public.device_distribution_log";
 	$projectEntities[ "public.device_inventory_changes" ] = array( "url" => "device_inventory_changes", "type" => 0 );
 	$projectEntitiesReverse[ "device_inventory_changes" ] = "public.device_inventory_changes";
+	$projectEntities[ "aio_training_tracking" ] = array( "url" => "aio_training_tracking", "type" => 6 );
+	$projectEntitiesReverse[ "aio_training_tracking" ] = "aio_training_tracking";
 }
 
 function findTable( $table ) {

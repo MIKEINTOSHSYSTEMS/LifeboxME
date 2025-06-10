@@ -530,6 +530,10 @@ function testAdvSearch($table)
 		{
 			return 1;
 		}
+		if($table=="aio_training_tracking")
+		{
+			return 1;
+		}
 	}
 	elseif(is_wr_db())
 	{
@@ -994,6 +998,10 @@ function getCaptionTable($table)
 	if($table=="public.device_inventory_changes")
 	{
 		return "Device Inventory Changes";
+	}
+	if($table=="aio_training_tracking")
+	{
+		return "Aio Training Tracking";
 	}
 	return $table;
 }

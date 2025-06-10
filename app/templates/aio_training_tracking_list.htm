@@ -1,0 +1,4449 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
+	{BEGIN rtlCSS}
+	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
+	{END rtlCSS}
+	{BEGIN styleCSSFiles}
+	<link REL="stylesheet" href="{$stylepath}" type="text/css">
+	{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-list"   
+			data-panel-bg
+		>
+	{BEGIN body}
+		<style>
+		{$containerCss}
+		</style>
+		<div class="r-vbar-page">
+			<div data-width="300px" data-fixed class="r-left clearfix {$leftbar_class}" >
+								<div data-location="left" id="form_left_{$pageid}" data-makeup="leftbar" {$form_left} data-pageid="{$pageid}">
+{BEGIN left_block}
+ 
+     
+         
+
+			<div data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell class="clearfix " data-itemid="logo" {$item_logo}>
+				{BEGIN logo_block}
+	<A data-itemtype="logo" data-itemid="logo" {$item_logo} data-pageid="{$pageid}" class="navbar-brand" href="{$home_link}" data-pageid="{$pageid}" {$logo_hiddenattr}>
+		{$logo}
+	</A>
+{END logo_block}
+				<button data-pageid="1" type="button" class="navbar-toggle collapsed" data-runner-toggle="collapse" data-target="[data-mobile-controlled]">	
+					<span class="sr-only">Toggle navigation</span>	
+					<span class="icon-bar"></span>					
+				</button>				
+			</div>
+		
+ 
+
+			<div class="clearfix " data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell data-itemid="expand_button" {$item_expand_button} data-topcell-item-type="expand_button" >
+				<span data-itemtype="expand_button" data-itemid="expand_button" {$item_expand_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Expand" class="btn btn-link   
+	" href="#" >
+					<span class="glyphicon glyphicon-triangle-right"></span>
+										</a>
+</span>
+			</div>
+		
+     
+     
+         
+
+			<div class="clearfix  r-ori-vert" data-cellId="left_c" data-pageid="{$pageid}" data-itemid="search_panel" {$item_search_panel} data-topcell-item-type="search_panel" >
+				<!-- Begin Search panel content -->
+<div class="searchOptions panel panel-primary searchPanelContainer " {$srchOpt_attrs} data-itemtype="search_panel" data-itemid="search_panel" {$item_search_panel} data-pageid="{$pageid}"	 >
+
+	<div class="panel-heading">
+		<div class="btn-group r-sp-addfield" id="addSearchFieldButton{$id}">
+			<button id="showHideControlChooseMenu{$id}" type="button" class="btn btn-default dropdown-toggle btn-sm )" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			Search in			<span class="caret"></span>
+			</button>
+		</div>
+
+
+		<div class="btn-group r-sp-options" id="searchPanelOptions{$id}">
+			<button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<span class="glyphicon glyphicon glyphicon-option-vertical"></span>
+			</button>
+			<ul class="dropdown-menu dropdown-left">
+				<li id="showHideSearchType{$id}" {$showHideCtrlsOpt_attrs}><a>Show options</a></li>
+				<li role="separator" class="divider"></li>
+				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAll" {$all_checkbox}><label for="radioAll"><span class="glyphicon">&nbsp;</span>all conditions</label></a></li>
+				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAny" {$any_checkbox}><label for="radioAny"><span class="glyphicon">&nbsp;</span>any condition</label></a></li>
+				<li role="separator" class="divider"></li>
+				<li><a class="close-button"><span class="glyphicon glyphicon-remove">&nbsp;</span>hide</a></li>
+			</ul>
+		</div>
+
+
+		</div>
+	<div class="panel-body controlsBlock" {$bottomSearchButt_attrs} >
+
+
+		
+		{BEGIN searchCtrlBlock}
+		<div class="srchPanelRow form-group" {$filterRow_attrs}>
+			<label>{$fLabel}</label>	{$delCtrlButt}
+				<span class="rnr-searchtype">{$searchtype}</span>
+				<span class="rnr-searchcontrol">{$searchcontrol}</span>
+				<span class="rnr-searchcontrol">{$searchcontrol1}</span>
+		</div>
+		{END searchCtrlBlock}
+																		{BEGIN searchCtrlBlock_participant_id}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_participant_id}" {$filterRow_attrs_participant_id}>
+			<label>{$label aio_training_tracking participant_id }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_participant_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_participant_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_participant_id}</span>
+						</div>
+		{END searchCtrlBlock_participant_id}
+																{BEGIN searchCtrlBlock_title}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_title}" {$filterRow_attrs_title}>
+			<label>{$label aio_training_tracking title }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_title}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_title}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_title}</span>
+						</div>
+		{END searchCtrlBlock_title}
+																{BEGIN searchCtrlBlock_first_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_first_name}" {$filterRow_attrs_first_name}>
+			<label>{$label aio_training_tracking first_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_first_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_first_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_first_name}</span>
+						</div>
+		{END searchCtrlBlock_first_name}
+																{BEGIN searchCtrlBlock_middle_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_middle_name}" {$filterRow_attrs_middle_name}>
+			<label>{$label aio_training_tracking middle_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_middle_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_middle_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_middle_name}</span>
+						</div>
+		{END searchCtrlBlock_middle_name}
+																{BEGIN searchCtrlBlock_last_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_last_name}" {$filterRow_attrs_last_name}>
+			<label>{$label aio_training_tracking last_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_last_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_last_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_last_name}</span>
+						</div>
+		{END searchCtrlBlock_last_name}
+																{BEGIN searchCtrlBlock_gender}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_gender}" {$filterRow_attrs_gender}>
+			<label>{$label aio_training_tracking gender }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_gender}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_gender}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_gender}</span>
+						</div>
+		{END searchCtrlBlock_gender}
+																{BEGIN searchCtrlBlock_participant_role}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_participant_role}" {$filterRow_attrs_participant_role}>
+			<label>{$label aio_training_tracking participant_role }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_participant_role}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_participant_role}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_participant_role}</span>
+						</div>
+		{END searchCtrlBlock_participant_role}
+																{BEGIN searchCtrlBlock_country}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_country}" {$filterRow_attrs_country}>
+			<label>{$label aio_training_tracking country }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_country}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_country}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_country}</span>
+						</div>
+		{END searchCtrlBlock_country}
+																{BEGIN searchCtrlBlock_facility}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_facility}" {$filterRow_attrs_facility}>
+			<label>{$label aio_training_tracking facility }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_facility}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_facility}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_facility}</span>
+						</div>
+		{END searchCtrlBlock_facility}
+																{BEGIN searchCtrlBlock_phone}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_phone}" {$filterRow_attrs_phone}>
+			<label>{$label aio_training_tracking phone }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_phone}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_phone}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_phone}</span>
+						</div>
+		{END searchCtrlBlock_phone}
+																{BEGIN searchCtrlBlock_email}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_email}" {$filterRow_attrs_email}>
+			<label>{$label aio_training_tracking email }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_email}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_email}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_email}</span>
+						</div>
+		{END searchCtrlBlock_email}
+																{BEGIN searchCtrlBlock_training_id}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_training_id}" {$filterRow_attrs_training_id}>
+			<label>{$label aio_training_tracking training_id }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_training_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_training_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_training_id}</span>
+						</div>
+		{END searchCtrlBlock_training_id}
+																{BEGIN searchCtrlBlock_training_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_training_name}" {$filterRow_attrs_training_name}>
+			<label>{$label aio_training_tracking training_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_training_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_training_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_training_name}</span>
+						</div>
+		{END searchCtrlBlock_training_name}
+																{BEGIN searchCtrlBlock_program}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_program}" {$filterRow_attrs_program}>
+			<label>{$label aio_training_tracking program }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_program}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_program}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_program}</span>
+						</div>
+		{END searchCtrlBlock_program}
+																{BEGIN searchCtrlBlock_partners}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_partners}" {$filterRow_attrs_partners}>
+			<label>{$label aio_training_tracking partners }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_partners}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_partners}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_partners}</span>
+						</div>
+		{END searchCtrlBlock_partners}
+																{BEGIN searchCtrlBlock_training_type}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_training_type}" {$filterRow_attrs_training_type}>
+			<label>{$label aio_training_tracking training_type }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_training_type}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_training_type}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_training_type}</span>
+						</div>
+		{END searchCtrlBlock_training_type}
+																{BEGIN searchCtrlBlock_training_approach}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_training_approach}" {$filterRow_attrs_training_approach}>
+			<label>{$label aio_training_tracking training_approach }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_training_approach}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_training_approach}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_training_approach}</span>
+						</div>
+		{END searchCtrlBlock_training_approach}
+																{BEGIN searchCtrlBlock_training_language}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_training_language}" {$filterRow_attrs_training_language}>
+			<label>{$label aio_training_tracking training_language }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_training_language}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_training_language}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_training_language}</span>
+						</div>
+		{END searchCtrlBlock_training_language}
+																{BEGIN searchCtrlBlock_training_lead}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_training_lead}" {$filterRow_attrs_training_lead}>
+			<label>{$label aio_training_tracking training_lead }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_training_lead}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_training_lead}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_training_lead}</span>
+						</div>
+		{END searchCtrlBlock_training_lead}
+																{BEGIN searchCtrlBlock_start_date}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_start_date}" {$filterRow_attrs_start_date}>
+			<label>{$label aio_training_tracking start_date }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_start_date}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_start_date}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_start_date}</span>
+						</div>
+		{END searchCtrlBlock_start_date}
+																{BEGIN searchCtrlBlock_end_date}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_end_date}" {$filterRow_attrs_end_date}>
+			<label>{$label aio_training_tracking end_date }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_end_date}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_end_date}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_end_date}</span>
+						</div>
+		{END searchCtrlBlock_end_date}
+																{BEGIN searchCtrlBlock_total_days}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_total_days}" {$filterRow_attrs_total_days}>
+			<label>{$label aio_training_tracking total_days }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_total_days}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_total_days}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_total_days}</span>
+						</div>
+		{END searchCtrlBlock_total_days}
+																{BEGIN searchCtrlBlock_days_recorded}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_days_recorded}" {$filterRow_attrs_days_recorded}>
+			<label>{$label aio_training_tracking days_recorded }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_days_recorded}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_days_recorded}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_days_recorded}</span>
+						</div>
+		{END searchCtrlBlock_days_recorded}
+																{BEGIN searchCtrlBlock_days_attended}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_days_attended}" {$filterRow_attrs_days_attended}>
+			<label>{$label aio_training_tracking days_attended }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_days_attended}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_days_attended}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_days_attended}</span>
+						</div>
+		{END searchCtrlBlock_days_attended}
+																{BEGIN searchCtrlBlock_attendance_percentage}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_attendance_percentage}" {$filterRow_attrs_attendance_percentage}>
+			<label>{$label aio_training_tracking attendance_percentage }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_attendance_percentage}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_attendance_percentage}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_attendance_percentage}</span>
+						</div>
+		{END searchCtrlBlock_attendance_percentage}
+																{BEGIN searchCtrlBlock_attendance_status}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_attendance_status}" {$filterRow_attrs_attendance_status}>
+			<label>{$label aio_training_tracking attendance_status }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_attendance_status}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_attendance_status}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_attendance_status}</span>
+						</div>
+		{END searchCtrlBlock_attendance_status}
+																{BEGIN searchCtrlBlock_pre_test_score}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_pre_test_score}" {$filterRow_attrs_pre_test_score}>
+			<label>{$label aio_training_tracking pre_test_score }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_pre_test_score}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_pre_test_score}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_pre_test_score}</span>
+						</div>
+		{END searchCtrlBlock_pre_test_score}
+																{BEGIN searchCtrlBlock_post_test_score}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_post_test_score}" {$filterRow_attrs_post_test_score}>
+			<label>{$label aio_training_tracking post_test_score }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_post_test_score}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_post_test_score}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_post_test_score}</span>
+						</div>
+		{END searchCtrlBlock_post_test_score}
+																{BEGIN searchCtrlBlock_ceu_points}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_ceu_points}" {$filterRow_attrs_ceu_points}>
+			<label>{$label aio_training_tracking ceu_points }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_ceu_points}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_ceu_points}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_ceu_points}</span>
+						</div>
+		{END searchCtrlBlock_ceu_points}
+		
+
+	</div>
+
+	<div class="panel-footer bottomSearchButt" {$bottomSearchButt_attrs}>
+		<button class="btn btn-primary btn-sm" id="searchButton{$id}" {$searchbutton_attrs}>Search</button>
+
+				<button class="btn btn-default btn-sm" {$showAllCont_attrs} {$showallbutton_attrs}>Show all</button>
+	</div>
+</div>
+<!-- End Search panel content -->
+			</div>
+		
+     
+     
+         
+
+			<div data-cellId="left_c1" data-pageid="{$pageid}" class="clearfix  r-ori-vert " data-itemtype="menu" data-itemid="menu" {$item_menu} data-pageid="{$pageid}">
+				{BEGIN menuitems_main}
+<ul data-itemtype="menu" data-itemid="menu" {$item_menu} data-pageid="{$pageid}"	class="r-menu nav menu-treelike" 
+	data-menulevel="1"
+>
+
+{BEGIN item_children1}
+<li class="
+	{$item_current}">
+<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline data-menu-top >
+	{$item_separator}
+	<span class="r-menu-link r-menu-expanded "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren2}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren2}
+	</span>
+		<span class="r-menu-collapsed">{$item_collicon}{$item_firstcap}</span>
+	</a>
+{BEGIN item_showchildren2}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="2">
+	{BEGIN item_children2}
+		{BEGIN item_menulink2}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren2}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren2}
+	</span>
+	</a>
+			{BEGIN item_showchildren3}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="3">
+	{BEGIN item_children3}
+		{BEGIN item_menulink3}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren3}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren3}
+	</span>
+	</a>
+			{BEGIN item_showchildren4}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="4">
+	{BEGIN item_children4}
+		{BEGIN item_menulink4}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren4}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren4}
+	</span>
+	</a>
+			{BEGIN item_showchildren5}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="5">
+	{BEGIN item_children5}
+		{BEGIN item_menulink5}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren5}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren5}
+	</span>
+	</a>
+					</li>
+		{END item_menulink5}
+	{END item_children5}
+</ul>
+{END item_showchildren5}
+		</li>
+		{END item_menulink4}
+	{END item_children4}
+</ul>
+{END item_showchildren4}
+		</li>
+		{END item_menulink3}
+	{END item_children3}
+</ul>
+{END item_showchildren3}
+		</li>
+		{END item_menulink2}
+	{END item_children2}
+</ul>
+{END item_showchildren2}
+</li>
+{END item_children1}
+</ul>
+{END menuitems_main}
+			</div>
+		
+    {END left_block}
+</div>				</div>
+			<div class="r-content-col" data-resize-left="leftbar">
+				<div data-resize-left="leftbar"  data-fixed class="r-topheader" data-resize-name="topbar">
+									{BEGIN supertop_block}
+<nav class="navbar navbar-default" 
+	data-location="supertop" id="form_supertop_{$pageid}" data-makeup="leftbar" {$form_supertop} data-pageid="{$pageid}" >
+			 
+							 
+				<span class="navbar-form  navbar-header" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="expand_menu_button" {$item_expand_menu_button} data-topcell-item-type="expand_menu_button" >
+				<span data-itemtype="expand_menu_button" data-itemid="expand_menu_button" {$item_expand_menu_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Show menu" class="btn-link   
+	 glyphicon glyphicon-menu-hamburger" href="#" >		
+				
+								</a>
+</span>
+			</span>
+		 
+				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="collapse_button" {$item_collapse_button} data-topcell-item-type="collapse_button" >
+				<span data-itemtype="collapse_button" data-itemid="collapse_button" {$item_collapse_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Collapse" class="btn-link   
+	 glyphicon glyphicon-triangle-left" href="#" >		
+				
+								</a>
+</span>
+			</span>
+		 
+				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="breadcrumb" {$item_breadcrumb} data-topcell-item-type="breadcrumb" >
+				{BEGIN breadcrumb}
+<ol class="breadcrumb" data-itemtype="breadcrumb" data-itemid="breadcrumb" {$item_breadcrumb} data-pageid="{$pageid}">
+<li ><a href="{$crumb_home_link}"><span class="glyphicon glyphicon-home"></span></a>{$crumb_dropdown}</li>
+{BEGIN crumb}
+  <li class="{$crumb_item_class}">
+{BEGIN crumb_title_link}
+	<a {$crumb_attrs}>{$crumb_title}</a>
+{END crumb_title_link}
+{BEGIN crumb_title_span}
+	<span {$crumb_attrs}>{$crumb_title}</span>
+{END crumb_title_span}	
+	{$crumb_dropdown}
+  </li>
+{END crumb}
+</ol>
+{END breadcrumb}			</span>
+							 
+							 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="simple_search" {$item_simple_search} data-topcell-item-type="simple_search" >
+				<span data-itemtype="simple_search" data-itemid="simple_search" {$item_simple_search} data-pageid="{$pageid}" class="form-group">
+
+<div  class="input-group">
+{BEGIN searchform_text}
+	<input type="search" class="form-control" {$searchfor_attrs} size="25">
+{END searchform_text}
+	<span class="input-group-btn">
+	{BEGIN searchform_showall}
+				<button class="btn btn-default" {$showAllCont_attrs} {$showallbutton_attrs} title="Show all">
+			<span class="glyphicon glyphicon-remove"></span>
+		</button>
+	{END searchform_showall}
+
+	{BEGIN searchform_search}
+	<button {$searchbutton_attrs} class="btn btn-primary" >
+		<span class="glyphicon glyphicon-search"></span>
+	</button>
+	{END searchform_search}
+	</span>
+</div>
+		
+</span>			</span>
+		 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="list_options" {$item_list_options} data-topcell-item-type="list_options" >
+				<span data-itemtype="list_options" data-itemid="list_options" {$item_list_options} data-pageid="{$pageid}" data-small data-button-item>
+	<span class="dropdown ">
+		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
+										<span class="glyphicon glyphicon-cog"></span>
+												<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+								<li data-itemtype="advsearch_link" data-itemid="advsearch_link" {$item_advsearch_link} data-pageid="{$pageid}" data-small >
+				<a   href="aio_training_tracking_search.php{$stateLink_full}" {$advsearchlink_attrs}  title="" >
+				
+		Advanced search		
+		</a>
+	</li>
+							{BEGIN searchPanelTopButtons}
+	<li data-itemtype="show_search_panel" data-itemid="show_search_panel" {$item_show_search_panel} data-pageid="{$pageid}" data-small >
+				<a  id="showOptPanel{$id}"  title="" >
+				
+		Show search panel		
+		</a>
+	</li>
+{END searchPanelTopButtons}
+							{BEGIN searchPanelTopButtons}
+	<li data-itemtype="hide_search_panel" data-itemid="hide_search_panel" {$item_hide_search_panel} data-pageid="{$pageid}" data-small >
+				<a  id="hideOptPanel{$id}"  title="" >
+				
+		Hide search panel		
+		</a>
+	</li>
+{END searchPanelTopButtons}
+							<li role="separator" class="divider"></li>							{BEGIN saveSeachButton}
+	<li data-itemtype="save_search" data-itemid="save_search" {$item_save_search} data-pageid="{$pageid}" data-small >
+				<a  href="#" id="saveSearch{$id}"  title="" >
+				
+		Save search		
+		</a>
+	</li>
+{END saveSeachButton}
+							<li role="separator" class="divider"></li>							{BEGIN savedSeachesButton}
+<li data-itemtype="saved_searches" data-itemid="saved_searches" {$item_saved_searches} data-pageid="{$pageid}">
+	<a {$saveSearchButtonAttrs} id="savedSearches{$id}">Saved searches:</a>
+	<ul class="rnr-saved-searches rnr-list" id ="savedSearchedList{$id}"></ul>
+</li>
+{END savedSeachesButton}
+							<li role="separator" class="divider"></li>							{BEGIN export_link}
+	<li data-itemtype="export" data-itemid="export" {$item_export} data-pageid="{$pageid}" data-small >
+				<a  href="#" {$exportlink_attrs}  title="" >
+				
+		Export results		
+		</a>
+	</li>
+{END export_link}
+							<li role="separator" class="divider"></li>							{BEGIN import_link}
+	<li data-itemtype="import" data-itemid="import" {$item_import} data-pageid="{$pageid}" data-small >
+				<a  {$importlink_attrs} href="aio_training_tracking_import.php{$stateLink_full}"  title="" >
+				
+		Import		
+		</a>
+	</li>
+{END import_link}
+					</ul>
+	</span>
+</span>
+			</span>
+		 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="loginform_login" {$item_loginform_login} data-topcell-item-type="loginform_login" >
+				{BEGIN guestloginbutton}
+<span data-itemtype="loginform_login" data-itemid="loginform_login" {$item_loginform_login} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" href="#" {$guestloginlink_attrs} >
+							Login			</a>
+</span>
+{END guestloginbutton}
+			</span>
+		 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="username_button" {$item_username_button} data-topcell-item-type="username_button" >
+				{BEGIN loggedas_message}
+<span data-itemtype="username_button" data-itemid="username_button" {$item_username_button} data-pageid="{$pageid}" data-small data-button-item>
+	<span class="dropdown ">
+		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
+			{BEGIN userbutton_icon}							<span class="glyphicon glyphicon-user"></span>
+						{END userbutton_icon}{$userbutton_image}			{$username}			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+							{BEGIN userinfo_link}
+	<li data-itemtype="userinfo_link" data-itemid="userinfo_link" {$item_userinfo_link} data-pageid="{$pageid}" data-small >
+				<a  href="userinfo.php"  title="" >
+				
+		User Profile		
+		</a>
+	</li>
+{END userinfo_link}
+							{BEGIN logoutbutton}
+	<li data-itemtype="logout_link" data-itemid="logout_link" {$item_logout_link} data-pageid="{$pageid}" data-small >
+				<a  href="#" {$logoutlink_attrs}  title="" >
+				
+		Log out		
+		</a>
+	</li>
+{END logoutbutton}
+							{BEGIN adminarea_link}
+	<li data-itemtype="adminarea_link" data-itemid="adminarea_link" {$item_adminarea_link} data-pageid="{$pageid}" data-small >
+				<a  href="admin_rights_list.php"  title="" >
+				
+		Admin Area		
+		</a>
+	</li>
+{END adminarea_link}
+							{BEGIN changepwd_link}
+	<li data-itemtype="changepassword_link" data-itemid="changepassword_link" {$item_changepassword_link} data-pageid="{$pageid}" data-small >
+				<a  href="changepwd.php" {$changepwdlink_attrs} id="changePasswordButton{$id}"  title="" >
+				
+		Change password		
+		</a>
+	</li>
+{END changepwd_link}
+					</ul>
+	</span>
+</span>
+{END loggedas_message}
+			</span>
+								</nav>
+{END supertop_block}
+						{$locking}
+				</div>
+				<div class="r-body" data-resize-top="topbar" data-body-width="standard">
+					{$header}
+					<div class="r-top">
+									{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="leftbar" {$form_top} data-pageid="{$pageid}" >		
+	</div>		
+{END top_block}
+						</div>
+											<div class="r-grid"
+			data-responsive
+	>
+	{BEGIN grid_tabs}
+  <ul class="nav nav-tabs bsgrid_tabs">
+	{$grid_tabs_content}
+  </ul>
+{END grid_tabs}
+	<div class="panel panel-default"
+	>
+		<div class="panel-heading">
+							{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="leftbar" {$form_above-grid} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c" data-pageid="{$pageid}"	{$cell_above-grid_c}
+	class=" r-ori-vert			col-md-6
+	
+">
+		{BEGIN firstAboveGridCell}
+				{END firstAboveGridCell}	
+	</div>			 
+				<div 
+	data-cellId="above-grid_c3" data-pageid="{$pageid}"	{$cell_above-grid_c3}
+	class="r-align-right r-ori-vert			col-md-6
+	
+">
+			</div>					</div>
+			 
+				<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c5" data-pageid="{$pageid}"	{$cell_above-grid_c5}
+	class=" r-ori-vert			col-md-6
+	
+">
+			</div>			 
+				<div 
+	data-cellId="above-grid_c6" data-pageid="{$pageid}"	{$cell_above-grid_c6}
+	class="r-align-right r-ori-vert			col-md-6
+	
+">
+		 
+		<div class="form-inline sortby-ctrl" data-itemtype="sort_dropdown" data-itemid="sort_dropdown" {$item_sort_dropdown} data-pageid="{$pageid}">
+Sort by&nbsp;{$sortByDropdown}
+</div>		</div>					</div>
+			 
+				<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-6
+	
+">
+			</div>			 
+				<div 
+	data-cellId="above-grid_c2" data-pageid="{$pageid}"	{$cell_above-grid_c2}
+	class="r-align-right			col-md-6
+	
+">
+		 
+		<span data-itemtype="details_found" data-itemid="details_found" {$item_details_found} data-pageid="{$pageid}" data-small >
+{$mlp_push}{$mlparam first var first_shown}{$mlparam last var last_shown}{$mlparam total var records_found}{mlang_message DISPLAYING}{$mlp_pop}</span>	 
+		<span data-itemtype="page_size" data-itemid="page_size" {$item_page_size} data-pageid="{$pageid}" >
+		{$recsPerPage}
+</span>	 
+		{BEGIN print_friendly}
+<span id="printpanelblock{$id}"  data-pageid="{$pageid}" {$printpanel_hiddenattr} data-itemtype="print_panel" data-itemid="print_panel" {$item_print_panel} data-pageid="{$pageid}">
+	<button title="Print-friendly page" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					<span class="glyphicon glyphicon-print"></span>
+				<span class="caret"></span>
+	</button>
+	<ul class="dropdown-menu pull-right">
+										 
+				 
+					<li class="container-fluid 
+										">
+									<div id="print_friendly_scope{$id}">
+	<div class="row">
+		<div class="col-md-4">
+			Scope:		</div>
+
+			 
+		{BEGIN print_friendly_all}
+		<div class="col-md-8">
+			<label for="printAll{$id}">
+				<input type="radio" id="printAll{$id}" data-href="aio_training_tracking_print.php?all=1&amp;{$crosstable_attrs}" name="printScope" >
+									Print all pages							</label>
+		</div>
+		{END print_friendly_all}
+		</div>
+		<div class="row">
+		<div class="col-md-4">&nbsp;</div>
+		<div class="col-md-8">
+			<label for="printPage{$id}">
+				<input name="printScope" id="printPage{$id}" type="radio" checked data-href="aio_training_tracking_print.php?{$crosstable_attrs}">
+				Print this page			</label>
+		</div>
+	</div>
+		
+	</div>
+				 
+					</li>
+											<li class="divider" role="separator"></li>
+																				 
+				 
+					<li class="container-fluid 
+										">
+									<div>
+	<label for="printPerPage{$id}">
+					Records Per Page							
+	</label>
+	<input type="number" id="printPerPage{$id}" value="{$print_recspp}" class="rnr-printrecspp">		
+</div>
+				 
+					</li>
+											<li class="divider" role="separator"></li>
+																				 
+				 
+					<li class="container-fluid 
+					 text-center 					">
+									<span data-itemtype="print_button" data-itemid="print_button" {$item_print_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" id="print_friendly_button{$id}" >
+							Print			</a>
+</span>
+				 
+					</li>
+															</ul>
+</span>
+{END print_friendly}
+	 
+		<div id="fildhidepanel{$id}" class="bs-fildhidepanel 
+	 showHide		keep-open btn-group"
+	data-itemtype="columns_control" data-itemid="columns_control" {$item_columns_control} data-pageid="{$pageid}"	title="Show/hide columns"
+	>
+	<button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button"><i class="glyphicon glyphicon-th-list"></i> <span class="caret"></span></button>
+	<ul role="menu" class="dropdown-menu dropdown-left">
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_participant_id" checked="checked" value="1" data-field="participant_id" data-fieldname="participant_id">
+					<span>{$label aio_training_tracking participant_id }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_title" checked="checked" value="1" data-field="title" data-fieldname="title">
+					<span>{$label aio_training_tracking title }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_first_name" checked="checked" value="1" data-field="first_name" data-fieldname="first_name">
+					<span>{$label aio_training_tracking first_name }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_middle_name" checked="checked" value="1" data-field="middle_name" data-fieldname="middle_name">
+					<span>{$label aio_training_tracking middle_name }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_last_name" checked="checked" value="1" data-field="last_name" data-fieldname="last_name">
+					<span>{$label aio_training_tracking last_name }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_gender" checked="checked" value="1" data-field="gender" data-fieldname="gender">
+					<span>{$label aio_training_tracking gender }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_participant_role" checked="checked" value="1" data-field="participant_role" data-fieldname="participant_role">
+					<span>{$label aio_training_tracking participant_role }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_country" checked="checked" value="1" data-field="country" data-fieldname="country">
+					<span>{$label aio_training_tracking country }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_facility" checked="checked" value="1" data-field="facility" data-fieldname="facility">
+					<span>{$label aio_training_tracking facility }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_phone" checked="checked" value="1" data-field="phone" data-fieldname="phone">
+					<span>{$label aio_training_tracking phone }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_email" checked="checked" value="1" data-field="email" data-fieldname="email">
+					<span>{$label aio_training_tracking email }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_training_id" checked="checked" value="1" data-field="training_id" data-fieldname="training_id">
+					<span>{$label aio_training_tracking training_id }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_training_name" checked="checked" value="1" data-field="training_name" data-fieldname="training_name">
+					<span>{$label aio_training_tracking training_name }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_program" checked="checked" value="1" data-field="program" data-fieldname="program">
+					<span>{$label aio_training_tracking program }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_partners" checked="checked" value="1" data-field="partners" data-fieldname="partners">
+					<span>{$label aio_training_tracking partners }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_training_type" checked="checked" value="1" data-field="training_type" data-fieldname="training_type">
+					<span>{$label aio_training_tracking training_type }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_training_approach" checked="checked" value="1" data-field="training_approach" data-fieldname="training_approach">
+					<span>{$label aio_training_tracking training_approach }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_training_language" checked="checked" value="1" data-field="training_language" data-fieldname="training_language">
+					<span>{$label aio_training_tracking training_language }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_training_lead" checked="checked" value="1" data-field="training_lead" data-fieldname="training_lead">
+					<span>{$label aio_training_tracking training_lead }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_start_date" checked="checked" value="1" data-field="start_date" data-fieldname="start_date">
+					<span>{$label aio_training_tracking start_date }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_end_date" checked="checked" value="1" data-field="end_date" data-fieldname="end_date">
+					<span>{$label aio_training_tracking end_date }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_total_days" checked="checked" value="1" data-field="total_days" data-fieldname="total_days">
+					<span>{$label aio_training_tracking total_days }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_days_recorded" checked="checked" value="1" data-field="days_recorded" data-fieldname="days_recorded">
+					<span>{$label aio_training_tracking days_recorded }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_days_attended" checked="checked" value="1" data-field="days_attended" data-fieldname="days_attended">
+					<span>{$label aio_training_tracking days_attended }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_attendance_percentage" checked="checked" value="1" data-field="attendance_percentage" data-fieldname="attendance_percentage">
+					<span>{$label aio_training_tracking attendance_percentage }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_attendance_status" checked="checked" value="1" data-field="attendance_status" data-fieldname="attendance_status">
+					<span>{$label aio_training_tracking attendance_status }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_pre_test_score" checked="checked" value="1" data-field="pre_test_score" data-fieldname="pre_test_score">
+					<span>{$label aio_training_tracking pre_test_score }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_post_test_score" checked="checked" value="1" data-field="post_test_score" data-fieldname="post_test_score">
+					<span>{$label aio_training_tracking post_test_score }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_ceu_points" checked="checked" value="1" data-field="ceu_points" data-fieldname="ceu_points">
+					<span>{$label aio_training_tracking ceu_points }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+			</ul>
+</div>
+		</div>					</div>
+			 
+				<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c4" data-pageid="{$pageid}"	{$cell_above-grid_c4}
+	class=" r-ori-vert			col-md-12
+	
+">
+		 
+		<div data-itemtype="filter_panel" data-itemid="filter_panel" {$item_filter_panel} data-pageid="{$pageid}">
+	<div class="filterPanelContainer {$filterPanelStateClass}" 
+					data-horizontal
+			>
+	<!-- Begin Filter panel content -->
+
+
+
+
+
+
+{BEGIN filter_control_gender}
+
+	<div class="dropdown filter-field filter-gender-container" {BEGIN filter_selected_gender} data-selected {END filter_selected_gender}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_gender}
+			<a href="#" class="filter-clear filter-clear-gender" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_gender}
+			<span class="r-filter-field">{$label aio_training_tracking gender }				{BEGIN filter_selected_gender}:{END filter_selected_gender}
+			</span>
+			{BEGIN filter_selected_gender}
+			<span class="r-filter-value">{$filtervalue_gender}</span>
+			{END filter_selected_gender}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_gender}
+		<li class=" filter-values filter-values-gender  {$visibilityClass_gender}">
+			{$gender_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_gender}
+
+			{BEGIN filter_button_showmore_gender}
+		<li class=" filter-show-more {$collapsedClass_gender} {$showMoreBtnClass_gender}">
+			<a class="filter-show-more-link filterShowMore_gender" href="#">{$show_n_more_gender}</a>
+		</li>
+		{END filter_button_showmore_gender}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_gender}
+
+
+
+
+
+
+{BEGIN filter_control_participant_role}
+
+	<div class="dropdown filter-field filter-participant_role-container" {BEGIN filter_selected_participant_role} data-selected {END filter_selected_participant_role}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_participant_role}
+			<a href="#" class="filter-clear filter-clear-participant_role" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_participant_role}
+			<span class="r-filter-field">{$label aio_training_tracking participant_role }				{BEGIN filter_selected_participant_role}:{END filter_selected_participant_role}
+			</span>
+			{BEGIN filter_selected_participant_role}
+			<span class="r-filter-value">{$filtervalue_participant_role}</span>
+			{END filter_selected_participant_role}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_participant_role}
+		<li class=" filter-values filter-values-participant_role  {$visibilityClass_participant_role}">
+			{$participant_role_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_participant_role}
+
+			{BEGIN filter_button_showmore_participant_role}
+		<li class=" filter-show-more {$collapsedClass_participant_role} {$showMoreBtnClass_participant_role}">
+			<a class="filter-show-more-link filterShowMore_participant_role" href="#">{$show_n_more_participant_role}</a>
+		</li>
+		{END filter_button_showmore_participant_role}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_participant_role}
+
+
+
+
+
+
+{BEGIN filter_control_country}
+
+	<div class="dropdown filter-field filter-country-container" {BEGIN filter_selected_country} data-selected {END filter_selected_country}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_country}
+			<a href="#" class="filter-clear filter-clear-country" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_country}
+			<span class="r-filter-field">{$label aio_training_tracking country }				{BEGIN filter_selected_country}:{END filter_selected_country}
+			</span>
+			{BEGIN filter_selected_country}
+			<span class="r-filter-value">{$filtervalue_country}</span>
+			{END filter_selected_country}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_country}
+		<li class=" filter-values filter-values-country  {$visibilityClass_country}">
+			{$country_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_country}
+
+			{BEGIN filter_button_showmore_country}
+		<li class=" filter-show-more {$collapsedClass_country} {$showMoreBtnClass_country}">
+			<a class="filter-show-more-link filterShowMore_country" href="#">{$show_n_more_country}</a>
+		</li>
+		{END filter_button_showmore_country}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_country}
+
+
+
+
+
+
+{BEGIN filter_control_facility}
+
+	<div class="dropdown filter-field filter-facility-container" {BEGIN filter_selected_facility} data-selected {END filter_selected_facility}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_facility}
+			<a href="#" class="filter-clear filter-clear-facility" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_facility}
+			<span class="r-filter-field">{$label aio_training_tracking facility }				{BEGIN filter_selected_facility}:{END filter_selected_facility}
+			</span>
+			{BEGIN filter_selected_facility}
+			<span class="r-filter-value">{$filtervalue_facility}</span>
+			{END filter_selected_facility}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_facility}
+		<li class=" filter-values filter-values-facility  {$visibilityClass_facility}">
+			{$facility_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_facility}
+
+			{BEGIN filter_button_showmore_facility}
+		<li class=" filter-show-more {$collapsedClass_facility} {$showMoreBtnClass_facility}">
+			<a class="filter-show-more-link filterShowMore_facility" href="#">{$show_n_more_facility}</a>
+		</li>
+		{END filter_button_showmore_facility}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_facility}
+
+
+
+
+
+
+{BEGIN filter_control_training_id}
+
+	<div class="dropdown filter-field filter-training_id-container" {BEGIN filter_selected_training_id} data-selected {END filter_selected_training_id}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_training_id}
+			<a href="#" class="filter-clear filter-clear-training_id" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_training_id}
+			<span class="r-filter-field">{$label aio_training_tracking training_id }				{BEGIN filter_selected_training_id}:{END filter_selected_training_id}
+			</span>
+			{BEGIN filter_selected_training_id}
+			<span class="r-filter-value">{$filtervalue_training_id}</span>
+			{END filter_selected_training_id}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_training_id}
+		<li class=" filter-values filter-values-training_id  {$visibilityClass_training_id}">
+			{$training_id_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_training_id}
+
+			{BEGIN filter_button_showmore_training_id}
+		<li class=" filter-show-more {$collapsedClass_training_id} {$showMoreBtnClass_training_id}">
+			<a class="filter-show-more-link filterShowMore_training_id" href="#">{$show_n_more_training_id}</a>
+		</li>
+		{END filter_button_showmore_training_id}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_training_id}
+
+
+
+
+
+
+{BEGIN filter_control_training_name}
+
+	<div class="dropdown filter-field filter-training_name-container" {BEGIN filter_selected_training_name} data-selected {END filter_selected_training_name}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_training_name}
+			<a href="#" class="filter-clear filter-clear-training_name" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_training_name}
+			<span class="r-filter-field">{$label aio_training_tracking training_name }				{BEGIN filter_selected_training_name}:{END filter_selected_training_name}
+			</span>
+			{BEGIN filter_selected_training_name}
+			<span class="r-filter-value">{$filtervalue_training_name}</span>
+			{END filter_selected_training_name}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_training_name}
+		<li class=" filter-values filter-values-training_name  {$visibilityClass_training_name}">
+			{$training_name_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_training_name}
+
+			{BEGIN filter_button_showmore_training_name}
+		<li class=" filter-show-more {$collapsedClass_training_name} {$showMoreBtnClass_training_name}">
+			<a class="filter-show-more-link filterShowMore_training_name" href="#">{$show_n_more_training_name}</a>
+		</li>
+		{END filter_button_showmore_training_name}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_training_name}
+
+
+
+
+
+
+{BEGIN filter_control_attendance_status}
+
+	<div class="dropdown filter-field filter-attendance_status-container" {BEGIN filter_selected_attendance_status} data-selected {END filter_selected_attendance_status}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_attendance_status}
+			<a href="#" class="filter-clear filter-clear-attendance_status" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_attendance_status}
+			<span class="r-filter-field">{$label aio_training_tracking attendance_status }				{BEGIN filter_selected_attendance_status}:{END filter_selected_attendance_status}
+			</span>
+			{BEGIN filter_selected_attendance_status}
+			<span class="r-filter-value">{$filtervalue_attendance_status}</span>
+			{END filter_selected_attendance_status}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_attendance_status}
+		<li class=" filter-values filter-values-attendance_status  {$visibilityClass_attendance_status}">
+			{$attendance_status_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_attendance_status}
+
+			{BEGIN filter_button_showmore_attendance_status}
+		<li class=" filter-show-more {$collapsedClass_attendance_status} {$showMoreBtnClass_attendance_status}">
+			<a class="filter-show-more-link filterShowMore_attendance_status" href="#">{$show_n_more_attendance_status}</a>
+		</li>
+		{END filter_button_showmore_attendance_status}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_attendance_status}
+
+
+
+
+
+
+{BEGIN filter_control_program}
+
+	<div class="dropdown filter-field filter-program-container" {BEGIN filter_selected_program} data-selected {END filter_selected_program}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_program}
+			<a href="#" class="filter-clear filter-clear-program" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_program}
+			<span class="r-filter-field">{$label aio_training_tracking program }				{BEGIN filter_selected_program}:{END filter_selected_program}
+			</span>
+			{BEGIN filter_selected_program}
+			<span class="r-filter-value">{$filtervalue_program}</span>
+			{END filter_selected_program}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_program}
+		<li class=" filter-values filter-values-program  {$visibilityClass_program}">
+			{$program_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_program}
+
+			{BEGIN filter_button_showmore_program}
+		<li class=" filter-show-more {$collapsedClass_program} {$showMoreBtnClass_program}">
+			<a class="filter-show-more-link filterShowMore_program" href="#">{$show_n_more_program}</a>
+		</li>
+		{END filter_button_showmore_program}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_program}
+
+
+
+
+
+
+{BEGIN filter_control_partners}
+
+	<div class="dropdown filter-field filter-partners-container" {BEGIN filter_selected_partners} data-selected {END filter_selected_partners}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_partners}
+			<a href="#" class="filter-clear filter-clear-partners" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_partners}
+			<span class="r-filter-field">{$label aio_training_tracking partners }				{BEGIN filter_selected_partners}:{END filter_selected_partners}
+			</span>
+			{BEGIN filter_selected_partners}
+			<span class="r-filter-value">{$filtervalue_partners}</span>
+			{END filter_selected_partners}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_partners}
+		<li class=" filter-values filter-values-partners  {$visibilityClass_partners}">
+			{$partners_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_partners}
+
+			{BEGIN filter_button_showmore_partners}
+		<li class=" filter-show-more {$collapsedClass_partners} {$showMoreBtnClass_partners}">
+			<a class="filter-show-more-link filterShowMore_partners" href="#">{$show_n_more_partners}</a>
+		</li>
+		{END filter_button_showmore_partners}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_partners}
+
+
+
+
+
+
+{BEGIN filter_control_training_type}
+
+	<div class="dropdown filter-field filter-training_type-container" {BEGIN filter_selected_training_type} data-selected {END filter_selected_training_type}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_training_type}
+			<a href="#" class="filter-clear filter-clear-training_type" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_training_type}
+			<span class="r-filter-field">{$label aio_training_tracking training_type }				{BEGIN filter_selected_training_type}:{END filter_selected_training_type}
+			</span>
+			{BEGIN filter_selected_training_type}
+			<span class="r-filter-value">{$filtervalue_training_type}</span>
+			{END filter_selected_training_type}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_training_type}
+		<li class=" filter-values filter-values-training_type  {$visibilityClass_training_type}">
+			{$training_type_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_training_type}
+
+			{BEGIN filter_button_showmore_training_type}
+		<li class=" filter-show-more {$collapsedClass_training_type} {$showMoreBtnClass_training_type}">
+			<a class="filter-show-more-link filterShowMore_training_type" href="#">{$show_n_more_training_type}</a>
+		</li>
+		{END filter_button_showmore_training_type}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_training_type}
+
+
+
+
+
+
+{BEGIN filter_control_training_approach}
+
+	<div class="dropdown filter-field filter-training_approach-container" {BEGIN filter_selected_training_approach} data-selected {END filter_selected_training_approach}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_training_approach}
+			<a href="#" class="filter-clear filter-clear-training_approach" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_training_approach}
+			<span class="r-filter-field">{$label aio_training_tracking training_approach }				{BEGIN filter_selected_training_approach}:{END filter_selected_training_approach}
+			</span>
+			{BEGIN filter_selected_training_approach}
+			<span class="r-filter-value">{$filtervalue_training_approach}</span>
+			{END filter_selected_training_approach}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_training_approach}
+		<li class=" filter-values filter-values-training_approach  {$visibilityClass_training_approach}">
+			{$training_approach_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_training_approach}
+
+			{BEGIN filter_button_showmore_training_approach}
+		<li class=" filter-show-more {$collapsedClass_training_approach} {$showMoreBtnClass_training_approach}">
+			<a class="filter-show-more-link filterShowMore_training_approach" href="#">{$show_n_more_training_approach}</a>
+		</li>
+		{END filter_button_showmore_training_approach}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_training_approach}
+
+
+
+
+
+
+{BEGIN filter_control_training_language}
+
+	<div class="dropdown filter-field filter-training_language-container" {BEGIN filter_selected_training_language} data-selected {END filter_selected_training_language}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_training_language}
+			<a href="#" class="filter-clear filter-clear-training_language" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_training_language}
+			<span class="r-filter-field">{$label aio_training_tracking training_language }				{BEGIN filter_selected_training_language}:{END filter_selected_training_language}
+			</span>
+			{BEGIN filter_selected_training_language}
+			<span class="r-filter-value">{$filtervalue_training_language}</span>
+			{END filter_selected_training_language}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_training_language}
+		<li class=" filter-values filter-values-training_language  {$visibilityClass_training_language}">
+			{$training_language_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_training_language}
+
+			{BEGIN filter_button_showmore_training_language}
+		<li class=" filter-show-more {$collapsedClass_training_language} {$showMoreBtnClass_training_language}">
+			<a class="filter-show-more-link filterShowMore_training_language" href="#">{$show_n_more_training_language}</a>
+		</li>
+		{END filter_button_showmore_training_language}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_training_language}
+
+
+
+
+
+
+{BEGIN filter_control_training_lead}
+
+	<div class="dropdown filter-field filter-training_lead-container" {BEGIN filter_selected_training_lead} data-selected {END filter_selected_training_lead}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_training_lead}
+			<a href="#" class="filter-clear filter-clear-training_lead" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_training_lead}
+			<span class="r-filter-field">{$label aio_training_tracking training_lead }				{BEGIN filter_selected_training_lead}:{END filter_selected_training_lead}
+			</span>
+			{BEGIN filter_selected_training_lead}
+			<span class="r-filter-value">{$filtervalue_training_lead}</span>
+			{END filter_selected_training_lead}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_training_lead}
+		<li class=" filter-values filter-values-training_lead  {$visibilityClass_training_lead}">
+			{$training_lead_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_training_lead}
+
+			{BEGIN filter_button_showmore_training_lead}
+		<li class=" filter-show-more {$collapsedClass_training_lead} {$showMoreBtnClass_training_lead}">
+			<a class="filter-show-more-link filterShowMore_training_lead" href="#">{$show_n_more_training_lead}</a>
+		</li>
+		{END filter_button_showmore_training_lead}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_training_lead}
+
+
+
+
+
+
+{BEGIN filter_control_end_date}
+
+	<div class="dropdown filter-field filter-end_date-container" {BEGIN filter_selected_end_date} data-selected {END filter_selected_end_date}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_end_date}
+			<a href="#" class="filter-clear filter-clear-end_date" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_end_date}
+			<span class="r-filter-field">{$label aio_training_tracking end_date }				{BEGIN filter_selected_end_date}:{END filter_selected_end_date}
+			</span>
+			{BEGIN filter_selected_end_date}
+			<span class="r-filter-value">{$filtervalue_end_date}</span>
+			{END filter_selected_end_date}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_end_date}
+		<li class=" filter-values filter-values-end_date  {$visibilityClass_end_date}">
+			{$end_date_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_end_date}
+
+			{BEGIN filter_button_showmore_end_date}
+		<li class=" filter-show-more {$collapsedClass_end_date} {$showMoreBtnClass_end_date}">
+			<a class="filter-show-more-link filterShowMore_end_date" href="#">{$show_n_more_end_date}</a>
+		</li>
+		{END filter_button_showmore_end_date}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_end_date}
+
+
+
+
+
+
+{BEGIN filter_control_start_date}
+
+	<div class="dropdown filter-field filter-start_date-container" {BEGIN filter_selected_start_date} data-selected {END filter_selected_start_date}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_start_date}
+			<a href="#" class="filter-clear filter-clear-start_date" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_start_date}
+			<span class="r-filter-field">{$label aio_training_tracking start_date }				{BEGIN filter_selected_start_date}:{END filter_selected_start_date}
+			</span>
+			{BEGIN filter_selected_start_date}
+			<span class="r-filter-value">{$filtervalue_start_date}</span>
+			{END filter_selected_start_date}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_start_date}
+		<li class=" filter-values filter-values-start_date  {$visibilityClass_start_date}">
+			{$start_date_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_start_date}
+
+			{BEGIN filter_button_showmore_start_date}
+		<li class=" filter-show-more {$collapsedClass_start_date} {$showMoreBtnClass_start_date}">
+			<a class="filter-show-more-link filterShowMore_start_date" href="#">{$show_n_more_start_date}</a>
+		</li>
+		{END filter_button_showmore_start_date}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_start_date}
+
+
+
+	<!-- End Filter panel content -->
+	</div>
+</div>		</div>					</div>
+			</div>		
+{END above-grid_block}
+			</div>
+
+					{BEGIN grid_block}
+{BEGIN message_block}
+<div data-grid-message data-pageid="{$pageid}" class="alert {$message_class}" role="alert" {$grid_message_attrs}>{$message}</div>
+{END message_block}	<style>
+@media screen and (max-width: 767px) {
+		[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="participant_id"]:before {
+		content: "{$label aio_training_tracking participant_id}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="title"]:before {
+		content: "{$label aio_training_tracking title}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="first_name"]:before {
+		content: "{$label aio_training_tracking first_name}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="middle_name"]:before {
+		content: "{$label aio_training_tracking middle_name}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="last_name"]:before {
+		content: "{$label aio_training_tracking last_name}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="gender"]:before {
+		content: "{$label aio_training_tracking gender}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="participant_role"]:before {
+		content: "{$label aio_training_tracking participant_role}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="country"]:before {
+		content: "{$label aio_training_tracking country}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="facility"]:before {
+		content: "{$label aio_training_tracking facility}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="phone"]:before {
+		content: "{$label aio_training_tracking phone}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="email"]:before {
+		content: "{$label aio_training_tracking email}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="training_id"]:before {
+		content: "{$label aio_training_tracking training_id}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="training_name"]:before {
+		content: "{$label aio_training_tracking training_name}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="program"]:before {
+		content: "{$label aio_training_tracking program}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="partners"]:before {
+		content: "{$label aio_training_tracking partners}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="training_type"]:before {
+		content: "{$label aio_training_tracking training_type}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="training_approach"]:before {
+		content: "{$label aio_training_tracking training_approach}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="training_language"]:before {
+		content: "{$label aio_training_tracking training_language}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="training_lead"]:before {
+		content: "{$label aio_training_tracking training_lead}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="start_date"]:before {
+		content: "{$label aio_training_tracking start_date}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="end_date"]:before {
+		content: "{$label aio_training_tracking end_date}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="total_days"]:before {
+		content: "{$label aio_training_tracking total_days}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="days_recorded"]:before {
+		content: "{$label aio_training_tracking days_recorded}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="days_attended"]:before {
+		content: "{$label aio_training_tracking days_attended}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="attendance_percentage"]:before {
+		content: "{$label aio_training_tracking attendance_percentage}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="attendance_status"]:before {
+		content: "{$label aio_training_tracking attendance_status}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="pre_test_score"]:before {
+		content: "{$label aio_training_tracking pre_test_score}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="post_test_score"]:before {
+		content: "{$label aio_training_tracking post_test_score}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="ceu_points"]:before {
+		content: "{$label aio_training_tracking ceu_points}";
+	}
+	}
+</style>
+<table data-location="grid" id="form_grid_{$pageid}" data-makeup="leftbar" {$form_grid} data-pageid="{$pageid}" class=" table table-condensed table-striped table-hover table-bordered r-horizontal-grid  r-flexgrid rnr-b-grid rnr-gridtable"
+	cellpadding="0"
+	data-body-height="1"
+>
+						<thead>
+			{BEGIN grid_header}
+			
+																									<tr {$rowattrs} {$row_grid_0} class="{$rowclass}
+									{$gridHeader_class}
+					
+								r-gridrow
+							">
+									{BEGIN cellblock_grid_headcell_checkbox}
+	<th
+	
+	{$cell_grid_headcell_checkbox}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_headcell_checkbox" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+		data-checkbox-cell
+	>
+
+	 
+		{BEGIN checkbox_column}
+<span data-itemtype="grid_checkbox_head" data-itemid="grid_checkbox_head" {$item_grid_checkbox_head} data-pageid="{$pageid}" data-record-id="{$recId}" >
+	<input type="checkbox" {$checkboxheader_attrs}>
+</span>
+{END checkbox_column}
+	
+	</th>
+	{END cellblock_grid_headcell_checkbox}
+									{BEGIN cellblock_grid_headcell_field}
+	<th
+	
+	{$cell_grid_headcell_field}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$participant_id_class}	"
+
+			data-field="participant_id"
+	
+	data-cellId="grid_headcell_field" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN participant_id_fieldheadercolumn}
+	{BEGIN participant_id_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field29" {$item_simple_grid_field29} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="participant_id" data-fieldname="participant_id" 
+
+			{$participant_id_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking participant_id }</span>
+					{$arrow_icon_participant_id}
+			</span>
+	</span>
+	{END participant_id_fieldheader}
+{END participant_id_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field}
+									{BEGIN cellblock_grid_headcell_field1}
+	<th
+	
+	{$cell_grid_headcell_field1}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$title_class}	"
+
+			data-field="title"
+	
+	data-cellId="grid_headcell_field1" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN title_fieldheadercolumn}
+	{BEGIN title_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field30" {$item_simple_grid_field30} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="title" data-fieldname="title" 
+
+			{$title_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking title }</span>
+					{$arrow_icon_title}
+			</span>
+	</span>
+	{END title_fieldheader}
+{END title_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field1}
+									{BEGIN cellblock_grid_headcell_field2}
+	<th
+	
+	{$cell_grid_headcell_field2}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$first_name_class}	"
+
+			data-field="first_name"
+	
+	data-cellId="grid_headcell_field2" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN first_name_fieldheadercolumn}
+	{BEGIN first_name_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field31" {$item_simple_grid_field31} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="first_name" data-fieldname="first_name" 
+
+			{$first_name_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking first_name }</span>
+					{$arrow_icon_first_name}
+			</span>
+	</span>
+	{END first_name_fieldheader}
+{END first_name_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field2}
+									{BEGIN cellblock_grid_headcell_field3}
+	<th
+	
+	{$cell_grid_headcell_field3}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$middle_name_class}	"
+
+			data-field="middle_name"
+	
+	data-cellId="grid_headcell_field3" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN middle_name_fieldheadercolumn}
+	{BEGIN middle_name_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field32" {$item_simple_grid_field32} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="middle_name" data-fieldname="middle_name" 
+
+			{$middle_name_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking middle_name }</span>
+					{$arrow_icon_middle_name}
+			</span>
+	</span>
+	{END middle_name_fieldheader}
+{END middle_name_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field3}
+									{BEGIN cellblock_grid_headcell_field4}
+	<th
+	
+	{$cell_grid_headcell_field4}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$last_name_class}	"
+
+			data-field="last_name"
+	
+	data-cellId="grid_headcell_field4" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN last_name_fieldheadercolumn}
+	{BEGIN last_name_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field33" {$item_simple_grid_field33} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="last_name" data-fieldname="last_name" 
+
+			{$last_name_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking last_name }</span>
+					{$arrow_icon_last_name}
+			</span>
+	</span>
+	{END last_name_fieldheader}
+{END last_name_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field4}
+									{BEGIN cellblock_grid_headcell_field5}
+	<th
+	
+	{$cell_grid_headcell_field5}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$gender_class}	"
+
+			data-field="gender"
+	
+	data-cellId="grid_headcell_field5" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN gender_fieldheadercolumn}
+	{BEGIN gender_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field34" {$item_simple_grid_field34} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="gender" data-fieldname="gender" 
+
+			{$gender_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking gender }</span>
+					{$arrow_icon_gender}
+			</span>
+	</span>
+	{END gender_fieldheader}
+{END gender_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field5}
+									{BEGIN cellblock_grid_headcell_field6}
+	<th
+	
+	{$cell_grid_headcell_field6}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$participant_role_class}	"
+
+			data-field="participant_role"
+	
+	data-cellId="grid_headcell_field6" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN participant_role_fieldheadercolumn}
+	{BEGIN participant_role_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field35" {$item_simple_grid_field35} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="participant_role" data-fieldname="participant_role" 
+
+			{$participant_role_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking participant_role }</span>
+					{$arrow_icon_participant_role}
+			</span>
+	</span>
+	{END participant_role_fieldheader}
+{END participant_role_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field6}
+									{BEGIN cellblock_grid_headcell_field7}
+	<th
+	
+	{$cell_grid_headcell_field7}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$country_class}	"
+
+			data-field="country"
+	
+	data-cellId="grid_headcell_field7" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN country_fieldheadercolumn}
+	{BEGIN country_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field36" {$item_simple_grid_field36} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="country" data-fieldname="country" 
+
+			{$country_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking country }</span>
+					{$arrow_icon_country}
+			</span>
+	</span>
+	{END country_fieldheader}
+{END country_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field7}
+									{BEGIN cellblock_grid_headcell_field8}
+	<th
+	
+	{$cell_grid_headcell_field8}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$facility_class}	"
+
+			data-field="facility"
+	
+	data-cellId="grid_headcell_field8" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN facility_fieldheadercolumn}
+	{BEGIN facility_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field37" {$item_simple_grid_field37} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="facility" data-fieldname="facility" 
+
+			{$facility_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking facility }</span>
+					{$arrow_icon_facility}
+			</span>
+	</span>
+	{END facility_fieldheader}
+{END facility_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field8}
+									{BEGIN cellblock_grid_headcell_field9}
+	<th
+	
+	{$cell_grid_headcell_field9}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$phone_class}	"
+
+			data-field="phone"
+	
+	data-cellId="grid_headcell_field9" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN phone_fieldheadercolumn}
+	{BEGIN phone_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field38" {$item_simple_grid_field38} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="phone" data-fieldname="phone" 
+
+			{$phone_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking phone }</span>
+					{$arrow_icon_phone}
+			</span>
+	</span>
+	{END phone_fieldheader}
+{END phone_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field9}
+									{BEGIN cellblock_grid_headcell_field10}
+	<th
+	
+	{$cell_grid_headcell_field10}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$email_class}	"
+
+			data-field="email"
+	
+	data-cellId="grid_headcell_field10" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN email_fieldheadercolumn}
+	{BEGIN email_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field39" {$item_simple_grid_field39} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="email" data-fieldname="email" 
+
+			{$email_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking email }</span>
+					{$arrow_icon_email}
+			</span>
+	</span>
+	{END email_fieldheader}
+{END email_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field10}
+									{BEGIN cellblock_grid_headcell_field11}
+	<th
+	
+	{$cell_grid_headcell_field11}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_id_class}	"
+
+			data-field="training_id"
+	
+	data-cellId="grid_headcell_field11" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN training_id_fieldheadercolumn}
+	{BEGIN training_id_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field40" {$item_simple_grid_field40} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_id" data-fieldname="training_id" 
+
+			{$training_id_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking training_id }</span>
+					{$arrow_icon_training_id}
+			</span>
+	</span>
+	{END training_id_fieldheader}
+{END training_id_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field11}
+									{BEGIN cellblock_grid_headcell_field12}
+	<th
+	
+	{$cell_grid_headcell_field12}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_name_class}	"
+
+			data-field="training_name"
+	
+	data-cellId="grid_headcell_field12" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN training_name_fieldheadercolumn}
+	{BEGIN training_name_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field41" {$item_simple_grid_field41} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_name" data-fieldname="training_name" 
+
+			{$training_name_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking training_name }</span>
+					{$arrow_icon_training_name}
+			</span>
+	</span>
+	{END training_name_fieldheader}
+{END training_name_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field12}
+									{BEGIN cellblock_grid_headcell_field13}
+	<th
+	
+	{$cell_grid_headcell_field13}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$program_class}	"
+
+			data-field="program"
+	
+	data-cellId="grid_headcell_field13" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN program_fieldheadercolumn}
+	{BEGIN program_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field42" {$item_simple_grid_field42} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="program" data-fieldname="program" 
+
+			{$program_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking program }</span>
+					{$arrow_icon_program}
+			</span>
+	</span>
+	{END program_fieldheader}
+{END program_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field13}
+									{BEGIN cellblock_grid_headcell_field14}
+	<th
+	
+	{$cell_grid_headcell_field14}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$partners_class}	"
+
+			data-field="partners"
+	
+	data-cellId="grid_headcell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN partners_fieldheadercolumn}
+	{BEGIN partners_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field43" {$item_simple_grid_field43} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="partners" data-fieldname="partners" 
+
+			{$partners_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking partners }</span>
+					{$arrow_icon_partners}
+			</span>
+	</span>
+	{END partners_fieldheader}
+{END partners_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field14}
+									{BEGIN cellblock_grid_headcell_field15}
+	<th
+	
+	{$cell_grid_headcell_field15}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_type_class}	"
+
+			data-field="training_type"
+	
+	data-cellId="grid_headcell_field15" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN training_type_fieldheadercolumn}
+	{BEGIN training_type_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field44" {$item_simple_grid_field44} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_type" data-fieldname="training_type" 
+
+			{$training_type_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking training_type }</span>
+					{$arrow_icon_training_type}
+			</span>
+	</span>
+	{END training_type_fieldheader}
+{END training_type_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field15}
+									{BEGIN cellblock_grid_headcell_field16}
+	<th
+	
+	{$cell_grid_headcell_field16}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_approach_class}	"
+
+			data-field="training_approach"
+	
+	data-cellId="grid_headcell_field16" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN training_approach_fieldheadercolumn}
+	{BEGIN training_approach_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field45" {$item_simple_grid_field45} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_approach" data-fieldname="training_approach" 
+
+			{$training_approach_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking training_approach }</span>
+					{$arrow_icon_training_approach}
+			</span>
+	</span>
+	{END training_approach_fieldheader}
+{END training_approach_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field16}
+									{BEGIN cellblock_grid_headcell_field17}
+	<th
+	
+	{$cell_grid_headcell_field17}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_language_class}	"
+
+			data-field="training_language"
+	
+	data-cellId="grid_headcell_field17" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN training_language_fieldheadercolumn}
+	{BEGIN training_language_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field46" {$item_simple_grid_field46} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_language" data-fieldname="training_language" 
+
+			{$training_language_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking training_language }</span>
+					{$arrow_icon_training_language}
+			</span>
+	</span>
+	{END training_language_fieldheader}
+{END training_language_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field17}
+									{BEGIN cellblock_grid_headcell_field18}
+	<th
+	
+	{$cell_grid_headcell_field18}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_lead_class}	"
+
+			data-field="training_lead"
+	
+	data-cellId="grid_headcell_field18" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN training_lead_fieldheadercolumn}
+	{BEGIN training_lead_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field47" {$item_simple_grid_field47} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_lead" data-fieldname="training_lead" 
+
+			{$training_lead_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking training_lead }</span>
+					{$arrow_icon_training_lead}
+			</span>
+	</span>
+	{END training_lead_fieldheader}
+{END training_lead_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field18}
+									{BEGIN cellblock_grid_headcell_field19}
+	<th
+	
+	{$cell_grid_headcell_field19}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$start_date_class}	"
+
+			data-field="start_date"
+	
+	data-cellId="grid_headcell_field19" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN start_date_fieldheadercolumn}
+	{BEGIN start_date_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field48" {$item_simple_grid_field48} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="start_date" data-fieldname="start_date" 
+
+			{$start_date_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking start_date }</span>
+					{$arrow_icon_start_date}
+			</span>
+	</span>
+	{END start_date_fieldheader}
+{END start_date_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field19}
+									{BEGIN cellblock_grid_headcell_field20}
+	<th
+	
+	{$cell_grid_headcell_field20}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$end_date_class}	"
+
+			data-field="end_date"
+	
+	data-cellId="grid_headcell_field20" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN end_date_fieldheadercolumn}
+	{BEGIN end_date_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field49" {$item_simple_grid_field49} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="end_date" data-fieldname="end_date" 
+
+			{$end_date_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking end_date }</span>
+					{$arrow_icon_end_date}
+			</span>
+	</span>
+	{END end_date_fieldheader}
+{END end_date_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field20}
+									{BEGIN cellblock_grid_headcell_field21}
+	<th
+	
+	{$cell_grid_headcell_field21}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$total_days_class}	"
+
+			data-field="total_days"
+	
+	data-cellId="grid_headcell_field21" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN total_days_fieldheadercolumn}
+	{BEGIN total_days_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field50" {$item_simple_grid_field50} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="total_days" data-fieldname="total_days" 
+
+			{$total_days_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking total_days }</span>
+					{$arrow_icon_total_days}
+			</span>
+	</span>
+	{END total_days_fieldheader}
+{END total_days_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field21}
+									{BEGIN cellblock_grid_headcell_field22}
+	<th
+	
+	{$cell_grid_headcell_field22}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$days_recorded_class}	"
+
+			data-field="days_recorded"
+	
+	data-cellId="grid_headcell_field22" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN days_recorded_fieldheadercolumn}
+	{BEGIN days_recorded_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field51" {$item_simple_grid_field51} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="days_recorded" data-fieldname="days_recorded" 
+
+			{$days_recorded_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking days_recorded }</span>
+					{$arrow_icon_days_recorded}
+			</span>
+	</span>
+	{END days_recorded_fieldheader}
+{END days_recorded_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field22}
+									{BEGIN cellblock_grid_headcell_field23}
+	<th
+	
+	{$cell_grid_headcell_field23}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$days_attended_class}	"
+
+			data-field="days_attended"
+	
+	data-cellId="grid_headcell_field23" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN days_attended_fieldheadercolumn}
+	{BEGIN days_attended_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field52" {$item_simple_grid_field52} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="days_attended" data-fieldname="days_attended" 
+
+			{$days_attended_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking days_attended }</span>
+					{$arrow_icon_days_attended}
+			</span>
+	</span>
+	{END days_attended_fieldheader}
+{END days_attended_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field23}
+									{BEGIN cellblock_grid_headcell_field24}
+	<th
+	
+	{$cell_grid_headcell_field24}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$attendance_percentage_class}	"
+
+			data-field="attendance_percentage"
+	
+	data-cellId="grid_headcell_field24" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN attendance_percentage_fieldheadercolumn}
+	{BEGIN attendance_percentage_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field53" {$item_simple_grid_field53} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="attendance_percentage" data-fieldname="attendance_percentage" 
+
+			{$attendance_percentage_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking attendance_percentage }</span>
+					{$arrow_icon_attendance_percentage}
+			</span>
+	</span>
+	{END attendance_percentage_fieldheader}
+{END attendance_percentage_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field24}
+									{BEGIN cellblock_grid_headcell_field25}
+	<th
+	
+	{$cell_grid_headcell_field25}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$attendance_status_class}	"
+
+			data-field="attendance_status"
+	
+	data-cellId="grid_headcell_field25" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN attendance_status_fieldheadercolumn}
+	{BEGIN attendance_status_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field54" {$item_simple_grid_field54} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="attendance_status" data-fieldname="attendance_status" 
+
+			{$attendance_status_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking attendance_status }</span>
+					{$arrow_icon_attendance_status}
+			</span>
+	</span>
+	{END attendance_status_fieldheader}
+{END attendance_status_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field25}
+									{BEGIN cellblock_grid_headcell_field26}
+	<th
+	
+	{$cell_grid_headcell_field26}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$pre_test_score_class}	"
+
+			data-field="pre_test_score"
+	
+	data-cellId="grid_headcell_field26" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN pre_test_score_fieldheadercolumn}
+	{BEGIN pre_test_score_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field55" {$item_simple_grid_field55} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="pre_test_score" data-fieldname="pre_test_score" 
+
+			{$pre_test_score_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking pre_test_score }</span>
+					{$arrow_icon_pre_test_score}
+			</span>
+	</span>
+	{END pre_test_score_fieldheader}
+{END pre_test_score_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field26}
+									{BEGIN cellblock_grid_headcell_field27}
+	<th
+	
+	{$cell_grid_headcell_field27}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$post_test_score_class}	"
+
+			data-field="post_test_score"
+	
+	data-cellId="grid_headcell_field27" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN post_test_score_fieldheadercolumn}
+	{BEGIN post_test_score_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field56" {$item_simple_grid_field56} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="post_test_score" data-fieldname="post_test_score" 
+
+			{$post_test_score_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking post_test_score }</span>
+					{$arrow_icon_post_test_score}
+			</span>
+	</span>
+	{END post_test_score_fieldheader}
+{END post_test_score_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field27}
+									{BEGIN cellblock_grid_headcell_field28}
+	<th
+	
+	{$cell_grid_headcell_field28}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$ceu_points_class}	"
+
+			data-field="ceu_points"
+	
+	data-cellId="grid_headcell_field28" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN ceu_points_fieldheadercolumn}
+	{BEGIN ceu_points_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field57" {$item_simple_grid_field57} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="ceu_points" data-fieldname="ceu_points" 
+
+			{$ceu_points_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label aio_training_tracking ceu_points }</span>
+					{$arrow_icon_ceu_points}
+			</span>
+	</span>
+	{END ceu_points_fieldheader}
+{END ceu_points_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field28}
+							</tr>
+															
+					{END grid_header}
+			</thead>
+															<tbody>
+					{BEGIN grid_row}
+							
+																														<tr {$rowattrs} {$row_grid_1} class="{$rowclass}
+				
+								r-gridrow
+							">
+									{BEGIN cellblock_grid_cell_checkbox}
+	<td
+	
+	{$cell_grid_cell_checkbox}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_cell_checkbox" data-pageid="{$pageid}" data-record-id="{$recId}"		data-control-cell
+	
+		data-checkbox-cell
+	>
+
+	 
+		{BEGIN checkbox_column}
+<span data-itemtype="grid_checkbox" data-itemid="grid_checkbox" {$item_grid_checkbox} data-pageid="{$pageid}" data-record-id="{$recId}" >
+	<input type="checkbox" {$checkbox_attrs}
+		>
+</span>	
+{END checkbox_column}
+	
+	</td>
+	{END cellblock_grid_cell_checkbox}
+									{BEGIN cellblock_grid_cell_field}
+	<td
+	
+	{$cell_grid_cell_field}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$participant_id_class}	"
+
+			data-field="participant_id"
+	
+	data-cellId="grid_cell_field" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN participant_id_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field" {$item_simple_grid_field} data-pageid="{$pageid}" data-page="aio_training_tracking_list" data-record-id="{$recId}" data-field="participant_id" data-fieldname="participant_id" data-default-width >
+{$participant_id_value}
+</span>
+{END participant_id_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field}
+									{BEGIN cellblock_grid_cell_field1}
+	<td
+	
+	{$cell_grid_cell_field1}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$title_class}	"
+
+			data-field="title"
+	
+	data-cellId="grid_cell_field1" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN title_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field1" {$item_simple_grid_field1} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="title" data-fieldname="title" data-default-width >
+{$title_value}
+</span>
+{END title_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field1}
+									{BEGIN cellblock_grid_cell_field2}
+	<td
+	
+	{$cell_grid_cell_field2}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$first_name_class}	"
+
+			data-field="first_name"
+	
+	data-cellId="grid_cell_field2" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN first_name_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field2" {$item_simple_grid_field2} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="first_name" data-fieldname="first_name" data-default-width >
+{$first_name_value}
+</span>
+{END first_name_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field2}
+									{BEGIN cellblock_grid_cell_field3}
+	<td
+	
+	{$cell_grid_cell_field3}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$middle_name_class}	"
+
+			data-field="middle_name"
+	
+	data-cellId="grid_cell_field3" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN middle_name_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field3" {$item_simple_grid_field3} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="middle_name" data-fieldname="middle_name" data-default-width >
+{$middle_name_value}
+</span>
+{END middle_name_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field3}
+									{BEGIN cellblock_grid_cell_field4}
+	<td
+	
+	{$cell_grid_cell_field4}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$last_name_class}	"
+
+			data-field="last_name"
+	
+	data-cellId="grid_cell_field4" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN last_name_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field4" {$item_simple_grid_field4} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="last_name" data-fieldname="last_name" data-default-width >
+{$last_name_value}
+</span>
+{END last_name_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field4}
+									{BEGIN cellblock_grid_cell_field5}
+	<td
+	
+	{$cell_grid_cell_field5}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$gender_class}	"
+
+			data-field="gender"
+	
+	data-cellId="grid_cell_field5" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN gender_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field5" {$item_simple_grid_field5} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="gender" data-fieldname="gender" data-default-width >
+{$gender_value}
+</span>
+{END gender_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field5}
+									{BEGIN cellblock_grid_cell_field6}
+	<td
+	
+	{$cell_grid_cell_field6}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$participant_role_class}	"
+
+			data-field="participant_role"
+	
+	data-cellId="grid_cell_field6" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN participant_role_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field6" {$item_simple_grid_field6} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="participant_role" data-fieldname="participant_role" data-default-width >
+{$participant_role_value}
+</span>
+{END participant_role_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field6}
+									{BEGIN cellblock_grid_cell_field7}
+	<td
+	
+	{$cell_grid_cell_field7}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$country_class}	"
+
+			data-field="country"
+	
+	data-cellId="grid_cell_field7" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN country_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field7" {$item_simple_grid_field7} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="country" data-fieldname="country" data-default-width >
+{$country_value}
+</span>
+{END country_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field7}
+									{BEGIN cellblock_grid_cell_field8}
+	<td
+	
+	{$cell_grid_cell_field8}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$facility_class}	"
+
+			data-field="facility"
+	
+	data-cellId="grid_cell_field8" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN facility_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field8" {$item_simple_grid_field8} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="facility" data-fieldname="facility" data-default-width >
+{$facility_value}
+</span>
+{END facility_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field8}
+									{BEGIN cellblock_grid_cell_field9}
+	<td
+	
+	{$cell_grid_cell_field9}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$phone_class}	"
+
+			data-field="phone"
+	
+	data-cellId="grid_cell_field9" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN phone_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field9" {$item_simple_grid_field9} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="phone" data-fieldname="phone" data-default-width >
+{$phone_value}
+</span>
+{END phone_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field9}
+									{BEGIN cellblock_grid_cell_field10}
+	<td
+	
+	{$cell_grid_cell_field10}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$email_class}	"
+
+			data-field="email"
+	
+	data-cellId="grid_cell_field10" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN email_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field10" {$item_simple_grid_field10} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="email" data-fieldname="email" data-default-width >
+{$email_value}
+</span>
+{END email_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field10}
+									{BEGIN cellblock_grid_cell_field11}
+	<td
+	
+	{$cell_grid_cell_field11}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_id_class}	"
+
+			data-field="training_id"
+	
+	data-cellId="grid_cell_field11" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN training_id_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field11" {$item_simple_grid_field11} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_id" data-fieldname="training_id" data-default-width >
+{$training_id_value}
+</span>
+{END training_id_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field11}
+									{BEGIN cellblock_grid_cell_field12}
+	<td
+	
+	{$cell_grid_cell_field12}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_name_class}	"
+
+			data-field="training_name"
+	
+	data-cellId="grid_cell_field12" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN training_name_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field12" {$item_simple_grid_field12} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_name" data-fieldname="training_name" data-default-width >
+{$training_name_value}
+</span>
+{END training_name_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field12}
+									{BEGIN cellblock_grid_cell_field13}
+	<td
+	
+	{$cell_grid_cell_field13}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$program_class}	"
+
+			data-field="program"
+	
+	data-cellId="grid_cell_field13" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN program_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field13" {$item_simple_grid_field13} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="program" data-fieldname="program" data-default-width >
+{$program_value}
+</span>
+{END program_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field13}
+									{BEGIN cellblock_grid_cell_field14}
+	<td
+	
+	{$cell_grid_cell_field14}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$partners_class}	"
+
+			data-field="partners"
+	
+	data-cellId="grid_cell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN partners_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field14" {$item_simple_grid_field14} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="partners" data-fieldname="partners" data-default-width >
+{$partners_value}
+</span>
+{END partners_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field14}
+									{BEGIN cellblock_grid_cell_field15}
+	<td
+	
+	{$cell_grid_cell_field15}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_type_class}	"
+
+			data-field="training_type"
+	
+	data-cellId="grid_cell_field15" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN training_type_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field15" {$item_simple_grid_field15} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_type" data-fieldname="training_type" data-default-width >
+{$training_type_value}
+</span>
+{END training_type_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field15}
+									{BEGIN cellblock_grid_cell_field16}
+	<td
+	
+	{$cell_grid_cell_field16}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_approach_class}	"
+
+			data-field="training_approach"
+	
+	data-cellId="grid_cell_field16" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN training_approach_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field16" {$item_simple_grid_field16} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_approach" data-fieldname="training_approach" data-default-width >
+{$training_approach_value}
+</span>
+{END training_approach_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field16}
+									{BEGIN cellblock_grid_cell_field17}
+	<td
+	
+	{$cell_grid_cell_field17}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_language_class}	"
+
+			data-field="training_language"
+	
+	data-cellId="grid_cell_field17" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN training_language_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field17" {$item_simple_grid_field17} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_language" data-fieldname="training_language" data-default-width >
+{$training_language_value}
+</span>
+{END training_language_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field17}
+									{BEGIN cellblock_grid_cell_field18}
+	<td
+	
+	{$cell_grid_cell_field18}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_lead_class}	"
+
+			data-field="training_lead"
+	
+	data-cellId="grid_cell_field18" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN training_lead_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field28" {$item_simple_grid_field28} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="training_lead" data-fieldname="training_lead" data-default-width >
+{$training_lead_value}
+</span>
+{END training_lead_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field18}
+									{BEGIN cellblock_grid_cell_field19}
+	<td
+	
+	{$cell_grid_cell_field19}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$start_date_class}	"
+
+			data-field="start_date"
+	
+	data-cellId="grid_cell_field19" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN start_date_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field18" {$item_simple_grid_field18} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="start_date" data-fieldname="start_date" data-default-width >
+{$start_date_value}
+</span>
+{END start_date_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field19}
+									{BEGIN cellblock_grid_cell_field20}
+	<td
+	
+	{$cell_grid_cell_field20}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$end_date_class}	"
+
+			data-field="end_date"
+	
+	data-cellId="grid_cell_field20" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN end_date_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field19" {$item_simple_grid_field19} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="end_date" data-fieldname="end_date" data-default-width >
+{$end_date_value}
+</span>
+{END end_date_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field20}
+									{BEGIN cellblock_grid_cell_field21}
+	<td
+	
+	{$cell_grid_cell_field21}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$total_days_class}	"
+
+			data-field="total_days"
+	
+	data-cellId="grid_cell_field21" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN total_days_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field20" {$item_simple_grid_field20} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="total_days" data-fieldname="total_days" data-default-width >
+{$total_days_value}
+</span>
+{END total_days_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field21}
+									{BEGIN cellblock_grid_cell_field22}
+	<td
+	
+	{$cell_grid_cell_field22}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$days_recorded_class}	"
+
+			data-field="days_recorded"
+	
+	data-cellId="grid_cell_field22" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN days_recorded_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field21" {$item_simple_grid_field21} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="days_recorded" data-fieldname="days_recorded" data-default-width >
+{$days_recorded_value}
+</span>
+{END days_recorded_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field22}
+									{BEGIN cellblock_grid_cell_field23}
+	<td
+	
+	{$cell_grid_cell_field23}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$days_attended_class}	"
+
+			data-field="days_attended"
+	
+	data-cellId="grid_cell_field23" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN days_attended_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field22" {$item_simple_grid_field22} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="days_attended" data-fieldname="days_attended" data-default-width >
+{$days_attended_value}
+</span>
+{END days_attended_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field23}
+									{BEGIN cellblock_grid_cell_field24}
+	<td
+	
+	{$cell_grid_cell_field24}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$attendance_percentage_class}	"
+
+			data-field="attendance_percentage"
+	
+	data-cellId="grid_cell_field24" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN attendance_percentage_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field23" {$item_simple_grid_field23} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="attendance_percentage" data-fieldname="attendance_percentage" data-default-width >
+{$attendance_percentage_value}
+</span>
+{END attendance_percentage_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field24}
+									{BEGIN cellblock_grid_cell_field25}
+	<td
+	
+	{$cell_grid_cell_field25}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$attendance_status_class}	"
+
+			data-field="attendance_status"
+	
+	data-cellId="grid_cell_field25" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN attendance_status_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field24" {$item_simple_grid_field24} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="attendance_status" data-fieldname="attendance_status" data-default-width >
+{$attendance_status_value}
+</span>
+{END attendance_status_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field25}
+									{BEGIN cellblock_grid_cell_field26}
+	<td
+	
+	{$cell_grid_cell_field26}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$pre_test_score_class}	"
+
+			data-field="pre_test_score"
+	
+	data-cellId="grid_cell_field26" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN pre_test_score_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field25" {$item_simple_grid_field25} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="pre_test_score" data-fieldname="pre_test_score" data-default-width >
+{$pre_test_score_value}
+</span>
+{END pre_test_score_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field26}
+									{BEGIN cellblock_grid_cell_field27}
+	<td
+	
+	{$cell_grid_cell_field27}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$post_test_score_class}	"
+
+			data-field="post_test_score"
+	
+	data-cellId="grid_cell_field27" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN post_test_score_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field26" {$item_simple_grid_field26} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="post_test_score" data-fieldname="post_test_score" data-default-width >
+{$post_test_score_value}
+</span>
+{END post_test_score_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field27}
+									{BEGIN cellblock_grid_cell_field28}
+	<td
+	
+	{$cell_grid_cell_field28}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$ceu_points_class}	"
+
+			data-field="ceu_points"
+	
+	data-cellId="grid_cell_field28" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN ceu_points_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field27" {$item_simple_grid_field27} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="ceu_points" data-fieldname="ceu_points" data-default-width >
+{$ceu_points_value}
+</span>
+{END ceu_points_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field28}
+							</tr>
+										
+											{END grid_row}
+					</tbody>
+													<tfoot>
+			
+																																			<tr {$rowattrs} {$row_grid_2} class="{$rowclass}
+									{$gridFooter_class}
+					
+								r-gridrow
+							">
+									{BEGIN cellblock_grid_footcell_checkbox}
+	<td
+	
+	{$cell_grid_footcell_checkbox}
+	{$recordattrs}
+	class="
+		 r-ori-vert			"
+
+	
+	data-cellId="grid_footcell_checkbox" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_checkbox}
+									{BEGIN cellblock_grid_footcell_field}
+	<td
+	
+	{$cell_grid_footcell_field}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$participant_id_class}	"
+
+	
+	data-cellId="grid_footcell_field" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field}
+									{BEGIN cellblock_grid_footcell_field1}
+	<td
+	
+	{$cell_grid_footcell_field1}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$title_class}	"
+
+	
+	data-cellId="grid_footcell_field1" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field1}
+									{BEGIN cellblock_grid_footcell_field2}
+	<td
+	
+	{$cell_grid_footcell_field2}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$first_name_class}	"
+
+	
+	data-cellId="grid_footcell_field2" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field2}
+									{BEGIN cellblock_grid_footcell_field3}
+	<td
+	
+	{$cell_grid_footcell_field3}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$middle_name_class}	"
+
+	
+	data-cellId="grid_footcell_field3" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field3}
+									{BEGIN cellblock_grid_footcell_field4}
+	<td
+	
+	{$cell_grid_footcell_field4}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$last_name_class}	"
+
+	
+	data-cellId="grid_footcell_field4" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field4}
+									{BEGIN cellblock_grid_footcell_field5}
+	<td
+	
+	{$cell_grid_footcell_field5}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$gender_class}	"
+
+	
+	data-cellId="grid_footcell_field5" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field5}
+									{BEGIN cellblock_grid_footcell_field6}
+	<td
+	
+	{$cell_grid_footcell_field6}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$participant_role_class}	"
+
+	
+	data-cellId="grid_footcell_field6" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field6}
+									{BEGIN cellblock_grid_footcell_field7}
+	<td
+	
+	{$cell_grid_footcell_field7}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$country_class}	"
+
+	
+	data-cellId="grid_footcell_field7" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field7}
+									{BEGIN cellblock_grid_footcell_field8}
+	<td
+	
+	{$cell_grid_footcell_field8}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$facility_class}	"
+
+	
+	data-cellId="grid_footcell_field8" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field8}
+									{BEGIN cellblock_grid_footcell_field9}
+	<td
+	
+	{$cell_grid_footcell_field9}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$phone_class}	"
+
+	
+	data-cellId="grid_footcell_field9" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field9}
+									{BEGIN cellblock_grid_footcell_field10}
+	<td
+	
+	{$cell_grid_footcell_field10}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$email_class}	"
+
+	
+	data-cellId="grid_footcell_field10" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field10}
+									{BEGIN cellblock_grid_footcell_field11}
+	<td
+	
+	{$cell_grid_footcell_field11}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_id_class}	"
+
+	
+	data-cellId="grid_footcell_field11" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field11}
+									{BEGIN cellblock_grid_footcell_field12}
+	<td
+	
+	{$cell_grid_footcell_field12}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_name_class}	"
+
+	
+	data-cellId="grid_footcell_field12" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field12}
+									{BEGIN cellblock_grid_footcell_field13}
+	<td
+	
+	{$cell_grid_footcell_field13}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$program_class}	"
+
+	
+	data-cellId="grid_footcell_field13" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field13}
+									{BEGIN cellblock_grid_footcell_field14}
+	<td
+	
+	{$cell_grid_footcell_field14}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$partners_class}	"
+
+	
+	data-cellId="grid_footcell_field14" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field14}
+									{BEGIN cellblock_grid_footcell_field15}
+	<td
+	
+	{$cell_grid_footcell_field15}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_type_class}	"
+
+	
+	data-cellId="grid_footcell_field15" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field15}
+									{BEGIN cellblock_grid_footcell_field16}
+	<td
+	
+	{$cell_grid_footcell_field16}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_approach_class}	"
+
+	
+	data-cellId="grid_footcell_field16" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field16}
+									{BEGIN cellblock_grid_footcell_field17}
+	<td
+	
+	{$cell_grid_footcell_field17}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_language_class}	"
+
+	
+	data-cellId="grid_footcell_field17" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field17}
+									{BEGIN cellblock_grid_footcell_field18}
+	<td
+	
+	{$cell_grid_footcell_field18}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$training_lead_class}	"
+
+	
+	data-cellId="grid_footcell_field18" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field18}
+									{BEGIN cellblock_grid_footcell_field19}
+	<td
+	
+	{$cell_grid_footcell_field19}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$start_date_class}	"
+
+	
+	data-cellId="grid_footcell_field19" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field19}
+									{BEGIN cellblock_grid_footcell_field20}
+	<td
+	
+	{$cell_grid_footcell_field20}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$end_date_class}	"
+
+	
+	data-cellId="grid_footcell_field20" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field20}
+									{BEGIN cellblock_grid_footcell_field21}
+	<td
+	
+	{$cell_grid_footcell_field21}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$total_days_class}	"
+
+	
+	data-cellId="grid_footcell_field21" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field21}
+									{BEGIN cellblock_grid_footcell_field22}
+	<td
+	
+	{$cell_grid_footcell_field22}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$days_recorded_class}	"
+
+	
+	data-cellId="grid_footcell_field22" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field22}
+									{BEGIN cellblock_grid_footcell_field23}
+	<td
+	
+	{$cell_grid_footcell_field23}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$days_attended_class}	"
+
+	
+	data-cellId="grid_footcell_field23" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field23}
+									{BEGIN cellblock_grid_footcell_field24}
+	<td
+	
+	{$cell_grid_footcell_field24}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$attendance_percentage_class}	"
+
+	
+	data-cellId="grid_footcell_field24" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field24}
+									{BEGIN cellblock_grid_footcell_field25}
+	<td
+	
+	{$cell_grid_footcell_field25}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$attendance_status_class}	"
+
+	
+	data-cellId="grid_footcell_field25" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field25}
+									{BEGIN cellblock_grid_footcell_field26}
+	<td
+	
+	{$cell_grid_footcell_field26}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$pre_test_score_class}	"
+
+	
+	data-cellId="grid_footcell_field26" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field26}
+									{BEGIN cellblock_grid_footcell_field27}
+	<td
+	
+	{$cell_grid_footcell_field27}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$post_test_score_class}	"
+
+	
+	data-cellId="grid_footcell_field27" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field27}
+									{BEGIN cellblock_grid_footcell_field28}
+	<td
+	
+	{$cell_grid_footcell_field28}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$ceu_points_class}	"
+
+	
+	data-cellId="grid_footcell_field28" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="aio_training_tracking_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field28}
+							</tr>
+					
+					</tfoot>
+				</table>
+{END grid_block}
+	
+			{BEGIN below-grid_outerblock}
+		<div class="panel-footer">
+			{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="leftbar" {$form_below-grid} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class="r-align-center r-ori-vert			col-md-12
+	
+">
+		 
+		{BEGIN pagination_block}
+<span data-itemtype="pagination" data-itemid="pagination" {$item_pagination} data-pageid="{$pageid}" >
+{$pagination}
+</span>
+{END pagination_block}
+		</div>					</div>
+			</div>		
+{END below-grid_block}
+		</div>
+	{END below-grid_outerblock}
+		</div>
+
+</div>
+
+
+
+
+										{$footer}
+				</div>
+			</div>
+			<div class="r-body-shadow">
+			</div>
+		</div>
+	{END body}
+	</body>
+</html>
