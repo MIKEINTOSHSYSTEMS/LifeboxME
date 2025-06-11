@@ -19,7 +19,8 @@ EOF
 fi
 
 # Start the containers
-docker-compose -p lifebox -f dev.docker-compose.yml --env-file $ENV_FILE up -d
+#docker-compose -p lifebox -f dev.docker-compose.yml --env-file $ENV_FILE up -d
+docker-compose -p lifebox --env-file .env.dev -f dev.docker-compose.yml up -d
 
 # Show status
 echo "Containers started. Running containers:"

@@ -4,8 +4,9 @@
 export ENV_FILE=.env.dev
 
 # Stop and remove containers with volumes
-docker-compose -p lifebox -f dev.docker-compose.yml --env-file $ENV_FILE down --volumes
-
+#docker-compose -p lifebox -f dev.docker-compose.yml --env-file $ENV_FILE down --volumes
+#docker-compose -p lifebox down --volumes
+docker-compose -p lifebox -f dev.docker-compose.yml down --volumes
 # Clean data directories (commented out by default - uncomment if needed)
 # echo "Cleaning data directories..."
 # rm -rf ./data/pgadmin-data
