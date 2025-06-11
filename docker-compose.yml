@@ -75,7 +75,8 @@ services:
     restart: unless-stopped
     ports:
       #- "127.0.0.1:4000:3000"
-      - "4000:3000"
+      - "0.0.0.0:4000:3000"
+      #- "4000:3000"
     environment:
       MB_DB_TYPE: postgres
       MB_DB_DBNAME: lifeboxmeta

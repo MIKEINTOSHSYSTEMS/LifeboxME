@@ -104,7 +104,8 @@ services:
     restart: unless-stopped
     ports:
       #- "127.0.0.1:${METABASE_PORT}:3000"
-      - "${METABASE_PORT}:3000"
+      - "0.0.0.0:${METABASE_PORT}:3000"
+#      - "${METABASE_PORT}:3000"
     environment:
       MB_DB_TYPE: postgres
       MB_DB_DBNAME: ${MB_DB_DBNAME}
