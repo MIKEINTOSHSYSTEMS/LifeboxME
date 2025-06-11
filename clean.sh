@@ -4,8 +4,16 @@ set -e
 cd "$(dirname "$0")"
 ENV_FILE=.env.dev
 
+# Prompt the user for confirmation
 read -p "Are you sure you want to permanently delete all containers, images, volumes, and data directories? [y/N] " confirm
-if [[ $confirm != "y" ]]; then
+
+# Normalize input (lowercase and trim spaces)
+confirm=$(echo "$confirm" | tr '[:upper:]' '[:lower:]' | xargs)
+
+# Check if the input is 'y' or 'yes'
+if [[ "$confirm" == "y" || "$confirm" == "yes" ]]; then
+  echo "Proceeding with cleanup..."
+else
   echo "Aborting cleanup."
   exit 1
 fi
