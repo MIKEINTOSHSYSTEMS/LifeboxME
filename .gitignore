@@ -14,3 +14,4 @@ api/database/main/test.php
 note.txt
 prod.docker-compose.yml
 .env.prod
+.htaccess

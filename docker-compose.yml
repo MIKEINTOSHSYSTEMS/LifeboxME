@@ -88,6 +88,7 @@ services:
       MB_ADMIN_EMAIL: lifebox@cloud.merqconsultancy.org
       MB_ADMIN_FIRST_NAME: LIFEBOX
       MB_ADMIN_PASSWORD: lifeboxme0
+      MB_SITE_URL: https://lifebox.merqconsultancy.org/metabase/
 #      MB_SITE_URL: http://localhost:4000
     networks:
       lifeboxnet:

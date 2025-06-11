@@ -104,7 +104,7 @@ services:
     restart: unless-stopped
     ports:
       #- "127.0.0.1:${METABASE_PORT}:3000"
-      - "0.0.0.0:${METABASE_PORT}:3000"
+      - "127.0.0.1:${METABASE_PORT}:3000"
 #      - "${METABASE_PORT}:3000"
     environment:
       MB_DB_TYPE: postgres
@@ -116,6 +116,7 @@ services:
       MB_ADMIN_EMAIL: ${MB_ADMIN_EMAIL}
       MB_ADMIN_FIRST_NAME: ${MB_ADMIN_FIRST_NAME}
       MB_ADMIN_PASSWORD: ${MB_ADMIN_PASSWORD}
+      MB_SITE_URL: https://${BASE_URL}/metabase/
       #MB_SITE_URL: http://localhost:${METABASE_PORT}
     networks:
       lifeboxnet:
