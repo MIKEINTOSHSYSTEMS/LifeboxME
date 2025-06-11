@@ -120,7 +120,7 @@ services:
       MB_ADMIN_EMAIL: ${MB_ADMIN_EMAIL}
       MB_ADMIN_FIRST_NAME: ${MB_ADMIN_FIRST_NAME}
       MB_ADMIN_PASSWORD: ${MB_ADMIN_PASSWORD}
-      MB_JETTY_PATH: /metabase # Optional, set if you want to change the context path
+      #MB_JETTY_PATH: /metabase # Optional, set if you want to change the context path
       MB_SITE_URL: https://${BASE_URL}/metabase/
       #MB_SITE_URL: http://localhost:${METABASE_PORT}
     networks:
