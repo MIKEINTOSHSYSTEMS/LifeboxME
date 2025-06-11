@@ -1,0 +1,145 @@
+version: '3.8'
+##########################################################################
+# Start all services in detached mode (using .env variables automatically)
+#docker-compose -p lifebox up -d
+
+# Alternative form (explicitly specifying compose file - .env is still used)
+#docker-compose -p lifebox -f dev.docker-compose.yml up -d
+
+# Stop and remove all containers, networks, volumes, and images
+#docker-compose -p lifebox down --volumes --rmi all
+
+# Alternative form for down command
+#docker-compose -p lifebox -f dev.docker-compose.yml down --volumes --rmi all
+
+##########################################################################
+
+# View logs (follow mode)
+#docker-compose -p lifebox logs -f
+
+# Access PostgreSQL database (note: USER comes from .env now)
+#docker-compose -p lifebox exec -it lifeboxme_db psql -U ${POSTGRES_USER} -d ${POSTGRES_DB}
+
+# Access pgAdmin container
+#docker-compose -p lifebox exec -it lifeboxme_pgadmin bash
+
+# Configure pgAdmin servers (Python commands remain the same)
+#docker-compose -p lifebox exec -it lifeboxme_pgadmin python3 /pgadmin4/servers.py
+#docker-compose -p lifebox exec -it lifeboxme_pgadmin python3 /pgadmin4/servers.py --load-servers /pgadmin4/servers.json
+
+##########################################################################
+
+# Clean data directories (same as before)
+#rm -rf ./data/pgadmin-data
+#rm -rf ./data/postgres-data
+#rm -rf ./data/postgres-init
+
+# Create directories (same as before)
+#mkdir -p ./data/pgadmin-data
+#mkdir -p ./data/postgres-data
+#mkdir -p ./data/postgres-init
+
+##########################################################################
+
+# To see resolved configuration with variables substituted
+#docker-compose -p lifebox config
+
+# To use a different .env file (e.g., for production)
+#docker-compose -p lifebox --env-file .env.prod up -d
+
+# To check environment variables being used
+#docker-compose -p lifebox exec lifeboxme_db env
+##########################################################################
+
+services:
+  lifeboxme_db:
+    container_name: lifeboxme_db
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_ROOT_PASSWORD: ${POSTGRES_ROOT_PASSWORD}
+      TZ: UTC
+    networks:
+      lifeboxnet:
+        ipv4_address: ${DB_IP}
+    volumes:
+      - lifeboxme_db_data:/var/lib/postgresql/data
+      - ./data/postgres-init:/docker-entrypoint-initdb.d
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  lifeboxme_pgadmin:
+    container_name: lifeboxme_pgadmin
+    image: dpage/pgadmin4:latest
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: 'True'
+      PGADMIN_CONFIG_CONSOLE_LOG_LEVEL: '10'
+    networks:
+      lifeboxnet:
+        ipv4_address: ${PGADMIN_IP}
+    volumes:
+      - lifeboxme_pgadmin_data:/var/lib/pgadmin
+      - ./pgadmin-servers.json:/pgadmin4/servers.json
+    ports:
+      - "${PGADMIN_PORT}:80"
+    depends_on:
+      lifeboxme_db:
+        condition: service_healthy
+
+  lifeboxme_metabase:
+    image: metabase/metabase:latest
+    container_name: lifeboxme_metabase
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${METABASE_PORT}:3000"
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: ${MB_DB_DBNAME}
+      MB_DB_PORT: ${POSTGRES_PORT}
+      MB_DB_USER: ${POSTGRES_USER}
+      MB_DB_PASS: ${POSTGRES_PASSWORD}
+      MB_DB_HOST: lifeboxme_db
+      MB_ADMIN_EMAIL: ${MB_ADMIN_EMAIL}
+      MB_ADMIN_FIRST_NAME: ${MB_ADMIN_FIRST_NAME}
+      MB_ADMIN_PASSWORD: ${MB_ADMIN_PASSWORD}
+      MB_SITE_URL: http://localhost:${METABASE_PORT}
+    networks:
+      lifeboxnet:
+        ipv4_address: ${METABASE_IP}
+    depends_on:
+      lifeboxme_db:
+        condition: service_healthy
+
+networks:
+  lifeboxnet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${NETWORK_SUBNET}
+          gateway: ${NETWORK_GATEWAY}
+
+volumes:
+  lifeboxme_db_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data/postgres-data
+  lifeboxme_pgadmin_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data/pgadmin-data

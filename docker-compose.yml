@@ -69,6 +69,31 @@ services:
       lifeboxme_db:
         condition: service_healthy
 
+  lifeboxme_metabase:
+    image: metabase/metabase:latest
+    container_name: lifeboxme_metabase
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:4000:3000"
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: lifeboxmeta
+      MB_DB_PORT: 5432
+      MB_DB_USER: postgres
+      MB_DB_PASS: mikeintosh
+#      MB_DB_HOST: 192.168.47.2  # Using IP address directly is not recommended in production for dev Only
+      MB_DB_HOST: lifeboxme_db  # Using service name instead of IP
+      MB_ADMIN_EMAIL: lifebox@cloud.merqconsultancy.org
+      MB_ADMIN_FIRST_NAME: LIFEBOX
+      MB_ADMIN_PASSWORD: lifeboxme0
+#      MB_SITE_URL: http://localhost:4000
+    networks:
+      lifeboxnet:
+        ipv4_address: 192.168.47.4
+    depends_on:
+      lifeboxme_db:
+        condition: service_healthy
+
 networks:
   lifeboxnet:
     driver: bridge
