@@ -408,7 +408,7 @@ if ($action === 'restore_progress' && isset($_GET['file'])) {
 
             for ($i = 0; $i < $len; $i++) {
                 $char = $backupContent[$i];
-
+                
                 // Handle dollar-quoted strings
                 if (!$inString && $char === '$') {
                     // Check if we're at the start of a dollar quote
@@ -418,7 +418,7 @@ if ($action === 'restore_progress' && isset($_GET['file'])) {
                         $potentialTag .= $backupContent[$j];
                         $j++;
                     }
-
+                    
                     if ($j < $len && $backupContent[$j] === '$') {
                         if ($inDollarQuote && $potentialTag === $dollarTag) {
                             // End of dollar quote
@@ -438,21 +438,21 @@ if ($action === 'restore_progress' && isset($_GET['file'])) {
                         continue;
                     }
                 }
-
+                
                 // Handle regular strings
                 if ($char === "'" && !$inDollarQuote && !$escapeNext) {
                     $inString = !$inString;
                 }
-
+                
                 // Handle escape sequences
                 if ($char === "\\" && $inString) {
                     $escapeNext = !$escapeNext;
                 } else {
                     $escapeNext = false;
                 }
-
+                
                 $current .= $char;
-
+                
                 // Detect statement boundaries
                 if (!$inString && !$inDollarQuote && $char === ';') {
                     $statements[] = trim($current);
@@ -493,7 +493,7 @@ if ($action === 'restore_progress' && isset($_GET['file'])) {
             $currentStatement = 0;
             $batchSize = 10;
             $batch = [];
-
+            
             foreach ($statements as $statement) {
                 $currentStatement++;
                 $statement = trim($statement);
@@ -503,17 +503,17 @@ if ($action === 'restore_progress' && isset($_GET['file'])) {
                 if (strpos($statement, '--') === 0) continue;
 
                 $batch[] = $statement;
-
+                
                 // Execute in batches or if it's the last statement
                 if (count($batch) >= $batchSize || $currentStatement == $totalStatements) {
                     $progress = 10 + intval(($currentStatement / $totalStatements) * 85);
-
+                    
                     // Log every 10 statements
                     if ($currentStatement % 10 === 0) {
                         $logContent .= "Executing statement $currentStatement/$totalStatements\n";
                         file_put_contents($logFile, $logContent);
                     }
-
+                    
                     // Execute each statement in the batch
                     foreach ($batch as $stmt) {
                         $result = @pg_query($conn, $stmt);
@@ -525,7 +525,7 @@ if ($action === 'restore_progress' && isset($_GET['file'])) {
                             }
                         }
                     }
-
+                    
                     $batch = []; // Reset batch
                 }
             }
@@ -980,8 +980,7 @@ function formatSize($bytes)
                                     </button>
                                 </form>
                                 <button class="btn waves-effect waves-light teal">
-                                    <!--<a href="./index.php?action=backup_progress">-->
-                                    <a href="#">
+                                    <a href="./index.php?action=backup_progress">
                                         <i class="material-icons left">restore</i>View Last Backup Logs
                                     </a>
                                 </button>
