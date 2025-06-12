@@ -8,8 +8,11 @@ data/postgres-data/
 data/pgadmin-init/
 api/gen
 api/dhis2
+api/database/main/0.php
+api/database/main/*.sql
 api/database/main/backup
 api/database/main/test.php
+api/database/test/
 .env
 note.txt
 prod.docker-compose.yml
