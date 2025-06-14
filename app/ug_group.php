@@ -69,6 +69,7 @@ $nonAdminTablesArr[] = "public.donors";
 $nonAdminTablesArr[] = "public.device_distribution_log";
 $nonAdminTablesArr[] = "public.device_inventory_changes";
 $nonAdminTablesArr[] = "aio_training_tracking";
+$nonAdminTablesArr[] = "Dashboard";
 
 $ug_connection = $cman->getForUserGroups();
 

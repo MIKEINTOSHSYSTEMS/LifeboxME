@@ -311,6 +311,8 @@ function checkTableName($shortTName )
 		return true;
 	if ("aio_training_tracking" == $shortTName )
 		return true;
+	if ("dashboard" == $shortTName )
+		return true;
 	return false;
 }
 
@@ -847,6 +849,15 @@ function GetTablesList($pdfMode = false)
 	if( $tableAvailable ) {
 		$arr[]="aio_training_tracking";
 	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("Dashboard");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="Dashboard";
+	}
 	return $arr;
 }
 
@@ -910,6 +921,7 @@ function GetTablesListWithoutSecurity()
 	$arr[]="public.device_distribution_log";
 	$arr[]="public.device_inventory_changes";
 	$arr[]="aio_training_tracking";
+	$arr[]="Dashboard";
 	return $arr;
 }
 
@@ -1806,6 +1818,11 @@ function GetUserPermissionsStatic( $table )
 	{
 //	default permissions
 		return "ADESPI".$extraPerm;
+	}
+	if( $table=="Dashboard" )
+	{
+//	default permissions
+		return "S".$extraPerm;
 	}
 	// grant nothing by default
 	return "";

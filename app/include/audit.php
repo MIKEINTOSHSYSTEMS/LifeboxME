@@ -626,6 +626,10 @@ class AuditTrailTable
 		{
 			return false;
 		}
+		if($table=="Dashboard")
+		{
+			return false;
+		}
 	}
 
 	protected function insert($datetime, $ip, $user, $table, $action, $description)
@@ -1201,6 +1205,10 @@ class AuditTrailFile
 			return false;
 		}
 		if($table=="aio_training_tracking")
+		{
+			return false;
+		}
+		if($table=="Dashboard")
 		{
 			return false;
 		}

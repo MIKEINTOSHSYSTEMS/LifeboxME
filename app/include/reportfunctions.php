@@ -534,6 +534,10 @@ function testAdvSearch($table)
 		{
 			return 1;
 		}
+		if($table=="Dashboard")
+		{
+			return 1;
+		}
 	}
 	elseif(is_wr_db())
 	{
@@ -1002,6 +1006,10 @@ function getCaptionTable($table)
 	if($table=="aio_training_tracking")
 	{
 		return "Aio Training Tracking";
+	}
+	if($table=="Dashboard")
+	{
+		return "Dashboard";
 	}
 	return $table;
 }

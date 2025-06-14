@@ -85,7 +85,7 @@
 
         .components {
             padding: 7px 0;
-            background: white;
+            background: transparent;/*white;*/
         }
 
         /* Custom tab styles */
@@ -106,7 +106,28 @@
 
         .nav-link:focus,
         .nav-link:hover {
-            color: #FF8000FF;
+            color: #ffc107;
+        }
+
+        .tab-content {
+            padding: 30px;
+            background: transparent;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--bs-body-font-family);
+            font-size: var(--bs-body-font-size);
+            font-weight: var(--bs-body-font-weight);
+            line-height: var(--bs-body-line-height);
+            color: var(--bs-body-color);
+            text-align: var(--bs-body-text-align);
+            background-color: transparent;
+            /*var(--bs-body-bg);*/
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
         }
     </style>
 </head>
@@ -143,7 +164,18 @@
                         <div class="section-title">
                             <h2>
                                 <div class="logo-text">
-                                    <span>Welcome</span><span> To</span><span> Lifebox</span> <span>M</span><span>&amp;</span><span>E</span> <span>System</span>
+                                    <span>Welcome</span><span> To</span>
+                                    <!--<span> Lifebox</span> <span>M</span><span>&amp;</span><span>E</span> <span>System</span>-->
+                                </div>
+                                <div style="font-size: 17px; font-weight: bold;">
+
+                                    <img src="../../assets/img/lblogo-white.svg" height="47px"></img>
+                                    <br>
+                                    </br>
+                                    <span style="color: red;">M</span>
+                                    <span style="color: #D5F7FFFF;">&amp;</span>
+                                    <span style="color: orange;">E</span>
+                                    <span style="color: #FAFFAFFF;"> System</span>
                                 </div>
                             </h2>
                             <p>Explore the comprehensive modules that make up the Lifebox M&E System.</p>

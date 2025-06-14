@@ -3686,6 +3686,8 @@ function fillProjectEntites()
 	$projectEntitiesReverse[ "device_inventory_changes" ] = "public.device_inventory_changes";
 	$projectEntities[ "aio_training_tracking" ] = array( "url" => "aio_training_tracking", "type" => 6 );
 	$projectEntitiesReverse[ "aio_training_tracking" ] = "aio_training_tracking";
+	$projectEntities[ "Dashboard" ] = array( "url" => "dashboard", "type" => 4 );
+	$projectEntitiesReverse[ "dashboard" ] = "Dashboard";
 }
 
 function findTable( $table ) {
