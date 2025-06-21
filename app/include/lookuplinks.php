@@ -673,10 +673,10 @@ function InitLookupLinks()
 		if( !isset( $lookupTableLinks["Lifebox_DHIS2_OrgUnits"] ) ) {
 			$lookupTableLinks["Lifebox_DHIS2_OrgUnits"] = array();
 		}
-		if( !isset( $lookupTableLinks["Lifebox_DHIS2_OrgUnits"]["lifebox_dhis2_orgunits.Hospital_Facility_Name"] )) {
-			$lookupTableLinks["Lifebox_DHIS2_OrgUnits"]["lifebox_dhis2_orgunits.Hospital_Facility_Name"] = array();
+		if( !isset( $lookupTableLinks["Lifebox_DHIS2_OrgUnits"]["lifebox_dhis2_orgunits.Hospital_Facility"] )) {
+			$lookupTableLinks["Lifebox_DHIS2_OrgUnits"]["lifebox_dhis2_orgunits.Hospital_Facility"] = array();
 		}
-		$lookupTableLinks["Lifebox_DHIS2_OrgUnits"]["lifebox_dhis2_orgunits.Hospital_Facility_Name"]["edit"] = array("table" => "Lifebox_DHIS2_OrgUnits", "field" => "Hospital_Facility_Name", "page" => "edit");
+		$lookupTableLinks["Lifebox_DHIS2_OrgUnits"]["lifebox_dhis2_orgunits.Hospital_Facility"]["edit"] = array("table" => "Lifebox_DHIS2_OrgUnits", "field" => "Hospital_Facility", "page" => "edit");
 }
 
 ?>

@@ -25,33 +25,33 @@ if(mlang_getcurrentlang()=="English")
 	$fieldToolTipslifebox_dhis2_orgunits["English"] = array();
 	$placeHolderslifebox_dhis2_orgunits["English"] = array();
 	$pageTitleslifebox_dhis2_orgunits["English"] = array();
-	$fieldLabelslifebox_dhis2_orgunits["English"]["Lifebox_International_ID"] = "Lifebox International ID";
-	$fieldToolTipslifebox_dhis2_orgunits["English"]["Lifebox_International_ID"] = "";
-	$placeHolderslifebox_dhis2_orgunits["English"]["Lifebox_International_ID"] = "";
-	$fieldLabelslifebox_dhis2_orgunits["English"]["Lifebox_International"] = "Lifebox International";
-	$fieldToolTipslifebox_dhis2_orgunits["English"]["Lifebox_International"] = "";
-	$placeHolderslifebox_dhis2_orgunits["English"]["Lifebox_International"] = "";
-	$fieldLabelslifebox_dhis2_orgunits["English"]["Continent_ID"] = "Continent ID";
-	$fieldToolTipslifebox_dhis2_orgunits["English"]["Continent_ID"] = "";
-	$placeHolderslifebox_dhis2_orgunits["English"]["Continent_ID"] = "";
 	$fieldLabelslifebox_dhis2_orgunits["English"]["Continent"] = "Continent";
 	$fieldToolTipslifebox_dhis2_orgunits["English"]["Continent"] = "";
 	$placeHolderslifebox_dhis2_orgunits["English"]["Continent"] = "";
-	$fieldLabelslifebox_dhis2_orgunits["English"]["Country_ID"] = "Country ID";
-	$fieldToolTipslifebox_dhis2_orgunits["English"]["Country_ID"] = "";
-	$placeHolderslifebox_dhis2_orgunits["English"]["Country_ID"] = "";
 	$fieldLabelslifebox_dhis2_orgunits["English"]["Country"] = "Country";
 	$fieldToolTipslifebox_dhis2_orgunits["English"]["Country"] = "";
 	$placeHolderslifebox_dhis2_orgunits["English"]["Country"] = "";
-	$fieldLabelslifebox_dhis2_orgunits["English"]["Hospital_Facility_ID"] = "Hospital Facility ID";
-	$fieldToolTipslifebox_dhis2_orgunits["English"]["Hospital_Facility_ID"] = "";
-	$placeHolderslifebox_dhis2_orgunits["English"]["Hospital_Facility_ID"] = "";
-	$fieldLabelslifebox_dhis2_orgunits["English"]["Hospital_Facility_Name"] = "Hospital Facility Name";
-	$fieldToolTipslifebox_dhis2_orgunits["English"]["Hospital_Facility_Name"] = "";
-	$placeHolderslifebox_dhis2_orgunits["English"]["Hospital_Facility_Name"] = "";
 	$fieldLabelslifebox_dhis2_orgunits["English"]["Level"] = "Level";
 	$fieldToolTipslifebox_dhis2_orgunits["English"]["Level"] = "";
 	$placeHolderslifebox_dhis2_orgunits["English"]["Level"] = "";
+	$fieldLabelslifebox_dhis2_orgunits["English"]["LB_Int_ID"] = "LB";
+	$fieldToolTipslifebox_dhis2_orgunits["English"]["LB_Int_ID"] = "";
+	$placeHolderslifebox_dhis2_orgunits["English"]["LB_Int_ID"] = "";
+	$fieldLabelslifebox_dhis2_orgunits["English"]["LB_Int"] = "LB Int";
+	$fieldToolTipslifebox_dhis2_orgunits["English"]["LB_Int"] = "";
+	$placeHolderslifebox_dhis2_orgunits["English"]["LB_Int"] = "";
+	$fieldLabelslifebox_dhis2_orgunits["English"]["Cont_ID"] = "Cont_ID";
+	$fieldToolTipslifebox_dhis2_orgunits["English"]["Cont_ID"] = "";
+	$placeHolderslifebox_dhis2_orgunits["English"]["Cont_ID"] = "";
+	$fieldLabelslifebox_dhis2_orgunits["English"]["Count_ID"] = "Count_ID";
+	$fieldToolTipslifebox_dhis2_orgunits["English"]["Count_ID"] = "";
+	$placeHolderslifebox_dhis2_orgunits["English"]["Count_ID"] = "";
+	$fieldLabelslifebox_dhis2_orgunits["English"]["Hosp_Fac_ID"] = "Hosp_Fac_ID";
+	$fieldToolTipslifebox_dhis2_orgunits["English"]["Hosp_Fac_ID"] = "";
+	$placeHolderslifebox_dhis2_orgunits["English"]["Hosp_Fac_ID"] = "";
+	$fieldLabelslifebox_dhis2_orgunits["English"]["Hospital_Facility"] = "Hospital/Facility";
+	$fieldToolTipslifebox_dhis2_orgunits["English"]["Hospital_Facility"] = "";
+	$placeHolderslifebox_dhis2_orgunits["English"]["Hospital_Facility"] = "";
 	if (count($fieldToolTipslifebox_dhis2_orgunits["English"]))
 		$tdatalifebox_dhis2_orgunits[".isUseToolTips"] = true;
 }
@@ -169,14 +169,14 @@ $tdatalifebox_dhis2_orgunits[".filterFields"] = array();
 $tdatalifebox_dhis2_orgunits[".requiredSearchFields"] = array();
 
 $tdatalifebox_dhis2_orgunits[".googleLikeFields"] = array();
-$tdatalifebox_dhis2_orgunits[".googleLikeFields"][] = "Lifebox International ID";
-$tdatalifebox_dhis2_orgunits[".googleLikeFields"][] = "Lifebox International";
-$tdatalifebox_dhis2_orgunits[".googleLikeFields"][] = "Continent ID";
+$tdatalifebox_dhis2_orgunits[".googleLikeFields"][] = "LB_Int_ID";
+$tdatalifebox_dhis2_orgunits[".googleLikeFields"][] = "LB_Int";
+$tdatalifebox_dhis2_orgunits[".googleLikeFields"][] = "Cont_ID";
 $tdatalifebox_dhis2_orgunits[".googleLikeFields"][] = "Continent";
-$tdatalifebox_dhis2_orgunits[".googleLikeFields"][] = "Country ID";
+$tdatalifebox_dhis2_orgunits[".googleLikeFields"][] = "Count_ID";
 $tdatalifebox_dhis2_orgunits[".googleLikeFields"][] = "Country";
-$tdatalifebox_dhis2_orgunits[".googleLikeFields"][] = "Hospital_Facility_ID";
-$tdatalifebox_dhis2_orgunits[".googleLikeFields"][] = "Hospital_Facility_Name";
+$tdatalifebox_dhis2_orgunits[".googleLikeFields"][] = "Hosp_Fac_ID";
+$tdatalifebox_dhis2_orgunits[".googleLikeFields"][] = "Hospital_Facility";
 $tdatalifebox_dhis2_orgunits[".googleLikeFields"][] = "Level";
 
 
@@ -261,14 +261,14 @@ $tdatalifebox_dhis2_orgunits[".hideMobileList"] = array();
 
 
 
-//	Lifebox International ID
+//	LB_Int_ID
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 1;
-	$fdata["strName"] = "Lifebox International ID";
-	$fdata["GoodName"] = "Lifebox_International_ID";
+	$fdata["strName"] = "LB_Int_ID";
+	$fdata["GoodName"] = "LB_Int_ID";
 	$fdata["ownerTable"] = "";
-	$fdata["Label"] = GetFieldLabel("Lifebox_DHIS2_OrgUnits","Lifebox_International_ID");
+	$fdata["Label"] = GetFieldLabel("Lifebox_DHIS2_OrgUnits","LB_Int_ID");
 	$fdata["FieldType"] = 202;
 
 
@@ -276,11 +276,11 @@ $tdatalifebox_dhis2_orgunits[".hideMobileList"] = array();
 	
 			
 
-		$fdata["strField"] = "data/*/Lifebox International ID";
+		$fdata["strField"] = "data/*/LB_Int_ID";
 
 	
 	
-		$fdata["FullName"] = "Lifebox International ID";
+		$fdata["FullName"] = "LB_Int_ID";
 
 	
 	
@@ -395,16 +395,16 @@ $tdatalifebox_dhis2_orgunits[".hideMobileList"] = array();
 //end of Filters settings
 
 
-	$tdatalifebox_dhis2_orgunits["Lifebox International ID"] = $fdata;
-		$tdatalifebox_dhis2_orgunits[".searchableFields"][] = "Lifebox International ID";
-//	Lifebox International
+	$tdatalifebox_dhis2_orgunits["LB_Int_ID"] = $fdata;
+		$tdatalifebox_dhis2_orgunits[".searchableFields"][] = "LB_Int_ID";
+//	LB_Int
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 2;
-	$fdata["strName"] = "Lifebox International";
-	$fdata["GoodName"] = "Lifebox_International";
+	$fdata["strName"] = "LB_Int";
+	$fdata["GoodName"] = "LB_Int";
 	$fdata["ownerTable"] = "";
-	$fdata["Label"] = GetFieldLabel("Lifebox_DHIS2_OrgUnits","Lifebox_International");
+	$fdata["Label"] = GetFieldLabel("Lifebox_DHIS2_OrgUnits","LB_Int");
 	$fdata["FieldType"] = 202;
 
 
@@ -412,11 +412,11 @@ $tdatalifebox_dhis2_orgunits[".hideMobileList"] = array();
 	
 			
 
-		$fdata["strField"] = "data/*/Lifebox International";
+		$fdata["strField"] = "data/*/LB_Int";
 
 	
 	
-		$fdata["FullName"] = "Lifebox International";
+		$fdata["FullName"] = "LB_Int";
 
 	
 	
@@ -531,16 +531,16 @@ $tdatalifebox_dhis2_orgunits[".hideMobileList"] = array();
 //end of Filters settings
 
 
-	$tdatalifebox_dhis2_orgunits["Lifebox International"] = $fdata;
-		$tdatalifebox_dhis2_orgunits[".searchableFields"][] = "Lifebox International";
-//	Continent ID
+	$tdatalifebox_dhis2_orgunits["LB_Int"] = $fdata;
+		$tdatalifebox_dhis2_orgunits[".searchableFields"][] = "LB_Int";
+//	Cont_ID
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 3;
-	$fdata["strName"] = "Continent ID";
-	$fdata["GoodName"] = "Continent_ID";
+	$fdata["strName"] = "Cont_ID";
+	$fdata["GoodName"] = "Cont_ID";
 	$fdata["ownerTable"] = "";
-	$fdata["Label"] = GetFieldLabel("Lifebox_DHIS2_OrgUnits","Continent_ID");
+	$fdata["Label"] = GetFieldLabel("Lifebox_DHIS2_OrgUnits","Cont_ID");
 	$fdata["FieldType"] = 202;
 
 
@@ -548,11 +548,11 @@ $tdatalifebox_dhis2_orgunits[".hideMobileList"] = array();
 	
 			
 
-		$fdata["strField"] = "data/*/Continent ID";
+		$fdata["strField"] = "data/*/Cont_ID";
 
 	
 	
-		$fdata["FullName"] = "Continent ID";
+		$fdata["FullName"] = "Cont_ID";
 
 	
 	
@@ -667,8 +667,8 @@ $tdatalifebox_dhis2_orgunits[".hideMobileList"] = array();
 //end of Filters settings
 
 
-	$tdatalifebox_dhis2_orgunits["Continent ID"] = $fdata;
-		$tdatalifebox_dhis2_orgunits[".searchableFields"][] = "Continent ID";
+	$tdatalifebox_dhis2_orgunits["Cont_ID"] = $fdata;
+		$tdatalifebox_dhis2_orgunits[".searchableFields"][] = "Cont_ID";
 //	Continent
 //	Custom field settings
 	$fdata = array();
@@ -743,17 +743,19 @@ $tdatalifebox_dhis2_orgunits[".hideMobileList"] = array();
 		$edata["LCType"] = 0;
 
 	
-		
-	$edata["LinkField"] = "Continent ID";
+			$edata["LookupUnique"] = true;
+
+	$edata["LinkField"] = "Cont_ID";
 	$edata["LinkFieldType"] = 0;
 	$edata["DisplayField"] = "Continent";
 
 	
 
 	
-	$edata["LookupOrderBy"] = "";
+	$edata["LookupOrderBy"] = "Continent";
 
-	
+		$edata["LookupDesc"] = true;
+
 	
 	
 	
@@ -812,9 +814,10 @@ $tdatalifebox_dhis2_orgunits[".hideMobileList"] = array();
 
 
 //Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
+	$fdata["filterTotals"] = 1;
+		$fdata["filterMultiSelect"] = 2;
+		$fdata["filterTotalFields"] = "Level";
+		$fdata["filterFormat"] = "Values list";
 		$fdata["showCollapsed"] = false;
 
 		$fdata["sortValueType"] = 0;
@@ -831,14 +834,14 @@ $tdatalifebox_dhis2_orgunits[".hideMobileList"] = array();
 
 	$tdatalifebox_dhis2_orgunits["Continent"] = $fdata;
 		$tdatalifebox_dhis2_orgunits[".searchableFields"][] = "Continent";
-//	Country ID
+//	Count_ID
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 5;
-	$fdata["strName"] = "Country ID";
-	$fdata["GoodName"] = "Country_ID";
+	$fdata["strName"] = "Count_ID";
+	$fdata["GoodName"] = "Count_ID";
 	$fdata["ownerTable"] = "";
-	$fdata["Label"] = GetFieldLabel("Lifebox_DHIS2_OrgUnits","Country_ID");
+	$fdata["Label"] = GetFieldLabel("Lifebox_DHIS2_OrgUnits","Count_ID");
 	$fdata["FieldType"] = 202;
 
 
@@ -846,11 +849,11 @@ $tdatalifebox_dhis2_orgunits[".hideMobileList"] = array();
 	
 			
 
-		$fdata["strField"] = "data/*/Country ID";
+		$fdata["strField"] = "data/*/Count_ID";
 
 	
 	
-		$fdata["FullName"] = "Country ID";
+		$fdata["FullName"] = "Count_ID";
 
 	
 	
@@ -965,8 +968,8 @@ $tdatalifebox_dhis2_orgunits[".hideMobileList"] = array();
 //end of Filters settings
 
 
-	$tdatalifebox_dhis2_orgunits["Country ID"] = $fdata;
-		$tdatalifebox_dhis2_orgunits[".searchableFields"][] = "Country ID";
+	$tdatalifebox_dhis2_orgunits["Count_ID"] = $fdata;
+		$tdatalifebox_dhis2_orgunits[".searchableFields"][] = "Count_ID";
 //	Country
 //	Custom field settings
 	$fdata = array();
@@ -1041,18 +1044,23 @@ $tdatalifebox_dhis2_orgunits[".hideMobileList"] = array();
 		$edata["LCType"] = 0;
 
 	
-		
-	$edata["LinkField"] = "Country ID";
+			$edata["LookupUnique"] = true;
+
+	$edata["LinkField"] = "Count_ID";
 	$edata["LinkFieldType"] = 0;
 	$edata["DisplayField"] = "Country";
 
 	
 
 	
-	$edata["LookupOrderBy"] = "";
+	$edata["LookupOrderBy"] = "Country";
 
-	
-	
+		$edata["LookupDesc"] = true;
+
+		$edata["UseCategory"] = true;
+	$edata["categoryFields"] = array();
+	$edata["categoryFields"][] = array( "main" => "Cont_ID", "lookup" => "Cont_ID" );
+
 	
 	
 
@@ -1110,9 +1118,10 @@ $tdatalifebox_dhis2_orgunits[".hideMobileList"] = array();
 
 
 //Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
+	$fdata["filterTotals"] = 1;
+		$fdata["filterMultiSelect"] = 2;
+		$fdata["filterTotalFields"] = "Level";
+		$fdata["filterFormat"] = "Values list";
 		$fdata["showCollapsed"] = false;
 
 		$fdata["sortValueType"] = 0;
@@ -1129,14 +1138,14 @@ $tdatalifebox_dhis2_orgunits[".hideMobileList"] = array();
 
 	$tdatalifebox_dhis2_orgunits["Country"] = $fdata;
 		$tdatalifebox_dhis2_orgunits[".searchableFields"][] = "Country";
-//	Hospital_Facility_ID
+//	Hosp_Fac_ID
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 7;
-	$fdata["strName"] = "Hospital_Facility_ID";
-	$fdata["GoodName"] = "Hospital_Facility_ID";
+	$fdata["strName"] = "Hosp_Fac_ID";
+	$fdata["GoodName"] = "Hosp_Fac_ID";
 	$fdata["ownerTable"] = "";
-	$fdata["Label"] = GetFieldLabel("Lifebox_DHIS2_OrgUnits","Hospital_Facility_ID");
+	$fdata["Label"] = GetFieldLabel("Lifebox_DHIS2_OrgUnits","Hosp_Fac_ID");
 	$fdata["FieldType"] = 202;
 
 
@@ -1144,11 +1153,11 @@ $tdatalifebox_dhis2_orgunits[".hideMobileList"] = array();
 	
 			
 
-		$fdata["strField"] = "data/*/Hospital_Facility_ID";
+		$fdata["strField"] = "data/*/Hosp_Fac_ID";
 
 	
 	
-		$fdata["FullName"] = "Hospital_Facility_ID";
+		$fdata["FullName"] = "Hosp_Fac_ID";
 
 	
 	
@@ -1263,16 +1272,16 @@ $tdatalifebox_dhis2_orgunits[".hideMobileList"] = array();
 //end of Filters settings
 
 
-	$tdatalifebox_dhis2_orgunits["Hospital_Facility_ID"] = $fdata;
-		$tdatalifebox_dhis2_orgunits[".searchableFields"][] = "Hospital_Facility_ID";
-//	Hospital_Facility_Name
+	$tdatalifebox_dhis2_orgunits["Hosp_Fac_ID"] = $fdata;
+		$tdatalifebox_dhis2_orgunits[".searchableFields"][] = "Hosp_Fac_ID";
+//	Hospital_Facility
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 8;
-	$fdata["strName"] = "Hospital_Facility_Name";
-	$fdata["GoodName"] = "Hospital_Facility_Name";
+	$fdata["strName"] = "Hospital_Facility";
+	$fdata["GoodName"] = "Hospital_Facility";
 	$fdata["ownerTable"] = "";
-	$fdata["Label"] = GetFieldLabel("Lifebox_DHIS2_OrgUnits","Hospital_Facility_Name");
+	$fdata["Label"] = GetFieldLabel("Lifebox_DHIS2_OrgUnits","Hospital_Facility");
 	$fdata["FieldType"] = 202;
 
 
@@ -1280,11 +1289,11 @@ $tdatalifebox_dhis2_orgunits[".hideMobileList"] = array();
 	
 			
 
-		$fdata["strField"] = "data/*/Hospital_Facility_Name";
+		$fdata["strField"] = "data/*/Hospital_Facility";
 
 	
 	
-		$fdata["FullName"] = "Hospital_Facility_Name";
+		$fdata["FullName"] = "Hospital_Facility";
 
 	
 	
@@ -1339,18 +1348,23 @@ $tdatalifebox_dhis2_orgunits[".hideMobileList"] = array();
 		$edata["LCType"] = 0;
 
 	
-		
-	$edata["LinkField"] = "Hospital_Facility_ID";
+			$edata["LookupUnique"] = true;
+
+	$edata["LinkField"] = "Hosp_Fac_ID";
 	$edata["LinkFieldType"] = 0;
-	$edata["DisplayField"] = "Hospital_Facility_Name";
+	$edata["DisplayField"] = "Hospital_Facility";
 
 	
 
 	
-	$edata["LookupOrderBy"] = "";
+	$edata["LookupOrderBy"] = "Hospital_Facility";
 
-	
-	
+		$edata["LookupDesc"] = true;
+
+		$edata["UseCategory"] = true;
+	$edata["categoryFields"] = array();
+	$edata["categoryFields"][] = array( "main" => "Count_ID", "lookup" => "Count_ID" );
+
 	
 	
 
@@ -1408,9 +1422,10 @@ $tdatalifebox_dhis2_orgunits[".hideMobileList"] = array();
 
 
 //Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
+	$fdata["filterTotals"] = 1;
+		$fdata["filterMultiSelect"] = 2;
+		$fdata["filterTotalFields"] = "Level";
+		$fdata["filterFormat"] = "Values list";
 		$fdata["showCollapsed"] = false;
 
 		$fdata["sortValueType"] = 0;
@@ -1425,8 +1440,8 @@ $tdatalifebox_dhis2_orgunits[".hideMobileList"] = array();
 //end of Filters settings
 
 
-	$tdatalifebox_dhis2_orgunits["Hospital_Facility_Name"] = $fdata;
-		$tdatalifebox_dhis2_orgunits[".searchableFields"][] = "Hospital_Facility_Name";
+	$tdatalifebox_dhis2_orgunits["Hospital_Facility"] = $fdata;
+		$tdatalifebox_dhis2_orgunits[".searchableFields"][] = "Hospital_Facility";
 //	Level
 //	Custom field settings
 	$fdata = array();
@@ -1547,9 +1562,10 @@ $tdatalifebox_dhis2_orgunits[".hideMobileList"] = array();
 
 
 //Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
+	$fdata["filterTotals"] = 1;
+		$fdata["filterMultiSelect"] = 1;
+		$fdata["filterTotalFields"] = "Level";
+		$fdata["filterFormat"] = "Values list";
 		$fdata["showCollapsed"] = false;
 
 		$fdata["sortValueType"] = 0;
