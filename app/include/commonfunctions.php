@@ -315,6 +315,10 @@ function checkTableName($shortTName )
 		return true;
 	if ("lifebox_dhis2_orgunits" == $shortTName )
 		return true;
+	if ("lifeboxme_dhis2_orgunits" == $shortTName )
+		return true;
+	if ("lifebox_dhis2_settings" == $shortTName )
+		return true;
 	return false;
 }
 
@@ -869,6 +873,24 @@ function GetTablesList($pdfMode = false)
 	if( $tableAvailable ) {
 		$arr[]="Lifebox_DHIS2_OrgUnits";
 	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lifeboxme_dhis2_orgunits");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lifeboxme_dhis2_orgunits";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("Lifebox_DHIS2_Settings");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="Lifebox_DHIS2_Settings";
+	}
 	return $arr;
 }
 
@@ -934,6 +956,8 @@ function GetTablesListWithoutSecurity()
 	$arr[]="aio_training_tracking";
 	$arr[]="Dashboard";
 	$arr[]="Lifebox_DHIS2_OrgUnits";
+	$arr[]="public.lifeboxme_dhis2_orgunits";
+	$arr[]="Lifebox_DHIS2_Settings";
 	return $arr;
 }
 
@@ -1837,6 +1861,16 @@ function GetUserPermissionsStatic( $table )
 		return "S".$extraPerm;
 	}
 	if( $table=="Lifebox_DHIS2_OrgUnits" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lifeboxme_dhis2_orgunits" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="Lifebox_DHIS2_Settings" )
 	{
 //	default permissions
 		return "ADESPI".$extraPerm;

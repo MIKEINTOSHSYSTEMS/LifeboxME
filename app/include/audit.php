@@ -634,6 +634,14 @@ class AuditTrailTable
 		{
 			return false;
 		}
+		if($table=="public.lifeboxme_dhis2_orgunits")
+		{
+			return false;
+		}
+		if($table=="Lifebox_DHIS2_Settings")
+		{
+			return false;
+		}
 	}
 
 	protected function insert($datetime, $ip, $user, $table, $action, $description)
@@ -1217,6 +1225,14 @@ class AuditTrailFile
 			return false;
 		}
 		if($table=="Lifebox_DHIS2_OrgUnits")
+		{
+			return false;
+		}
+		if($table=="public.lifeboxme_dhis2_orgunits")
+		{
+			return false;
+		}
+		if($table=="Lifebox_DHIS2_Settings")
 		{
 			return false;
 		}

@@ -8,6 +8,8 @@ data/postgres-data/
 data/pgadmin-init/
 api/gen
 api/dhis2/orgunits/test/
+api/dhis2/orgunits/fetch.php
+api/dhis2/orgunits/test.php
 api/dhis2/index.php
 api/database/main/0.php
 api/database/main/*.sql

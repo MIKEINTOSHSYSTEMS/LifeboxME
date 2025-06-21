@@ -542,6 +542,14 @@ function testAdvSearch($table)
 		{
 			return 1;
 		}
+		if($table=="public.lifeboxme_dhis2_orgunits")
+		{
+			return 1;
+		}
+		if($table=="Lifebox_DHIS2_Settings")
+		{
+			return 1;
+		}
 	}
 	elseif(is_wr_db())
 	{
@@ -1018,6 +1026,14 @@ function getCaptionTable($table)
 	if($table=="Lifebox_DHIS2_OrgUnits")
 	{
 		return "Lifebox DHIS2 OrgUnits";
+	}
+	if($table=="public.lifeboxme_dhis2_orgunits")
+	{
+		return "Lifeboxme Dhis2 Orgunits";
+	}
+	if($table=="Lifebox_DHIS2_Settings")
+	{
+		return "Lifebox DHIS2 Settings";
 	}
 	return $table;
 }
@@ -2516,6 +2532,18 @@ function GetTablesListReport()
 		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
 		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
 			$arr[]="public.device_inventory_changes";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lifeboxme_dhis2_orgunits");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lifeboxme_dhis2_orgunits";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lifeboxme_dhis2_orgunits";
 	}
 	return $arr;
 }

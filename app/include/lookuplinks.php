@@ -677,6 +677,55 @@ function InitLookupLinks()
 			$lookupTableLinks["Lifebox_DHIS2_OrgUnits"]["lifebox_dhis2_orgunits.Hospital_Facility"] = array();
 		}
 		$lookupTableLinks["Lifebox_DHIS2_OrgUnits"]["lifebox_dhis2_orgunits.Hospital_Facility"]["edit"] = array("table" => "Lifebox_DHIS2_OrgUnits", "field" => "Hospital_Facility", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_orgunits"] ) ) {
+			$lookupTableLinks["public.lifeboxme_dhis2_orgunits"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_orgunits"]["lifeboxme_dhis2_orgunits.cont_id"] )) {
+			$lookupTableLinks["public.lifeboxme_dhis2_orgunits"]["lifeboxme_dhis2_orgunits.cont_id"] = array();
+		}
+		$lookupTableLinks["public.lifeboxme_dhis2_orgunits"]["lifeboxme_dhis2_orgunits.cont_id"]["edit"] = array("table" => "public.lifeboxme_dhis2_orgunits", "field" => "cont_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_orgunits"] ) ) {
+			$lookupTableLinks["public.lifeboxme_dhis2_orgunits"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_orgunits"]["lifeboxme_dhis2_orgunits.continent"] )) {
+			$lookupTableLinks["public.lifeboxme_dhis2_orgunits"]["lifeboxme_dhis2_orgunits.continent"] = array();
+		}
+		$lookupTableLinks["public.lifeboxme_dhis2_orgunits"]["lifeboxme_dhis2_orgunits.continent"]["edit"] = array("table" => "public.lifeboxme_dhis2_orgunits", "field" => "continent", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_orgunits"] ) ) {
+			$lookupTableLinks["public.lifeboxme_dhis2_orgunits"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_orgunits"]["lifeboxme_dhis2_orgunits.count_id"] )) {
+			$lookupTableLinks["public.lifeboxme_dhis2_orgunits"]["lifeboxme_dhis2_orgunits.count_id"] = array();
+		}
+		$lookupTableLinks["public.lifeboxme_dhis2_orgunits"]["lifeboxme_dhis2_orgunits.count_id"]["edit"] = array("table" => "public.lifeboxme_dhis2_orgunits", "field" => "count_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_orgunits"] ) ) {
+			$lookupTableLinks["public.lifeboxme_dhis2_orgunits"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_orgunits"]["lifeboxme_dhis2_orgunits.country"] )) {
+			$lookupTableLinks["public.lifeboxme_dhis2_orgunits"]["lifeboxme_dhis2_orgunits.country"] = array();
+		}
+		$lookupTableLinks["public.lifeboxme_dhis2_orgunits"]["lifeboxme_dhis2_orgunits.country"]["edit"] = array("table" => "public.lifeboxme_dhis2_orgunits", "field" => "country", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_orgunits"] ) ) {
+			$lookupTableLinks["public.lifeboxme_dhis2_orgunits"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_orgunits"]["lifeboxme_dhis2_orgunits.hosp_fac_id"] )) {
+			$lookupTableLinks["public.lifeboxme_dhis2_orgunits"]["lifeboxme_dhis2_orgunits.hosp_fac_id"] = array();
+		}
+		$lookupTableLinks["public.lifeboxme_dhis2_orgunits"]["lifeboxme_dhis2_orgunits.hosp_fac_id"]["edit"] = array("table" => "public.lifeboxme_dhis2_orgunits", "field" => "hosp_fac_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_orgunits"] ) ) {
+			$lookupTableLinks["public.lifeboxme_dhis2_orgunits"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_orgunits"]["lifeboxme_dhis2_orgunits.hospital_facility"] )) {
+			$lookupTableLinks["public.lifeboxme_dhis2_orgunits"]["lifeboxme_dhis2_orgunits.hospital_facility"] = array();
+		}
+		$lookupTableLinks["public.lifeboxme_dhis2_orgunits"]["lifeboxme_dhis2_orgunits.hospital_facility"]["edit"] = array("table" => "public.lifeboxme_dhis2_orgunits", "field" => "hospital_facility", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_orgunits"] ) ) {
+			$lookupTableLinks["public.lifeboxme_dhis2_orgunits"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_orgunits"]["lifeboxme_dhis2_orgunits.level"] )) {
+			$lookupTableLinks["public.lifeboxme_dhis2_orgunits"]["lifeboxme_dhis2_orgunits.level"] = array();
+		}
+		$lookupTableLinks["public.lifeboxme_dhis2_orgunits"]["lifeboxme_dhis2_orgunits.level"]["edit"] = array("table" => "public.lifeboxme_dhis2_orgunits", "field" => "level", "page" => "edit");
 }
 
 ?>

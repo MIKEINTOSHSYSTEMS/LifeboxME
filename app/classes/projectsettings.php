@@ -3690,6 +3690,10 @@ function fillProjectEntites()
 	$projectEntitiesReverse[ "dashboard" ] = "Dashboard";
 	$projectEntities[ "Lifebox_DHIS2_OrgUnits" ] = array( "url" => "lifebox_dhis2_orgunits", "type" => 7 );
 	$projectEntitiesReverse[ "lifebox_dhis2_orgunits" ] = "Lifebox_DHIS2_OrgUnits";
+	$projectEntities[ "public.lifeboxme_dhis2_orgunits" ] = array( "url" => "lifeboxme_dhis2_orgunits", "type" => 0 );
+	$projectEntitiesReverse[ "lifeboxme_dhis2_orgunits" ] = "public.lifeboxme_dhis2_orgunits";
+	$projectEntities[ "Lifebox_DHIS2_Settings" ] = array( "url" => "lifebox_dhis2_settings", "type" => 6 );
+	$projectEntitiesReverse[ "lifebox_dhis2_settings" ] = "Lifebox_DHIS2_Settings";
 }
 
 function findTable( $table ) {
