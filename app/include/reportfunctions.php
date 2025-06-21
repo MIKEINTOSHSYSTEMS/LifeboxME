@@ -538,6 +538,10 @@ function testAdvSearch($table)
 		{
 			return 1;
 		}
+		if($table=="Lifebox_DHIS2_OrgUnits")
+		{
+			return 1;
+		}
 	}
 	elseif(is_wr_db())
 	{
@@ -1010,6 +1014,10 @@ function getCaptionTable($table)
 	if($table=="Dashboard")
 	{
 		return "Dashboard";
+	}
+	if($table=="Lifebox_DHIS2_OrgUnits")
+	{
+		return "Lifebox DHIS2 OrgUnits";
 	}
 	return $table;
 }

@@ -313,6 +313,8 @@ function checkTableName($shortTName )
 		return true;
 	if ("dashboard" == $shortTName )
 		return true;
+	if ("lifebox_dhis2_orgunits" == $shortTName )
+		return true;
 	return false;
 }
 
@@ -858,6 +860,15 @@ function GetTablesList($pdfMode = false)
 	if( $tableAvailable ) {
 		$arr[]="Dashboard";
 	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("Lifebox_DHIS2_OrgUnits");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="Lifebox_DHIS2_OrgUnits";
+	}
 	return $arr;
 }
 
@@ -922,6 +933,7 @@ function GetTablesListWithoutSecurity()
 	$arr[]="public.device_inventory_changes";
 	$arr[]="aio_training_tracking";
 	$arr[]="Dashboard";
+	$arr[]="Lifebox_DHIS2_OrgUnits";
 	return $arr;
 }
 
@@ -1823,6 +1835,11 @@ function GetUserPermissionsStatic( $table )
 	{
 //	default permissions
 		return "S".$extraPerm;
+	}
+	if( $table=="Lifebox_DHIS2_OrgUnits" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
 	}
 	// grant nothing by default
 	return "";

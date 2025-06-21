@@ -3688,6 +3688,8 @@ function fillProjectEntites()
 	$projectEntitiesReverse[ "aio_training_tracking" ] = "aio_training_tracking";
 	$projectEntities[ "Dashboard" ] = array( "url" => "dashboard", "type" => 4 );
 	$projectEntitiesReverse[ "dashboard" ] = "Dashboard";
+	$projectEntities[ "Lifebox_DHIS2_OrgUnits" ] = array( "url" => "lifebox_dhis2_orgunits", "type" => 7 );
+	$projectEntitiesReverse[ "lifebox_dhis2_orgunits" ] = "Lifebox_DHIS2_OrgUnits";
 }
 
 function findTable( $table ) {

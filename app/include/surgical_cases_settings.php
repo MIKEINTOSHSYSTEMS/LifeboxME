@@ -11299,7 +11299,7 @@ $proto0["m_strFrom"] = "FROM \"public\".surgical_cases";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
 	
-		;
+				;
 			$proto0["cipherer"] = null;
 $proto2=array();
 $proto2["m_sql"] = "";
@@ -12532,7 +12532,7 @@ $queryData_surgical_cases = createSqlQuery_surgical_cases();
 
 
 	
-		;
+				;
 
 																																																																													
 

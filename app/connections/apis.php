@@ -16,6 +16,7 @@ class RestManager
 	protected function _setTablesConnectionIds()
 	{
 		$connectionsIds = array();
+		$connectionsIds["Lifebox_DHIS2_OrgUnits"] = "rest";
 		$this->_tablesConnectionIds = &$connectionsIds;
 	}
 
@@ -26,6 +27,16 @@ class RestManager
 
 		$connectionsData = array();
 
+		$data = array();
+		$data["connId"] = "rest";
+		$data["connName"] = "LifeboxME_REST-API";
+
+		$this->_connectionsIdByName["LifeboxME_REST-API"] = "rest";
+
+		$data["url"] = "https://lifebox.merqconsultancy.org";
+		$data["authType"] = "none";
+				
+		$connectionsData["rest"] = $data;
 		$this->_connectionsData = &$connectionsData;
 	}
 

@@ -70,6 +70,7 @@ $nonAdminTablesArr[] = "public.device_distribution_log";
 $nonAdminTablesArr[] = "public.device_inventory_changes";
 $nonAdminTablesArr[] = "aio_training_tracking";
 $nonAdminTablesArr[] = "Dashboard";
+$nonAdminTablesArr[] = "Lifebox_DHIS2_OrgUnits";
 
 $ug_connection = $cman->getForUserGroups();
 

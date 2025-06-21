@@ -297,6 +297,7 @@ class ConnectionManager_Base
 		$connectionsIds["public.device_distribution_log"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["public.device_inventory_changes"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["aio_training_tracking"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["Lifebox_DHIS2_OrgUnits"] = "rest";
 
 		$this->_tablesConnectionIds = &$connectionsIds;
 	}

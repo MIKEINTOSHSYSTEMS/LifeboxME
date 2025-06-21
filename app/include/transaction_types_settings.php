@@ -560,7 +560,7 @@ $proto0["m_strFrom"] = "FROM \"public\".transaction_types";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
 	
-		;
+				;
 			$proto0["cipherer"] = null;
 $proto2=array();
 $proto2["m_sql"] = "";
@@ -668,7 +668,7 @@ $queryData_transaction_types = createSqlQuery_transaction_types();
 
 
 	
-		;
+				;
 
 		
 

@@ -656,6 +656,27 @@ function InitLookupLinks()
 			$lookupTableLinks["public.device_distributions"]["device_distribution_log.previous_quantity"] = array();
 		}
 		$lookupTableLinks["public.device_distributions"]["device_distribution_log.previous_quantity"]["edit"] = array("table" => "public.device_distribution_log", "field" => "previous_quantity", "page" => "edit");
+		if( !isset( $lookupTableLinks["Lifebox_DHIS2_OrgUnits"] ) ) {
+			$lookupTableLinks["Lifebox_DHIS2_OrgUnits"] = array();
+		}
+		if( !isset( $lookupTableLinks["Lifebox_DHIS2_OrgUnits"]["lifebox_dhis2_orgunits.Continent"] )) {
+			$lookupTableLinks["Lifebox_DHIS2_OrgUnits"]["lifebox_dhis2_orgunits.Continent"] = array();
+		}
+		$lookupTableLinks["Lifebox_DHIS2_OrgUnits"]["lifebox_dhis2_orgunits.Continent"]["edit"] = array("table" => "Lifebox_DHIS2_OrgUnits", "field" => "Continent", "page" => "edit");
+		if( !isset( $lookupTableLinks["Lifebox_DHIS2_OrgUnits"] ) ) {
+			$lookupTableLinks["Lifebox_DHIS2_OrgUnits"] = array();
+		}
+		if( !isset( $lookupTableLinks["Lifebox_DHIS2_OrgUnits"]["lifebox_dhis2_orgunits.Country"] )) {
+			$lookupTableLinks["Lifebox_DHIS2_OrgUnits"]["lifebox_dhis2_orgunits.Country"] = array();
+		}
+		$lookupTableLinks["Lifebox_DHIS2_OrgUnits"]["lifebox_dhis2_orgunits.Country"]["edit"] = array("table" => "Lifebox_DHIS2_OrgUnits", "field" => "Country", "page" => "edit");
+		if( !isset( $lookupTableLinks["Lifebox_DHIS2_OrgUnits"] ) ) {
+			$lookupTableLinks["Lifebox_DHIS2_OrgUnits"] = array();
+		}
+		if( !isset( $lookupTableLinks["Lifebox_DHIS2_OrgUnits"]["lifebox_dhis2_orgunits.Hospital_Facility_Name"] )) {
+			$lookupTableLinks["Lifebox_DHIS2_OrgUnits"]["lifebox_dhis2_orgunits.Hospital_Facility_Name"] = array();
+		}
+		$lookupTableLinks["Lifebox_DHIS2_OrgUnits"]["lifebox_dhis2_orgunits.Hospital_Facility_Name"]["edit"] = array("table" => "Lifebox_DHIS2_OrgUnits", "field" => "Hospital_Facility_Name", "page" => "edit");
 }
 
 ?>

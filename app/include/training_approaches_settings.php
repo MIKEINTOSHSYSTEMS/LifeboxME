@@ -1160,7 +1160,7 @@ $proto0["m_strFrom"] = "FROM \"public\".training_approaches";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
 	
-		;
+				;
 			$proto0["cipherer"] = null;
 $proto2=array();
 $proto2["m_sql"] = "";
@@ -1328,7 +1328,7 @@ $queryData_training_approaches = createSqlQuery_training_approaches();
 
 
 	
-		;
+				;
 
 						
 

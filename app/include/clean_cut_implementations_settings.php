@@ -2799,7 +2799,7 @@ $proto0["m_strFrom"] = "FROM \"public\".clean_cut_implementations";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
 	
-		;
+				;
 			$proto0["cipherer"] = null;
 $proto2=array();
 $proto2["m_sql"] = "";
@@ -3132,7 +3132,7 @@ $queryData_clean_cut_implementations = createSqlQuery_clean_cut_implementations(
 
 
 	
-		;
+				;
 
 																	
 
