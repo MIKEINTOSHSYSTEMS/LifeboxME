@@ -7,7 +7,8 @@ data/pgadmin-data/
 data/postgres-data/
 data/pgadmin-init/
 api/gen
-api/dhis2
+api/dhis2/orgunits/test/
+api/dhis2/index.php
 api/database/main/0.php
 api/database/main/*.sql
 api/database/main/backup
