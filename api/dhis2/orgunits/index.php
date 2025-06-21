@@ -76,33 +76,61 @@ try {
 }
 
 // Function to fetch data from DHIS2 API
-function fetchDhis2Data($endpoint)
+function fetchDhis2Data($endpoint, $maxRetries = 3)
 {
     global $DHIS2_BASE_URL, $DHIS2_USERNAME, $DHIS2_PASSWORD;
 
     $url = $DHIS2_BASE_URL . $endpoint;
+    $attempt = 0;
 
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-    curl_setopt($ch, CURLOPT_USERPWD, "$DHIS2_USERNAME:$DHIS2_PASSWORD");
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // For development only
+    while ($attempt < $maxRetries) {
+        $attempt++;
 
-    $response = curl_exec($ch);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        curl_setopt($ch, CURLOPT_USERPWD, "$DHIS2_USERNAME:$DHIS2_PASSWORD");
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Development only
 
-    if (curl_errno($ch)) {
-        throw new Exception('DHIS2 API request failed: ' . curl_error($ch));
+        // NEW: Timeout settings
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 15); // 15s to establish connection
+        curl_setopt($ch, CURLOPT_TIMEOUT, 60);        // 60s max request time
+
+        $response = curl_exec($ch);
+
+        if (curl_errno($ch)) {
+            $error = curl_error($ch);
+            curl_close($ch);
+
+            // Retry on timeout or transient errors
+            if ($attempt < $maxRetries) {
+                error_log("DHIS2 request attempt $attempt failed: $error. Retrying...");
+                sleep($attempt * 2); // 2s, 4s, 6s backoff
+                continue;
+            } else {
+                throw new Exception("DHIS2 API request failed after $maxRetries attempts: $error");
+            }
+        }
+
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($httpCode !== 200) {
+            if ($attempt < $maxRetries) {
+                error_log("DHIS2 request attempt $attempt returned HTTP $httpCode. Retrying...");
+                sleep($attempt * 2);
+                continue;
+            } else {
+                throw new Exception("DHIS2 API returned HTTP code $httpCode after $maxRetries attempts");
+            }
+        }
+
+        return json_decode($response, true);
     }
 
-    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    if ($httpCode !== 200) {
-        throw new Exception("DHIS2 API returned HTTP code $httpCode");
-    }
-
-    curl_close($ch);
-
-    return json_decode($response, true);
+    // Should never reach here
+    throw new Exception("Unknown error during DHIS2 API fetch");
 }
 
 // Function to build a complete hierarchy map
@@ -136,48 +164,74 @@ function buildHierarchyMap($units)
 function getHierarchyPath($unit, $map)
 {
     $path = [
-        'Lifebox International ID' => null,
-        'Lifebox International' => null,
-        'Continent ID' => null,
+        'LB_Int_ID' => null,
+        'LB_Int' => null,
+        'Cont_ID' => null,
         'Continent' => null,
-        'Country ID' => null,
+        'Count_ID' => null,
         'Country' => null,
-        'Hospital_Facility_ID' => null,
-        'Hospital_Facility_Name' => null,
+        'Hosp_Fac_ID' => null,
+        'Hospital_Facility' => null,
         'Level' => $unit['level']
     ];
 
-    $current = $unit;
-
-    while (isset($current['parent']['id'])) {
-        switch ($current['level']) {
-            case 4:
-                $path['Hospital_Facility_ID'] = $current['id'];
-                $path['Hospital_Facility_Name'] = $current['name'];
-                break;
-            case 3:
-                $path['Country ID'] = $current['id'];
-                $path['Country'] = $current['name'];
-                break;
-            case 2:
-                $path['Continent ID'] = $current['id'];
-                $path['Continent'] = $current['name'];
-                break;
-            case 1:
-                $path['Lifebox International ID'] = $current['id'];
-                $path['Lifebox International'] = $current['name'];
-                break;
-        }
-
-        if (isset($current['parent']['full'])) {
-            $current = $current['parent']['full'];
-        } else {
+    // Set current level's information first
+    switch ($unit['level']) {
+        case 4:
+            $path['Hosp_Fac_ID'] = $unit['id'];
+            $path['Hospital_Facility'] = $unit['name'];
             break;
+        case 3:
+            $path['Count_ID'] = $unit['id'];
+            $path['Country'] = $unit['name'];
+            break;
+        case 2:
+            $path['Cont_ID'] = $unit['id'];
+            $path['Continent'] = $unit['name'];
+            break;
+        case 1:
+            $path['LB_Int_ID'] = $unit['id'];
+            $path['LB_Int'] = $unit['name'];
+            return $path; // No parent for level 1
+    }
+
+    // Now resolve parent hierarchy
+    $current = $unit;
+    while (isset($current['parent']['id'])) {
+        $parentId = $current['parent']['id'];
+
+        // If we have the full parent in our map
+        if (isset($map[$parentId])) {
+            $parent = $map[$parentId];
+
+            switch ($parent['level']) {
+                case 3: // Parent is a country
+                    if ($unit['level'] == 4) { // Only set if current is facility
+                        $path['Count_ID'] = $parent['id'];
+                        $path['Country'] = $parent['name'];
+                    }
+                    break;
+                case 2: // Parent is a continent
+                    if ($unit['level'] >= 3) { // Set for countries and facilities
+                        $path['Cont_ID'] = $parent['id'];
+                        $path['Continent'] = $parent['name'];
+                    }
+                    break;
+                case 1: // Parent is Lifebox International
+                    $path['LB_Int_ID'] = $parent['id'];
+                    $path['LB_Int'] = $parent['name'];
+                    break;
+            }
+
+            $current = $parent;
+        } else {
+            break; // No more parents in our map
         }
     }
 
     return $path;
 }
+
 
 // Main execution
 try {
@@ -198,10 +252,10 @@ try {
     foreach ($map as $unitId => $unit) {
         $path = getHierarchyPath($unit, $map);
 
-        // Fill in Lifebox International if not already set
-        if ($path['Lifebox International ID'] === null && $level1) {
-            $path['Lifebox International ID'] = $level1['id'];
-            $path['Lifebox International'] = $level1['name'];
+        // Fill in LB_Int if not already set
+        if ($path['LB_Int_ID'] === null && $level1) {
+            $path['LB_Int_ID'] = $level1['id'];
+            $path['LB_Int'] = $level1['name'];
         }
 
         $structuredData[] = $path;
