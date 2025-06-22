@@ -3,7 +3,7 @@
 // dhis2_analytics.php
 
 /**
- * Fetches DHIS2 analytics data and returns the relevant fields in a structured format.
+ * Fetches DHIS2 analytics data and returns structured results
  * Reads credentials from ../../../.env.dev
  */
 
@@ -22,12 +22,10 @@ function parseEnvFile($filePath)
     $env = [];
 
     foreach ($lines as $line) {
-        // Skip comments
         if (strpos(trim($line), '#') === 0) {
             continue;
         }
 
-        // Split on first equals sign
         $parts = explode('=', $line, 2);
         if (count($parts) !== 2) {
             continue;
@@ -36,7 +34,6 @@ function parseEnvFile($filePath)
         $key = trim($parts[0]);
         $value = trim($parts[1]);
 
-        // Remove quotes if present
         if (preg_match('/^"(.*)"$/', $value, $matches)) {
             $value = $matches[1];
         } elseif (preg_match('/^\'(.*)\'$/', $value, $matches)) {
@@ -54,7 +51,6 @@ try {
     $envFile = '../../../.env.dev';
     $env = parseEnvFile($envFile);
 
-    // Validate required DHIS2 configuration
     $requiredVars = ['DHIS2_BASE_URL', 'DHIS2_USERNAME', 'DHIS2_PASSWORD'];
     foreach ($requiredVars as $var) {
         if (!isset($env[$var]) || empty($env[$var])) {
@@ -76,13 +72,13 @@ try {
     exit;
 }
 
-// Function to fetch data from DHIS2 API
+// Function to fetch data from DHIS2 API with retries
 function fetchDhis2Data($endpoint, $maxRetries = 3)
 {
     global $DHIS2_BASE_URL, $DHIS2_USERNAME, $DHIS2_PASSWORD;
 
     $url = $DHIS2_BASE_URL . $endpoint;
-    error_log("Fetching URL: $url"); // Log the URL to check if it's correct
+    error_log("Fetching DHIS2 URL: $url");
     $attempt = 0;
 
     while ($attempt < $maxRetries) {
@@ -93,11 +89,9 @@ function fetchDhis2Data($endpoint, $maxRetries = 3)
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         curl_setopt($ch, CURLOPT_USERPWD, "$DHIS2_USERNAME:$DHIS2_PASSWORD");
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Development only
-
-        // Timeout settings
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 15); // 15s to establish connection
-        curl_setopt($ch, CURLOPT_TIMEOUT, 60);        // 60s max request time
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 15);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 60);
 
         $response = curl_exec($ch);
 
@@ -105,13 +99,11 @@ function fetchDhis2Data($endpoint, $maxRetries = 3)
             $error = curl_error($ch);
             curl_close($ch);
 
-            // Retry on timeout or transient errors
             if ($attempt < $maxRetries) {
                 error_log("DHIS2 request attempt $attempt failed: $error. Retrying...");
-                sleep($attempt * 2); // 2s, 4s, 6s backoff
+                sleep($attempt * 2);
                 continue;
             } else {
-                error_log("DHIS2 API request failed after $maxRetries attempts: $error");
                 throw new Exception("DHIS2 API request failed after $maxRetries attempts: $error");
             }
         }
@@ -125,72 +117,169 @@ function fetchDhis2Data($endpoint, $maxRetries = 3)
                 sleep($attempt * 2);
                 continue;
             } else {
-                error_log("DHIS2 API returned HTTP code $httpCode after $maxRetries attempts");
                 throw new Exception("DHIS2 API returned HTTP code $httpCode after $maxRetries attempts");
             }
         }
 
-        // Log the full response for debugging purposes
-        error_log("Response from DHIS2 API: " . $response);
         return json_decode($response, true);
     }
 
-    // Should never reach here
     throw new Exception("Unknown error during DHIS2 API fetch");
+}
+
+// Function to fetch data items metadata
+function fetchDataItemsMetadata()
+{
+    $dataItemsApi = 'http://lifeboxme/api/dhis2/indicators/dataItems.php';
+
+    try {
+        $ch = curl_init($dataItemsApi);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 15);
+        $response = curl_exec($ch);
+
+        if (curl_errno($ch)) {
+            throw new Exception('Data items API request failed: ' . curl_error($ch));
+        }
+
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($httpCode !== 200) {
+            throw new Exception("Data items API returned HTTP code $httpCode");
+        }
+
+        $data = json_decode($response, true);
+
+        if (!is_array($data)) {
+            throw new Exception('Invalid response from data items API');
+        }
+
+        $metadata = [];
+        foreach ($data as $item) {
+            $metadata[$item['id']] = $item;
+        }
+
+        return $metadata;
+    } catch (Exception $e) {
+        error_log("Failed to fetch data items metadata: " . $e->getMessage());
+        return [];
+    }
 }
 
 // Main execution
 try {
-    // Construct the endpoint URL (make sure it's correct)
-    $endpoint = 'api/41/analytics?dimension=dx:x5ry7WTgNCY;jEPJMVLgZx2&filter=ou:USER_ORGUNIT&filter=pe:LAST_MONTH&displayProperty=NAME&includeNumDen=false&skipMeta=false&skipData=true&includeMetadataDetails=true&paging=false';
+    // Get parameters from URL
+    $dimensions = $_GET['dimensions'] ?? '';
+    $filters = $_GET['filters'] ?? '';
+
+    error_log("Received request with dimensions: $dimensions and filters: $filters");
+
+    // Construct the endpoint
+    $endpoint = 'api/analytics.json?';
+    if (!empty($dimensions)) {
+        $endpoint .= 'dimension=' . urlencode($dimensions) . '&';
+    }
+    if (!empty($filters)) {
+        $endpoint .= 'filter=' . urlencode($filters) . '&';
+    }
+    $endpoint .= 'displayProperty=NAME&includeNumDen=false&skipMeta=false&skipData=false';
+
+    error_log("Constructed DHIS2 endpoint: $endpoint");
 
     // Fetch analytics data from DHIS2 API
     $response = fetchDhis2Data($endpoint);
 
-    // Extract relevant metadata and rows data
+    if (empty($response['rows'])) {
+        throw new Exception("No data found for the given analytics query.");
+    }
+
+    $metaData = $response['metaData']['items'] ?? [];
+    $dimensionData = $response['metaData']['dimensions'] ?? [];
+
+    // Extract organization unit information from metadata
+    $orgUnits = [];
+    foreach ($dimensionData['ou'] ?? [] as $ouId) {
+        $orgUnits[] = [
+            'id' => $ouId,
+            'displayName' => $metaData[$ouId]['name'] ?? $ouId
+        ];
+    }
+
+    // If no org units found in dimensions, check the first filter
+    if (empty($orgUnits)) {
+        $requestedOrgUnitId = '';
+        if (!empty($filters)) {
+            $filterParts = explode('&', $filters);
+            foreach ($filterParts as $filter) {
+                if (strpos($filter, 'ou:') === 0) {
+                    $requestedOrgUnitId = substr($filter, 3);
+                    // Handle multiple org units separated by semicolons
+                    $requestedOrgUnitId = explode(';', $requestedOrgUnitId)[0];
+                    $requestedOrgUnitId = trim($requestedOrgUnitId);
+                    break;
+                }
+            }
+        }
+
+        if (!empty($requestedOrgUnitId)) {
+            $orgUnits[] = [
+                'id' => $requestedOrgUnitId,
+                'displayName' => $metaData[$requestedOrgUnitId]['name'] ?? $requestedOrgUnitId
+            ];
+        }
+    }
+
+    // Pre-fetch required metadata
+    $dataItemMetadata = fetchDataItemsMetadata();
+
+    // Extract IDs from dimensions
+    $dxIds = $dimensionData['dx'] ?? [];
+    $peIds = $dimensionData['pe'] ?? [];
+
+    // Map period IDs to names
+    $periods = [];
+    foreach ($peIds as $peId) {
+        $periods[] = $metaData[$peId]['name'] ?? $peId;
+    }
+
+    // Precompute data values by dxId
+    $dxValues = [];
+    foreach ($response['rows'] as $row) {
+        $dxId = $row[0];
+        $value = (float)$row[1];
+        if (!isset($dxValues[$dxId])) {
+            $dxValues[$dxId] = [];
+        }
+        $dxValues[$dxId][] = $value;
+    }
+
+    // Process each data item
     $result = [];
-    $metadata = $response['metaData'] ?? [];
+    foreach ($dxIds as $dxId) {
+        // Get metadata from our API if available
+        $itemInfo = $dataItemMetadata[$dxId] ?? [];
 
-    // Check if we have dimension metadata for `dx` (indicators)
-    if (isset($metadata['items']['dx'])) {
-        foreach ($metadata['items'] as $key => $item) {
-            if (in_array($key, ['x5ry7WTgNCY', 'jEPJMVLgZx2'])) {
-                $result[] = [
-                    'id' => $item['uid'],
-                    'displayName' => $item['name'],
-                    'name' => $item['name'],
-                    'shortName' => $item['shortName'] ?? 'N/A',
-                    'displayShortName' => $item['displayShortName'] ?? 'N/A',
-                    'dimensionItemType' => $item['dimensionItemType'] ?? 'N/A',
-                    'organizationUnit' => ['Lifebox International'],  // Replace with actual data if needed
-                    'period' => ['202505'],  // Replace with actual data if needed
-                    'dataValues' => []  // To be filled with actual data
-                ];
-            }
-        }
+        // Build the result item with org unit info
+        $resultItem = [
+            'id' => $dxId,
+            'displayName' => $itemInfo['displayName'] ?? ($metaData[$dxId]['name'] ?? $dxId),
+            'name' => $itemInfo['name'] ?? ($metaData[$dxId]['name'] ?? $dxId),
+            'shortName' => $itemInfo['shortName'] ?? 'N/A',
+            'displayShortName' => $itemInfo['displayShortName'] ?? $itemInfo['shortName'] ?? 'N/A',
+            'dimensionItemType' => $itemInfo['dimensionItemType'] ?? 'UNKNOWN',
+            'organizationUnits' => $orgUnits, // Changed to plural and array format
+            'periods' => $periods, // Changed to plural for consistency
+            'dataValues' => $dxValues[$dxId] ?? []
+        ];
+
+        $result[] = $resultItem;
     }
 
-    // Now process the rows from the analytics data
-    if (!empty($response['rows'])) {
-        foreach ($response['rows'] as $row) {
-            $organizationUnit = $row[0]; // Assuming first element is the organization unit
-            $period = $row[1];           // Assuming second element is the period
-            $dataValues = array_slice($row, 2); // Remaining elements are the data values
-
-            // Add the data to the corresponding metadata
-            foreach ($result as &$item) {
-                $item['organizationUnit'][] = $organizationUnit;
-                $item['period'][] = $period;
-                $item['dataValues'][] = $dataValues;
-            }
-        }
-    }
-
-    // Set JSON headers and output
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 } catch (Exception $e) {
-    // Error handling
+    error_log("Error in main execution: " . $e->getMessage());
     header('Content-Type: application/json; charset=utf-8');
     http_response_code(500);
     echo json_encode([

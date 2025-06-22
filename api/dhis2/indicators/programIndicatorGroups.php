@@ -1,6 +1,6 @@
 <?php
 
-// program_Indicator_Groups.php
+// programIndicatorGroups.php
 
 /**
  * Fetches DHIS2 programIndicatorGroups and returns their id and displayName in a structured format
