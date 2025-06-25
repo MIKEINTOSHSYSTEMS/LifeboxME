@@ -1434,11 +1434,11 @@
 
 	$menuNodes[] = $menuNode;
 	$menuNode = array();
-	$menuNode["id"] = "82";
-	$menuNode["name"] = "Lifebox DHIS2 Data Items";
+	$menuNode["id"] = "83";
+	$menuNode["name"] = "Lifeboxme DHIS2 Data Items";
 	$menuNode["href"] = "mypage.htm";
 	$menuNode["type"] = "Leaf";
-	$menuNode["table"] = "Lifebox_DHIS2_dataItems";
+	$menuNode["table"] = "public.lifeboxme_dhis2_dataitems";
 	$menuNode["style"] = "";
 	$menuNode["params"] = "";
 	$menuNode["parent"] = "75";
@@ -1454,7 +1454,7 @@
 
 		$menuNode["color"] = "";
 
-	$menuNode["title"] = "Lifebox DHIS2 Data Items";
+	$menuNode["title"] = "Lifeboxme DHIS2 Data Items";
 
 
 
@@ -1564,6 +1564,58 @@
 
 	$menuNodes[] = $menuNode;
 	$menuNode = array();
+	$menuNode["id"] = "84";
+	$menuNode["name"] = "DHIS2 DataItems Fetcher";
+	$menuNode["href"] = "mypage.htm";
+	$menuNode["type"] = "Leaf";
+	$menuNode["table"] = "Lifebox_DHIS2_Settings";
+	$menuNode["style"] = "";
+	$menuNode["params"] = "";
+	$menuNode["parent"] = "79";
+	$menuNode["nameType"] = "Text";
+	$menuNode["linkType"] = "Internal";
+	$menuNode["pageType"] = strtolower("List");//
+	$menuNode["pageId"] = "dhis2_dataitems_fetcher";
+	$menuNode["openType"] = "None";
+
+	$menuNode["icon"] = "fa-cloud-download";
+	$menuNode["iconType"] = "3";
+	$menuNode["iconShow"] = "1";
+
+		$menuNode["color"] = "";
+
+	$menuNode["title"] = "DHIS2 DataItems Fetcher";
+
+
+
+	$menuNodes[] = $menuNode;
+	$menuNode = array();
+	$menuNode["id"] = "85";
+	$menuNode["name"] = "-------";
+	$menuNode["href"] = "";
+	$menuNode["type"] = "Separator";
+	$menuNode["table"] = "";
+	$menuNode["style"] = "";
+	$menuNode["params"] = "";
+	$menuNode["parent"] = "79";
+	$menuNode["nameType"] = "Text";
+	$menuNode["linkType"] = "None";
+	$menuNode["pageType"] = strtolower("");//
+	$menuNode["pageId"] = "";
+	$menuNode["openType"] = "None";
+
+	$menuNode["icon"] = "";
+	$menuNode["iconType"] = "0";
+	$menuNode["iconShow"] = "1";
+
+		$menuNode["color"] = "";
+
+	$menuNode["title"] = "-------";
+
+
+
+	$menuNodes[] = $menuNode;
+	$menuNode = array();
 	$menuNode["id"] = "74";
 	$menuNode["name"] = "[BETA] Lifebox DHIS2 OrgUnits - API";
 	$menuNode["href"] = "mypage.htm";
@@ -1585,6 +1637,32 @@
 		$menuNode["color"] = "";
 
 	$menuNode["title"] = "[BETA] Lifebox DHIS2 OrgUnits - API";
+
+
+
+	$menuNodes[] = $menuNode;
+	$menuNode = array();
+	$menuNode["id"] = "82";
+	$menuNode["name"] = "[BETA] Lifebox DHIS2 DataItems - API";
+	$menuNode["href"] = "mypage.htm";
+	$menuNode["type"] = "Leaf";
+	$menuNode["table"] = "Lifebox_DHIS2_dataItems";
+	$menuNode["style"] = "";
+	$menuNode["params"] = "";
+	$menuNode["parent"] = "79";
+	$menuNode["nameType"] = "Text";
+	$menuNode["linkType"] = "Internal";
+	$menuNode["pageType"] = strtolower("List");//
+	$menuNode["pageId"] = "";
+	$menuNode["openType"] = "None";
+
+	$menuNode["icon"] = "fa-subscript";
+	$menuNode["iconType"] = "3";
+	$menuNode["iconShow"] = "1";
+
+		$menuNode["color"] = "";
+
+	$menuNode["title"] = "[BETA] Lifebox DHIS2 DataItems - API";
 
 
 

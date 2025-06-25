@@ -69,6 +69,7 @@ function displayPage()
                 --bs-bg-opacity: 1;
                 background-color: #078ca7 !important;
             }
+
             .card {
                 margin-top: 20px;
             }
@@ -138,6 +139,7 @@ function displayPage()
                 background-color: #6c757d;
                 color: white;
             }
+
             .badge-indicator {
                 background-color: #0d7efd;
             }
@@ -153,15 +155,15 @@ function displayPage()
             .badge-attribute {
                 background-color: #6610f2;
             }
-            
+
             .badge-reporting-rate {
                 background-color: #17a2b8;
             }
 
             .badge-program-data-element {
                 background-color: #ff0000;
-            }            
-            
+            }
+
             .badge-default {
                 background-color: #6c757d;
             }
@@ -169,7 +171,7 @@ function displayPage()
     </head>
 
     <body>
-        <div class="container">
+        <div class="container" style="max-width: 100%;">
             <div class="card">
                 <div class="card-header bg-primary text-white">
                     <h2>DHIS2 Data Items Fetcher</h2>
@@ -206,7 +208,7 @@ function displayPage()
                                 <br>
                                 <strong>DHIS2 Status:</strong> <span id="dhis2Status">Unknown</span>
                             </div>
-    <!--                            
+                            <!--                            
                             <div class="alert alert-light" id="typeLegendContainer">
                                 <h5>Item Type Legend:</h5>
                                 <div id="typeLegend"></div>
@@ -253,7 +255,7 @@ function displayPage()
             $(document).ready(function() {
                 // Load type legend first
                 loadTypeLegend();
-                
+
                 // Initialize DataTable
                 const table = $('#dataTable').DataTable({
                     ajax: {
@@ -271,56 +273,55 @@ function displayPage()
                             );
                         }
                     },
-                    columns: [
-    { 
-        data: 'dimensionItemType',
-        render: function(data, type, row) {
-            if (!data) return '';
-            let badgeClass = '';
-            switch(data) {
-                case 'INDICATOR':
-                    badgeClass = 'badge-indicator';
-                    break;
-                case 'PROGRAM_INDICATOR':
-                    badgeClass = 'badge-program-indicator';
-                    break;
-                case 'DATA_ELEMENT':
-                    badgeClass = 'badge-data-element';
-                    break;
-                case 'PROGRAM_ATTRIBUTE':
-                    badgeClass = 'badge-attribute';
-                    break;
-                case 'REPORTING_RATE':
-                    badgeClass = 'badge-reporting-rate';
-                    break;
-                case 'PROGRAM_DATA_ELEMENT':
-                    badgeClass = 'badge-program-data-element';
-                    break;                                        
-                default:
-                    badgeClass = 'badge-secondary';
-            }
-            return `<span class="badge ${badgeClass} text-white">${data}</span>`;
-        }
-    },
-                        { 
+                    columns: [{
+                            data: 'dimensionItemType',
+                            render: function(data, type, row) {
+                                if (!data) return '';
+                                let badgeClass = '';
+                                switch (data) {
+                                    case 'INDICATOR':
+                                        badgeClass = 'badge-indicator';
+                                        break;
+                                    case 'PROGRAM_INDICATOR':
+                                        badgeClass = 'badge-program-indicator';
+                                        break;
+                                    case 'DATA_ELEMENT':
+                                        badgeClass = 'badge-data-element';
+                                        break;
+                                    case 'PROGRAM_ATTRIBUTE':
+                                        badgeClass = 'badge-attribute';
+                                        break;
+                                    case 'REPORTING_RATE':
+                                        badgeClass = 'badge-reporting-rate';
+                                        break;
+                                    case 'PROGRAM_DATA_ELEMENT':
+                                        badgeClass = 'badge-program-data-element';
+                                        break;
+                                    default:
+                                        badgeClass = 'badge-secondary';
+                                }
+                                return `<span class="badge ${badgeClass} text-white">${data}</span>`;
+                            }
+                        },
+                        {
                             data: 'id',
                             render: function(data, type, row) {
                                 return data || '';
                             }
                         },
-                        { 
+                        {
                             data: 'displayName',
                             render: function(data, type, row) {
                                 return data || '';
                             }
                         },
-                        { 
+                        {
                             data: 'shortName',
                             render: function(data, type, row) {
                                 return data || '';
                             }
                         },
-                        { 
+                        {
                             data: 'name',
                             render: function(data, type, row) {
                                 return data || '';
@@ -447,7 +448,7 @@ function displayPage()
                         }
                     }, 'json');
                 }
-                
+
                 function loadTypeLegend() {
                     $.post('fetch_dataitems.php', {
                         action: 'get_legend_types'
@@ -494,10 +495,10 @@ function ensureTableExists($pdo)
                 )
             ";
             $pdo->exec($sql);
-            
+
             // Set the MINVALUE for the sequence
             $pdo->exec('ALTER SEQUENCE "public"."lifeboxme_dhis2_dataitems_id_seq" MINVALUE 0;');
-            
+
             // Reset the sequence to 0
             $pdo->exec('SELECT setval(\'"public"."lifeboxme_dhis2_dataitems_id_seq"\', 0, true);');
             return true;
@@ -696,10 +697,10 @@ function fetchAndStoreData()
 
         // Set the MINVALUE for the sequence
         $pdo->exec('ALTER SEQUENCE "public"."lifeboxme_dhis2_dataitems_id_seq" MINVALUE 0;');
-        
+
         // Reset the sequence to 0
         $pdo->exec('SELECT setval(\'"public"."lifeboxme_dhis2_dataitems_id_seq"\', 0, true);');
-        
+
         // Prepare insert statement
         sendProgress(47, "Preparing to insert data into database...", 'log-entry');
         $insertStmt = $pdo->prepare("

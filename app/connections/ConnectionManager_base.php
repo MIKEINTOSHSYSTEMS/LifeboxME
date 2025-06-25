@@ -301,6 +301,7 @@ class ConnectionManager_Base
 		$connectionsIds["public.lifeboxme_dhis2_orgunits"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["Lifebox_DHIS2_Settings"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["Lifebox_DHIS2_dataItems"] = "rest";
+		$connectionsIds["public.lifeboxme_dhis2_dataitems"] = "lifebox_mesystem_at_localhost";
 
 		$this->_tablesConnectionIds = &$connectionsIds;
 	}

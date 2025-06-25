@@ -66,6 +66,7 @@ class tDAL
 	var $tbllifebox_mesystem_at_localhost_public_lifebox_staff;
 	var $tbllifebox_mesystem_at_localhost_public_lifeboxme__audit;
 	var $tbllifebox_mesystem_at_localhost_public_lifeboxme__locking;
+	var $tbllifebox_mesystem_at_localhost_public_lifeboxme_dhis2_dataitems;
 	var $tbllifebox_mesystem_at_localhost_public_lifeboxme_dhis2_orgunits;
 	var $tbllifebox_mesystem_at_localhost_public_lifeboxme_settings;
 	var $tbllifebox_mesystem_at_localhost_public_lifeboxme_uggroups;
@@ -131,6 +132,7 @@ class tDAL
 		$this->lstTables[] = array("name" => "lifebox_staff", "varname" => "lifebox_mesystem_at_localhost_public_lifebox_staff", "altvarname" => "lifebox_staff", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "lifeboxme__audit", "varname" => "lifebox_mesystem_at_localhost_public_lifeboxme__audit", "altvarname" => "lifeboxme__audit", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "lifeboxme__locking", "varname" => "lifebox_mesystem_at_localhost_public_lifeboxme__locking", "altvarname" => "lifeboxme__locking", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "lifeboxme_dhis2_dataitems", "varname" => "lifebox_mesystem_at_localhost_public_lifeboxme_dhis2_dataitems", "altvarname" => "lifeboxme_dhis2_dataitems", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "lifeboxme_dhis2_orgunits", "varname" => "lifebox_mesystem_at_localhost_public_lifeboxme_dhis2_orgunits", "altvarname" => "lifeboxme_dhis2_orgunits", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "lifeboxme_settings", "varname" => "lifebox_mesystem_at_localhost_public_lifeboxme_settings", "altvarname" => "lifeboxme_settings", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "lifeboxme_uggroups", "varname" => "lifebox_mesystem_at_localhost_public_lifeboxme_uggroups", "altvarname" => "lifeboxme_uggroups", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");

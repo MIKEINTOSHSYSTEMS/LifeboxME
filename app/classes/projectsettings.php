@@ -3696,6 +3696,8 @@ function fillProjectEntites()
 	$projectEntitiesReverse[ "lifebox_dhis2_settings" ] = "Lifebox_DHIS2_Settings";
 	$projectEntities[ "Lifebox_DHIS2_dataItems" ] = array( "url" => "lifebox_dhis2_dataitems", "type" => 7 );
 	$projectEntitiesReverse[ "lifebox_dhis2_dataitems" ] = "Lifebox_DHIS2_dataItems";
+	$projectEntities[ "public.lifeboxme_dhis2_dataitems" ] = array( "url" => "lifeboxme_dhis2_dataitems", "type" => 0 );
+	$projectEntitiesReverse[ "lifeboxme_dhis2_dataitems" ] = "public.lifeboxme_dhis2_dataitems";
 }
 
 function findTable( $table ) {

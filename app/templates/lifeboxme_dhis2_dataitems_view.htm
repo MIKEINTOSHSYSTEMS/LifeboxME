@@ -16,8 +16,7 @@
 			
 	</head>
 
-	<body class="{$stylename} function-list"   
-			data-panel-bg
+	<body class="{$stylename} function-view"   
 		>
 	{BEGIN body}
 		<style>
@@ -230,24 +229,6 @@
 								</a>
 </span>
 			</span>
-		 
-				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="breadcrumb" {$item_breadcrumb} data-topcell-item-type="breadcrumb" >
-				{BEGIN breadcrumb}
-<ol class="breadcrumb" data-itemtype="breadcrumb" data-itemid="breadcrumb" {$item_breadcrumb} data-pageid="{$pageid}">
-<li ><a href="{$crumb_home_link}"><span class="glyphicon glyphicon-home"></span></a>{$crumb_dropdown}</li>
-{BEGIN crumb}
-  <li class="{$crumb_item_class}">
-{BEGIN crumb_title_link}
-	<a {$crumb_attrs}>{$crumb_title}</a>
-{END crumb_title_link}
-{BEGIN crumb_title_span}
-	<span {$crumb_attrs}>{$crumb_title}</span>
-{END crumb_title_span}	
-	{$crumb_dropdown}
-  </li>
-{END crumb}
-</ol>
-{END breadcrumb}			</span>
 							 
 							 
 				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="loginform_login" {$item_loginform_login} data-topcell-item-type="loginform_login" >
@@ -310,187 +291,279 @@
 {END supertop_block}
 						{$locking}
 				</div>
-				<div class="r-body" data-resize-top="topbar" data-body-width="full">
+				<div class="r-body" data-resize-top="topbar" data-body-width="standard">
 					{$header}
 					<div class="r-top">
 									{BEGIN top_block}
 <div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="leftbar" {$form_top} data-pageid="{$pageid}" >		
-	</div>		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="top_c1" data-pageid="{$pageid}"	{$cell_top_c1}
+	class=" r-ori-vert			col-md-12
+	
+">
+		 
+		<h2 data-itemtype="view_header" data-itemid="view_header" {$item_view_header} data-pageid="{$pageid}" >{$pagetitlelabel public_lifeboxme_dhis2_dataitems view}</h2>
+		</div>					</div>
+			</div>		
 {END top_block}
 						</div>
-											<div class="r-grid"
-			data-responsive
-	>
-	{BEGIN grid_tabs}
-  <ul class="nav nav-tabs bsgrid_tabs">
-	{$grid_tabs_content}
-  </ul>
-{END grid_tabs}
-	<div class="panel panel-default"
-	>
-		<div class="panel-heading">
-							{BEGIN above-grid_block}
+											<div class="r-above">
+					{BEGIN above-grid_block}
 <div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="leftbar" {$form_above-grid} data-pageid="{$pageid}" >		
 	 
 				<div class="row">
 			 
 				<div 
 	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
-	class=" r-ori-vert			col-md-6
+	class=" r-ori-vert			col-md-12
 	
 ">
 		{BEGIN firstAboveGridCell}
 				{END firstAboveGridCell}	
-	</div>			 
-				<div 
-	data-cellId="above-grid_c2" data-pageid="{$pageid}"	{$cell_above-grid_c2}
-	class="r-align-right r-ori-vert			col-md-6
-	
-">
-			</div>					</div>
-			 
-				<div class="row">
-			 
-				<div 
-	data-cellId="above-grid_c4" data-pageid="{$pageid}"	{$cell_above-grid_c4}
-	class=" r-ori-vert			col-md-6
-	
-">
-			</div>			 
-				<div 
-	data-cellId="above-grid_c5" data-pageid="{$pageid}"	{$cell_above-grid_c5}
-	class="r-align-right r-ori-vert			col-md-6
-	
-">
-			</div>					</div>
-			 
-				<div class="row">
-			 
-				<div 
-	data-cellId="above-grid_c" data-pageid="{$pageid}"	{$cell_above-grid_c}
-	class="r-align-center r-ori-vert			col-md-12
-	
-">
-		 
-		<span data-itemtype="text" data-itemid="text" {$item_text} data-pageid="{$pageid}" data-small > 
-	<iframe src="/api/dhis2/orgunits/fetch_orgunits.php"    style="width: 100%; height: 200vh; border: none;"    title="DHIS2 Organization Units"></iframe><style>    iframe {        max-width: 100%;        min-width: 320px;        /* Minimum width for mobile devices */        height: 80vh;        /* Adjust height as per your needs */    }    @media (max-width: 600px) {        iframe {            height: 60vh;            /* Adjust for smaller screens */        }    }    @media (min-width: 600px) {        iframe {            height: 80vh;            /* Adjust for larger screens */        }    }</style></span>
-		</div>					</div>
+	</div>					</div>
 			</div>		
 {END above-grid_block}
-			</div>
-
+	</div>
+<div class="r-grid">
+	{BEGIN grid_tabs}
+  <ul class="nav nav-tabs bsgrid_tabs">
+	{$grid_tabs_content}
+  </ul>
+{END grid_tabs}
 					{BEGIN grid_block}
-{BEGIN message_block}
-<div data-grid-message data-pageid="{$pageid}" class="alert {$message_class}" role="alert" {$grid_message_attrs}>{$message}</div>
-{END message_block}	<style>
-@media screen and (max-width: 767px) {
-}
-</style>
-<table data-location="grid" id="form_grid_{$pageid}" data-makeup="leftbar" {$form_grid} data-pageid="{$pageid}" class=" table table-condensed table-striped table-hover table-bordered r-horizontal-grid  r-flexgrid rnr-b-grid rnr-gridtable"
-	cellpadding="0"
-	data-body-height="1"
->
-						<thead>
-			{BEGIN grid_header}
-			
-																									<tr {$rowattrs} {$row_grid_0} class="{$rowclass}
-									{$gridHeader_class}
-					
-								r-gridrow
-							">
-									{BEGIN cellblock_grid_headcell_field}
-	<th
-	
-	{$cell_grid_headcell_field}
-	{$recordattrs}
-	class="
-		 r-ori-vert			"
 
-	
-	data-cellId="grid_headcell_field" data-pageid="{$pageid}" data-record-id="{$recId}"	
+
+
+
+ 
+	 
+												<table 
+	data-body-align="left"
+	data-location="grid" id="form_grid_{$pageid}" data-makeup="leftbar" {$form_grid} data-pageid="{$pageid}" 
+	class="r-edit-form" cellpadding="0" cellspacing="0" 
+	{$grid_hiddenattr} 
+		data-form-width="1"
+		
+		data-v-width="4"
 	>
-
-	
-	</th>
-	{END cellblock_grid_headcell_field}
-							</tr>
-															
-					{END grid_header}
-			</thead>
-															<tbody>
-					{BEGIN grid_row}
-							
-																														<tr {$rowattrs} {$row_grid_1} class="{$rowclass}
-				
-								r-gridrow
-							">
-									{BEGIN cellblock_grid_cell_field}
-	<td
-	
-	{$cell_grid_cell_field}
-	{$recordattrs}
-	class="
-		 r-ori-vert			"
-
-	
-	data-cellId="grid_cell_field" data-pageid="{$pageid}" data-record-id="{$recId}"	
-	>
-
-	
-	</td>
-	{END cellblock_grid_cell_field}
-							</tr>
+	<tbody>
+										<tr {$row_grid_0} >
 										
-											{END grid_row}
-					</tbody>
-													<tfoot>
-			
-																																			<tr {$rowattrs} {$row_grid_2} class="{$rowclass}
-									{$gridFooter_class}
-					
-								r-gridrow
-							">
-									{BEGIN cellblock_grid_footcell_field}
-	<td
+
+{BEGIN cellblock_grid_c3}
+<td
+	{$cell_grid_c3}
+	class=" r-ori-vert"
 	
-	{$cell_grid_footcell_field}
-	{$recordattrs}
-	class="
-		 r-ori-vert			"
+				data-fullwidth
+		
+			data-cellId="grid_c3" data-pageid="{$pageid}"
+		data-v-cell="4"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_id}  r-vertical-field" data-fieldname="id" data-signal-error-for="id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="id" data-fieldname="id" data-compact >
 
 	
-	data-cellId="grid_footcell_field" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lifebox_dhis2_settings_dhis2_orgunits_fetcher"	
-	>
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_id}">
+		
+		{BEGIN id_label}{$label public_lifeboxme_dhis2_dataitems id }{END id_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$id_value}	</div>
+
+		
+</div>
+
+
+{END id_fieldblock}
+											
+{BEGIN item_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_item_id}  r-vertical-field" data-fieldname="item_id" data-signal-error-for="item_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="item_id" data-fieldname="item_id" data-compact >
 
 	
-	</td>
-	{END cellblock_grid_footcell_field}
-							</tr>
-					
-					</tfoot>
-				</table>
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_item_id}">
+		
+		{BEGIN item_id_label}{$label public_lifeboxme_dhis2_dataitems item_id }{END item_id_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$item_id_value}	</div>
+
+		
+</div>
+
+
+{END item_id_fieldblock}
+											
+{BEGIN display_name_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_display_name}  r-vertical-field" data-fieldname="display_name" data-signal-error-for="display_name{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="display_name" data-fieldname="display_name" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_display_name}">
+		
+		{BEGIN display_name_label}{$label public_lifeboxme_dhis2_dataitems display_name }{END display_name_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$display_name_value}	</div>
+
+		
+</div>
+
+
+{END display_name_fieldblock}
+											
+{BEGIN name_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_name}  r-vertical-field" data-fieldname="name" data-signal-error-for="name{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="name" data-fieldname="name" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_name}">
+		
+		{BEGIN name_label}{$label public_lifeboxme_dhis2_dataitems name }{END name_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$name_value}	</div>
+
+		
+</div>
+
+
+{END name_fieldblock}
+											
+{BEGIN short_name_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_short_name}  r-vertical-field" data-fieldname="short_name" data-signal-error-for="short_name{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="short_name" data-fieldname="short_name" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_short_name}">
+		
+		{BEGIN short_name_label}{$label public_lifeboxme_dhis2_dataitems short_name }{END short_name_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$short_name_value}	</div>
+
+		
+</div>
+
+
+{END short_name_fieldblock}
+											
+{BEGIN display_short_name_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_display_short_name}  r-vertical-field" data-fieldname="display_short_name" data-signal-error-for="display_short_name{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="display_short_name" data-fieldname="display_short_name" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_display_short_name}">
+		
+		{BEGIN display_short_name_label}{$label public_lifeboxme_dhis2_dataitems display_short_name }{END display_short_name_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$display_short_name_value}	</div>
+
+		
+</div>
+
+
+{END display_short_name_fieldblock}
+											
+{BEGIN dimension_item_type_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_dimension_item_type}  r-vertical-field" data-fieldname="dimension_item_type" data-signal-error-for="dimension_item_type{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="dimension_item_type" data-fieldname="dimension_item_type" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_dimension_item_type}">
+		
+		{BEGIN dimension_item_type_label}{$label public_lifeboxme_dhis2_dataitems dimension_item_type }{END dimension_item_type_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$dimension_item_type_value}	</div>
+
+		
+</div>
+
+
+{END dimension_item_type_fieldblock}
+											
+{BEGIN last_updated_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_last_updated}  r-vertical-field" data-fieldname="last_updated" data-signal-error-for="last_updated{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="last_updated" data-fieldname="last_updated" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_last_updated}">
+		
+		{BEGIN last_updated_label}{$label public_lifeboxme_dhis2_dataitems last_updated }{END last_updated_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$last_updated_value}	</div>
+
+		
+</div>
+
+
+{END last_updated_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c3}
+								</tr>
+			</tbody></table>
 {END grid_block}
-	
-			{BEGIN below-grid_outerblock}
-		<div class="panel-footer">
-			{BEGIN below-grid_block}
+	</div>
+<div class="r-below">
+					{BEGIN below-grid_block}
 <div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="leftbar" {$form_below-grid} data-pageid="{$pageid}" >		
 	 
 				<div class="row">
 			 
 				<div 
 	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
-	class="r-align-center r-ori-vert			col-md-12
+	class="			col-md-6
 	
 ">
-			</div>					</div>
+		 
+		{BEGIN back_button}
+<span data-itemtype="view_back_list" data-itemid="view_back_list" {$item_view_back_list} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$backbutton_attrs} >
+							Back to list			</a>
+</span>
+{END back_button}
+	 
+		{BEGIN close_button}
+<span data-itemtype="view_close" data-itemid="view_close" {$item_view_close} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" href="#" {$closebutton_attrs} >
+							Close window			</a>
+</span>
+{END close_button}
+		</div>			 
+				<div 
+	data-cellId="below-grid_c2" data-pageid="{$pageid}"	{$cell_below-grid_c2}
+	class="r-align-right r-ori-vert			col-md-6
+	
+">
+		 
+		<span data-itemtype="hamburger" data-itemid="hamburger" {$item_hamburger} data-pageid="{$pageid}" data-small data-button-item>
+</span>
+		</div>					</div>
 			</div>		
 {END below-grid_block}
-		</div>
-	{END below-grid_outerblock}
-		</div>
-
-</div>
+	</div>
 
 
 

@@ -321,6 +321,8 @@ function checkTableName($shortTName )
 		return true;
 	if ("lifebox_dhis2_dataitems" == $shortTName )
 		return true;
+	if ("lifeboxme_dhis2_dataitems" == $shortTName )
+		return true;
 	return false;
 }
 
@@ -902,6 +904,15 @@ function GetTablesList($pdfMode = false)
 	if( $tableAvailable ) {
 		$arr[]="Lifebox_DHIS2_dataItems";
 	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lifeboxme_dhis2_dataitems");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lifeboxme_dhis2_dataitems";
+	}
 	return $arr;
 }
 
@@ -970,6 +981,7 @@ function GetTablesListWithoutSecurity()
 	$arr[]="public.lifeboxme_dhis2_orgunits";
 	$arr[]="Lifebox_DHIS2_Settings";
 	$arr[]="Lifebox_DHIS2_dataItems";
+	$arr[]="public.lifeboxme_dhis2_dataitems";
 	return $arr;
 }
 
@@ -1888,6 +1900,11 @@ function GetUserPermissionsStatic( $table )
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="Lifebox_DHIS2_dataItems" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lifeboxme_dhis2_dataitems" )
 	{
 //	default permissions
 		return "ADESPI".$extraPerm;

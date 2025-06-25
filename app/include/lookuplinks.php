@@ -740,6 +740,20 @@ function InitLookupLinks()
 			$lookupTableLinks["Lifebox_DHIS2_dataItems"]["lifebox_dhis2_dataitems.dimensionItemType"] = array();
 		}
 		$lookupTableLinks["Lifebox_DHIS2_dataItems"]["lifebox_dhis2_dataitems.dimensionItemType"]["edit"] = array("table" => "Lifebox_DHIS2_dataItems", "field" => "dimensionItemType", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_dataitems"] ) ) {
+			$lookupTableLinks["public.lifeboxme_dhis2_dataitems"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_dataitems"]["lifeboxme_dhis2_dataitems.display_name"] )) {
+			$lookupTableLinks["public.lifeboxme_dhis2_dataitems"]["lifeboxme_dhis2_dataitems.display_name"] = array();
+		}
+		$lookupTableLinks["public.lifeboxme_dhis2_dataitems"]["lifeboxme_dhis2_dataitems.display_name"]["edit"] = array("table" => "public.lifeboxme_dhis2_dataitems", "field" => "display_name", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_dataitems"] ) ) {
+			$lookupTableLinks["public.lifeboxme_dhis2_dataitems"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_dataitems"]["lifeboxme_dhis2_dataitems.dimension_item_type"] )) {
+			$lookupTableLinks["public.lifeboxme_dhis2_dataitems"]["lifeboxme_dhis2_dataitems.dimension_item_type"] = array();
+		}
+		$lookupTableLinks["public.lifeboxme_dhis2_dataitems"]["lifeboxme_dhis2_dataitems.dimension_item_type"]["edit"] = array("table" => "public.lifeboxme_dhis2_dataitems", "field" => "dimension_item_type", "page" => "edit");
 }
 
 ?>

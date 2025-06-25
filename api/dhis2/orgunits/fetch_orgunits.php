@@ -130,7 +130,7 @@ function displayPage()
     </head>
 
     <body>
-        <div class="container">
+        <div class="container" style="max-width: 100%;">
             <div class="card">
                 <div class="card-header bg-primary text-white">
                     <h2>DHIS2 Organization Units Fetcher</h2>
@@ -323,8 +323,7 @@ function displayPage()
                         // Proper response interpretation
                         const dbStatus = res.database ?
                             '<span class="text-success">✔ Connected</span>' :
-                            '<span class="text-success">✔ Connected</span>';
-                        <!--'<span class="text-danger">✖ Failed</span>'; for fixing false positives -->
+                            '<span class="text-danger">✖ Failed</span>';
 
                         const dhis2Status = res.dhis2 ?
                             '<span class="text-success">✔ Connected</span>' :
