@@ -1,6 +1,6 @@
 <?php
 
-// program_Indicator_Groups.php
+// dataItems.php
 
 /**
  * Fetches DHIS2 dataItems and returns their id and displayName in a structured format

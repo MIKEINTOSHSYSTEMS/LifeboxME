@@ -1,6 +1,6 @@
 <?php
 
-// program_Indicator_Groups.php
+// dataSets.php
 
 /**
  * Fetches DHIS2 dataSets and returns their id and displayName in a structured format

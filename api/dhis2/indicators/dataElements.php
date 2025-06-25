@@ -1,6 +1,6 @@
 <?php
 
-// program_Indicator_Groups.php
+// dataElements.php
 
 /**
  * Fetches DHIS2 dataElements and returns their id and displayName in a structured format

@@ -1,6 +1,6 @@
 <?php
 
-// program_indicators.php
+// indicators.php
 
 /**
  * Fetches DHIS2 indicators and returns their id and displayName in a structured format
