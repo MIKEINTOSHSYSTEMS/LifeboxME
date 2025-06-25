@@ -88,6 +88,7 @@ function fetchDhis2Data($endpoint, $maxRetries = 3)
         $attempt++;
 
         $ch = curl_init();
+        curl_setopt($ch, CURLOPT_VERBOSE, true);
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
@@ -96,7 +97,7 @@ function fetchDhis2Data($endpoint, $maxRetries = 3)
 
         // NEW: Timeout settings
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 15); // 15s to establish connection
-        curl_setopt($ch, CURLOPT_TIMEOUT, 60);        // 60s max request time
+        curl_setopt($ch, CURLOPT_TIMEOUT, 180);        // 60s max request time
 
         $response = curl_exec($ch);
 

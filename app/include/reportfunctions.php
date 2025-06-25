@@ -550,6 +550,10 @@ function testAdvSearch($table)
 		{
 			return 1;
 		}
+		if($table=="Lifebox_DHIS2_dataItems")
+		{
+			return 1;
+		}
 	}
 	elseif(is_wr_db())
 	{
@@ -1034,6 +1038,10 @@ function getCaptionTable($table)
 	if($table=="Lifebox_DHIS2_Settings")
 	{
 		return "Lifebox DHIS2 Settings";
+	}
+	if($table=="Lifebox_DHIS2_dataItems")
+	{
+		return "Lifebox DHIS2 DataItems";
 	}
 	return $table;
 }

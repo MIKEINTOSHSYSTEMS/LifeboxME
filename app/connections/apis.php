@@ -17,6 +17,7 @@ class RestManager
 	{
 		$connectionsIds = array();
 		$connectionsIds["Lifebox_DHIS2_OrgUnits"] = "rest";
+		$connectionsIds["Lifebox_DHIS2_dataItems"] = "rest";
 		$this->_tablesConnectionIds = &$connectionsIds;
 	}
 

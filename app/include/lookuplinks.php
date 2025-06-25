@@ -726,6 +726,20 @@ function InitLookupLinks()
 			$lookupTableLinks["public.lifeboxme_dhis2_orgunits"]["lifeboxme_dhis2_orgunits.level"] = array();
 		}
 		$lookupTableLinks["public.lifeboxme_dhis2_orgunits"]["lifeboxme_dhis2_orgunits.level"]["edit"] = array("table" => "public.lifeboxme_dhis2_orgunits", "field" => "level", "page" => "edit");
+		if( !isset( $lookupTableLinks["Lifebox_DHIS2_dataItems"] ) ) {
+			$lookupTableLinks["Lifebox_DHIS2_dataItems"] = array();
+		}
+		if( !isset( $lookupTableLinks["Lifebox_DHIS2_dataItems"]["lifebox_dhis2_dataitems.displayName"] )) {
+			$lookupTableLinks["Lifebox_DHIS2_dataItems"]["lifebox_dhis2_dataitems.displayName"] = array();
+		}
+		$lookupTableLinks["Lifebox_DHIS2_dataItems"]["lifebox_dhis2_dataitems.displayName"]["edit"] = array("table" => "Lifebox_DHIS2_dataItems", "field" => "displayName", "page" => "edit");
+		if( !isset( $lookupTableLinks["Lifebox_DHIS2_dataItems"] ) ) {
+			$lookupTableLinks["Lifebox_DHIS2_dataItems"] = array();
+		}
+		if( !isset( $lookupTableLinks["Lifebox_DHIS2_dataItems"]["lifebox_dhis2_dataitems.dimensionItemType"] )) {
+			$lookupTableLinks["Lifebox_DHIS2_dataItems"]["lifebox_dhis2_dataitems.dimensionItemType"] = array();
+		}
+		$lookupTableLinks["Lifebox_DHIS2_dataItems"]["lifebox_dhis2_dataitems.dimensionItemType"]["edit"] = array("table" => "Lifebox_DHIS2_dataItems", "field" => "dimensionItemType", "page" => "edit");
 }
 
 ?>
