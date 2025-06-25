@@ -11,13 +11,15 @@ api/dhis2/orgunits/test/
 api/dhis2/orgunits/fetch.php
 api/dhis2/orgunits/test.php
 api/dhis2/index.php
+api/dhis2/indicators/fetch.php
+api/dhis2/indicators/debug_output.json
 api/database/main/0.php
 api/database/main/*.sql
 api/database/main/backup
 api/database/main/test.php
 api/database/test/
 .env
-note.txt
+**/note.txt
 prod.docker-compose.yml
 .env.prod
 .htaccess

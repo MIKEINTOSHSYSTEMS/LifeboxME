@@ -41,6 +41,9 @@ function handleAjaxRequest()
             case 'get_metadata':
                 getMetadata();
                 break;
+            case 'get_legend_types':
+                getLegendTypes();
+                break;
             default:
                 throw new Exception("Invalid action");
         }
@@ -62,6 +65,10 @@ function displayPage()
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
         <style>
+            .bg-primary {
+                --bs-bg-opacity: 1;
+                background-color: #078ca7 !important;
+            }
             .card {
                 margin-top: 20px;
             }
@@ -127,8 +134,12 @@ function displayPage()
                 margin-bottom: 20px;
             }
 
+            .badge-type {
+                background-color: #6c757d;
+                color: white;
+            }
             .badge-indicator {
-                background-color: #6f42c1;
+                background-color: #0d7efd;
             }
 
             .badge-program-indicator {
@@ -141,6 +152,18 @@ function displayPage()
 
             .badge-attribute {
                 background-color: #6610f2;
+            }
+            
+            .badge-reporting-rate {
+                background-color: #17a2b8;
+            }
+
+            .badge-program-data-element {
+                background-color: #ff0000;
+            }            
+            
+            .badge-default {
+                background-color: #6c757d;
             }
         </style>
     </head>
@@ -155,11 +178,11 @@ function displayPage()
                     <div class="row">
                         <div class="col-md-6">
                             <div class="btn-container">
-                                <button id="fetchBtn" class="btn btn-primary me-2">
+                                <button id="fetchBtn" class="btn btn-success me-2">
                                     <span class="spinner" id="fetchSpinner" style="display:none;">↻</span>
                                     Start Fetching Data
                                 </button>
-                                <button id="testConnBtn" class="btn btn-secondary">
+                                <button id="testConnBtn" class="btn btn-warning">
                                     Test Connections
                                 </button>
                             </div>
@@ -183,12 +206,20 @@ function displayPage()
                                 <br>
                                 <strong>DHIS2 Status:</strong> <span id="dhis2Status">Unknown</span>
                             </div>
+    <!--                            
+                            <div class="alert alert-light" id="typeLegendContainer">
+                                <h5>Item Type Legend:</h5>
+                                <div id="typeLegend"></div>
+                            </div>
+        -->
                             <div class="alert alert-light">
                                 <h5>Item Type Legend:</h5>
                                 <span class="badge badge-indicator text-white me-2">INDICATOR</span>
                                 <span class="badge badge-program-indicator text-white me-2">PROGRAM_INDICATOR</span>
                                 <span class="badge badge-data-element text-white me-2">DATA_ELEMENT</span>
                                 <span class="badge badge-attribute text-white">PROGRAM_ATTRIBUTE</span>
+                                <span class="badge badge-reporting-rate text-white">REPORTING_RATE</span>
+                                <span class="badge badge-program-data-element text-white">PROGRAM_DATA_ELEMENT</span>
                             </div>
                         </div>
                     </div>
@@ -220,6 +251,9 @@ function displayPage()
 
         <script>
             $(document).ready(function() {
+                // Load type legend first
+                loadTypeLegend();
+                
                 // Initialize DataTable
                 const table = $('#dataTable').DataTable({
                     ajax: {
@@ -228,42 +262,69 @@ function displayPage()
                         data: {
                             action: 'get_data'
                         },
-                        dataSrc: 'data'
+                        dataSrc: 'data',
+                        error: function(xhr, error, thrown) {
+                            console.log('DataTables AJAX error:', xhr.responseText);
+                            $('#logContainer').append(
+                                `<div class="log-error">DataTables error: ${thrown}</div>` +
+                                `<div class="log-debug">${xhr.responseText}</div>`
+                            );
+                        }
                     },
-                    columns: [{
-                            data: 'dimensionItemType',
+                    columns: [
+    { 
+        data: 'dimensionItemType',
+        render: function(data, type, row) {
+            if (!data) return '';
+            let badgeClass = '';
+            switch(data) {
+                case 'INDICATOR':
+                    badgeClass = 'badge-indicator';
+                    break;
+                case 'PROGRAM_INDICATOR':
+                    badgeClass = 'badge-program-indicator';
+                    break;
+                case 'DATA_ELEMENT':
+                    badgeClass = 'badge-data-element';
+                    break;
+                case 'PROGRAM_ATTRIBUTE':
+                    badgeClass = 'badge-attribute';
+                    break;
+                case 'REPORTING_RATE':
+                    badgeClass = 'badge-reporting-rate';
+                    break;
+                case 'PROGRAM_DATA_ELEMENT':
+                    badgeClass = 'badge-program-data-element';
+                    break;                                        
+                default:
+                    badgeClass = 'badge-secondary';
+            }
+            return `<span class="badge ${badgeClass} text-white">${data}</span>`;
+        }
+    },
+                        { 
+                            data: 'id',
                             render: function(data, type, row) {
-                                let badgeClass = '';
-                                switch (data) {
-                                    case 'INDICATOR':
-                                        badgeClass = 'badge-indicator';
-                                        break;
-                                    case 'PROGRAM_INDICATOR':
-                                        badgeClass = 'badge-program-indicator';
-                                        break;
-                                    case 'DATA_ELEMENT':
-                                        badgeClass = 'badge-data-element';
-                                        break;
-                                    case 'PROGRAM_ATTRIBUTE':
-                                        badgeClass = 'badge-attribute';
-                                        break;
-                                    default:
-                                        badgeClass = 'badge-secondary';
-                                }
-                                return `<span class="badge ${badgeClass} text-white">${data}</span>`;
+                                return data || '';
                             }
                         },
-                        {
-                            data: 'id'
+                        { 
+                            data: 'displayName',
+                            render: function(data, type, row) {
+                                return data || '';
+                            }
                         },
-                        {
-                            data: 'displayName'
+                        { 
+                            data: 'shortName',
+                            render: function(data, type, row) {
+                                return data || '';
+                            }
                         },
-                        {
-                            data: 'displayShortName'
-                        },
-                        {
-                            data: 'name'
+                        { 
+                            data: 'name',
+                            render: function(data, type, row) {
+                                return data || '';
+                            }
                         }
                     ],
                     pageLength: 10,
@@ -315,6 +376,7 @@ function displayPage()
                                 // Update metadata and reload data
                                 updateMetadata();
                                 table.ajax.reload();
+                                loadTypeLegend();
                             } else if (data.type === 'log-error') {
                                 $('#progressBar').removeClass('progress-bar-animated').addClass('bg-danger');
                                 $('#progressStatus').removeClass('alert-info').addClass('alert-danger')
@@ -385,6 +447,20 @@ function displayPage()
                         }
                     }, 'json');
                 }
+                
+                function loadTypeLegend() {
+                    $.post('fetch_dataitems.php', {
+                        action: 'get_legend_types'
+                    }, function(res) {
+                        if (res.success && res.types && res.types.length > 0) {
+                            let legendHtml = '';
+                            res.types.forEach(type => {
+                                legendHtml += `<span class="badge badge-type me-2">${type}</span>`;
+                            });
+                            $('#typeLegend').html(legendHtml);
+                        }
+                    }, 'json');
+                }
 
                 // Load initial metadata
                 updateMetadata();
@@ -418,6 +494,12 @@ function ensureTableExists($pdo)
                 )
             ";
             $pdo->exec($sql);
+            
+            // Set the MINVALUE for the sequence
+            $pdo->exec('ALTER SEQUENCE "public"."lifeboxme_dhis2_dataitems_id_seq" MINVALUE 0;');
+            
+            // Reset the sequence to 0
+            $pdo->exec('SELECT setval(\'"public"."lifeboxme_dhis2_dataitems_id_seq"\', 0, true);');
             return true;
         }
         return true;
@@ -425,6 +507,7 @@ function ensureTableExists($pdo)
         throw new Exception("Table check/create failed: " . $e->getMessage());
     }
 }
+
 
 function getLastFetchTime()
 {
@@ -456,20 +539,36 @@ function getStoredData()
     try {
         $pdo = connectToDatabase();
         ensureTableExists($pdo);
-        $stmt = $pdo->query("
+        $stmt = $pdo->query('
             SELECT 
-                item_id as id,
-                display_name,
+                item_id as "id",
+                display_name as "displayName",
                 name,
-                short_name,
-                display_short_name,
-                dimension_item_type
+                short_name as "shortName",
+                display_short_name as "displayShortName",
+                dimension_item_type as "dimensionItemType"
             FROM lifeboxme_dhis2_dataitems
             ORDER BY dimension_item_type, display_name
-        ");
+        ');
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
         echo json_encode(['success' => true, 'data' => $data]);
+    } catch (Exception $e) {
+        echo json_encode(['success' => false, 'error' => $e->getMessage()]);
+    }
+}
+
+function getLegendTypes()
+{
+    try {
+        $pdo = connectToDatabase();
+        ensureTableExists($pdo);
+        $stmt = $pdo->query("
+            SELECT DISTINCT dimension_item_type 
+            FROM lifeboxme_dhis2_dataitems
+            ORDER BY dimension_item_type
+        ");
+        $types = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
+        echo json_encode(['success' => true, 'types' => $types]);
     } catch (Exception $e) {
         echo json_encode(['success' => false, 'error' => $e->getMessage()]);
     }
@@ -593,8 +692,16 @@ function fetchAndStoreData()
 
         sendProgress(40, sprintf("Fetched %d data items", count($dataItems['dataItems'])), 'log-success');
 
+        sendProgress(42, "Resetting Sequence to 0...", 'log-success');
+
+        // Set the MINVALUE for the sequence
+        $pdo->exec('ALTER SEQUENCE "public"."lifeboxme_dhis2_dataitems_id_seq" MINVALUE 0;');
+        
+        // Reset the sequence to 0
+        $pdo->exec('SELECT setval(\'"public"."lifeboxme_dhis2_dataitems_id_seq"\', 0, true);');
+        
         // Prepare insert statement
-        sendProgress(45, "Preparing to insert data into database...", 'log-entry');
+        sendProgress(47, "Preparing to insert data into database...", 'log-entry');
         $insertStmt = $pdo->prepare("
             INSERT INTO lifeboxme_dhis2_dataitems (
                 item_id, display_name, name, short_name, display_short_name, dimension_item_type
