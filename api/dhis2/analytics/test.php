@@ -130,10 +130,18 @@ function fetchDhis2Data($endpoint, $maxRetries = 3)
 // Function to fetch data items metadata
 function fetchDataItemsMetadata()
 {
-    $dataItemsApi = 'http://lifeboxme/api/dhis2/indicators/dataItems.php';
+    //$dataItemsApi = 'http://lifeboxme/api/dhis2/indicators/dataItems.php';
+    // Get current scheme and host dynamically
+    $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+    $host = $_SERVER['HTTP_HOST'];
+    $basePath = dirname($_SERVER['SCRIPT_NAME']); // e.g., /api/dhis2/analytics
+    $dataItemsPath = '/api/dhis2/indicators/dataItems.php';
+
+    // Build full URL to dataItems.php
+    $fullUrl = $scheme . '://' . $host . $dataItemsPath;
 
     try {
-        $ch = curl_init($dataItemsApi);
+        $ch = curl_init($fullUrl);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 15);
         $response = curl_exec($ch);
