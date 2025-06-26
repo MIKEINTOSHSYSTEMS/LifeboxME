@@ -754,6 +754,48 @@ function InitLookupLinks()
 			$lookupTableLinks["public.lifeboxme_dhis2_dataitems"]["lifeboxme_dhis2_dataitems.dimension_item_type"] = array();
 		}
 		$lookupTableLinks["public.lifeboxme_dhis2_dataitems"]["lifeboxme_dhis2_dataitems.dimension_item_type"]["edit"] = array("table" => "public.lifeboxme_dhis2_dataitems", "field" => "dimension_item_type", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_dataitems"] ) ) {
+			$lookupTableLinks["public.lifeboxme_dhis2_dataitems"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_dataitems"]["lifeboxme_dhis2_analytics_settings.dx"] )) {
+			$lookupTableLinks["public.lifeboxme_dhis2_dataitems"]["lifeboxme_dhis2_analytics_settings.dx"] = array();
+		}
+		$lookupTableLinks["public.lifeboxme_dhis2_dataitems"]["lifeboxme_dhis2_analytics_settings.dx"]["edit"] = array("table" => "public.lifeboxme_dhis2_analytics_settings", "field" => "dx", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_analytics_settings"] ) ) {
+			$lookupTableLinks["public.lifeboxme_dhis2_analytics_settings"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_analytics_settings"]["lifeboxme_dhis2_analytics_data.setting_id"] )) {
+			$lookupTableLinks["public.lifeboxme_dhis2_analytics_settings"]["lifeboxme_dhis2_analytics_data.setting_id"] = array();
+		}
+		$lookupTableLinks["public.lifeboxme_dhis2_analytics_settings"]["lifeboxme_dhis2_analytics_data.setting_id"]["edit"] = array("table" => "public.lifeboxme_dhis2_analytics_data", "field" => "setting_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_analytics_data"] ) ) {
+			$lookupTableLinks["public.lifeboxme_dhis2_analytics_data"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_analytics_data"]["lifeboxme_dhis2_analytics_data.dx_name"] )) {
+			$lookupTableLinks["public.lifeboxme_dhis2_analytics_data"]["lifeboxme_dhis2_analytics_data.dx_name"] = array();
+		}
+		$lookupTableLinks["public.lifeboxme_dhis2_analytics_data"]["lifeboxme_dhis2_analytics_data.dx_name"]["edit"] = array("table" => "public.lifeboxme_dhis2_analytics_data", "field" => "dx_name", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_analytics_data"] ) ) {
+			$lookupTableLinks["public.lifeboxme_dhis2_analytics_data"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_analytics_data"]["lifeboxme_dhis2_analytics_data.dx_dimensiontype"] )) {
+			$lookupTableLinks["public.lifeboxme_dhis2_analytics_data"]["lifeboxme_dhis2_analytics_data.dx_dimensiontype"] = array();
+		}
+		$lookupTableLinks["public.lifeboxme_dhis2_analytics_data"]["lifeboxme_dhis2_analytics_data.dx_dimensiontype"]["edit"] = array("table" => "public.lifeboxme_dhis2_analytics_data", "field" => "dx_dimensiontype", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_analytics_data"] ) ) {
+			$lookupTableLinks["public.lifeboxme_dhis2_analytics_data"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_analytics_data"]["lifeboxme_dhis2_analytics_data.ou_name"] )) {
+			$lookupTableLinks["public.lifeboxme_dhis2_analytics_data"]["lifeboxme_dhis2_analytics_data.ou_name"] = array();
+		}
+		$lookupTableLinks["public.lifeboxme_dhis2_analytics_data"]["lifeboxme_dhis2_analytics_data.ou_name"]["edit"] = array("table" => "public.lifeboxme_dhis2_analytics_data", "field" => "ou_name", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_analytics_data"] ) ) {
+			$lookupTableLinks["public.lifeboxme_dhis2_analytics_data"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_analytics_data"]["lifeboxme_dhis2_analytics_data.pe_relativeperiod"] )) {
+			$lookupTableLinks["public.lifeboxme_dhis2_analytics_data"]["lifeboxme_dhis2_analytics_data.pe_relativeperiod"] = array();
+		}
+		$lookupTableLinks["public.lifeboxme_dhis2_analytics_data"]["lifeboxme_dhis2_analytics_data.pe_relativeperiod"]["edit"] = array("table" => "public.lifeboxme_dhis2_analytics_data", "field" => "pe_relativeperiod", "page" => "edit");
 }
 
 ?>

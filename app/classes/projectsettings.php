@@ -3698,6 +3698,10 @@ function fillProjectEntites()
 	$projectEntitiesReverse[ "lifebox_dhis2_dataitems" ] = "Lifebox_DHIS2_dataItems";
 	$projectEntities[ "public.lifeboxme_dhis2_dataitems" ] = array( "url" => "lifeboxme_dhis2_dataitems", "type" => 0 );
 	$projectEntitiesReverse[ "lifeboxme_dhis2_dataitems" ] = "public.lifeboxme_dhis2_dataitems";
+	$projectEntities[ "public.lifeboxme_dhis2_analytics_settings" ] = array( "url" => "lifeboxme_dhis2_analytics_settings", "type" => 0 );
+	$projectEntitiesReverse[ "lifeboxme_dhis2_analytics_settings" ] = "public.lifeboxme_dhis2_analytics_settings";
+	$projectEntities[ "public.lifeboxme_dhis2_analytics_data" ] = array( "url" => "lifeboxme_dhis2_analytics_data", "type" => 0 );
+	$projectEntitiesReverse[ "lifeboxme_dhis2_analytics_data" ] = "public.lifeboxme_dhis2_analytics_data";
 }
 
 function findTable( $table ) {

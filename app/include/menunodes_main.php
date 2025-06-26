@@ -1435,7 +1435,7 @@
 	$menuNodes[] = $menuNode;
 	$menuNode = array();
 	$menuNode["id"] = "83";
-	$menuNode["name"] = "Lifeboxme DHIS2 Data Items";
+	$menuNode["name"] = "Lifebox DHIS2 Data Items";
 	$menuNode["href"] = "mypage.htm";
 	$menuNode["type"] = "Leaf";
 	$menuNode["table"] = "public.lifeboxme_dhis2_dataitems";
@@ -1454,7 +1454,33 @@
 
 		$menuNode["color"] = "";
 
-	$menuNode["title"] = "Lifeboxme DHIS2 Data Items";
+	$menuNode["title"] = "Lifebox DHIS2 Data Items";
+
+
+
+	$menuNodes[] = $menuNode;
+	$menuNode = array();
+	$menuNode["id"] = "87";
+	$menuNode["name"] = "Lifebox DHIS2 Analytics Data";
+	$menuNode["href"] = "mypage.htm";
+	$menuNode["type"] = "Leaf";
+	$menuNode["table"] = "public.lifeboxme_dhis2_analytics_data";
+	$menuNode["style"] = "";
+	$menuNode["params"] = "";
+	$menuNode["parent"] = "75";
+	$menuNode["nameType"] = "Text";
+	$menuNode["linkType"] = "Internal";
+	$menuNode["pageType"] = strtolower("List");//
+	$menuNode["pageId"] = "";
+	$menuNode["openType"] = "None";
+
+	$menuNode["icon"] = "fa-cube";
+	$menuNode["iconType"] = "3";
+	$menuNode["iconShow"] = "1";
+
+		$menuNode["color"] = "";
+
+	$menuNode["title"] = "Lifebox DHIS2 Analytics Data";
 
 
 
@@ -1585,6 +1611,32 @@
 		$menuNode["color"] = "";
 
 	$menuNode["title"] = "DHIS2 DataItems Fetcher";
+
+
+
+	$menuNodes[] = $menuNode;
+	$menuNode = array();
+	$menuNode["id"] = "86";
+	$menuNode["name"] = "DHIS2 Analytics Fetcher Settings";
+	$menuNode["href"] = "mypage.htm";
+	$menuNode["type"] = "Leaf";
+	$menuNode["table"] = "public.lifeboxme_dhis2_analytics_settings";
+	$menuNode["style"] = "";
+	$menuNode["params"] = "";
+	$menuNode["parent"] = "79";
+	$menuNode["nameType"] = "Text";
+	$menuNode["linkType"] = "Internal";
+	$menuNode["pageType"] = strtolower("List");//
+	$menuNode["pageId"] = "";
+	$menuNode["openType"] = "None";
+
+	$menuNode["icon"] = "fa-cloud-download";
+	$menuNode["iconType"] = "3";
+	$menuNode["iconShow"] = "1";
+
+		$menuNode["color"] = "";
+
+	$menuNode["title"] = "DHIS2 Analytics Fetcher Settings";
 
 
 

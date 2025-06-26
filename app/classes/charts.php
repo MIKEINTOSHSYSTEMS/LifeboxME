@@ -498,6 +498,10 @@ class Chart
 			return true;
 		if("public.lifeboxme_dhis2_dataitems" == $this->chrt_array['tables'][0])
 			return true;
+		if("public.lifeboxme_dhis2_analytics_settings" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lifeboxme_dhis2_analytics_data" == $this->chrt_array['tables'][0])
+			return true;
 		return false;
 	}
 

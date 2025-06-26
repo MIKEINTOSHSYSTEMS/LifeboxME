@@ -558,6 +558,14 @@ function testAdvSearch($table)
 		{
 			return 1;
 		}
+		if($table=="public.lifeboxme_dhis2_analytics_settings")
+		{
+			return 1;
+		}
+		if($table=="public.lifeboxme_dhis2_analytics_data")
+		{
+			return 1;
+		}
 	}
 	elseif(is_wr_db())
 	{
@@ -1050,6 +1058,14 @@ function getCaptionTable($table)
 	if($table=="public.lifeboxme_dhis2_dataitems")
 	{
 		return "Lifeboxme Dhis2 Dataitems";
+	}
+	if($table=="public.lifeboxme_dhis2_analytics_settings")
+	{
+		return "Lifeboxme Dhis2 Analytics Settings";
+	}
+	if($table=="public.lifeboxme_dhis2_analytics_data")
+	{
+		return "Lifeboxme Dhis2 Analytics Data";
 	}
 	return $table;
 }
@@ -2572,6 +2588,30 @@ function GetTablesListReport()
 		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
 		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
 			$arr[]="public.lifeboxme_dhis2_dataitems";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lifeboxme_dhis2_analytics_settings");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lifeboxme_dhis2_analytics_settings";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lifeboxme_dhis2_analytics_settings";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lifeboxme_dhis2_analytics_data");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lifeboxme_dhis2_analytics_data";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lifeboxme_dhis2_analytics_data";
 	}
 	return $arr;
 }

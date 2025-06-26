@@ -1069,6 +1069,7 @@ if ($action) {
                 if (!confirm('Fetch data for this setting? This may take some time.')) return;
 
                 addLog(`Starting data fetch for setting ID: ${settingId}`);
+                addLog(`Starting data fetch for setting: ${settingName}`);
 
                 $.post('fetch_analytics.php', {
                     action: 'fetch_data',

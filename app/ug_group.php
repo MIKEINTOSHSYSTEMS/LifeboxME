@@ -75,6 +75,8 @@ $nonAdminTablesArr[] = "public.lifeboxme_dhis2_orgunits";
 $nonAdminTablesArr[] = "Lifebox_DHIS2_Settings";
 $nonAdminTablesArr[] = "Lifebox_DHIS2_dataItems";
 $nonAdminTablesArr[] = "public.lifeboxme_dhis2_dataitems";
+$nonAdminTablesArr[] = "public.lifeboxme_dhis2_analytics_settings";
+$nonAdminTablesArr[] = "public.lifeboxme_dhis2_analytics_data";
 
 $ug_connection = $cman->getForUserGroups();
 

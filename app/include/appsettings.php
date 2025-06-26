@@ -768,9 +768,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "127_1750879279";
+$projectBuildKey = "129_1750964883";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "127";
+$projectBuildNumber = "129";
 
 $mlang_messages = array();
 $mlang_charsets = array();
@@ -854,8 +854,10 @@ $tableCaptions["English"]["Lifebox_DHIS2_OrgUnits"] = "Lifebox DHIS2 OrgUnits";
 $tableCaptions["English"]["public_lifeboxme_dhis2_orgunits"] = "Lifeboxme Dhis2 Orgunits";
 $tableCaptions["English"]["Lifebox_DHIS2_dataItems"] = "Lifebox DHIS2 DataItems";
 $tableCaptions["English"]["public_lifeboxme_dhis2_dataitems"] = "Lifeboxme Dhis2 Dataitems";
-$tableCaptions["English"]["Lifebox_DHIS2_Settings"] = "Lifebox DHIS2 Settings";
+$tableCaptions["English"]["public_lifeboxme_dhis2_analytics_settings"] = "Lifeboxme Dhis2 Analytics Settings";
+$tableCaptions["English"]["public_lifeboxme_dhis2_analytics_data"] = "Lifeboxme Dhis2 Analytics Data";
 $tableCaptions["English"]["Dashboard"] = "Dashboard";
+$tableCaptions["English"]["Lifebox_DHIS2_Settings"] = "Lifebox DHIS2 Settings";
 
 
 $globalEvents = new class_GlobalEvents;

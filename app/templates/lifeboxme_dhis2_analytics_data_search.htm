@@ -1,0 +1,524 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
+	{BEGIN rtlCSS}
+	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
+	{END rtlCSS}
+	{BEGIN styleCSSFiles}
+	<link REL="stylesheet" href="{$stylepath}" type="text/css">
+	{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-search" >
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		{$locking}
+		<div class="r-small-page" 
+			data-body-align="center"
+			data-body-width="standard"
+		>
+							{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="small" {$form_top} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="top_c1" data-pageid="{$pageid}"	{$cell_top_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	 
+		<h2 data-itemtype="search_header" data-itemid="search_header" {$item_search_header} data-pageid="{$pageid}" >{$pagetitlelabel public_lifeboxme_dhis2_analytics_data search}</h2>
+	</div>					</div>
+	</div>		
+{END top_block}
+									{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="small" {$form_above-grid} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	</div>					</div>
+	</div>		
+{END above-grid_block}
+									{BEGIN grid_block}
+
+
+
+
+ 
+	 
+												<table 
+	data-body-align="center"
+	data-location="grid" id="form_grid_{$pageid}" data-makeup="small" {$form_grid} data-pageid="{$pageid}" 
+	class="r-edit-form" cellpadding="0" cellspacing="0" 
+	{$grid_hiddenattr} 
+		data-form-width="1"
+		
+		data-v-width="6"
+	>
+	<tbody>
+										<tr {$row_grid_0} >
+										
+
+{BEGIN cellblock_grid_c3}
+<td
+	{$cell_grid_c3}
+	class=" r-ori-vert"
+	
+				data-fullwidth
+		
+			data-cellId="grid_c3" data-pageid="{$pageid}"
+		data-v-cell="6"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN id_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_id}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="id{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field" {$item_integrated_search_field} data-pageid="{$pageid}" data-field="id" data-fieldname="id" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_id}">
+		{$label public_lifeboxme_dhis2_analytics_data id }	</label>
+	<div class="r-search-option">
+		{$searchtype_id}
+	</div>
+	<div class="r-search-field">
+		{$id_editcontrol}	</div>
+	<div class="r-search-field">
+		{$id_editcontrol1}
+	</div>
+	
+</div>
+
+{END id_fieldblock}
+											
+{BEGIN setting_id_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_setting_id}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="setting_id{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field1" {$item_integrated_search_field1} data-pageid="{$pageid}" data-field="setting_id" data-fieldname="setting_id" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_setting_id}">
+		{$label public_lifeboxme_dhis2_analytics_data setting_id }	</label>
+	<div class="r-search-option">
+		{$searchtype_setting_id}
+	</div>
+	<div class="r-search-field">
+		{$setting_id_editcontrol}	</div>
+	<div class="r-search-field">
+		{$setting_id_editcontrol1}
+	</div>
+	
+</div>
+
+{END setting_id_fieldblock}
+											
+{BEGIN dx_id_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_dx_id}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="dx_id{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field2" {$item_integrated_search_field2} data-pageid="{$pageid}" data-field="dx_id" data-fieldname="dx_id" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_dx_id}">
+		{$label public_lifeboxme_dhis2_analytics_data dx_id }	</label>
+	<div class="r-search-option">
+		{$searchtype_dx_id}
+	</div>
+	<div class="r-search-field">
+		{$dx_id_editcontrol}	</div>
+	<div class="r-search-field">
+		{$dx_id_editcontrol1}
+	</div>
+	
+</div>
+
+{END dx_id_fieldblock}
+											
+{BEGIN dx_name_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_dx_name}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="dx_name{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field3" {$item_integrated_search_field3} data-pageid="{$pageid}" data-field="dx_name" data-fieldname="dx_name" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_dx_name}">
+		{$label public_lifeboxme_dhis2_analytics_data dx_name }	</label>
+	<div class="r-search-option">
+		{$searchtype_dx_name}
+	</div>
+	<div class="r-search-field">
+		{$dx_name_editcontrol}	</div>
+	<div class="r-search-field">
+		{$dx_name_editcontrol1}
+	</div>
+	
+</div>
+
+{END dx_name_fieldblock}
+											
+{BEGIN dx_shortname_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_dx_shortname}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="dx_shortname{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field4" {$item_integrated_search_field4} data-pageid="{$pageid}" data-field="dx_shortname" data-fieldname="dx_shortname" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_dx_shortname}">
+		{$label public_lifeboxme_dhis2_analytics_data dx_shortname }	</label>
+	<div class="r-search-option">
+		{$searchtype_dx_shortname}
+	</div>
+	<div class="r-search-field">
+		{$dx_shortname_editcontrol}	</div>
+	<div class="r-search-field">
+		{$dx_shortname_editcontrol1}
+	</div>
+	
+</div>
+
+{END dx_shortname_fieldblock}
+											
+{BEGIN dx_displayname_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_dx_displayname}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="dx_displayname{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field5" {$item_integrated_search_field5} data-pageid="{$pageid}" data-field="dx_displayname" data-fieldname="dx_displayname" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_dx_displayname}">
+		{$label public_lifeboxme_dhis2_analytics_data dx_displayname }	</label>
+	<div class="r-search-option">
+		{$searchtype_dx_displayname}
+	</div>
+	<div class="r-search-field">
+		{$dx_displayname_editcontrol}	</div>
+	<div class="r-search-field">
+		{$dx_displayname_editcontrol1}
+	</div>
+	
+</div>
+
+{END dx_displayname_fieldblock}
+											
+{BEGIN dx_dimensiontype_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_dx_dimensiontype}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="dx_dimensiontype{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field6" {$item_integrated_search_field6} data-pageid="{$pageid}" data-field="dx_dimensiontype" data-fieldname="dx_dimensiontype" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_dx_dimensiontype}">
+		{$label public_lifeboxme_dhis2_analytics_data dx_dimensiontype }	</label>
+	<div class="r-search-option">
+		{$searchtype_dx_dimensiontype}
+	</div>
+	<div class="r-search-field">
+		{$dx_dimensiontype_editcontrol}	</div>
+	<div class="r-search-field">
+		{$dx_dimensiontype_editcontrol1}
+	</div>
+	
+</div>
+
+{END dx_dimensiontype_fieldblock}
+											
+{BEGIN ou_id_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_ou_id}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="ou_id{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field7" {$item_integrated_search_field7} data-pageid="{$pageid}" data-field="ou_id" data-fieldname="ou_id" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_ou_id}">
+		{$label public_lifeboxme_dhis2_analytics_data ou_id }	</label>
+	<div class="r-search-option">
+		{$searchtype_ou_id}
+	</div>
+	<div class="r-search-field">
+		{$ou_id_editcontrol}	</div>
+	<div class="r-search-field">
+		{$ou_id_editcontrol1}
+	</div>
+	
+</div>
+
+{END ou_id_fieldblock}
+											
+{BEGIN ou_name_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_ou_name}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="ou_name{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field8" {$item_integrated_search_field8} data-pageid="{$pageid}" data-field="ou_name" data-fieldname="ou_name" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_ou_name}">
+		{$label public_lifeboxme_dhis2_analytics_data ou_name }	</label>
+	<div class="r-search-option">
+		{$searchtype_ou_name}
+	</div>
+	<div class="r-search-field">
+		{$ou_name_editcontrol}	</div>
+	<div class="r-search-field">
+		{$ou_name_editcontrol1}
+	</div>
+	
+</div>
+
+{END ou_name_fieldblock}
+											
+{BEGIN pe_id_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_pe_id}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="pe_id{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field9" {$item_integrated_search_field9} data-pageid="{$pageid}" data-field="pe_id" data-fieldname="pe_id" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_pe_id}">
+		{$label public_lifeboxme_dhis2_analytics_data pe_id }	</label>
+	<div class="r-search-option">
+		{$searchtype_pe_id}
+	</div>
+	<div class="r-search-field">
+		{$pe_id_editcontrol}	</div>
+	<div class="r-search-field">
+		{$pe_id_editcontrol1}
+	</div>
+	
+</div>
+
+{END pe_id_fieldblock}
+											
+{BEGIN pe_name_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_pe_name}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="pe_name{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field10" {$item_integrated_search_field10} data-pageid="{$pageid}" data-field="pe_name" data-fieldname="pe_name" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_pe_name}">
+		{$label public_lifeboxme_dhis2_analytics_data pe_name }	</label>
+	<div class="r-search-option">
+		{$searchtype_pe_name}
+	</div>
+	<div class="r-search-field">
+		{$pe_name_editcontrol}	</div>
+	<div class="r-search-field">
+		{$pe_name_editcontrol1}
+	</div>
+	
+</div>
+
+{END pe_name_fieldblock}
+											
+{BEGIN pe_relativeperiod_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_pe_relativeperiod}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="pe_relativeperiod{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field11" {$item_integrated_search_field11} data-pageid="{$pageid}" data-field="pe_relativeperiod" data-fieldname="pe_relativeperiod" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_pe_relativeperiod}">
+		{$label public_lifeboxme_dhis2_analytics_data pe_relativeperiod }	</label>
+	<div class="r-search-option">
+		{$searchtype_pe_relativeperiod}
+	</div>
+	<div class="r-search-field">
+		{$pe_relativeperiod_editcontrol}	</div>
+	<div class="r-search-field">
+		{$pe_relativeperiod_editcontrol1}
+	</div>
+	
+</div>
+
+{END pe_relativeperiod_fieldblock}
+											
+{BEGIN value_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_value}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="value{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field12" {$item_integrated_search_field12} data-pageid="{$pageid}" data-field="value" data-fieldname="value" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_value}">
+		{$label public_lifeboxme_dhis2_analytics_data value }	</label>
+	<div class="r-search-option">
+		{$searchtype_value}
+	</div>
+	<div class="r-search-field">
+		{$value_editcontrol}	</div>
+	<div class="r-search-field">
+		{$value_editcontrol1}
+	</div>
+	
+</div>
+
+{END value_fieldblock}
+											
+{BEGIN stored_by_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_stored_by}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="stored_by{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field13" {$item_integrated_search_field13} data-pageid="{$pageid}" data-field="stored_by" data-fieldname="stored_by" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_stored_by}">
+		{$label public_lifeboxme_dhis2_analytics_data stored_by }	</label>
+	<div class="r-search-option">
+		{$searchtype_stored_by}
+	</div>
+	<div class="r-search-field">
+		{$stored_by_editcontrol}	</div>
+	<div class="r-search-field">
+		{$stored_by_editcontrol1}
+	</div>
+	
+</div>
+
+{END stored_by_fieldblock}
+											
+{BEGIN created_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_created}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="created{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field14" {$item_integrated_search_field14} data-pageid="{$pageid}" data-field="created" data-fieldname="created" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_created}">
+		{$label public_lifeboxme_dhis2_analytics_data created }	</label>
+	<div class="r-search-option">
+		{$searchtype_created}
+	</div>
+	<div class="r-search-field">
+		{$created_editcontrol}	</div>
+	<div class="r-search-field">
+		{$created_editcontrol1}
+	</div>
+	
+</div>
+
+{END created_fieldblock}
+											
+{BEGIN last_updated_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_last_updated}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="last_updated{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field15" {$item_integrated_search_field15} data-pageid="{$pageid}" data-field="last_updated" data-fieldname="last_updated" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_last_updated}">
+		{$label public_lifeboxme_dhis2_analytics_data last_updated }	</label>
+	<div class="r-search-option">
+		{$searchtype_last_updated}
+	</div>
+	<div class="r-search-field">
+		{$last_updated_editcontrol}	</div>
+	<div class="r-search-field">
+		{$last_updated_editcontrol1}
+	</div>
+	
+</div>
+
+{END last_updated_fieldblock}
+											
+{BEGIN fetched_at_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_fetched_at}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="fetched_at{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field16" {$item_integrated_search_field16} data-pageid="{$pageid}" data-field="fetched_at" data-fieldname="fetched_at" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_fetched_at}">
+		{$label public_lifeboxme_dhis2_analytics_data fetched_at }	</label>
+	<div class="r-search-option">
+		{$searchtype_fetched_at}
+	</div>
+	<div class="r-search-field">
+		{$fetched_at_editcontrol}	</div>
+	<div class="r-search-field">
+		{$fetched_at_editcontrol1}
+	</div>
+	
+</div>
+
+{END fetched_at_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c3}
+								</tr>
+			</tbody></table>
+{END grid_block}
+									{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="small" {$form_below-grid} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class="			col-md-12
+	">
+	 
+		<span data-itemtype="search_search" data-itemid="search_search" {$item_search_search} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" {$searchbutton_attrs} data-page=undefined >
+							Search			</a>
+</span>
+	 
+		<span data-itemtype="search_reset" data-itemid="search_reset" {$item_search_reset} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$resetbutton_attrs} >
+							Reset			</a>
+</span>
+	 
+		{BEGIN back_button}
+<span data-itemtype="search_back_list" data-itemid="search_back_list" {$item_search_back_list} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$backbutton_attrs} >
+							Back to list			</a>
+</span>
+{END back_button}
+	 
+		{BEGIN cancel_button}
+<span data-itemtype="search_cancel" data-itemid="search_cancel" {$item_search_cancel} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" id="cancelButton{$id}" >
+							Cancel			</a>
+</span>
+{END cancel_button}
+	</div>					</div>
+	</div>		
+{END below-grid_block}
+			</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

@@ -1501,6 +1501,10 @@ class CrossTableWebReport
 			$isDB = true;
 		if("public.lifeboxme_dhis2_dataitems" == $this->xml_array['tables'][0])
 			$isDB = true;
+		if("public.lifeboxme_dhis2_analytics_settings" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lifeboxme_dhis2_analytics_data" == $this->xml_array['tables'][0])
+			$isDB = true;
 		return $isDB;
 	}
 	
