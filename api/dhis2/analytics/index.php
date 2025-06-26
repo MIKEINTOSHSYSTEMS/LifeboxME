@@ -12,14 +12,9 @@ if (file_exists($envFile)) {
 // Function to fetch data items metadata
 function fetchDataItemsMetadata()
 {
-    //$dataItemsApi = 'http://lifeboxme/api/dhis2/indicators/dataItems.php';
-    // Get current scheme and host dynamically
     $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
     $host = $_SERVER['HTTP_HOST'];
-    $basePath = dirname($_SERVER['SCRIPT_NAME']); // e.g., /api/dhis2/analytics
     $dataItemsPath = '/api/dhis2/indicators/dataItems.php';
-
-    // Build full URL to dataItems.php
     $fullUrl = $scheme . '://' . $host . $dataItemsPath;
 
     try {
@@ -40,7 +35,6 @@ function fetchDataItemsMetadata()
         }
 
         $data = json_decode($response, true);
-
         if (!is_array($data)) {
             throw new Exception('Invalid response from data items API');
         }
@@ -57,7 +51,7 @@ function fetchDataItemsMetadata()
     }
 }
 
-// Get all query parameters except those we want to exclude
+// Get all query parameters
 $allowedParams = [
     'dimension',
     'filter',
@@ -70,10 +64,34 @@ $allowedParams = [
     'page'
 ];
 
+// Extract filters from URL
+$filteredOrgUnits = [];
+$filteredPeriods = [];
+
+foreach ($_GET as $key => $value) {
+    if ($key === 'filter') {
+        if (is_array($value)) {
+            foreach ($value as $filter) {
+                if (strpos($filter, 'ou:') === 0) {
+                    $filteredOrgUnits = array_merge($filteredOrgUnits, explode(';', substr($filter, 3)));
+                } elseif (strpos($filter, 'pe:') === 0) {
+                    $filteredPeriods = array_merge($filteredPeriods, explode(';', substr($filter, 3)));
+                }
+            }
+        } else {
+            if (strpos($value, 'ou:') === 0) {
+                $filteredOrgUnits = explode(';', substr($value, 3));
+            } elseif (strpos($value, 'pe:') === 0) {
+                $filteredPeriods = explode(';', substr($value, 3));
+            }
+        }
+    }
+}
+
+// Build API endpoint
 $queryParams = [];
 foreach ($_GET as $key => $value) {
     if (in_array($key, $allowedParams)) {
-        // Handle multiple filter parameters
         if ($key === 'filter' && is_array($value)) {
             foreach ($value as $filter) {
                 $queryParams[] = "$key=$filter";
@@ -84,135 +102,141 @@ foreach ($_GET as $key => $value) {
     }
 }
 
-// Build the API endpoint
 $apiEndpoint = '/api/analytics?' . implode('&', $queryParams);
 
 // DHIS2 API Configuration
 $baseUrl = rtrim($envVars['DHIS2_BASE_URL'], '/');
 $username = $envVars['DHIS2_USERNAME'];
 $password = $envVars['DHIS2_PASSWORD'];
-
-// Full URL
 $url = $baseUrl . $apiEndpoint;
 
-// Initialize cURL session
+// Make API request
 $ch = curl_init();
-
-// Set cURL options
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // For testing only, remove in production
-curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false); // For testing only, remove in production
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 
-// Add headers for JSON response
 $headers = [
     'Accept: application/json',
     'Content-Type: application/json'
 ];
 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-// Execute the request
 $response = curl_exec($ch);
 
-// Check for errors
 if (curl_errno($ch)) {
     $error_msg = curl_error($ch);
     curl_close($ch);
     die(json_encode(['error' => "DHIS2 API request failed: $error_msg"]));
 }
 
-// Get HTTP status code
 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
 
-// Check if the request was successful
 if ($httpCode !== 200) {
     die(json_encode(['error' => "DHIS2 API returned HTTP code $httpCode"]));
 }
 
-// Decode the JSON response
 $jsonData = json_decode($response, true);
 if (json_last_error() !== JSON_ERROR_NONE) {
     die(json_encode(['error' => 'Invalid JSON response from DHIS2 API']));
 }
 
-// Fetch additional metadata from data items API
+// Get additional metadata
 $dataItemMetadata = fetchDataItemsMetadata();
 
-// Process the response
+// Process response
 $result = [];
 
-// Extract all dimension IDs from the response
-$dxIds = [];
-foreach ($jsonData['metaData']['dimensions'] as $dimension => $ids) {
-    if ($dimension === 'dx') {
-        $dxIds = $ids;
-        break;
+// Get all indicator IDs
+$dxIds = $jsonData['metaData']['dimensions']['dx'] ?? [];
+
+// Get all org units from response (only z6VZwVMwK4d in this case)
+$allOrgUnits = [];
+if (isset($jsonData['metaData']['dimensions']['ou'])) {
+    foreach ($jsonData['metaData']['dimensions']['ou'] as $ouId) {
+        $allOrgUnits[$ouId] = [
+            'id' => $ouId,
+            'displayName' => $jsonData['metaData']['items'][$ouId]['name'] ?? $ouId
+        ];
+    }
+}
+
+// Build a map from resolved period ID to user-entered period (e.g., 202506 => THIS_MONTH)
+$periodIdToUserPeriod = [];
+if (isset($jsonData['metaData']['dimensions']['pe'])) {
+    // If user entered a single period filter, map all returned periods to that filter
+    if (count($filteredPeriods) === 1) {
+        foreach ($jsonData['metaData']['dimensions']['pe'] as $peId) {
+            $periodIdToUserPeriod[$peId] = $filteredPeriods[0];
+        }
+    } else {
+        // If multiple, try to map by order (DHIS2 usually preserves order)
+        foreach ($jsonData['metaData']['dimensions']['pe'] as $idx => $peId) {
+            $periodIdToUserPeriod[$peId] = $filteredPeriods[$idx] ?? $peId;
+        }
+    }
+}
+
+
+// Get all periods from response (2024 and 2025)
+$allPeriods = [];
+if (isset($jsonData['metaData']['dimensions']['pe'])) {
+    foreach ($jsonData['metaData']['dimensions']['pe'] as $peId) {
+        $allPeriods[$peId] = [
+            'id' => $peId,
+            'displayName' => $jsonData['metaData']['items'][$peId]['name'] ?? $peId,
+            'relativePeriod' => $periodIdToUserPeriod[$peId] ?? null
+            //'relativePeriod' => $jsonData['metaData']['items'][$peId]['name'] ?? null
+            //'relativePeriod' => $jsonData['metaData']['items']['LAST_YEAR']['name'] ?? null
+        ];
     }
 }
 
 // Process each indicator
 foreach ($dxIds as $dxId) {
-    // Get metadata from our API if available
     $itemInfo = $dataItemMetadata[$dxId] ?? [];
 
-    // Build organization units info
-    $orgUnits = [];
-    if (isset($jsonData['metaData']['dimensions']['ou'])) {
-        foreach ($jsonData['metaData']['dimensions']['ou'] as $ouId) {
-            $orgUnits[] = [
-                'id' => $ouId,
-                'displayName' => $jsonData['metaData']['items'][$ouId]['name'] ?? null
-            ];
-        }
-    }
-
-    // Build periods info
-    $periods = [];
-    if (isset($jsonData['metaData']['dimensions']['pe'])) {
-        foreach ($jsonData['metaData']['dimensions']['pe'] as $peId) {
-            $periods[] = [
-                'id' => $peId,
-                'displayName' => $jsonData['metaData']['items'][$peId]['name'] ?? null,
-                'relativePeriod' => $jsonData['metaData']['items']['LAST_YEAR']['name'] ?? null
-            ];
-        }
-    }
-
-    // Build data values for this indicator
-    $dataValues = [];
-    if (!empty($jsonData['rows'])) {
-        foreach ($jsonData['rows'] as $row) {
-            // Check if this row belongs to current indicator
-            if ($row[0] === $dxId) {
-                $dataValues[] = [
-                    'value' => $row[1] ?? null,
-                    'storedBy' => 'system',
-                    'created' => date('c'),
-                    'lastUpdated' => date('c')
-                ];
-            }
-        }
-    }
-
-    // Build the result item
-    $result[] = [
+    $indicator = [
         'id' => $dxId,
         'displayName' => $itemInfo['displayName'] ?? ($jsonData['metaData']['items'][$dxId]['name'] ?? $dxId),
         'name' => $itemInfo['name'] ?? ($jsonData['metaData']['items'][$dxId]['name'] ?? $dxId),
         'shortName' => $itemInfo['shortName'] ?? 'N/A',
         'displayShortName' => $itemInfo['displayShortName'] ?? ($itemInfo['shortName'] ?? 'N/A'),
         'dimensionItemType' => $itemInfo['dimensionItemType'] ?? 'UNKNOWN',
-        'organizationUnits' => $orgUnits,
-        'periods' => $periods,
-        'dataValues' => $dataValues
+        'organizationUnits' => array_values($allOrgUnits),
+        'periods' => array_values($allPeriods),
+        'data' => []
     ];
+
+    // Find the value for this indicator (rows only contain dx and value)
+    $value = null;
+    foreach ($jsonData['rows'] as $row) {
+        if ($row[0] === $dxId) {
+            $value = $row[1] ?? null;
+            break;
+        }
+    }
+
+    // Create data entries for each org unit and period combination
+    foreach ($allOrgUnits as $ouInfo) {
+        foreach ($allPeriods as $peInfo) {
+            $indicator['data'][] = [
+                'orgUnit' => $ouInfo,
+                'period' => $peInfo,
+                'value' => $value,
+                'storedBy' => 'system',
+                'created' => date('c'),
+                'lastUpdated' => date('c')
+            ];
+        }
+    }
+
+    $result[] = $indicator;
 }
 
-// Set the content type header to JSON
 header('Content-Type: application/json');
-
-// Output pretty-printed JSON
 echo json_encode($result, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);

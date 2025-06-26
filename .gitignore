@@ -20,6 +20,7 @@ api/database/main/test.php
 api/database/test/
 .env
 **/note.txt
+*.log
 prod.docker-compose.yml
 .env.prod
 .htaccess
