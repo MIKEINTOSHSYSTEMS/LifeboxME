@@ -35,7 +35,7 @@ try {
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )");
 
-    // Create data table with enhanced metadata columns
+    // Create data table with enhanced metadata columns including parent OU
     $db->exec("CREATE TABLE IF NOT EXISTS lifeboxme_dhis2_analytics_data (
         id SERIAL PRIMARY KEY,
         setting_id INTEGER NOT NULL,
@@ -46,6 +46,8 @@ try {
         dx_dimensiontype VARCHAR(50),
         ou_id VARCHAR(255) NOT NULL,
         ou_name VARCHAR(255) NOT NULL,
+        ou_parent_id VARCHAR(255),  -- New column for parent OU ID
+        ou_parent_name VARCHAR(255), -- New column for parent OU name
         pe_id VARCHAR(255) NOT NULL,
         pe_name VARCHAR(255) NOT NULL,
         pe_relativeperiod VARCHAR(255),
@@ -98,6 +100,65 @@ function fetchDataItemsMetadata($envVars)
         return $metadata;
     } catch (Exception $e) {
         error_log("Failed to fetch data items metadata: " . $e->getMessage());
+        return [];
+    }
+}
+
+// Function to fetch organization unit metadata including parents
+function fetchOrgUnitsMetadata($envVars, $ouIds)
+{
+    $baseUrl = rtrim($envVars['DHIS2_BASE_URL'], '/');
+    $username = $envVars['DHIS2_USERNAME'];
+    $password = $envVars['DHIS2_PASSWORD'];
+
+    if (empty($ouIds)) {
+        return [];
+    }
+
+    try {
+        // Format OU IDs for API request
+        $idList = implode(',', $ouIds);
+        $url = $baseUrl . '/api/organisationUnits.json?fields=id,name,parent[id,name]&filter=id:in:[' . $idList . ']&paging=false';
+
+        $ch = curl_init($url);
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
+            CURLOPT_USERPWD => "$username:$password",
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_SSL_VERIFYHOST => false,
+            CURLOPT_TIMEOUT => 30
+        ]);
+
+        $response = curl_exec($ch);
+        if (curl_errno($ch)) {
+            throw new Exception('OU metadata request failed: ' . curl_error($ch));
+        }
+
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($httpCode !== 200) {
+            throw new Exception("OU metadata API returned HTTP code $httpCode");
+        }
+
+        $data = json_decode($response, true);
+        if (!isset($data['organisationUnits'])) {
+            throw new Exception('Invalid response from OU metadata API');
+        }
+
+        $metadata = [];
+        foreach ($data['organisationUnits'] as $unit) {
+            $metadata[$unit['id']] = [
+                'name' => $unit['name'],
+                'parent_id' => $unit['parent']['id'] ?? null,
+                'parent_name' => $unit['parent']['name'] ?? null
+            ];
+        }
+
+        return $metadata;
+    } catch (Exception $e) {
+        error_log("Failed to fetch OU metadata: " . $e->getMessage());
         return [];
     }
 }
@@ -258,17 +319,23 @@ if ($action) {
                 // Fetch additional metadata
                 $dataItemMetadata = fetchDataItemsMetadata($envVars);
 
+                // Fetch organization unit metadata including parents
+                $ouMetadata = fetchOrgUnitsMetadata($envVars, $ouIds);
+
                 // Process response like index.php
                 $dxIds = $data['metaData']['dimensions']['dx'] ?? [];
                 $ouIds = $data['metaData']['dimensions']['ou'] ?? [];
                 $peIds = $data['metaData']['dimensions']['pe'] ?? [];
 
-                // Build org units array
+                // Build org units array with parent info
                 $allOrgUnits = [];
                 foreach ($ouIds as $ouId) {
+                    $metadata = $ouMetadata[$ouId] ?? null;
                     $allOrgUnits[$ouId] = [
                         'id' => $ouId,
-                        'name' => $data['metaData']['items'][$ouId]['name'] ?? $ouId
+                        'name' => $data['metaData']['items'][$ouId]['name'] ?? $ouId,
+                        'parent_id' => $metadata['parent_id'] ?? null,
+                        'parent_name' => $metadata['parent_name'] ?? null
                     ];
                 }
 
@@ -316,12 +383,12 @@ if ($action) {
                 // Reset the sequence to 0
                 $db->exec('SELECT setval(\'"public"."lifeboxme_dhis2_analytics_data_id_seq"\', 0, true);');
 
-
-                // Prepare insert statement with new columns
+                // Prepare insert statement with new columns including parent OU
                 $stmt = $db->prepare("INSERT INTO lifeboxme_dhis2_analytics_data 
-                    (setting_id, dx_id, dx_name, dx_shortname, dx_displayname, dx_dimensiontype, 
-                    ou_id, ou_name, pe_id, pe_name, pe_relativeperiod, value, stored_by, created, last_updated) 
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                (setting_id, dx_id, dx_name, dx_shortname, dx_displayname, dx_dimensiontype, 
+                ou_id, ou_name, ou_parent_id, ou_parent_name, 
+                pe_id, pe_name, pe_relativeperiod, value, stored_by, created, last_updated) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
                 $inserted = 0;
                 $now = date('Y-m-d H:i:s');
@@ -348,6 +415,8 @@ if ($action) {
                                 $dxDimensionType,
                                 $ou['id'],
                                 $ou['name'],
+                                $ou['parent_id'],
+                                $ou['parent_name'],
                                 $pe['id'],
                                 $pe['name'],
                                 $pe['relativePeriod'] ?? $pe['name'],
@@ -413,15 +482,15 @@ if ($action) {
                 $countQuery = "SELECT COUNT(*) FROM lifeboxme_dhis2_analytics_data WHERE setting_id = $id";
 
                 if ($search) {
-                    $query .= " AND (dx_name ILIKE '%$search%' OR ou_name ILIKE '%$search%' OR pe_name ILIKE '%$search%' OR pe_relativeperiod ILIKE '%$search%')";
-                    $countQuery .= " AND (dx_name ILIKE '%$search%' OR ou_name ILIKE '%$search%' OR pe_name ILIKE '%$search%' OR pe_relativeperiod ILIKE '%$search%')";
+                    $query .= " AND (dx_name ILIKE '%$search%' OR ou_name ILIKE '%$search%' OR ou_parent_id ILIKE '%$search%' OR ou_parent_name ILIKE '%$search%' OR pe_name ILIKE '%$search%' OR pe_relativeperiod ILIKE '%$search%')";
+                    $countQuery .= " AND (dx_name ILIKE '%$search%' OR ou_name ILIKE '%$search%' OR ou_parent_id ILIKE '%$search%' OR ou_parent_name ILIKE '%$search%' OR pe_name ILIKE '%$search%' OR pe_relativeperiod ILIKE '%$search%')";
                 }
 
                 $total = $db->query($countQuery)->fetchColumn();
 
                 $orderColumn = $_POST['order'][0]['column'] ?? 0;
                 $orderDir = $_POST['order'][0]['dir'] ?? 'asc';
-                // Add all columns to DataTable
+                // Add all columns to DataTable (including new parent OU columns)
                 $columns = [
                     'id',
                     'dx_name',
@@ -429,6 +498,8 @@ if ($action) {
                     'dx_displayname',
                     'dx_dimensiontype',
                     'ou_name',
+                    'ou_parent_id',   // New column
+                    'ou_parent_name', // New column
                     'pe_name',
                     'pe_relativeperiod',
                     'value',
@@ -743,6 +814,8 @@ if ($action) {
                                             <th>DX Display</th>
                                             <th>DX Type</th>
                                             <th>Org Unit</th>
+                                            <th>Parent OU ID</th>
+                                            <th>Parent OU Name</th>
                                             <th>Period</th>
                                             <th>Relative Period</th>
                                             <th>Value</th>
@@ -811,6 +884,12 @@ if ($action) {
                     },
                     {
                         data: 'ou_name'
+                    },
+                    {
+                        data: 'ou_parent_id'
+                    },
+                    {
+                        data: 'ou_parent_name'
                     },
                     {
                         data: 'pe_name'
@@ -1066,9 +1145,10 @@ if ($action) {
                     return;
                 }
 
+                const settingName = $("#settingsSelect option:selected").text();
+
                 if (!confirm('Fetch data for this setting? This may take some time.')) return;
 
-                addLog(`Starting data fetch for setting ID: ${settingId}`);
                 addLog(`Starting data fetch for setting: ${settingName}`);
 
                 $.post('fetch_analytics.php', {
@@ -1096,7 +1176,8 @@ if ($action) {
 
                 // Find the setting in the list and trigger edit
                 $(`.edit-setting[data-id="${settingId}"]`).click();
-                addLog(`Loaded setting ID: ${settingId}`);
+                const settingName = $("#settingsSelect option:selected").text();
+                addLog(`Loaded setting: ${settingName}`);
             });
 
             // Delete data buttons
@@ -1107,6 +1188,8 @@ if ($action) {
                     return;
                 }
 
+                const settingName = $("#settingsSelect option:selected").text();
+
                 if (!confirm('Delete ALL data for this setting?')) return;
 
                 $.post('fetch_analytics.php', {
@@ -1115,7 +1198,7 @@ if ($action) {
                     type: 'all'
                 }, function(response) {
                     if (response.status === 'success') {
-                        addLog(response.message, 'success');
+                        addLog(`Deleted all data for: ${settingName}`, 'success');
                         dataTable.ajax.reload();
                     } else {
                         addLog(response.message, 'error');
@@ -1130,6 +1213,8 @@ if ($action) {
                     return;
                 }
 
+                const settingName = $("#settingsSelect option:selected").text();
+
                 if (!confirm('Delete all NON-NULL data for this setting?')) return;
 
                 $.post('fetch_analytics.php', {
@@ -1138,7 +1223,7 @@ if ($action) {
                     type: 'non_null'
                 }, function(response) {
                     if (response.status === 'success') {
-                        addLog(response.message, 'success');
+                        addLog(`Deleted non-null data for: ${settingName}`, 'success');
                         dataTable.ajax.reload();
                     } else {
                         addLog(response.message, 'error');
