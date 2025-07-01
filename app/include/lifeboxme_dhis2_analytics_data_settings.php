@@ -76,6 +76,12 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["fetched_at"] = "Fetched At";
 	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["fetched_at"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_data["English"]["fetched_at"] = "";
+	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["ou_parent_id"] = "Ou Parent Id";
+	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["ou_parent_id"] = "";
+	$placeHolderslifeboxme_dhis2_analytics_data["English"]["ou_parent_id"] = "";
+	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["ou_parent_name"] = "Ou Parent Name";
+	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["ou_parent_name"] = "";
+	$placeHolderslifeboxme_dhis2_analytics_data["English"]["ou_parent_name"] = "";
 	if (count($fieldToolTipslifeboxme_dhis2_analytics_data["English"]))
 		$tdatalifeboxme_dhis2_analytics_data[".isUseToolTips"] = true;
 }
@@ -202,6 +208,8 @@ $tdatalifeboxme_dhis2_analytics_data[".googleLikeFields"][] = "dx_displayname";
 $tdatalifeboxme_dhis2_analytics_data[".googleLikeFields"][] = "dx_dimensiontype";
 $tdatalifeboxme_dhis2_analytics_data[".googleLikeFields"][] = "ou_id";
 $tdatalifeboxme_dhis2_analytics_data[".googleLikeFields"][] = "ou_name";
+$tdatalifeboxme_dhis2_analytics_data[".googleLikeFields"][] = "ou_parent_id";
+$tdatalifeboxme_dhis2_analytics_data[".googleLikeFields"][] = "ou_parent_name";
 $tdatalifeboxme_dhis2_analytics_data[".googleLikeFields"][] = "pe_id";
 $tdatalifeboxme_dhis2_analytics_data[".googleLikeFields"][] = "pe_name";
 $tdatalifeboxme_dhis2_analytics_data[".googleLikeFields"][] = "pe_relativeperiod";
@@ -244,7 +252,7 @@ $tdatalifeboxme_dhis2_analytics_data[".strOrderBy"] = $tstrOrderBy;
 $tdatalifeboxme_dhis2_analytics_data[".orderindexes"] = array();
 
 
-$tdatalifeboxme_dhis2_analytics_data[".sqlHead"] = "SELECT id,  	setting_id,  	dx_id,  	dx_name,  	dx_shortname,  	dx_displayname,  	dx_dimensiontype,  	ou_id,  	ou_name,  	pe_id,  	pe_name,  	pe_relativeperiod,  	\"value\",  	stored_by,  	created,  	last_updated,  	fetched_at";
+$tdatalifeboxme_dhis2_analytics_data[".sqlHead"] = "SELECT id,  	setting_id,  	dx_id,  	dx_name,  	dx_shortname,  	dx_displayname,  	dx_dimensiontype,  	ou_id,  	ou_name,  	ou_parent_id,  	ou_parent_name,  	pe_id,  	pe_name,  	pe_relativeperiod,  	\"value\",  	stored_by,  	created,  	last_updated,  	fetched_at";
 $tdatalifeboxme_dhis2_analytics_data[".sqlFrom"] = "FROM \"public\".lifeboxme_dhis2_analytics_data";
 $tdatalifeboxme_dhis2_analytics_data[".sqlWhereExpr"] = "";
 $tdatalifeboxme_dhis2_analytics_data[".sqlTail"] = "";
@@ -1573,7 +1581,7 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 	
 
 	
-	$edata["LookupOrderBy"] = "ou_name";
+	$edata["LookupOrderBy"] = "";
 
 	
 	
@@ -1635,6 +1643,146 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 
 
 //Filters settings
+	$fdata["filterTotals"] = 1;
+		$fdata["filterMultiSelect"] = 1;
+		$fdata["filterTotalFields"] = "id";
+		$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatalifeboxme_dhis2_analytics_data["ou_name"] = $fdata;
+		$tdatalifeboxme_dhis2_analytics_data[".searchableFields"][] = "ou_name";
+//	ou_parent_id
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 10;
+	$fdata["strName"] = "ou_parent_id";
+	$fdata["GoodName"] = "ou_parent_id";
+	$fdata["ownerTable"] = "public.lifeboxme_dhis2_analytics_data";
+	$fdata["Label"] = GetFieldLabel("public_lifeboxme_dhis2_analytics_data","ou_parent_id");
+	$fdata["FieldType"] = 200;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "ou_parent_id";
+
+		$fdata["sourceSingle"] = "ou_parent_id";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "ou_parent_id";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+			$edata["EditParams"].= " maxlength=255";
+
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
 	$fdata["filterTotals"] = 0;
 		$fdata["filterMultiSelect"] = 0;
 			$fdata["filterFormat"] = "Values list";
@@ -1652,12 +1800,179 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 //end of Filters settings
 
 
-	$tdatalifeboxme_dhis2_analytics_data["ou_name"] = $fdata;
-		$tdatalifeboxme_dhis2_analytics_data[".searchableFields"][] = "ou_name";
+	$tdatalifeboxme_dhis2_analytics_data["ou_parent_id"] = $fdata;
+		$tdatalifeboxme_dhis2_analytics_data[".searchableFields"][] = "ou_parent_id";
+//	ou_parent_name
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 11;
+	$fdata["strName"] = "ou_parent_name";
+	$fdata["GoodName"] = "ou_parent_name";
+	$fdata["ownerTable"] = "public.lifeboxme_dhis2_analytics_data";
+	$fdata["Label"] = GetFieldLabel("public_lifeboxme_dhis2_analytics_data","ou_parent_name");
+	$fdata["FieldType"] = 200;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "ou_parent_name";
+
+		$fdata["sourceSingle"] = "ou_parent_name";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "ou_parent_name";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Lookup wizard");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+// Begin Lookup settings
+				$edata["LookupType"] = 2;
+	$edata["LookupTable"] = "public.lifeboxme_dhis2_analytics_data";
+			$edata["autoCompleteFieldsOnEdit"] = 0;
+	$edata["autoCompleteFields"] = array();
+		$edata["LCType"] = 0;
+
+	
+			$edata["LookupUnique"] = true;
+
+	$edata["LinkField"] = "ou_parent_name";
+	$edata["LinkFieldType"] = 0;
+	$edata["DisplayField"] = "ou_parent_name";
+
+	
+
+	
+	$edata["LookupOrderBy"] = "";
+
+	
+	
+	
+	
+
+	
+		$edata["Multiselect"] = true;
+
+		$edata["SelectSize"] = 1;
+
+// End Lookup Settings
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+	
+	
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Equals";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 1;
+		$fdata["filterMultiSelect"] = 1;
+		$fdata["filterTotalFields"] = "id";
+		$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatalifeboxme_dhis2_analytics_data["ou_parent_name"] = $fdata;
+		$tdatalifeboxme_dhis2_analytics_data[".searchableFields"][] = "ou_parent_name";
 //	pe_id
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 10;
+	$fdata["Index"] = 12;
 	$fdata["strName"] = "pe_id";
 	$fdata["GoodName"] = "pe_id";
 	$fdata["ownerTable"] = "public.lifeboxme_dhis2_analytics_data";
@@ -1796,7 +2111,7 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 //	pe_name
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 11;
+	$fdata["Index"] = 13;
 	$fdata["strName"] = "pe_name";
 	$fdata["GoodName"] = "pe_name";
 	$fdata["ownerTable"] = "public.lifeboxme_dhis2_analytics_data";
@@ -1851,7 +2166,7 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Text field");
+	$edata = array("EditFormat" => "Lookup wizard");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -1861,6 +2176,36 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 	
 	
 
+// Begin Lookup settings
+				$edata["LookupType"] = 2;
+	$edata["LookupTable"] = "public.lifeboxme_dhis2_analytics_data";
+			$edata["autoCompleteFieldsOnEdit"] = 0;
+	$edata["autoCompleteFields"] = array();
+		$edata["LCType"] = 0;
+
+	
+			$edata["LookupUnique"] = true;
+
+	$edata["LinkField"] = "pe_name";
+	$edata["LinkFieldType"] = 0;
+	$edata["DisplayField"] = "pe_name";
+
+	
+
+	
+	$edata["LookupOrderBy"] = "";
+
+	
+	
+	
+	
+
+	
+		$edata["Multiselect"] = true;
+
+		$edata["SelectSize"] = 1;
+
+// End Lookup Settings
 
 
 	
@@ -1875,11 +2220,8 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 	
 	
 	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-			$edata["EditParams"].= " maxlength=255";
-
+	
+	
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
@@ -1905,7 +2247,7 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "Equals";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
@@ -1913,9 +2255,10 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 
 
 //Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
+	$fdata["filterTotals"] = 1;
+		$fdata["filterMultiSelect"] = 1;
+		$fdata["filterTotalFields"] = "id";
+		$fdata["filterFormat"] = "Values list";
 		$fdata["showCollapsed"] = false;
 
 		$fdata["sortValueType"] = 0;
@@ -1935,7 +2278,7 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 //	pe_relativeperiod
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 12;
+	$fdata["Index"] = 14;
 	$fdata["strName"] = "pe_relativeperiod";
 	$fdata["GoodName"] = "pe_relativeperiod";
 	$fdata["ownerTable"] = "public.lifeboxme_dhis2_analytics_data";
@@ -2102,7 +2445,7 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 //	value
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 13;
+	$fdata["Index"] = 15;
 	$fdata["strName"] = "value";
 	$fdata["GoodName"] = "value";
 	$fdata["ownerTable"] = "public.lifeboxme_dhis2_analytics_data";
@@ -2242,7 +2585,7 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 //	stored_by
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 14;
+	$fdata["Index"] = 16;
 	$fdata["strName"] = "stored_by";
 	$fdata["GoodName"] = "stored_by";
 	$fdata["ownerTable"] = "public.lifeboxme_dhis2_analytics_data";
@@ -2381,7 +2724,7 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 //	created
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 15;
+	$fdata["Index"] = 17;
 	$fdata["strName"] = "created";
 	$fdata["GoodName"] = "created";
 	$fdata["ownerTable"] = "public.lifeboxme_dhis2_analytics_data";
@@ -2520,7 +2863,7 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 //	last_updated
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 16;
+	$fdata["Index"] = 18;
 	$fdata["strName"] = "last_updated";
 	$fdata["GoodName"] = "last_updated";
 	$fdata["ownerTable"] = "public.lifeboxme_dhis2_analytics_data";
@@ -2659,7 +3002,7 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 //	fetched_at
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 17;
+	$fdata["Index"] = 19;
 	$fdata["strName"] = "fetched_at";
 	$fdata["GoodName"] = "fetched_at";
 	$fdata["ownerTable"] = "public.lifeboxme_dhis2_analytics_data";
@@ -2857,7 +3200,7 @@ function createSqlQuery_lifeboxme_dhis2_analytics_data()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "id,  	setting_id,  	dx_id,  	dx_name,  	dx_shortname,  	dx_displayname,  	dx_dimensiontype,  	ou_id,  	ou_name,  	pe_id,  	pe_name,  	pe_relativeperiod,  	\"value\",  	stored_by,  	created,  	last_updated,  	fetched_at";
+$proto0["m_strFieldList"] = "id,  	setting_id,  	dx_id,  	dx_name,  	dx_shortname,  	dx_displayname,  	dx_dimensiontype,  	ou_id,  	ou_name,  	ou_parent_id,  	ou_parent_name,  	pe_id,  	pe_name,  	pe_relativeperiod,  	\"value\",  	stored_by,  	created,  	last_updated,  	fetched_at";
 $proto0["m_strFrom"] = "FROM \"public\".lifeboxme_dhis2_analytics_data";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
@@ -3025,12 +3368,12 @@ $obj = new SQLFieldListItem($proto22);
 $proto0["m_fieldlist"][]=$obj;
 						$proto24=array();
 			$obj = new SQLField(array(
-	"m_strName" => "pe_id",
+	"m_strName" => "ou_parent_id",
 	"m_strTable" => "public.lifeboxme_dhis2_analytics_data",
 	"m_srcTableName" => "public.lifeboxme_dhis2_analytics_data"
 ));
 
-$proto24["m_sql"] = "pe_id";
+$proto24["m_sql"] = "ou_parent_id";
 $proto24["m_srcTableName"] = "public.lifeboxme_dhis2_analytics_data";
 $proto24["m_expr"]=$obj;
 $proto24["m_alias"] = "";
@@ -3039,12 +3382,12 @@ $obj = new SQLFieldListItem($proto24);
 $proto0["m_fieldlist"][]=$obj;
 						$proto26=array();
 			$obj = new SQLField(array(
-	"m_strName" => "pe_name",
+	"m_strName" => "ou_parent_name",
 	"m_strTable" => "public.lifeboxme_dhis2_analytics_data",
 	"m_srcTableName" => "public.lifeboxme_dhis2_analytics_data"
 ));
 
-$proto26["m_sql"] = "pe_name";
+$proto26["m_sql"] = "ou_parent_name";
 $proto26["m_srcTableName"] = "public.lifeboxme_dhis2_analytics_data";
 $proto26["m_expr"]=$obj;
 $proto26["m_alias"] = "";
@@ -3053,12 +3396,12 @@ $obj = new SQLFieldListItem($proto26);
 $proto0["m_fieldlist"][]=$obj;
 						$proto28=array();
 			$obj = new SQLField(array(
-	"m_strName" => "pe_relativeperiod",
+	"m_strName" => "pe_id",
 	"m_strTable" => "public.lifeboxme_dhis2_analytics_data",
 	"m_srcTableName" => "public.lifeboxme_dhis2_analytics_data"
 ));
 
-$proto28["m_sql"] = "pe_relativeperiod";
+$proto28["m_sql"] = "pe_id";
 $proto28["m_srcTableName"] = "public.lifeboxme_dhis2_analytics_data";
 $proto28["m_expr"]=$obj;
 $proto28["m_alias"] = "";
@@ -3067,12 +3410,12 @@ $obj = new SQLFieldListItem($proto28);
 $proto0["m_fieldlist"][]=$obj;
 						$proto30=array();
 			$obj = new SQLField(array(
-	"m_strName" => "value",
+	"m_strName" => "pe_name",
 	"m_strTable" => "public.lifeboxme_dhis2_analytics_data",
 	"m_srcTableName" => "public.lifeboxme_dhis2_analytics_data"
 ));
 
-$proto30["m_sql"] = "\"value\"";
+$proto30["m_sql"] = "pe_name";
 $proto30["m_srcTableName"] = "public.lifeboxme_dhis2_analytics_data";
 $proto30["m_expr"]=$obj;
 $proto30["m_alias"] = "";
@@ -3081,12 +3424,12 @@ $obj = new SQLFieldListItem($proto30);
 $proto0["m_fieldlist"][]=$obj;
 						$proto32=array();
 			$obj = new SQLField(array(
-	"m_strName" => "stored_by",
+	"m_strName" => "pe_relativeperiod",
 	"m_strTable" => "public.lifeboxme_dhis2_analytics_data",
 	"m_srcTableName" => "public.lifeboxme_dhis2_analytics_data"
 ));
 
-$proto32["m_sql"] = "stored_by";
+$proto32["m_sql"] = "pe_relativeperiod";
 $proto32["m_srcTableName"] = "public.lifeboxme_dhis2_analytics_data";
 $proto32["m_expr"]=$obj;
 $proto32["m_alias"] = "";
@@ -3095,12 +3438,12 @@ $obj = new SQLFieldListItem($proto32);
 $proto0["m_fieldlist"][]=$obj;
 						$proto34=array();
 			$obj = new SQLField(array(
-	"m_strName" => "created",
+	"m_strName" => "value",
 	"m_strTable" => "public.lifeboxme_dhis2_analytics_data",
 	"m_srcTableName" => "public.lifeboxme_dhis2_analytics_data"
 ));
 
-$proto34["m_sql"] = "created";
+$proto34["m_sql"] = "\"value\"";
 $proto34["m_srcTableName"] = "public.lifeboxme_dhis2_analytics_data";
 $proto34["m_expr"]=$obj;
 $proto34["m_alias"] = "";
@@ -3109,12 +3452,12 @@ $obj = new SQLFieldListItem($proto34);
 $proto0["m_fieldlist"][]=$obj;
 						$proto36=array();
 			$obj = new SQLField(array(
-	"m_strName" => "last_updated",
+	"m_strName" => "stored_by",
 	"m_strTable" => "public.lifeboxme_dhis2_analytics_data",
 	"m_srcTableName" => "public.lifeboxme_dhis2_analytics_data"
 ));
 
-$proto36["m_sql"] = "last_updated";
+$proto36["m_sql"] = "stored_by";
 $proto36["m_srcTableName"] = "public.lifeboxme_dhis2_analytics_data";
 $proto36["m_expr"]=$obj;
 $proto36["m_alias"] = "";
@@ -3123,65 +3466,95 @@ $obj = new SQLFieldListItem($proto36);
 $proto0["m_fieldlist"][]=$obj;
 						$proto38=array();
 			$obj = new SQLField(array(
-	"m_strName" => "fetched_at",
+	"m_strName" => "created",
 	"m_strTable" => "public.lifeboxme_dhis2_analytics_data",
 	"m_srcTableName" => "public.lifeboxme_dhis2_analytics_data"
 ));
 
-$proto38["m_sql"] = "fetched_at";
+$proto38["m_sql"] = "created";
 $proto38["m_srcTableName"] = "public.lifeboxme_dhis2_analytics_data";
 $proto38["m_expr"]=$obj;
 $proto38["m_alias"] = "";
 $obj = new SQLFieldListItem($proto38);
 
 $proto0["m_fieldlist"][]=$obj;
-$proto0["m_fromlist"] = array();
-												$proto40=array();
-$proto40["m_link"] = "SQLL_MAIN";
-			$proto41=array();
-$proto41["m_strName"] = "public.lifeboxme_dhis2_analytics_data";
-$proto41["m_srcTableName"] = "public.lifeboxme_dhis2_analytics_data";
-$proto41["m_columns"] = array();
-$proto41["m_columns"][] = "id";
-$proto41["m_columns"][] = "setting_id";
-$proto41["m_columns"][] = "dx_id";
-$proto41["m_columns"][] = "dx_name";
-$proto41["m_columns"][] = "dx_shortname";
-$proto41["m_columns"][] = "dx_displayname";
-$proto41["m_columns"][] = "dx_dimensiontype";
-$proto41["m_columns"][] = "ou_id";
-$proto41["m_columns"][] = "ou_name";
-$proto41["m_columns"][] = "pe_id";
-$proto41["m_columns"][] = "pe_name";
-$proto41["m_columns"][] = "pe_relativeperiod";
-$proto41["m_columns"][] = "value";
-$proto41["m_columns"][] = "stored_by";
-$proto41["m_columns"][] = "created";
-$proto41["m_columns"][] = "last_updated";
-$proto41["m_columns"][] = "fetched_at";
-$obj = new SQLTable($proto41);
+						$proto40=array();
+			$obj = new SQLField(array(
+	"m_strName" => "last_updated",
+	"m_strTable" => "public.lifeboxme_dhis2_analytics_data",
+	"m_srcTableName" => "public.lifeboxme_dhis2_analytics_data"
+));
 
-$proto40["m_table"] = $obj;
-$proto40["m_sql"] = "\"public\".lifeboxme_dhis2_analytics_data";
-$proto40["m_alias"] = "";
+$proto40["m_sql"] = "last_updated";
 $proto40["m_srcTableName"] = "public.lifeboxme_dhis2_analytics_data";
-$proto42=array();
-$proto42["m_sql"] = "";
-$proto42["m_uniontype"] = "SQLL_UNKNOWN";
+$proto40["m_expr"]=$obj;
+$proto40["m_alias"] = "";
+$obj = new SQLFieldListItem($proto40);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto42=array();
+			$obj = new SQLField(array(
+	"m_strName" => "fetched_at",
+	"m_strTable" => "public.lifeboxme_dhis2_analytics_data",
+	"m_srcTableName" => "public.lifeboxme_dhis2_analytics_data"
+));
+
+$proto42["m_sql"] = "fetched_at";
+$proto42["m_srcTableName"] = "public.lifeboxme_dhis2_analytics_data";
+$proto42["m_expr"]=$obj;
+$proto42["m_alias"] = "";
+$obj = new SQLFieldListItem($proto42);
+
+$proto0["m_fieldlist"][]=$obj;
+$proto0["m_fromlist"] = array();
+												$proto44=array();
+$proto44["m_link"] = "SQLL_MAIN";
+			$proto45=array();
+$proto45["m_strName"] = "public.lifeboxme_dhis2_analytics_data";
+$proto45["m_srcTableName"] = "public.lifeboxme_dhis2_analytics_data";
+$proto45["m_columns"] = array();
+$proto45["m_columns"][] = "id";
+$proto45["m_columns"][] = "setting_id";
+$proto45["m_columns"][] = "dx_id";
+$proto45["m_columns"][] = "dx_name";
+$proto45["m_columns"][] = "dx_shortname";
+$proto45["m_columns"][] = "dx_displayname";
+$proto45["m_columns"][] = "dx_dimensiontype";
+$proto45["m_columns"][] = "ou_id";
+$proto45["m_columns"][] = "ou_name";
+$proto45["m_columns"][] = "ou_parent_id";
+$proto45["m_columns"][] = "ou_parent_name";
+$proto45["m_columns"][] = "pe_id";
+$proto45["m_columns"][] = "pe_name";
+$proto45["m_columns"][] = "pe_relativeperiod";
+$proto45["m_columns"][] = "value";
+$proto45["m_columns"][] = "stored_by";
+$proto45["m_columns"][] = "created";
+$proto45["m_columns"][] = "last_updated";
+$proto45["m_columns"][] = "fetched_at";
+$obj = new SQLTable($proto45);
+
+$proto44["m_table"] = $obj;
+$proto44["m_sql"] = "\"public\".lifeboxme_dhis2_analytics_data";
+$proto44["m_alias"] = "";
+$proto44["m_srcTableName"] = "public.lifeboxme_dhis2_analytics_data";
+$proto46=array();
+$proto46["m_sql"] = "";
+$proto46["m_uniontype"] = "SQLL_UNKNOWN";
 	$obj = new SQLNonParsed(array(
 	"m_sql" => ""
 ));
 
-$proto42["m_column"]=$obj;
-$proto42["m_contained"] = array();
-$proto42["m_strCase"] = "";
-$proto42["m_havingmode"] = false;
-$proto42["m_inBrackets"] = false;
-$proto42["m_useAlias"] = false;
-$obj = new SQLLogicalExpr($proto42);
+$proto46["m_column"]=$obj;
+$proto46["m_contained"] = array();
+$proto46["m_strCase"] = "";
+$proto46["m_havingmode"] = false;
+$proto46["m_inBrackets"] = false;
+$proto46["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto46);
 
-$proto40["m_joinon"] = $obj;
-$obj = new SQLFromListItem($proto40);
+$proto44["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto44);
 
 $proto0["m_fromlist"][]=$obj;
 $proto0["m_groupby"] = array();
@@ -3197,7 +3570,7 @@ $queryData_lifeboxme_dhis2_analytics_data = createSqlQuery_lifeboxme_dhis2_analy
 	
 				;
 
-																	
+																			
 
 $tdatalifeboxme_dhis2_analytics_data[".sqlquery"] = $queryData_lifeboxme_dhis2_analytics_data;
 
