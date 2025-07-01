@@ -35,7 +35,7 @@ try {
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )");
 
-    // Create data table with enhanced metadata columns including parent OU
+    // Create data table with enhanced metadata columns including parent OU and level
     $db->exec("CREATE TABLE IF NOT EXISTS lifeboxme_dhis2_analytics_data (
         id SERIAL PRIMARY KEY,
         setting_id INTEGER NOT NULL,
@@ -46,8 +46,10 @@ try {
         dx_dimensiontype VARCHAR(50),
         ou_id VARCHAR(255) NOT NULL,
         ou_name VARCHAR(255) NOT NULL,
-        ou_parent_id VARCHAR(255),  -- New column for parent OU ID
-        ou_parent_name VARCHAR(255), -- New column for parent OU name
+        ou_parent_id VARCHAR(255),
+        ou_parent_name VARCHAR(255),
+        ou_level_id INTEGER,        -- New column for OU level ID
+        ou_level_name VARCHAR(50),  -- New column for OU level name
         pe_id VARCHAR(255) NOT NULL,
         pe_name VARCHAR(255) NOT NULL,
         pe_relativeperiod VARCHAR(255),
@@ -58,6 +60,10 @@ try {
         fetched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (setting_id) REFERENCES lifeboxme_dhis2_analytics_settings(id)
     )");
+
+    // Add new columns if they don't exist
+    $db->exec("ALTER TABLE lifeboxme_dhis2_analytics_data ADD COLUMN IF NOT EXISTS ou_level_id INTEGER");
+    $db->exec("ALTER TABLE lifeboxme_dhis2_analytics_data ADD COLUMN IF NOT EXISTS ou_level_name VARCHAR(50)");
 } catch (PDOException $e) {
     die("Database error: " . $e->getMessage());
 }
@@ -104,7 +110,7 @@ function fetchDataItemsMetadata($envVars)
     }
 }
 
-// Function to fetch organization unit metadata including parents
+// Function to fetch organization unit metadata including parents and level
 function fetchOrgUnitsMetadata($envVars, $ouIds)
 {
     $baseUrl = rtrim($envVars['DHIS2_BASE_URL'], '/');
@@ -118,7 +124,7 @@ function fetchOrgUnitsMetadata($envVars, $ouIds)
     try {
         // Format OU IDs for API request
         $idList = implode(',', $ouIds);
-        $url = $baseUrl . '/api/organisationUnits.json?fields=id,name,parent[id,name]&filter=id:in:[' . $idList . ']&paging=false';
+        $url = $baseUrl . '/api/organisationUnits.json?fields=id,name,level,parent[id,name]&filter=id:in:[' . $idList . ']&paging=false';
 
         $ch = curl_init($url);
         curl_setopt_array($ch, [
@@ -152,7 +158,8 @@ function fetchOrgUnitsMetadata($envVars, $ouIds)
             $metadata[$unit['id']] = [
                 'name' => $unit['name'],
                 'parent_id' => $unit['parent']['id'] ?? null,
-                'parent_name' => $unit['parent']['name'] ?? null
+                'parent_name' => $unit['parent']['name'] ?? null,
+                'level' => $unit['level']  // Added level information
             ];
         }
 
@@ -161,6 +168,18 @@ function fetchOrgUnitsMetadata($envVars, $ouIds)
         error_log("Failed to fetch OU metadata: " . $e->getMessage());
         return [];
     }
+}
+
+// Map level numbers to level names
+function mapLevelToName($level)
+{
+    $levelMap = [
+        1 => 'Lifebox International',
+        2 => 'Continent',
+        3 => 'Country',
+        4 => 'Hospital/Facility'
+    ];
+    return $levelMap[$level] ?? "Level $level";
 }
 
 // Handle actions
@@ -319,7 +338,7 @@ if ($action) {
                 // Fetch additional metadata
                 $dataItemMetadata = fetchDataItemsMetadata($envVars);
 
-                // Fetch organization unit metadata including parents
+                // Fetch organization unit metadata including parents and level
                 $ouMetadata = fetchOrgUnitsMetadata($envVars, $ouIds);
 
                 // Process response like index.php
@@ -327,15 +346,19 @@ if ($action) {
                 $ouIds = $data['metaData']['dimensions']['ou'] ?? [];
                 $peIds = $data['metaData']['dimensions']['pe'] ?? [];
 
-                // Build org units array with parent info
+                // Build org units array with parent info and level
                 $allOrgUnits = [];
                 foreach ($ouIds as $ouId) {
                     $metadata = $ouMetadata[$ouId] ?? null;
+                    $level = $metadata['level'] ?? null;
+
                     $allOrgUnits[$ouId] = [
                         'id' => $ouId,
                         'name' => $data['metaData']['items'][$ouId]['name'] ?? $ouId,
                         'parent_id' => $metadata['parent_id'] ?? null,
-                        'parent_name' => $metadata['parent_name'] ?? null
+                        'parent_name' => $metadata['parent_name'] ?? null,
+                        'level_id' => $level,  // Level ID (1-4)
+                        'level_name' => mapLevelToName($level)  // Level name
                     ];
                 }
 
@@ -383,12 +406,12 @@ if ($action) {
                 // Reset the sequence to 0
                 $db->exec('SELECT setval(\'"public"."lifeboxme_dhis2_analytics_data_id_seq"\', 0, true);');
 
-                // Prepare insert statement with new columns including parent OU
+                // Prepare insert statement with new columns including parent OU and level
                 $stmt = $db->prepare("INSERT INTO lifeboxme_dhis2_analytics_data 
                 (setting_id, dx_id, dx_name, dx_shortname, dx_displayname, dx_dimensiontype, 
-                ou_id, ou_name, ou_parent_id, ou_parent_name, 
+                ou_id, ou_name, ou_parent_id, ou_parent_name, ou_level_id, ou_level_name,
                 pe_id, pe_name, pe_relativeperiod, value, stored_by, created, last_updated) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
                 $inserted = 0;
                 $now = date('Y-m-d H:i:s');
@@ -417,6 +440,8 @@ if ($action) {
                                 $ou['name'],
                                 $ou['parent_id'],
                                 $ou['parent_name'],
+                                $ou['level_id'],  // New: OU Level ID
+                                $ou['level_name'], // New: OU Level Name
                                 $pe['id'],
                                 $pe['name'],
                                 $pe['relativePeriod'] ?? $pe['name'],
@@ -490,7 +515,7 @@ if ($action) {
 
                 $orderColumn = $_POST['order'][0]['column'] ?? 0;
                 $orderDir = $_POST['order'][0]['dir'] ?? 'asc';
-                // Add all columns to DataTable (including new parent OU columns)
+                // Add all columns to DataTable (including new level columns)
                 $columns = [
                     'id',
                     'dx_name',
@@ -498,8 +523,10 @@ if ($action) {
                     'dx_displayname',
                     'dx_dimensiontype',
                     'ou_name',
-                    'ou_parent_id',   // New column
-                    'ou_parent_name', // New column
+                    'ou_parent_id',
+                    'ou_parent_name',
+                    'ou_level_id',     // New: OU Level ID
+                    'ou_level_name',    // New: OU Level Name
                     'pe_name',
                     'pe_relativeperiod',
                     'value',
@@ -632,6 +659,23 @@ if ($action) {
         .table td {
             padding: 0.5rem;
             font-size: 0.9rem;
+        }
+
+        /* Highlight levels with colors */
+        .level-1 {
+            background-color: #e6f7ff;
+        }
+
+        .level-2 {
+            background-color: #fff7e6;
+        }
+
+        .level-3 {
+            background-color: #f0ffe6;
+        }
+
+        .level-4 {
+            background-color: #ffe6e6;
         }
     </style>
 </head>
@@ -816,6 +860,8 @@ if ($action) {
                                             <th>Org Unit</th>
                                             <th>Parent OU ID</th>
                                             <th>Parent OU Name</th>
+                                            <th>OU Level ID</th> <!-- New Column -->
+                                            <th>OU Level Name</th> <!-- New Column -->
                                             <th>Period</th>
                                             <th>Relative Period</th>
                                             <th>Value</th>
@@ -892,6 +938,12 @@ if ($action) {
                         data: 'ou_parent_name'
                     },
                     {
+                        data: 'ou_level_id'
+                    }, // New: OU Level ID
+                    {
+                        data: 'ou_level_name'
+                    }, // New: OU Level Name
+                    {
                         data: 'pe_name'
                     },
                     {
@@ -903,7 +955,13 @@ if ($action) {
                     {
                         data: 'fetched_at'
                     }
-                ]
+                ],
+                createdRow: function(row, data, dataIndex) {
+                    // Add level-specific class for row coloring
+                    if (data.ou_level_id) {
+                        $(row).addClass('level-' + data.ou_level_id);
+                    }
+                }
             });
 
             // Add log entry with type-based coloring

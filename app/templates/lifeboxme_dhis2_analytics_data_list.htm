@@ -561,6 +561,32 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_dx_dimensiontype}</span>
 						</div>
 		{END searchCtrlBlock_dx_dimensiontype}
+																{BEGIN searchCtrlBlock_ou_level_id}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_ou_level_id}" {$filterRow_attrs_ou_level_id}>
+			<label>{$label public_lifeboxme_dhis2_analytics_data ou_level_id }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_ou_level_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_ou_level_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_ou_level_id}</span>
+						</div>
+		{END searchCtrlBlock_ou_level_id}
+																{BEGIN searchCtrlBlock_ou_level_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_ou_level_name}" {$filterRow_attrs_ou_level_name}>
+			<label>{$label public_lifeboxme_dhis2_analytics_data ou_level_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_ou_level_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_ou_level_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_ou_level_name}</span>
+						</div>
+		{END searchCtrlBlock_ou_level_name}
 																{BEGIN searchCtrlBlock_ou_parent_id}
 
 
@@ -882,6 +908,7 @@
 					
 					
 					
+					
 					</li>
 		{END filterCtrlBlock_dx_name}
 
@@ -933,6 +960,7 @@
 					
 					
 					
+					
 					</li>
 		{END filterCtrlBlock_dx_dimensiontype}
 
@@ -955,6 +983,63 @@
 	</div>
 
 {END filter_control_dx_dimensiontype}
+
+
+
+
+
+
+{BEGIN filter_control_ou_level_name}
+
+	<div class="dropdown filter-field filter-ou_level_name-container" {BEGIN filter_selected_ou_level_name} data-selected {END filter_selected_ou_level_name}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-ou_level_name" type="checkbox" name="selectAll" {$selectAll_attrs_ou_level_name} />
+						{BEGIN clearLink_ou_level_name}
+			<a href="#" class="filter-clear filter-clear-ou_level_name" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_ou_level_name}
+			<span class="r-filter-field">{$label public_lifeboxme_dhis2_analytics_data ou_level_name }				{BEGIN filter_selected_ou_level_name}:{END filter_selected_ou_level_name}
+			</span>
+			{BEGIN filter_selected_ou_level_name}
+			<span class="r-filter-value">{$filtervalue_ou_level_name}</span>
+			{END filter_selected_ou_level_name}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_ou_level_name}
+		<li class=" filter-values filter-values-ou_level_name  {$visibilityClass_ou_level_name}">
+			{$ou_level_name_filter}
+						
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_ou_level_name}
+
+			{BEGIN filter_button_showmore_ou_level_name}
+		<li class=" filter-show-more {$collapsedClass_ou_level_name} {$showMoreBtnClass_ou_level_name}">
+			<a class="filter-show-more-link filterShowMore_ou_level_name" href="#">{$show_n_more_ou_level_name}</a>
+		</li>
+		{END filter_button_showmore_ou_level_name}
+	
+
+
+	
+
+			{BEGIN filter_button_multiselect_ou_level_name}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_ou_level_name}">
+			<a href="#" class="filter-ou_level_name-btn-multiselect filter-apply-ou_level_name" {$filterbutton_attrs_ou_level_name}>Multiselect</a>
+		</li>
+		{END filter_button_multiselect_ou_level_name}
+			</ul>
+	</div>
+
+{END filter_control_ou_level_name}
 
 
 
@@ -984,6 +1069,7 @@
 		<li class=" filter-values filter-values-ou_parent_name  {$visibilityClass_ou_parent_name}">
 			{$ou_parent_name_filter}
 						
+					
 					
 					
 					
@@ -1045,6 +1131,7 @@
 					
 					
 					
+					
 					</li>
 		{END filterCtrlBlock_ou_name}
 
@@ -1101,6 +1188,7 @@
 					
 					
 					
+					
 					</li>
 		{END filterCtrlBlock_pe_relativeperiod}
 
@@ -1152,6 +1240,7 @@
 		<li class=" filter-values filter-values-pe_name  {$visibilityClass_pe_name}">
 			{$pe_name_filter}
 						
+					
 					
 					
 					
@@ -1232,6 +1321,12 @@
 	}
 			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="ou_parent_name"]:before {
 		content: "{$label public_lifeboxme_dhis2_analytics_data ou_parent_name}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="ou_level_id"]:before {
+		content: "{$label public_lifeboxme_dhis2_analytics_data ou_level_id}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="ou_level_name"]:before {
+		content: "{$label public_lifeboxme_dhis2_analytics_data ou_level_name}";
 	}
 			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="pe_id"]:before {
 		content: "{$label public_lifeboxme_dhis2_analytics_data pe_id}";
@@ -1326,7 +1421,7 @@
 		{BEGIN id_fieldheadercolumn}
 	{BEGIN id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field19" {$item_simple_grid_field19} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="id" data-fieldname="id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field21" {$item_simple_grid_field21} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="id" data-fieldname="id" 
 
 			{$id_orderlinkattrs}
 	
@@ -1360,7 +1455,7 @@
 		{BEGIN setting_id_fieldheadercolumn}
 	{BEGIN setting_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field20" {$item_simple_grid_field20} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="setting_id" data-fieldname="setting_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field22" {$item_simple_grid_field22} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="setting_id" data-fieldname="setting_id" 
 
 			{$setting_id_orderlinkattrs}
 	
@@ -1394,7 +1489,7 @@
 		{BEGIN dx_id_fieldheadercolumn}
 	{BEGIN dx_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field21" {$item_simple_grid_field21} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="dx_id" data-fieldname="dx_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field23" {$item_simple_grid_field23} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="dx_id" data-fieldname="dx_id" 
 
 			{$dx_id_orderlinkattrs}
 	
@@ -1428,7 +1523,7 @@
 		{BEGIN dx_name_fieldheadercolumn}
 	{BEGIN dx_name_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field22" {$item_simple_grid_field22} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="dx_name" data-fieldname="dx_name" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field24" {$item_simple_grid_field24} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="dx_name" data-fieldname="dx_name" 
 
 			{$dx_name_orderlinkattrs}
 	
@@ -1462,7 +1557,7 @@
 		{BEGIN dx_shortname_fieldheadercolumn}
 	{BEGIN dx_shortname_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field23" {$item_simple_grid_field23} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="dx_shortname" data-fieldname="dx_shortname" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field25" {$item_simple_grid_field25} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="dx_shortname" data-fieldname="dx_shortname" 
 
 			{$dx_shortname_orderlinkattrs}
 	
@@ -1496,7 +1591,7 @@
 		{BEGIN dx_displayname_fieldheadercolumn}
 	{BEGIN dx_displayname_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field24" {$item_simple_grid_field24} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="dx_displayname" data-fieldname="dx_displayname" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field26" {$item_simple_grid_field26} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="dx_displayname" data-fieldname="dx_displayname" 
 
 			{$dx_displayname_orderlinkattrs}
 	
@@ -1530,7 +1625,7 @@
 		{BEGIN dx_dimensiontype_fieldheadercolumn}
 	{BEGIN dx_dimensiontype_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field25" {$item_simple_grid_field25} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="dx_dimensiontype" data-fieldname="dx_dimensiontype" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field27" {$item_simple_grid_field27} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="dx_dimensiontype" data-fieldname="dx_dimensiontype" 
 
 			{$dx_dimensiontype_orderlinkattrs}
 	
@@ -1553,18 +1648,86 @@
 	{$cell_grid_headcell_field7}
 	{$recordattrs}
 	class="
+		 r-ori-vert		 {$ou_level_id_class}	"
+
+			data-field="ou_level_id"
+	
+	data-cellId="grid_headcell_field7" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN ou_level_id_fieldheadercolumn}
+	{BEGIN ou_level_id_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field28" {$item_simple_grid_field28} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="ou_level_id" data-fieldname="ou_level_id" 
+
+			{$ou_level_id_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_lifeboxme_dhis2_analytics_data ou_level_id }</span>
+					{$arrow_icon_ou_level_id}
+			</span>
+	</span>
+	{END ou_level_id_fieldheader}
+{END ou_level_id_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field7}
+									{BEGIN cellblock_grid_headcell_field8}
+	<th
+	
+	{$cell_grid_headcell_field8}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$ou_level_name_class}	"
+
+			data-field="ou_level_name"
+	
+	data-cellId="grid_headcell_field8" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN ou_level_name_fieldheadercolumn}
+	{BEGIN ou_level_name_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field29" {$item_simple_grid_field29} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="ou_level_name" data-fieldname="ou_level_name" 
+
+			{$ou_level_name_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_lifeboxme_dhis2_analytics_data ou_level_name }</span>
+					{$arrow_icon_ou_level_name}
+			</span>
+	</span>
+	{END ou_level_name_fieldheader}
+{END ou_level_name_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field8}
+									{BEGIN cellblock_grid_headcell_field9}
+	<th
+	
+	{$cell_grid_headcell_field9}
+	{$recordattrs}
+	class="
 		 r-ori-vert		 {$ou_parent_id_class}	"
 
 			data-field="ou_parent_id"
 	
-	data-cellId="grid_headcell_field7" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field9" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN ou_parent_id_fieldheadercolumn}
 	{BEGIN ou_parent_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field26" {$item_simple_grid_field26} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="ou_parent_id" data-fieldname="ou_parent_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field30" {$item_simple_grid_field30} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="ou_parent_id" data-fieldname="ou_parent_id" 
 
 			{$ou_parent_id_orderlinkattrs}
 	
@@ -1580,25 +1743,25 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field7}
-									{BEGIN cellblock_grid_headcell_field8}
+	{END cellblock_grid_headcell_field9}
+									{BEGIN cellblock_grid_headcell_field10}
 	<th
 	
-	{$cell_grid_headcell_field8}
+	{$cell_grid_headcell_field10}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$ou_parent_name_class}	"
 
 			data-field="ou_parent_name"
 	
-	data-cellId="grid_headcell_field8" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field10" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN ou_parent_name_fieldheadercolumn}
 	{BEGIN ou_parent_name_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field27" {$item_simple_grid_field27} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="ou_parent_name" data-fieldname="ou_parent_name" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field31" {$item_simple_grid_field31} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="ou_parent_name" data-fieldname="ou_parent_name" 
 
 			{$ou_parent_name_orderlinkattrs}
 	
@@ -1614,25 +1777,25 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field8}
-									{BEGIN cellblock_grid_headcell_field9}
+	{END cellblock_grid_headcell_field10}
+									{BEGIN cellblock_grid_headcell_field11}
 	<th
 	
-	{$cell_grid_headcell_field9}
+	{$cell_grid_headcell_field11}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$ou_id_class}	"
 
 			data-field="ou_id"
 	
-	data-cellId="grid_headcell_field9" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field11" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN ou_id_fieldheadercolumn}
 	{BEGIN ou_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field28" {$item_simple_grid_field28} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="ou_id" data-fieldname="ou_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field32" {$item_simple_grid_field32} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="ou_id" data-fieldname="ou_id" 
 
 			{$ou_id_orderlinkattrs}
 	
@@ -1648,25 +1811,25 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field9}
-									{BEGIN cellblock_grid_headcell_field10}
+	{END cellblock_grid_headcell_field11}
+									{BEGIN cellblock_grid_headcell_field12}
 	<th
 	
-	{$cell_grid_headcell_field10}
+	{$cell_grid_headcell_field12}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$ou_name_class}	"
 
 			data-field="ou_name"
 	
-	data-cellId="grid_headcell_field10" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field12" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN ou_name_fieldheadercolumn}
 	{BEGIN ou_name_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field29" {$item_simple_grid_field29} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="ou_name" data-fieldname="ou_name" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field33" {$item_simple_grid_field33} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="ou_name" data-fieldname="ou_name" 
 
 			{$ou_name_orderlinkattrs}
 	
@@ -1682,25 +1845,25 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field10}
-									{BEGIN cellblock_grid_headcell_field11}
+	{END cellblock_grid_headcell_field12}
+									{BEGIN cellblock_grid_headcell_field13}
 	<th
 	
-	{$cell_grid_headcell_field11}
+	{$cell_grid_headcell_field13}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$pe_id_class}	"
 
 			data-field="pe_id"
 	
-	data-cellId="grid_headcell_field11" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field13" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN pe_id_fieldheadercolumn}
 	{BEGIN pe_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field30" {$item_simple_grid_field30} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="pe_id" data-fieldname="pe_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field34" {$item_simple_grid_field34} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="pe_id" data-fieldname="pe_id" 
 
 			{$pe_id_orderlinkattrs}
 	
@@ -1716,25 +1879,25 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field11}
-									{BEGIN cellblock_grid_headcell_field12}
+	{END cellblock_grid_headcell_field13}
+									{BEGIN cellblock_grid_headcell_field14}
 	<th
 	
-	{$cell_grid_headcell_field12}
+	{$cell_grid_headcell_field14}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$pe_name_class}	"
 
 			data-field="pe_name"
 	
-	data-cellId="grid_headcell_field12" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN pe_name_fieldheadercolumn}
 	{BEGIN pe_name_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field31" {$item_simple_grid_field31} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="pe_name" data-fieldname="pe_name" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field35" {$item_simple_grid_field35} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="pe_name" data-fieldname="pe_name" 
 
 			{$pe_name_orderlinkattrs}
 	
@@ -1750,25 +1913,25 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field12}
-									{BEGIN cellblock_grid_headcell_field13}
+	{END cellblock_grid_headcell_field14}
+									{BEGIN cellblock_grid_headcell_field15}
 	<th
 	
-	{$cell_grid_headcell_field13}
+	{$cell_grid_headcell_field15}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$pe_relativeperiod_class}	"
 
 			data-field="pe_relativeperiod"
 	
-	data-cellId="grid_headcell_field13" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field15" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN pe_relativeperiod_fieldheadercolumn}
 	{BEGIN pe_relativeperiod_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field32" {$item_simple_grid_field32} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="pe_relativeperiod" data-fieldname="pe_relativeperiod" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field36" {$item_simple_grid_field36} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="pe_relativeperiod" data-fieldname="pe_relativeperiod" 
 
 			{$pe_relativeperiod_orderlinkattrs}
 	
@@ -1784,25 +1947,25 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field13}
-									{BEGIN cellblock_grid_headcell_field14}
+	{END cellblock_grid_headcell_field15}
+									{BEGIN cellblock_grid_headcell_field16}
 	<th
 	
-	{$cell_grid_headcell_field14}
+	{$cell_grid_headcell_field16}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$value_class}	"
 
 			data-field="value"
 	
-	data-cellId="grid_headcell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field16" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN value_fieldheadercolumn}
 	{BEGIN value_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field33" {$item_simple_grid_field33} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="value" data-fieldname="value" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field37" {$item_simple_grid_field37} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="value" data-fieldname="value" 
 
 			{$value_orderlinkattrs}
 	
@@ -1818,25 +1981,25 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field14}
-									{BEGIN cellblock_grid_headcell_field15}
+	{END cellblock_grid_headcell_field16}
+									{BEGIN cellblock_grid_headcell_field17}
 	<th
 	
-	{$cell_grid_headcell_field15}
+	{$cell_grid_headcell_field17}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$stored_by_class}	"
 
 			data-field="stored_by"
 	
-	data-cellId="grid_headcell_field15" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field17" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN stored_by_fieldheadercolumn}
 	{BEGIN stored_by_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field34" {$item_simple_grid_field34} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="stored_by" data-fieldname="stored_by" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field38" {$item_simple_grid_field38} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="stored_by" data-fieldname="stored_by" 
 
 			{$stored_by_orderlinkattrs}
 	
@@ -1852,25 +2015,25 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field15}
-									{BEGIN cellblock_grid_headcell_field16}
+	{END cellblock_grid_headcell_field17}
+									{BEGIN cellblock_grid_headcell_field18}
 	<th
 	
-	{$cell_grid_headcell_field16}
+	{$cell_grid_headcell_field18}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$created_class}	"
 
 			data-field="created"
 	
-	data-cellId="grid_headcell_field16" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field18" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN created_fieldheadercolumn}
 	{BEGIN created_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field35" {$item_simple_grid_field35} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="created" data-fieldname="created" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field39" {$item_simple_grid_field39} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="created" data-fieldname="created" 
 
 			{$created_orderlinkattrs}
 	
@@ -1886,25 +2049,25 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field16}
-									{BEGIN cellblock_grid_headcell_field17}
+	{END cellblock_grid_headcell_field18}
+									{BEGIN cellblock_grid_headcell_field19}
 	<th
 	
-	{$cell_grid_headcell_field17}
+	{$cell_grid_headcell_field19}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$last_updated_class}	"
 
 			data-field="last_updated"
 	
-	data-cellId="grid_headcell_field17" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field19" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN last_updated_fieldheadercolumn}
 	{BEGIN last_updated_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field36" {$item_simple_grid_field36} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="last_updated" data-fieldname="last_updated" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field40" {$item_simple_grid_field40} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="last_updated" data-fieldname="last_updated" 
 
 			{$last_updated_orderlinkattrs}
 	
@@ -1920,25 +2083,25 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field17}
-									{BEGIN cellblock_grid_headcell_field18}
+	{END cellblock_grid_headcell_field19}
+									{BEGIN cellblock_grid_headcell_field20}
 	<th
 	
-	{$cell_grid_headcell_field18}
+	{$cell_grid_headcell_field20}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$fetched_at_class}	"
 
 			data-field="fetched_at"
 	
-	data-cellId="grid_headcell_field18" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field20" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN fetched_at_fieldheadercolumn}
 	{BEGIN fetched_at_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field37" {$item_simple_grid_field37} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="fetched_at" data-fieldname="fetched_at" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field41" {$item_simple_grid_field41} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="fetched_at" data-fieldname="fetched_at" 
 
 			{$fetched_at_orderlinkattrs}
 	
@@ -1954,7 +2117,7 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field18}
+	{END cellblock_grid_headcell_field20}
 							</tr>
 															
 					{END grid_header}
@@ -2179,11 +2342,53 @@
 	{$cell_grid_cell_field7}
 	{$recordattrs}
 	class="
+		 r-ori-vert		 {$ou_level_id_class}	"
+
+			data-field="ou_level_id"
+	
+	data-cellId="grid_cell_field7" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN ou_level_id_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field19" {$item_simple_grid_field19} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="ou_level_id" data-fieldname="ou_level_id" data-default-width >
+{$ou_level_id_value}
+</span>
+{END ou_level_id_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field7}
+									{BEGIN cellblock_grid_cell_field8}
+	<td
+	
+	{$cell_grid_cell_field8}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$ou_level_name_class}	"
+
+			data-field="ou_level_name"
+	
+	data-cellId="grid_cell_field8" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN ou_level_name_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field20" {$item_simple_grid_field20} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="ou_level_name" data-fieldname="ou_level_name" data-default-width >
+{$ou_level_name_value}
+</span>
+{END ou_level_name_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field8}
+									{BEGIN cellblock_grid_cell_field9}
+	<td
+	
+	{$cell_grid_cell_field9}
+	{$recordattrs}
+	class="
 		 r-ori-vert		 {$ou_parent_id_class}	"
 
 			data-field="ou_parent_id"
 	
-	data-cellId="grid_cell_field7" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field9" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -2193,18 +2398,18 @@
 </span>
 {END ou_parent_id_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field7}
-									{BEGIN cellblock_grid_cell_field8}
+	{END cellblock_grid_cell_field9}
+									{BEGIN cellblock_grid_cell_field10}
 	<td
 	
-	{$cell_grid_cell_field8}
+	{$cell_grid_cell_field10}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$ou_parent_name_class}	"
 
 			data-field="ou_parent_name"
 	
-	data-cellId="grid_cell_field8" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field10" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -2214,18 +2419,18 @@
 </span>
 {END ou_parent_name_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field8}
-									{BEGIN cellblock_grid_cell_field9}
+	{END cellblock_grid_cell_field10}
+									{BEGIN cellblock_grid_cell_field11}
 	<td
 	
-	{$cell_grid_cell_field9}
+	{$cell_grid_cell_field11}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$ou_id_class}	"
 
 			data-field="ou_id"
 	
-	data-cellId="grid_cell_field9" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field11" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -2235,18 +2440,18 @@
 </span>
 {END ou_id_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field9}
-									{BEGIN cellblock_grid_cell_field10}
+	{END cellblock_grid_cell_field11}
+									{BEGIN cellblock_grid_cell_field12}
 	<td
 	
-	{$cell_grid_cell_field10}
+	{$cell_grid_cell_field12}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$ou_name_class}	"
 
 			data-field="ou_name"
 	
-	data-cellId="grid_cell_field10" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field12" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -2256,18 +2461,18 @@
 </span>
 {END ou_name_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field10}
-									{BEGIN cellblock_grid_cell_field11}
+	{END cellblock_grid_cell_field12}
+									{BEGIN cellblock_grid_cell_field13}
 	<td
 	
-	{$cell_grid_cell_field11}
+	{$cell_grid_cell_field13}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$pe_id_class}	"
 
 			data-field="pe_id"
 	
-	data-cellId="grid_cell_field11" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field13" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -2277,18 +2482,18 @@
 </span>
 {END pe_id_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field11}
-									{BEGIN cellblock_grid_cell_field12}
+	{END cellblock_grid_cell_field13}
+									{BEGIN cellblock_grid_cell_field14}
 	<td
 	
-	{$cell_grid_cell_field12}
+	{$cell_grid_cell_field14}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$pe_name_class}	"
 
 			data-field="pe_name"
 	
-	data-cellId="grid_cell_field12" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -2298,18 +2503,18 @@
 </span>
 {END pe_name_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field12}
-									{BEGIN cellblock_grid_cell_field13}
+	{END cellblock_grid_cell_field14}
+									{BEGIN cellblock_grid_cell_field15}
 	<td
 	
-	{$cell_grid_cell_field13}
+	{$cell_grid_cell_field15}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$pe_relativeperiod_class}	"
 
 			data-field="pe_relativeperiod"
 	
-	data-cellId="grid_cell_field13" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field15" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -2319,18 +2524,18 @@
 </span>
 {END pe_relativeperiod_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field13}
-									{BEGIN cellblock_grid_cell_field14}
+	{END cellblock_grid_cell_field15}
+									{BEGIN cellblock_grid_cell_field16}
 	<td
 	
-	{$cell_grid_cell_field14}
+	{$cell_grid_cell_field16}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$value_class}	"
 
 			data-field="value"
 	
-	data-cellId="grid_cell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field16" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -2340,18 +2545,18 @@
 </span>
 {END value_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field14}
-									{BEGIN cellblock_grid_cell_field15}
+	{END cellblock_grid_cell_field16}
+									{BEGIN cellblock_grid_cell_field17}
 	<td
 	
-	{$cell_grid_cell_field15}
+	{$cell_grid_cell_field17}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$stored_by_class}	"
 
 			data-field="stored_by"
 	
-	data-cellId="grid_cell_field15" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field17" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -2361,18 +2566,18 @@
 </span>
 {END stored_by_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field15}
-									{BEGIN cellblock_grid_cell_field16}
+	{END cellblock_grid_cell_field17}
+									{BEGIN cellblock_grid_cell_field18}
 	<td
 	
-	{$cell_grid_cell_field16}
+	{$cell_grid_cell_field18}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$created_class}	"
 
 			data-field="created"
 	
-	data-cellId="grid_cell_field16" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field18" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -2382,18 +2587,18 @@
 </span>
 {END created_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field16}
-									{BEGIN cellblock_grid_cell_field17}
+	{END cellblock_grid_cell_field18}
+									{BEGIN cellblock_grid_cell_field19}
 	<td
 	
-	{$cell_grid_cell_field17}
+	{$cell_grid_cell_field19}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$last_updated_class}	"
 
 			data-field="last_updated"
 	
-	data-cellId="grid_cell_field17" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field19" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -2403,18 +2608,18 @@
 </span>
 {END last_updated_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field17}
-									{BEGIN cellblock_grid_cell_field18}
+	{END cellblock_grid_cell_field19}
+									{BEGIN cellblock_grid_cell_field20}
 	<td
 	
-	{$cell_grid_cell_field18}
+	{$cell_grid_cell_field20}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$fetched_at_class}	"
 
 			data-field="fetched_at"
 	
-	data-cellId="grid_cell_field18" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field20" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -2424,7 +2629,7 @@
 </span>
 {END fetched_at_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field18}
+	{END cellblock_grid_cell_field20}
 							</tr>
 										
 											{END grid_row}
@@ -2577,7 +2782,7 @@
 	{$cell_grid_footcell_field7}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$ou_parent_id_class}	"
+		 r-ori-vert		 {$ou_level_id_class}	"
 
 	
 	data-cellId="grid_footcell_field7" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lifeboxme_dhis2_analytics_data_list"	
@@ -2592,7 +2797,7 @@
 	{$cell_grid_footcell_field8}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$ou_parent_name_class}	"
+		 r-ori-vert		 {$ou_level_name_class}	"
 
 	
 	data-cellId="grid_footcell_field8" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lifeboxme_dhis2_analytics_data_list"	
@@ -2607,7 +2812,7 @@
 	{$cell_grid_footcell_field9}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$ou_id_class}	"
+		 r-ori-vert		 {$ou_parent_id_class}	"
 
 	
 	data-cellId="grid_footcell_field9" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lifeboxme_dhis2_analytics_data_list"	
@@ -2622,7 +2827,7 @@
 	{$cell_grid_footcell_field10}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$ou_name_class}	"
+		 r-ori-vert		 {$ou_parent_name_class}	"
 
 	
 	data-cellId="grid_footcell_field10" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lifeboxme_dhis2_analytics_data_list"	
@@ -2637,7 +2842,7 @@
 	{$cell_grid_footcell_field11}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$pe_id_class}	"
+		 r-ori-vert		 {$ou_id_class}	"
 
 	
 	data-cellId="grid_footcell_field11" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lifeboxme_dhis2_analytics_data_list"	
@@ -2652,7 +2857,7 @@
 	{$cell_grid_footcell_field12}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$pe_name_class}	"
+		 r-ori-vert		 {$ou_name_class}	"
 
 	
 	data-cellId="grid_footcell_field12" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lifeboxme_dhis2_analytics_data_list"	
@@ -2667,7 +2872,7 @@
 	{$cell_grid_footcell_field13}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$pe_relativeperiod_class}	"
+		 r-ori-vert		 {$pe_id_class}	"
 
 	
 	data-cellId="grid_footcell_field13" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lifeboxme_dhis2_analytics_data_list"	
@@ -2682,7 +2887,7 @@
 	{$cell_grid_footcell_field14}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$value_class}	"
+		 r-ori-vert		 {$pe_name_class}	"
 
 	
 	data-cellId="grid_footcell_field14" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lifeboxme_dhis2_analytics_data_list"	
@@ -2697,7 +2902,7 @@
 	{$cell_grid_footcell_field15}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$stored_by_class}	"
+		 r-ori-vert		 {$pe_relativeperiod_class}	"
 
 	
 	data-cellId="grid_footcell_field15" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lifeboxme_dhis2_analytics_data_list"	
@@ -2712,7 +2917,7 @@
 	{$cell_grid_footcell_field16}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$created_class}	"
+		 r-ori-vert		 {$value_class}	"
 
 	
 	data-cellId="grid_footcell_field16" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lifeboxme_dhis2_analytics_data_list"	
@@ -2727,7 +2932,7 @@
 	{$cell_grid_footcell_field17}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$last_updated_class}	"
+		 r-ori-vert		 {$stored_by_class}	"
 
 	
 	data-cellId="grid_footcell_field17" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lifeboxme_dhis2_analytics_data_list"	
@@ -2742,7 +2947,7 @@
 	{$cell_grid_footcell_field18}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$fetched_at_class}	"
+		 r-ori-vert		 {$created_class}	"
 
 	
 	data-cellId="grid_footcell_field18" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lifeboxme_dhis2_analytics_data_list"	
@@ -2751,6 +2956,36 @@
 	
 	</td>
 	{END cellblock_grid_footcell_field18}
+									{BEGIN cellblock_grid_footcell_field19}
+	<td
+	
+	{$cell_grid_footcell_field19}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$last_updated_class}	"
+
+	
+	data-cellId="grid_footcell_field19" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lifeboxme_dhis2_analytics_data_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field19}
+									{BEGIN cellblock_grid_footcell_field20}
+	<td
+	
+	{$cell_grid_footcell_field20}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$fetched_at_class}	"
+
+	
+	data-cellId="grid_footcell_field20" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lifeboxme_dhis2_analytics_data_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field20}
 							</tr>
 					
 					</tfoot>

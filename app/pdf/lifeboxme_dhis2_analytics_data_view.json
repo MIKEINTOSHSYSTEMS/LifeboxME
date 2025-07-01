@@ -188,6 +188,12 @@ pdfDocument = {
 			{"hidden":"{$item_hide_integrated_edit_field6}","stack":[{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data dx_dimensiontype }","bold":true},{"text":{$dx_dimensiontype_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
+			{"hidden":"{$item_hide_integrated_edit_field19}","stack":[{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data ou_level_id }","bold":true},{"text":{$ou_level_id_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field20}","stack":[{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data ou_level_name }","bold":true},{"text":{$ou_level_name_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
 			{"hidden":"{$item_hide_integrated_edit_field17}","stack":[{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data ou_parent_id }","bold":true},{"text":{$ou_parent_id_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				

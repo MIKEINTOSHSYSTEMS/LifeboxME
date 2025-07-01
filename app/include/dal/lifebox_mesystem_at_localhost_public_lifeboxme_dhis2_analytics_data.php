@@ -11,6 +11,8 @@ $dalTablelifeboxme_dhis2_analytics_data["ou_id"] = array("type"=>200,"varname"=>
 $dalTablelifeboxme_dhis2_analytics_data["ou_name"] = array("type"=>200,"varname"=>"ou_name", "name" => "ou_name", "autoInc" => "0");
 $dalTablelifeboxme_dhis2_analytics_data["ou_parent_id"] = array("type"=>200,"varname"=>"ou_parent_id", "name" => "ou_parent_id", "autoInc" => "0");
 $dalTablelifeboxme_dhis2_analytics_data["ou_parent_name"] = array("type"=>200,"varname"=>"ou_parent_name", "name" => "ou_parent_name", "autoInc" => "0");
+$dalTablelifeboxme_dhis2_analytics_data["ou_level_id"] = array("type"=>3,"varname"=>"ou_level_id", "name" => "ou_level_id", "autoInc" => "0");
+$dalTablelifeboxme_dhis2_analytics_data["ou_level_name"] = array("type"=>200,"varname"=>"ou_level_name", "name" => "ou_level_name", "autoInc" => "0");
 $dalTablelifeboxme_dhis2_analytics_data["pe_id"] = array("type"=>200,"varname"=>"pe_id", "name" => "pe_id", "autoInc" => "0");
 $dalTablelifeboxme_dhis2_analytics_data["pe_name"] = array("type"=>200,"varname"=>"pe_name", "name" => "pe_name", "autoInc" => "0");
 $dalTablelifeboxme_dhis2_analytics_data["pe_relativeperiod"] = array("type"=>200,"varname"=>"pe_relativeperiod", "name" => "pe_relativeperiod", "autoInc" => "0");
