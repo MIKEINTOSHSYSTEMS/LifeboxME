@@ -9,6 +9,47 @@ if (file_exists($envFile)) {
     die(json_encode(['error' => 'Configuration file not found']));
 }
 
+// Helper function to parse dimension strings
+function parseDimensionString($str)
+{
+    if (empty($str)) {
+        return [];
+    }
+    $result = [];
+    $parts = explode(',', $str);
+    foreach ($parts as $part) {
+        if (strpos($part, ':') !== false) {
+            list($dim, $itemsStr) = explode(':', $part, 2);
+            $items = explode(';', $itemsStr);
+            $result[$dim] = $items;
+        }
+    }
+    return $result;
+}
+
+// Helper function to parse filter values
+function parseFilterValue($filterValue)
+{
+    $filters = [];
+    if (is_array($filterValue)) {
+        $filterStrings = $filterValue;
+    } else {
+        $filterStrings = [$filterValue];
+    }
+
+    foreach ($filterStrings as $filterStr) {
+        if (strpos($filterStr, ':') !== false) {
+            list($dim, $itemsStr) = explode(':', $filterStr, 2);
+            $items = explode(';', $itemsStr);
+            if (!isset($filters[$dim])) {
+                $filters[$dim] = [];
+            }
+            $filters[$dim] = array_merge($filters[$dim], $items);
+        }
+    }
+    return $filters;
+}
+
 // Function to fetch data items metadata
 function fetchDataItemsMetadata()
 {
@@ -64,29 +105,28 @@ $allowedParams = [
     'page'
 ];
 
-// Extract filters from URL
-$filteredOrgUnits = [];
-$filteredPeriods = [];
+// Parse dimension parameter to extract org units and periods
+$dimensionParam = $_GET['dimension'] ?? '';
+$dimensionData = parseDimensionString($dimensionParam);
 
-foreach ($_GET as $key => $value) {
-    if ($key === 'filter') {
-        if (is_array($value)) {
-            foreach ($value as $filter) {
-                if (strpos($filter, 'ou:') === 0) {
-                    $filteredOrgUnits = array_merge($filteredOrgUnits, explode(';', substr($filter, 3)));
-                } elseif (strpos($filter, 'pe:') === 0) {
-                    $filteredPeriods = array_merge($filteredPeriods, explode(';', substr($filter, 3)));
-                }
-            }
-        } else {
-            if (strpos($value, 'ou:') === 0) {
-                $filteredOrgUnits = explode(';', substr($value, 3));
-            } elseif (strpos($value, 'pe:') === 0) {
-                $filteredPeriods = explode(';', substr($value, 3));
-            }
-        }
-    }
-}
+// Parse filter parameter to extract org units and periods
+$filterParam = $_GET['filter'] ?? [];
+$filterData = parseFilterValue($filterParam);
+
+// Combine org units from both dimension and filter parameters
+$filteredOrgUnits = array_merge(
+    $dimensionData['ou'] ?? [],
+    $filterData['ou'] ?? []
+);
+
+// Combine periods from both dimension and filter parameters
+$filteredPeriods = array_merge(
+    $dimensionData['pe'] ?? [],
+    $filterData['pe'] ?? []
+);
+
+// For period mapping, use only filter periods (relative periods)
+$periodsForMapping = $filterData['pe'] ?? [];
 
 // Build API endpoint
 $queryParams = [];
@@ -154,7 +194,7 @@ $result = [];
 // Get all indicator IDs
 $dxIds = $jsonData['metaData']['dimensions']['dx'] ?? [];
 
-// Get all org units from response (only z6VZwVMwK4d in this case)
+// Get all org units from response
 $allOrgUnits = [];
 if (isset($jsonData['metaData']['dimensions']['ou'])) {
     foreach ($jsonData['metaData']['dimensions']['ou'] as $ouId) {
@@ -169,20 +209,19 @@ if (isset($jsonData['metaData']['dimensions']['ou'])) {
 $periodIdToUserPeriod = [];
 if (isset($jsonData['metaData']['dimensions']['pe'])) {
     // If user entered a single period filter, map all returned periods to that filter
-    if (count($filteredPeriods) === 1) {
+    if (count($periodsForMapping) === 1) {
         foreach ($jsonData['metaData']['dimensions']['pe'] as $peId) {
-            $periodIdToUserPeriod[$peId] = $filteredPeriods[0];
+            $periodIdToUserPeriod[$peId] = $periodsForMapping[0];
         }
     } else {
         // If multiple, try to map by order (DHIS2 usually preserves order)
         foreach ($jsonData['metaData']['dimensions']['pe'] as $idx => $peId) {
-            $periodIdToUserPeriod[$peId] = $filteredPeriods[$idx] ?? $peId;
+            $periodIdToUserPeriod[$peId] = $periodsForMapping[$idx] ?? $peId;
         }
     }
 }
 
-
-// Get all periods from response (2024 and 2025)
+// Get all periods from response
 $allPeriods = [];
 if (isset($jsonData['metaData']['dimensions']['pe'])) {
     foreach ($jsonData['metaData']['dimensions']['pe'] as $peId) {
@@ -190,9 +229,35 @@ if (isset($jsonData['metaData']['dimensions']['pe'])) {
             'id' => $peId,
             'displayName' => $jsonData['metaData']['items'][$peId]['name'] ?? $peId,
             'relativePeriod' => $periodIdToUserPeriod[$peId] ?? null
-            //'relativePeriod' => $jsonData['metaData']['items'][$peId]['name'] ?? null
-            //'relativePeriod' => $jsonData['metaData']['items']['LAST_YEAR']['name'] ?? null
         ];
+    }
+}
+
+// NEW: Create a map for values based on dimensions
+$valueMap = [];
+foreach ($jsonData['rows'] as $row) {
+    // Determine row structure based on dimensions in the request
+    $isOrgUnitDimension = isset($dimensionData['ou']);
+
+    // Case 1: When ou is a dimension (dx, ou, value)
+    if ($isOrgUnitDimension) {
+        if (count($row) >= 3) {
+            $dxId = $row[0];
+            $ouId = $row[1];
+            $value = $row[2];
+            $valueMap[$dxId][$ouId] = $value;
+        }
+    }
+    // Case 2: When ou is a filter (dx, value)
+    else {
+        if (count($row) >= 2) {
+            $dxId = $row[0];
+            $value = $row[1];
+            // For filtered org units, associate value with each org unit
+            foreach ($filteredOrgUnits as $ouId) {
+                $valueMap[$dxId][$ouId] = $value;
+            }
+        }
     }
 }
 
@@ -212,18 +277,12 @@ foreach ($dxIds as $dxId) {
         'data' => []
     ];
 
-    // Find the value for this indicator (rows only contain dx and value)
-    $value = null;
-    foreach ($jsonData['rows'] as $row) {
-        if ($row[0] === $dxId) {
-            $value = $row[1] ?? null;
-            break;
-        }
-    }
-
     // Create data entries for each org unit and period combination
-    foreach ($allOrgUnits as $ouInfo) {
-        foreach ($allPeriods as $peInfo) {
+    foreach ($allOrgUnits as $ouId => $ouInfo) {
+        foreach ($allPeriods as $peId => $peInfo) {
+            // Get value from map if available
+            $value = $valueMap[$dxId][$ouId] ?? null;
+
             $indicator['data'][] = [
                 'orgUnit' => $ouInfo,
                 'period' => $peInfo,
