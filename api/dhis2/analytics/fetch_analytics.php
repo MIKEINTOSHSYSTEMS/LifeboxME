@@ -6,6 +6,47 @@ ob_start();
 $envFile = __DIR__ . '/../../../.env.dev';
 $envVars = file_exists($envFile) ? parse_ini_file($envFile) : die(json_encode(['error' => 'Configuration error']));
 
+// Helper function to parse dimension strings
+function parseDimensionString($str)
+{
+    if (empty($str)) {
+        return [];
+    }
+    $result = [];
+    $parts = explode(',', $str);
+    foreach ($parts as $part) {
+        if (strpos($part, ':') !== false) {
+            list($dim, $itemsStr) = explode(':', $part, 2);
+            $items = explode(';', $itemsStr);
+            $result[$dim] = $items;
+        }
+    }
+    return $result;
+}
+
+// Helper function to parse filter values
+function parseFilterValue($filterValue)
+{
+    $filters = [];
+    if (is_array($filterValue)) {
+        $filterStrings = $filterValue;
+    } else {
+        $filterStrings = [$filterValue];
+    }
+
+    foreach ($filterStrings as $filterStr) {
+        if (strpos($filterStr, ':') !== false) {
+            list($dim, $itemsStr) = explode(':', $filterStr, 2);
+            $items = explode(';', $itemsStr);
+            if (!isset($filters[$dim])) {
+                $filters[$dim] = [];
+            }
+            $filters[$dim] = array_merge($filters[$dim], $items);
+        }
+    }
+    return $filters;
+}
+
 // Database connection
 $dbHost = $envVars['DB_HOST'] ?? 'localhost';
 $dbPort = $envVars['POSTGRES_PORT'] ?? '5432';
@@ -273,13 +314,18 @@ if ($action) {
 
                 if (!$setting) throw new Exception("Setting not found");
 
-                // Build API URL with proper semicolon separation
+                // Extract parameters using helper functions
                 $dxIds = explode(',', $setting['dx']);
                 $ouIds = explode(',', $setting['ou']);
                 $peIds = explode(',', $setting['pe']);
 
+                // Build dimension parameter with proper structure
+                $dimensionParam = 'dx:' . implode(';', $dxIds) . ',ou:' . implode(';', $ouIds);
+                $filterParam = ['pe:' . implode(';', $peIds)];
+
                 $params = [
-                    'dimension' => 'dx:' . implode(';', $dxIds),
+                    'dimension' => $dimensionParam,
+                    'filter' => $filterParam,
                     'displayProperty' => $setting['display_property'],
                     'includeNumDen' => $setting['include_num_den'] ? 'true' : 'false',
                     'skipMeta' => $setting['skip_meta'] ? 'true' : 'false',
@@ -288,18 +334,20 @@ if ($action) {
                     'pageSize' => $setting['page_size']
                 ];
 
-                // Build filter parameters with semicolon separation
-                $filterParams = [
-                    'ou:' . implode(';', $ouIds),
-                    'pe:' . implode(';', $peIds)
-                ];
-
                 // Build query string
                 $queryParts = [];
-                $queryParts[] = http_build_query($params);
-                foreach ($filterParams as $filter) {
+                $queryParts[] = http_build_query(['dimension' => $params['dimension']]);
+                foreach ($params['filter'] as $filter) {
                     $queryParts[] = 'filter=' . urlencode($filter);
                 }
+                $queryParts[] = http_build_query([
+                    'displayProperty' => $params['displayProperty'],
+                    'includeNumDen' => $params['includeNumDen'],
+                    'skipMeta' => $params['skipMeta'],
+                    'skipData' => $params['skipData'],
+                    'paging' => $params['paging'],
+                    'pageSize' => $params['pageSize']
+                ]);
                 $queryString = implode('&', $queryParts);
 
                 // Fetch from DHIS2 API
@@ -341,7 +389,7 @@ if ($action) {
                 // Fetch organization unit metadata including parents and level
                 $ouMetadata = fetchOrgUnitsMetadata($envVars, $ouIds);
 
-                // Process response like index.php
+                // Process response
                 $dxIds = $data['metaData']['dimensions']['dx'] ?? [];
                 $ouIds = $data['metaData']['dimensions']['ou'] ?? [];
                 $peIds = $data['metaData']['dimensions']['pe'] ?? [];
@@ -362,13 +410,13 @@ if ($action) {
                     ];
                 }
 
-                // Build a map from resolved period ID to user-entered period (e.g., 202506 => THIS_MONTH)
-                $userPeriods = $peIds; // These are the periods returned by DHIS2 (e.g., 202506)
-                $requestedPeriods = explode(',', $setting['pe']); // These are the user-entered periods (e.g., THIS_MONTH)
+                // Build a map from resolved period ID to user-entered period
+                $userPeriods = $peIds; // Resolved periods from DHIS2
+                $requestedPeriods = explode(',', $setting['pe']); // User-entered periods
 
                 $periodIdToUserPeriod = [];
                 if (count($requestedPeriods) === 1) {
-                    // If only one user period, map all returned periods to that
+                    // If only one user period, map all to that
                     foreach ($userPeriods as $peId) {
                         $periodIdToUserPeriod[$peId] = $requestedPeriods[0];
                     }
@@ -389,11 +437,26 @@ if ($action) {
                     ];
                 }
 
-                // Build dx value map
+                // Build value map based on row structure
                 $dxValueMap = [];
                 foreach ($data['rows'] as $row) {
-                    if (isset($row[0])) {
-                        $dxValueMap[$row[0]] = $row[1] ?? null;
+                    // Handle different row structures:
+                    // - When ou is dimension: [dx, ou, value]
+                    // - When ou is filter: [dx, value]
+                    if (count($row) === 3) {
+                        // dx, ou, value structure
+                        $dxId = $row[0];
+                        $ouId = $row[1];
+                        $value = $row[2];
+                        $dxValueMap[$dxId][$ouId] = $value;
+                    } elseif (count($row) === 2) {
+                        // dx, value structure
+                        $dxId = $row[0];
+                        $value = $row[1];
+                        // Apply to all org units
+                        foreach ($ouIds as $ouId) {
+                            $dxValueMap[$dxId][$ouId] = $value;
+                        }
                     }
                 }
 
@@ -406,7 +469,7 @@ if ($action) {
                 // Reset the sequence to 0
                 $db->exec('SELECT setval(\'"public"."lifeboxme_dhis2_analytics_data_id_seq"\', 0, true);');
 
-                // Prepare insert statement with new columns including parent OU and level
+                // Prepare insert statement
                 $stmt = $db->prepare("INSERT INTO lifeboxme_dhis2_analytics_data 
                 (setting_id, dx_id, dx_name, dx_shortname, dx_displayname, dx_dimensiontype, 
                 ou_id, ou_name, ou_parent_id, ou_parent_name, ou_level_id, ou_level_name,
@@ -427,7 +490,7 @@ if ($action) {
 
                     foreach ($allOrgUnits as $ou) {
                         foreach ($allPeriods as $pe) {
-                            $value = $dxValueMap[$dxId] ?? null;
+                            $value = $dxValueMap[$dxId][$ou['id']] ?? null;
 
                             $stmt->execute([
                                 $id,
@@ -440,8 +503,8 @@ if ($action) {
                                 $ou['name'],
                                 $ou['parent_id'],
                                 $ou['parent_name'],
-                                $ou['level_id'],  // New: OU Level ID
-                                $ou['level_name'], // New: OU Level Name
+                                $ou['level_id'],  // OU Level ID
+                                $ou['level_name'], // OU Level Name
                                 $pe['id'],
                                 $pe['name'],
                                 $pe['relativePeriod'] ?? $pe['name'],

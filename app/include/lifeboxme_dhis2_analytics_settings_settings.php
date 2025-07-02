@@ -25,19 +25,19 @@ if(mlang_getcurrentlang()=="English")
 	$fieldToolTipslifeboxme_dhis2_analytics_settings["English"] = array();
 	$placeHolderslifeboxme_dhis2_analytics_settings["English"] = array();
 	$pageTitleslifeboxme_dhis2_analytics_settings["English"] = array();
-	$fieldLabelslifeboxme_dhis2_analytics_settings["English"]["id"] = "Id";
+	$fieldLabelslifeboxme_dhis2_analytics_settings["English"]["id"] = "ID";
 	$fieldToolTipslifeboxme_dhis2_analytics_settings["English"]["id"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_settings["English"]["id"] = "";
-	$fieldLabelslifeboxme_dhis2_analytics_settings["English"]["name"] = "Name";
+	$fieldLabelslifeboxme_dhis2_analytics_settings["English"]["name"] = "Setting Name";
 	$fieldToolTipslifeboxme_dhis2_analytics_settings["English"]["name"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_settings["English"]["name"] = "";
-	$fieldLabelslifeboxme_dhis2_analytics_settings["English"]["dx"] = "Dx";
+	$fieldLabelslifeboxme_dhis2_analytics_settings["English"]["dx"] = "Data Items";
 	$fieldToolTipslifeboxme_dhis2_analytics_settings["English"]["dx"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_settings["English"]["dx"] = "";
-	$fieldLabelslifeboxme_dhis2_analytics_settings["English"]["ou"] = "Ou";
+	$fieldLabelslifeboxme_dhis2_analytics_settings["English"]["ou"] = "Organization Units";
 	$fieldToolTipslifeboxme_dhis2_analytics_settings["English"]["ou"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_settings["English"]["ou"] = "";
-	$fieldLabelslifeboxme_dhis2_analytics_settings["English"]["pe"] = "Pe";
+	$fieldLabelslifeboxme_dhis2_analytics_settings["English"]["pe"] = "Periods";
 	$fieldToolTipslifeboxme_dhis2_analytics_settings["English"]["pe"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_settings["English"]["pe"] = "";
 	$fieldLabelslifeboxme_dhis2_analytics_settings["English"]["display_property"] = "Display Property";
@@ -1880,7 +1880,7 @@ $tdatalifeboxme_dhis2_analytics_settings[".hideMobileList"] = array();
 	$edata = array("EditFormat" => "Date");
 
 	
-		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+		$edata["weekdayMessage"] = array("message" => "Invalid week day", "messageType" => "Text");
 	$edata["weekdays"] = "[]";
 
 
@@ -1899,7 +1899,7 @@ $tdatalifeboxme_dhis2_analytics_settings[".hideMobileList"] = array();
 
 	
 	
-		$edata["DateEditType"] = 13;
+		$edata["DateEditType"] = 5;
 	$edata["InitialYearFactor"] = 100;
 	$edata["LastYearFactor"] = 10;
 
@@ -2019,7 +2019,7 @@ $tdatalifeboxme_dhis2_analytics_settings[".hideMobileList"] = array();
 	$edata = array("EditFormat" => "Date");
 
 	
-		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+		$edata["weekdayMessage"] = array("message" => "Invalid week day", "messageType" => "Text");
 	$edata["weekdays"] = "[]";
 
 
@@ -2038,7 +2038,7 @@ $tdatalifeboxme_dhis2_analytics_settings[".hideMobileList"] = array();
 
 	
 	
-		$edata["DateEditType"] = 13;
+		$edata["DateEditType"] = 5;
 	$edata["InitialYearFactor"] = 100;
 	$edata["LastYearFactor"] = 10;
 
@@ -2052,7 +2052,8 @@ $tdatalifeboxme_dhis2_analytics_settings[".hideMobileList"] = array();
 	$edata["validateAs"]["basicValidate"] = array();
 	$edata["validateAs"]["customMessages"] = array();
 	
-	
+		$edata["autoUpdatable"] = true;
+
 //	End validation
 
 	

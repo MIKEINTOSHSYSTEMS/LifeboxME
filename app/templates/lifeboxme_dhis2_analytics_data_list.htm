@@ -496,6 +496,19 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_setting_id}</span>
 						</div>
 		{END searchCtrlBlock_setting_id}
+																{BEGIN searchCtrlBlock_dx_dimensiontype}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_dx_dimensiontype}" {$filterRow_attrs_dx_dimensiontype}>
+			<label>{$label public_lifeboxme_dhis2_analytics_data dx_dimensiontype }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_dx_dimensiontype}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_dx_dimensiontype}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_dx_dimensiontype}</span>
+						</div>
+		{END searchCtrlBlock_dx_dimensiontype}
 																{BEGIN searchCtrlBlock_dx_id}
 
 
@@ -548,19 +561,6 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_dx_displayname}</span>
 						</div>
 		{END searchCtrlBlock_dx_displayname}
-																{BEGIN searchCtrlBlock_dx_dimensiontype}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_dx_dimensiontype}" {$filterRow_attrs_dx_dimensiontype}>
-			<label>{$label public_lifeboxme_dhis2_analytics_data dx_dimensiontype }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_dx_dimensiontype}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_dx_dimensiontype}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_dx_dimensiontype}</span>
-						</div>
-		{END searchCtrlBlock_dx_dimensiontype}
 																{BEGIN searchCtrlBlock_ou_level_id}
 
 
@@ -881,114 +881,6 @@
 
 
 
-{BEGIN filter_control_dx_name}
-
-	<div class="dropdown filter-field filter-dx_name-container" {BEGIN filter_selected_dx_name} data-selected {END filter_selected_dx_name}>
-		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
-						{BEGIN clearLink_dx_name}
-			<a href="#" class="filter-clear filter-clear-dx_name" title="Clear">
-				<span class="glyphicon glyphicon-remove"></span>
-			</a>
-			{END clearLink_dx_name}
-			<span class="r-filter-field">{$label public_lifeboxme_dhis2_analytics_data dx_name }				{BEGIN filter_selected_dx_name}:{END filter_selected_dx_name}
-			</span>
-			{BEGIN filter_selected_dx_name}
-			<span class="r-filter-value">{$filtervalue_dx_name}</span>
-			{END filter_selected_dx_name}
-			
-			<span class="caret"></span>
-		</div>
-		<ul class="dropdown-menu">
-					{BEGIN filterCtrlBlock_dx_name}
-		<li class=" filter-values filter-values-dx_name  {$visibilityClass_dx_name}">
-			{$dx_name_filter}
-						
-					
-					
-					
-					
-					
-					
-					</li>
-		{END filterCtrlBlock_dx_name}
-
-			{BEGIN filter_button_showmore_dx_name}
-		<li class=" filter-show-more {$collapsedClass_dx_name} {$showMoreBtnClass_dx_name}">
-			<a class="filter-show-more-link filterShowMore_dx_name" href="#">{$show_n_more_dx_name}</a>
-		</li>
-		{END filter_button_showmore_dx_name}
-	
-
-
-	
-
-			</ul>
-	</div>
-
-{END filter_control_dx_name}
-
-
-
-
-
-
-{BEGIN filter_control_dx_dimensiontype}
-
-	<div class="dropdown filter-field filter-dx_dimensiontype-container" {BEGIN filter_selected_dx_dimensiontype} data-selected {END filter_selected_dx_dimensiontype}>
-		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
-							<input class="filter-selectAll-dx_dimensiontype" type="checkbox" name="selectAll" {$selectAll_attrs_dx_dimensiontype} />
-						{BEGIN clearLink_dx_dimensiontype}
-			<a href="#" class="filter-clear filter-clear-dx_dimensiontype" title="Clear">
-				<span class="glyphicon glyphicon-remove"></span>
-			</a>
-			{END clearLink_dx_dimensiontype}
-			<span class="r-filter-field">{$label public_lifeboxme_dhis2_analytics_data dx_dimensiontype }				{BEGIN filter_selected_dx_dimensiontype}:{END filter_selected_dx_dimensiontype}
-			</span>
-			{BEGIN filter_selected_dx_dimensiontype}
-			<span class="r-filter-value">{$filtervalue_dx_dimensiontype}</span>
-			{END filter_selected_dx_dimensiontype}
-			
-			<span class="caret"></span>
-		</div>
-		<ul class="dropdown-menu">
-					{BEGIN filterCtrlBlock_dx_dimensiontype}
-		<li class=" filter-values filter-values-dx_dimensiontype  {$visibilityClass_dx_dimensiontype}">
-			{$dx_dimensiontype_filter}
-						
-					
-					
-					
-					
-					
-					
-					</li>
-		{END filterCtrlBlock_dx_dimensiontype}
-
-			{BEGIN filter_button_showmore_dx_dimensiontype}
-		<li class=" filter-show-more {$collapsedClass_dx_dimensiontype} {$showMoreBtnClass_dx_dimensiontype}">
-			<a class="filter-show-more-link filterShowMore_dx_dimensiontype" href="#">{$show_n_more_dx_dimensiontype}</a>
-		</li>
-		{END filter_button_showmore_dx_dimensiontype}
-	
-
-
-	
-
-			{BEGIN filter_button_multiselect_dx_dimensiontype}
-		<li class="filter-multiselect  filter-field-btn {$collapsedClass_dx_dimensiontype}">
-			<a href="#" class="filter-dx_dimensiontype-btn-multiselect filter-apply-dx_dimensiontype" {$filterbutton_attrs_dx_dimensiontype}>Multiselect</a>
-		</li>
-		{END filter_button_multiselect_dx_dimensiontype}
-			</ul>
-	</div>
-
-{END filter_control_dx_dimensiontype}
-
-
-
-
-
-
 {BEGIN filter_control_ou_level_name}
 
 	<div class="dropdown filter-field filter-ou_level_name-container" {BEGIN filter_selected_ou_level_name} data-selected {END filter_selected_ou_level_name}>
@@ -1012,9 +904,6 @@
 		<li class=" filter-values filter-values-ou_level_name  {$visibilityClass_ou_level_name}">
 			{$ou_level_name_filter}
 						
-					
-					
-					
 					
 					
 					
@@ -1072,9 +961,6 @@
 					
 					
 					
-					
-					
-					
 					</li>
 		{END filterCtrlBlock_ou_parent_name}
 
@@ -1129,9 +1015,6 @@
 					
 					
 					
-					
-					
-					
 					</li>
 		{END filterCtrlBlock_ou_name}
 
@@ -1154,63 +1037,6 @@
 	</div>
 
 {END filter_control_ou_name}
-
-
-
-
-
-
-{BEGIN filter_control_pe_relativeperiod}
-
-	<div class="dropdown filter-field filter-pe_relativeperiod-container" {BEGIN filter_selected_pe_relativeperiod} data-selected {END filter_selected_pe_relativeperiod}>
-		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
-							<input class="filter-selectAll-pe_relativeperiod" type="checkbox" name="selectAll" {$selectAll_attrs_pe_relativeperiod} />
-						{BEGIN clearLink_pe_relativeperiod}
-			<a href="#" class="filter-clear filter-clear-pe_relativeperiod" title="Clear">
-				<span class="glyphicon glyphicon-remove"></span>
-			</a>
-			{END clearLink_pe_relativeperiod}
-			<span class="r-filter-field">{$label public_lifeboxme_dhis2_analytics_data pe_relativeperiod }				{BEGIN filter_selected_pe_relativeperiod}:{END filter_selected_pe_relativeperiod}
-			</span>
-			{BEGIN filter_selected_pe_relativeperiod}
-			<span class="r-filter-value">{$filtervalue_pe_relativeperiod}</span>
-			{END filter_selected_pe_relativeperiod}
-			
-			<span class="caret"></span>
-		</div>
-		<ul class="dropdown-menu">
-					{BEGIN filterCtrlBlock_pe_relativeperiod}
-		<li class=" filter-values filter-values-pe_relativeperiod  {$visibilityClass_pe_relativeperiod}">
-			{$pe_relativeperiod_filter}
-						
-					
-					
-					
-					
-					
-					
-					</li>
-		{END filterCtrlBlock_pe_relativeperiod}
-
-			{BEGIN filter_button_showmore_pe_relativeperiod}
-		<li class=" filter-show-more {$collapsedClass_pe_relativeperiod} {$showMoreBtnClass_pe_relativeperiod}">
-			<a class="filter-show-more-link filterShowMore_pe_relativeperiod" href="#">{$show_n_more_pe_relativeperiod}</a>
-		</li>
-		{END filter_button_showmore_pe_relativeperiod}
-	
-
-
-	
-
-			{BEGIN filter_button_multiselect_pe_relativeperiod}
-		<li class="filter-multiselect  filter-field-btn {$collapsedClass_pe_relativeperiod}">
-			<a href="#" class="filter-pe_relativeperiod-btn-multiselect filter-apply-pe_relativeperiod" {$filterbutton_attrs_pe_relativeperiod}>Multiselect</a>
-		</li>
-		{END filter_button_multiselect_pe_relativeperiod}
-			</ul>
-	</div>
-
-{END filter_control_pe_relativeperiod}
 
 
 
@@ -1240,9 +1066,6 @@
 		<li class=" filter-values filter-values-pe_name  {$visibilityClass_pe_name}">
 			{$pe_name_filter}
 						
-					
-					
-					
 					
 					
 					
@@ -1478,18 +1301,52 @@
 	{$cell_grid_headcell_field2}
 	{$recordattrs}
 	class="
+		 r-ori-vert		 {$dx_dimensiontype_class}	"
+
+			data-field="dx_dimensiontype"
+	
+	data-cellId="grid_headcell_field2" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN dx_dimensiontype_fieldheadercolumn}
+	{BEGIN dx_dimensiontype_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field23" {$item_simple_grid_field23} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="dx_dimensiontype" data-fieldname="dx_dimensiontype" 
+
+			{$dx_dimensiontype_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_lifeboxme_dhis2_analytics_data dx_dimensiontype }</span>
+					{$arrow_icon_dx_dimensiontype}
+			</span>
+	</span>
+	{END dx_dimensiontype_fieldheader}
+{END dx_dimensiontype_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field2}
+									{BEGIN cellblock_grid_headcell_field3}
+	<th
+	
+	{$cell_grid_headcell_field3}
+	{$recordattrs}
+	class="
 		 r-ori-vert		 {$dx_id_class}	"
 
 			data-field="dx_id"
 	
-	data-cellId="grid_headcell_field2" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field3" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN dx_id_fieldheadercolumn}
 	{BEGIN dx_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field23" {$item_simple_grid_field23} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="dx_id" data-fieldname="dx_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field24" {$item_simple_grid_field24} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="dx_id" data-fieldname="dx_id" 
 
 			{$dx_id_orderlinkattrs}
 	
@@ -1505,25 +1362,25 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field2}
-									{BEGIN cellblock_grid_headcell_field3}
+	{END cellblock_grid_headcell_field3}
+									{BEGIN cellblock_grid_headcell_field4}
 	<th
 	
-	{$cell_grid_headcell_field3}
+	{$cell_grid_headcell_field4}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$dx_name_class}	"
 
 			data-field="dx_name"
 	
-	data-cellId="grid_headcell_field3" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field4" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN dx_name_fieldheadercolumn}
 	{BEGIN dx_name_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field24" {$item_simple_grid_field24} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="dx_name" data-fieldname="dx_name" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field25" {$item_simple_grid_field25} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="dx_name" data-fieldname="dx_name" 
 
 			{$dx_name_orderlinkattrs}
 	
@@ -1539,25 +1396,25 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field3}
-									{BEGIN cellblock_grid_headcell_field4}
+	{END cellblock_grid_headcell_field4}
+									{BEGIN cellblock_grid_headcell_field5}
 	<th
 	
-	{$cell_grid_headcell_field4}
+	{$cell_grid_headcell_field5}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$dx_shortname_class}	"
 
 			data-field="dx_shortname"
 	
-	data-cellId="grid_headcell_field4" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field5" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN dx_shortname_fieldheadercolumn}
 	{BEGIN dx_shortname_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field25" {$item_simple_grid_field25} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="dx_shortname" data-fieldname="dx_shortname" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field26" {$item_simple_grid_field26} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="dx_shortname" data-fieldname="dx_shortname" 
 
 			{$dx_shortname_orderlinkattrs}
 	
@@ -1573,25 +1430,25 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field4}
-									{BEGIN cellblock_grid_headcell_field5}
+	{END cellblock_grid_headcell_field5}
+									{BEGIN cellblock_grid_headcell_field6}
 	<th
 	
-	{$cell_grid_headcell_field5}
+	{$cell_grid_headcell_field6}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$dx_displayname_class}	"
 
 			data-field="dx_displayname"
 	
-	data-cellId="grid_headcell_field5" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field6" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN dx_displayname_fieldheadercolumn}
 	{BEGIN dx_displayname_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field26" {$item_simple_grid_field26} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="dx_displayname" data-fieldname="dx_displayname" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field27" {$item_simple_grid_field27} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="dx_displayname" data-fieldname="dx_displayname" 
 
 			{$dx_displayname_orderlinkattrs}
 	
@@ -1604,40 +1461,6 @@
 	</span>
 	{END dx_displayname_fieldheader}
 {END dx_displayname_fieldheadercolumn}
-
-	
-	</th>
-	{END cellblock_grid_headcell_field5}
-									{BEGIN cellblock_grid_headcell_field6}
-	<th
-	
-	{$cell_grid_headcell_field6}
-	{$recordattrs}
-	class="
-		 r-ori-vert		 {$dx_dimensiontype_class}	"
-
-			data-field="dx_dimensiontype"
-	
-	data-cellId="grid_headcell_field6" data-pageid="{$pageid}" data-record-id="{$recId}"	
-	>
-
-	 
-		{BEGIN dx_dimensiontype_fieldheadercolumn}
-	{BEGIN dx_dimensiontype_fieldheader}
-<span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field27" {$item_simple_grid_field27} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="dx_dimensiontype" data-fieldname="dx_dimensiontype" 
-
-			{$dx_dimensiontype_orderlinkattrs}
-	
-	
-	>
-	<span class="text-label">
-		<span>{$label public_lifeboxme_dhis2_analytics_data dx_dimensiontype }</span>
-					{$arrow_icon_dx_dimensiontype}
-			</span>
-	</span>
-	{END dx_dimensiontype_fieldheader}
-{END dx_dimensiontype_fieldheadercolumn}
 
 	
 	</th>
@@ -2237,11 +2060,32 @@
 	{$cell_grid_cell_field2}
 	{$recordattrs}
 	class="
+		 r-ori-vert		 {$dx_dimensiontype_class}	"
+
+			data-field="dx_dimensiontype"
+	
+	data-cellId="grid_cell_field2" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN dx_dimensiontype_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field6" {$item_simple_grid_field6} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="dx_dimensiontype" data-fieldname="dx_dimensiontype" data-default-width >
+{$dx_dimensiontype_value}
+</span>
+{END dx_dimensiontype_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field2}
+									{BEGIN cellblock_grid_cell_field3}
+	<td
+	
+	{$cell_grid_cell_field3}
+	{$recordattrs}
+	class="
 		 r-ori-vert		 {$dx_id_class}	"
 
 			data-field="dx_id"
 	
-	data-cellId="grid_cell_field2" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field3" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -2251,18 +2095,18 @@
 </span>
 {END dx_id_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field2}
-									{BEGIN cellblock_grid_cell_field3}
+	{END cellblock_grid_cell_field3}
+									{BEGIN cellblock_grid_cell_field4}
 	<td
 	
-	{$cell_grid_cell_field3}
+	{$cell_grid_cell_field4}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$dx_name_class}	"
 
 			data-field="dx_name"
 	
-	data-cellId="grid_cell_field3" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field4" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -2272,18 +2116,18 @@
 </span>
 {END dx_name_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field3}
-									{BEGIN cellblock_grid_cell_field4}
+	{END cellblock_grid_cell_field4}
+									{BEGIN cellblock_grid_cell_field5}
 	<td
 	
-	{$cell_grid_cell_field4}
+	{$cell_grid_cell_field5}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$dx_shortname_class}	"
 
 			data-field="dx_shortname"
 	
-	data-cellId="grid_cell_field4" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field5" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -2293,18 +2137,18 @@
 </span>
 {END dx_shortname_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field4}
-									{BEGIN cellblock_grid_cell_field5}
+	{END cellblock_grid_cell_field5}
+									{BEGIN cellblock_grid_cell_field6}
 	<td
 	
-	{$cell_grid_cell_field5}
+	{$cell_grid_cell_field6}
 	{$recordattrs}
 	class="
 		 r-ori-vert		 {$dx_displayname_class}	"
 
 			data-field="dx_displayname"
 	
-	data-cellId="grid_cell_field5" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field6" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -2313,27 +2157,6 @@
 {$dx_displayname_value}
 </span>
 {END dx_displayname_fieldcolumn}	
-	</td>
-	{END cellblock_grid_cell_field5}
-									{BEGIN cellblock_grid_cell_field6}
-	<td
-	
-	{$cell_grid_cell_field6}
-	{$recordattrs}
-	class="
-		 r-ori-vert		 {$dx_dimensiontype_class}	"
-
-			data-field="dx_dimensiontype"
-	
-	data-cellId="grid_cell_field6" data-pageid="{$pageid}" data-record-id="{$recId}"	
-	>
-
-	 
-		{BEGIN dx_dimensiontype_fieldcolumn}
-<span data-itemtype="grid_field" data-itemid="simple_grid_field6" {$item_simple_grid_field6} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="dx_dimensiontype" data-fieldname="dx_dimensiontype" data-default-width >
-{$dx_dimensiontype_value}
-</span>
-{END dx_dimensiontype_fieldcolumn}	
 	</td>
 	{END cellblock_grid_cell_field6}
 									{BEGIN cellblock_grid_cell_field7}
@@ -2707,7 +2530,7 @@
 	{$cell_grid_footcell_field2}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$dx_id_class}	"
+		 r-ori-vert		 {$dx_dimensiontype_class}	"
 
 	
 	data-cellId="grid_footcell_field2" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lifeboxme_dhis2_analytics_data_list"	
@@ -2722,7 +2545,7 @@
 	{$cell_grid_footcell_field3}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$dx_name_class}	"
+		 r-ori-vert		 {$dx_id_class}	"
 
 	
 	data-cellId="grid_footcell_field3" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lifeboxme_dhis2_analytics_data_list"	
@@ -2737,7 +2560,7 @@
 	{$cell_grid_footcell_field4}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$dx_shortname_class}	"
+		 r-ori-vert		 {$dx_name_class}	"
 
 	
 	data-cellId="grid_footcell_field4" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lifeboxme_dhis2_analytics_data_list"	
@@ -2752,7 +2575,7 @@
 	{$cell_grid_footcell_field5}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$dx_displayname_class}	"
+		 r-ori-vert		 {$dx_shortname_class}	"
 
 	
 	data-cellId="grid_footcell_field5" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lifeboxme_dhis2_analytics_data_list"	
@@ -2767,7 +2590,7 @@
 	{$cell_grid_footcell_field6}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$dx_dimensiontype_class}	"
+		 r-ori-vert		 {$dx_displayname_class}	"
 
 	
 	data-cellId="grid_footcell_field6" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lifeboxme_dhis2_analytics_data_list"	

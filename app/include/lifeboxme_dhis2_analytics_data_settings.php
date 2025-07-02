@@ -25,40 +25,40 @@ if(mlang_getcurrentlang()=="English")
 	$fieldToolTipslifeboxme_dhis2_analytics_data["English"] = array();
 	$placeHolderslifeboxme_dhis2_analytics_data["English"] = array();
 	$pageTitleslifeboxme_dhis2_analytics_data["English"] = array();
-	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["id"] = "Id";
+	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["id"] = "ID";
 	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["id"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_data["English"]["id"] = "";
 	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["setting_id"] = "Setting Id";
 	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["setting_id"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_data["English"]["setting_id"] = "";
-	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["dx_id"] = "Dx Id";
+	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["dx_id"] = "DxID";
 	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["dx_id"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_data["English"]["dx_id"] = "";
-	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["dx_name"] = "Dx Name";
+	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["dx_name"] = "Data Item";
 	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["dx_name"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_data["English"]["dx_name"] = "";
-	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["dx_shortname"] = "Dx Shortname";
+	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["dx_shortname"] = "Shortname";
 	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["dx_shortname"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_data["English"]["dx_shortname"] = "";
-	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["dx_displayname"] = "Dx Displayname";
+	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["dx_displayname"] = "Displayname";
 	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["dx_displayname"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_data["English"]["dx_displayname"] = "";
-	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["dx_dimensiontype"] = "Dx Dimensiontype";
+	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["dx_dimensiontype"] = "Dimension Type";
 	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["dx_dimensiontype"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_data["English"]["dx_dimensiontype"] = "";
-	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["ou_id"] = "Ou Id";
+	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["ou_id"] = "OUID";
 	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["ou_id"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_data["English"]["ou_id"] = "";
-	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["ou_name"] = "Ou Name";
+	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["ou_name"] = "Organization Unit";
 	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["ou_name"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_data["English"]["ou_name"] = "";
-	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["pe_id"] = "Pe Id";
+	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["pe_id"] = "PeID";
 	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["pe_id"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_data["English"]["pe_id"] = "";
-	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["pe_name"] = "Pe Name";
+	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["pe_name"] = "Actual Period";
 	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["pe_name"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_data["English"]["pe_name"] = "";
-	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["pe_relativeperiod"] = "Pe Relativeperiod";
+	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["pe_relativeperiod"] = "Relative Period";
 	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["pe_relativeperiod"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_data["English"]["pe_relativeperiod"] = "";
 	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["value"] = "Value";
@@ -76,16 +76,16 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["fetched_at"] = "Fetched At";
 	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["fetched_at"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_data["English"]["fetched_at"] = "";
-	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["ou_parent_id"] = "Ou Parent Id";
+	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["ou_parent_id"] = "OU PID";
 	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["ou_parent_id"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_data["English"]["ou_parent_id"] = "";
-	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["ou_parent_name"] = "Ou Parent Name";
+	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["ou_parent_name"] = "OU Parent";
 	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["ou_parent_name"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_data["English"]["ou_parent_name"] = "";
-	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["ou_level_id"] = "Ou Level Id";
+	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["ou_level_id"] = "OU LID";
 	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["ou_level_id"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_data["English"]["ou_level_id"] = "";
-	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["ou_level_name"] = "Ou Level Name";
+	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["ou_level_name"] = "OU Level";
 	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["ou_level_name"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_data["English"]["ou_level_name"] = "";
 	if (count($fieldToolTipslifeboxme_dhis2_analytics_data["English"]))
@@ -254,15 +254,17 @@ $tdatalifeboxme_dhis2_analytics_data[".warnLeavingPages"] = true;
 
 
 
-$tstrOrderBy = "";
+$tstrOrderBy = "ORDER BY id, ou_level_id";
 $tdatalifeboxme_dhis2_analytics_data[".strOrderBy"] = $tstrOrderBy;
 
 $tdatalifeboxme_dhis2_analytics_data[".orderindexes"] = array();
+			$tdatalifeboxme_dhis2_analytics_data[".orderindexes"][] = array(1, (1 ? "ASC" : "DESC"), "id");
+			$tdatalifeboxme_dhis2_analytics_data[".orderindexes"][] = array(12, (1 ? "ASC" : "DESC"), "ou_level_id");
 
 
-$tdatalifeboxme_dhis2_analytics_data[".sqlHead"] = "SELECT id,  	setting_id,  	dx_id,  	dx_name,  	dx_shortname,  	dx_displayname,  	dx_dimensiontype,  	ou_id,  	ou_name,  	ou_parent_id,  	ou_parent_name,  	ou_level_id,  	ou_level_name,  	pe_id,  	pe_name,  	pe_relativeperiod,  	\"value\",  	stored_by,  	created,  	last_updated,  	fetched_at";
+$tdatalifeboxme_dhis2_analytics_data[".sqlHead"] = "SELECT id,  setting_id,  dx_id,  dx_name,  dx_shortname,  dx_displayname,  dx_dimensiontype,  ou_id,  ou_name,  ou_parent_id,  ou_parent_name,  ou_level_id,  ou_level_name,  pe_id,  pe_name,  pe_relativeperiod,  \"value\",  stored_by,  created,  last_updated,  fetched_at";
 $tdatalifeboxme_dhis2_analytics_data[".sqlFrom"] = "FROM \"public\".lifeboxme_dhis2_analytics_data";
-$tdatalifeboxme_dhis2_analytics_data[".sqlWhereExpr"] = "";
+$tdatalifeboxme_dhis2_analytics_data[".sqlWhereExpr"] = "(\"value\" IS NOT NULL)";
 $tdatalifeboxme_dhis2_analytics_data[".sqlTail"] = "";
 
 
@@ -828,7 +830,7 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 	$edata["LookupTable"] = "public.lifeboxme_dhis2_analytics_data";
 			$edata["autoCompleteFieldsOnEdit"] = 0;
 	$edata["autoCompleteFields"] = array();
-		$edata["LCType"] = 0;
+		$edata["LCType"] = 3;
 
 	
 			$edata["LookupUnique"] = true;
@@ -840,18 +842,20 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 	
 
 	
-	$edata["LookupOrderBy"] = "dx_name";
+	$edata["LookupOrderBy"] = "";
 
 	
-	
+		$edata["UseCategory"] = true;
+	$edata["categoryFields"] = array();
+	$edata["categoryFields"][] = array( "main" => "dx_dimensiontype", "lookup" => "dx_dimensiontype" );
+
 	
 	
 
 	
 		$edata["Multiselect"] = true;
 
-		$edata["SelectSize"] = 1;
-
+	
 // End Lookup Settings
 
 
@@ -1284,12 +1288,15 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 	
 
 	
-	$edata["LookupOrderBy"] = "dx_dimensiontype";
+	$edata["LookupOrderBy"] = "";
 
 	
 	
 	
 	
+				//dependent dropdowns @deprecated data ?
+	$edata["DependentLookups"] = array();
+	$edata["DependentLookups"][] = "dx_name";
 
 	
 	
@@ -1345,10 +1352,9 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 
 
 //Filters settings
-	$fdata["filterTotals"] = 1;
-		$fdata["filterMultiSelect"] = 1;
-		$fdata["filterTotalFields"] = "id";
-		$fdata["filterFormat"] = "Values list";
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
 		$fdata["showCollapsed"] = false;
 
 		$fdata["sortValueType"] = 0;
@@ -1577,9 +1583,10 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 	$edata["LookupTable"] = "public.lifeboxme_dhis2_analytics_data";
 			$edata["autoCompleteFieldsOnEdit"] = 0;
 	$edata["autoCompleteFields"] = array();
-		$edata["LCType"] = 0;
+		$edata["LCType"] = 3;
 
-	
+		$edata["HorizontalLookup"] = true;
+
 			$edata["LookupUnique"] = true;
 
 	$edata["LinkField"] = "ou_name";
@@ -1592,15 +1599,17 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 	$edata["LookupOrderBy"] = "";
 
 	
-	
+		$edata["UseCategory"] = true;
+	$edata["categoryFields"] = array();
+	$edata["categoryFields"][] = array( "main" => "ou_parent_name", "lookup" => "ou_parent_name" );
+
 	
 	
 
 	
 		$edata["Multiselect"] = true;
 
-		$edata["SelectSize"] = 1;
-
+	
 // End Lookup Settings
 
 
@@ -1883,7 +1892,7 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 	$edata["LookupTable"] = "public.lifeboxme_dhis2_analytics_data";
 			$edata["autoCompleteFieldsOnEdit"] = 0;
 	$edata["autoCompleteFields"] = array();
-		$edata["LCType"] = 0;
+		$edata["LCType"] = 3;
 
 	
 			$edata["LookupUnique"] = true;
@@ -1898,15 +1907,20 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 	$edata["LookupOrderBy"] = "";
 
 	
+		$edata["UseCategory"] = true;
+	$edata["categoryFields"] = array();
+	$edata["categoryFields"][] = array( "main" => "ou_level_name", "lookup" => "ou_level_name" );
+
 	
 	
-	
+				//dependent dropdowns @deprecated data ?
+	$edata["DependentLookups"] = array();
+	$edata["DependentLookups"][] = "ou_name";
 
 	
 		$edata["Multiselect"] = true;
 
-		$edata["SelectSize"] = 1;
-
+	
 // End Lookup Settings
 
 
@@ -2035,7 +2049,7 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Text field");
+	$edata = array("EditFormat" => "Lookup wizard");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -2045,6 +2059,35 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 	
 	
 
+// Begin Lookup settings
+				$edata["LookupType"] = 2;
+	$edata["LookupTable"] = "public.lifeboxme_dhis2_analytics_data";
+			$edata["autoCompleteFieldsOnEdit"] = 0;
+	$edata["autoCompleteFields"] = array();
+		$edata["LCType"] = 0;
+
+	
+			$edata["LookupUnique"] = true;
+
+	$edata["LinkField"] = "ou_level_id";
+	$edata["LinkFieldType"] = 0;
+	$edata["DisplayField"] = "ou_level_name";
+
+	
+
+	
+	$edata["LookupOrderBy"] = "";
+
+	
+	
+	
+	
+
+	
+	
+		$edata["SelectSize"] = 1;
+
+// End Lookup Settings
 
 
 	
@@ -2059,17 +2102,14 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 	
 	
 	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-		
+	
+	
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
 	$edata["validateAs"] = array();
 	$edata["validateAs"]["basicValidate"] = array();
 	$edata["validateAs"]["customMessages"] = array();
-				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
 							
 	
 //	End validation
@@ -2089,7 +2129,7 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "Equals";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
@@ -2207,6 +2247,9 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 	
 	
 	
+				//dependent dropdowns @deprecated data ?
+	$edata["DependentLookups"] = array();
+	$edata["DependentLookups"][] = "ou_parent_name";
 
 	
 	
@@ -2509,7 +2552,10 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 	$edata["LookupOrderBy"] = "";
 
 	
-	
+		$edata["UseCategory"] = true;
+	$edata["categoryFields"] = array();
+	$edata["categoryFields"][] = array( "main" => "pe_relativeperiod", "lookup" => "pe_relativeperiod" );
+
 	
 	
 
@@ -2673,16 +2719,18 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 	
 
 	
-	$edata["LookupOrderBy"] = "pe_relativeperiod";
+	$edata["LookupOrderBy"] = "";
 
 	
 	
 	
 	
+				//dependent dropdowns @deprecated data ?
+	$edata["DependentLookups"] = array();
+	$edata["DependentLookups"][] = "pe_name";
 
 	
-		$edata["Multiselect"] = true;
-
+	
 		$edata["SelectSize"] = 1;
 
 // End Lookup Settings
@@ -2735,10 +2783,9 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 
 
 //Filters settings
-	$fdata["filterTotals"] = 1;
-		$fdata["filterMultiSelect"] = 1;
-		$fdata["filterTotalFields"] = "id";
-		$fdata["filterFormat"] = "Values list";
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
 		$fdata["showCollapsed"] = false;
 
 		$fdata["sortValueType"] = 0;
@@ -2868,11 +2915,9 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "NOT Empty";
 
-			// the default search options list
-				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
-// the end of search options settings
+	// the end of search options settings
 
 
 //Filters settings
@@ -3513,23 +3558,25 @@ function createSqlQuery_lifeboxme_dhis2_analytics_data()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "id,  	setting_id,  	dx_id,  	dx_name,  	dx_shortname,  	dx_displayname,  	dx_dimensiontype,  	ou_id,  	ou_name,  	ou_parent_id,  	ou_parent_name,  	ou_level_id,  	ou_level_name,  	pe_id,  	pe_name,  	pe_relativeperiod,  	\"value\",  	stored_by,  	created,  	last_updated,  	fetched_at";
+$proto0["m_strFieldList"] = "id,  setting_id,  dx_id,  dx_name,  dx_shortname,  dx_displayname,  dx_dimensiontype,  ou_id,  ou_name,  ou_parent_id,  ou_parent_name,  ou_level_id,  ou_level_name,  pe_id,  pe_name,  pe_relativeperiod,  \"value\",  stored_by,  created,  last_updated,  fetched_at";
 $proto0["m_strFrom"] = "FROM \"public\".lifeboxme_dhis2_analytics_data";
-$proto0["m_strWhere"] = "";
-$proto0["m_strOrderBy"] = "";
+$proto0["m_strWhere"] = "(\"value\" IS NOT NULL)";
+$proto0["m_strOrderBy"] = "ORDER BY id, ou_level_id";
 	
 				;
 			$proto0["cipherer"] = null;
 $proto2=array();
-$proto2["m_sql"] = "";
+$proto2["m_sql"] = "\"value\" IS NOT NULL";
 $proto2["m_uniontype"] = "SQLL_UNKNOWN";
-	$obj = new SQLNonParsed(array(
-	"m_sql" => ""
+						$obj = new SQLField(array(
+	"m_strName" => "value",
+	"m_strTable" => "public.lifeboxme_dhis2_analytics_data",
+	"m_srcTableName" => "public.lifeboxme_dhis2_analytics_data"
 ));
 
 $proto2["m_column"]=$obj;
 $proto2["m_contained"] = array();
-$proto2["m_strCase"] = "";
+$proto2["m_strCase"] = "IS NOT NULL";
 $proto2["m_havingmode"] = false;
 $proto2["m_inBrackets"] = false;
 $proto2["m_useAlias"] = false;
@@ -3902,6 +3949,32 @@ $obj = new SQLFromListItem($proto48);
 $proto0["m_fromlist"][]=$obj;
 $proto0["m_groupby"] = array();
 $proto0["m_orderby"] = array();
+												$proto52=array();
+						$obj = new SQLField(array(
+	"m_strName" => "id",
+	"m_strTable" => "public.lifeboxme_dhis2_analytics_data",
+	"m_srcTableName" => "public.lifeboxme_dhis2_analytics_data"
+));
+
+$proto52["m_column"]=$obj;
+$proto52["m_bAsc"] = 1;
+$proto52["m_nColumn"] = 0;
+$obj = new SQLOrderByItem($proto52);
+
+$proto0["m_orderby"][]=$obj;					
+												$proto54=array();
+						$obj = new SQLField(array(
+	"m_strName" => "ou_level_id",
+	"m_strTable" => "public.lifeboxme_dhis2_analytics_data",
+	"m_srcTableName" => "public.lifeboxme_dhis2_analytics_data"
+));
+
+$proto54["m_column"]=$obj;
+$proto54["m_bAsc"] = 1;
+$proto54["m_nColumn"] = 0;
+$obj = new SQLOrderByItem($proto54);
+
+$proto0["m_orderby"][]=$obj;					
 $proto0["m_srcTableName"]="public.lifeboxme_dhis2_analytics_data";		
 $obj = new SQLQuery($proto0);
 
