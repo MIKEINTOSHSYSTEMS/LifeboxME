@@ -6,14 +6,14 @@ if (!file_exists($envPath)) {
 }
 $env = parse_ini_file($envPath);
 
-// Required environment variables (including the secret key)
+// Required environment variables
 $siteUrl = 'https://' . rtrim($env['MB_SITE_URL'] ?? '', '/');
 $secretKey = $env['MB_SECRET_KEY'] ?? '';
 if (empty($siteUrl) || empty($secretKey)) {
     die("Missing MB_SITE_URL or MB_SECRET_KEY in .env.dev");
 }
 
-// Get dashboard ID from URL (default to 2 if not set)
+// Get dashboard ID from URL (default to 2)
 $dashboardId = isset($_GET['dashboard']) ? intval($_GET['dashboard']) : 2;
 
 // JWT Header
@@ -46,27 +46,41 @@ $base64UrlSignature = base64url_encode($signature);
 // Combine to get the token
 $token = $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
 
-// Construct the iframe URL with the signed token
-$iframeUrl = $siteUrl . "/embed/dashboard/" . $token . "#bordered=true&titled=true";
+$iframeUrl = $siteUrl . "/embed/dashboard/" . $token . "#background=false&bordered=true&titled=true";
+//$iframeUrl = $siteUrl . "/embed/dashboard/" . $token . "#bordered=true&titled=true";
+//$iframeUrl = $siteUrl . "/embed/dashboard/" . $token . "#bordered=true&titled=true&background=transparent&theme=night";
 ?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Embedded Metabase Dashboard</title>
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
 </head>
 
 <body>
-    <h6>Lifebox M&E Embedded Dashboard Current ID: <?php echo htmlspecialchars($dashboardId); ?> DEMO </h6>
+
     <iframe
         src="<?php echo htmlspecialchars($iframeUrl); ?>"
-        frameborder="0"
-        width="100%"
-        height="800px"
-        allowtransparency></iframe>
-
-        <h6>DEMO ONLY</h6>
+        allowfullscreen
+        allowtransparency="true">
+        <h6>Lifebox M&E Embedded Dashboard Current ID: <?php echo htmlspecialchars($dashboardId); ?> DEMO </h6>
+    </iframe>
 </body>
 
 </html>

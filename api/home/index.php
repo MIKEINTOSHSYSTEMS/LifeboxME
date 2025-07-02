@@ -85,7 +85,8 @@
 
         .components {
             padding: 7px 0;
-            background: transparent;/*white;*/
+            background: transparent;
+            /*white;*/
         }
 
         /* Custom tab styles */
@@ -128,6 +129,50 @@
             /*var(--bs-body-bg);*/
             -webkit-text-size-adjust: 100%;
             -webkit-tap-highlight-color: transparent;
+        }
+
+        .tabs-section,
+        .tab-content,
+        .tab-pane {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* FIXED STYLES */
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #tabsContent {
+            height: calc(100% - 50px);
+            /* Account for tabs height */
+        }
+
+        .tab-pane {
+            height: 100%;
+        }
+
+        #embed {
+            padding: 0 !important;
+        }
+
+        .dashboard-container {
+            height: 100%;
+            width: 100%;
+            position: relative;
+        }
+
+        .dashboard-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            overflow: hidden;
         }
     </style>
 </head>
@@ -456,14 +501,12 @@
 
             <!-- Embed Tab -->
             <div class="tab-pane fade" id="embed" role="tabpanel">
-                <div class="container mt-4">
-                    <h4>Dashboard</h4>
+                <div class="dashboard-container">
                     <iframe
                         src="../meta/index.php"
-                        frameborder="0"
-                        width="100%"
-                        height="1900px"
-                        allowtransparency>
+                        class="dashboard-iframe"
+                        allowtransparency="true"
+                        allowfullscreen>
                     </iframe>
                 </div>
             </div>
@@ -488,9 +531,33 @@
         </div>
     </section>
 
-
-
     <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to calculate available height for iframe
+            function calculateAvailableHeight() {
+                const tabsHeight = document.getElementById('tabs').offsetHeight;
+                const windowHeight = window.innerHeight;
+                return windowHeight - tabsHeight;
+            }
+
+            // Set initial height for tabsContent
+            document.getElementById('tabsContent').style.height = calculateAvailableHeight() + 'px';
+
+            // Adjust height on window resize
+            window.addEventListener('resize', function() {
+                document.getElementById('tabsContent').style.height = calculateAvailableHeight() + 'px';
+            });
+
+            // Handle tab switching
+            const embedTabButton = document.querySelector('[data-bs-target="#embed"]');
+            embedTabButton.addEventListener('shown.bs.tab', function() {
+                // Force resize after tab switch
+                document.getElementById('tabsContent').style.height = calculateAvailableHeight() + 'px';
+            });
+        });
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="../../assets/js/scripts.js"></script>
