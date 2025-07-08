@@ -31,7 +31,7 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelslifeboxme_dhis2_dataitems["English"]["item_id"] = "Item Id";
 	$fieldToolTipslifeboxme_dhis2_dataitems["English"]["item_id"] = "";
 	$placeHolderslifeboxme_dhis2_dataitems["English"]["item_id"] = "";
-	$fieldLabelslifeboxme_dhis2_dataitems["English"]["display_name"] = "Display Name";
+	$fieldLabelslifeboxme_dhis2_dataitems["English"]["display_name"] = "Data Item";
 	$fieldToolTipslifeboxme_dhis2_dataitems["English"]["display_name"] = "";
 	$placeHolderslifeboxme_dhis2_dataitems["English"]["display_name"] = "";
 	$fieldLabelslifeboxme_dhis2_dataitems["English"]["name"] = "Name";
@@ -43,7 +43,7 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelslifeboxme_dhis2_dataitems["English"]["display_short_name"] = "Display Short Name";
 	$fieldToolTipslifeboxme_dhis2_dataitems["English"]["display_short_name"] = "";
 	$placeHolderslifeboxme_dhis2_dataitems["English"]["display_short_name"] = "";
-	$fieldLabelslifeboxme_dhis2_dataitems["English"]["dimension_item_type"] = "Dimension Item Type";
+	$fieldLabelslifeboxme_dhis2_dataitems["English"]["dimension_item_type"] = "Dimension Type";
 	$fieldToolTipslifeboxme_dhis2_dataitems["English"]["dimension_item_type"] = "";
 	$placeHolderslifeboxme_dhis2_dataitems["English"]["dimension_item_type"] = "";
 	$fieldLabelslifeboxme_dhis2_dataitems["English"]["last_updated"] = "Last Updated";
@@ -622,17 +622,20 @@ $tdatalifeboxme_dhis2_dataitems[".hideMobileList"] = array();
 	
 
 	
-	$edata["LookupOrderBy"] = "display_name";
+	$edata["LookupOrderBy"] = "";
 
 	
-	
+		$edata["UseCategory"] = true;
+	$edata["categoryFields"] = array();
+	$edata["categoryFields"][] = array( "main" => "dimension_item_type", "lookup" => "dimension_item_type" );
+
 	
 	
 
 	
 		$edata["Multiselect"] = true;
 
-		$edata["SelectSize"] = 1;
+		$edata["SelectSize"] = 4;
 
 // End Lookup Settings
 
@@ -1221,6 +1224,9 @@ $tdatalifeboxme_dhis2_dataitems[".hideMobileList"] = array();
 	
 	
 	
+				//dependent dropdowns @deprecated data ?
+	$edata["DependentLookups"] = array();
+	$edata["DependentLookups"][] = "display_name";
 
 	
 	

@@ -482,6 +482,19 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_item_id}</span>
 						</div>
 		{END searchCtrlBlock_item_id}
+																{BEGIN searchCtrlBlock_dimension_item_type}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_dimension_item_type}" {$filterRow_attrs_dimension_item_type}>
+			<label>{$label public_lifeboxme_dhis2_dataitems dimension_item_type }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_dimension_item_type}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_dimension_item_type}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_dimension_item_type}</span>
+						</div>
+		{END searchCtrlBlock_dimension_item_type}
 																{BEGIN searchCtrlBlock_display_name}
 
 
@@ -534,19 +547,6 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_display_short_name}</span>
 						</div>
 		{END searchCtrlBlock_display_short_name}
-																{BEGIN searchCtrlBlock_dimension_item_type}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_dimension_item_type}" {$filterRow_attrs_dimension_item_type}>
-			<label>{$label public_lifeboxme_dhis2_dataitems dimension_item_type }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_dimension_item_type}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_dimension_item_type}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_dimension_item_type}</span>
-						</div>
-		{END searchCtrlBlock_dimension_item_type}
 																{BEGIN searchCtrlBlock_last_updated}
 
 
@@ -690,58 +690,6 @@
 
 
 
-{BEGIN filter_control_display_name}
-
-	<div class="dropdown filter-field filter-display_name-container" {BEGIN filter_selected_display_name} data-selected {END filter_selected_display_name}>
-		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
-							<input class="filter-selectAll-display_name" type="checkbox" name="selectAll" {$selectAll_attrs_display_name} />
-						{BEGIN clearLink_display_name}
-			<a href="#" class="filter-clear filter-clear-display_name" title="Clear">
-				<span class="glyphicon glyphicon-remove"></span>
-			</a>
-			{END clearLink_display_name}
-			<span class="r-filter-field">{$label public_lifeboxme_dhis2_dataitems display_name }				{BEGIN filter_selected_display_name}:{END filter_selected_display_name}
-			</span>
-			{BEGIN filter_selected_display_name}
-			<span class="r-filter-value">{$filtervalue_display_name}</span>
-			{END filter_selected_display_name}
-			
-			<span class="caret"></span>
-		</div>
-		<ul class="dropdown-menu">
-					{BEGIN filterCtrlBlock_display_name}
-		<li class=" filter-values filter-values-display_name  {$visibilityClass_display_name}">
-			{$display_name_filter}
-						
-					
-					</li>
-		{END filterCtrlBlock_display_name}
-
-			{BEGIN filter_button_showmore_display_name}
-		<li class=" filter-show-more {$collapsedClass_display_name} {$showMoreBtnClass_display_name}">
-			<a class="filter-show-more-link filterShowMore_display_name" href="#">{$show_n_more_display_name}</a>
-		</li>
-		{END filter_button_showmore_display_name}
-	
-
-
-	
-
-			{BEGIN filter_button_multiselect_display_name}
-		<li class="filter-multiselect  filter-field-btn {$collapsedClass_display_name}">
-			<a href="#" class="filter-display_name-btn-multiselect filter-apply-display_name" {$filterbutton_attrs_display_name}>Multiselect</a>
-		</li>
-		{END filter_button_multiselect_display_name}
-			</ul>
-	</div>
-
-{END filter_control_display_name}
-
-
-
-
-
-
 {BEGIN filter_control_dimension_item_type}
 
 	<div class="dropdown filter-field filter-dimension_item_type-container" {BEGIN filter_selected_dimension_item_type} data-selected {END filter_selected_dimension_item_type}>
@@ -788,6 +736,58 @@
 	</div>
 
 {END filter_control_dimension_item_type}
+
+
+
+
+
+
+{BEGIN filter_control_display_name}
+
+	<div class="dropdown filter-field filter-display_name-container" {BEGIN filter_selected_display_name} data-selected {END filter_selected_display_name}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-display_name" type="checkbox" name="selectAll" {$selectAll_attrs_display_name} />
+						{BEGIN clearLink_display_name}
+			<a href="#" class="filter-clear filter-clear-display_name" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_display_name}
+			<span class="r-filter-field">{$label public_lifeboxme_dhis2_dataitems display_name }				{BEGIN filter_selected_display_name}:{END filter_selected_display_name}
+			</span>
+			{BEGIN filter_selected_display_name}
+			<span class="r-filter-value">{$filtervalue_display_name}</span>
+			{END filter_selected_display_name}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_display_name}
+		<li class=" filter-values filter-values-display_name  {$visibilityClass_display_name}">
+			{$display_name_filter}
+						
+					
+					</li>
+		{END filterCtrlBlock_display_name}
+
+			{BEGIN filter_button_showmore_display_name}
+		<li class=" filter-show-more {$collapsedClass_display_name} {$showMoreBtnClass_display_name}">
+			<a class="filter-show-more-link filterShowMore_display_name" href="#">{$show_n_more_display_name}</a>
+		</li>
+		{END filter_button_showmore_display_name}
+	
+
+
+	
+
+			{BEGIN filter_button_multiselect_display_name}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_display_name}">
+			<a href="#" class="filter-display_name-btn-multiselect filter-apply-display_name" {$filterbutton_attrs_display_name}>Multiselect</a>
+		</li>
+		{END filter_button_multiselect_display_name}
+			</ul>
+	</div>
+
+{END filter_control_display_name}
 
 
 
