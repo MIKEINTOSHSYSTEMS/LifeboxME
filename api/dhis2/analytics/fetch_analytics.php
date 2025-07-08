@@ -91,9 +91,9 @@ try {
         ou_parent_name VARCHAR(255),
         ou_level_id INTEGER,        -- New column for OU level ID
         ou_level_name VARCHAR(50),  -- New column for OU level name
-        pe_id VARCHAR(255) NOT NULL,
-        pe_name VARCHAR(255) NOT NULL,
-        pe_relativeperiod VARCHAR(255),
+        period_id VARCHAR(255) NOT NULL,  -- New: Absolute period ID (e.g. 2025Q3)
+        period_display_name VARCHAR(255) NOT NULL,  -- Renamed from pe_name
+        pe_relativeperiod VARCHAR(255),  -- Relative period string (e.g. THIS_QUARTER)
         value DECIMAL(15,4) NULL,
         stored_by VARCHAR(255) DEFAULT 'system',
         created TIMESTAMP NULL,
@@ -105,6 +105,10 @@ try {
     // Add new columns if they don't exist
     $db->exec("ALTER TABLE lifeboxme_dhis2_analytics_data ADD COLUMN IF NOT EXISTS ou_level_id INTEGER");
     $db->exec("ALTER TABLE lifeboxme_dhis2_analytics_data ADD COLUMN IF NOT EXISTS ou_level_name VARCHAR(50)");
+    $db->exec("ALTER TABLE lifeboxme_dhis2_analytics_data ADD COLUMN IF NOT EXISTS period_id VARCHAR(255)");
+    $db->exec("ALTER TABLE lifeboxme_dhis2_analytics_data ADD COLUMN IF NOT EXISTS period_display_name VARCHAR(255)");
+    $db->exec("ALTER TABLE lifeboxme_dhis2_analytics_data DROP COLUMN IF EXISTS pe_name"); // Remove old column
+
 } catch (PDOException $e) {
     die("Database error: " . $e->getMessage());
 }
@@ -427,12 +431,12 @@ if ($action) {
                     }
                 }
 
-                // Build periods array
+                // Build periods array with all needed information
                 $allPeriods = [];
                 foreach ($peIds as $peId) {
                     $allPeriods[$peId] = [
                         'id' => $peId,
-                        'name' => $data['metaData']['items'][$peId]['name'] ?? $peId,
+                        'displayName' => $data['metaData']['items'][$peId]['name'] ?? $peId,
                         'relativePeriod' => $periodIdToUserPeriod[$peId] ?? null
                     ];
                 }
@@ -464,16 +468,16 @@ if ($action) {
                 $db->exec("DELETE FROM lifeboxme_dhis2_analytics_data WHERE setting_id = $id");
 
                 // Set the MINVALUE for the sequence
-                $db->exec('ALTER SEQUENCE "public"."lifeboxme_dhis2_analytics_data_id_seq" MINVALUE 0;');
+                //$db->exec('ALTER SEQUENCE "public"."lifeboxme_dhis2_analytics_data_id_seq" MINVALUE 0;');
 
                 // Reset the sequence to 0
-                $db->exec('SELECT setval(\'"public"."lifeboxme_dhis2_analytics_data_id_seq"\', 0, true);');
+                //$db->exec('SELECT setval(\'"public"."lifeboxme_dhis2_analytics_data_id_seq"\', 0, true);');
 
                 // Prepare insert statement
                 $stmt = $db->prepare("INSERT INTO lifeboxme_dhis2_analytics_data 
                 (setting_id, dx_id, dx_name, dx_shortname, dx_displayname, dx_dimensiontype, 
                 ou_id, ou_name, ou_parent_id, ou_parent_name, ou_level_id, ou_level_name,
-                pe_id, pe_name, pe_relativeperiod, value, stored_by, created, last_updated) 
+                period_id, period_display_name, pe_relativeperiod, value, stored_by, created, last_updated) 
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
                 $inserted = 0;
@@ -505,9 +509,9 @@ if ($action) {
                                 $ou['parent_name'],
                                 $ou['level_id'],  // OU Level ID
                                 $ou['level_name'], // OU Level Name
-                                $pe['id'],
-                                $pe['name'],
-                                $pe['relativePeriod'] ?? $pe['name'],
+                                $pe['id'],        // Absolute period ID
+                                $pe['displayName'], // Period display name
+                                $pe['relativePeriod'] ?? null, // Relative period string
                                 $value,
                                 'system',
                                 $now,
@@ -570,8 +574,8 @@ if ($action) {
                 $countQuery = "SELECT COUNT(*) FROM lifeboxme_dhis2_analytics_data WHERE setting_id = $id";
 
                 if ($search) {
-                    $query .= " AND (dx_name ILIKE '%$search%' OR ou_name ILIKE '%$search%' OR ou_parent_id ILIKE '%$search%' OR ou_parent_name ILIKE '%$search%' OR pe_name ILIKE '%$search%' OR pe_relativeperiod ILIKE '%$search%')";
-                    $countQuery .= " AND (dx_name ILIKE '%$search%' OR ou_name ILIKE '%$search%' OR ou_parent_id ILIKE '%$search%' OR ou_parent_name ILIKE '%$search%' OR pe_name ILIKE '%$search%' OR pe_relativeperiod ILIKE '%$search%')";
+                    $query .= " AND (dx_name ILIKE '%$search%' OR ou_name ILIKE '%$search%' OR ou_parent_id ILIKE '%$search%' OR ou_parent_name ILIKE '%$search%' OR period_display_name ILIKE '%$search%' OR pe_relativeperiod ILIKE '%$search%')";
+                    $countQuery .= " AND (dx_name ILIKE '%$search%' OR ou_name ILIKE '%$search%' OR ou_parent_id ILIKE '%$search%' OR ou_parent_name ILIKE '%$search%' OR period_display_name ILIKE '%$search%' OR pe_relativeperiod ILIKE '%$search%')";
                 }
 
                 $total = $db->query($countQuery)->fetchColumn();
@@ -590,8 +594,9 @@ if ($action) {
                     'ou_parent_name',
                     'ou_level_id',     // New: OU Level ID
                     'ou_level_name',    // New: OU Level Name
-                    'pe_name',
-                    'pe_relativeperiod',
+                    'period_id',        // New: Absolute period ID
+                    'period_display_name', // Period display name
+                    'pe_relativeperiod', // Relative period string
                     'value',
                     'fetched_at'
                 ];
@@ -739,6 +744,11 @@ if ($action) {
 
         .level-4 {
             background-color: #ffe6e6;
+        }
+
+        /* Add some spacing to table headers */
+        .table th {
+            white-space: nowrap;
         }
     </style>
 </head>
@@ -926,6 +936,7 @@ if ($action) {
                                             <th>OU Level ID</th> <!-- New Column -->
                                             <th>OU Level Name</th> <!-- New Column -->
                                             <th>Period</th>
+                                            <th>Period Display</th>
                                             <th>Relative Period</th>
                                             <th>Value</th>
                                             <th>Fetched At</th>
@@ -1007,7 +1018,10 @@ if ($action) {
                         data: 'ou_level_name'
                     }, // New: OU Level Name
                     {
-                        data: 'pe_name'
+                        data: 'period_id'
+                    },
+                    {
+                        data: 'period_display_name'
                     },
                     {
                         data: 'pe_relativeperiod'

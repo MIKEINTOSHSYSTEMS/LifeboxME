@@ -300,6 +300,55 @@ pdfDocument = {
 				
 			{"text":"","hidden":"{$item_hide_print_panel}"},
 				
+				
+			{"text":"","hidden":"{$item_hide_columns_control}"},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'right',
+     
+      
+      },
+
+											],
+						[
+																{
+	cellId: 'c3',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+		
+			
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+																							{
+	cellId: 'c6',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+		
+			
+			
+	
+			"text": [
+		
+				
+			{"text":"","hidden":"{$item_hide_sort_dropdown}"},
+				
 		  ],
   "border": [ false, false, false, false ],
               "alignment": 'right',
@@ -805,7 +854,7 @@ pdfDocument = {
 	cellId: 'headcell_field13',
 	col:0,
 	row:0,
-			fieldName: 'pe_id',
+			fieldName: 'period_id',
 				style: 'headcell',
 		
 		
@@ -819,11 +868,11 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data pe_id }","hidden":"{$item_hide_simple_grid_field34}","bold":true},
+			{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data period_id }","hidden":"{$item_hide_simple_grid_field34}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$pe_id_align}',
+              "alignment": '{$period_id_align}',
      
       
       },
@@ -834,7 +883,7 @@ pdfDocument = {
 	cellId: 'headcell_field14',
 	col:0,
 	row:0,
-			fieldName: 'pe_name',
+			fieldName: 'period_display_name',
 				style: 'headcell',
 		
 		
@@ -848,11 +897,11 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data pe_name }","hidden":"{$item_hide_simple_grid_field35}","bold":true},
+			{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data period_display_name }","hidden":"{$item_hide_simple_grid_field35}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$pe_name_align}',
+              "alignment": '{$period_display_name_align}',
      
       
       },
@@ -1482,7 +1531,7 @@ pdfDocument = {
 	cellId: 'cell_field13',
 	col:0,
 	row:0,
-			fieldName: 'pe_id',
+			fieldName: 'period_id',
 				style: 'bodycell',
 		
 		
@@ -1496,11 +1545,11 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":{$pe_id_pdfvalue},"hidden":"{$item_hide_simple_grid_field9}"},
+			{"text":{$period_id_pdfvalue},"hidden":"{$item_hide_simple_grid_field9}"},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$pe_id_align}',
+              "alignment": '{$period_id_align}',
      
       
       },
@@ -1511,7 +1560,7 @@ pdfDocument = {
 	cellId: 'cell_field14',
 	col:0,
 	row:0,
-			fieldName: 'pe_name',
+			fieldName: 'period_display_name',
 				style: 'bodycell',
 		
 		
@@ -1525,11 +1574,11 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":{$pe_name_pdfvalue},"hidden":"{$item_hide_simple_grid_field10}"},
+			{"text":{$period_display_name_pdfvalue},"hidden":"{$item_hide_simple_grid_field10}"},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$pe_name_align}',
+              "alignment": '{$period_display_name_align}',
      
       
       },

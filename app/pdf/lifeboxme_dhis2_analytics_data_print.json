@@ -670,64 +670,6 @@ pdfDocument = {
 	cellId: 'headcell_field13',
 	col:0,
 	row:0,
-			fieldName: 'pe_id',
-				style: 'headcell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data pe_id }","hidden":"{$item_hide_simple_grid_field34}","bold":true},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$pe_id_align}',
-     
-      
-      },
-
-{END cellblock_grid_headcell_field13}
-																							{BEGIN cellblock_grid_headcell_field14}
-{
-	cellId: 'headcell_field14',
-	col:0,
-	row:0,
-			fieldName: 'pe_name',
-				style: 'headcell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data pe_name }","hidden":"{$item_hide_simple_grid_field35}","bold":true},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$pe_name_align}',
-     
-      
-      },
-
-{END cellblock_grid_headcell_field14}
-																							{BEGIN cellblock_grid_headcell_field15}
-{
-	cellId: 'headcell_field15',
-	col:0,
-	row:0,
 			fieldName: 'pe_relativeperiod',
 				style: 'headcell',
 		
@@ -742,7 +684,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data pe_relativeperiod }","hidden":"{$item_hide_simple_grid_field36}","bold":true},
+			{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data pe_relativeperiod }","hidden":"{$item_hide_simple_grid_field34}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -751,10 +693,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field15}
-																							{BEGIN cellblock_grid_headcell_field16}
+{END cellblock_grid_headcell_field13}
+																							{BEGIN cellblock_grid_headcell_field14}
 {
-	cellId: 'headcell_field16',
+	cellId: 'headcell_field14',
 	col:0,
 	row:0,
 			fieldName: 'value',
@@ -771,7 +713,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data value }","hidden":"{$item_hide_simple_grid_field37}","bold":true},
+			{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data value }","hidden":"{$item_hide_simple_grid_field35}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -780,10 +722,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field16}
-																							{BEGIN cellblock_grid_headcell_field17}
+{END cellblock_grid_headcell_field14}
+																							{BEGIN cellblock_grid_headcell_field15}
 {
-	cellId: 'headcell_field17',
+	cellId: 'headcell_field15',
 	col:0,
 	row:0,
 			fieldName: 'stored_by',
@@ -800,7 +742,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data stored_by }","hidden":"{$item_hide_simple_grid_field38}","bold":true},
+			{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data stored_by }","hidden":"{$item_hide_simple_grid_field36}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -809,10 +751,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field17}
-																							{BEGIN cellblock_grid_headcell_field18}
+{END cellblock_grid_headcell_field15}
+																							{BEGIN cellblock_grid_headcell_field16}
 {
-	cellId: 'headcell_field18',
+	cellId: 'headcell_field16',
 	col:0,
 	row:0,
 			fieldName: 'created',
@@ -829,7 +771,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data created }","hidden":"{$item_hide_simple_grid_field39}","bold":true},
+			{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data created }","hidden":"{$item_hide_simple_grid_field37}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -838,10 +780,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field18}
-																							{BEGIN cellblock_grid_headcell_field19}
+{END cellblock_grid_headcell_field16}
+																							{BEGIN cellblock_grid_headcell_field17}
 {
-	cellId: 'headcell_field19',
+	cellId: 'headcell_field17',
 	col:0,
 	row:0,
 			fieldName: 'last_updated',
@@ -858,7 +800,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data last_updated }","hidden":"{$item_hide_simple_grid_field40}","bold":true},
+			{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data last_updated }","hidden":"{$item_hide_simple_grid_field38}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -867,10 +809,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field19}
-																							{BEGIN cellblock_grid_headcell_field20}
+{END cellblock_grid_headcell_field17}
+																							{BEGIN cellblock_grid_headcell_field18}
 {
-	cellId: 'headcell_field20',
+	cellId: 'headcell_field18',
 	col:0,
 	row:0,
 			fieldName: 'fetched_at',
@@ -887,11 +829,69 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data fetched_at }","hidden":"{$item_hide_simple_grid_field41}","bold":true},
+			{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data fetched_at }","hidden":"{$item_hide_simple_grid_field39}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
               "alignment": '{$fetched_at_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field18}
+																							{BEGIN cellblock_grid_headcell_field19}
+{
+	cellId: 'headcell_field19',
+	col:0,
+	row:0,
+			fieldName: 'period_id',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data period_id }","hidden":"{$item_hide_simple_grid_field40}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$period_id_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field19}
+																							{BEGIN cellblock_grid_headcell_field20}
+{
+	cellId: 'headcell_field20',
+	col:0,
+	row:0,
+			fieldName: 'period_display_name',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data period_display_name }","hidden":"{$item_hide_simple_grid_field41}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$period_display_name_align}',
      
       
       },
@@ -1288,64 +1288,6 @@ pdfDocument = {
 	cellId: 'cell_field13',
 	col:0,
 	row:0,
-			fieldName: 'pe_id',
-				style: 'bodycell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":{$pe_id_pdfvalue},"hidden":"{$item_hide_simple_grid_field9}"},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$pe_id_align}',
-     
-      
-      },
-
-{END cellblock_grid_cell_field13}
-																							{BEGIN cellblock_grid_cell_field14}
-{
-	cellId: 'cell_field14',
-	col:0,
-	row:0,
-			fieldName: 'pe_name',
-				style: 'bodycell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":{$pe_name_pdfvalue},"hidden":"{$item_hide_simple_grid_field10}"},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$pe_name_align}',
-     
-      
-      },
-
-{END cellblock_grid_cell_field14}
-																							{BEGIN cellblock_grid_cell_field15}
-{
-	cellId: 'cell_field15',
-	col:0,
-	row:0,
 			fieldName: 'pe_relativeperiod',
 				style: 'bodycell',
 		
@@ -1369,10 +1311,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field15}
-																							{BEGIN cellblock_grid_cell_field16}
+{END cellblock_grid_cell_field13}
+																							{BEGIN cellblock_grid_cell_field14}
 {
-	cellId: 'cell_field16',
+	cellId: 'cell_field14',
 	col:0,
 	row:0,
 			fieldName: 'value',
@@ -1398,10 +1340,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field16}
-																							{BEGIN cellblock_grid_cell_field17}
+{END cellblock_grid_cell_field14}
+																							{BEGIN cellblock_grid_cell_field15}
 {
-	cellId: 'cell_field17',
+	cellId: 'cell_field15',
 	col:0,
 	row:0,
 			fieldName: 'stored_by',
@@ -1427,10 +1369,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field17}
-																							{BEGIN cellblock_grid_cell_field18}
+{END cellblock_grid_cell_field15}
+																							{BEGIN cellblock_grid_cell_field16}
 {
-	cellId: 'cell_field18',
+	cellId: 'cell_field16',
 	col:0,
 	row:0,
 			fieldName: 'created',
@@ -1456,10 +1398,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field18}
-																							{BEGIN cellblock_grid_cell_field19}
+{END cellblock_grid_cell_field16}
+																							{BEGIN cellblock_grid_cell_field17}
 {
-	cellId: 'cell_field19',
+	cellId: 'cell_field17',
 	col:0,
 	row:0,
 			fieldName: 'last_updated',
@@ -1485,10 +1427,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field19}
-																							{BEGIN cellblock_grid_cell_field20}
+{END cellblock_grid_cell_field17}
+																							{BEGIN cellblock_grid_cell_field18}
 {
-	cellId: 'cell_field20',
+	cellId: 'cell_field18',
 	col:0,
 	row:0,
 			fieldName: 'fetched_at',
@@ -1510,6 +1452,64 @@ pdfDocument = {
 		  ],
   "border": [ true, true, true, true ],
               "alignment": '{$fetched_at_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field18}
+																							{BEGIN cellblock_grid_cell_field19}
+{
+	cellId: 'cell_field19',
+	col:0,
+	row:0,
+			fieldName: 'period_id',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$period_id_pdfvalue},"hidden":"{$item_hide_simple_grid_field9}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$period_id_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field19}
+																							{BEGIN cellblock_grid_cell_field20}
+{
+	cellId: 'cell_field20',
+	col:0,
+	row:0,
+			fieldName: 'period_display_name',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$period_display_name_pdfvalue},"hidden":"{$item_hide_simple_grid_field10}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$period_display_name_align}',
      
       
       },

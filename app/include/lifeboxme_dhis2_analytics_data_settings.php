@@ -52,12 +52,6 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["ou_name"] = "Organization Unit";
 	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["ou_name"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_data["English"]["ou_name"] = "";
-	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["pe_id"] = "PeID";
-	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["pe_id"] = "";
-	$placeHolderslifeboxme_dhis2_analytics_data["English"]["pe_id"] = "";
-	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["pe_name"] = "Actual Period";
-	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["pe_name"] = "";
-	$placeHolderslifeboxme_dhis2_analytics_data["English"]["pe_name"] = "";
 	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["pe_relativeperiod"] = "Relative Period";
 	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["pe_relativeperiod"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_data["English"]["pe_relativeperiod"] = "";
@@ -88,6 +82,12 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["ou_level_name"] = "OU Level";
 	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["ou_level_name"] = "";
 	$placeHolderslifeboxme_dhis2_analytics_data["English"]["ou_level_name"] = "";
+	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["period_id"] = "PeID";
+	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["period_id"] = "";
+	$placeHolderslifeboxme_dhis2_analytics_data["English"]["period_id"] = "";
+	$fieldLabelslifeboxme_dhis2_analytics_data["English"]["period_display_name"] = "Period";
+	$fieldToolTipslifeboxme_dhis2_analytics_data["English"]["period_display_name"] = "";
+	$placeHolderslifeboxme_dhis2_analytics_data["English"]["period_display_name"] = "";
 	if (count($fieldToolTipslifeboxme_dhis2_analytics_data["English"]))
 		$tdatalifeboxme_dhis2_analytics_data[".isUseToolTips"] = true;
 }
@@ -218,8 +218,8 @@ $tdatalifeboxme_dhis2_analytics_data[".googleLikeFields"][] = "ou_parent_id";
 $tdatalifeboxme_dhis2_analytics_data[".googleLikeFields"][] = "ou_parent_name";
 $tdatalifeboxme_dhis2_analytics_data[".googleLikeFields"][] = "ou_level_id";
 $tdatalifeboxme_dhis2_analytics_data[".googleLikeFields"][] = "ou_level_name";
-$tdatalifeboxme_dhis2_analytics_data[".googleLikeFields"][] = "pe_id";
-$tdatalifeboxme_dhis2_analytics_data[".googleLikeFields"][] = "pe_name";
+$tdatalifeboxme_dhis2_analytics_data[".googleLikeFields"][] = "period_id";
+$tdatalifeboxme_dhis2_analytics_data[".googleLikeFields"][] = "period_display_name";
 $tdatalifeboxme_dhis2_analytics_data[".googleLikeFields"][] = "pe_relativeperiod";
 $tdatalifeboxme_dhis2_analytics_data[".googleLikeFields"][] = "value";
 $tdatalifeboxme_dhis2_analytics_data[".googleLikeFields"][] = "stored_by";
@@ -262,7 +262,7 @@ $tdatalifeboxme_dhis2_analytics_data[".orderindexes"] = array();
 			$tdatalifeboxme_dhis2_analytics_data[".orderindexes"][] = array(12, (1 ? "ASC" : "DESC"), "ou_level_id");
 
 
-$tdatalifeboxme_dhis2_analytics_data[".sqlHead"] = "SELECT id,  setting_id,  dx_id,  dx_name,  dx_shortname,  dx_displayname,  dx_dimensiontype,  ou_id,  ou_name,  ou_parent_id,  ou_parent_name,  ou_level_id,  ou_level_name,  pe_id,  pe_name,  pe_relativeperiod,  \"value\",  stored_by,  created,  last_updated,  fetched_at";
+$tdatalifeboxme_dhis2_analytics_data[".sqlHead"] = "SELECT id,  setting_id,  dx_id,  dx_name,  dx_shortname,  dx_displayname,  dx_dimensiontype,  ou_id,  ou_name,  ou_parent_id,  ou_parent_name,  ou_level_id,  ou_level_name,  period_id,  period_display_name,  pe_relativeperiod,  \"value\",  stored_by,  created,  last_updated,  fetched_at";
 $tdatalifeboxme_dhis2_analytics_data[".sqlFrom"] = "FROM \"public\".lifeboxme_dhis2_analytics_data";
 $tdatalifeboxme_dhis2_analytics_data[".sqlWhereExpr"] = "(\"value\" IS NOT NULL)";
 $tdatalifeboxme_dhis2_analytics_data[".sqlTail"] = "";
@@ -2325,14 +2325,14 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 
 	$tdatalifeboxme_dhis2_analytics_data["ou_level_name"] = $fdata;
 		$tdatalifeboxme_dhis2_analytics_data[".searchableFields"][] = "ou_level_name";
-//	pe_id
+//	period_id
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 14;
-	$fdata["strName"] = "pe_id";
-	$fdata["GoodName"] = "pe_id";
+	$fdata["strName"] = "period_id";
+	$fdata["GoodName"] = "period_id";
 	$fdata["ownerTable"] = "public.lifeboxme_dhis2_analytics_data";
-	$fdata["Label"] = GetFieldLabel("public_lifeboxme_dhis2_analytics_data","pe_id");
+	$fdata["Label"] = GetFieldLabel("public_lifeboxme_dhis2_analytics_data","period_id");
 	$fdata["FieldType"] = 200;
 
 
@@ -2340,13 +2340,13 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 	
 			
 
-		$fdata["strField"] = "pe_id";
+		$fdata["strField"] = "period_id";
 
-		$fdata["sourceSingle"] = "pe_id";
+		$fdata["sourceSingle"] = "period_id";
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "pe_id";
+	$fdata["FullName"] = "period_id";
 
 	
 	
@@ -2462,16 +2462,16 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 //end of Filters settings
 
 
-	$tdatalifeboxme_dhis2_analytics_data["pe_id"] = $fdata;
-		$tdatalifeboxme_dhis2_analytics_data[".searchableFields"][] = "pe_id";
-//	pe_name
+	$tdatalifeboxme_dhis2_analytics_data["period_id"] = $fdata;
+		$tdatalifeboxme_dhis2_analytics_data[".searchableFields"][] = "period_id";
+//	period_display_name
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 15;
-	$fdata["strName"] = "pe_name";
-	$fdata["GoodName"] = "pe_name";
+	$fdata["strName"] = "period_display_name";
+	$fdata["GoodName"] = "period_display_name";
 	$fdata["ownerTable"] = "public.lifeboxme_dhis2_analytics_data";
-	$fdata["Label"] = GetFieldLabel("public_lifeboxme_dhis2_analytics_data","pe_name");
+	$fdata["Label"] = GetFieldLabel("public_lifeboxme_dhis2_analytics_data","period_display_name");
 	$fdata["FieldType"] = 200;
 
 
@@ -2479,13 +2479,13 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 	
 			
 
-		$fdata["strField"] = "pe_name";
+		$fdata["strField"] = "period_display_name";
 
-		$fdata["sourceSingle"] = "pe_name";
+		$fdata["sourceSingle"] = "period_display_name";
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "pe_name";
+	$fdata["FullName"] = "period_display_name";
 
 	
 	
@@ -2542,9 +2542,9 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 	
 			$edata["LookupUnique"] = true;
 
-	$edata["LinkField"] = "pe_name";
+	$edata["LinkField"] = "period_display_name";
 	$edata["LinkFieldType"] = 0;
-	$edata["DisplayField"] = "pe_name";
+	$edata["DisplayField"] = "period_display_name";
 
 	
 
@@ -2562,7 +2562,7 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 	
 		$edata["Multiselect"] = true;
 
-		$edata["SelectSize"] = 1;
+		$edata["SelectSize"] = 4;
 
 // End Lookup Settings
 
@@ -2632,8 +2632,8 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 //end of Filters settings
 
 
-	$tdatalifeboxme_dhis2_analytics_data["pe_name"] = $fdata;
-		$tdatalifeboxme_dhis2_analytics_data[".searchableFields"][] = "pe_name";
+	$tdatalifeboxme_dhis2_analytics_data["period_display_name"] = $fdata;
+		$tdatalifeboxme_dhis2_analytics_data[".searchableFields"][] = "period_display_name";
 //	pe_relativeperiod
 //	Custom field settings
 	$fdata = array();
@@ -2727,7 +2727,7 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 	
 				//dependent dropdowns @deprecated data ?
 	$edata["DependentLookups"] = array();
-	$edata["DependentLookups"][] = "pe_name";
+	$edata["DependentLookups"][] = "period_display_name";
 
 	
 	
@@ -2783,9 +2783,10 @@ $tdatalifeboxme_dhis2_analytics_data[".hideMobileList"] = array();
 
 
 //Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
+	$fdata["filterTotals"] = 1;
+		$fdata["filterMultiSelect"] = 1;
+		$fdata["filterTotalFields"] = "id";
+		$fdata["filterFormat"] = "Values list";
 		$fdata["showCollapsed"] = false;
 
 		$fdata["sortValueType"] = 0;
@@ -3558,7 +3559,7 @@ function createSqlQuery_lifeboxme_dhis2_analytics_data()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "id,  setting_id,  dx_id,  dx_name,  dx_shortname,  dx_displayname,  dx_dimensiontype,  ou_id,  ou_name,  ou_parent_id,  ou_parent_name,  ou_level_id,  ou_level_name,  pe_id,  pe_name,  pe_relativeperiod,  \"value\",  stored_by,  created,  last_updated,  fetched_at";
+$proto0["m_strFieldList"] = "id,  setting_id,  dx_id,  dx_name,  dx_shortname,  dx_displayname,  dx_dimensiontype,  ou_id,  ou_name,  ou_parent_id,  ou_parent_name,  ou_level_id,  ou_level_name,  period_id,  period_display_name,  pe_relativeperiod,  \"value\",  stored_by,  created,  last_updated,  fetched_at";
 $proto0["m_strFrom"] = "FROM \"public\".lifeboxme_dhis2_analytics_data";
 $proto0["m_strWhere"] = "(\"value\" IS NOT NULL)";
 $proto0["m_strOrderBy"] = "ORDER BY id, ou_level_id";
@@ -3784,12 +3785,12 @@ $obj = new SQLFieldListItem($proto30);
 $proto0["m_fieldlist"][]=$obj;
 						$proto32=array();
 			$obj = new SQLField(array(
-	"m_strName" => "pe_id",
+	"m_strName" => "period_id",
 	"m_strTable" => "public.lifeboxme_dhis2_analytics_data",
 	"m_srcTableName" => "public.lifeboxme_dhis2_analytics_data"
 ));
 
-$proto32["m_sql"] = "pe_id";
+$proto32["m_sql"] = "period_id";
 $proto32["m_srcTableName"] = "public.lifeboxme_dhis2_analytics_data";
 $proto32["m_expr"]=$obj;
 $proto32["m_alias"] = "";
@@ -3798,12 +3799,12 @@ $obj = new SQLFieldListItem($proto32);
 $proto0["m_fieldlist"][]=$obj;
 						$proto34=array();
 			$obj = new SQLField(array(
-	"m_strName" => "pe_name",
+	"m_strName" => "period_display_name",
 	"m_strTable" => "public.lifeboxme_dhis2_analytics_data",
 	"m_srcTableName" => "public.lifeboxme_dhis2_analytics_data"
 ));
 
-$proto34["m_sql"] = "pe_name";
+$proto34["m_sql"] = "period_display_name";
 $proto34["m_srcTableName"] = "public.lifeboxme_dhis2_analytics_data";
 $proto34["m_expr"]=$obj;
 $proto34["m_alias"] = "";
@@ -3914,8 +3915,8 @@ $proto49["m_columns"][] = "ou_parent_id";
 $proto49["m_columns"][] = "ou_parent_name";
 $proto49["m_columns"][] = "ou_level_id";
 $proto49["m_columns"][] = "ou_level_name";
-$proto49["m_columns"][] = "pe_id";
-$proto49["m_columns"][] = "pe_name";
+$proto49["m_columns"][] = "period_id";
+$proto49["m_columns"][] = "period_display_name";
 $proto49["m_columns"][] = "pe_relativeperiod";
 $proto49["m_columns"][] = "value";
 $proto49["m_columns"][] = "stored_by";

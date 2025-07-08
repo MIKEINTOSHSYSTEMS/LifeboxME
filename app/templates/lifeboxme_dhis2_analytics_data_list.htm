@@ -639,19 +639,19 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_ou_name}</span>
 						</div>
 		{END searchCtrlBlock_ou_name}
-																{BEGIN searchCtrlBlock_pe_id}
+																{BEGIN searchCtrlBlock_period_id}
 
 
-		<div class="form-group srchPanelRow {$filterRow_class_pe_id}" {$filterRow_attrs_pe_id}>
-			<label>{$label public_lifeboxme_dhis2_analytics_data pe_id }</label>
+		<div class="form-group srchPanelRow {$filterRow_class_period_id}" {$filterRow_attrs_period_id}>
+			<label>{$label public_lifeboxme_dhis2_analytics_data period_id }</label>
 
 							{$delCtrlButt}
 			
-								<span class="rnr-searchtype">{$searchtype_pe_id}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_pe_id}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_pe_id}</span>
+								<span class="rnr-searchtype">{$searchtype_period_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_period_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_period_id}</span>
 						</div>
-		{END searchCtrlBlock_pe_id}
+		{END searchCtrlBlock_period_id}
 																{BEGIN searchCtrlBlock_pe_relativeperiod}
 
 
@@ -665,19 +665,19 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_pe_relativeperiod}</span>
 						</div>
 		{END searchCtrlBlock_pe_relativeperiod}
-																{BEGIN searchCtrlBlock_pe_name}
+																{BEGIN searchCtrlBlock_period_display_name}
 
 
-		<div class="form-group srchPanelRow {$filterRow_class_pe_name}" {$filterRow_attrs_pe_name}>
-			<label>{$label public_lifeboxme_dhis2_analytics_data pe_name }</label>
+		<div class="form-group srchPanelRow {$filterRow_class_period_display_name}" {$filterRow_attrs_period_display_name}>
+			<label>{$label public_lifeboxme_dhis2_analytics_data period_display_name }</label>
 
 							{$delCtrlButt}
 			
-								<span class="rnr-searchtype">{$searchtype_pe_name}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_pe_name}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_pe_name}</span>
+								<span class="rnr-searchtype">{$searchtype_period_display_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_period_display_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_period_display_name}</span>
 						</div>
-		{END searchCtrlBlock_pe_name}
+		{END searchCtrlBlock_period_display_name}
 																{BEGIN searchCtrlBlock_value}
 
 
@@ -860,7 +860,244 @@
 															</ul>
 </span>
 {END print_friendly}
+	 
+		<div id="fildhidepanel{$id}" class="bs-fildhidepanel 
+	 showHide	 reorder	keep-open btn-group"
+	data-itemtype="columns_control" data-itemid="columns_control" {$item_columns_control} data-pageid="{$pageid}"	title="Show/hide columns"
+	>
+	<button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button"><i class="glyphicon glyphicon-th-list"></i> <span class="caret"></span></button>
+	<ul role="menu" class="dropdown-menu dropdown-left">
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_id" checked="checked" value="1" data-field="id" data-fieldname="id">
+					<span>{$label public_lifeboxme_dhis2_analytics_data id }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_setting_id" checked="checked" value="1" data-field="setting_id" data-fieldname="setting_id">
+					<span>{$label public_lifeboxme_dhis2_analytics_data setting_id }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_dx_dimensiontype" checked="checked" value="1" data-field="dx_dimensiontype" data-fieldname="dx_dimensiontype">
+					<span>{$label public_lifeboxme_dhis2_analytics_data dx_dimensiontype }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_dx_id" checked="checked" value="1" data-field="dx_id" data-fieldname="dx_id">
+					<span>{$label public_lifeboxme_dhis2_analytics_data dx_id }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_dx_name" checked="checked" value="1" data-field="dx_name" data-fieldname="dx_name">
+					<span>{$label public_lifeboxme_dhis2_analytics_data dx_name }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_dx_shortname" checked="checked" value="1" data-field="dx_shortname" data-fieldname="dx_shortname">
+					<span>{$label public_lifeboxme_dhis2_analytics_data dx_shortname }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_dx_displayname" checked="checked" value="1" data-field="dx_displayname" data-fieldname="dx_displayname">
+					<span>{$label public_lifeboxme_dhis2_analytics_data dx_displayname }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_ou_level_id" checked="checked" value="1" data-field="ou_level_id" data-fieldname="ou_level_id">
+					<span>{$label public_lifeboxme_dhis2_analytics_data ou_level_id }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_ou_level_name" checked="checked" value="1" data-field="ou_level_name" data-fieldname="ou_level_name">
+					<span>{$label public_lifeboxme_dhis2_analytics_data ou_level_name }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_ou_parent_id" checked="checked" value="1" data-field="ou_parent_id" data-fieldname="ou_parent_id">
+					<span>{$label public_lifeboxme_dhis2_analytics_data ou_parent_id }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_ou_parent_name" checked="checked" value="1" data-field="ou_parent_name" data-fieldname="ou_parent_name">
+					<span>{$label public_lifeboxme_dhis2_analytics_data ou_parent_name }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_ou_id" checked="checked" value="1" data-field="ou_id" data-fieldname="ou_id">
+					<span>{$label public_lifeboxme_dhis2_analytics_data ou_id }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_ou_name" checked="checked" value="1" data-field="ou_name" data-fieldname="ou_name">
+					<span>{$label public_lifeboxme_dhis2_analytics_data ou_name }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_period_id" checked="checked" value="1" data-field="period_id" data-fieldname="period_id">
+					<span>{$label public_lifeboxme_dhis2_analytics_data period_id }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_period_display_name" checked="checked" value="1" data-field="period_display_name" data-fieldname="period_display_name">
+					<span>{$label public_lifeboxme_dhis2_analytics_data period_display_name }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_pe_relativeperiod" checked="checked" value="1" data-field="pe_relativeperiod" data-fieldname="pe_relativeperiod">
+					<span>{$label public_lifeboxme_dhis2_analytics_data pe_relativeperiod }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_value" checked="checked" value="1" data-field="value" data-fieldname="value">
+					<span>{$label public_lifeboxme_dhis2_analytics_data value }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_stored_by" checked="checked" value="1" data-field="stored_by" data-fieldname="stored_by">
+					<span>{$label public_lifeboxme_dhis2_analytics_data stored_by }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_created" checked="checked" value="1" data-field="created" data-fieldname="created">
+					<span>{$label public_lifeboxme_dhis2_analytics_data created }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_last_updated" checked="checked" value="1" data-field="last_updated" data-fieldname="last_updated">
+					<span>{$label public_lifeboxme_dhis2_analytics_data last_updated }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+							<li>
+		<a>
+					  	<div class="checkbox">
+				<label>
+					<input type="checkbox" id="hide_fetched_at" checked="checked" value="1" data-field="fetched_at" data-fieldname="fetched_at">
+					<span>{$label public_lifeboxme_dhis2_analytics_data fetched_at }</span>
+				</label>
+			</div>
+					</a>
+		</li>
+			</ul>
+</div>
 		</div>					</div>
+			 
+				<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c3" data-pageid="{$pageid}"	{$cell_above-grid_c3}
+	class=" r-ori-vert			col-md-6
+	
+">
+			</div>			 
+				<div 
+	data-cellId="above-grid_c6" data-pageid="{$pageid}"	{$cell_above-grid_c6}
+	class="r-align-right r-ori-vert			col-md-6
+	
+">
+		 
+		<div class="form-inline sortby-ctrl" data-itemtype="sort_dropdown" data-itemid="sort_dropdown" {$item_sort_dropdown} data-pageid="{$pageid}">
+Sort by&nbsp;{$sortByDropdown}
+</div>		</div>					</div>
 			 
 				<div class="row">
 			 
@@ -904,6 +1141,7 @@
 		<li class=" filter-values filter-values-ou_level_name  {$visibilityClass_ou_level_name}">
 			{$ou_level_name_filter}
 						
+					
 					
 					
 					
@@ -961,6 +1199,7 @@
 					
 					
 					
+					
 					</li>
 		{END filterCtrlBlock_ou_parent_name}
 
@@ -1015,6 +1254,7 @@
 					
 					
 					
+					
 					</li>
 		{END filterCtrlBlock_ou_name}
 
@@ -1043,54 +1283,110 @@
 
 
 
-{BEGIN filter_control_pe_name}
+{BEGIN filter_control_pe_relativeperiod}
 
-	<div class="dropdown filter-field filter-pe_name-container" {BEGIN filter_selected_pe_name} data-selected {END filter_selected_pe_name}>
+	<div class="dropdown filter-field filter-pe_relativeperiod-container" {BEGIN filter_selected_pe_relativeperiod} data-selected {END filter_selected_pe_relativeperiod}>
 		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
-							<input class="filter-selectAll-pe_name" type="checkbox" name="selectAll" {$selectAll_attrs_pe_name} />
-						{BEGIN clearLink_pe_name}
-			<a href="#" class="filter-clear filter-clear-pe_name" title="Clear">
+							<input class="filter-selectAll-pe_relativeperiod" type="checkbox" name="selectAll" {$selectAll_attrs_pe_relativeperiod} />
+						{BEGIN clearLink_pe_relativeperiod}
+			<a href="#" class="filter-clear filter-clear-pe_relativeperiod" title="Clear">
 				<span class="glyphicon glyphicon-remove"></span>
 			</a>
-			{END clearLink_pe_name}
-			<span class="r-filter-field">{$label public_lifeboxme_dhis2_analytics_data pe_name }				{BEGIN filter_selected_pe_name}:{END filter_selected_pe_name}
+			{END clearLink_pe_relativeperiod}
+			<span class="r-filter-field">{$label public_lifeboxme_dhis2_analytics_data pe_relativeperiod }				{BEGIN filter_selected_pe_relativeperiod}:{END filter_selected_pe_relativeperiod}
 			</span>
-			{BEGIN filter_selected_pe_name}
-			<span class="r-filter-value">{$filtervalue_pe_name}</span>
-			{END filter_selected_pe_name}
+			{BEGIN filter_selected_pe_relativeperiod}
+			<span class="r-filter-value">{$filtervalue_pe_relativeperiod}</span>
+			{END filter_selected_pe_relativeperiod}
 			
 			<span class="caret"></span>
 		</div>
 		<ul class="dropdown-menu">
-					{BEGIN filterCtrlBlock_pe_name}
-		<li class=" filter-values filter-values-pe_name  {$visibilityClass_pe_name}">
-			{$pe_name_filter}
+					{BEGIN filterCtrlBlock_pe_relativeperiod}
+		<li class=" filter-values filter-values-pe_relativeperiod  {$visibilityClass_pe_relativeperiod}">
+			{$pe_relativeperiod_filter}
 						
 					
 					
 					
+					
 					</li>
-		{END filterCtrlBlock_pe_name}
+		{END filterCtrlBlock_pe_relativeperiod}
 
-			{BEGIN filter_button_showmore_pe_name}
-		<li class=" filter-show-more {$collapsedClass_pe_name} {$showMoreBtnClass_pe_name}">
-			<a class="filter-show-more-link filterShowMore_pe_name" href="#">{$show_n_more_pe_name}</a>
+			{BEGIN filter_button_showmore_pe_relativeperiod}
+		<li class=" filter-show-more {$collapsedClass_pe_relativeperiod} {$showMoreBtnClass_pe_relativeperiod}">
+			<a class="filter-show-more-link filterShowMore_pe_relativeperiod" href="#">{$show_n_more_pe_relativeperiod}</a>
 		</li>
-		{END filter_button_showmore_pe_name}
+		{END filter_button_showmore_pe_relativeperiod}
 	
 
 
 	
 
-			{BEGIN filter_button_multiselect_pe_name}
-		<li class="filter-multiselect  filter-field-btn {$collapsedClass_pe_name}">
-			<a href="#" class="filter-pe_name-btn-multiselect filter-apply-pe_name" {$filterbutton_attrs_pe_name}>Multiselect</a>
+			{BEGIN filter_button_multiselect_pe_relativeperiod}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_pe_relativeperiod}">
+			<a href="#" class="filter-pe_relativeperiod-btn-multiselect filter-apply-pe_relativeperiod" {$filterbutton_attrs_pe_relativeperiod}>Multiselect</a>
 		</li>
-		{END filter_button_multiselect_pe_name}
+		{END filter_button_multiselect_pe_relativeperiod}
 			</ul>
 	</div>
 
-{END filter_control_pe_name}
+{END filter_control_pe_relativeperiod}
+
+
+
+
+
+
+{BEGIN filter_control_period_display_name}
+
+	<div class="dropdown filter-field filter-period_display_name-container" {BEGIN filter_selected_period_display_name} data-selected {END filter_selected_period_display_name}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-period_display_name" type="checkbox" name="selectAll" {$selectAll_attrs_period_display_name} />
+						{BEGIN clearLink_period_display_name}
+			<a href="#" class="filter-clear filter-clear-period_display_name" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_period_display_name}
+			<span class="r-filter-field">{$label public_lifeboxme_dhis2_analytics_data period_display_name }				{BEGIN filter_selected_period_display_name}:{END filter_selected_period_display_name}
+			</span>
+			{BEGIN filter_selected_period_display_name}
+			<span class="r-filter-value">{$filtervalue_period_display_name}</span>
+			{END filter_selected_period_display_name}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_period_display_name}
+		<li class=" filter-values filter-values-period_display_name  {$visibilityClass_period_display_name}">
+			{$period_display_name_filter}
+						
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_period_display_name}
+
+			{BEGIN filter_button_showmore_period_display_name}
+		<li class=" filter-show-more {$collapsedClass_period_display_name} {$showMoreBtnClass_period_display_name}">
+			<a class="filter-show-more-link filterShowMore_period_display_name" href="#">{$show_n_more_period_display_name}</a>
+		</li>
+		{END filter_button_showmore_period_display_name}
+	
+
+
+	
+
+			{BEGIN filter_button_multiselect_period_display_name}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_period_display_name}">
+			<a href="#" class="filter-period_display_name-btn-multiselect filter-apply-period_display_name" {$filterbutton_attrs_period_display_name}>Multiselect</a>
+		</li>
+		{END filter_button_multiselect_period_display_name}
+			</ul>
+	</div>
+
+{END filter_control_period_display_name}
 
 
 
@@ -1151,11 +1447,11 @@
 			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="ou_level_name"]:before {
 		content: "{$label public_lifeboxme_dhis2_analytics_data ou_level_name}";
 	}
-			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="pe_id"]:before {
-		content: "{$label public_lifeboxme_dhis2_analytics_data pe_id}";
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="period_id"]:before {
+		content: "{$label public_lifeboxme_dhis2_analytics_data period_id}";
 	}
-			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="pe_name"]:before {
-		content: "{$label public_lifeboxme_dhis2_analytics_data pe_name}";
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="period_display_name"]:before {
+		content: "{$label public_lifeboxme_dhis2_analytics_data period_display_name}";
 	}
 			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="pe_relativeperiod"]:before {
 		content: "{$label public_lifeboxme_dhis2_analytics_data pe_relativeperiod}";
@@ -1675,30 +1971,30 @@
 	{$cell_grid_headcell_field13}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$pe_id_class}	"
+		 r-ori-vert		 {$period_id_class}	"
 
-			data-field="pe_id"
+			data-field="period_id"
 	
 	data-cellId="grid_headcell_field13" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
-		{BEGIN pe_id_fieldheadercolumn}
-	{BEGIN pe_id_fieldheader}
+		{BEGIN period_id_fieldheadercolumn}
+	{BEGIN period_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field34" {$item_simple_grid_field34} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="pe_id" data-fieldname="pe_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field34" {$item_simple_grid_field34} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="period_id" data-fieldname="period_id" 
 
-			{$pe_id_orderlinkattrs}
+			{$period_id_orderlinkattrs}
 	
 	
 	>
 	<span class="text-label">
-		<span>{$label public_lifeboxme_dhis2_analytics_data pe_id }</span>
-					{$arrow_icon_pe_id}
+		<span>{$label public_lifeboxme_dhis2_analytics_data period_id }</span>
+					{$arrow_icon_period_id}
 			</span>
 	</span>
-	{END pe_id_fieldheader}
-{END pe_id_fieldheadercolumn}
+	{END period_id_fieldheader}
+{END period_id_fieldheadercolumn}
 
 	
 	</th>
@@ -1709,30 +2005,30 @@
 	{$cell_grid_headcell_field14}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$pe_name_class}	"
+		 r-ori-vert		 {$period_display_name_class}	"
 
-			data-field="pe_name"
+			data-field="period_display_name"
 	
 	data-cellId="grid_headcell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
-		{BEGIN pe_name_fieldheadercolumn}
-	{BEGIN pe_name_fieldheader}
+		{BEGIN period_display_name_fieldheadercolumn}
+	{BEGIN period_display_name_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field35" {$item_simple_grid_field35} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="pe_name" data-fieldname="pe_name" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field35" {$item_simple_grid_field35} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="period_display_name" data-fieldname="period_display_name" 
 
-			{$pe_name_orderlinkattrs}
+			{$period_display_name_orderlinkattrs}
 	
 	
 	>
 	<span class="text-label">
-		<span>{$label public_lifeboxme_dhis2_analytics_data pe_name }</span>
-					{$arrow_icon_pe_name}
+		<span>{$label public_lifeboxme_dhis2_analytics_data period_display_name }</span>
+					{$arrow_icon_period_display_name}
 			</span>
 	</span>
-	{END pe_name_fieldheader}
-{END pe_name_fieldheadercolumn}
+	{END period_display_name_fieldheader}
+{END period_display_name_fieldheadercolumn}
 
 	
 	</th>
@@ -2291,19 +2587,19 @@
 	{$cell_grid_cell_field13}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$pe_id_class}	"
+		 r-ori-vert		 {$period_id_class}	"
 
-			data-field="pe_id"
+			data-field="period_id"
 	
 	data-cellId="grid_cell_field13" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
-		{BEGIN pe_id_fieldcolumn}
-<span data-itemtype="grid_field" data-itemid="simple_grid_field9" {$item_simple_grid_field9} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="pe_id" data-fieldname="pe_id" data-default-width >
-{$pe_id_value}
+		{BEGIN period_id_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field9" {$item_simple_grid_field9} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="period_id" data-fieldname="period_id" data-default-width >
+{$period_id_value}
 </span>
-{END pe_id_fieldcolumn}	
+{END period_id_fieldcolumn}	
 	</td>
 	{END cellblock_grid_cell_field13}
 									{BEGIN cellblock_grid_cell_field14}
@@ -2312,19 +2608,19 @@
 	{$cell_grid_cell_field14}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$pe_name_class}	"
+		 r-ori-vert		 {$period_display_name_class}	"
 
-			data-field="pe_name"
+			data-field="period_display_name"
 	
 	data-cellId="grid_cell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
-		{BEGIN pe_name_fieldcolumn}
-<span data-itemtype="grid_field" data-itemid="simple_grid_field10" {$item_simple_grid_field10} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="pe_name" data-fieldname="pe_name" data-default-width >
-{$pe_name_value}
+		{BEGIN period_display_name_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field10" {$item_simple_grid_field10} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="period_display_name" data-fieldname="period_display_name" data-default-width >
+{$period_display_name_value}
 </span>
-{END pe_name_fieldcolumn}	
+{END period_display_name_fieldcolumn}	
 	</td>
 	{END cellblock_grid_cell_field14}
 									{BEGIN cellblock_grid_cell_field15}
@@ -2695,7 +2991,7 @@
 	{$cell_grid_footcell_field13}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$pe_id_class}	"
+		 r-ori-vert		 {$period_id_class}	"
 
 	
 	data-cellId="grid_footcell_field13" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lifeboxme_dhis2_analytics_data_list"	
@@ -2710,7 +3006,7 @@
 	{$cell_grid_footcell_field14}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$pe_name_class}	"
+		 r-ori-vert		 {$period_display_name_class}	"
 
 	
 	data-cellId="grid_footcell_field14" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lifeboxme_dhis2_analytics_data_list"	

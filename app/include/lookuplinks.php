@@ -813,10 +813,10 @@ function InitLookupLinks()
 		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_analytics_data"] ) ) {
 			$lookupTableLinks["public.lifeboxme_dhis2_analytics_data"] = array();
 		}
-		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_analytics_data"]["lifeboxme_dhis2_analytics_data.pe_name"] )) {
-			$lookupTableLinks["public.lifeboxme_dhis2_analytics_data"]["lifeboxme_dhis2_analytics_data.pe_name"] = array();
+		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_analytics_data"]["lifeboxme_dhis2_analytics_data.period_display_name"] )) {
+			$lookupTableLinks["public.lifeboxme_dhis2_analytics_data"]["lifeboxme_dhis2_analytics_data.period_display_name"] = array();
 		}
-		$lookupTableLinks["public.lifeboxme_dhis2_analytics_data"]["lifeboxme_dhis2_analytics_data.pe_name"]["edit"] = array("table" => "public.lifeboxme_dhis2_analytics_data", "field" => "pe_name", "page" => "edit");
+		$lookupTableLinks["public.lifeboxme_dhis2_analytics_data"]["lifeboxme_dhis2_analytics_data.period_display_name"]["edit"] = array("table" => "public.lifeboxme_dhis2_analytics_data", "field" => "period_display_name", "page" => "edit");
 		if( !isset( $lookupTableLinks["public.lifeboxme_dhis2_analytics_data"] ) ) {
 			$lookupTableLinks["public.lifeboxme_dhis2_analytics_data"] = array();
 		}

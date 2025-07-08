@@ -380,50 +380,6 @@
 
 {END ou_name_fieldblock}
 											
-{BEGIN pe_id_fieldblock}
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_pe_id}  r-horizontal-field form-horizontal" 	
-	data-signal-error-for="pe_id{$id}" 
-	data-itemtype="integrated_search_field" data-itemid="integrated_search_field9" {$item_integrated_search_field9} data-pageid="{$pageid}" data-field="pe_id" data-fieldname="pe_id" >
-
-
-	<label class="r-search-label control-label" for="{$labelfor_pe_id}">
-		{$label public_lifeboxme_dhis2_analytics_data pe_id }	</label>
-	<div class="r-search-option">
-		{$searchtype_pe_id}
-	</div>
-	<div class="r-search-field">
-		{$pe_id_editcontrol}	</div>
-	<div class="r-search-field">
-		{$pe_id_editcontrol1}
-	</div>
-	
-</div>
-
-{END pe_id_fieldblock}
-											
-{BEGIN pe_name_fieldblock}
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_pe_name}  r-horizontal-field form-horizontal" 	
-	data-signal-error-for="pe_name{$id}" 
-	data-itemtype="integrated_search_field" data-itemid="integrated_search_field10" {$item_integrated_search_field10} data-pageid="{$pageid}" data-field="pe_name" data-fieldname="pe_name" >
-
-
-	<label class="r-search-label control-label" for="{$labelfor_pe_name}">
-		{$label public_lifeboxme_dhis2_analytics_data pe_name }	</label>
-	<div class="r-search-option">
-		{$searchtype_pe_name}
-	</div>
-	<div class="r-search-field">
-		{$pe_name_editcontrol}	</div>
-	<div class="r-search-field">
-		{$pe_name_editcontrol1}
-	</div>
-	
-</div>
-
-{END pe_name_fieldblock}
-											
 {BEGIN pe_relativeperiod_fieldblock}
 
 <div class="r-integrated-field form-group clearfix {$fielddispclass_pe_relativeperiod}  r-horizontal-field form-horizontal" 	
@@ -555,6 +511,50 @@
 </div>
 
 {END fetched_at_fieldblock}
+											
+{BEGIN period_id_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_period_id}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="period_id{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field9" {$item_integrated_search_field9} data-pageid="{$pageid}" data-field="period_id" data-fieldname="period_id" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_period_id}">
+		{$label public_lifeboxme_dhis2_analytics_data period_id }	</label>
+	<div class="r-search-option">
+		{$searchtype_period_id}
+	</div>
+	<div class="r-search-field">
+		{$period_id_editcontrol}	</div>
+	<div class="r-search-field">
+		{$period_id_editcontrol1}
+	</div>
+	
+</div>
+
+{END period_id_fieldblock}
+											
+{BEGIN period_display_name_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_period_display_name}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="period_display_name{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field10" {$item_integrated_search_field10} data-pageid="{$pageid}" data-field="period_display_name" data-fieldname="period_display_name" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_period_display_name}">
+		{$label public_lifeboxme_dhis2_analytics_data period_display_name }	</label>
+	<div class="r-search-option">
+		{$searchtype_period_display_name}
+	</div>
+	<div class="r-search-field">
+		{$period_display_name_editcontrol}	</div>
+	<div class="r-search-field">
+		{$period_display_name_editcontrol1}
+	</div>
+	
+</div>
+
+{END period_display_name_fieldblock}
 	
 								</td>
 			{END cellblock_grid_c3}

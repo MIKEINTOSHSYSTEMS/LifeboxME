@@ -206,12 +206,6 @@ pdfDocument = {
 			{"hidden":"{$item_hide_integrated_edit_field8}","stack":[{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data ou_name }","bold":true},{"text":{$ou_name_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
-			{"hidden":"{$item_hide_integrated_edit_field9}","stack":[{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data pe_id }","bold":true},{"text":{$pe_id_pdfvalue}}],"margin":[0,0,0,15]},
-				
-				
-			{"hidden":"{$item_hide_integrated_edit_field10}","stack":[{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data pe_name }","bold":true},{"text":{$pe_name_pdfvalue}}],"margin":[0,0,0,15]},
-				
-				
 			{"hidden":"{$item_hide_integrated_edit_field11}","stack":[{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data pe_relativeperiod }","bold":true},{"text":{$pe_relativeperiod_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
@@ -228,6 +222,12 @@ pdfDocument = {
 				
 				
 			{"hidden":"{$item_hide_integrated_edit_field16}","stack":[{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data fetched_at }","bold":true},{"text":{$fetched_at_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field9}","stack":[{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data period_id }","bold":true},{"text":{$period_id_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field10}","stack":[{"text":"{$jslabel public_lifeboxme_dhis2_analytics_data period_display_name }","bold":true},{"text":{$period_display_name_pdfvalue}}],"margin":[0,0,0,15]},
 				
 		  ],
   "border": [ false, false, false, false ],
