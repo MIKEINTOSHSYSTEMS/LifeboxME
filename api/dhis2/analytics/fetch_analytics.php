@@ -554,6 +554,12 @@ if ($action) {
                 $response = ['status' => 'success', 'data' => $settings];
                 break;
 
+            case 'get_all_settings':
+                $settings = $db->query("SELECT id, name FROM lifeboxme_dhis2_analytics_settings ORDER BY created_at DESC")
+                    ->fetchAll(PDO::FETCH_ASSOC);
+                $response = ['status' => 'success', 'data' => $settings];
+                break;
+
             case 'get_data':
                 $id = $_POST['id'] ?? 0;
                 if (!$id) {
@@ -750,6 +756,19 @@ if ($action) {
         .table th {
             white-space: nowrap;
         }
+
+        /* NEW: Progress bar styles */
+        .progress-container {
+            margin: 15px 0;
+            display: none;
+        }
+
+        .progress-bar {
+            height: 20px;
+            background-color: #078ca7;
+            border-radius: 5px;
+            transition: width 0.3s;
+        }
     </style>
 </head>
 
@@ -879,7 +898,6 @@ if ($action) {
                 </div>
 
             </div>
-
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
@@ -888,15 +906,32 @@ if ($action) {
                     <div class="card-body">
                         <div class="row mb-4">
                             <div class="col-md-8">
-                                <div class="input-group">
+                                <!-- MODIFIED: Added progress bar container -->
+                                <div class="progress-container" id="progressContainer">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span id="progressText">Fetching settings...</span>
+                                        <span id="progressCount">0/0</span>
+                                    </div>
+                                    <div class="progress" style="height: 25px;">
+                                        <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+
+                                <div class="input-group mb-2">
                                     <select class="form-select" id="settingsSelect">
                                         <option value="" disabled selected>Select a setting</option>
                                     </select>
                                     <button class="btn btn-primary" type="button" id="loadBtn">
                                         <i class="fas fa-download me-1"></i>Load
                                     </button>
+                                </div>
+                                <div class="d-grid gap-2 d-md-flex">
                                     <button class="btn btn-success" type="button" id="fetchBtn">
-                                        <i class="fas fa-cloud-download-alt me-1"></i>Fetch Data
+                                        <i class="fas fa-cloud-download-alt me-1"></i>Fetch Selected Setting Data
+                                    </button>
+                                    <!-- NEW: Fetch All Settings button -->
+                                    <button class="btn btn-info" type="button" id="fetchAllBtn">
+                                        <i class="fas fa-globe me-1"></i>Fetch All Settings Data
                                     </button>
                                 </div>
                             </div>
@@ -919,33 +954,7 @@ if ($action) {
                             </div>
                         </div>
 
-                        <div>
-                            <h5>Data Preview</h5>
-                            <div class="table-responsive">
-                                <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>DX Name</th>
-                                            <th>DX Short</th>
-                                            <th>DX Display</th>
-                                            <th>DX Type</th>
-                                            <th>Org Unit</th>
-                                            <th>Parent OU ID</th>
-                                            <th>Parent OU Name</th>
-                                            <th>OU Level ID</th> <!-- New Column -->
-                                            <th>OU Level Name</th> <!-- New Column -->
-                                            <th>Period</th>
-                                            <th>Period Display</th>
-                                            <th>Relative Period</th>
-                                            <th>Value</th>
-                                            <th>Fetched At</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -964,140 +973,173 @@ if ($action) {
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Data Preview</h5>
+                        <button class="btn btn-primary" id="previewBtn">
+                            <i class="fas fa-eye me-1"></i> Preview Data
+                        </button>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>DX Name</th>
+                                    <th>DX Short</th>
+                                    <th>DX Display</th>
+                                    <th>DX Type</th>
+                                    <th>Org Unit</th>
+                                    <th>Parent OU ID</th>
+                                    <th>Parent OU Name</th>
+                                    <th>OU Level ID</th> <!-- New Column -->
+                                    <th>OU Level Name</th> <!-- New Column -->
+                                    <th>Period</th>
+                                    <th>Period Display</th>
+                                    <th>Relative Period</th>
+                                    <th>Value</th>
+                                    <th>Fetched At</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
-    <script>
-        $(document).ready(function() {
-            // Initialize DataTable with more columns
-            const dataTable = $('#dataTable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: {
-                    url: 'fetch_analytics.php',
-                    type: 'POST',
-                    data: function(d) {
-                        d.action = 'get_data';
-                        d.id = $('#settingsSelect').val() || 0;
+            <!-- Scripts -->
+            <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+            <script>
+                $(document).ready(function() {
+                    // Initialize DataTable with more columns
+                    const dataTable = $('#dataTable').DataTable({
+                        processing: true,
+                        serverSide: true,
+                        ajax: {
+                            url: 'fetch_analytics.php',
+                            type: 'POST',
+                            data: function(d) {
+                                d.action = 'get_data';
+                                d.id = $('#settingsSelect').val() || 0;
+                            }
+                        },
+                        columns: [{
+                                data: 'id'
+                            },
+                            {
+                                data: 'dx_name'
+                            },
+                            {
+                                data: 'dx_shortname'
+                            },
+                            {
+                                data: 'dx_displayname'
+                            },
+                            {
+                                data: 'dx_dimensiontype'
+                            },
+                            {
+                                data: 'ou_name'
+                            },
+                            {
+                                data: 'ou_parent_id'
+                            },
+                            {
+                                data: 'ou_parent_name'
+                            },
+                            {
+                                data: 'ou_level_id'
+                            }, // New: OU Level ID
+                            {
+                                data: 'ou_level_name'
+                            }, // New: OU Level Name
+                            {
+                                data: 'period_id'
+                            },
+                            {
+                                data: 'period_display_name'
+                            },
+                            {
+                                data: 'pe_relativeperiod'
+                            },
+                            {
+                                data: 'value'
+                            },
+                            {
+                                data: 'fetched_at'
+                            }
+                        ],
+                        createdRow: function(row, data, dataIndex) {
+                            // Add level-specific class for row coloring
+                            if (data.ou_level_id) {
+                                $(row).addClass('level-' + data.ou_level_id);
+                            }
+                        }
+                    });
+
+                    // Add log entry with type-based coloring
+                    function addLog(message, type = 'info') {
+                        const timestamp = new Date().toLocaleTimeString();
+                        const typeClass = type === 'error' ? 'log-error' :
+                            type === 'success' ? 'log-success' : '';
+
+                        const logEntry = $('<div class="log-entry">')
+                            .append(`<span class="log-timestamp">${timestamp}</span>`)
+                            .append(`<span class="${typeClass}">${message}</span>`);
+
+                        $('#logContainer').prepend(logEntry);
+                        $('#logContainer').scrollTop(0);
                     }
-                },
-                columns: [{
-                        data: 'id'
-                    },
-                    {
-                        data: 'dx_name'
-                    },
-                    {
-                        data: 'dx_shortname'
-                    },
-                    {
-                        data: 'dx_displayname'
-                    },
-                    {
-                        data: 'dx_dimensiontype'
-                    },
-                    {
-                        data: 'ou_name'
-                    },
-                    {
-                        data: 'ou_parent_id'
-                    },
-                    {
-                        data: 'ou_parent_name'
-                    },
-                    {
-                        data: 'ou_level_id'
-                    }, // New: OU Level ID
-                    {
-                        data: 'ou_level_name'
-                    }, // New: OU Level Name
-                    {
-                        data: 'period_id'
-                    },
-                    {
-                        data: 'period_display_name'
-                    },
-                    {
-                        data: 'pe_relativeperiod'
-                    },
-                    {
-                        data: 'value'
-                    },
-                    {
-                        data: 'fetched_at'
-                    }
-                ],
-                createdRow: function(row, data, dataIndex) {
-                    // Add level-specific class for row coloring
-                    if (data.ou_level_id) {
-                        $(row).addClass('level-' + data.ou_level_id);
-                    }
-                }
-            });
 
-            // Add log entry with type-based coloring
-            function addLog(message, type = 'info') {
-                const timestamp = new Date().toLocaleTimeString();
-                const typeClass = type === 'error' ? 'log-error' :
-                    type === 'success' ? 'log-success' : '';
-
-                const logEntry = $('<div class="log-entry">')
-                    .append(`<span class="log-timestamp">${timestamp}</span>`)
-                    .append(`<span class="${typeClass}">${message}</span>`);
-
-                $('#logContainer').prepend(logEntry);
-                $('#logContainer').scrollTop(0);
-            }
-
-            // Add input field
-            function addInputField(container, className, placeholder) {
-                const fieldId = Date.now();
-                const field = $(`
+                    // Add input field
+                    function addInputField(container, className, placeholder) {
+                        const fieldId = Date.now();
+                        const field = $(`
                 <div class="input-group mb-2" id="field-${fieldId}">
                     <input type="text" class="form-control ${className}" placeholder="${placeholder}">
                     <button type="button" class="btn btn-outline-danger btn-remove">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
-            `);
+                        `);
 
-                container.append(field);
-                field.find('.btn-remove').click(function() {
-                    if (container.children().length > 1) {
-                        $(this).closest('.input-group').remove();
-                    } else {
-                        $(this).siblings('input').val('');
-                    }
-                });
-            }
-
-            // Initialize input fields
-            $('#addDx').click(() => addInputField($('#dxContainer'), 'dx-input', 'Data element ID'));
-            $('#addOu').click(() => addInputField($('#ouContainer'), 'ou-input', 'Org unit ID'));
-            $('#addPe').click(() => addInputField($('#peContainer'), 'pe-input', 'Period ID'));
-
-            // Load settings
-            function loadSettings() {
-                $.post('fetch_analytics.php', {
-                    action: 'get_settings'
-                }, function(response) {
-                    if (response.status === 'success') {
-                        // Update dropdown
-                        $('#settingsSelect').empty().append('<option value="" disabled selected>Select a setting</option>');
-                        response.data.forEach(setting => {
-                            $('#settingsSelect').append(`<option value="${setting.id}">${setting.name}</option>`);
+                        container.append(field);
+                        field.find('.btn-remove').click(function() {
+                            if (container.children().length > 1) {
+                                $(this).closest('.input-group').remove();
+                            } else {
+                                $(this).siblings('input').val('');
+                            }
                         });
+                    }
 
-                        // Update settings list
-                        $('#settingsList').empty();
-                        response.data.forEach(setting => {
-                            const item = $(`
+                    // Initialize input fields
+                    $('#addDx').click(() => addInputField($('#dxContainer'), 'dx-input', 'Data element ID'));
+                    $('#addOu').click(() => addInputField($('#ouContainer'), 'ou-input', 'Org unit ID'));
+                    $('#addPe').click(() => addInputField($('#peContainer'), 'pe-input', 'Period ID'));
+
+                    // Load settings
+                    function loadSettings() {
+                        $.post('fetch_analytics.php', {
+                            action: 'get_settings'
+                        }, function(response) {
+                            if (response.status === 'success') {
+                                // Update dropdown
+                                $('#settingsSelect').empty().append('<option value="" disabled selected>Select a setting</option>');
+                                response.data.forEach(setting => {
+                                    $('#settingsSelect').append(`<option value="${setting.id}">${setting.name}</option>`);
+                                });
+
+                                // Update settings list
+                                $('#settingsList').empty();
+                                response.data.forEach(setting => {
+                                    const item = $(`
                             <div class="col-md-6">
                                 <div class="setting-item">
                                     <h6>${setting.name}</h6>
@@ -1113,260 +1155,350 @@ if ($action) {
                                 </div>
                             </div>
                         `);
-                            $('#settingsList').append(item);
-                        });
-
-                        // Add edit handlers
-                        $('.edit-setting').click(function() {
-                            const id = $(this).data('id');
-                            const setting = response.data.find(s => s.id == id);
-
-                            if (setting) {
-                                $('#settingId').val(setting.id);
-                                $('#settingName').val(setting.name);
-
-                                // Clear and populate DX
-                                $('#dxContainer').empty();
-                                setting.dx.split(',').forEach(dx => {
-                                    if (dx) {
-                                        addInputField($('#dxContainer'), 'dx-input', 'Data element ID');
-                                        $('#dxContainer').find('.dx-input').last().val(dx);
-                                    }
+                                    $('#settingsList').append(item);
                                 });
 
-                                // Clear and populate OU
-                                $('#ouContainer').empty();
-                                setting.ou.split(',').forEach(ou => {
-                                    if (ou) {
-                                        addInputField($('#ouContainer'), 'ou-input', 'Org unit ID');
-                                        $('#ouContainer').find('.ou-input').last().val(ou);
+                                // Add edit handlers
+                                $('.edit-setting').click(function() {
+                                    const id = $(this).data('id');
+                                    const setting = response.data.find(s => s.id == id);
+
+                                    if (setting) {
+                                        $('#settingId').val(setting.id);
+                                        $('#settingName').val(setting.name);
+
+                                        // Clear and populate DX
+                                        $('#dxContainer').empty();
+                                        setting.dx.split(',').forEach(dx => {
+                                            if (dx) {
+                                                addInputField($('#dxContainer'), 'dx-input', 'Data element ID');
+                                                $('#dxContainer').find('.dx-input').last().val(dx);
+                                            }
+                                        });
+
+                                        // Clear and populate OU
+                                        $('#ouContainer').empty();
+                                        setting.ou.split(',').forEach(ou => {
+                                            if (ou) {
+                                                addInputField($('#ouContainer'), 'ou-input', 'Org unit ID');
+                                                $('#ouContainer').find('.ou-input').last().val(ou);
+                                            }
+                                        });
+
+                                        // Clear and populate PE
+                                        $('#peContainer').empty();
+                                        setting.pe.split(',').forEach(pe => {
+                                            if (pe) {
+                                                addInputField($('#peContainer'), 'pe-input', 'Period ID');
+                                                $('#peContainer').find('.pe-input').last().val(pe);
+                                            }
+                                        });
+
+                                        // Set other values
+                                        $('[name="display_property"]').val(setting.display_property);
+                                        $('[name="include_num_den"]').prop('checked', setting.include_num_den === '1');
+                                        $('[name="skip_meta"]').prop('checked', setting.skip_meta === '1');
+                                        $('[name="skip_data"]').prop('checked', setting.skip_data === '1');
+                                        $('[name="paging"]').prop('checked', setting.paging === '1');
+                                        $('[name="page_size"]').val(setting.page_size);
+
+                                        // Show update/delete buttons
+                                        $('#saveBtn').hide();
+                                        $('#updateBtn, #deleteBtn').show();
+
+                                        addLog(`Loaded setting: ${setting.name}`);
                                     }
                                 });
-
-                                // Clear and populate PE
-                                $('#peContainer').empty();
-                                setting.pe.split(',').forEach(pe => {
-                                    if (pe) {
-                                        addInputField($('#peContainer'), 'pe-input', 'Period ID');
-                                        $('#peContainer').find('.pe-input').last().val(pe);
-                                    }
-                                });
-
-                                // Set other values
-                                $('[name="display_property"]').val(setting.display_property);
-                                $('[name="include_num_den"]').prop('checked', setting.include_num_den === '1');
-                                $('[name="skip_meta"]').prop('checked', setting.skip_meta === '1');
-                                $('[name="skip_data"]').prop('checked', setting.skip_data === '1');
-                                $('[name="paging"]').prop('checked', setting.paging === '1');
-                                $('[name="page_size"]').val(setting.page_size);
-
-                                // Show update/delete buttons
-                                $('#saveBtn').hide();
-                                $('#updateBtn, #deleteBtn').show();
-
-                                addLog(`Loaded setting: ${setting.name}`);
                             }
+                        }, 'json');
+                    }
+
+                    // Load settings on page load
+                    loadSettings();
+
+                    // Form submission
+                    $('#settingForm').submit(function(e) {
+                        e.preventDefault();
+
+                        const formData = {
+                            action: 'save_setting',
+                            name: $('#settingName').val(),
+                            dx: $('.dx-input').map((i, el) => $(el).val()).get(),
+                            ou: $('.ou-input').map((i, el) => $(el).val()).get(),
+                            pe: $('.pe-input').map((i, el) => $(el).val()).get(),
+                            display_property: $('[name="display_property"]').val(),
+                            include_num_den: $('[name="include_num_den"]').prop('checked') ? 1 : 0,
+                            skip_meta: $('[name="skip_meta"]').prop('checked') ? 1 : 0,
+                            skip_data: $('[name="skip_data"]').prop('checked') ? 1 : 0,
+                            paging: $('[name="paging"]').prop('checked') ? 1 : 0,
+                            page_size: $('[name="page_size"]').val()
+                        };
+
+                        $.post('fetch_analytics.php', formData, function(response) {
+                            if (response.status === 'success') {
+                                addLog(response.message, 'success');
+                                loadSettings();
+                                $('#settingForm')[0].reset();
+                                $('#dxContainer, #ouContainer, #peContainer').empty();
+                                addInputField($('#dxContainer'), 'dx-input', 'Data element ID');
+                                addInputField($('#ouContainer'), 'ou-input', 'Org unit ID');
+                                addInputField($('#peContainer'), 'pe-input', 'Period ID');
+                            } else {
+                                addLog(response.message, 'error');
+                            }
+                        }, 'json');
+                    });
+
+                    // Update button
+                    $('#updateBtn').click(function() {
+                        const id = $('#settingId').val();
+                        if (!id) return;
+
+                        const formData = {
+                            action: 'update_setting',
+                            id: id,
+                            name: $('#settingName').val(),
+                            dx: $('.dx-input').map((i, el) => $(el).val()).get(),
+                            ou: $('.ou-input').map((i, el) => $(el).val()).get(),
+                            pe: $('.pe-input').map((i, el) => $(el).val()).get(),
+                            display_property: $('[name="display_property"]').val(),
+                            include_num_den: $('[name="include_num_den"]').prop('checked') ? 1 : 0,
+                            skip_meta: $('[name="skip_meta"]').prop('checked') ? 1 : 0,
+                            skip_data: $('[name="skip_data"]').prop('checked') ? 1 : 0,
+                            paging: $('[name="paging"]').prop('checked') ? 1 : 0,
+                            page_size: $('[name="page_size"]').val()
+                        };
+
+                        $.post('fetch_analytics.php', formData, function(response) {
+                            if (response.status === 'success') {
+                                addLog(response.message, 'success');
+                                loadSettings();
+                                $('#settingForm')[0].reset();
+                                $('#dxContainer, #ouContainer, #peContainer').empty();
+                                addInputField($('#dxContainer'), 'dx-input', 'Data element ID');
+                                addInputField($('#ouContainer'), 'ou-input', 'Org unit ID');
+                                addInputField($('#peContainer'), 'pe-input', 'Period ID');
+                                $('#saveBtn').show();
+                                $('#updateBtn, #deleteBtn').hide();
+                            } else {
+                                addLog(response.message, 'error');
+                            }
+                        }, 'json');
+                    });
+
+                    // Delete button
+                    $('#deleteBtn').click(function() {
+                        if (!confirm('Are you sure you want to delete this setting and all its data?')) return;
+
+                        const id = $('#settingId').val();
+                        if (!id) return;
+
+                        $.post('fetch_analytics.php', {
+                            action: 'delete_setting',
+                            id: id
+                        }, function(response) {
+                            if (response.status === 'success') {
+                                addLog(response.message, 'success');
+                                loadSettings();
+                                $('#settingForm')[0].reset();
+                                $('#dxContainer, #ouContainer, #peContainer').empty();
+                                addInputField($('#dxContainer'), 'dx-input', 'Data element ID');
+                                addInputField($('#ouContainer'), 'ou-input', 'Org unit ID');
+                                addInputField($('#peContainer'), 'pe-input', 'Period ID');
+                                $('#saveBtn').show();
+                                $('#updateBtn, #deleteBtn').hide();
+                                dataTable.ajax.reload(); // Reload table after delete
+                            } else {
+                                addLog(response.message, 'error');
+                            }
+                        }, 'json');
+                    });
+
+                    // Fetch data button
+                    $('#fetchBtn').click(function() {
+                        const settingId = $('#settingsSelect').val();
+                        if (!settingId) {
+                            alert('Please select a setting first');
+                            return;
+                        }
+
+                        const settingName = $("#settingsSelect option:selected").text();
+
+                        if (!confirm('Fetch data for this setting? This may take some time.')) return;
+
+                        addLog(`Starting data fetch for setting: ${settingName}`);
+
+                        $.post('fetch_analytics.php', {
+                            action: 'fetch_data',
+                            id: settingId
+                        }, function(response) {
+                            if (response.status === 'success') {
+                                addLog(response.message, 'success');
+                                dataTable.ajax.reload();
+                            } else {
+                                addLog(response.message, 'error');
+                            }
+                        }, 'json').fail(function(xhr) {
+                            addLog('Fetch operation failed: ' + xhr.responseText, 'error');
                         });
-                    }
-                }, 'json');
-            }
+                    });
 
-            // Load settings on page load
-            loadSettings();
+                    // Load button
+                    $('#loadBtn').click(function() {
+                        const settingId = $('#settingsSelect').val();
+                        if (!settingId) {
+                            alert('Please select a setting first');
+                            return;
+                        }
 
-            // Form submission
-            $('#settingForm').submit(function(e) {
-                e.preventDefault();
+                        // Find the setting in the list and trigger edit
+                        $(`.edit-setting[data-id="${settingId}"]`).click();
+                        const settingName = $("#settingsSelect option:selected").text();
+                        addLog(`Loaded setting: ${settingName}`);
+                    });
 
-                const formData = {
-                    action: 'save_setting',
-                    name: $('#settingName').val(),
-                    dx: $('.dx-input').map((i, el) => $(el).val()).get(),
-                    ou: $('.ou-input').map((i, el) => $(el).val()).get(),
-                    pe: $('.pe-input').map((i, el) => $(el).val()).get(),
-                    display_property: $('[name="display_property"]').val(),
-                    include_num_den: $('[name="include_num_den"]').prop('checked') ? 1 : 0,
-                    skip_meta: $('[name="skip_meta"]').prop('checked') ? 1 : 0,
-                    skip_data: $('[name="skip_data"]').prop('checked') ? 1 : 0,
-                    paging: $('[name="paging"]').prop('checked') ? 1 : 0,
-                    page_size: $('[name="page_size"]').val()
-                };
+                    // Delete data buttons
+                    $('#deleteAllBtn').click(function() {
+                        const settingId = $('#settingsSelect').val();
+                        if (!settingId) {
+                            alert('Please select a setting first');
+                            return;
+                        }
 
-                $.post('fetch_analytics.php', formData, function(response) {
-                    if (response.status === 'success') {
-                        addLog(response.message, 'success');
-                        loadSettings();
-                        $('#settingForm')[0].reset();
-                        $('#dxContainer, #ouContainer, #peContainer').empty();
-                        addInputField($('#dxContainer'), 'dx-input', 'Data element ID');
-                        addInputField($('#ouContainer'), 'ou-input', 'Org unit ID');
-                        addInputField($('#peContainer'), 'pe-input', 'Period ID');
-                    } else {
-                        addLog(response.message, 'error');
-                    }
-                }, 'json');
-            });
+                        const settingName = $("#settingsSelect option:selected").text();
 
-            // Update button
-            $('#updateBtn').click(function() {
-                const id = $('#settingId').val();
-                if (!id) return;
+                        if (!confirm('Delete ALL data for this setting?')) return;
 
-                const formData = {
-                    action: 'update_setting',
-                    id: id,
-                    name: $('#settingName').val(),
-                    dx: $('.dx-input').map((i, el) => $(el).val()).get(),
-                    ou: $('.ou-input').map((i, el) => $(el).val()).get(),
-                    pe: $('.pe-input').map((i, el) => $(el).val()).get(),
-                    display_property: $('[name="display_property"]').val(),
-                    include_num_den: $('[name="include_num_den"]').prop('checked') ? 1 : 0,
-                    skip_meta: $('[name="skip_meta"]').prop('checked') ? 1 : 0,
-                    skip_data: $('[name="skip_data"]').prop('checked') ? 1 : 0,
-                    paging: $('[name="paging"]').prop('checked') ? 1 : 0,
-                    page_size: $('[name="page_size"]').val()
-                };
+                        $.post('fetch_analytics.php', {
+                            action: 'delete_data',
+                            id: settingId,
+                            type: 'all'
+                        }, function(response) {
+                            if (response.status === 'success') {
+                                addLog(`Deleted all data for: ${settingName}`, 'success');
+                                dataTable.ajax.reload();
+                            } else {
+                                addLog(response.message, 'error');
+                            }
+                        }, 'json');
+                    });
 
-                $.post('fetch_analytics.php', formData, function(response) {
-                    if (response.status === 'success') {
-                        addLog(response.message, 'success');
-                        loadSettings();
-                        $('#settingForm')[0].reset();
-                        $('#dxContainer, #ouContainer, #peContainer').empty();
-                        addInputField($('#dxContainer'), 'dx-input', 'Data element ID');
-                        addInputField($('#ouContainer'), 'ou-input', 'Org unit ID');
-                        addInputField($('#peContainer'), 'pe-input', 'Period ID');
-                        $('#saveBtn').show();
-                        $('#updateBtn, #deleteBtn').hide();
-                    } else {
-                        addLog(response.message, 'error');
-                    }
-                }, 'json');
-            });
+                    $('#deleteNonNullBtn').click(function() {
+                        const settingId = $('#settingsSelect').val();
+                        if (!settingId) {
+                            alert('Please select a setting first');
+                            return;
+                        }
 
-            // Delete button
-            $('#deleteBtn').click(function() {
-                if (!confirm('Are you sure you want to delete this setting and all its data?')) return;
+                        const settingName = $("#settingsSelect option:selected").text();
 
-                const id = $('#settingId').val();
-                if (!id) return;
+                        if (!confirm('Delete all NON-NULL data for this setting?')) return;
 
-                $.post('fetch_analytics.php', {
-                    action: 'delete_setting',
-                    id: id
-                }, function(response) {
-                    if (response.status === 'success') {
-                        addLog(response.message, 'success');
-                        loadSettings();
-                        $('#settingForm')[0].reset();
-                        $('#dxContainer, #ouContainer, #peContainer').empty();
-                        addInputField($('#dxContainer'), 'dx-input', 'Data element ID');
-                        addInputField($('#ouContainer'), 'ou-input', 'Org unit ID');
-                        addInputField($('#peContainer'), 'pe-input', 'Period ID');
-                        $('#saveBtn').show();
-                        $('#updateBtn, #deleteBtn').hide();
-                        dataTable.ajax.reload(); // Reload table after delete
-                    } else {
-                        addLog(response.message, 'error');
-                    }
-                }, 'json');
-            });
+                        $.post('fetch_analytics.php', {
+                            action: 'delete_data',
+                            id: settingId,
+                            type: 'non_null'
+                        }, function(response) {
+                            if (response.status === 'success') {
+                                addLog(`Deleted non-null data for: ${settingName}`, 'success');
+                                dataTable.ajax.reload();
+                            } else {
+                                addLog(response.message, 'error');
+                            }
+                        }, 'json');
+                    });
 
-            // Fetch data button
-            $('#fetchBtn').click(function() {
-                const settingId = $('#settingsSelect').val();
-                if (!settingId) {
-                    alert('Please select a setting first');
-                    return;
-                }
+                    $('#previewBtn').click(function() {
+                        const settingId = $('#settingsSelect').val();
+                        if (!settingId) {
+                            alert('Please select a setting first');
+                            return;
+                        }
 
-                const settingName = $("#settingsSelect option:selected").text();
-
-                if (!confirm('Fetch data for this setting? This may take some time.')) return;
-
-                addLog(`Starting data fetch for setting: ${settingName}`);
-
-                $.post('fetch_analytics.php', {
-                    action: 'fetch_data',
-                    id: settingId
-                }, function(response) {
-                    if (response.status === 'success') {
-                        addLog(response.message, 'success');
+                        // Reload DataTable to show existing data
                         dataTable.ajax.reload();
-                    } else {
-                        addLog(response.message, 'error');
-                    }
-                }, 'json').fail(function(xhr) {
-                    addLog('Fetch operation failed: ' + xhr.responseText, 'error');
+                        addLog('Loaded existing data for preview');
+                    });
+
+                    // NEW: Fetch All Settings button functionality
+                    $('#fetchAllBtn').click(function() {
+                        if (!confirm('This will fetch data for ALL settings. It may take a long time. Continue?')) {
+                            return;
+                        }
+
+                        // Show progress UI
+                        $('#progressContainer').show();
+                        $('#progressBar').css('width', '0%');
+                        $('#progressText').text('Preparing to fetch...');
+                        $('#progressCount').text('0/0');
+
+                        // Get all settings
+                        $.post('fetch_analytics.php', {
+                            action: 'get_all_settings'
+                        }, function(response) {
+                            if (response.status !== 'success' || !response.data.length) {
+                                addLog('No settings found to fetch', 'error');
+                                $('#progressContainer').hide();
+                                return;
+                            }
+
+                            const settings = response.data;
+                            let currentIndex = 0;
+                            let successCount = 0;
+                            let errorCount = 0;
+
+                            // Update progress UI
+                            $('#progressCount').text(`0/${settings.length}`);
+
+                            // Function to process next setting
+                            function processNextSetting() {
+                                if (currentIndex >= settings.length) {
+                                    // Finished processing all settings
+                                    $('#progressContainer').hide();
+                                    addLog(`Finished fetching all settings. Success: ${successCount}, Errors: ${errorCount}`, 'success');
+                                    return;
+                                }
+
+                                const setting = settings[currentIndex];
+                                currentIndex++;
+
+                                // Update progress
+                                const percent = Math.round((currentIndex / settings.length) * 100);
+                                $('#progressBar').css('width', `${percent}%`);
+                                $('#progressText').text(`Fetching: ${setting.name}`);
+                                $('#progressCount').text(`${currentIndex}/${settings.length}`);
+
+                                addLog(`Starting fetch for setting: ${setting.name} (${currentIndex}/${settings.length})`);
+
+                                // Fetch data for this setting
+                                $.post('fetch_analytics.php', {
+                                    action: 'fetch_data',
+                                    id: setting.id
+                                }, function(response) {
+                                    if (response.status === 'success') {
+                                        addLog(`Success: ${response.message} for ${setting.name}`, 'success');
+                                        successCount++;
+                                    } else {
+                                        addLog(`Error for ${setting.name}: ${response.message}`, 'error');
+                                        errorCount++;
+                                    }
+
+                                    // Process next setting after short delay
+                                    setTimeout(processNextSetting, 300);
+                                }, 'json').fail(function(xhr) {
+                                    addLog(`Failed to fetch ${setting.name}: ${xhr.responseText}`, 'error');
+                                    errorCount++;
+                                    setTimeout(processNextSetting, 300);
+                                });
+                            }
+
+                            // Start processing
+                            processNextSetting();
+                        }, 'json');
+                    });
+
                 });
-            });
-
-            // Load button
-            $('#loadBtn').click(function() {
-                const settingId = $('#settingsSelect').val();
-                if (!settingId) {
-                    alert('Please select a setting first');
-                    return;
-                }
-
-                // Find the setting in the list and trigger edit
-                $(`.edit-setting[data-id="${settingId}"]`).click();
-                const settingName = $("#settingsSelect option:selected").text();
-                addLog(`Loaded setting: ${settingName}`);
-            });
-
-            // Delete data buttons
-            $('#deleteAllBtn').click(function() {
-                const settingId = $('#settingsSelect').val();
-                if (!settingId) {
-                    alert('Please select a setting first');
-                    return;
-                }
-
-                const settingName = $("#settingsSelect option:selected").text();
-
-                if (!confirm('Delete ALL data for this setting?')) return;
-
-                $.post('fetch_analytics.php', {
-                    action: 'delete_data',
-                    id: settingId,
-                    type: 'all'
-                }, function(response) {
-                    if (response.status === 'success') {
-                        addLog(`Deleted all data for: ${settingName}`, 'success');
-                        dataTable.ajax.reload();
-                    } else {
-                        addLog(response.message, 'error');
-                    }
-                }, 'json');
-            });
-
-            $('#deleteNonNullBtn').click(function() {
-                const settingId = $('#settingsSelect').val();
-                if (!settingId) {
-                    alert('Please select a setting first');
-                    return;
-                }
-
-                const settingName = $("#settingsSelect option:selected").text();
-
-                if (!confirm('Delete all NON-NULL data for this setting?')) return;
-
-                $.post('fetch_analytics.php', {
-                    action: 'delete_data',
-                    id: settingId,
-                    type: 'non_null'
-                }, function(response) {
-                    if (response.status === 'success') {
-                        addLog(`Deleted non-null data for: ${settingName}`, 'success');
-                        dataTable.ajax.reload();
-                    } else {
-                        addLog(response.message, 'error');
-                    }
-                }, 'json');
-            });
-        });
-    </script>
+            </script>
 </body>
 
 </html>
