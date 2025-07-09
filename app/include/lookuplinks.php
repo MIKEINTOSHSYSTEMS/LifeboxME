@@ -656,6 +656,20 @@ function InitLookupLinks()
 			$lookupTableLinks["public.device_distributions"]["device_distribution_log.previous_quantity"] = array();
 		}
 		$lookupTableLinks["public.device_distributions"]["device_distribution_log.previous_quantity"]["edit"] = array("table" => "public.device_distribution_log", "field" => "previous_quantity", "page" => "edit");
+		if( !isset( $lookupTableLinks["aio_training_tracking"] ) ) {
+			$lookupTableLinks["aio_training_tracking"] = array();
+		}
+		if( !isset( $lookupTableLinks["aio_training_tracking"]["aio_training_tracking.gender"] )) {
+			$lookupTableLinks["aio_training_tracking"]["aio_training_tracking.gender"] = array();
+		}
+		$lookupTableLinks["aio_training_tracking"]["aio_training_tracking.gender"]["edit"] = array("table" => "aio_training_tracking", "field" => "gender", "page" => "edit");
+		if( !isset( $lookupTableLinks["aio_training_tracking"] ) ) {
+			$lookupTableLinks["aio_training_tracking"] = array();
+		}
+		if( !isset( $lookupTableLinks["aio_training_tracking"]["aio_training_tracking.country"] )) {
+			$lookupTableLinks["aio_training_tracking"]["aio_training_tracking.country"] = array();
+		}
+		$lookupTableLinks["aio_training_tracking"]["aio_training_tracking.country"]["edit"] = array("table" => "aio_training_tracking", "field" => "country", "page" => "edit");
 		if( !isset( $lookupTableLinks["Lifebox_DHIS2_OrgUnits"] ) ) {
 			$lookupTableLinks["Lifebox_DHIS2_OrgUnits"] = array();
 		}
@@ -824,6 +838,48 @@ function InitLookupLinks()
 			$lookupTableLinks["public.lifeboxme_dhis2_analytics_data"]["lifeboxme_dhis2_analytics_data.pe_relativeperiod"] = array();
 		}
 		$lookupTableLinks["public.lifeboxme_dhis2_analytics_data"]["lifeboxme_dhis2_analytics_data.pe_relativeperiod"]["edit"] = array("table" => "public.lifeboxme_dhis2_analytics_data", "field" => "pe_relativeperiod", "page" => "edit");
+		if( !isset( $lookupTableLinks["aio_training_tracking"] ) ) {
+			$lookupTableLinks["aio_training_tracking"] = array();
+		}
+		if( !isset( $lookupTableLinks["aio_training_tracking"]["aio_training_tracking_chart.gender"] )) {
+			$lookupTableLinks["aio_training_tracking"]["aio_training_tracking_chart.gender"] = array();
+		}
+		$lookupTableLinks["aio_training_tracking"]["aio_training_tracking_chart.gender"]["search"] = array("table" => "aio_training_tracking Chart", "field" => "gender", "page" => "search");
+		if( !isset( $lookupTableLinks["aio_training_tracking"] ) ) {
+			$lookupTableLinks["aio_training_tracking"] = array();
+		}
+		if( !isset( $lookupTableLinks["aio_training_tracking"]["aio_training_tracking_chart.country"] )) {
+			$lookupTableLinks["aio_training_tracking"]["aio_training_tracking_chart.country"] = array();
+		}
+		$lookupTableLinks["aio_training_tracking"]["aio_training_tracking_chart.country"]["search"] = array("table" => "aio_training_tracking Chart", "field" => "country", "page" => "search");
+		if( !isset( $lookupTableLinks["aio_training_tracking"] ) ) {
+			$lookupTableLinks["aio_training_tracking"] = array();
+		}
+		if( !isset( $lookupTableLinks["aio_training_tracking"]["aio_training_tracking_chart.training_name"] )) {
+			$lookupTableLinks["aio_training_tracking"]["aio_training_tracking_chart.training_name"] = array();
+		}
+		$lookupTableLinks["aio_training_tracking"]["aio_training_tracking_chart.training_name"]["search"] = array("table" => "aio_training_tracking Chart", "field" => "training_name", "page" => "search");
+		if( !isset( $lookupTableLinks["aio_training_tracking"] ) ) {
+			$lookupTableLinks["aio_training_tracking"] = array();
+		}
+		if( !isset( $lookupTableLinks["aio_training_tracking"]["aio_training_tracking_chart_by_sex.gender"] )) {
+			$lookupTableLinks["aio_training_tracking"]["aio_training_tracking_chart_by_sex.gender"] = array();
+		}
+		$lookupTableLinks["aio_training_tracking"]["aio_training_tracking_chart_by_sex.gender"]["search"] = array("table" => "aio_training_tracking Chart by sex", "field" => "gender", "page" => "search");
+		if( !isset( $lookupTableLinks["aio_training_tracking"] ) ) {
+			$lookupTableLinks["aio_training_tracking"] = array();
+		}
+		if( !isset( $lookupTableLinks["aio_training_tracking"]["aio_training_tracking_chart_by_sex.country"] )) {
+			$lookupTableLinks["aio_training_tracking"]["aio_training_tracking_chart_by_sex.country"] = array();
+		}
+		$lookupTableLinks["aio_training_tracking"]["aio_training_tracking_chart_by_sex.country"]["search"] = array("table" => "aio_training_tracking Chart by sex", "field" => "country", "page" => "search");
+		if( !isset( $lookupTableLinks["aio_training_tracking"] ) ) {
+			$lookupTableLinks["aio_training_tracking"] = array();
+		}
+		if( !isset( $lookupTableLinks["aio_training_tracking"]["aio_training_tracking_chart_by_sex.training_name"] )) {
+			$lookupTableLinks["aio_training_tracking"]["aio_training_tracking_chart_by_sex.training_name"] = array();
+		}
+		$lookupTableLinks["aio_training_tracking"]["aio_training_tracking_chart_by_sex.training_name"]["search"] = array("table" => "aio_training_tracking Chart by sex", "field" => "training_name", "page" => "search");
 }
 
 ?>

@@ -768,9 +768,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "142_1751999995";
+$projectBuildKey = "154_1751999995";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "142";
+$projectBuildNumber = "154";
 
 $mlang_messages = array();
 $mlang_charsets = array();
@@ -858,6 +858,8 @@ $tableCaptions["English"]["public_lifeboxme_dhis2_analytics_settings"] = "Lifebo
 $tableCaptions["English"]["public_lifeboxme_dhis2_analytics_data"] = "Lifeboxme Dhis2 Analytics Data";
 $tableCaptions["English"]["Dashboard"] = "Dashboard";
 $tableCaptions["English"]["Lifebox_DHIS2_Settings"] = "Lifebox DHIS2 Settings";
+$tableCaptions["English"]["aio_training_tracking_Chart"] = "Aio Training Tracking Chart";
+$tableCaptions["English"]["aio_training_tracking_Chart_by_sex"] = "aio_training_tracking Chart by sex";
 
 
 $globalEvents = new class_GlobalEvents;

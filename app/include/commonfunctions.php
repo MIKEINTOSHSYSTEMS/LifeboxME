@@ -327,6 +327,10 @@ function checkTableName($shortTName )
 		return true;
 	if ("lifeboxme_dhis2_analytics_data" == $shortTName )
 		return true;
+	if ("aio_training_tracking_chart" == $shortTName )
+		return true;
+	if ("aio_training_tracking_chart_by_sex" == $shortTName )
+		return true;
 	return false;
 }
 
@@ -935,6 +939,24 @@ function GetTablesList($pdfMode = false)
 	if( $tableAvailable ) {
 		$arr[]="public.lifeboxme_dhis2_analytics_data";
 	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("aio_training_tracking Chart");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="aio_training_tracking Chart";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("aio_training_tracking Chart by sex");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="aio_training_tracking Chart by sex";
+	}
 	return $arr;
 }
 
@@ -1006,6 +1028,8 @@ function GetTablesListWithoutSecurity()
 	$arr[]="public.lifeboxme_dhis2_dataitems";
 	$arr[]="public.lifeboxme_dhis2_analytics_settings";
 	$arr[]="public.lifeboxme_dhis2_analytics_data";
+	$arr[]="aio_training_tracking Chart";
+	$arr[]="aio_training_tracking Chart by sex";
 	return $arr;
 }
 
@@ -1049,6 +1073,10 @@ function GetFullFieldName($field, $table = "", $addAs = true, $connection = null
  */
 function GetChartType($shorttable)
 {
+	if($shorttable=="aio_training_tracking_chart")
+		return "2DColumn";
+	if($shorttable=="aio_training_tracking_chart_by_sex")
+		return "2DColumn";
 	return "";
 }
 
@@ -1939,6 +1967,16 @@ function GetUserPermissionsStatic( $table )
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.lifeboxme_dhis2_analytics_data" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="aio_training_tracking Chart" )
+	{
+//	default permissions
+		return "S".$extraPerm;
+	}
+	if( $table=="aio_training_tracking Chart by sex" )
 	{
 //	default permissions
 		return "ADESPI".$extraPerm;

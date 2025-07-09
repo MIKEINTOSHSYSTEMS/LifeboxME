@@ -502,6 +502,10 @@ class Chart
 			return true;
 		if("public.lifeboxme_dhis2_analytics_data" == $this->chrt_array['tables'][0])
 			return true;
+		if("aio_training_tracking" == $this->chrt_array['tables'][0])
+			return true;
+		if("aio_training_tracking" == $this->chrt_array['tables'][0])
+			return true;
 		return false;
 	}
 

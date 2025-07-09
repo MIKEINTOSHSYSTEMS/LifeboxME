@@ -1505,6 +1505,10 @@ class CrossTableWebReport
 			$isDB = true;
 		if("public.lifeboxme_dhis2_analytics_data" == $this->xml_array['tables'][0])
 			$isDB = true;
+		if("aio_training_tracking" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("aio_training_tracking" == $this->xml_array['tables'][0])
+			$isDB = true;
 		return $isDB;
 	}
 	

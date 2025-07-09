@@ -3702,6 +3702,10 @@ function fillProjectEntites()
 	$projectEntitiesReverse[ "lifeboxme_dhis2_analytics_settings" ] = "public.lifeboxme_dhis2_analytics_settings";
 	$projectEntities[ "public.lifeboxme_dhis2_analytics_data" ] = array( "url" => "lifeboxme_dhis2_analytics_data", "type" => 0 );
 	$projectEntitiesReverse[ "lifeboxme_dhis2_analytics_data" ] = "public.lifeboxme_dhis2_analytics_data";
+	$projectEntities[ "aio_training_tracking Chart" ] = array( "url" => "aio_training_tracking_chart", "type" => 9 );
+	$projectEntitiesReverse[ "aio_training_tracking_chart" ] = "aio_training_tracking Chart";
+	$projectEntities[ "aio_training_tracking Chart by sex" ] = array( "url" => "aio_training_tracking_chart_by_sex", "type" => 9 );
+	$projectEntitiesReverse[ "aio_training_tracking_chart_by_sex" ] = "aio_training_tracking Chart by sex";
 }
 
 function findTable( $table ) {

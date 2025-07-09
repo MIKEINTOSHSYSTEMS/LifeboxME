@@ -1,0 +1,1564 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
+	{BEGIN rtlCSS}
+	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
+	{END rtlCSS}
+	{BEGIN styleCSSFiles}
+	<link REL="stylesheet" href="{$stylepath}" type="text/css">
+	{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-chart"   
+			data-panel-bg
+		>
+	{BEGIN body}
+		<style>
+		{$containerCss}
+		</style>
+		<div class="r-vbar-page">
+			<div data-width="300px" data-fixed class="r-left clearfix {$leftbar_class}" >
+								<div data-location="left" id="form_left_{$pageid}" data-makeup="leftbar" {$form_left} data-pageid="{$pageid}">
+{BEGIN left_block}
+ 
+     
+         
+
+			<div data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell class="clearfix " data-itemid="logo" {$item_logo}>
+				{BEGIN logo_block}
+	<A data-itemtype="logo" data-itemid="logo" {$item_logo} data-pageid="{$pageid}" class="navbar-brand" href="{$home_link}" data-pageid="{$pageid}" {$logo_hiddenattr}>
+		{$logo}
+	</A>
+{END logo_block}
+				<button data-pageid="1" type="button" class="navbar-toggle collapsed" data-runner-toggle="collapse" data-target="[data-mobile-controlled]">	
+					<span class="sr-only">Toggle navigation</span>	
+					<span class="icon-bar"></span>					
+				</button>				
+			</div>
+		
+ 
+
+			<div class="clearfix " data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell data-itemid="expand_button" {$item_expand_button} data-topcell-item-type="expand_button" >
+				<span data-itemtype="expand_button" data-itemid="expand_button" {$item_expand_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Expand" class="btn btn-link   
+	" href="#" >
+					<span class="glyphicon glyphicon-triangle-right"></span>
+										</a>
+</span>
+			</div>
+		
+     
+     
+         
+
+			<div data-cellId="left_c1" data-pageid="{$pageid}" class="clearfix  r-ori-vert " data-itemtype="menu" data-itemid="menu" {$item_menu} data-pageid="{$pageid}">
+				{BEGIN menuitems_main}
+<ul data-itemtype="menu" data-itemid="menu" {$item_menu} data-pageid="{$pageid}"	class="r-menu nav menu-treelike" 
+	data-menulevel="1"
+>
+
+{BEGIN item_children1}
+<li class="
+	{$item_current}">
+<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline data-menu-top >
+	{$item_separator}
+	<span class="r-menu-link r-menu-expanded "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren2}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren2}
+	</span>
+		<span class="r-menu-collapsed">{$item_collicon}{$item_firstcap}</span>
+	</a>
+{BEGIN item_showchildren2}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="2">
+	{BEGIN item_children2}
+		{BEGIN item_menulink2}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren2}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren2}
+	</span>
+	</a>
+			{BEGIN item_showchildren3}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="3">
+	{BEGIN item_children3}
+		{BEGIN item_menulink3}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren3}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren3}
+	</span>
+	</a>
+			{BEGIN item_showchildren4}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="4">
+	{BEGIN item_children4}
+		{BEGIN item_menulink4}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren4}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren4}
+	</span>
+	</a>
+			{BEGIN item_showchildren5}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="5">
+	{BEGIN item_children5}
+		{BEGIN item_menulink5}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren5}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren5}
+	</span>
+	</a>
+					</li>
+		{END item_menulink5}
+	{END item_children5}
+</ul>
+{END item_showchildren5}
+		</li>
+		{END item_menulink4}
+	{END item_children4}
+</ul>
+{END item_showchildren4}
+		</li>
+		{END item_menulink3}
+	{END item_children3}
+</ul>
+{END item_showchildren3}
+		</li>
+		{END item_menulink2}
+	{END item_children2}
+</ul>
+{END item_showchildren2}
+</li>
+{END item_children1}
+</ul>
+{END menuitems_main}
+			</div>
+		
+ 
+
+			<div class="clearfix  r-ori-vert" data-cellId="left_c1" data-pageid="{$pageid}" data-itemid="filter_panel" {$item_filter_panel} data-topcell-item-type="filter_panel" >
+				<div data-itemtype="filter_panel" data-itemid="filter_panel" {$item_filter_panel} data-pageid="{$pageid}">
+	<div class="filterPanelContainer {$filterPanelStateClass}" 
+			>
+	<!-- Begin Filter panel content -->
+
+
+
+
+
+
+{BEGIN filter_control_gender}
+
+	<div class="panel panel-info filter-field filter-gender-container">
+		<div class="panel-heading filter-expander">
+													<span class="filter-indicator glyphicon glyphicon-triangle-bottom"></span>
+
+		
+			{BEGIN clearLink_gender}
+			<a href="#" class="filter-clear filter-clear-gender" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_gender}
+			{$label aio_training_tracking_Chart gender }		</div>
+		<ul class="list-group">
+					{BEGIN filterCtrlBlock_gender}
+		<li class="list-group-item filter-values filter-values-gender {$collapsedClass_gender} {$visibilityClass_gender}">
+			{$gender_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_gender}
+
+			{BEGIN filter_button_showmore_gender}
+		<li class="list-group-item filter-show-more {$collapsedClass_gender} {$showMoreBtnClass_gender}">
+			<a class="filter-show-more-link filterShowMore_gender" href="#">{$show_n_more_gender}</a>
+		</li>
+		{END filter_button_showmore_gender}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_gender}
+
+
+
+
+
+
+{BEGIN filter_control_quarter}
+
+	<div class="panel panel-info filter-field filter-quarter-container">
+		<div class="panel-heading filter-expander">
+													<span class="filter-indicator glyphicon glyphicon-triangle-bottom"></span>
+
+		
+			{BEGIN clearLink_quarter}
+			<a href="#" class="filter-clear filter-clear-quarter" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_quarter}
+			{$label aio_training_tracking_Chart quarter }		</div>
+		<ul class="list-group">
+					{BEGIN filterCtrlBlock_quarter}
+		<li class="list-group-item filter-values filter-values-quarter {$collapsedClass_quarter} {$visibilityClass_quarter}">
+			{$quarter_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_quarter}
+
+			{BEGIN filter_button_showmore_quarter}
+		<li class="list-group-item filter-show-more {$collapsedClass_quarter} {$showMoreBtnClass_quarter}">
+			<a class="filter-show-more-link filterShowMore_quarter" href="#">{$show_n_more_quarter}</a>
+		</li>
+		{END filter_button_showmore_quarter}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_quarter}
+
+
+
+
+
+
+{BEGIN filter_control_training_lead}
+
+	<div class="panel panel-info filter-field filter-training_lead-container">
+		<div class="panel-heading filter-expander">
+													<span class="filter-indicator glyphicon glyphicon-triangle-bottom"></span>
+
+		
+			{BEGIN clearLink_training_lead}
+			<a href="#" class="filter-clear filter-clear-training_lead" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_training_lead}
+			{$label aio_training_tracking_Chart training_lead }		</div>
+		<ul class="list-group">
+					{BEGIN filterCtrlBlock_training_lead}
+		<li class="list-group-item filter-values filter-values-training_lead {$collapsedClass_training_lead} {$visibilityClass_training_lead}">
+			{$training_lead_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_training_lead}
+
+			{BEGIN filter_button_showmore_training_lead}
+		<li class="list-group-item filter-show-more {$collapsedClass_training_lead} {$showMoreBtnClass_training_lead}">
+			<a class="filter-show-more-link filterShowMore_training_lead" href="#">{$show_n_more_training_lead}</a>
+		</li>
+		{END filter_button_showmore_training_lead}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_training_lead}
+
+
+
+
+
+
+{BEGIN filter_control_training_language}
+
+	<div class="panel panel-info filter-field filter-training_language-container">
+		<div class="panel-heading filter-expander">
+													<span class="filter-indicator glyphicon glyphicon-triangle-bottom"></span>
+
+		
+			{BEGIN clearLink_training_language}
+			<a href="#" class="filter-clear filter-clear-training_language" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_training_language}
+			{$label aio_training_tracking_Chart training_language }		</div>
+		<ul class="list-group">
+					{BEGIN filterCtrlBlock_training_language}
+		<li class="list-group-item filter-values filter-values-training_language {$collapsedClass_training_language} {$visibilityClass_training_language}">
+			{$training_language_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_training_language}
+
+			{BEGIN filter_button_showmore_training_language}
+		<li class="list-group-item filter-show-more {$collapsedClass_training_language} {$showMoreBtnClass_training_language}">
+			<a class="filter-show-more-link filterShowMore_training_language" href="#">{$show_n_more_training_language}</a>
+		</li>
+		{END filter_button_showmore_training_language}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_training_language}
+
+
+
+
+
+
+{BEGIN filter_control_training_approach}
+
+	<div class="panel panel-info filter-field filter-training_approach-container">
+		<div class="panel-heading filter-expander">
+													<span class="filter-indicator glyphicon glyphicon-triangle-bottom"></span>
+
+		
+			{BEGIN clearLink_training_approach}
+			<a href="#" class="filter-clear filter-clear-training_approach" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_training_approach}
+			{$label aio_training_tracking_Chart training_approach }		</div>
+		<ul class="list-group">
+					{BEGIN filterCtrlBlock_training_approach}
+		<li class="list-group-item filter-values filter-values-training_approach {$collapsedClass_training_approach} {$visibilityClass_training_approach}">
+			{$training_approach_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_training_approach}
+
+			{BEGIN filter_button_showmore_training_approach}
+		<li class="list-group-item filter-show-more {$collapsedClass_training_approach} {$showMoreBtnClass_training_approach}">
+			<a class="filter-show-more-link filterShowMore_training_approach" href="#">{$show_n_more_training_approach}</a>
+		</li>
+		{END filter_button_showmore_training_approach}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_training_approach}
+
+
+
+
+
+
+{BEGIN filter_control_training_type}
+
+	<div class="panel panel-info filter-field filter-training_type-container">
+		<div class="panel-heading filter-expander">
+													<span class="filter-indicator glyphicon glyphicon-triangle-bottom"></span>
+
+		
+			{BEGIN clearLink_training_type}
+			<a href="#" class="filter-clear filter-clear-training_type" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_training_type}
+			{$label aio_training_tracking_Chart training_type }		</div>
+		<ul class="list-group">
+					{BEGIN filterCtrlBlock_training_type}
+		<li class="list-group-item filter-values filter-values-training_type {$collapsedClass_training_type} {$visibilityClass_training_type}">
+			{$training_type_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_training_type}
+
+			{BEGIN filter_button_showmore_training_type}
+		<li class="list-group-item filter-show-more {$collapsedClass_training_type} {$showMoreBtnClass_training_type}">
+			<a class="filter-show-more-link filterShowMore_training_type" href="#">{$show_n_more_training_type}</a>
+		</li>
+		{END filter_button_showmore_training_type}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_training_type}
+
+
+
+
+
+
+{BEGIN filter_control_partners}
+
+	<div class="panel panel-info filter-field filter-partners-container">
+		<div class="panel-heading filter-expander">
+													<span class="filter-indicator glyphicon glyphicon-triangle-bottom"></span>
+
+		
+			{BEGIN clearLink_partners}
+			<a href="#" class="filter-clear filter-clear-partners" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_partners}
+			{$label aio_training_tracking_Chart partners }		</div>
+		<ul class="list-group">
+					{BEGIN filterCtrlBlock_partners}
+		<li class="list-group-item filter-values filter-values-partners {$collapsedClass_partners} {$visibilityClass_partners}">
+			{$partners_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_partners}
+
+			{BEGIN filter_button_showmore_partners}
+		<li class="list-group-item filter-show-more {$collapsedClass_partners} {$showMoreBtnClass_partners}">
+			<a class="filter-show-more-link filterShowMore_partners" href="#">{$show_n_more_partners}</a>
+		</li>
+		{END filter_button_showmore_partners}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_partners}
+
+
+
+
+
+
+{BEGIN filter_control_program}
+
+	<div class="panel panel-info filter-field filter-program-container">
+		<div class="panel-heading filter-expander">
+													<span class="filter-indicator glyphicon glyphicon-triangle-bottom"></span>
+
+		
+			{BEGIN clearLink_program}
+			<a href="#" class="filter-clear filter-clear-program" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_program}
+			{$label aio_training_tracking_Chart program }		</div>
+		<ul class="list-group">
+					{BEGIN filterCtrlBlock_program}
+		<li class="list-group-item filter-values filter-values-program {$collapsedClass_program} {$visibilityClass_program}">
+			{$program_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_program}
+
+			{BEGIN filter_button_showmore_program}
+		<li class="list-group-item filter-show-more {$collapsedClass_program} {$showMoreBtnClass_program}">
+			<a class="filter-show-more-link filterShowMore_program" href="#">{$show_n_more_program}</a>
+		</li>
+		{END filter_button_showmore_program}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_program}
+
+
+
+
+
+
+{BEGIN filter_control_training_name}
+
+	<div class="panel panel-info filter-field filter-training_name-container">
+		<div class="panel-heading filter-expander">
+													<span class="filter-indicator glyphicon glyphicon-triangle-bottom"></span>
+
+		
+			{BEGIN clearLink_training_name}
+			<a href="#" class="filter-clear filter-clear-training_name" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_training_name}
+			{$label aio_training_tracking_Chart training_name }		</div>
+		<ul class="list-group">
+					{BEGIN filterCtrlBlock_training_name}
+		<li class="list-group-item filter-values filter-values-training_name {$collapsedClass_training_name} {$visibilityClass_training_name}">
+			{$training_name_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_training_name}
+
+			{BEGIN filter_button_showmore_training_name}
+		<li class="list-group-item filter-show-more {$collapsedClass_training_name} {$showMoreBtnClass_training_name}">
+			<a class="filter-show-more-link filterShowMore_training_name" href="#">{$show_n_more_training_name}</a>
+		</li>
+		{END filter_button_showmore_training_name}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_training_name}
+
+
+
+
+
+
+{BEGIN filter_control_facility}
+
+	<div class="panel panel-info filter-field filter-facility-container">
+		<div class="panel-heading filter-expander">
+													<span class="filter-indicator glyphicon glyphicon-triangle-bottom"></span>
+
+		
+			{BEGIN clearLink_facility}
+			<a href="#" class="filter-clear filter-clear-facility" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_facility}
+			{$label aio_training_tracking_Chart facility }		</div>
+		<ul class="list-group">
+					{BEGIN filterCtrlBlock_facility}
+		<li class="list-group-item filter-values filter-values-facility {$collapsedClass_facility} {$visibilityClass_facility}">
+			{$facility_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_facility}
+
+			{BEGIN filter_button_showmore_facility}
+		<li class="list-group-item filter-show-more {$collapsedClass_facility} {$showMoreBtnClass_facility}">
+			<a class="filter-show-more-link filterShowMore_facility" href="#">{$show_n_more_facility}</a>
+		</li>
+		{END filter_button_showmore_facility}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_facility}
+
+
+
+
+
+
+{BEGIN filter_control_country}
+
+	<div class="panel panel-info filter-field filter-country-container">
+		<div class="panel-heading filter-expander">
+													<span class="filter-indicator glyphicon glyphicon-triangle-bottom"></span>
+
+		
+			{BEGIN clearLink_country}
+			<a href="#" class="filter-clear filter-clear-country" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_country}
+			{$label aio_training_tracking_Chart country }		</div>
+		<ul class="list-group">
+					{BEGIN filterCtrlBlock_country}
+		<li class="list-group-item filter-values filter-values-country {$collapsedClass_country} {$visibilityClass_country}">
+			{$country_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_country}
+
+			{BEGIN filter_button_showmore_country}
+		<li class="list-group-item filter-show-more {$collapsedClass_country} {$showMoreBtnClass_country}">
+			<a class="filter-show-more-link filterShowMore_country" href="#">{$show_n_more_country}</a>
+		</li>
+		{END filter_button_showmore_country}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_country}
+
+
+
+
+
+
+{BEGIN filter_control_participant_role}
+
+	<div class="panel panel-info filter-field filter-participant_role-container">
+		<div class="panel-heading filter-expander">
+													<span class="filter-indicator glyphicon glyphicon-triangle-bottom"></span>
+
+		
+			{BEGIN clearLink_participant_role}
+			<a href="#" class="filter-clear filter-clear-participant_role" title="Clear">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_participant_role}
+			{$label aio_training_tracking_Chart participant_role }		</div>
+		<ul class="list-group">
+					{BEGIN filterCtrlBlock_participant_role}
+		<li class="list-group-item filter-values filter-values-participant_role {$collapsedClass_participant_role} {$visibilityClass_participant_role}">
+			{$participant_role_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_participant_role}
+
+			{BEGIN filter_button_showmore_participant_role}
+		<li class="list-group-item filter-show-more {$collapsedClass_participant_role} {$showMoreBtnClass_participant_role}">
+			<a class="filter-show-more-link filterShowMore_participant_role" href="#">{$show_n_more_participant_role}</a>
+		</li>
+		{END filter_button_showmore_participant_role}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_participant_role}
+
+
+
+	<!-- End Filter panel content -->
+	</div>
+</div>			</div>
+		
+    {END left_block}
+</div>				</div>
+			<div class="r-content-col" data-resize-left="leftbar">
+				<div data-resize-left="leftbar"  data-fixed class="r-topheader" data-resize-name="topbar">
+									{BEGIN supertop_block}
+<nav class="navbar navbar-default" 
+	data-location="supertop" id="form_supertop_{$pageid}" data-makeup="leftbar" {$form_supertop} data-pageid="{$pageid}" >
+			 
+							 
+				<span class="navbar-form  navbar-header" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="expand_menu_button" {$item_expand_menu_button} data-topcell-item-type="expand_menu_button" >
+				<span data-itemtype="expand_menu_button" data-itemid="expand_menu_button" {$item_expand_menu_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Show menu" class="btn-link   
+	 glyphicon glyphicon-menu-hamburger" href="#" >		
+				
+								</a>
+</span>
+			</span>
+		 
+				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="collapse_button" {$item_collapse_button} data-topcell-item-type="collapse_button" >
+				<span data-itemtype="collapse_button" data-itemid="collapse_button" {$item_collapse_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Collapse" class="btn-link   
+	 glyphicon glyphicon-triangle-left" href="#" >		
+				
+								</a>
+</span>
+			</span>
+		 
+				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="breadcrumb" {$item_breadcrumb} data-topcell-item-type="breadcrumb" >
+				{BEGIN breadcrumb}
+<ol class="breadcrumb" data-itemtype="breadcrumb" data-itemid="breadcrumb" {$item_breadcrumb} data-pageid="{$pageid}">
+<li ><a href="{$crumb_home_link}"><span class="glyphicon glyphicon-home"></span></a>{$crumb_dropdown}</li>
+{BEGIN crumb}
+  <li class="{$crumb_item_class}">
+{BEGIN crumb_title_link}
+	<a {$crumb_attrs}>{$crumb_title}</a>
+{END crumb_title_link}
+{BEGIN crumb_title_span}
+	<span {$crumb_attrs}>{$crumb_title}</span>
+{END crumb_title_span}	
+	{$crumb_dropdown}
+  </li>
+{END crumb}
+</ol>
+{END breadcrumb}			</span>
+							 
+							 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="simple_search" {$item_simple_search} data-topcell-item-type="simple_search" >
+				<span data-itemtype="simple_search" data-itemid="simple_search" {$item_simple_search} data-pageid="{$pageid}" class="form-group">
+
+<div  class="input-group">
+{BEGIN searchform_text}
+	<input type="search" class="form-control" {$searchfor_attrs} size="25">
+{END searchform_text}
+	<span class="input-group-btn">
+	{BEGIN searchform_showall}
+				<button class="btn btn-default" {$showAllCont_attrs} {$showallbutton_attrs} title="Show all">
+			<span class="glyphicon glyphicon-remove"></span>
+		</button>
+	{END searchform_showall}
+
+	{BEGIN searchform_search}
+	<button {$searchbutton_attrs} class="btn btn-primary" >
+		<span class="glyphicon glyphicon-search"></span>
+	</button>
+	{END searchform_search}
+	</span>
+</div>
+		
+</span>			</span>
+		 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="list_options" {$item_list_options} data-topcell-item-type="list_options" >
+				<span data-itemtype="list_options" data-itemid="list_options" {$item_list_options} data-pageid="{$pageid}" data-small data-button-item>
+	<span class="dropdown ">
+		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
+										<span class="glyphicon glyphicon-cog"></span>
+												<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+								<li data-itemtype="advsearch_link" data-itemid="advsearch_link" {$item_advsearch_link} data-pageid="{$pageid}" data-small >
+				<a   href="aio_training_tracking_chart_search.php{$stateLink_full}" {$advsearchlink_attrs}  title="" >
+				
+		Advanced search		
+		</a>
+	</li>
+							{BEGIN searchPanelTopButtons}
+	<li data-itemtype="show_search_panel" data-itemid="show_search_panel" {$item_show_search_panel} data-pageid="{$pageid}" data-small >
+				<a  id="showOptPanel{$id}"  title="" >
+				
+		Show search panel		
+		</a>
+	</li>
+{END searchPanelTopButtons}
+							{BEGIN searchPanelTopButtons}
+	<li data-itemtype="hide_search_panel" data-itemid="hide_search_panel" {$item_hide_search_panel} data-pageid="{$pageid}" data-small >
+				<a  id="hideOptPanel{$id}"  title="" >
+				
+		Hide search panel		
+		</a>
+	</li>
+{END searchPanelTopButtons}
+					</ul>
+	</span>
+</span>
+			</span>
+		 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="loginform_login" {$item_loginform_login} data-topcell-item-type="loginform_login" >
+				{BEGIN guestloginbutton}
+<span data-itemtype="loginform_login" data-itemid="loginform_login" {$item_loginform_login} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" href="#" {$guestloginlink_attrs} >
+							Login			</a>
+</span>
+{END guestloginbutton}
+			</span>
+		 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="username_button" {$item_username_button} data-topcell-item-type="username_button" >
+				{BEGIN loggedas_message}
+<span data-itemtype="username_button" data-itemid="username_button" {$item_username_button} data-pageid="{$pageid}" data-small data-button-item>
+	<span class="dropdown ">
+		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
+			{BEGIN userbutton_icon}							<span class="glyphicon glyphicon-user"></span>
+						{END userbutton_icon}{$userbutton_image}			{$username}			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+							{BEGIN userinfo_link}
+	<li data-itemtype="userinfo_link" data-itemid="userinfo_link" {$item_userinfo_link} data-pageid="{$pageid}" data-small >
+				<a  href="userinfo.php"  title="" >
+				
+		User Profile		
+		</a>
+	</li>
+{END userinfo_link}
+							{BEGIN logoutbutton}
+	<li data-itemtype="logout_link" data-itemid="logout_link" {$item_logout_link} data-pageid="{$pageid}" data-small >
+				<a  href="#" {$logoutlink_attrs}  title="" >
+				
+		Log out		
+		</a>
+	</li>
+{END logoutbutton}
+							{BEGIN adminarea_link}
+	<li data-itemtype="adminarea_link" data-itemid="adminarea_link" {$item_adminarea_link} data-pageid="{$pageid}" data-small >
+				<a  href="admin_rights_list.php"  title="" >
+				
+		Admin Area		
+		</a>
+	</li>
+{END adminarea_link}
+							{BEGIN changepwd_link}
+	<li data-itemtype="changepassword_link" data-itemid="changepassword_link" {$item_changepassword_link} data-pageid="{$pageid}" data-small >
+				<a  href="changepwd.php" {$changepwdlink_attrs} id="changePasswordButton{$id}"  title="" >
+				
+		Change password		
+		</a>
+	</li>
+{END changepwd_link}
+					</ul>
+	</span>
+</span>
+{END loggedas_message}
+			</span>
+								</nav>
+{END supertop_block}
+						{$locking}
+				</div>
+				<div class="r-body" data-resize-top="topbar" data-body-width="standard">
+					{$header}
+					<div class="r-top">
+									{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="leftbar" {$form_top} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="top_c2" data-pageid="{$pageid}"	{$cell_top_c2}
+	class=" r-ori-vert			col-md-12
+	
+">
+		 
+		{BEGIN mastertable_block}
+<div data-itemtype="master_info" data-itemid="master_info" {$item_master_info} data-pageid="{$pageid}">
+	{$showmasterfile}
+</div>
+{END mastertable_block}		</div>					</div>
+			</div>		
+{END top_block}
+						</div>
+											<div class="r-grid"
+	>
+	{BEGIN grid_tabs}
+  <ul class="nav nav-tabs bsgrid_tabs">
+	{$grid_tabs_content}
+  </ul>
+{END grid_tabs}
+	<div class="panel panel-default"
+	>
+		<div class="panel-heading">
+							{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="leftbar" {$form_above-grid} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-12
+	
+">
+		{BEGIN firstAboveGridCell}
+		 
+		<!-- Begin Search panel content -->
+<div class="searchOptions panel panel-primary searchPanelContainer " {$srchOpt_attrs} data-itemtype="search_panel" data-itemid="search_panel" {$item_search_panel} data-pageid="{$pageid}"			data-horizontal
+	 >
+
+	<div class="panel-heading">
+		<div class="btn-group r-sp-addfield" id="addSearchFieldButton{$id}">
+			<button id="showHideControlChooseMenu{$id}" type="button" class="btn btn-default dropdown-toggle btn-sm )" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			Search in			<span class="caret"></span>
+			</button>
+		</div>
+
+
+		<div class="btn-group r-sp-options" id="searchPanelOptions{$id}">
+			<button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<span class="glyphicon glyphicon glyphicon-option-vertical"></span>
+			</button>
+			<ul class="dropdown-menu dropdown-left">
+				<li id="showHideSearchType{$id}" {$showHideCtrlsOpt_attrs}><a>Show options</a></li>
+				<li role="separator" class="divider"></li>
+				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAll" {$all_checkbox}><label for="radioAll"><span class="glyphicon">&nbsp;</span>all conditions</label></a></li>
+				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAny" {$any_checkbox}><label for="radioAny"><span class="glyphicon">&nbsp;</span>any condition</label></a></li>
+				<li role="separator" class="divider"></li>
+				<li><a class="close-button"><span class="glyphicon glyphicon-remove">&nbsp;</span>hide</a></li>
+			</ul>
+		</div>
+
+
+		</div>
+	<div class="panel-body controlsBlock" {$bottomSearchButt_attrs} >
+
+
+		
+		{BEGIN searchCtrlBlock}
+		<div class="srchPanelRow form-group" {$filterRow_attrs}>
+			<label>{$fLabel}</label>	{$delCtrlButt}
+				<span class="rnr-searchtype">{$searchtype}</span>
+				<span class="rnr-searchcontrol">{$searchcontrol}</span>
+				<span class="rnr-searchcontrol">{$searchcontrol1}</span>
+		</div>
+		{END searchCtrlBlock}
+																		{BEGIN searchCtrlBlock_attendance_percentage}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_attendance_percentage}" {$filterRow_attrs_attendance_percentage}>
+			<label>{$label aio_training_tracking_Chart attendance_percentage }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_attendance_percentage}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_attendance_percentage}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_attendance_percentage}</span>
+						</div>
+		{END searchCtrlBlock_attendance_percentage}
+																{BEGIN searchCtrlBlock_training_type}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_training_type}" {$filterRow_attrs_training_type}>
+			<label>{$label aio_training_tracking_Chart training_type }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_training_type}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_training_type}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_training_type}</span>
+						</div>
+		{END searchCtrlBlock_training_type}
+																{BEGIN searchCtrlBlock_training_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_training_name}" {$filterRow_attrs_training_name}>
+			<label>{$label aio_training_tracking_Chart training_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_training_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_training_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_training_name}</span>
+						</div>
+		{END searchCtrlBlock_training_name}
+																{BEGIN searchCtrlBlock_training_lead}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_training_lead}" {$filterRow_attrs_training_lead}>
+			<label>{$label aio_training_tracking_Chart training_lead }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_training_lead}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_training_lead}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_training_lead}</span>
+						</div>
+		{END searchCtrlBlock_training_lead}
+																{BEGIN searchCtrlBlock_training_language}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_training_language}" {$filterRow_attrs_training_language}>
+			<label>{$label aio_training_tracking_Chart training_language }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_training_language}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_training_language}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_training_language}</span>
+						</div>
+		{END searchCtrlBlock_training_language}
+																{BEGIN searchCtrlBlock_training_id}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_training_id}" {$filterRow_attrs_training_id}>
+			<label>{$label aio_training_tracking_Chart training_id }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_training_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_training_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_training_id}</span>
+						</div>
+		{END searchCtrlBlock_training_id}
+																{BEGIN searchCtrlBlock_training_approach}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_training_approach}" {$filterRow_attrs_training_approach}>
+			<label>{$label aio_training_tracking_Chart training_approach }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_training_approach}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_training_approach}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_training_approach}</span>
+						</div>
+		{END searchCtrlBlock_training_approach}
+																{BEGIN searchCtrlBlock_total_days}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_total_days}" {$filterRow_attrs_total_days}>
+			<label>{$label aio_training_tracking_Chart total_days }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_total_days}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_total_days}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_total_days}</span>
+						</div>
+		{END searchCtrlBlock_total_days}
+																{BEGIN searchCtrlBlock_title}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_title}" {$filterRow_attrs_title}>
+			<label>{$label aio_training_tracking_Chart title }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_title}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_title}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_title}</span>
+						</div>
+		{END searchCtrlBlock_title}
+																{BEGIN searchCtrlBlock_start_date}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_start_date}" {$filterRow_attrs_start_date}>
+			<label>{$label aio_training_tracking_Chart start_date }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_start_date}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_start_date}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_start_date}</span>
+						</div>
+		{END searchCtrlBlock_start_date}
+																{BEGIN searchCtrlBlock_quarter}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_quarter}" {$filterRow_attrs_quarter}>
+			<label>{$label aio_training_tracking_Chart quarter }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_quarter}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_quarter}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_quarter}</span>
+						</div>
+		{END searchCtrlBlock_quarter}
+																{BEGIN searchCtrlBlock_program}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_program}" {$filterRow_attrs_program}>
+			<label>{$label aio_training_tracking_Chart program }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_program}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_program}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_program}</span>
+						</div>
+		{END searchCtrlBlock_program}
+																{BEGIN searchCtrlBlock_pre_test_score}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_pre_test_score}" {$filterRow_attrs_pre_test_score}>
+			<label>{$label aio_training_tracking_Chart pre_test_score }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_pre_test_score}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_pre_test_score}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_pre_test_score}</span>
+						</div>
+		{END searchCtrlBlock_pre_test_score}
+																{BEGIN searchCtrlBlock_post_test_score}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_post_test_score}" {$filterRow_attrs_post_test_score}>
+			<label>{$label aio_training_tracking_Chart post_test_score }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_post_test_score}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_post_test_score}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_post_test_score}</span>
+						</div>
+		{END searchCtrlBlock_post_test_score}
+																{BEGIN searchCtrlBlock_phone}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_phone}" {$filterRow_attrs_phone}>
+			<label>{$label aio_training_tracking_Chart phone }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_phone}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_phone}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_phone}</span>
+						</div>
+		{END searchCtrlBlock_phone}
+																{BEGIN searchCtrlBlock_partners}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_partners}" {$filterRow_attrs_partners}>
+			<label>{$label aio_training_tracking_Chart partners }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_partners}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_partners}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_partners}</span>
+						</div>
+		{END searchCtrlBlock_partners}
+																{BEGIN searchCtrlBlock_participant_role}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_participant_role}" {$filterRow_attrs_participant_role}>
+			<label>{$label aio_training_tracking_Chart participant_role }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_participant_role}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_participant_role}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_participant_role}</span>
+						</div>
+		{END searchCtrlBlock_participant_role}
+																{BEGIN searchCtrlBlock_participant_id}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_participant_id}" {$filterRow_attrs_participant_id}>
+			<label>{$label aio_training_tracking_Chart participant_id }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_participant_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_participant_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_participant_id}</span>
+						</div>
+		{END searchCtrlBlock_participant_id}
+																{BEGIN searchCtrlBlock_middle_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_middle_name}" {$filterRow_attrs_middle_name}>
+			<label>{$label aio_training_tracking_Chart middle_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_middle_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_middle_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_middle_name}</span>
+						</div>
+		{END searchCtrlBlock_middle_name}
+																{BEGIN searchCtrlBlock_last_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_last_name}" {$filterRow_attrs_last_name}>
+			<label>{$label aio_training_tracking_Chart last_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_last_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_last_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_last_name}</span>
+						</div>
+		{END searchCtrlBlock_last_name}
+																{BEGIN searchCtrlBlock_gender}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_gender}" {$filterRow_attrs_gender}>
+			<label>{$label aio_training_tracking_Chart gender }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_gender}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_gender}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_gender}</span>
+						</div>
+		{END searchCtrlBlock_gender}
+																{BEGIN searchCtrlBlock_first_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_first_name}" {$filterRow_attrs_first_name}>
+			<label>{$label aio_training_tracking_Chart first_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_first_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_first_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_first_name}</span>
+						</div>
+		{END searchCtrlBlock_first_name}
+																{BEGIN searchCtrlBlock_facility}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_facility}" {$filterRow_attrs_facility}>
+			<label>{$label aio_training_tracking_Chart facility }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_facility}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_facility}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_facility}</span>
+						</div>
+		{END searchCtrlBlock_facility}
+																{BEGIN searchCtrlBlock_end_date}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_end_date}" {$filterRow_attrs_end_date}>
+			<label>{$label aio_training_tracking_Chart end_date }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_end_date}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_end_date}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_end_date}</span>
+						</div>
+		{END searchCtrlBlock_end_date}
+																{BEGIN searchCtrlBlock_email}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_email}" {$filterRow_attrs_email}>
+			<label>{$label aio_training_tracking_Chart email }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_email}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_email}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_email}</span>
+						</div>
+		{END searchCtrlBlock_email}
+																{BEGIN searchCtrlBlock_days_recorded}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_days_recorded}" {$filterRow_attrs_days_recorded}>
+			<label>{$label aio_training_tracking_Chart days_recorded }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_days_recorded}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_days_recorded}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_days_recorded}</span>
+						</div>
+		{END searchCtrlBlock_days_recorded}
+																{BEGIN searchCtrlBlock_days_attended}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_days_attended}" {$filterRow_attrs_days_attended}>
+			<label>{$label aio_training_tracking_Chart days_attended }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_days_attended}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_days_attended}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_days_attended}</span>
+						</div>
+		{END searchCtrlBlock_days_attended}
+																{BEGIN searchCtrlBlock_country}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_country}" {$filterRow_attrs_country}>
+			<label>{$label aio_training_tracking_Chart country }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_country}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_country}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_country}</span>
+						</div>
+		{END searchCtrlBlock_country}
+																{BEGIN searchCtrlBlock_ceu_points}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_ceu_points}" {$filterRow_attrs_ceu_points}>
+			<label>{$label aio_training_tracking_Chart ceu_points }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_ceu_points}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_ceu_points}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_ceu_points}</span>
+						</div>
+		{END searchCtrlBlock_ceu_points}
+																{BEGIN searchCtrlBlock_attendance_status}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_attendance_status}" {$filterRow_attrs_attendance_status}>
+			<label>{$label aio_training_tracking_Chart attendance_status }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_attendance_status}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_attendance_status}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_attendance_status}</span>
+						</div>
+		{END searchCtrlBlock_attendance_status}
+		
+
+	</div>
+
+	<div class="panel-footer bottomSearchButt" {$bottomSearchButt_attrs}>
+		<button class="btn btn-primary btn-sm" id="searchButton{$id}" {$searchbutton_attrs}>Search</button>
+
+				<button class="btn btn-default btn-sm" {$showAllCont_attrs} {$showallbutton_attrs}>Show all</button>
+	</div>
+</div>
+<!-- End Search panel content -->
+			{END firstAboveGridCell}	
+	</div>					</div>
+			 
+				<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c" data-pageid="{$pageid}"	{$cell_above-grid_c}
+	class=" r-ori-vert			col-md-12
+	
+">
+			</div>					</div>
+			</div>		
+{END above-grid_block}
+			</div>
+
+					{BEGIN grid_block}
+	{BEGIN message_block}
+<div data-grid-message data-pageid="{$pageid}" class="alert {$message_class}" role="alert" {$grid_message_attrs}>{$message}</div>
+{END message_block}<table class="r-fluid r-form" data-location="grid" id="form_grid_{$pageid}" data-makeup="leftbar" {$form_grid} data-pageid="{$pageid}" >
+						<tbody>
+			
+								<tr {$row_grid_0} >
+									<td 
+	class=" r-ori-vert			"
+			 
+	data-cellId="grid_c1" data-pageid="{$pageid}">
+ 
+<div data-itemtype="chart" data-itemid="chart" {$item_chart} data-pageid="{$pageid}" data-page="aio_training_tracking_chart_chart" >
+{$chart aio_training_tracking_chart 530px}
+</div>
+  </td>
+							</tr>
+					
+					</tbody>
+				</table>
+{END grid_block}
+	
+			{BEGIN below-grid_outerblock}
+		<div class="panel-footer">
+			{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="leftbar" {$form_below-grid} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class=" r-ori-vert			col-md-12
+	
+">
+			</div>					</div>
+			</div>		
+{END below-grid_block}
+		</div>
+	{END below-grid_outerblock}
+		</div>
+
+</div>
+
+
+
+
+										{$footer}
+				</div>
+			</div>
+			<div class="r-body-shadow">
+			</div>
+		</div>
+	{END body}
+	</body>
+</html>

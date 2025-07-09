@@ -566,6 +566,14 @@ function testAdvSearch($table)
 		{
 			return 1;
 		}
+		if($table=="aio_training_tracking Chart")
+		{
+			return 1;
+		}
+		if($table=="aio_training_tracking Chart by sex")
+		{
+			return 1;
+		}
 	}
 	elseif(is_wr_db())
 	{
@@ -1066,6 +1074,14 @@ function getCaptionTable($table)
 	if($table=="public.lifeboxme_dhis2_analytics_data")
 	{
 		return "Lifeboxme Dhis2 Analytics Data";
+	}
+	if($table=="aio_training_tracking Chart")
+	{
+		return "Aio Training Tracking Chart";
+	}
+	if($table=="aio_training_tracking Chart by sex")
+	{
+		return "aio_training_tracking Chart by sex";
 	}
 	return $table;
 }

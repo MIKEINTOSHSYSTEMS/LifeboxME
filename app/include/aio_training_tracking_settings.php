@@ -6,11 +6,11 @@ $tdataaio_training_tracking[".OwnerID"] = "";
 $tdataaio_training_tracking[".OriginalTable"] = "aio_training_tracking";
 
 
-$tdataaio_training_tracking[".pagesByType"] = my_json_decode( "{\"export\":[\"export\"],\"import\":[\"import\"],\"list\":[\"list\"],\"print\":[\"print\"],\"search\":[\"search\"]}" );
+$tdataaio_training_tracking[".pagesByType"] = my_json_decode( "{\"export\":[\"export\"],\"import\":[\"import\"],\"list\":[\"list\"],\"masterlist\":[\"masterlist\"],\"masterprint\":[\"masterprint\"],\"print\":[\"print\"],\"search\":[\"search\"]}" );
 $tdataaio_training_tracking[".originalPagesByType"] = $tdataaio_training_tracking[".pagesByType"];
-$tdataaio_training_tracking[".pages"] = types2pages( my_json_decode( "{\"export\":[\"export\"],\"import\":[\"import\"],\"list\":[\"list\"],\"print\":[\"print\"],\"search\":[\"search\"]}" ) );
+$tdataaio_training_tracking[".pages"] = types2pages( my_json_decode( "{\"export\":[\"export\"],\"import\":[\"import\"],\"list\":[\"list\"],\"masterlist\":[\"masterlist\"],\"masterprint\":[\"masterprint\"],\"print\":[\"print\"],\"search\":[\"search\"]}" ) );
 $tdataaio_training_tracking[".originalPages"] = $tdataaio_training_tracking[".pages"];
-$tdataaio_training_tracking[".defaultPages"] = my_json_decode( "{\"export\":\"export\",\"import\":\"import\",\"list\":\"list\",\"print\":\"print\",\"search\":\"search\"}" );
+$tdataaio_training_tracking[".defaultPages"] = my_json_decode( "{\"export\":\"export\",\"import\":\"import\",\"list\":\"list\",\"masterlist\":\"masterlist\",\"masterprint\":\"masterprint\",\"print\":\"print\",\"search\":\"search\"}" );
 $tdataaio_training_tracking[".originalDefaultPages"] = $tdataaio_training_tracking[".defaultPages"];
 
 //	field labels
@@ -40,7 +40,7 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelsaio_training_tracking["English"]["last_name"] = "Last Name";
 	$fieldToolTipsaio_training_tracking["English"]["last_name"] = "";
 	$placeHoldersaio_training_tracking["English"]["last_name"] = "";
-	$fieldLabelsaio_training_tracking["English"]["gender"] = "Sex";
+	$fieldLabelsaio_training_tracking["English"]["gender"] = "Gender";
 	$fieldToolTipsaio_training_tracking["English"]["gender"] = "";
 	$placeHoldersaio_training_tracking["English"]["gender"] = "";
 	$fieldLabelsaio_training_tracking["English"]["participant_role"] = "Role";
@@ -224,7 +224,7 @@ $tdataaio_training_tracking[".addPageEvents"] = false;
 $tdataaio_training_tracking[".isUseTimeForSearch"] = false;
 
 
-$tdataaio_training_tracking[".badgeColor"] = "E8926F";
+$tdataaio_training_tracking[".badgeColor"] = "e8926f";
 
 
 $tdataaio_training_tracking[".allSearchFields"] = array();
@@ -1084,7 +1084,7 @@ $tdataaio_training_tracking[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Text field");
+	$edata = array("EditFormat" => "Lookup wizard");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -1094,6 +1094,35 @@ $tdataaio_training_tracking[".hideMobileList"] = array();
 	
 	
 
+// Begin Lookup settings
+				$edata["LookupType"] = 2;
+	$edata["LookupTable"] = "aio_training_tracking";
+			$edata["autoCompleteFieldsOnEdit"] = 0;
+	$edata["autoCompleteFields"] = array();
+		$edata["LCType"] = 0;
+
+	
+			$edata["LookupUnique"] = true;
+
+	$edata["LinkField"] = "gender";
+	$edata["LinkFieldType"] = 0;
+	$edata["DisplayField"] = "gender";
+
+	
+
+	
+	$edata["LookupOrderBy"] = "";
+
+	
+	
+	
+	
+
+	
+	
+		$edata["SelectSize"] = 1;
+
+// End Lookup Settings
 
 
 	
@@ -1108,10 +1137,8 @@ $tdataaio_training_tracking[".hideMobileList"] = array();
 	
 	
 	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-		
+	
+	
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
@@ -1137,7 +1164,7 @@ $tdataaio_training_tracking[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "Equals";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
@@ -1356,7 +1383,7 @@ $tdataaio_training_tracking[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Text field");
+	$edata = array("EditFormat" => "Lookup wizard");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -1366,6 +1393,35 @@ $tdataaio_training_tracking[".hideMobileList"] = array();
 	
 	
 
+// Begin Lookup settings
+				$edata["LookupType"] = 2;
+	$edata["LookupTable"] = "aio_training_tracking";
+			$edata["autoCompleteFieldsOnEdit"] = 0;
+	$edata["autoCompleteFields"] = array();
+		$edata["LCType"] = 0;
+
+	
+			$edata["LookupUnique"] = true;
+
+	$edata["LinkField"] = "country";
+	$edata["LinkFieldType"] = 0;
+	$edata["DisplayField"] = "country";
+
+	
+
+	
+	$edata["LookupOrderBy"] = "";
+
+	
+	
+	
+	
+
+	
+	
+		$edata["SelectSize"] = 1;
+
+// End Lookup Settings
 
 
 	
@@ -1380,10 +1436,8 @@ $tdataaio_training_tracking[".hideMobileList"] = array();
 	
 	
 	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-		
+	
+	
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
@@ -1409,7 +1463,7 @@ $tdataaio_training_tracking[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "Equals";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
@@ -4478,6 +4532,66 @@ changeTextControlsToDate( "aio_training_tracking" );
 //if !@TABLE.bReportCrossTab
 
 $detailsTablesData["aio_training_tracking"] = array();
+//	aio_training_tracking Chart
+	
+	
+
+		$dIndex = 0;
+	$detailsParam = array();
+	$detailsParam["dDataSourceTable"]="aio_training_tracking Chart";
+		$detailsParam["dOriginalTable"] = "aio_training_tracking";
+
+
+
+			$detailsParam["dType"]=PAGE_CHART;
+
+		$detailsParam["dShortTable"] = "aio_training_tracking_chart";
+	$detailsParam["dCaptionTable"] = GetTableCaption("aio_training_tracking_Chart");
+	$detailsParam["masterKeys"] =array();
+	$detailsParam["detailKeys"] =array();
+
+
+		
+	$detailsTablesData["aio_training_tracking"][$dIndex] = $detailsParam;
+
+	
+		$detailsTablesData["aio_training_tracking"][$dIndex]["masterKeys"] = array();
+
+	$detailsTablesData["aio_training_tracking"][$dIndex]["masterKeys"][]="participant_id";
+
+				$detailsTablesData["aio_training_tracking"][$dIndex]["detailKeys"] = array();
+
+	$detailsTablesData["aio_training_tracking"][$dIndex]["detailKeys"][]="participant_id";
+//	aio_training_tracking Chart by sex
+	
+	
+
+		$dIndex = 1;
+	$detailsParam = array();
+	$detailsParam["dDataSourceTable"]="aio_training_tracking Chart by sex";
+		$detailsParam["dOriginalTable"] = "aio_training_tracking";
+
+
+
+			$detailsParam["dType"]=PAGE_CHART;
+
+		$detailsParam["dShortTable"] = "aio_training_tracking_chart_by_sex";
+	$detailsParam["dCaptionTable"] = GetTableCaption("aio_training_tracking_Chart_by_sex");
+	$detailsParam["masterKeys"] =array();
+	$detailsParam["detailKeys"] =array();
+
+
+		
+	$detailsTablesData["aio_training_tracking"][$dIndex] = $detailsParam;
+
+	
+		$detailsTablesData["aio_training_tracking"][$dIndex]["masterKeys"] = array();
+
+	$detailsTablesData["aio_training_tracking"][$dIndex]["masterKeys"][]="participant_id";
+
+				$detailsTablesData["aio_training_tracking"][$dIndex]["detailKeys"] = array();
+
+	$detailsTablesData["aio_training_tracking"][$dIndex]["detailKeys"][]="participant_id";
 //endif
 
 // tables which are master tables for current table (detail)

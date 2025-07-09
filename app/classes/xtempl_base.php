@@ -136,6 +136,16 @@ class XTempl_Base
 
 		if( !$hideAddedCharts ) //#9607 1. Temporary fix
 		{
+			$this->assign_function("aio_training_tracking_chart_chart","xt_showchart",
+			array(
+				"chartName"=>"aio_training_tracking_chart",
+				"table"=>"aio_training_tracking Chart",
+				"ctype"=>"2DColumn"));
+			$this->assign_function("aio_training_tracking_chart_by_sex_chart","xt_showchart",
+			array(
+				"chartName"=>"aio_training_tracking_chart_by_sex",
+				"table"=>"aio_training_tracking Chart by sex",
+				"ctype"=>"2DColumn"));
 		}
 
 

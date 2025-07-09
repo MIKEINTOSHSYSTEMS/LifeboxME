@@ -304,6 +304,8 @@ class ConnectionManager_Base
 		$connectionsIds["public.lifeboxme_dhis2_dataitems"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["public.lifeboxme_dhis2_analytics_settings"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["public.lifeboxme_dhis2_analytics_data"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["aio_training_tracking Chart"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["aio_training_tracking Chart by sex"] = "lifebox_mesystem_at_localhost";
 
 		$this->_tablesConnectionIds = &$connectionsIds;
 	}
