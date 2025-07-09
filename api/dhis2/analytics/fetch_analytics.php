@@ -572,6 +572,13 @@ if ($action) {
                     break;
                 }
 
+                // Add to handle actions
+            case 'get_settings_for_cron':
+                $settings = $db->query("SELECT id, name FROM lifeboxme_dhis2_analytics_settings")
+                    ->fetchAll(PDO::FETCH_ASSOC);
+                $response = ['status' => 'success', 'data' => $settings];
+                break;
+
                 $page = $_POST['start'] ?? 0;
                 $length = $_POST['length'] ?? 10;
                 $search = $_POST['search']['value'] ?? '';
@@ -641,134 +648,8 @@ if ($action) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="../../assets/css/style.css" rel="stylesheet">
     <style>
-        :root {
-            --primary: #078ca7;
-            --secondary: #3498db;
-            --success: #27ae60;
-            --light-bg: #f8f9fa;
-        }
-
-        body {
-            background-color: var(--light-bg);
-            padding-top: 20px;
-            padding-bottom: 50px;
-            color: #004477;
-        }
-
-        .container {
-            max-width: 100%;
-        }
-
-        .card {
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            border: none;
-        }
-
-        .card-header {
-            background-color: var(--primary);
-            color: white;
-            border-radius: 10px 10px 0 0 !important;
-            font-weight: 600;
-        }
-
-        .btn-primary {
-            background-color: var(--secondary);
-            border: none;
-        }
-
-        .btn-danger {
-            background-color: #e74c3c;
-        }
-
-        .log-container {
-            height: 300px;
-            overflow-y: auto;
-            background-color: #2c3e50;
-            color: #ecf0f1;
-            border-radius: 5px;
-            padding: 15px;
-            font-family: monospace;
-        }
-
-        .log-entry {
-            margin-bottom: 5px;
-            padding: 3px 0;
-            border-bottom: 1px solid #34495e;
-        }
-
-        .log-timestamp {
-            color: #3498db;
-            margin-right: 10px;
-        }
-
-        .log-error {
-            color: #ff6b6b;
-        }
-
-        .log-success {
-            color: #51cf66;
-        }
-
-        .tab-content {
-            padding: 20px 0;
-        }
-
-        .setting-item {
-            border-left: 4px solid var(--secondary);
-            margin-bottom: 15px;
-            padding: 10px 15px;
-            background-color: white;
-            border-radius: 0 5px 5px 0;
-        }
-
-        .form-check-label {
-            user-select: none;
-        }
-
-        /* Make table more compact */
-        .table th,
-        .table td {
-            padding: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        /* Highlight levels with colors */
-        .level-1 {
-            background-color: #e6f7ff;
-        }
-
-        .level-2 {
-            background-color: #fff7e6;
-        }
-
-        .level-3 {
-            background-color: #f0ffe6;
-        }
-
-        .level-4 {
-            background-color: #ffe6e6;
-        }
-
-        /* Add some spacing to table headers */
-        .table th {
-            white-space: nowrap;
-        }
-
-        /* NEW: Progress bar styles */
-        .progress-container {
-            margin: 15px 0;
-            display: none;
-        }
-
-        .progress-bar {
-            height: 20px;
-            background-color: #078ca7;
-            border-radius: 5px;
-            transition: width 0.3s;
-        }
     </style>
 </head>
 
