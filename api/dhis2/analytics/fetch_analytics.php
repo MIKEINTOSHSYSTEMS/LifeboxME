@@ -562,21 +562,128 @@ if ($action) {
 
             case 'get_data':
                 $id = $_POST['id'] ?? 0;
-                if (!$id) {
-                    $response = [
-                        'draw' => intval($_POST['draw'] ?? 1),
-                        'recordsTotal' => 0,
-                        'recordsFiltered' => 0,
-                        'data' => []
-                    ];
-                    break;
+
+                // Explicitly define columns to match DataTables configuration
+                $columns = [
+                    'id',
+                    'dx_name',
+                    'dx_shortname',
+                    'dx_displayname',
+                    'dx_dimensiontype',
+                    'ou_name',
+                    'ou_parent_id',
+                    'ou_parent_name',
+                    'ou_level_id',
+                    'ou_level_name',
+                    'period_id',
+                    'period_display_name',
+                    'pe_relativeperiod',
+                    'value',
+                    'fetched_at'
+                ];
+
+                $columnList = implode(',', $columns);
+
+                // Base queries - handle both "all data" and "specific setting"
+                $baseQuery = "SELECT $columnList FROM lifeboxme_dhis2_analytics_data";
+                $baseCountQuery = "SELECT COUNT(*) FROM lifeboxme_dhis2_analytics_data";
+
+                $conditions = [];
+                $params = [];
+                $searchParams = [];
+
+                if ($id > 0) {
+                    $conditions[] = 'setting_id = :id';
+                    $params[':id'] = $id;
                 }
 
-                // Add to handle actions
+                $page = $_POST['start'] ?? 0;
+                $length = $_POST['length'] ?? 10;
+                $search = $_POST['search']['value'] ?? '';
+
+                // Build search condition if search term exists
+                if ($search) {
+                    $searchTerm = "%$search%";
+                    $searchConditions = [];
+
+                    // Create search conditions for all columns
+                    foreach ($columns as $col) {
+                        $param = ":search_$col";
+                        $searchConditions[] = "$col::text ILIKE $param";
+                        $params[$param] = $searchTerm;
+                    }
+
+                    $conditions[] = '(' . implode(' OR ', $searchConditions) . ')';
+                }
+
+                // Build WHERE clause if we have conditions
+                $whereClause = '';
+                if (!empty($conditions)) {
+                    $whereClause = ' WHERE ' . implode(' AND ', $conditions);
+                }
+
+                $query = $baseQuery . $whereClause;
+                $countQuery = $baseCountQuery . $whereClause;
+
+                // Get total records
+                $stmt = $db->prepare($countQuery);
+                foreach ($params as $key => $value) {
+                    $stmt->bindValue($key, $value);
+                }
+                $stmt->execute();
+                $total = $stmt->fetchColumn();
+
+                // Apply ordering
+                $orderColumn = $_POST['order'][0]['column'] ?? 0;
+                $orderDir = $_POST['order'][0]['dir'] ?? 'asc';
+                $orderColumnName = $columns[$orderColumn];
+                $query .= " ORDER BY $orderColumnName " . strtoupper($orderDir);
+
+                // Apply pagination
+                $query .= " LIMIT :limit OFFSET :offset";
+                $params[':limit'] = $length;
+                $params[':offset'] = $page;
+
+                // Fetch data
+                $stmt = $db->prepare($query);
+                foreach ($params as $key => $value) {
+                    $paramType = is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR;
+                    $stmt->bindValue($key, $value, $paramType);
+                }
+                $stmt->execute();
+                $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                $response = [
+                    'draw' => intval($_POST['draw'] ?? 1),
+                    'recordsTotal' => intval($total),
+                    'recordsFiltered' => intval($total),
+                    'data' => $data
+                ];
+                break;
+
+            // Add to handle cron actions
             case 'get_settings_for_cron':
                 $settings = $db->query("SELECT id, name FROM lifeboxme_dhis2_analytics_settings")
                     ->fetchAll(PDO::FETCH_ASSOC);
                 $response = ['status' => 'success', 'data' => $settings];
+                break;
+
+            case 'purge_all_data':
+                try {
+                    $db->beginTransaction();
+                    // Delete all data
+                    $db->exec("DELETE FROM lifeboxme_dhis2_analytics_data");
+
+                    // Reset sequence
+                    $db->exec('ALTER SEQUENCE "public"."lifeboxme_dhis2_analytics_data_id_seq" MINVALUE 0;');
+                    $db->exec('SELECT setval(\'"public"."lifeboxme_dhis2_analytics_data_id_seq"\', 0, true);');
+
+                    $db->commit();
+                    $response = ['status' => 'success', 'message' => 'All data purged and sequence reset'];
+                } catch (Exception $e) {
+                    $db->rollBack();
+                    $response = ['status' => 'error', 'message' => $e->getMessage()];
+                }
                 break;
 
                 $page = $_POST['start'] ?? 0;
@@ -648,8 +755,134 @@ if ($action) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="../../assets/css/style.css" rel="stylesheet">
     <style>
+        :root {
+            --primary: #078ca7;
+            --secondary: #3498db;
+            --success: #27ae60;
+            --light-bg: #f8f9fa;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            padding-top: 20px;
+            padding-bottom: 50px;
+            color: #004477;
+        }
+
+        .container {
+            max-width: 100%;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            border: none;
+        }
+
+        .card-header {
+            background-color: var(--primary);
+            color: white;
+            border-radius: 10px 10px 0 0 !important;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary);
+            border: none;
+        }
+
+        .btn-danger {
+            background-color: #e74c3c;
+        }
+
+        .log-container {
+            height: 300px;
+            overflow-y: auto;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            border-radius: 5px;
+            padding: 15px;
+            font-family: monospace;
+        }
+
+        .log-entry {
+            margin-bottom: 5px;
+            padding: 3px 0;
+            border-bottom: 1px solid #34495e;
+        }
+
+        .log-timestamp {
+            color: #3498db;
+            margin-right: 10px;
+        }
+
+        .log-error {
+            color: #ff6b6b;
+        }
+
+        .log-success {
+            color: #51cf66;
+        }
+
+        .tab-content {
+            padding: 20px 0;
+        }
+
+        .setting-item {
+            border-left: 4px solid var(--secondary);
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            background-color: white;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .form-check-label {
+            user-select: none;
+        }
+
+        /* Make table more compact */
+        .table th,
+        .table td {
+            padding: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Highlight levels with colors */
+        .level-1 {
+            background-color: #e6f7ff;
+        }
+
+        .level-2 {
+            background-color: #fff7e6;
+        }
+
+        .level-3 {
+            background-color: #f0ffe6;
+        }
+
+        .level-4 {
+            background-color: #ffe6e6;
+        }
+
+        /* Add some spacing to table headers */
+        .table th {
+            white-space: nowrap;
+        }
+
+        /* NEW: Progress bar styles */
+        .progress-container {
+            margin: 15px 0;
+            display: none;
+        }
+
+        .progress-bar {
+            height: 20px;
+            background-color: #078ca7;
+            border-radius: 5px;
+            transition: width 0.3s;
+        }
     </style>
 </head>
 
@@ -824,6 +1057,9 @@ if ($action) {
                                     <button class="btn btn-warning" type="button" id="deleteNonNullBtn">
                                         <i class="fas fa-filter me-1"></i>Delete Non-Null
                                     </button>
+                                    <button class="btn btn-dark" type="button" id="purgeAllBtn">
+                                        <i class="fas fa-broom me-1"></i>Purge All Fetched Data
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -898,72 +1134,6 @@ if ($action) {
 
             <script>
                 $(document).ready(function() {
-                    // Initialize DataTable with more columns
-                    const dataTable = $('#dataTable').DataTable({
-                        processing: true,
-                        serverSide: true,
-                        ajax: {
-                            url: 'fetch_analytics.php',
-                            type: 'POST',
-                            data: function(d) {
-                                d.action = 'get_data';
-                                d.id = $('#settingsSelect').val() || 0;
-                            }
-                        },
-                        columns: [{
-                                data: 'id'
-                            },
-                            {
-                                data: 'dx_name'
-                            },
-                            {
-                                data: 'dx_shortname'
-                            },
-                            {
-                                data: 'dx_displayname'
-                            },
-                            {
-                                data: 'dx_dimensiontype'
-                            },
-                            {
-                                data: 'ou_name'
-                            },
-                            {
-                                data: 'ou_parent_id'
-                            },
-                            {
-                                data: 'ou_parent_name'
-                            },
-                            {
-                                data: 'ou_level_id'
-                            }, // New: OU Level ID
-                            {
-                                data: 'ou_level_name'
-                            }, // New: OU Level Name
-                            {
-                                data: 'period_id'
-                            },
-                            {
-                                data: 'period_display_name'
-                            },
-                            {
-                                data: 'pe_relativeperiod'
-                            },
-                            {
-                                data: 'value'
-                            },
-                            {
-                                data: 'fetched_at'
-                            }
-                        ],
-                        createdRow: function(row, data, dataIndex) {
-                            // Add level-specific class for row coloring
-                            if (data.ou_level_id) {
-                                $(row).addClass('level-' + data.ou_level_id);
-                            }
-                        }
-                    });
-
                     // Add log entry with type-based coloring
                     function addLog(message, type = 'info') {
                         const timestamp = new Date().toLocaleTimeString();
@@ -988,7 +1158,7 @@ if ($action) {
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
-                        `);
+            `);
 
                         container.append(field);
                         field.find('.btn-remove').click(function() {
@@ -999,11 +1169,6 @@ if ($action) {
                             }
                         });
                     }
-
-                    // Initialize input fields
-                    $('#addDx').click(() => addInputField($('#dxContainer'), 'dx-input', 'Data element ID'));
-                    $('#addOu').click(() => addInputField($('#ouContainer'), 'ou-input', 'Org unit ID'));
-                    $('#addPe').click(() => addInputField($('#peContainer'), 'pe-input', 'Period ID'));
 
                     // Load settings
                     function loadSettings() {
@@ -1093,6 +1258,78 @@ if ($action) {
                             }
                         }, 'json');
                     }
+
+                    // Initialize DataTable with more columns
+                    const dataTable = $('#dataTable').DataTable({
+                        processing: true,
+                        serverSide: true,
+                        ajax: {
+                            url: 'fetch_analytics.php',
+                            type: 'POST',
+                            data: function(d) {
+                                d.action = 'get_data';
+                                // Send selected setting ID if exists, otherwise send 0
+                                d.id = $('#settingsSelect').val() || 0;
+                            }
+                        },
+                        columns: [{
+                                data: 'id'
+                            },
+                            {
+                                data: 'dx_name'
+                            },
+                            {
+                                data: 'dx_shortname'
+                            },
+                            {
+                                data: 'dx_displayname'
+                            },
+                            {
+                                data: 'dx_dimensiontype'
+                            },
+                            {
+                                data: 'ou_name'
+                            },
+                            {
+                                data: 'ou_parent_id'
+                            },
+                            {
+                                data: 'ou_parent_name'
+                            },
+                            {
+                                data: 'ou_level_id'
+                            }, // New: OU Level ID
+                            {
+                                data: 'ou_level_name'
+                            }, // New: OU Level Name
+                            {
+                                data: 'period_id'
+                            },
+                            {
+                                data: 'period_display_name'
+                            },
+                            {
+                                data: 'pe_relativeperiod'
+                            },
+                            {
+                                data: 'value'
+                            },
+                            {
+                                data: 'fetched_at'
+                            }
+                        ],
+                        createdRow: function(row, data, dataIndex) {
+                            // Add level-specific class for row coloring
+                            if (data.ou_level_id) {
+                                $(row).addClass('level-' + data.ou_level_id);
+                            }
+                        }
+                    });
+
+                    // Initialize input fields
+                    $('#addDx').click(() => addInputField($('#dxContainer'), 'dx-input', 'Data element ID'));
+                    $('#addOu').click(() => addInputField($('#ouContainer'), 'ou-input', 'Org unit ID'));
+                    $('#addPe').click(() => addInputField($('#peContainer'), 'pe-input', 'Period ID'));
 
                     // Load settings on page load
                     loadSettings();
@@ -1290,18 +1527,12 @@ if ($action) {
                     });
 
                     $('#previewBtn').click(function() {
-                        const settingId = $('#settingsSelect').val();
-                        if (!settingId) {
-                            alert('Please select a setting first');
-                            return;
-                        }
-
-                        // Reload DataTable to show existing data
+                        // Always reload DataTable - no need for setting selection
                         dataTable.ajax.reload();
-                        addLog('Loaded existing data for preview');
+                        addLog('Loaded data for preview');
                     });
 
-                    // NEW: Fetch All Settings button functionality
+                    // Fetch All Settings button functionality
                     $('#fetchAllBtn').click(function() {
                         if (!confirm('This will fetch data for ALL settings. It may take a long time. Continue?')) {
                             return;
@@ -1378,6 +1609,24 @@ if ($action) {
                         }, 'json');
                     });
 
+                    // Purge all data button
+                    $('#purgeAllBtn').click(function() {
+                        if (!confirm('WARNING: This will delete ALL fetched data from the entire system and reset the ID counter. Are you absolutely sure?')) {
+                            return;
+                        }
+
+                        $.post('fetch_analytics.php', {
+                            action: 'purge_all_data'
+                        }, function(response) {
+                            if (response.status === 'success') {
+                                addLog(response.message, 'success');
+                                // Reload DataTable to show empty state
+                                dataTable.ajax.reload();
+                            } else {
+                                addLog(response.message, 'error');
+                            }
+                        }, 'json');
+                    });
                 });
             </script>
 </body>
