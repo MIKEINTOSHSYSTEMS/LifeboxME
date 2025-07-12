@@ -600,11 +600,11 @@ $globalSettings["useBuiltInMailer"] = false;
 
 $globalSettings["useCustomSMTPSettings"] = true;
 
-$globalSettings["strSMTPUser"] = "lifebox@cloud.merqconsultancy.org";
-$globalSettings["strSMTPServer"] = "cloud.merqconsultancy.org";
+$globalSettings["strSMTPUser"] = "mne@lifebox.org";
+$globalSettings["strSMTPServer"] = "smtp-mail.outlook.com";
 $globalSettings["strSMTPPort"] = "587";
-$globalSettings["strSMTPPassword"] = "LifeboxCloud";
-$globalSettings["strFromEmail"] = "lifebox@cloud.merqconsultancy.org";
+$globalSettings["strSMTPPassword"] = "G.817939771353uk";
+$globalSettings["strFromEmail"] = "mne@lifebox.org";
 
 $globalSettings["SMTPSecure"] = "starttls";
 //
@@ -769,9 +769,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "158_1751999995";
+$projectBuildKey = "159_1751999995";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "158";
+$projectBuildNumber = "159";
 
 $mlang_messages = array();
 $mlang_charsets = array();
