@@ -20,6 +20,7 @@ api/database/main/*.sql
 api/database/main/backup
 api/database/main/test.php
 api/database/test/
+api/mail/PHPMailer/
 .env
 **/note.txt
 *.log
