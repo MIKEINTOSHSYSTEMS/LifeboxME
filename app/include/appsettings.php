@@ -606,6 +606,7 @@ $globalSettings["strSMTPPort"] = "587";
 $globalSettings["strSMTPPassword"] = "LifeboxCloud";
 $globalSettings["strFromEmail"] = "lifebox@cloud.merqconsultancy.org";
 
+$globalSettings["SMTPSecure"] = "starttls";
 //
 
 /*

@@ -230,6 +230,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="form-group">
                 <label for="protocol">Protocol:</label>
                 <select id="protocol" name="protocol" class="rounded-lg">
+                    <option value="STARTTLS" <?php echo ($protocol === 'STARTTLS') ? 'selected' : ''; ?>>STARTTLS (Outlook for Port 587)</option>
                     <option value="tls" <?php echo ($protocol === 'tls') ? 'selected' : ''; ?>>TLS (Recommended for Port 587)</option>
                     <option value="ssl" <?php echo ($protocol === 'ssl') ? 'selected' : ''; ?>>SSL (Recommended for Port 465)</option>
                     <option value="none" <?php echo ($protocol === 'none') ? 'selected' : ''; ?>>None (No Encryption)</option>

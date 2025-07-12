@@ -192,8 +192,8 @@ function read_multiline($stream): string
         <input name="host" value="<?= htmlspecialchars($_POST['host'] ?? 'smtp-mail.outlook.com') ?>">
         <label>SMTP port</label>
         <input name="port" value="<?= htmlspecialchars($_POST['port'] ?? '587') ?>">
-        <label>Protocol (plain | tls | ssl)</label>
-        <input name="protocol" value="<?= htmlspecialchars($_POST['protocol'] ?? 'tls') ?>">
+        <label>Protocol (plain | starttls | tls | ssl)</label>
+        <input name="protocol" value="<?= htmlspecialchars($_POST['protocol'] ?? 'starttls') ?>">
         <label>SMTP username</label>
         <input name="user" value="<?= htmlspecialchars($_POST['user'] ?? 'mne@lifebox.org') ?>">
         <label>SMTP password</label>

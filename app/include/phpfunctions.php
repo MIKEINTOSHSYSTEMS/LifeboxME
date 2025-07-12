@@ -1800,6 +1800,7 @@ function runner_mail_smtp( $params )
 	}
 
 	$mail->SMTPSecure = GetGlobalData("SMTPSecure", "");
+	//$mail->SMTPSecure = GetGlobalData("SMTPSecure", "STARTTLS");
 
 	$mail->Subject = $params['subject'];
 
