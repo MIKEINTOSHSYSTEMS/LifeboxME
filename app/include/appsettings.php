@@ -601,7 +601,7 @@ $globalSettings["useBuiltInMailer"] = false;
 $globalSettings["useCustomSMTPSettings"] = true;
 
 $globalSettings["strSMTPUser"] = "mne@lifebox.org";
-$globalSettings["strSMTPServer"] = "smtp-mail.outlook.com";
+$globalSettings["strSMTPServer"] = "smtp.office365.com";
 $globalSettings["strSMTPPort"] = "587";
 $globalSettings["strSMTPPassword"] = "G.817939771353uk";
 $globalSettings["strFromEmail"] = "mne@lifebox.org";
