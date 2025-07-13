@@ -606,7 +606,7 @@ $globalSettings["strSMTPPort"] = "587";
 $globalSettings["strSMTPPassword"] = "LifeboxCloud";
 $globalSettings["strFromEmail"] = "lifebox@cloud.merqconsultancy.org";
 
-$globalSettings["SMTPSecure"] = "starttls";
+$globalSettings["SMTPSecure"] = "tls";
 //
 
 /*
@@ -769,9 +769,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "160_1751999995";
+$projectBuildKey = "162_1751999995";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "160";
+$projectBuildNumber = "162";
 
 $mlang_messages = array();
 $mlang_charsets = array();

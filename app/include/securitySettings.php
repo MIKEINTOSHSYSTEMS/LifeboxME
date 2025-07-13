@@ -1,4 +1,33 @@
 <?php
+// Read .env.dev file (located two directories up from this file)
+$envPath = __DIR__ . '/../../.env.dev';
+$clientId = '';
+$clientSecret = '';
+
+if (file_exists($envPath)) {
+    $lines = file($envPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        // Skip comments and empty lines
+        if (strpos(trim($line), '#') === 0 || trim($line) === '') {
+            continue;
+        }
+
+        // Parse key=value pairs
+        list($key, $value) = explode('=', $line, 2);
+        $key = trim($key);
+        $value = trim($value);
+
+        // Remove surrounding quotes if present
+        $value = trim($value, "'\"");
+
+        if ($key === 'clientId') {
+            $clientId = $value;
+        } elseif ($key === 'clientSecret') {
+            $clientSecret = $value;
+        }
+    }
+}
+
 $securitySettings_var = array( 'providers' => array( array( 'type' => '%db',
 'activationField' => 'active',
 'active' => true,
@@ -16,7 +45,20 @@ $securitySettings_var = array( 'providers' => array( array( 'type' => '%db',
 'table' => 'public.users' ),
 'userGroupField' => 'username',
 'usernameField' => 'username',
-'userpicField' => 'userpic' ) ),
+'userpicField' => 'userpic' ),
+array( 'scope' => 'openid profile email ',
+'nameClaim' => 'name',
+'emailClaim' => 'email',
+'logOut' => false,
+'active' => true,
+'clientId' => $clientId,  // Now from .env.dev
+'clientSecret' => $clientSecret,  // Now from .env.dev
+'code' => 'az',
+'configUrl' => 'https://login.microsoftonline.com/common/.well-known/openid-configuration',
+'label' => array( 'text' => 'AzureAD',
+'type' => 0 ),
+'name' => 'azure',
+'type' => '%azure' ) ),
 'sessionControl' => array( 'lifeTime' => 15,
 'sessionName' => 'LifeboxSA7lVH6MEdvwh',
 'JWTSecret' => 'KgDg763op72JzHiH0yQY',
@@ -235,7 +277,8 @@ $securitySettings_var = array( 'providers' => array( array( 'type' => '%db',
 'usernameField' => 'username',
 'userpicField' => 'userpic' ),
 'adAdminGroups' => array(  ),
-'showUserSource' => false,
-'dbProviderCodes' => array( '00' ),
+'showUserSource' => true,
+'dbProviderCodes' => array( '00',
+'az' ),
 'notifications' => array(  ) );
 ?>

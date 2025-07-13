@@ -185,7 +185,7 @@ function read_multiline($stream): string
 </head>
 
 <body>
-    <h2>SMTP Test Utility</h2>
+    <h2>Lifebox M&E | SMTP Test Utility</h2>
 
     <form method="post">
         <label>SMTP server</label>
