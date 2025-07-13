@@ -6,9 +6,9 @@ $tdatalifebox_dhis2_settings[".OwnerID"] = "";
 $tdatalifebox_dhis2_settings[".OriginalTable"] = "Lifebox_DHIS2_Settings";
 
 
-$tdatalifebox_dhis2_settings[".pagesByType"] = my_json_decode( "{\"export\":[\"export\"],\"import\":[\"import\"],\"list\":[\"dhis2_orgunits_fetcher\",\"dhis2_dataitems_fetcher\"],\"print\":[\"print\"]}" );
+$tdatalifebox_dhis2_settings[".pagesByType"] = my_json_decode( "{\"export\":[\"export\"],\"import\":[\"import\"],\"list\":[\"dhis2_orgunits_fetcher\",\"dhis2_automated_data_fetcher_cronjob\",\"dhis2_dataitems_fetcher\"],\"print\":[\"print\"]}" );
 $tdatalifebox_dhis2_settings[".originalPagesByType"] = $tdatalifebox_dhis2_settings[".pagesByType"];
-$tdatalifebox_dhis2_settings[".pages"] = types2pages( my_json_decode( "{\"export\":[\"export\"],\"import\":[\"import\"],\"list\":[\"dhis2_orgunits_fetcher\",\"dhis2_dataitems_fetcher\"],\"print\":[\"print\"]}" ) );
+$tdatalifebox_dhis2_settings[".pages"] = types2pages( my_json_decode( "{\"export\":[\"export\"],\"import\":[\"import\"],\"list\":[\"dhis2_orgunits_fetcher\",\"dhis2_automated_data_fetcher_cronjob\",\"dhis2_dataitems_fetcher\"],\"print\":[\"print\"]}" ) );
 $tdatalifebox_dhis2_settings[".originalPages"] = $tdatalifebox_dhis2_settings[".pages"];
 $tdatalifebox_dhis2_settings[".defaultPages"] = my_json_decode( "{\"export\":\"export\",\"import\":\"import\",\"list\":\"dhis2_orgunits_fetcher\",\"print\":\"print\"}" );
 $tdatalifebox_dhis2_settings[".originalDefaultPages"] = $tdatalifebox_dhis2_settings[".defaultPages"];

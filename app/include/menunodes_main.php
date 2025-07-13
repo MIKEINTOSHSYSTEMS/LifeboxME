@@ -1772,6 +1772,32 @@
 
 	$menuNodes[] = $menuNode;
 	$menuNode = array();
+	$menuNode["id"] = "93";
+	$menuNode["name"] = "DHIS2 Automated Data Fetcher CronJob";
+	$menuNode["href"] = "mypage.htm";
+	$menuNode["type"] = "Leaf";
+	$menuNode["table"] = "Lifebox_DHIS2_Settings";
+	$menuNode["style"] = "";
+	$menuNode["params"] = "";
+	$menuNode["parent"] = "79";
+	$menuNode["nameType"] = "Text";
+	$menuNode["linkType"] = "Internal";
+	$menuNode["pageType"] = strtolower("List");//
+	$menuNode["pageId"] = "dhis2_automated_data_fetcher_cronjob";
+	$menuNode["openType"] = "None";
+
+	$menuNode["icon"] = "fa-tasks";
+	$menuNode["iconType"] = "3";
+	$menuNode["iconShow"] = "1";
+
+		$menuNode["color"] = "";
+
+	$menuNode["title"] = "DHIS2 Automated Data Fetcher CronJob";
+
+
+
+	$menuNodes[] = $menuNode;
+	$menuNode = array();
 	$menuNode["id"] = "85";
 	$menuNode["name"] = "-------";
 	$menuNode["href"] = "";

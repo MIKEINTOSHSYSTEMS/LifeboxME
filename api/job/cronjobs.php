@@ -243,7 +243,7 @@ if ($action) {
                                 <li class="mb-2">Add this to your system's crontab:</li>
                                 <pre class="bg-dark text-white p-3 rounded">* * * * * /usr/bin/php <?= realpath(__DIR__) ?>/cron_runner.php</pre>
 
-                                <li class="mt-3">Create a <code>cron_runner.php</code> file in the same directory with this content:</li>
+                                <li class="mt-3">Make sure you have or Create a <code>cron_runner.php</code> file in the same directory with this content:</li>
                                 <pre class="bg-dark text-white p-3 rounded"><?= htmlspecialchars("<?php
 require __DIR__ . '/cron_runner_functions.php';
 \$runner = new CronRunner();
