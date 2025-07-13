@@ -182,8 +182,9 @@ Login into your account</span>
  
 {BEGIN signin_button}
 <span data-itemtype="login_button" data-itemid="login_button" {$item_login_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="" class="btn btn-primary   
+	<a type="button" title="" class="btn btn-success   
 	" {$loginlink_attrs} >
+					<span class="fa fa-sign-in"></span>
 							Sign in			</a>
 </span>
 {END signin_button}
@@ -196,28 +197,46 @@ Login into your account</span>
 <span data-itemtype="login_remind" data-itemid="login_remind" {$item_login_remind} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-info   
 	" {$forgotpasswordlink_attrs} href="remind.php" >
+					<span class="fa fa-key"></span>
 							Forgot password?			</a>
 </span>
 </td>
 							</tr>
 											<tr {$row_footer_1} >
 									<td 
-	class=" r-ori-vert			"
+	class="r-align-center r-ori-vert			"
 	colspan="2"		 
-	data-cellId="footer_c" data-pageid="{$pageid}">
+	data-cellId="footer_c6" data-pageid="{$pageid}">
+ 
+<span data-itemtype="text" data-itemid="text" {$item_text} data-pageid="{$pageid}" data-small > 
+	<p>
+</p></span>
 </td>
 							</tr>
 											<tr {$row_footer_2} >
 									<td 
+	class=" r-ori-vert			"
+			 
+	data-cellId="footer_c4" data-pageid="{$pageid}">
+ 
+<span data-itemtype="login_external" data-itemid="login_external" {$item_login_external} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="Using Lifebox.org Email" class="btn btn-primary   
+	" data-provider="az" >
+					<img src="{$file_url images/menuicons/microsoft-16.png}" />
+							{$mlp_push}{$mlparam provider text AzureAD}{mlang_message LOGIN_WITH}{$mlp_pop}			</a>
+</span>
+</td>
+									<td 
+	class="r-align-right r-ori-vert			"
+			 
+	data-cellId="footer_c5" data-pageid="{$pageid}">
+</td>
+							</tr>
+											<tr {$row_footer_3} >
+									<td 
 	class="r-align-center r-ori-vert			"
 	colspan="2"		 
 	data-cellId="footer_c3" data-pageid="{$pageid}">
- 
-<span data-itemtype="login_external" data-itemid="login_external" {$item_login_external} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="" class="btn btn-default   
-	" data-provider="az" >
-							{$mlp_push}{$mlparam provider text AzureAD}{mlang_message LOGIN_WITH}{$mlp_pop}			</a>
-</span>
 </td>
 							</tr>
 					
@@ -237,6 +256,7 @@ Login into your account</span>
 <span data-itemtype="loginform_register_link" data-itemid="loginform_register_link" {$item_loginform_register_link} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-warning   
 	" {$registerlink_attrs} href="register.php" >
+					<span class="fa fa-user-plus"></span>
 							Sign Up			</a>
 </span>
 </td>
