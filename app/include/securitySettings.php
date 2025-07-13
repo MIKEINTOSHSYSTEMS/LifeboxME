@@ -1,6 +1,8 @@
 <?php
 // Read .env.dev file (located two directories up from this file)
-$envPath = __DIR__ . '/../../.env.dev';
+//$envPath = __DIR__ . '/../../.env';
+//$envPath = __DIR__ . '/../../.env.dev';
+$envPath = __DIR__ . '/../../.env.prod';
 $clientId = '';
 $clientSecret = '';
 
