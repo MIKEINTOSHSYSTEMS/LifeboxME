@@ -177,9 +177,9 @@ if ($action) {
                 break;
 
             case 'delete_all':
-                $db->exec("TRUNCATE TABLE lifeboxme_cron_jobs RESTART IDENTITY");
-                $db->exec("TRUNCATE TABLE lifeboxme_cron_activity_log RESTART IDENTITY");
-                $response = ['status' => 'success', 'message' => 'All cron jobs deleted'];
+                $db->exec("TRUNCATE TABLE lifeboxme_cron_jobs RESTART IDENTITY CASCADE");
+                //$db->exec("TRUNCATE TABLE lifeboxme_cron_activity_log RESTART IDENTITY"); //no need since the above series will restart the identity sequence
+                $response = ['status' => 'success', 'message' => 'All cron jobs deleted, along with their related activity logs.'];
                 break;
 
             case 'get_crons':
@@ -453,7 +453,75 @@ function logActivity($db, $cronId, $message, $status = 'info')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
+    <!-- SweetAlert2 CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.9/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.9/dist/sweetalert2.min.js"></script>
+
     <style>
+        /* Custom styles from above sweet alert*/
+        .swal2-loader {
+            background-color: #4caf50;
+            border: 3px solid #ff9800;
+        }
+
+        .swal2-actions {
+            background-color: #04747407;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .swal2-confirm {
+            background-color: #079ca7;
+            border-color: #0056b3;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .swal2-confirm:hover {
+            background-color: #004747;
+            transform: scale(1.05);
+        }
+
+        .swal2-cancel {
+            background-color: #ff5722;
+            border-color: #e64a19;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .swal2-cancel:hover {
+            background-color: #e64a19;
+            transform: scale(1.05);
+        }
+
+        .swal2-title {
+            font-family: 'Arial', sans-serif;
+            color: #333333;
+            font-size: 1.8em;
+        }
+
+        .swal2-content {
+            font-family: 'Verdana', sans-serif;
+            color: #666666;
+            font-size: 1.2em;
+        }
+
+        .swal2-styled.swal2-confirm {
+            border: 0;
+            border-radius: .25em;
+            background: initial;
+            background-color: #079ca7;
+            color: #fff;
+            font-size: 1em;
+        }
+
+        /*End of Custom Styles for Sweet Alert */
         .status-badge {
             padding: 0.25rem 0.5rem;
             border-radius: 0.25rem;
@@ -1027,50 +1095,97 @@ require __DIR__ . '/cron_runner_functions.php';
                         if (res.status === 'success') {
                             loadCrons();
                         } else {
-                            alert(res.message || 'Error updating cron job');
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: res.message || 'Error updating cron job',
+                            });
                         }
                     });
                 });
 
+                // Delete cron job
                 $('.delete-cron').click(function() {
-                    if (!confirm('Are you sure you want to delete this cron job?')) return;
-
                     const id = $(this).data('id');
-                    $.post('cronjobs.php', {
-                        action: 'delete_cron',
-                        id: id
-                    }, function(res) {
-                        if (res.status === 'success') {
-                            loadCrons();
-                        } else {
-                            alert(res.message || 'Error deleting cron job');
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: 'Do you want to delete this cron job?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, delete it!',
+                        cancelButtonText: 'Cancel',
+                        reverseButtons: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.post('cronjobs.php', {
+                                action: 'delete_cron',
+                                id: id
+                            }, function(res) {
+                                if (res.status === 'success') {
+                                    loadCrons();
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Deleted',
+                                        text: 'Cron job deleted successfully.',
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Error',
+                                        text: res.message || 'Error deleting cron job',
+                                    });
+                                }
+                            });
                         }
                     });
                 });
 
+                // Test cron job
                 $('.test-cron').click(function() {
                     const id = $(this).data('id');
-                    if (!confirm('Run this cron job immediately?')) return;
+                    Swal.fire({
+                        title: 'Run Cron Job?',
+                        text: 'Do you want to run this cron job immediately?',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, run it!',
+                        cancelButtonText: 'Cancel',
+                        reverseButtons: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Store button reference
+                            const $button = $(this);
+                            const originalHtml = $button.html();
+                            $button.html('<i class="fas fa-spinner fa-spin"></i>');
 
-                    // Store button reference
-                    const $button = $(this);
-                    const originalHtml = $button.html();
-                    $button.html('<i class="fas fa-spinner fa-spin"></i>');
-
-                    $.post('cronjobs.php', {
-                        action: 'test_cron',
-                        id: id
-                    }, function(res) {
-                        if (res.status === 'success') {
-                            alert('Cron job executed successfully');
-                            loadActivityLogs();
-                        } else {
-                            alert('Error: ' + (res.message || 'Unknown error occurred'));
+                            $.post('cronjobs.php', {
+                                action: 'test_cron',
+                                id: id
+                            }, function(res) {
+                                if (res.status === 'success') {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Success',
+                                        text: 'Cron job executed successfully',
+                                    });
+                                    loadActivityLogs();
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Error',
+                                        text: 'Error: ' + (res.message || 'Unknown error occurred'),
+                                    });
+                                }
+                                $button.html(originalHtml);
+                            }).fail(function(xhr) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'Error: ' + (xhr.responseJSON?.message || 'Could not execute cron job'),
+                                });
+                                $button.html(originalHtml);
+                            });
                         }
-                        $button.html(originalHtml);
-                    }).fail(function(xhr) {
-                        alert('Error: ' + (xhr.responseJSON?.message || 'Could not execute cron job'));
-                        $button.html(originalHtml);
                     });
                 });
 
@@ -1228,17 +1343,37 @@ require __DIR__ . '/cron_runner_functions.php';
 
             // Handle delete all
             $('#deleteAllBtn').click(function() {
-                if (!confirm('Are you sure you want to delete ALL cron jobs? This cannot be undone.')) return;
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'You want to delete ALL cron jobs? This cannot be undone.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete all!',
+                    cancelButtonText: 'Cancel',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.post('cronjobs.php', {
+                            action: 'delete_all'
+                        }, function(res) {
+                            if (res.status === 'success') {
+                                selectedCronIds = [];
+                                loadCrons();
+                                loadActivityLogs();
 
-                $.post('cronjobs.php', {
-                    action: 'delete_all'
-                }, function(res) {
-                    if (res.status === 'success') {
-                        selectedCronIds = [];
-                        loadCrons();
-                        loadActivityLogs();
-                    } else {
-                        alert(res.message || 'Error deleting all cron jobs');
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Deleted',
+                                    text: 'All cron jobs have been deleted successfully.',
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: res.message || 'Error deleting all cron jobs',
+                                });
+                            }
+                        });
                     }
                 });
             });

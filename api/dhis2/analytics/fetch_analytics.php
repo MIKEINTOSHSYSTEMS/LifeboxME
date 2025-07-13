@@ -755,7 +755,70 @@ if ($action) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- SweetAlert -->
+    <script src="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.22.2/dist/sweetalert2.all.min.js
+    "></script>
+    <link href="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.22.2/dist/sweetalert2.min.css
+    " rel="stylesheet">
     <style>
+        /* Custom styles from above sweet alert*/
+        .swal2-loader {
+            background-color: #4caf50;
+            border: 3px solid #ff9800;
+        }
+
+        .swal2-actions {
+            background-color: #04747407;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .swal2-confirm {
+            background-color: #079ca7;
+            border-color: #0056b3;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .swal2-confirm:hover {
+            background-color: #004747;
+            transform: scale(1.05);
+        }
+
+        .swal2-cancel {
+            background-color: #ff5722;
+            border-color: #e64a19;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .swal2-cancel:hover {
+            background-color: #e64a19;
+            transform: scale(1.05);
+        }
+
+        .swal2-title {
+            font-family: 'Arial', sans-serif;
+            color: #333333;
+            font-size: 1.8em;
+        }
+
+        .swal2-content {
+            font-family: 'Verdana', sans-serif;
+            color: #666666;
+            font-size: 1.2em;
+        }
+
+        /*End of Custom Styles for Sweet Alert */
+
         :root {
             --primary: #078ca7;
             --secondary: #3498db;
@@ -1436,28 +1499,41 @@ if ($action) {
                     $('#fetchBtn').click(function() {
                         const settingId = $('#settingsSelect').val();
                         if (!settingId) {
-                            alert('Please select a setting first');
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Please select a setting first',
+                            });
                             return;
                         }
 
                         const settingName = $("#settingsSelect option:selected").text();
 
-                        if (!confirm('Fetch data for this setting? This may take some time.')) return;
+                        Swal.fire({
+                            title: `Fetch data for ${settingName}?`,
+                            text: 'This may take some time.',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonText: 'Yes, fetch it!',
+                            cancelButtonText: 'Cancel'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                addLog(`Starting data fetch for setting: ${settingName}`);
 
-                        addLog(`Starting data fetch for setting: ${settingName}`);
-
-                        $.post('fetch_analytics.php', {
-                            action: 'fetch_data',
-                            id: settingId
-                        }, function(response) {
-                            if (response.status === 'success') {
-                                addLog(response.message, 'success');
-                                dataTable.ajax.reload();
-                            } else {
-                                addLog(response.message, 'error');
+                                $.post('fetch_analytics.php', {
+                                    action: 'fetch_data',
+                                    id: settingId
+                                }, function(response) {
+                                    if (response.status === 'success') {
+                                        addLog(response.message, 'success');
+                                        dataTable.ajax.reload();
+                                    } else {
+                                        addLog(response.message, 'error');
+                                    }
+                                }, 'json').fail(function(xhr) {
+                                    addLog('Fetch operation failed: ' + xhr.responseText, 'error');
+                                });
                             }
-                        }, 'json').fail(function(xhr) {
-                            addLog('Fetch operation failed: ' + xhr.responseText, 'error');
                         });
                     });
 
@@ -1465,7 +1541,11 @@ if ($action) {
                     $('#loadBtn').click(function() {
                         const settingId = $('#settingsSelect').val();
                         if (!settingId) {
-                            alert('Please select a setting first');
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Please select a setting first',
+                            });
                             return;
                         }
 
@@ -1479,51 +1559,78 @@ if ($action) {
                     $('#deleteAllBtn').click(function() {
                         const settingId = $('#settingsSelect').val();
                         if (!settingId) {
-                            alert('Please select a setting first');
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Please select a setting first',
+                            });
                             return;
                         }
 
                         const settingName = $("#settingsSelect option:selected").text();
 
-                        if (!confirm('Delete ALL data for this setting?')) return;
-
-                        $.post('fetch_analytics.php', {
-                            action: 'delete_data',
-                            id: settingId,
-                            type: 'all'
-                        }, function(response) {
-                            if (response.status === 'success') {
-                                addLog(`Deleted all data for: ${settingName}`, 'success');
-                                dataTable.ajax.reload();
-                            } else {
-                                addLog(response.message, 'error');
+                        Swal.fire({
+                            title: `Are you sure?`,
+                            text: `Delete ALL data for the setting: ${settingName}?`,
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonText: 'Yes, delete all!',
+                            cancelButtonText: 'Cancel'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $.post('fetch_analytics.php', {
+                                    action: 'delete_data',
+                                    id: settingId,
+                                    type: 'all'
+                                }, function(response) {
+                                    if (response.status === 'success') {
+                                        addLog(`Deleted all data for: ${settingName}`, 'success');
+                                        dataTable.ajax.reload();
+                                    } else {
+                                        addLog(response.message, 'error');
+                                    }
+                                }, 'json');
                             }
-                        }, 'json');
+                        });
                     });
 
+                    // Delete non-null data button
                     $('#deleteNonNullBtn').click(function() {
                         const settingId = $('#settingsSelect').val();
                         if (!settingId) {
-                            alert('Please select a setting first');
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Please select a setting first',
+                            });
                             return;
                         }
 
                         const settingName = $("#settingsSelect option:selected").text();
 
-                        if (!confirm('Delete all NON-NULL data for this setting?')) return;
-
-                        $.post('fetch_analytics.php', {
-                            action: 'delete_data',
-                            id: settingId,
-                            type: 'non_null'
-                        }, function(response) {
-                            if (response.status === 'success') {
-                                addLog(`Deleted non-null data for: ${settingName}`, 'success');
-                                dataTable.ajax.reload();
-                            } else {
-                                addLog(response.message, 'error');
+                        Swal.fire({
+                            title: `Are you sure?`,
+                            text: `Delete all NON-NULL data for the setting: ${settingName}?`,
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonText: 'Yes, delete non-null!',
+                            cancelButtonText: 'Cancel'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $.post('fetch_analytics.php', {
+                                    action: 'delete_data',
+                                    id: settingId,
+                                    type: 'non_null'
+                                }, function(response) {
+                                    if (response.status === 'success') {
+                                        addLog(`Deleted non-null data for: ${settingName}`, 'success');
+                                        dataTable.ajax.reload();
+                                    } else {
+                                        addLog(response.message, 'error');
+                                    }
+                                }, 'json');
                             }
-                        }, 'json');
+                        });
                     });
 
                     $('#previewBtn').click(function() {
@@ -1611,21 +1718,29 @@ if ($action) {
 
                     // Purge all data button
                     $('#purgeAllBtn').click(function() {
-                        if (!confirm('WARNING: This will delete ALL fetched data from the entire system and reset the ID counter. Are you absolutely sure?')) {
-                            return;
-                        }
-
-                        $.post('fetch_analytics.php', {
-                            action: 'purge_all_data'
-                        }, function(response) {
-                            if (response.status === 'success') {
-                                addLog(response.message, 'success');
-                                // Reload DataTable to show empty state
-                                dataTable.ajax.reload();
-                            } else {
-                                addLog(response.message, 'error');
+                        Swal.fire({
+                            title: 'WARNING',
+                            text: 'This will delete ALL fetched data from the entire system and reset the ID counter. Are you absolutely sure?',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonText: 'Yes, delete it!',
+                            cancelButtonText: 'Cancel',
+                            reverseButtons: true
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $.post('fetch_analytics.php', {
+                                    action: 'purge_all_data'
+                                }, function(response) {
+                                    if (response.status === 'success') {
+                                        addLog(response.message, 'success');
+                                        // Reload DataTable to show empty state
+                                        dataTable.ajax.reload();
+                                    } else {
+                                        addLog(response.message, 'error');
+                                    }
+                                }, 'json');
                             }
-                        }, 'json');
+                        });
                     });
                 });
             </script>

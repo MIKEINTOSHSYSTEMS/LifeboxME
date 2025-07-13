@@ -71,7 +71,20 @@ class CronRunner {
         }
     }
 
-    private function fetchAndProcessSetting($setting) {
+    private function fetchAndProcessSetting($setting)
+    {
+        // First delete existing data for this setting
+        try {
+            $stmt = $this->db->prepare("DELETE FROM lifeboxme_dhis2_analytics_data WHERE setting_id = ?");
+            $stmt->execute([$setting['setting_id']]);
+            $deletedCount = $stmt->rowCount();
+
+            error_log("Deleted $deletedCount existing records for setting_id {$setting['setting_id']} before fetching new data");
+        } catch (Exception $e) {
+            error_log("Error deleting existing data for setting_id {$setting['setting_id']}: " . $e->getMessage());
+            throw new Exception("Failed to clean up existing data before fetch");
+        }
+
         // Extract parameters
         $dxIds = explode(',', $setting['dx']);
         $ouIds = explode(',', $setting['ou']);
