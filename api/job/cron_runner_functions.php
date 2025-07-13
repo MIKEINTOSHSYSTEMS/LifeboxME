@@ -5,7 +5,7 @@ class CronRunner {
     
     public function __construct() {
         // Load environment configuration
-        $envFile = __DIR__ . '/../../../.env.dev';
+        $envFile = __DIR__ . '/../../.env.dev';
         if (!file_exists($envFile)) die("Configuration error: .env.dev not found");
         $this->envVars = parse_ini_file($envFile);
         
@@ -25,8 +25,7 @@ class CronRunner {
         }
     }
 
-    public function executeDueJobs()
-    {
+    public function executeDueJobs() {
         // Get due cron jobs
         $dueJobs = $this->db->query("SELECT cj.*, s.dx, s.ou, s.pe, s.display_property, 
                 s.include_num_den, s.skip_meta, s.skip_data, s.paging, s.page_size
@@ -61,83 +60,37 @@ class CronRunner {
         }
     }
 
-    private function executeBulkSettings(array $settings)
-    {
-        // Create a combined API request for all settings
-        $combinedParams = $this->buildCombinedApiParams($settings);
-
-        // Make the combined API call
-        $apiResponse = $this->makeDhis2ApiCall($combinedParams);
-        $data = json_decode($apiResponse, true);
-        if (!$data) throw new Exception("Invalid API response for bulk settings");
-
-        // Process and store data for each setting
+    public function executeBulkSettings(array $settings) {
         foreach ($settings as $setting) {
-            $this->processAndStoreData($data, $setting);
+            try {
+                $this->fetchAndProcessSetting($setting);
+            } catch (Exception $e) {
+                error_log("Error processing cron job ID {$setting['id']}: " . $e->getMessage());
+                continue;
+            }
         }
     }
 
-    private function buildCombinedApiParams(array $settings)
-    {
-        $combinedDimensions = [];
-        $combinedFilters = [];
+    private function fetchAndProcessSetting($setting) {
+        // Extract parameters
+        $dxIds = explode(',', $setting['dx']);
+        $ouIds = explode(',', $setting['ou']);
+        $peIds = explode(',', $setting['pe']);
 
-        foreach ($settings as $setting) {
-            $dxIds = explode(',', $setting['dx']);
-            $ouIds = explode(',', $setting['ou']);
-            $peIds = explode(',', $setting['pe']);
+        // Build dimension parameter with proper structure
+        $dimensionParam = 'dx:' . implode(';', $dxIds) . ',ou:' . implode(';', $ouIds);
+        $filterParam = ['pe:' . implode(';', $peIds)];
 
-            // Add dimensions
-            if (!isset($combinedDimensions['dx'])) {
-                $combinedDimensions['dx'] = [];
-            }
-            $combinedDimensions['dx'] = array_merge($combinedDimensions['dx'], $dxIds);
-
-            if (!isset($combinedDimensions['ou'])) {
-                $combinedDimensions['ou'] = [];
-            }
-            $combinedDimensions['ou'] = array_merge($combinedDimensions['ou'], $ouIds);
-
-            // Add filters
-            if (!isset($combinedFilters['pe'])) {
-                $combinedFilters['pe'] = [];
-            }
-            $combinedFilters['pe'] = array_merge($combinedFilters['pe'], $peIds);
-        }
-
-        // Build dimension parameter
-        $dimensionParam = '';
-        foreach ($combinedDimensions as $dim => $ids) {
-            $dimensionParam .= $dim . ':' . implode(';', array_unique($ids)) . ',';
-        }
-        $dimensionParam = rtrim($dimensionParam, ',');
-
-        // Build filter parameter
-        $filterParam = [];
-        foreach ($combinedFilters as $dim => $ids) {
-            $filterParam[] = $dim . ':' . implode(';', array_unique($ids));
-        }
-
-        // Use parameters from first setting (they should be similar)
-        $firstSetting = $settings[0];
-
-        return [
+        $params = [
             'dimension' => $dimensionParam,
             'filter' => $filterParam,
-            'displayProperty' => $firstSetting['display_property'],
-            'includeNumDen' => $firstSetting['include_num_den'] ? 'true' : 'false',
-            'skipMeta' => $firstSetting['skip_meta'] ? 'true' : 'false',
-            'skipData' => $firstSetting['skip_data'] ? 'true' : 'false',
-            'paging' => $firstSetting['paging'] ? 'true' : 'false',
-            'pageSize' => $firstSetting['page_size']
+            'displayProperty' => $setting['display_property'],
+            'includeNumDen' => $setting['include_num_den'] ? 'true' : 'false',
+            'skipMeta' => $setting['skip_meta'] ? 'true' : 'false',
+            'skipData' => $setting['skip_data'] ? 'true' : 'false',
+            'paging' => $setting['paging'] ? 'true' : 'false',
+            'pageSize' => $setting['page_size']
         ];
-    }
-
-    private function makeDhis2ApiCall($params)
-    {
-        $baseUrl = rtrim($this->envVars['DHIS2_BASE_URL'], '/');
-        $username = $this->envVars['DHIS2_USERNAME'];
-        $password = $this->envVars['DHIS2_PASSWORD'];
 
         // Build query string
         $queryParts = [http_build_query(['dimension' => $params['dimension']])];
@@ -154,6 +107,11 @@ class CronRunner {
         ]);
         $queryString = implode('&', $queryParts);
 
+        // Fetch from DHIS2 API
+        $baseUrl = rtrim($this->envVars['DHIS2_BASE_URL'], '/');
+        $username = $this->envVars['DHIS2_USERNAME'];
+        $password = $this->envVars['DHIS2_PASSWORD'];
+
         $url = $baseUrl . '/api/analytics?' . $queryString;
         $ch = curl_init($url);
         curl_setopt_array($ch, [
@@ -166,7 +124,7 @@ class CronRunner {
             CURLOPT_TIMEOUT => 300 // Increased timeout for bulk operations
         ]);
 
-        $response = curl_exec($ch);
+        $apiResponse = curl_exec($ch);
         if (curl_errno($ch)) {
             throw new Exception("DHIS2 API error: " . curl_error($ch));
         }
@@ -175,15 +133,18 @@ class CronRunner {
         curl_close($ch);
 
         if ($httpCode !== 200) {
-            $errorDetails = json_decode($response, true)['message'] ?? $response;
+            $errorDetails = json_decode($apiResponse, true)['message'] ?? $apiResponse;
             throw new Exception("DHIS2 returned HTTP $httpCode: $errorDetails");
         }
 
-        return $response;
+        $data = json_decode($apiResponse, true);
+        if (!$data) throw new Exception("Invalid API response");
+
+        // Process and store the data
+        $this->processAndStoreData($data, $setting);
     }
 
-    private function processAndStoreData($data, $setting)
-    {
+    private function processAndStoreData($data, $setting) {
         // Fetch additional metadata
         $dataItemMetadata = $this->fetchDataItemsMetadata();
         $ouIds = explode(',', $setting['ou']);
@@ -210,34 +171,57 @@ class CronRunner {
             ];
         }
 
-        // Build periods array
+        // Build a map from resolved period ID to user-entered period
+        $userPeriods = $peIds; // Resolved periods from DHIS2
+        $requestedPeriods = explode(',', $setting['pe']); // User-entered periods
+
+        $periodIdToUserPeriod = [];
+        if (count($requestedPeriods) === 1) {
+            // If only one user period, map all to that
+            foreach ($userPeriods as $peId) {
+                $periodIdToUserPeriod[$peId] = $requestedPeriods[0];
+            }
+        } else {
+            // If multiple, map by order
+            foreach ($userPeriods as $idx => $peId) {
+                $periodIdToUserPeriod[$peId] = $requestedPeriods[$idx] ?? $peId;
+            }
+        }
+
+        // Build periods array with all needed information
         $allPeriods = [];
         foreach ($peIds as $peId) {
             $allPeriods[$peId] = [
                 'id' => $peId,
                 'displayName' => $data['metaData']['items'][$peId]['name'] ?? $peId,
-                'relativePeriod' => $peId
+                'relativePeriod' => $periodIdToUserPeriod[$peId] ?? null
             ];
         }
 
-        // Build value map
+        // Build value map based on row structure
         $dxValueMap = [];
         foreach ($data['rows'] as $row) {
+            // Handle different row structures:
+            // - When ou is dimension: [dx, ou, value]
+            // - When ou is filter: [dx, value]
             if (count($row) === 3) {
+                // dx, ou, value structure
                 $dxId = $row[0];
                 $ouId = $row[1];
                 $value = $row[2];
                 $dxValueMap[$dxId][$ouId] = $value;
             } elseif (count($row) === 2) {
+                // dx, value structure
                 $dxId = $row[0];
                 $value = $row[1];
+                // Apply to all org units
                 foreach ($ouIds as $ouId) {
                     $dxValueMap[$dxId][$ouId] = $value;
                 }
             }
         }
 
-        // Clear existing data for this setting
+        // Clear existing data
         $this->db->exec("DELETE FROM lifeboxme_dhis2_analytics_data WHERE setting_id = {$setting['setting_id']}");
 
         // Prepare insert statement
@@ -252,7 +236,7 @@ class CronRunner {
         foreach ($dxIds as $dxId) {
             $itemInfo = $dataItemMetadata[$dxId] ?? [];
 
-            // Get metadata
+            // Get metadata with proper fallbacks
             $dxName = $itemInfo['displayName'] ?? ($data['metaData']['items'][$dxId]['name'] ?? $dxId);
             $dxShortName = $itemInfo['shortName'] ?? 'N/A';
             $dxDisplayName = $itemInfo['displayShortName'] ?? ($itemInfo['displayName'] ?? $dxName);
