@@ -31,7 +31,7 @@ $smtpConfigs = get_all_smtp_configs($conn); // Fetch all configs for the dropdow
 
 /* ───────── Fetch Selected SMTP Configuration ───────── */
 $smtpConfig = null;
-if (isset($_POST['smtp_id'])) {
+if (isset($_POST['smtp_id']) && !empty($_POST['smtp_id'])) { // Ensure the selected SMTP id is not empty
     $smtpConfig = get_smtp_config_by_id($conn, $_POST['smtp_id']);
 }
 
@@ -43,22 +43,27 @@ if (!$smtpConfig) {
         'port' => '',
         'password' => '',
         'smtpfrom' => '',
-        'secure' => 'starttls', // Default protocol if no config found
+        'secure' => '', // Default protocol if no config found
     ];
 }
 
-/* ───────── Handle form submission ───────── */
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send_test'])) {
-    $host  = $smtpConfig['host']; // Use DB values or user input
-    $port  = $smtpConfig['port'];
-    $proto = strtolower(trim($_POST['protocol'] ?? $smtpConfig['secure'])); // Default to secure from DB
-    $user  = $smtpConfig['username'];
-    $pass  = $smtpConfig['password'];
-    $from  = $smtpConfig['smtpfrom'];
-    $to    = trim($_POST['to'] ?? '');
+    /* ───────── Handle form submission ───────── */
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send_test'])) {
+        // Check if SMTP configuration is selected
+        if (empty($_POST['smtp_id'])) {
+            echo "<p style='color: red;'>Please select an SMTP configuration.</p>";
+        } else {
+            // Proceed with sending the test email
+            $host  = $smtpConfig['host']; // Use DB values or user input
+            $port  = $smtpConfig['port'];
+            $proto = strtolower(trim($_POST['protocol'] ?? $smtpConfig['secure'])); // Default to secure from DB
+            $user  = $smtpConfig['username'];
+            $pass  = $smtpConfig['password'];
+            $from  = $smtpConfig['smtpfrom'];
+            $to    = trim($_POST['to'] ?? '');
 
-    $subject = 'SMTP Test - HTML Email';
-    $body    = '<!DOCTYPE html>
+            $subject = 'SMTP Test - HTML Email';
+            $body    = '<!DOCTYPE html>
 <html>
 <head>
     <style>
@@ -95,11 +100,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send_test'])) {
 </body>
 </html>';
 
-    $result = send_smtp_mail($host, $port, $proto, $user, $pass, $from, $to, $subject, $body);
-}
+            $result = send_smtp_mail($host, $port, $proto, $user, $pass, $from, $to, $subject, $body);
+        }
+    }
 
-/* Fetch all SMTP configurations from PostgreSQL */
-function get_all_smtp_configs($conn)
+    /* Fetch all SMTP configurations from PostgreSQL */
+    function get_all_smtp_configs($conn)
 {
     $query = "SELECT id, host, username FROM SMTP ORDER BY created_at DESC";
     $result = pg_query($conn, $query);
@@ -112,6 +118,8 @@ function get_all_smtp_configs($conn)
 /* Fetch SMTP configuration by ID */
 function get_smtp_config_by_id($conn, $id)
 {
+    //$query = "SELECT * FROM SMTP WHERE id = $1";
+    //$query = "SELECT * FROM SMTP ORDER BY id ASC LIMIT 5"; // Get first two SMTP configurations
     $query = "SELECT * FROM SMTP WHERE id = $1";
     $result = pg_query_params($conn, $query, [$id]);
     if ($result) {
@@ -120,7 +128,7 @@ function get_smtp_config_by_id($conn, $id)
     return null;
 }
 
-/* ───────── Mini SMTP client ───────── */
+    /* ───────── Mini SMTP client ───────── */
 function send_smtp_mail(
     $host,
     $port,
@@ -133,7 +141,8 @@ function send_smtp_mail(
     $body
 ): array {
     $log = '';
-    $prefix = $protocol === 'ssl' ? 'ssl://' : '';
+    // Modify the prefix to handle both SSL and TLS (including STARTTLS)
+    $prefix = ($protocol === 'ssl' || $protocol === 'tls') ? $protocol . '://' : '';
 
     // Create context with IPv4 forcing
     $context = stream_context_create([
@@ -141,6 +150,7 @@ function send_smtp_mail(
             'bindto' => '0:0', // Forces IPv4
         ],
         'ssl' => [
+            'crypto_method' => STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT, // Force TLS 1.2
             'verify_peer'       => false,
             'verify_peer_name'  => false
         ]
@@ -160,8 +170,9 @@ function send_smtp_mail(
         return ['ok' => false, 'log' => "⚠️  Connect failed: $errstr ($errno)\n"];
     }
 
-    if ($protocol === 'tls' || $protocol === 'starttls') {
-    stream_set_timeout($stream, 15); // 15 second timeout for TLS
+    // Handle STARTTLS if the protocol is 'starttls'
+    if ($protocol === 'starttls') {
+        stream_set_timeout($stream, 15); // 15 second timeout for TLS
     }
 
     $log .= fgets($stream); // server greeting
@@ -220,8 +231,8 @@ function send_smtp_mail(
     return ['ok' => true, 'log' => $log];
 }
 
-/* Read a potentially multi‑line SMTP response */
-function read_multiline($stream): string
+    /* Read a potentially multi‑line SMTP response */
+    function read_multiline($stream): string
 {
     $out = '';
     while ($line = fgets($stream)) {
@@ -265,14 +276,7 @@ function read_multiline($stream): string
             font-weight: 600;
         }
 
-        input {
-            width: 100%;
-            padding: 8px 10px;
-            margin-top: 4px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
+        input,
         select {
             width: 100%;
             padding: 8px 10px;
@@ -301,14 +305,32 @@ function read_multiline($stream): string
             max-width: 920px;
             margin: 24px auto;
         }
+
+        .ssl-status {
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
     </style>
 </head>
 
 <body>
     <h2>Lifebox M&E | SMTP Test Utility</h2>
+    <div class="ssl-status">
+        <?= extension_loaded('openssl') ? '✅ SSL loaded' : '❌ SSL not loaded' ?>
+        <br></br>
+        <?php echo OPENSSL_VERSION_TEXT;   ?>
+    </div>
 
     <form method="post">
         <label>Select SMTP Setting</label>
+        <?php
+        // Sort the $smtpConfigs array by 'id' in ascending order
+        usort($smtpConfigs, function ($a, $b) {
+            return $a['id'] <=> $b['id']; // Comparison operator that sorts in ascending order
+        });
+        ?>
+
         <select name="smtp_id" onchange="this.form.submit()">
             <option value="">Select SMTP Config</option>
             <?php foreach ($smtpConfigs as $config): ?>
