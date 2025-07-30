@@ -596,6 +596,7 @@ $globalSettings["bEncryptPasswords"] = true;
 $globalSettings["nEncryptPasswordMethod"] = "0";
 
 //mail settings
+/*
 $globalSettings["useBuiltInMailer"] = false;
 
 $globalSettings["useCustomSMTPSettings"] = true;
@@ -607,6 +608,7 @@ $globalSettings["strSMTPPassword"] = "";
 $globalSettings["strFromEmail"] = "";
 
 $globalSettings["SMTPSecure"] = "tls";
+*/
 //
 
 /*
