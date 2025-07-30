@@ -506,6 +506,8 @@ class Chart
 			return true;
 		if("aio_training_tracking" == $this->chrt_array['tables'][0])
 			return true;
+		if("public.smtp" == $this->chrt_array['tables'][0])
+			return true;
 		return false;
 	}
 

@@ -1509,6 +1509,8 @@ class CrossTableWebReport
 			$isDB = true;
 		if("aio_training_tracking" == $this->xml_array['tables'][0])
 			$isDB = true;
+		if("public.smtp" == $this->xml_array['tables'][0])
+			$isDB = true;
 		return $isDB;
 	}
 	

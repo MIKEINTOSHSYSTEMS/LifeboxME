@@ -25,6 +25,7 @@ class class_GlobalEvents extends eventsBase
 		$this->events["BeforeRegister"]=true;
 
 
+
 //	onscreen events
 		$this->events["_global__snippet_apikey"] = true;
 
@@ -58,6 +59,36 @@ return true;
 ;		
 } // function BeforeRegister
 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		

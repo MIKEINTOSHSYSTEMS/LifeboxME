@@ -1214,6 +1214,10 @@ function GetDefaultValue($field, $ptype, $table="")
 	{
 		return strftime("%Y-%m-%d");
 	}
+				if($table=="public.smtp" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
 	return "";
 }
 
@@ -1312,6 +1316,10 @@ function GetAutoUpdateValue($field, $ptype, $table="")
 				if($table=="public.lifeboxme_dhis2_analytics_settings" && $field=="updated_at")
 	{
 		return strftime("%Y-%m-%d");
+	}
+				if($table=="public.smtp" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
 	}
 	return "";
 }
@@ -1800,7 +1808,6 @@ function runner_mail_smtp( $params )
 	}
 
 	$mail->SMTPSecure = GetGlobalData("SMTPSecure", "");
-	//$mail->SMTPSecure = GetGlobalData("SMTPSecure", "STARTTLS");
 
 	$mail->Subject = $params['subject'];
 

@@ -79,6 +79,7 @@ $nonAdminTablesArr[] = "public.lifeboxme_dhis2_analytics_settings";
 $nonAdminTablesArr[] = "public.lifeboxme_dhis2_analytics_data";
 $nonAdminTablesArr[] = "aio_training_tracking Chart";
 $nonAdminTablesArr[] = "aio_training_tracking Chart by sex";
+$nonAdminTablesArr[] = "public.smtp";
 
 $ug_connection = $cman->getForUserGroups();
 

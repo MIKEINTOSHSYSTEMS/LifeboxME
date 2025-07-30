@@ -666,6 +666,10 @@ class AuditTrailTable
 		{
 			return false;
 		}
+		if($table=="public.smtp")
+		{
+			return false;
+		}
 	}
 
 	protected function insert($datetime, $ip, $user, $table, $action, $description)
@@ -1281,6 +1285,10 @@ class AuditTrailFile
 			return false;
 		}
 		if($table=="aio_training_tracking Chart by sex")
+		{
+			return false;
+		}
+		if($table=="public.smtp")
 		{
 			return false;
 		}

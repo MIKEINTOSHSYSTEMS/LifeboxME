@@ -596,6 +596,8 @@ $globalSettings["bEncryptPasswords"] = true;
 $globalSettings["nEncryptPasswordMethod"] = "0";
 
 //mail settings
+
+/*
 $globalSettings["useBuiltInMailer"] = false;
 
 $globalSettings["useCustomSMTPSettings"] = true;
@@ -606,6 +608,8 @@ $globalSettings["strSMTPPort"] = "587";
 $globalSettings["strSMTPPassword"] = "G.817939771353uk";
 $globalSettings["strFromEmail"] = "mne@lifebox.org";
 
+$globalSettings["SMTPSecure"] = "tls";
+*/
 //
 
 /*
@@ -768,9 +772,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "166_1753878736";
+$projectBuildKey = "168_1753882913";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "166";
+$projectBuildNumber = "168";
 
 $mlang_messages = array();
 $mlang_charsets = array();
@@ -858,6 +862,7 @@ $tableCaptions["English"]["public_lifeboxme_dhis2_analytics_settings"] = "Lifebo
 $tableCaptions["English"]["public_lifeboxme_dhis2_analytics_data"] = "Lifeboxme Dhis2 Analytics Data";
 $tableCaptions["English"]["aio_training_tracking_Chart"] = "Aio Training Tracking Chart";
 $tableCaptions["English"]["aio_training_tracking_Chart_by_sex"] = "aio_training_tracking Chart by sex";
+$tableCaptions["English"]["public_smtp"] = "Smtp";
 $tableCaptions["English"]["Dashboard"] = "Dashboard";
 $tableCaptions["English"]["Lifebox_DHIS2_Settings"] = "Lifebox DHIS2 Settings";
 
@@ -983,6 +988,46 @@ $fieldFilterDefaultValue = "";
 $fieldFilterValueShrinkPostfix = "...";
 
 
+// here goes EVENT_INIT_APP event
+
+
+//mail settings
+$sql = "select * from SMTP";
+
+$rs = DB::Query($sql);
+
+$record = $rs->fetchAssoc();
+
+$SMTPUser = $record["username"];
+
+$SMTPServer = $record["host"];
+
+$SMTPPort = $record["port"];
+
+$SMTPPassword = $record["password"];
+
+$FromEmail = $record["smtpfrom"];
+
+$SMTPSecure = $record["secure"];
+$globalSettings["useBuiltInMailer"] = false;
+
+$globalSettings["useCustomSMTPSettings"] = true;
+$globalSettings["strSMTPUser"] = $record["username"];
+
+$globalSettings["strSMTPServer"] = $record["host"];
+
+$globalSettings["strSMTPPort"] = $record["port"];
+
+$globalSettings["strSMTPPassword"] = $record["password"];
+
+$globalSettings["strFromEmail"] = $record["smtpfrom"];
+
+$globalSettings["SMTPSecure"] = $record["secure"];
+
+
+// Place event code here.
+// Use "Add Action" button to add code snippets.
+;
 
 
 // default connection link #9875

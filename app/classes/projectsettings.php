@@ -3706,6 +3706,8 @@ function fillProjectEntites()
 	$projectEntitiesReverse[ "aio_training_tracking_chart" ] = "aio_training_tracking Chart";
 	$projectEntities[ "aio_training_tracking Chart by sex" ] = array( "url" => "aio_training_tracking_chart_by_sex", "type" => 9 );
 	$projectEntitiesReverse[ "aio_training_tracking_chart_by_sex" ] = "aio_training_tracking Chart by sex";
+	$projectEntities[ "public.smtp" ] = array( "url" => "smtp", "type" => 0 );
+	$projectEntitiesReverse[ "smtp" ] = "public.smtp";
 }
 
 function findTable( $table ) {
