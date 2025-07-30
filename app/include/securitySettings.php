@@ -1,35 +1,4 @@
 <?php
-// Read .env.dev file (located two directories up from this file)
-//$envPath = __DIR__ . '/../../.env';
-//$envPath = __DIR__ . '/../../.env.dev';
-$envPath = __DIR__ . '/../../.env.prod';
-$clientId = '';
-$clientSecret = '';
-
-if (file_exists($envPath)) {
-    $lines = file($envPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    foreach ($lines as $line) {
-        // Skip comments and empty lines
-        if (strpos(trim($line), '#') === 0 || trim($line) === '') {
-            continue;
-        }
-
-        // Parse key=value pairs
-        list($key, $value) = explode('=', $line, 2);
-        $key = trim($key);
-        $value = trim($value);
-
-        // Remove surrounding quotes if present
-        $value = trim($value, "'\"");
-
-        if ($key === 'clientId') {
-            $clientId = $value;
-        } elseif ($key === 'clientSecret') {
-            $clientSecret = $value;
-        }
-    }
-}
-
 $securitySettings_var = array( 'providers' => array( array( 'type' => '%db',
 'activationField' => 'active',
 'active' => true,
@@ -53,8 +22,8 @@ array( 'scope' => 'openid profile email ',
 'emailClaim' => 'email',
 'logOut' => false,
 'active' => true,
-'clientId' => $clientId,  // Now from .env.dev
-'clientSecret' => $clientSecret,  // Now from .env.dev
+'clientId' => 'beaa6a03-9a79-4d3e-b927-88bf2dc9a0b7',
+'clientSecret' => 'mwv8Q~kAE.04KcE5-Y29vR5K_6~VxrcPp2QDTcf5',
 'code' => 'az',
 'configUrl' => 'https://login.microsoftonline.com/common/.well-known/openid-configuration',
 'label' => array( 'text' => 'AzureAD',
@@ -88,13 +57,13 @@ array( 'scope' => 'openid profile email ',
 'siteKey' => '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
 'secretKey' => '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe',
 'passesCount' => 5 ),
-'emailSettings' => array( 'fromEmail' => 'lifebox@cloud.merqconsultancy.org',
+'emailSettings' => array( 'fromEmail' => 'mne@lifebox.org',
 'usePHPDefinedSMTP' => false,
 'useBuiltInMailer' => false,
-'SMTPServer' => 'cloud.merqconsultancy.org',
+'SMTPServer' => 'smpt-mail.outlook.com',
 'SMTPPort' => 587,
-'SMTPUser' => 'lifebox@cloud.merqconsultancy.org',
-'SMTPPassword' => 'LifeboxCloud',
+'SMTPUser' => 'mne@lifebox.org',
+'SMTPPassword' => 'G.817939771353uk',
 'securityProtocol' => 2 ),
 'advancedSecurity' => array( 'allowGuestLogin' => false ),
 'auditAndLocking' => array( 'loggingTable' => array( 'connId' => 'lifebox_mesystem_at_localhost',

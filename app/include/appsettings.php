@@ -600,11 +600,11 @@ $globalSettings["useBuiltInMailer"] = false;
 
 $globalSettings["useCustomSMTPSettings"] = true;
 
-$globalSettings["strSMTPUser"] = "lifebox@cloud.merqconsultancy.org";
-$globalSettings["strSMTPServer"] = "cloud.merqconsultancy.org";
+$globalSettings["strSMTPUser"] = "mne@lifebox.org";
+$globalSettings["strSMTPServer"] = "smpt-mail.outlook.com";
 $globalSettings["strSMTPPort"] = "587";
-$globalSettings["strSMTPPassword"] = "LifeboxCloud";
-$globalSettings["strFromEmail"] = "lifebox@cloud.merqconsultancy.org";
+$globalSettings["strSMTPPassword"] = "G.817939771353uk";
+$globalSettings["strFromEmail"] = "mne@lifebox.org";
 
 $globalSettings["SMTPSecure"] = "tls";
 //
@@ -769,9 +769,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "163_1751999995";
+$projectBuildKey = "164_1753878736";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "163";
+$projectBuildNumber = "164";
 
 $mlang_messages = array();
 $mlang_charsets = array();
@@ -857,10 +857,10 @@ $tableCaptions["English"]["Lifebox_DHIS2_dataItems"] = "Lifebox DHIS2 DataItems"
 $tableCaptions["English"]["public_lifeboxme_dhis2_dataitems"] = "Lifeboxme Dhis2 Dataitems";
 $tableCaptions["English"]["public_lifeboxme_dhis2_analytics_settings"] = "Lifeboxme Dhis2 Analytics Settings";
 $tableCaptions["English"]["public_lifeboxme_dhis2_analytics_data"] = "Lifeboxme Dhis2 Analytics Data";
-$tableCaptions["English"]["Dashboard"] = "Dashboard";
-$tableCaptions["English"]["Lifebox_DHIS2_Settings"] = "Lifebox DHIS2 Settings";
 $tableCaptions["English"]["aio_training_tracking_Chart"] = "Aio Training Tracking Chart";
 $tableCaptions["English"]["aio_training_tracking_Chart_by_sex"] = "aio_training_tracking Chart by sex";
+$tableCaptions["English"]["Dashboard"] = "Dashboard";
+$tableCaptions["English"]["Lifebox_DHIS2_Settings"] = "Lifebox DHIS2 Settings";
 
 
 $globalEvents = new class_GlobalEvents;
