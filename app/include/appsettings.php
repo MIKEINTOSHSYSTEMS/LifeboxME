@@ -596,7 +596,6 @@ $globalSettings["bEncryptPasswords"] = true;
 $globalSettings["nEncryptPasswordMethod"] = "0";
 
 //mail settings
-/*
 $globalSettings["useBuiltInMailer"] = false;
 
 $globalSettings["useCustomSMTPSettings"] = true;
@@ -608,7 +607,6 @@ $globalSettings["strSMTPPassword"] = "";
 $globalSettings["strFromEmail"] = "";
 
 $globalSettings["SMTPSecure"] = "tls";
-*/
 //
 
 /*
@@ -771,9 +769,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "171_1753882913";
+$projectBuildKey = "172_1753882913";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "171";
+$projectBuildNumber = "172";
 
 $mlang_messages = array();
 $mlang_charsets = array();
@@ -1069,12 +1067,26 @@ if ($record) {
       try {
         // Server settings
         $mail->isSMTP();
+
+        // Force IPv4 - THE KEY CHANGE
         $mail->Host = $globalSettings["strSMTPServer"];
         $mail->Port = $globalSettings["strSMTPPort"];
         $mail->SMTPAuth = $globalSettings["SMTPAuth"];
         $mail->Username = $globalSettings["strSMTPUser"];
         $mail->Password = $globalSettings["strSMTPPassword"];
         $mail->SMTPSecure = $globalSettings["SMTPSecure"];
+
+        // Add socket context to force IPv4
+        $mail->SMTPOptions = [
+          'ssl' => [
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true
+          ],
+          'socket' => [
+            'bindto' => '0:0' // Force IPv4
+          ]
+        ];
 
         // Recipients
         $mail->setFrom($globalSettings["strFromEmail"], 'Lifebox M&E System');

@@ -134,20 +134,34 @@ function send_smtp_mail(
 ): array {
     $log = '';
     $prefix = $protocol === 'ssl' ? 'ssl://' : '';
+
+    // Create context with IPv4 forcing
+    $context = stream_context_create([
+        'socket' => [
+            'bindto' => '0:0', // Forces IPv4
+        ],
+        'ssl' => [
+            'verify_peer'       => false,
+            'verify_peer_name'  => false
+        ]
+    ]);
+
     $stream = @stream_socket_client(
         $prefix . $host . ':' . $port,
         $errno,
         $errstr,
         30,
         STREAM_CLIENT_CONNECT,
-        stream_context_create(['ssl' => [
-            'verify_peer'       => false,
-            'verify_peer_name'  => false
-        ]])
+        $context
     );
 
     if (!$stream) {
+        error_log("SMTP connection failed to $host:$port - $errstr ($errno)");
         return ['ok' => false, 'log' => "⚠️  Connect failed: $errstr ($errno)\n"];
+    }
+
+    if ($protocol === 'tls' || $protocol === 'starttls') {
+    stream_set_timeout($stream, 15); // 15 second timeout for TLS
     }
 
     $log .= fgets($stream); // server greeting
