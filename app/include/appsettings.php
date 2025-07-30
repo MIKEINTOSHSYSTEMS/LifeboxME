@@ -606,7 +606,6 @@ $globalSettings["strSMTPPort"] = "587";
 $globalSettings["strSMTPPassword"] = "G.817939771353uk";
 $globalSettings["strFromEmail"] = "mne@lifebox.org";
 
-$globalSettings["SMTPSecure"] = "tls";
 //
 
 /*
@@ -769,9 +768,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "165_1753878736";
+$projectBuildKey = "166_1753878736";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "165";
+$projectBuildNumber = "166";
 
 $mlang_messages = array();
 $mlang_charsets = array();
