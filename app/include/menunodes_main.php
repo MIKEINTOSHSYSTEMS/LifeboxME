@@ -2371,26 +2371,26 @@
 	$menuNodes[] = $menuNode;
 	$menuNode = array();
 	$menuNode["id"] = "94";
-	$menuNode["name"] = "";
+	$menuNode["name"] = "SMTP Settings";
 	$menuNode["href"] = "mypage.htm";
 	$menuNode["type"] = "Leaf";
 	$menuNode["table"] = "public.smtp";
 	$menuNode["style"] = "";
 	$menuNode["params"] = "";
-	$menuNode["parent"] = "0";
+	$menuNode["parent"] = "61";
 	$menuNode["nameType"] = "Text";
 	$menuNode["linkType"] = "Internal";
 	$menuNode["pageType"] = strtolower("List");//
 	$menuNode["pageId"] = "";
 	$menuNode["openType"] = "None";
 
-	$menuNode["icon"] = "";
-	$menuNode["iconType"] = "0";
+	$menuNode["icon"] = "fa-paper-plane-o";
+	$menuNode["iconType"] = "3";
 	$menuNode["iconShow"] = "1";
 
 		$menuNode["color"] = "";
 
-	$menuNode["title"] = "Smtp";
+	$menuNode["title"] = "SMTP Settings";
 
 
 

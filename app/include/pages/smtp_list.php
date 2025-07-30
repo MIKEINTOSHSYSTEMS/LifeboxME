@@ -77,7 +77,9 @@
 'details_found',
 'page_size',
 'print_panel' ),
-'below-grid' => array( 'pagination' ),
+'below-grid' => array( 'pagination',
+'text',
+'text1' ),
 'left' => array( 'logo',
 'expand_button',
 'menu',
@@ -117,7 +119,6 @@
 'details_found',
 'recsPerPage',
 'print_friendly' ),
-'below-grid' => array( 'pagination' ),
 'top' => array(  ) ),
 'itemForms' => array( 'add' => 'above-grid',
 'delete' => 'above-grid',
@@ -125,6 +126,8 @@
 'page_size' => 'above-grid',
 'print_panel' => 'above-grid',
 'pagination' => 'below-grid',
+'text' => 'below-grid',
+'text1' => 'below-grid',
 'logo' => 'left',
 'expand_button' => 'left',
 'menu' => 'left',
@@ -249,6 +252,8 @@
 'delete' => array( 'delete' ),
 'delete_selected' => array( 'delete_selected' ),
 'advsearch_link' => array( 'advsearch_link' ),
+'text' => array( 'text',
+'text1' ),
 'grid_field' => array( 'simple_grid_field',
 'simple_grid_field1',
 'simple_grid_field2',
@@ -514,10 +519,22 @@ array( 'cell' => 'c2' ) ),
 'deferredItems' => array(  ),
 'recsPerRow' => 1 ),
 'below-grid' => array( 'modelId' => 'list-below-grid',
-'grid' => array( array( 'cells' => array( array( 'cell' => 'c1' ) ),
+'grid' => array( array( 'section' => '',
+'cells' => array( array( 'cell' => 'c3' ) ) ),
+array( 'section' => '',
+'cells' => array( array( 'cell' => 'c' ) ) ),
+array( 'section' => '',
+'cells' => array( array( 'cell' => 'c2' ) ) ),
+array( 'cells' => array( array( 'cell' => 'c1' ) ),
 'section' => '' ) ),
 'cells' => array( 'c1' => array( 'model' => 'c1',
-'items' => array( 'pagination' ) ) ),
+'items' => array( 'pagination' ) ),
+'c' => array( 'model' => 'c1',
+'items' => array( 'text' ) ),
+'c2' => array( 'model' => 'c1',
+'items' => array(  ) ),
+'c3' => array( 'model' => 'c1',
+'items' => array( 'text1' ) ) ),
 'deferredItems' => array(  ),
 'recsPerRow' => 1 ),
 'left' => array( 'modelId' => 'leftbar-menu',
@@ -785,6 +802,31 @@ array( 'cell' => 'footcell_field8' ) ) ) ),
 'delete_selected' => array( 'type' => 'delete_selected' ),
 'advsearch_link' => array( 'type' => 'advsearch_link' ),
 '-3' => array( 'type' => '-' ),
+'text' => array( 'type' => 'text',
+'label' => array( 'text' => '<html>
+
+<head>
+    <title>SMTP</title>
+</head>
+<body>
+<h6>.</h6>
+    <iframe
+        src="../api/mail/index.php"
+        frameborder="0"
+        width="100%"
+        height="1900px"
+        allowtransparency>
+    </iframe>
+</body>
+<h6>.</h6>
+
+</html>',
+'type' => 0 ),
+'editedByRte' => false ),
+'text1' => array( 'type' => 'text',
+'label' => array( 'text' => '<br></br>',
+'type' => 0 ),
+'editedByRte' => false ),
 'simple_grid_field' => array( 'field' => 'id',
 'type' => 'grid_field',
 'inlineAdd' => false,

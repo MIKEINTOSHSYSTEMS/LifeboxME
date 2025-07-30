@@ -1,5 +1,6 @@
 settings.xml
 *.code-workspace
+*.txt
 /schema
 app/templates_c/
 demo.php

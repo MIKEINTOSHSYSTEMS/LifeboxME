@@ -7,25 +7,117 @@
  * ──────────────────────────────────────────────────────────────
  *  ✓ Plain, SSL or STARTTLS (tls)             ✓ AUTH LOGIN
  *  ✓ Shows full server conversation log       ✓ No external libs
+ *  ✓ HTML email support
  * ----------------------------------------------------------------
  */
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+/* ───────── PostgreSQL Database Connection ───────── */
+$host = '127.0.0.1';
+$dbname = 'lifebox_mesystem';
+$user = 'postgres';
+$password = 'mikeintosh';
+
+$conn = pg_connect("host=$host dbname=$dbname user=$user password=$password");
+
+if (!$conn) {
+    die("Database connection failed: " . pg_last_error());
+}
+
+/* ───────── Fetch All SMTP Configurations for Dropdown ───────── */
+$smtpConfigs = get_all_smtp_configs($conn); // Fetch all configs for the dropdown
+
+/* ───────── Fetch Selected SMTP Configuration ───────── */
+$smtpConfig = null;
+if (isset($_POST['smtp_id'])) {
+    $smtpConfig = get_smtp_config_by_id($conn, $_POST['smtp_id']);
+}
+
+if (!$smtpConfig) {
+    $smtpConfig = [
+        'id' => '',
+        'username' => '',
+        'host' => '',
+        'port' => '',
+        'password' => '',
+        'smtpfrom' => '',
+        'secure' => 'starttls', // Default protocol if no config found
+    ];
+}
+
 /* ───────── Handle form submission ───────── */
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $host  = trim($_POST['host'] ?? '');
-    $port  = (int)($_POST['port'] ?? 25);
-    $proto = strtolower(trim($_POST['protocol'] ?? 'plain')); // plain | ssl | tls
-    $user  = trim($_POST['user'] ?? '');
-    $pass  = trim($_POST['pass'] ?? '');
-    $to    = trim($_POST['to']  ?? '');
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send_test'])) {
+    $host  = $smtpConfig['host']; // Use DB values or user input
+    $port  = $smtpConfig['port'];
+    $proto = strtolower(trim($_POST['protocol'] ?? $smtpConfig['secure'])); // Default to secure from DB
+    $user  = $smtpConfig['username'];
+    $pass  = $smtpConfig['password'];
+    $from  = $smtpConfig['smtpfrom'];
+    $to    = trim($_POST['to'] ?? '');
 
-    $subject = 'SMTP Test';
-    $body    = 'Test SMTP';
+    $subject = 'SMTP Test - HTML Email';
+    $body    = '<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+        .header { background-color: #0078d4; color: white; padding: 10px; text-align: center; border-radius: 5px 5px 0 0; }
+        .content { padding: 20px; }
+        .footer { margin-top: 20px; padding-top: 10px; border-top: 1px solid #eee; font-size: 0.9em; color: #777; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>SMTP Test Successful!</h1>
+        </div>
+        <div class="content">
+            <p>Hello,</p>
+            <p>This is a <strong>test email</strong> sent from the Lifebox M&E System SMTP Tester.</p>
+            <p>If you\'re reading this, your SMTP configuration is working correctly.</p>
+            <p>Here are the details of this test:</p>
+            <ul>
+                <li><strong>Server:</strong> ' . htmlspecialchars($host) . '</li>
+                <li><strong>Port:</strong> ' . htmlspecialchars($port) . '</li>
+                <li><strong>Protocol:</strong> ' . htmlspecialchars($proto) . '</li>
+                <li><strong>From:</strong> ' . htmlspecialchars($from) . '</li>
+                <li><strong>To:</strong> ' . htmlspecialchars($to) . '</li>
+            </ul>
+        </div>
+        <div class="footer">
+            <p>This is an automated message. Please do not reply.</p>
+            <p>&copy; ' . date('Y') . ' Lifebox M&E System</p>
+        </div>
+    </div>
+</body>
+</html>';
 
-    $result = send_smtp_mail($host, $port, $proto, $user, $pass, $user, $to, $subject, $body);
+    $result = send_smtp_mail($host, $port, $proto, $user, $pass, $from, $to, $subject, $body);
+}
+
+/* Fetch all SMTP configurations from PostgreSQL */
+function get_all_smtp_configs($conn)
+{
+    $query = "SELECT id, host, username FROM SMTP ORDER BY created_at DESC";
+    $result = pg_query($conn, $query);
+    if ($result) {
+        return pg_fetch_all($result); // Return all rows
+    }
+    return [];
+}
+
+/* Fetch SMTP configuration by ID */
+function get_smtp_config_by_id($conn, $id)
+{
+    $query = "SELECT * FROM SMTP WHERE id = $1";
+    $result = pg_query_params($conn, $query, [$id]);
+    if ($result) {
+        return pg_fetch_assoc($result); // Return the config row by ID
+    }
+    return null;
 }
 
 /* ───────── Mini SMTP client ───────── */
@@ -57,28 +149,32 @@ function send_smtp_mail(
     if (!$stream) {
         return ['ok' => false, 'log' => "⚠️  Connect failed: $errstr ($errno)\n"];
     }
-    $log .= fgets($stream);              // server greeting
+
+    $log .= fgets($stream); // server greeting
     $ehlo = "EHLO tester\r\n";
 
     fwrite($stream, $ehlo);
     $log .= $ehlo . read_multiline($stream);
 
     /* Upgrade to TLS if requested */
-    if ($protocol === 'tls') {
+    if ($protocol === 'tls' || $protocol === 'starttls') {
         fwrite($stream, "STARTTLS\r\n");
         $log .= "STARTTLS\r\n" . read_multiline($stream);
         if (!stream_socket_enable_crypto($stream, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
             return ['ok' => false, 'log' => $log . "⚠️  TLS negotiation failed\n"];
         }
-        fwrite($stream, $ehlo);
+        fwrite($stream, $ehlo); // re-send EHLO after STARTTLS
         $log .= $ehlo . read_multiline($stream);
     }
 
     /* AUTH LOGIN */
     fwrite($stream, "AUTH LOGIN\r\n");
     $log .= "AUTH LOGIN\r\n" . read_multiline($stream);
+
+    // Send base64 encoded username and password
     fwrite($stream, base64_encode($username) . "\r\n");
     $log .= "***username***\n" . read_multiline($stream);
+
     fwrite($stream, base64_encode($password) . "\r\n");
     $log .= "***password***\n" . read_multiline($stream);
 
@@ -90,15 +186,17 @@ function send_smtp_mail(
     fwrite($stream, "DATA\r\n");
     $log .= "DATA\r\n" . read_multiline($stream);
 
-    /* Message data */
+    // Email Headers with HTML content type
     $headers  = "From: $from\r\n";
     $headers .= "To: $to\r\n";
     $headers .= "Subject: $subject\r\n";
     $headers .= "MIME-Version: 1.0\r\n";
-    $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+    $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+    $headers .= "Content-Transfer-Encoding: quoted-printable\r\n";
 
+    // Send email body (HTML formatted)
     fwrite($stream, $headers . "\r\n" . $body . "\r\n.\r\n");
-    $log .= "[message sent]\n" . read_multiline($stream);
+    $log .= "[HTML message sent]\n" . read_multiline($stream);
 
     /* QUIT */
     fwrite($stream, "QUIT\r\n");
@@ -161,6 +259,14 @@ function read_multiline($stream): string
             border-radius: 4px;
         }
 
+        select {
+            width: 100%;
+            padding: 8px 10px;
+            margin-top: 4px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
         button {
             margin-top: 20px;
             padding: 10px 18px;
@@ -188,19 +294,35 @@ function read_multiline($stream): string
     <h2>Lifebox M&E | SMTP Test Utility</h2>
 
     <form method="post">
+        <label>Select SMTP Setting</label>
+        <select name="smtp_id" onchange="this.form.submit()">
+            <option value="">Select SMTP Config</option>
+            <?php foreach ($smtpConfigs as $config): ?>
+                <option value="<?= $config['id'] ?>" <?= $config['id'] == $smtpConfig['id'] ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($config['host']) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+
         <label>SMTP server</label>
-        <input name="host" value="<?= htmlspecialchars($_POST['host'] ?? 'smtp-mail.outlook.com') ?>">
+        <input name="host" value="<?= htmlspecialchars($smtpConfig['host']) ?>" required>
+
         <label>SMTP port</label>
-        <input name="port" value="<?= htmlspecialchars($_POST['port'] ?? '587') ?>">
+        <input name="port" value="<?= htmlspecialchars($smtpConfig['port']) ?>" required>
+
         <label>Protocol (plain | starttls | tls | ssl)</label>
-        <input name="protocol" value="<?= htmlspecialchars($_POST['protocol'] ?? 'starttls') ?>">
+        <input name="protocol" value="<?= htmlspecialchars($smtpConfig['secure']) ?>" required>
+
         <label>SMTP username</label>
-        <input name="user" value="<?= htmlspecialchars($_POST['user'] ?? 'mne@lifebox.org') ?>">
+        <input name="user" value="<?= htmlspecialchars($smtpConfig['username']) ?>" required>
+
         <label>SMTP password</label>
-        <input name="pass" type="password" value="<?= htmlspecialchars($_POST['pass'] ?? 'G.817939771353uk') ?>">
+        <input name="pass" type="password" value="<?= htmlspecialchars($smtpConfig['password']) ?>" required>
+
         <label>Recipient e‑mail</label>
-        <input name="to" value="<?= htmlspecialchars($_POST['to'] ?? 'michaelktd@merqconsultancy.org') ?>">
-        <button type="submit">Send Test</button>
+        <input name="to" value="<?= htmlspecialchars($_POST['to'] ?? '') ?>" required>
+
+        <button name="send_test" type="submit">Send Test</button>
     </form>
 
     <?php if (isset($result)): ?>

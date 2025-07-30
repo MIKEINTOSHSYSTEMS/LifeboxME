@@ -596,20 +596,17 @@ $globalSettings["bEncryptPasswords"] = true;
 $globalSettings["nEncryptPasswordMethod"] = "0";
 
 //mail settings
-
-/*
 $globalSettings["useBuiltInMailer"] = false;
 
 $globalSettings["useCustomSMTPSettings"] = true;
 
-$globalSettings["strSMTPUser"] = "mne@lifebox.org";
-$globalSettings["strSMTPServer"] = "smtp-mail.outlook.com";
+$globalSettings["strSMTPUser"] = "";
+$globalSettings["strSMTPServer"] = "";
 $globalSettings["strSMTPPort"] = "587";
-$globalSettings["strSMTPPassword"] = "G.817939771353uk";
-$globalSettings["strFromEmail"] = "mne@lifebox.org";
+$globalSettings["strSMTPPassword"] = "";
+$globalSettings["strFromEmail"] = "";
 
 $globalSettings["SMTPSecure"] = "tls";
-*/
 //
 
 /*
@@ -772,9 +769,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "168_1753882913";
+$projectBuildKey = "171_1753882913";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "168";
+$projectBuildNumber = "171";
 
 $mlang_messages = array();
 $mlang_charsets = array();
@@ -991,42 +988,121 @@ $fieldFilterValueShrinkPostfix = "...";
 // here goes EVENT_INIT_APP event
 
 
-//mail settings
-$sql = "select * from SMTP";
-
+// mail settings
+$sql = "SELECT * FROM SMTP LIMIT 1"; // Ensure we only get one record
 $rs = DB::Query($sql);
-
 $record = $rs->fetchAssoc();
 
-$SMTPUser = $record["username"];
+if ($record) {
+  // Basic SMTP settings
+  $SMTPUser = $record["username"];
+  $SMTPServer = $record["host"];
+  $SMTPPort = $record["port"];
+  $SMTPPassword = $record["password"];
+  $FromEmail = $record["smtpfrom"];
+  $SMTPSecure = strtolower($record["secure"]); // Ensure lowercase for consistency
 
-$SMTPServer = $record["host"];
+  // Convert secure protocol to what PHPMailer expects
+  $mailerSecure = '';
+  if ($SMTPSecure === 'ssl') {
+    $mailerSecure = 'ssl';
+  } elseif ($SMTPSecure === 'tls' || $SMTPSecure === 'starttls') {
+    $mailerSecure = 'tls';
+  }
 
-$SMTPPort = $record["port"];
+  // Global settings configuration
+  $globalSettings["useBuiltInMailer"] = false;
+  $globalSettings["useCustomSMTPSettings"] = true;
 
-$SMTPPassword = $record["password"];
+  $globalSettings["strSMTPUser"] = $SMTPUser;
+  $globalSettings["strSMTPServer"] = $SMTPServer;
+  $globalSettings["strSMTPPort"] = $SMTPPort;
+  $globalSettings["strSMTPPassword"] = $SMTPPassword;
+  $globalSettings["strFromEmail"] = $FromEmail;
+  $globalSettings["SMTPSecure"] = $mailerSecure;
 
-$FromEmail = $record["smtpfrom"];
+  // HTML Email Settings
+  $globalSettings["SMTPAuth"] = true;
+  $globalSettings["SMTPDebug"] = 0;
+  $globalSettings["CharSet"] = 'UTF-8';
+  $globalSettings["ContentType"] = 'text/html';
+  $globalSettings["Encoding"] = 'quoted-printable';
+  $globalSettings["isHTML"] = true;
 
-$SMTPSecure = $record["secure"];
-$globalSettings["useBuiltInMailer"] = false;
+  // Define the HTML footer to be appended to all emails
+  $globalSettings["htmlFooter"] = '
+    <div align="center" style="margin: 30px 0; font-family: \'Segoe UI\', Tahoma, Geneva, Verdana, sans-serif; background-color: #078ca9e7; border: 1px solid #1e97b1; border-radius: 8px; padding: 20px; box-shadow: 0 3px 10px #0079a7cc;">
+        <p style="font-size: 16px; color: white; margin: 0;">
+            <strong>Lifebox Monitoring &amp; Evaluation System</strong> <br>
+            <span style="font-style: italic; color: #f8f9fa;">Version 0.1 | Build 0.7</span><br>
+            <span style="color: white;">All Rights Reserved.</span>
+            <img src="https://www.lifebox.org/wp-content/themes/lifebox/assets/images/lblogo.svg" alt="Lifebox Logo" width="15" height="15" style="vertical-align: middle;">
+            <a href="https://lifebox.org" style="text-decoration: none; color: white; font-weight: bold;">Lifebox</a> ©
+            ' . date('Y') . '<br>
+            <span style="color: #ff6b35;">Designed &amp; Developed By</span>
+            <a href="https://merqconsultancy.org" style="text-decoration: none; color: white; font-weight: bold;">MERQ Consultancy</a>
+            <br><br>
+            <a href="' . rtrim($globalSettings["rootURL"], '/') . '" style="display: inline-block; background-color: #ffc107; color: #212529; padding: 6px 12px; text-decoration: none; border-radius: 4px; font-weight: bold;">
+                <i class="fa fa-home" style="margin-right: 5px;"></i>Home
+            </a>
+        </p>
+    </div>';
 
-$globalSettings["useCustomSMTPSettings"] = true;
-$globalSettings["strSMTPUser"] = $record["username"];
+  // For PHP mailer configuration
+  ini_set('SMTP', $SMTPServer);
+  ini_set('smtp_port', $SMTPPort);
+  ini_set('sendmail_from', $FromEmail);
 
-$globalSettings["strSMTPServer"] = $record["host"];
+  // If you're using PHPMailer, you might want to add this helper function
+  if (!function_exists('sendHtmlEmail')) {
+    function sendHtmlEmail($to, $subject, $body, $altBody = '')
+    {
+      global $globalSettings;
 
-$globalSettings["strSMTPPort"] = $record["port"];
+      // Append the HTML footer to the body
+      $fullHtmlBody = $body . $globalSettings["htmlFooter"];
 
-$globalSettings["strSMTPPassword"] = $record["password"];
+      // If you're using PHPMailer
+      $mail = new PHPMailer(true);
+      try {
+        // Server settings
+        $mail->isSMTP();
+        $mail->Host = $globalSettings["strSMTPServer"];
+        $mail->Port = $globalSettings["strSMTPPort"];
+        $mail->SMTPAuth = $globalSettings["SMTPAuth"];
+        $mail->Username = $globalSettings["strSMTPUser"];
+        $mail->Password = $globalSettings["strSMTPPassword"];
+        $mail->SMTPSecure = $globalSettings["SMTPSecure"];
 
-$globalSettings["strFromEmail"] = $record["smtpfrom"];
+        // Recipients
+        $mail->setFrom($globalSettings["strFromEmail"], 'Lifebox M&E System');
+        $mail->addAddress($to);
 
-$globalSettings["SMTPSecure"] = $record["secure"];
+        // Content
+        $mail->isHTML(true);
+        $mail->Subject = $subject;
+        $mail->Body = $fullHtmlBody;
+        $mail->AltBody = $altBody ?: strip_tags($fullHtmlBody);
 
+        $mail->send();
+        return true;
+      } catch (Exception $e) {
+        error_log("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+        return false;
+      }
+    }
+  }
+} else {
+  // Fallback to default mail() function if no SMTP config found
+  $globalSettings["useBuiltInMailer"] = true;
+  $globalSettings["useCustomSMTPSettings"] = false;
+  error_log("Warning: No SMTP configuration found in database. Falling back to PHP mail() function.");
+}
 
+// end of smtp mail settings
 // Place event code here.
 // Use "Add Action" button to add code snippets.
+
 ;
 
 
