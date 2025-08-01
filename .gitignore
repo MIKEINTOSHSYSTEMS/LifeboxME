@@ -22,6 +22,8 @@ api/database/main/backup
 api/database/main/test.php
 api/database/test/
 api/mail/PHPMailer/
+api/users/test.php
+api/dev/
 .env
 **/note.txt
 *.log
