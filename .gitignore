@@ -23,7 +23,10 @@ api/database/main/test.php
 api/database/test/
 api/mail/PHPMailer/
 api/users/test.php
-api/dev/
+api/dev/api/
+api/dev/assets/
+api/dev/db/db.php
+api/dev/docker/
 .env
 **/note.txt
 *.log
