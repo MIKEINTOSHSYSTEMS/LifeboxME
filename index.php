@@ -243,6 +243,21 @@ function getNotificationIcon($type)
                         .notification-badge.pulse {
                             animation: pulse 0.5s ease-in-out;
                         }
+
+                        .notification-actions {
+                            opacity: 0;
+                            transition: opacity 0.3s ease;
+                        }
+
+                        .notification-item:hover .notification-actions {
+                            opacity: 1;
+                        }
+
+                        .btn-unmark {
+                            padding: 0.15rem 0.4rem;
+                            font-size: 0.75rem;
+                            line-height: 1;
+                        }
                     </style>
                 </defs>
                 <g id="Lifebox_Icon" data-name="Lifebox Icon">
@@ -340,7 +355,10 @@ function getNotificationIcon($type)
                             <div class="dropdown-menu dropdown-menu-end notification-menu" aria-labelledby="notificationDropdown">
                                 <div class="notification-header">
                                     <h6>Notifications</h6>
-                                    <small><a href="#" id="markAllRead">Mark all as read</a></small>
+                                    <div>
+                                        <small><a href="#" id="markAllRead">Mark all as read</a></small>
+                                        <small><a href="#" id="markAllUnread" class="ms-2">Unmark all</a></small>
+                                    </div>
                                 </div>
                                 <div class="notification-list" id="notificationList">
                                     <!-- Notifications will be loaded here via AJAX -->
@@ -350,10 +368,11 @@ function getNotificationIcon($type)
                                         </div>
                                     </div>
                                 </div>
-                                <div class="notification-footer">
-                                    <!-- This button will link to the admin panel  And should be visible only if the admin user logged in-->
-                                    <a href="res/admin/index.php" class="btn btn-sm btn-primary w-100">View All</a>
-                                </div>
+                                <?php if (is_logged_in() && ($_SESSION['is_admin'] ?? false)): ?>
+                                    <div class="notification-footer">
+                                        <a href="res/admin/index.php" class="btn btn-sm btn-primary w-100">View All</a>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </li>
@@ -1040,20 +1059,17 @@ function getNotificationIcon($type)
 
     <!-- NEW Notice Modal START-->
 
-    <div class="modal fade" id="noticeModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-notice">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"><i class="fa-solid fa-hexagon-exclamation"></i> System Updates & Notices</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <?php if (empty($activeNotifications)): ?>
-                        <div class="alert alert-info">
-                            <h5><i class="fas fa-info-circle me-2"></i> No Current Notifications</h5>
-                            <p>There are no active system notifications at this time.</p>
-                        </div>
-                    <?php else: ?>
+    <!-- Notice Modal -->
+    <?php if (!empty($activeNotifications)): ?>
+        <!-- Notice Modal (only shown when there are active notifications) -->
+        <div class="modal fade" id="noticeModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-notice">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><i class="fa-solid fa-hexagon-exclamation"></i> System Updates & Notices</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
                         <?php foreach ($activeNotifications as $notification): ?>
                             <div class="alert alert-<?= htmlspecialchars($notification['notification_type']) ?>">
                                 <?= $notification['content'] ?>
@@ -1066,17 +1082,32 @@ function getNotificationIcon($type)
                                 <?php endif; ?>
                             </div>
                         <?php endforeach; ?>
-                    <?php endif; ?>
-                    <a href="./app/login.php" class="btn btn-secondary"><i class="fa-solid fa-arrow-right-to-arc"></i> Login</a>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <!-- This button will link to the admin panel  And should be visible only if the admin user logged in-->
-                    <button type="button" class="btn btn-primary">View All Notices</button>
+                        <a href="./app/login.php" class="btn btn-secondary"><i class="fa-solid fa-arrow-right-to-arc"></i> Login</a>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <?php if (is_logged_in() && ($_SESSION['is_admin'] ?? false)): ?>
+                            <a href="res/admin/index.php" class="btn btn-primary">View All Notices</a>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <script>
+            $(document).ready(function() {
+                $('#noticeModal').modal('show');
+            });
+        </script>
+    <?php endif; ?>
+
+    <?php if (!empty($activeNotifications)): ?>
+        <script>
+            $(document).ready(function() {
+                $('#noticeModal').modal('show');
+            });
+        </script>
+    <?php endif; ?>
 
 
 
@@ -1195,6 +1226,101 @@ function getNotificationIcon($type)
                 notificationCount.classList.remove('pulse');
             }
 
+            // Time ago helper function
+            function getTimeAgo(dateString) {
+                const date = new Date(dateString);
+                const now = new Date();
+                const seconds = Math.floor((now - date) / 1000);
+
+                if (seconds < 60) return 'Just now';
+                if (seconds < 3600) return `${Math.floor(seconds / 60)} minutes ago`;
+                if (seconds < 86400) return `${Math.floor(seconds / 3600)} hours ago`;
+                return `${Math.floor(seconds / 86400)} days ago`;
+            }
+
+            // Function to mark notification as read
+            function markAsRead(notificationId, element) {
+                fetch('res/notifications/mark_read.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            notification_id: notificationId
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            element.classList.remove('unread');
+                            element.classList.add('read');
+
+                            // Add unmark button
+                            const unmarkBtn = document.createElement('button');
+                            unmarkBtn.className = 'btn btn-sm btn-outline-secondary btn-unmark';
+                            unmarkBtn.innerHTML = '<i class="fas fa-undo me-1"></i> Unmark';
+                            unmarkBtn.onclick = (e) => {
+                                e.stopPropagation();
+                                markAsUnread(notificationId, element);
+                            };
+
+                            // Create actions container if it doesn't exist
+                            let actionsContainer = element.querySelector('.notification-actions');
+                            if (!actionsContainer) {
+                                actionsContainer = document.createElement('div');
+                                actionsContainer.className = 'notification-actions';
+                                element.querySelector('.notification-time').after(actionsContainer);
+                            }
+
+                            actionsContainer.innerHTML = '';
+                            actionsContainer.appendChild(unmarkBtn);
+
+                            // Update unread count
+                            const count = parseInt(notificationCount.textContent) - 1;
+                            notificationCount.textContent = count;
+                            if (count === 0) {
+                                notificationCount.classList.remove('pulse');
+                            }
+                        }
+                    });
+            }
+
+            // Function to mark notification as unread
+            function markAsUnread(notificationId, element) {
+                fetch('res/notifications/mark_unread.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            notification_id: notificationId
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            element.classList.remove('read');
+                            element.classList.add('unread');
+
+                            // Remove unmark button
+                            const actionsContainer = element.querySelector('.notification-actions');
+                            if (actionsContainer) {
+                                actionsContainer.innerHTML = '';
+                            }
+
+                            // Update unread count
+                            const count = parseInt(notificationCount.textContent) + 1;
+                            notificationCount.textContent = count;
+                            notificationCount.classList.add('pulse');
+
+                            // Re-add click handler
+                            element.addEventListener('click', function() {
+                                markAsRead(notificationId, element);
+                            });
+                        }
+                    });
+            }
+
             // Function to load notifications
             function loadNotifications() {
                 fetch('res/notifications/get_active.php')
@@ -1220,10 +1346,13 @@ function getNotificationIcon($type)
                                 if (isUnread) unreadCount++;
 
                                 html += `
-                            <div class="notification-item ${isUnread ? 'unread' : ''}" 
+                            <div class="notification-item ${isUnread ? 'unread' : 'read'}" 
                                  data-notification-id="${notification.id}">
                                 <div class="notification-content">${notification.content}</div>
-                                <div class="notification-time">${timeAgo}</div>
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <div class="notification-time">${timeAgo}</div>
+                                    <div class="notification-actions"></div>
+                                </div>
                             </div>
                         `;
                             });
@@ -1231,12 +1360,27 @@ function getNotificationIcon($type)
                             notificationList.innerHTML = html;
                             notificationCount.textContent = unreadCount;
 
-                            // Add click handler to mark as read when clicked
+                            // Add click handler to mark as read when clicked on unread items
                             document.querySelectorAll('.notification-item.unread').forEach(item => {
                                 item.addEventListener('click', function() {
                                     const notificationId = this.getAttribute('data-notification-id');
                                     markAsRead(notificationId, this);
                                 });
+                            });
+
+                            // Add unmark buttons to read notifications
+                            document.querySelectorAll('.notification-item.read').forEach(item => {
+                                const notificationId = item.getAttribute('data-notification-id');
+                                const unmarkBtn = document.createElement('button');
+                                unmarkBtn.className = 'btn btn-sm btn-outline-secondary btn-unmark';
+                                unmarkBtn.innerHTML = '<i class="fas fa-undo me-1"></i> Unmark';
+                                unmarkBtn.onclick = (e) => {
+                                    e.stopPropagation();
+                                    markAsUnread(notificationId, item);
+                                };
+
+                                const actionsContainer = item.querySelector('.notification-actions');
+                                actionsContainer.appendChild(unmarkBtn);
                             });
 
                             // Add pulse animation if there are unread notifications
@@ -1259,18 +1403,6 @@ function getNotificationIcon($type)
                     });
             }
 
-            // Time ago helper function
-            function getTimeAgo(dateString) {
-                const date = new Date(dateString);
-                const now = new Date();
-                const seconds = Math.floor((now - date) / 1000);
-
-                if (seconds < 60) return 'Just now';
-                if (seconds < 3600) return `${Math.floor(seconds / 60)} minutes ago`;
-                if (seconds < 86400) return `${Math.floor(seconds / 3600)} hours ago`;
-                return `${Math.floor(seconds / 86400)} days ago`;
-            }
-
             // Load notifications when bell is clicked
             notificationBell.addEventListener('shown.bs.dropdown', loadNotifications);
 
@@ -1281,12 +1413,35 @@ function getNotificationIcon($type)
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
-                        }
+                        },
+                        body: JSON.stringify({
+                            mark_all: true
+                        })
                     })
                     .then(response => {
                         if (response.ok) {
                             loadNotifications();
                             notificationCount.classList.remove('pulse');
+                        }
+                    });
+            });
+
+            // Mark all as unread
+            document.getElementById('markAllUnread').addEventListener('click', function(e) {
+                e.preventDefault();
+                fetch('res/notifications/mark_unread.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            mark_all: true
+                        })
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            loadNotifications();
+                            notificationCount.classList.add('pulse');
                         }
                     });
             });

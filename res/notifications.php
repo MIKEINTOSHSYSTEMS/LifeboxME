@@ -53,8 +53,8 @@ class NotificationManager
     {
         // First check if already read to avoid duplicates
         $checkSql = "SELECT id FROM notification_reads 
-                     WHERE notification_id = :notification_id 
-                     AND user_id = :user_id";
+                 WHERE notification_id = :notification_id 
+                 AND user_id = :user_id";
         $checkStmt = $this->pdo->prepare($checkSql);
         $checkStmt->execute([
             ':notification_id' => $notificationId,
@@ -66,7 +66,7 @@ class NotificationManager
         }
 
         $sql = "INSERT INTO notification_reads (notification_id, user_id) 
-                VALUES (:notification_id, :user_id)";
+            VALUES (:notification_id, :user_id)";
 
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([
@@ -101,6 +101,19 @@ class NotificationManager
         }
 
         return count($unreadNotifications);
+    }
+
+    public function markNotificationAsUnread($notificationId, $userId)
+    {
+        $sql = "DELETE FROM notification_reads 
+            WHERE notification_id = :notification_id 
+            AND user_id = :user_id";
+
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([
+            ':notification_id' => $notificationId,
+            ':user_id' => $userId
+        ]);
     }
 
     // Create a new notification
@@ -231,7 +244,7 @@ class NotificationManager
         ]);
     }
 
-    // Add this method to NotificationManager class
+    // To get notifications for the current user
     public function getUserNotifications($userId)
     {
         $now = date('Y-m-d H:i:s');

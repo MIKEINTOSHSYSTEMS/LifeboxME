@@ -4,6 +4,11 @@ require_once '../database.php';
 require_once '../notifications.php';
 require_once '../session_helper.php';
 
+if (!is_logged_in() || !($_SESSION['is_admin'] ?? false)) {
+    http_response_code(403);
+    die('Access denied. You must be an administrator to view this page.');
+}
+
 $notificationManager = new NotificationManager($pdo);
 
 // Handle form submissions

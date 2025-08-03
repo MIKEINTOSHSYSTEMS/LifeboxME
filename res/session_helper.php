@@ -46,6 +46,15 @@ function is_logged_in()
     return isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
 }
 
+if (isset($_SESSION['UserID'])) {
+    $_SESSION['user_id'] = (int)$_SESSION['UserID'];
+    $_SESSION['username'] = $_SESSION['UserName'] ?? null;
+
+    // Check if user is admin
+    $is_admin = ($_SESSION['AccessLevel'] ?? 0) === ACCESS_LEVEL_ADMIN;
+    $_SESSION['is_admin'] = $is_admin;
+}
+
 /**
  * Handle logout
  */
