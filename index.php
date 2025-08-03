@@ -1,5 +1,44 @@
 <?php
 // index.php
+
+require_once 'res/database.php';
+require_once 'res/notifications.php';
+require_once 'res/session_helper.php';
+
+// Initialize shared session with PHPRunner
+//initializeSharedSession();
+
+try {
+    $notificationManager = new NotificationManager($pdo);
+    $activeNotifications = $notificationManager->getActiveNotifications();
+
+    // Debug output - remove after testing
+    error_log("Active notifications count: " . count($activeNotifications));
+} catch (Exception $e) {
+    error_log("Error loading notifications: " . $e->getMessage());
+    $activeNotifications = [];
+}
+?>
+
+<?php
+// Helper function to get appropriate icon for notification type
+function getNotificationIcon($type)
+{
+    switch ($type) {
+        case 'info':
+            return 'info-circle';
+        case 'warning':
+            return 'exclamation-triangle';
+        case 'primary':
+            return 'bullhorn';
+        case 'danger':
+            return 'exclamation-circle';
+        case 'success':
+            return 'check-circle';
+        default:
+            return 'info-circle';
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,6 +123,127 @@
                         .preloader-logo polygon,
                         .preloader-logo polyline {
                             opacity: 0;
+                        }
+
+                        /* Notification Bell Styles */
+                        .notification-bell {
+                            position: relative;
+                            font-size: 1.25rem;
+                            color: rgba(255, 255, 255, 0.75);
+                            transition: all 0.3s ease;
+                            padding: 0.5rem 1rem;
+                        }
+
+                        .notification-bell:hover {
+                            color: white;
+                        }
+
+                        .notification-badge {
+                            position: absolute;
+                            top: 5px;
+                            right: 5px;
+                            background-color: #ec6542;
+                            color: white;
+                            border-radius: 50%;
+                            width: 18px;
+                            height: 18px;
+                            font-size: 10px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-weight: bold;
+                        }
+
+                        .notification-menu {
+                            width: 350px;
+                            padding: 0;
+                            border: none;
+                            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+                            border-radius: 8px;
+                            overflow: hidden;
+                        }
+
+                        .notification-header {
+                            padding: 12px 15px;
+                            background-color: #048ba7;
+                            color: white;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                        }
+
+                        .notification-header h6 {
+                            margin: 0;
+                            font-weight: 600;
+                        }
+
+                        .notification-header small a {
+                            color: rgba(255, 255, 255, 0.8);
+                            text-decoration: none;
+                            font-size: 0.75rem;
+                        }
+
+                        .notification-header small a:hover {
+                            color: white;
+                        }
+
+                        .notification-list {
+                            max-height: 400px;
+                            overflow-y: auto;
+                        }
+
+                        .notification-item {
+                            padding: 12px 15px;
+                            border-bottom: 1px solid #eee;
+                            transition: background-color 0.2s;
+                        }
+
+                        .notification-item:last-child {
+                            border-bottom: none;
+                        }
+
+                        .notification-item:hover {
+                            background-color: #f8f9fa;
+                        }
+
+                        .notification-item.unread {
+                            background-color: #f0f9ff;
+                        }
+
+                        .notification-content {
+                            font-size: 0.9rem;
+                            color: #333;
+                        }
+
+                        .notification-time {
+                            font-size: 0.75rem;
+                            color: #6c757d;
+                            margin-top: 5px;
+                        }
+
+                        .notification-footer {
+                            padding: 10px 15px;
+                            background-color: #f8f9fa;
+                            border-top: 1px solid #eee;
+                        }
+
+                        /* Animation for new notifications */
+                        @keyframes pulse {
+                            0% {
+                                transform: scale(1);
+                            }
+
+                            50% {
+                                transform: scale(1.1);
+                            }
+
+                            100% {
+                                transform: scale(1);
+                            }
+                        }
+
+                        .notification-badge.pulse {
+                            animation: pulse 0.5s ease-in-out;
                         }
                     </style>
                 </defs>
@@ -172,6 +332,32 @@
                     <li class="nav-item"><a class="nav-link" href="#screenshots">Screenshots</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item">
+                        <!-- Notification Bell -->
+                        <div class="dropdown notification-dropdown">
+                            <a href="#" class="nav-link notification-bell" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-bell"></i>
+                                <span class="notification-badge" id="notificationCount">0</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end notification-menu" aria-labelledby="notificationDropdown">
+                                <div class="notification-header">
+                                    <h6>Notifications</h6>
+                                    <small><a href="#" id="markAllRead">Mark all as read</a></small>
+                                </div>
+                                <div class="notification-list" id="notificationList">
+                                    <!-- Notifications will be loaded here via AJAX -->
+                                    <div class="text-center py-3">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="notification-footer">
+                                    <a href="res/admin/notifications.php" class="btn btn-sm btn-primary w-100">View All</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
                     <li class="nav-item"><a class="nav-link btn btn-primary btn-sm text-white ms-2" href="app/index.htm">Login</a></li>
                 </ul>
             </div>
@@ -807,7 +993,51 @@
         </div>
     </footer>
 
-    <!-- Notice Modal -->
+    <!-- NEW Notice Modal START-->
+
+    <div class="modal fade" id="noticeModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-notice">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fa-solid fa-hexagon-exclamation"></i> System Updates & Notices</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <?php if (empty($activeNotifications)): ?>
+                        <div class="alert alert-info">
+                            <h5><i class="fas fa-info-circle me-2"></i> No Current Notifications</h5>
+                            <p>There are no active system notifications at this time.</p>
+                        </div>
+                    <?php else: ?>
+                        <?php foreach ($activeNotifications as $notification): ?>
+                            <div class="alert alert-<?= htmlspecialchars($notification['notification_type']) ?>">
+                                <?= $notification['content'] ?>
+                                <?php if (!empty($notification['action_url'])): ?>
+                                    <div class="mt-2">
+                                        <a href="<?= htmlspecialchars($notification['action_url']) ?>" class="alert-link">
+                                            <?= htmlspecialchars($notification['action_text'] ?? 'Click here') ?>
+                                        </a>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                    <a href="./app/login.php" class="btn btn-secondary"><i class="fa-solid fa-arrow-right-to-arc"></i> Login</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">View All Notices</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- NEW Notice Modal END -->
+
+
+    <!-- OLD Notice Modal 
     <div class="modal fade" id="noticeModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-notice">
             <div class="modal-content">
@@ -845,6 +1075,7 @@
             </div>
         </div>
     </div>
+                -->
 
     <!-- Scroll to Top Button -->
     <button id="scrollToTopBtn" style="display:none;position:fixed;bottom:30px;right:30px;z-index:9999;" class="btn btn-primary rounded-circle">
@@ -872,7 +1103,158 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script src="./assets/js/scripts.js"></script>
     <script>
+        // Notification Timeout
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hide preloader when page is fully loaded
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    var preloader = document.getElementById('preloader');
+                    if (preloader) {
+                        preloader.style.opacity = '0';
+                        setTimeout(function() {
+                            preloader.style.display = 'none';
+                        }, 500);
+                    }
+                }, 500); // Adjust timeout if needed
+            });
 
+            // Add this to handle cases where load event doesn't fire
+            setTimeout(function() {
+                var preloader = document.getElementById('preloader');
+                if (preloader) {
+                    preloader.style.opacity = '0';
+                    setTimeout(function() {
+                        preloader.style.display = 'none';
+                    }, 500);
+                }
+            }, 3000); // Fallback timeout after 3 seconds
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load notifications when bell is clicked
+            const notificationBell = document.getElementById('notificationDropdown');
+            const notificationList = document.getElementById('notificationList');
+            const notificationCount = document.getElementById('notificationCount');
+
+            // Function to handle authentication errors
+            function handleAuthError() {
+                notificationList.innerHTML = `
+            <div class="text-center py-3">
+                <p>Please login to view notifications</p>
+                <a href="app/index.htm" class="btn btn-sm btn-primary">Login</a>
+            </div>
+        `;
+                notificationCount.textContent = '0';
+                notificationCount.classList.remove('pulse');
+            }
+
+            // Function to load notifications
+            function loadNotifications() {
+                fetch('res/notifications/get_active.php')
+                    .then(response => {
+                        if (response.status === 401) {
+                            handleAuthError();
+                            throw new Error('Unauthorized');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.error) {
+                            throw new Error(data.error);
+                        }
+
+                        if (data.length > 0) {
+                            let html = '';
+                            let unreadCount = 0;
+
+                            data.forEach(notification => {
+                                const timeAgo = getTimeAgo(notification.created_at);
+                                const isUnread = !notification.is_read;
+                                if (isUnread) unreadCount++;
+
+                                html += `
+                            <div class="notification-item ${isUnread ? 'unread' : ''}" 
+                                 data-notification-id="${notification.id}">
+                                <div class="notification-content">${notification.content}</div>
+                                <div class="notification-time">${timeAgo}</div>
+                            </div>
+                        `;
+                            });
+
+                            notificationList.innerHTML = html;
+                            notificationCount.textContent = unreadCount;
+
+                            // Add click handler to mark as read when clicked
+                            document.querySelectorAll('.notification-item.unread').forEach(item => {
+                                item.addEventListener('click', function() {
+                                    const notificationId = this.getAttribute('data-notification-id');
+                                    markAsRead(notificationId, this);
+                                });
+                            });
+
+                            // Add pulse animation if there are unread notifications
+                            if (unreadCount > 0) {
+                                notificationCount.classList.add('pulse');
+                            } else {
+                                notificationCount.classList.remove('pulse');
+                            }
+                        } else {
+                            notificationList.innerHTML = '<div class="text-center py-3 text-muted">No new notifications</div>';
+                            notificationCount.textContent = '0';
+                            notificationCount.classList.remove('pulse');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error loading notifications:', error);
+                        if (error.message !== 'Unauthorized') {
+                            notificationList.innerHTML = '<div class="text-center py-3 text-danger">Error loading notifications</div>';
+                        }
+                    });
+            }
+
+            // Time ago helper function
+            function getTimeAgo(dateString) {
+                const date = new Date(dateString);
+                const now = new Date();
+                const seconds = Math.floor((now - date) / 1000);
+
+                if (seconds < 60) return 'Just now';
+                if (seconds < 3600) return `${Math.floor(seconds / 60)} minutes ago`;
+                if (seconds < 86400) return `${Math.floor(seconds / 3600)} hours ago`;
+                return `${Math.floor(seconds / 86400)} days ago`;
+            }
+
+            // Load notifications when bell is clicked
+            notificationBell.addEventListener('shown.bs.dropdown', loadNotifications);
+
+            // Mark all as read
+            document.getElementById('markAllRead').addEventListener('click', function(e) {
+                e.preventDefault();
+                fetch('res/notifications/mark_read.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            loadNotifications();
+                            notificationCount.classList.remove('pulse');
+                        }
+                    });
+            });
+
+            // Initialize with count (lightweight)
+            fetch('res/notifications/get_count.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.count > 0) {
+                        notificationCount.textContent = data.count;
+                        notificationCount.classList.add('pulse');
+                    }
+                });
+        });
     </script>
 </body>
 
