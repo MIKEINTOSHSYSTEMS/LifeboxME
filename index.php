@@ -50,6 +50,7 @@ function getNotificationIcon($type)
     <meta name="author" content="MERQ Consultancy">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
     <link rel="stylesheet" href="./assets/style/styles.css">
@@ -350,6 +351,7 @@ function getNotificationIcon($type)
                                     </div>
                                 </div>
                                 <div class="notification-footer">
+                                    <!-- This button will link to the admin panel  And should be visible only if the admin user logged in-->
                                     <a href="res/admin/index.php" class="btn btn-sm btn-primary w-100">View All</a>
                                 </div>
                             </div>
@@ -363,7 +365,7 @@ function getNotificationIcon($type)
                                     <i class="fas fa-user me-1"></i> <?= htmlspecialchars($_SESSION['username'] ?? 'User') ?>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="?logout=1">Logout</a></li>
+                                    <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                                 </ul>
                             </div>
                         <?php else: ?>
@@ -1069,6 +1071,7 @@ function getNotificationIcon($type)
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!-- This button will link to the admin panel  And should be visible only if the admin user logged in-->
                     <button type="button" class="btn btn-primary">View All Notices</button>
                 </div>
             </div>
@@ -1307,31 +1310,42 @@ function getNotificationIcon($type)
                 const username = $('#loginUsername').val();
                 const password = $('#loginPassword').val();
 
+                // Clear previous errors
+                $('#loginError').addClass('d-none').text('');
+
+                // Basic validation
+                if (!username || !password) {
+                    $('#loginError').text('Please enter both username and password').removeClass('d-none');
+                    return;
+                }
+
                 $.ajax({
                     type: 'POST',
                     url: 'login_handler.php',
                     data: {
-                        username,
-                        password
+                        username: username,
+                        password: password
                     },
+                    dataType: 'json',
                     success: function(response) {
                         if (response.success) {
-                            location.reload(); // Reload page on success
+                            // Close modal and reload page
+                            $('#loginModal').modal('hide');
+                            location.reload();
                         } else {
                             $('#loginError').text(response.error || 'Login failed').removeClass('d-none');
                         }
                     },
-                    error: function() {
-                        $('#loginError').text('Server error').removeClass('d-none');
+                    error: function(xhr) {
+                        let errorMsg = 'Server error';
+                        try {
+                            const res = JSON.parse(xhr.responseText);
+                            if (res.error) errorMsg = res.error;
+                        } catch (e) {}
+                        $('#loginError').text(errorMsg).removeClass('d-none');
                     }
                 });
             });
-
-            // Notification AJAX calls (existing but updated)
-            const notificationBell = document.getElementById('notificationDropdown');
-            if (notificationBell) {
-                notificationBell.addEventListener('shown.bs.dropdown', loadNotifications);
-            }
         });
     </script>
 </body>

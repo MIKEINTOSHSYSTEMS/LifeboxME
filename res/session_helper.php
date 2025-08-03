@@ -32,7 +32,10 @@ if (session_status() === PHP_SESSION_NONE) {
 if (isset($_SESSION['UserID'])) {
     $_SESSION['user_id'] = (int)$_SESSION['UserID'];
     $_SESSION['username'] = $_SESSION['UserName'] ?? null;
-    $_SESSION['is_admin'] = ($_SESSION['AccessLevel'] ?? 0) === ACCESS_LEVEL_ADMIN;
+
+    // Check if user is admin
+    $is_admin = ($_SESSION['AccessLevel'] ?? 0) === ACCESS_LEVEL_ADMIN;
+    $_SESSION['is_admin'] = $is_admin;
 }
 
 /**

@@ -251,8 +251,8 @@ class NotificationManager
 
 
     // Add this old method to get active notifications for the current user
-   
-   /*
+
+    /*
     public function getUserNotifications($userId = null)
     {
         if ($userId === null) {
@@ -283,10 +283,10 @@ class NotificationManager
     public function getUserUnreadCount($userId = null)
     {
         if ($userId === null) {
-            if (!isset($_SESSION['user_id'])) {
+            if (!isset($_SESSION['UserID'])) {
                 return 0;
             }
-            $userId = (int)$_SESSION['user_id'];
+            $userId = (int)$_SESSION['UserID'];
         }
 
         $now = date('Y-m-d H:i:s');
