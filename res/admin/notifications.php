@@ -2,6 +2,13 @@
 // res/admin/notifications.php
 require_once '../database.php';
 require_once '../notifications.php';
+require_once '../session_helper.php';
+
+// Check if user is admin
+if (!is_admin()) {
+    header('Location: notifications.php');
+    exit();
+}
 
 $notificationManager = new NotificationManager($pdo);
 

@@ -1,6 +1,8 @@
 <?php
+// res/admin/index.php
 require_once '../database.php';
 require_once '../notifications.php';
+require_once '../session_helper.php';
 
 $notificationManager = new NotificationManager($pdo);
 

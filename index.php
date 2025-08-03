@@ -2,22 +2,19 @@
 // index.php
 
 require_once 'res/database.php';
-require_once 'res/notifications.php';
 require_once 'res/session_helper.php';
-
-// Initialize shared session with PHPRunner
-//initializeSharedSession();
+require_once 'res/notifications.php';
 
 try {
     $notificationManager = new NotificationManager($pdo);
     $activeNotifications = $notificationManager->getActiveNotifications();
-
-    // Debug output - remove after testing
-    error_log("Active notifications count: " . count($activeNotifications));
 } catch (Exception $e) {
-    error_log("Error loading notifications: " . $e->getMessage());
     $activeNotifications = [];
 }
+
+// Initialize shared session with PHPRunner
+//initializeSharedSession();
+
 ?>
 
 <?php
@@ -353,12 +350,29 @@ function getNotificationIcon($type)
                                     </div>
                                 </div>
                                 <div class="notification-footer">
-                                    <a href="res/admin/notifications.php" class="btn btn-sm btn-primary w-100">View All</a>
+                                    <a href="res/admin/index.php" class="btn btn-sm btn-primary w-100">View All</a>
                                 </div>
                             </div>
                         </div>
                     </li>
-                    <li class="nav-item"><a class="nav-link btn btn-primary btn-sm text-white ms-2" href="app/index.htm">Login</a></li>
+                    <!-- Update navbar login button -->
+                    <li class="nav-item">
+                        <?php if (is_logged_in()): ?>
+                            <div class="dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-user me-1"></i> <?= htmlspecialchars($_SESSION['username'] ?? 'User') ?>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="?logout=1">Logout</a></li>
+                                </ul>
+                            </div>
+                        <?php else: ?>
+                            <a class="nav-link btn btn-primary btn-sm text-white ms-2"
+                                href="#"
+                                data-bs-toggle="modal"
+                                data-bs-target="#loginModal">Login</a>
+                        <?php endif; ?>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -993,6 +1007,35 @@ function getNotificationIcon($type)
         </div>
     </footer>
 
+    <!-- login modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login to Lifebox M&E</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="loginUsername" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="loginUsername" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" required>
+                        </div>
+                        <div class="alert alert-danger d-none" id="loginError"></div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="loginSubmit">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- NEW Notice Modal START-->
 
     <div class="modal fade" id="noticeModal" tabindex="-1" aria-hidden="true">
@@ -1254,6 +1297,41 @@ function getNotificationIcon($type)
                         notificationCount.classList.add('pulse');
                     }
                 });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            // Login form submission
+            $('#loginSubmit').click(function() {
+                const username = $('#loginUsername').val();
+                const password = $('#loginPassword').val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'login_handler.php',
+                    data: {
+                        username,
+                        password
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            location.reload(); // Reload page on success
+                        } else {
+                            $('#loginError').text(response.error || 'Login failed').removeClass('d-none');
+                        }
+                    },
+                    error: function() {
+                        $('#loginError').text('Server error').removeClass('d-none');
+                    }
+                });
+            });
+
+            // Notification AJAX calls (existing but updated)
+            const notificationBell = document.getElementById('notificationDropdown');
+            if (notificationBell) {
+                notificationBell.addEventListener('shown.bs.dropdown', loadNotifications);
+            }
         });
     </script>
 </body>

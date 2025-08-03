@@ -1,34 +1,31 @@
 <?php
+// res/notifications/get_active.php
 require_once '../database.php';
 require_once '../notifications.php';
 require_once '../session_helper.php';
 
-// Initialize shared session
-initializeSharedSession();
-
 header('Content-Type: application/json');
 
-try {
-    if (!isset($_SESSION['user_id'])) {
-        throw new Exception('User not authenticated', 401);
-    }
+if (!is_logged_in()) {
+    http_response_code(401);
+    echo json_encode(['error' => 'Unauthorized']);
+    exit;
+}
 
+try {
     $notificationManager = new NotificationManager($pdo);
-    $notifications = $notificationManager->getActiveNotificationsForUser((int)$_SESSION['user_id']);
-    
-    // Format for display
-    $result = array_map(function($notification) {
+    $notifications = $notificationManager->getUserNotifications($_SESSION['user_id']);
+
+    echo json_encode(array_map(function ($notification) {
         return [
             'id' => (int)$notification['id'],
-            'content' => (string)$notification['content'],
-            'created_at' => (string)$notification['created_at'],
-            'is_read' => (bool)$notification['is_read']
+            'content' => $notification['content'],
+            'created_at' => $notification['created_at'],
+            'is_read' => (bool)$notification['is_read'],
+            'type' => $notification['notification_type']
         ];
-    }, $notifications);
-    
-    echo json_encode($result);
+    }, $notifications));
 } catch (Exception $e) {
-    http_response_code($e->getCode() ?: 500);
+    http_response_code(500);
     echo json_encode(['error' => $e->getMessage()]);
 }
-?>

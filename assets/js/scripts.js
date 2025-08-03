@@ -180,3 +180,66 @@ scrollToTopBtn.addEventListener('click', function () {
         });
     }
 });
+
+// Add to existing scripts
+$(document).ready(function () {
+    // Login form submission
+    $('#loginSubmit').click(function () {
+        const username = $('#loginUsername').val();
+        const password = $('#loginPassword').val();
+
+        $.ajax({
+            type: 'POST',
+            url: '/login_handler.php',
+            data: { username, password },
+            success: function (response) {
+                if (response.success) {
+                    location.reload(); // Reload page on success
+                } else {
+                    $('#loginError').text(response.error || 'Login failed').removeClass('d-none');
+                }
+            },
+            error: function () {
+                $('#loginError').text('Server error').removeClass('d-none');
+            }
+        });
+    });
+
+    // Notification AJAX calls (existing but updated)
+    const notificationBell = document.getElementById('notificationDropdown');
+    if (notificationBell) {
+        notificationBell.addEventListener('shown.bs.dropdown', loadNotifications);
+    }
+
+    // ... rest of existing notification code ...
+});
+
+// Add to existing scripts
+$(document).ready(function () {
+    // Login form submission
+    $('#loginSubmit').click(function () {
+        const username = $('#loginUsername').val();
+        const password = $('#loginPassword').val();
+
+        $.ajax({
+            type: 'POST',
+            url: '/login_handler.php',
+            data: { username, password },
+            success: function (response) {
+                if (response.success) {
+                    location.reload(); // Reload page on success
+                } else {
+                    $('#loginError').text(response.error || 'Login failed').removeClass('d-none');
+                }
+            },
+            error: function () {
+                $('#loginError').text('Server error').removeClass('d-none');
+            }
+        });
+    });
+
+    // Notification AJAX calls (existing but updated)
+    const notificationBell = document.getElementById('notificationDropdown');
+    if (notificationBell) {
+        notificationBell.addEventListener('shown.bs.dropdown', loadNotifications);
+    }});

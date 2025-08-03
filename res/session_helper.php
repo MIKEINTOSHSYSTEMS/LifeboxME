@@ -1,51 +1,53 @@
 <?php
 // res/session_helper.php
 
-/**
- * Initialize shared session with PHPRunner
- */
-function initializeSharedSession() {
-    // Match PHPRunner's session configuration
-    $cookieParams = session_get_cookie_params();
-    $secure = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
-    
-    // Use the same session name as PHPRunner
-    session_name('LifeboxSA7lVH6MEdvwh');
-    
-    // Set cookie parameters to match
-    session_set_cookie_params([
-        'lifetime' => 15 * 60, // 15 minutes in seconds
-        'path' => $cookieParams['path'],
-        'domain' => $cookieParams['domain'],
-        'secure' => $secure,
-        'httponly' => true,
-        'samesite' => 'Lax'
-    ]);
-    
-    // Start the session if not already started
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-    
-    // Check for PHPRunner session variables
-    if (isset($_SESSION['UserID'])) {
-        // Map PHPRunner session vars to our format
-        $_SESSION['user_id'] = (int)$_SESSION['UserID'];
-        $_SESSION['username'] = $_SESSION['UserName'] ?? null;
-    }
+// Match PHPRunner's session configuration
+$cookieParams = session_get_cookie_params();
+$secure = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
+
+define("ACCESS_LEVEL_ADMIN", "Admin");
+define("ACCESS_LEVEL_ADMINGROUP", "AdminGroup");
+define("ACCESS_LEVEL_USER", "User");
+define("ACCESS_LEVEL_GUEST", "Guest");
+
+// Use the same session name as PHPRunner
+session_name('pLifeboxSA7lVH6MEdvwh');
+
+// Set cookie parameters to match
+session_set_cookie_params([
+    'lifetime' => 15 * 60, // 15 minutes
+    'path' => $cookieParams['path'],
+    'domain' => $cookieParams['domain'],
+    'secure' => $secure,
+    'httponly' => true,
+    'samesite' => 'Lax'
+]);
+
+// Start the session if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Map PHPRunner session variables to our format
+if (isset($_SESSION['UserID'])) {
+    $_SESSION['user_id'] = (int)$_SESSION['UserID'];
+    $_SESSION['username'] = $_SESSION['UserName'] ?? null;
+    $_SESSION['is_admin'] = ($_SESSION['AccessLevel'] ?? 0) === ACCESS_LEVEL_ADMIN;
 }
 
 /**
- * Check if user is logged in (has active session)
+ * Check if user is logged in
  */
-function is_logged_in() {
+function is_logged_in()
+{
     return isset($_SESSION['user_id']) && $_SESSION['user_id'] !== null;
 }
 
 /**
  * Handle logout
  */
-function handle_logout() {
+function handle_logout()
+{
     if (isset($_GET['logout'])) {
         session_unset();
         session_destroy();
@@ -54,7 +56,5 @@ function handle_logout() {
     }
 }
 
-// Initialize the session when this file is included
-initializeSharedSession();
+// Handle logout if requested
 handle_logout();
-?>

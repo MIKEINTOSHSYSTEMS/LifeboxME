@@ -230,4 +230,80 @@ class NotificationManager
             ':user_id' => $userId
         ]);
     }
+
+    // Add this method to NotificationManager class
+    public function getUserNotifications($userId)
+    {
+        $now = date('Y-m-d H:i:s');
+        $sql = "SELECT n.*, 
+            (nr.user_id IS NOT NULL) AS is_read
+            FROM system_notifications n
+            LEFT JOIN notification_reads nr ON n.id = nr.notification_id AND nr.user_id = :user_id
+            WHERE n.is_active = TRUE 
+            AND (n.start_date IS NULL OR n.start_date <= :now)
+            AND (n.end_date IS NULL OR n.end_date >= :now)
+            ORDER BY n.priority DESC, n.created_at DESC";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':now' => $now, ':user_id' => $userId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    // Add this old method to get active notifications for the current user
+   
+   /*
+    public function getUserNotifications($userId = null)
+    {
+        if ($userId === null) {
+            if (!isset($_SESSION['user_id'])) {
+                return [];
+            }
+            $userId = (int)$_SESSION['user_id'];
+        }
+
+        $now = date('Y-m-d H:i:s');
+        $sql = "SELECT n.*, 
+                (SELECT COUNT(*) FROM notification_reads nr 
+                 WHERE nr.notification_id = n.id AND nr.user_id = :user_id) > 0 AS is_read
+                FROM system_notifications n
+                WHERE n.is_active = TRUE 
+                AND (n.start_date IS NULL OR n.start_date <= :now)
+                AND (n.end_date IS NULL OR n.end_date >= :now)
+                ORDER BY n.priority DESC, n.created_at DESC";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':now' => $now, ':user_id' => $userId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    */
+
+    // Add this method to get unread count for the current user
+    public function getUserUnreadCount($userId = null)
+    {
+        if ($userId === null) {
+            if (!isset($_SESSION['user_id'])) {
+                return 0;
+            }
+            $userId = (int)$_SESSION['user_id'];
+        }
+
+        $now = date('Y-m-d H:i:s');
+        $sql = "SELECT COUNT(n.id) as count
+                FROM system_notifications n
+                WHERE n.is_active = TRUE 
+                AND (n.start_date IS NULL OR n.start_date <= :now)
+                AND (n.end_date IS NULL OR n.end_date >= :now)
+                AND NOT EXISTS (
+                    SELECT 1 FROM notification_reads nr 
+                    WHERE nr.notification_id = n.id AND nr.user_id = :user_id
+                )";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':now' => $now, ':user_id' => $userId]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int)$result['count'];
+    }
 }
+?>
