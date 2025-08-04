@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Set permissions
 chmod 644 .env.dev
 
 # Load environment variables
@@ -9,7 +8,11 @@ source .env.dev
 set +a
 
 # Create required directories
-mkdir -p ./data/{pgadmin-data,postgres-data,postgres-init,mariadb_data,mysql-init}
+mkdir -p ./data/pgadmin-data
+mkdir -p ./data/postgres-data
+mkdir -p ./data/postgres-init
+mkdir -p ./data/mariadb_data
+mkdir -p ./data/mysql-init
 
 # Create MariaDB initialization script
 cat > "./data/mysql-init/01-create-db.sql" <<EOF
@@ -20,19 +23,19 @@ FLUSH PRIVILEGES;
 EOF
 
 # Create PostgreSQL initialization script
-cat > "./data/postgres-init/01-create-meta-db.sql" <<EOF
+INIT_SCRIPT="./data/postgres-init/01-create-meta-db.sql"
+if [ ! -f "$INIT_SCRIPT" ]; then
+    echo "Creating database initialization script..."
+    cat > "$INIT_SCRIPT" <<EOF
 CREATE DATABASE lifeboxmeta;
 GRANT ALL PRIVILEGES ON DATABASE lifeboxmeta TO postgres;
 EOF
+fi
 
-# Clean and start fresh
-docker-compose -p lifebox -f dev.docker-compose.yml down
-docker volume prune -f
-rm -rf ./data/mariadb_data/*
-
-# Start containers
+# Start the containers
 docker-compose -p lifebox -f dev.docker-compose.yml up -d
 
-# Verify
+# Show status
 echo "Containers started. Running containers:"
 docker-compose -p lifebox -f dev.docker-compose.yml ps
+echo "Services are now running. You can access the application at '${BASE_URL}'."
