@@ -6,6 +6,7 @@ settings.xml
 /analytics/tmp/
 app/templates_c/
 demo.php
+data/mariadb-data/
 data/pgadmin-data/
 data/postgres-data/
 data/pgadmin-init/
