@@ -219,8 +219,6 @@ services:
 networks:
   lifeboxnet:
     driver: bridge
-    name: lifeboxnet
-    attachable: true
     ipam:
       config:
         - subnet: ${NETWORK_SUBNET}
