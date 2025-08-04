@@ -2,6 +2,7 @@
 ; file automatically generated or modified by Matomo; you can manually override the default values in global.ini.php by redefining them in this file.
 [database]
 host = "127.0.0.1"
+host = "192.168.47.5"
 username = "lifeboxme_system"
 password = "lifeboxme_system"
 dbname = "lifeboxme_matomo"
@@ -82,4 +83,3 @@ PluginsInstalled[] = "Tour"
 PluginsInstalled[] = "PagePerformance"
 PluginsInstalled[] = "CustomDimensions"
 PluginsInstalled[] = "FeatureFlags"
-
