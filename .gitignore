@@ -4,9 +4,11 @@ settings.xml
 /schema
 /analytics/misc/DBIP-City.mmdb
 /analytics/tmp/
+/matomo-config/
 app/templates_c/
 demo.php
 data/mariadb-data/
+data/mysql-init/
 data/pgadmin-data/
 data/postgres-data/
 data/pgadmin-init/
