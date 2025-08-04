@@ -1,5 +1,7 @@
 #!/bin/bash
 
+chmod 644 .env.dev
+
 # Load environment variables
 set -a
 source .env.dev

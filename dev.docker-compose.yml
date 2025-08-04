@@ -91,12 +91,12 @@ services:
     env_file:
       - .env.dev
     environment:
-      MYSQL_ROOT_HOST: localhost
+      MYSQL_ROOT_HOST: '%'  # Allow root access from any host
       MYSQL_DATABASE: ${MARIADB_DATABASE}
       MYSQL_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
       MYSQL_USER: ${MARIADB_USER}
       MYSQL_PASSWORD: ${MARIADB_PASSWORD}
-      TZ: ${TZ}
+      MYSQL_TCP_PORT: 3306
     networks:
       lifeboxnet:
         ipv4_address: ${MARIADB_IP}
@@ -146,6 +146,7 @@ services:
     environment:
       PMA_ARBITRARY: 1
       PMA_HOST: lifeboxme_mariadb
+      PMA_PORT: 3306
       PMA_USER: ${MARIADB_USER}
       PMA_PASSWORD: ${MARIADB_PASSWORD}
       UPLOAD_LIMIT: 128M
