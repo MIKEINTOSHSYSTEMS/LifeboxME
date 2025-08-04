@@ -9,6 +9,15 @@ mkdir -p ./data/pgadmin-data
 mkdir -p ./data/postgres-data
 mkdir -p ./data/postgres-init
 mkdir -p ./data/mariadb-data
+mkdir -p ./data/mysql-init
+
+# Create database initialization script if it doesn't exist
+INIT_SCRIPT="./data/mysql-init/01-create-db.sql"
+cat > "$INIT_SCRIPT" <<EOF
+CREATE DATABASE IF NOT EXISTS ${MARIADB_DATABASE};
+GRANT ALL PRIVILEGES ON ${MARIADB_DATABASE}.* TO '${MARIADB_USER}'@'%' IDENTIFIED BY '${MARIADB_PASSWORD}';
+FLUSH PRIVILEGES;
+EOF
 
 # Create database initialization script if it doesn't exist
 INIT_SCRIPT="./data/postgres-init/01-create-meta-db.sql"
