@@ -1190,11 +1190,239 @@ function getNotificationIcon($type)
                 <div class="col-md-4 text-md-end">
                     <button class="btn btn-primary btn-sm" id="acceptCookies">Accept</button>
                     <button class="btn btn-outline-light btn-sm" id="declineCookies">Decline</button>
-                    <a href="#" class="btn btn-link btn-sm text-white">Learn More</a>
+                    <button class="btn btn-link btn-sm text-white" id="learnMoreCookies">Learn More</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Cookie Details Modal -->
+    <div class="modal fade" id="cookieDetailsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title"><i class="fas fa-cookie-bite me-2"></i> Cookie Policy Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card h-100 border-primary">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0"><i class="fas fa-check-circle me-2"></i> If You Accept</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p>By accepting cookies, you allow us to:</p>
+                                    <ul class="fa-ul">
+                                        <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Remember your preferences and settings</li>
+                                        <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Analyze site usage to improve our services</li>
+                                        <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Personalize content based on your interests</li>
+                                        <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Maintain your session for a seamless experience</li>
+                                        <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Track performance metrics anonymously</li>
+                                    </ul>
+                                    <div class="alert alert-info mt-3">
+                                        <i class="fas fa-info-circle me-2"></i> These cookies help us provide you with a better user experience.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 border-warning">
+                                <div class="card-header bg-warning text-dark">
+                                    <h5 class="mb-0"><i class="fas fa-times-circle me-2"></i> If You Decline</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p>If you decline cookies, we will:</p>
+                                    <ul class="fa-ul">
+                                        <li><span class="fa-li"><i class="fas fa-times text-danger"></i></span>Not store any preferences or settings</li>
+                                        <li><span class="fa-li"><i class="fas fa-times text-danger"></i></span>Disable personalized content</li>
+                                        <li><span class="fa-li"><i class="fas fa-times text-danger"></i></span>Not track your usage analytics</li>
+                                        <li><span class="fa-li"><i class="fas fa-times text-danger"></i></span>Use only strictly necessary session cookies</li>
+                                        <li><span class="fa-li"><i class="fas fa-times text-danger"></i></span>Reset your preferences on each visit</li>
+                                    </ul>
+                                    <div class="alert alert-warning mt-3">
+                                        <i class="fas fa-exclamation-triangle me-2"></i> Some features may not work properly without cookies.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h5><i class="fas fa-shield-alt me-2"></i> Your Privacy Matters</h5>
+                        <p>We respect your privacy. All data collected is anonymized and used solely to improve your experience on our platform. You can change your cookie preferences at any time through your browser settings.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="acceptFromModal">Accept All</button>
+                    <button type="button" class="btn btn-outline-secondary" id="declineFromModal">Decline All</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if cookie consent was already given
+            if (document.cookie.includes('cookieConsent=')) {
+                document.getElementById('cookieConsent').style.display = 'none';
+                return;
+            }
+
+            // Show cookie consent bar
+            document.getElementById('cookieConsent').style.display = 'block';
+
+            // Modal trigger
+            document.getElementById('learnMoreCookies').addEventListener('click', function() {
+                var modal = new bootstrap.Modal(document.getElementById('cookieDetailsModal'));
+                modal.show();
+            });
+
+            // Accept from main bar
+            document.getElementById('acceptCookies').addEventListener('click', function() {
+                setCookieConsent('accepted');
+                document.getElementById('cookieConsent').style.display = 'none';
+            });
+
+            // Decline from main bar
+            document.getElementById('declineCookies').addEventListener('click', function() {
+                setCookieConsent('declined');
+                document.getElementById('cookieConsent').style.display = 'none';
+            });
+
+            // Accept from modal
+            document.getElementById('acceptFromModal').addEventListener('click', function() {
+                setCookieConsent('accepted');
+                document.getElementById('cookieConsent').style.display = 'none';
+                var modal = bootstrap.Modal.getInstance(document.getElementById('cookieDetailsModal'));
+                modal.hide();
+            });
+
+            // Decline from modal
+            document.getElementById('declineFromModal').addEventListener('click', function() {
+                setCookieConsent('declined');
+                document.getElementById('cookieConsent').style.display = 'none';
+                var modal = bootstrap.Modal.getInstance(document.getElementById('cookieDetailsModal'));
+                modal.hide();
+            });
+
+            // Set cookie consent
+            function setCookieConsent(status) {
+                const date = new Date();
+                date.setFullYear(date.getFullYear() + 1); // Expires in 1 year
+
+                document.cookie = `cookieConsent=${status}; expires=${date.toUTCString()}; path=/; SameSite=Lax`;
+
+                // Apply the choice
+                if (status === 'declined') {
+                    // Clear all cookies except essential ones
+                    clearNonEssentialCookies();
+                    // Disable tracking scripts (you would need to implement this based on your analytics)
+                    disableTracking();
+                }
+
+                // You can add additional logic here based on the user's choice
+                console.log(`Cookie consent: ${status}`);
+            }
+
+            function clearNonEssentialCookies() {
+                // This is a simplified example - you would need to adjust based on your actual cookies
+                const cookies = document.cookie.split(';');
+                for (let cookie of cookies) {
+                    const eqPos = cookie.indexOf('=');
+                    const name = eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim();
+                    // Don't clear the consent cookie or essential session cookies
+                    if (name !== 'cookieConsent' && name !== 'PHPSESSID') {
+                        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+                    }
+                }
+            }
+
+            function disableTracking() {
+                // This is a placeholder - implement based on your analytics tools
+                // For example, if using Google Analytics:
+                // window['ga-disable-UA-XXXXX-Y'] = true;
+                console.log('Tracking disabled based on user preference');
+            }
+        });
+    </script>
+
+    <style>
+        /* Cookie Consent Bar Styles */
+        .cookie-consent {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 15px 0;
+            z-index: 9999;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+            /* Initially hidden, shown via JS */
+        }
+
+        .cookie-consent p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+        }
+
+        .cookie-consent .btn {
+            margin-left: 10px;
+        }
+
+        .cookie-consent .btn-link {
+            text-decoration: underline;
+        }
+
+        /* Cookie Modal Styles */
+        .cookie-details-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .cookie-details-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cookie-details-list li:last-child {
+            border-bottom: none;
+        }
+
+        .cookie-type {
+            display: inline-block;
+            width: 100px;
+            font-weight: bold;
+        }
+
+        .cookie-purpose {
+            color: #666;
+        }
+
+        .bg-primary {
+            --bs-bg-opacity: 1;
+            background-color: #0097A7 !important;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .cookie-consent .row {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .cookie-consent .col-md-4 {
+                margin-top: 10px;
+                text-align: center !important;
+            }
+
+            .cookie-consent .btn {
+                margin: 5px;
+            }
+        }
+    </style>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
