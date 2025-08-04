@@ -242,4 +242,4 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ./data/mariadb-data
+      device: ./data/mariadb_data
