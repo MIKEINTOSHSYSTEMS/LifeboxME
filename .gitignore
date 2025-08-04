@@ -9,6 +9,7 @@ app/templates_c/
 demo.php
 data/mariadb-data/
 data/mysql-init/
+data/mysql-init/01-create-db.sql
 data/pgadmin-data/
 data/postgres-data/
 data/pgadmin-init/
