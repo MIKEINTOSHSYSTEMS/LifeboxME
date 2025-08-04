@@ -1,4 +1,4 @@
-version: '3.9'
+#version: '3.9'
 
 # NOTE: This file is intended to be used with the .env.dev file.
 # Usage: docker-compose -f dev.docker-compose.yml --env-file .env.dev up -d
@@ -102,12 +102,12 @@ services:
         ipv4_address: ${MARIADB_IP}
     volumes:
       - ./data/mariadb_data:/var/lib/mysql
-#      - ./data/mysql-init:/docker-entrypoint-initdb.d
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD"]
-      interval: 5s
-      timeout: 5s
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MARIADB_ROOT_PASSWORD"]
+      interval: 10s
+      timeout: 10s
       retries: 10
+      start_period: 30s
 
   # Database Management
   lifeboxme_pgadmin:
