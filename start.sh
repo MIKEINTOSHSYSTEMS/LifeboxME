@@ -8,6 +8,7 @@ ENV_FILE=.env.dev
 mkdir -p ./data/pgadmin-data
 mkdir -p ./data/postgres-data
 mkdir -p ./data/postgres-init
+mkdir -p ./data/mariadb-data
 
 # Create database initialization script if it doesn't exist
 INIT_SCRIPT="./data/postgres-init/01-create-meta-db.sql"

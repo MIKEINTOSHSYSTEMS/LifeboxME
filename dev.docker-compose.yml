@@ -5,16 +5,16 @@ version: '3.8'
 
 ##########################################################################
 # Start all services in detached mode (using .env variables automatically)
-#docker-compose -p lifebox up -d
+# docker-compose -p lifebox up -d
 
 # Alternative form (explicitly specifying compose file - .env is still used)
-#docker-compose -p lifebox -f dev.docker-compose.yml up -d
+# docker-compose -p lifebox -f dev.docker-compose.yml up -d
 
 # Stop and remove all containers, networks, volumes, and images
-#docker-compose -p lifebox down --volumes --rmi all
+# docker-compose -p lifebox down --volumes --rmi all
 
 # Alternative form for down command
-#docker-compose -p lifebox -f dev.docker-compose.yml down --volumes --rmi all
+# docker-compose -p lifebox -f dev.docker-compose.yml down --volumes --rmi all
 
 ##########################################################################
 
@@ -56,16 +56,19 @@ version: '3.8'
 ##########################################################################
 
 services:
+  # Database Services
   lifeboxme_db:
     container_name: lifeboxme_db
     image: postgres:15-alpine
     restart: unless-stopped
+    env_file:
+      - .env.dev
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_ROOT_PASSWORD: ${POSTGRES_ROOT_PASSWORD}
-      TZ: UTC
+      TZ: ${TZ}
     networks:
       lifeboxnet:
         ipv4_address: ${DB_IP}
@@ -80,16 +83,40 @@ services:
       timeout: 5s
       retries: 10
 
+  # Analytics Database (MariaDB)
+  lifeboxme_mariadb:
+    container_name: lifeboxme_mariadb
+    image: mariadb:11.2.4
+    restart: always
+    env_file:
+      - .env.dev
+    environment:
+      MYSQL_ROOT_HOST: localhost
+      MYSQL_DATABASE: ${MARIADB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MYSQL_USER: ${MARIADB_USER}
+      MYSQL_PASSWORD: ${MARIADB_PASSWORD}
+      TZ: ${TZ}
+    networks:
+      lifeboxnet:
+        ipv4_address: ${MARIADB_IP}
+    volumes:
+      - lifeboxme_mariadb_data:/var/lib/mysql
+      - ./data/mysql-init:/docker-entrypoint-initdb.d
+
+  # Database Management
   lifeboxme_pgadmin:
     container_name: lifeboxme_pgadmin
     image: dpage/pgadmin4:latest
     restart: unless-stopped
+    env_file:
+      - .env.dev
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
-      PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: 'True'
-      PGADMIN_CONFIG_CONSOLE_LOG_LEVEL: '10'
+      PGADMIN_CONFIG_SERVER_MODE: ${PGADMIN_CONFIG_SERVER_MODE}
+      PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: ${PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION}
+      PGADMIN_CONFIG_CONSOLE_LOG_LEVEL: ${PGADMIN_CONFIG_CONSOLE_LOG_LEVEL}
     networks:
       lifeboxnet:
         ipv4_address: ${PGADMIN_IP}
@@ -102,16 +129,40 @@ services:
       lifeboxme_db:
         condition: service_healthy
 
+  lifeboxme_phpmyadmin:
+    container_name: lifeboxme_phpmyadmin
+    image: phpmyadmin:5.2.1
+    restart: always
+    env_file:
+      - .env.dev
+    ports:
+      - "${PHPMYADMIN_PORT}:80"
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: lifeboxme_mariadb
+      PMA_USER: ${MARIADB_USER}
+      PMA_PASSWORD: ${MARIADB_PASSWORD}
+      UPLOAD_LIMIT: 128M
+    networks:
+      lifeboxnet:
+        ipv4_address: ${PHPMYADMIN_IP}
+    depends_on:
+      lifeboxme_mariadb:
+        condition: service_healthy
+
+  # Analytics Services
   lifeboxme_metabase:
     image: metabase/metabase:latest
     container_name: lifeboxme_metabase
     restart: unless-stopped
+    env_file:
+      - .env.dev
     ports:
       #- "127.0.0.1:${METABASE_PORT}:3000"
       - "0.0.0.0:${METABASE_PORT}:3000"
 #      - "${METABASE_PORT}:3000"
     environment:
-      MB_DB_TYPE: postgres
+      MB_DB_TYPE: ${MB_DB_TYPE}
       MB_DB_DBNAME: ${MB_DB_DBNAME}
       MB_DB_PORT: ${POSTGRES_PORT}
       MB_DB_USER: ${POSTGRES_USER}
@@ -130,6 +181,33 @@ services:
     depends_on:
       lifeboxme_db:
         condition: service_healthy
+
+  lifeboxme_matomo:
+    container_name: lifeboxme_matomo
+    image: matomo:latest
+    restart: always
+    env_file:
+      - .env.dev
+    ports:
+      - "${MATOMO_PORT}:80"
+    networks:
+      lifeboxnet:
+        ipv4_address: ${MATOMO_IP}
+    volumes:
+      - ./analytics:/var/www/html
+      - ./matomo-config:/var/www/html/config
+    environment:
+      MATOMO_DATABASE_HOST: lifeboxme_mariadb
+      MATOMO_DATABASE_ADAPTER: ${MATOMO_DATABASE_ADAPTER}
+      MATOMO_DATABASE_TABLES_PREFIX: ${MATOMO_DATABASE_TABLES_PREFIX}
+      MATOMO_DATABASE_USERNAME: ${MARIADB_USER}
+      MATOMO_DATABASE_PASSWORD: ${MARIADB_PASSWORD}
+      MATOMO_DATABASE_DBNAME: ${MARIADB_DATABASE}
+      PHP_MEMORY_LIMIT: ${PHP_MEMORY_LIMIT}
+    depends_on:
+      lifeboxme_mariadb:
+        condition: service_healthy
+    command: /bin/bash -c "chmod -R 777 /var/www/html/tmp && apache2-foreground"
 
 networks:
   lifeboxnet:
@@ -152,3 +230,9 @@ volumes:
       type: none
       o: bind
       device: ./data/pgadmin-data
+  lifeboxme_mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data/mariadb-data

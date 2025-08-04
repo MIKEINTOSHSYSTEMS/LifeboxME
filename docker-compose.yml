@@ -1,21 +1,19 @@
 version: '3.8'
 
-# Usage instructions:
 # docker-compose -p lifebox up -d
 # docker-compose -p lifebox -f docker-compose.yml up -d
 # docker-compose -p lifebox down --volumes --rmi all
 # docker-compose -p lifebox -f docker-compose.yml down --volumes --rmi all
+##########################################################################
 # docker-compose -p lifebox logs -f
-# docker-compose -p lifebox exec -it lifeboxme_db psql -U ${POSTGRES_USER} -d ${POSTGRES_DB}
+# docker-compose -p lifebox exec -it lifeboxme_db psql -U lifebox_me -d lifebox_mesystem
 # docker-compose -p lifebox exec -it lifeboxme_pgadmin bash
 # docker-compose -p lifebox exec -it lifeboxme_pgadmin python3 /pgadmin4/servers.py
 # docker-compose -p lifebox exec -it lifeboxme_pgadmin python3 /pgadmin4/servers.py --load-servers /pgadmin4/servers.json
 
-# Alternative commands:
 # docker-compose up -d
 # docker-compose down --volumes --rmi all
 
-# Cleanup commands:
 # rm -rf ./data/pgadmin-data
 # rm -rf ./data/postgres-data
 # rm -rf ./data/postgres-init
@@ -29,22 +27,20 @@ services:
     container_name: lifeboxme_db
     image: postgres:15-alpine
     restart: unless-stopped
-    env_file:
-      - .env.dev
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_ROOT_PASSWORD: ${POSTGRES_ROOT_PASSWORD}
-      TZ: ${TZ}
+      POSTGRES_DB: lifebox_mesystem
+      POSTGRES_USER: postgres  # lifebox_me
+      POSTGRES_PASSWORD: mikeintosh
+      POSTGRES_ROOT_PASSWORD: lifeboxme@sys
+      TZ: UTC
     networks:
       lifeboxnet:
-        ipv4_address: ${DB_IP}
+        ipv4_address: 192.168.47.2
     volumes:
       - lifeboxme_db_data:/var/lib/postgresql/data
       - ./data/postgres-init:/docker-entrypoint-initdb.d
     ports:
-      - "127.0.0.1:${POSTGRES_PORT}:5432"
+      - "127.0.0.1:5432:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
       interval: 5s
@@ -53,24 +49,22 @@ services:
 
   lifeboxme_pgadmin:
     container_name: lifeboxme_pgadmin
-    image: dpage/pgadmin4:latest
+    image: dpage/pgadmin4:latest # 7.3
     restart: unless-stopped
-    env_file:
-      - .env.dev
     environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
-      PGADMIN_CONFIG_SERVER_MODE: ${PGADMIN_CONFIG_SERVER_MODE}
-      PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: ${PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION}
-      PGADMIN_CONFIG_CONSOLE_LOG_LEVEL: ${PGADMIN_CONFIG_CONSOLE_LOG_LEVEL}
+      PGADMIN_DEFAULT_EMAIL: dev@merqconsultancy.org
+      PGADMIN_DEFAULT_PASSWORD: lifeboxme@sys
+      PGADMIN_CONFIG_SERVER_MODE: 'False'  
+      PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: 'True'
+      PGADMIN_CONFIG_CONSOLE_LOG_LEVEL: '10'
     networks:
       lifeboxnet:
-        ipv4_address: ${PGADMIN_IP}
+        ipv4_address: 192.168.47.3
     volumes:
       - lifeboxme_pgadmin_data:/var/lib/pgadmin
       - ./pgadmin-servers.json:/pgadmin4/servers.json
     ports:
-      - "${PGADMIN_PORT}:80"
+      - "5445:80"
     depends_on:
       lifeboxme_db:
         condition: service_healthy
@@ -79,25 +73,26 @@ services:
     image: metabase/metabase:latest
     container_name: lifeboxme_metabase
     restart: unless-stopped
-    env_file:
-      - .env.dev
     ports:
-      - "0.0.0.0:${METABASE_PORT}:3000"
+      #- "127.0.0.1:4000:3000"
+      - "0.0.0.0:4000:3000"
+      #- "4000:3000"
     environment:
-      MB_DB_TYPE: ${MB_DB_TYPE}
-      MB_DB_DBNAME: ${MB_DB_DBNAME}
-      MB_DB_PORT: ${MB_DB_PORT}
-      MB_DB_USER: ${MB_DB_USER}
-      MB_DB_PASS: ${MB_DB_PASS}
-      MB_DB_HOST: lifeboxme_db
-      MB_ADMIN_EMAIL: ${MB_ADMIN_EMAIL}
-      MB_ADMIN_FIRST_NAME: ${MB_ADMIN_FIRST_NAME}
-      MB_ADMIN_PASSWORD: ${MB_ADMIN_PASSWORD}
-      MB_SITE_URL: ${MB_SITE_URL}
-      MB_SECRET_KEY: ${MB_SECRET_KEY}
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: lifeboxmeta
+      MB_DB_PORT: 5432
+      MB_DB_USER: postgres
+      MB_DB_PASS: mikeintosh
+#      MB_DB_HOST: 192.168.47.2  # Using IP address directly is not recommended in production for dev Only
+      MB_DB_HOST: lifeboxme_db  # Using service name instead of IP
+      MB_ADMIN_EMAIL: lifebox@cloud.merqconsultancy.org
+      MB_ADMIN_FIRST_NAME: LIFEBOX
+      MB_ADMIN_PASSWORD: lifeboxme0
+      MB_SITE_URL: https://lifebox.merqconsultancy.org/metabase/
+#      MB_SITE_URL: http://localhost:4000
     networks:
       lifeboxnet:
-        ipv4_address: ${METABASE_IP}
+        ipv4_address: 192.168.47.4
     depends_on:
       lifeboxme_db:
         condition: service_healthy
@@ -106,66 +101,65 @@ services:
     image: mariadb:11.2.4
     container_name: lifeboxme_mariadb
     restart: always
-    env_file:
-      - .env.dev
     environment:
       MYSQL_ROOT_HOST: localhost
-      MYSQL_DATABASE: ${MARIADB_DATABASE}
-      MYSQL_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
-      MYSQL_USER: ${MARIADB_USER}
-      MYSQL_PASSWORD: ${MARIADB_PASSWORD}
+      MYSQL_DATABASE: lifeboxme_matomo
+      MYSQL_ROOT_PASSWORD: lifeboxme@system
+      MYSQL_USER: lifeboxme_system
+      MYSQL_PASSWORD: lifeboxme_system
+    #volumes:
+      # ./src/lifeboxme_dev.sql:/docker-entrypoint-initdb.d/lifeboxme_dev.sql
+      #- ./src/lifeboxme_matomo.sql:/docker-entrypoint-initdb.d/lifeboxme_matomo.sql
+      #- ./mysql-init:/docker-entrypoint-initdb.d
+      #- /var/run/mysqld/mysqld.sock:/var/run/mysqld/mysqld.sock  # Mount the MySQL socket file if there is no conflict with the host server
     networks:
       lifeboxnet:
-        ipv4_address: ${MARIADB_IP}
+        ipv4_address: 192.168.47.5
 
   phpmyadmin:
     image: phpmyadmin:5.2.1
     restart: always
-    env_file:
-      - .env.dev
     ports:
-      - "${PHPMYADMIN_PORT}:80"
+      - "3309:80"
     environment:
       PMA_ARBITRARY: 1
       PMA_HOSTS: db
-      PMA_USER: ${MARIADB_USER}
-      PMA_PASSWORD: ${MARIADB_PASSWORD}
+      PMA_USER: lifeboxme_system
+      PMA_PASSWORD: lifeboxme_system
     networks:
       lifeboxnet:
-        ipv4_address: ${PHPMYADMIN_IP}
+        ipv4_address: 192.168.47.6        
 
   lifeboxme_matomo:
     image: matomo:latest
     container_name: lifeboxme_matomo
     restart: always
-    env_file:
-      - .env.dev
     ports:
-      - "${MATOMO_PORT}:80"
+      - "8088:80"
     networks:
       lifeboxnet:
-        ipv4_address: ${MATOMO_IP}
+        ipv4_address: 192.168.47.7
     volumes:
       - ./analytics:/var/www/html
     depends_on:
-      - db
+      - db      
     environment:
-      MATOMO_DATABASE_HOST: ${MATOMO_DATABASE_HOST}
-      MATOMO_DATABASE_ADAPTER: ${MATOMO_DATABASE_ADAPTER}
-      MATOMO_DATABASE_TABLES_PREFIX: ${MATOMO_DATABASE_TABLES_PREFIX}
-      MATOMO_DATABASE_USERNAME: ${MATOMO_DATABASE_USERNAME}
-      MATOMO_DATABASE_PASSWORD: ${MATOMO_DATABASE_PASSWORD}
-      MATOMO_DATABASE_DBNAME: ${MATOMO_DATABASE_DBNAME}
-      PHP_MEMORY_LIMIT: ${PHP_MEMORY_LIMIT}
-    command: /bin/bash -c "chmod -R 777 /var/www/html/tmp && apache2-foreground"
+      - MATOMO_DATABASE_HOST=192.168.47.7
+      - MATOMO_DATABASE_ADAPTER=mysql
+      - MATOMO_DATABASE_TABLES_PREFIX=matomo_
+      - MATOMO_DATABASE_USERNAME=lifeboxme_system
+      - MATOMO_DATABASE_PASSWORD=lifeboxme_system
+      - MATOMO_DATABASE_DBNAME=lifeboxme_matomo
+      - PHP_MEMORY_LIMIT=256M
+    command: /bin/bash -c "chmod -R 777 /var/www/html/tmp && apache2-foreground"        
 
 networks:
   lifeboxnet:
     driver: bridge
     ipam:
       config:
-        - subnet: ${NETWORK_SUBNET}
-          gateway: ${NETWORK_GATEWAY}
+        - subnet: 192.168.47.0/24
+          gateway: 192.168.47.1
 
 volumes:
   lifeboxme_db_data:
