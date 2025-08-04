@@ -156,7 +156,7 @@ function getNotificationIcon($type)
                             width: 350px;
                             padding: 0;
                             border: none;
-                            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+                            box-shadow: 0 5px 15px rgb(18 130 173);
                             border-radius: 8px;
                             overflow: hidden;
                         }
@@ -223,6 +223,20 @@ function getNotificationIcon($type)
                             padding: 10px 15px;
                             background-color: #f8f9fa;
                             border-top: 1px solid #eee;
+                        }
+
+                        .modal-content {
+                            position: relative;
+                            display: flex;
+                            flex-direction: column;
+                            width: 90%;
+                            color: var(--bs-modal-color);
+                            pointer-events: auto;
+                            background-color: var(--bs-modal-bg);
+                            background-clip: padding-box;
+                            border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
+                            border-radius: var(--bs-modal-border-radius);
+                            outline: 0;
                         }
 
                         /* Animation for new notifications */
@@ -1096,18 +1110,25 @@ function getNotificationIcon($type)
 
         <script>
             $(document).ready(function() {
+                // Show the modal
                 $('#noticeModal').modal('show');
+
+                // Ensure proper cleanup when modal is closed
+                $('#noticeModal').on('hidden.bs.modal', function() {
+                    // Remove any remaining backdrop
+                    $('.modal-backdrop').remove();
+                    // Remove modal-open class from body
+                    $('body').removeClass('modal-open');
+                    // Reset body padding and overflow
+                    $('body').css({
+                        'padding-right': '',
+                        'overflow': ''
+                    });
+                });
             });
         </script>
     <?php endif; ?>
 
-    <?php if (!empty($activeNotifications)): ?>
-        <script>
-            $(document).ready(function() {
-                $('#noticeModal').modal('show');
-            });
-        </script>
-    <?php endif; ?>
 
 
 
