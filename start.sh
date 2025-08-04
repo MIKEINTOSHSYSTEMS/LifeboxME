@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Set permissions
 chmod 644 .env.dev
 
 # Load environment variables
@@ -8,33 +9,30 @@ source .env.dev
 set +a
 
 # Create required directories
-mkdir -p ./data/pgadmin-data
-mkdir -p ./data/postgres-data
-mkdir -p ./data/postgres-init
-mkdir -p ./data/mariadb_data
-mkdir -p ./data/mysql-init
+mkdir -p ./data/{pgadmin-data,postgres-data,postgres-init,mariadb_data,mysql-init}
 
-# Create database initialization script if it doesn't exist
-INIT_SCRIPT="./data/mysql-init/01-create-db.sql"
-cat > "$INIT_SCRIPT" <<EOF
+# Create MariaDB initialization script
+cat > "./data/mysql-init/01-create-db.sql" <<EOF
 CREATE DATABASE IF NOT EXISTS ${MARIADB_DATABASE};
-GRANT ALL PRIVILEGES ON ${MARIADB_DATABASE}.* TO '${MARIADB_USER}'@'%' IDENTIFIED BY '${MARIADB_PASSWORD}';
+CREATE USER IF NOT EXISTS '${MARIADB_USER}'@'%' IDENTIFIED BY '${MARIADB_PASSWORD}';
+GRANT ALL PRIVILEGES ON *.* TO '${MARIADB_USER}'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 EOF
 
-# Create database initialization script if it doesn't exist
-INIT_SCRIPT="./data/postgres-init/01-create-meta-db.sql"
-if [ ! -f "$INIT_SCRIPT" ]; then
-    echo "Creating database initialization script..."
-    cat > "$INIT_SCRIPT" <<EOF
+# Create PostgreSQL initialization script
+cat > "./data/postgres-init/01-create-meta-db.sql" <<EOF
 CREATE DATABASE lifeboxmeta;
 GRANT ALL PRIVILEGES ON DATABASE lifeboxmeta TO postgres;
 EOF
-fi
 
-# Start the containers
+# Clean and start fresh
+docker-compose -p lifebox -f dev.docker-compose.yml down
+docker volume prune -f
+rm -rf ./data/mariadb_data/*
+
+# Start containers
 docker-compose -p lifebox -f dev.docker-compose.yml up -d
 
-# Show status
+# Verify
 echo "Containers started. Running containers:"
 docker-compose -p lifebox -f dev.docker-compose.yml ps
