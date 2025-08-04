@@ -1,2 +1,0 @@
-CREATE DATABASE lifeboxmeta;
-GRANT ALL PRIVILEGES ON DATABASE lifeboxmeta TO postgres;
