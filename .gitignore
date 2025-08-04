@@ -7,9 +7,8 @@ settings.xml
 /matomo-config/
 app/templates_c/
 demo.php
-data/mariadb-data/
+data/mariadb_data/
 data/mysql-init/
-data/mysql-init/01-create-db.sql
 data/pgadmin-data/
 data/postgres-data/
 data/pgadmin-init/

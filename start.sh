@@ -8,7 +8,7 @@ ENV_FILE=.env.dev
 mkdir -p ./data/pgadmin-data
 mkdir -p ./data/postgres-data
 mkdir -p ./data/postgres-init
-mkdir -p ./data/mariadb-data
+mkdir -p ./data/mariadb_data
 mkdir -p ./data/mysql-init
 
 # Create database initialization script if it doesn't exist

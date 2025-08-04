@@ -101,7 +101,7 @@ services:
       lifeboxnet:
         ipv4_address: ${MARIADB_IP}
     volumes:
-      - ./mariadb_data:/var/lib/mysql
+      - ./data/mariadb_data:/var/lib/mysql
 #      - ./data/mysql-init:/docker-entrypoint-initdb.d
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD"]
