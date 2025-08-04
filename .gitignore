@@ -2,6 +2,8 @@ settings.xml
 *.code-workspace
 *.txt
 /schema
+/analytics/js/
+/analytics/config/config.ini.php
 /analytics/misc/DBIP-City.mmdb
 /analytics/tmp/
 /matomo-config/
