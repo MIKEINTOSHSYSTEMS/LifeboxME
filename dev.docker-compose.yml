@@ -102,7 +102,7 @@ services:
         ipv4_address: ${MARIADB_IP}
     volumes:
       - ./data/mariadb_data:/var/lib/mysql
-      - ./data/mariadb_data:/docker-entrypoint-initdb.d
+      - ./data/mysql-init:/docker-entrypoint-initdb.d
     healthcheck:
       test: ["CMD-SHELL", "mariadb -u root -p$$MARIADB_ROOT_PASSWORD -e 'SELECT 1;' || exit 1"]
       interval: 10s
