@@ -26,6 +26,7 @@ api/dhis2/indicators/debug_output.json
 api/dhis2/analytics/cache/
 api/dhis2/analytics/test/
 api/database/main/0.php
+api/database/main/1.php
 api/database/main/*.sql
 api/database/main/backup
 api/database/main/test.php

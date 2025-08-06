@@ -1,10 +1,20 @@
 <?php
+// Load environment variables from .env.dev
+$envPath = realpath(__DIR__ . '/../../../.env.dev');
+if (file_exists($envPath)) {
+    $envVars = parse_ini_file($envPath);
+    foreach ($envVars as $key => $value) {
+        putenv("$key=$value");
+        $_ENV[$key] = $value;
+    }
+}
+
 // Database Configuration
-define('DB_HOST', 'localhost');
-define('DB_PORT', '5432');
-define('DB_NAME', 'lifebox_mesystem');
-define('DB_USER', 'postgres');
-define('DB_PASS', 'mikeintosh');
+define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+define('DB_PORT', getenv('POSTGRES_PORT') ?: '5432');
+define('DB_NAME', getenv('POSTGRES_DB') ?: 'lifebox_mesystem');
+define('DB_USER', getenv('POSTGRES_USER') ?: 'postgres');
+define('DB_PASS', getenv('POSTGRES_PASSWORD') ?: 'mikeintosh');
 define('BACKUP_DIR', 'backup');
 define('ITEMS_PER_PAGE', 10);
 
@@ -20,7 +30,57 @@ $error = '';
 $logContent = '';
 $progress = 0;
 $operation = '';
-$isProgressView = in_array($action, ['backup_progress', 'restore_progress']);
+$isOperationRunning = false;
+$currentOperation = '';
+
+
+$itemsPerPage = isset($_GET['per_page']) ? (int)$_GET['per_page'] : ITEMS_PER_PAGE;
+if ($itemsPerPage === 0) {
+    $itemsPerPage = PHP_INT_MAX; // Show all items
+}
+
+// Sorting parameters
+$sortField = $_GET['sort'] ?? 'date'; // Default sort by date
+$sortOrder = $_GET['order'] ?? 'desc'; // Default descending (newest first)
+
+// Modify your backup files sorting logic
+$backupFiles = glob(BACKUP_DIR . '/*.{sql,backup,dump,pgdump}', GLOB_BRACE);
+
+// Sort files based on selected field and order
+usort($backupFiles, function($a, $b) use ($sortField, $sortOrder) {
+    $aFile = basename($a);
+    $aSize = filesize($a);
+    $aDate = filemtime($a);
+    
+    $bFile = basename($b);
+    $bSize = filesize($b);
+    $bDate = filemtime($b);
+    
+    $result = 0;
+    
+    switch ($sortField) {
+        case 'name':
+            $result = strcmp($aFile, $bFile);
+            break;
+        case 'size':
+            $result = $aSize <=> $bSize;
+            break;
+        case 'date':
+        default:
+            $result = $aDate <=> $bDate;
+            break;
+    }
+    
+    return $sortOrder === 'desc' ? -$result : $result;
+});
+
+// Update pagination calculation to use the selected items per page
+$totalFiles = count($backupFiles);
+$totalPages = $itemsPerPage > 0 ? ceil($totalFiles / $itemsPerPage) : 1;
+$page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+$offset = ($page - 1) * $itemsPerPage;
+$paginatedFiles = array_slice($backupFiles, $offset, $itemsPerPage);
+
 
 // Database connection function
 function connectDB()
@@ -31,6 +91,25 @@ function connectDB()
         die("Connection failed: " . pg_last_error());
     }
     return $conn;
+}
+
+function buildPaginationUrl($page)
+{
+    $url = "?page=$page";
+
+    if (isset($_GET['sort'])) {
+        $url .= "&sort=" . urlencode($_GET['sort']);
+    }
+
+    if (isset($_GET['order'])) {
+        $url .= "&order=" . urlencode($_GET['order']);
+    }
+
+    if (isset($_GET['per_page'])) {
+        $url .= "&per_page=" . (int)$_GET['per_page'];
+    }
+
+    return $url;
 }
 
 // Get total table count
@@ -44,16 +123,57 @@ function getTableCount($conn)
     return intval($row['total_tables']);
 }
 
-// Handle backup action
-if ($action === 'backup') {
-    // Redirect to progress page
-    header("Location: index.php?action=backup_progress");
+// Progress tracking functions
+function writeProgress($operation, $progress, $message = '')
+{
+    $progressFile = BACKUP_DIR . "/{$operation}_progress.json";
+    $data = [
+        'progress' => $progress,
+        'message' => $message,
+        'timestamp' => time()
+    ];
+    file_put_contents($progressFile, json_encode($data));
+}
+
+function getProgress($operation)
+{
+    $progressFile = BACKUP_DIR . "/{$operation}_progress.json";
+    if (file_exists($progressFile)) {
+        $data = json_decode(file_get_contents($progressFile), true);
+        return $data ?: ['progress' => 0, 'message' => ''];
+    }
+    return ['progress' => 0, 'message' => ''];
+}
+
+function clearProgress($operation)
+{
+    $progressFile = BACKUP_DIR . "/{$operation}_progress.json";
+    if (file_exists($progressFile)) {
+        unlink($progressFile);
+    }
+}
+
+// Handle progress status requests
+if ($action === 'backup_status' || $action === 'restore_status') {
+    $operation = str_replace('_status', '', $action);
+    $progressData = getProgress($operation);
+
+    header('Content-Type: application/json');
+    echo json_encode([
+        'progress' => $progressData['progress'],
+        'message' => $progressData['message'],
+        'timestamp' => $progressData['timestamp'] ?? time()
+    ]);
     exit;
 }
 
-// Handle backup progress
-if ($action === 'backup_progress') {
+// Handle backup action
+if ($action === 'backup') {
+    // Set flags to show operation in progress
+    $isOperationRunning = true;
+    $currentOperation = 'backup';
     $operation = 'backup';
+
     $backupName = 'lifeboxme_db_bak_' . date('Y-m-d_H-i-s') . '.sql';
     $backupPath = BACKUP_DIR . '/' . $backupName;
     $logFile = BACKUP_DIR . '/backup_log_' . date('YmdHis') . '.txt';
@@ -61,12 +181,17 @@ if ($action === 'backup_progress') {
     $logContent .= "Database: " . DB_NAME . "\n";
     $logContent .= "Backup file: " . $backupName . "\n\n";
 
+    // Initialize progress
+    writeProgress('backup', 0, 'Starting backup');
+
     $backupSuccess = false;
     $conn = connectDB();
 
     try {
         $totalTables = getTableCount($conn);
         $logContent .= "Found $totalTables tables in database\n\n";
+        file_put_contents($logFile, $logContent);
+        writeProgress('backup', 5, "Found $totalTables tables");
 
         // Begin building SQL dump
         $dump = "";
@@ -79,12 +204,10 @@ if ($action === 'backup_progress') {
         // Set search path
         $dump .= "SET search_path = public;\n\n";
 
-        // Drop all existing connections
-        $logContent .= "Dropping existing connections...\n";
-        pg_query($conn, "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '" . DB_NAME . "' AND pid <> pg_backend_pid();");
-
         // Add extensions
         $logContent .= "Backing up extensions...\n";
+        file_put_contents($logFile, $logContent, FILE_APPEND);
+        writeProgress('backup', 10, "Backing up extensions");
         $result = pg_query($conn, "SELECT extname FROM pg_extension");
         while ($row = pg_fetch_assoc($result)) {
             $dump .= "CREATE EXTENSION IF NOT EXISTS \"{$row['extname']}\";\n";
@@ -94,6 +217,8 @@ if ($action === 'backup_progress') {
 
         // Add custom types
         $logContent .= "Backing up custom types...\n";
+        file_put_contents($logFile, $logContent, FILE_APPEND);
+        writeProgress('backup', 12, "Backing up custom types");
         $result = pg_query($conn, "SELECT t.typname, t.typbasetype, t.typtype, 
                                  pg_catalog.format_type(t.typbasetype, t.typtypmod) as basetype 
                                  FROM pg_catalog.pg_type t 
@@ -140,8 +265,10 @@ if ($action === 'backup_progress') {
         $currentTable = 0;
         foreach ($tables as $table) {
             $currentTable++;
-            $progress = intval(($currentTable / $totalTables) * 80);
+            $progress = 10 + intval(($currentTable / $totalTables) * 70); // 10-80%
             $logContent .= "[$currentTable/$totalTables] Backing up table: $table\n";
+            file_put_contents($logFile, $logContent, FILE_APPEND);
+            writeProgress('backup', $progress, "Backing up table: $table ($currentTable/$totalTables)");
 
             // Get table structure
             $result = pg_query($conn, "SELECT column_name, data_type, udt_name, character_maximum_length, 
@@ -189,59 +316,81 @@ if ($action === 'backup_progress') {
                 $columnDefs[] = $colDef;
             }
 
-            // Add primary key
+            // Add primary key - using improved method
+            $logContent .= "  Getting primary key...\n";
+            file_put_contents($logFile, $logContent, FILE_APPEND);
+
             $pk_result = pg_query($conn, "SELECT kcu.column_name 
                                          FROM information_schema.table_constraints tc 
                                          JOIN information_schema.key_column_usage kcu 
                                          ON tc.constraint_name = kcu.constraint_name 
                                          WHERE tc.table_name = '$table' 
                                          AND tc.constraint_type = 'PRIMARY KEY'");
-            $pk_columns = [];
-            while ($pk_row = pg_fetch_assoc($pk_result)) {
-                $pk_columns[] = "\"{$pk_row['column_name']}\"";
-            }
-            if (!empty($pk_columns)) {
-                $columnDefs[] = "PRIMARY KEY (" . implode(", ", $pk_columns) . ")";
+
+            if ($pk_result) {
+                $pk_columns = [];
+                while ($pk_row = pg_fetch_assoc($pk_result)) {
+                    $pk_columns[] = "\"{$pk_row['column_name']}\"";
+                }
+                if (!empty($pk_columns)) {
+                    $columnDefs[] = "PRIMARY KEY (" . implode(", ", $pk_columns) . ")";
+                }
+            } else {
+                $logContent .= "  Warning: Failed to get primary key for $table: " . pg_last_error($conn) . "\n";
+                file_put_contents($logFile, $logContent, FILE_APPEND);
             }
 
             $dump .= implode(",\n", $columnDefs) . "\n);\n\n";
 
             // Get table data
             $result = pg_query($conn, "SELECT COUNT(*) AS total_rows FROM \"$table\"");
-            $rowCount = pg_fetch_result($result, 0, 'total_rows');
-            $logContent .= "  Rows to backup: $rowCount\n";
-
-            $result = pg_query($conn, "SELECT * FROM \"$table\"");
             if (!$result) {
-                throw new Exception("Failed to get data for $table: " . pg_last_error($conn));
+                $logContent .= "  Warning: Failed to count rows for $table: " . pg_last_error($conn) . "\n";
+                file_put_contents($logFile, $logContent, FILE_APPEND);
+                $rowCount = 0;
+            } else {
+                $rowCount = pg_fetch_result($result, 0, 'total_rows');
             }
 
-            // Add INSERT statements
-            $currentRow = 0;
-            while ($row = pg_fetch_assoc($result)) {
-                $currentRow++;
-                $cols = [];
-                $vals = [];
-                foreach ($row as $col => $val) {
-                    $cols[] = "\"$col\"";
-                    $vals[] = $val === null ? 'NULL' : "'" . pg_escape_string($conn, $val) . "'";
-                }
-                $dump .= "INSERT INTO \"$table\" (" . implode(', ', $cols) . ") VALUES (" . implode(', ', $vals) . ");\n";
+            $logContent .= "  Rows to backup: $rowCount\n";
+            file_put_contents($logFile, $logContent, FILE_APPEND);
 
-                // Update progress every 100 rows
-                if ($currentRow % 100 === 0) {
-                    $rowProgress = min(5, intval(($currentRow / $rowCount) * 5)); // Max 5% per table
-                    $progress = intval(($currentTable / $totalTables) * 80) + $rowProgress;
+            if ($rowCount > 0) {
+                $result = pg_query($conn, "SELECT * FROM \"$table\"");
+                if (!$result) {
+                    throw new Exception("Failed to get data for $table: " . pg_last_error($conn));
+                }
+
+                // Add INSERT statements
+                $currentRow = 0;
+                while ($row = pg_fetch_assoc($result)) {
+                    $currentRow++;
+                    $cols = [];
+                    $vals = [];
+                    foreach ($row as $col => $val) {
+                        $cols[] = "\"$col\"";
+                        $vals[] = $val === null ? 'NULL' : "'" . pg_escape_string($conn, $val) . "'";
+                    }
+                    $dump .= "INSERT INTO \"$table\" (" . implode(', ', $cols) . ") VALUES (" . implode(', ', $vals) . ");\n";
+
+                    // Update progress every 100 rows
+                    if ($currentRow % 100 === 0) {
+                        $rowProgress = min(5, intval(($currentRow / $rowCount) * 5)); // Max 5% per table
+                        $progress = 10 + intval(($currentTable / $totalTables) * 70) + $rowProgress;
+                        writeProgress('backup', $progress, "Backing up $table: $currentRow/$rowCount rows");
+                    }
                 }
             }
             $dump .= "\n";
 
             // Write intermediate progress to log file
-            file_put_contents($logFile, $logContent);
+            file_put_contents($logFile, $logContent, FILE_APPEND);
         }
 
         $progress = 85;
         $logContent .= "\nBacking up foreign keys...\n";
+        file_put_contents($logFile, $logContent, FILE_APPEND);
+        writeProgress('backup', $progress, "Backing up foreign keys");
 
         // Add foreign key constraints
         foreach ($tables as $table) {
@@ -256,16 +405,23 @@ if ($action === 'backup_progress') {
                                       ON ccu.constraint_name = tc.constraint_name 
                                       WHERE tc.table_name = '$table' 
                                       AND tc.constraint_type = 'FOREIGN KEY'");
-            while ($row = pg_fetch_assoc($result)) {
-                $dump .= "ALTER TABLE \"$table\" ADD CONSTRAINT \"{$row['constraint_name']}\" " .
-                    "FOREIGN KEY (\"{$row['column_name']}\") " .
-                    "REFERENCES \"{$row['foreign_table_name']}\" (\"{$row['foreign_column_name']}\");\n";
+            if ($result) {
+                while ($row = pg_fetch_assoc($result)) {
+                    $dump .= "ALTER TABLE \"$table\" ADD CONSTRAINT \"{$row['constraint_name']}\" " .
+                        "FOREIGN KEY (\"{$row['column_name']}\") " .
+                        "REFERENCES \"{$row['foreign_table_name']}\" (\"{$row['foreign_column_name']}\");\n";
+                }
+            } else {
+                $logContent .= "  Warning: Failed to get foreign keys for $table: " . pg_last_error($conn) . "\n";
+                file_put_contents($logFile, $logContent, FILE_APPEND);
             }
         }
         $dump .= "\n";
 
         $progress = 90;
         $logContent .= "Backing up indexes...\n";
+        file_put_contents($logFile, $logContent, FILE_APPEND);
+        writeProgress('backup', $progress, "Backing up indexes");
 
         // Add indexes
         foreach ($tables as $table) {
@@ -273,42 +429,63 @@ if ($action === 'backup_progress') {
                                       FROM pg_indexes 
                                       WHERE tablename = '$table' 
                                       AND indexname NOT LIKE '%pkey'");
-            while ($row = pg_fetch_assoc($result)) {
-                $dump .= $row['indexdef'] . ";\n";
+            if ($result) {
+                while ($row = pg_fetch_assoc($result)) {
+                    $dump .= $row['indexdef'] . ";\n";
+                }
+            } else {
+                $logContent .= "  Warning: Failed to get indexes for $table: " . pg_last_error($conn) . "\n";
+                file_put_contents($logFile, $logContent, FILE_APPEND);
             }
         }
         $dump .= "\n";
 
         $progress = 92;
         $logContent .= "Backing up functions...\n";
+        file_put_contents($logFile, $logContent, FILE_APPEND);
+        writeProgress('backup', $progress, "Backing up functions");
 
         // Add functions
         $result = pg_query($conn, "SELECT proname, pg_get_functiondef(p.oid) AS functiondef 
                                   FROM pg_proc p 
                                   JOIN pg_namespace n ON p.pronamespace = n.oid 
                                   WHERE n.nspname = 'public'");
-        while ($row = pg_fetch_assoc($result)) {
-            // Ensure proper formatting of function definitions
-            $functionDef = $row['functiondef'];
-            if (strpos($functionDef, 'CREATE OR REPLACE FUNCTION') === false) {
-                $functionDef = "CREATE OR REPLACE FUNCTION " . $functionDef;
+        if ($result) {
+            while ($row = pg_fetch_assoc($result)) {
+                // Ensure proper formatting of function definitions
+                $functionDef = $row['functiondef'];
+                if (strpos($functionDef, 'CREATE OR REPLACE FUNCTION') === false) {
+                    $functionDef = "CREATE OR REPLACE FUNCTION " . $functionDef;
+                }
+                $dump .= $functionDef . ";\n\n";
             }
-            $dump .= $functionDef . ";\n\n";
+        } else {
+            $logContent .= "  Warning: Failed to get functions: " . pg_last_error($conn) . "\n";
+            file_put_contents($logFile, $logContent, FILE_APPEND);
         }
 
         $progress = 94;
         $logContent .= "Backing up views...\n";
+        file_put_contents($logFile, $logContent, FILE_APPEND);
+        writeProgress('backup', $progress, "Backing up views");
 
         // Add views
         $result = pg_query($conn, "SELECT table_name, view_definition 
                                   FROM information_schema.views 
                                   WHERE table_schema = 'public'");
-        while ($row = pg_fetch_assoc($result)) {
-            $dump .= "CREATE OR REPLACE VIEW \"{$row['table_name']}\" AS {$row['view_definition']};\n\n";
+        if ($result) {
+            while ($row = pg_fetch_assoc($result)) {
+                $dump .= "CREATE OR REPLACE VIEW \"{$row['table_name']}\" AS {$row['view_definition']};\n\n";
+            }
+        } else {
+            $logContent .= "  Warning: Failed to get views: " . pg_last_error($conn) . "\n";
+            file_put_contents($logFile, $logContent, FILE_APPEND);
         }
 
         $progress = 96;
         $logContent .= "Backing up triggers...\n";
+        file_put_contents($logFile, $logContent, FILE_APPEND);
+        writeProgress('backup', $progress, "Backing up triggers");
 
         // Add triggers
         $result = pg_query($conn, "SELECT tgname, pg_get_triggerdef(t.oid) AS triggerdef 
@@ -317,27 +494,35 @@ if ($action === 'backup_progress') {
                                   JOIN pg_namespace n ON c.relnamespace = n.oid 
                                   WHERE n.nspname = 'public' 
                                   AND NOT t.tgisinternal");
-        while ($row = pg_fetch_assoc($result)) {
-            $dump .= $row['triggerdef'] . ";\n\n";
+        if ($result) {
+            while ($row = pg_fetch_assoc($result)) {
+                $dump .= $row['triggerdef'] . ";\n\n";
+            }
+        } else {
+            $logContent .= "  Warning: Failed to get triggers: " . pg_last_error($conn) . "\n";
+            file_put_contents($logFile, $logContent, FILE_APPEND);
         }
 
         $progress = 98;
         $logContent .= "Backing up sequences...\n";
+        file_put_contents($logFile, $logContent, FILE_APPEND);
+        writeProgress('backup', $progress, "Backing up sequences");
 
         // Add sequences
         $result = pg_query($conn, "SELECT sequence_name, data_type, start_value, increment 
                                   FROM information_schema.sequences 
                                   WHERE sequence_schema = 'public'");
 
-        if (!$result) {
-            throw new Exception("Failed to get sequences: " . pg_last_error($conn));
-        }
-
-        while ($row = pg_fetch_assoc($result)) {
-            $dump .= "CREATE SEQUENCE \"{$row['sequence_name']}\" 
+        if ($result) {
+            while ($row = pg_fetch_assoc($result)) {
+                $dump .= "CREATE SEQUENCE \"{$row['sequence_name']}\" 
                      AS {$row['data_type']}
                      START WITH {$row['start_value']}
                      INCREMENT BY {$row['increment']};\n\n";
+            }
+        } else {
+            $logContent .= "  Warning: Failed to get sequences: " . pg_last_error($conn) . "\n";
+            file_put_contents($logFile, $logContent, FILE_APPEND);
         }
 
         // Write to file
@@ -345,6 +530,8 @@ if ($action === 'backup_progress') {
             $progress = 100;
             $logContent .= "Backup completed successfully! File: $backupName\n";
             $logContent .= "Total size: " . formatSize(filesize($backupPath)) . "\n";
+            file_put_contents($logFile, $logContent, FILE_APPEND);
+            writeProgress('backup', $progress, "Backup completed successfully: $backupName");
             $backupSuccess = true;
             $message = "Backup created successfully: " . $backupName;
         } else {
@@ -355,6 +542,8 @@ if ($action === 'backup_progress') {
     } catch (Exception $e) {
         $progress = 100;
         $logContent .= "Backup failed: " . $e->getMessage() . "\n";
+        file_put_contents($logFile, $logContent, FILE_APPEND);
+        writeProgress('backup', $progress, "Backup failed: " . $e->getMessage());
         $error = "Backup failed: " . $e->getMessage();
         if (file_exists($backupPath)) {
             unlink($backupPath);
@@ -362,204 +551,232 @@ if ($action === 'backup_progress') {
     }
 
     // Save final log
-    file_put_contents($logFile, $logContent);
+    file_put_contents($logFile, $logContent, FILE_APPEND);
 }
 
 // Handle restore action
 if ($action === 'restore') {
     if (isset($_POST['backup_file'])) {
-        // Redirect to progress page
-        header("Location: index.php?action=restore_progress&file=" . urlencode($_POST['backup_file']));
-        exit;
-    } else {
-        $error = "No backup file selected";
-    }
-}
+        // Set flags to show operation in progress
+        $isOperationRunning = true;
+        $currentOperation = 'restore';
+        $operation = 'restore';
+        $backupFile = $_POST['backup_file'];
+        $backupPath = BACKUP_DIR . '/' . $backupFile;
+        $logFile = BACKUP_DIR . '/restore_log_' . date('YmdHis') . '.txt';
+        $logContent = "Starting restore operation at " . date('Y-m-d H:i:s') . "\n";
+        $logContent .= "Database: " . DB_NAME . "\n";
+        $logContent .= "Restoring from: " . $backupFile . "\n\n";
 
-// Handle restore progress
-if ($action === 'restore_progress' && isset($_GET['file'])) {
-    $operation = 'restore';
-    $backupFile = $_GET['file'];
-    $backupPath = BACKUP_DIR . '/' . $backupFile;
-    $logFile = BACKUP_DIR . '/restore_log_' . date('YmdHis') . '.txt';
-    $logContent = "Starting restore operation at " . date('Y-m-d H:i:s') . "\n";
-    $logContent .= "Database: " . DB_NAME . "\n";
-    $logContent .= "Restoring from: " . $backupFile . "\n\n";
+        // Initialize progress
+        writeProgress('restore', 0, 'Starting restore');
 
-    if (file_exists($backupPath)) {
-        $restoreSuccess = false;
-        $conn = null;
+        if (file_exists($backupPath)) {
+            $restoreSuccess = false;
+            $conn = null;
 
-        try {
-            $logContent .= "Reading backup file...\n";
-            $backupContent = file_get_contents($backupPath);
-            if ($backupContent === false) {
-                throw new Exception("Failed to read backup file");
-            }
+            try {
+                $logContent .= "Reading backup file...\n";
+                file_put_contents($logFile, $logContent, FILE_APPEND);
+                writeProgress('restore', 5, "Reading backup file");
 
-            // Improved SQL statement parser
-            $statements = [];
-            $current = '';
-            $inString = false;
-            $inDollarQuote = false;
-            $dollarTag = '';
-            $escapeNext = false;
-            $len = strlen($backupContent);
+                $backupContent = file_get_contents($backupPath);
+                if ($backupContent === false) {
+                    throw new Exception("Failed to read backup file");
+                }
 
-            for ($i = 0; $i < $len; $i++) {
-                $char = $backupContent[$i];
-                
-                // Handle dollar-quoted strings
-                if (!$inString && $char === '$') {
-                    // Check if we're at the start of a dollar quote
-                    $potentialTag = '';
-                    $j = $i + 1;
-                    while ($j < $len && ctype_alpha($backupContent[$j])) {
-                        $potentialTag .= $backupContent[$j];
-                        $j++;
-                    }
-                    
-                    if ($j < $len && $backupContent[$j] === '$') {
-                        if ($inDollarQuote && $potentialTag === $dollarTag) {
-                            // End of dollar quote
-                            $current .= substr($backupContent, $i, $j - $i + 1);
-                            $i = $j;
-                            $inDollarQuote = false;
-                            $dollarTag = '';
-                        } elseif (!$inDollarQuote) {
-                            // Start of dollar quote
-                            $current .= substr($backupContent, $i, $j - $i + 1);
-                            $i = $j;
-                            $inDollarQuote = true;
-                            $dollarTag = $potentialTag;
-                        } else {
-                            $current .= $char;
+                // Improved SQL statement parser
+                $statements = [];
+                $current = '';
+                $inString = false;
+                $inDollarQuote = false;
+                $dollarTag = '';
+                $escapeNext = false;
+                $len = strlen($backupContent);
+
+                for ($i = 0; $i < $len; $i++) {
+                    $char = $backupContent[$i];
+
+                    // Handle dollar-quoted strings
+                    if (!$inString && $char === '$') {
+                        // Check if we're at the start of a dollar quote
+                        $potentialTag = '';
+                        $j = $i + 1;
+                        while ($j < $len && ctype_alpha($backupContent[$j])) {
+                            $potentialTag .= $backupContent[$j];
+                            $j++;
                         }
-                        continue;
+
+                        if ($j < $len && $backupContent[$j] === '$') {
+                            if ($inDollarQuote && $potentialTag === $dollarTag) {
+                                // End of dollar quote
+                                $current .= substr($backupContent, $i, $j - $i + 1);
+                                $i = $j;
+                                $inDollarQuote = false;
+                                $dollarTag = '';
+                            } elseif (!$inDollarQuote) {
+                                // Start of dollar quote
+                                $current .= substr($backupContent, $i, $j - $i + 1);
+                                $i = $j;
+                                $inDollarQuote = true;
+                                $dollarTag = $potentialTag;
+                            } else {
+                                $current .= $char;
+                            }
+                            continue;
+                        }
+                    }
+
+                    // Handle regular strings
+                    if ($char === "'" && !$inDollarQuote && !$escapeNext) {
+                        $inString = !$inString;
+                    }
+
+                    // Handle escape sequences
+                    if ($char === "\\" && $inString) {
+                        $escapeNext = !$escapeNext;
+                    } else {
+                        $escapeNext = false;
+                    }
+
+                    $current .= $char;
+
+                    // Detect statement boundaries
+                    if (!$inString && !$inDollarQuote && $char === ';') {
+                        $statements[] = trim($current);
+                        $current = '';
+                        // Skip trailing whitespace/newlines
+                        while ($i + 1 < $len && ctype_space($backupContent[$i + 1])) {
+                            $i++;
+                        }
                     }
                 }
-                
-                // Handle regular strings
-                if ($char === "'" && !$inDollarQuote && !$escapeNext) {
-                    $inString = !$inString;
-                }
-                
-                // Handle escape sequences
-                if ($char === "\\" && $inString) {
-                    $escapeNext = !$escapeNext;
-                } else {
-                    $escapeNext = false;
-                }
-                
-                $current .= $char;
-                
-                // Detect statement boundaries
-                if (!$inString && !$inDollarQuote && $char === ';') {
+
+                // Add final statement if not empty
+                if (!empty(trim($current))) {
                     $statements[] = trim($current);
-                    $current = '';
-                    // Skip trailing whitespace/newlines
-                    while ($i + 1 < $len && ctype_space($backupContent[$i + 1])) {
-                        $i++;
-                    }
                 }
-            }
 
-            // Add final statement if not empty
-            if (!empty(trim($current))) {
-                $statements[] = trim($current);
-            }
+                $totalStatements = count($statements);
+                $logContent .= "Total SQL statements to execute: $totalStatements\n\n";
+                file_put_contents($logFile, $logContent, FILE_APPEND);
+                writeProgress('restore', 10, "Parsed $totalStatements SQL statements");
 
-            $totalStatements = count($statements);
-            $logContent .= "Total SQL statements to execute: $totalStatements\n\n";
+                $conn = connectDB();
 
-            $conn = connectDB();
+                // Terminate all connections EXCEPT current one
+                $logContent .= "Terminating existing connections...\n";
+                file_put_contents($logFile, $logContent, FILE_APPEND);
+                writeProgress('restore', 15, "Terminating existing connections");
 
-            // Terminate all connections
-            $logContent .= "Terminating existing connections...\n";
-            pg_query($conn, "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '" . DB_NAME . "' AND pid <> pg_backend_pid();");
+                pg_query($conn, "SELECT pg_terminate_backend(pg_stat_activity.pid) 
+                                FROM pg_stat_activity 
+                                WHERE pg_stat_activity.datname = '" . DB_NAME . "' 
+                                AND pid <> pg_backend_pid()");
 
-            // Drop all objects in public schema
-            $logContent .= "Dropping existing schema...\n";
-            pg_query($conn, "DROP SCHEMA public CASCADE;");
-            pg_query($conn, "CREATE SCHEMA public;");
-            pg_query($conn, "GRANT ALL ON SCHEMA public TO postgres;");
-            pg_query($conn, "GRANT ALL ON SCHEMA public TO public;");
+                // Drop all objects in public schema
+                $logContent .= "Dropping existing schema...\n";
+                file_put_contents($logFile, $logContent, FILE_APPEND);
+                writeProgress('restore', 20, "Dropping existing schema");
 
-            // Create extensions first
-            $logContent .= "Creating extensions...\n";
-            pg_query($conn, "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";");
+                pg_query($conn, "DROP SCHEMA public CASCADE;");
+                pg_query($conn, "CREATE SCHEMA public;");
+                pg_query($conn, "GRANT ALL ON SCHEMA public TO postgres;");
+                pg_query($conn, "GRANT ALL ON SCHEMA public TO public;");
 
-            // Execute statements in batches with error handling
-            $currentStatement = 0;
-            $batchSize = 10;
-            $batch = [];
-            
-            foreach ($statements as $statement) {
-                $currentStatement++;
-                $statement = trim($statement);
-                if (empty($statement)) continue;
+                // Create extensions first
+                $logContent .= "Creating extensions...\n";
+                file_put_contents($logFile, $logContent, FILE_APPEND);
+                writeProgress('restore', 25, "Creating extensions");
 
-                // Skip comments
-                if (strpos($statement, '--') === 0) continue;
+                pg_query($conn, "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";");
 
-                $batch[] = $statement;
-                
-                // Execute in batches or if it's the last statement
-                if (count($batch) >= $batchSize || $currentStatement == $totalStatements) {
-                    $progress = 10 + intval(($currentStatement / $totalStatements) * 85);
-                    
-                    // Log every 10 statements
-                    if ($currentStatement % 10 === 0) {
-                        $logContent .= "Executing statement $currentStatement/$totalStatements\n";
-                        file_put_contents($logFile, $logContent);
-                    }
-                    
-                    // Execute each statement in the batch
-                    foreach ($batch as $stmt) {
-                        $result = @pg_query($conn, $stmt);
-                        if (!$result) {
-                            $error = pg_last_error($conn);
-                            // Log non-critical errors but continue
-                            if (!preg_match('/(relation .* does not exist|already exists|type .* does not exist)/i', $error)) {
-                                $logContent .= "WARNING: $error\n";
+                // Execute statements in batches with error handling
+                $currentStatement = 0;
+                $batchSize = 10;
+                $batch = [];
+
+                foreach ($statements as $statement) {
+                    $currentStatement++;
+                    $statement = trim($statement);
+                    if (empty($statement)) continue;
+
+                    // Skip comments
+                    if (strpos($statement, '--') === 0) continue;
+
+                    $batch[] = $statement;
+
+                    // Execute in batches or if it's the last statement
+                    if (count($batch) >= $batchSize || $currentStatement == $totalStatements) {
+                        $progress = 30 + intval(($currentStatement / $totalStatements) * 65);
+
+                        // Update progress
+                        writeProgress('restore', $progress, "Executing statement $currentStatement/$totalStatements");
+
+                        // Log every 10 statements
+                        if ($currentStatement % 10 === 0) {
+                            $logContent .= "Executing statement $currentStatement/$totalStatements\n";
+                            file_put_contents($logFile, $logContent, FILE_APPEND);
+                        }
+
+                        // Execute each statement in the batch
+                        foreach ($batch as $stmt) {
+                            $result = @pg_query($conn, $stmt);
+                            if (!$result) {
+                                $error = pg_last_error($conn);
+                                // Log non-critical errors but continue
+                                if (!preg_match('/(relation .* does not exist|already exists|type .* does not exist)/i', $error)) {
+                                    $logContent .= "WARNING: $error\n";
+                                    file_put_contents($logFile, $logContent, FILE_APPEND);
+                                }
                             }
                         }
+
+                        $batch = []; // Reset batch
                     }
-                    
-                    $batch = []; // Reset batch
+                }
+
+                $progress = 98;
+                $logContent .= "\nRunning post-restore checks...\n";
+                file_put_contents($logFile, $logContent, FILE_APPEND);
+                writeProgress('restore', $progress, "Running post-restore checks");
+
+                // Verify restore
+                $tableCount = getTableCount($conn);
+                $logContent .= "Found $tableCount tables after restore\n";
+                file_put_contents($logFile, $logContent, FILE_APPEND);
+
+                if ($tableCount > 0) {
+                    $progress = 100;
+                    $logContent .= "Restore completed successfully!\n";
+                    file_put_contents($logFile, $logContent, FILE_APPEND);
+                    writeProgress('restore', $progress, "Restore completed successfully");
+                    $restoreSuccess = true;
+                    $message = "Database restored successfully from: " . $backupFile;
+                } else {
+                    throw new Exception("Restore failed - no tables found in database");
+                }
+
+                pg_close($conn);
+            } catch (Exception $e) {
+                $progress = 100;
+                $logContent .= "Restore failed: " . $e->getMessage() . "\n";
+                file_put_contents($logFile, $logContent, FILE_APPEND);
+                writeProgress('restore', $progress, "Restore failed: " . $e->getMessage());
+                $error = "Restore failed: " . $e->getMessage();
+                if ($conn) {
+                    pg_close($conn);
                 }
             }
 
-            $progress = 98;
-            $logContent .= "\nRunning post-restore checks...\n";
-
-            // Verify restore
-            $tableCount = getTableCount($conn);
-            $logContent .= "Found $tableCount tables after restore\n";
-
-            if ($tableCount > 0) {
-                $progress = 100;
-                $logContent .= "Restore completed successfully!\n";
-                $restoreSuccess = true;
-                $message = "Database restored successfully from: " . $backupFile;
-            } else {
-                throw new Exception("Restore failed - no tables found in database");
-            }
-
-            pg_close($conn);
-        } catch (Exception $e) {
-            $progress = 100;
-            $logContent .= "Restore failed: " . $e->getMessage() . "\n";
-            $error = "Restore failed: " . $e->getMessage();
-            if ($conn) {
-                pg_close($conn);
-            }
+            // Save final log
+            file_put_contents($logFile, $logContent, FILE_APPEND);
+        } else {
+            $error = "Backup file not found: " . $backupFile;
+            writeProgress('restore', 100, "Backup file not found: $backupFile");
         }
-
-        // Save final log
-        file_put_contents($logFile, $logContent);
     } else {
-        $error = "Backup file not found: " . $backupFile;
+        $error = "No backup file selected";
     }
 }
 
@@ -661,6 +878,12 @@ function formatSize($bytes)
         return '0 bytes';
     }
 }
+
+// Check if there's an active operation
+$progressData = [];
+if ($isOperationRunning) {
+    $progressData = getProgress($currentOperation);
+}
 ?>
 
 <!DOCTYPE html>
@@ -688,6 +911,7 @@ function formatSize($bytes)
         .card {
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
 
         .btn {
@@ -758,7 +982,7 @@ function formatSize($bytes)
         }
 
         .log-container {
-            height: 400px;
+            height: 300px;
             overflow-y: auto;
             background: #1e1e1e;
             color: #d4d4d4;
@@ -816,340 +1040,437 @@ function formatSize($bytes)
             background-color: #ffcdd2;
             color: #b71c1c;
         }
+
+        .operation-card {
+            margin-bottom: 30px;
+            border-left: 4px solid #26a69a;
+        }
+
+        .operation-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .operation-badge {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .badge-processing {
+            background-color: #0d47a1;
+        }
+
+        .badge-success {
+            background-color: #1b5e20;
+        }
+
+        .badge-error {
+            background-color: #b71c1c;
+        }
     </style>
 </head>
 
 <body>
     <main>
         <div class="container">
-            <!-- Progress View (for backup/restore operations) -->
-            <?php if ($isProgressView): ?>
-                <div class="row">
-                    <div class="col s12">
-                        <h4 class="teal-text text-darken-2">
-                            <?php echo $operation === 'backup' ? 'Database Backup in Progress' : 'Database Restore in Progress'; ?>
-                        </h4>
+            <div class="row">
+                <div class="col s12">
+                    <h4 class="teal-text text-darken-2">Lifebox Main DB Backup & Restore</h4>
+                    <p class="grey-text">Database: <?php echo DB_NAME; ?></p>
+                </div>
+            </div>
 
-                        <div class="operation-status status-processing">
-                            <i class="material-icons left">hourglass_full</i>
-                            Operation is running...
+            <!-- System Information -->
+            <div class="row system-info">
+                <div class="col s12">
+                    <h5>System Information</h5>
+                    <p><strong>PHP Version:</strong> <?php echo phpversion(); ?></p>
+                    <p><strong>PostgreSQL Extension:</strong> <?php echo extension_loaded('pgsql') ? 'Loaded' : 'Not Loaded'; ?></p>
+                    <p><strong>Backup Directory:</strong> <?php echo realpath(BACKUP_DIR); ?> (<?php echo is_writable(BACKUP_DIR) ? 'Writable' : 'Not Writable'; ?>)</p>
+                    <p><strong>Available Disk Space:</strong> <?php echo formatSize(disk_free_space(BACKUP_DIR)); ?></p>
+
+                    <?php
+                    $conn = @connectDB();
+                    if ($conn) {
+                        $tableCount = getTableCount($conn);
+                        echo "<p><strong>Database Tables:</strong> $tableCount</p>";
+                        pg_close($conn);
+                    }
+                    ?>
+                </div>
+            </div>
+
+
+
+
+
+
+            <!-- Action Cards -->
+            <div class="row">
+                <!-- Backup Card -->
+                <div class="col s12 m6 l4">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title teal-text">Create Backup</span>
+                            <p>Create a new backup of the current database state.</p>
+                            <p>Backup includes all tables, views, functions, triggers, and sequences.</p>
                         </div>
-
-                        <div class="progress-container">
-                            <div class="progress-bar" id="progress-bar" style="width: <?php echo $progress; ?>%;">
-                                <?php echo $progress; ?>%
-                            </div>
+                        <div class="card-action">
+                            <form method="post" action="index.php">
+                                <input type="hidden" name="action" value="backup">
+                                <button type="submit" class="btn waves-effect waves-light teal">
+                                    <i class="material-icons left">backup</i>Create Backup
+                                </button>
+                            </form>
                         </div>
+                    </div>
+                </div>
 
-                        <h5>Operation Log</h5>
-                        <div class="log-container" id="log-container">
-                            <?php
-                            // Format log content for display
-                            $logLines = explode("\n", $logContent);
-                            foreach ($logLines as $line) {
-                                $lineClass = 'log-message';
-                                if (stripos($line, 'error') !== false || stripos($line, 'fail') !== false) {
-                                    $lineClass = 'log-error';
-                                } elseif (stripos($line, 'warning') !== false) {
-                                    $lineClass = 'log-warning';
-                                } elseif (stripos($line, 'success') !== false) {
-                                    $lineClass = 'log-success';
-                                }
-
-                                // Extract timestamp if present
-                                $timestamp = '';
-                                if (preg_match('/^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) - (.*)$/', $line, $matches)) {
-                                    $timestamp = $matches[1];
-                                    $message = $matches[2];
-                                    echo '<div class="log-entry"><span class="log-time">[' . $timestamp . ']</span> <span class="' . $lineClass . '">' . $message . '</span></div>';
-                                } else {
-                                    echo '<div class="log-entry"><span class="' . $lineClass . '">' . $line . '</span></div>';
-                                }
-                            }
-                            ?>
+                <!-- Upload Card -->
+                <div class="col s12 m6 l4">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title teal-text">Upload Backup</span>
+                            <p>Upload a database backup file to the server.</p>
+                            <p>Allowed formats: .sql, .backup, .dump, .pgdump</p>
                         </div>
-
-                        <div class="center-align" style="margin-top: 20px;">
-                            <?php if ($progress < 100): ?>
-                                <div class="preloader-wrapper big active">
-                                    <div class="spinner-layer spinner-teal-only">
-                                        <div class="circle-clipper left">
-                                            <div class="circle"></div>
-                                        </div>
-                                        <div class="gap-patch">
-                                            <div class="circle"></div>
-                                        </div>
-                                        <div class="circle-clipper right">
-                                            <div class="circle"></div>
-                                        </div>
+                        <div class="card-action">
+                            <form method="post" action="index.php" enctype="multipart/form-data">
+                                <input type="hidden" name="action" value="upload">
+                                <div class="file-field input-field">
+                                    <div class="btn teal">
+                                        <span>File</span>
+                                        <input type="file" name="backup_file" accept=".sql,.backup,.dump,.pgdump" required>
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text" placeholder="Select backup file">
                                     </div>
                                 </div>
-                                <p>Please wait, this may take several minutes...</p>
-                                <script>
-                                    // Auto-refresh every 5 seconds to update progress
-                                    setTimeout(function() {
-                                        window.location.reload();
-                                    }, 5000);
-                                </script>
-                            <?php else: ?>
-                                <?php if (empty($error)): ?>
-                                    <div class="operation-status status-success">
-                                        <i class="material-icons left">check_circle</i>
-                                        Operation completed successfully!
-                                    </div>
-                                <?php else: ?>
-                                    <div class="operation-status status-error">
-                                        <i class="material-icons left">error</i>
-                                        Operation failed!
-                                    </div>
-                                <?php endif; ?>
-
-                                <a href="index.php" class="btn waves-effect waves-light teal">
-                                    <i class="material-icons left">arrow_back</i> Return to Dashboard
-                                </a>
-                            <?php endif; ?>
+                                <button type="submit" class="btn waves-effect waves-light teal">
+                                    <i class="material-icons left">cloud_upload</i>Upload
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
 
-                <!-- Main Dashboard View -->
-            <?php else: ?>
-                <div class="row">
-                    <div class="col s12">
-                        <h4 class="teal-text text-darken-2">Lifebox Main DB Backup & Restore</h4>
-                        <p class="grey-text">Database: <?php echo DB_NAME; ?></p>
+                <!-- Delete All Card -->
+                <div class="col s12 m6 l4">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title teal-text">Delete All Backups</span>
+                            <p>Warning: This will permanently delete all backup files.</p>
+                        </div>
+                        <div class="card-action">
+                            <form method="post" action="index.php" onsubmit="return confirm('Are you sure you want to delete ALL backup files?');">
+                                <input type="hidden" name="action" value="delete_all">
+                                <button type="submit" class="btn waves-effect waves-light red">
+                                    <i class="material-icons left">delete_forever</i>Delete All
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- System Information -->
-                <div class="row system-info">
+
+            <!-- Messages -->
+            <?php if ($message): ?>
+                <div class="row">
                     <div class="col s12">
-                        <h5>System Information</h5>
-                        <p><strong>PHP Version:</strong> <?php echo phpversion(); ?></p>
-                        <p><strong>PostgreSQL Extension:</strong> <?php echo extension_loaded('pgsql') ? 'Loaded' : 'Not Loaded'; ?></p>
-                        <p><strong>Backup Directory:</strong> <?php echo realpath(BACKUP_DIR); ?> (<?php echo is_writable(BACKUP_DIR) ? 'Writable' : 'Not Writable'; ?>)</p>
-                        <p><strong>Available Disk Space:</strong> <?php echo formatSize(disk_free_space(BACKUP_DIR)); ?></p>
+                        <div class="card-panel teal lighten-2 white-text">
+                            <?php echo $message; ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
 
+            <?php if ($error): ?>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="card-panel red lighten-2 white-text">
+                            <?php echo $error; ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <!-- Operation Progress Card -->
+            <?php
+            // Always show the operation card
+            $progressData = $isOperationRunning ? getProgress($currentOperation) : ['progress' => 0, 'message' => 'No active operation'];
+            $isComplete = $isOperationRunning ? ($progressData['progress'] >= 100) : false;
+            $operationTitle = $isOperationRunning ?
+                ($currentOperation === 'backup' ? 'Database Backup' : 'Database Restore') :
+                'Operation Status';
+            $statusClass = $isOperationRunning ?
+                ($isComplete ?
+                    (empty($error) ? 'status-success' : 'status-error') :
+                    'status-processing') :
+                'status-processing';
+            $badgeClass = $isOperationRunning ?
+                ($isComplete ?
+                    (empty($error) ? 'badge-success' : 'badge-error') :
+                    'badge-processing') :
+                'badge-processing';
+            $statusText = $isOperationRunning ?
+                ($isComplete ?
+                    (empty($error) ? 'Completed' : 'Failed') :
+                    'In Progress') :
+                'Idle';
+            ?>
+
+
+            <div class="card operation-card">
+                <div class="card-content">
+                    <div class="operation-title">
+                        <span class="card-title teal-text"><?php echo $operationTitle; ?></span>
+                        <span class="operation-badge <?php echo $badgeClass; ?>">
+                            <?php echo $statusText; ?>
+                        </span>
+                    </div>
+
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progress-bar" style="width: <?php echo $progressData['progress']; ?>%;">
+                            <?php echo $progressData['progress']; ?>%
+                        </div>
+                    </div>
+
+                    <div id="progress-message" class="log-message">
+                        <?php echo $progressData['message']; ?>
+                    </div>
+
+                    <div class="log-container" id="log-container">
                         <?php
-                        $conn = @connectDB();
-                        if ($conn) {
-                            $tableCount = getTableCount($conn);
-                            echo "<p><strong>Database Tables:</strong> $tableCount</p>";
-                            pg_close($conn);
+                        if ($isOperationRunning) {
+                            $logFilePattern = BACKUP_DIR . '/' . $currentOperation . '_log_*.txt';
+                            $logFiles = glob($logFilePattern);
+                            rsort($logFiles);
+                            $latestLog = $logFiles[0] ?? '';
+
+                            if ($latestLog && file_exists($latestLog)) {
+                                $logContent = file_get_contents($latestLog);
+                                $logLines = explode("\n", $logContent);
+
+                                foreach ($logLines as $line) {
+                                    $lineClass = 'log-message';
+                                    if (stripos($line, 'error') !== false || stripos($line, 'fail') !== false) {
+                                        $lineClass = 'log-error';
+                                    } elseif (stripos($line, 'warning') !== false) {
+                                        $lineClass = 'log-warning';
+                                    } elseif (stripos($line, 'success') !== false) {
+                                        $lineClass = 'log-success';
+                                    }
+
+                                    // Extract timestamp if present
+                                    $timestamp = '';
+                                    if (preg_match('/^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) - (.*)$/', $line, $matches)) {
+                                        $timestamp = $matches[1];
+                                        $message = $matches[2];
+                                        echo '<div class="log-entry"><span class="log-time">[' . $timestamp . ']</span> <span class="' . $lineClass . '">' . $message . '</span></div>';
+                                    } else {
+                                        echo '<div class="log-entry"><span class="' . $lineClass . '">' . $line . '</span></div>';
+                                    }
+                                }
+                            }
+                        } else {
+                            echo '<div class="log-entry"><span class="log-message">No active operation. When you start a backup or restore, progress will appear here.</span></div>';
                         }
                         ?>
                     </div>
-                </div>
 
-                <!-- Messages -->
-                <?php if ($message): ?>
-                    <div class="row">
-                        <div class="col s12">
-                            <div class="card-panel teal lighten-2 white-text">
-                                <?php echo $message; ?>
-                            </div>
-                        </div>
-                    </div>
-                <?php endif; ?>
-
-                <?php if ($error): ?>
-                    <div class="row">
-                        <div class="col s12">
-                            <div class="card-panel red lighten-2 white-text">
-                                <?php echo $error; ?>
-                            </div>
-                        </div>
-                    </div>
-                <?php endif; ?>
-
-                <!-- Action Cards -->
-                <div class="row">
-                    <!-- Backup Card -->
-                    <div class="col s12 m6 l4">
-                        <div class="card">
-                            <div class="card-content">
-                                <span class="card-title teal-text">Create Backup</span>
-                                <p>Create a new backup of the current database state.</p>
-                                <p>Backup includes all tables, views, functions, triggers, and sequences.</p>
-                            </div>
-                            <div class="card-action">
-                                <form method="post" action="index.php">
-                                    <input type="hidden" name="action" value="backup">
-                                    <button type="submit" class="btn waves-effect waves-light teal">
-                                        <i class="material-icons left">backup</i>Create Backup
-                                    </button>
-                                </form>
-                                <button class="btn waves-effect waves-light teal">
-                                    <a href="./index.php?action=backup_progress">
-                                        <i class="material-icons left">restore</i>View Last Backup Logs
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Upload Card -->
-                    <div class="col s12 m6 l4">
-                        <div class="card">
-                            <div class="card-content">
-                                <span class="card-title teal-text">Upload Backup</span>
-                                <p>Upload a database backup file to the server.</p>
-                                <p>Allowed formats: .sql, .backup, .dump, .pgdump</p>
-                            </div>
-                            <div class="card-action">
-                                <form method="post" action="index.php" enctype="multipart/form-data">
-                                    <input type="hidden" name="action" value="upload">
-                                    <div class="file-field input-field">
-                                        <div class="btn teal">
-                                            <span>File</span>
-                                            <input type="file" name="backup_file" accept=".sql,.backup,.dump,.pgdump" required>
-                                        </div>
-                                        <div class="file-path-wrapper">
-                                            <input class="file-path validate" type="text" placeholder="Select backup file">
-                                        </div>
+                    <div class="center-align" style="margin-top: 20px;">
+                        <?php if ($isOperationRunning && !$isComplete): ?>
+                            <div class="preloader-wrapper big active">
+                                <div class="spinner-layer spinner-teal-only">
+                                    <div class="circle-clipper left">
+                                        <div class="circle"></div>
                                     </div>
-                                    <button type="submit" class="btn waves-effect waves-light teal">
-                                        <i class="material-icons left">cloud_upload</i>Upload
-                                    </button>
-                                </form>
+                                    <div class="gap-patch">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Delete All Card -->
-                    <div class="col s12 m6 l4">
-                        <div class="card">
-                            <div class="card-content">
-                                <span class="card-title teal-text">Delete All Backups</span>
-                                <p>Warning: This will permanently delete all backup files.</p>
-                            </div>
-                            <div class="card-action">
-                                <form method="post" action="index.php" onsubmit="return confirm('Are you sure you want to delete ALL backup files?');">
-                                    <input type="hidden" name="action" value="delete_all">
-                                    <button type="submit" class="btn waves-effect waves-light red">
-                                        <i class="material-icons left">delete_forever</i>Delete All
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
+                            <p>Please wait, this may take several minutes...</p>
+                            <script>
+                                // Auto-refresh every 5 seconds to update progress
+                                setTimeout(function() {
+                                    window.location.reload();
+                                }, 5000);
+                            </script>
+                        <?php else: ?>
+                            <a href="index.php" class="btn waves-effect waves-light teal">
+                                <i class="material-icons left">refresh</i> Refresh Page
+                            </a>
+                        <?php endif; ?>
                     </div>
                 </div>
+            </div>
 
-                <!-- Backup List -->
-                <div class="row">
-                    <div class="col s12">
-                        <div class="card">
-                            <div class="card-content">
-                                <span class="card-title teal-text">Available Backups</span>
-                                <p>Total backups: <?php echo $totalFiles; ?></p>
+            <!-- Backup List -->
+            <div class="row">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title teal-text">Available Backups</span>
+                            <p>Total backups: <?php echo $totalFiles; ?></p>
 
-                                <form method="post" action="index.php" id="backupForm">
-                                    <input type="hidden" name="action" value="restore" id="formAction">
+                            <!-- Search and Items Per Page Controls -->
+                            <div class="row" style="margin-bottom: 20px;">
+                                <div class="col s12 m6">
+                                    <div class="input-field">
+                                        <input type="text" id="searchBackups" placeholder="Search backups...">
+                                        <label for="searchBackups">Search</label>
+                                    </div>
+                                </div>
+                                <div class="col s12 m6 right-align">
+                                    <div class="input-field" style="display: inline-block; width: auto;">
+                                        <select id="itemsPerPage" onchange="updateItemsPerPage(this.value)">
+                                            <option value="10" <?php echo ITEMS_PER_PAGE == 10 ? 'selected' : ''; ?>>10 per page</option>
+                                            <option value="25" <?php echo ITEMS_PER_PAGE == 25 ? 'selected' : ''; ?>>25 per page</option>
+                                            <option value="50" <?php echo ITEMS_PER_PAGE == 50 ? 'selected' : ''; ?>>50 per page</option>
+                                            <option value="100" <?php echo ITEMS_PER_PAGE == 100 ? 'selected' : ''; ?>>100 per page</option>
+                                            <option value="0" <?php echo ITEMS_PER_PAGE == 0 ? 'selected' : ''; ?>>All</option>
+                                        </select>
+                                        <label>Items per page</label>
+                                    </div>
+                                </div>
+                            </div>
 
-                                    <?php if (count($paginatedFiles) > 0): ?>
-                                        <table class="highlight">
-                                            <thead>
-                                                <tr>
-                                                    <th>
+                            <form method="post" action="index.php" id="backupForm">
+                                <input type="hidden" name="action" value="restore" id="formAction">
+                                <input type="hidden" name="sort" id="sortField" value="<?php echo $_GET['sort'] ?? ''; ?>">
+                                <input type="hidden" name="order" id="sortOrder" value="<?php echo $_GET['order'] ?? 'asc'; ?>">
+
+                                <?php if (count($paginatedFiles) > 0): ?>
+                                    <table class="highlight" id="backupsTable">
+                                        <thead>
+                                            <tr>
+                                                <th width="50px">
+                                                    <label>
+                                                        <input type="checkbox" id="selectAll">
+                                                        <span></span>
+                                                    </label>
+                                                </th>
+                                                <th>
+                                                    <a href="#" onclick="sortTable('name')">File Name
+                                                        <?php if (($_GET['sort'] ?? '') === 'name'): ?>
+                                                            <i class="material-icons tiny">arrow_<?php echo ($_GET['order'] ?? 'asc') === 'asc' ? 'upward' : 'downward'; ?></i>
+                                                        <?php endif; ?>
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="#" onclick="sortTable('size')">Size
+                                                        <?php if (($_GET['sort'] ?? '') === 'size'): ?>
+                                                            <i class="material-icons tiny">arrow_<?php echo ($_GET['order'] ?? 'asc') === 'asc' ? 'upward' : 'downward'; ?></i>
+                                                        <?php endif; ?>
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="#" onclick="sortTable('date')">Date
+                                                        <?php if (($_GET['sort'] ?? '') === 'date'): ?>
+                                                            <i class="material-icons tiny">arrow_<?php echo ($_GET['order'] ?? 'asc') === 'asc' ? 'upward' : 'downward'; ?></i>
+                                                        <?php endif; ?>
+                                                    </a>
+                                                </th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($paginatedFiles as $file): ?>
+                                                <?php
+                                                $fileName = basename($file);
+                                                $fileSize = filesize($file);
+                                                $fileDate = date('Y-m-d H:i:s', filemtime($file));
+                                                ?>
+                                                <tr class="backup-row" data-name="<?php echo htmlspecialchars($fileName); ?>"
+                                                    data-size="<?php echo $fileSize; ?>"
+                                                    data-date="<?php echo strtotime($fileDate); ?>">
+                                                    <td>
                                                         <label>
-                                                            <input type="checkbox" id="selectAll">
+                                                            <input type="checkbox" name="backup_files[]" value="<?php echo $fileName; ?>" class="backup-checkbox">
                                                             <span></span>
                                                         </label>
-                                                    </th>
-                                                    <th>File Name</th>
-                                                    <th>Size</th>
-                                                    <th>Date</th>
-                                                    <th>Actions</th>
+                                                    </td>
+                                                    <td><?php echo $fileName; ?></td>
+                                                    <td><?php echo formatSize($fileSize); ?></td>
+                                                    <td><?php echo $fileDate; ?></td>
+                                                    <td>
+                                                        <button type="button" onclick="restoreBackup('<?php echo $fileName; ?>')" class="btn-small waves-effect waves-light teal">
+                                                            <i class="material-icons left">restore</i>Restore
+                                                        </button>
+                                                        <button type="button" onclick="downloadBackup('<?php echo $fileName; ?>')" class="btn-small waves-effect waves-light blue">
+                                                            <i class="material-icons left">cloud_download</i>Download
+                                                        </button>
+                                                    </td>
                                                 </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php foreach ($paginatedFiles as $file): ?>
-                                                    <?php
-                                                    $fileName = basename($file);
-                                                    $fileSize = filesize($file);
-                                                    $fileDate = date('Y-m-d H:i:s', filemtime($file));
-                                                    ?>
-                                                    <tr>
-                                                        <td>
-                                                            <label>
-                                                                <input type="checkbox" name="backup_files[]" value="<?php echo $fileName; ?>" class="backup-checkbox">
-                                                                <span></span>
-                                                            </label>
-                                                        </td>
-                                                        <td><?php echo $fileName; ?></td>
-                                                        <td><?php echo formatSize($fileSize); ?></td>
-                                                        <td><?php echo $fileDate; ?></td>
-                                                        <td>
-                                                            <button type="button" onclick="restoreBackup('<?php echo $fileName; ?>')" class="btn-small waves-effect waves-light teal">
-                                                                <i class="material-icons left">restore</i>Restore
-                                                            </button>
-                                                            <button type="button" onclick="downloadBackup('<?php echo $fileName; ?>')" class="btn-small waves-effect waves-light blue">
-                                                                <i class="material-icons left">cloud_download</i>Download
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                <?php endforeach; ?>
-                                            </tbody>
-                                        </table>
-                                    <?php else: ?>
-                                        <p class="grey-text">No backup files found.</p>
-                                    <?php endif; ?>
-                                </form>
-                            </div>
-                            <div class="card-action">
-                                <button type="button" onclick="setAction('restore')" class="btn waves-effect waves-light teal" id="restoreSelectedBtn" disabled>
-                                    <i class="material-icons left">restore</i>Restore Selected
-                                </button>
-                                <button type="button" onclick="setAction('delete')" class="btn waves-effect waves-light red" id="deleteSelectedBtn" disabled>
-                                    <i class="material-icons left">delete</i>Delete Selected
-                                </button>
-                            </div>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                <?php else: ?>
+                                    <p class="grey-text">No backup files found.</p>
+                                <?php endif; ?>
+                            </form>
+                        </div>
+                        <div class="card-action">
+                            <button type="button" onclick="setAction('restore')" class="btn waves-effect waves-light teal" id="restoreSelectedBtn" disabled>
+                                <i class="material-icons left">restore</i>Restore Selected
+                            </button>
+                            <button type="button" onclick="setAction('delete')" class="btn waves-effect waves-light red" id="deleteSelectedBtn" disabled>
+                                <i class="material-icons left">delete</i>Delete Selected
+                            </button>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Pagination -->
-                <?php if ($totalPages > 1): ?>
-                    <div class="row">
-                        <div class="col s12 center-align">
-                            <ul class="pagination">
-                                <?php if ($page > 1): ?>
-                                    <li class="waves-effect">
-                                        <a href="?page=<?php echo $page - 1; ?>">
-                                            <i class="material-icons">chevron_left</i>
-                                        </a>
-                                    </li>
-                                <?php else: ?>
-                                    <li class="disabled">
-                                        <a href="#!">
-                                            <i class="material-icons">chevron_left</i>
-                                        </a>
-                                    </li>
-                                <?php endif; ?>
+            <!-- Pagination -->
+            <?php if ($totalPages > 1 && ITEMS_PER_PAGE > 0): ?>
+                <div class="row">
+                    <div class="col s12 center-align">
+                        <ul class="pagination">
+                            <?php if ($page > 1): ?>
+                                <li class="waves-effect">
+                                    <a href="<?php echo buildPaginationUrl($page - 1); ?>">
+                                        <i class="material-icons">chevron_left</i>
+                                    </a>
+                                </li>
+                            <?php else: ?>
+                                <li class="disabled">
+                                    <a href="#!">
+                                        <i class="material-icons">chevron_left</i>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
 
-                                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                                    <li class="<?php echo $i == $page ? 'active' : 'waves-effect'; ?>">
-                                        <a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                                    </li>
-                                <?php endfor; ?>
+                            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                                <li class="<?php echo $i == $page ? 'active' : 'waves-effect'; ?>">
+                                    <a href="<?php echo buildPaginationUrl($i); ?>"><?php echo $i; ?></a>
+                                </li>
+                            <?php endfor; ?>
 
-                                <?php if ($page < $totalPages): ?>
-                                    <li class="waves-effect">
-                                        <a href="?page=<?php echo $page + 1; ?>">
-                                            <i class="material-icons">chevron_right</i>
-                                        </a>
-                                    </li>
-                                <?php else: ?>
-                                    <li class="disabled">
-                                        <a href="#!">
-                                            <i class="material-icons">chevron_right</i>
-                                        </a>
-                                    </li>
-                                <?php endif; ?>
-                            </ul>
-                        </div>
+                            <?php if ($page < $totalPages): ?>
+                                <li class="waves-effect">
+                                    <a href="<?php echo buildPaginationUrl($page + 1); ?>">
+                                        <i class="material-icons">chevron_right</i>
+                                    </a>
+                                </li>
+                            <?php else: ?>
+                                <li class="disabled">
+                                    <a href="#!">
+                                        <i class="material-icons">chevron_right</i>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
                     </div>
-                <?php endif; ?>
+                </div>
             <?php endif; ?>
         </div>
     </main>
@@ -1248,6 +1569,79 @@ function formatSize($bytes)
 
         function downloadBackup(filename) {
             window.location.href = 'backup/' + filename;
+        }
+    </script>
+
+    <script>
+        // Initialize select dropdown
+        document.addEventListener('DOMContentLoaded', function() {
+            M.AutoInit();
+            var elems = document.querySelectorAll('select');
+            M.FormSelect.init(elems);
+
+            // Initialize search functionality
+            document.getElementById('searchBackups').addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const rows = document.querySelectorAll('#backupsTable tbody tr.backup-row');
+
+                rows.forEach(row => {
+                    const fileName = row.getAttribute('data-name').toLowerCase();
+                    const fileDate = row.getAttribute('data-date');
+                    const formattedDate = new Date(parseInt(fileDate) * 1000).toLocaleString();
+
+                    if (fileName.includes(searchTerm) || formattedDate.includes(searchTerm)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Sorting function
+        function sortTable(field) {
+            const currentSort = document.getElementById('sortField').value;
+            const currentOrder = document.getElementById('sortOrder').value;
+
+            let newOrder = 'asc';
+            if (currentSort === field) {
+                newOrder = currentOrder === 'asc' ? 'desc' : 'asc';
+            }
+
+            // Update hidden fields
+            document.getElementById('sortField').value = field;
+            document.getElementById('sortOrder').value = newOrder;
+
+            // Submit the form to reload with new sorting
+            const form = document.getElementById('backupForm');
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'sort';
+            input.value = field;
+            form.appendChild(input);
+
+            const input2 = document.createElement('input');
+            input2.type = 'hidden';
+            input2.name = 'order';
+            input2.value = newOrder;
+            form.appendChild(input2);
+
+            form.submit();
+        }
+
+        // Items per page selection
+        function updateItemsPerPage(value) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('per_page', value);
+            url.searchParams.delete('page'); // Reset to first page
+            window.location.href = url.toString();
+        }
+
+        // Helper function to build pagination URLs with all parameters
+        function buildPaginationUrl(page) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('page', page);
+            return url.toString();
         }
     </script>
 </body>
