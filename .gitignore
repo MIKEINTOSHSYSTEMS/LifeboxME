@@ -1,6 +1,7 @@
 settings.xml
 *.code-workspace
 *.txt
+*.mmdb
 /schema
 /analytics/js/
 /analytics/config/config.ini.php

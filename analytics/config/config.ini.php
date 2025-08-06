@@ -83,6 +83,7 @@ Plugins[] = "CustomDimensions"
 Plugins[] = "JsTrackerInstallCheck"
 Plugins[] = "FeatureFlags"
 Plugins[] = "TagManager"
+Plugins[] = "Modern"
 
 [PluginsInstalled]
 PluginsInstalled[] = "Diagnostics"
@@ -151,6 +152,5 @@ PluginsInstalled[] = "PagePerformance"
 PluginsInstalled[] = "CustomDimensions"
 PluginsInstalled[] = "FeatureFlags"
 PluginsInstalled[] = "TagManager"
-
-[TagManager]
+PluginsInstalled[] = "Modern"
 

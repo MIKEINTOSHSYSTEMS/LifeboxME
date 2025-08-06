@@ -1,0 +1,43 @@
+/*
+ * System Notifications
+ */
+.system.notification {
+  box-shadow: none;
+
+  &.notification-danger,
+  &.notification-error {
+    .alert-danger;
+    color: @theme-color-header-background !important;
+    background-color: @darkmode-color-danger;
+    border-color: @darkmode-color-danger-border;
+  }
+  &.notification-info {
+    .alert-info;
+    color: @theme-color-header-background !important;
+    background-color: @darkmode-color-info;
+    border-color: @darkmode-color-info-border;
+  }
+  &.notification-success {
+    .alert-success;
+    color: @theme-color-header-background !important;
+    background-color: @darkmode-color-success;
+    border-color: @darkmode-color-success-border;
+  }
+  &.notification-warning {
+    .alert-warning;
+    background-color: @darkmode-color-warning;
+    color: @theme-color-header-background !important;
+    border-color: @darkmode-color-warning-border;
+  }
+
+  &:before,
+  p,
+  a {
+    color: @theme-color-header-background !important;
+  }
+
+  .close {
+    color: @theme-color-header-background !important;
+    top: -5px;
+  }
+}
