@@ -1,5 +1,6 @@
 <?php
 // Load environment variables manually from .env.dev
+//$envPath = __DIR__ . '/.env.dev';
 $envPath = __DIR__ . '/../../.env.dev';
 if (!file_exists($envPath)) {
     die("Environment file not found at $envPath");
