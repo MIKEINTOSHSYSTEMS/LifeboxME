@@ -10,11 +10,12 @@ if (file_exists($envPath)) {
 }
 
 // Database Configuration
+//define('DB_HOST', getenv('MB_DB_HOST') ?: 'lifeboxmeta');//use when on docker container
 define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
 define('DB_PORT', getenv('POSTGRES_PORT') ?: '5432');
-define('DB_NAME', getenv('POSTGRES_DB') ?: 'lifebox_mesystem');
-define('DB_USER', getenv('POSTGRES_USER') ?: 'postgres');
-define('DB_PASS', getenv('POSTGRES_PASSWORD') ?: 'mikeintosh');
+define('DB_NAME', getenv('MB_DB_DBNAME') ?: 'lifeboxmeta');
+define('DB_USER', getenv('MB_DB_USER') ?: 'postgres');
+define('DB_PASS', getenv('MB_DB_PASS') ?: 'mikeintosh');
 define('BACKUP_DIR', 'backup');
 define('ITEMS_PER_PAGE', 10);
 
@@ -174,7 +175,7 @@ if ($action === 'backup') {
     $currentOperation = 'backup';
     $operation = 'backup';
 
-    $backupName = 'lifeboxme_db_bak_' . date('Y-m-d_H-i-s') . '.sql';
+    $backupName = 'lifeboxmeta_db_bak_' . date('Y-m-d_H-i-s') . '.sql';
     $backupPath = BACKUP_DIR . '/' . $backupName;
     $logFile = BACKUP_DIR . '/backup_log_' . date('YmdHis') . '.txt';
     $logContent = "Starting backup operation at " . date('Y-m-d H:i:s') . "\n";
@@ -892,7 +893,7 @@ if ($isOperationRunning) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lifebox Main DB Backup & Restore Tool</title>
+    <title>Lifebox Metabase DB Backup & Restore Tool</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
     <style>
@@ -1082,7 +1083,7 @@ if ($isOperationRunning) {
         <div class="container">
             <div class="row">
                 <div class="col s12">
-                    <h4 class="teal-text text-darken-2">Lifebox Main DB Backup & Restore</h4>
+                    <h4 class="teal-text text-darken-2">Lifebox Metabase DB Backup & Restore</h4>
                     <p class="grey-text">Database: <?php echo DB_NAME; ?></p>
                 </div>
             </div>
@@ -1483,7 +1484,7 @@ if ($isOperationRunning) {
         <div class="container">
             <div class="row">
                 <div class="col s12">
-                    <p class="white-text">Lifebox Main DB Backup & Restore Tool</p>
+                    <p class="white-text">Lifebox Metabase DB Backup & Restore Tool</p>
                 </div>
             </div>
         </div>

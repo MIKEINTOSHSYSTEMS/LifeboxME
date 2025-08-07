@@ -29,6 +29,9 @@ api/database/main/0.php
 api/database/main/1.php
 api/database/main/*.sql
 api/database/main/backup
+api/database/metabase/backup
+api/database/forms/backup
+api/database/analytics/backup
 api/database/main/test.php
 api/database/test/
 api/mail/PHPMailer/
