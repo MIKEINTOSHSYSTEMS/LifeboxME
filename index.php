@@ -421,9 +421,16 @@ function getNotificationIcon($type)
                             </div>
                         <?php else: ?>
                             <a class="nav-link btn btn-primary btn-sm text-white ms-2"
+                                href="app/login.php"
+                                data-bs-toggle="modal"
+                                data-bs-target="app/login.php">Login</a>
+
+                            <!--
+                                <a class=" nav-link btn btn-primary btn-sm text-white ms-2"
                                 href="#"
                                 data-bs-toggle="modal"
                                 data-bs-target="#loginModal">Login</a>
+                            -->
                         <?php endif; ?>
                     </li>
                 </ul>
@@ -1008,6 +1015,33 @@ function getNotificationIcon($type)
                                 <span style="color: white;"> System</span>
                             </div>
                         </div>
+                        <br></br>
+                        <!-- TEST LOGIN Start-->
+                        <div class="nav-item">
+                            <?php if (is_logged_in()): ?>
+                                <div class="dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                        <i class="fas fa-user me-1"></i> <?= htmlspecialchars($_SESSION['username'] ?? 'User') ?>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                                    </ul>
+                                </div>
+                            <?php else: ?>
+                                <a class="nav-link btn btn-primary btn-sm text-white ms-2"
+                                    href="app/login.php"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="app/login.php">Login Via App</a>
+
+                                <br></br>
+                                <a class=" nav-link btn btn-primary btn-sm text-white ms-2"
+                                    href="#"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#loginModal">Direct Login</a>
+
+                            <?php endif; ?>
+                        </div>
+                        <!-- TEST LOGIN Start-->
                     </div>
                     <p class="mt-3">Comprehensive Monitoring & Evaluation System for surgical safety initiatives worldwide.</p>
                     <div class="social-links mt-4">
