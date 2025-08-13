@@ -769,9 +769,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "173_1753882913";
+$projectBuildKey = "174_1755104478";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "173";
+$projectBuildNumber = "174";
 
 $mlang_messages = array();
 $mlang_charsets = array();
@@ -1035,7 +1035,7 @@ if (!empty($smtpConfigs)) {
   // 3. Email Sending Function with Fallback
   // =============================================
   if (!function_exists('sendHtmlEmail')) {
-    function sendHtmlEmail($to, $subject, $body, $params = [])
+    function sendHtmlEmail($to, $subject, $body, $altBody = '')
     {
       global $globalSettings, $smtpConfigs;
 
@@ -1085,21 +1085,10 @@ if (!empty($smtpConfigs)) {
           // =============================================
           $mail->setFrom($config["smtpfrom"], 'Lifebox M&E System');
           $mail->addAddress($to);
+          $mail->isHTML(true);
           $mail->Subject = $subject;
-
-          // If 'htmlbody' is provided in $params, send the email as HTML
-          if (isset($params['htmlbody'])) {
-            // Set HTML body
-            $mail->isHTML(true);
-            $mail->MsgHTML($params['htmlbody']); // Set HTML content
-
-            // Set plain-text AltBody as fallback for email clients that can't display HTML
-            $mail->AltBody = $body ?: strip_tags($params['htmlbody']); // Plain-text fallback
-          } else {
-            // If no 'htmlbody' is provided, send the plain-text version only
-            $mail->isHTML(false);
-            $mail->Body = $body; // Plain-text body
-          }
+          $mail->Body = $body . $globalSettings["htmlFooter"];
+          $mail->AltBody = $altBody ?: strip_tags($body);
 
           // =============================================
           // 6. Pre-Send Connection Test
@@ -1142,9 +1131,9 @@ if (!empty($smtpConfigs)) {
 }
 
 // =============================================
-// HTML Email body configuration
+// HTML Email Footer
 // =============================================
-$globalSettings["htmlbody"] = '
+$globalSettings["htmlFooter"] = '
 <div align="center" style="margin: 30px 0; font-family: \'Segoe UI\', Tahoma, Geneva, Verdana, sans-serif; background-color: #078ca9e7; border: 1px solid #1e97b1; border-radius: 8px; padding: 20px; box-shadow: 0 3px 10px #0079a7cc;">
     <p style="font-size: 16px; color: white; margin: 0;">
         <strong>Lifebox Monitoring &amp; Evaluation System</strong> <br>

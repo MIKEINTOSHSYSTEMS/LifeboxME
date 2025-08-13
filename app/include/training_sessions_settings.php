@@ -25,7 +25,7 @@ if(mlang_getcurrentlang()=="English")
 	$fieldToolTipstraining_sessions["English"] = array();
 	$placeHolderstraining_sessions["English"] = array();
 	$pageTitlestraining_sessions["English"] = array();
-	$fieldLabelstraining_sessions["English"]["training_id"] = "Training Id";
+	$fieldLabelstraining_sessions["English"]["training_id"] = "Training SeID";
 	$fieldToolTipstraining_sessions["English"]["training_id"] = "";
 	$placeHolderstraining_sessions["English"]["training_id"] = "";
 	$fieldLabelstraining_sessions["English"]["course_id"] = "Course";
@@ -2381,7 +2381,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Readonly");
+	$edata = array("EditFormat" => "Text field");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -2405,14 +2405,17 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 	
 	
 	
-	
-	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
 	$edata["validateAs"] = array();
 	$edata["validateAs"]["basicValidate"] = array();
 	$edata["validateAs"]["customMessages"] = array();
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
 							
 	
 //	End validation
@@ -2518,7 +2521,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Readonly");
+	$edata = array("EditFormat" => "Text field");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -2542,14 +2545,17 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 	
 	
 	
-	
-	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
 	$edata["validateAs"] = array();
 	$edata["validateAs"]["basicValidate"] = array();
 	$edata["validateAs"]["customMessages"] = array();
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
 							
 	
 //	End validation
