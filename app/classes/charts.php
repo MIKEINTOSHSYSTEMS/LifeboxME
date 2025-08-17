@@ -508,6 +508,48 @@ class Chart
 			return true;
 		if("public.smtp" == $this->chrt_array['tables'][0])
 			return true;
+		if("public.lbapt_annual_plan_tracker" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbapt_beginnings_fund" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbapt_communications" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbapt_cri" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbapt_dashboard_summary" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbapt_development" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbapt_elma" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbapt_governance" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbapt_kpis_on_track" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbapt_operations" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbapt_programs" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbapt_sample_workflow" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbapt_status" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbapt_strategic_areas" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbapt_all_activities_view" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbapt_dashboard_summary_view" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbapt_kpis_tracking_view" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbapt_unified_activities" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.years" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbapt_finance" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbapt_hr" == $this->chrt_array['tables'][0])
+			return true;
 		return false;
 	}
 

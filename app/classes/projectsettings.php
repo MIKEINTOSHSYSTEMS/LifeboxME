@@ -3708,6 +3708,48 @@ function fillProjectEntites()
 	$projectEntitiesReverse[ "aio_training_tracking_chart_by_sex" ] = "aio_training_tracking Chart by sex";
 	$projectEntities[ "public.smtp" ] = array( "url" => "smtp", "type" => 0 );
 	$projectEntitiesReverse[ "smtp" ] = "public.smtp";
+	$projectEntities[ "public.lbapt_annual_plan_tracker" ] = array( "url" => "lbapt_annual_plan_tracker", "type" => 0 );
+	$projectEntitiesReverse[ "lbapt_annual_plan_tracker" ] = "public.lbapt_annual_plan_tracker";
+	$projectEntities[ "public.lbapt_beginnings_fund" ] = array( "url" => "lbapt_beginnings_fund", "type" => 0 );
+	$projectEntitiesReverse[ "lbapt_beginnings_fund" ] = "public.lbapt_beginnings_fund";
+	$projectEntities[ "public.lbapt_communications" ] = array( "url" => "lbapt_communications", "type" => 0 );
+	$projectEntitiesReverse[ "lbapt_communications" ] = "public.lbapt_communications";
+	$projectEntities[ "public.lbapt_cri" ] = array( "url" => "lbapt_cri", "type" => 0 );
+	$projectEntitiesReverse[ "lbapt_cri" ] = "public.lbapt_cri";
+	$projectEntities[ "public.lbapt_dashboard_summary" ] = array( "url" => "lbapt_dashboard_summary", "type" => 0 );
+	$projectEntitiesReverse[ "lbapt_dashboard_summary" ] = "public.lbapt_dashboard_summary";
+	$projectEntities[ "public.lbapt_development" ] = array( "url" => "lbapt_development", "type" => 0 );
+	$projectEntitiesReverse[ "lbapt_development" ] = "public.lbapt_development";
+	$projectEntities[ "public.lbapt_elma" ] = array( "url" => "lbapt_elma", "type" => 0 );
+	$projectEntitiesReverse[ "lbapt_elma" ] = "public.lbapt_elma";
+	$projectEntities[ "public.lbapt_governance" ] = array( "url" => "lbapt_governance", "type" => 0 );
+	$projectEntitiesReverse[ "lbapt_governance" ] = "public.lbapt_governance";
+	$projectEntities[ "public.lbapt_kpis_on_track" ] = array( "url" => "lbapt_kpis_on_track", "type" => 0 );
+	$projectEntitiesReverse[ "lbapt_kpis_on_track" ] = "public.lbapt_kpis_on_track";
+	$projectEntities[ "public.lbapt_operations" ] = array( "url" => "lbapt_operations", "type" => 0 );
+	$projectEntitiesReverse[ "lbapt_operations" ] = "public.lbapt_operations";
+	$projectEntities[ "public.lbapt_programs" ] = array( "url" => "lbapt_programs", "type" => 0 );
+	$projectEntitiesReverse[ "lbapt_programs" ] = "public.lbapt_programs";
+	$projectEntities[ "public.lbapt_sample_workflow" ] = array( "url" => "lbapt_sample_workflow", "type" => 0 );
+	$projectEntitiesReverse[ "lbapt_sample_workflow" ] = "public.lbapt_sample_workflow";
+	$projectEntities[ "public.lbapt_status" ] = array( "url" => "lbapt_status", "type" => 0 );
+	$projectEntitiesReverse[ "lbapt_status" ] = "public.lbapt_status";
+	$projectEntities[ "public.lbapt_strategic_areas" ] = array( "url" => "lbapt_strategic_areas", "type" => 0 );
+	$projectEntitiesReverse[ "lbapt_strategic_areas" ] = "public.lbapt_strategic_areas";
+	$projectEntities[ "public.lbapt_all_activities_view" ] = array( "url" => "lbapt_all_activities_view", "type" => 0 );
+	$projectEntitiesReverse[ "lbapt_all_activities_view" ] = "public.lbapt_all_activities_view";
+	$projectEntities[ "public.lbapt_dashboard_summary_view" ] = array( "url" => "lbapt_dashboard_summary_view", "type" => 0 );
+	$projectEntitiesReverse[ "lbapt_dashboard_summary_view" ] = "public.lbapt_dashboard_summary_view";
+	$projectEntities[ "public.lbapt_kpis_tracking_view" ] = array( "url" => "lbapt_kpis_tracking_view", "type" => 0 );
+	$projectEntitiesReverse[ "lbapt_kpis_tracking_view" ] = "public.lbapt_kpis_tracking_view";
+	$projectEntities[ "public.lbapt_unified_activities" ] = array( "url" => "lbapt_unified_activities", "type" => 0 );
+	$projectEntitiesReverse[ "lbapt_unified_activities" ] = "public.lbapt_unified_activities";
+	$projectEntities[ "public.years" ] = array( "url" => "years", "type" => 0 );
+	$projectEntitiesReverse[ "years" ] = "public.years";
+	$projectEntities[ "public.lbapt_finance" ] = array( "url" => "lbapt_finance", "type" => 0 );
+	$projectEntitiesReverse[ "lbapt_finance" ] = "public.lbapt_finance";
+	$projectEntities[ "public.lbapt_hr" ] = array( "url" => "lbapt_hr", "type" => 0 );
+	$projectEntitiesReverse[ "lbapt_hr" ] = "public.lbapt_hr";
 }
 
 function findTable( $table ) {

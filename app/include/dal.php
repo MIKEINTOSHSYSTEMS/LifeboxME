@@ -63,6 +63,26 @@ class tDAL
 	var $tbllifebox_mesystem_at_localhost_public_facilities;
 	var $tbllifebox_mesystem_at_localhost_public_follow_ups;
 	var $tbllifebox_mesystem_at_localhost_public_languages;
+	var $tbllifebox_mesystem_at_localhost_public_lbapt_all_activities_view;
+	var $tbllifebox_mesystem_at_localhost_public_lbapt_annual_plan_tracker;
+	var $tbllifebox_mesystem_at_localhost_public_lbapt_beginnings_fund;
+	var $tbllifebox_mesystem_at_localhost_public_lbapt_communications;
+	var $tbllifebox_mesystem_at_localhost_public_lbapt_cri;
+	var $tbllifebox_mesystem_at_localhost_public_lbapt_dashboard_summary;
+	var $tbllifebox_mesystem_at_localhost_public_lbapt_dashboard_summary_view;
+	var $tbllifebox_mesystem_at_localhost_public_lbapt_development;
+	var $tbllifebox_mesystem_at_localhost_public_lbapt_elma;
+	var $tbllifebox_mesystem_at_localhost_public_lbapt_finance;
+	var $tbllifebox_mesystem_at_localhost_public_lbapt_governance;
+	var $tbllifebox_mesystem_at_localhost_public_lbapt_hr;
+	var $tbllifebox_mesystem_at_localhost_public_lbapt_kpis_on_track;
+	var $tbllifebox_mesystem_at_localhost_public_lbapt_kpis_tracking_view;
+	var $tbllifebox_mesystem_at_localhost_public_lbapt_operations;
+	var $tbllifebox_mesystem_at_localhost_public_lbapt_programs;
+	var $tbllifebox_mesystem_at_localhost_public_lbapt_sample_workflow;
+	var $tbllifebox_mesystem_at_localhost_public_lbapt_status;
+	var $tbllifebox_mesystem_at_localhost_public_lbapt_strategic_areas;
+	var $tbllifebox_mesystem_at_localhost_public_lbapt_unified_activities;
 	var $tbllifebox_mesystem_at_localhost_public_lifebox_staff;
 	var $tbllifebox_mesystem_at_localhost_public_lifeboxme__audit;
 	var $tbllifebox_mesystem_at_localhost_public_lifeboxme__locking;
@@ -109,6 +129,7 @@ class tDAL
 	var $tbllifebox_mesystem_at_localhost_public_webreport_admin;
 	var $tbllifebox_mesystem_at_localhost_public_webreport_style;
 	var $tbllifebox_mesystem_at_localhost_public_webreports;
+	var $tbllifebox_mesystem_at_localhost_public_years;
 	var $lstTables;
 	var $Table = array();
 
@@ -132,6 +153,26 @@ class tDAL
 		$this->lstTables[] = array("name" => "facilities", "varname" => "lifebox_mesystem_at_localhost_public_facilities", "altvarname" => "facilities", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "follow_ups", "varname" => "lifebox_mesystem_at_localhost_public_follow_ups", "altvarname" => "follow_ups", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "languages", "varname" => "lifebox_mesystem_at_localhost_public_languages", "altvarname" => "languages", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "lbapt_all_activities_view", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_all_activities_view", "altvarname" => "lbapt_all_activities_view", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "lbapt_annual_plan_tracker", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_annual_plan_tracker", "altvarname" => "lbapt_annual_plan_tracker", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "lbapt_beginnings_fund", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_beginnings_fund", "altvarname" => "lbapt_beginnings_fund", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "lbapt_communications", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_communications", "altvarname" => "lbapt_communications", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "lbapt_cri", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_cri", "altvarname" => "lbapt_cri", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "lbapt_dashboard_summary", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_dashboard_summary", "altvarname" => "lbapt_dashboard_summary", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "lbapt_dashboard_summary_view", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_dashboard_summary_view", "altvarname" => "lbapt_dashboard_summary_view", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "lbapt_development", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_development", "altvarname" => "lbapt_development", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "lbapt_elma", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_elma", "altvarname" => "lbapt_elma", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "lbapt_finance", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_finance", "altvarname" => "lbapt_finance", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "lbapt_governance", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_governance", "altvarname" => "lbapt_governance", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "lbapt_hr", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_hr", "altvarname" => "lbapt_hr", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "lbapt_kpis_on_track", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_kpis_on_track", "altvarname" => "lbapt_kpis_on_track", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "lbapt_kpis_tracking_view", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_kpis_tracking_view", "altvarname" => "lbapt_kpis_tracking_view", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "lbapt_operations", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_operations", "altvarname" => "lbapt_operations", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "lbapt_programs", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_programs", "altvarname" => "lbapt_programs", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "lbapt_sample_workflow", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_sample_workflow", "altvarname" => "lbapt_sample_workflow", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "lbapt_status", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_status", "altvarname" => "lbapt_status", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "lbapt_strategic_areas", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_strategic_areas", "altvarname" => "lbapt_strategic_areas", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "lbapt_unified_activities", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_unified_activities", "altvarname" => "lbapt_unified_activities", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "lifebox_staff", "varname" => "lifebox_mesystem_at_localhost_public_lifebox_staff", "altvarname" => "lifebox_staff", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "lifeboxme__audit", "varname" => "lifebox_mesystem_at_localhost_public_lifeboxme__audit", "altvarname" => "lifeboxme__audit", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "lifeboxme__locking", "varname" => "lifebox_mesystem_at_localhost_public_lifeboxme__locking", "altvarname" => "lifeboxme__locking", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
@@ -178,6 +219,7 @@ class tDAL
 		$this->lstTables[] = array("name" => "webreport_admin", "varname" => "lifebox_mesystem_at_localhost_public_webreport_admin", "altvarname" => "webreport_admin", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "webreport_style", "varname" => "lifebox_mesystem_at_localhost_public_webreport_style", "altvarname" => "webreport_style", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "webreports", "varname" => "lifebox_mesystem_at_localhost_public_webreports", "altvarname" => "webreports", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "years", "varname" => "lifebox_mesystem_at_localhost_public_years", "altvarname" => "years", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 	}
 
 	/**

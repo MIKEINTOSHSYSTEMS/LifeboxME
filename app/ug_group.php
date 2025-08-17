@@ -80,6 +80,27 @@ $nonAdminTablesArr[] = "public.lifeboxme_dhis2_analytics_data";
 $nonAdminTablesArr[] = "aio_training_tracking Chart";
 $nonAdminTablesArr[] = "aio_training_tracking Chart by sex";
 $nonAdminTablesArr[] = "public.smtp";
+$nonAdminTablesArr[] = "public.lbapt_annual_plan_tracker";
+$nonAdminTablesArr[] = "public.lbapt_beginnings_fund";
+$nonAdminTablesArr[] = "public.lbapt_communications";
+$nonAdminTablesArr[] = "public.lbapt_cri";
+$nonAdminTablesArr[] = "public.lbapt_dashboard_summary";
+$nonAdminTablesArr[] = "public.lbapt_development";
+$nonAdminTablesArr[] = "public.lbapt_elma";
+$nonAdminTablesArr[] = "public.lbapt_governance";
+$nonAdminTablesArr[] = "public.lbapt_kpis_on_track";
+$nonAdminTablesArr[] = "public.lbapt_operations";
+$nonAdminTablesArr[] = "public.lbapt_programs";
+$nonAdminTablesArr[] = "public.lbapt_sample_workflow";
+$nonAdminTablesArr[] = "public.lbapt_status";
+$nonAdminTablesArr[] = "public.lbapt_strategic_areas";
+$nonAdminTablesArr[] = "public.lbapt_all_activities_view";
+$nonAdminTablesArr[] = "public.lbapt_dashboard_summary_view";
+$nonAdminTablesArr[] = "public.lbapt_kpis_tracking_view";
+$nonAdminTablesArr[] = "public.lbapt_unified_activities";
+$nonAdminTablesArr[] = "public.years";
+$nonAdminTablesArr[] = "public.lbapt_finance";
+$nonAdminTablesArr[] = "public.lbapt_hr";
 
 $ug_connection = $cman->getForUserGroups();
 

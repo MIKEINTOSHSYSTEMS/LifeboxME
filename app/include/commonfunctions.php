@@ -333,6 +333,48 @@ function checkTableName($shortTName )
 		return true;
 	if ("smtp" == $shortTName )
 		return true;
+	if ("lbapt_annual_plan_tracker" == $shortTName )
+		return true;
+	if ("lbapt_beginnings_fund" == $shortTName )
+		return true;
+	if ("lbapt_communications" == $shortTName )
+		return true;
+	if ("lbapt_cri" == $shortTName )
+		return true;
+	if ("lbapt_dashboard_summary" == $shortTName )
+		return true;
+	if ("lbapt_development" == $shortTName )
+		return true;
+	if ("lbapt_elma" == $shortTName )
+		return true;
+	if ("lbapt_governance" == $shortTName )
+		return true;
+	if ("lbapt_kpis_on_track" == $shortTName )
+		return true;
+	if ("lbapt_operations" == $shortTName )
+		return true;
+	if ("lbapt_programs" == $shortTName )
+		return true;
+	if ("lbapt_sample_workflow" == $shortTName )
+		return true;
+	if ("lbapt_status" == $shortTName )
+		return true;
+	if ("lbapt_strategic_areas" == $shortTName )
+		return true;
+	if ("lbapt_all_activities_view" == $shortTName )
+		return true;
+	if ("lbapt_dashboard_summary_view" == $shortTName )
+		return true;
+	if ("lbapt_kpis_tracking_view" == $shortTName )
+		return true;
+	if ("lbapt_unified_activities" == $shortTName )
+		return true;
+	if ("years" == $shortTName )
+		return true;
+	if ("lbapt_finance" == $shortTName )
+		return true;
+	if ("lbapt_hr" == $shortTName )
+		return true;
 	return false;
 }
 
@@ -968,6 +1010,195 @@ function GetTablesList($pdfMode = false)
 	if( $tableAvailable ) {
 		$arr[]="public.smtp";
 	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbapt_annual_plan_tracker");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbapt_annual_plan_tracker";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbapt_beginnings_fund");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbapt_beginnings_fund";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbapt_communications");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbapt_communications";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbapt_cri");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbapt_cri";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbapt_dashboard_summary");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbapt_dashboard_summary";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbapt_development");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbapt_development";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbapt_elma");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbapt_elma";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbapt_governance");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbapt_governance";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbapt_kpis_on_track");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbapt_kpis_on_track";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbapt_operations");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbapt_operations";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbapt_programs");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbapt_programs";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbapt_sample_workflow");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbapt_sample_workflow";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbapt_status");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbapt_status";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbapt_strategic_areas");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbapt_strategic_areas";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbapt_all_activities_view");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbapt_all_activities_view";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbapt_dashboard_summary_view");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbapt_dashboard_summary_view";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbapt_kpis_tracking_view");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbapt_kpis_tracking_view";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbapt_unified_activities");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbapt_unified_activities";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.years");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.years";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbapt_finance");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbapt_finance";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbapt_hr");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbapt_hr";
+	}
 	return $arr;
 }
 
@@ -1042,6 +1273,27 @@ function GetTablesListWithoutSecurity()
 	$arr[]="aio_training_tracking Chart";
 	$arr[]="aio_training_tracking Chart by sex";
 	$arr[]="public.smtp";
+	$arr[]="public.lbapt_annual_plan_tracker";
+	$arr[]="public.lbapt_beginnings_fund";
+	$arr[]="public.lbapt_communications";
+	$arr[]="public.lbapt_cri";
+	$arr[]="public.lbapt_dashboard_summary";
+	$arr[]="public.lbapt_development";
+	$arr[]="public.lbapt_elma";
+	$arr[]="public.lbapt_governance";
+	$arr[]="public.lbapt_kpis_on_track";
+	$arr[]="public.lbapt_operations";
+	$arr[]="public.lbapt_programs";
+	$arr[]="public.lbapt_sample_workflow";
+	$arr[]="public.lbapt_status";
+	$arr[]="public.lbapt_strategic_areas";
+	$arr[]="public.lbapt_all_activities_view";
+	$arr[]="public.lbapt_dashboard_summary_view";
+	$arr[]="public.lbapt_kpis_tracking_view";
+	$arr[]="public.lbapt_unified_activities";
+	$arr[]="public.years";
+	$arr[]="public.lbapt_finance";
+	$arr[]="public.lbapt_hr";
 	return $arr;
 }
 
@@ -1994,6 +2246,111 @@ function GetUserPermissionsStatic( $table )
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.smtp" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbapt_annual_plan_tracker" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbapt_beginnings_fund" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbapt_communications" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbapt_cri" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbapt_dashboard_summary" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbapt_development" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbapt_elma" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbapt_governance" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbapt_kpis_on_track" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbapt_operations" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbapt_programs" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbapt_sample_workflow" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbapt_status" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbapt_strategic_areas" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbapt_all_activities_view" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbapt_dashboard_summary_view" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbapt_kpis_tracking_view" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbapt_unified_activities" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.years" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbapt_finance" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbapt_hr" )
 	{
 //	default permissions
 		return "ADESPI".$extraPerm;

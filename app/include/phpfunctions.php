@@ -1218,6 +1218,74 @@ function GetDefaultValue($field, $ptype, $table="")
 	{
 		return strftime("%Y-%m-%d %H:%M:%S");
 	}
+				if($table=="public.lbapt_annual_plan_tracker" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_beginnings_fund" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_communications" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_cri" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_dashboard_summary" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_development" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_elma" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_governance" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_kpis_on_track" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_operations" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_programs" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_sample_workflow" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_status" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_strategic_areas" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_all_activities_view" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_finance" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_hr" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
 	return "";
 }
 
@@ -1318,6 +1386,74 @@ function GetAutoUpdateValue($field, $ptype, $table="")
 		return strftime("%Y-%m-%d");
 	}
 				if($table=="public.smtp" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_annual_plan_tracker" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_beginnings_fund" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_communications" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_cri" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_dashboard_summary" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_development" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_elma" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_governance" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_kpis_on_track" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_operations" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_programs" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_sample_workflow" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_status" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_strategic_areas" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_all_activities_view" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_finance" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_hr" && $field=="updated_at")
 	{
 		return strftime("%Y-%m-%d %H:%M:%S");
 	}

@@ -880,6 +880,405 @@ function InitLookupLinks()
 			$lookupTableLinks["aio_training_tracking"]["aio_training_tracking_chart_by_sex.training_name"] = array();
 		}
 		$lookupTableLinks["aio_training_tracking"]["aio_training_tracking_chart_by_sex.training_name"]["search"] = array("table" => "aio_training_tracking Chart by sex", "field" => "training_name", "page" => "search");
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"] ) ) {
+			$lookupTableLinks["public.lbapt_strategic_areas"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_annual_plan_tracker.strategic_area_id"] )) {
+			$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_annual_plan_tracker.strategic_area_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_annual_plan_tracker.strategic_area_id"]["edit"] = array("table" => "public.lbapt_annual_plan_tracker", "field" => "strategic_area_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_status"] ) ) {
+			$lookupTableLinks["public.lbapt_status"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_status"]["lbapt_annual_plan_tracker.status_id"] )) {
+			$lookupTableLinks["public.lbapt_status"]["lbapt_annual_plan_tracker.status_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_status"]["lbapt_annual_plan_tracker.status_id"]["edit"] = array("table" => "public.lbapt_annual_plan_tracker", "field" => "status_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.years"] ) ) {
+			$lookupTableLinks["public.years"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.years"]["lbapt_annual_plan_tracker.fyear"] )) {
+			$lookupTableLinks["public.years"]["lbapt_annual_plan_tracker.fyear"] = array();
+		}
+		$lookupTableLinks["public.years"]["lbapt_annual_plan_tracker.fyear"]["edit"] = array("table" => "public.lbapt_annual_plan_tracker", "field" => "fyear", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"] ) ) {
+			$lookupTableLinks["public.lbapt_strategic_areas"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_beginnings_fund.strategic_area_id"] )) {
+			$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_beginnings_fund.strategic_area_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_beginnings_fund.strategic_area_id"]["edit"] = array("table" => "public.lbapt_beginnings_fund", "field" => "strategic_area_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_beginnings_fund.key_objective"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_beginnings_fund.key_objective"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_beginnings_fund.key_objective"]["edit"] = array("table" => "public.lbapt_beginnings_fund", "field" => "key_objective", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_beginnings_fund.kpi"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_beginnings_fund.kpi"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_beginnings_fund.kpi"]["edit"] = array("table" => "public.lbapt_beginnings_fund", "field" => "kpi", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_status"] ) ) {
+			$lookupTableLinks["public.lbapt_status"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_status"]["lbapt_beginnings_fund.status_id"] )) {
+			$lookupTableLinks["public.lbapt_status"]["lbapt_beginnings_fund.status_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_status"]["lbapt_beginnings_fund.status_id"]["edit"] = array("table" => "public.lbapt_beginnings_fund", "field" => "status_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"] ) ) {
+			$lookupTableLinks["public.lbapt_strategic_areas"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_communications.strategic_area_id"] )) {
+			$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_communications.strategic_area_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_communications.strategic_area_id"]["edit"] = array("table" => "public.lbapt_communications", "field" => "strategic_area_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_communications.key_objective"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_communications.key_objective"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_communications.key_objective"]["edit"] = array("table" => "public.lbapt_communications", "field" => "key_objective", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_communications.activity"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_communications.activity"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_communications.activity"]["edit"] = array("table" => "public.lbapt_communications", "field" => "activity", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_communications.kpi"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_communications.kpi"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_communications.kpi"]["edit"] = array("table" => "public.lbapt_communications", "field" => "kpi", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_status"] ) ) {
+			$lookupTableLinks["public.lbapt_status"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_status"]["lbapt_communications.status_id"] )) {
+			$lookupTableLinks["public.lbapt_status"]["lbapt_communications.status_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_status"]["lbapt_communications.status_id"]["edit"] = array("table" => "public.lbapt_communications", "field" => "status_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"] ) ) {
+			$lookupTableLinks["public.lbapt_strategic_areas"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_cri.strategic_area_id"] )) {
+			$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_cri.strategic_area_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_cri.strategic_area_id"]["edit"] = array("table" => "public.lbapt_cri", "field" => "strategic_area_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_cri.key_objective"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_cri.key_objective"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_cri.key_objective"]["edit"] = array("table" => "public.lbapt_cri", "field" => "key_objective", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_cri.kpi"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_cri.kpi"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_cri.kpi"]["edit"] = array("table" => "public.lbapt_cri", "field" => "kpi", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_status"] ) ) {
+			$lookupTableLinks["public.lbapt_status"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_status"]["lbapt_cri.status_id"] )) {
+			$lookupTableLinks["public.lbapt_status"]["lbapt_cri.status_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_status"]["lbapt_cri.status_id"]["edit"] = array("table" => "public.lbapt_cri", "field" => "status_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"] ) ) {
+			$lookupTableLinks["public.lbapt_strategic_areas"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_dashboard_summary.strategic_area_id"] )) {
+			$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_dashboard_summary.strategic_area_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_dashboard_summary.strategic_area_id"]["edit"] = array("table" => "public.lbapt_dashboard_summary", "field" => "strategic_area_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"] ) ) {
+			$lookupTableLinks["public.lbapt_strategic_areas"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_development.strategic_area_id"] )) {
+			$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_development.strategic_area_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_development.strategic_area_id"]["edit"] = array("table" => "public.lbapt_development", "field" => "strategic_area_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_development.key_objective"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_development.key_objective"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_development.key_objective"]["edit"] = array("table" => "public.lbapt_development", "field" => "key_objective", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_development.activity"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_development.activity"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_development.activity"]["edit"] = array("table" => "public.lbapt_development", "field" => "activity", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_development.kpi"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_development.kpi"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_development.kpi"]["edit"] = array("table" => "public.lbapt_development", "field" => "kpi", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_status"] ) ) {
+			$lookupTableLinks["public.lbapt_status"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_status"]["lbapt_development.status_id"] )) {
+			$lookupTableLinks["public.lbapt_status"]["lbapt_development.status_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_status"]["lbapt_development.status_id"]["edit"] = array("table" => "public.lbapt_development", "field" => "status_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"] ) ) {
+			$lookupTableLinks["public.lbapt_strategic_areas"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_elma.strategic_area_id"] )) {
+			$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_elma.strategic_area_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_elma.strategic_area_id"]["edit"] = array("table" => "public.lbapt_elma", "field" => "strategic_area_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_elma.key_objective"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_elma.key_objective"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_elma.key_objective"]["edit"] = array("table" => "public.lbapt_elma", "field" => "key_objective", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_elma.kpi"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_elma.kpi"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_elma.kpi"]["edit"] = array("table" => "public.lbapt_elma", "field" => "kpi", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_status"] ) ) {
+			$lookupTableLinks["public.lbapt_status"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_status"]["lbapt_elma.status_id"] )) {
+			$lookupTableLinks["public.lbapt_status"]["lbapt_elma.status_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_status"]["lbapt_elma.status_id"]["edit"] = array("table" => "public.lbapt_elma", "field" => "status_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"] ) ) {
+			$lookupTableLinks["public.lbapt_strategic_areas"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_governance.strategic_area_id"] )) {
+			$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_governance.strategic_area_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_governance.strategic_area_id"]["edit"] = array("table" => "public.lbapt_governance", "field" => "strategic_area_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_governance.key_objective"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_governance.key_objective"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_governance.key_objective"]["edit"] = array("table" => "public.lbapt_governance", "field" => "key_objective", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_governance.activity"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_governance.activity"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_governance.activity"]["edit"] = array("table" => "public.lbapt_governance", "field" => "activity", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_governance.kpi"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_governance.kpi"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_governance.kpi"]["edit"] = array("table" => "public.lbapt_governance", "field" => "kpi", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_status"] ) ) {
+			$lookupTableLinks["public.lbapt_status"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_status"]["lbapt_governance.status_id"] )) {
+			$lookupTableLinks["public.lbapt_status"]["lbapt_governance.status_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_status"]["lbapt_governance.status_id"]["edit"] = array("table" => "public.lbapt_governance", "field" => "status_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"] ) ) {
+			$lookupTableLinks["public.lbapt_strategic_areas"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_kpis_on_track.strategic_area_id"] )) {
+			$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_kpis_on_track.strategic_area_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_kpis_on_track.strategic_area_id"]["edit"] = array("table" => "public.lbapt_kpis_on_track", "field" => "strategic_area_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"] ) ) {
+			$lookupTableLinks["public.lbapt_strategic_areas"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_operations.strategic_area_id"] )) {
+			$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_operations.strategic_area_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_operations.strategic_area_id"]["edit"] = array("table" => "public.lbapt_operations", "field" => "strategic_area_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_operations.key_objective"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_operations.key_objective"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_operations.key_objective"]["edit"] = array("table" => "public.lbapt_operations", "field" => "key_objective", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_operations.activity"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_operations.activity"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_operations.activity"]["edit"] = array("table" => "public.lbapt_operations", "field" => "activity", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_operations.kpi"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_operations.kpi"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_operations.kpi"]["edit"] = array("table" => "public.lbapt_operations", "field" => "kpi", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_status"] ) ) {
+			$lookupTableLinks["public.lbapt_status"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_status"]["lbapt_operations.status_id"] )) {
+			$lookupTableLinks["public.lbapt_status"]["lbapt_operations.status_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_status"]["lbapt_operations.status_id"]["edit"] = array("table" => "public.lbapt_operations", "field" => "status_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"] ) ) {
+			$lookupTableLinks["public.lbapt_strategic_areas"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_programs.strategic_area_id"] )) {
+			$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_programs.strategic_area_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_programs.strategic_area_id"]["edit"] = array("table" => "public.lbapt_programs", "field" => "strategic_area_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_programs.key_objective"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_programs.key_objective"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_programs.key_objective"]["edit"] = array("table" => "public.lbapt_programs", "field" => "key_objective", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_programs.activity"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_programs.activity"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_programs.activity"]["edit"] = array("table" => "public.lbapt_programs", "field" => "activity", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_programs.kpi"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_programs.kpi"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_programs.kpi"]["edit"] = array("table" => "public.lbapt_programs", "field" => "kpi", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_status"] ) ) {
+			$lookupTableLinks["public.lbapt_status"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_status"]["lbapt_programs.status_id"] )) {
+			$lookupTableLinks["public.lbapt_status"]["lbapt_programs.status_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_status"]["lbapt_programs.status_id"]["edit"] = array("table" => "public.lbapt_programs", "field" => "status_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"] ) ) {
+			$lookupTableLinks["public.lbapt_strategic_areas"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_sample_workflow.strategic_area_id"] )) {
+			$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_sample_workflow.strategic_area_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_sample_workflow.strategic_area_id"]["edit"] = array("table" => "public.lbapt_sample_workflow", "field" => "strategic_area_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"] ) ) {
+			$lookupTableLinks["public.lbapt_strategic_areas"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_sample_workflow.program_name"] )) {
+			$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_sample_workflow.program_name"] = array();
+		}
+		$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_sample_workflow.program_name"]["edit"] = array("table" => "public.lbapt_sample_workflow", "field" => "program_name", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.years"] ) ) {
+			$lookupTableLinks["public.years"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.years"]["lbapt_sample_workflow.fyear"] )) {
+			$lookupTableLinks["public.years"]["lbapt_sample_workflow.fyear"] = array();
+		}
+		$lookupTableLinks["public.years"]["lbapt_sample_workflow.fyear"]["edit"] = array("table" => "public.lbapt_sample_workflow", "field" => "fyear", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_status"] ) ) {
+			$lookupTableLinks["public.lbapt_status"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_status"]["lbapt_sample_workflow.status_id"] )) {
+			$lookupTableLinks["public.lbapt_status"]["lbapt_sample_workflow.status_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_status"]["lbapt_sample_workflow.status_id"]["edit"] = array("table" => "public.lbapt_sample_workflow", "field" => "status_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_status"] ) ) {
+			$lookupTableLinks["public.lbapt_status"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_status"]["lbapt_unified_activities.status_id"] )) {
+			$lookupTableLinks["public.lbapt_status"]["lbapt_unified_activities.status_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_status"]["lbapt_unified_activities.status_id"]["edit"] = array("table" => "public.lbapt_unified_activities", "field" => "status_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"] ) ) {
+			$lookupTableLinks["public.lbapt_strategic_areas"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_finance.strategic_area_id"] )) {
+			$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_finance.strategic_area_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_finance.strategic_area_id"]["edit"] = array("table" => "public.lbapt_finance", "field" => "strategic_area_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_finance.key_objective"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_finance.key_objective"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_finance.key_objective"]["edit"] = array("table" => "public.lbapt_finance", "field" => "key_objective", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_finance.activity"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_finance.activity"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_finance.activity"]["edit"] = array("table" => "public.lbapt_finance", "field" => "activity", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_finance.kpi"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_finance.kpi"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_finance.kpi"]["edit"] = array("table" => "public.lbapt_finance", "field" => "kpi", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_status"] ) ) {
+			$lookupTableLinks["public.lbapt_status"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_status"]["lbapt_finance.status_id"] )) {
+			$lookupTableLinks["public.lbapt_status"]["lbapt_finance.status_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_status"]["lbapt_finance.status_id"]["edit"] = array("table" => "public.lbapt_finance", "field" => "status_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"] ) ) {
+			$lookupTableLinks["public.lbapt_strategic_areas"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_hr.strategic_area_id"] )) {
+			$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_hr.strategic_area_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_hr.strategic_area_id"]["edit"] = array("table" => "public.lbapt_hr", "field" => "strategic_area_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_hr.key_objective"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_hr.key_objective"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_hr.key_objective"]["edit"] = array("table" => "public.lbapt_hr", "field" => "key_objective", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_hr.activity"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_hr.activity"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_hr.activity"]["edit"] = array("table" => "public.lbapt_hr", "field" => "activity", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"] ) ) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_hr.kpi"] )) {
+			$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_hr.kpi"] = array();
+		}
+		$lookupTableLinks["public.lbapt_annual_plan_tracker"]["lbapt_hr.kpi"]["edit"] = array("table" => "public.lbapt_hr", "field" => "kpi", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_status"] ) ) {
+			$lookupTableLinks["public.lbapt_status"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_status"]["lbapt_hr.status_id"] )) {
+			$lookupTableLinks["public.lbapt_status"]["lbapt_hr.status_id"] = array();
+		}
+		$lookupTableLinks["public.lbapt_status"]["lbapt_hr.status_id"]["edit"] = array("table" => "public.lbapt_hr", "field" => "status_id", "page" => "edit");
 }
 
 ?>

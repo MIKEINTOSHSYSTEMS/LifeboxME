@@ -670,6 +670,90 @@ class AuditTrailTable
 		{
 			return false;
 		}
+		if($table=="public.lbapt_annual_plan_tracker")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_beginnings_fund")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_communications")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_cri")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_dashboard_summary")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_development")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_elma")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_governance")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_kpis_on_track")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_operations")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_programs")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_sample_workflow")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_status")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_strategic_areas")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_all_activities_view")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_dashboard_summary_view")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_kpis_tracking_view")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_unified_activities")
+		{
+			return false;
+		}
+		if($table=="public.years")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_finance")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_hr")
+		{
+			return false;
+		}
 	}
 
 	protected function insert($datetime, $ip, $user, $table, $action, $description)
@@ -1289,6 +1373,90 @@ class AuditTrailFile
 			return false;
 		}
 		if($table=="public.smtp")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_annual_plan_tracker")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_beginnings_fund")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_communications")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_cri")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_dashboard_summary")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_development")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_elma")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_governance")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_kpis_on_track")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_operations")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_programs")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_sample_workflow")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_status")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_strategic_areas")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_all_activities_view")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_dashboard_summary_view")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_kpis_tracking_view")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_unified_activities")
+		{
+			return false;
+		}
+		if($table=="public.years")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_finance")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_hr")
 		{
 			return false;
 		}

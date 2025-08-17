@@ -1511,6 +1511,48 @@ class CrossTableWebReport
 			$isDB = true;
 		if("public.smtp" == $this->xml_array['tables'][0])
 			$isDB = true;
+		if("public.lbapt_annual_plan_tracker" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbapt_beginnings_fund" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbapt_communications" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbapt_cri" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbapt_dashboard_summary" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbapt_development" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbapt_elma" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbapt_governance" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbapt_kpis_on_track" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbapt_operations" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbapt_programs" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbapt_sample_workflow" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbapt_status" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbapt_strategic_areas" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbapt_all_activities_view" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbapt_dashboard_summary_view" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbapt_kpis_tracking_view" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbapt_unified_activities" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.years" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbapt_finance" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbapt_hr" == $this->xml_array['tables'][0])
+			$isDB = true;
 		return $isDB;
 	}
 	

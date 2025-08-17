@@ -40,7 +40,7 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelstraining_sessions["English"]["end_date"] = "End Date";
 	$fieldToolTipstraining_sessions["English"]["end_date"] = "";
 	$placeHolderstraining_sessions["English"]["end_date"] = "";
-	$fieldLabelstraining_sessions["English"]["facility_id"] = "Facility Id";
+	$fieldLabelstraining_sessions["English"]["facility_id"] = "Facility";
 	$fieldToolTipstraining_sessions["English"]["facility_id"] = "";
 	$placeHolderstraining_sessions["English"]["facility_id"] = "";
 	$fieldLabelstraining_sessions["English"]["host_country_id"] = "Host Country";
@@ -579,7 +579,7 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "Equals";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
@@ -587,9 +587,10 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 
 //Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
+	$fdata["filterTotals"] = 1;
+		$fdata["filterMultiSelect"] = 1;
+		$fdata["filterTotalFields"] = "training_id";
+		$fdata["filterFormat"] = "Values list";
 		$fdata["showCollapsed"] = false;
 
 		$fdata["sortValueType"] = 0;
@@ -751,9 +752,10 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 
 //Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
+	$fdata["filterTotals"] = 1;
+		$fdata["filterMultiSelect"] = 1;
+		$fdata["filterTotalFields"] = "training_id";
+		$fdata["filterFormat"] = "Values list";
 		$fdata["showCollapsed"] = false;
 
 		$fdata["sortValueType"] = 0;
@@ -915,9 +917,10 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 
 //Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
+	$fdata["filterTotals"] = 1;
+		$fdata["filterMultiSelect"] = 1;
+		$fdata["filterTotalFields"] = "training_id";
+		$fdata["filterFormat"] = "Values list";
 		$fdata["showCollapsed"] = false;
 
 		$fdata["sortValueType"] = 0;
@@ -1079,9 +1082,10 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 
 //Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
+	$fdata["filterTotals"] = 1;
+		$fdata["filterMultiSelect"] = 1;
+		$fdata["filterTotalFields"] = "training_id";
+		$fdata["filterFormat"] = "Values list";
 		$fdata["showCollapsed"] = false;
 
 		$fdata["sortValueType"] = 0;
@@ -1246,9 +1250,10 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 
 //Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
+	$fdata["filterTotals"] = 1;
+		$fdata["filterMultiSelect"] = 1;
+		$fdata["filterTotalFields"] = "training_id";
+		$fdata["filterFormat"] = "Values list";
 		$fdata["showCollapsed"] = false;
 
 		$fdata["sortValueType"] = 0;
@@ -1693,9 +1698,10 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 
 //Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
+	$fdata["filterTotals"] = 1;
+		$fdata["filterMultiSelect"] = 1;
+		$fdata["filterTotalFields"] = "training_id";
+		$fdata["filterFormat"] = "Values list";
 		$fdata["showCollapsed"] = false;
 
 		$fdata["sortValueType"] = 0;
@@ -1858,9 +1864,10 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 
 //Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
+	$fdata["filterTotals"] = 1;
+		$fdata["filterMultiSelect"] = 1;
+		$fdata["filterTotalFields"] = "training_id";
+		$fdata["filterFormat"] = "Values list";
 		$fdata["showCollapsed"] = false;
 
 		$fdata["sortValueType"] = 0;
@@ -2024,9 +2031,10 @@ $tdatatraining_sessions[".hideMobileList"] = array();
 
 
 //Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
+	$fdata["filterTotals"] = 1;
+		$fdata["filterMultiSelect"] = 1;
+		$fdata["filterTotalFields"] = "training_id";
+		$fdata["filterFormat"] = "Values list";
 		$fdata["showCollapsed"] = false;
 
 		$fdata["sortValueType"] = 0;

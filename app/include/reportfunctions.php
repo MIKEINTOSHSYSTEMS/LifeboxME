@@ -578,6 +578,90 @@ function testAdvSearch($table)
 		{
 			return 1;
 		}
+		if($table=="public.lbapt_annual_plan_tracker")
+		{
+			return 1;
+		}
+		if($table=="public.lbapt_beginnings_fund")
+		{
+			return 1;
+		}
+		if($table=="public.lbapt_communications")
+		{
+			return 1;
+		}
+		if($table=="public.lbapt_cri")
+		{
+			return 1;
+		}
+		if($table=="public.lbapt_dashboard_summary")
+		{
+			return 1;
+		}
+		if($table=="public.lbapt_development")
+		{
+			return 1;
+		}
+		if($table=="public.lbapt_elma")
+		{
+			return 1;
+		}
+		if($table=="public.lbapt_governance")
+		{
+			return 1;
+		}
+		if($table=="public.lbapt_kpis_on_track")
+		{
+			return 1;
+		}
+		if($table=="public.lbapt_operations")
+		{
+			return 1;
+		}
+		if($table=="public.lbapt_programs")
+		{
+			return 1;
+		}
+		if($table=="public.lbapt_sample_workflow")
+		{
+			return 1;
+		}
+		if($table=="public.lbapt_status")
+		{
+			return 1;
+		}
+		if($table=="public.lbapt_strategic_areas")
+		{
+			return 1;
+		}
+		if($table=="public.lbapt_all_activities_view")
+		{
+			return 1;
+		}
+		if($table=="public.lbapt_dashboard_summary_view")
+		{
+			return 1;
+		}
+		if($table=="public.lbapt_kpis_tracking_view")
+		{
+			return 1;
+		}
+		if($table=="public.lbapt_unified_activities")
+		{
+			return 1;
+		}
+		if($table=="public.years")
+		{
+			return 1;
+		}
+		if($table=="public.lbapt_finance")
+		{
+			return 1;
+		}
+		if($table=="public.lbapt_hr")
+		{
+			return 1;
+		}
 	}
 	elseif(is_wr_db())
 	{
@@ -1090,6 +1174,90 @@ function getCaptionTable($table)
 	if($table=="public.smtp")
 	{
 		return "Smtp";
+	}
+	if($table=="public.lbapt_annual_plan_tracker")
+	{
+		return "Lbapt Annual Plan Tracker";
+	}
+	if($table=="public.lbapt_beginnings_fund")
+	{
+		return "Lbapt Beginnings Fund";
+	}
+	if($table=="public.lbapt_communications")
+	{
+		return "Lbapt Communications";
+	}
+	if($table=="public.lbapt_cri")
+	{
+		return "Lbapt Cri";
+	}
+	if($table=="public.lbapt_dashboard_summary")
+	{
+		return "Lbapt Dashboard Summary";
+	}
+	if($table=="public.lbapt_development")
+	{
+		return "Lbapt Development";
+	}
+	if($table=="public.lbapt_elma")
+	{
+		return "Lbapt Elma";
+	}
+	if($table=="public.lbapt_governance")
+	{
+		return "Lbapt Governance";
+	}
+	if($table=="public.lbapt_kpis_on_track")
+	{
+		return "Lbapt Kpis On Track";
+	}
+	if($table=="public.lbapt_operations")
+	{
+		return "Lbapt Operations";
+	}
+	if($table=="public.lbapt_programs")
+	{
+		return "Lbapt Programs";
+	}
+	if($table=="public.lbapt_sample_workflow")
+	{
+		return "Lbapt Sample Workflow";
+	}
+	if($table=="public.lbapt_status")
+	{
+		return "Lbapt Status";
+	}
+	if($table=="public.lbapt_strategic_areas")
+	{
+		return "Lbapt Strategic Areas";
+	}
+	if($table=="public.lbapt_all_activities_view")
+	{
+		return "Lbapt All Activities View";
+	}
+	if($table=="public.lbapt_dashboard_summary_view")
+	{
+		return "Lbapt Dashboard Summary View";
+	}
+	if($table=="public.lbapt_kpis_tracking_view")
+	{
+		return "Lbapt Kpis Tracking View";
+	}
+	if($table=="public.lbapt_unified_activities")
+	{
+		return "Lbapt Unified Activities";
+	}
+	if($table=="public.years")
+	{
+		return "Years";
+	}
+	if($table=="public.lbapt_finance")
+	{
+		return "Lbapt Finance";
+	}
+	if($table=="public.lbapt_hr")
+	{
+		return "Lbapt Hr";
 	}
 	return $table;
 }
@@ -2648,6 +2816,258 @@ function GetTablesListReport()
 		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
 		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
 			$arr[]="public.smtp";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lbapt_annual_plan_tracker");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lbapt_annual_plan_tracker";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lbapt_annual_plan_tracker";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lbapt_beginnings_fund");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lbapt_beginnings_fund";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lbapt_beginnings_fund";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lbapt_communications");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lbapt_communications";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lbapt_communications";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lbapt_cri");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lbapt_cri";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lbapt_cri";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lbapt_dashboard_summary");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lbapt_dashboard_summary";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lbapt_dashboard_summary";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lbapt_development");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lbapt_development";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lbapt_development";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lbapt_elma");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lbapt_elma";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lbapt_elma";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lbapt_governance");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lbapt_governance";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lbapt_governance";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lbapt_kpis_on_track");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lbapt_kpis_on_track";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lbapt_kpis_on_track";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lbapt_operations");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lbapt_operations";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lbapt_operations";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lbapt_programs");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lbapt_programs";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lbapt_programs";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lbapt_sample_workflow");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lbapt_sample_workflow";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lbapt_sample_workflow";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lbapt_status");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lbapt_status";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lbapt_status";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lbapt_strategic_areas");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lbapt_strategic_areas";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lbapt_strategic_areas";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lbapt_all_activities_view");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lbapt_all_activities_view";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lbapt_all_activities_view";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lbapt_dashboard_summary_view");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lbapt_dashboard_summary_view";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lbapt_dashboard_summary_view";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lbapt_kpis_tracking_view");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lbapt_kpis_tracking_view";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lbapt_kpis_tracking_view";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lbapt_unified_activities");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lbapt_unified_activities";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lbapt_unified_activities";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.years");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.years";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.years";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lbapt_finance");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lbapt_finance";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lbapt_finance";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lbapt_hr");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lbapt_hr";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lbapt_hr";
 	}
 	return $arr;
 }

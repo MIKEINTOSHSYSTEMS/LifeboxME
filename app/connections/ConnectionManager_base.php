@@ -307,6 +307,27 @@ class ConnectionManager_Base
 		$connectionsIds["aio_training_tracking Chart"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["aio_training_tracking Chart by sex"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["public.smtp"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbapt_annual_plan_tracker"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbapt_beginnings_fund"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbapt_communications"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbapt_cri"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbapt_dashboard_summary"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbapt_development"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbapt_elma"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbapt_governance"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbapt_kpis_on_track"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbapt_operations"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbapt_programs"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbapt_sample_workflow"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbapt_status"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbapt_strategic_areas"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbapt_all_activities_view"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbapt_dashboard_summary_view"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbapt_kpis_tracking_view"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbapt_unified_activities"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.years"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbapt_finance"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbapt_hr"] = "lifebox_mesystem_at_localhost";
 
 		$this->_tablesConnectionIds = &$connectionsIds;
 	}
