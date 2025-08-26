@@ -22,6 +22,14 @@ GRANT ALL PRIVILEGES ON *.* TO '${MARIADB_USER}'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 EOF
 
+# Create Lifebox Forms database initialization script
+cat > "./data/mysql-init/02-create-lifebox-forms-db.sql" <<EOF
+CREATE DATABASE IF NOT EXISTS ${LIFEBOX_FORMS_DB_NAME};
+CREATE USER IF NOT EXISTS '${LIFEBOX_FORMS_DB_USER}'@'%' IDENTIFIED BY '${LIFEBOX_FORMS_DB_PASSWORD}';
+GRANT ALL PRIVILEGES ON *.* TO '${LIFEBOX_FORMS_DB_USER}'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+EOF
+
 # Create PostgreSQL initialization script
 INIT_SCRIPT="./data/postgres-init/01-create-meta-db.sql"
 if [ ! -f "$INIT_SCRIPT" ]; then

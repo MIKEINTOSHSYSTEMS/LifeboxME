@@ -6,7 +6,8 @@ return [
     'schemaCacheDuration' => 86400,
     'schemaCache' => 'cache',
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=127.0.0.1;port=3306;dbname=lifeboxme_forms',
-    'username' => 'lifeboxme_forms',
-    'password' => 'lifeboxme_forms',
+    //'dsn' => 'mysql:host=127.0.0.1;port=3306;dbname=lifeboxme_forms', // dev
+    'dsn' => 'mysql:host=192.168.47.7;port=3306;dbname=lifeboxme_forms', // prod
+    'username' => 'lifeboxme_system',
+    'password' => 'lifeboxme_system',
 ];
