@@ -40,6 +40,8 @@ api/dev/api/
 api/dev/assets/
 api/dev/db/db.php
 api/dev/docker/
+modules/srcs/
+#modules/forms
 .env
 **/note.txt
 *.log
