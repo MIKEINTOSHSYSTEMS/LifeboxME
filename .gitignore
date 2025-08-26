@@ -2,6 +2,7 @@ settings.xml
 *.code-workspace
 *.txt
 *.mmdb
+*.zip
 /schema
 /analytics/js/
 /analytics/config/config.ini.php
@@ -29,6 +30,7 @@ api/database/main/0.php
 api/database/main/1.php
 api/database/main/*.sql
 api/database/main/backup
+api/database/meta/backup
 api/database/metabase/backup
 api/database/forms/backup
 api/database/analytics/backup
