@@ -3,6 +3,7 @@ settings.xml
 *.txt
 *.mmdb
 *.zip
+*.sql
 /schema
 /analytics/js/
 /analytics/config/config.ini.php
@@ -43,6 +44,8 @@ api/dev/assets/
 api/dev/db/db.php
 api/dev/docker/
 modules/srcs/
+modules/quiz/
+modules/test/exam
 #modules/forms
 .env
 **/note.txt

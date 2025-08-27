@@ -1,0 +1,3 @@
+/* public/assets/app.css */
+body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+.question { margin-bottom: 1rem; padding: .5rem; background: #fff; border-radius: .25rem; }
