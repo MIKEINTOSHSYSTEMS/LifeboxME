@@ -6,9 +6,9 @@ require_once(getabspath("classes/cipherer.php"));
 $tdatadashboard = array();
 $tdatadashboard[".ShortName"] = "dashboard";
 
-$tdatadashboard[".pagesByType"] = my_json_decode( "{\"dashboard\":[\"dashboard\",\"all_in_one_training\"],\"search\":[\"search\"]}" );
+$tdatadashboard[".pagesByType"] = my_json_decode( "{\"dashboard\":[\"dashboard\",\"all_in_one_training\",\"lifebox_test_center\"],\"search\":[\"search\"]}" );
 $tdatadashboard[".originalPagesByType"] = $tdatadashboard[".pagesByType"];
-$tdatadashboard[".pages"] = types2pages( my_json_decode( "{\"dashboard\":[\"dashboard\",\"all_in_one_training\"],\"search\":[\"search\"]}" ) );
+$tdatadashboard[".pages"] = types2pages( my_json_decode( "{\"dashboard\":[\"dashboard\",\"all_in_one_training\",\"lifebox_test_center\"],\"search\":[\"search\"]}" ) );
 $tdatadashboard[".originalPages"] = $tdatadashboard[".pages"];
 $tdatadashboard[".defaultPages"] = my_json_decode( "{\"dashboard\":\"dashboard\",\"search\":\"search\"}" );
 $tdatadashboard[".originalDefaultPages"] = $tdatadashboard[".defaultPages"];
