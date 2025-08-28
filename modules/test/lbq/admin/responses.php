@@ -75,11 +75,23 @@ $tests = $quiz->listTests(100);
 
 // Get trainings for filter dropdown
 $trainings = $pdo->query("
+    SELECT ts.training_id, tc.course_name, ts.training_type, ts.quarter, ts.start_date, ts.end_date
+    FROM training_sessions ts
+    LEFT JOIN training_courses tc ON tc.course_id = ts.course_id
+    -- WHERE ts.start_date >= CURRENT_DATE - INTERVAL '1 year'
+    ORDER BY tc.course_name ASC, ts.training_id ASC,  ts.start_date ASC
+    -- ORDER BY ts.start_date DESC
+")->fetchAll();
+
+/*
+$trainings = $pdo->query("
     SELECT training_id, training_type as title 
     FROM training_sessions 
     ORDER BY start_date DESC 
     LIMIT 100
 ")->fetchAll();
+*/
+
 
 // Get participants for filter dropdown
 $participants = $pdo->query("
@@ -161,7 +173,11 @@ $participants = $pdo->query("
                   <option value="">All Trainings</option>
                   <?php foreach ($trainings as $tr): ?>
                     <option value="<?= $tr['training_id'] ?>" <?= $training_id == $tr['training_id'] ? 'selected' : '' ?>>
-                      <?= htmlspecialchars($tr['title'] ?? 'Training #' . $tr['training_id']) ?>
+                      <?/*= htmlspecialchars($tr['title'] ?? 'Training Session #' . $tr['training_id'])*/ ?>
+                      <?= htmlspecialchars($tr['course_name'] ?? 'Training', ENT_QUOTES, 'UTF-8') ?> - Session
+                      <?= htmlspecialchars($tr['training_id'] ?? '', ENT_QUOTES, 'UTF-8') ?> - Quarter
+                      <?= htmlspecialchars($tr['quarter'] ?? '', ENT_QUOTES, 'UTF-8') ?>
+                      (<?= $tr['start_date'] ? date('M Y', strtotime($tr['start_date'])) : 'N/A' ?>)
                     </option>
                   <?php endforeach; ?>
                 </select>
@@ -239,8 +255,12 @@ $participants = $pdo->query("
                           <small class="text-muted">ID: <?= $r['test_id'] ?></small>
                         </td>
                         <td>
-                          <?= htmlspecialchars($r['training_title'] ?? 'Training #' . $r['training_id']) ?><br>
-                          <small class="text-muted">ID: <?= $r['training_id'] ?></small>
+                          Course:
+                          <?= htmlspecialchars($tr['course_name'] ?? 'Training', ENT_QUOTES, 'UTF-8') ?> - Quarter
+                          <?= htmlspecialchars($tr['quarter'] ?? '', ENT_QUOTES, 'UTF-8') ?>
+                          (<?= $tr['start_date'] ? date('M Y', strtotime($tr['start_date'])) : 'N/A' ?>)
+                          <br>
+                          <small class="text-muted">Session: <?= $r['training_id'] ?></small>
                         </td>
                         <td>
                           <?php if ($r['participant_id']): ?>

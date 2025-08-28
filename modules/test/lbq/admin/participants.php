@@ -46,7 +46,8 @@ if ($role_id > 0) {
     $params[':role_id'] = $count_params[':role_id'] = $role_id;
 }
 
-$sql .= " ORDER BY created_at DESC LIMIT :limit OFFSET :offset";
+//$sql .= " ORDER BY created_at DESC LIMIT :limit OFFSET :offset";
+$sql .= " ORDER BY created_at ASC LIMIT :limit OFFSET :offset";
 $params[':limit'] = $limit;
 $params[':offset'] = $offset;
 
@@ -96,10 +97,6 @@ $roles = $pdo->query("SELECT role_id, role_name FROM participant_role ORDER BY r
             top: 0;
             background-color: #f8f9fa;
             z-index: 10;
-        }
-
-        .table-responsive {
-            max-height: 70vh;
         }
     </style>
 </head>

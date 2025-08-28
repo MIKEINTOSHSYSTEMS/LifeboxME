@@ -62,21 +62,34 @@ class Quiz
         return $row ? $row['id'] : null;
     }
 
-
-    public function updateTest($id, $title, $description, $time_limit, $is_active, $is_pretest)
+    public function updateTest($id, $title, $description, $time_limit, $is_active, $is_pretest, $training_id = null)
     {
-        $stmt = $this->pdo->prepare("UPDATE lbquiz_tests 
-                                    SET title = :title, description = :desc, time_limit_minutes = :time, 
-                                    is_active = :active, is_pretest = :pre 
-                                    WHERE id = :id");
-        $stmt->execute([
+        $sql = "UPDATE lbquiz_tests 
+            SET title = :title, description = :desc, time_limit_minutes = :time, 
+            is_active = :active, is_pretest = :pre";
+
+        if ($training_id !== null) {
+            $sql .= ", training_id = :tid";
+        }
+
+        $sql .= " WHERE id = :id";
+
+        $stmt = $this->pdo->prepare($sql);
+
+        $params = [
             ':title' => $title,
             ':desc' => $description,
             ':time' => $time_limit,
             ':active' => $is_active,
             ':pre' => $is_pretest,
             ':id' => $id
-        ]);
+        ];
+
+        if ($training_id !== null) {
+            $params[':tid'] = $training_id;
+        }
+
+        $stmt->execute($params);
         return $stmt->rowCount();
     }
 
@@ -279,15 +292,14 @@ class Quiz
         $stmt = $this->pdo->prepare("INSERT INTO public.quiz_answers (questionid, text, picture, correct) 
                                 VALUES (:qid, :t, :p, :c) RETURNING id");
 
-        // For PostgreSQL, we need to use proper boolean values
-        // Convert PHP boolean to PostgreSQL boolean (true/false)
+        // Use proper PostgreSQL boolean representation
         $correct_value = $correct ? 'true' : 'false';
 
         $stmt->execute([
             ':qid' => $question_id,
             ':t' => $text,
             ':p' => $picture,
-            ':c' => $correct_value  // Use string representation
+            ':c' => $correct_value
         ]);
         $row = $stmt->fetch();
         return $row ? $row['id'] : null;
@@ -299,13 +311,13 @@ class Quiz
                                 SET text = :t, picture = :p, correct = :c 
                                 WHERE id = :id");
 
-        // Convert PHP boolean to PostgreSQL boolean (true/false)
+        // Use proper PostgreSQL boolean representation
         $correct_value = $correct ? 'true' : 'false';
 
         $stmt->execute([
             ':t' => $text,
             ':p' => $picture,
-            ':c' => $correct_value,  // Use string representation
+            ':c' => $correct_value,
             ':id' => $answer_id
         ]);
         return $stmt->rowCount();

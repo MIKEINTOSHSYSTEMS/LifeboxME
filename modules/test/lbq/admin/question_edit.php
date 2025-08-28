@@ -66,14 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // For matrix questions, handle rows
-    if ($question_id && $qtype == 3) {
-        $matrix_rows = $_POST['matrix_row'] ?? [];
-        $matrix_row_ids = $_POST['matrix_row_id'] ?? [];
-
-        // TODO: Implement matrix row management
-    }
-
     header("Location: question_edit.php?id=" . $question_id);
     exit;
 }
@@ -100,6 +92,19 @@ if ($question_id && !$question) {
             padding: 10px;
             border: 1px solid #dee2e6;
             border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+
+        .answer-row:hover {
+            background-color: #e9ecef;
+        }
+
+        .sortable-ghost {
+            opacity: 0.5;
+        }
+
+        .matrix-section {
+            display: none;
         }
     </style>
 </head>
@@ -119,9 +124,13 @@ if ($question_id && !$question) {
                     </div>
                 </div>
 
+                <?php if (isset($error)): ?>
+                    <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
+                <?php endif; ?>
+
                 <div class="card">
                     <div class="card-body">
-                        <form method="post">
+                        <form method="post" id="questionForm">
                             <div class="mb-3">
                                 <label for="question" class="form-label">Question Text</label>
                                 <textarea class="form-control" id="question" name="question" rows="3" required><?= $question ? htmlspecialchars($question['question']) : '' ?></textarea>
@@ -142,57 +151,65 @@ if ($question_id && !$question) {
                                 <div class="col-md-6">
                                     <label for="videolink" class="form-label">Video Link (Optional)</label>
                                     <input type="url" class="form-control" id="videolink" name="videolink"
-                                        value="<?= $question ? htmlspecialchars($question['videolink'] ?? '') : '' ?>">
+                                        value="<?= $question ? htmlspecialchars($question['videolink'] ?? '') : '' ?>"
+                                        placeholder="https://example.com/video.mp4">
                                 </div>
                             </div>
 
-                            <!-- Answers Section (for single/multiple choice) -->
-                            <div id="answers-section" style="<?= ($question && in_array($question['qtype'], [1, 2])) ? '' : 'display: none;' ?>">
+                            <!-- Answers Section -->
+                            <div id="answers-section" class="<?= ($question && in_array($question['qtype'], [1, 2])) ? '' : 'd-none' ?>">
                                 <h5>Answers</h5>
-                                <div id="answers-container">
+                                <div class="alert alert-info">
+                                    <i class="bi bi-info-circle"></i> Check the box next to answers that are correct.
+                                </div>
+                                <div id="answers-container" class="mb-3">
                                     <?php if ($question && in_array($question['qtype'], [1, 2])): ?>
                                         <?php foreach ($answers as $index => $answer): ?>
-                                            <div class="answer-row">
+                                            <div class="answer-row" data-index="<?= $index ?>">
                                                 <input type="hidden" name="answer_id[]" value="<?= $answer['id'] ?>">
-                                                <div class="row">
-                                                    <div class="col-md-8">
+                                                <div class="row align-items-center">
+                                                    <div class="col-md-7">
                                                         <input type="text" class="form-control" name="answer_text[]"
                                                             value="<?= htmlspecialchars($answer['text']) ?>" placeholder="Answer text" required>
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        <div class="form-check form-switch mt-2">
+                                                    <div class="col-md-3">
+                                                        <div class="form-check form-switch">
                                                             <input class="form-check-input" type="checkbox" name="answer_correct[]"
                                                                 value="<?= $index ?>" <?= $answer['correct'] ? 'checked' : '' ?>>
-                                                            <label class="form-check-label">Correct</label>
+                                                            <label class="form-check-label">Correct Answer</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <button type="button" class="btn btn-danger btn-sm remove-answer">Remove</button>
+                                                        <button type="button" class="btn btn-danger btn-sm remove-answer">
+                                                            <i class="bi bi-trash"></i> Remove
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
                                 </div>
-                                <button type="button" id="add-answer" class="btn btn-sm btn-outline-primary mt-2">
+                                <button type="button" id="add-answer" class="btn btn-sm btn-outline-primary mb-3">
                                     <i class="bi bi-plus-circle"></i> Add Answer
                                 </button>
                             </div>
 
-                            <!-- Matrix Rows Section (for decision matrix) -->
-                            <div id="matrix-section" style="<?= ($question && $question['qtype'] == 3) ? '' : 'display: none;' ?>">
-                                <h5>Matrix Rows</h5>
-                                <div id="matrix-rows-container">
-                                    <!-- TODO: Implement matrix rows management -->
-                                    <div class="alert alert-info">
-                                        Matrix question management will be implemented in a future version.
-                                    </div>
+                            <!-- Matrix Section -->
+                            <div id="matrix-section" class="<?= ($question && $question['qtype'] == 3) ? '' : 'd-none' ?>">
+                                <h5>Matrix Configuration</h5>
+                                <div class="alert alert-info">
+                                    <i class="bi bi-info-circle"></i> Matrix questions require special configuration.
+                                    Please contact support for matrix question setup.
                                 </div>
                             </div>
 
                             <div class="mt-4">
-                                <button type="submit" class="btn btn-primary">Save Question</button>
-                                <a href="questions.php" class="btn btn-secondary">Cancel</a>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-check-circle"></i> <?= $question_id ? 'Update' : 'Create' ?> Question
+                                </button>
+                                <a href="questions.php" class="btn btn-secondary">
+                                    <i class="bi bi-x-circle"></i> Cancel
+                                </a>
                             </div>
                         </form>
                     </div>
@@ -204,40 +221,43 @@ if ($question_id && !$question) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Toggle answers section based on question type
             const qtypeSelect = document.getElementById('qtype');
             const answersSection = document.getElementById('answers-section');
             const matrixSection = document.getElementById('matrix-section');
 
             function toggleSections() {
                 const selectedType = parseInt(qtypeSelect.value);
-                answersSection.style.display = (selectedType === 1 || selectedType === 2) ? 'block' : 'none';
-                matrixSection.style.display = (selectedType === 3) ? 'block' : 'none';
+                answersSection.classList.toggle('d-none', !(selectedType === 1 || selectedType === 2));
+                matrixSection.classList.toggle('d-none', selectedType !== 3);
             }
 
             qtypeSelect.addEventListener('change', toggleSections);
-            toggleSections(); // Initial toggle
+            toggleSections();
 
             // Add answer row
             document.getElementById('add-answer').addEventListener('click', function() {
                 const container = document.getElementById('answers-container');
                 const index = container.children.length;
+                const newIndex = Date.now(); // Unique index
 
                 const row = document.createElement('div');
                 row.className = 'answer-row';
                 row.innerHTML = `
-                    <div class="row">
-                        <div class="col-md-8">
+                    <input type="hidden" name="answer_id[]" value="">
+                    <div class="row align-items-center">
+                        <div class="col-md-7">
                             <input type="text" class="form-control" name="new_answer_text[]" placeholder="Answer text" required>
                         </div>
-                        <div class="col-md-2">
-                            <div class="form-check form-switch mt-2">
-                                <input class="form-check-input" type="checkbox" name="new_answer_correct[]" value="${index}">
-                                <label class="form-check-label">Correct</label>
+                        <div class="col-md-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="new_answer_correct[]" value="${newIndex}">
+                                <label class="form-check-label">Correct Answer</label>
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <button type="button" class="btn btn-danger btn-sm remove-answer">Remove</button>
+                            <button type="button" class="btn btn-danger btn-sm remove-answer">
+                                <i class="bi bi-trash"></i> Remove
+                            </button>
                         </div>
                     </div>
                 `;
@@ -255,6 +275,18 @@ if ($question_id && !$question) {
                 button.addEventListener('click', function() {
                     this.closest('.answer-row').remove();
                 });
+            });
+
+            // Form validation
+            document.getElementById('questionForm').addEventListener('submit', function(e) {
+                const qtype = parseInt(qtypeSelect.value);
+                const answerCount = document.querySelectorAll('#answers-container .answer-row').length;
+
+                if ((qtype === 1 || qtype === 2) && answerCount === 0) {
+                    e.preventDefault();
+                    alert('Please add at least one answer for this question type.');
+                    return false;
+                }
             });
         });
     </script>

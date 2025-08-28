@@ -14,18 +14,22 @@ if (!$response_id) {
     exit;
 }
 
-// Get response details
+// Get response details with complete information
 $stmt = $pdo->prepare("
     SELECT r.*, t.title as test_title, t.training_id, t.description as test_description,
            t.time_limit_minutes, t.is_pretest, t.is_active,
-           ts.training_type as training_title,
+           ts.training_type, ts.start_date, ts.end_date, tc.course_name,
            tp.participant_id, part.first_name, part.last_name, part.email,
-           part.phone, part.title_salutation
+           part.phone, part.title_salutation, part.role_id, part.facility_id,
+           f.facility_name, pr.role_name
     FROM lbquiz_responses r 
     JOIN lbquiz_tests t ON t.id = r.test_id
+    LEFT JOIN training_sessions ts ON ts.training_id = t.training_id
+    LEFT JOIN training_courses tc ON tc.course_id = ts.course_id
     LEFT JOIN training_participation tp ON tp.participation_id = r.participation_id
     LEFT JOIN training_participants part ON part.participant_id = tp.participant_id
-    LEFT JOIN training_sessions ts ON ts.training_id = t.training_id
+    LEFT JOIN facilities f ON f.facility_id = part.facility_id
+    LEFT JOIN participant_role pr ON pr.role_id = part.role_id
     WHERE r.id = :id
 ");
 $stmt->execute([':id' => $response_id]);
@@ -36,70 +40,78 @@ if (!$response) {
     exit;
 }
 
-// Get response details with questions and answers - FIXED THE QUERY
+// Get response details with questions and answers
 $stmt = $pdo->prepare("
-    SELECT rd.*, q.question, q.qtype, 
+    SELECT rd.*, q.question, q.qtype, q.videolink,
            tq.weight, tq.position,
            -- Get all answers for this question
-           (SELECT json_agg(json_build_object('id', a.id, 'text', a.text, 'correct', a.correct))
+           (SELECT json_agg(json_build_object('id', a.id, 'text', a.text, 'correct', a.correct, 'picture', a.picture))
             FROM quiz_answers a 
             WHERE a.questionid = q.id) as all_answers,
-           -- Get selected answer IDs as array
+           -- Get selected answer IDs
            rd.answer_ids as selected_answer_ids
     FROM lbquiz_response_details rd
-    JOIN lbquiz_test_questions tq ON tq.test_id = rd.response_id AND tq.quiz_question_id = rd.quiz_question_id
     JOIN quiz_questions q ON q.id = rd.quiz_question_id
+    JOIN lbquiz_test_questions tq ON tq.test_id = :test_id AND tq.quiz_question_id = rd.quiz_question_id
     WHERE rd.response_id = :id
     ORDER BY tq.position, rd.id
 ");
-$stmt->execute([':id' => $response_id]);
+$stmt->execute([':id' => $response_id, ':test_id' => $response['test_id']]);
 $response_details = $stmt->fetchAll();
 
-// Process the answers
+// Process the answers and calculate scores
+$total_possible = 0;
+$total_earned = 0;
+
 foreach ($response_details as &$detail) {
     // Decode the JSON arrays
     $detail['all_answers'] = json_decode($detail['all_answers'] ?? '[]', true) ?: [];
-    $detail['selected_answer_ids'] = $detail['selected_answer_ids'] ?: [];
 
-    // For single answer questions, convert to array
-    if (!is_array($detail['selected_answer_ids']) && !empty($detail['selected_answer_ids'])) {
-        $detail['selected_answer_ids'] = [$detail['selected_answer_ids']];
+    // Process selected answer IDs
+    if (!empty($detail['selected_answer_ids']) && $detail['selected_answer_ids'][0] === '{') {
+        // PostgreSQL array format: {1,2,3}
+        $detail['selected_answer_ids'] = array_map('intval', explode(',', trim($detail['selected_answer_ids'], '{}')));
+    } elseif (!empty($detail['selected_answer_ids'])) {
+        // Single value or already array
+        $detail['selected_answer_ids'] = is_array($detail['selected_answer_ids']) ?
+            $detail['selected_answer_ids'] : [intval($detail['selected_answer_ids'])];
+    } else {
+        $detail['selected_answer_ids'] = [];
     }
 
     // Calculate points for this question
-    $detail['calculated_points'] = 0;
     $detail['max_points'] = $detail['weight'];
+    $detail['calculated_points'] = 0;
 
     if (!empty($detail['selected_answer_ids']) && !empty($detail['all_answers'])) {
         $correct_answers = array_filter($detail['all_answers'], function ($a) {
             return $a['correct'];
         });
+
         $selected_correct = array_filter($detail['all_answers'], function ($a) use ($detail) {
             return $a['correct'] && in_array($a['id'], $detail['selected_answer_ids']);
         });
+
         $selected_incorrect = array_filter($detail['all_answers'], function ($a) use ($detail) {
             return !$a['correct'] && in_array($a['id'], $detail['selected_answer_ids']);
         });
 
-        // Simple scoring: points based on correct selections
-        if (count($selected_incorrect) === 0) {
-            $detail['calculated_points'] = (count($selected_correct) / max(1, count($correct_answers))) * $detail['weight'];
+        // Scoring logic
+        if (count($selected_incorrect) === 0 && count($selected_correct) > 0) {
+            if ($detail['qtype'] == 1) { // Single choice
+                $detail['calculated_points'] = count($selected_correct) > 0 ? $detail['weight'] : 0;
+            } else { // Multiple choice
+                $detail['calculated_points'] = (count($selected_correct) / max(1, count($correct_answers))) * $detail['weight'];
+            }
         }
     }
-}
 
-// Calculate score breakdown
-$total_possible = 0;
-$total_earned = 0;
-
-foreach ($response_details as $detail) {
     $total_possible += $detail['weight'];
     $total_earned += $detail['points_awarded'] ?? $detail['calculated_points'];
 }
 
 $calculated_score = $total_possible > 0 ? round(($total_earned / $total_possible) * 100, 2) : 0;
 
-// Question types
 $qtypes = [
     1 => 'Single Choice',
     2 => 'Multiple Choice',
@@ -119,61 +131,62 @@ $qtypes = [
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         .question-card {
-            border-left: 4px solid var(--primary-color);
+            border-left: 4px solid #6c757d;
             transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
         }
 
         .question-card.correct {
-            border-left-color: var(--success-color);
-            background-color: rgba(40, 167, 69, 0.05);
+            border-left-color: #198754;
+            background-color: rgba(25, 135, 84, 0.05);
         }
 
         .question-card.incorrect {
-            border-left-color: var(--danger-color);
+            border-left-color: #dc3545;
             background-color: rgba(220, 53, 69, 0.05);
         }
 
         .question-card.partial {
-            border-left-color: var(--warning-color);
+            border-left-color: #ffc107;
             background-color: rgba(255, 193, 7, 0.05);
         }
 
         .answer-item {
             padding: 0.75rem;
-            border-radius: 8px;
+            border-radius: 6px;
             margin-bottom: 0.5rem;
             border: 2px solid #e9ecef;
             transition: all 0.3s ease;
         }
 
         .answer-item.correct {
-            border-color: var(--success-color);
-            background-color: rgba(40, 167, 69, 0.1);
+            border-color: #198754;
+            background-color: rgba(25, 135, 84, 0.1);
         }
 
         .answer-item.selected {
-            border-color: var(--primary-color);
-            background-color: rgba(0, 121, 165, 0.1);
+            border-color: #0d6efd;
+            background-color: rgba(13, 110, 253, 0.1);
         }
 
         .answer-item.incorrect {
-            border-color: var(--danger-color);
+            border-color: #dc3545;
             background-color: rgba(220, 53, 69, 0.1);
         }
 
         .answer-item.selected-incorrect {
-            border-color: var(--danger-color);
+            border-color: #dc3545;
             background-color: rgba(220, 53, 69, 0.2);
         }
 
         .score-badge {
-            font-size: 1.1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+            font-size: 1.2rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
         }
 
         .timeline {
-            border-left: 3px solid var(--primary-color);
+            border-left: 3px solid #0d6efd;
             margin-left: 1rem;
             padding-left: 2rem;
         }
@@ -191,9 +204,17 @@ $qtypes = [
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background: var(--primary-color);
+            background: #0d6efd;
             border: 3px solid white;
-            box-shadow: 0 0 0 2px var(--primary-color);
+            box-shadow: 0 0 0 2px #0d6efd;
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -206,7 +227,7 @@ $qtypes = [
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <div>
-                        <h1 class="h2">Response Details</h1>
+                        <h1 class="h2">Response Details #<?= $response_id ?></h1>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
@@ -235,9 +256,10 @@ $qtypes = [
                                         <strong>Test:</strong> <?= htmlspecialchars($response['test_title']) ?><br>
                                         <strong>Type:</strong>
                                         <span class="badge bg-<?= $response['is_pretest'] ? 'info' : 'primary' ?>">
-                                            <?= $response['is_pretest'] ? 'Pretest' : 'Posttest' ?>
+                                            <?= $response['is_pretest'] ? 'Pre Test' : 'Post Test' ?>
                                         </span><br>
-                                        <strong>Training:</strong> <?= htmlspecialchars($response['training_title'] ?? 'N/A') ?>
+                                        <strong>Course:</strong> <?= htmlspecialchars($response['course_name'] ?? 'N/A') ?><br>
+                                        <strong>Training:</strong> <?= htmlspecialchars($response['training_type'] ?? 'N/A') ?>
                                     </div>
                                     <div class="col-md-6">
                                         <strong>Time Limit:</strong>
@@ -246,13 +268,16 @@ $qtypes = [
                                         <span class="badge bg-<?= $response['is_active'] ? 'success' : 'secondary' ?>">
                                             <?= $response['is_active'] ? 'Active' : 'Inactive' ?>
                                         </span><br>
-                                        <strong>Test ID:</strong> <?= $response['test_id'] ?>
+                                        <strong>Test ID:</strong> <?= $response['test_id'] ?><br>
+                                        <strong>Training Dates:</strong>
+                                        <?= $response['start_date'] ? date('M j, Y', strtotime($response['start_date'])) : 'N/A' ?> -
+                                        <?= $response['end_date'] ? date('M j, Y', strtotime($response['end_date'])) : 'N/A' ?>
                                     </div>
                                 </div>
                                 <?php if ($response['test_description']): ?>
                                     <hr>
                                     <strong>Description:</strong><br>
-                                    <?= htmlspecialchars($response['test_description']) ?>
+                                    <?= nl2br(htmlspecialchars($response['test_description'])) ?>
                                 <?php endif; ?>
                             </div>
                         </div>
