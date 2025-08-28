@@ -127,7 +127,7 @@ $qtypes = [
                       </small>
                     </div>
                     <p class="mb-1 preview-text">
-                      <strong>Answers:</strong> <?= htmlspecialchars($r['answer_preview']) ?>
+                      <strong>Answers:</strong> <?= htmlspecialchars($r['answer_preview'] ?? 'No answers') ?>
                     </p>
                     <small class="text-muted">
                       ID: <?= $r['id'] ?> |

@@ -46,7 +46,14 @@ class Quiz
         $stmt->bindValue(':tid', $training_id, PDO::PARAM_INT);
         $stmt->bindValue(':title', $title, PDO::PARAM_STR);
         $stmt->bindValue(':desc', $description, PDO::PARAM_STR);
-        $stmt->bindValue(':time', $time_limit, PDO::PARAM_INT); // use PARAM_INT even if null
+
+        // Handle null time limit
+        if ($time_limit === null) {
+            $stmt->bindValue(':time', null, PDO::PARAM_NULL);
+        } else {
+            $stmt->bindValue(':time', $time_limit, PDO::PARAM_INT);
+        }
+
         $stmt->bindValue(':pre', (bool)$is_pretest, PDO::PARAM_BOOL);
         $stmt->bindValue(':active', (bool)$is_active, PDO::PARAM_BOOL);
 
@@ -270,8 +277,18 @@ class Quiz
     public function addAnswer($question_id, $text, $correct = false, $picture = null)
     {
         $stmt = $this->pdo->prepare("INSERT INTO public.quiz_answers (questionid, text, picture, correct) 
-                                    VALUES (:qid, :t, :p, :c) RETURNING id");
-        $stmt->execute([':qid' => $question_id, ':t' => $text, ':p' => $picture, ':c' => $correct]);
+                                VALUES (:qid, :t, :p, :c) RETURNING id");
+
+        // For PostgreSQL, we need to use proper boolean values
+        // Convert PHP boolean to PostgreSQL boolean (true/false)
+        $correct_value = $correct ? 'true' : 'false';
+
+        $stmt->execute([
+            ':qid' => $question_id,
+            ':t' => $text,
+            ':p' => $picture,
+            ':c' => $correct_value  // Use string representation
+        ]);
         $row = $stmt->fetch();
         return $row ? $row['id'] : null;
     }
@@ -279,9 +296,18 @@ class Quiz
     public function updateAnswer($answer_id, $text, $correct = false, $picture = null)
     {
         $stmt = $this->pdo->prepare("UPDATE public.quiz_answers 
-                                    SET text = :t, picture = :p, correct = :c 
-                                    WHERE id = :id");
-        $stmt->execute([':t' => $text, ':p' => $picture, ':c' => $correct, ':id' => $answer_id]);
+                                SET text = :t, picture = :p, correct = :c 
+                                WHERE id = :id");
+
+        // Convert PHP boolean to PostgreSQL boolean (true/false)
+        $correct_value = $correct ? 'true' : 'false';
+
+        $stmt->execute([
+            ':t' => $text,
+            ':p' => $picture,
+            ':c' => $correct_value,  // Use string representation
+            ':id' => $answer_id
+        ]);
         return $stmt->rowCount();
     }
 
