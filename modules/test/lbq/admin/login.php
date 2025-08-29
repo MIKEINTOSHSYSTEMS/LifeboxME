@@ -5,7 +5,8 @@ if (!empty($_POST)) {
   $pass = trim($_POST['password'] ?? '');
 
   // WARNING: demo-only. Replace with proper auth in production
-  if ($user === 'admin' && $pass === 'adminpass') {
+  //if ($user === 'admin' && $pass === 'adminpass') {
+  if ($user === 'admin' && $pass === 'merqadmin') {
     $_SESSION['admin'] = true;
     header('Location: dashboard.php');
     exit;
