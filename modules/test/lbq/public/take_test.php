@@ -38,17 +38,18 @@ if (!$test_id) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Select Test - LifeBox Test Center</title>
+    <link href="/assets/style/styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
   </head>
 
   <body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
       <div class="container">
         <a class="navbar-brand" href="dashboard.php">
           <img src="../lblogo-white.svg" alt="LifeBox Logo" height="30" class="d-inline-block align-text-top me-2">
-          LifeBox Test Center
+          Test Center
         </a>
         <div class="d-flex align-items-center">
           <span class="navbar-text text-white me-3 d-none d-md-block">
@@ -96,7 +97,7 @@ if (!$test_id) {
                         </div>
                         <div class="card-footer bg-transparent">
                           <a href="take_test.php?test_id=<?= $test['id'] ?>&participation_id=<?= $test['participation_id'] ?>"
-                            class="btn btn-primary w-100">
+                            class="btn btn-success w-100">
                             Start Test
                           </a>
                         </div>
@@ -211,6 +212,11 @@ shuffle($questions);
       border-radius: 0.5rem;
       margin-bottom: 1.5rem;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .bg-primary {
+      
+      background-color: #0079a7ed !important;
     }
 
     .timer-container {
@@ -348,7 +354,7 @@ shuffle($questions);
         <div class="intro-card">
           <div class="text-center mb-4">
             <img src="../lblogo-dark.svg" alt="LifeBox Logo" height="60" class="mb-3">
-            <h2 class="text-primary"><?= htmlspecialchars($test['title']) ?></h2>
+            <h2 class="text-info"><?= htmlspecialchars($test['title']) ?></h2>
             <p class="lead"><?= htmlspecialchars($test['description'] ?? '') ?></p>
           </div>
 
@@ -407,7 +413,7 @@ shuffle($questions);
               <i class="bi bi-play-circle me-2"></i>
               Start Test
             </button>
-        <br><a href="../public/dashboard.php"> Go to your Dashboard</a></br>
+            <br><a href="../public/dashboard.php"> Go to your Dashboard</a></br>
           </div>
         </div>
       </div>

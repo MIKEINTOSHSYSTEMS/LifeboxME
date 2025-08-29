@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="card login-card">
                         <div class="card-body p-5">
                             <div class="text-center mb-4">
-                                <h2 class="card-title text-primary">LifeBox Test Center</h2>
+                                <h2 class="card-title text-info">LifeBox Test Center</h2>
                                 <p class="text-muted">Sign in to access your tests</p>
                             </div>
 
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </div>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary w-100 py-2">Sign In</button>
+                                <button type="submit" class="btn btn-warning w-100 py-2">Sign In</button>
                             </form>
 
                             <div class="text-center mt-4">

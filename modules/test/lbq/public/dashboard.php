@@ -150,7 +150,7 @@ foreach ($trainings as $training) {
         }
 
         .certificate-btn {
-            background: linear-gradient(135deg, var(--success), #0f6848);
+            background: linear-gradient(135deg, var(--light), #0f6848);
             border: none;
             border-radius: 50px;
             padding: 0.5rem 1.5rem;
@@ -158,7 +158,7 @@ foreach ($trainings as $training) {
         }
 
         .certificate-btn:hover {
-            background: linear-gradient(135deg, #0f6848, var(--success));
+            background: linear-gradient(135deg, #0f6848, var(--light));
             transform: translateY(-2px);
         }
 
@@ -419,7 +419,8 @@ foreach ($trainings as $training) {
                             <a href="#results-section" class="btn btn-outline-primary">
                                 <i class="bi bi-bar-chart me-2"></i> View Results
                             </a>
-                            <a href="certificates.php" class="btn btn-outline-success">
+                            <!--<a href="certificates.php" class="btn btn-outline-success">-->
+                            <a href="all_results.php" class="btn btn-outline-success">
                                 <i class="bi bi-award me-2"></i> My Certificates
                             </a>
                         </div>

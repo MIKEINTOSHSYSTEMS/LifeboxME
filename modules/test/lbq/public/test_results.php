@@ -109,6 +109,11 @@ foreach ($response_details as $detail) {
             margin-bottom: 2rem;
         }
 
+        .bg-primary {
+
+            background-color: #0079a7ed !important;
+        }
+
         .stats-card {
             border-radius: 0.5rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
@@ -206,7 +211,7 @@ foreach ($response_details as $detail) {
         <div class="container">
             <a class="navbar-brand" href="dashboard.php">
                 <img src="../lblogo-white.svg" alt="LifeBox Logo" height="30" class="d-inline-block align-text-top me-2">
-                LifeBox Test Center
+                Test Center
             </a>
             <div class="d-flex align-items-center">
                 <span class="navbar-text text-white me-3 d-none d-md-block">
@@ -432,7 +437,7 @@ foreach ($response_details as $detail) {
 
         <!-- Action Buttons -->
         <div class="text-center mt-4">
-            <a href="take_test.php?test_id=<?= $test['id'] ?>&participation_id=<?= $response['participation_id'] ?>" class="btn btn-primary me-2">
+            <a href="take_test.php?test_id=<?= $test['id'] ?>&participation_id=<?= $response['participation_id'] ?>" class="btn btn-info me-2">
                 <i class="bi bi-arrow-repeat me-1"></i> Retake Test
             </a>
             <a href="certificate.php?response_id=<?= $response_id ?>" class="btn btn-success me-2">

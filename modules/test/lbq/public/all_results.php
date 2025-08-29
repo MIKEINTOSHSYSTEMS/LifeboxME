@@ -101,6 +101,11 @@ $stats = $stmt->fetch();
             margin-bottom: 2rem;
         }
 
+        .bg-primary {
+
+            background-color: #0079a7ed !important;
+        }
+
         .stats-card {
             border-radius: 0.5rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
@@ -182,7 +187,7 @@ $stats = $stmt->fetch();
         <div class="container">
             <a class="navbar-brand" href="dashboard.php">
                 <img src="../lblogo-white.svg" alt="LifeBox Logo" height="30" class="d-inline-block align-text-top me-2">
-                LifeBox Test Center
+                Test Center
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
