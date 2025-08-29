@@ -59,7 +59,7 @@ if (!$resp_id) {
 $quiz->insertResponseDetails($resp_id, $answers);
 
 // Call scoring function explicitly (DB trigger also exists)
-$stmt = $pdo->prepare("SELECT lbexam.calculate_and_store_score(:rid)");
+$stmt = $pdo->prepare("SELECT public.calculate_and_store_score(:rid)");
 $stmt->execute([':rid' => $resp_id]);
 
 header("Location: result.php?response_id=" . intval($resp_id));
