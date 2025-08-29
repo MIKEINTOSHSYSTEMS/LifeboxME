@@ -137,7 +137,7 @@ if ($selected_border === 'custom' && isset($_GET['custom_img'])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         :root {
-            --primary: #0d6efd;
+            --primary: #0079a7;
             --success: #198754;
             --gold: #d4af37;
             --dark-gold: #b8860b;
@@ -425,7 +425,7 @@ if ($selected_border === 'custom' && isset($_GET['custom_img'])) {
             border: 0px solid var(--gold);
             padding: 1.5rem;
             background: rgba(242, 242, 242, 0.079);
-            position: relative;
+            /* position: relative;*/
         }
 
         .gold-border:before {
@@ -484,6 +484,7 @@ if ($selected_border === 'custom' && isset($_GET['custom_img'])) {
         }
 
         .border-option.custom {
+            border: 2px solid #0079a7ed;
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Arial" font-size="10">Custom</text></svg>');
             background-size: cover;
         }
@@ -495,7 +496,7 @@ if ($selected_border === 'custom' && isset($_GET['custom_img'])) {
 
         .custom-image-input {
             display: none;
-            margin-top: 10px;
+            margin-top: -7rem;
         }
 
         .mt-4 {
@@ -627,22 +628,32 @@ if ($selected_border === 'custom' && isset($_GET['custom_img'])) {
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <div class="border-selector">
-                    <h5>Select Certificate Border:</h5>
-                    <?php foreach ($border_options as $key => $name): ?>
-                        <div class="border-option <?= $key ?> <?= $selected_border === $key ? 'active' : '' ?>"
-                            data-border="<?= $key ?>" title="<?= $name ?>"
-                            onclick="selectBorder('<?= $key ?>')"></div>
-                    <?php endforeach; ?>
+                    <h5 class="text-center mb-3">Select Certificate Border Style:</h5>
+                    <div class="d-flex flex-wrap justify-content-center gap-3 mt-3">
+                        <?php foreach ($border_options as $key => $name): ?>
+                            <div class="border-option-container text-center <?= $selected_border === $key ? 'active' : '' ?>">
+                                <div class="border-option <?= $key ?> <?= $selected_border === $key ? 'active' : '' ?>"
+                                    data-border="<?= $key ?>" title="<?= $name ?>"
+                                    onclick="selectBorder('<?= $key ?>')">
+                                </div>
+                                <div class="border-name mt-2 small fw-medium <?= $selected_border === $key ? 'text-info' : 'text-muted' ?>">
+                                    <?= $name ?>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
 
                     <div id="customImageInput" class="custom-image-input <?= $selected_border === 'custom' ? 'd-block' : 'd-none' ?>">
-                        <div class="input-group mt-3">
-                                <input type="text" id="customImageUrl" class="form-control" placeholder="Please enter image URL that is a portrait with 1970x1400px aspect ratio"
+                        <div class="input-group mt-4">
+                            <span class="input-group-text bg-light"><i class="bi bi-link-45deg"></i></span>
+                            <input type="text" id="customImageUrl" class="form-control" placeholder="Enter image URL (recommended: 1970x1400px for best results)"
                                 value="<?= $custom_border_url ?>" onchange="updateCustomBorder(this.value)">
                             <button class="btn btn-outline-secondary" type="button" onclick="document.getElementById('customImageFile').click()">
-                                <i class="bi bi-upload"></i> Upload
+                                <i class="bi bi-upload me-1"></i> Upload
                             </button>
                             <input type="file" id="customImageFile" accept="image/*" style="display: none;" onchange="handleImageUpload(this)">
                         </div>
+                        <div class="form-text">For best results, use a border image with a 1970x1400px aspect ratio</div>
                     </div>
                 </div>
             </div>
@@ -774,11 +785,16 @@ if ($selected_border === 'custom' && isset($_GET['custom_img'])) {
                         <div class="row justify-content-center mt-4">
                             <div class="col-md-8 text-center">
                                 <div class="verification-info">
+                                    <!--
+                                    <div class="mb-2">Verify this certificate at: <?= $verification_url ?></div>
+                                    <div class="mb-2">Certificate ID: <?= $response['checksum'] ?></div>
+                                    -->
                                     <img src="<?= $qr_code_data ?>" alt="QR Code" width="120" class="mt-2">
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="verification-info"><small>Certificate ID: <?= $response['checksum'] ?></small></div>
                 </div>
 
                 <!-- Action Buttons -->

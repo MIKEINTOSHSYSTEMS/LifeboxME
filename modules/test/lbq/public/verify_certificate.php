@@ -22,63 +22,11 @@ $stmt->execute([':code' => $verification_code]);
 $response = $stmt->fetch();
 
 if (!$response) {
-    die("Certificate not found or invalid verification code");
+die("Certificate not found or invalid verification code | This incedent will be reported!!!");
 }
 
 // Get certificate number
 $certificate_number = "LB-" . str_pad($response['id'], 6, '0', STR_PAD_LEFT);
-
-// Generate verification URL
-$verification_url = "https://" . $_SERVER['HTTP_HOST'] . "/modules/test/lbq/public/verify_certificate.php?code=" . urlencode($verification_code);
-
-// Function to generate QR code as SVG
-function generateQRCode($url, $size = 150)
-{
-    // Simple QR code implementation using SVG
-    $qrSize = 21; // Standard QR code size (version 1)
-    $moduleSize = $size / $qrSize;
-
-    // This is a simplified representation - a real QR would encode the data properly
-    // For a real implementation, you might want to use a proper PHP QR library
-    $svg = '<svg width="' . $size . '" height="' . $size . '" viewBox="0 0 ' . $size . ' ' . $size . '" xmlns="http://www.w3.org/2000/svg">';
-    $svg .= '<rect width="100%" height="100%" fill="white"/>';
-
-    // Add border
-    $svg .= '<rect x="0" y="0" width="' . $size . '" height="' . $size . '" fill="none" stroke="#ddd" stroke-width="1"/>';
-
-    // Generate a pattern that looks like a QR code
-    // In a real implementation, this would encode the actual URL
-    srand(crc32($url)); // Seed random for consistent pattern per URL
-
-    for ($i = 0; $i < $qrSize; $i++) {
-        for ($j = 0; $j < $qrSize; $j++) {
-            if (rand(0, 1) > 0.5) {
-                $x = $i * $moduleSize;
-                $y = $j * $moduleSize;
-                $svg .= '<rect x="' . $x . '" y="' . $y . '" width="' . $moduleSize . '" height="' . $moduleSize . '" fill="black"/>';
-            }
-        }
-    }
-
-    // Add positioning markers (like real QR codes have)
-    $svg .= '<rect x="0" y="0" width="' . (7 * $moduleSize) . '" height="' . (7 * $moduleSize) . '" fill="black"/>';
-    $svg .= '<rect x="' . ($moduleSize) . '" y="' . ($moduleSize) . '" width="' . (5 * $moduleSize) . '" height="' . (5 * $moduleSize) . '" fill="white"/>';
-    $svg .= '<rect x="' . (2 * $moduleSize) . '" y="' . (2 * $moduleSize) . '" width="' . (3 * $moduleSize) . '" height="' . (3 * $moduleSize) . '" fill="black"/>';
-
-    $svg .= '<rect x="' . (($qrSize - 7) * $moduleSize) . '" y="0" width="' . (7 * $moduleSize) . '" height="' . (7 * $moduleSize) . '" fill="black"/>';
-    $svg .= '<rect x="' . (($qrSize - 6) * $moduleSize) . '" y="' . ($moduleSize) . '" width="' . (5 * $moduleSize) . '" height="' . (5 * $moduleSize) . '" fill="white"/>';
-    $svg .= '<rect x="' . (($qrSize - 5) * $moduleSize) . '" y="' . (2 * $moduleSize) . '" width="' . (3 * $moduleSize) . '" height="' . (3 * $moduleSize) . '" fill="black"/>';
-
-    $svg .= '<rect x="0" y="' . (($qrSize - 7) * $moduleSize) . '" width="' . (7 * $moduleSize) . '" height="' . (7 * $moduleSize) . '" fill="black"/>';
-    $svg .= '<rect x="' . ($moduleSize) . '" y="' . (($qrSize - 6) * $moduleSize) . '" width="' . (5 * $moduleSize) . '" height="' . (5 * $moduleSize) . '" fill="white"/>';
-    $svg .= '<rect x="' . (2 * $moduleSize) . '" y="' . (($qrSize - 5) * $moduleSize) . '" width="' . (3 * $moduleSize) . '" height="' . (3 * $moduleSize) . '" fill="black"/>';
-
-    $svg .= '</svg>';
-
-    return $svg;
-}
-
-$qr_code_svg = generateQRCode($verification_url, 150);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -99,10 +47,6 @@ $qr_code_svg = generateQRCode($verification_url, 150);
         .bg-primary {
             --bs-bg-opacity: 1;
             background-color: #0079a7ed !important;
-        }
-
-        .mt-3 {
-            margin-top: 0rem !important;
         }
 
         .verification-container {
@@ -131,7 +75,7 @@ $qr_code_svg = generateQRCode($verification_url, 150);
             position: absolute;
             top: 10px;
             right: 10px;
-            background: #198754;
+            background: #0079a7ed;
             color: white;
             padding: 5px 10px;
             border-radius: 4px;
@@ -141,23 +85,6 @@ $qr_code_svg = generateQRCode($verification_url, 150);
 
         .verification-code {
             font-family: monospace;
-            background: #f8f9fa;
-            padding: 0.5rem;
-            border-radius: 0.25rem;
-            border: 1px solid #dee2e6;
-        }
-
-        .qr-code {
-            display: inline-block;
-            padding: 10px;
-            background: white;
-            border: 1px solid #dee2e6;
-            border-radius: 4px;
-        }
-
-        .verification-url {
-            word-break: break-all;
-            font-size: 0.9rem;
             background: #f8f9fa;
             padding: 0.5rem;
             border-radius: 0.25rem;
@@ -215,14 +142,10 @@ $qr_code_svg = generateQRCode($verification_url, 150);
             }
 
             .verified-badge {
-                background: #198754 !important;
+                background: #0079a7ed !important;
                 color: white !important;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
-            }
-
-            .qr-code {
-                border: 1px solid #ccc;
             }
         }
     </style>
@@ -231,7 +154,7 @@ $qr_code_svg = generateQRCode($verification_url, 150);
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="../">
+                <a class="navbar-brand" href="../public/dashboard.php">
                 <img src="../lblogo-white.svg" alt="LifeBox Logo" height="30" class="d-inline-block align-text-top me-2">
                 Test Center
             </a>
@@ -290,21 +213,7 @@ $qr_code_svg = generateQRCode($verification_url, 150);
                             <p><strong>Verification Code:</strong><br>
                                 <span class="verification-code"><?= $verification_code ?></span>
                             </p>
-
-                            <p><strong>Verification URL:</strong><br>
-                                <span class="verification-url"><?= $verification_url ?></span>
-                            </p>
                         </div>
-                        <div class="col-md-6 text-center">
-                            <p><strong>QR Code:</strong></p>
-                            <div class="qr-code">
-                                <?= $qr_code_svg ?>
-                            </div>
-                            <p class="mt-2"><small>Scan to verify this certificate</small></p>
-                        </div>
-                    </div>
-
-                    <div class="row mt-3">
                         <div class="col-md-6">
                             <p><strong>Verification Date:</strong><br>
                                 <?= date('F j, Y, g:i a') ?></p>
@@ -313,7 +222,7 @@ $qr_code_svg = generateQRCode($verification_url, 150);
 
                     <div class="alert alert-info mt-3">
                         <i class="bi bi-info-circle me-2"></i>
-                        This certificate was issued by LifeBox Test Center and can be verified at any time using the verification code or QR code above.
+                        This certificate was issued by LifeBox Test Center and can be verified at any time using the verification code above.
                     </div>
                 </div>
             </div>
