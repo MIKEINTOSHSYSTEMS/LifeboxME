@@ -1472,6 +1472,7 @@ $tdatalbapt_all_activities_view[".sqlquery"] = $queryData_lbapt_all_activities_v
 
 
 
-$tdatalbapt_all_activities_view[".hasEvents"] = false;
+include_once(getabspath("include/lbapt_all_activities_view_events.php"));
+$tdatalbapt_all_activities_view[".hasEvents"] = true;
 
 ?>

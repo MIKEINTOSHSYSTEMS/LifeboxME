@@ -249,9 +249,11 @@ $erdData = generateErdData($schema);
     <!--<link rel="stylesheet" href="../assets/css/dbdb.css">-->
 
     <!-- Vis.js for ER Diagram -->
-    <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/10.0.1/standalone/umd/vis-network.min.js"></script>
+    <!--<script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>-->
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/vis-network.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/10.0.1/dist/dist/vis-network.min.css" rel="stylesheet">
+    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/vis-network.min.css" rel="stylesheet">-->
 
     <!-- jsPDF for PDF Export -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>

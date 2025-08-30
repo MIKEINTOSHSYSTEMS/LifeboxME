@@ -679,7 +679,8 @@ $tdatalbapt_programs[".hideMobileList"] = array();
 		$edata["LCType"] = 0;
 
 	
-		
+			$edata["LookupUnique"] = true;
+
 	$edata["LinkField"] = "key_objective";
 	$edata["LinkFieldType"] = 0;
 	$edata["DisplayField"] = "key_objective";
@@ -856,7 +857,8 @@ $tdatalbapt_programs[".hideMobileList"] = array();
 		$edata["LCType"] = 0;
 
 	
-		
+			$edata["LookupUnique"] = true;
+
 	$edata["LinkField"] = "activity";
 	$edata["LinkFieldType"] = 0;
 	$edata["DisplayField"] = "activity";
@@ -1031,7 +1033,8 @@ $tdatalbapt_programs[".hideMobileList"] = array();
 		$edata["LCType"] = 0;
 
 	
-		
+			$edata["LookupUnique"] = true;
+
 	$edata["LinkField"] = "kpi";
 	$edata["LinkFieldType"] = 0;
 	$edata["DisplayField"] = "kpi";
