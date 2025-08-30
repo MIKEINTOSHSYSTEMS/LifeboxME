@@ -25,7 +25,7 @@ if(mlang_getcurrentlang()=="English")
 	$fieldToolTipslbapt_annual_plan_tracker["English"] = array();
 	$placeHolderslbapt_annual_plan_tracker["English"] = array();
 	$pageTitleslbapt_annual_plan_tracker["English"] = array();
-	$fieldLabelslbapt_annual_plan_tracker["English"]["tracker_id"] = "Tracker ID";
+	$fieldLabelslbapt_annual_plan_tracker["English"]["tracker_id"] = "T-ID";
 	$fieldToolTipslbapt_annual_plan_tracker["English"]["tracker_id"] = "";
 	$placeHolderslbapt_annual_plan_tracker["English"]["tracker_id"] = "";
 	$fieldLabelslbapt_annual_plan_tracker["English"]["strategic_area_id"] = "Strategic Area";
@@ -43,28 +43,28 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelslbapt_annual_plan_tracker["English"]["status_id"] = "Status";
 	$fieldToolTipslbapt_annual_plan_tracker["English"]["status_id"] = "";
 	$placeHolderslbapt_annual_plan_tracker["English"]["status_id"] = "";
-	$fieldLabelslbapt_annual_plan_tracker["English"]["planned_timeframe_q1"] = "Planned Timeframe Q1";
+	$fieldLabelslbapt_annual_plan_tracker["English"]["planned_timeframe_q1"] = "PT-Q1";
 	$fieldToolTipslbapt_annual_plan_tracker["English"]["planned_timeframe_q1"] = "";
 	$placeHolderslbapt_annual_plan_tracker["English"]["planned_timeframe_q1"] = "";
-	$fieldLabelslbapt_annual_plan_tracker["English"]["planned_timeframe_q2"] = "Planned Timeframe Q2";
+	$fieldLabelslbapt_annual_plan_tracker["English"]["planned_timeframe_q2"] = "PT-Q2";
 	$fieldToolTipslbapt_annual_plan_tracker["English"]["planned_timeframe_q2"] = "";
 	$placeHolderslbapt_annual_plan_tracker["English"]["planned_timeframe_q2"] = "";
-	$fieldLabelslbapt_annual_plan_tracker["English"]["planned_timeframe_q3"] = "Planned Timeframe Q3";
+	$fieldLabelslbapt_annual_plan_tracker["English"]["planned_timeframe_q3"] = "PT-Q3";
 	$fieldToolTipslbapt_annual_plan_tracker["English"]["planned_timeframe_q3"] = "";
 	$placeHolderslbapt_annual_plan_tracker["English"]["planned_timeframe_q3"] = "";
-	$fieldLabelslbapt_annual_plan_tracker["English"]["planned_timeframe_q4"] = "Planned Timeframe Q4";
+	$fieldLabelslbapt_annual_plan_tracker["English"]["planned_timeframe_q4"] = "PT-Q4";
 	$fieldToolTipslbapt_annual_plan_tracker["English"]["planned_timeframe_q4"] = "";
 	$placeHolderslbapt_annual_plan_tracker["English"]["planned_timeframe_q4"] = "";
-	$fieldLabelslbapt_annual_plan_tracker["English"]["achievement_q1"] = "Achievement Q1";
+	$fieldLabelslbapt_annual_plan_tracker["English"]["achievement_q1"] = "A-Q1";
 	$fieldToolTipslbapt_annual_plan_tracker["English"]["achievement_q1"] = "";
 	$placeHolderslbapt_annual_plan_tracker["English"]["achievement_q1"] = "";
-	$fieldLabelslbapt_annual_plan_tracker["English"]["achievement_q2"] = "Achievement Q2";
+	$fieldLabelslbapt_annual_plan_tracker["English"]["achievement_q2"] = "A-Q2";
 	$fieldToolTipslbapt_annual_plan_tracker["English"]["achievement_q2"] = "";
 	$placeHolderslbapt_annual_plan_tracker["English"]["achievement_q2"] = "";
-	$fieldLabelslbapt_annual_plan_tracker["English"]["achievement_q3"] = "Achievement Q3";
+	$fieldLabelslbapt_annual_plan_tracker["English"]["achievement_q3"] = "A-Q3";
 	$fieldToolTipslbapt_annual_plan_tracker["English"]["achievement_q3"] = "";
 	$placeHolderslbapt_annual_plan_tracker["English"]["achievement_q3"] = "";
-	$fieldLabelslbapt_annual_plan_tracker["English"]["achievement_q4"] = "Achievement Q4";
+	$fieldLabelslbapt_annual_plan_tracker["English"]["achievement_q4"] = "A-Q4";
 	$fieldToolTipslbapt_annual_plan_tracker["English"]["achievement_q4"] = "";
 	$placeHolderslbapt_annual_plan_tracker["English"]["achievement_q4"] = "";
 	$fieldLabelslbapt_annual_plan_tracker["English"]["notes"] = "Notes";
@@ -574,7 +574,7 @@ $tdatalbapt_annual_plan_tracker[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "Equals";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
@@ -582,9 +582,10 @@ $tdatalbapt_annual_plan_tracker[".hideMobileList"] = array();
 
 
 //Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
+	$fdata["filterTotals"] = 1;
+		$fdata["filterMultiSelect"] = 1;
+		$fdata["filterTotalFields"] = "tracker_id";
+		$fdata["filterFormat"] = "Values list";
 		$fdata["showCollapsed"] = false;
 
 		$fdata["sortValueType"] = 0;
@@ -1161,7 +1162,7 @@ $tdatalbapt_annual_plan_tracker[".hideMobileList"] = array();
 
 
 // the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
+		$fdata["defaultSearchOption"] = "Equals";
 
 			// the default search options list
 				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
@@ -1169,9 +1170,10 @@ $tdatalbapt_annual_plan_tracker[".hideMobileList"] = array();
 
 
 //Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
+	$fdata["filterTotals"] = 1;
+		$fdata["filterMultiSelect"] = 1;
+		$fdata["filterTotalFields"] = "tracker_id";
+		$fdata["filterFormat"] = "Values list";
 		$fdata["showCollapsed"] = false;
 
 		$fdata["sortValueType"] = 0;
@@ -1337,13 +1339,15 @@ $tdatalbapt_annual_plan_tracker[".hideMobileList"] = array();
 
 
 //Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
+	$fdata["filterTotals"] = 1;
+		$fdata["filterMultiSelect"] = 1;
+		$fdata["filterTotalFields"] = "tracker_id";
+		$fdata["filterFormat"] = "Values list";
 		$fdata["showCollapsed"] = false;
 
 		$fdata["sortValueType"] = 0;
-		$fdata["numberOfVisibleItems"] = 10;
+		$fdata["descendingOrder"] = true;
+	$fdata["numberOfVisibleItems"] = 10;
 
 		$fdata["filterBy"] = 0;
 
@@ -3281,6 +3285,7 @@ $tdatalbapt_annual_plan_tracker[".sqlquery"] = $queryData_lbapt_annual_plan_trac
 
 
 
-$tdatalbapt_annual_plan_tracker[".hasEvents"] = false;
+include_once(getabspath("include/lbapt_annual_plan_tracker_events.php"));
+$tdatalbapt_annual_plan_tracker[".hasEvents"] = true;
 
 ?>

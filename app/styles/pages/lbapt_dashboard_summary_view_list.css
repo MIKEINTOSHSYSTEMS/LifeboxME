@@ -1,14 +1,26 @@
+[data-cellid="grid_cell_field"][data-page="lbapt_dashboard_summary_view_list"][data-cellid="grid_cell_field"][data-page="lbapt_dashboard_summary_view_list"][data-cellid="grid_cell_field"][data-page="lbapt_dashboard_summary_view_list"] {
+  background-color: #a7eeff;
+}
 [data-cellid="grid_footcell_field"][data-page="lbapt_dashboard_summary_view_list"][data-cellid="grid_footcell_field"][data-page="lbapt_dashboard_summary_view_list"][data-cellid="grid_footcell_field"][data-page="lbapt_dashboard_summary_view_list"] {
   white-space: nowrap;
 }
 [data-cellid="grid_footcell_field1"][data-page="lbapt_dashboard_summary_view_list"][data-cellid="grid_footcell_field1"][data-page="lbapt_dashboard_summary_view_list"][data-cellid="grid_footcell_field1"][data-page="lbapt_dashboard_summary_view_list"] {
   white-space: nowrap;
 }
+[data-cellid="grid_cell_field2"][data-page="lbapt_dashboard_summary_view_list"][data-cellid="grid_cell_field2"][data-page="lbapt_dashboard_summary_view_list"][data-cellid="grid_cell_field2"][data-page="lbapt_dashboard_summary_view_list"] {
+  background-color: #00ff77;
+}
 [data-cellid="grid_footcell_field2"][data-page="lbapt_dashboard_summary_view_list"][data-cellid="grid_footcell_field2"][data-page="lbapt_dashboard_summary_view_list"][data-cellid="grid_footcell_field2"][data-page="lbapt_dashboard_summary_view_list"] {
   white-space: nowrap;
 }
+[data-cellid="grid_cell_field3"][data-page="lbapt_dashboard_summary_view_list"][data-cellid="grid_cell_field3"][data-page="lbapt_dashboard_summary_view_list"][data-cellid="grid_cell_field3"][data-page="lbapt_dashboard_summary_view_list"] {
+  background-color: #feff77;
+}
 [data-cellid="grid_footcell_field3"][data-page="lbapt_dashboard_summary_view_list"][data-cellid="grid_footcell_field3"][data-page="lbapt_dashboard_summary_view_list"][data-cellid="grid_footcell_field3"][data-page="lbapt_dashboard_summary_view_list"] {
   white-space: nowrap;
+}
+[data-cellid="grid_cell_field4"][data-page="lbapt_dashboard_summary_view_list"][data-cellid="grid_cell_field4"][data-page="lbapt_dashboard_summary_view_list"][data-cellid="grid_cell_field4"][data-page="lbapt_dashboard_summary_view_list"] {
+  background-color: #ff0077;
 }
 [data-cellid="grid_footcell_field4"][data-page="lbapt_dashboard_summary_view_list"][data-cellid="grid_footcell_field4"][data-page="lbapt_dashboard_summary_view_list"][data-cellid="grid_footcell_field4"][data-page="lbapt_dashboard_summary_view_list"] {
   white-space: nowrap;
@@ -18,6 +30,25 @@
 }
 [data-cellid="grid_headcell_checkbox"][data-page="lbapt_dashboard_summary_view_list"][data-cellid="grid_headcell_checkbox"][data-page="lbapt_dashboard_summary_view_list"][data-cellid="grid_headcell_checkbox"][data-page="lbapt_dashboard_summary_view_list"] {
   width: 30px;
+}
+[data-page="lbapt_dashboard_summary_view_list"][data-itemid="simple_grid_field"] {
+  font-weight: bold;
+}
+[data-page="lbapt_dashboard_summary_view_list"][data-itemid="simple_grid_field2"] {
+  font-weight: bold;
+}
+[data-page="lbapt_dashboard_summary_view_list"][data-itemid="simple_grid_field3"] {
+  font-weight: bold;
+}
+[data-page="lbapt_dashboard_summary_view_list"][data-itemid="simple_grid_field4"] {
+  font-weight: bold;
+}
+[data-page="lbapt_dashboard_summary_view_list"][data-itemid="simple_grid_field5"] {
+  font-style: italic;
+  font-weight: bold;
+}
+[data-page="lbapt_dashboard_summary_view_list"][data-itemid="text"] {
+  font-weight: bold;
 }
 [data-page="lbapt_dashboard_summary_view_list"][data-itemid="page_image_ash8f23hr"] {
   width: 400px;

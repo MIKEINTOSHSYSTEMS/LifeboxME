@@ -181,6 +181,7 @@ $tdatalbapt_dashboard_summary_view[".geocodingEnabled"] = false;
 
 
 
+$tdatalbapt_dashboard_summary_view[".isDisplayLoading"] = true;
 
 
 
@@ -1024,7 +1025,7 @@ $tdatalbapt_dashboard_summary_view[".hideMobileList"] = array();
 	
 	
 	
-			$edata["HTML5InuptType"] = "text";
+			$edata["HTML5InuptType"] = "number";
 
 		$edata["EditParams"] = "";
 		
@@ -1064,7 +1065,8 @@ $tdatalbapt_dashboard_summary_view[".hideMobileList"] = array();
 //Filters settings
 	$fdata["filterTotals"] = 0;
 		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
+		$fdata["filterTotalFields"] = "total_activities";
+		$fdata["filterFormat"] = "Values list";
 		$fdata["showCollapsed"] = false;
 
 		$fdata["sortValueType"] = 0;

@@ -214,6 +214,39 @@ pdfDocument = {
 				
 				[
 																{
+	cellId: 'c4',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+					colSpan: 2,
+		
+			
+			
+	
+			"text": [
+		
+				
+			{"text":"","hidden":"{$item_hide_search_panel}"},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+																		{ 
+				cellId: 'c4',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+							],
+						[
+																{
 	cellId: 'c1',
 	col:0,
 	row:0,
@@ -272,6 +305,103 @@ pdfDocument = {
       },
 
 											],
+						[
+																{
+	cellId: 'c',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+					colSpan: 2,
+		
+			
+			
+	
+			"text": [
+		
+				
+			{"text":"","hidden":"{$item_hide_filter_panel}"},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+																		{ 
+				cellId: 'c',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+							],
+						[
+																{
+	cellId: 'c3',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+					colSpan: 2,
+		
+			
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+																		{ 
+				cellId: 'c3',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+							],
+						[
+																{
+	cellId: 'c5',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+					colSpan: 2,
+		
+			
+			
+	
+			"text": [
+		
+				
+			{"text":"<br>\n</br>\nQ (Quarter)\nA (Achievement)\nPT (Planned Timeframe)\n","hidden":"{$item_hide_text}","isHtml":true},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+																		{ 
+				cellId: 'c5',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+							],
 		
 		]
 	}
@@ -393,7 +523,7 @@ pdfDocument = {
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$strategic_area_id_align}',
+              "alignment": 'center',
      
       
       },
@@ -509,7 +639,7 @@ pdfDocument = {
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$status_id_align}',
+              "alignment": 'center',
      
       
       },
@@ -538,7 +668,7 @@ pdfDocument = {
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$fyear_align}',
+              "alignment": 'center',
      
       
       },
@@ -986,10 +1116,11 @@ pdfDocument = {
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$strategic_area_id_align}',
+      fillColor: '#a7eeff',        "alignment": 'center',
      
       
-      },
+         bold: true,
+   },
 
 {END cellblock_grid_cell_field1}
 																							{BEGIN cellblock_grid_cell_field2}
@@ -1098,14 +1229,15 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":{$status_id_pdfvalue},"hidden":"{$item_hide_simple_grid_field5}"},
+			{"text":{$status_id_pdfvalue},"hidden":"{$item_hide_simple_grid_field5}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$status_id_align}',
+              "alignment": 'center',
      
       
-      },
+         bold: true,
+   },
 
 {END cellblock_grid_cell_field5}
 																							{BEGIN cellblock_grid_cell_field6}
@@ -1131,7 +1263,7 @@ pdfDocument = {
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$fyear_align}',
+              "alignment": 'center',
      
       
       },

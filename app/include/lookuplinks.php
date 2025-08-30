@@ -1202,6 +1202,20 @@ function InitLookupLinks()
 			$lookupTableLinks["public.lbapt_status"]["lbapt_sample_workflow.status_id"] = array();
 		}
 		$lookupTableLinks["public.lbapt_status"]["lbapt_sample_workflow.status_id"]["edit"] = array("table" => "public.lbapt_sample_workflow", "field" => "status_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"] ) ) {
+			$lookupTableLinks["public.lbapt_strategic_areas"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_all_activities_view.strategic_area"] )) {
+			$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_all_activities_view.strategic_area"] = array();
+		}
+		$lookupTableLinks["public.lbapt_strategic_areas"]["lbapt_all_activities_view.strategic_area"]["edit"] = array("table" => "public.lbapt_all_activities_view", "field" => "strategic_area", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbapt_status"] ) ) {
+			$lookupTableLinks["public.lbapt_status"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbapt_status"]["lbapt_all_activities_view.status"] )) {
+			$lookupTableLinks["public.lbapt_status"]["lbapt_all_activities_view.status"] = array();
+		}
+		$lookupTableLinks["public.lbapt_status"]["lbapt_all_activities_view.status"]["edit"] = array("table" => "public.lbapt_all_activities_view", "field" => "status", "page" => "edit");
 		if( !isset( $lookupTableLinks["public.lbapt_status"] ) ) {
 			$lookupTableLinks["public.lbapt_status"] = array();
 		}
