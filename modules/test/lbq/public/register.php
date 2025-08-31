@@ -65,6 +65,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 if (empty($formData['phone'])) {
                     $errors[] = "Phone number is required.";
+                } else {
+                    // Check if phone already exists
+                    $stmt = $pdo->prepare("SELECT COUNT(*) FROM training_participants WHERE phone = :phone");
+                    $stmt->execute([':phone' => $formData['phone']]);
+                    if ($stmt->fetchColumn() > 0) {
+                        $errors[] = "This phone number is already registered.";
+                    }
                 }
                 break;
 
@@ -526,15 +533,50 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
             display: inline-block;
         }
 
+        /* Enhanced Select2 Styling */
         .select2-container--default .select2-selection--single {
             height: auto;
             padding: 0.75rem 1rem;
             border: 2px solid #e9ecef;
             border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+            background-color: #fff;
+        }
+
+        .select2-container--default.select2-container--focus .select2-selection--single {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
         }
 
         .select2-container--default .select2-selection--single .select2-selection__arrow {
             height: 100%;
+            right: 10px;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #495057;
+            line-height: 1.5;
+            padding-left: 0;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__placeholder {
+            color: #6c757d;
+        }
+
+        .select2-container--default .select2-dropdown {
+            border: 2px solid var(--secondary-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .select2-container--default .select2-results__option--highlighted[aria-selected] {
+            background-color: var(--secondary-color);
+        }
+
+        /* Style for required fields that are empty */
+        .select2-container--required .select2-selection--single {
+            border-color: #e74c3c;
+            background-color: #fff6f6;
         }
 
         .alert {
@@ -676,6 +718,7 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
                         <label for="email" class="form-label">Email Address *</label>
                         <input type="email" class="form-control" id="email" name="email"
                             value="<?= htmlspecialchars($formData['email'], ENT_QUOTES, 'UTF-8') ?>" required>
+                        <div class="invalid-feedback" id="email-feedback"></div>
                     </div>
                 </div>
 
@@ -684,6 +727,7 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
                         <label for="phone" class="form-label">Phone Number *</label>
                         <input type="tel" class="form-control" id="phone" name="phone" required>
                         <input type="hidden" id="full_phone" name="full_phone">
+                        <div class="invalid-feedback" id="phone-feedback"></div>
                         <small class="form-text text-muted">Enter your phone number with country code</small>
                     </div>
                 </div>
@@ -942,10 +986,32 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
 
     <script>
         $(document).ready(function() {
-            // Initialize Select2
+            // Initialize Select2 with custom styling
             $('.select2').select2({
                 theme: 'bootstrap-5',
-                width: '100%'
+                width: '100%',
+                placeholder: "Select an option",
+                allowClear: false
+            }).on('select2:open', function() {
+                // Add custom class when dropdown is open
+                $(this).data('select2').$container.addClass('select2-container--open');
+            }).on('select2:close', function() {
+                // Remove custom class when dropdown is closed
+                $(this).data('select2').$container.removeClass('select2-container--open');
+
+                // Add required class if empty
+                if (!$(this).val() && $(this).prop('required')) {
+                    $(this).data('select2').$container.addClass('select2-container--required');
+                } else {
+                    $(this).data('select2').$container.removeClass('select2-container--required');
+                }
+            });
+
+            // Initialize required state for Select2 fields
+            $('.select2[required]').each(function() {
+                if (!$(this).val()) {
+                    $(this).data('select2').$container.addClass('select2-container--required');
+                }
             });
 
             // Initialize International Telephone Input
@@ -1124,6 +1190,7 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
 
                 // Reset error states
                 $('#first_name, #last_name, #email, #phone').removeClass('is-invalid');
+                $('#email-feedback, #phone-feedback').text('');
 
                 // Validate first name
                 if (!$('#first_name').val().trim()) {
@@ -1143,19 +1210,41 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
                 const email = $('#email').val();
                 if (!email) {
                     $('#email').addClass('is-invalid');
+                    $('#email-feedback').text('Email is required');
                     errors.push('Email is required');
                     isValid = false;
                 } else if (!isValidEmail(email)) {
                     $('#email').addClass('is-invalid');
+                    $('#email-feedback').text('Please enter a valid email address');
                     errors.push('Please enter a valid email address');
                     isValid = false;
+                } else {
+                    // Check if email exists via AJAX
+                    const emailValid = validateEmailUniqueness(email);
+                    if (!emailValid) {
+                        $('#email').addClass('is-invalid');
+                        $('#email-feedback').text('This email is already registered');
+                        errors.push('This email is already registered');
+                        isValid = false;
+                    }
                 }
 
                 // Validate phone
                 if (!phoneInput.isValidNumber()) {
                     $('#phone').addClass('is-invalid');
+                    $('#phone-feedback').text('Please enter a valid phone number');
                     errors.push('Please enter a valid phone number');
                     isValid = false;
+                } else {
+                    // Check if phone exists via AJAX
+                    const phoneNumber = phoneInput.getNumber();
+                    const phoneValid = validatePhoneUniqueness(phoneNumber);
+                    if (!phoneValid) {
+                        $('#phone').addClass('is-invalid');
+                        $('#phone-feedback').text('This phone number is already registered');
+                        errors.push('This phone number is already registered');
+                        isValid = false;
+                    }
                 }
 
                 // Show errors if any
@@ -1176,24 +1265,25 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
 
                 // Reset error states
                 $('#country_id, #facility_id, #role_id').removeClass('is-invalid');
+                $('.select2-container--required').removeClass('select2-container--required');
 
                 // Validate country
                 if (!$('#country_id').val()) {
-                    $('#country_id').addClass('is-invalid');
+                    $('#country_id').data('select2').$container.addClass('select2-container--required');
                     errors.push('Country is required');
                     isValid = false;
                 }
 
                 // Validate facility
                 if (!$('#facility_id').val()) {
-                    $('#facility_id').addClass('is-invalid');
+                    $('#facility_id').data('select2').$container.addClass('select2-container--required');
                     errors.push('Facility is required');
                     isValid = false;
                 }
 
                 // Validate role
                 if (!$('#role_id').val()) {
-                    $('#role_id').addClass('is-invalid');
+                    $('#role_id').data('select2').$container.addClass('select2-container--required');
                     errors.push('Role is required');
                     isValid = false;
                 }
@@ -1206,6 +1296,58 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
                         icon: 'error'
                     });
                 }
+
+                return isValid;
+            }
+
+            // AJAX function to validate email uniqueness
+            function validateEmailUniqueness(email) {
+                let isValid = true;
+
+                // This would be an AJAX call to your server in a real implementation
+                // For now, we'll simulate a synchronous check
+                $.ajax({
+                    url: 'check_email.php',
+                    method: 'POST',
+                    async: false, // Make it synchronous for validation
+                    data: {
+                        email: email,
+                        csrf_token: "<?= $_SESSION['csrf_token'] ?>"
+                    },
+                    success: function(response) {
+                        isValid = response.available;
+                    },
+                    error: function() {
+                        // If there's an error, we'll assume it's valid to not block the user
+                        isValid = true;
+                    }
+                });
+
+                return isValid;
+            }
+
+            // AJAX function to validate phone uniqueness
+            function validatePhoneUniqueness(phone) {
+                let isValid = true;
+
+                // This would be an AJAX call to your server in a real implementation
+                // For now, we'll simulate a synchronous check
+                $.ajax({
+                    url: 'check_phone.php',
+                    method: 'POST',
+                    async: false, // Make it synchronous for validation
+                    data: {
+                        phone: phone,
+                        csrf_token: "<?= $_SESSION['csrf_token'] ?>"
+                    },
+                    success: function(response) {
+                        isValid = response.available;
+                    },
+                    error: function() {
+                        // If there's an error, we'll assume it's valid to not block the user
+                        isValid = true;
+                    }
+                });
 
                 return isValid;
             }
