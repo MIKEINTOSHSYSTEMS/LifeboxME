@@ -1,0 +1,53 @@
+/* Custom styles for Lifebox Registration */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --light-bg: #f8f9fa;
+    --dark-text: #2c3e50;
+    --light-text: #ecf0f1;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.registration-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.registration-header img {
+    height: 70px;
+    margin-bottom: 1rem;
+}
+
+.registration-header h2 {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.form-section-title {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.review-card {
+    border: 2px solid #e9ecef;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    background: var(--light-bg);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .registration-container {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    .phone-input-group {
+        flex-direction: column;
+    }
+}

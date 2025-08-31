@@ -4,6 +4,8 @@ settings.xml
 *.mmdb
 *.zip
 *.sql
+*.exe
+*.tar.gz
 /schema
 /analytics/js/
 /analytics/config/config.ini.php
@@ -46,6 +48,7 @@ api/dev/docker/
 modules/srcs/
 modules/quiz/
 modules/test/exam
+modules/test/lbq/public/regdevtests/
 #modules/forms
 .env
 **/note.txt

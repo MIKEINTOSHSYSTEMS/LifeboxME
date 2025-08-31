@@ -178,11 +178,11 @@ class Quiz
         $stmt->execute([':pos' => $new_position, ':t' => $test_id, ':q' => $quiz_question_id]);
     }
 
-    public function createResponse($participation_id, $test_id, $userid = null, $raw_answers_json)
+    public function createResponse($participation_id, $test_id, $raw_answers_json, $userid = null)
     {
         $checksum = hash('sha256', $participation_id . '|' . $test_id . '|' . microtime(true));
         $stmt = $this->pdo->prepare("INSERT INTO lbquiz_responses (participation_id, test_id, userid, raw_answers, checksum) 
-                                    VALUES (:pid, :tid, :uid, :raw, :ck) RETURNING id");
+                                VALUES (:pid, :tid, :uid, :raw, :ck) RETURNING id");
         $stmt->execute([
             ':pid' => $participation_id,
             ':tid' => $test_id,
@@ -193,6 +193,7 @@ class Quiz
         $resp = $stmt->fetch();
         return $resp ? $resp['id'] : null;
     }
+
 
     public function insertResponseDetails($response_id, $details)
     {
