@@ -7,6 +7,10 @@
 [data-page="_global_userinfo"][data-itemid="user_fields_title"] {
   font-size: 24px;
 }
+[data-page="_global_userinfo"][data-itemid="section"] > .panel-heading {
+  background-color: #00b3c7;
+  background-image: none;
+}
 [data-page="_global_userinfo"][data-itemid="page_image_ash8f23hr"] {
   width: 400px;
 }

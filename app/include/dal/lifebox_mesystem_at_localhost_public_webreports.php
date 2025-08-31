@@ -9,7 +9,6 @@ $dalTablewebreports["rpt_content"] = array("type"=>201,"varname"=>"rpt_content",
 $dalTablewebreports["rpt_owner"] = array("type"=>200,"varname"=>"rpt_owner", "name" => "rpt_owner", "autoInc" => "0");
 $dalTablewebreports["rpt_status"] = array("type"=>200,"varname"=>"rpt_status", "name" => "rpt_status", "autoInc" => "0");
 $dalTablewebreports["rpt_type"] = array("type"=>200,"varname"=>"rpt_type", "name" => "rpt_type", "autoInc" => "0");
-$dalTablewebreports["rpt_id"]["key"]=true;
 
 $dal_info["lifebox_mesystem_at_localhost_public_webreports"] = &$dalTablewebreports;
 ?>

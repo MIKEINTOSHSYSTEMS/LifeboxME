@@ -301,7 +301,7 @@
 {END supertop_block}
 						{$locking}
 				</div>
-				<div class="r-body" data-resize-top="topbar" data-body-width="compact">
+				<div class="r-body" data-resize-top="topbar" data-body-width="standard">
 					{$header}
 					<div class="r-top">
 									{BEGIN top_block}
@@ -913,14 +913,13 @@ Profile</span>
 								</tr>
 	 
 	 
-		
-						<tr>
-						
+														<tr {$row_grid_7} >
+										
 
 {BEGIN cellblock_grid_fields13}
 <td
 	{$cell_grid_fields13}
-	class=" r-ori-vert"
+	class="r-align-center r-ori-vert"
 	
 			data-single
 			
@@ -929,12 +928,130 @@ Profile</span>
 		
 >
 	<div edit-form-cell class="clearfix">
-									</td>
+				<span data-itemtype="text" data-itemid="text1" {$item_text1} data-pageid="{$pageid}" data-small > 
+	<br>
+</br></span>
+	
+								</td>
 			{END cellblock_grid_fields13}
 								</tr>
 	 
 	 
-														<tr {$row_grid_8} >
+																</tbody></table>
+				 
+	<div class="panel panel-default form-section" data-itemtype="section" data-itemid="section" {$item_section} data-pageid="{$pageid}" data-page="_global_userinfo">
+		<div class="panel-heading" role="tab" {$section_section1_headattrs} 
+			data-toggle="collapse"  
+
+				href="#section1{$pageid}" aria-expanded="false" aria-controls="section1"
+
+		>
+		  <h4 class="panel-title">
+		  				<a role="button" >
+				Security & Keys			</a>
+					  </h4>
+		</div>
+		<div  class="panel-collapse collapse  {$section_section1_xtrclass}" role="tabpanel"  {$section_section1_attrs}
+
+				id="section1{$pageid}" 
+		>
+		  <div class="panel-body">
+			{BEGIN section_block}
+
+
+
+
+ 
+	 
+												<table 
+	data-body-align="left"
+	data-location="section" id="form_section_{$pageid}" data-makeup="leftbar" {$form_section} data-pageid="{$pageid}" 
+	class="r-edit-form" cellpadding="0" cellspacing="0" 
+	{$grid_hiddenattr} 
+		data-form-width="1"
+		
+		data-v-width="1"
+	>
+	<tbody>
+										<tr {$row_section_0} >
+										
+
+{BEGIN cellblock_section_c1}
+<td
+	{$cell_section_c1}
+	class=" r-ori-vert"
+	
+			data-single
+				data-fullwidth
+		
+			data-cellId="section_c1" data-pageid="{$pageid}"
+		data-v-cell="1"
+		
+>
+	<div edit-form-cell class="clearfix">
+				<span data-itemtype="text" data-itemid="text" {$item_text} data-pageid="{$pageid}" data-small > 
+	<html>
+
+<head>
+    <title>Users Profile API Key Management</title>
+</head>
+<body>
+<h6>.</h6>
+    <iframe
+        src="../api/users/profile/index.php"
+        frameborder="0"
+        width="100%"
+        height="900px"
+        allowtransparency>
+    </iframe>
+</body>
+<h6>.</h6>
+
+</html></span>
+	
+								</td>
+			{END cellblock_section_c1}
+								</tr>
+			</tbody></table>
+{END section_block}
+		  </div>
+		</div>
+	</div>
+	
+				 
+	 
+		
+					<table 
+	data-body-align="left"
+	data-location="grid" id="form_grid_{$pageid}" data-makeup="leftbar" {$form_grid} data-pageid="{$pageid}" 
+	class="r-edit-form" cellpadding="0" cellspacing="0" 
+	{$grid_hiddenattr} 
+		data-form-width="4"
+		
+		data-v-width="8"
+	>
+	<tbody>
+						<tr>
+						
+
+{BEGIN cellblock_grid_fields18}
+<td
+	{$cell_grid_fields18}
+	class=" r-ori-vert"
+	
+			data-single
+			
+	ocolspan="4"		data-cellId="grid_fields18" data-pageid="{$pageid}"
+		data-v-cell="8"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_fields18}
+								</tr>
+	 
+	 
+														<tr {$row_grid_10} >
 										
 
 {BEGIN cellblock_grid_fields15}
@@ -977,14 +1094,13 @@ Profile</span>
 								</tr>
 	 
 	 
-		
-						<tr>
-						
+														<tr {$row_grid_11} >
+										
 
 {BEGIN cellblock_grid_fields16}
 <td
 	{$cell_grid_fields16}
-	class=" r-ori-vert"
+	class="r-align-center r-ori-vert"
 	
 			data-single
 			
@@ -993,18 +1109,43 @@ Profile</span>
 		
 >
 	<div edit-form-cell class="clearfix">
-									</td>
+				<span data-itemtype="text" data-itemid="text2" {$item_text2} data-pageid="{$pageid}" data-small > 
+	<br>
+</br></span>
+	
+								</td>
 			{END cellblock_grid_fields16}
 								</tr>
 	 
 	 
-														<tr {$row_grid_10} >
+		
+						<tr>
+						
+
+{BEGIN cellblock_grid_fields17}
+<td
+	{$cell_grid_fields17}
+	class="r-align-center r-ori-vert"
+	
+			data-single
+			
+	ocolspan="4"		data-cellId="grid_fields17" data-pageid="{$pageid}"
+		data-v-cell="8"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_fields17}
+								</tr>
+	 
+	 
+														<tr {$row_grid_13} >
 										
 
 {BEGIN cellblock_grid_fields}
 <td
 	{$cell_grid_fields}
-	class=" r-ori-vert"
+	class="r-align-right r-ori-vert"
 	
 			data-single
 			
@@ -1015,7 +1156,7 @@ Profile</span>
 	<div edit-form-cell class="clearfix">
 				{BEGIN changepwd_link}
 <span data-itemtype="changepassword_link" data-itemid="changepassword_link" {$item_changepassword_link} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="" class="btn btn-default   
+	<a type="button" title="" class="btn btn-warning   
 	" href="changepwd.php" {$changepwdlink_attrs} id="changePasswordButton{$id}" >
 							Change password			</a>
 </span>
@@ -1026,7 +1167,7 @@ Profile</span>
 								</tr>
 	 
 	 
-														<tr {$row_grid_11} >
+														<tr {$row_grid_14} >
 										
 
 {BEGIN cellblock_grid_buttons}

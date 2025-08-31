@@ -3150,34 +3150,8 @@
 
 	$menuNodes[] = $menuNode;
 	$menuNode = array();
-	$menuNode["id"] = "128";
-	$menuNode["name"] = "Lifebox Visitors Analytics";
-	$menuNode["href"] = "mypage.htm";
-	$menuNode["type"] = "Leaf";
-	$menuNode["table"] = "Dashboard";
-	$menuNode["style"] = "";
-	$menuNode["params"] = "";
-	$menuNode["parent"] = "61";
-	$menuNode["nameType"] = "Text";
-	$menuNode["linkType"] = "Internal";
-	$menuNode["pageType"] = strtolower("Dashboard");//
-	$menuNode["pageId"] = "lifebox_visitors_analytics";
-	$menuNode["openType"] = "None";
-
-	$menuNode["icon"] = "fa-line-chart";
-	$menuNode["iconType"] = "3";
-	$menuNode["iconShow"] = "1";
-
-		$menuNode["color"] = "";
-
-	$menuNode["title"] = "Lifebox Visitors Analytics";
-
-
-
-	$menuNodes[] = $menuNode;
-	$menuNode = array();
 	$menuNode["id"] = "59";
-	$menuNode["name"] = "";
+	$menuNode["name"] = "Users Audit";
 	$menuNode["href"] = "mypage.htm";
 	$menuNode["type"] = "Leaf";
 	$menuNode["table"] = "public.lifeboxme__audit";
@@ -3196,33 +3170,33 @@
 
 		$menuNode["color"] = "";
 
-	$menuNode["title"] = "Lifeboxme  Audit";
+	$menuNode["title"] = "Users Audit";
 
 
 
 	$menuNodes[] = $menuNode;
 	$menuNode = array();
-	$menuNode["id"] = "60";
-	$menuNode["name"] = "";
+	$menuNode["id"] = "128";
+	$menuNode["name"] = "Visitors Analytics";
 	$menuNode["href"] = "mypage.htm";
 	$menuNode["type"] = "Leaf";
-	$menuNode["table"] = "public.lifeboxme__locking";
+	$menuNode["table"] = "Dashboard";
 	$menuNode["style"] = "";
 	$menuNode["params"] = "";
 	$menuNode["parent"] = "61";
 	$menuNode["nameType"] = "Text";
 	$menuNode["linkType"] = "Internal";
-	$menuNode["pageType"] = strtolower("List");//
-	$menuNode["pageId"] = "";
+	$menuNode["pageType"] = strtolower("Dashboard");//
+	$menuNode["pageId"] = "lifebox_visitors_analytics";
 	$menuNode["openType"] = "None";
 
-	$menuNode["icon"] = "fa-unlock-alt";
+	$menuNode["icon"] = "fa-line-chart";
 	$menuNode["iconType"] = "3";
 	$menuNode["iconShow"] = "1";
 
 		$menuNode["color"] = "";
 
-	$menuNode["title"] = "Lifeboxme  Locking";
+	$menuNode["title"] = "Visitors Analytics";
 
 
 
@@ -3249,6 +3223,32 @@
 		$menuNode["color"] = "";
 
 	$menuNode["title"] = "SMTP Settings";
+
+
+
+	$menuNodes[] = $menuNode;
+	$menuNode = array();
+	$menuNode["id"] = "60";
+	$menuNode["name"] = "Table & Session  Locking";
+	$menuNode["href"] = "mypage.htm";
+	$menuNode["type"] = "Leaf";
+	$menuNode["table"] = "public.lifeboxme__locking";
+	$menuNode["style"] = "";
+	$menuNode["params"] = "";
+	$menuNode["parent"] = "61";
+	$menuNode["nameType"] = "Text";
+	$menuNode["linkType"] = "Internal";
+	$menuNode["pageType"] = strtolower("List");//
+	$menuNode["pageId"] = "";
+	$menuNode["openType"] = "None";
+
+	$menuNode["icon"] = "fa-unlock-alt";
+	$menuNode["iconType"] = "3";
+	$menuNode["iconShow"] = "1";
+
+		$menuNode["color"] = "";
+
+	$menuNode["title"] = "Table & Session  Locking";
 
 
 

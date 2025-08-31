@@ -189,7 +189,7 @@ if (isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: #ffffff;
         }
 
         .card {
@@ -270,7 +270,7 @@ if (isset($_SESSION['user_id'])) {
             <div class="d-flex">
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <span class="navbar-text me-3">
-                        <i class="fas fa-user me-1"></i> <?= htmlspecialchars($_SESSION['username']) ?>
+                        <i class="fas fa-user me-1"></i> <?= htmlspecialchars($_SESSION['username'] ?? '') ?>
                     </span>
 
                     <form method="post" style="display:inline;">
@@ -318,7 +318,7 @@ if (isset($_SESSION['user_id'])) {
             <!-- User Profile Card -->
             <div class="col-lg-4 mb-4">
                 <div class="card h-100">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header bg-info text-white">
                         <h5 class="mb-0"><i class="fas fa-user-circle me-2"></i>Your Profile</h5>
                     </div>
                     <div class="card-body">
@@ -377,7 +377,9 @@ if (isset($_SESSION['user_id'])) {
                                 <?php endif; ?>
                             </form>
                         <?php else: ?>
-                            <p>Please <a href="../index.php">log in</a> to view your profile.</p>
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <h3>Re-Authentication Required</h3>
+                            <p>Please <a href="../index.php">log in</a> to re-authenticate</p>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -429,8 +431,8 @@ if (isset($_SESSION['user_id'])) {
                                                         </div>
                                                     </td>
                                                     <td><?= $user['id'] ?></td>
-                                                    <td><?= htmlspecialchars($user['username']) ?></td>
-                                                    <td><?= htmlspecialchars($user['email']) ?></td>
+                                                    <td><?= htmlspecialchars($user['username'] ?? '') ?></td>
+                                                    <td><?= htmlspecialchars($user['email'] ?? '') ?></td>
                                                     <td>
                                                         <?php if ($user['api_key']): ?>
                                                             <span class="badge bg-success status-badge">Active</span>
@@ -483,7 +485,7 @@ if (isset($_SESSION['user_id'])) {
 
                             <div class="alert alert-warning">
                                 <i class="fas fa-exclamation-triangle me-2"></i>
-                                <strong>Important:</strong> You will only see your API key once after generation. Save it securely!
+                                <strong>Important:</strong> Save your API key securly once after generation!
                             </div>
                         </div>
                     </div>

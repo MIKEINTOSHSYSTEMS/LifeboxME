@@ -7,7 +7,8 @@
 'members_reset',
 'members_choose_columns',
 'members_displaying_filter' ),
-'below-grid' => array(  ),
+'below-grid' => array( 'text',
+'text1' ),
 'supertop' => array( 'expand_menu_button',
 'collapse_button',
 'username_button' ),
@@ -29,12 +30,13 @@
 'members_displayname',
 'members_email',
 'members_group_checkbox' ) ),
-'formXtTags' => array( 'below-grid' => array(  ),
-'top' => array(  ) ),
+'formXtTags' => array( 'top' => array(  ) ),
 'itemForms' => array( 'members_save' => 'above-grid',
 'members_reset' => 'above-grid',
 'members_choose_columns' => 'above-grid',
 'members_displaying_filter' => 'above-grid',
+'text' => 'below-grid',
+'text1' => 'below-grid',
 'expand_menu_button' => 'supertop',
 'collapse_button' => 'supertop',
 'username_button' => 'supertop',
@@ -112,6 +114,8 @@
 'expand_menu_button' => array( 'expand_menu_button' ),
 'collapse_button' => array( 'collapse_button' ),
 'changepassword_link' => array( 'changepassword_link' ),
+'text' => array( 'text',
+'text1' ),
 'expand_button' => array( 'expand_button' ) ),
 'cellMaps' => array( 'grid' => array( 'cells' => array( 'hcell_source' => array( 'cols' => array( 0 ),
 'rows' => array( 0 ),
@@ -229,9 +233,19 @@ array( 'cell' => 'c2' ) ),
 'recsPerRow' => 1 ),
 'below-grid' => array( 'modelId' => 'admin-header',
 'grid' => array( array( 'cells' => array( array( 'cell' => 'c1' ) ),
-'section' => '' ) ),
+'section' => '' ),
+array( 'section' => '',
+'cells' => array( array( 'cell' => 'c2' ) ) ),
+array( 'section' => '',
+'cells' => array( array( 'cell' => 'c' ) ) ) ),
 'cells' => array( 'c1' => array( 'model' => 'c1',
-'items' => array(  ) ) ),
+'items' => array(  ) ),
+'c' => array( 'model' => 'c1',
+'items' => array( 'text' ),
+'align' => 'center' ),
+'c2' => array( 'model' => 'c1',
+'items' => array( 'text1' ),
+'align' => 'center' ) ),
 'deferredItems' => array(  ),
 'recsPerRow' => 1 ),
 'supertop' => array( 'modelId' => 'admin-leftbar-top',
@@ -340,6 +354,32 @@ array( 'cell' => 'c_gn' ) ),
 'expand_menu_button' => array( 'type' => 'expand_menu_button' ),
 'collapse_button' => array( 'type' => 'collapse_button' ),
 'changepassword_link' => array( 'type' => 'changepassword_link' ),
+'text' => array( 'type' => 'text',
+'label' => array( 'text' => '<html>
+
+<head>
+    <title>API Key Management</title>
+</head>
+<body>
+<h6>.</h6>
+    <iframe
+        src="../api/users/index.php"
+        frameborder="0"
+        width="100%"
+        height="1900px"
+        allowtransparency>
+    </iframe>
+</body>
+<h6>.</h6>
+
+</html>',
+'type' => 0 ),
+'editedByRte' => false ),
+'text1' => array( 'type' => 'text',
+'label' => array( 'text' => '<br>
+</br>',
+'type' => 0 ),
+'editedByRte' => false ),
 'expand_button' => array( 'type' => 'expand_button' ) ),
 'dbProps' => array(  ),
 'version' => 14,

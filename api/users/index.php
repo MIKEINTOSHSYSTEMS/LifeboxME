@@ -560,7 +560,7 @@ if (!is_logged_in()) {
             }
 
             body {
-                background-color: #f5f7fb;
+                background-color: #ffffff; /* #f5f7fb;*/
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             }
 
@@ -595,7 +595,8 @@ if (!is_logged_in()) {
                     <i class="fas fa-lock"></i>
                 </div>
                 <h3>Lifebox M&E Users API Key Management</h3>
-                <p class="text-muted">Sign in to your account</p>
+                <p class="text-muted">RE-AUTHENTICATION REQUIRED!</p>
+                <p class="text-muted">Please sign in to your account</p>
             </div>
 
             <?php if (isset($login_error)): ?>
@@ -635,11 +636,6 @@ if (!is_logged_in()) {
                 --light-color: #f8f9fa;
                 --dark-color: #212529;
                 --gray-color: #6c757d;
-            }
-
-            body {
-                background-color: #f5f7fb;
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             }
 
             .navbar {
@@ -1068,16 +1064,16 @@ if (!is_logged_in()) {
                                                         <td>
                                                             <div class="d-flex align-items-center">
                                                                 <div class="user-avatar me-3">
-                                                                    <?php echo substr($user['username'], 0, 1); ?>
+                                                                    <?php echo substr($user['username'] ?? '', 0, 1); ?>
                                                                 </div>
                                                                 <div>
-                                                                    <div class="fw-bold"><?php echo htmlspecialchars($user['username']); ?></div>
-                                                                    <div class="text-muted"><?php echo htmlspecialchars($user['fullname']); ?></div>
+                                                                    <div class="fw-bold"><?php echo htmlspecialchars($user['username'] ?? ''); ?></div>
+                                                                    <div class="text-muted"><?php echo htmlspecialchars($user['fullname'] ?? ''); ?></div>
                                                                 </div>
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div><?php echo htmlspecialchars($user['email']); ?></div>
+                                                            <div><?php echo htmlspecialchars($user['email'] ?? ''); ?></div>
                                                         </td>
                                                         <td>
                                                             <?php echo htmlspecialchars($user['designation'] ?? ''); ?>
