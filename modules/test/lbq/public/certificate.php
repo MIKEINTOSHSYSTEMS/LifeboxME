@@ -112,7 +112,7 @@ $base_url = "http://" . $_SERVER['HTTP_HOST'] . "/modules/test/lbq/public/";
 
 //$custom_border_url = $base_url . "custcert.png";
 //$custom_border_url = $base_url . "custcertgold.png";
-$custom_border_url = $base_url . "custcertgoldart.png";
+$custom_border_url = $base_url . "assets/templates/custcertgoldart.png";
 
 //$custom_border_url = "http://lifeboxme/modules/test/lbq/public/custcert.png";
 //$custom_border_url = null;
