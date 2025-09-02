@@ -1,7 +1,18 @@
 <?php
 // admin/sidebar.php
+require __DIR__ . '/session_helper.php';
+
 $current_page = basename($_SERVER['PHP_SELF']);
+
+// Get current user details from SESSION (not database)
+$user_details = $_SESSION['user_details'] ?? null;
+$username = $user_details['username'] ?? ($_SESSION['UserName'] ?? 'User');
+$email = $user_details['email'] ?? '';
+$first_name = $user_details['first_name'] ?? '';
+$last_name = $user_details['last_name'] ?? '';
+$display_name = trim("$first_name $last_name") ?: $username;
 ?>
+
 <!-- Sidebar Toggle Button (visible on mobile) -->
 <button class="btn btn-primary d-md-none position-fixed" style="top: -3px; left: 0px; height:52px; z-index: 1080;"
     onclick="toggleSidebar()">
@@ -56,18 +67,35 @@ $current_page = basename($_SERVER['PHP_SELF']);
             </li>
         </ul>
         <hr>
-        <span> Welcome
+        <span>Welcome,
             <div class="dropdown">
                 <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
-                    <img src="/assets/img/lifebox.svg" alt="Admin" width="32" height="32" class="rounded-circle me-2">
+                    <img src="/assets/img/lifebox.svg" alt="User" width="32" height="32" class="rounded-circle me-2">
                     <strong>
-                        <p>
-                            <font color="White">Admin</font>
-                        </p>
+                        <span class="text-white"><?= htmlspecialchars($display_name) ?></span>
                     </strong>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                    <li><a class="dropdown-item" href="logout.php">Sign out</a></li>
+                    <?php if ($email): ?>
+                        <li class="dropdown-item-text">
+                            <small class="text-muted"><?= htmlspecialchars($email) ?></small>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                    <?php endif; ?>
+                    <li class="dropdown-item-text">
+                        <small class="text-muted">Username: <?= htmlspecialchars($_SESSION['UserID'] ?? 'User') ?></small>
+                    </li>
+                    <?php if ($first_name || $last_name): ?>
+                        <li class="dropdown-item-text">
+                            <small class="text-muted">Name: <?= htmlspecialchars(trim("$first_name $last_name")) ?></small>
+                        </li>
+                    <?php endif; ?>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="logout.php?logout=1"><i class="bi bi-box-arrow-right me-2"></i>Sign out</a></li>
                 </ul>
             </div>
         </span>

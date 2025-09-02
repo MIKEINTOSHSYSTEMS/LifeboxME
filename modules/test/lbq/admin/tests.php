@@ -1,9 +1,10 @@
 <?php
+/*
 session_start();
 if (empty($_SESSION['admin'])) {
     header('Location: login.php');
     exit;
-}
+}*/
 require __DIR__ . '/../src/db.php';
 require __DIR__ . '/../src/model/Quiz.php';
 $quiz = new Quiz($pdo);

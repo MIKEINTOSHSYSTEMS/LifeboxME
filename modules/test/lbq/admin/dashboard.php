@@ -1,9 +1,16 @@
 <?php
+
+/*
 session_start();
 if (empty($_SESSION['admin'])) {
   header('Location: login.php');
   exit;
 }
+*/
+
+//require __DIR__ . '/session_helper.php';
+//require_admin();
+
 require __DIR__ . '/../src/db.php';
 require __DIR__ . '/../src/model/Quiz.php';
 $quiz = new Quiz($pdo);
@@ -144,8 +151,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               <div class="card-body">
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Tests</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $total_tests ?></div>
+                    <a href="tests.php" class="text-decoration-none">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Tests</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $total_tests ?></div>
+                    </a>
                   </div>
                   <div class="col-auto">
                     <i class="bi bi-journal-text stat-icon text-primary"></i>
@@ -160,8 +169,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               <div class="card-body">
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Questions</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $total_questions ?></div>
+                    <a href="questions.php" class="text-decoration-none">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Questions</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $total_questions ?></div>
+                    </a>
                   </div>
                   <div class="col-auto">
                     <i class="bi bi-question-circle stat-icon text-success"></i>
@@ -176,8 +187,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               <div class="card-body">
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
+                    <a href="participants.php" class="text-decoration-none">
                     <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Participants</div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $total_participants ?></div>
+                    </a>
                   </div>
                   <div class="col-auto">
                     <i class="bi bi-people stat-icon text-info"></i>
@@ -192,8 +205,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               <div class="card-body">
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
+                    <a href="responses.php" class="text-decoration-none">
                     <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Completed Tests</div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $completed_tests ?></div>
+                    </a>
                   </div>
                   <div class="col-auto">
                     <i class="bi bi-check-circle stat-icon text-warning"></i>

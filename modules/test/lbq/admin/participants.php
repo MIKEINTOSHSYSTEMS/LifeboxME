@@ -1,9 +1,12 @@
 <?php
+/*
 session_start();
 if (empty($_SESSION['admin'])) {
     header('Location: login.php');
     exit;
 }
+*/
+//require __DIR__ . '/session_helper.php';
 require __DIR__ . '/../src/db.php';
 
 // Get filters and pagination
