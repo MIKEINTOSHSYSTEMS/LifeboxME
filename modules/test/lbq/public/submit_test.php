@@ -49,7 +49,9 @@ foreach ($questions as $index => $question) {
 }
 
 $raw = json_encode($answers);
-$resp_id = $quiz->createResponse($participation_id, $test_id, $_SESSION['participant_id'], $raw);
+//$resp_id = $quiz->createResponse($participation_id, $test_id, $_SESSION['participant_id'], $raw);
+
+$resp_id = $quiz->createResponse($participation_id, $test_id, $raw, $_SESSION['participant_id']);
 
 if (!$resp_id) {
     echo "Failed to create response";

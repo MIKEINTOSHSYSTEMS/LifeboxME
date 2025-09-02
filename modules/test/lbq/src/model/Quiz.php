@@ -181,15 +181,26 @@ class Quiz
     public function createResponse($participation_id, $test_id, $raw_answers_json, $userid = null)
     {
         $checksum = hash('sha256', $participation_id . '|' . $test_id . '|' . microtime(true));
-        $stmt = $this->pdo->prepare("INSERT INTO lbquiz_responses (participation_id, test_id, userid, raw_answers, checksum) 
+
+        $stmt = $this->pdo->prepare("INSERT INTO lbquiz_responses 
+                                (participation_id, test_id, userid, raw_answers, checksum) 
                                 VALUES (:pid, :tid, :uid, :raw, :ck) RETURNING id");
-        $stmt->execute([
+
+        $params = [
             ':pid' => $participation_id,
             ':tid' => $test_id,
-            ':uid' => $userid,
             ':raw' => $raw_answers_json,
             ':ck' => $checksum
-        ]);
+        ];
+
+        // Handle userid (can be null)
+        if ($userid !== null) {
+            $params[':uid'] = (int)$userid;
+        } else {
+            $params[':uid'] = null;
+        }
+
+        $stmt->execute($params);
         $resp = $stmt->fetch();
         return $resp ? $resp['id'] : null;
     }
