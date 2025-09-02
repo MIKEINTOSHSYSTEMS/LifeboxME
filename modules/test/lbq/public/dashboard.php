@@ -205,11 +205,20 @@ foreach ($trainings as $training) {
                             <i class="bi bi-bar-chart me-1"></i> My Results
                         </a>
                     </li>
+    <!--
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.php">
+                            <i class="bi bi-person-circle me-1"></i> My Profile
+                        </a>
+                    </li>
+    -->
                 </ul>
                 <div class="d-flex align-items-center">
                     <span class="navbar-text text-white me-3 d-none d-md-block">
-                        <i class="bi bi-person-circle me-1"></i>
-                        <?= htmlspecialchars($participant['first_name'] . ' ' . $participant['last_name']) ?>
+                        <a class="nav-link" href="profile.php">
+                            <i class="bi bi-person-circle me-1"></i>
+                            <?= htmlspecialchars($participant['first_name'] . ' ' . $participant['last_name']) ?>
+                            </a>
                     </span>
                     <a href="logout.php" class="btn btn-outline-light btn-sm">Logout</a>
                 </div>
@@ -222,7 +231,7 @@ foreach ($trainings as $training) {
         <div class="welcome-section">
             <div class="row align-items-center">
                 <div class="col-md-8">
-                    <h2>Welcome back, <?= htmlspecialchars($participant['first_name']) ?>!</h2>
+                    <h2>Welcome back, <?= htmlspecialchars($participant['title_salutation'] . $participant['first_name'] ?? '') ?>!</h2>
                     <p class="lead mb-0">Ready to continue your learning journey?</p>
                 </div>
                 <div class="col-md-4 text-md-end">

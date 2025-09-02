@@ -5,22 +5,20 @@ require_once __DIR__ . '/../src/db.php';
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(['success' => false, 'message' => 'Method not allowed']);
+    echo json_encode(['available' => false, 'message' => 'Invalid request method']);
     exit;
 }
 
 // Validate CSRF token
 if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-    http_response_code(403);
-    echo json_encode(['success' => false, 'message' => 'Invalid CSRF token']);
+    echo json_encode(['available' => false, 'message' => 'Invalid CSRF token']);
     exit;
 }
 
 $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    echo json_encode(['available' => false]);
+    echo json_encode(['available' => false, 'message' => 'Invalid email format']);
     exit;
 }
 
@@ -29,8 +27,7 @@ try {
     $stmt->execute([':email' => $email]);
     $count = $stmt->fetchColumn();
 
-    echo json_encode(['available' => $count === 0]);
+    echo json_encode(['available' => $count === 0, 'message' => $count === 0 ? 'Email available' : 'Email already registered']);
 } catch (Exception $e) {
-    error_log("Error checking email: " . $e->getMessage());
-    echo json_encode(['available' => true]); // Assume available on error
+    echo json_encode(['available' => false, 'message' => 'Error checking email']);
 }

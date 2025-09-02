@@ -1,5 +1,8 @@
 <?php
 // register.php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 session_start();
 require_once __DIR__ . '/../src/db.php';
 
@@ -21,14 +24,15 @@ $formData = [
     'venue_id' => ''
 ];
 
-if (isset($_SESSION['current_step'])) {
-    $step = $_SESSION['current_step'];
-    unset($_SESSION['current_step']);
-}
-
 // Load saved form data from session if available
 if (isset($_SESSION['registration_data'])) {
     $formData = array_merge($formData, $_SESSION['registration_data']);
+}
+
+// Check if we're coming from a redirect with step info
+if (isset($_SESSION['current_step'])) {
+    $step = $_SESSION['current_step'];
+    // Don't unset it here - we need it for the form processing
 }
 
 // Process form submission
@@ -40,8 +44,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Collect form data
         $formData = array_merge($formData, $_POST);
 
+        // Save the current step from the form
+        $currentStep = (int)($_POST['step'] ?? 1);
+
         // Save form data to session for multi-step persistence
         $_SESSION['registration_data'] = $formData;
+        $_SESSION['current_step'] = $currentStep;
 
         // Validate based on current step
         switch ($step) {
@@ -108,30 +116,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // If no errors, proceed to next step or complete registration
         if (empty($errors)) {
-            if ($step < 3) {
-                $step++;
-                // Instead of header redirect, we'll let the page reload with the new step
-                // This avoids issues with form resubmission
+            if ($currentStep < 3) {
+                $step = $currentStep + 1;
                 $_SESSION['current_step'] = $step;
+
+                // Redirect to avoid form resubmission
+                header("Location: register.php?step=" . $step);
+                exit;
             } else {
                 // Final step - complete registration
                 try {
                     $pdo->beginTransaction();
 
                     // Get the full phone number from the intl-tel-input
-                    $fullPhone = $_POST['full_phone'] ?? '';
+                    $fullPhone = $_POST['full_phone'] ?? ($formData['phone_code'] . $formData['phone']);
+
+                    // Debug: Log the data being processed
+                    error_log("Processing registration with data:");
+                    error_log("Full Phone: " . $fullPhone);
+                    error_log("Form Data: " . print_r($formData, true));
+
+                    // Sanitize all integer fields - convert empty strings to NULL
+                    $integerFields = ['sex_id', 'country_id', 'facility_id', 'role_id', 'venue_id'];
+                    foreach ($integerFields as $field) {
+                        if (isset($formData[$field]) && ($formData[$field] === '' || $formData[$field] === ' ')) {
+                            $formData[$field] = null;
+                            error_log("Converted empty $field to NULL");
+                        }
+                    }
 
                     // Insert into training_participants
                     $stmt = $pdo->prepare("
                         INSERT INTO training_participants 
                         (title_salutation, first_name, middle_name, last_name, sex_id, email, phone, 
-                         country_id, facility_id, role_id, venue_id, training_date, created_at, updated_at)
+                        country_id, facility_id, role_id, venue_id, training_date, created_at, updated_at)
                         VALUES (:title, :fname, :mname, :lname, :sex, :email, :phone, 
                                 :country, :facility, :role, :venue, CURRENT_DATE, NOW(), NOW())
                         RETURNING participant_id
                     ");
 
-                    $stmt->execute([
+                    // Prepare data for insertion
+                    $insertData = [
                         ':title' => $formData['title_salutation'],
                         ':fname' => trim($formData['first_name']),
                         ':mname' => trim($formData['middle_name']),
@@ -142,32 +167,72 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         ':country' => $formData['country_id'],
                         ':facility' => $formData['facility_id'],
                         ':role' => $formData['role_id'],
-                        ':venue' => $formData['venue_id']
-                    ]);
+                        ':venue' => $formData['venue_id']  // This will be NULL if empty
+                    ];
 
+                    // Debug: Log the final insert data
+                    error_log("Final Insert Data: " . print_r($insertData, true));
+
+                    // Execute the insert
+                    $stmt->execute($insertData);
                     $participantId = $stmt->fetchColumn();
 
-                    // Send confirmation email
-                    if (sendConfirmationEmail($formData, $fullPhone, $pdo)) {
-                        $pdo->commit();
+                    error_log("Successfully inserted participant with ID: " . $participantId);
 
-                        // Clear session data
-                        unset($_SESSION['registration_data']);
-                        unset($_SESSION['current_step']);
+                    // Commit the transaction (SKIP EMAIL FOR NOW - JUST SAVE TO DATABASE)
+                    $pdo->commit();
+                    error_log("Database transaction committed successfully");
 
-                        // Redirect to success page
-                        $_SESSION['registration_success'] = true;
-                        $_SESSION['participant_data'] = $formData;
-                        header("Location: register_success.php");
-                        exit;
-                    } else {
-                        throw new Exception("Failed to send confirmation email.");
-                    }
+                    // Clear session data
+                    unset($_SESSION['registration_data']);
+                    unset($_SESSION['current_step']);
+
+                    // Set participant ID in session for success page
+                    $_SESSION['participant_id'] = $participantId;
+                    $_SESSION['registration_success'] = true;
+                    $_SESSION['participant_data'] = $formData;
+
+                    error_log("Redirecting to success page with participant ID: " . $participantId);
+
+                    // Redirect to success page
+                    header("Location: register_success.php");
+                    exit;
                 } catch (Exception $e) {
                     $pdo->rollBack();
-                    $errors[] = "Registration failed: " . $e->getMessage();
+                    $errorMessage = "Registration failed: " . $e->getMessage();
+                    $errors[] = $errorMessage;
+
+                    // Detailed debug output
+                    error_log("REGISTRATION ERROR: " . $e->getMessage());
+                    error_log("Error Code: " . $e->getCode());
+                    error_log("Form data: " . print_r($formData, true));
+
+                    // Log the full phone value
+                    error_log("Full Phone: " . ($fullPhone ?? 'NOT SET'));
+
+                    // Log database error info if available
+                    if ($e instanceof PDOException) {
+                        error_log("PDO Error Info: " . print_r($e->errorInfo, true));
+                    }
+
+                    // Keep user on step 3 to fix errors
+                    $step = 3;
+                    $_SESSION['current_step'] = 3;
+
+                    // Also show the error to the user
+                    error_log("User-facing error: " . $errorMessage);
                 }
+
+                // Debug: Log the raw POST data
+                error_log("RAW POST DATA: " . print_r($_POST, true));
+                error_log("SESSION DATA: " . print_r($_SESSION, true));
+                error_log("Current Step: " . $step);                
+
             }
+        } else {
+            // If there are errors, stay on the current step
+            $step = $currentStep;
+            $_SESSION['current_step'] = $currentStep;
         }
     }
 }
@@ -1022,11 +1087,49 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
             });
 
             // Update hidden full_phone field before form submission
-            $('#registrationForm').on('submit', function() {
+            $('#registrationForm').on('submit', function(e) {
+                e.preventDefault();
+
                 const fullNumber = phoneInput.getNumber();
-                $('#full_phone').val(fullNumber);
-                updateReviewSection(); // Ensure review section is updated before submission
+                // Remove any duplicate country codes
+                const cleanNumber = fullNumber.replace(/^(\+\d+)(\+\d+)/, '$2');
+                $('#full_phone').val(cleanNumber);
+                updateReviewSection();
+
+                if (validateStep3()) {
+                    this.submit();
+                }
             });
+
+            // Add validation for step 3
+            function validateStep3() {
+                let isValid = true;
+                const errors = [];
+
+                // Validate CAPTCHA
+                const captchaResponse = grecaptcha.getResponse();
+                if (!captchaResponse) {
+                    errors.push('Please complete the CAPTCHA verification');
+                    isValid = false;
+                }
+
+                // Validate terms agreement
+                if (!$('#terms_agree').is(':checked')) {
+                    errors.push('You must agree to the terms and conditions');
+                    isValid = false;
+                }
+
+                // Show errors if any
+                if (!isValid) {
+                    Swal.fire({
+                        title: 'Please fix the errors',
+                        html: '<ul class="text-start"><li>' + errors.join('</li><li>') + '</li></ul>',
+                        icon: 'error'
+                    });
+                }
+
+                return isValid;
+            }
 
             // Step Navigation
             $('#nextToStep2').click(function() {

@@ -256,7 +256,9 @@ $stats = $stmt->fetch();
                         <div class="text-success mb-2">
                             <i class="bi bi-graph-up display-4"></i>
                         </div>
-                        <h3 class="card-title"><?= round($stats['average_score'], 1) ?>%</h3>
+                        <h3 class="card-title">
+                            <?= $stats['average_score'] !== null ? round($stats['average_score'], 1) . '%' : 'N/A' ?>
+                        </h3>
                         <p class="card-text text-muted">Average Score</p>
                     </div>
                 </div>
@@ -267,7 +269,7 @@ $stats = $stmt->fetch();
                         <div class="text-warning mb-2">
                             <i class="bi bi-trophy-fill display-4"></i>
                         </div>
-                        <h3 class="card-title"><?= $stats['highest_score'] ?>%</h3>
+                        <h3 class="card-title"><?= $stats['highest_score'] !== null ? $stats['highest_score'] . '%' : 'N/A' ?></h3>
                         <p class="card-text text-muted">Highest Score</p>
                     </div>
                 </div>
@@ -278,7 +280,7 @@ $stats = $stmt->fetch();
                         <div class="text-info mb-2">
                             <i class="bi bi-clock-history display-4"></i>
                         </div>
-                        <h3 class="card-title"><?= $stats['lowest_score'] ?>%</h3>
+                        <h3 class="card-title"><?= $stats['lowest_score'] !== null ? $stats['lowest_score'] . '%' : 'N/A' ?></h3>
                         <p class="card-text text-muted">Lowest Score</p>
                     </div>
                 </div>
