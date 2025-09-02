@@ -12,6 +12,7 @@ if (empty($_SESSION['participant_id'])) {
 $participantId = $_SESSION['participant_id'];
 $errors = [];
 $success = false;
+$successMessage = '';
 
 // Fetch participant data
 try {
@@ -36,6 +37,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
         $errors[] = "Invalid form submission. Please try again.";
     } else {
+        // Check if this is an email send request
+        $sendEmail = isset($_POST['send_email']) && $_POST['send_email'] == '1';
+
+        // If just sending email, use existing data instead of form data
+        if ($sendEmail) {
+            $formData = [
+                'title_salutation' => $participant['title_salutation'] ?? '',
+                'first_name' => $participant['first_name'] ?? '',
+                'middle_name' => $participant['middle_name'] ?? '',
+                'last_name' => $participant['last_name'] ?? '',
+                'sex_id' => $participant['sex_id'] ?? null,
+                'email' => $participant['email'] ?? '',
+                'phone' => $participant['phone'] ?? '',
+                'country_id' => $participant['country_id'] ?? null,
+                'facility_id' => $participant['facility_id'] ?? null,
+                'role_id' => $participant['role_id'] ?? null,
+                'venue_id' => $participant['venue_id'] ?? null
+            ];
+
+            // Send confirmation email
+            $emailSent = sendConfirmationEmail($formData, $participant['phone'], $pdo);
+
+            if ($emailSent) {
+                $success = true;
+                $successMessage = "Confirmation email sent successfully to " . htmlspecialchars($participant['email']);
+            } else {
+                $errors[] = "Failed to send confirmation email. Please try again.";
+            }
+
+            // Skip the rest of the form processing for email-only requests
+            goto render_page;
+        }
+
         // Collect and sanitize form data
         $formData = [
             'title_salutation' => trim($_POST['title_salutation'] ?? ''),
@@ -123,6 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $pdo->commit();
                 $success = true;
+                $successMessage = "Your profile has been updated successfully!";
 
                 // Refresh participant data
                 $stmt = $pdo->prepare("SELECT * FROM training_participants WHERE participant_id = :id");
@@ -145,11 +180,149 @@ if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
-function nullIfEmpty($value) {
+function nullIfEmpty($value)
+{
     return ($value === '' || $value === null) ? null : $value;
 }
 
+// Function to send confirmation email using SMTP
+function sendConfirmationEmail($data, $phone, $pdo)
+{
+    // Include the SMTP functions
+    require_once __DIR__ . '/../src/smtp_functions.php';
 
+    // Get SMTP settings from database (default to ID 2)
+    $smtpConfig = get_smtp_config($pdo, 2);
+
+    if (!$smtpConfig) {
+        error_log("No SMTP configuration found");
+        return false; // No SMTP settings configured
+    }
+
+    // Force plain authentication since TLS is not working
+    $smtpConfig['secure'] = 'plain';
+
+    // Get additional data for email
+    $countryName = '';
+    $facilityName = '';
+    $roleName = '';
+    $venueName = '';
+    $sexName = '';
+
+    if (!empty($data['country_id'])) {
+        $stmt = $pdo->prepare("SELECT country_name FROM countries WHERE country_id = :id");
+        $stmt->execute([':id' => $data['country_id']]);
+        $countryName = $stmt->fetchColumn() ?: 'Not specified';
+    }
+
+    if (!empty($data['facility_id'])) {
+        $stmt = $pdo->prepare("SELECT facility_name FROM facilities WHERE facility_id = :id");
+        $stmt->execute([':id' => $data['facility_id']]);
+        $facilityName = $stmt->fetchColumn() ?: 'Not specified';
+    }
+
+    if (!empty($data['role_id'])) {
+        $stmt = $pdo->prepare("SELECT role_name FROM participant_role WHERE role_id = :id");
+        $stmt->execute([':id' => $data['role_id']]);
+        $roleName = $stmt->fetchColumn() ?: 'Not specified';
+    }
+
+    if (!empty($data['venue_id'])) {
+        $stmt = $pdo->prepare("SELECT venue_name FROM venues WHERE venue_id = :id");
+        $stmt->execute([':id' => $data['venue_id']]);
+        $venueName = $stmt->fetchColumn() ?: 'Not specified';
+    }
+
+    if (!empty($data['sex_id'])) {
+        $stmt = $pdo->prepare("SELECT sex_name FROM sex WHERE sex_id = :id");
+        $stmt->execute([':id' => $data['sex_id']]);
+        $sexName = $stmt->fetchColumn() ?: 'Not specified';
+    }
+
+    // Email content
+    $subject = "Profile Confirmation - Lifebox Training";
+
+    // HTML email body
+    $body = '<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+        .header { background-color: #0078d4; color: white; padding: 10px; text-align: center; border-radius: 5px 5px 0 0; }
+        .content { padding: 20px; }
+        .footer { margin-top: 20px; padding-top: 10px; border-top: 1px solid #eee; font-size: 0.9em; color: #777; }
+        table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        th, td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Profile Confirmation</h1>
+        </div>
+        <div class="content">
+            <p>Hello ' . htmlspecialchars($data['first_name']) . ',</p>
+            <p>This email confirms your current profile information in the Lifebox Training Program.</p>
+            
+            <h3>Your Profile Details:</h3>
+            <table>
+                <tr><th>Field</th><th>Value</th></tr>
+                <tr><td>Name</td><td>' . htmlspecialchars($data['title_salutation'] . ' ' . $data['first_name'] . ' ' . $data['middle_name'] . ' ' . $data['last_name']) . '</td></tr>
+                <tr><td>Gender</td><td>' . htmlspecialchars($sexName) . '</td></tr>
+                <tr><td>Email</td><td>' . htmlspecialchars($data['email']) . '</td></tr>
+                <tr><td>Phone</td><td>' . htmlspecialchars($phone) . '</td></tr>
+                <tr><td>Country</td><td>' . htmlspecialchars($countryName) . '</td></tr>
+                <tr><td>Facility</td><td>' . htmlspecialchars($facilityName) . '</td></tr>
+                <tr><td>Role</td><td>' . htmlspecialchars($roleName) . '</td></tr>
+                <tr><td>Venue</td><td>' . htmlspecialchars($venueName) . '</td></tr>
+                <tr><td>Profile Last Updated</td><td>' . date('Y-m-d H:i:s') . '</td></tr>
+            </table>
+            
+            <p>If any of this information is incorrect, please log in to your account and update your profile.</p>
+        </div>
+        <div class="footer">
+            <p>This is an automated message. Please do not reply.</p>
+            <p>&copy; ' . date('Y') . ' Lifebox M&E System</p>
+        </div>
+    </div>
+</body>
+</html>';
+
+    // Send email using SMTP
+    $result = send_smtp_email($smtpConfig, $data['email'], $subject, $body);
+
+    if ($result['ok']) {
+        error_log("Profile confirmation email sent successfully to " . $data['email']);
+        return true;
+    } else {
+        error_log("Failed to send profile confirmation email: " . $result['log']);
+
+        // Fallback to PHP mail() function if SMTP fails
+        return send_email_fallback($data, $phone, $subject, $body);
+    }
+}
+
+// Fallback function using PHP's mail()
+function send_email_fallback($data, $phone, $subject, $body)
+{
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    $headers .= "From: lifebox@cloud.merqconsultancy.org" . "\r\n";
+    $headers .= "Reply-To: lifebox@cloud.merqconsultancy.org" . "\r\n";
+    $headers .= "X-Mailer: PHP/" . phpversion();
+
+    $result = mail($data['email'], $subject, $body, $headers);
+
+    if ($result) {
+        error_log("Profile confirmation email sent via fallback method to " . $data['email']);
+        return true;
+    } else {
+        error_log("Failed to send profile confirmation email via fallback method to " . $data['email']);
+        return false;
+    }
+}
 
 // Function to fetch options for dropdowns
 function getDropdownOptions($pdo, $table, $valueField, $textField, $where = '')
@@ -171,6 +344,8 @@ $countryOptions = getDropdownOptions($pdo, 'countries', 'country_id', 'country_n
 $facilityOptions = getDropdownOptions($pdo, 'facilities', 'facility_id', 'facility_name', 'is_active = true');
 $roleOptions = getDropdownOptions($pdo, 'participant_role', 'role_id', 'role_name', 'is_active = true');
 $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is_active = true');
+
+render_page:
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -180,6 +355,11 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile - Lifebox Training</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/style/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -188,6 +368,12 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
 
     <!-- Select2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+
+    <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
+    <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
+    <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
+
 
     <style>
         :root {
@@ -272,6 +458,16 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
             border-color: #2980b9;
         }
 
+        .btn-success {
+            background: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+            border-color: #1e7e34;
+        }
+
         .profile-info {
             background: var(--light-bg);
             border-radius: var(--border-radius);
@@ -291,7 +487,56 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
     </style>
 </head>
 
-<body>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="dashboard.php">
+                <img src="../lblogo-white.svg" alt="LifeBox Logo" height="30" class="d-inline-block align-text-top me-2">
+                Test Center
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="dashboard.php">
+                            <i class="bi bi-speedometer2 me-1"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="take_test.php">
+                            <i class="bi bi-pencil-square me-1"></i> Available Tests
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="all_results.php">
+                            <i class="bi bi-bar-chart me-1"></i> My Results
+                        </a>
+                    </li>
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.php">
+                            <i class="bi bi-person-circle me-1"></i> My Profile
+                        </a>
+                    </li>
+    -->
+                </ul>
+                <div class="d-flex align-items-center">
+                    <span class="navbar-text text-white me-3 d-none d-md-block">
+                        <a class="nav-link" href="profile.php">
+                            <i class="bi bi-person-circle me-1"></i>
+                            <?= htmlspecialchars($participant['title_salutation'] . $participant['first_name'] . ' ' . $participant['last_name'] ?? '') ?>
+                        </a>
+                    </span>
+                    <a href="logout.php" class="btn btn-outline-light btn-sm">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <br></br>
+
     <div class="container profile-container">
         <div class="profile-header">
             <img src="../lblogo-dark.svg" alt="Lifebox Logo">
@@ -303,7 +548,7 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
         <?php if ($success): ?>
             <div class="alert alert-success">
                 <i class="fas fa-check-circle me-2"></i>
-                Your profile has been updated successfully!
+                <?= $successMessage ?>
             </div>
         <?php endif; ?>
 
@@ -474,9 +719,14 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
                 <a href="dashboard.php" class="btn btn-secondary">
                     <i class="fas fa-arrow-left me-1"></i> Back to Dashboard
                 </a>
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-save me-1"></i> Update Profile
-                </button>
+                <div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-1"></i> Update Profile
+                    </button>
+                    <button type="submit" name="send_email" value="1" class="btn btn-success ms-2">
+                        <i class="fas fa-envelope me-1"></i> Send Confirmation Email
+                    </button>
+                </div>
             </div>
         </form>
     </div>
@@ -501,6 +751,15 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
 
             // Form validation
             $('#profileForm').on('submit', function(e) {
+                // Check if this is an email send request
+                if ($('button[name="send_email"]').is(':focus')) {
+                    if (!confirm('Are you sure you want to send a confirmation email to ' + $('#email').val() + '?')) {
+                        e.preventDefault();
+                        return false;
+                    }
+                    return true; // Continue with form submission
+                }
+
                 let isValid = true;
                 const errors = [];
 

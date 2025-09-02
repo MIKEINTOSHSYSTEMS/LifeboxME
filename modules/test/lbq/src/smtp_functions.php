@@ -22,6 +22,11 @@ function send_smtp_email($smtpConfig, $to, $subject, $body)
     $password = $smtpConfig['password'];
     $from = $smtpConfig['smtpfrom'];
 
+
+    error_log("Attempting to send email via SMTP to: $to");
+    error_log("Using SMTP server: $host:$port");
+
+
     // Modify the prefix to handle both SSL and TLS (including STARTTLS)
     $prefix = ($protocol === 'ssl' || $protocol === 'tls') ? $protocol . '://' : '';
 

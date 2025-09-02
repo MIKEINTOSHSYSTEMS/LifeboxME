@@ -22,7 +22,7 @@ $stmt->execute([':code' => $verification_code]);
 $response = $stmt->fetch();
 
 if (!$response) {
-die("Certificate not found or invalid verification code | This incedent will be reported!!!");
+    die("Certificate not found or invalid verification code | This incedent will be reported!!!");
 }
 
 // Get certificate number
@@ -38,6 +38,11 @@ $certificate_number = "LB-" . str_pad($response['id'], 6, '0', STR_PAD_LEFT);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
+    <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
+    <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
+
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
@@ -154,7 +159,7 @@ $certificate_number = "LB-" . str_pad($response['id'], 6, '0', STR_PAD_LEFT);
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
         <div class="container">
-                <a class="navbar-brand" href="../public/dashboard.php">
+            <a class="navbar-brand" href="../public/dashboard.php">
                 <img src="../lblogo-white.svg" alt="LifeBox Logo" height="30" class="d-inline-block align-text-top me-2">
                 Test Center
             </a>

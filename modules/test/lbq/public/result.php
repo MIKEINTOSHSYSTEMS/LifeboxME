@@ -26,6 +26,11 @@ if (!$response) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
+  <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
+  <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
+  
   <style>
     body {
       font-family: 'Montserrat', sans-serif;

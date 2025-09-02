@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       ]);
     }
     header("Location: test_edit.php?id=$test_id");
-    exit;    
+    exit;
   } elseif (!empty($_POST['update_question_weight'])) {
     $qid = intval($_POST['question_id']);
     $weight = floatval($_POST['weight'] ?? 1.0);
@@ -156,6 +156,11 @@ $qtypes = [
   <link href="../assets/css/styles.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
+  <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
+  <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
+
   <style>
     .question-item {
       border-left: 4px solid #0d6efd;
@@ -448,7 +453,7 @@ $qtypes = [
                           </div>
                         </div>
                       </div>
-<br></br>
+                      <br></br>
                       <div class="col-md-12">
                         <div class="card">
                           <div class="card-header bg-light">

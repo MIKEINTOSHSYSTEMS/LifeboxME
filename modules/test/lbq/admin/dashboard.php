@@ -88,6 +88,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link href="../assets/css/styles.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
+  <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
+  <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
+
   <style>
     .dashboard-card {
       transition: transform 0.3s;

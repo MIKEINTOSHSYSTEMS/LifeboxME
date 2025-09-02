@@ -76,6 +76,11 @@ $stats = $stmt->fetch();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
+    <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
+    <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
+
     <style>
         :root {
             --primary: #0079a5;
@@ -166,6 +171,15 @@ $stats = $stmt->fetch();
             transform: scale(1.05);
         }
 
+        div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm) {
+            border-radius: var(--swal2-confirm-button-border-radius);
+            background: initial;
+            background-color: #0a4e69 !important;
+            box-shadow: var(--swal2-confirm-button-box-shadow);
+            color: var(--swal2-confirm-button-color);
+            font-size: 1em;
+        }
+
         @media (max-width: 768px) {
             .results-header {
                 padding: 1.5rem;
@@ -212,8 +226,10 @@ $stats = $stmt->fetch();
                 </ul>
                 <div class="d-flex align-items-center">
                     <span class="navbar-text text-white me-3 d-none d-md-block">
-                        <i class="bi bi-person-circle me-1"></i>
-                        <?= htmlspecialchars($participant['first_name'] . ' ' . $participant['last_name']) ?>
+                        <a class="nav-link" href="profile.php">
+                            <i class="bi bi-person-circle me-1"></i>
+                            <?= htmlspecialchars($participant['title_salutation'] . $participant['first_name'] . ' ' . $participant['last_name'] ?? '') ?>
+                        </a>
                     </span>
                     <a href="logout.php" class="btn btn-outline-light btn-sm">Logout</a>
                 </div>

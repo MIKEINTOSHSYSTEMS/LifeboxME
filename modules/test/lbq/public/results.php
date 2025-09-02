@@ -21,6 +21,11 @@ if (!$response) {
 <head>
     <meta charset="utf-8">
     <title>Result</title>
+
+    <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
+    <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
+    <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 

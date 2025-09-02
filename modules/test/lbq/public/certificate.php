@@ -135,6 +135,11 @@ if ($selected_border === 'custom' && isset($_GET['custom_img'])) {
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&family=Parisienne&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
+    <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
+    <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
+
     <style>
         :root {
             --primary: #0079a7;
@@ -609,10 +614,6 @@ if ($selected_border === 'custom' && isset($_GET['custom_img'])) {
                     Test Center
                 </a>
                 <div class="d-flex align-items-center">
-                    <span class="navbar-text text-white me-3 d-none d-md-block">
-                        <i class="bi bi-person-circle me-1"></i>
-                        <?= htmlspecialchars($_SESSION['participant_name'] ?? 'User') ?>
-                    </span>
                     <a href="test_results.php?response_id=<?= $response_id ?>" class="btn btn-outline-light btn-sm me-2">
                         <i class="bi bi-arrow-left me-1"></i> Back to Results
                     </a>
@@ -620,6 +621,13 @@ if ($selected_border === 'custom' && isset($_GET['custom_img'])) {
                         <i class="bi bi-printer me-1"></i> Print
                     </button>
                 </div>
+                <span class="navbar-text text-white me-3 d-none d-md-block">
+                    <a class="nav-link" href="profile.php">
+                        <i class="bi bi-person-circle me-1"></i>
+                        <?= htmlspecialchars($_SESSION['participant_name'] ?? 'User') ?>
+                    </a>
+                </span>
+                <a href="logout.php" class="btn btn-outline-light btn-sm">Logout</a>
             </div>
         </nav>
     </div>
@@ -698,7 +706,7 @@ if ($selected_border === 'custom' && isset($_GET['custom_img'])) {
                     <!-- Body -->
                     <div class="certificate-body">
                         <div class="participant-name">
-                            <?= htmlspecialchars($participant['first_name'] . ' ' . $participant['last_name']) ?>
+                            <?= htmlspecialchars($participant['title_salutation'] . $participant['first_name'] . ' ' . $participant['last_name']) ?>
                         </div>
 
                         <div class="certificate-text">

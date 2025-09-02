@@ -42,6 +42,11 @@ if (!$test_id) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
+    <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
+    <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
+
   </head>
 
   <body class="bg-light">
@@ -53,8 +58,10 @@ if (!$test_id) {
         </a>
         <div class="d-flex align-items-center">
           <span class="navbar-text text-white me-3 d-none d-md-block">
-            <i class="bi bi-person-circle me-1"></i>
-            <?= htmlspecialchars($_SESSION['participant_name'] ?? 'User') ?>
+            <a class="nav-link" href="profile.php">
+              <i class="bi bi-person-circle me-1"></i>
+              <?= htmlspecialchars($_SESSION['participant_name'] ?? 'User') ?>
+            </a>
           </span>
           <a href="logout.php" class="btn btn-outline-light btn-sm">Logout</a>
         </div>
@@ -215,7 +222,7 @@ shuffle($questions);
     }
 
     .bg-primary {
-      
+
       background-color: #0079a7ed !important;
     }
 
@@ -363,7 +370,7 @@ shuffle($questions);
             <div class="d-flex flex-wrap">
               <span class="test-info-badge">
                 <i class="bi bi-person-circle"></i>
-                Participant: <?= htmlspecialchars($participant['first_name'] . ' ' . $participant['last_name']) ?>
+                Participant: <?= htmlspecialchars($participant['title_salutation'] . $participant['first_name'] . ' ' . $participant['last_name']) ?>
               </span>
               <span class="test-info-badge">
                 <i class="bi bi-journal-text"></i>

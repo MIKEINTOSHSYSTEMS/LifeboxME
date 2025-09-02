@@ -5,6 +5,7 @@ ini_set('display_errors', 1);
 
 session_start();
 require_once __DIR__ . '/../src/db.php';
+require_once __DIR__ . '/../src/smtp_functions.php';
 
 // Initialize variables
 $step = isset($_GET['step']) ? (int)$_GET['step'] : 1;
@@ -179,9 +180,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     error_log("Successfully inserted participant with ID: " . $participantId);
 
-                    // Commit the transaction (SKIP EMAIL FOR NOW - JUST SAVE TO DATABASE)
+                    // Commit the transaction
                     $pdo->commit();
                     error_log("Database transaction committed successfully");
+
+                    // Send confirmation email
+                    try {
+                        $emailSent = sendConfirmationEmail($formData, $fullPhone, $pdo);
+                        if (!$emailSent) {
+                            error_log("Failed to send confirmation email, but registration was successful");
+                            // Don't fail the registration if email fails
+                        }
+                    } catch (Exception $e) {
+                        error_log("Error sending confirmation email: " . $e->getMessage());
+                        // Don't fail the registration if email fails
+                    }
 
                     // Clear session data
                     unset($_SESSION['registration_data']);
@@ -226,8 +239,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Debug: Log the raw POST data
                 error_log("RAW POST DATA: " . print_r($_POST, true));
                 error_log("SESSION DATA: " . print_r($_SESSION, true));
-                error_log("Current Step: " . $step);                
-
+                error_log("Current Step: " . $step);
             }
         } else {
             // If there are errors, stay on the current step
@@ -242,16 +254,19 @@ if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
-// Function to send confirmation email without PHPMailer
+// Function to send confirmation email using SMTP
 function sendConfirmationEmail($data, $fullPhone, $pdo)
 {
-    // Get SMTP settings from database
-    $stmt = $pdo->query("SELECT * FROM smtp ORDER BY id DESC LIMIT 1");
-    $smtpSettings = $stmt->fetch();
+    // Get SMTP settings from database (default to ID 2)
+    $smtpConfig = get_smtp_config($pdo, 2);
 
-    if (!$smtpSettings) {
+    if (!$smtpConfig) {
+        error_log("No SMTP configuration found");
         return false; // No SMTP settings configured
     }
+
+    // Force plain authentication since TLS is not working
+    $smtpConfig['secure'] = 'plain';
 
     // Get additional data for email
     $countryName = '';
@@ -292,39 +307,88 @@ function sendConfirmationEmail($data, $fullPhone, $pdo)
 
     // Email content
     $subject = "Registration Confirmation - Lifebox Training";
-    $message = "
-        <h2>Registration Confirmation</h2>
-        <p>Thank you for registering for the Lifebox Training Program.</p>
-        
-        <h3>Your Details:</h3>
-        <table border='1' cellpadding='8' style='border-collapse: collapse;'>
-            <tr><th>Field</th><th>Value</th></tr>
-            <tr><td>Name</td><td>" . htmlspecialchars($data['title_salutation'] . ' ' . $data['first_name'] . ' ' . $data['middle_name'] . ' ' . $data['last_name']) . "</td></tr>
-            <tr><td>Gender</td><td>" . htmlspecialchars($sexName) . "</td></tr>
-            <tr><td>Email</td><td>" . htmlspecialchars($data['email']) . "</td></tr>
-            <tr><td>Phone</td><td>" . htmlspecialchars($fullPhone) . "</td></tr>
-            <tr><td>Country</td><td>" . htmlspecialchars($countryName) . "</td></tr>
-            <tr><td>Facility</td><td>" . htmlspecialchars($facilityName) . "</td></tr>
-            <tr><td>Role</td><td>" . htmlspecialchars($roleName) . "</td></tr>
-            <tr><td>Venue</td><td>" . htmlspecialchars($venueName) . "</td></tr>
-            <tr><td>Training Date</td><td>" . date('Y-m-d') . "</td></tr>
-        </table>
-        
-        <p>We will contact you with further details about the training program.</p>
-        <p>Best regards,<br>Lifebox Team</p>
-    ";
 
-    // Email headers
-    $headers = "MIME-Version: 1.0" . "\r\n";
-    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-    $headers .= "From: " . $smtpSettings['smtpfrom'] . "\r\n";
-    $headers .= "Reply-To: " . $smtpSettings['smtpfrom'] . "\r\n";
-    $headers .= "X-Mailer: PHP/" . phpversion();
+    // HTML email body
+    $body = '<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+        .header { background-color: #0078d4; color: white; padding: 10px; text-align: center; border-radius: 5px 5px 0 0; }
+        .content { padding: 20px; }
+        .footer { margin-top: 20px; padding-top: 10px; border-top: 1px solid #eee; font-size: 0.9em; color: #777; }
+        table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        th, td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Registration Confirmation</h1>
+        </div>
+        <div class="content">
+            <p>Hello ' . htmlspecialchars($data['first_name']) . ',</p>
+            <p>Thank you for registering for the Lifebox Training Program.</p>
+            
+            <h3>Your Details:</h3>
+            <table>
+                <tr><th>Field</th><th>Value</th></tr>
+                <tr><td>Name</td><td>' . htmlspecialchars($data['title_salutation'] . ' ' . $data['first_name'] . ' ' . $data['middle_name'] . ' ' . $data['last_name']) . '</td></tr>
+                <tr><td>Gender</td><td>' . htmlspecialchars($sexName) . '</td></tr>
+                <tr><td>Email</td><td>' . htmlspecialchars($data['email']) . '</td></tr>
+                <tr><td>Phone</td><td>' . htmlspecialchars($fullPhone) . '</td></tr>
+                <tr><td>Country</td><td>' . htmlspecialchars($countryName) . '</td></tr>
+                <tr><td>Facility</td><td>' . htmlspecialchars($facilityName) . '</td></tr>
+                <tr><td>Role</td><td>' . htmlspecialchars($roleName) . '</td></tr>
+                <tr><td>Venue</td><td>' . htmlspecialchars($venueName) . '</td></tr>
+                <tr><td>Registration Date</td><td>' . date('Y-m-d') . '</td></tr>
+            </table>
+            
+            <p>We will contact you with further details about the training program.</p>
+        </div>
+        <div class="footer">
+            <p>This is an automated message. Please do not reply.</p>
+            <p>&copy; ' . date('Y') . ' Lifebox M&E System</p>
+        </div>
+    </div>
+</body>
+</html>';
 
-    // Send email using mail() function
-    return mail($data['email'], $subject, $message, $headers);
+    // Send email using SMTP
+    $result = send_smtp_email($smtpConfig, $data['email'], $subject, $body);
+
+    if ($result['ok']) {
+        error_log("Confirmation email sent successfully to " . $data['email']);
+        return true;
+    } else {
+        error_log("Failed to send confirmation email: " . $result['log']);
+
+        // Fallback to PHP mail() function if SMTP fails
+        return send_email_fallback($data, $fullPhone, $subject, $body);
+    }
 }
 
+// Fallback function using PHP's mail()
+function send_email_fallback($data, $fullPhone, $subject, $body)
+{
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    $headers .= "From: lifebox@cloud.merqconsultancy.org" . "\r\n";
+    $headers .= "Reply-To: lifebox@cloud.merqconsultancy.org" . "\r\n";
+    $headers .= "X-Mailer: PHP/" . phpversion();
+
+    $result = mail($data['email'], $subject, $body, $headers);
+
+    if ($result) {
+        error_log("Confirmation email sent via fallback method to " . $data['email']);
+        return true;
+    } else {
+        error_log("Failed to send confirmation email via fallback method to " . $data['email']);
+        return false;
+    }
+}
 // Function to fetch options for dropdowns
 function getDropdownOptions($pdo, $table, $valueField, $textField, $where = '')
 {
@@ -371,6 +435,12 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/custom.css">
+
+
+    <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
+    <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
+    <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
+
 
     <style>
         :root {
