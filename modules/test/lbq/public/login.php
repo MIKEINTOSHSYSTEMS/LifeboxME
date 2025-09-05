@@ -42,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login - LifeBox Test Center</title>
+    <link href="../assets/css/styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
@@ -62,6 +63,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
+
+        :root {
+            --primary-color: #0079a5;
+            --secondary-color: #1e6a7d;
+            --accent-color: #ff6b35;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --info-color: #17a2b8;
+        }
+
+        /* Global Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        @media (min-width: 768px) {
+            .px-md-4 {
+                padding-right: 7.5rem !important;
+                padding-left: 1.5rem !important;
+            }
+        }
+
+        .text-dark {
+
+            color: var(--primary-color) !important;
+        }
     </style>
 </head>
 
@@ -73,7 +106,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="card login-card">
                         <div class="card-body p-5">
                             <div class="text-center mb-4">
-                                <h2 class="card-title text-info">LifeBox Test Center</h2>
+                                <img src="../lblogo-dark.svg" alt="Logo" height="70" class="me-2">
+                                <h2 class="card-title text-dark">Test Center</h2>
                                 <p class="text-muted">Sign in to access your tests</p>
                             </div>
 

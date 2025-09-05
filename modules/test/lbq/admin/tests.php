@@ -7,6 +7,7 @@ if (empty($_SESSION['admin'])) {
 }*/
 require __DIR__ . '/../src/db.php';
 require __DIR__ . '/../src/model/Quiz.php';
+require __DIR__ . '/session_helper.php';
 $quiz = new Quiz($pdo);
 
 // Get trainings for dropdown
@@ -107,6 +108,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
 
 </head>
+<style>
+    @media (min-width: 768px) {
+        .px-md-4 {
+            padding-right: 7.5rem !important;
+            padding-left: 1.5rem !important;
+        }
+    }
+</style>
 
 <body>
     <div class="container-fluid">

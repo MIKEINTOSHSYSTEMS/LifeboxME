@@ -8,6 +8,7 @@ if (empty($_SESSION['admin'])) {
 }
 */
 require __DIR__ . '/../src/db.php';
+require __DIR__ . '/session_helper.php';
 
 $participant_id = intval($_GET['id'] ?? 0);
 if (!$participant_id) {

@@ -8,6 +8,7 @@ if (empty($_SESSION['admin'])) {
 */
 //require __DIR__ . '/session_helper.php';
 require __DIR__ . '/../src/db.php';
+require __DIR__ . '/session_helper.php';
 
 // Get filters and pagination
 $page = max(1, intval($_GET['page'] ?? 1));
@@ -107,11 +108,21 @@ $roles = $pdo->query("SELECT role_id, role_name FROM participant_role ORDER BY r
             z-index: 10;
         }
     </style>
+    <style>
+        @media (min-width: 768px) {
+            .px-md-4 {
+                padding-right: 7.5rem !important;
+                padding-left: 1.5rem !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row">
+            <?php //include 'navbar.php'; ?>
+
             <?php include 'sidebar.php'; ?>
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">

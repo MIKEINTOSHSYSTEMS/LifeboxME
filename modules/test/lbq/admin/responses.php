@@ -7,6 +7,7 @@ if (empty($_SESSION['admin'])) {
 }*/
 require __DIR__ . '/../src/db.php';
 require __DIR__ . '/../src/model/Quiz.php';
+require __DIR__ . '/session_helper.php';
 $quiz = new Quiz($pdo);
 
 // Get filters
@@ -136,6 +137,14 @@ $participants = $pdo->query("
 
     .score-low {
       color: #dc3545;
+    }
+  </style>
+  <style>
+    @media (min-width: 768px) {
+      .px-md-4 {
+        padding-right: 7.5rem !important;
+        padding-left: 1.5rem !important;
+      }
     }
   </style>
 </head>
