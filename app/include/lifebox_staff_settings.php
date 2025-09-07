@@ -88,7 +88,7 @@ $tdatalifebox_staff[".listAjax"] = false;
 //	temporary
 //$tdatalifebox_staff[".listAjax"] = false;
 
-	$tdatalifebox_staff[".audit"] = false;
+	$tdatalifebox_staff[".audit"] = true;
 
 	$tdatalifebox_staff[".locking"] = false;
 

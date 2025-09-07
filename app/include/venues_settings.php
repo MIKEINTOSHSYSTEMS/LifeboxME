@@ -103,7 +103,7 @@ $tdatavenues[".listAjax"] = false;
 //	temporary
 //$tdatavenues[".listAjax"] = false;
 
-	$tdatavenues[".audit"] = false;
+	$tdatavenues[".audit"] = true;
 
 	$tdatavenues[".locking"] = false;
 

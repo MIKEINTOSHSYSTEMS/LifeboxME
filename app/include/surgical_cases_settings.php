@@ -289,7 +289,7 @@ $tdatasurgical_cases[".listAjax"] = false;
 //	temporary
 //$tdatasurgical_cases[".listAjax"] = false;
 
-	$tdatasurgical_cases[".audit"] = false;
+	$tdatasurgical_cases[".audit"] = true;
 
 	$tdatasurgical_cases[".locking"] = false;
 

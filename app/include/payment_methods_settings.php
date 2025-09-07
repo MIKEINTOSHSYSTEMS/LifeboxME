@@ -64,7 +64,7 @@ $tdatapayment_methods[".listAjax"] = false;
 //	temporary
 //$tdatapayment_methods[".listAjax"] = false;
 
-	$tdatapayment_methods[".audit"] = false;
+	$tdatapayment_methods[".audit"] = true;
 
 	$tdatapayment_methods[".locking"] = false;
 

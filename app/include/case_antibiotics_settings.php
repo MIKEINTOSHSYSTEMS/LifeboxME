@@ -70,7 +70,7 @@ $tdatacase_antibiotics[".listAjax"] = false;
 //	temporary
 //$tdatacase_antibiotics[".listAjax"] = false;
 
-	$tdatacase_antibiotics[".audit"] = false;
+	$tdatacase_antibiotics[".audit"] = true;
 
 	$tdatacase_antibiotics[".locking"] = false;
 

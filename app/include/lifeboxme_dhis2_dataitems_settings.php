@@ -82,7 +82,7 @@ $tdatalifeboxme_dhis2_dataitems[".listAjax"] = false;
 //	temporary
 //$tdatalifeboxme_dhis2_dataitems[".listAjax"] = false;
 
-	$tdatalifeboxme_dhis2_dataitems[".audit"] = false;
+	$tdatalifeboxme_dhis2_dataitems[".audit"] = true;
 
 	$tdatalifeboxme_dhis2_dataitems[".locking"] = false;
 

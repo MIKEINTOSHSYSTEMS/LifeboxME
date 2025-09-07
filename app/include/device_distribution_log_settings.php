@@ -82,7 +82,7 @@ $tdatadevice_distribution_log[".listAjax"] = false;
 //	temporary
 //$tdatadevice_distribution_log[".listAjax"] = false;
 
-	$tdatadevice_distribution_log[".audit"] = false;
+	$tdatadevice_distribution_log[".audit"] = true;
 
 	$tdatadevice_distribution_log[".locking"] = false;
 

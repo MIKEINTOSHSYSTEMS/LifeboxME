@@ -109,7 +109,7 @@ $tdatalbapt_development[".listAjax"] = false;
 //	temporary
 //$tdatalbapt_development[".listAjax"] = false;
 
-	$tdatalbapt_development[".audit"] = false;
+	$tdatalbapt_development[".audit"] = true;
 
 	$tdatalbapt_development[".locking"] = false;
 

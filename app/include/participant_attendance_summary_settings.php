@@ -106,7 +106,7 @@ $tdataparticipant_attendance_summary[".listAjax"] = false;
 //	temporary
 //$tdataparticipant_attendance_summary[".listAjax"] = false;
 
-	$tdataparticipant_attendance_summary[".audit"] = false;
+	$tdataparticipant_attendance_summary[".audit"] = true;
 
 	$tdataparticipant_attendance_summary[".locking"] = false;
 

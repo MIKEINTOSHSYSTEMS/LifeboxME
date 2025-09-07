@@ -106,7 +106,7 @@ $tdatalbapt_sample_workflow[".listAjax"] = false;
 //	temporary
 //$tdatalbapt_sample_workflow[".listAjax"] = false;
 
-	$tdatalbapt_sample_workflow[".audit"] = false;
+	$tdatalbapt_sample_workflow[".audit"] = true;
 
 	$tdatalbapt_sample_workflow[".locking"] = false;
 

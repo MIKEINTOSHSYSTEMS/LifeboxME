@@ -109,7 +109,7 @@ $tdatalbapt_finance[".listAjax"] = false;
 //	temporary
 //$tdatalbapt_finance[".listAjax"] = false;
 
-	$tdatalbapt_finance[".audit"] = false;
+	$tdatalbapt_finance[".audit"] = true;
 
 	$tdatalbapt_finance[".locking"] = false;
 

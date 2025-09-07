@@ -79,7 +79,7 @@ $tdatatraining_courses[".listAjax"] = false;
 //	temporary
 //$tdatatraining_courses[".listAjax"] = false;
 
-	$tdatatraining_courses[".audit"] = false;
+	$tdatatraining_courses[".audit"] = true;
 
 	$tdatatraining_courses[".locking"] = false;
 

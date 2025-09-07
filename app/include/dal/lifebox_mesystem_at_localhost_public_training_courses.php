@@ -7,7 +7,6 @@ $dalTabletraining_courses["duration_hours"] = array("type"=>3,"varname"=>"durati
 $dalTabletraining_courses["is_active"] = array("type"=>11,"varname"=>"is_active", "name" => "is_active", "autoInc" => "0");
 $dalTabletraining_courses["created_at"] = array("type"=>135,"varname"=>"created_at", "name" => "created_at", "autoInc" => "0");
 $dalTabletraining_courses["updated_at"] = array("type"=>135,"varname"=>"updated_at", "name" => "updated_at", "autoInc" => "0");
-$dalTabletraining_courses["course_id"]["key"]=true;
 
 $dal_info["lifebox_mesystem_at_localhost_public_training_courses"] = &$dalTabletraining_courses;
 ?>

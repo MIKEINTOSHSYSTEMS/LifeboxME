@@ -88,7 +88,7 @@ $tdatalbapt_kpis_tracking_view[".listAjax"] = false;
 //	temporary
 //$tdatalbapt_kpis_tracking_view[".listAjax"] = false;
 
-	$tdatalbapt_kpis_tracking_view[".audit"] = false;
+	$tdatalbapt_kpis_tracking_view[".audit"] = true;
 
 	$tdatalbapt_kpis_tracking_view[".locking"] = false;
 

@@ -9,7 +9,6 @@ $dalTablelifebox_staff["region_id"] = array("type"=>3,"varname"=>"region_id", "n
 $dalTablelifebox_staff["is_active"] = array("type"=>11,"varname"=>"is_active", "name" => "is_active", "autoInc" => "0");
 $dalTablelifebox_staff["created_at"] = array("type"=>135,"varname"=>"created_at", "name" => "created_at", "autoInc" => "0");
 $dalTablelifebox_staff["updated_at"] = array("type"=>135,"varname"=>"updated_at", "name" => "updated_at", "autoInc" => "0");
-$dalTablelifebox_staff["staff_id"]["key"]=true;
 
 $dal_info["lifebox_mesystem_at_localhost_public_lifebox_staff"] = &$dalTablelifebox_staff;
 ?>

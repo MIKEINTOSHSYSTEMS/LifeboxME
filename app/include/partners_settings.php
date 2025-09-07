@@ -82,7 +82,7 @@ $tdatapartners[".listAjax"] = false;
 //	temporary
 //$tdatapartners[".listAjax"] = false;
 
-	$tdatapartners[".audit"] = false;
+	$tdatapartners[".audit"] = true;
 
 	$tdatapartners[".locking"] = false;
 

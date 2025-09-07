@@ -76,7 +76,7 @@ $tdataparticipant_role[".listAjax"] = false;
 //	temporary
 //$tdataparticipant_role[".listAjax"] = false;
 
-	$tdataparticipant_role[".audit"] = false;
+	$tdataparticipant_role[".audit"] = true;
 
 	$tdataparticipant_role[".locking"] = false;
 

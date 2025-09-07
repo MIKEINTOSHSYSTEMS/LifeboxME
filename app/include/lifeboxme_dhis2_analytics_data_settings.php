@@ -121,7 +121,7 @@ $tdatalifeboxme_dhis2_analytics_data[".listAjax"] = false;
 //	temporary
 //$tdatalifeboxme_dhis2_analytics_data[".listAjax"] = false;
 
-	$tdatalifeboxme_dhis2_analytics_data[".audit"] = false;
+	$tdatalifeboxme_dhis2_analytics_data[".audit"] = true;
 
 	$tdatalifeboxme_dhis2_analytics_data[".locking"] = false;
 

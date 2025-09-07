@@ -8,7 +8,6 @@ $dalTablelifeboxme_dhis2_dataitems["short_name"] = array("type"=>201,"varname"=>
 $dalTablelifeboxme_dhis2_dataitems["display_short_name"] = array("type"=>201,"varname"=>"display_short_name", "name" => "display_short_name", "autoInc" => "0");
 $dalTablelifeboxme_dhis2_dataitems["dimension_item_type"] = array("type"=>200,"varname"=>"dimension_item_type", "name" => "dimension_item_type", "autoInc" => "0");
 $dalTablelifeboxme_dhis2_dataitems["last_updated"] = array("type"=>135,"varname"=>"last_updated", "name" => "last_updated", "autoInc" => "0");
-$dalTablelifeboxme_dhis2_dataitems["id"]["key"]=true;
 
 $dal_info["lifebox_mesystem_at_localhost_public_lifeboxme_dhis2_dataitems"] = &$dalTablelifeboxme_dhis2_dataitems;
 ?>

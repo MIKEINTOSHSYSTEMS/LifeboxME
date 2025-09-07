@@ -76,7 +76,7 @@ $tdatatraining_approaches[".listAjax"] = false;
 //	temporary
 //$tdatatraining_approaches[".listAjax"] = false;
 
-	$tdatatraining_approaches[".audit"] = false;
+	$tdatatraining_approaches[".audit"] = true;
 
 	$tdatatraining_approaches[".locking"] = false;
 

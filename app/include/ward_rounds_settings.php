@@ -175,7 +175,7 @@ $tdataward_rounds[".listAjax"] = false;
 //	temporary
 //$tdataward_rounds[".listAjax"] = false;
 
-	$tdataward_rounds[".audit"] = false;
+	$tdataward_rounds[".audit"] = true;
 
 	$tdataward_rounds[".locking"] = false;
 

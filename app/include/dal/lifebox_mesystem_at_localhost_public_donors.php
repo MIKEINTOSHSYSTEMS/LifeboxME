@@ -10,7 +10,6 @@ $dalTabledonors["contact_person"] = array("type"=>200,"varname"=>"contact_person
 $dalTabledonors["donor_status"] = array("type"=>11,"varname"=>"donor_status", "name" => "donor_status", "autoInc" => "0");
 $dalTabledonors["donor_type"] = array("type"=>200,"varname"=>"donor_type", "name" => "donor_type", "autoInc" => "0");
 $dalTabledonors["notes"] = array("type"=>200,"varname"=>"notes", "name" => "notes", "autoInc" => "0");
-$dalTabledonors["id"]["key"]=true;
 
 $dal_info["lifebox_mesystem_at_localhost_public_donors"] = &$dalTabledonors;
 ?>

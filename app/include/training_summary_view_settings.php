@@ -115,7 +115,7 @@ $tdatatraining_summary_view[".listAjax"] = false;
 //	temporary
 //$tdatatraining_summary_view[".listAjax"] = false;
 
-	$tdatatraining_summary_view[".audit"] = false;
+	$tdatatraining_summary_view[".audit"] = true;
 
 	$tdatatraining_summary_view[".locking"] = false;
 

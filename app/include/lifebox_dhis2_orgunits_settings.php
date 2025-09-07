@@ -85,7 +85,7 @@ $tdatalifebox_dhis2_orgunits[".listAjax"] = false;
 //	temporary
 //$tdatalifebox_dhis2_orgunits[".listAjax"] = false;
 
-	$tdatalifebox_dhis2_orgunits[".audit"] = false;
+	$tdatalifebox_dhis2_orgunits[".audit"] = true;
 
 	$tdatalifebox_dhis2_orgunits[".locking"] = false;
 

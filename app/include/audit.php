@@ -412,219 +412,219 @@ class AuditTrailTable
 	{
 		if($table=="public.antibiotics")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.case_antibiotics")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.clean_cut_implementations")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.countries")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.device_distributions")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.diagnoses")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.facilities")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.follow_ups")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.languages")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lifebox_staff")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.partners")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.procedures")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.regions")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.surgical_cases")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.trainers")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.training_courses")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.training_languages")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.training_leads")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.training_partners")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.training_sessions")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.training_trainers")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.ward_antibiotics")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.ward_rounds")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.clean_cut_implementation_summary_view")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.device_distribution_summary_view")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.surgical_case_summary_view")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.training_summary_view")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.programs")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.training_approaches")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.training_types")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.quarters")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.participant_role")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.sex")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.training_participants")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.venues")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.training_attendance")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.participant_attendance_detail")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.participant_attendance_summary")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.training_participation")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.daily_attendance_view")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.users")
 		{
-			return false;
+			return true;
 		}
 		if($table=="admin_rights")
 		{
-			return false;
+			return true;
 		}
 		if($table=="admin_members")
 		{
-			return false;
+			return true;
 		}
 		if($table=="admin_users")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lifeboxme__audit")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lifeboxme__locking")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.months")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.devices")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.payment_methods")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.transaction_types")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.donors")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.device_distribution_log")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.device_inventory_changes")
 		{
-			return false;
+			return true;
 		}
 		if($table=="aio_training_tracking")
 		{
-			return false;
+			return true;
 		}
 		if($table=="Dashboard")
 		{
@@ -632,31 +632,31 @@ class AuditTrailTable
 		}
 		if($table=="Lifebox_DHIS2_OrgUnits")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lifeboxme_dhis2_orgunits")
 		{
-			return false;
+			return true;
 		}
 		if($table=="Lifebox_DHIS2_Settings")
 		{
-			return false;
+			return true;
 		}
 		if($table=="Lifebox_DHIS2_dataItems")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lifeboxme_dhis2_dataitems")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lifeboxme_dhis2_analytics_settings")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lifeboxme_dhis2_analytics_data")
 		{
-			return false;
+			return true;
 		}
 		if($table=="aio_training_tracking Chart")
 		{
@@ -668,91 +668,91 @@ class AuditTrailTable
 		}
 		if($table=="public.smtp")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_annual_plan_tracker")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_beginnings_fund")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_communications")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_cri")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_dashboard_summary")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_development")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_elma")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_governance")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_kpis_on_track")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_operations")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_programs")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_sample_workflow")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_status")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_strategic_areas")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_all_activities_view")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_dashboard_summary_view")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_kpis_tracking_view")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_unified_activities")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.years")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_finance")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_hr")
 		{
-			return false;
+			return true;
 		}
 	}
 
@@ -1118,219 +1118,219 @@ class AuditTrailFile
 	{
 		if($table=="public.antibiotics")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.case_antibiotics")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.clean_cut_implementations")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.countries")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.device_distributions")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.diagnoses")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.facilities")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.follow_ups")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.languages")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lifebox_staff")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.partners")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.procedures")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.regions")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.surgical_cases")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.trainers")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.training_courses")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.training_languages")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.training_leads")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.training_partners")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.training_sessions")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.training_trainers")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.ward_antibiotics")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.ward_rounds")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.clean_cut_implementation_summary_view")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.device_distribution_summary_view")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.surgical_case_summary_view")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.training_summary_view")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.programs")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.training_approaches")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.training_types")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.quarters")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.participant_role")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.sex")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.training_participants")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.venues")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.training_attendance")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.participant_attendance_detail")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.participant_attendance_summary")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.training_participation")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.daily_attendance_view")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.users")
 		{
-			return false;
+			return true;
 		}
 		if($table=="admin_rights")
 		{
-			return false;
+			return true;
 		}
 		if($table=="admin_members")
 		{
-			return false;
+			return true;
 		}
 		if($table=="admin_users")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lifeboxme__audit")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lifeboxme__locking")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.months")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.devices")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.payment_methods")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.transaction_types")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.donors")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.device_distribution_log")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.device_inventory_changes")
 		{
-			return false;
+			return true;
 		}
 		if($table=="aio_training_tracking")
 		{
-			return false;
+			return true;
 		}
 		if($table=="Dashboard")
 		{
@@ -1338,31 +1338,31 @@ class AuditTrailFile
 		}
 		if($table=="Lifebox_DHIS2_OrgUnits")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lifeboxme_dhis2_orgunits")
 		{
-			return false;
+			return true;
 		}
 		if($table=="Lifebox_DHIS2_Settings")
 		{
-			return false;
+			return true;
 		}
 		if($table=="Lifebox_DHIS2_dataItems")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lifeboxme_dhis2_dataitems")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lifeboxme_dhis2_analytics_settings")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lifeboxme_dhis2_analytics_data")
 		{
-			return false;
+			return true;
 		}
 		if($table=="aio_training_tracking Chart")
 		{
@@ -1374,91 +1374,91 @@ class AuditTrailFile
 		}
 		if($table=="public.smtp")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_annual_plan_tracker")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_beginnings_fund")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_communications")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_cri")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_dashboard_summary")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_development")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_elma")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_governance")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_kpis_on_track")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_operations")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_programs")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_sample_workflow")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_status")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_strategic_areas")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_all_activities_view")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_dashboard_summary_view")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_kpis_tracking_view")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_unified_activities")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.years")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_finance")
 		{
-			return false;
+			return true;
 		}
 		if($table=="public.lbapt_hr")
 		{
-			return false;
+			return true;
 		}
 	}
 

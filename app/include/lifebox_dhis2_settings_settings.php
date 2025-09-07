@@ -58,7 +58,7 @@ $tdatalifebox_dhis2_settings[".listAjax"] = false;
 //	temporary
 //$tdatalifebox_dhis2_settings[".listAjax"] = false;
 
-	$tdatalifebox_dhis2_settings[".audit"] = false;
+	$tdatalifebox_dhis2_settings[".audit"] = true;
 
 	$tdatalifebox_dhis2_settings[".locking"] = false;
 

@@ -118,7 +118,7 @@ $tdataadmin_users[".listAjax"] = false;
 //	temporary
 //$tdataadmin_users[".listAjax"] = false;
 
-	$tdataadmin_users[".audit"] = false;
+	$tdataadmin_users[".audit"] = true;
 
 	$tdataadmin_users[".locking"] = false;
 

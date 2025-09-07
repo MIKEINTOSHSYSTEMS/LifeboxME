@@ -76,7 +76,7 @@ $tdatasex[".listAjax"] = false;
 //	temporary
 //$tdatasex[".listAjax"] = false;
 
-	$tdatasex[".audit"] = false;
+	$tdatasex[".audit"] = true;
 
 	$tdatasex[".locking"] = false;
 

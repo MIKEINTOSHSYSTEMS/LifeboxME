@@ -9,7 +9,6 @@ $dalTablesmtp["smtpfrom"] = array("type"=>200,"varname"=>"smtpfrom", "name" => "
 $dalTablesmtp["secure"] = array("type"=>200,"varname"=>"secure", "name" => "secure", "autoInc" => "0");
 $dalTablesmtp["created_at"] = array("type"=>135,"varname"=>"created_at", "name" => "created_at", "autoInc" => "0");
 $dalTablesmtp["updated_at"] = array("type"=>135,"varname"=>"updated_at", "name" => "updated_at", "autoInc" => "0");
-$dalTablesmtp["id"]["key"]=true;
 
 $dal_info["lifebox_mesystem_at_localhost_public_smtp"] = &$dalTablesmtp;
 ?>

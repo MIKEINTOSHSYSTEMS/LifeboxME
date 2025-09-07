@@ -17,7 +17,6 @@ $dalTablelbapt_beginnings_fund["achievement_q4"] = array("type"=>11,"varname"=>"
 $dalTablelbapt_beginnings_fund["notes"] = array("type"=>201,"varname"=>"notes", "name" => "notes", "autoInc" => "0");
 $dalTablelbapt_beginnings_fund["created_at"] = array("type"=>135,"varname"=>"created_at", "name" => "created_at", "autoInc" => "0");
 $dalTablelbapt_beginnings_fund["updated_at"] = array("type"=>135,"varname"=>"updated_at", "name" => "updated_at", "autoInc" => "0");
-$dalTablelbapt_beginnings_fund["bf_id"]["key"]=true;
 
 $dal_info["lifebox_mesystem_at_localhost_public_lbapt_beginnings_fund"] = &$dalTablelbapt_beginnings_fund;
 ?>

@@ -88,7 +88,7 @@ $tdatadonors[".listAjax"] = false;
 //	temporary
 //$tdatadonors[".listAjax"] = false;
 
-	$tdatadonors[".audit"] = false;
+	$tdatadonors[".audit"] = true;
 
 	$tdatadonors[".locking"] = false;
 

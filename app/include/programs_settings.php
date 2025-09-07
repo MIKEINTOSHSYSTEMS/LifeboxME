@@ -76,7 +76,7 @@ $tdataprograms[".listAjax"] = false;
 //	temporary
 //$tdataprograms[".listAjax"] = false;
 
-	$tdataprograms[".audit"] = false;
+	$tdataprograms[".audit"] = true;
 
 	$tdataprograms[".locking"] = false;
 

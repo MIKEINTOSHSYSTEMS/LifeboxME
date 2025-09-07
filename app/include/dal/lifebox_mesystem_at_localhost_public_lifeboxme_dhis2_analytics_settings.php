@@ -13,7 +13,6 @@ $dalTablelifeboxme_dhis2_analytics_settings["paging"] = array("type"=>11,"varnam
 $dalTablelifeboxme_dhis2_analytics_settings["page_size"] = array("type"=>3,"varname"=>"page_size", "name" => "page_size", "autoInc" => "0");
 $dalTablelifeboxme_dhis2_analytics_settings["created_at"] = array("type"=>135,"varname"=>"created_at", "name" => "created_at", "autoInc" => "0");
 $dalTablelifeboxme_dhis2_analytics_settings["updated_at"] = array("type"=>135,"varname"=>"updated_at", "name" => "updated_at", "autoInc" => "0");
-$dalTablelifeboxme_dhis2_analytics_settings["id"]["key"]=true;
 
 $dal_info["lifebox_mesystem_at_localhost_public_lifeboxme_dhis2_analytics_settings"] = &$dalTablelifeboxme_dhis2_analytics_settings;
 ?>

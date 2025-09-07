@@ -76,7 +76,7 @@ $tdatacountries[".listAjax"] = false;
 //	temporary
 //$tdatacountries[".listAjax"] = false;
 
-	$tdatacountries[".audit"] = false;
+	$tdatacountries[".audit"] = true;
 
 	$tdatacountries[".locking"] = false;
 

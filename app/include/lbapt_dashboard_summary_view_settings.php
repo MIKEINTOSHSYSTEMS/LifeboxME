@@ -76,7 +76,7 @@ $tdatalbapt_dashboard_summary_view[".listAjax"] = false;
 //	temporary
 //$tdatalbapt_dashboard_summary_view[".listAjax"] = false;
 
-	$tdatalbapt_dashboard_summary_view[".audit"] = false;
+	$tdatalbapt_dashboard_summary_view[".audit"] = true;
 
 	$tdatalbapt_dashboard_summary_view[".locking"] = false;
 

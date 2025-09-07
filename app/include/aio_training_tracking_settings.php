@@ -148,7 +148,7 @@ $tdataaio_training_tracking[".listAjax"] = false;
 //	temporary
 //$tdataaio_training_tracking[".listAjax"] = false;
 
-	$tdataaio_training_tracking[".audit"] = false;
+	$tdataaio_training_tracking[".audit"] = true;
 
 	$tdataaio_training_tracking[".locking"] = false;
 

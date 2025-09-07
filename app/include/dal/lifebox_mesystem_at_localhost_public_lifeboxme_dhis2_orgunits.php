@@ -11,7 +11,6 @@ $dalTablelifeboxme_dhis2_orgunits["hosp_fac_id"] = array("type"=>200,"varname"=>
 $dalTablelifeboxme_dhis2_orgunits["hospital_facility"] = array("type"=>200,"varname"=>"hospital_facility", "name" => "hospital_facility", "autoInc" => "0");
 $dalTablelifeboxme_dhis2_orgunits["level"] = array("type"=>3,"varname"=>"level", "name" => "level", "autoInc" => "0");
 $dalTablelifeboxme_dhis2_orgunits["last_updated"] = array("type"=>135,"varname"=>"last_updated", "name" => "last_updated", "autoInc" => "0");
-$dalTablelifeboxme_dhis2_orgunits["id"]["key"]=true;
 
 $dal_info["lifebox_mesystem_at_localhost_public_lifeboxme_dhis2_orgunits"] = &$dalTablelifeboxme_dhis2_orgunits;
 ?>

@@ -109,7 +109,7 @@ $tdatalbapt_elma[".listAjax"] = false;
 //	temporary
 //$tdatalbapt_elma[".listAjax"] = false;
 
-	$tdatalbapt_elma[".audit"] = false;
+	$tdatalbapt_elma[".audit"] = true;
 
 	$tdatalbapt_elma[".locking"] = false;
 

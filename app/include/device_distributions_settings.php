@@ -112,7 +112,7 @@ $tdatadevice_distributions[".listAjax"] = false;
 //	temporary
 //$tdatadevice_distributions[".listAjax"] = false;
 
-	$tdatadevice_distributions[".audit"] = false;
+	$tdatadevice_distributions[".audit"] = true;
 
 	$tdatadevice_distributions[".locking"] = false;
 

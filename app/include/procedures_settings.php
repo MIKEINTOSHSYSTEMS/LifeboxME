@@ -73,7 +73,7 @@ $tdataprocedures[".listAjax"] = false;
 //	temporary
 //$tdataprocedures[".listAjax"] = false;
 
-	$tdataprocedures[".audit"] = false;
+	$tdataprocedures[".audit"] = true;
 
 	$tdataprocedures[".locking"] = false;
 

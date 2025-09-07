@@ -70,7 +70,7 @@ $tdataantibiotics[".listAjax"] = false;
 //	temporary
 //$tdataantibiotics[".listAjax"] = false;
 
-	$tdataantibiotics[".audit"] = false;
+	$tdataantibiotics[".audit"] = true;
 
 	$tdataantibiotics[".locking"] = false;
 

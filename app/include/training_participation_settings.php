@@ -79,7 +79,7 @@ $tdatatraining_participation[".listAjax"] = false;
 //	temporary
 //$tdatatraining_participation[".listAjax"] = false;
 
-	$tdatatraining_participation[".audit"] = false;
+	$tdatatraining_participation[".audit"] = true;
 
 	$tdatatraining_participation[".locking"] = false;
 

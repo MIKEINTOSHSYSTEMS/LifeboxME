@@ -64,7 +64,7 @@ $tdatatransaction_types[".listAjax"] = false;
 //	temporary
 //$tdatatransaction_types[".listAjax"] = false;
 
-	$tdatatransaction_types[".audit"] = false;
+	$tdatatransaction_types[".audit"] = true;
 
 	$tdatatransaction_types[".locking"] = false;
 

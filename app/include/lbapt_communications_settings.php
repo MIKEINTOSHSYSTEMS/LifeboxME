@@ -109,7 +109,7 @@ $tdatalbapt_communications[".listAjax"] = false;
 //	temporary
 //$tdatalbapt_communications[".listAjax"] = false;
 
-	$tdatalbapt_communications[".audit"] = false;
+	$tdatalbapt_communications[".audit"] = true;
 
 	$tdatalbapt_communications[".locking"] = false;
 

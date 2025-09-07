@@ -15,7 +15,6 @@ $dalTabletraining_participants["updated_at"] = array("type"=>135,"varname"=>"upd
 $dalTabletraining_participants["venue_id"] = array("type"=>3,"varname"=>"venue_id", "name" => "venue_id", "autoInc" => "0");
 $dalTabletraining_participants["title_salutation"] = array("type"=>200,"varname"=>"title_salutation", "name" => "title_salutation", "autoInc" => "0");
 $dalTabletraining_participants["middle_name"] = array("type"=>200,"varname"=>"middle_name", "name" => "middle_name", "autoInc" => "0");
-$dalTabletraining_participants["participant_id"]["key"]=true;
 
 $dal_info["lifebox_mesystem_at_localhost_public_training_participants"] = &$dalTabletraining_participants;
 ?>

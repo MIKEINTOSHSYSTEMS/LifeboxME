@@ -109,7 +109,7 @@ $tdatalbapt_beginnings_fund[".listAjax"] = false;
 //	temporary
 //$tdatalbapt_beginnings_fund[".listAjax"] = false;
 
-	$tdatalbapt_beginnings_fund[".audit"] = false;
+	$tdatalbapt_beginnings_fund[".audit"] = true;
 
 	$tdatalbapt_beginnings_fund[".locking"] = false;
 

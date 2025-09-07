@@ -16,7 +16,6 @@ $dalTablelbapt_sample_workflow["status_id"] = array("type"=>3,"varname"=>"status
 $dalTablelbapt_sample_workflow["created_at"] = array("type"=>135,"varname"=>"created_at", "name" => "created_at", "autoInc" => "0");
 $dalTablelbapt_sample_workflow["updated_at"] = array("type"=>135,"varname"=>"updated_at", "name" => "updated_at", "autoInc" => "0");
 $dalTablelbapt_sample_workflow["fyear"] = array("type"=>3,"varname"=>"fyear", "name" => "fyear", "autoInc" => "0");
-$dalTablelbapt_sample_workflow["workflow_id"]["key"]=true;
 
 $dal_info["lifebox_mesystem_at_localhost_public_lbapt_sample_workflow"] = &$dalTablelbapt_sample_workflow;
 ?>

@@ -17,7 +17,6 @@ $dalTablelbapt_operations["achievement_q4"] = array("type"=>11,"varname"=>"achie
 $dalTablelbapt_operations["notes"] = array("type"=>201,"varname"=>"notes", "name" => "notes", "autoInc" => "0");
 $dalTablelbapt_operations["created_at"] = array("type"=>135,"varname"=>"created_at", "name" => "created_at", "autoInc" => "0");
 $dalTablelbapt_operations["updated_at"] = array("type"=>135,"varname"=>"updated_at", "name" => "updated_at", "autoInc" => "0");
-$dalTablelbapt_operations["operation_id"]["key"]=true;
 
 $dal_info["lifebox_mesystem_at_localhost_public_lbapt_operations"] = &$dalTablelbapt_operations;
 ?>

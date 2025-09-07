@@ -73,7 +73,7 @@ $tdatadiagnoses[".listAjax"] = false;
 //	temporary
 //$tdatadiagnoses[".listAjax"] = false;
 
-	$tdatadiagnoses[".audit"] = false;
+	$tdatadiagnoses[".audit"] = true;
 
 	$tdatadiagnoses[".locking"] = false;
 

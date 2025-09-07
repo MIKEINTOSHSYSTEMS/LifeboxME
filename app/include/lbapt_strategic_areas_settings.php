@@ -73,7 +73,7 @@ $tdatalbapt_strategic_areas[".listAjax"] = false;
 //	temporary
 //$tdatalbapt_strategic_areas[".listAjax"] = false;
 
-	$tdatalbapt_strategic_areas[".audit"] = false;
+	$tdatalbapt_strategic_areas[".audit"] = true;
 
 	$tdatalbapt_strategic_areas[".locking"] = false;
 

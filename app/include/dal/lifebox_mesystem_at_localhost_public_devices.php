@@ -16,7 +16,6 @@ $dalTabledevices["facility_id"] = array("type"=>3,"varname"=>"facility_id", "nam
 $dalTabledevices["warehouse_location"] = array("type"=>200,"varname"=>"warehouse_location", "name" => "warehouse_location", "autoInc" => "0");
 $dalTabledevices["created_at"] = array("type"=>135,"varname"=>"created_at", "name" => "created_at", "autoInc" => "0");
 $dalTabledevices["updated_at"] = array("type"=>135,"varname"=>"updated_at", "name" => "updated_at", "autoInc" => "0");
-$dalTabledevices["device_id"]["key"]=true;
 
 $dal_info["lifebox_mesystem_at_localhost_public_devices"] = &$dalTabledevices;
 ?>

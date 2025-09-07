@@ -13,7 +13,6 @@ $dalTablelbapt_kpis_on_track["achievement_q3"] = array("type"=>11,"varname"=>"ac
 $dalTablelbapt_kpis_on_track["achievement_q4"] = array("type"=>11,"varname"=>"achievement_q4", "name" => "achievement_q4", "autoInc" => "0");
 $dalTablelbapt_kpis_on_track["created_at"] = array("type"=>135,"varname"=>"created_at", "name" => "created_at", "autoInc" => "0");
 $dalTablelbapt_kpis_on_track["updated_at"] = array("type"=>135,"varname"=>"updated_at", "name" => "updated_at", "autoInc" => "0");
-$dalTablelbapt_kpis_on_track["kpi_id"]["key"]=true;
 
 $dal_info["lifebox_mesystem_at_localhost_public_lbapt_kpis_on_track"] = &$dalTablelbapt_kpis_on_track;
 ?>

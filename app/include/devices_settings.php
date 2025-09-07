@@ -103,7 +103,7 @@ $tdatadevices[".listAjax"] = false;
 //	temporary
 //$tdatadevices[".listAjax"] = false;
 
-	$tdatadevices[".audit"] = false;
+	$tdatadevices[".audit"] = true;
 
 	$tdatadevices[".locking"] = false;
 

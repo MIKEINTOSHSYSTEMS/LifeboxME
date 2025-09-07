@@ -85,7 +85,7 @@ $tdatasmtp[".listAjax"] = false;
 //	temporary
 //$tdatasmtp[".listAjax"] = false;
 
-	$tdatasmtp[".audit"] = false;
+	$tdatasmtp[".audit"] = true;
 
 	$tdatasmtp[".locking"] = false;
 

@@ -112,7 +112,7 @@ $tdatalbapt_annual_plan_tracker[".listAjax"] = false;
 //	temporary
 //$tdatalbapt_annual_plan_tracker[".listAjax"] = false;
 
-	$tdatalbapt_annual_plan_tracker[".audit"] = false;
+	$tdatalbapt_annual_plan_tracker[".audit"] = true;
 
 	$tdatalbapt_annual_plan_tracker[".locking"] = false;
 

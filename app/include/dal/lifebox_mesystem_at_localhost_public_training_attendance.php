@@ -8,7 +8,6 @@ $dalTabletraining_attendance["notes"] = array("type"=>201,"varname"=>"notes", "n
 $dalTabletraining_attendance["recorded_at"] = array("type"=>135,"varname"=>"recorded_at", "name" => "recorded_at", "autoInc" => "0");
 $dalTabletraining_attendance["recorded_by"] = array("type"=>3,"varname"=>"recorded_by", "name" => "recorded_by", "autoInc" => "0");
 $dalTabletraining_attendance["participation_id"] = array("type"=>3,"varname"=>"participation_id", "name" => "participation_id", "autoInc" => "0");
-$dalTabletraining_attendance["attendance_id"]["key"]=true;
 
 $dal_info["lifebox_mesystem_at_localhost_public_training_attendance"] = &$dalTabletraining_attendance;
 ?>

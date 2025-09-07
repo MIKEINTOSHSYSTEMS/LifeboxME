@@ -7,7 +7,6 @@ $dalTablelifeboxme_settings["USERNAME"] = array("type"=>201,"varname"=>"USERNAME
 $dalTablelifeboxme_settings["COOKIE"] = array("type"=>200,"varname"=>"COOKIE", "name" => "COOKIE", "autoInc" => "0");
 $dalTablelifeboxme_settings["SEARCH"] = array("type"=>201,"varname"=>"SEARCH", "name" => "SEARCH", "autoInc" => "0");
 $dalTablelifeboxme_settings["TABLENAME"] = array("type"=>200,"varname"=>"TABLENAME", "name" => "TABLENAME", "autoInc" => "0");
-$dalTablelifeboxme_settings["ID"]["key"]=true;
 
 $dal_info["lifebox_mesystem_at_localhost_public_lifeboxme_settings"] = &$dalTablelifeboxme_settings;
 ?>

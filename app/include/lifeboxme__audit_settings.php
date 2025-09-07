@@ -79,7 +79,7 @@ $tdatalifeboxme__audit[".listAjax"] = false;
 //	temporary
 //$tdatalifeboxme__audit[".listAjax"] = false;
 
-	$tdatalifeboxme__audit[".audit"] = false;
+	$tdatalifeboxme__audit[".audit"] = true;
 
 	$tdatalifeboxme__audit[".locking"] = false;
 

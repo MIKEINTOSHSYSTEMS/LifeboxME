@@ -103,7 +103,7 @@ $tdatatraining_participants[".listAjax"] = false;
 //	temporary
 //$tdatatraining_participants[".listAjax"] = false;
 
-	$tdatatraining_participants[".audit"] = false;
+	$tdatatraining_participants[".audit"] = true;
 
 	$tdatatraining_participants[".locking"] = false;
 

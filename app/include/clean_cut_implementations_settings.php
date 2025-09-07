@@ -109,7 +109,7 @@ $tdataclean_cut_implementations[".listAjax"] = false;
 //	temporary
 //$tdataclean_cut_implementations[".listAjax"] = false;
 
-	$tdataclean_cut_implementations[".audit"] = false;
+	$tdataclean_cut_implementations[".audit"] = true;
 
 	$tdataclean_cut_implementations[".locking"] = false;
 

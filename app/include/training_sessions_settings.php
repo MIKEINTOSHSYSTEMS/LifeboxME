@@ -115,7 +115,7 @@ $tdatatraining_sessions[".listAjax"] = false;
 //	temporary
 //$tdatatraining_sessions[".listAjax"] = false;
 
-	$tdatatraining_sessions[".audit"] = false;
+	$tdatatraining_sessions[".audit"] = true;
 
 	$tdatatraining_sessions[".locking"] = false;
 

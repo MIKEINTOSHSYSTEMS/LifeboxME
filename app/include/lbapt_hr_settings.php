@@ -109,7 +109,7 @@ $tdatalbapt_hr[".listAjax"] = false;
 //	temporary
 //$tdatalbapt_hr[".listAjax"] = false;
 
-	$tdatalbapt_hr[".audit"] = false;
+	$tdatalbapt_hr[".audit"] = true;
 
 	$tdatalbapt_hr[".locking"] = false;
 

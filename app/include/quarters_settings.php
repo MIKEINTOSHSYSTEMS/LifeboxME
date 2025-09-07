@@ -64,7 +64,7 @@ $tdataquarters[".listAjax"] = false;
 //	temporary
 //$tdataquarters[".listAjax"] = false;
 
-	$tdataquarters[".audit"] = false;
+	$tdataquarters[".audit"] = true;
 
 	$tdataquarters[".locking"] = false;
 

@@ -82,7 +82,7 @@ $tdatadevice_inventory_changes[".listAjax"] = false;
 //	temporary
 //$tdatadevice_inventory_changes[".listAjax"] = false;
 
-	$tdatadevice_inventory_changes[".audit"] = false;
+	$tdatadevice_inventory_changes[".audit"] = true;
 
 	$tdatadevice_inventory_changes[".locking"] = false;
 

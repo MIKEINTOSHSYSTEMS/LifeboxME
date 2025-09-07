@@ -136,7 +136,7 @@ $tdatatraining_attendance[".listAjax"] = false;
 //	temporary
 //$tdatatraining_attendance[".listAjax"] = false;
 
-	$tdatatraining_attendance[".audit"] = false;
+	$tdatatraining_attendance[".audit"] = true;
 
 	$tdatatraining_attendance[".locking"] = false;
 

@@ -88,7 +88,7 @@ $tdatadaily_attendance_view[".listAjax"] = false;
 //	temporary
 //$tdatadaily_attendance_view[".listAjax"] = false;
 
-	$tdatadaily_attendance_view[".audit"] = false;
+	$tdatadaily_attendance_view[".audit"] = true;
 
 	$tdatadaily_attendance_view[".locking"] = false;
 

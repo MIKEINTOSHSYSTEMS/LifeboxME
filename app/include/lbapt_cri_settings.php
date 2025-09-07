@@ -109,7 +109,7 @@ $tdatalbapt_cri[".listAjax"] = false;
 //	temporary
 //$tdatalbapt_cri[".listAjax"] = false;
 
-	$tdatalbapt_cri[".audit"] = false;
+	$tdatalbapt_cri[".audit"] = true;
 
 	$tdatalbapt_cri[".locking"] = false;
 

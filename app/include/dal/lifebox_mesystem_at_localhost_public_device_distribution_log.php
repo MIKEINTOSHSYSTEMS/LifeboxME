@@ -8,7 +8,6 @@ $dalTabledevice_distribution_log["distributed_quantity"] = array("type"=>3,"varn
 $dalTabledevice_distribution_log["new_quantity"] = array("type"=>3,"varname"=>"new_quantity", "name" => "new_quantity", "autoInc" => "0");
 $dalTabledevice_distribution_log["performed_by"] = array("type"=>200,"varname"=>"performed_by", "name" => "performed_by", "autoInc" => "0");
 $dalTabledevice_distribution_log["created_at"] = array("type"=>135,"varname"=>"created_at", "name" => "created_at", "autoInc" => "0");
-$dalTabledevice_distribution_log["log_id"]["key"]=true;
 
 $dal_info["lifebox_mesystem_at_localhost_public_device_distribution_log"] = &$dalTabledevice_distribution_log;
 ?>

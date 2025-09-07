@@ -8,7 +8,6 @@ $dalTablelifeboxme__locking["keys"] = array("type"=>200,"varname"=>"keys", "name
 $dalTablelifeboxme__locking["sessionid"] = array("type"=>200,"varname"=>"sessionid", "name" => "sessionid", "autoInc" => "0");
 $dalTablelifeboxme__locking["userid"] = array("type"=>200,"varname"=>"userid", "name" => "userid", "autoInc" => "0");
 $dalTablelifeboxme__locking["action"] = array("type"=>3,"varname"=>"action", "name" => "action", "autoInc" => "0");
-$dalTablelifeboxme__locking["id"]["key"]=true;
 
 $dal_info["lifebox_mesystem_at_localhost_public_lifeboxme__locking"] = &$dalTablelifeboxme__locking;
 ?>

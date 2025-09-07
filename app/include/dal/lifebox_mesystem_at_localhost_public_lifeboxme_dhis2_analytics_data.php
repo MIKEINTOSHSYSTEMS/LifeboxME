@@ -21,7 +21,6 @@ $dalTablelifeboxme_dhis2_analytics_data["stored_by"] = array("type"=>200,"varnam
 $dalTablelifeboxme_dhis2_analytics_data["created"] = array("type"=>135,"varname"=>"created", "name" => "created", "autoInc" => "0");
 $dalTablelifeboxme_dhis2_analytics_data["last_updated"] = array("type"=>135,"varname"=>"last_updated", "name" => "last_updated", "autoInc" => "0");
 $dalTablelifeboxme_dhis2_analytics_data["fetched_at"] = array("type"=>135,"varname"=>"fetched_at", "name" => "fetched_at", "autoInc" => "0");
-$dalTablelifeboxme_dhis2_analytics_data["id"]["key"]=true;
 
 $dal_info["lifebox_mesystem_at_localhost_public_lifeboxme_dhis2_analytics_data"] = &$dalTablelifeboxme_dhis2_analytics_data;
 ?>

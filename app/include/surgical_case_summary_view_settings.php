@@ -112,7 +112,7 @@ $tdatasurgical_case_summary_view[".listAjax"] = false;
 //	temporary
 //$tdatasurgical_case_summary_view[".listAjax"] = false;
 
-	$tdatasurgical_case_summary_view[".audit"] = false;
+	$tdatasurgical_case_summary_view[".audit"] = true;
 
 	$tdatasurgical_case_summary_view[".locking"] = false;
 

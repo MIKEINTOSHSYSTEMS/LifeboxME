@@ -109,7 +109,7 @@ $tdatalbapt_unified_activities[".listAjax"] = false;
 //	temporary
 //$tdatalbapt_unified_activities[".listAjax"] = false;
 
-	$tdatalbapt_unified_activities[".audit"] = false;
+	$tdatalbapt_unified_activities[".audit"] = true;
 
 	$tdatalbapt_unified_activities[".locking"] = false;
 

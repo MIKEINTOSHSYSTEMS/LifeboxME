@@ -18,7 +18,6 @@ $dalTablelbapt_annual_plan_tracker["notes"] = array("type"=>201,"varname"=>"note
 $dalTablelbapt_annual_plan_tracker["created_at"] = array("type"=>135,"varname"=>"created_at", "name" => "created_at", "autoInc" => "0");
 $dalTablelbapt_annual_plan_tracker["updated_at"] = array("type"=>135,"varname"=>"updated_at", "name" => "updated_at", "autoInc" => "0");
 $dalTablelbapt_annual_plan_tracker["fyear"] = array("type"=>3,"varname"=>"fyear", "name" => "fyear", "autoInc" => "0");
-$dalTablelbapt_annual_plan_tracker["tracker_id"]["key"]=true;
 
 $dal_info["lifebox_mesystem_at_localhost_public_lbapt_annual_plan_tracker"] = &$dalTablelbapt_annual_plan_tracker;
 ?>

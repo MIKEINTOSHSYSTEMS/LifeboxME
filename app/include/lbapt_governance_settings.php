@@ -109,7 +109,7 @@ $tdatalbapt_governance[".listAjax"] = false;
 //	temporary
 //$tdatalbapt_governance[".listAjax"] = false;
 
-	$tdatalbapt_governance[".audit"] = false;
+	$tdatalbapt_governance[".audit"] = true;
 
 	$tdatalbapt_governance[".locking"] = false;
 

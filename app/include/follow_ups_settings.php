@@ -115,7 +115,7 @@ $tdatafollow_ups[".listAjax"] = false;
 //	temporary
 //$tdatafollow_ups[".listAjax"] = false;
 
-	$tdatafollow_ups[".audit"] = false;
+	$tdatafollow_ups[".audit"] = true;
 
 	$tdatafollow_ups[".locking"] = false;
 

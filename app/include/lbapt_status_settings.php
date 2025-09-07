@@ -73,7 +73,7 @@ $tdatalbapt_status[".listAjax"] = false;
 //	temporary
 //$tdatalbapt_status[".listAjax"] = false;
 
-	$tdatalbapt_status[".audit"] = false;
+	$tdatalbapt_status[".audit"] = true;
 
 	$tdatalbapt_status[".locking"] = false;
 

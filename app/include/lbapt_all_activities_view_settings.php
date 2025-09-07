@@ -79,7 +79,7 @@ $tdatalbapt_all_activities_view[".listAjax"] = false;
 //	temporary
 //$tdatalbapt_all_activities_view[".listAjax"] = false;
 
-	$tdatalbapt_all_activities_view[".audit"] = false;
+	$tdatalbapt_all_activities_view[".audit"] = true;
 
 	$tdatalbapt_all_activities_view[".locking"] = false;
 

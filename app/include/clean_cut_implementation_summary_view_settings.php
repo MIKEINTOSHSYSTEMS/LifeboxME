@@ -106,7 +106,7 @@ $tdataclean_cut_implementation_summary_view[".listAjax"] = false;
 //	temporary
 //$tdataclean_cut_implementation_summary_view[".listAjax"] = false;
 
-	$tdataclean_cut_implementation_summary_view[".audit"] = false;
+	$tdataclean_cut_implementation_summary_view[".audit"] = true;
 
 	$tdataclean_cut_implementation_summary_view[".locking"] = false;
 

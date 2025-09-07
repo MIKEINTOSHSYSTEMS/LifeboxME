@@ -100,7 +100,7 @@ $tdatadevice_distribution_summary_view[".listAjax"] = false;
 //	temporary
 //$tdatadevice_distribution_summary_view[".listAjax"] = false;
 
-	$tdatadevice_distribution_summary_view[".audit"] = false;
+	$tdatadevice_distribution_summary_view[".audit"] = true;
 
 	$tdatadevice_distribution_summary_view[".locking"] = false;
 

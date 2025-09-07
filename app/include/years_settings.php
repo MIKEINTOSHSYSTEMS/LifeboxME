@@ -67,7 +67,7 @@ $tdatayears[".listAjax"] = false;
 //	temporary
 //$tdatayears[".listAjax"] = false;
 
-	$tdatayears[".audit"] = false;
+	$tdatayears[".audit"] = true;
 
 	$tdatayears[".locking"] = false;
 

@@ -85,7 +85,7 @@ $tdatatrainers[".listAjax"] = false;
 //	temporary
 //$tdatatrainers[".listAjax"] = false;
 
-	$tdatatrainers[".audit"] = false;
+	$tdatatrainers[".audit"] = true;
 
 	$tdatatrainers[".locking"] = false;
 

@@ -70,7 +70,7 @@ $tdatatraining_languages[".listAjax"] = false;
 //	temporary
 //$tdatatraining_languages[".listAjax"] = false;
 
-	$tdatatraining_languages[".audit"] = false;
+	$tdatatraining_languages[".audit"] = true;
 
 	$tdatatraining_languages[".locking"] = false;
 

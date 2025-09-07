@@ -70,7 +70,7 @@ $tdatatraining_partners[".listAjax"] = false;
 //	temporary
 //$tdatatraining_partners[".listAjax"] = false;
 
-	$tdatatraining_partners[".audit"] = false;
+	$tdatatraining_partners[".audit"] = true;
 
 	$tdatatraining_partners[".locking"] = false;
 

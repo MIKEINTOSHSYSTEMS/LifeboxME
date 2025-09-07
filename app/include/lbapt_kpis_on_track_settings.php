@@ -97,7 +97,7 @@ $tdatalbapt_kpis_on_track[".listAjax"] = false;
 //	temporary
 //$tdatalbapt_kpis_on_track[".listAjax"] = false;
 
-	$tdatalbapt_kpis_on_track[".audit"] = false;
+	$tdatalbapt_kpis_on_track[".audit"] = true;
 
 	$tdatalbapt_kpis_on_track[".locking"] = false;
 
