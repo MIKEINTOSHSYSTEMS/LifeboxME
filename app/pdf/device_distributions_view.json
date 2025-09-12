@@ -218,6 +218,12 @@ pdfDocument = {
 			{"hidden":"{$item_hide_integrated_edit_field19}","stack":[{"text":"{$jslabel public_device_distributions receiving_date }","bold":true},{"text":{$receiving_date_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
+			{"hidden":"{$item_hide_integrated_edit_field20}","stack":[{"text":"{$jslabel public_device_distributions started_using }","bold":true},{"text":{$started_using_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field21}","stack":[{"text":"{$jslabel public_device_distributions date_started_using }","bold":true},{"text":{$date_started_using_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
 			{"hidden":"{$item_hide_integrated_edit_field13}","stack":[{"text":"{$jslabel public_device_distributions notes }","bold":true},{"text":{$notes_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				

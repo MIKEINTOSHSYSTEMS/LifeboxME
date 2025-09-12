@@ -510,7 +510,8 @@ class LoginPage extends RunnerPage
 		else
 		{
 			//	discard. Go to menu.php after login
-			$this->myurl = "";
+			//$this->myurl = "";
+			$this->myurl = "dashboard_dashboard.php?menuItemId=72";
 		}
 	}
 

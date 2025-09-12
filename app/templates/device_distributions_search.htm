@@ -6,6 +6,11 @@
 	<title>{$pagetitle}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<base href="{$projectPath}">
+    <LINK rel="shortcut icon" type="image/png" href="/assets/img/lb_favicon.ico"/>
+    <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
+    <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
+    <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
+    
 		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
 	{BEGIN rtlCSS}
 	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
@@ -467,6 +472,50 @@
 </div>
 
 {END receiving_date_fieldblock}
+											
+{BEGIN started_using_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_started_using}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="started_using{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field20" {$item_integrated_search_field20} data-pageid="{$pageid}" data-field="started_using" data-fieldname="started_using" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_started_using}">
+		{$label public_device_distributions started_using }	</label>
+	<div class="r-search-option">
+		{$searchtype_started_using}
+	</div>
+	<div class="r-search-field">
+		{$started_using_editcontrol}	</div>
+	<div class="r-search-field">
+		{$started_using_editcontrol1}
+	</div>
+	
+</div>
+
+{END started_using_fieldblock}
+											
+{BEGIN date_started_using_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_date_started_using}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="date_started_using{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field21" {$item_integrated_search_field21} data-pageid="{$pageid}" data-field="date_started_using" data-fieldname="date_started_using" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_date_started_using}">
+		{$label public_device_distributions date_started_using }	</label>
+	<div class="r-search-option">
+		{$searchtype_date_started_using}
+	</div>
+	<div class="r-search-field">
+		{$date_started_using_editcontrol}	</div>
+	<div class="r-search-field">
+		{$date_started_using_editcontrol1}
+	</div>
+	
+</div>
+
+{END date_started_using_fieldblock}
 											
 {BEGIN notes_fieldblock}
 

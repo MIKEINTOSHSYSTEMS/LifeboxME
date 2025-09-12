@@ -630,11 +630,11 @@ $ajaxSearchStartsWith = true;
 
 
 
-$globalSettings["LandingPageType"] = 0;
+$globalSettings["LandingPageType"] = 2;
 $globalSettings["LandingTable"] = "";
-$globalSettings["LandingPage"] = "";
-$globalSettings["LandingURL"] = "";
-$globalSettings["LandingPageId"] = "";
+$globalSettings["LandingPage"] = "menu";
+$globalSettings["LandingURL"] = "dashboard_dashboard.php?menuItemId=72";
+$globalSettings["LandingPageId"] = "menu";
 
 $globalSettings["ProjectLogo"] = array();
 $globalSettings["ProjectLogo"]["English"] = "<div style=\"display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;\">
@@ -769,9 +769,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "210_1757681686";
+$projectBuildKey = "215_1757692462";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "210";
+$projectBuildNumber = "215";
 
 $mlang_messages = array();
 $mlang_charsets = array();

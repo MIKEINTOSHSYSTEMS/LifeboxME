@@ -6,6 +6,11 @@
 	<title>{$pagetitle}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<base href="{$projectPath}">
+    <LINK rel="shortcut icon" type="image/png" href="/assets/img/lb_favicon.ico"/>
+    <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
+    <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
+    <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
+    
 		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
 	{BEGIN rtlCSS}
 	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
@@ -734,6 +739,50 @@
 
 
 {END receiving_date_fieldblock}
+											
+{BEGIN started_using_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_started_using}  r-vertical-field" 
+	data-signal-error-for="started_using{$id}" {$required_attr_started_using}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field19" {$item_integrated_edit_field19} data-pageid="{$pageid}" data-field="started_using" data-fieldname="started_using" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_started_using}">
+		{BEGIN started_using_label}{$label public_device_distributions started_using }{END started_using_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$started_using_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="started_using" {$tooltipAttr public_device_distributions started_using } >
+		<div class="text-muted" >
+		{$tooltip public_device_distributions started_using }		</div>
+	</div>
+</div>
+
+
+{END started_using_fieldblock}
+											
+{BEGIN date_started_using_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_date_started_using}  r-vertical-field" 
+	data-signal-error-for="date_started_using{$id}" {$required_attr_date_started_using}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field20" {$item_integrated_edit_field20} data-pageid="{$pageid}" data-field="date_started_using" data-fieldname="date_started_using" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_date_started_using}">
+		{BEGIN date_started_using_label}{$label public_device_distributions date_started_using }{END date_started_using_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$date_started_using_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="date_started_using" {$tooltipAttr public_device_distributions date_started_using } >
+		<div class="text-muted" >
+		{$tooltip public_device_distributions date_started_using }		</div>
+	</div>
+</div>
+
+
+{END date_started_using_fieldblock}
 											
 {BEGIN notes_fieldblock}
 

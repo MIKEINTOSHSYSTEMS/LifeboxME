@@ -174,6 +174,16 @@
             border: none;
             overflow: hidden;
         }
+
+        .help-iframe {
+            position: absolute;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            height: 90%;
+            border: none;
+            overflow: hidden;
+        }
     </style>
 </head>
 
@@ -514,16 +524,15 @@
             <!-- Help Tab -->
             <div class="tab-pane fade" id="help" role="tabpanel">
                 <div class="container mt-4">
-                    <h4>Help Section</h4>
+                    <!--<h6>Help Section</h6>-->
                     <?php
                     // Include the content of help.php
                     //include("./help.php");
                     ?>
                     <iframe
                         src="help.php"
-                        frameborder="0"
-                        width="100%"
-                        height="900px"
+                        class="help-iframe"
+                        allowtransparency="true"
                         allowtransparency>
                     </iframe>
                 </div>
