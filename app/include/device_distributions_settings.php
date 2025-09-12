@@ -79,6 +79,12 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelsdevice_distributions["English"]["donor"] = "Donor";
 	$fieldToolTipsdevice_distributions["English"]["donor"] = "";
 	$placeHoldersdevice_distributions["English"]["donor"] = "";
+	$fieldLabelsdevice_distributions["English"]["is_received"] = "Is Received";
+	$fieldToolTipsdevice_distributions["English"]["is_received"] = "";
+	$placeHoldersdevice_distributions["English"]["is_received"] = "";
+	$fieldLabelsdevice_distributions["English"]["receiving_date"] = "Receiving Date";
+	$fieldToolTipsdevice_distributions["English"]["receiving_date"] = "";
+	$placeHoldersdevice_distributions["English"]["receiving_date"] = "";
 	if (count($fieldToolTipsdevice_distributions["English"]))
 		$tdatadevice_distributions[".isUseToolTips"] = true;
 }
@@ -214,6 +220,8 @@ $tdatadevice_distributions[".googleLikeFields"][] = "device_type";
 $tdatadevice_distributions[".googleLikeFields"][] = "payment_method";
 $tdatadevice_distributions[".googleLikeFields"][] = "transaction_type";
 $tdatadevice_distributions[".googleLikeFields"][] = "donor";
+$tdatadevice_distributions[".googleLikeFields"][] = "is_received";
+$tdatadevice_distributions[".googleLikeFields"][] = "receiving_date";
 
 
 
@@ -248,7 +256,7 @@ $tdatadevice_distributions[".strOrderBy"] = $tstrOrderBy;
 $tdatadevice_distributions[".orderindexes"] = array();
 
 
-$tdatadevice_distributions[".sqlHead"] = "SELECT distribution_id,  	region_id,  	country_id,  	order_reference,  	facility_id,  	monthly_surgical_volume,  	contact_name,  	contact_email,  	distribution_month,  	distribution_year,  	quantity,  	notes,  	created_at,  	updated_at,  	device_type,  	payment_method,  	transaction_type,  	donor";
+$tdatadevice_distributions[".sqlHead"] = "SELECT distribution_id,  	region_id,  	country_id,  	order_reference,  	facility_id,  	monthly_surgical_volume,  	contact_name,  	contact_email,  	distribution_month,  	distribution_year,  	quantity,  	notes,  	created_at,  	updated_at,  	device_type,  	payment_method,  	transaction_type,  	donor,  	is_received,  	receiving_date";
 $tdatadevice_distributions[".sqlFrom"] = "FROM \"public\".device_distributions";
 $tdatadevice_distributions[".sqlWhereExpr"] = "";
 $tdatadevice_distributions[".sqlTail"] = "";
@@ -3032,6 +3040,278 @@ $tdatadevice_distributions[".hideMobileList"] = array();
 
 	$tdatadevice_distributions["donor"] = $fdata;
 		$tdatadevice_distributions[".searchableFields"][] = "donor";
+//	is_received
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 19;
+	$fdata["strName"] = "is_received";
+	$fdata["GoodName"] = "is_received";
+	$fdata["ownerTable"] = "public.device_distributions";
+	$fdata["Label"] = GetFieldLabel("public_device_distributions","is_received");
+	$fdata["FieldType"] = 11;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "is_received";
+
+		$fdata["sourceSingle"] = "is_received";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "is_received";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "Checkbox");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Checkbox");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+	
+	
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Equals";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+				$fdata["filterFormat"] = "Options list";
+		$fdata["showCollapsed"] = false;
+
+	
+	
+	
+		$fdata["filterCheckedMessageType"] = "Text";
+	$fdata["filterCheckedMessageText"] = "Checked";
+	$fdata["filterUncheckedMessageType"] = "Text";
+	$fdata["filterUncheckedMessageText"] = "Unchecked";
+
+//end of Filters settings
+
+
+	$tdatadevice_distributions["is_received"] = $fdata;
+		$tdatadevice_distributions[".searchableFields"][] = "is_received";
+//	receiving_date
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 20;
+	$fdata["strName"] = "receiving_date";
+	$fdata["GoodName"] = "receiving_date";
+	$fdata["ownerTable"] = "public.device_distributions";
+	$fdata["Label"] = GetFieldLabel("public_device_distributions","receiving_date");
+	$fdata["FieldType"] = 135;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "receiving_date";
+
+		$fdata["sourceSingle"] = "receiving_date";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "receiving_date";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "Short Date");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Date");
+
+	
+		$edata["weekdayMessage"] = array("message" => "Invalid week day", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+		$edata["DateEditType"] = 5;
+	$edata["InitialYearFactor"] = 100;
+	$edata["LastYearFactor"] = 10;
+
+	
+	
+	
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Equals";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Equals", "More than", "Less than", "Between", EMPTY_SEARCH, NOT_EMPTY );
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatadevice_distributions["receiving_date"] = $fdata;
+		$tdatadevice_distributions[".searchableFields"][] = "receiving_date";
 
 
 $tables_data["public.device_distributions"]=&$tdatadevice_distributions;
@@ -3178,7 +3458,7 @@ function createSqlQuery_device_distributions()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "distribution_id,  	region_id,  	country_id,  	order_reference,  	facility_id,  	monthly_surgical_volume,  	contact_name,  	contact_email,  	distribution_month,  	distribution_year,  	quantity,  	notes,  	created_at,  	updated_at,  	device_type,  	payment_method,  	transaction_type,  	donor";
+$proto0["m_strFieldList"] = "distribution_id,  	region_id,  	country_id,  	order_reference,  	facility_id,  	monthly_surgical_volume,  	contact_name,  	contact_email,  	distribution_month,  	distribution_year,  	quantity,  	notes,  	created_at,  	updated_at,  	device_type,  	payment_method,  	transaction_type,  	donor,  	is_received,  	receiving_date";
 $proto0["m_strFrom"] = "FROM \"public\".device_distributions";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
@@ -3470,54 +3750,84 @@ $proto40["m_alias"] = "";
 $obj = new SQLFieldListItem($proto40);
 
 $proto0["m_fieldlist"][]=$obj;
-$proto0["m_fromlist"] = array();
-												$proto42=array();
-$proto42["m_link"] = "SQLL_MAIN";
-			$proto43=array();
-$proto43["m_strName"] = "public.device_distributions";
-$proto43["m_srcTableName"] = "public.device_distributions";
-$proto43["m_columns"] = array();
-$proto43["m_columns"][] = "distribution_id";
-$proto43["m_columns"][] = "region_id";
-$proto43["m_columns"][] = "country_id";
-$proto43["m_columns"][] = "order_reference";
-$proto43["m_columns"][] = "facility_id";
-$proto43["m_columns"][] = "monthly_surgical_volume";
-$proto43["m_columns"][] = "contact_name";
-$proto43["m_columns"][] = "contact_email";
-$proto43["m_columns"][] = "distribution_month";
-$proto43["m_columns"][] = "distribution_year";
-$proto43["m_columns"][] = "quantity";
-$proto43["m_columns"][] = "notes";
-$proto43["m_columns"][] = "created_at";
-$proto43["m_columns"][] = "updated_at";
-$proto43["m_columns"][] = "device_type";
-$proto43["m_columns"][] = "payment_method";
-$proto43["m_columns"][] = "transaction_type";
-$proto43["m_columns"][] = "donor";
-$obj = new SQLTable($proto43);
+						$proto42=array();
+			$obj = new SQLField(array(
+	"m_strName" => "is_received",
+	"m_strTable" => "public.device_distributions",
+	"m_srcTableName" => "public.device_distributions"
+));
 
-$proto42["m_table"] = $obj;
-$proto42["m_sql"] = "\"public\".device_distributions";
-$proto42["m_alias"] = "";
+$proto42["m_sql"] = "is_received";
 $proto42["m_srcTableName"] = "public.device_distributions";
-$proto44=array();
-$proto44["m_sql"] = "";
-$proto44["m_uniontype"] = "SQLL_UNKNOWN";
+$proto42["m_expr"]=$obj;
+$proto42["m_alias"] = "";
+$obj = new SQLFieldListItem($proto42);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto44=array();
+			$obj = new SQLField(array(
+	"m_strName" => "receiving_date",
+	"m_strTable" => "public.device_distributions",
+	"m_srcTableName" => "public.device_distributions"
+));
+
+$proto44["m_sql"] = "receiving_date";
+$proto44["m_srcTableName"] = "public.device_distributions";
+$proto44["m_expr"]=$obj;
+$proto44["m_alias"] = "";
+$obj = new SQLFieldListItem($proto44);
+
+$proto0["m_fieldlist"][]=$obj;
+$proto0["m_fromlist"] = array();
+												$proto46=array();
+$proto46["m_link"] = "SQLL_MAIN";
+			$proto47=array();
+$proto47["m_strName"] = "public.device_distributions";
+$proto47["m_srcTableName"] = "public.device_distributions";
+$proto47["m_columns"] = array();
+$proto47["m_columns"][] = "distribution_id";
+$proto47["m_columns"][] = "region_id";
+$proto47["m_columns"][] = "country_id";
+$proto47["m_columns"][] = "order_reference";
+$proto47["m_columns"][] = "facility_id";
+$proto47["m_columns"][] = "monthly_surgical_volume";
+$proto47["m_columns"][] = "contact_name";
+$proto47["m_columns"][] = "contact_email";
+$proto47["m_columns"][] = "distribution_month";
+$proto47["m_columns"][] = "distribution_year";
+$proto47["m_columns"][] = "quantity";
+$proto47["m_columns"][] = "notes";
+$proto47["m_columns"][] = "created_at";
+$proto47["m_columns"][] = "updated_at";
+$proto47["m_columns"][] = "device_type";
+$proto47["m_columns"][] = "payment_method";
+$proto47["m_columns"][] = "transaction_type";
+$proto47["m_columns"][] = "donor";
+$proto47["m_columns"][] = "is_received";
+$proto47["m_columns"][] = "receiving_date";
+$obj = new SQLTable($proto47);
+
+$proto46["m_table"] = $obj;
+$proto46["m_sql"] = "\"public\".device_distributions";
+$proto46["m_alias"] = "";
+$proto46["m_srcTableName"] = "public.device_distributions";
+$proto48=array();
+$proto48["m_sql"] = "";
+$proto48["m_uniontype"] = "SQLL_UNKNOWN";
 	$obj = new SQLNonParsed(array(
 	"m_sql" => ""
 ));
 
-$proto44["m_column"]=$obj;
-$proto44["m_contained"] = array();
-$proto44["m_strCase"] = "";
-$proto44["m_havingmode"] = false;
-$proto44["m_inBrackets"] = false;
-$proto44["m_useAlias"] = false;
-$obj = new SQLLogicalExpr($proto44);
+$proto48["m_column"]=$obj;
+$proto48["m_contained"] = array();
+$proto48["m_strCase"] = "";
+$proto48["m_havingmode"] = false;
+$proto48["m_inBrackets"] = false;
+$proto48["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto48);
 
-$proto42["m_joinon"] = $obj;
-$obj = new SQLFromListItem($proto42);
+$proto46["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto46);
 
 $proto0["m_fromlist"][]=$obj;
 $proto0["m_groupby"] = array();
@@ -3533,7 +3843,7 @@ $queryData_device_distributions = createSqlQuery_device_distributions();
 	
 				;
 
-																		
+																				
 
 $tdatadevice_distributions[".sqlquery"] = $queryData_device_distributions;
 

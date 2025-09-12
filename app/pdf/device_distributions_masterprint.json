@@ -121,6 +121,12 @@ pdfDocument = {
 										{BEGIN col_grid_18}
 					"%",
 					{END col_grid_18}
+										{BEGIN col_grid_19}
+					"%",
+					{END col_grid_19}
+										{BEGIN col_grid_20}
+					"%",
+					{END col_grid_20}
 															],
 											heights: [ // first height for header part
 					"%",
@@ -291,7 +297,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions distribution_id }","hidden":"{$item_hide_simple_grid_field18}","bold":true},
+			{"text":"{$jslabel public_device_distributions distribution_id }","hidden":"{$item_hide_simple_grid_field20}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -320,7 +326,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions region_id }","hidden":"{$item_hide_simple_grid_field19}","bold":true},
+			{"text":"{$jslabel public_device_distributions region_id }","hidden":"{$item_hide_simple_grid_field21}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -349,7 +355,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions country_id }","hidden":"{$item_hide_simple_grid_field20}","bold":true},
+			{"text":"{$jslabel public_device_distributions country_id }","hidden":"{$item_hide_simple_grid_field22}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -378,7 +384,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions order_reference }","hidden":"{$item_hide_simple_grid_field21}","bold":true},
+			{"text":"{$jslabel public_device_distributions order_reference }","hidden":"{$item_hide_simple_grid_field23}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -407,7 +413,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions facility_id }","hidden":"{$item_hide_simple_grid_field22}","bold":true},
+			{"text":"{$jslabel public_device_distributions facility_id }","hidden":"{$item_hide_simple_grid_field24}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -436,7 +442,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions monthly_surgical_volume }","hidden":"{$item_hide_simple_grid_field23}","bold":true},
+			{"text":"{$jslabel public_device_distributions monthly_surgical_volume }","hidden":"{$item_hide_simple_grid_field25}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -465,7 +471,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions contact_name }","hidden":"{$item_hide_simple_grid_field24}","bold":true},
+			{"text":"{$jslabel public_device_distributions contact_name }","hidden":"{$item_hide_simple_grid_field26}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -494,7 +500,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions contact_email }","hidden":"{$item_hide_simple_grid_field25}","bold":true},
+			{"text":"{$jslabel public_device_distributions contact_email }","hidden":"{$item_hide_simple_grid_field27}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -523,7 +529,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions distribution_month }","hidden":"{$item_hide_simple_grid_field26}","bold":true},
+			{"text":"{$jslabel public_device_distributions distribution_month }","hidden":"{$item_hide_simple_grid_field28}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -552,7 +558,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions distribution_year }","hidden":"{$item_hide_simple_grid_field27}","bold":true},
+			{"text":"{$jslabel public_device_distributions distribution_year }","hidden":"{$item_hide_simple_grid_field29}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -581,7 +587,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions quantity }","hidden":"{$item_hide_simple_grid_field28}","bold":true},
+			{"text":"{$jslabel public_device_distributions quantity }","hidden":"{$item_hide_simple_grid_field30}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -594,6 +600,64 @@ pdfDocument = {
 																							{BEGIN cellblock_grid_headcell_field11}
 {
 	cellId: 'headcell_field11',
+	col:0,
+	row:0,
+			fieldName: 'is_received',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_device_distributions is_received }","hidden":"{$item_hide_simple_grid_field31}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$is_received_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field11}
+																							{BEGIN cellblock_grid_headcell_field12}
+{
+	cellId: 'headcell_field12',
+	col:0,
+	row:0,
+			fieldName: 'receiving_date',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_device_distributions receiving_date }","hidden":"{$item_hide_simple_grid_field32}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$receiving_date_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field12}
+																							{BEGIN cellblock_grid_headcell_field13}
+{
+	cellId: 'headcell_field13',
 	col:0,
 	row:0,
 			fieldName: 'notes',
@@ -610,7 +674,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions notes }","hidden":"{$item_hide_simple_grid_field29}","bold":true},
+			{"text":"{$jslabel public_device_distributions notes }","hidden":"{$item_hide_simple_grid_field33}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -619,10 +683,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field11}
-																							{BEGIN cellblock_grid_headcell_field12}
+{END cellblock_grid_headcell_field13}
+																							{BEGIN cellblock_grid_headcell_field14}
 {
-	cellId: 'headcell_field12',
+	cellId: 'headcell_field14',
 	col:0,
 	row:0,
 			fieldName: 'created_at',
@@ -639,7 +703,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions created_at }","hidden":"{$item_hide_simple_grid_field30}","bold":true},
+			{"text":"{$jslabel public_device_distributions created_at }","hidden":"{$item_hide_simple_grid_field34}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -648,10 +712,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field12}
-																							{BEGIN cellblock_grid_headcell_field13}
+{END cellblock_grid_headcell_field14}
+																							{BEGIN cellblock_grid_headcell_field15}
 {
-	cellId: 'headcell_field13',
+	cellId: 'headcell_field15',
 	col:0,
 	row:0,
 			fieldName: 'updated_at',
@@ -668,7 +732,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions updated_at }","hidden":"{$item_hide_simple_grid_field31}","bold":true},
+			{"text":"{$jslabel public_device_distributions updated_at }","hidden":"{$item_hide_simple_grid_field35}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -677,10 +741,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field13}
-																							{BEGIN cellblock_grid_headcell_field14}
+{END cellblock_grid_headcell_field15}
+																							{BEGIN cellblock_grid_headcell_field16}
 {
-	cellId: 'headcell_field14',
+	cellId: 'headcell_field16',
 	col:0,
 	row:0,
 			fieldName: 'device_type',
@@ -697,7 +761,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions device_type }","hidden":"{$item_hide_simple_grid_field32}","bold":true},
+			{"text":"{$jslabel public_device_distributions device_type }","hidden":"{$item_hide_simple_grid_field36}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -706,10 +770,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field14}
-																							{BEGIN cellblock_grid_headcell_field15}
+{END cellblock_grid_headcell_field16}
+																							{BEGIN cellblock_grid_headcell_field17}
 {
-	cellId: 'headcell_field15',
+	cellId: 'headcell_field17',
 	col:0,
 	row:0,
 			fieldName: 'payment_method',
@@ -726,7 +790,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions payment_method }","hidden":"{$item_hide_simple_grid_field33}","bold":true},
+			{"text":"{$jslabel public_device_distributions payment_method }","hidden":"{$item_hide_simple_grid_field37}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -735,10 +799,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field15}
-																							{BEGIN cellblock_grid_headcell_field16}
+{END cellblock_grid_headcell_field17}
+																							{BEGIN cellblock_grid_headcell_field18}
 {
-	cellId: 'headcell_field16',
+	cellId: 'headcell_field18',
 	col:0,
 	row:0,
 			fieldName: 'transaction_type',
@@ -755,7 +819,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions transaction_type }","hidden":"{$item_hide_simple_grid_field34}","bold":true},
+			{"text":"{$jslabel public_device_distributions transaction_type }","hidden":"{$item_hide_simple_grid_field38}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -764,10 +828,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field16}
-																							{BEGIN cellblock_grid_headcell_field17}
+{END cellblock_grid_headcell_field18}
+																							{BEGIN cellblock_grid_headcell_field19}
 {
-	cellId: 'headcell_field17',
+	cellId: 'headcell_field19',
 	col:0,
 	row:0,
 			fieldName: 'donor',
@@ -784,7 +848,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions donor }","hidden":"{$item_hide_simple_grid_field35}","bold":true},
+			{"text":"{$jslabel public_device_distributions donor }","hidden":"{$item_hide_simple_grid_field39}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -793,7 +857,7 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field17}
+{END cellblock_grid_headcell_field19}
 											],
 				{END row_grid_0}
 		
@@ -1155,6 +1219,64 @@ pdfDocument = {
 	cellId: 'cell_field11',
 	col:0,
 	row:0,
+			fieldName: 'is_received',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$is_received_pdfvalue},"hidden":"{$item_hide_simple_grid_field18}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$is_received_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field11}
+																							{BEGIN cellblock_grid_cell_field12}
+{
+	cellId: 'cell_field12',
+	col:0,
+	row:0,
+			fieldName: 'receiving_date',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$receiving_date_pdfvalue},"hidden":"{$item_hide_simple_grid_field19}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$receiving_date_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field12}
+																							{BEGIN cellblock_grid_cell_field13}
+{
+	cellId: 'cell_field13',
+	col:0,
+	row:0,
 			fieldName: 'notes',
 				style: 'bodycell',
 		
@@ -1178,10 +1300,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field11}
-																							{BEGIN cellblock_grid_cell_field12}
+{END cellblock_grid_cell_field13}
+																							{BEGIN cellblock_grid_cell_field14}
 {
-	cellId: 'cell_field12',
+	cellId: 'cell_field14',
 	col:0,
 	row:0,
 			fieldName: 'created_at',
@@ -1207,10 +1329,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field12}
-																							{BEGIN cellblock_grid_cell_field13}
+{END cellblock_grid_cell_field14}
+																							{BEGIN cellblock_grid_cell_field15}
 {
-	cellId: 'cell_field13',
+	cellId: 'cell_field15',
 	col:0,
 	row:0,
 			fieldName: 'updated_at',
@@ -1236,10 +1358,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field13}
-																							{BEGIN cellblock_grid_cell_field14}
+{END cellblock_grid_cell_field15}
+																							{BEGIN cellblock_grid_cell_field16}
 {
-	cellId: 'cell_field14',
+	cellId: 'cell_field16',
 	col:0,
 	row:0,
 			fieldName: 'device_type',
@@ -1265,10 +1387,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field14}
-																							{BEGIN cellblock_grid_cell_field15}
+{END cellblock_grid_cell_field16}
+																							{BEGIN cellblock_grid_cell_field17}
 {
-	cellId: 'cell_field15',
+	cellId: 'cell_field17',
 	col:0,
 	row:0,
 			fieldName: 'payment_method',
@@ -1294,10 +1416,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field15}
-																							{BEGIN cellblock_grid_cell_field16}
+{END cellblock_grid_cell_field17}
+																							{BEGIN cellblock_grid_cell_field18}
 {
-	cellId: 'cell_field16',
+	cellId: 'cell_field18',
 	col:0,
 	row:0,
 			fieldName: 'transaction_type',
@@ -1323,10 +1445,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field16}
-																							{BEGIN cellblock_grid_cell_field17}
+{END cellblock_grid_cell_field18}
+																							{BEGIN cellblock_grid_cell_field19}
 {
-	cellId: 'cell_field17',
+	cellId: 'cell_field19',
 	col:0,
 	row:0,
 			fieldName: 'donor',
@@ -1352,7 +1474,7 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field17}
+{END cellblock_grid_cell_field19}
 											],
 				{END row_grid_1}
 		
@@ -1856,6 +1978,58 @@ pdfDocument = {
       },
 
 {END cellblock_grid_footcell_field17}
+																							{BEGIN cellblock_grid_footcell_field18}
+{
+	cellId: 'footcell_field18',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field18}
+																							{BEGIN cellblock_grid_footcell_field19}
+{
+	cellId: 'footcell_field19',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field19}
 											],
 				{END row_grid_2}
 		

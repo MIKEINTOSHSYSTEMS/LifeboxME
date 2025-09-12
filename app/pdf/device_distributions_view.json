@@ -212,6 +212,12 @@ pdfDocument = {
 			{"hidden":"{$item_hide_integrated_edit_field12}","stack":[{"text":"{$jslabel public_device_distributions quantity }","bold":true},{"text":{$quantity_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
+			{"hidden":"{$item_hide_integrated_edit_field18}","stack":[{"text":"{$jslabel public_device_distributions is_received }","bold":true},{"text":{$is_received_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field19}","stack":[{"text":"{$jslabel public_device_distributions receiving_date }","bold":true},{"text":{$receiving_date_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
 			{"hidden":"{$item_hide_integrated_edit_field13}","stack":[{"text":"{$jslabel public_device_distributions notes }","bold":true},{"text":{$notes_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				

@@ -18,6 +18,8 @@ $dalTabledevice_distributions["device_type"] = array("type"=>3,"varname"=>"devic
 $dalTabledevice_distributions["payment_method"] = array("type"=>3,"varname"=>"payment_method", "name" => "payment_method", "autoInc" => "0");
 $dalTabledevice_distributions["transaction_type"] = array("type"=>3,"varname"=>"transaction_type", "name" => "transaction_type", "autoInc" => "0");
 $dalTabledevice_distributions["donor"] = array("type"=>3,"varname"=>"donor", "name" => "donor", "autoInc" => "0");
+$dalTabledevice_distributions["is_received"] = array("type"=>11,"varname"=>"is_received", "name" => "is_received", "autoInc" => "0");
+$dalTabledevice_distributions["receiving_date"] = array("type"=>135,"varname"=>"receiving_date", "name" => "receiving_date", "autoInc" => "0");
 
 $dal_info["lifebox_mesystem_at_localhost_public_device_distributions"] = &$dalTabledevice_distributions;
 ?>
