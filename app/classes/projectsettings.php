@@ -3750,6 +3750,14 @@ function fillProjectEntites()
 	$projectEntitiesReverse[ "lbapt_finance" ] = "public.lbapt_finance";
 	$projectEntities[ "public.lbapt_hr" ] = array( "url" => "lbapt_hr", "type" => 0 );
 	$projectEntitiesReverse[ "lbapt_hr" ] = "public.lbapt_hr";
+	$projectEntities[ "public.lbapt_cathedral" ] = array( "url" => "lbapt_cathedral", "type" => 0 );
+	$projectEntitiesReverse[ "lbapt_cathedral" ] = "public.lbapt_cathedral";
+	$projectEntities[ "public.lbapt_izumi" ] = array( "url" => "lbapt_izumi", "type" => 0 );
+	$projectEntitiesReverse[ "lbapt_izumi" ] = "public.lbapt_izumi";
+	$projectEntities[ "public.lbapt_st" ] = array( "url" => "lbapt_st", "type" => 0 );
+	$projectEntitiesReverse[ "lbapt_st" ] = "public.lbapt_st";
+	$projectEntities[ "public.lbapt_whi" ] = array( "url" => "lbapt_whi", "type" => 0 );
+	$projectEntitiesReverse[ "lbapt_whi" ] = "public.lbapt_whi";
 }
 
 function findTable( $table ) {

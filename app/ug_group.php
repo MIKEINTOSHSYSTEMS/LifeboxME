@@ -101,6 +101,10 @@ $nonAdminTablesArr[] = "public.lbapt_unified_activities";
 $nonAdminTablesArr[] = "public.years";
 $nonAdminTablesArr[] = "public.lbapt_finance";
 $nonAdminTablesArr[] = "public.lbapt_hr";
+$nonAdminTablesArr[] = "public.lbapt_cathedral";
+$nonAdminTablesArr[] = "public.lbapt_izumi";
+$nonAdminTablesArr[] = "public.lbapt_st";
+$nonAdminTablesArr[] = "public.lbapt_whi";
 
 $ug_connection = $cman->getForUserGroups();
 

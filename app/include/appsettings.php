@@ -769,9 +769,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "217_1757692462";
+$projectBuildKey = "221_1757773806";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "217";
+$projectBuildNumber = "221";
 
 $mlang_messages = array();
 $mlang_charsets = array();
@@ -881,6 +881,10 @@ $tableCaptions["English"]["public_lbapt_unified_activities"] = "Lbapt Unified Ac
 $tableCaptions["English"]["public_years"] = "Years";
 $tableCaptions["English"]["public_lbapt_finance"] = "Lbapt Finance";
 $tableCaptions["English"]["public_lbapt_hr"] = "Lbapt Hr";
+$tableCaptions["English"]["public_lbapt_cathedral"] = "Lbapt Cathedral";
+$tableCaptions["English"]["public_lbapt_izumi"] = "Lbapt Izumi";
+$tableCaptions["English"]["public_lbapt_st"] = "Lbapt St";
+$tableCaptions["English"]["public_lbapt_whi"] = "Lbapt Whi";
 $tableCaptions["English"]["Dashboard"] = "Dashboard";
 $tableCaptions["English"]["Lifebox_DHIS2_Settings"] = "Lifebox DHIS2 Settings";
 

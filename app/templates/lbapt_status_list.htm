@@ -728,6 +728,34 @@
 					Lbapt Hr				</label>
 			</div>
 			{END print_details_lbapt_hr}
+														{BEGIN print_details_lbapt_cathedral}
+			<div>
+				<label for="printDetailslbapt_cathedral{$id}">
+					<input type="checkbox" value="lbapt_cathedral" id="printDetailslbapt_cathedral{$id}" checked>
+					Lbapt Cathedral				</label>
+			</div>
+			{END print_details_lbapt_cathedral}
+														{BEGIN print_details_lbapt_izumi}
+			<div>
+				<label for="printDetailslbapt_izumi{$id}">
+					<input type="checkbox" value="lbapt_izumi" id="printDetailslbapt_izumi{$id}" checked>
+					Lbapt Izumi				</label>
+			</div>
+			{END print_details_lbapt_izumi}
+														{BEGIN print_details_lbapt_st}
+			<div>
+				<label for="printDetailslbapt_st{$id}">
+					<input type="checkbox" value="lbapt_st" id="printDetailslbapt_st{$id}" checked>
+					Lbapt St				</label>
+			</div>
+			{END print_details_lbapt_st}
+														{BEGIN print_details_lbapt_whi}
+			<div>
+				<label for="printDetailslbapt_whi{$id}">
+					<input type="checkbox" value="lbapt_whi" id="printDetailslbapt_whi{$id}" checked>
+					Lbapt Whi				</label>
+			</div>
+			{END print_details_lbapt_whi}
 						</div>
 </div>
 {END print_details}
@@ -1349,6 +1377,82 @@
 	{END lbapt_hr_dtable_link}
 
 
+	 
+		
+		
+	{BEGIN lbapt_cathedral_dtable_link}
+	<span data-itemtype="grid_details_link" data-itemid="grid_details_link12" {$item_grid_details_link12} data-pageid="{$pageid}" data-record-id="{$recId}">
+	<a  {$lbapt_cathedral_link_attrs} data-short-details="lbapt_cathedral"
+		class="{$lbapt_cathedral_dlink_class}" 
+		title="{$caption public_lbapt_cathedral }"			>
+								
+									{BEGIN lbapt_cathedral_childcount}
+				<span class="details-badge badge lbapt_cathedral_badge" {$lbapt_cathedral_childnumber_attr}>
+					{$lbapt_cathedral_childnumber}				
+				</span>
+				{END lbapt_cathedral_childcount}
+						</a>
+	</span>
+	{END lbapt_cathedral_dtable_link}
+
+
+	 
+		
+		
+	{BEGIN lbapt_izumi_dtable_link}
+	<span data-itemtype="grid_details_link" data-itemid="grid_details_link13" {$item_grid_details_link13} data-pageid="{$pageid}" data-record-id="{$recId}">
+	<a  {$lbapt_izumi_link_attrs} data-short-details="lbapt_izumi"
+		class="{$lbapt_izumi_dlink_class}" 
+		title="{$caption public_lbapt_izumi }"			>
+								
+									{BEGIN lbapt_izumi_childcount}
+				<span class="details-badge badge lbapt_izumi_badge" {$lbapt_izumi_childnumber_attr}>
+					{$lbapt_izumi_childnumber}				
+				</span>
+				{END lbapt_izumi_childcount}
+						</a>
+	</span>
+	{END lbapt_izumi_dtable_link}
+
+
+	 
+		
+		
+	{BEGIN lbapt_st_dtable_link}
+	<span data-itemtype="grid_details_link" data-itemid="grid_details_link14" {$item_grid_details_link14} data-pageid="{$pageid}" data-record-id="{$recId}">
+	<a  {$lbapt_st_link_attrs} data-short-details="lbapt_st"
+		class="{$lbapt_st_dlink_class}" 
+		title="{$caption public_lbapt_st }"			>
+								
+									{BEGIN lbapt_st_childcount}
+				<span class="details-badge badge lbapt_st_badge" {$lbapt_st_childnumber_attr}>
+					{$lbapt_st_childnumber}				
+				</span>
+				{END lbapt_st_childcount}
+						</a>
+	</span>
+	{END lbapt_st_dtable_link}
+
+
+	 
+		
+		
+	{BEGIN lbapt_whi_dtable_link}
+	<span data-itemtype="grid_details_link" data-itemid="grid_details_link15" {$item_grid_details_link15} data-pageid="{$pageid}" data-record-id="{$recId}">
+	<a  {$lbapt_whi_link_attrs} data-short-details="lbapt_whi"
+		class="{$lbapt_whi_dlink_class}" 
+		title="{$caption public_lbapt_whi }"			>
+								
+									{BEGIN lbapt_whi_childcount}
+				<span class="details-badge badge lbapt_whi_badge" {$lbapt_whi_childnumber_attr}>
+					{$lbapt_whi_childnumber}				
+				</span>
+				{END lbapt_whi_childcount}
+						</a>
+	</span>
+	{END lbapt_whi_dtable_link}
+
+
 	
 	</td>
 	{END cellblock_grid_cell_details}
@@ -1474,9 +1578,9 @@
 	>
 
 	 
-														<div data-itemtype="details_preview" data-itemid="details_preview" {$item_details_preview} data-pageid="{$pageid}" data-record-id="{$recId}" 
-	data-orders="lbapt_annual_plan_tracker,lbapt_beginnings_fund,lbapt_communications,lbapt_cri,lbapt_development,lbapt_elma,lbapt_governance,lbapt_operations,lbapt_programs,lbapt_sample_workflow,lbapt_finance,lbapt_hr"
-			data-details-lbapt_annual_plan_tracker			data-details-lbapt_beginnings_fund			data-details-lbapt_communications			data-details-lbapt_cri			data-details-lbapt_development			data-details-lbapt_elma			data-details-lbapt_governance			data-details-lbapt_operations			data-details-lbapt_programs			data-details-lbapt_sample_workflow			data-details-lbapt_finance			data-details-lbapt_hr	>
+																		<div data-itemtype="details_preview" data-itemid="details_preview" {$item_details_preview} data-pageid="{$pageid}" data-record-id="{$recId}" 
+	data-orders="lbapt_annual_plan_tracker,lbapt_beginnings_fund,lbapt_communications,lbapt_cri,lbapt_development,lbapt_elma,lbapt_governance,lbapt_operations,lbapt_programs,lbapt_sample_workflow,lbapt_finance,lbapt_hr,lbapt_cathedral,lbapt_izumi,lbapt_st,lbapt_whi"
+			data-details-lbapt_annual_plan_tracker			data-details-lbapt_beginnings_fund			data-details-lbapt_communications			data-details-lbapt_cri			data-details-lbapt_development			data-details-lbapt_elma			data-details-lbapt_governance			data-details-lbapt_operations			data-details-lbapt_programs			data-details-lbapt_sample_workflow			data-details-lbapt_finance			data-details-lbapt_hr			data-details-lbapt_cathedral			data-details-lbapt_izumi			data-details-lbapt_st			data-details-lbapt_whi	>
 		<span data-details-inside data-short-table="lbapt_annual_plan_tracker">
 			</span>
 		<span data-details-inside data-short-table="lbapt_beginnings_fund">
@@ -1501,10 +1605,22 @@
 			</span>
 		<span data-details-inside data-short-table="lbapt_hr">
 			</span>
+		<span data-details-inside data-short-table="lbapt_cathedral">
+			</span>
+		<span data-details-inside data-short-table="lbapt_izumi">
+			</span>
+		<span data-details-inside data-short-table="lbapt_st">
+			</span>
+		<span data-details-inside data-short-table="lbapt_whi">
+			</span>
 		<div data-details-preview>
 	</div>
 </div>
 	 
+			 
+			 
+			 
+			 
 			 
 			 
 			 

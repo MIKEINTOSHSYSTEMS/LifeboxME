@@ -1381,6 +1381,126 @@ $detailsTablesData["public.lbapt_strategic_areas"] = array();
 				$detailsTablesData["public.lbapt_strategic_areas"][$dIndex]["detailKeys"] = array();
 
 	$detailsTablesData["public.lbapt_strategic_areas"][$dIndex]["detailKeys"][]="strategic_area_id";
+//	public.lbapt_cathedral
+	
+	
+
+		$dIndex = 14;
+	$detailsParam = array();
+	$detailsParam["dDataSourceTable"]="public.lbapt_cathedral";
+		$detailsParam["dOriginalTable"] = "public.lbapt_cathedral";
+
+
+
+		
+		$detailsParam["dType"]=PAGE_LIST;
+	$detailsParam["dShortTable"] = "lbapt_cathedral";
+	$detailsParam["dCaptionTable"] = GetTableCaption("public_lbapt_cathedral");
+	$detailsParam["masterKeys"] =array();
+	$detailsParam["detailKeys"] =array();
+
+
+		
+	$detailsTablesData["public.lbapt_strategic_areas"][$dIndex] = $detailsParam;
+
+	
+		$detailsTablesData["public.lbapt_strategic_areas"][$dIndex]["masterKeys"] = array();
+
+	$detailsTablesData["public.lbapt_strategic_areas"][$dIndex]["masterKeys"][]="strategic_area_id";
+
+				$detailsTablesData["public.lbapt_strategic_areas"][$dIndex]["detailKeys"] = array();
+
+	$detailsTablesData["public.lbapt_strategic_areas"][$dIndex]["detailKeys"][]="strategic_area_id";
+//	public.lbapt_izumi
+	
+	
+
+		$dIndex = 15;
+	$detailsParam = array();
+	$detailsParam["dDataSourceTable"]="public.lbapt_izumi";
+		$detailsParam["dOriginalTable"] = "public.lbapt_izumi";
+
+
+
+		
+		$detailsParam["dType"]=PAGE_LIST;
+	$detailsParam["dShortTable"] = "lbapt_izumi";
+	$detailsParam["dCaptionTable"] = GetTableCaption("public_lbapt_izumi");
+	$detailsParam["masterKeys"] =array();
+	$detailsParam["detailKeys"] =array();
+
+
+		
+	$detailsTablesData["public.lbapt_strategic_areas"][$dIndex] = $detailsParam;
+
+	
+		$detailsTablesData["public.lbapt_strategic_areas"][$dIndex]["masterKeys"] = array();
+
+	$detailsTablesData["public.lbapt_strategic_areas"][$dIndex]["masterKeys"][]="strategic_area_id";
+
+				$detailsTablesData["public.lbapt_strategic_areas"][$dIndex]["detailKeys"] = array();
+
+	$detailsTablesData["public.lbapt_strategic_areas"][$dIndex]["detailKeys"][]="strategic_area_id";
+//	public.lbapt_st
+	
+	
+
+		$dIndex = 16;
+	$detailsParam = array();
+	$detailsParam["dDataSourceTable"]="public.lbapt_st";
+		$detailsParam["dOriginalTable"] = "public.lbapt_st";
+
+
+
+		
+		$detailsParam["dType"]=PAGE_LIST;
+	$detailsParam["dShortTable"] = "lbapt_st";
+	$detailsParam["dCaptionTable"] = GetTableCaption("public_lbapt_st");
+	$detailsParam["masterKeys"] =array();
+	$detailsParam["detailKeys"] =array();
+
+
+		
+	$detailsTablesData["public.lbapt_strategic_areas"][$dIndex] = $detailsParam;
+
+	
+		$detailsTablesData["public.lbapt_strategic_areas"][$dIndex]["masterKeys"] = array();
+
+	$detailsTablesData["public.lbapt_strategic_areas"][$dIndex]["masterKeys"][]="strategic_area_id";
+
+				$detailsTablesData["public.lbapt_strategic_areas"][$dIndex]["detailKeys"] = array();
+
+	$detailsTablesData["public.lbapt_strategic_areas"][$dIndex]["detailKeys"][]="strategic_area_id";
+//	public.lbapt_whi
+	
+	
+
+		$dIndex = 17;
+	$detailsParam = array();
+	$detailsParam["dDataSourceTable"]="public.lbapt_whi";
+		$detailsParam["dOriginalTable"] = "public.lbapt_whi";
+
+
+
+		
+		$detailsParam["dType"]=PAGE_LIST;
+	$detailsParam["dShortTable"] = "lbapt_whi";
+	$detailsParam["dCaptionTable"] = GetTableCaption("public_lbapt_whi");
+	$detailsParam["masterKeys"] =array();
+	$detailsParam["detailKeys"] =array();
+
+
+		
+	$detailsTablesData["public.lbapt_strategic_areas"][$dIndex] = $detailsParam;
+
+	
+		$detailsTablesData["public.lbapt_strategic_areas"][$dIndex]["masterKeys"] = array();
+
+	$detailsTablesData["public.lbapt_strategic_areas"][$dIndex]["masterKeys"][]="strategic_area_id";
+
+				$detailsTablesData["public.lbapt_strategic_areas"][$dIndex]["detailKeys"] = array();
+
+	$detailsTablesData["public.lbapt_strategic_areas"][$dIndex]["detailKeys"][]="strategic_area_id";
 //endif
 
 // tables which are master tables for current table (detail)

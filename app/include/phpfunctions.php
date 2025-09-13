@@ -1286,6 +1286,22 @@ function GetDefaultValue($field, $ptype, $table="")
 	{
 		return strftime("%Y-%m-%d %H:%M:%S");
 	}
+				if($table=="public.lbapt_cathedral" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_izumi" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_st" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_whi" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
 	return "";
 }
 
@@ -1454,6 +1470,22 @@ function GetAutoUpdateValue($field, $ptype, $table="")
 		return strftime("%Y-%m-%d %H:%M:%S");
 	}
 				if($table=="public.lbapt_hr" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_cathedral" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_izumi" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_st" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbapt_whi" && $field=="updated_at")
 	{
 		return strftime("%Y-%m-%d %H:%M:%S");
 	}

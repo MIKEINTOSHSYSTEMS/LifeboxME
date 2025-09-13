@@ -550,6 +550,14 @@ class Chart
 			return true;
 		if("public.lbapt_hr" == $this->chrt_array['tables'][0])
 			return true;
+		if("public.lbapt_cathedral" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbapt_izumi" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbapt_st" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbapt_whi" == $this->chrt_array['tables'][0])
+			return true;
 		return false;
 	}
 

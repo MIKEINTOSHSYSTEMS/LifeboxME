@@ -328,6 +328,10 @@ class ConnectionManager_Base
 		$connectionsIds["public.years"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["public.lbapt_finance"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["public.lbapt_hr"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbapt_cathedral"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbapt_izumi"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbapt_st"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbapt_whi"] = "lifebox_mesystem_at_localhost";
 
 		$this->_tablesConnectionIds = &$connectionsIds;
 	}

@@ -375,6 +375,14 @@ function checkTableName($shortTName )
 		return true;
 	if ("lbapt_hr" == $shortTName )
 		return true;
+	if ("lbapt_cathedral" == $shortTName )
+		return true;
+	if ("lbapt_izumi" == $shortTName )
+		return true;
+	if ("lbapt_st" == $shortTName )
+		return true;
+	if ("lbapt_whi" == $shortTName )
+		return true;
 	return false;
 }
 
@@ -1199,6 +1207,42 @@ function GetTablesList($pdfMode = false)
 	if( $tableAvailable ) {
 		$arr[]="public.lbapt_hr";
 	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbapt_cathedral");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbapt_cathedral";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbapt_izumi");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbapt_izumi";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbapt_st");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbapt_st";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbapt_whi");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbapt_whi";
+	}
 	return $arr;
 }
 
@@ -1294,6 +1338,10 @@ function GetTablesListWithoutSecurity()
 	$arr[]="public.years";
 	$arr[]="public.lbapt_finance";
 	$arr[]="public.lbapt_hr";
+	$arr[]="public.lbapt_cathedral";
+	$arr[]="public.lbapt_izumi";
+	$arr[]="public.lbapt_st";
+	$arr[]="public.lbapt_whi";
 	return $arr;
 }
 
@@ -2351,6 +2399,26 @@ function GetUserPermissionsStatic( $table )
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.lbapt_hr" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbapt_cathedral" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbapt_izumi" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbapt_st" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbapt_whi" )
 	{
 //	default permissions
 		return "ADESPI".$extraPerm;

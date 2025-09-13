@@ -1553,6 +1553,14 @@ class CrossTableWebReport
 			$isDB = true;
 		if("public.lbapt_hr" == $this->xml_array['tables'][0])
 			$isDB = true;
+		if("public.lbapt_cathedral" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbapt_izumi" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbapt_st" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbapt_whi" == $this->xml_array['tables'][0])
+			$isDB = true;
 		return $isDB;
 	}
 	

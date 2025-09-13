@@ -754,6 +754,22 @@ class AuditTrailTable
 		{
 			return true;
 		}
+		if($table=="public.lbapt_cathedral")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_izumi")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_st")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_whi")
+		{
+			return false;
+		}
 	}
 
 	protected function insert($datetime, $ip, $user, $table, $action, $description)
@@ -1459,6 +1475,22 @@ class AuditTrailFile
 		if($table=="public.lbapt_hr")
 		{
 			return true;
+		}
+		if($table=="public.lbapt_cathedral")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_izumi")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_st")
+		{
+			return false;
+		}
+		if($table=="public.lbapt_whi")
+		{
+			return false;
 		}
 	}
 
