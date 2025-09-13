@@ -1405,6 +1405,90 @@ function InitLookupLinks()
 			$lookupTableLinks["public.lbapt_status"]["lbapt_whi.status_id"] = array();
 		}
 		$lookupTableLinks["public.lbapt_status"]["lbapt_whi.status_id"]["edit"] = array("table" => "public.lbapt_whi", "field" => "status_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbpmi_indicators"] ) ) {
+			$lookupTableLinks["public.lbpmi_indicators"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbpmi_indicators"]["lbpmi_calculation_log.indicator_id"] )) {
+			$lookupTableLinks["public.lbpmi_indicators"]["lbpmi_calculation_log.indicator_id"] = array();
+		}
+		$lookupTableLinks["public.lbpmi_indicators"]["lbpmi_calculation_log.indicator_id"]["edit"] = array("table" => "public.lbpmi_calculation_log", "field" => "indicator_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbpmi_data_elements"] ) ) {
+			$lookupTableLinks["public.lbpmi_data_elements"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbpmi_data_elements"]["lbpmi_datasets.data_element_id"] )) {
+			$lookupTableLinks["public.lbpmi_data_elements"]["lbpmi_datasets.data_element_id"] = array();
+		}
+		$lookupTableLinks["public.lbpmi_data_elements"]["lbpmi_datasets.data_element_id"]["edit"] = array("table" => "public.lbpmi_datasets", "field" => "data_element_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.period_types"] ) ) {
+			$lookupTableLinks["public.period_types"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.period_types"]["lbpmi_datasets.dataset_period_type"] )) {
+			$lookupTableLinks["public.period_types"]["lbpmi_datasets.dataset_period_type"] = array();
+		}
+		$lookupTableLinks["public.period_types"]["lbpmi_datasets.dataset_period_type"]["edit"] = array("table" => "public.lbpmi_datasets", "field" => "dataset_period_type", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.months"] ) ) {
+			$lookupTableLinks["public.months"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.months"]["lbpmi_datasets.dataset_month"] )) {
+			$lookupTableLinks["public.months"]["lbpmi_datasets.dataset_month"] = array();
+		}
+		$lookupTableLinks["public.months"]["lbpmi_datasets.dataset_month"]["edit"] = array("table" => "public.lbpmi_datasets", "field" => "dataset_month", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.quarters"] ) ) {
+			$lookupTableLinks["public.quarters"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.quarters"]["lbpmi_datasets.dataset_quarter"] )) {
+			$lookupTableLinks["public.quarters"]["lbpmi_datasets.dataset_quarter"] = array();
+		}
+		$lookupTableLinks["public.quarters"]["lbpmi_datasets.dataset_quarter"]["edit"] = array("table" => "public.lbpmi_datasets", "field" => "dataset_quarter", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.years"] ) ) {
+			$lookupTableLinks["public.years"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.years"]["lbpmi_datasets.dataset_year"] )) {
+			$lookupTableLinks["public.years"]["lbpmi_datasets.dataset_year"] = array();
+		}
+		$lookupTableLinks["public.years"]["lbpmi_datasets.dataset_year"]["edit"] = array("table" => "public.lbpmi_datasets", "field" => "dataset_year", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbpmi_indicators"] ) ) {
+			$lookupTableLinks["public.lbpmi_indicators"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbpmi_indicators"]["lbpmi_indicator_actuals.indicator_id"] )) {
+			$lookupTableLinks["public.lbpmi_indicators"]["lbpmi_indicator_actuals.indicator_id"] = array();
+		}
+		$lookupTableLinks["public.lbpmi_indicators"]["lbpmi_indicator_actuals.indicator_id"]["edit"] = array("table" => "public.lbpmi_indicator_actuals", "field" => "indicator_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.years"] ) ) {
+			$lookupTableLinks["public.years"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.years"]["lbpmi_indicator_actuals.year"] )) {
+			$lookupTableLinks["public.years"]["lbpmi_indicator_actuals.year"] = array();
+		}
+		$lookupTableLinks["public.years"]["lbpmi_indicator_actuals.year"]["edit"] = array("table" => "public.lbpmi_indicator_actuals", "field" => "year", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbpmi_indicators"] ) ) {
+			$lookupTableLinks["public.lbpmi_indicators"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbpmi_indicators"]["lbpmi_indicator_targets.indicator_id"] )) {
+			$lookupTableLinks["public.lbpmi_indicators"]["lbpmi_indicator_targets.indicator_id"] = array();
+		}
+		$lookupTableLinks["public.lbpmi_indicators"]["lbpmi_indicator_targets.indicator_id"]["edit"] = array("table" => "public.lbpmi_indicator_targets", "field" => "indicator_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.years"] ) ) {
+			$lookupTableLinks["public.years"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.years"]["lbpmi_indicator_targets.year"] )) {
+			$lookupTableLinks["public.years"]["lbpmi_indicator_targets.year"] = array();
+		}
+		$lookupTableLinks["public.years"]["lbpmi_indicator_targets.year"]["edit"] = array("table" => "public.lbpmi_indicator_targets", "field" => "year", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.unit_of_measurement"] ) ) {
+			$lookupTableLinks["public.unit_of_measurement"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.unit_of_measurement"]["lbpmi_indicators.unit_of_measurement"] )) {
+			$lookupTableLinks["public.unit_of_measurement"]["lbpmi_indicators.unit_of_measurement"] = array();
+		}
+		$lookupTableLinks["public.unit_of_measurement"]["lbpmi_indicators.unit_of_measurement"]["edit"] = array("table" => "public.lbpmi_indicators", "field" => "unit_of_measurement", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.period_types"] ) ) {
+			$lookupTableLinks["public.period_types"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.period_types"]["lbpmi_indicators.reporting_frequency"] )) {
+			$lookupTableLinks["public.period_types"]["lbpmi_indicators.reporting_frequency"] = array();
+		}
+		$lookupTableLinks["public.period_types"]["lbpmi_indicators.reporting_frequency"]["edit"] = array("table" => "public.lbpmi_indicators", "field" => "reporting_frequency", "page" => "edit");
 }
 
 ?>

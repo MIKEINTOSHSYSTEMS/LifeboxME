@@ -1,0 +1,683 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+    <LINK rel="shortcut icon" type="image/png" href="/assets/img/lb_favicon.ico"/>
+    <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
+    <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
+    <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
+    
+		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
+	{BEGIN rtlCSS}
+	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
+	{END rtlCSS}
+	{BEGIN styleCSSFiles}
+	<link REL="stylesheet" href="{$stylepath}" type="text/css">
+	{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-search" >
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		{$locking}
+		<div class="r-small-page" 
+			data-body-align="center"
+			data-body-width="standard"
+		>
+							{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="small" {$form_top} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="top_c1" data-pageid="{$pageid}"	{$cell_top_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	 
+		<h2 data-itemtype="search_header" data-itemid="search_header" {$item_search_header} data-pageid="{$pageid}" >{$pagetitlelabel public_lbpmi_summary search}</h2>
+	</div>					</div>
+	</div>		
+{END top_block}
+									{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="small" {$form_above-grid} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	</div>					</div>
+	</div>		
+{END above-grid_block}
+									{BEGIN grid_block}
+
+
+
+
+ 
+	 
+												<table 
+	data-body-align="center"
+	data-location="grid" id="form_grid_{$pageid}" data-makeup="small" {$form_grid} data-pageid="{$pageid}" 
+	class="r-edit-form" cellpadding="0" cellspacing="0" 
+	{$grid_hiddenattr} 
+		data-form-width="1"
+		
+		data-v-width="6"
+	>
+	<tbody>
+										<tr {$row_grid_0} >
+										
+
+{BEGIN cellblock_grid_c3}
+<td
+	{$cell_grid_c3}
+	class=" r-ori-vert"
+	
+				data-fullwidth
+		
+			data-cellId="grid_c3" data-pageid="{$pageid}"
+		data-v-cell="6"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN indicator_id_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_indicator_id}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="indicator_id{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field" {$item_integrated_search_field} data-pageid="{$pageid}" data-field="indicator_id" data-fieldname="indicator_id" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_indicator_id}">
+		{$label public_lbpmi_summary indicator_id }	</label>
+	<div class="r-search-option">
+		{$searchtype_indicator_id}
+	</div>
+	<div class="r-search-field">
+		{$indicator_id_editcontrol}	</div>
+	<div class="r-search-field">
+		{$indicator_id_editcontrol1}
+	</div>
+	
+</div>
+
+{END indicator_id_fieldblock}
+											
+{BEGIN result_area_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_result_area}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="result_area{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field1" {$item_integrated_search_field1} data-pageid="{$pageid}" data-field="result_area" data-fieldname="result_area" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_result_area}">
+		{$label public_lbpmi_summary result_area }	</label>
+	<div class="r-search-option">
+		{$searchtype_result_area}
+	</div>
+	<div class="r-search-field">
+		{$result_area_editcontrol}	</div>
+	<div class="r-search-field">
+		{$result_area_editcontrol1}
+	</div>
+	
+</div>
+
+{END result_area_fieldblock}
+											
+{BEGIN indicator_name_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_indicator_name}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="indicator_name{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field2" {$item_integrated_search_field2} data-pageid="{$pageid}" data-field="indicator_name" data-fieldname="indicator_name" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_indicator_name}">
+		{$label public_lbpmi_summary indicator_name }	</label>
+	<div class="r-search-option">
+		{$searchtype_indicator_name}
+	</div>
+	<div class="r-search-field">
+		{$indicator_name_editcontrol}	</div>
+	<div class="r-search-field">
+		{$indicator_name_editcontrol1}
+	</div>
+	
+</div>
+
+{END indicator_name_fieldblock}
+											
+{BEGIN indicator_description_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_indicator_description}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="indicator_description{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field3" {$item_integrated_search_field3} data-pageid="{$pageid}" data-field="indicator_description" data-fieldname="indicator_description" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_indicator_description}">
+		{$label public_lbpmi_summary indicator_description }	</label>
+	<div class="r-search-option">
+		{$searchtype_indicator_description}
+	</div>
+	<div class="r-search-field">
+		{$indicator_description_editcontrol}	</div>
+	<div class="r-search-field">
+		{$indicator_description_editcontrol1}
+	</div>
+	
+</div>
+
+{END indicator_description_fieldblock}
+											
+{BEGIN indicator_type_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_indicator_type}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="indicator_type{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field4" {$item_integrated_search_field4} data-pageid="{$pageid}" data-field="indicator_type" data-fieldname="indicator_type" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_indicator_type}">
+		{$label public_lbpmi_summary indicator_type }	</label>
+	<div class="r-search-option">
+		{$searchtype_indicator_type}
+	</div>
+	<div class="r-search-field">
+		{$indicator_type_editcontrol}	</div>
+	<div class="r-search-field">
+		{$indicator_type_editcontrol1}
+	</div>
+	
+</div>
+
+{END indicator_type_fieldblock}
+											
+{BEGIN unit_of_measurement_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_unit_of_measurement}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="unit_of_measurement{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field5" {$item_integrated_search_field5} data-pageid="{$pageid}" data-field="unit_of_measurement" data-fieldname="unit_of_measurement" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_unit_of_measurement}">
+		{$label public_lbpmi_summary unit_of_measurement }	</label>
+	<div class="r-search-option">
+		{$searchtype_unit_of_measurement}
+	</div>
+	<div class="r-search-field">
+		{$unit_of_measurement_editcontrol}	</div>
+	<div class="r-search-field">
+		{$unit_of_measurement_editcontrol1}
+	</div>
+	
+</div>
+
+{END unit_of_measurement_fieldblock}
+											
+{BEGIN formula_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_formula}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="formula{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field6" {$item_integrated_search_field6} data-pageid="{$pageid}" data-field="formula" data-fieldname="formula" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_formula}">
+		{$label public_lbpmi_summary formula }	</label>
+	<div class="r-search-option">
+		{$searchtype_formula}
+	</div>
+	<div class="r-search-field">
+		{$formula_editcontrol}	</div>
+	<div class="r-search-field">
+		{$formula_editcontrol1}
+	</div>
+	
+</div>
+
+{END formula_fieldblock}
+											
+{BEGIN reporting_frequency_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_reporting_frequency}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="reporting_frequency{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field7" {$item_integrated_search_field7} data-pageid="{$pageid}" data-field="reporting_frequency" data-fieldname="reporting_frequency" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_reporting_frequency}">
+		{$label public_lbpmi_summary reporting_frequency }	</label>
+	<div class="r-search-option">
+		{$searchtype_reporting_frequency}
+	</div>
+	<div class="r-search-field">
+		{$reporting_frequency_editcontrol}	</div>
+	<div class="r-search-field">
+		{$reporting_frequency_editcontrol1}
+	</div>
+	
+</div>
+
+{END reporting_frequency_fieldblock}
+											
+{BEGIN year_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_year}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="year{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field8" {$item_integrated_search_field8} data-pageid="{$pageid}" data-field="year" data-fieldname="year" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_year}">
+		{$label public_lbpmi_summary year }	</label>
+	<div class="r-search-option">
+		{$searchtype_year}
+	</div>
+	<div class="r-search-field">
+		{$year_editcontrol}	</div>
+	<div class="r-search-field">
+		{$year_editcontrol1}
+	</div>
+	
+</div>
+
+{END year_fieldblock}
+											
+{BEGIN baseline_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_baseline}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="baseline{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field9" {$item_integrated_search_field9} data-pageid="{$pageid}" data-field="baseline" data-fieldname="baseline" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_baseline}">
+		{$label public_lbpmi_summary baseline }	</label>
+	<div class="r-search-option">
+		{$searchtype_baseline}
+	</div>
+	<div class="r-search-field">
+		{$baseline_editcontrol}	</div>
+	<div class="r-search-field">
+		{$baseline_editcontrol1}
+	</div>
+	
+</div>
+
+{END baseline_fieldblock}
+											
+{BEGIN q1_target_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_q1_target}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="q1_target{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field10" {$item_integrated_search_field10} data-pageid="{$pageid}" data-field="q1_target" data-fieldname="q1_target" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_q1_target}">
+		{$label public_lbpmi_summary q1_target }	</label>
+	<div class="r-search-option">
+		{$searchtype_q1_target}
+	</div>
+	<div class="r-search-field">
+		{$q1_target_editcontrol}	</div>
+	<div class="r-search-field">
+		{$q1_target_editcontrol1}
+	</div>
+	
+</div>
+
+{END q1_target_fieldblock}
+											
+{BEGIN q2_target_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_q2_target}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="q2_target{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field11" {$item_integrated_search_field11} data-pageid="{$pageid}" data-field="q2_target" data-fieldname="q2_target" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_q2_target}">
+		{$label public_lbpmi_summary q2_target }	</label>
+	<div class="r-search-option">
+		{$searchtype_q2_target}
+	</div>
+	<div class="r-search-field">
+		{$q2_target_editcontrol}	</div>
+	<div class="r-search-field">
+		{$q2_target_editcontrol1}
+	</div>
+	
+</div>
+
+{END q2_target_fieldblock}
+											
+{BEGIN q3_target_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_q3_target}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="q3_target{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field12" {$item_integrated_search_field12} data-pageid="{$pageid}" data-field="q3_target" data-fieldname="q3_target" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_q3_target}">
+		{$label public_lbpmi_summary q3_target }	</label>
+	<div class="r-search-option">
+		{$searchtype_q3_target}
+	</div>
+	<div class="r-search-field">
+		{$q3_target_editcontrol}	</div>
+	<div class="r-search-field">
+		{$q3_target_editcontrol1}
+	</div>
+	
+</div>
+
+{END q3_target_fieldblock}
+											
+{BEGIN q4_target_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_q4_target}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="q4_target{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field13" {$item_integrated_search_field13} data-pageid="{$pageid}" data-field="q4_target" data-fieldname="q4_target" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_q4_target}">
+		{$label public_lbpmi_summary q4_target }	</label>
+	<div class="r-search-option">
+		{$searchtype_q4_target}
+	</div>
+	<div class="r-search-field">
+		{$q4_target_editcontrol}	</div>
+	<div class="r-search-field">
+		{$q4_target_editcontrol1}
+	</div>
+	
+</div>
+
+{END q4_target_fieldblock}
+											
+{BEGIN q1_actual_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_q1_actual}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="q1_actual{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field14" {$item_integrated_search_field14} data-pageid="{$pageid}" data-field="q1_actual" data-fieldname="q1_actual" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_q1_actual}">
+		{$label public_lbpmi_summary q1_actual }	</label>
+	<div class="r-search-option">
+		{$searchtype_q1_actual}
+	</div>
+	<div class="r-search-field">
+		{$q1_actual_editcontrol}	</div>
+	<div class="r-search-field">
+		{$q1_actual_editcontrol1}
+	</div>
+	
+</div>
+
+{END q1_actual_fieldblock}
+											
+{BEGIN q2_actual_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_q2_actual}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="q2_actual{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field15" {$item_integrated_search_field15} data-pageid="{$pageid}" data-field="q2_actual" data-fieldname="q2_actual" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_q2_actual}">
+		{$label public_lbpmi_summary q2_actual }	</label>
+	<div class="r-search-option">
+		{$searchtype_q2_actual}
+	</div>
+	<div class="r-search-field">
+		{$q2_actual_editcontrol}	</div>
+	<div class="r-search-field">
+		{$q2_actual_editcontrol1}
+	</div>
+	
+</div>
+
+{END q2_actual_fieldblock}
+											
+{BEGIN q3_actual_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_q3_actual}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="q3_actual{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field16" {$item_integrated_search_field16} data-pageid="{$pageid}" data-field="q3_actual" data-fieldname="q3_actual" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_q3_actual}">
+		{$label public_lbpmi_summary q3_actual }	</label>
+	<div class="r-search-option">
+		{$searchtype_q3_actual}
+	</div>
+	<div class="r-search-field">
+		{$q3_actual_editcontrol}	</div>
+	<div class="r-search-field">
+		{$q3_actual_editcontrol1}
+	</div>
+	
+</div>
+
+{END q3_actual_fieldblock}
+											
+{BEGIN q4_actual_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_q4_actual}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="q4_actual{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field17" {$item_integrated_search_field17} data-pageid="{$pageid}" data-field="q4_actual" data-fieldname="q4_actual" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_q4_actual}">
+		{$label public_lbpmi_summary q4_actual }	</label>
+	<div class="r-search-option">
+		{$searchtype_q4_actual}
+	</div>
+	<div class="r-search-field">
+		{$q4_actual_editcontrol}	</div>
+	<div class="r-search-field">
+		{$q4_actual_editcontrol1}
+	</div>
+	
+</div>
+
+{END q4_actual_fieldblock}
+											
+{BEGIN q1_calculated_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_q1_calculated}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="q1_calculated{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field18" {$item_integrated_search_field18} data-pageid="{$pageid}" data-field="q1_calculated" data-fieldname="q1_calculated" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_q1_calculated}">
+		{$label public_lbpmi_summary q1_calculated }	</label>
+	<div class="r-search-option">
+		{$searchtype_q1_calculated}
+	</div>
+	<div class="r-search-field">
+		{$q1_calculated_editcontrol}	</div>
+	<div class="r-search-field">
+		{$q1_calculated_editcontrol1}
+	</div>
+	
+</div>
+
+{END q1_calculated_fieldblock}
+											
+{BEGIN q2_calculated_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_q2_calculated}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="q2_calculated{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field19" {$item_integrated_search_field19} data-pageid="{$pageid}" data-field="q2_calculated" data-fieldname="q2_calculated" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_q2_calculated}">
+		{$label public_lbpmi_summary q2_calculated }	</label>
+	<div class="r-search-option">
+		{$searchtype_q2_calculated}
+	</div>
+	<div class="r-search-field">
+		{$q2_calculated_editcontrol}	</div>
+	<div class="r-search-field">
+		{$q2_calculated_editcontrol1}
+	</div>
+	
+</div>
+
+{END q2_calculated_fieldblock}
+											
+{BEGIN q3_calculated_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_q3_calculated}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="q3_calculated{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field20" {$item_integrated_search_field20} data-pageid="{$pageid}" data-field="q3_calculated" data-fieldname="q3_calculated" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_q3_calculated}">
+		{$label public_lbpmi_summary q3_calculated }	</label>
+	<div class="r-search-option">
+		{$searchtype_q3_calculated}
+	</div>
+	<div class="r-search-field">
+		{$q3_calculated_editcontrol}	</div>
+	<div class="r-search-field">
+		{$q3_calculated_editcontrol1}
+	</div>
+	
+</div>
+
+{END q3_calculated_fieldblock}
+											
+{BEGIN q4_calculated_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_q4_calculated}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="q4_calculated{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field21" {$item_integrated_search_field21} data-pageid="{$pageid}" data-field="q4_calculated" data-fieldname="q4_calculated" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_q4_calculated}">
+		{$label public_lbpmi_summary q4_calculated }	</label>
+	<div class="r-search-option">
+		{$searchtype_q4_calculated}
+	</div>
+	<div class="r-search-field">
+		{$q4_calculated_editcontrol}	</div>
+	<div class="r-search-field">
+		{$q4_calculated_editcontrol1}
+	</div>
+	
+</div>
+
+{END q4_calculated_fieldblock}
+											
+{BEGIN created_at_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_created_at}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="created_at{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field22" {$item_integrated_search_field22} data-pageid="{$pageid}" data-field="created_at" data-fieldname="created_at" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_created_at}">
+		{$label public_lbpmi_summary created_at }	</label>
+	<div class="r-search-option">
+		{$searchtype_created_at}
+	</div>
+	<div class="r-search-field">
+		{$created_at_editcontrol}	</div>
+	<div class="r-search-field">
+		{$created_at_editcontrol1}
+	</div>
+	
+</div>
+
+{END created_at_fieldblock}
+											
+{BEGIN updated_at_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_updated_at}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="updated_at{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field23" {$item_integrated_search_field23} data-pageid="{$pageid}" data-field="updated_at" data-fieldname="updated_at" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_updated_at}">
+		{$label public_lbpmi_summary updated_at }	</label>
+	<div class="r-search-option">
+		{$searchtype_updated_at}
+	</div>
+	<div class="r-search-field">
+		{$updated_at_editcontrol}	</div>
+	<div class="r-search-field">
+		{$updated_at_editcontrol1}
+	</div>
+	
+</div>
+
+{END updated_at_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c3}
+								</tr>
+			</tbody></table>
+{END grid_block}
+									{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="small" {$form_below-grid} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class="			col-md-12
+	">
+	 
+		<span data-itemtype="search_search" data-itemid="search_search" {$item_search_search} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" {$searchbutton_attrs} data-page=undefined >
+							Search			</a>
+</span>
+	 
+		<span data-itemtype="search_reset" data-itemid="search_reset" {$item_search_reset} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$resetbutton_attrs} >
+							Reset			</a>
+</span>
+	 
+		{BEGIN back_button}
+<span data-itemtype="search_back_list" data-itemid="search_back_list" {$item_search_back_list} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$backbutton_attrs} >
+							Back to list			</a>
+</span>
+{END back_button}
+	 
+		{BEGIN cancel_button}
+<span data-itemtype="search_cancel" data-itemid="search_cancel" {$item_search_cancel} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" id="cancelButton{$id}" >
+							Cancel			</a>
+</span>
+{END cancel_button}
+	</div>					</div>
+	</div>		
+{END below-grid_block}
+			</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

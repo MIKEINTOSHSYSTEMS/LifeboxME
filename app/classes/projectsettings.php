@@ -3758,6 +3758,24 @@ function fillProjectEntites()
 	$projectEntitiesReverse[ "lbapt_st" ] = "public.lbapt_st";
 	$projectEntities[ "public.lbapt_whi" ] = array( "url" => "lbapt_whi", "type" => 0 );
 	$projectEntitiesReverse[ "lbapt_whi" ] = "public.lbapt_whi";
+	$projectEntities[ "public.lbpmi_calculation_log" ] = array( "url" => "lbpmi_calculation_log", "type" => 0 );
+	$projectEntitiesReverse[ "lbpmi_calculation_log" ] = "public.lbpmi_calculation_log";
+	$projectEntities[ "public.lbpmi_data_elements" ] = array( "url" => "lbpmi_data_elements", "type" => 0 );
+	$projectEntitiesReverse[ "lbpmi_data_elements" ] = "public.lbpmi_data_elements";
+	$projectEntities[ "public.lbpmi_datasets" ] = array( "url" => "lbpmi_datasets", "type" => 0 );
+	$projectEntitiesReverse[ "lbpmi_datasets" ] = "public.lbpmi_datasets";
+	$projectEntities[ "public.lbpmi_indicator_actuals" ] = array( "url" => "lbpmi_indicator_actuals", "type" => 0 );
+	$projectEntitiesReverse[ "lbpmi_indicator_actuals" ] = "public.lbpmi_indicator_actuals";
+	$projectEntities[ "public.lbpmi_indicator_targets" ] = array( "url" => "lbpmi_indicator_targets", "type" => 0 );
+	$projectEntitiesReverse[ "lbpmi_indicator_targets" ] = "public.lbpmi_indicator_targets";
+	$projectEntities[ "public.lbpmi_indicators" ] = array( "url" => "lbpmi_indicators", "type" => 0 );
+	$projectEntitiesReverse[ "lbpmi_indicators" ] = "public.lbpmi_indicators";
+	$projectEntities[ "public.lbpmi_summary" ] = array( "url" => "lbpmi_summary", "type" => 0 );
+	$projectEntitiesReverse[ "lbpmi_summary" ] = "public.lbpmi_summary";
+	$projectEntities[ "public.period_types" ] = array( "url" => "period_types", "type" => 0 );
+	$projectEntitiesReverse[ "period_types" ] = "public.period_types";
+	$projectEntities[ "public.unit_of_measurement" ] = array( "url" => "unit_of_measurement", "type" => 0 );
+	$projectEntitiesReverse[ "unit_of_measurement" ] = "public.unit_of_measurement";
 }
 
 function findTable( $table ) {

@@ -558,6 +558,24 @@ class Chart
 			return true;
 		if("public.lbapt_whi" == $this->chrt_array['tables'][0])
 			return true;
+		if("public.lbpmi_calculation_log" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbpmi_data_elements" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbpmi_datasets" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbpmi_indicator_actuals" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbpmi_indicator_targets" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbpmi_indicators" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbpmi_summary" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.period_types" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.unit_of_measurement" == $this->chrt_array['tables'][0])
+			return true;
 		return false;
 	}
 

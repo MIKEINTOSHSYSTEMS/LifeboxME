@@ -105,6 +105,15 @@ $nonAdminTablesArr[] = "public.lbapt_cathedral";
 $nonAdminTablesArr[] = "public.lbapt_izumi";
 $nonAdminTablesArr[] = "public.lbapt_st";
 $nonAdminTablesArr[] = "public.lbapt_whi";
+$nonAdminTablesArr[] = "public.lbpmi_calculation_log";
+$nonAdminTablesArr[] = "public.lbpmi_data_elements";
+$nonAdminTablesArr[] = "public.lbpmi_datasets";
+$nonAdminTablesArr[] = "public.lbpmi_indicator_actuals";
+$nonAdminTablesArr[] = "public.lbpmi_indicator_targets";
+$nonAdminTablesArr[] = "public.lbpmi_indicators";
+$nonAdminTablesArr[] = "public.lbpmi_summary";
+$nonAdminTablesArr[] = "public.period_types";
+$nonAdminTablesArr[] = "public.unit_of_measurement";
 
 $ug_connection = $cman->getForUserGroups();
 

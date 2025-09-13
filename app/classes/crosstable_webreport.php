@@ -1561,6 +1561,24 @@ class CrossTableWebReport
 			$isDB = true;
 		if("public.lbapt_whi" == $this->xml_array['tables'][0])
 			$isDB = true;
+		if("public.lbpmi_calculation_log" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbpmi_data_elements" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbpmi_datasets" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbpmi_indicator_actuals" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbpmi_indicator_targets" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbpmi_indicators" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbpmi_summary" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.period_types" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.unit_of_measurement" == $this->xml_array['tables'][0])
+			$isDB = true;
 		return $isDB;
 	}
 	

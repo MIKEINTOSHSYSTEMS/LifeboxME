@@ -770,6 +770,42 @@ class AuditTrailTable
 		{
 			return false;
 		}
+		if($table=="public.lbpmi_calculation_log")
+		{
+			return false;
+		}
+		if($table=="public.lbpmi_data_elements")
+		{
+			return false;
+		}
+		if($table=="public.lbpmi_datasets")
+		{
+			return false;
+		}
+		if($table=="public.lbpmi_indicator_actuals")
+		{
+			return false;
+		}
+		if($table=="public.lbpmi_indicator_targets")
+		{
+			return false;
+		}
+		if($table=="public.lbpmi_indicators")
+		{
+			return false;
+		}
+		if($table=="public.lbpmi_summary")
+		{
+			return false;
+		}
+		if($table=="public.period_types")
+		{
+			return false;
+		}
+		if($table=="public.unit_of_measurement")
+		{
+			return false;
+		}
 	}
 
 	protected function insert($datetime, $ip, $user, $table, $action, $description)
@@ -1489,6 +1525,42 @@ class AuditTrailFile
 			return false;
 		}
 		if($table=="public.lbapt_whi")
+		{
+			return false;
+		}
+		if($table=="public.lbpmi_calculation_log")
+		{
+			return false;
+		}
+		if($table=="public.lbpmi_data_elements")
+		{
+			return false;
+		}
+		if($table=="public.lbpmi_datasets")
+		{
+			return false;
+		}
+		if($table=="public.lbpmi_indicator_actuals")
+		{
+			return false;
+		}
+		if($table=="public.lbpmi_indicator_targets")
+		{
+			return false;
+		}
+		if($table=="public.lbpmi_indicators")
+		{
+			return false;
+		}
+		if($table=="public.lbpmi_summary")
+		{
+			return false;
+		}
+		if($table=="public.period_types")
+		{
+			return false;
+		}
+		if($table=="public.unit_of_measurement")
 		{
 			return false;
 		}

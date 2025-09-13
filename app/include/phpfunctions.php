@@ -1302,6 +1302,26 @@ function GetDefaultValue($field, $ptype, $table="")
 	{
 		return strftime("%Y-%m-%d %H:%M:%S");
 	}
+				if($table=="public.lbpmi_data_elements" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbpmi_datasets" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbpmi_indicator_actuals" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbpmi_indicator_targets" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbpmi_indicators" && $field=="created_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
 	return "";
 }
 
@@ -1486,6 +1506,26 @@ function GetAutoUpdateValue($field, $ptype, $table="")
 		return strftime("%Y-%m-%d %H:%M:%S");
 	}
 				if($table=="public.lbapt_whi" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbpmi_data_elements" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbpmi_datasets" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbpmi_indicator_actuals" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbpmi_indicator_targets" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbpmi_indicators" && $field=="updated_at")
 	{
 		return strftime("%Y-%m-%d %H:%M:%S");
 	}

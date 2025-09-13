@@ -383,6 +383,24 @@ function checkTableName($shortTName )
 		return true;
 	if ("lbapt_whi" == $shortTName )
 		return true;
+	if ("lbpmi_calculation_log" == $shortTName )
+		return true;
+	if ("lbpmi_data_elements" == $shortTName )
+		return true;
+	if ("lbpmi_datasets" == $shortTName )
+		return true;
+	if ("lbpmi_indicator_actuals" == $shortTName )
+		return true;
+	if ("lbpmi_indicator_targets" == $shortTName )
+		return true;
+	if ("lbpmi_indicators" == $shortTName )
+		return true;
+	if ("lbpmi_summary" == $shortTName )
+		return true;
+	if ("period_types" == $shortTName )
+		return true;
+	if ("unit_of_measurement" == $shortTName )
+		return true;
 	return false;
 }
 
@@ -1243,6 +1261,87 @@ function GetTablesList($pdfMode = false)
 	if( $tableAvailable ) {
 		$arr[]="public.lbapt_whi";
 	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbpmi_calculation_log");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbpmi_calculation_log";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbpmi_data_elements");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbpmi_data_elements";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbpmi_datasets");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbpmi_datasets";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbpmi_indicator_actuals");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbpmi_indicator_actuals";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbpmi_indicator_targets");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbpmi_indicator_targets";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbpmi_indicators");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbpmi_indicators";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbpmi_summary");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbpmi_summary";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.period_types");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.period_types";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.unit_of_measurement");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.unit_of_measurement";
+	}
 	return $arr;
 }
 
@@ -1342,6 +1441,15 @@ function GetTablesListWithoutSecurity()
 	$arr[]="public.lbapt_izumi";
 	$arr[]="public.lbapt_st";
 	$arr[]="public.lbapt_whi";
+	$arr[]="public.lbpmi_calculation_log";
+	$arr[]="public.lbpmi_data_elements";
+	$arr[]="public.lbpmi_datasets";
+	$arr[]="public.lbpmi_indicator_actuals";
+	$arr[]="public.lbpmi_indicator_targets";
+	$arr[]="public.lbpmi_indicators";
+	$arr[]="public.lbpmi_summary";
+	$arr[]="public.period_types";
+	$arr[]="public.unit_of_measurement";
 	return $arr;
 }
 
@@ -2419,6 +2527,51 @@ function GetUserPermissionsStatic( $table )
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.lbapt_whi" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbpmi_calculation_log" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbpmi_data_elements" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbpmi_datasets" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbpmi_indicator_actuals" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbpmi_indicator_targets" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbpmi_indicators" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbpmi_summary" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.period_types" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.unit_of_measurement" )
 	{
 //	default permissions
 		return "ADESPI".$extraPerm;

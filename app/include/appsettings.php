@@ -769,9 +769,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "221_1757773806";
+$projectBuildKey = "229_1757790475";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "221";
+$projectBuildNumber = "229";
 
 $mlang_messages = array();
 $mlang_charsets = array();
@@ -885,8 +885,17 @@ $tableCaptions["English"]["public_lbapt_cathedral"] = "Lbapt Cathedral";
 $tableCaptions["English"]["public_lbapt_izumi"] = "Lbapt Izumi";
 $tableCaptions["English"]["public_lbapt_st"] = "Lbapt St";
 $tableCaptions["English"]["public_lbapt_whi"] = "Lbapt Whi";
+$tableCaptions["English"]["public_lbpmi_calculation_log"] = "Lbpmi Calculation Log";
+$tableCaptions["English"]["public_lbpmi_data_elements"] = "Lbpmi Data Elements";
+$tableCaptions["English"]["public_lbpmi_datasets"] = "Lbpmi Datasets";
+$tableCaptions["English"]["public_lbpmi_indicator_actuals"] = "Lbpmi Indicator Actuals";
+$tableCaptions["English"]["public_lbpmi_indicator_targets"] = "Lbpmi Indicator Targets";
+$tableCaptions["English"]["public_lbpmi_indicators"] = "Lbpmi Indicators";
+$tableCaptions["English"]["public_lbpmi_summary"] = "Lbpmi Summary";
 $tableCaptions["English"]["Dashboard"] = "Dashboard";
 $tableCaptions["English"]["Lifebox_DHIS2_Settings"] = "Lifebox DHIS2 Settings";
+$tableCaptions["English"]["public_period_types"] = "Period Types";
+$tableCaptions["English"]["public_unit_of_measurement"] = "Unit Of Measurement";
 
 
 $globalEvents = new class_GlobalEvents;
