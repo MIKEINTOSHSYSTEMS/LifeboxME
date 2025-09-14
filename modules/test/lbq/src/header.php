@@ -1,3 +1,6 @@
+<html>
+
+<head>
     <!-- Matomo -->
     <script>
         var _paq = window._paq = window._paq || [];
@@ -60,3 +63,6 @@
         })();
     </script>
     <!-- End Matomo Tag Manager -->
+</head>
+
+</html>
