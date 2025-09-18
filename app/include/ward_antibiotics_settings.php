@@ -134,7 +134,7 @@ $tdataward_antibiotics[".isUseAjaxSuggest"] = true;
 
 
 
-
+									
 
 $tdataward_antibiotics[".ajaxCodeSnippetAdded"] = false;
 

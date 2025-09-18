@@ -134,7 +134,7 @@ $tdataantibiotics[".isUseAjaxSuggest"] = true;
 
 
 
-
+			
 
 $tdataantibiotics[".ajaxCodeSnippetAdded"] = false;
 

@@ -122,7 +122,7 @@ $tdatalifebox_dhis2_settings[".isUseAjaxSuggest"] = false;
 
 
 
-
+			
 
 $tdatalifebox_dhis2_settings[".ajaxCodeSnippetAdded"] = false;
 

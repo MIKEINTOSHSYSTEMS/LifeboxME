@@ -1579,6 +1579,8 @@ class CrossTableWebReport
 			$isDB = true;
 		if("public.unit_of_measurement" == $this->xml_array['tables'][0])
 			$isDB = true;
+		if("public.lbpmi_calculation_jobs" == $this->xml_array['tables'][0])
+			$isDB = true;
 		return $isDB;
 	}
 	

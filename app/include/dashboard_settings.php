@@ -50,7 +50,7 @@ $tdatadashboard[".hasEvents"] = false;
 $tdatadashboard[".tableType"] = "dashboard";
 
 
-
+	
 $tdatadashboard[".addPageEvents"] = false;
 
 $tdatadashboard[".isUseAjaxSuggest"] = true;

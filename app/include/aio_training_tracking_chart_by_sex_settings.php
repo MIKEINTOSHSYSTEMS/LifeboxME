@@ -213,7 +213,7 @@ $tdataaio_training_tracking_chart_by_sex[".isUseAjaxSuggest"] = false;
 
 
 
-
+						
 
 $tdataaio_training_tracking_chart_by_sex[".ajaxCodeSnippetAdded"] = false;
 

@@ -152,7 +152,7 @@ $tdatalbapt_kpis_tracking_view[".isUseAjaxSuggest"] = true;
 
 
 
-
+			
 
 $tdatalbapt_kpis_tracking_view[".ajaxCodeSnippetAdded"] = false;
 

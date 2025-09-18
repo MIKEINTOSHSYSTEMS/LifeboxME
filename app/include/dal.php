@@ -87,6 +87,7 @@ class tDAL
 	var $tbllifebox_mesystem_at_localhost_public_lbapt_strategic_areas;
 	var $tbllifebox_mesystem_at_localhost_public_lbapt_unified_activities;
 	var $tbllifebox_mesystem_at_localhost_public_lbapt_whi;
+	var $tbllifebox_mesystem_at_localhost_public_lbpmi_calculation_jobs;
 	var $tbllifebox_mesystem_at_localhost_public_lbpmi_calculation_log;
 	var $tbllifebox_mesystem_at_localhost_public_lbpmi_data_elements;
 	var $tbllifebox_mesystem_at_localhost_public_lbpmi_datasets;
@@ -190,6 +191,7 @@ class tDAL
 		$this->lstTables[] = array("name" => "lbapt_strategic_areas", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_strategic_areas", "altvarname" => "lbapt_strategic_areas", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "lbapt_unified_activities", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_unified_activities", "altvarname" => "lbapt_unified_activities", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "lbapt_whi", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_whi", "altvarname" => "lbapt_whi", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
+		$this->lstTables[] = array("name" => "lbpmi_calculation_jobs", "varname" => "lifebox_mesystem_at_localhost_public_lbpmi_calculation_jobs", "altvarname" => "lbpmi_calculation_jobs", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "lbpmi_calculation_log", "varname" => "lifebox_mesystem_at_localhost_public_lbpmi_calculation_log", "altvarname" => "lbpmi_calculation_log", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "lbpmi_data_elements", "varname" => "lifebox_mesystem_at_localhost_public_lbpmi_data_elements", "altvarname" => "lbpmi_data_elements", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
 		$this->lstTables[] = array("name" => "lbpmi_datasets", "varname" => "lifebox_mesystem_at_localhost_public_lbpmi_datasets", "altvarname" => "lbpmi_datasets", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");

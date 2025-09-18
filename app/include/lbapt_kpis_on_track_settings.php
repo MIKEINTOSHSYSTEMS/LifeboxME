@@ -161,7 +161,7 @@ $tdatalbapt_kpis_on_track[".isUseAjaxSuggest"] = true;
 
 
 
-
+						
 
 $tdatalbapt_kpis_on_track[".ajaxCodeSnippetAdded"] = false;
 

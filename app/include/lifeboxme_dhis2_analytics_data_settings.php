@@ -185,7 +185,7 @@ $tdatalifeboxme_dhis2_analytics_data[".isUseAjaxSuggest"] = true;
 
 
 
-
+						
 
 $tdatalifeboxme_dhis2_analytics_data[".ajaxCodeSnippetAdded"] = false;
 

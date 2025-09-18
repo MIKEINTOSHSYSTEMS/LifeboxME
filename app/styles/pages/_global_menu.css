@@ -283,6 +283,9 @@
 [data-page="_global_menu"][data-itemid="welcome_item95"] > .bs-welcome-header {
   background-color: #D2AF80;
 }
+[data-page="_global_menu"][data-itemid="welcome_item96"] > .bs-welcome-header {
+  background-color: #6493EA;
+}
 [data-page="_global_menu"][data-itemid="page_image_ash8f23hr"] {
   width: 400px;
 }

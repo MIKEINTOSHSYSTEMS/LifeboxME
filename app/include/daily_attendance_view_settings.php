@@ -152,7 +152,7 @@ $tdatadaily_attendance_view[".isUseAjaxSuggest"] = true;
 
 
 
-
+			
 
 $tdatadaily_attendance_view[".ajaxCodeSnippetAdded"] = false;
 

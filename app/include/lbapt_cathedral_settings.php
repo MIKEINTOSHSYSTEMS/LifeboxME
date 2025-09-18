@@ -173,7 +173,7 @@ $tdatalbapt_cathedral[".isUseAjaxSuggest"] = true;
 
 
 
-
+									
 
 $tdatalbapt_cathedral[".ajaxCodeSnippetAdded"] = false;
 

@@ -401,6 +401,8 @@ function checkTableName($shortTName )
 		return true;
 	if ("unit_of_measurement" == $shortTName )
 		return true;
+	if ("lbpmi_calculation_jobs" == $shortTName )
+		return true;
 	return false;
 }
 
@@ -1342,6 +1344,15 @@ function GetTablesList($pdfMode = false)
 	if( $tableAvailable ) {
 		$arr[]="public.unit_of_measurement";
 	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbpmi_calculation_jobs");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbpmi_calculation_jobs";
+	}
 	return $arr;
 }
 
@@ -1450,6 +1461,7 @@ function GetTablesListWithoutSecurity()
 	$arr[]="public.lbpmi_summary";
 	$arr[]="public.period_types";
 	$arr[]="public.unit_of_measurement";
+	$arr[]="public.lbpmi_calculation_jobs";
 	return $arr;
 }
 
@@ -2572,6 +2584,11 @@ function GetUserPermissionsStatic( $table )
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.unit_of_measurement" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbpmi_calculation_jobs" )
 	{
 //	default permissions
 		return "ADESPI".$extraPerm;

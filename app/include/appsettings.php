@@ -769,9 +769,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "232_1757790475";
+$projectBuildKey = "235_1758228838";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "232";
+$projectBuildNumber = "235";
 
 $mlang_messages = array();
 $mlang_charsets = array();
@@ -892,10 +892,11 @@ $tableCaptions["English"]["public_lbpmi_indicator_actuals"] = "Lbpmi Indicator A
 $tableCaptions["English"]["public_lbpmi_indicator_targets"] = "Lbpmi Indicator Targets";
 $tableCaptions["English"]["public_lbpmi_indicators"] = "Lbpmi Indicators";
 $tableCaptions["English"]["public_lbpmi_summary"] = "Lbpmi Summary";
-$tableCaptions["English"]["Dashboard"] = "Dashboard";
-$tableCaptions["English"]["Lifebox_DHIS2_Settings"] = "Lifebox DHIS2 Settings";
 $tableCaptions["English"]["public_period_types"] = "Period Types";
 $tableCaptions["English"]["public_unit_of_measurement"] = "Unit Of Measurement";
+$tableCaptions["English"]["public_lbpmi_calculation_jobs"] = "Lbpmi Calculation Jobs";
+$tableCaptions["English"]["Dashboard"] = "Dashboard";
+$tableCaptions["English"]["Lifebox_DHIS2_Settings"] = "Lifebox DHIS2 Settings";
 
 
 $globalEvents = new class_GlobalEvents;

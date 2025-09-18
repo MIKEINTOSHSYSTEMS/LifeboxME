@@ -128,7 +128,7 @@ $tdataperiod_types[".isUseAjaxSuggest"] = true;
 
 
 
-
+			
 
 $tdataperiod_types[".ajaxCodeSnippetAdded"] = false;
 

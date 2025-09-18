@@ -146,7 +146,7 @@ $tdatadevice_inventory_changes[".isUseAjaxSuggest"] = true;
 
 
 
-
+			
 
 $tdatadevice_inventory_changes[".ajaxCodeSnippetAdded"] = false;
 

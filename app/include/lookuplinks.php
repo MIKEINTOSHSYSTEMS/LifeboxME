@@ -1489,6 +1489,13 @@ function InitLookupLinks()
 			$lookupTableLinks["public.period_types"]["lbpmi_indicators.reporting_frequency"] = array();
 		}
 		$lookupTableLinks["public.period_types"]["lbpmi_indicators.reporting_frequency"]["edit"] = array("table" => "public.lbpmi_indicators", "field" => "reporting_frequency", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbpmi_indicators"] ) ) {
+			$lookupTableLinks["public.lbpmi_indicators"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbpmi_indicators"]["lbpmi_calculation_jobs.indicator_id"] )) {
+			$lookupTableLinks["public.lbpmi_indicators"]["lbpmi_calculation_jobs.indicator_id"] = array();
+		}
+		$lookupTableLinks["public.lbpmi_indicators"]["lbpmi_calculation_jobs.indicator_id"]["edit"] = array("table" => "public.lbpmi_calculation_jobs", "field" => "indicator_id", "page" => "edit");
 }
 
 ?>

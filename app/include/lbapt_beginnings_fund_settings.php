@@ -173,7 +173,7 @@ $tdatalbapt_beginnings_fund[".isUseAjaxSuggest"] = true;
 
 
 
-
+									
 
 $tdatalbapt_beginnings_fund[".ajaxCodeSnippetAdded"] = false;
 

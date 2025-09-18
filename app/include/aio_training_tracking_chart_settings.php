@@ -213,7 +213,7 @@ $tdataaio_training_tracking_chart[".isUseAjaxSuggest"] = false;
 
 
 
-
+						
 
 $tdataaio_training_tracking_chart[".ajaxCodeSnippetAdded"] = false;
 

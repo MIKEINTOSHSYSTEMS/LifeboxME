@@ -170,7 +170,7 @@ $tdataclean_cut_implementation_summary_view[".isUseAjaxSuggest"] = true;
 
 
 
-
+			
 
 $tdataclean_cut_implementation_summary_view[".ajaxCodeSnippetAdded"] = false;
 

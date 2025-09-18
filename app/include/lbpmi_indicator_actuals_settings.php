@@ -149,7 +149,7 @@ $tdatalbpmi_indicator_actuals[".isUseAjaxSuggest"] = true;
 
 
 
-
+						
 
 $tdatalbpmi_indicator_actuals[".ajaxCodeSnippetAdded"] = false;
 

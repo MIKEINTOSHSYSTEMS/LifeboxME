@@ -179,7 +179,7 @@ $tdatatraining_sessions[".isUseAjaxSuggest"] = true;
 
 
 
-
+																					
 
 $tdatatraining_sessions[".ajaxCodeSnippetAdded"] = false;
 

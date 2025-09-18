@@ -806,6 +806,10 @@ class AuditTrailTable
 		{
 			return false;
 		}
+		if($table=="public.lbpmi_calculation_jobs")
+		{
+			return false;
+		}
 	}
 
 	protected function insert($datetime, $ip, $user, $table, $action, $description)
@@ -1561,6 +1565,10 @@ class AuditTrailFile
 			return false;
 		}
 		if($table=="public.unit_of_measurement")
+		{
+			return false;
+		}
+		if($table=="public.lbpmi_calculation_jobs")
 		{
 			return false;
 		}

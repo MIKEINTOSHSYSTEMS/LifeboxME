@@ -134,7 +134,7 @@ $tdatatraining_trainers[".isUseAjaxSuggest"] = true;
 
 
 
-
+									
 
 $tdatatraining_trainers[".ajaxCodeSnippetAdded"] = false;
 

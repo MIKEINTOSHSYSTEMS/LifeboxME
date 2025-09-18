@@ -140,7 +140,7 @@ $tdatalifebox_dhis2_dataitems[".isUseAjaxSuggest"] = true;
 
 
 
-
+			
 
 $tdatalifebox_dhis2_dataitems[".ajaxCodeSnippetAdded"] = false;
 

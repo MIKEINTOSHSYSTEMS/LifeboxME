@@ -134,7 +134,7 @@ $tdatatraining_languages[".isUseAjaxSuggest"] = true;
 
 
 
-
+									
 
 $tdatatraining_languages[".ajaxCodeSnippetAdded"] = false;
 

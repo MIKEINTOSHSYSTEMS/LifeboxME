@@ -714,6 +714,10 @@ function testAdvSearch($table)
 		{
 			return 1;
 		}
+		if($table=="public.lbpmi_calculation_jobs")
+		{
+			return 1;
+		}
 	}
 	elseif(is_wr_db())
 	{
@@ -1362,6 +1366,10 @@ function getCaptionTable($table)
 	if($table=="public.unit_of_measurement")
 	{
 		return "Unit Of Measurement";
+	}
+	if($table=="public.lbpmi_calculation_jobs")
+	{
+		return "Lbpmi Calculation Jobs";
 	}
 	return $table;
 }
@@ -3328,6 +3336,18 @@ function GetTablesListReport()
 		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
 		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
 			$arr[]="public.unit_of_measurement";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lbpmi_calculation_jobs");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lbpmi_calculation_jobs";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lbpmi_calculation_jobs";
 	}
 	return $arr;
 }

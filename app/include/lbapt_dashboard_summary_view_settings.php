@@ -140,7 +140,7 @@ $tdatalbapt_dashboard_summary_view[".isUseAjaxSuggest"] = true;
 
 
 
-
+			
 
 $tdatalbapt_dashboard_summary_view[".ajaxCodeSnippetAdded"] = false;
 

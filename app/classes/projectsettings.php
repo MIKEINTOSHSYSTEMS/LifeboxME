@@ -3776,6 +3776,8 @@ function fillProjectEntites()
 	$projectEntitiesReverse[ "period_types" ] = "public.period_types";
 	$projectEntities[ "public.unit_of_measurement" ] = array( "url" => "unit_of_measurement", "type" => 0 );
 	$projectEntitiesReverse[ "unit_of_measurement" ] = "public.unit_of_measurement";
+	$projectEntities[ "public.lbpmi_calculation_jobs" ] = array( "url" => "lbpmi_calculation_jobs", "type" => 0 );
+	$projectEntitiesReverse[ "lbpmi_calculation_jobs" ] = "public.lbpmi_calculation_jobs";
 }
 
 function findTable( $table ) {

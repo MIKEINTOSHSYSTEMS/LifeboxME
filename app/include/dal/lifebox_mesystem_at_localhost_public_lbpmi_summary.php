@@ -22,8 +22,13 @@ $dalTablelbpmi_summary["q1_calculated"] = array("type"=>14,"varname"=>"q1_calcul
 $dalTablelbpmi_summary["q2_calculated"] = array("type"=>14,"varname"=>"q2_calculated", "name" => "q2_calculated", "autoInc" => "0");
 $dalTablelbpmi_summary["q3_calculated"] = array("type"=>14,"varname"=>"q3_calculated", "name" => "q3_calculated", "autoInc" => "0");
 $dalTablelbpmi_summary["q4_calculated"] = array("type"=>14,"varname"=>"q4_calculated", "name" => "q4_calculated", "autoInc" => "0");
+$dalTablelbpmi_summary["q1_combined"] = array("type"=>14,"varname"=>"q1_combined", "name" => "q1_combined", "autoInc" => "0");
+$dalTablelbpmi_summary["q2_combined"] = array("type"=>14,"varname"=>"q2_combined", "name" => "q2_combined", "autoInc" => "0");
+$dalTablelbpmi_summary["q3_combined"] = array("type"=>14,"varname"=>"q3_combined", "name" => "q3_combined", "autoInc" => "0");
+$dalTablelbpmi_summary["q4_combined"] = array("type"=>14,"varname"=>"q4_combined", "name" => "q4_combined", "autoInc" => "0");
 $dalTablelbpmi_summary["created_at"] = array("type"=>135,"varname"=>"created_at", "name" => "created_at", "autoInc" => "0");
 $dalTablelbpmi_summary["updated_at"] = array("type"=>135,"varname"=>"updated_at", "name" => "updated_at", "autoInc" => "0");
+$dalTablelbpmi_summary["actuals_updated_at"] = array("type"=>135,"varname"=>"actuals_updated_at", "name" => "actuals_updated_at", "autoInc" => "0");
 
 $dal_info["lifebox_mesystem_at_localhost_public_lbpmi_summary"] = &$dalTablelbpmi_summary;
 ?>

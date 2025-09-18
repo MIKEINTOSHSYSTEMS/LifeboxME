@@ -128,7 +128,7 @@ $tdatatransaction_types[".isUseAjaxSuggest"] = true;
 
 
 
-
+			
 
 $tdatatransaction_types[".ajaxCodeSnippetAdded"] = false;
 

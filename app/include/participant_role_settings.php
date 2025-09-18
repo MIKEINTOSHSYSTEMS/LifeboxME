@@ -140,7 +140,7 @@ $tdataparticipant_role[".isUseAjaxSuggest"] = true;
 
 
 
-
+			
 
 $tdataparticipant_role[".ajaxCodeSnippetAdded"] = false;
 

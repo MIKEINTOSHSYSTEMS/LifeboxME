@@ -170,7 +170,7 @@ $tdatalbapt_sample_workflow[".isUseAjaxSuggest"] = true;
 
 
 
-
+									
 
 $tdatalbapt_sample_workflow[".ajaxCodeSnippetAdded"] = false;
 

@@ -353,7 +353,7 @@ $tdatasurgical_cases[".isUseAjaxSuggest"] = true;
 
 
 
-
+															
 
 $tdatasurgical_cases[".ajaxCodeSnippetAdded"] = false;
 

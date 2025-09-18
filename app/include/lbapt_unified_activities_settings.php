@@ -173,7 +173,7 @@ $tdatalbapt_unified_activities[".isUseAjaxSuggest"] = true;
 
 
 
-
+			
 
 $tdatalbapt_unified_activities[".ajaxCodeSnippetAdded"] = false;
 

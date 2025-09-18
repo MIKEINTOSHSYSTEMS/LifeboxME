@@ -136,6 +136,21 @@ pdfDocument = {
 										{BEGIN col_grid_23}
 					"%",
 					{END col_grid_23}
+										{BEGIN col_grid_24}
+					"%",
+					{END col_grid_24}
+										{BEGIN col_grid_25}
+					"%",
+					{END col_grid_25}
+										{BEGIN col_grid_26}
+					"%",
+					{END col_grid_26}
+										{BEGIN col_grid_27}
+					"%",
+					{END col_grid_27}
+										{BEGIN col_grid_28}
+					"%",
+					{END col_grid_28}
 															],
 											heights: [ // first height for header part
 					"%",
@@ -283,7 +298,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_summary indicator_id }","hidden":"{$item_hide_simple_grid_field24}","bold":true},
+			{"text":"{$jslabel public_lbpmi_summary indicator_id }","hidden":"{$item_hide_simple_grid_field29}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -312,7 +327,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_summary result_area }","hidden":"{$item_hide_simple_grid_field25}","bold":true},
+			{"text":"{$jslabel public_lbpmi_summary result_area }","hidden":"{$item_hide_simple_grid_field30}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -341,7 +356,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_summary indicator_name }","hidden":"{$item_hide_simple_grid_field26}","bold":true},
+			{"text":"{$jslabel public_lbpmi_summary indicator_name }","hidden":"{$item_hide_simple_grid_field31}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -370,7 +385,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_summary indicator_description }","hidden":"{$item_hide_simple_grid_field27}","bold":true},
+			{"text":"{$jslabel public_lbpmi_summary indicator_description }","hidden":"{$item_hide_simple_grid_field32}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -399,7 +414,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_summary indicator_type }","hidden":"{$item_hide_simple_grid_field28}","bold":true},
+			{"text":"{$jslabel public_lbpmi_summary indicator_type }","hidden":"{$item_hide_simple_grid_field33}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -428,7 +443,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_summary unit_of_measurement }","hidden":"{$item_hide_simple_grid_field29}","bold":true},
+			{"text":"{$jslabel public_lbpmi_summary unit_of_measurement }","hidden":"{$item_hide_simple_grid_field34}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -457,7 +472,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_summary formula }","hidden":"{$item_hide_simple_grid_field30}","bold":true},
+			{"text":"{$jslabel public_lbpmi_summary formula }","hidden":"{$item_hide_simple_grid_field35}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -486,7 +501,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_summary reporting_frequency }","hidden":"{$item_hide_simple_grid_field31}","bold":true},
+			{"text":"{$jslabel public_lbpmi_summary reporting_frequency }","hidden":"{$item_hide_simple_grid_field36}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -515,7 +530,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_summary year }","hidden":"{$item_hide_simple_grid_field32}","bold":true},
+			{"text":"{$jslabel public_lbpmi_summary year }","hidden":"{$item_hide_simple_grid_field37}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -544,7 +559,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_summary baseline }","hidden":"{$item_hide_simple_grid_field33}","bold":true},
+			{"text":"{$jslabel public_lbpmi_summary baseline }","hidden":"{$item_hide_simple_grid_field38}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -573,7 +588,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_summary q1_target }","hidden":"{$item_hide_simple_grid_field34}","bold":true},
+			{"text":"{$jslabel public_lbpmi_summary q1_target }","hidden":"{$item_hide_simple_grid_field39}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -602,7 +617,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_summary q2_target }","hidden":"{$item_hide_simple_grid_field35}","bold":true},
+			{"text":"{$jslabel public_lbpmi_summary q2_target }","hidden":"{$item_hide_simple_grid_field40}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -631,7 +646,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_summary q3_target }","hidden":"{$item_hide_simple_grid_field36}","bold":true},
+			{"text":"{$jslabel public_lbpmi_summary q3_target }","hidden":"{$item_hide_simple_grid_field41}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -660,7 +675,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_summary q4_target }","hidden":"{$item_hide_simple_grid_field37}","bold":true},
+			{"text":"{$jslabel public_lbpmi_summary q4_target }","hidden":"{$item_hide_simple_grid_field42}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -689,7 +704,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_summary q1_actual }","hidden":"{$item_hide_simple_grid_field38}","bold":true},
+			{"text":"{$jslabel public_lbpmi_summary q1_actual }","hidden":"{$item_hide_simple_grid_field43}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -718,7 +733,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_summary q2_actual }","hidden":"{$item_hide_simple_grid_field39}","bold":true},
+			{"text":"{$jslabel public_lbpmi_summary q2_actual }","hidden":"{$item_hide_simple_grid_field44}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -747,7 +762,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_summary q3_actual }","hidden":"{$item_hide_simple_grid_field40}","bold":true},
+			{"text":"{$jslabel public_lbpmi_summary q3_actual }","hidden":"{$item_hide_simple_grid_field45}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -776,7 +791,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_summary q4_actual }","hidden":"{$item_hide_simple_grid_field41}","bold":true},
+			{"text":"{$jslabel public_lbpmi_summary q4_actual }","hidden":"{$item_hide_simple_grid_field46}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -805,7 +820,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_summary q1_calculated }","hidden":"{$item_hide_simple_grid_field42}","bold":true},
+			{"text":"{$jslabel public_lbpmi_summary q1_calculated }","hidden":"{$item_hide_simple_grid_field47}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -834,7 +849,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_summary q2_calculated }","hidden":"{$item_hide_simple_grid_field43}","bold":true},
+			{"text":"{$jslabel public_lbpmi_summary q2_calculated }","hidden":"{$item_hide_simple_grid_field48}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -863,7 +878,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_summary q3_calculated }","hidden":"{$item_hide_simple_grid_field44}","bold":true},
+			{"text":"{$jslabel public_lbpmi_summary q3_calculated }","hidden":"{$item_hide_simple_grid_field49}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -892,7 +907,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_summary q4_calculated }","hidden":"{$item_hide_simple_grid_field45}","bold":true},
+			{"text":"{$jslabel public_lbpmi_summary q4_calculated }","hidden":"{$item_hide_simple_grid_field50}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -905,6 +920,151 @@ pdfDocument = {
 																							{BEGIN cellblock_grid_headcell_field22}
 {
 	cellId: 'headcell_field22',
+	col:0,
+	row:0,
+			fieldName: 'q1_combined',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_lbpmi_summary q1_combined }","hidden":"{$item_hide_simple_grid_field51}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$q1_combined_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field22}
+																							{BEGIN cellblock_grid_headcell_field23}
+{
+	cellId: 'headcell_field23',
+	col:0,
+	row:0,
+			fieldName: 'q2_combined',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_lbpmi_summary q2_combined }","hidden":"{$item_hide_simple_grid_field52}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$q2_combined_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field23}
+																							{BEGIN cellblock_grid_headcell_field24}
+{
+	cellId: 'headcell_field24',
+	col:0,
+	row:0,
+			fieldName: 'q3_combined',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_lbpmi_summary q3_combined }","hidden":"{$item_hide_simple_grid_field53}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$q3_combined_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field24}
+																							{BEGIN cellblock_grid_headcell_field25}
+{
+	cellId: 'headcell_field25',
+	col:0,
+	row:0,
+			fieldName: 'q4_combined',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_lbpmi_summary q4_combined }","hidden":"{$item_hide_simple_grid_field54}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$q4_combined_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field25}
+																							{BEGIN cellblock_grid_headcell_field26}
+{
+	cellId: 'headcell_field26',
+	col:0,
+	row:0,
+			fieldName: 'actuals_updated_at',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_lbpmi_summary actuals_updated_at }","hidden":"{$item_hide_simple_grid_field55}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$actuals_updated_at_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field26}
+																							{BEGIN cellblock_grid_headcell_field27}
+{
+	cellId: 'headcell_field27',
 	col:0,
 	row:0,
 			fieldName: 'created_at',
@@ -921,7 +1081,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_summary created_at }","hidden":"{$item_hide_simple_grid_field46}","bold":true},
+			{"text":"{$jslabel public_lbpmi_summary created_at }","hidden":"{$item_hide_simple_grid_field56}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -930,10 +1090,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field22}
-																							{BEGIN cellblock_grid_headcell_field23}
+{END cellblock_grid_headcell_field27}
+																							{BEGIN cellblock_grid_headcell_field28}
 {
-	cellId: 'headcell_field23',
+	cellId: 'headcell_field28',
 	col:0,
 	row:0,
 			fieldName: 'updated_at',
@@ -950,7 +1110,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_summary updated_at }","hidden":"{$item_hide_simple_grid_field47}","bold":true},
+			{"text":"{$jslabel public_lbpmi_summary updated_at }","hidden":"{$item_hide_simple_grid_field57}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -959,7 +1119,7 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field23}
+{END cellblock_grid_headcell_field28}
 											],
 				{END row_grid_0}
 		
@@ -1612,6 +1772,151 @@ pdfDocument = {
 	cellId: 'cell_field22',
 	col:0,
 	row:0,
+			fieldName: 'q1_combined',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$q1_combined_pdfvalue},"hidden":"{$item_hide_simple_grid_field24}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$q1_combined_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field22}
+																							{BEGIN cellblock_grid_cell_field23}
+{
+	cellId: 'cell_field23',
+	col:0,
+	row:0,
+			fieldName: 'q2_combined',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$q2_combined_pdfvalue},"hidden":"{$item_hide_simple_grid_field25}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$q2_combined_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field23}
+																							{BEGIN cellblock_grid_cell_field24}
+{
+	cellId: 'cell_field24',
+	col:0,
+	row:0,
+			fieldName: 'q3_combined',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$q3_combined_pdfvalue},"hidden":"{$item_hide_simple_grid_field26}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$q3_combined_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field24}
+																							{BEGIN cellblock_grid_cell_field25}
+{
+	cellId: 'cell_field25',
+	col:0,
+	row:0,
+			fieldName: 'q4_combined',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$q4_combined_pdfvalue},"hidden":"{$item_hide_simple_grid_field27}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$q4_combined_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field25}
+																							{BEGIN cellblock_grid_cell_field26}
+{
+	cellId: 'cell_field26',
+	col:0,
+	row:0,
+			fieldName: 'actuals_updated_at',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$actuals_updated_at_pdfvalue},"hidden":"{$item_hide_simple_grid_field28}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$actuals_updated_at_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field26}
+																							{BEGIN cellblock_grid_cell_field27}
+{
+	cellId: 'cell_field27',
+	col:0,
+	row:0,
 			fieldName: 'created_at',
 				style: 'bodycell',
 		
@@ -1635,10 +1940,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field22}
-																							{BEGIN cellblock_grid_cell_field23}
+{END cellblock_grid_cell_field27}
+																							{BEGIN cellblock_grid_cell_field28}
 {
-	cellId: 'cell_field23',
+	cellId: 'cell_field28',
 	col:0,
 	row:0,
 			fieldName: 'updated_at',
@@ -1664,7 +1969,7 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field23}
+{END cellblock_grid_cell_field28}
 											],
 				{END row_grid_1}
 		
@@ -2298,6 +2603,136 @@ pdfDocument = {
       },
 
 {END cellblock_grid_footcell_field23}
+																							{BEGIN cellblock_grid_footcell_field24}
+{
+	cellId: 'footcell_field24',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field24}
+																							{BEGIN cellblock_grid_footcell_field25}
+{
+	cellId: 'footcell_field25',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field25}
+																							{BEGIN cellblock_grid_footcell_field26}
+{
+	cellId: 'footcell_field26',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field26}
+																							{BEGIN cellblock_grid_footcell_field27}
+{
+	cellId: 'footcell_field27',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field27}
+																							{BEGIN cellblock_grid_footcell_field28}
+{
+	cellId: 'footcell_field28',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field28}
 											],
 				{END row_grid_2}
 		

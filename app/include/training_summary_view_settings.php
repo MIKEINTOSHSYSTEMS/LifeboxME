@@ -179,7 +179,7 @@ $tdatatraining_summary_view[".isUseAjaxSuggest"] = true;
 
 
 
-
+			
 
 $tdatatraining_summary_view[".ajaxCodeSnippetAdded"] = false;
 

@@ -128,7 +128,7 @@ $tdatapayment_methods[".isUseAjaxSuggest"] = true;
 
 
 
-
+			
 
 $tdatapayment_methods[".ajaxCodeSnippetAdded"] = false;
 

@@ -164,7 +164,7 @@ $tdatadevice_distribution_summary_view[".isUseAjaxSuggest"] = true;
 
 
 
-
+			
 
 $tdatadevice_distribution_summary_view[".ajaxCodeSnippetAdded"] = false;
 

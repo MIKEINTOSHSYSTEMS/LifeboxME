@@ -200,7 +200,7 @@ $tdatatraining_attendance[".isUseAjaxSuggest"] = true;
 
 
 
-
+						
 
 $tdatatraining_attendance[".ajaxCodeSnippetAdded"] = false;
 

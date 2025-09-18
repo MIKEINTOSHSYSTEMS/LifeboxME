@@ -137,7 +137,7 @@ $tdatalbapt_status[".isUseAjaxSuggest"] = true;
 
 
 
-
+			
 
 $tdatalbapt_status[".ajaxCodeSnippetAdded"] = false;
 

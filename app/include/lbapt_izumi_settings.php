@@ -173,7 +173,7 @@ $tdatalbapt_izumi[".isUseAjaxSuggest"] = true;
 
 
 
-
+									
 
 $tdatalbapt_izumi[".ajaxCodeSnippetAdded"] = false;
 

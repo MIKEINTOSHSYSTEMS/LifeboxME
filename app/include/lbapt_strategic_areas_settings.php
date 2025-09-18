@@ -137,7 +137,7 @@ $tdatalbapt_strategic_areas[".isUseAjaxSuggest"] = true;
 
 
 
-
+			
 
 $tdatalbapt_strategic_areas[".ajaxCodeSnippetAdded"] = false;
 

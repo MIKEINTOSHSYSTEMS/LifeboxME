@@ -176,7 +176,7 @@ $tdatasurgical_case_summary_view[".isUseAjaxSuggest"] = true;
 
 
 
-
+			
 
 $tdatasurgical_case_summary_view[".ajaxCodeSnippetAdded"] = false;
 

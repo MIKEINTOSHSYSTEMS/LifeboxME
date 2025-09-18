@@ -170,7 +170,7 @@ $tdataparticipant_attendance_summary[".isUseAjaxSuggest"] = true;
 
 
 
-
+			
 
 $tdataparticipant_attendance_summary[".ajaxCodeSnippetAdded"] = false;
 

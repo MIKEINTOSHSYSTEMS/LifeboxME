@@ -173,7 +173,7 @@ $tdatalbapt_finance[".isUseAjaxSuggest"] = true;
 
 
 
-
+									
 
 $tdatalbapt_finance[".ajaxCodeSnippetAdded"] = false;
 

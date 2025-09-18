@@ -576,6 +576,8 @@ class Chart
 			return true;
 		if("public.unit_of_measurement" == $this->chrt_array['tables'][0])
 			return true;
+		if("public.lbpmi_calculation_jobs" == $this->chrt_array['tables'][0])
+			return true;
 		return false;
 	}
 

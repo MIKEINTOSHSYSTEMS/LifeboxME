@@ -114,6 +114,7 @@ $nonAdminTablesArr[] = "public.lbpmi_indicators";
 $nonAdminTablesArr[] = "public.lbpmi_summary";
 $nonAdminTablesArr[] = "public.period_types";
 $nonAdminTablesArr[] = "public.unit_of_measurement";
+$nonAdminTablesArr[] = "public.lbpmi_calculation_jobs";
 
 $ug_connection = $cman->getForUserGroups();
 
