@@ -404,116 +404,6 @@
 
 {END indicator_id_fieldblock}
 											
-{BEGIN year_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_year}  r-vertical-field" 
-	data-signal-error-for="year{$id}" {$required_attr_year}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="year" data-fieldname="year" >
-
-	<label class="r-edit-label control-label" for="{$labelfor_year}">
-		{BEGIN year_label}{$label public_lbpmi_indicator_actuals year }{END year_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$year_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="year" {$tooltipAttr public_lbpmi_indicator_actuals year } >
-		<div class="text-muted" >
-		{$tooltip public_lbpmi_indicator_actuals year }		</div>
-	</div>
-</div>
-
-
-{END year_fieldblock}
-											
-{BEGIN q1_actual_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_q1_actual}  r-vertical-field" 
-	data-signal-error-for="q1_actual{$id}" {$required_attr_q1_actual}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="q1_actual" data-fieldname="q1_actual" >
-
-	<label class="r-edit-label control-label" for="{$labelfor_q1_actual}">
-		{BEGIN q1_actual_label}{$label public_lbpmi_indicator_actuals q1_actual }{END q1_actual_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$q1_actual_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="q1_actual" {$tooltipAttr public_lbpmi_indicator_actuals q1_actual } >
-		<div class="text-muted" >
-		{$tooltip public_lbpmi_indicator_actuals q1_actual }		</div>
-	</div>
-</div>
-
-
-{END q1_actual_fieldblock}
-											
-{BEGIN q2_actual_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_q2_actual}  r-vertical-field" 
-	data-signal-error-for="q2_actual{$id}" {$required_attr_q2_actual}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="q2_actual" data-fieldname="q2_actual" >
-
-	<label class="r-edit-label control-label" for="{$labelfor_q2_actual}">
-		{BEGIN q2_actual_label}{$label public_lbpmi_indicator_actuals q2_actual }{END q2_actual_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$q2_actual_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="q2_actual" {$tooltipAttr public_lbpmi_indicator_actuals q2_actual } >
-		<div class="text-muted" >
-		{$tooltip public_lbpmi_indicator_actuals q2_actual }		</div>
-	</div>
-</div>
-
-
-{END q2_actual_fieldblock}
-											
-{BEGIN q3_actual_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_q3_actual}  r-vertical-field" 
-	data-signal-error-for="q3_actual{$id}" {$required_attr_q3_actual}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="q3_actual" data-fieldname="q3_actual" >
-
-	<label class="r-edit-label control-label" for="{$labelfor_q3_actual}">
-		{BEGIN q3_actual_label}{$label public_lbpmi_indicator_actuals q3_actual }{END q3_actual_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$q3_actual_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="q3_actual" {$tooltipAttr public_lbpmi_indicator_actuals q3_actual } >
-		<div class="text-muted" >
-		{$tooltip public_lbpmi_indicator_actuals q3_actual }		</div>
-	</div>
-</div>
-
-
-{END q3_actual_fieldblock}
-											
-{BEGIN q4_actual_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_q4_actual}  r-vertical-field" 
-	data-signal-error-for="q4_actual{$id}" {$required_attr_q4_actual}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="q4_actual" data-fieldname="q4_actual" >
-
-	<label class="r-edit-label control-label" for="{$labelfor_q4_actual}">
-		{BEGIN q4_actual_label}{$label public_lbpmi_indicator_actuals q4_actual }{END q4_actual_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$q4_actual_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="q4_actual" {$tooltipAttr public_lbpmi_indicator_actuals q4_actual } >
-		<div class="text-muted" >
-		{$tooltip public_lbpmi_indicator_actuals q4_actual }		</div>
-	</div>
-</div>
-
-
-{END q4_actual_fieldblock}
-											
 {BEGIN created_at_fieldblock}
 
 
@@ -557,6 +447,226 @@
 
 
 {END updated_at_fieldblock}
+											
+{BEGIN period_type_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_period_type}  r-vertical-field" 
+	data-signal-error-for="period_type{$id}" {$required_attr_period_type}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="period_type" data-fieldname="period_type" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_period_type}">
+		{BEGIN period_type_label}{$label public_lbpmi_indicator_actuals period_type }{END period_type_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$period_type_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="period_type" {$tooltipAttr public_lbpmi_indicator_actuals period_type } >
+		<div class="text-muted" >
+		{$tooltip public_lbpmi_indicator_actuals period_type }		</div>
+	</div>
+</div>
+
+
+{END period_type_fieldblock}
+											
+{BEGIN period_year_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_period_year}  r-vertical-field" 
+	data-signal-error-for="period_year{$id}" {$required_attr_period_year}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="period_year" data-fieldname="period_year" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_period_year}">
+		{BEGIN period_year_label}{$label public_lbpmi_indicator_actuals period_year }{END period_year_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$period_year_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="period_year" {$tooltipAttr public_lbpmi_indicator_actuals period_year } >
+		<div class="text-muted" >
+		{$tooltip public_lbpmi_indicator_actuals period_year }		</div>
+	</div>
+</div>
+
+
+{END period_year_fieldblock}
+											
+{BEGIN period_quarter_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_period_quarter}  r-vertical-field" 
+	data-signal-error-for="period_quarter{$id}" {$required_attr_period_quarter}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="period_quarter" data-fieldname="period_quarter" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_period_quarter}">
+		{BEGIN period_quarter_label}{$label public_lbpmi_indicator_actuals period_quarter }{END period_quarter_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$period_quarter_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="period_quarter" {$tooltipAttr public_lbpmi_indicator_actuals period_quarter } >
+		<div class="text-muted" >
+		{$tooltip public_lbpmi_indicator_actuals period_quarter }		</div>
+	</div>
+</div>
+
+
+{END period_quarter_fieldblock}
+											
+{BEGIN period_month_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_period_month}  r-vertical-field" 
+	data-signal-error-for="period_month{$id}" {$required_attr_period_month}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="period_month" data-fieldname="period_month" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_period_month}">
+		{BEGIN period_month_label}{$label public_lbpmi_indicator_actuals period_month }{END period_month_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$period_month_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="period_month" {$tooltipAttr public_lbpmi_indicator_actuals period_month } >
+		<div class="text-muted" >
+		{$tooltip public_lbpmi_indicator_actuals period_month }		</div>
+	</div>
+</div>
+
+
+{END period_month_fieldblock}
+											
+{BEGIN region_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_region_id}  r-vertical-field" 
+	data-signal-error-for="region_id{$id}" {$required_attr_region_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="region_id" data-fieldname="region_id" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_region_id}">
+		{BEGIN region_id_label}{$label public_lbpmi_indicator_actuals region_id }{END region_id_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$region_id_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="region_id" {$tooltipAttr public_lbpmi_indicator_actuals region_id } >
+		<div class="text-muted" >
+		{$tooltip public_lbpmi_indicator_actuals region_id }		</div>
+	</div>
+</div>
+
+
+{END region_id_fieldblock}
+											
+{BEGIN country_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_country_id}  r-vertical-field" 
+	data-signal-error-for="country_id{$id}" {$required_attr_country_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="country_id" data-fieldname="country_id" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_country_id}">
+		{BEGIN country_id_label}{$label public_lbpmi_indicator_actuals country_id }{END country_id_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$country_id_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="country_id" {$tooltipAttr public_lbpmi_indicator_actuals country_id } >
+		<div class="text-muted" >
+		{$tooltip public_lbpmi_indicator_actuals country_id }		</div>
+	</div>
+</div>
+
+
+{END country_id_fieldblock}
+											
+{BEGIN facility_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_facility_id}  r-vertical-field" 
+	data-signal-error-for="facility_id{$id}" {$required_attr_facility_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="facility_id" data-fieldname="facility_id" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_facility_id}">
+		{BEGIN facility_id_label}{$label public_lbpmi_indicator_actuals facility_id }{END facility_id_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$facility_id_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="facility_id" {$tooltipAttr public_lbpmi_indicator_actuals facility_id } >
+		<div class="text-muted" >
+		{$tooltip public_lbpmi_indicator_actuals facility_id }		</div>
+	</div>
+</div>
+
+
+{END facility_id_fieldblock}
+											
+{BEGIN actual_value_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_actual_value}  r-vertical-field" 
+	data-signal-error-for="actual_value{$id}" {$required_attr_actual_value}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="actual_value" data-fieldname="actual_value" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_actual_value}">
+		{BEGIN actual_value_label}{$label public_lbpmi_indicator_actuals actual_value }{END actual_value_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$actual_value_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="actual_value" {$tooltipAttr public_lbpmi_indicator_actuals actual_value } >
+		<div class="text-muted" >
+		{$tooltip public_lbpmi_indicator_actuals actual_value }		</div>
+	</div>
+</div>
+
+
+{END actual_value_fieldblock}
+											
+{BEGIN is_calculated_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_is_calculated}  r-vertical-field" 
+	data-signal-error-for="is_calculated{$id}" {$required_attr_is_calculated}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="is_calculated" data-fieldname="is_calculated" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_is_calculated}">
+		{BEGIN is_calculated_label}{$label public_lbpmi_indicator_actuals is_calculated }{END is_calculated_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$is_calculated_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="is_calculated" {$tooltipAttr public_lbpmi_indicator_actuals is_calculated } >
+		<div class="text-muted" >
+		{$tooltip public_lbpmi_indicator_actuals is_calculated }		</div>
+	</div>
+</div>
+
+
+{END is_calculated_fieldblock}
+											
+{BEGIN calculation_timestamp_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_calculation_timestamp}  r-vertical-field" 
+	data-signal-error-for="calculation_timestamp{$id}" {$required_attr_calculation_timestamp}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="calculation_timestamp" data-fieldname="calculation_timestamp" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_calculation_timestamp}">
+		{BEGIN calculation_timestamp_label}{$label public_lbpmi_indicator_actuals calculation_timestamp }{END calculation_timestamp_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$calculation_timestamp_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="calculation_timestamp" {$tooltipAttr public_lbpmi_indicator_actuals calculation_timestamp } >
+		<div class="text-muted" >
+		{$tooltip public_lbpmi_indicator_actuals calculation_timestamp }		</div>
+	</div>
+</div>
+
+
+{END calculation_timestamp_fieldblock}
 	
 								</td>
 			{END cellblock_grid_c3}

@@ -14,6 +14,8 @@
 'public.training_participants' => array( 'displayPreview' => 2,
 'previewPageId' => '' ),
 'public.venues' => array( 'displayPreview' => 2,
+'previewPageId' => '' ),
+'public.lbpmi_data_values' => array( 'displayPreview' => 2,
 'previewPageId' => '' ) ),
 'master' => array( 'public.countries' => array( 'preview' => false ) ),
 'captcha' => array( 'captcha' => false ),

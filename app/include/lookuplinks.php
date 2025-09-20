@@ -1415,38 +1415,66 @@ function InitLookupLinks()
 		if( !isset( $lookupTableLinks["public.lbpmi_data_elements"] ) ) {
 			$lookupTableLinks["public.lbpmi_data_elements"] = array();
 		}
-		if( !isset( $lookupTableLinks["public.lbpmi_data_elements"]["lbpmi_datasets.data_element_id"] )) {
-			$lookupTableLinks["public.lbpmi_data_elements"]["lbpmi_datasets.data_element_id"] = array();
+		if( !isset( $lookupTableLinks["public.lbpmi_data_elements"]["lbpmi_calculation_log.data_element_id"] )) {
+			$lookupTableLinks["public.lbpmi_data_elements"]["lbpmi_calculation_log.data_element_id"] = array();
 		}
-		$lookupTableLinks["public.lbpmi_data_elements"]["lbpmi_datasets.data_element_id"]["edit"] = array("table" => "public.lbpmi_datasets", "field" => "data_element_id", "page" => "edit");
+		$lookupTableLinks["public.lbpmi_data_elements"]["lbpmi_calculation_log.data_element_id"]["edit"] = array("table" => "public.lbpmi_calculation_log", "field" => "data_element_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.regions"] ) ) {
+			$lookupTableLinks["public.regions"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.regions"]["lbpmi_calculation_log.region_id"] )) {
+			$lookupTableLinks["public.regions"]["lbpmi_calculation_log.region_id"] = array();
+		}
+		$lookupTableLinks["public.regions"]["lbpmi_calculation_log.region_id"]["edit"] = array("table" => "public.lbpmi_calculation_log", "field" => "region_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.countries"] ) ) {
+			$lookupTableLinks["public.countries"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.countries"]["lbpmi_calculation_log.country_id"] )) {
+			$lookupTableLinks["public.countries"]["lbpmi_calculation_log.country_id"] = array();
+		}
+		$lookupTableLinks["public.countries"]["lbpmi_calculation_log.country_id"]["edit"] = array("table" => "public.lbpmi_calculation_log", "field" => "country_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.facilities"] ) ) {
+			$lookupTableLinks["public.facilities"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.facilities"]["lbpmi_calculation_log.facility_id"] )) {
+			$lookupTableLinks["public.facilities"]["lbpmi_calculation_log.facility_id"] = array();
+		}
+		$lookupTableLinks["public.facilities"]["lbpmi_calculation_log.facility_id"]["edit"] = array("table" => "public.lbpmi_calculation_log", "field" => "facility_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.unit_of_measurement"] ) ) {
+			$lookupTableLinks["public.unit_of_measurement"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.unit_of_measurement"]["lbpmi_data_elements.value_type"] )) {
+			$lookupTableLinks["public.unit_of_measurement"]["lbpmi_data_elements.value_type"] = array();
+		}
+		$lookupTableLinks["public.unit_of_measurement"]["lbpmi_data_elements.value_type"]["edit"] = array("table" => "public.lbpmi_data_elements", "field" => "value_type", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbpmi_aggregation_type"] ) ) {
+			$lookupTableLinks["public.lbpmi_aggregation_type"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbpmi_aggregation_type"]["lbpmi_data_elements.aggregation_type"] )) {
+			$lookupTableLinks["public.lbpmi_aggregation_type"]["lbpmi_data_elements.aggregation_type"] = array();
+		}
+		$lookupTableLinks["public.lbpmi_aggregation_type"]["lbpmi_data_elements.aggregation_type"]["edit"] = array("table" => "public.lbpmi_data_elements", "field" => "aggregation_type", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbpmi_domain_type"] ) ) {
+			$lookupTableLinks["public.lbpmi_domain_type"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbpmi_domain_type"]["lbpmi_data_elements.domain_type"] )) {
+			$lookupTableLinks["public.lbpmi_domain_type"]["lbpmi_data_elements.domain_type"] = array();
+		}
+		$lookupTableLinks["public.lbpmi_domain_type"]["lbpmi_data_elements.domain_type"]["edit"] = array("table" => "public.lbpmi_data_elements", "field" => "domain_type", "page" => "edit");
 		if( !isset( $lookupTableLinks["public.period_types"] ) ) {
 			$lookupTableLinks["public.period_types"] = array();
 		}
-		if( !isset( $lookupTableLinks["public.period_types"]["lbpmi_datasets.dataset_period_type"] )) {
-			$lookupTableLinks["public.period_types"]["lbpmi_datasets.dataset_period_type"] = array();
+		if( !isset( $lookupTableLinks["public.period_types"]["lbpmi_datasets.period_type"] )) {
+			$lookupTableLinks["public.period_types"]["lbpmi_datasets.period_type"] = array();
 		}
-		$lookupTableLinks["public.period_types"]["lbpmi_datasets.dataset_period_type"]["edit"] = array("table" => "public.lbpmi_datasets", "field" => "dataset_period_type", "page" => "edit");
-		if( !isset( $lookupTableLinks["public.months"] ) ) {
-			$lookupTableLinks["public.months"] = array();
+		$lookupTableLinks["public.period_types"]["lbpmi_datasets.period_type"]["edit"] = array("table" => "public.lbpmi_datasets", "field" => "period_type", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbpmi_data_elements"] ) ) {
+			$lookupTableLinks["public.lbpmi_data_elements"] = array();
 		}
-		if( !isset( $lookupTableLinks["public.months"]["lbpmi_datasets.dataset_month"] )) {
-			$lookupTableLinks["public.months"]["lbpmi_datasets.dataset_month"] = array();
+		if( !isset( $lookupTableLinks["public.lbpmi_data_elements"]["lbpmi_datasets.data_elements"] )) {
+			$lookupTableLinks["public.lbpmi_data_elements"]["lbpmi_datasets.data_elements"] = array();
 		}
-		$lookupTableLinks["public.months"]["lbpmi_datasets.dataset_month"]["edit"] = array("table" => "public.lbpmi_datasets", "field" => "dataset_month", "page" => "edit");
-		if( !isset( $lookupTableLinks["public.quarters"] ) ) {
-			$lookupTableLinks["public.quarters"] = array();
-		}
-		if( !isset( $lookupTableLinks["public.quarters"]["lbpmi_datasets.dataset_quarter"] )) {
-			$lookupTableLinks["public.quarters"]["lbpmi_datasets.dataset_quarter"] = array();
-		}
-		$lookupTableLinks["public.quarters"]["lbpmi_datasets.dataset_quarter"]["edit"] = array("table" => "public.lbpmi_datasets", "field" => "dataset_quarter", "page" => "edit");
-		if( !isset( $lookupTableLinks["public.years"] ) ) {
-			$lookupTableLinks["public.years"] = array();
-		}
-		if( !isset( $lookupTableLinks["public.years"]["lbpmi_datasets.dataset_year"] )) {
-			$lookupTableLinks["public.years"]["lbpmi_datasets.dataset_year"] = array();
-		}
-		$lookupTableLinks["public.years"]["lbpmi_datasets.dataset_year"]["edit"] = array("table" => "public.lbpmi_datasets", "field" => "dataset_year", "page" => "edit");
+		$lookupTableLinks["public.lbpmi_data_elements"]["lbpmi_datasets.data_elements"]["edit"] = array("table" => "public.lbpmi_datasets", "field" => "data_elements", "page" => "edit");
 		if( !isset( $lookupTableLinks["public.lbpmi_indicators"] ) ) {
 			$lookupTableLinks["public.lbpmi_indicators"] = array();
 		}
@@ -1454,13 +1482,55 @@ function InitLookupLinks()
 			$lookupTableLinks["public.lbpmi_indicators"]["lbpmi_indicator_actuals.indicator_id"] = array();
 		}
 		$lookupTableLinks["public.lbpmi_indicators"]["lbpmi_indicator_actuals.indicator_id"]["edit"] = array("table" => "public.lbpmi_indicator_actuals", "field" => "indicator_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.period_types"] ) ) {
+			$lookupTableLinks["public.period_types"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.period_types"]["lbpmi_indicator_actuals.period_type"] )) {
+			$lookupTableLinks["public.period_types"]["lbpmi_indicator_actuals.period_type"] = array();
+		}
+		$lookupTableLinks["public.period_types"]["lbpmi_indicator_actuals.period_type"]["edit"] = array("table" => "public.lbpmi_indicator_actuals", "field" => "period_type", "page" => "edit");
 		if( !isset( $lookupTableLinks["public.years"] ) ) {
 			$lookupTableLinks["public.years"] = array();
 		}
-		if( !isset( $lookupTableLinks["public.years"]["lbpmi_indicator_actuals.year"] )) {
-			$lookupTableLinks["public.years"]["lbpmi_indicator_actuals.year"] = array();
+		if( !isset( $lookupTableLinks["public.years"]["lbpmi_indicator_actuals.period_year"] )) {
+			$lookupTableLinks["public.years"]["lbpmi_indicator_actuals.period_year"] = array();
 		}
-		$lookupTableLinks["public.years"]["lbpmi_indicator_actuals.year"]["edit"] = array("table" => "public.lbpmi_indicator_actuals", "field" => "year", "page" => "edit");
+		$lookupTableLinks["public.years"]["lbpmi_indicator_actuals.period_year"]["edit"] = array("table" => "public.lbpmi_indicator_actuals", "field" => "period_year", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.quarters"] ) ) {
+			$lookupTableLinks["public.quarters"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.quarters"]["lbpmi_indicator_actuals.period_quarter"] )) {
+			$lookupTableLinks["public.quarters"]["lbpmi_indicator_actuals.period_quarter"] = array();
+		}
+		$lookupTableLinks["public.quarters"]["lbpmi_indicator_actuals.period_quarter"]["edit"] = array("table" => "public.lbpmi_indicator_actuals", "field" => "period_quarter", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.months"] ) ) {
+			$lookupTableLinks["public.months"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.months"]["lbpmi_indicator_actuals.period_month"] )) {
+			$lookupTableLinks["public.months"]["lbpmi_indicator_actuals.period_month"] = array();
+		}
+		$lookupTableLinks["public.months"]["lbpmi_indicator_actuals.period_month"]["edit"] = array("table" => "public.lbpmi_indicator_actuals", "field" => "period_month", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.regions"] ) ) {
+			$lookupTableLinks["public.regions"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.regions"]["lbpmi_indicator_actuals.region_id"] )) {
+			$lookupTableLinks["public.regions"]["lbpmi_indicator_actuals.region_id"] = array();
+		}
+		$lookupTableLinks["public.regions"]["lbpmi_indicator_actuals.region_id"]["edit"] = array("table" => "public.lbpmi_indicator_actuals", "field" => "region_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.countries"] ) ) {
+			$lookupTableLinks["public.countries"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.countries"]["lbpmi_indicator_actuals.country_id"] )) {
+			$lookupTableLinks["public.countries"]["lbpmi_indicator_actuals.country_id"] = array();
+		}
+		$lookupTableLinks["public.countries"]["lbpmi_indicator_actuals.country_id"]["edit"] = array("table" => "public.lbpmi_indicator_actuals", "field" => "country_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.facilities"] ) ) {
+			$lookupTableLinks["public.facilities"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.facilities"]["lbpmi_indicator_actuals.facility_id"] )) {
+			$lookupTableLinks["public.facilities"]["lbpmi_indicator_actuals.facility_id"] = array();
+		}
+		$lookupTableLinks["public.facilities"]["lbpmi_indicator_actuals.facility_id"]["edit"] = array("table" => "public.lbpmi_indicator_actuals", "field" => "facility_id", "page" => "edit");
 		if( !isset( $lookupTableLinks["public.lbpmi_indicators"] ) ) {
 			$lookupTableLinks["public.lbpmi_indicators"] = array();
 		}
@@ -1468,27 +1538,62 @@ function InitLookupLinks()
 			$lookupTableLinks["public.lbpmi_indicators"]["lbpmi_indicator_targets.indicator_id"] = array();
 		}
 		$lookupTableLinks["public.lbpmi_indicators"]["lbpmi_indicator_targets.indicator_id"]["edit"] = array("table" => "public.lbpmi_indicator_targets", "field" => "indicator_id", "page" => "edit");
-		if( !isset( $lookupTableLinks["public.years"] ) ) {
-			$lookupTableLinks["public.years"] = array();
-		}
-		if( !isset( $lookupTableLinks["public.years"]["lbpmi_indicator_targets.year"] )) {
-			$lookupTableLinks["public.years"]["lbpmi_indicator_targets.year"] = array();
-		}
-		$lookupTableLinks["public.years"]["lbpmi_indicator_targets.year"]["edit"] = array("table" => "public.lbpmi_indicator_targets", "field" => "year", "page" => "edit");
-		if( !isset( $lookupTableLinks["public.unit_of_measurement"] ) ) {
-			$lookupTableLinks["public.unit_of_measurement"] = array();
-		}
-		if( !isset( $lookupTableLinks["public.unit_of_measurement"]["lbpmi_indicators.unit_of_measurement"] )) {
-			$lookupTableLinks["public.unit_of_measurement"]["lbpmi_indicators.unit_of_measurement"] = array();
-		}
-		$lookupTableLinks["public.unit_of_measurement"]["lbpmi_indicators.unit_of_measurement"]["edit"] = array("table" => "public.lbpmi_indicators", "field" => "unit_of_measurement", "page" => "edit");
 		if( !isset( $lookupTableLinks["public.period_types"] ) ) {
 			$lookupTableLinks["public.period_types"] = array();
 		}
-		if( !isset( $lookupTableLinks["public.period_types"]["lbpmi_indicators.reporting_frequency"] )) {
-			$lookupTableLinks["public.period_types"]["lbpmi_indicators.reporting_frequency"] = array();
+		if( !isset( $lookupTableLinks["public.period_types"]["lbpmi_indicator_targets.period_type"] )) {
+			$lookupTableLinks["public.period_types"]["lbpmi_indicator_targets.period_type"] = array();
 		}
-		$lookupTableLinks["public.period_types"]["lbpmi_indicators.reporting_frequency"]["edit"] = array("table" => "public.lbpmi_indicators", "field" => "reporting_frequency", "page" => "edit");
+		$lookupTableLinks["public.period_types"]["lbpmi_indicator_targets.period_type"]["edit"] = array("table" => "public.lbpmi_indicator_targets", "field" => "period_type", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.years"] ) ) {
+			$lookupTableLinks["public.years"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.years"]["lbpmi_indicator_targets.period_year"] )) {
+			$lookupTableLinks["public.years"]["lbpmi_indicator_targets.period_year"] = array();
+		}
+		$lookupTableLinks["public.years"]["lbpmi_indicator_targets.period_year"]["edit"] = array("table" => "public.lbpmi_indicator_targets", "field" => "period_year", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.quarters"] ) ) {
+			$lookupTableLinks["public.quarters"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.quarters"]["lbpmi_indicator_targets.period_quarter"] )) {
+			$lookupTableLinks["public.quarters"]["lbpmi_indicator_targets.period_quarter"] = array();
+		}
+		$lookupTableLinks["public.quarters"]["lbpmi_indicator_targets.period_quarter"]["edit"] = array("table" => "public.lbpmi_indicator_targets", "field" => "period_quarter", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.months"] ) ) {
+			$lookupTableLinks["public.months"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.months"]["lbpmi_indicator_targets.period_month"] )) {
+			$lookupTableLinks["public.months"]["lbpmi_indicator_targets.period_month"] = array();
+		}
+		$lookupTableLinks["public.months"]["lbpmi_indicator_targets.period_month"]["edit"] = array("table" => "public.lbpmi_indicator_targets", "field" => "period_month", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.regions"] ) ) {
+			$lookupTableLinks["public.regions"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.regions"]["lbpmi_indicator_targets.region_id"] )) {
+			$lookupTableLinks["public.regions"]["lbpmi_indicator_targets.region_id"] = array();
+		}
+		$lookupTableLinks["public.regions"]["lbpmi_indicator_targets.region_id"]["edit"] = array("table" => "public.lbpmi_indicator_targets", "field" => "region_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.countries"] ) ) {
+			$lookupTableLinks["public.countries"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.countries"]["lbpmi_indicator_targets.country_id"] )) {
+			$lookupTableLinks["public.countries"]["lbpmi_indicator_targets.country_id"] = array();
+		}
+		$lookupTableLinks["public.countries"]["lbpmi_indicator_targets.country_id"]["edit"] = array("table" => "public.lbpmi_indicator_targets", "field" => "country_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.facilities"] ) ) {
+			$lookupTableLinks["public.facilities"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.facilities"]["lbpmi_indicator_targets.facility_id"] )) {
+			$lookupTableLinks["public.facilities"]["lbpmi_indicator_targets.facility_id"] = array();
+		}
+		$lookupTableLinks["public.facilities"]["lbpmi_indicator_targets.facility_id"]["edit"] = array("table" => "public.lbpmi_indicator_targets", "field" => "facility_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbpmi_indicator_types"] ) ) {
+			$lookupTableLinks["public.lbpmi_indicator_types"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbpmi_indicator_types"]["lbpmi_indicators.indicator_type"] )) {
+			$lookupTableLinks["public.lbpmi_indicator_types"]["lbpmi_indicators.indicator_type"] = array();
+		}
+		$lookupTableLinks["public.lbpmi_indicator_types"]["lbpmi_indicators.indicator_type"]["edit"] = array("table" => "public.lbpmi_indicators", "field" => "indicator_type", "page" => "edit");
 		if( !isset( $lookupTableLinks["public.lbpmi_indicators"] ) ) {
 			$lookupTableLinks["public.lbpmi_indicators"] = array();
 		}
@@ -1496,6 +1601,90 @@ function InitLookupLinks()
 			$lookupTableLinks["public.lbpmi_indicators"]["lbpmi_calculation_jobs.indicator_id"] = array();
 		}
 		$lookupTableLinks["public.lbpmi_indicators"]["lbpmi_calculation_jobs.indicator_id"]["edit"] = array("table" => "public.lbpmi_calculation_jobs", "field" => "indicator_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbpmi_data_elements"] ) ) {
+			$lookupTableLinks["public.lbpmi_data_elements"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbpmi_data_elements"]["lbpmi_calculation_jobs.data_element_id"] )) {
+			$lookupTableLinks["public.lbpmi_data_elements"]["lbpmi_calculation_jobs.data_element_id"] = array();
+		}
+		$lookupTableLinks["public.lbpmi_data_elements"]["lbpmi_calculation_jobs.data_element_id"]["edit"] = array("table" => "public.lbpmi_calculation_jobs", "field" => "data_element_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.regions"] ) ) {
+			$lookupTableLinks["public.regions"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.regions"]["lbpmi_calculation_jobs.region_id"] )) {
+			$lookupTableLinks["public.regions"]["lbpmi_calculation_jobs.region_id"] = array();
+		}
+		$lookupTableLinks["public.regions"]["lbpmi_calculation_jobs.region_id"]["edit"] = array("table" => "public.lbpmi_calculation_jobs", "field" => "region_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.countries"] ) ) {
+			$lookupTableLinks["public.countries"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.countries"]["lbpmi_calculation_jobs.country_id"] )) {
+			$lookupTableLinks["public.countries"]["lbpmi_calculation_jobs.country_id"] = array();
+		}
+		$lookupTableLinks["public.countries"]["lbpmi_calculation_jobs.country_id"]["edit"] = array("table" => "public.lbpmi_calculation_jobs", "field" => "country_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.facilities"] ) ) {
+			$lookupTableLinks["public.facilities"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.facilities"]["lbpmi_calculation_jobs.facility_id"] )) {
+			$lookupTableLinks["public.facilities"]["lbpmi_calculation_jobs.facility_id"] = array();
+		}
+		$lookupTableLinks["public.facilities"]["lbpmi_calculation_jobs.facility_id"]["edit"] = array("table" => "public.lbpmi_calculation_jobs", "field" => "facility_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.lbpmi_data_elements"] ) ) {
+			$lookupTableLinks["public.lbpmi_data_elements"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.lbpmi_data_elements"]["lbpmi_data_values.data_element_id"] )) {
+			$lookupTableLinks["public.lbpmi_data_elements"]["lbpmi_data_values.data_element_id"] = array();
+		}
+		$lookupTableLinks["public.lbpmi_data_elements"]["lbpmi_data_values.data_element_id"]["edit"] = array("table" => "public.lbpmi_data_values", "field" => "data_element_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.period_types"] ) ) {
+			$lookupTableLinks["public.period_types"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.period_types"]["lbpmi_data_values.period_type"] )) {
+			$lookupTableLinks["public.period_types"]["lbpmi_data_values.period_type"] = array();
+		}
+		$lookupTableLinks["public.period_types"]["lbpmi_data_values.period_type"]["edit"] = array("table" => "public.lbpmi_data_values", "field" => "period_type", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.years"] ) ) {
+			$lookupTableLinks["public.years"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.years"]["lbpmi_data_values.period_year"] )) {
+			$lookupTableLinks["public.years"]["lbpmi_data_values.period_year"] = array();
+		}
+		$lookupTableLinks["public.years"]["lbpmi_data_values.period_year"]["edit"] = array("table" => "public.lbpmi_data_values", "field" => "period_year", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.quarters"] ) ) {
+			$lookupTableLinks["public.quarters"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.quarters"]["lbpmi_data_values.period_quarter"] )) {
+			$lookupTableLinks["public.quarters"]["lbpmi_data_values.period_quarter"] = array();
+		}
+		$lookupTableLinks["public.quarters"]["lbpmi_data_values.period_quarter"]["edit"] = array("table" => "public.lbpmi_data_values", "field" => "period_quarter", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.months"] ) ) {
+			$lookupTableLinks["public.months"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.months"]["lbpmi_data_values.period_month"] )) {
+			$lookupTableLinks["public.months"]["lbpmi_data_values.period_month"] = array();
+		}
+		$lookupTableLinks["public.months"]["lbpmi_data_values.period_month"]["edit"] = array("table" => "public.lbpmi_data_values", "field" => "period_month", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.regions"] ) ) {
+			$lookupTableLinks["public.regions"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.regions"]["lbpmi_data_values.region_id"] )) {
+			$lookupTableLinks["public.regions"]["lbpmi_data_values.region_id"] = array();
+		}
+		$lookupTableLinks["public.regions"]["lbpmi_data_values.region_id"]["edit"] = array("table" => "public.lbpmi_data_values", "field" => "region_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.countries"] ) ) {
+			$lookupTableLinks["public.countries"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.countries"]["lbpmi_data_values.country_id"] )) {
+			$lookupTableLinks["public.countries"]["lbpmi_data_values.country_id"] = array();
+		}
+		$lookupTableLinks["public.countries"]["lbpmi_data_values.country_id"]["edit"] = array("table" => "public.lbpmi_data_values", "field" => "country_id", "page" => "edit");
+		if( !isset( $lookupTableLinks["public.facilities"] ) ) {
+			$lookupTableLinks["public.facilities"] = array();
+		}
+		if( !isset( $lookupTableLinks["public.facilities"]["lbpmi_data_values.facility_id"] )) {
+			$lookupTableLinks["public.facilities"]["lbpmi_data_values.facility_id"] = array();
+		}
+		$lookupTableLinks["public.facilities"]["lbpmi_data_values.facility_id"]["edit"] = array("table" => "public.lbpmi_data_values", "field" => "facility_id", "page" => "edit");
 }
 
 ?>

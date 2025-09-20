@@ -1581,6 +1581,14 @@ class CrossTableWebReport
 			$isDB = true;
 		if("public.lbpmi_calculation_jobs" == $this->xml_array['tables'][0])
 			$isDB = true;
+		if("public.lbpmi_data_values" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbpmi_aggregation_type" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbpmi_domain_type" == $this->xml_array['tables'][0])
+			$isDB = true;
+		if("public.lbpmi_indicator_types" == $this->xml_array['tables'][0])
+			$isDB = true;
 		return $isDB;
 	}
 	

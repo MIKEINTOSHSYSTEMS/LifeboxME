@@ -662,6 +662,11 @@ pdfDocument = {
 			{$displayDetailTable_venues }
 		{END details_venues},
 				
+				
+			 {BEGIN details_lbpmi_data_values}
+			{$displayDetailTable_lbpmi_data_values }
+		{END details_lbpmi_data_values},
+				
 		  ],
   "border": [ true, true, true, true ],
               "alignment": 'left',

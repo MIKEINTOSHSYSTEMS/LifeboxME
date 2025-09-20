@@ -3778,6 +3778,14 @@ function fillProjectEntites()
 	$projectEntitiesReverse[ "unit_of_measurement" ] = "public.unit_of_measurement";
 	$projectEntities[ "public.lbpmi_calculation_jobs" ] = array( "url" => "lbpmi_calculation_jobs", "type" => 0 );
 	$projectEntitiesReverse[ "lbpmi_calculation_jobs" ] = "public.lbpmi_calculation_jobs";
+	$projectEntities[ "public.lbpmi_data_values" ] = array( "url" => "lbpmi_data_values", "type" => 0 );
+	$projectEntitiesReverse[ "lbpmi_data_values" ] = "public.lbpmi_data_values";
+	$projectEntities[ "public.lbpmi_aggregation_type" ] = array( "url" => "lbpmi_aggregation_type", "type" => 0 );
+	$projectEntitiesReverse[ "lbpmi_aggregation_type" ] = "public.lbpmi_aggregation_type";
+	$projectEntities[ "public.lbpmi_domain_type" ] = array( "url" => "lbpmi_domain_type", "type" => 0 );
+	$projectEntitiesReverse[ "lbpmi_domain_type" ] = "public.lbpmi_domain_type";
+	$projectEntities[ "public.lbpmi_indicator_types" ] = array( "url" => "lbpmi_indicator_types", "type" => 0 );
+	$projectEntitiesReverse[ "lbpmi_indicator_types" ] = "public.lbpmi_indicator_types";
 }
 
 function findTable( $table ) {

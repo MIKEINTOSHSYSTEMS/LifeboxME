@@ -120,28 +120,6 @@
 
 {END indicator_id_fieldblock}
 											
-{BEGIN result_area_fieldblock}
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_result_area}  r-horizontal-field form-horizontal" 	
-	data-signal-error-for="result_area{$id}" 
-	data-itemtype="integrated_search_field" data-itemid="integrated_search_field1" {$item_integrated_search_field1} data-pageid="{$pageid}" data-field="result_area" data-fieldname="result_area" >
-
-
-	<label class="r-search-label control-label" for="{$labelfor_result_area}">
-		{$label public_lbpmi_indicators result_area }	</label>
-	<div class="r-search-option">
-		{$searchtype_result_area}
-	</div>
-	<div class="r-search-field">
-		{$result_area_editcontrol}	</div>
-	<div class="r-search-field">
-		{$result_area_editcontrol1}
-	</div>
-	
-</div>
-
-{END result_area_fieldblock}
-											
 {BEGIN indicator_name_fieldblock}
 
 <div class="r-integrated-field form-group clearfix {$fielddispclass_indicator_name}  r-horizontal-field form-horizontal" 	
@@ -208,28 +186,6 @@
 
 {END indicator_type_fieldblock}
 											
-{BEGIN unit_of_measurement_fieldblock}
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_unit_of_measurement}  r-horizontal-field form-horizontal" 	
-	data-signal-error-for="unit_of_measurement{$id}" 
-	data-itemtype="integrated_search_field" data-itemid="integrated_search_field5" {$item_integrated_search_field5} data-pageid="{$pageid}" data-field="unit_of_measurement" data-fieldname="unit_of_measurement" >
-
-
-	<label class="r-search-label control-label" for="{$labelfor_unit_of_measurement}">
-		{$label public_lbpmi_indicators unit_of_measurement }	</label>
-	<div class="r-search-option">
-		{$searchtype_unit_of_measurement}
-	</div>
-	<div class="r-search-field">
-		{$unit_of_measurement_editcontrol}	</div>
-	<div class="r-search-field">
-		{$unit_of_measurement_editcontrol1}
-	</div>
-	
-</div>
-
-{END unit_of_measurement_fieldblock}
-											
 {BEGIN formula_fieldblock}
 
 <div class="r-integrated-field form-group clearfix {$fielddispclass_formula}  r-horizontal-field form-horizontal" 	
@@ -251,28 +207,6 @@
 </div>
 
 {END formula_fieldblock}
-											
-{BEGIN reporting_frequency_fieldblock}
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_reporting_frequency}  r-horizontal-field form-horizontal" 	
-	data-signal-error-for="reporting_frequency{$id}" 
-	data-itemtype="integrated_search_field" data-itemid="integrated_search_field7" {$item_integrated_search_field7} data-pageid="{$pageid}" data-field="reporting_frequency" data-fieldname="reporting_frequency" >
-
-
-	<label class="r-search-label control-label" for="{$labelfor_reporting_frequency}">
-		{$label public_lbpmi_indicators reporting_frequency }	</label>
-	<div class="r-search-option">
-		{$searchtype_reporting_frequency}
-	</div>
-	<div class="r-search-field">
-		{$reporting_frequency_editcontrol}	</div>
-	<div class="r-search-field">
-		{$reporting_frequency_editcontrol1}
-	</div>
-	
-</div>
-
-{END reporting_frequency_fieldblock}
 											
 {BEGIN created_at_fieldblock}
 
@@ -317,6 +251,160 @@
 </div>
 
 {END updated_at_fieldblock}
+											
+{BEGIN indicator_code_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_indicator_code}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="indicator_code{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field1" {$item_integrated_search_field1} data-pageid="{$pageid}" data-field="indicator_code" data-fieldname="indicator_code" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_indicator_code}">
+		{$label public_lbpmi_indicators indicator_code }	</label>
+	<div class="r-search-option">
+		{$searchtype_indicator_code}
+	</div>
+	<div class="r-search-field">
+		{$indicator_code_editcontrol}	</div>
+	<div class="r-search-field">
+		{$indicator_code_editcontrol1}
+	</div>
+	
+</div>
+
+{END indicator_code_fieldblock}
+											
+{BEGIN numerator_description_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_numerator_description}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="numerator_description{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field5" {$item_integrated_search_field5} data-pageid="{$pageid}" data-field="numerator_description" data-fieldname="numerator_description" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_numerator_description}">
+		{$label public_lbpmi_indicators numerator_description }	</label>
+	<div class="r-search-option">
+		{$searchtype_numerator_description}
+	</div>
+	<div class="r-search-field">
+		{$numerator_description_editcontrol}	</div>
+	<div class="r-search-field">
+		{$numerator_description_editcontrol1}
+	</div>
+	
+</div>
+
+{END numerator_description_fieldblock}
+											
+{BEGIN denominator_description_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_denominator_description}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="denominator_description{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field7" {$item_integrated_search_field7} data-pageid="{$pageid}" data-field="denominator_description" data-fieldname="denominator_description" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_denominator_description}">
+		{$label public_lbpmi_indicators denominator_description }	</label>
+	<div class="r-search-option">
+		{$searchtype_denominator_description}
+	</div>
+	<div class="r-search-field">
+		{$denominator_description_editcontrol}	</div>
+	<div class="r-search-field">
+		{$denominator_description_editcontrol1}
+	</div>
+	
+</div>
+
+{END denominator_description_fieldblock}
+											
+{BEGIN annualized_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_annualized}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="annualized{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field10" {$item_integrated_search_field10} data-pageid="{$pageid}" data-field="annualized" data-fieldname="annualized" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_annualized}">
+		{$label public_lbpmi_indicators annualized }	</label>
+	<div class="r-search-option">
+		{$searchtype_annualized}
+	</div>
+	<div class="r-search-field">
+		{$annualized_editcontrol}	</div>
+	<div class="r-search-field">
+		{$annualized_editcontrol1}
+	</div>
+	
+</div>
+
+{END annualized_fieldblock}
+											
+{BEGIN decimals_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_decimals}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="decimals{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field11" {$item_integrated_search_field11} data-pageid="{$pageid}" data-field="decimals" data-fieldname="decimals" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_decimals}">
+		{$label public_lbpmi_indicators decimals }	</label>
+	<div class="r-search-option">
+		{$searchtype_decimals}
+	</div>
+	<div class="r-search-field">
+		{$decimals_editcontrol}	</div>
+	<div class="r-search-field">
+		{$decimals_editcontrol1}
+	</div>
+	
+</div>
+
+{END decimals_fieldblock}
+											
+{BEGIN is_active_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_is_active}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="is_active{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field12" {$item_integrated_search_field12} data-pageid="{$pageid}" data-field="is_active" data-fieldname="is_active" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_is_active}">
+		{$label public_lbpmi_indicators is_active }	</label>
+	<div class="r-search-option">
+		{$searchtype_is_active}
+	</div>
+	<div class="r-search-field">
+		{$is_active_editcontrol}	</div>
+	<div class="r-search-field">
+		{$is_active_editcontrol1}
+	</div>
+	
+</div>
+
+{END is_active_fieldblock}
+											
+{BEGIN created_by_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_created_by}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="created_by{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field13" {$item_integrated_search_field13} data-pageid="{$pageid}" data-field="created_by" data-fieldname="created_by" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_created_by}">
+		{$label public_lbpmi_indicators created_by }	</label>
+	<div class="r-search-option">
+		{$searchtype_created_by}
+	</div>
+	<div class="r-search-field">
+		{$created_by_editcontrol}	</div>
+	<div class="r-search-field">
+		{$created_by_editcontrol1}
+	</div>
+	
+</div>
+
+{END created_by_fieldblock}
 	
 								</td>
 			{END cellblock_grid_c3}

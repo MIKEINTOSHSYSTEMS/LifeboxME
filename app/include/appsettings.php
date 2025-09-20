@@ -769,9 +769,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "235_1758228838";
+$projectBuildKey = "244_1758404346";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "235";
+$projectBuildNumber = "244";
 
 $mlang_messages = array();
 $mlang_charsets = array();
@@ -895,6 +895,10 @@ $tableCaptions["English"]["public_lbpmi_summary"] = "Lbpmi Summary";
 $tableCaptions["English"]["public_period_types"] = "Period Types";
 $tableCaptions["English"]["public_unit_of_measurement"] = "Unit Of Measurement";
 $tableCaptions["English"]["public_lbpmi_calculation_jobs"] = "Lbpmi Calculation Jobs";
+$tableCaptions["English"]["public_lbpmi_data_values"] = "Lbpmi Data Values";
+$tableCaptions["English"]["public_lbpmi_aggregation_type"] = "Lbpmi Aggregation Type";
+$tableCaptions["English"]["public_lbpmi_domain_type"] = "Lbpmi Domain Type";
+$tableCaptions["English"]["public_lbpmi_indicator_types"] = "Lbpmi Indicator Types";
 $tableCaptions["English"]["Dashboard"] = "Dashboard";
 $tableCaptions["English"]["Lifebox_DHIS2_Settings"] = "Lifebox DHIS2 Settings";
 

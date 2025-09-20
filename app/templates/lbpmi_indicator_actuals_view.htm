@@ -408,101 +408,6 @@
 
 {END indicator_id_fieldblock}
 											
-{BEGIN year_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_year}  r-vertical-field" data-fieldname="year" data-signal-error-for="year{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="year" data-fieldname="year" data-compact >
-
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_year}">
-		
-		{BEGIN year_label}{$label public_lbpmi_indicator_actuals year }{END year_label}
-	</label>
-	<div class="col-md-offset-3 col-md-6" >
-		{$year_value}	</div>
-
-		
-</div>
-
-
-{END year_fieldblock}
-											
-{BEGIN q1_actual_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_q1_actual}  r-vertical-field" data-fieldname="q1_actual" data-signal-error-for="q1_actual{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="q1_actual" data-fieldname="q1_actual" data-compact >
-
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_q1_actual}">
-		
-		{BEGIN q1_actual_label}{$label public_lbpmi_indicator_actuals q1_actual }{END q1_actual_label}
-	</label>
-	<div class="col-md-offset-3 col-md-6" >
-		{$q1_actual_value}	</div>
-
-		
-</div>
-
-
-{END q1_actual_fieldblock}
-											
-{BEGIN q2_actual_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_q2_actual}  r-vertical-field" data-fieldname="q2_actual" data-signal-error-for="q2_actual{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="q2_actual" data-fieldname="q2_actual" data-compact >
-
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_q2_actual}">
-		
-		{BEGIN q2_actual_label}{$label public_lbpmi_indicator_actuals q2_actual }{END q2_actual_label}
-	</label>
-	<div class="col-md-offset-3 col-md-6" >
-		{$q2_actual_value}	</div>
-
-		
-</div>
-
-
-{END q2_actual_fieldblock}
-											
-{BEGIN q3_actual_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_q3_actual}  r-vertical-field" data-fieldname="q3_actual" data-signal-error-for="q3_actual{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="q3_actual" data-fieldname="q3_actual" data-compact >
-
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_q3_actual}">
-		
-		{BEGIN q3_actual_label}{$label public_lbpmi_indicator_actuals q3_actual }{END q3_actual_label}
-	</label>
-	<div class="col-md-offset-3 col-md-6" >
-		{$q3_actual_value}	</div>
-
-		
-</div>
-
-
-{END q3_actual_fieldblock}
-											
-{BEGIN q4_actual_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_q4_actual}  r-vertical-field" data-fieldname="q4_actual" data-signal-error-for="q4_actual{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="q4_actual" data-fieldname="q4_actual" data-compact >
-
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_q4_actual}">
-		
-		{BEGIN q4_actual_label}{$label public_lbpmi_indicator_actuals q4_actual }{END q4_actual_label}
-	</label>
-	<div class="col-md-offset-3 col-md-6" >
-		{$q4_actual_value}	</div>
-
-		
-</div>
-
-
-{END q4_actual_fieldblock}
-											
 {BEGIN created_at_fieldblock}
 
 
@@ -540,6 +445,196 @@
 
 
 {END updated_at_fieldblock}
+											
+{BEGIN period_type_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_period_type}  r-vertical-field" data-fieldname="period_type" data-signal-error-for="period_type{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="period_type" data-fieldname="period_type" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_period_type}">
+		
+		{BEGIN period_type_label}{$label public_lbpmi_indicator_actuals period_type }{END period_type_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$period_type_value}	</div>
+
+		
+</div>
+
+
+{END period_type_fieldblock}
+											
+{BEGIN period_year_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_period_year}  r-vertical-field" data-fieldname="period_year" data-signal-error-for="period_year{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="period_year" data-fieldname="period_year" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_period_year}">
+		
+		{BEGIN period_year_label}{$label public_lbpmi_indicator_actuals period_year }{END period_year_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$period_year_value}	</div>
+
+		
+</div>
+
+
+{END period_year_fieldblock}
+											
+{BEGIN period_quarter_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_period_quarter}  r-vertical-field" data-fieldname="period_quarter" data-signal-error-for="period_quarter{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="period_quarter" data-fieldname="period_quarter" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_period_quarter}">
+		
+		{BEGIN period_quarter_label}{$label public_lbpmi_indicator_actuals period_quarter }{END period_quarter_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$period_quarter_value}	</div>
+
+		
+</div>
+
+
+{END period_quarter_fieldblock}
+											
+{BEGIN period_month_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_period_month}  r-vertical-field" data-fieldname="period_month" data-signal-error-for="period_month{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="period_month" data-fieldname="period_month" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_period_month}">
+		
+		{BEGIN period_month_label}{$label public_lbpmi_indicator_actuals period_month }{END period_month_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$period_month_value}	</div>
+
+		
+</div>
+
+
+{END period_month_fieldblock}
+											
+{BEGIN region_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_region_id}  r-vertical-field" data-fieldname="region_id" data-signal-error-for="region_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="region_id" data-fieldname="region_id" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_region_id}">
+		
+		{BEGIN region_id_label}{$label public_lbpmi_indicator_actuals region_id }{END region_id_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$region_id_value}	</div>
+
+		
+</div>
+
+
+{END region_id_fieldblock}
+											
+{BEGIN country_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_country_id}  r-vertical-field" data-fieldname="country_id" data-signal-error-for="country_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="country_id" data-fieldname="country_id" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_country_id}">
+		
+		{BEGIN country_id_label}{$label public_lbpmi_indicator_actuals country_id }{END country_id_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$country_id_value}	</div>
+
+		
+</div>
+
+
+{END country_id_fieldblock}
+											
+{BEGIN facility_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_facility_id}  r-vertical-field" data-fieldname="facility_id" data-signal-error-for="facility_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="facility_id" data-fieldname="facility_id" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_facility_id}">
+		
+		{BEGIN facility_id_label}{$label public_lbpmi_indicator_actuals facility_id }{END facility_id_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$facility_id_value}	</div>
+
+		
+</div>
+
+
+{END facility_id_fieldblock}
+											
+{BEGIN actual_value_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_actual_value}  r-vertical-field" data-fieldname="actual_value" data-signal-error-for="actual_value{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="actual_value" data-fieldname="actual_value" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_actual_value}">
+		
+		{BEGIN actual_value_label}{$label public_lbpmi_indicator_actuals actual_value }{END actual_value_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$actual_value_value}	</div>
+
+		
+</div>
+
+
+{END actual_value_fieldblock}
+											
+{BEGIN is_calculated_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_is_calculated}  r-vertical-field" data-fieldname="is_calculated" data-signal-error-for="is_calculated{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="is_calculated" data-fieldname="is_calculated" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_is_calculated}">
+		
+		{BEGIN is_calculated_label}{$label public_lbpmi_indicator_actuals is_calculated }{END is_calculated_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$is_calculated_value}	</div>
+
+		
+</div>
+
+
+{END is_calculated_fieldblock}
+											
+{BEGIN calculation_timestamp_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_calculation_timestamp}  r-vertical-field" data-fieldname="calculation_timestamp" data-signal-error-for="calculation_timestamp{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field13" {$item_integrated_edit_field13} data-pageid="{$pageid}" data-field="calculation_timestamp" data-fieldname="calculation_timestamp" data-compact >
+
+	
+	<label class="col-md-offset-3 col-md-6" for="{$labelfor_calculation_timestamp}">
+		
+		{BEGIN calculation_timestamp_label}{$label public_lbpmi_indicator_actuals calculation_timestamp }{END calculation_timestamp_label}
+	</label>
+	<div class="col-md-offset-3 col-md-6" >
+		{$calculation_timestamp_value}	</div>
+
+		
+</div>
+
+
+{END calculation_timestamp_fieldblock}
 	
 								</td>
 			{END cellblock_grid_c3}

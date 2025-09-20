@@ -387,28 +387,6 @@
 >
 	<div edit-form-cell class="clearfix">
 				
-{BEGIN result_area_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_result_area}  r-vertical-field" 
-	data-signal-error-for="result_area{$id}" {$required_attr_result_area}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="result_area" data-fieldname="result_area" >
-
-	<label class="r-edit-label control-label" for="{$labelfor_result_area}">
-		{BEGIN result_area_label}{$label public_lbpmi_indicators result_area }{END result_area_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$result_area_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="result_area" {$tooltipAttr public_lbpmi_indicators result_area } >
-		<div class="text-muted" >
-		{$tooltip public_lbpmi_indicators result_area }		</div>
-	</div>
-</div>
-
-
-{END result_area_fieldblock}
-											
 {BEGIN indicator_name_fieldblock}
 
 
@@ -475,28 +453,6 @@
 
 {END indicator_type_fieldblock}
 											
-{BEGIN unit_of_measurement_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_unit_of_measurement}  r-vertical-field" 
-	data-signal-error-for="unit_of_measurement{$id}" {$required_attr_unit_of_measurement}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="unit_of_measurement" data-fieldname="unit_of_measurement" >
-
-	<label class="r-edit-label control-label" for="{$labelfor_unit_of_measurement}">
-		{BEGIN unit_of_measurement_label}{$label public_lbpmi_indicators unit_of_measurement }{END unit_of_measurement_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$unit_of_measurement_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="unit_of_measurement" {$tooltipAttr public_lbpmi_indicators unit_of_measurement } >
-		<div class="text-muted" >
-		{$tooltip public_lbpmi_indicators unit_of_measurement }		</div>
-	</div>
-</div>
-
-
-{END unit_of_measurement_fieldblock}
-											
 {BEGIN formula_fieldblock}
 
 
@@ -518,28 +474,6 @@
 
 
 {END formula_fieldblock}
-											
-{BEGIN reporting_frequency_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_reporting_frequency}  r-vertical-field" 
-	data-signal-error-for="reporting_frequency{$id}" {$required_attr_reporting_frequency}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="reporting_frequency" data-fieldname="reporting_frequency" >
-
-	<label class="r-edit-label control-label" for="{$labelfor_reporting_frequency}">
-		{BEGIN reporting_frequency_label}{$label public_lbpmi_indicators reporting_frequency }{END reporting_frequency_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$reporting_frequency_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="reporting_frequency" {$tooltipAttr public_lbpmi_indicators reporting_frequency } >
-		<div class="text-muted" >
-		{$tooltip public_lbpmi_indicators reporting_frequency }		</div>
-	</div>
-</div>
-
-
-{END reporting_frequency_fieldblock}
 											
 {BEGIN created_at_fieldblock}
 
@@ -584,6 +518,160 @@
 
 
 {END updated_at_fieldblock}
+											
+{BEGIN indicator_code_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_indicator_code}  r-vertical-field" 
+	data-signal-error-for="indicator_code{$id}" {$required_attr_indicator_code}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="indicator_code" data-fieldname="indicator_code" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_indicator_code}">
+		{BEGIN indicator_code_label}{$label public_lbpmi_indicators indicator_code }{END indicator_code_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$indicator_code_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="indicator_code" {$tooltipAttr public_lbpmi_indicators indicator_code } >
+		<div class="text-muted" >
+		{$tooltip public_lbpmi_indicators indicator_code }		</div>
+	</div>
+</div>
+
+
+{END indicator_code_fieldblock}
+											
+{BEGIN numerator_description_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_numerator_description}  r-vertical-field" 
+	data-signal-error-for="numerator_description{$id}" {$required_attr_numerator_description}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="numerator_description" data-fieldname="numerator_description" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_numerator_description}">
+		{BEGIN numerator_description_label}{$label public_lbpmi_indicators numerator_description }{END numerator_description_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$numerator_description_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="numerator_description" {$tooltipAttr public_lbpmi_indicators numerator_description } >
+		<div class="text-muted" >
+		{$tooltip public_lbpmi_indicators numerator_description }		</div>
+	</div>
+</div>
+
+
+{END numerator_description_fieldblock}
+											
+{BEGIN denominator_description_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_denominator_description}  r-vertical-field" 
+	data-signal-error-for="denominator_description{$id}" {$required_attr_denominator_description}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="denominator_description" data-fieldname="denominator_description" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_denominator_description}">
+		{BEGIN denominator_description_label}{$label public_lbpmi_indicators denominator_description }{END denominator_description_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$denominator_description_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="denominator_description" {$tooltipAttr public_lbpmi_indicators denominator_description } >
+		<div class="text-muted" >
+		{$tooltip public_lbpmi_indicators denominator_description }		</div>
+	</div>
+</div>
+
+
+{END denominator_description_fieldblock}
+											
+{BEGIN annualized_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_annualized}  r-vertical-field" 
+	data-signal-error-for="annualized{$id}" {$required_attr_annualized}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="annualized" data-fieldname="annualized" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_annualized}">
+		{BEGIN annualized_label}{$label public_lbpmi_indicators annualized }{END annualized_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$annualized_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="annualized" {$tooltipAttr public_lbpmi_indicators annualized } >
+		<div class="text-muted" >
+		{$tooltip public_lbpmi_indicators annualized }		</div>
+	</div>
+</div>
+
+
+{END annualized_fieldblock}
+											
+{BEGIN decimals_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_decimals}  r-vertical-field" 
+	data-signal-error-for="decimals{$id}" {$required_attr_decimals}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="decimals" data-fieldname="decimals" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_decimals}">
+		{BEGIN decimals_label}{$label public_lbpmi_indicators decimals }{END decimals_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$decimals_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="decimals" {$tooltipAttr public_lbpmi_indicators decimals } >
+		<div class="text-muted" >
+		{$tooltip public_lbpmi_indicators decimals }		</div>
+	</div>
+</div>
+
+
+{END decimals_fieldblock}
+											
+{BEGIN is_active_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_is_active}  r-vertical-field" 
+	data-signal-error-for="is_active{$id}" {$required_attr_is_active}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="is_active" data-fieldname="is_active" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_is_active}">
+		{BEGIN is_active_label}{$label public_lbpmi_indicators is_active }{END is_active_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$is_active_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="is_active" {$tooltipAttr public_lbpmi_indicators is_active } >
+		<div class="text-muted" >
+		{$tooltip public_lbpmi_indicators is_active }		</div>
+	</div>
+</div>
+
+
+{END is_active_fieldblock}
+											
+{BEGIN created_by_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_created_by}  r-vertical-field" 
+	data-signal-error-for="created_by{$id}" {$required_attr_created_by}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="created_by" data-fieldname="created_by" >
+
+	<label class="r-edit-label control-label" for="{$labelfor_created_by}">
+		{BEGIN created_by_label}{$label public_lbpmi_indicators created_by }{END created_by_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$created_by_editcontrol}	</div>
+	<div class="r-edit-tooltip" data-helpfor="created_by" {$tooltipAttr public_lbpmi_indicators created_by } >
+		<div class="text-muted" >
+		{$tooltip public_lbpmi_indicators created_by }		</div>
+	</div>
+</div>
+
+
+{END created_by_fieldblock}
 	
 								</td>
 			{END cellblock_grid_c3}

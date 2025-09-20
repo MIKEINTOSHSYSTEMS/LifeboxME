@@ -4,6 +4,8 @@
 'public.device_distributions' => array( 'displayPreview' => 2,
 'previewPageId' => '' ),
 'public.lifebox_staff' => array( 'displayPreview' => 2,
+'previewPageId' => '' ),
+'public.lbpmi_data_values' => array( 'displayPreview' => 2,
 'previewPageId' => '' ) ),
 'captcha' => array( 'captcha' => false ),
 'fields' => array( 'gridFields' => array( 'region_name',

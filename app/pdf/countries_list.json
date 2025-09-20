@@ -623,6 +623,9 @@ pdfDocument = {
 				
 			{"text":"","hidden":"{$item_hide_grid_details_link6}"},
 				
+				
+			{"text":"","hidden":"{$item_hide_grid_details_link7}"},
+				
 		  ],
   "border": [ true, true, true, true ],
               "alignment": 'left',
@@ -863,6 +866,11 @@ pdfDocument = {
 			 {BEGIN details_venues}
 			{$displayDetailTable_venues }
 		{END details_venues},
+				
+				
+			 {BEGIN details_lbpmi_data_values}
+			{$displayDetailTable_lbpmi_data_values }
+		{END details_lbpmi_data_values},
 				
 		  ],
   "border": [ true, true, true, true ],

@@ -664,6 +664,13 @@
 					Lifebox Staff				</label>
 			</div>
 			{END print_details_lifebox_staff}
+														{BEGIN print_details_lbpmi_data_values}
+			<div>
+				<label for="printDetailslbpmi_data_values{$id}">
+					<input type="checkbox" value="lbpmi_data_values" id="printDetailslbpmi_data_values{$id}" checked>
+					Lbpmi Data Values				</label>
+			</div>
+			{END print_details_lbpmi_data_values}
 						</div>
 </div>
 {END print_details}
@@ -1114,6 +1121,25 @@
 	{END lifebox_staff_dtable_link}
 
 
+	 
+		
+		
+	{BEGIN lbpmi_data_values_dtable_link}
+	<span data-itemtype="grid_details_link" data-itemid="grid_details_link3" {$item_grid_details_link3} data-pageid="{$pageid}" data-record-id="{$recId}">
+	<a  {$lbpmi_data_values_link_attrs} data-short-details="lbpmi_data_values"
+		class="{$lbpmi_data_values_dlink_class}" 
+		title="{$caption public_lbpmi_data_values }"			>
+								
+									{BEGIN lbpmi_data_values_childcount}
+				<span class="details-badge badge lbpmi_data_values_badge" {$lbpmi_data_values_childnumber_attr}>
+					{$lbpmi_data_values_childnumber}				
+				</span>
+				{END lbpmi_data_values_childcount}
+						</a>
+	</span>
+	{END lbpmi_data_values_dtable_link}
+
+
 	
 	</td>
 	{END cellblock_grid_cell_details}
@@ -1239,19 +1265,22 @@
 	>
 
 	 
-					<div data-itemtype="details_preview" data-itemid="details_preview" {$item_details_preview} data-pageid="{$pageid}" data-record-id="{$recId}" 
-	data-orders="countries,device_distributions,lifebox_staff"
-			data-details-countries			data-details-device_distributions			data-details-lifebox_staff	>
+						<div data-itemtype="details_preview" data-itemid="details_preview" {$item_details_preview} data-pageid="{$pageid}" data-record-id="{$recId}" 
+	data-orders="countries,device_distributions,lifebox_staff,lbpmi_data_values"
+			data-details-countries			data-details-device_distributions			data-details-lifebox_staff			data-details-lbpmi_data_values	>
 		<span data-details-inside data-short-table="countries">
 			</span>
 		<span data-details-inside data-short-table="device_distributions">
 			</span>
 		<span data-details-inside data-short-table="lifebox_staff">
 			</span>
+		<span data-details-inside data-short-table="lbpmi_data_values">
+			</span>
 		<div data-details-preview>
 	</div>
 </div>
 	 
+			 
 			 
 			
 	</td>

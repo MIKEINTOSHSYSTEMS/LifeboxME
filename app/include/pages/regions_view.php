@@ -5,6 +5,8 @@
 'public.device_distributions' => array( 'displayPreview' => 2,
 'previewPageId' => '' ),
 'public.lifebox_staff' => array( 'displayPreview' => 2,
+'previewPageId' => '' ),
+'public.lbpmi_data_values' => array( 'displayPreview' => 2,
 'previewPageId' => '' ) ),
 'fields' => array( 'gridFields' => array( 'region_id',
 'region_name',

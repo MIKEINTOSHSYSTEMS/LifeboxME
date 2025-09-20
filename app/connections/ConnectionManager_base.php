@@ -342,6 +342,10 @@ class ConnectionManager_Base
 		$connectionsIds["public.period_types"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["public.unit_of_measurement"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["public.lbpmi_calculation_jobs"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbpmi_data_values"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbpmi_aggregation_type"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbpmi_domain_type"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbpmi_indicator_types"] = "lifebox_mesystem_at_localhost";
 
 		$this->_tablesConnectionIds = &$connectionsIds;
 	}

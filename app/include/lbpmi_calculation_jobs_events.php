@@ -28,7 +28,7 @@ $sql = "SELECT public.process_calculation_jobs();";
 db_exec($sql, $conn);
 
 // Optional response message
-echo "Calculation job completed.";
+//echo "Calculation job completed.";
 
 // Place event code here.
 // Use "Add Action" button to add code snippets.

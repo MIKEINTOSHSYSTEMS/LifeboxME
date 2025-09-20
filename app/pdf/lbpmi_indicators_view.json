@@ -170,9 +170,6 @@ pdfDocument = {
 			{"hidden":"{$item_hide_integrated_edit_field}","stack":[{"text":"{$jslabel public_lbpmi_indicators indicator_id }","bold":true},{"text":{$indicator_id_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
-			{"hidden":"{$item_hide_integrated_edit_field1}","stack":[{"text":"{$jslabel public_lbpmi_indicators result_area }","bold":true},{"text":{$result_area_pdfvalue}}],"margin":[0,0,0,15]},
-				
-				
 			{"hidden":"{$item_hide_integrated_edit_field2}","stack":[{"text":"{$jslabel public_lbpmi_indicators indicator_name }","bold":true},{"text":{$indicator_name_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
@@ -182,19 +179,34 @@ pdfDocument = {
 			{"hidden":"{$item_hide_integrated_edit_field4}","stack":[{"text":"{$jslabel public_lbpmi_indicators indicator_type }","bold":true},{"text":{$indicator_type_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
-			{"hidden":"{$item_hide_integrated_edit_field5}","stack":[{"text":"{$jslabel public_lbpmi_indicators unit_of_measurement }","bold":true},{"text":{$unit_of_measurement_pdfvalue}}],"margin":[0,0,0,15]},
-				
-				
 			{"hidden":"{$item_hide_integrated_edit_field6}","stack":[{"text":"{$jslabel public_lbpmi_indicators formula }","bold":true},{"text":{$formula_pdfvalue}}],"margin":[0,0,0,15]},
-				
-				
-			{"hidden":"{$item_hide_integrated_edit_field7}","stack":[{"text":"{$jslabel public_lbpmi_indicators reporting_frequency }","bold":true},{"text":{$reporting_frequency_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
 			{"hidden":"{$item_hide_integrated_edit_field8}","stack":[{"text":"{$jslabel public_lbpmi_indicators created_at }","bold":true},{"text":{$created_at_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
 			{"hidden":"{$item_hide_integrated_edit_field9}","stack":[{"text":"{$jslabel public_lbpmi_indicators updated_at }","bold":true},{"text":{$updated_at_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field1}","stack":[{"text":"{$jslabel public_lbpmi_indicators indicator_code }","bold":true},{"text":{$indicator_code_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field5}","stack":[{"text":"{$jslabel public_lbpmi_indicators numerator_description }","bold":true},{"text":{$numerator_description_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field7}","stack":[{"text":"{$jslabel public_lbpmi_indicators denominator_description }","bold":true},{"text":{$denominator_description_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field10}","stack":[{"text":"{$jslabel public_lbpmi_indicators annualized }","bold":true},{"text":{$annualized_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field11}","stack":[{"text":"{$jslabel public_lbpmi_indicators decimals }","bold":true},{"text":{$decimals_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field12}","stack":[{"text":"{$jslabel public_lbpmi_indicators is_active }","bold":true},{"text":{$is_active_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field13}","stack":[{"text":"{$jslabel public_lbpmi_indicators created_by }","bold":true},{"text":{$created_by_pdfvalue}}],"margin":[0,0,0,15]},
 				
 		  ],
   "border": [ false, false, false, false ],

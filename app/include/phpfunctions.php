@@ -1322,6 +1322,10 @@ function GetDefaultValue($field, $ptype, $table="")
 	{
 		return strftime("%Y-%m-%d %H:%M:%S");
 	}
+				if($table=="public.lbpmi_data_values" && $field=="created")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
 	return "";
 }
 
@@ -1526,6 +1530,10 @@ function GetAutoUpdateValue($field, $ptype, $table="")
 		return strftime("%Y-%m-%d %H:%M:%S");
 	}
 				if($table=="public.lbpmi_indicators" && $field=="updated_at")
+	{
+		return strftime("%Y-%m-%d %H:%M:%S");
+	}
+				if($table=="public.lbpmi_data_values" && $field=="last_updated")
 	{
 		return strftime("%Y-%m-%d %H:%M:%S");
 	}

@@ -1337,6 +1337,36 @@ $detailsTablesData["public.countries"] = array();
 				$detailsTablesData["public.countries"][$dIndex]["detailKeys"] = array();
 
 	$detailsTablesData["public.countries"][$dIndex]["detailKeys"][]="country_id";
+//	public.lbpmi_data_values
+	
+	
+
+		$dIndex = 7;
+	$detailsParam = array();
+	$detailsParam["dDataSourceTable"]="public.lbpmi_data_values";
+		$detailsParam["dOriginalTable"] = "public.lbpmi_data_values";
+
+
+
+		
+		$detailsParam["dType"]=PAGE_LIST;
+	$detailsParam["dShortTable"] = "lbpmi_data_values";
+	$detailsParam["dCaptionTable"] = GetTableCaption("public_lbpmi_data_values");
+	$detailsParam["masterKeys"] =array();
+	$detailsParam["detailKeys"] =array();
+
+
+		
+	$detailsTablesData["public.countries"][$dIndex] = $detailsParam;
+
+	
+		$detailsTablesData["public.countries"][$dIndex]["masterKeys"] = array();
+
+	$detailsTablesData["public.countries"][$dIndex]["masterKeys"][]="country_id";
+
+				$detailsTablesData["public.countries"][$dIndex]["detailKeys"] = array();
+
+	$detailsTablesData["public.countries"][$dIndex]["detailKeys"][]="country_id";
 //endif
 
 // tables which are master tables for current table (detail)

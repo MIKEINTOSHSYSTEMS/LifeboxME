@@ -810,6 +810,22 @@ class AuditTrailTable
 		{
 			return false;
 		}
+		if($table=="public.lbpmi_data_values")
+		{
+			return false;
+		}
+		if($table=="public.lbpmi_aggregation_type")
+		{
+			return false;
+		}
+		if($table=="public.lbpmi_domain_type")
+		{
+			return false;
+		}
+		if($table=="public.lbpmi_indicator_types")
+		{
+			return false;
+		}
 	}
 
 	protected function insert($datetime, $ip, $user, $table, $action, $description)
@@ -1569,6 +1585,22 @@ class AuditTrailFile
 			return false;
 		}
 		if($table=="public.lbpmi_calculation_jobs")
+		{
+			return false;
+		}
+		if($table=="public.lbpmi_data_values")
+		{
+			return false;
+		}
+		if($table=="public.lbpmi_aggregation_type")
+		{
+			return false;
+		}
+		if($table=="public.lbpmi_domain_type")
+		{
+			return false;
+		}
+		if($table=="public.lbpmi_indicator_types")
 		{
 			return false;
 		}

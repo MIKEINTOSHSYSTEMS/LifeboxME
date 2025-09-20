@@ -2259,6 +2259,36 @@ $detailsTablesData["public.facilities"] = array();
 				$detailsTablesData["public.facilities"][$dIndex]["detailKeys"] = array();
 
 	$detailsTablesData["public.facilities"][$dIndex]["detailKeys"][]="facility_id";
+//	public.lbpmi_data_values
+	
+	
+
+		$dIndex = 8;
+	$detailsParam = array();
+	$detailsParam["dDataSourceTable"]="public.lbpmi_data_values";
+		$detailsParam["dOriginalTable"] = "public.lbpmi_data_values";
+
+
+
+		
+		$detailsParam["dType"]=PAGE_LIST;
+	$detailsParam["dShortTable"] = "lbpmi_data_values";
+	$detailsParam["dCaptionTable"] = GetTableCaption("public_lbpmi_data_values");
+	$detailsParam["masterKeys"] =array();
+	$detailsParam["detailKeys"] =array();
+
+
+		
+	$detailsTablesData["public.facilities"][$dIndex] = $detailsParam;
+
+	
+		$detailsTablesData["public.facilities"][$dIndex]["masterKeys"] = array();
+
+	$detailsTablesData["public.facilities"][$dIndex]["masterKeys"][]="facility_id";
+
+				$detailsTablesData["public.facilities"][$dIndex]["detailKeys"] = array();
+
+	$detailsTablesData["public.facilities"][$dIndex]["detailKeys"][]="facility_id";
 //endif
 
 // tables which are master tables for current table (detail)

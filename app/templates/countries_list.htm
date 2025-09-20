@@ -727,6 +727,13 @@
 					Venues				</label>
 			</div>
 			{END print_details_venues}
+														{BEGIN print_details_lbpmi_data_values}
+			<div>
+				<label for="printDetailslbpmi_data_values{$id}">
+					<input type="checkbox" value="lbpmi_data_values" id="printDetailslbpmi_data_values{$id}" checked>
+					Lbpmi Data Values				</label>
+			</div>
+			{END print_details_lbpmi_data_values}
 						</div>
 </div>
 {END print_details}
@@ -1299,6 +1306,25 @@
 	{END venues_dtable_link}
 
 
+	 
+		
+		
+	{BEGIN lbpmi_data_values_dtable_link}
+	<span data-itemtype="grid_details_link" data-itemid="grid_details_link7" {$item_grid_details_link7} data-pageid="{$pageid}" data-record-id="{$recId}">
+	<a  {$lbpmi_data_values_link_attrs} data-short-details="lbpmi_data_values"
+		class="{$lbpmi_data_values_dlink_class}" 
+		title="{$caption public_lbpmi_data_values }"			>
+								
+									{BEGIN lbpmi_data_values_childcount}
+				<span class="details-badge badge lbpmi_data_values_badge" {$lbpmi_data_values_childnumber_attr}>
+					{$lbpmi_data_values_childnumber}				
+				</span>
+				{END lbpmi_data_values_childcount}
+						</a>
+	</span>
+	{END lbpmi_data_values_dtable_link}
+
+
 	
 	</td>
 	{END cellblock_grid_cell_details}
@@ -1445,9 +1471,9 @@
 	>
 
 	 
-									<div data-itemtype="details_preview" data-itemid="details_preview" {$item_details_preview} data-pageid="{$pageid}" data-record-id="{$recId}" 
-	data-orders="clean_cut_implementations,device_distributions,facilities,surgical_cases,training_sessions,training_participants,venues"
-			data-details-clean_cut_implementations			data-details-device_distributions			data-details-facilities			data-details-surgical_cases			data-details-training_sessions			data-details-training_participants			data-details-venues	>
+										<div data-itemtype="details_preview" data-itemid="details_preview" {$item_details_preview} data-pageid="{$pageid}" data-record-id="{$recId}" 
+	data-orders="clean_cut_implementations,device_distributions,facilities,surgical_cases,training_sessions,training_participants,venues,lbpmi_data_values"
+			data-details-clean_cut_implementations			data-details-device_distributions			data-details-facilities			data-details-surgical_cases			data-details-training_sessions			data-details-training_participants			data-details-venues			data-details-lbpmi_data_values	>
 		<span data-details-inside data-short-table="clean_cut_implementations">
 			</span>
 		<span data-details-inside data-short-table="device_distributions">
@@ -1462,10 +1488,13 @@
 			</span>
 		<span data-details-inside data-short-table="venues">
 			</span>
+		<span data-details-inside data-short-table="lbpmi_data_values">
+			</span>
 		<div data-details-preview>
 	</div>
 </div>
 	 
+			 
 			 
 			 
 			 

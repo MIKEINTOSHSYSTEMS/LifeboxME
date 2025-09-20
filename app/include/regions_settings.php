@@ -1051,6 +1051,36 @@ $detailsTablesData["public.regions"] = array();
 				$detailsTablesData["public.regions"][$dIndex]["detailKeys"] = array();
 
 	$detailsTablesData["public.regions"][$dIndex]["detailKeys"][]="region_id";
+//	public.lbpmi_data_values
+	
+	
+
+		$dIndex = 3;
+	$detailsParam = array();
+	$detailsParam["dDataSourceTable"]="public.lbpmi_data_values";
+		$detailsParam["dOriginalTable"] = "public.lbpmi_data_values";
+
+
+
+		
+		$detailsParam["dType"]=PAGE_LIST;
+	$detailsParam["dShortTable"] = "lbpmi_data_values";
+	$detailsParam["dCaptionTable"] = GetTableCaption("public_lbpmi_data_values");
+	$detailsParam["masterKeys"] =array();
+	$detailsParam["detailKeys"] =array();
+
+
+		
+	$detailsTablesData["public.regions"][$dIndex] = $detailsParam;
+
+	
+		$detailsTablesData["public.regions"][$dIndex]["masterKeys"] = array();
+
+	$detailsTablesData["public.regions"][$dIndex]["masterKeys"][]="region_id";
+
+				$detailsTablesData["public.regions"][$dIndex]["detailKeys"] = array();
+
+	$detailsTablesData["public.regions"][$dIndex]["detailKeys"][]="region_id";
 //endif
 
 // tables which are master tables for current table (detail)

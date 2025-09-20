@@ -578,6 +578,14 @@ class Chart
 			return true;
 		if("public.lbpmi_calculation_jobs" == $this->chrt_array['tables'][0])
 			return true;
+		if("public.lbpmi_data_values" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbpmi_aggregation_type" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbpmi_domain_type" == $this->chrt_array['tables'][0])
+			return true;
+		if("public.lbpmi_indicator_types" == $this->chrt_array['tables'][0])
+			return true;
 		return false;
 	}
 

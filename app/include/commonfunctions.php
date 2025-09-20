@@ -403,6 +403,14 @@ function checkTableName($shortTName )
 		return true;
 	if ("lbpmi_calculation_jobs" == $shortTName )
 		return true;
+	if ("lbpmi_data_values" == $shortTName )
+		return true;
+	if ("lbpmi_aggregation_type" == $shortTName )
+		return true;
+	if ("lbpmi_domain_type" == $shortTName )
+		return true;
+	if ("lbpmi_indicator_types" == $shortTName )
+		return true;
 	return false;
 }
 
@@ -1353,6 +1361,42 @@ function GetTablesList($pdfMode = false)
 	if( $tableAvailable ) {
 		$arr[]="public.lbpmi_calculation_jobs";
 	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbpmi_data_values");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbpmi_data_values";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbpmi_aggregation_type");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbpmi_aggregation_type";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbpmi_domain_type");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbpmi_domain_type";
+	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbpmi_indicator_types");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbpmi_indicator_types";
+	}
 	return $arr;
 }
 
@@ -1462,6 +1506,10 @@ function GetTablesListWithoutSecurity()
 	$arr[]="public.period_types";
 	$arr[]="public.unit_of_measurement";
 	$arr[]="public.lbpmi_calculation_jobs";
+	$arr[]="public.lbpmi_data_values";
+	$arr[]="public.lbpmi_aggregation_type";
+	$arr[]="public.lbpmi_domain_type";
+	$arr[]="public.lbpmi_indicator_types";
 	return $arr;
 }
 
@@ -2589,6 +2637,26 @@ function GetUserPermissionsStatic( $table )
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.lbpmi_calculation_jobs" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbpmi_data_values" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbpmi_aggregation_type" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbpmi_domain_type" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbpmi_indicator_types" )
 	{
 //	default permissions
 		return "ADESPI".$extraPerm;

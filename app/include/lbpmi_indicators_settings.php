@@ -28,9 +28,6 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelslbpmi_indicators["English"]["indicator_id"] = "Indicator Id";
 	$fieldToolTipslbpmi_indicators["English"]["indicator_id"] = "";
 	$placeHolderslbpmi_indicators["English"]["indicator_id"] = "";
-	$fieldLabelslbpmi_indicators["English"]["result_area"] = "Result Area";
-	$fieldToolTipslbpmi_indicators["English"]["result_area"] = "";
-	$placeHolderslbpmi_indicators["English"]["result_area"] = "";
 	$fieldLabelslbpmi_indicators["English"]["indicator_name"] = "Indicator Name";
 	$fieldToolTipslbpmi_indicators["English"]["indicator_name"] = "";
 	$placeHolderslbpmi_indicators["English"]["indicator_name"] = "";
@@ -40,21 +37,36 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelslbpmi_indicators["English"]["indicator_type"] = "Indicator Type";
 	$fieldToolTipslbpmi_indicators["English"]["indicator_type"] = "";
 	$placeHolderslbpmi_indicators["English"]["indicator_type"] = "";
-	$fieldLabelslbpmi_indicators["English"]["unit_of_measurement"] = "Unit Of Measurement";
-	$fieldToolTipslbpmi_indicators["English"]["unit_of_measurement"] = "";
-	$placeHolderslbpmi_indicators["English"]["unit_of_measurement"] = "";
 	$fieldLabelslbpmi_indicators["English"]["formula"] = "Formula";
 	$fieldToolTipslbpmi_indicators["English"]["formula"] = "";
 	$placeHolderslbpmi_indicators["English"]["formula"] = "";
-	$fieldLabelslbpmi_indicators["English"]["reporting_frequency"] = "Reporting Frequency";
-	$fieldToolTipslbpmi_indicators["English"]["reporting_frequency"] = "";
-	$placeHolderslbpmi_indicators["English"]["reporting_frequency"] = "";
 	$fieldLabelslbpmi_indicators["English"]["created_at"] = "Created At";
 	$fieldToolTipslbpmi_indicators["English"]["created_at"] = "";
 	$placeHolderslbpmi_indicators["English"]["created_at"] = "";
 	$fieldLabelslbpmi_indicators["English"]["updated_at"] = "Updated At";
 	$fieldToolTipslbpmi_indicators["English"]["updated_at"] = "";
 	$placeHolderslbpmi_indicators["English"]["updated_at"] = "";
+	$fieldLabelslbpmi_indicators["English"]["indicator_code"] = "Indicator Code";
+	$fieldToolTipslbpmi_indicators["English"]["indicator_code"] = "";
+	$placeHolderslbpmi_indicators["English"]["indicator_code"] = "";
+	$fieldLabelslbpmi_indicators["English"]["numerator_description"] = "Numerator Description";
+	$fieldToolTipslbpmi_indicators["English"]["numerator_description"] = "";
+	$placeHolderslbpmi_indicators["English"]["numerator_description"] = "";
+	$fieldLabelslbpmi_indicators["English"]["denominator_description"] = "Denominator Description";
+	$fieldToolTipslbpmi_indicators["English"]["denominator_description"] = "";
+	$placeHolderslbpmi_indicators["English"]["denominator_description"] = "";
+	$fieldLabelslbpmi_indicators["English"]["annualized"] = "Annualized";
+	$fieldToolTipslbpmi_indicators["English"]["annualized"] = "";
+	$placeHolderslbpmi_indicators["English"]["annualized"] = "";
+	$fieldLabelslbpmi_indicators["English"]["decimals"] = "Decimals";
+	$fieldToolTipslbpmi_indicators["English"]["decimals"] = "";
+	$placeHolderslbpmi_indicators["English"]["decimals"] = "";
+	$fieldLabelslbpmi_indicators["English"]["is_active"] = "Is Active";
+	$fieldToolTipslbpmi_indicators["English"]["is_active"] = "";
+	$placeHolderslbpmi_indicators["English"]["is_active"] = "";
+	$fieldLabelslbpmi_indicators["English"]["created_by"] = "Created By";
+	$fieldToolTipslbpmi_indicators["English"]["created_by"] = "";
+	$placeHolderslbpmi_indicators["English"]["created_by"] = "";
 	if (count($fieldToolTipslbpmi_indicators["English"]))
 		$tdatalbpmi_indicators[".isUseToolTips"] = true;
 }
@@ -173,13 +185,17 @@ $tdatalbpmi_indicators[".requiredSearchFields"] = array();
 
 $tdatalbpmi_indicators[".googleLikeFields"] = array();
 $tdatalbpmi_indicators[".googleLikeFields"][] = "indicator_id";
-$tdatalbpmi_indicators[".googleLikeFields"][] = "result_area";
 $tdatalbpmi_indicators[".googleLikeFields"][] = "indicator_name";
 $tdatalbpmi_indicators[".googleLikeFields"][] = "indicator_description";
+$tdatalbpmi_indicators[".googleLikeFields"][] = "indicator_code";
 $tdatalbpmi_indicators[".googleLikeFields"][] = "indicator_type";
-$tdatalbpmi_indicators[".googleLikeFields"][] = "unit_of_measurement";
+$tdatalbpmi_indicators[".googleLikeFields"][] = "numerator_description";
+$tdatalbpmi_indicators[".googleLikeFields"][] = "denominator_description";
 $tdatalbpmi_indicators[".googleLikeFields"][] = "formula";
-$tdatalbpmi_indicators[".googleLikeFields"][] = "reporting_frequency";
+$tdatalbpmi_indicators[".googleLikeFields"][] = "annualized";
+$tdatalbpmi_indicators[".googleLikeFields"][] = "decimals";
+$tdatalbpmi_indicators[".googleLikeFields"][] = "is_active";
+$tdatalbpmi_indicators[".googleLikeFields"][] = "created_by";
 $tdatalbpmi_indicators[".googleLikeFields"][] = "created_at";
 $tdatalbpmi_indicators[".googleLikeFields"][] = "updated_at";
 
@@ -215,7 +231,7 @@ $tdatalbpmi_indicators[".strOrderBy"] = $tstrOrderBy;
 $tdatalbpmi_indicators[".orderindexes"] = array();
 
 
-$tdatalbpmi_indicators[".sqlHead"] = "SELECT indicator_id,  	result_area,  	indicator_name,  	indicator_description,  	indicator_type,  	unit_of_measurement,  	formula,  	reporting_frequency,  	created_at,  	updated_at";
+$tdatalbpmi_indicators[".sqlHead"] = "SELECT indicator_id,  	indicator_name,  	indicator_description,  	indicator_code,  	indicator_type,  	numerator_description,  	denominator_description,  	formula,  	annualized,  	decimals,  	is_active,  	created_by,  	created_at,  	updated_at";
 $tdatalbpmi_indicators[".sqlFrom"] = "FROM \"public\".lbpmi_indicators";
 $tdatalbpmi_indicators[".sqlWhereExpr"] = "";
 $tdatalbpmi_indicators[".sqlTail"] = "";
@@ -405,149 +421,10 @@ $tdatalbpmi_indicators[".hideMobileList"] = array();
 
 	$tdatalbpmi_indicators["indicator_id"] = $fdata;
 		$tdatalbpmi_indicators[".searchableFields"][] = "indicator_id";
-//	result_area
-//	Custom field settings
-	$fdata = array();
-	$fdata["Index"] = 2;
-	$fdata["strName"] = "result_area";
-	$fdata["GoodName"] = "result_area";
-	$fdata["ownerTable"] = "public.lbpmi_indicators";
-	$fdata["Label"] = GetFieldLabel("public_lbpmi_indicators","result_area");
-	$fdata["FieldType"] = 200;
-
-
-	
-	
-			
-
-		$fdata["strField"] = "result_area";
-
-		$fdata["sourceSingle"] = "result_area";
-
-	
-		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "result_area";
-
-	
-	
-				$fdata["UploadFolder"] = "files";
-
-//  Begin View Formats
-	$fdata["ViewFormats"] = array();
-
-	$vdata = array("ViewFormat" => "");
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		$vdata["NeedEncode"] = true;
-
-	
-		$vdata["truncateText"] = true;
-	$vdata["NumberOfChars"] = 80;
-
-	$fdata["ViewFormats"]["view"] = $vdata;
-//  End View Formats
-
-//	Begin Edit Formats
-	$fdata["EditFormats"] = array();
-
-	$edata = array("EditFormat" => "Text field");
-
-	
-		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
-	$edata["weekdays"] = "[]";
-
-
-	
-	
-
-
-
-	
-	
-	
-	
-			$edata["acceptFileTypesHtml"] = "";
-
-		$edata["maxNumberOfFiles"] = 1;
-
-	
-	
-	
-	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-			$edata["EditParams"].= " maxlength=255";
-
-		$edata["controlWidth"] = 200;
-
-//	Begin validation
-	$edata["validateAs"] = array();
-	$edata["validateAs"]["basicValidate"] = array();
-	$edata["validateAs"]["customMessages"] = array();
-	
-	
-//	End validation
-
-	
-			
-	
-	
-	
-	$fdata["EditFormats"]["edit"] = $edata;
-//	End Edit Formats
-
-
-	$fdata["isSeparate"] = false;
-
-
-
-
-// the field's search options settings
-		$fdata["defaultSearchOption"] = "Contains";
-
-			// the default search options list
-				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
-// the end of search options settings
-
-
-//Filters settings
-	$fdata["filterTotals"] = 0;
-		$fdata["filterMultiSelect"] = 0;
-			$fdata["filterFormat"] = "Values list";
-		$fdata["showCollapsed"] = false;
-
-		$fdata["sortValueType"] = 0;
-		$fdata["numberOfVisibleItems"] = 10;
-
-		$fdata["filterBy"] = 0;
-
-	
-
-	
-	
-//end of Filters settings
-
-
-	$tdatalbpmi_indicators["result_area"] = $fdata;
-		$tdatalbpmi_indicators[".searchableFields"][] = "result_area";
 //	indicator_name
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 3;
+	$fdata["Index"] = 2;
 	$fdata["strName"] = "indicator_name";
 	$fdata["GoodName"] = "indicator_name";
 	$fdata["ownerTable"] = "public.lbpmi_indicators";
@@ -686,7 +563,7 @@ $tdatalbpmi_indicators[".hideMobileList"] = array();
 //	indicator_description
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 4;
+	$fdata["Index"] = 3;
 	$fdata["strName"] = "indicator_description";
 	$fdata["GoodName"] = "indicator_description";
 	$fdata["ownerTable"] = "public.lbpmi_indicators";
@@ -824,14 +701,14 @@ $tdatalbpmi_indicators[".hideMobileList"] = array();
 
 	$tdatalbpmi_indicators["indicator_description"] = $fdata;
 		$tdatalbpmi_indicators[".searchableFields"][] = "indicator_description";
-//	indicator_type
+//	indicator_code
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 5;
-	$fdata["strName"] = "indicator_type";
-	$fdata["GoodName"] = "indicator_type";
+	$fdata["Index"] = 4;
+	$fdata["strName"] = "indicator_code";
+	$fdata["GoodName"] = "indicator_code";
 	$fdata["ownerTable"] = "public.lbpmi_indicators";
-	$fdata["Label"] = GetFieldLabel("public_lbpmi_indicators","indicator_type");
+	$fdata["Label"] = GetFieldLabel("public_lbpmi_indicators","indicator_code");
 	$fdata["FieldType"] = 200;
 
 
@@ -839,13 +716,13 @@ $tdatalbpmi_indicators[".hideMobileList"] = array();
 	
 			
 
-		$fdata["strField"] = "indicator_type";
+		$fdata["strField"] = "indicator_code";
 
-		$fdata["sourceSingle"] = "indicator_type";
+		$fdata["sourceSingle"] = "indicator_code";
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "indicator_type";
+	$fdata["FullName"] = "indicator_code";
 
 	
 	
@@ -909,7 +786,7 @@ $tdatalbpmi_indicators[".hideMobileList"] = array();
 			$edata["HTML5InuptType"] = "text";
 
 		$edata["EditParams"] = "";
-			$edata["EditParams"].= " maxlength=50";
+			$edata["EditParams"].= " maxlength=100";
 
 		$edata["controlWidth"] = 200;
 
@@ -961,16 +838,16 @@ $tdatalbpmi_indicators[".hideMobileList"] = array();
 //end of Filters settings
 
 
-	$tdatalbpmi_indicators["indicator_type"] = $fdata;
-		$tdatalbpmi_indicators[".searchableFields"][] = "indicator_type";
-//	unit_of_measurement
+	$tdatalbpmi_indicators["indicator_code"] = $fdata;
+		$tdatalbpmi_indicators[".searchableFields"][] = "indicator_code";
+//	indicator_type
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 6;
-	$fdata["strName"] = "unit_of_measurement";
-	$fdata["GoodName"] = "unit_of_measurement";
+	$fdata["Index"] = 5;
+	$fdata["strName"] = "indicator_type";
+	$fdata["GoodName"] = "indicator_type";
 	$fdata["ownerTable"] = "public.lbpmi_indicators";
-	$fdata["Label"] = GetFieldLabel("public_lbpmi_indicators","unit_of_measurement");
+	$fdata["Label"] = GetFieldLabel("public_lbpmi_indicators","indicator_type");
 	$fdata["FieldType"] = 200;
 
 
@@ -978,13 +855,13 @@ $tdatalbpmi_indicators[".hideMobileList"] = array();
 	
 			
 
-		$fdata["strField"] = "unit_of_measurement";
+		$fdata["strField"] = "indicator_type";
 
-		$fdata["sourceSingle"] = "unit_of_measurement";
+		$fdata["sourceSingle"] = "indicator_type";
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "unit_of_measurement";
+	$fdata["FullName"] = "indicator_type";
 
 	
 	
@@ -1033,16 +910,16 @@ $tdatalbpmi_indicators[".hideMobileList"] = array();
 
 // Begin Lookup settings
 				$edata["LookupType"] = 2;
-	$edata["LookupTable"] = "public.unit_of_measurement";
+	$edata["LookupTable"] = "public.lbpmi_indicator_types";
 			$edata["autoCompleteFieldsOnEdit"] = 0;
 	$edata["autoCompleteFields"] = array();
 		$edata["LCType"] = 0;
 
 	
 		
-	$edata["LinkField"] = "uom_name";
+	$edata["LinkField"] = "indicator_type";
 	$edata["LinkFieldType"] = 0;
-	$edata["DisplayField"] = "uom_name";
+	$edata["DisplayField"] = "indicator_type";
 
 	
 
@@ -1125,12 +1002,294 @@ $tdatalbpmi_indicators[".hideMobileList"] = array();
 //end of Filters settings
 
 
-	$tdatalbpmi_indicators["unit_of_measurement"] = $fdata;
-		$tdatalbpmi_indicators[".searchableFields"][] = "unit_of_measurement";
-//	formula
+	$tdatalbpmi_indicators["indicator_type"] = $fdata;
+		$tdatalbpmi_indicators[".searchableFields"][] = "indicator_type";
+//	numerator_description
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 6;
+	$fdata["strName"] = "numerator_description";
+	$fdata["GoodName"] = "numerator_description";
+	$fdata["ownerTable"] = "public.lbpmi_indicators";
+	$fdata["Label"] = GetFieldLabel("public_lbpmi_indicators","numerator_description");
+	$fdata["FieldType"] = 201;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "numerator_description";
+
+		$fdata["sourceSingle"] = "numerator_description";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "numerator_description";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text area");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 0;
+
+	
+	
+	
+				$edata["nRows"] = 100;
+			$edata["nCols"] = 200;
+
+	
+	
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+		$edata["CreateThumbnail"] = true;
+	$edata["StrThumbnail"] = "th";
+			$edata["ThumbnailSize"] = 600;
+
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatalbpmi_indicators["numerator_description"] = $fdata;
+		$tdatalbpmi_indicators[".searchableFields"][] = "numerator_description";
+//	denominator_description
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 7;
+	$fdata["strName"] = "denominator_description";
+	$fdata["GoodName"] = "denominator_description";
+	$fdata["ownerTable"] = "public.lbpmi_indicators";
+	$fdata["Label"] = GetFieldLabel("public_lbpmi_indicators","denominator_description");
+	$fdata["FieldType"] = 201;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "denominator_description";
+
+		$fdata["sourceSingle"] = "denominator_description";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "denominator_description";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text area");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 0;
+
+	
+	
+	
+				$edata["nRows"] = 100;
+			$edata["nCols"] = 200;
+
+	
+	
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+		$edata["CreateThumbnail"] = true;
+	$edata["StrThumbnail"] = "th";
+			$edata["ThumbnailSize"] = 600;
+
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatalbpmi_indicators["denominator_description"] = $fdata;
+		$tdatalbpmi_indicators[".searchableFields"][] = "denominator_description";
+//	formula
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 8;
 	$fdata["strName"] = "formula";
 	$fdata["GoodName"] = "formula";
 	$fdata["ownerTable"] = "public.lbpmi_indicators";
@@ -1268,28 +1427,28 @@ $tdatalbpmi_indicators[".hideMobileList"] = array();
 
 	$tdatalbpmi_indicators["formula"] = $fdata;
 		$tdatalbpmi_indicators[".searchableFields"][] = "formula";
-//	reporting_frequency
+//	annualized
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 8;
-	$fdata["strName"] = "reporting_frequency";
-	$fdata["GoodName"] = "reporting_frequency";
+	$fdata["Index"] = 9;
+	$fdata["strName"] = "annualized";
+	$fdata["GoodName"] = "annualized";
 	$fdata["ownerTable"] = "public.lbpmi_indicators";
-	$fdata["Label"] = GetFieldLabel("public_lbpmi_indicators","reporting_frequency");
-	$fdata["FieldType"] = 200;
+	$fdata["Label"] = GetFieldLabel("public_lbpmi_indicators","annualized");
+	$fdata["FieldType"] = 11;
 
 
 	
 	
 			
 
-		$fdata["strField"] = "reporting_frequency";
+		$fdata["strField"] = "annualized";
 
-		$fdata["sourceSingle"] = "reporting_frequency";
+		$fdata["sourceSingle"] = "annualized";
 
 	
 		$fdata["isSQLExpression"] = true;
-	$fdata["FullName"] = "reporting_frequency";
+	$fdata["FullName"] = "annualized";
 
 	
 	
@@ -1298,7 +1457,7 @@ $tdatalbpmi_indicators[".hideMobileList"] = array();
 //  Begin View Formats
 	$fdata["ViewFormats"] = array();
 
-	$vdata = array("ViewFormat" => "");
+	$vdata = array("ViewFormat" => "Checkbox");
 
 	
 	
@@ -1314,8 +1473,7 @@ $tdatalbpmi_indicators[".hideMobileList"] = array();
 	
 	
 	
-		$vdata["NeedEncode"] = true;
-
+	
 	
 		$vdata["truncateText"] = true;
 	$vdata["NumberOfChars"] = 80;
@@ -1326,7 +1484,7 @@ $tdatalbpmi_indicators[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Lookup wizard");
+	$edata = array("EditFormat" => "Checkbox");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -1336,34 +1494,6 @@ $tdatalbpmi_indicators[".hideMobileList"] = array();
 	
 	
 
-// Begin Lookup settings
-				$edata["LookupType"] = 2;
-	$edata["LookupTable"] = "public.period_types";
-			$edata["autoCompleteFieldsOnEdit"] = 0;
-	$edata["autoCompleteFields"] = array();
-		$edata["LCType"] = 0;
-
-	
-		
-	$edata["LinkField"] = "period_name";
-	$edata["LinkFieldType"] = 0;
-	$edata["DisplayField"] = "period_name";
-
-	
-
-	
-	$edata["LookupOrderBy"] = "";
-
-	
-	
-	
-	
-
-	
-	
-		$edata["SelectSize"] = 1;
-
-// End Lookup Settings
 
 
 	
@@ -1414,6 +1544,143 @@ $tdatalbpmi_indicators[".hideMobileList"] = array();
 
 //Filters settings
 	$fdata["filterTotals"] = 0;
+				$fdata["filterFormat"] = "Options list";
+		$fdata["showCollapsed"] = false;
+
+	
+	
+	
+		$fdata["filterCheckedMessageType"] = "Text";
+	$fdata["filterCheckedMessageText"] = "Checked";
+	$fdata["filterUncheckedMessageType"] = "Text";
+	$fdata["filterUncheckedMessageText"] = "Unchecked";
+
+//end of Filters settings
+
+
+	$tdatalbpmi_indicators["annualized"] = $fdata;
+		$tdatalbpmi_indicators[".searchableFields"][] = "annualized";
+//	decimals
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 10;
+	$fdata["strName"] = "decimals";
+	$fdata["GoodName"] = "decimals";
+	$fdata["ownerTable"] = "public.lbpmi_indicators";
+	$fdata["Label"] = GetFieldLabel("public_lbpmi_indicators","decimals");
+	$fdata["FieldType"] = 3;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "decimals";
+
+		$fdata["sourceSingle"] = "decimals";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "decimals";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
+							
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
 		$fdata["filterMultiSelect"] = 0;
 			$fdata["filterFormat"] = "Values list";
 		$fdata["showCollapsed"] = false;
@@ -1430,12 +1697,284 @@ $tdatalbpmi_indicators[".hideMobileList"] = array();
 //end of Filters settings
 
 
-	$tdatalbpmi_indicators["reporting_frequency"] = $fdata;
-		$tdatalbpmi_indicators[".searchableFields"][] = "reporting_frequency";
+	$tdatalbpmi_indicators["decimals"] = $fdata;
+		$tdatalbpmi_indicators[".searchableFields"][] = "decimals";
+//	is_active
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 11;
+	$fdata["strName"] = "is_active";
+	$fdata["GoodName"] = "is_active";
+	$fdata["ownerTable"] = "public.lbpmi_indicators";
+	$fdata["Label"] = GetFieldLabel("public_lbpmi_indicators","is_active");
+	$fdata["FieldType"] = 11;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "is_active";
+
+		$fdata["sourceSingle"] = "is_active";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "is_active";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "Checkbox");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Checkbox");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+	
+	
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Equals";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+				$fdata["filterFormat"] = "Options list";
+		$fdata["showCollapsed"] = false;
+
+	
+	
+	
+		$fdata["filterCheckedMessageType"] = "Text";
+	$fdata["filterCheckedMessageText"] = "Checked";
+	$fdata["filterUncheckedMessageType"] = "Text";
+	$fdata["filterUncheckedMessageText"] = "Unchecked";
+
+//end of Filters settings
+
+
+	$tdatalbpmi_indicators["is_active"] = $fdata;
+		$tdatalbpmi_indicators[".searchableFields"][] = "is_active";
+//	created_by
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 12;
+	$fdata["strName"] = "created_by";
+	$fdata["GoodName"] = "created_by";
+	$fdata["ownerTable"] = "public.lbpmi_indicators";
+	$fdata["Label"] = GetFieldLabel("public_lbpmi_indicators","created_by");
+	$fdata["FieldType"] = 3;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "created_by";
+
+		$fdata["sourceSingle"] = "created_by";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "created_by";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
+							
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatalbpmi_indicators["created_by"] = $fdata;
+		$tdatalbpmi_indicators[".searchableFields"][] = "created_by";
 //	created_at
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 9;
+	$fdata["Index"] = 13;
 	$fdata["strName"] = "created_at";
 	$fdata["GoodName"] = "created_at";
 	$fdata["ownerTable"] = "public.lbpmi_indicators";
@@ -1574,7 +2113,7 @@ $tdatalbpmi_indicators[".hideMobileList"] = array();
 //	updated_at
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 10;
+	$fdata["Index"] = 14;
 	$fdata["strName"] = "updated_at";
 	$fdata["GoodName"] = "updated_at";
 	$fdata["ownerTable"] = "public.lbpmi_indicators";
@@ -1845,7 +2384,7 @@ function createSqlQuery_lbpmi_indicators()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "indicator_id,  	result_area,  	indicator_name,  	indicator_description,  	indicator_type,  	unit_of_measurement,  	formula,  	reporting_frequency,  	created_at,  	updated_at";
+$proto0["m_strFieldList"] = "indicator_id,  	indicator_name,  	indicator_description,  	indicator_code,  	indicator_type,  	numerator_description,  	denominator_description,  	formula,  	annualized,  	decimals,  	is_active,  	created_by,  	created_at,  	updated_at";
 $proto0["m_strFrom"] = "FROM \"public\".lbpmi_indicators";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
@@ -1901,12 +2440,12 @@ $obj = new SQLFieldListItem($proto6);
 $proto0["m_fieldlist"][]=$obj;
 						$proto8=array();
 			$obj = new SQLField(array(
-	"m_strName" => "result_area",
+	"m_strName" => "indicator_name",
 	"m_strTable" => "public.lbpmi_indicators",
 	"m_srcTableName" => "public.lbpmi_indicators"
 ));
 
-$proto8["m_sql"] = "result_area";
+$proto8["m_sql"] = "indicator_name";
 $proto8["m_srcTableName"] = "public.lbpmi_indicators";
 $proto8["m_expr"]=$obj;
 $proto8["m_alias"] = "";
@@ -1915,12 +2454,12 @@ $obj = new SQLFieldListItem($proto8);
 $proto0["m_fieldlist"][]=$obj;
 						$proto10=array();
 			$obj = new SQLField(array(
-	"m_strName" => "indicator_name",
+	"m_strName" => "indicator_description",
 	"m_strTable" => "public.lbpmi_indicators",
 	"m_srcTableName" => "public.lbpmi_indicators"
 ));
 
-$proto10["m_sql"] = "indicator_name";
+$proto10["m_sql"] = "indicator_description";
 $proto10["m_srcTableName"] = "public.lbpmi_indicators";
 $proto10["m_expr"]=$obj;
 $proto10["m_alias"] = "";
@@ -1929,12 +2468,12 @@ $obj = new SQLFieldListItem($proto10);
 $proto0["m_fieldlist"][]=$obj;
 						$proto12=array();
 			$obj = new SQLField(array(
-	"m_strName" => "indicator_description",
+	"m_strName" => "indicator_code",
 	"m_strTable" => "public.lbpmi_indicators",
 	"m_srcTableName" => "public.lbpmi_indicators"
 ));
 
-$proto12["m_sql"] = "indicator_description";
+$proto12["m_sql"] = "indicator_code";
 $proto12["m_srcTableName"] = "public.lbpmi_indicators";
 $proto12["m_expr"]=$obj;
 $proto12["m_alias"] = "";
@@ -1957,12 +2496,12 @@ $obj = new SQLFieldListItem($proto14);
 $proto0["m_fieldlist"][]=$obj;
 						$proto16=array();
 			$obj = new SQLField(array(
-	"m_strName" => "unit_of_measurement",
+	"m_strName" => "numerator_description",
 	"m_strTable" => "public.lbpmi_indicators",
 	"m_srcTableName" => "public.lbpmi_indicators"
 ));
 
-$proto16["m_sql"] = "unit_of_measurement";
+$proto16["m_sql"] = "numerator_description";
 $proto16["m_srcTableName"] = "public.lbpmi_indicators";
 $proto16["m_expr"]=$obj;
 $proto16["m_alias"] = "";
@@ -1971,12 +2510,12 @@ $obj = new SQLFieldListItem($proto16);
 $proto0["m_fieldlist"][]=$obj;
 						$proto18=array();
 			$obj = new SQLField(array(
-	"m_strName" => "formula",
+	"m_strName" => "denominator_description",
 	"m_strTable" => "public.lbpmi_indicators",
 	"m_srcTableName" => "public.lbpmi_indicators"
 ));
 
-$proto18["m_sql"] = "formula";
+$proto18["m_sql"] = "denominator_description";
 $proto18["m_srcTableName"] = "public.lbpmi_indicators";
 $proto18["m_expr"]=$obj;
 $proto18["m_alias"] = "";
@@ -1985,12 +2524,12 @@ $obj = new SQLFieldListItem($proto18);
 $proto0["m_fieldlist"][]=$obj;
 						$proto20=array();
 			$obj = new SQLField(array(
-	"m_strName" => "reporting_frequency",
+	"m_strName" => "formula",
 	"m_strTable" => "public.lbpmi_indicators",
 	"m_srcTableName" => "public.lbpmi_indicators"
 ));
 
-$proto20["m_sql"] = "reporting_frequency";
+$proto20["m_sql"] = "formula";
 $proto20["m_srcTableName"] = "public.lbpmi_indicators";
 $proto20["m_expr"]=$obj;
 $proto20["m_alias"] = "";
@@ -1999,12 +2538,12 @@ $obj = new SQLFieldListItem($proto20);
 $proto0["m_fieldlist"][]=$obj;
 						$proto22=array();
 			$obj = new SQLField(array(
-	"m_strName" => "created_at",
+	"m_strName" => "annualized",
 	"m_strTable" => "public.lbpmi_indicators",
 	"m_srcTableName" => "public.lbpmi_indicators"
 ));
 
-$proto22["m_sql"] = "created_at";
+$proto22["m_sql"] = "annualized";
 $proto22["m_srcTableName"] = "public.lbpmi_indicators";
 $proto22["m_expr"]=$obj;
 $proto22["m_alias"] = "";
@@ -2013,58 +2552,118 @@ $obj = new SQLFieldListItem($proto22);
 $proto0["m_fieldlist"][]=$obj;
 						$proto24=array();
 			$obj = new SQLField(array(
-	"m_strName" => "updated_at",
+	"m_strName" => "decimals",
 	"m_strTable" => "public.lbpmi_indicators",
 	"m_srcTableName" => "public.lbpmi_indicators"
 ));
 
-$proto24["m_sql"] = "updated_at";
+$proto24["m_sql"] = "decimals";
 $proto24["m_srcTableName"] = "public.lbpmi_indicators";
 $proto24["m_expr"]=$obj;
 $proto24["m_alias"] = "";
 $obj = new SQLFieldListItem($proto24);
 
 $proto0["m_fieldlist"][]=$obj;
-$proto0["m_fromlist"] = array();
-												$proto26=array();
-$proto26["m_link"] = "SQLL_MAIN";
-			$proto27=array();
-$proto27["m_strName"] = "public.lbpmi_indicators";
-$proto27["m_srcTableName"] = "public.lbpmi_indicators";
-$proto27["m_columns"] = array();
-$proto27["m_columns"][] = "indicator_id";
-$proto27["m_columns"][] = "result_area";
-$proto27["m_columns"][] = "indicator_name";
-$proto27["m_columns"][] = "indicator_description";
-$proto27["m_columns"][] = "indicator_type";
-$proto27["m_columns"][] = "unit_of_measurement";
-$proto27["m_columns"][] = "formula";
-$proto27["m_columns"][] = "reporting_frequency";
-$proto27["m_columns"][] = "created_at";
-$proto27["m_columns"][] = "updated_at";
-$obj = new SQLTable($proto27);
+						$proto26=array();
+			$obj = new SQLField(array(
+	"m_strName" => "is_active",
+	"m_strTable" => "public.lbpmi_indicators",
+	"m_srcTableName" => "public.lbpmi_indicators"
+));
 
-$proto26["m_table"] = $obj;
-$proto26["m_sql"] = "\"public\".lbpmi_indicators";
-$proto26["m_alias"] = "";
+$proto26["m_sql"] = "is_active";
 $proto26["m_srcTableName"] = "public.lbpmi_indicators";
-$proto28=array();
-$proto28["m_sql"] = "";
-$proto28["m_uniontype"] = "SQLL_UNKNOWN";
+$proto26["m_expr"]=$obj;
+$proto26["m_alias"] = "";
+$obj = new SQLFieldListItem($proto26);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto28=array();
+			$obj = new SQLField(array(
+	"m_strName" => "created_by",
+	"m_strTable" => "public.lbpmi_indicators",
+	"m_srcTableName" => "public.lbpmi_indicators"
+));
+
+$proto28["m_sql"] = "created_by";
+$proto28["m_srcTableName"] = "public.lbpmi_indicators";
+$proto28["m_expr"]=$obj;
+$proto28["m_alias"] = "";
+$obj = new SQLFieldListItem($proto28);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto30=array();
+			$obj = new SQLField(array(
+	"m_strName" => "created_at",
+	"m_strTable" => "public.lbpmi_indicators",
+	"m_srcTableName" => "public.lbpmi_indicators"
+));
+
+$proto30["m_sql"] = "created_at";
+$proto30["m_srcTableName"] = "public.lbpmi_indicators";
+$proto30["m_expr"]=$obj;
+$proto30["m_alias"] = "";
+$obj = new SQLFieldListItem($proto30);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto32=array();
+			$obj = new SQLField(array(
+	"m_strName" => "updated_at",
+	"m_strTable" => "public.lbpmi_indicators",
+	"m_srcTableName" => "public.lbpmi_indicators"
+));
+
+$proto32["m_sql"] = "updated_at";
+$proto32["m_srcTableName"] = "public.lbpmi_indicators";
+$proto32["m_expr"]=$obj;
+$proto32["m_alias"] = "";
+$obj = new SQLFieldListItem($proto32);
+
+$proto0["m_fieldlist"][]=$obj;
+$proto0["m_fromlist"] = array();
+												$proto34=array();
+$proto34["m_link"] = "SQLL_MAIN";
+			$proto35=array();
+$proto35["m_strName"] = "public.lbpmi_indicators";
+$proto35["m_srcTableName"] = "public.lbpmi_indicators";
+$proto35["m_columns"] = array();
+$proto35["m_columns"][] = "indicator_id";
+$proto35["m_columns"][] = "indicator_name";
+$proto35["m_columns"][] = "indicator_description";
+$proto35["m_columns"][] = "indicator_code";
+$proto35["m_columns"][] = "indicator_type";
+$proto35["m_columns"][] = "numerator_description";
+$proto35["m_columns"][] = "denominator_description";
+$proto35["m_columns"][] = "formula";
+$proto35["m_columns"][] = "annualized";
+$proto35["m_columns"][] = "decimals";
+$proto35["m_columns"][] = "is_active";
+$proto35["m_columns"][] = "created_by";
+$proto35["m_columns"][] = "created_at";
+$proto35["m_columns"][] = "updated_at";
+$obj = new SQLTable($proto35);
+
+$proto34["m_table"] = $obj;
+$proto34["m_sql"] = "\"public\".lbpmi_indicators";
+$proto34["m_alias"] = "";
+$proto34["m_srcTableName"] = "public.lbpmi_indicators";
+$proto36=array();
+$proto36["m_sql"] = "";
+$proto36["m_uniontype"] = "SQLL_UNKNOWN";
 	$obj = new SQLNonParsed(array(
 	"m_sql" => ""
 ));
 
-$proto28["m_column"]=$obj;
-$proto28["m_contained"] = array();
-$proto28["m_strCase"] = "";
-$proto28["m_havingmode"] = false;
-$proto28["m_inBrackets"] = false;
-$proto28["m_useAlias"] = false;
-$obj = new SQLLogicalExpr($proto28);
+$proto36["m_column"]=$obj;
+$proto36["m_contained"] = array();
+$proto36["m_strCase"] = "";
+$proto36["m_havingmode"] = false;
+$proto36["m_inBrackets"] = false;
+$proto36["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto36);
 
-$proto26["m_joinon"] = $obj;
-$obj = new SQLFromListItem($proto26);
+$proto34["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto34);
 
 $proto0["m_fromlist"][]=$obj;
 $proto0["m_groupby"] = array();
@@ -2080,7 +2679,7 @@ $queryData_lbpmi_indicators = createSqlQuery_lbpmi_indicators();
 	
 				;
 
-										
+														
 
 $tdatalbpmi_indicators[".sqlquery"] = $queryData_lbpmi_indicators;
 
