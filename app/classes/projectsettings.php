@@ -3786,6 +3786,8 @@ function fillProjectEntites()
 	$projectEntitiesReverse[ "lbpmi_domain_type" ] = "public.lbpmi_domain_type";
 	$projectEntities[ "public.lbpmi_indicator_types" ] = array( "url" => "lbpmi_indicator_types", "type" => 0 );
 	$projectEntitiesReverse[ "lbpmi_indicator_types" ] = "public.lbpmi_indicator_types";
+	$projectEntities[ "public.lbpmi_indicator_groups" ] = array( "url" => "lbpmi_indicator_groups", "type" => 0 );
+	$projectEntitiesReverse[ "lbpmi_indicator_groups" ] = "public.lbpmi_indicator_groups";
 }
 
 function findTable( $table ) {

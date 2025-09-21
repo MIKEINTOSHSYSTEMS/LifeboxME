@@ -14,6 +14,8 @@ $dalTablelbpmi_indicators["is_active"] = array("type"=>11,"varname"=>"is_active"
 $dalTablelbpmi_indicators["created_by"] = array("type"=>3,"varname"=>"created_by", "name" => "created_by", "autoInc" => "0");
 $dalTablelbpmi_indicators["created_at"] = array("type"=>135,"varname"=>"created_at", "name" => "created_at", "autoInc" => "0");
 $dalTablelbpmi_indicators["updated_at"] = array("type"=>135,"varname"=>"updated_at", "name" => "updated_at", "autoInc" => "0");
+$dalTablelbpmi_indicators["indicator_group_id"] = array("type"=>3,"varname"=>"indicator_group_id", "name" => "indicator_group_id", "autoInc" => "0");
+$dalTablelbpmi_indicators["dataset_id"] = array("type"=>3,"varname"=>"dataset_id", "name" => "dataset_id", "autoInc" => "0");
 $dalTablelbpmi_indicators["indicator_id"]["key"]=true;
 
 $dal_info["lifebox_mesystem_at_localhost_public_lbpmi_indicators"] = &$dalTablelbpmi_indicators;

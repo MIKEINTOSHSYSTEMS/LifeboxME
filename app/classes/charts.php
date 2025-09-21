@@ -586,6 +586,8 @@ class Chart
 			return true;
 		if("public.lbpmi_indicator_types" == $this->chrt_array['tables'][0])
 			return true;
+		if("public.lbpmi_indicator_groups" == $this->chrt_array['tables'][0])
+			return true;
 		return false;
 	}
 

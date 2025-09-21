@@ -826,6 +826,10 @@ class AuditTrailTable
 		{
 			return false;
 		}
+		if($table=="public.lbpmi_indicator_groups")
+		{
+			return false;
+		}
 	}
 
 	protected function insert($datetime, $ip, $user, $table, $action, $description)
@@ -1601,6 +1605,10 @@ class AuditTrailFile
 			return false;
 		}
 		if($table=="public.lbpmi_indicator_types")
+		{
+			return false;
+		}
+		if($table=="public.lbpmi_indicator_groups")
 		{
 			return false;
 		}

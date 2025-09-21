@@ -1,5 +1,7 @@
 <?php
 			$optionsArray = array( 'pdf' => array( 'pdfView' => false ),
+'details' => array( 'public.lbpmi_indicators' => array( 'displayPreview' => 2,
+'previewPageId' => '' ) ),
 'fields' => array( 'gridFields' => array( 'dataset_id',
 'dataset_name',
 'dataset_description',

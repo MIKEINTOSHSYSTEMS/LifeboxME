@@ -167,7 +167,13 @@ pdfDocument = {
 			"stack": [
 		
 				
+			{"hidden":"{$item_hide_integrated_edit_field15}","stack":[{"text":"{$jslabel public_lbpmi_indicators dataset_id }","bold":true},{"text":{$dataset_id_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
 			{"hidden":"{$item_hide_integrated_edit_field}","stack":[{"text":"{$jslabel public_lbpmi_indicators indicator_id }","bold":true},{"text":{$indicator_id_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field14}","stack":[{"text":"{$jslabel public_lbpmi_indicators indicator_group_id }","bold":true},{"text":{$indicator_group_id_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
 			{"hidden":"{$item_hide_integrated_edit_field2}","stack":[{"text":"{$jslabel public_lbpmi_indicators indicator_name }","bold":true},{"text":{$indicator_name_pdfvalue}}],"margin":[0,0,0,15]},

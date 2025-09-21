@@ -1,5 +1,7 @@
 <?php
-			$optionsArray = array( 'captcha' => array( 'captcha' => false ),
+			$optionsArray = array( 'details' => array( 'public.lbpmi_indicators' => array( 'displayPreview' => 2,
+'previewPageId' => '' ) ),
+'captcha' => array( 'captcha' => false ),
 'fields' => array( 'gridFields' => array( 'dataset_name',
 'dataset_description',
 'dataset_code',

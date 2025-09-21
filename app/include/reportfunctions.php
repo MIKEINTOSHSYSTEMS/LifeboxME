@@ -734,6 +734,10 @@ function testAdvSearch($table)
 		{
 			return 1;
 		}
+		if($table=="public.lbpmi_indicator_groups")
+		{
+			return 1;
+		}
 	}
 	elseif(is_wr_db())
 	{
@@ -1402,6 +1406,10 @@ function getCaptionTable($table)
 	if($table=="public.lbpmi_indicator_types")
 	{
 		return "Lbpmi Indicator Types";
+	}
+	if($table=="public.lbpmi_indicator_groups")
+	{
+		return "Lbpmi Indicator Groups";
 	}
 	return $table;
 }
@@ -3428,6 +3436,18 @@ function GetTablesListReport()
 		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
 		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
 			$arr[]="public.lbpmi_indicator_types";
+	}
+	if( Security::permissionsAvailable() ) {
+		$strPerm = GetUserPermissions("public.lbpmi_indicator_groups");
+		$securityFlag = strpos($strPerm, "P") !== false || strpos($strPerm, "S") !== false;
+	}
+	if($securityFlag)
+	{
+		$value="public.lbpmi_indicator_groups";
+		if(substr($value,-6)!="_audit" && substr($value,-8)!="_locking" && substr($value,-9)!="_ugrights" && substr($value,-9)!="_uggroups"
+		&& substr($value,-10)!="_ugmembers" && $value!="admin_rights" && $value!="admin_users"
+		&& $value!="admin_members" && $value!="webreports" && $value!="webreport_style" && $value!="webreport_settings" && $value!="webreport_admin" && $value!="webreport_sql")
+			$arr[]="public.lbpmi_indicator_groups";
 	}
 	return $arr;
 }

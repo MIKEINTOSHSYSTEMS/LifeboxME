@@ -151,6 +151,15 @@ if(mlang_getcurrentlang()=="English")
 	$fieldLabelslbpmi_summary["English"]["legacy_performance_status"] = "Legacy Performance Status";
 	$fieldToolTipslbpmi_summary["English"]["legacy_performance_status"] = "";
 	$placeHolderslbpmi_summary["English"]["legacy_performance_status"] = "";
+	$fieldLabelslbpmi_summary["English"]["indicator_group_id"] = "Indicator Group Id";
+	$fieldToolTipslbpmi_summary["English"]["indicator_group_id"] = "";
+	$placeHolderslbpmi_summary["English"]["indicator_group_id"] = "";
+	$fieldLabelslbpmi_summary["English"]["indicator_group_code"] = "Indicator Group Code";
+	$fieldToolTipslbpmi_summary["English"]["indicator_group_code"] = "";
+	$placeHolderslbpmi_summary["English"]["indicator_group_code"] = "";
+	$fieldLabelslbpmi_summary["English"]["indicator_group_name"] = "Indicator Group Name";
+	$fieldToolTipslbpmi_summary["English"]["indicator_group_name"] = "";
+	$placeHolderslbpmi_summary["English"]["indicator_group_name"] = "";
 	if (count($fieldToolTipslbpmi_summary["English"]))
 		$tdatalbpmi_summary[".isUseToolTips"] = true;
 }
@@ -268,6 +277,9 @@ $tdatalbpmi_summary[".filterFields"] = array();
 $tdatalbpmi_summary[".requiredSearchFields"] = array();
 
 $tdatalbpmi_summary[".googleLikeFields"] = array();
+$tdatalbpmi_summary[".googleLikeFields"][] = "indicator_group_id";
+$tdatalbpmi_summary[".googleLikeFields"][] = "indicator_group_name";
+$tdatalbpmi_summary[".googleLikeFields"][] = "indicator_group_code";
 $tdatalbpmi_summary[".googleLikeFields"][] = "indicator_id";
 $tdatalbpmi_summary[".googleLikeFields"][] = "indicator_name";
 $tdatalbpmi_summary[".googleLikeFields"][] = "indicator_code";
@@ -343,7 +355,7 @@ $tdatalbpmi_summary[".strOrderBy"] = $tstrOrderBy;
 $tdatalbpmi_summary[".orderindexes"] = array();
 
 
-$tdatalbpmi_summary[".sqlHead"] = "SELECT indicator_id,  	indicator_name,  	indicator_code,  	indicator_type,  	formula,  	period_type,  	period_year,  	period_quarter,  	period_month,  	region_id,  	region_name,  	country_id,  	country_name,  	facility_id,  	facility_name,  	actual_value,  	target_value,  	\"variance\",  	variance_percentage,  	calculation_timestamp,  	is_calculated,  	decimals,  	annualized,  	data_completeness,  	overall_completion_percentage,  	actual_value_completion,  	target_value_completion,  	completion_status,  	is_actual_missing,  	is_target_missing,  	data_freshness,  	days_since_last_calculation,  	performance_status,  	performance_percentage,  	data_quality_flag,  	data_hierarchy_level,  	period_completeness,  	calculation_method,  	formula_type,  	org_unit_validity,  	period_validity,  	legacy_performance_status";
+$tdatalbpmi_summary[".sqlHead"] = "SELECT indicator_group_id,  	indicator_group_name,  	indicator_group_code,  	indicator_id,  	indicator_name,  	indicator_code,  	indicator_type,  	formula,  	period_type,  	period_year,  	period_quarter,  	period_month,  	region_id,  	region_name,  	country_id,  	country_name,  	facility_id,  	facility_name,  	actual_value,  	target_value,  	\"variance\",  	variance_percentage,  	calculation_timestamp,  	is_calculated,  	decimals,  	annualized,  	data_completeness,  	overall_completion_percentage,  	actual_value_completion,  	target_value_completion,  	completion_status,  	is_actual_missing,  	is_target_missing,  	data_freshness,  	days_since_last_calculation,  	performance_status,  	performance_percentage,  	data_quality_flag,  	data_hierarchy_level,  	period_completeness,  	calculation_method,  	formula_type,  	org_unit_validity,  	period_validity,  	legacy_performance_status";
 $tdatalbpmi_summary[".sqlFrom"] = "FROM \"public\".lbpmi_summary";
 $tdatalbpmi_summary[".sqlWhereExpr"] = "";
 $tdatalbpmi_summary[".sqlTail"] = "";
@@ -390,10 +402,425 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 
 
 
-//	indicator_id
+//	indicator_group_id
 //	Custom field settings
 	$fdata = array();
 	$fdata["Index"] = 1;
+	$fdata["strName"] = "indicator_group_id";
+	$fdata["GoodName"] = "indicator_group_id";
+	$fdata["ownerTable"] = "public.lbpmi_summary";
+	$fdata["Label"] = GetFieldLabel("public_lbpmi_summary","indicator_group_id");
+	$fdata["FieldType"] = 3;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "indicator_group_id";
+
+		$fdata["sourceSingle"] = "indicator_group_id";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "indicator_group_id";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+				$edata["validateAs"]["basicValidate"][] = getJsValidatorName("Number");
+							
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatalbpmi_summary["indicator_group_id"] = $fdata;
+		$tdatalbpmi_summary[".searchableFields"][] = "indicator_group_id";
+//	indicator_group_name
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 2;
+	$fdata["strName"] = "indicator_group_name";
+	$fdata["GoodName"] = "indicator_group_name";
+	$fdata["ownerTable"] = "public.lbpmi_summary";
+	$fdata["Label"] = GetFieldLabel("public_lbpmi_summary","indicator_group_name");
+	$fdata["FieldType"] = 200;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "indicator_group_name";
+
+		$fdata["sourceSingle"] = "indicator_group_name";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "indicator_group_name";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatalbpmi_summary["indicator_group_name"] = $fdata;
+		$tdatalbpmi_summary[".searchableFields"][] = "indicator_group_name";
+//	indicator_group_code
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 3;
+	$fdata["strName"] = "indicator_group_code";
+	$fdata["GoodName"] = "indicator_group_code";
+	$fdata["ownerTable"] = "public.lbpmi_summary";
+	$fdata["Label"] = GetFieldLabel("public_lbpmi_summary","indicator_group_code");
+	$fdata["FieldType"] = 200;
+
+
+	
+	
+			
+
+		$fdata["strField"] = "indicator_group_code";
+
+		$fdata["sourceSingle"] = "indicator_group_code";
+
+	
+		$fdata["isSQLExpression"] = true;
+	$fdata["FullName"] = "indicator_group_code";
+
+	
+	
+				$fdata["UploadFolder"] = "files";
+
+//  Begin View Formats
+	$fdata["ViewFormats"] = array();
+
+	$vdata = array("ViewFormat" => "");
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		$vdata["NeedEncode"] = true;
+
+	
+		$vdata["truncateText"] = true;
+	$vdata["NumberOfChars"] = 80;
+
+	$fdata["ViewFormats"]["view"] = $vdata;
+//  End View Formats
+
+//	Begin Edit Formats
+	$fdata["EditFormats"] = array();
+
+	$edata = array("EditFormat" => "Text field");
+
+	
+		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
+	$edata["weekdays"] = "[]";
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+			$edata["acceptFileTypesHtml"] = "";
+
+		$edata["maxNumberOfFiles"] = 1;
+
+	
+	
+	
+	
+			$edata["HTML5InuptType"] = "text";
+
+		$edata["EditParams"] = "";
+		
+		$edata["controlWidth"] = 200;
+
+//	Begin validation
+	$edata["validateAs"] = array();
+	$edata["validateAs"]["basicValidate"] = array();
+	$edata["validateAs"]["customMessages"] = array();
+	
+	
+//	End validation
+
+	
+			
+	
+	
+	
+	$fdata["EditFormats"]["edit"] = $edata;
+//	End Edit Formats
+
+
+	$fdata["isSeparate"] = false;
+
+
+
+
+// the field's search options settings
+		$fdata["defaultSearchOption"] = "Contains";
+
+			// the default search options list
+				$fdata["searchOptionsList"] = array("Contains", "Equals", "Starts with", "More than", "Less than", "Between", "Empty", NOT_EMPTY);
+// the end of search options settings
+
+
+//Filters settings
+	$fdata["filterTotals"] = 0;
+		$fdata["filterMultiSelect"] = 0;
+			$fdata["filterFormat"] = "Values list";
+		$fdata["showCollapsed"] = false;
+
+		$fdata["sortValueType"] = 0;
+		$fdata["numberOfVisibleItems"] = 10;
+
+		$fdata["filterBy"] = 0;
+
+	
+
+	
+	
+//end of Filters settings
+
+
+	$tdatalbpmi_summary["indicator_group_code"] = $fdata;
+		$tdatalbpmi_summary[".searchableFields"][] = "indicator_group_code";
+//	indicator_id
+//	Custom field settings
+	$fdata = array();
+	$fdata["Index"] = 4;
 	$fdata["strName"] = "indicator_id";
 	$fdata["GoodName"] = "indicator_id";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -532,7 +959,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	indicator_name
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 2;
+	$fdata["Index"] = 5;
 	$fdata["strName"] = "indicator_name";
 	$fdata["GoodName"] = "indicator_name";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -671,7 +1098,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	indicator_code
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 3;
+	$fdata["Index"] = 6;
 	$fdata["strName"] = "indicator_code";
 	$fdata["GoodName"] = "indicator_code";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -810,7 +1237,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	indicator_type
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 4;
+	$fdata["Index"] = 7;
 	$fdata["strName"] = "indicator_type";
 	$fdata["GoodName"] = "indicator_type";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -949,7 +1376,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	formula
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 5;
+	$fdata["Index"] = 8;
 	$fdata["strName"] = "formula";
 	$fdata["GoodName"] = "formula";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -1090,7 +1517,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	period_type
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 6;
+	$fdata["Index"] = 9;
 	$fdata["strName"] = "period_type";
 	$fdata["GoodName"] = "period_type";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -1229,7 +1656,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	period_year
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 7;
+	$fdata["Index"] = 10;
 	$fdata["strName"] = "period_year";
 	$fdata["GoodName"] = "period_year";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -1368,7 +1795,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	period_quarter
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 8;
+	$fdata["Index"] = 11;
 	$fdata["strName"] = "period_quarter";
 	$fdata["GoodName"] = "period_quarter";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -1507,7 +1934,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	period_month
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 9;
+	$fdata["Index"] = 12;
 	$fdata["strName"] = "period_month";
 	$fdata["GoodName"] = "period_month";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -1646,7 +2073,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	region_id
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 10;
+	$fdata["Index"] = 13;
 	$fdata["strName"] = "region_id";
 	$fdata["GoodName"] = "region_id";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -1785,7 +2212,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	region_name
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 11;
+	$fdata["Index"] = 14;
 	$fdata["strName"] = "region_name";
 	$fdata["GoodName"] = "region_name";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -1924,7 +2351,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	country_id
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 12;
+	$fdata["Index"] = 15;
 	$fdata["strName"] = "country_id";
 	$fdata["GoodName"] = "country_id";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -2063,7 +2490,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	country_name
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 13;
+	$fdata["Index"] = 16;
 	$fdata["strName"] = "country_name";
 	$fdata["GoodName"] = "country_name";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -2202,7 +2629,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	facility_id
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 14;
+	$fdata["Index"] = 17;
 	$fdata["strName"] = "facility_id";
 	$fdata["GoodName"] = "facility_id";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -2341,7 +2768,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	facility_name
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 15;
+	$fdata["Index"] = 18;
 	$fdata["strName"] = "facility_name";
 	$fdata["GoodName"] = "facility_name";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -2480,7 +2907,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	actual_value
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 16;
+	$fdata["Index"] = 19;
 	$fdata["strName"] = "actual_value";
 	$fdata["GoodName"] = "actual_value";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -2620,7 +3047,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	target_value
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 17;
+	$fdata["Index"] = 20;
 	$fdata["strName"] = "target_value";
 	$fdata["GoodName"] = "target_value";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -2760,7 +3187,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	variance
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 18;
+	$fdata["Index"] = 21;
 	$fdata["strName"] = "variance";
 	$fdata["GoodName"] = "variance";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -2900,7 +3327,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	variance_percentage
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 19;
+	$fdata["Index"] = 22;
 	$fdata["strName"] = "variance_percentage";
 	$fdata["GoodName"] = "variance_percentage";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -3040,7 +3467,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	calculation_timestamp
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 20;
+	$fdata["Index"] = 23;
 	$fdata["strName"] = "calculation_timestamp";
 	$fdata["GoodName"] = "calculation_timestamp";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -3179,7 +3606,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	is_calculated
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 21;
+	$fdata["Index"] = 24;
 	$fdata["strName"] = "is_calculated";
 	$fdata["GoodName"] = "is_calculated";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -3312,7 +3739,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	decimals
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 22;
+	$fdata["Index"] = 25;
 	$fdata["strName"] = "decimals";
 	$fdata["GoodName"] = "decimals";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -3451,7 +3878,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	annualized
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 23;
+	$fdata["Index"] = 26;
 	$fdata["strName"] = "annualized";
 	$fdata["GoodName"] = "annualized";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -3584,7 +4011,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	data_completeness
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 24;
+	$fdata["Index"] = 27;
 	$fdata["strName"] = "data_completeness";
 	$fdata["GoodName"] = "data_completeness";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -3723,7 +4150,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	overall_completion_percentage
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 25;
+	$fdata["Index"] = 28;
 	$fdata["strName"] = "overall_completion_percentage";
 	$fdata["GoodName"] = "overall_completion_percentage";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -3862,7 +4289,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	actual_value_completion
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 26;
+	$fdata["Index"] = 29;
 	$fdata["strName"] = "actual_value_completion";
 	$fdata["GoodName"] = "actual_value_completion";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -4001,7 +4428,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	target_value_completion
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 27;
+	$fdata["Index"] = 30;
 	$fdata["strName"] = "target_value_completion";
 	$fdata["GoodName"] = "target_value_completion";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -4140,7 +4567,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	completion_status
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 28;
+	$fdata["Index"] = 31;
 	$fdata["strName"] = "completion_status";
 	$fdata["GoodName"] = "completion_status";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -4281,7 +4708,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	is_actual_missing
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 29;
+	$fdata["Index"] = 32;
 	$fdata["strName"] = "is_actual_missing";
 	$fdata["GoodName"] = "is_actual_missing";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -4420,7 +4847,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	is_target_missing
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 30;
+	$fdata["Index"] = 33;
 	$fdata["strName"] = "is_target_missing";
 	$fdata["GoodName"] = "is_target_missing";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -4559,7 +4986,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	data_freshness
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 31;
+	$fdata["Index"] = 34;
 	$fdata["strName"] = "data_freshness";
 	$fdata["GoodName"] = "data_freshness";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -4700,7 +5127,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	days_since_last_calculation
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 32;
+	$fdata["Index"] = 35;
 	$fdata["strName"] = "days_since_last_calculation";
 	$fdata["GoodName"] = "days_since_last_calculation";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -4840,7 +5267,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	performance_status
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 33;
+	$fdata["Index"] = 36;
 	$fdata["strName"] = "performance_status";
 	$fdata["GoodName"] = "performance_status";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -4981,7 +5408,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	performance_percentage
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 34;
+	$fdata["Index"] = 37;
 	$fdata["strName"] = "performance_percentage";
 	$fdata["GoodName"] = "performance_percentage";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -5121,7 +5548,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	data_quality_flag
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 35;
+	$fdata["Index"] = 38;
 	$fdata["strName"] = "data_quality_flag";
 	$fdata["GoodName"] = "data_quality_flag";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -5262,7 +5689,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	data_hierarchy_level
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 36;
+	$fdata["Index"] = 39;
 	$fdata["strName"] = "data_hierarchy_level";
 	$fdata["GoodName"] = "data_hierarchy_level";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -5403,7 +5830,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	period_completeness
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 37;
+	$fdata["Index"] = 40;
 	$fdata["strName"] = "period_completeness";
 	$fdata["GoodName"] = "period_completeness";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -5544,7 +5971,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	calculation_method
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 38;
+	$fdata["Index"] = 41;
 	$fdata["strName"] = "calculation_method";
 	$fdata["GoodName"] = "calculation_method";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -5685,7 +6112,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	formula_type
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 39;
+	$fdata["Index"] = 42;
 	$fdata["strName"] = "formula_type";
 	$fdata["GoodName"] = "formula_type";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -5826,7 +6253,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	org_unit_validity
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 40;
+	$fdata["Index"] = 43;
 	$fdata["strName"] = "org_unit_validity";
 	$fdata["GoodName"] = "org_unit_validity";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -5967,7 +6394,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	period_validity
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 41;
+	$fdata["Index"] = 44;
 	$fdata["strName"] = "period_validity";
 	$fdata["GoodName"] = "period_validity";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -6108,7 +6535,7 @@ $tdatalbpmi_summary[".hideMobileList"] = array();
 //	legacy_performance_status
 //	Custom field settings
 	$fdata = array();
-	$fdata["Index"] = 42;
+	$fdata["Index"] = 45;
 	$fdata["strName"] = "legacy_performance_status";
 	$fdata["GoodName"] = "legacy_performance_status";
 	$fdata["ownerTable"] = "public.lbpmi_summary";
@@ -6290,7 +6717,7 @@ function createSqlQuery_lbpmi_summary()
 {
 $proto0=array();
 $proto0["m_strHead"] = "SELECT";
-$proto0["m_strFieldList"] = "indicator_id,  	indicator_name,  	indicator_code,  	indicator_type,  	formula,  	period_type,  	period_year,  	period_quarter,  	period_month,  	region_id,  	region_name,  	country_id,  	country_name,  	facility_id,  	facility_name,  	actual_value,  	target_value,  	\"variance\",  	variance_percentage,  	calculation_timestamp,  	is_calculated,  	decimals,  	annualized,  	data_completeness,  	overall_completion_percentage,  	actual_value_completion,  	target_value_completion,  	completion_status,  	is_actual_missing,  	is_target_missing,  	data_freshness,  	days_since_last_calculation,  	performance_status,  	performance_percentage,  	data_quality_flag,  	data_hierarchy_level,  	period_completeness,  	calculation_method,  	formula_type,  	org_unit_validity,  	period_validity,  	legacy_performance_status";
+$proto0["m_strFieldList"] = "indicator_group_id,  	indicator_group_name,  	indicator_group_code,  	indicator_id,  	indicator_name,  	indicator_code,  	indicator_type,  	formula,  	period_type,  	period_year,  	period_quarter,  	period_month,  	region_id,  	region_name,  	country_id,  	country_name,  	facility_id,  	facility_name,  	actual_value,  	target_value,  	\"variance\",  	variance_percentage,  	calculation_timestamp,  	is_calculated,  	decimals,  	annualized,  	data_completeness,  	overall_completion_percentage,  	actual_value_completion,  	target_value_completion,  	completion_status,  	is_actual_missing,  	is_target_missing,  	data_freshness,  	days_since_last_calculation,  	performance_status,  	performance_percentage,  	data_quality_flag,  	data_hierarchy_level,  	period_completeness,  	calculation_method,  	formula_type,  	org_unit_validity,  	period_validity,  	legacy_performance_status";
 $proto0["m_strFrom"] = "FROM \"public\".lbpmi_summary";
 $proto0["m_strWhere"] = "";
 $proto0["m_strOrderBy"] = "";
@@ -6332,12 +6759,12 @@ $proto0["m_having"] = $obj;
 $proto0["m_fieldlist"] = array();
 						$proto6=array();
 			$obj = new SQLField(array(
-	"m_strName" => "indicator_id",
+	"m_strName" => "indicator_group_id",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto6["m_sql"] = "indicator_id";
+$proto6["m_sql"] = "indicator_group_id";
 $proto6["m_srcTableName"] = "public.lbpmi_summary";
 $proto6["m_expr"]=$obj;
 $proto6["m_alias"] = "";
@@ -6346,12 +6773,12 @@ $obj = new SQLFieldListItem($proto6);
 $proto0["m_fieldlist"][]=$obj;
 						$proto8=array();
 			$obj = new SQLField(array(
-	"m_strName" => "indicator_name",
+	"m_strName" => "indicator_group_name",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto8["m_sql"] = "indicator_name";
+$proto8["m_sql"] = "indicator_group_name";
 $proto8["m_srcTableName"] = "public.lbpmi_summary";
 $proto8["m_expr"]=$obj;
 $proto8["m_alias"] = "";
@@ -6360,12 +6787,12 @@ $obj = new SQLFieldListItem($proto8);
 $proto0["m_fieldlist"][]=$obj;
 						$proto10=array();
 			$obj = new SQLField(array(
-	"m_strName" => "indicator_code",
+	"m_strName" => "indicator_group_code",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto10["m_sql"] = "indicator_code";
+$proto10["m_sql"] = "indicator_group_code";
 $proto10["m_srcTableName"] = "public.lbpmi_summary";
 $proto10["m_expr"]=$obj;
 $proto10["m_alias"] = "";
@@ -6374,12 +6801,12 @@ $obj = new SQLFieldListItem($proto10);
 $proto0["m_fieldlist"][]=$obj;
 						$proto12=array();
 			$obj = new SQLField(array(
-	"m_strName" => "indicator_type",
+	"m_strName" => "indicator_id",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto12["m_sql"] = "indicator_type";
+$proto12["m_sql"] = "indicator_id";
 $proto12["m_srcTableName"] = "public.lbpmi_summary";
 $proto12["m_expr"]=$obj;
 $proto12["m_alias"] = "";
@@ -6388,12 +6815,12 @@ $obj = new SQLFieldListItem($proto12);
 $proto0["m_fieldlist"][]=$obj;
 						$proto14=array();
 			$obj = new SQLField(array(
-	"m_strName" => "formula",
+	"m_strName" => "indicator_name",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto14["m_sql"] = "formula";
+$proto14["m_sql"] = "indicator_name";
 $proto14["m_srcTableName"] = "public.lbpmi_summary";
 $proto14["m_expr"]=$obj;
 $proto14["m_alias"] = "";
@@ -6402,12 +6829,12 @@ $obj = new SQLFieldListItem($proto14);
 $proto0["m_fieldlist"][]=$obj;
 						$proto16=array();
 			$obj = new SQLField(array(
-	"m_strName" => "period_type",
+	"m_strName" => "indicator_code",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto16["m_sql"] = "period_type";
+$proto16["m_sql"] = "indicator_code";
 $proto16["m_srcTableName"] = "public.lbpmi_summary";
 $proto16["m_expr"]=$obj;
 $proto16["m_alias"] = "";
@@ -6416,12 +6843,12 @@ $obj = new SQLFieldListItem($proto16);
 $proto0["m_fieldlist"][]=$obj;
 						$proto18=array();
 			$obj = new SQLField(array(
-	"m_strName" => "period_year",
+	"m_strName" => "indicator_type",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto18["m_sql"] = "period_year";
+$proto18["m_sql"] = "indicator_type";
 $proto18["m_srcTableName"] = "public.lbpmi_summary";
 $proto18["m_expr"]=$obj;
 $proto18["m_alias"] = "";
@@ -6430,12 +6857,12 @@ $obj = new SQLFieldListItem($proto18);
 $proto0["m_fieldlist"][]=$obj;
 						$proto20=array();
 			$obj = new SQLField(array(
-	"m_strName" => "period_quarter",
+	"m_strName" => "formula",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto20["m_sql"] = "period_quarter";
+$proto20["m_sql"] = "formula";
 $proto20["m_srcTableName"] = "public.lbpmi_summary";
 $proto20["m_expr"]=$obj;
 $proto20["m_alias"] = "";
@@ -6444,12 +6871,12 @@ $obj = new SQLFieldListItem($proto20);
 $proto0["m_fieldlist"][]=$obj;
 						$proto22=array();
 			$obj = new SQLField(array(
-	"m_strName" => "period_month",
+	"m_strName" => "period_type",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto22["m_sql"] = "period_month";
+$proto22["m_sql"] = "period_type";
 $proto22["m_srcTableName"] = "public.lbpmi_summary";
 $proto22["m_expr"]=$obj;
 $proto22["m_alias"] = "";
@@ -6458,12 +6885,12 @@ $obj = new SQLFieldListItem($proto22);
 $proto0["m_fieldlist"][]=$obj;
 						$proto24=array();
 			$obj = new SQLField(array(
-	"m_strName" => "region_id",
+	"m_strName" => "period_year",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto24["m_sql"] = "region_id";
+$proto24["m_sql"] = "period_year";
 $proto24["m_srcTableName"] = "public.lbpmi_summary";
 $proto24["m_expr"]=$obj;
 $proto24["m_alias"] = "";
@@ -6472,12 +6899,12 @@ $obj = new SQLFieldListItem($proto24);
 $proto0["m_fieldlist"][]=$obj;
 						$proto26=array();
 			$obj = new SQLField(array(
-	"m_strName" => "region_name",
+	"m_strName" => "period_quarter",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto26["m_sql"] = "region_name";
+$proto26["m_sql"] = "period_quarter";
 $proto26["m_srcTableName"] = "public.lbpmi_summary";
 $proto26["m_expr"]=$obj;
 $proto26["m_alias"] = "";
@@ -6486,12 +6913,12 @@ $obj = new SQLFieldListItem($proto26);
 $proto0["m_fieldlist"][]=$obj;
 						$proto28=array();
 			$obj = new SQLField(array(
-	"m_strName" => "country_id",
+	"m_strName" => "period_month",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto28["m_sql"] = "country_id";
+$proto28["m_sql"] = "period_month";
 $proto28["m_srcTableName"] = "public.lbpmi_summary";
 $proto28["m_expr"]=$obj;
 $proto28["m_alias"] = "";
@@ -6500,12 +6927,12 @@ $obj = new SQLFieldListItem($proto28);
 $proto0["m_fieldlist"][]=$obj;
 						$proto30=array();
 			$obj = new SQLField(array(
-	"m_strName" => "country_name",
+	"m_strName" => "region_id",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto30["m_sql"] = "country_name";
+$proto30["m_sql"] = "region_id";
 $proto30["m_srcTableName"] = "public.lbpmi_summary";
 $proto30["m_expr"]=$obj;
 $proto30["m_alias"] = "";
@@ -6514,12 +6941,12 @@ $obj = new SQLFieldListItem($proto30);
 $proto0["m_fieldlist"][]=$obj;
 						$proto32=array();
 			$obj = new SQLField(array(
-	"m_strName" => "facility_id",
+	"m_strName" => "region_name",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto32["m_sql"] = "facility_id";
+$proto32["m_sql"] = "region_name";
 $proto32["m_srcTableName"] = "public.lbpmi_summary";
 $proto32["m_expr"]=$obj;
 $proto32["m_alias"] = "";
@@ -6528,12 +6955,12 @@ $obj = new SQLFieldListItem($proto32);
 $proto0["m_fieldlist"][]=$obj;
 						$proto34=array();
 			$obj = new SQLField(array(
-	"m_strName" => "facility_name",
+	"m_strName" => "country_id",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto34["m_sql"] = "facility_name";
+$proto34["m_sql"] = "country_id";
 $proto34["m_srcTableName"] = "public.lbpmi_summary";
 $proto34["m_expr"]=$obj;
 $proto34["m_alias"] = "";
@@ -6542,12 +6969,12 @@ $obj = new SQLFieldListItem($proto34);
 $proto0["m_fieldlist"][]=$obj;
 						$proto36=array();
 			$obj = new SQLField(array(
-	"m_strName" => "actual_value",
+	"m_strName" => "country_name",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto36["m_sql"] = "actual_value";
+$proto36["m_sql"] = "country_name";
 $proto36["m_srcTableName"] = "public.lbpmi_summary";
 $proto36["m_expr"]=$obj;
 $proto36["m_alias"] = "";
@@ -6556,12 +6983,12 @@ $obj = new SQLFieldListItem($proto36);
 $proto0["m_fieldlist"][]=$obj;
 						$proto38=array();
 			$obj = new SQLField(array(
-	"m_strName" => "target_value",
+	"m_strName" => "facility_id",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto38["m_sql"] = "target_value";
+$proto38["m_sql"] = "facility_id";
 $proto38["m_srcTableName"] = "public.lbpmi_summary";
 $proto38["m_expr"]=$obj;
 $proto38["m_alias"] = "";
@@ -6570,12 +6997,12 @@ $obj = new SQLFieldListItem($proto38);
 $proto0["m_fieldlist"][]=$obj;
 						$proto40=array();
 			$obj = new SQLField(array(
-	"m_strName" => "variance",
+	"m_strName" => "facility_name",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto40["m_sql"] = "\"variance\"";
+$proto40["m_sql"] = "facility_name";
 $proto40["m_srcTableName"] = "public.lbpmi_summary";
 $proto40["m_expr"]=$obj;
 $proto40["m_alias"] = "";
@@ -6584,12 +7011,12 @@ $obj = new SQLFieldListItem($proto40);
 $proto0["m_fieldlist"][]=$obj;
 						$proto42=array();
 			$obj = new SQLField(array(
-	"m_strName" => "variance_percentage",
+	"m_strName" => "actual_value",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto42["m_sql"] = "variance_percentage";
+$proto42["m_sql"] = "actual_value";
 $proto42["m_srcTableName"] = "public.lbpmi_summary";
 $proto42["m_expr"]=$obj;
 $proto42["m_alias"] = "";
@@ -6598,12 +7025,12 @@ $obj = new SQLFieldListItem($proto42);
 $proto0["m_fieldlist"][]=$obj;
 						$proto44=array();
 			$obj = new SQLField(array(
-	"m_strName" => "calculation_timestamp",
+	"m_strName" => "target_value",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto44["m_sql"] = "calculation_timestamp";
+$proto44["m_sql"] = "target_value";
 $proto44["m_srcTableName"] = "public.lbpmi_summary";
 $proto44["m_expr"]=$obj;
 $proto44["m_alias"] = "";
@@ -6612,12 +7039,12 @@ $obj = new SQLFieldListItem($proto44);
 $proto0["m_fieldlist"][]=$obj;
 						$proto46=array();
 			$obj = new SQLField(array(
-	"m_strName" => "is_calculated",
+	"m_strName" => "variance",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto46["m_sql"] = "is_calculated";
+$proto46["m_sql"] = "\"variance\"";
 $proto46["m_srcTableName"] = "public.lbpmi_summary";
 $proto46["m_expr"]=$obj;
 $proto46["m_alias"] = "";
@@ -6626,12 +7053,12 @@ $obj = new SQLFieldListItem($proto46);
 $proto0["m_fieldlist"][]=$obj;
 						$proto48=array();
 			$obj = new SQLField(array(
-	"m_strName" => "decimals",
+	"m_strName" => "variance_percentage",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto48["m_sql"] = "decimals";
+$proto48["m_sql"] = "variance_percentage";
 $proto48["m_srcTableName"] = "public.lbpmi_summary";
 $proto48["m_expr"]=$obj;
 $proto48["m_alias"] = "";
@@ -6640,12 +7067,12 @@ $obj = new SQLFieldListItem($proto48);
 $proto0["m_fieldlist"][]=$obj;
 						$proto50=array();
 			$obj = new SQLField(array(
-	"m_strName" => "annualized",
+	"m_strName" => "calculation_timestamp",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto50["m_sql"] = "annualized";
+$proto50["m_sql"] = "calculation_timestamp";
 $proto50["m_srcTableName"] = "public.lbpmi_summary";
 $proto50["m_expr"]=$obj;
 $proto50["m_alias"] = "";
@@ -6654,12 +7081,12 @@ $obj = new SQLFieldListItem($proto50);
 $proto0["m_fieldlist"][]=$obj;
 						$proto52=array();
 			$obj = new SQLField(array(
-	"m_strName" => "data_completeness",
+	"m_strName" => "is_calculated",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto52["m_sql"] = "data_completeness";
+$proto52["m_sql"] = "is_calculated";
 $proto52["m_srcTableName"] = "public.lbpmi_summary";
 $proto52["m_expr"]=$obj;
 $proto52["m_alias"] = "";
@@ -6668,12 +7095,12 @@ $obj = new SQLFieldListItem($proto52);
 $proto0["m_fieldlist"][]=$obj;
 						$proto54=array();
 			$obj = new SQLField(array(
-	"m_strName" => "overall_completion_percentage",
+	"m_strName" => "decimals",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto54["m_sql"] = "overall_completion_percentage";
+$proto54["m_sql"] = "decimals";
 $proto54["m_srcTableName"] = "public.lbpmi_summary";
 $proto54["m_expr"]=$obj;
 $proto54["m_alias"] = "";
@@ -6682,12 +7109,12 @@ $obj = new SQLFieldListItem($proto54);
 $proto0["m_fieldlist"][]=$obj;
 						$proto56=array();
 			$obj = new SQLField(array(
-	"m_strName" => "actual_value_completion",
+	"m_strName" => "annualized",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto56["m_sql"] = "actual_value_completion";
+$proto56["m_sql"] = "annualized";
 $proto56["m_srcTableName"] = "public.lbpmi_summary";
 $proto56["m_expr"]=$obj;
 $proto56["m_alias"] = "";
@@ -6696,12 +7123,12 @@ $obj = new SQLFieldListItem($proto56);
 $proto0["m_fieldlist"][]=$obj;
 						$proto58=array();
 			$obj = new SQLField(array(
-	"m_strName" => "target_value_completion",
+	"m_strName" => "data_completeness",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto58["m_sql"] = "target_value_completion";
+$proto58["m_sql"] = "data_completeness";
 $proto58["m_srcTableName"] = "public.lbpmi_summary";
 $proto58["m_expr"]=$obj;
 $proto58["m_alias"] = "";
@@ -6710,12 +7137,12 @@ $obj = new SQLFieldListItem($proto58);
 $proto0["m_fieldlist"][]=$obj;
 						$proto60=array();
 			$obj = new SQLField(array(
-	"m_strName" => "completion_status",
+	"m_strName" => "overall_completion_percentage",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto60["m_sql"] = "completion_status";
+$proto60["m_sql"] = "overall_completion_percentage";
 $proto60["m_srcTableName"] = "public.lbpmi_summary";
 $proto60["m_expr"]=$obj;
 $proto60["m_alias"] = "";
@@ -6724,12 +7151,12 @@ $obj = new SQLFieldListItem($proto60);
 $proto0["m_fieldlist"][]=$obj;
 						$proto62=array();
 			$obj = new SQLField(array(
-	"m_strName" => "is_actual_missing",
+	"m_strName" => "actual_value_completion",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto62["m_sql"] = "is_actual_missing";
+$proto62["m_sql"] = "actual_value_completion";
 $proto62["m_srcTableName"] = "public.lbpmi_summary";
 $proto62["m_expr"]=$obj;
 $proto62["m_alias"] = "";
@@ -6738,12 +7165,12 @@ $obj = new SQLFieldListItem($proto62);
 $proto0["m_fieldlist"][]=$obj;
 						$proto64=array();
 			$obj = new SQLField(array(
-	"m_strName" => "is_target_missing",
+	"m_strName" => "target_value_completion",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto64["m_sql"] = "is_target_missing";
+$proto64["m_sql"] = "target_value_completion";
 $proto64["m_srcTableName"] = "public.lbpmi_summary";
 $proto64["m_expr"]=$obj;
 $proto64["m_alias"] = "";
@@ -6752,12 +7179,12 @@ $obj = new SQLFieldListItem($proto64);
 $proto0["m_fieldlist"][]=$obj;
 						$proto66=array();
 			$obj = new SQLField(array(
-	"m_strName" => "data_freshness",
+	"m_strName" => "completion_status",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto66["m_sql"] = "data_freshness";
+$proto66["m_sql"] = "completion_status";
 $proto66["m_srcTableName"] = "public.lbpmi_summary";
 $proto66["m_expr"]=$obj;
 $proto66["m_alias"] = "";
@@ -6766,12 +7193,12 @@ $obj = new SQLFieldListItem($proto66);
 $proto0["m_fieldlist"][]=$obj;
 						$proto68=array();
 			$obj = new SQLField(array(
-	"m_strName" => "days_since_last_calculation",
+	"m_strName" => "is_actual_missing",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto68["m_sql"] = "days_since_last_calculation";
+$proto68["m_sql"] = "is_actual_missing";
 $proto68["m_srcTableName"] = "public.lbpmi_summary";
 $proto68["m_expr"]=$obj;
 $proto68["m_alias"] = "";
@@ -6780,12 +7207,12 @@ $obj = new SQLFieldListItem($proto68);
 $proto0["m_fieldlist"][]=$obj;
 						$proto70=array();
 			$obj = new SQLField(array(
-	"m_strName" => "performance_status",
+	"m_strName" => "is_target_missing",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto70["m_sql"] = "performance_status";
+$proto70["m_sql"] = "is_target_missing";
 $proto70["m_srcTableName"] = "public.lbpmi_summary";
 $proto70["m_expr"]=$obj;
 $proto70["m_alias"] = "";
@@ -6794,12 +7221,12 @@ $obj = new SQLFieldListItem($proto70);
 $proto0["m_fieldlist"][]=$obj;
 						$proto72=array();
 			$obj = new SQLField(array(
-	"m_strName" => "performance_percentage",
+	"m_strName" => "data_freshness",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto72["m_sql"] = "performance_percentage";
+$proto72["m_sql"] = "data_freshness";
 $proto72["m_srcTableName"] = "public.lbpmi_summary";
 $proto72["m_expr"]=$obj;
 $proto72["m_alias"] = "";
@@ -6808,12 +7235,12 @@ $obj = new SQLFieldListItem($proto72);
 $proto0["m_fieldlist"][]=$obj;
 						$proto74=array();
 			$obj = new SQLField(array(
-	"m_strName" => "data_quality_flag",
+	"m_strName" => "days_since_last_calculation",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto74["m_sql"] = "data_quality_flag";
+$proto74["m_sql"] = "days_since_last_calculation";
 $proto74["m_srcTableName"] = "public.lbpmi_summary";
 $proto74["m_expr"]=$obj;
 $proto74["m_alias"] = "";
@@ -6822,12 +7249,12 @@ $obj = new SQLFieldListItem($proto74);
 $proto0["m_fieldlist"][]=$obj;
 						$proto76=array();
 			$obj = new SQLField(array(
-	"m_strName" => "data_hierarchy_level",
+	"m_strName" => "performance_status",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto76["m_sql"] = "data_hierarchy_level";
+$proto76["m_sql"] = "performance_status";
 $proto76["m_srcTableName"] = "public.lbpmi_summary";
 $proto76["m_expr"]=$obj;
 $proto76["m_alias"] = "";
@@ -6836,12 +7263,12 @@ $obj = new SQLFieldListItem($proto76);
 $proto0["m_fieldlist"][]=$obj;
 						$proto78=array();
 			$obj = new SQLField(array(
-	"m_strName" => "period_completeness",
+	"m_strName" => "performance_percentage",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto78["m_sql"] = "period_completeness";
+$proto78["m_sql"] = "performance_percentage";
 $proto78["m_srcTableName"] = "public.lbpmi_summary";
 $proto78["m_expr"]=$obj;
 $proto78["m_alias"] = "";
@@ -6850,12 +7277,12 @@ $obj = new SQLFieldListItem($proto78);
 $proto0["m_fieldlist"][]=$obj;
 						$proto80=array();
 			$obj = new SQLField(array(
-	"m_strName" => "calculation_method",
+	"m_strName" => "data_quality_flag",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto80["m_sql"] = "calculation_method";
+$proto80["m_sql"] = "data_quality_flag";
 $proto80["m_srcTableName"] = "public.lbpmi_summary";
 $proto80["m_expr"]=$obj;
 $proto80["m_alias"] = "";
@@ -6864,12 +7291,12 @@ $obj = new SQLFieldListItem($proto80);
 $proto0["m_fieldlist"][]=$obj;
 						$proto82=array();
 			$obj = new SQLField(array(
-	"m_strName" => "formula_type",
+	"m_strName" => "data_hierarchy_level",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto82["m_sql"] = "formula_type";
+$proto82["m_sql"] = "data_hierarchy_level";
 $proto82["m_srcTableName"] = "public.lbpmi_summary";
 $proto82["m_expr"]=$obj;
 $proto82["m_alias"] = "";
@@ -6878,12 +7305,12 @@ $obj = new SQLFieldListItem($proto82);
 $proto0["m_fieldlist"][]=$obj;
 						$proto84=array();
 			$obj = new SQLField(array(
-	"m_strName" => "org_unit_validity",
+	"m_strName" => "period_completeness",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto84["m_sql"] = "org_unit_validity";
+$proto84["m_sql"] = "period_completeness";
 $proto84["m_srcTableName"] = "public.lbpmi_summary";
 $proto84["m_expr"]=$obj;
 $proto84["m_alias"] = "";
@@ -6892,12 +7319,12 @@ $obj = new SQLFieldListItem($proto84);
 $proto0["m_fieldlist"][]=$obj;
 						$proto86=array();
 			$obj = new SQLField(array(
-	"m_strName" => "period_validity",
+	"m_strName" => "calculation_method",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto86["m_sql"] = "period_validity";
+$proto86["m_sql"] = "calculation_method";
 $proto86["m_srcTableName"] = "public.lbpmi_summary";
 $proto86["m_expr"]=$obj;
 $proto86["m_alias"] = "";
@@ -6906,90 +7333,135 @@ $obj = new SQLFieldListItem($proto86);
 $proto0["m_fieldlist"][]=$obj;
 						$proto88=array();
 			$obj = new SQLField(array(
-	"m_strName" => "legacy_performance_status",
+	"m_strName" => "formula_type",
 	"m_strTable" => "public.lbpmi_summary",
 	"m_srcTableName" => "public.lbpmi_summary"
 ));
 
-$proto88["m_sql"] = "legacy_performance_status";
+$proto88["m_sql"] = "formula_type";
 $proto88["m_srcTableName"] = "public.lbpmi_summary";
 $proto88["m_expr"]=$obj;
 $proto88["m_alias"] = "";
 $obj = new SQLFieldListItem($proto88);
 
 $proto0["m_fieldlist"][]=$obj;
-$proto0["m_fromlist"] = array();
-												$proto90=array();
-$proto90["m_link"] = "SQLL_MAIN";
-			$proto91=array();
-$proto91["m_strName"] = "public.lbpmi_summary";
-$proto91["m_srcTableName"] = "public.lbpmi_summary";
-$proto91["m_columns"] = array();
-$proto91["m_columns"][] = "indicator_id";
-$proto91["m_columns"][] = "indicator_name";
-$proto91["m_columns"][] = "indicator_code";
-$proto91["m_columns"][] = "indicator_type";
-$proto91["m_columns"][] = "formula";
-$proto91["m_columns"][] = "period_type";
-$proto91["m_columns"][] = "period_year";
-$proto91["m_columns"][] = "period_quarter";
-$proto91["m_columns"][] = "period_month";
-$proto91["m_columns"][] = "region_id";
-$proto91["m_columns"][] = "region_name";
-$proto91["m_columns"][] = "country_id";
-$proto91["m_columns"][] = "country_name";
-$proto91["m_columns"][] = "facility_id";
-$proto91["m_columns"][] = "facility_name";
-$proto91["m_columns"][] = "actual_value";
-$proto91["m_columns"][] = "target_value";
-$proto91["m_columns"][] = "variance";
-$proto91["m_columns"][] = "variance_percentage";
-$proto91["m_columns"][] = "calculation_timestamp";
-$proto91["m_columns"][] = "is_calculated";
-$proto91["m_columns"][] = "decimals";
-$proto91["m_columns"][] = "annualized";
-$proto91["m_columns"][] = "data_completeness";
-$proto91["m_columns"][] = "overall_completion_percentage";
-$proto91["m_columns"][] = "actual_value_completion";
-$proto91["m_columns"][] = "target_value_completion";
-$proto91["m_columns"][] = "completion_status";
-$proto91["m_columns"][] = "is_actual_missing";
-$proto91["m_columns"][] = "is_target_missing";
-$proto91["m_columns"][] = "data_freshness";
-$proto91["m_columns"][] = "days_since_last_calculation";
-$proto91["m_columns"][] = "performance_status";
-$proto91["m_columns"][] = "performance_percentage";
-$proto91["m_columns"][] = "data_quality_flag";
-$proto91["m_columns"][] = "data_hierarchy_level";
-$proto91["m_columns"][] = "period_completeness";
-$proto91["m_columns"][] = "calculation_method";
-$proto91["m_columns"][] = "formula_type";
-$proto91["m_columns"][] = "org_unit_validity";
-$proto91["m_columns"][] = "period_validity";
-$proto91["m_columns"][] = "legacy_performance_status";
-$obj = new SQLTable($proto91);
+						$proto90=array();
+			$obj = new SQLField(array(
+	"m_strName" => "org_unit_validity",
+	"m_strTable" => "public.lbpmi_summary",
+	"m_srcTableName" => "public.lbpmi_summary"
+));
 
-$proto90["m_table"] = $obj;
-$proto90["m_sql"] = "\"public\".lbpmi_summary";
-$proto90["m_alias"] = "";
+$proto90["m_sql"] = "org_unit_validity";
 $proto90["m_srcTableName"] = "public.lbpmi_summary";
-$proto92=array();
-$proto92["m_sql"] = "";
-$proto92["m_uniontype"] = "SQLL_UNKNOWN";
+$proto90["m_expr"]=$obj;
+$proto90["m_alias"] = "";
+$obj = new SQLFieldListItem($proto90);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto92=array();
+			$obj = new SQLField(array(
+	"m_strName" => "period_validity",
+	"m_strTable" => "public.lbpmi_summary",
+	"m_srcTableName" => "public.lbpmi_summary"
+));
+
+$proto92["m_sql"] = "period_validity";
+$proto92["m_srcTableName"] = "public.lbpmi_summary";
+$proto92["m_expr"]=$obj;
+$proto92["m_alias"] = "";
+$obj = new SQLFieldListItem($proto92);
+
+$proto0["m_fieldlist"][]=$obj;
+						$proto94=array();
+			$obj = new SQLField(array(
+	"m_strName" => "legacy_performance_status",
+	"m_strTable" => "public.lbpmi_summary",
+	"m_srcTableName" => "public.lbpmi_summary"
+));
+
+$proto94["m_sql"] = "legacy_performance_status";
+$proto94["m_srcTableName"] = "public.lbpmi_summary";
+$proto94["m_expr"]=$obj;
+$proto94["m_alias"] = "";
+$obj = new SQLFieldListItem($proto94);
+
+$proto0["m_fieldlist"][]=$obj;
+$proto0["m_fromlist"] = array();
+												$proto96=array();
+$proto96["m_link"] = "SQLL_MAIN";
+			$proto97=array();
+$proto97["m_strName"] = "public.lbpmi_summary";
+$proto97["m_srcTableName"] = "public.lbpmi_summary";
+$proto97["m_columns"] = array();
+$proto97["m_columns"][] = "indicator_group_id";
+$proto97["m_columns"][] = "indicator_group_name";
+$proto97["m_columns"][] = "indicator_group_code";
+$proto97["m_columns"][] = "indicator_id";
+$proto97["m_columns"][] = "indicator_name";
+$proto97["m_columns"][] = "indicator_code";
+$proto97["m_columns"][] = "indicator_type";
+$proto97["m_columns"][] = "formula";
+$proto97["m_columns"][] = "period_type";
+$proto97["m_columns"][] = "period_year";
+$proto97["m_columns"][] = "period_quarter";
+$proto97["m_columns"][] = "period_month";
+$proto97["m_columns"][] = "region_id";
+$proto97["m_columns"][] = "region_name";
+$proto97["m_columns"][] = "country_id";
+$proto97["m_columns"][] = "country_name";
+$proto97["m_columns"][] = "facility_id";
+$proto97["m_columns"][] = "facility_name";
+$proto97["m_columns"][] = "actual_value";
+$proto97["m_columns"][] = "target_value";
+$proto97["m_columns"][] = "variance";
+$proto97["m_columns"][] = "variance_percentage";
+$proto97["m_columns"][] = "calculation_timestamp";
+$proto97["m_columns"][] = "is_calculated";
+$proto97["m_columns"][] = "decimals";
+$proto97["m_columns"][] = "annualized";
+$proto97["m_columns"][] = "data_completeness";
+$proto97["m_columns"][] = "overall_completion_percentage";
+$proto97["m_columns"][] = "actual_value_completion";
+$proto97["m_columns"][] = "target_value_completion";
+$proto97["m_columns"][] = "completion_status";
+$proto97["m_columns"][] = "is_actual_missing";
+$proto97["m_columns"][] = "is_target_missing";
+$proto97["m_columns"][] = "data_freshness";
+$proto97["m_columns"][] = "days_since_last_calculation";
+$proto97["m_columns"][] = "performance_status";
+$proto97["m_columns"][] = "performance_percentage";
+$proto97["m_columns"][] = "data_quality_flag";
+$proto97["m_columns"][] = "data_hierarchy_level";
+$proto97["m_columns"][] = "period_completeness";
+$proto97["m_columns"][] = "calculation_method";
+$proto97["m_columns"][] = "formula_type";
+$proto97["m_columns"][] = "org_unit_validity";
+$proto97["m_columns"][] = "period_validity";
+$proto97["m_columns"][] = "legacy_performance_status";
+$obj = new SQLTable($proto97);
+
+$proto96["m_table"] = $obj;
+$proto96["m_sql"] = "\"public\".lbpmi_summary";
+$proto96["m_alias"] = "";
+$proto96["m_srcTableName"] = "public.lbpmi_summary";
+$proto98=array();
+$proto98["m_sql"] = "";
+$proto98["m_uniontype"] = "SQLL_UNKNOWN";
 	$obj = new SQLNonParsed(array(
 	"m_sql" => ""
 ));
 
-$proto92["m_column"]=$obj;
-$proto92["m_contained"] = array();
-$proto92["m_strCase"] = "";
-$proto92["m_havingmode"] = false;
-$proto92["m_inBrackets"] = false;
-$proto92["m_useAlias"] = false;
-$obj = new SQLLogicalExpr($proto92);
+$proto98["m_column"]=$obj;
+$proto98["m_contained"] = array();
+$proto98["m_strCase"] = "";
+$proto98["m_havingmode"] = false;
+$proto98["m_inBrackets"] = false;
+$proto98["m_useAlias"] = false;
+$obj = new SQLLogicalExpr($proto98);
 
-$proto90["m_joinon"] = $obj;
-$obj = new SQLFromListItem($proto90);
+$proto96["m_joinon"] = $obj;
+$obj = new SQLFromListItem($proto96);
 
 $proto0["m_fromlist"][]=$obj;
 $proto0["m_groupby"] = array();
@@ -7005,7 +7477,7 @@ $queryData_lbpmi_summary = createSqlQuery_lbpmi_summary();
 	
 				;
 
-																																										
+																																													
 
 $tdatalbpmi_summary[".sqlquery"] = $queryData_lbpmi_summary;
 

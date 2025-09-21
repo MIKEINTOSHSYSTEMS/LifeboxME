@@ -1589,6 +1589,8 @@ class CrossTableWebReport
 			$isDB = true;
 		if("public.lbpmi_indicator_types" == $this->xml_array['tables'][0])
 			$isDB = true;
+		if("public.lbpmi_indicator_groups" == $this->xml_array['tables'][0])
+			$isDB = true;
 		return $isDB;
 	}
 	

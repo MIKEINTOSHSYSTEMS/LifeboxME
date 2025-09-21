@@ -769,9 +769,9 @@ $suggestAllContent = true;
 $strLastSQL = "";
 $showCustomMarkerOnPrint = false;
 
-$projectBuildKey = "244_1758404346";
+$projectBuildKey = "251_1758488734";
 $wizardBuildKey = "41974";
-$projectBuildNumber = "244";
+$projectBuildNumber = "251";
 
 $mlang_messages = array();
 $mlang_charsets = array();
@@ -899,6 +899,7 @@ $tableCaptions["English"]["public_lbpmi_data_values"] = "Lbpmi Data Values";
 $tableCaptions["English"]["public_lbpmi_aggregation_type"] = "Lbpmi Aggregation Type";
 $tableCaptions["English"]["public_lbpmi_domain_type"] = "Lbpmi Domain Type";
 $tableCaptions["English"]["public_lbpmi_indicator_types"] = "Lbpmi Indicator Types";
+$tableCaptions["English"]["public_lbpmi_indicator_groups"] = "Lbpmi Indicator Groups";
 $tableCaptions["English"]["Dashboard"] = "Dashboard";
 $tableCaptions["English"]["Lifebox_DHIS2_Settings"] = "Lifebox DHIS2 Settings";
 
@@ -1025,6 +1026,30 @@ $fieldFilterValueShrinkPostfix = "...";
 
 
 // here goes EVENT_INIT_APP event
+
+
+// Function to generate a random 11-character string
+function gen_random_string($length=11)
+
+{
+
+$chars ="1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+$final_rand='';
+
+for($i=0;$i<$length; $i++)
+
+{
+
+$final_rand .= $chars[ rand(0,strlen($chars)-1)];
+
+
+
+}
+
+return $final_rand;
+
+}
 
 
 // mail settings

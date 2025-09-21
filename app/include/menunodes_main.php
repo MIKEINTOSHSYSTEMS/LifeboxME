@@ -2344,6 +2344,32 @@
 
 	$menuNodes[] = $menuNode;
 	$menuNode = array();
+	$menuNode["id"] = "153";
+	$menuNode["name"] = "Indicator Groups";
+	$menuNode["href"] = "mypage.htm";
+	$menuNode["type"] = "Leaf";
+	$menuNode["table"] = "public.lbpmi_indicator_groups";
+	$menuNode["style"] = "";
+	$menuNode["params"] = "";
+	$menuNode["parent"] = "142";
+	$menuNode["nameType"] = "Text";
+	$menuNode["linkType"] = "Internal";
+	$menuNode["pageType"] = strtolower("List");//
+	$menuNode["pageId"] = "";
+	$menuNode["openType"] = "None";
+
+	$menuNode["icon"] = "";
+	$menuNode["iconType"] = "0";
+	$menuNode["iconShow"] = "1";
+
+		$menuNode["color"] = "";
+
+	$menuNode["title"] = "Indicator Groups";
+
+
+
+	$menuNodes[] = $menuNode;
+	$menuNode = array();
 	$menuNode["id"] = "137";
 	$menuNode["name"] = "Indicator Actuals";
 	$menuNode["href"] = "mypage.htm";

@@ -6,11 +6,11 @@ $tdatalbpmi_datasets[".OwnerID"] = "";
 $tdatalbpmi_datasets[".OriginalTable"] = "public.lbpmi_datasets";
 
 
-$tdatalbpmi_datasets[".pagesByType"] = my_json_decode( "{\"add\":[\"add\"],\"edit\":[\"edit\"],\"export\":[\"export\"],\"import\":[\"import\"],\"list\":[\"list\"],\"print\":[\"print\"],\"search\":[\"search\"],\"view\":[\"view\"]}" );
+$tdatalbpmi_datasets[".pagesByType"] = my_json_decode( "{\"add\":[\"add\"],\"edit\":[\"edit\"],\"export\":[\"export\"],\"import\":[\"import\"],\"list\":[\"list\"],\"masterlist\":[\"masterlist\"],\"masterprint\":[\"masterprint\"],\"print\":[\"print\"],\"search\":[\"search\"],\"view\":[\"view\"]}" );
 $tdatalbpmi_datasets[".originalPagesByType"] = $tdatalbpmi_datasets[".pagesByType"];
-$tdatalbpmi_datasets[".pages"] = types2pages( my_json_decode( "{\"add\":[\"add\"],\"edit\":[\"edit\"],\"export\":[\"export\"],\"import\":[\"import\"],\"list\":[\"list\"],\"print\":[\"print\"],\"search\":[\"search\"],\"view\":[\"view\"]}" ) );
+$tdatalbpmi_datasets[".pages"] = types2pages( my_json_decode( "{\"add\":[\"add\"],\"edit\":[\"edit\"],\"export\":[\"export\"],\"import\":[\"import\"],\"list\":[\"list\"],\"masterlist\":[\"masterlist\"],\"masterprint\":[\"masterprint\"],\"print\":[\"print\"],\"search\":[\"search\"],\"view\":[\"view\"]}" ) );
 $tdatalbpmi_datasets[".originalPages"] = $tdatalbpmi_datasets[".pages"];
-$tdatalbpmi_datasets[".defaultPages"] = my_json_decode( "{\"add\":\"add\",\"edit\":\"edit\",\"export\":\"export\",\"import\":\"import\",\"list\":\"list\",\"print\":\"print\",\"search\":\"search\",\"view\":\"view\"}" );
+$tdatalbpmi_datasets[".defaultPages"] = my_json_decode( "{\"add\":\"add\",\"edit\":\"edit\",\"export\":\"export\",\"import\":\"import\",\"list\":\"list\",\"masterlist\":\"masterlist\",\"masterprint\":\"masterprint\",\"print\":\"print\",\"search\":\"search\",\"view\":\"view\"}" );
 $tdatalbpmi_datasets[".originalDefaultPages"] = $tdatalbpmi_datasets[".defaultPages"];
 
 //	field labels
@@ -743,7 +743,7 @@ $tdatalbpmi_datasets[".hideMobileList"] = array();
 //	Begin Edit Formats
 	$fdata["EditFormats"] = array();
 
-	$edata = array("EditFormat" => "Text field");
+	$edata = array("EditFormat" => "Readonly");
 
 	
 		$edata["weekdayMessage"] = array("message" => "", "messageType" => "Text");
@@ -767,11 +767,8 @@ $tdatalbpmi_datasets[".hideMobileList"] = array();
 	
 	
 	
-			$edata["HTML5InuptType"] = "text";
-
-		$edata["EditParams"] = "";
-			$edata["EditParams"].= " maxlength=100";
-
+	
+	
 		$edata["controlWidth"] = 200;
 
 //	Begin validation
@@ -1722,6 +1719,36 @@ changeTextControlsToDate( "public.lbpmi_datasets" );
 //if !@TABLE.bReportCrossTab
 
 $detailsTablesData["public.lbpmi_datasets"] = array();
+//	public.lbpmi_indicators
+	
+	
+
+		$dIndex = 0;
+	$detailsParam = array();
+	$detailsParam["dDataSourceTable"]="public.lbpmi_indicators";
+		$detailsParam["dOriginalTable"] = "public.lbpmi_indicators";
+
+
+
+		
+		$detailsParam["dType"]=PAGE_LIST;
+	$detailsParam["dShortTable"] = "lbpmi_indicators";
+	$detailsParam["dCaptionTable"] = GetTableCaption("public_lbpmi_indicators");
+	$detailsParam["masterKeys"] =array();
+	$detailsParam["detailKeys"] =array();
+
+
+		
+	$detailsTablesData["public.lbpmi_datasets"][$dIndex] = $detailsParam;
+
+	
+		$detailsTablesData["public.lbpmi_datasets"][$dIndex]["masterKeys"] = array();
+
+	$detailsTablesData["public.lbpmi_datasets"][$dIndex]["masterKeys"][]="dataset_id";
+
+				$detailsTablesData["public.lbpmi_datasets"][$dIndex]["detailKeys"] = array();
+
+	$detailsTablesData["public.lbpmi_datasets"][$dIndex]["detailKeys"][]="dataset_id";
 //endif
 
 // tables which are master tables for current table (detail)
@@ -1990,6 +2017,7 @@ $tdatalbpmi_datasets[".sqlquery"] = $queryData_lbpmi_datasets;
 
 
 
-$tdatalbpmi_datasets[".hasEvents"] = false;
+include_once(getabspath("include/lbpmi_datasets_events.php"));
+$tdatalbpmi_datasets[".hasEvents"] = true;
 
 ?>

@@ -1,5 +1,8 @@
 <?php
 $dalTablelbpmi_summary = array();
+$dalTablelbpmi_summary["indicator_group_id"] = array("type"=>3,"varname"=>"indicator_group_id", "name" => "indicator_group_id", "autoInc" => "0");
+$dalTablelbpmi_summary["indicator_group_name"] = array("type"=>200,"varname"=>"indicator_group_name", "name" => "indicator_group_name", "autoInc" => "0");
+$dalTablelbpmi_summary["indicator_group_code"] = array("type"=>200,"varname"=>"indicator_group_code", "name" => "indicator_group_code", "autoInc" => "0");
 $dalTablelbpmi_summary["indicator_id"] = array("type"=>3,"varname"=>"indicator_id", "name" => "indicator_id", "autoInc" => "0");
 $dalTablelbpmi_summary["indicator_name"] = array("type"=>200,"varname"=>"indicator_name", "name" => "indicator_name", "autoInc" => "0");
 $dalTablelbpmi_summary["indicator_code"] = array("type"=>200,"varname"=>"indicator_code", "name" => "indicator_code", "autoInc" => "0");

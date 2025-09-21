@@ -411,6 +411,8 @@ function checkTableName($shortTName )
 		return true;
 	if ("lbpmi_indicator_types" == $shortTName )
 		return true;
+	if ("lbpmi_indicator_groups" == $shortTName )
+		return true;
 	return false;
 }
 
@@ -1397,6 +1399,15 @@ function GetTablesList($pdfMode = false)
 	if( $tableAvailable ) {
 		$arr[]="public.lbpmi_indicator_types";
 	}
+	$tableAvailable = true;
+	if( $checkPermissions ) {
+		$strPerm = GetUserPermissions("public.lbpmi_indicator_groups");
+		$tableAvailable = ( strpos($strPerm, "P") !== false
+			|| $pdfMode && strpos($strPerm, "S") !== false );
+	}
+	if( $tableAvailable ) {
+		$arr[]="public.lbpmi_indicator_groups";
+	}
 	return $arr;
 }
 
@@ -1510,6 +1521,7 @@ function GetTablesListWithoutSecurity()
 	$arr[]="public.lbpmi_aggregation_type";
 	$arr[]="public.lbpmi_domain_type";
 	$arr[]="public.lbpmi_indicator_types";
+	$arr[]="public.lbpmi_indicator_groups";
 	return $arr;
 }
 
@@ -2657,6 +2669,11 @@ function GetUserPermissionsStatic( $table )
 		return "ADESPI".$extraPerm;
 	}
 	if( $table=="public.lbpmi_indicator_types" )
+	{
+//	default permissions
+		return "ADESPI".$extraPerm;
+	}
+	if( $table=="public.lbpmi_indicator_groups" )
 	{
 //	default permissions
 		return "ADESPI".$extraPerm;

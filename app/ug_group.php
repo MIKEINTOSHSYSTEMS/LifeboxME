@@ -119,6 +119,7 @@ $nonAdminTablesArr[] = "public.lbpmi_data_values";
 $nonAdminTablesArr[] = "public.lbpmi_aggregation_type";
 $nonAdminTablesArr[] = "public.lbpmi_domain_type";
 $nonAdminTablesArr[] = "public.lbpmi_indicator_types";
+$nonAdminTablesArr[] = "public.lbpmi_indicator_groups";
 
 $ug_connection = $cman->getForUserGroups();
 

@@ -346,6 +346,7 @@ class ConnectionManager_Base
 		$connectionsIds["public.lbpmi_aggregation_type"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["public.lbpmi_domain_type"] = "lifebox_mesystem_at_localhost";
 		$connectionsIds["public.lbpmi_indicator_types"] = "lifebox_mesystem_at_localhost";
+		$connectionsIds["public.lbpmi_indicator_groups"] = "lifebox_mesystem_at_localhost";
 
 		$this->_tablesConnectionIds = &$connectionsIds;
 	}
