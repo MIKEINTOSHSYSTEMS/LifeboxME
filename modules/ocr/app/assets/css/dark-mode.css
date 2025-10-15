@@ -1,118 +1,315 @@
-/* Dark mode specific enhancements */
+/* Enhanced Dark mode specific styles */
 
 [data-theme="dark"] {
 
-    /* Enhanced contrast for better readability */
+    /* Enhanced contrast and depth */
+    .header {
+        background: rgba(30, 41, 59, 0.8);
+        backdrop-filter: blur(20px);
+        border-bottom-color: #374151;
+    }
+
+    .card {
+        background: #1e293b;
+        border-color: #374151;
+    }
+
+    .card:hover {
+        background: #1f2a3c;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Enhanced form elements */
     .text-area {
         background: #1a2332;
         border-color: #2d3748;
+        color: #e2e8f0;
     }
 
     .text-area:focus {
         background: #1e293b;
         border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    }
+
+    .text-area:disabled {
+        background: #0f172a;
+        color: #64748b;
     }
 
     .form-select {
         background: #1a2332;
         border-color: #2d3748;
+        color: #e2e8f0;
     }
 
     .form-select:focus {
         background: #1e293b;
+        border-color: var(--primary-color);
     }
 
+    /* Enhanced file upload */
     .file-upload-area {
-        background: #1a2332;
+        background: #0f172a;
+        border-color: #374151;
     }
 
     .file-upload-area:hover {
         background: #1e293b;
+        border-color: var(--primary-color);
     }
 
-    .preview-container {
-        background: #1a2332;
-    }
-
-    /* Camera video styling */
-    .camera-video,
-    .camera-canvas {
-        background: #1a2332;
-        border-color: #2d3748;
-    }
-
-    /* Loading overlay dark mode */
-    .loading-overlay {
-        background: rgba(0, 0, 0, 0.85);
-    }
-
-    /* Alert dark mode enhancements */
-    .alert-success {
-        background: rgba(16, 185, 129, 0.15);
-    }
-
-    .alert-error {
-        background: rgba(239, 68, 68, 0.15);
-    }
-
-    /* Button hover states */
-    .btn-secondary:hover:not(:disabled) {
-        background: #475569;
-    }
-
-    /* Card hover effects */
-    .card:hover {
-        border-color: #374151;
-    }
-
-    /* Statistics in dark mode */
-    .text-stats {
-        border-top-color: #374151;
-    }
-
-    /* File upload drag-over state */
     .file-upload-area.dragover {
         background: var(--primary-color);
         border-color: var(--primary-color);
     }
-}
 
-/* Smooth transitions for all interactive elements */
-.card,
-.btn,
-.form-select,
-.text-area,
-.file-upload-area,
-.theme-toggle {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Focus states for accessibility */
-.btn:focus-visible,
-.form-select:focus-visible,
-.text-area:focus-visible,
-.theme-toggle:focus-visible {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-    :root {
-        --border-color: #000000;
-        --shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    .upload-supported .supported-formats,
+    .upload-supported .max-size {
+        background: #1e293b;
+        color: #94a3b8;
     }
 
+    /* Enhanced preview section */
+    .preview-container {
+        background: #0f172a;
+        border-color: #374151;
+    }
+
+    .preview-actions .preview-action-btn {
+        background: #1e293b;
+        border-color: #374151;
+        color: #cbd5e1;
+    }
+
+    .preview-actions .preview-action-btn:hover {
+        background: var(--primary-color);
+        color: white;
+    }
+
+    /* Enhanced camera section */
+    .camera-video,
+    .camera-canvas {
+        background: #0f172a;
+        border-color: #374151;
+    }
+
+    .camera-placeholder {
+        background: #0f172a;
+        color: #94a3b8;
+    }
+
+    .camera-frame {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Enhanced statistics */
+    .stat-item {
+        background: #0f172a;
+        border-color: #374151;
+    }
+
+    .stat-item:hover {
+        background: #1e293b;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Enhanced debug console */
+    .debug-console {
+        background: #0f172a;
+        border-color: #374151;
+    }
+
+    .debug-message {
+        background: #1e293b;
+        border-left-color: #374151;
+    }
+
+    .debug-message.debug-info {
+        background: rgba(59, 130, 246, 0.1);
+        border-left-color: var(--info-color);
+    }
+
+    .debug-message.debug-success {
+        background: rgba(16, 185, 129, 0.1);
+        border-left-color: var(--success-color);
+    }
+
+    .debug-message.debug-warning {
+        background: rgba(245, 158, 11, 0.1);
+        border-left-color: var(--warning-color);
+    }
+
+    .debug-message.debug-error {
+        background: rgba(239, 68, 68, 0.1);
+        border-left-color: var(--error-color);
+    }
+
+    /* Enhanced user guide */
+    .guide-step {
+        background: #0f172a;
+        border-color: #374151;
+    }
+
+    .guide-step:hover {
+        background: #1e293b;
+    }
+
+    .guide-tips {
+        background: #0f172a;
+        border-color: #374151;
+    }
+
+    .guide-tips li {
+        border-bottom-color: #374151;
+    }
+
+    /* Enhanced footer */
+    .footer {
+        background: #1e293b;
+        border-top-color: #374151;
+    }
+
+    .version-info {
+        background: #0f172a;
+        color: #94a3b8;
+    }
+
+    .footer-secondary {
+        border-top-color: #374151;
+    }
+
+    /* Enhanced alerts */
+    .alert-success {
+        background: rgba(16, 185, 129, 0.15);
+        border-color: var(--success-color);
+    }
+
+    .alert-error {
+        background: rgba(239, 68, 68, 0.15);
+        border-color: var(--error-color);
+    }
+
+    .alert-warning {
+        background: rgba(245, 158, 11, 0.15);
+        border-color: var(--warning-color);
+    }
+
+    .alert-info {
+        background: rgba(59, 130, 246, 0.15);
+        border-color: var(--info-color);
+    }
+
+    /* Enhanced buttons */
+    .btn-secondary {
+        background: #475569;
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+        background: #64748b;
+    }
+
+    .btn-danger {
+        background: #dc2626;
+    }
+
+    .btn-danger:hover:not(:disabled) {
+        background: #ef4444;
+    }
+
+    /* Enhanced performance options */
+    .modern-checkbox:hover {
+        background: #0f172a;
+        border-color: #374151;
+    }
+
+    .checkmark {
+        border-color: #475569;
+    }
+
+    /* Enhanced loading overlay */
+    .loading-overlay {
+        background: rgba(15, 23, 42, 0.98);
+    }
+
+    /* Enhanced toast notifications */
+    .toast {
+        background: #1e293b;
+        border-color: #374151;
+        color: #e2e8f0;
+    }
+
+    .toast-close:hover {
+        background: #0f172a;
+    }
+
+    /* Enhanced text selection */
+    ::selection {
+        background: var(--primary-color);
+        color: white;
+    }
+
+    /* Enhanced scrollbars */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #0f172a;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #374151;
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #475569;
+    }
+
+    /* Enhanced focus states */
+    .btn:focus-visible,
+    .form-select:focus-visible,
+    .text-area:focus-visible,
+    .theme-toggle:focus-visible {
+        outline: 2px solid var(--primary-color);
+        outline-offset: 2px;
+    }
+
+    /* Enhanced disabled states */
+    .btn:disabled {
+        background: #374151;
+        color: #64748b;
+    }
+
+    /* Enhanced transitions for smooth theme switching */
+    .card,
+    .btn,
+    .form-select,
+    .text-area,
+    .file-upload-area,
+    .theme-toggle,
+    .alert {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+}
+
+/* Smooth theme transitions */
+* {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Ensure images maintain proper contrast in dark mode */
+[data-theme="dark"] img {
+    filter: brightness(0.9) contrast(1.1);
+}
+
+/* Print styles for dark mode */
+@media print {
     [data-theme="dark"] {
-        --border-color: #ffffff;
-    }
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+        --background-color: white !important;
+        --text-primary: black !important;
+        --surface-color: white !important;
     }
 }

@@ -133,121 +133,222 @@ $_SESSION['debug_log'] = $debugLog;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lifebox M&E Smart OCR Web Application</title>
+    <title>Lifebox M&E Smart OCR - Advanced Text Extraction Tool</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/dark-mode.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
     <div class="container">
+        <!-- Enhanced Header -->
         <header class="header">
-            <h1 class="logo">
-                <span class="logo-icon">🔍</span>
-                Lifebox M&E Smart 👁️‍🗨️©️®️
-            </h1>
-            <form method="post" class="theme-toggle-form">
-                <button type="submit" name="toggle_theme" class="theme-toggle">
-                    <span class="theme-icon"><?= $currentTheme === 'light' ? '🌙' : '☀️' ?></span>
-                    <?= $currentTheme === 'light' ? 'Dark Mode' : 'Light Mode' ?>
-                </button>
-            </form>
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="logo-text">
+                            <span class="logo-main">Lifebox M&E</span>
+                            <span class="logo-sub">
+                                <h3>Smart OCR Pro</h3>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="beta-badge">BETA v0.7</div>
+                </div>
+
+                <form method="post" class="theme-toggle-form">
+                    <button type="submit" name="toggle_theme" class="theme-toggle" aria-label="Toggle theme">
+                        <span class="theme-icon">
+                            <i class="fas fa-<?= $currentTheme === 'light' ? 'moon' : 'sun' ?>"></i>
+                        </span>
+                        <span class="theme-text">
+                            <?= $currentTheme === 'light' ? 'Dark Mode' : 'Light Mode' ?>
+                        </span>
+                    </button>
+                </form>
+            </div>
         </header>
 
+        <!-- Main Content -->
         <main class="main-content">
+            <!-- Status Alerts -->
             <?php if ($error): ?>
                 <div class="alert alert-error">
-                    <span class="alert-icon">⚠️</span>
-                    <?= htmlspecialchars($error) ?>
+                    <div class="alert-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="alert-content">
+                        <strong>Error:</strong> <?= htmlspecialchars($error) ?>
+                    </div>
+                    <button class="alert-close" onclick="this.parentElement.remove()">
+                        <i class="fas fa-times"></i>
+                    </button>
                 </div>
             <?php endif; ?>
 
             <?php if ($estimatedTime): ?>
                 <div class="alert alert-info">
-                    <span class="alert-icon">⏱️</span>
-                    Estimated processing time: <?= $estimatedTime ?> seconds
-                </div>
-                <div class="alert alert-info">
-                    <span class="alert-icon">⏱️</span>
-                    Total processing time: <?= number_format($ocrResult['processing_time'], 2) ?>s
+                    <div class="alert-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="alert-content">
+                        <!--Estimated processing time: <strong><?= $estimatedTime ?> seconds</strong>-->
+                        Total Processing time: <strong><?= number_format($ocrResult['processing_time'], 2) ?>sseconds</strong>
+                    </div>
                 </div>
             <?php endif; ?>
 
             <?php if ($ocrResult): ?>
                 <div class="alert alert-success">
-                    <span class="alert-icon">✅</span>
-                    OCR processing completed successfully!
-                    <?php if (empty(trim($ocrResult['text']))): ?>
-                        <br><small>But no text was extracted. Please try a different image or check the debug console.</small>
-                    <?php endif; ?>
+                    <div class="alert-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="alert-content">
+                        <strong>Success!</strong> OCR processing completed!
+                        <?php if (empty(trim($ocrResult['text']))): ?>
+                            <br><small>No text was extracted. Try a different image or check debug console.</small>
+                        <?php endif; ?>
+                    </div>
                 </div>
             <?php endif; ?>
 
+            <!-- Enhanced App Grid -->
             <div class="app-grid">
                 <!-- Upload Section -->
                 <section class="upload-section card">
-                    <h2>Upload Image</h2>
-                    <p class="section-description">Upload a JPG, JPEG, or PNG image for text extraction</p>
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <h2>Upload Image</h2>
+                    </div>
+                    <p class="section-description">Upload JPG, JPEG, or PNG images for text extraction</p>
 
                     <form id="uploadForm" method="post" enctype="multipart/form-data" class="upload-form">
                         <div class="file-upload-area" id="dropZone">
                             <div class="upload-placeholder">
-                                <span class="upload-icon">📁</span>
-                                <p>Drag & drop your image here</p>
-                                <p class="upload-hint">or click to browse</p>
+                                <div class="upload-icon">
+                                    <i class="fas fa-file-image"></i>
+                                </div>
+                                <h3>Drop your image here</h3>
+                                <p class="upload-hint">or click to browse files</p>
+                                <div class="upload-supported">
+                                    <span class="supported-formats">Supported: JPG, JPEG, PNG</span>
+                                    <span class="max-size">Max: 10MB</span>
+                                </div>
+                            </div>
+                            <div class="upload-preview" id="uploadPreview" style="display: none;">
+                                <img id="previewThumbnail" class="preview-thumbnail">
+                                <div class="preview-info">
+                                    <span id="previewFileName" class="file-name"></span>
+                                    <span id="previewFileSize" class="file-size"></span>
+                                </div>
+                                <button type="button" class="preview-remove" onclick="clearFileInput()">
+                                    <i class="fas fa-times"></i>
+                                </button>
                             </div>
                             <input type="file" id="imageFile" name="image_file" accept=".jpg,.jpeg,.png" required class="file-input">
                         </div>
 
-                        <div class="form-group">
-                            <label for="language">OCR Language:</label>
-                            <select id="language" name="language" class="form-select">
-                                <option value="eng">English</option>
-                                <option value="fra">French</option>
-                                <option value="spa">Spanish</option>
-                                <option value="deu">German</option>
-                            </select>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="language" class="form-label">
+                                    <i class="fas fa-language"></i>
+                                    OCR Language
+                                </label>
+                                <select id="language" name="language" class="form-select">
+                                    <option value="eng">English</option>
+                                    <option value="fra">French</option>
+                                    <option value="spa">Spanish</option>
+                                    <option value="deu">German</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">
+                                    <i class="fas fa-bolt"></i>
+                                    Processing Options
+                                </label>
+                                <div class="performance-options">
+                                    <label class="checkbox-label modern-checkbox">
+                                        <input type="checkbox" name="optimize_speed" value="1" checked>
+                                        <span class="checkmark">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                        <span class="checkbox-text">
+                                            <span class="checkbox-title">Optimize for Speed</span>
+                                            <span class="checkbox-description">Faster processing with slightly reduced accuracy</span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="performance-options">
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="optimize_speed" value="1" checked>
-                                <span class="checkmark"></span>
-                                Optimize for Speed (Faster processing)
-                            </label>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary btn-full" id="scanButton">
-                            <span class="btn-icon">🔍</span>
-                            Scan Image
+                        <button type="submit" class="btn btn-primary btn-full upload-button" id="scanButton">
+                            <span class="btn-icon">
+                                <i class="fas fa-search"></i>
+                            </span>
+                            <span class="btn-text">Scan Image</span>
+                            <div class="btn-loading" style="display: none;">
+                                <div class="loading-spinner-small"></div>
+                                Processing...
+                            </div>
                         </button>
                     </form>
                 </section>
 
                 <!-- Camera Section -->
                 <section class="camera-section card">
-                    <h2>Camera Capture</h2>
-                    <p class="section-description">Capture an image directly from your camera</p>
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <h2>Camera Capture</h2>
+                    </div>
+                    <p class="section-description">Capture images directly from your camera</p>
 
                     <div class="camera-container">
-                        <video id="cameraPreview" autoplay playsinline class="camera-video" style="display: none;"></video>
-                        <canvas id="cameraCanvas" class="camera-canvas" style="display: none;"></canvas>
+                        <div class="camera-wrapper">
+                            <video id="cameraPreview" autoplay playsinline class="camera-video" style="display: none;"></video>
+                            <canvas id="cameraCanvas" class="camera-canvas" style="display: none;"></canvas>
 
-                        <div id="cameraPlaceholder" class="camera-placeholder">
-                            <span class="camera-icon">📷</span>
-                            <p>Camera not active</p>
+                            <div id="cameraPlaceholder" class="camera-placeholder">
+                                <div class="camera-icon">
+                                    <i class="fas fa-camera"></i>
+                                </div>
+                                <h3>Camera Ready</h3>
+                                <p>Start camera to begin capture</p>
+                            </div>
+
+                            <div class="camera-overlay">
+                                <div class="camera-frame"></div>
+                            </div>
                         </div>
 
                         <div class="camera-controls">
-                            <button type="button" id="startCamera" class="btn btn-secondary">
-                                <span class="btn-icon">📷</span>
+                            <button type="button" id="startCamera" class="btn btn-secondary camera-btn">
+                                <span class="btn-icon">
+                                    <i class="fas fa-play"></i>
+                                </span>
                                 Start Camera
                             </button>
-                            <button type="button" id="captureImage" class="btn btn-primary" disabled>
-                                <span class="btn-icon">⭕</span>
+                            <button type="button" id="captureImage" class="btn btn-primary camera-btn" disabled>
+                                <span class="btn-icon">
+                                    <i class="fas fa-camera"></i>
+                                </span>
                                 Capture
+                            </button>
+                            <button type="button" id="stopCamera" class="btn btn-danger camera-btn" style="display: none;">
+                                <span class="btn-icon">
+                                    <i class="fas fa-stop"></i>
+                                </span>
+                                Stop
                             </button>
                         </div>
                     </div>
@@ -261,14 +362,35 @@ $_SESSION['debug_log'] = $debugLog;
 
                 <!-- Preview Section -->
                 <section class="preview-section card">
-                    <h2>Image Preview</h2>
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <h2>Image Preview</h2>
+                    </div>
                     <div class="preview-container">
                         <?php if ($uploadedFileUrl): ?>
-                            <img src="<?= htmlspecialchars($uploadedFileUrl) ?>" alt="Uploaded image" class="preview-image" id="previewImage">
+                            <div class="preview-image-wrapper">
+                                <img src="<?= htmlspecialchars($uploadedFileUrl) ?>" alt="Uploaded image" class="preview-image" id="previewImage">
+                                <div class="preview-actions">
+                                    <button class="preview-action-btn" onclick="zoomIn()">
+                                        <i class="fas fa-search-plus"></i>
+                                    </button>
+                                    <button class="preview-action-btn" onclick="zoomOut()">
+                                        <i class="fas fa-search-minus"></i>
+                                    </button>
+                                    <button class="preview-action-btn" onclick="resetZoom()">
+                                        <i class="fas fa-sync"></i>
+                                    </button>
+                                </div>
+                            </div>
                         <?php else: ?>
                             <div class="preview-placeholder">
-                                <span class="preview-icon">🖼️</span>
-                                <p>No image selected</p>
+                                <div class="preview-icon">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                                <h3>No Image Selected</h3>
+                                <p>Upload an image or use camera to see preview</p>
                             </div>
                         <?php endif; ?>
                     </div>
@@ -276,65 +398,99 @@ $_SESSION['debug_log'] = $debugLog;
 
                 <!-- Results Section -->
                 <section class="results-section card">
-                    <h2>Extracted Text</h2>
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h2>Extracted Text</h2>
+                    </div>
+
                     <div class="results-header">
                         <div class="results-info">
                             <?php if ($ocrResult): ?>
-                                <span class="confidence-badge">
-                                    Confidence: <?= number_format($ocrResult['confidence'], 1) ?>%
-                                </span>
-                                <span class="processing-time">
-                                    Time: <?= number_format($ocrResult['processing_time'], 2) ?>s
-                                </span>
-                                <?php if (isset($ocrResult['fonts_processed'])): ?>
-                                    <span class="fonts-badge">
-                                        Fonts: <?= $ocrResult['fonts_processed'] ?>
+                                <div class="result-badges">
+                                    <span class="confidence-badge">
+                                        <i class="fas fa-chart-line"></i>
+                                        Confidence: <?= number_format($ocrResult['confidence'], 1) ?>%
                                     </span>
-                                <?php endif; ?>
-                                <?php if (isset($ocrResult['best_font'])): ?>
-                                    <span class="font-badge">
-                                        Best Font: <?= htmlspecialchars($ocrResult['best_font']) ?>
+                                    <span class="processing-time">
+                                        <i class="fas fa-clock"></i>
+                                        Time: <?= number_format($ocrResult['processing_time'], 2) ?>s
                                     </span>
-                                <?php endif; ?>
+                                    <?php if (isset($ocrResult['fonts_processed'])): ?>
+                                        <span class="fonts-badge">
+                                            <i class="fas fa-font"></i>
+                                            Fonts: <?= $ocrResult['fonts_processed'] ?>
+                                        </span>
+                                    <?php endif; ?>
+                                    <?php if (isset($ocrResult['best_font'])): ?>
+                                        <span class="font-badge">
+                                            <i class="fas fa-text-height"></i>
+                                            Best Font: <?= htmlspecialchars($ocrResult['best_font']) ?>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
                             <?php endif; ?>
                         </div>
                         <div class="results-actions">
                             <?php if ($ocrResult && !empty(trim($ocrResult['text']))): ?>
-                                <button type="button" id="copyText" class="btn btn-secondary btn-sm">
-                                    <span class="btn-icon">📋</span>
-                                    Copy
+                                <button type="button" id="copyText" class="btn btn-secondary btn-sm result-action-btn">
+                                    <span class="btn-icon">
+                                        <i class="fas fa-copy"></i>
+                                    </span>
+                                    Copy Text
                                 </button>
-                                <a href="download.php" class="btn btn-primary btn-sm" id="downloadLink">
-                                    <span class="btn-icon">💾</span>
+                                <a href="download.php" class="btn btn-primary btn-sm result-action-btn" id="downloadLink">
+                                    <span class="btn-icon">
+                                        <i class="fas fa-download"></i>
+                                    </span>
                                     Download
                                 </a>
+                                <button type="button" id="clearText" class="btn btn-danger btn-sm result-action-btn">
+                                    <span class="btn-icon">
+                                        <i class="fas fa-trash"></i>
+                                    </span>
+                                    Clear
+                                </button>
                             <?php endif; ?>
                         </div>
                     </div>
 
                     <div class="text-results">
-                        <textarea
-                            id="extractedText"
-                            class="text-area"
-                            placeholder="Extracted text will appear here..."
-                            <?= $ocrResult ? '' : 'disabled' ?>><?=
-                                                                $ocrResult ? (
-                                                                    is_array($ocrResult['text']) ?
-                                                                    implode("\n", $ocrResult['text']) :
-                                                                    htmlspecialchars($ocrResult['text'])
-                                                                ) : ''
-                                                                ?></textarea>
+                        <div class="text-area-container">
+                            <textarea
+                                id="extractedText"
+                                class="text-area"
+                                placeholder="Extracted text will appear here..."
+                                <?= $ocrResult ? '' : 'disabled' ?>><?=
+                                                                    $ocrResult ? (
+                                                                        is_array($ocrResult['text']) ?
+                                                                        implode("\n", $ocrResult['text']) :
+                                                                        htmlspecialchars($ocrResult['text'])
+                                                                    ) : ''
+                                                                    ?></textarea>
+                            <div class="text-area-overlay" id="textAreaOverlay" style="display: none;">
+                                <div class="overlay-content">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    <p>Processing OCR...</p>
+                                </div>
+                            </div>
+                        </div>
 
                         <?php if ($ocrResult && empty(trim($ocrResult['text']))): ?>
-                            <div class="alert alert-warning" style="margin-top: 1rem;">
-                                <span class="alert-icon">⚠️</span>
-                                No text was extracted from the image. This could be because:
-                                <ul style="margin: 0.5rem 0 0 1rem;">
-                                    <li>The image doesn't contain readable text</li>
-                                    <li>The text is too small or blurry</li>
-                                    <li>The font is not supported</li>
-                                    <li>Check the debug console for more details</li>
-                                </ul>
+                            <div class="alert alert-warning">
+                                <div class="alert-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="alert-content">
+                                    <strong>No text extracted.</strong> Possible reasons:
+                                    <ul class="alert-list">
+                                        <li>Image doesn't contain readable text</li>
+                                        <li>Text is too small or blurry</li>
+                                        <li>Unsupported font or language</li>
+                                        <li>Low image quality or contrast</li>
+                                    </ul>
+                                </div>
                             </div>
                         <?php endif; ?>
                     </div>
@@ -342,16 +498,31 @@ $_SESSION['debug_log'] = $debugLog;
                     <?php if ($ocrResult && !empty(trim($ocrResult['text']))): ?>
                         <div class="text-stats">
                             <div class="stat-item">
-                                <span class="stat-label">Characters:</span>
-                                <span class="stat-value" id="charCount"><?= mb_strlen($ocrResult['text']) ?></span>
+                                <div class="stat-icon">
+                                    <i class="fas fa-font"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <span class="stat-value" id="charCount"><?= mb_strlen($ocrResult['text']) ?></span>
+                                    <span class="stat-label">Characters</span>
+                                </div>
                             </div>
                             <div class="stat-item">
-                                <span class="stat-label">Words:</span>
-                                <span class="stat-value" id="wordCount"><?= str_word_count($ocrResult['text']) ?></span>
+                                <div class="stat-icon">
+                                    <i class="fas fa-file-word"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <span class="stat-value" id="wordCount"><?= str_word_count($ocrResult['text']) ?></span>
+                                    <span class="stat-label">Words</span>
+                                </div>
                             </div>
                             <div class="stat-item">
-                                <span class="stat-label">Lines:</span>
-                                <span class="stat-value" id="lineCount"><?= substr_count($ocrResult['text'], "\n") + 1 ?></span>
+                                <div class="stat-icon">
+                                    <i class="fas fa-bars"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <span class="stat-value" id="lineCount"><?= substr_count($ocrResult['text'], "\n") + 1 ?></span>
+                                    <span class="stat-label">Lines</span>
+                                </div>
                             </div>
                         </div>
                     <?php endif; ?>
@@ -359,28 +530,57 @@ $_SESSION['debug_log'] = $debugLog;
 
                 <!-- Debug Console Section -->
                 <section class="debug-section card">
-                    <h2>Debug Console</h2>
-                    <div class="debug-controls">
-                        <button type="button" id="clearDebug" class="btn btn-secondary btn-sm">
-                            <span class="btn-icon">🗑️</span>
-                            Clear
-                        </button>
-                        <button type="button" id="toggleDebug" class="btn btn-secondary btn-sm">
-                            <span class="btn-icon">🔍</span>
-                            Toggle Console
-                        </button>
-                        <span class="debug-timezone">Timezone: Africa/Addis_Ababa</span>
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-terminal"></i>
+                        </div>
+                        <h2>Debug Console</h2>
                     </div>
+
+                    <div class="debug-controls">
+                        <div class="debug-buttons">
+                            <button type="button" id="clearDebug" class="btn btn-secondary btn-sm debug-btn">
+                                <span class="btn-icon">
+                                    <i class="fas fa-trash"></i>
+                                </span>
+                                Clear Console
+                            </button>
+                            <button type="button" id="toggleDebug" class="btn btn-secondary btn-sm debug-btn">
+                                <span class="btn-icon">
+                                    <i class="fas fa-chevron-down"></i>
+                                </span>
+                                <span class="toggle-text">Collapse</span>
+                            </button>
+                            <button type="button" id="exportDebug" class="btn btn-secondary btn-sm debug-btn">
+                                <span class="btn-icon">
+                                    <i class="fas fa-download"></i>
+                                </span>
+                                Export Logs
+                            </button>
+                        </div>
+                        <div class="debug-info">
+                            <span class="debug-timezone">
+                                <i class="fas fa-globe"></i>
+                                Africa/Addis_Ababa
+                            </span>
+                            <span class="debug-status" id="debugStatus">
+                                <i class="fas fa-circle"></i>
+                                Ready
+                            </span>
+                        </div>
+                    </div>
+
                     <div class="debug-console" id="debugConsole">
-                        <div class="debug-messages">
+                        <div class="debug-messages" id="debugMessages">
                             <?php foreach ($debugLog as $logEntry): ?>
                                 <div class="debug-message">
                                     <span class="debug-timestamp">[<?= date('H:i:s') ?>]</span>
-                                    <?= htmlspecialchars($logEntry) ?>
+                                    <span class="debug-content"><?= htmlspecialchars($logEntry) ?></span>
                                 </div>
                             <?php endforeach; ?>
                             <?php if (empty($debugLog)): ?>
                                 <div class="debug-message debug-info">
+                                    <i class="fas fa-info-circle"></i>
                                     No debug messages yet. Processing logs will appear here.
                                 </div>
                             <?php endif; ?>
@@ -388,26 +588,133 @@ $_SESSION['debug_log'] = $debugLog;
                     </div>
                 </section>
             </div>
+
+            <!-- User Guide Section -->
+            <section class="guide-section card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h2>How to Use This Tool</h2>
+                </div>
+
+                <div class="guide-content">
+                    <div class="guide-steps">
+                        <div class="guide-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Upload or Capture Image</h3>
+                                <p>Use the upload section to select an image file or use your camera to capture text directly.</p>
+                            </div>
+                        </div>
+                        <div class="guide-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>Configure Settings</h3>
+                                <p>Select the appropriate language and choose between speed optimization or higher accuracy.</p>
+                            </div>
+                        </div>
+                        <div class="guide-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>Process Image</h3>
+                                <p>Click "Scan Image" to start the OCR process. Processing time depends on image size and complexity.</p>
+                            </div>
+                        </div>
+                        <div class="guide-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h3>Review & Export</h3>
+                                <p>Check the extracted text, copy it to clipboard, or download as a text file.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="guide-tips">
+                        <h3>Pro Tips for Better Results:</h3>
+                        <ul>
+                            <li>Use high-contrast, clear images with good lighting</li>
+                            <li>Ensure text is horizontal and not rotated</li>
+                            <li>For camera capture, hold the device steady</li>
+                            <li>Use "Optimize for Speed" for simple documents</li>
+                            <li>Disable speed optimization for complex layouts</li>
+                            <li>Check the debug console for processing details</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
         </main>
 
+        <!-- Enhanced Footer -->
         <footer class="footer">
-            <p>&copy; <?= date('Y') ?>Lifebox M&E Smart OCR Application. All rights reserved.</p>
-            <p class="footer-time">Server Time: <?= date('Y-m-d H:i:s') ?> (Africa/Addis_Ababa)</p>
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-brand">
+                        <div class="footer-logo">
+                            <i class="fas fa-search"></i>
+                            <span>Lifebox M&E Smart OCR</span>
+                        </div>
+                        <div class="version-info">Version 0.7.0 BETA</div>
+                    </div>
+
+                    <div class="footer-links">
+                        <a href="https://merqconsultancy.org" target="_blank" class="footer-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            Powered By: MERQ Consultancy
+                        </a>
+                        <span class="footer-separator">|</span>
+                        <span class="footer-dev">
+                            <i class="fas fa-code"></i>
+                            Under Active Development
+                        </span>
+                    </div>
+                </div>
+
+                <div class="footer-secondary">
+                    <div class="footer-time">
+                        <i class="fas fa-clock"></i>
+                        Server Time: <?= date('Y-m-d H:i:s') ?> (Africa/Addis_Ababa)
+                    </div>
+                    <div class="footer-features">
+                        <i class="fas fa-rocket"></i>
+                        More features coming soon: Batch processing, PDF support, Advanced editing
+                    </div>
+                </div>
+            </div>
         </footer>
     </div>
 
-    <!-- Loading Overlay -->
+    <!-- Enhanced Loading Overlay -->
     <div id="loadingOverlay" class="loading-overlay hidden">
-        <div class="loading-spinner"></div>
-        <p class="loading-text">Processing OCR... Please wait</p>
-        <div class="loading-details" id="loadingDetails"></div>
-        <?php if ($estimatedTime): ?>
-            <div class="loading-estimate">
-                Estimated time: <?= $estimatedTime ?> seconds
+        <div class="loading-container">
+            <div class="loading-animation">
+                <div class="loading-spinner-large"></div>
+                <div class="loading-pulse"></div>
             </div>
-        <?php endif; ?>
+            <div class="loading-content">
+                <h3 class="loading-title">Processing OCR</h3>
+                <p class="loading-text">Analyzing your image and extracting text...</p>
+                <div class="loading-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">Initializing...</div>
+                </div>
+                <div class="loading-details" id="loadingDetails"></div>
+                <?php if ($estimatedTime): ?>
+                    <div class="loading-estimate">
+                        <i class="fas fa-clock"></i>
+                        Estimated time: <?= $estimatedTime ?> seconds
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
     </div>
 
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Scripts -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/upload.js"></script>
     <script src="assets/js/camera.js"></script>
