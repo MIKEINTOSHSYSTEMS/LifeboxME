@@ -13,20 +13,25 @@ $security = new Security();
 // Initialize debug log
 $debugLog = [];
 
-// Handle theme preference
+// Handle theme preference - FIXED VERSION
 $currentTheme = $_COOKIE['theme'] ?? 'light';
 if (isset($_POST['toggle_theme'])) {
     $currentTheme = $currentTheme === 'light' ? 'dark' : 'light';
     setcookie('theme', $currentTheme, time() + (86400 * 30), "/");
+    // Refresh to apply theme immediately
+    header('Location: ' . $_SERVER['PHP_SELF']);
+    exit;
 }
 
 // Process OCR if form submitted
 $ocrResult = null;
 $error = null;
 $uploadedFileUrl = null;
+$estimatedTime = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image_file'])) {
     try {
+        $startTime = microtime(true);
         Config::log("Starting OCR process for uploaded file");
         $debugLog[] = "Starting OCR process for uploaded file";
 
@@ -37,13 +42,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image_file'])) {
         $uploadedFileUrl = Config::getBaseUrl() . 'uploads/tmp/' . basename($uploadedFile);
         $debugLog[] = "Generated file URL: " . $uploadedFileUrl;
 
+        // File Upload Section
         if ($uploadedFile) {
             $ocr = new OCRProcessor();
             $language = $_POST['language'] ?? Config::DEFAULT_LANGUAGE;
+            $optimizeSpeed = isset($_POST['optimize_speed']) && $_POST['optimize_speed'] == '1';
             $debugLog[] = "Using language: " . $language;
+            $debugLog[] = "Optimize for speed: " . ($optimizeSpeed ? 'Yes' : 'No');
 
-            $ocrResult = $ocr->processImage($uploadedFile, $language);
-            $debugLog[] = "OCR processing completed. Confidence: " . $ocrResult['confidence'] . "%, Time: " . $ocrResult['processing_time'] . "s";
+            // Estimate processing time based on file size and optimization
+            $fileSize = filesize($uploadedFile);
+            $estimatedTime = $ocr->estimateProcessingTime($fileSize, $optimizeSpeed);
+            $debugLog[] = "Estimated processing time: " . $estimatedTime . " seconds";
+
+            $ocrResult = $ocr->processImage($uploadedFile, $language, $optimizeSpeed);
+            $actualTime = microtime(true) - $startTime;
+            $debugLog[] = "OCR processing completed. Confidence: " . $ocrResult['confidence'] . "%, Time: " . round($actualTime, 2) . "s";
+            $debugLog[] = "Best font: " . ($ocrResult['best_font'] ?? 'Unknown');
+            $debugLog[] = "Fonts processed: " . ($ocrResult['fonts_processed'] ?? 0);
             $debugLog[] = "Extracted text length: " . strlen($ocrResult['text']);
 
             // Store result in session for download
@@ -64,6 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image_file'])) {
 // Handle camera capture
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['camera_image'])) {
     try {
+        $startTime = microtime(true);
         Config::log("Starting OCR process for camera capture");
         $debugLog[] = "Starting OCR process for camera capture";
 
@@ -71,13 +88,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['camera_image'])) {
         $uploadedFile = $uploader->processCameraImage($imageData);
         $debugLog[] = "Camera image processed: " . basename($uploadedFile);
 
+        // camera section:
         if ($uploadedFile) {
             $ocr = new OCRProcessor();
             $language = $_POST['language'] ?? Config::DEFAULT_LANGUAGE;
+            $optimizeSpeed = isset($_POST['optimize_speed']) && $_POST['optimize_speed'] == '1';
             $debugLog[] = "Using language: " . $language;
+            $debugLog[] = "Optimize for speed: " . ($optimizeSpeed ? 'Yes' : 'No');
 
-            $ocrResult = $ocr->processImage($uploadedFile, $language);
-            $debugLog[] = "OCR processing completed. Confidence: " . $ocrResult['confidence'] . "%, Time: " . $ocrResult['processing_time'] . "s";
+            // Estimate processing time for camera image
+            $estimatedTime = $ocr->estimateProcessingTime(500000, $optimizeSpeed); // Assume ~500KB for camera images
+            $debugLog[] = "Estimated processing time: " . $estimatedTime . " seconds";
+
+            $ocrResult = $ocr->processImage($uploadedFile, $language, $optimizeSpeed);
+            $actualTime = microtime(true) - $startTime;
+            $debugLog[] = "OCR processing completed. Confidence: " . $ocrResult['confidence'] . "%, Time: " . round($actualTime, 2) . "s";
+            $debugLog[] = "Best font: " . ($ocrResult['best_font'] ?? 'Unknown');
+            $debugLog[] = "Fonts processed: " . ($ocrResult['fonts_processed'] ?? 0);
             $debugLog[] = "Extracted text length: " . strlen($ocrResult['text']);
 
             $_SESSION['last_ocr_result'] = [
@@ -106,7 +133,7 @@ $_SESSION['debug_log'] = $debugLog;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart OCR Web Application</title>
+    <title>Lifebox M&E Smart OCR Web Application</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/dark-mode.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -119,7 +146,7 @@ $_SESSION['debug_log'] = $debugLog;
         <header class="header">
             <h1 class="logo">
                 <span class="logo-icon">🔍</span>
-                Smart OCR
+                Lifebox M&E Smart 👁️‍🗨️©️®️
             </h1>
             <form method="post" class="theme-toggle-form">
                 <button type="submit" name="toggle_theme" class="theme-toggle">
@@ -134,6 +161,17 @@ $_SESSION['debug_log'] = $debugLog;
                 <div class="alert alert-error">
                     <span class="alert-icon">⚠️</span>
                     <?= htmlspecialchars($error) ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($estimatedTime): ?>
+                <div class="alert alert-info">
+                    <span class="alert-icon">⏱️</span>
+                    Estimated processing time: <?= $estimatedTime ?> seconds
+                </div>
+                <div class="alert alert-info">
+                    <span class="alert-icon">⏱️</span>
+                    Total processing time: <?= number_format($ocrResult['processing_time'], 2) ?>s
                 </div>
             <?php endif; ?>
 
@@ -173,6 +211,14 @@ $_SESSION['debug_log'] = $debugLog;
                             </select>
                         </div>
 
+                        <div class="performance-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="optimize_speed" value="1" checked>
+                                <span class="checkmark"></span>
+                                Optimize for Speed (Faster processing)
+                            </label>
+                        </div>
+
                         <button type="submit" class="btn btn-primary btn-full" id="scanButton">
                             <span class="btn-icon">🔍</span>
                             Scan Image
@@ -209,6 +255,7 @@ $_SESSION['debug_log'] = $debugLog;
                     <form id="cameraForm" method="post" class="hidden">
                         <input type="hidden" name="camera_image" id="cameraImageData">
                         <input type="hidden" name="language" id="cameraLanguage">
+                        <input type="hidden" name="optimize_speed" value="1">
                     </form>
                 </section>
 
@@ -239,6 +286,16 @@ $_SESSION['debug_log'] = $debugLog;
                                 <span class="processing-time">
                                     Time: <?= number_format($ocrResult['processing_time'], 2) ?>s
                                 </span>
+                                <?php if (isset($ocrResult['fonts_processed'])): ?>
+                                    <span class="fonts-badge">
+                                        Fonts: <?= $ocrResult['fonts_processed'] ?>
+                                    </span>
+                                <?php endif; ?>
+                                <?php if (isset($ocrResult['best_font'])): ?>
+                                    <span class="font-badge">
+                                        Best Font: <?= htmlspecialchars($ocrResult['best_font']) ?>
+                                    </span>
+                                <?php endif; ?>
                             <?php endif; ?>
                         </div>
                         <div class="results-actions">
@@ -255,14 +312,12 @@ $_SESSION['debug_log'] = $debugLog;
                         </div>
                     </div>
 
-                    <!-- Updated FixIn the results section of index.php -->
                     <div class="text-results">
                         <textarea
                             id="extractedText"
                             class="text-area"
                             placeholder="Extracted text will appear here..."
                             <?= $ocrResult ? '' : 'disabled' ?>><?=
-                                                                // Ensure we're displaying a string, not an array
                                                                 $ocrResult ? (
                                                                     is_array($ocrResult['text']) ?
                                                                     implode("\n", $ocrResult['text']) :
@@ -314,6 +369,7 @@ $_SESSION['debug_log'] = $debugLog;
                             <span class="btn-icon">🔍</span>
                             Toggle Console
                         </button>
+                        <span class="debug-timezone">Timezone: Africa/Addis_Ababa</span>
                     </div>
                     <div class="debug-console" id="debugConsole">
                         <div class="debug-messages">
@@ -335,7 +391,8 @@ $_SESSION['debug_log'] = $debugLog;
         </main>
 
         <footer class="footer">
-            <p>&copy; <?= date('Y') ?> Smart OCR Application. All rights reserved.</p>
+            <p>&copy; <?= date('Y') ?>Lifebox M&E Smart OCR Application. All rights reserved.</p>
+            <p class="footer-time">Server Time: <?= date('Y-m-d H:i:s') ?> (Africa/Addis_Ababa)</p>
         </footer>
     </div>
 
@@ -344,6 +401,11 @@ $_SESSION['debug_log'] = $debugLog;
         <div class="loading-spinner"></div>
         <p class="loading-text">Processing OCR... Please wait</p>
         <div class="loading-details" id="loadingDetails"></div>
+        <?php if ($estimatedTime): ?>
+            <div class="loading-estimate">
+                Estimated time: <?= $estimatedTime ?> seconds
+            </div>
+        <?php endif; ?>
     </div>
 
     <script src="assets/js/main.js"></script>

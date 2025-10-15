@@ -7,8 +7,8 @@
 
 :root {
     /* Light theme variables */
-    --primary-color: #2563eb;
-    --primary-hover: #1d4ed8;
+    --primary-color: #047da9;
+    --primary-hover: #70b497;
     --secondary-color: #64748b;
     --secondary-hover: #475569;
     --background-color: #f8fafc;
@@ -26,8 +26,8 @@
 }
 
 [data-theme="dark"] {
-    --primary-color: #3b82f6;
-    --primary-hover: #2563eb;
+    --primary-color: #047da9;
+    --primary-hover: #70b497;
     --secondary-color: #94a3b8;
     --secondary-hover: #cbd5e1;
     --background-color: #0f172a;
@@ -710,4 +710,96 @@ body {
             "results"
             "debug";
     }
+}
+
+/* Performance Options */
+.performance-options {
+    margin: 1rem 0;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.checkbox-label input[type="checkbox"] {
+    display: none;
+}
+
+.checkmark {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--border-color);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.checkbox-label input[type="checkbox"]:checked+.checkmark {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.checkbox-label input[type="checkbox"]:checked+.checkmark::after {
+    content: '✓';
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Fonts badge */
+.fonts-badge {
+    background: var(--secondary-color);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Debug timezone */
+.debug-timezone {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-left: auto;
+}
+
+/* Footer time */
+.footer-time {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+}
+
+/* Loading estimate */
+.loading-estimate {
+    color: white;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* Alert info */
+.alert-info {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+/* Fonts Badge */
+.font-badge {
+    background: #8b5cf6;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

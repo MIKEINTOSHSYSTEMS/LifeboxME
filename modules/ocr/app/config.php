@@ -31,29 +31,18 @@ class Config
     public const TMP_FILE_MAX_AGE = 24;
 
     // Debug settings
-    // In config.php, update the DEBUG_MODE constant
     public const DEBUG_MODE = true;
-
-    public static function log(string $message, string $level = 'INFO'): void
-    {
-        $timestamp = date('Y-m-d H:i:s');
-        $logMessage = "[$timestamp] [$level] $message\n";
-
-        // Always log to file if debug mode is enabled
-        if (self::DEBUG_MODE) {
-            file_put_contents(self::LOG_FILE, $logMessage, FILE_APPEND | LOCK_EX);
-        }
-
-        // Also output to console if running in CLI
-        if (php_sapi_name() === 'cli') {
-            echo $logMessage;
-        }
-    }
-
     public const LOG_FILE = __DIR__ . '/logs/debug.log';
+
+    // Performance settings
+    public const OPTIMIZE_FOR_SPEED = true;
+    public const MAX_PROCESSING_TIME = 300; // seconds
 
     public static function init(): void
     {
+        // Set timezone to Addis Ababa
+        date_default_timezone_set('Africa/Addis_Ababa');
+
         // Create directories if they don't exist
         $directories = [
             self::UPLOAD_TMP_DIR,
@@ -80,8 +69,30 @@ class Config
             ini_set('log_errors', '1');
             ini_set('error_log', self::LOG_FILE);
         }
+
+        // Performance optimizations
+        if (self::OPTIMIZE_FOR_SPEED) {
+            ini_set('max_execution_time', self::MAX_PROCESSING_TIME);
+        }
     }
-/*
+
+    public static function log(string $message, string $level = 'INFO'): void
+    {
+        $timestamp = date('Y-m-d H:i:s');
+        $logMessage = "[$timestamp] [$level] $message\n";
+
+        // Always log to file if debug mode is enabled
+        if (self::DEBUG_MODE) {
+            file_put_contents(self::LOG_FILE, $logMessage, FILE_APPEND | LOCK_EX);
+        }
+
+        // Also output to console if running in CLI
+        if (php_sapi_name() === 'cli') {
+            echo $logMessage;
+        }
+    }
+
+    /*
     public static function log(string $message, string $level = 'INFO'): void
     {
         if (self::DEBUG_MODE) {
@@ -105,6 +116,38 @@ class Config
         }
 
         return $protocol . '://' . $host . $basePath;
+    }
+
+    /**
+     * Get all available fonts recursively
+     */
+    public static function getAvailableFonts(): array
+    {
+        $fonts = [];
+        $fontFiles = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator(__DIR__ . '/fonts/active')
+        );
+
+        foreach ($fontFiles as $file) {
+            if ($file->isFile() && $file->getExtension() === 'ttf') {
+                $fonts[] = $file->getPathname();
+            }
+        }
+
+        // Sort fonts for consistent ordering
+        sort($fonts);
+        return $fonts;
+    }
+
+    /**
+     * Get font display name from path
+     */
+    public static function getFontDisplayName(string $fontPath): string
+    {
+        $filename = basename($fontPath, '.ttf');
+        // Convert filename to readable format
+        $name = str_replace(['-', '_'], ' ', $filename);
+        return ucwords($name);
     }
 }
 

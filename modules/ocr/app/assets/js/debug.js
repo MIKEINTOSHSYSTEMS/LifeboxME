@@ -67,16 +67,22 @@ class DebugConsole {
         });
     }
 
+    // Updated the log method to use local time
     log(message, level = 'INFO') {
         if (!this.messagesContainer) return;
 
-        const timestamp = new Date().toLocaleTimeString();
+        // Use server time (already in Addis Ababa timezone) or local time
+        const timestamp = new Date().toLocaleTimeString('en-US', {
+            timeZone: 'Africa/Addis_Ababa',
+            hour12: false
+        });
+
         const messageElement = document.createElement('div');
         messageElement.className = `debug-message debug-${level.toLowerCase()}`;
         messageElement.innerHTML = `
-            <span class="debug-timestamp">[${timestamp}]</span>
-            ${this.escapeHtml(message)}
-        `;
+        <span class="debug-timestamp">[${timestamp}]</span>
+        ${this.escapeHtml(message)}
+    `;
 
         this.messagesContainer.appendChild(messageElement);
 

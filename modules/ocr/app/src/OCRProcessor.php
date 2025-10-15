@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Main OCR processing class with enhanced debugging
+ * Main OCR processing class with enhanced debugging and multi-font support
  */
 
 class OCRProcessor
@@ -16,15 +16,16 @@ class OCRProcessor
     }
 
     /**
-     * Process image with OCR
+     * Process image with OCR using multiple fonts
      */
-    public function processImage(string $imagePath, string $language = 'eng'): array
+    public function processImage(string $imagePath, string $language = 'eng', bool $optimizeSpeed = true): array
     {
         $startTime = microtime(true);
 
         Config::log("OCRProcessor: Starting image processing");
         Config::log("OCRProcessor: Image path: " . $imagePath);
         Config::log("OCRProcessor: Language: " . $language);
+        Config::log("OCRProcessor: Optimize for speed: " . ($optimizeSpeed ? 'Yes' : 'No'));
 
         // Validate input
         if (!file_exists($imagePath)) {
@@ -44,19 +45,23 @@ class OCRProcessor
             $processedImage = $this->preprocessImage($imagePath);
             Config::log("OCRProcessor: Image preprocessing completed");
 
-            // Perform OCR using the existing OCR class
-            Config::log("OCRProcessor: Starting OCR analysis");
-            $ocr = new OCR();
-            $result = $ocr->read_by_font($processedImage, $this->getFontForLanguage($language));
+            // Perform OCR using the existing OCR class with all available fonts
+            Config::log("OCRProcessor: Starting OCR analysis with multiple fonts");
+            $ocr = new OCR($optimizeSpeed);
+
+            // Get the best result from all available fonts
+            $result = $ocr->read($processedImage);
 
             $processingTime = microtime(true) - $startTime;
 
             // Ensure text is a string, not an array
-            $extractedText = is_array($result['autocorrected']) ? implode("\n", $result['autocorrected']) : ($result['autocorrected'] ?? '');
-            $extractedText = is_array($result['output']) ? implode("\n", $result['output']) : ($extractedText ?? '');
+            $extractedText = is_array($result['text']) ? implode("\n", $result['text']) : ($result['text'] ?? '');
+            $extractedText = $extractedText ?: '';
 
             Config::log("OCRProcessor: OCR completed in " . round($processingTime, 2) . " seconds");
             Config::log("OCRProcessor: Confidence score: " . ($result['score'] ?? 0));
+            Config::log("OCRProcessor: Best font: " . ($result['font'] ?? 'Unknown'));
+            Config::log("OCRProcessor: Fonts processed: " . ($result['fonts_processed'] ?? 0));
             Config::log("OCRProcessor: Extracted text length: " . strlen($extractedText));
             Config::log("OCRProcessor: Extracted text preview: " . substr($extractedText, 0, 100) . (strlen($extractedText) > 100 ? '...' : ''));
 
@@ -70,13 +75,16 @@ class OCRProcessor
                 'processing_time' => $processingTime,
                 'original_path' => $imagePath,
                 'processed_path' => $processedImage,
+                'best_font' => $result['font'] ?? null,
+                'fonts_processed' => $result['fonts_processed'] ?? 0,
                 'debug_info' => [
                     'language_used' => $language,
-                    'font_used' => $this->getFontForLanguage($language),
+                    'best_font_used' => $result['font'] ?? 'Unknown',
+                    'font_path_used' => $result['font_path'] ?? null,
                     'file_size' => filesize($imagePath),
                     'extracted_length' => strlen($extractedText),
-                    'line_count' => $result['line_count'] ?? 0,
-                    'letter_count' => $result['letter_count'] ?? 0
+                    'fonts_processed_count' => $result['fonts_processed'] ?? 0,
+                    'optimize_speed' => $optimizeSpeed
                 ]
             ];
         } catch (Exception $e) {
@@ -129,21 +137,23 @@ class OCRProcessor
     }
 
     /**
-     * Get appropriate font for language
+     * Get appropriate fonts for language (now returns multiple fonts)
      */
-    private function getFontForLanguage(string $language): string
+    private function getFontsForLanguage(string $language): array
     {
-        $fontMap = [
-            'eng' => 'fonts/Ubuntu-Regular.ttf',
-            'fra' => 'fonts/Ubuntu-Regular.ttf',
-            'spa' => 'fonts/Ubuntu-Regular.ttf',
-            'deu' => 'fonts/Ubuntu-Regular.ttf'
-        ];
+        $allFonts = Config::getAvailableFonts();
+        Config::log("OCRProcessor: Found " . count($allFonts) . " total fonts");
 
-        $font = $fontMap[$language] ?? $fontMap['eng'];
-        Config::log("OCRProcessor: Selected font: " . $font);
+        // Filter fonts by language characteristics if needed
+        // For now, return all available fonts
+        $selectedFonts = $allFonts;
 
-        return $font;
+        // Log the fonts being used
+        foreach ($selectedFonts as $font) {
+            Config::log("OCRProcessor: Available font: " . Config::getFontDisplayName($font));
+        }
+
+        return $selectedFonts;
     }
 
     /**
@@ -152,6 +162,25 @@ class OCRProcessor
     public function getSupportedLanguages(): array
     {
         return Config::SUPPORTED_LANGUAGES;
+    }
+
+    /**
+     * Get available fonts information for display
+     */
+    public function getAvailableFontsInfo(): array
+    {
+        $fonts = Config::getAvailableFonts();
+        $fontInfo = [];
+
+        foreach ($fonts as $fontPath) {
+            $fontInfo[] = [
+                'path' => $fontPath,
+                'name' => Config::getFontDisplayName($fontPath),
+                'size' => filesize($fontPath)
+            ];
+        }
+
+        return $fontInfo;
     }
 
     /**
@@ -181,6 +210,87 @@ class OCRProcessor
             ];
         }
 
+        // Check if we have fonts
+        $fonts = Config::getAvailableFonts();
+        $requirements['fonts'] = [
+            'status' => !empty($fonts),
+            'message' => count($fonts) . " fonts found in fonts directory"
+        ];
+
         return $requirements;
+    }
+
+    /**
+     * Estimate processing time based on file size and number of fonts
+     */
+    public function estimateProcessingTime(int $fileSize, bool $optimizeSpeed = true): string
+    {
+        // Base time + time per MB
+        $baseTime = 29.3; // seconds
+        $timePerMB = 47.9; // seconds per MB
+
+        // Adjust based on number of fonts (fewer fonts = faster)
+        $totalFonts = count(Config::getAvailableFonts());
+        $fontsFactor = $optimizeSpeed ? min(1, $totalFonts) : $totalFonts; // Limit to 5 fonts in speed mode
+        $timePerFont = 0.5; // seconds per font
+
+        $sizeInMB = $fileSize / (1024 * 1024);
+        $estimatedSeconds = $baseTime + ($sizeInMB * $timePerMB) + ($fontsFactor * $timePerFont);
+
+        // Cap at reasonable maximum
+        $estimatedSeconds = min($estimatedSeconds, $optimizeSpeed ? 30 : 60);
+
+        return number_format($estimatedSeconds, 1);
+    }
+
+    /**
+     * Test individual fonts to see which works best for a specific image
+     */
+    public function testFonts(string $imagePath, int $maxFonts = 10): array
+    {
+        Config::log("OCRProcessor: Testing fonts for image: " . $imagePath);
+
+        $fonts = Config::getAvailableFonts();
+        $results = [];
+        $tested = 0;
+
+        foreach ($fonts as $fontPath) {
+            if ($tested >= $maxFonts) {
+                break;
+            }
+
+            try {
+                Config::log("OCRProcessor: Testing font: " . Config::getFontDisplayName($fontPath));
+
+                $ocr = new OCR(false); // Don't optimize for individual font testing
+                $startTime = microtime(true);
+
+                $result = $ocr->read_by_font($imagePath, $fontPath);
+                $processingTime = microtime(true) - $startTime;
+
+                $results[] = [
+                    'font' => Config::getFontDisplayName($fontPath),
+                    'font_path' => $fontPath,
+                    'score' => $result['score'],
+                    'processing_time' => $processingTime,
+                    'text_length' => strlen($result['autocorrected'] ?? ''),
+                    'confidence' => $result['score'] > 80 ? 'high' : ($result['score'] > 60 ? 'medium' : 'low')
+                ];
+
+                Config::log("OCRProcessor: Font " . Config::getFontDisplayName($fontPath) . " score: " . $result['score']);
+
+                $tested++;
+            } catch (Exception $e) {
+                Config::log("OCRProcessor: Failed to test font " . Config::getFontDisplayName($fontPath) . ": " . $e->getMessage(), 'WARNING');
+                continue;
+            }
+        }
+
+        // Sort by score descending
+        usort($results, function ($a, $b) {
+            return $b['score'] <=> $a['score'];
+        });
+
+        return $results;
     }
 }

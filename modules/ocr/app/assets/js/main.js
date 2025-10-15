@@ -39,7 +39,7 @@ class OCRApp {
 
     initializeTheme() {
         const savedTheme = localStorage.getItem('ocr-theme') ||
-            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            (window.matchMedia('(prefers-color-scheme: light)').matches ? 'dark' : 'light');
 
         document.documentElement.setAttribute('data-theme', savedTheme);
 
