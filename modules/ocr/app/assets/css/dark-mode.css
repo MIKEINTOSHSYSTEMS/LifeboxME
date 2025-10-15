@@ -1,0 +1,118 @@
+/* Dark mode specific enhancements */
+
+[data-theme="dark"] {
+
+    /* Enhanced contrast for better readability */
+    .text-area {
+        background: #1a2332;
+        border-color: #2d3748;
+    }
+
+    .text-area:focus {
+        background: #1e293b;
+        border-color: var(--primary-color);
+    }
+
+    .form-select {
+        background: #1a2332;
+        border-color: #2d3748;
+    }
+
+    .form-select:focus {
+        background: #1e293b;
+    }
+
+    .file-upload-area {
+        background: #1a2332;
+    }
+
+    .file-upload-area:hover {
+        background: #1e293b;
+    }
+
+    .preview-container {
+        background: #1a2332;
+    }
+
+    /* Camera video styling */
+    .camera-video,
+    .camera-canvas {
+        background: #1a2332;
+        border-color: #2d3748;
+    }
+
+    /* Loading overlay dark mode */
+    .loading-overlay {
+        background: rgba(0, 0, 0, 0.85);
+    }
+
+    /* Alert dark mode enhancements */
+    .alert-success {
+        background: rgba(16, 185, 129, 0.15);
+    }
+
+    .alert-error {
+        background: rgba(239, 68, 68, 0.15);
+    }
+
+    /* Button hover states */
+    .btn-secondary:hover:not(:disabled) {
+        background: #475569;
+    }
+
+    /* Card hover effects */
+    .card:hover {
+        border-color: #374151;
+    }
+
+    /* Statistics in dark mode */
+    .text-stats {
+        border-top-color: #374151;
+    }
+
+    /* File upload drag-over state */
+    .file-upload-area.dragover {
+        background: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+}
+
+/* Smooth transitions for all interactive elements */
+.card,
+.btn,
+.form-select,
+.text-area,
+.file-upload-area,
+.theme-toggle {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Focus states for accessibility */
+.btn:focus-visible,
+.form-select:focus-visible,
+.text-area:focus-visible,
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: #000000;
+        --shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    [data-theme="dark"] {
+        --border-color: #ffffff;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

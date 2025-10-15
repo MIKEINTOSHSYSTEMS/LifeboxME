@@ -50,6 +50,13 @@ modules/quiz/
 modules/test/exam
 modules/test/lbq/public/regdevtests/
 #modules/forms
+!modules/ocr/app/
+modules/ocr/app/uploads/
+modules/ocr/*.php
+modules/ocr/*.txt
+modules/ocr/*.md
+modules/ocr/*.css
+modules/ocr/assets/
 .env
 **/note.txt
 *.log
