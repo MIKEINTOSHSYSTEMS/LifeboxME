@@ -274,13 +274,13 @@ $responses = $stmt->fetchAll();
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-3 text-center">
-                        <div class="stats-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <div class="stats-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 9px;">
                             <h6>Total Tests Taken</h6>
                             <h3><?= count($responses) ?></h3>
                         </div>
                     </div>
                     <div class="col-md-3 text-center">
-                        <div class="stats-card" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                        <div class="stats-card" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); border-radius: 9px;">
                             <h6>Average Pre Test Score</h6>
                             <h3>
                                 <?php
@@ -292,7 +292,7 @@ $responses = $stmt->fetchAll();
                         </div>
                     </div>
                     <div class="col-md-3 text-center">
-                        <div class="stats-card" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);">
+                        <div class="stats-card" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%); border-radius: 9px;">
                             <h6>Average Post Test Score</h6>
                             <h3>
                                 <?php
@@ -304,7 +304,7 @@ $responses = $stmt->fetchAll();
                         </div>
                     </div>
                     <div class="col-md-3 text-center">
-                        <div class="stats-card" style="background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);">
+                        <div class="stats-card" style="background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%); border-radius: 9px;">
                             <h6>Improvement</h6>
                             <h3>
                                 <?php

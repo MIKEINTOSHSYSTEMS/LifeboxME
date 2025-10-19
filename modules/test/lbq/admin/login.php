@@ -51,7 +51,7 @@ if (!empty($_POST)) {
 
   <style>
     body {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #038ca7 0%, #026176 100%);
       min-height: 100vh;
       display: flex;
       align-items: center;

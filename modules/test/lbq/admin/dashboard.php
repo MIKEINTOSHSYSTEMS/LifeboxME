@@ -276,7 +276,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <div>
             <br></br>
             <!--<h1 class="h2 mb-1 fw-bold text-dark animate-fade-in">Dashboard Overview</h1>-->
-            <h1 class="h2 mb-1 fw-bold animate-fade-in">Dashboard Overview</h1>
+            <h1 class="h2 mb-1 fw-bold animate-fade-in">Overview Dashboard</h1>
             <p class="text-muted">Welcome back! <strong class="d-block"><?= htmlspecialchars($display_name) ?></strong> <br></br> Here's what's happening with Lifebox Tests today.</p>
           </div>
           <div class="btn-toolbar">

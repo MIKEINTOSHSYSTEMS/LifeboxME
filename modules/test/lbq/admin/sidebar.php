@@ -223,18 +223,19 @@ $user_id = $_SESSION['UserID'] ?? '';
     /* Sidebar Style */
     .sidebar {
         position: fixed;
-        top: 43px;
+        top: 47px;
         left: 0;
-        height: 100vh;
+        height: calc(100vh - 43px);
         width: 250px;
         z-index: 1000;
         transition: all 0.3s ease;
         box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3);
+        transform: translateX(0);
     }
 
     .sidebar.collapsed {
+        transform: translateX(-250px);
         width: 0;
-        overflow: hidden;
     }
 
     .sidebar-overlay {
@@ -253,7 +254,6 @@ $user_id = $_SESSION['UserID'] ?? '';
         text-decoration: none;
     }
 
-
     .dropdown,
     .dropdown-center,
     .dropend,
@@ -263,7 +263,6 @@ $user_id = $_SESSION['UserID'] ?? '';
         position: relative;
         bottom: 70px;
     }
-
 
     @media (min-width: 1200px) {
 
@@ -291,11 +290,14 @@ $user_id = $_SESSION['UserID'] ?? '';
 
     .toggle-sidebar-btn {
         display: block;
-        position: absolute;
-        top: 10px;
-        left: 10px;
+        position: fixed;
+        top: 0px;
+        left: 0px;
         z-index: 1081;
         background: linear-gradient(135deg, #078ca9e7 0%, #34495e 100%);
+        border: none;
+        padding: 10px 15px;
+        border-radius: 0 0 10px 0;
     }
 
     .nav-link {
@@ -313,16 +315,22 @@ $user_id = $_SESSION['UserID'] ?? '';
         border-left: 4px solid #038DA9;
     }
 
-    .main-content {
-        transition: margin-left 0.3s ease;
-    }
-
-    body.sidebar-collapsed .sidebar {
-        width: 0 !important;
-    }
-
-    body.sidebar-collapsed .main-content {
+    /* Main content area adjustments */
+    .main-content-expanded {
         margin-left: 0 !important;
+        width: 100% !important;
+        transition: all 0.3s ease;
+    }
+
+    .main-content-normal {
+        margin-left: 250px !important;
+        width: calc(100% - 250px) !important;
+        transition: all 0.3s ease;
+    }
+
+    /* Ensure body handles the layout correctly */
+    body {
+        overflow-x: hidden;
     }
 </style>
 
@@ -330,6 +338,7 @@ $user_id = $_SESSION['UserID'] ?? '';
     function toggleSidebar() {
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('sidebarOverlay');
+        const mainContent = document.querySelector('main');
         const isMobile = window.innerWidth < 768;
 
         if (isMobile) {
@@ -337,17 +346,42 @@ $user_id = $_SESSION['UserID'] ?? '';
             if (overlay) {
                 overlay.classList.toggle('show');
             }
+            // For mobile, we don't adjust main content margins
+            if (mainContent) {
+                mainContent.classList.toggle('main-content-expanded');
+            }
         } else {
             sidebar.classList.toggle('collapsed');
-            document.body.classList.toggle('sidebar-collapsed');
+            // Toggle main content width
+            if (mainContent) {
+                if (sidebar.classList.contains('collapsed')) {
+                    mainContent.classList.remove('main-content-normal');
+                    mainContent.classList.add('main-content-expanded');
+                } else {
+                    mainContent.classList.remove('main-content-expanded');
+                    mainContent.classList.add('main-content-normal');
+                }
+            }
         }
     }
+
+    // Initialize sidebar state on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.querySelector('main');
+        const isMobile = window.innerWidth < 768;
+
+        if (!isMobile && mainContent) {
+            mainContent.classList.add('main-content-normal');
+        }
+    });
 
     // Close sidebar when clicking outside (mobile only)
     document.addEventListener('click', function(event) {
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('sidebarOverlay');
         const toggleBtn = document.querySelector('.toggle-sidebar-btn');
+        const mainContent = document.querySelector('main');
 
         if (window.innerWidth < 768 && sidebar.classList.contains('show')) {
             const isClickInsideSidebar = sidebar.contains(event.target);
@@ -356,6 +390,9 @@ $user_id = $_SESSION['UserID'] ?? '';
             if (!isClickInsideSidebar && !isClickOnToggleBtn && overlay) {
                 sidebar.classList.remove('show');
                 overlay.classList.remove('show');
+                if (mainContent) {
+                    mainContent.classList.remove('main-content-expanded');
+                }
             }
         }
     });
@@ -375,11 +412,27 @@ $user_id = $_SESSION['UserID'] ?? '';
     window.addEventListener('resize', function() {
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('sidebarOverlay');
+        const mainContent = document.querySelector('main');
 
         if (window.innerWidth >= 768) {
             sidebar.classList.remove('show');
             if (overlay) {
                 overlay.classList.remove('show');
+            }
+            // Ensure proper desktop layout
+            if (mainContent) {
+                if (sidebar.classList.contains('collapsed')) {
+                    mainContent.classList.add('main-content-expanded');
+                    mainContent.classList.remove('main-content-normal');
+                } else {
+                    mainContent.classList.add('main-content-normal');
+                    mainContent.classList.remove('main-content-expanded');
+                }
+            }
+        } else {
+            // Mobile layout
+            if (mainContent) {
+                mainContent.classList.remove('main-content-normal', 'main-content-expanded');
             }
         }
     });

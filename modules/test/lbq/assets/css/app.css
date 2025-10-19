@@ -236,7 +236,8 @@ h6 {
     font-weight: var(--font-weight-semibold);
     line-height: 1.2;
     margin-bottom: var(--spacing-md);
-    color: var(--text-primary);
+    color: #00f7f7;
+    /*color: var(--text-primary);*/
 }
 
 h1 {
