@@ -62,6 +62,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (empty(trim($formData['last_name']))) {
                     $errors[] = "Last name is required.";
                 }
+                if (empty(trim($formData['sex_id']))) {
+                    $errors[] = "Sex/Gender is required.";
+                }
                 if (empty($formData['email']) || !filter_var($formData['email'], FILTER_VALIDATE_EMAIL)) {
                     $errors[] = "Valid email address is required.";
                 } else {
@@ -444,7 +447,7 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register for Lifebox Training</title>
+    <title>Register for Lifebox Training/Tests</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -524,7 +527,7 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
         .step-progress {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 2.5rem;
+            margin-bottom: 7rem;
             position: relative;
         }
 
@@ -554,14 +557,14 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
         }
 
         .step.active {
-            background: var(--secondary-color);
-            color: white;
+            background: #079ca7;
+            color: #ff9174;
             transform: scale(1.1);
         }
 
         .step.completed {
             background: #27ae60;
-            color: white;
+            color: #00e7ff;
         }
 
         .step-label {
@@ -695,6 +698,17 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
         }
 
         /* Enhanced Select2 Styling */
+
+        .select2-container .select2-selection--single .select2-selection__rendered {
+            display: block;
+            padding-left: 8px;
+            padding-right: 20px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            border-style: ridge;
+        }
+
         .select2-container--default .select2-selection--single {
             height: auto;
             padding: 0.75rem 1rem;
@@ -796,6 +810,390 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
             width: 1rem;
             height: 1rem;
         }
+
+        div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm) {
+            border-radius: var(--swal2-confirm-button-border-radius);
+            background: initial;
+            background-color: #0097A7 !important;
+            box-shadow: var(--swal2-confirm-button-box-shadow);
+            color: var(--swal2-confirm-button-color);
+            font-size: 1em;
+        }
+    </style>
+
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-bg: #f8f9fa;
+            --dark-text: #2c3e50;
+            --light-text: #ecf0f1;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--light-bg) 0%, #eef2f7 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark-text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .registration-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2.5rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .registration-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .registration-header img {
+            height: 70px;
+            margin-bottom: 1rem;
+        }
+
+        .registration-header h2 {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .registration-header p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+
+        .step-progress {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 7rem;
+            position: relative;
+        }
+
+        .step-progress::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #e9ecef;
+            z-index: 1;
+        }
+
+        .step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 50%;
+            background: #e9ecef;
+            color: #6c757d;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .step.active {
+            background: #079ca7;
+            color: #ff9174;
+            transform: scale(1.1);
+        }
+
+        .step.completed {
+            background: #27ae60;
+            color: #00e7ff;
+        }
+
+        .step-label {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .form-step {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-section-title {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--dark-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: var(--border-radius);
+            padding: 0.75rem 1rem;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+
+        .phone-input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .phone-input-group select {
+            flex: 0 0 140px;
+        }
+
+        .phone-input-group input {
+            flex: 1;
+        }
+
+        .btn {
+            border-radius: var(--border-radius);
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+            border-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            border-color: #95a5a6;
+        }
+
+        .btn-success {
+            background: #27ae60;
+            border-color: #27ae60;
+        }
+
+        .btn-outline-secondary {
+            border-color: #95a5a6;
+            color: #95a5a6;
+        }
+
+        .btn-outline-secondary:hover {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .review-card {
+            border: 2px solid #e9ecef;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--light-bg);
+        }
+
+        .review-card h5 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .review-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .review-item strong {
+            color: var(--primary-color);
+            min-width: 120px;
+            display: inline-block;
+        }
+
+        /* Enhanced Select2 Styling */
+
+        .select2-container .select2-selection--single .select2-selection__rendered {
+            display: block;
+            padding-left: 8px;
+            padding-right: 20px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            border-style: ridge;
+        }
+
+        .select2-container--default .select2-selection--single {
+            height: auto;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+            background-color: #fff;
+        }
+
+        .select2-container--default.select2-container--focus .select2-selection--single {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 100%;
+            right: 10px;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #495057;
+            line-height: 1.5;
+            padding-left: 0;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__placeholder {
+            color: #6c757d;
+        }
+
+        .select2-container--default .select2-dropdown {
+            border: 2px solid var(--secondary-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .select2-container--default .select2-results__option--highlighted[aria-selected] {
+            background-color: var(--secondary-color);
+        }
+
+        /* Style for required fields that are empty */
+        .select2-container--required .select2-selection--single {
+            border-color: #e74c3c;
+            background-color: #fff6f6;
+        }
+
+        .alert {
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+        }
+
+        .flag-icon {
+            width: 20px;
+            height: 15px;
+            margin-right: 8px;
+            display: inline-block;
+            vertical-align: middle;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* International Telephone Input Styling */
+        .iti {
+            width: 100%;
+        }
+
+        .iti__flag {
+            background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/img/flags.png");
+        }
+
+        @media (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi) {
+            .iti__flag {
+                background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/img/flags@2x.png");
+            }
+        }
+
+        @media (max-width: 768px) {
+            .registration-container {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+
+            .phone-input-group {
+                flex-direction: column;
+            }
+
+            .phone-input-group select {
+                flex: 1;
+            }
+        }
+
+        /* Loading spinner for facility dropdown */
+        .loading-facilities {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .spinner-border-sm {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        div:where(.swal2-container) button:where(.swal2-styled):where(.swal2-confirm) {
+            border-radius: var(--swal2-confirm-button-border-radius);
+            background: initial;
+            background-color: #0097A7 !important;
+            box-shadow: var(--swal2-confirm-button-box-shadow);
+            color: var(--swal2-confirm-button-color);
+            font-size: 1em;
+        }
+
+        /* Tooltip styling */
+        .form-tooltip {
+            cursor: help;
+            color: #6c757d;
+            margin-left: 5px;
+        }
+
+        .form-tooltip:hover {
+            color: #007bff;
+        }
+
+        .help-text {
+            font-size: 0.875rem;
+            color: #6c757d;
+            margin-top: 0.25rem;
+        }
+
+        /* Back to login button styling */
+        .back-to-login {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e9ecef;
+        }
     </style>
 </head>
 
@@ -803,7 +1201,7 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
     <div class="container registration-container">
         <div class="registration-header">
             <img src="../lblogo-dark.svg" alt="Lifebox Logo">
-            <h2>Register for Lifebox Training</h2>
+            <h2>Register for Lifebox Training/Tests</h2>
             <p class="text-muted">Complete the form below to register for our training program</p>
         </div>
 
@@ -844,7 +1242,7 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
 
                 <div class="row mb-3">
                     <div class="col-md-3">
-                        <label for="title_salutation" class="form-label">Title</label>
+                        <label for="title_salutation" class="form-label">Title/Salutation</label>
                         <select class="form-select" id="title_salutation" name="title_salutation">
                             <option value="">Select Title</option>
                             <?php foreach ($salutations as $value => $label): ?>
@@ -878,9 +1276,9 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
                     <div class="col-md-6">
                         <label for="sex_id" class="form-label">Gender</label>
                         <select class="form-select" id="sex_id" name="sex_id">
-                            <option value="">Select Gender</option>
+                            <option value="">Select Gender/Sex</option>
                             <?php foreach ($sexOptions as $value => $label): ?>
-                                <option value="<?= $value ?>" <?= $formData['sex_id'] == $value ? 'selected' : '' ?>>
+                                <option value="<?= $value ?>" <?= $formData['sex_id'] == $value ? 'selected' : '' ?> required>
                                     <?= $label ?>
                                 </option>
                             <?php endforeach; ?>
@@ -905,8 +1303,12 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
                 </div>
 
                 <div class="d-flex justify-content-between mt-4">
-                    <div></div>
-                    <button type="button" class="btn btn-primary" id="nextToStep2">Next <i class="fas fa-arrow-right ms-1"></i></button>
+                    <a href="login.php" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-1"></i> Back to Login
+                    </a>
+                    <button type="button" class="btn btn-primary" id="nextToStep2">
+                        Next <i class="fas fa-arrow-right ms-1"></i>
+                    </button>
                 </div>
             </div>
 
@@ -967,7 +1369,7 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label for="venue_id" class="form-label">Preferred Training Venue</label>
+                        <label for="venue_id" class="form-label">Preferred Training Venue (Optional) </label>
                         <select class="form-select select2" id="venue_id" name="venue_id">
                             <option value="">Select Venue</option>
                             <?php foreach ($venueOptions as $value => $label): ?>
@@ -1044,6 +1446,13 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
                 </div>
             </div>
         </form>
+        <!-- Back to Login Section -->
+        <div class="back-to-login">
+            <p class="text-muted">Already have an account?</p>
+            <a href="login.php" class="btn btn-outline-primary">
+                <i class="fas fa-sign-in-alt me-1"></i> Back to Login Page
+            </a>
+        </div>
     </div>
 
     <!-- Add Facility Modal -->
@@ -1492,7 +1901,7 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
                 const errors = [];
 
                 // Reset error states
-                $('#first_name, #last_name, #email, #phone').removeClass('is-invalid');
+                $('#first_name, #last_name, #sex_id, #email, #phone').removeClass('is-invalid');
                 $('#email-feedback, #phone-feedback').text('');
 
                 // Validate first name
@@ -1506,6 +1915,13 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
                 if (!$('#last_name').val().trim()) {
                     $('#last_name').addClass('is-invalid');
                     errors.push('Last name is required');
+                    isValid = false;
+                }
+
+                // Validate Gender/Sex
+                if (!$('#sex_id').val().trim()) {
+                    $('#sex_id').addClass('is-invalid');
+                    errors.push('Gender/Sex is required');
                     isValid = false;
                 }
 
