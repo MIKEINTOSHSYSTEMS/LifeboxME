@@ -15,6 +15,9 @@ $user_id = $_SESSION['UserID'] ?? '';
 ?>
 
 <head>
+    <link rel="stylesheet" href="../assets/css/app.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+
     <!-- Matomo -->
     <script>
         var _paq = window._paq = window._paq || [];

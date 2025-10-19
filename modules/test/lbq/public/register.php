@@ -389,6 +389,7 @@ function send_email_fallback($data, $fullPhone, $subject, $body)
         return false;
     }
 }
+
 // Function to fetch options for dropdowns
 function getDropdownOptions($pdo, $table, $valueField, $textField, $where = '')
 {
@@ -402,11 +403,38 @@ function getDropdownOptions($pdo, $table, $valueField, $textField, $where = '')
     return $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
 }
 
+// NEW: Function to get countries from facilities table
+function getCountriesFromFacilities($pdo)
+{
+    $sql = "SELECT DISTINCT c.country_id, c.country_name 
+            FROM countries c 
+            INNER JOIN facilities f ON c.country_id = f.country_id 
+            WHERE f.is_active = true 
+            ORDER BY c.country_name";
+
+    $stmt = $pdo->query($sql);
+    return $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
+}
+
 // Get options for dropdowns
 $salutations = ['Mr.' => 'Mr.', 'Ms.' => 'Ms.', 'Dr.' => 'Dr.', 'Prof.' => 'Prof.', 'Eng.' => 'Eng.', 'Nurse' => 'Nurse'];
 $sexOptions = getDropdownOptions($pdo, 'sex', 'sex_id', 'sex_name', 'is_active = true');
-$countryOptions = getDropdownOptions($pdo, 'countries', 'country_id', 'country_name');
-$facilityOptions = getDropdownOptions($pdo, 'facilities', 'facility_id', 'facility_name', 'is_active = true');
+
+// Use countries from facilities table instead of all countries
+$countryOptions = getCountriesFromFacilities($pdo);
+
+// Get initial facility options (will be updated dynamically based on country selection)
+$facilityOptions = [];
+if (!empty($formData['country_id'])) {
+    $facilityOptions = getDropdownOptions(
+        $pdo,
+        'facilities',
+        'facility_id',
+        'facility_name',
+        "is_active = true AND country_id = " . (int)$formData['country_id']
+    );
+}
+
 $roleOptions = getDropdownOptions($pdo, 'participant_role', 'role_id', 'role_name', 'is_active = true');
 $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is_active = true');
 ?>
@@ -436,11 +464,9 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/custom.css">
 
-
     <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
     <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
     <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
-
 
     <style>
         :root {
@@ -759,6 +785,17 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
                 flex: 1;
             }
         }
+
+        /* Loading spinner for facility dropdown */
+        .loading-facilities {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .spinner-border-sm {
+            width: 1rem;
+            height: 1rem;
+        }
     </style>
 </head>
 
@@ -894,15 +931,20 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
                         <div class="input-group">
                             <select class="form-select select2" id="facility_id" name="facility_id" required>
                                 <option value="">Select Facility</option>
-                                <?php foreach ($facilityOptions as $value => $label): ?>
-                                    <option value="<?= $value ?>" <?= $formData['facility_id'] == $value ? 'selected' : '' ?>>
-                                        <?= $label ?>
-                                    </option>
-                                <?php endforeach; ?>
+                                <?php if (!empty($facilityOptions)): ?>
+                                    <?php foreach ($facilityOptions as $value => $label): ?>
+                                        <option value="<?= $value ?>" <?= $formData['facility_id'] == $value ? 'selected' : '' ?>>
+                                            <?= $label ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </select>
-                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addFacilityModal">
+                            <button type="button" class="btn btn-outline-secondary" id="addFacilityBtn" data-bs-toggle="modal" data-bs-target="#addFacilityModal">
                                 <i class="fas fa-plus"></i>
                             </button>
+                        </div>
+                        <div class="form-text" id="facility-help-text">
+                            Select a country first to see available facilities
                         </div>
                     </div>
                 </div>
@@ -1015,31 +1057,32 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
                 <div class="modal-body">
                     <form id="addFacilityForm">
                         <div class="mb-3">
-                            <label for="new_facility_name" class="form-label">Facility Name</label>
+                            <label for="new_facility_country" class="form-label">Country *</label>
+                            <select class="form-select" id="new_facility_country" required disabled>
+                                <option value="">Select Country</option>
+                            </select>
+                            <small class="form-text text-muted">Country is automatically selected from your previous selection</small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="new_facility_name" class="form-label">Facility Name *</label>
                             <input type="text" class="form-control" id="new_facility_name" required>
                         </div>
                         <div class="mb-3">
-                            <label for="new_facility_country" class="form-label">Country</label>
-                            <select class="form-select" id="new_facility_country" required>
-                                <option value="">Select Country</option>
-                                <?php foreach ($countryOptions as $value => $label): ?>
-                                    <option value="<?= $value ?>"><?= $label ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div class="mb-3">
                             <label for="new_facility_type" class="form-label">Facility Type</label>
-                            <input type="text" class="form-control" id="new_facility_type">
+                            <input type="text" class="form-control" id="new_facility_type" placeholder="e.g., Hospital, Clinic, Health Center">
                         </div>
                         <div class="mb-3">
                             <label for="new_facility_address" class="form-label">Address</label>
-                            <textarea class="form-control" id="new_facility_address" rows="2"></textarea>
+                            <textarea class="form-control" id="new_facility_address" rows="2" placeholder="Full address of the facility"></textarea>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="saveFacilityBtn">Save Facility</button>
+                    <button type="button" class="btn btn-primary" id="saveFacilityBtn">
+                        <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                        Save Facility
+                    </button>
                 </div>
             </div>
         </div>
@@ -1154,6 +1197,80 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
                 initialCountry: "et", // Default to Ethiopia
                 separateDialCode: true,
                 utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+            });
+
+            // Country change handler - load facilities for selected country
+            $('#country_id').on('change', function() {
+                const countryId = $(this).val();
+                const facilitySelect = $('#facility_id');
+                const addFacilityBtn = $('#addFacilityBtn');
+
+                if (countryId) {
+                    // Show loading state
+                    facilitySelect.prop('disabled', true).addClass('loading-facilities');
+                    $('#facility-help-text').html('<i class="fas fa-spinner fa-spin"></i> Loading facilities...');
+
+                    // Load facilities for selected country
+                    $.ajax({
+                        url: 'get_facilities.php',
+                        method: 'POST',
+                        data: {
+                            country_id: countryId,
+                            csrf_token: "<?= $_SESSION['csrf_token'] ?>"
+                        },
+                        success: function(response) {
+                            facilitySelect.empty().append('<option value="">Select Facility</option>');
+
+                            if (response.success && response.facilities.length > 0) {
+                                $.each(response.facilities, function(index, facility) {
+                                    facilitySelect.append(new Option(facility.name, facility.id, false, false));
+                                });
+                                $('#facility-help-text').text('Select your facility from the list');
+                            } else {
+                                $('#facility-help-text').html('No facilities found for this country. <strong>Click the + button to add a new facility.</strong>');
+                            }
+
+                            // Enable facility dropdown and add facility button
+                            facilitySelect.prop('disabled', false).removeClass('loading-facilities');
+                            addFacilityBtn.prop('disabled', false);
+
+                            // Trigger change to update Select2
+                            facilitySelect.trigger('change');
+                        },
+                        error: function() {
+                            Swal.fire('Error', 'Failed to load facilities', 'error');
+                            facilitySelect.prop('disabled', false).removeClass('loading-facilities');
+                            $('#facility-help-text').text('Error loading facilities. Please try again.');
+                        }
+                    });
+                } else {
+                    // Reset facility dropdown if no country selected
+                    facilitySelect.empty().append('<option value="">Select Facility</option>').prop('disabled', true);
+                    addFacilityBtn.prop('disabled', true);
+                    $('#facility-help-text').text('Select a country first to see available facilities');
+                    facilitySelect.trigger('change');
+                }
+            });
+
+            // Initialize facility dropdown based on current country selection
+            const currentCountryId = $('#country_id').val();
+            if (currentCountryId) {
+                $('#country_id').trigger('change');
+            }
+
+            // Handle add facility modal opening
+            $('#addFacilityBtn').click(function() {
+                const selectedCountryId = $('#country_id').val();
+                const selectedCountryName = $('#country_id option:selected').text();
+
+                if (!selectedCountryId) {
+                    Swal.fire('Error', 'Please select a country first before adding a facility', 'error');
+                    return false;
+                }
+
+                // Set the country in the modal (disabled since it's automatically selected)
+                $('#new_facility_country').empty().append(`<option value="${selectedCountryId}" selected>${selectedCountryName}</option>`);
+                $('#new_facility_name').focus();
             });
 
             // Update hidden full_phone field before form submission
@@ -1277,13 +1394,18 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
 
             // Handle facility addition
             $('#saveFacilityBtn').click(function() {
-                const facilityName = $('#new_facility_name').val();
+                const saveBtn = $(this);
                 const countryId = $('#new_facility_country').val();
+                const facilityName = $('#new_facility_name').val().trim();
 
-                if (!facilityName || !countryId) {
-                    Swal.fire('Error', 'Please provide both facility name and country', 'error');
+                if (!facilityName) {
+                    Swal.fire('Error', 'Please provide a facility name', 'error');
                     return;
                 }
+
+                // Show loading state
+                saveBtn.prop('disabled', true);
+                saveBtn.find('.spinner-border').removeClass('d-none');
 
                 // AJAX request to add facility
                 $.ajax({
@@ -1298,9 +1420,12 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
                     },
                     success: function(response) {
                         if (response.success) {
-                            // Add new option to select
+                            // Add new option to facility select and select it
                             const newOption = new Option(facilityName, response.facility_id, true, true);
                             $('#facility_id').append(newOption).trigger('change');
+
+                            // Update facility options in the dropdown
+                            $('#facility-help-text').text('Facility added successfully and selected');
 
                             // Close modal and reset form
                             $('#addFacilityModal').modal('hide');
@@ -1311,15 +1436,20 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
                             Swal.fire('Error', response.message || 'Failed to add facility', 'error');
                         }
                     },
-                    error: function() {
-                        Swal.fire('Error', 'An error occurred while adding the facility', 'error');
+                    error: function(xhr, status, error) {
+                        Swal.fire('Error', 'An error occurred while adding the facility: ' + error, 'error');
+                    },
+                    complete: function() {
+                        // Reset button state
+                        saveBtn.prop('disabled', false);
+                        saveBtn.find('.spinner-border').addClass('d-none');
                     }
                 });
             });
 
             // Handle role addition
             $('#saveRoleBtn').click(function() {
-                const roleName = $('#new_role_name').val();
+                const roleName = $('#new_role_name').val().trim();
 
                 if (!roleName) {
                     Swal.fire('Error', 'Please provide a role name', 'error');

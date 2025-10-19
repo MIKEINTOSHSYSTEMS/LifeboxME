@@ -12,7 +12,7 @@ require __DIR__ . '/session_helper.php';
 
 // Get filters and pagination
 $page = max(1, intval($_GET['page'] ?? 1));
-$limit = intval($_GET['limit'] ?? 20);
+$limit = intval($_GET['limit'] ?? 5);
 $offset = ($page - 1) * $limit;
 
 $search = trim($_GET['search'] ?? '');
@@ -20,38 +20,61 @@ $country_id = intval($_GET['country_id'] ?? 0);
 $facility_id = intval($_GET['facility_id'] ?? 0);
 $role_id = intval($_GET['role_id'] ?? 0);
 
-// Build query with filters
-$sql = "SELECT * FROM training_participants WHERE 1=1";
-$count_sql = "SELECT COUNT(*) FROM training_participants WHERE 1=1";
+// Build query with filters - UPDATED TO JOIN WITH RELATED TABLES
+$sql = "
+    SELECT 
+        p.*,
+        c.country_name,
+        f.facility_name,
+        pr.role_name,
+        v.venue_name,
+        s.sex_name
+    FROM training_participants p
+    LEFT JOIN countries c ON c.country_id = p.country_id
+    LEFT JOIN facilities f ON f.facility_id = p.facility_id
+    LEFT JOIN participant_role pr ON pr.role_id = p.role_id
+    LEFT JOIN venues v ON v.venue_id = p.venue_id
+    LEFT JOIN sex s ON s.sex_id = p.sex_id
+    WHERE 1=1
+";
+
+$count_sql = "
+    SELECT COUNT(*) 
+    FROM training_participants p
+    WHERE 1=1
+";
+
 $params = [];
 $count_params = [];
 
 if (!empty($search)) {
-    $sql .= " AND (first_name ILIKE :search OR last_name ILIKE :search OR email ILIKE :search OR phone ILIKE :search)";
-    $count_sql .= " AND (first_name ILIKE :search OR last_name ILIKE :search OR email ILIKE :search OR phone ILIKE :search)";
+    $sql .= " AND (p.first_name ILIKE :search OR p.last_name ILIKE :search OR p.email ILIKE :search OR p.phone ILIKE :search)";
+    $count_sql .= " AND (p.first_name ILIKE :search OR p.last_name ILIKE :search OR p.email ILIKE :search OR p.phone ILIKE :search)";
     $params[':search'] = $count_params[':search'] = '%' . $search . '%';
 }
 
 if ($country_id > 0) {
-    $sql .= " AND country_id = :country_id";
-    $count_sql .= " AND country_id = :country_id";
+    $sql .= " AND p.country_id = :country_id";
+    $count_sql .= " AND p.country_id = :country_id";
     $params[':country_id'] = $count_params[':country_id'] = $country_id;
 }
 
 if ($facility_id > 0) {
-    $sql .= " AND facility_id = :facility_id";
-    $count_sql .= " AND facility_id = :facility_id";
+    $sql .= " AND p.facility_id = :facility_id";
+    $count_sql .= " AND p.facility_id = :facility_id";
     $params[':facility_id'] = $count_params[':facility_id'] = $facility_id;
 }
 
 if ($role_id > 0) {
-    $sql .= " AND role_id = :role_id";
-    $count_sql .= " AND role_id = :role_id";
+    $sql .= " AND p.role_id = :role_id";
+    $count_sql .= " AND p.role_id = :role_id";
     $params[':role_id'] = $count_params[':role_id'] = $role_id;
 }
 
-//$sql .= " ORDER BY created_at DESC LIMIT :limit OFFSET :offset";
-$sql .= " ORDER BY created_at ASC LIMIT :limit OFFSET :offset";
+//$sql .= " ORDER BY p.created_at DESC LIMIT :limit OFFSET :offset";
+//$sql .= " ORDER BY p.created_at ASC LIMIT :limit OFFSET :offset";
+$sql .= " ORDER BY p.participant_id DESC LIMIT :limit OFFSET :offset";
+
 $params[':limit'] = $limit;
 $params[':offset'] = $offset;
 
@@ -107,6 +130,18 @@ $roles = $pdo->query("SELECT role_id, role_name FROM participant_role ORDER BY r
             background-color: #f8f9fa;
             z-index: 10;
         }
+
+        .table-responsive {
+            /*max-height: 70vh;*/
+            max-height: max-content;
+        }
+
+        .text-truncate-custom {
+            max-width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     </style>
     <style>
         @media (min-width: 768px) {
@@ -121,7 +156,8 @@ $roles = $pdo->query("SELECT role_id, role_name FROM participant_role ORDER BY r
 <body>
     <div class="container-fluid">
         <div class="row">
-            <?php //include 'navbar.php'; ?>
+            <?php //include 'navbar.php'; 
+            ?>
 
             <?php include 'sidebar.php'; ?>
 
@@ -184,6 +220,7 @@ $roles = $pdo->query("SELECT role_id, role_name FROM participant_role ORDER BY r
                             <div class="col-md-2">
                                 <label for="limit" class="form-label">Items per page</label>
                                 <select class="form-select" id="limit" name="limit">
+                                    <option value="5" <?= $limit == 5 ? 'selected' : '' ?>>5</option>
                                     <option value="10" <?= $limit == 10 ? 'selected' : '' ?>>10</option>
                                     <option value="20" <?= $limit == 20 ? 'selected' : '' ?>>20</option>
                                     <option value="50" <?= $limit == 50 ? 'selected' : '' ?>>50</option>
@@ -246,23 +283,29 @@ $roles = $pdo->query("SELECT role_id, role_name FROM participant_role ORDER BY r
                                                 <td><?= htmlspecialchars($p['first_name']) ?></td>
                                                 <td><?= htmlspecialchars($p['middle_name'] ?? 'N/A') ?></td>
                                                 <td><?= htmlspecialchars($p['last_name']) ?></td>
+                                                <td><?= htmlspecialchars($p['sex_name'] ?? 'N/A') ?></td>
+                                                <!-- UPDATED: Display actual names instead of IDs -->
                                                 <td>
-                                                    <?php
-                                                    $sex = 'N/A';
-                                                    if ($p['sex_id'] == 1) $sex = 'Male';
-                                                    if ($p['sex_id'] == 2) $sex = 'Female';
-                                                    echo $sex;
-                                                    ?>
+                                                    <span class="text-truncate-custom" title="<?= htmlspecialchars($p['role_name'] ?? 'N/A') ?>">
+                                                        <?= htmlspecialchars($p['role_name'] ?? 'N/A') ?>
+                                                    </span>
                                                 </td>
-                                                <td><?= htmlspecialchars($p['role_id'] ? 'Role ' . $p['role_id'] : 'N/A') ?></td>
-                                                <td><?= htmlspecialchars($p['facility_id'] ? 'Facility ' . $p['facility_id'] : 'N/A') ?></td>
+                                                <td>
+                                                    <span class="text-truncate-custom" title="<?= htmlspecialchars($p['facility_name'] ?? 'N/A') ?>">
+                                                        <?= htmlspecialchars($p['facility_name'] ?? 'N/A') ?>
+                                                    </span>
+                                                </td>
                                                 <td><?= htmlspecialchars($p['phone'] ?? 'N/A') ?></td>
-                                                <td><?= htmlspecialchars($p['email'] ?? 'N/A') ?></td>
-                                                <td><?= htmlspecialchars($p['country_id'] ? 'Country ' . $p['country_id'] : 'N/A') ?></td>
-                                                <td><?= htmlspecialchars($p['venue_id'] ? 'Venue ' . $p['venue_id'] : 'N/A') ?></td>
+                                                <td>
+                                                    <span class="text-truncate-custom" title="<?= htmlspecialchars($p['email'] ?? 'N/A') ?>">
+                                                        <?= htmlspecialchars($p['email'] ?? 'N/A') ?>
+                                                    </span>
+                                                </td>
+                                                <td><?= htmlspecialchars($p['country_name'] ?? 'N/A') ?></td>
+                                                <td><?= htmlspecialchars($p['venue_name'] ?? 'N/A') ?></td>
                                                 <td><?= $p['training_date'] ? date('M j, Y', strtotime($p['training_date'])) : 'N/A' ?></td>
                                                 <td><?= $p['created_at'] ? date('M j, Y', strtotime($p['created_at'])) : 'N/A' ?></td>
-                                                <td><?= $p['updated_at'] ? date('M, j, Y', strtotime($p['updated_at'])) : 'N/A' ?></td>
+                                                <td><?= $p['updated_at'] ? date('M j, Y', strtotime($p['updated_at'])) : 'N/A' ?></td>
 
                                                 <td>
                                                     <button class="btn btn-sm btn-outline-primary view-participant"
@@ -364,18 +407,45 @@ $roles = $pdo->query("SELECT role_id, role_name FROM participant_role ORDER BY r
         });
 
         function exportToCSV() {
-            // Simple CSV export implementation
+            // Enhanced CSV export with proper headers
             let csv = [];
-            let rows = document.querySelectorAll(".participant-table tr");
+
+            // Add headers
+            let headers = [
+                'Participant ID',
+                'Title/Salutation',
+                'First Name',
+                'Middle Name',
+                'Last Name',
+                'Sex',
+                'Role',
+                'Facility',
+                'Phone',
+                'Email',
+                'Country',
+                'Venue',
+                'Registration Date',
+                'Created At',
+                'Updated At'
+            ];
+            csv.push(headers.join(","));
+
+            // Add data rows
+            let rows = document.querySelectorAll(".participant-table tbody tr");
 
             for (let i = 0; i < rows.length; i++) {
                 let row = [],
-                    cols = rows[i].querySelectorAll("td, th");
+                    cols = rows[i].querySelectorAll("td");
 
                 for (let j = 0; j < cols.length; j++) {
-                    // Remove action column
+                    // Skip the actions column (last column)
                     if (j !== cols.length - 1) {
-                        row.push('"' + cols[j].innerText.replace(/"/g, '""') + '"');
+                        let text = cols[j].innerText.trim();
+                        // Handle text with commas by wrapping in quotes
+                        if (text.includes(',')) {
+                            text = '"' + text.replace(/"/g, '""') + '"';
+                        }
+                        row.push(text);
                     }
                 }
 
