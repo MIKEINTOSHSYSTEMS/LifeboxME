@@ -16,7 +16,7 @@
     --primary-rgb: 0, 124, 183;
 
     /* Secondary Colors */
-    --secondary-color: #6c757d;
+    --secondary-color: #6c757d; /** --secondary-color: #cca028; **/
     --success-color: #28a745;
     --info-color: #17a2b8;
     --warning-color: #ffc107;

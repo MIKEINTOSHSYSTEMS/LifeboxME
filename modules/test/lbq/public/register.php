@@ -1194,6 +1194,11 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
             padding-top: 1rem;
             border-top: 1px solid #e9ecef;
         }
+
+        a {
+        color: #00adb9ff !important;
+            text-decoration: underline;
+        }
     </style>
 </head>
 
@@ -1303,10 +1308,10 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
                 </div>
 
                 <div class="d-flex justify-content-between mt-4">
-                    <a href="login.php" class="btn btn-outline-secondary">
-                        <i class="fas fa-arrow-left me-1"></i> Back to Login
+                    <a href="/" class="btn btn-outline-secondary">
+                        <i class="fas fa-house me-1"></i> Back to Home
                     </a>
-                    <button type="button" class="btn btn-primary" id="nextToStep2">
+                    <button type="button" class="btn btn-success" id="nextToStep2">
                         Next <i class="fas fa-arrow-right ms-1"></i>
                     </button>
                 </div>
@@ -1436,7 +1441,7 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
                 <div class="form-check mb-4">
                     <input class="form-check-input" type="checkbox" id="terms_agree" name="terms_agree" required>
                     <label class="form-check-label" for="terms_agree">
-                        I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and conditions</a>
+                        I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal"><b>Terms and Conditions</b></a> Read carefully before proceeding.
                     </label>
                 </div>
 
@@ -1449,7 +1454,7 @@ $venueOptions = getDropdownOptions($pdo, 'venues', 'venue_id', 'venue_name', 'is
         <!-- Back to Login Section -->
         <div class="back-to-login">
             <p class="text-muted">Already have an account?</p>
-            <a href="login.php" class="btn btn-outline-primary">
+           <a href="login.php" class="btn btn-warning">
                 <i class="fas fa-sign-in-alt me-1"></i> Back to Login Page
             </a>
         </div>

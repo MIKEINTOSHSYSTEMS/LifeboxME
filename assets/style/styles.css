@@ -4,6 +4,11 @@
     --accent-color: #ff6b35;
     --light-color: #f8f9fa;
     --dark-color: #343a40;
+    --light-yellow: #fffeee;
+    --lifebox-yellow: #f2ea60;
+    --lifebox-green: #6fb395;
+    --lifebox-red: #ec3627;
+    --lifebox-blue: #079ca7;
 }
 
 body {
@@ -301,6 +306,41 @@ body {
     border: none;
 }
 
+/* Customize the scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+    /* width of the scrollbar */
+    height: 12px;
+    /* height of the scrollbar for horizontal scrolling */
+}
+
+/* Customize the track (background) of the scrollbar */
+::-webkit-scrollbar-track {
+    background: var(--light-yellow);
+    /* Light color for track for good contrast */
+    border-radius: 10px;
+    /* optional rounded corners */
+}
+
+/* Customize the thumb (the draggable part of the scrollbar) */
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    /* Primary color for the thumb */
+    border-radius: 10px;
+}
+
+/* Optional: Customize the thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+    /* Darker secondary color when hovered */
+}
+
+/* Optional: Add a focus state (good for accessibility) */
+::-webkit-scrollbar-thumb:focus {
+    background: var(--accent-color);
+    /* Accent color for focus state */
+}
+
 /* Hero Section */
 .hero {
     height: 100vh;
@@ -570,6 +610,148 @@ body {
     margin-bottom: 0;
 }
 
+.components {
+    padding: 7px 0;
+    background: transparent;
+}
+
+/* Component tabs styling */
+.component-tabs .nav-link {
+    color: var(--dark);
+    border-radius: 20px;
+    margin: 0 5px 15px;
+    padding: 8px 20px;
+    transition: var(--transition);
+}
+
+.component-tabs .nav-link.active {
+    background: var(--primary);
+    color: #0079a0;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.component-tabs .nav-link:hover:not(.active) {
+    background: rgba(18, 130, 173, 0.1);
+}
+
+/* Component items styling */
+.component-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+    padding: 30px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+    transform: translateY(0);
+}
+
+
+.component-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 40px;
+    border-bottom: none;
+}
+
+.component-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.component-icon {
+    flex: 0 0 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    color: #0079a0;
+    font-size: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.component-text h4 {
+    color: var(--primary);
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.component-text p {
+    color: #666;
+    margin-bottom: 0;
+}
+
+        /* Enhanced contrast for accessibility */
+        .component-text h4 {
+            color: #0a5a7a;
+        }
+
+        .component-text p {
+            color: #444;
+        }
+
+        .section-title p {
+            color: #00707c;
+        }
+
+
+        .component-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .component-link:hover {
+            text-decoration: none;
+            color: inherit;
+            transform: translateY(-2px);
+        }
+
+        .component-link:hover .component-item {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Search box styling */
+        .search-box {
+            max-width: 600px;
+            margin: 20px auto;
+            position: relative;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--secondary);
+            cursor: pointer;
+        }
+/* components end */
+
+
 /* Screenshots Slider */
 .screenshots {
     padding: 100px 0;
@@ -818,11 +1000,20 @@ footer {
 
 .modal-notice .modal-body {
     padding: 30px;
+    height: 63vh;
+    overflow: scroll;
 }
 
 .modal-notice .modal-footer {
     border-top: none;
     background: #f8f9fa;
+}
+
+.modal.show .modal-dialog {
+    transform: none;
+    margin-top: 77px;
+    padding-left: 7px;
+    padding-right: 7px;
 }
 
 /* Cookie Consent */
@@ -932,3 +1123,35 @@ footer {
         height: 280px;
     }
 }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .nav-tabs .nav-item {
+                margin-bottom: 10px;
+                width: 100%;
+            }
+
+            .nav-link {
+                border-radius: 8px;
+                text-align: center;
+            }
+
+            .component-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .component-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .component-tabs .nav-link {
+                margin-bottom: 10px;
+            }
+
+            .tab-content {
+                padding: 15px;
+            }
+        }
+

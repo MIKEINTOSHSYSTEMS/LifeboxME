@@ -95,12 +95,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             color: var(--primary-color) !important;
         }
+
+        .h2,
+        h2 {
+            font-size: 2rem;
+            color: #0079a3;
+        }
     </style>
 </head>
 
 <body>
     <div class="login-container">
         <div class="container">
+            <br></br>
             <div class="row justify-content-center">
                 <div class="col-md-6 col-lg-5">
                     <div class="card login-card">
@@ -128,16 +135,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <button type="submit" class="btn btn-warning w-100 py-2">Sign In</button>
                             </form>
 
-                            <div>
-                                <a href="register.php" class="btn btn-link mt-3 d-block text-center">Register for an account</a>
-                            </div>
+
 
                             <div class="text-center mt-4">
                                 <p class="text-muted">
                                     Don't have an account?<br>
-                                    <small>Your email should be registered in our training system. Contact your administrator if you can't access your account.</small>
+                                <div>
+                                    <!--<a href="register.php" class="btn btn-link mt-3 d-block text-center">Register for an account</a>-->
+                                    <a href="register.php" class="btn btn-success mt-3 d-block text-center">
+                                        <i class="fas fa-sign-in-alt me-1"></i> Register for an account
+                                    </a>
+                                    <br></br>
+                                </div>
+
+                                <small>In order to access the <b>Test Center or Take Tests</b> Your email should be registered in our training system and Should Take Trainings. Contact your administrator if you can't access your account.</small>
                                 </p>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <br></br>
+                <div class="col-md-6 col-lg-5">
+                    <!--<div class="card login-card">-->
+                    <div class="">
+                        <div class="card-body p-5" align="right">
+                            <?php
+                            include 'qr.php';
+                            /*
+echo "<h1 style='text-align: center; color: #2c5aa0;'>QR Code Generator Test Page</h1>";
+echo "<div style='max-width: 1200px; margin: 0 auto; padding: 20px;'>";
+
+echo "<h2>1. Standard QR Code Widget</h2>";
+displayQRCode(200, "Standard QR Code", true);
+
+echo "<h2>2. Vibrant QR Code Widget</h2>";
+displayVibrantQRCode(200, "Vibrant QR Code", true);
+
+echo "<h2>3. Multiple Color Schemes</h2>";
+echo "<div style='display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;'>";
+
+$qr1 = new QRGenerator(150);
+echo $qr1->generateVibrantWidget("Location 1", true);
+
+$qr2 = new QRGenerator(150);
+echo $qr2->generateVibrantWidget("Location 2", true);
+
+$qr3 = new QRGenerator(150);
+echo $qr3->generateVibrantWidget("Location 3", true);
+
+echo "</div>";
+*/
+
+                            echo "<h2>Share or Scan with your mobile to access Test page</h2>";
+                            echo getQRCodeImage(150, "QR Code Image");
+
+
+                            ?>
                         </div>
                     </div>
                 </div>

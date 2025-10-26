@@ -394,6 +394,58 @@
         .section-title p {
             color: rgba(255, 255, 255, 0.9);
         }
+
+
+        .component-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .component-link:hover {
+            text-decoration: none;
+            color: inherit;
+            transform: translateY(-2px);
+        }
+
+        .component-link:hover .component-item {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Search box styling */
+        .search-box {
+            max-width: 600px;
+            margin: 20px auto;
+            position: relative;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--secondary);
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -606,6 +658,11 @@
                             }
                         </style>
 
+                        <div class="search-box">
+                            <input type="text" id="searchInput" placeholder="Search for system modules...">
+                            <i class="fas fa-search"></i>
+                        </div>
+
                         <ul class="nav nav-pills component-tabs justify-content-center" id="components-tab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="tracking-tab" data-bs-toggle="pill" data-bs-target="#tracking" type="button" role="tab">Tracking Modules</button>
@@ -625,16 +682,16 @@
                             <div class="tab-pane fade show active" id="tracking" role="tabpanel">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="component-item animate-slide-in">
+                                        <div class="component-item animate-slide-in" data-link="/api/meta/index.php" style="animation-delay: 0.4s;">
                                             <div class="component-icon">
-                                                <i class="fas fa-procedures"></i>
+                                                <i class="fa-regular fa-chart-mixed"></i>
                                             </div>
                                             <div class="component-text">
-                                                <h4>Surgical Case Tracker</h4>
-                                                <p>Monitor surgical cases with detailed information on procedures, outcomes, and safety checklist compliance.</p>
+                                                <h4>Lifebox at Glance Dashboard</h4>
+                                                <p>Analyze data visualizations and components grouped by Training, Device Distributions, DHIS2...</p>
                                             </div>
                                         </div>
-                                        <div class="component-item animate-slide-in" style="animation-delay: 0.1s;">
+                                        <div class="component-item animate-slide-in" data-href="/app/index.htm" style="animation-delay: 0.1s;">
                                             <div class="component-icon">
                                                 <i class="fa-regular fa-users-medical"></i>
                                             </div>
@@ -643,7 +700,7 @@
                                                 <p>Track patient outcomes and measure the impact of surgical safety interventions.</p>
                                             </div>
                                         </div>
-                                        <div class="component-item animate-slide-in" style="animation-delay: 0.2s;">
+                                        <div class="component-item animate-slide-in" data-href="/app/clean_cut_implementations_list.php" style="animation-delay: 0.2s;">
                                             <div class="component-icon">
                                                 <i class="fas fa-scissors"></i>
                                             </div>
@@ -654,7 +711,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="component-item animate-slide-in" style="animation-delay: 0.3s;">
+                                        <div class="component-item animate-slide-in" data-href="/app/device_distributions_list.php" style="animation-delay: 0.3s;">
                                             <div class="component-icon">
                                                 <i class="fa-solid fa-chart-network"></i>
                                             </div>
@@ -663,16 +720,16 @@
                                                 <p>Manage inventory and track distribution of pulse oximeters and other medical devices.</p>
                                             </div>
                                         </div>
-                                        <div class="component-item animate-slide-in" style="animation-delay: 0.4s;">
-                                            <div class="component-icon">
-                                                <i class="fa-regular fa-chart-mixed"></i>
+                                        <div class="component-item animate-slide-in" data-href="/app/surgical_cases_list.php">
+                                            <div class=" component-icon">
+                                                <i class="fas fa-procedures"></i>
                                             </div>
                                             <div class="component-text">
-                                                <h4>Performance Analytics</h4>
-                                                <p>Analyze key performance indicators and benchmark against targets and standards.</p>
+                                                <h4>Surgical Case Tracker</h4>
+                                                <p>Monitor surgical cases with detailed information on procedures, outcomes, and safety checklist compliance.</p>
                                             </div>
                                         </div>
-                                        <div class="component-item animate-slide-in" style="animation-delay: 0.5s;">
+                                        <div class="component-item animate-slide-in" data-href="/app/antibiotics_list.php" style="animation-delay: 0.5s;">
                                             <div class="component-icon">
                                                 <i class="fa-solid fa-prescription-bottle-pill"></i>
                                             </div>
@@ -688,7 +745,7 @@
                             <div class="tab-pane fade" id="training" role="tabpanel">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="component-item">
+                                        <div class="component-item" data-href="/app/training_sessions_list.php">
                                             <div class="component-icon">
                                                 <i class="fas fa-chalkboard-teacher"></i>
                                             </div>
@@ -697,7 +754,7 @@
                                                 <p>Schedule, manage, and track all training sessions conducted across locations.</p>
                                             </div>
                                         </div>
-                                        <div class="component-item">
+                                        <div class="component-item" data-href="/app/training_participants_list.php">
                                             <div class="component-icon">
                                                 <i class="fas fa-users"></i>
                                             </div>
@@ -706,7 +763,7 @@
                                                 <p>Manage participant information, attendance, and training outcomes.</p>
                                             </div>
                                         </div>
-                                        <div class="component-item">
+                                        <div class="component-item" data-href="/app/training_courses_list.php">
                                             <div class="component-icon">
                                                 <i class="fas fa-certificate"></i>
                                             </div>
@@ -717,7 +774,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="component-item">
+                                        <div class="component-item" data-href="/app/trainers_list.php">
                                             <div class="component-icon">
                                                 <i class="fas fa-user-tie"></i>
                                             </div>
@@ -726,7 +783,7 @@
                                                 <p>Database of trainers with their qualifications and training assignments.</p>
                                             </div>
                                         </div>
-                                        <div class="component-item">
+                                        <div class="component-item" data-href="/app/dashboard_dashboard.php?page=lifebox_test_center&menuItemId=124">
                                             <div class="component-icon">
                                                 <i class="fas fa-clipboard-check"></i>
                                             </div>
@@ -735,7 +792,7 @@
                                                 <p>Assess training effectiveness through pre- and post-training evaluations.</p>
                                             </div>
                                         </div>
-                                        <div class="component-item">
+                                        <div class="component-item" data-href="/app/training_languages_list.php">
                                             <div class="component-icon">
                                                 <i class="fas fa-language"></i>
                                             </div>
@@ -751,7 +808,7 @@
                             <div class="tab-pane fade" id="data" role="tabpanel">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="component-item">
+                                        <div class="component-item" data-href="/app/regions_list.php">
                                             <div class="component-icon">
                                                 <i class="fas fa-globe-africa"></i>
                                             </div>
@@ -760,7 +817,7 @@
                                                 <p>Geographical data management for all countries and regions of operation.</p>
                                             </div>
                                         </div>
-                                        <div class="component-item">
+                                        <div class="component-item" data-href="/app/facilities_list.php">
                                             <div class="component-icon">
                                                 <i class="fas fa-hospital"></i>
                                             </div>
@@ -769,7 +826,7 @@
                                                 <p>Comprehensive database of healthcare facilities implementing Lifebox programs.</p>
                                             </div>
                                         </div>
-                                        <div class="component-item">
+                                        <div class="component-item" data-href="/app/diagnoses_list.php">
                                             <div class="component-icon">
                                                 <i class="fas fa-procedures"></i>
                                             </div>
@@ -780,7 +837,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="component-item">
+                                        <div class="component-item" data-href="/app/partners_list.php">
                                             <div class="component-icon">
                                                 <i class="fas fa-people-arrows"></i>
                                             </div>
@@ -789,7 +846,7 @@
                                                 <p>Management of partner organizations and their engagement details.</p>
                                             </div>
                                         </div>
-                                        <div class="component-item">
+                                        <div class="component-item" data-href="/app/lifebox_staff_list.php">
                                             <div class="component-icon">
                                                 <i class="fas fa-user-md"></i>
                                             </div>
@@ -798,7 +855,7 @@
                                                 <p>Directory of Lifebox team members and their roles across regions.</p>
                                             </div>
                                         </div>
-                                        <div class="component-item">
+                                        <div class="component-item" data-href="/app/period_types_list.php">
                                             <div class="component-icon">
                                                 <i class="fas fa-calendar-alt"></i>
                                             </div>
@@ -814,7 +871,7 @@
                             <div class="tab-pane fade" id="admin" role="tabpanel">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="component-item">
+                                        <div class="component-item" data-href="/app/admin_rights_list.php">
                                             <div class="component-icon">
                                                 <i class="fas fa-user-shield"></i>
                                             </div>
@@ -823,7 +880,7 @@
                                                 <p>Granular control over user permissions and data access levels.</p>
                                             </div>
                                         </div>
-                                        <div class="component-item">
+                                        <div class="component-item" data-href="">
                                             <div class="component-icon">
                                                 <i class="fas fa-cogs"></i>
                                             </div>
@@ -832,7 +889,7 @@
                                                 <p>Centralized settings for system behavior, notifications, and integrations.</p>
                                             </div>
                                         </div>
-                                        <div class="component-item">
+                                        <div class="component-item" data-href="">
                                             <div class="component-icon">
                                                 <i class="fas fa-database"></i>
                                             </div>
@@ -843,7 +900,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="component-item">
+                                        <div class="component-item" data-href="/app/webreport.php">
                                             <div class="component-icon">
                                                 <i class="fas fa-chart-bar"></i>
                                             </div>
@@ -852,7 +909,7 @@
                                                 <p>Management of standard and custom report templates.</p>
                                             </div>
                                         </div>
-                                        <div class="component-item">
+                                        <div class="component-item" data-href="/app/lifeboxme_dhis2_analytics_settings_list.php">
                                             <div class="component-icon">
                                                 <i class="fas fa-exchange-alt"></i>
                                             </div>
@@ -861,7 +918,7 @@
                                                 <p>Configuration of external system integrations (DHIS2, etc.).</p>
                                             </div>
                                         </div>
-                                        <div class="component-item">
+                                        <div class="component-item" data-href="/app/lifeboxme__audit_list.php">
                                             <div class="component-icon">
                                                 <i class="fas fa-history"></i>
                                             </div>
@@ -981,6 +1038,112 @@
                 tab.addEventListener('mouseleave', function() {
                     if (!this.classList.contains('active')) {
                         this.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        // Add click handlers to component items
+        /* */
+        document.querySelectorAll('.component-item').forEach(item => {
+            item.style.cursor = 'pointer';
+            item.addEventListener('click', function() {
+                const href = this.getAttribute('data-link');
+                if (href) {
+                    window.location.href = href;
+                }
+            });
+        });
+
+
+
+        // Enhanced version with configurable window features
+
+        document.addEventListener('DOMContentLoaded', function() {
+            function openComponentWindow(url) {
+                //const windowFeatures = 'width=1700,height=800,scrollbars=yes,resizable=yes,toolbar=yes,menubar=yes,location=yes';
+                const windowFeatures = 'width=1700,height=800,scrollbars=yes,resizable=yes';
+                //window.open(url, '_blank', windowFeatures);
+                window.open(url, '_blank');
+            }
+
+            document.querySelectorAll('.component-item[data-href]').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    const href = this.getAttribute('data-href');
+                    if (href) {
+                        openComponentWindow(href);
+                    }
+                });
+
+                // Keyboard and accessibility support
+                item.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        const href = this.getAttribute('data-href');
+                        if (href) {
+                            openComponentWindow(href);
+                        }
+                    }
+                });
+
+                item.setAttribute('tabindex', '0');
+                item.setAttribute('role', 'button');
+                item.setAttribute('aria-label', `Open ${item.querySelector('h4').textContent}`);
+            });
+        });
+
+
+        /*
+        // Modified version to reload application window with clicked URL
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.component-item[data-href]').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    const href = this.getAttribute('data-href');
+                    if (href) {
+                        // Navigate to the new URL in the same window
+                        //window.location.href = href;
+                        window.location.assign(href);
+                    }
+                });
+
+                // Keyboard and accessibility support
+                item.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        const href = this.getAttribute('data-href');
+                        if (href) {
+                            //window.location.href = href;
+                            window.location.assign(href);
+                        }
+                    }
+                });
+
+                item.setAttribute('tabindex', '0');
+                item.setAttribute('role', 'button');
+                item.setAttribute('aria-label', `Open ${item.querySelector('h4').textContent}`);
+            });
+        });
+        */
+    </script>
+
+    <script>
+        // Search functionality for system modules
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function() {
+                const filter = this.value.toLowerCase();
+                const componentItems = document.querySelectorAll('.component-item');
+
+                componentItems.forEach(item => {
+                    const title = item.querySelector('h4').textContent.toLowerCase();
+                    const description = item.querySelector('p').textContent.toLowerCase();
+
+                    if (title.includes(filter) || description.includes(filter)) {
+                        item.style.display = '';
+                    } else {
+                        item.style.display = 'none';
                     }
                 });
             });
