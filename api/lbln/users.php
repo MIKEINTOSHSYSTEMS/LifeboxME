@@ -184,8 +184,8 @@ function fetchAllPaginatedData($endpoint, $filters = [], $maxPages = null) {
             $allData = array_merge($allData, $response['data']);
             $meta = $response['meta'] ?? [];
             $totalPages = $meta['totalPages'] ?? 1;
-            $itemsPerPage = $meta['itemsPerPage'] ?? 20;
-            $totalItems = $meta['totalItems'] ?? 0;
+//            $itemsPerPage = $meta['itemsPerPage'] ?? 20;
+//            $totalItems = $meta['totalItems'] ?? 0;
             
             // Log progress
             if (DEBUG_MODE) {
@@ -211,7 +211,7 @@ function fetchAllPaginatedData($endpoint, $filters = [], $maxPages = null) {
         } else {
             $page++;
             
-            // Add delay to avoid rate limiting, but reduce it for faster fetching
+            // Add delay to avoid rate limiting
             usleep(50000); // 0.05 second delay
         }
     }
@@ -260,13 +260,18 @@ function getUser($userId) {
     ];
 }
 
-// Get user courses (enrollments) with pagination
+// Get user courses (enrollments)
 function getUserCourses($userId, $filters = [], $maxPages = null) {
     return fetchAllPaginatedData('/users/' . urlencode($userId) . '/courses', $filters, $maxPages);
 }
 
-// Get single page of user courses
-function getUserCoursesSinglePage($userId, $page = 1) {
+// Get user progress for all courses
+function getUserProgress($userId, $filters = [], $maxPages = null) {
+    return fetchAllPaginatedData('/users/' . urlencode($userId) . '/progress', $filters, $maxPages);
+}
+
+// Get user progress for specific course
+function getUserCourseProgress($userId, $courseId) {
     $config = loadEnv();
     
     if (isset($config['error'])) {
@@ -274,7 +279,7 @@ function getUserCoursesSinglePage($userId, $page = 1) {
     }
     
     $baseUrl = rtrim($config['LIFEBOX_BASE_URL'], '/');
-    $url = $baseUrl . '/users/' . urlencode($userId) . '/courses?page=' . $page;
+    $url = $baseUrl . '/users/' . urlencode($userId) . '/courses/' . urlencode($courseId) . '/progress';
     
     $response = makeApiRequest($url);
     
@@ -284,15 +289,14 @@ function getUserCoursesSinglePage($userId, $page = 1) {
     
     return [
         'success' => true,
-        'data' => $response['data'] ?? $response,
-        'meta' => $response['meta'] ?? [
-            'page' => $page,
+        'data' => $response,
+        'meta' => [
             'timestamp' => date('Y-m-d H:i:s')
         ]
     ];
 }
 
-// Format response - handles both success and error responses
+// Format response
 function formatResponse($data) {
     // If data already has an error key
     if (isset($data['error'])) {
@@ -306,13 +310,12 @@ function formatResponse($data) {
         ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     }
     
-    // If data is a direct API response (not wrapped in success/data structure)
+    // If data is a direct API response
     if (!isset($data['success']) && (isset($data['data']) || isset($data[0]))) {
-        // It's already a proper API response
         return json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     }
     
-    // If it's a direct array response from API
+    // If it's a direct array response
     if (is_array($data) && isset($data[0])) {
         return json_encode([
             'success' => true,
@@ -324,18 +327,7 @@ function formatResponse($data) {
         ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     }
     
-    // If it's a single item
-    if (!empty($data) && !isset($data['success'])) {
-        return json_encode([
-            'success' => true,
-            'data' => $data,
-            'meta' => [
-                'timestamp' => date('Y-m-d H:i:s')
-            ]
-        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-    }
-    
-    // Default: assume it's already properly formatted
+    // Default
     return json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 }
 
@@ -464,15 +456,66 @@ function filterUserCourses($courses, $filters) {
     return $filtered;
 }
 
+// Helper function to filter user progress
+function filterUserProgress($progressData, $filters) {
+    if (empty($filters) || empty($progressData)) {
+        return $progressData;
+    }
+    
+    $filtered = [];
+    foreach ($progressData as $progress) {
+        $include = true;
+        
+        foreach ($filters as $key => $value) {
+            if (empty($value)) continue;
+            
+            if ($key === 'status') {
+                $status = $progress['status'] ?? '';
+                if ($status !== $value) {
+                    $include = false;
+                    break;
+                }
+            } elseif ($key === 'min_progress') {
+                $progressRate = $progress['progress_rate'] ?? 0;
+                if ($progressRate < floatval($value)) {
+                    $include = false;
+                    break;
+                }
+            } elseif ($key === 'max_progress') {
+                $progressRate = $progress['progress_rate'] ?? 0;
+                if ($progressRate > floatval($value)) {
+                    $include = false;
+                    break;
+                }
+            } elseif ($key === 'completed') {
+                $isCompleted = ($progress['status'] ?? '') === 'completed';
+                $filterValue = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+                if ($isCompleted !== $filterValue) {
+                    $include = false;
+                    break;
+                }
+            }
+        }
+        
+        if ($include) {
+            $filtered[] = $progress;
+        }
+    }
+    
+    return $filtered;
+}
+
 // Main execution
 try {
     // Get parameters
     $userId = $_GET['id'] ?? '';
+    $courseId = $_GET['course_id'] ?? '';
     $action = $_GET['action'] ?? '';
     $page = intval($_GET['page'] ?? 1);
     $singlePage = isset($_GET['single_page']) ? filter_var($_GET['single_page'], FILTER_VALIDATE_BOOLEAN) : false;
     $maxPages = isset($_GET['max_pages']) ? intval($_GET['max_pages']) : null;
     $limit = isset($_GET['limit']) ? intval($_GET['limit']) : null;
+    $itemsPerPage = isset($_GET['items_per_page']) ? intval($_GET['items_per_page']) : null;
     
     // Filter parameters
     $emailContains = $_GET['email_contains'] ?? '';
@@ -482,10 +525,16 @@ try {
     
     // Course filter parameters
     $courseTitleContains = $_GET['course_title_contains'] ?? '';
-    $courseIdFilter = $_GET['course_id'] ?? '';
+    $courseIdFilter = $_GET['course_id_filter'] ?? '';
     $courseAccessFilter = $_GET['course_access'] ?? '';
     $categoryContains = $_GET['category_contains'] ?? '';
     $freeOnly = isset($_GET['free_only']) ? filter_var($_GET['free_only'], FILTER_VALIDATE_BOOLEAN) : false;
+    
+    // Progress filter parameters
+    $progressStatus = $_GET['progress_status'] ?? '';
+    $minProgress = $_GET['min_progress'] ?? '';
+    $maxProgress = $_GET['max_progress'] ?? '';
+    $completedOnly = isset($_GET['completed_only']) ? filter_var($_GET['completed_only'], FILTER_VALIDATE_BOOLEAN) : false;
     
     // Test mode
     $testMode = isset($_GET['test']);
@@ -504,11 +553,13 @@ try {
             ],
             'request' => [
                 'id' => $userId,
+                'course_id' => $courseId,
                 'action' => $action,
                 'page' => $page,
                 'single_page' => $singlePage,
                 'max_pages' => $maxPages,
                 'limit' => $limit,
+                'items_per_page' => $itemsPerPage,
                 'filters' => [
                     'email_contains' => $emailContains,
                     'name_contains' => $nameContains,
@@ -517,34 +568,68 @@ try {
                 ],
                 'course_filters' => [
                     'course_title_contains' => $courseTitleContains,
-                    'course_id' => $courseIdFilter,
+                    'course_id_filter' => $courseIdFilter,
                     'course_access' => $courseAccessFilter,
                     'category_contains' => $categoryContains,
                     'free_only' => $freeOnly
+                ],
+                'progress_filters' => [
+                    'status' => $progressStatus,
+                    'min_progress' => $minProgress,
+                    'max_progress' => $maxProgress,
+                    'completed_only' => $completedOnly
                 ]
             ]
         ]);
         exit;
     }
     
+    // Validate required parameters for specific actions
+    if (in_array($action, ['courses', 'progress', 'course_progress']) && !$userId) {
+        http_response_code(400);
+        echo formatResponse(['error' => 'User ID or email is required for this action']);
+        exit;
+    }
+    
+    if ($action === 'course_progress' && !$courseId) {
+        http_response_code(400);
+        echo formatResponse(['error' => 'Course ID is required for course_progress action']);
+        exit;
+    }
+    
     // API filters
     $apiFilters = [];
+    if ($itemsPerPage) {
+        $apiFilters['items_per_page'] = $itemsPerPage;
+    }
+    if ($singlePage) {
+        $apiFilters['page'] = $page;
+    }
     
     // Handle different actions
     switch ($action) {
         case 'courses':
             // Get user courses (enrollments)
-            if (!$userId) {
-                http_response_code(400);
-                echo formatResponse(['error' => 'User ID or email is required for courses action']);
-                exit;
-            }
-            
-            $courseFilters = [];
             if ($singlePage) {
-                $result = getUserCoursesSinglePage($userId, $page);
+                $config = loadEnv();
+                $baseUrl = rtrim($config['LIFEBOX_BASE_URL'] ?? '', '/');
+                $url = $baseUrl . '/users/' . urlencode($userId) . '/courses?' . http_build_query($apiFilters);
+                $response = makeApiRequest($url);
+                
+                if (isset($response['error'])) {
+                    $result = $response;
+                } else {
+                    $result = [
+                        'success' => true,
+                        'data' => $response['data'] ?? $response,
+                        'meta' => $response['meta'] ?? [
+                            'page' => $page,
+                            'timestamp' => date('Y-m-d H:i:s')
+                        ]
+                    ];
+                }
             } else {
-                $result = getUserCourses($userId, $courseFilters, $maxPages);
+                $result = getUserCourses($userId, $apiFilters, $maxPages);
             }
             
             // Apply course filters if needed
@@ -562,21 +647,58 @@ try {
                     $result['meta']['totalItems'] = count($filteredCourses);
                     $result['meta']['filters_applied'] = $clientCourseFilters;
                 }
+            }
+            break;
+            
+        case 'progress':
+            // Get user progress for all courses
+            if ($singlePage) {
+                $config = loadEnv();
+                $baseUrl = rtrim($config['LIFEBOX_BASE_URL'] ?? '', '/');
+                $url = $baseUrl . '/users/' . urlencode($userId) . '/progress?' . http_build_query($apiFilters);
+                $response = makeApiRequest($url);
                 
-                // Apply limit if specified
-                if ($limit && $limit > 0 && count($result['data']) > $limit) {
-                    $result['data'] = array_slice($result['data'], 0, $limit);
-                    $result['meta']['limit_applied'] = $limit;
-                    $result['meta']['totalItems'] = $limit;
+                if (isset($response['error'])) {
+                    $result = $response;
+                } else {
+                    $result = [
+                        'success' => true,
+                        'data' => $response['data'] ?? $response,
+                        'meta' => $response['meta'] ?? [
+                            'page' => $page,
+                            'timestamp' => date('Y-m-d H:i:s')
+                        ]
+                    ];
+                }
+            } else {
+                $result = getUserProgress($userId, $apiFilters, $maxPages);
+            }
+            
+            // Apply progress filters if needed
+            if (!isset($result['error']) && isset($result['data']) && is_array($result['data'])) {
+                $progressFilters = [];
+                if ($progressStatus) $progressFilters['status'] = $progressStatus;
+                if ($minProgress !== '') $progressFilters['min_progress'] = $minProgress;
+                if ($maxProgress !== '') $progressFilters['max_progress'] = $maxProgress;
+                if ($completedOnly) $progressFilters['completed'] = $completedOnly;
+                
+                if (!empty($progressFilters)) {
+                    $filteredProgress = filterUserProgress($result['data'], $progressFilters);
+                    $result['data'] = $filteredProgress;
+                    $result['meta']['totalItems'] = count($filteredProgress);
+                    $result['meta']['filters_applied'] = $progressFilters;
                 }
             }
+            break;
+            
+        case 'course_progress':
+            // Get user progress for specific course
+            $result = getUserCourseProgress($userId, $courseId);
             break;
             
         default:
             // Default action: get users or specific user
             if ($singlePage) {
-                $apiFilters['page'] = $page;
-                
                 $config = loadEnv();
                 $baseUrl = rtrim($config['LIFEBOX_BASE_URL'] ?? '', '/');
                 $url = $baseUrl . '/users?' . http_build_query($apiFilters);
@@ -619,15 +741,17 @@ try {
                     $result['meta']['totalItems'] = count($filteredUsers);
                     $result['meta']['filters_applied'] = $clientFilters;
                 }
-                
-                // Apply limit if specified
-                if ($limit && $limit > 0 && count($result['data']) > $limit) {
-                    $result['data'] = array_slice($result['data'], 0, $limit);
-                    $result['meta']['limit_applied'] = $limit;
-                    $result['meta']['totalItems'] = $limit;
-                }
             }
             break;
+    }
+    
+    // Apply limit if specified (for data arrays)
+    if (!isset($result['error']) && isset($result['data']) && is_array($result['data']) && $limit && $limit > 0) {
+        if (count($result['data']) > $limit) {
+            $result['data'] = array_slice($result['data'], 0, $limit);
+            $result['meta']['limit_applied'] = $limit;
+            $result['meta']['totalItems'] = $limit;
+        }
     }
     
     // Output result

@@ -9,6 +9,9 @@ if (DEBUG_MODE) {
     ini_set('display_startup_errors', 1);
 }
 
+// Increase execution time for large datasets
+set_time_limit(300); // 5 minutes
+
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
@@ -144,8 +147,8 @@ function makeApiRequest($url, $method = 'GET', $data = null) {
     return ['error' => 'Max retries exceeded'];
 }
 
-// Fetch all paginated data from any endpoint
-function fetchAllPaginatedData($endpoint, $filters = []) {
+// Fetch all paginated data from any endpoint with progress tracking
+function fetchAllPaginatedData($endpoint, $filters = [], $maxPages = null) {
     $config = loadEnv();
     
     if (isset($config['error'])) {
@@ -159,7 +162,7 @@ function fetchAllPaginatedData($endpoint, $filters = []) {
     $hasMorePages = true;
     $totalPages = 1;
     
-    while ($hasMorePages) {
+    while ($hasMorePages && (!$maxPages || $page <= $maxPages)) {
         $queryParams = array_merge($filters, ['page' => $page]);
         $queryString = http_build_query($queryParams);
         $queryString = preg_replace('/%5B\d+%5D/', '%5B%5D', $queryString);
@@ -167,7 +170,7 @@ function fetchAllPaginatedData($endpoint, $filters = []) {
         $url = $baseUrl . $endpoint . '?' . $queryString;
         
         if (DEBUG_MODE) {
-            error_log("Fetching paginated data from: " . $url);
+            error_log("Fetching page $page from: " . $url);
         }
         
         $response = makeApiRequest($url);
@@ -181,6 +184,11 @@ function fetchAllPaginatedData($endpoint, $filters = []) {
             $allData = array_merge($allData, $response['data']);
             $meta = $response['meta'] ?? [];
             $totalPages = $meta['totalPages'] ?? 1;
+            
+            // Log progress
+            if (DEBUG_MODE) {
+                error_log("Page $page: " . count($response['data']) . " items, Total so far: " . count($allData));
+            }
         } else if (is_array($response) && isset($response[0])) {
             // If response is directly an array (not wrapped in data/meta)
             $allData = array_merge($allData, $response);
@@ -189,13 +197,20 @@ function fetchAllPaginatedData($endpoint, $filters = []) {
             // Single item response
             $allData[] = $response;
             $totalPages = 1;
+        } else {
+            // Empty response
+            $hasMorePages = false;
+            break;
         }
         
+        // Check if we have more pages
         if ($page >= $totalPages) {
             $hasMorePages = false;
         } else {
             $page++;
-            usleep(100000); // 0.1 second delay to avoid rate limiting
+            
+            // Add delay to avoid rate limiting
+            usleep(50000); // 0.05 second delay
         }
     }
     
@@ -204,15 +219,17 @@ function fetchAllPaginatedData($endpoint, $filters = []) {
         'data' => $allData,
         'meta' => [
             'totalItems' => count($allData),
-            'totalPagesFetched' => $page,
+            'totalPagesFetched' => $page - 1,
+            'totalPagesAvailable' => $totalPages,
+            'maxPagesLimit' => $maxPages,
             'timestamp' => date('Y-m-d H:i:s')
         ]
     ];
 }
 
 // Get all courses with filters
-function getAllCourses($filters = []) {
-    return fetchAllPaginatedData('/courses', $filters);
+function getAllCourses($filters = [], $maxPages = null) {
+    return fetchAllPaginatedData('/courses', $filters, $maxPages);
 }
 
 // Get single course
@@ -226,17 +243,29 @@ function getCourse($courseId) {
     $baseUrl = rtrim($config['LIFEBOX_BASE_URL'], '/');
     $url = $baseUrl . '/courses/' . urlencode($courseId);
     
-    return makeApiRequest($url);
+    $response = makeApiRequest($url);
+    
+    if (isset($response['error'])) {
+        return $response;
+    }
+    
+    return [
+        'success' => true,
+        'data' => $response,
+        'meta' => [
+            'timestamp' => date('Y-m-d H:i:s')
+        ]
+    ];
 }
 
 // Get all course users
-function getAllCourseUsers($courseId, $filters = []) {
-    return fetchAllPaginatedData('/courses/' . urlencode($courseId) . '/users', $filters);
+function getAllCourseUsers($courseId, $filters = [], $maxPages = null) {
+    return fetchAllPaginatedData('/courses/' . urlencode($courseId) . '/users', $filters, $maxPages);
 }
 
 // Get all course grades
-function getAllCourseGrades($courseId, $filters = []) {
-    return fetchAllPaginatedData('/courses/' . urlencode($courseId) . '/grades', $filters);
+function getAllCourseGrades($courseId, $filters = [], $maxPages = null) {
+    return fetchAllPaginatedData('/courses/' . urlencode($courseId) . '/grades', $filters, $maxPages);
 }
 
 // Get course analytics
@@ -250,11 +279,50 @@ function getCourseAnalytics($courseId) {
     $baseUrl = rtrim($config['LIFEBOX_BASE_URL'], '/');
     $url = $baseUrl . '/courses/' . urlencode($courseId) . '/analytics';
     
-    return makeApiRequest($url);
+    $response = makeApiRequest($url);
+    
+    if (isset($response['error'])) {
+        return $response;
+    }
+    
+    return [
+        'success' => true,
+        'data' => $response,
+        'meta' => [
+            'timestamp' => date('Y-m-d H:i:s')
+        ]
+    ];
+}
+
+// Get learning activity analytics
+function getLearningActivityAnalytics($courseId, $unitId) {
+    $config = loadEnv();
+    
+    if (isset($config['error'])) {
+        return ['error' => $config['message']];
+    }
+    
+    $baseUrl = rtrim($config['LIFEBOX_BASE_URL'], '/');
+    $url = $baseUrl . '/courses/' . urlencode($courseId) . '/units/' . urlencode($unitId) . '/analytics';
+    
+    $response = makeApiRequest($url);
+    
+    if (isset($response['error'])) {
+        return $response;
+    }
+    
+    return [
+        'success' => true,
+        'data' => $response,
+        'meta' => [
+            'timestamp' => date('Y-m-d H:i:s')
+        ]
+    ];
 }
 
 // Format response
 function formatResponse($data) {
+    // If data already has an error key
     if (isset($data['error'])) {
         http_response_code(400);
         return json_encode([
@@ -266,6 +334,36 @@ function formatResponse($data) {
         ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     }
     
+    // If data is a direct API response (not wrapped in success/data structure)
+    if (!isset($data['success']) && (isset($data['data']) || isset($data[0]))) {
+        // It's already a proper API response
+        return json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+    }
+    
+    // If it's a direct array response from API
+    if (is_array($data) && isset($data[0])) {
+        return json_encode([
+            'success' => true,
+            'data' => $data,
+            'meta' => [
+                'totalItems' => count($data),
+                'timestamp' => date('Y-m-d H:i:s')
+            ]
+        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+    }
+    
+    // If it's a single item
+    if (!empty($data) && !isset($data['success'])) {
+        return json_encode([
+            'success' => true,
+            'data' => $data,
+            'meta' => [
+                'timestamp' => date('Y-m-d H:i:s')
+            ]
+        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+    }
+    
+    // Default: assume it's already properly formatted
     return json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 }
 
@@ -273,12 +371,14 @@ function formatResponse($data) {
 try {
     // Get parameters
     $courseId = $_GET['id'] ?? '';
+    $unitId = $_GET['unit_id'] ?? '';
     $action = $_GET['action'] ?? '';
     $page = intval($_GET['page'] ?? 1);
     $access = $_GET['access'] ?? '';
     $categories = $_GET['categories'] ?? '';
-    $format = $_GET['format'] ?? 'json';
     $singlePage = isset($_GET['single_page']) ? filter_var($_GET['single_page'], FILTER_VALIDATE_BOOLEAN) : false;
+    $maxPages = isset($_GET['max_pages']) ? intval($_GET['max_pages']) : null;
+    $limit = isset($_GET['limit']) ? intval($_GET['limit']) : null;
     
     // Test mode
     $testMode = isset($_GET['test']);
@@ -297,11 +397,14 @@ try {
             ],
             'request' => [
                 'id' => $courseId,
+                'unit_id' => $unitId,
                 'action' => $action,
                 'page' => $page,
                 'access' => $access,
                 'categories' => $categories,
-                'single_page' => $singlePage
+                'single_page' => $singlePage,
+                'max_pages' => $maxPages,
+                'limit' => $limit
             ]
         ]);
         exit;
@@ -318,57 +421,124 @@ try {
         $filters['categories'] = $categories;
     }
     
-    if ($singlePage && $page > 1) {
-        $filters['page'] = $page;
+    // Handle different actions
+    switch ($action) {
+        case 'analytics':
+            if (!$courseId) {
+                http_response_code(400);
+                echo formatResponse(['error' => 'Course ID is required for analytics']);
+                exit;
+            }
+            $result = getCourseAnalytics($courseId);
+            break;
+            
+        case 'users':
+            if (!$courseId) {
+                http_response_code(400);
+                echo formatResponse(['error' => 'Course ID is required for users']);
+                exit;
+            }
+            if ($singlePage) {
+                $config = loadEnv();
+                $baseUrl = rtrim($config['LIFEBOX_BASE_URL'] ?? '', '/');
+                $queryParams = array_merge($filters, ['page' => $page]);
+                $url = $baseUrl . '/courses/' . urlencode($courseId) . '/users?' . http_build_query($queryParams);
+                $response = makeApiRequest($url);
+                
+                if (isset($response['error'])) {
+                    $result = $response;
+                } else {
+                    $result = [
+                        'success' => true,
+                        'data' => $response['data'] ?? $response,
+                        'meta' => $response['meta'] ?? [
+                            'page' => $page,
+                            'timestamp' => date('Y-m-d H:i:s')
+                        ]
+                    ];
+                }
+            } else {
+                $result = getAllCourseUsers($courseId, $filters, $maxPages);
+            }
+            break;
+            
+        case 'grades':
+            if (!$courseId) {
+                http_response_code(400);
+                echo formatResponse(['error' => 'Course ID is required for grades']);
+                exit;
+            }
+            if ($singlePage) {
+                $config = loadEnv();
+                $baseUrl = rtrim($config['LIFEBOX_BASE_URL'] ?? '', '/');
+                $queryParams = array_merge($filters, ['page' => $page]);
+                $url = $baseUrl . '/courses/' . urlencode($courseId) . '/grades?' . http_build_query($queryParams);
+                $response = makeApiRequest($url);
+                
+                if (isset($response['error'])) {
+                    $result = $response;
+                } else {
+                    $result = [
+                        'success' => true,
+                        'data' => $response['data'] ?? $response,
+                        'meta' => $response['meta'] ?? [
+                            'page' => $page,
+                            'timestamp' => date('Y-m-d H:i:s')
+                        ]
+                    ];
+                }
+            } else {
+                $result = getAllCourseGrades($courseId, $filters, $maxPages);
+            }
+            break;
+            
+        case 'unit_analytics':
+            if (!$courseId || !$unitId) {
+                http_response_code(400);
+                echo formatResponse(['error' => 'Course ID and Unit ID are required for unit analytics']);
+                exit;
+            }
+            $result = getLearningActivityAnalytics($courseId, $unitId);
+            break;
+            
+        default:
+            // Get course or courses
+            if ($courseId) {
+                $result = getCourse($courseId);
+            } else {
+                // Get all courses
+                if ($singlePage) {
+                    $queryParams = array_merge($filters, ['page' => $page]);
+                    $config = loadEnv();
+                    $baseUrl = rtrim($config['LIFEBOX_BASE_URL'] ?? '', '/');
+                    $url = $baseUrl . '/courses?' . http_build_query($queryParams);
+                    $response = makeApiRequest($url);
+                    
+                    if (isset($response['error'])) {
+                        $result = $response;
+                    } else {
+                        $result = [
+                            'success' => true,
+                            'data' => $response['data'] ?? $response,
+                            'meta' => $response['meta'] ?? [
+                                'page' => $page,
+                                'timestamp' => date('Y-m-d H:i:s')
+                            ]
+                        ];
+                    }
+                } else {
+                    $result = getAllCourses($filters, $maxPages);
+                }
+            }
+            break;
     }
     
-    if ($courseId) {
-        switch ($action) {
-            case 'analytics':
-                $result = getCourseAnalytics($courseId);
-                break;
-                
-            case 'users':
-                if ($singlePage) {
-                    // Get single page of users
-                    $config = loadEnv();
-                    $baseUrl = rtrim($config['LIFEBOX_BASE_URL'] ?? '', '/');
-                    $url = $baseUrl . '/courses/' . urlencode($courseId) . '/users?' . http_build_query($filters);
-                    $result = makeApiRequest($url);
-                } else {
-                    // Get ALL users (all pages)
-                    $result = getAllCourseUsers($courseId, $filters);
-                }
-                break;
-                
-            case 'grades':
-                if ($singlePage) {
-                    // Get single page of grades
-                    $config = loadEnv();
-                    $baseUrl = rtrim($config['LIFEBOX_BASE_URL'] ?? '', '/');
-                    $url = $baseUrl . '/courses/' . urlencode($courseId) . '/grades?' . http_build_query($filters);
-                    $result = makeApiRequest($url);
-                } else {
-                    // Get ALL grades (all pages)
-                    $result = getAllCourseGrades($courseId, $filters);
-                }
-                break;
-                
-            default:
-                $result = getCourse($courseId);
-                break;
-        }
-    } else {
-        // Get all courses
-        if ($singlePage) {
-            // Get single page of courses
-            $config = loadEnv();
-            $baseUrl = rtrim($config['LIFEBOX_BASE_URL'] ?? '', '/');
-            $url = $baseUrl . '/courses?' . http_build_query($filters);
-            $result = makeApiRequest($url);
-        } else {
-            // Get ALL courses (all pages)
-            $result = getAllCourses($filters);
+    // Apply limit if specified (for data arrays)
+    if (!isset($result['error']) && isset($result['data']) && is_array($result['data']) && $limit && $limit > 0) {
+        if (count($result['data']) > $limit) {
+            $result['data'] = array_slice($result['data'], 0, $limit);
+            $result['meta']['limit_applied'] = $limit;
+            $result['meta']['totalItems'] = $limit;
         }
     }
     
