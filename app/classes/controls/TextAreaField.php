@@ -14,15 +14,14 @@ class TextAreaField extends TextControl
 		if( $this->pageObject->pSetEdit->isUseRTE( $this->field ) ) {
 			$value = $this->RTESafe( $value );
 			
-			switch( $this->pageObject->pSetEdit->getRTEType( $this->field ) ) {
-				case "RTE":
+			switch( ProjectSettings::rteType() ) {
+				case rteBasic:
 					$this->buildTinyMCE( $value );
 					break;
-				case "RTECK_NEW":
-				case "RTECK":
+				case rteCKEditor:
 					$this->CreateCKeditor( $value );
 					break;
-				case "RTEINNOVA":
+				case rteInnovaEditor:
 					$this->buildInnova( $value );
 					break;
 			}
@@ -82,7 +81,7 @@ class TextAreaField extends TextControl
 	 * Add control JS files to page object
 	 */
 	function addJSFiles() {
-		if ( $this->pageObject->pSetEdit->getRTEType( $this->field ) == "RTE" ) {
+		if ( $this->pageObject->pSetEdit->isUseRTE( $this->field ) && ProjectSettings::rteType() === rteBasic ) {
 			$this->pageObject->AddJSFile("plugins/tinymce/tinymce.min.js");
 		}
 	}	

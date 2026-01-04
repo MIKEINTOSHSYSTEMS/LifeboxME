@@ -1,4 +1,6 @@
 <?php
+require_once( getabspath( "classes/runnerpage.php" ) );
+
 class ReportPage extends RunnerPage
 {
 
@@ -49,9 +51,6 @@ class ReportPage extends RunnerPage
 		parent::__construct($params);
 
 		$this->crossTable = $this->pSet->isCrossTabReport();
-
-		$this->jsSettings['tableSettings'][ $this->tName ]['crossTable'] = $this->crossTable;
-		$this->jsSettings['tableSettings'][ $this->tName ]['simpleSearchActive'] = $this->searchClauseObj->simpleSearchActive;
 
 		if( $this->mode == REPORT_DASHBOARD || $this->mode == REPORT_DETAILS || $this->mode == REPORT_DASHDETAILS )
 		{
@@ -450,16 +449,13 @@ class ReportPage extends RunnerPage
 
 		$this->crossTableObj = new CrossTableReport( $params, $this );
 
-		if( $this->crosstableRefresh )
-		{
+		if( $this->crosstableRefresh ) {
 			$this->refreshCrossTable();
 			return;
 		}
 
-		if( $this->crossTableObj->isEmpty() )
-		{
+		if( $this->crossTableObj->isEmpty() ) {
 			$this->noRecordsFound = true;
-			$this->jsSettings["tableSettings"][ $this->tName ]["crossParams"] = $this->getCurrentCrossParams();
 		}
 
 		$this->crossTableCommonAssign( $params["totalSummary"] );
@@ -765,8 +761,6 @@ class ReportPage extends RunnerPage
 			$this->xt->assign("pagination_block", true);
 			$pagination = '';
 			$limit = 10;
-			if( $this->mobileTemplateMode() )
-				$limit = 5;
 
 			$counterstart = $this->myPage - ($limit - 1);
 			if($this->myPage % $limit != 0)
@@ -778,8 +772,8 @@ class ReportPage extends RunnerPage
 
 			if($counterstart != 1)
 			{
-				$pagination.= $this->getPaginationLink(1, "First").$advSeparator;
-				$pagination.= $this->getPaginationLink($counterstart - 1, "Previous").$separator;
+				$pagination.= $this->getPaginationLink(1, mlang_message('FIRST')).$advSeparator;
+				$pagination.= $this->getPaginationLink($counterstart - 1, mlang_message('PREVIOUS')).$separator;
 			}
 
 			$pageLinks = "";
@@ -793,8 +787,8 @@ class ReportPage extends RunnerPage
 
 			if($counterend != $this->maxPages)
 			{
-				$pagination.= $separator . $this->getPaginationLink($counterend + 1, "Next") . $advSeparator;
-				$pagination.= $separator . $this->getPaginationLink($this->maxPages, "Last");
+				$pagination.= $separator . $this->getPaginationLink($counterend + 1, mlang_message('NEXT')) . $advSeparator;
+				$pagination.= $separator . $this->getPaginationLink($this->maxPages, mlang_message('LAST'));
 			}
 
 			$pagination = '<nav><ul class="pagination" data-function="pagination' . $this->id . '">' . $pagination . '</ul></nav>';
@@ -827,12 +821,9 @@ class ReportPage extends RunnerPage
 		return;
 
 		// set detail links
-		foreach( $this->allDetailsTablesArr as $detailTableData )
-		{
+		foreach( $this->pSet->getDetailsTables() as $details ) {
 			// get perm for det tables
-			$this->permis[ $detailTableData['dDataSourceTable'] ] = $this->getPermissions( $detailTableData['dDataSourceTable'] );
-			// field names of detail keys of passed detail table, when current is master
-			$this->detailKeysByD[] = $this->pSet->getDetailKeysByDetailTable( $detailTableData['dDataSourceTable'] );
+			$this->permis[ $details ] = $this->getPermissions( $details );
 		}
 
 		$this->controlsMap['gridRows'] = array();
@@ -963,7 +954,7 @@ class ReportPage extends RunnerPage
 	public function createPerPage()
 	{
 		$classString = 'class="form-control"';
-		$allMessage = "All";
+		$allMessage = mlang_message('ALL');
 
 		$rpp = "<select ".$classString." id=\"recordspp".$this->id."\">";
 
@@ -1013,10 +1004,6 @@ class ReportPage extends RunnerPage
 		if( $this->isShowMenu() )
 			$this->xt->assign("menu_block", true);
 
-		if( $this->mobileTemplateMode() )
-			$this->xt->assign('tableinfomobile_block', true);
-
-
 		if( !Security::permissionsAvailable() ) {
 			$allow_search = true;
 			$allow_export = true;
@@ -1050,7 +1037,7 @@ class ReportPage extends RunnerPage
 		}
 
 		if( $this->pdfJsonMode() )
-			$this->xt->assign( "pdfFonts", my_json_encode( getPdfFonts() ) );
+			$this->xt->assign( "pdfFonts", runner_json_encode( getPdfFonts() ) );
 	}
 
 	/**
@@ -1068,7 +1055,7 @@ class ReportPage extends RunnerPage
 	{
 		$this->body["begin"].= GetBaseScriptsForPage( $this->isDisplayLoading );
 
-		if( $this->mode == REPORT_SIMPLE && !$this->mobileTemplateMode() )
+		if( $this->mode == REPORT_SIMPLE )
 			$this->body["begin"].= "<div id=\"search_suggest\" class=\"search_suggest\"></div>";
 
 		// assign body end in such way, to prevent collisions with flyId increment
@@ -1127,7 +1114,7 @@ class ReportPage extends RunnerPage
 
 			//	prepend headerCont with the page title
 			$returnJSON['headerCont'] = '<span class="rnr-dbebrick">'
-				. $this->getPageTitle( $this->pageName, GoodFieldName($this->tName) )
+				. $this->getPageTitle( $this->pageName, $this->tName)
 				. "</span>"
 				. $returnJSON['headerCont'];
 
@@ -1229,13 +1216,13 @@ class ReportPage extends RunnerPage
 
 		if( $this->mode == REPORT_DETAILS && ( $this->masterPageType == PAGE_LIST || $this->masterPageType == PAGE_REPORT || $this->masterPageType == PAGE_CHART ) )
 		{
-			$returnJSON['headerCont'] = $this->getProceedLink()	. $returnJSON['headerCont'];
+			$returnJSON['headerCont'] = $returnJSON['headerCont'];
 		}
 		else if( $this->mode == REPORT_DASHDETAILS )
 		{
 			//	prepend headerCont with the page title
 			$returnJSON['headerCont'] = '<span class="rnr-dbebrick">'
-				. $this->getPageTitle( $this->pageName, GoodFieldName($this->tName) )
+				. $this->getPageTitle( $this->pageName, $this->tName) 
 				. "</span>"
 				. $returnJSON['headerCont'];
 		}
@@ -1402,6 +1389,20 @@ class ReportPage extends RunnerPage
 			$dc->filter = DataCondition::_False();
 
 		return $dc;
+	}
+
+	protected function buildJsTableSettings( $table, $pSet ) {
+		$settings = parent::buildJsTableSettings( $table, $pSet );
+		
+		$settings['crossTable'] = $this->crossTable;
+		$settings['simpleSearchActive'] = $this->searchClauseObj->simpleSearchActive;
+		
+		if( $this->crossTableObj && $this->crossTableObj->isEmpty() ) {
+			$settings["crossParams"] = $this->getCurrentCrossParams();
+		}
+
+
+		return $settings;
 	}
 
 }

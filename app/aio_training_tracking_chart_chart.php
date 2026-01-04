@@ -2,8 +2,9 @@
 @ini_set("display_errors","1");
 @ini_set("display_startup_errors","1");
 
-$requestTable = "aio_training_tracking Chart";
-$requestPage = "list";
+$requestTable = 'aio_training_tracking Chart';
+$strTableName = 'aio_training_tracking Chart';
+$requestPage = "chart";
 
 require_once("include/dbcommon.php");
 require_once('include/xtempl.php');
@@ -11,15 +12,13 @@ require_once('classes/chartpage.php');
 require_once('classes/searchclause.php');
 add_nocache_headers();
 
-require_once("include/aio_training_tracking_chart_variables.php");
-
 if( Security::hasLogin() ) {
-	if( !Security::processPageSecurity( $strtablename, 'S' ) )
+	if( !Security::processPageSecurity( $strTableName, 'S' ) )
 		return;
 }
 
 $pageMode = ChartPage::readChartModeFromRequest();
-$xt = new Xtempl( $pageMode != CHART_SIMPLE );
+$xt = new Xtempl();
 
 // set params for a RunnerPage constructor
 $params = array();

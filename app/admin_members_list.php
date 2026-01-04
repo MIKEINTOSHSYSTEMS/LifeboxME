@@ -5,8 +5,6 @@
 require_once("include/dbcommon.php");
 header("Expires: Thu, 01 Jan 1970 00:00:01 GMT"); 
 
-require_once("include/admin_members_variables.php");
-
 if( !Security::processAdminPageSecurity( false ) )
 	return;
 
@@ -35,18 +33,19 @@ $options["requestGoto"] = postvalue_number("goto");
 $options["providerType"] = stDB;
 
 
-$pageObject = ListPage::createListPage( $strTableName, $options );
+$pageObject = ListPage::createListPage( GLOBAL_PAGES, $options );
 if( postvalue("a") == "saveMembers" )
 {
 	//	CSRF protection
 	if( !isPostRequest() )
 		return;
-	$modifiedMembers = my_json_decode( postvalue('values') );
+	$modifiedMembers = runner_json_decode( postvalue('values') );
 	$pageObject->saveMembers( $modifiedMembers );
 	return;
 }
 
  // add button events if exist
+$pageObject->addButtonHandlers();
 
 // prepare code for build page
 $pageObject->prepareForBuildPage();

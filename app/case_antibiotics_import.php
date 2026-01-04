@@ -6,12 +6,15 @@ header("Expires: Thu, 01 Jan 1970 00:00:01 GMT");
 
 set_time_limit(600);
 
-require_once("include/case_antibiotics_variables.php");
+$requestTable = 'public.case_antibiotics';
+$strTableName = 'public.case_antibiotics';
+$requestPage = "import";
+
 require_once("include/import_functions.php");
 require_once('classes/importpage.php');
 
 if( Security::hasLogin() ) {
-	if( !Security::processPageSecurity( $strtablename, 'I' ) )
+	if( !Security::processPageSecurity( $strTableName, 'I' ) )
 		return;
 }
 
@@ -38,7 +41,7 @@ if( $params["action"] == "importPreview" )
 } 
 elseif( $params["action"] == "importData" )
 {
-	$params["importData"] = my_json_decode( postvalue("importData") );
+	$params["importData"] = runner_json_decode( postvalue("importData") );
 }
 
 $params["masterTable"] = postvalue("mastertable");

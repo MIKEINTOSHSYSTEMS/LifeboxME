@@ -1,6 +1,9 @@
 <?php
 @ini_set("display_errors","1");
-@ini_set("display_startup_errors","1");
+
+$requestTable = 'public.lbapt_st';
+$strTableName = 'public.lbapt_st';
+$requestPage = "print";
 
 require_once("include/dbcommon.php");
 require_once("classes/searchclause.php");
@@ -12,10 +15,8 @@ require_once('classes/reportprintpage.php');
 
 add_nocache_headers();
 
-require_once("include/lbapt_st_variables.php");
-
 if( Security::hasLogin() ) {
-	if( !Security::processPageSecurity( $strtablename, 'P' ) )
+	if( !Security::processPageSecurity( $strTableName, 'P' ) )
 	return;
 }
 
@@ -29,7 +30,7 @@ $params["xt"] = &$xt;
 $params["pageType"] = PAGE_PRINT;
 $params["pageName"] = postvalue("page");
 $params["tName"] = $strTableName;
-$params["selection"] = postvalue("selection"); //PrintPage::readSelectedRecordsFromRequest( "public.lbapt_st" );
+$params["selection"] = postvalue("selection"); 
 $params["allPagesMode"] = postvalue("all");
 $params["detailTables"] = postvalue("details");
 $params["splitByRecords"] = postvalue("records");

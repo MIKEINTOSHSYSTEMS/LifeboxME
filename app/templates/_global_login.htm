@@ -1,7 +1,7 @@
 <!doctype html>
 <html  {$html_attrs}>
 	<head>
-				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+						<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{$pagetitle}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -10,13 +10,9 @@
     <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
     <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
     <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
-    		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
-	{BEGIN rtlCSS}
-	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
-	{END rtlCSS}
-	{BEGIN styleCSSFiles}
-	<link REL="stylesheet" href="{$stylepath}" type="text/css">
-	{END styleCSSFiles}
+    		{BEGIN styleCSSFiles}
+<link REL="stylesheet" href="{$stylepath}" type="text/css">
+{END styleCSSFiles}
 			
 	</head>
 
@@ -48,7 +44,7 @@
 	
 ">
 		 
-		<span data-itemtype="login-logo" data-itemid="login-logo" {$item_login-logo} data-pageid="{$pageid}" data-page="_global_login" data-small >
+		<span data-itemtype="login-logo" data-itemid="login-logo" {$item_login-logo} data-pageid="{$pageid}" data-page="_global_login" >
 	{$logo}
 </span>
 		</div>					</div>
@@ -75,8 +71,8 @@
 ">
 		{BEGIN firstAboveGridCell}
 		 
-		<span data-itemtype="login_welcome" data-itemid="login_welcome" {$item_login_welcome} data-pageid="{$pageid}" data-page="_global_login" data-small >
-Login into your account</span>
+		<span data-itemtype="login_welcome" data-itemid="login_welcome" {$item_login_welcome} data-pageid="{$pageid}" data-page="_global_login" >
+{mlang_message LOGIN_SUBTITLE}</span>
 			{END firstAboveGridCell}	
 	</div>					</div>
 			 
@@ -91,11 +87,7 @@ Login into your account</span>
 		{BEGIN message_block}
 <div data-itemtype="login_message" data-itemid="login_message" {$item_login_message} data-pageid="{$pageid}" class="alert {$message_class}" role="alert">
 {$message}
-		{BEGIN resend_activation_button}
-	<br>
-	<button class="btn btn-sm btn-default" {$resend_activation_button_attrs} id="resendActivation{$id}">Resend email</button>
-	{END resend_activation_button}
-</div>
+	</div>
 {END message_block}		</div>					</div>
 			</div>		
 {END above-grid_block}
@@ -109,8 +101,8 @@ Login into your account</span>
 	colspan="2"		 
 	data-cellId="grid_c1" data-pageid="{$pageid}">
  
-<label data-itemtype="username_label" data-itemid="username_label" {$item_username_label} data-pageid="{$pageid}" data-small class="r-edit-label control-label" for="username">
-	{BEGIN username_label}Username{END username_label}
+<label data-itemtype="username_label" data-itemid="username_label" {$item_username_label} data-pageid="{$pageid}" class="r-edit-label control-label" for="username">
+	{BEGIN username_label}{mlang_message USERNAME}{END username_label}
 </label> 
 <div class="r-edit-field" data-itemtype="username" data-itemid="username" {$item_username} data-pageid="{$pageid}" >
 	<input type="text" class="form-control" name="username" {$username_attrs} id="username">
@@ -122,8 +114,8 @@ Login into your account</span>
 	colspan="2"		 
 	data-cellId="grid_c2" data-pageid="{$pageid}">
  
-<label data-itemtype="password_label" data-itemid="password_label" {$item_password_label} data-pageid="{$pageid}" data-small class="r-edit-label control-label" for="password">
-	{BEGIN password_label}Password{END password_label}
+<label data-itemtype="password_label" data-itemid="password_label" {$item_password_label} data-pageid="{$pageid}" class="r-edit-label control-label" for="password">
+	{BEGIN password_label}{mlang_message PASSWORD}{END password_label}
 </label> 
 <div class="r-edit-field" data-itemtype="password" data-itemid="password" {$item_password} data-pageid="{$pageid}" >
 	<input type="password" class="form-control" name="password" {$password_attrs} id="password">
@@ -154,7 +146,7 @@ Login into your account</span>
  
 <div class="checkbox r-edit-field" data-itemtype="remember_password" data-itemid="remember_password" {$item_remember_password} data-pageid="{$pageid}" >
 	<label>
-		<input type="checkbox" id="remember_password{$id}" name="remember_password" value="1" {$rememberbox_attrs}> Remember me	</label>
+		<input type="checkbox" id="remember_password{$id}" name="remember_password" value="1" {$rememberbox_attrs}> {mlang_message REMEMBER_ME}	</label>
 </div></td>
 									<td 
 	class="r-align-right r-ori-vert			"
@@ -165,7 +157,7 @@ Login into your account</span>
 <span data-itemtype="guest_login" data-itemid="guest_login" {$item_guest_login} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-link   
 	" {$guestlink_attrs} >
-							Login as Guest			</a>
+							{mlang_message GUEST}			</a>
 </span>
 {END guestlink_block}
 </td>
@@ -189,7 +181,7 @@ Login into your account</span>
 	<a type="button" title="" class="btn btn-success   
 	" {$loginlink_attrs} >
 					<span class="fa fa-sign-in"></span>
-							Sign in			</a>
+							{mlang_message SIGN_IN}			</a>
 </span>
 {END signin_button}
 </td>
@@ -201,8 +193,8 @@ Login into your account</span>
 <span data-itemtype="login_remind" data-itemid="login_remind" {$item_login_remind} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-info   
 	" {$forgotpasswordlink_attrs} href="remind.php" >
-					<span class="fa fa-key"></span>
-							Forgot password?			</a>
+					<span class="fas fa-key"></span>
+							{mlang_message FORGOT}			</a>
 </span>
 </td>
 							</tr>
@@ -212,7 +204,7 @@ Login into your account</span>
 	colspan="2"		 
 	data-cellId="footer_c6" data-pageid="{$pageid}">
  
-<span data-itemtype="text" data-itemid="text" {$item_text} data-pageid="{$pageid}" data-small > 
+<span data-itemtype="text" data-itemid="text" {$item_text} data-pageid="{$pageid}" > 
 	<p>
 </p></span>
 </td>
@@ -260,8 +252,8 @@ Login into your account</span>
 <span data-itemtype="loginform_register_link" data-itemid="loginform_register_link" {$item_loginform_register_link} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-warning   
 	" {$registerlink_attrs} href="register.php" >
-					<span class="fa fa-user-plus"></span>
-							Sign Up			</a>
+					<span class="fas fa-user-plus"></span>
+							{mlang_message SIGN_UP}			</a>
 </span>
 </td>
 									<td 

@@ -36,25 +36,25 @@ class ListPage_Dashboard extends ListPage_Embed
 		$this->sessionPrefix = $this->dashTName."_".$this->dashElementName;
 	}
 
-	/**
-	 * Fill table settings
-	 * @intellisense
-	 */
-	protected function fillTableSettings( $table = "", $pSet = null )
-	{
-		parent::fillTableSettings( $table, $pSet );
 
+	protected function buildJsTableSettings( $table, $pSet ) {
+		$settings = parent::buildJsTableSettings( $table, $pSet );
 		if( $this->addAvailable() )
-			$this->jsSettings["tableSettings"][ $this->tName ]["showAddInPopup"] = true;
+			$settings["showAddInPopup"] = true;
 
 		if( $this->editAvailable() || $this->updateSelectedAvailable() )
-			$this->jsSettings["tableSettings"][ $this->tName ]["showEditInPopup"] = true;
+			$settings["showEditInPopup"] = true;
 
 		if( $this->viewAvailable() )
-			$this->jsSettings["tableSettings"][ $this->tName ]["showViewInPopup"] = true;
+			$settings["showViewInPopup"] = true;
 
 		if( $this->inlineEditAvailable() )
-			$this->jsSettings["tableSettings"][ $this->tName ]["inlineEditAvailable"] = true;
+			$settings["inlineEditAvailable"] = true;
+		
+
+		$settings['showRows'] = ($this->numRowsFromSQL ? true : false);
+
+		return $settings;
 	}
 
 	/**
@@ -76,8 +76,6 @@ class ListPage_Dashboard extends ListPage_Embed
 	{
 		if( $this->isResizeColumns )
 			$this->prepareForResizeColumns();
-
-		$this->jsSettings['tableSettings'][ $this->tName ]['showRows'] = ($this->numRowsFromSQL ? true : false);
 	}
 
 	function prepareForResizeColumns()
@@ -158,7 +156,7 @@ class ListPage_Dashboard extends ListPage_Embed
 				. "</span>";			
 		} else {
 			$returnJSON['headerCont'] = '<span class="rnr-dbebrick">'
-				. $this->getPageTitle( $this->pageName, GoodFieldName($this->tName) )
+				. $this->getPageTitle( $this->pageName, $this->tName )
 				. "</span>";			
 		}
 	
@@ -360,8 +358,7 @@ class ListPage_Dashboard extends ListPage_Embed
 		return $this->hasMainDashMapElem() && $this->mapRefresh;
 	}
 
-	protected function detailInGridAvailable( $detailTableData ) {
-		$detTable = $detailTableData['dDataSourceTable'];
+	protected function detailInGridAvailable( $detTable ) {
 		if( $this->pSet->detailsPreview( $detTable ) == DP_NONE ) {
 			return false;
 		}
@@ -382,7 +379,6 @@ class ListPage_Dashboard extends ListPage_Embed
 		return $this->dashElementData["tabLocation"] == "body";
 
 	}
-
 
 }
 ?>

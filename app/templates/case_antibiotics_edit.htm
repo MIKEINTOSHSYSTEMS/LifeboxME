@@ -1,7 +1,7 @@
 <!doctype html>
 <html  {$html_attrs}>
 	<head>
-				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+						<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{$pagetitle}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -10,13 +10,9 @@
     <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
     <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
     <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
-    		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
-	{BEGIN rtlCSS}
-	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
-	{END rtlCSS}
-	{BEGIN styleCSSFiles}
-	<link REL="stylesheet" href="{$stylepath}" type="text/css">
-	{END styleCSSFiles}
+    		{BEGIN styleCSSFiles}
+<link REL="stylesheet" href="{$stylepath}" type="text/css">
+{END styleCSSFiles}
 			
 	</head>
 
@@ -50,7 +46,7 @@
 
 			<div class="clearfix " data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell data-itemid="expand_button" {$item_expand_button} data-topcell-item-type="expand_button" >
 				<span data-itemtype="expand_button" data-itemid="expand_button" {$item_expand_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Expand" class="btn btn-link   
+	<a type="button" title="{mlang_message EXPAND}" class="btn btn-link   
 	" href="#" >
 					<span class="glyphicon glyphicon-triangle-right"></span>
 										</a>
@@ -218,7 +214,7 @@
 							 
 				<span class="navbar-form  navbar-header" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="expand_menu_button" {$item_expand_menu_button} data-topcell-item-type="expand_menu_button" >
 				<span data-itemtype="expand_menu_button" data-itemid="expand_menu_button" {$item_expand_menu_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Show menu" class="btn-link   
+	<a type="button" title="{mlang_message SHOW_MENU}" class="btn-link   
 	 glyphicon glyphicon-menu-hamburger" href="#" >		
 				
 								</a>
@@ -227,7 +223,7 @@
 		 
 				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="collapse_button" {$item_collapse_button} data-topcell-item-type="collapse_button" >
 				<span data-itemtype="collapse_button" data-itemid="collapse_button" {$item_collapse_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Collapse" class="btn-link   
+	<a type="button" title="{mlang_message COLLAPSE}" class="btn-link   
 	 glyphicon glyphicon-triangle-left" href="#" >		
 				
 								</a>
@@ -240,7 +236,7 @@
 <span data-itemtype="loginform_login" data-itemid="loginform_login" {$item_loginform_login} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-primary   
 	" href="#" {$guestloginlink_attrs} >
-							Login			</a>
+							{mlang_message LOGIN}			</a>
 </span>
 {END guestloginbutton}
 			</span>
@@ -251,14 +247,14 @@
 	<span class="dropdown ">
 		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
 			{BEGIN userbutton_icon}							<span class="glyphicon glyphicon-user"></span>
-						{END userbutton_icon}{$userbutton_image}			{$username}			<span class="caret"></span>
+						{END userbutton_icon}{$userbutton_image}			{$mlp_push}{$mlparam username var username}{$mltext %username%}{$mlp_pop}			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu">
 							{BEGIN userinfo_link}
 	<li data-itemtype="userinfo_link" data-itemid="userinfo_link" {$item_userinfo_link} data-pageid="{$pageid}" data-small >
 				<a  href="userinfo.php"  title="" >
 				
-		User Profile		
+		{mlang_message USERINFO}		
 		</a>
 	</li>
 {END userinfo_link}
@@ -266,7 +262,7 @@
 	<li data-itemtype="logout_link" data-itemid="logout_link" {$item_logout_link} data-pageid="{$pageid}" data-small >
 				<a  href="#" {$logoutlink_attrs}  title="" >
 				
-		Log out		
+		{mlang_message LOG_OUT}		
 		</a>
 	</li>
 {END logoutbutton}
@@ -274,7 +270,7 @@
 	<li data-itemtype="adminarea_link" data-itemid="adminarea_link" {$item_adminarea_link} data-pageid="{$pageid}" data-small >
 				<a  href="admin_rights_list.php"  title="" >
 				
-		Admin Area		
+		{mlang_message AA_ADMINAREA}		
 		</a>
 	</li>
 {END adminarea_link}
@@ -282,7 +278,7 @@
 	<li data-itemtype="changepassword_link" data-itemid="changepassword_link" {$item_changepassword_link} data-pageid="{$pageid}" data-small >
 				<a  href="changepwd.php" {$changepwdlink_attrs} id="changePasswordButton{$id}"  title="" >
 				
-		Change password		
+		{mlang_message CHANGE_PASSWORD}		
 		</a>
 	</li>
 {END changepwd_link}
@@ -331,10 +327,10 @@
 <h5>{$message}</h5>
 <div>
 {BEGIN message_back_button}
-			<button class="btn btn-sm btn-default" {$backbutton_attrs}>Back to list</button>
+			<button class="btn btn-sm btn-default" {$backbutton_attrs}>{mlang_message BACK_TO_LIST}</button>
 	{END message_back_button}
 {BEGIN message_view_page_button}
-		<a class="btn btn-sm btn-default" href="case_antibiotics_view.php?{$editlink}" {$view_page_button_attrs}>View</a>
+		<a class="btn btn-sm btn-default" href="case_antibiotics_view.php?{$editlink}" {$view_page_button_attrs}>{mlang_message VIEW}</a>
 {END message_view_page_button}
 </div>
 </div>
@@ -389,17 +385,19 @@
 	data-signal-error-for="case_id{$id}" {$required_attr_case_id}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="case_id" data-fieldname="case_id" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_case_id}">
-		{BEGIN case_id_label}{$label public_case_antibiotics case_id }{END case_id_label}
+	<label class="r-edit-label control-label {$case_id_label_class}" for="{$labelfor_case_id}">
+		{BEGIN case_id_label}
+			{$case_id_forward_control}
+			{$label public_case_antibiotics case_id }			{END case_id_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$case_id_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="case_id" {$tooltipAttr public_case_antibiotics case_id } >
+		<div class="r-edit-tooltip" data-helpfor="case_id" {$tooltipAttr public_case_antibiotics case_id } >
 		<div class="text-muted" >
 		{$tooltip public_case_antibiotics case_id }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END case_id_fieldblock}
@@ -411,17 +409,19 @@
 	data-signal-error-for="antibiotic_id{$id}" {$required_attr_antibiotic_id}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="antibiotic_id" data-fieldname="antibiotic_id" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_antibiotic_id}">
-		{BEGIN antibiotic_id_label}{$label public_case_antibiotics antibiotic_id }{END antibiotic_id_label}
+	<label class="r-edit-label control-label {$antibiotic_id_label_class}" for="{$labelfor_antibiotic_id}">
+		{BEGIN antibiotic_id_label}
+			{$antibiotic_id_forward_control}
+			{$label public_case_antibiotics antibiotic_id }			{END antibiotic_id_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$antibiotic_id_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="antibiotic_id" {$tooltipAttr public_case_antibiotics antibiotic_id } >
+		<div class="r-edit-tooltip" data-helpfor="antibiotic_id" {$tooltipAttr public_case_antibiotics antibiotic_id } >
 		<div class="text-muted" >
 		{$tooltip public_case_antibiotics antibiotic_id }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END antibiotic_id_fieldblock}
@@ -433,17 +433,19 @@
 	data-signal-error-for="created_at{$id}" {$required_attr_created_at}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="created_at" data-fieldname="created_at" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_created_at}">
-		{BEGIN created_at_label}{$label public_case_antibiotics created_at }{END created_at_label}
+	<label class="r-edit-label control-label {$created_at_label_class}" for="{$labelfor_created_at}">
+		{BEGIN created_at_label}
+			{$created_at_forward_control}
+			{$label public_case_antibiotics created_at }			{END created_at_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$created_at_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="created_at" {$tooltipAttr public_case_antibiotics created_at } >
+		<div class="r-edit-tooltip" data-helpfor="created_at" {$tooltipAttr public_case_antibiotics created_at } >
 		<div class="text-muted" >
 		{$tooltip public_case_antibiotics created_at }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END created_at_fieldblock}
@@ -470,7 +472,7 @@
 <span data-itemtype="edit_save" data-itemid="edit_save" {$item_edit_save} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-primary   
 	" {$savebutton_attrs} >
-							Save			</a>
+							{mlang_message SAVE}			</a>
 </span>
 {END save_edit}
 	 
@@ -478,7 +480,7 @@
 <span data-itemtype="edit_back_list" data-itemid="edit_back_list" {$item_edit_back_list} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-default   
 	" {$backbutton_attrs} >
-							Back to list			</a>
+							{mlang_message BACK_TO_LIST}			</a>
 </span>
 {END back_button}
 	 
@@ -486,7 +488,7 @@
 <span data-itemtype="edit_close" data-itemid="edit_close" {$item_edit_close} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-default   
 	" {$closebutton_attrs} >
-							Cancel			</a>
+							{mlang_message CANCEL}			</a>
 </span>
 {END close_button}
 		</div>			 
@@ -503,17 +505,19 @@
 												<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu">
-								<li data-itemtype="edit_reset" data-itemid="edit_reset" {$item_edit_reset} data-pageid="{$pageid}" data-small >
+							{BEGIN reset_button}
+	<li data-itemtype="edit_reset" data-itemid="edit_reset" {$item_edit_reset} data-pageid="{$pageid}" data-small >
 				<a  {$resetbutton_attrs}  title="" >
 				
-		Reset		
+		{mlang_message RESET}		
 		</a>
 	</li>
+{END reset_button}
 							{BEGIN view_page_button}
 	<li data-itemtype="edit_view" data-itemid="edit_view" {$item_edit_view} data-pageid="{$pageid}" data-small >
 				<a  href="case_antibiotics_view.php?{$editlink}" {$view_page_button_attrs}  title="" >
 				
-		View		
+		{mlang_message VIEW}		
 		</a>
 	</li>
 {END view_page_button}

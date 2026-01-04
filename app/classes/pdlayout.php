@@ -9,27 +9,26 @@ class PDLayout
 	var $bootstrapSize;
 	var $name="";
 	var $style="";
-	var $stylePath="";
 	/**
 	 * True when 'this page has custom settings' is checked off
 	 */
 	var $customSettings = false;
 
-	function __construct( $table, $page, $theme, $size = "normal", $stylePath = "", $customSettings = false )
+	function __construct( $table, $page, $theme, $size, $name, $customSettings )
 	{
 		$this->page = $page;
 		$this->table = $table;
 		$this->bootstrapTheme = $theme;
 		$this->bootstrapSize = $size;
-		$this->stylePath = $stylePath;
 		$this->customSettings = $customSettings;
+		$this->name = $name;
 	}
 
 
 	/**
 	 *  Returns list of CSS files required for displaying the layout
 	 */
-	public function getCSSFiles($rtl = false, $mobile = false, $pdf = false)
+	public function getCSSFiles($rtl = false )
 	{
 		$files = array();
 		$suffix = "";
@@ -38,18 +37,19 @@ class PDLayout
 		}
 
 		// add custom theme style for page(Editor tab settings) or project theme style
-		if ($this->customSettings && strlen($this->stylePath) != 0) {
-			$files[] = $this->stylePath . "/style" . $suffix . ".css";
+		if ($this->customSettings ) {
+			$files[] = 'styles/bootstrap/custom/' . $this->name . "/style" . $suffix . ".css";
 		} else {
 			$files[] = "styles/bootstrap/" . $this->bootstrapTheme . "/" . $this->bootstrapSize . "/style" . $suffix . ".css";
 		}
 
-		$files[] = "styles/font-awesome/css/font-awesome.min.css";
+		$files[] = "styles/font-awesome/css/all.min.css";
+		$files[] = "styles/font-awesome/css/v4-shims.min.css";
 
 		// add project CustomCSS
 		if (!$this->customSettings) {
-			if (file_exists(getabspath("styles/custom/custom" . $suffix . ".css"))) {
-				$files[] = "styles/custom/custom" . $suffix . ".css";
+			if( ProjectSettings::getProjectValue('hasCustomCss') ) {
+				$files[] = "styles/custom/custom.css";
 			}
 		}
 
@@ -485,7 +485,14 @@ class CellMapPD {
 				for( $i = 0; $i < count($colCells); ++$i ) {
 					$cell = $colCells[$i];
 					$colIdx = array_search( $col, $this->cells[$cell]["cols"] );
-									array_splice( $this->cells[$cell]["cols"], $colIdx, 1 );
+					if( ProjectSettings::ext() == "aspx ") {
+						//	ugly fix for .NET converter
+						$colsArr = &$this->cells[$cell]["cols"];
+						array_splice( $colsArr, $colIdx, 1 );
+						$this->cells[$cell]["cols"] = $colsArr;
+					} else {
+						array_splice( $this->cells[$cell]["cols"], $colIdx, 1 );
+					}
 				}
 				$ret["cols"][] = $col;
 			}
@@ -508,8 +515,15 @@ class CellMapPD {
 			for( $i = 0; $i < count($rowCells); ++$i ) {
 				$cell = $rowCells[$i];
 				$rowIdx = array_search( $row, $this->cells[$cell]["rows"] );
-
-								array_splice( $this->cells[$cell]["rows"], $rowIdx, 1 );
+				
+				if( ProjectSettings::ext() == "aspx ") {
+					//	ugly fix for .NET converter
+					$rowsArr = $this->cells[$cell]["rows"];
+					array_splice( $rowsArr, $rowIdx, 1 );
+					$this->cells[$cell]["rows"] = $rowsArr;
+				} else {
+					array_splice( $this->cells[$cell]["rows"], $rowIdx, 1 );
+				}
 			}
 			$ret["rows"][] = $row;
 		}

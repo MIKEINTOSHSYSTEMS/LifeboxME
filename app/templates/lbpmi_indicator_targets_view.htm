@@ -1,7 +1,7 @@
 <!doctype html>
 <html  {$html_attrs}>
 	<head>
-				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+						<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{$pagetitle}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -10,13 +10,9 @@
     <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
     <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
     <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
-    		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
-	{BEGIN rtlCSS}
-	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
-	{END rtlCSS}
-	{BEGIN styleCSSFiles}
-	<link REL="stylesheet" href="{$stylepath}" type="text/css">
-	{END styleCSSFiles}
+    		{BEGIN styleCSSFiles}
+<link REL="stylesheet" href="{$stylepath}" type="text/css">
+{END styleCSSFiles}
 			
 	</head>
 
@@ -50,7 +46,7 @@
 
 			<div class="clearfix " data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell data-itemid="expand_button" {$item_expand_button} data-topcell-item-type="expand_button" >
 				<span data-itemtype="expand_button" data-itemid="expand_button" {$item_expand_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Expand" class="btn btn-link   
+	<a type="button" title="{mlang_message EXPAND}" class="btn btn-link   
 	" href="#" >
 					<span class="glyphicon glyphicon-triangle-right"></span>
 										</a>
@@ -218,7 +214,7 @@
 							 
 				<span class="navbar-form  navbar-header" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="expand_menu_button" {$item_expand_menu_button} data-topcell-item-type="expand_menu_button" >
 				<span data-itemtype="expand_menu_button" data-itemid="expand_menu_button" {$item_expand_menu_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Show menu" class="btn-link   
+	<a type="button" title="{mlang_message SHOW_MENU}" class="btn-link   
 	 glyphicon glyphicon-menu-hamburger" href="#" >		
 				
 								</a>
@@ -227,7 +223,7 @@
 		 
 				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="collapse_button" {$item_collapse_button} data-topcell-item-type="collapse_button" >
 				<span data-itemtype="collapse_button" data-itemid="collapse_button" {$item_collapse_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Collapse" class="btn-link   
+	<a type="button" title="{mlang_message COLLAPSE}" class="btn-link   
 	 glyphicon glyphicon-triangle-left" href="#" >		
 				
 								</a>
@@ -240,7 +236,7 @@
 <span data-itemtype="loginform_login" data-itemid="loginform_login" {$item_loginform_login} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-primary   
 	" href="#" {$guestloginlink_attrs} >
-							Login			</a>
+							{mlang_message LOGIN}			</a>
 </span>
 {END guestloginbutton}
 			</span>
@@ -251,14 +247,14 @@
 	<span class="dropdown ">
 		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
 			{BEGIN userbutton_icon}							<span class="glyphicon glyphicon-user"></span>
-						{END userbutton_icon}{$userbutton_image}			{$username}			<span class="caret"></span>
+						{END userbutton_icon}{$userbutton_image}			{$mlp_push}{$mlparam username var username}{$mltext %username%}{$mlp_pop}			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu">
 							{BEGIN userinfo_link}
 	<li data-itemtype="userinfo_link" data-itemid="userinfo_link" {$item_userinfo_link} data-pageid="{$pageid}" data-small >
 				<a  href="userinfo.php"  title="" >
 				
-		User Profile		
+		{mlang_message USERINFO}		
 		</a>
 	</li>
 {END userinfo_link}
@@ -266,7 +262,7 @@
 	<li data-itemtype="logout_link" data-itemid="logout_link" {$item_logout_link} data-pageid="{$pageid}" data-small >
 				<a  href="#" {$logoutlink_attrs}  title="" >
 				
-		Log out		
+		{mlang_message LOG_OUT}		
 		</a>
 	</li>
 {END logoutbutton}
@@ -274,7 +270,7 @@
 	<li data-itemtype="adminarea_link" data-itemid="adminarea_link" {$item_adminarea_link} data-pageid="{$pageid}" data-small >
 				<a  href="admin_rights_list.php"  title="" >
 				
-		Admin Area		
+		{mlang_message AA_ADMINAREA}		
 		</a>
 	</li>
 {END adminarea_link}
@@ -282,7 +278,7 @@
 	<li data-itemtype="changepassword_link" data-itemid="changepassword_link" {$item_changepassword_link} data-pageid="{$pageid}" data-small >
 				<a  href="changepwd.php" {$changepwdlink_attrs} id="changePasswordButton{$id}"  title="" >
 				
-		Change password		
+		{mlang_message CHANGE_PASSWORD}		
 		</a>
 	</li>
 {END changepwd_link}
@@ -373,18 +369,19 @@
 {BEGIN target_id_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_target_id}  r-vertical-field" data-fieldname="target_id" data-signal-error-for="target_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="target_id" data-fieldname="target_id" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_target_id}  r-vertical-field" 
+	data-signal-error-for="target_id{$id}" {$required_attr_target_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="target_id" data-fieldname="target_id" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_target_id}">
-		
-		{BEGIN target_id_label}{$label public_lbpmi_indicator_targets target_id }{END target_id_label}
+	<label class="r-edit-label control-label {$target_id_label_class}" for="{$labelfor_target_id}">
+		{BEGIN target_id_label}
+			{$target_id_forward_control}
+			{$label public_lbpmi_indicator_targets target_id }			{END target_id_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$target_id_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END target_id_fieldblock}
@@ -392,18 +389,19 @@
 {BEGIN indicator_id_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_indicator_id}  r-vertical-field" data-fieldname="indicator_id" data-signal-error-for="indicator_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="indicator_id" data-fieldname="indicator_id" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_indicator_id}  r-vertical-field" 
+	data-signal-error-for="indicator_id{$id}" {$required_attr_indicator_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="indicator_id" data-fieldname="indicator_id" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_indicator_id}">
-		
-		{BEGIN indicator_id_label}{$label public_lbpmi_indicator_targets indicator_id }{END indicator_id_label}
+	<label class="r-edit-label control-label {$indicator_id_label_class}" for="{$labelfor_indicator_id}">
+		{BEGIN indicator_id_label}
+			{$indicator_id_forward_control}
+			{$label public_lbpmi_indicator_targets indicator_id }			{END indicator_id_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$indicator_id_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END indicator_id_fieldblock}
@@ -411,18 +409,19 @@
 {BEGIN created_at_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_created_at}  r-vertical-field" data-fieldname="created_at" data-signal-error-for="created_at{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="created_at" data-fieldname="created_at" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_created_at}  r-vertical-field" 
+	data-signal-error-for="created_at{$id}" {$required_attr_created_at}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="created_at" data-fieldname="created_at" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_created_at}">
-		
-		{BEGIN created_at_label}{$label public_lbpmi_indicator_targets created_at }{END created_at_label}
+	<label class="r-edit-label control-label {$created_at_label_class}" for="{$labelfor_created_at}">
+		{BEGIN created_at_label}
+			{$created_at_forward_control}
+			{$label public_lbpmi_indicator_targets created_at }			{END created_at_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$created_at_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END created_at_fieldblock}
@@ -430,18 +429,19 @@
 {BEGIN updated_at_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_updated_at}  r-vertical-field" data-fieldname="updated_at" data-signal-error-for="updated_at{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="updated_at" data-fieldname="updated_at" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_updated_at}  r-vertical-field" 
+	data-signal-error-for="updated_at{$id}" {$required_attr_updated_at}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="updated_at" data-fieldname="updated_at" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_updated_at}">
-		
-		{BEGIN updated_at_label}{$label public_lbpmi_indicator_targets updated_at }{END updated_at_label}
+	<label class="r-edit-label control-label {$updated_at_label_class}" for="{$labelfor_updated_at}">
+		{BEGIN updated_at_label}
+			{$updated_at_forward_control}
+			{$label public_lbpmi_indicator_targets updated_at }			{END updated_at_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$updated_at_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END updated_at_fieldblock}
@@ -449,18 +449,19 @@
 {BEGIN period_type_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_period_type}  r-vertical-field" data-fieldname="period_type" data-signal-error-for="period_type{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="period_type" data-fieldname="period_type" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_period_type}  r-vertical-field" 
+	data-signal-error-for="period_type{$id}" {$required_attr_period_type}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="period_type" data-fieldname="period_type" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_period_type}">
-		
-		{BEGIN period_type_label}{$label public_lbpmi_indicator_targets period_type }{END period_type_label}
+	<label class="r-edit-label control-label {$period_type_label_class}" for="{$labelfor_period_type}">
+		{BEGIN period_type_label}
+			{$period_type_forward_control}
+			{$label public_lbpmi_indicator_targets period_type }			{END period_type_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$period_type_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END period_type_fieldblock}
@@ -468,18 +469,19 @@
 {BEGIN period_year_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_period_year}  r-vertical-field" data-fieldname="period_year" data-signal-error-for="period_year{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="period_year" data-fieldname="period_year" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_period_year}  r-vertical-field" 
+	data-signal-error-for="period_year{$id}" {$required_attr_period_year}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="period_year" data-fieldname="period_year" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_period_year}">
-		
-		{BEGIN period_year_label}{$label public_lbpmi_indicator_targets period_year }{END period_year_label}
+	<label class="r-edit-label control-label {$period_year_label_class}" for="{$labelfor_period_year}">
+		{BEGIN period_year_label}
+			{$period_year_forward_control}
+			{$label public_lbpmi_indicator_targets period_year }			{END period_year_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$period_year_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END period_year_fieldblock}
@@ -487,18 +489,19 @@
 {BEGIN period_quarter_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_period_quarter}  r-vertical-field" data-fieldname="period_quarter" data-signal-error-for="period_quarter{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="period_quarter" data-fieldname="period_quarter" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_period_quarter}  r-vertical-field" 
+	data-signal-error-for="period_quarter{$id}" {$required_attr_period_quarter}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="period_quarter" data-fieldname="period_quarter" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_period_quarter}">
-		
-		{BEGIN period_quarter_label}{$label public_lbpmi_indicator_targets period_quarter }{END period_quarter_label}
+	<label class="r-edit-label control-label {$period_quarter_label_class}" for="{$labelfor_period_quarter}">
+		{BEGIN period_quarter_label}
+			{$period_quarter_forward_control}
+			{$label public_lbpmi_indicator_targets period_quarter }			{END period_quarter_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$period_quarter_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END period_quarter_fieldblock}
@@ -506,18 +509,19 @@
 {BEGIN period_month_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_period_month}  r-vertical-field" data-fieldname="period_month" data-signal-error-for="period_month{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="period_month" data-fieldname="period_month" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_period_month}  r-vertical-field" 
+	data-signal-error-for="period_month{$id}" {$required_attr_period_month}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="period_month" data-fieldname="period_month" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_period_month}">
-		
-		{BEGIN period_month_label}{$label public_lbpmi_indicator_targets period_month }{END period_month_label}
+	<label class="r-edit-label control-label {$period_month_label_class}" for="{$labelfor_period_month}">
+		{BEGIN period_month_label}
+			{$period_month_forward_control}
+			{$label public_lbpmi_indicator_targets period_month }			{END period_month_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$period_month_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END period_month_fieldblock}
@@ -525,18 +529,19 @@
 {BEGIN region_id_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_region_id}  r-vertical-field" data-fieldname="region_id" data-signal-error-for="region_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="region_id" data-fieldname="region_id" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_region_id}  r-vertical-field" 
+	data-signal-error-for="region_id{$id}" {$required_attr_region_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="region_id" data-fieldname="region_id" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_region_id}">
-		
-		{BEGIN region_id_label}{$label public_lbpmi_indicator_targets region_id }{END region_id_label}
+	<label class="r-edit-label control-label {$region_id_label_class}" for="{$labelfor_region_id}">
+		{BEGIN region_id_label}
+			{$region_id_forward_control}
+			{$label public_lbpmi_indicator_targets region_id }			{END region_id_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$region_id_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END region_id_fieldblock}
@@ -544,18 +549,19 @@
 {BEGIN country_id_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_country_id}  r-vertical-field" data-fieldname="country_id" data-signal-error-for="country_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="country_id" data-fieldname="country_id" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_country_id}  r-vertical-field" 
+	data-signal-error-for="country_id{$id}" {$required_attr_country_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="country_id" data-fieldname="country_id" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_country_id}">
-		
-		{BEGIN country_id_label}{$label public_lbpmi_indicator_targets country_id }{END country_id_label}
+	<label class="r-edit-label control-label {$country_id_label_class}" for="{$labelfor_country_id}">
+		{BEGIN country_id_label}
+			{$country_id_forward_control}
+			{$label public_lbpmi_indicator_targets country_id }			{END country_id_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$country_id_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END country_id_fieldblock}
@@ -563,18 +569,19 @@
 {BEGIN facility_id_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_facility_id}  r-vertical-field" data-fieldname="facility_id" data-signal-error-for="facility_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="facility_id" data-fieldname="facility_id" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_facility_id}  r-vertical-field" 
+	data-signal-error-for="facility_id{$id}" {$required_attr_facility_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="facility_id" data-fieldname="facility_id" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_facility_id}">
-		
-		{BEGIN facility_id_label}{$label public_lbpmi_indicator_targets facility_id }{END facility_id_label}
+	<label class="r-edit-label control-label {$facility_id_label_class}" for="{$labelfor_facility_id}">
+		{BEGIN facility_id_label}
+			{$facility_id_forward_control}
+			{$label public_lbpmi_indicator_targets facility_id }			{END facility_id_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$facility_id_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END facility_id_fieldblock}
@@ -582,18 +589,19 @@
 {BEGIN target_value_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_target_value}  r-vertical-field" data-fieldname="target_value" data-signal-error-for="target_value{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="target_value" data-fieldname="target_value" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_target_value}  r-vertical-field" 
+	data-signal-error-for="target_value{$id}" {$required_attr_target_value}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="target_value" data-fieldname="target_value" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_target_value}">
-		
-		{BEGIN target_value_label}{$label public_lbpmi_indicator_targets target_value }{END target_value_label}
+	<label class="r-edit-label control-label {$target_value_label_class}" for="{$labelfor_target_value}">
+		{BEGIN target_value_label}
+			{$target_value_forward_control}
+			{$label public_lbpmi_indicator_targets target_value }			{END target_value_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$target_value_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END target_value_fieldblock}
@@ -601,18 +609,19 @@
 {BEGIN is_annual_target_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_is_annual_target}  r-vertical-field" data-fieldname="is_annual_target" data-signal-error-for="is_annual_target{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="is_annual_target" data-fieldname="is_annual_target" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_is_annual_target}  r-vertical-field" 
+	data-signal-error-for="is_annual_target{$id}" {$required_attr_is_annual_target}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="is_annual_target" data-fieldname="is_annual_target" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_is_annual_target}">
-		
-		{BEGIN is_annual_target_label}{$label public_lbpmi_indicator_targets is_annual_target }{END is_annual_target_label}
+	<label class="r-edit-label control-label {$is_annual_target_label_class}" for="{$labelfor_is_annual_target}">
+		{BEGIN is_annual_target_label}
+			{$is_annual_target_forward_control}
+			{$label public_lbpmi_indicator_targets is_annual_target }			{END is_annual_target_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$is_annual_target_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END is_annual_target_fieldblock}
@@ -620,18 +629,19 @@
 {BEGIN created_by_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_created_by}  r-vertical-field" data-fieldname="created_by" data-signal-error-for="created_by{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field13" {$item_integrated_edit_field13} data-pageid="{$pageid}" data-field="created_by" data-fieldname="created_by" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_created_by}  r-vertical-field" 
+	data-signal-error-for="created_by{$id}" {$required_attr_created_by}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field13" {$item_integrated_edit_field13} data-pageid="{$pageid}" data-field="created_by" data-fieldname="created_by" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_created_by}">
-		
-		{BEGIN created_by_label}{$label public_lbpmi_indicator_targets created_by }{END created_by_label}
+	<label class="r-edit-label control-label {$created_by_label_class}" for="{$labelfor_created_by}">
+		{BEGIN created_by_label}
+			{$created_by_forward_control}
+			{$label public_lbpmi_indicator_targets created_by }			{END created_by_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$created_by_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END created_by_fieldblock}
@@ -658,7 +668,7 @@
 <span data-itemtype="view_back_list" data-itemid="view_back_list" {$item_view_back_list} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-default   
 	" {$backbutton_attrs} >
-							Back to list			</a>
+							{mlang_message BACK_TO_LIST}			</a>
 </span>
 {END back_button}
 	 
@@ -666,7 +676,7 @@
 <span data-itemtype="view_close" data-itemid="view_close" {$item_view_close} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-default   
 	" href="#" {$closebutton_attrs} >
-							Close window			</a>
+							{mlang_message CLOSE_WINDOW}			</a>
 </span>
 {END close_button}
 		</div>			 
@@ -687,7 +697,7 @@
 	<li data-itemtype="view_edit" data-itemid="view_edit" {$item_view_edit} data-pageid="{$pageid}" data-small >
 				<a  href="lbpmi_indicator_targets_edit.php?{$editlink}" {$edit_page_button_attrs}  title="" >
 				
-		Edit		
+		{mlang_message EDIT}		
 		</a>
 	</li>
 {END edit_page_button}

@@ -16,9 +16,7 @@ class WhereTabs
 
         $pSet = new ProjectSettings($tableName);
 
-        if(!$pSet->isExistsTableKey(".arrGridTabs"))
-            $pSet->_tableData[".arrGridTabs"] = $pSet->getDefaultValueByKey("arrGridTabs");
-        return $pSet->_tableData[".arrGridTabs"];
+        return $pSet->_tableData['whereTabs'];
     }
 
     protected static function &getGridTab($table, $id)
@@ -28,7 +26,7 @@ class WhereTabs
             return false;
 
         foreach ($gridTabs as &$tab) {
-            if ($tab["tabId"] == $id)
+            if ($tab['id'] == $id)
                 return $tab;
         }
         return false;
@@ -41,16 +39,18 @@ class WhereTabs
             return false;
 
         foreach ($gridTabs as $tab) {
-            if ($tab["tabId"] == $id)
+            if ($tab['id'] == $id)
                 return false;
         }
 
         $gridTabs[] = array(
-            'tabId' => $id,
-            'name' => $title,
-            'nameType' => "Text",
+            'id' => $id,
+            'title' => array( 
+				'type' => mlTypeText,
+				'text' => $title
+			),
             'where' => $where,
-            'showRowCount' => false,
+            'showCount' => false,
             'hideEmpty' => false,
         );
 
@@ -64,7 +64,7 @@ class WhereTabs
             return false;
 
         foreach ($gridTabs as $key => $tab) {
-            if ($tab["tabId"] == $id) {
+            if ($tab['id'] == $id) {
                 unset($gridTabs[$key]);
                 break;
             }
@@ -77,8 +77,10 @@ class WhereTabs
         $tab = &WhereTabs::getGridTab($table, $id);
 
         if ($tab) {
-            $tab['name'] = $title;
-            $tab['nameType'] = "Text";
+            $tab['title'] = array( 
+				'type' => mlTypeText,
+				'text' => $title
+			);
             return true;
         }
         return false;
@@ -105,7 +107,7 @@ class WhereTabs
         $tab = &WhereTabs::getGridTab($table, $id);
 
         if ($tab) {
-            $tab['showRowCount'] = $showCount ? 1 : 0;
+            $tab['showCount'] = $showCount ? 1 : 0;
             return true;
         }
         return false;

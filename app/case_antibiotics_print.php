@@ -1,6 +1,9 @@
 <?php
 @ini_set("display_errors","1");
-@ini_set("display_startup_errors","1");
+
+$requestTable = 'public.case_antibiotics';
+$strTableName = 'public.case_antibiotics';
+$requestPage = "print";
 
 require_once("include/dbcommon.php");
 require_once("classes/searchclause.php");
@@ -12,10 +15,8 @@ require_once('classes/reportprintpage.php');
 
 add_nocache_headers();
 
-require_once("include/case_antibiotics_variables.php");
-
 if( Security::hasLogin() ) {
-	if( !Security::processPageSecurity( $strtablename, 'P' ) )
+	if( !Security::processPageSecurity( $strTableName, 'P' ) )
 	return;
 }
 
@@ -29,7 +30,7 @@ $params["xt"] = &$xt;
 $params["pageType"] = PAGE_PRINT;
 $params["pageName"] = postvalue("page");
 $params["tName"] = $strTableName;
-$params["selection"] = postvalue("selection"); //PrintPage::readSelectedRecordsFromRequest( "public.case_antibiotics" );
+$params["selection"] = postvalue("selection"); 
 $params["allPagesMode"] = postvalue("all");
 $params["detailTables"] = postvalue("details");
 $params["splitByRecords"] = postvalue("records");

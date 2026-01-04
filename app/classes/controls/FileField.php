@@ -29,13 +29,12 @@ class FileField extends EditControl
 			$this->format = "";
 			
 			$classString = "";
-			if( $this->pageObject->isBootstrap() )
-				$classString = " class=\"form-control\"";
+			$classString = " class=\"form-control\"";
 			
 			echo '<input id="'.$this->cfield.'" '.$classString.$this->inputStyle.' type="text" '
 				.('autocomplete="off" ')
 				.( $this->is508==true ? 'alt="'.$this->strLabel.'" ' : '')
-				.'name="'.$this->cfield.'" '.$this->pageObject->pSetEdit->getEditParams($this->field).' value="'
+				.'name="'.$this->cfield.'" value="'
 				.runner_htmlspecialchars($value).'">';
 			
 			$this->buildControlEnd($validate, $mode);
@@ -61,7 +60,7 @@ class FileField extends EditControl
 		$fh = new RunnerFileHandler( $this->field, $this->pageObject->pSet, $this->formStamp );
 		$userFilesArray = $fh->loadFiles( $filesArray );
 		
-		$jsonValue = my_json_encode($userFilesArray);
+		$jsonValue = runner_json_encode( $userFilesArray);
 		$multiple = "";
 		if( $this->pageObject->pSetEdit->getMaxNumberOfFiles($this->field) != 1 )
 			$multiple = "multiple ";
@@ -80,9 +79,9 @@ class FileField extends EditControl
  				<SPAN class="btn btn-primary btn-sm fileinput-button filesUpload">
 					<!--<A class="rnr-button filesUpload button" href="#" >-->
 					<input class="fileinput-button-input" type="file" accept="'.$this->pageObject->pSetEdit->getAcceptFileTypesHtml($this->field).'" name="files[]" value="'
-				."Add files"
+				.mlang_message('ADD_FILES')
 				.'" '. $multiple .' />'
-				."Add files"
+				.mlang_message('ADD_FILES')
 				.'<!--</A>-->
 				</SPAN>'
 		.'
@@ -113,8 +112,8 @@ class FileField extends EditControl
             <td class="name"><span class="text-muted">{%=file.name%}</span></td>
             <td class="size"><span class="text-muted" dir="LTR">{%=o.formatFileSize(file.size)%}</span></td>
             <td colspan=2 class="error"><span class="text-danger rnr-error">'
-			.""
-			.' {%=locale.fileupload.errors[file.error] || file.error%}</span></td>
+			.mlang_message('ERROR')
+			.' {%=window.locale && window.locale.fileupload && window.locale.fileupload.errors[file.error] || file.error%}</span></td>
         {% } else { %}
             <td class="preview">{% if (file.thumbnail_url) { %}
                 <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"
@@ -134,7 +133,7 @@ class FileField extends EditControl
 				{% if (!file.error) { %}
 				<SPAN class="btn btn-xs btn-default delete" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}" data-name="{%=file.name%}">
 				<!--<A href="#" >-->'
-				."Delete"
+				.mlang_message('DELETE')
 				.'<!--</A>-->
 					</SPAN>
 				{% } %}
@@ -150,9 +149,9 @@ class FileField extends EditControl
 			<td class="name"><span class="text-muted">{%=file.name%}</span></td>
 			<td class="size"><span class="text-muted">{%=o.formatFileSize(file.size)%}</span></td>
             <td class="error" colspan="2"><span class="text-danger rnr-error">'
-			.""
-			.' {%=locale.fileupload.errors[file.error] || file.error%}</span></td>
-        {% } else if (o.files.valid && !i) { %}
+			.mlang_message('ERROR')
+			.' {%=window.locale && window.locale.fileupload && window.locale.fileupload.errors[file.error] || file.error%}</span></td>
+        {% } else if (!i) { %}
 			<td class="name"><span>{%=file.name%}</span></td>
 			<td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
             <td>
@@ -166,7 +165,7 @@ class FileField extends EditControl
         	{% if (!file.error) { %}
         	<SPAN class="btn btn-default btn-xs">
 			<!--<A href="#" >-->'
-			."Cancel"
+			.mlang_message('CANCEL')
 			.'<!--</A>-->
 				</SPAN>
 			{% } %}
@@ -194,7 +193,7 @@ class FileField extends EditControl
 		$this->formStamp = postvalue("formStamp_".$this->goodFieldName."_".$this->id);
 		if (FieldSubmitted($this->goodFieldName."_".$this->id) && $this->formStamp != "")
 		{
-			$filesArray = my_json_decode($this->webValue);
+			$filesArray = runner_json_decode($this->webValue);
 			if(!is_array($filesArray) || count($filesArray) == 0)
 				$this->webValue = "";
 			else
@@ -230,7 +229,7 @@ class FileField extends EditControl
 				if(count($result) > 0)
 				{
 					$result[0]["searchStr"] = $searchStr.":sStrEnd";
-					$this->webValue = my_json_encode_unescaped_unicode($result);
+					$this->webValue = runner_json_encode_unescaped_unicode($result);
 				}
 				else
 					$this->webValue = "";
@@ -297,7 +296,7 @@ class FileField extends EditControl
 		//value is preceeded with "_"
 		$value = substr($value, 1);
 
-		$filesArray = my_json_decode($value);
+		$filesArray = runner_json_decode($value);
 
 		if(!is_array($filesArray) || count($filesArray) == 0)
 			$response[ "_".$value ] = "_".$value;
@@ -366,7 +365,7 @@ class FileField extends EditControl
 			}
 		}
 
-		return my_json_encode( $filesData );
+		return runner_json_encode( $filesData );
 	}
 	
 	/**

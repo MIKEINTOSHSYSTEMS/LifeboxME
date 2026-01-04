@@ -1,73 +1,213 @@
 <?php
-			$optionsArray = array( 'fields' => array( 'gridFields' => array(  ),
-'searchRequiredFields' => array(  ),
-'searchPanelFields' => array(  ),
-'fieldItems' => array(  ) ),
-'layoutHelper' => array( 'formItems' => array( 'formItems' => array( 'above-grid' => array( 'session_expired_message',
-'session_expired_comment' ),
-'grid' => array( 'expired_stay',
-'expired_logout' ) ),
-'formXtTags' => array(  ),
-'itemForms' => array( 'session_expired_message' => 'above-grid',
-'session_expired_comment' => 'above-grid',
-'expired_stay' => 'grid',
-'expired_logout' => 'grid' ),
-'itemLocations' => array(  ),
-'itemVisiblity' => array(  ) ),
-'itemsByType' => array( 'session_expired_message' => array( 'session_expired_message' ),
-'session_expired_comment' => array( 'session_expired_comment' ),
-'expired_stay' => array( 'expired_stay' ),
-'expired_logout' => array( 'expired_logout' ) ),
-'cellMaps' => array(  ) ),
-'page' => array( 'verticalBar' => false,
-'labeledButtons' => array( 'update_records' => array(  ),
-'print_pages' => array(  ),
-'register_activate_message' => array(  ),
-'details_found' => array(  ) ),
-'hasCustomButtons' => false,
-'customButtons' => array(  ),
-'hasNotifications' => false,
-'menus' => array(  ),
-'calcTotalsFor' => 1 ),
-'events' => array( 'maps' => array(  ),
-'mapsData' => array(  ),
-'buttons' => array(  ) ) );
-			$pageArray = array( 'id' => 'session_expired',
-'type' => 'session_expired',
-'layoutId' => 'session_expired',
-'disabled' => 0,
-'default' => 0,
-'forms' => array( 'above-grid' => array( 'modelId' => 'session_expired-grid',
-'grid' => array( array( 'section' => '',
-'cells' => array( array( 'cell' => 'c' ) ) ),
-array( 'cells' => array( array( 'cell' => 'c1' ) ),
-'section' => '' ) ),
-'cells' => array( 'c1' => array( 'model' => 'c1',
-'items' => array( 'session_expired_message',
-'session_expired_comment' ) ),
-'c' => array( 'model' => 'c1',
-'items' => array(  ) ) ),
-'deferredItems' => array(  ),
-'recsPerRow' => 1 ),
-'grid' => array( 'modelId' => 'session_expired-footer',
-'grid' => array( array( 'cells' => array( array( 'cell' => 'c1' ) ),
-'section' => '' ) ),
-'cells' => array( 'c1' => array( 'model' => 'c1',
-'items' => array( 'expired_stay',
-'expired_logout' ) ) ),
-'deferredItems' => array(  ),
-'recsPerRow' => 1 ) ),
-'items' => array( 'session_expired_message' => array( 'type' => 'session_expired_message',
-'color' => '#55768e',
-'font-size' => '22px' ),
-'session_expired_comment' => array( 'type' => 'session_expired_comment' ),
-'expired_stay' => array( 'type' => 'expired_stay' ),
-'expired_logout' => array( 'type' => 'expired_logout' ) ),
-'dbProps' => array(  ),
-'version' => 14,
-'imageItem' => array( 'type' => 'page_image' ),
-'imageBgColor' => '#f2f2f2',
-'controlsBgColor' => 'white',
-'imagePosition' => 'right',
-'listTotals' => 1 );
+			$optionsArray = array(
+	'fields' => array(
+		'gridFields' => array( 
+			 
+		),
+		'searchRequiredFields' => array( 
+			 
+		),
+		'searchPanelFields' => array( 
+			 
+		),
+		'fieldItems' => array(
+			 
+		) 
+	),
+	'layoutHelper' => array(
+		'formItems' => array(
+			'formItems' => array(
+				'above-grid' => array( 
+					'session_expired_message',
+					'session_expired_comment' 
+				),
+				'grid' => array( 
+					'expired_stay',
+					'expired_logout' 
+				) 
+			),
+			'formXtTags' => array(
+				 
+			),
+			'itemForms' => array(
+				'session_expired_message' => 'above-grid',
+				'session_expired_comment' => 'above-grid',
+				'expired_stay' => 'grid',
+				'expired_logout' => 'grid' 
+			),
+			'itemLocations' => array(
+				 
+			),
+			'itemVisiblity' => array(
+				 
+			) 
+		),
+		'itemsByType' => array(
+			'session_expired_message' => array( 
+				'session_expired_message' 
+			),
+			'session_expired_comment' => array( 
+				'session_expired_comment' 
+			),
+			'expired_stay' => array( 
+				'expired_stay' 
+			),
+			'expired_logout' => array( 
+				'expired_logout' 
+			) 
+		),
+		'cellMaps' => array(
+			 
+		) 
+	),
+	'page' => array(
+		'verticalBar' => false,
+		'labeledButtons' => array(
+			'update_records' => array(
+				 
+			),
+			'print_pages' => array(
+				 
+			),
+			'register_activate_message' => array(
+				 
+			),
+			'details_found' => array(
+				 
+			) 
+		),
+		'hasCustomButtons' => false,
+		'customButtons' => array( 
+			 
+		),
+		'codeSnippets' => array( 
+			 
+		),
+		'clickHandlerSnippets' => array( 
+			 
+		),
+		'hasNotifications' => false,
+		'menus' => array( 
+			 
+		),
+		'calcTotalsFor' => 1,
+		'hasCharts' => false 
+	),
+	'events' => array(
+		'maps' => array( 
+			 
+		),
+		'mapsData' => array(
+			 
+		),
+		'buttons' => array( 
+			 
+		) 
+	) 
+);
+			$pageArray = array(
+	'id' => 'session_expired',
+	'type' => 'session_expired',
+	'layoutId' => 'session_expired',
+	'disabled' => 0,
+	'default' => 0,
+	'forms' => array(
+		'above-grid' => array(
+			'modelId' => 'session_expired-grid',
+			'grid' => array( 
+				array(
+					'section' => '',
+					'cells' => array( 
+						array(
+							'cell' => 'c' 
+						) 
+					) 
+				),
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c1' 
+						) 
+					),
+					'section' => '' 
+				) 
+			),
+			'cells' => array(
+				'c1' => array(
+					'model' => 'c1',
+					'items' => array( 
+						'session_expired_message',
+						'session_expired_comment' 
+					) 
+				),
+				'c' => array(
+					'model' => 'c1',
+					'items' => array( 
+						 
+					) 
+				) 
+			),
+			'deferredItems' => array( 
+				 
+			),
+			'recsPerRow' => 1 
+		),
+		'grid' => array(
+			'modelId' => 'session_expired-footer',
+			'grid' => array( 
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c1' 
+						) 
+					),
+					'section' => '' 
+				) 
+			),
+			'cells' => array(
+				'c1' => array(
+					'model' => 'c1',
+					'items' => array( 
+						'expired_stay',
+						'expired_logout' 
+					) 
+				) 
+			),
+			'deferredItems' => array( 
+				 
+			),
+			'recsPerRow' => 1 
+		) 
+	),
+	'items' => array(
+		'session_expired_message' => array(
+			'type' => 'session_expired_message',
+			'color' => '#55768e',
+			'font-size' => '22px' 
+		),
+		'session_expired_comment' => array(
+			'type' => 'session_expired_comment' 
+		),
+		'expired_stay' => array(
+			'type' => 'expired_stay' 
+		),
+		'expired_logout' => array(
+			'type' => 'expired_logout' 
+		) 
+	),
+	'dbProps' => array(
+		 
+	),
+	'version' => 14,
+	'imageItem' => array(
+		'type' => 'page_image' 
+	),
+	'imageBgColor' => '#f2f2f2',
+	'controlsBgColor' => 'white',
+	'imagePosition' => 'right',
+	'listTotals' => 1,
+	'title' => array(
+		 
+	) 
+);
 		?>

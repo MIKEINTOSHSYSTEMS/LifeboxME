@@ -17,7 +17,8 @@ function ExportExcelInit($arrdata,$arrwidth)
 		$colLetter = PHPExcel_Cell::stringFromColumnIndex($col);
 		$objASheet = $objPHPExcel->getActiveSheet();
 		$objDim = $objASheet->getColumnDimension($colLetter);
-		$objDim->setWidth($arrwidth[$field]);
+		//$objDim->setWidth($arrwidth[$field]);
+		$objDim->setAutoSize(true);
 		$col++;
 	}
 
@@ -50,7 +51,7 @@ function ExportExcelRecord( $arrdata, $datatype, $numberRow, $objPHPExcel, $page
 			
 			if(!$gdImage)
 			{
-				$objASIndex->setCellValueByColumnAndRow($col,$numberRow+1,"LONG BINARY DATA - CANNOT BE DISPLAYED");
+				$objASIndex->setCellValueByColumnAndRow($col,$numberRow+1,mlang_message('LONG_BINARY'));
 				continue;
 			}			
 			
@@ -65,15 +66,17 @@ function ExportExcelRecord( $arrdata, $datatype, $numberRow, $objPHPExcel, $page
 			if($rowDim->getRowHeight() < $height)
 				$rowDim->setRowHeight($height);
 			
+			/*
 			$colDimSh = $objASheet->getColumnDimension($colLetter);
 			$colDimSh->setAutoSize(false);
 			
 			if($colDim->getWidth() < $width)
-				$colDim->setWidth($width);			
+				$colDim->setWidth($width);
+			*/
 		}
 		elseif($datatype[$field] == "file")
 		{
-			$arr = my_json_decode($row[$field]);
+			$arr = runner_json_decode($row[$field]);
 			if(count($arr) == 0)
 			{
 				$data = PHPExcel_Shared_String::ConvertEncoding($data, 'UTF-8', $cCharset);
@@ -112,11 +115,13 @@ function ExportExcelRecord( $arrdata, $datatype, $numberRow, $objPHPExcel, $page
 				if($rowDim->getRowHeight() < $height)
 					$rowDim->setRowHeight($height);
 				
+				/*
 				$colDimSh = $objASheet->getColumnDimension($colLetter);
 				$colDimSh->setAutoSize(false);
 				
 				if($colDim->getWidth() < $width)
 					$colDim->setWidth($width);
+				*/
 			}
 		} else {
 			$data = PHPExcel_Shared_String::ConvertEncoding($data, 'UTF-8', $cCharset);

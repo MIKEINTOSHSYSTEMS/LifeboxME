@@ -195,7 +195,12 @@ class OrderClause
 			}
 		}
 		
-		$this->_cachedFields = array_merge($groupByRet, $ret);
+		foreach( $groupByRet as $o ) {
+			$this->_cachedFields[] = $o;
+		}
+		foreach( $ret as $o ) {
+			$this->_cachedFields[] = $o;
+		}
 
 		return $this->_cachedFields;
 	}
@@ -283,9 +288,8 @@ class OrderClause
 		if( $this->_cachedSortBySettings !== null )
 			return $this->_cachedSortBySettings;
 			
-		$sortSettings = $this->pSet->getSortControlSettingsJSONString();
-		$sortSettings = my_json_decode( $sortSettings );
-		if( !$sortSettings || !$sortSettings )
+		$sortSettings = $this->pSet->getSortControlSettings();
+		if( !$sortSettings )
 		{
 			$sortSettings = array();
 			
@@ -334,7 +338,7 @@ class OrderClause
 			if( !$o['hidden'] )
 				$normOrder[] = array( $o['column'], $o['dir'] );
 		}
-		$sortString = my_json_encode( $normOrder );
+		$sortString = runner_json_encode( $normOrder );
 		
 		
 		// make normalized string of each $sortbySettings element and compare to $normOrder
@@ -344,7 +348,7 @@ class OrderClause
 			$normOrder = array();
 			foreach( $s["fields"] as $f )
 				$normOrder[] = array( $f['field'], $f["desc"] ? 'DESC' : 'ASC' );
-			if( my_json_encode( $normOrder ) == $sortString )
+			if( runner_json_encode( $normOrder ) == $sortString )
 				return $i;
 		}
 		return -1;

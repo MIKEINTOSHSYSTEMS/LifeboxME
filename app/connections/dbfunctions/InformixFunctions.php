@@ -1,6 +1,14 @@
 <?php
 class InformixFunctions extends DBFunctions
 {	
+
+	function __construct( $params )
+	{
+		parent::__construct( $params );
+		$this->strLeftWrapper = "";
+		$this->strRightWrapper = "";
+	}
+
 	/**
 	 * @param String str
 	 * @return String
@@ -10,6 +18,28 @@ class InformixFunctions extends DBFunctions
 		return $str;
 	}
 	
+	/**
+	 *  add wrappers only to schema name!!
+	 */
+	public function addTableWrappers( $strName )
+	{
+		$arr = explode(".", $strName);
+		if( count( $arr ) == 1 ) {
+			return $strName;
+		}
+		$ret = "";
+		foreach( $arr as $idx => $e )
+		{
+			if( $ret != "" )
+				$ret .= ".";
+			if( $idx == 0 ) {
+				$ret .= '"' . $e . '"';
+			} else {
+				$ret .= $e;
+			}
+		}
+		return $ret;
+	}
 	
 	/**
 	 * @param String str

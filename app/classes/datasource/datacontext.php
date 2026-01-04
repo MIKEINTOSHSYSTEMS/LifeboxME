@@ -65,6 +65,7 @@ define( 'dsopMORE', '>' );
 define( 'dsopLESS', '<' );
 define( 'dsopEQUAL', '=' );
 define( 'dsopEMPTY', 'null' );
+define( 'dsopNULL', 'isnull' );
 define( 'dsopIN', 'in' );	//not implemented yet
 define( 'dsopAND', 'and' );
 define( 'dsopOR', 'or' );
@@ -399,6 +400,21 @@ class DataCondition {
 				),
 				$operation,
 				$caseInsensitive
+			);
+	}
+
+	static function FieldIsNull( $fieldname ) {
+		return new DsCondition( array(
+				new DsOperand( dsotFIELD, $fieldname )
+				),
+				dsopNULL
+			);
+	}
+	static function FieldIsEmpty( $fieldname ) {
+		return new DsCondition( array(
+				new DsOperand( dsotFIELD, $fieldname )
+				),
+				dsopEMPTY
 			);
 	}
 

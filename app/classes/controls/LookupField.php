@@ -42,6 +42,7 @@ class LookupField extends EditControl
 	public $bUseCategory = false;
 	public $horizontalLookup = false;
 	public $addNewItem = false;
+	public $editLookupItem = false;
 
 	public $isLinkFieldEncrypted = false;
 	public $isDisplayFieldEncrypted = false;
@@ -189,10 +190,9 @@ class LookupField extends EditControl
 
 		$this->horizontalLookup = $this->pageObject->pSetEdit->isHorizontalLookup($this->field);
 
-		$this->addMainFieldsSettings();
-
 		//	alter "add on the fly" settings
 		$this->addNewItem = $this->isAllowToAdd( $mode );
+		$this->editLookupItem = $this->isAllowToEdit( $mode );
 
 		// prepare multi-select attributes
 		$this->multiple = $this->multiselect ? " multiple" : "";
@@ -243,47 +243,25 @@ class LookupField extends EditControl
 		if( strpos($strPerm,"A") !== false && $this->LCType != LCT_LIST && $mode != MODE_SEARCH )
 		{
 			$addNewItem = $this->pageObject->pSetEdit->isAllowToAdd($this->field);
-			$advancedadd = !$this->pageObject->pSetEdit->isSimpleAdd($this->field);
+			$advancedadd = $this->pageObject->pSetEdit->getLookupType( $this->field ) == LT_QUERY;
 			if(!$advancedadd || $this->pageObject->pageType == PAGE_REGISTER)
 				$addNewItem = false;
 		}
 
 		return $addNewItem;
 	}
-
-	/**
-	 *
-	 */
-	protected function addMainFieldsSettings()
-	{
-		if( $this->pageObject->pSetEdit->isLookupWhereCode( $this->field ) )
-			return;
-
-		$mainMasterFields = array();
-		$mainFields = array();
-
-		$where = $this->pageObject->pSetEdit->getLookupWhere( $this->field );
-		foreach( DB::readSQLTokens( $where ) as $token )
-		{
-			$prefix = "";
-			$field = $token;
-			$dotPos = strpos( $token, ".");
-
-			if( $dotPos !== FALSE )
-			{
-				$prefix = strtolower( substr( $token, 0, $dotPos ) );
-				$field = substr( $token, $dotPos + 1 );
-			}
-
-			if( $prefix == "master" )
-				$mainMasterFields[] = $field;
-			else if( !$prefix )
-				$mainFields[] = $field;
+	
+	protected function isAllowToEdit( $mode ) {
+		$allowEdit = false;
+		$strPerm = GetUserPermissions($this->lookupTable);
+		
+		if( strpos($strPerm, "E") !== false && $mode != MODE_SEARCH ) {
+			$allowEdit = $this->pageObject->pSetEdit->isAllowToEdit($this->field);
 		}
 
-		$this->addJSSetting( "mainFields", $mainFields );
-		$this->addJSSetting( "mainMasterFields", $mainMasterFields );
+		return $allowEdit;
 	}
+
 
 	/**
 	 * Get indexes of link and display fields
@@ -340,7 +318,7 @@ class LookupField extends EditControl
 				echo '<select id="'.$this->cfield.'" size="'.$this->lookupSize.'" '.$dataAttr.$selectClass.' name="'.$this->cfield.$this->postfix.'" '
 					.$this->multiple.' '.$this->inputStyle.'>';
 				if( !$this->multiselect )
-					echo '<option value="">'."Please select".'</option>';
+					echo '<option value="">'.mlang_message('PLEASE_SELECT').'</option>';
 				else if($mode == MODE_SEARCH)
 					echo '<option value=""> </option>';
 
@@ -415,7 +393,6 @@ class LookupField extends EditControl
 			$this->buildMultiselectAJAXLookup($avalue, $value, $mode, $searchOption);
 			return;
 		}
-		
 
 		$listSearchHasSimpleBox = $mode == MODE_SEARCH && $this->isAdditionalControlRequired();
 		$optionContains = $this->isSearchOpitonForSimpleBox( $searchOption );
@@ -507,7 +484,8 @@ class LookupField extends EditControl
 		if( $this->LCType == LCT_LIST && !$this->pageObject->pSetEdit->isRequired($this->field))
 			$inputParams.= ' class="clearable" ';
 
-		$inputTag = '<input type="text" '.$inputParams.'>';
+		$dataKeysAttr = $this->editLookupItem ? $this->getDataKeysAttr($data) : "";
+		$inputTag = '<input type="text" '.$inputParams.' '.$dataKeysAttr.'>';
 		if ( $this->LCType == LCT_LIST )
 		{
 			echo '<span class="bs-list-lookup">'.$inputTag.'</span>';
@@ -553,7 +531,7 @@ class LookupField extends EditControl
 	{
 		//$this->fillLookupFieldsIndexes();
 
-		if( $this->linkAndDisplaySame || $this->lookupPageType == PAGE_SEARCH )
+		if( $this->linkAndDisplaySame && !$this->editLookupItem || $this->lookupPageType == PAGE_SEARCH )
 		{
 			$this->displayFieldAlias = $this->displayFieldName;
 			foreach($avalue as $mKey => $mValue)
@@ -646,7 +624,7 @@ class LookupField extends EditControl
 
 					echo '<select size="'.$this->lookupSize.'" id="'.$this->cfield.'" name="'.$this->cfield.$this->postfix.'" class="'.$selectClass.'" '.$dataAttr.
 						$this->multiple.' '.$this->inputStyle.'>';
-					echo '<option value="">'."Please select".'</option>';
+					echo '<option value="">'.mlang_message('PLEASE_SELECT').'</option>';
 					echo '</select>';
 					break;
 			}
@@ -680,7 +658,7 @@ class LookupField extends EditControl
 			echo '<select size="'.$this->lookupSize.'" id="'.$this->cfield.'" '
 				.$this->alt.' name="'.$this->cfield.$this->postfix.'"'.$dataAttr.' class="'.$selectClass.'" '.$this->multiple.' '.$this->inputStyle.'>';
 			if( !$this->multiselect )
-				echo '<option value="">'."Please select".'</option>';
+				echo '<option value="">'.mlang_message('PLEASE_SELECT').'</option>';
 			else if($mode == MODE_SEARCH)
 				echo '<option value=""> </option>';
 		}
@@ -778,20 +756,22 @@ class LookupField extends EditControl
 		}
 
 		$render_value = $this->getLookupTextValue( $display_value );
+		
+		$dataKeysAttr = $this->editLookupItem ? $this->getDataKeysAttr($data) : "";
 
 		switch($this->LCType)
 		{
 			case LCT_DROPDOWN:
 			case LCT_LIST:
 			case LCT_AJAX:
-				echo '<option value="'.runner_htmlspecialchars($data[ $this->linkFieldName ]).'"'.$checked.'>'
+				echo '<option value="'.runner_htmlspecialchars($data[ $this->linkFieldName ]).'"'.$checked.' '.$dataKeysAttr.'>'
 						.$render_value.'</option>';
 				break;
 
 			case LCT_CBLIST:
 				echo '<span class="checkbox"><label>'
 						.'<input id="'.$this->cfield.'_'.$i.'" class="rnr-checkbox" type="checkbox" '.$this->alt.' name="'.$this->cfield.$this->postfix
-							.'" value="'.runner_htmlspecialchars( $link_value ).'"'.$checked.'/>&nbsp;'
+							.'" '.$dataKeysAttr.' value="'.runner_htmlspecialchars( $link_value ).'"'.$checked.'/>&nbsp;'
 						.'<span class="rnr-checkbox-label" id="data_'.$this->cfield.'_'.$i.'">'
 							.$render_value
 						.'</span>'
@@ -801,7 +781,7 @@ class LookupField extends EditControl
 			case LCT_RADIO:
 				echo '<span class="radio"><label>'
 						.'<input type="Radio" class="rnr-radio-button" id="radio_'.$this->cfieldname.'_'.$i.'" '
-							.$this->alt.' name="radio_'.$this->cfieldname.'" '.$checked.' value="'.runner_htmlspecialchars( $link_value ).'">'
+							.$this->alt.' '.$dataKeysAttr.' name="radio_'.$this->cfieldname.'" '.$checked.' value="'.runner_htmlspecialchars( $link_value ).'">'
 						.' <span id="label_radio_'.$this->cfieldname.'_'.$i.'" class="rnr-radio-label">'
 							.$render_value
 						.'</span>'
@@ -851,7 +831,7 @@ class LookupField extends EditControl
 		if( $this->multiselect )
 			return false;
 
-		$hostPageType = $this->pageObject->pSetEdit->getTableType();
+		$hostPageType = ProjectSettings::defaultPageType( $this->pageObject->pSetEdit->getEntityType() );
 		if( $hostPageType == "report" || $hostPageType == "chart" )
 			return false;
 
@@ -975,7 +955,7 @@ class LookupField extends EditControl
 			return $this->searchByDisplayedFieldIsAllowed;
 		}
 
-		$hostPageType = $this->pageObject->pSetEdit->getTableType();
+		$hostPageType = ProjectSettings::defaultPageType( $this->pageObject->pSetEdit->getEntityType() );
 
 		$this->searchByDisplayedFieldIsAllowed = $hostPageType != "report" && $hostPageType != "chart" && !$this->linkAndDisplaySame
 			&& !$this->multiselect && ( $this->LCType == LCT_LIST || $this->LCType == LCT_DROPDOWN || $this->LCType == LCT_AJAX )
@@ -1102,8 +1082,7 @@ class LookupField extends EditControl
 		parent::suggestValue($value, $searchFor, $response, $row);
 		return;
 
-		// ??????
-		if( !GetGlobalData("handleSearchSuggestInLookup", true) || $this->lookupType == LT_LISTOFVALUES || $this->isSearchByDispalyedFieldAllowed() )
+		if( $this->lookupType == LT_LISTOFVALUES || $this->isSearchByDispalyedFieldAllowed() )
 		{
 			parent::suggestValue($value, $searchFor, $response, $row);
 			return;
@@ -1195,15 +1174,24 @@ class LookupField extends EditControl
 			while( $data = $qResult->fetchAssoc() )
 			{
 				$dispValue = $data[ $this->displayFieldAlias ];
-				if( $isUnique )
-				{
+				if( $isUnique ) {
 					if( in_array( $dispValue, $uniqueArray) )
 						continue;
 
 					$uniqueArray[] = $dispValue;
 				}
-				$response[] = $data[ $this->linkFieldName ];
-				$response[] = $this->getLookupTextValue( $dispValue );
+				
+				$keys = array();
+				if( $this->lookupPSet ) {
+					foreach( $this->lookupPSet->getTableKeys() as $kf ) {
+						$keys[] = $data[ $kf ];
+					}
+				}
+				
+				$response[] = array( 
+					"linkValue" => $data[ $this->linkFieldName ],
+					"displayValue" => $this->getLookupTextValue( $dispValue ),
+					"keys" => $keys );
 			}
 		}
 		else
@@ -1211,10 +1199,18 @@ class LookupField extends EditControl
 			$data = $qResult->fetchAssoc();
 			//	assign value if it is asked for, or if there is only oine record in recordset
 
-			if( $data && ( $selectValue || !$qResult->fetchAssoc() ) )
-			{
-				$response[] = $data[ $this->linkFieldName ];
-				$response[] = $this->getLookupTextValue( $data[ $this->displayFieldAlias ] );
+			if( $data && ( $selectValue || !$qResult->fetchAssoc() ) ) {
+				$keys = array();
+				if( $this->lookupPSet ) {
+					foreach( $this->lookupPSet->getTableKeys() as $kf ) {
+						$keys[] = $data[ $kf ];
+					}
+				}
+
+				$response[] = array( 
+					"linkValue" => $data[ $this->linkFieldName ],
+					"displayValue" => $this->getLookupTextValue( $data[ $this->displayFieldAlias ] ),
+					"keys" => $keys );
 			}
 		}
 
@@ -1290,18 +1286,18 @@ class LookupField extends EditControl
 		{
 			foreach( $autoCompleteFields as $aData )
 			{
-				$data[ $aData["lookupF"] ] = $row[ $aData["lookupF"] ];
+				$data[ $aData["lookupField"] ] = $row[ $aData["lookupField"] ];
 			}
 		}
 
 		$ret = array();
 		$masterData = array();
 		foreach( $autoCompleteFields as $aData ) {
-			$masterData[ $aData["masterF"] ] = $data[ $aData["lookupF"] ];
+			$masterData[ $aData["masterField"] ] = $data[ $aData["lookupField"] ];
 
 			$fieldData = array();
-			$val = $data[ $aData["lookupF"] ];
-			$ctrl = $this->pageObject->getControl( $aData["masterF"] );
+			$val = $data[ $aData["lookupField"] ];
+			$ctrl = $this->pageObject->getControl( $aData["masterField"] );
 			$dispValue = $ctrl->getDisplayValue( $masterData );
 			if( $ctrl->format == EDIT_FORMAT_READONLY ) {
 				$fieldData["value"] = $val;
@@ -1310,7 +1306,7 @@ class LookupField extends EditControl
 				$fieldData["value"] = $dispValue;
 			}
 
-			$ret[ $aData["lookupF"] ] = $fieldData;
+			$ret[ $aData["lookupField"] ] = $fieldData;
 		}
 		
 		if( !$ret )
@@ -1334,21 +1330,22 @@ class LookupField extends EditControl
 	{
 		$links = array();
 
-		if( $this->LCType == LCT_LIST )
-		{
+		if( $this->LCType == LCT_LIST ) {
 			$visibility = $hiddenSelect ? ' style="visibility: hidden;"' : '';
 			$openId = "open_lookup_".GoodFieldName( $this->field )."_".$this->id;
-			$links[] = '<a href="#" id="'.$openId.'" '.$visibility.'>'."Select".'</a>';
-			
-			if( $this->multiselect ) {
-				$clearId = "clearLookup_".GoodFieldName( $this->field )."_".$this->id;
-				$links[] = '<a href="#" id="'.$clearId.'" style="visibility: hidden;">'."Clear".'</a>';
-			}
+			$links[] = '<a href="#" id="'.$openId.'" '.$visibility.'>'.mlang_message('SELECT_LIST').'</a>';
 		}
 
 		if( $this->addNewItem )
-			$links[] = '<a href="#" id="addnew_'.$this->cfield.'">'."Add new".'</a>';
-		
+			$links[] = '<a href="#" id="addnew_'.$this->cfield.'">'.mlang_message('ADD_NEW').'</a>';
+	
+		if( $this->editLookupItem )
+			$links[] = '<a href="#" class="hidden-link" id="edit_lookup_item_'.$this->cfield.'">'.mlang_message('MODIFY').'</a>';
+
+		if( $this->LCType == LCT_LIST && $this->multiselect ) {
+			$clearId = "clearLookup_".GoodFieldName( $this->field )."_".$this->id;
+			$links[] = '<a href="#" id="'.$clearId.'" style="visibility: hidden;">'.mlang_message('FILTER_CLEAR').'</a>';
+		}
 
 		if( !count($links) )
 			return "";
@@ -1638,6 +1635,22 @@ class LookupField extends EditControl
 		}
 
 		return runner_htmlspecialchars( $displayValue );
+	}
+	
+	protected function getDataKeysAttr( &$data ) {
+		if( !$data )
+			return "";
+
+		$keys = array();
+		if( $this->lookupPSet ) {
+			foreach( $this->lookupPSet->getTableKeys() as $kf ) {
+				$keys[] = $data[ $kf ];
+			}
+		}
+		if( count( $keys ) ) {
+			return 'data-keys="'.runner_htmlspecialchars( runner_json_encode( $keys ) ).'"';
+		}
+		return "";
 	}
 }
 ?>

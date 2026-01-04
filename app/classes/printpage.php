@@ -255,7 +255,6 @@ class PrintPage extends RunnerPage
 
 		$this->hideEmptyFields();
 
-		$this->prepareJsSettings();
 		$this->addButtonHandlers();
 		$this->addCommonJs();
 
@@ -672,19 +671,13 @@ class PrintPage extends RunnerPage
 			}
 			$this->xt->assignbyref('body', $pdfBody );
 			
-			$this->xt->assign( "pdfFonts", my_json_encode( getPdfFonts() ) );
+			$this->xt->assign( "pdfFonts", runner_json_encode( getPdfFonts() ) );
 		} else
 			$this->xt->assignbyref('body', $this->body);
 
 		$this->xt->assign("grid_block", true);
 		$this->xt->assign("page_number",true);
 
-
-		//	display Prepare for printing or PDF buttons
-		if( !$this->splitByRecords || $this->pSet->isPrinterPagePDF() )
-		{
-			$this->xt->assign("printbuttons", true);
-		}
 
 		$this->xt->assign("printheader",true);
 
@@ -830,48 +823,8 @@ class PrintPage extends RunnerPage
 		echo '<img id="'.$params['mapId'].'" src="'.$src.'">';
 	}
 
-	/**
-	 *
-	 */
-	protected function prepareJsSettings()
-	{
-		if( isRTL() )
-			$this->jsSettings['tableSettings'][ $this->tName ]['isRTL'] = true;
-
-		if( $this->pSet->isPrinterPagePDF() )
-			$this->jsSettings['tableSettings'][ $this->tName ]['printerPagePDF'] = true;
-
-		$this->jsSettings['tableSettings'][ $this->tName ]['printerPageOrientation'] = $this->pSet->getPrinterPageOrientation();
-		$this->jsSettings['tableSettings'][ $this->tName ]['printerPageScale'] = $this->pSet->getPrinterPageScale();
-		$this->jsSettings['tableSettings'][ $this->tName ]['isPrinterPageFitToPage'] = $this->pSet->isPrinterPageFitToPage();
-		$this->jsSettings['tableSettings'][ $this->tName ]['printerSplitRecords'] = $this->pSet->getPrinterSplitRecords();
-		$this->jsSettings['tableSettings'][ $this->tName ]['printerPDFSplitRecords'] = $this->pSet->getPrinterPDFSplitRecords();
-
-		if( $this->printGridLayout )
-			$this->jsSettings['tableSettings'][$this->tName]['printGridLayout'] = $this->printGridLayout;
-
-		if( $this->showHideFieldsFeatureEnabled() )
-			$this->jsSettings['tableSettings'][ $this->tName ]['isAllowShowHideFields'] = true;
-		$this->prepareColumnOrderSettings();
-	}
-
 	protected function reorderFieldsFeatureEnabled() {
 		return parent::reorderFieldsFeatureEnabled() && $this->pSet->listColumnsOrderOnPrint();
-	}
-	
-	protected function prepareColumnOrderSettings()
-	{
-		if( $this->reorderFieldsFeatureEnabled() && $this->printGridLayout == gltHORIZONTAL && $this->recsPerRowPrint == 1 )
-		{
-			$this->jsSettings['tableSettings'][ $this->tName ]['isAllowFieldsReordering'] = true;
-
-			include_once getabspath("classes/paramsLogger.php");
-			$logger = new paramsLogger( $this->tName, FORDER_PARAMS_TYPE );
-
-			$columnOrder = $logger->getData();
-			if( $columnOrder )
-				$this->jsSettings['tableSettings'][ $this->tName ]['columnOrder'] = $columnOrder;
-		}
 	}
 
 	/**
@@ -930,8 +883,8 @@ class PrintPage extends RunnerPage
 		{
 			$dtName = GetTableByShort( $dt );
 
-			$tSet = $this->pSet->getTable( $dtName );
-			$tType = $tSet->getTableType();
+			$tSet = new ProjectSettings( $dtName );
+			$tType = $tSet->getDefaultPageType();
 			$pageType = $tType == PAGE_REPORT ? PAGE_RPRINT : PAGE_PRINT;
 
 			$pageName = $this->pSet->detailsPageId( $dtName );
@@ -940,7 +893,7 @@ class PrintPage extends RunnerPage
 			$pageLayout = GetPageLayout( $dtName, $dpSet->pageName() );
 			$templatefile = GetTemplateName( GetTableURL( $dtName ), $dpSet->pageName() );
 
-			$cssFiles = $pageLayout->getCSSFiles( isRTL(), isPageLayoutMobile( $templatefile ), false );
+			$cssFiles = $pageLayout->getCSSFiles( isRTL() );
 			$this->AddCSSFile( $cssFiles );
 
 			include_once getabspath('classes/controls/ViewControlsContainer.php');
@@ -970,12 +923,12 @@ class PrintPage extends RunnerPage
 	protected function buildDetailsXtMethod($dt, $data)
 	{
 		$dTable = GetTableByShort( $dt );
-		$mkeys = $this->pSet->getMasterKeysByDetailTable( $dTable );
+		$mkeys = $this->pSet->getDetailsKeys( $dTable );
 		if( !$mkeys )
 			return false;
 
-		$tSet = $this->pSet->getTable( $dTable );
-		$tType = $tSet->getTableType();
+		$tSet = new ProjectSettings( $dTable );
+		$tType = $tSet->getDefaultPageType();
 
 		$dtableArrParams = array();
 		$dtableArrParams = array();
@@ -989,7 +942,7 @@ class PrintPage extends RunnerPage
 		$dtableArrParams["masterTable"] = $this->tName;
 		$dtableArrParams["masterKeysReq"] = array();
 		$i = 0;
-		foreach( $mkeys as $mkey )
+		foreach( $mkeys['masterKeys'] as $mkey )
 		{
 			$i++;
 			$dtableArrParams["masterKeysReq"][$i] = $data[$mkey] ;
@@ -1124,5 +1077,36 @@ class PrintPage extends RunnerPage
 	protected function getTotalDataCommand() {
 		return parent::getSubsetDataCommand();
 	}
+
+	protected function buildJsTableSettings( $table, $pSet ) {
+		$settings = parent::buildJsTableSettings( $table, $pSet );
+
+		$settings['isRTL'] = isRTL();
+		$settings['printerPagePDF'] = $this->pSet->isPrinterPagePDF();
+		$settings['printerPageOrientation'] = $this->pSet->getPrinterPageOrientation();
+		$settings['printerPageScale'] = $this->pSet->getPrinterPageScale();
+		$settings['isPrinterPageFitToPage'] = $this->pSet->isPrinterPageFitToPage();
+		$settings['printerSplitRecords'] = $this->pSet->getPrinterSplitRecords();
+
+		if( $this->printGridLayout )
+			$settings['printGridLayout'] = $this->printGridLayout;
+
+		if( $this->showHideFieldsFeatureEnabled() )
+			$settings['isAllowShowHideFields'] = true;
+
+		if( $this->reorderFieldsFeatureEnabled() && $this->printGridLayout == gltHORIZONTAL && $this->recsPerRowPrint == 1 ) {
+			$settings['isAllowFieldsReordering'] = true;
+
+			require_once( getabspath("classes/paramsLogger.php") );
+			$logger = new paramsLogger( $this->tName, FORDER_PARAMS_TYPE );
+
+			$columnOrder = $logger->getData();
+			if( $columnOrder )
+				$settings['columnOrder'] = $columnOrder;
+		}
+
+		return $settings;
+	}
+
 }
 ?>

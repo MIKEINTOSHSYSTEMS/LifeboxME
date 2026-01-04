@@ -8,14 +8,12 @@ class SearchPageDash extends SearchPage
 	{
 		parent::__construct($params);
 		
-		if ($this->mode == SEARCH_DASHBOARD)
-		{
-			$this->jsSettings['tableSettings'][ $this->tName ]['isDashSearchPage'] = true;
+		if( $this->mode == SEARCH_DASHBOARD ) {
+			$this->pageData['isDashSearchPage'] = true;
 		}
 	}
 	
-	protected function assignSessionPrefix() 
-	{
+	protected function assignSessionPrefix() {
 		$this->sessionPrefix = $this->tName;
 	}
 	
@@ -29,6 +27,22 @@ class SearchPageDash extends SearchPage
 	
 	}
 
+	protected function buildJsFieldSettings( $pSet, $field, $pageType ) {
+		$settings = parent::buildJsFieldSettings( $pSet, $field, $pageType );
+
+		$editFormat = $pSet->getEditFormat( $field );
+		if( $editFormat === EDIT_FORMAT_LOOKUP_WIZARD ) {
+			$parentData = $pSet->getLookupParentFNames( $tableFieldName );
+			foreach( $fData as $i => $parentField ) {
+				$parentData[ $i ] = $this->locateDashFieldByOriginal( $pSet->table(), $parentField );
+			}
+			$settings["parentFields"] = $parentData;
+		}
+		
+		return $settings;
+	}
+	
+	
 	protected function prepareFields()
 	{	
 		$pageFields = $this->pSet->getPageFields();
@@ -40,9 +54,6 @@ class SearchPageDash extends SearchPage
 			$field = $fdata[0]["field"];
 			$table = $fdata[0]["table"];
 			$fSet = $this->getTableSettings( $table );
-			$lookupTable = $fSet->getLookupTable( $field );
-			if( $lookupTable )
-				$this->settingsMap["globalSettings"]['shortTNames'][ $lookupTable ] = GetTableURL( $lookupTable );
 	
 			$srchFields = $this->searchClauseObj->getSearchCtrlParams( $f );
 			$firstFieldParams = array();
@@ -54,7 +65,7 @@ class SearchPageDash extends SearchPage
 			{
 				$firstFieldParams['fName'] = $f;
 				$firstFieldParams['eType'] = '';
-				$firstFieldParams['value1'] = $this->pSet->getDefaultValue( $field, $table );
+				$firstFieldParams['value1'] = $this->pSet->getSearchDefaultValue( $field );
 				$firstFieldParams['value2'] = '';
 				$firstFieldParams['not'] = false;
 				$firstFieldParams['opt'] = $this->pSet->getDefaultSearchOption( $f );
@@ -101,12 +112,6 @@ class SearchPageDash extends SearchPage
 		}
 	}
 	
-	function fillFieldSettings()
-	{		
-		$arrFields = $this->pSet->getAllSearchFields();
-		$this->addFieldsSettings($arrFields, null, $this->pageType);
-	}
-    
 	function locateDashFieldByOriginal( $table, $field )
 	{
 		foreach($this->pSet->getDashboardSearchFields() as $fname => $data)
@@ -120,98 +125,50 @@ class SearchPageDash extends SearchPage
 		}
 		return $fname;
 	}
-	
-	
-	function addFieldsSettings($arrFields, $pSet, $pageType)
-	{
-		$dashSearchFields = $this->pSet->getDashboardSearchFields();
+
+	protected function buildJsTableSettings( $table, $pSet ) {
+		$settings = parent::buildJsTableSettings( $table, $pSet );
+		if( $pSet->table() != $this->pSet->table() ) {
+			return $settings;
+		}
+		
 		$tableSettingsFilled = array();
-		foreach($arrFields as $fieldName)
-		{
+		$tableSettingsFilled[ $this->tName ] = true;
+		$dashSearchFields = $this->pSet->getDashboardSearchFields();
+		
+		$settings[ 'fieldSettings' ] = array();
+
+		foreach( $this->pSet->getAllSearchFields() as $fieldName ) {
 			$tableName = $dashSearchFields[$fieldName][0]["table"];
 			$pSet = new ProjectSettings( $tableName, $pageType);
 			$tableFieldName = $dashSearchFields[$fieldName][0]["field"];
-			
-			if( !$tableSettingsFilled[ $tableName ] )
-			{
-				$this->fillTableSettings( $tableName, $pSet );
+
+			if( !@$tableSettingsFilled[ $tableName ] ) {
 				$tableSettingsFilled[ $tableName ] = true;
+				$this->fillTableSettings( $tableName, $pSet );
 			}
-			if( !array_key_exists($fieldName, $this->jsSettings['tableSettings'][ $this->tName ]['fieldSettings']) )
-				$this->jsSettings['tableSettings'][ $this->tName ]['fieldSettings'][ $fieldName ] = array();
-			
-			if( !array_key_exists($pageType, $this->jsSettings['tableSettings'][ $this->tName ]['fieldSettings'][ $fieldName ]) )
-				$this->jsSettings['tableSettings'][ $this->tName ]['fieldSettings'][ $fieldName ][ $pageType ] = array();
-						
-			foreach($this->settingsMap["fieldSettings"] as $key => $val)
-			{
-				$fData = $pSet->getFieldData($tableFieldName, $key);
-				
-				if( $key == "validateAs" )
-				{
-					if( $pageType == PAGE_ADD || $pageType == PAGE_EDIT || $pageType == PAGE_REGISTER ) 
-						$this->fillValidation($fData, $val, $this->jsSettings['tableSettings'][ $this->tName]['fieldSettings'][ $fieldName ][ $pageType ]);
-					continue;
-				}
-				
-				if( $key == "RTEType" )
-				{
-					$fData = $pSet->getRTEType($tableFieldName);
-					if($fData == "RTECK")
-					{
-						$this->isUseCK = true;
-						$this->jsSettings['tableSettings'][ $this->tName ]['fieldSettings'][ $fieldName ][ $pageType ]['nWidth'] = $pSet->getNCols($tableFieldName);
-						$this->jsSettings['tableSettings'][ $this->tName ]['fieldSettings'][ $fieldName ][ $pageType ]['nHeight'] = $pSet->getNRows($tableFieldName);
-					}	
-				}
-				elseif( $key == "autoCompleteFields" )
-				{
-					$fData = $pSet->getAutoCompleteFields($tableFieldName);
-				}
-				elseif( $key == "parentFields" )
-				{
-					$fData = $pSet->getLookupParentFNames( $tableFieldName );
-					foreach( $fData as $i => $parentField )
-					{
-						$fData[$i] = $this->locateDashFieldByOriginal( $tableName, $parentField );
-					}
-				}
-				
-				$isDefault = false;
-				if( is_array($fData) )
-				{
-					$isDefault = !$fData;
-				}
-				else if( !is_array($val['default']) )
-				{
-					$isDefault = $fData === $val['default'];
-				}
-				
-				if( !$isDefault )
-				{
-					$this->jsSettings['tableSettings'][ $this->tName ]['fieldSettings'][ $fieldName ][ $pageType ][ $val['jsName'] ] = $fData;
-				}
-			}
-			
-			//add Dash Search-specific settings
-			$this->jsSettings['tableSettings'][ $this->tName ]['fieldSettings'][ $fieldName ][ $pageType ][ 'originalTable' ] = $tableName;
-			$this->jsSettings['tableSettings'][ $this->tName ]['fieldSettings'][ $fieldName ][ $pageType ][ 'originalField' ] = $tableFieldName;
-			
-			$this->jsSettings['tableSettings'][ $this->tName ]['isUseCK'] = $this->isUseCK;
-			
-			if( $this->googleMapCfg && $this->googleMapCfg['isUseGoogleMap'] )
-			{
-				$this->jsSettings['tableSettings'][ $this->tName ]['isUseGoogleMap'] = true;
-				$this->jsSettings['tableSettings'][ $this->tName ]['googleMapCfg'] = $this->googleMapCfg;	
-			}
-			
-			$lookupTableName = $pSet->getLookupTable($tableFieldName);
-			if( $lookupTableName )
-				$this->jsSettings['global']['shortTNames'][ $lookupTableName ] = GetTableURL($lookupTableName);
-				
-			if( $pSet->getEditFormat($tableFieldName) == 'Time' )
-				$this->fillTimePickSettings( $tableFieldName, "", $pSet, $pageType, $fieldName );
+			$settings[ 'fieldSettings' ][ $fieldName ] = array( $this->pageType => $this->buildJsFieldSettings( $pSet, $tableFieldName, $pageType ) );
 		}
+		return $settings;
+
 	}
+
+	protected function buildJsGlobalSettings() {
+		$settings = parent::buildJsGlobalSettings();
+
+		foreach( $this->pSet->getDashboardSearchFields() as $f => $fdata )
+		{
+			$field = $fdata[0]["field"];
+			$table = $fdata[0]["table"];
+			$fSet = $this->getTableSettings( $table );
+			$lookupTable = $fSet->getLookupTable( $field );
+			if( $lookupTable ) {
+				$settings['shortTNames'][ $lookupTable ] = GetTableURL( $lookupTable );
+			}
+		}
+		return $settings;
+	}
+
+
 }
 ?>

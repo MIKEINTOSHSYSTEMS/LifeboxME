@@ -58,15 +58,12 @@ class ListPage_Simple extends ListPage
 			$this->xt->assign("print_friendly_all", true);
 			$this->xt->assign("print_recspp", $this->pSet->getPrinterSplitRecords() );
 
-			for($i = 0; $i < count($this->allDetailsTablesArr); $i ++) 
-			{
-				$detTable = $this->allDetailsTablesArr[$i]['dDataSourceTable'];
-				$dPset = new ProjectSettings( $detTable );
-				
-				if( $dPset->hasPrintPage() && $this->permis[ $detTable ]["export"] )
+			foreach( $this->pSet->getDetailsTables() as $details ) {
+				$dPset = new ProjectSettings( $details );
+				if( $dPset->hasPrintPage() && $this->permis[ $details ]["export"] )
 				{
 					$this->xt->assign("print_details", true);
-					$this->xt->assign("print_details_" . GetTableURL( $detTable ), true);
+					$this->xt->assign("print_details_" . GetTableURL( $details ), true);
 				}
 			}
 					
@@ -81,13 +78,6 @@ class ListPage_Simple extends ListPage
 				
 		$this->xt->assign('menu_block', $this->isShowMenu() || $this->isAdminTable());
 		
-		if( $this->mobileTemplateMode() )
-		{
-			$this->xt->assign('morelinkmobile_block', true);
-			$this->xt->assign('tableinfomobile_block', true);
-		}
-		
-		//$this->setupBreadcrumbs();
 		
 	}
 
@@ -101,9 +91,7 @@ class ListPage_Simple extends ListPage
 		
 		if( $this->pSet->isAllowShowHideFields() ) 
 		{
-			$this->jsSettings['tableSettings'][ $this->tName ]['isAllowShowHideFields'] = true;
 			$hideColumns = $this->getColumnsToHide();
-			$this->jsSettings['tableSettings'][ $this->tName ]['hideColumns'] = $hideColumns;
 
 			if( !$this->recordsOnPage )
 				$this->hideItemType("columns_control");
@@ -115,22 +103,12 @@ class ListPage_Simple extends ListPage
 				$dm = RunnerPage::deviceClassToMacro( $d );
 				if( getMediaType() == 0 && $dm == 0 ||
 					( getMediaType() == 2 || getMediaType() == 1 ) &&  $dm == 2  ) {
-					foreach( $fields as $f )
-					{
-						$this->hideField( $f );
+					foreach( $fields as $gf ) {
+						$fieldName = $this->pSet->getFieldByGoodFieldName( $gf );
+						$this->hideField( $fieldName );
 					}
 				}
 			}
-		}
-
-		if( $this->reorderFieldsFeatureEnabled() ) 
-		{
-			$this->jsSettings['tableSettings'][ $this->tName ]['isAllowFieldsReordering'] = true;
-			
-			$logger = new paramsLogger( $this->tName, FORDER_PARAMS_TYPE );
-			$columnOrder = $logger->getData();
-			if( $columnOrder )
-				$this->jsSettings['tableSettings'][ $this->tName ]['columnOrder'] = $columnOrder;
 		}
 	}
 
@@ -219,9 +197,10 @@ class ListPage_Simple extends ListPage
 		$params = array();
 		$params['pageObj'] = &$this;
 		$params['panelSearchFields'] = $this->panelSearchFields;
+		$masterKeys = $this->pSet->getMasterKeys( $this->masterTable );
 		$params['allSearchFields'] = array_diff( 
 			$this->pSet->getAllSearchFields(), 
-			$this->pSet->getDetailKeysByMasterTable( $this->masterTable ) 
+			$masterKeys['detailsKeys'] 
 		);
 		
 		$this->searchPanel = new SearchPanelSimple( $params );
@@ -235,8 +214,6 @@ class ListPage_Simple extends ListPage
 	function prepareForResizeColumns()
 	{
 		parent::prepareForResizeColumns();
-		if(  !$this->isBootstrap() )
-			return;
 		include_once getabspath("classes/paramsLogger.php");	
 		$logger = new paramsLogger( $this->tName, CRESIZE_PARAMS_TYPE );
 		$columnsData = $logger->getData();
@@ -254,11 +231,32 @@ class ListPage_Simple extends ListPage
 	 */
 	protected function prepareEmptyFPMarkup()
 	{
-		if( $this->listAjax && $this->pSetEdit->isSearchRequiredForFiltering() && !$this->isRequiredSearchRunning() && $this->isBootstrap() )
+		if( $this->listAjax && $this->pSetEdit->isSearchRequiredForFiltering() && !$this->isRequiredSearchRunning()  )
 		{
 			$this->xt->enable_section("filterPanel");
 			$this->hideElement("filterpanel");
 		}		
 	}
+
+	protected function buildJsTableSettings( $table, $pSet ) {
+		$settings = parent::buildJsTableSettings( $table, $pSet );
+		if( $this->pSet->isAllowShowHideFields() ) 
+		{
+			$settings['isAllowShowHideFields'] = true;
+			$settings['hideColumns'] = $this->getColumnsToHide();
+		}
+		if( $this->reorderFieldsFeatureEnabled() ) 
+		{
+			$settings['isAllowFieldsReordering'] = true;
+			$logger = new paramsLogger( $this->tName, FORDER_PARAMS_TYPE );
+			$columnOrder = $logger->getData();
+			if( $columnOrder ) {
+				$settings['columnOrder'] = $columnOrder;
+			}
+		}
+
+		return $settings;
+	}
+
 }
 ?>

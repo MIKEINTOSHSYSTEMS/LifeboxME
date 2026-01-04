@@ -19,8 +19,6 @@ class ProjectSettings
 
 	var $_tableData = array();
 
-	var $_optionsFile = array();
-
 	/**
 	 * _auxTableData is used for all page-related settings such as getDefaultPage, getPageOption etc
 	 * The only page so far where table != auxTable is Register
@@ -30,10 +28,6 @@ class ProjectSettings
 	var $_auxTableData = array();
 
 	var $_pageOptions = array();
-
-	var $_mastersTableData = array();
-
-	var $_detailsTableData = array();
 
 	var $_dashboardElemPSet = array();
 
@@ -100,29 +94,17 @@ class ProjectSettings
 		}
 	}
 
-	/**
-	 * Return default poage type for the current entity
-	 */
-	function getDefaultPageType() {
-		$pageTypes = array();
-
-		$pageTypes[ titTABLE ] = "list";
-		$pageTypes[ titVIEW ] = "list";
-		$pageTypes[ titREPORT ] = "report";
-		$pageTypes[ titCHART ] = "chart";
-		$pageTypes[ titDASHBOARD ] = "dashboard";
-		$pageTypes[ titSQL ] = "list";
-		$pageTypes[ titREST ] = "list";
-		$pageTypes[ titSQL_REPORT ] = "report";
-		$pageTypes[ titSQL_CHART ] = "chart";
-		$pageTypes[ titREST_REPORT ] = "report";
-		$pageTypes[ titREST_CHART ] = "chart";
-		return $pageTypes[ $this->getEntityType() ];
-
-	}
-
 	function table() {
 		return $this->_table;
+	}
+
+	
+	/**
+	 * Legacy. 
+	 * Was used in business templates
+	 */
+	function getTableName() {
+		return $this->table();
 	}
 
 	function loadPageOptions( $option = "" ) {
@@ -145,27 +127,24 @@ class ProjectSettings
 		if( array_search( $page, $this->getPageIds() ) === FALSE ) {
 			return;
 		}
-		$this->_optionsFile = getabspath("include/pages/". GetTableURL( $this->_auxTable ) . "_" . $page . ".json");
 	}
 
 	function setTable($table)
 	{
 		$this->_table = $table;
-		global $tables_data, $field_labels, $fieldToolTips, $placeHolders, $page_titles, $detailsTablesData, $masterTablesData, $bSubqueriesSupported;
+//		global $tables_data, $field_labels, $fieldToolTips, $placeHolders, $page_titles, $detailsTablesData, $masterTablesData, $bSubqueriesSupported;
 		if(GetTableURL($table) != "") {
 			importTableSettings( $table );
 		}
 
-		if(isset($tables_data[$this->_table]))
-			$this->_tableData = &$tables_data[$this->_table];
+		global $runnerTableSettings;
+		if(isset( $runnerTableSettings[$this->_table]) )
+			$this->_tableData = &$runnerTableSettings[$this->_table];
 
-		$this->_mastersTableData = &$masterTablesData[$this->_table];
-		$this->_detailsTableData = &$detailsTablesData[$this->_table];
+		$pageType = $this->getDefaultPageType();
 
-		$tableType = $this->getTableType();
-
-		$this->_editPage = $this->getDefaultEditPageType($tableType);
-		$this->_viewPage = $this->getDefaultViewPageType($tableType);
+		$this->_editPage = $this->getDefaultEditPageType($pageType);
+		$this->_viewPage = $this->getDefaultViewPageType($pageType);
 		$this->_defaultEditPage = $this->_editPage;
 		$this->_defaultViewPage = $this->_viewPage;
 	}
@@ -173,13 +152,13 @@ class ProjectSettings
 	function loadAuxTable($auxTable)
 	{
 		$this->_auxTable = $auxTable;
-		global $tables_data;
-		if(GetTableURL($auxTable) != "") {
+		if( GetTableURL($auxTable) != "" ) {
 			importTableSettings( $auxTable );
 		}
 
-		if(isset($tables_data[$this->_auxTable]))
-			$this->_auxTableData = &$tables_data[$this->_auxTable];
+		global $runnerTableSettings;
+		if(isset( $runnerTableSettings[$this->_auxTable]) )
+			$this->_auxTableData = &$runnerTableSettings[$this->_auxTable];
 	}
 
 
@@ -220,7 +199,7 @@ class ProjectSettings
 		//	a deeper checking for table and page types compatibility might be added here
 		if($this->isPageTypeForView($page))
 		{
-			$tableType = $this->getTableType();
+			$tableType = $this->getDefaultPageType();
 			if($tableType != "report" && $tableType != "chart"
 				&& ($page == PAGE_CHART || $page == PAGE_REPORT))
 				$this->_viewPage = PAGE_LIST;
@@ -231,20 +210,18 @@ class ProjectSettings
 		if($this->isPageTypeForEdit($page))
 		{
 			$this->_editPage = $page;
-			$this->_defaultEditPage = $this->getDefaultEditPageType($this->getTableType());
+			$this->_defaultEditPage = $this->getDefaultEditPageType($this->getDefaultPageType());
 		}
 	}
 
 	function getDefaultPages() {
 		$this->updatePages();
-		return $this->getAuxTableData(".defaultPages");
+		return $this->getAuxTableValue("defaultPages");
 	}
 
 	function getDefaultPage( $type, $pageTable = "" ) {
 		$this->updatePages();
-		if( isAdminPage( $this->_auxTable ) )
-			return $this->_pageType;
-		$defPages =& $this->getAuxTableData(".defaultPages");
+		$defPages =& $this->getAuxTableValue("defaultPages");
 		$defPage = $defPages[$type];
 		if( $defPage )
 			return $defPage;
@@ -253,7 +230,7 @@ class ProjectSettings
 
 	function getPageIds() {
 		$this->updatePages();
-		$ret = $this->getAuxTableData(".pages");
+		$ret = $this->getAuxTableValue("pageTypes");
 		if( !is_array( $ret ) )
 			return array();
 		return $ret;
@@ -276,40 +253,15 @@ class ProjectSettings
 		return in_array(strtolower($ptype), $pageTypesForEdit);
 	}
 
-	/**
-	 * DEPRECATED
-	 * Use new ProjectSettings instead
-	 */
-	function getTable($table, $page = "")
+	function getPageTypeByFieldEditFormat($field, $editFormat )
 	{
-		return new ProjectSettings($table, $page);
-	}
-
-	function getPageTypeByFieldEditFormat($field, $editFormat)
-	{
-		if(isset($this->_tableData[$field]) && isset($this->_tableData[$field][FORMAT_EDIT]))
-		{
-			foreach($this->_tableData[$field][FORMAT_EDIT] as $pageType => $editSettings)
-			{
-				if(isset($editSettings["EditFormat"]) && $editSettings["EditFormat"] == $editFormat)
-					return $pageType;
+		$editFormats = $this->getTableValue( "fields", $field, "editFormats" );
+		foreach( $editFormats as $pageType => $ef ) {
+			if( $ef['format'] == $editFormat ) {
+				return $pageType;
 			}
 		}
-		return "";
-	}
-
-	function getTableData($key)
-	{
-		if(!$this->isExistsTableKey($key))
-			return $this->getDefaultValueByKey(substr($key,1));
-		return $this->_tableData[$key];
-	}
-
-	function getAuxTableData($key)
-	{
-		if(!$this->isExistsAuxTableKey($key))
-			return $this->getDefaultValueByKey(substr($key,1));
-		return $this->_auxTableData[$key];
+		return '';
 	}
 
 	/**
@@ -371,8 +323,55 @@ class ProjectSettings
 		return $opt;
 	}
 
+	public function getEffectiveViewFormat( $field ) {
+		
+		$viewFormats = &$this->_tableData['fields'][ $field ]['viewFormats'];
+		if( !is_array( $viewFormats ) || !$viewFormats ) {
+			return null;
+		}
 
-	private function getEffectiveEditPage( $field )
+		if( !@$this->_tableData['fields'][ $field ]['separateEditViewFormats'] ) {
+			if( @$viewFormats['view'] ) {
+				return 'view';
+			}
+			if( $this->getEntityType() == titREPORT ) {
+				return 'report';
+			}
+		}
+
+		$effectiveView = $this->getEffectiveViewPage( $field );
+		if( array_key_exists( $effectiveView, $viewFormats ) ) {
+			return $effectiveView;
+		}
+		$formats = array_keys( $viewFormats );
+		return $formats[0];
+	}
+
+	public function getEffectiveEditFormat( $field ) {
+		
+		$editFormats = &$this->_tableData['fields'][ $field ]['editFormats'];
+		if( !is_array( $editFormats ) || !$editFormats ) {
+			return null;
+		}
+		if( !@$this->_tableData['fields'][ $field ]['separateEditViewFormats'] ) {
+			//	charts and reports can have either 'edit' or 'search' format
+			//	10.x version had 'search', 1 has 'edit'
+			if( array_key_exists( 'edit', $editFormats ) ) {
+				return 'edit';
+			}
+			$formats = array_keys( $editFormats );
+			return $formats[0];
+		}
+		$effectiveEdit = $this->getEffectiveEditPage( $field );
+		if( array_key_exists( $effectiveEdit, $editFormats ) ) {
+			return $effectiveEdit;
+		}
+		$formats = array_keys( $editFormats );
+		return $formats[0];
+		
+	}
+
+	public function getEffectiveEditPage( $field )
 	{
 		if( $this->isSeparate($field) )
 		{
@@ -381,7 +380,7 @@ class ProjectSettings
 		return $this->_defaultEditPage;
 	}
 
-	private function getEffectiveViewPage( $field )
+	public function getEffectiveViewPage( $field )
 	{
 		if( $this->isSeparate($field) )
 		{
@@ -400,77 +399,7 @@ class ProjectSettings
 		}
 		return $this->_defaultViewPage;
 	}
-	function getFieldData( $field, $key )
-	{
-		global $g_settingsType;
-		if( $this->getEntityType() == titDASHBOARD )
-		{
-			return $this->getDashFieldData( $field, $key );
-		}
 
-		if(!isset($this->_tableData[$field]))
-			return $this->getDefaultValueByKey($key);
-
-		$settingType = $g_settingsType[$key];
-		if($settingType == null)
-			$settingType = "";
-
-		switch($settingType)
-		{
-			case SETTING_TYPE_VIEW:
-				$viewPage = $this->getEffectiveViewPage( $field );
-
-				if(isset($this->_tableData[$field][FORMAT_VIEW][$viewPage][$key]))
-					return $this->_tableData[$field][FORMAT_VIEW][$viewPage][$key];
-				break;
-			case SETTING_TYPE_EDIT:
-				$editPage = $this->getEffectiveEditPage( $field );
-
-				if(isset($this->_tableData[$field][FORMAT_EDIT][$editPage][$key]))
-					return $this->_tableData[$field][FORMAT_EDIT][$editPage][$key];
-				break;
-			default:
-				if (isset($this->_tableData[$field][$key]))
-					return $this->_tableData[$field][$key];
-				break;
-		}
-		return $this->getDefaultValueByKey($key);
-	}
-
-	function setFieldData( $field, $key, $value )
-	{
-		$oldValue = $this->getFieldData( $field, $key );
-		global $g_settingsType;
-
-		$settingType = $g_settingsType[$key];
-		if($settingType == null)
-			$settingType = "";
-
-		switch($settingType)
-		{
-			case SETTING_TYPE_VIEW:
-				$viewPage = $this->getEffectiveViewPage( $field );
-				$this->_tableData[$field][FORMAT_VIEW][$viewPage][$key] = $value;
-				break;
-			case SETTING_TYPE_EDIT:
-				$editPage = $this->getEffectiveEditPage( $field );
-				$this->_tableData[$field][FORMAT_EDIT][$editPage][$key] = $value;
-				break;
-			default:
-				$this->_tableData[$field][$key] = $value;
-				break;
-		}
-		return $oldValue;
-	}
-
-	/**
-	 * getTableName
-	 * Returns table name the class is created for
-	 */
-	function getTableName()
-	{
-		return $this->_table;
-	}
 
 	/**
 	 * findField
@@ -480,20 +409,20 @@ class ProjectSettings
 
 	function findField( $f )
 	{
-		global $field_labels, $mlang_defaultlang;
 		//	check exact match
 		$fields = $this->getFieldsList();
-		if( array_search( $f, $fields ) !== FALSE )
+		if( $this->_tableData[ 'fields' ][ $f ] ) {
 			return $f;
-
+		}
 		//	check goodfieldname
-		$gTable = GoodFieldName( $this->_table );
-		if( isset( $field_labels[ $mlang_defaultlang ][ $f ] ) )
+		global $runnerTableLabels;
+		if( isset( $runnerTableLabels[ $this->_table ]['fieldlabels'][ $f ] ) ) {
 			return $this->getFieldByGoodFieldName( $f );
+		}
 
 		//	case-insensitive check
 		$f = strtoupper( $f );
-		foreach( $fields as $ff )
+		foreach( $this->getFieldsList() as $ff )
 		{
 			if( strtoupper( $ff ) == $f )
 				return $ff;
@@ -538,294 +467,235 @@ class ProjectSettings
 		return FALSE;
 	}
 
-	function isExistsTableKey($key)
-	{
-		if(!isset($this->_tableData[$key]))
-			return false;
-		return true;
-	}
-
-	function isExistsAuxTableKey($key)
-	{
-		if(!isset($this->_auxTableData[$key]))
-			return false;
-		return true;
-	}
-
-	function isExistsFieldKey($field, $key)
-	{
-		if(!$this->isExistsTableKey($field))
-			return false;
-		if(!isset($this->_tableData[$field][$key]))
-			return false;
-		return true;
-	}
-
-	function getDefaultValueByKey($key)
-	{
-		global $g_defaultOptionValues;
-		if(isset($g_defaultOptionValues[$key]))
-			return $g_defaultOptionValues[$key];
-		return false;
+	/**
+	 * @return Array of string
+	 */
+	public function getDetailsTables() {
+		return $this->getTableValue( 'detailsTables' );
 	}
 
 	/**
-	 * Returns array of master tables , which are master for current detail table
-	 * @return array if success otherwise false
+	 * Cached list of available details tables
+	 * @return Array of string
 	 */
-	function getMasterTablesArr()
-	{
-		return $this->_mastersTableData;
-	}
-
-	/**
-	 * Returns array of master keys for passed detailTable
-	 *
-	 * @param string $dTableName - it's detail data sourse table name,
-	 * @return array if success otherwise false
-	 */
-	function getMasterKeysByDetailTable($dTableName, $default = array())
-	{
-		if(!$dTableName)
-			return $default;
-		foreach ($this->_detailsTableData as $dTableDataArr)
-		{
-			if ($dTableDataArr['dDataSourceTable'] == $dTableName)
-				return $dTableDataArr['masterKeys'];
+	public function getAvailableDetailsTables() {
+		if( !array_key_exists( 'availableDetailsTables', $this->_tableData ) ) {
+			$available = array();
+			$details = $this->getTableValue( 'detailsTables' );
+			foreach( $details as $d ) {
+				$strPerm = GetUserPermissions( $d );
+				if( $strPerm !== '' ) {
+					$available[] = $d;
+				}
+			}
+			$this->_tableData[ 'availableDetailsTables' ] = $available;
 		}
-		return $default;
+		return $this->_tableData[ 'availableDetailsTables' ];
 	}
 
-	/**
-	 * Returns array of detail tables , which are detail for current master table
-	 * @param string $tName - it's data source master table name
-	 * @return array if success otherwise false
-	 */
-	function getDetailTablesArr()
-	{
-		if( !is_array( $this->_detailsTableData ) )
-			return array();
-		return $this->_detailsTableData;
-	}
 
 	/**
-	 * Returns array of detail keys for passed masterTable
-	 *
-	 * @param string $mTableName - it's master table name,
-	 * @param array $default
-	 * @return array if success otherwise default value
+	 * Cached array of details keys
+	 * @return Array( "masterKeys" => string[], "detailsKeys" => string[] )
 	 */
-	function getDetailKeysByMasterTable($mTableName = "", $default = array())
-	{
-		if(!$mTableName)
-			return $default;
-		foreach($this->_mastersTableData as $mTableDataArr)
-		{
-			if ($mTableDataArr['mDataSourceTable'] == $mTableName)
-				return $mTableDataArr['detailKeys'];
+	public function getDetailsKeys( $detailsTable ) {
+		if( !array_key_exists( 'detailsKeys', $this->_tableData ) ) {
+			$this->_tableData['detailsKeys'] = array();
 		}
-		return $default;
-	}
-
-	/**
-	 * Returns array of detail keys for passed detailTable
-	 *
-	 * @param string $dTableName - It's detail data sourse table name
-	 * @param string $tName - current(master) table name
-	 * @return array if success otherwise false
-	 */
-	function getDetailKeysByDetailTable($dTableName, $default = array())
-	{
-		foreach ($this->_detailsTableData as $dTableDataArr)
-		{
-			if ($dTableDataArr['dDataSourceTable'] == $dTableName)
-				return $dTableDataArr['detailKeys'];
+		$detailsKeys = &$this->_tableData['detailsKeys'];
+		if( !array_key_exists( $detailsTable, $detailsKeys ) ) {
+			$detailsPs = new ProjectSettings( $detailsTable );
+			$detailsKeys[ $detailsTable ] = $detailsPs->getMasterKeys( $this->table() );
 		}
-		return $default;
+		return $detailsKeys[ $detailsTable ];
+	}
+
+	public function getMasterTables() {
+		return $this->getTableValue( 'masterTables' );
 	}
 
 	/**
-	 * Returns details preview Type
-	 *
-	 * @param string $dTableName - it's detail data sourse table name,
-	 * @param string $tName - current(master) table name
-	 * @return array if success otherwise false
+	 * @return Array( "masterKeys" => string[], "detailsKeys" => string[] )
 	 */
-	function getDPType($dTableName)
-	{
-		if(!$dTableName)
+	public function getMasterKeys( $masterTable ) {
+		foreach( $this->getMasterTables() as $master ) {
+			if( $master['table'] === $masterTable ) {
+				return array(
+					'masterKeys' => $master['masterKeys'],
+					'detailsKeys' => $master['detailsKeys'],
+				);
+			}
+		}
+		return array(
+			'masterKeys' => array(),
+			'detailsKeys' => array(),
+		);
+
+	}
+
+	public function verifyMasterTable( $masterTable ) {
+		if( !$masterTable ) {
 			return false;
-		foreach ($this->_detailsTableData as $dTableDataArr)
-		{
-			if ($dTableDataArr['dDataSourceTable'] == $dTableName)
-				return $dTableDataArr['previewOnList'];
+		}
+		foreach( $this->getMasterTables() as $master ) {
+			if( $master['table'] === $masterTable ) {
+				return true;
+			}
 		}
 		return false;
 	}
+
 
 	function GetFieldByIndex($index)
 	{
-		foreach($this->_tableData as $key => $value)
-		{
-			if(!is_array($value))
-				continue;
-			elseif(!isset($value["Index"]))
-				continue;
-			if($value["Index"] == $index && $this->getFieldIndex($key))
-				return $key;
+		$fields = $this->getFieldsList();
+		foreach( $fields as $f ) {
+			if( $this->getFieldIndex( $f ) == $index ) {
+				return $f;
+			}
 		}
 		return null;
 	}
 
 	//	Is field has separate type for editing and viewing
-	function isSeparate($field)
-	{
-		return !!$this->_tableData[$field]["isSeparate"];
+	function isSeparate( $field ) {
+		return $this->getFieldValue( $field, 'separateEditViewFormats' );
 	}
 
 	// return field label
-	function label($field)
-	{
+	function label( $field ) {
 		$result = GetFieldLabel( GoodFieldName($this->_table), GoodFieldName($field) );
 		return $result != "" ? $result : $field;
 	}
 
-	//	return filename field if any
-	//	viewFormat setting
-	function getFilenameField($field)
-	{
-		return $this->getFieldData($field, "Filename");
+	function getFilenameField( $field ) {
+		return $this->getFieldValue( $field, 'view', 'fileFilenameField' );
 	}
 
 	//	return hyperlink prefix
 	//	viewFormat setting
-	function getLinkPrefix($field)
-	{
-		return $this->getFieldData($field, "LinkPrefix");
+	function getLinkPrefix( $field ) {
+		return $this->getFieldValue( $field, 'view', 'linkPrefix' );
 	}
 
 	/**
 	 * Get hyperlink type
 	 */
-	function getLinkType($field)
-	{
-		return $this->getFieldData($field, "hlType");
+	function getLinkType( $field ) {
+		return $this->getFieldValue( $field, 'view', 'linkDisplay' );
 	}
 
 	/**
 	 * Get hyperlink display field for title
 	 * @return string field name
 	 */
-	function getLinkDisplayField($field)
-	{
-		return $this->getFieldData($field, "hlTitleField");
+	function getLinkDisplayField( $field ) {
+		return $this->getFieldValue( $field, 'view', 'linkDisplayField' );
 	}
 
-	function openLinkInNewWindow($field)
-	{
-		return $this->getFieldData($field, "hlNewWindow");
+	function openLinkInNewWindow( $field ) {
+		return $this->getFieldValue( $field, 'view', 'linkNewWindow' );
 	}
 
-	function getLinkWordNameType($field)
-	{
-		return $this->getFieldData($field, "hlLinkWordNameType");
-	}
-
-	function getLinkWordText($field)
-	{
-		return $this->getFieldData($field, "hlLinkWordText");
+	function getLinkDisplayText( $field ) {
+		return $this->getFieldValue( $field, 'view', 'linkDisplayText' );
 	}
 
 	//	return database field type
 	//	using ADO DataTypeEnum constants
 	//	the full list available at:
 	//	http://msdn.microsoft.com/library/default.asp?url=/library/en-us/ado270/htm/mdcstdatatypeenum.asp
-	function getFieldType($field)
-	{
-		return $this->getFieldData($field, "FieldType");
+	function getFieldType( $field ) {
+		return $this->getFieldValue( $field, 'type' );
 	}
 
-	function getFieldDateFormat($field)
-	{
-		return $this->getFieldData($field, "dateFormat");
+	function getRestDateFormat( $field ) {
+		return $this->getFieldValue( $field, 'restDateFormat' );
 	}
 
-	function isAutoincField($field)
-	{
-		return $this->getFieldData($field, "AutoInc");
+	function isAutoincField( $field ) {
+		return $this->getFieldValue( $field, 'autoinc' );
 	}
 
-	function getDefaultValue($field, $table = "")
+	function getCustomExpression( $field, $value, $data )
 	{
-		$tableName = $table ? $table : $this->_table;
-		$editPage = $this->_editPage;
-		if(!$this->isSeparate($field))
-			return;
-		return GetDefaultValue($field, $editPage, $tableName);
+		$events = getEventObject( $this );
+		$pageType = $this->getEffectiveViewFormat( $field );
+		return $events->customExpression( $field, $pageType, $value, $data );
 	}
 
-	function isAutoUpdatable($field)
+	function getDefaultValue( $field )
 	{
-		return $this->getFieldData($field, "autoUpdatable");
+		$events = getEventObject( $this );
+		$pageType = $this->getEffectiveEditFormat( $field );
+		if( !$events->hasDefaultValue( $field, $pageType ) ) {
+			return '';
+		}
+		return $events->defaultValue( $field, $pageType );
 	}
 
-	function getAutoUpdateValue($field)
-	{
-		$editPage = $this->_editPage;
-		if(!$this->isSeparate($field))
-			$editPage = $this->getDefaultEditPageType($this->getTableType());;
-		return GetAutoUpdateValue($field, $editPage, $this->_table);
+	function getSearchDefaultValue( $field ) {
+		if( !$this->isSeparate( $field ) ) {
+			return '';
+		}
+		return $this->getDefaultValue( $field );
+	}
+
+	function isAutoUpdatable( $field ) {
+		$events = getEventObject( $this );
+		$pageType = $this->getEffectiveEditFormat( $field );
+		return $events->hasAutoUpdateValue( $field, $pageType );
+	}
+
+	function getAutoUpdateValue( $field ) {
+		$events = getEventObject( $this );
+		$pageType = $this->getEffectiveEditFormat( $field );
+		if( !$events->hasAutoUpdateValue( $field, $pageType ) ) {
+			return '';
+		}
+		return $events->autoUpdateValue( $field, $pageType );
 	}
 
 	//	return Edit format
 	//	editFormats
-	function getEditFormat($field)
-	{
-		return $this->getFieldData($field, "EditFormat");
+	function getEditFormat( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'format' );
 	}
 
 	//	return View format
 	//	viewFormat setting
-	function getViewFormat($field)
-	{
-		return $this->getFieldData($field, "ViewFormat");
+	function getViewFormat( $field ) {
+		return $this->getFieldValue( $field, 'view', 'format' );
 	}
 
 	//	show time in datepicker or not
-	function dateEditShowTime($field)
-	{
-		return $this->getFieldData($field, "ShowTime");
+	function dateEditShowTime( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'dateShowTime' );
 	}
 
-	function lookupControlType($field)
-	{
-		return $this->getFieldData($field, "LCType");
+	function lookupControlType( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'lookupControlType' );
 	}
 
-	function lookupListPageId($field)
-	{
-		return $this->getFieldData($field, "listPageId");
+	function lookupListPageId( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'lookupListPage' );
 	}
-	function lookupAddPageId($field)
-	{
-		return $this->getFieldData($field, "addPageId");
+	function lookupAddPageId( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'lookupAddPage' );
 	}
 
-	function isDeleteAssociatedFile($field)
-	{
-		return $this->getFieldData($field, "DeleteAssociatedFile");
+	function isDeleteAssociatedFile( $field ) {
+		return $this->getFieldValue( $field, 'deleteFile' );
 	}
 
 	//	is Lookup wizard dependent or not
-	function useCategory($field)
-	{
-		return $this->getFieldData($field, "UseCategory");
+	function useCategory( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'lookupDependent' );
 	}
 
 	//	is Lookup wizard with multiple selection
-	function multiSelect($field)
-	{
-		return $this->getFieldData($field, "Multiselect");
+	function multiSelect( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'lookupMultiselect' );
 	}
 
 	/**
@@ -835,9 +705,9 @@ class ProjectSettings
 	 * @return Array of string
 	 */
 	function getOAuthCloudFields() {
-		if( !GetGlobalData( "GoogleDriveClientID" )
-			&& !GetGlobalData( "OneDriveClientID" )
-			&& !GetGlobalData( "DropboxClientID" )
+		if( !ProjectSettings::getProjectValue( 'cloudSettings', 'cloudGDriveClientId' )
+			&& !ProjectSettings::getProjectValue( 'cloudSettings', 'cloudOneDriveClientId' )
+			&& !ProjectSettings::getProjectValue( 'cloudSettings', 'cloudDropboxClientId' )
 		) {
 			//	nothing to check
 			return array();
@@ -845,9 +715,9 @@ class ProjectSettings
 		$fields = array();
 		foreach( $this->getFieldsList() as $field ) {
 			$stp = $this->fileStorageProvider( $field );
-			if( $stp === stpGOOGLEDRIVE
-				|| $stp === stpDROPBOX
-				|| $stp === stpONEDRIVE ) {
+			if( $stp == stpGOOGLEDRIVE
+				|| $stp == stpDROPBOX
+				|| $stp == stpONEDRIVE ) {
 
 				$fields[] = $field;
 			}
@@ -868,16 +738,39 @@ class ProjectSettings
 	function singleSelectLookupEdit( $field )
 	{
 		$hasLookup = false;
-		foreach( $this->_tableData[$field][FORMAT_EDIT] as $pageType => $editFormat ) {
+		$editFormats = $this->getTableValue( "fields", $field, "editFormats" );
+		foreach( $editFormats as $pageType => $editFormat ) {
 			if( $pageType != "edit" && $pageType != "add" )
 				continue;
-			if( $editFormat["EditFormat"] != EDIT_FORMAT_LOOKUP_WIZARD )
+			if( $editFormat["format"] != EDIT_FORMAT_LOOKUP_WIZARD )
 				continue;
 			$hasLookup = true;
-			if( $editFormat["Multiselect"] )
+			if( $editFormat["lookupMultiselect"] )
 				return false;
 		}
 		return $hasLookup;
+	}
+
+	/**
+	*  returns ProjectSettings object for main table if the link exists in project settings.
+	*  returns NULL otherwise
+	*/
+	function getLookupMainTableSettings( $mainTableShortName, $mainField, $desiredPage = "" ) {
+		$mainPSet = new ProjectSettings( GetTableByShort( $mainTableShortName ), $desiredPage );
+		$editFormats = $mainPSet->getTableValue( "fields", $mainField, "editFormats" );
+		if( !$editFormats ) {
+			return null;
+		}
+		foreach( $editFormats as $ef ) {
+			if( $ef['format'] != EDIT_FORMAT_LOOKUP_WIZARD || $ef['lookupType'] == LT_LISTOFVALUES ) {
+				continue;
+			}
+			if( $ef['lookupTable'] == $this->table() ) {
+				return $mainPSet;
+			}
+		}
+		return null;
+		
 	}
 
 	/**
@@ -886,12 +779,13 @@ class ProjectSettings
 	*/
 	function multiSelectLookupEdit( $field )
 	{
-		foreach( $this->_tableData[$field][FORMAT_EDIT] as $pageType => $editFormat ) {
+		$editFormats = $this->getTableValue( "fields", $field, "editFormats" );
+		foreach( $editFormats as $pageType => $editFormat ) {
 			if( $pageType != "edit" && $pageType != "add" )
 				continue;
-			if( $editFormat["EditFormat"] != EDIT_FORMAT_LOOKUP_WIZARD )
+			if( $editFormat["format"] != EDIT_FORMAT_LOOKUP_WIZARD )
 				continue;
-			if( $editFormat["Multiselect"] )
+			if( $editFormat["lookupMultiselect"] )
 				return true;
 		}
 		return false;
@@ -902,10 +796,11 @@ class ProjectSettings
 	*/
 	function lookupField( $field )
 	{
-		foreach( $this->_tableData[$field][FORMAT_EDIT] as $pageType => $editFormat ) {
-			if( $editFormat["EditFormat"] != EDIT_FORMAT_LOOKUP_WIZARD )
+		$editFormats = $this->getTableValue( "fields", $field, "editFormats" );
+		foreach( $editFormats as $pageType => $editFormat ) {
+			if( $editFormat["format"] != EDIT_FORMAT_LOOKUP_WIZARD )
 				continue;
-			if( $editFormat["LinkField"] != $editFormat["DisplayField"] )
+			if( $editFormat["lookupLinkField"] != $editFormat["lookupDisplayField"] )
 				return true;
 		}
 		return false;
@@ -913,160 +808,175 @@ class ProjectSettings
 
 
 	// Lookup wizard select size
-	function selectSize($field)
-	{
-		return $this->getFieldData($field, "SelectSize");
+	function selectSize( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'lookupSize' );
 	}
 
-	function showThumbnail($field)
-	{
-		return $this->getFieldData($field, "ShowThumbnail");
+	function showThumbnail( $field ) {
+		return $this->getFieldValue( $field, 'view', 'imageShowThumbnail' );
 	}
 
-	function isImageURL($field)
-	{
-		return $this->getFieldData($field, "fieldIsImageUrl");
+	function isImageURL( $field ) {
+		return $this->getFieldValue( $field, 'view', 'imageUrl' );
 	}
 
-	function showCustomExpr($field)
-	{
-		return $this->getFieldData($field, "ShowCustomExpr");
+	function showCustomExpr( $field ) {
+		return $this->getFieldValue( $field, 'view', 'fileShowCustom' );
 	}
 
-	function showFileSize($field)
-	{
-		return $this->getFieldData($field, "ShowFileSize");
+	function showFileSize( $field ) {
+		return $this->getFieldValue( $field, 'view', 'fileShowSize' );
 	}
 
-	function displayPDF($field)
-	{
-		return $this->getFieldData($field, "DisplayPDF");
+	function displayPDF( $field ) {
+		return $this->getFieldValue( $field, 'view', 'fileShowPdf' );
 	}
 
-	function showIcon($field)
-	{
-		return $this->getFieldData($field, "ShowIcon");
+	function showIcon( $field ) {
+		return $this->getFieldValue( $field, 'view', 'fileShowIcon' );
 	}
 
-	function getImageWidth($field)
-	{
-		return $this->getFieldData($field, "ImageWidth");
+	function getImageWidth( $field ) {
+		return $this->getFieldValue( $field, 'view', 'imageWidth' );
 	}
 
-	function getImageHeight($field)
-	{
-		return $this->getFieldData($field, "ImageHeight");
+	function getImageHeight( $field ) {
+		return $this->getFieldValue( $field, 'view', 'imageHeight' );
 	}
 
-	function getThumbnailWidth($field)
-	{
-		return $this->getFieldData($field, "ThumbWidth");
+	function getThumbnailWidth( $field ) {
+		return $this->getFieldValue( $field, 'view', 'imageThumbWidth' );
 	}
 
-	function getThumbnailHeight($field)
-	{
-		return $this->getFieldData($field, "ThumbHeight");
+	function getThumbnailHeight( $field ) {
+		return $this->getFieldValue( $field, 'view', 'imageThumbHeight' );
 	}
 
 	// Get nLookupType for current field
-	function getLookupType($field)
-	{
-		return $this->getFieldData($field, "LookupType");
+	function getLookupType( $field ) {
+		$lookupType = $this->getFieldValue( $field, 'edit', 'lookupType' );
+		if( $lookupType == LT_LISTOFVALUES ) {
+			return $lookupType;
+		}
+		//	legacy projects
+		$projectTable = findTable( $this->getLookupTable( $field ) );
+		return $projectTable
+			? LT_QUERY
+			: LT_LOOKUPTABLE;
 	}
 
 	//Get lookup table name
-	function getLookupTable($field)
-	{
-		return $this->getFieldData($field, "LookupTable");
+	function getLookupTable( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'lookupTable' );
 	}
 
 	/**
 	 *	Returns true if Lookup Where clause is specified as PHP code expression
 	 *	@return Boolean
 	 */
-	function isLookupWhereCode($field)
-	{
-		return $this->getFieldData($field, "LookupWhereCode");
+	function isLookupWhereCode( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'lookupWhereCode' );
 	}
 
-	function isLookupWhereSet($field)
-	{
-		if( $this->isLookupWhereCode( $field ) )
-			return true;
-		return 0 != strlen( $this->getFieldData($field, "LookupWhere") );
+	function isLookupWhereSet( $field ) {
+		return 0 != strlen( $this->getFieldValue( $field, 'edit', 'lookupWhere' ) );
 	}
 
 
-	function getLookupWhere($field)
-	{
-		if( $this->isLookupWhereCode( $field )) {
-			$tName = $this->_table;
-			if( $this->getEntityType() == titDASHBOARD )
-			{
-				$dashSearchFields = $this->getDashboardSearchFields();
-				if( isset($dashSearchFields[$field]) ) {
-					$tName = $dashSearchFields[$field][0]["table"];
-					$field = $dashSearchFields[$field][0]["field"];
-				}
+	function getLookupWhere( $field ) {
+		if( $this->getEntityType() == titDASHBOARD )
+		{
+			$pSet = $this->getDashSearchFieldSettings( $field );
+			if( !$pSet ) {
+				return '';
 			}
-
-			return GetLWWhere( $field, $this->getEffectiveEditPage( $field ), $tName );
+			return $pSet->getLookupWhere( $field );
+		}
+		
+		if( $this->isLookupWhereCode( $field )) {
+			$events = getEventObject( $this );
+			$pageType = $this->getEffectiveEditFormat( $field );
+			if( !$events->hasLookupWhere( $field, $pageType ) ) {
+				return '';
+			}
+			return $events->lookupWhere( $field, $pageType );
 		}
 
-		return $this->getFieldData($field, "LookupWhere");
+		return $this->getFieldValue( $field, 'edit', 'lookupWhere' );
 	}
 
 
 
-	function getNotProjectLookupTableConnId($field)
-	{
-		return $this->getFieldData($field, "LookupConnId");
+	function getNotProjectLookupTableConnId( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'lookupTableConnection' );
 	}
 
 	function getConnId()
 	{
-		$connId = $this->getTableData( ".connId" );
-		if( $connId == "" ) {
-			return "lifebox_mesystem_at_localhost";
-		}
-		return $connId;
+		return $this->getTableValue( 'connId' );
 	}
 
-	function getLinkField($field)
-	{
-		return $this->getFieldData($field, "LinkField");
+	function getLinkField( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'lookupLinkField' );
 	}
 
-	function getLWLinkFieldType($field)
-	{
-		return $this->getFieldData($field, "LinkFieldType");
+	function getDisplayField( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'lookupDisplayField' );
 	}
 
-	function getDisplayField($field)
-	{
-		return $this->getFieldData($field, "DisplayField");
+	/**
+	 * Lookup custom display field
+	 */
+	function getCustomDisplay( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'lookupCustomDisplay' );
 	}
 
-	function getCustomDisplay($field)
-	{
-		return $this->getFieldData($field, 'CustomDisplay');
+	//	???
+	function NeedEncode( $field ) {
+		$nonEncodeViewFormats = array(
+			FORMAT_CUSTOM, 
+			FORMAT_HTML,
+			FORMAT_FILE,
+			FORMAT_FILE_IMAGE,
+			FORMAT_CHECKBOX,
+			FORMAT_EMAILHYPERLINK,
+			FORMAT_HYPERLINK
+		);
+		return array_search( $this->getViewFormat( $field ), $nonEncodeViewFormats ) === false;
 	}
 
-	//	viewFormats
-	function NeedEncode($field)
-	{
-		return $this->getFieldData($field, "NeedEncode");
+	/**
+	 * return String
+	 */
+	function getValidationType( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'validateAs' );
 	}
 
 	/**
 	 * Get array of validation for control
-	 * return array - of validations
 	 */
-	function getValidation($field)
-	{
-		return $this->getFieldData($field, "validateAs");
+	function getValidationData( $field ) {
+		$ret = array();
+		$ret["basicValidate"] = array();
+		$ret["customMessages"] = array();
+		$editFormat = $this->getEditFormat( $field );
+		$validationType = $this->getValidationType( $field );
+		if( $validationType && ( $editFormat == EDIT_FORMAT_TEXT_FIELD || $editFormat == EDIT_FORMAT_TIME || $editFormat == EDIT_FORMAT_PASSWORD ) ) {
+			$ret["basicValidate"][] = getJsValidatorName( $validationType );
+			if( $validationType === VALIDATE_AS_REGEXP ) {
+				$ret["regExp"] = $this->getFieldValue( $field, 'edit', 'validateRegex' );
+				$ret["customMessages"]["RegExp"] = $this->getFieldValue( $field, 'edit', 'validateRegexMessage' );
+			}
+		}
+		if( $this->isRequired( $field ) && $editFormat != EDIT_FORMAT_READONLY ) {
+			$ret["basicValidate"][] = "IsRequired";
+		}
+		if( !$this->allowDuplicateValues( $field ) ) {
+			$ret["basicValidate"][] = "DenyDuplicated";
+			$ret["customMessages"]["DenyDuplicated"] = $this->getFieldValue( $field, 'edit', 'denyDuplicateMessage' );
+		}
+		return $ret;
 	}
-
 
 	/**
 	 * Returns array of items for a given field
@@ -1088,8 +998,7 @@ class ProjectSettings
 	 * Check is appear current field on list page
 	 * return boolean - true or false
 	 */
-	function appearOnListPage($field)
-	{
+	function appearOnListPage( $field ) {
 		if( array_search( $field, $this->getPageOption("fields", "gridFields") ) !== FALSE )
 			return true;
 		if( isReport( $this->getEntityType() ) ) {
@@ -1102,8 +1011,7 @@ class ProjectSettings
 	 * Check is appear current field on add page
 	 * return boolean - true or false
 	 */
-	function appearOnAddPage($field)
-	{
+	function appearOnAddPage( $field ) {
 		return $this->appearOnPage( $field );
 	}
 
@@ -1111,8 +1019,7 @@ class ProjectSettings
 	 * Check is appear current field on inline add
 	 * return boolean
 	 */
-	function appearOnInlineAdd($field)
-	{
+	function appearOnInlineAdd( $field ) {
 		$fields =& $this->getInlineAddFields();
 		if( !$fields ) {
 			return false;
@@ -1124,8 +1031,7 @@ class ProjectSettings
 	 * Check is appear current field on edit page
 	 * return boolean - true or false
 	 */
-	function appearOnEditPage($field)
-	{
+	function appearOnEditPage( $field ) {
 		return $this->appearOnPage( $field );
 	}
 
@@ -1133,32 +1039,27 @@ class ProjectSettings
 	 * Check is appear current field on edit page
 	 * return boolean - true or false
 	 */
-	function appearOnInlineEdit($field)
-	{
+	function appearOnInlineEdit( $field ) {
 		$inlineFields =& $this->getInlineEditFields();
 		if( !$inlineFields ) {
 			return false;
 		}
 		return array_search( $field, $inlineFields ) !== FALSE;
-		//return $this->getFieldData($field, "bInlineEdit");
 	}
 
 	/**
 	 * Check is appear current field on edit page
 	 * return boolean - true or false
 	 */
-	function appearOnUpdateSelected($field)
-	{
+	function appearOnUpdateSelected( $field ) {
 		$updateOnEditFields = $this->getPageOption("fields", "updateOnEditFields");
 		if( !$updateOnEditFields )
 			return false;
 
 		return array_search( $field, $this->getPageOption("fields", "updateOnEditFields") ) !== FALSE;
-		//return $this->getFieldData($field, "bUpdateSelected");
 	}
 
-	function appearOnPage($field)
-	{
+	function appearOnPage( $field ) {
 		$gridFields = &$this->getPageOption("fields", "gridFields");
 		if( !$gridFields )
 			$ret = false;
@@ -1171,8 +1072,7 @@ class ProjectSettings
 		return $ret;
 	}
 
-	function appearOnSearchPanel($field)
-	{
+	function appearOnSearchPanel( $field ) {
 		$fields = &$this->getPageOption("fields", "searchPanelFields");
 		if( !$fields )
 			return false;
@@ -1203,8 +1103,7 @@ class ProjectSettings
 	 * Check is appear current field on view page
 	 * return boolean - true or false
 	 */
-	function appearOnViewPage($field)
-	{
+	function appearOnViewPage( $field ) {
 		return $this->appearOnPage( $field );
 	}
 
@@ -1212,39 +1111,32 @@ class ProjectSettings
 	 * Check is appear current field on print page
 	 * return boolean - true or false
 	 */
-	function appearOnPrinterPage($field)
-	{
+	function appearOnPrinterPage( $field ) {
 		return $this->appearOnListPage($field);
 	}
 
-	function isVideoUrlField($field)
-	{
-		return $this->getFieldData($field, "fieldIsVideoUrl");
+	function isVideoUrlField( $field ) {
+		return $this->getFieldValue( $field, 'view', 'videoFieldContainsFileURL' );
 	}
 
-	function isAbsolute($field)
-	{
-		return $this->getFieldData($field, "Absolute");
+	function isAbsolute( $field ) {
+		return $this->getFieldValue( $field, 'absolutePath' );
 	}
 
-	function getAudioTitleField($field)
-	{
-		return $this->getFieldData($field, "audioTitleField");
+	function getAudioTitleField( $field ) {
+		return $this->getFieldValue( $field, 'view', 'videoTitleField' );
 	}
 
-	function getVideoWidth($field)
-	{
-		return $this->getFieldData($field, "videoWidth");
+	function getVideoWidth( $field ) {
+		return $this->getFieldValue( $field, 'view', 'videoWidth' );
 	}
 
-	function getVideoHeight($field)
-	{
-		return $this->getFieldData($field, "videoHeight");
+	function getVideoHeight( $field ) {
+		return $this->getFieldValue( $field, 'view', 'videoHeight' );
 	}
 
-	function isRewindEnabled($field)
-	{
-		return $this->getFieldData($field, "RewindEnabled");
+	function isRewindEnabled( $field ) {
+		return $this->getFieldValue( $field, 'view', 'videoRewindEnabled' );
 	}
 
 	/**
@@ -1253,7 +1145,17 @@ class ProjectSettings
 	 */
 	function getParentFieldsData( $field )
 	{
-		return $this->getFieldData($field, "categoryFields");
+		if( !$this->useCategory( $field ) ) {
+			return array();
+		}
+		$categoryFields = array();
+		foreach( $this->getFieldValue( $field, 'edit', 'lookupDependentFields' ) as $fields ) {
+			$categoryFields[] = array(
+				'main' => $fields['masterField'],
+				'lookup' => $fields['lookupField']
+			);
+		}
+		return $categoryFields;
 	}
 
 	/**
@@ -1270,40 +1172,44 @@ class ProjectSettings
 		return $fNames;
 	}
 
-	function isLookupUnique($field)
-	{
-		return $this->getFieldData($field, "LookupUnique");
+	function isLookupUnique( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'lookupUnique' );
 	}
 
-	function getLookupOrderBy($field)
-	{
-		return $this->getFieldData($field, "LookupOrderBy");
+	function getLookupOrderBy( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'lookupOrderBy' );
 	}
 
-	function isLookupDesc($field)
-	{
-		return $this->getFieldData($field, "LookupDesc");
+	function isLookupDesc( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'lookupOrderByDesc' );
 	}
 
-	function getOwnerTable($field)
-	{
-		return $this->getFieldData($field, "ownerTable");
+	function getOwnerTable( $field ) {
+		return $this->getFieldValue( $field, 'tableName' );
 	}
 
-	function isFieldEncrypted($field)
-	{
-		return $this->getFieldData($field, "bIsEncrypted");
+	function isFieldEncrypted( $field ) {
+		return $this->getFieldValue( $field, 'encrypted' );
 	}
 
-	function isAllowToAdd($field)
-	{
-		return $this->getFieldData($field, "AllowToAdd");
+	function isAllowToAdd( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'lookupAllowAdd' );
 	}
 
-	function isSimpleAdd($field)
-	{
-		return $this->getFieldData($field, "SimpleAdd");
+	function isAllowToEdit( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'lookupAllowEdit' );
 	}
+
+	public static function encryptSettings( $connId ) {
+		$ret = ProjectSettings::getProjectValue( 'connEncryptInfo', $connId  );
+		if( !$ret ) {
+			$ret = array(
+				"encryptMethod" => 0
+			);
+		}
+		return $ret;
+	}
+
 
 	/**
 	 * Get the array containing the autocomplete fields data
@@ -1311,40 +1217,59 @@ class ProjectSettings
 	 * @param String field
 	 * @return Array
 	 */
-	function getAutoCompleteFields($field)
-	{
-		$editPageType = $this->getEditPageType();
+	function getAutoCompleteFields( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'lookupAutofillFields' );
+	}
 
-		if( $editPageType == PAGE_REGISTER || $editPageType == PAGE_ADD || $editPageType == PAGE_EDIT && ( $this->isSeparate($field) || $this->isAutoCompleteFieldsOnEdit($field) ) )
-		{
-			return $this->getFieldData($field, "autoCompleteFields");
+	function isAutoCompleteFieldsOnEdit( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'lookupAutofillEdit' );
+	}
+
+	function isFreeInput( $field ) {
+		return $this->lookupControlType( $field ) == LCT_AJAX 
+			&& $this->getDisplayField( $field ) == $this->getLinkField( $field )
+			&& $this->getFieldValue( $field, 'edit', 'lookupFreeInput' );
+	}
+
+	function getMapData( $field ) {
+		if( $this->getViewFormat( $field ) != FORMAT_MAP ) {
+			return array();
 		}
-
-		return $this->getDefaultValueByKey("autoCompleteFields");
+		$mapData = array(
+			'width' => $this->getFieldValue( $field, 'view', 'mapWidth' ),
+			'height' => $this->getFieldValue( $field, 'view', 'mapHeight' ),
+			'address' => $this->getFieldValue( $field, 'view', 'mapAddressField' ),
+			'lat' => $this->getFieldValue( $field, 'view', 'mapLatField' ),
+			'lng' => $this->getFieldValue( $field, 'view', 'mapLonField' ),
+			'desc' => $this->getFieldValue( $field, 'view', 'mapDescriptionField' ),
+			'mapIcon' => $this->getFieldValue( $field, 'view', 'mapMarkerIcon' ),
+			'isMapIconCustom' => $this->getFieldValue( $field, 'view', 'mapMarkerCodeExpression' ),
+		);
+		$zoom = $this->getFieldValue( $field, 'view', 'mapZoom' );
+		if( $zoom ) {
+			$mapData[ 'zoom' ] = $zoom;
+		}
+		return $mapData;
 	}
 
-	function isAutoCompleteFieldsOnEdit($field)
-	{
-		return $this->getFieldData($field, "autoCompleteFieldsOnEdit");
-	}
-
-	function isFreeInput($field)
-	{
-		return $this->getFieldData($field, "freeInput");
-	}
-
-	function getMapData($field)
-	{
-		return $this->getFieldData($field, "mapData");
-	}
-
-	function getFormatTimeAttrs($field)
-	{
-		return $this->getFieldData($field, "FormatTimeAttrs");
+	function getFormatTimeAttrs( $field ) {
+		$hours = $this->getFieldValue( $field, 'edit', 'timeConvention' ) == 0
+			? 12
+			: 24;
+		return array(
+			"useTimePicker" => $this->getFieldValue( $field, 'edit', 'timeUseTimepicker' ),
+			"hours" => $hours,
+			"minutes" => $this->getFieldValue( $field, 'edit', 'timeMinutesStep' ),
+			"showSeconds" => $this->getFieldValue( $field, 'edit', 'timeShowSeconds' )
+		);
 	}
 
 	function getViewAsTimeFormatData( $field ) {
-		return $this->getFieldData( $field, "timeFormatData" );
+		return array(
+			"showSeconds" => $this->getFieldValue( $field, 'view', 'timeShowSeconds' ),
+			"showDaysInTotals" => false,
+			"timeFormat" => $this->getFieldValue( $field, 'view', 'timeFormat' )
+		);
 	}
 
 	function showDaysInTimeTotals( $field ) {
@@ -1356,8 +1281,7 @@ class ProjectSettings
 	 * Check is appear current field on export page
 	 * return boolean - true or false
 	 */
-	function appearOnExportPage($field)
-	{
+	function appearOnExportPage( $field ) {
 		return $this->appearOnpage($field);
 	}
 
@@ -1366,7 +1290,7 @@ class ProjectSettings
 	 */
 	function getStrOriginalTableName()
 	{
-		return $this->getTableData(".strOriginalTableName");
+		return $this->getTableValue( 'originalTable' );
 	}
 
 	function getSearchableFields()
@@ -1374,7 +1298,7 @@ class ProjectSettings
 		if( $this->getEntityType() == titDASHBOARD ) {
 			return $this->getPageOptionAsArray( 'dashSearch', 'allSearchFields');
 		}
-		return $this->getTableData(".searchableFields");
+		return $this->getTableValue( 'searchSettings', 'searchableFields' );
 	}
 
 	function getAllSearchFields()
@@ -1389,42 +1313,34 @@ class ProjectSettings
 		return $this->getPageOptionAsArray("fields", "gridFields");
 	}
 
-	function isUseTimeForSearch()
-	{
-		return $this->getTableData(".isUseTimeForSearch");
+
+	public function getDefaultPageType() {
+		return ProjectSettings::defaultPageType( $this->getEntityType() );
 	}
 
-	/**
-	 * @deprecated
-	 */
-	function isUseToolTips()
+	public static function defaultPageType( $entityType )
 	{
-		return $this->getTableData(".isUseToolTips");
-	}
-
-	function isUseVideo()
-	{
-		return $this->getTableData(".isUseVideo");
-	}
-
-	function isUseAudio()
-	{
-		return $this->getTableData(".isUseAudio");
-	}
-
-	function isUseAudioOnDetails()
-	{
-		for($i = 0; $i < count($this->_detailsTableData); $i++)
-		{
-			if($this->_detailsTableData[$i]["isUseAudio"])
-				return true;
+		switch( $entityType ) {
+			case titTABLE:
+			case titVIEW:
+			case titSQL:
+			case titREST:
+				return 'list';
+			case titDASHBOARD:
+				return 'dashboard';
+			case titGLOBAL:
+				return 'menu';
+				
+			case titREPORT:
+			case titSQL_REPORT:
+			case titREST_REPORT:
+				return 'report';
+			case titCHART:
+			case titSQL_CHART:
+			case titREST_CHART:
+				return 'chart';
 		}
-		return false;
-	}
-
-	function getTableType()
-	{
-		return $this->getTableData(".tableType");
+		return '';
 	}
 
 	function getShortTableName()
@@ -1449,20 +1365,14 @@ class ProjectSettings
 
 	function isResizeColumns()
 	{
-		return $this->getTableData(".isResizeColumns");
+		return $this->getTableValue( 'resizeColumns' );
 	}
 
 	function isUseAjaxSuggest()
 	{
-		return $this->getTableData(".isUseAjaxSuggest");
+		return $this->getTableValue( 'searchSettings', 'searchSuggest' );
 	}
 
-/*
-	function getDetailsLinksOnList()
-	{
-		return $this->getTableData(".detailsLinksOnList");
-	}
-*/
 
 	function getAllPageFields()
 	{
@@ -1474,18 +1384,13 @@ class ProjectSettings
 		return $this->getPageOptionAsArray("listSearch", "alwaysOnPanelFields");
 	}
 
-	function getSearchPanelOptions()
-	{
-		return $this->GetTableData(".searchPanelOptions");
-	}
-
 	function getGoogleLikeFields()
 	{
 		if( $this->getEntityType() == titDASHBOARD )
 		{
 			return $this->getPageOptionAsArray( 'dashSearch', 'googleLikeFields');
 		}
-		return $this->getTableData(".googleLikeFields");
+		return $this->getTableValue( 'searchSettings', 'googleLikeSearchFields' );
 
 	}
 
@@ -1559,14 +1464,9 @@ class ProjectSettings
 		return $fields;
 	}
 
-	function isAddPageEvents()
+	function hasJsEvents()
 	{
-		return $this->getAuxTableData(".addPageEvents");
-	}
-
-	function hasAjaxSnippet()
-	{
-		return $this->getTableData(".ajaxCodeSnippetAdded");
+		return $this->getAuxTableValue("hasJsEvents");
 	}
 
 	function hasButtonsAdded()
@@ -1579,186 +1479,157 @@ class ProjectSettings
 		return $this->getPageOptionAsArray("page", "customButtons");
 	}
 
-	function isUseFieldsMaps()
-	{
-		return $this->getTableData(".isUseFieldsMaps");
+	function clickHandlerSnippets()	{
+		return $this->getPageOptionAsArray("page", "clickHandlerSnippets");
 	}
 
+	function isUseFieldsMaps()
+	{
+		return $this->getTableValue( 'hasFieldMaps' );
+	}
+	function getOrderInfo() {
+		return $this->getTableValue( 'orderInfo' );
+	}
+
+	/**
+	 * 	legacy order info format
+	 * [ index, direction, field ]
+	 * In new code use getOrderInfo instead
+	 */
 	function getOrderIndexes()
 	{
-		return $this->getTableData(".orderindexes");
+		$ret = array();
+		foreach( $this->getOrderInfo() as $o ) {
+			$ret[] = array( $o['index'], $o['dir'], $o['field'] );
+		}
+		return $ret;
 	}
 
 	function getStrOrderBy()
 	{
-		return $this->getTableData(".strOrderBy");
+		return $this->getTableValue( 'strOrderBy' );
 	}
 
-	function getSQLQuery()
-	{
-		$query = $this->getTableData(".sqlquery");
-		if($query != null)
-		{
-			return $query;
-		}
-		return null;
+	function getSQLQuery() {
+		return ProjectSettings::getTableSQLQuery( $this->table() );
 	}
-	/* Dashboard-safe version of getSQLQuery
-	*/
-	function getSQLQueryByField( $field )
-	{
-		if( $this->getTableType() == PAGE_DASHBOARD )
-		{
-			$query = $this->getDashTableData($field, ".sqlquery");
-			if($query != null)
-			{
-				return $query;
-			}
-			return null;
 
-		}
-		else
-		{
-			$query = $this->getTableData(".sqlquery");
-			if($query != null)
-			{
-				return $query;
-			}
+	static function getTableSQLQuery( $table ) {
+		global $runnerTableSettings;
+		$tableData = &$runnerTableSettings[ $table ];
+		if( !$tableData ) {
 			return null;
 		}
+		if( !$tableData['sqlQuery'] ) {
+			$tableData['sqlQuery'] = sqlFromJson( $tableData['query'] );
+		}
+		return $tableData['sqlQuery'];
 
+	}
+	
+	function getSQLQueryByField( $field ) {
+		if( $this->getEntityType() == titDASHBOARD ) {
+			$pSet = $this->getDashSearchFieldSettings( $field );
+			return $pSet->getSQLQuery();
+		} else {
+			return $this->getSQLQuery();
+		}
+	}
+
+	function getDashSearchFieldSettings( $field ) {
+		$dashSearchFields = $this->getDashboardSearchFields();
+		return new ProjectSettings($dashSearchFields[$field][0]["table"], $this->_editPage);
 	}
 
 	/**
 	 * Create Thumbnail or not
 	 */
-	function getCreateThumbnail($field)
-	{
-		return $this->getFieldData($field, "CreateThumbnail");
+	function getCreateThumbnail( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'fileCreateThumbnail' );
 	}
 
 	/**
 	 * Return Thumbnail prefix
 	 */
-	function getStrThumbnail($field)
-	{
-		return $this->getFieldData($field, "StrThumbnail");
+	function getStrThumbnail( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'fileThumbnailPrefix' );
+	}
+	function getThumbnailField( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'fileThumbnailField' );
 	}
 
 	/**
 	 * Return Thumbnail prefix
 	 */
-	function getThumbnailSize($field)
-	{
-		return $this->getFieldData($field, "ThumbnailSize");
+	function getThumbnailSize( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'fileThumbnailSize' );
 	}
 
 	/**
 	 * Resize on upload
 	 */
-	function getResizeOnUpload($field)
-	{
-		return $this->getFieldData($field, "ResizeImage");
+	function getResizeOnUpload( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'fileResize' );
 	}
 
 	/**
 	 * True if FileField must work in old single-file mode
 	 */
-	function isBasicUploadUsed($field)
-	{
-		return $this->getFieldData($field, "CompatibilityMode");
-	}
-
-	/**
-	 * True if file in FileField must be uploaded immediately after choosing or dropping
-	 */
-	function isAutoUpload($field)
-	{
-		return $this->getFieldData($field, "autoUpload");
+	function isBasicUploadUsed( $field ) {
+		return $this->getFieldValue( $field, 'basicUpload' );
 	}
 
 	/**
 	 * Get size to reduce image after upload
 	 */
-	function getNewImageSize($field)
-	{
-		return $this->getFieldData($field, "NewSize");
+	function getNewImageSize( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'fileResizeSize' );
 	}
 
-	function getAcceptFileTypes($field)
-	{
-		return $this->getFieldData($field, "acceptFileTypes");
+	function getAcceptFileTypes( $field ) {
+		$ret = array();
+		foreach( $this->getFieldValue( $field, 'edit', 'fileTypes' ) as $ext ) {
+			$ret[] = strtoupper( $ext );
+		}
+		return $ret;
 	}
 
-	function getAcceptFileTypesHtml($field)
-	{
-		return $this->getFieldData($field, "acceptFileTypesHtml");
+	function getAcceptFileTypesHtml( $field ) {
+		$ret = array();
+		foreach( $this->getFieldValue( $field, 'edit', 'fileTypes' ) as $ext ) {
+			$ret[] = '.' . $ext;
+		}
+		return implode( ',', $ret );
+
 	}
 
 	/**
 	 * Get maximum allowed size for uploaded files
 	 */
-	function getMaxFileSize($field)
-	{
-		return $this->getFieldData($field, "maxFileSize");
+	function getMaxFileSize( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'fileSizeLimit' );
 	}
 
 	/**
 	 * Get maximum allowed size for all uploaded files per field
 	 */
-	function getMaxTotalFilesSize($field)
-	{
-		return $this->getFieldData($field, "maxTotalFilesSize");
+	function getMaxTotalFilesSize( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'fileTotalSizeLimit' );
 	}
 
 	/**
 	 * Get maximum allowed number of uploaded files
 	 */
-	function getMaxNumberOfFiles($field)
-	{
-		return $this->getFieldData($field, "maxNumberOfFiles");
-	}
-
-	/**
-	 * Get maximum allowed width of uploaded image
-	 */
-	function getMaxImageWidth($field)
-	{
-		return $this->getFieldData($field, "maxImageWidth");
-	}
-
-	/**
-	 * Get maximum allowed heiht of uploaded image
-	 */
-	function getMaxImageHeight($field)
-	{
-		return $this->getFieldData($field, "maxImageHeight");
-	}
-
-	/**
-	 * Get size to reduce image after upload
-	 */
-	function getStrFilename($field)
-	{
-		return $this->getFieldData($field, "strFilename");
+	function getMaxNumberOfFiles( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'fileMaxNumber' );
 	}
 
 	/**
 	 * Return height of text area
 	 * EditFormat setting
 	 */
-	function getNRows($field)
-	{
-		return $this->getFieldData($field, "nRows");
-	}
-
-	/**
-	 * Return width of text area
-	 * EditFormat setting
-	 */
-	function getNCols($field)
-	{
-		return $this->getFieldData($field, "nCols");
+	function getNRows( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'textareaHeight' );
 	}
 
 	/**
@@ -1766,7 +1637,7 @@ class ProjectSettings
 	 */
 	function getOriginalTableName()
 	{
-		$result = $this->getTableData(".OriginalTable");
+		$result = $this->getTableValue("originalTable");
 		return $result != "" ? $result : $this->_table;
 	}
 
@@ -1775,186 +1646,366 @@ class ProjectSettings
 	 */
 	function getTableKeys()
 	{
-		return $this->getTableData(".Keys");
+		return $this->getTableValue( 'keyFields' );
 	}
 
-	function isLargeTextTruncationSet($field)
-	{
-		return $this->getFieldData($field, "truncateText");
+	function truncateLargeText( $field ) {
+		return $this->getFieldValue( $field, 'view', 'textShowFirst' );
 	}
 
 	/**
 	 * Return number of chars to show before "More..." link
 	 */
-	function getNumberOfChars($field)
-	{
-		return $this->getFieldData($field, "NumberOfChars");
+	function getNumberOfChars( $field ) {
+		return $this->truncateLargeText( $field ) 
+			? $this->getFieldValue( $field, 'view', 'textShowFirstN' )
+			: 0;
 	}
 
 	/**
 	 * Check if the field is an sql expression
 	 */
-	function isSQLExpression($field)
-	{
-		return $this->getFieldData($field, "isSQLExpression");
+	function isSQLExpression( $field ) {
+		return !!$this->getFieldValue( $field, 'sqlExpression' );
 	}
 
 	/**
 	 * Get full field name
 	 */
-	function getFullFieldName($field)
-	{
-		return $this->getFieldData($field, "FullName");
+	function getFullFieldName( $field ) {
+		return $this->getFieldValue( $field, 'sqlExpression' );
 	}
 
 	/**
-	 * set full field name
+	 * For Meetings business template only
 	 */
-	function setFullFieldName($field, $value)
-	{
-		return $this->setFieldData($field, "FullName", $value);
-	}
-
-
-	/**
-	 * Return table Owner ID field
-	 */
-	function getTableOwnerID()
-	{
-		return $this->getTableData(".OwnerID");
+	function setFullFieldName( $field, $value ) {
+		$this->_tableData['fields'][ $field ][ 'sqlExpression' ] = $value;
 	}
 
 	/**
 	 * Is field marked as required
 	 * EditFormat setting
 	 */
-	function isRequired($field)
-	{
-		return $this->getFieldData($field, "IsRequired");
+	function isRequired( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'required' );
 	}
 
-	function insertNull($field)
-	{
-		return $this->getFieldData($field, "insertNull");
+	function insertNull( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'textInsertNull' );
 	}
 
 	/**
 	 * IS use Rich Text Editor or not
 	 */
-	function isUseRTE($field)
-	{
-		return $this->getFieldData($field, "UseRTE");
+	function isUseRTE( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'textareaRTE' );
 	}
 
-	/**
-	 * Is use Rich Text Editor BASIC or not
-	 */
-	function isUseRTEBasic($field)
-	{
-		global $isUseRTEBasic;
-		return $this->isUseRTE($field) && $isUseRTEBasic;
-	}
-
-	/**
-	 * Is use Rich Text Editor FCK or not
-	 */
-	function isUseRTEFCK($field)
-	{
-		global $isUseRTECK;
-		return $this->isUseRTE($field) && $isUseRTECK;
-	}
-
-	/**
-	 * check if RTE CKEditor version 5 is used in project
-	 */
-	function isUseRTECKNew($field)
-	{
-		global $isUseRTECKNew;
-		return $this->isUseRTE($field) && $isUseRTECKNew;
-	}
-
-	/**
-	 * Is use Rich Text Editor INNOVA or not
-	 */
-	function isUseRTEInnova($field)
-	{
-		global $isUseRTEInnova;
-		return $this->isUseRTE($field) && $isUseRTEInnova;
-	}
 
 	/**
 	 * Add timestamp to filename when files uploading or not
 	 * EditFormat setting
 	 */
-	function isUseTimestamp($field)
-	{
-		return $this->getFieldData($field, "UseTimestamp");
+	function isUseTimestamp( $field ) {
+		return $this->getFieldValue( $field, "edit", "fileAddTimestamp" );
 	}
 
-	function getFieldIndex($field)
-	{
-		return $this->getFieldData($field, "Index");
+	function getFieldIndex( $field ) {
+		return $this->getFieldValue( $field, 'index' );
 	}
 
 	function getEntityType()
 	{
-		return $this->getTableData(".entityType");
+		return $this->getTableValue( "type" );
+	}
+
+	function getAuxEntityType()
+	{
+		return $this->getAuxTableValue( "type" );
+	}
+
+	protected function getDefaultFieldValue( $path1, $path2 = null, $path3 = null, $path4 = null ) {
+		$path = array( "fields", "" );
+		if( $path1 === "filter" ) {
+			$path[] = "filterFormat";
+		} else if( $path1 === "view" ) {
+			$path[] = "filterFormats";		
+			$path[] = '';
+		} else if( $path1 === "edit" ) {
+			$path[] = "editFormats";		
+			$path[] = '';
+		} else {
+			$path[] = $path1;
+		}
+		if( $path2 !== null ) $path[] = $path2;
+		if( $path3 !== null ) $path[] = $path3;
+		if( $path4 !== null ) $path[] = $path4;
+		return ProjectSettings::_getTableDefault( $path );
+
+	}
+
+	function getDashFieldValue( $field, $path1, $path2 = null, $path3 = null, $path4 = null ) {
+		$dashSearchFields = $this->getDashboardSearchFields();
+		$dfield = $dashSearchFields[ $field ];
+		if( $dfield )
+			$table = $dfield[0]["table"];
+		if( !$dfield || !$table)
+			return $this->getDefaultFieldvalue( $path1, $path2, $path3, $path4 );
+
+		if( !$this->_dashboardElemPSet[ $table ] )
+			$this->_dashboardElemPSet[ $table ] = new ProjectSettings( $table, $this->_editPage );
+
+		return $this->_dashboardElemPSet[ $table ]->getFieldValue( $dfield[0]["field"], $path1, $path2, $path3, $path4 );
+	}
+
+	public static function & getFieldObj( $table, $field ) {
+		global $runnerTableSettings;
+		return $runnerTableSettings[ $table ][ 'fields' ][ $field ];
+	}
+
+	public static function & getFieldEditFormat( $table, $field, $pageType = 'edit' ) {
+		$fieldObj = & ProjectSettings::getFieldObj( $table, $field );
+		if( !array_key_exists( $pageType, $fieldObj['editFormats'] ) ) {
+			$pageTypes = array_keys( $fieldObj['editFormats'] );
+			$pageType = $pageTypes[0];
+		}
+		return $fieldObj['editFormats'][ $pageType ];
+	}
+
+	public static function & getFieldViewFormat( $table, $field, $pageType = 'view' ) {
+		$fieldObj = & ProjectSettings::getFieldObj( $table, $field );
+		if( !array_key_exists( $pageType, $fieldObj['viewFormats'] ) ) {
+			$pageTypes = array_keys( $fieldObj['viewFormats'] );
+			$pageType = $pageTypes[0];
+		}
+		return $fieldObj['viewFormats'][ $pageType ];
+	}
+
+	
+	/**
+	 * Special values for $path1
+	 * "view" -> effective view format value
+	 * "edit" -> effective edit format value
+	 * "filter" -> filter format
+	 */
+	public function getFieldValue( $field, $path1, $path2 = null, $path3 = null, $path4 = null ) {
+
+		if( $this->getEntityType() == titDASHBOARD ) {
+			return $this->getDashFieldValue( $field, $path1, $path2, $path3, $path4 );
+		}
+
+		if( !$this->_tableData['fields'] || !array_key_exists( $field, $this->_tableData['fields'] ) ) {
+			return $this->getDefaultFieldvalue( $path1, $path2, $path3, $path4 );
+		}
+		if( $path1 === "filter" ) {
+			$path1 = "filterFormat";
+		}
+		$path = array( "fields", $field );
+		if( $path1 == "view" ) {
+			$path[] = "viewFormats";
+			$path[] = $this->getEffectiveViewFormat( $field );
+		} else if( $path1 == "edit" ) {
+			$path[] = "editFormats";
+			$path[] = $this->getEffectiveEditFormat( $field );
+		} else {
+			$path[] = $path1;
+		}
+		if( $path2 !== null ) $path[] = $path2;
+		if( $path3 !== null ) $path[] = $path3;
+		if( $path4 !== null ) $path[] = $path4;
+		$value = ProjectSettings::_getSettingsValue( $this->_tableData, $path );
+		if( $value === null ) {
+			return ProjectSettings::_getTableDefault( $path );
+		}
+		return $value;
+	}
+
+	public function getCalendarValue( $name ) { 
+		return $this->getTableValue( 'calendarSettings', $name );
+	}
+
+	public function getGanttValue( $name ) { 
+		return $this->getTableValue( 'ganttSettings', $name );
+	}
+
+	public function getTableValue( $path1, $path2 = null, $path3 = null, $path4 = null ) {
+		$path = array( $path1 );
+		if( $path2 !== null ) $path[] = $path2;
+		if( $path3 !== null ) $path[] = $path3;
+		if( $path4 !== null ) $path[] = $path4;
+		
+		$value = ProjectSettings::_getSettingsValue( $this->_tableData, $path );
+		if( $value === null ) {
+			return ProjectSettings::_getTableDefault( $path );
+		}
+		return $value;
+	}
+
+	protected function getAuxTableValue( $path1, $path2 = null, $path3 = null, $path4 = null  ) {
+		$path = array( $path1 );
+		if( $path2 !== null ) $path[] = $path2;
+		if( $path3 !== null ) $path[] = $path3;
+		if( $path4 !== null ) $path[] = $path4;
+		
+		$value = ProjectSettings::_getSettingsValue( $this->_auxTableData, $path );
+		if( $value === null ) {
+			return ProjectSettings::_getTableDefault( $path );
+		}
+		return $value;
+	}
+
+	public static function passwordValidationValue( $name ) {
+		return ProjectSettings::getSecurityValue('registration', 'passwordValidation', $name );
+	}
+
+	public static function & staticPermissions() {
+		return ProjectSettings::getSecurityValue( 'staticPermissions', 'groups' );
+	}
+
+	public static function twoFactorValue( $name )	{
+		return ProjectSettings::getSecurityValue( 'twoFactorSettings', $name );
+	}
+
+	public static function captchaValue( $name ) {
+		return ProjectSettings::getSecurityValue( 'captchaSettings', $name );
+	}
+
+	public static function getSecurityValue( $path1, $path2 = null, $path3 = null, $path4 = null  ) {
+		$path = array( 'security', $path1 );
+		if( $path2 !== null ) $path[] = $path2;
+		if( $path3 !== null ) $path[] = $path3;
+		if( $path4 !== null ) $path[] = $path4;
+		
+		global $runnerProjectSettings, $runnerProjectDefaults;
+		$value = ProjectSettings::_getSettingsValue( $runnerProjectSettings, $path );
+		if( $value === null ) {
+			return ProjectSettings::_getDefaultSetting( $runnerProjectDefaults, $path );
+		}
+		return $value;
+	}
+
+	public static function getProjectValue( $path1, $path2 = null, $path3 = null, $path4 = null  ) {
+		$path = array( $path1 );
+		if( $path2 !== null ) $path[] = $path2;
+		if( $path3 !== null ) $path[] = $path3;
+		if( $path4 !== null ) $path[] = $path4;
+		
+		global $runnerProjectSettings, $runnerProjectDefaults;
+		$value =  ProjectSettings::_getSettingsValue( $runnerProjectSettings, $path );
+		if( $value === null ) {
+			return ProjectSettings::_getDefaultSetting( $runnerProjectDefaults, $path );
+		}
+		return $value;
+	}
+
+	public static function & getProjectTables() {
+		global $runnerProjectSettings;
+		return $runnerProjectSettings['allTables'];
+	}
+	
+
+	protected static function _getSettingsValue( &$root, $path ) {
+		$ptr = &$root;
+		foreach( $path as $p ) {
+			if( !is_array( $ptr ) ) {
+				return null;
+			}
+			if( !isset( $ptr[ $p ] ) ) {
+				return null;
+			}
+			$ptr = &$ptr[ $p ];
+		}
+		return $ptr;
+	}
+
+
+	/**
+	 * @param Array() $path - path in the TableSettings array
+	 */
+	protected static  function _getTableDefault( $path ) {
+		
+		global $runnerTableDefaults;
+		return ProjectSettings::_getDefaultSetting( $runnerTableDefaults, $path );
+	}
+
+	protected static function _getDefaultSetting( &$root, $path ) {
+		$ptr = &$root;
+		foreach( $path as $p ) {
+			if( !is_array( $ptr ) ) {
+				global $strictSettings;
+				if( $strictSettings ) {
+					echo "error in _getDefaultSetting";
+					debugVar( $path );
+					printStack();
+					exit();
+				}
+				
+				return null;
+			}
+			if( isset( $ptr['__meta__'] ) ) {
+				$metaType = $ptr['__meta__'];
+				$ptr = &$ptr[ '__object__' ];
+				if( $metaType === metaObject ) {
+					$ptr = &$ptr[ $p ];
+				}
+			} else {
+				$ptr = &$ptr[ $p ];
+			}
+		}
+		if( is_array($ptr) && $ptr['__meta__'] ) {
+			return array();
+		}
+		return $ptr;
 	}
 
 
 	/**
 	 * Return Date field edit type
 	 */
-	function getDateEditType($field)
-	{
-		return $this->getFieldData($field, "DateEditType");
+	function getDateEditType( $field ) {
+		return $this->getFieldValue( $field, "edit", "dateEditType" );
 	}
 
-	function getHTML5InputType($field)
-	{
-		return $this->getFieldData($field, "HTML5InuptType");
+	function getHTML5InputType( $field ) {
+		return $this->getFieldValue( $field, "edit", "textHTML5Input" );
 	}
 
-	/**
-	 * Return text edit parameters
-	 */
-	function getEditParams($field)
-	{
-		return $this->getFieldData($field, "EditParams");
+	function getMaxLength( $field ) {
+		return $this->getFieldValue( $field, "edit", "textboxMaxLenth" );
 	}
 
-
-	function getControlWidth($field)
-	{
-		return $this->getFieldData($field, "controlWidth");
+	function getControlWidth( $field ) {
+		return $this->getFieldValue( $field, "edit", "textboxSize" );
 	}
 
 	/**
 	 * Check whether field is viewable
 	 */
-	function checkFieldPermissions($field)
-	{
+	function checkFieldPermissions( $field ) {
 		return $this->appearOnPage( $field );
 	}
 
 	function getTableOwnerIdField()
 	{
-		return $this->getTableData(".mainTableOwnerID");
+		return $this->getTableValue( 'tableOwnerIdField' );
 	}
 
-	function isHorizontalLookup($field)
-	{
-		return $this->getFieldData($field, "HorizontalLookup");
+	function hasEvents() {
+		return $this->getTableValue( 'hasEvents' );
 	}
 
-	function isDecimalDigits($field)
-	{
-		return $this->getFieldData($field, "DecimalDigits");
+
+	function isHorizontalLookup( $field ) {
+		return $this->getFieldValue( $field, "edit", "lookupHorizontal" );
 	}
 
-	function getLookupValues($field)
-	{
-		return $this->getFieldData($field, "LookupValues");
+	function isDecimalDigits( $field ) {
+		return $this->getFieldValue( $field, 'view', 'numberFractionalDigits' );
+	}
+
+	function getLookupValues( $field ) {
+		return $this->getFieldValue( $field, "edit", "lookupValues" );
 	}
 
 	function hasEditPage()
@@ -2017,13 +2068,13 @@ class ProjectSettings
 		return $this->getPageOption("list", "sortDropdown");
 	}
 
-	function getSortControlSettingsJSONString()
+	function getSortControlSettings()
 	{
-		return $this->getTableData(".strSortControlSettingsJSON");
+		return $this->getTableValue( 'sortByFields', 'sortOrder' );
 	}
-	function getClickActionJSONString()
+	function getClickActions()
 	{
-		return $this->getTableData(".strClickActionJSON");
+		return $this->getTableValue( 'clickActions' );
 	}
 
 	function hasCopyPage()
@@ -2068,6 +2119,10 @@ class ProjectSettings
 		return $this->getPageOption("page", "calcTotalsFor");
 	}
 
+	function pageHasCharts() {
+		return $this->getPageOption("page", "hasCharts");
+	}
+
 	function getExportTxtFormattingType()
 	{
 		return $this->getPageOption("export","format");
@@ -2102,31 +2157,49 @@ class ProjectSettings
 	{
 		if( !Security::advancedSecurityAvailable() )
 			return ADVSECURITY_ALL;
-		return $this->getTableData(".nSecOptions");
+		return $this->getTableValue( 'advancedSecurityType' );
 	}
 	function displayLoading()
 	{
-		return $this->getTableData(".isDisplayLoading");
+		return $this->getTableValue( 'displayLoading' );
 	}
-	function getRecordsPerPageArray()
-	{
-		return $this->getTableData(".arrRecsPerPage");
+	function getRecordsPerPageArray() {
+		$values = $this->getTableValue( 'pageSizeSelectorRecords' );
+		return $this->postProcessPerPageArr( 
+			$values 
+				? $values 
+				: array( '10', '20', '30', '50', '100', '500', 'all' )
+		);
 	}
-	function getGroupsPerPageArray()
-	{
-		return $this->getTableData(".arrGroupsPerPage");
+
+	function getGroupsPerPageArray() {
+		$values = $this->getTableValue( 'pageSizeSelectorGroups' );
+		return $this->postProcessPerPageArr( 
+			$values 
+				? $values 
+				: array( '1', '3', '5', '10', '50', '100', 'all' )
+		);
 	}
+
+	protected function postProcessPerPageArr( $values ) {
+		$ret = array();
+		foreach( $values as $v ) {
+			$ret[] = $v == 'all'
+				? '-1'
+				: $v;
+		}
+		return $ret;
+	}
+
 
 	function isReportWithGroups()
 	{
 		return !!$this->getPageOption("newreport", "reportInfo", "groupFields" );
-		//return $this->getTableData(".reportGroupFields");
 	}
 
 	function isCrossTabReport()
 	{
 		return $this->getPageOption("newreport", "reportInfo", "crosstab" );
-		//return $this->getTableData(".crossTabReport");
 	}
 
 	function getReportGroupFields()
@@ -2151,7 +2224,6 @@ class ProjectSettings
 			$ret[] = $gdata;
 		}
 		return $ret;
-//		return $this->getTableData(".reportGroupFieldsData");
 	}
 
 	function reportHasHorizontalSummary()
@@ -2176,7 +2248,6 @@ class ProjectSettings
 
 	function getReportLayout()
 	{
-		//return  $this->getTableData(".reportLayout");
 		$rLayout =  $this->getPageOption("newreport", "reportInfo", "layout" );
 		if( $rLayout === 'stepped' ) {
 			return REPORT_STEPPED;
@@ -2234,62 +2305,22 @@ class ProjectSettings
 
 	function noRecordsOnFirstPage()
 	{
-		return $this->getTableData(".noRecordsFirstPage");
-	}
-
-	function isViewPagePDF()
-	{
-		return $this->getTableData(".isViewPagePDF");
-	}
-
-	function isLandscapeViewPDFOrientation()
-	{
-		return $this->getTableData(".isLandscapeViewPDFOrientation");
-	}
-
-	function isViewPagePDFFitToPage()
-	{
-		return $this->getTableData(".isViewPagePDFFitToPage");
-	}
-
-	function getViewPagePDFScale()
-	{
-		return $this->getTableData(".nViewPagePDFScale");
-	}
-
-	function isLandscapePrinterPagePDFOrientation()
-	{
-		return $this->getTableData(".isLandscapePrinterPagePDFOrientation");
-	}
-
-	function isPrinterPagePDFFitToPage()
-	{
-		return $this->getTableData(".isPrinterPagePDFFitToPage");
-	}
-
-	function getPrinterPagePDFScale()
-	{
-		return $this->getTableData(".nPrinterPagePDFScale");
+		return $this->getTableValue( 'searchSettings', 'hideDataUntilSearch' );
 	}
 
 	function isPrinterPageFitToPage()
 	{
-		return $this->getTableData(".isPrinterPageFitToPage");
+		return $this->getTableValue( 'printFitToPage' );
 	}
 
 	function getPrinterPageScale()
 	{
-		return $this->getTableData(".nPrinterPageScale");
+		return $this->getTableValue( 'printScale' );
 	}
 
 	function getPrinterSplitRecords()
 	{
-		return $this->getTableData(".nPrinterSplitRecords");
-	}
-
-	function getPrinterPDFSplitRecords()
-	{
-		return $this->getTableData(".nPrinterPDFSplitRecords");
+		return $this->getTableValue( 'pageSizePrintRecords' );
 	}
 
 	function isPrinterPagePDF()
@@ -2307,29 +2338,27 @@ class ProjectSettings
 
 	function isSearchRequiredForFiltering()
 	{
-		return $this->getTableData(".searchIsRequiredForFilters");
+		return $this->getTableValue( 'searchSettings', 'hideFilterUntilSearch' );
 	}
 	function warnLeavingPages()
 	{
-		return $this->getTableData(".warnLeavingPages");
+		return $this->getTableValue( 'warnLeavingEdit' );
 	}
 
 	function hideEmptyViewFields()
 	{
-		return $this->getTableData(".hideEmptyFieldsOnView");
+		return $this->getTableValue( 'hideEmptyFieldsOnView' );
 	}
 
 	function getInitialPageSize()
 	{
 		if( isReport( $this->getEntityType() ) ) {
 			if( $this->isReportWithGroups() ) {
-				return $this->getTableData(".pageSizeGroups");
-			} else {
-				return $this->getTableData(".pageSizeRecords");
+				return $this->getTableValue("pageSizeGroups");
 			}
 
 		}
-		return $this->getTableData(".pageSize");
+		return $this->getTableValue("pageSizeRecords");
 	}
 
 	function getRecordsPerRowList()
@@ -2344,7 +2373,7 @@ class ProjectSettings
 
 	function getRecordsLimit()
 	{
-		return $this->getTableData(".recsLimit");
+		return $this->getTableValue( 'limitRecords' );
 	}
 
 	function useMoveNext()
@@ -2367,36 +2396,24 @@ class ProjectSettings
 		return $this->getPageOption("page", "gridType");
 	}
 
-	/*
-	function getReportPrintLayout()
-	{
-		return $this->getTableData(".printReportLayout");
-	}
-	*/
-
 	function getPrinterPageOrientation()
 	{
-		return $this->getTableData(".printerPageOrientation");
+		return $this->getTableValue( 'pageOrientation' );
 	}
 
 
 	function getReportPrintGroupsPerPage()
 	{
 		if( $this->isReportWithGroups() )
-			return $this->getTableData(".reportPrintGroupsPerPage");
+			return $this->getTableValue( 'pageSizePrintGroups' );
 		else
-			return $this->getTableData(".reportPrintRecordsPerPage");
+			return $this->getTableValue( 'pageSizePrintRecords' );
 
-	}
-
-	function getReportPrintPDFGroupsPerPage()
-	{
-		return $this->getTableData(".reportPrintPDFGroupsPerPage");
 	}
 
 	function ajaxBasedListPage()
 	{
-		return $this->getTableData(".listAjax");
+		return $this->getTableValue( 'listAjax' );
 	}
 
 	function isMultistepped()
@@ -2416,26 +2433,32 @@ class ProjectSettings
 	 */
 	function getGridTabs()
 	{
-		return $this->getTableData(".arrGridTabs");
+		$ret = $this->getTableValue("whereTabs");
+		if( !$ret ) {
+			return array();
+		}
+		foreach( array_keys( $ret ) as $tabIdx ) {
+			$tab = &$ret[ $tabIdx ];
+			if( !array_key_exists( 'title', $tab ) ) {
+				$tab['title'] = ProjectSettings::_getTableDefault( array( 'whereTabs', '', 'title' ) );
+			}
+		}
+		return $ret;
 	}
 
 
 	function highlightSearchResults()
 	{
-		return $this->getTableData(".highlightSearchResults");
+		return $this->getTableValue( 'searchSettings', 'highlightSearchResults' );
 	}
 
 
 	function getFieldsList()
 	{
-		if(is_null($this->_tableData))
+		if( !$this->_tableData['fields'] ) {
 			return array();
-		$t = array_keys($this->_tableData);
-		$arr = array();
-		foreach($t as $f)
-			if(substr($f,0,1)!=".")
-				$arr[] = $f;
-		return $arr;
+		}
+		return array_keys( $this->_tableData['fields'] );
 	}
 
 	function getFieldCount() {
@@ -2470,13 +2493,10 @@ class ProjectSettings
 	 * @param string	$field The good field name
 	 * @return string
 	 */
-	function getFieldByGoodFieldName($field)
-	{
-		foreach($this->_tableData as $key => $value)
-		{
-			if( is_array( $value ) && count($value) > 1)
-			{
-				if($value["GoodName"] == $field)
+	function getFieldByGoodFieldName( $field ) {
+		foreach( $this->_tableData['fields'] as $key => $value ) {
+			if( is_array( $value ) && count( $value ) > 1 ) {
+				if( $value["goodName"] == $field )
 					return $key;
 			}
 		}
@@ -2489,19 +2509,19 @@ class ProjectSettings
 	 * @param {string} field name
 	 * @param {array} file info (name, type, size)
 	 */
-	function getUploadFolder($field, $fileData = array())
-	{
-		if($this->isUploadCodeExpression($field))
-			$path = GetUploadFolderExpression($field, $fileData, $this->_table );
-		else
-			$path = $this->getFieldData($field, "UploadFolder");
-				if(strlen($path) && substr($path,strlen($path)-1) != "/")
+	function getUploadFolder($field, $fileData = array()) {
+		$eventObj = getEventObject( $this );
+		if( $eventObj->hasUploadFolder( $field ) ) {
+			$path = $eventObj->uploadFolder( $field, $fileData );
+		} else {
+			$path = $this->getFieldValue( $field, 'uploadFolder' );
+		}
+		if(strlen($path) && substr($path,strlen($path)-1) != "/")
 			$path.="/";
 		return $path;
 	}
 
-	function isMakeDirectoryNeeded($field)
-	{
+	function isMakeDirectoryNeeded( $field ) {
 		return $this->isUploadCodeExpression($field) || !$this->isAbsolute($field);
 	}
 
@@ -2511,14 +2531,21 @@ class ProjectSettings
 			$path = $this->getUploadFolder($field, $fileData);
 		else
 			$path = getabspath($this->getUploadFolder($field, $fileData));
-				if(strlen($path) && substr($path,strlen($path)-1) != "/")
-			$path.="/";
+		
+		if( ProjectSettings::ext() == "php") {
+			if(strlen($path) && substr($path,strlen($path)-1) != "/")
+				$path.="/";
+		} else {
+			if(strlen($path) && substr($path,strlen($path)-1) != "\\")
+				$path.="\\";
+		}
+		
 		return $path;
 	}
 
-	function isUploadCodeExpression($field)
-	{
-		return $this->getFieldData($field, "UploadCodeExpression");
+	function isUploadCodeExpression( $field ) {
+		$eventObj = getEventObject( $this );
+		return $eventObj->hasUploadFolder( $field );
 	}
 
 	function &getQueryObject()
@@ -2527,7 +2554,7 @@ class ProjectSettings
 		return $queryObj;
 	}
 
-	function getListOfFieldsByExprType($needaggregate)
+	function getListOfFieldsByExprType( $needaggregate )
 	{
 		$query = &$this->getSQLQuery();
 		if( !$query ) {
@@ -2535,17 +2562,16 @@ class ProjectSettings
 		}
 		$fields = $this->getFieldsList();
 		$out = array();
-		foreach($fields as $idx=>$f)
-		{
-			$aggr = $query->IsAggrFuncField($idx);
-			if($needaggregate && $aggr || !$needaggregate && !$aggr)
+		foreach( $fields as $f ) {
+			$idx = $this->getFieldIndex( $f ) - 1;
+			$aggr = $query->IsAggrFuncField( $idx ) ;
+			if( $needaggregate && $aggr || !$needaggregate && !$aggr)
 				$out[] = $f;
 		}
 		return $out;
 	}
 
-	function isAggregateField($field)
-	{
+	function isAggregateField( $field ) {
 		$query = &$this->getSQLQuery();
 		$idx = $this->getFieldIndex($field) - 1;
 		return $query->IsAggrFuncField($idx);
@@ -2557,27 +2583,34 @@ class ProjectSettings
 	 */
 	function getNCSearch()
 	{
-		return $this->getTableData(".NCSearch");
+		return !$this->getTableValue( 'searchSettings', 'caseSensitiveSearch');
 	}
 
 	function getChartType()
 	{
-		return $this->getTableData(".chartType");
+		return $this->getTableValue( 'chartSettings', 'shape' );
 	}
 
 	function getChartRefreshTime()
 	{
-		return $this->getTableData(".ChartRefreshTime");
+		return $this->chartRefresh()
+			? $this->getTableValue( 'chartSettings', 'chartRefreshTime' )
+			: 0;
 	}
 
-	function getChartXml()
+	function chartRefresh()
 	{
-		return $this->getTableData(".chartXml");
+		return $this->getTableValue( 'chartSettings', 'chartRefresh' );
+	}
+
+	function getChartSettings()
+	{
+		return $this->getTableValue( 'chartSettings' );
 	}
 
 	function auditEnabled()
 	{
-		return $this->getTableData(".audit");
+		return $this->getTableValue( 'audit' );
 	}
 
 	function isSearchSavingEnabled()
@@ -2591,10 +2624,9 @@ class ProjectSettings
 			return false;
 
 		return $this->getPageOption( "list", "showHideFields" );
-		//return $this->getTableData(".allowShowHideFields");
 	}
 
-	function isAllowFieldsReordering()
+	public function isAllowFieldsReordering()
 	{
 		if ( $this->getScrollGridBody() || $this->getRecordsPerRowList() > 1)
 			return false;
@@ -2604,23 +2636,21 @@ class ProjectSettings
 
 	function lockingEnabled()
 	{
-		return $this->getTableData(".locking");
+		return $this->getTableValue( 'locking' );
 	}
 
 	function hasEncryptedFields()
 	{
-		return $this->getTableData(".hasEncryptedFields");
+		return $this->getTableValue( 'hasEncryptedFields' );
 	}
 
 	function showSearchPanel()
 	{
-		//return $this->getTableData(".showSearchPanel");
 		return $this->getPageOption( "listSearch", "searchPanel" );
 	}
 
 	function isFlexibleSearch()
 	{
-		// return $this->getTableData(".flexibleSearch");
 		return !$this->getPageOption( "listSearch", "fixedSearchPanel" );
 	}
 
@@ -2634,7 +2664,7 @@ class ProjectSettings
 		return $this->getPageOption("listSearch", "simpleSearchOptions");
 	}
 
-	function getFieldsToHideIfEmpty()
+	public function getFieldsToHideIfEmpty()
 	{
 		return $this->getPageOption("fields", "hideEmptyFields");
 	}
@@ -2644,137 +2674,119 @@ class ProjectSettings
 		return  $this->getPageOptionAsArray("fields", "filterFields");
 	}
 
-	function getFilterFieldFormat($field)
-	{
-		return $this->getFieldData($field, "filterFormat");
+	function getFilterFieldFormat( $field ) {
+		return $this->getFieldValue( $field, 'filter', 'format' );
 	}
 
-	function getFilterFieldTotal($field)
-	{
-		return $this->getFieldData($field, "filterTotals");
+	function getFilterFieldTotal( $field ) {
+		return $this->getFieldValue( $field, 'filter', 'filterTotals' );
 	}
 
-	function showWithNoRecords($field)
-	{
-		return $this->getFieldData($field, "showWithNoRecords");
+	function showWithNoRecords( $field ) {
+		return $this->getFieldValue( $field, 'filter', 'showWithNoRecords' );
 	}
 
-	function getFilterSortValueType($field)
-	{
-		return $this->getFieldData($field, "sortValueType");
+	function getFilterSortValueType( $field ) {
+		return $this->getFieldValue( $field, 'filter', 'sortValueType' );
 	}
 
-	function isFilterSortOrderDescending($field)
-	{
-		return $this->getFieldData($field, "descendingOrder");
+	function isFilterSortOrderDescending( $field ) {
+		return $this->getFieldValue( $field, 'filter', 'descendingOrder' );
 	}
 
-	function getNumberOfVisibleFilterItems($field)
-	{
-		return $this->getFieldData($field, "numberOfVisibleItems");
+	function getNumberOfVisibleFilterItems( $field ) {
+		return $this->getFieldValue( $field, 'filter', 'firstVisibleItems' );
 	}
 
-	function getFilterByInterval($field)
-	{
-		return $this->getFieldData($field, "filterBy");
+	function getFilterByInterval( $field ) {
+		return $this->getFieldValue( $field, 'filter', 'filterBy' );
 	}
 
-	function getParentFilterName($field)
-	{
-		return $this->getFieldData($field, "parentFilterField");
+	function getParentFilterName( $field ) {
+		return $this->getFieldValue( $field, 'parentFilter' );
 	}
 
-	function getFilterIntervals($field)
-	{
-		return $this->getFieldData($field, "filterIntervals");
+	function getFilterIntervals( $field ) {
+		$ret = array();
+		foreach( $this->getFieldValue( $field, 'filter', 'arrFilterIntervals' ) as $idx => $original ) {
+			$interval = $original;
+			$interval['index'] = $idx + 1;
+			$interval['remainder'] = $original['lowerLimitType'] == FIL_REMAINDER && $original['upperLimitType'] == FIL_REMAINDER;
+			$interval['noLimits'] = $original['lowerLimitType'] == FIL_NONE && $original['upperLimitType'] == FIL_NONE;
+			$ret[] = $interval;
+		}
+		return $ret;
 	}
 
-	function showCollapsed($field)
-	{
-		return $this->getFieldData($field, "showCollapsed");
+	function showCollapsed( $field ) {
+		return $this->getFieldValue( $field, 'filter', 'hideControl' );
 	}
+		
 
-	function getFilterIntervalDatabyIndex($field, $idx)
+	public function getFilterIntervalDatabyIndex($field, $idx)
 	{
 		$intervalData = array();
 
 		$filterIntervalsData = $this->getFilterIntervals($field);
-		foreach($filterIntervalsData as $interval)
-		{
-			if($interval["index"] == $idx)
-			{
-				$intervalData = $interval;
-				break;
-			}
+		if( $filterIntervalsData[ $idx - 1 ] ) {
+			return $filterIntervalsData[ $idx - 1 ];
 		}
+		if( $filterIntervalsData[0] ) {
+			return $filterIntervalsData[0];
+		}
+		return array();
+	}
+		
 
-		return $intervalData;
+	function getFilterTotalsField( $field ) {
+		return $this->getFieldValue( $field, 'filter', 'filterTotalsField' );
 	}
 
-	function getFilterTotalsField($field)
-	{
-		return $this->getFieldData($field, "filterTotalFields");
-	}
-
-	function getFilterFiledMultiSelect($field)
-	{
-		return $this->getFieldData($field, "filterMultiSelect");
+	function getFilterFiledMultiSelect( $field ) {
+		return $this->getFieldValue( $field, 'filter', 'filterMultiselect' );
 	}
 
 	function getBooleanFilterMessageData( $field, $checked ) {
-		if( $checked ) {
-			return array (
-					"text" => $this->getFieldData($field, "filterCheckedMessageText"),
-					"type" => $this->getFieldData($field, "filterCheckedMessageType")
-				);
-		}
-		return array (
-				"text" => $this->getFieldData($field, "filterUncheckedMessageText"),
-				"type" => $this->getFieldData($field, "filterUncheckedMessageType")
-			);
+		return $this->getFieldValue( $field, 'filter', $checked ? 'multilangCheckedMessage' : 'multilangUncheckedMessage' );
 	}
 
 
-	function getFilterStepType($field)
-	{
-		return $this->getFieldData($field, "filterSliderStepType");
+	function getFilterStepType( $field ) {
+		// #17488 p.2 ( string -> number)
+		return (int)$this->getFieldValue( $field, 'filter', 'sliderStepType' );
 	}
 
-	function getFilterStepValue($field)
-	{
-		return $this->getFieldData($field, "filterSliderStepValue");
+	function getFilterStepValue( $field ) {
+		// #17488 p.2 ( string -> number)
+		return (float)$this->getFieldValue( $field, 'filter', 'sliderStepValue' );
 	}
 
-	function getFilterKnobsType($field)
-	{
-		return $this->getFieldData($field, "filterKnobsType");
+	function getFilterKnobsType( $field ) {
+		// #17488 p.2 ( string -> number)
+		return (int)$this->getFieldValue( $field, 'filter', 'sliderKnobs' );
 	}
 
-	function isFilterApplyBtnSet($field)
-	{
-		return $this->getFieldData($field, "filterApplyBtn");
+	function isFilterApplyBtnSet( $field ) {
+		return $this->getFieldValue( $field, 'filter', 'addApplyButton' );
 	}
 
-	function getStrField($field)
-	{
-		return $this->getFieldData($field, "strField");
+	function getStrField( $field ) {
+		return $this->getFieldValue( $field, 'strField' );
 	}
 
 	function getSourceSingle( $field )
 	{
-		return $this->getFieldData($field, "sourceSingle");
+		return $this->getFieldValue( $field, 'sourceSingle' );
 	}
 
 	function getFieldSource( $field, $listRequest )
 	{
-		return $listRequest
-			? $this->getFieldData( $field, "strField" )
-			: $this->getFieldData( $field, "sourceSingle" );
+		return $this->getFieldValue( $field, $listRequest ? 'strField' : 'sourceSingle' );
 	}
 
 	function getScrollGridBody()
 	{
-		return $this->getTableData(".scrollGridBody");
+		return $this->getTableValue( 'scrollGridBody' );
 	}
 
 	/**
@@ -2782,7 +2794,7 @@ class ProjectSettings
 	 */
 	function isUpdateLatLng()
 	{
-		return $this->getTableData(".geocodingEnabled");
+		return $this->getTableValue( 'geoCoding', 'enabled' );
 	}
 
 	/**
@@ -2790,49 +2802,25 @@ class ProjectSettings
 	 */
 	function getGeocodingData()
 	{
-		return $this->getTableData(".geocodingData");
+		$ret = $this->getTableValue( 'geoCoding' );
+		$ret['lngField'] = $ret['lonField'];
+		return $ret;
 	}
 
-	function allowDuplicateValues($field)
-	{
-		return !$this->getFieldData($field, "denyDuplicates");
+	function allowDuplicateValues( $field ) {
+		return !$this->getFieldValue( $field, 'edit', 'denyDuplicate' );
 	}
-
-	function getDashFieldData($field, $key)
-	{
-		$dashSearchFields = $this->getDashboardSearchFields();
-		$dfield = $dashSearchFields[ $field ];
-		if( $dfield )
-			$table = $dfield[0]["table"];
-		if( !$dfield || !$table)
-			return $this->getDefaultValueByKey( $key );
-
-		if( !$this->_dashboardElemPSet[ $table ] )
-			$this->_dashboardElemPSet[ $table ] = new ProjectSettings( $table, $this->_editPage );
-
-		return $this->_dashboardElemPSet[ $table ]->getFieldData( $dfield[0]["field"], $key );
-	}
-
-	function getDashTableData($field, $key)
-	{
-		$dashSearchFields = $this->getDashboardSearchFields();
-		$tableSettings = new ProjectSettings($dashSearchFields[$field][0]["table"], $this->_editPage);
-		return $tableSettings->getTableData( $key );
-	}
-
 
 	/**
 	 * It returns an empty array if the 'Select all' (search options) is ticked
 	 */
-	function getSearchOptionsList($field)
-	{
-		return $this->getFieldData($field, "searchOptionsList");
+	function getSearchOptionsList( $field ) {
+		return $this->getFieldValue( $field, 'searchOptions' );
 	}
 
 
-	function getDefaultSearchOption($field)
-	{
-		$defaultOpt = $this->getFieldData($field, "defaultSearchOption");
+	function getDefaultSearchOption( $field ) {
+		$defaultOpt = $this->getFieldValue( $field, 'defaultSearchOption' );
 
 		if( !$defaultOpt )
 		{
@@ -2843,20 +2831,9 @@ class ProjectSettings
 		return $defaultOpt;
 	}
 
-	/**
-	 * Get status show list of thumbnails
-	 * @param string $field field name
-	 * @return boolean
-	 */
-	function showListOfThumbnails($field)
-	{
-		return $this->getFieldData($field, "ShowListOfThumbnails");
-	}
-
-	static function isMenuTreelike( $menuName )
-	{
-		global $menuTreelikeFlags;
-		return $menuTreelikeFlags[$menuName];
+	static function isMenuTreelike( $menuName ) {
+		global $runnerMenus;
+		return $runnerMenus[ $menuName ]['treeLike'];
 	}
 
 	function setPageMode($pageMode)
@@ -2876,33 +2853,15 @@ class ProjectSettings
 		return false;
 	}
 
+	static function rteType() {
+		return ProjectSettings::getProjectValue( 'rteType' );
+	}
+
 	/**
-	 * Get a field's RTE type for RTE fields
-	 * and the empty string for others
-	 * @param {String} $field 	A field's name
-	 * @return {String}
+	 * @return Boolean
 	 */
-	function getRTEType($field)
-	{
-		if($this->isUseRTEBasic($field))
-		{
-			return "RTE";
-		}
-
-		if( $this->isUseRTECKNew($field) )
-		{
-			return "RTECK_NEW";
-		}
-
-		if($this->isUseRTEFCK($field))
-		{
-			return "RTECK";
-		}
-		if($this->isUseRTEInnova($field))
-		{
-			return "RTEINNOVA";
-		}
-		return "";
+	static function richTextEnabled() {
+		return ProjectSettings::getProjectValue( 'richTextEnabled' );
 	}
 
 	/**
@@ -2910,9 +2869,9 @@ class ProjectSettings
 	 * @param {Number} Device code : 1-4
 	 * @return {Array} array in the form of: $arr[$field]=true, where the $field must be hidden.
 	 */
-	function getHiddenFields($device)
+	function getHiddenFields( $device )
 	{
-		$list = $this->getTableData( ".hideMobileList" );
+		$list = $this->getTableValue( 'deviceHideFields' );
 		if( isset( $list[$device] ) )
 			return $list[$device];
 		return array();
@@ -2927,8 +2886,8 @@ class ProjectSettings
 	{
 		$hGoodFields = array();
 		$hFields = $this->getHiddenFields($device);
-		foreach ( $hFields as $field => $isShow ) {
-			$hGoodFields[GoodFieldName($field)] = $isShow;
+		foreach ( $hFields as $field ) {
+			$hGoodFields[] = GoodFieldName( $field );
 		}
 
 		return $hGoodFields;
@@ -2940,7 +2899,7 @@ class ProjectSettings
 	 */
 	function columnsByDeviceEnabled()
 	{
-		$list = $this->getTableData( ".hideMobileList" );
+		$list = $this->getTableValue( 'deviceHideFields' );
 		foreach( $list as $d => $v )
 		{
 			if( $v )
@@ -2951,58 +2910,12 @@ class ProjectSettings
 
 
 	/**
-	 * Build CSS media clause for given device code.
-	 * Thanks to mobile device vendors, there are plenty of weird heuristics here, take it easy.
-	 */
-	static function getDeviceMediaClause($device)
-	{
-		if( $device == DESKTOP )
-		{
-			// width >= 1281
-
-			//	Desktop. We don't care about prehistoric VGA displays
-			return "@media (min-device-width: 1281px)";
-		}
-		else if( $device == TABLET_10_IN )	//	10" tablets
-		{
-			// width >= 768 and height == 1024 ( iPad )
-			// or width between 1025 and 1280 and height is less than 1023
-			// or the same with width and height interchanged
-
-			// All iPads including mini go here, because there is no way to tell full-sized iPad from mini.
-			return "@media (device-width: 768px) and (device-height: 1024px)".
-
-			// The rest of contemporary 10" devices supposedly go here
-				" , (min-device-width: 1025px) and (max-device-width: 1280px) and (max-device-height: 1023px) , (min-device-height: 1025px) and (max-device-height: 1280px) and (max-device-width: 1023px)";
-		}
-		else if( $device == TABLET_7_IN )
-		{
-			// width between 401 and 1024 and height between 401 and 800
-			// or the same with width and height interchanged
-
-			return "@media (min-device-height: 401px) and (max-device-height: 800px) and (min-device-width: 401px) and (max-device-width: 1024px) , (min-device-height: 401px) and (min-device-width: 401px) and (max-device-height: 1024px) and (max-device-width: 800px)";
-		}
-
-		else if( $device == SMARTPHONE_LANDSCAPE )
-		{
-			// landscape mode and width or height no more than 400
-			return "@media (orientation: landscape) and (max-device-height: 400px), (orientation: landscape) and (max-device-width: 400px)";
-		}
-
-		else if( $device == SMARTPHONE_PORTRAIT )
-		{
-			// potrait mode and width or height no more than 400
-			return "@media (orientation: portrait) and (max-device-height: 400px), (orientation: portrait) and (max-device-width: 400px)";
-		}
-	}
-
-	/**
 	 * @return Mixed
 	 */
 	public static function getForLogin()
 	{
 		return !!Security::dbProvider()
-			? new ProjectSettings("public.users", PAGE_LIST)
+			? new ProjectSettings( Security::loginTable(), PAGE_LIST)
 			: null;
 	}
 
@@ -3014,16 +2927,6 @@ class ProjectSettings
 	{
 		return $this->getPageOptionAsArray( 'dashSearch', 'searchFields');
 	}
-	/**
-	 * Returns the list of the dashboard elements
-	 * Each element is represented by the array of "name", "table" and "type"
-	 */
-/*
-	 function getDashboardElements()
-	{
-		return $this->getTableData(".dashElements");
-	}
-	*/
 
 	/**
 	 * @param String dashElementName
@@ -3045,7 +2948,7 @@ class ProjectSettings
 	 */
 	function getAfterAddAction()
 	{
-		return $this->getTableData(".afterAddAction");
+		return $this->getTableValue( 'afterAddAction' );
 	}
 
 	/**
@@ -3053,7 +2956,7 @@ class ProjectSettings
 	 */
 	function getAADetailTable()
 	{
-		return $this->getTableData(".afterAddActionDetTable");
+		return $this->getTableValue( 'afterAddDetail' );
 	}
 
 	/**
@@ -3061,7 +2964,7 @@ class ProjectSettings
 	 */
 	function checkClosePopupAfterAdd()
 	{
-		return $this->getTableData(".closePopupAfterAdd");
+		return $this->getTableValue( 'closePopupAfterAdd' );
 	}
 
 	/**
@@ -3069,7 +2972,7 @@ class ProjectSettings
 	 */
 	function getAfterEditAction()
 	{
-		return $this->getTableData(".afterEditAction");
+		return $this->getTableValue( 'afterEditAction' );
 	}
 
 	/**
@@ -3077,7 +2980,7 @@ class ProjectSettings
 	 */
 	function getAEDetailTable()
 	{
-		return $this->getTableData(".afterEditActionDetTable");
+		return $this->getTableValue( 'afterEditDetails' );
 	}
 
 	/**
@@ -3085,7 +2988,7 @@ class ProjectSettings
 	 */
 	function checkClosePopupAfterEdit()
 	{
-		return $this->getTableData(".closePopupAfterEdit");
+		return $this->getTableValue( 'closePopupAfterEdit' );
 	}
 
 	function getMapIcon($field, $data)
@@ -3098,9 +3001,19 @@ class ProjectSettings
 		}
 		else
 		{
-			return getCustomMapIcon($field, "", $data);
+			$eventObj = getEventObject( $this );
+			$pageType = $this->getEffectiveViewFormat( $field );
+			return $eventObj->mapMarker( $field, $pageType, $data );
 		}
 	}
+
+	function getFileText( $field, $fileData, $data )
+	{
+		$eventObj = getEventObject( $this );
+		$pageType = $this->getEffectiveViewFormat( $field );
+		return $eventObj->fileText( $field, $pageType, $fileData, $data );
+	}
+
 
 	/**
 	 * @param String dashElementName
@@ -3109,12 +3022,12 @@ class ProjectSettings
 	 */
 	function getDashMapIcon( $dashElementName, $data )
 	{
+		global $globalEvents;
 		$dashElementData = $this->getDashboardElementData( $dashElementName );
 
 		if( $dashElementData["isMarkerIconCustom"] ) {
-			$eventObj = getEventObject( $this->table() );
-			$funcName = "event_" . $dashElementData["iconF"];
-			return getDashMapCustomIcon( $eventObj, $funcName, $data );
+			$funcName = "event_" . $dashElementData["iconSnippet"];
+			return $globalEvents->$funcName( $data );
 		}
 		if( $dashElementData["iconF"] )
 			return "images/menuicons/" . $dashElementData["iconF"];
@@ -3129,11 +3042,11 @@ class ProjectSettings
 	 */
 	function getDashMapLocationIcon( $dashElementName )
 	{
+		global $globalEvents;
 		$dashElementData = $this->getDashboardElementData( $dashElementName );
 		if( $dashElementData["isLocationMarkerIconCustom"] ) {
-			$eventObj = getEventObject( $this->table() );
-			$funcName = "event_" . $dashElementData["currentLocationIcon"];
-			return getDashMapCustomIcon( $eventObj, $funcName, array() );
+			$funcName = "event_" . $dashElementData["currentLocationIconSnippet"];
+			return $globalEvents->$funcName( array() );
 		}
 
 		if( $dashElementData["currentLocationIcon"] )
@@ -3142,8 +3055,7 @@ class ProjectSettings
 		return "";
 	}
 
-	function isMapIconCustom($field)
-	{
+	function isMapIconCustom( $field ) {
 		$mapData = $this->getMapData($field);
 		return $mapData["isMapIconCustom"];
 	}
@@ -3160,7 +3072,7 @@ class ProjectSettings
 	}
 
 	function getDefaultBadgeColor() {
-		return $this->getTableData(".badgeColor");
+		return $this->getTableValue( 'detailsBadgeColor' );
 	}
 
 	function & helperFormItems()
@@ -3257,7 +3169,7 @@ class ProjectSettings
 	{
 		if( !$page )
 			$page = $this->_page;
-		return $this->_auxTableData[ ".pages" ][ $page ];
+		return $this->_auxTableData[ "pageTypes" ][ $page ];
 	}
 
 	/**
@@ -3267,7 +3179,7 @@ class ProjectSettings
 	{
 		if( !$page )
 			$page = $this->_page;
-		return $this->_auxTableData[ ".originalPages" ][ $page ];
+		return $this->_auxTableData[ "originalPageTypes" ][ $page ];
 	}
 
 	/**
@@ -3275,7 +3187,7 @@ class ProjectSettings
 	 */
 	function & getOriginalPages()
 	{
-		return $this->_auxTableData[ ".originalPages" ];
+		return $this->_auxTableData[ "originalPageTypes" ];
 	}
 
 	function welcomeItems()
@@ -3290,28 +3202,35 @@ class ProjectSettings
 
 	function getMultipleImgMode( $field )
 	{
-		return $this->getFieldData( $field, "multipleImgMode" );
+		$editFormat = $this->getEditFormat( $field );
+		if( $editFormat == EDIT_FORMAT_DATABASE_IMAGE || $editFormat == EDIT_FORMAT_DATABASE_FILE ) {
+			return false;
+		}
+		return $this->getFieldValue( $field, 'view', 'imageMultipleMode' );
 	}
 
 	function getMaxImages( $field )
 	{
-		return $this->getFieldData( $field, "maxImages" );
+		if( !$this->getMultipleImgMode( $field ) ) {
+			return 1;
+		}
+		return $this->getFieldValue( $field, 'view', 'imageMaxCount' );
 	}
 	function isGalleryEnabled( $field )
 	{
-		return $this->getFieldData( $field, "showGallery" );
+		return $this->getFieldValue( $field, 'view', 'imageGallery' );
 	}
-	function getGalleryMode( $field )
+	function getGalleryMode()
 	{
-		return $this->getFieldData( $field, "galleryMode" );
+		return $this->getTableValue( 'galleryMode' );
 	}
 	function getCaptionMode( $field )
 	{
-		return $this->getFieldData( $field, "captionMode" );
+		return $this->getFieldValue( $field, 'view', 'imageCaptions' );
 	}
 	function getCaptionField( $field )
 	{
-		return $this->getFieldData( $field, "captionField" );
+		return $this->getFieldValue( $field, 'view', 'imageCaptionField' );
 	}
 
 	/**
@@ -3319,12 +3238,12 @@ class ProjectSettings
 	 */
 	function getImageBorder( $field )
 	{
-		return $this->getFieldData( $field, "imageBorder" );
+		return $this->getFieldValue( $field, 'view', 'imageBorder' );
 	}
 
 	function getImageFullWidth( $field )
 	{
-		return $this->getFieldData( $field, "imageFullWidth" );
+		return $this->getFieldValue( $field, 'view', 'imageMobileFullWidth' );
 	}
 
 	/**
@@ -3332,13 +3251,13 @@ class ProjectSettings
 	 * @return Boolean
 	 */
 	function pageTypeAvailable( $pageType ) {
-		$pagesByType =& $this->_auxTableData[".pagesByType"];
+		$pagesByType =& $this->_auxTableData["pagesByType"];
 		return !!$pagesByType[ $pageType ];
 	}
 
 	function updatePages() {
 
-		if( $this->_auxTableData[".pagesUpdated"] ) {
+		if( $this->_auxTableData["pagesUpdated"] ) {
 			return;
 		}
 
@@ -3352,16 +3271,16 @@ class ProjectSettings
 		}
 
 
-		$this->_auxTableData[".pagesUpdated"] = true;
+		$this->_auxTableData["pagesUpdated"] = true;
 
 		$restrictedPages = Security::getRestrictedPages( $this->_auxTable, $this );
 		if( !$restrictedPages ) {
 			return;
 		}
-		$pages =& $this->_auxTableData[".pages"];
-		$pagesByType =& $this->_auxTableData[".pagesByType"];
+		$pages =& $this->_auxTableData["pageTypes"];
+		$pagesByType =& $this->_auxTableData["pagesByType"];
 		$newPages = array();
-		$defaultPages =& $this->_auxTableData[".defaultPages"];
+		$defaultPages =& $this->_auxTableData["defaultPages"];
 		foreach( $pages as $p => $type ) {
 			if( !$restrictedPages[$p] ) {
 				$newPages[ $p ] = $type;
@@ -3379,7 +3298,7 @@ class ProjectSettings
 				}
 			}
 		}
-		$this->_auxTableData[".pages"] = &$newPages;
+		$this->_auxTableData["pageTypes"] = &$newPages;
 	}
 
 	/**
@@ -3387,49 +3306,49 @@ class ProjectSettings
 	 * This is called from Security::setRestrictedPages/setAllowedPages
 	 */
 	function resetPages() {
-		unset( $this->_auxTableData[".pagesUpdated"] );
-		$this->_auxTableData[".defaultPages"] = $this->_auxTableData[".originalDefaultPages"];
-		$this->_auxTableData[".pages"] = $this->_auxTableData[".originalPages"];
+		unset( $this->_auxTableData["pagesUpdated"] );
+		$this->_auxTableData["defaultPages"] = $this->_auxTableData["originalDefaultPages"];
+		$this->_auxTableData["pageTypes"] = $this->_auxTableData["originalPageTypes"];
 	}
 
 	/**
 	 * returns array of page ids ignoring user permissions
 	 */
 	function getOriginalPagesByType( $pageType) {
-		return $this->_auxTableData[".originalPagesByType"][ $pageType ];
+		return $this->_auxTableData["originalPagesByType"][ $pageType ];
 	}
 
 	function &getDataSourceOps()
 	{
-		return $this->_tableData[".operations"];
+		return $this->getTableValue( 'dataSourceOperations' );
 	}
 
 	/**
 	 * @return Boolean
 	 */
 	function groupChart() {
-		return $this->getTableData( ".groupChart" );
+		return $this->getTableValue( 'chartSettings', 'groupChart' );
 	}
 
 	/**
 	 * @return Integer
 	 */
 	function chartLabelInterval() {
-		return $this->getTableData( ".chartLabelInterval" );
+		return $this->getTableValue( 'chartSettings', 'labelInterval' );
 	}
 
 	/**
 	 * @return Array
 	 */
 	function chartSeries() {
-		return $this->getTableData( ".chartSeries" );
+		return $this->getTableValue( 'chartSettings', 'dataSeries' );
 	}
 
 	/**
 	 * @return String
 	 */
 	function chartLabelField() {
-		return $this->getTableData( ".chartLabelField" );
+		return $this->getTableValue( 'chartSettings', 'labelField' );
 	}
 
 	function getViewPageType() {
@@ -3469,11 +3388,11 @@ class ProjectSettings
 	}
 
 	function fileStorageProvider( $field ) {
-		return $this->getFieldData($field, "fileStorageProvider");
+		return $this->getFieldValue( $field, 'storageProvider' );
 	}
 
 	function googleDriveFolder( $field ) {
-		return $this->getFieldData($field, "googleDriveFolder");
+		return $this->getFieldValue( $field, 'googleDrivePath' );
 	}
 
 	function hideAdGroupsUntilSearch() {
@@ -3485,57 +3404,57 @@ class ProjectSettings
 		return $this->getPageOption("page", "hasNotifications");
 	}
 
-	function amazonSecretKey( $field ) {
-		return GetGlobalData( "S3SecretKey" );
+	static function amazonSecretKey() {
+		return ProjectSettings::getProjectValue( 'cloudSettings', 'cloudAmazonSecretKey' );
 	}
 
-	function amazonAccessKey( $field ) {
-		return GetGlobalData( "S3AccessKey" );
+	static function amazonAccessKey() {
+		return ProjectSettings::getProjectValue( 'cloudSettings', 'cloudAmazonAccessKey' );
 	}
 
 	function amazonPath( $field ) {
-		return $this->getFieldData( $field, "S3Path" );
+		return $this->getFieldValue( $field, 'amazonPath' );
 	}
 
-	function amazonBucket( $field ) {
-		return GetGlobalData( "S3Bucket" );
+	static function amazonBucket() {
+		return ProjectSettings::getProjectValue( 'cloudSettings', 'cloudAmazonBucket' );
 	}
 
-	function amazonRegion( $field ) {
-		return GetGlobalData( "S3Region" );
+	static function amazonRegion() {
+		return ProjectSettings::getProjectValue( 'cloudSettings', 'cloudAmazonRegion' );
 	}
 
 
-	function wasabiSecretKey( $field ) {
-		return GetGlobalData( "WasabiSecretKey" );
+	static function wasabiSecretKey() {
+		return ProjectSettings::getProjectValue( 'cloudSettings', 'cloudWasabiSecretKey' );
 	}
 
-	function wasabiAccessKey( $field ) {
-		return GetGlobalData( "WasabiAccessKey" );
+	static function wasabiAccessKey() {
+		return ProjectSettings::getProjectValue( 'cloudSettings', 'cloudWasabiAccessKey' );
 	}
 
 	function wasabiPath( $field ) {
-		return $this->getFieldData( $field, "wasabiPath" );
+		return $this->getFieldValue( $field, 'wasabiPath' );
 	}
 
-	function wasabiBucket( $field ) {
-		return GetGlobalData( "WasabiBucket" );
+	static function wasabiBucket() {
+		return ProjectSettings::getProjectValue( 'cloudSettings', 'cloudWasabiBucket' );
 	}
 
-	function wasabiRegion( $field ) {
-		return GetGlobalData( "WasabiRegion" );
+	static function wasabiRegion() {
+		return ProjectSettings::getProjectValue( 'cloudSettings', 'cloudWasabiRegion' );
 	}
 
 	function oneDrivePath( $field ) {
-		return $this->getFieldData( $field, "oneDrivePath" );
+		return $this->getFieldValue( $field, 'oneDrivePath' );
 	}
 
-	function oneDriveDrive( $field ) {
-		return GetGlobalData( "OneDriveDrive" );
+	static function oneDriveDrive() {
+		return ProjectSettings::getProjectValue( 'cloudSettings', 'cloudOneDriveDrive' );
 	}
 
 	function dropboxPath( $field ) {
-		return $this->getFieldData( $field, "dropBoxPath" );
+		return $this->getFieldValue( $field, 'dropboxPath' );
 	}
 
 	/**
@@ -3569,746 +3488,212 @@ class ProjectSettings
 		return $this->getPageOption("list", "hideNumberOfRecords");
 	}
 
-
-}
-
-
-function fillProjectEntites()
-{
-	global $projectEntities, $projectEntitiesReverse, $tablesByGoodName, $tablesByUpperCase, $tablesByUpperGoodname;
-	if( count( $projectEntities ) )
-		return;
-	$projectEntities[ "public.antibiotics" ] = array( "url" => "antibiotics", "type" => 0 );
-	$projectEntitiesReverse[ "antibiotics" ] = "public.antibiotics";
-	$projectEntities[ "public.case_antibiotics" ] = array( "url" => "case_antibiotics", "type" => 0 );
-	$projectEntitiesReverse[ "case_antibiotics" ] = "public.case_antibiotics";
-	$projectEntities[ "public.clean_cut_implementations" ] = array( "url" => "clean_cut_implementations", "type" => 0 );
-	$projectEntitiesReverse[ "clean_cut_implementations" ] = "public.clean_cut_implementations";
-	$projectEntities[ "public.countries" ] = array( "url" => "countries", "type" => 0 );
-	$projectEntitiesReverse[ "countries" ] = "public.countries";
-	$projectEntities[ "public.device_distributions" ] = array( "url" => "device_distributions", "type" => 0 );
-	$projectEntitiesReverse[ "device_distributions" ] = "public.device_distributions";
-	$projectEntities[ "public.diagnoses" ] = array( "url" => "diagnoses", "type" => 0 );
-	$projectEntitiesReverse[ "diagnoses" ] = "public.diagnoses";
-	$projectEntities[ "public.facilities" ] = array( "url" => "facilities", "type" => 0 );
-	$projectEntitiesReverse[ "facilities" ] = "public.facilities";
-	$projectEntities[ "public.follow_ups" ] = array( "url" => "follow_ups", "type" => 0 );
-	$projectEntitiesReverse[ "follow_ups" ] = "public.follow_ups";
-	$projectEntities[ "public.languages" ] = array( "url" => "languages", "type" => 0 );
-	$projectEntitiesReverse[ "languages" ] = "public.languages";
-	$projectEntities[ "public.lifebox_staff" ] = array( "url" => "lifebox_staff", "type" => 0 );
-	$projectEntitiesReverse[ "lifebox_staff" ] = "public.lifebox_staff";
-	$projectEntities[ "public.partners" ] = array( "url" => "partners", "type" => 0 );
-	$projectEntitiesReverse[ "partners" ] = "public.partners";
-	$projectEntities[ "public.procedures" ] = array( "url" => "procedures", "type" => 0 );
-	$projectEntitiesReverse[ "procedures" ] = "public.procedures";
-	$projectEntities[ "public.regions" ] = array( "url" => "regions", "type" => 0 );
-	$projectEntitiesReverse[ "regions" ] = "public.regions";
-	$projectEntities[ "public.surgical_cases" ] = array( "url" => "surgical_cases", "type" => 0 );
-	$projectEntitiesReverse[ "surgical_cases" ] = "public.surgical_cases";
-	$projectEntities[ "public.trainers" ] = array( "url" => "trainers", "type" => 0 );
-	$projectEntitiesReverse[ "trainers" ] = "public.trainers";
-	$projectEntities[ "public.training_courses" ] = array( "url" => "training_courses", "type" => 0 );
-	$projectEntitiesReverse[ "training_courses" ] = "public.training_courses";
-	$projectEntities[ "public.training_languages" ] = array( "url" => "training_languages", "type" => 0 );
-	$projectEntitiesReverse[ "training_languages" ] = "public.training_languages";
-	$projectEntities[ "public.training_leads" ] = array( "url" => "training_leads", "type" => 0 );
-	$projectEntitiesReverse[ "training_leads" ] = "public.training_leads";
-	$projectEntities[ "public.training_partners" ] = array( "url" => "training_partners", "type" => 0 );
-	$projectEntitiesReverse[ "training_partners" ] = "public.training_partners";
-	$projectEntities[ "public.training_sessions" ] = array( "url" => "training_sessions", "type" => 0 );
-	$projectEntitiesReverse[ "training_sessions" ] = "public.training_sessions";
-	$projectEntities[ "public.training_trainers" ] = array( "url" => "training_trainers", "type" => 0 );
-	$projectEntitiesReverse[ "training_trainers" ] = "public.training_trainers";
-	$projectEntities[ "public.ward_antibiotics" ] = array( "url" => "ward_antibiotics", "type" => 0 );
-	$projectEntitiesReverse[ "ward_antibiotics" ] = "public.ward_antibiotics";
-	$projectEntities[ "public.ward_rounds" ] = array( "url" => "ward_rounds", "type" => 0 );
-	$projectEntitiesReverse[ "ward_rounds" ] = "public.ward_rounds";
-	$projectEntities[ "public.clean_cut_implementation_summary_view" ] = array( "url" => "clean_cut_implementation_summary_view", "type" => 0 );
-	$projectEntitiesReverse[ "clean_cut_implementation_summary_view" ] = "public.clean_cut_implementation_summary_view";
-	$projectEntities[ "public.device_distribution_summary_view" ] = array( "url" => "device_distribution_summary_view", "type" => 0 );
-	$projectEntitiesReverse[ "device_distribution_summary_view" ] = "public.device_distribution_summary_view";
-	$projectEntities[ "public.surgical_case_summary_view" ] = array( "url" => "surgical_case_summary_view", "type" => 0 );
-	$projectEntitiesReverse[ "surgical_case_summary_view" ] = "public.surgical_case_summary_view";
-	$projectEntities[ "public.training_summary_view" ] = array( "url" => "training_summary_view", "type" => 0 );
-	$projectEntitiesReverse[ "training_summary_view" ] = "public.training_summary_view";
-	$projectEntities[ "public.programs" ] = array( "url" => "programs", "type" => 0 );
-	$projectEntitiesReverse[ "programs" ] = "public.programs";
-	$projectEntities[ "public.training_approaches" ] = array( "url" => "training_approaches", "type" => 0 );
-	$projectEntitiesReverse[ "training_approaches" ] = "public.training_approaches";
-	$projectEntities[ "public.training_types" ] = array( "url" => "training_types", "type" => 0 );
-	$projectEntitiesReverse[ "training_types" ] = "public.training_types";
-	$projectEntities[ "public.quarters" ] = array( "url" => "quarters", "type" => 0 );
-	$projectEntitiesReverse[ "quarters" ] = "public.quarters";
-	$projectEntities[ "public.participant_role" ] = array( "url" => "participant_role", "type" => 0 );
-	$projectEntitiesReverse[ "participant_role" ] = "public.participant_role";
-	$projectEntities[ "public.sex" ] = array( "url" => "sex", "type" => 0 );
-	$projectEntitiesReverse[ "sex" ] = "public.sex";
-	$projectEntities[ "public.training_participants" ] = array( "url" => "training_participants", "type" => 0 );
-	$projectEntitiesReverse[ "training_participants" ] = "public.training_participants";
-	$projectEntities[ "public.venues" ] = array( "url" => "venues", "type" => 0 );
-	$projectEntitiesReverse[ "venues" ] = "public.venues";
-	$projectEntities[ "public.training_attendance" ] = array( "url" => "training_attendance", "type" => 0 );
-	$projectEntitiesReverse[ "training_attendance" ] = "public.training_attendance";
-	$projectEntities[ "public.participant_attendance_detail" ] = array( "url" => "participant_attendance_detail", "type" => 0 );
-	$projectEntitiesReverse[ "participant_attendance_detail" ] = "public.participant_attendance_detail";
-	$projectEntities[ "public.participant_attendance_summary" ] = array( "url" => "participant_attendance_summary", "type" => 0 );
-	$projectEntitiesReverse[ "participant_attendance_summary" ] = "public.participant_attendance_summary";
-	$projectEntities[ "public.training_participation" ] = array( "url" => "training_participation", "type" => 0 );
-	$projectEntitiesReverse[ "training_participation" ] = "public.training_participation";
-	$projectEntities[ "public.daily_attendance_view" ] = array( "url" => "daily_attendance_view", "type" => 0 );
-	$projectEntitiesReverse[ "daily_attendance_view" ] = "public.daily_attendance_view";
-	$projectEntities[ "public.users" ] = array( "url" => "users", "type" => 0 );
-	$projectEntitiesReverse[ "users" ] = "public.users";
-	$projectEntities[ "admin_rights" ] = array( "url" => "admin_rights", "type" => 1 );
-	$projectEntitiesReverse[ "admin_rights" ] = "admin_rights";
-	$projectEntities[ "admin_members" ] = array( "url" => "admin_members", "type" => 1 );
-	$projectEntitiesReverse[ "admin_members" ] = "admin_members";
-	$projectEntities[ "admin_users" ] = array( "url" => "admin_users", "type" => 1 );
-	$projectEntitiesReverse[ "admin_users" ] = "admin_users";
-	$projectEntities[ "public.lifeboxme__audit" ] = array( "url" => "lifeboxme__audit", "type" => 0 );
-	$projectEntitiesReverse[ "lifeboxme__audit" ] = "public.lifeboxme__audit";
-	$projectEntities[ "public.lifeboxme__locking" ] = array( "url" => "lifeboxme__locking", "type" => 0 );
-	$projectEntitiesReverse[ "lifeboxme__locking" ] = "public.lifeboxme__locking";
-	$projectEntities[ "public.months" ] = array( "url" => "months", "type" => 0 );
-	$projectEntitiesReverse[ "months" ] = "public.months";
-	$projectEntities[ "public.devices" ] = array( "url" => "devices", "type" => 0 );
-	$projectEntitiesReverse[ "devices" ] = "public.devices";
-	$projectEntities[ "public.payment_methods" ] = array( "url" => "payment_methods", "type" => 0 );
-	$projectEntitiesReverse[ "payment_methods" ] = "public.payment_methods";
-	$projectEntities[ "public.transaction_types" ] = array( "url" => "transaction_types", "type" => 0 );
-	$projectEntitiesReverse[ "transaction_types" ] = "public.transaction_types";
-	$projectEntities[ "public.donors" ] = array( "url" => "donors", "type" => 0 );
-	$projectEntitiesReverse[ "donors" ] = "public.donors";
-	$projectEntities[ "public.device_distribution_log" ] = array( "url" => "device_distribution_log", "type" => 0 );
-	$projectEntitiesReverse[ "device_distribution_log" ] = "public.device_distribution_log";
-	$projectEntities[ "public.device_inventory_changes" ] = array( "url" => "device_inventory_changes", "type" => 0 );
-	$projectEntitiesReverse[ "device_inventory_changes" ] = "public.device_inventory_changes";
-	$projectEntities[ "aio_training_tracking" ] = array( "url" => "aio_training_tracking", "type" => 6 );
-	$projectEntitiesReverse[ "aio_training_tracking" ] = "aio_training_tracking";
-	$projectEntities[ "Dashboard" ] = array( "url" => "dashboard", "type" => 4 );
-	$projectEntitiesReverse[ "dashboard" ] = "Dashboard";
-	$projectEntities[ "Lifebox_DHIS2_OrgUnits" ] = array( "url" => "lifebox_dhis2_orgunits", "type" => 7 );
-	$projectEntitiesReverse[ "lifebox_dhis2_orgunits" ] = "Lifebox_DHIS2_OrgUnits";
-	$projectEntities[ "public.lifeboxme_dhis2_orgunits" ] = array( "url" => "lifeboxme_dhis2_orgunits", "type" => 0 );
-	$projectEntitiesReverse[ "lifeboxme_dhis2_orgunits" ] = "public.lifeboxme_dhis2_orgunits";
-	$projectEntities[ "Lifebox_DHIS2_Settings" ] = array( "url" => "lifebox_dhis2_settings", "type" => 6 );
-	$projectEntitiesReverse[ "lifebox_dhis2_settings" ] = "Lifebox_DHIS2_Settings";
-	$projectEntities[ "Lifebox_DHIS2_dataItems" ] = array( "url" => "lifebox_dhis2_dataitems", "type" => 7 );
-	$projectEntitiesReverse[ "lifebox_dhis2_dataitems" ] = "Lifebox_DHIS2_dataItems";
-	$projectEntities[ "public.lifeboxme_dhis2_dataitems" ] = array( "url" => "lifeboxme_dhis2_dataitems", "type" => 0 );
-	$projectEntitiesReverse[ "lifeboxme_dhis2_dataitems" ] = "public.lifeboxme_dhis2_dataitems";
-	$projectEntities[ "public.lifeboxme_dhis2_analytics_settings" ] = array( "url" => "lifeboxme_dhis2_analytics_settings", "type" => 0 );
-	$projectEntitiesReverse[ "lifeboxme_dhis2_analytics_settings" ] = "public.lifeboxme_dhis2_analytics_settings";
-	$projectEntities[ "public.lifeboxme_dhis2_analytics_data" ] = array( "url" => "lifeboxme_dhis2_analytics_data", "type" => 0 );
-	$projectEntitiesReverse[ "lifeboxme_dhis2_analytics_data" ] = "public.lifeboxme_dhis2_analytics_data";
-	$projectEntities[ "aio_training_tracking Chart" ] = array( "url" => "aio_training_tracking_chart", "type" => 9 );
-	$projectEntitiesReverse[ "aio_training_tracking_chart" ] = "aio_training_tracking Chart";
-	$projectEntities[ "aio_training_tracking Chart by sex" ] = array( "url" => "aio_training_tracking_chart_by_sex", "type" => 9 );
-	$projectEntitiesReverse[ "aio_training_tracking_chart_by_sex" ] = "aio_training_tracking Chart by sex";
-	$projectEntities[ "public.smtp" ] = array( "url" => "smtp", "type" => 0 );
-	$projectEntitiesReverse[ "smtp" ] = "public.smtp";
-	$projectEntities[ "public.lbapt_annual_plan_tracker" ] = array( "url" => "lbapt_annual_plan_tracker", "type" => 0 );
-	$projectEntitiesReverse[ "lbapt_annual_plan_tracker" ] = "public.lbapt_annual_plan_tracker";
-	$projectEntities[ "public.lbapt_beginnings_fund" ] = array( "url" => "lbapt_beginnings_fund", "type" => 0 );
-	$projectEntitiesReverse[ "lbapt_beginnings_fund" ] = "public.lbapt_beginnings_fund";
-	$projectEntities[ "public.lbapt_communications" ] = array( "url" => "lbapt_communications", "type" => 0 );
-	$projectEntitiesReverse[ "lbapt_communications" ] = "public.lbapt_communications";
-	$projectEntities[ "public.lbapt_cri" ] = array( "url" => "lbapt_cri", "type" => 0 );
-	$projectEntitiesReverse[ "lbapt_cri" ] = "public.lbapt_cri";
-	$projectEntities[ "public.lbapt_dashboard_summary" ] = array( "url" => "lbapt_dashboard_summary", "type" => 0 );
-	$projectEntitiesReverse[ "lbapt_dashboard_summary" ] = "public.lbapt_dashboard_summary";
-	$projectEntities[ "public.lbapt_development" ] = array( "url" => "lbapt_development", "type" => 0 );
-	$projectEntitiesReverse[ "lbapt_development" ] = "public.lbapt_development";
-	$projectEntities[ "public.lbapt_elma" ] = array( "url" => "lbapt_elma", "type" => 0 );
-	$projectEntitiesReverse[ "lbapt_elma" ] = "public.lbapt_elma";
-	$projectEntities[ "public.lbapt_governance" ] = array( "url" => "lbapt_governance", "type" => 0 );
-	$projectEntitiesReverse[ "lbapt_governance" ] = "public.lbapt_governance";
-	$projectEntities[ "public.lbapt_kpis_on_track" ] = array( "url" => "lbapt_kpis_on_track", "type" => 0 );
-	$projectEntitiesReverse[ "lbapt_kpis_on_track" ] = "public.lbapt_kpis_on_track";
-	$projectEntities[ "public.lbapt_operations" ] = array( "url" => "lbapt_operations", "type" => 0 );
-	$projectEntitiesReverse[ "lbapt_operations" ] = "public.lbapt_operations";
-	$projectEntities[ "public.lbapt_programs" ] = array( "url" => "lbapt_programs", "type" => 0 );
-	$projectEntitiesReverse[ "lbapt_programs" ] = "public.lbapt_programs";
-	$projectEntities[ "public.lbapt_sample_workflow" ] = array( "url" => "lbapt_sample_workflow", "type" => 0 );
-	$projectEntitiesReverse[ "lbapt_sample_workflow" ] = "public.lbapt_sample_workflow";
-	$projectEntities[ "public.lbapt_status" ] = array( "url" => "lbapt_status", "type" => 0 );
-	$projectEntitiesReverse[ "lbapt_status" ] = "public.lbapt_status";
-	$projectEntities[ "public.lbapt_strategic_areas" ] = array( "url" => "lbapt_strategic_areas", "type" => 0 );
-	$projectEntitiesReverse[ "lbapt_strategic_areas" ] = "public.lbapt_strategic_areas";
-	$projectEntities[ "public.lbapt_all_activities_view" ] = array( "url" => "lbapt_all_activities_view", "type" => 0 );
-	$projectEntitiesReverse[ "lbapt_all_activities_view" ] = "public.lbapt_all_activities_view";
-	$projectEntities[ "public.lbapt_dashboard_summary_view" ] = array( "url" => "lbapt_dashboard_summary_view", "type" => 0 );
-	$projectEntitiesReverse[ "lbapt_dashboard_summary_view" ] = "public.lbapt_dashboard_summary_view";
-	$projectEntities[ "public.lbapt_kpis_tracking_view" ] = array( "url" => "lbapt_kpis_tracking_view", "type" => 0 );
-	$projectEntitiesReverse[ "lbapt_kpis_tracking_view" ] = "public.lbapt_kpis_tracking_view";
-	$projectEntities[ "public.lbapt_unified_activities" ] = array( "url" => "lbapt_unified_activities", "type" => 0 );
-	$projectEntitiesReverse[ "lbapt_unified_activities" ] = "public.lbapt_unified_activities";
-	$projectEntities[ "public.years" ] = array( "url" => "years", "type" => 0 );
-	$projectEntitiesReverse[ "years" ] = "public.years";
-	$projectEntities[ "public.lbapt_finance" ] = array( "url" => "lbapt_finance", "type" => 0 );
-	$projectEntitiesReverse[ "lbapt_finance" ] = "public.lbapt_finance";
-	$projectEntities[ "public.lbapt_hr" ] = array( "url" => "lbapt_hr", "type" => 0 );
-	$projectEntitiesReverse[ "lbapt_hr" ] = "public.lbapt_hr";
-	$projectEntities[ "public.lbapt_cathedral" ] = array( "url" => "lbapt_cathedral", "type" => 0 );
-	$projectEntitiesReverse[ "lbapt_cathedral" ] = "public.lbapt_cathedral";
-	$projectEntities[ "public.lbapt_izumi" ] = array( "url" => "lbapt_izumi", "type" => 0 );
-	$projectEntitiesReverse[ "lbapt_izumi" ] = "public.lbapt_izumi";
-	$projectEntities[ "public.lbapt_st" ] = array( "url" => "lbapt_st", "type" => 0 );
-	$projectEntitiesReverse[ "lbapt_st" ] = "public.lbapt_st";
-	$projectEntities[ "public.lbapt_whi" ] = array( "url" => "lbapt_whi", "type" => 0 );
-	$projectEntitiesReverse[ "lbapt_whi" ] = "public.lbapt_whi";
-	$projectEntities[ "public.lbpmi_calculation_log" ] = array( "url" => "lbpmi_calculation_log", "type" => 0 );
-	$projectEntitiesReverse[ "lbpmi_calculation_log" ] = "public.lbpmi_calculation_log";
-	$projectEntities[ "public.lbpmi_data_elements" ] = array( "url" => "lbpmi_data_elements", "type" => 0 );
-	$projectEntitiesReverse[ "lbpmi_data_elements" ] = "public.lbpmi_data_elements";
-	$projectEntities[ "public.lbpmi_datasets" ] = array( "url" => "lbpmi_datasets", "type" => 0 );
-	$projectEntitiesReverse[ "lbpmi_datasets" ] = "public.lbpmi_datasets";
-	$projectEntities[ "public.lbpmi_indicator_actuals" ] = array( "url" => "lbpmi_indicator_actuals", "type" => 0 );
-	$projectEntitiesReverse[ "lbpmi_indicator_actuals" ] = "public.lbpmi_indicator_actuals";
-	$projectEntities[ "public.lbpmi_indicator_targets" ] = array( "url" => "lbpmi_indicator_targets", "type" => 0 );
-	$projectEntitiesReverse[ "lbpmi_indicator_targets" ] = "public.lbpmi_indicator_targets";
-	$projectEntities[ "public.lbpmi_indicators" ] = array( "url" => "lbpmi_indicators", "type" => 0 );
-	$projectEntitiesReverse[ "lbpmi_indicators" ] = "public.lbpmi_indicators";
-	$projectEntities[ "public.lbpmi_summary" ] = array( "url" => "lbpmi_summary", "type" => 0 );
-	$projectEntitiesReverse[ "lbpmi_summary" ] = "public.lbpmi_summary";
-	$projectEntities[ "public.period_types" ] = array( "url" => "period_types", "type" => 0 );
-	$projectEntitiesReverse[ "period_types" ] = "public.period_types";
-	$projectEntities[ "public.unit_of_measurement" ] = array( "url" => "unit_of_measurement", "type" => 0 );
-	$projectEntitiesReverse[ "unit_of_measurement" ] = "public.unit_of_measurement";
-	$projectEntities[ "public.lbpmi_calculation_jobs" ] = array( "url" => "lbpmi_calculation_jobs", "type" => 0 );
-	$projectEntitiesReverse[ "lbpmi_calculation_jobs" ] = "public.lbpmi_calculation_jobs";
-	$projectEntities[ "public.lbpmi_data_values" ] = array( "url" => "lbpmi_data_values", "type" => 0 );
-	$projectEntitiesReverse[ "lbpmi_data_values" ] = "public.lbpmi_data_values";
-	$projectEntities[ "public.lbpmi_aggregation_type" ] = array( "url" => "lbpmi_aggregation_type", "type" => 0 );
-	$projectEntitiesReverse[ "lbpmi_aggregation_type" ] = "public.lbpmi_aggregation_type";
-	$projectEntities[ "public.lbpmi_domain_type" ] = array( "url" => "lbpmi_domain_type", "type" => 0 );
-	$projectEntitiesReverse[ "lbpmi_domain_type" ] = "public.lbpmi_domain_type";
-	$projectEntities[ "public.lbpmi_indicator_types" ] = array( "url" => "lbpmi_indicator_types", "type" => 0 );
-	$projectEntitiesReverse[ "lbpmi_indicator_types" ] = "public.lbpmi_indicator_types";
-	$projectEntities[ "public.lbpmi_indicator_groups" ] = array( "url" => "lbpmi_indicator_groups", "type" => 0 );
-	$projectEntitiesReverse[ "lbpmi_indicator_groups" ] = "public.lbpmi_indicator_groups";
-}
-
-function findTable( $table ) {
-	global $projectEntities, $projectEntitiesReverse;
-	fillProjectEntites();
-
-	if( isset( $projectEntities[ $table ] ) )
-		return $table;
-	$uTable = strtoupper( $table );
-
-	foreach( $projectEntities as $t => $d ) {
-		if( $uTable == strtoupper($t) )
-			return $t;
-		$gt = GoodFieldName($t);
-		if( $table == $gt || $uTable == strtoupper( $gt ) )
-			return $t;
+	/**
+	 * @return array( array( 
+	 * 	name => string,
+	 * 	nativename => string,
+	 * 	rtl => boolean,
+	 * 	filename => string	
+	 * ) )
+	 */
+	public static function languageDescriptors() {
+		global $runnerProjectSettings;
+		return $runnerProjectSettings['languages'];
 	}
 
-	//	check shortTableName
-	if( isset( $projectEntitiesReverse[ $table ] ) )
-		return $projectEntitiesReverse[ $table ];
-	foreach( $projectEntitiesReverse as $t => $v ) {
-		if( $uTable == strtoupper($t) )
-			return $v;
+	/**
+	 * @return Array( string )
+	 */
+	public static function languages() {
+		global $runnerProjectSettings;
+		return $runnerProjectSettings['languageNames'];
 	}
-	return "";
-}
-//	return table short name
-function GetTableURL( $table )
-{
-	if( $table == "<global>")
-		return GLOBAL_PAGES_SHORT;
-	global $strTableName, $projectEntities;
 
-	if(!$table) {
+	function fieldEditEvents( $field ) {
+		return $this->getFieldValue( $field, 'edit', 'fieldEvents' );
+	}
+
+	function fieldViewEvents( $field ) {
+		return $this->getFieldValue( $field, 'view', 'fieldEvents' );
+	}
+
+	function fieldHasEvent( $eventId, $field, $editEvent ) {
+		if( $editEvent ) {
+			$editFormats = $this->getTableValue( "fields", $field, "editFormats" );
+			foreach( $editFormats as $pageType => $editFormat ) {
+				$fieldEvents = $editFormat['fieldEvents'];
+				if( $this->eventInList( $editFormat['fieldEvents'], $eventId ) ) {
+					return true;
+				}
+			} 
+		} else {
+			$viewFormats = $this->getTableValue( "fields", $field, "viewFormats" );
+			foreach( $viewFormats as $pageType => $viewFormat ) {
+				if( $this->eventInList( $viewFormat['fieldEvents'], $eventId ) ) {
+					return true;
+				}
+			}
+		}
+		return $false;
+	}
+
+	/**
+	 * @return Boolean
+	 */
+	protected function eventInList( $fieldEvents, $eventId ) {
+		foreach( $fieldEvents as $e ) {
+			if( $e['handlerId'] == $eventId ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/** 
+	 * @return String 'php' or 'aspx'
+	*/
+	public static function ext() {
+		return ProjectSettings::getProjectValue( 'ext' );
+	}
+
+	/** 
+	 * @return Boolean
+	*/
+	public static function webReports() {
+		return false;
+		//return ProjectSettings::getProjectValue( 'enableWebreports' );
+	}
+
+	/**
+	 * Legacy function, used in some Edit plugins
+	 */
+	function getEditParams( $field ) {
 		return "";
 	}
-	fillProjectEntites();
 
-	if( isset( $projectEntities[ $table ] ) )
-		return $projectEntities[ $table ][ "url" ];
+	/**
+	 * LEGACY alias. Used in some business templates and old code
+	 */
+	function getTableOwnerID()
+	{
+		return $this->getTableOwnerIdField();
+	}
+
+
+}
+
+
+/**
+ * Find correct table name from user-specified name
+ */
+function findTable( $tableName, $strict = false ) {
+
+	$projectTables =& ProjectSettings::getProjectTables();
+	$tableObj = $projectTables[ $tableName ];
+	if( $tableObj ) {
+		return $tableObj['name'];
+	}
+	if( $strict ) {
+		return '';
+	}
+
+	$uTable = strtoupper( $tableName );
+	foreach( ProjectSettings::getProjectTables() as $table ) {
+		if( strtoupper( $table['name'] ) == $uTable ) {
+			return $table['name'];
+		}
+		$gTable = GoodFieldName( $table['name'] );
+		if( $uTable == strtoupper( $gTable ) ) {
+			return $table['name'];
+		}
+	}
+
+	$found = GetTableByShort( $tableName );
+	if( $found ) {
+		return $found;
+	}
+
+	foreach( ProjectSettings::getProjectTables() as $table ) {
+		if( strtoupper( $table['shortName'] ) == $uTable ) {
+			return $table['name'];
+		}
+	}
 
 	return "";
 }
+
+
+//	return table short name
+function GetTableURL( $tableName )
+{
+	if( $tableName == "<global>")
+		return GLOBAL_PAGES_SHORT;
+	$projectTables =& ProjectSettings::getProjectTables();
+	$tableObj = $projectTables[ $tableName ];
+	if( $tableObj ) {
+		return $tableObj["shortName"];
+	}
+	return "";
+}
+
+//	return table name
+function GetTableByGID( $gid ) {
+	if( $gid == -1 ) {
+		return "<global>";
+	}
+	foreach( ProjectSettings::getProjectTables() as $name => $table ) {
+		if( $table['gid'] == $gid ) {
+			return $name;
+		}
+	}
+	return '';
+}
+
 
 function GetEntityType($table = "")
 {
-	global $strTableName, $projectEntities;
-	if(!$table)
-		$table=$strTableName;
-	fillProjectEntites();
-
-	if( isset( $projectEntities[ $table ] ) )
-		return $projectEntities[ $table ][ "type" ];
-
-	return "";
+	if( $tableName == GLOBAL_PAGES)
+		return titGLOBAL;
+	$projectTables =& ProjectSettings::getProjectTables();
+	$tableObj = $projectTables[ $table ];
+	if( $tableObj ) {
+		return $tableObj["type"];
+	}
+	return null;
 }
 
 
 //	return strTableName by short table name
-function GetTableByShort( $shortTName )
-{
-	global $projectEntitiesReverse;
-	fillProjectEntites();
-	if(!$shortTName)
-		return false;
-	return $projectEntitiesReverse[ $shortTName ];
+function GetTableByShort( $shortTName ) {
+
+	if( $tableName == GLOBAL_PAGES_SHORT)
+		return GLOBAL_PAGES;
+	global $runnerProjectSettings;
+	if( array_key_exists( $shortTName, $runnerProjectSettings['tablesByShort'] ) ) {
+		return $runnerProjectSettings['tablesByShort'][ $shortTName ];
+	}
+	return "";
 }
 
-//	A
-	$g_defaultOptionValues["Absolute"] = false;
-	$g_defaultOptionValues["acceptFileTypes"] = array();
-	$g_defaultOptionValues["addFields"] = array();
-	$g_defaultOptionValues["addPageEvents"] = false;
-	$g_defaultOptionValues["ajaxCodeSnippetAdded"] = false;
-	$g_defaultOptionValues["advSearchFields"] = array();
-	$g_defaultOptionValues["afterAddAction"] = 1;
-	$g_defaultOptionValues["afterAddActionDetTable"] = "";
-	$g_defaultOptionValues["afterEditAction"] = 1;
-	$g_defaultOptionValues["afterEditActionDetTable"] = "";
-	$g_defaultOptionValues["AllowToAdd"] = false;
-	$g_defaultOptionValues["allowFieldsReordering"] = false;
-	$g_defaultOptionValues["allowShowHideFields"] = false;
-	$g_defaultOptionValues["allSearchFields"] = array();
-	$g_defaultOptionValues["arrGroupsPerPage"] = array();
-	$g_defaultOptionValues["arrGridTabs"] = array();
-	$g_defaultOptionValues["arrRecsPerPage"] = array();
+function GetTableByGood( $goodTableName ) {
 
-	$g_defaultOptionValues["audioTitleField"] = "";
-	$g_defaultOptionValues["audit"] = false;
-	$g_defaultOptionValues["autoCompleteFields"] = array();
-	$g_defaultOptionValues["autoCompleteFieldsAdd"] = array();
-	$g_defaultOptionValues["autoCompleteFieldsEdit"] = array();
-	$g_defaultOptionValues["autoCompleteFieldsOnEdit"] = false;
-	$g_defaultOptionValues["AutoInc"] = false;
-	$g_defaultOptionValues["autoUpload"] = false;
-	$g_defaultOptionValues["autoUpdatable"] = false;
-//	B
-	$g_defaultOptionValues["badgeColor"] = "";
-	$g_defaultOptionValues["bInlineAdd"] = false;
-	$g_defaultOptionValues["bInlineEdit"] = false;
-	$g_defaultOptionValues["bUpdateSelected"] = false;
-	$g_defaultOptionValues["bIsEncrypted"] = false;
-	$g_defaultOptionValues["bListPage"] = false;
-	$g_defaultOptionValues["bPrinterPage"] = false;
-	$g_defaultOptionValues["buttonsAdded"] = false;
-//	C
-	$g_defaultOptionValues["CompatibilityMode"] = false;
-	$g_defaultOptionValues["categoryFields"] = array();
-	$g_defaultOptionValues["ChartRefreshTime"] = 60;
-	$g_defaultOptionValues["chartXml"] = "";
-	$g_defaultOptionValues["chartType"] = "";
-	$g_defaultOptionValues["closePopupAfterAdd"] = false;
-	$g_defaultOptionValues["closePopupAfterEdit"] = false;
-	$g_defaultOptionValues["controlWidth"] = 160;
-	$g_defaultOptionValues["copy"] = false;
-	$g_defaultOptionValues["CreateThumbnail"] = false;
-	$g_defaultOptionValues["crossTabReport"] = false;
-	$g_defaultOptionValues["CustomDisplay"] = false;
-//	D
-	$g_defaultOptionValues["detailsLinksOnList"] = DL_SINGLE;
-	$g_defaultOptionValues["dashElements"] = array();
-	$g_defaultOptionValues["dashCells"] = array();
-	$g_defaultOptionValues["DateEditType"] = 0;
-	$g_defaultOptionValues["DecimalDigits"] = "";
-	$g_defaultOptionValues["defaultSearchOption"] = "";
-	$g_defaultOptionValues["DefaultValue"] = "";
-	$g_defaultOptionValues["delete"] = false;
-	$g_defaultOptionValues["DeleteAssociatedFile"] = false;
-	$g_defaultOptionValues["denyDuplicates"] = false;
-	$g_defaultOptionValues["DependentLookups"] = array();
-	$g_defaultOptionValues["descendingOrder"] = false;
-	$g_defaultOptionValues["DisplayField"] = "";
-//	E
-	$g_defaultOptionValues["edit"] = false;
-	$g_defaultOptionValues["editFields"] = array();
-	$g_defaultOptionValues["EditFormat"] = "";
-	$g_defaultOptionValues["EditParams"] = "";
-	$g_defaultOptionValues["exportTo"] = false;
-	$g_defaultOptionValues["exportFormatting"] = EXPORT_BOTH;
-	$g_defaultOptionValues["exportDelimiter"] = ",";
-//	F
-	$g_defaultOptionValues["fieldIsVideoUrl"] = false;
-	$g_defaultOptionValues["fieldIsImageUrl"] = false;
-	$g_defaultOptionValues["FieldType"] = "";
-	$g_defaultOptionValues["FieldPermissions"] = false;
-	$g_defaultOptionValues["Filename"] = "";
-	$g_defaultOptionValues["filterBy"] = 0;
-	$g_defaultOptionValues["filterFields"] = array();
-	$g_defaultOptionValues["filterFormat"] = FF_VALUE_LIST;
-	$g_defaultOptionValues["filterIntervals"] = array();
-	$g_defaultOptionValues["filterTotals"] = FT_NONE;
-	$g_defaultOptionValues["filterMultiSelect"] = FM_NONE;
-	$g_defaultOptionValues["filterCheckedMessageText"] = "";
-	$g_defaultOptionValues["filterCheckedMessageType"] = "";
-	$g_defaultOptionValues["filterUncheckedMessageText"] = "";
-	$g_defaultOptionValues["filterUncheckedMessageType"] = "";
-	$g_defaultOptionValues["filterSliderStepType"] = 1;
-	$g_defaultOptionValues["filterSliderStepValue"] = 1;
-	$g_defaultOptionValues["filterKnobsType"] = 0;
-	$g_defaultOptionValues["filterApplyBtn"] = false;
-	$g_defaultOptionValues["flexibleSearch"] = false;
-	$g_defaultOptionValues["FormatTimeAttrs"] = array();
-	$g_defaultOptionValues["freeInput"] = false;
-	$g_defaultOptionValues["FullName"] = "";
-	$g_defaultOptionValues["fieldEvents"] = false;
-	$g_defaultOptionValues["fieldViewEvents"] = false;
-//	G
-	$g_defaultOptionValues["googleLikeFields"] = array();
-	$g_defaultOptionValues["GoodName"] = "";
-//	H
-	$g_defaultOptionValues["hasEncryptedFields"] = false;
-	$g_defaultOptionValues["hideEmptyFieldsOnView"] = false;
-	$g_defaultOptionValues["HorizontalLookup"] = false;
-	$g_defaultOptionValues["hlNewWindow"] = false;
-	$g_defaultOptionValues["hlType"] = 0;
-	$g_defaultOptionValues["hlLinkWordNameType"] = "";
-	$g_defaultOptionValues["hlLinkWordText"] = "";
-	$g_defaultOptionValues["hlTitleField"] = "";
-	$g_defaultOptionValues["highlightSearchResults"] = false;
-	$g_defaultOptionValues["HTML5InuptType"] = "text";
-//	I
-	$g_defaultOptionValues["Index"] = 0;
-	$g_defaultOptionValues["InitialYearFactor"] = 100;
-	$g_defaultOptionValues["ImageHeight"] = 0;
-	$g_defaultOptionValues["ImageWidth"] = 0;
-	//$g_defaultOptionValues["import"] = false;
-	$g_defaultOptionValues["inlineAdd"] = false;
-	$g_defaultOptionValues["inlineAddFields"] = array();
-	$g_defaultOptionValues["inlineEdit"] = false;
-	$g_defaultOptionValues["updateSelected"] = false;
-	$g_defaultOptionValues["inlineEditFields"] = array();
-	$g_defaultOptionValues["isDisplayLoading"] = false;
-	$g_defaultOptionValues["tableType"] = "";
-	$g_defaultOptionValues["IsRequired"] = false;
-	$g_defaultOptionValues["insertNull"] = false;
-	$g_defaultOptionValues["isResizeColumns"] = false;
-	$g_defaultOptionValues["isSeparate"] = false;
-	$g_defaultOptionValues["UpdateLatLng"] = false;
-	$g_defaultOptionValues["isUseAjaxSuggest"] = false;
-	$g_defaultOptionValues["isUseAudio"] = false;
-	$g_defaultOptionValues["isUseFieldsMaps"] = false;
-	$g_defaultOptionValues["isUseTimeForSearch"] = false;
-	$g_defaultOptionValues["isUseToolTips"] = false;
-	$g_defaultOptionValues["isUseVideo"] = false;
-	$g_defaultOptionValues["listGridLayout"] = 0;
-	$g_defaultOptionValues["isExistTotalFields"] = false;
-	$g_defaultOptionValues["isViewPagePDFFitToPage"] = 1;
-	$g_defaultOptionValues["isPrinterPagePDFFitToPage"] = 1;
-	$g_defaultOptionValues["isLandscapeViewPDFOrientation"] = 0;
-	$g_defaultOptionValues["isLandscapePrinterPagePDFOrientation"] = 0;
-	$g_defaultOptionValues["isPrinterPagePDF"] = false;
-	$g_defaultOptionValues["isViewPagePDF"] = false;
-	$g_defaultOptionValues["isSQLExpression"] = false;
-	$g_defaultOptionValues["isPrinterPageFitToPage"] = 1;
-//	J
-//	K
-	$g_defaultOptionValues["Keys"] = array();
-//	L
-	$g_defaultOptionValues["Label"] = "";
-	$g_defaultOptionValues["LookupConnId"] = "";
-	$g_defaultOptionValues["LastYearFactor"] = 10;
-	$g_defaultOptionValues["LCType"] = LCT_DROPDOWN;
-	$g_defaultOptionValues["listPageId"] = "";
-	$g_defaultOptionValues["addPageId"] = "";
-	$g_defaultOptionValues["LinkField"] = "";
-	$g_defaultOptionValues["LinkFieldType"] = 0;
-	$g_defaultOptionValues["LinkPrefix"] = "";
-	$g_defaultOptionValues["list"] = false;
-	$g_defaultOptionValues["listAjax"] = false;
+	if( $tableName == GLOBAL_PAGES_SHORT)
+		return GLOBAL_PAGES;
+	global $runnerProjectSettings;
+	if( array_key_exists( $goodTableName, $runnerProjectSettings['tablesByGood'] ) ) {
+		return $runnerProjectSettings['tablesByGood'][ $goodTableName ];
+	}
+	return "";
+}
 
-	$g_defaultOptionValues["locking"] = false;
-	$g_defaultOptionValues["LookupDesc"] = false;
-	$g_defaultOptionValues["LookupOrderBy"] = "";
-	$g_defaultOptionValues["LookupTable"] = "";
-	$g_defaultOptionValues["LookupType"] = 0;
-	$g_defaultOptionValues["LookupUnique"] = false;
-	$g_defaultOptionValues["LookupValues"] = array();
-	$g_defaultOptionValues["LookupWhere"] = "";
-	$g_defaultOptionValues["LookupWhereCode"] = false;
-//	M
-	$g_defaultOptionValues["mainTableOwnerID"] = "";
-	$g_defaultOptionValues["mapData"] = array();
-	$g_defaultOptionValues["masterListFields"] = array();
-	$g_defaultOptionValues["maxFileSize"] = null;
-	$g_defaultOptionValues["maxImageHeight"] = null;
-	$g_defaultOptionValues["maxImageWidth"] = null;
-	$g_defaultOptionValues["maxNumberOfFiles"] = 1;
-	$g_defaultOptionValues["maxTotalFilesSize"] = null;
-	$g_defaultOptionValues["moveNext"] = "";
-	$g_defaultOptionValues["Multiselect"] = false;
-//	N
-	$g_defaultOptionValues["NCSearch"] = false;
-	$g_defaultOptionValues["NeedEncode"] = false;
-	$g_defaultOptionValues["NewSize"] = 0;
-	$g_defaultOptionValues["noRecordsFirstPage"] = false;
-	$g_defaultOptionValues["nSecOptions"] = ADVSECURITY_NONE;
-	$g_defaultOptionValues["NumberOfChars"] = 0;
-	$g_defaultOptionValues["numberOfVisibleItems"] = 10;
-	$g_defaultOptionValues["nViewPagePDFScale"] = 100;
-	$g_defaultOptionValues["nPrinterPagePDFScale"] = 100;
-	$g_defaultOptionValues["nPrinterPageScale"] = 100;
-	$g_defaultOptionValues["nPrinterPDFSplitRecords"] = 0;
-	$g_defaultOptionValues["nPrinterSplitRecords"] = 0;
+/**
+ * Legacy, used in some business templates (News)
+ */
+function getSecurityOption( $option ) {
+	return ProjectSettings::getSecurityValue( $option );
+}
 
+require_once( getabspath('settings/defaults.php') );
 
-//	O
-	$g_defaultOptionValues["OriginalTable"] = "";
-	$g_defaultOptionValues["orderindexes"] = array();
-	$g_defaultOptionValues["OwnerID"] = 0;
-	$g_defaultOptionValues["ownerTable"] = "";
-	$g_defaultOptionValues["OraSequenceName"] = "";
-//	P
-	$g_defaultOptionValues["pageSize"] = 0;
-	$g_defaultOptionValues["panelSearchFields"] = array();
-	$g_defaultOptionValues["parentFilterField"] = "";
-	$g_defaultOptionValues["printFriendly"] = false;
-	$g_defaultOptionValues["printFields"] = array();
-	$g_defaultOptionValues["printGridLayout"] = 0;
-	$g_defaultOptionValues["printReportLayout"] = 0;
-	$g_defaultOptionValues["printerPageOrientation"] = 0;
-//	Q
-//	R
-	$g_defaultOptionValues["recsLimit"] = 0;
-	$g_defaultOptionValues["recsPerRowList"] = 1;
-	$g_defaultOptionValues["recsPerRowPrint"] = 1;
-
-	$g_defaultOptionValues["ResizeImage"] = false;
-	$g_defaultOptionValues["RewindEnabled"] = false;
-	$g_defaultOptionValues["requiredSearchFields"] = array();
-	$g_defaultOptionValues["reportPrintGroupsPerPage"] = 3;
-	$g_defaultOptionValues["reportPrintPDFGroupsPerPage"] = 0;
-
-//	S
-	$g_defaultOptionValues["searchFields"] = false;
-	$g_defaultOptionValues["searchPanelOptions"] = array();
-	$g_defaultOptionValues["SelectSize"] = 1;
-	$g_defaultOptionValues["selectExportDelimiter"] = false;
-	$g_defaultOptionValues["selectExportFields"] = false;
-	$g_defaultOptionValues["searchIsRequiredForFilters"] = false;
-	$g_defaultOptionValues["searchOptionsList"] = array();
-	$g_defaultOptionValues["ShortName"] = "";
-	$g_defaultOptionValues["shortTableName"] = "";
-	$g_defaultOptionValues["showAddInPopup"] = false;
-	$g_defaultOptionValues["ShowCustomExpr"] = false;
-	$g_defaultOptionValues["showEditInPopup"] = false;
-	$g_defaultOptionValues["ShowFileSize"] = false;
-	$g_defaultOptionValues["DisplayPDF"] = false;
-	$g_defaultOptionValues["ShowIcon"] = false;
-	$g_defaultOptionValues["showSearchPanel"] = false;
-	$g_defaultOptionValues["showSimpleSearchOptions"] = false;
-	$g_defaultOptionValues["ShowThumbnail"] = false;
-	$g_defaultOptionValues["ShowTime"] = false;
-	$g_defaultOptionValues["showViewInPopup"] = false;
-	$g_defaultOptionValues["showCollapsed"] = false;
-	$g_defaultOptionValues["showWithNoRecords"] = false;
-	$g_defaultOptionValues["SimpleAdd"] = false;
-	$g_defaultOptionValues["ShowListOfThumbnails"] = false;
-	$g_defaultOptionValues["sortValueType"] = SORT_BY_DISP_VALUE;
-	$g_defaultOptionValues["sqlFrom"] = "";
-	$g_defaultOptionValues["sqlHead"] = "";
-	$g_defaultOptionValues["sqlTail"] = "";
-	$g_defaultOptionValues["sqlWhereExpr"] = "";
-	$g_defaultOptionValues["sqlquery"] = null;
-	$g_defaultOptionValues["strField"] = "";
-	$g_defaultOptionValues["strFilename"] = "";
-	$g_defaultOptionValues["strName"] = "";
-	$g_defaultOptionValues["strOrderBy"] = "";
-	$g_defaultOptionValues["StrThumbnail"] = "";
-	$g_defaultOptionValues["strSortControlSettingsJSON"] = "";
-	$g_defaultOptionValues["strClickActionJSON"] = "";
-	$g_defaultOptionValues["ThumbnailSize"] = 0;
-	$g_defaultOptionValues["scrollGridBody"] = false;
-	$g_defaultOptionValues["fileStorageProvider"] = 0;
-	$g_defaultOptionValues["googleDriveFolder"] = "";
-
-//	T
-	$g_defaultOptionValues["totalsFields"] = array();
-	$g_defaultOptionValues["ThumbHeight"] = 72;
-	$g_defaultOptionValues["ThumbWidth"] = 72;
-	$g_defaultOptionValues["truncateText"] = false;
-//	U
-	$g_defaultOptionValues["UploadFolder"] = "";
-	$g_defaultOptionValues["UploadCodeExpression"] = false;
-	$g_defaultOptionValues["UseCategory"] = false;
-	$g_defaultOptionValues["UseRTE"] = false;
-	$g_defaultOptionValues["UseTimestamp"] = false;
-//	V
-	$g_defaultOptionValues["validateAs"] = array();
-	$g_defaultOptionValues["videoHeight"] = 200;
-	$g_defaultOptionValues["videoWidth"] = 300;
-	$g_defaultOptionValues["videoTitleField"] = "";
-	$g_defaultOptionValues["view"] = false;
-	$g_defaultOptionValues["ViewFormat"] = "";
-//	W
-	$g_defaultOptionValues["warnLeavingPages"] = false;
-	$g_defaultOptionValues["weekdays"] = "";
-	$g_defaultOptionValues["weekdayMessage"] = array();
-//	X
-//	Y
-//	Z
-$g_defaultOptionValues["groupChart"] = false;
-$g_defaultOptionValues["chartLabelInterval"] = 0;
-$g_defaultOptionValues["chartSeries"] = array();
-
-
-
-//	A
-	$g_settingsType["Absolute"] = SETTING_TYPE_GLOBAL;
-	$g_settingsType["acceptFileTypes"] = SETTING_TYPE_EDIT;
-	$g_settingsType["acceptFileTypesHtml"] = SETTING_TYPE_EDIT;
-	$g_settingsType["AllowToAdd"] = SETTING_TYPE_EDIT;
-	$g_settingsType["autoCompleteFields"] = SETTING_TYPE_EDIT;
-	$g_settingsType["autoCompleteFieldsOnEdit"] = SETTING_TYPE_EDIT;
-	$g_settingsType["AutoInc"] = SETTING_TYPE_GLOBAL;
-	$g_settingsType["audioTitleField"] = SETTING_TYPE_VIEW;
-	$g_settingsType["autoUpload"] = SETTING_TYPE_EDIT;
-	$g_settingsType["autoUpdatable"] = SETTING_TYPE_EDIT;
-//	B
-	$g_settingsType["bInlineAdd"] = SETTING_TYPE_GLOBAL;
-	$g_settingsType["bInlineEdit"] = SETTING_TYPE_GLOBAL;
-	$g_settingsType["bUpdateSelected"] = SETTING_TYPE_GLOBAL;
-	$g_settingsType["bIsEncrypted"] = SETTING_TYPE_GLOBAL;
-	$g_settingsType["bListPage"] = SETTING_TYPE_GLOBAL;
-	$g_settingsType["bPrinterPage"] = SETTING_TYPE_GLOBAL;
-//	C
-	$g_settingsType["CompatibilityMode"] = SETTING_TYPE_GLOBAL;
-	$g_settingsType["categoryFields"] = SETTING_TYPE_EDIT;
-	$g_settingsType["controlWidth"] = SETTING_TYPE_EDIT;
-	$g_settingsType["CreateThumbnail"] = SETTING_TYPE_EDIT;
-	$g_settingsType["CustomDisplay"] = SETTING_TYPE_EDIT;
-//	D
-	$g_settingsType["DateEditType"] = SETTING_TYPE_EDIT;
-	$g_settingsType["DecimalDigits"] = SETTING_TYPE_VIEW;
-	$g_settingsType["DeleteAssociatedFile"] = SETTING_TYPE_GLOBAL;
-	$g_settingsType["denyDuplicates"] = SETTING_TYPE_EDIT;
-	$g_settingsType["DependentLookups"] = SETTING_TYPE_EDIT;
-	$g_settingsType["DisplayField"] = SETTING_TYPE_EDIT;
-//	E
-	$g_settingsType["EditFormat"] = SETTING_TYPE_EDIT;
-	$g_settingsType["EditParams"] = SETTING_TYPE_EDIT;
-//	F
-	$g_settingsType["fieldIsVideoUrl"] = SETTING_TYPE_VIEW;
-	$g_settingsType["fieldIsImageUrl"] = SETTING_TYPE_VIEW;
-	$g_settingsType["FieldType"] = SETTING_TYPE_GLOBAL;
-	$g_settingsType["FieldPermissions"] = SETTING_TYPE_GLOBAL;
-	$g_settingsType["Filename"] = SETTING_TYPE_VIEW;
-	$g_settingsType["FormatTimeAttrs"] = SETTING_TYPE_EDIT;
-	$g_settingsType["freeInput"] = SETTING_TYPE_EDIT;
-	$g_settingsType["FullName"] = SETTING_TYPE_GLOBAL;
-	$g_settingsType["fieldEvents"] = SETTING_TYPE_EDIT;
-	$g_settingsType["fieldViewEvents"] = SETTING_TYPE_VIEW;
-//	G
-	$g_settingsType["GoodName"] = SETTING_TYPE_GLOBAL;
-//	H
-	$g_settingsType["HorizontalLookup"] = SETTING_TYPE_EDIT;
-	$g_settingsType["hlNewWindow"] = SETTING_TYPE_VIEW;
-	$g_settingsType["hlType"] = SETTING_TYPE_VIEW;
-	$g_settingsType["hlLinkWordNameType"] = SETTING_TYPE_VIEW;
-	$g_settingsType["hlLinkWordText"] = SETTING_TYPE_VIEW;
-	$g_settingsType["hlTitleField"] = SETTING_TYPE_VIEW;
-	$g_settingsType["HTML5InuptType"] = SETTING_TYPE_EDIT;
-//	I
-	$g_settingsType["Index"] = SETTING_TYPE_GLOBAL;
-	$g_settingsType["InitialYearFactor"] = SETTING_TYPE_EDIT;
-	$g_settingsType["ImageHeight"] = SETTING_TYPE_VIEW;
-	$g_settingsType["ImageWidth"] = SETTING_TYPE_VIEW;
-	$g_settingsType["insertNull"] = SETTING_TYPE_EDIT;
-	$g_settingsType["IsRequired"] = SETTING_TYPE_EDIT;
-	$g_settingsType["isSeparate"] = SETTING_TYPE_GLOBAL;
-	$g_settingsType["UpdateLatLng"] = SETTING_TYPE_EDIT;
-//	J
-//	K
-//	L
-	$g_settingsType["Label"] = SETTING_TYPE_GLOBAL;
-	$g_settingsType["LastYearFactor"] = SETTING_TYPE_EDIT;
-	$g_settingsType["LCType"] = SETTING_TYPE_EDIT;
-	$g_settingsType["listPageId"] = SETTING_TYPE_EDIT;
-	$g_settingsType["addPageId"] = SETTING_TYPE_EDIT;
-	$g_settingsType["LinkField"] = SETTING_TYPE_EDIT;
-	$g_settingsType["LinkFieldType"] = SETTING_TYPE_EDIT;
-	$g_settingsType["LinkPrefix"] = SETTING_TYPE_VIEW;
-	$g_settingsType["LookupConnId"] = SETTING_TYPE_EDIT;
-	$g_settingsType["LookupDesc"] = SETTING_TYPE_EDIT;
-	$g_settingsType["LookupOrderBy"] = SETTING_TYPE_EDIT;
-	$g_settingsType["LookupTable"] = SETTING_TYPE_EDIT;
-	$g_settingsType["LookupType"] = SETTING_TYPE_EDIT;
-	$g_settingsType["LookupUnique"] = SETTING_TYPE_EDIT;
-	$g_settingsType["LookupValues"] = SETTING_TYPE_EDIT;
-	$g_settingsType["LookupWhere"] = SETTING_TYPE_EDIT;
-	$g_settingsType["LookupWhereCode"] = SETTING_TYPE_EDIT;
-//	M
-	$g_settingsType["mapData"] = SETTING_TYPE_VIEW;
-	$g_settingsType["maxFileSize"] = SETTING_TYPE_EDIT;
-	$g_settingsType["maxImageHeight"] = SETTING_TYPE_EDIT;
-	$g_settingsType["maxImageWidth"] = SETTING_TYPE_EDIT;
-	$g_settingsType["maxNumberOfFiles"] = SETTING_TYPE_EDIT;
-	$g_settingsType["maxTotalFilesSize"] = SETTING_TYPE_EDIT;
-	$g_settingsType["Multiselect"] = SETTING_TYPE_EDIT;
-//	N
-	$g_settingsType["nCols"] = SETTING_TYPE_EDIT;
-	$g_settingsType["NeedEncode"] = SETTING_TYPE_VIEW;
-	$g_settingsType["NewSize"] = SETTING_TYPE_EDIT;
-	$g_settingsType["nRows"] = SETTING_TYPE_EDIT;
-	$g_settingsType["nSecOptions"] = ADVSECURITY_NONE;
-	$g_settingsType["NumberOfChars"] = SETTING_TYPE_VIEW;
-//	O
-	$g_settingsType["ownerTable"] = SETTING_TYPE_GLOBAL;
-	$g_settingsType["OraSequenceName"] = SETTING_TYPE_GLOBAL;
-//	P
-//	Q
-//	R
-	$g_settingsType["ResizeImage"] = SETTING_TYPE_EDIT;
-	$g_settingsType["RewindEnabled"] = SETTING_TYPE_VIEW;
-//	S
-	$g_settingsType["SelectSize"] = SETTING_TYPE_EDIT;
-	$g_settingsType["ShowCustomExpr"] = SETTING_TYPE_VIEW;
-	$g_settingsType["ShowFileSize"] = SETTING_TYPE_VIEW;
-	$g_settingsType["DisplayPDF"] = SETTING_TYPE_VIEW;
-	$g_settingsType["ShowIcon"] = SETTING_TYPE_VIEW;
-	$g_settingsType["ShowThumbnail"] = SETTING_TYPE_VIEW;
-	$g_settingsType["ShowTime"] = SETTING_TYPE_EDIT;
-	$g_settingsType["SimpleAdd"] = SETTING_TYPE_EDIT;
-	$g_settingsType["ShowListOfThumbnails"] = SETTING_TYPE_VIEW;
-	$g_settingsType["strField"] = SETTING_TYPE_GLOBAL;
-	$g_settingsType["strFilename"] = SETTING_TYPE_VIEW;
-	$g_settingsType["filterTotalFields"] = '';
-	$g_settingsType["strEditMask"] = SETTING_TYPE_EDIT;
-	$g_settingsType["strName"] = SETTING_TYPE_GLOBAL;
-	$g_settingsType["StrThumbnail"] = SETTING_TYPE_EDIT;
-	$g_settingsType["fileStorageProvider"] = SETTING_TYPE_GLOBAL;
-	$g_settingsType["googleDriveFolder"] = SETTING_TYPE_GLOBAL;
-//	T
-	$g_settingsType["ThumbnailSize"] = SETTING_TYPE_EDIT;
-	$g_settingsType["ThumbHeight"] = SETTING_TYPE_VIEW;
-	$g_settingsType["ThumbWidth"] = SETTING_TYPE_VIEW;
-	$g_settingsType["truncateText"] = SETTING_TYPE_VIEW;
-	$g_settingsType["timeFormatData"] = SETTING_TYPE_VIEW;
-//	U
-	$g_settingsType["UploadFolder"] = SETTING_TYPE_GLOBAL;
-	$g_settingsType["UploadCodeExpression"] = SETTING_TYPE_GLOBAL;
-	$g_settingsType["UseCategory"] = SETTING_TYPE_EDIT;
-	$g_settingsType["UseRTE"] = SETTING_TYPE_EDIT;
-	$g_settingsType["UseTimestamp"] = SETTING_TYPE_EDIT;
-//	V
-	$g_settingsType["validateAs"] = SETTING_TYPE_EDIT;
-	$g_settingsType["videoHeight"] = SETTING_TYPE_VIEW;
-	$g_settingsType["videoWidth"] = SETTING_TYPE_VIEW;
-	$g_settingsType["videoTitleField"] = SETTING_TYPE_VIEW;
-	$g_settingsType["ViewFormat"] = SETTING_TYPE_VIEW;
-
-	$g_settingsType["multipleImgMode"] = SETTING_TYPE_VIEW;
-	$g_settingsType["maxImages"] = SETTING_TYPE_VIEW;
-	$g_settingsType["showGallery"] = SETTING_TYPE_VIEW;
-	$g_settingsType["galleryMode"] = SETTING_TYPE_VIEW;
-	$g_settingsType["captionMode"] = SETTING_TYPE_VIEW;
-	$g_settingsType["captionField"] = SETTING_TYPE_VIEW;
-	$g_settingsType["imageBorder"] = SETTING_TYPE_VIEW;
-	$g_settingsType["imageFullWidth"] = SETTING_TYPE_VIEW;
-
-	$g_settingsType["weekdays"] = SETTING_TYPE_EDIT;
-	$g_settingsType["weekdayMessage"] = SETTING_TYPE_EDIT;
 
 ?>

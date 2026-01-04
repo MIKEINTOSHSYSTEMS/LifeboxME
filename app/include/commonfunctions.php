@@ -1,6 +1,6 @@
 <?php
 
-require_once(getabspath("include/sms.php"));
+include_once( getabspath( "include/sms.php" ) );
 
 /**
  * That function  copies all elements from associative array to object, as object properties with same names
@@ -10,7 +10,7 @@ require_once(getabspath("include/sms.php"));
  * @param link $argsArr
  * @intellisense
  */
-function RunnerApply (&$obj, &$argsArr)
+function RunnerApply(&$obj, &$argsArr)
 {
 	foreach ($argsArr as $key=>$var)
 		setObjectProperty($obj,$key,$argsArr[$key]);
@@ -78,7 +78,7 @@ function redirectToLogin()
 {
 
 	$expired = "";
-	$url = "http://";
+$url = "http://";
 	if( $_SERVER["HTTPS"] && $_SERVER["HTTPS"] != "off")
 		$url = "https://";
 	$url .= $_SERVER["HTTP_HOST"] . $_SERVER['REQUEST_URI'];
@@ -130,31 +130,18 @@ function getFilenameFromURI( $uri )
 	return $uri;
 }
 
-
 /**
  * @intellisense
  */
 function getLangFileName($langName)
 {
-	$langArr = array();
-	$langArr["English"] = "English";
-	return $langArr[$langName];
-}
-
-/**
- * @intellisense
- */
-function GetGlobalData($name, $defValue = false )
-{
-	global $globalSettings;
-	if(!array_key_exists($name, $globalSettings))
-		return $defValue;
-	return $globalSettings[$name];
-}
-
-function & getSecurityOption( $name ) {
-	global $globalSettings;
-	return $globalSettings['security'][ $name ];
+	//	only protect from loading arbitrary file
+	foreach( ProjectSettings::languageDescriptors() as $lang ) {
+		if( $lang['name'] == $langName ) {
+			return $langName;
+		}
+	}
+	return '';
 }
 
 /**
@@ -195,226 +182,6 @@ function DisplayMap($params)
 		$pageObject->googleMapCfg['APIcode'] = $params['APIkey'];
 }
 
-/**
- * @intellisense
- */
-function checkTableName($shortTName )
-{
-	if (!$shortTName)
-		return false;
-
-	if ("antibiotics" == $shortTName )
-		return true;
-	if ("case_antibiotics" == $shortTName )
-		return true;
-	if ("clean_cut_implementations" == $shortTName )
-		return true;
-	if ("countries" == $shortTName )
-		return true;
-	if ("device_distributions" == $shortTName )
-		return true;
-	if ("diagnoses" == $shortTName )
-		return true;
-	if ("facilities" == $shortTName )
-		return true;
-	if ("follow_ups" == $shortTName )
-		return true;
-	if ("languages" == $shortTName )
-		return true;
-	if ("lifebox_staff" == $shortTName )
-		return true;
-	if ("partners" == $shortTName )
-		return true;
-	if ("procedures" == $shortTName )
-		return true;
-	if ("regions" == $shortTName )
-		return true;
-	if ("surgical_cases" == $shortTName )
-		return true;
-	if ("trainers" == $shortTName )
-		return true;
-	if ("training_courses" == $shortTName )
-		return true;
-	if ("training_languages" == $shortTName )
-		return true;
-	if ("training_leads" == $shortTName )
-		return true;
-	if ("training_partners" == $shortTName )
-		return true;
-	if ("training_sessions" == $shortTName )
-		return true;
-	if ("training_trainers" == $shortTName )
-		return true;
-	if ("ward_antibiotics" == $shortTName )
-		return true;
-	if ("ward_rounds" == $shortTName )
-		return true;
-	if ("clean_cut_implementation_summary_view" == $shortTName )
-		return true;
-	if ("device_distribution_summary_view" == $shortTName )
-		return true;
-	if ("surgical_case_summary_view" == $shortTName )
-		return true;
-	if ("training_summary_view" == $shortTName )
-		return true;
-	if ("programs" == $shortTName )
-		return true;
-	if ("training_approaches" == $shortTName )
-		return true;
-	if ("training_types" == $shortTName )
-		return true;
-	if ("quarters" == $shortTName )
-		return true;
-	if ("participant_role" == $shortTName )
-		return true;
-	if ("sex" == $shortTName )
-		return true;
-	if ("training_participants" == $shortTName )
-		return true;
-	if ("venues" == $shortTName )
-		return true;
-	if ("training_attendance" == $shortTName )
-		return true;
-	if ("participant_attendance_detail" == $shortTName )
-		return true;
-	if ("participant_attendance_summary" == $shortTName )
-		return true;
-	if ("training_participation" == $shortTName )
-		return true;
-	if ("daily_attendance_view" == $shortTName )
-		return true;
-	if ("users" == $shortTName )
-		return true;
-	if ("admin_rights" == $shortTName )
-		return true;
-	if ("admin_members" == $shortTName )
-		return true;
-	if ("admin_users" == $shortTName )
-		return true;
-	if ("lifeboxme__audit" == $shortTName )
-		return true;
-	if ("lifeboxme__locking" == $shortTName )
-		return true;
-	if ("months" == $shortTName )
-		return true;
-	if ("devices" == $shortTName )
-		return true;
-	if ("payment_methods" == $shortTName )
-		return true;
-	if ("transaction_types" == $shortTName )
-		return true;
-	if ("donors" == $shortTName )
-		return true;
-	if ("device_distribution_log" == $shortTName )
-		return true;
-	if ("device_inventory_changes" == $shortTName )
-		return true;
-	if ("aio_training_tracking" == $shortTName )
-		return true;
-	if ("dashboard" == $shortTName )
-		return true;
-	if ("lifebox_dhis2_orgunits" == $shortTName )
-		return true;
-	if ("lifeboxme_dhis2_orgunits" == $shortTName )
-		return true;
-	if ("lifebox_dhis2_settings" == $shortTName )
-		return true;
-	if ("lifebox_dhis2_dataitems" == $shortTName )
-		return true;
-	if ("lifeboxme_dhis2_dataitems" == $shortTName )
-		return true;
-	if ("lifeboxme_dhis2_analytics_settings" == $shortTName )
-		return true;
-	if ("lifeboxme_dhis2_analytics_data" == $shortTName )
-		return true;
-	if ("aio_training_tracking_chart" == $shortTName )
-		return true;
-	if ("aio_training_tracking_chart_by_sex" == $shortTName )
-		return true;
-	if ("smtp" == $shortTName )
-		return true;
-	if ("lbapt_annual_plan_tracker" == $shortTName )
-		return true;
-	if ("lbapt_beginnings_fund" == $shortTName )
-		return true;
-	if ("lbapt_communications" == $shortTName )
-		return true;
-	if ("lbapt_cri" == $shortTName )
-		return true;
-	if ("lbapt_dashboard_summary" == $shortTName )
-		return true;
-	if ("lbapt_development" == $shortTName )
-		return true;
-	if ("lbapt_elma" == $shortTName )
-		return true;
-	if ("lbapt_governance" == $shortTName )
-		return true;
-	if ("lbapt_kpis_on_track" == $shortTName )
-		return true;
-	if ("lbapt_operations" == $shortTName )
-		return true;
-	if ("lbapt_programs" == $shortTName )
-		return true;
-	if ("lbapt_sample_workflow" == $shortTName )
-		return true;
-	if ("lbapt_status" == $shortTName )
-		return true;
-	if ("lbapt_strategic_areas" == $shortTName )
-		return true;
-	if ("lbapt_all_activities_view" == $shortTName )
-		return true;
-	if ("lbapt_dashboard_summary_view" == $shortTName )
-		return true;
-	if ("lbapt_kpis_tracking_view" == $shortTName )
-		return true;
-	if ("lbapt_unified_activities" == $shortTName )
-		return true;
-	if ("years" == $shortTName )
-		return true;
-	if ("lbapt_finance" == $shortTName )
-		return true;
-	if ("lbapt_hr" == $shortTName )
-		return true;
-	if ("lbapt_cathedral" == $shortTName )
-		return true;
-	if ("lbapt_izumi" == $shortTName )
-		return true;
-	if ("lbapt_st" == $shortTName )
-		return true;
-	if ("lbapt_whi" == $shortTName )
-		return true;
-	if ("lbpmi_calculation_log" == $shortTName )
-		return true;
-	if ("lbpmi_data_elements" == $shortTName )
-		return true;
-	if ("lbpmi_datasets" == $shortTName )
-		return true;
-	if ("lbpmi_indicator_actuals" == $shortTName )
-		return true;
-	if ("lbpmi_indicator_targets" == $shortTName )
-		return true;
-	if ("lbpmi_indicators" == $shortTName )
-		return true;
-	if ("lbpmi_summary" == $shortTName )
-		return true;
-	if ("period_types" == $shortTName )
-		return true;
-	if ("unit_of_measurement" == $shortTName )
-		return true;
-	if ("lbpmi_calculation_jobs" == $shortTName )
-		return true;
-	if ("lbpmi_data_values" == $shortTName )
-		return true;
-	if ("lbpmi_aggregation_type" == $shortTName )
-		return true;
-	if ("lbpmi_domain_type" == $shortTName )
-		return true;
-	if ("lbpmi_indicator_types" == $shortTName )
-		return true;
-	if ("lbpmi_indicator_groups" == $shortTName )
-		return true;
-	return false;
-}
 
 /**
  * DEPRECATED
@@ -456,960 +223,6 @@ function GetEmailField($table = "")
 	return Security::emailField();
 }
 
-/**
- * @intellisense
- */
-function GetTablesList($pdfMode = false)
-{
-	$arr = array();
-	$checkPermissions = Security::permissionsAvailable();
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.antibiotics");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.antibiotics";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.case_antibiotics");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.case_antibiotics";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.clean_cut_implementations");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.clean_cut_implementations";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.countries");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.countries";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.device_distributions");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.device_distributions";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.diagnoses");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.diagnoses";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.facilities");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.facilities";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.follow_ups");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.follow_ups";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.languages");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.languages";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lifebox_staff");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lifebox_staff";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.partners");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.partners";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.procedures");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.procedures";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.regions");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.regions";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.surgical_cases");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.surgical_cases";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.trainers");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.trainers";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.training_courses");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.training_courses";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.training_languages");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.training_languages";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.training_leads");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.training_leads";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.training_partners");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.training_partners";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.training_sessions");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.training_sessions";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.training_trainers");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.training_trainers";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.ward_antibiotics");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.ward_antibiotics";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.ward_rounds");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.ward_rounds";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.clean_cut_implementation_summary_view");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.clean_cut_implementation_summary_view";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.device_distribution_summary_view");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.device_distribution_summary_view";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.surgical_case_summary_view");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.surgical_case_summary_view";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.training_summary_view");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.training_summary_view";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.programs");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.programs";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.training_approaches");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.training_approaches";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.training_types");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.training_types";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.quarters");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.quarters";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.participant_role");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.participant_role";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.sex");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.sex";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.training_participants");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.training_participants";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.venues");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.venues";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.training_attendance");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.training_attendance";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.participant_attendance_detail");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.participant_attendance_detail";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.participant_attendance_summary");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.participant_attendance_summary";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.training_participation");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.training_participation";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.daily_attendance_view");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.daily_attendance_view";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.users");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.users";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("admin_rights");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="admin_rights";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("admin_members");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="admin_members";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("admin_users");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="admin_users";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lifeboxme__audit");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lifeboxme__audit";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lifeboxme__locking");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lifeboxme__locking";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.months");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.months";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.devices");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.devices";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.payment_methods");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.payment_methods";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.transaction_types");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.transaction_types";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.donors");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.donors";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.device_distribution_log");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.device_distribution_log";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.device_inventory_changes");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.device_inventory_changes";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("aio_training_tracking");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="aio_training_tracking";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("Dashboard");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="Dashboard";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("Lifebox_DHIS2_OrgUnits");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="Lifebox_DHIS2_OrgUnits";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lifeboxme_dhis2_orgunits");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lifeboxme_dhis2_orgunits";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("Lifebox_DHIS2_Settings");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="Lifebox_DHIS2_Settings";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("Lifebox_DHIS2_dataItems");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="Lifebox_DHIS2_dataItems";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lifeboxme_dhis2_dataitems");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lifeboxme_dhis2_dataitems";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lifeboxme_dhis2_analytics_settings");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lifeboxme_dhis2_analytics_settings";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lifeboxme_dhis2_analytics_data");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lifeboxme_dhis2_analytics_data";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("aio_training_tracking Chart");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="aio_training_tracking Chart";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("aio_training_tracking Chart by sex");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="aio_training_tracking Chart by sex";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.smtp");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.smtp";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbapt_annual_plan_tracker");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbapt_annual_plan_tracker";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbapt_beginnings_fund");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbapt_beginnings_fund";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbapt_communications");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbapt_communications";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbapt_cri");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbapt_cri";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbapt_dashboard_summary");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbapt_dashboard_summary";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbapt_development");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbapt_development";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbapt_elma");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbapt_elma";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbapt_governance");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbapt_governance";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbapt_kpis_on_track");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbapt_kpis_on_track";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbapt_operations");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbapt_operations";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbapt_programs");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbapt_programs";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbapt_sample_workflow");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbapt_sample_workflow";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbapt_status");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbapt_status";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbapt_strategic_areas");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbapt_strategic_areas";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbapt_all_activities_view");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbapt_all_activities_view";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbapt_dashboard_summary_view");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbapt_dashboard_summary_view";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbapt_kpis_tracking_view");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbapt_kpis_tracking_view";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbapt_unified_activities");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbapt_unified_activities";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.years");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.years";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbapt_finance");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbapt_finance";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbapt_hr");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbapt_hr";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbapt_cathedral");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbapt_cathedral";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbapt_izumi");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbapt_izumi";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbapt_st");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbapt_st";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbapt_whi");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbapt_whi";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbpmi_calculation_log");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbpmi_calculation_log";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbpmi_data_elements");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbpmi_data_elements";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbpmi_datasets");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbpmi_datasets";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbpmi_indicator_actuals");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbpmi_indicator_actuals";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbpmi_indicator_targets");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbpmi_indicator_targets";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbpmi_indicators");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbpmi_indicators";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbpmi_summary");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbpmi_summary";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.period_types");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.period_types";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.unit_of_measurement");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.unit_of_measurement";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbpmi_calculation_jobs");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbpmi_calculation_jobs";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbpmi_data_values");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbpmi_data_values";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbpmi_aggregation_type");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbpmi_aggregation_type";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbpmi_domain_type");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbpmi_domain_type";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbpmi_indicator_types");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbpmi_indicator_types";
-	}
-	$tableAvailable = true;
-	if( $checkPermissions ) {
-		$strPerm = GetUserPermissions("public.lbpmi_indicator_groups");
-		$tableAvailable = ( strpos($strPerm, "P") !== false
-			|| $pdfMode && strpos($strPerm, "S") !== false );
-	}
-	if( $tableAvailable ) {
-		$arr[]="public.lbpmi_indicator_groups";
-	}
-	return $arr;
-}
 
 /**
  * @intellisense
@@ -1417,164 +230,13 @@ function GetTablesList($pdfMode = false)
 function GetTablesListWithoutSecurity()
 {
 	$arr = array();
-	$arr[]="public.antibiotics";
-	$arr[]="public.case_antibiotics";
-	$arr[]="public.clean_cut_implementations";
-	$arr[]="public.countries";
-	$arr[]="public.device_distributions";
-	$arr[]="public.diagnoses";
-	$arr[]="public.facilities";
-	$arr[]="public.follow_ups";
-	$arr[]="public.languages";
-	$arr[]="public.lifebox_staff";
-	$arr[]="public.partners";
-	$arr[]="public.procedures";
-	$arr[]="public.regions";
-	$arr[]="public.surgical_cases";
-	$arr[]="public.trainers";
-	$arr[]="public.training_courses";
-	$arr[]="public.training_languages";
-	$arr[]="public.training_leads";
-	$arr[]="public.training_partners";
-	$arr[]="public.training_sessions";
-	$arr[]="public.training_trainers";
-	$arr[]="public.ward_antibiotics";
-	$arr[]="public.ward_rounds";
-	$arr[]="public.clean_cut_implementation_summary_view";
-	$arr[]="public.device_distribution_summary_view";
-	$arr[]="public.surgical_case_summary_view";
-	$arr[]="public.training_summary_view";
-	$arr[]="public.programs";
-	$arr[]="public.training_approaches";
-	$arr[]="public.training_types";
-	$arr[]="public.quarters";
-	$arr[]="public.participant_role";
-	$arr[]="public.sex";
-	$arr[]="public.training_participants";
-	$arr[]="public.venues";
-	$arr[]="public.training_attendance";
-	$arr[]="public.participant_attendance_detail";
-	$arr[]="public.participant_attendance_summary";
-	$arr[]="public.training_participation";
-	$arr[]="public.daily_attendance_view";
-	$arr[]="public.users";
-	$arr[]="admin_rights";
-	$arr[]="admin_members";
-	$arr[]="admin_users";
-	$arr[]="public.lifeboxme__audit";
-	$arr[]="public.lifeboxme__locking";
-	$arr[]="public.months";
-	$arr[]="public.devices";
-	$arr[]="public.payment_methods";
-	$arr[]="public.transaction_types";
-	$arr[]="public.donors";
-	$arr[]="public.device_distribution_log";
-	$arr[]="public.device_inventory_changes";
-	$arr[]="aio_training_tracking";
-	$arr[]="Dashboard";
-	$arr[]="Lifebox_DHIS2_OrgUnits";
-	$arr[]="public.lifeboxme_dhis2_orgunits";
-	$arr[]="Lifebox_DHIS2_Settings";
-	$arr[]="Lifebox_DHIS2_dataItems";
-	$arr[]="public.lifeboxme_dhis2_dataitems";
-	$arr[]="public.lifeboxme_dhis2_analytics_settings";
-	$arr[]="public.lifeboxme_dhis2_analytics_data";
-	$arr[]="aio_training_tracking Chart";
-	$arr[]="aio_training_tracking Chart by sex";
-	$arr[]="public.smtp";
-	$arr[]="public.lbapt_annual_plan_tracker";
-	$arr[]="public.lbapt_beginnings_fund";
-	$arr[]="public.lbapt_communications";
-	$arr[]="public.lbapt_cri";
-	$arr[]="public.lbapt_dashboard_summary";
-	$arr[]="public.lbapt_development";
-	$arr[]="public.lbapt_elma";
-	$arr[]="public.lbapt_governance";
-	$arr[]="public.lbapt_kpis_on_track";
-	$arr[]="public.lbapt_operations";
-	$arr[]="public.lbapt_programs";
-	$arr[]="public.lbapt_sample_workflow";
-	$arr[]="public.lbapt_status";
-	$arr[]="public.lbapt_strategic_areas";
-	$arr[]="public.lbapt_all_activities_view";
-	$arr[]="public.lbapt_dashboard_summary_view";
-	$arr[]="public.lbapt_kpis_tracking_view";
-	$arr[]="public.lbapt_unified_activities";
-	$arr[]="public.years";
-	$arr[]="public.lbapt_finance";
-	$arr[]="public.lbapt_hr";
-	$arr[]="public.lbapt_cathedral";
-	$arr[]="public.lbapt_izumi";
-	$arr[]="public.lbapt_st";
-	$arr[]="public.lbapt_whi";
-	$arr[]="public.lbpmi_calculation_log";
-	$arr[]="public.lbpmi_data_elements";
-	$arr[]="public.lbpmi_datasets";
-	$arr[]="public.lbpmi_indicator_actuals";
-	$arr[]="public.lbpmi_indicator_targets";
-	$arr[]="public.lbpmi_indicators";
-	$arr[]="public.lbpmi_summary";
-	$arr[]="public.period_types";
-	$arr[]="public.unit_of_measurement";
-	$arr[]="public.lbpmi_calculation_jobs";
-	$arr[]="public.lbpmi_data_values";
-	$arr[]="public.lbpmi_aggregation_type";
-	$arr[]="public.lbpmi_domain_type";
-	$arr[]="public.lbpmi_indicator_types";
-	$arr[]="public.lbpmi_indicator_groups";
+	global $runnerProjectSettings;
+	foreach( $runnerProjectSettings['allTables'] as $table ) {
+		$arr[] = $table[ 'name' ];
+	}
 	return $arr;
 }
 
-/**
- * DEPRECATED! Use RunnerPage::_getFieldSQLDecrypt instead
- * Return the full database field original name
- *
- * @param string	$field
- * @param string	$table The datasource table name
- * @param boolean	$addAs OPTIONAL
- *
- * @return String
- * @intellisense
- * @deprecated
- */
-function GetFullFieldName($field, $table = "", $addAs = true, $connection = null)
-{
-	global $strTableName, $cman;
-
-	if( $table == "" )
-		$table = $strTableName;
-
-	if( !$connection )
-		$connection = $cman->byTable( $table );
-	$pSet = new ProjectSettings($table);
-
-	$fname = RunnerPage::_getFieldSQL($field, $connection, $pSet);
-
-	if($pSet->hasEncryptedFields() && !$connection->isEncryptionByPHPEnabled())
-	{
-		$cipherer = new RunnerCipherer($table);
-		return $cipherer->GetFieldName($fname, $field)
-			.($cipherer->isFieldEncrypted($field) && $addAs ? " as ".$connection->addFieldWrappers($field) : "");
-	}
-	return $fname;
-}
-
-/**
- * returns Chart type
- * @intellisense
- */
-function GetChartType($shorttable)
-{
-	if($shorttable=="aio_training_tracking_chart")
-		return "2DColumn";
-	if($shorttable=="aio_training_tracking_chart_by_sex")
-		return "2DColumn";
-	return "";
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// data output functions
-////////////////////////////////////////////////////////////////////////////////
 
 /**
  * @intellisense
@@ -2125,562 +787,18 @@ function IsBigInt($type)
  */
 function GetUserPermissionsDynamic( $table )
 {
-	if( !isLogged() )
+	if( !isLogged() ) {
 		return "";
-	global $gPermissionsRefreshTime,$gPermissionsRead;
-	if( Security::isAdmin() )
-	{
-		if($table=="admin_rights")
-			return "ADESPIM";
-		if($table=="admin_members")
-			return "ADESPIM";
-		if($table=="admin_users")
-			return "ADESPIM";
+	}
+
+	if( Security::isAdmin() && Security::isAdminTable( $table ) ) {
+		return "ADESPIM";
 	}
 
 	$userRights = &Security::dynamicUserRights();
 	return $userRights[ $table ][ "mask" ];
 }
 
-
-/**
- * @intellisense
- */
-function GetUserPermissionsStatic( $table )
-{
-	if( !isLogged() )
-		return "";
-
-	$sUserGroup = storageGet( "GroupID" );
-	$extraPerm = "";
-	if( $table=="public.antibiotics" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.case_antibiotics" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.clean_cut_implementations" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.countries" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.device_distributions" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.diagnoses" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.facilities" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.follow_ups" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.languages" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lifebox_staff" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.partners" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.procedures" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.regions" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.surgical_cases" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.trainers" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.training_courses" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.training_languages" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.training_leads" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.training_partners" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.training_sessions" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.training_trainers" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.ward_antibiotics" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.ward_rounds" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.clean_cut_implementation_summary_view" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.device_distribution_summary_view" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.surgical_case_summary_view" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.training_summary_view" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.programs" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.training_approaches" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.training_types" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.quarters" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.participant_role" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.sex" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.training_participants" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.venues" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.training_attendance" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.participant_attendance_detail" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.participant_attendance_summary" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.training_participation" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.daily_attendance_view" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.users" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="admin_rights" )
-	{
-//	default permissions
-		return "".$extraPerm;
-	}
-	if( $table=="admin_members" )
-	{
-//	default permissions
-		return "".$extraPerm;
-	}
-	if( $table=="admin_users" )
-	{
-//	default permissions
-		return "".$extraPerm;
-	}
-	if( $table=="public.lifeboxme__audit" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lifeboxme__locking" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.months" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.devices" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.payment_methods" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.transaction_types" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.donors" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.device_distribution_log" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.device_inventory_changes" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="aio_training_tracking" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="Dashboard" )
-	{
-//	default permissions
-		return "S".$extraPerm;
-	}
-	if( $table=="Lifebox_DHIS2_OrgUnits" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lifeboxme_dhis2_orgunits" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="Lifebox_DHIS2_Settings" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="Lifebox_DHIS2_dataItems" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lifeboxme_dhis2_dataitems" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lifeboxme_dhis2_analytics_settings" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lifeboxme_dhis2_analytics_data" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="aio_training_tracking Chart" )
-	{
-//	default permissions
-		return "S".$extraPerm;
-	}
-	if( $table=="aio_training_tracking Chart by sex" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.smtp" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbapt_annual_plan_tracker" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbapt_beginnings_fund" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbapt_communications" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbapt_cri" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbapt_dashboard_summary" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbapt_development" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbapt_elma" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbapt_governance" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbapt_kpis_on_track" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbapt_operations" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbapt_programs" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbapt_sample_workflow" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbapt_status" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbapt_strategic_areas" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbapt_all_activities_view" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbapt_dashboard_summary_view" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbapt_kpis_tracking_view" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbapt_unified_activities" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.years" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbapt_finance" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbapt_hr" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbapt_cathedral" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbapt_izumi" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbapt_st" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbapt_whi" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbpmi_calculation_log" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbpmi_data_elements" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbpmi_datasets" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbpmi_indicator_actuals" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbpmi_indicator_targets" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbpmi_indicators" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbpmi_summary" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.period_types" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.unit_of_measurement" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbpmi_calculation_jobs" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbpmi_data_values" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbpmi_aggregation_type" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbpmi_domain_type" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbpmi_indicator_types" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	if( $table=="public.lbpmi_indicator_groups" )
-	{
-//	default permissions
-		return "ADESPI".$extraPerm;
-	}
-	// grant nothing by default
-	return "";
-}
 
 /**
  * DEPRECATED
@@ -2704,11 +822,9 @@ function IsAdmin()
  * @return String
  * @intellisense
  */
-function GetUserPermissions( $table = "" )
+function GetUserPermissions( $table )
 {
-	global $strTableName, $globalEvents;
-	if(!$table)
-		$table = $strTableName;
+	global $globalEvents;
 	$permissions = "";
 	if( Security::hasLogin() ) {
 		if( !IsLogged() )
@@ -2728,7 +844,7 @@ function GetUserPermissions( $table = "" )
 		if( Security::dynamicPermissions() ) {
 			$permissions =  GetUserPermissionsDynamic($table);
 		} else {
-			$permissions =  GetUserPermissionsStatic($table);
+			$permissions =  Security::getUserPermissionsStatic( $table );
 		}
 	} else {
 		$permissions =  "ADESPI";
@@ -2751,14 +867,15 @@ function GetUserPermissions( $table = "" )
  */
 function menuLinkAvailable( $table, $pageType, $page = null )
 {
-	if ( $table == WEBREPORTS_TABLE )
+	if ( $table == WEBREPORTS_TABLE ) {
 		return true;
+	}
+
+	if( isAdminPage( $pageType ) ) {
+		return Security::isAdmin();
+	}
 
 	if ( !$page ) {
-//		this part solves #15950, but very time consuming as creates ProjectSettings for every menu item every time.
-//		$pSet = new ProjectSettings( $table, $pageType );
-//		$permission = Security::pageType2permission( $pSet->getPageType() );
-
 		$permission = Security::pageType2permission( $pageType );
 		return Security::userCan( $permission, $table );
 	}
@@ -3147,39 +1264,6 @@ function splitvalues($str)
 	return $arr;
 }
 
-/**
- *
- */
-/*
-function GetLookupFieldsIndexes($pSet, $field)
-{
-	$lookupTable = $pSet->getLookupTable($field);
-	$lookupType = $pSet->getLookupType($field);
-	$displayFieldName = $pSet->getDisplayField($field);
-	$linkFieldName = $pSet->getLinkField($field);
-	$linkAndDisplaySame = $linkFieldName == $displayFieldName;
-	if($lookupType == LT_QUERY)
-	{
-		$lookupPSet = new ProjectSettings($lookupTable);
-		$linkFieldIndex = $lookupPSet->getFieldIndex($linkFieldName) - 1;
-		if($linkAndDisplaySame)
-			$displayFieldIndex = $linkFieldIndex;
-		else
-		{
-			if($pSet->getCustomDisplay($field))
-				$displayFieldIndex = $lookupPSet->getCustomExpressionIndex($pSet->_table, $field);
-			else
-				$displayFieldIndex = $lookupPSet->getFieldIndex($displayFieldName) - 1;
-		}
-	}
-	else
-	{
-		$linkFieldIndex = 0;
-		$displayFieldIndex = $linkAndDisplaySame ? 0 : 1;
-	}
-	return array("linkFieldIndex" => $linkFieldIndex, "displayFieldIndex" => $displayFieldIndex);
-}
-*/
 //////////////////////////////////////////////////////////////////////////////
 /**
  * Get locale, am, pm for field edit as time
@@ -3329,9 +1413,17 @@ function print_inline_array(&$arr,$printkey=false)
  */
 function checkpassword($pwd)
 {
+	if( !ProjectSettings::passwordValidationValue('strong') ) {
+		return true;
+	}
+	$pwdMinLength = ProjectSettings::passwordValidationValue('minimumLength');
+	$pwdUniqueChars = ProjectSettings::passwordValidationValue('uniqueCharacters');
+	$pwdDigitsSymbols = ProjectSettings::passwordValidationValue('digitsAndSymbols');
+	$pwdUpperLower = ProjectSettings::passwordValidationValue('upperAndLowerCase');
 	$len = strlen($pwd);
-	if($len < 8)
+	if( $pwdMinLength && $len < $pwdMinLength ) {
 		return false;
+	}
 	$cUnique = array();
 	$cLower = $cUpper = $cDigit = 0;
 	for($i=0; $i<$len; $i++)
@@ -3346,22 +1438,20 @@ function checkpassword($pwd)
 
 		$cUnique[$c] = 1;
 	}
-	if(count($cUnique)<4)
+
+	if( $pwdUniqueChars && count($cUnique) < $pwdUniqueChars ) {
 		return false;
-	if($cDigit<2)
+	}
+	if( $pwdDigitsSymbols && $cDigit < $pwdDigitsSymbols ) {
 		return false;
+	}
+
+	if( $pwdUpperLower && ( !$cLower || !$cUpper ) ) {
+		return false;
+	}
 	return true;
 }
 
-/**
- * @intellisense
- */
-function GetChartXML($chartname)
-{
-	$strTableName = GetTableByShort($chartname);
-	$settings = new ProjectSettings($strTableName);
-	return $settings->getChartXml();
-}
 
 function isSecureProtocol() {
   return
@@ -3403,41 +1493,33 @@ function GetFullSiteUrl()
 /**
  * @intellisense
  */
-function GetAuditObject($table="")
+function GetAuditObject( $table = "" )
 {
+	$auditSettings =& ProjectSettings::getSecurityValue( 'auditAndLocking' );
+	if( @$auditSettings['loggingMode'] == 0 ) {
+		return null;
+	}
+	if( $table ) {
+		$tableSettings = @$auditSettings['tables'][ $table ];
+		if( !$tableSettings || !@$tableSettings['logModifications'] ) {
+			return null;
+		} 
+	}
+	return @$auditSettings[ 'loggingMode' ] == 1
+		? new AuditTrailTable()
+		: new AuditTrailFile();
 
-	$linkAudit = false;
-	if(!$table)
-	{
-		$linkAudit = true;
-	}
-	else
-	{
-		$settings = new ProjectSettings($table);
-		$linkAudit = $settings->auditEnabled();
-	}
-	if ($linkAudit)
-	{
-		require_once(getabspath("include/audit.php"));
-		return new AuditTrailTable();
-	}
-	else
-	{
-		return NULL;
-	}
 }
 
 /**
  * @intellisense
  */
-function GetLockingObject($table="")
+function GetLockingObject( $table )
 {
-
-	if(!$table)
-	{
-		global $strTableName;
-		$table = $strTableName;
+	if( !ProjectSettings::getSecurityValue( 'auditAndLocking', 'enableLocking' ) ) {
+		return null;
 	}
+
 	$settings = new ProjectSettings($table);
 	if ($settings->lockingEnabled())
 	{
@@ -3453,9 +1535,8 @@ function GetLockingObject($table="")
 /**
  * @intellisense
  */
-function isEnableSection508()
-{
-	return GetGlobalData("isSection508",false);
+function isEnableSection508() {
+	return ProjectSettings::getProjectValue( 'section508Compat' );
 }
 
 /**
@@ -3523,7 +1604,9 @@ function SetLangVars($xt, $prefix, $pageName = "", $extraparams = "")
 
 	$xt->assign($currentLang . "LANGLINK_ACTIVE", true);
 
-	$xt->assign("EnglishLANGLINK", "English" != $currentLang);
+	foreach( ProjectSettings::languageDescriptors() as $l ) {
+		$xt->assign( $l['name'] . "LANGLINK", $l['name'] != $currentLang);
+	}
 
 	if( isEnableSection508() )
 		$xt->assign_section("lang_label", "<label for=\"languageSelector\">","</label>");
@@ -3540,49 +1623,42 @@ function SetLangVars($xt, $prefix, $pageName = "", $extraparams = "")
 /**
  * @intellisense
  */
-function GetTableCaption($table)
-{
-	global $tableCaptions;
-	return @$tableCaptions[mlang_getcurrentlang()][$table];
+/**
+ * @param String table - Goo
+ */
+function GetTableCaption( $table ) {
+	return Labels::getTableCaption( $table );
 }
+
 
 /**
  * @intellisense
  */
-function GetFieldByLabel($table, $label)
+function GetFieldLabel( $goodTable, $field )
 {
-	global $field_labels, $strTableName;
-	if (!$table)
-	{
-		$table = $strTableName;
+	if( $goodTable === GLOBAL_PAGES_GOOD ) {
+		$table = Security::loginTable();
+	} else {
+		$table = GetTableByGood( $goodTable );
 	}
 
-	if(!array_key_exists($table,$field_labels))
-		return "";
-	$currLang = mlang_getcurrentlang();
-	if(!array_key_exists($currLang,$field_labels[$table]))
-		return "";
-	$lables = $field_labels[$table][mlang_getcurrentlang()];
-	foreach ($lables as $key=>$val)
-	{
-		if ($val == $label)
-		{
-			return $key;
+	/*
+	if( GetEntityType( $table ) == titDASHBOARD ) {
+		$pSet = new ProjectSettings( $table );
+		$dashSearchFields = $pSet->getDashboardSearchFields();
+		$fieldInfo = $dashSearchFields[ $field ];
+		if( !$fieldInfo ) {
+			return '';
 		}
+		$table = $fieldInfo[0]["table"];
+		$field = $fieldInfo[0]["field"];
 	}
-	return '';
-}
+	*/
 
-/**
- * @intellisense
- */
-function GetFieldLabel($table,$field)
-{
-	global $field_labels;
-	if( !array_key_exists( $table, $field_labels ) )
+	global $runnerTableLabels;
+	if( !array_key_exists( $table, $runnerTableLabels ) )
 		return "";
-
-	return @$field_labels[ $table ][ mlang_getcurrentlang() ][ $field ];
+	return @$runnerTableLabels[ $table ][ 'fieldLabels' ][ $field ];
 }
 
 
@@ -3591,11 +1667,12 @@ function GetFieldLabel($table,$field)
  */
 function GetFieldToolTip($table, $field)
 {
-	global $fieldToolTips;
-	if( !array_key_exists( $table, $fieldToolTips ) )
+	$table = GetTableByGood( $table );
+	global $runnerTableLabels;
+	if( !array_key_exists( $table, $runnerTableLabels ) )
 		return "";
 
-	return @$fieldToolTips[ $table ][ mlang_getcurrentlang() ][ $field ];
+	return @$runnerTableLabels[ $table ][ 'fieldTooltips' ][ $field ];
 }
 
 /**
@@ -3605,12 +1682,12 @@ function GetFieldToolTip($table, $field)
  */
 function GetFieldPlaceHolder( $table, $field )
 {
-	global $placeHolders;
-
-	if( !array_key_exists( $table, $placeHolders ) )
+	$table = GetTableByGood( $table );
+	global $runnerTableLabels;
+	if( !array_key_exists( $table, $runnerTableLabels ) )
 		return "";
 
-	return @$placeHolders[ $table ][ mlang_getcurrentlang() ][ $field ];
+	return @$runnerTableLabels[ $table ][ 'fieldPlaceholders' ][ $field ];
 }
 
 
@@ -3623,16 +1700,24 @@ function GetMLString($mLString)
 	if( !$mLString ) {
 		return "";
 	}
+	if( is_string( $mLString ) ) {
+		return $mLString;
+	}
 	switch($mLString["type"])
 	{
-		case ML_TEXT:
+		case mlTypeText:
 			return $mLString["text"];
 
-		case ML_CUSTOM_LABEL:
+		case mlTypeCustomLabel:
 			return GetCustomLabel($mLString["label"]);
 
-		case ML_MESSAGE:
+		case mlTypeMessage:
 			return mlang_message($mLString["tag"]);
+
+		case mlTypeTableCaption:
+			return Labels::getTableCaption($mLString["table"]);
+	
+	
 	}
 
 	return "";
@@ -3644,32 +1729,37 @@ function GetMLString($mLString)
 /**
  * @intellisense
  */
-function GetCustomLabel($custom)
-{
-	global $custom_labels;
-	return @$custom_labels[mlang_getcurrentlang()][$custom];
+function GetCustomLabel( $custom ) {
+	global $runnerLangMessages;
+	return @$runnerLangMessages[ mlang_getcurrentlang() ][ 'customLabels' ][ $custom ];
 }
 
 /**
  * @intellisense
  */
-function mlang_getcurrentlang()
-{
-	global $_currentLanguage, $mlang_messages,$mlang_defaultlang;
-	if(@$_POST["language"])
-		$_SESSION["language"]=@$_POST["language"];
-	if(@$_GET["language"])
-		$_SESSION["language"]=@$_GET["language"];
-	if(@$_SESSION["language"])
-		return $_SESSION["language"];
+function mlang_getcurrentlang() {
+	global $mlang_defaultlang;
+	if( @$_POST["language"] )
+		$_SESSION["language"] = @$_POST["language"];
+	if( @$_GET["language"] )
+		$_SESSION["language"] = @$_GET["language"];
+	if( @$_SESSION[ 'language' ] ) {
+		//	verify or clear the language
+		$lang = $_SESSION[ 'language' ];
+		foreach( ProjectSettings::languageDescriptors() as $l ) {
+			if( $lang == $l['name'] ) {
+				return $lang;
+			}
+		}
+		$_SESSION[ 'language' ] = '';
+	}
 	return $mlang_defaultlang;
 }
 
 function isRTL()
 {
-	global $mlang_charsets;
-	$cp = strtolower($mlang_charsets[mlang_getcurrentlang()]);
-	return ($cp == 'windows-1256' || $cp == 'windows-1255');
+	$rtlLanguages = ProjectSettings::getProjectValue( 'rtlLanguages' );
+	return !!$rtlLanguages[ mlang_getcurrentlang() ];
 }
 
 
@@ -3688,18 +1778,18 @@ function mlang_getlanglist()
 function getMountNames()
 {
 	$mounts = array();
-		$mounts[1] = "January";
-	$mounts[2] = "February";
-	$mounts[3] = "March";
-	$mounts[4] = "April";
-	$mounts[5] = "May";
-	$mounts[6] = "June";
-	$mounts[7] = "July";
-	$mounts[8] = "August";
-	$mounts[9] = "September";
-	$mounts[10] = "October";
-	$mounts[11] = "November";
-	$mounts[12] = "December";
+	$mounts[1] = mlang_message("MONTH_JAN");
+	$mounts[2] = mlang_message("MONTH_FEB");
+	$mounts[3] = mlang_message("MONTH_MAR");
+	$mounts[4] = mlang_message("MONTH_APR");
+	$mounts[5] = mlang_message("MONTH_MAY");
+	$mounts[6] = mlang_message("MONTH_JUN");
+	$mounts[7] = mlang_message("MONTH_JUL");
+	$mounts[8] = mlang_message("MONTH_AUG");
+	$mounts[9] = mlang_message("MONTH_SEP");
+	$mounts[10] = mlang_message("MONTH_OCT");
+	$mounts[11] = mlang_message("MONTH_NOV");
+	$mounts[12] = mlang_message("MONTH_DEC");
 
 	return $mounts;
 }
@@ -3763,33 +1853,24 @@ function DoInsertRecordSQL($table, &$avalues, &$blobfields, &$pageObject)
 	return true;
 }
 
-function getEventObject( $table )
+function getIntervalLimitsExpressions( $pSet, $field, $idx, $isLowerBound ) {
+	$events = getEventObject( $pSet );
+	return $events->filterIntervalValue( $field, $idx, $isLowerBound );
+
+}
+
+
+function getEventObject( $pSet )
 {
-	global $tableEvents, $tables_data, $dummyEvents;
-	if( array_key_exists($table,$tableEvents) )
+	global $tableEvents, $dummyEvents;
+	$table = $pSet->table();
+	if( array_key_exists( $table, $tableEvents ) ) {
 		return $tableEvents[$table];
-
-	if( !$tables_data[$table] ) {
-		return null;
 	}
-	if( !$tables_data[$table][".hasEvents"] ) {
-		return $dummyEvents;
-	}
-	$tableEvents[$table] = createEventClass( $table );
-	return $tableEvents[$table];
+	$tableEvents[ $table ] = createEventClass( $table );
+	return $tableEvents[ $table ];
 }
 
-/**
- * @intellisense
- */
-function tableEventExists($event,$table)
-{
-	$events = getEventObject( $table );
-	if( !$events ) {
-		return false;
-	}
-	return $events->exists($event);
-}
 
 /**
  * @intellisense
@@ -3966,28 +2047,7 @@ function isIE8()
 	return (count($matches)>1 && $matches[1]<=8);
 }
 
-/**
- * Check if the client application's part is run on a mobile device
- * @intellisense
- */
-function mobileDeviceDetected()
-{
-	return false;
-}
 
-/**
- * Check if the client application's part is run on a mobile device
- * @return Boolean
- */
-function detectMobileDevice()
-{
-	return false;
-}
-
-function IsMobile()
-{
-	return detectMobileDevice();
-}
 
 /**
  * GetPageLayout
@@ -4000,24 +2060,8 @@ function IsMobile()
 function & GetPageLayout($table, $page, $suffixName = '')
 {
 	$shortTableName = GetTableURL($table);
-	global $page_layouts, $arrCustomPages, $all_page_layouts, $pd_pages;
+	global $all_page_layouts, $pd_pages;
 
-	// try open old layout first
-	$layoutName = ($shortTableName != '' ? $shortTableName.'_' : '').$page.($suffixName != '' ? '_'.$suffixName : '');
-	$oldLayoutName = $layoutName;
-	if( $shortTableName == GLOBAL_PAGES_SHORT )
-		$oldLayoutName = $page;
-	if( $arrCustomPages[ $oldLayoutName . ".htm" ] /*||  isAdminPage( $shortTableName ) */) {
-		$layout = $page_layouts[ $oldLayoutName ];
-		if($layout)
-		{
-			if(postvalue("pdf"))
-			{
-				$layout->style = $layout->pdfStyle();
-			}
-		}
-		return $layout;
-	}
 	//	find and return new layout
 	$shortTableName = $shortTableName == "" ? GLOBAL_PAGES_SHORT : $shortTableName;
 	$pdLayoutName = $shortTableName . '_' .$page;
@@ -4029,29 +2073,16 @@ function & GetPageLayout($table, $page, $suffixName = '')
 		return null;
 	}
 
-	global $bsProjectTheme, $bsProjectSize, $styleOverrides;
+	$styleOverrides =& ProjectSettings::getProjectValue( "styleOverrides" );
 
-	$stylepath = "";
-	$theme = $bsProjectTheme;
-	$size = $bsProjectSize;
-	$customSettings = false;
-	$override = $styleOverrides[ $table . "_" . $page ];
-	if( !$override && $table == GLOBAL_PAGES ) {
-		$override = $styleOverrides[ "_" . $page ];
-	}
-	if( $override ) {
-		$theme = $override["theme"];
-		$size = $override["size"];
-		$stylepath = $override["path"];
-		$customSettings = true;
-	}
 	$layout  = new PDLayout(
 			$shortTableName,
 			$pd_pages[ $table ][ $page ],
-			$theme,
-			$size,
-			$stylepath,
-			$customSettings );
+			ProjectSettings::getProjectValue( 'projectTheme' ),
+			ProjectSettings::getProjectValue( 'projectSize' ),
+			$pdLayoutName,
+			array_key_exists( $pdLayoutName, $styleOverrides ) 
+	);
 	$all_page_layouts[ $shortTableName."_".$page ] = $layout;
 	return $layout;
 }
@@ -4067,15 +2098,6 @@ function & getLayoutByFilename( $filename ) {
 	return $page_layouts[$oldFileName];
 }
 
-/**
- * Check if the mobile template is set
- * @param String templateFileName
- * @return Boolean
- */
-function isPageLayoutMobile( $templateFileName )
-{
-	return false;
-}
 
 /**
  * @intellisense
@@ -4196,9 +2218,8 @@ function getOptionsForMultiUpload($pSet, $field)
 	$options = array(
 		"max_file_size" => $pSet->getMaxFileSize($field),
 		"max_totalFile_size" => $pSet->getMaxTotalFilesSize($field),
-		"max_number_of_files" => $pSet->getMaxNumberOfFiles($field),
-		"max_width" => $pSet->getMaxImageWidth($field),
-		"max_height" => $pSet->getMaxImageHeight($field));
+		"max_number_of_files" => $pSet->getMaxNumberOfFiles($field)
+	);
 	if($pSet->getResizeOnUpload($field))
 	{
 		$options["resizeOnUpload"] = true;
@@ -4386,14 +2407,12 @@ function getContentTypeByExtension($ext)
  */
 function getLatLngByAddr($addr)
 {
-	global $globalSettings;
-
-	$apiKey = $globalSettings["apiGoogleMapsCode"];
+	$apiKey = ProjectSettings::getProjectValue( 'mapSettings', 'apikey' );
 
 	switch( getMapProvider() ){
 		case GOOGLE_MAPS:
 			$url = 'https://maps.googleapis.com/maps/api/geocode/json?address='.rawurlencode($addr).'&sensor=false&key=' . $apiKey;
-			$result = my_json_decode(myurl_get_contents($url));
+			$result = runner_json_decode(myurl_get_contents($url));
 			if( $result['status'] == 'OK' ) {
 				return $result['results'][0]['geometry']['location'];
 			}
@@ -4401,7 +2420,7 @@ function getLatLngByAddr($addr)
 
 		case OPEN_STREET_MAPS:
 			$url = 'https://nominatim.openstreetmap.org/search/'.rawurlencode($addr).'?format=json&addressdetails=1&limit=1';
-			$result = my_json_decode(myurl_get_contents($url));
+			$result = runner_json_decode(myurl_get_contents($url));
 			if( $result ) {
 				$lat = $result[0]['lat'];
 				if( !$lat )
@@ -4418,7 +2437,7 @@ function getLatLngByAddr($addr)
 				return false;
 
 			$url = 'https://dev.virtualearth.net/REST/v1/Locations?query='.rawurlencode( $addr ).'&output=json&key='.$apiKey;
-			$result = my_json_decode(myurl_get_contents($url));
+			$result = runner_json_decode(myurl_get_contents($url));
 			if( $result ) {
 				$lat = $result["resourceSets"][0]["resources"][0]["geocodePoints"][0]["coordinates"][0];
 				if( !$lat )
@@ -4438,7 +2457,7 @@ function getLatLngByAddr($addr)
 
 			$ret = $request->run();
 			if( !$ret["erorr"] && $ret["content"] ) {
-				$data = my_json_decode( $ret["content"] );
+				$data = runner_json_decode( $ret["content"] );
 				return array(
 					"lat" => $data["items"][0]["position"]["lat"],
 					"lng" => $data["items"][0]["position"]["lng"]
@@ -4454,7 +2473,7 @@ function getLatLngByAddr($addr)
 
 			$ret = $request->run();
 			if( !$ret["erorr"] && $ret["content"] ) {
-				$data = my_json_decode( $ret["content"] );
+				$data = runner_json_decode( $ret["content"] );
 				return array(
 					"lat" => $data["results"][0]["locations"][0]["latLng"]["lat"],
 					"lng" => $data["results"][0]["locations"][0]["latLng"]["lng"]
@@ -4471,18 +2490,6 @@ function getLatLngByAddr($addr)
 function isLoggedAsGuest()
 {
 	return Security::isGuest();
-}
-
-
-/**
- * @intellisense
- */
-function func_Override($page)
-{
-	global $globalSettings;
-	if(!isset($globalSettings["override"][$page]))
-		return otNone;
-	return $globalSettings["override"][$page];
 }
 
 
@@ -4695,14 +2702,21 @@ function GetKeysArray($arr, $pageObject, $searchId = false)
 
 function GetBaseScriptsForPage($isDisplayLoading, $additionalScripts = "", $customText = "")
 {
-	global $projectBuildKey;
+	$projectBuildKey = ProjectSettings::getProjectValue('projectBuild');
+	$wizardBuildKey = ProjectSettings::getProjectValue('wizardBuild');
 	$result = "";
-	$result .= "<script type=\"text/javascript\" src=\"".GetRootPathForResources("include/loadfirst.js?41974")."\"></script>";
+	$result .= '<script type="text/javascript" src="include/loadfirst.js?'.$wizardBuildKey.'"></script>';
 
+	if( ProjectSettings::getProjectValue( 'hasCustomFunctionsJs' ) ) {
+		$result .= "<script type=\"text/javascript\" src=\"usercode/custom_functions.js?".$projectBuildKey."\"></script>";
+	}
 
 	$result .= $additionalScripts;
-	$result .= "<script type=\"text/javascript\" src=\"".GetRootPathForResources("include/lang/".getLangFileName(mlang_getcurrentlang()).".js?41974")."\"></script>";
+	$result .= '<script type="text/javascript" src="include/lang/' . getLangFileName(mlang_getcurrentlang()) . '.js?'.$wizardBuildKey.'"></script>';
 
+	if( ProjectSettings::richTextEnabled() && ProjectSettings::rteType() == rteInnovaEditor ) {
+		$result .= "<script type=\"text/javascript\" src=\"plugins/innovaeditor/scripts/innovaeditor.js\"></script>";
+	}
 
 
 	if( getMapProvider() == BING_MAPS )
@@ -4754,34 +2768,12 @@ function GetBaseScriptsForPage($isDisplayLoading, $additionalScripts = "", $cust
  */
 function printJSON($data, $returnPlainJSON = false)
 {
-	$rJSON = my_json_encode( $data );
+	$rJSON = runner_json_encode( $data );
 
 	return $returnPlainJSON ? $rJSON : runner_htmlspecialchars( $rJSON );
 }
 
-/**
- * Get the value of an interval limit's custom PHP expression
- * @param String table
- * @param String field
- * @param Number idx
- * @param Boolean isLowerBound
- * @return Mixed
- */
-function getIntervalLimitsExprs($table, $field, $idx, $isLowerBound)
-{
 
-
-}
-
-/**
- * @deprecated
- */
-function import_error_handler($errno, $errstr, $errfile, $errline)
-{
-	/*global $error_happened;
-
-	$error_happened=1;*/
-}
 function PrepareForExcel($ret)
 {
 	//$ret = htmlspecialchars($str); commented for bug #6823
@@ -4876,7 +2868,7 @@ function isIOS()
 
 /* Get map provider google = 0, openStreetMap = 1*/
 function getMapProvider(){
-	return GetGlobalData("mapProvider", true);
+	return ProjectSettings::getProjectValue( 'mapSettings', 'provider' );
 }
 
 function getBingMapsLang()
@@ -4907,64 +2899,73 @@ function getBingMapsLang()
 
 function getDefaultLanguage()
 {
-	if( @strlen(@$_SESSION["language"]) == 0 && $_SERVER['HTTP_ACCEPT_LANGUAGE'] )
-	{
-		$arrWizardLang = array();
-		$arrWizardLang[] = "English";
-		$arrLang = array();
-		$arrLang["af"] = "Afrikaans";
-		$arrLang["ar"] = "Arabic";
-		$arrLang["bs"] = "Bosnian"; //?
-		$arrLang["bg"] = "Bulgarian";
-		$arrLang["ca"] = "Catalan";
-		$arrLang["zh"] = "Chinese";// 1
-		$arrLang["hr"] = "Croatian";
-		$arrLang["cs"] = "Czech";
-		$arrLang["da"] = "Danish";
-		$arrLang["nl"] = "Dutch";
-		$arrLang["en"] = "English";
-		$arrLang["fa"] = "Farsi"; //?
-		$arrLang["fr"] = "French";
-		$arrLang["ka"] = "Georgian";
-		$arrLang["de"] = "German";
-		$arrLang["el"] = "Greek";
-		$arrLang["he"] = "Hebrew";//?
-		$arrLang["hk"] = "Hongkong";// 1
-		$arrLang["hu"] = "Hungarian";
-		$arrLang["id"] = "Indonesian";//?
-		$arrLang["it"] = "Italian";
-		$arrLang["ja"] = "Japanese";
-		$arrLang["ms"] = "Malay";
-		$arrLang["no"] = "Norwegian";
-		$arrLang["fl"] = "Phillipines";//?
-		$arrLang["pl"] = "Polish";
-		$arrLang["pt"] = "Portugal"; // 2
-		$arrLang["br"] = "Portuguese"; // 2
-		$arrLang["ro"] = "Romanian";
-		$arrLang["ru"] = "Russian";
-		$arrLang["sk"] = "Slovak";
-		$arrLang["es"] = "Spanish";
-		$arrLang["sv"] = "Swedish";
-		$arrLang["tw"] = "Taiwan";//??
-		$arrLang["th"] = "Thai";
-		$arrLang["tr"] = "Turkish";
-		$arrLang["ur"] = "Urdu";
-		$arrLang["cy"] = "Welsh";
+	if( !ProjectSettings::getProjectValue( 'detectDefaultLanguage' ) ) {
+		return ProjectSettings::getProjectValue( 'defaultLanguage' );
+	}
+	$acceptHeader = @$_SERVER['HTTP_ACCEPT_LANGUAGE'];
+	if( !$acceptHeader ) {
+		return ProjectSettings::getProjectValue( 'defaultLanguage' );
+	}
+	if( mlang_getcurrentlang() ) {
+		//	no need to detect anything
+		return ProjectSettings::getProjectValue( 'defaultLanguage' );
+	}
 
-		$http_lang = strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']); //return string ex.:fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4
-		$http_lang = str_replace(";",",",$http_lang);
-		$http_lang = str_replace("-",",",$http_lang);
+	$projectLanguages = array();
+	foreach( ProjectSettings::languageDescriptors() as $l ) {
+		$projectLanguages[ $l['name'] ] = true;
+	}
+	
+	$langCodes = array();
+	$langCodes["af"] = "Afrikaans";
+	$langCodes["ar"] = "Arabic";
+	$langCodes["bs"] = "Bosnian"; //?
+	$langCodes["bg"] = "Bulgarian";
+	$langCodes["ca"] = "Catalan";
+	$langCodes["zh"] = "Chinese";// 1
+	$langCodes["hr"] = "Croatian";
+	$langCodes["cs"] = "Czech";
+	$langCodes["da"] = "Danish";
+	$langCodes["nl"] = "Dutch";
+	$langCodes["en"] = "English";
+	$langCodes["fa"] = "Farsi"; //?
+	$langCodes["fr"] = "French";
+	$langCodes["ka"] = "Georgian";
+	$langCodes["de"] = "German";
+	$langCodes["el"] = "Greek";
+	$langCodes["he"] = "Hebrew";//?
+	$langCodes["hk"] = "Hongkong";// 1
+	$langCodes["hu"] = "Hungarian";
+	$langCodes["id"] = "Indonesian";//?
+	$langCodes["it"] = "Italian";
+	$langCodes["ja"] = "Japanese";
+	$langCodes["ms"] = "Malay";
+	$langCodes["no"] = "Norwegian";
+	$langCodes["fl"] = "Phillipines";//?
+	$langCodes["pl"] = "Polish";
+	$langCodes["pt"] = "Portugal"; // 2
+	$langCodes["br"] = "Portuguese"; // 2
+	$langCodes["ro"] = "Romanian";
+	$langCodes["ru"] = "Russian";
+	$langCodes["sk"] = "Slovak";
+	$langCodes["es"] = "Spanish";
+	$langCodes["sv"] = "Swedish";
+	$langCodes["tw"] = "Taiwan";//??
+	$langCodes["th"] = "Thai";
+	$langCodes["tr"] = "Turkish";
+	$langCodes["ur"] = "Urdu";
+	$langCodes["cy"] = "Welsh";
 
-		$langcode = array();
-		$langcode = explode(",", $http_lang);
+	$acceptHeader = strtolower( $acceptHeader ); //return string ex.:fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4
+	$acceptHeader = str_replace( array(';', '-' ), ',', $acceptHeader );
 
-		foreach($langcode as $lang)
-		{
-			if( in_array($arrLang[$lang], $arrWizardLang) )
-				return $arrLang[$lang];
+	foreach( explode( ',', $acceptHeader ) as $code ) {
+		$language = @$langCodes[ $code ];
+		if( $language && @$projectLanguages[ $language ] ) {
+			return $language;
 		}
 	}
-	return "English";
+	return ProjectSettings::getProjectValue( 'defaultLanguage' );
 }
 
 
@@ -4982,22 +2983,22 @@ function xt_showchart($params)
 	echo '<div class="bs-chart" id="' . $chartParams['containerId'] . '"></div>';
 	if( true || !$params["singlePage"] )
 	{
-		echo '<div data-runner-chart-params="' . runner_htmlspecialchars( my_json_encode( $chartParams ) ) . '"></div>';
+		echo '<div data-runner-chart-params="' . runner_htmlspecialchars( runner_json_encode( $chartParams ) ) . '"></div>';
 	}
 }
 
 function getFileUrl( $params )
 {
-	echo GetRootPathForResources($params["custom1"]);
+	echo $params["custom1"];
 }
 
 function getPdfImageObject( $params )
 {
-	$imagePath = GetRootPathForResources( $params["custom1"] );
+	$imagePath = $params["custom1"];
 	$width = $params["custom2"];
 	$height = $params["custom3"];
 	echo '{
-		image: "'.jsreplace( GetRootPathForResources( $params["custom1"] ) ) . '",
+		image: "'.jsreplace(  $params["custom1"] ) . '",
 		width: '. ( $width ? $width : 'null' ).',
 		height: '. ( $height ? $height : 'null' ).'
 	}';
@@ -5005,34 +3006,35 @@ function getPdfImageObject( $params )
 
 function setHomePage( $url )
 {
-	global $globalSettings;
-	$globalSettings["LandingPageType"] = 2;
-	$globalSettings["LandingURL"] = $url;
+	global $runnerProjectSettings;
+	$runnerProjectSettings[ 'landingSettings' ]['type'] = 2;
+	$runnerProjectSettings[ 'url' ] = $url;
 }
 
 function getHomePage()
 {
-	global $globalSettings;
-	if( $globalSettings["LandingPageType"] == 2 )
-	{
-		return $globalSettings["LandingURL"];
+	$type = ProjectSettings::getProjectValue( 'landingSettings', 'type' );
+	if( $type == 2 ) {
+		return ProjectSettings::getProjectValue( 'landingSettings', 'url' );
 	}
 
-//	GetLocalLink makes any difference with GetTableLink in ASP.NET only
-	if( $globalSettings["LandingPageType"] == 0 )
-		return GetLocalLink("menu");
+//	GetTableLink makes any difference with GetTableLink in ASP.NET only
+	if( $type == 0 )
+		return GetTableLink("menu");
 
-	if( $globalSettings["LandingPage"]=="" || $globalSettings["LandingPage"] == "login" || $globalSettings["LandingPage"] == "register" )
-		return GetLocalLink("menu");
+	$page = ProjectSettings::getProjectValue( 'landingSettings', 'page' );
+	$pageId = ProjectSettings::getProjectValue( 'landingSettings', 'pageId' );
+	$table = ProjectSettings::getProjectValue( 'landingSettings', 'table' );
+	if( $page == "" || $page == "login" || $page == "register" )
+		return GetTableLink("menu");
 
-	if( @strlen($globalSettings["LandingTable"]) )
-	{
-		if( @strlen( $globalSettings["LandingPageId"] ) )
-			return GetLocalLink( GetTableURL($globalSettings["LandingTable"]), $globalSettings["LandingPage"], "page=".$globalSettings["LandingPageId"] );
-		return GetLocalLink( GetTableURL($globalSettings["LandingTable"]), $globalSettings["LandingPage"] );
+	if( $table != '' ) {
+		if( $pageId != '' )
+			return GetTableLink( GetTableURL($table), $page, "page=" . $pageId );
+		return GetTableLink( GetTableURL($table), $page );
 	}
 
-	return GetLocalLink( $globalSettings["LandingPage"] );
+	return GetTableLink( $page );
 }
 
 
@@ -5043,25 +3045,25 @@ function printHomeLink( $params )
 }
 
 
+/**
+ * Probably API function
+ */
 function setProjectLogo( $html, $lng="" )
 {
-	global $globalSettings;
-	if(strlen($lng) == 0)
-		$lng = mlang_getcurrentlang();
-	$globalSettings["ProjectLogo"][$lng] = $html;
+	return Labels::setProjectLogo( $html, $lng );
 }
 
+/**
+ * Probably API function
+ */
 function getProjectLogo($lng="")
 {
-	global $globalSettings;
-	if(strlen($lng) == 0)
-		$lng = mlang_getcurrentlang();
-	return $globalSettings["ProjectLogo"][$lng];
+	return Labels::getProjectLogo( $lng );
 }
 
 function printProjectLogo( $params )
 {
-	echo getProjectLogo(mlang_getcurrentlang());
+	echo Labels::getProjectLogo();
 }
 
 
@@ -5077,15 +3079,16 @@ function xt_pagetitlelabel($params)
 
 function _pagetitlelabel($params)
 {
-	global $pageObject;
+	$pageObject = $params[ 'pageObj' ];
 
 	$record = isset($params["record"]) ? $params["record"] : null;
 	$settings = isset($params["settings"]) ? $params["settings"] : null;
 
-	if( isset($params["custom2"]) )
-		return $pageObject->getPageTitle( $params["custom2"], $params["custom1"] , $record, $settings );
-	else
-	return $pageObject->getPageTitle( $params["custom1"], "", $record, $settings );
+	if( isset($params["custom2"]) ) {
+		return $pageObject->getPageTitle( $params["custom2"], GetTableByGood( $params["custom1"] ), $record, $settings );
+	} else {
+		return $pageObject->getPageTitle( $params["custom1"], "", $record, $settings );
+	}
 }
 
 function xt_label($params)
@@ -5130,18 +3133,63 @@ function xt_cl_length( $params )
 
 function xt_caption($params)
 {
-	echo GetTableCaption($params["custom1"]);
+	$table = GetTableByGood( $params["custom1"] );
+	echo Labels::getTableCaption( $table );
 }
 
 function xt_jscaption($params)
 {
-	echo jsreplace( GetTableCaption($params["custom1"]) );
+	$table = GetTableByGood( $params["custom1"] );
+	echo jsreplace( Labels::getTableCaption( $table ));
 }
+
+
+function xt_buildforwardcontrol(&$params) {
+	$clearVar = $params["clearVar"];
+	$xt = $params["xt"];
+
+	$xt->assign( $clearVar, false );
+	if( !$params["additionalCtrlParams"] ) {
+		$params["additionalCtrlParams"] = array();
+	}
+	$params["additionalCtrlParams"][ 'inLabel' ] = true;
+	$params["clearVar"] = '';
+	
+	return xt_buildeditcontrol( $params );
+
+}
+
+function xt_forwardViewControl(&$params) {
+	$clearVar = $params["clearVar"];
+	$xt = $params["xt"];
+	$xt->assign( $clearVar, false );
+	
+	echo $params[ 'value' ];
+
+}
+
+function xt_buildviewcontrol(&$params) {
+	$clearVar = $params["clearVar"];
+	$xt = $params["xt"];
+	if( $clearVar ) {
+		$xt->assign( $clearVar, false );
+	}
+	echo $params[ 'value' ];
+}
+
 
 
 //	BuildEditControl wrapper
 function xt_buildeditcontrol(&$params)
 {
+	$clearVar = $params["clearVar"];
+	$xt = $params["xt"];
+	if( $clearVar ) {
+		$xt->assign( $clearVar, false );
+	}
+
+	
+	
 	$pageObj = $params["pageObj"];
 	$data = $pageObj->getFieldControlsData();
 
@@ -5238,7 +3286,7 @@ function prepareLookupWhere( $field, $pSet ) {
 	if( $pSet->isLookupWhereCode( $field ) )
 		return $where;
 
-	return DB::PrepareSQL( $pSet->getLookupWhere( $field ) );
+	return DB::PrepareSQL( $where );
 }
 
 function verifyRecaptchaResponse( $response ) {
@@ -5246,16 +3294,14 @@ function verifyRecaptchaResponse( $response ) {
 	$verifyUrl = "https://www.recaptcha.net/recaptcha/api/siteverify?";
 
 	$errors = array();
-	$errors["missing-input-response"] = "Invalid security code.";
-	$errors["invalid-input-response"] = "Invalid security code.";
+	$errors["missing-input-response"] = mlang_message('SEC_INVALID_CAPTCHA_CODE');
+	$errors["invalid-input-response"] = mlang_message('SEC_INVALID_CAPTCHA_CODE');
 	$errors["missing-input-secret"] = "The secret parameter is missing";
 	$errors["invalid-input-secret"] = "The secret parameter is invalid or malformed";
 	$errors["bad-request"] = "The request is invalid or malformed";
 
-	$captchaSettings = GetGlobalData("CaptchaSettings", "");
-
 	$data = array();
-	$data['secret'] = $captchaSettings["secretKey"];
+	$data['secret'] = ProjectSettings::captchaValue( 'secretKey' );
 	$data['response'] = $response;
 	$data['remoteIp'] = $_SERVER["REMOTE_ADDR"];
 
@@ -5265,7 +3311,7 @@ function verifyRecaptchaResponse( $response ) {
 	}
 
 	$response = myurl_get_contents($verifyUrl . implode('&', $req) );
-	$answers = my_json_decode($response);
+	$answers = runner_json_decode($response);
 
 	$message = '';
 	if ( $response == "" )
@@ -5310,30 +3356,15 @@ function toSet( $arr ) {
 	return $ret;
 }
 
-function _loadTablePages() {
-	global $all_pages;
-
-	if( !$all_pages ) {
-		$all_pages = my_json_decode( myfile_get_contents( getabspath("include/pages/pages.json" ), "r" ) );
-	}
-}
-
-function pageEnabled( $tablename, $type ) {
-	global $all_pages;
-	_loadTablePages();
-
-	return isset( $all_pages[ $tablename ][ $type ] );
-}
-
 /**
  * returns list of all table pages in format
  * { pageType: pageId }
  */
 function tablePages( $tablename ) {
-	global $all_pages;
+	global $runnerPageInfo;
 	_loadTablePages();
 
-	return $all_pages[ $tablename ];
+	return $runnerPageInfo['allPages'][ $tablename ];
 }
 
 /**
@@ -5341,38 +3372,10 @@ function tablePages( $tablename ) {
  * { table: { pageType: pageId } }
  */
 function & allTablePages() {
-	global $all_pages;
+	global $runnerPageInfo;
 	_loadTablePages();
 
-	return $all_pages;
-}
-
-
-
-function isAdminPage( $table ) {
-	return $table=="admin_rights" || $table=="admin_members" || $table=="admin_admembers";
-}
-
-function isOldCustomFile( $filename ) {
-	global $arrCustomPages;
-	$oldFileName = getOldTemplateFilename( $filename );
-	 return !!$arrCustomPages[ $oldFileName . ".htm" ];
-}
-
-function getOldTemplateFilename( $filename ) {
-	if( substr($filename, 0, 8 ) == GLOBAL_PAGES_SHORT . "_" )
-		return  substr( $filename, 8 );
-	return $filename;
-}
-
-function types2pages( &$pagesByTypes ) {
-	$pages = array();
-	foreach( $pagesByTypes as $ptype => $pids ) {
-		foreach(  $pids as $pid ) {
-			$pages[$pid] = $ptype;
-		}
-	}
-	return $pages;
+	return $runnerPageInfo['allPages'];
 }
 
 function getMediaType() {
@@ -5641,9 +3644,10 @@ function jwt_encode( $payload, $duration = 10 ) {
 	if( !$payload["exp"] ) {
 		$payload["exp"] = time() + $duration;
 	}
-	$header64 = base64_encode_url( my_json_encode( array('typ' => 'JWT', 'alg' => 'HS256') ) );
-	$payload64 = base64_encode_url( my_json_encode( $payload) );
-	$signature = hash_hmac_sha256($header64 . "." . $payload64, GetGlobalData("jwtSecret"), true);
+	$header64 = base64_encode_url( runner_json_encode( array('typ' => 'JWT', 'alg' => 'HS256') ) );
+	$payload64 = base64_encode_url( runner_json_encode( $payload) );
+	$jwtSecret = ProjectSettings::getSecurityValue( 'sessionControl', 'JWTSecret' );
+	$signature = hash_hmac_sha256($header64 . "." . $payload64, $jwtSecret, true);
 	$base64UrlSignature = base64_encode_url_binary( $signature );
 	return $header64 . "." . $payload64 . "." . $base64UrlSignature;
 }
@@ -5653,10 +3657,11 @@ function jwt_verify_decode( $jwt ) {
 	if( count( $parts) != 3 )
 		return false;
 	$signature = $parts[2];
+	$jwtSecret = ProjectSettings::getSecurityValue( 'sessionControl', 'JWTSecret' );
 	//	compare encoded strings. Binary string comparison fails in .NET
-	if( base64_encode_url_binary( hash_hmac_sha256( $parts[0] . "." . $parts[1], GetGlobalData("jwtSecret"), true ) ) !== $signature )
+	if( base64_encode_url_binary( hash_hmac_sha256( $parts[0] . "." . $parts[1], $jwtSecret, true ) ) !== $signature )
 		return false;
-	$ret = my_json_decode( base64_decode_url( $parts[1] ) );
+	$ret = runner_json_decode( base64_decode_url( $parts[1] ) );
 	if( !is_array( $ret ) )
 		return false;
 
@@ -5797,13 +3802,6 @@ function ldap_DN2Domain($dn)
 	return implode('.', $dom);
 }
 
-function ldap_factory() {
-	return new RunnerLdap(
-		GetGlobalData( "ADServer", null )
-	);
-}
-
-
 /**
  * @param String field - name of field set up as Lookup Wizard
  * @param ProjectSettings - object for the main table, where $field is, not the lookup table!
@@ -5871,20 +3869,27 @@ function getDbTableDataSource( $table, $connId ) {
 	return null;
 }
 
-function getWebDataSource( &$report ) {
+function getWebDataSource( &$report, $tableType = "", $tName = "" ) {
 	require_once( getabspath( 'classes/datasource/datasource.php') );
-
+	
 	$table_type = $report["table_type"];
-	$table = $report['tables'][0];
+	if( $tableType )
+		$table_type = $tableType;
+	
+	if( $tName )
+		$table = $tName;
+	else
+		$table = $report['tables'][0];
+	
 	global $cman;
 	$connId = $cman->getDefaultConnId();
 	$connection = $cman->getDefault();
-	if( $report["table_type"] == "db" ) {
+	if( $table_type == "db" ) {
 		$dbTableInfo = DB::_getTableInfo( $table, $connId );
 		if( $dbTableInfo ) {
 			return new DataSourceWebTable( $table, $connection, $report, $dbTableInfo );
 		}
-	} else if( $report["table_type"] == "custom" ) {
+	} else if( $table_type == "custom" ) {
 		return new DataSourceWebSQL( $connection, $report );
 	}
 	return null;
@@ -5999,14 +4004,6 @@ function prepareUrlQuery( $params ) {
 	return implode('&', $data);
 }
 
-function runner_json_decode( $str ) {
-	return my_json_decode( $str );
-}
-
-function runner_json_encode( $str ) {
-	return my_json_encode( $str );
-}
-
 function getRESTConn( $name = "" ) {
 	global $restApis;
 	$id = $restApis->idByName( $name );
@@ -6047,6 +4044,19 @@ function storageDelete( $key ) {
 	}
 }
 
+function storageKeys() {
+	if( !inRestApi() ) {
+		// array_keys might not work with .NET sessions
+		$ret = array();
+		foreach( $_SESSION as $key => $value ) {
+			$ret[] = $key;
+		}
+		return $ret;
+	} else {
+		global $restStorage;
+		return array_keys( $restStorage );
+	}
+}
 
 function storageExists( $key ) {
 	if( !inRestApi() ) {
@@ -6192,17 +4202,9 @@ function validateEmail( $address ) {
 	return strlen( $address ) >= 3 && strpos( $address, '@' ) !== false;
 }
 
-function normalizePhoneNumber( $number ) {
-	$number = preg_replace("/[^\+\d]/", "", $number);
-
-	if( $number[0] == "+" && strlen( $number ) > 10 )
-		return $number;
-	return GetGlobalData("strCounryCode", "") . $number;
-}
-
 function maskPhoneNumber( $number )
 {
-	$smsMaskLength = GetGlobalData("smsMaskLength", 4);
+	$smsMaskLength = ProjectSettings::getProjectValue( 'smsMaskLength' );
 
 	$astrixStringLength = strlen( $number ) - $smsMaskLength;
 	$number = preg_replace( "/[^+]/", "*", substr($number, 0, $astrixStringLength) ).substr($number, $astrixStringLength);
@@ -6311,10 +4313,16 @@ function findArrayInArray( $arr, $valueArr ) {
  * @return Boolean
  */
 function originalTableField( $field, $pSet ) {
+	
+/*	//	Field.tableName is not being filled currently
+	return true;
+*/	
+
 	$entityType = $pSet->getEntityType();
 	if( $entityType != titTABLE && $entityType != titVIEW ) {
 		return true;
 	}
+	
 	$fieldTable = $pSet->getOwnerTable( $field );
 	return $fieldTable == $pSet->getStrOriginalTableName();
 	//	the alternative could involve reading table info with DB::_getTableInfo and checking against field list.
@@ -6329,15 +4337,7 @@ function isEmailTemplateUseHTML($template, $lng="")
 	if(strlen($lng) == 0)
 		$lng = mlang_getcurrentlang();
 
-	$emailTemplates = GetGlobalData("htmlEmailTemplates", array());
-
-	if(!array_key_exists($lng, $emailTemplates))
-		return false;
-
-	if(!is_array($emailTemplates[$lng]) || !array_key_exists($template, $emailTemplates[$lng]))
-		return false;
-
-	return !!$emailTemplates[$lng][$template];
+	return !!ProjectSettings::getProjectValue( 'emailTemplates', $lng, $template, 'useHTML' );
 }
 
 /**
@@ -6364,45 +4364,24 @@ function ldapEscape( $str ) {
 	return str_replace( $escapeChars, $escapedChars, $str );
 }
 
-/**
- * @param String table
- * Update edit format for date text fields
- */
-function changeTextControlsToDate( $table ) {
-	global $editTextAsDate, $tables_data;
-	if( $editTextAsDate && $tables_data[ $table ] ) {
-		foreach( $tables_data[ $table ] as $f => $v ) {
-			if( substr( $f, 0, 1 ) == "." )
-				continue;
-
-			if( IsDateFieldType( $tables_data[ $table ][ $f ]["FieldType"] ) ) {
-				foreach( $tables_data[ $table ][$f]["EditFormats"] as $pType => $format ) {
-					if( $format["EditFormat"] == EDIT_FORMAT_TEXT_FIELD ) {
-						$tables_data[ $table ][$f]["EditFormats"][ $pType ]["EditFormat"] = EDIT_FORMAT_DATE;
-					}
-				}
-			}
-		}
-	}
-}
 
 /**
  * @return RestConnection
  */
 function getOneDriveConnection() {
 	$connData = array();
-	$connData["connId"] = spidONEDRIVE;
+	$connData["id"] = spidONEDRIVE;
 	$connData["authType"] = "oauth";
 	$connData["url"] = "https://graph.microsoft.com/v1.0";
 	$tenant = "consumers";
-	if( GetGlobalData("MicrosoftAccountType") == 1 ) {
-		$tenant = GetGlobalData("MicrosoftDirectoryID");
+	if( ProjectSettings::getProjectValue( 'cloudSettings', 'cloudOneDriveAccountType' ) == 1 ) {
+		$tenant = ProjectSettings::getProjectValue( 'cloudSettings', 'cloudOneDriveDirectoryId' );
 	}
 	$connData["authUrl"] = "https://login.microsoftonline.com/" . $tenant . "/oauth2/v2.0/authorize";
 	$connData["tokenUrl"] = "https://login.microsoftonline.com/" . $tenant . "/oauth2/v2.0/token";
 
-	$connData["clientId"] = GetGlobalData( "OneDriveClientID" );
-	$connData["clientSecret"] = GetGlobalData( "OneDriveClientSecret" );
+	$connData["clientId"] = ProjectSettings::getProjectValue( 'cloudSettings', 'cloudOneDriveClientId' );
+	$connData["clientSecret"] = ProjectSettings::getProjectValue( 'cloudSettings', 'cloudOneDriveClientSecret' );
 	$connData["scope"] = "files.readwrite offline_access";
 
 	return new RestConnection( $connData );
@@ -6413,14 +4392,14 @@ function getOneDriveConnection() {
  */
 function getGoogleDriveConnection() {
 	$connData = array();
-	$connData["connId"] = spidGOOGLEDRIVE;
+	$connData["id"] = spidGOOGLEDRIVE;
 	$connData["authType"] = "oauth";
 	$connData["url"] = "https://www.googleapis.com/drive/v3/";
 	$connData["authUrl"] = "https://accounts.google.com/o/oauth2/v2/auth";
 	$connData["tokenUrl"] = "https://oauth2.googleapis.com/token";
 
-	$connData["clientId"] = GetGlobalData( "GoogleDriveClientID" );
-	$connData["clientSecret"] = GetGlobalData( "GoogleDriveClientSecret" );
+	$connData["clientId"] = ProjectSettings::getProjectValue( 'cloudSettings', 'cloudGDriveClientId' );
+	$connData["clientSecret"] = ProjectSettings::getProjectValue( 'cloudSettings', 'cloudGDriveClientSecret' );
 	$connData["scope"] = "https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.photos.readonly";
 
 	return new RestConnection( $connData );
@@ -6431,7 +4410,7 @@ function getGoogleDriveConnection() {
  */
 function getDropboxConnection() {
 	$connData = array();
-	$connData["connId"] = spidDROPBOX;
+	$connData["id"] = spidDROPBOX;
 	$connData["authType"] = "oauth";
 	// endpoint depends
 	//$connData["url"] = "";
@@ -6439,13 +4418,53 @@ function getDropboxConnection() {
 	$connData["authUrl"] = "https://www.dropbox.com/oauth2/authorize";
 	$connData["tokenUrl"] = "https://api.dropboxapi.com/oauth2/token";
 
-	$connData["clientId"] = GetGlobalData( "DropboxClientID" );
-	$connData["clientSecret"] = GetGlobalData( "DropboxClientSecret" );
+	$connData["clientId"] = ProjectSettings::getProjectValue( 'cloudSettings', 'cloudDropboxClientId' );
+	$connData["clientSecret"] = ProjectSettings::getProjectValue( 'cloudSettings', 'cloudDropboxClientSecret' );
 	$connData["scope"] = "files.content.read files.content.write files.metadata.read";
 
 	return new RestConnection( $connData );
 }
 
+function getCloudProvider( $type, $path ) {
+	return createStorageObject( $type, array( "path" => $path ) );
+}
+
+function createStorageObject( $providerType, $additionalParams ) {
+	$params = array();
+	if( $providerType == stpDISK) {
+		$params = array_merge( $params, $additionalParams );
+		return new DiskFileSystem( $params );
+	}
+	if( $providerType == stpAMAZON) {
+		$params["accessKey"] = ProjectSettings::amazonAccessKey();
+		$params["secretKey"] = ProjectSettings::amazonSecretKey();
+		$params["bucket"] = ProjectSettings::amazonBucket();
+		$params["region"] = ProjectSettings::amazonRegion();
+		$params = array_merge( $params, $additionalParams );
+		return new S3FileSystem( $params );
+	}
+	if( $providerType == stpGOOGLEDRIVE) {
+		$params = array_merge( $params, $additionalParams );
+		return new GoogleDriveFileSystem( $params );
+	}
+	if( $providerType == stpONEDRIVE ) {
+		$params["driveId"] = ProjectSettings::oneDriveDrive();
+		$params = array_merge( $params, $additionalParams );
+		return new OneDriveFileSystem( $params );
+	}
+	if( $providerType == stpDROPBOX ) {
+		$params = array_merge( $params, $additionalParams );
+		return new DropboxFileSystem( $params );
+	}
+	if( $providerType == stpWASABI ) {
+		$params["accessKey"] = ProjectSettings::wasabiAccessKey();
+		$params["secretKey"] = ProjectSettings::wasabiSecretKey();
+		$params["bucket"] = ProjectSettings::wasabiBucket();
+		$params["region"] = ProjectSettings::wasabiRegion();
+		$params = array_merge( $params, $additionalParams );
+		return new WasabiFileSystem( $params );
+	}
+}
 
 function getStorageProvider( $pSet, $field ) {
 	$providerType = $pSet->fileStorageProvider( $field );
@@ -6453,37 +4472,20 @@ function getStorageProvider( $pSet, $field ) {
 	if( $providerType == stpDISK) {
 		$params["absolutePath"] = $pSet->isAbsolute( $field );
 		$params["path"] = $pSet->getUploadFolder( $field );
-		return new DiskFileSystem( $params );
 	}
-	if( $providerType == stpAMAZON) {
-		$params["accessKey"] = $pSet->amazonAccessKey( $field );
-		$params["secretKey"] = $pSet->amazonSecretKey( $field );
-		$params["bucket"] = $pSet->amazonBucket( $field );
-		$params["region"] = $pSet->amazonRegion( $field );
+	else if( $providerType == stpAMAZON) {
 		$params["path"] = $pSet->amazonPath( $field );
-		return new S3FileSystem( $params );
 	}
-	if( $providerType == stpGOOGLEDRIVE) {
+	else if( $providerType == stpGOOGLEDRIVE) {
 		$params["folder"] = $pSet->googleDriveFolder( $field );
-		return new GoogleDriveFileSystem( $params );
-	}
-	if( $providerType == stpONEDRIVE ) {
+	} else if( $providerType == stpONEDRIVE ) {
 		$params["path"] = $pSet->oneDrivePath( $field );
-		$params["driveId"] = $pSet->oneDriveDrive( $field );
-		return new OneDriveFileSystem( $params );
-	}
-	if( $providerType == stpDROPBOX ) {
+	} else if( $providerType == stpDROPBOX ) {
 		$params["path"] = $pSet->dropboxPath( $field );
-		return new DropboxFileSystem( $params );
-	}
-	if( $providerType == stpWASABI ) {
-		$params["accessKey"] = $pSet->wasabiAccessKey( $field );
-		$params["secretKey"] = $pSet->wasabiSecretKey( $field );
-		$params["bucket"] = $pSet->wasabiBucket( $field );
-		$params["region"] = $pSet->wasabiRegion( $field );
+	} else if( $providerType == stpWASABI ) {
 		$params["path"] = $pSet->wasabiPath( $field );
-		return new WasabiFileSystem( $params );
 	}
+	return createStorageObject( $providerType, $params );
 }
 
 /**
@@ -6499,10 +4501,10 @@ function fileAttrHash( $keyLink, $size, $lastModified = 0 ) {
 }
 
 function getNotificationSettings() {
-	return getSecurityOption("notifications");
+	return ProjectSettings::getProjectValue("notifications");
 }
 
-function createNotification( &$params ) {
+function createNotification( $params ) {
 	require_once( getabspath( "classes/notifications.php" ) );
 	$noti = new RunnerNotifications( getNotificationSettings() );
 	return $noti->create( $params );
@@ -6645,7 +4647,7 @@ function getPdfChartObject( $params )
 	$chart["width"] = $params["width"];
 	$chart["chartParams"] = $chartParams;
 
-	echo my_json_encode( $chart );
+	echo runner_json_encode( $chart );
 }
 
 function getChartParams($params) {
@@ -6666,6 +4668,9 @@ function getChartParams($params) {
 		'&ctype=' . $params["ctype"] .
 		'&showDetails=' . $showDetails .
 		'&' . $params["stateLink"];
+
+	$chartParams['stateParams'] = $params["stateParams"];
+	
 
 	if( isset( $params["dash"] ) && $params["dash"] )
 	{
@@ -6733,14 +4738,14 @@ function runner_basename( $path ) {
 
 
 function getPdfFonts() {
-	global $globalSettings;
+	global $runnerProjectSettings;
 
-	if ( !$globalSettings['fonts'] ) {
+	if ( !$runnerProjectSettings['fonts'] ) {
 		importFontSettings();
 	}
 
 	$fonts = array();
-	foreach( $globalSettings['fonts'] as $font ) {
+	foreach( $runnerProjectSettings['fonts'] as $font ) {
 		if( $font['pdf'] && $font['type'] == 0 ) {
 			$fonts[] = $font;
 		}
@@ -6850,6 +4855,190 @@ function getFormatSettings( $viewFomat, &$pSet, $fName ) {
 	}
 
 	return $formatSettings;
+}
+
+function mlang_message($tag)
+{
+	global $runnerLangMessages;
+	return @$runnerLangMessages[ mlang_getcurrentlang() ]['messages'][ $tag ];
+}
+
+
+function loadLanguage( $lang ) {
+	loadLanguageMessages( getLangFileName($lang) );
+}
+
+function GetTableLink( $shortTable, $pageType = "", $getParams = "")
+{
+	$ext = ProjectSettings::getProjectValue('ext');
+
+	if ( $ext == 'aspx' && $shortTable == 'assetmanager' ) {
+		return "assetmanager.aspx";
+	}
+
+	if( $shortTable === GLOBAL_PAGES_SHORT || $shortTable == '' ) {
+		$url = $pageType;
+	} else if( $pageType == "" ) {
+		$url = $shortTable;
+	} else {
+		if( $ext == 'php' ) {
+			$url = $shortTable . '_' . $pageType;
+		} else {
+			$url = $shortTable . '/' . $pageType;
+		}
+	}
+	if( $ext == 'php' ) {
+		$url .= ".php";
+	}
+	if($getParams != "") {
+		$url .= "?".$getParams;
+	}
+	return $url;
+}
+
+/**
+ * Verify if user has permissions on the Server part of the AJAX code snippet
+ * Check Click Actions and Field events
+ * @return Boolean
+ */
+function verifyAjaxSnippet( $eventId, $field, $pSet ) {
+	$pageType = $pSet->getPageType();
+
+	//	click actions
+	if( $pageType === 'list' ) {
+		if( array_search( $eventId, $pSet->clickHandlerSnippets() ) !== false ) {
+			return true;;
+		}
+	}
+
+	//	field events
+	$fields = $pSet->getPageFields();
+	$searchFields = $pageType === 'list'
+		? $pSet->getSearchableFields()
+		: array();
+	//	field is not on page
+	if( array_search( $field, $fields ) === false && array_search( $field, $searchFields ) === false ) {
+		return false;
+	}
+	$editEvent = $pageType === 'edit' || $pageType === 'add' || $pageType === 'search' || $pageType === 'register' || $pageType === 'login' || $pageType === 'userinfo';
+	if( $pSet->fieldHasEvent( $eventId, $field, $editEvent ) ) {
+		return true;
+	}
+	//	inline add/edit
+	$inlieAddFields = $pSet->getInlineAddFields();
+	$inlieEditFields = $pSet->getInlineEditFields();
+	if( $pageType == 'list' && ( 
+			array_search( $field, $inlieEditFields ) !== false ||
+			array_search( $field, $inlieAddFields ) !== false  ||
+			array_search( $field, $searchFields ) !== false 
+			) ) {
+		if( $pSet->fieldHasEvent( $eventId, $field, true ) ) {
+			return true;
+		}
+	}
+	return false;
+	
+}
+
+function runnerConnectionIdByName( $name ) {
+	global $runnerDatabases;
+	foreach( $runnerDatabases as $db ) {
+		if( $db[ 'connName' ] == $name ) {
+			return $db[ 'connId' ];
+		}
+	}
+	return '';
+}
+
+
+function runnerGetRestConnectionInfo( $id ) {
+	global $runnerRestConnections;
+	//	run REST events ??
+	return $runnerRestConnections[ $id ];
+}
+
+function runnerRestConnectionIdByName( $name = null ) {
+	global $runnerRestConnections;
+	foreach( $runnerRestConnections as $rest ) {
+		if( !$name ) {
+			//	return first available REST connection if $name not provided
+			return $rest[ 'id' ];
+		}
+		if( $rest[ 'name' ] == $name ) {
+			return $rest[ 'id' ];
+		}
+	}
+	return '';
+}
+
+/**
+ * Legacy, used in some business templates
+ */
+
+function GetWebRootPath() {
+	return '';
+}
+
+/**
+ * Legacy functions
+ */
+function my_json_decode( $str ) {
+	return runner_json_decode( $str );
+}
+
+function my_json_encode( $str ) {
+	return runner_json_encode( $str );
+}
+
+function menuExists( $id ) {
+	$availableMenus = ProjectSettings::getProjectValue( 'menuIds' );
+	return array_search( $id, $availableMenus ) !== false;
+}
+
+function GetTemplateName($table, $templateName)
+{
+	if( $templateName == "" )
+		return GLOBAL_PAGES_SHORT . "_" . $table . ".htm";
+
+	if( $table == "" ) {
+		return $templateName . ".htm";
+	}
+	return $table."_".$templateName . ".htm";
+}
+
+function isAdminPage( $pageType ) {
+	return $pageType == PAGE_ADMIN_RIGHTS || $pageType == PAGE_ADMIN_MEMBERS || $pageType == PAGE_ADMIN_ADMEMBERS;
+}
+
+/**
+ * @param String bgColor - 6 characters hex color representation
+ * @return Boolean - true when text color should be black, false otherwise. 
+ *  
+ */
+function fgColorBlack( $bgColor ) {
+	$color = hexdec( str_pad( $bgColor, 6, '0', STR_PAD_RIGHT ));
+	$red = ( $color & 0xff0000 ) >> 16;
+	$green = ( $color & 0xff00 ) >> 8;
+	$blue = $color & 0xff;
+	return $red * 0.299 + $green * 0.587 + $blue * 0.114 > 186;
+}
+
+/**
+ * Take in consideration both current language and locale
+ */
+function currentLocale() {
+	global $locale_info, $languages_data;
+	$langData = $languages_data[ mlang_getcurrentlang() ];
+	if( !$langData || !$langData['languageCode'] ) {
+		return $locale_info["LOCALE_SNAME"];
+	}
+	//	check if languageCode includes country
+	foreach( explode( '-', $langData['languageCode'] ) as $lPart ) {
+		if( strtoupper( $lPart ) === $lPart ) {
+			return $langData['languageCode'];
+		}
+	}
+	return $langData['languageCode'] . '-'. $locale_info["LOCALE_SISO3166CTRYNAME"];	
 }
 
 ?>

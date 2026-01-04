@@ -66,14 +66,14 @@ class PDOConnection extends Connection
 	{
 		$this->debugInfo($sql);
 
-		$sth = $this->conn->prepare( $sql, array( PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL ) );
+		$sth = $this->conn->query( $sql );
 		if( !$sth )
 		{
 			$errInfo = $this->conn->errorInfo();
 			$this->triggerError( $errInfo[2] );
 			return FALSE;
 		}
-		$sth->execute();
+
 		return new QueryResult( $this, $sth );
 	}
 
@@ -174,11 +174,11 @@ class PDOConnection extends Connection
 		if( !$n )
 			return;
 
-		try {
+		if( $this->conn->setAttribute( PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL ) )
+		{
+			// db supports CURSOR_SCROLL ??
 			$qHandle->fetch( PDO::FETCH_ASSOC, PDO::FETCH_ORI_ABS, $n );
 			return;
-		} catch( Exception $e ) {
-
 		}
 
 		//scroll fwd doesn't work

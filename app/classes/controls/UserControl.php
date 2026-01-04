@@ -35,60 +35,24 @@ class UserControl extends EditControl
 	
 	function init()
 	{
-	$tName = $this->pageObject->tName;
-	$field = $this->field;
-	if( $this->pageObject->pSet ) {
-		if($this->pageObject->pageType == PAGE_SEARCH && $this->pageObject->pSet->getTableType() == PAGE_DASHBOARD)
-		{
-			$dashFields = $this->pageObject->pSet->getDashboardSearchFields();
+		$tName = $this->pageObject->tName;
+		$field = $this->field;
+		$pSet = $this->pageObject->pSetEdit;
+		if($this->pageObject->pageType == PAGE_SEARCH && $pSet->getDefaultPageType() == PAGE_DASHBOARD) {
+			$dashFields = $pSet->getDashboardSearchFields();
 			$tName = $dashFields[$field][0]["table"];
 			$field = $dashFields[$field][0]["field"];
+			$pSet = new projectSettings( $tName, PAGE_SEARCH );
 		}
-	}
-				if($tName=="public.users" && $field=="phone")
-	{
-		$this->settings["required"] = true;                    // Wether is mandatory
-$this->settings["tooltip"] = "Click here to enter telephone"; // Information tooltip
-$this->settings["initialCountry"] = "et";               // Country default
-$this->settings["preferredCountries"] = "et";           // Preferred Country;
-		return;
-	}	
-	$tName = $this->pageObject->tName;
-	$field = $this->field;
-	if( $this->pageObject->pSet ) {
-		if($this->pageObject->pageType == PAGE_SEARCH && $this->pageObject->pSet->getTableType() == PAGE_DASHBOARD)
-		{
-			$dashFields = $this->pageObject->pSet->getDashboardSearchFields();
-			$tName = $dashFields[$field][0]["table"];
-			$field = $dashFields[$field][0]["field"];
+		$pageType = $pSet->getEffectiveEditFormat( $field );
+		$method = 'plugin_' . goodFieldName( $field ) . '_ef' . $pageType;
+		$eventsObject = getEventObject( $pSet );
+		if( $eventsObject->fieldValues[ 'editPluginInit' ][ $field ][ $pageType ] ) {
+			$settings = $eventsObject->$method( $this->pageObject );
+			foreach( $settings as $name => $value ) {
+				$this->settings[ $name ] = $value;
+			}
 		}
-	}
-				if($tName=="admin_users" && $field=="phone")
-	{
-		$this->settings["required"] = true;                    // Wether is mandatory
-$this->settings["tooltip"] = "Click here to enter telephone"; // Information tooltip
-$this->settings["initialCountry"] = "et";               // Country default
-$this->settings["preferredCountries"] = "et";           // Preferred Country;
-		return;
-	}	
-	$tName = $this->pageObject->tName;
-	$field = $this->field;
-	if( $this->pageObject->pSet ) {
-		if($this->pageObject->pageType == PAGE_SEARCH && $this->pageObject->pSet->getTableType() == PAGE_DASHBOARD)
-		{
-			$dashFields = $this->pageObject->pSet->getDashboardSearchFields();
-			$tName = $dashFields[$field][0]["table"];
-			$field = $dashFields[$field][0]["field"];
-		}
-	}
-				if($tName=="public.donors" && $field=="phone")
-	{
-		$this->settings["required"] = false;                    // Wether is mandatory
-$this->settings["tooltip"] = "Click here to enter telephone"; // Information tooltip
-$this->settings["initialCountry"] = "us";               // Country default
-$this->settings["preferredCountries"] = "us";           // Preferred Country;
-		return;
-	}	
 	}
 }
 ?>

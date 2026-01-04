@@ -33,9 +33,6 @@ class LookupTextField extends LookupField
 			$this->ciphererDisplay = $this->ciphererLink;
 
 		$this->LCType = $this->localPSet->lookupControlType($this->field);
-		if( $this->pageObject->mobileTemplateMode() && $this->LCType == LCT_AJAX )
-			$this->LCType = LCT_DROPDOWN;
-
 		$this->multiselect = $this->localPSet->multiSelect($this->field);
 		$this->lwLinkField = $connection->addFieldWrappers($this->localPSet->getLinkField($this->field));
 		$this->lwDisplayFieldWrapped = RunnerPage::sqlFormattedDisplayField($this->field, $connection, $this->localPSet);
@@ -48,7 +45,7 @@ class LookupTextField extends LookupField
 		echo '<input id="'.$this->cfield.'" '.$this->inputStyle.' type="text" '
 			.($mode == MODE_SEARCH ? 'autocomplete="off" ' : '')
 			.(($mode==MODE_INLINE_EDIT || $mode==MODE_INLINE_ADD) && $this->is508==true ? 'alt="'.$this->strLabel.'" ' : '')
-			.'name="'.$this->cfield.'" '.$this->pageObject->pSetEdit->getEditParams($this->field).' value="'
+			.'name="'.$this->cfield.'" value="'
 			.runner_htmlspecialchars($value).'">';
 		$this->buildControlEnd($validate, $mode);
 	}

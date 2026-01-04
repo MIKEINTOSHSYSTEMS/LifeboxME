@@ -2,16 +2,7 @@
 class ODBCConnection extends Connection
 {
 	protected $ODBCString;
-
-	/**
-	 * @type String
-	 */
-	protected $ODBCUID;
-
-	/**
-	 * @type String
-	 */
-	protected $ODBCPWD;
+	protected $odbcParams = array();
 
 
 	function __construct( $params )
@@ -28,8 +19,18 @@ class ODBCConnection extends Connection
 		parent::assignConnectionParams( $params );
 
 		$this->ODBCString = $params["ODBCString"];
-		$this->ODBCUID = $params["ODBCUID"];
-		$this->ODBCPWD = $params["ODBCPWD"];
+		
+		$connParts = explode( ';', $this->ODBCString );
+		foreach( $connParts as $part ) {
+			$eqPos = strpos( $part, '=' );
+			if( $eqPos === false ) {
+				continue;
+			}
+			$name = strtolower( substr( $part, 0, $eqPos ) );
+			$value = substr( $part, $eqPos + 1 );
+			$this->odbcParams[ $name ] = $value;
+		}
+		
 	}
 
 	/**
@@ -39,10 +40,10 @@ class ODBCConnection extends Connection
 	{
 		$uid = "";
 		$pwd = "";
-		if( $this->dbType == nDATABASE_Interbase )
+		if( $this->dbType == nDATABASE_Informix || $this->dbType == nDATABASE_Interbase || $this->dbType == nDATABASE_DB2 || $this->dbType == nDATABASE_iSeries )
 		{
-			$uid = $this->ODBCUID;
-			$pwd = $this->ODBCPWD;
+			$uid = $this->odbcParams['uid'];
+			$pwd = $this->odbcParams['pwd'];
 		}
 
 		$this->conn = odbc_connect( $this->ODBCString, $uid, $pwd );

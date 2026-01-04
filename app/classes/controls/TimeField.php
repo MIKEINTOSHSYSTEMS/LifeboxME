@@ -24,15 +24,15 @@ class TimeField extends DateTimeControl
 
 		if( count( $this->timeAttrs ) )
 		{	
-			$type = $this->pageObject->mobileTemplateMode() ? "time" : "text";
+			$type = "text";
 
 			$classString = 'class="form-control"';				
 				
 			$resultHtml = '<input '.$this->getPlaceholderAttr().' type="'.$type.'" '.$this->inputStyle.' name="'.$this->cfield.'" ' . $classString
 					.(($mode==MODE_INLINE_EDIT || $mode==MODE_INLINE_ADD) && $this->is508 == true ? 'alt="'.$this->strLabel.'" ' : '')
-					.'id="'.$this->cfield.'" '.$this->pageObject->pSetEdit->getEditParams($this->field);
+					.'id="'.$this->cfield.'" ' . $this->maxLengthAttr();
 					
-			if( $this->timeAttrs["useTimePicker"] && !$this->pageObject->mobileTemplateMode() )
+			if( $this->timeAttrs["useTimePicker"]  )
 			{
 				$convention = $this->timeAttrs["hours"];
 				$loc = getLacaleAmPmForTimePicker($convention, true);
@@ -78,10 +78,8 @@ class TimeField extends DateTimeControl
 		if( count( $numbers ) == 6 )
 			return str_format_time( array(0, 0, 0, $numbers[3], $numbers[4], $numbers[5]) );
 
-		if( !$this->pageObject->mobileTemplateMode() )
-			return str_format_time( array(0, 0, 0, $numbers[0], $numbers[1], $numbers[2]) );
+		return str_format_time( array(0, 0, 0, $numbers[0], $numbers[1], $numbers[2]) );
 
-		return format_datetime_custom( array(0, 0, 0, $numbers[0], $numbers[1], $numbers[2]), "HH:mm:ss" );
 	}
 	
 	function getFirstElementId()

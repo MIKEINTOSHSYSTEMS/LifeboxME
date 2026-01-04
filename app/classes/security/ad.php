@@ -51,10 +51,9 @@ class SecurityPluginAd extends SecurityPlugin {
 		$this->ldapUsernames = $this->getDefaultUserNames();
 		$this->ldapMemberAttrMap = $this->getDefaultMemberAttrMap();
 
-	
 		$this->ldapObj = new RunnerLdap( $this->ldapURL );
 
-		$this->useCustomLDAP = GetGlobalData( "customLDAP", false );
+		$this->useCustomLDAP = ProjectSettings::getProjectValue( 'customLDAP' );
 
 		if ( $this->useCustomLDAP ) {
 			$this->ldapLoginFilter = $customLDAPSettings["loginFilter"];
@@ -66,7 +65,6 @@ class SecurityPluginAd extends SecurityPlugin {
 			$this->ldapMemberAttrMap = $customLDAPSettings["memberAttrMap"];
 			$this->ldapLoginAttrs = array();
 		}
-
 	}
 
 	/**
@@ -207,7 +205,7 @@ class SecurityPluginAd extends SecurityPlugin {
 		$filter = $this->getLoginFilter( $loginUsername );
 		$entries = $this->ldapObj->runner_ldap_getData( $filter, $this->ldapBaseDN, $this->ldapLoginAttrs );
 		if( !$entries ) {
-			$this->error = "Invalid Login"; //"Invalid Login";
+			$this->error = mlang_message('INVALID_LOGIN'); //"Invalid Login";
 			return false;
 		}
 
@@ -304,24 +302,6 @@ class SecurityPluginAd extends SecurityPlugin {
 		}
 
 		return $userGroups;
-	}
-
-
-	/**
-	 * Returns allowed domains from appsettings as array
-	 * @return Array
-	 */
-	private function getDomainList() {
-		$rawDomain = GetGlobalData("GoogleDomain", "");
-		$domainList = explode(',', $rawDomain);
-		$result = array();
-		foreach($domainList as $domain) {
-			$trimDomain = trim($domain);
-			if ( $trimDomain ) {
-				$result[] = $trimDomain;
-			}
-		}
-		return $result;
 	}
 
 	protected function addGroupsFromAD( &$userGroups, $distinguishedName )

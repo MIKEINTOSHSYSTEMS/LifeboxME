@@ -1,7 +1,7 @@
 <!doctype html>
 <html  {$html_attrs}>
 	<head>
-				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+						<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{$pagetitle}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -10,13 +10,9 @@
     <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
     <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
     <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
-    		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
-	{BEGIN rtlCSS}
-	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
-	{END rtlCSS}
-	{BEGIN styleCSSFiles}
-	<link REL="stylesheet" href="{$stylepath}" type="text/css">
-	{END styleCSSFiles}
+    		{BEGIN styleCSSFiles}
+<link REL="stylesheet" href="{$stylepath}" type="text/css">
+{END styleCSSFiles}
 			
 	</head>
 
@@ -50,7 +46,7 @@
 
 			<div class="clearfix " data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell data-itemid="expand_button" {$item_expand_button} data-topcell-item-type="expand_button" >
 				<span data-itemtype="expand_button" data-itemid="expand_button" {$item_expand_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Expand" class="btn btn-link   
+	<a type="button" title="{mlang_message EXPAND}" class="btn btn-link   
 	" href="#" >
 					<span class="glyphicon glyphicon-triangle-right"></span>
 										</a>
@@ -218,7 +214,7 @@
 							 
 				<span class="navbar-form r-align-left navbar-header" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="expand_menu_button" {$item_expand_menu_button} data-topcell-item-type="expand_menu_button" >
 				<span data-itemtype="expand_menu_button" data-itemid="expand_menu_button" {$item_expand_menu_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Show menu" class="btn-link   
+	<a type="button" title="{mlang_message SHOW_MENU}" class="btn-link   
 	 glyphicon glyphicon-menu-hamburger" href="#" >		
 				
 								</a>
@@ -227,7 +223,7 @@
 		 
 				<span class="navbar-form r-align-left navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="collapse_button" {$item_collapse_button} data-topcell-item-type="collapse_button" >
 				<span data-itemtype="collapse_button" data-itemid="collapse_button" {$item_collapse_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Collapse" class="btn-link   
+	<a type="button" title="{mlang_message COLLAPSE}" class="btn-link   
 	 glyphicon glyphicon-triangle-left" href="#" >		
 				
 								</a>
@@ -240,7 +236,7 @@
 <span data-itemtype="loginform_login" data-itemid="loginform_login" {$item_loginform_login} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-primary   
 	" href="#" {$guestloginlink_attrs} >
-							Login			</a>
+							{mlang_message LOGIN}			</a>
 </span>
 {END guestloginbutton}
 			</span>
@@ -251,14 +247,14 @@
 	<span class="dropdown ">
 		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
 			{BEGIN userbutton_icon}							<span class="glyphicon glyphicon-user"></span>
-						{END userbutton_icon}{$userbutton_image}			{$username}			<span class="caret"></span>
+						{END userbutton_icon}{$userbutton_image}			{$mlp_push}{$mlparam username var username}{$mltext %username%}{$mlp_pop}			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu">
 							{BEGIN userinfo_link}
 	<li data-itemtype="userinfo_link" data-itemid="userinfo_link" {$item_userinfo_link} data-pageid="{$pageid}" data-small >
 				<a  href="userinfo.php"  title="" >
 				
-		User Profile		
+		{mlang_message USERINFO}		
 		</a>
 	</li>
 {END userinfo_link}
@@ -266,7 +262,7 @@
 	<li data-itemtype="logout_link" data-itemid="logout_link" {$item_logout_link} data-pageid="{$pageid}" data-small >
 				<a  href="#" {$logoutlink_attrs}  title="" >
 				
-		Log out		
+		{mlang_message LOG_OUT}		
 		</a>
 	</li>
 {END logoutbutton}
@@ -274,7 +270,7 @@
 	<li data-itemtype="adminarea_link" data-itemid="adminarea_link" {$item_adminarea_link} data-pageid="{$pageid}" data-small >
 				<a  href="admin_rights_list.php"  title="" >
 				
-		Admin Area		
+		{mlang_message AA_ADMINAREA}		
 		</a>
 	</li>
 {END adminarea_link}
@@ -282,7 +278,7 @@
 	<li data-itemtype="changepassword_link" data-itemid="changepassword_link" {$item_changepassword_link} data-pageid="{$pageid}" data-small >
 				<a  href="changepwd.php" {$changepwdlink_attrs} id="changePasswordButton{$id}"  title="" >
 				
-		Change password		
+		{mlang_message CHANGE_PASSWORD}		
 		</a>
 	</li>
 {END changepwd_link}
@@ -322,7 +318,7 @@
 	
 ">
 		 
-		<span data-itemtype="text" data-itemid="text" {$item_text} data-pageid="{$pageid}" data-small > 
+		<span data-itemtype="text" data-itemid="text" {$item_text} data-pageid="{$pageid}" > 
 	<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
   <img src="https://www.lifebox.org/wp-content/themes/lifebox/assets//images/lblogo-dark.svg" alt="Logo" style="height: 50px; margin-bottom: 5px;">
   <div style="font-size: 27px; font-weight: bold;">
@@ -343,7 +339,7 @@
 	
 ">
 		 
-		<span data-itemtype="text" data-itemid="text1" {$item_text1} data-pageid="{$pageid}" data-small > 
+		<span data-itemtype="text" data-itemid="text1" {$item_text1} data-pageid="{$pageid}" > 
 	<p class="ql-align-center"><strong>DEMO VERSION</strong></p></span>
 		</div>					</div>
 			</div>		
@@ -370,7 +366,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item51" {$item_welcome_item51} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="52">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="dashboard_dashboard.php"  > 
-							<span class="fa fa-dashboard"></span>Dashboard					</a>
+							<span class="fa fa-dashboard"></span>{$caption Dashboard}					</a>
 	</div>
 
 			
@@ -392,7 +388,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item" {$item_welcome_item} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="23">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="antibiotics_list.php"  > 
-							<span class="fa fa-eyedropper"></span>Antibiotics					</a>
+							<span class="fa fa-eyedropper"></span>{$caption public_antibiotics}					</a>
 	</div>
 
 			
@@ -405,7 +401,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item1" {$item_welcome_item1} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="28">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="case_antibiotics_list.php"  > 
-							<span class="fa fa-medkit"></span>Case Antibiotics					</a>
+							<span class="fas fa-medkit"></span>{$caption public_case_antibiotics}					</a>
 	</div>
 
 			
@@ -418,7 +414,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item2" {$item_welcome_item2} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="37">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="clean_cut_implementations_list.php"  > 
-							<span class="fa fa-cut"></span>Clean Cut Implementations					</a>
+							<span class="fas fa-cut"></span>{$caption public_clean_cut_implementations}					</a>
 	</div>
 
 			
@@ -431,7 +427,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item3" {$item_welcome_item3} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="21">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="countries_list.php"  > 
-							<span class="fa fa-flag"></span>Countries					</a>
+							<span class="fas fa-flag"></span>{$caption public_countries}					</a>
 	</div>
 
 			
@@ -444,7 +440,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item4" {$item_welcome_item4} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="32">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="device_distributions_list.php"  > 
-							<span class="fa fa-mobile-phone"></span>Device Distributions					</a>
+							<span class="fa fa-mobile-phone"></span>{$caption public_device_distributions}					</a>
 	</div>
 
 			
@@ -457,7 +453,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item6" {$item_welcome_item6} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="facilities_list.php"  > 
-							<span class="fa fa-hospital-o"></span>Facilities					</a>
+							<span class="far fa-hospital"></span>{$caption public_facilities}					</a>
 	</div>
 
 	</div>
@@ -467,7 +463,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item5" {$item_welcome_item5} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="diagnoses_list.php"  > 
-							<span class="fa fa-list-ul"></span>Diagnoses					</a>
+							<span class="fas fa-list-ul"></span>{$caption public_diagnoses}					</a>
 	</div>
 
 	</div>
@@ -477,7 +473,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item7" {$item_welcome_item7} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="follow_ups_list.php"  > 
-							Follow Ups					</a>
+							{$caption public_follow_ups}					</a>
 	</div>
 
 	</div>
@@ -487,7 +483,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item8" {$item_welcome_item8} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="languages_list.php"  > 
-							Languages					</a>
+							{$caption public_languages}					</a>
 	</div>
 
 	</div>
@@ -497,7 +493,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item9" {$item_welcome_item9} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lifebox_staff_list.php"  > 
-							Lifebox Staff					</a>
+							{$caption public_lifebox_staff}					</a>
 	</div>
 
 	</div>
@@ -507,7 +503,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item10" {$item_welcome_item10} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="partners_list.php"  > 
-							Partners					</a>
+							{$caption public_partners}					</a>
 	</div>
 
 	</div>
@@ -517,7 +513,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item11" {$item_welcome_item11} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="procedures_list.php"  > 
-							Procedures					</a>
+							{$caption public_procedures}					</a>
 	</div>
 
 	</div>
@@ -527,7 +523,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item12" {$item_welcome_item12} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="regions_list.php"  > 
-							Regions					</a>
+							{$caption public_regions}					</a>
 	</div>
 
 	</div>
@@ -537,7 +533,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item13" {$item_welcome_item13} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="surgical_cases_list.php"  > 
-							Surgical Cases					</a>
+							{$caption public_surgical_cases}					</a>
 	</div>
 
 	</div>
@@ -547,7 +543,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item14" {$item_welcome_item14} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="trainers_list.php"  > 
-							Trainers					</a>
+							{$caption public_trainers}					</a>
 	</div>
 
 	</div>
@@ -557,7 +553,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item15" {$item_welcome_item15} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="training_courses_list.php"  > 
-							Training Courses					</a>
+							{$caption public_training_courses}					</a>
 	</div>
 
 	</div>
@@ -567,7 +563,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item16" {$item_welcome_item16} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="training_languages_list.php"  > 
-							Training Languages					</a>
+							{$caption public_training_languages}					</a>
 	</div>
 
 	</div>
@@ -577,7 +573,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item17" {$item_welcome_item17} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="training_leads_list.php"  > 
-							Training Leads					</a>
+							{$caption public_training_leads}					</a>
 	</div>
 
 	</div>
@@ -587,7 +583,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item18" {$item_welcome_item18} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="training_partners_list.php"  > 
-							Training Partners					</a>
+							{$caption public_training_partners}					</a>
 	</div>
 
 	</div>
@@ -597,7 +593,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item19" {$item_welcome_item19} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="training_sessions_list.php"  > 
-							Training Sessions					</a>
+							{$caption public_training_sessions}					</a>
 	</div>
 
 	</div>
@@ -607,7 +603,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item20" {$item_welcome_item20} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="training_trainers_list.php"  > 
-							Training Trainers					</a>
+							{$caption public_training_trainers}					</a>
 	</div>
 
 	</div>
@@ -617,7 +613,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item21" {$item_welcome_item21} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="ward_antibiotics_list.php"  > 
-							Ward Antibiotics					</a>
+							{$caption public_ward_antibiotics}					</a>
 	</div>
 
 	</div>
@@ -627,7 +623,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item22" {$item_welcome_item22} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="ward_rounds_list.php"  > 
-							Ward Rounds					</a>
+							{$caption public_ward_rounds}					</a>
 	</div>
 
 	</div>
@@ -637,7 +633,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item23" {$item_welcome_item23} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="clean_cut_implementation_summary_view_list.php"  > 
-							Clean Cut Implementation Summary View					</a>
+							{$caption public_clean_cut_implementation_summary_view}					</a>
 	</div>
 
 	</div>
@@ -647,7 +643,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item24" {$item_welcome_item24} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="device_distribution_summary_view_list.php"  > 
-							Device Distribution Summary View					</a>
+							{$caption public_device_distribution_summary_view}					</a>
 	</div>
 
 	</div>
@@ -657,7 +653,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item25" {$item_welcome_item25} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="surgical_case_summary_view_list.php"  > 
-							Surgical Case Summary View					</a>
+							{$caption public_surgical_case_summary_view}					</a>
 	</div>
 
 	</div>
@@ -667,7 +663,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item26" {$item_welcome_item26} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="training_summary_view_list.php"  > 
-							Training Summary View					</a>
+							{$caption public_training_summary_view}					</a>
 	</div>
 
 	</div>
@@ -677,7 +673,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item27" {$item_welcome_item27} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="programs_list.php"  > 
-							Programs					</a>
+							{$caption public_programs}					</a>
 	</div>
 
 	</div>
@@ -687,7 +683,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item28" {$item_welcome_item28} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="training_approaches_list.php"  > 
-							Training Approaches					</a>
+							{$caption public_training_approaches}					</a>
 	</div>
 
 	</div>
@@ -697,7 +693,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item29" {$item_welcome_item29} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="training_types_list.php"  > 
-							Training Types					</a>
+							{$caption public_training_types}					</a>
 	</div>
 
 	</div>
@@ -707,7 +703,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item30" {$item_welcome_item30} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="quarters_list.php"  > 
-							Quarters					</a>
+							{$caption public_quarters}					</a>
 	</div>
 
 	</div>
@@ -717,7 +713,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item31" {$item_welcome_item31} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="participant_role_list.php"  > 
-							Participant Role					</a>
+							{$caption public_participant_role}					</a>
 	</div>
 
 	</div>
@@ -727,7 +723,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item32" {$item_welcome_item32} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="sex_list.php"  > 
-							Sex					</a>
+							{$caption public_sex}					</a>
 	</div>
 
 	</div>
@@ -737,7 +733,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item33" {$item_welcome_item33} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="training_participants_list.php"  > 
-							Training Participants					</a>
+							{$caption public_training_participants}					</a>
 	</div>
 
 	</div>
@@ -747,7 +743,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item34" {$item_welcome_item34} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="venues_list.php"  > 
-							Venues					</a>
+							{$caption public_venues}					</a>
 	</div>
 
 	</div>
@@ -757,7 +753,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item35" {$item_welcome_item35} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="training_attendance_list.php"  > 
-							Training Attendance					</a>
+							{$caption public_training_attendance}					</a>
 	</div>
 
 	</div>
@@ -767,7 +763,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item37" {$item_welcome_item37} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="participant_attendance_detail_list.php"  > 
-							Participant Attendance Detail					</a>
+							{$caption public_participant_attendance_detail}					</a>
 	</div>
 
 	</div>
@@ -777,7 +773,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item38" {$item_welcome_item38} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="participant_attendance_summary_list.php"  > 
-							Participant Attendance Summary					</a>
+							{$caption public_participant_attendance_summary}					</a>
 	</div>
 
 	</div>
@@ -787,7 +783,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item36" {$item_welcome_item36} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="training_participation_list.php"  > 
-							Training Participation					</a>
+							{$caption public_training_participation}					</a>
 	</div>
 
 	</div>
@@ -797,7 +793,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item39" {$item_welcome_item39} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="daily_attendance_view_list.php"  > 
-							Daily Attendance View					</a>
+							{$caption public_daily_attendance_view}					</a>
 	</div>
 
 	</div>
@@ -807,7 +803,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item40" {$item_welcome_item40} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lifeboxme__audit_list.php"  > 
-							Lifeboxme  Audit					</a>
+							{$caption public_lifeboxme__audit}					</a>
 	</div>
 
 	</div>
@@ -817,7 +813,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item41" {$item_welcome_item41} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lifeboxme__locking_list.php"  > 
-							Lifeboxme  Locking					</a>
+							{$caption public_lifeboxme__locking}					</a>
 	</div>
 
 	</div>
@@ -827,7 +823,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item42" {$item_welcome_item42} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="months_list.php"  > 
-							Months					</a>
+							{$caption public_months}					</a>
 	</div>
 
 	</div>
@@ -837,7 +833,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item43" {$item_welcome_item43} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="devices_list.php"  > 
-							Devices					</a>
+							{$caption public_devices}					</a>
 	</div>
 
 	</div>
@@ -847,7 +843,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item44" {$item_welcome_item44} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="payment_methods_list.php"  > 
-							Payment Methods					</a>
+							{$caption public_payment_methods}					</a>
 	</div>
 
 	</div>
@@ -857,7 +853,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item45" {$item_welcome_item45} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="transaction_types_list.php"  > 
-							Transaction Types					</a>
+							{$caption public_transaction_types}					</a>
 	</div>
 
 	</div>
@@ -867,7 +863,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item46" {$item_welcome_item46} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="donors_list.php"  > 
-							Donors					</a>
+							{$caption public_donors}					</a>
 	</div>
 
 	</div>
@@ -877,12 +873,12 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item47" {$item_welcome_item47} data-pageid="{$pageid}" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="webreport.php"  > 
-							Web Reports					</a>
+							{mlang_message WEBREPORTS_SHORT}					</a>
 	</div>
 
 			
 	<div class="bs-welcome-content">
-		Web Reports and Charts	</div>
+		{mlang_message WEBREPORTS_LONG}	</div>
 	</div>
 
  
@@ -890,7 +886,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item48" {$item_welcome_item48} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="device_distribution_log_list.php"  > 
-							Device Distribution Log					</a>
+							{$caption public_device_distribution_log}					</a>
 	</div>
 
 	</div>
@@ -900,7 +896,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item49" {$item_welcome_item49} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="device_inventory_changes_list.php"  > 
-							Device Inventory Changes					</a>
+							{$caption public_device_inventory_changes}					</a>
 	</div>
 
 	</div>
@@ -910,7 +906,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item50" {$item_welcome_item50} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="aio_training_tracking_list.php"  > 
-							Aio Training Tracking					</a>
+							{$caption aio_training_tracking}					</a>
 	</div>
 
 	</div>
@@ -920,7 +916,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item52" {$item_welcome_item52} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lifebox_dhis2_orgunits_list.php"  > 
-							Lifebox DHIS2 OrgUnits					</a>
+							{$caption Lifebox_DHIS2_OrgUnits}					</a>
 	</div>
 
 	</div>
@@ -930,7 +926,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item53" {$item_welcome_item53} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lifeboxme_dhis2_orgunits_list.php"  > 
-							Lifeboxme Dhis2 Orgunits					</a>
+							{$caption public_lifeboxme_dhis2_orgunits}					</a>
 	</div>
 
 	</div>
@@ -940,7 +936,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item54" {$item_welcome_item54} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lifebox_dhis2_settings_list.php"  > 
-							Lifebox DHIS2 Settings					</a>
+							{$caption Lifebox_DHIS2_Settings}					</a>
 	</div>
 
 	</div>
@@ -950,7 +946,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item55" {$item_welcome_item55} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lifebox_dhis2_dataitems_list.php"  > 
-							Lifebox DHIS2 DataItems					</a>
+							{$caption Lifebox_DHIS2_dataItems}					</a>
 	</div>
 
 	</div>
@@ -960,7 +956,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item56" {$item_welcome_item56} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lifeboxme_dhis2_dataitems_list.php"  > 
-							Lifeboxme Dhis2 Dataitems					</a>
+							{$caption public_lifeboxme_dhis2_dataitems}					</a>
 	</div>
 
 	</div>
@@ -970,7 +966,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item57" {$item_welcome_item57} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lifeboxme_dhis2_analytics_settings_list.php"  > 
-							Lifeboxme Dhis2 Analytics Settings					</a>
+							{$caption public_lifeboxme_dhis2_analytics_settings}					</a>
 	</div>
 
 	</div>
@@ -980,7 +976,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item58" {$item_welcome_item58} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lifeboxme_dhis2_analytics_data_list.php"  > 
-							Lifeboxme Dhis2 Analytics Data					</a>
+							{$caption public_lifeboxme_dhis2_analytics_data}					</a>
 	</div>
 
 	</div>
@@ -990,7 +986,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item59" {$item_welcome_item59} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="aio_training_tracking_chart_chart.php"  > 
-							Aio Training Tracking Chart					</a>
+							{$caption aio_training_tracking_Chart}					</a>
 	</div>
 
 	</div>
@@ -1000,7 +996,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item60" {$item_welcome_item60} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="aio_training_tracking_chart_by_sex_chart.php"  > 
-							aio_training_tracking Chart by sex					</a>
+							{$caption aio_training_tracking_Chart_by_sex}					</a>
 	</div>
 
 	</div>
@@ -1010,7 +1006,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item61" {$item_welcome_item61} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="smtp_list.php"  > 
-							Smtp					</a>
+							{$caption public_smtp}					</a>
 	</div>
 
 	</div>
@@ -1020,7 +1016,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item62" {$item_welcome_item62} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbapt_annual_plan_tracker_list.php"  > 
-							Lbapt Annual Plan Tracker					</a>
+							{$caption public_lbapt_annual_plan_tracker}					</a>
 	</div>
 
 	</div>
@@ -1030,7 +1026,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item63" {$item_welcome_item63} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbapt_beginnings_fund_list.php"  > 
-							Lbapt Beginnings Fund					</a>
+							{$caption public_lbapt_beginnings_fund}					</a>
 	</div>
 
 	</div>
@@ -1040,7 +1036,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item64" {$item_welcome_item64} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbapt_communications_list.php"  > 
-							Lbapt Communications					</a>
+							{$caption public_lbapt_communications}					</a>
 	</div>
 
 	</div>
@@ -1050,7 +1046,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item65" {$item_welcome_item65} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbapt_cri_list.php"  > 
-							Lbapt Cri					</a>
+							{$caption public_lbapt_cri}					</a>
 	</div>
 
 	</div>
@@ -1060,7 +1056,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item66" {$item_welcome_item66} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbapt_dashboard_summary_list.php"  > 
-							Lbapt Dashboard Summary					</a>
+							{$caption public_lbapt_dashboard_summary}					</a>
 	</div>
 
 	</div>
@@ -1070,7 +1066,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item67" {$item_welcome_item67} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbapt_development_list.php"  > 
-							Lbapt Development					</a>
+							{$caption public_lbapt_development}					</a>
 	</div>
 
 	</div>
@@ -1080,7 +1076,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item68" {$item_welcome_item68} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbapt_elma_list.php"  > 
-							Lbapt Elma					</a>
+							{$caption public_lbapt_elma}					</a>
 	</div>
 
 	</div>
@@ -1090,7 +1086,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item69" {$item_welcome_item69} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbapt_governance_list.php"  > 
-							Lbapt Governance					</a>
+							{$caption public_lbapt_governance}					</a>
 	</div>
 
 	</div>
@@ -1100,7 +1096,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item70" {$item_welcome_item70} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbapt_kpis_on_track_list.php"  > 
-							Lbapt Kpis On Track					</a>
+							{$caption public_lbapt_kpis_on_track}					</a>
 	</div>
 
 	</div>
@@ -1110,7 +1106,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item71" {$item_welcome_item71} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbapt_operations_list.php"  > 
-							Lbapt Operations					</a>
+							{$caption public_lbapt_operations}					</a>
 	</div>
 
 	</div>
@@ -1120,7 +1116,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item72" {$item_welcome_item72} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbapt_programs_list.php"  > 
-							Lbapt Programs					</a>
+							{$caption public_lbapt_programs}					</a>
 	</div>
 
 	</div>
@@ -1130,7 +1126,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item73" {$item_welcome_item73} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbapt_sample_workflow_list.php"  > 
-							Lbapt Sample Workflow					</a>
+							{$caption public_lbapt_sample_workflow}					</a>
 	</div>
 
 	</div>
@@ -1140,7 +1136,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item74" {$item_welcome_item74} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbapt_status_list.php"  > 
-							Lbapt Status					</a>
+							{$caption public_lbapt_status}					</a>
 	</div>
 
 	</div>
@@ -1150,7 +1146,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item75" {$item_welcome_item75} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbapt_strategic_areas_list.php"  > 
-							Lbapt Strategic Areas					</a>
+							{$caption public_lbapt_strategic_areas}					</a>
 	</div>
 
 	</div>
@@ -1160,7 +1156,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item76" {$item_welcome_item76} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbapt_all_activities_view_list.php"  > 
-							Lbapt All Activities View					</a>
+							{$caption public_lbapt_all_activities_view}					</a>
 	</div>
 
 	</div>
@@ -1170,7 +1166,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item77" {$item_welcome_item77} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbapt_dashboard_summary_view_list.php"  > 
-							Lbapt Dashboard Summary View					</a>
+							{$caption public_lbapt_dashboard_summary_view}					</a>
 	</div>
 
 	</div>
@@ -1180,7 +1176,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item78" {$item_welcome_item78} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbapt_kpis_tracking_view_list.php"  > 
-							Lbapt Kpis Tracking View					</a>
+							{$caption public_lbapt_kpis_tracking_view}					</a>
 	</div>
 
 	</div>
@@ -1190,7 +1186,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item79" {$item_welcome_item79} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbapt_unified_activities_list.php"  > 
-							Lbapt Unified Activities					</a>
+							{$caption public_lbapt_unified_activities}					</a>
 	</div>
 
 	</div>
@@ -1200,7 +1196,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item80" {$item_welcome_item80} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="years_list.php"  > 
-							Years					</a>
+							{$caption public_years}					</a>
 	</div>
 
 	</div>
@@ -1210,7 +1206,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item81" {$item_welcome_item81} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbapt_finance_list.php"  > 
-							Lbapt Finance					</a>
+							{$caption public_lbapt_finance}					</a>
 	</div>
 
 	</div>
@@ -1220,7 +1216,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item82" {$item_welcome_item82} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbapt_hr_list.php"  > 
-							Lbapt Hr					</a>
+							{$caption public_lbapt_hr}					</a>
 	</div>
 
 	</div>
@@ -1230,7 +1226,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item83" {$item_welcome_item83} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbapt_cathedral_list.php"  > 
-							Lbapt Cathedral					</a>
+							{$caption public_lbapt_cathedral}					</a>
 	</div>
 
 	</div>
@@ -1240,7 +1236,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item84" {$item_welcome_item84} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbapt_izumi_list.php"  > 
-							Lbapt Izumi					</a>
+							{$caption public_lbapt_izumi}					</a>
 	</div>
 
 	</div>
@@ -1250,7 +1246,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item85" {$item_welcome_item85} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbapt_st_list.php"  > 
-							Lbapt St					</a>
+							{$caption public_lbapt_st}					</a>
 	</div>
 
 	</div>
@@ -1260,7 +1256,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item86" {$item_welcome_item86} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbapt_whi_list.php"  > 
-							Lbapt Whi					</a>
+							{$caption public_lbapt_whi}					</a>
 	</div>
 
 	</div>
@@ -1270,7 +1266,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item87" {$item_welcome_item87} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbpmi_calculation_log_list.php"  > 
-							Lbpmi Calculation Log					</a>
+							{$caption public_lbpmi_calculation_log}					</a>
 	</div>
 
 	</div>
@@ -1280,7 +1276,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item88" {$item_welcome_item88} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbpmi_data_elements_list.php"  > 
-							Lbpmi Data Elements					</a>
+							{$caption public_lbpmi_data_elements}					</a>
 	</div>
 
 	</div>
@@ -1290,7 +1286,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item89" {$item_welcome_item89} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbpmi_datasets_list.php"  > 
-							Lbpmi Datasets					</a>
+							{$caption public_lbpmi_datasets}					</a>
 	</div>
 
 	</div>
@@ -1300,7 +1296,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item90" {$item_welcome_item90} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbpmi_indicator_actuals_list.php"  > 
-							Lbpmi Indicator Actuals					</a>
+							{$caption public_lbpmi_indicator_actuals}					</a>
 	</div>
 
 	</div>
@@ -1310,7 +1306,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item91" {$item_welcome_item91} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbpmi_indicator_targets_list.php"  > 
-							Lbpmi Indicator Targets					</a>
+							{$caption public_lbpmi_indicator_targets}					</a>
 	</div>
 
 	</div>
@@ -1320,7 +1316,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item92" {$item_welcome_item92} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbpmi_indicators_list.php"  > 
-							Lbpmi Indicators					</a>
+							{$caption public_lbpmi_indicators}					</a>
 	</div>
 
 	</div>
@@ -1330,7 +1326,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item93" {$item_welcome_item93} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbpmi_summary_list.php"  > 
-							Lbpmi Summary					</a>
+							{$caption public_lbpmi_summary}					</a>
 	</div>
 
 	</div>
@@ -1340,7 +1336,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item94" {$item_welcome_item94} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="period_types_list.php"  > 
-							Period Types					</a>
+							{$caption public_period_types}					</a>
 	</div>
 
 	</div>
@@ -1350,7 +1346,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item95" {$item_welcome_item95} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="unit_of_measurement_list.php"  > 
-							Unit Of Measurement					</a>
+							{$caption public_unit_of_measurement}					</a>
 	</div>
 
 	</div>
@@ -1360,7 +1356,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item96" {$item_welcome_item96} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbpmi_calculation_jobs_list.php"  > 
-							Lbpmi Calculation Jobs					</a>
+							{$caption public_lbpmi_calculation_jobs}					</a>
 	</div>
 
 	</div>
@@ -1370,7 +1366,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item97" {$item_welcome_item97} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbpmi_data_values_list.php"  > 
-							Lbpmi Data Values					</a>
+							{$caption public_lbpmi_data_values}					</a>
 	</div>
 
 	</div>
@@ -1380,7 +1376,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item98" {$item_welcome_item98} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbpmi_aggregation_type_list.php"  > 
-							Lbpmi Aggregation Type					</a>
+							{$caption public_lbpmi_aggregation_type}					</a>
 	</div>
 
 	</div>
@@ -1390,7 +1386,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item99" {$item_welcome_item99} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbpmi_domain_type_list.php"  > 
-							Lbpmi Domain Type					</a>
+							{$caption public_lbpmi_domain_type}					</a>
 	</div>
 
 	</div>
@@ -1400,7 +1396,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item100" {$item_welcome_item100} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbpmi_indicator_types_list.php"  > 
-							Lbpmi Indicator Types					</a>
+							{$caption public_lbpmi_indicator_types}					</a>
 	</div>
 
 	</div>
@@ -1410,7 +1406,7 @@
 <div class="bs-welcome-item" data-itemtype="welcome_item" data-itemid="welcome_item101" {$item_welcome_item101} data-pageid="{$pageid}" data-page="_global_menu" data-comment-len="0">
 	<div class="bs-welcome-header">
 		<a id="itemlink" href="lbpmi_indicator_groups_list.php"  > 
-							Lbpmi Indicator Groups					</a>
+							{$caption public_lbpmi_indicator_groups}					</a>
 	</div>
 
 	</div>

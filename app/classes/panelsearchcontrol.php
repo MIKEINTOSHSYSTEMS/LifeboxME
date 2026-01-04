@@ -22,7 +22,7 @@ class PanelSearchControl extends SearchControl
 		$control = array();
 		
 		$parameters["additionalCtrlParams"]["searchPanelControl"] = true;
-		$parameters["additionalCtrlParams"]["style"] = $this->pageObj->mobileTemplateMode() ? 'width: 35%;' :'width: 115px;';
+		$parameters["additionalCtrlParams"]["style"] = 'width: 115px;';
 		
 		$ctrlsMap = $this->getExtraControlMap();
 		$this->pageObj->fillControlsMap($ctrlsMap,true);

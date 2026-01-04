@@ -1,18 +1,20 @@
 <?php
 
-include_once(getabspath("connections/ConnectionManager_base.php"));
+require_once( getabspath( 'connections/ConnectionManager_base.php' ) );
 
 class ConnectionManager extends ConnectionManager_Base
 {
+
 	/**
 	 * @param String connId
 	 * @return Connection
 	 */
 	protected function getConnection( $connId )
 	{
-		include_once getabspath("connections/Connection.php");
+	
+		require_once( getabspath("connections/Connection.php") );
 
-		$data = $this->_connectionsData[ $connId ];
+		$data = runnerGetConnectionInfo( $connId );
 		switch( $data["connStringType"] )
 		{
 			case "mysql":
@@ -20,6 +22,9 @@ class ConnectionManager extends ConnectionManager_Base
 				{
 					include_once getabspath("connections/MySQLiConnection.php");
 					return new MySQLiConnection( $data );
+				}
+				else {
+					exit( 'MySQL driver missing. Install <b>mysqli</b> PHP extension in order to run this application.');
 				}
 
 				include_once getabspath("connections/MySQLConnection.php");
@@ -92,12 +97,19 @@ class ConnectionManager extends ConnectionManager_Base
 
 			case "db2":
 				include_once getabspath("connections/DB2Connection.php");
-				return new DB2Connection( $data );
+				if( function_exists( 'db2_connect') ) {
+					return new DB2Connection( $data );
+				}
+				include_once getabspath("connections/ODBCConnection.php");
+				return new ODBCConnection( $data );
 
 			case "informix":
-				include_once getabspath("connections/InformixConnection.php");
-				return new InformixConnection( $data );
-
+				if( function_exists( 'ifx_connect') ) {
+					include_once getabspath("connections/InformixConnection.php");
+					return new InformixConnection( $data );
+				}
+				include_once getabspath("connections/ODBCConnection.php");
+				return new ODBCConnection( $data );
 			case "sqlite":
 				include_once getabspath("connections/SQLite3Connection.php");
 				return new SQLite3Connection( $data );
@@ -105,56 +117,7 @@ class ConnectionManager extends ConnectionManager_Base
 				include_once getabspath("connections/PDOConnection.php");
 				return new PDOConnection( $data );
 		}
-	}
-
-	/**
-	 * Set the data representing the project's
-	 * db connection properties
-	 */
-	protected function _setConnectionsData()
-	{
-		// content of this function can be modified on demo account
-		// variable names $data and $connectionsData are important
-
-		$connectionsData = array();
-
-		$data = array();
-		$data["dbType"] = 4;
-		$data["connId"] = "lifebox_mesystem_at_localhost";
-		$data["connName"] = "lifebox_mesystem at localhost";
-		$data["connStringType"] = "postgre";
-		$data["connectionString"] = "postgre;localhost;postgres;mikeintosh;;lifebox_mesystem;;1;"; //currently unused
-
-		$this->_connectionsIdByName["lifebox_mesystem at localhost"] = "lifebox_mesystem_at_localhost";
-
-		$data["connInfo"] = array();
-		$data["ODBCUID"] = "postgres";
-		$data["ODBCPWD"] = "mikeintosh";
-		$data["leftWrap"] = "\"";
-		$data["rightWrap"] = "\"";
-
-		$data["DBPath"] = "db"; //currently unused
-		$data["useServerMapPath"] = 1; //currently unused
-
 		
-		//	Don't change any of these lines manually!
-		//	Use 'Server database connections' feature on the Output screen in PHPRunner instead.
-		$data["connInfo"][0] = "localhost";
-		$data["connInfo"][1] = "postgres";
-		$data["connInfo"][2] = "mikeintosh";
-		$data["connInfo"][3] = "";
-		$data["connInfo"][4] = "lifebox_mesystem";
-		$data["connInfo"][5] = ""; //currently unused
-		$data["connInfo"][6] = "1"; //currently unused
-		$data["ODBCString"] = "Driver={PostgreSQL ODBC Driver(ANSI)};Server=localhost;Database=lifebox_mesystem;Uid=postgres;Pwd=mikeintosh";
-		// encription set
-		$data["EncryptInfo"] = array();
-		$data["EncryptInfo"]["mode"] = 0;
-		$data["EncryptInfo"]["alg"]  = 256;
-		$data["EncryptInfo"]["key"]  = "";
-
-		$connectionsData["lifebox_mesystem_at_localhost"] = $data;
-		$this->_connectionsData = &$connectionsData;
 	}
 
 	/**

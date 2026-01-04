@@ -29,10 +29,16 @@ class ListPage_DPDash extends ListPage_Dashboard
 	
 		$this->searchClauseObj->clearSearch();
 		
-		$this->jsSettings['tableSettings'][$this->tName]['masterTable'] = $this->masterTable;
-		$this->jsSettings['tableSettings'][$this->tName]['firstTime'] = $this->firstTime;
-		$this->jsSettings['tableSettings'][$this->tName]['strKey'] = $this->getStrMasterKey();
 	}
+
+	protected function buildJsTableSettings( $table, $pSet ) {
+		$settings = parent::buildJsTableSettings( $table, $pSet );
+		$settings['masterTable'] = $this->masterTable;
+		$settings['firstTime'] = $this->firstTime;
+		$settings['strKey'] = $this->getStrMasterKey();
+		return $settings;
+	}
+
 	
 	/**
 	 * Assigne Import Links or not
@@ -75,7 +81,7 @@ class ListPage_DPDash extends ListPage_Dashboard
 	/**
 	 * A stub preventing the Search Panel from building
 	 */
-	function buildSearchPanel(){}
+	function buildSearchPanel() {}
 	/**
 	 * A stub preventing simple_search from building
 	 */
@@ -98,10 +104,10 @@ class ListPage_DPDash extends ListPage_Dashboard
 	}
 
 	function inlineEditAvailable() {
-		return false; 
+		return ListPage_Embed::inlineEditAvailable() && $this->dashElementData["details"][$this->tName]["inlineEdit"];
 	}
 	function inlineAddAvailable() {
-		return false;
+		return ListPage_Embed::inlineAddAvailable() && $this->dashElementData["details"][$this->tName]["inlineAdd"];
 	}
 
 	function displayTabsInPage()

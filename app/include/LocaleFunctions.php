@@ -969,7 +969,7 @@ function isleapyear($y)
 function GetLongDateFormat()
 {
 	global $locale_info;
-	$format=$locale_info["LOCALE_SLONGDATE"];
+	$format = $locale_info["LOCALE_SLONGDATE"];
 
 //	dd,d - day
 //	MMMM, MMM, MM, M - month
@@ -1182,5 +1182,18 @@ function dateInDbFormat($str)
 function dbFormatDateTime( $dt ) {
 	return format_datetime_custom( $dt, "yyyy-MM-dd HH:mm:ss" );
 }
+
+function dbFormatDate( $dt ) {
+	return format_datetime_custom( $dt, "yyyy-MM-dd" );
+}
+
+function dbFormatTime( $dt ) {
+	return format_datetime_custom( $dt, "HH:mm:ss" );
+}
+
+ /**
+ * 	converts mysql datetime to array(year,month,day,hour,minute,second)
+ * @intellisense
+ */
 
 ?>

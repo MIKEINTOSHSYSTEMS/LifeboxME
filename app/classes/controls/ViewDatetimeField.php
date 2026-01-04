@@ -8,12 +8,12 @@ class ViewDatetimeField extends ViewControl
 	
 	/**
 	 * @param &Array data
-	 * @return String	 
+	 * @return String 
 	 */
 	public function getTextValue(&$data)
 	{
 		return str_format_datetime( db2time( $data[ $this->field ] ) );
-	}	
+	}
 	
 	/**
 	 * Get the field's content that will be exported
@@ -23,7 +23,10 @@ class ViewDatetimeField extends ViewControl
 	 */
 	public function getExportValue(&$data, $keylink = "", $html = false )
 	{
+		if( ProjectSettings::ext() == "aspx ") {
+			return $data[ $this->field ];
+		}
 		return $this->showDBValue($data, $keylink, $html );
-	}	
+	}
 }
 ?>

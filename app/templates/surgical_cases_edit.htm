@@ -1,7 +1,7 @@
 <!doctype html>
 <html  {$html_attrs}>
 	<head>
-				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+						<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{$pagetitle}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -10,13 +10,9 @@
     <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
     <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
     <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
-    		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
-	{BEGIN rtlCSS}
-	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
-	{END rtlCSS}
-	{BEGIN styleCSSFiles}
-	<link REL="stylesheet" href="{$stylepath}" type="text/css">
-	{END styleCSSFiles}
+    		{BEGIN styleCSSFiles}
+<link REL="stylesheet" href="{$stylepath}" type="text/css">
+{END styleCSSFiles}
 			
 	</head>
 
@@ -50,7 +46,7 @@
 
 			<div class="clearfix " data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell data-itemid="expand_button" {$item_expand_button} data-topcell-item-type="expand_button" >
 				<span data-itemtype="expand_button" data-itemid="expand_button" {$item_expand_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Expand" class="btn btn-link   
+	<a type="button" title="{mlang_message EXPAND}" class="btn btn-link   
 	" href="#" >
 					<span class="glyphicon glyphicon-triangle-right"></span>
 										</a>
@@ -218,7 +214,7 @@
 							 
 				<span class="navbar-form  navbar-header" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="expand_menu_button" {$item_expand_menu_button} data-topcell-item-type="expand_menu_button" >
 				<span data-itemtype="expand_menu_button" data-itemid="expand_menu_button" {$item_expand_menu_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Show menu" class="btn-link   
+	<a type="button" title="{mlang_message SHOW_MENU}" class="btn-link   
 	 glyphicon glyphicon-menu-hamburger" href="#" >		
 				
 								</a>
@@ -227,7 +223,7 @@
 		 
 				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="collapse_button" {$item_collapse_button} data-topcell-item-type="collapse_button" >
 				<span data-itemtype="collapse_button" data-itemid="collapse_button" {$item_collapse_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Collapse" class="btn-link   
+	<a type="button" title="{mlang_message COLLAPSE}" class="btn-link   
 	 glyphicon glyphicon-triangle-left" href="#" >		
 				
 								</a>
@@ -240,7 +236,7 @@
 <span data-itemtype="loginform_login" data-itemid="loginform_login" {$item_loginform_login} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-primary   
 	" href="#" {$guestloginlink_attrs} >
-							Login			</a>
+							{mlang_message LOGIN}			</a>
 </span>
 {END guestloginbutton}
 			</span>
@@ -251,14 +247,14 @@
 	<span class="dropdown ">
 		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
 			{BEGIN userbutton_icon}							<span class="glyphicon glyphicon-user"></span>
-						{END userbutton_icon}{$userbutton_image}			{$username}			<span class="caret"></span>
+						{END userbutton_icon}{$userbutton_image}			{$mlp_push}{$mlparam username var username}{$mltext %username%}{$mlp_pop}			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu">
 							{BEGIN userinfo_link}
 	<li data-itemtype="userinfo_link" data-itemid="userinfo_link" {$item_userinfo_link} data-pageid="{$pageid}" data-small >
 				<a  href="userinfo.php"  title="" >
 				
-		User Profile		
+		{mlang_message USERINFO}		
 		</a>
 	</li>
 {END userinfo_link}
@@ -266,7 +262,7 @@
 	<li data-itemtype="logout_link" data-itemid="logout_link" {$item_logout_link} data-pageid="{$pageid}" data-small >
 				<a  href="#" {$logoutlink_attrs}  title="" >
 				
-		Log out		
+		{mlang_message LOG_OUT}		
 		</a>
 	</li>
 {END logoutbutton}
@@ -274,7 +270,7 @@
 	<li data-itemtype="adminarea_link" data-itemid="adminarea_link" {$item_adminarea_link} data-pageid="{$pageid}" data-small >
 				<a  href="admin_rights_list.php"  title="" >
 				
-		Admin Area		
+		{mlang_message AA_ADMINAREA}		
 		</a>
 	</li>
 {END adminarea_link}
@@ -282,7 +278,7 @@
 	<li data-itemtype="changepassword_link" data-itemid="changepassword_link" {$item_changepassword_link} data-pageid="{$pageid}" data-small >
 				<a  href="changepwd.php" {$changepwdlink_attrs} id="changePasswordButton{$id}"  title="" >
 				
-		Change password		
+		{mlang_message CHANGE_PASSWORD}		
 		</a>
 	</li>
 {END changepwd_link}
@@ -331,10 +327,10 @@
 <h5>{$message}</h5>
 <div>
 {BEGIN message_back_button}
-			<button class="btn btn-sm btn-default" {$backbutton_attrs}>Back to list</button>
+			<button class="btn btn-sm btn-default" {$backbutton_attrs}>{mlang_message BACK_TO_LIST}</button>
 	{END message_back_button}
 {BEGIN message_view_page_button}
-		<a class="btn btn-sm btn-default" href="surgical_cases_view.php?{$editlink}" {$view_page_button_attrs}>View</a>
+		<a class="btn btn-sm btn-default" href="surgical_cases_view.php?{$editlink}" {$view_page_button_attrs}>{mlang_message VIEW}</a>
 {END message_view_page_button}
 </div>
 </div>
@@ -389,17 +385,19 @@
 	data-signal-error-for="case_id{$id}" {$required_attr_case_id}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="case_id" data-fieldname="case_id" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_case_id}">
-		{BEGIN case_id_label}{$label public_surgical_cases case_id }{END case_id_label}
+	<label class="r-edit-label control-label {$case_id_label_class}" for="{$labelfor_case_id}">
+		{BEGIN case_id_label}
+			{$case_id_forward_control}
+			{$label public_surgical_cases case_id }			{END case_id_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$case_id_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="case_id" {$tooltipAttr public_surgical_cases case_id } >
+		<div class="r-edit-tooltip" data-helpfor="case_id" {$tooltipAttr public_surgical_cases case_id } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases case_id }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END case_id_fieldblock}
@@ -411,17 +409,19 @@
 	data-signal-error-for="facility_id{$id}" {$required_attr_facility_id}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="facility_id" data-fieldname="facility_id" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_facility_id}">
-		{BEGIN facility_id_label}{$label public_surgical_cases facility_id }{END facility_id_label}
+	<label class="r-edit-label control-label {$facility_id_label_class}" for="{$labelfor_facility_id}">
+		{BEGIN facility_id_label}
+			{$facility_id_forward_control}
+			{$label public_surgical_cases facility_id }			{END facility_id_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$facility_id_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="facility_id" {$tooltipAttr public_surgical_cases facility_id } >
+		<div class="r-edit-tooltip" data-helpfor="facility_id" {$tooltipAttr public_surgical_cases facility_id } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases facility_id }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END facility_id_fieldblock}
@@ -433,17 +433,19 @@
 	data-signal-error-for="country_id{$id}" {$required_attr_country_id}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="country_id" data-fieldname="country_id" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_country_id}">
-		{BEGIN country_id_label}{$label public_surgical_cases country_id }{END country_id_label}
+	<label class="r-edit-label control-label {$country_id_label_class}" for="{$labelfor_country_id}">
+		{BEGIN country_id_label}
+			{$country_id_forward_control}
+			{$label public_surgical_cases country_id }			{END country_id_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$country_id_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="country_id" {$tooltipAttr public_surgical_cases country_id } >
+		<div class="r-edit-tooltip" data-helpfor="country_id" {$tooltipAttr public_surgical_cases country_id } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases country_id }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END country_id_fieldblock}
@@ -455,17 +457,19 @@
 	data-signal-error-for="surgery_date{$id}" {$required_attr_surgery_date}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="surgery_date" data-fieldname="surgery_date" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_surgery_date}">
-		{BEGIN surgery_date_label}{$label public_surgical_cases surgery_date }{END surgery_date_label}
+	<label class="r-edit-label control-label {$surgery_date_label_class}" for="{$labelfor_surgery_date}">
+		{BEGIN surgery_date_label}
+			{$surgery_date_forward_control}
+			{$label public_surgical_cases surgery_date }			{END surgery_date_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$surgery_date_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="surgery_date" {$tooltipAttr public_surgical_cases surgery_date } >
+		<div class="r-edit-tooltip" data-helpfor="surgery_date" {$tooltipAttr public_surgical_cases surgery_date } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases surgery_date }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END surgery_date_fieldblock}
@@ -477,17 +481,19 @@
 	data-signal-error-for="data_type{$id}" {$required_attr_data_type}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="data_type" data-fieldname="data_type" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_data_type}">
-		{BEGIN data_type_label}{$label public_surgical_cases data_type }{END data_type_label}
+	<label class="r-edit-label control-label {$data_type_label_class}" for="{$labelfor_data_type}">
+		{BEGIN data_type_label}
+			{$data_type_forward_control}
+			{$label public_surgical_cases data_type }			{END data_type_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$data_type_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="data_type" {$tooltipAttr public_surgical_cases data_type } >
+		<div class="r-edit-tooltip" data-helpfor="data_type" {$tooltipAttr public_surgical_cases data_type } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases data_type }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END data_type_fieldblock}
@@ -499,17 +505,19 @@
 	data-signal-error-for="data_collector_name{$id}" {$required_attr_data_collector_name}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="data_collector_name" data-fieldname="data_collector_name" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_data_collector_name}">
-		{BEGIN data_collector_name_label}{$label public_surgical_cases data_collector_name }{END data_collector_name_label}
+	<label class="r-edit-label control-label {$data_collector_name_label_class}" for="{$labelfor_data_collector_name}">
+		{BEGIN data_collector_name_label}
+			{$data_collector_name_forward_control}
+			{$label public_surgical_cases data_collector_name }			{END data_collector_name_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$data_collector_name_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="data_collector_name" {$tooltipAttr public_surgical_cases data_collector_name } >
+		<div class="r-edit-tooltip" data-helpfor="data_collector_name" {$tooltipAttr public_surgical_cases data_collector_name } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases data_collector_name }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END data_collector_name_fieldblock}
@@ -521,17 +529,19 @@
 	data-signal-error-for="location_of_surgery{$id}" {$required_attr_location_of_surgery}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="location_of_surgery" data-fieldname="location_of_surgery" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_location_of_surgery}">
-		{BEGIN location_of_surgery_label}{$label public_surgical_cases location_of_surgery }{END location_of_surgery_label}
+	<label class="r-edit-label control-label {$location_of_surgery_label_class}" for="{$labelfor_location_of_surgery}">
+		{BEGIN location_of_surgery_label}
+			{$location_of_surgery_forward_control}
+			{$label public_surgical_cases location_of_surgery }			{END location_of_surgery_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$location_of_surgery_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="location_of_surgery" {$tooltipAttr public_surgical_cases location_of_surgery } >
+		<div class="r-edit-tooltip" data-helpfor="location_of_surgery" {$tooltipAttr public_surgical_cases location_of_surgery } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases location_of_surgery }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END location_of_surgery_fieldblock}
@@ -543,17 +553,19 @@
 	data-signal-error-for="patient_sex{$id}" {$required_attr_patient_sex}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="patient_sex" data-fieldname="patient_sex" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_patient_sex}">
-		{BEGIN patient_sex_label}{$label public_surgical_cases patient_sex }{END patient_sex_label}
+	<label class="r-edit-label control-label {$patient_sex_label_class}" for="{$labelfor_patient_sex}">
+		{BEGIN patient_sex_label}
+			{$patient_sex_forward_control}
+			{$label public_surgical_cases patient_sex }			{END patient_sex_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$patient_sex_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="patient_sex" {$tooltipAttr public_surgical_cases patient_sex } >
+		<div class="r-edit-tooltip" data-helpfor="patient_sex" {$tooltipAttr public_surgical_cases patient_sex } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases patient_sex }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END patient_sex_fieldblock}
@@ -565,17 +577,19 @@
 	data-signal-error-for="patient_asa_classification{$id}" {$required_attr_patient_asa_classification}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="patient_asa_classification" data-fieldname="patient_asa_classification" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_patient_asa_classification}">
-		{BEGIN patient_asa_classification_label}{$label public_surgical_cases patient_asa_classification }{END patient_asa_classification_label}
+	<label class="r-edit-label control-label {$patient_asa_classification_label_class}" for="{$labelfor_patient_asa_classification}">
+		{BEGIN patient_asa_classification_label}
+			{$patient_asa_classification_forward_control}
+			{$label public_surgical_cases patient_asa_classification }			{END patient_asa_classification_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$patient_asa_classification_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="patient_asa_classification" {$tooltipAttr public_surgical_cases patient_asa_classification } >
+		<div class="r-edit-tooltip" data-helpfor="patient_asa_classification" {$tooltipAttr public_surgical_cases patient_asa_classification } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases patient_asa_classification }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END patient_asa_classification_fieldblock}
@@ -587,17 +601,19 @@
 	data-signal-error-for="patient_dob{$id}" {$required_attr_patient_dob}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="patient_dob" data-fieldname="patient_dob" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_patient_dob}">
-		{BEGIN patient_dob_label}{$label public_surgical_cases patient_dob }{END patient_dob_label}
+	<label class="r-edit-label control-label {$patient_dob_label_class}" for="{$labelfor_patient_dob}">
+		{BEGIN patient_dob_label}
+			{$patient_dob_forward_control}
+			{$label public_surgical_cases patient_dob }			{END patient_dob_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$patient_dob_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="patient_dob" {$tooltipAttr public_surgical_cases patient_dob } >
+		<div class="r-edit-tooltip" data-helpfor="patient_dob" {$tooltipAttr public_surgical_cases patient_dob } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases patient_dob }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END patient_dob_fieldblock}
@@ -609,17 +625,19 @@
 	data-signal-error-for="patient_age{$id}" {$required_attr_patient_age}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="patient_age" data-fieldname="patient_age" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_patient_age}">
-		{BEGIN patient_age_label}{$label public_surgical_cases patient_age }{END patient_age_label}
+	<label class="r-edit-label control-label {$patient_age_label_class}" for="{$labelfor_patient_age}">
+		{BEGIN patient_age_label}
+			{$patient_age_forward_control}
+			{$label public_surgical_cases patient_age }			{END patient_age_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$patient_age_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="patient_age" {$tooltipAttr public_surgical_cases patient_age } >
+		<div class="r-edit-tooltip" data-helpfor="patient_age" {$tooltipAttr public_surgical_cases patient_age } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases patient_age }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END patient_age_fieldblock}
@@ -631,17 +649,19 @@
 	data-signal-error-for="diabetes{$id}" {$required_attr_diabetes}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="diabetes" data-fieldname="diabetes" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_diabetes}">
-		{BEGIN diabetes_label}{$label public_surgical_cases diabetes }{END diabetes_label}
+	<label class="r-edit-label control-label {$diabetes_label_class}" for="{$labelfor_diabetes}">
+		{BEGIN diabetes_label}
+			{$diabetes_forward_control}
+			{$label public_surgical_cases diabetes }			{END diabetes_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$diabetes_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="diabetes" {$tooltipAttr public_surgical_cases diabetes } >
+		<div class="r-edit-tooltip" data-helpfor="diabetes" {$tooltipAttr public_surgical_cases diabetes } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases diabetes }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END diabetes_fieldblock}
@@ -653,17 +673,19 @@
 	data-signal-error-for="hypertension{$id}" {$required_attr_hypertension}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="hypertension" data-fieldname="hypertension" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_hypertension}">
-		{BEGIN hypertension_label}{$label public_surgical_cases hypertension }{END hypertension_label}
+	<label class="r-edit-label control-label {$hypertension_label_class}" for="{$labelfor_hypertension}">
+		{BEGIN hypertension_label}
+			{$hypertension_forward_control}
+			{$label public_surgical_cases hypertension }			{END hypertension_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$hypertension_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="hypertension" {$tooltipAttr public_surgical_cases hypertension } >
+		<div class="r-edit-tooltip" data-helpfor="hypertension" {$tooltipAttr public_surgical_cases hypertension } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases hypertension }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END hypertension_fieldblock}
@@ -675,17 +697,19 @@
 	data-signal-error-for="obese{$id}" {$required_attr_obese}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field13" {$item_integrated_edit_field13} data-pageid="{$pageid}" data-field="obese" data-fieldname="obese" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_obese}">
-		{BEGIN obese_label}{$label public_surgical_cases obese }{END obese_label}
+	<label class="r-edit-label control-label {$obese_label_class}" for="{$labelfor_obese}">
+		{BEGIN obese_label}
+			{$obese_forward_control}
+			{$label public_surgical_cases obese }			{END obese_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$obese_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="obese" {$tooltipAttr public_surgical_cases obese } >
+		<div class="r-edit-tooltip" data-helpfor="obese" {$tooltipAttr public_surgical_cases obese } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases obese }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END obese_fieldblock}
@@ -697,17 +721,19 @@
 	data-signal-error-for="malnourished{$id}" {$required_attr_malnourished}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field14" {$item_integrated_edit_field14} data-pageid="{$pageid}" data-field="malnourished" data-fieldname="malnourished" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_malnourished}">
-		{BEGIN malnourished_label}{$label public_surgical_cases malnourished }{END malnourished_label}
+	<label class="r-edit-label control-label {$malnourished_label_class}" for="{$labelfor_malnourished}">
+		{BEGIN malnourished_label}
+			{$malnourished_forward_control}
+			{$label public_surgical_cases malnourished }			{END malnourished_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$malnourished_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="malnourished" {$tooltipAttr public_surgical_cases malnourished } >
+		<div class="r-edit-tooltip" data-helpfor="malnourished" {$tooltipAttr public_surgical_cases malnourished } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases malnourished }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END malnourished_fieldblock}
@@ -719,17 +745,19 @@
 	data-signal-error-for="smoker{$id}" {$required_attr_smoker}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field15" {$item_integrated_edit_field15} data-pageid="{$pageid}" data-field="smoker" data-fieldname="smoker" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_smoker}">
-		{BEGIN smoker_label}{$label public_surgical_cases smoker }{END smoker_label}
+	<label class="r-edit-label control-label {$smoker_label_class}" for="{$labelfor_smoker}">
+		{BEGIN smoker_label}
+			{$smoker_forward_control}
+			{$label public_surgical_cases smoker }			{END smoker_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$smoker_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="smoker" {$tooltipAttr public_surgical_cases smoker } >
+		<div class="r-edit-tooltip" data-helpfor="smoker" {$tooltipAttr public_surgical_cases smoker } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases smoker }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END smoker_fieldblock}
@@ -741,17 +769,19 @@
 	data-signal-error-for="on_steroids{$id}" {$required_attr_on_steroids}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field16" {$item_integrated_edit_field16} data-pageid="{$pageid}" data-field="on_steroids" data-fieldname="on_steroids" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_on_steroids}">
-		{BEGIN on_steroids_label}{$label public_surgical_cases on_steroids }{END on_steroids_label}
+	<label class="r-edit-label control-label {$on_steroids_label_class}" for="{$labelfor_on_steroids}">
+		{BEGIN on_steroids_label}
+			{$on_steroids_forward_control}
+			{$label public_surgical_cases on_steroids }			{END on_steroids_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$on_steroids_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="on_steroids" {$tooltipAttr public_surgical_cases on_steroids } >
+		<div class="r-edit-tooltip" data-helpfor="on_steroids" {$tooltipAttr public_surgical_cases on_steroids } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases on_steroids }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END on_steroids_fieldblock}
@@ -763,17 +793,19 @@
 	data-signal-error-for="admitted_to_icu{$id}" {$required_attr_admitted_to_icu}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field17" {$item_integrated_edit_field17} data-pageid="{$pageid}" data-field="admitted_to_icu" data-fieldname="admitted_to_icu" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_admitted_to_icu}">
-		{BEGIN admitted_to_icu_label}{$label public_surgical_cases admitted_to_icu }{END admitted_to_icu_label}
+	<label class="r-edit-label control-label {$admitted_to_icu_label_class}" for="{$labelfor_admitted_to_icu}">
+		{BEGIN admitted_to_icu_label}
+			{$admitted_to_icu_forward_control}
+			{$label public_surgical_cases admitted_to_icu }			{END admitted_to_icu_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$admitted_to_icu_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="admitted_to_icu" {$tooltipAttr public_surgical_cases admitted_to_icu } >
+		<div class="r-edit-tooltip" data-helpfor="admitted_to_icu" {$tooltipAttr public_surgical_cases admitted_to_icu } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases admitted_to_icu }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END admitted_to_icu_fieldblock}
@@ -785,17 +817,19 @@
 	data-signal-error-for="hypothermic{$id}" {$required_attr_hypothermic}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field18" {$item_integrated_edit_field18} data-pageid="{$pageid}" data-field="hypothermic" data-fieldname="hypothermic" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_hypothermic}">
-		{BEGIN hypothermic_label}{$label public_surgical_cases hypothermic }{END hypothermic_label}
+	<label class="r-edit-label control-label {$hypothermic_label_class}" for="{$labelfor_hypothermic}">
+		{BEGIN hypothermic_label}
+			{$hypothermic_forward_control}
+			{$label public_surgical_cases hypothermic }			{END hypothermic_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$hypothermic_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="hypothermic" {$tooltipAttr public_surgical_cases hypothermic } >
+		<div class="r-edit-tooltip" data-helpfor="hypothermic" {$tooltipAttr public_surgical_cases hypothermic } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases hypothermic }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END hypothermic_fieldblock}
@@ -807,17 +841,19 @@
 	data-signal-error-for="preoperative_diagnosis_id{$id}" {$required_attr_preoperative_diagnosis_id}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field19" {$item_integrated_edit_field19} data-pageid="{$pageid}" data-field="preoperative_diagnosis_id" data-fieldname="preoperative_diagnosis_id" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_preoperative_diagnosis_id}">
-		{BEGIN preoperative_diagnosis_id_label}{$label public_surgical_cases preoperative_diagnosis_id }{END preoperative_diagnosis_id_label}
+	<label class="r-edit-label control-label {$preoperative_diagnosis_id_label_class}" for="{$labelfor_preoperative_diagnosis_id}">
+		{BEGIN preoperative_diagnosis_id_label}
+			{$preoperative_diagnosis_id_forward_control}
+			{$label public_surgical_cases preoperative_diagnosis_id }			{END preoperative_diagnosis_id_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$preoperative_diagnosis_id_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="preoperative_diagnosis_id" {$tooltipAttr public_surgical_cases preoperative_diagnosis_id } >
+		<div class="r-edit-tooltip" data-helpfor="preoperative_diagnosis_id" {$tooltipAttr public_surgical_cases preoperative_diagnosis_id } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases preoperative_diagnosis_id }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END preoperative_diagnosis_id_fieldblock}
@@ -829,17 +865,19 @@
 	data-signal-error-for="hours_since_injury{$id}" {$required_attr_hours_since_injury}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field20" {$item_integrated_edit_field20} data-pageid="{$pageid}" data-field="hours_since_injury" data-fieldname="hours_since_injury" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_hours_since_injury}">
-		{BEGIN hours_since_injury_label}{$label public_surgical_cases hours_since_injury }{END hours_since_injury_label}
+	<label class="r-edit-label control-label {$hours_since_injury_label_class}" for="{$labelfor_hours_since_injury}">
+		{BEGIN hours_since_injury_label}
+			{$hours_since_injury_forward_control}
+			{$label public_surgical_cases hours_since_injury }			{END hours_since_injury_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$hours_since_injury_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="hours_since_injury" {$tooltipAttr public_surgical_cases hours_since_injury } >
+		<div class="r-edit-tooltip" data-helpfor="hours_since_injury" {$tooltipAttr public_surgical_cases hours_since_injury } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases hours_since_injury }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END hours_since_injury_fieldblock}
@@ -851,17 +889,19 @@
 	data-signal-error-for="sterilizable_drill_used{$id}" {$required_attr_sterilizable_drill_used}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field21" {$item_integrated_edit_field21} data-pageid="{$pageid}" data-field="sterilizable_drill_used" data-fieldname="sterilizable_drill_used" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_sterilizable_drill_used}">
-		{BEGIN sterilizable_drill_used_label}{$label public_surgical_cases sterilizable_drill_used }{END sterilizable_drill_used_label}
+	<label class="r-edit-label control-label {$sterilizable_drill_used_label_class}" for="{$labelfor_sterilizable_drill_used}">
+		{BEGIN sterilizable_drill_used_label}
+			{$sterilizable_drill_used_forward_control}
+			{$label public_surgical_cases sterilizable_drill_used }			{END sterilizable_drill_used_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$sterilizable_drill_used_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="sterilizable_drill_used" {$tooltipAttr public_surgical_cases sterilizable_drill_used } >
+		<div class="r-edit-tooltip" data-helpfor="sterilizable_drill_used" {$tooltipAttr public_surgical_cases sterilizable_drill_used } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases sterilizable_drill_used }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END sterilizable_drill_used_fieldblock}
@@ -873,17 +913,19 @@
 	data-signal-error-for="drill_sterile_cover_used{$id}" {$required_attr_drill_sterile_cover_used}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field22" {$item_integrated_edit_field22} data-pageid="{$pageid}" data-field="drill_sterile_cover_used" data-fieldname="drill_sterile_cover_used" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_drill_sterile_cover_used}">
-		{BEGIN drill_sterile_cover_used_label}{$label public_surgical_cases drill_sterile_cover_used }{END drill_sterile_cover_used_label}
+	<label class="r-edit-label control-label {$drill_sterile_cover_used_label_class}" for="{$labelfor_drill_sterile_cover_used}">
+		{BEGIN drill_sterile_cover_used_label}
+			{$drill_sterile_cover_used_forward_control}
+			{$label public_surgical_cases drill_sterile_cover_used }			{END drill_sterile_cover_used_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$drill_sterile_cover_used_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="drill_sterile_cover_used" {$tooltipAttr public_surgical_cases drill_sterile_cover_used } >
+		<div class="r-edit-tooltip" data-helpfor="drill_sterile_cover_used" {$tooltipAttr public_surgical_cases drill_sterile_cover_used } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases drill_sterile_cover_used }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END drill_sterile_cover_used_fieldblock}
@@ -895,17 +937,19 @@
 	data-signal-error-for="holes_in_sterile_cover{$id}" {$required_attr_holes_in_sterile_cover}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field23" {$item_integrated_edit_field23} data-pageid="{$pageid}" data-field="holes_in_sterile_cover" data-fieldname="holes_in_sterile_cover" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_holes_in_sterile_cover}">
-		{BEGIN holes_in_sterile_cover_label}{$label public_surgical_cases holes_in_sterile_cover }{END holes_in_sterile_cover_label}
+	<label class="r-edit-label control-label {$holes_in_sterile_cover_label_class}" for="{$labelfor_holes_in_sterile_cover}">
+		{BEGIN holes_in_sterile_cover_label}
+			{$holes_in_sterile_cover_forward_control}
+			{$label public_surgical_cases holes_in_sterile_cover }			{END holes_in_sterile_cover_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$holes_in_sterile_cover_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="holes_in_sterile_cover" {$tooltipAttr public_surgical_cases holes_in_sterile_cover } >
+		<div class="r-edit-tooltip" data-helpfor="holes_in_sterile_cover" {$tooltipAttr public_surgical_cases holes_in_sterile_cover } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases holes_in_sterile_cover }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END holes_in_sterile_cover_fieldblock}
@@ -917,17 +961,19 @@
 	data-signal-error-for="sign_in_read_aloud{$id}" {$required_attr_sign_in_read_aloud}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field24" {$item_integrated_edit_field24} data-pageid="{$pageid}" data-field="sign_in_read_aloud" data-fieldname="sign_in_read_aloud" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_sign_in_read_aloud}">
-		{BEGIN sign_in_read_aloud_label}{$label public_surgical_cases sign_in_read_aloud }{END sign_in_read_aloud_label}
+	<label class="r-edit-label control-label {$sign_in_read_aloud_label_class}" for="{$labelfor_sign_in_read_aloud}">
+		{BEGIN sign_in_read_aloud_label}
+			{$sign_in_read_aloud_forward_control}
+			{$label public_surgical_cases sign_in_read_aloud }			{END sign_in_read_aloud_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$sign_in_read_aloud_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="sign_in_read_aloud" {$tooltipAttr public_surgical_cases sign_in_read_aloud } >
+		<div class="r-edit-tooltip" data-helpfor="sign_in_read_aloud" {$tooltipAttr public_surgical_cases sign_in_read_aloud } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases sign_in_read_aloud }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END sign_in_read_aloud_fieldblock}
@@ -939,17 +985,19 @@
 	data-signal-error-for="sign_in_completed_before_anesthesia{$id}" {$required_attr_sign_in_completed_before_anesthesia}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field25" {$item_integrated_edit_field25} data-pageid="{$pageid}" data-field="sign_in_completed_before_anesthesia" data-fieldname="sign_in_completed_before_anesthesia" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_sign_in_completed_before_anesthesia}">
-		{BEGIN sign_in_completed_before_anesthesia_label}{$label public_surgical_cases sign_in_completed_before_anesthesia }{END sign_in_completed_before_anesthesia_label}
+	<label class="r-edit-label control-label {$sign_in_completed_before_anesthesia_label_class}" for="{$labelfor_sign_in_completed_before_anesthesia}">
+		{BEGIN sign_in_completed_before_anesthesia_label}
+			{$sign_in_completed_before_anesthesia_forward_control}
+			{$label public_surgical_cases sign_in_completed_before_anesthesia }			{END sign_in_completed_before_anesthesia_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$sign_in_completed_before_anesthesia_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="sign_in_completed_before_anesthesia" {$tooltipAttr public_surgical_cases sign_in_completed_before_anesthesia } >
+		<div class="r-edit-tooltip" data-helpfor="sign_in_completed_before_anesthesia" {$tooltipAttr public_surgical_cases sign_in_completed_before_anesthesia } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases sign_in_completed_before_anesthesia }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END sign_in_completed_before_anesthesia_fieldblock}
@@ -961,17 +1009,19 @@
 	data-signal-error-for="sterility_indicator_in_tray{$id}" {$required_attr_sterility_indicator_in_tray}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field26" {$item_integrated_edit_field26} data-pageid="{$pageid}" data-field="sterility_indicator_in_tray" data-fieldname="sterility_indicator_in_tray" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_sterility_indicator_in_tray}">
-		{BEGIN sterility_indicator_in_tray_label}{$label public_surgical_cases sterility_indicator_in_tray }{END sterility_indicator_in_tray_label}
+	<label class="r-edit-label control-label {$sterility_indicator_in_tray_label_class}" for="{$labelfor_sterility_indicator_in_tray}">
+		{BEGIN sterility_indicator_in_tray_label}
+			{$sterility_indicator_in_tray_forward_control}
+			{$label public_surgical_cases sterility_indicator_in_tray }			{END sterility_indicator_in_tray_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$sterility_indicator_in_tray_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="sterility_indicator_in_tray" {$tooltipAttr public_surgical_cases sterility_indicator_in_tray } >
+		<div class="r-edit-tooltip" data-helpfor="sterility_indicator_in_tray" {$tooltipAttr public_surgical_cases sterility_indicator_in_tray } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases sterility_indicator_in_tray }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END sterility_indicator_in_tray_fieldblock}
@@ -983,17 +1033,19 @@
 	data-signal-error-for="sterility_indicator_color_changed{$id}" {$required_attr_sterility_indicator_color_changed}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field27" {$item_integrated_edit_field27} data-pageid="{$pageid}" data-field="sterility_indicator_color_changed" data-fieldname="sterility_indicator_color_changed" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_sterility_indicator_color_changed}">
-		{BEGIN sterility_indicator_color_changed_label}{$label public_surgical_cases sterility_indicator_color_changed }{END sterility_indicator_color_changed_label}
+	<label class="r-edit-label control-label {$sterility_indicator_color_changed_label_class}" for="{$labelfor_sterility_indicator_color_changed}">
+		{BEGIN sterility_indicator_color_changed_label}
+			{$sterility_indicator_color_changed_forward_control}
+			{$label public_surgical_cases sterility_indicator_color_changed }			{END sterility_indicator_color_changed_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$sterility_indicator_color_changed_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="sterility_indicator_color_changed" {$tooltipAttr public_surgical_cases sterility_indicator_color_changed } >
+		<div class="r-edit-tooltip" data-helpfor="sterility_indicator_color_changed" {$tooltipAttr public_surgical_cases sterility_indicator_color_changed } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases sterility_indicator_color_changed }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END sterility_indicator_color_changed_fieldblock}
@@ -1005,17 +1057,19 @@
 	data-signal-error-for="tray_wet_prior_to_operation{$id}" {$required_attr_tray_wet_prior_to_operation}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field28" {$item_integrated_edit_field28} data-pageid="{$pageid}" data-field="tray_wet_prior_to_operation" data-fieldname="tray_wet_prior_to_operation" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_tray_wet_prior_to_operation}">
-		{BEGIN tray_wet_prior_to_operation_label}{$label public_surgical_cases tray_wet_prior_to_operation }{END tray_wet_prior_to_operation_label}
+	<label class="r-edit-label control-label {$tray_wet_prior_to_operation_label_class}" for="{$labelfor_tray_wet_prior_to_operation}">
+		{BEGIN tray_wet_prior_to_operation_label}
+			{$tray_wet_prior_to_operation_forward_control}
+			{$label public_surgical_cases tray_wet_prior_to_operation }			{END tray_wet_prior_to_operation_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$tray_wet_prior_to_operation_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="tray_wet_prior_to_operation" {$tooltipAttr public_surgical_cases tray_wet_prior_to_operation } >
+		<div class="r-edit-tooltip" data-helpfor="tray_wet_prior_to_operation" {$tooltipAttr public_surgical_cases tray_wet_prior_to_operation } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases tray_wet_prior_to_operation }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END tray_wet_prior_to_operation_fieldblock}
@@ -1027,17 +1081,19 @@
 	data-signal-error-for="tray_replaced{$id}" {$required_attr_tray_replaced}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field29" {$item_integrated_edit_field29} data-pageid="{$pageid}" data-field="tray_replaced" data-fieldname="tray_replaced" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_tray_replaced}">
-		{BEGIN tray_replaced_label}{$label public_surgical_cases tray_replaced }{END tray_replaced_label}
+	<label class="r-edit-label control-label {$tray_replaced_label_class}" for="{$labelfor_tray_replaced}">
+		{BEGIN tray_replaced_label}
+			{$tray_replaced_forward_control}
+			{$label public_surgical_cases tray_replaced }			{END tray_replaced_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$tray_replaced_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="tray_replaced" {$tooltipAttr public_surgical_cases tray_replaced } >
+		<div class="r-edit-tooltip" data-helpfor="tray_replaced" {$tooltipAttr public_surgical_cases tray_replaced } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases tray_replaced }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END tray_replaced_fieldblock}
@@ -1049,17 +1105,19 @@
 	data-signal-error-for="gauze_count_performed{$id}" {$required_attr_gauze_count_performed}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field30" {$item_integrated_edit_field30} data-pageid="{$pageid}" data-field="gauze_count_performed" data-fieldname="gauze_count_performed" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_gauze_count_performed}">
-		{BEGIN gauze_count_performed_label}{$label public_surgical_cases gauze_count_performed }{END gauze_count_performed_label}
+	<label class="r-edit-label control-label {$gauze_count_performed_label_class}" for="{$labelfor_gauze_count_performed}">
+		{BEGIN gauze_count_performed_label}
+			{$gauze_count_performed_forward_control}
+			{$label public_surgical_cases gauze_count_performed }			{END gauze_count_performed_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$gauze_count_performed_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="gauze_count_performed" {$tooltipAttr public_surgical_cases gauze_count_performed } >
+		<div class="r-edit-tooltip" data-helpfor="gauze_count_performed" {$tooltipAttr public_surgical_cases gauze_count_performed } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases gauze_count_performed }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END gauze_count_performed_fieldblock}
@@ -1071,17 +1129,19 @@
 	data-signal-error-for="gauze_count_total{$id}" {$required_attr_gauze_count_total}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field31" {$item_integrated_edit_field31} data-pageid="{$pageid}" data-field="gauze_count_total" data-fieldname="gauze_count_total" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_gauze_count_total}">
-		{BEGIN gauze_count_total_label}{$label public_surgical_cases gauze_count_total }{END gauze_count_total_label}
+	<label class="r-edit-label control-label {$gauze_count_total_label_class}" for="{$labelfor_gauze_count_total}">
+		{BEGIN gauze_count_total_label}
+			{$gauze_count_total_forward_control}
+			{$label public_surgical_cases gauze_count_total }			{END gauze_count_total_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$gauze_count_total_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="gauze_count_total" {$tooltipAttr public_surgical_cases gauze_count_total } >
+		<div class="r-edit-tooltip" data-helpfor="gauze_count_total" {$tooltipAttr public_surgical_cases gauze_count_total } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases gauze_count_total }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END gauze_count_total_fieldblock}
@@ -1093,17 +1153,19 @@
 	data-signal-error-for="surgeon_scrubbed_hands{$id}" {$required_attr_surgeon_scrubbed_hands}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field32" {$item_integrated_edit_field32} data-pageid="{$pageid}" data-field="surgeon_scrubbed_hands" data-fieldname="surgeon_scrubbed_hands" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_surgeon_scrubbed_hands}">
-		{BEGIN surgeon_scrubbed_hands_label}{$label public_surgical_cases surgeon_scrubbed_hands }{END surgeon_scrubbed_hands_label}
+	<label class="r-edit-label control-label {$surgeon_scrubbed_hands_label_class}" for="{$labelfor_surgeon_scrubbed_hands}">
+		{BEGIN surgeon_scrubbed_hands_label}
+			{$surgeon_scrubbed_hands_forward_control}
+			{$label public_surgical_cases surgeon_scrubbed_hands }			{END surgeon_scrubbed_hands_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$surgeon_scrubbed_hands_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="surgeon_scrubbed_hands" {$tooltipAttr public_surgical_cases surgeon_scrubbed_hands } >
+		<div class="r-edit-tooltip" data-helpfor="surgeon_scrubbed_hands" {$tooltipAttr public_surgical_cases surgeon_scrubbed_hands } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases surgeon_scrubbed_hands }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END surgeon_scrubbed_hands_fieldblock}
@@ -1115,17 +1177,19 @@
 	data-signal-error-for="handwashing_available{$id}" {$required_attr_handwashing_available}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field33" {$item_integrated_edit_field33} data-pageid="{$pageid}" data-field="handwashing_available" data-fieldname="handwashing_available" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_handwashing_available}">
-		{BEGIN handwashing_available_label}{$label public_surgical_cases handwashing_available }{END handwashing_available_label}
+	<label class="r-edit-label control-label {$handwashing_available_label_class}" for="{$labelfor_handwashing_available}">
+		{BEGIN handwashing_available_label}
+			{$handwashing_available_forward_control}
+			{$label public_surgical_cases handwashing_available }			{END handwashing_available_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$handwashing_available_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="handwashing_available" {$tooltipAttr public_surgical_cases handwashing_available } >
+		<div class="r-edit-tooltip" data-helpfor="handwashing_available" {$tooltipAttr public_surgical_cases handwashing_available } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases handwashing_available }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END handwashing_available_fieldblock}
@@ -1137,17 +1201,19 @@
 	data-signal-error-for="alcohol_solution_applied{$id}" {$required_attr_alcohol_solution_applied}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field34" {$item_integrated_edit_field34} data-pageid="{$pageid}" data-field="alcohol_solution_applied" data-fieldname="alcohol_solution_applied" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_alcohol_solution_applied}">
-		{BEGIN alcohol_solution_applied_label}{$label public_surgical_cases alcohol_solution_applied }{END alcohol_solution_applied_label}
+	<label class="r-edit-label control-label {$alcohol_solution_applied_label_class}" for="{$labelfor_alcohol_solution_applied}">
+		{BEGIN alcohol_solution_applied_label}
+			{$alcohol_solution_applied_forward_control}
+			{$label public_surgical_cases alcohol_solution_applied }			{END alcohol_solution_applied_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$alcohol_solution_applied_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="alcohol_solution_applied" {$tooltipAttr public_surgical_cases alcohol_solution_applied } >
+		<div class="r-edit-tooltip" data-helpfor="alcohol_solution_applied" {$tooltipAttr public_surgical_cases alcohol_solution_applied } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases alcohol_solution_applied }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END alcohol_solution_applied_fieldblock}
@@ -1159,17 +1225,19 @@
 	data-signal-error-for="new_surgical_gloves_used{$id}" {$required_attr_new_surgical_gloves_used}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field35" {$item_integrated_edit_field35} data-pageid="{$pageid}" data-field="new_surgical_gloves_used" data-fieldname="new_surgical_gloves_used" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_new_surgical_gloves_used}">
-		{BEGIN new_surgical_gloves_used_label}{$label public_surgical_cases new_surgical_gloves_used }{END new_surgical_gloves_used_label}
+	<label class="r-edit-label control-label {$new_surgical_gloves_used_label_class}" for="{$labelfor_new_surgical_gloves_used}">
+		{BEGIN new_surgical_gloves_used_label}
+			{$new_surgical_gloves_used_forward_control}
+			{$label public_surgical_cases new_surgical_gloves_used }			{END new_surgical_gloves_used_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$new_surgical_gloves_used_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="new_surgical_gloves_used" {$tooltipAttr public_surgical_cases new_surgical_gloves_used } >
+		<div class="r-edit-tooltip" data-helpfor="new_surgical_gloves_used" {$tooltipAttr public_surgical_cases new_surgical_gloves_used } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases new_surgical_gloves_used }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END new_surgical_gloves_used_fieldblock}
@@ -1181,17 +1249,19 @@
 	data-signal-error-for="gown_sterility_indicator{$id}" {$required_attr_gown_sterility_indicator}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field36" {$item_integrated_edit_field36} data-pageid="{$pageid}" data-field="gown_sterility_indicator" data-fieldname="gown_sterility_indicator" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_gown_sterility_indicator}">
-		{BEGIN gown_sterility_indicator_label}{$label public_surgical_cases gown_sterility_indicator }{END gown_sterility_indicator_label}
+	<label class="r-edit-label control-label {$gown_sterility_indicator_label_class}" for="{$labelfor_gown_sterility_indicator}">
+		{BEGIN gown_sterility_indicator_label}
+			{$gown_sterility_indicator_forward_control}
+			{$label public_surgical_cases gown_sterility_indicator }			{END gown_sterility_indicator_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$gown_sterility_indicator_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="gown_sterility_indicator" {$tooltipAttr public_surgical_cases gown_sterility_indicator } >
+		<div class="r-edit-tooltip" data-helpfor="gown_sterility_indicator" {$tooltipAttr public_surgical_cases gown_sterility_indicator } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases gown_sterility_indicator }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END gown_sterility_indicator_fieldblock}
@@ -1203,17 +1273,19 @@
 	data-signal-error-for="gown_indicator_color_changed{$id}" {$required_attr_gown_indicator_color_changed}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field37" {$item_integrated_edit_field37} data-pageid="{$pageid}" data-field="gown_indicator_color_changed" data-fieldname="gown_indicator_color_changed" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_gown_indicator_color_changed}">
-		{BEGIN gown_indicator_color_changed_label}{$label public_surgical_cases gown_indicator_color_changed }{END gown_indicator_color_changed_label}
+	<label class="r-edit-label control-label {$gown_indicator_color_changed_label_class}" for="{$labelfor_gown_indicator_color_changed}">
+		{BEGIN gown_indicator_color_changed_label}
+			{$gown_indicator_color_changed_forward_control}
+			{$label public_surgical_cases gown_indicator_color_changed }			{END gown_indicator_color_changed_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$gown_indicator_color_changed_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="gown_indicator_color_changed" {$tooltipAttr public_surgical_cases gown_indicator_color_changed } >
+		<div class="r-edit-tooltip" data-helpfor="gown_indicator_color_changed" {$tooltipAttr public_surgical_cases gown_indicator_color_changed } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases gown_indicator_color_changed }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END gown_indicator_color_changed_fieldblock}
@@ -1225,17 +1297,19 @@
 	data-signal-error-for="gown_pack_replaced{$id}" {$required_attr_gown_pack_replaced}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field38" {$item_integrated_edit_field38} data-pageid="{$pageid}" data-field="gown_pack_replaced" data-fieldname="gown_pack_replaced" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_gown_pack_replaced}">
-		{BEGIN gown_pack_replaced_label}{$label public_surgical_cases gown_pack_replaced }{END gown_pack_replaced_label}
+	<label class="r-edit-label control-label {$gown_pack_replaced_label_class}" for="{$labelfor_gown_pack_replaced}">
+		{BEGIN gown_pack_replaced_label}
+			{$gown_pack_replaced_forward_control}
+			{$label public_surgical_cases gown_pack_replaced }			{END gown_pack_replaced_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$gown_pack_replaced_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="gown_pack_replaced" {$tooltipAttr public_surgical_cases gown_pack_replaced } >
+		<div class="r-edit-tooltip" data-helpfor="gown_pack_replaced" {$tooltipAttr public_surgical_cases gown_pack_replaced } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases gown_pack_replaced }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END gown_pack_replaced_fieldblock}
@@ -1247,17 +1321,19 @@
 	data-signal-error-for="gowns_or_drapes_wet{$id}" {$required_attr_gowns_or_drapes_wet}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field39" {$item_integrated_edit_field39} data-pageid="{$pageid}" data-field="gowns_or_drapes_wet" data-fieldname="gowns_or_drapes_wet" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_gowns_or_drapes_wet}">
-		{BEGIN gowns_or_drapes_wet_label}{$label public_surgical_cases gowns_or_drapes_wet }{END gowns_or_drapes_wet_label}
+	<label class="r-edit-label control-label {$gowns_or_drapes_wet_label_class}" for="{$labelfor_gowns_or_drapes_wet}">
+		{BEGIN gowns_or_drapes_wet_label}
+			{$gowns_or_drapes_wet_forward_control}
+			{$label public_surgical_cases gowns_or_drapes_wet }			{END gowns_or_drapes_wet_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$gowns_or_drapes_wet_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="gowns_or_drapes_wet" {$tooltipAttr public_surgical_cases gowns_or_drapes_wet } >
+		<div class="r-edit-tooltip" data-helpfor="gowns_or_drapes_wet" {$tooltipAttr public_surgical_cases gowns_or_drapes_wet } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases gowns_or_drapes_wet }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END gowns_or_drapes_wet_fieldblock}
@@ -1269,17 +1345,19 @@
 	data-signal-error-for="wet_gowns_replaced{$id}" {$required_attr_wet_gowns_replaced}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field40" {$item_integrated_edit_field40} data-pageid="{$pageid}" data-field="wet_gowns_replaced" data-fieldname="wet_gowns_replaced" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_wet_gowns_replaced}">
-		{BEGIN wet_gowns_replaced_label}{$label public_surgical_cases wet_gowns_replaced }{END wet_gowns_replaced_label}
+	<label class="r-edit-label control-label {$wet_gowns_replaced_label_class}" for="{$labelfor_wet_gowns_replaced}">
+		{BEGIN wet_gowns_replaced_label}
+			{$wet_gowns_replaced_forward_control}
+			{$label public_surgical_cases wet_gowns_replaced }			{END wet_gowns_replaced_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$wet_gowns_replaced_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="wet_gowns_replaced" {$tooltipAttr public_surgical_cases wet_gowns_replaced } >
+		<div class="r-edit-tooltip" data-helpfor="wet_gowns_replaced" {$tooltipAttr public_surgical_cases wet_gowns_replaced } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases wet_gowns_replaced }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END wet_gowns_replaced_fieldblock}
@@ -1291,17 +1369,19 @@
 	data-signal-error-for="holes_in_gowns{$id}" {$required_attr_holes_in_gowns}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field41" {$item_integrated_edit_field41} data-pageid="{$pageid}" data-field="holes_in_gowns" data-fieldname="holes_in_gowns" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_holes_in_gowns}">
-		{BEGIN holes_in_gowns_label}{$label public_surgical_cases holes_in_gowns }{END holes_in_gowns_label}
+	<label class="r-edit-label control-label {$holes_in_gowns_label_class}" for="{$labelfor_holes_in_gowns}">
+		{BEGIN holes_in_gowns_label}
+			{$holes_in_gowns_forward_control}
+			{$label public_surgical_cases holes_in_gowns }			{END holes_in_gowns_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$holes_in_gowns_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="holes_in_gowns" {$tooltipAttr public_surgical_cases holes_in_gowns } >
+		<div class="r-edit-tooltip" data-helpfor="holes_in_gowns" {$tooltipAttr public_surgical_cases holes_in_gowns } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases holes_in_gowns }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END holes_in_gowns_fieldblock}
@@ -1313,17 +1393,19 @@
 	data-signal-error-for="torn_gowns_replaced{$id}" {$required_attr_torn_gowns_replaced}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field42" {$item_integrated_edit_field42} data-pageid="{$pageid}" data-field="torn_gowns_replaced" data-fieldname="torn_gowns_replaced" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_torn_gowns_replaced}">
-		{BEGIN torn_gowns_replaced_label}{$label public_surgical_cases torn_gowns_replaced }{END torn_gowns_replaced_label}
+	<label class="r-edit-label control-label {$torn_gowns_replaced_label_class}" for="{$labelfor_torn_gowns_replaced}">
+		{BEGIN torn_gowns_replaced_label}
+			{$torn_gowns_replaced_forward_control}
+			{$label public_surgical_cases torn_gowns_replaced }			{END torn_gowns_replaced_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$torn_gowns_replaced_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="torn_gowns_replaced" {$tooltipAttr public_surgical_cases torn_gowns_replaced } >
+		<div class="r-edit-tooltip" data-helpfor="torn_gowns_replaced" {$tooltipAttr public_surgical_cases torn_gowns_replaced } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases torn_gowns_replaced }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END torn_gowns_replaced_fieldblock}
@@ -1335,17 +1417,19 @@
 	data-signal-error-for="holes_in_drapes{$id}" {$required_attr_holes_in_drapes}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field43" {$item_integrated_edit_field43} data-pageid="{$pageid}" data-field="holes_in_drapes" data-fieldname="holes_in_drapes" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_holes_in_drapes}">
-		{BEGIN holes_in_drapes_label}{$label public_surgical_cases holes_in_drapes }{END holes_in_drapes_label}
+	<label class="r-edit-label control-label {$holes_in_drapes_label_class}" for="{$labelfor_holes_in_drapes}">
+		{BEGIN holes_in_drapes_label}
+			{$holes_in_drapes_forward_control}
+			{$label public_surgical_cases holes_in_drapes }			{END holes_in_drapes_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$holes_in_drapes_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="holes_in_drapes" {$tooltipAttr public_surgical_cases holes_in_drapes } >
+		<div class="r-edit-tooltip" data-helpfor="holes_in_drapes" {$tooltipAttr public_surgical_cases holes_in_drapes } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases holes_in_drapes }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END holes_in_drapes_fieldblock}
@@ -1357,17 +1441,19 @@
 	data-signal-error-for="drapes_replaced{$id}" {$required_attr_drapes_replaced}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field44" {$item_integrated_edit_field44} data-pageid="{$pageid}" data-field="drapes_replaced" data-fieldname="drapes_replaced" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_drapes_replaced}">
-		{BEGIN drapes_replaced_label}{$label public_surgical_cases drapes_replaced }{END drapes_replaced_label}
+	<label class="r-edit-label control-label {$drapes_replaced_label_class}" for="{$labelfor_drapes_replaced}">
+		{BEGIN drapes_replaced_label}
+			{$drapes_replaced_forward_control}
+			{$label public_surgical_cases drapes_replaced }			{END drapes_replaced_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$drapes_replaced_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="drapes_replaced" {$tooltipAttr public_surgical_cases drapes_replaced } >
+		<div class="r-edit-tooltip" data-helpfor="drapes_replaced" {$tooltipAttr public_surgical_cases drapes_replaced } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases drapes_replaced }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END drapes_replaced_fieldblock}
@@ -1379,17 +1465,19 @@
 	data-signal-error-for="surgical_site_prep_method{$id}" {$required_attr_surgical_site_prep_method}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field45" {$item_integrated_edit_field45} data-pageid="{$pageid}" data-field="surgical_site_prep_method" data-fieldname="surgical_site_prep_method" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_surgical_site_prep_method}">
-		{BEGIN surgical_site_prep_method_label}{$label public_surgical_cases surgical_site_prep_method }{END surgical_site_prep_method_label}
+	<label class="r-edit-label control-label {$surgical_site_prep_method_label_class}" for="{$labelfor_surgical_site_prep_method}">
+		{BEGIN surgical_site_prep_method_label}
+			{$surgical_site_prep_method_forward_control}
+			{$label public_surgical_cases surgical_site_prep_method }			{END surgical_site_prep_method_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$surgical_site_prep_method_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="surgical_site_prep_method" {$tooltipAttr public_surgical_cases surgical_site_prep_method } >
+		<div class="r-edit-tooltip" data-helpfor="surgical_site_prep_method" {$tooltipAttr public_surgical_cases surgical_site_prep_method } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases surgical_site_prep_method }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END surgical_site_prep_method_fieldblock}
@@ -1401,17 +1489,19 @@
 	data-signal-error-for="vaginal_preparation{$id}" {$required_attr_vaginal_preparation}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field46" {$item_integrated_edit_field46} data-pageid="{$pageid}" data-field="vaginal_preparation" data-fieldname="vaginal_preparation" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_vaginal_preparation}">
-		{BEGIN vaginal_preparation_label}{$label public_surgical_cases vaginal_preparation }{END vaginal_preparation_label}
+	<label class="r-edit-label control-label {$vaginal_preparation_label_class}" for="{$labelfor_vaginal_preparation}">
+		{BEGIN vaginal_preparation_label}
+			{$vaginal_preparation_forward_control}
+			{$label public_surgical_cases vaginal_preparation }			{END vaginal_preparation_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$vaginal_preparation_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="vaginal_preparation" {$tooltipAttr public_surgical_cases vaginal_preparation } >
+		<div class="r-edit-tooltip" data-helpfor="vaginal_preparation" {$tooltipAttr public_surgical_cases vaginal_preparation } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases vaginal_preparation }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END vaginal_preparation_fieldblock}
@@ -1423,17 +1513,19 @@
 	data-signal-error-for="antibiotics_given{$id}" {$required_attr_antibiotics_given}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field47" {$item_integrated_edit_field47} data-pageid="{$pageid}" data-field="antibiotics_given" data-fieldname="antibiotics_given" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_antibiotics_given}">
-		{BEGIN antibiotics_given_label}{$label public_surgical_cases antibiotics_given }{END antibiotics_given_label}
+	<label class="r-edit-label control-label {$antibiotics_given_label_class}" for="{$labelfor_antibiotics_given}">
+		{BEGIN antibiotics_given_label}
+			{$antibiotics_given_forward_control}
+			{$label public_surgical_cases antibiotics_given }			{END antibiotics_given_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$antibiotics_given_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="antibiotics_given" {$tooltipAttr public_surgical_cases antibiotics_given } >
+		<div class="r-edit-tooltip" data-helpfor="antibiotics_given" {$tooltipAttr public_surgical_cases antibiotics_given } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases antibiotics_given }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END antibiotics_given_fieldblock}
@@ -1445,17 +1537,19 @@
 	data-signal-error-for="antibiotics_admin_location{$id}" {$required_attr_antibiotics_admin_location}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field48" {$item_integrated_edit_field48} data-pageid="{$pageid}" data-field="antibiotics_admin_location" data-fieldname="antibiotics_admin_location" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_antibiotics_admin_location}">
-		{BEGIN antibiotics_admin_location_label}{$label public_surgical_cases antibiotics_admin_location }{END antibiotics_admin_location_label}
+	<label class="r-edit-label control-label {$antibiotics_admin_location_label_class}" for="{$labelfor_antibiotics_admin_location}">
+		{BEGIN antibiotics_admin_location_label}
+			{$antibiotics_admin_location_forward_control}
+			{$label public_surgical_cases antibiotics_admin_location }			{END antibiotics_admin_location_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$antibiotics_admin_location_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="antibiotics_admin_location" {$tooltipAttr public_surgical_cases antibiotics_admin_location } >
+		<div class="r-edit-tooltip" data-helpfor="antibiotics_admin_location" {$tooltipAttr public_surgical_cases antibiotics_admin_location } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases antibiotics_admin_location }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END antibiotics_admin_location_fieldblock}
@@ -1467,17 +1561,19 @@
 	data-signal-error-for="antibiotics_time{$id}" {$required_attr_antibiotics_time}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field49" {$item_integrated_edit_field49} data-pageid="{$pageid}" data-field="antibiotics_time" data-fieldname="antibiotics_time" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_antibiotics_time}">
-		{BEGIN antibiotics_time_label}{$label public_surgical_cases antibiotics_time }{END antibiotics_time_label}
+	<label class="r-edit-label control-label {$antibiotics_time_label_class}" for="{$labelfor_antibiotics_time}">
+		{BEGIN antibiotics_time_label}
+			{$antibiotics_time_forward_control}
+			{$label public_surgical_cases antibiotics_time }			{END antibiotics_time_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$antibiotics_time_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="antibiotics_time" {$tooltipAttr public_surgical_cases antibiotics_time } >
+		<div class="r-edit-tooltip" data-helpfor="antibiotics_time" {$tooltipAttr public_surgical_cases antibiotics_time } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases antibiotics_time }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END antibiotics_time_fieldblock}
@@ -1489,17 +1585,19 @@
 	data-signal-error-for="on_scheduled_antibiotics{$id}" {$required_attr_on_scheduled_antibiotics}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field50" {$item_integrated_edit_field50} data-pageid="{$pageid}" data-field="on_scheduled_antibiotics" data-fieldname="on_scheduled_antibiotics" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_on_scheduled_antibiotics}">
-		{BEGIN on_scheduled_antibiotics_label}{$label public_surgical_cases on_scheduled_antibiotics }{END on_scheduled_antibiotics_label}
+	<label class="r-edit-label control-label {$on_scheduled_antibiotics_label_class}" for="{$labelfor_on_scheduled_antibiotics}">
+		{BEGIN on_scheduled_antibiotics_label}
+			{$on_scheduled_antibiotics_forward_control}
+			{$label public_surgical_cases on_scheduled_antibiotics }			{END on_scheduled_antibiotics_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$on_scheduled_antibiotics_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="on_scheduled_antibiotics" {$tooltipAttr public_surgical_cases on_scheduled_antibiotics } >
+		<div class="r-edit-tooltip" data-helpfor="on_scheduled_antibiotics" {$tooltipAttr public_surgical_cases on_scheduled_antibiotics } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases on_scheduled_antibiotics }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END on_scheduled_antibiotics_fieldblock}
@@ -1511,17 +1609,19 @@
 	data-signal-error-for="antibiotic_type{$id}" {$required_attr_antibiotic_type}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field51" {$item_integrated_edit_field51} data-pageid="{$pageid}" data-field="antibiotic_type" data-fieldname="antibiotic_type" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_antibiotic_type}">
-		{BEGIN antibiotic_type_label}{$label public_surgical_cases antibiotic_type }{END antibiotic_type_label}
+	<label class="r-edit-label control-label {$antibiotic_type_label_class}" for="{$labelfor_antibiotic_type}">
+		{BEGIN antibiotic_type_label}
+			{$antibiotic_type_forward_control}
+			{$label public_surgical_cases antibiotic_type }			{END antibiotic_type_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$antibiotic_type_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="antibiotic_type" {$tooltipAttr public_surgical_cases antibiotic_type } >
+		<div class="r-edit-tooltip" data-helpfor="antibiotic_type" {$tooltipAttr public_surgical_cases antibiotic_type } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases antibiotic_type }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END antibiotic_type_fieldblock}
@@ -1533,17 +1633,19 @@
 	data-signal-error-for="timeout_read_aloud{$id}" {$required_attr_timeout_read_aloud}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field52" {$item_integrated_edit_field52} data-pageid="{$pageid}" data-field="timeout_read_aloud" data-fieldname="timeout_read_aloud" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_timeout_read_aloud}">
-		{BEGIN timeout_read_aloud_label}{$label public_surgical_cases timeout_read_aloud }{END timeout_read_aloud_label}
+	<label class="r-edit-label control-label {$timeout_read_aloud_label_class}" for="{$labelfor_timeout_read_aloud}">
+		{BEGIN timeout_read_aloud_label}
+			{$timeout_read_aloud_forward_control}
+			{$label public_surgical_cases timeout_read_aloud }			{END timeout_read_aloud_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$timeout_read_aloud_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="timeout_read_aloud" {$tooltipAttr public_surgical_cases timeout_read_aloud } >
+		<div class="r-edit-tooltip" data-helpfor="timeout_read_aloud" {$tooltipAttr public_surgical_cases timeout_read_aloud } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases timeout_read_aloud }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END timeout_read_aloud_fieldblock}
@@ -1555,17 +1657,19 @@
 	data-signal-error-for="operation_type_announced{$id}" {$required_attr_operation_type_announced}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field53" {$item_integrated_edit_field53} data-pageid="{$pageid}" data-field="operation_type_announced" data-fieldname="operation_type_announced" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_operation_type_announced}">
-		{BEGIN operation_type_announced_label}{$label public_surgical_cases operation_type_announced }{END operation_type_announced_label}
+	<label class="r-edit-label control-label {$operation_type_announced_label_class}" for="{$labelfor_operation_type_announced}">
+		{BEGIN operation_type_announced_label}
+			{$operation_type_announced_forward_control}
+			{$label public_surgical_cases operation_type_announced }			{END operation_type_announced_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$operation_type_announced_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="operation_type_announced" {$tooltipAttr public_surgical_cases operation_type_announced } >
+		<div class="r-edit-tooltip" data-helpfor="operation_type_announced" {$tooltipAttr public_surgical_cases operation_type_announced } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases operation_type_announced }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END operation_type_announced_fieldblock}
@@ -1577,17 +1681,19 @@
 	data-signal-error-for="blood_loss_announced{$id}" {$required_attr_blood_loss_announced}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field54" {$item_integrated_edit_field54} data-pageid="{$pageid}" data-field="blood_loss_announced" data-fieldname="blood_loss_announced" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_blood_loss_announced}">
-		{BEGIN blood_loss_announced_label}{$label public_surgical_cases blood_loss_announced }{END blood_loss_announced_label}
+	<label class="r-edit-label control-label {$blood_loss_announced_label_class}" for="{$labelfor_blood_loss_announced}">
+		{BEGIN blood_loss_announced_label}
+			{$blood_loss_announced_forward_control}
+			{$label public_surgical_cases blood_loss_announced }			{END blood_loss_announced_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$blood_loss_announced_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="blood_loss_announced" {$tooltipAttr public_surgical_cases blood_loss_announced } >
+		<div class="r-edit-tooltip" data-helpfor="blood_loss_announced" {$tooltipAttr public_surgical_cases blood_loss_announced } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases blood_loss_announced }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END blood_loss_announced_fieldblock}
@@ -1599,17 +1705,19 @@
 	data-signal-error-for="estimated_blood_loss{$id}" {$required_attr_estimated_blood_loss}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field55" {$item_integrated_edit_field55} data-pageid="{$pageid}" data-field="estimated_blood_loss" data-fieldname="estimated_blood_loss" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_estimated_blood_loss}">
-		{BEGIN estimated_blood_loss_label}{$label public_surgical_cases estimated_blood_loss }{END estimated_blood_loss_label}
+	<label class="r-edit-label control-label {$estimated_blood_loss_label_class}" for="{$labelfor_estimated_blood_loss}">
+		{BEGIN estimated_blood_loss_label}
+			{$estimated_blood_loss_forward_control}
+			{$label public_surgical_cases estimated_blood_loss }			{END estimated_blood_loss_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$estimated_blood_loss_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="estimated_blood_loss" {$tooltipAttr public_surgical_cases estimated_blood_loss } >
+		<div class="r-edit-tooltip" data-helpfor="estimated_blood_loss" {$tooltipAttr public_surgical_cases estimated_blood_loss } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases estimated_blood_loss }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END estimated_blood_loss_fieldblock}
@@ -1621,17 +1729,19 @@
 	data-signal-error-for="time_of_incision{$id}" {$required_attr_time_of_incision}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field56" {$item_integrated_edit_field56} data-pageid="{$pageid}" data-field="time_of_incision" data-fieldname="time_of_incision" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_time_of_incision}">
-		{BEGIN time_of_incision_label}{$label public_surgical_cases time_of_incision }{END time_of_incision_label}
+	<label class="r-edit-label control-label {$time_of_incision_label_class}" for="{$labelfor_time_of_incision}">
+		{BEGIN time_of_incision_label}
+			{$time_of_incision_forward_control}
+			{$label public_surgical_cases time_of_incision }			{END time_of_incision_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$time_of_incision_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="time_of_incision" {$tooltipAttr public_surgical_cases time_of_incision } >
+		<div class="r-edit-tooltip" data-helpfor="time_of_incision" {$tooltipAttr public_surgical_cases time_of_incision } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases time_of_incision }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END time_of_incision_fieldblock}
@@ -1643,17 +1753,19 @@
 	data-signal-error-for="gauze_count_end_performed{$id}" {$required_attr_gauze_count_end_performed}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field57" {$item_integrated_edit_field57} data-pageid="{$pageid}" data-field="gauze_count_end_performed" data-fieldname="gauze_count_end_performed" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_gauze_count_end_performed}">
-		{BEGIN gauze_count_end_performed_label}{$label public_surgical_cases gauze_count_end_performed }{END gauze_count_end_performed_label}
+	<label class="r-edit-label control-label {$gauze_count_end_performed_label_class}" for="{$labelfor_gauze_count_end_performed}">
+		{BEGIN gauze_count_end_performed_label}
+			{$gauze_count_end_performed_forward_control}
+			{$label public_surgical_cases gauze_count_end_performed }			{END gauze_count_end_performed_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$gauze_count_end_performed_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="gauze_count_end_performed" {$tooltipAttr public_surgical_cases gauze_count_end_performed } >
+		<div class="r-edit-tooltip" data-helpfor="gauze_count_end_performed" {$tooltipAttr public_surgical_cases gauze_count_end_performed } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases gauze_count_end_performed }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END gauze_count_end_performed_fieldblock}
@@ -1665,17 +1777,19 @@
 	data-signal-error-for="gauze_count_end_total{$id}" {$required_attr_gauze_count_end_total}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field58" {$item_integrated_edit_field58} data-pageid="{$pageid}" data-field="gauze_count_end_total" data-fieldname="gauze_count_end_total" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_gauze_count_end_total}">
-		{BEGIN gauze_count_end_total_label}{$label public_surgical_cases gauze_count_end_total }{END gauze_count_end_total_label}
+	<label class="r-edit-label control-label {$gauze_count_end_total_label_class}" for="{$labelfor_gauze_count_end_total}">
+		{BEGIN gauze_count_end_total_label}
+			{$gauze_count_end_total_forward_control}
+			{$label public_surgical_cases gauze_count_end_total }			{END gauze_count_end_total_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$gauze_count_end_total_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="gauze_count_end_total" {$tooltipAttr public_surgical_cases gauze_count_end_total } >
+		<div class="r-edit-tooltip" data-helpfor="gauze_count_end_total" {$tooltipAttr public_surgical_cases gauze_count_end_total } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases gauze_count_end_total }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END gauze_count_end_total_fieldblock}
@@ -1687,17 +1801,19 @@
 	data-signal-error-for="time_dressing_applied{$id}" {$required_attr_time_dressing_applied}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field59" {$item_integrated_edit_field59} data-pageid="{$pageid}" data-field="time_dressing_applied" data-fieldname="time_dressing_applied" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_time_dressing_applied}">
-		{BEGIN time_dressing_applied_label}{$label public_surgical_cases time_dressing_applied }{END time_dressing_applied_label}
+	<label class="r-edit-label control-label {$time_dressing_applied_label_class}" for="{$labelfor_time_dressing_applied}">
+		{BEGIN time_dressing_applied_label}
+			{$time_dressing_applied_forward_control}
+			{$label public_surgical_cases time_dressing_applied }			{END time_dressing_applied_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$time_dressing_applied_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="time_dressing_applied" {$tooltipAttr public_surgical_cases time_dressing_applied } >
+		<div class="r-edit-tooltip" data-helpfor="time_dressing_applied" {$tooltipAttr public_surgical_cases time_dressing_applied } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases time_dressing_applied }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END time_dressing_applied_fieldblock}
@@ -1709,17 +1825,19 @@
 	data-signal-error-for="procedure_id{$id}" {$required_attr_procedure_id}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field60" {$item_integrated_edit_field60} data-pageid="{$pageid}" data-field="procedure_id" data-fieldname="procedure_id" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_procedure_id}">
-		{BEGIN procedure_id_label}{$label public_surgical_cases procedure_id }{END procedure_id_label}
+	<label class="r-edit-label control-label {$procedure_id_label_class}" for="{$labelfor_procedure_id}">
+		{BEGIN procedure_id_label}
+			{$procedure_id_forward_control}
+			{$label public_surgical_cases procedure_id }			{END procedure_id_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$procedure_id_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="procedure_id" {$tooltipAttr public_surgical_cases procedure_id } >
+		<div class="r-edit-tooltip" data-helpfor="procedure_id" {$tooltipAttr public_surgical_cases procedure_id } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases procedure_id }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END procedure_id_fieldblock}
@@ -1731,17 +1849,19 @@
 	data-signal-error-for="hardware_or_bioprosthetic_used{$id}" {$required_attr_hardware_or_bioprosthetic_used}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field61" {$item_integrated_edit_field61} data-pageid="{$pageid}" data-field="hardware_or_bioprosthetic_used" data-fieldname="hardware_or_bioprosthetic_used" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_hardware_or_bioprosthetic_used}">
-		{BEGIN hardware_or_bioprosthetic_used_label}{$label public_surgical_cases hardware_or_bioprosthetic_used }{END hardware_or_bioprosthetic_used_label}
+	<label class="r-edit-label control-label {$hardware_or_bioprosthetic_used_label_class}" for="{$labelfor_hardware_or_bioprosthetic_used}">
+		{BEGIN hardware_or_bioprosthetic_used_label}
+			{$hardware_or_bioprosthetic_used_forward_control}
+			{$label public_surgical_cases hardware_or_bioprosthetic_used }			{END hardware_or_bioprosthetic_used_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$hardware_or_bioprosthetic_used_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="hardware_or_bioprosthetic_used" {$tooltipAttr public_surgical_cases hardware_or_bioprosthetic_used } >
+		<div class="r-edit-tooltip" data-helpfor="hardware_or_bioprosthetic_used" {$tooltipAttr public_surgical_cases hardware_or_bioprosthetic_used } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases hardware_or_bioprosthetic_used }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END hardware_or_bioprosthetic_used_fieldblock}
@@ -1753,17 +1873,19 @@
 	data-signal-error-for="cesarean_indication{$id}" {$required_attr_cesarean_indication}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field62" {$item_integrated_edit_field62} data-pageid="{$pageid}" data-field="cesarean_indication" data-fieldname="cesarean_indication" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_cesarean_indication}">
-		{BEGIN cesarean_indication_label}{$label public_surgical_cases cesarean_indication }{END cesarean_indication_label}
+	<label class="r-edit-label control-label {$cesarean_indication_label_class}" for="{$labelfor_cesarean_indication}">
+		{BEGIN cesarean_indication_label}
+			{$cesarean_indication_forward_control}
+			{$label public_surgical_cases cesarean_indication }			{END cesarean_indication_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$cesarean_indication_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="cesarean_indication" {$tooltipAttr public_surgical_cases cesarean_indication } >
+		<div class="r-edit-tooltip" data-helpfor="cesarean_indication" {$tooltipAttr public_surgical_cases cesarean_indication } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases cesarean_indication }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END cesarean_indication_fieldblock}
@@ -1775,17 +1897,19 @@
 	data-signal-error-for="wound_closed_primarily{$id}" {$required_attr_wound_closed_primarily}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field63" {$item_integrated_edit_field63} data-pageid="{$pageid}" data-field="wound_closed_primarily" data-fieldname="wound_closed_primarily" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_wound_closed_primarily}">
-		{BEGIN wound_closed_primarily_label}{$label public_surgical_cases wound_closed_primarily }{END wound_closed_primarily_label}
+	<label class="r-edit-label control-label {$wound_closed_primarily_label_class}" for="{$labelfor_wound_closed_primarily}">
+		{BEGIN wound_closed_primarily_label}
+			{$wound_closed_primarily_forward_control}
+			{$label public_surgical_cases wound_closed_primarily }			{END wound_closed_primarily_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$wound_closed_primarily_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="wound_closed_primarily" {$tooltipAttr public_surgical_cases wound_closed_primarily } >
+		<div class="r-edit-tooltip" data-helpfor="wound_closed_primarily" {$tooltipAttr public_surgical_cases wound_closed_primarily } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases wound_closed_primarily }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END wound_closed_primarily_fieldblock}
@@ -1797,17 +1921,19 @@
 	data-signal-error-for="wound_classification{$id}" {$required_attr_wound_classification}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field64" {$item_integrated_edit_field64} data-pageid="{$pageid}" data-field="wound_classification" data-fieldname="wound_classification" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_wound_classification}">
-		{BEGIN wound_classification_label}{$label public_surgical_cases wound_classification }{END wound_classification_label}
+	<label class="r-edit-label control-label {$wound_classification_label_class}" for="{$labelfor_wound_classification}">
+		{BEGIN wound_classification_label}
+			{$wound_classification_forward_control}
+			{$label public_surgical_cases wound_classification }			{END wound_classification_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$wound_classification_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="wound_classification" {$tooltipAttr public_surgical_cases wound_classification } >
+		<div class="r-edit-tooltip" data-helpfor="wound_classification" {$tooltipAttr public_surgical_cases wound_classification } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases wound_classification }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END wound_classification_fieldblock}
@@ -1819,17 +1945,19 @@
 	data-signal-error-for="case_type{$id}" {$required_attr_case_type}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field65" {$item_integrated_edit_field65} data-pageid="{$pageid}" data-field="case_type" data-fieldname="case_type" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_case_type}">
-		{BEGIN case_type_label}{$label public_surgical_cases case_type }{END case_type_label}
+	<label class="r-edit-label control-label {$case_type_label_class}" for="{$labelfor_case_type}">
+		{BEGIN case_type_label}
+			{$case_type_forward_control}
+			{$label public_surgical_cases case_type }			{END case_type_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$case_type_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="case_type" {$tooltipAttr public_surgical_cases case_type } >
+		<div class="r-edit-tooltip" data-helpfor="case_type" {$tooltipAttr public_surgical_cases case_type } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases case_type }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END case_type_fieldblock}
@@ -1841,17 +1969,19 @@
 	data-signal-error-for="sign_out_read_aloud{$id}" {$required_attr_sign_out_read_aloud}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field66" {$item_integrated_edit_field66} data-pageid="{$pageid}" data-field="sign_out_read_aloud" data-fieldname="sign_out_read_aloud" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_sign_out_read_aloud}">
-		{BEGIN sign_out_read_aloud_label}{$label public_surgical_cases sign_out_read_aloud }{END sign_out_read_aloud_label}
+	<label class="r-edit-label control-label {$sign_out_read_aloud_label_class}" for="{$labelfor_sign_out_read_aloud}">
+		{BEGIN sign_out_read_aloud_label}
+			{$sign_out_read_aloud_forward_control}
+			{$label public_surgical_cases sign_out_read_aloud }			{END sign_out_read_aloud_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$sign_out_read_aloud_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="sign_out_read_aloud" {$tooltipAttr public_surgical_cases sign_out_read_aloud } >
+		<div class="r-edit-tooltip" data-helpfor="sign_out_read_aloud" {$tooltipAttr public_surgical_cases sign_out_read_aloud } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases sign_out_read_aloud }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END sign_out_read_aloud_fieldblock}
@@ -1863,17 +1993,19 @@
 	data-signal-error-for="sign_out_in_theatre{$id}" {$required_attr_sign_out_in_theatre}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field67" {$item_integrated_edit_field67} data-pageid="{$pageid}" data-field="sign_out_in_theatre" data-fieldname="sign_out_in_theatre" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_sign_out_in_theatre}">
-		{BEGIN sign_out_in_theatre_label}{$label public_surgical_cases sign_out_in_theatre }{END sign_out_in_theatre_label}
+	<label class="r-edit-label control-label {$sign_out_in_theatre_label_class}" for="{$labelfor_sign_out_in_theatre}">
+		{BEGIN sign_out_in_theatre_label}
+			{$sign_out_in_theatre_forward_control}
+			{$label public_surgical_cases sign_out_in_theatre }			{END sign_out_in_theatre_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$sign_out_in_theatre_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="sign_out_in_theatre" {$tooltipAttr public_surgical_cases sign_out_in_theatre } >
+		<div class="r-edit-tooltip" data-helpfor="sign_out_in_theatre" {$tooltipAttr public_surgical_cases sign_out_in_theatre } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases sign_out_in_theatre }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END sign_out_in_theatre_fieldblock}
@@ -1885,17 +2017,19 @@
 	data-signal-error-for="unplanned_intubation{$id}" {$required_attr_unplanned_intubation}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field68" {$item_integrated_edit_field68} data-pageid="{$pageid}" data-field="unplanned_intubation" data-fieldname="unplanned_intubation" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_unplanned_intubation}">
-		{BEGIN unplanned_intubation_label}{$label public_surgical_cases unplanned_intubation }{END unplanned_intubation_label}
+	<label class="r-edit-label control-label {$unplanned_intubation_label_class}" for="{$labelfor_unplanned_intubation}">
+		{BEGIN unplanned_intubation_label}
+			{$unplanned_intubation_forward_control}
+			{$label public_surgical_cases unplanned_intubation }			{END unplanned_intubation_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$unplanned_intubation_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="unplanned_intubation" {$tooltipAttr public_surgical_cases unplanned_intubation } >
+		<div class="r-edit-tooltip" data-helpfor="unplanned_intubation" {$tooltipAttr public_surgical_cases unplanned_intubation } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases unplanned_intubation }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END unplanned_intubation_fieldblock}
@@ -1907,17 +2041,19 @@
 	data-signal-error-for="urgent_tracheostomy{$id}" {$required_attr_urgent_tracheostomy}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field69" {$item_integrated_edit_field69} data-pageid="{$pageid}" data-field="urgent_tracheostomy" data-fieldname="urgent_tracheostomy" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_urgent_tracheostomy}">
-		{BEGIN urgent_tracheostomy_label}{$label public_surgical_cases urgent_tracheostomy }{END urgent_tracheostomy_label}
+	<label class="r-edit-label control-label {$urgent_tracheostomy_label_class}" for="{$labelfor_urgent_tracheostomy}">
+		{BEGIN urgent_tracheostomy_label}
+			{$urgent_tracheostomy_forward_control}
+			{$label public_surgical_cases urgent_tracheostomy }			{END urgent_tracheostomy_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$urgent_tracheostomy_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="urgent_tracheostomy" {$tooltipAttr public_surgical_cases urgent_tracheostomy } >
+		<div class="r-edit-tooltip" data-helpfor="urgent_tracheostomy" {$tooltipAttr public_surgical_cases urgent_tracheostomy } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases urgent_tracheostomy }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END urgent_tracheostomy_fieldblock}
@@ -1929,17 +2065,19 @@
 	data-signal-error-for="urgent_central_access{$id}" {$required_attr_urgent_central_access}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field70" {$item_integrated_edit_field70} data-pageid="{$pageid}" data-field="urgent_central_access" data-fieldname="urgent_central_access" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_urgent_central_access}">
-		{BEGIN urgent_central_access_label}{$label public_surgical_cases urgent_central_access }{END urgent_central_access_label}
+	<label class="r-edit-label control-label {$urgent_central_access_label_class}" for="{$labelfor_urgent_central_access}">
+		{BEGIN urgent_central_access_label}
+			{$urgent_central_access_forward_control}
+			{$label public_surgical_cases urgent_central_access }			{END urgent_central_access_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$urgent_central_access_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="urgent_central_access" {$tooltipAttr public_surgical_cases urgent_central_access } >
+		<div class="r-edit-tooltip" data-helpfor="urgent_central_access" {$tooltipAttr public_surgical_cases urgent_central_access } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases urgent_central_access }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END urgent_central_access_fieldblock}
@@ -1951,17 +2089,19 @@
 	data-signal-error-for="other_crisis_occurred{$id}" {$required_attr_other_crisis_occurred}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field71" {$item_integrated_edit_field71} data-pageid="{$pageid}" data-field="other_crisis_occurred" data-fieldname="other_crisis_occurred" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_other_crisis_occurred}">
-		{BEGIN other_crisis_occurred_label}{$label public_surgical_cases other_crisis_occurred }{END other_crisis_occurred_label}
+	<label class="r-edit-label control-label {$other_crisis_occurred_label_class}" for="{$labelfor_other_crisis_occurred}">
+		{BEGIN other_crisis_occurred_label}
+			{$other_crisis_occurred_forward_control}
+			{$label public_surgical_cases other_crisis_occurred }			{END other_crisis_occurred_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$other_crisis_occurred_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="other_crisis_occurred" {$tooltipAttr public_surgical_cases other_crisis_occurred } >
+		<div class="r-edit-tooltip" data-helpfor="other_crisis_occurred" {$tooltipAttr public_surgical_cases other_crisis_occurred } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases other_crisis_occurred }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END other_crisis_occurred_fieldblock}
@@ -1973,17 +2113,19 @@
 	data-signal-error-for="crisis_description{$id}" {$required_attr_crisis_description}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field72" {$item_integrated_edit_field72} data-pageid="{$pageid}" data-field="crisis_description" data-fieldname="crisis_description" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_crisis_description}">
-		{BEGIN crisis_description_label}{$label public_surgical_cases crisis_description }{END crisis_description_label}
+	<label class="r-edit-label control-label {$crisis_description_label_class}" for="{$labelfor_crisis_description}">
+		{BEGIN crisis_description_label}
+			{$crisis_description_forward_control}
+			{$label public_surgical_cases crisis_description }			{END crisis_description_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$crisis_description_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="crisis_description" {$tooltipAttr public_surgical_cases crisis_description } >
+		<div class="r-edit-tooltip" data-helpfor="crisis_description" {$tooltipAttr public_surgical_cases crisis_description } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases crisis_description }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END crisis_description_fieldblock}
@@ -1995,17 +2137,19 @@
 	data-signal-error-for="death_in_or{$id}" {$required_attr_death_in_or}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field73" {$item_integrated_edit_field73} data-pageid="{$pageid}" data-field="death_in_or" data-fieldname="death_in_or" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_death_in_or}">
-		{BEGIN death_in_or_label}{$label public_surgical_cases death_in_or }{END death_in_or_label}
+	<label class="r-edit-label control-label {$death_in_or_label_class}" for="{$labelfor_death_in_or}">
+		{BEGIN death_in_or_label}
+			{$death_in_or_forward_control}
+			{$label public_surgical_cases death_in_or }			{END death_in_or_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$death_in_or_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="death_in_or" {$tooltipAttr public_surgical_cases death_in_or } >
+		<div class="r-edit-tooltip" data-helpfor="death_in_or" {$tooltipAttr public_surgical_cases death_in_or } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases death_in_or }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END death_in_or_fieldblock}
@@ -2017,17 +2161,19 @@
 	data-signal-error-for="fetal_death{$id}" {$required_attr_fetal_death}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field74" {$item_integrated_edit_field74} data-pageid="{$pageid}" data-field="fetal_death" data-fieldname="fetal_death" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_fetal_death}">
-		{BEGIN fetal_death_label}{$label public_surgical_cases fetal_death }{END fetal_death_label}
+	<label class="r-edit-label control-label {$fetal_death_label_class}" for="{$labelfor_fetal_death}">
+		{BEGIN fetal_death_label}
+			{$fetal_death_forward_control}
+			{$label public_surgical_cases fetal_death }			{END fetal_death_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$fetal_death_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="fetal_death" {$tooltipAttr public_surgical_cases fetal_death } >
+		<div class="r-edit-tooltip" data-helpfor="fetal_death" {$tooltipAttr public_surgical_cases fetal_death } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases fetal_death }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END fetal_death_fieldblock}
@@ -2039,17 +2185,19 @@
 	data-signal-error-for="created_at{$id}" {$required_attr_created_at}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field75" {$item_integrated_edit_field75} data-pageid="{$pageid}" data-field="created_at" data-fieldname="created_at" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_created_at}">
-		{BEGIN created_at_label}{$label public_surgical_cases created_at }{END created_at_label}
+	<label class="r-edit-label control-label {$created_at_label_class}" for="{$labelfor_created_at}">
+		{BEGIN created_at_label}
+			{$created_at_forward_control}
+			{$label public_surgical_cases created_at }			{END created_at_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$created_at_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="created_at" {$tooltipAttr public_surgical_cases created_at } >
+		<div class="r-edit-tooltip" data-helpfor="created_at" {$tooltipAttr public_surgical_cases created_at } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases created_at }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END created_at_fieldblock}
@@ -2061,17 +2209,19 @@
 	data-signal-error-for="updated_at{$id}" {$required_attr_updated_at}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field76" {$item_integrated_edit_field76} data-pageid="{$pageid}" data-field="updated_at" data-fieldname="updated_at" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_updated_at}">
-		{BEGIN updated_at_label}{$label public_surgical_cases updated_at }{END updated_at_label}
+	<label class="r-edit-label control-label {$updated_at_label_class}" for="{$labelfor_updated_at}">
+		{BEGIN updated_at_label}
+			{$updated_at_forward_control}
+			{$label public_surgical_cases updated_at }			{END updated_at_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$updated_at_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="updated_at" {$tooltipAttr public_surgical_cases updated_at } >
+		<div class="r-edit-tooltip" data-helpfor="updated_at" {$tooltipAttr public_surgical_cases updated_at } >
 		<div class="text-muted" >
 		{$tooltip public_surgical_cases updated_at }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END updated_at_fieldblock}
@@ -2098,7 +2248,7 @@
 <span data-itemtype="edit_save" data-itemid="edit_save" {$item_edit_save} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-primary   
 	" {$savebutton_attrs} >
-							Save			</a>
+							{mlang_message SAVE}			</a>
 </span>
 {END save_edit}
 	 
@@ -2106,7 +2256,7 @@
 <span data-itemtype="edit_back_list" data-itemid="edit_back_list" {$item_edit_back_list} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-default   
 	" {$backbutton_attrs} >
-							Back to list			</a>
+							{mlang_message BACK_TO_LIST}			</a>
 </span>
 {END back_button}
 	 
@@ -2114,7 +2264,7 @@
 <span data-itemtype="edit_close" data-itemid="edit_close" {$item_edit_close} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-default   
 	" {$closebutton_attrs} >
-							Cancel			</a>
+							{mlang_message CANCEL}			</a>
 </span>
 {END close_button}
 		</div>			 
@@ -2131,17 +2281,19 @@
 												<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu">
-								<li data-itemtype="edit_reset" data-itemid="edit_reset" {$item_edit_reset} data-pageid="{$pageid}" data-small >
+							{BEGIN reset_button}
+	<li data-itemtype="edit_reset" data-itemid="edit_reset" {$item_edit_reset} data-pageid="{$pageid}" data-small >
 				<a  {$resetbutton_attrs}  title="" >
 				
-		Reset		
+		{mlang_message RESET}		
 		</a>
 	</li>
+{END reset_button}
 							{BEGIN view_page_button}
 	<li data-itemtype="edit_view" data-itemid="edit_view" {$item_edit_view} data-pageid="{$pageid}" data-small >
 				<a  href="surgical_cases_view.php?{$editlink}" {$view_page_button_attrs}  title="" >
 				
-		View		
+		{mlang_message VIEW}		
 		</a>
 	</li>
 {END view_page_button}

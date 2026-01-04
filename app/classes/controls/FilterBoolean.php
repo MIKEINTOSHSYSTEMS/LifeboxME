@@ -28,7 +28,7 @@ class FilterBoolean extends FilterControl
 	 */
 	protected function getShownValue( $checked ) {
 		$mData = $this->pSet->getBooleanFilterMessageData( $this->fName, $checked );
-		return $this->getLabel( $mData["type"], $mData["text"] );
+		return GetMLString( $mData );
 	}
 	
 	/**

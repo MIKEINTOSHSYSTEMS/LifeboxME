@@ -78,7 +78,7 @@ class PrintPage_Details extends PrintPage
 
 		echo '<div class="panel panel-info details-grid">
 			<div class="panel-heading">
-				<h4 class="panel-title">' . $this->getPageTitle( $this->pageName, GoodFieldName($this->tName) ) . '</h4>
+				<h4 class="panel-title">' . $this->getPageTitle( $this->pageName, $this->tName ) . '</h4>
 			</div>
 			<div class="panel-body">';
 		echo $this->fetchForms( array( "grid" ) );	
@@ -94,11 +94,11 @@ class PrintPage_Details extends PrintPage
 	function getMasterTableSQLClause() 
 	{
 		$where = "";
-		$dKeys = $this->pSet->getDetailKeysByMasterTable( $this->masterTable );
-		if( !$dKeys )
+		$dKeys = $this->pSet->getMasterKeys( $this->masterTable );
+		if( !$dKeys['detailsKeys'] )
 			return "1=0";
 		
-		foreach( $dKeys as $i => $key ) 
+		foreach( $dKeys['detailsKeys'] as $i => $key ) 
 		{
 			if($i != 0) 
 				$where.= " and ";

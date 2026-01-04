@@ -4,9 +4,8 @@
 ///////////////////////////////////////////////////////////////////////////
 class SQLEntity
 {
-	protected $connection = null;
-	
-	function __construct(){}
+	var $sql;
+	function __construct( $proto ){}
 	function IsAggregationFunctionCall() 
 	{
 		return false;
@@ -27,80 +26,65 @@ class SQLEntity
 		return false;
 	}
 	
-	/**
-	 * Set the 'connection' property
-	 * @param String srcTableName
-	 */
-	protected function setConnection( $srcTableName )
-	{
-		global $cman;
-		$this->connection = $cman->byTable( $srcTableName );
-	}	
 };
 
 class SQLNonParsed extends SQLEntity
 {
-	var $m_sql;
 	function __construct($proto)
 	{
-		$this->m_sql = isset($proto["m_sql"]) ? $proto["m_sql"] : '';
+		$this->sql = sqlFromJson( $proto["sql"] );
 	}
 	
 	function toSql($query)
 	{
-		return $this->m_sql;
+		return $this->sql;
 	}
 
 	function IsAsterisk() 
 	{
-		$last = substr($this->m_sql,strlen($this->m_sql)-1);
+		$last = substr($this->sql,strlen($this->sql)-1);
 		return ($last=="*");
 	}
+
+	function fromJson( $proto ) {
+		return new SQLNonParsed( $proto );
+	}
+
 
 }
 
 class SQLField extends SQLEntity
 {
-	var $m_strName;
-	var $m_strTable;
-	
-	/**
-	 * The data source table name
-	 * @type String
-	 */
-	protected $m_srcTableName;
-	
+	var $name;
+	var $table;
 	
 	function __construct($proto)
 	{
-		$this->m_strName = isset($proto["m_strName"]) ? $proto["m_strName"] : null;
-		$this->m_strTable = isset($proto["m_strTable"]) ? $proto["m_strTable"] : null;
-		$this->m_srcTableName = $proto["m_srcTableName"];
+		$this->name = sqlFromJson( $proto["name"] );
+		$this->table = sqlFromJson( $proto["table"] );
 	}
 	
 	function toSql($query)
 	{
-		if( is_null($this->connection) )
-			$this->setConnection( $this->m_srcTableName );
 		
 		if( $query->cipherer != null )
 		{
 			return $query->cipherer->GetFieldName(
-				($this->m_strTable != "" && $query->TableCount() > 1 ? $this->connection->addTableWrappers($this->m_strTable)."." : "")
-					.$this->connection->addFieldWrappers($this->m_strName) );
+				($this->table != "" && $query->TableCount() > 1 ? $query->connection->addTableWrappers($this->table)."." : "")
+					.$query->connection->addFieldWrappers($this->name) );
 		}
 		
-		$fieldName = $this->connection->addFieldWrappers($this->m_strName);
-		if( $this->m_strTable == "" || $query->TableCount() == 1 )
+		$fieldName = $query->connection->addFieldWrappers($this->name);
+		if( $this->table == "" || $query->TableCount() == 1 )
 			return $fieldName;
 
-		return $this->connection->addTableWrappers($this->m_strTable) . "." . $fieldName;
+		return $query->connection->addTableWrappers($this->table) . "." . $fieldName;
 	}
 	
 	function GetType()
 	{
-		$pSet = new ProjectSettings($this->m_strTable);
-		return $pSet->getFieldType($this->m_strName);
+		$pSet = new ProjectSettings($this->table);
+		return $pSet->getFieldType($this->name);
 	}
 	
 	function IsBinary()
@@ -116,50 +100,48 @@ class SQLField extends SQLEntity
 
 class SQLFieldListItem extends SQLEntity
 {
-	var $m_sql;
-	var $m_expr; 
-	var $m_alias;
-	var $m_isEncrypted = false;
-	
-	/**
-	 * The data source table name
-	 * @type String
-	 */
-	protected $m_srcTableName;
-	
+	var $expression; 
+	var $alias;
+	var $columnName;
+	var $encrypted = false;
 	
 	function __construct($proto)
 	{
-		$this->m_expr = isset($proto["m_expr"]) ? $proto["m_expr"] : null;
-		$this->m_alias = isset($proto["m_alias"]) ? $proto["m_alias"] : null;
-		$this->m_sql = isset($proto["m_sql"]) ? $proto["m_sql"] : null;
-		
-		$this->m_srcTableName = $proto["m_srcTableName"];
+		$this->expression = sqlFromJson( $proto["expression"] );
+		$this->alias = sqlFromJson( $proto["alias"] );
+		$this->sql = sqlFromJson( $proto["sql"] );
+		$this->columnName = sqlFromJson( $proto["columnName"] );
+		$this->encrypted = sqlFromJson( $proto["encrypted"] );
+		if( !$this->expression ) {
+			$this->expression = new SQLNonParsed(array(
+				"sql" => $this->sql
+			));
+		}
 	}
 	
 	function toSql($query, $addAlias = true)
 	{
 		$ret = '';
-		if($this->m_expr)
+		if($this->expression)
 		{
-			if(is_string($this->m_expr))
+			if(is_string($this->expression))
 			{
-				$ret = $this->m_expr;
+				$ret = $this->expression;
 			}
 			else
 			{
-				if(is_a($this->m_expr, 'SQLQuery'))
+				if(is_a($this->expression, 'SQLQuery'))
 				{
-					$ret = $this->m_sql;
+					$ret = $this->sql;
 				}
 				else
 				{
-					$ret = $this->m_expr->toSql($query);
+					$ret = $this->expression->toSql($query);
 				}
 				
 			}
 		}
-		if($this->m_isEncrypted ) 
+		if( $this->encrypted ) 
 		{
 			// ASP conversion requirement
 			if( !$query->cipherer->isEncryptionByPHPEnabled() )
@@ -168,25 +150,10 @@ class SQLFieldListItem extends SQLEntity
 		
 		if($addAlias)
 		{
-			if( is_null($this->connection) )
-				$this->setConnection( $this->m_srcTableName );
-			
-			if($this->m_alias != "")
-			{
-				$ret .= ' as ' . $this->connection->addFieldWrappers($this->m_alias);
-			}
-			elseif(is_object($this->m_expr))
-			{
-				if($this->m_expr->IsSQLField() && $query->cipherer != null )
-				{
-					// ASP conversion requirement
-					if( !$query->cipherer->isEncryptionByPHPEnabled() )
-					{
-						if($query->cipherer->isFieldEncrypted($this->m_expr->m_strName)){
-							$ret .= ' as ' . $this->connection->addFieldWrappers($this->m_expr->m_strName); 
-						}
-					}
-				}
+			if( $this->alias != "" ) {
+				$ret .= ' as ' . $query->connection->addFieldWrappers($this->alias);
+			} elseif( $this->encrypted ) {
+				$ret .= ' as ' . $query->connection->addFieldWrappers( $this->columnName ); 
 			}
 		}
 		
@@ -195,116 +162,97 @@ class SQLFieldListItem extends SQLEntity
 	
 	function IsAsterisk() 
 	{
-		if(is_object($this->m_expr))
-			return $this->m_expr->IsAsterisk();
+		if(is_object($this->expression))
+			return $this->expression->IsAsterisk();
 		return false;
 	}
 	function IsAggregationFunctionCall()
 	{
-		if(is_object($this->m_expr))
-			return $this->m_expr->IsAggregationFunctionCall();
+		if(is_object($this->expression))
+			return $this->expression->IsAggregationFunctionCall();
 		return false;
 	}
 	function getAlias()
 	{
-		if(isset($this->m_alias) && !isset($this->m_expr->m_strName))
-		{
-			return $this->m_alias;
-		}
-		elseif(isset($this->m_expr->m_strName))
-		{
-			if(isset($this->m_alias) && $this->m_alias!="")
-			{
-				return $this->m_alias;
-			}
-			else
-			{
-				return $this->m_expr->m_strName;
-			}
-		}
+		return $this->columnName;
 	}
 }
 
 class SQLFromListItem extends SQLEntity
 {
-	var $m_sql;
-	var $m_link;
-	var $m_table;
-	var $m_alias;
-	var $m_joinon;
-	
-	/**
-	 * The data source table name
-	 * @type String
-	 */
-	protected $m_srcTableName;
+	var $link;
+	var $table;
+	var $alias;
+	var $joinOn;
 	
 	function __construct($proto)
 	{
-		$this->m_link = isset($proto["m_link"]) ? $proto["m_link"] : null;
-		$this->m_table = isset($proto["m_table"]) ? $proto["m_table"] : null;
-		$this->m_alias = isset($proto["m_alias"]) ? $proto["m_alias"] : null;
-		$this->m_joinon = isset($proto["m_joinon"]) ? $proto["m_joinon"] : null;
-		$this->m_sql = isset($proto["m_sql"]) ? $proto["m_sql"] : null;
+		$this->link = sqlFromJson( $proto["link"] );
+		$this->table = sqlFromJson( $proto["table"] );
+		$this->alias = sqlFromJson( $proto["alias"] );
+		$this->joinOn = sqlFromJson( $proto["joinOn"] );
+		$this->sql = sqlFromJson( $proto["sql"] );
 		
-		$this->m_srcTableName =  $proto["m_srcTableName"];
+		if( !$this->table ) {
+			$this->table = new SQLNonParsed(array(
+				"sql" => $this->sql
+			));
+		}
+
 	}
 	
 	function SetQuery(&$query)
 	{
-		if(is_object($this->m_table))
-			$this->m_table->SetQuery($query);
+		if(is_object($this->table))
+			$this->table->SetQuery($query);
 	}
 	
 	function toSql($query, $first)
 	{
 		$ret = '';
 		$skipAlias = false;
-		if(is_a($this->m_table, "SQLTable"))
+		if(is_a($this->table, "SQLTable"))
 		{
-			$ret .= $this->m_table->toSql($query);
+			$ret .= $this->table->toSql($query);
 		}
 		else
 		{
-			return $this->m_sql;
+			return $this->sql;
 		}
 		
-		if($this->m_alias != '' && !$skipAlias)
+		if($this->alias != '' && !$skipAlias)
 		{
-			if( is_null($this->connection) )
-				$this->setConnection( $this->m_srcTableName );
-				
-			$ret .= ' ' . $this->connection->addFieldWrappers($this->m_alias);
+			$ret .= ' ' . $query->connection->addFieldWrappers($this->alias);
 		}
 		
-		if($this->m_link == 'SQLL_MAIN')
+		if($this->link == sqlLinkMAIN)
 		{
 			return $ret;
 		}
 		
-		switch($this->m_link)
+		switch($this->link)
 		{
-			case 'SQLL_INNERJOIN':
+			case sqlLinkINNERJOIN:
 				$ret = ' INNER JOIN ' . $ret;
 				break;
-			case 'SQLL_NATURALJOIN':
+			case sqlLinkNATURALJOIN:
 				$ret = ' NATURAL JOIN ' . $ret;
 				break;
-			case 'SQLL_LEFTJOIN':
+			case sqlLinkLEFTJOIN:
 				$ret = ' LEFT OUTER JOIN ' . $ret;
 				break;
-			case 'SQLL_RIGHTJOIN':
+			case sqlLinkRIGHTJOIN:
 				$ret = ' RIGHT OUTER JOIN ' . $ret;
 				break;
-			case 'SQLL_FULLOUTERJOIN':
+			case sqlLinkFULLOUTERJOIN:
 				$ret = ' FULL OUTER JOIN ' . $ret;
 				break;
-			case 'SQLL_CROSSJOIN':
+			case sqlLinkCROSSJOIN:
 				$ret = (!$first ? ',' : '') . $ret;
 				break;
 		}
 		
-		$joinStr = $this->m_joinon->toSql($query);
+		$joinStr = $this->joinOn->toSql($query);
 		if($joinStr != '')
 		{
 			$ret .= ' ON ' . $joinStr;
@@ -315,62 +263,62 @@ class SQLFromListItem extends SQLEntity
 	
 	function getIdentifier()
 	{
-		if( $this->m_alias != '' )
-			return $this->m_alias;
+		if( $this->alias != '' )
+			return $this->alias;
 			
-		return $this->m_table;
+		return $this->table;
 	}	
 }
 
 class SQLJoinOn extends SQLEntity
 {
-	var $m_field1;
-	var $m_field2;
+	var $field1;
+	var $field2;
       
 	function __construct($proto)
 	{
-		$this->m_field1 = isset($proto["m_field1"]) ? $proto["m_field1"] : null;
-		$this->m_field2 = isset($proto["m_field2"]) ? $proto["m_field2"] : null;
+		$this->field1 = sqlFromJson( $proto["field1"] );
+		$this->field2 = sqlFromJson( $proto["field2"] );
 	}
 }
 
 class SQLFunctionCall extends SQLEntity
 {
-	var $m_functiontype;
-	var $m_strFunctionName;
-	var $m_arguments;
+	var $functionType;
+	var $functionName;
+	var $arguments;
 	function __construct($proto)
 	{
-		$this->m_functiontype = isset($proto["m_functiontype"]) ? $proto["m_functiontype"] : null;
-		$this->m_strFunctionName = isset($proto["m_strFunctionName"]) ? $proto["m_strFunctionName"] : null;
-		$this->m_arguments = isset($proto["m_arguments"]) ? $proto["m_arguments"] : null;
+		$this->functionType = sqlFromJson( $proto["functionType"] );
+		$this->functionName = sqlFromJson( $proto["functionName"] );
+		$this->arguments = sqlFromJson( $proto["arguments"] );
 	}
 	
 	function toSql($query)
 	{
 		$ret = '';
-		switch($this->m_functiontype)
+		switch($this->functionType)
 		{
-			case 'SQLF_AVG':
+			case SQLF_AVG:
 				$ret .= ' AVG';
 				break;
-			case 'SQLF_SUM':
+			case SQLF_SUM:
 				$ret .= ' SUM';
 				break;
-			case 'SQLF_MIN':
+			case SQLF_MIN:
 				$ret .= ' MIN';
 				break;
-			case 'SQLF_MAX':
+			case SQLF_MAX:
 				$ret .= ' MAX';
 				break;
-			case 'SQLF_COUNT':
+			case SQLF_COUNT:
 				$ret .= ' COUNT';
 				break;
 			default:
-				$ret .= $this->m_strFunctionName;
+				$ret .= $this->functionName;
 		}
 		$args = array();
-		foreach($this->m_arguments as $a)
+		foreach($this->arguments as $a)
 		{
 			$args []= $a->toSql($query);
 		}
@@ -379,16 +327,16 @@ class SQLFunctionCall extends SQLEntity
 	}
 	function IsAggregationFunctionCall() 
 	{
-		switch($this->m_functiontype)
+		switch($this->functionType)
 		{
-			case 'SQLF_AVG':
-			case 'SQLF_SUM':
-			case 'SQLF_MIN':
-			case 'SQLF_MAX':
-			case 'SQLF_COUNT':
+			case SQLF_AVG:
+			case SQLF_SUM:
+			case SQLF_MIN:
+			case SQLF_MAX:
+			case SQLF_COUNT:
 			return true;
 		}
-		if( strtolower( $this->m_strFunctionName ) == "group_concat" )
+		if( strtolower( $this->functionName ) == "group_concat" )
 			return true;
 		return false;
 	}
@@ -396,15 +344,22 @@ class SQLFunctionCall extends SQLEntity
 
 class SQLGroupByItem extends SQLEntity
 {
-	var $m_column;
+	var $column;
 	function __construct($proto)
 	{
-		$this->m_column = isset($proto["m_column"]) ? $proto["m_column"] : null;
+		$this->column = sqlFromJson( $proto["column"] );
+		$this->sql = sqlFromJson( $proto["sql"] );
+		if( !$this->column ) {
+			$this->column = new SQLNonParsed(array(
+				"sql" => $this->sql
+			));
+		}
+
 	}
 	
 	function toSql($query)
 	{
-		return $this->m_column->toSql($query);
+		return $this->column->toSql($query);
 	}
 }
 
@@ -420,37 +375,42 @@ define("F_SIMPLE", 2);
 
 class SQLLogicalExpr extends SQLEntity
 {
-	var $m_uniontype;
-	var $m_column;
-	var $m_strCase;
-	var $m_havingmode;
-	var $m_contained;
-	var $m_inBrackets;
-	var $m_useAlias;
-	var $m_sql;
+	var $unionType;
+	var $column;
+	var $case;
+	var $havingMode;
+	var $contained;
+	var $inBrackets;
+	var $useAlias;
 
 	var $query;
 	var $postSql;
 	
 	function __construct($proto)
 	{
-		$this->m_sql = isset($proto["m_sql"]) ? $proto["m_sql"] : null;
-		$this->m_uniontype = isset($proto["m_uniontype"]) ? $proto["m_uniontype"] : null;
-		$this->m_column = isset($proto["m_column"]) ? $proto["m_column"] : null;
-		$this->m_strCase = isset($proto["m_strCase"]) ? $proto["m_strCase"] : null;
-		$this->m_havingmode = isset($proto["m_havingmode"]) ? $proto["m_havingmode"] : null;
-		$this->m_contained = isset($proto["m_contained"]) ? $proto["m_contained"] : null;
-		$this->m_inBrackets = isset($proto["m_inBrackets"]) ? $proto["m_inBrackets"] : null;
-		$this->m_useAlias = isset($proto["m_useAlias"]) ? $proto["m_useAlias"] : null;
+		$this->sql = sqlFromJson( $proto["sql"] );
+		$this->unionType = sqlFromJson( $proto["unionType"] );
+		$this->column = sqlFromJson( $proto["column"] );
+		$this->case = sqlFromJson( $proto["case"] );
+		$this->havingMode = sqlFromJson( $proto["havingMode"] );
+		$this->contained = sqlFromJson( $proto["contained"] );
+		$this->inBrackets = sqlFromJson( $proto["inBrackets"] );
+		$this->useAlias = sqlFromJson( $proto["useAlias"] );
 		$this->postSql = array();
+
+		if( !$this->column ) {
+			$this->column = new SQLNonParsed(array(
+				"sql" => $this->sql
+			));
+		}
 	}
 	
 	function SetQuery(&$query)
 	{
 		$this->query = &$query;
-		for($nCnt = 0; $nCnt < count($this->m_contained); $nCnt ++)
+		for($nCnt = 0; $nCnt < count($this->contained); $nCnt ++)
 		{
-			$this->m_contained[$nCnt]->SetQuery($query);
+			$this->contained[$nCnt]->SetQuery($query);
 		}
 	}
 	
@@ -461,11 +421,11 @@ class SQLLogicalExpr extends SQLEntity
 		{
 			// guess glue
 			$glue = '';
-			if($this->m_uniontype == 'SQLL_AND')
+			if($this->unionType == sqlUnionAND )
 			{
 				$glue = ' AND ';
 			}
-			else if($this->m_uniontype == 'SQLL_OR')
+			else if($this->unionType == sqlUnionOR )
 			{
 				$glue = ' OR ';
 			}
@@ -476,7 +436,7 @@ class SQLLogicalExpr extends SQLEntity
 			
 			// get list of contained sql
 			$contained = array();
-			foreach($this->m_contained as $c)
+			foreach($this->contained as $c)
 			{
 				$cSql = $c->toSql($query);
 				if($cSql != '')
@@ -511,7 +471,7 @@ class SQLLogicalExpr extends SQLEntity
 				}
 			}
 			
-			if($this->m_inBrackets)
+			if($this->inBrackets)
 			{
 				$ret = '(' . $ret . ')';
 			}
@@ -519,26 +479,26 @@ class SQLLogicalExpr extends SQLEntity
 			return $ret;
 		}
 		
-		if( $this->m_sql ) {
-			return $this->m_sql;
+		if( $this->sql ) {
+			return $this->sql;
 		}
-		if(!$this->m_column)
+		if(!$this->column)
 		{
-			$ret = $this->m_sql;
+			$ret = $this->sql;
 		}
 		else
 		{
-			if($this->m_useAlias)
+			if($this->useAlias)
 			{
-				$ret = $this->m_column->m_alias;
+				$ret = $this->column->alias;
 			}
 			else
 			{
-				$ret = $this->m_column->toSql($query);
+				$ret = $this->column->toSql($query);
 			}
 		}
 		
-		if($this->m_strCase == 'NOT')
+		if($this->case == 'NOT')
 		{
 			return ' NOT ' . $ret;
 		}
@@ -546,11 +506,11 @@ class SQLLogicalExpr extends SQLEntity
 		{
 			if($ret != '')
 			{
-				$ret .= ' ' . $this->m_strCase;
+				$ret .= ' ' . $this->case;
 			}
 		}
 		
-		if($this->m_inBrackets)
+		if($this->inBrackets)
 		{
 			$ret = '(' . $ret . ')';
 		}
@@ -560,35 +520,41 @@ class SQLLogicalExpr extends SQLEntity
 	
 	function haveContained()
 	{
-		return count($this->m_contained) > 0 || count($this->postSql) > 0;
+		return count($this->contained) > 0 || count($this->postSql) > 0;
 	}
 }
 
 class SQLOrderByItem extends SQLEntity
 {
-	var $m_column;
-	var $m_bAsc;
-	var $m_nColumn;
+	var $column;
+	var $asc;
+	var $columnNumber;
 	function __construct($proto)
 	{
-		$this->m_column = isset($proto["m_column"]) ? $proto["m_column"] : null;
-		$this->m_bAsc = isset($proto["m_bAsc"]) ? $proto["m_bAsc"] : null;
-		$this->m_nColumn = isset($proto["m_nColumn"]) ? $proto["m_nColumn"] : null;
+		$this->column = sqlFromJson( $proto["column"] );
+		$this->asc = sqlFromJson( $proto["asc"] );
+		$this->columnNumber = sqlFromJson( $proto["columnNumber"] );
+		$this->sql = sqlFromJson( $proto["sql"] );
+		if( !$this->column ) {
+			$this->column = new SQLNonParsed(array(
+				"sql" => $this->sql
+			));
+		}
 	}
 	
 	function toSql($query)
 	{
 		$ret = '';
-		if(0 == $this->m_nColumn)
+		if(0 == $this->columnNumber)
 		{
-			$ret .= $this->m_column->toSql($query);
+			$ret .= $this->column->toSql($query);
 		}
 		else
 		{
-			$ret .= $this->m_nColumn;
+			$ret .= $this->columnNumber;
 		}
 		
-		if(!$this->m_bAsc)
+		if(!$this->asc)
 		{
 			$ret .= ' DESC ';
 		}
@@ -599,23 +565,14 @@ class SQLOrderByItem extends SQLEntity
 
 class SQLTable extends SQLEntity
 {
-	var $m_strName;
-	var $m_columns;
+	var $name;
+	var $columns;
 	var $query;
-	
-	/**
-	 * The data source table name
-	 * @type String
-	 */
-	protected $m_srcTableName;	
-	
 	
 	function __construct($proto)
 	{
-		$this->m_strName = isset($proto["m_strName"]) ? $proto["m_strName"] : null;
-		$this->m_columns = isset($proto["m_columns"]) ? $proto["m_columns"] : null;
-		
-		$this->m_srcTableName = $proto["m_srcTableName"];
+		$this->name = sqlFromJson( $proto["name"] );
+		$this->columns = sqlFromJson( $proto["columns"] );
 	}
 
 	function SetQuery(&$query)
@@ -625,64 +582,53 @@ class SQLTable extends SQLEntity
 	
 	function toSql($query)
 	{
-		if( is_null($this->connection) )
-			$this->setConnection( $this->m_srcTableName );
-			
-		return $this->connection->addTableWrappers($this->m_strName);
+		return $query->connection->addTableWrappers($this->name);
 	}
 }
 
 class SQLQuery extends SQLEntity
 {
-	var $m_strHead;
-	var $m_strFieldList;
-	var $m_strFrom;
-	var $m_strWhere;
-	var $m_strOrderBy;
-	var $m_where;
-	var $m_having;
-	var $m_fieldlist;
-	var $m_fromlist;
-	var $m_groupby;
-	var $m_orderby;
+	var $headSql;
+	var $fieldListSql;
+	var $fromListSql;
+	var $whereSql;
+	var $orderBySql;
+	var $where;
+	var $having;
+	var $fieldList;
+	var $fromList;
+	var $groupBy;
+	var $orderBy;
 	var $bHasAsterisks = false;
-	var $m_proto = array();
-	/**
-	 * Instance of Cypher class for encoding/decoding fields values and names  
-	 *
-	 * @var object
-	 */
-	var $cipherer = null;
-	
-	public $m_srcTableName;
+
+	//	initialized in getSqlComponents and toSQL only
+	public $connection = null;
+	public $cipherer = null;
 	
 	function __construct($proto)
 	{
-		$this->m_proto = $proto;
-		$this->m_strHead = isset($proto["m_strHead"]) ? $proto["m_strHead"] : null;
-		$this->m_strFieldList = isset($proto["m_strFieldList"]) ? $proto["m_strFieldList"] : null;
-		$this->m_strFrom = isset($proto["m_strFrom"]) ? $proto["m_strFrom"] : null;
-		$this->m_strWhere = isset($proto["m_strWhere"]) ? $proto["m_strWhere"] : null;
-		$this->m_strOrderBy = isset($proto["m_strOrderBy"]) ? $proto["m_strOrderBy"] : null;
-		$this->m_where = isset($proto["m_where"]) ? $proto["m_where"] : null;
-		$this->m_having = isset($proto["m_having"]) ? $proto["m_having"] : null;
-		$this->m_fieldlist = isset($proto["m_fieldlist"]) ? $proto["m_fieldlist"] : null;
-		$this->m_fromlist = isset($proto["m_fromlist"]) ? $proto["m_fromlist"] : null;
-		$this->m_groupby = isset($proto["m_groupby"]) ? $proto["m_groupby"] : null;
-		$this->m_orderby = isset($proto["m_orderby"]) ? $proto["m_orderby"] : null;
-		$this->cipherer = isset($proto["cipherer"]) ? $proto["cipherer"] : null;
-		$this->m_srcTableName = $proto["m_srcTableName"];
+		$this->headSql = sqlFromJson( $proto["headSql"] );
+		$this->fieldListSql = sqlFromJson( $proto["fieldListSql"] );
+		$this->fromListSql = sqlFromJson( $proto["fromListSql"] );
+		$this->whereSql = sqlFromJson( $proto["whereSql"] );
+		$this->orderBySql = sqlFromJson( $proto["orderBySql"] );
+		$this->where = sqlFromJson( $proto["where"] );
+		$this->having = sqlFromJson( $proto["having"] );
+		$this->fieldList = sqlFromJson( $proto["fieldList"] );
+		$this->fromList = sqlFromJson( $proto["fromList"] );
+		$this->groupBy = sqlFromJson( $proto["groupBy"] );
+		$this->orderBy = sqlFromJson( $proto["orderBy"] );
 		
-		for($nCnt = 0; $nCnt < count($this->m_fromlist); $nCnt++)
+		for($nCnt = 0; $nCnt < count($this->fromList); $nCnt++)
 		{
-			$this->m_fromlist[$nCnt]->SetQuery($this);
+			$this->fromList[$nCnt]->SetQuery($this);
 		}
-		$this->m_where->SetQuery($this);
-		if(!is_array($this->m_fieldlist))
+		$this->where->SetQuery($this);
+		if(!is_array($this->fieldList))
 			return;
-		for($i=0;$i<count($this->m_fieldlist);$i++)
+		for($i=0;$i<count($this->fieldList);$i++)
 		{
-			if($this->m_fieldlist[$i]->IsAsterisk())
+			if($this->fieldList[$i]->IsAsterisk())
 			{
 				$this->bHasAsterisks=true;
 				break;
@@ -690,35 +636,10 @@ class SQLQuery extends SQLEntity
 		}
 	}
 	
-	function updateProto() 
-	{
-		$this->m_proto["m_strHead"] = $this->m_strHead;
-		$this->m_proto["m_strFieldList"] = $this->m_strFieldList;
-		$this->m_proto["m_strFrom"] = $this->m_strFrom;
-		$this->m_proto["m_strWhere"] = $this->m_strWhere;
-		$this->m_proto["m_strOrderBy"] = $this->m_strOrderBy;
-		$this->m_proto["m_where"] = $this->m_where;
-		$this->m_proto["m_having"] = $this->m_having;
-		$this->m_proto["m_fieldlist"] = $this->m_fieldlist;
-		$this->m_proto["m_fromlist"] = $this->m_fromlist;
-		$this->m_proto["m_groupby"] = $this->m_groupby;
-		$this->m_proto["m_orderby"] = $this->m_orderby;
-		$this->m_proto["cipherer"] = $this->cipherer;
-		$this->m_proto["m_srcTableName"] = $this->m_srcTableName;
-	}
-	
-	function CloneObject()
-	{
-		return new SQLQuery( $this->m_proto );
-	}
-	
 	function FromToSql()
 	{
-		if( is_null($this->connection) )
-			$this->setConnection( $this->m_srcTableName );		
-		
 		$sql = "";
-		if(count($this->m_fromlist) > 0)
+		if(count($this->fromList) > 0)
 		{
 			$sql .= "\r\n";
 			$sql .= ' FROM ';
@@ -727,22 +648,22 @@ class SQLQuery extends SQLEntity
 		if( $this->connection->dbType == nDATABASE_Access )
 		{
 			$sqlFromList = '';
-			for($nCnt = 0; $nCnt < count($this->m_fromlist); $nCnt ++)
+			for($nCnt = 0; $nCnt < count($this->fromList); $nCnt ++)
 			{
 				if($sqlFromList !== '')
 				{
 					$sqlFromList = '(' . $sqlFromList . ')';
 				}
-				$sqlFromList .=  $this->m_fromlist[$nCnt]->toSql($this, $nCnt == 0);
+				$sqlFromList .=  $this->fromList[$nCnt]->toSql($this, $nCnt == 0);
 			}
 			$sql .= $sqlFromList;
 		}
 		else
 		{		
 			$fromlist = array();
-			for($nCnt = 0; $nCnt < count($this->m_fromlist); $nCnt ++)
+			for($nCnt = 0; $nCnt < count($this->fromList); $nCnt ++)
 			{
-				$fromlist []= $this->m_fromlist[$nCnt]->toSql($this, $nCnt == 0);
+				$fromlist []= $this->fromList[$nCnt]->toSql($this, $nCnt == 0);
 			}
 			$sql .= implode("\r\n", $fromlist);
 		}
@@ -752,21 +673,18 @@ class SQLQuery extends SQLEntity
 	
 	function HavingToSql()
 	{
-		return $this->m_having->toSql($this);
+		return $this->having->toSql($this);
 	}
 	
 	function OrderByToSql()
 	{
-		return $this->m_strOrderBy;
+		return $this->orderBySql;
 	}
 		
-	function HeadToSql($oneRecordMode = false)
+	function HeadToSql( $oneRecordMode = false )
 	{
-		if( is_null($this->connection) )
-			$this->setConnection( $this->m_srcTableName );			
-		
 		$sql = '';
-		$sql .= $this->m_strHead;
+		$sql .= $this->headSql;
 		
 		if( $this->connection->dbType == nDATABASE_MSSQLServer || $this->connection->dbType == nDATABASE_Access )
 		{
@@ -782,7 +700,7 @@ class SQLQuery extends SQLEntity
 		
 		// collect fields
 		$fields = array();
-		foreach($this->m_fieldlist as $f)
+		foreach($this->fieldList as $f)
 		{
 			$fields []= $f->toSql($this);
 		}
@@ -806,11 +724,11 @@ class SQLQuery extends SQLEntity
 	 */
 	function AddCustomExpression($expression, $pSet, $mainTable, $mainFiled, $alias = "")
 	{
-		$index = count($this->m_fieldlist);
+		$index = count($this->fieldList);
 		$itemFound = false;	
-		foreach($this->m_fieldlist as $key => $listItem)
+		foreach($this->fieldList as $key => $listItem)
 		{
-			if( $listItem->m_expr == $expression &&  $listItem->m_alias == $alias )
+			if( $listItem->expression == $expression &&  $listItem->alias == $alias )
 			{
 				$index = $key;
 				$itemFound = true;
@@ -819,7 +737,10 @@ class SQLQuery extends SQLEntity
 		}
 		
 		if( !$itemFound ) 
-			$this->m_fieldlist[] = new SQLFieldListItem(array("m_expr" => $expression, "m_alias" => $alias, "m_srcTableName" => $this->m_srcTableName));
+			$this->fieldList[] = new SQLFieldListItem( array(
+				"expression" => $expression, 
+				"alias" => $alias
+			));
 		
 		$pSet->addCustomExpressionIndex($mainTable, $mainFiled, $index);
 	}
@@ -828,7 +749,7 @@ class SQLQuery extends SQLEntity
 	{
 		$sql = '';
 		$groupby = array();
-		foreach($this->m_groupby as $g)
+		foreach($this->groupBy as $g)
 		{
 			$groupby []= $g->toSql($this);
 		}
@@ -854,17 +775,15 @@ class SQLQuery extends SQLEntity
 		return $sql;
 	}
 		
-	function toSql($strwhere = null, $strorderby = null, $strhaving = null, $oneRecordMode = false, $joinFromPart = null)
+	/**
+	 * Only called for subqueries
+	 * @param SQLQuery main query
+	 */
+	function toSql( $query )
 	{
-		if( is_null($this->connection) )
-			$this->setConnection( $this->m_srcTableName );		
-		
-		if(is_a($strwhere, 'SQLQuery'))
-		{
-			// Parent SQL query passed. Ignore.
-			$strwhere = null;
-		}
-		
+		$this->connection = $query->connection;
+		$this->cipherer = $query->cipherer;
+
 		$sql = $this->HeadToSql($oneRecordMode);
 		
 		$sql .= $this->FromToSql();
@@ -880,7 +799,7 @@ class SQLQuery extends SQLEntity
 		}
 		else
 		{
-			$where = $this->m_where->toSql($this);
+			$where = $this->where->toSql($this);
 			if($where != "")
 			{
 				$sql .= ' WHERE ' . $where . "\r\n";
@@ -898,7 +817,7 @@ class SQLQuery extends SQLEntity
 		}
 		else
 		{
-			$having = $this->m_having->toSql($this);
+			$having = $this->having->toSql($this);
 			if($having != "")
 			{
 				$sql .= ' HAVING ' . $having . "\r\n";
@@ -912,7 +831,7 @@ class SQLQuery extends SQLEntity
 		else
 		{
 			$orderby = array();
-			foreach($this->m_orderby as $g)
+			foreach($this->orderBy as $g)
 			{
 				$orderby []= $g->toSql($this);
 			}
@@ -947,7 +866,7 @@ class SQLQuery extends SQLEntity
 	
 	function TableCount()
 	{
-		return count($this->m_fromlist);
+		return count($this->fromList);
 	}
 	
 	/**
@@ -957,9 +876,9 @@ class SQLQuery extends SQLEntity
 	{
 		if($this->HasAsterisks())
 			return false;
-		if(!isset($this->m_fieldlist[$idx]))
+		if(!isset($this->fieldList[$idx]))
 			return false;
-		return $this->m_fieldlist[$idx]->IsAggregationFunctionCall();
+		return $this->fieldList[$idx]->IsAggregationFunctionCall();
 	}
 	
 	/**
@@ -972,13 +891,13 @@ class SQLQuery extends SQLEntity
 			
 		foreach($fieldindices as $idx)
 		{
-			if(!isset($this->m_fieldlist[$idx - 1]))
+			if(!isset($this->fieldList[$idx - 1]))
 				return;
 			
-			$this->m_fieldlist[$idx - 1] = new SQLFieldListItem(array(
-						"m_alias" => "runnerdummy" . $idx,
-						"m_expr" => "1",
-						"m_srcTableName" => $this->m_srcTableName ));
+			$this->fieldList[$idx - 1] = new SQLFieldListItem(array(
+				"alias" => "runnerdummy" . $idx,
+				"expression" => "1"
+			));
 		}
 	}
 	
@@ -987,7 +906,7 @@ class SQLQuery extends SQLEntity
 		if($this->HasAsterisks())
 			return;
 		$removeindices=array();
-		for($i=0;$i<count($this->m_fieldlist);$i++)
+		for($i=0;$i<count($this->fieldList);$i++)
 		{
 			if($i!=$idx-1)
 				$removeindices[]=$i+1;
@@ -1000,7 +919,7 @@ class SQLQuery extends SQLEntity
 		if($this->HasAsterisks())
 			return;
 		$removeindices=array();
-		for($i=0;$i<count($this->m_fieldlist);$i++)
+		for($i=0;$i<count($this->fieldList);$i++)
 		{
 			if( array_search( $i + 1, $arr ) === false )
 				$removeindices[] = $i + 1;
@@ -1010,17 +929,17 @@ class SQLQuery extends SQLEntity
 	
 	function WhereToSql()
 	{
-		return $this->m_where->toSql($this);
+		return $this->where->toSql($this);
 	}
 	
 	function & Where()
 	{
-		return $this->m_where;
+		return $this->where;
 	}
 	
 	function & Having()
 	{
-		return $this->m_having;
+		return $this->having;
 	}
 	
 	function Copy()
@@ -1030,14 +949,14 @@ class SQLQuery extends SQLEntity
 	
 	function HasGroupBy()
 	{
-		return count($this->m_groupby) > 0;
+		return count($this->groupBy) > 0;
 	}
 	
 	function HasSubQueryInFromClause()
 	{
-		foreach($this->m_fromlist as $fromList)
+		foreach($this->fromList as $fromList)
 		{
-			if( is_object( $fromList->m_table ) && is_a($fromList->m_table, 'SQLQuery') ) 
+			if( is_object( $fromList->table ) && is_a($fromList->table, 'SQLQuery') ) 
 				return true;
 		}
 		return false;
@@ -1045,12 +964,12 @@ class SQLQuery extends SQLEntity
 	
 	function HasJoinInFromClause()
 	{
-		return count( $this->m_fromlist ) > 1;
+		return count( $this->fromList ) > 1;
 	}
 	
 	function HasTableInFormClause($tName)
 	{
-		foreach($this->m_fromlist as $fromList)
+		foreach($this->fromList as $fromList)
 		{
 			if( $tName == $fromList->getIdentifier() )
 				return true;
@@ -1071,33 +990,33 @@ class SQLQuery extends SQLEntity
 		}
 		
 		$myproto=array();
-		$myproto["m_sql"] = $_where;
-		$myproto["m_uniontype"] = "SQLL_UNKNOWN";
+		$myproto["sql"] = $_where;
+		$myproto["unionType"] = sqlUnionUNKNOWN;
 
-		$myproto["m_column"]=null;
-		$myproto["m_contained"] = array();
-		$myproto["m_strCase"] = "";
-		$myproto["m_havingmode"] = false;
-		$myproto["m_inBrackets"] = true;
-		$myproto["m_useAlias"] = false;
+		$myproto["column"]=null;
+		$myproto["contained"] = array();
+		$myproto["case"] = "";
+		$myproto["havingMode"] = false;
+		$myproto["inBrackets"] = true;
+		$myproto["useAlias"] = false;
 		
 		$myobj = new SQLLogicalExpr($myproto);
 		$myobj->query = $this;
 		
-		if(!$this->m_where)
+		if(!$this->where)
 		{
-			$this->m_where = $myobj;
+			$this->where = $myobj;
 			return;
 		}
 
 		$newproto=array();
-		$newproto["m_uniontype"] = "SQLL_AND";
-		$newproto["m_contained"] = array();
-		$newproto["m_contained"][] = $this->m_where;
-		$newproto["m_contained"][] = $myobj;
+		$newproto["unionType"] = sqlUnionAND;
+		$newproto["contained"] = array();
+		$newproto["contained"][] = $this->where;
+		$newproto["contained"][] = $myobj;
 		$newobj = new SQLLogicalExpr($newproto);
 		$newobj->query = $this;
-		$this->m_where = $newobj;
+		$this->where = $newobj;
 		
 	}
 	
@@ -1109,55 +1028,53 @@ class SQLQuery extends SQLEntity
 			$myobj = new SQLLogicalExpr($myproto);
 			$myobj->query = $this;
 			
-			$this->m_where = $myobj;
+			$this->where = $myobj;
 			
 			return;
 		}
 		$myproto = array();
-		$myproto["m_sql"] = $_where;
-		$myproto["m_uniontype"] = "SQLL_UNKNOWN";
+		$myproto["sql"] = $_where;
+		$myproto["unionType"] = sqlUnionUNKNOWN;
 
-		$myproto["m_column"]=null;
-		$myproto["m_contained"] = array();
-		$myproto["m_strCase"] = "";
-		$myproto["m_havingmode"] = false;
-		$myproto["m_inBrackets"] = true;
-		$myproto["m_useAlias"] = false;
+		$myproto["column"]=null;
+		$myproto["contained"] = array();
+		$myproto["case"] = "";
+		$myproto["havingMode"] = false;
+		$myproto["inBrackets"] = true;
+		$myproto["useAlias"] = false;
 		
 		$myobj = new SQLLogicalExpr($myproto);
 		$myobj->query = $this;
 		
-		$this->m_where = $myobj;
+		$this->where = $myobj;
 	}
 	
 	function addField($_field, $_alias)
 	{
 		$myproto=array();
 		$myobj = new SQLNonParsed(array(
-			"m_sql" => $_field
+			"sql" => $_field
 		));
-		$myproto["m_expr"]=$myobj;
-		$myproto["m_alias"]=$_alias;
-		$myproto["m_srcTableName"] = $this->m_srcTableName;
+		$myproto["expression"]=$myobj;
+		$myproto["alias"]=$_alias;
 		
 		$myobj = new SQLFieldListItem($myproto);
-		$this->m_fieldlist[] = $myobj;
-		$this->updateProto();
+		$this->fieldList[] = $myobj;
 	}
 	
 	function replaceField($_field, $_newfield, $_newalias = "")
 	{
 		$myproto=array();
 		$myobj = new SQLNonParsed(array(
-			"m_sql" => $_newfield
+			"sql" => $_newfield
 		));
-		$myproto["m_expr"]=$myobj;
+		$myproto["expression"]=$myobj;
 
 		if(!is_numeric($_field))
 		{
-			foreach($this->m_fieldlist as $key=>$obj)
+			foreach($this->fieldList as $key=>$obj)
 			{
-				if($this->m_fieldlist[$key]->getAlias() == $_field)
+				if($this->fieldList[$key]->getAlias() == $_field)
 				{
 					$_field = $key;
 					break;
@@ -1167,23 +1084,21 @@ class SQLQuery extends SQLEntity
 		if(is_numeric($_field))
 		{
 			if(!$_newalias)
-				$_newalias = $this->m_fieldlist[$_field]->getAlias();
-			$myproto["m_alias"]=$_newalias;
-			$myproto["m_srcTableName"] = $this->m_srcTableName;
+				$_newalias = $this->fieldList[$_field]->getAlias();
+			$myproto["alias"]=$_newalias;
 			
 			$myobj = new SQLFieldListItem($myproto);
-			$this->m_fieldlist[$_field] = $myobj;
+			$this->fieldList[$_field] = $myobj;
 		}
-		$this->updateProto();
 	}
 	
 	function deleteField($_field)
 	{
 		if(!is_numeric($_field))
 		{
-			foreach($this->m_fieldlist as $key=>$obj)
+			foreach($this->fieldList as $key=>$obj)
 			{
-				if($this->m_fieldlist[$key]->getAlias() == $_field)
+				if($this->fieldList[$key]->getAlias() == $_field)
 				{
 					$_field = $key;
 					break;
@@ -1192,11 +1107,10 @@ class SQLQuery extends SQLEntity
 		}
 		if(is_numeric($_field))
 		{
-			$fieldlist = $this->m_fieldlist;
+			$fieldlist = $this->fieldList;
 			array_splice($fieldlist, $_field,1);
-			$this->m_fieldlist = $fieldlist;
+			$this->fieldList = $fieldlist;
 		}
-		$this->updateProto();
 	}
 
 	/**
@@ -1205,25 +1119,18 @@ class SQLQuery extends SQLEntity
 	 */
 	function deleteAllFieldsExcept( $idx )
 	{
-		$field = $this->m_fieldlist[ $idx ];
-		$this->m_fieldlist = array();
-		$this->m_fieldlist[] = $field;
+		$field = $this->fieldList[ $idx ];
+		$this->fieldList = array();
+		$this->fieldList[] = $field;
 	}
 
 	/**
-	 *	DEPRECATED
-	 *	This function exists for backward compatibility only ( webreports etc )
-	 */
-	function gSQLWhere( $where )
-	{
-		return $this->buildSQL_default( array( $where ) );
-	}
-	
-	/**
 	 *
 	 */
-	function getSqlComponents( $oneRecordMode = false ) 
+	function getSqlComponents( $connection, $cipherer, $oneRecordMode = false ) 
 	{
+		$this->connection = $connection;
+		$this->cipherer = $cipherer;
 		return array(
 			"head" => $this->HeadToSql( $oneRecordMode ),
 			"from" => $this->FromToSql(),
@@ -1233,15 +1140,7 @@ class SQLQuery extends SQLEntity
 		);
 	}
 
-	function buildSQL_default( $additionalWhere = "" ){
-		
-		if( !is_array( $additionalWhere ) )
-			$additionalWhere = array( $additionalWhere );
 
-		return SQLQuery::buildSQL( $this->getSqlComponents(), $additionalWhere );
-	}
-
-	
 	/**
 	 * Build SQL query from components.
 	 *
@@ -1352,18 +1251,18 @@ class SQLQuery extends SQLEntity
 	 */
 	public function fieldComesFromTheTableAsIs($index, $tableName, $field)
 	{
-		$fieldListItem = $this->m_fieldlist[ $index ];
+		$fieldListItem = $this->fieldList[ $index ];
 		
 		if( !is_object($fieldListItem) )
 			return false;
-		if( 0 != strlen($fieldListItem->m_alias) )
+		if( 0 != strlen($fieldListItem->alias) )
 			return false;
-		if( !is_a($fieldListItem->m_expr, 'SQLField') )
+		if( !is_a($fieldListItem->expression, 'SQLField') )
 			return false;
-		if( strlen($fieldListItem->m_expr->m_strTable) != 0 && $fieldListItem->m_expr->m_strTable != $tableName )
+		if( strlen($fieldListItem->expression->table) != 0 && $fieldListItem->expression->table != $tableName )
 			return false;
 			
-		return 0 == strcasecmp($fieldListItem->m_expr->m_strName, $field);
+		return 0 == strcasecmp($fieldListItem->expression->name, $field);
 		
 	}
 }
@@ -1379,7 +1278,7 @@ class SQLCountQuery extends SQLQuery
 		}
 		
 		// drop this
-		$this->m_strHead = '';
+		$this->headSql = '';
 		
 		if(!$this->HasGroupBy())
 		{
@@ -1387,7 +1286,7 @@ class SQLCountQuery extends SQLQuery
 			// select count(*) from ...
 			// otherwise it will look like:
 			// select count(*) from (select ... from ...) 
-			$this->m_fieldlist = array();
+			$this->fieldList = array();
 		}
 	}
 	
@@ -1408,4 +1307,46 @@ class SQLCountQuery extends SQLQuery
 		return $ret;
 	}
 }
+
+function sqlFromJson( $proto ) {
+	if( !is_array( $proto ) ) {
+		return $proto;
+	}
+	if( !$proto['type'] ) {
+		//	array of objects
+		$ret = array();
+		foreach( $proto as $obj ) {
+			$ret[] = sqlFromJson( $obj );
+		}
+		return $ret;
+	}
+	switch( $proto['type'] ) {
+		case 'FieldListItem':
+			return new SQLFieldListItem( $proto );
+		case 'SQLField':
+			return new SQLField( $proto );
+		case 'JoinOn':
+			return new SQLJoinOn( $proto );
+		case 'FromListItem':
+			return new SQLFromListItem( $proto );
+		case 'FunctionCall':
+			return new SQLFunctionCall( $proto );
+		case 'GroupByListItem':
+			return new SQLGroupByItem( $proto );
+		case 'LogicalExpression':
+			return new SQLLogicalExpr( $proto );
+		case 'OrderByListItem':
+			return new SQLOrderByItem( $proto );
+		case 'SQLQuery':
+			return new SQLQuery( $proto );
+		case 'SQLTable':
+			return new SQLTable( $proto );
+		case 'NonParsedEntity':
+			return new SQLNonParsed( $proto );
+		case 'Entity':
+			return new SQLEntity( $proto );
+	}
+	return null;
+}
+
 ?>

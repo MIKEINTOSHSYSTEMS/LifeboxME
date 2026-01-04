@@ -6,12 +6,15 @@ header("Expires: Thu, 01 Jan 1970 00:00:01 GMT");
 
 set_time_limit(600);
 
-require_once("include/countries_variables.php");
+$requestTable = 'public.countries';
+$strTableName = 'public.countries';
+$requestPage = "import";
+
 require_once("include/import_functions.php");
 require_once('classes/importpage.php');
 
 if( Security::hasLogin() ) {
-	if( !Security::processPageSecurity( $strtablename, 'I' ) )
+	if( !Security::processPageSecurity( $strTableName, 'I' ) )
 		return;
 }
 
@@ -38,7 +41,7 @@ if( $params["action"] == "importPreview" )
 } 
 elseif( $params["action"] == "importData" )
 {
-	$params["importData"] = my_json_decode( postvalue("importData") );
+	$params["importData"] = runner_json_decode( postvalue("importData") );
 }
 
 $params["masterTable"] = postvalue("mastertable");

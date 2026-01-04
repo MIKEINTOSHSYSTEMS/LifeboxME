@@ -1,316 +1,630 @@
 <?php
-			$optionsArray = array( 'fields' => array( 'gridFields' => array( 'aio_training_tracking_gender',
-'aio_training_tracking_participant_role',
-'aio_training_tracking_country',
-'aio_training_tracking_facility',
-'aio_training_tracking_training_id',
-'aio_training_tracking_training_name',
-'aio_training_tracking_program',
-'aio_training_tracking_partners',
-'aio_training_tracking_training_type',
-'aio_training_tracking_training_approach',
-'aio_training_tracking_training_language',
-'aio_training_tracking_training_lead',
-'aio_training_tracking_quarter',
-'aio_training_tracking_attendance_status',
-'aio_training_tracking_Chart_gender',
-'aio_training_tracking_Chart_participant_role',
-'aio_training_tracking_Chart_country',
-'aio_training_tracking_Chart_training_name' ),
-'searchRequiredFields' => array(  ),
-'searchPanelFields' => array(  ),
-'fieldItems' => array( 'aio_training_tracking_gender' => array( 'integrated_search_field' ),
-'aio_training_tracking_participant_role' => array( 'integrated_search_field1' ),
-'aio_training_tracking_country' => array( 'integrated_search_field2' ),
-'aio_training_tracking_facility' => array( 'integrated_search_field3' ),
-'aio_training_tracking_training_id' => array( 'integrated_search_field4' ),
-'aio_training_tracking_training_name' => array( 'integrated_search_field5' ),
-'aio_training_tracking_program' => array( 'integrated_search_field6' ),
-'aio_training_tracking_partners' => array( 'integrated_search_field7' ),
-'aio_training_tracking_training_type' => array( 'integrated_search_field8' ),
-'aio_training_tracking_training_approach' => array( 'integrated_search_field9' ),
-'aio_training_tracking_training_language' => array( 'integrated_search_field10' ),
-'aio_training_tracking_training_lead' => array( 'integrated_search_field11' ),
-'aio_training_tracking_quarter' => array( 'integrated_search_field12' ),
-'aio_training_tracking_attendance_status' => array( 'integrated_search_field13' ),
-'aio_training_tracking_Chart_gender' => array( 'integrated_search_field14' ),
-'aio_training_tracking_Chart_participant_role' => array( 'integrated_search_field15' ),
-'aio_training_tracking_Chart_country' => array( 'integrated_search_field16' ),
-'aio_training_tracking_Chart_training_name' => array( 'integrated_search_field17' ) ) ),
-'pageLinks' => array( 'edit' => false,
-'add' => false,
-'view' => false,
-'print' => false ),
-'layoutHelper' => array( 'formItems' => array( 'formItems' => array( 'above-grid' => array(  ),
-'below-grid' => array( 'search_search',
-'search_reset',
-'search_back_list',
-'search_cancel' ),
-'top' => array( 'search_header' ),
-'grid' => array( 'integrated_search_field17',
-'integrated_search_field14',
-'integrated_search_field',
-'integrated_search_field15',
-'integrated_search_field16',
-'integrated_search_field1',
-'integrated_search_field2',
-'integrated_search_field3',
-'integrated_search_field4',
-'integrated_search_field5',
-'integrated_search_field6',
-'integrated_search_field7',
-'integrated_search_field8',
-'integrated_search_field9',
-'integrated_search_field10',
-'integrated_search_field11',
-'integrated_search_field12',
-'integrated_search_field13' ) ),
-'formXtTags' => array( 'above-grid' => array(  ) ),
-'itemForms' => array( 'search_search' => 'below-grid',
-'search_reset' => 'below-grid',
-'search_back_list' => 'below-grid',
-'search_cancel' => 'below-grid',
-'search_header' => 'top',
-'integrated_search_field17' => 'grid',
-'integrated_search_field14' => 'grid',
-'integrated_search_field' => 'grid',
-'integrated_search_field15' => 'grid',
-'integrated_search_field16' => 'grid',
-'integrated_search_field1' => 'grid',
-'integrated_search_field2' => 'grid',
-'integrated_search_field3' => 'grid',
-'integrated_search_field4' => 'grid',
-'integrated_search_field5' => 'grid',
-'integrated_search_field6' => 'grid',
-'integrated_search_field7' => 'grid',
-'integrated_search_field8' => 'grid',
-'integrated_search_field9' => 'grid',
-'integrated_search_field10' => 'grid',
-'integrated_search_field11' => 'grid',
-'integrated_search_field12' => 'grid',
-'integrated_search_field13' => 'grid' ),
-'itemLocations' => array( 'integrated_search_field17' => array( 'location' => 'grid',
-'cellId' => 'c3' ),
-'integrated_search_field14' => array( 'location' => 'grid',
-'cellId' => 'c3' ),
-'integrated_search_field' => array( 'location' => 'grid',
-'cellId' => 'c3' ),
-'integrated_search_field15' => array( 'location' => 'grid',
-'cellId' => 'c3' ),
-'integrated_search_field16' => array( 'location' => 'grid',
-'cellId' => 'c3' ),
-'integrated_search_field1' => array( 'location' => 'grid',
-'cellId' => 'c3' ),
-'integrated_search_field2' => array( 'location' => 'grid',
-'cellId' => 'c3' ),
-'integrated_search_field3' => array( 'location' => 'grid',
-'cellId' => 'c3' ),
-'integrated_search_field4' => array( 'location' => 'grid',
-'cellId' => 'c3' ),
-'integrated_search_field5' => array( 'location' => 'grid',
-'cellId' => 'c3' ),
-'integrated_search_field6' => array( 'location' => 'grid',
-'cellId' => 'c3' ),
-'integrated_search_field7' => array( 'location' => 'grid',
-'cellId' => 'c3' ),
-'integrated_search_field8' => array( 'location' => 'grid',
-'cellId' => 'c3' ),
-'integrated_search_field9' => array( 'location' => 'grid',
-'cellId' => 'c3' ),
-'integrated_search_field10' => array( 'location' => 'grid',
-'cellId' => 'c3' ),
-'integrated_search_field11' => array( 'location' => 'grid',
-'cellId' => 'c3' ),
-'integrated_search_field12' => array( 'location' => 'grid',
-'cellId' => 'c3' ),
-'integrated_search_field13' => array( 'location' => 'grid',
-'cellId' => 'c3' ) ),
-'itemVisiblity' => array(  ) ),
-'itemsByType' => array( 'search_header' => array( 'search_header' ),
-'search_reset' => array( 'search_reset' ),
-'search_back_list' => array( 'search_back_list' ),
-'search_search' => array( 'search_search' ),
-'search_cancel' => array( 'search_cancel' ),
-'integrated_search_field' => array( 'integrated_search_field',
-'integrated_search_field1',
-'integrated_search_field2',
-'integrated_search_field3',
-'integrated_search_field4',
-'integrated_search_field5',
-'integrated_search_field6',
-'integrated_search_field7',
-'integrated_search_field8',
-'integrated_search_field9',
-'integrated_search_field10',
-'integrated_search_field11',
-'integrated_search_field12',
-'integrated_search_field13',
-'integrated_search_field14',
-'integrated_search_field15',
-'integrated_search_field16',
-'integrated_search_field17' ) ),
-'cellMaps' => array( 'grid' => array( 'cells' => array( 'c3' => array( 'cols' => array( 0 ),
-'rows' => array( 0 ),
-'tags' => array(  ),
-'items' => array( 'integrated_search_field17',
-'integrated_search_field14',
-'integrated_search_field',
-'integrated_search_field15',
-'integrated_search_field16',
-'integrated_search_field1',
-'integrated_search_field2',
-'integrated_search_field3',
-'integrated_search_field4',
-'integrated_search_field5',
-'integrated_search_field6',
-'integrated_search_field7',
-'integrated_search_field8',
-'integrated_search_field9',
-'integrated_search_field10',
-'integrated_search_field11',
-'integrated_search_field12',
-'integrated_search_field13' ),
-'fixedAtServer' => true,
-'fixedAtClient' => false ) ),
-'width' => 1,
-'height' => 1 ) ) ),
-'loginForm' => array( 'loginForm' => 3 ),
-'page' => array( 'verticalBar' => false,
-'labeledButtons' => array( 'update_records' => array(  ),
-'print_pages' => array(  ),
-'register_activate_message' => array(  ),
-'details_found' => array(  ) ),
-'hasCustomButtons' => false,
-'customButtons' => array(  ),
-'hasNotifications' => false,
-'menus' => array(  ),
-'calcTotalsFor' => 1 ),
-'misc' => array( 'type' => 'search',
-'breadcrumb' => false ),
-'events' => array( 'maps' => array(  ),
-'mapsData' => array(  ),
-'buttons' => array(  ) ),
-'dashSearch' => array( 'searchFields' => array(  ),
-'allSearchFields' => array(  ),
-'googleLikeFields' => array(  ) ) );
-			$pageArray = array( 'id' => 'search',
-'type' => 'search',
-'layoutId' => 'nomenu',
-'disabled' => 0,
-'default' => 0,
-'forms' => array( 'above-grid' => array( 'modelId' => 'search-above-grid',
-'grid' => array( array( 'cells' => array( array( 'cell' => 'c1',
-'colspan' => 2 ) ),
-'section' => '' ) ),
-'cells' => array( 'c1' => array( 'model' => 'c1',
-'items' => array(  ) ) ),
-'deferredItems' => array(  ),
-'recsPerRow' => 1 ),
-'below-grid' => array( 'modelId' => 'search-below-grid',
-'grid' => array( array( 'cells' => array( array( 'cell' => 'c1' ) ),
-'section' => '' ) ),
-'cells' => array( 'c1' => array( 'model' => 'c1',
-'items' => array( 'search_search',
-'search_reset',
-'search_back_list',
-'search_cancel' ) ) ),
-'deferredItems' => array(  ),
-'recsPerRow' => 1 ),
-'top' => array( 'modelId' => 'search-header',
-'grid' => array( array( 'cells' => array( array( 'cell' => 'c1' ) ),
-'section' => '' ) ),
-'cells' => array( 'c1' => array( 'model' => 'c1',
-'items' => array( 'search_header' ) ) ),
-'deferredItems' => array(  ),
-'recsPerRow' => 1 ),
-'grid' => array( 'modelId' => 'simple-search',
-'grid' => array( array( 'cells' => array( array( 'cell' => 'c3' ) ),
-'section' => '' ) ),
-'cells' => array( 'c3' => array( 'model' => 'c3',
-'items' => array( 'integrated_search_field17',
-'integrated_search_field14',
-'integrated_search_field',
-'integrated_search_field15',
-'integrated_search_field16',
-'integrated_search_field1',
-'integrated_search_field2',
-'integrated_search_field3',
-'integrated_search_field4',
-'integrated_search_field5',
-'integrated_search_field6',
-'integrated_search_field7',
-'integrated_search_field8',
-'integrated_search_field9',
-'integrated_search_field10',
-'integrated_search_field11',
-'integrated_search_field12',
-'integrated_search_field13' ) ) ),
-'deferredItems' => array(  ),
-'separateLabels' => false ) ),
-'items' => array( 'search_header' => array( 'type' => 'search_header' ),
-'search_reset' => array( 'type' => 'search_reset' ),
-'search_back_list' => array( 'type' => 'search_back_list' ),
-'search_search' => array( 'type' => 'search_search' ),
-'search_cancel' => array( 'type' => 'search_cancel' ),
-'integrated_search_field' => array( 'field' => 'aio_training_tracking_gender',
-'type' => 'integrated_search_field',
-'orientation' => 0 ),
-'integrated_search_field1' => array( 'field' => 'aio_training_tracking_participant_role',
-'type' => 'integrated_search_field',
-'orientation' => 0 ),
-'integrated_search_field2' => array( 'field' => 'aio_training_tracking_country',
-'type' => 'integrated_search_field',
-'orientation' => 0 ),
-'integrated_search_field3' => array( 'field' => 'aio_training_tracking_facility',
-'type' => 'integrated_search_field',
-'orientation' => 0 ),
-'integrated_search_field4' => array( 'field' => 'aio_training_tracking_training_id',
-'type' => 'integrated_search_field',
-'orientation' => 0 ),
-'integrated_search_field5' => array( 'field' => 'aio_training_tracking_training_name',
-'type' => 'integrated_search_field',
-'orientation' => 0 ),
-'integrated_search_field6' => array( 'field' => 'aio_training_tracking_program',
-'type' => 'integrated_search_field',
-'orientation' => 0 ),
-'integrated_search_field7' => array( 'field' => 'aio_training_tracking_partners',
-'type' => 'integrated_search_field',
-'orientation' => 0 ),
-'integrated_search_field8' => array( 'field' => 'aio_training_tracking_training_type',
-'type' => 'integrated_search_field',
-'orientation' => 0 ),
-'integrated_search_field9' => array( 'field' => 'aio_training_tracking_training_approach',
-'type' => 'integrated_search_field',
-'orientation' => 0 ),
-'integrated_search_field10' => array( 'field' => 'aio_training_tracking_training_language',
-'type' => 'integrated_search_field',
-'orientation' => 0 ),
-'integrated_search_field11' => array( 'field' => 'aio_training_tracking_training_lead',
-'type' => 'integrated_search_field',
-'orientation' => 0 ),
-'integrated_search_field12' => array( 'field' => 'aio_training_tracking_quarter',
-'type' => 'integrated_search_field',
-'orientation' => 0 ),
-'integrated_search_field13' => array( 'field' => 'aio_training_tracking_attendance_status',
-'type' => 'integrated_search_field',
-'orientation' => 0 ),
-'integrated_search_field14' => array( 'field' => 'aio_training_tracking_Chart_gender',
-'type' => 'integrated_search_field',
-'orientation' => 0 ),
-'integrated_search_field15' => array( 'field' => 'aio_training_tracking_Chart_participant_role',
-'type' => 'integrated_search_field',
-'orientation' => 0 ),
-'integrated_search_field16' => array( 'field' => 'aio_training_tracking_Chart_country',
-'type' => 'integrated_search_field',
-'orientation' => 0 ),
-'integrated_search_field17' => array( 'field' => 'aio_training_tracking_Chart_training_name',
-'type' => 'integrated_search_field',
-'orientation' => 0 ) ),
-'dbProps' => array(  ),
-'version' => 14,
-'imageItem' => array( 'type' => 'page_image' ),
-'imageBgColor' => '#f2f2f2',
-'controlsBgColor' => 'white',
-'imagePosition' => 'right',
-'listTotals' => 1 );
+			$optionsArray = array(
+	'fields' => array(
+		'gridFields' => array( 
+			'aio_training_tracking_gender',
+			'aio_training_tracking_participant_role',
+			'aio_training_tracking_country',
+			'aio_training_tracking_facility',
+			'aio_training_tracking_training_id',
+			'aio_training_tracking_training_name',
+			'aio_training_tracking_program',
+			'aio_training_tracking_partners',
+			'aio_training_tracking_training_type',
+			'aio_training_tracking_training_approach',
+			'aio_training_tracking_training_language',
+			'aio_training_tracking_training_lead',
+			'aio_training_tracking_quarter',
+			'aio_training_tracking_attendance_status',
+			'aio_training_tracking_Chart_gender',
+			'aio_training_tracking_Chart_participant_role',
+			'aio_training_tracking_Chart_country',
+			'aio_training_tracking_Chart_training_name' 
+		),
+		'searchRequiredFields' => array( 
+			 
+		),
+		'searchPanelFields' => array( 
+			 
+		),
+		'fieldItems' => array(
+			'aio_training_tracking_gender' => array( 
+				'integrated_search_field' 
+			),
+			'aio_training_tracking_participant_role' => array( 
+				'integrated_search_field1' 
+			),
+			'aio_training_tracking_country' => array( 
+				'integrated_search_field2' 
+			),
+			'aio_training_tracking_facility' => array( 
+				'integrated_search_field3' 
+			),
+			'aio_training_tracking_training_id' => array( 
+				'integrated_search_field4' 
+			),
+			'aio_training_tracking_training_name' => array( 
+				'integrated_search_field5' 
+			),
+			'aio_training_tracking_program' => array( 
+				'integrated_search_field6' 
+			),
+			'aio_training_tracking_partners' => array( 
+				'integrated_search_field7' 
+			),
+			'aio_training_tracking_training_type' => array( 
+				'integrated_search_field8' 
+			),
+			'aio_training_tracking_training_approach' => array( 
+				'integrated_search_field9' 
+			),
+			'aio_training_tracking_training_language' => array( 
+				'integrated_search_field10' 
+			),
+			'aio_training_tracking_training_lead' => array( 
+				'integrated_search_field11' 
+			),
+			'aio_training_tracking_quarter' => array( 
+				'integrated_search_field12' 
+			),
+			'aio_training_tracking_attendance_status' => array( 
+				'integrated_search_field13' 
+			),
+			'aio_training_tracking_Chart_gender' => array( 
+				'integrated_search_field14' 
+			),
+			'aio_training_tracking_Chart_participant_role' => array( 
+				'integrated_search_field15' 
+			),
+			'aio_training_tracking_Chart_country' => array( 
+				'integrated_search_field16' 
+			),
+			'aio_training_tracking_Chart_training_name' => array( 
+				'integrated_search_field17' 
+			) 
+		) 
+	),
+	'pageLinks' => array(
+		'edit' => false,
+		'add' => false,
+		'view' => false,
+		'print' => false 
+	),
+	'layoutHelper' => array(
+		'formItems' => array(
+			'formItems' => array(
+				'above-grid' => array( 
+					 
+				),
+				'below-grid' => array( 
+					'search_search',
+					'search_reset',
+					'search_back_list',
+					'search_cancel' 
+				),
+				'top' => array( 
+					'search_header' 
+				),
+				'grid' => array( 
+					'integrated_search_field17',
+					'integrated_search_field14',
+					'integrated_search_field',
+					'integrated_search_field15',
+					'integrated_search_field16',
+					'integrated_search_field1',
+					'integrated_search_field2',
+					'integrated_search_field3',
+					'integrated_search_field4',
+					'integrated_search_field5',
+					'integrated_search_field6',
+					'integrated_search_field7',
+					'integrated_search_field8',
+					'integrated_search_field9',
+					'integrated_search_field10',
+					'integrated_search_field11',
+					'integrated_search_field12',
+					'integrated_search_field13' 
+				) 
+			),
+			'formXtTags' => array(
+				'above-grid' => array( 
+					 
+				) 
+			),
+			'itemForms' => array(
+				'search_search' => 'below-grid',
+				'search_reset' => 'below-grid',
+				'search_back_list' => 'below-grid',
+				'search_cancel' => 'below-grid',
+				'search_header' => 'top',
+				'integrated_search_field17' => 'grid',
+				'integrated_search_field14' => 'grid',
+				'integrated_search_field' => 'grid',
+				'integrated_search_field15' => 'grid',
+				'integrated_search_field16' => 'grid',
+				'integrated_search_field1' => 'grid',
+				'integrated_search_field2' => 'grid',
+				'integrated_search_field3' => 'grid',
+				'integrated_search_field4' => 'grid',
+				'integrated_search_field5' => 'grid',
+				'integrated_search_field6' => 'grid',
+				'integrated_search_field7' => 'grid',
+				'integrated_search_field8' => 'grid',
+				'integrated_search_field9' => 'grid',
+				'integrated_search_field10' => 'grid',
+				'integrated_search_field11' => 'grid',
+				'integrated_search_field12' => 'grid',
+				'integrated_search_field13' => 'grid' 
+			),
+			'itemLocations' => array(
+				'integrated_search_field17' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field14' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field15' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field16' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field1' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field2' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field3' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field4' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field5' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field6' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field7' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field8' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field9' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field10' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field11' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field12' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field13' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				) 
+			),
+			'itemVisiblity' => array(
+				 
+			) 
+		),
+		'itemsByType' => array(
+			'search_header' => array( 
+				'search_header' 
+			),
+			'search_reset' => array( 
+				'search_reset' 
+			),
+			'search_back_list' => array( 
+				'search_back_list' 
+			),
+			'search_search' => array( 
+				'search_search' 
+			),
+			'search_cancel' => array( 
+				'search_cancel' 
+			),
+			'integrated_search_field' => array( 
+				'integrated_search_field',
+				'integrated_search_field1',
+				'integrated_search_field2',
+				'integrated_search_field3',
+				'integrated_search_field4',
+				'integrated_search_field5',
+				'integrated_search_field6',
+				'integrated_search_field7',
+				'integrated_search_field8',
+				'integrated_search_field9',
+				'integrated_search_field10',
+				'integrated_search_field11',
+				'integrated_search_field12',
+				'integrated_search_field13',
+				'integrated_search_field14',
+				'integrated_search_field15',
+				'integrated_search_field16',
+				'integrated_search_field17' 
+			) 
+		),
+		'cellMaps' => array(
+			'grid' => array(
+				'cells' => array(
+					'c3' => array(
+						'cols' => array( 
+							0 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							'integrated_search_field17',
+							'integrated_search_field14',
+							'integrated_search_field',
+							'integrated_search_field15',
+							'integrated_search_field16',
+							'integrated_search_field1',
+							'integrated_search_field2',
+							'integrated_search_field3',
+							'integrated_search_field4',
+							'integrated_search_field5',
+							'integrated_search_field6',
+							'integrated_search_field7',
+							'integrated_search_field8',
+							'integrated_search_field9',
+							'integrated_search_field10',
+							'integrated_search_field11',
+							'integrated_search_field12',
+							'integrated_search_field13' 
+						),
+						'fixedAtServer' => true,
+						'fixedAtClient' => false 
+					) 
+				),
+				'width' => 1,
+				'height' => 1 
+			) 
+		) 
+	),
+	'loginForm' => array(
+		'loginForm' => 3 
+	),
+	'page' => array(
+		'verticalBar' => false,
+		'labeledButtons' => array(
+			'update_records' => array(
+				 
+			),
+			'print_pages' => array(
+				 
+			),
+			'register_activate_message' => array(
+				 
+			),
+			'details_found' => array(
+				 
+			) 
+		),
+		'hasCustomButtons' => false,
+		'customButtons' => array( 
+			 
+		),
+		'codeSnippets' => array( 
+			 
+		),
+		'clickHandlerSnippets' => array( 
+			 
+		),
+		'hasNotifications' => false,
+		'menus' => array( 
+			 
+		),
+		'calcTotalsFor' => 1,
+		'hasCharts' => false 
+	),
+	'misc' => array(
+		'type' => 'search',
+		'breadcrumb' => false 
+	),
+	'events' => array(
+		'maps' => array( 
+			 
+		),
+		'mapsData' => array(
+			 
+		),
+		'buttons' => array( 
+			 
+		) 
+	),
+	'dashSearch' => array(
+		'searchFields' => array(
+			 
+		),
+		'allSearchFields' => array( 
+			 
+		),
+		'googleLikeFields' => array( 
+			 
+		) 
+	) 
+);
+			$pageArray = array(
+	'id' => 'search',
+	'type' => 'search',
+	'layoutId' => 'nomenu',
+	'disabled' => 0,
+	'default' => 0,
+	'forms' => array(
+		'above-grid' => array(
+			'modelId' => 'search-above-grid',
+			'grid' => array( 
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c1',
+							'colspan' => 2 
+						) 
+					),
+					'section' => '' 
+				) 
+			),
+			'cells' => array(
+				'c1' => array(
+					'model' => 'c1',
+					'items' => array( 
+						 
+					) 
+				) 
+			),
+			'deferredItems' => array( 
+				 
+			),
+			'recsPerRow' => 1 
+		),
+		'below-grid' => array(
+			'modelId' => 'search-below-grid',
+			'grid' => array( 
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c1' 
+						) 
+					),
+					'section' => '' 
+				) 
+			),
+			'cells' => array(
+				'c1' => array(
+					'model' => 'c1',
+					'items' => array( 
+						'search_search',
+						'search_reset',
+						'search_back_list',
+						'search_cancel' 
+					) 
+				) 
+			),
+			'deferredItems' => array( 
+				 
+			),
+			'recsPerRow' => 1 
+		),
+		'top' => array(
+			'modelId' => 'search-header',
+			'grid' => array( 
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c1' 
+						) 
+					),
+					'section' => '' 
+				) 
+			),
+			'cells' => array(
+				'c1' => array(
+					'model' => 'c1',
+					'items' => array( 
+						'search_header' 
+					) 
+				) 
+			),
+			'deferredItems' => array( 
+				 
+			),
+			'recsPerRow' => 1 
+		),
+		'grid' => array(
+			'modelId' => 'simple-search',
+			'grid' => array( 
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c3' 
+						) 
+					),
+					'section' => '' 
+				) 
+			),
+			'cells' => array(
+				'c3' => array(
+					'model' => 'c3',
+					'items' => array( 
+						'integrated_search_field17',
+						'integrated_search_field14',
+						'integrated_search_field',
+						'integrated_search_field15',
+						'integrated_search_field16',
+						'integrated_search_field1',
+						'integrated_search_field2',
+						'integrated_search_field3',
+						'integrated_search_field4',
+						'integrated_search_field5',
+						'integrated_search_field6',
+						'integrated_search_field7',
+						'integrated_search_field8',
+						'integrated_search_field9',
+						'integrated_search_field10',
+						'integrated_search_field11',
+						'integrated_search_field12',
+						'integrated_search_field13' 
+					) 
+				) 
+			),
+			'deferredItems' => array( 
+				 
+			),
+			'separateLabels' => false 
+		) 
+	),
+	'items' => array(
+		'search_header' => array(
+			'type' => 'search_header' 
+		),
+		'search_reset' => array(
+			'type' => 'search_reset' 
+		),
+		'search_back_list' => array(
+			'type' => 'search_back_list' 
+		),
+		'search_search' => array(
+			'type' => 'search_search' 
+		),
+		'search_cancel' => array(
+			'type' => 'search_cancel' 
+		),
+		'integrated_search_field' => array(
+			'field' => 'aio_training_tracking_gender',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
+		),
+		'integrated_search_field1' => array(
+			'field' => 'aio_training_tracking_participant_role',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
+		),
+		'integrated_search_field2' => array(
+			'field' => 'aio_training_tracking_country',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
+		),
+		'integrated_search_field3' => array(
+			'field' => 'aio_training_tracking_facility',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
+		),
+		'integrated_search_field4' => array(
+			'field' => 'aio_training_tracking_training_id',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
+		),
+		'integrated_search_field5' => array(
+			'field' => 'aio_training_tracking_training_name',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
+		),
+		'integrated_search_field6' => array(
+			'field' => 'aio_training_tracking_program',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
+		),
+		'integrated_search_field7' => array(
+			'field' => 'aio_training_tracking_partners',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
+		),
+		'integrated_search_field8' => array(
+			'field' => 'aio_training_tracking_training_type',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
+		),
+		'integrated_search_field9' => array(
+			'field' => 'aio_training_tracking_training_approach',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
+		),
+		'integrated_search_field10' => array(
+			'field' => 'aio_training_tracking_training_language',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
+		),
+		'integrated_search_field11' => array(
+			'field' => 'aio_training_tracking_training_lead',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
+		),
+		'integrated_search_field12' => array(
+			'field' => 'aio_training_tracking_quarter',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
+		),
+		'integrated_search_field13' => array(
+			'field' => 'aio_training_tracking_attendance_status',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
+		),
+		'integrated_search_field14' => array(
+			'field' => 'aio_training_tracking_Chart_gender',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
+		),
+		'integrated_search_field15' => array(
+			'field' => 'aio_training_tracking_Chart_participant_role',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
+		),
+		'integrated_search_field16' => array(
+			'field' => 'aio_training_tracking_Chart_country',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
+		),
+		'integrated_search_field17' => array(
+			'field' => 'aio_training_tracking_Chart_training_name',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
+		) 
+	),
+	'dbProps' => array(
+		 
+	),
+	'version' => 14,
+	'imageItem' => array(
+		'type' => 'page_image' 
+	),
+	'imageBgColor' => '#f2f2f2',
+	'controlsBgColor' => 'white',
+	'imagePosition' => 'right',
+	'listTotals' => 1,
+	'title' => array(
+		 
+	) 
+);
 		?>

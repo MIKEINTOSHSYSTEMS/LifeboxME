@@ -16,7 +16,7 @@ class UserInfoPage extends EditPage {
 	}
 
 
-	public static function processUserInfoPageSecurity( $table ) {
+	public static function processUserInfoPageSecurity() {
 		if( !Security::providerUsersInDb( Security::currentProvider() ) ) {
 			HeaderRedirect("menu");
 		}
@@ -115,6 +115,9 @@ class UserInfoPage extends EditPage {
 
 	protected function prepareTwoFactorData() {
 		$twofData = $this->loadTwofData();
+		if( !$twofData ) {
+			return;
+		}
 		$this->pageData["twoFactorData"] = $twofData->serialize();
 		$this->pageData["twoFactorSettings"] = Security::twoFactorSettings();
 
@@ -273,7 +276,7 @@ class UserInfoPage extends EditPage {
 			return;
 
 		$this->messageType = MESSAGE_INFO;
-		$this->setMessage( "<strong>"."User profile updated"."</strong>" );
+		$this->setMessage( "<strong>".mlang_message('USERPROFILE_UPDATED')."</strong>" );
 
 		$_SESSION["message_userinfo"] = $this->message . "";
 		$_SESSION["message_userinfo_type"] = $this->messageType;
@@ -541,7 +544,7 @@ class UserInfoPage extends EditPage {
 		}
 
 		$twofData->methods[ $method ] = true;
-		$twofData->code = generateUserCode( GetGlobalData("smsCodeLength", 6) );
+		$twofData->code = generateUserCode( ProjectSettings::getProjectValue( 'smsCodeLength' ) );
 		global $debug2Factor;
 		if( $debug2Factor ) {
 			$twofData->code = 333;
@@ -602,7 +605,7 @@ class UserInfoPage extends EditPage {
 
 
 	protected function send2fError( $message, $status = 'error' ) {
-		echo my_json_encode( array(
+		echo runner_json_encode( array(
 			"status" => $status,
 			"message" => $message
 		));
@@ -643,7 +646,7 @@ class UserInfoPage extends EditPage {
 		} else if( $method == TWOFACTOR_PHONE ) {
 			$response["phone"] = $twofData->phone;
 		}
-		echo my_json_encode( $response );
+		echo runner_json_encode( $response );
 		exit();
 	}
 
@@ -658,7 +661,7 @@ class UserInfoPage extends EditPage {
 			"status" => "saved",
 			"twoFactorData" => $twofData->serialize()
 		);
-		echo my_json_encode( $response );
+		echo runner_json_encode( $response );
 		exit();
 	}
 
@@ -681,7 +684,7 @@ class UserInfoPage extends EditPage {
 		}
 		if( !$this->verify2fCode( $method, $twofData, $code ) ) {
 			//	just wrong code, ask to reype
-			$this->send2fError( "Wrong code", 'wrong' );
+			$this->send2fError( mlang_message('WRONG_CODE'), 'wrong' );
 		}
 
 		//	save data in the database
@@ -773,7 +776,7 @@ class UserInfoPage extends EditPage {
 
 	protected function prepareBreadcrumbs() {
 		$this->xt->assign( "breadcrumb", true );
-		$this->xt->assign( "crumb_home_link", runner_htmlspecialchars( GetLocalLink("menu") ) );
+		$this->xt->assign( "crumb_home_link", runner_htmlspecialchars( GetTableLink("menu") ) );
 
 		$crumb = array();
 		$crumb["crumb_title_span"] = true;

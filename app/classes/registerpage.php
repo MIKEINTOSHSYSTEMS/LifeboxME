@@ -1,8 +1,6 @@
 <?php
 class RegisterPage extends RunnerPage
 {
-	public $pwdStrong = false;
-
 	public $action;
 
 	protected $regValues = array();
@@ -22,6 +20,10 @@ class RegisterPage extends RunnerPage
 
 	protected $sendActivationLinkFailedMessage = "";
 
+	protected $userErrorMessage = '';
+	protected $emailErrorMessage = '';
+	protected $pwdErrorMessage = '';
+
 	function __construct(&$params = "")
 	{
 		parent::__construct($params);
@@ -29,21 +31,11 @@ class RegisterPage extends RunnerPage
 		$this->usernameFiled = Security::usernameField();
 		$this->emailFiled = GetEmailField();
 
-		if( GetGlobalData("userRequireActivation") ) {
+		if( ProjectSettings::getSecurityValue( 'registration', 'sendActivationLink' ) ) {
 			$this->sendActivationLink = true;
 		}
 
 		// fill global password settings
-		$this->pwdStrong = GetGlobalData("pwdStrong", false);
-		if( $this->pwdStrong )
-		{
-			$this->settingsMap["globalSettings"]["pwdLen"] = GetGlobalData("pwdLen", 0);
-			$this->settingsMap["globalSettings"]["pwdUnique"] = GetGlobalData("pwdUnique", 0);
-			$this->settingsMap["globalSettings"]["pwdDigits"] = GetGlobalData("pwdDigits", 0);
-			$this->settingsMap["globalSettings"]["pwdStrong"] = true;
-			$this->settingsMap["globalSettings"]["pwdUpperLower"] = GetGlobalData("pwdUpperLower", false);
-		}
-
 		$this->headerForms = array( "top" );
 		$this->footerForms = array( "below-grid" );
 
@@ -93,7 +85,7 @@ class RegisterPage extends RunnerPage
 
 		$rs = $this->dataSource->getSingle( $dc );		
 		if( !$rs ) {
-			echo "Invalid validation code.";
+			echo mlang_message('SEC_INVALID_REG_CODE');
 			return;
 		}
 		
@@ -101,19 +93,19 @@ class RegisterPage extends RunnerPage
 		
 		if( !$data )
 		{
-			echo "Invalid validation code.";
+			echo mlang_message('SEC_INVALID_REG_CODE');
 			return;
 		}
 
 		$dbPassword = $data[ Security::passwordField() ];
 		if( !Security::verifyActivationCode( $code, $username, $dbPassword ) )
 		{
-			echo "Invalid validation code.";
+			echo mlang_message('SEC_INVALID_REG_CODE');
 			return;
 		}
 
 		$dcUpdate = new DsCommand();
-		$dcUpdate->values[ GetGlobalData("userActivationField") ] = 1;
+		$dcUpdate->values[ ProjectSettings::getSecurityValue( 'dbProvider', 'activationField' ) ] = 1;
 		$dcUpdate->filter = $usernameCondition;
 			
 		$this->dataSource->updateSingle( $dcUpdate, false );
@@ -170,7 +162,7 @@ class RegisterPage extends RunnerPage
 		if( $globalEvents->exists("BeforeProcessRegister") )
 			$globalEvents->BeforeProcessRegister( $this );
 
-		if( $this->action == "activate" && GetGlobalData("userRequireActivation") ) {
+		if( $this->action == "activate" && ProjectSettings::getSecurityValue( 'registration', 'sendActivationLink' ) ) {
 			return $this->activateNewUser();
 		}
 
@@ -178,8 +170,9 @@ class RegisterPage extends RunnerPage
 		{
 			$this->registerSuccess = $this->registerNewUser();
 			$this->doAfterRegistrationEvent();
+			
+			$this->notifyUserAndAdmin();
 
-				$this->notifyUserAndAdmin();
 			if( !$this->registerSuccess && $this->mode == REGISTER_POPUP )
 			{
 				$returnJSON = array();
@@ -223,7 +216,10 @@ class RegisterPage extends RunnerPage
 			$this->xt->assign("supertop_block", true);
 			$this->pageData["buttons"] = array_merge( $this->pageData["buttons"], $this->pSet->buttons() );
 			foreach( $this->pSet->buttons() as $b ) {
-				$this->AddJSFile( "include/button_".$b.".js" );
+				if( !$b ) {
+					continue;
+				}
+				$this->AddJSFile( "usercode/button_".$b.".js" );
 			}
 		}
 
@@ -237,8 +233,8 @@ class RegisterPage extends RunnerPage
 
 		// users table pSet
 		$pSet = new ProjectSettings( $this->tName, $this->pageType, $this->pageName );
-		if( $pSet->isAddPageEvents() )
-			$this->AddJSFile("include/runnerJS/events/pageevents_".GetTableURL( $this->tName ).".js");
+		if( $pSet->hasJsEvents() )
+			$this->AddJSFile("usercode/pageevents_".GetTableURL( $this->pageTable ).".js");
 	}
 
 	/**
@@ -263,18 +259,21 @@ class RegisterPage extends RunnerPage
 		if( !$this->registerSuccess )
 			return;
 
-		$sentMailResults = $this->sendUserRegisterMessage();
-
-		if( !@$sentMailResults["mailed"] )
-		{
-			$this->message.= " ".$sentMailResults["message"];
-			if ( $this->sendActivationLink )
-				$this->sendActivationLinkFailedMessage = $sentMailResults["message"];
+		if( ProjectSettings::getSecurityValue('registration', 'notifyUser' ) ) {
+			$sentMailResults = $this->sendUserRegisterMessage();
+			if( !@$sentMailResults["mailed"] ) {
+				$this->message.= " ".$sentMailResults["message"];
+				if ( $this->sendActivationLink )
+					$this->sendActivationLinkFailedMessage = $sentMailResults["message"];
+			}
 		}
 
-		$sentMailResults1 = $this->sendAdminRegisterMessage();
-		if( !@$sentMailResults1["mailed"] )
-			$this->message.= " ".$sentMailResults1["message"];
+		if( ProjectSettings::getSecurityValue('registration', 'notifyAdmin' ) ) {
+			$sentMailResults1 = $this->sendAdminRegisterMessage();
+			if( !@$sentMailResults1["mailed"] ) {
+				$this->message.= " ".$sentMailResults1["message"];
+			}
+		}
 	}
 
 	/**
@@ -284,7 +283,7 @@ class RegisterPage extends RunnerPage
 	protected function sendUserRegisterMessage()
 	{
 		$data = array();
-		if( GetGlobalData("userRequireActivation") ) {
+		if( ProjectSettings::getSecurityValue( 'registration', 'sendActivationLink' ) ) {
 			$data["activateurl"] = $this->getUserActivationUrl( $this->regValues[Security::usernameField()], $this->prepActivationCode );
 		}
 
@@ -309,14 +308,14 @@ class RegisterPage extends RunnerPage
 	protected function sendAdminRegisterMessage()
 	{
 		$data = array();
-		if( GetGlobalData("userRequireActivation")	)
+		if( ProjectSettings::getSecurityValue( 'registration', 'sendActivationLink' )	)
 			$data["activateurl"] = $this->getUserActivationUrl( $this->regValues[Security::usernameField()], $this->prepActivationCode );
 
 		foreach( $this->pSet->getPageFields() as $uf ) {
 			$data[ GoodFieldName( $uf . "_value" ) ] = $this->regValues[ $uf ];
 		}
 
-		$strEmail = "admin@merqconsultancy.org";
+		$strEmail = ProjectSettings::getSecurityValue('registration', 'adminEmail' );
 
 		$html = isEmailTemplateUseHTML("adminregister");
 		return RunnerPage::sendEmailByTemplate($strEmail, "adminregister", $data, $html);
@@ -349,8 +348,8 @@ class RegisterPage extends RunnerPage
 			$values[ $key ] = $value;
 		}
 
-		if( GetGlobalData("userRequireActivation") ) {
-			$values[ GetGlobalData("userActivationField") ] = 0;
+		if( ProjectSettings::getSecurityValue( 'registration', 'sendActivationLink' ) ) {
+			$values[ ProjectSettings::getSecurityValue( 'dbProvider', 'activationField' ) ] = 0;
 		}
 
 		$this->strUsername = $values[Security::usernameField()];
@@ -376,7 +375,7 @@ class RegisterPage extends RunnerPage
 		$originalpassword = $values[ Security::passwordField() ];
 
 		//	hash password
-		if( GetGlobalData("bEncryptPasswords") && !$this->cipherer->isFieldEncrypted( Security::passwordField() ) ) {
+		if( ProjectSettings::getSecurityValue( 'registration', 'hashPassword' ) && !$this->cipherer->isFieldEncrypted( Security::passwordField() ) ) {
 			$values[ Security::passwordField() ] = Security::hashPassword( $originalpassword );
 		}
 
@@ -389,7 +388,7 @@ class RegisterPage extends RunnerPage
 		
 		$retval = $this->dataSource->insertSingle( $dc );
 
-		if( GetGlobalData("userRequireActivation") ) {
+		if( ProjectSettings::getSecurityValue( 'registration', 'sendActivationLink' ) ) {
 			$this->prepActivationCode = Security::getActivationCode(
 				$this->strUsername,
 				$values[ Security::passwordField() ]
@@ -421,12 +420,12 @@ class RegisterPage extends RunnerPage
 		//	check if entered username already exists
 		if( !strlen($strUsername) )
 		{
-			$this->jsSettings['tableSettings'][ $this->tName ]['msg_userError'] = "Username can not be empty.";
+			$this->userErrorMessage = mlang_message('USER_NOEMPTY');
 			$ret = false;
 		}
 		else if( !$this->checkIfUsernameUnique( $strUsername ) )
 		{
-			$this->jsSettings['tableSettings'][ $this->tName ]['msg_userError'] = "Username"." <i>".runner_htmlspecialchars( $strUsername )."</i> "."already exists. Choose another username.";
+			$this->userErrorMessage = mlang_message('USERNAME_EXISTS1')." <i>".runner_htmlspecialchars( $strUsername )."</i> ".mlang_message('USERNAME_EXISTS2');
 			$ret = false;
 		}
 
@@ -435,21 +434,21 @@ class RegisterPage extends RunnerPage
 			//	check if entered email already exists
 			if( !strlen($strEmail) )
 			{
-				$this->jsSettings['tableSettings'][ $this->tName ]['msg_emailError'] = "Please enter a valid email address.";
+				$this->emailErrorMessage = mlang_message('VALID_EMAIL');
 				$ret = false;
 			}
 			else if( !$this->checkIfEmailUnique( $strEmail ) )
 			{
-				$this->jsSettings['tableSettings'][ $this->tName ]['msg_emailError'] = "Email"." <i>". runner_htmlspecialchars( $strEmail )."</i> "."already registered. If you forgot your username or password use the password reminder form.";
+				$this->emailErrorMessage = mlang_message('EMAIL_ALREADY1')." <i>". runner_htmlspecialchars( $strEmail )."</i> ".mlang_message('EMAIL_ALREADY2');
 				$ret = false;
 			}
 		}
 
-		if( $this->pwdStrong )
+		if( ProjectSettings::passwordValidationValue( 'strong' ) )
 		{
 			if( !checkpassword( $strPassword ) )
 			{
-				$this->jsSettings['tableSettings'][ $this->tName ]['msg_passwordError'] = $this->getPwdStrongFailedMessage();
+				$this->pwdErrorMessage = $this->getPwdStrongFailedMessage();
 				$ret = false;
 			}
 		}
@@ -457,45 +456,6 @@ class RegisterPage extends RunnerPage
 		return $ret;
 	}
 
-
-	/**
-	 * @return String
-	 */
-	protected function getPwdStrongFailedMessage()
-	{
-		$msg = "";
-		$pwdLen = GetGlobalData("pwdLen", 0);
-		if($pwdLen)
-		{
-			$fmt = "Password must be at least %% characters length.";
-			$fmt = str_replace("%%", "".$pwdLen, $fmt);
-			$msg.= "<br>".$fmt;
-		}
-		$pwdUnique = GetGlobalData("pwdUnique", 0);
-		if($pwdUnique)
-		{
-			$fmt = "Password must contain %% unique characters.";
-			$fmt = str_replace("%%", "".$pwdUnique, $fmt);
-			$msg.= "<br>".$fmt;
-		}
-		$pwdDigits = GetGlobalData("pwdDigits", 0);
-		if($pwdDigits)
-		{
-			$fmt = "Password must contain %% digits or symbols.";
-			$fmt = str_replace("%%", "".$pwdDigits, $fmt);
-			$msg.= "<br>".$fmt;
-		}
-		if(GetGlobalData("pwdUpperLower", false))
-		{
-			$fmt = "Password must contain letters in upper and lower case.";
-			$msg.= "<br>".$fmt;
-		}
-
-		if($msg)
-			$msg = substr($msg, 4);
-
-		return $msg;
-	}
 
 	/**
 	 * @param String strUsername
@@ -554,7 +514,7 @@ class RegisterPage extends RunnerPage
 		{
 			foreach( $regFields as $f )
 			{
-				$defaultValue = GetDefaultValue($f, PAGE_REGISTER, $this->tName );
+				$defaultValue = $this->pSetSearch->getDefaultValue( $f );
 				if( strlen($defaultValue) )
 					$this->regValues[ $f ] = $defaultValue;
 			}
@@ -572,27 +532,17 @@ class RegisterPage extends RunnerPage
 			$parameters["pageObj"] = $this;
 			$parameters["suggest"] = ($fName == Security::passwordField() || $fName == $this->usernameFiled || $fName == $this->emailFiled);
 
-			if( $this->pSet->getEditFormat($fName) == 'Time' )
-				$this->fillTimePickSettings( $fName, @$this->regValues[ $fName ] );
-
 			if( $fName == Security::passwordField() )
 			{
 				$parameters["extraParams"] = array();
 				$parameters["extraParams"]["getConrirmFieldCtrl"] = true;
-				$this->jsSettings['tableSettings'][ $this->tName ]['passFieldName'] = $fName;
 			}
-
-			if( $fName == $this->usernameFiled )
-				$this->jsSettings['tableSettings'][ $this->tName ]['userFieldName'] = $fName;
-
-			if( $fName == $this->emailFiled )
-				$this->jsSettings['tableSettings'][ $this->tName ]['emailFieldName'] = $fName;
 
 			// Add validation
 			if( $fName == $this->usernameFiled || $fName == Security::passwordField() || $fName == $this->emailFiled )
 				$parameters["validate"] = Array('basicValidate' => Array ( 'IsRequired' ));
 			else
-				$parameters["validate"] = $this->pSet->getValidation( $fName );
+				$parameters["validate"] = $this->pSet->getValidationData( $fName );
 
 			$controls = array('controls' => array());
 			$controls["controls"]["id"] = $this->id;
@@ -608,7 +558,18 @@ class RegisterPage extends RunnerPage
 			if ( $firstElementId )
 				$this->xt->assign("labelfor_" . goodFieldName($fName), $firstElementId);
 
+			if( $this->pSet->getEditFormat( $fName ) == EDIT_FORMAT_CHECKBOX ) {
+				$parameters[ "xt" ] = $this->xt;
+				$parameters[ "clearVar" ] = $gfName . "_forward_control";
+			}
 			$this->xt->assign_function($gfName."_editcontrol", "xt_buildeditcontrol", $parameters );
+			if( $this->pSet->getEditFormat( $fName ) == EDIT_FORMAT_CHECKBOX ) {
+				$parameters[ "xt" ] = $this->xt;
+				$parameters[ "clearVar" ] = $gfName . "_editcontrol";
+				$this->xt->assign_function( $gfName . "_forward_control", "xt_buildforwardcontrol", $parameters );
+				
+				$this->xt->assign( $gfName . '_label_class' , 'r-checkbox-label' );
+			}
 
 			$preload = $this->fillPreload($fName, $regFields, $this->regValues);
 			if( $preload !== false)
@@ -722,7 +683,7 @@ class RegisterPage extends RunnerPage
 
 		$this->xt->assign("submit_attrs", "id=\"saveButton".$this->id."\"" . $addStyle);
 
-		if( GetGlobalData("userRequireActivation") && $this->registerSuccess )
+		if( ProjectSettings::getSecurityValue( 'registration', 'sendActivationLink' ) && $this->registerSuccess )
 		{
 			$this->xt->assign( "firstAboveGridCell", true );
 
@@ -768,7 +729,7 @@ class RegisterPage extends RunnerPage
 	 */
 	protected function assignBody()
 	{
-		if( $this->registerSuccess && !GetGlobalData("userRequireActivation") )
+		if( $this->registerSuccess && !ProjectSettings::getSecurityValue( 'registration', 'sendActivationLink' ) )
 		{
 			$this->body["begin"].= GetBaseScriptsForPage( false )
 				."<form method=\"POST\" action=\"".GetTableLink("login")."\" name=\"loginform\">
@@ -795,7 +756,7 @@ class RegisterPage extends RunnerPage
 		{
 			$this->switchToSuccessPage();
 			$this->bodyForms = array( "above-grid", "grid" );
-			if( GetGlobalData("userRequireActivation") ) {
+			if( ProjectSettings::getSecurityValue( 'registration', 'sendActivationLink' ) ) {
 				//	this must happen after switchToSuccessPage call
 				$this->hideItemType("register_proceed");
 				$this->hideItemType("register_activated_message");
@@ -878,7 +839,7 @@ class RegisterPage extends RunnerPage
 		//	always use username from DB to avoid upper/lower case issues
 		$username = $userData[ Security::usernameField() ];
 
-		if( GetGlobalData("userRequireActivation") && $userData[ GetGlobalData( "userActivationField" ) ] != 1 ) {
+		if( ProjectSettings::getSecurityValue( 'registration', 'sendActivationLink' ) && $userData[ ProjectSettings::getSecurityValue( 'dbProvider', 'activationField' ) ] != 1 ) {
 			//	create 'activation' provisional session
 			Security::createProvisionalSession( Security::dbProvider(), LOGGED_ACTIVATION_PENDING, $username, $userData[ Security::fullnameField() ], $userData );
 		} else {
@@ -894,5 +855,34 @@ class RegisterPage extends RunnerPage
 		}
 		return true;
 	}
+
+	protected function buildJsTableSettings( $table, $pSet ) {
+		$settings = parent::buildJsTableSettings( $table, $pSet );
+		if( $this->userErrorMessage ) {
+			$settings['msg_userError'] = $this->userErrorMessage;
+		}
+		if( $this->emailErrorMessage ) {
+			$settings['msg_emailError'] = $this->emailErrorMessage;
+		}
+		if( $this->pwdErrorMessage ) {
+			$settings['msg_passwordError'] = $this->pwdErrorMessage;
+		}
+		foreach( $this->pSet->getPageFields() as $fName ) {
+			if( $fName == Security::passwordField() ) {
+				$settings['passFieldName'] = $fName;
+			}
+			if( $fName == $this->usernameFiled ) {
+				$settings['userFieldName'] = $fName;
+			}
+			if( $fName == $this->emailFiled ) {
+				$settings['emailFieldName'] = $fName;
+			}
+		}
+
+
+		
+		return $settings;
+	}
+
 }
 ?>

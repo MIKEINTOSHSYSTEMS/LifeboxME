@@ -1,7 +1,7 @@
 <!doctype html>
 <html  {$html_attrs}>
 	<head>
-				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+						<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{$pagetitle}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -10,13 +10,9 @@
     <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
     <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
     <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
-    		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
-	{BEGIN rtlCSS}
-	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
-	{END rtlCSS}
-	{BEGIN styleCSSFiles}
-	<link REL="stylesheet" href="{$stylepath}" type="text/css">
-	{END styleCSSFiles}
+    		{BEGIN styleCSSFiles}
+<link REL="stylesheet" href="{$stylepath}" type="text/css">
+{END styleCSSFiles}
 			
 	</head>
 
@@ -50,7 +46,7 @@
 
 			<div class="clearfix " data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell data-itemid="expand_button" {$item_expand_button} data-topcell-item-type="expand_button" >
 				<span data-itemtype="expand_button" data-itemid="expand_button" {$item_expand_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Expand" class="btn btn-link   
+	<a type="button" title="{mlang_message EXPAND}" class="btn btn-link   
 	" href="#" >
 					<span class="glyphicon glyphicon-triangle-right"></span>
 										</a>
@@ -218,7 +214,7 @@
 							 
 				<span class="navbar-form  navbar-header" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="expand_menu_button" {$item_expand_menu_button} data-topcell-item-type="expand_menu_button" >
 				<span data-itemtype="expand_menu_button" data-itemid="expand_menu_button" {$item_expand_menu_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Show menu" class="btn-link   
+	<a type="button" title="{mlang_message SHOW_MENU}" class="btn-link   
 	 glyphicon glyphicon-menu-hamburger" href="#" >		
 				
 								</a>
@@ -227,7 +223,7 @@
 		 
 				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="collapse_button" {$item_collapse_button} data-topcell-item-type="collapse_button" >
 				<span data-itemtype="collapse_button" data-itemid="collapse_button" {$item_collapse_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Collapse" class="btn-link   
+	<a type="button" title="{mlang_message COLLAPSE}" class="btn-link   
 	 glyphicon glyphicon-triangle-left" href="#" >		
 				
 								</a>
@@ -240,7 +236,7 @@
 <span data-itemtype="loginform_login" data-itemid="loginform_login" {$item_loginform_login} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-primary   
 	" href="#" {$guestloginlink_attrs} >
-							Login			</a>
+							{mlang_message LOGIN}			</a>
 </span>
 {END guestloginbutton}
 			</span>
@@ -251,14 +247,14 @@
 	<span class="dropdown ">
 		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
 			{BEGIN userbutton_icon}							<span class="glyphicon glyphicon-user"></span>
-						{END userbutton_icon}{$userbutton_image}			{$username}			<span class="caret"></span>
+						{END userbutton_icon}{$userbutton_image}			{$mlp_push}{$mlparam username var username}{$mltext %username%}{$mlp_pop}			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu">
 							{BEGIN userinfo_link}
 	<li data-itemtype="userinfo_link" data-itemid="userinfo_link" {$item_userinfo_link} data-pageid="{$pageid}" data-small >
 				<a  href="userinfo.php"  title="" >
 				
-		User Profile		
+		{mlang_message USERINFO}		
 		</a>
 	</li>
 {END userinfo_link}
@@ -266,7 +262,7 @@
 	<li data-itemtype="logout_link" data-itemid="logout_link" {$item_logout_link} data-pageid="{$pageid}" data-small >
 				<a  href="#" {$logoutlink_attrs}  title="" >
 				
-		Log out		
+		{mlang_message LOG_OUT}		
 		</a>
 	</li>
 {END logoutbutton}
@@ -274,7 +270,7 @@
 	<li data-itemtype="adminarea_link" data-itemid="adminarea_link" {$item_adminarea_link} data-pageid="{$pageid}" data-small >
 				<a  href="admin_rights_list.php"  title="" >
 				
-		Admin Area		
+		{mlang_message AA_ADMINAREA}		
 		</a>
 	</li>
 {END adminarea_link}
@@ -282,7 +278,7 @@
 	<li data-itemtype="changepassword_link" data-itemid="changepassword_link" {$item_changepassword_link} data-pageid="{$pageid}" data-small >
 				<a  href="changepwd.php" {$changepwdlink_attrs} id="changePasswordButton{$id}"  title="" >
 				
-		Change password		
+		{mlang_message CHANGE_PASSWORD}		
 		</a>
 	</li>
 {END changepwd_link}
@@ -373,18 +369,19 @@
 {BEGIN participant_id_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_participant_id}  r-vertical-field" data-fieldname="participant_id" data-signal-error-for="participant_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="participant_id" data-fieldname="participant_id" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_participant_id}  r-vertical-field" 
+	data-signal-error-for="participant_id{$id}" {$required_attr_participant_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="participant_id" data-fieldname="participant_id" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_participant_id}">
-		
-		{BEGIN participant_id_label}{$label public_training_participants participant_id }{END participant_id_label}
+	<label class="r-edit-label control-label {$participant_id_label_class}" for="{$labelfor_participant_id}">
+		{BEGIN participant_id_label}
+			{$participant_id_forward_control}
+			{$label public_training_participants participant_id }			{END participant_id_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$participant_id_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END participant_id_fieldblock}
@@ -392,18 +389,19 @@
 {BEGIN title_salutation_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_title_salutation}  r-vertical-field" data-fieldname="title_salutation" data-signal-error-for="title_salutation{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="title_salutation" data-fieldname="title_salutation" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_title_salutation}  r-vertical-field" 
+	data-signal-error-for="title_salutation{$id}" {$required_attr_title_salutation}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="title_salutation" data-fieldname="title_salutation" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_title_salutation}">
-		
-		{BEGIN title_salutation_label}{$label public_training_participants title_salutation }{END title_salutation_label}
+	<label class="r-edit-label control-label {$title_salutation_label_class}" for="{$labelfor_title_salutation}">
+		{BEGIN title_salutation_label}
+			{$title_salutation_forward_control}
+			{$label public_training_participants title_salutation }			{END title_salutation_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$title_salutation_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END title_salutation_fieldblock}
@@ -411,18 +409,19 @@
 {BEGIN first_name_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_first_name}  r-vertical-field" data-fieldname="first_name" data-signal-error-for="first_name{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="first_name" data-fieldname="first_name" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_first_name}  r-vertical-field" 
+	data-signal-error-for="first_name{$id}" {$required_attr_first_name}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="first_name" data-fieldname="first_name" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_first_name}">
-		
-		{BEGIN first_name_label}{$label public_training_participants first_name }{END first_name_label}
+	<label class="r-edit-label control-label {$first_name_label_class}" for="{$labelfor_first_name}">
+		{BEGIN first_name_label}
+			{$first_name_forward_control}
+			{$label public_training_participants first_name }			{END first_name_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$first_name_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END first_name_fieldblock}
@@ -430,18 +429,19 @@
 {BEGIN middle_name_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_middle_name}  r-vertical-field" data-fieldname="middle_name" data-signal-error-for="middle_name{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field18" {$item_integrated_edit_field18} data-pageid="{$pageid}" data-field="middle_name" data-fieldname="middle_name" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_middle_name}  r-vertical-field" 
+	data-signal-error-for="middle_name{$id}" {$required_attr_middle_name}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field18" {$item_integrated_edit_field18} data-pageid="{$pageid}" data-field="middle_name" data-fieldname="middle_name" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_middle_name}">
-		
-		{BEGIN middle_name_label}{$label public_training_participants middle_name }{END middle_name_label}
+	<label class="r-edit-label control-label {$middle_name_label_class}" for="{$labelfor_middle_name}">
+		{BEGIN middle_name_label}
+			{$middle_name_forward_control}
+			{$label public_training_participants middle_name }			{END middle_name_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$middle_name_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END middle_name_fieldblock}
@@ -449,18 +449,19 @@
 {BEGIN last_name_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_last_name}  r-vertical-field" data-fieldname="last_name" data-signal-error-for="last_name{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="last_name" data-fieldname="last_name" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_last_name}  r-vertical-field" 
+	data-signal-error-for="last_name{$id}" {$required_attr_last_name}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="last_name" data-fieldname="last_name" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_last_name}">
-		
-		{BEGIN last_name_label}{$label public_training_participants last_name }{END last_name_label}
+	<label class="r-edit-label control-label {$last_name_label_class}" for="{$labelfor_last_name}">
+		{BEGIN last_name_label}
+			{$last_name_forward_control}
+			{$label public_training_participants last_name }			{END last_name_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$last_name_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END last_name_fieldblock}
@@ -468,18 +469,19 @@
 {BEGIN sex_id_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_sex_id}  r-vertical-field" data-fieldname="sex_id" data-signal-error-for="sex_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="sex_id" data-fieldname="sex_id" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_sex_id}  r-vertical-field" 
+	data-signal-error-for="sex_id{$id}" {$required_attr_sex_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="sex_id" data-fieldname="sex_id" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_sex_id}">
-		
-		{BEGIN sex_id_label}{$label public_training_participants sex_id }{END sex_id_label}
+	<label class="r-edit-label control-label {$sex_id_label_class}" for="{$labelfor_sex_id}">
+		{BEGIN sex_id_label}
+			{$sex_id_forward_control}
+			{$label public_training_participants sex_id }			{END sex_id_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$sex_id_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END sex_id_fieldblock}
@@ -487,18 +489,19 @@
 {BEGIN role_id_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_role_id}  r-vertical-field" data-fieldname="role_id" data-signal-error-for="role_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="role_id" data-fieldname="role_id" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_role_id}  r-vertical-field" 
+	data-signal-error-for="role_id{$id}" {$required_attr_role_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="role_id" data-fieldname="role_id" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_role_id}">
-		
-		{BEGIN role_id_label}{$label public_training_participants role_id }{END role_id_label}
+	<label class="r-edit-label control-label {$role_id_label_class}" for="{$labelfor_role_id}">
+		{BEGIN role_id_label}
+			{$role_id_forward_control}
+			{$label public_training_participants role_id }			{END role_id_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$role_id_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END role_id_fieldblock}
@@ -506,18 +509,19 @@
 {BEGIN facility_id_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_facility_id}  r-vertical-field" data-fieldname="facility_id" data-signal-error-for="facility_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="facility_id" data-fieldname="facility_id" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_facility_id}  r-vertical-field" 
+	data-signal-error-for="facility_id{$id}" {$required_attr_facility_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="facility_id" data-fieldname="facility_id" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_facility_id}">
-		
-		{BEGIN facility_id_label}{$label public_training_participants facility_id }{END facility_id_label}
+	<label class="r-edit-label control-label {$facility_id_label_class}" for="{$labelfor_facility_id}">
+		{BEGIN facility_id_label}
+			{$facility_id_forward_control}
+			{$label public_training_participants facility_id }			{END facility_id_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$facility_id_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END facility_id_fieldblock}
@@ -525,18 +529,19 @@
 {BEGIN phone_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_phone}  r-vertical-field" data-fieldname="phone" data-signal-error-for="phone{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="phone" data-fieldname="phone" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_phone}  r-vertical-field" 
+	data-signal-error-for="phone{$id}" {$required_attr_phone}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="phone" data-fieldname="phone" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_phone}">
-		
-		{BEGIN phone_label}{$label public_training_participants phone }{END phone_label}
+	<label class="r-edit-label control-label {$phone_label_class}" for="{$labelfor_phone}">
+		{BEGIN phone_label}
+			{$phone_forward_control}
+			{$label public_training_participants phone }			{END phone_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$phone_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END phone_fieldblock}
@@ -544,18 +549,19 @@
 {BEGIN email_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_email}  r-vertical-field" data-fieldname="email" data-signal-error-for="email{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="email" data-fieldname="email" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_email}  r-vertical-field" 
+	data-signal-error-for="email{$id}" {$required_attr_email}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="email" data-fieldname="email" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_email}">
-		
-		{BEGIN email_label}{$label public_training_participants email }{END email_label}
+	<label class="r-edit-label control-label {$email_label_class}" for="{$labelfor_email}">
+		{BEGIN email_label}
+			{$email_forward_control}
+			{$label public_training_participants email }			{END email_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$email_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END email_fieldblock}
@@ -563,18 +569,19 @@
 {BEGIN country_id_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_country_id}  r-vertical-field" data-fieldname="country_id" data-signal-error-for="country_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="country_id" data-fieldname="country_id" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_country_id}  r-vertical-field" 
+	data-signal-error-for="country_id{$id}" {$required_attr_country_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="country_id" data-fieldname="country_id" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_country_id}">
-		
-		{BEGIN country_id_label}{$label public_training_participants country_id }{END country_id_label}
+	<label class="r-edit-label control-label {$country_id_label_class}" for="{$labelfor_country_id}">
+		{BEGIN country_id_label}
+			{$country_id_forward_control}
+			{$label public_training_participants country_id }			{END country_id_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$country_id_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END country_id_fieldblock}
@@ -582,18 +589,19 @@
 {BEGIN venue_id_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_venue_id}  r-vertical-field" data-fieldname="venue_id" data-signal-error-for="venue_id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="venue_id" data-fieldname="venue_id" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_venue_id}  r-vertical-field" 
+	data-signal-error-for="venue_id{$id}" {$required_attr_venue_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="venue_id" data-fieldname="venue_id" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_venue_id}">
-		
-		{BEGIN venue_id_label}{$label public_training_participants venue_id }{END venue_id_label}
+	<label class="r-edit-label control-label {$venue_id_label_class}" for="{$labelfor_venue_id}">
+		{BEGIN venue_id_label}
+			{$venue_id_forward_control}
+			{$label public_training_participants venue_id }			{END venue_id_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$venue_id_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END venue_id_fieldblock}
@@ -601,18 +609,19 @@
 {BEGIN training_date_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_training_date}  r-vertical-field" data-fieldname="training_date" data-signal-error-for="training_date{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="training_date" data-fieldname="training_date" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_training_date}  r-vertical-field" 
+	data-signal-error-for="training_date{$id}" {$required_attr_training_date}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="training_date" data-fieldname="training_date" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_training_date}">
-		
-		{BEGIN training_date_label}{$label public_training_participants training_date }{END training_date_label}
+	<label class="r-edit-label control-label {$training_date_label_class}" for="{$labelfor_training_date}">
+		{BEGIN training_date_label}
+			{$training_date_forward_control}
+			{$label public_training_participants training_date }			{END training_date_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$training_date_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END training_date_fieldblock}
@@ -620,18 +629,19 @@
 {BEGIN created_at_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_created_at}  r-vertical-field" data-fieldname="created_at" data-signal-error-for="created_at{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field16" {$item_integrated_edit_field16} data-pageid="{$pageid}" data-field="created_at" data-fieldname="created_at" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_created_at}  r-vertical-field" 
+	data-signal-error-for="created_at{$id}" {$required_attr_created_at}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field16" {$item_integrated_edit_field16} data-pageid="{$pageid}" data-field="created_at" data-fieldname="created_at" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_created_at}">
-		
-		{BEGIN created_at_label}{$label public_training_participants created_at }{END created_at_label}
+	<label class="r-edit-label control-label {$created_at_label_class}" for="{$labelfor_created_at}">
+		{BEGIN created_at_label}
+			{$created_at_forward_control}
+			{$label public_training_participants created_at }			{END created_at_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$created_at_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END created_at_fieldblock}
@@ -639,18 +649,19 @@
 {BEGIN updated_at_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_updated_at}  r-vertical-field" data-fieldname="updated_at" data-signal-error-for="updated_at{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field17" {$item_integrated_edit_field17} data-pageid="{$pageid}" data-field="updated_at" data-fieldname="updated_at" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_updated_at}  r-vertical-field" 
+	data-signal-error-for="updated_at{$id}" {$required_attr_updated_at}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field17" {$item_integrated_edit_field17} data-pageid="{$pageid}" data-field="updated_at" data-fieldname="updated_at" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_updated_at}">
-		
-		{BEGIN updated_at_label}{$label public_training_participants updated_at }{END updated_at_label}
+	<label class="r-edit-label control-label {$updated_at_label_class}" for="{$labelfor_updated_at}">
+		{BEGIN updated_at_label}
+			{$updated_at_forward_control}
+			{$label public_training_participants updated_at }			{END updated_at_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$updated_at_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END updated_at_fieldblock}
@@ -677,7 +688,7 @@
 <span data-itemtype="view_back_list" data-itemid="view_back_list" {$item_view_back_list} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-default   
 	" {$backbutton_attrs} >
-							Back to list			</a>
+							{mlang_message BACK_TO_LIST}			</a>
 </span>
 {END back_button}
 	 
@@ -685,7 +696,7 @@
 <span data-itemtype="view_close" data-itemid="view_close" {$item_view_close} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-default   
 	" href="#" {$closebutton_attrs} >
-							Close window			</a>
+							{mlang_message CLOSE_WINDOW}			</a>
 </span>
 {END close_button}
 		</div>			 
@@ -706,7 +717,7 @@
 	<li data-itemtype="view_edit" data-itemid="view_edit" {$item_view_edit} data-pageid="{$pageid}" data-small >
 				<a  href="training_participants_edit.php?{$editlink}" {$edit_page_button_attrs}  title="" >
 				
-		Edit		
+		{mlang_message EDIT}		
 		</a>
 	</li>
 {END edit_page_button}

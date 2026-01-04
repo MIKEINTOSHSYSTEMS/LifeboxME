@@ -19,7 +19,7 @@ class PasswordField extends TextControl
 			: '';
 		echo '<input '.$this->inputStyle.' '.$autocompleteAttr.' '.$this->getPlaceholderAttr().' id="'.$this->cfield.'" '.$classString.' type="Password" '
 			.(($mode==MODE_INLINE_EDIT || $mode==MODE_INLINE_ADD) && $this->is508==true ? 'alt="'.$this->strLabel.'" ' : '').'name="'
-			.$this->cfield.'" '.$this->pageObject->pSetEdit->getEditParams($this->field).' value="'.runner_htmlspecialchars($value).'">';
+			.$this->cfield.'" '. $this->maxLengthAttr() .' value="'.runner_htmlspecialchars($value).'">';
 			
 		$this->buildControlEnd($validate, $mode);
 	}

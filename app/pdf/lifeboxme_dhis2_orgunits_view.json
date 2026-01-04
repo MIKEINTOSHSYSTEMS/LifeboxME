@@ -272,10 +272,10 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":""},
+			{"text":"","hidden":"{$item_hide_prev}"},
 				
 				
-			{"text":""},
+			{"text":"","hidden":"{$item_hide_next}"},
 				
 				
 			{"text":""},

@@ -45,12 +45,12 @@ if ( $masterTable != "" && isset($_SESSION[ $masterTable . "_masterRecordData" ]
 	$contextParams["masterData"] = $_SESSION[ $masterTable . "_masterRecordData" ];
 }
 
-$contextParams["data"] = my_json_decode( postvalue('data') );
+$contextParams["data"] = runner_json_decode( postvalue('data') );
 RunnerContext::push( new RunnerContextItem( $pageType, $contextParams));
 
 $isExistParent = postvalue('isExistParent');
 $searchByLinkField = postvalue('searchByLinkField');
-$parentCtrlsData = my_json_decode( postvalue('parentCtrlsData') );
+$parentCtrlsData = runner_json_decode( postvalue('parentCtrlsData') );
 
 $value = postvalue('searchFor');
 $values = postvalue('multiselection') ? splitLookupValues($value) : array($value);
@@ -136,13 +136,24 @@ while( $data = $qResult->fetchAssoc() )
 		$ctrlData[ $lookupField ] = $data[ $linkField ];
 		$viewContainer = new ViewControlsContainer( $pSet, PAGE_LIST, null );		
 		$displayedValue = $viewContainer->getControl( $lookupField )->getTextValue( $ctrlData );
-	}		
+	}
+
+	$keys = array();
+	if( $lookupPSet ) {
+		foreach( $lookupPSet->getTableKeys() as $kf ) {
+			$keys[] = $data[ $kf ];
+		}
+	}
 	
-	$response[] = $data[ $linkField ];
-	$response[] = $displayedValue;
+	$response[] = array( 
+		"link"=> $data[ $linkField ], 
+		"display" => $displayedValue, 
+		"displayEscaped" => runner_htmlspecialchars( $displayedValue ),
+		"keys" => $keys,
+	);
 }
 
-$respObj = array('success' => true, 'data' => array_slice($response, 0, 40));
+$respObj = array('success' => true, 'data' => array_slice($response, 0, $runnerProjectSettings['lookupSuggestsNumber'] ));
 echo printJSON($respObj);
 exit();
 ?>

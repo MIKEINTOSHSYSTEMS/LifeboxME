@@ -36,18 +36,19 @@ class MSSQLWinConnection extends Connection
 		parent::assignConnectionParams( $params );
 
 		$this->ODBCString = $params["ODBCString"];
-		$this->host = $params["connInfo"][0]; //strConnectInfo1
+		$this->host = $params["connInfo"][0]; 
+		//	port number
+		$this->host = str_replace( ':', ',', $this->host );
+		$this->dbname = $params["connInfo"][3]; 
 
-		if( $params["connInfo"][2] == "SSPI" )
+		if( $params["connInfo"][4] )
 		{
-			$this->dbname = $params["connInfo"][1];  //strConnectInfo2
-			$this->options = $params["connInfo"][2];  //strConnectInfo3
+			$this->options = 'SSPI';
 		}
 		else
 		{
-			$this->user = $params["connInfo"][1];  //strConnectInfo2
-			$this->pwd = $params["connInfo"][2]; //strConnectInfo3
-			$this->dbname = $params["connInfo"][3];  //strConnectInfo4
+			$this->user = $params["connInfo"][1];
+			$this->pwd = $params["connInfo"][2]; 
 		}
 	}
 
@@ -56,16 +57,17 @@ class MSSQLWinConnection extends Connection
 	 */
 	public function connect()
 	{
-		global $cCodepage;
+		global $cCodePage;
 
 		$connStrings = array();
-		if( $_SESSION["MSSQLConnString"] )
-			$connStrings[] = $_SESSION["SQLConnString"];
+		$savedString = $this->readConnString();
+		if( $savedString )
+			$connStrings[] = $savedString;
 
 		$connStrings[] = $this->ODBCString;
 		$providers = array( "MSOLEDBSQL", "SQLOLEDB", "SQLNCLI" );
 		foreach( $providers as $p ) {
-			if( $options == "SSPI" )
+			if( $this->options == "SSPI" )
 				$connStrings[] = "PROVIDER=".$p.";SERVER=".$this->host.";DATABASE=".$this->dbname.";Integrated Security=SSPI";
 			else
 				$connStrings[] = "PROVIDER=".$p.";SERVER=".$this->host.";UID=".$this->user.";PWD=".$this->pwd.";DATABASE=".$this->dbname;
@@ -76,7 +78,7 @@ class MSSQLWinConnection extends Connection
 		{
 			try
 			{
-				$this->conn = new COM("ADODB.Connection", NULL, $cCodepage);
+				$this->conn = new COM("ADODB.Connection", NULL, $cCodePage);
 				$this->conn->Open( $connStr );
 				$rs = $this->conn->Execute("select convert(datetime,'2000-11-22',121)");
 
@@ -91,7 +93,7 @@ class MSSQLWinConnection extends Connection
 				if( $d < $m && $m < $y )
 					$this->mssql_dmy = "dmy";
 
-				$_SESSION["MSSQLConnString"] = $connStr;
+				$this->saveConnString( $connStr );
 				$this->conn->CommandTimeout = 120;
 				return $this->conn;
 			}

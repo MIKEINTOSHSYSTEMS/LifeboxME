@@ -14,16 +14,10 @@ class AdvancedSearchControl extends SearchControl
 	
 	function getCtrlSearchTypeOptions($fName, $selOpt, $not, $flexible = false, $both = false) 
 	{
-		if( $this->pageObj->isBootstrap() ) 
-		{
-			if( !$flexible && ($selOpt == EMPTY_SEARCH || $selOpt == NOT_EMPTY) ) 
-				return $this->getControl($fName)->buildSearchOptions(array(EMPTY_SEARCH, NOT_EMPTY), $selOpt, $not, true);
-				
-			return $this->getControl($fName)->getSearchOptions($selOpt, $not, true); 
-		}
-		
-		$withNot = $both ? $not : false;
-		return parent::getCtrlSearchTypeOptions($fName, $selOpt, $withNot, false, $both);
+		if( !$flexible && ($selOpt == EMPTY_SEARCH || $selOpt == NOT_EMPTY) ) 
+			return $this->getControl($fName)->buildSearchOptions(array(EMPTY_SEARCH, NOT_EMPTY), $selOpt, $not, true);
+			
+		return $this->getControl($fName)->getSearchOptions($selOpt, $not, true); 
 	}
 }
 ?>

@@ -1,7 +1,7 @@
 <!doctype html>
 <html  {$html_attrs}>
 	<head>
-				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+						<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{$pagetitle}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -10,13 +10,9 @@
     <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
     <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
     <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
-    		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
-	{BEGIN rtlCSS}
-	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
-	{END rtlCSS}
-	{BEGIN styleCSSFiles}
-	<link REL="stylesheet" href="{$stylepath}" type="text/css">
-	{END styleCSSFiles}
+    		{BEGIN styleCSSFiles}
+<link REL="stylesheet" href="{$stylepath}" type="text/css">
+{END styleCSSFiles}
 			
 	</head>
 
@@ -50,7 +46,7 @@
 
 			<div class="clearfix " data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell data-itemid="expand_button" {$item_expand_button} data-topcell-item-type="expand_button" >
 				<span data-itemtype="expand_button" data-itemid="expand_button" {$item_expand_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Expand" class="btn btn-link   
+	<a type="button" title="{mlang_message EXPAND}" class="btn btn-link   
 	" href="#" >
 					<span class="glyphicon glyphicon-triangle-right"></span>
 										</a>
@@ -218,7 +214,7 @@
 							 
 				<span class="navbar-form  navbar-header" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="expand_menu_button" {$item_expand_menu_button} data-topcell-item-type="expand_menu_button" >
 				<span data-itemtype="expand_menu_button" data-itemid="expand_menu_button" {$item_expand_menu_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Show menu" class="btn-link   
+	<a type="button" title="{mlang_message SHOW_MENU}" class="btn-link   
 	 glyphicon glyphicon-menu-hamburger" href="#" >		
 				
 								</a>
@@ -227,7 +223,7 @@
 		 
 				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="collapse_button" {$item_collapse_button} data-topcell-item-type="collapse_button" >
 				<span data-itemtype="collapse_button" data-itemid="collapse_button" {$item_collapse_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Collapse" class="btn-link   
+	<a type="button" title="{mlang_message COLLAPSE}" class="btn-link   
 	 glyphicon glyphicon-triangle-left" href="#" >		
 				
 								</a>
@@ -241,14 +237,14 @@
 	<span class="dropdown ">
 		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
 			{BEGIN userbutton_icon}							<span class="glyphicon glyphicon-user"></span>
-						{END userbutton_icon}{$userbutton_image}			{$username}			<span class="caret"></span>
+						{END userbutton_icon}{$userbutton_image}			{$mlp_push}{$mlparam username var username}{$mltext %username%}{$mlp_pop}			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu">
 							{BEGIN userinfo_link}
 	<li data-itemtype="userinfo_link" data-itemid="userinfo_link" {$item_userinfo_link} data-pageid="{$pageid}" data-small >
 				<a  href="userinfo.php"  title="" >
 				
-		User Profile		
+		{mlang_message USERINFO}		
 		</a>
 	</li>
 {END userinfo_link}
@@ -256,7 +252,7 @@
 	<li data-itemtype="logout_link" data-itemid="logout_link" {$item_logout_link} data-pageid="{$pageid}" data-small >
 				<a  href="#" {$logoutlink_attrs}  title="" >
 				
-		Log out		
+		{mlang_message LOG_OUT}		
 		</a>
 	</li>
 {END logoutbutton}
@@ -264,7 +260,7 @@
 	<li data-itemtype="exit_adminarea_link" data-itemid="exit_adminarea_link" {$item_exit_adminarea_link} data-pageid="{$pageid}" data-small >
 				<a  href="#" {$exitaalink_attrs}  title="" >
 				
-		Exit Admin Area		
+		{mlang_message AA_EXIT_ADMINAREA}		
 		</a>
 	</li>
 {END exitadminarea_link}
@@ -272,7 +268,7 @@
 	<li data-itemtype="changepassword_link" data-itemid="changepassword_link" {$item_changepassword_link} data-pageid="{$pageid}" data-small >
 				<a  href="changepwd.php" {$changepwdlink_attrs} id="changePasswordButton{$id}"  title="" >
 				
-		Change password		
+		{mlang_message CHANGE_PASSWORD}		
 		</a>
 	</li>
 {END changepwd_link}
@@ -309,13 +305,13 @@
 		<span data-itemtype="members_save" data-itemid="members_save" {$item_members_save} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-primary   
 	" {$savebutton_attrs} >
-							Save			</a>
+							{mlang_message SAVE}			</a>
 </span>
 	 
 		<span data-itemtype="members_reset" data-itemid="members_reset" {$item_members_reset} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-default   
 	" {$resetbutton_attrs} >
-							Reset			</a>
+							{mlang_message RESET}			</a>
 </span>
 			{END firstAboveGridCell}	
 	</div>			 
@@ -328,15 +324,15 @@
 		<span data-itemtype="members_choose_columns" data-itemid="members_choose_columns" {$item_members_choose_columns} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-default   
 	" {$choosecolumnsbutton_attrs} >
-							Choose columns...			</a>
+							{mlang_message CHOOSE_COLUMNS}			</a>
 </span>
 	 
 		<span data-itemtype="members_displaying_filter" data-itemid="members_displaying_filter" {$item_members_displaying_filter} data-pageid="{$pageid}">
-Displaying	<span id="linkselectFilter" class="btn-group">
-		<span class="btn btn-link dropdown-toggle inline-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">all users</span>
+{mlang_message AA_MEMBERS_DISPLAYING}	<span id="linkselectFilter" class="btn-group">
+		<span class="btn btn-link dropdown-toggle inline-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{mlang_message AA_MEMBERS_DISPLAYING_ALL}</span>
 		<ul class="dropdown-menu">
-			<li data-value="all" ><a href="#">all users</a></li>
-			<li data-value="modified" ><a href="#">modified users</a></li>
+			<li data-value="all" ><a href="#">{mlang_message AA_MEMBERS_DISPLAYING_ALL}</a></li>
+			<li data-value="modified" ><a href="#">{mlang_message AA_MEMBERS_DISPLAYING_MODIFIED}</a></li>
 		</ul>
 	</span>
 </span>
@@ -364,7 +360,7 @@ Displaying	<span id="linkselectFilter" class="btn-group">
 		data-cellId="grid_hcell_source" data-pageid="{$pageid}"	>
 
  
-	<a class="rnr-orderlink" {$sourceuserheadersort_attrs} data-itemtype="members_source_label" data-itemid="members_source_label" {$item_members_source_label} data-pageid="{$pageid}">Source</a>
+	<span class="rnr-orderlink"><a {$sourceuserheadersort_attrs} data-itemtype="members_source_label" data-itemid="members_source_label" {$item_members_source_label} data-pageid="{$pageid}">{mlang_message AA_MEMBERS_SOURCE_LABEL}</a></span>
 
 	</th>
 	{END cellblock_grid_hcell_source}
@@ -379,7 +375,7 @@ Displaying	<span id="linkselectFilter" class="btn-group">
 		data-cellId="grid_hcell_username" data-pageid="{$pageid}"	>
 
  
-	<a class="rnr-orderlink" {$usernameheadersort_attrs} data-itemtype="members_username_label" data-itemid="members_username_label" {$item_members_username_label} data-pageid="{$pageid}">Username</a>
+	<span class="rnr-orderlink"><a {$usernameheadersort_attrs} data-itemtype="members_username_label" data-itemid="members_username_label" {$item_members_username_label} data-pageid="{$pageid}">{mlang_message USERNAME}</a></span>
 
 	</th>
 	{END cellblock_grid_hcell_username}
@@ -394,7 +390,7 @@ Displaying	<span id="linkselectFilter" class="btn-group">
 		data-cellId="grid_hcell_displayname" data-pageid="{$pageid}" {$displayuserheadertdsort_attrs}	>
 
  
-	<a class="rnr-orderlink" {$displayuserheadersort_attrs} data-itemtype="members_displayname_label" data-itemid="members_displayname_label" {$item_members_displayname_label} data-pageid="{$pageid}">Display name</a>
+	<span class="rnr-orderlink"><a {$displayuserheadersort_attrs} data-itemtype="members_displayname_label" data-itemid="members_displayname_label" {$item_members_displayname_label} data-pageid="{$pageid}">{mlang_message DISPLAY_NAME}</a></span>
 
 	</th>
 	{END cellblock_grid_hcell_displayname}
@@ -410,7 +406,7 @@ Displaying	<span id="linkselectFilter" class="btn-group">
 		data-cellId="grid_hcell_email" data-pageid="{$pageid}" {$emailuserheadertdsort_attrs}	>
 
  
-	<a class="rnr-orderlink" {$emailuserheadersort_attrs} data-itemtype="members_email_label" data-itemid="members_email_label" {$item_members_email_label} data-pageid="{$pageid}">Email</a>
+	<span class="rnr-orderlink"><a {$emailuserheadersort_attrs} data-itemtype="members_email_label" data-itemid="members_email_label" {$item_members_email_label} data-pageid="{$pageid}">{mlang_message EMAIL_ALREADY1}</a></span>
 
 	</th>
 	{END cellblock_grid_hcell_email}
@@ -426,7 +422,7 @@ Displaying	<span id="linkselectFilter" class="btn-group">
 		data-cellId="grid_hcell_groupname" data-pageid="{$pageid}" {$groupheadertdsort_attrs}	>
 
  
-	<a class="rnr-orderlink" {$groupheadersort_attrs}  data-itemtype="members_groupname_label" data-itemid="members_groupname_label" {$item_members_groupname_label} data-pageid="{$pageid}">{$groupname}</a>
+	<span class="rnr-orderlink"><a {$groupheadersort_attrs}  data-itemtype="members_groupname_label" data-itemid="members_groupname_label" {$item_members_groupname_label} data-pageid="{$pageid}">{$groupname}</a></span>
 
 	</th>
 	{END cellblock_grid_hcell_groupname}
@@ -446,7 +442,7 @@ Displaying	<span id="linkselectFilter" class="btn-group">
  
 	<span data-itemtype="members_source_filter" data-itemid="members_source_filter" {$item_members_source_filter} data-pageid="{$pageid}" >
 	<select class="form-control">
-		<option value="">All</option>
+		<option value="">{mlang_message ALL}</option>
 		{BEGIN user_sources}
 		<option value="{$code}">{$label}</option>
 		{END user_sources}
@@ -466,7 +462,7 @@ Displaying	<span id="linkselectFilter" class="btn-group">
 
  
 	<div data-itemtype="members_search" data-itemid="members_search" {$item_members_search} data-pageid="{$pageid}">
-	<input class="form-control" type=search id="adminMembersSearch"  placeholder="search">			
+	<input class="form-control" type=search id="adminMembersSearch"  placeholder="{mlang_message SEARCH_TIP}">			
 </div>
 
 	</th>
@@ -611,7 +607,7 @@ Displaying	<span id="linkselectFilter" class="btn-group">
 	
 ">
 		 
-		<span data-itemtype="text" data-itemid="text1" {$item_text1} data-pageid="{$pageid}" data-small > 
+		<span data-itemtype="text" data-itemid="text1" {$item_text1} data-pageid="{$pageid}" > 
 	<br>
 </br></span>
 		</div>					</div>
@@ -624,7 +620,7 @@ Displaying	<span id="linkselectFilter" class="btn-group">
 	
 ">
 		 
-		<span data-itemtype="text" data-itemid="text" {$item_text} data-pageid="{$pageid}" data-small > 
+		<span data-itemtype="text" data-itemid="text" {$item_text} data-pageid="{$pageid}" > 
 	<html>
 
 <head>

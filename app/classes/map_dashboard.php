@@ -60,7 +60,7 @@ class MapPage_Dashboard extends ListPage_Dashboard
 
 		if( !$this->gridBased )
 			$this->googleMapCfg['mapsData'][ $mapId ]['zoom'] = "auto";
-		else if( isset($this->dashElementData['zoom']) )
+		else if( isset($this->dashElementData['zoom']) && strlen($this->dashElementData['zoom']) )
 			$this->googleMapCfg['mapsData'][ $mapId ]['zoom'] = $this->dashElementData['zoom'];
 
 		if( isset($this->dashElementData['APIkey']) )
@@ -81,7 +81,7 @@ class MapPage_Dashboard extends ListPage_Dashboard
 		$data = $this->beforeProccessRow();
 		$tKeys = $this->pSet->getTableKeys();
 
-		$recNum = $this->hasTableDashGridElement() || strlen($this->masterTable) ? $this->pageSize : GetGlobalData( "mapMarkerCount" );
+		$recNum = $this->hasTableDashGridElement() || strlen($this->masterTable) ? $this->pageSize : ProjectSettings::getProjectValue( 'mapMarkerCount' );
 
 		if( !$this->mapRefresh && ( $this->dashElementData['clustering'] || $this->dashElementData['heatMap'] ) )
 		{
@@ -154,7 +154,7 @@ class MapPage_Dashboard extends ListPage_Dashboard
 		$response['id'] = $this->id;
 
 		$response["additionalJS"] = $this->grabAllJsFiles();
-		$response['headerCont'] = '<span class="rnr-dbebrick">' . $this->getPageTitle($this->pageName, GoodFieldName($this->tName)) . "</span>";
+		$response['headerCont'] = '<span class="rnr-dbebrick">' . $this->getPageTitle($this->pageName, $this->tName) . "</span>";
 		$icon = getIconHTML( $this->dashElementData["item"]["icon"] );
 		if( $icon )
 			$response["iconHtml"] = $icon;

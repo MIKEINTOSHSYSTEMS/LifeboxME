@@ -18,12 +18,12 @@ class ViewCheckboxField extends ViewControl
 
 	public function showDBValue(&$data, $keylink, $html = true )
 	{		
-		$result = "<img src=\"";
+		$result = '<img class="r-checkbox-image" src="';
 		$imgSrc = "images/check_";
 			
 		$imgSrc.= $this->getTrueCondition($data) ? "yes" : "no";
 
-		$result.= GetRootPathForResources($imgSrc.".gif")."\" border=0";
+		$result.= $imgSrc.".gif\" border=0";
 		if(isEnableSection508())
 			$result .= " alt=\" \"";
 		$result .=  ">";

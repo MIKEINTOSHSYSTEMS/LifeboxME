@@ -52,9 +52,7 @@ require_once getabspath('classes/filehandler.php');
 
 $fileHandler = new RunnerFileHandler( $field, $pSet, $formStamp );
 $filename = postvalue("file") != "" ? postvalue("file") : postvalue("filename");
-
 $useHttpRange = !postvalue('norange');
-
 $keys = array();
 if( !$formStamp ) {
 	//	ignore keys when formStamp is specified

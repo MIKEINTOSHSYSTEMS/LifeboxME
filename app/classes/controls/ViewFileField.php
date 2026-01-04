@@ -13,7 +13,7 @@ class ViewFileField extends ViewControl
 			return "\"\"";
 
 		$filesList = explode(", ", $textVal);
-		return my_json_encode( array(
+		return runner_json_encode( array(
 			"stack" => $filesList
 		) );
 	}
@@ -72,7 +72,7 @@ class ViewFileField extends ViewControl
 			return array( $fileData );
 		}
 
-		$files = my_json_decode( $fieldValue );
+		$files = runner_json_decode( $fieldValue );
 		
 		if( !is_array( $files ) || !$files && $fieldValue != "[]" ) {
 			// filename in the field as is

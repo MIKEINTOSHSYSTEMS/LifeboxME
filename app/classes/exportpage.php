@@ -23,21 +23,10 @@ class ExportPage extends RunnerPage
 	{
 		parent::__construct( $params );
 
-		if( $this->getLayoutVersion() === PD_BS_LAYOUT ) 
-		{
-			$this->headerForms = array( "top" );
-			$this->footerForms = array( "footer" );
-			$this->bodyForms = array( "grid" );
-		} 
-		else 
-		{		
-			$this->formBricks["header"] = "exportheader";
-			$this->formBricks["footer"] = "exportbuttons";
-			$this->assignFormFooterAndHeaderBricks( true );
-		}
+		$this->headerForms = array( "top" );
+		$this->footerForms = array( "footer" );
+		$this->bodyForms = array( "grid" );
 		
-		if( $this->pSet->chekcExportDelimiterSelection() )
-			$this->jsSettings["tableSettings"][ $this->tName ]["csvDelimiter"] = $this->pSet->getExportDelimiter();
 
 		$this->textFormattingType = $this->pSet->getExportTxtFormattingType();
 
@@ -52,8 +41,6 @@ class ExportPage extends RunnerPage
 		if( !$this->searchClauseObj )
 			$this->searchClauseObj = $this->getSearchObject();
 			
-		if( $this->selection )
-			$this->jsSettings["tableSettings"][ $this->tName ]["selection"] = $this->getSelection();			
 	}
 
 	
@@ -140,7 +127,7 @@ class ExportPage extends RunnerPage
 			$options[] = '<option value="'.runner_htmlspecialchars( $field ).'" selected="selected">'.runner_htmlspecialchars( $this->pSet->label( $field ) ).'</option>';
 		}
 
-		return '<select name="exportFields" multiple style="width: 100%;" data-placeholder="'."Please select".'" id="exportFields'. $this->id .'">'. implode( "", $options ) .'</select>';
+		return '<select name="exportFields" multiple style="width: 100%;" data-placeholder="'.mlang_message('PLEASE_SELECT').'" id="exportFields'. $this->id .'">'. implode( "", $options ) .'</select>';
 	}
 	
 	/**
@@ -192,7 +179,8 @@ class ExportPage extends RunnerPage
 				$this->dataSource->overrideOrder( $dc, $order );
 			}
 		}
-		runner_set_page_timeout(300);
+		//	let users do that themselves
+		//	runner_set_page_timeout(300);
 
 		$rs = $this->dataSource->getList( $dc );
 		if( !$rs ) {
@@ -327,7 +315,9 @@ class ExportPage extends RunnerPage
 
 		header("Content-Type: application/csv");
 		header("Content-Disposition: attachment;Filename=".GetTableURL($this->tName).".csv");
-		printBOM();
+		if( ProjectSettings::getProjectValue( 'charset' ) === 'utf-8' ) {
+			printBOM();
+		}
 
 		$this->viewControls->setForExportVar( "csv" );
 
@@ -338,7 +328,6 @@ class ExportPage extends RunnerPage
 		foreach( $this->selectedFields as $field )
 		{
 			$headerParts[] = '"'.str_replace( '"', '""', $field ).'"';
-		// 	$headerParts[] = '"'.str_replace( '"', '""', GetFieldLabel( GoodFieldName( $this->tName ), GoodFieldName( $field ) ) ).'"';			
 		}
 		echo implode( $delimiter, $headerParts );
 		echo "\r\n";
@@ -483,11 +472,11 @@ class ExportPage extends RunnerPage
 				if( strlen( $data["totalsType"] ) )
 				{
 					if( $data["totalsType"] == "COUNT" )
-						echo "Count".": ";
+						echo mlang_message('COUNT').": ";
 					elseif( $data["totalsType"] == "TOTAL" )
-						echo "Total".": ";
+						echo mlang_message('TOTAL').": ";
 					elseif( $data["totalsType"] == "AVERAGE" )
-						echo "Average".": ";
+						echo mlang_message('AVERAGE').": ";
 
 					echo runner_htmlspecialchars( GetTotals($data["fName"],
 						$totals[ $data["fName"] ]["value"],
@@ -512,7 +501,7 @@ class ExportPage extends RunnerPage
 		{
 			$fType = $this->pSet->getFieldType( $field );
 			if( IsBinaryType( $fType ) )
-				$values[ $field ] = "LONG BINARY DATA - CANNOT BE DISPLAYED";
+				$values[ $field ] = mlang_message('LONG_BINARY');
 			else
 				$values[ $field ] = $this->getFormattedFieldValue( $field, $row );
 		}
@@ -602,4 +591,15 @@ class ExportPage extends RunnerPage
 	public function getSecurityCondition() {
 		return Security::SelectCondition( "P", $this->pSet );
 	}
+
+	protected function buildJsTableSettings( $table, $pSet ) {
+		$settings = parent::buildJsTableSettings( $table, $pSet );
+		if( $this->pSet->chekcExportDelimiterSelection() )
+			$settings["csvDelimiter"] = $this->pSet->getExportDelimiter();
+		if( $this->selection )
+			$settings["selection"] = $this->getSelection();			
+
+		return $settings;
+	}
+
 }

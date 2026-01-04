@@ -1,11 +1,16 @@
 <?php 
-
 @ini_set("display_errors","1");
-@ini_set("display_startup_errors","1");
+
+$requestTable = 'public.regions';
+$strTableName = 'public.regions';
+$requestPage = "edit";
+$keyFields = array( 
+	'region_id' 
+);
+
 
 require_once("include/dbcommon.php");
 require_once("classes/searchclause.php");
-require_once("include/regions_variables.php");
 require_once('include/xtempl.php');
 require_once('classes/editpage.php');
 
@@ -18,9 +23,6 @@ if( Security::hasLogin() ) {
 
 EditPage::handleBrokenRequest();
 
-//	render all necessary layouts
-
-
 // parse control parameters
 $pageMode = EditPage::readEditModeFromRequest();
 
@@ -32,7 +34,9 @@ $id = intval($id) == 0 ? 1 : $id;
 
 // $keys could not be set properly if editid params were no passed
 $keys = array();
-$keys["region_id"] = postvalue("editid1");
+foreach( $keyFields as $idx => $f ) {
+	$keys[ $f ]	= postvalue( 'editid' . ($idx + 1) );
+}
 
 //array of params for classes
 $params = array();
@@ -45,12 +49,10 @@ $params["pageName"] = postvalue("page");
 $params["tName"] = $strTableName;
 $params["action"] = postvalue("a");
 $params["selectedFields"] = postvalue("fields");
-		
-;
-$params["captchaName"] = "captcha_1209xre";
-$params["captchaValue"] = postvalue("value_captcha_1209xre_" . $id);
+$params["captchaName"] = CaptchaId;
+$params["captchaValue"] = postvalue( 'value_'. CaptchaId . '_' . $id );
 $params["selection"] = postvalue("selection");
-$params["rowIds"] = my_json_decode( postvalue("rowIds") );
+$params["rowIds"] = runner_json_decode( postvalue("rowIds") );
 
 $params["masterTable"] = postvalue("mastertable");
 if( $params["masterTable"] )
@@ -78,7 +80,7 @@ if( $pageMode == EDIT_DASHBOARD )
 	if(	postvalue("mapRefresh") )
 	{
 		$params["mapRefresh"] = true;
-		$params["vpCoordinates"] = my_json_decode( postvalue("vpCoordinates") );
+		$params["vpCoordinates"] = runner_json_decode( postvalue("vpCoordinates") );
 	}	
 }
 
@@ -89,9 +91,25 @@ if(( $pageMode == EDIT_POPUP || $pageMode == EDIT_INLINE ) && postvalue("dashTNa
 	$params["dashPage"] = postvalue("dashPage");
 }
 
+if( $pageMode == EDIT_ONTHEFLY ) {
+	//table where lookup is set
+	$params["lookupTable"] = postvalue("table");
+	//field with lookup is set
+	$params["lookupField"] = postvalue("field");
+	 //the ptype od the page where lookup is set
+	$params["lookupPageType"] = postvalue("pageType");
+	
+	if( postvalue('parentsExist') ) {
+		//the parent controls values data
+		$params["parentCtrlsData"] = runner_json_decode( postvalue("parentCtrlsData") );
+	}
+}
+
+
 $params["forSpreadsheetGrid"] = postvalue("spreadsheetGrid");
 $params["hostPageName"] = postvalue("hostPageName");
 $params["listPage"] = postvalue("listPage");
+$params["gantt"] = postvalue("gantt");
 
 $pageObject = EditPage::EditPageFactory($params);
 

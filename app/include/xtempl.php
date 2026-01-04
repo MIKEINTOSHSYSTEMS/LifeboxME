@@ -16,56 +16,6 @@ class XTempl extends XTempl_Base
 		exit();
 	}
 	
-	protected function assign_headers() 
-	{
-		//check if headers are already assigned
-		if( isset( $this->xt_vars['header'] ) )
-			return;
-
-		if ( !$this->mobileTemplateMode() )
-		{
-			xtempl_include_header($this,"header","include/header.php");
-			xtempl_include_header($this,"footer","include/footer.php");
-		}
-		else
-		{
-			xtempl_include_header($this,"header","include/mheader.php");
-			xtempl_include_header($this,"footer","include/mfooter.php");
-		}
-	}
-	
-	
-
-	function xt_doevent($params)
-	{
-		if (isset($this->xt_events[@$params["custom1"]]))
-		{
-			$eventArr = $this->xt_events[@$params["custom1"]];
-			
-			if(isset($eventArr["method"]))
-			{
-				$params=array();
-				if(isset($eventArr["params"]))
-					$params=$eventArr["params"];
-				$method=$eventArr["method"];
-				$eventArr["object"]->$method($params);
-				return;
-			}
-		}
-		global $strTableName, $globalEvents;
-		if($this->eventsObject)
-			$eventObj = &$this->eventsObject;
-		else
-			$eventObj = &$globalEvents;
-		if(!$eventObj)
-			return;
-		$eventName = $params["custom1"];
-		if(!$eventObj->exists($eventName))
-			return;
-		$funcName = "event_".GoodFieldname( $eventName );
-		$eventObj->$funcName($params);
-	}
-
 
 	function call_func($var)
 	{

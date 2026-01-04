@@ -249,8 +249,7 @@ function runner_http_request( $url, $body = "", $method = "GET", $headers = arra
  */
 function runner_mail( $params )
 {
-	if( !GetGlobalData("useBuiltInMailer", false) )
-	{
+	if( !ProjectSettings::getSecurityValue( 'emailSettings', 'useBuiltInMailer' ) ) {
 		include_once(getabspath('libs/phpmailer/class.phpmailer.php'));
 		include_once(getabspath('libs/phpmailer/class.smtp.php'));
 		return runner_mail_smtp($params);
@@ -258,7 +257,7 @@ function runner_mail( $params )
 
 	$from = isset($params['from']) ? $params['from'] : "";
 	if( !$from )
-		$from = GetGlobalData("strFromEmail", "");
+		$from = ProjectSettings::getSecurityValue( 'emailSettings', 'fromEmail' );
 
 	$to = isset($params['to']) ? $params['to'] : "";
 	$body = isset($params['body']) ? $params['body'] : "";
@@ -422,6 +421,11 @@ function myfile_exists( $filename )
  */
 function try_create_new_file($filename)
 {
+	if( file_exists($filename) ) {
+		//	this check should not be required, 
+		//	but helps with the PHP or Linux bug where fopen creates a new file and returns false
+		return false;
+	}
 	$file = @fopen($filename,"x");
 	if($file)
 	{
@@ -995,558 +999,7 @@ function postvalue($name)
 	return $ret;
 }
 
-function getCustomMapIcon($field, $table, $data)
-{
-	global $strTableName;
-	$icon = "";
-	if(!$table)
-		$table = $strTableName;
 
-
-	return $icon;
-}
-
-function getDashMapCustomIcon( $eventObj, $funcName, $data )
-{
-	$icon = "";
-	$eventObj->$funcName( $icon, $data );
-	return $icon;
-}
-
-
-/**
- * return custom expression
- * @intellisense
- */
-function CustomExpression($value, $data, $field, $ptype, $table="")
-{
-	global $strTableName;
-	if(!$table)
-		$table = $strTableName;
-	return $value;
-}
-
-
-/**
- * return custom expression for file
- * @intellisense
- */
-function fileCustomExpression($file, $data, $field, $ptype, $table )
-{
-	$value = "";
-	return $value;
-}
-
-
-/**
- * return Lookup Wizard Where expression
- * @intellisense
- */
-function GetLWWhere($field, $ptype, $table = "")
-{
-	global $strTableName;
-	if(!$table)
-		$table = $strTableName;
-	return "";
-}
-
-/**
- * @intellisense
- */
-function GetDefaultValue($field, $ptype, $table="")
-{
-	global $strTableName;
-	if(!$table)
-		$table=$strTableName;
-				if($table=="public.antibiotics" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.case_antibiotics" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.clean_cut_implementations" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.countries" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.device_distributions" && $field=="distribution_year")
-	{
-		return strftime("%Y");
-	}
-				if($table=="public.device_distributions" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.diagnoses" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.facilities" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.follow_ups" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.languages" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.lifebox_staff" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.partners" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.procedures" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.regions" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.surgical_cases" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.trainers" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.training_courses" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.training_languages" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.training_leads" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.training_partners" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.training_sessions" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.training_trainers" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.ward_antibiotics" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.ward_rounds" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.programs" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.training_approaches" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.training_types" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.participant_role" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.sex" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.training_participants" && $field=="training_date")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.training_participants" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.venues" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.training_attendance" && $field=="attendance_date")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.training_attendance" && $field=="recorded_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.training_participation" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.devices" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.device_distribution_log" && $field=="performed_by")
-	{
-		return $_SESSION["UserID"];
-	}
-				if($table=="public.device_distribution_log" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.lifeboxme_dhis2_analytics_settings" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.smtp" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_annual_plan_tracker" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_beginnings_fund" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_communications" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_cri" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_dashboard_summary" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_development" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_elma" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_governance" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_kpis_on_track" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_operations" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_programs" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_sample_workflow" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_status" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_strategic_areas" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_all_activities_view" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_finance" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_hr" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_cathedral" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_izumi" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_st" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_whi" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbpmi_data_elements" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbpmi_datasets" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbpmi_indicator_actuals" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbpmi_indicator_targets" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbpmi_indicators" && $field=="created_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbpmi_data_values" && $field=="created")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-	return "";
-}
-
-/**
- * @intellisense
- */
-function GetAutoUpdateValue($field, $ptype, $table="")
-{
-	global $strTableName;
-	if(!$table)
-		$table=$strTableName;
-				if($table=="public.clean_cut_implementations" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.countries" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.device_distributions" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.facilities" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.follow_ups" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.lifebox_staff" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.partners" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.regions" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.surgical_cases" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.trainers" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.training_courses" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.training_sessions" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.ward_rounds" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.programs" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.training_approaches" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.training_types" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.participant_role" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.sex" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.training_participants" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.venues" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.devices" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.lifeboxme_dhis2_analytics_settings" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d");
-	}
-				if($table=="public.smtp" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_annual_plan_tracker" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_beginnings_fund" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_communications" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_cri" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_dashboard_summary" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_development" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_elma" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_governance" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_kpis_on_track" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_operations" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_programs" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_sample_workflow" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_status" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_strategic_areas" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_all_activities_view" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_finance" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_hr" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_cathedral" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_izumi" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_st" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbapt_whi" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbpmi_data_elements" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbpmi_datasets" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbpmi_indicator_actuals" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbpmi_indicator_targets" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbpmi_indicators" && $field=="updated_at")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-				if($table=="public.lbpmi_data_values" && $field=="last_updated")
-	{
-		return strftime("%Y-%m-%d %H:%M:%S");
-	}
-	return "";
-}
-
-/**
- * @intellisense
- */
-function GetUploadFolderExpression($field, $file, $table )
-{
-	return "";
-}
 
 /**
  * @intellisense
@@ -1563,10 +1016,8 @@ function mdeleteIndex($i)
  * @intellisense
  * @return array
  */
-function parse_backtrace($errfFile, $errLine)
+function parse_backtrace($errfFile, $errLine, $backtrace )
 {
-	// get backtrace array
-	$backtrace = debug_backtrace();
 
 	// delete calls to error handler functions
 	$skipFunctions = array('parse_backtrace', 'error_handler', 'runner_error_handler', 'trigger_error', 'extract_error_info');
@@ -1646,14 +1097,35 @@ function parse_backtrace($errfFile, $errLine)
 	return $funCallsArray;
 }
 
+function runner_handle_exception( $e ) {
+	if ( !ProjectSettings::getProjectValue( 'detailedError' ) ) {
+		echo Labels::multilangString( ProjectSettings::getProjectValue( 'customErrorMsg' ) );
+		exit(0);
+	}
+	$errinfo = extract_error_info( $e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTrace() );
+	runner_show_error($errinfo);
+}
+
+function runner_handle_shutdown() {
+	$error = error_get_last();
+	if( !$error || $error['type'] !== E_ERROR ) {
+		return;
+	}
+	if ( !ProjectSettings::getProjectValue( 'detailedError' ) ) {
+		echo Labels::multilangString( ProjectSettings::getProjectValue( 'customErrorMsg' ) );
+		exit(0);
+	}
+	$errinfo = extract_error_info( $error['type'], $error['message'], $error['file'], $error['line'], debug_backtrace() );
+	runner_show_error($errinfo);
+}
+
+
 /**
  * display error message
  * @intellisense
  */
 function runner_error_handler($errno, $errstr, $errfile, $errline)
 {
-	global $globalSettings;
-
 	if ($errno==2048 || $errno == 8 || $errno == 2 || $errno == 8192)
 		return 0;
 
@@ -1663,13 +1135,13 @@ function runner_error_handler($errno, $errstr, $errfile, $errline)
 	if(strpos($errstr,"fopen(")===0)
 		return 0;
 
-	if ( !$globalSettings["showDetailedError"] )
+	if ( !ProjectSettings::getProjectValue( 'detailedError' ) )
 	{
-		echo $globalSettings["customErrorMessage"];
+		echo Labels::multilangString( ProjectSettings::getProjectValue( 'customErrorMsg' ) );
 		exit(0);
 	}
 
-	$errinfo = extract_error_info($errno, $errstr, $errfile, $errline);
+	$errinfo = extract_error_info($errno, $errstr, $errfile, $errline, debug_backtrace() );
 
 	runner_show_error($errinfo);
 }
@@ -1702,7 +1174,7 @@ function runner_error_handler($errno, $errstr, $errfile, $errline)
   )
  * @intellisense
  */
-function extract_error_info($errno, $errstr, $errfile, $errline)
+function extract_error_info($errno, $errstr, $errfile, $errline, $backtrace )
 {
 	global $strLastSQL;
 
@@ -1721,7 +1193,7 @@ function extract_error_info($errno, $errstr, $errfile, $errline)
 
 	$errinfo['sqlStr'] = isset($strLastSQL) ? $strLastSQL : '';
 
-	$errinfo['debugRows'] = parse_backtrace($errfile, $errline);
+	$errinfo['debugRows'] = parse_backtrace($errfile, $errline, $backtrace );
 	return $errinfo;
 }
 
@@ -1969,155 +1441,131 @@ function parse_addr_list($to)
  */
 function runner_mail_smtp( $params )
 {
-	global $dDebug;
-	$mail = new PHPMailer( true );
-	$mail->IsSMTP(); // telling the class to use SMTP
 
-	if( $dDebug ) {
-		// debug logs will be printed using php 'echo' function
-		$mail->SMTPDebug = SMTP::DEBUG_LOWLEVEL;
-		$mail->Debugoutput = 'html';
-	}
+	$smtpUser = isset( $params['username'] ) 
+		? $params['username']
+		: ProjectSettings::getSecurityValue( 'emailSettings', 'SMTPUser' );
 
-	$useCustomSMTP = GetGlobalData("useCustomSMTPSettings", false);
-	$SMTPUser = GetGlobalData("strSMTPUser", "");
+	$smtpPassword = isset( $params['password'] ) 
+		? $params['password']
+		: ProjectSettings::getSecurityValue( 'emailSettings', 'SMTPPassword' );
 
-	if( $useCustomSMTP && $SMTPUser != "" || isset( $params['username'] ) )
-	{
-		$mail->SMTPAuth = true;  // enable SMTP authentication
-		$mail->Username = isset( $params['username'] ) ? $params['username'] : $SMTPUser;  // SMTP username
-		$mail->Password = isset( $params['password'] ) ? $params['password'] : GetGlobalData("strSMTPPassword", "");  // SMTP password
-	}
-	else
-	{
-		$mail->SMTPAuth = false;
-	}
+	$smtpServer = isset( $params['host'] ) 
+		? $params['host']
+		: ProjectSettings::getSecurityValue( 'emailSettings', 'SMTPServer' );
 
-	$SMTPServer = GetGlobalData("strSMTPServer", "");
-	if( $useCustomSMTP && $SMTPServer != "" || isset( $params['host'] ) )
-	{
-		$mail->Host = isset( $params['host'] ) ? $params['host'] : $SMTPServer;  // sets SMTP server
-	}
-	else if( ini_get('SMTP') != '' )
-	{
-		$mail->Host = ini_get('SMTP');
-	}
+	$smtpPort = isset( $params['port'] ) 
+		? $params['port']
+		: ProjectSettings::getSecurityValue( 'emailSettings', 'SMTPPort' );
 
-	if( $mail->Host == "" ) {
+	$smtpSecurity = isset( $params['securityProtocol'] ) 
+		? $params['securityProtocol']
+		: ProjectSettings::getSecurityValue( 'emailSettings', 'securityProtocol' );
+	
+	$smtpFrom = isset( $params['from'] ) 
+		? $params['from']
+		: ProjectSettings::getSecurityValue( 'emailSettings', 'fromEmail' );
+
+	$fromName = isset( $params['fromName'] ) 
+		? $params['fromName']
+		: '';
+
+	if( !$smtpServer ) {
 		return array(
 			"mailed" => false,
 			"success" => false,
 			"message" => "Email server connection is not specified. Setup the connection on the Miscellaneous - Email settings... dialog."
 		);
-
 	}
+	
+	global $dDebug;
 
+	try {
+		$mail = new PHPMailer( true );
+		$mail->IsSMTP(); // telling the class to use SMTP
 
-	$SMTPPort = GetGlobalData("strSMTPPort", "");
-	if( $useCustomSMTP && $SMTPPort != "" || isset( $params['port'] ) )
-	{
-		$mail->Port = isset( $params['port'] ) ? $params['port'] + 0 : $SMTPPort + 0;  // set the SMTP port
-	}
-	else if( ini_get('smtp_port') != '' )
-	{
-		 $mail->Port = ini_get('smtp_port') + 0;
-	}
-
-	$mail->SMTPSecure = GetGlobalData("SMTPSecure", "");
-
-	$mail->Subject = $params['subject'];
-
-	$from = isset( $params['from'] ) ? $params['from'] : "";
-	if( !$from )
-		$from = GetGlobalData("strFromEmail", "");
-
-	try
-	{
-		$mail->SetFrom( $from, isset( $params['fromName'] ) ? $params['fromName'] : "" );
-	}
-	catch( phpmailerException $e )
-	{
-		return array( "mailed" => false, "message"=>  $e->getMessage()  );
-	}
-
-	$to = isset( $params['to'] ) ? $params['to'] : "";
-	if( $to != "" )
-	{
-		$arr_to = parse_addr_list( $to );
-		foreach( $arr_to as $email )
-		{
-			$mail->AddAddress( $email['addr'], $email['name'] );
+		if( $dDebug ) {
+			// debug logs will be printed using php 'echo' function
+			$mail->SMTPDebug = SMTP::DEBUG_LOWLEVEL;
+			$mail->Debugoutput = 'html';
 		}
-	}
 
-	// replyTo
-	if ( isset( $params['replyTo'] ) )
-		$mail->AddReplyTo( $params['replyTo'], "" );
 
-	$body = isset( $params['body'] ) ? $params['body'] : "";
-
-	// body, htmlbody
-	if ( isset( $params['htmlbody'] ) )
-	{
-		$mail->AltBody = $body;
-		$mail->MsgHTML( $params['htmlbody'] );
-	}
-	else
-	{
-		$mail->Body = $body;
-	}
-
-	// charset
-	if ( isset( $params['charset'] ) )
-		$mail->CharSet = $params['charset'];
-	else
-		$mail->CharSet = "utf-8";
-
-	// priority
-	if( isset( $params['priority'] ) )
-		$mail->Priority = $params['priority'];
-
-	// CC
-	if( isset( $params['cc'] ) )
-	{
-		$arr_cc = parse_addr_list( $params['cc'] );
-		foreach( $arr_cc as $cc )
-		{
-			$mail->AddCC( $cc['addr'], $cc['name'] );
+		if( $smtpUser != '' ) {
+			$mail->SMTPAuth = true;  // enable SMTP authentication
+			$mail->Username = $smtpUser;
+			$mail->Password = $smtpPassword;
+		} else {
+			$mail->SMTPAuth = false;
 		}
-	}
 
-	// BCC
-	if( isset( $params['bcc'] ) )
-	{
-		$arr_bcc = parse_addr_list( $params['bcc'] );
-		foreach( $arr_bcc as $bcc )
-		{
-			$mail->AddBCC( $bcc['addr'], $bcc['name'] );
+		$mail->Host = $smtpServer;
+		$mail->Port = $smtpPort;
+
+		if( $smtpSecurity == 1 )
+			$mail->SMTPSecure = 'ssl';
+		else if( $smtpSecurity == 2 )
+			$mail->SMTPSecure = 'tls';
+
+		$mail->Subject = $params['subject'];
+
+		if( $params["to"] ) {
+			foreach( parse_addr_list( $params["to"] ) as $to ) {
+				$mail->AddAddress( $to['addr'], $to['name'] );
+			}
 		}
-	}
 
-	if( isset( $params['attachments'] ) && is_array( $params['attachments'] ) )
-	{
-		foreach ( $params['attachments'] as $attachment )
-		{
-			$mail->AddAttachment( $attachment['path'],
-				isset( $attachment['name'] ) ? $attachment['name'] : '',
-				isset( $attachment["encoding"] ) ? $attachment["encoding"] : 'base64',
-				isset( $attachment["type"] ) ? $attachment["type"] : 'application/octet-stream' );
+		if ( isset( $params['replyTo'] ) ) {
+			$mail->AddReplyTo( $params['replyTo'], "" );
 		}
-	}
 
-	try
-	{
+		$mail->SetFrom( $smtpFrom, $fromName );
+
+		$body = isset( $params['body'] ) ? $params['body'] : "";
+		if ( isset( $params['htmlbody'] ) ) {
+			$mail->AltBody = $body;
+			$mail->MsgHTML( $params['htmlbody'] );
+		} else {
+			$mail->Body = $body;
+		}
+
+		$mail->CharSet = isset( $params['charset'] )
+			? $params['charset']
+			: 'utf-8';
+
+		if( isset( $params['priority'] ) ) {
+			$mail->Priority = $params['priority'];
+		}
+
+		if( isset( $params['cc'] ) )
+		{
+			foreach( parse_addr_list( $params['cc'] ) as $cc ) {
+				$mail->AddCC( $cc['addr'], $cc['name'] );
+			}
+		}
+
+		if( isset( $params['bcc'] ) ) {
+			foreach( parse_addr_list( $params['bcc'] ) as $bcc ) {
+				$mail->AddBCC( $bcc['addr'], $bcc['name'] );
+			}
+		}
+
+		if( isset( $params['attachments'] ) && is_array( $params['attachments'] ) )
+		{
+			foreach ( $params['attachments'] as $attachment ) {
+				$mail->AddAttachment( $attachment['path'],
+					isset( $attachment['name'] ) ? $attachment['name'] : '',
+					isset( $attachment["encoding"] ) ? $attachment["encoding"] : 'base64',
+					isset( $attachment["type"] ) ? $attachment["type"] : 'application/octet-stream' );
+			}
+		}
 		$res = $mail->Send();
-	}
-	catch( phpmailerException $e )
-	{
+		return array( "success" => $res, "mailed" => $res, "message"=> $mail->ErrorInfo );
+	
+	} catch( phpmailerException $e ) {
 		return array( "success" => false, "mailed" => false, "message"=> $e->getMessage() );
 	}
 
-	return array( "success" => $res, "mailed" => $res, "message"=> $mail->ErrorInfo );
 }
 
 /**
@@ -2178,14 +1626,39 @@ function SendContentLength($len)
  */
 function DecodeUTF8($str)
 {
-	return $str;
+	global $useUTF8;
+	if( $useUTF8 ) {
+		return utf8_decode($str);
+	} else {
+		return $str;
+	}
 }
 /**
  * @intellisense
  */
 function escapeEntities($str)
 {
-	return $str;
+	global $useUTF8;
+	if( $useUTF8 ) {
+		return $str;
+	}
+
+	$out="";
+	$len=strlen($str);
+	$ind=0;
+	for($i=0;$i<$len;$i++)
+	{
+		if(ord(substr($str,$i,1))>=128)
+		{
+			if($ind<$i)
+				$out.=substr($str,$ind,$i-$ind);
+			$out.="&#".ord(substr($str,$i,1)).";";
+			$ind=$i+1;
+		}
+	}
+	if($ind<$len)
+		$out.=substr($str,$ind);
+	return $out;
 }
 
 /**
@@ -2196,12 +1669,6 @@ function empty_error_handler()
 	return true;
 }
 
-/**
- * @intellisense
- */
-function n_printDebug()
-{
-}
 
 /**
  * @param Array arr
@@ -2439,7 +1906,7 @@ function imageCreateThumb($new_width,$new_height,$img_width,$img_height,$file_pa
 					$new_height,
 					$img_width,
 					$img_height
-				) && imagegif($new_img, $new_file_path, $image_quality);
+				) && imagegif($new_img, $new_file_path);
 			break;
 		case "image/png":
 		case "image/x-png":
@@ -2592,6 +2059,8 @@ function makeSurePathExists($abspath)
 
 function createEventClass( $table )
 {
+	$filename = "usercode/events_" . GetTableUrl( $table ) . ".php";
+	require_once( getabspath( $filename ) );
 	$className = "eventclass_" . GetTableUrl( $table );
 	return new $className();
 }
@@ -2623,54 +2092,6 @@ function getQueryString()
 	return getenv('QUERY_STRING') ? urldecode(getenv('QUERY_STRING')) : $_SERVER["QUERY_STRING"];
 }
 
-/**
- * GetTableLink
- * Form proper link for table. Really need for ASP.Net MVC
- * @param {string} Table name
- * @param {string} Page type
- * @param (string) GET query string
- */
-function GetTableLink($table, $pageType = "", $getParams = "")
-{
-	$url = $table;
-	if($pageType != "")
-	{
-		$url .= "_".$pageType;
-	}
-	$url .= ".php";
-	if($getParams != "")
-	{
-		$url .= "?".$getParams;
-	}
-
-	return $url;
-}
-
-/**
- * GetLocalLink
- * Only needed in .NET
- *
- * @param {string} Table name
- * @param {string} Page type
- * @param (string) GET query string
- */
-function GetLocalLink($table, $pageType = "", $getParams = "")
-{
-	//	used in ASP.NET only
-	return GetTableLink( $table, $pageType, $getParams );
-}
-
-
-function GetTemplateName($table, $templateName)
-{
-	if( $templateName == "" )
-		return GLOBAL_PAGES_SHORT . "_" . $table . ".htm";
-
-	if( $table == "" ) {
-		return $templateName . ".htm";
-	}
-	return $table."_".$templateName . ".htm";
-}
 
 function HeaderRedirect($table, $pageType = "", $getParams = "")
 {
@@ -2748,13 +2169,6 @@ function GetPageURLWithGetParams()
 	return $pagename;
 }
 
-/*
- * Dummy for ASP.Net MVC
- */
-function GetWebRootPath()
-{
-	return "";
-}
 
 function GetCaptchaPath()
 {
@@ -2768,7 +2182,7 @@ function GetCaptchaSwfPath()
 
 
 /**
- * This function is used for my_json_encode() function.
+ * This function is used for runner_json_encode) function.
  * It will emulate the JSON_UNESCAPED_UNICODE option for json_encode() function.
  */
 function json_mb_encode_numericentity(&$item, $key)
@@ -3021,22 +2435,12 @@ function array_merge_assoc($arr1, $arr2)
 	return array_merge($arr1, $arr2);
 }
 
-function getIntervalLimitsExpressions($table, $field, $idx, $isLowerBound)
-{
-	return getIntervalLimitsExprs($table, $field, $idx, $isLowerBound);
-}
-
 /**
  * @return Boolean
  */
 function useMySQLiLib()
 {
-	global $useOldMysqlLib;
-
-	if( !$useOldMysqlLib )
-		return extension_loaded("mysqli") === true;
-
-	return extension_loaded("mysql") !== true;
+	return extension_loaded("mysqli") === true;
 }
 
 /**
@@ -3100,7 +2504,7 @@ function runner_date_format($param, $date="")
 function runner_set_page_timeout( $seconds )
 {
 	if( !ini_get("safe_mode") )
-		set_time_limit(300);
+		set_time_limit( $seconds );
 }
 
 /**
@@ -3119,24 +2523,6 @@ function passwordVerify( $pass, $hash )
 	return password_verify( $pass, $hash ) ;
 }
 
-
-function callDashboardSnippet($dashName, $dashElem)
-{
-	$snippetData = array();
-	ob_start();
-	$header = "";
-	$icon = $dashElem["item"]["icon"];
-	$funcName = "event_" . GoodFieldName($dashElem['snippetId']);
-	$eventObj = getEventObject($dashName);
-	if ($eventObj !== null && method_exists($eventObj, $funcName)) {
-		$eventObj->$funcName($header, $icon);
-	}
-	$snippetData["header"] = $header;
-	$snippetData["icon"] = $icon;
-	$snippetData["body"] = ob_get_contents();
-	ob_end_clean();
-	return $snippetData;
-}
 
 /**
  *	Wrapper for preg_match_all function with PREG_OFFSET_CAPTURE parameter
@@ -3169,15 +2555,17 @@ function findMatches( $pattern, $str )
 	return $ret;
 }
 
-function getPageStrings( $tableName ) {
-	require_once( getabspath("include/".$tableName."_pages.php"  ));
-	return $pageStrings;
-}
 
-function importTableSettings( $table )
+
+/**
+ * xxx__table - $table variable is used in After table initi event. If he user changes it everything goes wrong
+ */
+function importTableSettings( $xxx__table )
 {
-	global $tables_data, $field_labels, $fieldToolTips, $placeHolders, $page_titles, $detailsTablesData, $masterTablesData, $bSubqueriesSupported;
-	include_once(getabspath("include/".GetTableURL($table)."_settings.php"));
+	require_once( getabspath("settings/table_".GetTableURL( $xxx__table ).".php") );
+	
+	//	call after initialized event each time settings are imported
+	createEventClass( $xxx__table );
 }
 
 function importPageOptions( $table, $page )
@@ -3206,9 +2594,15 @@ function loadMaps( $pSet ) {
 
 }
 
+function importTableList() {
+	global $runnerDbTables;
+	include_once( getabspath( "settings/dbtables.php" ) );
+}
+
+
 function importTableInfo( $varname ) {
-	global $dal_info;
-	include_once( getabspath( "include/dal/" . $varname . ".php" ) );
+	global $runnerDbTableInfo;
+	include_once( getabspath( "settings/dbtables/" . $varname . ".php" ) );
 }
 
 function cloneArray( $arr ) {
@@ -3358,7 +2752,7 @@ function debugVar( $v, $text = "" ) {
 	echo "</pre>";
 }
 
-function showError( $message ) {
+function showError( $message = "" ) {
 	trigger_error($message, E_USER_ERROR );
 }
 
@@ -3580,22 +2974,13 @@ function regenerateSessionId() {
 	}
 }
 
-function importSecuritySettings() {
-	global $globalSettings;
-	if( isset($globalSettings["security"]) ) {
-		return;
-	}
-	require_once( getabspath( "include/securitySettings.php" ) );
-	$globalSettings["security"] = &$securitySettings_var;
-}
-
 function importFontSettings() {
-	global $globalSettings;
-	if( $globalSettings["fonts"] ) {
+	global $runnerProjectSettings;
+	if( $runnerProjectSettings["fonts"] ) {
 		return;
 	}
 	require_once( getabspath( "include/fontsettings.php" ) );
-	$globalSettings["fonts"] = &$fontSettings_var;
+	$runnerProjectSettings["fonts"] = &$fontSettings_var;
 }
 
 /**
@@ -3639,18 +3024,13 @@ function setCookieDirectly( $name, $value ) {
 	$_COOKIE[$name] = $value;
 }
 
-function & loadMenuNodes( $name ) {
-	global $menuNodesCache;
-	if( $name == "main" ) {
-		require_once( getabspath( "include/menunodes_" . $name .".php") );
+function & loadMenu( $id ) {
+	if( !menuExists( $id ) ) {
+		return null;
 	}
-	if( $name == "adminarea" ) {
-		require_once( getabspath( "include/menunodes_" . $name .".php") );
-	}
-	if( $name == "secondary" ) {
-		require_once( getabspath( "include/menunodes_" . $name . ".php") );
-	}
-	return $menuNodesCache[ $name ];
+	global $runnerMenus;
+	require_once( getabspath( "settings/menu_" . $id .".php") );
+	return $runnerMenus[ $id ];
 }
 
 function storeJSONDataFromRequest() {
@@ -3661,7 +3041,234 @@ function storeJSONDataFromRequest() {
 		return;
 	}
 
-	$jsonDataFromRequest = my_json_decode(file_get_contents('php://input'));
+	$jsonDataFromRequest = runner_json_decode(file_get_contents('php://input'));
 }
+
+function loadLanguageMessages( $filename ) {
+	require_once( getabspath( 'include/lang/' . $filename . '.php' ) );
+}
+
+function printStack() {
+	echo "<br>\n";
+	foreach( debug_backtrace() as $d  ) {
+		echo $d["function"] . '() at' . $d["file"] . "(" . $d["line"] .")";
+		echo "<br>\n";
+	}
+}
+
+function startSession() {
+	//	session cookie params
+	$cookieParams = session_get_cookie_params();
+	$secure = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
+	if( array_key_exists( "secure", $cookieParams ) ) {
+		@session_set_cookie_params( 0, $cookieParams["path"], $cookieParams["domain"], $secure, true );
+	} else {
+		//	pre-PHP 5.2
+		@session_set_cookie_params( 0, $cookieParams["path"], $cookieParams["domain"], $secure );
+	}
+
+	//	isolate sessions for projects running on the same site
+	@session_name( "p" . ProjectSettings::getSecurityValue( 'sessionControl', 'sessionName' ) );
+
+	// Setting the cache limiter to '' will turn off automatic sending of cache headers entirely
+	@session_cache_limiter("");
+	@session_start();
+}
+
+function _loadTablePages() {
+	global $runnerPageInfo;
+	if( !$runnerPageInfo ) {
+		require_once( getabspath('settings/pages.php') );
+	}
+}
+
+function runner_json_encode_unescaped_unicode($value) {
+	array_walk_recursive($value, 'json_mb_encode_numericentity');
+	return runner_decode_numeric_entity( runner_json_encode( $value), array(0x80, 0xffff, 0, 0xffff), 'UTF-8');
+}
+
+
+function init_json_library() {
+	if( @$GLOBALS['JSON_OBJECT'] ) {
+		return;
+	}
+	require_once(getabspath("classes/json.php"));
+	global $useUTF8;
+	$GLOBALS['JSON_OBJECT'] = new Services_JSON(SERVICES_JSON_LOOSE_TYPE, $useUTF8);
+}
+
+function runner_json_encode( $value){
+	global $useUTF8;
+	if( !function_exists('json_encode') || !$useUTF8 || version_compare( PHP_VERSION ,"5.5.0") < 0 ) {
+		init_json_library();
+		return $GLOBALS['JSON_OBJECT']->encode($value);
+	} else {
+		return json_encode($value, JSON_PARTIAL_OUTPUT_ON_ERROR );
+	}
+}
+
+function runner_json_decode( $value ){
+	global $useUTF8;
+	if( !function_exists('json_encode') || !$useUTF8 || version_compare( PHP_VERSION ,"5.5.0") < 0 ) {
+		init_json_library();
+		$result = $GLOBALS['JSON_OBJECT']->decode($value);
+	} else {
+		$result = json_decode( $value, true );
+	}
+	return !!$result ? $result : array();
+}
+
+function importExcelLibrary() {
+	if( ProjectSettings::getProjectValue( 'phpSpreadsheet' ) ) {
+		require_once getabspath( "include/phpspreadsheet_int.php" );
+	} else {
+		require_once getabspath( "plugins/PHPExcel.php" );
+		require_once getabspath( "include/export_functions_excel.php" );
+	}
+}
+
+function runnerGetConnectionInfo( $id ) {
+	global $runnerDatabases;
+	$info = $runnerDatabases[ $id ];
+	if( array_search( $id, DatabaseEvents::$customConnections ) !== false ) {
+		//	run Server Database Connections code
+		$dbEvents = new DatabaseEvents;
+		$methodName = 'db_' . GoodFieldName( $id );
+		$updates = $dbEvents->$methodName();
+		$info['connInfo'] = $updates['connInfo'];
+		if( array_key_exists( 'ODBCString', $updates ) && $updates['ODBCString'] ) {
+			$info['ODBCString'] = $updates['ODBCString'];
+		}
+		return $info;
+	}
+
+	return $runnerDatabases[ $id ];
+}
+
+function db2time($str)
+{
+	$now=localtime(time(),1);
+    $isdst=$now["tm_isdst"];
+    $havedate=0;
+	$havetime=0;
+	if(is_numeric($str))
+//	timestamp
+	{
+		$havedate=1;
+		$len=strlen($str);
+		if($len>=10)
+		  $havetime=1;
+		switch($len)
+		{
+		  case 14:
+		  	$pattern="/(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/";
+			break;
+		  case 12:
+		  	$pattern="/(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})/";
+			break;
+		  case 10:
+		  	$pattern="/(\d{4})(\d{2})(\d{2})(\d{2})/";
+			break;
+		  case 18:
+		  	$pattern="/(\d{4})(\d{2})(\d{2})/";
+			break;
+		  case 8:
+		  	$pattern="/(\d{4})(\d{2})(\d{2})/";
+			break;
+		  case 6:
+		  	$pattern="/(\d{2})(\d{2})(\d{2})/";
+			break;
+		  case 4:
+		  	$pattern="/(\d{2})(\d{2})/";
+			break;
+		  case 2:
+		  	$pattern="/(\d{2})/";
+			break;
+	      default: 
+		    return array();
+	    }
+		if(preg_match($pattern,$str,$parsed))
+		{
+		  $y=$parsed[1];
+		  $mo=(count($parsed)>2)?$parsed[2]:1;
+		  $d=(count($parsed)>3)?$parsed[3]:1;
+		  $h=(count($parsed)>4)?$parsed[4]:0;
+		  $mi=(count($parsed)>5)?$parsed[5]:0;
+		  $s=(count($parsed)>6)?$parsed[6]:0;
+		}
+		else
+		  return array();
+		  
+	}
+	else if(is_string($str))
+// date,time,datetime
+	{
+	  if(preg_match("/(\d{4})-(\d{1,2})-(\d{1,2}) (\d{1,2}):(\d{1,2}):(\d{1,2})/", $str, $parsed)) // datetime
+		{
+			$y = $parsed[1];
+			$mo = $parsed[2];
+			$d = $parsed[3];
+			$h = $parsed[4];
+			$mi = $parsed[5];
+			$s = $parsed[6];
+		    $havedate=1;
+			$havetime=1;
+		}
+		else if(preg_match("/(\d{4})-(\d{1,2})-(\d{1,2})/", $str, $parsed)) // date
+		{
+			$y = $parsed[1];
+			$mo = $parsed[2];
+			$d = $parsed[3];
+			$h = 0;
+			$mi = 0;
+			$s = 0;
+		    $havedate=1;
+		}
+		else if(preg_match("/(\d{2})-(\d{1,2})-(\d{1,2})/", $str, $parsed)) // time
+		{
+		  $y=$now["tm_year"];
+		  $mo=$now["tm_mon"]+1;
+		  $d=$now["tm_mday"];
+		  $h = $parsed[1];
+		  $mi = $parsed[2];
+		  $s = $parsed[3];
+		  $havetime=1;
+		}
+		else 
+			return array();
+	}
+	else
+	{
+		return array();
+	}
+	if(!$havetime)
+	{
+		$h=0;
+		$mi=0;
+		$s=0;
+	}
+	if(!$havedate)
+	{
+		$y=$now["tm_year"]+1900;
+		$mo=$now["tm_mon"]+1;
+		$d=$now["tm_mday"];
+	}
+	return array((integer)$y,(integer)$mo,(integer)$d,(integer)$h,(integer)$mi,(integer)$s);
+}
+
+/**
+ * Returns snippet body
+ */
+function callDashboardSnippet( $funcName, &$icon, &$header ) {
+	global $globalEvents;
+	ob_start();
+	$globalEvents->$funcName( $header, $icon );
+	$ret = ob_get_contents();
+	ob_end_clean();
+	return $ret;
+}
+
+
+$mbEnabled = extension_loaded('mbstring');
 
 ?>

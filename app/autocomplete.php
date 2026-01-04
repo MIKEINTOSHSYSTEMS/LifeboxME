@@ -27,7 +27,7 @@ $control = $editControls->getControl( $field );
 
 
 $contextParams = array();
-$contextParams["data"] = my_json_decode( postvalue('data') );
+$contextParams["data"] = runner_json_decode( postvalue('data') );
 
 $masterTable = postvalue('masterTable');
 if ( $masterTable != "" &&  isset($_SESSION[ $masterTable . "_masterRecordData" ] ) || postvalue('masterData') )
@@ -36,7 +36,7 @@ if ( $masterTable != "" &&  isset($_SESSION[ $masterTable . "_masterRecordData" 
 	if( !is_array($masterData) ) {
 		$masterData = array();
 	}
-	$masterControlsData = my_json_decode( postvalue('masterData') );
+	$masterControlsData = runner_json_decode( postvalue('masterData') );
 	foreach( $masterControlsData as $mField => $mValue )
 	{
 		$masterData[ $mField ] = $mValue;
@@ -48,7 +48,7 @@ if ( $masterTable != "" &&  isset($_SESSION[ $masterTable . "_masterRecordData" 
 RunnerContext::push( new RunnerContextItem( CONTEXT_ROW, $contextParams ) );
 
 
-$parentCtrlsData = my_json_decode( postvalue('parentCtrlsData') );
+$parentCtrlsData = runner_json_decode( postvalue('parentCtrlsData') );
 $isExistParent = postvalue('isExistParent');
 $mode = intval( postvalue('mode') );
 

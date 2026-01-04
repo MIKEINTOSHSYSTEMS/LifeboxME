@@ -30,12 +30,10 @@ class ListPage_DPList extends ListPage_DPInline
 	 */
 	function showPageAjax() {
 		$returnJSON = array();
-		$proceedLink = $this->getProceedLink();
 		
 		if( !$this->numRowsFromSQL && 
 			!$this->addAvailable() && !$this->inlineAddAvailable() && 
 			!$this->recordsDeleted && 
-			$proceedLink == '' && 
 			$this->getGridTabsCount() == 0 ) 
 		{
 			$returnJSON['success'] = false;
@@ -55,7 +53,7 @@ class ListPage_DPList extends ListPage_DPInline
 		$this->xt->assign("header", false);
 		$this->xt->assign("footer", false);
 		
-		$returnJSON['headerCont'] = $proceedLink . $this->xt->fetch_loaded("above-grid_block");
+		$returnJSON['headerCont'] = $this->xt->fetch_loaded("above-grid_block");
 		$returnJSON["footerCont"] = $this->xt->fetch_loaded("below-grid_block");
 		
 		$this->xt->prepareContainers();

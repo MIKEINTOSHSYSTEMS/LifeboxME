@@ -5,7 +5,7 @@ class ViewHTMLField extends ViewControl
 	public function getPdfValue(&$data, $keylink = "")
 	{
 
-		return my_json_encode( array(
+		return runner_json_encode( array(
 			"text" => $this->processText( $this->refineHTMLValue( $data[ $this->field ] ), $keylink ),
 //			"text" => $this->showDBValue($data, $keylink),
 			"isHtml" => true
@@ -365,25 +365,26 @@ class ViewHTMLField extends ViewControl
 			}
 			
 			//echo $value[$i]." ".$i."<br>";
-						if( $this->useUTF8 ) 
-			{
-				$ordord = ord( $value[$i] );
-				
-				if (0xC0 == (0xC0 & $ordord)) // 11000000
-					$i = $i + 1;
-				else if (0xE0 == (0xE0 & $ordord)) // 11100000
-					$i = $i + 2;
-				else if (0xF0 == (0xF0 & $ordord)) // 11110000
-					$i = $i + 3;
-				else if (0xF8 == (0xF8 & $ordord)) // 11111000
-					$i = $i + 4;
-				else if(0xFC == (0xFC & $ordord)) // 11111100
-					$i = $i + 5;
+			if( ProjectSettings::ext() == "php" ) {
+				if( $this->useUTF8 ) {
+					$ordord = ord( $value[$i] );
+					
+					if (0xC0 == (0xC0 & $ordord)) // 11000000
+						$i = $i + 1;
+					else if (0xE0 == (0xE0 & $ordord)) // 11100000
+						$i = $i + 2;
+					else if (0xF0 == (0xF0 & $ordord)) // 11110000
+						$i = $i + 3;
+					else if (0xF8 == (0xF8 & $ordord)) // 11111000
+						$i = $i + 4;
+					else if(0xFC == (0xFC & $ordord)) // 11111100
+						$i = $i + 5;
+				}
 			}
 			
 			$i = $i + 1;
 			$j = $j + 1;
-		}		
+		}
 
 		$truncatedValue = substr($value, 0, $i);
 		$tags = array_reverse( $tags );
@@ -429,7 +430,7 @@ class ViewHTMLField extends ViewControl
 			$dataField = 'data-fieldlabel="'.runner_htmlspecialchars( $label ).'"';
 			
 			$link = ' <a href="javascript:void(0);" data-gridlink data-query="'.GetTableLink("fulltext").'?'.$params.'" '.$dataField.'>'
-				."More".'&nbsp;...</a>';
+				.mlang_message('MORE').'&nbsp;...</a>';
 			$processedValue.= $link;			
 		}
 			

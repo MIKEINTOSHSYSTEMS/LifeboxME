@@ -72,21 +72,21 @@ class XTempl_Base
 		exit();
 	}
 
-	protected function assign_headers()
+	protected function assign_headers() 
 	{
+		$ext = ProjectSettings::getProjectValue('ext') == 'php'
+			? 'php'
+			: 'htm';
 		//check if headers are already assigned
 		if( isset( $this->xt_vars['header'] ) )
 			return;
 
-		if ( !$this->mobileTemplateMode() )
-		{
-			$this->assign("header","header");
-			$this->assign("footer","footer");
+		$templates = ProjectSettings::getProjectValue( 'customTemplates' );
+		if( array_search( 'header', $templates ) !== false ) {
+			xtempl_include_header($this,"header","include/header." . $ext );
 		}
-		else
-		{
-			$this->assign("header","mheader");
-			$this->assign("footer","mfooter");
+		if( array_search( 'footer', $templates ) !== false ) {
+			xtempl_include_header($this,"footer","include/footer." . $ext );
 		}
 	}
 
@@ -94,10 +94,8 @@ class XTempl_Base
 	/**
 	 * @param Boolean hideAddedCharts (optional) #9607 1.
 	 */
-	 function __construct( $hideAddedCharts = false )
+	 function __construct()
 	{
-		global $mlang_charsets;
-
 		$this->xt_vars=array();
 		$this->xt_stack=array();
 		$this->xt_stack[]=&$this->xt_vars;
@@ -110,13 +108,11 @@ class XTempl_Base
 		$this->assign_function("htmlcustom","xt_htmlcustom",array());
 		$this->assign_function("cl_length","xt_cl_length",array());
 		$this->assign_function("caption","xt_caption",array());
-		$this->assign_function("pagetitlelabel", "xt_pagetitlelabel", array());
 		$this->assign_function("logo","printProjectLogo",array());
 		$this->assign_function("home_link","printHomeLink",array());
 		$this->assign_function("file_url","getFileUrl",array());
 		$this->assign_function("jscaption","xt_jscaption",array());
 		$this->assign_function("jslabel","xt_jslabel",array());
-		$this->assign_function("jspagetitlelabel","xt_jspagetitlelabel",array());
 
 		$this->assign_function("pdf_image","getPdfImageObject",array());
 		$this->assign_function("pdf_chart", "getPdfChartObject", array());
@@ -133,26 +129,6 @@ class XTempl_Base
 
 		$this->assign_method("messagepart", $this, "messagePart", array());
 
-
-		if( !$hideAddedCharts ) //#9607 1. Temporary fix
-		{
-			$this->assign_function("aio_training_tracking_chart_chart","xt_showchart",
-			array(
-				"chartName"=>"aio_training_tracking_chart",
-				"table"=>"aio_training_tracking Chart",
-				"ctype"=>"2DColumn"));
-			$this->assign_function("aio_training_tracking_chart_by_sex_chart","xt_showchart",
-			array(
-				"chartName"=>"aio_training_tracking_chart_by_sex",
-				"table"=>"aio_training_tracking Chart by sex",
-				"ctype"=>"2DColumn"));
-		}
-
-
-		$mlang_charsets=array();
-		
-$mlang_charsets["English"]="Windows-1252";;
-		$this->charsets = &$mlang_charsets;
 
 		$html_attrs = '';
 		if(isRTL())
@@ -282,18 +258,13 @@ $mlang_charsets["English"]="Windows-1252";;
 
 	function xt_event($params)
 	{
-		global $projectLanguage;
 		if( $this->jsonMode ) {
-			if( $projectLanguage !== "aspx" ) {
-				ob_start();
-				$this->xt_doevent( $params );
-				$out = jsreplace( ob_get_contents() );
-				ob_end_clean();
-				echo $out;
-				return;
-			} else {
-				return jsreplace( $this->xt_doevent( $params ) );
-			}
+			ob_start();
+			$this->xt_doevent( $params );
+			$out = jsreplace( ob_get_contents() );
+			ob_end_clean();
+			echo $out;
+			return;
 		}
 		return $this->xt_doevent( $params );
 	}
@@ -324,9 +295,37 @@ $mlang_charsets["English"]="Windows-1252";;
 		echo $out;
 	}
 
+
 	function xt_doevent($params)
 	{
+		if (isset($this->xt_events[@$params["custom1"]]))
+		{
+			$eventArr = $this->xt_events[@$params["custom1"]];
+			
+			if(isset($eventArr["method"]))
+			{
+				$params = array();
+				if(isset($eventArr["params"]))
+					$params=$eventArr["params"];
+				$method=$eventArr["method"];
+				$eventArr["object"]->$method($params);
+				return;
+			}
+		}
+		global $globalEvents;
+		if($this->eventsObject)
+			$eventObj = $this->eventsObject;
+		else
+			$eventObj = $globalEvents;
+		if(!$eventObj)
+			return;
+		$eventName = $params["custom1"];
+		if( !$eventObj->snippetExists( $eventName ) )
+			return;
+		$funcName = "event_" . $eventName;
+		$eventObj->$funcName($params);
 	}
+
 
 	function fetchVar($varName)
 	{
@@ -366,26 +365,15 @@ $mlang_charsets["English"]="Windows-1252";;
 
 		//	read template file
 		$templatesPath = "templates/";
-		if ( $this->mobileTemplateMode() )
-			$templatesPath = "mobile/";
-
 		if( $this->jsonMode ) {
 			$templatesPath = "pdf/";
 			$template = $this->template_file . ".json";
 		}
 
-		if( !$this->jsonMode && isOldCustomFile( $this->template_file ) ) {
-			$template = getOldTemplateFilename( $this->template_file ).".htm";
-		}
 		if(file_exists(getabspath($templatesPath.$template)))
-			$this->template = myfile_get_contents(getabspath($templatesPath.$template));
+			$this->template = myfile_get_contents(getabspath($templatesPath.$template), "r");
 
 
-		if ( $this->mobileTemplateMode() && $this->template=='' )
-		{
-			$templatesPath = "templates/";
-			$this->template = myfile_get_contents(getabspath($templatesPath.$template));
-		}
 		$this->assign_headers();
 	}
 
@@ -619,14 +607,6 @@ $mlang_charsets["English"]="Windows-1252";;
 	function showField($fieldName)
 	{
 		$this->assign("fielddispclass_".GoodFieldName($fieldName), "");
-	}
-
-
-	function mobileTemplateMode() {
-		if($this->layout)
-			return mobileDeviceDetected() && $this->layout->version < BOOTSTRAP_LAYOUT;
-		else
-			return false;
 	}
 
 	function setPage( $page ) {

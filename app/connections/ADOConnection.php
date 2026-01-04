@@ -34,11 +34,11 @@ class ADOConnection extends Connection
 	 */
 	public function connect()
 	{
-		global $cCodepage;
+		global $cCodePage;
 
 		try
 		{
-			$this->conn = new COM("ADODB.Connection", NULL, $cCodepage);
+			$this->conn = new COM("ADODB.Connection", NULL, $cCodePage);
 			$this->conn->Open( $this->ODBCString );
 
 			if( $this->dbType == nDATABASE_Access )
@@ -80,13 +80,13 @@ class ADOConnection extends Connection
 	 */
 	public function query( $sql )
 	{
-		global $cCodepage;
+		global $cCodePage;
 
 		$this->debugInfo($sql);
 
 		try
 		{
-			$recordset = new COM("ADODB.recordset", NULL, $cCodepage);
+			$recordset = new COM("ADODB.recordset", NULL, $cCodePage);
 			$recordset->Open($sql, $this->conn, 2);
 
 			return new QueryResult( $this, $recordset );
@@ -290,13 +290,13 @@ class ADOConnection extends Connection
 	 */
 	public function execWithBlobProcessing( $sql, $blobs, $blobTypes = array(), $autoincField = null )
 	{
-		global $cCodepage;
+		global $cCodePage;
 
 		$this->debugInfo($sql);
 
 		try
 		{
-			$recordset = new COM("ADODB.recordset", NULL, $cCodepage);
+			$recordset = new COM("ADODB.recordset", NULL, $cCodePage);
 			$recordset->Open($sql, $this->conn, 2);
 			return true;
 		}

@@ -184,9 +184,9 @@ class MembersPage extends ListPage_Simple
 			$this->users[ $userid ][ "provider" ] = $provider["code"];
 
 			if( $this->showDisplayField() ) {
-				$row["displayusername"] = runner_htmlspecialchars( $data["fullname"] );
+				$row["displayusername"] = runner_htmlspecialchars( $data[ Security::fullnameField() ] );
 				$row["displayusername_attrs"] = "id=\"cellDisplayName".runner_htmlspecialchars($userid)."\"";
-				$this->users[ $userid ]["displayUserName"] = $data["fullname"];
+				$this->users[ $userid ]["displayUserName"] = $data[ Security::fullnameField() ];
 			}
 			if( $this->showEmailField() ) {
 				$row["emailuser"] = runner_htmlspecialchars( $data[Security::emailField()] );
@@ -227,11 +227,11 @@ class MembersPage extends ListPage_Simple
 			);
 		}
 		
-		$this->xt->assign("displayuserheadersort_attrs", "id=\"displayNameSort\" href=\"#\"");
-		$this->xt->assign("emailuserheadersort_attrs", "id=\"EmailSort\" href=\"#\"");
-		$this->xt->assign("usernameheadersort_attrs", "id=\"userNameSort\" href=\"#\"");
+		$this->xt->assign("displayuserheadersort_attrs", "id=\"displayNameSort\" ");
+		$this->xt->assign("emailuserheadersort_attrs", "id=\"EmailSort\" ");
+		$this->xt->assign("usernameheadersort_attrs", "id=\"userNameSort\" ");
 		$this->xt->assign("choosecolumnsbutton_attrs", "id=\"chooseColumnsButton\" href=\"#\"");
-		$this->xt->assign("sourceuserheadersort_attrs", "id=\"SourceSort\" href=\"#\"");
+		$this->xt->assign("sourceuserheadersort_attrs", "id=\"SourceSort\" ");
 		
 		$this->xt->assign("displayuserheadertdbox_attrs", "id=\"tdboxDisplayName\"");
 		$this->xt->assign("displayuserheadertdsort_attrs", "id=\"tdsortDisplayName\"");
@@ -277,7 +277,7 @@ class MembersPage extends ListPage_Simple
 	 */
 	function fillGroups()
 	{
-		$this->groups[] = array(-1, "<"."Admin".">");
+		$this->groups[] = array(-1, "<".mlang_message('AA_GROUP_ADMIN').">");
 		$this->groupFullChecked[] = true;
 
 		$groupIdField = "GroupID";
@@ -384,15 +384,6 @@ class MembersPage extends ListPage_Simple
 	 */
 	function addJsGroupsAndRights() 
 	{
-		$this->jsSettings['tableSettings'][$this->tName]['warnOnLeaving'] = true;
-		$this->jsSettings['tableSettings'][$this->tName]['usersList'] = $this->users;
-		$this->jsSettings['tableSettings'][$this->tName]['fieldsList'] = $this->fields;
-		$this->jsSettings['tableSettings'][$this->tName]['groupsList'] = array();
-		foreach( $this->groups as $grArr ) {
-			$this->jsSettings['tableSettings'][$this->tName]['groupsList'][$grArr[0]] = $grArr[1];
-		}
-		
-		$this->jsSettings['tableSettings'][$this->tName]['providerLabels'] = $this->providerLabels;
 	}
 	
 	function saveMembers( &$modifiedMembers )
@@ -401,7 +392,7 @@ class MembersPage extends ListPage_Simple
 		{
 			$this->updateUserGroups( $userData["provider"], $userData["username"], $userData["groups"] );
 		}	
-		echo my_json_encode(array( 'success' => true ));
+		echo runner_json_encode( array( 'success' => true ));
 	}
 	
 	/**
@@ -511,6 +502,30 @@ class MembersPage extends ListPage_Simple
 		$emailField = Security::emailField();
 		return $emailField && $emailField != $usernameField && $emailField != $displayNameField;
 	}
+	protected function buildJsTableSettings( $table, $pSet ) {
+		$settings = parent::buildJsTableSettings( $table, $pSet );
+		$settings['warnOnLeaving'] = true;
+		$settings['usersList'] = $this->users;
+		$settings['fieldsList'] = $this->fields;
+		$settings['groupsList'] = array();
+		foreach( $this->groups as $grArr ) {
+			$settings['groupsList'][$grArr[0]] = $grArr[1];
+		}
+		
+		$settings['providerLabels'] = $this->providerLabels;
+		return $settings;
+	}
+
+	function isAdminTable() {
+		return true;
+	}
+
+	function getDataSourceFilterCriteria( $ignoreFilterField = "" )
+	{
+		return null;
+	}
+
+
 
 }
 ?>

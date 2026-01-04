@@ -1,109 +1,71 @@
 <?php
 
-$version = explode('.', PHP_VERSION);
-if( $version[0] * 10 + $version[1] < 53 ) {
-	set_magic_quotes_runtime(0);
-}
+//	load code
+require_once("phpfunctions.php");
+require_once( getabspath( 'include/commonfunctions.php' ) );
+require_once( getabspath( 'classes/security.php' ) );
+require_once( getabspath( 'classes/runnerpage.php' ) );
+require_once( getabspath( 'classes/context.php' ) );
+require_once( getabspath( 'connections/ConnectionManager.php' ) );
+require_once( getabspath( 'connections/apis.php' ) );
+require_once( getabspath( 'classes/cipherer.php' ) );
+require_once( getabspath( 'classes/labels.php' ) );
+require_once( getabspath( 'classes/datasource/datacontext.php') );
+require_once( getabspath( 'classes/db.php' ) );
+require_once( getabspath( 'classes/projectsettings.php' ) );
+require_once( getabspath( 'classes/db.php' ) );
+require_once( getabspath( 'classes/runnermenu.php' ) );
+require_once( getabspath( 'classes/pdlayout.php' ) );
+require_once( getabspath( 'include/LocaleFunctions.php' ) );
+require_once( getabspath( 'classes/wheretabs.php' ) );
+require_once( getabspath( 'classes/filesystem/filesystem.php' ) );
+require_once( getabspath( 'classes/events.php' ) );
+require_once( getabspath( 'classes/datasource/httprequest.php') );
+require_once( getabspath( 'classes/searchclause.php' ) );
+require_once( getabspath( 'classes/sql.php') );
+require_once( getabspath( 'classes/audit.php' ) );
+require_once( getabspath( 'connections/dbfunctions_legacy.php' ) );
+require_once( getabspath( 'classes/controls/ViewControl.php' ) );
 
-//	session cookie params
-$cookieParams = session_get_cookie_params();
-$secure = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
-if( array_key_exists( "secure", $cookieParams ) ) {
-	session_set_cookie_params( 0, $cookieParams["path"], $cookieParams["domain"], $secure, true );
-} else {
-	//	pre-PHP 5.2
-	session_set_cookie_params( 0, $cookieParams["path"], $cookieParams["domain"], $secure );
-}
+//	events
+require_once( getabspath( 'usercode/globalevents.php' ) );
+require_once( getabspath( 'usercode/db.php' ) );
 
-//	isolate sessions for projects running on the same site
-@session_name( "pLifeboxSA7lVH6MEdvwh" );
 
-// Setting the cache limiter to '' will turn off automatic sending of cache headers entirely
-@session_cache_limiter("");
-@session_start();
+//	init constants and variables
+require_once( getabspath( 'include/constants.php' ) );
+require_once( getabspath( 'include/globalvars.php' ) );
+
+// load settings
+require_once( getabspath( 'connections/databases.php' ) );
+require_once( getabspath( 'settings/project.php' ) );
+require_once( getabspath( 'settings/project_add.php' ) );
+require_once( getabspath( 'include/locale.php' ) );
 
 
 //E_STRICT has become a part of E_ALL since php 5.4 only
-error_reporting( (E_ALL | E_STRICT) & ~E_STRICT & ~E_NOTICE & ~E_DEPRECATED & ~E_WARNING);
+error_reporting( (E_ALL ) &  ~E_NOTICE & ~E_DEPRECATED & ~E_WARNING);
+set_error_handler( 'runner_error_handler' );
 
-/// include php specific code
-//include("timing.php");
-include("phpfunctions.php");
+require_once( getabspath( 'include/legacy.php' ) );
 
-$useOldMysqlLib = 0 != 0;
+startSession();
 
-$cCharset = "utf-8";
-$cCodepage = 65001;
-$cMySQLNames = "utf8";
-$gLoadSearchControls = 30;
+//	language initialization
+$mlang_defaultlang = getDefaultLanguage();
+loadLanguage( mlang_getcurrentlang() );
+//locale initialization
+$locale_info["LOCALE_ILONGDATE"] = GetLongDateFormat();
 
-$bSubqueriesSupported = true;
 
-$jsonDataFromRequest = null;
+header("Content-Type: text/html; charset=" . $runnerProjectSettings['charset'] );
 
-$projectPath = '';
-
-$regenerateSessionOnLogin = true;
-
-header("Content-Type: text/html; charset=".$cCharset);
-
-// json support
-$useUTF8 = "utf-8" == "utf-8";
-
-//	JSON_PARTIAL_OUTPUT_ON_ERROR flag was introduced in PHP 5.5
-if( !function_exists('json_encode') || !$useUTF8 || version_compare( PHP_VERSION ,"5.5.0") < 0 )
-{
-	include_once(getabspath("classes/json.php"));
-	$GLOBALS['JSON_OBJECT'] = new Services_JSON(SERVICES_JSON_LOOSE_TYPE, $useUTF8);
-
-    function my_json_encode($value, $json_unescaped_unicode = false){
-    	return $GLOBALS['JSON_OBJECT']->encode($value);
-    }
-
-    function my_json_decode($value){
-        $result = $GLOBALS['JSON_OBJECT']->decode($value);
-        if( !$result )
-    		return array();
-    	else
-    		return $result;
-	}
-}
-else
-{
-	function my_json_encode($value){
-		return json_encode($value, JSON_PARTIAL_OUTPUT_ON_ERROR );
-    }
-
-    function my_json_decode($value){
-        $result = json_decode($value,true);
-        if( !$result )
-    		return array();
-    	else
-    		return $result;
-	}
+if( Security::hasLogin() ) {
+	Security::autoLoginAsGuest();
+	Security::updateCSRFCookie();
 }
 
 
-include("locale.php");
-include("events.php");
-include("commonfunctions.php");
-
-include("dal.php");
-include("appsettings.php");
-
-set_error_handler("runner_error_handler");
-
-$mbEnabled = extension_loaded('mbstring');
-
-
-
-function my_json_encode_unescaped_unicode($value)
-{
-	array_walk_recursive($value, 'json_mb_encode_numericentity');
-	return runner_decode_numeric_entity(my_json_encode($value), array(0x80, 0xffff, 0, 0xffff), 'UTF-8');
-}
-
-	
-				;
+require_once( getabspath( 'usercode/initapp.php' ) );
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-include_once(getabspath("classes/security.##@ext##"));
+include_once(getabspath("classes/security.php"));
 
 class SecurityPluginSaml extends SecurityPlugin {
 

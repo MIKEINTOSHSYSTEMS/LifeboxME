@@ -592,7 +592,7 @@ class SearchClause extends SearchClauseBase
 		{
 			$this->resetSearch();
 		}
-		else if( isset($_REQUEST["q"]) || isset($_REQUEST["qs"]) || @$_REQUEST["f"] )
+		else if( isset($_REQUEST["q"]) || isset($_REQUEST["qs"])  )
 		{
 			$this->srchType = 'integrated';
 			$this->parseItegratedRequest();
@@ -1913,6 +1913,8 @@ class SearchClause extends SearchClauseBase
 		$this->simpleSearchActive = false;
 		
 		$this->customFieldSQLConditions = array();
+
+		$this->setStorage( "filters", 'all' );
 	}
 
 	/**

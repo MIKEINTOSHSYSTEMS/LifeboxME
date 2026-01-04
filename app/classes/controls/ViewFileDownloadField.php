@@ -32,10 +32,12 @@ class ViewFileDownloadField extends ViewFileField
 
 	protected function getElementTextValue( $fileData, &$data ) {
 		$pSet = $this->pSettings();
-		$displayFileName = $fileData["usrName"];
 		if( $pSet->showCustomExpr( $this->field ) ) {
-			$displayFileName .= fileCustomExpression( $fileData, $data, $this->field, $this->container->pageType, $this->container->tName );
+			return $pSet->getFileText( $this->field, $fileData, $data );
 		}
+
+		$displayFileName = $fileData["usrName"];
+
 		if( $pSet->showFileSize( $this->field ) ) {
 			$displayFileName .= ' ' . $this->fileSizeString( $fileData["size"] );
 		}
@@ -178,7 +180,8 @@ class ViewFileDownloadField extends ViewFileField
 			}
 
 			if( $pSet->showCustomExpr( $this->field ) ) {
-				$urlData["htmlLabel"] = fileCustomExpression( $f, $data, $this->field, $this->container->pageType, $this->container->tName );
+//				$urlData["htmlLabel"] = fileCustomExpression( $f, $data, $this->field, $this->container->pageType, $this->container->tName );
+				$urlData["htmlLabel"] = $pSet->getFileText( $this->field, $f, $data );
 			}
 
 			if( $pSet->showFileSize( $this->field ) ) {

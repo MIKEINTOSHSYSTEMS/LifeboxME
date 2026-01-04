@@ -71,7 +71,7 @@ class DatabaseFileField extends EditControl
 					$disp = "<a target=_blank";
 
 					$disp.=" href=\"".
-						GetTableLink("imager", "",
+						GetTableLink("file", "",
 						"page=".$this->pageObject->pageName.
 						"&table=".GetTableURL($this->pageObject->tName).
 						"&".$this->iquery.
@@ -80,18 +80,12 @@ class DatabaseFileField extends EditControl
 					if($this->is508)
 						$disp .= " alt=\"Image from DB\"";
 					
-					//	show thumbnail or fullsize image
-					$displayField = $this->pageObject->pSetEdit->getStrThumbnail($this->field);
-					if( !strlen( $data[ $displayField ]) ) {
-						$displayField = $this->field;
-					}
-
 					$disp .= " src=\"".
-						GetTableLink("imager", "",
+						GetTableLink("file", "",
 							"page=".$this->pageObject->pageName.
 							"&table=".GetTableURL($this->pageObject->tName).
-							"&field=".rawurlencode( $displayField ).
-							$this->keylink.
+							"&thumbnail=1".
+							"&".$this->iquery.
 							"&rndVal=".rand(0,32768))."\">";
 					$disp.= "</a>";
 				}
@@ -101,7 +95,7 @@ class DatabaseFileField extends EditControl
 					if($this->is508)
 						$disp.= ' alt="Image from DB"';
 					$disp.=' border=0 src="'.
-						GetTableLink("imager", "",
+						GetTableLink("file", "",
 							'table='.GetTableURL($this->pageObject->tName).
 							"&page=".$this->pageObject->pageName.
 							'&'.$this->iquery."&src=1&rndVal=".rand(0,32768)).'">';
@@ -114,7 +108,7 @@ class DatabaseFileField extends EditControl
 					$disp = '<img class="mupload-preview-img" id="image_'.GoodFieldName($this->field).'_'.$this->id.'" name="'.$this->cfield.'" border=0 ';
 					if($this->is508)
 						$disp .= ' alt="file"';
-					$disp .= ' src="'.GetRootPathForResources("images/file.gif").'">';
+					$disp .= ' src="images/file.gif">';
 				}
 			}
 //	filename
@@ -134,25 +128,25 @@ class DatabaseFileField extends EditControl
 					$filename = "";
 				if($mode == MODE_INLINE_EDIT)
 				{
-					$strfilename = '<br><label for="filename_'.$this->cfieldname.'">'."Filename"
+					$strfilename = '<br><label for="filename_'.$this->cfieldname.'">'.mlang_message('FILENAME')
 						.'</label>&nbsp;&nbsp;<input type="text" '.$this->inputStyle.' id="filename_'.$this->cfieldname
 						.'" name="filename_'.$this->cfieldname.'" size="20" maxlength="50" value="'.runner_htmlspecialchars($filename).'">';
 				}
 				else
 				{
-					$strfilename = '<br><label for="filename_'.$this->cfieldname.'">'."Filename"
+					$strfilename = '<br><label for="filename_'.$this->cfieldname.'">'.mlang_message('FILENAME')
 						.'</label>&nbsp;&nbsp;<input type="text" '.$this->inputStyle.' id="filename_'.$this->cfieldname.'" name="filename_'
 						.$this->cfieldname.'" size="20" maxlength="50" value="'.runner_htmlspecialchars($filename).'">';
 				}
 			}
+			$labelTag = '<label class="r-img-control">';
 			if(strlen($value)) {
-				$strtype = '<br><input id="'.$this->ctype.'_keep" type="Radio" name="'.$this->ctype.'" value="file0" checked class="rnr-uploadtype">'."Keep";
+				$strtype = '<br>'.$labelTag.'<input id="'.$this->ctype.'_keep" type="Radio" name="'.$this->ctype.'" value="file0" checked class="rnr-uploadtype">'.mlang_message('KEEP').'</label>';
 
-			if(strlen($value) && !$this->pageObject->pSetEdit->isRequired($this->field))
-			{
-					$strtype .= '<input id="'.$this->ctype.'_delete" type="Radio" name="'.$this->ctype.'" value="file1" class="rnr-uploadtype">'."Delete";
-			}
-				$strtype .= '<input id="'.$this->ctype.'_update" type="Radio" name="'.$this->ctype.'" value="file2" class="rnr-uploadtype">'."Update";
+				if(strlen($value) && !$this->pageObject->pSetEdit->isRequired($this->field)) {
+					$strtype .= $labelTag.'<input id="'.$this->ctype.'_delete" type="Radio" name="'.$this->ctype.'" value="file1" class="rnr-uploadtype">'.mlang_message('DELETE').'</label>';
+				}
+				$strtype .= $labelTag.'<input id="'.$this->ctype.'_update" type="Radio" name="'.$this->ctype.'" value="file2" class="rnr-uploadtype">'.mlang_message('UPDATE').'</label>';
 			} else {
 				$strtype = '<input id="'.$this->ctype.'_update" type="hidden" name="'.$this->ctype.'" value="file2" class="rnr-uploadtype">';
 		}
@@ -163,7 +157,7 @@ class DatabaseFileField extends EditControl
 			$strtype = '<input id="'.$this->ctype.'" type="hidden" name="'.$this->ctype.'" value="file2">';
 			if($this->format == EDIT_FORMAT_DATABASE_FILE && $this->pageObject->pSetEdit->getFilenameField($this->field))
 			{
-				$strfilename = '<br><label for="filename_'.$this->cfieldname.'">'."Filename"
+				$strfilename = '<br><label for="filename_'.$this->cfieldname.'">'.mlang_message('FILENAME')
 					.'</label>&nbsp;&nbsp;<input type="text" '.$this->inputStyle.' id="filename_'.$this->cfieldname.'" name="filename_'
 					.$this->cfieldname.'" size="20" maxlength="50">';
 			}
@@ -251,8 +245,9 @@ class DatabaseFileField extends EditControl
 					$ext = CheckImageExtension(GetUploadedFileName("value_".$this->goodFieldName."_".$this->id));
 					if( $ext ) {
 						$thumb = CreateThumbnail($this->webValue, $this->pageObject->pSetEdit->getThumbnailSize($this->field), $ext);
-						$blobfields[] = $this->pageObject->pSetEdit->getStrThumbnail($this->field);
-						$avalues[$blobfields[count($blobfields) - 1]] = $thumb;
+						$thumbField = $this->pageObject->pSetEdit->getThumbnailField($this->field);
+						$blobfields[] = $thumbField;
+						$avalues[ $thumbField ] = $thumb;
 					}
 				}
 				//	resize on upload
@@ -269,14 +264,15 @@ class DatabaseFileField extends EditControl
 			}
 			else if($this->pageObject->pageType == PAGE_EDIT && $this->pageObject->pSetEdit->getCreateThumbnail($this->field))
 			{
-				$blobfields[] = $this->pageObject->pSetEdit->getStrThumbnail($this->field);
-				$avalues[$blobfields[count($blobfields) - 1]] = "";
+				$thumbField = $this->pageObject->pSetEdit->getThumbnailField( $this->field );
+				$blobfields[] = $thumbField;
+				$avalues[ $thumbField ] = "";
 			}
 			$blobfields[] = $this->field;
 			$avalues[$this->field] = $this->webValue;
 		}
-		if($filename && $this->pageObject->pSetEdit->getStrFilename($this->field))
-			$filename_values[$this->pageObject->pSetEdit->getStrFilename($this->field)] = $filename;
+		if($filename && $this->pageObject->pSetEdit->getFilenameField($this->field))
+			$filename_values[$this->pageObject->pSetEdit->getFilenameField($this->field)] = $filename;
 	}
 	
 	protected function fieldIsUserpic() {

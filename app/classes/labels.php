@@ -2,11 +2,8 @@
 
 class Labels {
 
-	public static function getLanguages()
-	{
-		$languages = array();
-		$languages[] = "English";
-		return $languages;
+	public static function getLanguages() {
+		return ProjectSettings::languages();
 	}
 
 	private static function findLanguage( $lng ) {
@@ -22,18 +19,28 @@ class Labels {
 		return mlang_getcurrentlang();
 	}
 
-	private static function findTable( $table ) {
-		$table = findTable( $table );
-		if( $table == "" )
+	private static function findTable( $table, $strict = false ) {
+		$table = findTable( $table, $strict );
+		if( !$table )
 			return "";
-
-		$ps = new ProjectSettings( $table ); // do not remove it - first init tables global settings
-
 		return $table;
 	}
 
-	public static function getFieldLabel( $table, $field, $lng = "" ) {
-		global $field_labels;
+	protected static function setFieldString( $key, $table, $field, $str ) {
+		global $runnerTableLabels;
+		$table = Labels::findTable( $table );
+		if( $table == "" )
+			return false;
+		$ps = new ProjectSettings( $table );
+		$field = $ps->findField( $field );
+		if( $field == "" )
+			return false;
+		$runnerTableLabels[ $table ][ $key ][ GoodFieldName($field) ] = $str;
+		return true;
+	}
+
+	protected static function getFieldString( $key, $table, $field ) {
+		global $runnerTableLabels;
 		$table = Labels::findTable( $table );
 		if( $table == "" )
 			return "";
@@ -41,138 +48,120 @@ class Labels {
 		$field = $ps->findField( $field );
 		if( $field == "" )
 			return "";
-		$lng = Labels::findLanguage( $lng );
-		return $field_labels[ GoodFieldName($table) ][ $lng ][ GoodFieldName($field) ];
+		return $runnerTableLabels[ $table ][ $key ][ GoodFieldName($field) ];
+	}
+
+	public static function getFieldLabel( $table, $field, $lng = "" ) {
+		if( $lng && $lng !== mlang_getcurrentlang() ) {
+			return "";
+		}
+		return Labels::getFieldString( 'fieldLabels', $table, $field );
 	}
 
 	public static function setFieldLabel( $table, $field, $str, $lng = "" ) {
-		global $field_labels;
-		$table = Labels::findTable( $table );
-		if( $table == "" )
+		if( $lng && $lng !== mlang_getcurrentlang() ) {
 			return false;
-		$ps = new ProjectSettings( $table );
-		$field = $ps->findField( $field );
-		if( $field == "" )
-			return false;
-		$lng = Labels::findLanguage( $lng );
-		$field_labels[ GoodFieldName($table) ][ $lng ][ GoodFieldName($field) ] = $str;
-		return true;
+		}
+		return Labels::setFieldString( 'fieldLabels', $table, $field, $str );
 	}
 
 	public static function getTableCaption( $table, $lng = "" ) {
-		global $tableCaptions;
-		$table = Labels::findTable( $table );
+		$table = Labels::findTable( $table, true );
 		if( $table == "" )
 			return "";
 		$lng = Labels::findLanguage( $lng );
-		return $tableCaptions[ $lng ][ GoodFieldName($table) ];
+		$strings = ProjectSettings::getProjectValue( 'allTables', $table, 'caption' );
+		if( !$strings ) {
+			return $table;
+		}
+		return Labels::getLanguageValue( $strings , $lng );
 	}
 
 	public static function setTableCaption( $table, $str, $lng = "" ) {
-		global $tableCaptions;
+		global $runnerProjectSettings;
 		$table = Labels::findTable( $table );
 		if( $table == "" )
 			return false;
 		$lng = Labels::findLanguage( $lng );
-		$tableCaptions[ $lng ][ GoodFieldName($table) ] = $str;
+		$runnerProjectSettings[ 'allTables' ][ $table ][ 'caption' ][ $lng ] = $str;
 		return true;
 	}
 
-	public static function getProjectLogo( $lng="")
+	public static function getProjectLogo( $lng = '' )
 	{
-		global $globalSettings;
+		global $runnerLangMessages;
 		$lng = Labels::findLanguage( $lng );
-		return $globalSettings["ProjectLogo"][$lng];
+		return @$runnerLangMessages[ $lng ]['projectLogo'];
 	}
 
 	public static function setProjectLogo( $str, $lng="" )
 	{
-		global $globalSettings;
+		global $runnerLangMessages;
 		$lng = Labels::findLanguage( $lng );
-		$globalSettings["ProjectLogo"][$lng] = $str;
+		if( !$runnerLangMessages[ $lng ] ) {
+			$runnerLangMessages[ $lng ] = array();
+		}
+		$runnerLangMessages[ $lng ]['projectLogo'] = $str;
 		return true;
 	}
 
 
-	public static function getCookieBanner( $lng="")
+	public static function getCookieBanner( $lng = '' )
 	{
-		global $globalSettings, $mlang_messages;
+		global $runnerLangMessages;
 		$lng = Labels::findLanguage( $lng );
-		$banner = $globalSettings["CookieBanner"][$lng];
-		return $banner ? $banner : @$mlang_messages[$lng]["COOKIE_BANNER"];
+		$banner = @$runnerLangMessages[ $lng ]['cookieBannerText'];
+		return $banner ? $banner : @$runnerLangMessages[ $lng ]['messages']["COOKIE_BANNER"];
 	}
 
 	public static function setCookieBanner( $str, $lng="" )
 	{
-		global $globalSettings;
+		global $runnerLangMessages;
 		$lng = Labels::findLanguage( $lng );
-		$globalSettings["CookieBanner"][$lng] = $str;
+		if( !$runnerLangMessages[ $lng ] ) {
+			$runnerLangMessages[ $lng ] = array();
+		}
+		$runnerLangMessages[ $lng ]['cookieBannerText'] = $str;
 		return true;
 	}
 
 	public static function setFieldTooltip($table, $field, $str, $lng = "")
 	{
-		global $fieldToolTips;
-
-		$table = Labels::findTable( $table );
-		if( $table == "" )
-			return false;
-		$ps = new ProjectSettings( $table );
-		$field = $ps->findField( $field );
-		if( $field == "" )
-			return false;
-		$lng = Labels::findLanguage( $lng );
-		$fieldToolTips[ GoodFieldName($table) ][ $lng ][ GoodFieldName($field) ] = $str;
-		return true;
+		if( $lng && $lng !== mlang_getcurrentlang() ) {
+			return "";
+		}
+		return Labels::setFieldString( 'fieldTooltips', $table, $field, $str );
 	}
 
 	public static function getFieldTooltip($table, $field, $lng = "")
 	{
-		global $fieldToolTips;
-
-		$table = Labels::findTable( $table );
-		if( $table == "" )
+		if( $lng && $lng !== mlang_getcurrentlang() ) {
 			return "";
-		$ps = new ProjectSettings( $table );
-		$field = $ps->findField( $field );
-		if( $field == "" )
-			return "";
-		$lng = Labels::findLanguage( $lng );
-		return $fieldToolTips[ GoodFieldName($table) ][ $lng ][ GoodFieldName($field) ];
+		}
+		return Labels::getFieldString( 'fieldTooltips', $table, $field );
 	}
 
 	public static function setPageTitleTempl( $table, $page, $str, $lng = "")
 	{
-		global $page_titles;
-
+		global $runnerTableLabels;
 		$table = Labels::findTable( $table );
-
 		if( $table == "" )
 			return false;
-
-		$lng = Labels::findLanguage( $lng );
-		$page_titles[ GoodFieldName($table) ][ $lng ][ $page ] = $str;
+		$runnerTableLabels[ $table ][ 'pageTitles' ][ $page ] = $page;
 		return  true;
 	}
 
 	public static function getPageTitleTempl( $table, $page, $lng = "")
 	{
-		global $page_titles;
-
+		global $runnerTableLabels;
 		$table = Labels::findTable( $table );
-
 		if( $table == "" )
 			return "";
-
-		$lng = Labels::findLanguage( $lng );
-
-		if( array_key_exists($page, $page_titles[ GoodFieldName($table) ][ $lng ]) )
-		{
-			$templ = $page_titles[GoodFieldName($table)][$lng][$page];
-			return $templ;
+		if( array_key_exists( $page, $runnerTableLabels[ $table ][ 'pageTitles' ]) ) {
+			return $runnerTableLabels[ $table ][ 'pageTitles' ][ $page ];
 		}
 		$ps = new ProjectSettings( $table, '', $page );
-		return RunnerPage::getDefaultPageTitle( $ps->getPageType(), GoodFieldName($table), $ps );
+		return RunnerPage::getDefaultPageTitle( $ps->getPageType(), $table, $ps );
 	}
 
 	public static function setBreadcrumbsLabelTempl( $table, $str, $master = "", $page = "", $lng = "" )
@@ -224,20 +213,10 @@ class Labels {
 	 */
 	static function getPlaceholder( $table, $field, $lng = "" )
 	{
-		global $placeHolders;
-
-		$table = findTable( $table );
-		if( $table == "" )
+		if( $lng && $lng !== mlang_getcurrentlang() ) {
 			return "";
-
-		$ps = new ProjectSettings( $table );
-		$field = $ps->findField( $field );
-		if( $field == "" )
-			return "";
-
-		$lng = Labels::findLanguage( $lng );
-
-		return $placeHolders[ GoodFieldName($table) ][ $lng ][ GoodFieldName($field) ];
+		}
+		return Labels::getFieldString( 'fieldPlaceholders', $table, $field );
 	}
 
 	/**
@@ -249,29 +228,47 @@ class Labels {
 	 */
 	static function setPlaceholder( $table, $field, $placeHolder, $lng = "" )
 	{
-		global $placeHolders;
+		if( $lng && $lng !== mlang_getcurrentlang() ) {
+			return "";
+		}
+		return Labels::setFieldString( 'fieldPlaceholders', $table, $field, $str );
+	}
 
-		$table = findTable( $table );
-		if( $table == "" )
-			return false;
+	/**
+	 * @return String
+	 */
+	public static function multilangString( $mlString ) {
+		if( !is_array( $mlString ) ) {
+			return '';
+		}
+		switch( @$mlString['type'] ) {
+			case mlTypeText: {
+				return $mlString['text'];
+			}		
+			case mlTypeCustomLabel: {
+				return GetCustomLabel( $mlString['label'] );
+			}
+		}
+		return '';
 
-		$ps = new ProjectSettings( $table );
-		$field = $ps->findField( $field );
-		if( $field == "" )
-			return false;
+	}
 
-		$lng = Labels::findLanguage( $lng );
-		$tName = GoodFieldName( $table );
-		$fName = GoodFieldName( $field );
-
-		if( !$placeHolders[ $tName] )
-			 $placeHolders[ $tName] = array();
-
-		if( !$placeHolders[ $tName ][ $lng ] )
-			 $placeHolders[ $tName ][ $lng ] = array();
-
-		$placeHolders[ $tName ][ $lng ][ $fName ] = $placeHolder;
-		return true;
+	
+	protected static function getLanguageValue( &$strings, $lang ) {
+		if( !$strings ) {
+			return '';
+		}
+		if( array_key_exists( $lang, $strings ) ) {
+			return $strings[ $lang ];
+		}
+		$defaultLang = ProjectSettings::getProjectValue( 'defaultLanguage' );
+		if( array_key_exists( $defaultLang, $strings ) ) {
+			return $strings[ $defaultLang ];
+		}
+		foreach( $strings as $str ) {
+			return $str;
+		}
+		return '';
 	}
 }
 

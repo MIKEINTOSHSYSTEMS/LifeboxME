@@ -1,7 +1,7 @@
 <!doctype html>
 <html  {$html_attrs}>
 	<head>
-				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+						<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{$pagetitle}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -10,13 +10,9 @@
     <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
     <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
     <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
-    		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
-	{BEGIN rtlCSS}
-	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
-	{END rtlCSS}
-	{BEGIN styleCSSFiles}
-	<link REL="stylesheet" href="{$stylepath}" type="text/css">
-	{END styleCSSFiles}
+    		{BEGIN styleCSSFiles}
+<link REL="stylesheet" href="{$stylepath}" type="text/css">
+{END styleCSSFiles}
 			
 	</head>
 
@@ -50,7 +46,7 @@
 
 			<div class="clearfix " data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell data-itemid="expand_button" {$item_expand_button} data-topcell-item-type="expand_button" >
 				<span data-itemtype="expand_button" data-itemid="expand_button" {$item_expand_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Expand" class="btn btn-link   
+	<a type="button" title="{mlang_message EXPAND}" class="btn btn-link   
 	" href="#" >
 					<span class="glyphicon glyphicon-triangle-right"></span>
 										</a>
@@ -218,7 +214,7 @@
 							 
 				<span class="navbar-form  navbar-header" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="expand_menu_button" {$item_expand_menu_button} data-topcell-item-type="expand_menu_button" >
 				<span data-itemtype="expand_menu_button" data-itemid="expand_menu_button" {$item_expand_menu_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Show menu" class="btn-link   
+	<a type="button" title="{mlang_message SHOW_MENU}" class="btn-link   
 	 glyphicon glyphicon-menu-hamburger" href="#" >		
 				
 								</a>
@@ -227,7 +223,7 @@
 		 
 				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="collapse_button" {$item_collapse_button} data-topcell-item-type="collapse_button" >
 				<span data-itemtype="collapse_button" data-itemid="collapse_button" {$item_collapse_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Collapse" class="btn-link   
+	<a type="button" title="{mlang_message COLLAPSE}" class="btn-link   
 	 glyphicon glyphicon-triangle-left" href="#" >		
 				
 								</a>
@@ -240,7 +236,7 @@
 <span data-itemtype="loginform_login" data-itemid="loginform_login" {$item_loginform_login} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-primary   
 	" href="#" {$guestloginlink_attrs} >
-							Login			</a>
+							{mlang_message LOGIN}			</a>
 </span>
 {END guestloginbutton}
 			</span>
@@ -251,14 +247,14 @@
 	<span class="dropdown ">
 		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
 			{BEGIN userbutton_icon}							<span class="glyphicon glyphicon-user"></span>
-						{END userbutton_icon}{$userbutton_image}			{$username}			<span class="caret"></span>
+						{END userbutton_icon}{$userbutton_image}			{$mlp_push}{$mlparam username var username}{$mltext %username%}{$mlp_pop}			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu">
 							{BEGIN userinfo_link}
 	<li data-itemtype="userinfo_link" data-itemid="userinfo_link" {$item_userinfo_link} data-pageid="{$pageid}" data-small >
 				<a  href="userinfo.php"  title="" >
 				
-		User Profile		
+		{mlang_message USERINFO}		
 		</a>
 	</li>
 {END userinfo_link}
@@ -266,7 +262,7 @@
 	<li data-itemtype="logout_link" data-itemid="logout_link" {$item_logout_link} data-pageid="{$pageid}" data-small >
 				<a  href="#" {$logoutlink_attrs}  title="" >
 				
-		Log out		
+		{mlang_message LOG_OUT}		
 		</a>
 	</li>
 {END logoutbutton}
@@ -274,7 +270,7 @@
 	<li data-itemtype="adminarea_link" data-itemid="adminarea_link" {$item_adminarea_link} data-pageid="{$pageid}" data-small >
 				<a  href="admin_rights_list.php"  title="" >
 				
-		Admin Area		
+		{mlang_message AA_ADMINAREA}		
 		</a>
 	</li>
 {END adminarea_link}
@@ -282,7 +278,7 @@
 	<li data-itemtype="changepassword_link" data-itemid="changepassword_link" {$item_changepassword_link} data-pageid="{$pageid}" data-small >
 				<a  href="changepwd.php" {$changepwdlink_attrs} id="changePasswordButton{$id}"  title="" >
 				
-		Change password		
+		{mlang_message CHANGE_PASSWORD}		
 		</a>
 	</li>
 {END changepwd_link}
@@ -331,10 +327,10 @@
 <h5>{$message}</h5>
 <div>
 {BEGIN message_back_button}
-			<button class="btn btn-sm btn-default" {$backbutton_attrs}>Back to list</button>
+			<button class="btn btn-sm btn-default" {$backbutton_attrs}>{mlang_message BACK_TO_LIST}</button>
 	{END message_back_button}
 {BEGIN message_view_page_button}
-		<a class="btn btn-sm btn-default" href="ward_rounds_view.php?{$editlink}" {$view_page_button_attrs}>View</a>
+		<a class="btn btn-sm btn-default" href="ward_rounds_view.php?{$editlink}" {$view_page_button_attrs}>{mlang_message VIEW}</a>
 {END message_view_page_button}
 </div>
 </div>
@@ -389,17 +385,19 @@
 	data-signal-error-for="case_id{$id}" {$required_attr_case_id}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="case_id" data-fieldname="case_id" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_case_id}">
-		{BEGIN case_id_label}{$label public_ward_rounds case_id }{END case_id_label}
+	<label class="r-edit-label control-label {$case_id_label_class}" for="{$labelfor_case_id}">
+		{BEGIN case_id_label}
+			{$case_id_forward_control}
+			{$label public_ward_rounds case_id }			{END case_id_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$case_id_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="case_id" {$tooltipAttr public_ward_rounds case_id } >
+		<div class="r-edit-tooltip" data-helpfor="case_id" {$tooltipAttr public_ward_rounds case_id } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds case_id }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END case_id_fieldblock}
@@ -411,17 +409,19 @@
 	data-signal-error-for="facility_id{$id}" {$required_attr_facility_id}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="facility_id" data-fieldname="facility_id" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_facility_id}">
-		{BEGIN facility_id_label}{$label public_ward_rounds facility_id }{END facility_id_label}
+	<label class="r-edit-label control-label {$facility_id_label_class}" for="{$labelfor_facility_id}">
+		{BEGIN facility_id_label}
+			{$facility_id_forward_control}
+			{$label public_ward_rounds facility_id }			{END facility_id_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$facility_id_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="facility_id" {$tooltipAttr public_ward_rounds facility_id } >
+		<div class="r-edit-tooltip" data-helpfor="facility_id" {$tooltipAttr public_ward_rounds facility_id } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds facility_id }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END facility_id_fieldblock}
@@ -433,17 +433,19 @@
 	data-signal-error-for="admission_date{$id}" {$required_attr_admission_date}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="admission_date" data-fieldname="admission_date" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_admission_date}">
-		{BEGIN admission_date_label}{$label public_ward_rounds admission_date }{END admission_date_label}
+	<label class="r-edit-label control-label {$admission_date_label_class}" for="{$labelfor_admission_date}">
+		{BEGIN admission_date_label}
+			{$admission_date_forward_control}
+			{$label public_ward_rounds admission_date }			{END admission_date_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$admission_date_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="admission_date" {$tooltipAttr public_ward_rounds admission_date } >
+		<div class="r-edit-tooltip" data-helpfor="admission_date" {$tooltipAttr public_ward_rounds admission_date } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds admission_date }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END admission_date_fieldblock}
@@ -455,17 +457,19 @@
 	data-signal-error-for="rounding_date{$id}" {$required_attr_rounding_date}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="rounding_date" data-fieldname="rounding_date" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_rounding_date}">
-		{BEGIN rounding_date_label}{$label public_ward_rounds rounding_date }{END rounding_date_label}
+	<label class="r-edit-label control-label {$rounding_date_label_class}" for="{$labelfor_rounding_date}">
+		{BEGIN rounding_date_label}
+			{$rounding_date_forward_control}
+			{$label public_ward_rounds rounding_date }			{END rounding_date_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$rounding_date_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="rounding_date" {$tooltipAttr public_ward_rounds rounding_date } >
+		<div class="r-edit-tooltip" data-helpfor="rounding_date" {$tooltipAttr public_ward_rounds rounding_date } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds rounding_date }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END rounding_date_fieldblock}
@@ -477,17 +481,19 @@
 	data-signal-error-for="data_collector_name{$id}" {$required_attr_data_collector_name}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="data_collector_name" data-fieldname="data_collector_name" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_data_collector_name}">
-		{BEGIN data_collector_name_label}{$label public_ward_rounds data_collector_name }{END data_collector_name_label}
+	<label class="r-edit-label control-label {$data_collector_name_label_class}" for="{$labelfor_data_collector_name}">
+		{BEGIN data_collector_name_label}
+			{$data_collector_name_forward_control}
+			{$label public_ward_rounds data_collector_name }			{END data_collector_name_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$data_collector_name_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="data_collector_name" {$tooltipAttr public_ward_rounds data_collector_name } >
+		<div class="r-edit-tooltip" data-helpfor="data_collector_name" {$tooltipAttr public_ward_rounds data_collector_name } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds data_collector_name }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END data_collector_name_fieldblock}
@@ -499,17 +505,19 @@
 	data-signal-error-for="ward_name{$id}" {$required_attr_ward_name}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="ward_name" data-fieldname="ward_name" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_ward_name}">
-		{BEGIN ward_name_label}{$label public_ward_rounds ward_name }{END ward_name_label}
+	<label class="r-edit-label control-label {$ward_name_label_class}" for="{$labelfor_ward_name}">
+		{BEGIN ward_name_label}
+			{$ward_name_forward_control}
+			{$label public_ward_rounds ward_name }			{END ward_name_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$ward_name_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="ward_name" {$tooltipAttr public_ward_rounds ward_name } >
+		<div class="r-edit-tooltip" data-helpfor="ward_name" {$tooltipAttr public_ward_rounds ward_name } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds ward_name }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END ward_name_fieldblock}
@@ -521,17 +529,19 @@
 	data-signal-error-for="ward_transfer{$id}" {$required_attr_ward_transfer}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="ward_transfer" data-fieldname="ward_transfer" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_ward_transfer}">
-		{BEGIN ward_transfer_label}{$label public_ward_rounds ward_transfer }{END ward_transfer_label}
+	<label class="r-edit-label control-label {$ward_transfer_label_class}" for="{$labelfor_ward_transfer}">
+		{BEGIN ward_transfer_label}
+			{$ward_transfer_forward_control}
+			{$label public_ward_rounds ward_transfer }			{END ward_transfer_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$ward_transfer_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="ward_transfer" {$tooltipAttr public_ward_rounds ward_transfer } >
+		<div class="r-edit-tooltip" data-helpfor="ward_transfer" {$tooltipAttr public_ward_rounds ward_transfer } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds ward_transfer }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END ward_transfer_fieldblock}
@@ -543,17 +553,19 @@
 	data-signal-error-for="postop_day{$id}" {$required_attr_postop_day}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="postop_day" data-fieldname="postop_day" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_postop_day}">
-		{BEGIN postop_day_label}{$label public_ward_rounds postop_day }{END postop_day_label}
+	<label class="r-edit-label control-label {$postop_day_label_class}" for="{$labelfor_postop_day}">
+		{BEGIN postop_day_label}
+			{$postop_day_forward_control}
+			{$label public_ward_rounds postop_day }			{END postop_day_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$postop_day_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="postop_day" {$tooltipAttr public_ward_rounds postop_day } >
+		<div class="r-edit-tooltip" data-helpfor="postop_day" {$tooltipAttr public_ward_rounds postop_day } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds postop_day }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END postop_day_fieldblock}
@@ -565,17 +577,19 @@
 	data-signal-error-for="dressing_not_removed{$id}" {$required_attr_dressing_not_removed}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="dressing_not_removed" data-fieldname="dressing_not_removed" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_dressing_not_removed}">
-		{BEGIN dressing_not_removed_label}{$label public_ward_rounds dressing_not_removed }{END dressing_not_removed_label}
+	<label class="r-edit-label control-label {$dressing_not_removed_label_class}" for="{$labelfor_dressing_not_removed}">
+		{BEGIN dressing_not_removed_label}
+			{$dressing_not_removed_forward_control}
+			{$label public_ward_rounds dressing_not_removed }			{END dressing_not_removed_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$dressing_not_removed_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="dressing_not_removed" {$tooltipAttr public_ward_rounds dressing_not_removed } >
+		<div class="r-edit-tooltip" data-helpfor="dressing_not_removed" {$tooltipAttr public_ward_rounds dressing_not_removed } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds dressing_not_removed }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END dressing_not_removed_fieldblock}
@@ -587,17 +601,19 @@
 	data-signal-error-for="wound_clean_and_healthy{$id}" {$required_attr_wound_clean_and_healthy}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="wound_clean_and_healthy" data-fieldname="wound_clean_and_healthy" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_wound_clean_and_healthy}">
-		{BEGIN wound_clean_and_healthy_label}{$label public_ward_rounds wound_clean_and_healthy }{END wound_clean_and_healthy_label}
+	<label class="r-edit-label control-label {$wound_clean_and_healthy_label_class}" for="{$labelfor_wound_clean_and_healthy}">
+		{BEGIN wound_clean_and_healthy_label}
+			{$wound_clean_and_healthy_forward_control}
+			{$label public_ward_rounds wound_clean_and_healthy }			{END wound_clean_and_healthy_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$wound_clean_and_healthy_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="wound_clean_and_healthy" {$tooltipAttr public_ward_rounds wound_clean_and_healthy } >
+		<div class="r-edit-tooltip" data-helpfor="wound_clean_and_healthy" {$tooltipAttr public_ward_rounds wound_clean_and_healthy } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds wound_clean_and_healthy }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END wound_clean_and_healthy_fieldblock}
@@ -609,17 +625,19 @@
 	data-signal-error-for="stitches_removed_or_wound_opened{$id}" {$required_attr_stitches_removed_or_wound_opened}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="stitches_removed_or_wound_opened" data-fieldname="stitches_removed_or_wound_opened" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_stitches_removed_or_wound_opened}">
-		{BEGIN stitches_removed_or_wound_opened_label}{$label public_ward_rounds stitches_removed_or_wound_opened }{END stitches_removed_or_wound_opened_label}
+	<label class="r-edit-label control-label {$stitches_removed_or_wound_opened_label_class}" for="{$labelfor_stitches_removed_or_wound_opened}">
+		{BEGIN stitches_removed_or_wound_opened_label}
+			{$stitches_removed_or_wound_opened_forward_control}
+			{$label public_ward_rounds stitches_removed_or_wound_opened }			{END stitches_removed_or_wound_opened_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$stitches_removed_or_wound_opened_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="stitches_removed_or_wound_opened" {$tooltipAttr public_ward_rounds stitches_removed_or_wound_opened } >
+		<div class="r-edit-tooltip" data-helpfor="stitches_removed_or_wound_opened" {$tooltipAttr public_ward_rounds stitches_removed_or_wound_opened } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds stitches_removed_or_wound_opened }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END stitches_removed_or_wound_opened_fieldblock}
@@ -631,17 +649,19 @@
 	data-signal-error-for="wound_opened_spontaneously{$id}" {$required_attr_wound_opened_spontaneously}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="wound_opened_spontaneously" data-fieldname="wound_opened_spontaneously" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_wound_opened_spontaneously}">
-		{BEGIN wound_opened_spontaneously_label}{$label public_ward_rounds wound_opened_spontaneously }{END wound_opened_spontaneously_label}
+	<label class="r-edit-label control-label {$wound_opened_spontaneously_label_class}" for="{$labelfor_wound_opened_spontaneously}">
+		{BEGIN wound_opened_spontaneously_label}
+			{$wound_opened_spontaneously_forward_control}
+			{$label public_ward_rounds wound_opened_spontaneously }			{END wound_opened_spontaneously_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$wound_opened_spontaneously_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="wound_opened_spontaneously" {$tooltipAttr public_ward_rounds wound_opened_spontaneously } >
+		<div class="r-edit-tooltip" data-helpfor="wound_opened_spontaneously" {$tooltipAttr public_ward_rounds wound_opened_spontaneously } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds wound_opened_spontaneously }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END wound_opened_spontaneously_fieldblock}
@@ -653,17 +673,19 @@
 	data-signal-error-for="pus_draining{$id}" {$required_attr_pus_draining}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="pus_draining" data-fieldname="pus_draining" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_pus_draining}">
-		{BEGIN pus_draining_label}{$label public_ward_rounds pus_draining }{END pus_draining_label}
+	<label class="r-edit-label control-label {$pus_draining_label_class}" for="{$labelfor_pus_draining}">
+		{BEGIN pus_draining_label}
+			{$pus_draining_forward_control}
+			{$label public_ward_rounds pus_draining }			{END pus_draining_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$pus_draining_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="pus_draining" {$tooltipAttr public_ward_rounds pus_draining } >
+		<div class="r-edit-tooltip" data-helpfor="pus_draining" {$tooltipAttr public_ward_rounds pus_draining } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds pus_draining }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END pus_draining_fieldblock}
@@ -675,17 +697,19 @@
 	data-signal-error-for="abscess_present{$id}" {$required_attr_abscess_present}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field13" {$item_integrated_edit_field13} data-pageid="{$pageid}" data-field="abscess_present" data-fieldname="abscess_present" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_abscess_present}">
-		{BEGIN abscess_present_label}{$label public_ward_rounds abscess_present }{END abscess_present_label}
+	<label class="r-edit-label control-label {$abscess_present_label_class}" for="{$labelfor_abscess_present}">
+		{BEGIN abscess_present_label}
+			{$abscess_present_forward_control}
+			{$label public_ward_rounds abscess_present }			{END abscess_present_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$abscess_present_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="abscess_present" {$tooltipAttr public_ward_rounds abscess_present } >
+		<div class="r-edit-tooltip" data-helpfor="abscess_present" {$tooltipAttr public_ward_rounds abscess_present } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds abscess_present }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END abscess_present_fieldblock}
@@ -697,17 +721,19 @@
 	data-signal-error-for="redness_around_wound{$id}" {$required_attr_redness_around_wound}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field14" {$item_integrated_edit_field14} data-pageid="{$pageid}" data-field="redness_around_wound" data-fieldname="redness_around_wound" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_redness_around_wound}">
-		{BEGIN redness_around_wound_label}{$label public_ward_rounds redness_around_wound }{END redness_around_wound_label}
+	<label class="r-edit-label control-label {$redness_around_wound_label_class}" for="{$labelfor_redness_around_wound}">
+		{BEGIN redness_around_wound_label}
+			{$redness_around_wound_forward_control}
+			{$label public_ward_rounds redness_around_wound }			{END redness_around_wound_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$redness_around_wound_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="redness_around_wound" {$tooltipAttr public_ward_rounds redness_around_wound } >
+		<div class="r-edit-tooltip" data-helpfor="redness_around_wound" {$tooltipAttr public_ward_rounds redness_around_wound } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds redness_around_wound }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END redness_around_wound_fieldblock}
@@ -719,17 +745,19 @@
 	data-signal-error-for="bleeding{$id}" {$required_attr_bleeding}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field15" {$item_integrated_edit_field15} data-pageid="{$pageid}" data-field="bleeding" data-fieldname="bleeding" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_bleeding}">
-		{BEGIN bleeding_label}{$label public_ward_rounds bleeding }{END bleeding_label}
+	<label class="r-edit-label control-label {$bleeding_label_class}" for="{$labelfor_bleeding}">
+		{BEGIN bleeding_label}
+			{$bleeding_forward_control}
+			{$label public_ward_rounds bleeding }			{END bleeding_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$bleeding_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="bleeding" {$tooltipAttr public_ward_rounds bleeding } >
+		<div class="r-edit-tooltip" data-helpfor="bleeding" {$tooltipAttr public_ward_rounds bleeding } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds bleeding }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END bleeding_fieldblock}
@@ -741,17 +769,19 @@
 	data-signal-error-for="new_dressing{$id}" {$required_attr_new_dressing}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field16" {$item_integrated_edit_field16} data-pageid="{$pageid}" data-field="new_dressing" data-fieldname="new_dressing" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_new_dressing}">
-		{BEGIN new_dressing_label}{$label public_ward_rounds new_dressing }{END new_dressing_label}
+	<label class="r-edit-label control-label {$new_dressing_label_class}" for="{$labelfor_new_dressing}">
+		{BEGIN new_dressing_label}
+			{$new_dressing_forward_control}
+			{$label public_ward_rounds new_dressing }			{END new_dressing_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$new_dressing_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="new_dressing" {$tooltipAttr public_ward_rounds new_dressing } >
+		<div class="r-edit-tooltip" data-helpfor="new_dressing" {$tooltipAttr public_ward_rounds new_dressing } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds new_dressing }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END new_dressing_fieldblock}
@@ -763,17 +793,19 @@
 	data-signal-error-for="new_dressing_type{$id}" {$required_attr_new_dressing_type}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field17" {$item_integrated_edit_field17} data-pageid="{$pageid}" data-field="new_dressing_type" data-fieldname="new_dressing_type" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_new_dressing_type}">
-		{BEGIN new_dressing_type_label}{$label public_ward_rounds new_dressing_type }{END new_dressing_type_label}
+	<label class="r-edit-label control-label {$new_dressing_type_label_class}" for="{$labelfor_new_dressing_type}">
+		{BEGIN new_dressing_type_label}
+			{$new_dressing_type_forward_control}
+			{$label public_ward_rounds new_dressing_type }			{END new_dressing_type_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$new_dressing_type_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="new_dressing_type" {$tooltipAttr public_ward_rounds new_dressing_type } >
+		<div class="r-edit-tooltip" data-helpfor="new_dressing_type" {$tooltipAttr public_ward_rounds new_dressing_type } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds new_dressing_type }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END new_dressing_type_fieldblock}
@@ -785,17 +817,19 @@
 	data-signal-error-for="fever{$id}" {$required_attr_fever}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field18" {$item_integrated_edit_field18} data-pageid="{$pageid}" data-field="fever" data-fieldname="fever" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_fever}">
-		{BEGIN fever_label}{$label public_ward_rounds fever }{END fever_label}
+	<label class="r-edit-label control-label {$fever_label_class}" for="{$labelfor_fever}">
+		{BEGIN fever_label}
+			{$fever_forward_control}
+			{$label public_ward_rounds fever }			{END fever_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$fever_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="fever" {$tooltipAttr public_ward_rounds fever } >
+		<div class="r-edit-tooltip" data-helpfor="fever" {$tooltipAttr public_ward_rounds fever } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds fever }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END fever_fieldblock}
@@ -807,17 +841,19 @@
 	data-signal-error-for="on_antibiotics{$id}" {$required_attr_on_antibiotics}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field19" {$item_integrated_edit_field19} data-pageid="{$pageid}" data-field="on_antibiotics" data-fieldname="on_antibiotics" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_on_antibiotics}">
-		{BEGIN on_antibiotics_label}{$label public_ward_rounds on_antibiotics }{END on_antibiotics_label}
+	<label class="r-edit-label control-label {$on_antibiotics_label_class}" for="{$labelfor_on_antibiotics}">
+		{BEGIN on_antibiotics_label}
+			{$on_antibiotics_forward_control}
+			{$label public_ward_rounds on_antibiotics }			{END on_antibiotics_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$on_antibiotics_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="on_antibiotics" {$tooltipAttr public_ward_rounds on_antibiotics } >
+		<div class="r-edit-tooltip" data-helpfor="on_antibiotics" {$tooltipAttr public_ward_rounds on_antibiotics } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds on_antibiotics }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END on_antibiotics_fieldblock}
@@ -829,17 +865,19 @@
 	data-signal-error-for="antibiotics_prescribed{$id}" {$required_attr_antibiotics_prescribed}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field20" {$item_integrated_edit_field20} data-pageid="{$pageid}" data-field="antibiotics_prescribed" data-fieldname="antibiotics_prescribed" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_antibiotics_prescribed}">
-		{BEGIN antibiotics_prescribed_label}{$label public_ward_rounds antibiotics_prescribed }{END antibiotics_prescribed_label}
+	<label class="r-edit-label control-label {$antibiotics_prescribed_label_class}" for="{$labelfor_antibiotics_prescribed}">
+		{BEGIN antibiotics_prescribed_label}
+			{$antibiotics_prescribed_forward_control}
+			{$label public_ward_rounds antibiotics_prescribed }			{END antibiotics_prescribed_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$antibiotics_prescribed_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="antibiotics_prescribed" {$tooltipAttr public_ward_rounds antibiotics_prescribed } >
+		<div class="r-edit-tooltip" data-helpfor="antibiotics_prescribed" {$tooltipAttr public_ward_rounds antibiotics_prescribed } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds antibiotics_prescribed }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END antibiotics_prescribed_fieldblock}
@@ -851,17 +889,19 @@
 	data-signal-error-for="ssi_diagnosed_on_reoperation{$id}" {$required_attr_ssi_diagnosed_on_reoperation}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field21" {$item_integrated_edit_field21} data-pageid="{$pageid}" data-field="ssi_diagnosed_on_reoperation" data-fieldname="ssi_diagnosed_on_reoperation" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_ssi_diagnosed_on_reoperation}">
-		{BEGIN ssi_diagnosed_on_reoperation_label}{$label public_ward_rounds ssi_diagnosed_on_reoperation }{END ssi_diagnosed_on_reoperation_label}
+	<label class="r-edit-label control-label {$ssi_diagnosed_on_reoperation_label_class}" for="{$labelfor_ssi_diagnosed_on_reoperation}">
+		{BEGIN ssi_diagnosed_on_reoperation_label}
+			{$ssi_diagnosed_on_reoperation_forward_control}
+			{$label public_ward_rounds ssi_diagnosed_on_reoperation }			{END ssi_diagnosed_on_reoperation_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$ssi_diagnosed_on_reoperation_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="ssi_diagnosed_on_reoperation" {$tooltipAttr public_ward_rounds ssi_diagnosed_on_reoperation } >
+		<div class="r-edit-tooltip" data-helpfor="ssi_diagnosed_on_reoperation" {$tooltipAttr public_ward_rounds ssi_diagnosed_on_reoperation } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds ssi_diagnosed_on_reoperation }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END ssi_diagnosed_on_reoperation_fieldblock}
@@ -873,17 +913,19 @@
 	data-signal-error-for="returned_to_or{$id}" {$required_attr_returned_to_or}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field22" {$item_integrated_edit_field22} data-pageid="{$pageid}" data-field="returned_to_or" data-fieldname="returned_to_or" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_returned_to_or}">
-		{BEGIN returned_to_or_label}{$label public_ward_rounds returned_to_or }{END returned_to_or_label}
+	<label class="r-edit-label control-label {$returned_to_or_label_class}" for="{$labelfor_returned_to_or}">
+		{BEGIN returned_to_or_label}
+			{$returned_to_or_forward_control}
+			{$label public_ward_rounds returned_to_or }			{END returned_to_or_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$returned_to_or_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="returned_to_or" {$tooltipAttr public_ward_rounds returned_to_or } >
+		<div class="r-edit-tooltip" data-helpfor="returned_to_or" {$tooltipAttr public_ward_rounds returned_to_or } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds returned_to_or }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END returned_to_or_fieldblock}
@@ -895,17 +937,19 @@
 	data-signal-error-for="return_or_procedure{$id}" {$required_attr_return_or_procedure}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field23" {$item_integrated_edit_field23} data-pageid="{$pageid}" data-field="return_or_procedure" data-fieldname="return_or_procedure" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_return_or_procedure}">
-		{BEGIN return_or_procedure_label}{$label public_ward_rounds return_or_procedure }{END return_or_procedure_label}
+	<label class="r-edit-label control-label {$return_or_procedure_label_class}" for="{$labelfor_return_or_procedure}">
+		{BEGIN return_or_procedure_label}
+			{$return_or_procedure_forward_control}
+			{$label public_ward_rounds return_or_procedure }			{END return_or_procedure_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$return_or_procedure_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="return_or_procedure" {$tooltipAttr public_ward_rounds return_or_procedure } >
+		<div class="r-edit-tooltip" data-helpfor="return_or_procedure" {$tooltipAttr public_ward_rounds return_or_procedure } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds return_or_procedure }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END return_or_procedure_fieldblock}
@@ -917,17 +961,19 @@
 	data-signal-error-for="disposition{$id}" {$required_attr_disposition}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field24" {$item_integrated_edit_field24} data-pageid="{$pageid}" data-field="disposition" data-fieldname="disposition" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_disposition}">
-		{BEGIN disposition_label}{$label public_ward_rounds disposition }{END disposition_label}
+	<label class="r-edit-label control-label {$disposition_label_class}" for="{$labelfor_disposition}">
+		{BEGIN disposition_label}
+			{$disposition_forward_control}
+			{$label public_ward_rounds disposition }			{END disposition_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$disposition_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="disposition" {$tooltipAttr public_ward_rounds disposition } >
+		<div class="r-edit-tooltip" data-helpfor="disposition" {$tooltipAttr public_ward_rounds disposition } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds disposition }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END disposition_fieldblock}
@@ -939,17 +985,19 @@
 	data-signal-error-for="planned_reoperation{$id}" {$required_attr_planned_reoperation}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field25" {$item_integrated_edit_field25} data-pageid="{$pageid}" data-field="planned_reoperation" data-fieldname="planned_reoperation" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_planned_reoperation}">
-		{BEGIN planned_reoperation_label}{$label public_ward_rounds planned_reoperation }{END planned_reoperation_label}
+	<label class="r-edit-label control-label {$planned_reoperation_label_class}" for="{$labelfor_planned_reoperation}">
+		{BEGIN planned_reoperation_label}
+			{$planned_reoperation_forward_control}
+			{$label public_ward_rounds planned_reoperation }			{END planned_reoperation_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$planned_reoperation_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="planned_reoperation" {$tooltipAttr public_ward_rounds planned_reoperation } >
+		<div class="r-edit-tooltip" data-helpfor="planned_reoperation" {$tooltipAttr public_ward_rounds planned_reoperation } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds planned_reoperation }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END planned_reoperation_fieldblock}
@@ -961,17 +1009,19 @@
 	data-signal-error-for="other_complications{$id}" {$required_attr_other_complications}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field26" {$item_integrated_edit_field26} data-pageid="{$pageid}" data-field="other_complications" data-fieldname="other_complications" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_other_complications}">
-		{BEGIN other_complications_label}{$label public_ward_rounds other_complications }{END other_complications_label}
+	<label class="r-edit-label control-label {$other_complications_label_class}" for="{$labelfor_other_complications}">
+		{BEGIN other_complications_label}
+			{$other_complications_forward_control}
+			{$label public_ward_rounds other_complications }			{END other_complications_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$other_complications_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="other_complications" {$tooltipAttr public_ward_rounds other_complications } >
+		<div class="r-edit-tooltip" data-helpfor="other_complications" {$tooltipAttr public_ward_rounds other_complications } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds other_complications }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END other_complications_fieldblock}
@@ -983,17 +1033,19 @@
 	data-signal-error-for="endometritis{$id}" {$required_attr_endometritis}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field27" {$item_integrated_edit_field27} data-pageid="{$pageid}" data-field="endometritis" data-fieldname="endometritis" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_endometritis}">
-		{BEGIN endometritis_label}{$label public_ward_rounds endometritis }{END endometritis_label}
+	<label class="r-edit-label control-label {$endometritis_label_class}" for="{$labelfor_endometritis}">
+		{BEGIN endometritis_label}
+			{$endometritis_forward_control}
+			{$label public_ward_rounds endometritis }			{END endometritis_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$endometritis_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="endometritis" {$tooltipAttr public_ward_rounds endometritis } >
+		<div class="r-edit-tooltip" data-helpfor="endometritis" {$tooltipAttr public_ward_rounds endometritis } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds endometritis }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END endometritis_fieldblock}
@@ -1005,17 +1057,19 @@
 	data-signal-error-for="urinary_tract_infection{$id}" {$required_attr_urinary_tract_infection}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field28" {$item_integrated_edit_field28} data-pageid="{$pageid}" data-field="urinary_tract_infection" data-fieldname="urinary_tract_infection" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_urinary_tract_infection}">
-		{BEGIN urinary_tract_infection_label}{$label public_ward_rounds urinary_tract_infection }{END urinary_tract_infection_label}
+	<label class="r-edit-label control-label {$urinary_tract_infection_label_class}" for="{$labelfor_urinary_tract_infection}">
+		{BEGIN urinary_tract_infection_label}
+			{$urinary_tract_infection_forward_control}
+			{$label public_ward_rounds urinary_tract_infection }			{END urinary_tract_infection_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$urinary_tract_infection_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="urinary_tract_infection" {$tooltipAttr public_ward_rounds urinary_tract_infection } >
+		<div class="r-edit-tooltip" data-helpfor="urinary_tract_infection" {$tooltipAttr public_ward_rounds urinary_tract_infection } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds urinary_tract_infection }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END urinary_tract_infection_fieldblock}
@@ -1027,17 +1081,19 @@
 	data-signal-error-for="pneumonia{$id}" {$required_attr_pneumonia}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field29" {$item_integrated_edit_field29} data-pageid="{$pageid}" data-field="pneumonia" data-fieldname="pneumonia" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_pneumonia}">
-		{BEGIN pneumonia_label}{$label public_ward_rounds pneumonia }{END pneumonia_label}
+	<label class="r-edit-label control-label {$pneumonia_label_class}" for="{$labelfor_pneumonia}">
+		{BEGIN pneumonia_label}
+			{$pneumonia_forward_control}
+			{$label public_ward_rounds pneumonia }			{END pneumonia_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$pneumonia_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="pneumonia" {$tooltipAttr public_ward_rounds pneumonia } >
+		<div class="r-edit-tooltip" data-helpfor="pneumonia" {$tooltipAttr public_ward_rounds pneumonia } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds pneumonia }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END pneumonia_fieldblock}
@@ -1049,17 +1105,19 @@
 	data-signal-error-for="other_complication_description{$id}" {$required_attr_other_complication_description}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field30" {$item_integrated_edit_field30} data-pageid="{$pageid}" data-field="other_complication_description" data-fieldname="other_complication_description" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_other_complication_description}">
-		{BEGIN other_complication_description_label}{$label public_ward_rounds other_complication_description }{END other_complication_description_label}
+	<label class="r-edit-label control-label {$other_complication_description_label_class}" for="{$labelfor_other_complication_description}">
+		{BEGIN other_complication_description_label}
+			{$other_complication_description_forward_control}
+			{$label public_ward_rounds other_complication_description }			{END other_complication_description_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$other_complication_description_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="other_complication_description" {$tooltipAttr public_ward_rounds other_complication_description } >
+		<div class="r-edit-tooltip" data-helpfor="other_complication_description" {$tooltipAttr public_ward_rounds other_complication_description } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds other_complication_description }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END other_complication_description_fieldblock}
@@ -1071,17 +1129,19 @@
 	data-signal-error-for="eschar{$id}" {$required_attr_eschar}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field31" {$item_integrated_edit_field31} data-pageid="{$pageid}" data-field="eschar" data-fieldname="eschar" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_eschar}">
-		{BEGIN eschar_label}{$label public_ward_rounds eschar }{END eschar_label}
+	<label class="r-edit-label control-label {$eschar_label_class}" for="{$labelfor_eschar}">
+		{BEGIN eschar_label}
+			{$eschar_forward_control}
+			{$label public_ward_rounds eschar }			{END eschar_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$eschar_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="eschar" {$tooltipAttr public_ward_rounds eschar } >
+		<div class="r-edit-tooltip" data-helpfor="eschar" {$tooltipAttr public_ward_rounds eschar } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds eschar }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END eschar_fieldblock}
@@ -1093,17 +1153,19 @@
 	data-signal-error-for="discharged_today{$id}" {$required_attr_discharged_today}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field32" {$item_integrated_edit_field32} data-pageid="{$pageid}" data-field="discharged_today" data-fieldname="discharged_today" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_discharged_today}">
-		{BEGIN discharged_today_label}{$label public_ward_rounds discharged_today }{END discharged_today_label}
+	<label class="r-edit-label control-label {$discharged_today_label_class}" for="{$labelfor_discharged_today}">
+		{BEGIN discharged_today_label}
+			{$discharged_today_forward_control}
+			{$label public_ward_rounds discharged_today }			{END discharged_today_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$discharged_today_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="discharged_today" {$tooltipAttr public_ward_rounds discharged_today } >
+		<div class="r-edit-tooltip" data-helpfor="discharged_today" {$tooltipAttr public_ward_rounds discharged_today } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds discharged_today }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END discharged_today_fieldblock}
@@ -1115,17 +1177,19 @@
 	data-signal-error-for="discharge_date{$id}" {$required_attr_discharge_date}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field33" {$item_integrated_edit_field33} data-pageid="{$pageid}" data-field="discharge_date" data-fieldname="discharge_date" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_discharge_date}">
-		{BEGIN discharge_date_label}{$label public_ward_rounds discharge_date }{END discharge_date_label}
+	<label class="r-edit-label control-label {$discharge_date_label_class}" for="{$labelfor_discharge_date}">
+		{BEGIN discharge_date_label}
+			{$discharge_date_forward_control}
+			{$label public_ward_rounds discharge_date }			{END discharge_date_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$discharge_date_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="discharge_date" {$tooltipAttr public_ward_rounds discharge_date } >
+		<div class="r-edit-tooltip" data-helpfor="discharge_date" {$tooltipAttr public_ward_rounds discharge_date } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds discharge_date }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END discharge_date_fieldblock}
@@ -1137,17 +1201,19 @@
 	data-signal-error-for="death_in_ward{$id}" {$required_attr_death_in_ward}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field34" {$item_integrated_edit_field34} data-pageid="{$pageid}" data-field="death_in_ward" data-fieldname="death_in_ward" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_death_in_ward}">
-		{BEGIN death_in_ward_label}{$label public_ward_rounds death_in_ward }{END death_in_ward_label}
+	<label class="r-edit-label control-label {$death_in_ward_label_class}" for="{$labelfor_death_in_ward}">
+		{BEGIN death_in_ward_label}
+			{$death_in_ward_forward_control}
+			{$label public_ward_rounds death_in_ward }			{END death_in_ward_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$death_in_ward_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="death_in_ward" {$tooltipAttr public_ward_rounds death_in_ward } >
+		<div class="r-edit-tooltip" data-helpfor="death_in_ward" {$tooltipAttr public_ward_rounds death_in_ward } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds death_in_ward }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END death_in_ward_fieldblock}
@@ -1159,17 +1225,19 @@
 	data-signal-error-for="neonatal_death{$id}" {$required_attr_neonatal_death}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field35" {$item_integrated_edit_field35} data-pageid="{$pageid}" data-field="neonatal_death" data-fieldname="neonatal_death" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_neonatal_death}">
-		{BEGIN neonatal_death_label}{$label public_ward_rounds neonatal_death }{END neonatal_death_label}
+	<label class="r-edit-label control-label {$neonatal_death_label_class}" for="{$labelfor_neonatal_death}">
+		{BEGIN neonatal_death_label}
+			{$neonatal_death_forward_control}
+			{$label public_ward_rounds neonatal_death }			{END neonatal_death_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$neonatal_death_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="neonatal_death" {$tooltipAttr public_ward_rounds neonatal_death } >
+		<div class="r-edit-tooltip" data-helpfor="neonatal_death" {$tooltipAttr public_ward_rounds neonatal_death } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds neonatal_death }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END neonatal_death_fieldblock}
@@ -1181,17 +1249,19 @@
 	data-signal-error-for="created_at{$id}" {$required_attr_created_at}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field36" {$item_integrated_edit_field36} data-pageid="{$pageid}" data-field="created_at" data-fieldname="created_at" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_created_at}">
-		{BEGIN created_at_label}{$label public_ward_rounds created_at }{END created_at_label}
+	<label class="r-edit-label control-label {$created_at_label_class}" for="{$labelfor_created_at}">
+		{BEGIN created_at_label}
+			{$created_at_forward_control}
+			{$label public_ward_rounds created_at }			{END created_at_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$created_at_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="created_at" {$tooltipAttr public_ward_rounds created_at } >
+		<div class="r-edit-tooltip" data-helpfor="created_at" {$tooltipAttr public_ward_rounds created_at } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds created_at }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END created_at_fieldblock}
@@ -1203,17 +1273,19 @@
 	data-signal-error-for="updated_at{$id}" {$required_attr_updated_at}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field37" {$item_integrated_edit_field37} data-pageid="{$pageid}" data-field="updated_at" data-fieldname="updated_at" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_updated_at}">
-		{BEGIN updated_at_label}{$label public_ward_rounds updated_at }{END updated_at_label}
+	<label class="r-edit-label control-label {$updated_at_label_class}" for="{$labelfor_updated_at}">
+		{BEGIN updated_at_label}
+			{$updated_at_forward_control}
+			{$label public_ward_rounds updated_at }			{END updated_at_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$updated_at_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="updated_at" {$tooltipAttr public_ward_rounds updated_at } >
+		<div class="r-edit-tooltip" data-helpfor="updated_at" {$tooltipAttr public_ward_rounds updated_at } >
 		<div class="text-muted" >
 		{$tooltip public_ward_rounds updated_at }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END updated_at_fieldblock}
@@ -1240,7 +1312,7 @@
 <span data-itemtype="edit_save" data-itemid="edit_save" {$item_edit_save} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-primary   
 	" {$savebutton_attrs} >
-							Save			</a>
+							{mlang_message SAVE}			</a>
 </span>
 {END save_edit}
 	 
@@ -1248,7 +1320,7 @@
 <span data-itemtype="edit_back_list" data-itemid="edit_back_list" {$item_edit_back_list} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-default   
 	" {$backbutton_attrs} >
-							Back to list			</a>
+							{mlang_message BACK_TO_LIST}			</a>
 </span>
 {END back_button}
 	 
@@ -1256,7 +1328,7 @@
 <span data-itemtype="edit_close" data-itemid="edit_close" {$item_edit_close} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-default   
 	" {$closebutton_attrs} >
-							Cancel			</a>
+							{mlang_message CANCEL}			</a>
 </span>
 {END close_button}
 		</div>			 
@@ -1273,17 +1345,19 @@
 												<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu">
-								<li data-itemtype="edit_reset" data-itemid="edit_reset" {$item_edit_reset} data-pageid="{$pageid}" data-small >
+							{BEGIN reset_button}
+	<li data-itemtype="edit_reset" data-itemid="edit_reset" {$item_edit_reset} data-pageid="{$pageid}" data-small >
 				<a  {$resetbutton_attrs}  title="" >
 				
-		Reset		
+		{mlang_message RESET}		
 		</a>
 	</li>
+{END reset_button}
 							{BEGIN view_page_button}
 	<li data-itemtype="edit_view" data-itemid="edit_view" {$item_edit_view} data-pageid="{$pageid}" data-small >
 				<a  href="ward_rounds_view.php?{$editlink}" {$view_page_button_attrs}  title="" >
 				
-		View		
+		{mlang_message VIEW}		
 		</a>
 	</li>
 {END view_page_button}

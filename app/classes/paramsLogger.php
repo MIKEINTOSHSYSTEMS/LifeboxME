@@ -1,10 +1,6 @@
 <?php
 class paramsLogger
 {
-	/**
-	 * @type String
-	 */
-	protected $paramsTableName = "public.lifeboxme_settings";
 
 	/**
 	 * 1 - saved searches
@@ -43,7 +39,7 @@ class paramsLogger
 		$this->assignUserId();
 		$this->assignCookieParams();
 		
-		$this->dataSource = getTableDataSource( $this->paramsTableName, $cman->getSavedSearchesConnId() );
+		$this->dataSource = getTableDataSource( ProjectSettings::getProjectValue( 'settingsTable', 'table' ), $cman->getSavedSearchesConnId() );
 	}
 
 	/**
@@ -108,7 +104,7 @@ class paramsLogger
 		$dc = new DsCommand();
 		
 		$values = $_values;
-		$values["SEARCH"] = my_json_encode( $data );
+		$values["SEARCH"] = runner_json_encode( $data );
 		$values["TABLENAME"] = $this->tableNameId;
 		
 		if ( $this->userID ) {
@@ -148,7 +144,7 @@ class paramsLogger
 		
 		$values = array();
 		$values["NAME"] = $deviceClass;
-		$values["SEARCH"] = my_json_encode( $data );
+		$values["SEARCH"] = runner_json_encode( $data );
 		$values["TABLENAME"] = $this->tableNameId;
 		$values["TYPE"] = $this->type;
 		
@@ -178,7 +174,7 @@ class paramsLogger
 	protected function getUpdateCommand( $data ) {
 		$dc = $this->getDataCommand();
 		$dc->values = array();
-		$dc->values[ "SEARCH" ] = my_json_encode( $data );
+		$dc->values[ "SEARCH" ] = runner_json_encode( $data );
 		return $dc;
 	}
 
@@ -203,7 +199,7 @@ class paramsLogger
 	 * @return array or null
 	 */
 	public function decode( $data ) {
-		$parsed = my_json_decode( $data );
+		$parsed = runner_json_decode( $data );
 		if( !is_array( $parsed ) )
 			return runner_unserialize_array( $data );
 		return $parsed;

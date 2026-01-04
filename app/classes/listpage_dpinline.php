@@ -67,16 +67,10 @@ class ListPage_DPInline extends ListPage_Embed
 			$this->searchClauseObj->resetSearch();
 			unset( $_SESSION[$this->sessionPrefix.'_advsearch'] );
 		}
-		
-		$this->jsSettings['tableSettings'][$this->tName]['masterPageType'] = $this->masterPageType;
-		$this->jsSettings['tableSettings'][$this->tName]['masterTable'] = $this->masterTable;
-		$this->jsSettings['tableSettings'][$this->tName]['firstTime'] = $this->firstTime;
-		$this->jsSettings['tableSettings'][$this->tName]['strKey'] = $this->getStrMasterKey();
 		$this->addRawFieldValues = true;
 		
 		if( $this->masterPageType == PAGE_ADD && parent::spreadsheetGridApplicable() ) {
 			$this->pageData['spreadsheetOnList'] = true;
-			$this->jsSettings['tableSettings'][ $this->tName ]['autoAddNewRecord'] = $this->pSet->addNewRecordAutomatically();
 		}
 	}
 	
@@ -184,8 +178,7 @@ class ListPage_DPInline extends ListPage_Embed
 			$this->selectAllLinkAttrs();
 			
 			//checkbox column
-			if(!$this->mobileTemplateMode())
-				$this->checkboxColumnAttrs();
+			$this->checkboxColumnAttrs();
 			
 			//edit selected link and attr
 			$this->editSelectedLinkAttrs();	
@@ -226,15 +219,14 @@ class ListPage_DPInline extends ListPage_Embed
 			$this->cancelAllLinkAttrs();
 		}
 		
-		for($i=0;$i<count($this->allDetailsTablesArr);$i++)
+		foreach( $this->pSet->getDetailsTables() as $details )
 		{
 			$permis = ( Security::permissionsAvailable() && 
-					($this->permis[$this->allDetailsTablesArr[$i]['dDataSourceTable']]['add'] 
-					|| $this->permis[$this->allDetailsTablesArr[$i]['dDataSourceTable']]['search'])) 
+					($this->permis[ $details ]['add'] 
+					|| $this->permis[ $details ]['search'])) 
 				|| (!Security::permissionsAvailable());	
-			if($permis)
-			{
-				$this->xt->assign(GoodFieldName($this->tName)."_dtable_column", $permis);
+			if($permis) {
+				$this->xt->assign( GoodFieldName($this->tName)."_dtable_column", $permis );
 				break;
 			}
 		}
@@ -277,22 +269,11 @@ class ListPage_DPInline extends ListPage_Embed
 			$inlineaddlink_attrs = $this->xt->getVar("inlineaddlink_attrs");
 			
 			if( $this->addAvailable() )
-				$caption = "Inline Add";
+				$caption = mlang_message('INLINE_ADD');
 			else	
-				$caption = "Add";
+				$caption = mlang_message('AA_P_ADD');
 				
-			if( !$this->isBootstrap() ) 
-			{
-				$controlsBlocks = '<span class="rnr-dbebrick ">'
-					.'<div class="style1 rnr-bl rnr-b-recordcontrols_new">'
-						.'<a class="rnr-button" href="#" '.$inlineaddlink_attrs.'>'.$caption.'</a> '
-					.'</div>'
-				.'</span>';		
-			}
-			else
-			{
-				$buttons.= '<a class="'. $bs_button_class.'" href="#" '.$inlineaddlink_attrs.'>'.$caption.'</a> ';		
-			}
+			$buttons.= '<a class="'. $bs_button_class.'" href="#" '.$inlineaddlink_attrs.'>'.$caption.'</a> ';		
 		}
 		
 		if( $this->addAvailable() && $this->xt->getVar("add_link") )
@@ -300,22 +281,11 @@ class ListPage_DPInline extends ListPage_Embed
 			$addlink_attrs = $this->xt->getVar("addlink_attrs");
 			
 			if( $this->inlineAddAvailable() )
-				$caption = "Add new";
+				$caption = mlang_message('ADD_NEW');
 			else	
-				$caption = "Add";
+				$caption = mlang_message('AA_P_ADD');
 				
-			if( !$this->isBootstrap() ) 
-			{
-				$controlsBlocks = '<span class="rnr-dbebrick ">'
-					.'<div class="style1 rnr-bl rnr-b-recordcontrols_new">'
-						.'<a class="rnr-button" href="#" '.$addlink_attrs.'>'.$caption.'</a> '
-					.'</div>'
-				.'</span>';		
-			}
-			else
-			{
-				$buttons.= '<a class="'. $bs_button_class.'" href="#" '.$addlink_attrs.'>'.$caption.'</a> ';		
-			}			
+			$buttons.= '<a class="'. $bs_button_class.'" href="#" '.$addlink_attrs.'>'.$caption.'</a> ';		
 		}
 
 		if( $this->inlineEditAvailable() && $this->xt->getVar("editselected_link") )
@@ -323,20 +293,13 @@ class ListPage_DPInline extends ListPage_Embed
 			$editselectedlink_attrs = $this->xt->getVar("editselectedlink_attrs");
 			$editselectedlink_span = $this->xt->getVar("editselectedlink_span");
 			
-			// "bs-invisible-button" class need for init hidden in bootstrap
-			if( !$this->isBootstrap()) 
-				$buttons.= '<a class="rnr-button" href="#" '.$editselectedlink_attrs.' '.$editselectedlink_span.'>'."Edit".'</a> ';
-			else
-				$buttons.= '<a class="' . $bs_button_class . ' " disabled href="#" '.$editselectedlink_attrs.' '.$editselectedlink_span.'>'."Edit".'</a> ';
+			$buttons.= '<a class="' . $bs_button_class . ' " disabled href="#" '.$editselectedlink_attrs.' '.$editselectedlink_span.'>'.mlang_message('AA_P_EDIT').'</a> ';
 		};	
 
-		if( $this->updateSelectedAvailable() && $this->xt->getVar("updateselected_link") && $this->isBootstrap() )
+		if( $this->updateSelectedAvailable() && $this->xt->getVar("updateselected_link") )
 		{
 			$updateselectedlink_attrs = $this->xt->getVar("updateselectedlink_attrs");   
-			if( $this->isPD() )
-				$buttons.= '<a class="' . $bs_button_class . '" disabled '.$updateselectedlink_attrs.'>'."Update selected".'</a> ';
-			else	
-				$buttons.= '<a class="' . $bs_button_class . '" disabled href="#" '.$updateselectedlink_attrs.'>'."Update selected".'</a> ';		  		
+			$buttons.= '<a class="' . $bs_button_class . '" disabled '.$updateselectedlink_attrs.'>'.mlang_message('UPDATE_SELECTED').'</a> ';
 		}
 		
 		if( $this->xt->getVar("saveall_link") )
@@ -344,10 +307,7 @@ class ListPage_DPInline extends ListPage_Embed
 			$savealllink_attrs = $this->xt->getVar("savealllink_attrs");	
 			$savealllink_span = $this->xt->getVar("savealllink_span");	
 	
-			if( !$this->isBootstrap()) 
-				$buttons.= '<a class="rnr-button" href="#" '.$savealllink_attrs.' '.$savealllink_span.'>'."Save all".'</a> ';					  
-			else
-				$buttons.= '<a class="' . $bs_button_class . '" href="#" '.$savealllink_attrs.' '.$savealllink_span.'>'."Save all".'</a> ';					  
+			$buttons.= '<a class="' . $bs_button_class . '" href="#" '.$savealllink_attrs.' '.$savealllink_span.'>'.mlang_message('SAVE_ALL').'</a> ';					  
 		}
 		
 		if( $this->xt->getVar("cancelall_link") )
@@ -355,10 +315,7 @@ class ListPage_DPInline extends ListPage_Embed
 			$cancelalllink_attrs = $this->xt->getVar("cancelalllink_attrs");	
 			$cancelalllink_span = $this->xt->getVar("cancelalllink_span");
 
-			if( !$this->isBootstrap()) 
-				$buttons.= '<a class="rnr-button" href="#" '.$cancelalllink_attrs.' '.$cancelalllink_span.'>'."Cancel".'</a> ';					  
-			else
-				$buttons.= '<a class="' . $bs_button_class . '" href="#" '.$cancelalllink_attrs.' '.$cancelalllink_span.'>'."Cancel".'</a> ';					  
+			$buttons.= '<a class="' . $bs_button_class . '" href="#" '.$cancelalllink_attrs.' '.$cancelalllink_span.'>'.mlang_message('CANCEL_ALL').'</a> ';					  
 		}
 		
 		if( $this->deleteAvailable() && $this->xt->getVar("deleteselected_link") )
@@ -366,26 +323,13 @@ class ListPage_DPInline extends ListPage_Embed
 			$deleteselectedlink_attrs = $this->xt->getVar("deleteselectedlink_attrs");	
 			$deleteselectedlink_span = $this->xt->getVar("deleteselectedlink_span");            
 
-			// "bs-invisible-button" class need for init hidden in bootstrap
-			if( !$this->isBootstrap()) 
-				$buttons.= '<a class="rnr-button " href="#" '.$deleteselectedlink_attrs.' '.$deleteselectedlink_span.'>'."Delete".'</a> ';		  
-			else
-				$buttons.= '<a class="' . $bs_button_class . '" disabled href="#" '.$deleteselectedlink_attrs.' '.$deleteselectedlink_span.'>'."Delete".'</a> ';		  
+			$buttons.= '<a class="' . $bs_button_class . '" disabled href="#" '.$deleteselectedlink_attrs.' '.$deleteselectedlink_span.'>'.mlang_message('AA_P_DELETE').'</a> ';		  
 		}		
 		if( $buttons ) 
 		{
-			if( !$this->isBootstrap()) 
-			{
-				$controlsBlocks.= '<span class="rnr-dbebrick ">'
-					.'<div class="style1 rnr-bl rnr-b-recordcontrol ">'
-					.$buttons
-					.'</div>'
-				.'</span>';				
-			} else {
-				$controlsBlocks.= '<span class="rnr-dbebrick ">'
-					.$buttons
-				.'</span>';				
-			}
+			$controlsBlocks.= '<span class="rnr-dbebrick ">'
+				.$buttons
+			.'</span>';				
 		}
 		
 		return $controlsBlocks.'<div class="rnr-dbefiller"></div>';
@@ -564,19 +508,31 @@ class ListPage_DPInline extends ListPage_Embed
 		
 	}
 	
-	protected function fillTableSettings( $table = "", $pSet = null )
-	{
-		parent::fillTableSettings( $table, $pSet );
-		
+	protected function buildJsTableSettings( $table, $pSet ) {
+		$settings = parent::buildJsTableSettings( $table, $pSet );
 		if( $this->addAvailable() )
-			$this->jsSettings["tableSettings"][ $this->tName ]["showAddInPopup"] = true;
+			$settings["showAddInPopup"] = true;
 
 		if( $this->editAvailable() || $this->updateSelectedAvailable() )
-			$this->jsSettings["tableSettings"][ $this->tName ]["showEditInPopup"] = true;
-			
-		if( $this->viewAvailable() )
-			$this->jsSettings["tableSettings"][ $this->tName ]["showViewInPopup"] = true;			
-	}		
+			$settings["showEditInPopup"] = true;
+
+		if( $this->viewAvailable() ) {
+			$settings["showViewInPopup"] = true;
+		}
+
+		$settings['masterPageType'] = $this->masterPageType;
+		$settings['masterTable'] = $this->masterTable;
+		$settings['firstTime'] = $this->firstTime;
+		$settings['strKey'] = $this->getStrMasterKey();
+		
+		if( $this->masterPageType == PAGE_ADD && parent::spreadsheetGridApplicable() ) {
+			$settings['autoAddNewRecord'] = $this->pSet->addNewRecordAutomatically();
+		}
+	
+
+		return $settings;
+	}
+
 	
 	function deleteAvailable() {
 		return $this->masterPageType != PAGE_VIEW && $this->masterPageType != PAGE_ADD && parent::deleteAvailable();
@@ -662,5 +618,6 @@ class ListPage_DPInline extends ListPage_Embed
 	 */
 	function buildSearchPanel() {
 	}
+
 }
 ?>

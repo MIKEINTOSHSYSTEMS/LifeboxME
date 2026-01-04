@@ -8,7 +8,7 @@ if( !Security::hasLogin() ) {
 	exit();
 }
 
-$sessionControl = getSecurityOption('sessionControl');
+$sessionControl = ProjectSettings::getSecurityValue('sessionControl');
 if( $sessionControl["keepAlive"] && postvalue("sessionControl") == "keepAlive" ) {
 	echo printJSON( array("success" => true ) );
 	exit();

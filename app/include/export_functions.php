@@ -1,8 +1,5 @@
 <?php
 
-require_once getabspath( "plugins/PHPExcel.php" );
-require_once getabspath( "include/export_functions_excel.php" );
-
 function ExportToExcel($rs, $pageSize, $pageObj)
 {
 	$row = $pageObj->cipherer->DecryptFetchedArray( $rs->fetchAssoc() );

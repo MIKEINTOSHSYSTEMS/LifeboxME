@@ -4563,74 +4563,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     margin-right: 0;
   }
 }
-
-/*
 .navbar-default {
-  background-color: #078ca9e7;
+  background-color: #17a2b8;
   border-color: transparent;
 }
-*/
-
-.navbar-default {
-  /*background-color: rgba(23, 162, 184, 0.85);*/
-  background-color: #078ca9e7;
-  /* Adding opacity to the background */
-  border-color: transparent;
-  /* Remove border color */
-  
-  /* 
-  position: sticky;
-  Make the navbar sticky */
-
-}
-
-.navbar-default .navbar-nav>li>a {
-  color: white;
-  /* Text color */
-  font-family: 'Arial', sans-serif;
-  /* Modern font */
-  font-size: 16px;
-  /* Appropriate font size */
-  font-weight: 600;
-  /* Bold text for contrast */
-  transition: color 0.3s ease-in-out;
-  /* Smooth color transition */
-}
-
-/* Hover effect for links */
-.navbar-default .navbar-nav>li>a:hover {
-  color: #f7f9fc;
-  /* Light color on hover */
-  text-decoration: underline;
-  /* Underline on hover for a modern touch */
-}
-
-/* Optional: On scroll, you can add a more solid background to the navbar */
-.navbar-default.sticky-active {
-  background-color: rgba(23, 162, 184, 1);
-  /* Solid background when scrolling */
-}
-
-/* Make the navbar items center aligned */
-.navbar-default .navbar-nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-}
-
-.navbar-default .navbar-nav>li {
-  margin: 0 15px;
-  /* Horizontal spacing between navbar items */
-}
-
-/* Optional: Add a hover effect for the entire navbar when the user hovers over it */
-.navbar-default:hover {
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  /* More pronounced shadow on hover */
-}
-
-
 .navbar-default .navbar-brand {
   color: rgba(255, 255, 255, 0.75);
 }
@@ -6931,7 +6867,7 @@ button.close {
 }
 table a:not(.btn),
 .table a:not(.btn) {
-  text-decoration: none;
+  text-decoration: underline;
 }
 table .dropdown-menu a,
 .table .dropdown-menu a {
@@ -7242,81 +7178,10 @@ select.form-control[size="1"] {
   border-color: #e5e5e5;
 }
 .bs-welcome-item.bs-welcome-item {
-  width: 280px;
-  /* Set a fixed width */
-  height: 200px;
-  /* Set a fixed height */
+  border-color: #d8d8d8;
   background: white;
   color: #2C3E50;
-  font-family: 'Arial', sans-serif;
-  /* Modern font */
-  font-weight: 600;
-  /* Slightly bold */
-  font-size: 16px;
-  line-height: 1.5;
-  border-radius: 15px;
-  /* Rounded corners for box */
-  padding: 10px;
-  /* Smaller padding to shrink the white background */
-  margin-bottom: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: all 0.4s ease;
-  position: relative;
-  /* Position relative to allow inner elements */
-  overflow: hidden;
-  /* Prevent anything from going outside rounded corners */
-  cursor: pointer;
-}
-
-.bs-welcome-item.bs-welcome-item .inner-content {
-  background: white;
-  /* White background for inner content */
-  padding: 12px;
-  /* Add padding inside to reduce white background area */
-  border-radius: 8px;
-  /* Smaller rounded corners for inner box */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* Slight shadow inside the box */
-  height: 100%;
-  width: 100%;
-  box-sizing: border-box;
-  /* Ensure padding is included in width/height calculation */
-}
-
-.bs-welcome-item.bs-welcome-item:hover {
-  transform: translateY(-6px);
-  /* Slight hover lift */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  border-color: #17a2b8;
-  background-color: #f7f9fc;
-}
-
-/* Hover animation */
-@keyframes bounce {
-  0% {
-    transform: translateY(0);
-  }
-
-  30% {
-    transform: translateY(-5px);
-  }
-
-  50% {
-    transform: translateY(0);
-  }
-
-  70% {
-    transform: translateY(-2px);
-  }
-
-  100% {
-    transform: translateY(0);
-  }
-}
-
-/* Optional: Bounce on hover */
-.bs-welcome-item.bs-welcome-item:hover {
-  animation: bounce 0.5s ease-in-out;
+  border-radius: 4px;
 }
 .bs-admin-header.bs-admin-header:first-child > th {
   background-color: #f8f8f8;
@@ -7353,6 +7218,9 @@ table.indenttables > * > .rightsindent5 > td.rightscell.rightscell.rightscell.ri
 .rnr-dbselectedrow.rnr-dbselectedrow.rnr-dbselectedrow.rnr-dbselectedrow.rnr-dbselectedrow.rnr-dbselectedrow {
   background-color: lightyellow;
   color: #2C3E50;
+}
+.rnr-dbselectedrow.rnr-dbselectedrow.rnr-dbselectedrow.rnr-dbselectedrow.rnr-dbselectedrow.rnr-dbselectedrow .btn-link {
+  color: inherit;
 }
 .navbar-form > .breadcrumb {
   font-size: 15px;
@@ -7817,6 +7685,10 @@ table.indenttables > * > .rightsindent5 > td.rightscell.rightscell.rightscell.ri
   color: inherit;
   padding: 0 15px;
 }
+/* To define elements visibility only. Don't add 'display: none;'*/
+.rnr-invisible-button {
+  visibility: hidden;
+}
 .bs-number {
   font-weight: bold;
 }
@@ -7979,9 +7851,6 @@ table.indenttables > * > .rightsindent5 > td.rightscell.rightscell.rightscell.ri
   .r-vbar-page .r-content-col .r-body > * {
     max-width: calc(100vw - 300px - 20px - (30px * 0.75) - 10px);
   }
-  .r-vbar-page .r-content-col .r-body > *.r-grid {
-    max-width: none;
-  }
   .r-vbar-page .r-content-col .r-body[data-body-width="full"] > * > .r-grid-vertical[data-vcolumns="1"] {
     display: flex;
   }
@@ -8114,7 +7983,7 @@ table.indenttables > * > .rightsindent5 > td.rightscell.rightscell.rightscell.ri
     right: 0;
     top: 0;
     bottom: 0;
-    background: #4792a9;
+    background: #888;
     opacity: 0.35;
   }
   .r-left-collapsed ~ .r-body-shadow {
@@ -8295,9 +8164,6 @@ table.indenttables > * > .rightsindent5 > td.rightscell.rightscell.rightscell.ri
   .r-leftbar-top-page > .r-under .r-content-col .r-body > * {
     max-width: calc(100vw - 300px - 20px - (30px * 0.75) - 10px);
   }
-  .r-leftbar-top-page > .r-under .r-content-col .r-body > *.r-grid {
-    max-width: none;
-  }
   .r-leftbar-top-page > .r-under .r-content-col .r-body[data-body-width="full"] > * > .r-grid-vertical[data-vcolumns="1"] {
     display: flex;
   }
@@ -8445,11 +8311,20 @@ table.indenttables > * > .rightsindent5 > td.rightscell.rightscell.rightscell.ri
   position: relative;
   display: block;
   padding-left: 20px !important;
-  color: #555555;
+  color: #7b8a8b;
+}
+.rnr-saved-searches li {
+  list-style: none;
+}
+.rnr-saved-searches li:hover {
+  background-color: #2C3E50;
+}
+.rnr-saved-searches a.savedSearch {
+  padding: 2px 5px;
 }
 .rnr-saved-searches a.deleteSearch:hover,
 .rnr-saved-searches a.savedSearch:hover {
-  color: #555555;
+  color: #fff;
 }
 /* cursor over menu groups */
 [data-itemtype="menu"] [data-toggle] {
@@ -8707,6 +8582,25 @@ table.indenttables > * > .rightsindent5 > td.rightscell.rightscell.rightscell.ri
 [data-fieldfilter].loading .dropdown-toggle i.loading {
   display: inline-block;
 }
+[data-itemtype="expired_stay"],
+[data-itemtype="expired_logout"] {
+  padding: 0 5px;
+}
+/*Begin multiple sorting hint style*/
+.rnr-sorthint {
+  max-width: 170pt;
+  padding: 3px 8px;
+  border-radius: 2px;
+  z-index: 1000;
+  display: none;
+  position: absolute;
+  font-size: 11px;
+  white-space: pre;
+  background-color: #ffffe1;
+  border: solid 1pt #747474;
+  color: #333;
+}
+/*End multiple sorting hint style*/
 @media print, (min-width: 768px) {
   .r-small-page[data-body-align="left"] {
     margin-left: 0;
@@ -9452,7 +9346,10 @@ table.indenttables > * > .rightsindent5 > td.rightscell.rightscell.rightscell.ri
 }
 .bs-welcome-item .bs-welcome-header img,
 .bs-welcome-item .bs-welcome-header .glyphicon:before,
-.bs-welcome-item .bs-welcome-header .fa:before {
+.bs-welcome-item .bs-welcome-header .fa:before,
+.bs-welcome-item .bs-welcome-header .fab:before,
+.bs-welcome-item .bs-welcome-header .fas:before,
+.bs-welcome-item .bs-welcome-header .far:before {
   margin-right: 10px;
 }
 .bs-welcome-item .bs-welcome-header a {
@@ -9470,7 +9367,7 @@ table.indenttables > * > .rightsindent5 > td.rightscell.rightscell.rightscell.ri
 }
 .bs-welcome-item[data-comment-len="0"] > .bs-welcome-header,
 .bs-welcome-header:last-child {
-  border-radius: 11px;
+  border-radius: 4px;
   border-bottom: solid #d8d8d8 1px;
 }
 .welcome-group {
@@ -9901,6 +9798,33 @@ td.bs-details-opened.bs-details-opened.bs-details-opened {
     background: rgba(0, 0, 255, 0.07);
   }
 }
+/* Admin area styles begin */
+.groupCopyLink {
+  font-size: 14px;
+  line-height: 16px;
+  text-decoration: none;
+  display: block;
+  font-family: monospace;
+}
+.groupCopySelector {
+  min-height: 100px;
+}
+.groupCopyLink:hover {
+  background: silver;
+  font-weight: bold;
+}
+.chooseColumnsLink {
+  font-size: 14px;
+  line-height: 22px;
+  text-decoration: none;
+  display: block;
+  font-family: monospace;
+}
+.chooseColumnsLink:hover {
+  background: silver;
+  font-weight: bold;
+}
+/* Admin area styles end */
 @media print, (min-width: 768px) {
   .r-panel-page {
     margin: auto;
@@ -10443,10 +10367,10 @@ td.bs-details-opened.bs-details-opened.bs-details-opened {
   flex-wrap: wrap;
 }
 @media print, (min-width: 768px) {
-  .r-edit-form > * > tr > [data-cellid]:not(.r-ori-vert):not([data-fullwidth]) > [edit-form-cell] > .r-edit-field {
+  .r-edit-form > * > tr > [data-cellid]:not(.r-ori-vert):not([data-fullwidth]) > [edit-form-cell] > .r-edit-field:not([data-compact]) {
     width: 66%;
   }
-  .r-edit-form > * > tr > [data-cellid]:not(.r-ori-vert):not([data-fullwidth]) > [edit-form-cell] > .r-edit-label {
+  .r-edit-form > * > tr > [data-cellid]:not(.r-ori-vert):not([data-fullwidth]) > [edit-form-cell] > .r-edit-label:not([data-compact]) {
     width: 33.33333333%;
     text-align: right;
   }
@@ -10454,11 +10378,11 @@ td.bs-details-opened.bs-details-opened.bs-details-opened {
     width: 66.66666667%;
     margin-left: 33.33333333%;
   }
-  .r-edit-form > * > tr > [data-cellid]:not(.r-ori-vert):not([data-fullwidth]) > [edit-form-cell] > .r-search-label {
+  .r-edit-form > * > tr > [data-cellid]:not(.r-ori-vert):not([data-fullwidth]) > [edit-form-cell] > .r-search-label:not([data-compact]) {
     width: 16.66666667%;
     text-align: right;
   }
-  .r-edit-form > * > tr > [data-cellid]:not(.r-ori-vert):not([data-fullwidth]) > [edit-form-cell] > .r-search-field {
+  .r-edit-form > * > tr > [data-cellid]:not(.r-ori-vert):not([data-fullwidth]) > [edit-form-cell] > .r-search-field:not([data-compact]) {
     width: 33.33333333%;
   }
   .r-edit-form > * > tr > [data-cellid]:not(.r-ori-vert):not([data-fullwidth]) > [edit-form-cell] > .r-search-option {
@@ -10550,14 +10474,14 @@ td.bs-details-opened.bs-details-opened.bs-details-opened {
   [data-fullwidth].r-ori-vert > * > [data-itemid] {
     margin-left: calc(25% + 30px/2);
   }
-  [data-fullwidth] > * > .r-integrated-field.r-vertical-field:not([data-compact]) > .r-view-label,
-  [data-fullwidth].r-ori-vert > * > .r-view-label,
-  [data-fullwidth] > * > .r-integrated-field.r-vertical-field:not([data-compact]) > .r-view-field,
-  [data-fullwidth].r-ori-vert > * > .r-view-field,
-  [data-fullwidth] > * > .r-integrated-field.r-vertical-field:not([data-compact]) > .r-edit-label,
-  [data-fullwidth].r-ori-vert > * > .r-edit-label,
-  [data-fullwidth] > * > .r-integrated-field.r-vertical-field:not([data-compact]) > .r-edit-field,
-  [data-fullwidth].r-ori-vert > * > .r-edit-field,
+  [data-fullwidth] > * > .r-integrated-field.r-vertical-field:not([data-compact]) > .r-view-label:not([data-compact]),
+  [data-fullwidth].r-ori-vert > * > .r-view-label:not([data-compact]),
+  [data-fullwidth] > * > .r-integrated-field.r-vertical-field:not([data-compact]) > .r-view-field:not([data-compact]),
+  [data-fullwidth].r-ori-vert > * > .r-view-field:not([data-compact]),
+  [data-fullwidth] > * > .r-integrated-field.r-vertical-field:not([data-compact]) > .r-edit-label:not([data-compact]),
+  [data-fullwidth].r-ori-vert > * > .r-edit-label:not([data-compact]),
+  [data-fullwidth] > * > .r-integrated-field.r-vertical-field:not([data-compact]) > .r-edit-field:not([data-compact]),
+  [data-fullwidth].r-ori-vert > * > .r-edit-field:not([data-compact]),
   [data-fullwidth] > * > .r-integrated-field.r-vertical-field:not([data-compact]) > .r-edit-tooltip,
   [data-fullwidth].r-ori-vert > * > .r-edit-tooltip {
     width: 50%;
@@ -11383,16 +11307,62 @@ However there might have been the case where dropdown showed up where it shouldn
   max-width: 500px;
   max-height: 300px;
 }
+.icon-required:before {
+  content: '*';
+  color: red;
+}
 [data-itemtype="integrated_edit_field"]:not([data-required]) .icon-required,
 [data-itemtype="edit_field_label"]:not([data-required]) .icon-required {
   display: none;
 }
 .bs-lookup-links a {
-  padding-right: 5px;
+  padding-right: 10px;
+}
+.bs-lookup-links a.hidden-link {
+  visibility: hidden;
 }
 .mobile-multiselection option {
   color: #555;
 }
+.rnr-horizontal-lookup.rnr-horizontal-lookup.rnr-horizontal-lookup {
+  white-space: normal;
+}
+.rnr-horizontal-lookup.rnr-horizontal-lookup.rnr-horizontal-lookup > span {
+  margin: 0 4px;
+  white-space: nowrap;
+  display: inline-block;
+}
+.rnr-vertical-lookup.rnr-vertical-lookup.rnr-vertical-lookup > span {
+  display: block;
+}
+.r-img-control {
+  font-weight: normal;
+  cursor: pointer;
+}
+.r-img-control .rnr-uploadtype {
+  margin-right: 3px;
+  position: relative;
+  top: 1px;
+}
+.r-img-control .rnr-uploadtype[value="file1"],
+.r-img-control .rnr-uploadtype[value="file2"] {
+  margin-left: 12px;
+}
+/* begin checkbox in label styles */
+.r-checkbox-label {
+  cursor: pointer;
+}
+label .r-checkbox-image {
+  margin-right: 4px;
+  position: relative;
+  top: -2px;
+}
+.r-checkbox-inlabel {
+  margin-right: 4px;
+  position: relative;
+  top: 1px;
+}
+/* end checkbox in label styles */
 /* Vertical grid Reordering */
 .ui-sortable-handle {
   overflow: auto;
@@ -11520,6 +11490,89 @@ However there might have been the case where dropdown showed up where it shouldn
 }
 .greyed-input {
   background: #E5E5E5;
+}
+@media (max-width: 1920px) {
+  .rnr-import-body-preview,
+  .rnr-import-head-preview {
+    max-width: 1820px;
+  }
+}
+@media (max-width: 1680px) {
+  .rnr-import-body-preview,
+  .rnr-import-head-preview {
+    max-width: 1480px;
+  }
+}
+@media (max-width: 1366px) {
+  .rnr-import-body-preview,
+  .rnr-import-head-preview {
+    max-width: 1166px;
+  }
+}
+@media (max-width: 1240px) {
+  .rnr-import-body-preview,
+  .rnr-import-head-preview {
+    max-width: 1040px;
+  }
+}
+.rnr-import-head-preview {
+  overflow: hidden;
+  margin: 10px 0px 0px 0px;
+  font-weight: normal;
+  position: relative;
+}
+.rnr-import-body-preview {
+  overflow: auto;
+  margin: 0px 0px 10px 0px;
+  max-height: 400px;
+  font-weight: normal;
+}
+.rnr-import-body-preview > table,
+.rnr-import-head-preview > table {
+  border-collapse: collapse;
+}
+.importColumnSelector {
+  font-size: 120%;
+  font-weight: bold;
+}
+td.prvcell {
+  max-width: 100px;
+  overflow: hidden;
+  padding: 2px 4px;
+}
+.rnr-import-disabled {
+  background: #E5E5E5;
+  color: #C0C0C0;
+}
+.rnr-import-disabledColumn {
+  background: #E5E5E5;
+}
+.rnr-import-settings {
+  padding: 6px 10px;
+}
+.rnr-is-control {
+  padding: 2px 0;
+}
+.rnr-import-progress img {
+  vertical-align: middle;
+  margin: 0 5px;
+}
+.rnr-import-report {
+  font-weight: normal;
+  padding: 1em;
+}
+.rnr-import-input-small {
+  width: 46px;
+}
+.import-dragndrop-area {
+  color: #000;
+  padding: 5px;
+  border: #000 dashed 1px;
+  width: 90%;
+  min-width: 150px;
+  min-height: 100px;
+  margin: auto;
+  margin-top: 15px;
 }
 @media print, (min-width: 768px) {
   .bs-desktop-right {
@@ -11843,9 +11896,15 @@ However there might have been the case where dropdown showed up where it shouldn
 .filterPanelContainer .filter-show-more > *:first-child.delete-button,
 .filterPanelContainer .filter-multiselect > *:first-child.delete-button,
 .filterPanelContainer .filter-btn-apply > *:first-child.delete-button {
-  padding-right: 0;
+  padding-right: 4px;
   flex: 0 0 auto;
   margin: 0;
+}
+.filterPanelContainer .filter-values > *:first-child > .delete-button,
+.filterPanelContainer .filter-show-more > *:first-child > .delete-button,
+.filterPanelContainer .filter-multiselect > *:first-child > .delete-button,
+.filterPanelContainer .filter-btn-apply > *:first-child > .delete-button {
+  padding-right: 4px;
 }
 .filterPanelContainer .filter-values > *:first-child input[type="checkbox"],
 .filterPanelContainer .filter-show-more > *:first-child input[type="checkbox"],
@@ -11957,6 +12016,26 @@ However there might have been the case where dropdown showed up where it shouldn
 .filterPanelContainer[data-horizontal] .filter-field[data-selected] > .btn-link > .r-filter-value {
   font-weight: bold;
 }
+/* styles copied from default.css */
+.filter-indicator {
+  float: right;
+}
+.filter-expander {
+  user-select: none;
+}
+.filter-slider {
+  width: 85%;
+  margin: 10px auto;
+}
+.filter-slider-values {
+  text-align: center;
+  margin: auto;
+  direction: ltr;
+}
+.filter-values:hover .delete-button {
+  visibility: visible;
+}
+/* end styles from default.css */
 .r-report > * > tr > .blackshade {
   background-color: #f9f9f9;
 }
@@ -12098,7 +12177,7 @@ However there might have been the case where dropdown showed up where it shouldn
     transform: rotate(-0.25turn);
   }
   [data-location="supertop"] .open > .dropdown-menu {
-    background-color: #f7f7f7;
+    background-color: #1ab6cf;
     padding-top: 0;
     padding-bottom: 0;
   }
@@ -12482,6 +12561,10 @@ However there might have been the case where dropdown showed up where it shouldn
 .template-upload > td {
   padding: 2px;
 }
+.r-upload-hidden {
+  visibility: hidden;
+  display: none;
+}
 .panel > .alert {
   margin-bottom: 0;
 }
@@ -12526,36 +12609,36 @@ However there might have been the case where dropdown showed up where it shouldn
   background-color: #fff;
 }
 @media print, (min-width: 768px) {
-  .r-grid > .panel:not(.form-section) {
+  .r-grid > .panel {
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.13), 0 1px 3px rgba(0, 0, 0, 0.2);
     display: table;
     width: 100%;
   }
-  .r-grid > .panel:not(.form-section) > .panel-heading {
+  .r-grid > .panel > .panel-heading {
     background-color: #fff;
     color: inherit;
   }
-  .r-grid > .panel:not(.form-section) > .panel-heading:before {
+  .r-grid > .panel > .panel-heading:before {
     content: #fff;
   }
-  .r-grid > .panel:not(.form-section) > .panel-footer {
+  .r-grid > .panel > .panel-footer {
     background-color: #fff;
   }
 }
 @media screen and (max-width: 767px) {
-  .r-grid:not([data-responsive]) > .panel.panel:not(.form-section) {
+  .r-grid:not([data-responsive]) > .panel {
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.13), 0 1px 3px rgba(0, 0, 0, 0.2);
     display: table;
     width: 100%;
   }
-  .r-grid:not([data-responsive]) > .panel.panel:not(.form-section) > .panel-heading {
+  .r-grid:not([data-responsive]) > .panel > .panel-heading {
     background-color: #fff;
     color: inherit;
   }
-  .r-grid:not([data-responsive]) > .panel.panel:not(.form-section) > .panel-heading:before {
+  .r-grid:not([data-responsive]) > .panel > .panel-heading:before {
     content: #fff;
   }
-  .r-grid:not([data-responsive]) > .panel.panel:not(.form-section) > .panel-footer {
+  .r-grid:not([data-responsive]) > .panel > .panel-footer {
     background-color: #fff;
   }
 }
@@ -12573,6 +12656,98 @@ However there might have been the case where dropdown showed up where it shouldn
     border: none;
     color: inherit;
   }
+}
+.rnr-orderlink {
+  cursor: pointer;
+  text-decoration: underline;
+  display: flex;
+  gap: 3px;
+}
+/*Begin s508 style*/
+.rnr-s508 {
+  width: 1pt;
+  height: 1pt;
+  display: block;
+  overflow: hidden;
+  position: absolute;
+}
+/*End s508 style*/
+/*Begin locking style*/
+.rnr-locking {
+  top: 0;
+  left: 0;
+  padding: 5pt;
+  text-align: center;
+  margin-bottom: 8pt;
+  background-color: #FFC85D;
+  /*dinamic*/
+  border-bottom: 1pt solid Black;
+  /*dinamic*/
+}
+.rnr-locking a {
+  margin-left: 15pt;
+}
+.rnr-locking,
+.rnr-locking a {
+  font-size: 10pt;
+}
+/*End styles for locking*/
+/*Begin search suggest style*/
+.search_suggest {
+  background-color: #FFFFFF;
+  border: 1px solid #000000;
+  color: black;
+  font-family: Verdana;
+  font-size: 8pt;
+  position: absolute;
+  text-align: left;
+  visibility: hidden;
+  width: 154pt;
+  overflow: hidden;
+}
+.suggest_link {
+  background-color: #FFFFFF;
+  padding: 2pt 5pt;
+  cursor: pointer;
+}
+.suggest_link_over {
+  background-color: #FFE4A2;
+  color: Black;
+  padding: 2pt 5pt 2pt 5pt;
+  cursor: pointer;
+}
+/*End search suggest style*/
+/* The Search saving styles*/
+.rnr-saved-searches {
+  padding: 3px;
+  text-align: left;
+}
+.rnr-saved-searches .deleteSearch {
+  margin-right: 5px;
+}
+.rnr-saved-searches a {
+  vertical-align: middle;
+}
+/**/
+[data-itemtype="gantt"][data-itemtype="gantt"][data-itemtype="gantt"][data-itemtype="gantt"][data-itemtype="gantt"][data-itemtype="gantt"] {
+  --g-progress-color: #dbdbdba1;
+  display: grid;
+}
+[data-itemtype="gantt"][data-itemtype="gantt"][data-itemtype="gantt"][data-itemtype="gantt"][data-itemtype="gantt"][data-itemtype="gantt"] .gantt-container .popup-wrapper .details {
+  font-size: 14px;
+}
+[data-itemtype="gantt"][data-itemtype="gantt"][data-itemtype="gantt"][data-itemtype="gantt"][data-itemtype="gantt"][data-itemtype="gantt"] .gantt-container .popup-wrapper .title {
+  font-size: 14px;
+  font-weight: normal;
+}
+[data-itemtype="calendar"][data-can-add] td[data-time] {
+  cursor: pointer;
+}
+[data-itemtype="calendar"][data-can-add] .fc-daygrid td[data-date] {
+  cursor: pointer;
+}
+[data-itemtype="calendar"][data-can-add] .fc-daygrid td[data-date]:hover {
+  background: #add8e625;
 }
 @media print, (min-width: 768px) {
   .r-pretty-login-page {
@@ -12698,28 +12873,28 @@ However there might have been the case where dropdown showed up where it shouldn
   .function-register .r-pretty-login-page [data-location="grid"] {
     table-layout: fixed;
   }
-  .function-register .r-pretty-login-page [data-location="grid"] tr td:not(:only-child) {
+  .function-register .r-pretty-login-page [data-location="grid"] > * > tr td:not(:only-child) {
     padding-left: 5px;
     padding-right: 5px;
   }
-  .function-register .r-pretty-login-page [data-location="grid"] td:nth-child(1):not(:only-child) {
+  .function-register .r-pretty-login-page [data-location="grid"] > * > tr > td:nth-child(1):not(:only-child) {
     width: 25%;
   }
-  .function-register .r-pretty-login-page [data-location="grid"] td > .r-edit-label {
+  .function-register .r-pretty-login-page [data-location="grid"] > * > tr > td > .r-edit-label {
     padding-top: 9px;
   }
-  .function-register .r-pretty-login-page [data-location="grid"] td:nth-child(2) {
+  .function-register .r-pretty-login-page [data-location="grid"] > * > tr > td:nth-child(2) {
     width: 50%;
   }
-  .function-register .r-pretty-login-page [data-location="grid"] td:nth-child(3) {
+  .function-register .r-pretty-login-page [data-location="grid"] > * > tr > td:nth-child(3) {
     width: 25%;
   }
 }
 @media screen and (max-width: 767px) {
-  .function-register .r-pretty-login-page [data-location="grid"] tr {
+  .function-register .r-pretty-login-page [data-location="grid"] > * > tr {
     padding-top: 15px;
   }
-  .function-register .r-pretty-login-page [data-location="grid"] tr td.r-align-right {
+  .function-register .r-pretty-login-page [data-location="grid"] > * tr > td.r-align-right {
     text-align: initial;
   }
 }
@@ -13158,3 +13333,45 @@ thead.r-fixedhead {
   content: ' ';
   display: block;
 }
+.rnr-hiddenelem {
+  display: none;
+}
+/*Begin Misc loading styles*/
+.rnr-loading.show {
+  display: block;
+}
+.rnr-loading.hide {
+  display: none;
+}
+.rnr-loading .fon {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 3000;
+  background-color: #000;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+}
+.rnr-loading .main {
+  position: absolute;
+  z-index: 4000;
+  padding: 1em 2em;
+}
+/*for printpage*/
+.rnr-loading-print .main {
+  display: inline-block;
+  padding: 1em 2em;
+  margin-bottom: 10px;
+  position: absolute;
+  z-index: 1000;
+}
+/*End for printpage*/
+.rnr-loading .text,
+.rnr-loading-print .text {
+  margin-left: 8pt;
+  font-size: 9pt;
+  vertical-align: middle;
+  color: #336699;
+  font-weight: bold;
+}
+/*End Misc loading styles*/

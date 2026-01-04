@@ -173,18 +173,7 @@ class EditControlsContainer
 	 */
 	function getControl($field, $id = "", $extraParmas = array())
 	{
-/*
-		if( count($extraParmas) && $extraParmas["makeReadonly"] ) {
-			include_once(getabspath("classes/controls/Control.php"));
-			$className = $this->classNamesForEdit[ EDIT_FORMAT_READONLY ];
-			
-			$ctrl = createControlClass($className, $field, $this->pageObject != null ? $this->pageObject : $this, $id, $this->connection);
-			$ctrl->container = $this;
-			
-			return $ctrl;
-		}
-*/		
-		
+	
 		if( count($extraParmas) && $extraParmas["getConrirmFieldCtrl"] ) 
 		{
 			include_once(getabspath("classes/controls/Control.php"));
@@ -283,11 +272,6 @@ class EditControlsContainer
 			return false;
 		}		
 		return true;
-	}
-	
-	function mobileTemplateMode() 
-	{
-		return false;
 	}
 	
 	protected function fillControlClassNames() 

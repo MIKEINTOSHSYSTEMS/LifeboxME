@@ -9,7 +9,7 @@ storeJSONDataFromRequest();
 
 require_once(getabspath( "api/api.php"));
 
-if( !GetGlobalData("restCreate") ) {
+if( !ProjectSettings::getProjectValue( 'createRestAPI' ) ) {
 	return;
 }
 
@@ -28,7 +28,7 @@ if( !$table ) {
 }
 
 $pSet = new ProjectSettings( $table );
-$eventsObject = &getEventObject( $table );
+$eventsObject = getEventObject( $pSet );
 $cipherer = new RunnerCipherer( $table, $pSet );
 
 $action = postvalue("action");

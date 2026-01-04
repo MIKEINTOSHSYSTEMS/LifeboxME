@@ -41,7 +41,7 @@ class ListPage_Master extends ListPage
 		if( !$this->masterRecordData || !$this->masterRecordData )
 			return;
 		
-		$this->xt->assign("pagetitlelabel", $this->getPageTitle( $this->pageType, GoodFieldName($this->tName), $this->masterRecordData ));	
+		$this->xt->assign("pagetitlelabel", $this->getPageTitle( $this->pageType, $this->tName, $this->masterRecordData ));	
 
 		$tKeys = $this->pSet->getTableKeys();
 		$keylink = "";
@@ -82,9 +82,6 @@ class ListPage_Master extends ListPage
 			
 		if( $this->pageLayout )
 			$this->xt->assign("pageattrs", 'class="'.$this->pageLayout->style." page-".$this->pageLayout->name.'"');
-		
-		/*if( !$this->pdfJsonMode() ) 
-			$this->xt->load_template( GetTemplateName($this->shortTableName, "master".$this->masterPageType) );*/				
 	}
 	
 	public function showMaster( $params ) 

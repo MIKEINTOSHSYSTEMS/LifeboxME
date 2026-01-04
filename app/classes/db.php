@@ -257,19 +257,21 @@ class DB
 	 * 	Find table info stored in the project file
 	 *
 	 */
-	public static function _findDalTable( $table, $conn = null )
+	public static function _findDBTable( $table, $conn = null )
 	{
-		global $dalTables;
+		global $runnerDbTables;
+		importTableList();
 		if( !$conn )
 			$conn = DB::CurrentConnection();
 		$tableName = $conn->getTableNameComponents( $table );
 
-		DB::_fillTablesList( $conn );
-
 		//	exact match
-		foreach( $dalTables[$conn->connId] as $t ) {
+		foreach( $runnerDbTables as $t ) {
+			if( $conn->connId != $t['connId'] ) {
+				continue;
+			}
 			if( ( !$tableName["schema"] || $t["schema"] == $tableName["schema"] )
-				&& $t["name"] == $tableName["table"] )
+				&& $t["table"] == $tableName["table"] )
 				return $t;
 		}
 
@@ -277,10 +279,13 @@ class DB
 		$tableName["schema"] = strtoupper( $tableName["schema"] );
 		$tableName["table"] = strtoupper( $tableName["table"] );
 
-		foreach( $dalTables[$conn->connId] as $t )
+		foreach( $runnerDbTables as $t )
 		{
+			if( $conn->connId != $t['connId'] ) {
+				continue;
+			}
 			if( ( !$tableName["schema"] || strtoupper( $t["schema"] ) == $tableName["schema"] )
-				&& strtoupper( $t["name"] ) == $tableName["table"] )
+				&& strtoupper( $t["table"] ) == $tableName["table"] )
 				return $t;
 		}
 		return null;
@@ -293,7 +298,7 @@ class DB
 	 */
 	public static function _getTableInfo($table, $connId = null )
 	{
-		global $dal_info, $tableinfo_cache, $cman;
+		global $dal_info, $tableinfo_cache, $cman, $runnerDbTableInfo;
 		if( !$connId )
 			$connId = DB::CurrentConnectionId();
 
@@ -304,18 +309,22 @@ class DB
 		$tableInfo = array();
 
 
-		$tableDescriptor = DB::_findDalTable( $table, $cman->byId( $connId ) );
+		$tableDescriptor = DB::_findDBTable( $table, $cman->byId( $connId ) );
 
 		if ( $tableDescriptor )
 		{
-			importTableInfo( $tableDescriptor["varname"] );
+			importTableInfo( $tableDescriptor["filename"] );
 
-			$tableInfo["fields"] = $dal_info[ $tableDescriptor["varname"] ];
+			$tableInfo["fields"] = array();
+			foreach( $runnerDbTableInfo[ $tableDescriptor["filename"] ]["fields"] as $f ) {
+				$tableInfo["fields"][ $f["name"] ] = $f;
+			}	
+			
 
 			if( $tableDescriptor["schema"] )
-				$tableInfo["fullName"] = $tableDescriptor["schema"] . "." . $tableDescriptor["name"];
+				$tableInfo["fullName"] = $tableDescriptor["schema"] . "." . $tableDescriptor["table"];
 			else
-				$tableInfo["fullName"] = $tableDescriptor["name"];
+				$tableInfo["fullName"] = $tableDescriptor["table"];
 		}
 		else
 		{
@@ -335,7 +344,10 @@ class DB
 			$fieldList = DB::CurrentConnection()->getFieldsList($helpSql);
 			foreach ($fieldList as $f )
 			{
-				$tableInfo["fields"][ $f["fieldname"] ] = array( "type" => $f["type"], "name" => $f["fieldname"] );
+				$tableInfo["fields"][ $f["fieldname"] ] = array( 
+					"type" => $f["type"], 
+					"name" => $f["fieldname"] 
+				);
 			}
 			$tableinfo_cache[ $connId ][ $table ] = $tableInfo;
 		}
@@ -343,121 +355,6 @@ class DB
 		return $tableInfo;
 	}
 
-
-	protected static function _fillTablesList( $conn )
-	{
-		global $dalTables;
-		if( !$conn )
-			$conn = DB::CurrentConnection();
-		if( isset($dalTables[ $conn->connId ]) )
-			return;
-		$dalTables[ $conn->connId ] = array();
-		if( "lifebox_mesystem_at_localhost" == $conn->connId )
-		{
-			$dalTables[$conn->connId][] = array("name" => "antibiotics", "varname" => "lifebox_mesystem_at_localhost_public_antibiotics", "altvarname" => "antibiotics", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "case_antibiotics", "varname" => "lifebox_mesystem_at_localhost_public_case_antibiotics", "altvarname" => "case_antibiotics", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "clean_cut_implementation_summary_view", "varname" => "lifebox_mesystem_at_localhost_public_clean_cut_implementation_summary_view", "altvarname" => "clean_cut_implementation_summary_view", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "clean_cut_implementations", "varname" => "lifebox_mesystem_at_localhost_public_clean_cut_implementations", "altvarname" => "clean_cut_implementations", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "countries", "varname" => "lifebox_mesystem_at_localhost_public_countries", "altvarname" => "countries", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "daily_attendance_view", "varname" => "lifebox_mesystem_at_localhost_public_daily_attendance_view", "altvarname" => "daily_attendance_view", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "device_distribution_log", "varname" => "lifebox_mesystem_at_localhost_public_device_distribution_log", "altvarname" => "device_distribution_log", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "device_distribution_summary_view", "varname" => "lifebox_mesystem_at_localhost_public_device_distribution_summary_view", "altvarname" => "device_distribution_summary_view", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "device_distributions", "varname" => "lifebox_mesystem_at_localhost_public_device_distributions", "altvarname" => "device_distributions", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "device_inventory_changes", "varname" => "lifebox_mesystem_at_localhost_public_device_inventory_changes", "altvarname" => "device_inventory_changes", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "devices", "varname" => "lifebox_mesystem_at_localhost_public_devices", "altvarname" => "devices", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "diagnoses", "varname" => "lifebox_mesystem_at_localhost_public_diagnoses", "altvarname" => "diagnoses", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "donors", "varname" => "lifebox_mesystem_at_localhost_public_donors", "altvarname" => "donors", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "facilities", "varname" => "lifebox_mesystem_at_localhost_public_facilities", "altvarname" => "facilities", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "follow_ups", "varname" => "lifebox_mesystem_at_localhost_public_follow_ups", "altvarname" => "follow_ups", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "languages", "varname" => "lifebox_mesystem_at_localhost_public_languages", "altvarname" => "languages", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbapt_all_activities_view", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_all_activities_view", "altvarname" => "lbapt_all_activities_view", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbapt_annual_plan_tracker", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_annual_plan_tracker", "altvarname" => "lbapt_annual_plan_tracker", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbapt_beginnings_fund", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_beginnings_fund", "altvarname" => "lbapt_beginnings_fund", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbapt_cathedral", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_cathedral", "altvarname" => "lbapt_cathedral", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbapt_communications", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_communications", "altvarname" => "lbapt_communications", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbapt_cri", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_cri", "altvarname" => "lbapt_cri", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbapt_dashboard_summary", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_dashboard_summary", "altvarname" => "lbapt_dashboard_summary", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbapt_dashboard_summary_view", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_dashboard_summary_view", "altvarname" => "lbapt_dashboard_summary_view", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbapt_development", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_development", "altvarname" => "lbapt_development", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbapt_elma", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_elma", "altvarname" => "lbapt_elma", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbapt_finance", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_finance", "altvarname" => "lbapt_finance", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbapt_governance", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_governance", "altvarname" => "lbapt_governance", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbapt_hr", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_hr", "altvarname" => "lbapt_hr", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbapt_izumi", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_izumi", "altvarname" => "lbapt_izumi", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbapt_kpis_on_track", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_kpis_on_track", "altvarname" => "lbapt_kpis_on_track", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbapt_kpis_tracking_view", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_kpis_tracking_view", "altvarname" => "lbapt_kpis_tracking_view", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbapt_operations", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_operations", "altvarname" => "lbapt_operations", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbapt_programs", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_programs", "altvarname" => "lbapt_programs", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbapt_sample_workflow", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_sample_workflow", "altvarname" => "lbapt_sample_workflow", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbapt_st", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_st", "altvarname" => "lbapt_st", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbapt_status", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_status", "altvarname" => "lbapt_status", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbapt_strategic_areas", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_strategic_areas", "altvarname" => "lbapt_strategic_areas", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbapt_unified_activities", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_unified_activities", "altvarname" => "lbapt_unified_activities", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbapt_whi", "varname" => "lifebox_mesystem_at_localhost_public_lbapt_whi", "altvarname" => "lbapt_whi", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbpmi_aggregation_type", "varname" => "lifebox_mesystem_at_localhost_public_lbpmi_aggregation_type", "altvarname" => "lbpmi_aggregation_type", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbpmi_calculation_jobs", "varname" => "lifebox_mesystem_at_localhost_public_lbpmi_calculation_jobs", "altvarname" => "lbpmi_calculation_jobs", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbpmi_calculation_log", "varname" => "lifebox_mesystem_at_localhost_public_lbpmi_calculation_log", "altvarname" => "lbpmi_calculation_log", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbpmi_data_elements", "varname" => "lifebox_mesystem_at_localhost_public_lbpmi_data_elements", "altvarname" => "lbpmi_data_elements", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbpmi_data_values", "varname" => "lifebox_mesystem_at_localhost_public_lbpmi_data_values", "altvarname" => "lbpmi_data_values", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbpmi_datasets", "varname" => "lifebox_mesystem_at_localhost_public_lbpmi_datasets", "altvarname" => "lbpmi_datasets", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbpmi_domain_type", "varname" => "lifebox_mesystem_at_localhost_public_lbpmi_domain_type", "altvarname" => "lbpmi_domain_type", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbpmi_indicator_actuals", "varname" => "lifebox_mesystem_at_localhost_public_lbpmi_indicator_actuals", "altvarname" => "lbpmi_indicator_actuals", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbpmi_indicator_groups", "varname" => "lifebox_mesystem_at_localhost_public_lbpmi_indicator_groups", "altvarname" => "lbpmi_indicator_groups", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbpmi_indicator_targets", "varname" => "lifebox_mesystem_at_localhost_public_lbpmi_indicator_targets", "altvarname" => "lbpmi_indicator_targets", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbpmi_indicator_types", "varname" => "lifebox_mesystem_at_localhost_public_lbpmi_indicator_types", "altvarname" => "lbpmi_indicator_types", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbpmi_indicators", "varname" => "lifebox_mesystem_at_localhost_public_lbpmi_indicators", "altvarname" => "lbpmi_indicators", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lbpmi_summary", "varname" => "lifebox_mesystem_at_localhost_public_lbpmi_summary", "altvarname" => "lbpmi_summary", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lifebox_staff", "varname" => "lifebox_mesystem_at_localhost_public_lifebox_staff", "altvarname" => "lifebox_staff", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lifeboxme__audit", "varname" => "lifebox_mesystem_at_localhost_public_lifeboxme__audit", "altvarname" => "lifeboxme__audit", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lifeboxme__locking", "varname" => "lifebox_mesystem_at_localhost_public_lifeboxme__locking", "altvarname" => "lifeboxme__locking", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lifeboxme_dhis2_analytics_data", "varname" => "lifebox_mesystem_at_localhost_public_lifeboxme_dhis2_analytics_data", "altvarname" => "lifeboxme_dhis2_analytics_data", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lifeboxme_dhis2_analytics_settings", "varname" => "lifebox_mesystem_at_localhost_public_lifeboxme_dhis2_analytics_settings", "altvarname" => "lifeboxme_dhis2_analytics_settings", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lifeboxme_dhis2_dataitems", "varname" => "lifebox_mesystem_at_localhost_public_lifeboxme_dhis2_dataitems", "altvarname" => "lifeboxme_dhis2_dataitems", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lifeboxme_dhis2_orgunits", "varname" => "lifebox_mesystem_at_localhost_public_lifeboxme_dhis2_orgunits", "altvarname" => "lifeboxme_dhis2_orgunits", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lifeboxme_settings", "varname" => "lifebox_mesystem_at_localhost_public_lifeboxme_settings", "altvarname" => "lifeboxme_settings", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lifeboxme_uggroups", "varname" => "lifebox_mesystem_at_localhost_public_lifeboxme_uggroups", "altvarname" => "lifeboxme_uggroups", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lifeboxme_ugmembers", "varname" => "lifebox_mesystem_at_localhost_public_lifeboxme_ugmembers", "altvarname" => "lifeboxme_ugmembers", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "lifeboxme_ugrights", "varname" => "lifebox_mesystem_at_localhost_public_lifeboxme_ugrights", "altvarname" => "lifeboxme_ugrights", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "months", "varname" => "lifebox_mesystem_at_localhost_public_months", "altvarname" => "months", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "participant_attendance_detail", "varname" => "lifebox_mesystem_at_localhost_public_participant_attendance_detail", "altvarname" => "participant_attendance_detail", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "participant_attendance_summary", "varname" => "lifebox_mesystem_at_localhost_public_participant_attendance_summary", "altvarname" => "participant_attendance_summary", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "participant_role", "varname" => "lifebox_mesystem_at_localhost_public_participant_role", "altvarname" => "participant_role", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "partners", "varname" => "lifebox_mesystem_at_localhost_public_partners", "altvarname" => "partners", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "payment_methods", "varname" => "lifebox_mesystem_at_localhost_public_payment_methods", "altvarname" => "payment_methods", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "period_types", "varname" => "lifebox_mesystem_at_localhost_public_period_types", "altvarname" => "period_types", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "procedures", "varname" => "lifebox_mesystem_at_localhost_public_procedures", "altvarname" => "procedures", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "programs", "varname" => "lifebox_mesystem_at_localhost_public_programs", "altvarname" => "programs", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "quarters", "varname" => "lifebox_mesystem_at_localhost_public_quarters", "altvarname" => "quarters", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "regions", "varname" => "lifebox_mesystem_at_localhost_public_regions", "altvarname" => "regions", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "sex", "varname" => "lifebox_mesystem_at_localhost_public_sex", "altvarname" => "sex", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "smtp", "varname" => "lifebox_mesystem_at_localhost_public_smtp", "altvarname" => "smtp", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "surgical_case_summary_view", "varname" => "lifebox_mesystem_at_localhost_public_surgical_case_summary_view", "altvarname" => "surgical_case_summary_view", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "surgical_cases", "varname" => "lifebox_mesystem_at_localhost_public_surgical_cases", "altvarname" => "surgical_cases", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "trainers", "varname" => "lifebox_mesystem_at_localhost_public_trainers", "altvarname" => "trainers", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "training_approaches", "varname" => "lifebox_mesystem_at_localhost_public_training_approaches", "altvarname" => "training_approaches", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "training_attendance", "varname" => "lifebox_mesystem_at_localhost_public_training_attendance", "altvarname" => "training_attendance", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "training_courses", "varname" => "lifebox_mesystem_at_localhost_public_training_courses", "altvarname" => "training_courses", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "training_languages", "varname" => "lifebox_mesystem_at_localhost_public_training_languages", "altvarname" => "training_languages", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "training_leads", "varname" => "lifebox_mesystem_at_localhost_public_training_leads", "altvarname" => "training_leads", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "training_participants", "varname" => "lifebox_mesystem_at_localhost_public_training_participants", "altvarname" => "training_participants", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "training_participation", "varname" => "lifebox_mesystem_at_localhost_public_training_participation", "altvarname" => "training_participation", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "training_partners", "varname" => "lifebox_mesystem_at_localhost_public_training_partners", "altvarname" => "training_partners", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "training_sessions", "varname" => "lifebox_mesystem_at_localhost_public_training_sessions", "altvarname" => "training_sessions", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "training_summary_view", "varname" => "lifebox_mesystem_at_localhost_public_training_summary_view", "altvarname" => "training_summary_view", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "training_trainers", "varname" => "lifebox_mesystem_at_localhost_public_training_trainers", "altvarname" => "training_trainers", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "training_types", "varname" => "lifebox_mesystem_at_localhost_public_training_types", "altvarname" => "training_types", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "transaction_types", "varname" => "lifebox_mesystem_at_localhost_public_transaction_types", "altvarname" => "transaction_types", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "unit_of_measurement", "varname" => "lifebox_mesystem_at_localhost_public_unit_of_measurement", "altvarname" => "unit_of_measurement", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "users", "varname" => "lifebox_mesystem_at_localhost_public_users", "altvarname" => "users", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "venues", "varname" => "lifebox_mesystem_at_localhost_public_venues", "altvarname" => "venues", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "ward_antibiotics", "varname" => "lifebox_mesystem_at_localhost_public_ward_antibiotics", "altvarname" => "ward_antibiotics", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "ward_rounds", "varname" => "lifebox_mesystem_at_localhost_public_ward_rounds", "altvarname" => "ward_rounds", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "webreport_admin", "varname" => "lifebox_mesystem_at_localhost_public_webreport_admin", "altvarname" => "webreport_admin", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "webreport_style", "varname" => "lifebox_mesystem_at_localhost_public_webreport_style", "altvarname" => "webreport_style", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "webreports", "varname" => "lifebox_mesystem_at_localhost_public_webreports", "altvarname" => "webreports", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-			$dalTables[$conn->connId][] = array("name" => "years", "varname" => "lifebox_mesystem_at_localhost_public_years", "altvarname" => "years", "connId" => "lifebox_mesystem_at_localhost", "schema" => "public", "connName" => "lifebox_mesystem at localhost");
-		}
-	}
 
 	public static function PrepareConnectionSQL( $conn, $sql,
 		$arg1 = null,
@@ -673,5 +570,35 @@ class DB
 	}
 
 }
+
+/**
+ * User API function
+ * It uses the default db connection
+ * @param String dalSQL
+ */
+function CustomQuery($dalSQL)
+{
+	$connection = getDefaultConnection();
+	$result = $connection->query( $dalSQL );
+	if($result)
+		return $result;
+}
+
+/**
+ * User API function
+ * It uses the default db connection 
+ * @param String sql
+ */
+function DBLookup($sql)
+{
+	$connection = getDefaultConnection();
+	$data = $connection->query( $sql )->fetchAssoc();
+
+	if( $data )
+		return reset($data);
+	  
+	return null;
+}
+
 
 ?>

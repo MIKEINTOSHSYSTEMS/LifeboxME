@@ -276,6 +276,11 @@ class DataSourceTable extends DataSource {
 			if( $dCondition->operation == dsopBETWEEN && count( $values ) == 2 ) {
 				return $fieldExpr . ' = ' . $values[0] . " or " . $fieldExpr . ' = ' . $values[1];
 			}
+			if( $dCondition->operation == dsopNULL ) {
+				$encryptedEmptyString = $this->encryptField( $field, $dCondition->operands[$i]->value );
+				return $fieldExpr . " is null or "
+					. $fieldExpr . " = ''";
+			}
 			if( $dCondition->operation == dsopEMPTY ) {
 				$encryptedEmptyString = $this->encryptField( $field, $dCondition->operands[$i]->value );
 				return $fieldExpr . " is null or "
@@ -294,6 +299,8 @@ class DataSourceTable extends DataSource {
 			return $this->sqlExpressionMore( $fieldType, $fieldExpr, $dCondition->operands[ 1 ]->value, $caseInsensitive, $op == dsopMORE );
 		} else if( $op == dsopEMPTY ) {
 			return $this->sqlExpressionEmpty( $fieldType, $fieldExpr );
+		} else if( $op == dsopNULL ) {
+			return $this->sqlExpressionNull( $fieldExpr );
 		} else if( $op == dsopSTART || $op == dsopCONTAIN ) {
 			return $this->sqlExpressionLike( $fieldType, $fieldExpr, $dCondition->operands[ 1 ]->value,
 			$caseInsensitive, $op == dsopSTART, $dCondition->operands[ 1 ]->likeWrapper );
@@ -311,7 +318,7 @@ class DataSourceTable extends DataSource {
 		$opCount = 1;
 		if( $op == dsopBETWEEN ) {
 			$opCount = 3;
-		} elseif( $op != dsopEMPTY ) {
+		} elseif( $op != dsopEMPTY && $op != dsopNULL ) {
 			$opCount = 2;
 		}
 		if( count( $operands ) < $opCount ) {
@@ -338,6 +345,11 @@ class DataSourceTable extends DataSource {
 		return "1=0";
 	}
 
+	protected function sqlExpressionNull( $fieldExpr ) {
+		return $fieldExpr . ' is null';
+	}
+
+
 	protected function sqlExpressionEmpty( $fieldType, $fieldExpr ) {
 		$ret = $fieldExpr . ' is null';
 
@@ -357,11 +369,14 @@ class DataSourceTable extends DataSource {
 			return $ret . " or " . $fieldExpr . " like ''";
 		} else {
 			return $ret . " or " . $fieldExpr . " = ''";
-		}
+		} 
 	}
 
 	protected function sqlExpressionEquals( $fieldType, $fieldExpr, $value, $caseInsensitive ) {
 
+		if( $this->connection->dbType == nDATABASE_PostgreSQL && $fieldType == adBoolean ) {
+			return !!$value ? $fieldExpr : 'NOT (' . $fieldExpr . ')';
+		}
 		if( !IsCharType( $fieldType ) ) {
 			return $fieldExpr . "=" . $this->prepareSQLValue( $fieldType, $value );
 		}
@@ -515,9 +530,6 @@ class DataSourceTable extends DataSource {
 	 * always returns string
 	 */
 	protected function prepareSQLValue( $type, $value ) {
-		if( $type === 11 && $this->connection->dbType === nDATABASE_PostgreSQL ) {
-			return $value ? 'true' : 'false';
-		}
 		if( !DataSourceTable::validateSQLValue( $type, $value ) ) {
 			return 'NULL';
 		}
@@ -609,8 +621,9 @@ class DataSourceTable extends DataSource {
 	 */
 	public function getCount( $dc ) {
 		// #16133 MySQL v8.0.0+ -> update select where condition
-		//	don't modify WHERE of the user has already modified it in the event
-		if( !$dc->_cache["overriden"] && $this->dbMysqlV8Higher() ) {
+		//	don't modify WHERE if the user has already modified it in the event
+		global $doMySQLCountBugWorkaround;
+		if( $doMySQLCountBugWorkaround && !$dc->_cache["overriden"] && $this->dbMysqlV8Higher() ) {
 			$filterCopy = $dc->filter;
 			$dc->filter = DataCondition::_And( array( $dc->filter, $this->getMysqlV8Filter() ) );
 			$this->clearDsCommandCache( $dc );
@@ -1050,19 +1063,41 @@ class DataSourceTable extends DataSource {
 			$nextOrder[] = $sqlColumn . ' ' . $of["dir"];
 			$prevOrder[] = $sqlColumn . ' ' . ($of["dir"] == "ASC" ? "DESC" : "ASC");
 
-			// Build this sort of exporessions:
+			$fieldIsNull = is_null( $data[$column] ) /*|| $data[$column] === ''*/;
+
+			// Build this sort of expressions:
 			// field1 > x or field1 = x and ( field2 > y or field2=y and ( field3 ... ) )
 			if ($i < count($dc->order) - 1) {
-				$equal = DataCondition::FieldEquals($column, $data[$column]);
+				$equal = !$fieldIsNull 
+					? DataCondition::FieldEquals($column, $data[$column])
+					: DataCondition::FieldIsNull( $column );
 				$nextWhere = $nextWhere ? DataCondition::_And(array($equal, $nextWhere)) : $equal;
 				$prevWhere = $prevWhere ? DataCondition::_And(array($equal, $prevWhere)) : $equal;
 			}
 
-			$next = DataCondition::FieldIs($column, $of["dir"] == "DESC" ? dsopLESS : dsopMORE, $data[$column]);
-			$prev = DataCondition::FieldIs($column, $of["dir"] == "DESC" ? dsopMORE : dsopLESS, $data[$column]);
+			if( !$fieldIsNull ) {
+				$moreExpression = DataCondition::FieldIs($column, dsopMORE, $data[$column] );
+				$lessExpression = DataCondition::_Or( array( 
+					DataCondition::FieldIs( $column, dsopLESS, $data[$column] ),
+					DataCondition::FieldIsNull( $column ),
+				));
+				$next = $of["dir"] == "DESC" ? $lessExpression : $moreExpression;
+				$prev = $of["dir"] == "DESC" ? $moreExpression : $lessExpression;
+			} else {
+				$next = $of["dir"] == "DESC" 
+					? null
+					: DataCondition::_Not( DataCondition::FieldIsNull( $column ) );
+				$prev = $of["dir"] == "DESC" 
+					? DataCondition::_Not( DataCondition::FieldIsNull( $column ) )
+					: null;
+			}
+			if( $next ) {
+				$nextWhere = DataCondition::_Or(array($next, $nextWhere));
+			} 
+			if( $prev ) {
+				$prevWhere = DataCondition::_Or(array($prev, $prevWhere));
+			}
 
-			$nextWhere = DataCondition::_Or(array($next, $nextWhere));
-			$prevWhere = DataCondition::_Or(array($prev, $prevWhere));
 		}
 
 		$context = new DsFilterBuildContext;

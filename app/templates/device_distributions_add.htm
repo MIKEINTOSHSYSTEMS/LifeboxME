@@ -1,7 +1,7 @@
 <!doctype html>
 <html  {$html_attrs}>
 	<head>
-				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+						<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{$pagetitle}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -10,13 +10,9 @@
     <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
     <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
     <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
-    		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
-	{BEGIN rtlCSS}
-	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
-	{END rtlCSS}
-	{BEGIN styleCSSFiles}
-	<link REL="stylesheet" href="{$stylepath}" type="text/css">
-	{END styleCSSFiles}
+    		{BEGIN styleCSSFiles}
+<link REL="stylesheet" href="{$stylepath}" type="text/css">
+{END styleCSSFiles}
 			
 	</head>
 
@@ -50,7 +46,7 @@
 
 			<div class="clearfix " data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell data-itemid="expand_button" {$item_expand_button} data-topcell-item-type="expand_button" >
 				<span data-itemtype="expand_button" data-itemid="expand_button" {$item_expand_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Expand" class="btn btn-link   
+	<a type="button" title="{mlang_message EXPAND}" class="btn btn-link   
 	" href="#" >
 					<span class="glyphicon glyphicon-triangle-right"></span>
 										</a>
@@ -218,7 +214,7 @@
 							 
 				<span class="navbar-form  navbar-header" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="expand_menu_button" {$item_expand_menu_button} data-topcell-item-type="expand_menu_button" >
 				<span data-itemtype="expand_menu_button" data-itemid="expand_menu_button" {$item_expand_menu_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Show menu" class="btn-link   
+	<a type="button" title="{mlang_message SHOW_MENU}" class="btn-link   
 	 glyphicon glyphicon-menu-hamburger" href="#" >		
 				
 								</a>
@@ -227,7 +223,7 @@
 		 
 				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="collapse_button" {$item_collapse_button} data-topcell-item-type="collapse_button" >
 				<span data-itemtype="collapse_button" data-itemid="collapse_button" {$item_collapse_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Collapse" class="btn-link   
+	<a type="button" title="{mlang_message COLLAPSE}" class="btn-link   
 	 glyphicon glyphicon-triangle-left" href="#" >		
 				
 								</a>
@@ -240,7 +236,7 @@
 <span data-itemtype="loginform_login" data-itemid="loginform_login" {$item_loginform_login} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-primary   
 	" href="#" {$guestloginlink_attrs} >
-							Login			</a>
+							{mlang_message LOGIN}			</a>
 </span>
 {END guestloginbutton}
 			</span>
@@ -251,14 +247,14 @@
 	<span class="dropdown ">
 		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
 			{BEGIN userbutton_icon}							<span class="glyphicon glyphicon-user"></span>
-						{END userbutton_icon}{$userbutton_image}			{$username}			<span class="caret"></span>
+						{END userbutton_icon}{$userbutton_image}			{$mlp_push}{$mlparam username var username}{$mltext %username%}{$mlp_pop}			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu">
 							{BEGIN userinfo_link}
 	<li data-itemtype="userinfo_link" data-itemid="userinfo_link" {$item_userinfo_link} data-pageid="{$pageid}" data-small >
 				<a  href="userinfo.php"  title="" >
 				
-		User Profile		
+		{mlang_message USERINFO}		
 		</a>
 	</li>
 {END userinfo_link}
@@ -266,7 +262,7 @@
 	<li data-itemtype="logout_link" data-itemid="logout_link" {$item_logout_link} data-pageid="{$pageid}" data-small >
 				<a  href="#" {$logoutlink_attrs}  title="" >
 				
-		Log out		
+		{mlang_message LOG_OUT}		
 		</a>
 	</li>
 {END logoutbutton}
@@ -274,7 +270,7 @@
 	<li data-itemtype="adminarea_link" data-itemid="adminarea_link" {$item_adminarea_link} data-pageid="{$pageid}" data-small >
 				<a  href="admin_rights_list.php"  title="" >
 				
-		Admin Area		
+		{mlang_message AA_ADMINAREA}		
 		</a>
 	</li>
 {END adminarea_link}
@@ -282,7 +278,7 @@
 	<li data-itemtype="changepassword_link" data-itemid="changepassword_link" {$item_changepassword_link} data-pageid="{$pageid}" data-small >
 				<a  href="changepwd.php" {$changepwdlink_attrs} id="changePasswordButton{$id}"  title="" >
 				
-		Change password		
+		{mlang_message CHANGE_PASSWORD}		
 		</a>
 	</li>
 {END changepwd_link}
@@ -333,13 +329,13 @@
 <div>
 {BEGIN message_back_button}
 		
-	<button class="btn btn-sm btn-default" {$backbutton_attrs}>Back to list</button>
+	<button class="btn btn-sm btn-default" {$backbutton_attrs}>{mlang_message BACK_TO_LIST}</button>
 	{END message_back_button}
 {BEGIN view_page_button}
-	<button class="btn btn-sm btn-default" {$view_page_button_attrs}>View</button>
+	<button class="btn btn-sm btn-default" {$view_page_button_attrs}>{mlang_message VIEW}</button>
 {END view_page_button}
 {BEGIN edit_page_button}
-	<button class="btn btn-sm btn-default" {$edit_page_button_attrs}>Edit</button>
+	<button class="btn btn-sm btn-default" {$edit_page_button_attrs}>{mlang_message EDIT}</button>
 {END edit_page_button}
 </div>
 </div>
@@ -394,17 +390,19 @@
 	data-signal-error-for="region_id{$id}" {$required_attr_region_id}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="region_id" data-fieldname="region_id" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_region_id}">
-		{BEGIN region_id_label}{$label public_device_distributions region_id }{END region_id_label}
+	<label class="r-edit-label control-label {$region_id_label_class}" for="{$labelfor_region_id}">
+		{BEGIN region_id_label}
+			{$region_id_forward_control}
+			{$label public_device_distributions region_id }			{END region_id_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$region_id_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="region_id" {$tooltipAttr public_device_distributions region_id } >
+		<div class="r-edit-tooltip" data-helpfor="region_id" {$tooltipAttr public_device_distributions region_id } >
 		<div class="text-muted" >
 		{$tooltip public_device_distributions region_id }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END region_id_fieldblock}
@@ -416,17 +414,19 @@
 	data-signal-error-for="country_id{$id}" {$required_attr_country_id}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="country_id" data-fieldname="country_id" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_country_id}">
-		{BEGIN country_id_label}{$label public_device_distributions country_id }{END country_id_label}
+	<label class="r-edit-label control-label {$country_id_label_class}" for="{$labelfor_country_id}">
+		{BEGIN country_id_label}
+			{$country_id_forward_control}
+			{$label public_device_distributions country_id }			{END country_id_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$country_id_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="country_id" {$tooltipAttr public_device_distributions country_id } >
+		<div class="r-edit-tooltip" data-helpfor="country_id" {$tooltipAttr public_device_distributions country_id } >
 		<div class="text-muted" >
 		{$tooltip public_device_distributions country_id }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END country_id_fieldblock}
@@ -438,17 +438,19 @@
 	data-signal-error-for="facility_id{$id}" {$required_attr_facility_id}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="facility_id" data-fieldname="facility_id" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_facility_id}">
-		{BEGIN facility_id_label}{$label public_device_distributions facility_id }{END facility_id_label}
+	<label class="r-edit-label control-label {$facility_id_label_class}" for="{$labelfor_facility_id}">
+		{BEGIN facility_id_label}
+			{$facility_id_forward_control}
+			{$label public_device_distributions facility_id }			{END facility_id_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$facility_id_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="facility_id" {$tooltipAttr public_device_distributions facility_id } >
+		<div class="r-edit-tooltip" data-helpfor="facility_id" {$tooltipAttr public_device_distributions facility_id } >
 		<div class="text-muted" >
 		{$tooltip public_device_distributions facility_id }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END facility_id_fieldblock}
@@ -460,17 +462,19 @@
 	data-signal-error-for="device_type{$id}" {$required_attr_device_type}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="device_type" data-fieldname="device_type" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_device_type}">
-		{BEGIN device_type_label}{$label public_device_distributions device_type }{END device_type_label}
+	<label class="r-edit-label control-label {$device_type_label_class}" for="{$labelfor_device_type}">
+		{BEGIN device_type_label}
+			{$device_type_forward_control}
+			{$label public_device_distributions device_type }			{END device_type_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$device_type_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="device_type" {$tooltipAttr public_device_distributions device_type } >
+		<div class="r-edit-tooltip" data-helpfor="device_type" {$tooltipAttr public_device_distributions device_type } >
 		<div class="text-muted" >
 		{$tooltip public_device_distributions device_type }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END device_type_fieldblock}
@@ -482,17 +486,19 @@
 	data-signal-error-for="order_reference{$id}" {$required_attr_order_reference}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="order_reference" data-fieldname="order_reference" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_order_reference}">
-		{BEGIN order_reference_label}{$label public_device_distributions order_reference }{END order_reference_label}
+	<label class="r-edit-label control-label {$order_reference_label_class}" for="{$labelfor_order_reference}">
+		{BEGIN order_reference_label}
+			{$order_reference_forward_control}
+			{$label public_device_distributions order_reference }			{END order_reference_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$order_reference_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="order_reference" {$tooltipAttr public_device_distributions order_reference } >
+		<div class="r-edit-tooltip" data-helpfor="order_reference" {$tooltipAttr public_device_distributions order_reference } >
 		<div class="text-muted" >
 		{$tooltip public_device_distributions order_reference }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END order_reference_fieldblock}
@@ -504,17 +510,19 @@
 	data-signal-error-for="monthly_surgical_volume{$id}" {$required_attr_monthly_surgical_volume}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="monthly_surgical_volume" data-fieldname="monthly_surgical_volume" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_monthly_surgical_volume}">
-		{BEGIN monthly_surgical_volume_label}{$label public_device_distributions monthly_surgical_volume }{END monthly_surgical_volume_label}
+	<label class="r-edit-label control-label {$monthly_surgical_volume_label_class}" for="{$labelfor_monthly_surgical_volume}">
+		{BEGIN monthly_surgical_volume_label}
+			{$monthly_surgical_volume_forward_control}
+			{$label public_device_distributions monthly_surgical_volume }			{END monthly_surgical_volume_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$monthly_surgical_volume_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="monthly_surgical_volume" {$tooltipAttr public_device_distributions monthly_surgical_volume } >
+		<div class="r-edit-tooltip" data-helpfor="monthly_surgical_volume" {$tooltipAttr public_device_distributions monthly_surgical_volume } >
 		<div class="text-muted" >
 		{$tooltip public_device_distributions monthly_surgical_volume }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END monthly_surgical_volume_fieldblock}
@@ -526,17 +534,19 @@
 	data-signal-error-for="contact_name{$id}" {$required_attr_contact_name}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="contact_name" data-fieldname="contact_name" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_contact_name}">
-		{BEGIN contact_name_label}{$label public_device_distributions contact_name }{END contact_name_label}
+	<label class="r-edit-label control-label {$contact_name_label_class}" for="{$labelfor_contact_name}">
+		{BEGIN contact_name_label}
+			{$contact_name_forward_control}
+			{$label public_device_distributions contact_name }			{END contact_name_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$contact_name_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="contact_name" {$tooltipAttr public_device_distributions contact_name } >
+		<div class="r-edit-tooltip" data-helpfor="contact_name" {$tooltipAttr public_device_distributions contact_name } >
 		<div class="text-muted" >
 		{$tooltip public_device_distributions contact_name }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END contact_name_fieldblock}
@@ -548,17 +558,19 @@
 	data-signal-error-for="contact_email{$id}" {$required_attr_contact_email}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="contact_email" data-fieldname="contact_email" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_contact_email}">
-		{BEGIN contact_email_label}{$label public_device_distributions contact_email }{END contact_email_label}
+	<label class="r-edit-label control-label {$contact_email_label_class}" for="{$labelfor_contact_email}">
+		{BEGIN contact_email_label}
+			{$contact_email_forward_control}
+			{$label public_device_distributions contact_email }			{END contact_email_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$contact_email_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="contact_email" {$tooltipAttr public_device_distributions contact_email } >
+		<div class="r-edit-tooltip" data-helpfor="contact_email" {$tooltipAttr public_device_distributions contact_email } >
 		<div class="text-muted" >
 		{$tooltip public_device_distributions contact_email }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END contact_email_fieldblock}
@@ -570,17 +582,19 @@
 	data-signal-error-for="distribution_month{$id}" {$required_attr_distribution_month}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="distribution_month" data-fieldname="distribution_month" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_distribution_month}">
-		{BEGIN distribution_month_label}{$label public_device_distributions distribution_month }{END distribution_month_label}
+	<label class="r-edit-label control-label {$distribution_month_label_class}" for="{$labelfor_distribution_month}">
+		{BEGIN distribution_month_label}
+			{$distribution_month_forward_control}
+			{$label public_device_distributions distribution_month }			{END distribution_month_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$distribution_month_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="distribution_month" {$tooltipAttr public_device_distributions distribution_month } >
+		<div class="r-edit-tooltip" data-helpfor="distribution_month" {$tooltipAttr public_device_distributions distribution_month } >
 		<div class="text-muted" >
 		{$tooltip public_device_distributions distribution_month }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END distribution_month_fieldblock}
@@ -592,17 +606,19 @@
 	data-signal-error-for="distribution_year{$id}" {$required_attr_distribution_year}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="distribution_year" data-fieldname="distribution_year" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_distribution_year}">
-		{BEGIN distribution_year_label}{$label public_device_distributions distribution_year }{END distribution_year_label}
+	<label class="r-edit-label control-label {$distribution_year_label_class}" for="{$labelfor_distribution_year}">
+		{BEGIN distribution_year_label}
+			{$distribution_year_forward_control}
+			{$label public_device_distributions distribution_year }			{END distribution_year_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$distribution_year_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="distribution_year" {$tooltipAttr public_device_distributions distribution_year } >
+		<div class="r-edit-tooltip" data-helpfor="distribution_year" {$tooltipAttr public_device_distributions distribution_year } >
 		<div class="text-muted" >
 		{$tooltip public_device_distributions distribution_year }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END distribution_year_fieldblock}
@@ -614,17 +630,19 @@
 	data-signal-error-for="transaction_type{$id}" {$required_attr_transaction_type}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field15" {$item_integrated_edit_field15} data-pageid="{$pageid}" data-field="transaction_type" data-fieldname="transaction_type" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_transaction_type}">
-		{BEGIN transaction_type_label}{$label public_device_distributions transaction_type }{END transaction_type_label}
+	<label class="r-edit-label control-label {$transaction_type_label_class}" for="{$labelfor_transaction_type}">
+		{BEGIN transaction_type_label}
+			{$transaction_type_forward_control}
+			{$label public_device_distributions transaction_type }			{END transaction_type_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$transaction_type_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="transaction_type" {$tooltipAttr public_device_distributions transaction_type } >
+		<div class="r-edit-tooltip" data-helpfor="transaction_type" {$tooltipAttr public_device_distributions transaction_type } >
 		<div class="text-muted" >
 		{$tooltip public_device_distributions transaction_type }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END transaction_type_fieldblock}
@@ -636,17 +654,19 @@
 	data-signal-error-for="payment_method{$id}" {$required_attr_payment_method}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="payment_method" data-fieldname="payment_method" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_payment_method}">
-		{BEGIN payment_method_label}{$label public_device_distributions payment_method }{END payment_method_label}
+	<label class="r-edit-label control-label {$payment_method_label_class}" for="{$labelfor_payment_method}">
+		{BEGIN payment_method_label}
+			{$payment_method_forward_control}
+			{$label public_device_distributions payment_method }			{END payment_method_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$payment_method_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="payment_method" {$tooltipAttr public_device_distributions payment_method } >
+		<div class="r-edit-tooltip" data-helpfor="payment_method" {$tooltipAttr public_device_distributions payment_method } >
 		<div class="text-muted" >
 		{$tooltip public_device_distributions payment_method }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END payment_method_fieldblock}
@@ -658,17 +678,19 @@
 	data-signal-error-for="donor{$id}" {$required_attr_donor}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field16" {$item_integrated_edit_field16} data-pageid="{$pageid}" data-field="donor" data-fieldname="donor" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_donor}">
-		{BEGIN donor_label}{$label public_device_distributions donor }{END donor_label}
+	<label class="r-edit-label control-label {$donor_label_class}" for="{$labelfor_donor}">
+		{BEGIN donor_label}
+			{$donor_forward_control}
+			{$label public_device_distributions donor }			{END donor_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$donor_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="donor" {$tooltipAttr public_device_distributions donor } >
+		<div class="r-edit-tooltip" data-helpfor="donor" {$tooltipAttr public_device_distributions donor } >
 		<div class="text-muted" >
 		{$tooltip public_device_distributions donor }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END donor_fieldblock}
@@ -680,17 +702,19 @@
 	data-signal-error-for="quantity{$id}" {$required_attr_quantity}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="quantity" data-fieldname="quantity" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_quantity}">
-		{BEGIN quantity_label}{$label public_device_distributions quantity }{END quantity_label}
+	<label class="r-edit-label control-label {$quantity_label_class}" for="{$labelfor_quantity}">
+		{BEGIN quantity_label}
+			{$quantity_forward_control}
+			{$label public_device_distributions quantity }			{END quantity_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$quantity_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="quantity" {$tooltipAttr public_device_distributions quantity } >
+		<div class="r-edit-tooltip" data-helpfor="quantity" {$tooltipAttr public_device_distributions quantity } >
 		<div class="text-muted" >
 		{$tooltip public_device_distributions quantity }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END quantity_fieldblock}
@@ -702,17 +726,19 @@
 	data-signal-error-for="is_received{$id}" {$required_attr_is_received}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field17" {$item_integrated_edit_field17} data-pageid="{$pageid}" data-field="is_received" data-fieldname="is_received" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_is_received}">
-		{BEGIN is_received_label}{$label public_device_distributions is_received }{END is_received_label}
+	<label class="r-edit-label control-label {$is_received_label_class}" for="{$labelfor_is_received}">
+		{BEGIN is_received_label}
+			{$is_received_forward_control}
+			{$label public_device_distributions is_received }			{END is_received_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$is_received_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="is_received" {$tooltipAttr public_device_distributions is_received } >
+		<div class="r-edit-tooltip" data-helpfor="is_received" {$tooltipAttr public_device_distributions is_received } >
 		<div class="text-muted" >
 		{$tooltip public_device_distributions is_received }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END is_received_fieldblock}
@@ -724,17 +750,19 @@
 	data-signal-error-for="receiving_date{$id}" {$required_attr_receiving_date}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field18" {$item_integrated_edit_field18} data-pageid="{$pageid}" data-field="receiving_date" data-fieldname="receiving_date" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_receiving_date}">
-		{BEGIN receiving_date_label}{$label public_device_distributions receiving_date }{END receiving_date_label}
+	<label class="r-edit-label control-label {$receiving_date_label_class}" for="{$labelfor_receiving_date}">
+		{BEGIN receiving_date_label}
+			{$receiving_date_forward_control}
+			{$label public_device_distributions receiving_date }			{END receiving_date_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$receiving_date_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="receiving_date" {$tooltipAttr public_device_distributions receiving_date } >
+		<div class="r-edit-tooltip" data-helpfor="receiving_date" {$tooltipAttr public_device_distributions receiving_date } >
 		<div class="text-muted" >
 		{$tooltip public_device_distributions receiving_date }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END receiving_date_fieldblock}
@@ -746,17 +774,19 @@
 	data-signal-error-for="started_using{$id}" {$required_attr_started_using}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field19" {$item_integrated_edit_field19} data-pageid="{$pageid}" data-field="started_using" data-fieldname="started_using" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_started_using}">
-		{BEGIN started_using_label}{$label public_device_distributions started_using }{END started_using_label}
+	<label class="r-edit-label control-label {$started_using_label_class}" for="{$labelfor_started_using}">
+		{BEGIN started_using_label}
+			{$started_using_forward_control}
+			{$label public_device_distributions started_using }			{END started_using_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$started_using_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="started_using" {$tooltipAttr public_device_distributions started_using } >
+		<div class="r-edit-tooltip" data-helpfor="started_using" {$tooltipAttr public_device_distributions started_using } >
 		<div class="text-muted" >
 		{$tooltip public_device_distributions started_using }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END started_using_fieldblock}
@@ -768,17 +798,19 @@
 	data-signal-error-for="date_started_using{$id}" {$required_attr_date_started_using}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field20" {$item_integrated_edit_field20} data-pageid="{$pageid}" data-field="date_started_using" data-fieldname="date_started_using" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_date_started_using}">
-		{BEGIN date_started_using_label}{$label public_device_distributions date_started_using }{END date_started_using_label}
+	<label class="r-edit-label control-label {$date_started_using_label_class}" for="{$labelfor_date_started_using}">
+		{BEGIN date_started_using_label}
+			{$date_started_using_forward_control}
+			{$label public_device_distributions date_started_using }			{END date_started_using_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$date_started_using_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="date_started_using" {$tooltipAttr public_device_distributions date_started_using } >
+		<div class="r-edit-tooltip" data-helpfor="date_started_using" {$tooltipAttr public_device_distributions date_started_using } >
 		<div class="text-muted" >
 		{$tooltip public_device_distributions date_started_using }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END date_started_using_fieldblock}
@@ -790,17 +822,19 @@
 	data-signal-error-for="notes{$id}" {$required_attr_notes}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="notes" data-fieldname="notes" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_notes}">
-		{BEGIN notes_label}{$label public_device_distributions notes }{END notes_label}
+	<label class="r-edit-label control-label {$notes_label_class}" for="{$labelfor_notes}">
+		{BEGIN notes_label}
+			{$notes_forward_control}
+			{$label public_device_distributions notes }			{END notes_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$notes_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="notes" {$tooltipAttr public_device_distributions notes } >
+		<div class="r-edit-tooltip" data-helpfor="notes" {$tooltipAttr public_device_distributions notes } >
 		<div class="text-muted" >
 		{$tooltip public_device_distributions notes }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END notes_fieldblock}
@@ -812,17 +846,19 @@
 	data-signal-error-for="created_at{$id}" {$required_attr_created_at}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field13" {$item_integrated_edit_field13} data-pageid="{$pageid}" data-field="created_at" data-fieldname="created_at" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_created_at}">
-		{BEGIN created_at_label}{$label public_device_distributions created_at }{END created_at_label}
+	<label class="r-edit-label control-label {$created_at_label_class}" for="{$labelfor_created_at}">
+		{BEGIN created_at_label}
+			{$created_at_forward_control}
+			{$label public_device_distributions created_at }			{END created_at_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$created_at_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="created_at" {$tooltipAttr public_device_distributions created_at } >
+		<div class="r-edit-tooltip" data-helpfor="created_at" {$tooltipAttr public_device_distributions created_at } >
 		<div class="text-muted" >
 		{$tooltip public_device_distributions created_at }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END created_at_fieldblock}
@@ -834,17 +870,19 @@
 	data-signal-error-for="updated_at{$id}" {$required_attr_updated_at}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field14" {$item_integrated_edit_field14} data-pageid="{$pageid}" data-field="updated_at" data-fieldname="updated_at" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_updated_at}">
-		{BEGIN updated_at_label}{$label public_device_distributions updated_at }{END updated_at_label}
+	<label class="r-edit-label control-label {$updated_at_label_class}" for="{$labelfor_updated_at}">
+		{BEGIN updated_at_label}
+			{$updated_at_forward_control}
+			{$label public_device_distributions updated_at }			{END updated_at_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$updated_at_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="updated_at" {$tooltipAttr public_device_distributions updated_at } >
+		<div class="r-edit-tooltip" data-helpfor="updated_at" {$tooltipAttr public_device_distributions updated_at } >
 		<div class="text-muted" >
 		{$tooltip public_device_distributions updated_at }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END updated_at_fieldblock}
@@ -870,20 +908,22 @@
 		<span data-itemtype="add_save" data-itemid="add_save" {$item_add_save} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-primary   
 	" {$savebutton_attrs} >
-							Save			</a>
+							{mlang_message SAVE}			</a>
 </span>
 	 
-		<span data-itemtype="add_reset" data-itemid="add_reset" {$item_add_reset} data-pageid="{$pageid}" data-small data-button-item>
+		{BEGIN reset_button}
+<span data-itemtype="add_reset" data-itemid="add_reset" {$item_add_reset} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-default   
 	" id="resetButton{$id}" >
-							Reset			</a>
+							{mlang_message RESET}			</a>
 </span>
+{END reset_button}
 	 
 		{BEGIN back_button}
 <span data-itemtype="add_back_list" data-itemid="add_back_list" {$item_add_back_list} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-default   
 	" id="backButton{$id}" >
-							Back to list			</a>
+							{mlang_message BACK_TO_LIST}			</a>
 </span>
 {END back_button}
 	 
@@ -891,7 +931,7 @@
 <span data-itemtype="add_cancel" data-itemid="add_cancel" {$item_add_cancel} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-default   
 	" id="cancelButton{$id}" >
-							Cancel			</a>
+							{mlang_message CANCEL}			</a>
 </span>
 {END cancel_button}
 		</div>					</div>

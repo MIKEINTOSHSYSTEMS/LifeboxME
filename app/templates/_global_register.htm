@@ -1,7 +1,7 @@
 <!doctype html>
 <html  {$html_attrs}>
 	<head>
-				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+						<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{$pagetitle}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -10,13 +10,9 @@
     <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
     <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
     <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
-    		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
-	{BEGIN rtlCSS}
-	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
-	{END rtlCSS}
-	{BEGIN styleCSSFiles}
-	<link REL="stylesheet" href="{$stylepath}" type="text/css">
-	{END styleCSSFiles}
+    		{BEGIN styleCSSFiles}
+<link REL="stylesheet" href="{$stylepath}" type="text/css">
+{END styleCSSFiles}
 			
 	</head>
 
@@ -48,7 +44,7 @@
 	
 ">
 		 
-		<span data-itemtype="text" data-itemid="text" {$item_text} data-pageid="{$pageid}" data-small > 
+		<span data-itemtype="text" data-itemid="text" {$item_text} data-pageid="{$pageid}" > 
 	<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
   <img src="https://www.lifebox.org/wp-content/themes/lifebox/assets//images/lblogo-dark.svg" alt="Logo" style="height: 30px; margin-bottom: 5px;">
   <div style="font-size: 17px; font-weight: bold;">
@@ -119,17 +115,19 @@
 	data-signal-error-for="prefix_title{$id}" {$required_attr_prefix_title}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="prefix_title" data-fieldname="prefix_title" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_prefix_title}">
-		{BEGIN prefix_title_label}{$label public_users prefix_title }{END prefix_title_label}
+	<label class="r-edit-label control-label {$prefix_title_label_class}" for="{$labelfor_prefix_title}">
+		{BEGIN prefix_title_label}
+			{$prefix_title_forward_control}
+			{$label _global_ prefix_title }			{END prefix_title_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$prefix_title_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="prefix_title" {$tooltipAttr public_users prefix_title } >
+		<div class="r-edit-tooltip" data-helpfor="prefix_title" {$tooltipAttr _global_ prefix_title } >
 		<div class="text-muted" >
-		{$tooltip public_users prefix_title }		</div>
+		{$tooltip _global_ prefix_title }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END prefix_title_fieldblock}
@@ -147,17 +145,19 @@
 	data-signal-error-for="fullname{$id}" {$required_attr_fullname}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="fullname" data-fieldname="fullname" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_fullname}">
-		{BEGIN fullname_label}{$label public_users fullname }{END fullname_label}
+	<label class="r-edit-label control-label {$fullname_label_class}" for="{$labelfor_fullname}">
+		{BEGIN fullname_label}
+			{$fullname_forward_control}
+			{$label _global_ fullname }			{END fullname_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$fullname_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="fullname" {$tooltipAttr public_users fullname } >
+		<div class="r-edit-tooltip" data-helpfor="fullname" {$tooltipAttr _global_ fullname } >
 		<div class="text-muted" >
-		{$tooltip public_users fullname }		</div>
+		{$tooltip _global_ fullname }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END fullname_fieldblock}
@@ -177,17 +177,19 @@
 	data-signal-error-for="first_name{$id}" {$required_attr_first_name}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="first_name" data-fieldname="first_name" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_first_name}">
-		{BEGIN first_name_label}{$label public_users first_name }{END first_name_label}
+	<label class="r-edit-label control-label {$first_name_label_class}" for="{$labelfor_first_name}">
+		{BEGIN first_name_label}
+			{$first_name_forward_control}
+			{$label _global_ first_name }			{END first_name_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$first_name_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="first_name" {$tooltipAttr public_users first_name } >
+		<div class="r-edit-tooltip" data-helpfor="first_name" {$tooltipAttr _global_ first_name } >
 		<div class="text-muted" >
-		{$tooltip public_users first_name }		</div>
+		{$tooltip _global_ first_name }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END first_name_fieldblock}
@@ -205,17 +207,19 @@
 	data-signal-error-for="middle_name{$id}" {$required_attr_middle_name}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="middle_name" data-fieldname="middle_name" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_middle_name}">
-		{BEGIN middle_name_label}{$label public_users middle_name }{END middle_name_label}
+	<label class="r-edit-label control-label {$middle_name_label_class}" for="{$labelfor_middle_name}">
+		{BEGIN middle_name_label}
+			{$middle_name_forward_control}
+			{$label _global_ middle_name }			{END middle_name_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$middle_name_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="middle_name" {$tooltipAttr public_users middle_name } >
+		<div class="r-edit-tooltip" data-helpfor="middle_name" {$tooltipAttr _global_ middle_name } >
 		<div class="text-muted" >
-		{$tooltip public_users middle_name }		</div>
+		{$tooltip _global_ middle_name }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END middle_name_fieldblock}
@@ -233,17 +237,19 @@
 	data-signal-error-for="last_name{$id}" {$required_attr_last_name}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="last_name" data-fieldname="last_name" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_last_name}">
-		{BEGIN last_name_label}{$label public_users last_name }{END last_name_label}
+	<label class="r-edit-label control-label {$last_name_label_class}" for="{$labelfor_last_name}">
+		{BEGIN last_name_label}
+			{$last_name_forward_control}
+			{$label _global_ last_name }			{END last_name_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$last_name_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="last_name" {$tooltipAttr public_users last_name } >
+		<div class="r-edit-tooltip" data-helpfor="last_name" {$tooltipAttr _global_ last_name } >
 		<div class="text-muted" >
-		{$tooltip public_users last_name }		</div>
+		{$tooltip _global_ last_name }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END last_name_fieldblock}
@@ -263,17 +269,19 @@
 	data-signal-error-for="sex{$id}" {$required_attr_sex}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="sex" data-fieldname="sex" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_sex}">
-		{BEGIN sex_label}{$label public_users sex }{END sex_label}
+	<label class="r-edit-label control-label {$sex_label_class}" for="{$labelfor_sex}">
+		{BEGIN sex_label}
+			{$sex_forward_control}
+			{$label _global_ sex }			{END sex_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$sex_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="sex" {$tooltipAttr public_users sex } >
+		<div class="r-edit-tooltip" data-helpfor="sex" {$tooltipAttr _global_ sex } >
 		<div class="text-muted" >
-		{$tooltip public_users sex }		</div>
+		{$tooltip _global_ sex }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END sex_fieldblock}
@@ -291,17 +299,19 @@
 	data-signal-error-for="designation_role{$id}" {$required_attr_designation_role}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="designation_role" data-fieldname="designation_role" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_designation_role}">
-		{BEGIN designation_role_label}{$label public_users designation_role }{END designation_role_label}
+	<label class="r-edit-label control-label {$designation_role_label_class}" for="{$labelfor_designation_role}">
+		{BEGIN designation_role_label}
+			{$designation_role_forward_control}
+			{$label _global_ designation_role }			{END designation_role_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$designation_role_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="designation_role" {$tooltipAttr public_users designation_role } >
+		<div class="r-edit-tooltip" data-helpfor="designation_role" {$tooltipAttr _global_ designation_role } >
 		<div class="text-muted" >
-		{$tooltip public_users designation_role }		</div>
+		{$tooltip _global_ designation_role }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END designation_role_fieldblock}
@@ -321,17 +331,19 @@
 	data-signal-error-for="email{$id}" {$required_attr_email}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="email" data-fieldname="email" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_email}">
-		{BEGIN email_label}{$label public_users email }{END email_label}
+	<label class="r-edit-label control-label {$email_label_class}" for="{$labelfor_email}">
+		{BEGIN email_label}
+			{$email_forward_control}
+			{$label _global_ email }			{END email_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$email_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="email" {$tooltipAttr public_users email } >
+		<div class="r-edit-tooltip" data-helpfor="email" {$tooltipAttr _global_ email } >
 		<div class="text-muted" >
-		{$tooltip public_users email }		</div>
+		{$tooltip _global_ email }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END email_fieldblock}
@@ -349,17 +361,19 @@
 	data-signal-error-for="region{$id}" {$required_attr_region}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="region" data-fieldname="region" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_region}">
-		{BEGIN region_label}{$label public_users region }{END region_label}
+	<label class="r-edit-label control-label {$region_label_class}" for="{$labelfor_region}">
+		{BEGIN region_label}
+			{$region_forward_control}
+			{$label _global_ region }			{END region_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$region_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="region" {$tooltipAttr public_users region } >
+		<div class="r-edit-tooltip" data-helpfor="region" {$tooltipAttr _global_ region } >
 		<div class="text-muted" >
-		{$tooltip public_users region }		</div>
+		{$tooltip _global_ region }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END region_fieldblock}
@@ -379,17 +393,19 @@
 	data-signal-error-for="phone{$id}" {$required_attr_phone}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="phone" data-fieldname="phone" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_phone}">
-		{BEGIN phone_label}{$label public_users phone }{END phone_label}
+	<label class="r-edit-label control-label {$phone_label_class}" for="{$labelfor_phone}">
+		{BEGIN phone_label}
+			{$phone_forward_control}
+			{$label _global_ phone }			{END phone_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$phone_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="phone" {$tooltipAttr public_users phone } >
+		<div class="r-edit-tooltip" data-helpfor="phone" {$tooltipAttr _global_ phone } >
 		<div class="text-muted" >
-		{$tooltip public_users phone }		</div>
+		{$tooltip _global_ phone }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END phone_fieldblock}
@@ -407,17 +423,19 @@
 	data-signal-error-for="country{$id}" {$required_attr_country}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="country" data-fieldname="country" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_country}">
-		{BEGIN country_label}{$label public_users country }{END country_label}
+	<label class="r-edit-label control-label {$country_label_class}" for="{$labelfor_country}">
+		{BEGIN country_label}
+			{$country_forward_control}
+			{$label _global_ country }			{END country_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$country_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="country" {$tooltipAttr public_users country } >
+		<div class="r-edit-tooltip" data-helpfor="country" {$tooltipAttr _global_ country } >
 		<div class="text-muted" >
-		{$tooltip public_users country }		</div>
+		{$tooltip _global_ country }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END country_fieldblock}
@@ -449,17 +467,19 @@
 	data-signal-error-for="username{$id}" {$required_attr_username}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="username" data-fieldname="username" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_username}">
-		{BEGIN username_label}{$label public_users username }{END username_label}
+	<label class="r-edit-label control-label {$username_label_class}" for="{$labelfor_username}">
+		{BEGIN username_label}
+			{$username_forward_control}
+			{$label _global_ username }			{END username_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$username_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="username" {$tooltipAttr public_users username } >
+		<div class="r-edit-tooltip" data-helpfor="username" {$tooltipAttr _global_ username } >
 		<div class="text-muted" >
-		{$tooltip public_users username }		</div>
+		{$tooltip _global_ username }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END username_fieldblock}
@@ -484,17 +504,19 @@
 	data-signal-error-for="password{$id}" {$required_attr_password}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="password" data-fieldname="password" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_password}">
-		{BEGIN password_label}{$label public_users password }{END password_label}
+	<label class="r-edit-label control-label {$password_label_class}" for="{$labelfor_password}">
+		{BEGIN password_label}
+			{$password_forward_control}
+			{$label _global_ password }			{END password_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$password_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="password" {$tooltipAttr public_users password } >
+		<div class="r-edit-tooltip" data-helpfor="password" {$tooltipAttr _global_ password } >
 		<div class="text-muted" >
-		{$tooltip public_users password }		</div>
+		{$tooltip _global_ password }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END password_fieldblock}
@@ -519,17 +541,19 @@
 	data-signal-error-for="confirm{$id}" {$required_attr_confirm_aoel3cx}
 	data-itemtype="integrated_confirm_password" data-itemid="integrated_confirm_password" {$item_integrated_confirm_password} data-pageid="{$pageid}" data-field="confirm_aoel3cx" data-fieldname="confirm_aoel3cx" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_confirm_aoel3cx_confirm}">
-		{BEGIN confirm_label}Confirm password{END confirm_label}
+	<label class="r-edit-label control-label {$confirm_label_class}" for="{$labelfor_confirm_aoel3cx_confirm}">
+		{BEGIN confirm_label}
+			{$confirm_forward_control}
+			{mlang_message CONFIRM_PASSWORD}			{END confirm_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$confirm_editcontrol1}	</div>
-	<div class="r-edit-tooltip" data-helpfor="confirm" {$tooltipAttr public_users confirm_aoel3cx } >
+		<div class="r-edit-tooltip" data-helpfor="confirm" {$tooltipAttr _global_ confirm_aoel3cx } >
 		<div class="text-muted" >
-		{$tooltip public_users confirm_aoel3cx }		</div>
+		{$tooltip _global_ confirm_aoel3cx }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END confirm_block}
@@ -581,13 +605,13 @@
 <span data-itemtype="register_save" data-itemid="register_save" {$item_register_save} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-primary   
 	" {$submit_attrs} >
-							Register			</a>
+							{mlang_message REGISTER}			</a>
 </span>
  
 <span data-itemtype="back_to_login" data-itemid="back_to_login" {$item_back_to_login} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-link   
 	" href="login.php" {$backlink_attrs} >
-							Back to login page			</a>
+							{mlang_message BACK_TO_LOGIN}			</a>
 </span>
 </td>
 									<td 
@@ -598,7 +622,7 @@
 <span data-itemtype="register_reset" data-itemid="register_reset" {$item_register_reset} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-default   
 	" {$resetbutton_attrs} >
-							Reset			</a>
+							{mlang_message RESET}			</a>
 </span>
 </td>
 							</tr>

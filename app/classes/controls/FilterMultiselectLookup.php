@@ -41,7 +41,7 @@ class FilterMultiselectLookup extends FilterValuesList {
 				foreach( $this->parentFiltersNames as $pName ) {
 					$parentFiltersData[ $pName ] = $data[ $pName ];
 				}
-				$parentString = my_json_encode( $parentFiltersData );
+				$parentString = runner_json_encode( $parentFiltersData );
 			}
 			
 			$values = splitLookupValues( $data[ $this->fName ] );

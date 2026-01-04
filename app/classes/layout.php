@@ -58,7 +58,7 @@ class TLayout
 	/**
 	 *  Returns list of CSS files required for displaying the layout
 	 */
-	public function getCSSFiles($rtl = false, $mobile = false, $pdf = false)
+	public function getCSSFiles($rtl = false, $pdf = false)
 	{
 		$files = array();
 		$suffix = "";
@@ -71,7 +71,7 @@ class TLayout
 		else
 			$files[] = "include/bootstrap/css/bootstrap-theme.min.css";
 
-		if($pdf)
+		if( $pdf )
 			$files[] = "styles/pdf.css";
 
 		$files[] = "styles/bs".$suffix.".css";
@@ -83,6 +83,8 @@ class TLayout
 				$files[] = "styles/bootstrap/".$this->bootstrapTheme."/css/tweaks".$suffix.".css";
 		}
 
+		//	incorect! file might have been left from previous builds
+		//	read projectsettings here 
 		if( file_exists( getabspath( "styles/custom/custom.css" ) ) )
 			$files[] = "styles/custom/custom".$suffix.".css";
 		

@@ -1,16 +1,18 @@
 <?php 
 @ini_set("display_errors","1");
 
+$requestTable = 'public.antibiotics';
+$strTableName = 'public.antibiotics';
+$requestPage = "add";
+
 require_once("include/dbcommon.php");
 require_once("classes/searchclause.php");
-require_once("include/antibiotics_variables.php");
 require_once('include/xtempl.php');
 require_once('classes/addpage.php');
-require_once('include/lookuplinks.php');
+require_once('classes/add_calendar.php');
+require_once('classes/add_gantt.php');
 
 add_nocache_headers();
-
-InitLookupLinks();
 
 if( Security::hasLogin() ) {
 	if( !AddPage::processAddPageSecurity( $strTableName ) )
@@ -49,10 +51,8 @@ if( $params["masterTable"] )
 	$params["masterKeysReq"] = RunnerPage::readMasterKeysFromRequest();
 
 
-		
-;
-$params["captchaName"] = "captcha_1209xre";
-$params["captchaValue"] = postvalue("value_captcha_1209xre_" . $id);
+$params["captchaName"] = CaptchaId;
+$params["captchaValue"] = postvalue( 'value_'. CaptchaId . '_' . $id );
 $params["dashElementName"] = postvalue("dashelement");
 $params["fromDashboard"] = postvalue("fromDashboard");
 $params["dashTName"] = $params["fromDashboard"] ? $params["fromDashboard"] : postvalue("dashTName");
@@ -97,11 +97,19 @@ if( $pageMode == ADD_ONTHEFLY || ( $pageMode == ADD_INLINE || $pageMode == ADD_P
 	if( postvalue('parentsExist') )
 	{
 		//the parent controls values data
-		$params["parentCtrlsData"] = my_json_decode( postvalue("parentCtrlsData") );		
+		$params["parentCtrlsData"] = runner_json_decode( postvalue("parentCtrlsData") );		
 	}		
 }
 
-$pageObject = new AddPage($params);
+if( $params['pageName'] == CALENDAR_ADD_PAGE ) {
+	$pageObject = new AddCalendarPage( $params );
+} else if( postvalue( 'gantt' ) ) {
+	$params['parentValue'] = postvalue( 'parent' );
+	$pageObject = new AddGanttPage( $params );
+} else {
+	$pageObject = new AddPage( $params );
+
+}
 $pageObject->init();
 
 $pageObject->process();	

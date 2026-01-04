@@ -4,10 +4,12 @@ class RunnerMenu {
 	/** @var MenuItem */
 	protected $root;
 	protected $_name;
+	protected $_id;
 
 	protected $activeItem = null;
 
-	function __construct( $name, $root ) {
+	function __construct( $id, $name, $root ) {
+		$this->_id = $id;
 		$this->_name = $name;
 		$this->root = $root;
 	}
@@ -16,34 +18,31 @@ class RunnerMenu {
 		return $this->_name;
 	}
 
+	public function id() {
+		return $this->_id;
+	}
+
 	/**
 	 * return corresponding RunnerMenu object
 	 * @return RunnerMenu
 	 */
-	public static function getMenuObject( $name ) {
-		if( !$name ) {
-			$name = "main";
-		}
+	public static function getMenuObject( $id ) {
+
 		global $menuCache;
-		if( $menuCache[ $name ] ) {
-			return $menuCache[ $name ];
+		if( $menuCache[ $id ] ) {
+			return $menuCache[ $id ];
 		}
 
-		$menuNodes = loadMenuNodes( $name );
+		$menuInfo = loadMenu( $id );
 
 		$nullParent = NULL;
 		$rootInfoArr = array("id"=>0, "href"=>"");
-		/* $menuNodesIndex must be set to 0 for to operate properly */
-		global $menuNodesIndex;
-		$menuNodesIndex = 0;
-
+		
 		$menuMap = array();
-		$rootElement = new MenuItem($rootInfoArr, $menuNodes, $nullParent, $menuMap, $name );
-		global $menuNodesCache;
-		unset( $menuNodesCache[ $name ] );
+		$rootElement = new MenuItem( $menuInfo['root'], $menuMap, $id );
 
-		$menuObj = new RunnerMenu( $name, $rootElement );
-		$menuCache[ $name ] = $menuObj;
+		$menuObj = new RunnerMenu( $menuInfo['id'], $menuInfo['name'] , $rootElement );
+		$menuCache[ $id ] = $menuObj;
 
 		global $globalEvents;
 		if( $globalEvents->exists("ModifyMenu") ) {
@@ -101,43 +100,37 @@ class RunnerMenu {
 	// ?
 	public function makeGroupItem( $label ) {
 		$menuNode = array();
-		$menuNode["id"] = MenuItem::maxChildId( $this->root ) + 1;
-		$menuNode["type"] = "Group";
-		$menuNode["title"] = $label;
+		$menuNode["id"] = MenuItem::newId( $this->root );
+		$menuNode["data"] = array();
+		$menuNode["data"]["itemTtype"] = menuItemTypeGroup;
+		$menuNode["data"]["name"] = $label;
 
-		// pass stub variables
-		$childNodes = array();
-		$parent = array(); 
-		return new MenuItem( $menuNode, $childNodes, $parent, $this->root->menuTableMap, $this->name() );
+		return new MenuItem( $menuNode, $this->root->menuTableMap, $this->id() );
 	}
 
 	public function makePageLinkItem( $label, $table, $pageType ) {
 		$menuNode = array();
-		$menuNode["id"] = MenuItem::maxChildId( $this->root ) + 1;
-		$menuNode["type"] = "Leaf";
-		$menuNode["title"] = $label;
-		$menuNode["linkType"] = "Internal";
-		$menuNode["pageType"] = $pageType;
-		$menuNode["table"] = $table;
+		$menuNode["id"] = MenuItem::newId( $this->root );
+		$menuNode["data"] = array();
+		$menuNode["data"]["itemType"] = menuItemTypeLeaf;
+		$menuNode["data"]["name"] = $label;
+		$menuNode["data"]["linkType"] = menuLinkTypeInternal;
+		$menuNode["data"]["pageType"] = $pageType;
+		$menuNode["data"]["tableName"] = $table;
 
-		// pass stub variables
-		$childNodes = array();
-		$parent = array(); 
-		return new MenuItem( $menuNode, $childNodes, $parent, $this->root->menuTableMap, $this->name() );
+		return new MenuItem( $menuNode, $this->root->menuTableMap, $this->id() );
 	}
 
 	public function makeURLItem( $label, $url ) {
 		$menuNode = array();
-		$menuNode["id"] = MenuItem::maxChildId( $this->root ) + 1;
-		$menuNode["type"] = "Leaf";
-		$menuNode["title"] = $label;
-		$menuNode["linkType"] = "External";
-		$menuNode["href"] = $url;
+		$menuNode["id"] = MenuItem::newId( $this->root );
+		$menuNode["data"] = array();
+		$menuNode["data"]["itemType"] = menuItemTypeLeaf;
+		$menuNode["data"]["name"] = $label;
+		$menuNode["data"]["linkType"] = menuLinkTypeExternal;
+		$menuNode["data"]["href"] = $url;
 
-		// pass stub variables
-		$childNodes = array();
-		$parent = array(); 
-		return new MenuItem( $menuNode, $childNodes, $parent, $this->root->menuTableMap, $this->name() );
+		return new MenuItem( $menuNode, $this->root->menuTableMap, $this->id() );
 	}
 
 	protected function addItemToMenu( $menuItem, $parentId ) {
@@ -183,7 +176,7 @@ class RunnerMenu {
 
 		$clone = MenuItem::cloneNode( $item );
 		// set unique id
-		$clone->id = MenuItem::maxChildId( $this->root ) + 1;
+		$clone->id = MenuItem::newId( $this->root );
 		
 		// if $parentId == -1, add as $item sibling
 		$parent = $parentId == -1 ? $item->parentItem : MenuItem::findItemById( $this->root, $parentId );

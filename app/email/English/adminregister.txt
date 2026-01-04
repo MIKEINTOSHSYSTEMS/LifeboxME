@@ -1,4 +1,4 @@
-Notification on registering
+Notification on registering 
 
 User registered at %url%
 

@@ -26,17 +26,22 @@ class PostgreConnection extends Connection
 	{
 		parent::assignConnectionParams( $params );
 
-		$host = pg_escape_string( $params["connInfo"][0] ); //strConnectInfo1
-		$user = pg_escape_string( $params["connInfo"][1] ); //strConnectInfo2
-		$password = pg_escape_string( $params["connInfo"][2] ); //strConnectInfo3
-		$dbname = pg_escape_string( $params["connInfo"][4] );  //strConnectInfo5
-		$options = $params["connInfo"][3]; //strConnectInfo4
-
-		$this->connstr = "host='". $host .
-			"' user='". $user .
-			"' password='". $password .
-			"' dbname='". $dbname .
-			"' ".$options;
+		$pgParams = array(
+			"host" => $params["connInfo"][0],
+			"user" => $params["connInfo"][1],
+			"password" => $params["connInfo"][2],
+			"dbname" => $params["connInfo"][4],
+		);
+		$pgStringParams = array();
+		if( $params["connInfo"][3] && is_numeric( $params["connInfo"][3] ) ) {
+			$pgParams["port"] = $params["connInfo"][3];
+		} else {
+			$pgStringParams[] = $params["connInfo"][3];
+		}
+		foreach( $pgParams as $name => $val ) {
+			$pgStringParams[] = $name . "=". pg_escape_string( $val );
+		}
+		$this->connstr = implode( ' ',  $pgStringParams );
 	}
 
 	/**
@@ -55,13 +60,17 @@ class PostgreConnection extends Connection
 	 */
 	public function connect()
 	{
-		if( GetGlobalData("showDetailedError", true) ) {
+		if( ProjectSettings::getProjectValue( 'detailedError' ) ) {
 			// there is no other way to display Postgre connection error
 			$errorMode = error_reporting( E_ALL );
+			$errorHandler = set_error_handler( null );
 		}
+		
 		$this->conn = pg_connect( $this->connstr );
-		if( GetGlobalData("showDetailedError", true) ) {
+		
+		if( ProjectSettings::getProjectValue( 'detailedError' ) ) {
 			error_reporting( $errorMode );
+			set_error_handler( $errorHandler );
 		}
 		if( !$this->conn )
 			$this->triggerError("Unable to connect");

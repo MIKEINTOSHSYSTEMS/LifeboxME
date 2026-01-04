@@ -19,8 +19,7 @@ class ViewMapField extends ViewControl
 			$mapData = &$this->pageObject->googleMapCfg['mapsData'][ $mapId ];		
 
 		if( $this->pageObject->pageType != PAGE_PRINT && $this->pageObject->pageType != PAGE_MASTER_INFO_PRINT 
-				&& $this->pageObject->pageType != PAGE_RPRINT && $this->pageObject->pageType != PAGE_REPORT 
-						&& !($this->pageObject->mode == VIEW_SIMPLE && $this->pageObject->pdfMode) ) {
+				&& $this->pageObject->pageType != PAGE_RPRINT && $this->pageObject->pageType != PAGE_REPORT ) {
 			return $this->getFieldMap( $mapData, $mapId );
 		}
 
@@ -37,7 +36,7 @@ class ViewMapField extends ViewControl
 		if( isset( $this->pageObject->googleMapCfg['fieldsAsMap'] ) )
 			$height = $this->pageObject->googleMapCfg['fieldsAsMap'][ $this->field ]['height'];
 		
-		if( GetGlobalData("useEmbedMapsAPI", false) && getMapProvider() == GOOGLE_MAPS ) {
+		if( ProjectSettings::getProjectValue( 'mapSettings', 'embed' ) && getMapProvider() == GOOGLE_MAPS ) {
 			$mapData["skipped"] = true;
 			
 			$q = $this->getPlaceDefinition( $mapData );

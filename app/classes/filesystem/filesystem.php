@@ -98,7 +98,10 @@ class RunnerFileSystem {
 	 * @return String - uploaded file contents
 	 */
 	public static function uploadedFileContent( $uploadFile ) {
-					return myfile_get_contents( $uploadFile["tmp_name" ]);
+		if( ProjectSettings::ext() == "php") {
+			return myfile_get_contents( $uploadFile["tmp_name" ]);
+		} 
+		return myfile_get_contents( $uploadFile["file"] );
 	}
 
 	/**
@@ -153,14 +156,14 @@ class RunnerFileSystem {
 	/**
 	 * @return String - filename only or false
 	 */
-	public function tryCreateUniqueFile( $filename, $path ) {
+	public function tryCreateUniqueFile( $originalFilename, $path ) {
 		$attempt = 0;
 		do {
 			//	on insecure filesystems physical file name always differs from the original one for security reason.
 			//	possible exploits:
 			//	upload x.php file to /files and then open site.com/files/x.php
 			//	guess the filename, download site.com/files/document.pdf
-			$filename = $this->generateFilename( $filename, $attempt > 0 || !$this->secureFilesystem() );
+			$filename = $this->generateFilename( $originalFilename, $attempt > 0 || !$this->secureFilesystem() );
 
 			$filepath = $path . $filename;
 			if( $this->tryCreateFile( $filepath ) )

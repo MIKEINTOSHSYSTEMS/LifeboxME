@@ -1,7 +1,7 @@
 <!doctype html>
 <html  {$html_attrs}>
 	<head>
-				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+						<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{$pagetitle}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -10,13 +10,9 @@
     <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
     <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
     <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
-    		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
-	{BEGIN rtlCSS}
-	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
-	{END rtlCSS}
-	{BEGIN styleCSSFiles}
-	<link REL="stylesheet" href="{$stylepath}" type="text/css">
-	{END styleCSSFiles}
+    		{BEGIN styleCSSFiles}
+<link REL="stylesheet" href="{$stylepath}" type="text/css">
+{END styleCSSFiles}
 			
 	</head>
 
@@ -51,7 +47,7 @@
 
 			<div class="clearfix " data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell data-itemid="expand_button" {$item_expand_button} data-topcell-item-type="expand_button" >
 				<span data-itemtype="expand_button" data-itemid="expand_button" {$item_expand_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Expand" class="btn btn-link   
+	<a type="button" title="{mlang_message EXPAND}" class="btn btn-link   
 	" href="#" >
 					<span class="glyphicon glyphicon-triangle-right"></span>
 										</a>
@@ -69,7 +65,7 @@
 	<div class="panel-heading">
 		<div class="btn-group r-sp-addfield" id="addSearchFieldButton{$id}">
 			<button id="showHideControlChooseMenu{$id}" type="button" class="btn btn-default dropdown-toggle btn-sm )" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			Search in			<span class="caret"></span>
+			{mlang_message SEARCH_IN}			<span class="caret"></span>
 			</button>
 		</div>
 
@@ -79,12 +75,12 @@
 				<span class="glyphicon glyphicon glyphicon-option-vertical"></span>
 			</button>
 			<ul class="dropdown-menu dropdown-left">
-				<li id="showHideSearchType{$id}" {$showHideCtrlsOpt_attrs}><a>Show options</a></li>
+				<li id="showHideSearchType{$id}" {$showHideCtrlsOpt_attrs}><a>{mlang_message SEARCH_SHOW_OPTIONS_BUTTON}</a></li>
 				<li role="separator" class="divider"></li>
-				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAll" {$all_checkbox}><label for="radioAll"><span class="glyphicon">&nbsp;</span>all conditions</label></a></li>
-				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAny" {$any_checkbox}><label for="radioAny"><span class="glyphicon">&nbsp;</span>any condition</label></a></li>
+				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAll" {$all_checkbox}><label for="radioAll"><span class="glyphicon">&nbsp;</span>{mlang_message SEARCH_ALL_CONDITIONS}</label></a></li>
+				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAny" {$any_checkbox}><label for="radioAny"><span class="glyphicon">&nbsp;</span>{mlang_message SEARCH_ANY_CONDITIONS}</label></a></li>
 				<li role="separator" class="divider"></li>
-				<li><a class="close-button"><span class="glyphicon glyphicon-remove">&nbsp;</span>hide</a></li>
+				<li><a class="close-button"><span class="glyphicon glyphicon-remove">&nbsp;</span>{mlang_message HIDE}</a></li>
 			</ul>
 		</div>
 
@@ -497,9 +493,9 @@
 	</div>
 
 	<div class="panel-footer bottomSearchButt" {$bottomSearchButt_attrs}>
-		<button class="btn btn-primary btn-sm" id="searchButton{$id}" {$searchbutton_attrs}>Search</button>
+		<button class="btn btn-primary btn-sm" id="searchButton{$id}" {$searchbutton_attrs}>{mlang_message SEARCH}</button>
 
-				<button class="btn btn-default btn-sm" {$showAllCont_attrs} {$showallbutton_attrs}>Show all</button>
+				<button class="btn btn-default btn-sm" {$showAllCont_attrs} {$showallbutton_attrs}>{mlang_message SHOW_ALL}</button>
 	</div>
 </div>
 <!-- End Search panel content -->
@@ -666,7 +662,7 @@
 							 
 				<span class="navbar-form  navbar-header" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="expand_menu_button" {$item_expand_menu_button} data-topcell-item-type="expand_menu_button" >
 				<span data-itemtype="expand_menu_button" data-itemid="expand_menu_button" {$item_expand_menu_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Show menu" class="btn-link   
+	<a type="button" title="{mlang_message SHOW_MENU}" class="btn-link   
 	 glyphicon glyphicon-menu-hamburger" href="#" >		
 				
 								</a>
@@ -675,7 +671,7 @@
 		 
 				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="collapse_button" {$item_collapse_button} data-topcell-item-type="collapse_button" >
 				<span data-itemtype="collapse_button" data-itemid="collapse_button" {$item_collapse_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Collapse" class="btn-link   
+	<a type="button" title="{mlang_message COLLAPSE}" class="btn-link   
 	 glyphicon glyphicon-triangle-left" href="#" >		
 				
 								</a>
@@ -710,7 +706,7 @@
 {END searchform_text}
 	<span class="input-group-btn">
 	{BEGIN searchform_showall}
-				<button class="btn btn-default" {$showAllCont_attrs} {$showallbutton_attrs} title="Show all">
+				<button class="btn btn-default" {$showAllCont_attrs} {$showallbutton_attrs} title="{mlang_message SHOW_ALL}">
 			<span class="glyphicon glyphicon-remove"></span>
 		</button>
 	{END searchform_showall}
@@ -736,14 +732,14 @@
 								<li data-itemtype="advsearch_link" data-itemid="advsearch_link" {$item_advsearch_link} data-pageid="{$pageid}" data-small >
 				<a   href="aio_training_tracking_search.php{$stateLink_full}" {$advsearchlink_attrs}  title="" >
 				
-		Advanced search		
+		{mlang_message ADVANCED_SEARCH}		
 		</a>
 	</li>
 							{BEGIN searchPanelTopButtons}
 	<li data-itemtype="show_search_panel" data-itemid="show_search_panel" {$item_show_search_panel} data-pageid="{$pageid}" data-small >
 				<a  id="showOptPanel{$id}"  title="" >
 				
-		Show search panel		
+		{mlang_message SHOW_SEARCH_PANEL}		
 		</a>
 	</li>
 {END searchPanelTopButtons}
@@ -751,7 +747,7 @@
 	<li data-itemtype="hide_search_panel" data-itemid="hide_search_panel" {$item_hide_search_panel} data-pageid="{$pageid}" data-small >
 				<a  id="hideOptPanel{$id}"  title="" >
 				
-		Hide search panel		
+		{mlang_message HIDE_SEARCH_PANEL}		
 		</a>
 	</li>
 {END searchPanelTopButtons}
@@ -759,21 +755,21 @@
 	<li data-itemtype="save_search" data-itemid="save_search" {$item_save_search} data-pageid="{$pageid}" data-small >
 				<a  href="#" id="saveSearch{$id}"  title="" >
 				
-		Save search		
+		{mlang_message SAVE_SEARCH}		
 		</a>
 	</li>
 {END saveSeachButton}
 							<li role="separator" class="divider"></li>							{BEGIN savedSeachesButton}
 <li data-itemtype="saved_searches" data-itemid="saved_searches" {$item_saved_searches} data-pageid="{$pageid}">
-	<a {$saveSearchButtonAttrs} id="savedSearches{$id}">Saved searches:</a>
-	<ul class="rnr-saved-searches rnr-list" id ="savedSearchedList{$id}"></ul>
+	<a {$saveSearchButtonAttrs} id="savedSearches{$id}">{mlang_message SAVED_SEARCHES}:</a>
+	<ul class="rnr-saved-searches rnr-list" id="savedSearchedList{$id}"></ul>
 </li>
 {END savedSeachesButton}
 							<li role="separator" class="divider"></li>							{BEGIN export_link}
 	<li data-itemtype="export" data-itemid="export" {$item_export} data-pageid="{$pageid}" data-small >
 				<a  href="#" {$exportlink_attrs}  title="" >
 				
-		Export results		
+		{mlang_message EXPORT_RESULTS}		
 		</a>
 	</li>
 {END export_link}
@@ -781,7 +777,7 @@
 	<li data-itemtype="import" data-itemid="import" {$item_import} data-pageid="{$pageid}" data-small >
 				<a  {$importlink_attrs} href="aio_training_tracking_import.php{$stateLink_full}"  title="" >
 				
-		Import		
+		{mlang_message IMPORT}		
 		</a>
 	</li>
 {END import_link}
@@ -795,7 +791,7 @@
 <span data-itemtype="loginform_login" data-itemid="loginform_login" {$item_loginform_login} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-primary   
 	" href="#" {$guestloginlink_attrs} >
-							Login			</a>
+							{mlang_message LOGIN}			</a>
 </span>
 {END guestloginbutton}
 			</span>
@@ -806,14 +802,14 @@
 	<span class="dropdown ">
 		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
 			{BEGIN userbutton_icon}							<span class="glyphicon glyphicon-user"></span>
-						{END userbutton_icon}{$userbutton_image}			{$username}			<span class="caret"></span>
+						{END userbutton_icon}{$userbutton_image}			{$mlp_push}{$mlparam username var username}{$mltext %username%}{$mlp_pop}			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu">
 							{BEGIN userinfo_link}
 	<li data-itemtype="userinfo_link" data-itemid="userinfo_link" {$item_userinfo_link} data-pageid="{$pageid}" data-small >
 				<a  href="userinfo.php"  title="" >
 				
-		User Profile		
+		{mlang_message USERINFO}		
 		</a>
 	</li>
 {END userinfo_link}
@@ -821,7 +817,7 @@
 	<li data-itemtype="logout_link" data-itemid="logout_link" {$item_logout_link} data-pageid="{$pageid}" data-small >
 				<a  href="#" {$logoutlink_attrs}  title="" >
 				
-		Log out		
+		{mlang_message LOG_OUT}		
 		</a>
 	</li>
 {END logoutbutton}
@@ -829,7 +825,7 @@
 	<li data-itemtype="adminarea_link" data-itemid="adminarea_link" {$item_adminarea_link} data-pageid="{$pageid}" data-small >
 				<a  href="admin_rights_list.php"  title="" >
 				
-		Admin Area		
+		{mlang_message AA_ADMINAREA}		
 		</a>
 	</li>
 {END adminarea_link}
@@ -837,7 +833,7 @@
 	<li data-itemtype="changepassword_link" data-itemid="changepassword_link" {$item_changepassword_link} data-pageid="{$pageid}" data-small >
 				<a  href="changepwd.php" {$changepwdlink_attrs} id="changePasswordButton{$id}"  title="" >
 				
-		Change password		
+		{mlang_message CHANGE_PASSWORD}		
 		</a>
 	</li>
 {END changepwd_link}
@@ -918,7 +914,7 @@
 ">
 		 
 		<div class="form-inline sortby-ctrl" data-itemtype="sort_dropdown" data-itemid="sort_dropdown" {$item_sort_dropdown} data-pageid="{$pageid}">
-Sort by&nbsp;{$sortByDropdown}
+{mlang_message SORT_BY}&nbsp;{$sortByDropdown}
 </div>		</div>					</div>
 			 
 				<div class="row">
@@ -935,14 +931,14 @@ Sort by&nbsp;{$sortByDropdown}
 	
 ">
 		 
-		<span data-itemtype="details_found" data-itemid="details_found" {$item_details_found} data-pageid="{$pageid}" data-small >
+		<span data-itemtype="details_found" data-itemid="details_found" {$item_details_found} data-pageid="{$pageid}" >
 {$mlp_push}{$mlparam first var first_shown}{$mlparam last var last_shown}{$mlparam total var records_found}{mlang_message DISPLAYING}{$mlp_pop}</span>	 
 		<span data-itemtype="page_size" data-itemid="page_size" {$item_page_size} data-pageid="{$pageid}" >
 		{$recsPerPage}
 </span>	 
 		{BEGIN print_friendly}
 <span id="printpanelblock{$id}"  data-pageid="{$pageid}" {$printpanel_hiddenattr} data-itemtype="print_panel" data-itemid="print_panel" {$item_print_panel} data-pageid="{$pageid}">
-	<button title="Print-friendly page" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+	<button title="{mlang_message WR_PRINT_FRIENDLY}" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 					<span class="glyphicon glyphicon-print"></span>
 				<span class="caret"></span>
 	</button>
@@ -954,14 +950,14 @@ Sort by&nbsp;{$sortByDropdown}
 									<div id="print_friendly_scope{$id}">
 	<div class="row">
 		<div class="col-md-4">
-			Scope:		</div>
+			{mlang_message PPANEL_SCOPE}		</div>
 
 			 
 		{BEGIN print_friendly_all}
 		<div class="col-md-8">
 			<label for="printAll{$id}">
-				<input type="radio" id="printAll{$id}" data-href="aio_training_tracking_print.php?all=1&amp;{$crosstable_attrs}" name="printScope" >
-									Print all pages							</label>
+				<input type="radio" id="printAll{$id}" data-href="_print.php?all=1&amp;{$crosstable_attrs}" name="printScope" >
+									{mlang_message PPANEL_ALL_PAGES}							</label>
 		</div>
 		{END print_friendly_all}
 		</div>
@@ -970,7 +966,7 @@ Sort by&nbsp;{$sortByDropdown}
 		<div class="col-md-8">
 			<label for="printPage{$id}">
 				<input name="printScope" id="printPage{$id}" type="radio" checked data-href="aio_training_tracking_print.php?{$crosstable_attrs}">
-				Print this page			</label>
+				{mlang_message PPANEL_THIS_PAGE}			</label>
 		</div>
 	</div>
 		
@@ -986,16 +982,9 @@ Sort by&nbsp;{$sortByDropdown}
 <div>
 	<label for="printDetailsToggler{$id}">
 		<input type="checkbox" id="printDetailsToggler{$id}">
-		Print details	</label>
+		{mlang_message PPANEL_DETAILS}	</label>
 	<div  id="printdetailstables{$id}" style="display:none;">
-											{BEGIN print_details_aio_training_tracking_chart}
-			<div>
-				<label for="printDetailsaio_training_tracking_chart{$id}">
-					<input type="checkbox" value="aio_training_tracking_chart" id="printDetailsaio_training_tracking_chart{$id}" checked>
-					Aio Training Tracking Chart				</label>
 			</div>
-			{END print_details_aio_training_tracking_chart}
-						</div>
 </div>
 {END print_details}
 				 
@@ -1007,7 +996,7 @@ Sort by&nbsp;{$sortByDropdown}
 										">
 									<div>
 	<label for="printPerPage{$id}">
-					Records Per Page							
+					{mlang_message RECORDS_PP}							
 	</label>
 	<input type="number" id="printPerPage{$id}" value="{$print_recspp}" class="rnr-printrecspp">		
 </div>
@@ -1021,7 +1010,7 @@ Sort by&nbsp;{$sortByDropdown}
 									<span data-itemtype="print_button" data-itemid="print_button" {$item_print_button} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-primary   
 	" id="print_friendly_button{$id}" >
-							Print			</a>
+							{mlang_message PPANEL_PRINT}			</a>
 </span>
 				 
 					</li>
@@ -1031,7 +1020,7 @@ Sort by&nbsp;{$sortByDropdown}
 	 
 		<div id="fildhidepanel{$id}" class="bs-fildhidepanel 
 	 showHide		keep-open btn-group"
-	data-itemtype="columns_control" data-itemid="columns_control" {$item_columns_control} data-pageid="{$pageid}"	title="Show/hide columns"
+	data-itemtype="columns_control" data-itemid="columns_control" {$item_columns_control} data-pageid="{$pageid}"	title="{mlang_message SHOW_HIDE_COLUMNS}"
 	>
 	<button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button"><i class="glyphicon glyphicon-th-list"></i> <span class="caret"></span></button>
 	<ul role="menu" class="dropdown-menu dropdown-left">
@@ -1363,7 +1352,7 @@ Sort by&nbsp;{$sortByDropdown}
 	<div class="dropdown filter-field filter-gender-container" {BEGIN filter_selected_gender} data-selected {END filter_selected_gender}>
 		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
 						{BEGIN clearLink_gender}
-			<a href="#" class="filter-clear filter-clear-gender" title="Clear">
+			<a href="#" class="filter-clear filter-clear-gender" title="{mlang_message FILTER_CLEAR}">
 				<span class="glyphicon glyphicon-remove"></span>
 			</a>
 			{END clearLink_gender}
@@ -1423,7 +1412,7 @@ Sort by&nbsp;{$sortByDropdown}
 	<div class="dropdown filter-field filter-participant_role-container" {BEGIN filter_selected_participant_role} data-selected {END filter_selected_participant_role}>
 		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
 						{BEGIN clearLink_participant_role}
-			<a href="#" class="filter-clear filter-clear-participant_role" title="Clear">
+			<a href="#" class="filter-clear filter-clear-participant_role" title="{mlang_message FILTER_CLEAR}">
 				<span class="glyphicon glyphicon-remove"></span>
 			</a>
 			{END clearLink_participant_role}
@@ -1483,7 +1472,7 @@ Sort by&nbsp;{$sortByDropdown}
 	<div class="dropdown filter-field filter-country-container" {BEGIN filter_selected_country} data-selected {END filter_selected_country}>
 		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
 						{BEGIN clearLink_country}
-			<a href="#" class="filter-clear filter-clear-country" title="Clear">
+			<a href="#" class="filter-clear filter-clear-country" title="{mlang_message FILTER_CLEAR}">
 				<span class="glyphicon glyphicon-remove"></span>
 			</a>
 			{END clearLink_country}
@@ -1543,7 +1532,7 @@ Sort by&nbsp;{$sortByDropdown}
 	<div class="dropdown filter-field filter-facility-container" {BEGIN filter_selected_facility} data-selected {END filter_selected_facility}>
 		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
 						{BEGIN clearLink_facility}
-			<a href="#" class="filter-clear filter-clear-facility" title="Clear">
+			<a href="#" class="filter-clear filter-clear-facility" title="{mlang_message FILTER_CLEAR}">
 				<span class="glyphicon glyphicon-remove"></span>
 			</a>
 			{END clearLink_facility}
@@ -1603,7 +1592,7 @@ Sort by&nbsp;{$sortByDropdown}
 	<div class="dropdown filter-field filter-training_id-container" {BEGIN filter_selected_training_id} data-selected {END filter_selected_training_id}>
 		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
 						{BEGIN clearLink_training_id}
-			<a href="#" class="filter-clear filter-clear-training_id" title="Clear">
+			<a href="#" class="filter-clear filter-clear-training_id" title="{mlang_message FILTER_CLEAR}">
 				<span class="glyphicon glyphicon-remove"></span>
 			</a>
 			{END clearLink_training_id}
@@ -1663,7 +1652,7 @@ Sort by&nbsp;{$sortByDropdown}
 	<div class="dropdown filter-field filter-training_name-container" {BEGIN filter_selected_training_name} data-selected {END filter_selected_training_name}>
 		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
 						{BEGIN clearLink_training_name}
-			<a href="#" class="filter-clear filter-clear-training_name" title="Clear">
+			<a href="#" class="filter-clear filter-clear-training_name" title="{mlang_message FILTER_CLEAR}">
 				<span class="glyphicon glyphicon-remove"></span>
 			</a>
 			{END clearLink_training_name}
@@ -1723,7 +1712,7 @@ Sort by&nbsp;{$sortByDropdown}
 	<div class="dropdown filter-field filter-attendance_status-container" {BEGIN filter_selected_attendance_status} data-selected {END filter_selected_attendance_status}>
 		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
 						{BEGIN clearLink_attendance_status}
-			<a href="#" class="filter-clear filter-clear-attendance_status" title="Clear">
+			<a href="#" class="filter-clear filter-clear-attendance_status" title="{mlang_message FILTER_CLEAR}">
 				<span class="glyphicon glyphicon-remove"></span>
 			</a>
 			{END clearLink_attendance_status}
@@ -1783,7 +1772,7 @@ Sort by&nbsp;{$sortByDropdown}
 	<div class="dropdown filter-field filter-program-container" {BEGIN filter_selected_program} data-selected {END filter_selected_program}>
 		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
 						{BEGIN clearLink_program}
-			<a href="#" class="filter-clear filter-clear-program" title="Clear">
+			<a href="#" class="filter-clear filter-clear-program" title="{mlang_message FILTER_CLEAR}">
 				<span class="glyphicon glyphicon-remove"></span>
 			</a>
 			{END clearLink_program}
@@ -1843,7 +1832,7 @@ Sort by&nbsp;{$sortByDropdown}
 	<div class="dropdown filter-field filter-partners-container" {BEGIN filter_selected_partners} data-selected {END filter_selected_partners}>
 		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
 						{BEGIN clearLink_partners}
-			<a href="#" class="filter-clear filter-clear-partners" title="Clear">
+			<a href="#" class="filter-clear filter-clear-partners" title="{mlang_message FILTER_CLEAR}">
 				<span class="glyphicon glyphicon-remove"></span>
 			</a>
 			{END clearLink_partners}
@@ -1903,7 +1892,7 @@ Sort by&nbsp;{$sortByDropdown}
 	<div class="dropdown filter-field filter-training_type-container" {BEGIN filter_selected_training_type} data-selected {END filter_selected_training_type}>
 		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
 						{BEGIN clearLink_training_type}
-			<a href="#" class="filter-clear filter-clear-training_type" title="Clear">
+			<a href="#" class="filter-clear filter-clear-training_type" title="{mlang_message FILTER_CLEAR}">
 				<span class="glyphicon glyphicon-remove"></span>
 			</a>
 			{END clearLink_training_type}
@@ -1963,7 +1952,7 @@ Sort by&nbsp;{$sortByDropdown}
 	<div class="dropdown filter-field filter-training_approach-container" {BEGIN filter_selected_training_approach} data-selected {END filter_selected_training_approach}>
 		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
 						{BEGIN clearLink_training_approach}
-			<a href="#" class="filter-clear filter-clear-training_approach" title="Clear">
+			<a href="#" class="filter-clear filter-clear-training_approach" title="{mlang_message FILTER_CLEAR}">
 				<span class="glyphicon glyphicon-remove"></span>
 			</a>
 			{END clearLink_training_approach}
@@ -2023,7 +2012,7 @@ Sort by&nbsp;{$sortByDropdown}
 	<div class="dropdown filter-field filter-training_language-container" {BEGIN filter_selected_training_language} data-selected {END filter_selected_training_language}>
 		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
 						{BEGIN clearLink_training_language}
-			<a href="#" class="filter-clear filter-clear-training_language" title="Clear">
+			<a href="#" class="filter-clear filter-clear-training_language" title="{mlang_message FILTER_CLEAR}">
 				<span class="glyphicon glyphicon-remove"></span>
 			</a>
 			{END clearLink_training_language}
@@ -2083,7 +2072,7 @@ Sort by&nbsp;{$sortByDropdown}
 	<div class="dropdown filter-field filter-training_lead-container" {BEGIN filter_selected_training_lead} data-selected {END filter_selected_training_lead}>
 		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
 						{BEGIN clearLink_training_lead}
-			<a href="#" class="filter-clear filter-clear-training_lead" title="Clear">
+			<a href="#" class="filter-clear filter-clear-training_lead" title="{mlang_message FILTER_CLEAR}">
 				<span class="glyphicon glyphicon-remove"></span>
 			</a>
 			{END clearLink_training_lead}
@@ -2143,7 +2132,7 @@ Sort by&nbsp;{$sortByDropdown}
 	<div class="dropdown filter-field filter-quarter-container" {BEGIN filter_selected_quarter} data-selected {END filter_selected_quarter}>
 		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
 						{BEGIN clearLink_quarter}
-			<a href="#" class="filter-clear filter-clear-quarter" title="Clear">
+			<a href="#" class="filter-clear filter-clear-quarter" title="{mlang_message FILTER_CLEAR}">
 				<span class="glyphicon glyphicon-remove"></span>
 			</a>
 			{END clearLink_quarter}
@@ -2203,7 +2192,7 @@ Sort by&nbsp;{$sortByDropdown}
 	<div class="dropdown filter-field filter-end_date-container" {BEGIN filter_selected_end_date} data-selected {END filter_selected_end_date}>
 		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
 						{BEGIN clearLink_end_date}
-			<a href="#" class="filter-clear filter-clear-end_date" title="Clear">
+			<a href="#" class="filter-clear filter-clear-end_date" title="{mlang_message FILTER_CLEAR}">
 				<span class="glyphicon glyphicon-remove"></span>
 			</a>
 			{END clearLink_end_date}
@@ -2263,7 +2252,7 @@ Sort by&nbsp;{$sortByDropdown}
 	<div class="dropdown filter-field filter-start_date-container" {BEGIN filter_selected_start_date} data-selected {END filter_selected_start_date}>
 		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
 						{BEGIN clearLink_start_date}
-			<a href="#" class="filter-clear filter-clear-start_date" title="Clear">
+			<a href="#" class="filter-clear filter-clear-start_date" title="{mlang_message FILTER_CLEAR}">
 				<span class="glyphicon glyphicon-remove"></span>
 			</a>
 			{END clearLink_start_date}

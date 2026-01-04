@@ -99,13 +99,13 @@ class DataResult
 	 */
 	function substituteFields( &$data ) {
 		if ( !$this->fieldSubs )
-			return;
+			return $data;
 		if( !$data ) {
 			return $data;
 		}
 
 		$ret = array();
-		foreach ( $this->fieldSubs as $srcField => $outField ) {
+		foreach ( $this->fieldSubs as $outField => $srcField ) {
 			if ( array_key_exists( $srcField, $data ) ) {
 				$ret[ $outField ] = $data[ $srcField ];
 			}

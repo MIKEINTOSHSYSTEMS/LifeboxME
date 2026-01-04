@@ -56,7 +56,7 @@ class ViewDatabaseImageField extends ViewImageDownloadField
 			"image" => GetTableLink("file", "", prepareUrlQuery( $params ).$keylink ),
 			"filename" => $fileName
 		);
-		$thumbField = $pSet->getStrThumbnail( $this->field );
+		$thumbField = $pSet->getThumbnailField( $this->field );
 		if( $thumbField && $this->showThumbnails ) {
 			$params["thumbnail"] = 1;
 			$params["hash"] = fileAttrHash( $keylink, strlen_bin( $data[ $thumbField ] ) );
@@ -91,36 +91,8 @@ class ViewDatabaseImageField extends ViewImageDownloadField
 	 */
 	public function getExportValue(&$data, $keylink = "", $html = false )
 	{
-		return "LONG BINARY DATA - CANNOT BE DISPLAYED";
+		return mlang_message('LONG_BINARY');
 	}
 
-	/**
-	 * Get the width and height setting for small thumbnails
-	 * wrapping in a style attribute
-	 * @param String imageSrc
-	 * @param Boolean hasThumbnail
-	 * @return String
-	 */
-	protected function getSmallThumbnailStyle( $imageSrc = false, $hasThumbnail = true )
-	{
-		$styles = array();
-
-		if( $imageSrc )
-		{
-			//	this is required to avoid the corrupting of the tag by the html2xhtml function in html2ps library
-			$imageSrc = str_replace( "=", "&#61;", $imageSrc );
-			$styles[] = ' background-image: url('.$imageSrc.');';
-			if( !$hasThumbnail )
-				$styles[] = ' background-size: '. $this->thumbWidth.'px '.$this->thumbHeight.'px ;';
-		}
-
-		if( $this->thumbWidth )
-			$styles[] = ' width: '.$this->thumbWidth.'px;';
-
-		if( $this->thumbHeight )
-			$styles[] = ' height: '.$this->thumbHeight.'px';
-
-		return ' style="'. implode( '' , $styles ) .'"';
-	}
 }
 ?>

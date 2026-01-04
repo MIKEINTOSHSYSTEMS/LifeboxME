@@ -1,7 +1,7 @@
 <!doctype html>
 <html  {$html_attrs}>
 	<head>
-				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+						<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{$pagetitle}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -10,13 +10,9 @@
     <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
     <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
     <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
-    		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
-	{BEGIN rtlCSS}
-	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
-	{END rtlCSS}
-	{BEGIN styleCSSFiles}
-	<link REL="stylesheet" href="{$stylepath}" type="text/css">
-	{END styleCSSFiles}
+    		{BEGIN styleCSSFiles}
+<link REL="stylesheet" href="{$stylepath}" type="text/css">
+{END styleCSSFiles}
 			
 	</head>
 
@@ -92,8 +88,8 @@
 			
 									data-cellId="grid_c1" data-pageid="{$pageid}"		>
 			<div edit-form-cell class="clearfix">
-								<label data-itemtype="oldpass_label" data-itemid="oldpass_label" {$item_oldpass_label} data-pageid="{$pageid}" data-small class="r-edit-label control-label" for="{$labelfor_oldpass}">
-	{BEGIN oldpass_label}Old password:{END oldpass_label}
+								<label data-itemtype="oldpass_label" data-itemid="oldpass_label" {$item_oldpass_label} data-pageid="{$pageid}" class="r-edit-label control-label" for="{$labelfor_oldpass}">
+	{BEGIN oldpass_label}{mlang_message OLD_PASSWORD}:{END oldpass_label}
 </label>					</div>
 		</td>
 	 
@@ -120,8 +116,8 @@
 			
 									data-cellId="grid_c3" data-pageid="{$pageid}"		>
 			<div edit-form-cell class="clearfix">
-								<label data-itemtype="newpass_label" data-itemid="newpass_label" {$item_newpass_label} data-pageid="{$pageid}" data-small class="r-edit-label control-label" for="{$labelfor_newpass}">
-	{BEGIN newpass_label}New password:{END newpass_label}
+								<label data-itemtype="newpass_label" data-itemid="newpass_label" {$item_newpass_label} data-pageid="{$pageid}" class="r-edit-label control-label" for="{$labelfor_newpass}">
+	{BEGIN newpass_label}{mlang_message NEW_PASSWORD}:{END newpass_label}
 </label>					</div>
 		</td>
 	 
@@ -148,8 +144,8 @@
 			
 									data-cellId="grid_c5" data-pageid="{$pageid}"		>
 			<div edit-form-cell class="clearfix">
-								<label data-itemtype="confirm_label" data-itemid="confirm_label" {$item_confirm_label} data-pageid="{$pageid}" data-small class="r-edit-label control-label" for="{$labelfor_confirm}">
-	{BEGIN confirm_label}Confirm password:{END confirm_label}
+								<label data-itemtype="confirm_label" data-itemid="confirm_label" {$item_confirm_label} data-pageid="{$pageid}" class="r-edit-label control-label" for="{$labelfor_confirm}">
+	{BEGIN confirm_label}{mlang_message CONFIRM_PASSWORD}:{END confirm_label}
 </label>					</div>
 		</td>
 	 
@@ -183,13 +179,13 @@
 		<span data-itemtype="changepwd_button" data-itemid="changepwd_button" {$item_changepwd_button} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-primary   
 	" {$submit_attrs} >
-							Submit			</a>
+							{mlang_message SUBMIT}			</a>
 </span>
 	 
 		<span data-itemtype="changepwd_back" data-itemid="changepwd_back" {$item_changepwd_back} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-link   
 	" {$backlink_attrs} >
-							Back			</a>
+							{mlang_message BACK}			</a>
 </span>
 		</div>					</div>
 			</div>		

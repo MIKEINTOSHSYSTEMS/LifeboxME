@@ -65,11 +65,11 @@ class DropboxFileSystem extends OAuthFileSystem {
         $url = $this->getEndpoint( "content" ) . "upload";
         $request = $this->getAuthorizedRequest( $url );
         $request->headers[ "content-type" ] = "application/octet-stream";
-        $request->headers[ "dropbox-api-arg" ] = my_json_encode( $strategy );
+        $request->headers[ "dropbox-api-arg" ] = runner_json_encode( $strategy );
         $request->body = $fileData;
 
         $result = $request->run();
-        return my_json_decode( $result[ "content" ] );
+        return runner_json_decode( $result[ "content" ] );
     }
 
     /**
@@ -79,14 +79,14 @@ class DropboxFileSystem extends OAuthFileSystem {
         $url = $this->getEndpoint( "content" ) . "upload_session/start";
         $request = $this->getAuthorizedRequest( $url );
         $request->headers[ "content-type" ] = "application/octet-stream";
-        $request->headers[ "dropbox-api-arg" ] = my_json_encode( array( "close" => false ) );
+        $request->headers[ "dropbox-api-arg" ] = runner_json_encode( array( "close" => false ) );
 
         $result = $request->run();
 		if( $result["error"] ) {
 			$this->setLastError( $result["errorMessage"] );
 			return false;
 		}
-        $uploadData = my_json_decode( $result["content"] );
+        $uploadData = runner_json_decode( $result["content"] );
         if( !$uploadData[ "session_id" ] ) {
 			$this->setLastError( $result["content"] );
 			return false;
@@ -113,7 +113,7 @@ class DropboxFileSystem extends OAuthFileSystem {
             
             $chunkLength = $chunkEnd - $chunkStart + 1;
 
-			$request->headers[ "dropbox-api-arg" ] = my_json_encode( 
+			$request->headers[ "dropbox-api-arg" ] = runner_json_encode( 
                 array( 
                     "cursor" => array(
                         "session_id" => $sessionId,
@@ -126,7 +126,7 @@ class DropboxFileSystem extends OAuthFileSystem {
 			$request->body = substr( $data, $chunkStart, $chunkLength );
 
 			$result = $request->run();
-			$data = my_json_decode( $result["content"] );
+			$data = runner_json_decode( $result["content"] );
 			// returns empty response on success
 			if( $data ) {
 				return false;
@@ -161,10 +161,10 @@ class DropboxFileSystem extends OAuthFileSystem {
         $params[ "cursor" ][ "offset" ] = strlen_bin( $fileData );
         $params[ "commit" ] = $strategy;
 
-        $request->headers[ "dropbox-api-arg" ] = my_json_encode( $params );
+        $request->headers[ "dropbox-api-arg" ] = runner_json_encode( $params );
 
         $result = $request->run();
-        return my_json_decode( $result[ "content" ] );
+        return runner_json_decode( $result[ "content" ] );
     }
 
 
@@ -176,14 +176,14 @@ class DropboxFileSystem extends OAuthFileSystem {
         $request = $this->getAuthorizedRequest( $url );
         $request->headers[ "content-type" ] = "application/json";
 
-        $request->body = my_json_encode( array( "path" => $path ) );
+        $request->body = runner_json_encode( array( "path" => $path ) );
         $result = $request->run();
 		if( $result["error"] ) {
 			$this->setLastError( $result["errorMessage"] );
 			return false;
 		}
 
-        return my_json_decode( $result[ "content" ] );
+        return runner_json_decode( $result[ "content" ] );
 	}
 
     /**
@@ -215,13 +215,13 @@ class DropboxFileSystem extends OAuthFileSystem {
             "duration" => DROPBOX_EXPIRATION_TIME_SECONDS
         );
 
-        $request->body = my_json_encode( $params );
+        $request->body = runner_json_encode( $params );
         $result = $request->run();
 		if( $result["error"] ) {
 			$this->setLastError( $result["errorMessage"] );
 			return false;
 		}
-        $data = my_json_decode( $result[ "content" ] );
+        $data = runner_json_decode( $result[ "content" ] );
 		if( !$data[ "link" ] ) {
 			$this->setLastError( $result[ "content" ] );
 			return false;
@@ -246,14 +246,14 @@ class DropboxFileSystem extends OAuthFileSystem {
         $request->headers[ "content-type" ] = "application/json";
         $params = array( "path" => $path );
 
-        $request->body = my_json_encode( $params );
+        $request->body = runner_json_encode( $params );
 
         $result = $request->run();
 		if( $result["error"] ) {
 			$this->setLastError( $result["errorMessage"] );
 			return false;
 		}
-        $data =  my_json_decode( $result[ "content" ] );
+        $data =  runner_json_decode( $result[ "content" ] );
 		if( !$data["link"] ) {
 			$this->setLastError( $result[ "content" ] );
 			return false;
@@ -286,14 +286,14 @@ class DropboxFileSystem extends OAuthFileSystem {
             "include_has_explicit_shared_members" => false
         );
 
-        $request->body = my_json_encode( $params );
+        $request->body = runner_json_encode( $params );
 
         $result = $request->run();
 		if( $result["error"] ) {
 			$this->setLastError( $result["errorMessage"] );
 			return null;
 		}
-		$data = my_json_decode( $result[ "content" ] );
+		$data = runner_json_decode( $result[ "content" ] );
 		
 		if( !$data["name"] ) {
 			//	dropbox returned error

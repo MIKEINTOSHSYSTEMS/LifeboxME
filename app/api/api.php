@@ -13,7 +13,7 @@ class API {
 		}
 		http_response_code( $responseCode );
 		$data["success"] = $success;
-		echo my_json_encode( $data );
+		echo runner_json_encode( $data );
 		exit();
 	}
 
@@ -24,7 +24,7 @@ class API {
 			return null;
 		}
 		foreach( array_keys( $data ) as $f ) {
-			if( IsBinaryType( $pSet->getFieldType( $f ) ) && GetGlobalData("restReturnEncodedBinary") ) {
+			if( IsBinaryType( $pSet->getFieldType( $f ) ) && ProjectSettings::getProjectValue( 'restAPIReturnEncodedBinary ') ) {
 				$data[ $f ] = base64_encode( $data[ $f ] );
 			}
 		}
@@ -44,13 +44,15 @@ class API {
 		if( !Security::hasLogin() ) {
 			return true;
 		}
-		$authType = GetGlobalData("restAuth");
+		$authType = ProjectSettings::getProjectValue( 'restAPIAuthType' );
 		if( $authType == REST_BASIC ) {
 			//	Authorization: Basic <base64_encode(username:password)>
 			$username = "";
 			$password = "";
-						$username = $_SERVER["PHP_AUTH_USER"];
-			$password = $_SERVER["PHP_AUTH_PW"];
+			if( ProjectSettings::ext() == 'php' ) {
+				$username = $_SERVER["PHP_AUTH_USER"];
+				$password = $_SERVER["PHP_AUTH_PW"];
+			}
 			if( !$username ) {
 				$loginHeader = getHttpHeader('Authorization') . "";
 				if( substr( $loginHeader, 0, 6 ) !== 'Basic ' ) {
@@ -79,7 +81,7 @@ class API {
 				return false;
 
 			if( Security::hardcodedLogin() ) {
-				if( GetGlobalData("APIkey", "") == $APIkey ) {
+				if( ProjectSettings::getProjectValue( 'restAPIKey' ) == $APIkey ) {
 					Security::createHardcodedSession();
 					return true;
 				}
@@ -89,7 +91,7 @@ class API {
 			$dataSource = getLoginDataSource();
 
 			$dc = new DsCommand();
-			$dc->filter = DataCondition::FieldEquals( GetGlobalData("APIkeyField"), $APIkey );
+			$dc->filter = DataCondition::FieldEquals( ProjectSettings::getProjectValue( 'restAPIKeyField' ) , $APIkey );
 			$rs = $dataSource->getSingle( $dc );
 			if( !$rs )
 				return false;
@@ -115,8 +117,9 @@ class API {
 	public static function valuesFromRequest( $pSet ) {
 		$values = array();
 		foreach( $pSet->getFieldsList() as $f ) {
-			if( postvalue( $f ) || GetUploadedFileName( $f ) ) {
-				$values[ $f ] = API::processRequestValue( $f, postvalue( $f ), $pSet );
+			$value = postvalue( $f );
+			if( $value || $value === '0' || GetUploadedFileName( $f ) ) {
+				$values[ $f ] = API::processRequestValue( $f, $value, $pSet );
 			}
 		}
 		
@@ -125,7 +128,7 @@ class API {
 
 	protected static function processRequestValue( $fieldName, $value, $pSet ) {
 		if( IsBinaryType( $pSet->getFieldType( $fieldName ) ) ) {
-			if( $value && GetGlobalData("restAcceptEncodedBinary") ) {
+			if( $value && ProjectSettings::getProjectValue( 'restAPIAcceptEncodedBinary' ) ) {
 				$decodedValue = base64_decode_binary( $value );
 
 				// invalid base64 value passed

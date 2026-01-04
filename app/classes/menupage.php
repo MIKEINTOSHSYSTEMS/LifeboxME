@@ -17,7 +17,6 @@ class MenuPage extends RunnerPage
 		if( $globalEvents->exists("BeforeProcessMenu") )
 			$globalEvents->BeforeProcessMenu( $this );
 
-
 		// get redirect location for menu page
 		$redirect = $this->getRedirectForMenuPage();
 		if( $redirect )
@@ -30,8 +29,7 @@ class MenuPage extends RunnerPage
 		$this->commonAssign();
 		$this->doCommonAssignments();
 			
-		if( $this->isPD() )	
-			$this->hideWelcomeItemsIfEmpty( $this->pSet->welcomeItems() );
+		$this->hideWelcomeItemsIfEmpty( $this->pSet->welcomeItems() );
 		
 		
 		$this->addButtonHandlers();
@@ -141,7 +139,7 @@ class MenuPage extends RunnerPage
 		if( !$redirect ) {
 			if( Security::isAdmin() )
 				$redirect = GetTableLink("admin_rights", "list");
-			else if($this->isAddWebRep)
+			else if( ProjectSettings::getProjectValue( 'enableWebreports' ) )
 				$redirect = GetTableLink("webreport");
 		}
 

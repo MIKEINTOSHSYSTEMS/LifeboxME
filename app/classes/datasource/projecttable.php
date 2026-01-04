@@ -28,7 +28,7 @@ class DataSourceProjectTable extends DataSourceTable {
 	}
 
 	protected function getSQLComponents() {
-		return $this->query->getSqlComponents();
+		return $this->query->getSqlComponents( $this->connection, $this->cipherer );
 	}
 
 	/**

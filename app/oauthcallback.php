@@ -27,7 +27,7 @@ if( $rconn->validateCode( $_GET['code'] ) ) {
 	}
 }
 echo "invalid token";
-if ( $globalSettings["showDetailedError"] ) {
+if ( ProjectSettings::getProjectValue( 'detailedError' ) ) {
 	echo "<pre>";
 	echo $rconn->lastError();
 	echo "</pre>";

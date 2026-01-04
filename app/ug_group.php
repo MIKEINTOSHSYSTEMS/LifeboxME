@@ -17,109 +17,6 @@ if( !Security::isAdmin() )
 {
 	return;
 }
-$nonAdminTablesArr = array();
-$nonAdminTablesArr[] = "public.antibiotics";
-$nonAdminTablesArr[] = "public.case_antibiotics";
-$nonAdminTablesArr[] = "public.clean_cut_implementations";
-$nonAdminTablesArr[] = "public.countries";
-$nonAdminTablesArr[] = "public.device_distributions";
-$nonAdminTablesArr[] = "public.diagnoses";
-$nonAdminTablesArr[] = "public.facilities";
-$nonAdminTablesArr[] = "public.follow_ups";
-$nonAdminTablesArr[] = "public.languages";
-$nonAdminTablesArr[] = "public.lifebox_staff";
-$nonAdminTablesArr[] = "public.partners";
-$nonAdminTablesArr[] = "public.procedures";
-$nonAdminTablesArr[] = "public.regions";
-$nonAdminTablesArr[] = "public.surgical_cases";
-$nonAdminTablesArr[] = "public.trainers";
-$nonAdminTablesArr[] = "public.training_courses";
-$nonAdminTablesArr[] = "public.training_languages";
-$nonAdminTablesArr[] = "public.training_leads";
-$nonAdminTablesArr[] = "public.training_partners";
-$nonAdminTablesArr[] = "public.training_sessions";
-$nonAdminTablesArr[] = "public.training_trainers";
-$nonAdminTablesArr[] = "public.ward_antibiotics";
-$nonAdminTablesArr[] = "public.ward_rounds";
-$nonAdminTablesArr[] = "public.clean_cut_implementation_summary_view";
-$nonAdminTablesArr[] = "public.device_distribution_summary_view";
-$nonAdminTablesArr[] = "public.surgical_case_summary_view";
-$nonAdminTablesArr[] = "public.training_summary_view";
-$nonAdminTablesArr[] = "public.programs";
-$nonAdminTablesArr[] = "public.training_approaches";
-$nonAdminTablesArr[] = "public.training_types";
-$nonAdminTablesArr[] = "public.quarters";
-$nonAdminTablesArr[] = "public.participant_role";
-$nonAdminTablesArr[] = "public.sex";
-$nonAdminTablesArr[] = "public.training_participants";
-$nonAdminTablesArr[] = "public.venues";
-$nonAdminTablesArr[] = "public.training_attendance";
-$nonAdminTablesArr[] = "public.participant_attendance_detail";
-$nonAdminTablesArr[] = "public.participant_attendance_summary";
-$nonAdminTablesArr[] = "public.training_participation";
-$nonAdminTablesArr[] = "public.daily_attendance_view";
-$nonAdminTablesArr[] = "public.users";
-$nonAdminTablesArr[] = "public.lifeboxme__audit";
-$nonAdminTablesArr[] = "public.lifeboxme__locking";
-$nonAdminTablesArr[] = "public.months";
-$nonAdminTablesArr[] = "public.devices";
-$nonAdminTablesArr[] = "public.payment_methods";
-$nonAdminTablesArr[] = "public.transaction_types";
-$nonAdminTablesArr[] = "public.donors";
-$nonAdminTablesArr[] = "public.device_distribution_log";
-$nonAdminTablesArr[] = "public.device_inventory_changes";
-$nonAdminTablesArr[] = "aio_training_tracking";
-$nonAdminTablesArr[] = "Dashboard";
-$nonAdminTablesArr[] = "Lifebox_DHIS2_OrgUnits";
-$nonAdminTablesArr[] = "public.lifeboxme_dhis2_orgunits";
-$nonAdminTablesArr[] = "Lifebox_DHIS2_Settings";
-$nonAdminTablesArr[] = "Lifebox_DHIS2_dataItems";
-$nonAdminTablesArr[] = "public.lifeboxme_dhis2_dataitems";
-$nonAdminTablesArr[] = "public.lifeboxme_dhis2_analytics_settings";
-$nonAdminTablesArr[] = "public.lifeboxme_dhis2_analytics_data";
-$nonAdminTablesArr[] = "aio_training_tracking Chart";
-$nonAdminTablesArr[] = "aio_training_tracking Chart by sex";
-$nonAdminTablesArr[] = "public.smtp";
-$nonAdminTablesArr[] = "public.lbapt_annual_plan_tracker";
-$nonAdminTablesArr[] = "public.lbapt_beginnings_fund";
-$nonAdminTablesArr[] = "public.lbapt_communications";
-$nonAdminTablesArr[] = "public.lbapt_cri";
-$nonAdminTablesArr[] = "public.lbapt_dashboard_summary";
-$nonAdminTablesArr[] = "public.lbapt_development";
-$nonAdminTablesArr[] = "public.lbapt_elma";
-$nonAdminTablesArr[] = "public.lbapt_governance";
-$nonAdminTablesArr[] = "public.lbapt_kpis_on_track";
-$nonAdminTablesArr[] = "public.lbapt_operations";
-$nonAdminTablesArr[] = "public.lbapt_programs";
-$nonAdminTablesArr[] = "public.lbapt_sample_workflow";
-$nonAdminTablesArr[] = "public.lbapt_status";
-$nonAdminTablesArr[] = "public.lbapt_strategic_areas";
-$nonAdminTablesArr[] = "public.lbapt_all_activities_view";
-$nonAdminTablesArr[] = "public.lbapt_dashboard_summary_view";
-$nonAdminTablesArr[] = "public.lbapt_kpis_tracking_view";
-$nonAdminTablesArr[] = "public.lbapt_unified_activities";
-$nonAdminTablesArr[] = "public.years";
-$nonAdminTablesArr[] = "public.lbapt_finance";
-$nonAdminTablesArr[] = "public.lbapt_hr";
-$nonAdminTablesArr[] = "public.lbapt_cathedral";
-$nonAdminTablesArr[] = "public.lbapt_izumi";
-$nonAdminTablesArr[] = "public.lbapt_st";
-$nonAdminTablesArr[] = "public.lbapt_whi";
-$nonAdminTablesArr[] = "public.lbpmi_calculation_log";
-$nonAdminTablesArr[] = "public.lbpmi_data_elements";
-$nonAdminTablesArr[] = "public.lbpmi_datasets";
-$nonAdminTablesArr[] = "public.lbpmi_indicator_actuals";
-$nonAdminTablesArr[] = "public.lbpmi_indicator_targets";
-$nonAdminTablesArr[] = "public.lbpmi_indicators";
-$nonAdminTablesArr[] = "public.lbpmi_summary";
-$nonAdminTablesArr[] = "public.period_types";
-$nonAdminTablesArr[] = "public.unit_of_measurement";
-$nonAdminTablesArr[] = "public.lbpmi_calculation_jobs";
-$nonAdminTablesArr[] = "public.lbpmi_data_values";
-$nonAdminTablesArr[] = "public.lbpmi_aggregation_type";
-$nonAdminTablesArr[] = "public.lbpmi_domain_type";
-$nonAdminTablesArr[] = "public.lbpmi_indicator_types";
-$nonAdminTablesArr[] = "public.lbpmi_indicator_groups";
 
 $ug_connection = $cman->getForUserGroups();
 
@@ -131,7 +28,7 @@ $cbxNames = array('add' => array('mask' => 'A', 'rightName' => 'add')
 	, 'imp' => array('mask' => 'I', 'rightName' => 'import')
 	, 'adm' => array('mask' => 'M'));
 
-$wGroupTableName = $ug_connection->addTableWrappers( "public.lifeboxme_uggroups" );
+$wGroupTableName = $ug_connection->addTableWrappers( ProjectSettings::getSecurityValue( 'dpTablePrefix' ) . 'uggroups' );
 	
 switch(postvalue("a"))
 {
@@ -150,7 +47,7 @@ switch(postvalue("a"))
 		$sql = "delete from ". $wGroupTableName ." where ". $ug_connection->addFieldWrappers("GroupID") ."=".(postvalue_number("id"));
 		$ug_connection->exec( $sql );
 		
-		$sql = "delete from ". $ug_connection->addTableWrappers( "public.lifeboxme_ugrights" ) 
+		$sql = "delete from ". $wGroupTableName 
 			." where ". $ug_connection->addFieldWrappers( "GroupID" ) ."=".(postvalue_number("id"));
 		$ug_connection->exec( $sql );
 
@@ -190,10 +87,10 @@ switch(postvalue("a"))
 				$allRights[] = $rightsRow;
 			}
 			
-			$wRightsTableName = $ug_connection->addTableWrappers( "public.lifeboxme_ugrights" );
+			$wRightsTableName = $ug_connection->addTableWrappers( ProjectSettings::getSecurityValue( 'dpTablePrefix' ) . 'ugrights' );
 			
 			$delGroupId = 0;
-			$state = my_json_decode( postvalue('state') );
+			$state = runner_json_decode( postvalue('state') );
 			// delete all extra permissions from db
 			foreach($allRights as $i => $rightValue)
 			{
@@ -282,7 +179,7 @@ function GetRealValues()
 {
 	$result = array();
 	if(postvalue('realValues'))
-		$realValues = my_json_decode(postvalue('realValues'));
+		$realValues = runner_json_decode(postvalue('realValues'));
 		foreach ($realValues as $key =>$value)
 			$result[$key] = $value;
 	return $result;

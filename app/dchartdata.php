@@ -1,30 +1,29 @@
 <?php
-    @ini_set("display_errors","1");
-    @ini_set("display_startup_errors","1");
-    require_once("include/dbcommon.php");
-    header("Expires: Thu, 01 Jan 1970 00:00:01 GMT"); 
-    require_once("classes/charts.php");
-	require_once(getabspath("include/xml.php"));
+	@ini_set("display_errors","1");
+	@ini_set("display_startup_errors","1");
+	require_once("include/dbcommon.php");
+	header("Expires: Thu, 01 Jan 1970 00:00:01 GMT"); 
+	require_once("classes/charts.php");
 	require_once(getabspath("classes/searchclause.php"));
-	include_once("include/reportfunctions.php");
+	
+	if( ProjectSettings::webReports() ) {
+		require_once(getabspath("include/xml.php"));
+		//include_once("include/reportfunctions.php");
+	}
 	
 
-if( Security::hasLogin() ) {
-	if(!isLogged())
-	{
-		Security::saveRedirectURL();
-		HeaderRedirect("login", "", "message=expired");
-		return;
+	if( Security::hasLogin() ) {
+		if( !isLogged() ) {
+			Security::saveRedirectURL();
+			HeaderRedirect("login", "", "message=expired");
+			return;
+		}
 	}
-}
-    $xml = new xml();
 
-	$chrt_strXML = "";
-	if( checkTableName(postvalue("chartname") ) )
-	{
-		include_once("include/".postvalue("chartname")."_variables.php");
-		$chrt_strXML = GetChartXML(postvalue("chartname"));
-		$chrt_array = $xml->xml_to_array( $chrt_strXML );
+	$chartSettings = null;
+	if( GetTableByShort(postvalue("chartname") ) ) {
+		$pSet = new ProjectSettings( GetTableByShort( postvalue("chartname") ) );
+		$chartSettings = $pSet->getChartSettings();
 		
 		if( !$_SESSION["webobject"] ) {
 			$_SESSION["webobject"] = array();
@@ -35,14 +34,20 @@ if( Security::hasLogin() ) {
 	}
 	
 	$webchart = false;
-	if( !$chrt_strXML )
-	{
+	if( !$chartSettings ) {
+		/*
+		$xml = new xml();
+		
 		$sessPrefix = "webchart".postvalue('cname');
 		$chrt_strXML = wrLoadSelectedEntity( postvalue('cname'), WR_CHART );
 		$webchart = true;
+		
 		$chrt_array = $xml->xml_to_array( $chrt_strXML );
 		if( is_wr_project() )
 	    	include_once("include/" . $chrt_array['settings']['short_table_name'] . "_variables.php");
+		
+		$chartSettings = convertToChartSettings( $chrt_array );
+		*/
 	}
 	
 	$param = array();
@@ -56,188 +61,105 @@ if( Security::hasLogin() ) {
 	if( $param["masterTable"] )
 		$param["masterKeysReq"] = RunnerPage::readMasterKeysFromRequest();
 	
-	if( $param["dashChart"] )
-	{
+	if( $param["dashChart"] ) {
 		$param["dashTName"] = postvalue('dashTName');
 		$param["dashElementName"] = postvalue('dashElName');
 		$params["dashPage"] = postvalue("dashPage");
 	}
 	
-	if( $webchart )
-	{
-		$param["cname"] = postvalue("cname");
-		switch( $chrt_array["chart_type"]["type"] )
-		{
-			case "3d_column":
-				$chrt_array["chart_type"]["type"] = "2d_column";
-				$chrt_array["appearance"]["is3d"] = "true";
-				$chrt_array["appearance"]["isstacked"] = "false";
-			break;
-			case "3d_bar":
-				$chrt_array["chart_type"]["type"] = "2d_bar";
-				$chrt_array["appearance"]["is3d"] = "true";
-				$chrt_array["appearance"]["isstacked"] = "false";
-			break;
-			case "3d_column_stacked":
-				$chrt_array["chart_type"]["type"] = "2d_column";
-				$chrt_array["appearance"]["is3d"] = "true";
-				$chrt_array["appearance"]["isstacked"] = "true";
-			break;
-			case "3d_bar_stacked":
-				$chrt_array["chart_type"]["type"] = "2d_bar";
-				$chrt_array["appearance"]["is3d"] = "true";
-				$chrt_array["appearance"]["isstacked"] = "true";
-			break;
-			case "2d_column_stacked":
-				$chrt_array["chart_type"]["type"] = "2d_column";
-				$chrt_array["appearance"]["isstacked"] = "true";
-				$chrt_array["appearance"]["is3d"] = "false";
-			break;
-			case "2d_bar_stacked":
-				$chrt_array["chart_type"]["type"] = "2d_bar";
-				$chrt_array["appearance"]["isstacked"] = "true";
-				$chrt_array["appearance"]["is3d"] = "false";
-			break;
-			case "line":
-				$chrt_array["chart_type"]["type"] = "line";
-				if( !isset( $chrt_array["appearance"]["linestyle"] ) )
-					$chrt_array["appearance"]["linestyle"] = 0;
-			break;
-			case "spline":
-				$chrt_array["chart_type"]["type"] = "line";
-				$chrt_array["appearance"]["linestyle"] = 1;
-			break;
-			case "step_line":
-				$chrt_array["chart_type"]["type"] = "line";
-				$chrt_array["appearance"]["linestyle"] = 2;
-			break;
-			case "area_stacked":
-				$chrt_array["chart_type"]["type"] = "area";
-				$chrt_array["appearance"]["isstacked"] = "true";
-			break;
-		}
-	}
-	else
-	{
-		$param["cname"] = postvalue("chartname");
-	}
-		
+	$param["cname"] = postvalue("chartname");
+	$param["tName"] =  GetTableByShort( postvalue("chartname") );
+	$param["tableType"] = "project";
 	
-	if( $chrt_array["chart_type"]["type"] == "candle" )
-        $chrt_array["chart_type"]["type"] = "candlestick";
+	if( $webchart ) {				
+		$param["cname"] = postvalue("cname");
+		$param["tableType"] = $chartSettings["webTableType"];
+		$param["tName"] =$chartSettings["webTableName"];
+	}
 
-	switch( $chrt_array["chart_type"]["type"] )
-	{
-		case "2d_column": 
-			$param["2d"] = true;
+
+	switch( $chartSettings["type"] ) {
+		case "2DColumn":
+			$param["2d"] = !$chartSettings["is3D"];
 			$param["bar"] = false;
-			$param["stacked"] = false;
-			
-			if( $chrt_array["appearance"]["is3d"] == "true" || $chrt_array["appearance"]["is3d"] == 1 )
-				$param["2d"] = false;
-				
-			if( $chrt_array["appearance"]["isstacked"] == "true" || $chrt_array["appearance"]["isstacked"] == 1 )
-				$param["stacked"] = true;
-				
-			$chartObj = new Chart_Bar($chrt_array, $param);
+			$param["stacked"] = $chartSettings["stacked"];
+
+			$chartObj = new Chart_Bar( $param, $chartSettings );
 		break;
-		case "2d_bar": 
-			$param["2d"] = true;
+		case "2DBar":
+			$param["2d"] = !$chartSettings["is3D"];
 			$param["bar"] = true;
-			$param["stacked"] = false;
-			
-			if( $chrt_array["appearance"]["is3d"] == "true" || $chrt_array["appearance"]["is3d"] == 1 )
-				$param["2d"] = false;
-				
-			if( $chrt_array["appearance"]["isstacked"] == "true" || $chrt_array["appearance"]["isstacked"] == 1 )
-				$param["stacked"] = true;
-				
-			$chartObj = new Chart_Bar($chrt_array, $param);
+			$param["stacked"] = $chartSettings["stacked"];
+
+			$chartObj = new Chart_Bar( $param, $chartSettings );
 		break;
-		case "line":
-			if( $chrt_array["appearance"]["linestyle"] == 0 )
-				$param["type_line"] = "line";
-			elseif( $chrt_array["appearance"]["linestyle"] == 2 )
-				$param["type_line"] = "step_line";
-			else
-				$param["type_line"] = "spline";
-				
-			$chartObj = new Chart_Line($chrt_array, $param);
+		case "Line":
+			$chartObj = new Chart_Line( $param, $chartSettings );
 		break;
-		case "area":
-			$param["stacked"] = false;
-			if( $chrt_array["appearance"]["isstacked"] == "true" || $chrt_array["appearance"]["isstacked"] == 1 )
-				$param["stacked"] = true;
-				
-			$chartObj = new Chart_Area($chrt_array, $param);
+		case "Area":
+			$param["stacked"] = $chartSettings["stacked"];
+
+			$chartObj = new Chart_Area( $param, $chartSettings );
 		break;
-		case "2d_pie":
-			$param["2d"] = true;
-			if( $chrt_array["appearance"]["is3d"] == "true" || $chrt_array["appearance"]["is3d"] == 1 )
-				$param["2d"] = false;
-				
+		case "2DPie":
+			$param["2d"] = !$chartSettings["is3D"];
 			$param["pie"] = true;
-			$chartObj = new Chart_Pie( $chrt_array, $param );
+			
+			$chartObj = new Chart_Pie( $param, $chartSettings );
 		break;
-		case "2d_doughnut":
+		case "2DDoughnut":
+			$param["2d"] = !$chartSettings["is3D"];
 			$param["pie"] = false;
-			$param["2d"] = true;
-			if( $chrt_array["appearance"]["is3d"] == "true" || $chrt_array["appearance"]["is3d"] == 1 )
-				$param["2d"] = false;
 				
-			$chartObj = new Chart_Pie($chrt_array, $param);
+			$chartObj = new Chart_Pie( $param, $chartSettings );
 		break;
-		case "combined":
-			$chartObj = new Chart_Combined($chrt_array, $param);
+		case "Combined":
+			$chartObj = new Chart_Combined( $param, $chartSettings );
 		break;
-		case "funnel":
-			$param["funnel_type"] = $chrt_array["appearance"]["accumulstyle"]; 
-			$param["funnel_inv"] = false;
-			if( $chrt_array["appearance"]["accumulinvert"] == "true" || $chrt_array["appearance"]["accumulinvert"] == 1 )
-				$param["funnel_inv"] = true;
-				
-			$chartObj = new Chart_Funnel($chrt_array, $param);
+		case "Funnel":
+			$param["funnel_type"] =  $chartSettings["accumulationAppearance"];
+			$param["funnel_inv"] = $chartSettings["accumInverted"];
+
+			$chartObj = new Chart_Funnel( $param, $chartSettings );
 		break;
-		case "bubble":
-			$param["2d"] = true;
-			if( $chrt_array["appearance"]["is3d"] == "true" || $chrt_array["appearance"]["is3d"] == 1 )
-				$param["2d"] = false;
-				
+		case "Bubble":
+			$param["2d"] = !$chartSettings["is3D"];
+			
 			$param["oppos"] = 1;
-			if( $chrt_array["appearance"]["bubbletransp"] == "true" || $chrt_array["appearance"]["bubbletransp"] == 1 )
+			if( $chartSettings["bubbleTransparent"] )
 				$param["oppos"] = 0.3;
 			
-			$chartObj = new Chart_Bubble($chrt_array, $param);
+			$chartObj = new Chart_Bubble( $param, $chartSettings );
 		break;
-		case "gauge":
-			if( $chrt_array["appearance"]["gaugestyle"] == 0 )
+		case "Gauge":
+			// 0 circle, 1 vertical, 2 horizontal
+			if( $chartSettings["gaugeAppearance"] == 0 )
 				$param["gaugeType"] = "circular-gauge";
 			else
 				$param["gaugeType"] = "linear-gauge";
 				
-			if( $chrt_array["appearance"]["gaugestyle"] == 1 )
+			if( $chartSettings["gaugeAppearance"] == 2 )
 				$param["layout"] = "horizontal";
 			else
-				$param["layout"] = "";	
+				$param["layout"] = "";
 				
-			$chartObj = new Chart_Gauge($chrt_array, $param);
+			$chartObj = new Chart_Gauge( $param, $chartSettings );
 		break;
-		case "ohlc":
+		case "OHLC":
 			$param["ohcl_type"] = "ohcl";
-			$chartObj = new Chart_Ohlc($chrt_array, $param);
+			$chartObj = new Chart_Ohlc( $param, $chartSettings );
 		break;
-		case "candlestick":
+		case "Candle":
 			$param["ohcl_type"] = "candlestick";
-			$chartObj = new Chart_Ohlc($chrt_array, $param);
+			$chartObj = new Chart_Ohlc( $param, $chartSettings );
 		break;
 	}
-	
-	if( postvalue("action") == "refresh" )
-	{
-		echo my_json_encode( $chartObj->get_data() );
+		
+	if ( postvalue("action") == "refresh" ) {
+		echo runner_json_encode( $chartObj->get_data() );
 		exit();
 	}
 	
-    header("Content-Type: application/json");
+	header("Content-Type: application/json");
 	$chartObj->write();
 ?>

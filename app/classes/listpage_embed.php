@@ -2,7 +2,6 @@
 
 class ListPage_Embed extends ListPage
 {
-	var $viewPDF = 0;
 	/**
 	 * Constructor, set initial params
 	 *

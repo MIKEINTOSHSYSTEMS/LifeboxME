@@ -149,7 +149,7 @@ class EditSelectedPage extends EditPage
 		if( !$this->readRecord() )
 			return;
 		
-		$this->setPageTitle( GetTableCaption(GoodFieldName( $this->tName ) ) );
+		$this->setPageTitle( Labels::getTableCaption( $this->tName ) );
 
 		$this->prepareReadonlyFields();
 
@@ -175,9 +175,6 @@ class EditSelectedPage extends EditPage
 	{
 		$this->pageData['detailsMasterKeys'] = $this->getDetailTablesMasterKeys( $this->getCurrentRecordInternal() );
 		
-		$this->jsSettings["tableSettings"][ $this->tName ]["selection"] = $this->getSelection();
-		$this->jsSettings["tableSettings"][ $this->tName ]["keyFields"] = $this->pSet->getTableKeys();
-		$this->jsSettings["tableSettings"][ $this->tName ]["captchaEditFieldName"] = $this->getCaptchaFieldName();
 	}
 
 	/**
@@ -220,19 +217,11 @@ class EditSelectedPage extends EditPage
 		$this->xt->assign("updsel_button", true);
 		$this->xt->assign("updselbutton_attrs", "id=\"saveButton".$this->id."\"" );
 		
-		if ( $this->isPD() )
-		{
-			foreach ( $this->pSet->updateSelectedButtons() as $itemId => $mLString )
-			{			
-				$label = str_replace( "%n%", $this->nSelected, GetMLString($mLString) );
-				$this->xt->assign($itemId."_label", $label );
-			}	
-		}
-		else
-		{
-			$label = str_replace( "%n%", $this->nSelected, "Update %n% records" );
-			$this->xt->assign("update_selected", $label );
-		}		
+		foreach ( $this->pSet->updateSelectedButtons() as $itemId => $mLString )
+		{			
+			$label = str_replace( "%n%", $this->nSelected, GetMLString($mLString) );
+			$this->xt->assign($itemId."_label", $label );
+		}	
 	}
 
 	/**
@@ -290,14 +279,15 @@ class EditSelectedPage extends EditPage
 
 		//	details tables keys
 		$returnJSON['detKeys'] = array();
-		foreach( $this->pSet->getDetailTablesArr() as $dt )
+		foreach( $this->pSet->getAvailableDetailsTables() as $dt )
 		{
 			$dkeys = array();
-			foreach( $dt["masterKeys"] as $idx => $mk )
+			$detailsKeys = $this->pSet->getDetailsKeys( $dt );
+			foreach( $detailsKeys["masterKeys"] as $idx => $mk )
 			{
 				$dkeys[ "masterkey".($idx + 1) ] = $data[ $mk ];
 			}
-			$returnJSON['detKeys'][ $dt['dDataSourceTable'] ] = $dkeys;
+			$returnJSON['detKeys'][ $dt ] = $dkeys;
 		}	
 		
 		//	prepare field values
@@ -540,9 +530,13 @@ class EditSelectedPage extends EditPage
 		$checkbox = "<input type=checkbox class=\"bs-updselbox\" id=updsel_"
 			.$gf.$this->id." data-field=\"".runner_htmlspecialchars( $field ) ."\">";
 		
-		$label = array();
-		$label["begin"] = $checkbox;		
-		$this->xt->assign($gf."_label", $label );
+		
+		$label = $this->xt->getVar( $gf."_label" );
+		if( !is_array( $label ) ) {
+			$label = array( 'begin' => '' );
+		}
+		$label["begin"] = $checkbox . $label["begin"];	
+		$this->xt->assign( $gf."_label", $label );
 		
 		if( $this->pSet->isRequired( $field ) || $required ) {
 			$this->xt->assign( "required_attr_".GoodFieldName( $field  ), 'data-required="true"' );
@@ -577,7 +571,16 @@ class EditSelectedPage extends EditPage
 	 */
 	protected function getNewRecordCopy( $newRecordData )
 	{
-		return $newRecordData;
+		if( ProjectSettings::ext() == 'php' ) {
+			return $newRecordData;
+		} else {
+			$newRecordCopy = array();
+			foreach( $newRecordData as $key => $data )
+			{
+				$newRecordCopy[ $key ] = $data;
+			}
+			return $newRecordCopy;
+		}
 	}
 	
 	/**
@@ -744,11 +747,11 @@ class EditSelectedPage extends EditPage
 	 */
 	protected function setSuccessfulEditMessage()
 	{
-		$message = str_replace( array("%succeed%", "%total%"), array( "<strong>".$this->nUpdated."</strong>", "<strong>".$this->nSelected."</strong>" ), "%succeed% out of %total% records updated successfully.");
+		$message = str_replace( array("%succeed%", "%total%"), array( "<strong>".$this->nUpdated."</strong>", "<strong>".$this->nSelected."</strong>" ), mlang_message('UPDATE_SELECTED_SUCCESS'));
 		$this->setMessage( $message );
 		
 		if( $this->nUpdated != $this->nSelected ) {
-			$message = str_replace( "%failed%", "<strong>".($this->nSelected - $this->nUpdated)."</strong>" , "%failed% records failed.");
+			$message = str_replace( "%failed%", "<strong>".($this->nSelected - $this->nUpdated)."</strong>" , mlang_message('UPDATE_SELECTED_FAIL'));
 			$this->setMessage( $message );
 		}
 	}
@@ -872,7 +875,7 @@ class EditSelectedPage extends EditPage
 	 */
 	public function setDatabaseError( $message )
 	{
-		$this->messages[] = "<strong>&lt;&lt;&lt; "."Record was NOT edited"." &gt;&gt;&gt;</strong><br>".$message;
+		$this->messages[] = "<strong>&lt;&lt;&lt; ".mlang_message('RECORD_NOT_UPDATED')." &gt;&gt;&gt;</strong><br>".$message;
 		$this->messageType = MESSAGE_ERROR;
 	}	
 	
@@ -919,5 +922,16 @@ class EditSelectedPage extends EditPage
 		
 		return $dc;
 	}	
+
+	protected function buildJsTableSettings( $table, $pSet ) {
+		$settings = parent::buildJsTableSettings( $table, $pSet );
+
+		$settings["selection"] = $this->getSelection();
+		$settings["keyFields"] = $this->pSet->getTableKeys();
+		$settings["captchaEditFieldName"] = $this->getCaptchaFieldName();
+
+		return $settings;
+	}
+
 }
 ?>

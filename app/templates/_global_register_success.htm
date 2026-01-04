@@ -1,7 +1,7 @@
 <!doctype html>
 <html  {$html_attrs}>
 	<head>
-				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+						<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{$pagetitle}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -10,13 +10,9 @@
     <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
     <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
     <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
-    		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
-	{BEGIN rtlCSS}
-	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
-	{END rtlCSS}
-	{BEGIN styleCSSFiles}
-	<link REL="stylesheet" href="{$stylepath}" type="text/css">
-	{END styleCSSFiles}
+    		{BEGIN styleCSSFiles}
+<link REL="stylesheet" href="{$stylepath}" type="text/css">
+{END styleCSSFiles}
 			
 	</head>
 
@@ -71,12 +67,12 @@
 ">
 		{BEGIN firstAboveGridCell}
 		 
-		<div class="alert {$activate_message_class}" data-itemtype="register_activate_message" data-itemid="register_activate_message" {$item_register_activate_message} data-pageid="{$pageid}" data-small > 
+		<div class="alert {$activate_message_class}" data-itemtype="register_activate_message" data-itemid="register_activate_message" {$item_register_activate_message} data-pageid="{$pageid}" > 
 	{$label_register_activate_message}
 </div>
 	 
-		<span data-itemtype="register_activated_message" data-itemid="register_activated_message" {$item_register_activated_message} data-pageid="{$pageid}" data-small >
-Thank you. Your account has been activated.</span>
+		<span data-itemtype="register_activated_message" data-itemid="register_activated_message" {$item_register_activated_message} data-pageid="{$pageid}" >
+{mlang_message REGISTER_ACTIVATED}</span>
 			{END firstAboveGridCell}	
 	</div>					</div>
 			 
@@ -98,7 +94,7 @@ Thank you. Your account has been activated.</span>
 ">
 		 
 		<span data-itemtype="snippet" data-itemid="snippet" {$item_snippet} data-pageid="{$pageid}" >
-{$event _global__snippet_apikey}
+{$event 4594}
 </span>		</div>					</div>
 			</div>		
 {END above-grid_block}
@@ -117,12 +113,12 @@ Thank you. Your account has been activated.</span>
 								<span data-itemtype="register_proceed" data-itemid="register_proceed" {$item_register_proceed} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-primary   
 	" {$loginlink_attrs} >
-							Continue			</a>
+							{mlang_message CONTINUE}			</a>
 </span>
 								<span data-itemtype="register_close" data-itemid="register_close" {$item_register_close} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-primary   
 	" href="#" {$closewindow_attrs} >
-							Close window			</a>
+							{mlang_message CLOSE_WINDOW}			</a>
 </span>
 					</div>
 		</td>

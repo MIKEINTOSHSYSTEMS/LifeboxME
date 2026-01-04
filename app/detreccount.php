@@ -20,7 +20,7 @@ if( !Security::userCan('S', $dTable ))
 
 require_once('include/xtempl.php');
 
-$mKeys = my_json_decode(postvalue("mKeys"));
+$mKeys = runner_json_decode(postvalue("mKeys"));
 $pageType = postvalue("pageType");
 
 $xt = new Xtempl();
@@ -32,12 +32,7 @@ $params["needSearchClauseObj"] = false;
 $pageObject = new RunnerPage($params);
 //$pageObject->init();
 
-for($dInd = 0; $dInd < count($pageObject->allDetailsTablesArr); $dInd ++) 
-{
-	if($pageObject->allDetailsTablesArr[$dInd]['dDataSourceTable'] == $dTable)
-		break;
-}
-$output = $pageObject->countDetailsRecsNoSubQ($dInd,$mKeys);
+$output = $pageObject->countDetailsRecsNoSubQ( $dTable, $mKeys );
 
 $respObj = array('success'=>true, 'recsCount'=>$output);
 echo printJSON($respObj);

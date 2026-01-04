@@ -31,18 +31,6 @@ if( !Security::userHasFieldPermissions( $table, $field, $pageType, $pageName, fa
 $pSet = new ProjectSettings( $table , $pageType, $pageName );
 $cipherer = new RunnerCipherer( $table, $pSet);
 $_connection = $cman->byTable( $table );
-/*
-
-$gQuery = $pSet->getSQLQuery();
-
-if(!$gQuery->HasGroupBy())
-{
-	// Do not select any fields except current (full text) field.
-	// If query has 'group by' clause then other fields are used in it and we may not simply cut 'em off.
-	// Just don't do anything in that case.
-	$gQuery->RemoveAllFieldsExcept($pSet->getFieldIndex($field));
-}
-*/
 $keysArr = $pSet->getTableKeys();
 $keys = array();
 foreach ($keysArr as $ind=>$k)

@@ -7,14 +7,17 @@ header("Expires: Thu, 01 Jan 1970 00:00:01 GMT");
 require_once("classes/searchclause.php");
 require_once("classes/sql.php");
 
-require_once("include/payment_methods_variables.php");
+$requestTable = 'public.payment_methods';
+$strTableName = 'public.payment_methods';
+$requestPage = "export";
 
 if( Security::hasLogin() ) {
-	if( !Security::processPageSecurity( $strtablename, 'P' ) )
+	if( !Security::processPageSecurity( $strTableName, 'P' ) )
 		return;
 }
 
 
+importExcelLibrary();
 require_once("include/export_functions.php");
 require_once("classes/exportpage.php");
 require_once("include/xtempl.php");

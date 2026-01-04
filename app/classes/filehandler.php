@@ -91,6 +91,45 @@ class RunnerFileHandler {
 
 		return $file;
 	}
+	
+	public function resetTo( $defaultValue ) {
+		$userFilesArray = runner_json_decode( $defaultValue );
+		$names = array();
+		
+		if( is_array( $userFilesArray ) ) {
+			foreach( $userFilesArray as $userFile ) {
+				if( !isset( $userFile["name"] ) ) {
+					continue;
+				}
+				
+				$fileData = $this->getFormData( $userFile["name"] );
+				if( $fileData ) {
+					$names[] = $userFile["name"];
+					$fileData["deleted"] = false;
+					$this->setFormData( $userFile["name"], $fileData );
+				}
+			}
+		}
+		
+		$formData = $_SESSION[ "mupload_".$this->formStamp ];
+		
+		if( !$formData ) {
+			return true;
+		}
+		
+		$filesToDelete = array();
+		foreach( $formData as $fName => $fileArray ) {
+			if( !in_array( $fName, $names ) ) {
+				$filesToDelete[] = $fName;
+			}
+		}
+		
+		foreach( $filesToDelete as $fileName ) {
+			$this->delete( $fileName );
+		}
+		
+		return true;
+	}
 
 	/**
 	 * @return Boolean
@@ -122,7 +161,7 @@ class RunnerFileHandler {
 	 * @param Array $uploadedFiles - array of standardized uploaded file descriptors
 	 * @return nothing Sends result to output
 	 */
-	public function acceptUpload( $uploadedFiles ) {
+	public function acceptUpload( $uploadedFiles, $wrapWithFiles = false ) {
         $result = array();
 		foreach ($uploadedFiles as $index => $uploadedFile) {
             $file = $this->acceptUploadedFile( $uploadedFile );
@@ -132,13 +171,17 @@ class RunnerFileHandler {
 				$fileData["deleted"] = false;
 				$fileData["fromDB"] = false;
 				$this->setFormData( $file['usrName'], $fileData );
-			} 				
+			}
 			$result[] = $this->returnFileDescriptor( $file );
-
-        }
-        header('Vary: Accept');
+		}
+		
+		if( $wrapWithFiles ) {
+			$result = array("files" => $result);
+		}
+		
+		 header('Vary: Accept');
 		header('Content-type: application/json');
-		echo my_json_encode( $result );
+		echo runner_json_encode( $result );
 	}
 
 	/**
@@ -185,7 +228,7 @@ class RunnerFileHandler {
 
 	protected function validateFile( $filename, $fileSize, &$errorMessage ) {
         if ( !$filename ) {
-            $errorMessage = "File name was not provided";
+            $errorMessage = mlang_message('ERROR_MISSING_FILE_NAME');
             return false;
         }
         
@@ -193,28 +236,28 @@ class RunnerFileHandler {
 		if( $acceptedTypes ) {
 			$ext = strtoupper( getFileExtension( $filename ) );
 			if( array_search( $ext, $acceptedTypes ) === false && array_search( ".".$ext, $acceptedTypes ) === false ) {
-				$errorMessage = "File type is not acceptable";
+				$errorMessage = mlang_message('ERROR_ACCEPT_FILE_TYPES');
 				return false;
 			}
 		}
 
 		$maxFileSize = $this->pSet->getMaxFileSize( $this->field );
 		if ( $maxFileSize && $fileSize > $maxFileSize * 1024 ) {
-            $errorMessage = mysprintf("File size exceeds limit of %s kbytes", array( $maxFileSize ) );
+            $errorMessage = mysprintf(mlang_message('ERROR_MAX_FILE_SIZE'), array( $maxFileSize ) );
             return false;
         }
 
 		$maxTotalFileSize = $this->pSet->getMaxTotalFilesSize( $this->field );
 		if ( $maxTotalFileSize ) {
 			if( $this->getUploadFilesSize() + $fileSize > $maxTotalFileSize * 1024 ) {
-				$errorMessage = mysprintf( "Total files size exceeds limit of %s kbytes", array( $maxTotalFileSize ) );
+				$errorMessage = mysprintf( mlang_message('ERROR_MAX_TOTAL_FILE_SIZE'), array( $maxTotalFileSize ) );
 				return false;
 			}
 		}
 
 		$maxNumberOfFiles = $this->pSet->getMaxNumberOfFiles( $this->field );
 		if ( $maxNumberOfFiles && $this->getUploadFilesCount() >= $maxNumberOfFiles ) {
-			$errorMessage = mysprintf( "You can upload no more than %s files", array( $maxNumberOfFiles ) );
+			$errorMessage = mysprintf( mlang_message('ERROR_MAX_NUMBER_OF_FILES_MANY'), array( $maxNumberOfFiles ) );
 			return false;
 		}
         return true;
@@ -251,7 +294,10 @@ class RunnerFileHandler {
 
 
 	protected function getFormData( $filename ) {
-		$formInfo = $this->getFormInfo();
+		$formInfo =& $_SESSION["mupload_".$this->formStamp];
+		if( !$formInfo ) {
+			return array();
+		}
 		return $formInfo[ $filename ];
 	}
 
@@ -331,7 +377,7 @@ class RunnerFileHandler {
 			$ds = $this->getDataSource();
 			$connection = $ds->getConnection();
 			if( $thumbnail ) {
-				$thumbField = $this->pSet->getStrThumbnail( $this->field );
+				$thumbField = $this->pSet->getThumbnailField( $this->field );
 				if( $thumbField && $data[ $thumbField ] ) {
 					$fileData["value"] = $connection->stripSlashesBinary( $data[ $thumbField ] );
 				}
@@ -355,7 +401,7 @@ class RunnerFileHandler {
 
 		//	file in filesystem
 		$fs = $this->getFilesystem();
-		$filesArray = my_json_decode( $data[ $this->field ] );
+		$filesArray = runner_json_decode( $data[ $this->field ] );
 		if( !is_array( $filesArray ) || count( $filesArray ) == 0 )
 		{
 			$filesArray = array();
@@ -400,9 +446,16 @@ class RunnerFileHandler {
 	 * @param Array $keys - key field values to find the record in the database.
 	 */
 	public function showFile( $filename, $thumbnail, $icon, $outputAsAttachment, $useHttpRange, $keys ) {
-		if($filename == "")
+		if($filename == "" && !$this->databaseFile() ) {
     		return;
+		}
 		$fileData = $this->getFileInfo( $filename, $thumbnail, $keys );
+
+		if( $thumbnail && $fileData && $fileData["thumbnail"] ) {
+			$fileData["name"] = $fileData["thumbnail"];
+			$fileData["size"] = $fileData["thumbnail_size"];
+			$fileData["type"] = $fileData["thumbnail_type"];
+		}
 
 		if( $fileData && !$this->databaseFile() ) {
 			//	read file info from the filesystem
@@ -411,6 +464,9 @@ class RunnerFileHandler {
 			if( !$fsFile && $fs->lastError() ) {
 				showError( $fs->lastError() );
 				return;
+			}
+			if( $fsFile ) {
+				$fileData["size"] = $fsFile["size"];
 			}
 		}
 		
@@ -425,12 +481,6 @@ class RunnerFileHandler {
 			} else {
 				return;
 			}
-		}
-
-		if( $thumbnail && $fileData["thumbnail"] ) {
-			$fileData["name"] = $fileData["thumbnail"];
-			$fileData["size"] = $fileData["thumbnail_size"];
-			$fileData["type"] = $fileData["thumbnail_type"];
 		}
 
 		if( $icon ) {
@@ -625,7 +675,10 @@ class RunnerFileHandler {
 		$newFilename = DiskFileSystem::uniqueFilename( "resize", $tempDir );
 
 		$newPath = $tempDir.$newFilename;
-			$success = imageCreateThumb(
+		if( ProjectSettings::ext() == 'aspx' ) {
+			$newPath = str_replace( "/", "\\", $newPath );
+		}
+		$success = imageCreateThumb(
 			$new_width,
 			$new_height,
 			$img_width,
@@ -752,9 +805,10 @@ class RunnerFileHandler {
 		} else {
 			$result["error"] = $file["error"];
 		}
+		
 		header('Vary: Accept');
 		header('Content-type: application/json');
-		echo my_json_encode( $result );
+		echo runner_json_encode( $result );
 		exit();
 	}
 
@@ -851,26 +905,8 @@ class RunnerFileHandler {
 		}
 		return false;
 	}
+	
 
-	protected function getFormInfo() {
-		$formInfo =& $_SESSION["mupload_".$this->formStamp];
-		if( !$formInfo ) {
-			return array();
-		}
-
-		return $formInfo;
-	}
-
-	public function resetUplodedFiles() {
-		$formInfo = $this->getFormInfo();
-		foreach ($formInfo as $usrName => $fileData) {
-			$info = $fileData["file"];
-			if( !$info["fromDB"] ) {
-				$this->delete( $usrName );
-			}
-		}
-		return true;
-	}
 }
 
 ?>

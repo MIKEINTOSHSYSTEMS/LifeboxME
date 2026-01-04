@@ -1,10 +1,16 @@
 <?php
+require_once( getabspath('classes/controls/Control.php' ) );
+
 class CheckboxField extends EditControl
 {
 	function __construct($field, $pageObject, $id, $connection)
 	{
 		parent::__construct($field, $pageObject, $id, $connection);
 		$this->format = EDIT_FORMAT_CHECKBOX;
+	}
+
+	public static function checkedValue( $value ) {
+		return $value === "t" || $value != "" && $value != 0;
 	}
 	
 	function buildControl($value, $mode, $fieldNum, $validate, $additionalCtrlParams, $data)
@@ -25,24 +31,30 @@ class CheckboxField extends EditControl
 				$reservedBoolean = 'data-true="t" data-false="f"';
 			}
 						
-			echo '<span class="checkbox r-checkbox-control"><label>';
+			echo $additionalCtrlParams[ 'inLabel' ] 
+				? '<span class="r-checkbox-inlabel r-checkbox-control">'
+				: '<span class="checkbox r-checkbox-control"><label>';
+
 			
 			echo '<input id="'.$this->ctype.'" type="hidden" name="'.$this->ctype.'" value="checkbox">';
 			echo '<input id="'.$this->cfield.'" type="Checkbox" '
 				.(($mode == MODE_INLINE_EDIT || $mode == MODE_INLINE_ADD) && $this->is508==true ? 'alt="'.$this->strLabel.'" ' : '')
 				.'name="'.$this->cfield.'" '.$checked.' '.$reservedBoolean.'>';
 
-			echo '</label></span>';
+			echo $additionalCtrlParams[ 'inLabel' ] 
+				? '</span>'
+				: '</label></span>';
 		}
 		else
 		{
+			//	search
 			echo '<input id="'.$this->ctype.'" type="hidden" name="'.$this->ctype.'" value="checkbox">';
 			echo '<select id="'.$this->cfield.'" '.(($mode == MODE_INLINE_EDIT || $mode == MODE_INLINE_ADD) && $this->is508==true ? 'alt="'
 				.$this->strLabel.'" ' : '').'name="'.$this->cfield.'" class="form-control">';
 				
 			$options = array( "", "on", "off" );
 			$possibleOptions = array( "" => array(), "on" => array("on", "1"), "off" => array("off", "0") );		
-			$labels = array("", "True", "False");
+			$labels = array("", mlang_message('TRUE'), mlang_message('FALSE'));
 			
 			foreach( $options as $key => $optValue )
 			{	
@@ -68,8 +80,8 @@ class CheckboxField extends EditControl
 			return null;
 		
 		$offCondition = DataCondition::_Or( array(
-			DataCondition::FieldIs( $field, dsopEQUAL, '0', false, 0, null, false ),
-			DataCondition::FieldIs( $field, dsopEMPTY, '', false, 0, null, false )
+			DataCondition::FieldIs( $field, dsopEQUAL, '0' ),
+			DataCondition::FieldIs( $field, dsopEMPTY, '' )
 		));
 		
 		if( $searchFor == "off" )

@@ -7,7 +7,6 @@ class SearchPage extends RunnerPage
 	
 	public $reportName;
 	public $chartName;
-	public $layoutVersion;
 	
 	public $needSettings = false;
 	
@@ -26,22 +25,10 @@ class SearchPage extends RunnerPage
 	{
 		parent::__construct($params);
 		
-		if( $this->getLayoutVersion() === PD_BS_LAYOUT ) 
-		{
-			$this->headerForms = array( "top" );
-			$this->footerForms = array( "below-grid" );
-			$this->bodyForms = array( "grid" );
-		} 
-		else 
-		{		
-			$this->formBricks["header"] = "searchheader";
-			$this->formBricks["footer"] = "searchbuttons";
-		}
+		$this->headerForms = array( "top" );
+		$this->footerForms = array( "below-grid" );
+		$this->bodyForms = array( "grid" );
 		
-		if( count( $this->extraPageParams ) )
-			$this->jsSettings["tableSettings"][ $this->tName ]["extraSearchPageParams"] = $this->extraPageParams;
-		
-		$this->jsSettings["tableSettings"][ $this->tName ]["searchPageFields"] = $this->pSet->getAdvSearchFields();
 	}
 		
 	public function init() 
@@ -65,7 +52,7 @@ class SearchPage extends RunnerPage
 	public function displaySearchControl() 
 	{
 		$this->searchControlBuilder = new PanelSearchControl($this->searchControllerId, $this->tName, $this->searchClauseObj, $this);
-		$defaultValue = $this->pSet->getDefaultValue( $this->ctrlField );
+		$defaultValue = $this->pSet->getSearchDefaultValue( $this->ctrlField );
 		$ctrlBlockArr = $this->searchControlBuilder->buildSearchCtrlBlockArr($this->id, $this->ctrlField, 0, '', false, true, $defaultValue, '');	
 		
 		// build array for encode
@@ -123,10 +110,6 @@ class SearchPage extends RunnerPage
 		foreach( $this->pSet->getAdvSearchFields() as $field )
 		{
 			$gfield = GoodFieldName( $field );
-			$lookupTable = $this->pSet->getLookupTable( $field );
-			if( $lookupTable )
-				$this->settingsMap["globalSettings"]['shortTNames'][ $lookupTable ] = GetTableURL( $lookupTable );
-	
 			$srchFields = $this->searchClauseObj->getSearchCtrlParams( $field );
 			$firstFieldParams = array();
 			if( count( $srchFields ) )
@@ -137,7 +120,7 @@ class SearchPage extends RunnerPage
 			{
 				$firstFieldParams['fName'] = $field;
 				$firstFieldParams['eType'] = '';
-				$firstFieldParams['value1'] = $this->pSet->getDefaultValue( $field );
+				$firstFieldParams['value1'] = $this->pSet->getSearchDefaultValue( $field );
 				$firstFieldParams['value2'] = '';
 				$firstFieldParams['not'] = false;
 				$firstFieldParams['opt'] = $this->pSet->getDefaultSearchOption( $field );
@@ -161,13 +144,10 @@ class SearchPage extends RunnerPage
 			else 
 				$this->xt->assign( $gfield . "_label", true);
 
-			if ( $this->isBootstrap() )
-			{			
-				$firstElementId = $this->getControl($field, $this->id)->getFirstElementId();
-				if ( $firstElementId )
-				{
-					$this->xt->assign("labelfor_" . $gfield, $firstElementId);
-				}
+			$firstElementId = $this->getControl($field, $this->id)->getFirstElementId();
+			if ( $firstElementId )
+			{
+				$this->xt->assign("labelfor_" . $gfield, $firstElementId);
 			}
 			
 			$this->xt->assign( $gfield . "_fieldblock", true);
@@ -198,16 +178,13 @@ class SearchPage extends RunnerPage
 	protected function doCommonAssignments()
 	{
 
-		if ( $this->isBootstrap() )
+		if ( $this->mode === SEARCH_SIMPLE )
 		{
-			if ( $this->mode === SEARCH_SIMPLE )
-			{
-				$this->headerCommonAssign();
-			}
-			else
-			{
-				$this->xt->assign("menu_chiddenattr", "data-hidden" );
-			}
+			$this->headerCommonAssign();
+		}
+		else
+		{
+			$this->xt->assign("menu_chiddenattr", "data-hidden" );
 		}
 		
 		$this->setLangParams();
@@ -246,11 +223,8 @@ class SearchPage extends RunnerPage
 			$this->xt->assign( "cname", $this->chartName );
 		}
 		
-		if( $this->isPD() )
-		{
-			$this->xt->assign( "cancel_button", $this->mode == SEARCH_POPUP );
-			$this->xt->assign( "back_button", $this->mode != SEARCH_POPUP );
-		}
+		$this->xt->assign( "cancel_button", $this->mode == SEARCH_POPUP );
+		$this->xt->assign( "back_button", $this->mode != SEARCH_POPUP );
 	}
 	
 	protected function displaySearchPage()
@@ -271,14 +245,6 @@ class SearchPage extends RunnerPage
 		
 		$this->displayAJAX( $templateFile, $this->flyId + 1 );
 		exit();
-	}
-	
-	function getLayoutVersion() 
-	{
-		if( $this->layoutVersion )
-			return $this->layoutVersion;
-			
-		return parent::getLayoutVersion();
 	}
 	
 	/**
@@ -326,5 +292,29 @@ class SearchPage extends RunnerPage
 		
 		return SEARCH_SIMPLE;
 	}
+
+	protected function buildJsTableSettings( $table, $pSet ) {
+		$settings = parent::buildJsTableSettings( $table, $pSet );
+
+		if( $this->extraPageParams ) {
+			$settings["extraSearchPageParams"] = $this->extraPageParams;
+		}
+		$settings["searchPageFields"] = $this->pSet->getAdvSearchFields();
+
+		return $settings;
+	}
+
+	protected function buildJsGlobalSettings() {
+		$settings = parent::buildJsGlobalSettings();
+		foreach( $this->pSet->getAdvSearchFields() as $field )
+		{
+			$lookupTable = $this->pSet->getLookupTable( $field );
+			if( $lookupTable ) {
+				$settings['shortTNames'][ $lookupTable ] = GetTableURL( $lookupTable );
+			}
+		}
+		return $settings;
+	}
+
 }
 ?>

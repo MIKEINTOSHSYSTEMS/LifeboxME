@@ -35,8 +35,6 @@ class SearchPanelSimple {
 	protected $allSearchFields = array();
 	
 
-	protected $searchOptions = array();	
-	
 	
 	/**
 	 * Constructor, accepts array of parametres, which will be copied to object properties by link
@@ -71,15 +69,7 @@ class SearchPanelSimple {
 	 *
 	 */
 	public function buildSearchPanel() {	
-		/*$searchPerm = true;
-		if( isEnableSection508() ) {
-			$searchPerm = array();
-			$searchPerm["begin"] = "<a name=\"skipsearch\"></a>";
-		}
-		$this->xt->assign( "searchformbuttons_block", $searchPerm );*/
-	
 		if( $this->pSet->showSearchPanel() ) {			
-			$this->searchOptions = $this->pSet->getSearchPanelOptions();
 			$this->displaySearchPanel();
 		}
 	}
@@ -107,7 +97,7 @@ class SearchPanelSimple {
 		$srchPanelAttrs = $this->searchClauseObj->getSrchPanelAttrs();
 		// assign the 'Show/Hide options' button 
 		$showHideOpt_mess = $srchPanelAttrs['ctrlTypeComboStatus'] ? 
-			"Hide options" : "Show options";		
+			mlang_message('SEARCH_HIDE_OPTIONS_BUTTON') : mlang_message('SEARCH_SHOW_OPTIONS_BUTTON');		
 		$this->xt->assign("showHideOpt_mess", $showHideOpt_mess);
 		$this->xt->assign("showHideCtrlsOpt_attrs", 'style="display: none;"');
 		
@@ -149,13 +139,14 @@ class SearchPanelSimple {
 			$isSrchPanelField = in_array($searchField, $this->panelSearchFields);
 
 			if( !$srchFields ) {
-				$defaultValue = $this->pSet->getDefaultValue( $searchField );
+				$defaultValue = $this->pSet->getSearchDefaultValue( $searchField );
 				
 				if( $isSrchPanelField ) {
 					$opt = '';
 					//set the field's option chosen for the inflexible search panel 
-					if( !$this->pSet->isFlexibleSearch() )
-						$opt = $this->searchOptions[$searchField];
+					if( !$this->pSet->isFlexibleSearch() ) {
+						$opt = $this->pSet->getDefaultSearchOption( $searchField );
+					}
 
 					// add a search panel field that should be always shown on the panel	
 					$srchFields[] = array('opt' => $opt, 'not' => '', 'value1' => $defaultValue, 'value2' => '');
@@ -207,7 +198,7 @@ class SearchPanelSimple {
 		if( $srchCtrlBlocksNumber > 0 && $srchCtrlBlocksNumber < $gLoadSearchControls ) {
 			$otherSearchControlsMaxNumber = $gLoadSearchControls - $srchCtrlBlocksNumber + count($otherFieldsBlocks);
 			foreach( $notAddedFileds as $searchField ) {			
-				$defaultValue = $this->pSet->getDefaultValue( $searchField );
+				$defaultValue = $this->pSet->getSearchDefaultValue( $searchField );
 				// add cached ctrl
 				$otherFieldsBlocks[] = $this->controlBuilder->buildSearchCtrlBlockArr(
 					$recId, 
@@ -246,8 +237,9 @@ class SearchPanelSimple {
 		if($isFieldNeedSecCtrl)
 			$searchBlock['ctrlsMap'][1] = $ctrlInd + 1;
 
-		if( !$this->pSet->isFlexibleSearch() )
-			$searchBlock['inflexSearchOption'] = $this->searchOptions[$fName];
+		if( !$this->pSet->isFlexibleSearch() ) {
+			$searchBlock['inflexSearchOption'] = $this->pSet->getSearchOptionsList( $fName );
+		}
 		
 		$this->pageObj->controlsMap["search"]["searchBlocks"][] = $searchBlock;
 		$recId = $this->pageObj->genId();

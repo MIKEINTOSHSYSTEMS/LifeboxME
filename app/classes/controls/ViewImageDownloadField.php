@@ -5,8 +5,6 @@ class ViewImageDownloadField extends ViewFileField
 	protected $isImageURL = false;
 	protected $showThumbnails = false;
 
-	protected $setOfThumbnails = false;
-
 	protected $useAbsolutePath = false;
 
 	protected $imageWidth;
@@ -21,7 +19,6 @@ class ViewImageDownloadField extends ViewFileField
 		parent::__construct($field, $container, $pageobject);
 
 		$this->showThumbnails = $container->pSet->showThumbnail( $this->field ) && !$this->isUrl();
-		$this->setOfThumbnails = $container->pSet->showListOfThumbnails( $this->field );
 		$this->useAbsolutePath = $container->pSet->isAbsolute( $this->field );
 
 		$this->imageWidth = $container->pSet->getImageWidth( $this->field );
@@ -205,14 +202,14 @@ class ViewImageDownloadField extends ViewFileField
 		$fileURLs = $this->getFileURLs($data, $keylink);
 
 		$attrs = array();
-		$attrs["images"] = my_json_encode( $fileURLs );
+		$attrs["images"] = runner_json_encode( $fileURLs );
 
 		$attrs["thumbnails"] = $pSet->showThumbnail( $this->field );
-		$attrs["images"] = my_json_encode( $fileURLs );
+		$attrs["images"] = runner_json_encode( $fileURLs );
 		$attrs["multiple"] = $pSet->getMultipleImgMode( $this->field );
 		$attrs["max-images"] = $pSet->getMaxImages( $this->field );
 		$attrs["gallery"] = $pSet->isGalleryEnabled( $this->field );
-		$attrs["gallery-mode"] = $pSet->getGalleryMode( $this->field );
+		$attrs["gallery-mode"] = $pSet->getGalleryMode();
 		$attrs["caption-mode"] = $pSet->getCaptionMode( $this->field );
 		if( $attrs["caption-mode"] == 3 )
 			$attrs["caption"] = $data[ ''.$pSet->getCaptionField( $this->field ) ];
@@ -261,58 +258,6 @@ class ViewImageDownloadField extends ViewFileField
 			return $imageFile;
 
 		return getabspath($imageFile);
-	}
-
-	/**
-	 * Get the width and height setting for small thumbnails
-	 * wrapping in a style attribute
-	 * @param String imageSrc (optional)
-	 * @param Boolean hasThumbnail (optional)
-	 * @return String
-	 */
-	protected function getSmallThumbnailStyle( $imageSrc = false, $hasThumbnail = true )
-	{
-		$styles = array();
-
-		if( $imageSrc )
-		{
-			//	this is required to avoid the corrupting of the tag by the html2xhtml function in html2ps library
-			$imageSrc = str_replace( "=", "&#61;", $imageSrc );
-
-			$styles[] = ' background-image: url('.$imageSrc.');';
-		}
-
-		if( $this->thumbWidth )
-			$styles[] = ' width: '.$this->thumbWidth.'px;';
-
-		if( $this->thumbHeight )
-			$styles[] = ' height: '.$this->thumbHeight.'px';
-
-		return ' style="'. implode( '' , $styles ) .'"';
-	}
-
-	/**
-	 * Get the width and height styles set for big thumbnails
-	 * (the 'Sets of thumbnails with preview' option)
-	 * @param Boolean widthAutoSet	(optional)
-	 * @return String
-	 */
-	protected function getBigThumbnailSizeStyles( $widthAutoSet = false )
-	{
-		$bigThumbnailSizeStyle = "";
-		$bigThumbnailHeight = $this->imageHeight;
-		$bigThumbnailWidth = $this->imageWidth;
-
-		if( $bigThumbnailWidth )
-			$bigThumbnailSizeStyle.= ' width: '.$bigThumbnailWidth.'px;';
-
-		if($bigThumbnailHeight)
-			$bigThumbnailSizeStyle.= ' height: '.$bigThumbnailHeight.'px;';
-
-		if( !$bigThumbnailWidth && $bigThumbnailHeight && $widthAutoSet )
-			$bigThumbnailSizeStyle.= ' width: '. floor( 4 * $bigThumbnailHeight / 3 ).'px;';
-
-		return $bigThumbnailSizeStyle;
 	}
 
 	/**

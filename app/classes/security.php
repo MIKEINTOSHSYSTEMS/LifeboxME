@@ -230,7 +230,7 @@ class Security
 	 */
 	public static function sendPermissionError( $message = '' )
 	{
-		echo printJSON(array("success" => false, "message" => "You don't have permissions to access this table" . " " .$message ) );
+		echo printJSON(array("success" => false, "message" => mlang_message('NO_PERMISSIONS') . " " .$message ) );
 		exit();
 	}
 
@@ -329,7 +329,6 @@ class Security
 	 */
 	public static function getUserGroupIds()
 	{
-		global $globalSettings;
 		if( !Security::userGroupsAvailable() )
 			return array();
 
@@ -360,7 +359,6 @@ class Security
 	 */
 	public static function getUserGroups()
 	{
-		global $globalSettings;
 		if( !Security::userGroupsAvailable() )
 			return array();
 		if( !Security::dynamicPermissions() )
@@ -371,19 +369,26 @@ class Security
 		// database-based dynamic permissions
 		$groupIds = Security::getUserGroupIds();
 
-		$groupNames = array();
+		if( !$groupIds ) {
+			return array();
+		}
 
 		global $cman;
 		$grConnection = $cman->getForUserGroups();
 
-		$sql = "select ". $grConnection->addFieldWrappers( "Label" )
-			." from ". $grConnection->addTableWrappers( "public.lifeboxme_uggroups" ) . " WHERE " . $grConnection->addFieldWrappers( "GroupID" )
-			." in ( " . implode( ",", array_keys( $groupIds ) ) . ")";
+		$dc = new DsCommand();
+		$dc->filter = DataCondition::FieldInList(
+			"GroupID",
+			array_keys( $groupIds ) 
+		);
 
-		$qResult = $grConnection->query( $sql );
-		while( $data = $qResult->fetchNumeric() )
+		$dataSource = Security::getUgGroupsDatasource();
+		$qResult = $dataSource->getList( $dc );
+
+		$groupNames = array();
+		while( $data = $qResult->fetchAssoc() )
 		{
-			$groupNames[ $data[0] ] = true;
+			$groupNames[ $data[ 'Label' ] ] = true;
 		}
 
 		if( $groupIds[ -1 ] )
@@ -448,7 +453,9 @@ class Security
 			return;
 		}
 		$fullName = $userData[ $fullnameField ];
-		Security::setDisplayName( runner_htmlspecialchars($fullName) );
+		if( $fullName ) {
+			Security::setDisplayName( $fullName );
+		}
 	}
 
 	/**
@@ -566,10 +573,8 @@ class Security
 			if( $userData ) {
 				return Security::loginAs( $username, $fireEvents, "", $userData );
 			}
-		} /* else if( $lMethod === LOGIN_AD ) {
-			$loginPageObject = Security::createLoginPageObject();
-			return $loginPageObject->LogIn($username, $password, $skipPasswordCheck, $fireEvents );
-		} */
+		} 
+		
 		if( $fireEvents ) {
 			//	call unsuccessful login event
 			Security::auditLoginFail( $username );
@@ -832,7 +837,7 @@ class Security
 
 	public static function hasLogin() {
 
-		return getSecurityOption( "enabled" );
+		return ProjectSettings::getSecurityValue( "enabled" );
 	}
 
 	public static function loginMethod() {
@@ -841,7 +846,7 @@ class Security
 
 	public static function dynamicPermissions() {
 		//	the rest of checks are made in the TS code
-		return getSecurityOption( "dynamicPermissions" );
+		return ProjectSettings::getSecurityValue( "dynamicPermissions" );
 	}
 
 	/**
@@ -852,7 +857,15 @@ class Security
 	public static function permissionsAvailable() {
 		if( !Security::hasUsers() )
 			return false;
-		return Security::dynamicPermissions() || GetGlobalData("userGroupCount");
+		if( Security::dynamicPermissions() ) {
+			return true;
+		}
+		$dbProv = Security::dbProvider();
+		if( $dbProv && $dbProv["active"] ) {
+			return count( ProjectSettings::staticPermissions() ) > 0;
+		}
+		//	non-db providers can only have Dynamic permissions
+		return false;
 	}
 
 	/**
@@ -861,7 +874,7 @@ class Security
 	 * @return Boolean
 	 */
 	public static function hasUsers() {
-		return getSecurityOption( "enabled" ) && !getSecurityOption( "hardcodedLogin" );
+		return ProjectSettings::getSecurityValue( "enabled" ) && !ProjectSettings::getSecurityValue( "hardcodedLogin" );
 	}
 
 
@@ -870,7 +883,7 @@ class Security
 	 *  $table that the permissions are requested on
 	 *  $ownerId - ownerId of the record the permissions is requested on
 	 */
-	public static function userCan( $permission, $table, $ownerId = null )
+	public static function userCan( $permission, $table, $checkOwnerId = false, $ownerId = null )
 	{
 		if( !Security::hasLogin() ) {
 			return true;
@@ -883,7 +896,7 @@ class Security
 			return false;
 
 		//	record ownerId check not requested or user has admin permissions
-		if( $ownerId === null || strpos($strPerm, "M") !== false )
+		if( !$checkOwnerId || strpos($strPerm, "M") !== false )
 			return true;
 
 		$pSet = new ProjectSettings($table);
@@ -943,15 +956,20 @@ class Security
 		return $pSet->appearOnPage( $field );
 	}
 
+	/**
+	 * Returns array
+	 */
 	public static function getRestrictedPages( $table, $pSet )
 	{
+		if( !Security::permissionsAvailable() ) {
+			return array();
+		}
 		global $globalEvents;
 		
 		if( $globalEvents->exists("GetTablePermissions", $table) ) {
 			//	ignore page-level permissions when GetTablePermissions event is used
 			return array();
 		}
-
 		if( is_array( $_SESSION["securityOverrides"] ) )
 		{
 			if( isset( $_SESSION["securityOverrides"][ $table ] ) ) {
@@ -1019,13 +1037,34 @@ class Security
 			return "P";
 		else if( $pageType == "import" )
 			return "I";
+		else if( $pageType == PAGE_REGISTER || $pageType == PAGE_USERINFO || $pageType == PAGE_LOGIN ) {
+			return "";
+		}
 		return "S";
 	}
 
+	/**
+	 * Return array of 
+	 */
 	public static function _staticRestrictedPages( $table ) {
+		$permissions =& ProjectSettings::staticPermissions();
 		$group = Security::getUserGroup();
-		//	default permissions
-		return array();
+		if( !$group ) {
+			$group = '<Default>';
+		}
+		$groupPermissions =& $permissions[ $group ];
+		if( !$groupPermissions ) {
+			return array();
+		}
+		$tablePermissions =& $groupPermissions['permissions'][ $table ];
+		if( !$tablePermissions ) {
+			return array();
+		}
+		$pages = $tablePermissions['restrictedPages'];
+		if( !$pages ) {
+			return array();
+		}
+		return $pages;
 	}
 
 	public static function getAuthPlugin( $code ) {
@@ -1167,7 +1206,7 @@ class Security
 		if ( $tableAdvSecurity == ADVSECURITY_VIEW_OWN
 				||  $tableAdvSecurity == ADVSECURITY_EDIT_OWN
 					&& ( $strRequestedPremission == "E" || $strRequestedPremission == "D") ) {
-			return DataCondition::FieldEquals( $pSet->getTableOwnerID(), $ownerid );
+			return DataCondition::FieldEquals( $pSet->getTableOwnerIdField(), $ownerid );
 		}
 
 		return null;
@@ -1182,7 +1221,7 @@ class Security
 			return null;
 		}
 		global $cman;
-		return getDbTableDataSource( "public.lifeboxme_ugmembers", $cman->getUserGroupsConnId() );
+		return getDbTableDataSource( ProjectSettings::getSecurityValue( 'dpTablePrefix' ) . 'ugmembers', $cman->getUserGroupsConnId() );
 	}
 
 	/**
@@ -1194,7 +1233,7 @@ class Security
 			return null;
 		}
 		global $cman;
-		return getDbTableDataSource( "public.lifeboxme_uggroups", $cman->getUserGroupsConnId() );
+		return getDbTableDataSource( ProjectSettings::getSecurityValue( 'dpTablePrefix' ) . 'uggroups', $cman->getUserGroupsConnId() );
 	}
 
 	/**
@@ -1206,7 +1245,7 @@ class Security
 			return null;
 		}
 		global $cman;
-		return getDbTableDataSource( "public.lifeboxme_ugrights", $cman->getUserGroupsConnId() );
+		return getDbTableDataSource( ProjectSettings::getSecurityValue( 'dpTablePrefix' ) . 'ugrights', $cman->getUserGroupsConnId() );
 	}
 
 
@@ -1217,7 +1256,7 @@ class Security
 	 */
 	public static function getOpenIdConfiguration( $configurationUrl ) {
 		$response = runner_http_request( $configurationUrl );
-		return my_json_decode( $response["content"] );
+		return runner_json_decode( $response["content"] );
 	}
 
 	/**
@@ -1228,13 +1267,14 @@ class Security
 	 */
 	public static function getOpenIdJWK( $jwt, $wellKnown ) {
 		$response = runner_http_request( $wellKnown["jwks_uri"] );
-		$keys = my_json_decode( $response["content"] );
+		$keyData = runner_json_decode( $response["content"] );
+		$keys = $keyData["keys"];
 
 		$parts = explode('.', $jwt);
-		$tokenHeader = my_json_decode( base64_decode_url( $parts[0] ) );
+		$tokenHeader = runner_json_decode( base64_decode_url( $parts[0] ) );
 
 		if( isset( $tokenHeader["kid"] ) ) {
-			foreach( $keys["keys"] as $key ) {
+			foreach( $keys as $key ) {
 				if( $key["kid"] == $tokenHeader["kid"] )
 					return $key;
 			}
@@ -1272,8 +1312,8 @@ class Security
 			return false;
 
 		return array(
-		"header" => my_json_decode( base64_decode_url( $parts[0] ) ),
-			"payload" => my_json_decode( base64_decode_url( $parts[1] ) ),
+		"header" => runner_json_decode( base64_decode_url( $parts[0] ) ),
+			"payload" => runner_json_decode( base64_decode_url( $parts[1] ) ),
 			"signature" => base64_decode_url_binary( $parts[2] )
 		);
 	}
@@ -1287,7 +1327,7 @@ class Security
 	}
 
 	public static function & twoFactorSettings() {
-		$ret =& getSecurityOption( "twoFactorSettings" );
+		$ret =& ProjectSettings::getSecurityValue( "twoFactorSettings" );
 		if( !$ret["available"] ) {
 			return array();
 		}
@@ -1295,11 +1335,11 @@ class Security
 		if( !$db || !$ret ) {
 			return array();
 		}
-		if( GetGlobalData("twoFactorEmail") ) {
-			$ret["emailField"] = GetGlobalData("twoFactorEmail");
-		} else {
-			$ret["emailField"] = $db["emailField"];
+		$emailField = ProjectSettings::twoFactorValue( 'emailField' );
+		if( !$emailField ) {
+			$emailField = $db["emailField"];
 		}
+		$ret["emailField"] = $emailField;
 		return $ret;
 	}
 
@@ -1452,8 +1492,7 @@ class Security
 	 * @return Boolean
 	 */
 	public static function guestLoginAvailable() {
-		global $globalSettings;
-		if( $globalSettings["staticGuestLogin"] || Security::dynamicPermissions() ) {
+		if( ProjectSettings::getSecurityValue( 'advancedSecurity', 'allowGuestLogin' ) || Security::dynamicPermissions() ) {
 			return guestHasPermissions();
 		}
 		return false;
@@ -1470,10 +1509,22 @@ class Security
 		if( $provider ) {
 			$securityType = $provider["type"];
 		}
-		if( $securityType == stAD && !$provider["useDbGroups"] ) {
-			$userId = Security::getUserName();
-		} else {
+		$tablesAdvSecurity =& ProjectSettings::getProjectValue( 'tablesAdvSecurity' );
+		$adMode = $securityType == stAD && !$provider["useDbGroups"];
+		$userId = Security::getUserName();
+		if( $adMode ) {
+			storageSet( "OwnerID", $userId );
 		}
+		foreach( $tablesAdvSecurity as $table => $advSec ) {
+			if( $advSec['advSecurity'] !== ADVSECURITY_VIEW_OWN && $advSec['advSecurity'] !== ADVSECURITY_EDIT_OWN ) {
+				continue;
+			}
+			$ownerId = $adMode ? $userId : $data[ $advSec['usersOwnerIdField'] ];
+			storageSet( "_" . $table . "_OwnerID", $ownerId );
+		}
+		
+		//	legacy
+		storageSet( "OwnerID", $ownerId );
 	}
 
 	/**
@@ -1519,13 +1570,15 @@ class Security
 
 		if( $userId && Security::getUserName() !== $userId ) {
 			regenerateSessionId();
+			//	language may have with session regeneration
+			loadLanguage( mlang_getcurrentlang() );
 		}
 
 		$accessLevel = ACCESS_LEVEL_USER;
 		if( $userId == "" ) {
 			$userId = "Guest";
 			$accessLevel = ACCESS_LEVEL_GUEST;
-			$displayName = "Guest";
+			$displayName = mlang_message('AA_GROUP_GUEST');
 		}
 		if( $displayName == "" ) {
 			$displayName = $userId;
@@ -1549,9 +1602,9 @@ class Security
 		if( $securityType === stAD ) {
 			storageSet("GroupID", implode( ",", $adGroups ) );
 		} else {
-			global $cUserGroupField;
-			storageSet("GroupID", Security::permissionsAvailable() && $cUserGroupField
-				? $userData[ $cUserGroupField ]
+			$userGroupField = Security::groupIdField();
+			storageSet("GroupID", Security::permissionsAvailable() && $userGroupField
+				? $userData[ $userGroupField ]
 				: "" );
 		}
 		if( $accessLevel === ACCESS_LEVEL_GUEST ) {
@@ -1802,7 +1855,7 @@ class Security
 			$table = $data[ "TableName" ];
 			$mask = $data[ "AccessMask" ];
 			$group = $data[ "GroupID" ];
-			$restrictedPages = my_json_decode( $data[ "Page" ] );
+			$restrictedPages = runner_json_decode( $data[ "Page" ] );
 			if( !is_array( $restrictedPages )) {
 				$restrictedPages = array();
 			}
@@ -1843,6 +1896,18 @@ class Security
 	}
 
 	public static function guestHasStaticPermissions() {
+		$permissions =& ProjectSettings::staticPermissions();
+		$guestPermissions =& $permissions['<Guest>'];
+		if( !$guestPermissions || !$guestPermissions['permissions'] ) {
+			return false;
+		}
+		$tablesAdvSecurity =& ProjectSettings::getProjectValue( 'tablesAdvSecurity' );
+		foreach( $guestPermissions['permissions'] as $table => $p ) {
+			$advSec = $tablesAdvSecurity[ $table ];
+			if( $p['mask'] && $advSec && $advSec['advSecurity'] !== ADVSECURITY_VIEW_OWN ) {
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -1895,8 +1960,8 @@ class Security
 			DataCondition::FieldEquals( $fieldName, $username, 0, Security::caseInsensitiveUsername() ? dsCASE_INSENSITIVE : dsCASE_STRICT )
 		);
 
-		if( !$ignoreActivation && GetGlobalData( "userRequireActivation" ) ) {
-			$conditions[] = DataCondition::FieldEquals( GetGlobalData( "userActivationField" ), 1 );
+		if( !$ignoreActivation && ProjectSettings::getSecurityValue( 'registration', 'sendActivationLink' ) ) {
+			$conditions[] = DataCondition::FieldEquals( ProjectSettings::getSecurityValue( 'dbProvider', 'activationField' ), 1 );
 		}
 		foreach( $loginControls as $field => $value ) {
 			$conditions[] = DataCondition::FieldEquals( $field, $value );
@@ -1926,10 +1991,10 @@ class Security
 		$qResult = $dataSource->getSingle( $dc );
 		$data = $dataSource->decryptRecord( $qResult->fetchAssoc() );
 
-		if( !$skipPasswordCheck && GetGlobalData( "userRequireActivation" ) ) {
+		if( !$skipPasswordCheck && ProjectSettings::getSecurityValue( 'registration', 'sendActivationLink' ) ) {
 			if( $data ) {
 				//	the activation field may not be present in the SQL
-				$data[ GetGlobalData( "userActivationField" ) ] = 1;
+				$data[ ProjectSettings::getSecurityValue( 'dbProvider', 'activationField' ) ] = 1;
 			} else {
 				//	try to find an unactivated user
 				$dc = Security::createFetchUserCommand( $providerCode, $username, $loginControls, true );
@@ -1949,9 +2014,8 @@ class Security
 	}
 
 	public static function verifyPassword( $password, $storedPassword ) {
-		global $globalSettings;
-		if( $globalSettings["bEncryptPasswords"] ) {
-			if( $globalSettings["nEncryptPasswordMethod"] == 0 )
+		if( ProjectSettings::getSecurityValue( 'registration', 'hashPassword' ) ) {
+			if( ProjectSettings::getSecurityValue( 'registration', 'hashAlgorithm' ) == 0 )
 				return passwordVerify( $password, $storedPassword );
 			else {
 				return (string)Security::hashPassword( $password ) === (string)$storedPassword;
@@ -1961,8 +2025,7 @@ class Security
 	}
 
 	public static function hashPassword( $password ) {
-		global $globalSettings;
-		return ( $globalSettings["nEncryptPasswordMethod"] == 0 )
+		return ( ProjectSettings::getSecurityValue( 'registration', 'hashAlgorithm' ) == 0 )
 			? getPasswordHash( $password )
 			: md5( $password );
 	}
@@ -2071,7 +2134,7 @@ class Security
 			return $destination;
 		}
 		//	generate 2f code
-		$code = generateUserCode( GetGlobalData("smsCodeLength", 6) );
+		$code = generateUserCode( ProjectSettings::getProjectValue( 'smsCodeLength' ) );
 		
 		if( $debug2Factor ) {
 			$code = "333";
@@ -2135,22 +2198,6 @@ class Security
 		$twoFactorValue = $userData[ $twofSettings[ "twoFactorField" ] ];
 		$methods = Security::twoFactorEnabledMethods( $twoFactorValue );
 		return count( $methods ) > 0;
-		
-		// verify user data??
-/*
-
-		if( $twofMethod === "totp" ) {
-			return validateTotpSecret( $userData[ $twofSettings[ "codeField" ] ] );
-		} else if ( $twofMethod === "phone" ) {
-			$number = normalizePhoneNumber( $userData[ $twofSettings[ "phoneField" ] ] );
-			return strlen( $number ) > 5;
-		} else if( $twofMethod === "email" ) {
-			return validateEmail( $userData[ $twofSettings[ "emailField" ] ] );
-		}
-
-		//	unknown or un-selected 2FA method
-		return false;
-*/		
 	}
 
 	/**
@@ -2177,7 +2224,7 @@ class Security
 
 	public static function setKeepLoggedCookie( $success ) {
 		$prov = Security::currentProvider();
-		if( $success && GetGlobalData( "keepLoggedIn" ) && $prov ) {
+		if( $success && ProjectSettings::getProjectValue( 'keepLoggedIn' ) && $prov ) {
 			$payload = array(
 				"username" => Security::getUserName(),
 				"host" => projectHost(),
@@ -2188,7 +2235,7 @@ class Security
 
 			//	add password hash for more security, so the old tokens stop working when password is changed
 			if( Security::hardcodedLogin() ) {
-				$payload["checksum"] = getPasswordHash( GetGlobalData("Password") );
+				$payload["checksum"] = getPasswordHash( ProjectSettings::getSecurityValue( 'hardcodedProvider', 'password' ) );
 			} else if( $prov["type"] == stDB ) {
 				$data =& Security::currentUserData();
 				$payload["checksum"] = getPasswordHash( $data[ Security::passwordField() ] );
@@ -2216,15 +2263,15 @@ class Security
 
 		if( $payload[ "external" ] ) {
 			//	token created by external.php
-			//	no additional chek needed
+			//	no additional check needed
 			return $payload;
 		}
 
 		//	token created by Remeber me feature
 		//	verify password checksum if available
-		//	verify GetGlobalData( "keepLoggedIn" ) and make sure 2FA is off
+		//	verify "keepLoggedIn" and make sure 2FA is off
 
-		if( !GetGlobalData( "keepLoggedIn" ) ) {
+		if( !ProjectSettings::getProjectValue( 'keepLoggedIn' ) ) {
 			return false;
 		}
 
@@ -2247,17 +2294,10 @@ class Security
 				return null;
 			}
 		} else if( $provider["type"] === stHARDCODED ) {
-			if( !passwordVerify( GetGlobalData("Password"), $payload["checksum"]) ) {
+			if( !passwordVerify( ProjectSettings::getSecurityValue( 'hardcodedProvider', 'password' ), $payload["checksum"]) ) {
 				return null;
 			}
-		} /*
-		else if( Security::loginMethod() === SECURITY_AD ) {
-			//	don't login if AD Autologin is in effect
-			if( GetGlobalData("ADSingleSign", 0) && $_SERVER["REMOTE_USER"] ) {
-				return null;
-			}
-		}
-		*/
+		} 
 		return $payload;
 	}
 
@@ -2408,7 +2448,7 @@ class Security
 	 * @return class DBProvider
 	 */
 	public static function & dbProvider() {
-		$ret =& getSecurityOption( "dbProvider" );
+		$ret = ProjectSettings::getSecurityValue( "dbProvider" );
 		if( !$ret ) {
 			return array();
 		}
@@ -2416,7 +2456,7 @@ class Security
 	}
 
 	public static function & hardcodedProvider() {
-		$ret =& getSecurityOption( "hardcodedProvider" );
+		$ret = ProjectSettings::getSecurityValue( "hardcodedProvider" );
 		if( !$ret ) {
 			return array();
 		}
@@ -2424,7 +2464,7 @@ class Security
 	}
 
 	public static function findProvider( $code ) {
-		$providers = &getSecurityOption( "providers" );
+		$providers = &ProjectSettings::getSecurityValue( "providers" );
 		foreach( $providers as $p ) {
 			if( $p["code"] == $code && $p["active"] ) {
 				return $p;
@@ -2434,7 +2474,7 @@ class Security
 	}
 
 	public static function providersByType( $type ) {
-		$providers = &getSecurityOption( "providers" );
+		$providers = &ProjectSettings::getSecurityValue( "providers" );
 		$ret = array();
 		foreach( $providers as $p ) {
 			if( $p["type"] == $type && $p["active"] ) {
@@ -2512,6 +2552,15 @@ class Security
 		}
 		return "";
 	}
+
+	public static function groupIdField() {
+		$db = &Security::dbProvider();
+		if( $db ) {
+			return $db["userGroupField"];
+		}
+		return "";
+	}
+
 
 	public static function resetDateField() {
 		$db = &Security::dbProvider();
@@ -2609,7 +2658,7 @@ class Security
 
 		$pPassword = generatePassword(20);
 		$cipherer = new RunnerCipherer( Security::loginTable() );
-		if( GetGlobalData("bEncryptPasswords") && !$cipherer->isFieldEncrypted( Security::passwordField() ) ) {
+		if( ProjectSettings::getSecurityValue( 'registration', 'hashPassword' ) && !$cipherer->isFieldEncrypted( Security::passwordField() ) ) {
 			$pPassword = getPasswordHash( $pPassword );
 		}
 		$dc = new DsCommand;
@@ -2626,8 +2675,8 @@ class Security
 		if( Security::emailField() )
 			$dc->values[ Security::emailField() ] = $info["email"];
 
-		if( GetGlobalData( "userRequireActivation" ) ) {
-			$dc->values[ GetGlobalData( "userActivationField" ) ] = 1;
+		if( ProjectSettings::getSecurityValue( 'registration', 'sendActivationLink' ) ) {
+			$dc->values[ ProjectSettings::getSecurityValue( 'dbProvider', 'activationField' ) ] = 1;
 		}
 
 		//	update image
@@ -2647,25 +2696,25 @@ class Security
 	 * @return Boolean
 	 */
 	public static function advancedSecurityAvailable() {
-		return getSecurityOption( "advancedSecurityAvailable" );
+		return ProjectSettings::getSecurityValue( "advancedSecurityAvailable" );
 	}
 
 	public static function userGroupsAvailable() {
-		return getSecurityOption( "userGroupsAvailable" );
+		return ProjectSettings::getSecurityValue( "userGroupsAvailable" );
 	}
 
 	/**
 	 * Only the hardcoded login option available
 	 */
 	public static function hardcodedLogin() {
-		return getSecurityOption( "hardcodedLogin" );
+		return ProjectSettings::getSecurityValue( "hardcodedLogin" );
 	}
 
 	/**
 	 * Either Hardcoded or database. NULL otherwise
 	 */
 	public static function defaultProvider() {
-		return Security::findProvider( getSecurityOption( "defaultProviderCode" ) );
+		return Security::findProvider( ProjectSettings::getSecurityValue( "defaultProviderCode" ) );
 	}
 
 	/**
@@ -2676,7 +2725,7 @@ class Security
 	 *  Advanced security is based on the username only
 	 */
 	public static function ADonlyLogin() {
-		return getSecurityOption( "adOnlyLogin" );
+		return ProjectSettings::getSecurityValue( "adOnlyLogin" );
 	}
 
 	/**
@@ -2885,11 +2934,11 @@ class Security
 	 * @return Array of strings - list of provider codes that save their users in the database
 	 */
 	public static function providersInDb() {
-		return getSecurityOption( "dbProviderCodes" );
+		return ProjectSettings::getSecurityValue( "dbProviderCodes" );
 	}
 
 	public static function caseInsensitiveUsername() {
-		$registration = getSecurityOption( "registration" );
+		$registration = ProjectSettings::getSecurityValue( "registration" );
 		return !!$registration["caseInsensitiveLogin"];
 
 	}
@@ -2898,12 +2947,12 @@ class Security
 	 * @return Boolean - registration page is enable in the project
 	 */
 	public static function registerPage() {
-		$registration = getSecurityOption( "registration" );
+		$registration = ProjectSettings::getSecurityValue( "registration" );
 		return !!$registration["registerPage"];
 	}
 
 	public static function loginDataSource() {
-		return getSecurityOption( "loginDataSource" );
+		return ProjectSettings::getSecurityValue( "loginDataSource" );
 	}
 
 	/**
@@ -2981,15 +3030,47 @@ class Security
 
 	static function isAdminTable( $table )
 	{
-		return $table === 'admin_rights' || $table === 'admin_members' || $table === 'admin_users';
+		return /*$table === 'admin_rights' || $table === 'admin_members' ||*/ $table === 'admin_users';
 	}
 
 	/**
 	 * Return user data provided by SecurityPlugin in login routine
 	 * @return Array
 	 */
-	public static function & rawUserData() {
+	public static function rawUserData() {
 		return storageGet("rawUserData");
+	}
+
+	public static function getUserPermissionsStatic( $table ) {
+		if( !isLogged() )
+		return "";
+
+		$userGroup = storageGet( "GroupID" );
+		$permissions =& ProjectSettings::staticPermissions();
+		$groupRights =& $permissions[ $userGroup ];
+		if( !$groupRights && !Security::isGuest() ) {
+			$groupRights =& $permissions[ '<Default>' ];
+		}
+		if( !$groupRights ) {
+			return '';
+		}
+		$tableRights =& $groupRights['permissions'][$table];
+		if( !$tableRights ) {
+			return '';
+		}
+		$adminPerm = '';
+		if( Security::isGuest() ) {
+			$tablesAdvSecurity =& ProjectSettings::getProjectValue( 'tablesAdvSecurity' );
+			$advSec = &$tablesAdvSecurity[ $table ];
+			if( $advSec && $advSec['advSecurity'] === ADVSECURITY_VIEW_OWN ) {
+				return '';
+			}
+		} else {
+			$adminPerm = $groupRights['admin'] ? 'M' : '';
+		}
+		return $tableRights['mask'] . $adminPerm;
+
+
 	}
 }
 

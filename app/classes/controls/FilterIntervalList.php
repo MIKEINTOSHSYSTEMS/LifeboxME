@@ -81,7 +81,7 @@ class FilterIntervalList extends FilterControl
 	
 	protected function getIntervalLabel( $index ) {
 		$iData = $this->pSet->getFilterIntervalDatabyIndex( $this->fName, $index );
-		return $this->getLabel( $iData["intervalLabelNameType"], $iData["intervalLabelText"] );		
+		return GetMLString( $iData['mutilangIntervalText'] );
 	}
 
 	/**
@@ -182,11 +182,11 @@ class FilterIntervalList extends FilterControl
 	
 	public static function getOrdinaryIntervalCondition( $fName, $intervalData, $pSet ) {
 		$lowerCondition = null;
-		$caseInsensitive = $intervalData["caseSensitive"] ? dsCASE_DEFAULT : dsCASE_INSENSITIVE;
+		$caseInsensitive = $intervalData["caseInsensitiveFiltering"] ? dsCASE_INSENSITIVE : dsCASE_DEFAULT;
 	
 		$lowerLimit = $intervalData[ "lowerLimit" ];
 		if( $intervalData[ "lowerUsesExpression" ] )
-			$lowerLimit = getIntervalLimitsExpressions( $pSet->getTableName(), $fName, $intervalData["index"], true );
+			$lowerLimit = getIntervalLimitsExpressions( $pSet, $fName, $intervalData["index"], true );
 		
 		if( $intervalData["lowerLimitType"] == FIL_MORE_THAN ) {
 			$lowerCondition = DataCondition::FieldIs( $fName, dsopMORE, $lowerLimit, $caseInsensitive );
@@ -199,7 +199,7 @@ class FilterIntervalList extends FilterControl
 		$upperCondition = null;
 		$upperLimit = $intervalData[ "upperLimit" ];
 		if( $intervalData[ "upperUsesExpression" ] )
-			$upperLimit = getIntervalLimitsExpressions( $pSet->getTableName(), $fName, $intervalData["index"], false );		
+			$upperLimit = getIntervalLimitsExpressions( $pSet, $fName, $intervalData["index"], false );		
 		
 		if( $intervalData["upperLimitType"] == FIL_LESS_THAN  ) {
 			$upperCondition = DataCondition::FieldIs( $fName, dsopLESS, $upperLimit, $caseInsensitive );

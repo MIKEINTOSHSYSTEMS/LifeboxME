@@ -28,7 +28,6 @@ class MenuItem
 
 	// for separator
 	var $name;
-	var $nameType;
 	var $style;
 
 	/**
@@ -78,7 +77,7 @@ class MenuItem
 	 *
 	 * @var array
 	 */
-	var $children=array();
+	var $children = array();
 
 	var $parentItem = null;
 
@@ -97,9 +96,9 @@ class MenuItem
 
 	/* welcome menu attributes */
 
-	var $comments;
 	var $icon;
 	var $iconType;
+	var $iconStyle;
 
 	/**
 	 * 0 - always, 1 - only in collapsed column
@@ -107,48 +106,61 @@ class MenuItem
 	var $iconShow;
 	var $color;
 
+	/**
+	 * @var Boolean
+	 */
+	var $linkToAnotherApp;
+
 
 	/**
 	 * Constructor, builds tree structure with item attributes
 	 *
 	 * @param array $menuItemInfo
 	 * @param array $menuNodes
-	 * @param obj $menuParent
 	 * @return MenuItem
 	 */
 
-	function __construct(&$menuItemInfo, &$menuNodes, &$menuParent, &$menuTableMap, $menuId )
+	function __construct( &$menuItemInfo, &$menuTableMap, $menuId )
 	{
-		global $menuNodesIndex;
-
 		$this->menuId = $menuId;
 		$this->menuTableMap =& $menuTableMap;
 
-
-		// simple attributes
+		$data = &$menuItemInfo['data'];
 		$this->id = $menuItemInfo['id'];
-		$this->name = $menuItemInfo['name'];
-		$this->type = $menuItemInfo['type'];
-		$this->href = $menuItemInfo['href'];
-		$this->title = $menuItemInfo['title'];
-		$this->comments = $menuItemInfo['comments'];
-		$this->color = $menuItemInfo['color'];
-		$this->style = $menuItemInfo['style'];
-		$this->table = $menuItemInfo['table'];
-		$this->params = $menuItemInfo['params'];
-		$this->linkType = $menuItemInfo['linkType'];
-		$this->nameType = $menuItemInfo['nameType'];
-		$this->pageType = $menuItemInfo['pageType'];
-		$this->pageId = $menuItemInfo['pageId'];
-		$this->openType = $menuItemInfo['openType'];
-		$this->icon = $menuItemInfo['icon'];
-		$this->iconType = $menuItemInfo['iconType'];
-		$this->iconShow = $menuItemInfo['iconShow'];
+		$this->name = $data['name'];
+		$this->type = $data['itemType'];
+		$this->href = $data['href'];
+		$this->style = $data['style'];
+		if( $data['tableName'] ) {
+			$this->table = $data['tableName'];
+		} else {
+			$this->table = GetTableByGID( $data['table'] );
+		}
+		$this->params = $data['params'];
+		$this->linkType = $data['linkType'];
+		$this->pageType = $data['pageType'];
+		$this->pageId = $data['pageId'];
+		$this->openType = $data['openType'];
+		$this->icon = $data['iconName'];
+		$this->iconType = $data['iconType'];
+		$this->iconStyle = $data['iconStyle'];
+		if( !$this->iconStyle ) {
+			$this->iconStyle = ICON_STYLE_SOLID;
+		}
+		$this->iconShow = $data['showIconType'];
+		$this->linkToAnotherApp = $data['linkToAnotherApp'];
 
-		//build tree structure
-		$this->buildTreeMenuStructure($menuNodes);
+		$this->title = GetMLString( $this->name );
 
-		if( $this->type != 'Separator' && $this->table )
+
+		if( is_array( $menuItemInfo['children'] ) ) {
+			foreach( $menuItemInfo['children'] as $childInfo ) {
+				$this->AddChild( new MenuItem( $childInfo, $menuTableMap, $menuId ) );
+			}
+			
+		}
+
+		if( !$this->isSeparator() && $this->table )
 		{
 			$pageType = strtolower( $this->pageType );
 			if( !isset( $this->menuTableMap[ $this->table ] ) )
@@ -184,9 +196,9 @@ class MenuItem
 	function setUrl($href)
 	{
 		$this->href = $href;
-		if ($this->linkType == 'Internal')
+		if ($this->linkType == menuLinkTypeInternal)
 		{
-			$this->linkType = 'External';
+			$this->linkType = menuLinkTypeExternal;
 		}
 	}
 
@@ -244,35 +256,24 @@ class MenuItem
 	}
 
 	function openNewWindow( $newWindow = true ) {
-		$oldValue = $this->openType == "NewWindow";
-		$this->openType = $newWindow ? "NewWindow" : "None";
+		$oldValue = $this->openType == menuOpenTypeNewWindow;
+		$this->openType = $newWindow ? menuOpenTypeNewWindow : menuOpenTypeNone;
 		return $oldValue;
 	}
 
-	function getLinkType() {
-		return $this->linkType;
-	}
 	/**
-	 * Recursively build tree menu structure
-	 *
-	 * @param array $menuNodes all nodes
-	 * @param int $parentId parentNode id
-	 * @param object $menuRoot parent obj
+	 * part of Menu API
+	 * @return string
 	 */
-	function buildTreeMenuStructure(&$menuNodes)
-	{
-		global $menuNodesIndex;
-		// for all menuItems
-		while( $menuNodesIndex < count( $menuNodes ) )
-		{
-			$i = $menuNodesIndex;
-			if( $menuNodes[$i]["parent"] != $this->id )
-				break;
-			// adds to parent
-			++$menuNodesIndex;
-			$this->AddChild( new MenuItem($menuNodes[$i], $menuNodes, $this, $this->menuTableMap, $this->menuId ) );
-
-		}
+	function getLinkType() {
+		switch( $this->linkType ) {
+			case menuLinkTypeInternal:
+				return 'Internal';
+			case menuLinkTypeExternal:
+				return 'External';
+			case menuLinkTypeNone:
+				return 'None';
+			}
 	}
 
 	/**
@@ -316,14 +317,17 @@ class MenuItem
 	 */
 	function showAsLink()
 	{
+		if( $this->isGroup() ) {
+			return false;
+		}
 		// if link external and has href
-		if ($this->linkType == "External" && strlen($this->href)>0)
+		if ($this->linkType == menuLinkTypeExternal && strlen($this->href)>0)
 			return true;
 		// allways show separators
-		if ($this->linkType == "Separator")
+		if ($this->linkType == menuLinkTypeNone)
 			return true;
 		// if internal and has href and user have permissions
-		if ($this->linkType == "Internal" && $this->linkAvailable())
+		if ($this->linkType == menuLinkTypeInternal && $this->linkAvailable())
 			return true;
 		// else not show as link
 		return false;
@@ -335,7 +339,7 @@ class MenuItem
 	 */
 	function isGroup()
 	{
-		return $this->type=="Group";
+		return $this->type == menuItemTypeGroup;
 	}
 	/**
 	 * Checks if this element is separator
@@ -344,9 +348,20 @@ class MenuItem
 	 */
 	function isSeparator()
 	{
-		return $this->type=="Separator";
+		return $this->type == menuItemTypeSeparator;
 	}
 
+	function iconStyleClass( $style ) {
+		switch( $style ) {
+			case ICON_STYLE_BRANDS:
+				return 'fab';
+			case ICON_STYLE_LEGACY:
+				return 'fa';
+			case ICON_STYLE_REGULAR:
+				return 'far';
+		}
+		return 'fas';
+	}
 	function getIconHTML()
 	{
 		if( !$this->icon )
@@ -357,7 +372,9 @@ class MenuItem
 		}
 		else if( $this->iconType == ICON_FONT_AWESOME )
 		{
-			return '<span class="menu-icon fa '.$this->icon.'"></span>';
+			
+			$style = $this->iconStyleClass( $this->iconStyle );
+			return '<span class="menu-icon ' . $style . ' '.$this->icon.'"></span>';
 		}
 		else if ( $this->iconType == ICON_FILE )
 		{
@@ -489,19 +506,19 @@ class MenuItem
 		$attrs["itemtitle"] = $this->title;
 		if( $this->style != "" )
 			$attrs["style"] = $this->style;
-		if( $this->openType == "NewWindow" )
+	if( $this->openType == menuOpenTypeNewWindow )
 		{
 			$attrs["rel"] = "external";
 			$attrs["target"] = "_blank";
 			$attrs["link"] = "External";
 		}
 
-		if( $this->linkType == "Internal" && $this->pageType == "webreports" )
+		if( $this->linkType == menuLinkTypeInternal && $this->pageType == "webreports" )
 		{
 			$attrs["href"] = GetTableLink("webreport");
 			$attrs["value"] = GetTableLink("webreport");
 		}
-		elseif( $this->linkType == "Internal" )
+		elseif( $this->linkType == menuLinkTypeInternal )
 		{
 			$params = array();
 
@@ -524,10 +541,14 @@ class MenuItem
 			$attrs["value"] = GetTableLink(GetTableURL($this->table), strtolower($this->pageType), $getParams);
 
 		}
-		elseif( $this->linkType == "External" )
+		elseif( $this->linkType == menuLinkTypeExternal )
 		{
 			$attrs["href"] = $this->href;
 			$attrs["value"] = $this->href;
+			if( $this->linkToAnotherApp ) {
+				$externalLink = ProjectSettings::ext() == 'php' ? 'external.php' : 'external';
+				$attrs["href"] = $externalLink . "?url=".rawurlencode( $this->href );
+			}
 		}
 		return $attrs;
 	}
@@ -730,11 +751,6 @@ class MenuItem
 		}
 	}
 
-	function isWelcome()
-	{
-		return ( $this->menuId == WELCOME_MENU );
-	}
-
 	function isTreelike( $menuMode )
 	{
 		return MENU_VERTICAL == $menuMode && ProjectSettings::isMenuTreelike( $this->menuId );
@@ -746,7 +762,7 @@ class MenuItem
 	 * @return MenuItem reference
 	 */
 	static function & findItemById( $root, $id ) {
-		if( $root->id == $id ) {
+		if( !$id || $root->id == $id ) {
 			return $root;
 		}
 
@@ -759,18 +775,33 @@ class MenuItem
 
 		return null;
 	}
+	
+	/**
+	 * @param MenuItem $root
+	 * @param Array $ids
+	 */
+	protected static function getMenuIds( $root, &$ids = array() ) {
+		$ids[] = $root->id;
+		foreach( $root->children as $child ) {
+			MenuItem::getMenuIds( $child, $ids );
+		}
+		
+		return $ids;
+	}
 
 	/**
 	 * @param MenuItem $root
 	 */
-	static function maxChildId( $root ) {
-		$max = $root->id;
-
-		foreach( $root->children as $child ) {
-			$max = max( $max, MenuItem::maxChildId( $child ) );
+	static function newId( $root ) {
+		$ids = MenuItem::getMenuIds( $root );
+		$newId = substr( md5( implode('', $ids) ), 0, 12 );
+		
+		$i = 0;
+		while( in_array( $newId, $ids ) ) {
+			$newId = $newId . ++$i;
 		}
 
-		return $max;
+		return $newId;
 	}
 
 	/**
@@ -780,22 +811,17 @@ class MenuItem
 	static function cloneNode( $item ) {
 		// stub data
 		$menuNode = array();
-		$childNodes = array();
-		$parent = array(); 
-		$cloneItem = new MenuItem( $menuNode, $childNodes, $parent, $item->menuTableMap, null );
+		$cloneItem = new MenuItem( $menuNode, $item->menuTableMap, null );
 
 		$cloneItem->id = $item->id;
 		$cloneItem->name = $item->name;
 		$cloneItem->type = $item->type;
 		$cloneItem->href = $item->href;	
 		$cloneItem->title = $item->title;
-		$cloneItem->comments = $item->comments;	
-		$cloneItem->color = $item->color;	
-		$cloneItem->style = $item->color;	
+		$cloneItem->style = $item->style;	
 		$cloneItem->table = $item->table;
 		$cloneItem->params = $item->params;
 		$cloneItem->linkType = $item->linkType;
-		$cloneItem->nameType = $item->nameType;
 		$cloneItem->pageType = $item->pageType;
 		$cloneItem->pageId = $item->pageId;
 		$cloneItem->openType = $item->openType;
@@ -803,7 +829,7 @@ class MenuItem
 		$cloneItem->iconType = $item->iconType;
 		$cloneItem->iconShow = $item->iconShow;
 		
-		$cloneItem->menuId = $item->id;
+		$cloneItem->menuId = $item->menuId;
 		$cloneItem->menuTableMap =& $item->menuTableMap;
 
 

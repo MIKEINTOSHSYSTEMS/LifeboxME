@@ -1,9 +1,12 @@
 <?php
+require_once( getabspath( "classes/ciphererdes.php" ) );
+require_once( getabspath( "classes/ciphereraes.php" ) );
+
 class RunnerCipherer
 {
 	public $key = '';
 	public $alg = '';
-	public $mode = '';
+	public $mode = ENCRYPTION_NONE;
 	
 	protected $strTableName = '';
 	
@@ -36,15 +39,26 @@ class RunnerCipherer
 		$this->setConnection();
 		
 		if( $this->connection->dbBased() ) {
-			$this->key = $this->connection->_encryptInfo["key"];
-			$this->alg = $this->connection->_encryptInfo["alg"];
-			$this->mode = $this->connection->_encryptInfo["mode"];
+			$encSettings = ProjectSettings::encryptSettings( $this->connection->connId );
+			if( $encSettings ) {
+				$this->key = $encSettings[ "encryptKey" ];
+				$this->alg = $encSettings[ "encryptAlgorithm" ];
+				$this->mode = $encSettings[ "encryptMethod" ];
+			} 
 		}
 		
 		if($pSet != null)
 			$this->pSet = $pSet;
 		else 
 			$this->pSet = new ProjectSettings($strTableName);
+	}
+
+	/**
+	 * @return Boolean
+	 */
+	function aesAlgorithm() {
+		$alg = $this->connection->_encryptInfo["encryptAlgorithm"];
+		return $alg == ENCRYPTION_ALG_AES || $alg == ENCRYPTION_ALG_AES_192 || $alg == ENCRYPTION_ALG_AES_256;
 	}
 	
 	/**
@@ -59,9 +73,16 @@ class RunnerCipherer
 		else
 			$this->connection = getDefaultConnection();
 
-		if ( $this->connection->dbType == nDATABASE_MSSQLServer && $this->connection->_encryptInfo["alg"] == ENCRYPTION_ALG_AES && $this->connection->_encryptInfo["mode"] == ENCRYPTION_DB )
+		if ( $this->connection->dbType == nDATABASE_MSSQLServer 
+			&& $this->aesAlgorithm() 
+			&& $this->connection->_encryptInfo["encryptMethod"] == ENCRYPTION_DB )
 		{
-			$symmetricSql = mysprintf("OPEN SYMMETRIC KEY [%s] DECRYPTION BY CERTIFICATE [%s];", array($this->connection->_encryptInfo["slqserverkey"], $this->connection->_encryptInfo["slqservercert"]));
+			$symmetricSql = mysprintf( 
+				"OPEN SYMMETRIC KEY [%s] DECRYPTION BY CERTIFICATE [%s];", 
+				array( 
+					$this->connection->_encryptInfo["symmetricKey"], 
+					$this->connection->_encryptInfo["certificate"])
+				);
 			$this->connection->setInitializingSQL($symmetricSql);
 		}
 	}
@@ -179,7 +200,7 @@ class RunnerCipherer
 	public function GetEncryptedFieldName($field, $alias = null, $addAs = false)
 	{
 		$result = "";
-		if ( $this->connection->_encryptInfo["alg"] == ENCRYPTION_ALG_DES)
+		if ( $this->connection->_encryptInfo["encryptAlgorithm"] == ENCRYPTION_ALG_DES)
 		{
 			if( $this->connection->dbType == nDATABASE_Oracle )	
 				$result = "utl_raw.cast_to_varchar2(DBMS_CRYPTO.DECRYPT(utl_raw.cast_to_raw(%s), 4353, utl_raw.cast_to_raw('%s')))";
@@ -190,7 +211,7 @@ class RunnerCipherer
 			elseif( $this->connection->dbType == nDATABASE_PostgreSQL )
 				$result = "pgp_sym_decrypt(CAST(%s as bytea), '%s')";
 		}
-		else if ( $this->connection->_encryptInfo["alg"] == ENCRYPTION_ALG_AES)
+		else if ( $this->aesAlgorithm() )
 		{
 			if( $this->connection->dbType == nDATABASE_Oracle )
 			{
@@ -234,7 +255,7 @@ class RunnerCipherer
 			
 		$result = "";
 		
-		if ( $this->connection->_encryptInfo["alg"] == ENCRYPTION_ALG_DES)
+		if ( $this->connection->_encryptInfo["encryptAlgorithm"] == ENCRYPTION_ALG_DES)
 		{
 			if( $this->connection->dbType == nDATABASE_Oracle )
 				$result = "utl_raw.cast_to_varchar2(DBMS_CRYPTO.ENCRYPT(utl_raw.cast_to_raw(%s), 4353, utl_raw.cast_to_raw('%s')))";	
@@ -245,7 +266,7 @@ class RunnerCipherer
 			elseif( $this->connection->dbType == nDATABASE_PostgreSQL )	
 				$result = "pgp_sym_encrypt(%s, '%s')";
 		}
-		else if ( $this->connection->_encryptInfo["alg"] == ENCRYPTION_ALG_AES)
+		else if ( $this->aesAlgorithm() )
 		{
 			if( $this->connection->dbType == nDATABASE_Oracle )
 			{
@@ -255,7 +276,7 @@ class RunnerCipherer
 			elseif( $this->connection->dbType == nDATABASE_MSSQLServer )
 			{			
 				$result = "EncryptByKey(Key_GUID('%s'), %s)";
-				$this->key = $this->connection->_encryptInfo["slqserverkey"];
+				$this->key = $this->connection->_encryptInfo["symmetricKey"];
 			}
 			elseif( $this->connection->dbType == nDATABASE_MySQL )	
 				$result = "hex(AES_ENCRYPT(%s, '%s'))";			
@@ -318,12 +339,11 @@ class RunnerCipherer
 
 	function getESFunctions()
 	{
-		if ( $this->connection->_encryptInfo["alg"] == ENCRYPTION_ALG_DES )
+		if ( $this->connection->_encryptInfo["encryptAlgorithm"] == ENCRYPTION_ALG_DES )
 			return new RunnerCiphererDES($this->key);
-		if ( $this->connection->_encryptInfo["alg"] == ENCRYPTION_ALG_AES )
-			return new RunnerCiphererAES($this->key);
-		if ( $this->connection->_encryptInfo["alg"] == ENCRYPTION_ALG_AES_256 )
-			return new RunnerCiphererAES($this->key, true);			
+		if ( $this->aesAlgorithm() )
+			return new RunnerCiphererAES($this->key, $this->connection->_encryptInfo["encryptAlgorithm"] );
+		return null;
 	}
 	
 	/**
@@ -332,8 +352,9 @@ class RunnerCipherer
 	 */
 	public static function getForLogin( $loginSet = null )
 	{	
+		global $cman;
 		if( !!Security::loginTable() ) {
-			return new RunnerCipherer( "public.users", $loginSet);
+			return new RunnerCipherer( $cman->getLoginConnId(), $loginSet);
 		}
 		return new RunnerCipherer( GLOBAL_PAGES, null);
 	}	

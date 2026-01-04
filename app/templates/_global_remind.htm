@@ -1,7 +1,7 @@
 <!doctype html>
 <html  {$html_attrs}>
 	<head>
-				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+						<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{$pagetitle}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -10,13 +10,9 @@
     <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
     <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
     <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
-    		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
-	{BEGIN rtlCSS}
-	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
-	{END rtlCSS}
-	{BEGIN styleCSSFiles}
-	<link REL="stylesheet" href="{$stylepath}" type="text/css">
-	{END styleCSSFiles}
+    		{BEGIN styleCSSFiles}
+<link REL="stylesheet" href="{$stylepath}" type="text/css">
+{END styleCSSFiles}
 			
 	</head>
 
@@ -92,8 +88,8 @@
 			
 									data-cellId="grid_c2" data-pageid="{$pageid}"		>
 			<div edit-form-cell class="clearfix">
-								<label data-itemtype="username_email_label" data-itemid="username_email_label" {$item_username_email_label} data-pageid="{$pageid}" data-small class="r-edit-label control-label" for="username_email">
-	{BEGIN username_email_label}Enter username or email:{END username_email_label}
+								<label data-itemtype="username_email_label" data-itemid="username_email_label" {$item_username_email_label} data-pageid="{$pageid}" class="r-edit-label control-label" for="username_email">
+	{BEGIN username_email_label}{mlang_message USERNAME_EMAIL}{END username_email_label}
 </label>					</div>
 		</td>
 	 
@@ -166,13 +162,13 @@
 		<span data-itemtype="remind_button" data-itemid="remind_button" {$item_remind_button} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-primary   
 	" href="#" {$submit_attrs} >
-							Submit			</a>
+							{mlang_message SUBMIT}			</a>
 </span>
 	 
 		<span data-itemtype="back_to_login" data-itemid="back_to_login" {$item_back_to_login} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-link   
 	" href="login.php" {$backlink_attrs} >
-							Back to login page			</a>
+							{mlang_message BACK_TO_LOGIN}			</a>
 </span>
 		</div>					</div>
 			</div>		

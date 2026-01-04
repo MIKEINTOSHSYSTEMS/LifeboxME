@@ -1,318 +1,732 @@
 <?php
-			$optionsArray = array( 'fields' => array( 'gridFields' => array(  ),
-'searchRequiredFields' => array(  ),
-'searchPanelFields' => array(  ),
-'fieldItems' => array(  ) ),
-'pageLinks' => array( 'edit' => false,
-'add' => false,
-'view' => false,
-'print' => false ),
-'layoutHelper' => array( 'formItems' => array( 'formItems' => array( 'grid' => array( 'chart',
-'chart1',
-'dashboard-item',
-'dashboard-item2' ),
-'left' => array( 'logo',
-'expand_button',
-'menu' ),
-'supertop' => array( 'expand_menu_button',
-'collapse_button',
-'breadcrumb',
-'simple_search',
-'list_options',
-'username_button' ),
-'top' => array(  ) ),
-'formXtTags' => array( 'top' => array(  ) ),
-'itemForms' => array( 'chart' => 'grid',
-'chart1' => 'grid',
-'dashboard-item' => 'grid',
-'dashboard-item2' => 'grid',
-'logo' => 'left',
-'expand_button' => 'left',
-'menu' => 'left',
-'expand_menu_button' => 'supertop',
-'collapse_button' => 'supertop',
-'breadcrumb' => 'supertop',
-'simple_search' => 'supertop',
-'list_options' => 'supertop',
-'username_button' => 'supertop' ),
-'itemLocations' => array(  ),
-'itemVisiblity' => array( 'breadcrumb' => 5,
-'expand_menu_button' => 2,
-'expand_button' => 5 ) ),
-'itemsByType' => array( 'breadcrumb' => array( 'breadcrumb' ),
-'logo' => array( 'logo' ),
-'menu' => array( 'menu' ),
-'simple_search' => array( 'simple_search' ),
-'username_button' => array( 'username_button' ),
-'adminarea_link' => array( 'adminarea_link' ),
-'changepassword_link' => array( 'changepassword_link' ),
-'userinfo_link' => array( 'userinfo_link' ),
-'logout_link' => array( 'logout_link' ),
-'expand_menu_button' => array( 'expand_menu_button' ),
-'collapse_button' => array( 'collapse_button' ),
-'chart' => array( 'chart',
-'chart1' ),
-'dashboard-item' => array( 'dashboard-item',
-'dashboard-item2' ),
-'list_options' => array( 'list_options' ),
-'advsearch_link' => array( 'advsearch_link' ),
-'expand_button' => array( 'expand_button' ) ),
-'cellMaps' => array(  ) ),
-'loginForm' => array( 'loginForm' => 3 ),
-'page' => array( 'verticalBar' => true,
-'labeledButtons' => array( 'update_records' => array(  ),
-'print_pages' => array(  ),
-'register_activate_message' => array(  ),
-'details_found' => array(  ) ),
-'hasCustomButtons' => false,
-'customButtons' => array(  ),
-'hasNotifications' => false,
-'menus' => array( array( 'id' => 'main',
-'horizontal' => false ) ),
-'calcTotalsFor' => 1 ),
-'misc' => array( 'type' => 'dashboard',
-'breadcrumb' => true ),
-'events' => array( 'maps' => array(  ),
-'mapsData' => array(  ),
-'buttons' => array(  ) ),
-'dashboard' => array( 'elements' => array( array( 'item' => array( 'type' => 'dashboard-item',
-'table' => 'Dashboard',
-'dashType' => 4,
-'dashName' => 'Dashboard_search',
-'bsStyle' => 'primary',
-'panelType' => 1,
-'icon' => array( 'fa' => 'bell' ),
-'viewTab' => true,
-'editTab' => true,
-'addTab' => true,
-'initialTab' => 0,
-'hiddenDetails' => array(  ),
-'detailsOptions' => array(  ),
-'mapUpdateGridWhenMoved' => true,
-'height' => '500px',
-'reloadInterval' => 0,
-'pageId' => 'search',
-'customLabel' => true,
-'dashLabel' => array( 'type' => 0,
-'text' => 'Dashboard Grid Search' ),
-'tabLeaveSpace' => true ),
-'elementName' => 'Dashboard_search',
-'table' => 'Dashboard',
-'pageName' => 'search',
-'type' => 4,
-'reload' => 0,
-'tabsPageTypes' => array(  ),
-'pageNames' => array(  ),
-'initialTabPageType' => 'view',
-'notUsedDetailTables' => array(  ),
-'details' => array(  ),
-'zoom' => 'undefined',
-'updateMoved' => true,
-'masterTable' => '',
-'tabLocation' => 'above',
-'tabLeaveSpace' => true,
-'panelStyle' => 'primary' ),
-array( 'item' => array( 'type' => 'dashboard-item',
-'table' => 'aio_training_tracking',
-'dashType' => 0,
-'dashName' => 'aio_training_tracking_grid',
-'bsStyle' => 'primary',
-'panelType' => 1,
-'icon' => array( 'glyph' => 'heart-empty' ),
-'viewTab' => true,
-'editTab' => true,
-'addTab' => true,
-'initialTab' => 0,
-'hiddenDetails' => array(  ),
-'detailsOptions' => array(  ),
-'mapUpdateGridWhenMoved' => true,
-'height' => '500px',
-'reloadInterval' => 0,
-'detailsFilterByMaster' => false,
-'detailsMasterTable' => null,
-'pageId' => 'list' ),
-'elementName' => 'aio_training_tracking_grid',
-'table' => 'aio_training_tracking',
-'pageName' => 'list',
-'type' => 0,
-'reload' => 0,
-'tabsPageTypes' => array(  ),
-'pageNames' => array(  ),
-'initialTabPageType' => 'view',
-'notUsedDetailTables' => array(  ),
-'details' => array(  ),
-'zoom' => 'undefined',
-'updateMoved' => true,
-'masterTable' => '',
-'tabLocation' => 'above',
-'panelStyle' => 'primary' ) ) ),
-'dashSearch' => array( 'searchFields' => array(  ),
-'allSearchFields' => array(  ),
-'googleLikeFields' => array(  ) ) );
-			$pageArray = array( 'id' => 'all_in_one_training',
-'type' => 'dashboard',
-'layoutId' => 'leftbar',
-'disabled' => 0,
-'default' => 0,
-'forms' => array( 'grid' => array( 'modelId' => 'dashboard-grid',
-'grid' => array( array( 'section' => '',
-'cells' => array( array( 'cell' => 'c10' ),
-array( 'cell' => 'c11' ) ) ),
-array( 'cells' => array( array( 'cell' => 'c1' ),
-array( 'cell' => 'c' ) ),
-'section' => '' ),
-array( 'section' => '',
-'cells' => array( array( 'cell' => 'c2' ),
-array( 'cell' => 'c3' ) ) ),
-array( 'section' => '',
-'cells' => array( array( 'cell' => 'c8',
-'colspan' => 2 ) ) ),
-array( 'section' => '',
-'cells' => array( array( 'cell' => 'c6',
-'colspan' => 2 ) ) ),
-array( 'section' => '',
-'cells' => array( array( 'cell' => 'c4' ),
-array( 'cell' => 'c5' ) ) ) ),
-'cells' => array( 'c1' => array( 'model' => 'c1',
-'items' => array( 'chart' ),
-'align' => 'center' ),
-'c' => array( 'model' => 'c1',
-'items' => array( 'chart1' ),
-'align' => 'center' ),
-'c2' => array( 'model' => 'c1',
-'items' => array(  ) ),
-'c3' => array( 'model' => 'c1',
-'items' => array(  ) ),
-'c4' => array( 'model' => 'c1',
-'items' => array(  ) ),
-'c5' => array( 'model' => 'c1',
-'items' => array(  ) ),
-'c6' => array( 'model' => 'c1',
-'items' => array( 'dashboard-item' ),
-'align' => 'center',
-'width' => '' ),
-'c10' => array( 'model' => 'c1',
-'items' => array(  ) ),
-'c11' => array( 'model' => 'c1',
-'items' => array(  ) ),
-'c8' => array( 'model' => 'c1',
-'items' => array( 'dashboard-item2' ),
-'align' => 'center',
-'width' => '' ) ),
-'deferredItems' => array(  ),
-'recsPerRow' => 1 ),
-'left' => array( 'modelId' => 'leftbar-dashboard',
-'grid' => array( array( 'cells' => array( array( 'cell' => 'c0' ) ),
-'section' => '' ),
-array( 'cells' => array( array( 'cell' => 'c1' ) ),
-'section' => '' ) ),
-'cells' => array( 'c0' => array( 'model' => 'c0',
-'items' => array( 'logo',
-'expand_button' ) ),
-'c1' => array( 'model' => 'c1',
-'items' => array( 'menu' ) ) ),
-'deferredItems' => array(  ),
-'recsPerRow' => 1 ),
-'supertop' => array( 'modelId' => 'leftbar-top-dashboard',
-'grid' => array( array( 'cells' => array( array( 'cell' => 'c1' ),
-array( 'cell' => 'c2' ) ),
-'section' => '' ) ),
-'cells' => array( 'c1' => array( 'model' => 'c1',
-'items' => array( 'expand_menu_button',
-'collapse_button',
-'breadcrumb' ) ),
-'c2' => array( 'model' => 'c2',
-'items' => array( 'simple_search',
-'list_options',
-'username_button' ) ) ),
-'deferredItems' => array(  ),
-'recsPerRow' => 1 ),
-'top' => array( 'modelId' => 'dashboard-top',
-'grid' => array( array( 'cells' => array( array( 'cell' => 'c4' ) ),
-'section' => '' ),
-array( 'section' => '',
-'cells' => array( array( 'cell' => 'c5' ) ) ),
-array( 'section' => '',
-'cells' => array( array( 'cell' => 'c' ) ) ) ),
-'cells' => array( 'c4' => array( 'model' => 'c4',
-'items' => array(  ) ),
-'c' => array( 'model' => 'c4',
-'items' => array(  ) ),
-'c5' => array( 'model' => 'c4',
-'items' => array(  ),
-'align' => 'center' ) ),
-'deferredItems' => array(  ),
-'recsPerRow' => 1 ) ),
-'items' => array( 'breadcrumb' => array( 'type' => 'breadcrumb' ),
-'logo' => array( 'type' => 'logo' ),
-'menu' => array( 'type' => 'menu' ),
-'simple_search' => array( 'type' => 'simple_search' ),
-'username_button' => array( 'type' => 'username_button',
-'items' => array( 'userinfo_link',
-'logout_link',
-'adminarea_link',
-'changepassword_link' ) ),
-'adminarea_link' => array( 'type' => 'adminarea_link' ),
-'changepassword_link' => array( 'type' => 'changepassword_link' ),
-'userinfo_link' => array( 'type' => 'userinfo_link' ),
-'logout_link' => array( 'type' => 'logout_link' ),
-'expand_menu_button' => array( 'type' => 'expand_menu_button' ),
-'collapse_button' => array( 'type' => 'collapse_button' ),
-'chart' => array( 'type' => 'chart',
-'table' => 'aio_training_tracking Chart',
-'icon' => array( 'glyph' => 'signal' ) ),
-'chart1' => array( 'type' => 'chart',
-'table' => 'aio_training_tracking Chart by sex',
-'icon' => array( 'glyph' => 'signal' ) ),
-'dashboard-item' => array( 'type' => 'dashboard-item',
-'table' => 'aio_training_tracking',
-'dashType' => 0,
-'dashName' => 'aio_training_tracking_grid',
-'bsStyle' => 'primary',
-'panelType' => 1,
-'icon' => array( 'glyph' => 'heart-empty' ),
-'viewTab' => true,
-'editTab' => true,
-'addTab' => true,
-'initialTab' => 0,
-'hiddenDetails' => array(  ),
-'detailsOptions' => array(  ),
-'mapUpdateGridWhenMoved' => true,
-'height' => '500px',
-'reloadInterval' => 0,
-'detailsFilterByMaster' => false,
-'detailsMasterTable' => null,
-'pageId' => 'list' ),
-'list_options' => array( 'type' => 'list_options',
-'items' => array( 'advsearch_link' ) ),
-'advsearch_link' => array( 'type' => 'advsearch_link' ),
-'dashboard-item2' => array( 'type' => 'dashboard-item',
-'table' => 'Dashboard',
-'dashType' => 4,
-'dashName' => 'Dashboard_search',
-'bsStyle' => 'primary',
-'panelType' => 1,
-'icon' => array( 'fa' => 'bell' ),
-'viewTab' => true,
-'editTab' => true,
-'addTab' => true,
-'initialTab' => 0,
-'hiddenDetails' => array(  ),
-'detailsOptions' => array(  ),
-'mapUpdateGridWhenMoved' => true,
-'height' => '500px',
-'reloadInterval' => 0,
-'pageId' => 'search',
-'customLabel' => true,
-'dashLabel' => array( 'type' => 0,
-'text' => 'Dashboard Grid Search' ),
-'tabLeaveSpace' => true ),
-'expand_button' => array( 'type' => 'expand_button' ) ),
-'dbProps' => array(  ),
-'version' => 14,
-'imageItem' => array( 'type' => 'page_image' ),
-'imageBgColor' => '#f2f2f2',
-'controlsBgColor' => 'white',
-'imagePosition' => 'right',
-'listTotals' => 1 );
+			$optionsArray = array(
+	'fields' => array(
+		'gridFields' => array( 
+			 
+		),
+		'searchRequiredFields' => array( 
+			 
+		),
+		'searchPanelFields' => array( 
+			 
+		),
+		'fieldItems' => array(
+			 
+		) 
+	),
+	'pageLinks' => array(
+		'edit' => false,
+		'add' => false,
+		'view' => false,
+		'print' => false 
+	),
+	'layoutHelper' => array(
+		'formItems' => array(
+			'formItems' => array(
+				'grid' => array( 
+					'chart',
+					'chart1',
+					'dashboard-item',
+					'dashboard-item2' 
+				),
+				'left' => array( 
+					'logo',
+					'expand_button',
+					'menu' 
+				),
+				'supertop' => array( 
+					'expand_menu_button',
+					'collapse_button',
+					'breadcrumb',
+					'simple_search',
+					'list_options',
+					'username_button' 
+				),
+				'top' => array( 
+					 
+				) 
+			),
+			'formXtTags' => array(
+				'top' => array( 
+					 
+				) 
+			),
+			'itemForms' => array(
+				'chart' => 'grid',
+				'chart1' => 'grid',
+				'dashboard-item' => 'grid',
+				'dashboard-item2' => 'grid',
+				'logo' => 'left',
+				'expand_button' => 'left',
+				'menu' => 'left',
+				'expand_menu_button' => 'supertop',
+				'collapse_button' => 'supertop',
+				'breadcrumb' => 'supertop',
+				'simple_search' => 'supertop',
+				'list_options' => 'supertop',
+				'username_button' => 'supertop' 
+			),
+			'itemLocations' => array(
+				 
+			),
+			'itemVisiblity' => array(
+				'breadcrumb' => 5,
+				'expand_menu_button' => 2,
+				'expand_button' => 5 
+			) 
+		),
+		'itemsByType' => array(
+			'breadcrumb' => array( 
+				'breadcrumb' 
+			),
+			'logo' => array( 
+				'logo' 
+			),
+			'menu' => array( 
+				'menu' 
+			),
+			'simple_search' => array( 
+				'simple_search' 
+			),
+			'username_button' => array( 
+				'username_button' 
+			),
+			'adminarea_link' => array( 
+				'adminarea_link' 
+			),
+			'changepassword_link' => array( 
+				'changepassword_link' 
+			),
+			'userinfo_link' => array( 
+				'userinfo_link' 
+			),
+			'logout_link' => array( 
+				'logout_link' 
+			),
+			'expand_menu_button' => array( 
+				'expand_menu_button' 
+			),
+			'collapse_button' => array( 
+				'collapse_button' 
+			),
+			'chart' => array( 
+				'chart',
+				'chart1' 
+			),
+			'dashboard-item' => array( 
+				'dashboard-item',
+				'dashboard-item2' 
+			),
+			'list_options' => array( 
+				'list_options' 
+			),
+			'advsearch_link' => array( 
+				'advsearch_link' 
+			),
+			'expand_button' => array( 
+				'expand_button' 
+			) 
+		),
+		'cellMaps' => array(
+			 
+		) 
+	),
+	'loginForm' => array(
+		'loginForm' => 3 
+	),
+	'page' => array(
+		'verticalBar' => true,
+		'labeledButtons' => array(
+			'update_records' => array(
+				 
+			),
+			'print_pages' => array(
+				 
+			),
+			'register_activate_message' => array(
+				 
+			),
+			'details_found' => array(
+				 
+			) 
+		),
+		'hasCustomButtons' => false,
+		'customButtons' => array( 
+			 
+		),
+		'codeSnippets' => array( 
+			 
+		),
+		'clickHandlerSnippets' => array( 
+			 
+		),
+		'hasNotifications' => false,
+		'menus' => array( 
+			array(
+				'id' => 'main',
+				'horizontal' => false 
+			) 
+		),
+		'calcTotalsFor' => 1,
+		'hasCharts' => true 
+	),
+	'misc' => array(
+		'type' => 'dashboard',
+		'breadcrumb' => true 
+	),
+	'events' => array(
+		'maps' => array( 
+			 
+		),
+		'mapsData' => array(
+			 
+		),
+		'buttons' => array( 
+			 
+		) 
+	),
+	'dashboard' => array(
+		'elements' => array( 
+			array(
+				'item' => array(
+					'type' => 'dashboard-item',
+					'table' => 4701,
+					'dashType' => 4,
+					'dashName' => 'Dashboard_search',
+					'bsStyle' => 'primary',
+					'panelType' => 1,
+					'icon' => array(
+						'fa' => 'bell' 
+					),
+					'viewTab' => true,
+					'editTab' => true,
+					'addTab' => true,
+					'initialTab' => 0,
+					'hiddenDetails' => array(
+						 
+					),
+					'detailsOptions' => array( 
+						 
+					),
+					'mapUpdateGridWhenMoved' => true,
+					'height' => '500px',
+					'reloadInterval' => 0,
+					'pageId' => 'search',
+					'customLabel' => true,
+					'dashLabel' => array(
+						'type' => 0,
+						'text' => 'Dashboard Grid Search' 
+					),
+					'tabLeaveSpace' => true 
+				),
+				'elementName' => 'Dashboard_search',
+				'table' => 'Dashboard',
+				'pageName' => 'search',
+				'type' => 4,
+				'reload' => 0,
+				'tabsPageTypes' => array( 
+					 
+				),
+				'pageNames' => array(
+					 
+				),
+				'initialTabPageType' => 'view',
+				'notUsedDetailTables' => array( 
+					 
+				),
+				'details' => array(
+					 
+				),
+				'zoom' => '',
+				'updateMoved' => true,
+				'masterTable' => '',
+				'tabLocation' => 'above',
+				'tabLeaveSpace' => true,
+				'panelStyle' => 'primary' 
+			),
+			array(
+				'item' => array(
+					'type' => 'dashboard-item',
+					'table' => 4700,
+					'dashType' => 0,
+					'dashName' => 'aio_training_tracking_grid',
+					'bsStyle' => 'primary',
+					'panelType' => 1,
+					'icon' => array(
+						'glyph' => 'heart-empty' 
+					),
+					'viewTab' => true,
+					'editTab' => true,
+					'addTab' => true,
+					'initialTab' => 0,
+					'hiddenDetails' => array(
+						 
+					),
+					'detailsOptions' => array( 
+						 
+					),
+					'mapUpdateGridWhenMoved' => true,
+					'height' => '500px',
+					'reloadInterval' => 0,
+					'detailsFilterByMaster' => false,
+					'detailsMasterTable' => null,
+					'pageId' => 'list' 
+				),
+				'elementName' => 'aio_training_tracking_grid',
+				'table' => 'aio_training_tracking',
+				'pageName' => 'list',
+				'type' => 0,
+				'reload' => 0,
+				'tabsPageTypes' => array( 
+					 
+				),
+				'pageNames' => array(
+					 
+				),
+				'initialTabPageType' => 'view',
+				'notUsedDetailTables' => array( 
+					 
+				),
+				'details' => array(
+					 
+				),
+				'zoom' => '',
+				'updateMoved' => true,
+				'masterTable' => '',
+				'tabLocation' => 'above',
+				'panelStyle' => 'primary' 
+			) 
+		) 
+	),
+	'dashSearch' => array(
+		'searchFields' => array(
+			 
+		),
+		'allSearchFields' => array( 
+			 
+		),
+		'googleLikeFields' => array( 
+			 
+		) 
+	) 
+);
+			$pageArray = array(
+	'id' => 'all_in_one_training',
+	'type' => 'dashboard',
+	'layoutId' => 'leftbar',
+	'disabled' => 0,
+	'default' => 0,
+	'forms' => array(
+		'grid' => array(
+			'modelId' => 'dashboard-grid',
+			'grid' => array( 
+				array(
+					'section' => '',
+					'cells' => array( 
+						array(
+							'cell' => 'c10' 
+						),
+						array(
+							'cell' => 'c11' 
+						) 
+					) 
+				),
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c1' 
+						),
+						array(
+							'cell' => 'c' 
+						) 
+					),
+					'section' => '' 
+				),
+				array(
+					'section' => '',
+					'cells' => array( 
+						array(
+							'cell' => 'c2' 
+						),
+						array(
+							'cell' => 'c3' 
+						) 
+					) 
+				),
+				array(
+					'section' => '',
+					'cells' => array( 
+						array(
+							'cell' => 'c8',
+							'colspan' => 2 
+						) 
+					) 
+				),
+				array(
+					'section' => '',
+					'cells' => array( 
+						array(
+							'cell' => 'c6',
+							'colspan' => 2 
+						) 
+					) 
+				),
+				array(
+					'section' => '',
+					'cells' => array( 
+						array(
+							'cell' => 'c4' 
+						),
+						array(
+							'cell' => 'c5' 
+						) 
+					) 
+				) 
+			),
+			'cells' => array(
+				'c1' => array(
+					'model' => 'c1',
+					'items' => array( 
+						'chart' 
+					),
+					'align' => 'center' 
+				),
+				'c' => array(
+					'model' => 'c1',
+					'items' => array( 
+						'chart1' 
+					),
+					'align' => 'center' 
+				),
+				'c2' => array(
+					'model' => 'c1',
+					'items' => array( 
+						 
+					) 
+				),
+				'c3' => array(
+					'model' => 'c1',
+					'items' => array( 
+						 
+					) 
+				),
+				'c4' => array(
+					'model' => 'c1',
+					'items' => array( 
+						 
+					) 
+				),
+				'c5' => array(
+					'model' => 'c1',
+					'items' => array( 
+						 
+					) 
+				),
+				'c6' => array(
+					'model' => 'c1',
+					'items' => array( 
+						'dashboard-item' 
+					),
+					'align' => 'center',
+					'width' => '' 
+				),
+				'c10' => array(
+					'model' => 'c1',
+					'items' => array( 
+						 
+					) 
+				),
+				'c11' => array(
+					'model' => 'c1',
+					'items' => array( 
+						 
+					) 
+				),
+				'c8' => array(
+					'model' => 'c1',
+					'items' => array( 
+						'dashboard-item2' 
+					),
+					'align' => 'center',
+					'width' => '' 
+				) 
+			),
+			'deferredItems' => array( 
+				 
+			),
+			'recsPerRow' => 1 
+		),
+		'left' => array(
+			'modelId' => 'leftbar-dashboard',
+			'grid' => array( 
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c0' 
+						) 
+					),
+					'section' => '' 
+				),
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c1' 
+						) 
+					),
+					'section' => '' 
+				) 
+			),
+			'cells' => array(
+				'c0' => array(
+					'model' => 'c0',
+					'items' => array( 
+						'logo',
+						'expand_button' 
+					) 
+				),
+				'c1' => array(
+					'model' => 'c1',
+					'items' => array( 
+						'menu' 
+					) 
+				) 
+			),
+			'deferredItems' => array( 
+				 
+			),
+			'recsPerRow' => 1 
+		),
+		'supertop' => array(
+			'modelId' => 'leftbar-top-dashboard',
+			'grid' => array( 
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c1' 
+						),
+						array(
+							'cell' => 'c2' 
+						) 
+					),
+					'section' => '' 
+				) 
+			),
+			'cells' => array(
+				'c1' => array(
+					'model' => 'c1',
+					'items' => array( 
+						'expand_menu_button',
+						'collapse_button',
+						'breadcrumb' 
+					) 
+				),
+				'c2' => array(
+					'model' => 'c2',
+					'items' => array( 
+						'simple_search',
+						'list_options',
+						'username_button' 
+					) 
+				) 
+			),
+			'deferredItems' => array( 
+				 
+			),
+			'recsPerRow' => 1 
+		),
+		'top' => array(
+			'modelId' => 'dashboard-top',
+			'grid' => array( 
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c4' 
+						) 
+					),
+					'section' => '' 
+				),
+				array(
+					'section' => '',
+					'cells' => array( 
+						array(
+							'cell' => 'c5' 
+						) 
+					) 
+				),
+				array(
+					'section' => '',
+					'cells' => array( 
+						array(
+							'cell' => 'c' 
+						) 
+					) 
+				) 
+			),
+			'cells' => array(
+				'c4' => array(
+					'model' => 'c4',
+					'items' => array( 
+						 
+					) 
+				),
+				'c' => array(
+					'model' => 'c4',
+					'items' => array( 
+						 
+					) 
+				),
+				'c5' => array(
+					'model' => 'c4',
+					'items' => array( 
+						 
+					),
+					'align' => 'center' 
+				) 
+			),
+			'deferredItems' => array( 
+				 
+			),
+			'recsPerRow' => 1 
+		) 
+	),
+	'items' => array(
+		'breadcrumb' => array(
+			'type' => 'breadcrumb' 
+		),
+		'logo' => array(
+			'type' => 'logo' 
+		),
+		'menu' => array(
+			'type' => 'menu' 
+		),
+		'simple_search' => array(
+			'type' => 'simple_search' 
+		),
+		'username_button' => array(
+			'type' => 'username_button',
+			'items' => array( 
+				'userinfo_link',
+				'logout_link',
+				'adminarea_link',
+				'changepassword_link' 
+			) 
+		),
+		'adminarea_link' => array(
+			'type' => 'adminarea_link' 
+		),
+		'changepassword_link' => array(
+			'type' => 'changepassword_link' 
+		),
+		'userinfo_link' => array(
+			'type' => 'userinfo_link' 
+		),
+		'logout_link' => array(
+			'type' => 'logout_link' 
+		),
+		'expand_menu_button' => array(
+			'type' => 'expand_menu_button' 
+		),
+		'collapse_button' => array(
+			'type' => 'collapse_button' 
+		),
+		'chart' => array(
+			'type' => 'chart',
+			'table' => 4717,
+			'icon' => array(
+				'glyph' => 'signal' 
+			) 
+		),
+		'chart1' => array(
+			'type' => 'chart',
+			'table' => 4720,
+			'icon' => array(
+				'glyph' => 'signal' 
+			) 
+		),
+		'dashboard-item' => array(
+			'type' => 'dashboard-item',
+			'table' => 4700,
+			'dashType' => 0,
+			'dashName' => 'aio_training_tracking_grid',
+			'bsStyle' => 'primary',
+			'panelType' => 1,
+			'icon' => array(
+				'glyph' => 'heart-empty' 
+			),
+			'viewTab' => true,
+			'editTab' => true,
+			'addTab' => true,
+			'initialTab' => 0,
+			'hiddenDetails' => array(
+				 
+			),
+			'detailsOptions' => array( 
+				 
+			),
+			'mapUpdateGridWhenMoved' => true,
+			'height' => '500px',
+			'reloadInterval' => 0,
+			'detailsFilterByMaster' => false,
+			'detailsMasterTable' => null,
+			'pageId' => 'list' 
+		),
+		'list_options' => array(
+			'type' => 'list_options',
+			'items' => array( 
+				'advsearch_link' 
+			) 
+		),
+		'advsearch_link' => array(
+			'type' => 'advsearch_link' 
+		),
+		'dashboard-item2' => array(
+			'type' => 'dashboard-item',
+			'table' => 4701,
+			'dashType' => 4,
+			'dashName' => 'Dashboard_search',
+			'bsStyle' => 'primary',
+			'panelType' => 1,
+			'icon' => array(
+				'fa' => 'bell' 
+			),
+			'viewTab' => true,
+			'editTab' => true,
+			'addTab' => true,
+			'initialTab' => 0,
+			'hiddenDetails' => array(
+				 
+			),
+			'detailsOptions' => array( 
+				 
+			),
+			'mapUpdateGridWhenMoved' => true,
+			'height' => '500px',
+			'reloadInterval' => 0,
+			'pageId' => 'search',
+			'customLabel' => true,
+			'dashLabel' => array(
+				'type' => 0,
+				'text' => 'Dashboard Grid Search' 
+			),
+			'tabLeaveSpace' => true 
+		),
+		'expand_button' => array(
+			'type' => 'expand_button' 
+		) 
+	),
+	'dbProps' => array(
+		 
+	),
+	'version' => 14,
+	'imageItem' => array(
+		'type' => 'page_image' 
+	),
+	'imageBgColor' => '#f2f2f2',
+	'controlsBgColor' => 'white',
+	'imagePosition' => 'right',
+	'listTotals' => 1,
+	'title' => array(
+		 
+	) 
+);
 		?>

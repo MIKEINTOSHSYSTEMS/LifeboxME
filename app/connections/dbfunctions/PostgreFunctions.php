@@ -32,7 +32,9 @@ class PostgreFunctions extends DBFunctions
 	 */
 	public function addSlashes( $str )
 	{
-				return pg_escape_string( $str );
+		if( ProjectSettings::ext() == "php") {
+			return pg_escape_string( $str );
+		}
 		return parent::addSlashes( $str );
 	}
 
@@ -42,8 +44,10 @@ class PostgreFunctions extends DBFunctions
 	 */
 	public function addSlashesBinary( $str )
 	{
-				if( $this->postgreDbVersion < 9 )
-			return "'".pg_escape_bytea($str)."'";
+		if( ProjectSettings::ext() == "php") {
+			if( $this->postgreDbVersion < 9 )
+				return "'".pg_escape_bytea($str)."'";
+		}
 
 		if( !strlen($str) )
 			return "''";
@@ -58,8 +62,10 @@ class PostgreFunctions extends DBFunctions
 	 */
 	public function stripSlashesBinary( $str )
 	{
-				if( $this->postgreDbVersion < 9 )
-			return pg_unescape_bytea($str);
+		if( ProjectSettings::ext() == "php") {
+			if( $this->postgreDbVersion < 9 )
+				return pg_unescape_bytea($str);
+		}
 
 		return hex2bin( substr($str, 2) );
 	}

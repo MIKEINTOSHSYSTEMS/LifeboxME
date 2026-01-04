@@ -188,11 +188,12 @@ class Button
 		$masterDs = getDataSource( $this->masterTable, $mpSet );
 		
 		$filters = array();
-		foreach( $pSet->getMasterTablesArr() as $i => $masterTableInfo ) {
-			if( $this->masterTable != $masterTableInfo['mDataSourceTable'] )
+
+		foreach( $pSet->getMasterTables() as $i => $master ) {
+			if( $this->masterTable != $master['table'] )
 				continue;
 			
-			foreach( $masterTableInfo['masterKeys'] as $j => $mKeyField ) {
+			foreach( $master['masterKeys'] as $j => $mKeyField ) {
 				$filters[] = DataCondition::FieldEquals( $mKeyField, $this->masterKeys[ $j + 1 ] );
 			}				
 		}

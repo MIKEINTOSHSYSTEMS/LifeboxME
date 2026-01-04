@@ -13,7 +13,7 @@ class ViewEmailHyperlinkField extends ViewControl
 		$title = $containsMailTo ? substr($result, 8) : $result ;
 		$link = $containsMailTo ? $result : "mailto:".$result ;
 		
-		return my_json_encode( array(
+		return runner_json_encode( array(
 			"text" => $title,
 			"link" => $link
 		) );

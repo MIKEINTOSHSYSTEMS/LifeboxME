@@ -7,14 +7,17 @@ header("Expires: Thu, 01 Jan 1970 00:00:01 GMT");
 require_once("classes/searchclause.php");
 require_once("classes/sql.php");
 
-require_once("include/lbapt_unified_activities_variables.php");
+$requestTable = 'public.lbapt_unified_activities';
+$strTableName = 'public.lbapt_unified_activities';
+$requestPage = "export";
 
 if( Security::hasLogin() ) {
-	if( !Security::processPageSecurity( $strtablename, 'P' ) )
+	if( !Security::processPageSecurity( $strTableName, 'P' ) )
 		return;
 }
 
 
+importExcelLibrary();
 require_once("include/export_functions.php");
 require_once("classes/exportpage.php");
 require_once("include/xtempl.php");

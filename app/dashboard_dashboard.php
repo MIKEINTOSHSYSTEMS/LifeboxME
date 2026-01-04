@@ -2,6 +2,11 @@
 @ini_set("display_errors","1");
 @ini_set("display_startup_errors","1");
 
+$requestTable = 'Dashboard';
+$strTableName = 'Dashboard';
+$requestPage = "dashboard";
+
+
 require_once("include/dbcommon.php");
 require_once("classes/searchclause.php");
 require_once('include/xtempl.php');
@@ -9,10 +14,8 @@ require_once('classes/dashboardpage.php');
 
 add_nocache_headers();
 
-require_once("include/dashboard_variables.php");
-
 if( Security::hasLogin() ) {
-	if( !Security::processPageSecurity( $strtablename, 'S' ) )
+	if( !Security::processPageSecurity( $strTableName, 'S' ) )
 		return;
 }
 
@@ -26,7 +29,10 @@ $params["tName"] = $strTableName;
 $params["mode"] = postvalue("mode");
 $params["pageType"] = PAGE_DASHBOARD;
 $params["pageName"] = postvalue("page");
-				
+
+$params["action"] = postvalue("a");
+$params["elementName"] = postvalue("elementName");
+
 $pageObject = new DashboardPage($params);
 $pageObject->init();
 

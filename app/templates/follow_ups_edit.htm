@@ -1,7 +1,7 @@
 <!doctype html>
 <html  {$html_attrs}>
 	<head>
-				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+						<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{$pagetitle}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -10,13 +10,9 @@
     <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
     <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
     <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
-    		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
-	{BEGIN rtlCSS}
-	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
-	{END rtlCSS}
-	{BEGIN styleCSSFiles}
-	<link REL="stylesheet" href="{$stylepath}" type="text/css">
-	{END styleCSSFiles}
+    		{BEGIN styleCSSFiles}
+<link REL="stylesheet" href="{$stylepath}" type="text/css">
+{END styleCSSFiles}
 			
 	</head>
 
@@ -50,7 +46,7 @@
 
 			<div class="clearfix " data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell data-itemid="expand_button" {$item_expand_button} data-topcell-item-type="expand_button" >
 				<span data-itemtype="expand_button" data-itemid="expand_button" {$item_expand_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Expand" class="btn btn-link   
+	<a type="button" title="{mlang_message EXPAND}" class="btn btn-link   
 	" href="#" >
 					<span class="glyphicon glyphicon-triangle-right"></span>
 										</a>
@@ -218,7 +214,7 @@
 							 
 				<span class="navbar-form  navbar-header" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="expand_menu_button" {$item_expand_menu_button} data-topcell-item-type="expand_menu_button" >
 				<span data-itemtype="expand_menu_button" data-itemid="expand_menu_button" {$item_expand_menu_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Show menu" class="btn-link   
+	<a type="button" title="{mlang_message SHOW_MENU}" class="btn-link   
 	 glyphicon glyphicon-menu-hamburger" href="#" >		
 				
 								</a>
@@ -227,7 +223,7 @@
 		 
 				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="collapse_button" {$item_collapse_button} data-topcell-item-type="collapse_button" >
 				<span data-itemtype="collapse_button" data-itemid="collapse_button" {$item_collapse_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Collapse" class="btn-link   
+	<a type="button" title="{mlang_message COLLAPSE}" class="btn-link   
 	 glyphicon glyphicon-triangle-left" href="#" >		
 				
 								</a>
@@ -240,7 +236,7 @@
 <span data-itemtype="loginform_login" data-itemid="loginform_login" {$item_loginform_login} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-primary   
 	" href="#" {$guestloginlink_attrs} >
-							Login			</a>
+							{mlang_message LOGIN}			</a>
 </span>
 {END guestloginbutton}
 			</span>
@@ -251,14 +247,14 @@
 	<span class="dropdown ">
 		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
 			{BEGIN userbutton_icon}							<span class="glyphicon glyphicon-user"></span>
-						{END userbutton_icon}{$userbutton_image}			{$username}			<span class="caret"></span>
+						{END userbutton_icon}{$userbutton_image}			{$mlp_push}{$mlparam username var username}{$mltext %username%}{$mlp_pop}			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu">
 							{BEGIN userinfo_link}
 	<li data-itemtype="userinfo_link" data-itemid="userinfo_link" {$item_userinfo_link} data-pageid="{$pageid}" data-small >
 				<a  href="userinfo.php"  title="" >
 				
-		User Profile		
+		{mlang_message USERINFO}		
 		</a>
 	</li>
 {END userinfo_link}
@@ -266,7 +262,7 @@
 	<li data-itemtype="logout_link" data-itemid="logout_link" {$item_logout_link} data-pageid="{$pageid}" data-small >
 				<a  href="#" {$logoutlink_attrs}  title="" >
 				
-		Log out		
+		{mlang_message LOG_OUT}		
 		</a>
 	</li>
 {END logoutbutton}
@@ -274,7 +270,7 @@
 	<li data-itemtype="adminarea_link" data-itemid="adminarea_link" {$item_adminarea_link} data-pageid="{$pageid}" data-small >
 				<a  href="admin_rights_list.php"  title="" >
 				
-		Admin Area		
+		{mlang_message AA_ADMINAREA}		
 		</a>
 	</li>
 {END adminarea_link}
@@ -282,7 +278,7 @@
 	<li data-itemtype="changepassword_link" data-itemid="changepassword_link" {$item_changepassword_link} data-pageid="{$pageid}" data-small >
 				<a  href="changepwd.php" {$changepwdlink_attrs} id="changePasswordButton{$id}"  title="" >
 				
-		Change password		
+		{mlang_message CHANGE_PASSWORD}		
 		</a>
 	</li>
 {END changepwd_link}
@@ -331,10 +327,10 @@
 <h5>{$message}</h5>
 <div>
 {BEGIN message_back_button}
-			<button class="btn btn-sm btn-default" {$backbutton_attrs}>Back to list</button>
+			<button class="btn btn-sm btn-default" {$backbutton_attrs}>{mlang_message BACK_TO_LIST}</button>
 	{END message_back_button}
 {BEGIN message_view_page_button}
-		<a class="btn btn-sm btn-default" href="follow_ups_view.php?{$editlink}" {$view_page_button_attrs}>View</a>
+		<a class="btn btn-sm btn-default" href="follow_ups_view.php?{$editlink}" {$view_page_button_attrs}>{mlang_message VIEW}</a>
 {END message_view_page_button}
 </div>
 </div>
@@ -389,17 +385,19 @@
 	data-signal-error-for="case_id{$id}" {$required_attr_case_id}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="case_id" data-fieldname="case_id" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_case_id}">
-		{BEGIN case_id_label}{$label public_follow_ups case_id }{END case_id_label}
+	<label class="r-edit-label control-label {$case_id_label_class}" for="{$labelfor_case_id}">
+		{BEGIN case_id_label}
+			{$case_id_forward_control}
+			{$label public_follow_ups case_id }			{END case_id_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$case_id_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="case_id" {$tooltipAttr public_follow_ups case_id } >
+		<div class="r-edit-tooltip" data-helpfor="case_id" {$tooltipAttr public_follow_ups case_id } >
 		<div class="text-muted" >
 		{$tooltip public_follow_ups case_id }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END case_id_fieldblock}
@@ -411,17 +409,19 @@
 	data-signal-error-for="facility_id{$id}" {$required_attr_facility_id}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="facility_id" data-fieldname="facility_id" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_facility_id}">
-		{BEGIN facility_id_label}{$label public_follow_ups facility_id }{END facility_id_label}
+	<label class="r-edit-label control-label {$facility_id_label_class}" for="{$labelfor_facility_id}">
+		{BEGIN facility_id_label}
+			{$facility_id_forward_control}
+			{$label public_follow_ups facility_id }			{END facility_id_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$facility_id_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="facility_id" {$tooltipAttr public_follow_ups facility_id } >
+		<div class="r-edit-tooltip" data-helpfor="facility_id" {$tooltipAttr public_follow_ups facility_id } >
 		<div class="text-muted" >
 		{$tooltip public_follow_ups facility_id }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END facility_id_fieldblock}
@@ -433,17 +433,19 @@
 	data-signal-error-for="phone_call_date{$id}" {$required_attr_phone_call_date}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="phone_call_date" data-fieldname="phone_call_date" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_phone_call_date}">
-		{BEGIN phone_call_date_label}{$label public_follow_ups phone_call_date }{END phone_call_date_label}
+	<label class="r-edit-label control-label {$phone_call_date_label_class}" for="{$labelfor_phone_call_date}">
+		{BEGIN phone_call_date_label}
+			{$phone_call_date_forward_control}
+			{$label public_follow_ups phone_call_date }			{END phone_call_date_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$phone_call_date_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="phone_call_date" {$tooltipAttr public_follow_ups phone_call_date } >
+		<div class="r-edit-tooltip" data-helpfor="phone_call_date" {$tooltipAttr public_follow_ups phone_call_date } >
 		<div class="text-muted" >
 		{$tooltip public_follow_ups phone_call_date }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END phone_call_date_fieldblock}
@@ -455,17 +457,19 @@
 	data-signal-error-for="data_collector_name{$id}" {$required_attr_data_collector_name}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="data_collector_name" data-fieldname="data_collector_name" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_data_collector_name}">
-		{BEGIN data_collector_name_label}{$label public_follow_ups data_collector_name }{END data_collector_name_label}
+	<label class="r-edit-label control-label {$data_collector_name_label_class}" for="{$labelfor_data_collector_name}">
+		{BEGIN data_collector_name_label}
+			{$data_collector_name_forward_control}
+			{$label public_follow_ups data_collector_name }			{END data_collector_name_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$data_collector_name_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="data_collector_name" {$tooltipAttr public_follow_ups data_collector_name } >
+		<div class="r-edit-tooltip" data-helpfor="data_collector_name" {$tooltipAttr public_follow_ups data_collector_name } >
 		<div class="text-muted" >
 		{$tooltip public_follow_ups data_collector_name }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END data_collector_name_fieldblock}
@@ -477,17 +481,19 @@
 	data-signal-error-for="call_successful{$id}" {$required_attr_call_successful}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="call_successful" data-fieldname="call_successful" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_call_successful}">
-		{BEGIN call_successful_label}{$label public_follow_ups call_successful }{END call_successful_label}
+	<label class="r-edit-label control-label {$call_successful_label_class}" for="{$labelfor_call_successful}">
+		{BEGIN call_successful_label}
+			{$call_successful_forward_control}
+			{$label public_follow_ups call_successful }			{END call_successful_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$call_successful_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="call_successful" {$tooltipAttr public_follow_ups call_successful } >
+		<div class="r-edit-tooltip" data-helpfor="call_successful" {$tooltipAttr public_follow_ups call_successful } >
 		<div class="text-muted" >
 		{$tooltip public_follow_ups call_successful }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END call_successful_fieldblock}
@@ -499,17 +505,19 @@
 	data-signal-error-for="call_failure_reason{$id}" {$required_attr_call_failure_reason}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="call_failure_reason" data-fieldname="call_failure_reason" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_call_failure_reason}">
-		{BEGIN call_failure_reason_label}{$label public_follow_ups call_failure_reason }{END call_failure_reason_label}
+	<label class="r-edit-label control-label {$call_failure_reason_label_class}" for="{$labelfor_call_failure_reason}">
+		{BEGIN call_failure_reason_label}
+			{$call_failure_reason_forward_control}
+			{$label public_follow_ups call_failure_reason }			{END call_failure_reason_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$call_failure_reason_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="call_failure_reason" {$tooltipAttr public_follow_ups call_failure_reason } >
+		<div class="r-edit-tooltip" data-helpfor="call_failure_reason" {$tooltipAttr public_follow_ups call_failure_reason } >
 		<div class="text-muted" >
 		{$tooltip public_follow_ups call_failure_reason }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END call_failure_reason_fieldblock}
@@ -521,17 +529,19 @@
 	data-signal-error-for="patient_status{$id}" {$required_attr_patient_status}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="patient_status" data-fieldname="patient_status" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_patient_status}">
-		{BEGIN patient_status_label}{$label public_follow_ups patient_status }{END patient_status_label}
+	<label class="r-edit-label control-label {$patient_status_label_class}" for="{$labelfor_patient_status}">
+		{BEGIN patient_status_label}
+			{$patient_status_forward_control}
+			{$label public_follow_ups patient_status }			{END patient_status_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$patient_status_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="patient_status" {$tooltipAttr public_follow_ups patient_status } >
+		<div class="r-edit-tooltip" data-helpfor="patient_status" {$tooltipAttr public_follow_ups patient_status } >
 		<div class="text-muted" >
 		{$tooltip public_follow_ups patient_status }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END patient_status_fieldblock}
@@ -543,17 +553,19 @@
 	data-signal-error-for="neonatal_death{$id}" {$required_attr_neonatal_death}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="neonatal_death" data-fieldname="neonatal_death" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_neonatal_death}">
-		{BEGIN neonatal_death_label}{$label public_follow_ups neonatal_death }{END neonatal_death_label}
+	<label class="r-edit-label control-label {$neonatal_death_label_class}" for="{$labelfor_neonatal_death}">
+		{BEGIN neonatal_death_label}
+			{$neonatal_death_forward_control}
+			{$label public_follow_ups neonatal_death }			{END neonatal_death_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$neonatal_death_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="neonatal_death" {$tooltipAttr public_follow_ups neonatal_death } >
+		<div class="r-edit-tooltip" data-helpfor="neonatal_death" {$tooltipAttr public_follow_ups neonatal_death } >
 		<div class="text-muted" >
 		{$tooltip public_follow_ups neonatal_death }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END neonatal_death_fieldblock}
@@ -565,17 +577,19 @@
 	data-signal-error-for="wound_opened{$id}" {$required_attr_wound_opened}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="wound_opened" data-fieldname="wound_opened" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_wound_opened}">
-		{BEGIN wound_opened_label}{$label public_follow_ups wound_opened }{END wound_opened_label}
+	<label class="r-edit-label control-label {$wound_opened_label_class}" for="{$labelfor_wound_opened}">
+		{BEGIN wound_opened_label}
+			{$wound_opened_forward_control}
+			{$label public_follow_ups wound_opened }			{END wound_opened_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$wound_opened_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="wound_opened" {$tooltipAttr public_follow_ups wound_opened } >
+		<div class="r-edit-tooltip" data-helpfor="wound_opened" {$tooltipAttr public_follow_ups wound_opened } >
 		<div class="text-muted" >
 		{$tooltip public_follow_ups wound_opened }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END wound_opened_fieldblock}
@@ -587,17 +601,19 @@
 	data-signal-error-for="wound_drainage{$id}" {$required_attr_wound_drainage}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="wound_drainage" data-fieldname="wound_drainage" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_wound_drainage}">
-		{BEGIN wound_drainage_label}{$label public_follow_ups wound_drainage }{END wound_drainage_label}
+	<label class="r-edit-label control-label {$wound_drainage_label_class}" for="{$labelfor_wound_drainage}">
+		{BEGIN wound_drainage_label}
+			{$wound_drainage_forward_control}
+			{$label public_follow_ups wound_drainage }			{END wound_drainage_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$wound_drainage_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="wound_drainage" {$tooltipAttr public_follow_ups wound_drainage } >
+		<div class="r-edit-tooltip" data-helpfor="wound_drainage" {$tooltipAttr public_follow_ups wound_drainage } >
 		<div class="text-muted" >
 		{$tooltip public_follow_ups wound_drainage }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END wound_drainage_fieldblock}
@@ -609,17 +625,19 @@
 	data-signal-error-for="drainage_type{$id}" {$required_attr_drainage_type}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="drainage_type" data-fieldname="drainage_type" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_drainage_type}">
-		{BEGIN drainage_type_label}{$label public_follow_ups drainage_type }{END drainage_type_label}
+	<label class="r-edit-label control-label {$drainage_type_label_class}" for="{$labelfor_drainage_type}">
+		{BEGIN drainage_type_label}
+			{$drainage_type_forward_control}
+			{$label public_follow_ups drainage_type }			{END drainage_type_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$drainage_type_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="drainage_type" {$tooltipAttr public_follow_ups drainage_type } >
+		<div class="r-edit-tooltip" data-helpfor="drainage_type" {$tooltipAttr public_follow_ups drainage_type } >
 		<div class="text-muted" >
 		{$tooltip public_follow_ups drainage_type }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END drainage_type_fieldblock}
@@ -631,17 +649,19 @@
 	data-signal-error-for="visited_healthcare_provider{$id}" {$required_attr_visited_healthcare_provider}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="visited_healthcare_provider" data-fieldname="visited_healthcare_provider" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_visited_healthcare_provider}">
-		{BEGIN visited_healthcare_provider_label}{$label public_follow_ups visited_healthcare_provider }{END visited_healthcare_provider_label}
+	<label class="r-edit-label control-label {$visited_healthcare_provider_label_class}" for="{$labelfor_visited_healthcare_provider}">
+		{BEGIN visited_healthcare_provider_label}
+			{$visited_healthcare_provider_forward_control}
+			{$label public_follow_ups visited_healthcare_provider }			{END visited_healthcare_provider_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$visited_healthcare_provider_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="visited_healthcare_provider" {$tooltipAttr public_follow_ups visited_healthcare_provider } >
+		<div class="r-edit-tooltip" data-helpfor="visited_healthcare_provider" {$tooltipAttr public_follow_ups visited_healthcare_provider } >
 		<div class="text-muted" >
 		{$tooltip public_follow_ups visited_healthcare_provider }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END visited_healthcare_provider_fieldblock}
@@ -653,17 +673,19 @@
 	data-signal-error-for="provider_location{$id}" {$required_attr_provider_location}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="provider_location" data-fieldname="provider_location" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_provider_location}">
-		{BEGIN provider_location_label}{$label public_follow_ups provider_location }{END provider_location_label}
+	<label class="r-edit-label control-label {$provider_location_label_class}" for="{$labelfor_provider_location}">
+		{BEGIN provider_location_label}
+			{$provider_location_forward_control}
+			{$label public_follow_ups provider_location }			{END provider_location_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$provider_location_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="provider_location" {$tooltipAttr public_follow_ups provider_location } >
+		<div class="r-edit-tooltip" data-helpfor="provider_location" {$tooltipAttr public_follow_ups provider_location } >
 		<div class="text-muted" >
 		{$tooltip public_follow_ups provider_location }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END provider_location_fieldblock}
@@ -675,17 +697,19 @@
 	data-signal-error-for="scheduled_postop_visit{$id}" {$required_attr_scheduled_postop_visit}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field13" {$item_integrated_edit_field13} data-pageid="{$pageid}" data-field="scheduled_postop_visit" data-fieldname="scheduled_postop_visit" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_scheduled_postop_visit}">
-		{BEGIN scheduled_postop_visit_label}{$label public_follow_ups scheduled_postop_visit }{END scheduled_postop_visit_label}
+	<label class="r-edit-label control-label {$scheduled_postop_visit_label_class}" for="{$labelfor_scheduled_postop_visit}">
+		{BEGIN scheduled_postop_visit_label}
+			{$scheduled_postop_visit_forward_control}
+			{$label public_follow_ups scheduled_postop_visit }			{END scheduled_postop_visit_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$scheduled_postop_visit_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="scheduled_postop_visit" {$tooltipAttr public_follow_ups scheduled_postop_visit } >
+		<div class="r-edit-tooltip" data-helpfor="scheduled_postop_visit" {$tooltipAttr public_follow_ups scheduled_postop_visit } >
 		<div class="text-muted" >
 		{$tooltip public_follow_ups scheduled_postop_visit }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END scheduled_postop_visit_fieldblock}
@@ -697,17 +721,19 @@
 	data-signal-error-for="attended_postop_visit{$id}" {$required_attr_attended_postop_visit}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field14" {$item_integrated_edit_field14} data-pageid="{$pageid}" data-field="attended_postop_visit" data-fieldname="attended_postop_visit" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_attended_postop_visit}">
-		{BEGIN attended_postop_visit_label}{$label public_follow_ups attended_postop_visit }{END attended_postop_visit_label}
+	<label class="r-edit-label control-label {$attended_postop_visit_label_class}" for="{$labelfor_attended_postop_visit}">
+		{BEGIN attended_postop_visit_label}
+			{$attended_postop_visit_forward_control}
+			{$label public_follow_ups attended_postop_visit }			{END attended_postop_visit_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$attended_postop_visit_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="attended_postop_visit" {$tooltipAttr public_follow_ups attended_postop_visit } >
+		<div class="r-edit-tooltip" data-helpfor="attended_postop_visit" {$tooltipAttr public_follow_ups attended_postop_visit } >
 		<div class="text-muted" >
 		{$tooltip public_follow_ups attended_postop_visit }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END attended_postop_visit_fieldblock}
@@ -719,17 +745,19 @@
 	data-signal-error-for="missed_visit_reason{$id}" {$required_attr_missed_visit_reason}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field15" {$item_integrated_edit_field15} data-pageid="{$pageid}" data-field="missed_visit_reason" data-fieldname="missed_visit_reason" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_missed_visit_reason}">
-		{BEGIN missed_visit_reason_label}{$label public_follow_ups missed_visit_reason }{END missed_visit_reason_label}
+	<label class="r-edit-label control-label {$missed_visit_reason_label_class}" for="{$labelfor_missed_visit_reason}">
+		{BEGIN missed_visit_reason_label}
+			{$missed_visit_reason_forward_control}
+			{$label public_follow_ups missed_visit_reason }			{END missed_visit_reason_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$missed_visit_reason_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="missed_visit_reason" {$tooltipAttr public_follow_ups missed_visit_reason } >
+		<div class="r-edit-tooltip" data-helpfor="missed_visit_reason" {$tooltipAttr public_follow_ups missed_visit_reason } >
 		<div class="text-muted" >
 		{$tooltip public_follow_ups missed_visit_reason }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END missed_visit_reason_fieldblock}
@@ -741,17 +769,19 @@
 	data-signal-error-for="created_at{$id}" {$required_attr_created_at}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field16" {$item_integrated_edit_field16} data-pageid="{$pageid}" data-field="created_at" data-fieldname="created_at" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_created_at}">
-		{BEGIN created_at_label}{$label public_follow_ups created_at }{END created_at_label}
+	<label class="r-edit-label control-label {$created_at_label_class}" for="{$labelfor_created_at}">
+		{BEGIN created_at_label}
+			{$created_at_forward_control}
+			{$label public_follow_ups created_at }			{END created_at_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$created_at_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="created_at" {$tooltipAttr public_follow_ups created_at } >
+		<div class="r-edit-tooltip" data-helpfor="created_at" {$tooltipAttr public_follow_ups created_at } >
 		<div class="text-muted" >
 		{$tooltip public_follow_ups created_at }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END created_at_fieldblock}
@@ -763,17 +793,19 @@
 	data-signal-error-for="updated_at{$id}" {$required_attr_updated_at}
 	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field17" {$item_integrated_edit_field17} data-pageid="{$pageid}" data-field="updated_at" data-fieldname="updated_at" >
 
-	<label class="r-edit-label control-label" for="{$labelfor_updated_at}">
-		{BEGIN updated_at_label}{$label public_follow_ups updated_at }{END updated_at_label}
+	<label class="r-edit-label control-label {$updated_at_label_class}" for="{$labelfor_updated_at}">
+		{BEGIN updated_at_label}
+			{$updated_at_forward_control}
+			{$label public_follow_ups updated_at }			{END updated_at_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
 		{$updated_at_editcontrol}	</div>
-	<div class="r-edit-tooltip" data-helpfor="updated_at" {$tooltipAttr public_follow_ups updated_at } >
+		<div class="r-edit-tooltip" data-helpfor="updated_at" {$tooltipAttr public_follow_ups updated_at } >
 		<div class="text-muted" >
 		{$tooltip public_follow_ups updated_at }		</div>
 	</div>
-</div>
+	</div>
 
 
 {END updated_at_fieldblock}
@@ -800,7 +832,7 @@
 <span data-itemtype="edit_save" data-itemid="edit_save" {$item_edit_save} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-primary   
 	" {$savebutton_attrs} >
-							Save			</a>
+							{mlang_message SAVE}			</a>
 </span>
 {END save_edit}
 	 
@@ -808,7 +840,7 @@
 <span data-itemtype="edit_back_list" data-itemid="edit_back_list" {$item_edit_back_list} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-default   
 	" {$backbutton_attrs} >
-							Back to list			</a>
+							{mlang_message BACK_TO_LIST}			</a>
 </span>
 {END back_button}
 	 
@@ -816,7 +848,7 @@
 <span data-itemtype="edit_close" data-itemid="edit_close" {$item_edit_close} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-default   
 	" {$closebutton_attrs} >
-							Cancel			</a>
+							{mlang_message CANCEL}			</a>
 </span>
 {END close_button}
 		</div>			 
@@ -833,17 +865,19 @@
 												<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu">
-								<li data-itemtype="edit_reset" data-itemid="edit_reset" {$item_edit_reset} data-pageid="{$pageid}" data-small >
+							{BEGIN reset_button}
+	<li data-itemtype="edit_reset" data-itemid="edit_reset" {$item_edit_reset} data-pageid="{$pageid}" data-small >
 				<a  {$resetbutton_attrs}  title="" >
 				
-		Reset		
+		{mlang_message RESET}		
 		</a>
 	</li>
+{END reset_button}
 							{BEGIN view_page_button}
 	<li data-itemtype="edit_view" data-itemid="edit_view" {$item_edit_view} data-pageid="{$pageid}" data-small >
 				<a  href="follow_ups_view.php?{$editlink}" {$view_page_button_attrs}  title="" >
 				
-		View		
+		{mlang_message VIEW}		
 		</a>
 	</li>
 {END view_page_button}

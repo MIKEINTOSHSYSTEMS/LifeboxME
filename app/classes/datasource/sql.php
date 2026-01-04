@@ -9,7 +9,6 @@ class DataSourceSQL extends DataSource {
 
 		$this->pSet = $pSet;
 		$this->connection = $connection;
-//		$this->cipherer = new RunnerCipherer( $this->name );
 		$this->opDescriptors = $this->pSet->getDataSourceOps();
 	}
 	
@@ -84,13 +83,14 @@ class DataSourceSQL extends DataSource {
 				$res = $this->filterResult( $res, $dc->filter );
 			}
 
-			if( !$this->opDescriptors[ $op ]["skipFilter"] ) {
-				$this->reorderResult( $dc, $res );
+			if( !$this->opDescriptors[ $op ]["skipOrder"] ) {
+				$res = $this->reorderResult( $dc, $res );
 			}
 		}
-		if( $res->randomAccess() )
+		if( $res->randomAccess() ) {
 			$dc->_cache["listData"] = $res;
 			$dc->_cache["listDataPos"] = $res->position();
+		}
 		return $res;
 	}
 
@@ -122,7 +122,6 @@ class DataSourceSQL extends DataSource {
 					$ret = ArrayResult::createFromResult( $ret );
 					$dc->_cache["listData"] = $ret;
 					$dc->_cache["listDataPos"] = 0;
-
 				}
 				//	apply totals
 				return $ret->count();

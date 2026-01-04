@@ -98,20 +98,20 @@ class EditControl
 		if( $this->connection->dbType == nDATABASE_PostgreSQL )
 			$this->like = "ilike";
 
-		$this->searchOptions[CONTAINS] = "Contains";
-		$this->searchOptions[EQUALS] = "Equals";
-		$this->searchOptions[STARTS_WITH] = "Starts with";
-		$this->searchOptions[MORE_THAN] = "More than";
-		$this->searchOptions[LESS_THAN] = "Less than";
-		$this->searchOptions[BETWEEN] = "Between";
-		$this->searchOptions[EMPTY_SEARCH] = "Empty";
-		$this->searchOptions[NOT_CONTAINS] = "Doesn't contain";
-		$this->searchOptions[NOT_EQUALS] = "Doesn't equal";
-		$this->searchOptions[NOT_STARTS_WITH] = "Doesn't start with";
-		$this->searchOptions[NOT_MORE_THAN] = "Is not more than";
-		$this->searchOptions[NOT_LESS_THAN] = "Is not less than";
-		$this->searchOptions[NOT_BETWEEN] = "Is not between";
-		$this->searchOptions[NOT_EMPTY] = "Is not empty";
+		$this->searchOptions[CONTAINS] = mlang_message('CONTAINS');
+		$this->searchOptions[EQUALS] = mlang_message('EQUALS');
+		$this->searchOptions[STARTS_WITH] = mlang_message('STARTS_WITH');
+		$this->searchOptions[MORE_THAN] = mlang_message('MORE_THAN');
+		$this->searchOptions[LESS_THAN] = mlang_message('LESS_THAN');
+		$this->searchOptions[BETWEEN] = mlang_message('BETWEEN');
+		$this->searchOptions[EMPTY_SEARCH] = mlang_message('EMPTY');
+		$this->searchOptions[NOT_CONTAINS] = mlang_message('SEARCH_NOT_CONTAINS');
+		$this->searchOptions[NOT_EQUALS] = mlang_message('SEARCH_NOT_EQUALS');
+		$this->searchOptions[NOT_STARTS_WITH] = mlang_message('SEARCH_NOT_STARTS_WITH');
+		$this->searchOptions[NOT_MORE_THAN] = mlang_message('SEARCH_NOT_MORE_THAN');
+		$this->searchOptions[NOT_LESS_THAN] = mlang_message('SEARCH_NOT_LESS_THAN');
+		$this->searchOptions[NOT_BETWEEN] = mlang_message('SEARCH_NOT_BETWEEN');
+		$this->searchOptions[NOT_EMPTY] = mlang_message('SEARCH_NOT_EMPTY');
 		
 		$this->init();
 	}
@@ -144,14 +144,21 @@ class EditControl
 		// $this->pageObject->AddCSSFile("include/mupload.css");
 	}
 	
+	/**
+	 * DEPRECATED
+	 * used in view/edit plugins with "Label" key only
+	 */
 	function getSetting($key)
 	{
-		return $this->pageObject->pSetEdit->getFieldData($this->field, $key);
+		if( $key === 'Label' ) {
+			return $this->pageObject->pSetEdit->label( $this->field );
+		}
+		return '';
 	}
 	
 	function addJSSetting($key, $value)
 	{
-		$this->pageObject->jsSettings['tableSettings'][ $this->pageObject->tName ]['fieldSettings'][ $this->field ][ $this->container->pageType ][ $key ] = $value;
+		$this->pageObject->jsControlSettings[ $this->field ][ $this->container->pageType ][ $key ] = $value;
 	}
 	
 	function buildControl($value, $mode, $fieldNum, $validate, $additionalCtrlParams, $data)
@@ -177,23 +184,12 @@ class EditControl
 		$isHidden = (isset($additionalCtrlParams['hidden']) && $additionalCtrlParams['hidden']);
 
 		$additionalClass = "";
-		if( $this->pageObject->isBootstrap() )
-		{		
-			if( $this->pageObject->isPD() ) {
-				$additionalClass.= "bs-ctrlspan ";
-			} else {
-				$additionalClass.= "bs-ctrlspan rnr-nowrap ";
-			}
-			if( $this->format == EDIT_FORMAT_READONLY )
-				$additionalClass.= "form-control-static ";
-			
-			if( $validate['basicValidate'] && array_search('IsRequired', $validate['basicValidate']) !== false )	
-				$additionalClass.= "bs-inlinerequired";
-		}
-		else
-		{
-			$additionalClass.= "rnr-nowrap ";
-		}
+		$additionalClass.= "bs-ctrlspan ";
+		if( $this->format == EDIT_FORMAT_READONLY )
+			$additionalClass.= "form-control-static ";
+		
+		if( $validate['basicValidate'] && array_search('IsRequired', $validate['basicValidate']) !== false )	
+			$additionalClass.= "bs-inlinerequired";
 
 		echo '<span id="edit'.$this->id.'_'.$this->goodFieldName.'_'.$fieldNum.'" class="'.$additionalClass.'"'.($isHidden ? ' style="display:none"' : '').'>';
 	}
@@ -211,17 +207,12 @@ class EditControl
 	 */
 	function isSearchPanelControl( $mode, $additionalCtrlParams )
 	{
-		return $mode == MODE_SEARCH && isset( $additionalCtrlParams['searchPanelControl'] ) && $additionalCtrlParams['searchPanelControl'] && !$this->pageObject->mobileTemplateMode();
+		return $mode == MODE_SEARCH && isset( $additionalCtrlParams['searchPanelControl'] ) && $additionalCtrlParams['searchPanelControl'];
 	}
 	
 	function buildControlEnd($validate, $mode)
 	{
-		if( $this->pageObject->isBootstrap() )
-			echo '</span>';
-		else if( $validate['basicValidate'] && array_search('IsRequired', $validate['basicValidate'])!==false)
-			echo'&nbsp;<font color="red">*</font></span>';
-		else
-			echo '</span>';
+		echo '</span>';
 	}
 	
 	function getPostValueAndType()
@@ -261,17 +252,19 @@ class EditControl
 				if(IsTextType($this->pageObject->pSetEdit->getFieldType($this->field)))
 					$blobfields[] = $this->field;
 			}
-			if($this->field == Security::passwordField() && $this->pageObject->tName == "admin_users")
-			{	
-				$needHashPass = true;
-				if ( $this->pageObject->pageType == PAGE_EDIT )
-				{
-					$oldData = $this->pageObject->getOldRecordData();
-					$needHashPass = $oldData[$this->field] != $this->webValue;
-				}
+			if( ProjectSettings::getSecurityValue( 'registration', 'hashPassword' ) ) {
+				if($this->field == Security::passwordField() && $this->pageObject->tName == "admin_users")
+				{	
+					$needHashPass = true;
+					if ( $this->pageObject->pageType == PAGE_EDIT )
+					{
+						$oldData = $this->pageObject->getOldRecordData();
+						$needHashPass = $oldData[$this->field] != $this->webValue;
+					}
 
-				if ( $needHashPass )
-					$this->webValue = Security::hashPassword( $this->webValue );	
+					if ( $needHashPass )
+						$this->webValue = Security::hashPassword( $this->webValue );	
+				}
 			}
 			$avalues[ $this->field ] = $this->webValue;
 		}
@@ -361,7 +354,7 @@ class EditControl
 	 */	
 	function suggestValue($value, $searchFor, &$response, &$row)
 	{
-		$suggestStringSize = GetGlobalData("suggestStringSize", 40);
+		$suggestStringSize = ProjectSettings::getProjectValue( 'suggestStringSize' );
 		
 		if( $suggestStringSize <= runner_strlen($searchFor) )
 		{
@@ -442,7 +435,7 @@ class EditControl
 	 */
 	function cutSuggestString( $_value, $searchFor ) 
 	{
-		$suggestStringSize = GetGlobalData("suggestStringSize", 40);
+		$suggestStringSize = ProjectSettings::getProjectValue( 'suggestStringSize' );
 		$caseIns = $this->pageObject->pSetEdit->getNCSearch();
 		
 		//	split to lines. Line breaks shouldn't appear in the suggested values
@@ -561,17 +554,6 @@ class EditControl
 	function getInputStyle( $mode )
 	{
 		return "";
-		if( $this->pageObject->isBootstrap() 
-			&& ($this->pageObject->pageType != PAGE_ADD || $this->pageObject->mode != ADD_INLINE) 
-			&& ($this->pageObject->pageType != PAGE_EDIT || $this->pageObject->mode != EDIT_INLINE) )
-		{
-			return "";
-		}
-		
-		$width = $this->searchPanelControl ? 150 : $this->pageObject->pSetEdit->getControlWidth( $this->field );
-		$style = $this->makeWidthStyle( $width );
-		
-		return 'style="'.$style.'"';		
 	}
 	
 	/** 
@@ -787,7 +769,7 @@ class EditControl
 		$value = $data[ $fName ];
 		if( $this->format !== EDIT_FORMAT_READONLY ) {
 			if( IsFloatType( $this->type ) && !is_null( $value ) ) {
-				if( $htmlType == "number" ) {
+				if( strtolower( $htmlType ) == "number" ) {
 					//	no thousand delimiters, only dot as decimal delimiter
 					$value = formatNumberForHTML5( $value );
 				} else {
@@ -796,6 +778,13 @@ class EditControl
 			}
 		}
 		return $value;
+	}
+
+	protected function maxLengthAttr() {
+		$maxLength = $this->pageObject->pSetEdit->getMaxLength( $this->field );
+		if( $maxLength ) {
+			return ' maxlength="' . $maxLength . '"';
+		}
 	}
 	
 }

@@ -124,7 +124,7 @@ class ViewControl
 
 	public function __construct($field, $container, $pageObject = null)
 	{
-		$this->useUTF8 = "utf-8" == "utf-8";
+		$this->useUTF8 = ProjectSettings::getProjectValue( 'charset' ) === 'utf-8';
 		$this->field = $field;
 		$this->container = $container;
 		$this->pageObject = $pageObject;
@@ -170,7 +170,7 @@ class ViewControl
 
 		if(IsBinaryType($this->fieldType))
 		{
-			$value = "LONG BINARY DATA - CANNOT BE DISPLAYED";
+			$value = mlang_message('LONG_BINARY');
 			$this->searchHighlight = false;
 		}
 
@@ -181,9 +181,9 @@ class ViewControl
 		if($this->editFormat == EDIT_FORMAT_CHECKBOX && $this->viewFormat == FORMAT_NONE)
 		{
 			if($value && $value!=0)
-				$value = "Yes";
+				$value = mlang_message('YES');
 			else
-				$value = "No";
+				$value = mlang_message('NO');
 
 			$this->searchHighlight = false;
 		}
@@ -216,13 +216,11 @@ class ViewControl
 	 */
 	public function processText($value, $keylink, $html = true )
 	{
-		$isMobileLookup = false;
 		$inlineOrFlyMode = false;
 		$pageType = $this->container->pageType;
 		if( !is_null($this->pageObject) )
 		{
 			$mode = $this->pageObject->mode;
-			$isMobileLookup = ($mode == LIST_LOOKUP) && $this->pageObject->mobileTemplateMode();
 			$inlineOrFlyMode = $pageType == PAGE_EDIT && ($mode == EDIT_INLINE || $mode == EDIT_POPUP) || $pageType == PAGE_ADD && ($mode == ADD_INLINE || $mode == ADD_POPUP);
 		}
 		$isDetailPreview = $this->container->isDetailsPreview;
@@ -245,10 +243,10 @@ class ViewControl
 		$isReportPage = $pageType == PAGE_REPORT || $pageType == PAGE_MASTER_INFO_REPORT;
 		$isListPage = $pageType == PAGE_LIST || $pageType == PAGE_MASTER_INFO_LIST;
 
-		if( $html &&  $needShortening && ( $isListPage || $isReportPage || $inlineOrFlyMode ) && !$isMobileLookup && !$isDetailPreview && $keylink != "" )
+		if( $html &&  $needShortening && ( $isListPage || $isReportPage || $inlineOrFlyMode ) && !$isDetailPreview && $keylink != "" )
 			return $this->getShorteningTextAndMoreLink($value, $cNumberOfChars, $keylink, $mode);
 
-		if( $needShortening && ($isPagePrint || $isMobileLookup || $isDetailPreview) )
+		if( $needShortening && ($isPagePrint || $isDetailPreview) )
 			return $this->getShorteningText($value, $cNumberOfChars, $html);
 
 		return $this->getText($value, $html );
@@ -317,7 +315,7 @@ class ViewControl
 		$dataField = 'data-fieldlabel="'.runner_htmlspecialchars( $label ).'"';
 
 		return $truncatedValue.' <a href="javascript:void(0);" data-gridlink data-query="'.GetTableLink('fulltext', '', implode('&',$params)).'" '.$dataField.'>'
-			."More".'&nbsp;...</a>';
+			.mlang_message('MORE').'&nbsp;...</a>';
 	}
 
 	/**

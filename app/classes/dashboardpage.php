@@ -3,6 +3,9 @@ class DashboardPage extends RunnerPage
 {
 	protected $elementsPermissions = array();
 
+	public $action = "";
+	public $elementName = "";
+
 	/**
 	 * @constructor
 	 * @param &Array params
@@ -29,89 +32,26 @@ class DashboardPage extends RunnerPage
 			echo printJSON( $returnJSON );
 			exit();
 		}
+		
+		if ( $this->action == "reloadElement" ) {
+			$snippetId = postvalue("snippetId");
+			
+			foreach( $this->pSet->getDashboardElements() as $key => $elem ) {
+				if ( $elem["type"] == DASHBOARD_SNIPPET && $elem["elementName"] == $this->elementName ) {
+					$snippetData = $this->callSnippet( $elem );
+					$contentHtml = $this->getSnippetHtml( $elem, $snippetData );
+					break;
+				}
+			}
+			
+			$returnJSON = array("success" => true, "contentHtml" => $contentHtml );
+			echo printJSON( $returnJSON );
+			exit();
+		}
 
 		// Set language params, if have more than one language
 		$this->setLangParams();
 
-		$this->jsSettings['tableSettings'][ $this->tName ]['dashElements'] = array();
-
-		$majorElements = $this->getMajorElements();
-
-		//	calculate additional element settings
-		foreach( $this->pSet->getDashboardElements() as $key => $elem )
-		{
-			$this->createElementLinks( $elem );
-			$permissions = false;
-			$newElem = $elem;
-
-			if( $elem['type'] == DASHBOARD_RECORD)
-			{
-				// check tables (add, view, edit) permissinons befor add to js
-				$newElem['tabsPageTypes'] = array();
-				foreach( $elem['tabsPageTypes'] as $idx => $pageType )
-				{
-					if( $this->CheckPermissions( $elem['table'], $pageType ) )
-					{
-						$permissions = true;
-						$newElem['tabsPageTypes'][] = $pageType;
-					}
-				}
-
-				$gridElem = $this->getGridElement( $elem['table'] );
-				if( $gridElem ) {
-					$eset = new ProjectSettings( $elem['table'], PAGE_LIST, $gridElem['pageName'] );
-					$newElem['spreadsheetGrid'] = $eset->spreadsheetGrid();
-					$newElem['hostListPage'] = $gridElem['pageName'];
-				}
-			}
-			elseif( $elem['type'] == DASHBOARD_DETAILS)
-			{
-				$eset = new ProjectSettings( $elem['table'] );
-				$details = $eset->getDetailTablesArr();
-
-				// add details shortTableNames
-				$newElem['details'] = array();
-				foreach( $details as $idx => $d )
-				{
-					if( in_array( $d['dDataSourceTable'], $elem['notUsedDetailTables'] ) )
-						continue;
-
-					if( $this->CheckPermissions( $d['dDataSourceTable'], $d['dType'] ) )
-					{
-						$permissions = true;
-						$d['pageName'] = $elem['details'][ $d['dDataSourceTable'] ]['pageName'];
-						$newElem['details'][] = $d;
-						$this->jsSettings['tableSettings'][ $d['dDataSourceTable'] ]['shortTName'] = $d[ 'dShortTable' ];
-					}
-				}
-			}
-			elseif( $elem['type'] == DASHBOARD_CHART || $elem['type'] == DASHBOARD_REPORT || $elem['type'] == DASHBOARD_SEARCH)
-				$permissions = $this->CheckPermissions($elem['table'], "Search" );
-			elseif( $elem['type'] == DASHBOARD_LIST )
-				$permissions = $this->CheckPermissions( $elem['table'], "list" );
-			elseif( $elem['type'] == DASHBOARD_MAP )
-			{
-				$permissions = $this->CheckPermissions( $elem['table'], "list" );
-				if( !$elem["updateMoved"] )
-					$newElem["updateMoved"] = !$this->hasGridElement( $elem['table'] );
-			}
-			elseif( $elem['type'] == DASHBOARD_SNIPPET )
-			{
-				$permissions = true;
-			}
-
-
-			$this->elementsPermissions[$key] = $permissions;
-			if ( !$permissions )
-				continue;
-
-			if( isset( $majorElements[ $newElem["elementName"]] ) )
-				$newElem["major"] = true;
-
-			// add shortTableNames and element
-			$this->jsSettings['tableSettings'][ $elem['table'] ]['shortTName'] = GetTableURL( $elem['table'] );
-			$this->jsSettings['tableSettings'][ $this->tName ]['dashElements'][$key] = $newElem;
-		}
 	}
 
 	function CheckPermissions( $table, $permis )
@@ -129,12 +69,12 @@ class DashboardPage extends RunnerPage
 	 * @param String $pageType
 	 * @return Array permission types
 	 */
-	function getPermissionType($pageType)
+	function getPermissionType( $pageType )
 	{
 		$result = array();
 		$type = parent::getPermisType($pageType);
 
-		if ($pageType == "view" || $pageType == "chart" || $pageType == "report" || $pageType == "list")
+		if ($pageType == "view" || $pageType == "chart" || $pageType == "report" || $pageType == "list" || $pageType == "calendar" || $pageType == "gantt")
 			$type = "S";
 		elseif ($pageType == "add")
 			$type = "A";
@@ -150,6 +90,7 @@ class DashboardPage extends RunnerPage
 	{
 		parent::init();
 
+		$this->fillElementPermissions();
 		$this->createElementContainers();
 	}
 
@@ -195,7 +136,7 @@ class DashboardPage extends RunnerPage
 
 			$contentHtml = "";
 			if ( $elem['type'] == DASHBOARD_SNIPPET ) {
-				$snippetData = callDashboardSnippet( $this->tName, $elem );
+				$snippetData = $this->callSnippet( $elem );
 				$contentHtml = $this->getSnippetHtml( $elem, $snippetData );
 			}
 
@@ -209,13 +150,21 @@ class DashboardPage extends RunnerPage
 			$dbElementAttrs .= ' data-dashtype="' . $elem['type'] . '"';
 
 			$this->xt->assign( "db_".$elem["elementName"] , $contentHtml );
-/*
-			$this->xt->assign(
-				"db_".$elem["elementName"] ,
-				$style."<div ".$dbElementAttrs." id=\"dashelement_" . $elem["elementName"] . $this->id . "\">".$contentHtml."</div>"
-			);
-*/
  		}
+	}
+
+	protected function callSnippet( $dashElem ) {
+		$snippetData = array( "body" => "" );
+		$header = "";
+		$icon = $dashElem["item"]["icon"];
+		global $globalEvents;
+		if( $globalEvents->dashSnippetExists( $dashElem['snippetId'] ) ) {
+			$funcName = "event_" . $dashElem['snippetId'];
+			$snippetData["body"] = callDashboardSnippet( $funcName, $icon, $header );
+		}
+		$snippetData["header"] = $header;
+		$snippetData["icon"] = $icon;
+		return $snippetData;
 	}
 
 	/**
@@ -365,8 +314,7 @@ class DashboardPage extends RunnerPage
 	public function addCommonHtml()
 	{
 		$this->body['begin'] = GetBaseScriptsForPage(false);
-		if( !$this->mobileTemplateMode() )
-			$this->body['begin'].= "<div id=\"search_suggest\" class=\"search_suggest\"></div>";
+		$this->body['begin'].= "<div id=\"search_suggest\" class=\"search_suggest\"></div>";
 
 		// assign body end
 		$this->body['end'] = XTempl::create_method_assignment( 'assignBodyEnd', $this );
@@ -383,8 +331,6 @@ class DashboardPage extends RunnerPage
 
 		$this->xt->assign("advsearchlink_attrs", "id=\"advButton".$this->id."\"");
 
-		if( $this->mobileTemplateMode() )
-			$this->xt->assign('tableinfomobile_block', true);
 	}
 
 	/**
@@ -394,10 +340,6 @@ class DashboardPage extends RunnerPage
 	{
 		parent::commonAssign();
 
-		if( $this->mobileTemplateMode() )
-		{
-			$this->hideElement("search_dashboard_m");
-		}
 	}
 
 	/**
@@ -417,6 +359,7 @@ class DashboardPage extends RunnerPage
 		$this->addCommonHtml();
 
 		$this->assignSimpleSearch();
+		$this->updateJsSettings();
 
 		if( $this->eventsObject->exists("BeforeShowDashboard") ) {
 			$this->eventsObject->BeforeShowDashboard( $this->xt, $this->templatefile, $this );
@@ -492,7 +435,8 @@ class DashboardPage extends RunnerPage
 			{
 				foreach( $t as $i )
 				{
-					if( $elements[$i]["type"] == DASHBOARD_LIST || $elements[$i]["type"] == DASHBOARD_CHART || $elements[$i]["type"] == DASHBOARD_REPORT )
+					$elementType = $elements[$i]["type"];
+					if( $elementType == DASHBOARD_LIST || $elementType == DASHBOARD_CHART || $elementType == DASHBOARD_REPORT || $elementType == DASHBOARD_CALENDAR || $elementType == DASHBOARD_GANTT )
 					{
 						$major = $elements[$i]["elementName"];
 						break;
@@ -554,5 +498,134 @@ class DashboardPage extends RunnerPage
 				|| $elem["type"] == DASHBOARD_RECORD
 				|| $elem["type"] == DASHBOARD_MAP;
 	}
+
+	protected function fillElementPermissions() {
+		foreach( $this->pSet->getDashboardElements() as $key => $elem )
+		{
+			$this->createElementLinks( $elem );
+			$permissions = false;
+			$newElem = $elem;
+
+			if( $elem['type'] == DASHBOARD_RECORD)
+			{
+				// check tables (add, view, edit) permissinons befor add to js
+				foreach( $elem['tabsPageTypes'] as $idx => $pageType )
+				{
+					if( $this->CheckPermissions( $elem['table'], $pageType ) ) {
+						$permissions = true;
+						break;
+					}
+				}
+			}
+			elseif( $elem['type'] == DASHBOARD_DETAILS)
+			{
+				$eset = new ProjectSettings( $elem['table'] );
+				$detailsTables = $eset->getAvailableDetailsTables();
+				foreach( $detailsTables as $idx => $d )
+				{
+					if( in_array( $d, $elem['notUsedDetailTables'] ) )
+						continue;
+					$permissions = true;
+					break;
+				}
+				
+			} elseif( $elem['type'] == DASHBOARD_CHART || $elem['type'] == DASHBOARD_REPORT || $elem['type'] == DASHBOARD_SEARCH) {
+				$permissions = $this->CheckPermissions($elem['table'], "list" );
+			} elseif( $elem['type'] == DASHBOARD_LIST ) {
+				$permissions = $this->CheckPermissions( $elem['table'], "list" );
+			} elseif( $elem['type'] == DASHBOARD_CALENDAR ) {
+				$permissions = $this->CheckPermissions( $elem['table'], "list" );
+			} elseif( $elem['type'] == DASHBOARD_GANTT ) {
+				$permissions = $this->CheckPermissions( $elem['table'], "list" );
+			} elseif( $elem['type'] == DASHBOARD_MAP ) {
+				$permissions = $this->CheckPermissions( $elem['table'], "list" );
+			} elseif( $elem['type'] == DASHBOARD_SNIPPET ) {
+				$permissions = true;
+			}
+
+			$this->elementsPermissions[$key] = $permissions;
+		}
+
+	}
+	protected function buildJsTableSettings( $table, $pSet ) {
+		$settings = parent::buildJsTableSettings( $table, $pSet );
+		$settings['dashElements'] = array();
+
+		$majorElements = $this->getMajorElements();
+
+		//	calculate additional element settings
+		foreach( $this->pSet->getDashboardElements() as $key => $elem )
+		{
+			if ( !$this->elementsPermissions[$key] )
+				continue;
+			$this->createElementLinks( $elem );
+			$newElem = $elem;
+
+			if( $elem['type'] == DASHBOARD_RECORD)
+			{
+				// check tables (add, view, edit) permissinons befor add to js
+				$newElem['tabsPageTypes'] = array();
+				foreach( $elem['tabsPageTypes'] as $idx => $pageType )
+				{
+					if( $this->CheckPermissions( $elem['table'], $pageType ) )
+					{
+						$newElem['tabsPageTypes'][] = $pageType;
+					}
+				}
+
+				$gridElem = $this->getGridElement( $elem['table'] );
+				if( $gridElem ) {
+					$eset = new ProjectSettings( $elem['table'], PAGE_LIST, $gridElem['pageName'] );
+					$newElem['spreadsheetGrid'] = $eset->spreadsheetGrid();
+					$newElem['hostListPage'] = $gridElem['pageName'];
+				}
+			}
+			elseif( $elem['type'] == DASHBOARD_DETAILS)
+			{
+				$eset = new ProjectSettings( $elem['table'] );
+				$detailsTables = $eset->getAvailableDetailsTables();
+
+				// add details shortTableNames
+				$newElem['details'] = array();
+				foreach( $detailsTables as $idx => $d )
+				{
+					if( in_array( $d, $elem['notUsedDetailTables'] ) )
+						continue;
+					
+					$detailsData = array();
+					$detailsData["dDataSourceTable"] = $d;
+					$detailsData["pageName"] = $elem['details'][ $d ]['pageName'];
+					$detailsData["dShortTable"] = GetTableURL( $d );
+					$detailsData["dCaptionTable"] = Labels::getTableCaption( $d );
+					$detailsData["dType"] = ProjectSettings::defaultPageType( GetEntityType( $d ) );
+
+					$newElem['details'][] = $detailsData;
+				
+				}
+				
+			} elseif( $elem['type'] == DASHBOARD_MAP ) {
+				if( !$elem["updateMoved"] )
+					$newElem["updateMoved"] = !$this->hasGridElement( $elem['table'] );
+			} 
+
+			if( isset( $majorElements[ $newElem["elementName"]] ) )
+				$newElem["major"] = true;
+
+			$settings['dashElements'][$key] = $newElem;
+		}
+
+		return $settings;
+	}
+
+	protected function updateJsSettings() {
+		// add shortTableNames
+		foreach( $this->pSet->getDashboardElements() as $key => $elem ) {
+			if( !$elem['table']) {
+				continue;
+			}
+			$this->jsSettings['tableSettings'][ $elem['table'] ]['shortTName'] = GetTableURL( $elem['table'] );
+		}
+	}
+
 }
 ?>

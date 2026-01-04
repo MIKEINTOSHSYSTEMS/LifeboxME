@@ -1,25 +1,6 @@
 Notification on registering
-
 You have registered as a user at %url%
 
 Click this link to confirm your account and finish the registration:
 %activateurl%
 If you are unable to click on the link, copy and paste it into your browser window.
-
-ID: %ID_value%
-Username: %username_value%
-Email: %email_value%
-Full Name: %fullname_value%
-Groupid: %groupid_value%
-Ext Security Id: %ext_security_id_value%
-Userpic: %userpic_value%
-First Name: %first_name_value%
-Middle Name: %middle_name_value%
-Last Name: %last_name_value%
-Sex: %sex_value%
-Designation Role: %designation_role_value%
-Region: %region_value%
-Country: %country_value%
-Phone: %phone_value%
-Prefix Title: %prefix_title_value%
-API Key: %api_key_value%

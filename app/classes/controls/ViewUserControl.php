@@ -32,7 +32,22 @@ class ViewUserControl extends ViewControl
 		// We need to add this dependencies ViewControl.js - for debug.
 		// For build we need to add RunnerAll.js
 		//$this->AddJSFile("include/runnerJS/controls/".$this->viewFormat.".js", 'include/runnerJS/viewControls/ViewControl.js');
-		
+
+		$tName = $this->container->tName;
+		$field = $this->field;
+		$pSet = $this->pSettings();
+		$pageType = $pSet->getEffectiveViewFormat( $field );
+		$method = 'plugin_' . goodFieldName( $field ) . '_vf' . $pageType;
+		$eventsObject = getEventObject( $pSet );
+		if( $eventsObject->fieldValues[ 'viewPluginInit' ][ $field ][ $pageType ] ) {
+			$settings = $eventsObject->$method( $this->pageObject );
+			foreach( $settings as $name => $value ) {
+				$this->settings[ $name ] = $value;
+			}
+		}
+		foreach( ProjectSettings::getProjectValue('viewPluginsWithJS') as $plugin ) {
+			$this->addViewPluginJSControl( 'View' . $plugin );
+		}
 	}
 
 	/**

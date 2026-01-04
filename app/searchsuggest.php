@@ -38,7 +38,7 @@ require_once getabspath('classes/controls/EditControlsContainer.php');
 
 $searchOpt = postvalue("start") ? "Starts with" : "Contains";
 $searchField = GoodFieldName( $searchField );
-$numberOfSuggests = GetGlobalData("searchSuggestsNumber", 10);
+$numberOfSuggests = ProjectSettings::getProjectValue( 'searchSuggestsNumber' );
 $whereClauses = array();
 
 
@@ -143,11 +143,10 @@ $detailKeys = array();
 if( $masterTable != "" )
 {	
 	$masterKetsReq = RunnerPage::readMasterKeysFromRequest();
-	$detailKeys = $pSet->getDetailKeysByMasterTable( $masterTable );
-
-	for($j = 0; $j < count($detailKeys); $j++)
+	$masterKeys = $pSet->getMasterKeys( $masterTable );
+	foreach( $masterKeys['detailsKeys'] as $j => $field )
 	{
-		$conditions[] = DataCondition::FieldEquals( $detailKeys[$j], $masterKetsReq[ $j + 1 ] );
+		$conditions[] = DataCondition::FieldEquals( $field, $masterKetsReq[ $j + 1 ] );
 	}
 }
 
@@ -156,7 +155,7 @@ $searchClauseObj = SearchClause::getSearchObject( $table, "", $table, $cipherer 
 $conditions[] = $searchClauseObj->getFilterCondition( $pSet );
 
 //	apply dependent driodown filter
-$parentCtrlsData = my_json_decode( postvalue('parentCtrlsData') );
+$parentCtrlsData = runner_json_decode( postvalue('parentCtrlsData') );
 if( $forLookupPage && $parentCtrlsData ) 
 {
 	require_once( getabspath( "classes/controls/Control.php" ) );

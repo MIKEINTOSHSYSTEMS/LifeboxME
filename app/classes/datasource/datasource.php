@@ -90,6 +90,7 @@ class DataSource {
 		$op == dsopLESS ||
 		$op == dsopEQUAL ||
 		$op == dsopEMPTY ||
+		$op == dsopNULL ||
 		$op == dsopIN ||
 		$op == dsopCONTAIN ||
 		$op == dsopSTART ||
@@ -219,6 +220,9 @@ class DataSource {
 		if( $op == dsopEMPTY ) {
 			return $fieldValue === '' || $fieldValue === null;
 		}
+		if( $op == dsopNULL ) {
+			return is_null( $fieldValue );
+		}
 		$value = $condition->operands[1]->value;
 		$value1 = "";
 		if( count( $condition->operands ) > 2 ) {
@@ -307,7 +311,7 @@ class DataSource {
 	 * Returns whatever user's event returns or false
 	 */
 	public function callCodeOp( $op, $dc ) {
-		$events = getEventObject( $this->_name );
+		$events = getEventObject( $this->pSet );
 		if( !$events )
 			return false;
 		if( !$events->exists( $op ) )
@@ -738,7 +742,7 @@ class DataSource {
 			if( !$source ) {
 				continue;
 			}
-			$ret[ $source ] = $f;
+			$ret[ $f ] = $source;
 		}
 		return $ret;
 	}
@@ -748,13 +752,15 @@ class DataSource {
 	 * @return DataResult
 	 */
 	private function substituteDataResult( $result ) {
-		$eventsObject = getEventObject( $this->_name );
-
+		if( !$this->pSet ) {
+			return $result;
+		}
+		$eventsObject = getEventObject( $this->pSet );
 		if ( $eventsObject && $eventsObject->exists( "ProcessRecord" ) ) {
 			return new EventDataResult( $result, $eventsObject );
 		}
-
 		return $result;
+
 	}
 
 	/**

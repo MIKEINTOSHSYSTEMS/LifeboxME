@@ -23,10 +23,19 @@ class MSSQLUnixConnection extends Connection
 	{
 		parent::assignConnectionParams( $params );
 
-		$this->host = $params["connInfo"][0];  //strConnectInfo1
-		$this->user = $params["connInfo"][1];  //strConnectInfo2
-		$this->pwd = $params["connInfo"][2];  //strConnectInfo3
-		$this->dbname = $params["connInfo"][3];  //strConnectInfo4
+		$this->ODBCString = $params["ODBCString"];
+		$this->host = $params["connInfo"][0]; 
+		$this->dbname = $params["connInfo"][3]; 
+
+		if( $params["connInfo"][4] )
+		{
+			$this->options = 'SSPI';
+		}
+		else
+		{
+			$this->user = $params["connInfo"][1];
+			$this->pwd = $params["connInfo"][2]; 
+		}
 	}
 
 	/**

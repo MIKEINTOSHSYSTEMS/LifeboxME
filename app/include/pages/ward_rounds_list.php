@@ -1,2711 +1,5779 @@
 <?php
-			$optionsArray = array( 'list' => array( 'inlineAdd' => false,
-'detailsAdd' => true,
-'inlineEdit' => false,
-'spreadsheetMode' => false,
-'addToBottom' => false,
-'delete' => true,
-'updateSelected' => false,
-'clickSort' => true,
-'sortDropdown' => false,
-'showHideFields' => false,
-'reorderFields' => false,
-'fieldFilter' => false,
-'hideNumberOfRecords' => false ),
-'allDetails' => array( 'linkType' => 0 ),
-'details' => array( 'public.ward_antibiotics' => array( 'displayPreview' => 1,
-'previewPageId' => 'list',
-'showCount' => true,
-'hideEmptyChild' => false,
-'hideEmptyPreview' => false,
-'showProceedLink' => true,
-'printDetails' => true ) ),
-'master' => array( 'public.surgical_cases' => array( 'preview' => true ),
-'public.facilities' => array( 'preview' => true ) ),
-'listSearch' => array( 'alwaysOnPanelFields' => array(  ),
-'searchPanel' => true,
-'fixedSearchPanel' => false,
-'simpleSearchOptions' => false,
-'searchSaving' => false ),
-'totals' => array( 'ward_round_id' => array( 'totalsType' => '' ),
-'case_id' => array( 'totalsType' => '' ),
-'facility_id' => array( 'totalsType' => '' ),
-'admission_date' => array( 'totalsType' => '' ),
-'rounding_date' => array( 'totalsType' => '' ),
-'data_collector_name' => array( 'totalsType' => '' ),
-'ward_name' => array( 'totalsType' => '' ),
-'ward_transfer' => array( 'totalsType' => '' ),
-'postop_day' => array( 'totalsType' => '' ),
-'dressing_not_removed' => array( 'totalsType' => '' ),
-'wound_clean_and_healthy' => array( 'totalsType' => '' ),
-'stitches_removed_or_wound_opened' => array( 'totalsType' => '' ),
-'wound_opened_spontaneously' => array( 'totalsType' => '' ),
-'pus_draining' => array( 'totalsType' => '' ),
-'abscess_present' => array( 'totalsType' => '' ),
-'redness_around_wound' => array( 'totalsType' => '' ),
-'bleeding' => array( 'totalsType' => '' ),
-'new_dressing' => array( 'totalsType' => '' ),
-'new_dressing_type' => array( 'totalsType' => '' ),
-'fever' => array( 'totalsType' => '' ),
-'on_antibiotics' => array( 'totalsType' => '' ),
-'antibiotics_prescribed' => array( 'totalsType' => '' ),
-'ssi_diagnosed_on_reoperation' => array( 'totalsType' => '' ),
-'returned_to_or' => array( 'totalsType' => '' ),
-'return_or_procedure' => array( 'totalsType' => '' ),
-'disposition' => array( 'totalsType' => '' ),
-'planned_reoperation' => array( 'totalsType' => '' ),
-'other_complications' => array( 'totalsType' => '' ),
-'endometritis' => array( 'totalsType' => '' ),
-'urinary_tract_infection' => array( 'totalsType' => '' ),
-'pneumonia' => array( 'totalsType' => '' ),
-'other_complication_description' => array( 'totalsType' => '' ),
-'eschar' => array( 'totalsType' => '' ),
-'discharged_today' => array( 'totalsType' => '' ),
-'discharge_date' => array( 'totalsType' => '' ),
-'death_in_ward' => array( 'totalsType' => '' ),
-'neonatal_death' => array( 'totalsType' => '' ),
-'created_at' => array( 'totalsType' => '' ),
-'updated_at' => array( 'totalsType' => '' ) ),
-'fields' => array( 'gridFields' => array( 'ward_round_id',
-'case_id',
-'facility_id',
-'admission_date',
-'rounding_date',
-'data_collector_name',
-'ward_name',
-'ward_transfer',
-'postop_day',
-'dressing_not_removed',
-'wound_clean_and_healthy',
-'stitches_removed_or_wound_opened',
-'wound_opened_spontaneously',
-'pus_draining',
-'abscess_present',
-'redness_around_wound',
-'bleeding',
-'new_dressing',
-'new_dressing_type',
-'fever',
-'on_antibiotics',
-'antibiotics_prescribed',
-'ssi_diagnosed_on_reoperation',
-'returned_to_or',
-'return_or_procedure',
-'disposition',
-'planned_reoperation',
-'other_complications',
-'endometritis',
-'urinary_tract_infection',
-'pneumonia',
-'other_complication_description',
-'eschar',
-'discharged_today',
-'discharge_date',
-'death_in_ward',
-'neonatal_death',
-'created_at',
-'updated_at' ),
-'searchRequiredFields' => array(  ),
-'searchPanelFields' => array( 'abscess_present',
-'wound_opened_spontaneously',
-'wound_clean_and_healthy',
-'ward_transfer',
-'ward_round_id',
-'ward_name',
-'urinary_tract_infection',
-'updated_at',
-'stitches_removed_or_wound_opened',
-'ssi_diagnosed_on_reoperation',
-'rounding_date',
-'returned_to_or',
-'return_or_procedure',
-'redness_around_wound',
-'pus_draining',
-'postop_day',
-'pneumonia',
-'planned_reoperation',
-'other_complications',
-'other_complication_description',
-'on_antibiotics',
-'new_dressing_type',
-'new_dressing',
-'neonatal_death',
-'fever',
-'facility_id',
-'eschar',
-'endometritis',
-'dressing_not_removed',
-'disposition',
-'discharged_today',
-'discharge_date',
-'death_in_ward',
-'data_collector_name',
-'created_at',
-'case_id',
-'bleeding',
-'antibiotics_prescribed',
-'admission_date' ),
-'filterFields' => array(  ),
-'inlineAddFields' => array(  ),
-'inlineEditFields' => array(  ),
-'fieldItems' => array( 'ward_round_id' => array( 'simple_grid_field',
-'simple_grid_field39' ),
-'case_id' => array( 'simple_grid_field1',
-'simple_grid_field40' ),
-'facility_id' => array( 'simple_grid_field2',
-'simple_grid_field41' ),
-'admission_date' => array( 'simple_grid_field3',
-'simple_grid_field42' ),
-'rounding_date' => array( 'simple_grid_field4',
-'simple_grid_field43' ),
-'data_collector_name' => array( 'simple_grid_field5',
-'simple_grid_field44' ),
-'ward_name' => array( 'simple_grid_field6',
-'simple_grid_field45' ),
-'ward_transfer' => array( 'simple_grid_field7',
-'simple_grid_field46' ),
-'postop_day' => array( 'simple_grid_field8',
-'simple_grid_field47' ),
-'dressing_not_removed' => array( 'simple_grid_field9',
-'simple_grid_field48' ),
-'wound_clean_and_healthy' => array( 'simple_grid_field10',
-'simple_grid_field49' ),
-'stitches_removed_or_wound_opened' => array( 'simple_grid_field11',
-'simple_grid_field50' ),
-'wound_opened_spontaneously' => array( 'simple_grid_field12',
-'simple_grid_field51' ),
-'pus_draining' => array( 'simple_grid_field13',
-'simple_grid_field52' ),
-'abscess_present' => array( 'simple_grid_field14',
-'simple_grid_field53' ),
-'redness_around_wound' => array( 'simple_grid_field15',
-'simple_grid_field54' ),
-'bleeding' => array( 'simple_grid_field16',
-'simple_grid_field55' ),
-'new_dressing' => array( 'simple_grid_field17',
-'simple_grid_field56' ),
-'new_dressing_type' => array( 'simple_grid_field18',
-'simple_grid_field57' ),
-'fever' => array( 'simple_grid_field19',
-'simple_grid_field58' ),
-'on_antibiotics' => array( 'simple_grid_field20',
-'simple_grid_field59' ),
-'antibiotics_prescribed' => array( 'simple_grid_field21',
-'simple_grid_field60' ),
-'ssi_diagnosed_on_reoperation' => array( 'simple_grid_field22',
-'simple_grid_field61' ),
-'returned_to_or' => array( 'simple_grid_field23',
-'simple_grid_field62' ),
-'return_or_procedure' => array( 'simple_grid_field24',
-'simple_grid_field63' ),
-'disposition' => array( 'simple_grid_field25',
-'simple_grid_field64' ),
-'planned_reoperation' => array( 'simple_grid_field26',
-'simple_grid_field65' ),
-'other_complications' => array( 'simple_grid_field27',
-'simple_grid_field66' ),
-'endometritis' => array( 'simple_grid_field28',
-'simple_grid_field67' ),
-'urinary_tract_infection' => array( 'simple_grid_field29',
-'simple_grid_field68' ),
-'pneumonia' => array( 'simple_grid_field30',
-'simple_grid_field69' ),
-'other_complication_description' => array( 'simple_grid_field31',
-'simple_grid_field70' ),
-'eschar' => array( 'simple_grid_field32',
-'simple_grid_field71' ),
-'discharged_today' => array( 'simple_grid_field33',
-'simple_grid_field72' ),
-'discharge_date' => array( 'simple_grid_field34',
-'simple_grid_field73' ),
-'death_in_ward' => array( 'simple_grid_field35',
-'simple_grid_field74' ),
-'neonatal_death' => array( 'simple_grid_field36',
-'simple_grid_field75' ),
-'created_at' => array( 'simple_grid_field37',
-'simple_grid_field76' ),
-'updated_at' => array( 'simple_grid_field38',
-'simple_grid_field77' ) ),
-'hideEmptyFields' => array(  ),
-'fieldFilterFields' => array(  ) ),
-'pageLinks' => array( 'edit' => true,
-'add' => true,
-'view' => true,
-'print' => true ),
-'layoutHelper' => array( 'formItems' => array( 'formItems' => array( 'above-grid' => array( 'add',
-'inline_add',
-'delete',
-'details_found',
-'page_size',
-'print_panel' ),
-'below-grid' => array( 'pagination' ),
-'left' => array( 'logo',
-'expand_button',
-'menu',
-'search_panel' ),
-'supertop' => array( 'expand_menu_button',
-'collapse_button',
-'breadcrumb',
-'simple_search',
-'list_options',
-'loginform_login',
-'username_button' ),
-'top' => array( 'master_info' ),
-'grid' => array( 'simple_grid_field39',
-'simple_grid_field',
-'simple_grid_field40',
-'simple_grid_field1',
-'simple_grid_field41',
-'simple_grid_field2',
-'simple_grid_field42',
-'simple_grid_field3',
-'simple_grid_field43',
-'simple_grid_field4',
-'simple_grid_field44',
-'simple_grid_field5',
-'simple_grid_field45',
-'simple_grid_field6',
-'simple_grid_field46',
-'simple_grid_field7',
-'simple_grid_field47',
-'simple_grid_field8',
-'simple_grid_field48',
-'simple_grid_field9',
-'simple_grid_field49',
-'simple_grid_field10',
-'simple_grid_field50',
-'simple_grid_field11',
-'simple_grid_field51',
-'simple_grid_field12',
-'simple_grid_field52',
-'simple_grid_field13',
-'simple_grid_field53',
-'simple_grid_field14',
-'simple_grid_field54',
-'simple_grid_field15',
-'simple_grid_field55',
-'simple_grid_field16',
-'simple_grid_field56',
-'simple_grid_field17',
-'simple_grid_field57',
-'simple_grid_field18',
-'simple_grid_field58',
-'simple_grid_field19',
-'simple_grid_field59',
-'simple_grid_field20',
-'simple_grid_field60',
-'simple_grid_field21',
-'simple_grid_field61',
-'simple_grid_field22',
-'simple_grid_field62',
-'simple_grid_field23',
-'simple_grid_field63',
-'simple_grid_field24',
-'simple_grid_field64',
-'simple_grid_field25',
-'simple_grid_field65',
-'simple_grid_field26',
-'simple_grid_field66',
-'simple_grid_field27',
-'simple_grid_field67',
-'simple_grid_field28',
-'simple_grid_field68',
-'simple_grid_field29',
-'simple_grid_field69',
-'simple_grid_field30',
-'simple_grid_field70',
-'simple_grid_field31',
-'simple_grid_field71',
-'simple_grid_field32',
-'simple_grid_field72',
-'simple_grid_field33',
-'simple_grid_field73',
-'simple_grid_field34',
-'simple_grid_field74',
-'simple_grid_field35',
-'simple_grid_field75',
-'simple_grid_field36',
-'simple_grid_field76',
-'simple_grid_field37',
-'simple_grid_field77',
-'simple_grid_field38',
-'details_preview',
-'grid_checkbox_head',
-'grid_checkbox',
-'grid_edit',
-'grid_inline_cancel',
-'grid_view',
-'grid_alldetails_link',
-'grid_details_link' ) ),
-'formXtTags' => array( 'above-grid' => array( 'add_link',
-'inlineadd_link',
-'deleteselected_link',
-'details_found',
-'recsPerPage',
-'print_friendly' ),
-'below-grid' => array( 'pagination' ),
-'top' => array( 'mastertable_block' ) ),
-'itemForms' => array( 'add' => 'above-grid',
-'inline_add' => 'above-grid',
-'delete' => 'above-grid',
-'details_found' => 'above-grid',
-'page_size' => 'above-grid',
-'print_panel' => 'above-grid',
-'pagination' => 'below-grid',
-'logo' => 'left',
-'expand_button' => 'left',
-'menu' => 'left',
-'search_panel' => 'left',
-'expand_menu_button' => 'supertop',
-'collapse_button' => 'supertop',
-'breadcrumb' => 'supertop',
-'simple_search' => 'supertop',
-'list_options' => 'supertop',
-'loginform_login' => 'supertop',
-'username_button' => 'supertop',
-'master_info' => 'top',
-'simple_grid_field39' => 'grid',
-'simple_grid_field' => 'grid',
-'simple_grid_field40' => 'grid',
-'simple_grid_field1' => 'grid',
-'simple_grid_field41' => 'grid',
-'simple_grid_field2' => 'grid',
-'simple_grid_field42' => 'grid',
-'simple_grid_field3' => 'grid',
-'simple_grid_field43' => 'grid',
-'simple_grid_field4' => 'grid',
-'simple_grid_field44' => 'grid',
-'simple_grid_field5' => 'grid',
-'simple_grid_field45' => 'grid',
-'simple_grid_field6' => 'grid',
-'simple_grid_field46' => 'grid',
-'simple_grid_field7' => 'grid',
-'simple_grid_field47' => 'grid',
-'simple_grid_field8' => 'grid',
-'simple_grid_field48' => 'grid',
-'simple_grid_field9' => 'grid',
-'simple_grid_field49' => 'grid',
-'simple_grid_field10' => 'grid',
-'simple_grid_field50' => 'grid',
-'simple_grid_field11' => 'grid',
-'simple_grid_field51' => 'grid',
-'simple_grid_field12' => 'grid',
-'simple_grid_field52' => 'grid',
-'simple_grid_field13' => 'grid',
-'simple_grid_field53' => 'grid',
-'simple_grid_field14' => 'grid',
-'simple_grid_field54' => 'grid',
-'simple_grid_field15' => 'grid',
-'simple_grid_field55' => 'grid',
-'simple_grid_field16' => 'grid',
-'simple_grid_field56' => 'grid',
-'simple_grid_field17' => 'grid',
-'simple_grid_field57' => 'grid',
-'simple_grid_field18' => 'grid',
-'simple_grid_field58' => 'grid',
-'simple_grid_field19' => 'grid',
-'simple_grid_field59' => 'grid',
-'simple_grid_field20' => 'grid',
-'simple_grid_field60' => 'grid',
-'simple_grid_field21' => 'grid',
-'simple_grid_field61' => 'grid',
-'simple_grid_field22' => 'grid',
-'simple_grid_field62' => 'grid',
-'simple_grid_field23' => 'grid',
-'simple_grid_field63' => 'grid',
-'simple_grid_field24' => 'grid',
-'simple_grid_field64' => 'grid',
-'simple_grid_field25' => 'grid',
-'simple_grid_field65' => 'grid',
-'simple_grid_field26' => 'grid',
-'simple_grid_field66' => 'grid',
-'simple_grid_field27' => 'grid',
-'simple_grid_field67' => 'grid',
-'simple_grid_field28' => 'grid',
-'simple_grid_field68' => 'grid',
-'simple_grid_field29' => 'grid',
-'simple_grid_field69' => 'grid',
-'simple_grid_field30' => 'grid',
-'simple_grid_field70' => 'grid',
-'simple_grid_field31' => 'grid',
-'simple_grid_field71' => 'grid',
-'simple_grid_field32' => 'grid',
-'simple_grid_field72' => 'grid',
-'simple_grid_field33' => 'grid',
-'simple_grid_field73' => 'grid',
-'simple_grid_field34' => 'grid',
-'simple_grid_field74' => 'grid',
-'simple_grid_field35' => 'grid',
-'simple_grid_field75' => 'grid',
-'simple_grid_field36' => 'grid',
-'simple_grid_field76' => 'grid',
-'simple_grid_field37' => 'grid',
-'simple_grid_field77' => 'grid',
-'simple_grid_field38' => 'grid',
-'details_preview' => 'grid',
-'grid_checkbox_head' => 'grid',
-'grid_checkbox' => 'grid',
-'grid_edit' => 'grid',
-'grid_inline_cancel' => 'grid',
-'grid_view' => 'grid',
-'grid_alldetails_link' => 'grid',
-'grid_details_link' => 'grid' ),
-'itemLocations' => array( 'simple_grid_field39' => array( 'location' => 'grid',
-'cellId' => 'headcell_field' ),
-'simple_grid_field' => array( 'location' => 'grid',
-'cellId' => 'cell_field' ),
-'simple_grid_field40' => array( 'location' => 'grid',
-'cellId' => 'headcell_field1' ),
-'simple_grid_field1' => array( 'location' => 'grid',
-'cellId' => 'cell_field1' ),
-'simple_grid_field41' => array( 'location' => 'grid',
-'cellId' => 'headcell_field2' ),
-'simple_grid_field2' => array( 'location' => 'grid',
-'cellId' => 'cell_field2' ),
-'simple_grid_field42' => array( 'location' => 'grid',
-'cellId' => 'headcell_field3' ),
-'simple_grid_field3' => array( 'location' => 'grid',
-'cellId' => 'cell_field3' ),
-'simple_grid_field43' => array( 'location' => 'grid',
-'cellId' => 'headcell_field4' ),
-'simple_grid_field4' => array( 'location' => 'grid',
-'cellId' => 'cell_field4' ),
-'simple_grid_field44' => array( 'location' => 'grid',
-'cellId' => 'headcell_field5' ),
-'simple_grid_field5' => array( 'location' => 'grid',
-'cellId' => 'cell_field5' ),
-'simple_grid_field45' => array( 'location' => 'grid',
-'cellId' => 'headcell_field6' ),
-'simple_grid_field6' => array( 'location' => 'grid',
-'cellId' => 'cell_field6' ),
-'simple_grid_field46' => array( 'location' => 'grid',
-'cellId' => 'headcell_field7' ),
-'simple_grid_field7' => array( 'location' => 'grid',
-'cellId' => 'cell_field7' ),
-'simple_grid_field47' => array( 'location' => 'grid',
-'cellId' => 'headcell_field8' ),
-'simple_grid_field8' => array( 'location' => 'grid',
-'cellId' => 'cell_field8' ),
-'simple_grid_field48' => array( 'location' => 'grid',
-'cellId' => 'headcell_field9' ),
-'simple_grid_field9' => array( 'location' => 'grid',
-'cellId' => 'cell_field9' ),
-'simple_grid_field49' => array( 'location' => 'grid',
-'cellId' => 'headcell_field10' ),
-'simple_grid_field10' => array( 'location' => 'grid',
-'cellId' => 'cell_field10' ),
-'simple_grid_field50' => array( 'location' => 'grid',
-'cellId' => 'headcell_field11' ),
-'simple_grid_field11' => array( 'location' => 'grid',
-'cellId' => 'cell_field11' ),
-'simple_grid_field51' => array( 'location' => 'grid',
-'cellId' => 'headcell_field12' ),
-'simple_grid_field12' => array( 'location' => 'grid',
-'cellId' => 'cell_field12' ),
-'simple_grid_field52' => array( 'location' => 'grid',
-'cellId' => 'headcell_field13' ),
-'simple_grid_field13' => array( 'location' => 'grid',
-'cellId' => 'cell_field13' ),
-'simple_grid_field53' => array( 'location' => 'grid',
-'cellId' => 'headcell_field14' ),
-'simple_grid_field14' => array( 'location' => 'grid',
-'cellId' => 'cell_field14' ),
-'simple_grid_field54' => array( 'location' => 'grid',
-'cellId' => 'headcell_field15' ),
-'simple_grid_field15' => array( 'location' => 'grid',
-'cellId' => 'cell_field15' ),
-'simple_grid_field55' => array( 'location' => 'grid',
-'cellId' => 'headcell_field16' ),
-'simple_grid_field16' => array( 'location' => 'grid',
-'cellId' => 'cell_field16' ),
-'simple_grid_field56' => array( 'location' => 'grid',
-'cellId' => 'headcell_field17' ),
-'simple_grid_field17' => array( 'location' => 'grid',
-'cellId' => 'cell_field17' ),
-'simple_grid_field57' => array( 'location' => 'grid',
-'cellId' => 'headcell_field18' ),
-'simple_grid_field18' => array( 'location' => 'grid',
-'cellId' => 'cell_field18' ),
-'simple_grid_field58' => array( 'location' => 'grid',
-'cellId' => 'headcell_field19' ),
-'simple_grid_field19' => array( 'location' => 'grid',
-'cellId' => 'cell_field19' ),
-'simple_grid_field59' => array( 'location' => 'grid',
-'cellId' => 'headcell_field20' ),
-'simple_grid_field20' => array( 'location' => 'grid',
-'cellId' => 'cell_field20' ),
-'simple_grid_field60' => array( 'location' => 'grid',
-'cellId' => 'headcell_field21' ),
-'simple_grid_field21' => array( 'location' => 'grid',
-'cellId' => 'cell_field21' ),
-'simple_grid_field61' => array( 'location' => 'grid',
-'cellId' => 'headcell_field22' ),
-'simple_grid_field22' => array( 'location' => 'grid',
-'cellId' => 'cell_field22' ),
-'simple_grid_field62' => array( 'location' => 'grid',
-'cellId' => 'headcell_field23' ),
-'simple_grid_field23' => array( 'location' => 'grid',
-'cellId' => 'cell_field23' ),
-'simple_grid_field63' => array( 'location' => 'grid',
-'cellId' => 'headcell_field24' ),
-'simple_grid_field24' => array( 'location' => 'grid',
-'cellId' => 'cell_field24' ),
-'simple_grid_field64' => array( 'location' => 'grid',
-'cellId' => 'headcell_field25' ),
-'simple_grid_field25' => array( 'location' => 'grid',
-'cellId' => 'cell_field25' ),
-'simple_grid_field65' => array( 'location' => 'grid',
-'cellId' => 'headcell_field26' ),
-'simple_grid_field26' => array( 'location' => 'grid',
-'cellId' => 'cell_field26' ),
-'simple_grid_field66' => array( 'location' => 'grid',
-'cellId' => 'headcell_field27' ),
-'simple_grid_field27' => array( 'location' => 'grid',
-'cellId' => 'cell_field27' ),
-'simple_grid_field67' => array( 'location' => 'grid',
-'cellId' => 'headcell_field28' ),
-'simple_grid_field28' => array( 'location' => 'grid',
-'cellId' => 'cell_field28' ),
-'simple_grid_field68' => array( 'location' => 'grid',
-'cellId' => 'headcell_field29' ),
-'simple_grid_field29' => array( 'location' => 'grid',
-'cellId' => 'cell_field29' ),
-'simple_grid_field69' => array( 'location' => 'grid',
-'cellId' => 'headcell_field30' ),
-'simple_grid_field30' => array( 'location' => 'grid',
-'cellId' => 'cell_field30' ),
-'simple_grid_field70' => array( 'location' => 'grid',
-'cellId' => 'headcell_field31' ),
-'simple_grid_field31' => array( 'location' => 'grid',
-'cellId' => 'cell_field31' ),
-'simple_grid_field71' => array( 'location' => 'grid',
-'cellId' => 'headcell_field32' ),
-'simple_grid_field32' => array( 'location' => 'grid',
-'cellId' => 'cell_field32' ),
-'simple_grid_field72' => array( 'location' => 'grid',
-'cellId' => 'headcell_field33' ),
-'simple_grid_field33' => array( 'location' => 'grid',
-'cellId' => 'cell_field33' ),
-'simple_grid_field73' => array( 'location' => 'grid',
-'cellId' => 'headcell_field34' ),
-'simple_grid_field34' => array( 'location' => 'grid',
-'cellId' => 'cell_field34' ),
-'simple_grid_field74' => array( 'location' => 'grid',
-'cellId' => 'headcell_field35' ),
-'simple_grid_field35' => array( 'location' => 'grid',
-'cellId' => 'cell_field35' ),
-'simple_grid_field75' => array( 'location' => 'grid',
-'cellId' => 'headcell_field36' ),
-'simple_grid_field36' => array( 'location' => 'grid',
-'cellId' => 'cell_field36' ),
-'simple_grid_field76' => array( 'location' => 'grid',
-'cellId' => 'headcell_field37' ),
-'simple_grid_field37' => array( 'location' => 'grid',
-'cellId' => 'cell_field37' ),
-'simple_grid_field77' => array( 'location' => 'grid',
-'cellId' => 'headcell_field38' ),
-'simple_grid_field38' => array( 'location' => 'grid',
-'cellId' => 'cell_field38' ),
-'details_preview' => array( 'location' => 'grid',
-'cellId' => 'cell_dpreview' ),
-'grid_checkbox_head' => array( 'location' => 'grid',
-'cellId' => 'headcell_checkbox' ),
-'grid_checkbox' => array( 'location' => 'grid',
-'cellId' => 'cell_checkbox' ),
-'grid_edit' => array( 'location' => 'grid',
-'cellId' => 'cell_icons' ),
-'grid_inline_cancel' => array( 'location' => 'grid',
-'cellId' => 'cell_icons' ),
-'grid_view' => array( 'location' => 'grid',
-'cellId' => 'cell_icons' ),
-'grid_alldetails_link' => array( 'location' => 'grid',
-'cellId' => 'cell_details' ),
-'grid_details_link' => array( 'location' => 'grid',
-'cellId' => 'cell_details' ) ),
-'itemVisiblity' => array( 'breadcrumb' => 5,
-'expand_menu_button' => 2,
-'print_panel' => 5,
-'expand_button' => 5 ) ),
-'itemsByType' => array( 'page_size' => array( 'page_size' ),
-'breadcrumb' => array( 'breadcrumb' ),
-'logo' => array( 'logo' ),
-'menu' => array( 'menu' ),
-'simple_search' => array( 'simple_search' ),
-'pagination' => array( 'pagination' ),
-'details_found' => array( 'details_found' ),
-'list_options' => array( 'list_options' ),
-'-' => array( '-3',
-'-',
-'-1',
-'-2' ),
-'advsearch_link' => array( 'advsearch_link' ),
-'delete_selected' => array( 'delete_selected' ),
-'delete' => array( 'delete' ),
-'expand_menu_button' => array( 'expand_menu_button' ),
-'collapse_button' => array( 'collapse_button' ),
-'add' => array( 'add' ),
-'print_panel' => array( 'print_panel' ),
-'print_scope' => array( 'print_scope' ),
-'print_button' => array( 'print_button' ),
-'print_records' => array( 'print_records' ),
-'export' => array( 'export' ),
-'export_selected' => array( 'export_selected' ),
-'import' => array( 'import' ),
-'search_panel' => array( 'search_panel' ),
-'show_search_panel' => array( 'show_search_panel' ),
-'hide_search_panel' => array( 'hide_search_panel' ),
-'search_panel_field' => array( 'search_panel_field',
-'search_panel_field1',
-'search_panel_field2',
-'search_panel_field3',
-'search_panel_field4',
-'search_panel_field5',
-'search_panel_field6',
-'search_panel_field7',
-'search_panel_field8',
-'search_panel_field9',
-'search_panel_field10',
-'search_panel_field11',
-'search_panel_field12',
-'search_panel_field13',
-'search_panel_field14',
-'search_panel_field15',
-'search_panel_field16',
-'search_panel_field17',
-'search_panel_field18',
-'search_panel_field19',
-'search_panel_field20',
-'search_panel_field21',
-'search_panel_field22',
-'search_panel_field23',
-'search_panel_field24',
-'search_panel_field25',
-'search_panel_field26',
-'search_panel_field27',
-'search_panel_field28',
-'search_panel_field29',
-'search_panel_field30',
-'search_panel_field31',
-'search_panel_field32',
-'search_panel_field33',
-'search_panel_field34',
-'search_panel_field35',
-'search_panel_field36',
-'search_panel_field37',
-'search_panel_field38' ),
-'master_info' => array( 'master_info' ),
-'print_details' => array( 'print_details' ),
-'username_button' => array( 'username_button' ),
-'changepassword_link' => array( 'changepassword_link' ),
-'adminarea_link' => array( 'adminarea_link' ),
-'loginform_login' => array( 'loginform_login' ),
-'userinfo_link' => array( 'userinfo_link' ),
-'logout_link' => array( 'logout_link' ),
-'grid_field' => array( 'simple_grid_field',
-'simple_grid_field1',
-'simple_grid_field2',
-'simple_grid_field3',
-'simple_grid_field4',
-'simple_grid_field5',
-'simple_grid_field6',
-'simple_grid_field7',
-'simple_grid_field8',
-'simple_grid_field9',
-'simple_grid_field10',
-'simple_grid_field11',
-'simple_grid_field12',
-'simple_grid_field13',
-'simple_grid_field14',
-'simple_grid_field15',
-'simple_grid_field16',
-'simple_grid_field17',
-'simple_grid_field18',
-'simple_grid_field19',
-'simple_grid_field20',
-'simple_grid_field21',
-'simple_grid_field22',
-'simple_grid_field23',
-'simple_grid_field24',
-'simple_grid_field25',
-'simple_grid_field26',
-'simple_grid_field27',
-'simple_grid_field28',
-'simple_grid_field29',
-'simple_grid_field30',
-'simple_grid_field31',
-'simple_grid_field32',
-'simple_grid_field33',
-'simple_grid_field34',
-'simple_grid_field35',
-'simple_grid_field36',
-'simple_grid_field37',
-'simple_grid_field38' ),
-'grid_field_label' => array( 'simple_grid_field39',
-'simple_grid_field40',
-'simple_grid_field41',
-'simple_grid_field42',
-'simple_grid_field43',
-'simple_grid_field44',
-'simple_grid_field45',
-'simple_grid_field46',
-'simple_grid_field47',
-'simple_grid_field48',
-'simple_grid_field49',
-'simple_grid_field50',
-'simple_grid_field51',
-'simple_grid_field52',
-'simple_grid_field53',
-'simple_grid_field54',
-'simple_grid_field55',
-'simple_grid_field56',
-'simple_grid_field57',
-'simple_grid_field58',
-'simple_grid_field59',
-'simple_grid_field60',
-'simple_grid_field61',
-'simple_grid_field62',
-'simple_grid_field63',
-'simple_grid_field64',
-'simple_grid_field65',
-'simple_grid_field66',
-'simple_grid_field67',
-'simple_grid_field68',
-'simple_grid_field69',
-'simple_grid_field70',
-'simple_grid_field71',
-'simple_grid_field72',
-'simple_grid_field73',
-'simple_grid_field74',
-'simple_grid_field75',
-'simple_grid_field76',
-'simple_grid_field77' ),
-'details_preview' => array( 'details_preview' ),
-'grid_checkbox' => array( 'grid_checkbox' ),
-'grid_checkbox_head' => array( 'grid_checkbox_head' ),
-'grid_edit' => array( 'grid_edit' ),
-'grid_view' => array( 'grid_view' ),
-'grid_alldetails_link' => array( 'grid_alldetails_link' ),
-'grid_details_link' => array( 'grid_details_link' ),
-'expand_button' => array( 'expand_button' ),
-'inline_add' => array( 'inline_add' ),
-'grid_inline_cancel' => array( 'grid_inline_cancel' ) ),
-'cellMaps' => array( 'grid' => array( 'cells' => array( 'headcell_icons' => array( 'cols' => array( 0 ),
-'rows' => array( 0 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_checkbox' => array( 'cols' => array( 1 ),
-'rows' => array( 0 ),
-'tags' => array( 'checkbox_column' ),
-'items' => array( 'grid_checkbox_head' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_details' => array( 'cols' => array( 2 ),
-'rows' => array( 0 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field' => array( 'cols' => array( 3 ),
-'rows' => array( 0 ),
-'tags' => array( 'ward_round_id_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field39' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field1' => array( 'cols' => array( 4 ),
-'rows' => array( 0 ),
-'tags' => array( 'case_id_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field40' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field2' => array( 'cols' => array( 5 ),
-'rows' => array( 0 ),
-'tags' => array( 'facility_id_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field41' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field3' => array( 'cols' => array( 6 ),
-'rows' => array( 0 ),
-'tags' => array( 'admission_date_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field42' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field4' => array( 'cols' => array( 7 ),
-'rows' => array( 0 ),
-'tags' => array( 'rounding_date_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field43' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field5' => array( 'cols' => array( 8 ),
-'rows' => array( 0 ),
-'tags' => array( 'data_collector_name_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field44' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field6' => array( 'cols' => array( 9 ),
-'rows' => array( 0 ),
-'tags' => array( 'ward_name_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field45' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field7' => array( 'cols' => array( 10 ),
-'rows' => array( 0 ),
-'tags' => array( 'ward_transfer_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field46' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field8' => array( 'cols' => array( 11 ),
-'rows' => array( 0 ),
-'tags' => array( 'postop_day_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field47' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field9' => array( 'cols' => array( 12 ),
-'rows' => array( 0 ),
-'tags' => array( 'dressing_not_removed_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field48' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field10' => array( 'cols' => array( 13 ),
-'rows' => array( 0 ),
-'tags' => array( 'wound_clean_and_healthy_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field49' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field11' => array( 'cols' => array( 14 ),
-'rows' => array( 0 ),
-'tags' => array( 'stitches_removed_or_wound_opened_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field50' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field12' => array( 'cols' => array( 15 ),
-'rows' => array( 0 ),
-'tags' => array( 'wound_opened_spontaneously_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field51' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field13' => array( 'cols' => array( 16 ),
-'rows' => array( 0 ),
-'tags' => array( 'pus_draining_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field52' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field14' => array( 'cols' => array( 17 ),
-'rows' => array( 0 ),
-'tags' => array( 'abscess_present_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field53' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field15' => array( 'cols' => array( 18 ),
-'rows' => array( 0 ),
-'tags' => array( 'redness_around_wound_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field54' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field16' => array( 'cols' => array( 19 ),
-'rows' => array( 0 ),
-'tags' => array( 'bleeding_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field55' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field17' => array( 'cols' => array( 20 ),
-'rows' => array( 0 ),
-'tags' => array( 'new_dressing_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field56' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field18' => array( 'cols' => array( 21 ),
-'rows' => array( 0 ),
-'tags' => array( 'new_dressing_type_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field57' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field19' => array( 'cols' => array( 22 ),
-'rows' => array( 0 ),
-'tags' => array( 'fever_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field58' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field20' => array( 'cols' => array( 23 ),
-'rows' => array( 0 ),
-'tags' => array( 'on_antibiotics_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field59' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field21' => array( 'cols' => array( 24 ),
-'rows' => array( 0 ),
-'tags' => array( 'antibiotics_prescribed_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field60' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field22' => array( 'cols' => array( 25 ),
-'rows' => array( 0 ),
-'tags' => array( 'ssi_diagnosed_on_reoperation_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field61' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field23' => array( 'cols' => array( 26 ),
-'rows' => array( 0 ),
-'tags' => array( 'returned_to_or_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field62' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field24' => array( 'cols' => array( 27 ),
-'rows' => array( 0 ),
-'tags' => array( 'return_or_procedure_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field63' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field25' => array( 'cols' => array( 28 ),
-'rows' => array( 0 ),
-'tags' => array( 'disposition_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field64' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field26' => array( 'cols' => array( 29 ),
-'rows' => array( 0 ),
-'tags' => array( 'planned_reoperation_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field65' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field27' => array( 'cols' => array( 30 ),
-'rows' => array( 0 ),
-'tags' => array( 'other_complications_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field66' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field28' => array( 'cols' => array( 31 ),
-'rows' => array( 0 ),
-'tags' => array( 'endometritis_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field67' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field29' => array( 'cols' => array( 32 ),
-'rows' => array( 0 ),
-'tags' => array( 'urinary_tract_infection_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field68' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field30' => array( 'cols' => array( 33 ),
-'rows' => array( 0 ),
-'tags' => array( 'pneumonia_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field69' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field31' => array( 'cols' => array( 34 ),
-'rows' => array( 0 ),
-'tags' => array( 'other_complication_description_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field70' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field32' => array( 'cols' => array( 35 ),
-'rows' => array( 0 ),
-'tags' => array( 'eschar_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field71' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field33' => array( 'cols' => array( 36 ),
-'rows' => array( 0 ),
-'tags' => array( 'discharged_today_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field72' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field34' => array( 'cols' => array( 37 ),
-'rows' => array( 0 ),
-'tags' => array( 'discharge_date_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field73' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field35' => array( 'cols' => array( 38 ),
-'rows' => array( 0 ),
-'tags' => array( 'death_in_ward_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field74' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field36' => array( 'cols' => array( 39 ),
-'rows' => array( 0 ),
-'tags' => array( 'neonatal_death_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field75' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field37' => array( 'cols' => array( 40 ),
-'rows' => array( 0 ),
-'tags' => array( 'created_at_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field76' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'headcell_field38' => array( 'cols' => array( 41 ),
-'rows' => array( 0 ),
-'tags' => array( 'updated_at_fieldheadercolumn' ),
-'items' => array( 'simple_grid_field77' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_icons' => array( 'cols' => array( 0 ),
-'rows' => array( 1 ),
-'tags' => array( 'edit_column',
-'inline_cancel',
-'view_column' ),
-'items' => array( 'grid_edit',
-'grid_inline_cancel',
-'grid_view' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_checkbox' => array( 'cols' => array( 1 ),
-'rows' => array( 1 ),
-'tags' => array( 'checkbox_column' ),
-'items' => array( 'grid_checkbox' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_details' => array( 'cols' => array( 2 ),
-'rows' => array( 1 ),
-'tags' => array(  ),
-'items' => array( 'grid_alldetails_link',
-'grid_details_link' ),
-'fixedAtServer' => true,
-'fixedAtClient' => false ),
-'cell_field' => array( 'cols' => array( 3 ),
-'rows' => array( 1 ),
-'tags' => array( 'ward_round_id_fieldcolumn' ),
-'items' => array( 'simple_grid_field' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field1' => array( 'cols' => array( 4 ),
-'rows' => array( 1 ),
-'tags' => array( 'case_id_fieldcolumn' ),
-'items' => array( 'simple_grid_field1' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field2' => array( 'cols' => array( 5 ),
-'rows' => array( 1 ),
-'tags' => array( 'facility_id_fieldcolumn' ),
-'items' => array( 'simple_grid_field2' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field3' => array( 'cols' => array( 6 ),
-'rows' => array( 1 ),
-'tags' => array( 'admission_date_fieldcolumn' ),
-'items' => array( 'simple_grid_field3' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field4' => array( 'cols' => array( 7 ),
-'rows' => array( 1 ),
-'tags' => array( 'rounding_date_fieldcolumn' ),
-'items' => array( 'simple_grid_field4' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field5' => array( 'cols' => array( 8 ),
-'rows' => array( 1 ),
-'tags' => array( 'data_collector_name_fieldcolumn' ),
-'items' => array( 'simple_grid_field5' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field6' => array( 'cols' => array( 9 ),
-'rows' => array( 1 ),
-'tags' => array( 'ward_name_fieldcolumn' ),
-'items' => array( 'simple_grid_field6' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field7' => array( 'cols' => array( 10 ),
-'rows' => array( 1 ),
-'tags' => array( 'ward_transfer_fieldcolumn' ),
-'items' => array( 'simple_grid_field7' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field8' => array( 'cols' => array( 11 ),
-'rows' => array( 1 ),
-'tags' => array( 'postop_day_fieldcolumn' ),
-'items' => array( 'simple_grid_field8' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field9' => array( 'cols' => array( 12 ),
-'rows' => array( 1 ),
-'tags' => array( 'dressing_not_removed_fieldcolumn' ),
-'items' => array( 'simple_grid_field9' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field10' => array( 'cols' => array( 13 ),
-'rows' => array( 1 ),
-'tags' => array( 'wound_clean_and_healthy_fieldcolumn' ),
-'items' => array( 'simple_grid_field10' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field11' => array( 'cols' => array( 14 ),
-'rows' => array( 1 ),
-'tags' => array( 'stitches_removed_or_wound_opened_fieldcolumn' ),
-'items' => array( 'simple_grid_field11' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field12' => array( 'cols' => array( 15 ),
-'rows' => array( 1 ),
-'tags' => array( 'wound_opened_spontaneously_fieldcolumn' ),
-'items' => array( 'simple_grid_field12' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field13' => array( 'cols' => array( 16 ),
-'rows' => array( 1 ),
-'tags' => array( 'pus_draining_fieldcolumn' ),
-'items' => array( 'simple_grid_field13' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field14' => array( 'cols' => array( 17 ),
-'rows' => array( 1 ),
-'tags' => array( 'abscess_present_fieldcolumn' ),
-'items' => array( 'simple_grid_field14' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field15' => array( 'cols' => array( 18 ),
-'rows' => array( 1 ),
-'tags' => array( 'redness_around_wound_fieldcolumn' ),
-'items' => array( 'simple_grid_field15' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field16' => array( 'cols' => array( 19 ),
-'rows' => array( 1 ),
-'tags' => array( 'bleeding_fieldcolumn' ),
-'items' => array( 'simple_grid_field16' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field17' => array( 'cols' => array( 20 ),
-'rows' => array( 1 ),
-'tags' => array( 'new_dressing_fieldcolumn' ),
-'items' => array( 'simple_grid_field17' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field18' => array( 'cols' => array( 21 ),
-'rows' => array( 1 ),
-'tags' => array( 'new_dressing_type_fieldcolumn' ),
-'items' => array( 'simple_grid_field18' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field19' => array( 'cols' => array( 22 ),
-'rows' => array( 1 ),
-'tags' => array( 'fever_fieldcolumn' ),
-'items' => array( 'simple_grid_field19' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field20' => array( 'cols' => array( 23 ),
-'rows' => array( 1 ),
-'tags' => array( 'on_antibiotics_fieldcolumn' ),
-'items' => array( 'simple_grid_field20' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field21' => array( 'cols' => array( 24 ),
-'rows' => array( 1 ),
-'tags' => array( 'antibiotics_prescribed_fieldcolumn' ),
-'items' => array( 'simple_grid_field21' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field22' => array( 'cols' => array( 25 ),
-'rows' => array( 1 ),
-'tags' => array( 'ssi_diagnosed_on_reoperation_fieldcolumn' ),
-'items' => array( 'simple_grid_field22' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field23' => array( 'cols' => array( 26 ),
-'rows' => array( 1 ),
-'tags' => array( 'returned_to_or_fieldcolumn' ),
-'items' => array( 'simple_grid_field23' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field24' => array( 'cols' => array( 27 ),
-'rows' => array( 1 ),
-'tags' => array( 'return_or_procedure_fieldcolumn' ),
-'items' => array( 'simple_grid_field24' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field25' => array( 'cols' => array( 28 ),
-'rows' => array( 1 ),
-'tags' => array( 'disposition_fieldcolumn' ),
-'items' => array( 'simple_grid_field25' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field26' => array( 'cols' => array( 29 ),
-'rows' => array( 1 ),
-'tags' => array( 'planned_reoperation_fieldcolumn' ),
-'items' => array( 'simple_grid_field26' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field27' => array( 'cols' => array( 30 ),
-'rows' => array( 1 ),
-'tags' => array( 'other_complications_fieldcolumn' ),
-'items' => array( 'simple_grid_field27' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field28' => array( 'cols' => array( 31 ),
-'rows' => array( 1 ),
-'tags' => array( 'endometritis_fieldcolumn' ),
-'items' => array( 'simple_grid_field28' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field29' => array( 'cols' => array( 32 ),
-'rows' => array( 1 ),
-'tags' => array( 'urinary_tract_infection_fieldcolumn' ),
-'items' => array( 'simple_grid_field29' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field30' => array( 'cols' => array( 33 ),
-'rows' => array( 1 ),
-'tags' => array( 'pneumonia_fieldcolumn' ),
-'items' => array( 'simple_grid_field30' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field31' => array( 'cols' => array( 34 ),
-'rows' => array( 1 ),
-'tags' => array( 'other_complication_description_fieldcolumn' ),
-'items' => array( 'simple_grid_field31' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field32' => array( 'cols' => array( 35 ),
-'rows' => array( 1 ),
-'tags' => array( 'eschar_fieldcolumn' ),
-'items' => array( 'simple_grid_field32' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field33' => array( 'cols' => array( 36 ),
-'rows' => array( 1 ),
-'tags' => array( 'discharged_today_fieldcolumn' ),
-'items' => array( 'simple_grid_field33' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field34' => array( 'cols' => array( 37 ),
-'rows' => array( 1 ),
-'tags' => array( 'discharge_date_fieldcolumn' ),
-'items' => array( 'simple_grid_field34' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field35' => array( 'cols' => array( 38 ),
-'rows' => array( 1 ),
-'tags' => array( 'death_in_ward_fieldcolumn' ),
-'items' => array( 'simple_grid_field35' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field36' => array( 'cols' => array( 39 ),
-'rows' => array( 1 ),
-'tags' => array( 'neonatal_death_fieldcolumn' ),
-'items' => array( 'simple_grid_field36' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field37' => array( 'cols' => array( 40 ),
-'rows' => array( 1 ),
-'tags' => array( 'created_at_fieldcolumn' ),
-'items' => array( 'simple_grid_field37' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_field38' => array( 'cols' => array( 41 ),
-'rows' => array( 1 ),
-'tags' => array( 'updated_at_fieldcolumn' ),
-'items' => array( 'simple_grid_field38' ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'cell_dpreview' => array( 'cols' => array( 0,
-1,
-2,
-3,
-4,
-5,
-6,
-7,
-8,
-9,
-10,
-11,
-12,
-13,
-14,
-15,
-16,
-17,
-18,
-19,
-20,
-21,
-22,
-23,
-24,
-25,
-26,
-27,
-28,
-29,
-30,
-31,
-32,
-33,
-34,
-35,
-36,
-37,
-38,
-39,
-40,
-41 ),
-'rows' => array( 2 ),
-'tags' => array(  ),
-'items' => array( 'details_preview' ),
-'fixedAtServer' => true,
-'fixedAtClient' => false ),
-'footcell_icons' => array( 'cols' => array( 0 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_checkbox' => array( 'cols' => array( 1 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_details' => array( 'cols' => array( 2 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field' => array( 'cols' => array( 3 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field1' => array( 'cols' => array( 4 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field2' => array( 'cols' => array( 5 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field3' => array( 'cols' => array( 6 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field4' => array( 'cols' => array( 7 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field5' => array( 'cols' => array( 8 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field6' => array( 'cols' => array( 9 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field7' => array( 'cols' => array( 10 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field8' => array( 'cols' => array( 11 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field9' => array( 'cols' => array( 12 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field10' => array( 'cols' => array( 13 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field11' => array( 'cols' => array( 14 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field12' => array( 'cols' => array( 15 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field13' => array( 'cols' => array( 16 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field14' => array( 'cols' => array( 17 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field15' => array( 'cols' => array( 18 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field16' => array( 'cols' => array( 19 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field17' => array( 'cols' => array( 20 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field18' => array( 'cols' => array( 21 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field19' => array( 'cols' => array( 22 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field20' => array( 'cols' => array( 23 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field21' => array( 'cols' => array( 24 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field22' => array( 'cols' => array( 25 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field23' => array( 'cols' => array( 26 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field24' => array( 'cols' => array( 27 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field25' => array( 'cols' => array( 28 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field26' => array( 'cols' => array( 29 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field27' => array( 'cols' => array( 30 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field28' => array( 'cols' => array( 31 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field29' => array( 'cols' => array( 32 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field30' => array( 'cols' => array( 33 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field31' => array( 'cols' => array( 34 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field32' => array( 'cols' => array( 35 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field33' => array( 'cols' => array( 36 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field34' => array( 'cols' => array( 37 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field35' => array( 'cols' => array( 38 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field36' => array( 'cols' => array( 39 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field37' => array( 'cols' => array( 40 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ),
-'footcell_field38' => array( 'cols' => array( 41 ),
-'rows' => array( 3 ),
-'tags' => array(  ),
-'items' => array(  ),
-'fixedAtServer' => false,
-'fixedAtClient' => false ) ),
-'width' => 42,
-'height' => 4 ) ) ),
-'loginForm' => array( 'loginForm' => 0 ),
-'page' => array( 'verticalBar' => true,
-'labeledButtons' => array( 'update_records' => array(  ),
-'print_pages' => array(  ),
-'register_activate_message' => array(  ),
-'details_found' => array( 'details_found' => array( 'tag' => 'DISPLAYING',
-'type' => 2 ) ) ),
-'gridType' => 0,
-'recsPerRow' => 1,
-'hasCustomButtons' => false,
-'customButtons' => array(  ),
-'hasNotifications' => false,
-'menus' => array( array( 'id' => 'main',
-'horizontal' => false ) ),
-'calcTotalsFor' => 1 ),
-'misc' => array( 'type' => 'list',
-'breadcrumb' => true ),
-'events' => array( 'maps' => array(  ),
-'mapsData' => array(  ),
-'buttons' => array(  ) ),
-'dataGrid' => array( 'groupFields' => array(  ) ) );
-			$pageArray = array( 'id' => 'list',
-'type' => 'list',
-'layoutId' => 'leftbar',
-'disabled' => 0,
-'default' => 0,
-'forms' => array( 'above-grid' => array( 'modelId' => 'list-above-grid',
-'grid' => array( array( 'cells' => array( array( 'cell' => 'c1' ),
-array( 'cell' => 'c2' ) ),
-'section' => '' ) ),
-'cells' => array( 'c1' => array( 'model' => 'c1',
-'items' => array( 'add',
-'inline_add',
-'delete' ) ),
-'c2' => array( 'model' => 'c2',
-'items' => array( 'details_found',
-'page_size',
-'print_panel' ) ) ),
-'deferredItems' => array(  ),
-'recsPerRow' => 1 ),
-'below-grid' => array( 'modelId' => 'list-below-grid',
-'grid' => array( array( 'cells' => array( array( 'cell' => 'c1' ) ),
-'section' => '' ) ),
-'cells' => array( 'c1' => array( 'model' => 'c1',
-'items' => array( 'pagination' ) ) ),
-'deferredItems' => array(  ),
-'recsPerRow' => 1 ),
-'left' => array( 'modelId' => 'leftbar-menu',
-'grid' => array( array( 'cells' => array( array( 'cell' => 'c0' ) ),
-'section' => '' ),
-array( 'cells' => array( array( 'cell' => 'c1' ) ),
-'section' => '' ) ),
-'cells' => array( 'c0' => array( 'model' => 'c0',
-'items' => array( 'logo',
-'expand_button' ) ),
-'c1' => array( 'model' => 'c1',
-'items' => array( 'menu',
-'search_panel' ) ) ),
-'deferredItems' => array(  ),
-'recsPerRow' => 1 ),
-'supertop' => array( 'modelId' => 'leftbar-top',
-'grid' => array( array( 'cells' => array( array( 'cell' => 'c1' ),
-array( 'cell' => 'c2' ) ),
-'section' => '' ) ),
-'cells' => array( 'c1' => array( 'model' => 'c1',
-'items' => array( 'expand_menu_button',
-'collapse_button',
-'breadcrumb' ) ),
-'c2' => array( 'model' => 'c2',
-'items' => array( 'simple_search',
-'list_options',
-'loginform_login',
-'username_button' ) ) ),
-'deferredItems' => array(  ),
-'recsPerRow' => 1 ),
-'top' => array( 'modelId' => 'list-sidebar-top',
-'grid' => array( array( 'cells' => array( array( 'cell' => 'c2' ) ),
-'section' => '' ) ),
-'cells' => array( 'c2' => array( 'model' => 'c2',
-'items' => array( 'master_info' ) ) ),
-'deferredItems' => array(  ),
-'recsPerRow' => 1 ),
-'grid' => array( 'modelId' => 'horizontal-grid',
-'grid' => array( array( 'section' => 'head',
-'cells' => array( array( 'cell' => 'headcell_icons' ),
-array( 'cell' => 'headcell_checkbox' ),
-array( 'cell' => 'headcell_details' ),
-array( 'cell' => 'headcell_field' ),
-array( 'cell' => 'headcell_field1' ),
-array( 'cell' => 'headcell_field2' ),
-array( 'cell' => 'headcell_field3' ),
-array( 'cell' => 'headcell_field4' ),
-array( 'cell' => 'headcell_field5' ),
-array( 'cell' => 'headcell_field6' ),
-array( 'cell' => 'headcell_field7' ),
-array( 'cell' => 'headcell_field8' ),
-array( 'cell' => 'headcell_field9' ),
-array( 'cell' => 'headcell_field10' ),
-array( 'cell' => 'headcell_field11' ),
-array( 'cell' => 'headcell_field12' ),
-array( 'cell' => 'headcell_field13' ),
-array( 'cell' => 'headcell_field14' ),
-array( 'cell' => 'headcell_field15' ),
-array( 'cell' => 'headcell_field16' ),
-array( 'cell' => 'headcell_field17' ),
-array( 'cell' => 'headcell_field18' ),
-array( 'cell' => 'headcell_field19' ),
-array( 'cell' => 'headcell_field20' ),
-array( 'cell' => 'headcell_field21' ),
-array( 'cell' => 'headcell_field22' ),
-array( 'cell' => 'headcell_field23' ),
-array( 'cell' => 'headcell_field24' ),
-array( 'cell' => 'headcell_field25' ),
-array( 'cell' => 'headcell_field26' ),
-array( 'cell' => 'headcell_field27' ),
-array( 'cell' => 'headcell_field28' ),
-array( 'cell' => 'headcell_field29' ),
-array( 'cell' => 'headcell_field30' ),
-array( 'cell' => 'headcell_field31' ),
-array( 'cell' => 'headcell_field32' ),
-array( 'cell' => 'headcell_field33' ),
-array( 'cell' => 'headcell_field34' ),
-array( 'cell' => 'headcell_field35' ),
-array( 'cell' => 'headcell_field36' ),
-array( 'cell' => 'headcell_field37' ),
-array( 'cell' => 'headcell_field38' ) ) ),
-array( 'section' => 'body',
-'cells' => array( array( 'cell' => 'cell_icons' ),
-array( 'cell' => 'cell_checkbox' ),
-array( 'cell' => 'cell_details' ),
-array( 'cell' => 'cell_field' ),
-array( 'cell' => 'cell_field1' ),
-array( 'cell' => 'cell_field2' ),
-array( 'cell' => 'cell_field3' ),
-array( 'cell' => 'cell_field4' ),
-array( 'cell' => 'cell_field5' ),
-array( 'cell' => 'cell_field6' ),
-array( 'cell' => 'cell_field7' ),
-array( 'cell' => 'cell_field8' ),
-array( 'cell' => 'cell_field9' ),
-array( 'cell' => 'cell_field10' ),
-array( 'cell' => 'cell_field11' ),
-array( 'cell' => 'cell_field12' ),
-array( 'cell' => 'cell_field13' ),
-array( 'cell' => 'cell_field14' ),
-array( 'cell' => 'cell_field15' ),
-array( 'cell' => 'cell_field16' ),
-array( 'cell' => 'cell_field17' ),
-array( 'cell' => 'cell_field18' ),
-array( 'cell' => 'cell_field19' ),
-array( 'cell' => 'cell_field20' ),
-array( 'cell' => 'cell_field21' ),
-array( 'cell' => 'cell_field22' ),
-array( 'cell' => 'cell_field23' ),
-array( 'cell' => 'cell_field24' ),
-array( 'cell' => 'cell_field25' ),
-array( 'cell' => 'cell_field26' ),
-array( 'cell' => 'cell_field27' ),
-array( 'cell' => 'cell_field28' ),
-array( 'cell' => 'cell_field29' ),
-array( 'cell' => 'cell_field30' ),
-array( 'cell' => 'cell_field31' ),
-array( 'cell' => 'cell_field32' ),
-array( 'cell' => 'cell_field33' ),
-array( 'cell' => 'cell_field34' ),
-array( 'cell' => 'cell_field35' ),
-array( 'cell' => 'cell_field36' ),
-array( 'cell' => 'cell_field37' ),
-array( 'cell' => 'cell_field38' ) ) ),
-array( 'cells' => array( array( 'cell' => 'cell_dpreview',
-'colspan' => 42 ) ),
-'section' => 'body' ),
-array( 'section' => 'foot',
-'cells' => array( array( 'cell' => 'footcell_icons' ),
-array( 'cell' => 'footcell_checkbox' ),
-array( 'cell' => 'footcell_details' ),
-array( 'cell' => 'footcell_field' ),
-array( 'cell' => 'footcell_field1' ),
-array( 'cell' => 'footcell_field2' ),
-array( 'cell' => 'footcell_field3' ),
-array( 'cell' => 'footcell_field4' ),
-array( 'cell' => 'footcell_field5' ),
-array( 'cell' => 'footcell_field6' ),
-array( 'cell' => 'footcell_field7' ),
-array( 'cell' => 'footcell_field8' ),
-array( 'cell' => 'footcell_field9' ),
-array( 'cell' => 'footcell_field10' ),
-array( 'cell' => 'footcell_field11' ),
-array( 'cell' => 'footcell_field12' ),
-array( 'cell' => 'footcell_field13' ),
-array( 'cell' => 'footcell_field14' ),
-array( 'cell' => 'footcell_field15' ),
-array( 'cell' => 'footcell_field16' ),
-array( 'cell' => 'footcell_field17' ),
-array( 'cell' => 'footcell_field18' ),
-array( 'cell' => 'footcell_field19' ),
-array( 'cell' => 'footcell_field20' ),
-array( 'cell' => 'footcell_field21' ),
-array( 'cell' => 'footcell_field22' ),
-array( 'cell' => 'footcell_field23' ),
-array( 'cell' => 'footcell_field24' ),
-array( 'cell' => 'footcell_field25' ),
-array( 'cell' => 'footcell_field26' ),
-array( 'cell' => 'footcell_field27' ),
-array( 'cell' => 'footcell_field28' ),
-array( 'cell' => 'footcell_field29' ),
-array( 'cell' => 'footcell_field30' ),
-array( 'cell' => 'footcell_field31' ),
-array( 'cell' => 'footcell_field32' ),
-array( 'cell' => 'footcell_field33' ),
-array( 'cell' => 'footcell_field34' ),
-array( 'cell' => 'footcell_field35' ),
-array( 'cell' => 'footcell_field36' ),
-array( 'cell' => 'footcell_field37' ),
-array( 'cell' => 'footcell_field38' ) ) ) ),
-'cells' => array( 'headcell_field' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field39' ),
-'field' => 'ward_round_id',
-'columnName' => 'field' ),
-'cell_field' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field' ),
-'field' => 'ward_round_id',
-'columnName' => 'field' ),
-'footcell_field' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field1' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field40' ),
-'field' => 'case_id',
-'columnName' => 'field' ),
-'cell_field1' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field1' ),
-'field' => 'case_id',
-'columnName' => 'field' ),
-'footcell_field1' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field2' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field41' ),
-'field' => 'facility_id',
-'columnName' => 'field' ),
-'cell_field2' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field2' ),
-'field' => 'facility_id',
-'columnName' => 'field' ),
-'footcell_field2' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field3' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field42' ),
-'field' => 'admission_date',
-'columnName' => 'field' ),
-'cell_field3' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field3' ),
-'field' => 'admission_date',
-'columnName' => 'field' ),
-'footcell_field3' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field4' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field43' ),
-'field' => 'rounding_date',
-'columnName' => 'field' ),
-'cell_field4' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field4' ),
-'field' => 'rounding_date',
-'columnName' => 'field' ),
-'footcell_field4' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field5' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field44' ),
-'field' => 'data_collector_name',
-'columnName' => 'field' ),
-'cell_field5' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field5' ),
-'field' => 'data_collector_name',
-'columnName' => 'field' ),
-'footcell_field5' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field6' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field45' ),
-'field' => 'ward_name',
-'columnName' => 'field' ),
-'cell_field6' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field6' ),
-'field' => 'ward_name',
-'columnName' => 'field' ),
-'footcell_field6' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field7' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field46' ),
-'field' => 'ward_transfer',
-'columnName' => 'field' ),
-'cell_field7' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field7' ),
-'field' => 'ward_transfer',
-'columnName' => 'field' ),
-'footcell_field7' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field8' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field47' ),
-'field' => 'postop_day',
-'columnName' => 'field' ),
-'cell_field8' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field8' ),
-'field' => 'postop_day',
-'columnName' => 'field' ),
-'footcell_field8' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field9' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field48' ),
-'field' => 'dressing_not_removed',
-'columnName' => 'field' ),
-'cell_field9' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field9' ),
-'field' => 'dressing_not_removed',
-'columnName' => 'field' ),
-'footcell_field9' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field10' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field49' ),
-'field' => 'wound_clean_and_healthy',
-'columnName' => 'field' ),
-'cell_field10' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field10' ),
-'field' => 'wound_clean_and_healthy',
-'columnName' => 'field' ),
-'footcell_field10' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field11' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field50' ),
-'field' => 'stitches_removed_or_wound_opened',
-'columnName' => 'field' ),
-'cell_field11' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field11' ),
-'field' => 'stitches_removed_or_wound_opened',
-'columnName' => 'field' ),
-'footcell_field11' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field12' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field51' ),
-'field' => 'wound_opened_spontaneously',
-'columnName' => 'field' ),
-'cell_field12' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field12' ),
-'field' => 'wound_opened_spontaneously',
-'columnName' => 'field' ),
-'footcell_field12' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field13' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field52' ),
-'field' => 'pus_draining',
-'columnName' => 'field' ),
-'cell_field13' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field13' ),
-'field' => 'pus_draining',
-'columnName' => 'field' ),
-'footcell_field13' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field14' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field53' ),
-'field' => 'abscess_present',
-'columnName' => 'field' ),
-'cell_field14' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field14' ),
-'field' => 'abscess_present',
-'columnName' => 'field' ),
-'footcell_field14' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field15' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field54' ),
-'field' => 'redness_around_wound',
-'columnName' => 'field' ),
-'cell_field15' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field15' ),
-'field' => 'redness_around_wound',
-'columnName' => 'field' ),
-'footcell_field15' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field16' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field55' ),
-'field' => 'bleeding',
-'columnName' => 'field' ),
-'cell_field16' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field16' ),
-'field' => 'bleeding',
-'columnName' => 'field' ),
-'footcell_field16' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field17' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field56' ),
-'field' => 'new_dressing',
-'columnName' => 'field' ),
-'cell_field17' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field17' ),
-'field' => 'new_dressing',
-'columnName' => 'field' ),
-'footcell_field17' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field18' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field57' ),
-'field' => 'new_dressing_type',
-'columnName' => 'field' ),
-'cell_field18' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field18' ),
-'field' => 'new_dressing_type',
-'columnName' => 'field' ),
-'footcell_field18' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field19' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field58' ),
-'field' => 'fever',
-'columnName' => 'field' ),
-'cell_field19' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field19' ),
-'field' => 'fever',
-'columnName' => 'field' ),
-'footcell_field19' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field20' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field59' ),
-'field' => 'on_antibiotics',
-'columnName' => 'field' ),
-'cell_field20' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field20' ),
-'field' => 'on_antibiotics',
-'columnName' => 'field' ),
-'footcell_field20' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field21' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field60' ),
-'field' => 'antibiotics_prescribed',
-'columnName' => 'field' ),
-'cell_field21' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field21' ),
-'field' => 'antibiotics_prescribed',
-'columnName' => 'field' ),
-'footcell_field21' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field22' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field61' ),
-'field' => 'ssi_diagnosed_on_reoperation',
-'columnName' => 'field' ),
-'cell_field22' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field22' ),
-'field' => 'ssi_diagnosed_on_reoperation',
-'columnName' => 'field' ),
-'footcell_field22' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field23' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field62' ),
-'field' => 'returned_to_or',
-'columnName' => 'field' ),
-'cell_field23' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field23' ),
-'field' => 'returned_to_or',
-'columnName' => 'field' ),
-'footcell_field23' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field24' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field63' ),
-'field' => 'return_or_procedure',
-'columnName' => 'field' ),
-'cell_field24' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field24' ),
-'field' => 'return_or_procedure',
-'columnName' => 'field' ),
-'footcell_field24' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field25' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field64' ),
-'field' => 'disposition',
-'columnName' => 'field' ),
-'cell_field25' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field25' ),
-'field' => 'disposition',
-'columnName' => 'field' ),
-'footcell_field25' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field26' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field65' ),
-'field' => 'planned_reoperation',
-'columnName' => 'field' ),
-'cell_field26' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field26' ),
-'field' => 'planned_reoperation',
-'columnName' => 'field' ),
-'footcell_field26' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field27' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field66' ),
-'field' => 'other_complications',
-'columnName' => 'field' ),
-'cell_field27' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field27' ),
-'field' => 'other_complications',
-'columnName' => 'field' ),
-'footcell_field27' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field28' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field67' ),
-'field' => 'endometritis',
-'columnName' => 'field' ),
-'cell_field28' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field28' ),
-'field' => 'endometritis',
-'columnName' => 'field' ),
-'footcell_field28' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field29' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field68' ),
-'field' => 'urinary_tract_infection',
-'columnName' => 'field' ),
-'cell_field29' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field29' ),
-'field' => 'urinary_tract_infection',
-'columnName' => 'field' ),
-'footcell_field29' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field30' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field69' ),
-'field' => 'pneumonia',
-'columnName' => 'field' ),
-'cell_field30' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field30' ),
-'field' => 'pneumonia',
-'columnName' => 'field' ),
-'footcell_field30' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field31' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field70' ),
-'field' => 'other_complication_description',
-'columnName' => 'field' ),
-'cell_field31' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field31' ),
-'field' => 'other_complication_description',
-'columnName' => 'field' ),
-'footcell_field31' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field32' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field71' ),
-'field' => 'eschar',
-'columnName' => 'field' ),
-'cell_field32' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field32' ),
-'field' => 'eschar',
-'columnName' => 'field' ),
-'footcell_field32' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field33' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field72' ),
-'field' => 'discharged_today',
-'columnName' => 'field' ),
-'cell_field33' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field33' ),
-'field' => 'discharged_today',
-'columnName' => 'field' ),
-'footcell_field33' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field34' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field73' ),
-'field' => 'discharge_date',
-'columnName' => 'field' ),
-'cell_field34' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field34' ),
-'field' => 'discharge_date',
-'columnName' => 'field' ),
-'footcell_field34' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field35' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field74' ),
-'field' => 'death_in_ward',
-'columnName' => 'field' ),
-'cell_field35' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field35' ),
-'field' => 'death_in_ward',
-'columnName' => 'field' ),
-'footcell_field35' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field36' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field75' ),
-'field' => 'neonatal_death',
-'columnName' => 'field' ),
-'cell_field36' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field36' ),
-'field' => 'neonatal_death',
-'columnName' => 'field' ),
-'footcell_field36' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field37' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field76' ),
-'field' => 'created_at',
-'columnName' => 'field' ),
-'cell_field37' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field37' ),
-'field' => 'created_at',
-'columnName' => 'field' ),
-'footcell_field37' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'headcell_field38' => array( 'model' => 'headcell_field',
-'items' => array( 'simple_grid_field77' ),
-'field' => 'updated_at',
-'columnName' => 'field' ),
-'cell_field38' => array( 'model' => 'cell_field',
-'items' => array( 'simple_grid_field38' ),
-'field' => 'updated_at',
-'columnName' => 'field' ),
-'footcell_field38' => array( 'model' => 'footcell_field',
-'items' => array(  ) ),
-'cell_dpreview' => array( 'model' => 'cell_dpreview',
-'items' => array( 'details_preview' ) ),
-'headcell_checkbox' => array( 'model' => 'headcell_checkbox',
-'items' => array( 'grid_checkbox_head' ) ),
-'cell_checkbox' => array( 'model' => 'cell_checkbox',
-'items' => array( 'grid_checkbox' ) ),
-'footcell_checkbox' => array( 'model' => 'footcell_checkbox',
-'items' => array(  ) ),
-'headcell_icons' => array( 'model' => 'headcell_icons',
-'items' => array(  ) ),
-'cell_icons' => array( 'model' => 'cell_icons',
-'items' => array( 'grid_edit',
-'grid_inline_cancel',
-'grid_view' ) ),
-'footcell_icons' => array( 'model' => 'footcell_icons',
-'items' => array(  ) ),
-'headcell_details' => array( 'model' => 'headcell_details',
-'items' => array(  ) ),
-'cell_details' => array( 'model' => 'cell_details',
-'items' => array( 'grid_alldetails_link',
-'grid_details_link' ) ),
-'footcell_details' => array( 'model' => 'footcell_details',
-'items' => array(  ) ) ),
-'deferredItems' => array(  ),
-'recsPerRow' => 1 ) ),
-'items' => array( 'page_size' => array( 'type' => 'page_size' ),
-'breadcrumb' => array( 'type' => 'breadcrumb' ),
-'logo' => array( 'type' => 'logo' ),
-'menu' => array( 'type' => 'menu' ),
-'simple_search' => array( 'type' => 'simple_search' ),
-'pagination' => array( 'type' => 'pagination' ),
-'details_found' => array( 'type' => 'details_found' ),
-'list_options' => array( 'type' => 'list_options',
-'items' => array( 'export_selected',
-'delete_selected',
-'-3',
-'advsearch_link',
-'show_search_panel',
-'hide_search_panel',
-'-1',
-'export',
-'-2',
-'import' ) ),
-'-3' => array( 'type' => '-' ),
-'advsearch_link' => array( 'type' => 'advsearch_link' ),
-'delete_selected' => array( 'type' => 'delete_selected' ),
-'delete' => array( 'type' => 'delete' ),
-'expand_menu_button' => array( 'type' => 'expand_menu_button' ),
-'collapse_button' => array( 'type' => 'collapse_button' ),
-'add' => array( 'type' => 'add' ),
-'print_panel' => array( 'type' => 'print_panel',
-'items' => array( 'print_scope',
-'print_details',
-'print_records',
-'print_button' ) ),
-'print_scope' => array( 'type' => 'print_scope' ),
-'print_button' => array( 'type' => 'print_button' ),
-'print_records' => array( 'type' => 'print_records' ),
-'export' => array( 'type' => 'export' ),
-'-' => array( 'type' => '-' ),
-'export_selected' => array( 'type' => 'export_selected' ),
-'-1' => array( 'type' => '-' ),
-'import' => array( 'type' => 'import' ),
-'-2' => array( 'type' => '-' ),
-'search_panel' => array( 'type' => 'search_panel',
-'items' => array( 'search_panel_field',
-'search_panel_field38',
-'search_panel_field37',
-'search_panel_field36',
-'search_panel_field35',
-'search_panel_field34',
-'search_panel_field33',
-'search_panel_field32',
-'search_panel_field31',
-'search_panel_field30',
-'search_panel_field29',
-'search_panel_field28',
-'search_panel_field27',
-'search_panel_field26',
-'search_panel_field25',
-'search_panel_field24',
-'search_panel_field23',
-'search_panel_field22',
-'search_panel_field21',
-'search_panel_field20',
-'search_panel_field19',
-'search_panel_field18',
-'search_panel_field17',
-'search_panel_field16',
-'search_panel_field15',
-'search_panel_field14',
-'search_panel_field13',
-'search_panel_field12',
-'search_panel_field11',
-'search_panel_field10',
-'search_panel_field9',
-'search_panel_field8',
-'search_panel_field7',
-'search_panel_field6',
-'search_panel_field5',
-'search_panel_field4',
-'search_panel_field3',
-'search_panel_field2',
-'search_panel_field1' ) ),
-'show_search_panel' => array( 'type' => 'show_search_panel' ),
-'hide_search_panel' => array( 'type' => 'hide_search_panel' ),
-'search_panel_field' => array( 'field' => 'abscess_present',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field1' => array( 'field' => 'admission_date',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field2' => array( 'field' => 'antibiotics_prescribed',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field3' => array( 'field' => 'bleeding',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field4' => array( 'field' => 'case_id',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field5' => array( 'field' => 'created_at',
-'type' => 'search_panel_field',
-'required' => false,
-'alwaysOnPanel' => false ),
-'search_panel_field6' => array( 'field' => 'data_collector_name',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field7' => array( 'field' => 'death_in_ward',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field8' => array( 'field' => 'discharge_date',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field9' => array( 'field' => 'discharged_today',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field10' => array( 'field' => 'disposition',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field11' => array( 'field' => 'dressing_not_removed',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field12' => array( 'field' => 'endometritis',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field13' => array( 'field' => 'eschar',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field14' => array( 'field' => 'facility_id',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field15' => array( 'field' => 'fever',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field16' => array( 'field' => 'neonatal_death',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field17' => array( 'field' => 'new_dressing',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field18' => array( 'field' => 'new_dressing_type',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field19' => array( 'field' => 'on_antibiotics',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field20' => array( 'field' => 'other_complication_description',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field21' => array( 'field' => 'other_complications',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field22' => array( 'field' => 'planned_reoperation',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field23' => array( 'field' => 'pneumonia',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field24' => array( 'field' => 'postop_day',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field25' => array( 'field' => 'pus_draining',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field26' => array( 'field' => 'redness_around_wound',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field27' => array( 'field' => 'return_or_procedure',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field28' => array( 'field' => 'returned_to_or',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field29' => array( 'field' => 'rounding_date',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field30' => array( 'field' => 'ssi_diagnosed_on_reoperation',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field31' => array( 'field' => 'stitches_removed_or_wound_opened',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field32' => array( 'field' => 'updated_at',
-'type' => 'search_panel_field',
-'required' => false,
-'alwaysOnPanel' => false ),
-'search_panel_field33' => array( 'field' => 'urinary_tract_infection',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field34' => array( 'field' => 'ward_name',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field35' => array( 'field' => 'ward_round_id',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field36' => array( 'field' => 'ward_transfer',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field37' => array( 'field' => 'wound_clean_and_healthy',
-'type' => 'search_panel_field',
-'required' => false ),
-'search_panel_field38' => array( 'field' => 'wound_opened_spontaneously',
-'type' => 'search_panel_field',
-'required' => false ),
-'master_info' => array( 'type' => 'master_info',
-'tables' => array( 'public.surgical_cases' => 'true',
-'public.facilities' => 'true' ) ),
-'print_details' => array( 'type' => 'print_details',
-'tables' => array( 'public.ward_antibiotics' => true ) ),
-'username_button' => array( 'type' => 'username_button',
-'items' => array( 'userinfo_link',
-'logout_link',
-'adminarea_link',
-'changepassword_link' ) ),
-'changepassword_link' => array( 'type' => 'changepassword_link' ),
-'adminarea_link' => array( 'type' => 'adminarea_link' ),
-'loginform_login' => array( 'type' => 'loginform_login',
-'popup' => false ),
-'userinfo_link' => array( 'type' => 'userinfo_link' ),
-'logout_link' => array( 'type' => 'logout_link' ),
-'simple_grid_field' => array( 'field' => 'ward_round_id',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field39' => array( 'type' => 'grid_field_label',
-'field' => 'ward_round_id' ),
-'simple_grid_field1' => array( 'field' => 'case_id',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field40' => array( 'type' => 'grid_field_label',
-'field' => 'case_id' ),
-'simple_grid_field2' => array( 'field' => 'facility_id',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field41' => array( 'type' => 'grid_field_label',
-'field' => 'facility_id' ),
-'simple_grid_field3' => array( 'field' => 'admission_date',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field42' => array( 'type' => 'grid_field_label',
-'field' => 'admission_date' ),
-'simple_grid_field4' => array( 'field' => 'rounding_date',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field43' => array( 'type' => 'grid_field_label',
-'field' => 'rounding_date' ),
-'simple_grid_field5' => array( 'field' => 'data_collector_name',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field44' => array( 'type' => 'grid_field_label',
-'field' => 'data_collector_name' ),
-'simple_grid_field6' => array( 'field' => 'ward_name',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field45' => array( 'type' => 'grid_field_label',
-'field' => 'ward_name' ),
-'simple_grid_field7' => array( 'field' => 'ward_transfer',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field46' => array( 'type' => 'grid_field_label',
-'field' => 'ward_transfer' ),
-'simple_grid_field8' => array( 'field' => 'postop_day',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field47' => array( 'type' => 'grid_field_label',
-'field' => 'postop_day' ),
-'simple_grid_field9' => array( 'field' => 'dressing_not_removed',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field48' => array( 'type' => 'grid_field_label',
-'field' => 'dressing_not_removed' ),
-'simple_grid_field10' => array( 'field' => 'wound_clean_and_healthy',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field49' => array( 'type' => 'grid_field_label',
-'field' => 'wound_clean_and_healthy' ),
-'simple_grid_field11' => array( 'field' => 'stitches_removed_or_wound_opened',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field50' => array( 'type' => 'grid_field_label',
-'field' => 'stitches_removed_or_wound_opened' ),
-'simple_grid_field12' => array( 'field' => 'wound_opened_spontaneously',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field51' => array( 'type' => 'grid_field_label',
-'field' => 'wound_opened_spontaneously' ),
-'simple_grid_field13' => array( 'field' => 'pus_draining',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field52' => array( 'type' => 'grid_field_label',
-'field' => 'pus_draining' ),
-'simple_grid_field14' => array( 'field' => 'abscess_present',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field53' => array( 'type' => 'grid_field_label',
-'field' => 'abscess_present' ),
-'simple_grid_field15' => array( 'field' => 'redness_around_wound',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field54' => array( 'type' => 'grid_field_label',
-'field' => 'redness_around_wound' ),
-'simple_grid_field16' => array( 'field' => 'bleeding',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field55' => array( 'type' => 'grid_field_label',
-'field' => 'bleeding' ),
-'simple_grid_field17' => array( 'field' => 'new_dressing',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field56' => array( 'type' => 'grid_field_label',
-'field' => 'new_dressing' ),
-'simple_grid_field18' => array( 'field' => 'new_dressing_type',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field57' => array( 'type' => 'grid_field_label',
-'field' => 'new_dressing_type' ),
-'simple_grid_field19' => array( 'field' => 'fever',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field58' => array( 'type' => 'grid_field_label',
-'field' => 'fever' ),
-'simple_grid_field20' => array( 'field' => 'on_antibiotics',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field59' => array( 'type' => 'grid_field_label',
-'field' => 'on_antibiotics' ),
-'simple_grid_field21' => array( 'field' => 'antibiotics_prescribed',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field60' => array( 'type' => 'grid_field_label',
-'field' => 'antibiotics_prescribed' ),
-'simple_grid_field22' => array( 'field' => 'ssi_diagnosed_on_reoperation',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field61' => array( 'type' => 'grid_field_label',
-'field' => 'ssi_diagnosed_on_reoperation' ),
-'simple_grid_field23' => array( 'field' => 'returned_to_or',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field62' => array( 'type' => 'grid_field_label',
-'field' => 'returned_to_or' ),
-'simple_grid_field24' => array( 'field' => 'return_or_procedure',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field63' => array( 'type' => 'grid_field_label',
-'field' => 'return_or_procedure' ),
-'simple_grid_field25' => array( 'field' => 'disposition',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field64' => array( 'type' => 'grid_field_label',
-'field' => 'disposition' ),
-'simple_grid_field26' => array( 'field' => 'planned_reoperation',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field65' => array( 'type' => 'grid_field_label',
-'field' => 'planned_reoperation' ),
-'simple_grid_field27' => array( 'field' => 'other_complications',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field66' => array( 'type' => 'grid_field_label',
-'field' => 'other_complications' ),
-'simple_grid_field28' => array( 'field' => 'endometritis',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field67' => array( 'type' => 'grid_field_label',
-'field' => 'endometritis' ),
-'simple_grid_field29' => array( 'field' => 'urinary_tract_infection',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field68' => array( 'type' => 'grid_field_label',
-'field' => 'urinary_tract_infection' ),
-'simple_grid_field30' => array( 'field' => 'pneumonia',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field69' => array( 'type' => 'grid_field_label',
-'field' => 'pneumonia' ),
-'simple_grid_field31' => array( 'field' => 'other_complication_description',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field70' => array( 'type' => 'grid_field_label',
-'field' => 'other_complication_description' ),
-'simple_grid_field32' => array( 'field' => 'eschar',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field71' => array( 'type' => 'grid_field_label',
-'field' => 'eschar' ),
-'simple_grid_field33' => array( 'field' => 'discharged_today',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field72' => array( 'type' => 'grid_field_label',
-'field' => 'discharged_today' ),
-'simple_grid_field34' => array( 'field' => 'discharge_date',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field73' => array( 'type' => 'grid_field_label',
-'field' => 'discharge_date' ),
-'simple_grid_field35' => array( 'field' => 'death_in_ward',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field74' => array( 'type' => 'grid_field_label',
-'field' => 'death_in_ward' ),
-'simple_grid_field36' => array( 'field' => 'neonatal_death',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field75' => array( 'type' => 'grid_field_label',
-'field' => 'neonatal_death' ),
-'simple_grid_field37' => array( 'field' => 'created_at',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field76' => array( 'type' => 'grid_field_label',
-'field' => 'created_at' ),
-'simple_grid_field38' => array( 'field' => 'updated_at',
-'type' => 'grid_field',
-'inlineAdd' => false,
-'inlineEdit' => false ),
-'simple_grid_field77' => array( 'type' => 'grid_field_label',
-'field' => 'updated_at' ),
-'details_preview' => array( 'type' => 'details_preview',
-'table' => 'public.ward_antibiotics',
-'items' => array(  ),
-'popup' => false,
-'proceedLink' => true,
-'hideEmptyPreview' => false,
-'pageId' => 'list' ),
-'grid_checkbox' => array( 'type' => 'grid_checkbox' ),
-'grid_checkbox_head' => array( 'type' => 'grid_checkbox_head' ),
-'grid_edit' => array( 'type' => 'grid_edit' ),
-'grid_view' => array( 'type' => 'grid_view' ),
-'grid_alldetails_link' => array( 'type' => 'grid_alldetails_link' ),
-'grid_details_link' => array( 'type' => 'grid_details_link',
-'table' => 'public.ward_antibiotics',
-'badge' => true,
-'hideIfNone' => false,
-'showCount' => true ),
-'expand_button' => array( 'type' => 'expand_button' ),
-'inline_add' => array( 'type' => 'inline_add',
-'detailsOnly' => true ),
-'grid_inline_cancel' => array( 'type' => 'grid_inline_cancel' ) ),
-'dbProps' => array(  ),
-'spreadsheetGrid' => false,
-'version' => 14,
-'imageItem' => array( 'type' => 'page_image' ),
-'imageBgColor' => '#f2f2f2',
-'controlsBgColor' => 'white',
-'imagePosition' => 'right',
-'listTotals' => 1 );
+			$optionsArray = array(
+	'list' => array(
+		'inlineAdd' => false,
+		'detailsAdd' => true,
+		'inlineEdit' => false,
+		'spreadsheetMode' => false,
+		'addToBottom' => false,
+		'delete' => true,
+		'updateSelected' => false,
+		'clickSort' => true,
+		'sortDropdown' => false,
+		'showHideFields' => false,
+		'reorderFields' => false,
+		'fieldFilter' => false,
+		'hideNumberOfRecords' => false 
+	),
+	'allDetails' => array(
+		'linkType' => 0 
+	),
+	'details' => array(
+		'public.ward_antibiotics' => array(
+			'displayPreview' => 1,
+			'previewPageId' => 'list',
+			'showCount' => true,
+			'hideEmptyChild' => false,
+			'hideEmptyPreview' => false,
+			'showProceedLink' => true,
+			'printDetails' => true 
+		) 
+	),
+	'master' => array(
+		'public.surgical_cases' => array(
+			'preview' => true 
+		),
+		'public.facilities' => array(
+			'preview' => true 
+		) 
+	),
+	'listSearch' => array(
+		'alwaysOnPanelFields' => array( 
+			 
+		),
+		'searchPanel' => true,
+		'fixedSearchPanel' => false,
+		'simpleSearchOptions' => false,
+		'searchSaving' => false 
+	),
+	'totals' => array(
+		'ward_round_id' => array(
+			'totalsType' => '' 
+		),
+		'case_id' => array(
+			'totalsType' => '' 
+		),
+		'facility_id' => array(
+			'totalsType' => '' 
+		),
+		'admission_date' => array(
+			'totalsType' => '' 
+		),
+		'rounding_date' => array(
+			'totalsType' => '' 
+		),
+		'data_collector_name' => array(
+			'totalsType' => '' 
+		),
+		'ward_name' => array(
+			'totalsType' => '' 
+		),
+		'ward_transfer' => array(
+			'totalsType' => '' 
+		),
+		'postop_day' => array(
+			'totalsType' => '' 
+		),
+		'dressing_not_removed' => array(
+			'totalsType' => '' 
+		),
+		'wound_clean_and_healthy' => array(
+			'totalsType' => '' 
+		),
+		'stitches_removed_or_wound_opened' => array(
+			'totalsType' => '' 
+		),
+		'wound_opened_spontaneously' => array(
+			'totalsType' => '' 
+		),
+		'pus_draining' => array(
+			'totalsType' => '' 
+		),
+		'abscess_present' => array(
+			'totalsType' => '' 
+		),
+		'redness_around_wound' => array(
+			'totalsType' => '' 
+		),
+		'bleeding' => array(
+			'totalsType' => '' 
+		),
+		'new_dressing' => array(
+			'totalsType' => '' 
+		),
+		'new_dressing_type' => array(
+			'totalsType' => '' 
+		),
+		'fever' => array(
+			'totalsType' => '' 
+		),
+		'on_antibiotics' => array(
+			'totalsType' => '' 
+		),
+		'antibiotics_prescribed' => array(
+			'totalsType' => '' 
+		),
+		'ssi_diagnosed_on_reoperation' => array(
+			'totalsType' => '' 
+		),
+		'returned_to_or' => array(
+			'totalsType' => '' 
+		),
+		'return_or_procedure' => array(
+			'totalsType' => '' 
+		),
+		'disposition' => array(
+			'totalsType' => '' 
+		),
+		'planned_reoperation' => array(
+			'totalsType' => '' 
+		),
+		'other_complications' => array(
+			'totalsType' => '' 
+		),
+		'endometritis' => array(
+			'totalsType' => '' 
+		),
+		'urinary_tract_infection' => array(
+			'totalsType' => '' 
+		),
+		'pneumonia' => array(
+			'totalsType' => '' 
+		),
+		'other_complication_description' => array(
+			'totalsType' => '' 
+		),
+		'eschar' => array(
+			'totalsType' => '' 
+		),
+		'discharged_today' => array(
+			'totalsType' => '' 
+		),
+		'discharge_date' => array(
+			'totalsType' => '' 
+		),
+		'death_in_ward' => array(
+			'totalsType' => '' 
+		),
+		'neonatal_death' => array(
+			'totalsType' => '' 
+		),
+		'created_at' => array(
+			'totalsType' => '' 
+		),
+		'updated_at' => array(
+			'totalsType' => '' 
+		) 
+	),
+	'fields' => array(
+		'gridFields' => array( 
+			'ward_round_id',
+			'case_id',
+			'facility_id',
+			'admission_date',
+			'rounding_date',
+			'data_collector_name',
+			'ward_name',
+			'ward_transfer',
+			'postop_day',
+			'dressing_not_removed',
+			'wound_clean_and_healthy',
+			'stitches_removed_or_wound_opened',
+			'wound_opened_spontaneously',
+			'pus_draining',
+			'abscess_present',
+			'redness_around_wound',
+			'bleeding',
+			'new_dressing',
+			'new_dressing_type',
+			'fever',
+			'on_antibiotics',
+			'antibiotics_prescribed',
+			'ssi_diagnosed_on_reoperation',
+			'returned_to_or',
+			'return_or_procedure',
+			'disposition',
+			'planned_reoperation',
+			'other_complications',
+			'endometritis',
+			'urinary_tract_infection',
+			'pneumonia',
+			'other_complication_description',
+			'eschar',
+			'discharged_today',
+			'discharge_date',
+			'death_in_ward',
+			'neonatal_death',
+			'created_at',
+			'updated_at' 
+		),
+		'searchRequiredFields' => array( 
+			 
+		),
+		'searchPanelFields' => array( 
+			'abscess_present',
+			'wound_opened_spontaneously',
+			'wound_clean_and_healthy',
+			'ward_transfer',
+			'ward_round_id',
+			'ward_name',
+			'urinary_tract_infection',
+			'updated_at',
+			'stitches_removed_or_wound_opened',
+			'ssi_diagnosed_on_reoperation',
+			'rounding_date',
+			'returned_to_or',
+			'return_or_procedure',
+			'redness_around_wound',
+			'pus_draining',
+			'postop_day',
+			'pneumonia',
+			'planned_reoperation',
+			'other_complications',
+			'other_complication_description',
+			'on_antibiotics',
+			'new_dressing_type',
+			'new_dressing',
+			'neonatal_death',
+			'fever',
+			'facility_id',
+			'eschar',
+			'endometritis',
+			'dressing_not_removed',
+			'disposition',
+			'discharged_today',
+			'discharge_date',
+			'death_in_ward',
+			'data_collector_name',
+			'created_at',
+			'case_id',
+			'bleeding',
+			'antibiotics_prescribed',
+			'admission_date' 
+		),
+		'filterFields' => array( 
+			 
+		),
+		'inlineAddFields' => array( 
+			 
+		),
+		'inlineEditFields' => array( 
+			 
+		),
+		'fieldItems' => array(
+			'ward_round_id' => array( 
+				'simple_grid_field',
+				'simple_grid_field39' 
+			),
+			'case_id' => array( 
+				'simple_grid_field1',
+				'simple_grid_field40' 
+			),
+			'facility_id' => array( 
+				'simple_grid_field2',
+				'simple_grid_field41' 
+			),
+			'admission_date' => array( 
+				'simple_grid_field3',
+				'simple_grid_field42' 
+			),
+			'rounding_date' => array( 
+				'simple_grid_field4',
+				'simple_grid_field43' 
+			),
+			'data_collector_name' => array( 
+				'simple_grid_field5',
+				'simple_grid_field44' 
+			),
+			'ward_name' => array( 
+				'simple_grid_field6',
+				'simple_grid_field45' 
+			),
+			'ward_transfer' => array( 
+				'simple_grid_field7',
+				'simple_grid_field46' 
+			),
+			'postop_day' => array( 
+				'simple_grid_field8',
+				'simple_grid_field47' 
+			),
+			'dressing_not_removed' => array( 
+				'simple_grid_field9',
+				'simple_grid_field48' 
+			),
+			'wound_clean_and_healthy' => array( 
+				'simple_grid_field10',
+				'simple_grid_field49' 
+			),
+			'stitches_removed_or_wound_opened' => array( 
+				'simple_grid_field11',
+				'simple_grid_field50' 
+			),
+			'wound_opened_spontaneously' => array( 
+				'simple_grid_field12',
+				'simple_grid_field51' 
+			),
+			'pus_draining' => array( 
+				'simple_grid_field13',
+				'simple_grid_field52' 
+			),
+			'abscess_present' => array( 
+				'simple_grid_field14',
+				'simple_grid_field53' 
+			),
+			'redness_around_wound' => array( 
+				'simple_grid_field15',
+				'simple_grid_field54' 
+			),
+			'bleeding' => array( 
+				'simple_grid_field16',
+				'simple_grid_field55' 
+			),
+			'new_dressing' => array( 
+				'simple_grid_field17',
+				'simple_grid_field56' 
+			),
+			'new_dressing_type' => array( 
+				'simple_grid_field18',
+				'simple_grid_field57' 
+			),
+			'fever' => array( 
+				'simple_grid_field19',
+				'simple_grid_field58' 
+			),
+			'on_antibiotics' => array( 
+				'simple_grid_field20',
+				'simple_grid_field59' 
+			),
+			'antibiotics_prescribed' => array( 
+				'simple_grid_field21',
+				'simple_grid_field60' 
+			),
+			'ssi_diagnosed_on_reoperation' => array( 
+				'simple_grid_field22',
+				'simple_grid_field61' 
+			),
+			'returned_to_or' => array( 
+				'simple_grid_field23',
+				'simple_grid_field62' 
+			),
+			'return_or_procedure' => array( 
+				'simple_grid_field24',
+				'simple_grid_field63' 
+			),
+			'disposition' => array( 
+				'simple_grid_field25',
+				'simple_grid_field64' 
+			),
+			'planned_reoperation' => array( 
+				'simple_grid_field26',
+				'simple_grid_field65' 
+			),
+			'other_complications' => array( 
+				'simple_grid_field27',
+				'simple_grid_field66' 
+			),
+			'endometritis' => array( 
+				'simple_grid_field28',
+				'simple_grid_field67' 
+			),
+			'urinary_tract_infection' => array( 
+				'simple_grid_field29',
+				'simple_grid_field68' 
+			),
+			'pneumonia' => array( 
+				'simple_grid_field30',
+				'simple_grid_field69' 
+			),
+			'other_complication_description' => array( 
+				'simple_grid_field31',
+				'simple_grid_field70' 
+			),
+			'eschar' => array( 
+				'simple_grid_field32',
+				'simple_grid_field71' 
+			),
+			'discharged_today' => array( 
+				'simple_grid_field33',
+				'simple_grid_field72' 
+			),
+			'discharge_date' => array( 
+				'simple_grid_field34',
+				'simple_grid_field73' 
+			),
+			'death_in_ward' => array( 
+				'simple_grid_field35',
+				'simple_grid_field74' 
+			),
+			'neonatal_death' => array( 
+				'simple_grid_field36',
+				'simple_grid_field75' 
+			),
+			'created_at' => array( 
+				'simple_grid_field37',
+				'simple_grid_field76' 
+			),
+			'updated_at' => array( 
+				'simple_grid_field38',
+				'simple_grid_field77' 
+			) 
+		),
+		'hideEmptyFields' => array( 
+			 
+		),
+		'fieldFilterFields' => array( 
+			 
+		) 
+	),
+	'pageLinks' => array(
+		'edit' => true,
+		'add' => true,
+		'view' => true,
+		'print' => true 
+	),
+	'layoutHelper' => array(
+		'formItems' => array(
+			'formItems' => array(
+				'above-grid' => array( 
+					'add',
+					'inline_add',
+					'delete',
+					'details_found',
+					'page_size',
+					'print_panel' 
+				),
+				'below-grid' => array( 
+					'pagination' 
+				),
+				'left' => array( 
+					'logo',
+					'expand_button',
+					'menu',
+					'search_panel' 
+				),
+				'supertop' => array( 
+					'expand_menu_button',
+					'collapse_button',
+					'breadcrumb',
+					'simple_search',
+					'list_options',
+					'loginform_login',
+					'username_button' 
+				),
+				'top' => array( 
+					'master_info' 
+				),
+				'grid' => array( 
+					'simple_grid_field39',
+					'simple_grid_field',
+					'simple_grid_field40',
+					'simple_grid_field1',
+					'simple_grid_field41',
+					'simple_grid_field2',
+					'simple_grid_field42',
+					'simple_grid_field3',
+					'simple_grid_field43',
+					'simple_grid_field4',
+					'simple_grid_field44',
+					'simple_grid_field5',
+					'simple_grid_field45',
+					'simple_grid_field6',
+					'simple_grid_field46',
+					'simple_grid_field7',
+					'simple_grid_field47',
+					'simple_grid_field8',
+					'simple_grid_field48',
+					'simple_grid_field9',
+					'simple_grid_field49',
+					'simple_grid_field10',
+					'simple_grid_field50',
+					'simple_grid_field11',
+					'simple_grid_field51',
+					'simple_grid_field12',
+					'simple_grid_field52',
+					'simple_grid_field13',
+					'simple_grid_field53',
+					'simple_grid_field14',
+					'simple_grid_field54',
+					'simple_grid_field15',
+					'simple_grid_field55',
+					'simple_grid_field16',
+					'simple_grid_field56',
+					'simple_grid_field17',
+					'simple_grid_field57',
+					'simple_grid_field18',
+					'simple_grid_field58',
+					'simple_grid_field19',
+					'simple_grid_field59',
+					'simple_grid_field20',
+					'simple_grid_field60',
+					'simple_grid_field21',
+					'simple_grid_field61',
+					'simple_grid_field22',
+					'simple_grid_field62',
+					'simple_grid_field23',
+					'simple_grid_field63',
+					'simple_grid_field24',
+					'simple_grid_field64',
+					'simple_grid_field25',
+					'simple_grid_field65',
+					'simple_grid_field26',
+					'simple_grid_field66',
+					'simple_grid_field27',
+					'simple_grid_field67',
+					'simple_grid_field28',
+					'simple_grid_field68',
+					'simple_grid_field29',
+					'simple_grid_field69',
+					'simple_grid_field30',
+					'simple_grid_field70',
+					'simple_grid_field31',
+					'simple_grid_field71',
+					'simple_grid_field32',
+					'simple_grid_field72',
+					'simple_grid_field33',
+					'simple_grid_field73',
+					'simple_grid_field34',
+					'simple_grid_field74',
+					'simple_grid_field35',
+					'simple_grid_field75',
+					'simple_grid_field36',
+					'simple_grid_field76',
+					'simple_grid_field37',
+					'simple_grid_field77',
+					'simple_grid_field38',
+					'details_preview',
+					'grid_checkbox_head',
+					'grid_checkbox',
+					'grid_edit',
+					'grid_inline_cancel',
+					'grid_view',
+					'grid_alldetails_link',
+					'grid_details_link' 
+				) 
+			),
+			'formXtTags' => array(
+				'above-grid' => array( 
+					'add_link',
+					'inlineadd_link',
+					'deleteselected_link',
+					'details_found',
+					'recsPerPage',
+					'print_friendly' 
+				),
+				'below-grid' => array( 
+					'pagination' 
+				),
+				'top' => array( 
+					'mastertable_block' 
+				) 
+			),
+			'itemForms' => array(
+				'add' => 'above-grid',
+				'inline_add' => 'above-grid',
+				'delete' => 'above-grid',
+				'details_found' => 'above-grid',
+				'page_size' => 'above-grid',
+				'print_panel' => 'above-grid',
+				'pagination' => 'below-grid',
+				'logo' => 'left',
+				'expand_button' => 'left',
+				'menu' => 'left',
+				'search_panel' => 'left',
+				'expand_menu_button' => 'supertop',
+				'collapse_button' => 'supertop',
+				'breadcrumb' => 'supertop',
+				'simple_search' => 'supertop',
+				'list_options' => 'supertop',
+				'loginform_login' => 'supertop',
+				'username_button' => 'supertop',
+				'master_info' => 'top',
+				'simple_grid_field39' => 'grid',
+				'simple_grid_field' => 'grid',
+				'simple_grid_field40' => 'grid',
+				'simple_grid_field1' => 'grid',
+				'simple_grid_field41' => 'grid',
+				'simple_grid_field2' => 'grid',
+				'simple_grid_field42' => 'grid',
+				'simple_grid_field3' => 'grid',
+				'simple_grid_field43' => 'grid',
+				'simple_grid_field4' => 'grid',
+				'simple_grid_field44' => 'grid',
+				'simple_grid_field5' => 'grid',
+				'simple_grid_field45' => 'grid',
+				'simple_grid_field6' => 'grid',
+				'simple_grid_field46' => 'grid',
+				'simple_grid_field7' => 'grid',
+				'simple_grid_field47' => 'grid',
+				'simple_grid_field8' => 'grid',
+				'simple_grid_field48' => 'grid',
+				'simple_grid_field9' => 'grid',
+				'simple_grid_field49' => 'grid',
+				'simple_grid_field10' => 'grid',
+				'simple_grid_field50' => 'grid',
+				'simple_grid_field11' => 'grid',
+				'simple_grid_field51' => 'grid',
+				'simple_grid_field12' => 'grid',
+				'simple_grid_field52' => 'grid',
+				'simple_grid_field13' => 'grid',
+				'simple_grid_field53' => 'grid',
+				'simple_grid_field14' => 'grid',
+				'simple_grid_field54' => 'grid',
+				'simple_grid_field15' => 'grid',
+				'simple_grid_field55' => 'grid',
+				'simple_grid_field16' => 'grid',
+				'simple_grid_field56' => 'grid',
+				'simple_grid_field17' => 'grid',
+				'simple_grid_field57' => 'grid',
+				'simple_grid_field18' => 'grid',
+				'simple_grid_field58' => 'grid',
+				'simple_grid_field19' => 'grid',
+				'simple_grid_field59' => 'grid',
+				'simple_grid_field20' => 'grid',
+				'simple_grid_field60' => 'grid',
+				'simple_grid_field21' => 'grid',
+				'simple_grid_field61' => 'grid',
+				'simple_grid_field22' => 'grid',
+				'simple_grid_field62' => 'grid',
+				'simple_grid_field23' => 'grid',
+				'simple_grid_field63' => 'grid',
+				'simple_grid_field24' => 'grid',
+				'simple_grid_field64' => 'grid',
+				'simple_grid_field25' => 'grid',
+				'simple_grid_field65' => 'grid',
+				'simple_grid_field26' => 'grid',
+				'simple_grid_field66' => 'grid',
+				'simple_grid_field27' => 'grid',
+				'simple_grid_field67' => 'grid',
+				'simple_grid_field28' => 'grid',
+				'simple_grid_field68' => 'grid',
+				'simple_grid_field29' => 'grid',
+				'simple_grid_field69' => 'grid',
+				'simple_grid_field30' => 'grid',
+				'simple_grid_field70' => 'grid',
+				'simple_grid_field31' => 'grid',
+				'simple_grid_field71' => 'grid',
+				'simple_grid_field32' => 'grid',
+				'simple_grid_field72' => 'grid',
+				'simple_grid_field33' => 'grid',
+				'simple_grid_field73' => 'grid',
+				'simple_grid_field34' => 'grid',
+				'simple_grid_field74' => 'grid',
+				'simple_grid_field35' => 'grid',
+				'simple_grid_field75' => 'grid',
+				'simple_grid_field36' => 'grid',
+				'simple_grid_field76' => 'grid',
+				'simple_grid_field37' => 'grid',
+				'simple_grid_field77' => 'grid',
+				'simple_grid_field38' => 'grid',
+				'details_preview' => 'grid',
+				'grid_checkbox_head' => 'grid',
+				'grid_checkbox' => 'grid',
+				'grid_edit' => 'grid',
+				'grid_inline_cancel' => 'grid',
+				'grid_view' => 'grid',
+				'grid_alldetails_link' => 'grid',
+				'grid_details_link' => 'grid' 
+			),
+			'itemLocations' => array(
+				'simple_grid_field39' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field' 
+				),
+				'simple_grid_field' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field' 
+				),
+				'simple_grid_field40' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field1' 
+				),
+				'simple_grid_field1' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field1' 
+				),
+				'simple_grid_field41' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field2' 
+				),
+				'simple_grid_field2' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field2' 
+				),
+				'simple_grid_field42' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field3' 
+				),
+				'simple_grid_field3' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field3' 
+				),
+				'simple_grid_field43' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field4' 
+				),
+				'simple_grid_field4' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field4' 
+				),
+				'simple_grid_field44' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field5' 
+				),
+				'simple_grid_field5' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field5' 
+				),
+				'simple_grid_field45' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field6' 
+				),
+				'simple_grid_field6' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field6' 
+				),
+				'simple_grid_field46' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field7' 
+				),
+				'simple_grid_field7' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field7' 
+				),
+				'simple_grid_field47' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field8' 
+				),
+				'simple_grid_field8' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field8' 
+				),
+				'simple_grid_field48' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field9' 
+				),
+				'simple_grid_field9' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field9' 
+				),
+				'simple_grid_field49' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field10' 
+				),
+				'simple_grid_field10' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field10' 
+				),
+				'simple_grid_field50' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field11' 
+				),
+				'simple_grid_field11' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field11' 
+				),
+				'simple_grid_field51' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field12' 
+				),
+				'simple_grid_field12' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field12' 
+				),
+				'simple_grid_field52' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field13' 
+				),
+				'simple_grid_field13' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field13' 
+				),
+				'simple_grid_field53' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field14' 
+				),
+				'simple_grid_field14' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field14' 
+				),
+				'simple_grid_field54' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field15' 
+				),
+				'simple_grid_field15' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field15' 
+				),
+				'simple_grid_field55' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field16' 
+				),
+				'simple_grid_field16' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field16' 
+				),
+				'simple_grid_field56' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field17' 
+				),
+				'simple_grid_field17' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field17' 
+				),
+				'simple_grid_field57' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field18' 
+				),
+				'simple_grid_field18' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field18' 
+				),
+				'simple_grid_field58' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field19' 
+				),
+				'simple_grid_field19' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field19' 
+				),
+				'simple_grid_field59' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field20' 
+				),
+				'simple_grid_field20' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field20' 
+				),
+				'simple_grid_field60' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field21' 
+				),
+				'simple_grid_field21' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field21' 
+				),
+				'simple_grid_field61' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field22' 
+				),
+				'simple_grid_field22' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field22' 
+				),
+				'simple_grid_field62' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field23' 
+				),
+				'simple_grid_field23' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field23' 
+				),
+				'simple_grid_field63' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field24' 
+				),
+				'simple_grid_field24' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field24' 
+				),
+				'simple_grid_field64' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field25' 
+				),
+				'simple_grid_field25' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field25' 
+				),
+				'simple_grid_field65' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field26' 
+				),
+				'simple_grid_field26' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field26' 
+				),
+				'simple_grid_field66' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field27' 
+				),
+				'simple_grid_field27' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field27' 
+				),
+				'simple_grid_field67' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field28' 
+				),
+				'simple_grid_field28' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field28' 
+				),
+				'simple_grid_field68' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field29' 
+				),
+				'simple_grid_field29' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field29' 
+				),
+				'simple_grid_field69' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field30' 
+				),
+				'simple_grid_field30' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field30' 
+				),
+				'simple_grid_field70' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field31' 
+				),
+				'simple_grid_field31' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field31' 
+				),
+				'simple_grid_field71' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field32' 
+				),
+				'simple_grid_field32' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field32' 
+				),
+				'simple_grid_field72' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field33' 
+				),
+				'simple_grid_field33' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field33' 
+				),
+				'simple_grid_field73' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field34' 
+				),
+				'simple_grid_field34' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field34' 
+				),
+				'simple_grid_field74' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field35' 
+				),
+				'simple_grid_field35' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field35' 
+				),
+				'simple_grid_field75' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field36' 
+				),
+				'simple_grid_field36' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field36' 
+				),
+				'simple_grid_field76' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field37' 
+				),
+				'simple_grid_field37' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field37' 
+				),
+				'simple_grid_field77' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field38' 
+				),
+				'simple_grid_field38' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field38' 
+				),
+				'details_preview' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_dpreview' 
+				),
+				'grid_checkbox_head' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_checkbox' 
+				),
+				'grid_checkbox' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_checkbox' 
+				),
+				'grid_edit' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_icons' 
+				),
+				'grid_inline_cancel' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_icons' 
+				),
+				'grid_view' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_icons' 
+				),
+				'grid_alldetails_link' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_details' 
+				),
+				'grid_details_link' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_details' 
+				) 
+			),
+			'itemVisiblity' => array(
+				'breadcrumb' => 5,
+				'expand_menu_button' => 2,
+				'print_panel' => 5,
+				'expand_button' => 5 
+			) 
+		),
+		'itemsByType' => array(
+			'page_size' => array( 
+				'page_size' 
+			),
+			'breadcrumb' => array( 
+				'breadcrumb' 
+			),
+			'logo' => array( 
+				'logo' 
+			),
+			'menu' => array( 
+				'menu' 
+			),
+			'simple_search' => array( 
+				'simple_search' 
+			),
+			'pagination' => array( 
+				'pagination' 
+			),
+			'details_found' => array( 
+				'details_found' 
+			),
+			'list_options' => array( 
+				'list_options' 
+			),
+			'-' => array( 
+				'-3',
+				'-',
+				'-1',
+				'-2' 
+			),
+			'advsearch_link' => array( 
+				'advsearch_link' 
+			),
+			'delete_selected' => array( 
+				'delete_selected' 
+			),
+			'delete' => array( 
+				'delete' 
+			),
+			'expand_menu_button' => array( 
+				'expand_menu_button' 
+			),
+			'collapse_button' => array( 
+				'collapse_button' 
+			),
+			'add' => array( 
+				'add' 
+			),
+			'print_panel' => array( 
+				'print_panel' 
+			),
+			'print_scope' => array( 
+				'print_scope' 
+			),
+			'print_button' => array( 
+				'print_button' 
+			),
+			'print_records' => array( 
+				'print_records' 
+			),
+			'export' => array( 
+				'export' 
+			),
+			'export_selected' => array( 
+				'export_selected' 
+			),
+			'import' => array( 
+				'import' 
+			),
+			'search_panel' => array( 
+				'search_panel' 
+			),
+			'show_search_panel' => array( 
+				'show_search_panel' 
+			),
+			'hide_search_panel' => array( 
+				'hide_search_panel' 
+			),
+			'search_panel_field' => array( 
+				'search_panel_field',
+				'search_panel_field1',
+				'search_panel_field2',
+				'search_panel_field3',
+				'search_panel_field4',
+				'search_panel_field5',
+				'search_panel_field6',
+				'search_panel_field7',
+				'search_panel_field8',
+				'search_panel_field9',
+				'search_panel_field10',
+				'search_panel_field11',
+				'search_panel_field12',
+				'search_panel_field13',
+				'search_panel_field14',
+				'search_panel_field15',
+				'search_panel_field16',
+				'search_panel_field17',
+				'search_panel_field18',
+				'search_panel_field19',
+				'search_panel_field20',
+				'search_panel_field21',
+				'search_panel_field22',
+				'search_panel_field23',
+				'search_panel_field24',
+				'search_panel_field25',
+				'search_panel_field26',
+				'search_panel_field27',
+				'search_panel_field28',
+				'search_panel_field29',
+				'search_panel_field30',
+				'search_panel_field31',
+				'search_panel_field32',
+				'search_panel_field33',
+				'search_panel_field34',
+				'search_panel_field35',
+				'search_panel_field36',
+				'search_panel_field37',
+				'search_panel_field38' 
+			),
+			'master_info' => array( 
+				'master_info' 
+			),
+			'print_details' => array( 
+				'print_details' 
+			),
+			'username_button' => array( 
+				'username_button' 
+			),
+			'changepassword_link' => array( 
+				'changepassword_link' 
+			),
+			'adminarea_link' => array( 
+				'adminarea_link' 
+			),
+			'loginform_login' => array( 
+				'loginform_login' 
+			),
+			'userinfo_link' => array( 
+				'userinfo_link' 
+			),
+			'logout_link' => array( 
+				'logout_link' 
+			),
+			'grid_field' => array( 
+				'simple_grid_field',
+				'simple_grid_field1',
+				'simple_grid_field2',
+				'simple_grid_field3',
+				'simple_grid_field4',
+				'simple_grid_field5',
+				'simple_grid_field6',
+				'simple_grid_field7',
+				'simple_grid_field8',
+				'simple_grid_field9',
+				'simple_grid_field10',
+				'simple_grid_field11',
+				'simple_grid_field12',
+				'simple_grid_field13',
+				'simple_grid_field14',
+				'simple_grid_field15',
+				'simple_grid_field16',
+				'simple_grid_field17',
+				'simple_grid_field18',
+				'simple_grid_field19',
+				'simple_grid_field20',
+				'simple_grid_field21',
+				'simple_grid_field22',
+				'simple_grid_field23',
+				'simple_grid_field24',
+				'simple_grid_field25',
+				'simple_grid_field26',
+				'simple_grid_field27',
+				'simple_grid_field28',
+				'simple_grid_field29',
+				'simple_grid_field30',
+				'simple_grid_field31',
+				'simple_grid_field32',
+				'simple_grid_field33',
+				'simple_grid_field34',
+				'simple_grid_field35',
+				'simple_grid_field36',
+				'simple_grid_field37',
+				'simple_grid_field38' 
+			),
+			'grid_field_label' => array( 
+				'simple_grid_field39',
+				'simple_grid_field40',
+				'simple_grid_field41',
+				'simple_grid_field42',
+				'simple_grid_field43',
+				'simple_grid_field44',
+				'simple_grid_field45',
+				'simple_grid_field46',
+				'simple_grid_field47',
+				'simple_grid_field48',
+				'simple_grid_field49',
+				'simple_grid_field50',
+				'simple_grid_field51',
+				'simple_grid_field52',
+				'simple_grid_field53',
+				'simple_grid_field54',
+				'simple_grid_field55',
+				'simple_grid_field56',
+				'simple_grid_field57',
+				'simple_grid_field58',
+				'simple_grid_field59',
+				'simple_grid_field60',
+				'simple_grid_field61',
+				'simple_grid_field62',
+				'simple_grid_field63',
+				'simple_grid_field64',
+				'simple_grid_field65',
+				'simple_grid_field66',
+				'simple_grid_field67',
+				'simple_grid_field68',
+				'simple_grid_field69',
+				'simple_grid_field70',
+				'simple_grid_field71',
+				'simple_grid_field72',
+				'simple_grid_field73',
+				'simple_grid_field74',
+				'simple_grid_field75',
+				'simple_grid_field76',
+				'simple_grid_field77' 
+			),
+			'details_preview' => array( 
+				'details_preview' 
+			),
+			'grid_checkbox' => array( 
+				'grid_checkbox' 
+			),
+			'grid_checkbox_head' => array( 
+				'grid_checkbox_head' 
+			),
+			'grid_edit' => array( 
+				'grid_edit' 
+			),
+			'grid_view' => array( 
+				'grid_view' 
+			),
+			'grid_alldetails_link' => array( 
+				'grid_alldetails_link' 
+			),
+			'grid_details_link' => array( 
+				'grid_details_link' 
+			),
+			'expand_button' => array( 
+				'expand_button' 
+			),
+			'inline_add' => array( 
+				'inline_add' 
+			),
+			'grid_inline_cancel' => array( 
+				'grid_inline_cancel' 
+			) 
+		),
+		'cellMaps' => array(
+			'grid' => array(
+				'cells' => array(
+					'headcell_icons' => array(
+						'cols' => array( 
+							0 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_checkbox' => array(
+						'cols' => array( 
+							1 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'checkbox_column' 
+						),
+						'items' => array( 
+							'grid_checkbox_head' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_details' => array(
+						'cols' => array( 
+							2 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field' => array(
+						'cols' => array( 
+							3 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'ward_round_id_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field39' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field1' => array(
+						'cols' => array( 
+							4 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'case_id_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field40' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field2' => array(
+						'cols' => array( 
+							5 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'facility_id_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field41' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field3' => array(
+						'cols' => array( 
+							6 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'admission_date_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field42' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field4' => array(
+						'cols' => array( 
+							7 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'rounding_date_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field43' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field5' => array(
+						'cols' => array( 
+							8 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'data_collector_name_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field44' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field6' => array(
+						'cols' => array( 
+							9 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'ward_name_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field45' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field7' => array(
+						'cols' => array( 
+							10 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'ward_transfer_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field46' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field8' => array(
+						'cols' => array( 
+							11 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'postop_day_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field47' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field9' => array(
+						'cols' => array( 
+							12 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'dressing_not_removed_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field48' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field10' => array(
+						'cols' => array( 
+							13 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'wound_clean_and_healthy_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field49' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field11' => array(
+						'cols' => array( 
+							14 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'stitches_removed_or_wound_opened_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field50' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field12' => array(
+						'cols' => array( 
+							15 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'wound_opened_spontaneously_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field51' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field13' => array(
+						'cols' => array( 
+							16 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'pus_draining_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field52' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field14' => array(
+						'cols' => array( 
+							17 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'abscess_present_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field53' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field15' => array(
+						'cols' => array( 
+							18 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'redness_around_wound_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field54' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field16' => array(
+						'cols' => array( 
+							19 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'bleeding_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field55' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field17' => array(
+						'cols' => array( 
+							20 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'new_dressing_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field56' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field18' => array(
+						'cols' => array( 
+							21 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'new_dressing_type_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field57' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field19' => array(
+						'cols' => array( 
+							22 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'fever_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field58' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field20' => array(
+						'cols' => array( 
+							23 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'on_antibiotics_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field59' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field21' => array(
+						'cols' => array( 
+							24 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'antibiotics_prescribed_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field60' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field22' => array(
+						'cols' => array( 
+							25 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'ssi_diagnosed_on_reoperation_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field61' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field23' => array(
+						'cols' => array( 
+							26 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'returned_to_or_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field62' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field24' => array(
+						'cols' => array( 
+							27 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'return_or_procedure_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field63' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field25' => array(
+						'cols' => array( 
+							28 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'disposition_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field64' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field26' => array(
+						'cols' => array( 
+							29 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'planned_reoperation_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field65' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field27' => array(
+						'cols' => array( 
+							30 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'other_complications_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field66' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field28' => array(
+						'cols' => array( 
+							31 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'endometritis_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field67' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field29' => array(
+						'cols' => array( 
+							32 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'urinary_tract_infection_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field68' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field30' => array(
+						'cols' => array( 
+							33 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'pneumonia_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field69' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field31' => array(
+						'cols' => array( 
+							34 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'other_complication_description_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field70' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field32' => array(
+						'cols' => array( 
+							35 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'eschar_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field71' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field33' => array(
+						'cols' => array( 
+							36 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'discharged_today_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field72' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field34' => array(
+						'cols' => array( 
+							37 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'discharge_date_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field73' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field35' => array(
+						'cols' => array( 
+							38 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'death_in_ward_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field74' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field36' => array(
+						'cols' => array( 
+							39 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'neonatal_death_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field75' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field37' => array(
+						'cols' => array( 
+							40 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'created_at_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field76' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field38' => array(
+						'cols' => array( 
+							41 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
+							'updated_at_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field77' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_icons' => array(
+						'cols' => array( 
+							0 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'edit_column',
+							'inline_cancel',
+							'view_column' 
+						),
+						'items' => array( 
+							'grid_edit',
+							'grid_inline_cancel',
+							'grid_view' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_checkbox' => array(
+						'cols' => array( 
+							1 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'checkbox_column' 
+						),
+						'items' => array( 
+							'grid_checkbox' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_details' => array(
+						'cols' => array( 
+							2 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							'grid_alldetails_link',
+							'grid_details_link' 
+						),
+						'fixedAtServer' => true,
+						'fixedAtClient' => false 
+					),
+					'cell_field' => array(
+						'cols' => array( 
+							3 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'ward_round_id_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field1' => array(
+						'cols' => array( 
+							4 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'case_id_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field1' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field2' => array(
+						'cols' => array( 
+							5 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'facility_id_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field2' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field3' => array(
+						'cols' => array( 
+							6 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'admission_date_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field3' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field4' => array(
+						'cols' => array( 
+							7 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'rounding_date_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field4' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field5' => array(
+						'cols' => array( 
+							8 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'data_collector_name_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field5' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field6' => array(
+						'cols' => array( 
+							9 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'ward_name_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field6' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field7' => array(
+						'cols' => array( 
+							10 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'ward_transfer_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field7' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field8' => array(
+						'cols' => array( 
+							11 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'postop_day_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field8' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field9' => array(
+						'cols' => array( 
+							12 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'dressing_not_removed_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field9' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field10' => array(
+						'cols' => array( 
+							13 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'wound_clean_and_healthy_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field10' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field11' => array(
+						'cols' => array( 
+							14 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'stitches_removed_or_wound_opened_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field11' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field12' => array(
+						'cols' => array( 
+							15 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'wound_opened_spontaneously_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field12' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field13' => array(
+						'cols' => array( 
+							16 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'pus_draining_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field13' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field14' => array(
+						'cols' => array( 
+							17 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'abscess_present_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field14' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field15' => array(
+						'cols' => array( 
+							18 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'redness_around_wound_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field15' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field16' => array(
+						'cols' => array( 
+							19 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'bleeding_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field16' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field17' => array(
+						'cols' => array( 
+							20 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'new_dressing_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field17' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field18' => array(
+						'cols' => array( 
+							21 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'new_dressing_type_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field18' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field19' => array(
+						'cols' => array( 
+							22 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'fever_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field19' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field20' => array(
+						'cols' => array( 
+							23 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'on_antibiotics_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field20' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field21' => array(
+						'cols' => array( 
+							24 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'antibiotics_prescribed_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field21' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field22' => array(
+						'cols' => array( 
+							25 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'ssi_diagnosed_on_reoperation_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field22' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field23' => array(
+						'cols' => array( 
+							26 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'returned_to_or_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field23' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field24' => array(
+						'cols' => array( 
+							27 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'return_or_procedure_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field24' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field25' => array(
+						'cols' => array( 
+							28 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'disposition_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field25' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field26' => array(
+						'cols' => array( 
+							29 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'planned_reoperation_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field26' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field27' => array(
+						'cols' => array( 
+							30 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'other_complications_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field27' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field28' => array(
+						'cols' => array( 
+							31 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'endometritis_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field28' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field29' => array(
+						'cols' => array( 
+							32 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'urinary_tract_infection_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field29' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field30' => array(
+						'cols' => array( 
+							33 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'pneumonia_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field30' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field31' => array(
+						'cols' => array( 
+							34 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'other_complication_description_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field31' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field32' => array(
+						'cols' => array( 
+							35 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'eschar_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field32' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field33' => array(
+						'cols' => array( 
+							36 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'discharged_today_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field33' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field34' => array(
+						'cols' => array( 
+							37 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'discharge_date_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field34' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field35' => array(
+						'cols' => array( 
+							38 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'death_in_ward_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field35' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field36' => array(
+						'cols' => array( 
+							39 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'neonatal_death_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field36' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field37' => array(
+						'cols' => array( 
+							40 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'created_at_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field37' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field38' => array(
+						'cols' => array( 
+							41 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'updated_at_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field38' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_dpreview' => array(
+						'cols' => array( 
+							0,
+							1,
+							2,
+							3,
+							4,
+							5,
+							6,
+							7,
+							8,
+							9,
+							10,
+							11,
+							12,
+							13,
+							14,
+							15,
+							16,
+							17,
+							18,
+							19,
+							20,
+							21,
+							22,
+							23,
+							24,
+							25,
+							26,
+							27,
+							28,
+							29,
+							30,
+							31,
+							32,
+							33,
+							34,
+							35,
+							36,
+							37,
+							38,
+							39,
+							40,
+							41 
+						),
+						'rows' => array( 
+							2 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							'details_preview' 
+						),
+						'fixedAtServer' => true,
+						'fixedAtClient' => false 
+					),
+					'footcell_icons' => array(
+						'cols' => array( 
+							0 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_checkbox' => array(
+						'cols' => array( 
+							1 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_details' => array(
+						'cols' => array( 
+							2 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field' => array(
+						'cols' => array( 
+							3 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field1' => array(
+						'cols' => array( 
+							4 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field2' => array(
+						'cols' => array( 
+							5 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field3' => array(
+						'cols' => array( 
+							6 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field4' => array(
+						'cols' => array( 
+							7 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field5' => array(
+						'cols' => array( 
+							8 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field6' => array(
+						'cols' => array( 
+							9 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field7' => array(
+						'cols' => array( 
+							10 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field8' => array(
+						'cols' => array( 
+							11 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field9' => array(
+						'cols' => array( 
+							12 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field10' => array(
+						'cols' => array( 
+							13 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field11' => array(
+						'cols' => array( 
+							14 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field12' => array(
+						'cols' => array( 
+							15 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field13' => array(
+						'cols' => array( 
+							16 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field14' => array(
+						'cols' => array( 
+							17 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field15' => array(
+						'cols' => array( 
+							18 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field16' => array(
+						'cols' => array( 
+							19 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field17' => array(
+						'cols' => array( 
+							20 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field18' => array(
+						'cols' => array( 
+							21 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field19' => array(
+						'cols' => array( 
+							22 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field20' => array(
+						'cols' => array( 
+							23 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field21' => array(
+						'cols' => array( 
+							24 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field22' => array(
+						'cols' => array( 
+							25 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field23' => array(
+						'cols' => array( 
+							26 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field24' => array(
+						'cols' => array( 
+							27 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field25' => array(
+						'cols' => array( 
+							28 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field26' => array(
+						'cols' => array( 
+							29 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field27' => array(
+						'cols' => array( 
+							30 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field28' => array(
+						'cols' => array( 
+							31 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field29' => array(
+						'cols' => array( 
+							32 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field30' => array(
+						'cols' => array( 
+							33 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field31' => array(
+						'cols' => array( 
+							34 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field32' => array(
+						'cols' => array( 
+							35 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field33' => array(
+						'cols' => array( 
+							36 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field34' => array(
+						'cols' => array( 
+							37 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field35' => array(
+						'cols' => array( 
+							38 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field36' => array(
+						'cols' => array( 
+							39 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field37' => array(
+						'cols' => array( 
+							40 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'footcell_field38' => array(
+						'cols' => array( 
+							41 
+						),
+						'rows' => array( 
+							3 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					) 
+				),
+				'width' => 42,
+				'height' => 4 
+			) 
+		) 
+	),
+	'loginForm' => array(
+		'loginForm' => 0 
+	),
+	'page' => array(
+		'verticalBar' => true,
+		'labeledButtons' => array(
+			'update_records' => array(
+				 
+			),
+			'print_pages' => array(
+				 
+			),
+			'register_activate_message' => array(
+				 
+			),
+			'details_found' => array(
+				'details_found' => array(
+					'tag' => 'DISPLAYING',
+					'type' => 2 
+				) 
+			) 
+		),
+		'gridType' => 0,
+		'recsPerRow' => 1,
+		'hasCustomButtons' => false,
+		'customButtons' => array( 
+			 
+		),
+		'codeSnippets' => array( 
+			 
+		),
+		'clickHandlerSnippets' => array( 
+			 
+		),
+		'hasNotifications' => false,
+		'menus' => array( 
+			array(
+				'id' => 'main',
+				'horizontal' => false 
+			) 
+		),
+		'calcTotalsFor' => 1,
+		'hasCharts' => false 
+	),
+	'misc' => array(
+		'type' => 'list',
+		'breadcrumb' => true 
+	),
+	'events' => array(
+		'maps' => array( 
+			 
+		),
+		'mapsData' => array(
+			 
+		),
+		'buttons' => array( 
+			 
+		) 
+	),
+	'dataGrid' => array(
+		'groupFields' => array( 
+			 
+		) 
+	) 
+);
+			$pageArray = array(
+	'id' => 'list',
+	'type' => 'list',
+	'layoutId' => 'leftbar',
+	'disabled' => 0,
+	'default' => 0,
+	'forms' => array(
+		'above-grid' => array(
+			'modelId' => 'list-above-grid',
+			'grid' => array( 
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c1' 
+						),
+						array(
+							'cell' => 'c2' 
+						) 
+					),
+					'section' => '' 
+				) 
+			),
+			'cells' => array(
+				'c1' => array(
+					'model' => 'c1',
+					'items' => array( 
+						'add',
+						'inline_add',
+						'delete' 
+					) 
+				),
+				'c2' => array(
+					'model' => 'c2',
+					'items' => array( 
+						'details_found',
+						'page_size',
+						'print_panel' 
+					) 
+				) 
+			),
+			'deferredItems' => array( 
+				 
+			),
+			'recsPerRow' => 1 
+		),
+		'below-grid' => array(
+			'modelId' => 'list-below-grid',
+			'grid' => array( 
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c1' 
+						) 
+					),
+					'section' => '' 
+				) 
+			),
+			'cells' => array(
+				'c1' => array(
+					'model' => 'c1',
+					'items' => array( 
+						'pagination' 
+					) 
+				) 
+			),
+			'deferredItems' => array( 
+				 
+			),
+			'recsPerRow' => 1 
+		),
+		'left' => array(
+			'modelId' => 'leftbar-menu',
+			'grid' => array( 
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c0' 
+						) 
+					),
+					'section' => '' 
+				),
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c1' 
+						) 
+					),
+					'section' => '' 
+				) 
+			),
+			'cells' => array(
+				'c0' => array(
+					'model' => 'c0',
+					'items' => array( 
+						'logo',
+						'expand_button' 
+					) 
+				),
+				'c1' => array(
+					'model' => 'c1',
+					'items' => array( 
+						'menu',
+						'search_panel' 
+					) 
+				) 
+			),
+			'deferredItems' => array( 
+				 
+			),
+			'recsPerRow' => 1 
+		),
+		'supertop' => array(
+			'modelId' => 'leftbar-top',
+			'grid' => array( 
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c1' 
+						),
+						array(
+							'cell' => 'c2' 
+						) 
+					),
+					'section' => '' 
+				) 
+			),
+			'cells' => array(
+				'c1' => array(
+					'model' => 'c1',
+					'items' => array( 
+						'expand_menu_button',
+						'collapse_button',
+						'breadcrumb' 
+					) 
+				),
+				'c2' => array(
+					'model' => 'c2',
+					'items' => array( 
+						'simple_search',
+						'list_options',
+						'loginform_login',
+						'username_button' 
+					) 
+				) 
+			),
+			'deferredItems' => array( 
+				 
+			),
+			'recsPerRow' => 1 
+		),
+		'top' => array(
+			'modelId' => 'list-sidebar-top',
+			'grid' => array( 
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c2' 
+						) 
+					),
+					'section' => '' 
+				) 
+			),
+			'cells' => array(
+				'c2' => array(
+					'model' => 'c2',
+					'items' => array( 
+						'master_info' 
+					) 
+				) 
+			),
+			'deferredItems' => array( 
+				 
+			),
+			'recsPerRow' => 1 
+		),
+		'grid' => array(
+			'modelId' => 'horizontal-grid',
+			'grid' => array( 
+				array(
+					'section' => 'head',
+					'cells' => array( 
+						array(
+							'cell' => 'headcell_icons' 
+						),
+						array(
+							'cell' => 'headcell_checkbox' 
+						),
+						array(
+							'cell' => 'headcell_details' 
+						),
+						array(
+							'cell' => 'headcell_field' 
+						),
+						array(
+							'cell' => 'headcell_field1' 
+						),
+						array(
+							'cell' => 'headcell_field2' 
+						),
+						array(
+							'cell' => 'headcell_field3' 
+						),
+						array(
+							'cell' => 'headcell_field4' 
+						),
+						array(
+							'cell' => 'headcell_field5' 
+						),
+						array(
+							'cell' => 'headcell_field6' 
+						),
+						array(
+							'cell' => 'headcell_field7' 
+						),
+						array(
+							'cell' => 'headcell_field8' 
+						),
+						array(
+							'cell' => 'headcell_field9' 
+						),
+						array(
+							'cell' => 'headcell_field10' 
+						),
+						array(
+							'cell' => 'headcell_field11' 
+						),
+						array(
+							'cell' => 'headcell_field12' 
+						),
+						array(
+							'cell' => 'headcell_field13' 
+						),
+						array(
+							'cell' => 'headcell_field14' 
+						),
+						array(
+							'cell' => 'headcell_field15' 
+						),
+						array(
+							'cell' => 'headcell_field16' 
+						),
+						array(
+							'cell' => 'headcell_field17' 
+						),
+						array(
+							'cell' => 'headcell_field18' 
+						),
+						array(
+							'cell' => 'headcell_field19' 
+						),
+						array(
+							'cell' => 'headcell_field20' 
+						),
+						array(
+							'cell' => 'headcell_field21' 
+						),
+						array(
+							'cell' => 'headcell_field22' 
+						),
+						array(
+							'cell' => 'headcell_field23' 
+						),
+						array(
+							'cell' => 'headcell_field24' 
+						),
+						array(
+							'cell' => 'headcell_field25' 
+						),
+						array(
+							'cell' => 'headcell_field26' 
+						),
+						array(
+							'cell' => 'headcell_field27' 
+						),
+						array(
+							'cell' => 'headcell_field28' 
+						),
+						array(
+							'cell' => 'headcell_field29' 
+						),
+						array(
+							'cell' => 'headcell_field30' 
+						),
+						array(
+							'cell' => 'headcell_field31' 
+						),
+						array(
+							'cell' => 'headcell_field32' 
+						),
+						array(
+							'cell' => 'headcell_field33' 
+						),
+						array(
+							'cell' => 'headcell_field34' 
+						),
+						array(
+							'cell' => 'headcell_field35' 
+						),
+						array(
+							'cell' => 'headcell_field36' 
+						),
+						array(
+							'cell' => 'headcell_field37' 
+						),
+						array(
+							'cell' => 'headcell_field38' 
+						) 
+					) 
+				),
+				array(
+					'section' => 'body',
+					'cells' => array( 
+						array(
+							'cell' => 'cell_icons' 
+						),
+						array(
+							'cell' => 'cell_checkbox' 
+						),
+						array(
+							'cell' => 'cell_details' 
+						),
+						array(
+							'cell' => 'cell_field' 
+						),
+						array(
+							'cell' => 'cell_field1' 
+						),
+						array(
+							'cell' => 'cell_field2' 
+						),
+						array(
+							'cell' => 'cell_field3' 
+						),
+						array(
+							'cell' => 'cell_field4' 
+						),
+						array(
+							'cell' => 'cell_field5' 
+						),
+						array(
+							'cell' => 'cell_field6' 
+						),
+						array(
+							'cell' => 'cell_field7' 
+						),
+						array(
+							'cell' => 'cell_field8' 
+						),
+						array(
+							'cell' => 'cell_field9' 
+						),
+						array(
+							'cell' => 'cell_field10' 
+						),
+						array(
+							'cell' => 'cell_field11' 
+						),
+						array(
+							'cell' => 'cell_field12' 
+						),
+						array(
+							'cell' => 'cell_field13' 
+						),
+						array(
+							'cell' => 'cell_field14' 
+						),
+						array(
+							'cell' => 'cell_field15' 
+						),
+						array(
+							'cell' => 'cell_field16' 
+						),
+						array(
+							'cell' => 'cell_field17' 
+						),
+						array(
+							'cell' => 'cell_field18' 
+						),
+						array(
+							'cell' => 'cell_field19' 
+						),
+						array(
+							'cell' => 'cell_field20' 
+						),
+						array(
+							'cell' => 'cell_field21' 
+						),
+						array(
+							'cell' => 'cell_field22' 
+						),
+						array(
+							'cell' => 'cell_field23' 
+						),
+						array(
+							'cell' => 'cell_field24' 
+						),
+						array(
+							'cell' => 'cell_field25' 
+						),
+						array(
+							'cell' => 'cell_field26' 
+						),
+						array(
+							'cell' => 'cell_field27' 
+						),
+						array(
+							'cell' => 'cell_field28' 
+						),
+						array(
+							'cell' => 'cell_field29' 
+						),
+						array(
+							'cell' => 'cell_field30' 
+						),
+						array(
+							'cell' => 'cell_field31' 
+						),
+						array(
+							'cell' => 'cell_field32' 
+						),
+						array(
+							'cell' => 'cell_field33' 
+						),
+						array(
+							'cell' => 'cell_field34' 
+						),
+						array(
+							'cell' => 'cell_field35' 
+						),
+						array(
+							'cell' => 'cell_field36' 
+						),
+						array(
+							'cell' => 'cell_field37' 
+						),
+						array(
+							'cell' => 'cell_field38' 
+						) 
+					) 
+				),
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'cell_dpreview',
+							'colspan' => 42 
+						) 
+					),
+					'section' => 'body' 
+				),
+				array(
+					'section' => 'foot',
+					'cells' => array( 
+						array(
+							'cell' => 'footcell_icons' 
+						),
+						array(
+							'cell' => 'footcell_checkbox' 
+						),
+						array(
+							'cell' => 'footcell_details' 
+						),
+						array(
+							'cell' => 'footcell_field' 
+						),
+						array(
+							'cell' => 'footcell_field1' 
+						),
+						array(
+							'cell' => 'footcell_field2' 
+						),
+						array(
+							'cell' => 'footcell_field3' 
+						),
+						array(
+							'cell' => 'footcell_field4' 
+						),
+						array(
+							'cell' => 'footcell_field5' 
+						),
+						array(
+							'cell' => 'footcell_field6' 
+						),
+						array(
+							'cell' => 'footcell_field7' 
+						),
+						array(
+							'cell' => 'footcell_field8' 
+						),
+						array(
+							'cell' => 'footcell_field9' 
+						),
+						array(
+							'cell' => 'footcell_field10' 
+						),
+						array(
+							'cell' => 'footcell_field11' 
+						),
+						array(
+							'cell' => 'footcell_field12' 
+						),
+						array(
+							'cell' => 'footcell_field13' 
+						),
+						array(
+							'cell' => 'footcell_field14' 
+						),
+						array(
+							'cell' => 'footcell_field15' 
+						),
+						array(
+							'cell' => 'footcell_field16' 
+						),
+						array(
+							'cell' => 'footcell_field17' 
+						),
+						array(
+							'cell' => 'footcell_field18' 
+						),
+						array(
+							'cell' => 'footcell_field19' 
+						),
+						array(
+							'cell' => 'footcell_field20' 
+						),
+						array(
+							'cell' => 'footcell_field21' 
+						),
+						array(
+							'cell' => 'footcell_field22' 
+						),
+						array(
+							'cell' => 'footcell_field23' 
+						),
+						array(
+							'cell' => 'footcell_field24' 
+						),
+						array(
+							'cell' => 'footcell_field25' 
+						),
+						array(
+							'cell' => 'footcell_field26' 
+						),
+						array(
+							'cell' => 'footcell_field27' 
+						),
+						array(
+							'cell' => 'footcell_field28' 
+						),
+						array(
+							'cell' => 'footcell_field29' 
+						),
+						array(
+							'cell' => 'footcell_field30' 
+						),
+						array(
+							'cell' => 'footcell_field31' 
+						),
+						array(
+							'cell' => 'footcell_field32' 
+						),
+						array(
+							'cell' => 'footcell_field33' 
+						),
+						array(
+							'cell' => 'footcell_field34' 
+						),
+						array(
+							'cell' => 'footcell_field35' 
+						),
+						array(
+							'cell' => 'footcell_field36' 
+						),
+						array(
+							'cell' => 'footcell_field37' 
+						),
+						array(
+							'cell' => 'footcell_field38' 
+						) 
+					) 
+				) 
+			),
+			'cells' => array(
+				'headcell_field' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field39' 
+					),
+					'field' => 'ward_round_id',
+					'columnName' => 'field' 
+				),
+				'cell_field' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field' 
+					),
+					'field' => 'ward_round_id',
+					'columnName' => 'field' 
+				),
+				'footcell_field' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field1' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field40' 
+					),
+					'field' => 'case_id',
+					'columnName' => 'field' 
+				),
+				'cell_field1' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field1' 
+					),
+					'field' => 'case_id',
+					'columnName' => 'field' 
+				),
+				'footcell_field1' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field2' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field41' 
+					),
+					'field' => 'facility_id',
+					'columnName' => 'field' 
+				),
+				'cell_field2' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field2' 
+					),
+					'field' => 'facility_id',
+					'columnName' => 'field' 
+				),
+				'footcell_field2' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field3' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field42' 
+					),
+					'field' => 'admission_date',
+					'columnName' => 'field' 
+				),
+				'cell_field3' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field3' 
+					),
+					'field' => 'admission_date',
+					'columnName' => 'field' 
+				),
+				'footcell_field3' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field4' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field43' 
+					),
+					'field' => 'rounding_date',
+					'columnName' => 'field' 
+				),
+				'cell_field4' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field4' 
+					),
+					'field' => 'rounding_date',
+					'columnName' => 'field' 
+				),
+				'footcell_field4' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field5' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field44' 
+					),
+					'field' => 'data_collector_name',
+					'columnName' => 'field' 
+				),
+				'cell_field5' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field5' 
+					),
+					'field' => 'data_collector_name',
+					'columnName' => 'field' 
+				),
+				'footcell_field5' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field6' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field45' 
+					),
+					'field' => 'ward_name',
+					'columnName' => 'field' 
+				),
+				'cell_field6' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field6' 
+					),
+					'field' => 'ward_name',
+					'columnName' => 'field' 
+				),
+				'footcell_field6' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field7' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field46' 
+					),
+					'field' => 'ward_transfer',
+					'columnName' => 'field' 
+				),
+				'cell_field7' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field7' 
+					),
+					'field' => 'ward_transfer',
+					'columnName' => 'field' 
+				),
+				'footcell_field7' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field8' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field47' 
+					),
+					'field' => 'postop_day',
+					'columnName' => 'field' 
+				),
+				'cell_field8' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field8' 
+					),
+					'field' => 'postop_day',
+					'columnName' => 'field' 
+				),
+				'footcell_field8' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field9' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field48' 
+					),
+					'field' => 'dressing_not_removed',
+					'columnName' => 'field' 
+				),
+				'cell_field9' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field9' 
+					),
+					'field' => 'dressing_not_removed',
+					'columnName' => 'field' 
+				),
+				'footcell_field9' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field10' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field49' 
+					),
+					'field' => 'wound_clean_and_healthy',
+					'columnName' => 'field' 
+				),
+				'cell_field10' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field10' 
+					),
+					'field' => 'wound_clean_and_healthy',
+					'columnName' => 'field' 
+				),
+				'footcell_field10' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field11' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field50' 
+					),
+					'field' => 'stitches_removed_or_wound_opened',
+					'columnName' => 'field' 
+				),
+				'cell_field11' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field11' 
+					),
+					'field' => 'stitches_removed_or_wound_opened',
+					'columnName' => 'field' 
+				),
+				'footcell_field11' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field12' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field51' 
+					),
+					'field' => 'wound_opened_spontaneously',
+					'columnName' => 'field' 
+				),
+				'cell_field12' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field12' 
+					),
+					'field' => 'wound_opened_spontaneously',
+					'columnName' => 'field' 
+				),
+				'footcell_field12' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field13' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field52' 
+					),
+					'field' => 'pus_draining',
+					'columnName' => 'field' 
+				),
+				'cell_field13' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field13' 
+					),
+					'field' => 'pus_draining',
+					'columnName' => 'field' 
+				),
+				'footcell_field13' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field14' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field53' 
+					),
+					'field' => 'abscess_present',
+					'columnName' => 'field' 
+				),
+				'cell_field14' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field14' 
+					),
+					'field' => 'abscess_present',
+					'columnName' => 'field' 
+				),
+				'footcell_field14' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field15' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field54' 
+					),
+					'field' => 'redness_around_wound',
+					'columnName' => 'field' 
+				),
+				'cell_field15' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field15' 
+					),
+					'field' => 'redness_around_wound',
+					'columnName' => 'field' 
+				),
+				'footcell_field15' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field16' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field55' 
+					),
+					'field' => 'bleeding',
+					'columnName' => 'field' 
+				),
+				'cell_field16' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field16' 
+					),
+					'field' => 'bleeding',
+					'columnName' => 'field' 
+				),
+				'footcell_field16' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field17' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field56' 
+					),
+					'field' => 'new_dressing',
+					'columnName' => 'field' 
+				),
+				'cell_field17' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field17' 
+					),
+					'field' => 'new_dressing',
+					'columnName' => 'field' 
+				),
+				'footcell_field17' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field18' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field57' 
+					),
+					'field' => 'new_dressing_type',
+					'columnName' => 'field' 
+				),
+				'cell_field18' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field18' 
+					),
+					'field' => 'new_dressing_type',
+					'columnName' => 'field' 
+				),
+				'footcell_field18' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field19' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field58' 
+					),
+					'field' => 'fever',
+					'columnName' => 'field' 
+				),
+				'cell_field19' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field19' 
+					),
+					'field' => 'fever',
+					'columnName' => 'field' 
+				),
+				'footcell_field19' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field20' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field59' 
+					),
+					'field' => 'on_antibiotics',
+					'columnName' => 'field' 
+				),
+				'cell_field20' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field20' 
+					),
+					'field' => 'on_antibiotics',
+					'columnName' => 'field' 
+				),
+				'footcell_field20' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field21' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field60' 
+					),
+					'field' => 'antibiotics_prescribed',
+					'columnName' => 'field' 
+				),
+				'cell_field21' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field21' 
+					),
+					'field' => 'antibiotics_prescribed',
+					'columnName' => 'field' 
+				),
+				'footcell_field21' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field22' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field61' 
+					),
+					'field' => 'ssi_diagnosed_on_reoperation',
+					'columnName' => 'field' 
+				),
+				'cell_field22' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field22' 
+					),
+					'field' => 'ssi_diagnosed_on_reoperation',
+					'columnName' => 'field' 
+				),
+				'footcell_field22' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field23' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field62' 
+					),
+					'field' => 'returned_to_or',
+					'columnName' => 'field' 
+				),
+				'cell_field23' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field23' 
+					),
+					'field' => 'returned_to_or',
+					'columnName' => 'field' 
+				),
+				'footcell_field23' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field24' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field63' 
+					),
+					'field' => 'return_or_procedure',
+					'columnName' => 'field' 
+				),
+				'cell_field24' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field24' 
+					),
+					'field' => 'return_or_procedure',
+					'columnName' => 'field' 
+				),
+				'footcell_field24' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field25' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field64' 
+					),
+					'field' => 'disposition',
+					'columnName' => 'field' 
+				),
+				'cell_field25' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field25' 
+					),
+					'field' => 'disposition',
+					'columnName' => 'field' 
+				),
+				'footcell_field25' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field26' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field65' 
+					),
+					'field' => 'planned_reoperation',
+					'columnName' => 'field' 
+				),
+				'cell_field26' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field26' 
+					),
+					'field' => 'planned_reoperation',
+					'columnName' => 'field' 
+				),
+				'footcell_field26' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field27' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field66' 
+					),
+					'field' => 'other_complications',
+					'columnName' => 'field' 
+				),
+				'cell_field27' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field27' 
+					),
+					'field' => 'other_complications',
+					'columnName' => 'field' 
+				),
+				'footcell_field27' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field28' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field67' 
+					),
+					'field' => 'endometritis',
+					'columnName' => 'field' 
+				),
+				'cell_field28' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field28' 
+					),
+					'field' => 'endometritis',
+					'columnName' => 'field' 
+				),
+				'footcell_field28' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field29' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field68' 
+					),
+					'field' => 'urinary_tract_infection',
+					'columnName' => 'field' 
+				),
+				'cell_field29' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field29' 
+					),
+					'field' => 'urinary_tract_infection',
+					'columnName' => 'field' 
+				),
+				'footcell_field29' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field30' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field69' 
+					),
+					'field' => 'pneumonia',
+					'columnName' => 'field' 
+				),
+				'cell_field30' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field30' 
+					),
+					'field' => 'pneumonia',
+					'columnName' => 'field' 
+				),
+				'footcell_field30' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field31' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field70' 
+					),
+					'field' => 'other_complication_description',
+					'columnName' => 'field' 
+				),
+				'cell_field31' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field31' 
+					),
+					'field' => 'other_complication_description',
+					'columnName' => 'field' 
+				),
+				'footcell_field31' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field32' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field71' 
+					),
+					'field' => 'eschar',
+					'columnName' => 'field' 
+				),
+				'cell_field32' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field32' 
+					),
+					'field' => 'eschar',
+					'columnName' => 'field' 
+				),
+				'footcell_field32' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field33' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field72' 
+					),
+					'field' => 'discharged_today',
+					'columnName' => 'field' 
+				),
+				'cell_field33' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field33' 
+					),
+					'field' => 'discharged_today',
+					'columnName' => 'field' 
+				),
+				'footcell_field33' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field34' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field73' 
+					),
+					'field' => 'discharge_date',
+					'columnName' => 'field' 
+				),
+				'cell_field34' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field34' 
+					),
+					'field' => 'discharge_date',
+					'columnName' => 'field' 
+				),
+				'footcell_field34' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field35' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field74' 
+					),
+					'field' => 'death_in_ward',
+					'columnName' => 'field' 
+				),
+				'cell_field35' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field35' 
+					),
+					'field' => 'death_in_ward',
+					'columnName' => 'field' 
+				),
+				'footcell_field35' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field36' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field75' 
+					),
+					'field' => 'neonatal_death',
+					'columnName' => 'field' 
+				),
+				'cell_field36' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field36' 
+					),
+					'field' => 'neonatal_death',
+					'columnName' => 'field' 
+				),
+				'footcell_field36' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field37' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field76' 
+					),
+					'field' => 'created_at',
+					'columnName' => 'field' 
+				),
+				'cell_field37' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field37' 
+					),
+					'field' => 'created_at',
+					'columnName' => 'field' 
+				),
+				'footcell_field37' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field38' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field77' 
+					),
+					'field' => 'updated_at',
+					'columnName' => 'field' 
+				),
+				'cell_field38' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field38' 
+					),
+					'field' => 'updated_at',
+					'columnName' => 'field' 
+				),
+				'footcell_field38' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'cell_dpreview' => array(
+					'model' => 'cell_dpreview',
+					'items' => array( 
+						'details_preview' 
+					) 
+				),
+				'headcell_checkbox' => array(
+					'model' => 'headcell_checkbox',
+					'items' => array( 
+						'grid_checkbox_head' 
+					) 
+				),
+				'cell_checkbox' => array(
+					'model' => 'cell_checkbox',
+					'items' => array( 
+						'grid_checkbox' 
+					) 
+				),
+				'footcell_checkbox' => array(
+					'model' => 'footcell_checkbox',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_icons' => array(
+					'model' => 'headcell_icons',
+					'items' => array( 
+						 
+					) 
+				),
+				'cell_icons' => array(
+					'model' => 'cell_icons',
+					'items' => array( 
+						'grid_edit',
+						'grid_inline_cancel',
+						'grid_view' 
+					) 
+				),
+				'footcell_icons' => array(
+					'model' => 'footcell_icons',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_details' => array(
+					'model' => 'headcell_details',
+					'items' => array( 
+						 
+					) 
+				),
+				'cell_details' => array(
+					'model' => 'cell_details',
+					'items' => array( 
+						'grid_alldetails_link',
+						'grid_details_link' 
+					) 
+				),
+				'footcell_details' => array(
+					'model' => 'footcell_details',
+					'items' => array( 
+						 
+					) 
+				) 
+			),
+			'deferredItems' => array( 
+				 
+			),
+			'recsPerRow' => 1 
+		) 
+	),
+	'items' => array(
+		'page_size' => array(
+			'type' => 'page_size' 
+		),
+		'breadcrumb' => array(
+			'type' => 'breadcrumb' 
+		),
+		'logo' => array(
+			'type' => 'logo' 
+		),
+		'menu' => array(
+			'type' => 'menu' 
+		),
+		'simple_search' => array(
+			'type' => 'simple_search' 
+		),
+		'pagination' => array(
+			'type' => 'pagination' 
+		),
+		'details_found' => array(
+			'type' => 'details_found' 
+		),
+		'list_options' => array(
+			'type' => 'list_options',
+			'items' => array( 
+				'export_selected',
+				'delete_selected',
+				'-3',
+				'advsearch_link',
+				'show_search_panel',
+				'hide_search_panel',
+				'-1',
+				'export',
+				'-2',
+				'import' 
+			) 
+		),
+		'-3' => array(
+			'type' => '-' 
+		),
+		'advsearch_link' => array(
+			'type' => 'advsearch_link' 
+		),
+		'delete_selected' => array(
+			'type' => 'delete_selected' 
+		),
+		'delete' => array(
+			'type' => 'delete' 
+		),
+		'expand_menu_button' => array(
+			'type' => 'expand_menu_button' 
+		),
+		'collapse_button' => array(
+			'type' => 'collapse_button' 
+		),
+		'add' => array(
+			'type' => 'add' 
+		),
+		'print_panel' => array(
+			'type' => 'print_panel',
+			'items' => array( 
+				'print_scope',
+				'print_details',
+				'print_records',
+				'print_button' 
+			) 
+		),
+		'print_scope' => array(
+			'type' => 'print_scope' 
+		),
+		'print_button' => array(
+			'type' => 'print_button' 
+		),
+		'print_records' => array(
+			'type' => 'print_records' 
+		),
+		'export' => array(
+			'type' => 'export' 
+		),
+		'-' => array(
+			'type' => '-' 
+		),
+		'export_selected' => array(
+			'type' => 'export_selected' 
+		),
+		'-1' => array(
+			'type' => '-' 
+		),
+		'import' => array(
+			'type' => 'import' 
+		),
+		'-2' => array(
+			'type' => '-' 
+		),
+		'search_panel' => array(
+			'type' => 'search_panel',
+			'items' => array( 
+				'search_panel_field',
+				'search_panel_field38',
+				'search_panel_field37',
+				'search_panel_field36',
+				'search_panel_field35',
+				'search_panel_field34',
+				'search_panel_field33',
+				'search_panel_field32',
+				'search_panel_field31',
+				'search_panel_field30',
+				'search_panel_field29',
+				'search_panel_field28',
+				'search_panel_field27',
+				'search_panel_field26',
+				'search_panel_field25',
+				'search_panel_field24',
+				'search_panel_field23',
+				'search_panel_field22',
+				'search_panel_field21',
+				'search_panel_field20',
+				'search_panel_field19',
+				'search_panel_field18',
+				'search_panel_field17',
+				'search_panel_field16',
+				'search_panel_field15',
+				'search_panel_field14',
+				'search_panel_field13',
+				'search_panel_field12',
+				'search_panel_field11',
+				'search_panel_field10',
+				'search_panel_field9',
+				'search_panel_field8',
+				'search_panel_field7',
+				'search_panel_field6',
+				'search_panel_field5',
+				'search_panel_field4',
+				'search_panel_field3',
+				'search_panel_field2',
+				'search_panel_field1' 
+			) 
+		),
+		'show_search_panel' => array(
+			'type' => 'show_search_panel' 
+		),
+		'hide_search_panel' => array(
+			'type' => 'hide_search_panel' 
+		),
+		'search_panel_field' => array(
+			'field' => 'abscess_present',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field1' => array(
+			'field' => 'admission_date',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field2' => array(
+			'field' => 'antibiotics_prescribed',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field3' => array(
+			'field' => 'bleeding',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field4' => array(
+			'field' => 'case_id',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field5' => array(
+			'field' => 'created_at',
+			'type' => 'search_panel_field',
+			'required' => false,
+			'alwaysOnPanel' => false 
+		),
+		'search_panel_field6' => array(
+			'field' => 'data_collector_name',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field7' => array(
+			'field' => 'death_in_ward',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field8' => array(
+			'field' => 'discharge_date',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field9' => array(
+			'field' => 'discharged_today',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field10' => array(
+			'field' => 'disposition',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field11' => array(
+			'field' => 'dressing_not_removed',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field12' => array(
+			'field' => 'endometritis',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field13' => array(
+			'field' => 'eschar',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field14' => array(
+			'field' => 'facility_id',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field15' => array(
+			'field' => 'fever',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field16' => array(
+			'field' => 'neonatal_death',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field17' => array(
+			'field' => 'new_dressing',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field18' => array(
+			'field' => 'new_dressing_type',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field19' => array(
+			'field' => 'on_antibiotics',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field20' => array(
+			'field' => 'other_complication_description',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field21' => array(
+			'field' => 'other_complications',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field22' => array(
+			'field' => 'planned_reoperation',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field23' => array(
+			'field' => 'pneumonia',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field24' => array(
+			'field' => 'postop_day',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field25' => array(
+			'field' => 'pus_draining',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field26' => array(
+			'field' => 'redness_around_wound',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field27' => array(
+			'field' => 'return_or_procedure',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field28' => array(
+			'field' => 'returned_to_or',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field29' => array(
+			'field' => 'rounding_date',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field30' => array(
+			'field' => 'ssi_diagnosed_on_reoperation',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field31' => array(
+			'field' => 'stitches_removed_or_wound_opened',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field32' => array(
+			'field' => 'updated_at',
+			'type' => 'search_panel_field',
+			'required' => false,
+			'alwaysOnPanel' => false 
+		),
+		'search_panel_field33' => array(
+			'field' => 'urinary_tract_infection',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field34' => array(
+			'field' => 'ward_name',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field35' => array(
+			'field' => 'ward_round_id',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field36' => array(
+			'field' => 'ward_transfer',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field37' => array(
+			'field' => 'wound_clean_and_healthy',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'search_panel_field38' => array(
+			'field' => 'wound_opened_spontaneously',
+			'type' => 'search_panel_field',
+			'required' => false 
+		),
+		'master_info' => array(
+			'type' => 'master_info',
+			'tables' => array(
+				'4608' => 'true',
+				'4619' => 'true' 
+			) 
+		),
+		'print_details' => array(
+			'type' => 'print_details',
+			'tables' => array(
+				'4636' => true 
+			) 
+		),
+		'username_button' => array(
+			'type' => 'username_button',
+			'items' => array( 
+				'userinfo_link',
+				'logout_link',
+				'adminarea_link',
+				'changepassword_link' 
+			) 
+		),
+		'changepassword_link' => array(
+			'type' => 'changepassword_link' 
+		),
+		'adminarea_link' => array(
+			'type' => 'adminarea_link' 
+		),
+		'loginform_login' => array(
+			'type' => 'loginform_login',
+			'popup' => false 
+		),
+		'userinfo_link' => array(
+			'type' => 'userinfo_link' 
+		),
+		'logout_link' => array(
+			'type' => 'logout_link' 
+		),
+		'simple_grid_field' => array(
+			'field' => 'ward_round_id',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field39' => array(
+			'type' => 'grid_field_label',
+			'field' => 'ward_round_id' 
+		),
+		'simple_grid_field1' => array(
+			'field' => 'case_id',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field40' => array(
+			'type' => 'grid_field_label',
+			'field' => 'case_id' 
+		),
+		'simple_grid_field2' => array(
+			'field' => 'facility_id',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field41' => array(
+			'type' => 'grid_field_label',
+			'field' => 'facility_id' 
+		),
+		'simple_grid_field3' => array(
+			'field' => 'admission_date',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field42' => array(
+			'type' => 'grid_field_label',
+			'field' => 'admission_date' 
+		),
+		'simple_grid_field4' => array(
+			'field' => 'rounding_date',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field43' => array(
+			'type' => 'grid_field_label',
+			'field' => 'rounding_date' 
+		),
+		'simple_grid_field5' => array(
+			'field' => 'data_collector_name',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field44' => array(
+			'type' => 'grid_field_label',
+			'field' => 'data_collector_name' 
+		),
+		'simple_grid_field6' => array(
+			'field' => 'ward_name',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field45' => array(
+			'type' => 'grid_field_label',
+			'field' => 'ward_name' 
+		),
+		'simple_grid_field7' => array(
+			'field' => 'ward_transfer',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field46' => array(
+			'type' => 'grid_field_label',
+			'field' => 'ward_transfer' 
+		),
+		'simple_grid_field8' => array(
+			'field' => 'postop_day',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field47' => array(
+			'type' => 'grid_field_label',
+			'field' => 'postop_day' 
+		),
+		'simple_grid_field9' => array(
+			'field' => 'dressing_not_removed',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field48' => array(
+			'type' => 'grid_field_label',
+			'field' => 'dressing_not_removed' 
+		),
+		'simple_grid_field10' => array(
+			'field' => 'wound_clean_and_healthy',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field49' => array(
+			'type' => 'grid_field_label',
+			'field' => 'wound_clean_and_healthy' 
+		),
+		'simple_grid_field11' => array(
+			'field' => 'stitches_removed_or_wound_opened',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field50' => array(
+			'type' => 'grid_field_label',
+			'field' => 'stitches_removed_or_wound_opened' 
+		),
+		'simple_grid_field12' => array(
+			'field' => 'wound_opened_spontaneously',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field51' => array(
+			'type' => 'grid_field_label',
+			'field' => 'wound_opened_spontaneously' 
+		),
+		'simple_grid_field13' => array(
+			'field' => 'pus_draining',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field52' => array(
+			'type' => 'grid_field_label',
+			'field' => 'pus_draining' 
+		),
+		'simple_grid_field14' => array(
+			'field' => 'abscess_present',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field53' => array(
+			'type' => 'grid_field_label',
+			'field' => 'abscess_present' 
+		),
+		'simple_grid_field15' => array(
+			'field' => 'redness_around_wound',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field54' => array(
+			'type' => 'grid_field_label',
+			'field' => 'redness_around_wound' 
+		),
+		'simple_grid_field16' => array(
+			'field' => 'bleeding',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field55' => array(
+			'type' => 'grid_field_label',
+			'field' => 'bleeding' 
+		),
+		'simple_grid_field17' => array(
+			'field' => 'new_dressing',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field56' => array(
+			'type' => 'grid_field_label',
+			'field' => 'new_dressing' 
+		),
+		'simple_grid_field18' => array(
+			'field' => 'new_dressing_type',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field57' => array(
+			'type' => 'grid_field_label',
+			'field' => 'new_dressing_type' 
+		),
+		'simple_grid_field19' => array(
+			'field' => 'fever',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field58' => array(
+			'type' => 'grid_field_label',
+			'field' => 'fever' 
+		),
+		'simple_grid_field20' => array(
+			'field' => 'on_antibiotics',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field59' => array(
+			'type' => 'grid_field_label',
+			'field' => 'on_antibiotics' 
+		),
+		'simple_grid_field21' => array(
+			'field' => 'antibiotics_prescribed',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field60' => array(
+			'type' => 'grid_field_label',
+			'field' => 'antibiotics_prescribed' 
+		),
+		'simple_grid_field22' => array(
+			'field' => 'ssi_diagnosed_on_reoperation',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field61' => array(
+			'type' => 'grid_field_label',
+			'field' => 'ssi_diagnosed_on_reoperation' 
+		),
+		'simple_grid_field23' => array(
+			'field' => 'returned_to_or',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field62' => array(
+			'type' => 'grid_field_label',
+			'field' => 'returned_to_or' 
+		),
+		'simple_grid_field24' => array(
+			'field' => 'return_or_procedure',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field63' => array(
+			'type' => 'grid_field_label',
+			'field' => 'return_or_procedure' 
+		),
+		'simple_grid_field25' => array(
+			'field' => 'disposition',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field64' => array(
+			'type' => 'grid_field_label',
+			'field' => 'disposition' 
+		),
+		'simple_grid_field26' => array(
+			'field' => 'planned_reoperation',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field65' => array(
+			'type' => 'grid_field_label',
+			'field' => 'planned_reoperation' 
+		),
+		'simple_grid_field27' => array(
+			'field' => 'other_complications',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field66' => array(
+			'type' => 'grid_field_label',
+			'field' => 'other_complications' 
+		),
+		'simple_grid_field28' => array(
+			'field' => 'endometritis',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field67' => array(
+			'type' => 'grid_field_label',
+			'field' => 'endometritis' 
+		),
+		'simple_grid_field29' => array(
+			'field' => 'urinary_tract_infection',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field68' => array(
+			'type' => 'grid_field_label',
+			'field' => 'urinary_tract_infection' 
+		),
+		'simple_grid_field30' => array(
+			'field' => 'pneumonia',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field69' => array(
+			'type' => 'grid_field_label',
+			'field' => 'pneumonia' 
+		),
+		'simple_grid_field31' => array(
+			'field' => 'other_complication_description',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field70' => array(
+			'type' => 'grid_field_label',
+			'field' => 'other_complication_description' 
+		),
+		'simple_grid_field32' => array(
+			'field' => 'eschar',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field71' => array(
+			'type' => 'grid_field_label',
+			'field' => 'eschar' 
+		),
+		'simple_grid_field33' => array(
+			'field' => 'discharged_today',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field72' => array(
+			'type' => 'grid_field_label',
+			'field' => 'discharged_today' 
+		),
+		'simple_grid_field34' => array(
+			'field' => 'discharge_date',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field73' => array(
+			'type' => 'grid_field_label',
+			'field' => 'discharge_date' 
+		),
+		'simple_grid_field35' => array(
+			'field' => 'death_in_ward',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field74' => array(
+			'type' => 'grid_field_label',
+			'field' => 'death_in_ward' 
+		),
+		'simple_grid_field36' => array(
+			'field' => 'neonatal_death',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field75' => array(
+			'type' => 'grid_field_label',
+			'field' => 'neonatal_death' 
+		),
+		'simple_grid_field37' => array(
+			'field' => 'created_at',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field76' => array(
+			'type' => 'grid_field_label',
+			'field' => 'created_at' 
+		),
+		'simple_grid_field38' => array(
+			'field' => 'updated_at',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field77' => array(
+			'type' => 'grid_field_label',
+			'field' => 'updated_at' 
+		),
+		'details_preview' => array(
+			'type' => 'details_preview',
+			'table' => 4636,
+			'items' => array( 
+				 
+			),
+			'popup' => false,
+			'proceedLink' => true,
+			'hideEmptyPreview' => false,
+			'pageId' => 'list' 
+		),
+		'grid_checkbox' => array(
+			'type' => 'grid_checkbox' 
+		),
+		'grid_checkbox_head' => array(
+			'type' => 'grid_checkbox_head' 
+		),
+		'grid_edit' => array(
+			'type' => 'grid_edit' 
+		),
+		'grid_view' => array(
+			'type' => 'grid_view' 
+		),
+		'grid_alldetails_link' => array(
+			'type' => 'grid_alldetails_link' 
+		),
+		'grid_details_link' => array(
+			'type' => 'grid_details_link',
+			'table' => 4636,
+			'badge' => true,
+			'hideIfNone' => false,
+			'showCount' => true 
+		),
+		'expand_button' => array(
+			'type' => 'expand_button' 
+		),
+		'inline_add' => array(
+			'type' => 'inline_add',
+			'detailsOnly' => true 
+		),
+		'grid_inline_cancel' => array(
+			'type' => 'grid_inline_cancel' 
+		) 
+	),
+	'dbProps' => array(
+		 
+	),
+	'spreadsheetGrid' => false,
+	'version' => 14,
+	'imageItem' => array(
+		'type' => 'page_image' 
+	),
+	'imageBgColor' => '#f2f2f2',
+	'controlsBgColor' => 'white',
+	'imagePosition' => 'right',
+	'listTotals' => 1,
+	'title' => array(
+		 
+	) 
+);
 		?>

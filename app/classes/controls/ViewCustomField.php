@@ -9,18 +9,7 @@ class ViewCustomField extends ViewControl
 			$fieldData = $this->displayField;
 		}
 		
-		$pageType = $this->container->pSet->getViewPageType();
-		/*
-		if( $this->pageObject )
-		{
-			if( $this->pageObject->mode == EDIT_INLINE && $this->pageObject->pageType != PAGE_VIEW ) 
-			{
-				$pageType = PAGE_LIST;
-			}
-		}
-		*/
-		
-		$result = CustomExpression( $fieldData, $data, $this->field, $pageType, $this->container->tName );
+		$result = $this->container->pSet->getCustomExpression( $this->field, $fieldData, $data );
 		
 		if( $this->searchHighlight )
 		{		
@@ -29,10 +18,19 @@ class ViewCustomField extends ViewControl
 		
 		return $result;
 	}
+	public function getTextValue( &$data ) {
+		$fieldData = $data[ $this->field ];
+		if( !is_null( $this->displayField ) )
+		{
+			$fieldData = $this->displayField;
+		}
+		
+		return $this->container->pSet->getCustomExpression( $this->field, $fieldData, $data );
+	}
 	
 	public function getPdfValue(&$data, $keylink = "")
 	{
-		return my_json_encode( array(
+		return runner_json_encode( array(
 			"text" => $this->showDBValue($data, $keylink),
 			"isHtml" => true
 		) );

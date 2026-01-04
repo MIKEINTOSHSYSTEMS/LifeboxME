@@ -1,544 +1,1002 @@
 <?php
-			$optionsArray = array( 'totals' => array( 'indicator_group_id' => array( 'totalsType' => '' ),
-'indicator_group_name' => array( 'totalsType' => '' ),
-'indicator_group_code' => array( 'totalsType' => '' ),
-'indicator_id' => array( 'totalsType' => '' ),
-'indicator_name' => array( 'totalsType' => '' ),
-'indicator_code' => array( 'totalsType' => '' ),
-'indicator_type' => array( 'totalsType' => '' ),
-'formula' => array( 'totalsType' => '' ),
-'period_type' => array( 'totalsType' => '' ),
-'period_year' => array( 'totalsType' => '' ),
-'period_quarter' => array( 'totalsType' => '' ),
-'period_month' => array( 'totalsType' => '' ),
-'region_id' => array( 'totalsType' => '' ),
-'region_name' => array( 'totalsType' => '' ),
-'country_id' => array( 'totalsType' => '' ),
-'country_name' => array( 'totalsType' => '' ),
-'facility_id' => array( 'totalsType' => '' ),
-'facility_name' => array( 'totalsType' => '' ),
-'actual_value' => array( 'totalsType' => '' ),
-'target_value' => array( 'totalsType' => '' ),
-'variance' => array( 'totalsType' => '' ),
-'variance_percentage' => array( 'totalsType' => '' ),
-'calculation_timestamp' => array( 'totalsType' => '' ),
-'is_calculated' => array( 'totalsType' => '' ),
-'decimals' => array( 'totalsType' => '' ),
-'annualized' => array( 'totalsType' => '' ),
-'data_completeness' => array( 'totalsType' => '' ),
-'overall_completion_percentage' => array( 'totalsType' => '' ),
-'actual_value_completion' => array( 'totalsType' => '' ),
-'target_value_completion' => array( 'totalsType' => '' ),
-'completion_status' => array( 'totalsType' => '' ),
-'is_actual_missing' => array( 'totalsType' => '' ),
-'is_target_missing' => array( 'totalsType' => '' ),
-'data_freshness' => array( 'totalsType' => '' ),
-'days_since_last_calculation' => array( 'totalsType' => '' ),
-'performance_status' => array( 'totalsType' => '' ),
-'performance_percentage' => array( 'totalsType' => '' ),
-'data_quality_flag' => array( 'totalsType' => '' ),
-'data_hierarchy_level' => array( 'totalsType' => '' ),
-'period_completeness' => array( 'totalsType' => '' ),
-'calculation_method' => array( 'totalsType' => '' ),
-'formula_type' => array( 'totalsType' => '' ),
-'org_unit_validity' => array( 'totalsType' => '' ),
-'period_validity' => array( 'totalsType' => '' ),
-'legacy_performance_status' => array( 'totalsType' => '' ) ),
-'fields' => array( 'gridFields' => array( 'indicator_id',
-'indicator_code',
-'indicator_name',
-'period_type',
-'indicator_type',
-'period_year',
-'formula',
-'period_quarter',
-'period_month',
-'region_id',
-'region_name',
-'country_id',
-'country_name',
-'facility_id',
-'facility_name',
-'actual_value',
-'target_value',
-'variance',
-'variance_percentage',
-'calculation_timestamp',
-'is_calculated',
-'decimals',
-'annualized',
-'data_completeness',
-'performance_status',
-'overall_completion_percentage',
-'actual_value_completion',
-'target_value_completion',
-'completion_status',
-'is_actual_missing',
-'is_target_missing',
-'data_freshness',
-'days_since_last_calculation',
-'performance_percentage',
-'data_quality_flag',
-'data_hierarchy_level',
-'period_completeness',
-'calculation_method',
-'formula_type',
-'org_unit_validity',
-'period_validity',
-'legacy_performance_status',
-'indicator_group_id',
-'indicator_group_code',
-'indicator_group_name' ),
-'exportFields' => array( 'indicator_group_id',
-'indicator_group_name',
-'indicator_group_code',
-'indicator_id',
-'indicator_name',
-'indicator_type',
-'formula',
-'indicator_code',
-'period_type',
-'period_year',
-'period_quarter',
-'period_month',
-'region_id',
-'region_name',
-'country_id',
-'country_name',
-'facility_id',
-'facility_name',
-'actual_value',
-'target_value',
-'variance',
-'variance_percentage',
-'calculation_timestamp',
-'is_calculated',
-'decimals',
-'annualized',
-'data_completeness',
-'performance_status',
-'overall_completion_percentage',
-'actual_value_completion',
-'target_value_completion',
-'completion_status',
-'is_actual_missing',
-'is_target_missing',
-'data_freshness',
-'days_since_last_calculation',
-'performance_percentage',
-'data_quality_flag',
-'data_hierarchy_level',
-'period_completeness',
-'calculation_method',
-'formula_type',
-'org_unit_validity',
-'period_validity',
-'legacy_performance_status' ),
-'searchRequiredFields' => array(  ),
-'searchPanelFields' => array(  ),
-'fieldItems' => array( 'indicator_id' => array( 'export_field' ),
-'indicator_code' => array( 'export_field1' ),
-'indicator_name' => array( 'export_field2' ),
-'period_type' => array( 'export_field3' ),
-'indicator_type' => array( 'export_field4' ),
-'period_year' => array( 'export_field5' ),
-'formula' => array( 'export_field6' ),
-'period_quarter' => array( 'export_field7' ),
-'period_month' => array( 'export_field8' ),
-'region_id' => array( 'export_field9' ),
-'region_name' => array( 'export_field10' ),
-'country_id' => array( 'export_field11' ),
-'country_name' => array( 'export_field12' ),
-'facility_id' => array( 'export_field13' ),
-'facility_name' => array( 'export_field14' ),
-'actual_value' => array( 'export_field15' ),
-'target_value' => array( 'export_field16' ),
-'variance' => array( 'export_field17' ),
-'variance_percentage' => array( 'export_field18' ),
-'calculation_timestamp' => array( 'export_field19' ),
-'is_calculated' => array( 'export_field20' ),
-'decimals' => array( 'export_field21' ),
-'annualized' => array( 'export_field22' ),
-'data_completeness' => array( 'export_field23' ),
-'performance_status' => array( 'export_field24' ),
-'overall_completion_percentage' => array( 'export_field25' ),
-'actual_value_completion' => array( 'export_field26' ),
-'target_value_completion' => array( 'export_field27' ),
-'completion_status' => array( 'export_field28' ),
-'is_actual_missing' => array( 'export_field29' ),
-'is_target_missing' => array( 'export_field30' ),
-'data_freshness' => array( 'export_field31' ),
-'days_since_last_calculation' => array( 'export_field32' ),
-'performance_percentage' => array( 'export_field33' ),
-'data_quality_flag' => array( 'export_field34' ),
-'data_hierarchy_level' => array( 'export_field35' ),
-'period_completeness' => array( 'export_field36' ),
-'calculation_method' => array( 'export_field37' ),
-'formula_type' => array( 'export_field38' ),
-'org_unit_validity' => array( 'export_field39' ),
-'period_validity' => array( 'export_field40' ),
-'legacy_performance_status' => array( 'export_field41' ),
-'indicator_group_id' => array( 'export_field42' ),
-'indicator_group_code' => array( 'export_field43' ),
-'indicator_group_name' => array( 'export_field44' ) ) ),
-'pageLinks' => array( 'edit' => false,
-'add' => false,
-'view' => false,
-'print' => false ),
-'layoutHelper' => array( 'formItems' => array( 'formItems' => array( 'supertop' => array(  ),
-'top' => array( 'export_header' ),
-'grid' => array( 'export_field42',
-'export_field44',
-'export_field43',
-'export_field',
-'export_field2',
-'export_field4',
-'export_field6',
-'export_field1',
-'export_field3',
-'export_field5',
-'export_field7',
-'export_field8',
-'export_field9',
-'export_field10',
-'export_field11',
-'export_field12',
-'export_field13',
-'export_field14',
-'export_field15',
-'export_field16',
-'export_field17',
-'export_field18',
-'export_field19',
-'export_field20',
-'export_field21',
-'export_field22',
-'export_field23',
-'export_field24',
-'export_field25',
-'export_field26',
-'export_field27',
-'export_field28',
-'export_field29',
-'export_field30',
-'export_field31',
-'export_field32',
-'export_field33',
-'export_field34',
-'export_field35',
-'export_field36',
-'export_field37',
-'export_field38',
-'export_field39',
-'export_field40',
-'export_field41' ),
-'footer' => array( 'export_export',
-'export_cancel' ) ),
-'formXtTags' => array( 'supertop' => array(  ) ),
-'itemForms' => array( 'export_header' => 'top',
-'export_field42' => 'grid',
-'export_field44' => 'grid',
-'export_field43' => 'grid',
-'export_field' => 'grid',
-'export_field2' => 'grid',
-'export_field4' => 'grid',
-'export_field6' => 'grid',
-'export_field1' => 'grid',
-'export_field3' => 'grid',
-'export_field5' => 'grid',
-'export_field7' => 'grid',
-'export_field8' => 'grid',
-'export_field9' => 'grid',
-'export_field10' => 'grid',
-'export_field11' => 'grid',
-'export_field12' => 'grid',
-'export_field13' => 'grid',
-'export_field14' => 'grid',
-'export_field15' => 'grid',
-'export_field16' => 'grid',
-'export_field17' => 'grid',
-'export_field18' => 'grid',
-'export_field19' => 'grid',
-'export_field20' => 'grid',
-'export_field21' => 'grid',
-'export_field22' => 'grid',
-'export_field23' => 'grid',
-'export_field24' => 'grid',
-'export_field25' => 'grid',
-'export_field26' => 'grid',
-'export_field27' => 'grid',
-'export_field28' => 'grid',
-'export_field29' => 'grid',
-'export_field30' => 'grid',
-'export_field31' => 'grid',
-'export_field32' => 'grid',
-'export_field33' => 'grid',
-'export_field34' => 'grid',
-'export_field35' => 'grid',
-'export_field36' => 'grid',
-'export_field37' => 'grid',
-'export_field38' => 'grid',
-'export_field39' => 'grid',
-'export_field40' => 'grid',
-'export_field41' => 'grid',
-'export_export' => 'footer',
-'export_cancel' => 'footer' ),
-'itemLocations' => array(  ),
-'itemVisiblity' => array(  ) ),
-'itemsByType' => array( 'export_header' => array( 'export_header' ),
-'export_export' => array( 'export_export' ),
-'export_cancel' => array( 'export_cancel' ),
-'export_field' => array( 'export_field',
-'export_field1',
-'export_field2',
-'export_field3',
-'export_field4',
-'export_field5',
-'export_field6',
-'export_field7',
-'export_field8',
-'export_field9',
-'export_field10',
-'export_field11',
-'export_field12',
-'export_field13',
-'export_field14',
-'export_field15',
-'export_field16',
-'export_field17',
-'export_field18',
-'export_field19',
-'export_field20',
-'export_field21',
-'export_field22',
-'export_field23',
-'export_field24',
-'export_field25',
-'export_field26',
-'export_field27',
-'export_field28',
-'export_field29',
-'export_field30',
-'export_field31',
-'export_field32',
-'export_field33',
-'export_field34',
-'export_field35',
-'export_field36',
-'export_field37',
-'export_field38',
-'export_field39',
-'export_field40',
-'export_field41',
-'export_field42',
-'export_field43',
-'export_field44' ) ),
-'cellMaps' => array(  ) ),
-'loginForm' => array( 'loginForm' => 3 ),
-'page' => array( 'verticalBar' => false,
-'labeledButtons' => array( 'update_records' => array(  ),
-'print_pages' => array(  ),
-'register_activate_message' => array(  ),
-'details_found' => array(  ) ),
-'hasCustomButtons' => false,
-'customButtons' => array(  ),
-'hasNotifications' => false,
-'menus' => array(  ),
-'calcTotalsFor' => 1 ),
-'events' => array( 'maps' => array(  ),
-'mapsData' => array(  ),
-'buttons' => array(  ) ),
-'export' => array( 'format' => 2,
-'selectFields' => false,
-'delimiter' => ',',
-'selectDelimiter' => false,
-'exportFileTypes' => array( 'excel' => true,
-'word' => true,
-'csv' => true,
-'xml' => false ) ) );
-			$pageArray = array( 'id' => 'export',
-'type' => 'export',
-'layoutId' => 'first',
-'disabled' => 0,
-'default' => 0,
-'forms' => array( 'supertop' => array( 'modelId' => 'panel-top',
-'grid' => array( array( 'cells' => array( array( 'cell' => 'c1' ) ),
-'section' => '' ) ),
-'cells' => array( 'c1' => array( 'model' => 'c1',
-'items' => array(  ) ) ),
-'deferredItems' => array(  ),
-'recsPerRow' => 1 ),
-'top' => array( 'modelId' => 'export-header',
-'grid' => array( array( 'cells' => array( array( 'cell' => 'c1' ) ),
-'section' => '' ) ),
-'cells' => array( 'c1' => array( 'model' => 'c1',
-'items' => array( 'export_header' ) ) ),
-'deferredItems' => array(  ),
-'recsPerRow' => 1 ),
-'grid' => array( 'modelId' => 'export-grid',
-'grid' => array( array( 'cells' => array( array( 'cell' => 'c1' ) ),
-'section' => '' ) ),
-'cells' => array( 'c1' => array( 'model' => 'c1',
-'items' => array( 'export_field42',
-'export_field44',
-'export_field43',
-'export_field',
-'export_field2',
-'export_field4',
-'export_field6',
-'export_field1',
-'export_field3',
-'export_field5',
-'export_field7',
-'export_field8',
-'export_field9',
-'export_field10',
-'export_field11',
-'export_field12',
-'export_field13',
-'export_field14',
-'export_field15',
-'export_field16',
-'export_field17',
-'export_field18',
-'export_field19',
-'export_field20',
-'export_field21',
-'export_field22',
-'export_field23',
-'export_field24',
-'export_field25',
-'export_field26',
-'export_field27',
-'export_field28',
-'export_field29',
-'export_field30',
-'export_field31',
-'export_field32',
-'export_field33',
-'export_field34',
-'export_field35',
-'export_field36',
-'export_field37',
-'export_field38',
-'export_field39',
-'export_field40',
-'export_field41' ) ) ),
-'deferredItems' => array(  ),
-'recsPerRow' => 1 ),
-'footer' => array( 'modelId' => 'export-footer',
-'grid' => array( array( 'cells' => array( array( 'cell' => 'c1' ),
-array( 'cell' => 'c2' ) ),
-'section' => '' ) ),
-'cells' => array( 'c1' => array( 'model' => 'c1',
-'items' => array(  ) ),
-'c2' => array( 'model' => 'c2',
-'items' => array( 'export_export',
-'export_cancel' ) ) ),
-'deferredItems' => array(  ),
-'recsPerRow' => 1 ) ),
-'items' => array( 'export_header' => array( 'type' => 'export_header' ),
-'export_export' => array( 'type' => 'export_export' ),
-'export_cancel' => array( 'type' => 'export_cancel' ),
-'export_field' => array( 'field' => 'indicator_id',
-'type' => 'export_field' ),
-'export_field1' => array( 'field' => 'indicator_code',
-'type' => 'export_field' ),
-'export_field2' => array( 'field' => 'indicator_name',
-'type' => 'export_field' ),
-'export_field3' => array( 'field' => 'period_type',
-'type' => 'export_field' ),
-'export_field4' => array( 'field' => 'indicator_type',
-'type' => 'export_field' ),
-'export_field5' => array( 'field' => 'period_year',
-'type' => 'export_field' ),
-'export_field6' => array( 'field' => 'formula',
-'type' => 'export_field' ),
-'export_field7' => array( 'field' => 'period_quarter',
-'type' => 'export_field' ),
-'export_field8' => array( 'field' => 'period_month',
-'type' => 'export_field' ),
-'export_field9' => array( 'field' => 'region_id',
-'type' => 'export_field' ),
-'export_field10' => array( 'field' => 'region_name',
-'type' => 'export_field' ),
-'export_field11' => array( 'field' => 'country_id',
-'type' => 'export_field' ),
-'export_field12' => array( 'field' => 'country_name',
-'type' => 'export_field' ),
-'export_field13' => array( 'field' => 'facility_id',
-'type' => 'export_field' ),
-'export_field14' => array( 'field' => 'facility_name',
-'type' => 'export_field' ),
-'export_field15' => array( 'field' => 'actual_value',
-'type' => 'export_field' ),
-'export_field16' => array( 'field' => 'target_value',
-'type' => 'export_field' ),
-'export_field17' => array( 'field' => 'variance',
-'type' => 'export_field' ),
-'export_field18' => array( 'field' => 'variance_percentage',
-'type' => 'export_field' ),
-'export_field19' => array( 'field' => 'calculation_timestamp',
-'type' => 'export_field' ),
-'export_field20' => array( 'field' => 'is_calculated',
-'type' => 'export_field' ),
-'export_field21' => array( 'field' => 'decimals',
-'type' => 'export_field' ),
-'export_field22' => array( 'field' => 'annualized',
-'type' => 'export_field' ),
-'export_field23' => array( 'field' => 'data_completeness',
-'type' => 'export_field' ),
-'export_field24' => array( 'field' => 'performance_status',
-'type' => 'export_field' ),
-'export_field25' => array( 'field' => 'overall_completion_percentage',
-'type' => 'export_field' ),
-'export_field26' => array( 'field' => 'actual_value_completion',
-'type' => 'export_field' ),
-'export_field27' => array( 'field' => 'target_value_completion',
-'type' => 'export_field' ),
-'export_field28' => array( 'field' => 'completion_status',
-'type' => 'export_field' ),
-'export_field29' => array( 'field' => 'is_actual_missing',
-'type' => 'export_field' ),
-'export_field30' => array( 'field' => 'is_target_missing',
-'type' => 'export_field' ),
-'export_field31' => array( 'field' => 'data_freshness',
-'type' => 'export_field' ),
-'export_field32' => array( 'field' => 'days_since_last_calculation',
-'type' => 'export_field' ),
-'export_field33' => array( 'field' => 'performance_percentage',
-'type' => 'export_field' ),
-'export_field34' => array( 'field' => 'data_quality_flag',
-'type' => 'export_field' ),
-'export_field35' => array( 'field' => 'data_hierarchy_level',
-'type' => 'export_field' ),
-'export_field36' => array( 'field' => 'period_completeness',
-'type' => 'export_field' ),
-'export_field37' => array( 'field' => 'calculation_method',
-'type' => 'export_field' ),
-'export_field38' => array( 'field' => 'formula_type',
-'type' => 'export_field' ),
-'export_field39' => array( 'field' => 'org_unit_validity',
-'type' => 'export_field' ),
-'export_field40' => array( 'field' => 'period_validity',
-'type' => 'export_field' ),
-'export_field41' => array( 'field' => 'legacy_performance_status',
-'type' => 'export_field' ),
-'export_field42' => array( 'field' => 'indicator_group_id',
-'type' => 'export_field' ),
-'export_field43' => array( 'field' => 'indicator_group_code',
-'type' => 'export_field' ),
-'export_field44' => array( 'field' => 'indicator_group_name',
-'type' => 'export_field' ) ),
-'dbProps' => array(  ),
-'version' => 14,
-'imageItem' => array( 'type' => 'page_image' ),
-'imageBgColor' => '#f2f2f2',
-'controlsBgColor' => 'white',
-'imagePosition' => 'right',
-'listTotals' => 1,
-'exportFormat' => 2,
-'exportDelimiter' => ',',
-'exportSelectDelimiter' => false,
-'exportSelectFields' => false );
+			$optionsArray = array(
+	'totals' => array(
+		'indicator_group_id' => array(
+			'totalsType' => '' 
+		),
+		'indicator_group_name' => array(
+			'totalsType' => '' 
+		),
+		'indicator_group_code' => array(
+			'totalsType' => '' 
+		),
+		'indicator_id' => array(
+			'totalsType' => '' 
+		),
+		'indicator_name' => array(
+			'totalsType' => '' 
+		),
+		'indicator_code' => array(
+			'totalsType' => '' 
+		),
+		'indicator_type' => array(
+			'totalsType' => '' 
+		),
+		'formula' => array(
+			'totalsType' => '' 
+		),
+		'period_type' => array(
+			'totalsType' => '' 
+		),
+		'period_year' => array(
+			'totalsType' => '' 
+		),
+		'period_quarter' => array(
+			'totalsType' => '' 
+		),
+		'period_month' => array(
+			'totalsType' => '' 
+		),
+		'region_id' => array(
+			'totalsType' => '' 
+		),
+		'region_name' => array(
+			'totalsType' => '' 
+		),
+		'country_id' => array(
+			'totalsType' => '' 
+		),
+		'country_name' => array(
+			'totalsType' => '' 
+		),
+		'facility_id' => array(
+			'totalsType' => '' 
+		),
+		'facility_name' => array(
+			'totalsType' => '' 
+		),
+		'actual_value' => array(
+			'totalsType' => '' 
+		),
+		'target_value' => array(
+			'totalsType' => '' 
+		),
+		'variance' => array(
+			'totalsType' => '' 
+		),
+		'variance_percentage' => array(
+			'totalsType' => '' 
+		),
+		'calculation_timestamp' => array(
+			'totalsType' => '' 
+		),
+		'is_calculated' => array(
+			'totalsType' => '' 
+		),
+		'decimals' => array(
+			'totalsType' => '' 
+		),
+		'annualized' => array(
+			'totalsType' => '' 
+		),
+		'data_completeness' => array(
+			'totalsType' => '' 
+		),
+		'overall_completion_percentage' => array(
+			'totalsType' => '' 
+		),
+		'actual_value_completion' => array(
+			'totalsType' => '' 
+		),
+		'target_value_completion' => array(
+			'totalsType' => '' 
+		),
+		'completion_status' => array(
+			'totalsType' => '' 
+		),
+		'is_actual_missing' => array(
+			'totalsType' => '' 
+		),
+		'is_target_missing' => array(
+			'totalsType' => '' 
+		),
+		'data_freshness' => array(
+			'totalsType' => '' 
+		),
+		'days_since_last_calculation' => array(
+			'totalsType' => '' 
+		),
+		'performance_status' => array(
+			'totalsType' => '' 
+		),
+		'performance_percentage' => array(
+			'totalsType' => '' 
+		),
+		'data_quality_flag' => array(
+			'totalsType' => '' 
+		),
+		'data_hierarchy_level' => array(
+			'totalsType' => '' 
+		),
+		'period_completeness' => array(
+			'totalsType' => '' 
+		),
+		'calculation_method' => array(
+			'totalsType' => '' 
+		),
+		'formula_type' => array(
+			'totalsType' => '' 
+		),
+		'org_unit_validity' => array(
+			'totalsType' => '' 
+		),
+		'period_validity' => array(
+			'totalsType' => '' 
+		),
+		'legacy_performance_status' => array(
+			'totalsType' => '' 
+		) 
+	),
+	'fields' => array(
+		'gridFields' => array( 
+			'indicator_id',
+			'indicator_code',
+			'indicator_name',
+			'period_type',
+			'indicator_type',
+			'period_year',
+			'formula',
+			'period_quarter',
+			'period_month',
+			'region_id',
+			'region_name',
+			'country_id',
+			'country_name',
+			'facility_id',
+			'facility_name',
+			'actual_value',
+			'target_value',
+			'variance',
+			'variance_percentage',
+			'calculation_timestamp',
+			'is_calculated',
+			'decimals',
+			'annualized',
+			'data_completeness',
+			'performance_status',
+			'overall_completion_percentage',
+			'actual_value_completion',
+			'target_value_completion',
+			'completion_status',
+			'is_actual_missing',
+			'is_target_missing',
+			'data_freshness',
+			'days_since_last_calculation',
+			'performance_percentage',
+			'data_quality_flag',
+			'data_hierarchy_level',
+			'period_completeness',
+			'calculation_method',
+			'formula_type',
+			'org_unit_validity',
+			'period_validity',
+			'legacy_performance_status',
+			'indicator_group_id',
+			'indicator_group_code',
+			'indicator_group_name' 
+		),
+		'exportFields' => array( 
+			'indicator_group_id',
+			'indicator_group_name',
+			'indicator_group_code',
+			'indicator_id',
+			'indicator_name',
+			'indicator_type',
+			'formula',
+			'indicator_code',
+			'period_type',
+			'period_year',
+			'period_quarter',
+			'period_month',
+			'region_id',
+			'region_name',
+			'country_id',
+			'country_name',
+			'facility_id',
+			'facility_name',
+			'actual_value',
+			'target_value',
+			'variance',
+			'variance_percentage',
+			'calculation_timestamp',
+			'is_calculated',
+			'decimals',
+			'annualized',
+			'data_completeness',
+			'performance_status',
+			'overall_completion_percentage',
+			'actual_value_completion',
+			'target_value_completion',
+			'completion_status',
+			'is_actual_missing',
+			'is_target_missing',
+			'data_freshness',
+			'days_since_last_calculation',
+			'performance_percentage',
+			'data_quality_flag',
+			'data_hierarchy_level',
+			'period_completeness',
+			'calculation_method',
+			'formula_type',
+			'org_unit_validity',
+			'period_validity',
+			'legacy_performance_status' 
+		),
+		'searchRequiredFields' => array( 
+			 
+		),
+		'searchPanelFields' => array( 
+			 
+		),
+		'fieldItems' => array(
+			'indicator_id' => array( 
+				'export_field' 
+			),
+			'indicator_code' => array( 
+				'export_field1' 
+			),
+			'indicator_name' => array( 
+				'export_field2' 
+			),
+			'period_type' => array( 
+				'export_field3' 
+			),
+			'indicator_type' => array( 
+				'export_field4' 
+			),
+			'period_year' => array( 
+				'export_field5' 
+			),
+			'formula' => array( 
+				'export_field6' 
+			),
+			'period_quarter' => array( 
+				'export_field7' 
+			),
+			'period_month' => array( 
+				'export_field8' 
+			),
+			'region_id' => array( 
+				'export_field9' 
+			),
+			'region_name' => array( 
+				'export_field10' 
+			),
+			'country_id' => array( 
+				'export_field11' 
+			),
+			'country_name' => array( 
+				'export_field12' 
+			),
+			'facility_id' => array( 
+				'export_field13' 
+			),
+			'facility_name' => array( 
+				'export_field14' 
+			),
+			'actual_value' => array( 
+				'export_field15' 
+			),
+			'target_value' => array( 
+				'export_field16' 
+			),
+			'variance' => array( 
+				'export_field17' 
+			),
+			'variance_percentage' => array( 
+				'export_field18' 
+			),
+			'calculation_timestamp' => array( 
+				'export_field19' 
+			),
+			'is_calculated' => array( 
+				'export_field20' 
+			),
+			'decimals' => array( 
+				'export_field21' 
+			),
+			'annualized' => array( 
+				'export_field22' 
+			),
+			'data_completeness' => array( 
+				'export_field23' 
+			),
+			'performance_status' => array( 
+				'export_field24' 
+			),
+			'overall_completion_percentage' => array( 
+				'export_field25' 
+			),
+			'actual_value_completion' => array( 
+				'export_field26' 
+			),
+			'target_value_completion' => array( 
+				'export_field27' 
+			),
+			'completion_status' => array( 
+				'export_field28' 
+			),
+			'is_actual_missing' => array( 
+				'export_field29' 
+			),
+			'is_target_missing' => array( 
+				'export_field30' 
+			),
+			'data_freshness' => array( 
+				'export_field31' 
+			),
+			'days_since_last_calculation' => array( 
+				'export_field32' 
+			),
+			'performance_percentage' => array( 
+				'export_field33' 
+			),
+			'data_quality_flag' => array( 
+				'export_field34' 
+			),
+			'data_hierarchy_level' => array( 
+				'export_field35' 
+			),
+			'period_completeness' => array( 
+				'export_field36' 
+			),
+			'calculation_method' => array( 
+				'export_field37' 
+			),
+			'formula_type' => array( 
+				'export_field38' 
+			),
+			'org_unit_validity' => array( 
+				'export_field39' 
+			),
+			'period_validity' => array( 
+				'export_field40' 
+			),
+			'legacy_performance_status' => array( 
+				'export_field41' 
+			),
+			'indicator_group_id' => array( 
+				'export_field42' 
+			),
+			'indicator_group_code' => array( 
+				'export_field43' 
+			),
+			'indicator_group_name' => array( 
+				'export_field44' 
+			) 
+		) 
+	),
+	'pageLinks' => array(
+		'edit' => false,
+		'add' => false,
+		'view' => false,
+		'print' => false 
+	),
+	'layoutHelper' => array(
+		'formItems' => array(
+			'formItems' => array(
+				'supertop' => array( 
+					 
+				),
+				'top' => array( 
+					'export_header' 
+				),
+				'grid' => array( 
+					'export_field42',
+					'export_field44',
+					'export_field43',
+					'export_field',
+					'export_field2',
+					'export_field4',
+					'export_field6',
+					'export_field1',
+					'export_field3',
+					'export_field5',
+					'export_field7',
+					'export_field8',
+					'export_field9',
+					'export_field10',
+					'export_field11',
+					'export_field12',
+					'export_field13',
+					'export_field14',
+					'export_field15',
+					'export_field16',
+					'export_field17',
+					'export_field18',
+					'export_field19',
+					'export_field20',
+					'export_field21',
+					'export_field22',
+					'export_field23',
+					'export_field24',
+					'export_field25',
+					'export_field26',
+					'export_field27',
+					'export_field28',
+					'export_field29',
+					'export_field30',
+					'export_field31',
+					'export_field32',
+					'export_field33',
+					'export_field34',
+					'export_field35',
+					'export_field36',
+					'export_field37',
+					'export_field38',
+					'export_field39',
+					'export_field40',
+					'export_field41' 
+				),
+				'footer' => array( 
+					'export_export',
+					'export_cancel' 
+				) 
+			),
+			'formXtTags' => array(
+				'supertop' => array( 
+					 
+				) 
+			),
+			'itemForms' => array(
+				'export_header' => 'top',
+				'export_field42' => 'grid',
+				'export_field44' => 'grid',
+				'export_field43' => 'grid',
+				'export_field' => 'grid',
+				'export_field2' => 'grid',
+				'export_field4' => 'grid',
+				'export_field6' => 'grid',
+				'export_field1' => 'grid',
+				'export_field3' => 'grid',
+				'export_field5' => 'grid',
+				'export_field7' => 'grid',
+				'export_field8' => 'grid',
+				'export_field9' => 'grid',
+				'export_field10' => 'grid',
+				'export_field11' => 'grid',
+				'export_field12' => 'grid',
+				'export_field13' => 'grid',
+				'export_field14' => 'grid',
+				'export_field15' => 'grid',
+				'export_field16' => 'grid',
+				'export_field17' => 'grid',
+				'export_field18' => 'grid',
+				'export_field19' => 'grid',
+				'export_field20' => 'grid',
+				'export_field21' => 'grid',
+				'export_field22' => 'grid',
+				'export_field23' => 'grid',
+				'export_field24' => 'grid',
+				'export_field25' => 'grid',
+				'export_field26' => 'grid',
+				'export_field27' => 'grid',
+				'export_field28' => 'grid',
+				'export_field29' => 'grid',
+				'export_field30' => 'grid',
+				'export_field31' => 'grid',
+				'export_field32' => 'grid',
+				'export_field33' => 'grid',
+				'export_field34' => 'grid',
+				'export_field35' => 'grid',
+				'export_field36' => 'grid',
+				'export_field37' => 'grid',
+				'export_field38' => 'grid',
+				'export_field39' => 'grid',
+				'export_field40' => 'grid',
+				'export_field41' => 'grid',
+				'export_export' => 'footer',
+				'export_cancel' => 'footer' 
+			),
+			'itemLocations' => array(
+				 
+			),
+			'itemVisiblity' => array(
+				 
+			) 
+		),
+		'itemsByType' => array(
+			'export_header' => array( 
+				'export_header' 
+			),
+			'export_export' => array( 
+				'export_export' 
+			),
+			'export_cancel' => array( 
+				'export_cancel' 
+			),
+			'export_field' => array( 
+				'export_field',
+				'export_field1',
+				'export_field2',
+				'export_field3',
+				'export_field4',
+				'export_field5',
+				'export_field6',
+				'export_field7',
+				'export_field8',
+				'export_field9',
+				'export_field10',
+				'export_field11',
+				'export_field12',
+				'export_field13',
+				'export_field14',
+				'export_field15',
+				'export_field16',
+				'export_field17',
+				'export_field18',
+				'export_field19',
+				'export_field20',
+				'export_field21',
+				'export_field22',
+				'export_field23',
+				'export_field24',
+				'export_field25',
+				'export_field26',
+				'export_field27',
+				'export_field28',
+				'export_field29',
+				'export_field30',
+				'export_field31',
+				'export_field32',
+				'export_field33',
+				'export_field34',
+				'export_field35',
+				'export_field36',
+				'export_field37',
+				'export_field38',
+				'export_field39',
+				'export_field40',
+				'export_field41',
+				'export_field42',
+				'export_field43',
+				'export_field44' 
+			) 
+		),
+		'cellMaps' => array(
+			 
+		) 
+	),
+	'loginForm' => array(
+		'loginForm' => 3 
+	),
+	'page' => array(
+		'verticalBar' => false,
+		'labeledButtons' => array(
+			'update_records' => array(
+				 
+			),
+			'print_pages' => array(
+				 
+			),
+			'register_activate_message' => array(
+				 
+			),
+			'details_found' => array(
+				 
+			) 
+		),
+		'hasCustomButtons' => false,
+		'customButtons' => array( 
+			 
+		),
+		'codeSnippets' => array( 
+			 
+		),
+		'clickHandlerSnippets' => array( 
+			 
+		),
+		'hasNotifications' => false,
+		'menus' => array( 
+			 
+		),
+		'calcTotalsFor' => 1,
+		'hasCharts' => false 
+	),
+	'events' => array(
+		'maps' => array( 
+			 
+		),
+		'mapsData' => array(
+			 
+		),
+		'buttons' => array( 
+			 
+		) 
+	),
+	'export' => array(
+		'format' => 2,
+		'selectFields' => false,
+		'delimiter' => ',',
+		'selectDelimiter' => false,
+		'exportFileTypes' => array(
+			'excel' => true,
+			'word' => true,
+			'csv' => true,
+			'xml' => false 
+		) 
+	) 
+);
+			$pageArray = array(
+	'id' => 'export',
+	'type' => 'export',
+	'layoutId' => 'first',
+	'disabled' => 0,
+	'default' => 0,
+	'forms' => array(
+		'supertop' => array(
+			'modelId' => 'panel-top',
+			'grid' => array( 
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c1' 
+						) 
+					),
+					'section' => '' 
+				) 
+			),
+			'cells' => array(
+				'c1' => array(
+					'model' => 'c1',
+					'items' => array( 
+						 
+					) 
+				) 
+			),
+			'deferredItems' => array( 
+				 
+			),
+			'recsPerRow' => 1 
+		),
+		'top' => array(
+			'modelId' => 'export-header',
+			'grid' => array( 
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c1' 
+						) 
+					),
+					'section' => '' 
+				) 
+			),
+			'cells' => array(
+				'c1' => array(
+					'model' => 'c1',
+					'items' => array( 
+						'export_header' 
+					) 
+				) 
+			),
+			'deferredItems' => array( 
+				 
+			),
+			'recsPerRow' => 1 
+		),
+		'grid' => array(
+			'modelId' => 'export-grid',
+			'grid' => array( 
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c1' 
+						) 
+					),
+					'section' => '' 
+				) 
+			),
+			'cells' => array(
+				'c1' => array(
+					'model' => 'c1',
+					'items' => array( 
+						'export_field42',
+						'export_field44',
+						'export_field43',
+						'export_field',
+						'export_field2',
+						'export_field4',
+						'export_field6',
+						'export_field1',
+						'export_field3',
+						'export_field5',
+						'export_field7',
+						'export_field8',
+						'export_field9',
+						'export_field10',
+						'export_field11',
+						'export_field12',
+						'export_field13',
+						'export_field14',
+						'export_field15',
+						'export_field16',
+						'export_field17',
+						'export_field18',
+						'export_field19',
+						'export_field20',
+						'export_field21',
+						'export_field22',
+						'export_field23',
+						'export_field24',
+						'export_field25',
+						'export_field26',
+						'export_field27',
+						'export_field28',
+						'export_field29',
+						'export_field30',
+						'export_field31',
+						'export_field32',
+						'export_field33',
+						'export_field34',
+						'export_field35',
+						'export_field36',
+						'export_field37',
+						'export_field38',
+						'export_field39',
+						'export_field40',
+						'export_field41' 
+					) 
+				) 
+			),
+			'deferredItems' => array( 
+				 
+			),
+			'recsPerRow' => 1 
+		),
+		'footer' => array(
+			'modelId' => 'export-footer',
+			'grid' => array( 
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c1' 
+						),
+						array(
+							'cell' => 'c2' 
+						) 
+					),
+					'section' => '' 
+				) 
+			),
+			'cells' => array(
+				'c1' => array(
+					'model' => 'c1',
+					'items' => array( 
+						 
+					) 
+				),
+				'c2' => array(
+					'model' => 'c2',
+					'items' => array( 
+						'export_export',
+						'export_cancel' 
+					) 
+				) 
+			),
+			'deferredItems' => array( 
+				 
+			),
+			'recsPerRow' => 1 
+		) 
+	),
+	'items' => array(
+		'export_header' => array(
+			'type' => 'export_header' 
+		),
+		'export_export' => array(
+			'type' => 'export_export' 
+		),
+		'export_cancel' => array(
+			'type' => 'export_cancel' 
+		),
+		'export_field' => array(
+			'field' => 'indicator_id',
+			'type' => 'export_field' 
+		),
+		'export_field1' => array(
+			'field' => 'indicator_code',
+			'type' => 'export_field' 
+		),
+		'export_field2' => array(
+			'field' => 'indicator_name',
+			'type' => 'export_field' 
+		),
+		'export_field3' => array(
+			'field' => 'period_type',
+			'type' => 'export_field' 
+		),
+		'export_field4' => array(
+			'field' => 'indicator_type',
+			'type' => 'export_field' 
+		),
+		'export_field5' => array(
+			'field' => 'period_year',
+			'type' => 'export_field' 
+		),
+		'export_field6' => array(
+			'field' => 'formula',
+			'type' => 'export_field' 
+		),
+		'export_field7' => array(
+			'field' => 'period_quarter',
+			'type' => 'export_field' 
+		),
+		'export_field8' => array(
+			'field' => 'period_month',
+			'type' => 'export_field' 
+		),
+		'export_field9' => array(
+			'field' => 'region_id',
+			'type' => 'export_field' 
+		),
+		'export_field10' => array(
+			'field' => 'region_name',
+			'type' => 'export_field' 
+		),
+		'export_field11' => array(
+			'field' => 'country_id',
+			'type' => 'export_field' 
+		),
+		'export_field12' => array(
+			'field' => 'country_name',
+			'type' => 'export_field' 
+		),
+		'export_field13' => array(
+			'field' => 'facility_id',
+			'type' => 'export_field' 
+		),
+		'export_field14' => array(
+			'field' => 'facility_name',
+			'type' => 'export_field' 
+		),
+		'export_field15' => array(
+			'field' => 'actual_value',
+			'type' => 'export_field' 
+		),
+		'export_field16' => array(
+			'field' => 'target_value',
+			'type' => 'export_field' 
+		),
+		'export_field17' => array(
+			'field' => 'variance',
+			'type' => 'export_field' 
+		),
+		'export_field18' => array(
+			'field' => 'variance_percentage',
+			'type' => 'export_field' 
+		),
+		'export_field19' => array(
+			'field' => 'calculation_timestamp',
+			'type' => 'export_field' 
+		),
+		'export_field20' => array(
+			'field' => 'is_calculated',
+			'type' => 'export_field' 
+		),
+		'export_field21' => array(
+			'field' => 'decimals',
+			'type' => 'export_field' 
+		),
+		'export_field22' => array(
+			'field' => 'annualized',
+			'type' => 'export_field' 
+		),
+		'export_field23' => array(
+			'field' => 'data_completeness',
+			'type' => 'export_field' 
+		),
+		'export_field24' => array(
+			'field' => 'performance_status',
+			'type' => 'export_field' 
+		),
+		'export_field25' => array(
+			'field' => 'overall_completion_percentage',
+			'type' => 'export_field' 
+		),
+		'export_field26' => array(
+			'field' => 'actual_value_completion',
+			'type' => 'export_field' 
+		),
+		'export_field27' => array(
+			'field' => 'target_value_completion',
+			'type' => 'export_field' 
+		),
+		'export_field28' => array(
+			'field' => 'completion_status',
+			'type' => 'export_field' 
+		),
+		'export_field29' => array(
+			'field' => 'is_actual_missing',
+			'type' => 'export_field' 
+		),
+		'export_field30' => array(
+			'field' => 'is_target_missing',
+			'type' => 'export_field' 
+		),
+		'export_field31' => array(
+			'field' => 'data_freshness',
+			'type' => 'export_field' 
+		),
+		'export_field32' => array(
+			'field' => 'days_since_last_calculation',
+			'type' => 'export_field' 
+		),
+		'export_field33' => array(
+			'field' => 'performance_percentage',
+			'type' => 'export_field' 
+		),
+		'export_field34' => array(
+			'field' => 'data_quality_flag',
+			'type' => 'export_field' 
+		),
+		'export_field35' => array(
+			'field' => 'data_hierarchy_level',
+			'type' => 'export_field' 
+		),
+		'export_field36' => array(
+			'field' => 'period_completeness',
+			'type' => 'export_field' 
+		),
+		'export_field37' => array(
+			'field' => 'calculation_method',
+			'type' => 'export_field' 
+		),
+		'export_field38' => array(
+			'field' => 'formula_type',
+			'type' => 'export_field' 
+		),
+		'export_field39' => array(
+			'field' => 'org_unit_validity',
+			'type' => 'export_field' 
+		),
+		'export_field40' => array(
+			'field' => 'period_validity',
+			'type' => 'export_field' 
+		),
+		'export_field41' => array(
+			'field' => 'legacy_performance_status',
+			'type' => 'export_field' 
+		),
+		'export_field42' => array(
+			'field' => 'indicator_group_id',
+			'type' => 'export_field' 
+		),
+		'export_field43' => array(
+			'field' => 'indicator_group_code',
+			'type' => 'export_field' 
+		),
+		'export_field44' => array(
+			'field' => 'indicator_group_name',
+			'type' => 'export_field' 
+		) 
+	),
+	'dbProps' => array(
+		 
+	),
+	'version' => 14,
+	'imageItem' => array(
+		'type' => 'page_image' 
+	),
+	'imageBgColor' => '#f2f2f2',
+	'controlsBgColor' => 'white',
+	'imagePosition' => 'right',
+	'listTotals' => 1,
+	'title' => array(
+		 
+	),
+	'exportFormat' => 2,
+	'exportDelimiter' => ',',
+	'exportSelectDelimiter' => false,
+	'exportSelectFields' => false 
+);
 		?>

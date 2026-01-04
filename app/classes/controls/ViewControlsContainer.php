@@ -58,7 +58,7 @@ class ViewControlsContainer
 		$this->pSet = $pSet;
 		$this->pageType = $pageType;
 		$this->pageObject = $pageObject;
-		$this->tName = $pSet->getTableName();
+		$this->tName = $pSet->table();
 		if($pageObject)
 			$this->pSet->setPageMode($pageObject->mode);
 			
@@ -92,19 +92,19 @@ class ViewControlsContainer
 	  */
 	function AddJSFile($file,$req1="",$req2="",$req3="")
 	{
-		$rootPath = GetRootPathForResources($file);
+		$rootPath = $file;
 		$this->includes_js[] = $rootPath;
 		if($req1!="")
 		{
-			$this->includes_jsreq[$rootPath] = array(GetRootPathForResources($req1));
+			$this->includes_jsreq[$rootPath] = array($req1);
 		}
 		if($req2!="")
 		{
-			$this->includes_jsreq[$rootPath][] = GetRootPathForResources($req2);
+			$this->includes_jsreq[$rootPath][] = $req2;
 		}
 		if($req3!="")
 		{
-			$this->includes_jsreq[$rootPath][] = GetRootPathForResources($req3);
+			$this->includes_jsreq[$rootPath][] = $req3;
 		}
 	}
 	
@@ -222,10 +222,6 @@ class ViewControlsContainer
 			if ($this->getControl($arField)->isUserControl())
 				return true;
 		}
-		return false;
-	}
-	function mobileTemplateMode() 
-	{
 		return false;
 	}
 }

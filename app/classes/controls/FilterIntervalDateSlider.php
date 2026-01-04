@@ -62,18 +62,18 @@ class FilterIntervalDateSlider extends FilterIntervalSlider
 		if($this->stepType == FSST_MONTHS)
 		{
 			$this->months = array(	
-				"January",
-				"February",
-				"March",
-				"April",
-				"May",
-				"June",
-				"July",
-				"August",
-				"September",
-				"October",
-				"November",
-				"December" );
+				mlang_message('MONTH_JAN'),
+				mlang_message('MONTH_FEB'),
+				mlang_message('MONTH_MAR'),
+				mlang_message('MONTH_APR'),
+				mlang_message('MONTH_MAY'),
+				mlang_message('MONTH_JUN'),
+				mlang_message('MONTH_JUL'),
+				mlang_message('MONTH_AUG'),
+				mlang_message('MONTH_SEP'),
+				mlang_message('MONTH_OCT'),
+				mlang_message('MONTH_NOV'),
+				mlang_message('MONTH_DEC') );
 		}
 	}
 
@@ -561,8 +561,10 @@ class FilterIntervalDateSlider extends FilterIntervalSlider
 		$this->minValue = $data['sliderMin'];
 		$this->maxValue = $data['sliderMax'];
 		
-		$timeZone = date_default_timezone_get(); 
-		date_default_timezone_set('UTC');
+		if( ProjectSettings::ext() == "php") {
+			$timeZone = date_default_timezone_get(); 
+			date_default_timezone_set('UTC');
+		}
 		
 		$this->minDateArray = $this->getDateTimeArray($this->minValue);	
 		$this->maxDateArray = $this->getDateTimeArray($this->maxValue);	
@@ -592,7 +594,9 @@ class FilterIntervalDateSlider extends FilterIntervalSlider
 				$this->maxKnobValue = $data['sliderMax'];	
 		}
 		
-		date_default_timezone_set($timeZone); 
+		if( ProjectSettings::ext() == "php") {	
+			date_default_timezone_set($timeZone); 
+		}
 		return $this->getSliderHTML();
 	}
 	
@@ -706,8 +710,10 @@ class FilterIntervalDateSlider extends FilterIntervalSlider
 	protected function getBaseContolsMapParams() 
 	{
 		$ctrlsMap = parent::getBaseContolsMapParams();
-		$timeZone = date_default_timezone_get(); 
-		date_default_timezone_set('UTC');		
+		if( ProjectSettings::ext() == "php") {	
+			$timeZone = date_default_timezone_get(); 
+			date_default_timezone_set('UTC');		
+		}
 		
 		$ctrlsMap['stepType'] = $this->stepType;		
 
@@ -738,7 +744,9 @@ class FilterIntervalDateSlider extends FilterIntervalSlider
 			if( $this->knobsType != FS_MIN_ONLY )
 				$ctrlsMap['maxKnobValue'] = $this->getRoundedDate( $this->maxKnobFormatValue, false, true );
 		}	
-		date_default_timezone_set( $timeZone );
+		if( ProjectSettings::ext() == "php") {
+			date_default_timezone_set( $timeZone );
+		}
 		
 		if( $this->stepType == FSST_SECONDS )
 			$ctrlsMap['showSeconds'] = true;

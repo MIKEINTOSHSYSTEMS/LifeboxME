@@ -19,10 +19,6 @@ class Connection
 	 */
 	public $connId;
 
-	/**
-	 * @type DBInfo
-	 */
-	public $_encryptInfo;
 
 	/**
 	 * @type DBFunctions
@@ -59,7 +55,7 @@ class Connection
 		$this->setDbFunctions( $params );
 		$this->setDbInfo( $params["ODBCString"] );
 
-		$this->_encryptInfo = $params["EncryptInfo"];
+		$this->_encryptInfo = ProjectSettings::encryptSettings( $this->connId );
 		
 		$initSQLList = $this->_functions->initializationSQL();
 		foreach( $initSQLList as $query ) {
@@ -72,7 +68,7 @@ class Connection
 	 */
 	function isEncryptionByPHPEnabled()
 	{
-		return isset( $this->_encryptInfo["mode"] ) && $this->_encryptInfo["mode"] == ENCRYPTION_PHP;
+		return isset( $this->_encryptInfo["encryptMethod"] ) && $this->_encryptInfo["encryptMethod"] == ENCRYPTION_PHP;
 	}
 
 	/**
@@ -137,7 +133,7 @@ class Connection
 				$this->_functions = new SQLite3Functions( $extraParams );
 			break;
 			case nDATABASE_DB2:
-			case 18:	//	iSeries
+			case nDATABASE_iSeries:
 				include_once getabspath("connections/dbfunctions/DB2Functions.php");
 				$this->_functions = new DB2Functions( $extraParams );
 			break;
@@ -758,6 +754,14 @@ class Connection
 	 */
 	public function getVersion() {
 		return "";
+	}
+
+	protected function saveConnString( $connString ) {
+		storageSet( 'runnerConnString_' . $this->connId, $connString );
+	}
+
+	protected function readConnString() {
+		storageGet( 'runnerConnString_' . $this->connId );
 	}
 
 }

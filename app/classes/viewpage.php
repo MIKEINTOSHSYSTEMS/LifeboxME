@@ -7,6 +7,9 @@ class ViewPage extends RunnerPage
 
 	public $keyFields = array();
 
+	public $nextData;
+	public $prevData;
+
 	/**
 	 * @constructor
 	 */
@@ -51,7 +54,7 @@ class ViewPage extends RunnerPage
 		$messageLink = "";
 
 		if( !isLogged() || Security::isGuest() )
-			$messageLink = " <a href='#' id='loginButtonContinue'>". "Login" . "</a>";
+			$messageLink = " <a href='#' id='loginButtonContinue'>". mlang_message('SESSION_EXPIRED3') . "</a>";
 
 		if( !Security::processPageSecurity( $table, "S", $pageMode != VIEW_SIMPLE, $messageLink) )
 			return false;
@@ -75,9 +78,6 @@ class ViewPage extends RunnerPage
 	 */
 	protected function prepareJsSettings()
 	{
-		$this->jsSettings['tableSettings'][ $this->tName ]["keys"] = $this->jsKeys;
-		$this->jsSettings['tableSettings'][ $this->tName ]["keyFields"] = $this->pSet->getTableKeys();
-
 		if( $this->mode == VIEW_DASHBOARD )
 			$this->pageData['detailsMasterKeys'] = $this->getDetailTablesMasterKeys( $this->getCurrentRecordInternal() );
 	}
@@ -275,7 +275,7 @@ class ViewPage extends RunnerPage
 		$this->xt->assign( "editlink", $this->getEditLink( $data ). '&' . $this->getStateUrlParams() );
 		
 		if( $this->pdfJsonMode() )
-			$this->xt->assign( "pdfFonts", my_json_encode( getPdfFonts() ) );		
+			$this->xt->assign( "pdfFonts", runner_json_encode( getPdfFonts() ) );		
 	}
 
 	/**
@@ -290,11 +290,6 @@ class ViewPage extends RunnerPage
 
 		if( $this->mode == VIEW_SIMPLE )
 		{
-				if( $this->pdfMode )
-			{
-				$this->makePDF();
-				return;
-			}
 			$this->display($templateFile);
 			return;
 		}
@@ -312,35 +307,13 @@ class ViewPage extends RunnerPage
 		exit();
 	}
 
-	protected function makePdf()
-	{
-		$this->AddCSSFile("styles/defaultPDF.css");
-		$this->assignStyleFiles( true );
-
-		$this->hideItemType("hamburger");
-		$this->hideItemType("view_back_list");
-		$this->xt->load_template($this->templatefile);
-		$page = $this->xt->fetch_loaded();
-
-		$landscape = $this->pSet->isLandscapeViewPDFOrientation();
-		if( $this->pSet->isViewPagePDFFitToPage() )
-		{
-			$pagewidth = postvalue("width");
-			$pageheight = postvalue("height");
-		}
-		else
-		{
-			$pagewidth = ($landscape ? PDF_PAGE_HEIGHT : PDF_PAGE_WIDTH) * 100 / $this->pSet->getViewPagePDFScale();
-		}
-		include(getabspath("plugins/page2pdf.php"));
-	}
 
 	/**
 	 * Set details preview on the view master page
 	 */
 	protected function prepareDetailsTables()
 	{
-		if( !$this->isShowDetailTables /*|| $this->mode == VIEW_DASHBOARD*/ )
+		if( !$this->showDetailsPreview() )
 			return;
 
 		$dpParams = $this->getDetailsParams( $this->id );
@@ -398,11 +371,28 @@ class ViewPage extends RunnerPage
 
 			if( !$this->pdfJsonMode() ) {
 				$value = '<span id="view'.$this->id.'_'.$gname.'" >' . $this->showDBValue( $f, $data, $keylink ). '</span>';
-				$this->xt->assign( $gname . "_value", $value );
+				$varName = $gname . "_value";
 			} else {
-				//	$value = "'" . jsreplace( $this->getTextValue( $f, $data ) ) . "'";
-				$this->xt->assign( $gname . "_pdfvalue", $this->showDBValue( $f, $data, $keylink ) );
+				$value = $this->showDBValue( $f, $data, $keylink );
+				$varName = $gname . "_pdfvalue";
 			}
+			$parameters = array( 'value' => $value );
+			if( $this->pSet->getViewFormat( $f ) == FORMAT_CHECKBOX ) {
+				$parameters[ "xt" ] = $this->xt;
+				$parameters[ "clearVar" ] = $gname . "_forward_control";
+			} 
+			
+			$this->xt->assign_function( $varName, 'xt_buildviewcontrol', $parameters );
+
+			if( $this->pSet->getViewFormat( $f ) == FORMAT_CHECKBOX ) {
+				$parameters = array();
+				$parameters[ "xt" ] = $this->xt;
+				$parameters[ "clearVar" ] = $varName;
+				$parameters[ 'value' ] = $value;
+
+				$this->xt->assign_function( $gname . "_forward_control", "xt_forwardViewControl", $parameters );
+			}
+
 
 			$this->xt->assign( $gname . "_fieldblock", true );
 
@@ -454,7 +444,7 @@ class ViewPage extends RunnerPage
 
 	protected function prepareNextPrevButtons()
 	{
-		if( !$this->pSet->useMoveNext() || $this->pdfMode || $this->mode == VIEW_PDFJSON ) {
+		if( !$this->pSet->useMoveNext() || $this->mode == VIEW_PDFJSON ) {
 			$this->hideItemType("prev");
 			$this->hideItemType("next");
 			return;
@@ -468,8 +458,8 @@ class ViewPage extends RunnerPage
 		//show Prev/Next buttons
 		$this->assignPrevNextButtons( !!$nextPrev["next"], !!$nextPrev["prev"], $this->mode == VIEW_DASHBOARD && ($this->hasTableDashGridElement() || $this->hasDashMapElement()) ); // TODO: hasMajorDashElem
 
-		$this->jsSettings["tableSettings"][ $this->tName] ["prevKeys"] = $nextPrev["prev"];
-		$this->jsSettings["tableSettings"][ $this->tName ]["nextKeys"] = $nextPrev["next"];
+		$this->nextData = $nextPrev["next"];
+		$this->prevData = $nextPrev["prev"];
 	}
 
 	/**
@@ -478,9 +468,6 @@ class ViewPage extends RunnerPage
 	protected function prepareButtons()
 	{
 		global $globalEvents;
-
-		if( $this->pdfMode )
-			return;
 
 		$this->prepareNextPrevButtons();
 
@@ -515,13 +502,8 @@ class ViewPage extends RunnerPage
 		if( $this->editAvailable() )
 		{
 			$data = $this->getCurrentRecordInternal();
-			$editable = Security::userCan( 'E', $this->tName, $data[ $this->pSet->getTableOwnerID() ] );
-
-			if( $globalEvents->exists("IsRecordEditable", $this->tName) )
-				$editable = $globalEvents->IsRecordEditable($this->getCurrentRecordInternal(), $editable, $this->tName);
-
-			if( $editable )
-			{
+			
+			if( $this->recordEditable( $data ) ) {
 				$this->xt->assign("edit_page_button", true);
 				$this->xt->assign("edit_page_button_attrs", "id=\"editPageButton".$this->id."\"");
 			}
@@ -595,6 +577,20 @@ class ViewPage extends RunnerPage
 	function inDashboardMode() {
 		return $this->mode == VIEW_DASHBOARD;
 	}
+
+	protected function buildJsTableSettings( $table, $pSet ) {
+		$settings = parent::buildJsTableSettings( $table, $pSet );
+
+		$settings["keys"] = $this->jsKeys;
+		$settings["keyFields"] = $this->pSet->getTableKeys();
+
+		$settings["prevKeys"] = $this->prevData;
+		$settings["nextKeys"] = $this->nextData;
+
+
+		return $settings;
+	}
+
 
 }
 ?>

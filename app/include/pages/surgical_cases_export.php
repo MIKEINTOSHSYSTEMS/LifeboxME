@@ -1,864 +1,1514 @@
 <?php
-			$optionsArray = array( 'totals' => array( 'case_id' => array( 'totalsType' => '' ),
-'facility_id' => array( 'totalsType' => '' ),
-'country_id' => array( 'totalsType' => '' ),
-'surgery_date' => array( 'totalsType' => '' ),
-'data_type' => array( 'totalsType' => '' ),
-'data_collector_name' => array( 'totalsType' => '' ),
-'location_of_surgery' => array( 'totalsType' => '' ),
-'patient_sex' => array( 'totalsType' => '' ),
-'patient_asa_classification' => array( 'totalsType' => '' ),
-'patient_dob' => array( 'totalsType' => '' ),
-'patient_age' => array( 'totalsType' => '' ),
-'diabetes' => array( 'totalsType' => '' ),
-'hypertension' => array( 'totalsType' => '' ),
-'obese' => array( 'totalsType' => '' ),
-'malnourished' => array( 'totalsType' => '' ),
-'smoker' => array( 'totalsType' => '' ),
-'on_steroids' => array( 'totalsType' => '' ),
-'admitted_to_icu' => array( 'totalsType' => '' ),
-'hypothermic' => array( 'totalsType' => '' ),
-'preoperative_diagnosis_id' => array( 'totalsType' => '' ),
-'hours_since_injury' => array( 'totalsType' => '' ),
-'sterilizable_drill_used' => array( 'totalsType' => '' ),
-'drill_sterile_cover_used' => array( 'totalsType' => '' ),
-'holes_in_sterile_cover' => array( 'totalsType' => '' ),
-'sign_in_read_aloud' => array( 'totalsType' => '' ),
-'sign_in_completed_before_anesthesia' => array( 'totalsType' => '' ),
-'sterility_indicator_in_tray' => array( 'totalsType' => '' ),
-'sterility_indicator_color_changed' => array( 'totalsType' => '' ),
-'tray_wet_prior_to_operation' => array( 'totalsType' => '' ),
-'tray_replaced' => array( 'totalsType' => '' ),
-'gauze_count_performed' => array( 'totalsType' => '' ),
-'gauze_count_total' => array( 'totalsType' => '' ),
-'surgeon_scrubbed_hands' => array( 'totalsType' => '' ),
-'handwashing_available' => array( 'totalsType' => '' ),
-'alcohol_solution_applied' => array( 'totalsType' => '' ),
-'new_surgical_gloves_used' => array( 'totalsType' => '' ),
-'gown_sterility_indicator' => array( 'totalsType' => '' ),
-'gown_indicator_color_changed' => array( 'totalsType' => '' ),
-'gown_pack_replaced' => array( 'totalsType' => '' ),
-'gowns_or_drapes_wet' => array( 'totalsType' => '' ),
-'wet_gowns_replaced' => array( 'totalsType' => '' ),
-'holes_in_gowns' => array( 'totalsType' => '' ),
-'torn_gowns_replaced' => array( 'totalsType' => '' ),
-'holes_in_drapes' => array( 'totalsType' => '' ),
-'drapes_replaced' => array( 'totalsType' => '' ),
-'surgical_site_prep_method' => array( 'totalsType' => '' ),
-'vaginal_preparation' => array( 'totalsType' => '' ),
-'antibiotics_given' => array( 'totalsType' => '' ),
-'antibiotics_admin_location' => array( 'totalsType' => '' ),
-'antibiotics_time' => array( 'totalsType' => '' ),
-'on_scheduled_antibiotics' => array( 'totalsType' => '' ),
-'antibiotic_type' => array( 'totalsType' => '' ),
-'timeout_read_aloud' => array( 'totalsType' => '' ),
-'operation_type_announced' => array( 'totalsType' => '' ),
-'blood_loss_announced' => array( 'totalsType' => '' ),
-'estimated_blood_loss' => array( 'totalsType' => '' ),
-'time_of_incision' => array( 'totalsType' => '' ),
-'gauze_count_end_performed' => array( 'totalsType' => '' ),
-'gauze_count_end_total' => array( 'totalsType' => '' ),
-'time_dressing_applied' => array( 'totalsType' => '' ),
-'procedure_id' => array( 'totalsType' => '' ),
-'hardware_or_bioprosthetic_used' => array( 'totalsType' => '' ),
-'cesarean_indication' => array( 'totalsType' => '' ),
-'wound_closed_primarily' => array( 'totalsType' => '' ),
-'wound_classification' => array( 'totalsType' => '' ),
-'case_type' => array( 'totalsType' => '' ),
-'sign_out_read_aloud' => array( 'totalsType' => '' ),
-'sign_out_in_theatre' => array( 'totalsType' => '' ),
-'unplanned_intubation' => array( 'totalsType' => '' ),
-'urgent_tracheostomy' => array( 'totalsType' => '' ),
-'urgent_central_access' => array( 'totalsType' => '' ),
-'other_crisis_occurred' => array( 'totalsType' => '' ),
-'crisis_description' => array( 'totalsType' => '' ),
-'death_in_or' => array( 'totalsType' => '' ),
-'fetal_death' => array( 'totalsType' => '' ),
-'created_at' => array( 'totalsType' => '' ),
-'updated_at' => array( 'totalsType' => '' ) ),
-'fields' => array( 'gridFields' => array( 'case_id',
-'facility_id',
-'country_id',
-'surgery_date',
-'data_type',
-'data_collector_name',
-'location_of_surgery',
-'patient_sex',
-'patient_asa_classification',
-'patient_dob',
-'patient_age',
-'diabetes',
-'hypertension',
-'obese',
-'malnourished',
-'smoker',
-'on_steroids',
-'admitted_to_icu',
-'hypothermic',
-'preoperative_diagnosis_id',
-'hours_since_injury',
-'sterilizable_drill_used',
-'drill_sterile_cover_used',
-'holes_in_sterile_cover',
-'sign_in_read_aloud',
-'sign_in_completed_before_anesthesia',
-'sterility_indicator_in_tray',
-'sterility_indicator_color_changed',
-'tray_wet_prior_to_operation',
-'tray_replaced',
-'gauze_count_performed',
-'gauze_count_total',
-'surgeon_scrubbed_hands',
-'handwashing_available',
-'alcohol_solution_applied',
-'new_surgical_gloves_used',
-'gown_sterility_indicator',
-'gown_indicator_color_changed',
-'gown_pack_replaced',
-'gowns_or_drapes_wet',
-'wet_gowns_replaced',
-'holes_in_gowns',
-'torn_gowns_replaced',
-'holes_in_drapes',
-'drapes_replaced',
-'surgical_site_prep_method',
-'vaginal_preparation',
-'antibiotics_given',
-'antibiotics_admin_location',
-'antibiotics_time',
-'on_scheduled_antibiotics',
-'antibiotic_type',
-'timeout_read_aloud',
-'operation_type_announced',
-'blood_loss_announced',
-'estimated_blood_loss',
-'time_of_incision',
-'gauze_count_end_performed',
-'gauze_count_end_total',
-'time_dressing_applied',
-'procedure_id',
-'hardware_or_bioprosthetic_used',
-'cesarean_indication',
-'wound_closed_primarily',
-'wound_classification',
-'case_type',
-'sign_out_read_aloud',
-'sign_out_in_theatre',
-'unplanned_intubation',
-'urgent_tracheostomy',
-'urgent_central_access',
-'other_crisis_occurred',
-'crisis_description',
-'death_in_or',
-'fetal_death',
-'created_at',
-'updated_at' ),
-'exportFields' => array( 'case_id',
-'facility_id',
-'country_id',
-'surgery_date',
-'data_type',
-'data_collector_name',
-'location_of_surgery',
-'patient_sex',
-'patient_asa_classification',
-'patient_dob',
-'patient_age',
-'diabetes',
-'hypertension',
-'obese',
-'malnourished',
-'smoker',
-'on_steroids',
-'admitted_to_icu',
-'hypothermic',
-'preoperative_diagnosis_id',
-'hours_since_injury',
-'sterilizable_drill_used',
-'drill_sterile_cover_used',
-'holes_in_sterile_cover',
-'sign_in_read_aloud',
-'sign_in_completed_before_anesthesia',
-'sterility_indicator_in_tray',
-'sterility_indicator_color_changed',
-'tray_wet_prior_to_operation',
-'tray_replaced',
-'gauze_count_performed',
-'gauze_count_total',
-'surgeon_scrubbed_hands',
-'handwashing_available',
-'alcohol_solution_applied',
-'new_surgical_gloves_used',
-'gown_sterility_indicator',
-'gown_indicator_color_changed',
-'gown_pack_replaced',
-'gowns_or_drapes_wet',
-'wet_gowns_replaced',
-'holes_in_gowns',
-'torn_gowns_replaced',
-'holes_in_drapes',
-'drapes_replaced',
-'surgical_site_prep_method',
-'vaginal_preparation',
-'antibiotics_given',
-'antibiotics_admin_location',
-'antibiotics_time',
-'on_scheduled_antibiotics',
-'antibiotic_type',
-'timeout_read_aloud',
-'operation_type_announced',
-'blood_loss_announced',
-'estimated_blood_loss',
-'time_of_incision',
-'gauze_count_end_performed',
-'gauze_count_end_total',
-'time_dressing_applied',
-'procedure_id',
-'hardware_or_bioprosthetic_used',
-'cesarean_indication',
-'wound_closed_primarily',
-'wound_classification',
-'case_type',
-'sign_out_read_aloud',
-'sign_out_in_theatre',
-'unplanned_intubation',
-'urgent_tracheostomy',
-'urgent_central_access',
-'other_crisis_occurred',
-'crisis_description',
-'death_in_or',
-'fetal_death',
-'created_at',
-'updated_at' ),
-'searchRequiredFields' => array(  ),
-'searchPanelFields' => array(  ),
-'fieldItems' => array( 'case_id' => array( 'export_field' ),
-'facility_id' => array( 'export_field1' ),
-'country_id' => array( 'export_field2' ),
-'surgery_date' => array( 'export_field3' ),
-'data_type' => array( 'export_field4' ),
-'data_collector_name' => array( 'export_field5' ),
-'location_of_surgery' => array( 'export_field6' ),
-'patient_sex' => array( 'export_field7' ),
-'patient_asa_classification' => array( 'export_field8' ),
-'patient_dob' => array( 'export_field9' ),
-'patient_age' => array( 'export_field10' ),
-'diabetes' => array( 'export_field11' ),
-'hypertension' => array( 'export_field12' ),
-'obese' => array( 'export_field13' ),
-'malnourished' => array( 'export_field14' ),
-'smoker' => array( 'export_field15' ),
-'on_steroids' => array( 'export_field16' ),
-'admitted_to_icu' => array( 'export_field17' ),
-'hypothermic' => array( 'export_field18' ),
-'preoperative_diagnosis_id' => array( 'export_field19' ),
-'hours_since_injury' => array( 'export_field20' ),
-'sterilizable_drill_used' => array( 'export_field21' ),
-'drill_sterile_cover_used' => array( 'export_field22' ),
-'holes_in_sterile_cover' => array( 'export_field23' ),
-'sign_in_read_aloud' => array( 'export_field24' ),
-'sign_in_completed_before_anesthesia' => array( 'export_field25' ),
-'sterility_indicator_in_tray' => array( 'export_field26' ),
-'sterility_indicator_color_changed' => array( 'export_field27' ),
-'tray_wet_prior_to_operation' => array( 'export_field28' ),
-'tray_replaced' => array( 'export_field29' ),
-'gauze_count_performed' => array( 'export_field30' ),
-'gauze_count_total' => array( 'export_field31' ),
-'surgeon_scrubbed_hands' => array( 'export_field32' ),
-'handwashing_available' => array( 'export_field33' ),
-'alcohol_solution_applied' => array( 'export_field34' ),
-'new_surgical_gloves_used' => array( 'export_field35' ),
-'gown_sterility_indicator' => array( 'export_field36' ),
-'gown_indicator_color_changed' => array( 'export_field37' ),
-'gown_pack_replaced' => array( 'export_field38' ),
-'gowns_or_drapes_wet' => array( 'export_field39' ),
-'wet_gowns_replaced' => array( 'export_field40' ),
-'holes_in_gowns' => array( 'export_field41' ),
-'torn_gowns_replaced' => array( 'export_field42' ),
-'holes_in_drapes' => array( 'export_field43' ),
-'drapes_replaced' => array( 'export_field44' ),
-'surgical_site_prep_method' => array( 'export_field45' ),
-'vaginal_preparation' => array( 'export_field46' ),
-'antibiotics_given' => array( 'export_field47' ),
-'antibiotics_admin_location' => array( 'export_field48' ),
-'antibiotics_time' => array( 'export_field49' ),
-'on_scheduled_antibiotics' => array( 'export_field50' ),
-'antibiotic_type' => array( 'export_field51' ),
-'timeout_read_aloud' => array( 'export_field52' ),
-'operation_type_announced' => array( 'export_field53' ),
-'blood_loss_announced' => array( 'export_field54' ),
-'estimated_blood_loss' => array( 'export_field55' ),
-'time_of_incision' => array( 'export_field56' ),
-'gauze_count_end_performed' => array( 'export_field57' ),
-'gauze_count_end_total' => array( 'export_field58' ),
-'time_dressing_applied' => array( 'export_field59' ),
-'procedure_id' => array( 'export_field60' ),
-'hardware_or_bioprosthetic_used' => array( 'export_field61' ),
-'cesarean_indication' => array( 'export_field62' ),
-'wound_closed_primarily' => array( 'export_field63' ),
-'wound_classification' => array( 'export_field64' ),
-'case_type' => array( 'export_field65' ),
-'sign_out_read_aloud' => array( 'export_field66' ),
-'sign_out_in_theatre' => array( 'export_field67' ),
-'unplanned_intubation' => array( 'export_field68' ),
-'urgent_tracheostomy' => array( 'export_field69' ),
-'urgent_central_access' => array( 'export_field70' ),
-'other_crisis_occurred' => array( 'export_field71' ),
-'crisis_description' => array( 'export_field72' ),
-'death_in_or' => array( 'export_field73' ),
-'fetal_death' => array( 'export_field74' ),
-'created_at' => array( 'export_field75' ),
-'updated_at' => array( 'export_field76' ) ) ),
-'pageLinks' => array( 'edit' => false,
-'add' => false,
-'view' => false,
-'print' => false ),
-'layoutHelper' => array( 'formItems' => array( 'formItems' => array( 'supertop' => array(  ),
-'top' => array( 'export_header' ),
-'grid' => array( 'export_field',
-'export_field1',
-'export_field2',
-'export_field3',
-'export_field4',
-'export_field5',
-'export_field6',
-'export_field7',
-'export_field8',
-'export_field9',
-'export_field10',
-'export_field11',
-'export_field12',
-'export_field13',
-'export_field14',
-'export_field15',
-'export_field16',
-'export_field17',
-'export_field18',
-'export_field19',
-'export_field20',
-'export_field21',
-'export_field22',
-'export_field23',
-'export_field24',
-'export_field25',
-'export_field26',
-'export_field27',
-'export_field28',
-'export_field29',
-'export_field30',
-'export_field31',
-'export_field32',
-'export_field33',
-'export_field34',
-'export_field35',
-'export_field36',
-'export_field37',
-'export_field38',
-'export_field39',
-'export_field40',
-'export_field41',
-'export_field42',
-'export_field43',
-'export_field44',
-'export_field45',
-'export_field46',
-'export_field47',
-'export_field48',
-'export_field49',
-'export_field50',
-'export_field51',
-'export_field52',
-'export_field53',
-'export_field54',
-'export_field55',
-'export_field56',
-'export_field57',
-'export_field58',
-'export_field59',
-'export_field60',
-'export_field61',
-'export_field62',
-'export_field63',
-'export_field64',
-'export_field65',
-'export_field66',
-'export_field67',
-'export_field68',
-'export_field69',
-'export_field70',
-'export_field71',
-'export_field72',
-'export_field73',
-'export_field74',
-'export_field75',
-'export_field76' ),
-'footer' => array( 'export_export',
-'export_cancel' ) ),
-'formXtTags' => array( 'supertop' => array(  ) ),
-'itemForms' => array( 'export_header' => 'top',
-'export_field' => 'grid',
-'export_field1' => 'grid',
-'export_field2' => 'grid',
-'export_field3' => 'grid',
-'export_field4' => 'grid',
-'export_field5' => 'grid',
-'export_field6' => 'grid',
-'export_field7' => 'grid',
-'export_field8' => 'grid',
-'export_field9' => 'grid',
-'export_field10' => 'grid',
-'export_field11' => 'grid',
-'export_field12' => 'grid',
-'export_field13' => 'grid',
-'export_field14' => 'grid',
-'export_field15' => 'grid',
-'export_field16' => 'grid',
-'export_field17' => 'grid',
-'export_field18' => 'grid',
-'export_field19' => 'grid',
-'export_field20' => 'grid',
-'export_field21' => 'grid',
-'export_field22' => 'grid',
-'export_field23' => 'grid',
-'export_field24' => 'grid',
-'export_field25' => 'grid',
-'export_field26' => 'grid',
-'export_field27' => 'grid',
-'export_field28' => 'grid',
-'export_field29' => 'grid',
-'export_field30' => 'grid',
-'export_field31' => 'grid',
-'export_field32' => 'grid',
-'export_field33' => 'grid',
-'export_field34' => 'grid',
-'export_field35' => 'grid',
-'export_field36' => 'grid',
-'export_field37' => 'grid',
-'export_field38' => 'grid',
-'export_field39' => 'grid',
-'export_field40' => 'grid',
-'export_field41' => 'grid',
-'export_field42' => 'grid',
-'export_field43' => 'grid',
-'export_field44' => 'grid',
-'export_field45' => 'grid',
-'export_field46' => 'grid',
-'export_field47' => 'grid',
-'export_field48' => 'grid',
-'export_field49' => 'grid',
-'export_field50' => 'grid',
-'export_field51' => 'grid',
-'export_field52' => 'grid',
-'export_field53' => 'grid',
-'export_field54' => 'grid',
-'export_field55' => 'grid',
-'export_field56' => 'grid',
-'export_field57' => 'grid',
-'export_field58' => 'grid',
-'export_field59' => 'grid',
-'export_field60' => 'grid',
-'export_field61' => 'grid',
-'export_field62' => 'grid',
-'export_field63' => 'grid',
-'export_field64' => 'grid',
-'export_field65' => 'grid',
-'export_field66' => 'grid',
-'export_field67' => 'grid',
-'export_field68' => 'grid',
-'export_field69' => 'grid',
-'export_field70' => 'grid',
-'export_field71' => 'grid',
-'export_field72' => 'grid',
-'export_field73' => 'grid',
-'export_field74' => 'grid',
-'export_field75' => 'grid',
-'export_field76' => 'grid',
-'export_export' => 'footer',
-'export_cancel' => 'footer' ),
-'itemLocations' => array(  ),
-'itemVisiblity' => array(  ) ),
-'itemsByType' => array( 'export_header' => array( 'export_header' ),
-'export_export' => array( 'export_export' ),
-'export_cancel' => array( 'export_cancel' ),
-'export_field' => array( 'export_field',
-'export_field1',
-'export_field2',
-'export_field3',
-'export_field4',
-'export_field5',
-'export_field6',
-'export_field7',
-'export_field8',
-'export_field9',
-'export_field10',
-'export_field11',
-'export_field12',
-'export_field13',
-'export_field14',
-'export_field15',
-'export_field16',
-'export_field17',
-'export_field18',
-'export_field19',
-'export_field20',
-'export_field21',
-'export_field22',
-'export_field23',
-'export_field24',
-'export_field25',
-'export_field26',
-'export_field27',
-'export_field28',
-'export_field29',
-'export_field30',
-'export_field31',
-'export_field32',
-'export_field33',
-'export_field34',
-'export_field35',
-'export_field36',
-'export_field37',
-'export_field38',
-'export_field39',
-'export_field40',
-'export_field41',
-'export_field42',
-'export_field43',
-'export_field44',
-'export_field45',
-'export_field46',
-'export_field47',
-'export_field48',
-'export_field49',
-'export_field50',
-'export_field51',
-'export_field52',
-'export_field53',
-'export_field54',
-'export_field55',
-'export_field56',
-'export_field57',
-'export_field58',
-'export_field59',
-'export_field60',
-'export_field61',
-'export_field62',
-'export_field63',
-'export_field64',
-'export_field65',
-'export_field66',
-'export_field67',
-'export_field68',
-'export_field69',
-'export_field70',
-'export_field71',
-'export_field72',
-'export_field73',
-'export_field74',
-'export_field75',
-'export_field76' ) ),
-'cellMaps' => array(  ) ),
-'loginForm' => array( 'loginForm' => 3 ),
-'page' => array( 'verticalBar' => false,
-'labeledButtons' => array( 'update_records' => array(  ),
-'print_pages' => array(  ),
-'register_activate_message' => array(  ),
-'details_found' => array(  ) ),
-'hasCustomButtons' => false,
-'customButtons' => array(  ),
-'hasNotifications' => false,
-'menus' => array(  ),
-'calcTotalsFor' => 1 ),
-'events' => array( 'maps' => array(  ),
-'mapsData' => array(  ),
-'buttons' => array(  ) ),
-'export' => array( 'format' => 2,
-'selectFields' => false,
-'delimiter' => ',',
-'selectDelimiter' => false,
-'exportFileTypes' => array( 'excel' => true,
-'word' => true,
-'csv' => true,
-'xml' => false ) ) );
-			$pageArray = array( 'id' => 'export',
-'type' => 'export',
-'layoutId' => 'first',
-'disabled' => 0,
-'default' => 0,
-'forms' => array( 'supertop' => array( 'modelId' => 'panel-top',
-'grid' => array( array( 'cells' => array( array( 'cell' => 'c1' ) ),
-'section' => '' ) ),
-'cells' => array( 'c1' => array( 'model' => 'c1',
-'items' => array(  ) ) ),
-'deferredItems' => array(  ),
-'recsPerRow' => 1 ),
-'top' => array( 'modelId' => 'export-header',
-'grid' => array( array( 'cells' => array( array( 'cell' => 'c1' ) ),
-'section' => '' ) ),
-'cells' => array( 'c1' => array( 'model' => 'c1',
-'items' => array( 'export_header' ) ) ),
-'deferredItems' => array(  ),
-'recsPerRow' => 1 ),
-'grid' => array( 'modelId' => 'export-grid',
-'grid' => array( array( 'cells' => array( array( 'cell' => 'c1' ) ),
-'section' => '' ) ),
-'cells' => array( 'c1' => array( 'model' => 'c1',
-'items' => array( 'export_field',
-'export_field1',
-'export_field2',
-'export_field3',
-'export_field4',
-'export_field5',
-'export_field6',
-'export_field7',
-'export_field8',
-'export_field9',
-'export_field10',
-'export_field11',
-'export_field12',
-'export_field13',
-'export_field14',
-'export_field15',
-'export_field16',
-'export_field17',
-'export_field18',
-'export_field19',
-'export_field20',
-'export_field21',
-'export_field22',
-'export_field23',
-'export_field24',
-'export_field25',
-'export_field26',
-'export_field27',
-'export_field28',
-'export_field29',
-'export_field30',
-'export_field31',
-'export_field32',
-'export_field33',
-'export_field34',
-'export_field35',
-'export_field36',
-'export_field37',
-'export_field38',
-'export_field39',
-'export_field40',
-'export_field41',
-'export_field42',
-'export_field43',
-'export_field44',
-'export_field45',
-'export_field46',
-'export_field47',
-'export_field48',
-'export_field49',
-'export_field50',
-'export_field51',
-'export_field52',
-'export_field53',
-'export_field54',
-'export_field55',
-'export_field56',
-'export_field57',
-'export_field58',
-'export_field59',
-'export_field60',
-'export_field61',
-'export_field62',
-'export_field63',
-'export_field64',
-'export_field65',
-'export_field66',
-'export_field67',
-'export_field68',
-'export_field69',
-'export_field70',
-'export_field71',
-'export_field72',
-'export_field73',
-'export_field74',
-'export_field75',
-'export_field76' ) ) ),
-'deferredItems' => array(  ),
-'recsPerRow' => 1 ),
-'footer' => array( 'modelId' => 'export-footer',
-'grid' => array( array( 'cells' => array( array( 'cell' => 'c1' ),
-array( 'cell' => 'c2' ) ),
-'section' => '' ) ),
-'cells' => array( 'c1' => array( 'model' => 'c1',
-'items' => array(  ) ),
-'c2' => array( 'model' => 'c2',
-'items' => array( 'export_export',
-'export_cancel' ) ) ),
-'deferredItems' => array(  ),
-'recsPerRow' => 1 ) ),
-'items' => array( 'export_header' => array( 'type' => 'export_header' ),
-'export_export' => array( 'type' => 'export_export' ),
-'export_cancel' => array( 'type' => 'export_cancel' ),
-'export_field' => array( 'field' => 'case_id',
-'type' => 'export_field' ),
-'export_field1' => array( 'field' => 'facility_id',
-'type' => 'export_field' ),
-'export_field2' => array( 'field' => 'country_id',
-'type' => 'export_field' ),
-'export_field3' => array( 'field' => 'surgery_date',
-'type' => 'export_field' ),
-'export_field4' => array( 'field' => 'data_type',
-'type' => 'export_field' ),
-'export_field5' => array( 'field' => 'data_collector_name',
-'type' => 'export_field' ),
-'export_field6' => array( 'field' => 'location_of_surgery',
-'type' => 'export_field' ),
-'export_field7' => array( 'field' => 'patient_sex',
-'type' => 'export_field' ),
-'export_field8' => array( 'field' => 'patient_asa_classification',
-'type' => 'export_field' ),
-'export_field9' => array( 'field' => 'patient_dob',
-'type' => 'export_field' ),
-'export_field10' => array( 'field' => 'patient_age',
-'type' => 'export_field' ),
-'export_field11' => array( 'field' => 'diabetes',
-'type' => 'export_field' ),
-'export_field12' => array( 'field' => 'hypertension',
-'type' => 'export_field' ),
-'export_field13' => array( 'field' => 'obese',
-'type' => 'export_field' ),
-'export_field14' => array( 'field' => 'malnourished',
-'type' => 'export_field' ),
-'export_field15' => array( 'field' => 'smoker',
-'type' => 'export_field' ),
-'export_field16' => array( 'field' => 'on_steroids',
-'type' => 'export_field' ),
-'export_field17' => array( 'field' => 'admitted_to_icu',
-'type' => 'export_field' ),
-'export_field18' => array( 'field' => 'hypothermic',
-'type' => 'export_field' ),
-'export_field19' => array( 'field' => 'preoperative_diagnosis_id',
-'type' => 'export_field' ),
-'export_field20' => array( 'field' => 'hours_since_injury',
-'type' => 'export_field' ),
-'export_field21' => array( 'field' => 'sterilizable_drill_used',
-'type' => 'export_field' ),
-'export_field22' => array( 'field' => 'drill_sterile_cover_used',
-'type' => 'export_field' ),
-'export_field23' => array( 'field' => 'holes_in_sterile_cover',
-'type' => 'export_field' ),
-'export_field24' => array( 'field' => 'sign_in_read_aloud',
-'type' => 'export_field' ),
-'export_field25' => array( 'field' => 'sign_in_completed_before_anesthesia',
-'type' => 'export_field' ),
-'export_field26' => array( 'field' => 'sterility_indicator_in_tray',
-'type' => 'export_field' ),
-'export_field27' => array( 'field' => 'sterility_indicator_color_changed',
-'type' => 'export_field' ),
-'export_field28' => array( 'field' => 'tray_wet_prior_to_operation',
-'type' => 'export_field' ),
-'export_field29' => array( 'field' => 'tray_replaced',
-'type' => 'export_field' ),
-'export_field30' => array( 'field' => 'gauze_count_performed',
-'type' => 'export_field' ),
-'export_field31' => array( 'field' => 'gauze_count_total',
-'type' => 'export_field' ),
-'export_field32' => array( 'field' => 'surgeon_scrubbed_hands',
-'type' => 'export_field' ),
-'export_field33' => array( 'field' => 'handwashing_available',
-'type' => 'export_field' ),
-'export_field34' => array( 'field' => 'alcohol_solution_applied',
-'type' => 'export_field' ),
-'export_field35' => array( 'field' => 'new_surgical_gloves_used',
-'type' => 'export_field' ),
-'export_field36' => array( 'field' => 'gown_sterility_indicator',
-'type' => 'export_field' ),
-'export_field37' => array( 'field' => 'gown_indicator_color_changed',
-'type' => 'export_field' ),
-'export_field38' => array( 'field' => 'gown_pack_replaced',
-'type' => 'export_field' ),
-'export_field39' => array( 'field' => 'gowns_or_drapes_wet',
-'type' => 'export_field' ),
-'export_field40' => array( 'field' => 'wet_gowns_replaced',
-'type' => 'export_field' ),
-'export_field41' => array( 'field' => 'holes_in_gowns',
-'type' => 'export_field' ),
-'export_field42' => array( 'field' => 'torn_gowns_replaced',
-'type' => 'export_field' ),
-'export_field43' => array( 'field' => 'holes_in_drapes',
-'type' => 'export_field' ),
-'export_field44' => array( 'field' => 'drapes_replaced',
-'type' => 'export_field' ),
-'export_field45' => array( 'field' => 'surgical_site_prep_method',
-'type' => 'export_field' ),
-'export_field46' => array( 'field' => 'vaginal_preparation',
-'type' => 'export_field' ),
-'export_field47' => array( 'field' => 'antibiotics_given',
-'type' => 'export_field' ),
-'export_field48' => array( 'field' => 'antibiotics_admin_location',
-'type' => 'export_field' ),
-'export_field49' => array( 'field' => 'antibiotics_time',
-'type' => 'export_field' ),
-'export_field50' => array( 'field' => 'on_scheduled_antibiotics',
-'type' => 'export_field' ),
-'export_field51' => array( 'field' => 'antibiotic_type',
-'type' => 'export_field' ),
-'export_field52' => array( 'field' => 'timeout_read_aloud',
-'type' => 'export_field' ),
-'export_field53' => array( 'field' => 'operation_type_announced',
-'type' => 'export_field' ),
-'export_field54' => array( 'field' => 'blood_loss_announced',
-'type' => 'export_field' ),
-'export_field55' => array( 'field' => 'estimated_blood_loss',
-'type' => 'export_field' ),
-'export_field56' => array( 'field' => 'time_of_incision',
-'type' => 'export_field' ),
-'export_field57' => array( 'field' => 'gauze_count_end_performed',
-'type' => 'export_field' ),
-'export_field58' => array( 'field' => 'gauze_count_end_total',
-'type' => 'export_field' ),
-'export_field59' => array( 'field' => 'time_dressing_applied',
-'type' => 'export_field' ),
-'export_field60' => array( 'field' => 'procedure_id',
-'type' => 'export_field' ),
-'export_field61' => array( 'field' => 'hardware_or_bioprosthetic_used',
-'type' => 'export_field' ),
-'export_field62' => array( 'field' => 'cesarean_indication',
-'type' => 'export_field' ),
-'export_field63' => array( 'field' => 'wound_closed_primarily',
-'type' => 'export_field' ),
-'export_field64' => array( 'field' => 'wound_classification',
-'type' => 'export_field' ),
-'export_field65' => array( 'field' => 'case_type',
-'type' => 'export_field' ),
-'export_field66' => array( 'field' => 'sign_out_read_aloud',
-'type' => 'export_field' ),
-'export_field67' => array( 'field' => 'sign_out_in_theatre',
-'type' => 'export_field' ),
-'export_field68' => array( 'field' => 'unplanned_intubation',
-'type' => 'export_field' ),
-'export_field69' => array( 'field' => 'urgent_tracheostomy',
-'type' => 'export_field' ),
-'export_field70' => array( 'field' => 'urgent_central_access',
-'type' => 'export_field' ),
-'export_field71' => array( 'field' => 'other_crisis_occurred',
-'type' => 'export_field' ),
-'export_field72' => array( 'field' => 'crisis_description',
-'type' => 'export_field' ),
-'export_field73' => array( 'field' => 'death_in_or',
-'type' => 'export_field' ),
-'export_field74' => array( 'field' => 'fetal_death',
-'type' => 'export_field' ),
-'export_field75' => array( 'field' => 'created_at',
-'type' => 'export_field' ),
-'export_field76' => array( 'field' => 'updated_at',
-'type' => 'export_field' ) ),
-'dbProps' => array(  ),
-'version' => 14,
-'imageItem' => array( 'type' => 'page_image' ),
-'imageBgColor' => '#f2f2f2',
-'controlsBgColor' => 'white',
-'imagePosition' => 'right',
-'listTotals' => 1,
-'exportFormat' => 2,
-'exportDelimiter' => ',',
-'exportSelectDelimiter' => false,
-'exportSelectFields' => false );
+			$optionsArray = array(
+	'totals' => array(
+		'case_id' => array(
+			'totalsType' => '' 
+		),
+		'facility_id' => array(
+			'totalsType' => '' 
+		),
+		'country_id' => array(
+			'totalsType' => '' 
+		),
+		'surgery_date' => array(
+			'totalsType' => '' 
+		),
+		'data_type' => array(
+			'totalsType' => '' 
+		),
+		'data_collector_name' => array(
+			'totalsType' => '' 
+		),
+		'location_of_surgery' => array(
+			'totalsType' => '' 
+		),
+		'patient_sex' => array(
+			'totalsType' => '' 
+		),
+		'patient_asa_classification' => array(
+			'totalsType' => '' 
+		),
+		'patient_dob' => array(
+			'totalsType' => '' 
+		),
+		'patient_age' => array(
+			'totalsType' => '' 
+		),
+		'diabetes' => array(
+			'totalsType' => '' 
+		),
+		'hypertension' => array(
+			'totalsType' => '' 
+		),
+		'obese' => array(
+			'totalsType' => '' 
+		),
+		'malnourished' => array(
+			'totalsType' => '' 
+		),
+		'smoker' => array(
+			'totalsType' => '' 
+		),
+		'on_steroids' => array(
+			'totalsType' => '' 
+		),
+		'admitted_to_icu' => array(
+			'totalsType' => '' 
+		),
+		'hypothermic' => array(
+			'totalsType' => '' 
+		),
+		'preoperative_diagnosis_id' => array(
+			'totalsType' => '' 
+		),
+		'hours_since_injury' => array(
+			'totalsType' => '' 
+		),
+		'sterilizable_drill_used' => array(
+			'totalsType' => '' 
+		),
+		'drill_sterile_cover_used' => array(
+			'totalsType' => '' 
+		),
+		'holes_in_sterile_cover' => array(
+			'totalsType' => '' 
+		),
+		'sign_in_read_aloud' => array(
+			'totalsType' => '' 
+		),
+		'sign_in_completed_before_anesthesia' => array(
+			'totalsType' => '' 
+		),
+		'sterility_indicator_in_tray' => array(
+			'totalsType' => '' 
+		),
+		'sterility_indicator_color_changed' => array(
+			'totalsType' => '' 
+		),
+		'tray_wet_prior_to_operation' => array(
+			'totalsType' => '' 
+		),
+		'tray_replaced' => array(
+			'totalsType' => '' 
+		),
+		'gauze_count_performed' => array(
+			'totalsType' => '' 
+		),
+		'gauze_count_total' => array(
+			'totalsType' => '' 
+		),
+		'surgeon_scrubbed_hands' => array(
+			'totalsType' => '' 
+		),
+		'handwashing_available' => array(
+			'totalsType' => '' 
+		),
+		'alcohol_solution_applied' => array(
+			'totalsType' => '' 
+		),
+		'new_surgical_gloves_used' => array(
+			'totalsType' => '' 
+		),
+		'gown_sterility_indicator' => array(
+			'totalsType' => '' 
+		),
+		'gown_indicator_color_changed' => array(
+			'totalsType' => '' 
+		),
+		'gown_pack_replaced' => array(
+			'totalsType' => '' 
+		),
+		'gowns_or_drapes_wet' => array(
+			'totalsType' => '' 
+		),
+		'wet_gowns_replaced' => array(
+			'totalsType' => '' 
+		),
+		'holes_in_gowns' => array(
+			'totalsType' => '' 
+		),
+		'torn_gowns_replaced' => array(
+			'totalsType' => '' 
+		),
+		'holes_in_drapes' => array(
+			'totalsType' => '' 
+		),
+		'drapes_replaced' => array(
+			'totalsType' => '' 
+		),
+		'surgical_site_prep_method' => array(
+			'totalsType' => '' 
+		),
+		'vaginal_preparation' => array(
+			'totalsType' => '' 
+		),
+		'antibiotics_given' => array(
+			'totalsType' => '' 
+		),
+		'antibiotics_admin_location' => array(
+			'totalsType' => '' 
+		),
+		'antibiotics_time' => array(
+			'totalsType' => '' 
+		),
+		'on_scheduled_antibiotics' => array(
+			'totalsType' => '' 
+		),
+		'antibiotic_type' => array(
+			'totalsType' => '' 
+		),
+		'timeout_read_aloud' => array(
+			'totalsType' => '' 
+		),
+		'operation_type_announced' => array(
+			'totalsType' => '' 
+		),
+		'blood_loss_announced' => array(
+			'totalsType' => '' 
+		),
+		'estimated_blood_loss' => array(
+			'totalsType' => '' 
+		),
+		'time_of_incision' => array(
+			'totalsType' => '' 
+		),
+		'gauze_count_end_performed' => array(
+			'totalsType' => '' 
+		),
+		'gauze_count_end_total' => array(
+			'totalsType' => '' 
+		),
+		'time_dressing_applied' => array(
+			'totalsType' => '' 
+		),
+		'procedure_id' => array(
+			'totalsType' => '' 
+		),
+		'hardware_or_bioprosthetic_used' => array(
+			'totalsType' => '' 
+		),
+		'cesarean_indication' => array(
+			'totalsType' => '' 
+		),
+		'wound_closed_primarily' => array(
+			'totalsType' => '' 
+		),
+		'wound_classification' => array(
+			'totalsType' => '' 
+		),
+		'case_type' => array(
+			'totalsType' => '' 
+		),
+		'sign_out_read_aloud' => array(
+			'totalsType' => '' 
+		),
+		'sign_out_in_theatre' => array(
+			'totalsType' => '' 
+		),
+		'unplanned_intubation' => array(
+			'totalsType' => '' 
+		),
+		'urgent_tracheostomy' => array(
+			'totalsType' => '' 
+		),
+		'urgent_central_access' => array(
+			'totalsType' => '' 
+		),
+		'other_crisis_occurred' => array(
+			'totalsType' => '' 
+		),
+		'crisis_description' => array(
+			'totalsType' => '' 
+		),
+		'death_in_or' => array(
+			'totalsType' => '' 
+		),
+		'fetal_death' => array(
+			'totalsType' => '' 
+		),
+		'created_at' => array(
+			'totalsType' => '' 
+		),
+		'updated_at' => array(
+			'totalsType' => '' 
+		) 
+	),
+	'fields' => array(
+		'gridFields' => array( 
+			'case_id',
+			'facility_id',
+			'country_id',
+			'surgery_date',
+			'data_type',
+			'data_collector_name',
+			'location_of_surgery',
+			'patient_sex',
+			'patient_asa_classification',
+			'patient_dob',
+			'patient_age',
+			'diabetes',
+			'hypertension',
+			'obese',
+			'malnourished',
+			'smoker',
+			'on_steroids',
+			'admitted_to_icu',
+			'hypothermic',
+			'preoperative_diagnosis_id',
+			'hours_since_injury',
+			'sterilizable_drill_used',
+			'drill_sterile_cover_used',
+			'holes_in_sterile_cover',
+			'sign_in_read_aloud',
+			'sign_in_completed_before_anesthesia',
+			'sterility_indicator_in_tray',
+			'sterility_indicator_color_changed',
+			'tray_wet_prior_to_operation',
+			'tray_replaced',
+			'gauze_count_performed',
+			'gauze_count_total',
+			'surgeon_scrubbed_hands',
+			'handwashing_available',
+			'alcohol_solution_applied',
+			'new_surgical_gloves_used',
+			'gown_sterility_indicator',
+			'gown_indicator_color_changed',
+			'gown_pack_replaced',
+			'gowns_or_drapes_wet',
+			'wet_gowns_replaced',
+			'holes_in_gowns',
+			'torn_gowns_replaced',
+			'holes_in_drapes',
+			'drapes_replaced',
+			'surgical_site_prep_method',
+			'vaginal_preparation',
+			'antibiotics_given',
+			'antibiotics_admin_location',
+			'antibiotics_time',
+			'on_scheduled_antibiotics',
+			'antibiotic_type',
+			'timeout_read_aloud',
+			'operation_type_announced',
+			'blood_loss_announced',
+			'estimated_blood_loss',
+			'time_of_incision',
+			'gauze_count_end_performed',
+			'gauze_count_end_total',
+			'time_dressing_applied',
+			'procedure_id',
+			'hardware_or_bioprosthetic_used',
+			'cesarean_indication',
+			'wound_closed_primarily',
+			'wound_classification',
+			'case_type',
+			'sign_out_read_aloud',
+			'sign_out_in_theatre',
+			'unplanned_intubation',
+			'urgent_tracheostomy',
+			'urgent_central_access',
+			'other_crisis_occurred',
+			'crisis_description',
+			'death_in_or',
+			'fetal_death',
+			'created_at',
+			'updated_at' 
+		),
+		'exportFields' => array( 
+			'case_id',
+			'facility_id',
+			'country_id',
+			'surgery_date',
+			'data_type',
+			'data_collector_name',
+			'location_of_surgery',
+			'patient_sex',
+			'patient_asa_classification',
+			'patient_dob',
+			'patient_age',
+			'diabetes',
+			'hypertension',
+			'obese',
+			'malnourished',
+			'smoker',
+			'on_steroids',
+			'admitted_to_icu',
+			'hypothermic',
+			'preoperative_diagnosis_id',
+			'hours_since_injury',
+			'sterilizable_drill_used',
+			'drill_sterile_cover_used',
+			'holes_in_sterile_cover',
+			'sign_in_read_aloud',
+			'sign_in_completed_before_anesthesia',
+			'sterility_indicator_in_tray',
+			'sterility_indicator_color_changed',
+			'tray_wet_prior_to_operation',
+			'tray_replaced',
+			'gauze_count_performed',
+			'gauze_count_total',
+			'surgeon_scrubbed_hands',
+			'handwashing_available',
+			'alcohol_solution_applied',
+			'new_surgical_gloves_used',
+			'gown_sterility_indicator',
+			'gown_indicator_color_changed',
+			'gown_pack_replaced',
+			'gowns_or_drapes_wet',
+			'wet_gowns_replaced',
+			'holes_in_gowns',
+			'torn_gowns_replaced',
+			'holes_in_drapes',
+			'drapes_replaced',
+			'surgical_site_prep_method',
+			'vaginal_preparation',
+			'antibiotics_given',
+			'antibiotics_admin_location',
+			'antibiotics_time',
+			'on_scheduled_antibiotics',
+			'antibiotic_type',
+			'timeout_read_aloud',
+			'operation_type_announced',
+			'blood_loss_announced',
+			'estimated_blood_loss',
+			'time_of_incision',
+			'gauze_count_end_performed',
+			'gauze_count_end_total',
+			'time_dressing_applied',
+			'procedure_id',
+			'hardware_or_bioprosthetic_used',
+			'cesarean_indication',
+			'wound_closed_primarily',
+			'wound_classification',
+			'case_type',
+			'sign_out_read_aloud',
+			'sign_out_in_theatre',
+			'unplanned_intubation',
+			'urgent_tracheostomy',
+			'urgent_central_access',
+			'other_crisis_occurred',
+			'crisis_description',
+			'death_in_or',
+			'fetal_death',
+			'created_at',
+			'updated_at' 
+		),
+		'searchRequiredFields' => array( 
+			 
+		),
+		'searchPanelFields' => array( 
+			 
+		),
+		'fieldItems' => array(
+			'case_id' => array( 
+				'export_field' 
+			),
+			'facility_id' => array( 
+				'export_field1' 
+			),
+			'country_id' => array( 
+				'export_field2' 
+			),
+			'surgery_date' => array( 
+				'export_field3' 
+			),
+			'data_type' => array( 
+				'export_field4' 
+			),
+			'data_collector_name' => array( 
+				'export_field5' 
+			),
+			'location_of_surgery' => array( 
+				'export_field6' 
+			),
+			'patient_sex' => array( 
+				'export_field7' 
+			),
+			'patient_asa_classification' => array( 
+				'export_field8' 
+			),
+			'patient_dob' => array( 
+				'export_field9' 
+			),
+			'patient_age' => array( 
+				'export_field10' 
+			),
+			'diabetes' => array( 
+				'export_field11' 
+			),
+			'hypertension' => array( 
+				'export_field12' 
+			),
+			'obese' => array( 
+				'export_field13' 
+			),
+			'malnourished' => array( 
+				'export_field14' 
+			),
+			'smoker' => array( 
+				'export_field15' 
+			),
+			'on_steroids' => array( 
+				'export_field16' 
+			),
+			'admitted_to_icu' => array( 
+				'export_field17' 
+			),
+			'hypothermic' => array( 
+				'export_field18' 
+			),
+			'preoperative_diagnosis_id' => array( 
+				'export_field19' 
+			),
+			'hours_since_injury' => array( 
+				'export_field20' 
+			),
+			'sterilizable_drill_used' => array( 
+				'export_field21' 
+			),
+			'drill_sterile_cover_used' => array( 
+				'export_field22' 
+			),
+			'holes_in_sterile_cover' => array( 
+				'export_field23' 
+			),
+			'sign_in_read_aloud' => array( 
+				'export_field24' 
+			),
+			'sign_in_completed_before_anesthesia' => array( 
+				'export_field25' 
+			),
+			'sterility_indicator_in_tray' => array( 
+				'export_field26' 
+			),
+			'sterility_indicator_color_changed' => array( 
+				'export_field27' 
+			),
+			'tray_wet_prior_to_operation' => array( 
+				'export_field28' 
+			),
+			'tray_replaced' => array( 
+				'export_field29' 
+			),
+			'gauze_count_performed' => array( 
+				'export_field30' 
+			),
+			'gauze_count_total' => array( 
+				'export_field31' 
+			),
+			'surgeon_scrubbed_hands' => array( 
+				'export_field32' 
+			),
+			'handwashing_available' => array( 
+				'export_field33' 
+			),
+			'alcohol_solution_applied' => array( 
+				'export_field34' 
+			),
+			'new_surgical_gloves_used' => array( 
+				'export_field35' 
+			),
+			'gown_sterility_indicator' => array( 
+				'export_field36' 
+			),
+			'gown_indicator_color_changed' => array( 
+				'export_field37' 
+			),
+			'gown_pack_replaced' => array( 
+				'export_field38' 
+			),
+			'gowns_or_drapes_wet' => array( 
+				'export_field39' 
+			),
+			'wet_gowns_replaced' => array( 
+				'export_field40' 
+			),
+			'holes_in_gowns' => array( 
+				'export_field41' 
+			),
+			'torn_gowns_replaced' => array( 
+				'export_field42' 
+			),
+			'holes_in_drapes' => array( 
+				'export_field43' 
+			),
+			'drapes_replaced' => array( 
+				'export_field44' 
+			),
+			'surgical_site_prep_method' => array( 
+				'export_field45' 
+			),
+			'vaginal_preparation' => array( 
+				'export_field46' 
+			),
+			'antibiotics_given' => array( 
+				'export_field47' 
+			),
+			'antibiotics_admin_location' => array( 
+				'export_field48' 
+			),
+			'antibiotics_time' => array( 
+				'export_field49' 
+			),
+			'on_scheduled_antibiotics' => array( 
+				'export_field50' 
+			),
+			'antibiotic_type' => array( 
+				'export_field51' 
+			),
+			'timeout_read_aloud' => array( 
+				'export_field52' 
+			),
+			'operation_type_announced' => array( 
+				'export_field53' 
+			),
+			'blood_loss_announced' => array( 
+				'export_field54' 
+			),
+			'estimated_blood_loss' => array( 
+				'export_field55' 
+			),
+			'time_of_incision' => array( 
+				'export_field56' 
+			),
+			'gauze_count_end_performed' => array( 
+				'export_field57' 
+			),
+			'gauze_count_end_total' => array( 
+				'export_field58' 
+			),
+			'time_dressing_applied' => array( 
+				'export_field59' 
+			),
+			'procedure_id' => array( 
+				'export_field60' 
+			),
+			'hardware_or_bioprosthetic_used' => array( 
+				'export_field61' 
+			),
+			'cesarean_indication' => array( 
+				'export_field62' 
+			),
+			'wound_closed_primarily' => array( 
+				'export_field63' 
+			),
+			'wound_classification' => array( 
+				'export_field64' 
+			),
+			'case_type' => array( 
+				'export_field65' 
+			),
+			'sign_out_read_aloud' => array( 
+				'export_field66' 
+			),
+			'sign_out_in_theatre' => array( 
+				'export_field67' 
+			),
+			'unplanned_intubation' => array( 
+				'export_field68' 
+			),
+			'urgent_tracheostomy' => array( 
+				'export_field69' 
+			),
+			'urgent_central_access' => array( 
+				'export_field70' 
+			),
+			'other_crisis_occurred' => array( 
+				'export_field71' 
+			),
+			'crisis_description' => array( 
+				'export_field72' 
+			),
+			'death_in_or' => array( 
+				'export_field73' 
+			),
+			'fetal_death' => array( 
+				'export_field74' 
+			),
+			'created_at' => array( 
+				'export_field75' 
+			),
+			'updated_at' => array( 
+				'export_field76' 
+			) 
+		) 
+	),
+	'pageLinks' => array(
+		'edit' => false,
+		'add' => false,
+		'view' => false,
+		'print' => false 
+	),
+	'layoutHelper' => array(
+		'formItems' => array(
+			'formItems' => array(
+				'supertop' => array( 
+					 
+				),
+				'top' => array( 
+					'export_header' 
+				),
+				'grid' => array( 
+					'export_field',
+					'export_field1',
+					'export_field2',
+					'export_field3',
+					'export_field4',
+					'export_field5',
+					'export_field6',
+					'export_field7',
+					'export_field8',
+					'export_field9',
+					'export_field10',
+					'export_field11',
+					'export_field12',
+					'export_field13',
+					'export_field14',
+					'export_field15',
+					'export_field16',
+					'export_field17',
+					'export_field18',
+					'export_field19',
+					'export_field20',
+					'export_field21',
+					'export_field22',
+					'export_field23',
+					'export_field24',
+					'export_field25',
+					'export_field26',
+					'export_field27',
+					'export_field28',
+					'export_field29',
+					'export_field30',
+					'export_field31',
+					'export_field32',
+					'export_field33',
+					'export_field34',
+					'export_field35',
+					'export_field36',
+					'export_field37',
+					'export_field38',
+					'export_field39',
+					'export_field40',
+					'export_field41',
+					'export_field42',
+					'export_field43',
+					'export_field44',
+					'export_field45',
+					'export_field46',
+					'export_field47',
+					'export_field48',
+					'export_field49',
+					'export_field50',
+					'export_field51',
+					'export_field52',
+					'export_field53',
+					'export_field54',
+					'export_field55',
+					'export_field56',
+					'export_field57',
+					'export_field58',
+					'export_field59',
+					'export_field60',
+					'export_field61',
+					'export_field62',
+					'export_field63',
+					'export_field64',
+					'export_field65',
+					'export_field66',
+					'export_field67',
+					'export_field68',
+					'export_field69',
+					'export_field70',
+					'export_field71',
+					'export_field72',
+					'export_field73',
+					'export_field74',
+					'export_field75',
+					'export_field76' 
+				),
+				'footer' => array( 
+					'export_export',
+					'export_cancel' 
+				) 
+			),
+			'formXtTags' => array(
+				'supertop' => array( 
+					 
+				) 
+			),
+			'itemForms' => array(
+				'export_header' => 'top',
+				'export_field' => 'grid',
+				'export_field1' => 'grid',
+				'export_field2' => 'grid',
+				'export_field3' => 'grid',
+				'export_field4' => 'grid',
+				'export_field5' => 'grid',
+				'export_field6' => 'grid',
+				'export_field7' => 'grid',
+				'export_field8' => 'grid',
+				'export_field9' => 'grid',
+				'export_field10' => 'grid',
+				'export_field11' => 'grid',
+				'export_field12' => 'grid',
+				'export_field13' => 'grid',
+				'export_field14' => 'grid',
+				'export_field15' => 'grid',
+				'export_field16' => 'grid',
+				'export_field17' => 'grid',
+				'export_field18' => 'grid',
+				'export_field19' => 'grid',
+				'export_field20' => 'grid',
+				'export_field21' => 'grid',
+				'export_field22' => 'grid',
+				'export_field23' => 'grid',
+				'export_field24' => 'grid',
+				'export_field25' => 'grid',
+				'export_field26' => 'grid',
+				'export_field27' => 'grid',
+				'export_field28' => 'grid',
+				'export_field29' => 'grid',
+				'export_field30' => 'grid',
+				'export_field31' => 'grid',
+				'export_field32' => 'grid',
+				'export_field33' => 'grid',
+				'export_field34' => 'grid',
+				'export_field35' => 'grid',
+				'export_field36' => 'grid',
+				'export_field37' => 'grid',
+				'export_field38' => 'grid',
+				'export_field39' => 'grid',
+				'export_field40' => 'grid',
+				'export_field41' => 'grid',
+				'export_field42' => 'grid',
+				'export_field43' => 'grid',
+				'export_field44' => 'grid',
+				'export_field45' => 'grid',
+				'export_field46' => 'grid',
+				'export_field47' => 'grid',
+				'export_field48' => 'grid',
+				'export_field49' => 'grid',
+				'export_field50' => 'grid',
+				'export_field51' => 'grid',
+				'export_field52' => 'grid',
+				'export_field53' => 'grid',
+				'export_field54' => 'grid',
+				'export_field55' => 'grid',
+				'export_field56' => 'grid',
+				'export_field57' => 'grid',
+				'export_field58' => 'grid',
+				'export_field59' => 'grid',
+				'export_field60' => 'grid',
+				'export_field61' => 'grid',
+				'export_field62' => 'grid',
+				'export_field63' => 'grid',
+				'export_field64' => 'grid',
+				'export_field65' => 'grid',
+				'export_field66' => 'grid',
+				'export_field67' => 'grid',
+				'export_field68' => 'grid',
+				'export_field69' => 'grid',
+				'export_field70' => 'grid',
+				'export_field71' => 'grid',
+				'export_field72' => 'grid',
+				'export_field73' => 'grid',
+				'export_field74' => 'grid',
+				'export_field75' => 'grid',
+				'export_field76' => 'grid',
+				'export_export' => 'footer',
+				'export_cancel' => 'footer' 
+			),
+			'itemLocations' => array(
+				 
+			),
+			'itemVisiblity' => array(
+				 
+			) 
+		),
+		'itemsByType' => array(
+			'export_header' => array( 
+				'export_header' 
+			),
+			'export_export' => array( 
+				'export_export' 
+			),
+			'export_cancel' => array( 
+				'export_cancel' 
+			),
+			'export_field' => array( 
+				'export_field',
+				'export_field1',
+				'export_field2',
+				'export_field3',
+				'export_field4',
+				'export_field5',
+				'export_field6',
+				'export_field7',
+				'export_field8',
+				'export_field9',
+				'export_field10',
+				'export_field11',
+				'export_field12',
+				'export_field13',
+				'export_field14',
+				'export_field15',
+				'export_field16',
+				'export_field17',
+				'export_field18',
+				'export_field19',
+				'export_field20',
+				'export_field21',
+				'export_field22',
+				'export_field23',
+				'export_field24',
+				'export_field25',
+				'export_field26',
+				'export_field27',
+				'export_field28',
+				'export_field29',
+				'export_field30',
+				'export_field31',
+				'export_field32',
+				'export_field33',
+				'export_field34',
+				'export_field35',
+				'export_field36',
+				'export_field37',
+				'export_field38',
+				'export_field39',
+				'export_field40',
+				'export_field41',
+				'export_field42',
+				'export_field43',
+				'export_field44',
+				'export_field45',
+				'export_field46',
+				'export_field47',
+				'export_field48',
+				'export_field49',
+				'export_field50',
+				'export_field51',
+				'export_field52',
+				'export_field53',
+				'export_field54',
+				'export_field55',
+				'export_field56',
+				'export_field57',
+				'export_field58',
+				'export_field59',
+				'export_field60',
+				'export_field61',
+				'export_field62',
+				'export_field63',
+				'export_field64',
+				'export_field65',
+				'export_field66',
+				'export_field67',
+				'export_field68',
+				'export_field69',
+				'export_field70',
+				'export_field71',
+				'export_field72',
+				'export_field73',
+				'export_field74',
+				'export_field75',
+				'export_field76' 
+			) 
+		),
+		'cellMaps' => array(
+			 
+		) 
+	),
+	'loginForm' => array(
+		'loginForm' => 3 
+	),
+	'page' => array(
+		'verticalBar' => false,
+		'labeledButtons' => array(
+			'update_records' => array(
+				 
+			),
+			'print_pages' => array(
+				 
+			),
+			'register_activate_message' => array(
+				 
+			),
+			'details_found' => array(
+				 
+			) 
+		),
+		'hasCustomButtons' => false,
+		'customButtons' => array( 
+			 
+		),
+		'codeSnippets' => array( 
+			 
+		),
+		'clickHandlerSnippets' => array( 
+			 
+		),
+		'hasNotifications' => false,
+		'menus' => array( 
+			 
+		),
+		'calcTotalsFor' => 1,
+		'hasCharts' => false 
+	),
+	'events' => array(
+		'maps' => array( 
+			 
+		),
+		'mapsData' => array(
+			 
+		),
+		'buttons' => array( 
+			 
+		) 
+	),
+	'export' => array(
+		'format' => 2,
+		'selectFields' => false,
+		'delimiter' => ',',
+		'selectDelimiter' => false,
+		'exportFileTypes' => array(
+			'excel' => true,
+			'word' => true,
+			'csv' => true,
+			'xml' => false 
+		) 
+	) 
+);
+			$pageArray = array(
+	'id' => 'export',
+	'type' => 'export',
+	'layoutId' => 'first',
+	'disabled' => 0,
+	'default' => 0,
+	'forms' => array(
+		'supertop' => array(
+			'modelId' => 'panel-top',
+			'grid' => array( 
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c1' 
+						) 
+					),
+					'section' => '' 
+				) 
+			),
+			'cells' => array(
+				'c1' => array(
+					'model' => 'c1',
+					'items' => array( 
+						 
+					) 
+				) 
+			),
+			'deferredItems' => array( 
+				 
+			),
+			'recsPerRow' => 1 
+		),
+		'top' => array(
+			'modelId' => 'export-header',
+			'grid' => array( 
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c1' 
+						) 
+					),
+					'section' => '' 
+				) 
+			),
+			'cells' => array(
+				'c1' => array(
+					'model' => 'c1',
+					'items' => array( 
+						'export_header' 
+					) 
+				) 
+			),
+			'deferredItems' => array( 
+				 
+			),
+			'recsPerRow' => 1 
+		),
+		'grid' => array(
+			'modelId' => 'export-grid',
+			'grid' => array( 
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c1' 
+						) 
+					),
+					'section' => '' 
+				) 
+			),
+			'cells' => array(
+				'c1' => array(
+					'model' => 'c1',
+					'items' => array( 
+						'export_field',
+						'export_field1',
+						'export_field2',
+						'export_field3',
+						'export_field4',
+						'export_field5',
+						'export_field6',
+						'export_field7',
+						'export_field8',
+						'export_field9',
+						'export_field10',
+						'export_field11',
+						'export_field12',
+						'export_field13',
+						'export_field14',
+						'export_field15',
+						'export_field16',
+						'export_field17',
+						'export_field18',
+						'export_field19',
+						'export_field20',
+						'export_field21',
+						'export_field22',
+						'export_field23',
+						'export_field24',
+						'export_field25',
+						'export_field26',
+						'export_field27',
+						'export_field28',
+						'export_field29',
+						'export_field30',
+						'export_field31',
+						'export_field32',
+						'export_field33',
+						'export_field34',
+						'export_field35',
+						'export_field36',
+						'export_field37',
+						'export_field38',
+						'export_field39',
+						'export_field40',
+						'export_field41',
+						'export_field42',
+						'export_field43',
+						'export_field44',
+						'export_field45',
+						'export_field46',
+						'export_field47',
+						'export_field48',
+						'export_field49',
+						'export_field50',
+						'export_field51',
+						'export_field52',
+						'export_field53',
+						'export_field54',
+						'export_field55',
+						'export_field56',
+						'export_field57',
+						'export_field58',
+						'export_field59',
+						'export_field60',
+						'export_field61',
+						'export_field62',
+						'export_field63',
+						'export_field64',
+						'export_field65',
+						'export_field66',
+						'export_field67',
+						'export_field68',
+						'export_field69',
+						'export_field70',
+						'export_field71',
+						'export_field72',
+						'export_field73',
+						'export_field74',
+						'export_field75',
+						'export_field76' 
+					) 
+				) 
+			),
+			'deferredItems' => array( 
+				 
+			),
+			'recsPerRow' => 1 
+		),
+		'footer' => array(
+			'modelId' => 'export-footer',
+			'grid' => array( 
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c1' 
+						),
+						array(
+							'cell' => 'c2' 
+						) 
+					),
+					'section' => '' 
+				) 
+			),
+			'cells' => array(
+				'c1' => array(
+					'model' => 'c1',
+					'items' => array( 
+						 
+					) 
+				),
+				'c2' => array(
+					'model' => 'c2',
+					'items' => array( 
+						'export_export',
+						'export_cancel' 
+					) 
+				) 
+			),
+			'deferredItems' => array( 
+				 
+			),
+			'recsPerRow' => 1 
+		) 
+	),
+	'items' => array(
+		'export_header' => array(
+			'type' => 'export_header' 
+		),
+		'export_export' => array(
+			'type' => 'export_export' 
+		),
+		'export_cancel' => array(
+			'type' => 'export_cancel' 
+		),
+		'export_field' => array(
+			'field' => 'case_id',
+			'type' => 'export_field' 
+		),
+		'export_field1' => array(
+			'field' => 'facility_id',
+			'type' => 'export_field' 
+		),
+		'export_field2' => array(
+			'field' => 'country_id',
+			'type' => 'export_field' 
+		),
+		'export_field3' => array(
+			'field' => 'surgery_date',
+			'type' => 'export_field' 
+		),
+		'export_field4' => array(
+			'field' => 'data_type',
+			'type' => 'export_field' 
+		),
+		'export_field5' => array(
+			'field' => 'data_collector_name',
+			'type' => 'export_field' 
+		),
+		'export_field6' => array(
+			'field' => 'location_of_surgery',
+			'type' => 'export_field' 
+		),
+		'export_field7' => array(
+			'field' => 'patient_sex',
+			'type' => 'export_field' 
+		),
+		'export_field8' => array(
+			'field' => 'patient_asa_classification',
+			'type' => 'export_field' 
+		),
+		'export_field9' => array(
+			'field' => 'patient_dob',
+			'type' => 'export_field' 
+		),
+		'export_field10' => array(
+			'field' => 'patient_age',
+			'type' => 'export_field' 
+		),
+		'export_field11' => array(
+			'field' => 'diabetes',
+			'type' => 'export_field' 
+		),
+		'export_field12' => array(
+			'field' => 'hypertension',
+			'type' => 'export_field' 
+		),
+		'export_field13' => array(
+			'field' => 'obese',
+			'type' => 'export_field' 
+		),
+		'export_field14' => array(
+			'field' => 'malnourished',
+			'type' => 'export_field' 
+		),
+		'export_field15' => array(
+			'field' => 'smoker',
+			'type' => 'export_field' 
+		),
+		'export_field16' => array(
+			'field' => 'on_steroids',
+			'type' => 'export_field' 
+		),
+		'export_field17' => array(
+			'field' => 'admitted_to_icu',
+			'type' => 'export_field' 
+		),
+		'export_field18' => array(
+			'field' => 'hypothermic',
+			'type' => 'export_field' 
+		),
+		'export_field19' => array(
+			'field' => 'preoperative_diagnosis_id',
+			'type' => 'export_field' 
+		),
+		'export_field20' => array(
+			'field' => 'hours_since_injury',
+			'type' => 'export_field' 
+		),
+		'export_field21' => array(
+			'field' => 'sterilizable_drill_used',
+			'type' => 'export_field' 
+		),
+		'export_field22' => array(
+			'field' => 'drill_sterile_cover_used',
+			'type' => 'export_field' 
+		),
+		'export_field23' => array(
+			'field' => 'holes_in_sterile_cover',
+			'type' => 'export_field' 
+		),
+		'export_field24' => array(
+			'field' => 'sign_in_read_aloud',
+			'type' => 'export_field' 
+		),
+		'export_field25' => array(
+			'field' => 'sign_in_completed_before_anesthesia',
+			'type' => 'export_field' 
+		),
+		'export_field26' => array(
+			'field' => 'sterility_indicator_in_tray',
+			'type' => 'export_field' 
+		),
+		'export_field27' => array(
+			'field' => 'sterility_indicator_color_changed',
+			'type' => 'export_field' 
+		),
+		'export_field28' => array(
+			'field' => 'tray_wet_prior_to_operation',
+			'type' => 'export_field' 
+		),
+		'export_field29' => array(
+			'field' => 'tray_replaced',
+			'type' => 'export_field' 
+		),
+		'export_field30' => array(
+			'field' => 'gauze_count_performed',
+			'type' => 'export_field' 
+		),
+		'export_field31' => array(
+			'field' => 'gauze_count_total',
+			'type' => 'export_field' 
+		),
+		'export_field32' => array(
+			'field' => 'surgeon_scrubbed_hands',
+			'type' => 'export_field' 
+		),
+		'export_field33' => array(
+			'field' => 'handwashing_available',
+			'type' => 'export_field' 
+		),
+		'export_field34' => array(
+			'field' => 'alcohol_solution_applied',
+			'type' => 'export_field' 
+		),
+		'export_field35' => array(
+			'field' => 'new_surgical_gloves_used',
+			'type' => 'export_field' 
+		),
+		'export_field36' => array(
+			'field' => 'gown_sterility_indicator',
+			'type' => 'export_field' 
+		),
+		'export_field37' => array(
+			'field' => 'gown_indicator_color_changed',
+			'type' => 'export_field' 
+		),
+		'export_field38' => array(
+			'field' => 'gown_pack_replaced',
+			'type' => 'export_field' 
+		),
+		'export_field39' => array(
+			'field' => 'gowns_or_drapes_wet',
+			'type' => 'export_field' 
+		),
+		'export_field40' => array(
+			'field' => 'wet_gowns_replaced',
+			'type' => 'export_field' 
+		),
+		'export_field41' => array(
+			'field' => 'holes_in_gowns',
+			'type' => 'export_field' 
+		),
+		'export_field42' => array(
+			'field' => 'torn_gowns_replaced',
+			'type' => 'export_field' 
+		),
+		'export_field43' => array(
+			'field' => 'holes_in_drapes',
+			'type' => 'export_field' 
+		),
+		'export_field44' => array(
+			'field' => 'drapes_replaced',
+			'type' => 'export_field' 
+		),
+		'export_field45' => array(
+			'field' => 'surgical_site_prep_method',
+			'type' => 'export_field' 
+		),
+		'export_field46' => array(
+			'field' => 'vaginal_preparation',
+			'type' => 'export_field' 
+		),
+		'export_field47' => array(
+			'field' => 'antibiotics_given',
+			'type' => 'export_field' 
+		),
+		'export_field48' => array(
+			'field' => 'antibiotics_admin_location',
+			'type' => 'export_field' 
+		),
+		'export_field49' => array(
+			'field' => 'antibiotics_time',
+			'type' => 'export_field' 
+		),
+		'export_field50' => array(
+			'field' => 'on_scheduled_antibiotics',
+			'type' => 'export_field' 
+		),
+		'export_field51' => array(
+			'field' => 'antibiotic_type',
+			'type' => 'export_field' 
+		),
+		'export_field52' => array(
+			'field' => 'timeout_read_aloud',
+			'type' => 'export_field' 
+		),
+		'export_field53' => array(
+			'field' => 'operation_type_announced',
+			'type' => 'export_field' 
+		),
+		'export_field54' => array(
+			'field' => 'blood_loss_announced',
+			'type' => 'export_field' 
+		),
+		'export_field55' => array(
+			'field' => 'estimated_blood_loss',
+			'type' => 'export_field' 
+		),
+		'export_field56' => array(
+			'field' => 'time_of_incision',
+			'type' => 'export_field' 
+		),
+		'export_field57' => array(
+			'field' => 'gauze_count_end_performed',
+			'type' => 'export_field' 
+		),
+		'export_field58' => array(
+			'field' => 'gauze_count_end_total',
+			'type' => 'export_field' 
+		),
+		'export_field59' => array(
+			'field' => 'time_dressing_applied',
+			'type' => 'export_field' 
+		),
+		'export_field60' => array(
+			'field' => 'procedure_id',
+			'type' => 'export_field' 
+		),
+		'export_field61' => array(
+			'field' => 'hardware_or_bioprosthetic_used',
+			'type' => 'export_field' 
+		),
+		'export_field62' => array(
+			'field' => 'cesarean_indication',
+			'type' => 'export_field' 
+		),
+		'export_field63' => array(
+			'field' => 'wound_closed_primarily',
+			'type' => 'export_field' 
+		),
+		'export_field64' => array(
+			'field' => 'wound_classification',
+			'type' => 'export_field' 
+		),
+		'export_field65' => array(
+			'field' => 'case_type',
+			'type' => 'export_field' 
+		),
+		'export_field66' => array(
+			'field' => 'sign_out_read_aloud',
+			'type' => 'export_field' 
+		),
+		'export_field67' => array(
+			'field' => 'sign_out_in_theatre',
+			'type' => 'export_field' 
+		),
+		'export_field68' => array(
+			'field' => 'unplanned_intubation',
+			'type' => 'export_field' 
+		),
+		'export_field69' => array(
+			'field' => 'urgent_tracheostomy',
+			'type' => 'export_field' 
+		),
+		'export_field70' => array(
+			'field' => 'urgent_central_access',
+			'type' => 'export_field' 
+		),
+		'export_field71' => array(
+			'field' => 'other_crisis_occurred',
+			'type' => 'export_field' 
+		),
+		'export_field72' => array(
+			'field' => 'crisis_description',
+			'type' => 'export_field' 
+		),
+		'export_field73' => array(
+			'field' => 'death_in_or',
+			'type' => 'export_field' 
+		),
+		'export_field74' => array(
+			'field' => 'fetal_death',
+			'type' => 'export_field' 
+		),
+		'export_field75' => array(
+			'field' => 'created_at',
+			'type' => 'export_field' 
+		),
+		'export_field76' => array(
+			'field' => 'updated_at',
+			'type' => 'export_field' 
+		) 
+	),
+	'dbProps' => array(
+		 
+	),
+	'version' => 14,
+	'imageItem' => array(
+		'type' => 'page_image' 
+	),
+	'imageBgColor' => '#f2f2f2',
+	'controlsBgColor' => 'white',
+	'imagePosition' => 'right',
+	'listTotals' => 1,
+	'title' => array(
+		 
+	),
+	'exportFormat' => 2,
+	'exportDelimiter' => ',',
+	'exportSelectDelimiter' => false,
+	'exportSelectFields' => false 
+);
 		?>

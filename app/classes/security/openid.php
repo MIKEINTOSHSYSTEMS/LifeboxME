@@ -92,23 +92,6 @@ class SecurityPluginOpenId extends SecurityPlugin {
 	}
 
 	/**
-	 * Returns allowed domains from appsettings as array
-	 * @return Array
-	 */
-	private function getDomainList() {
-		$rawDomain = GetGlobalData("GoogleDomain", "");
-		$domainList = explode(',', $rawDomain);
-		$result = array();
-		foreach($domainList as $domain) {
-			$trimDomain = trim($domain);
-			if ( $trimDomain ) {
-				$result[] = $trimDomain;
-			}
-		}
-		return $result;
-	}
-
-	/**
 	 * Verify token and return parsed paylod
 	 * @param String token
 	 * @return Array|false

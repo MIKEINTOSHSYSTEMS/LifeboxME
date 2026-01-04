@@ -14,16 +14,19 @@ class ViewShortDateField extends ViewControl
 	 */
 	public function getExportValue(&$data, $keylink = "", $html = false )
 	{
+		if( ProjectSettings::ext() == "aspx" ) {
+			return $data[ $this->field ];
+		}
 		return $this->showDBValue($data, $keylink, $html );
 	}
 
 	/**
 	 * @param &Array data
-	 * @return String	 
+	 * @return String 
 	 */
 	public function getTextValue(&$data)
 	{
 		return format_shortdate( db2time( $data[ $this->field ] ) );
-	}	
+	}
 }
 ?>

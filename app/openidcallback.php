@@ -28,7 +28,7 @@ if( !$_GET['code'] ) {
 $token = $plugin->getIdToken( $_GET['code'] );
 if( !$token ) {
 	echo "invalid token";
-	if ( $globalSettings["showDetailedError"] ) {
+	if ( ProjectSettings::getProjectValue( 'detailedError' ) ) {
 		echo "<pre>";
 		echo $plugin->getError();
 		echo "</pre>";

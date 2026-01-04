@@ -16,8 +16,7 @@ class TextField extends TextControl
 		$altAttr = ( $mode == MODE_INLINE_EDIT || $mode == MODE_INLINE_ADD ) && $this->is508 == true ? ' alt="'.$this->strLabel.'" ' : '';
 
 		$classString = "";
-		if( $this->pageObject->isBootstrap() )
-			$classString = " class=\"form-control\"";
+		$classString = " class=\"form-control\"";
 			
 		$autocompleteAttr = '';
 		if( $mode == MODE_SEARCH ) {
@@ -32,7 +31,7 @@ class TextField extends TextControl
 		echo '<input id="'.$this->cfield.'" '. $classString . $this->inputStyle.' type="'.$inputType.'" '
 			.$autocompleteAttr . ' '
 			.$altAttr
-			.'name="'.$this->cfield.'" '.$this->pageObject->pSetEdit->getEditParams( $this->field )
+			.'name="'.$this->cfield.'" ' . $this->maxLengthAttr()
 			. $this->getPlaceholderAttr()
 			.' value="'.runner_htmlspecialchars($value).'">';
 

@@ -30,17 +30,17 @@ class MySQLiConnection extends Connection
 	{
 		parent::assignConnectionParams( $params );
 
-		$this->host = $params["connInfo"][0];  //strConnectInfo1
+		$this->host = $params["connInfo"][0];  
 		if (substr($this->host, 0, 4) === "ssl/") {
 			$this->host = substr($this->host, 4);
 			$this->useSSL = true;
 		} else {
 			$this->useSSL = false;
 		}
-		$this->user = $params["connInfo"][1];  //strConnectInfo2
-		$this->pwd = $params["connInfo"][2];   //strConnectInfo3
-		$this->port = $params["connInfo"][3]; //strConnectInfo4
-		$this->sys_dbname = $params["connInfo"][4]; //strConnectInfo5
+		$this->user = $params["connInfo"][1]; 
+		$this->pwd = $params["connInfo"][2];  
+		$this->port = $params["connInfo"][3]; 
+		$this->sys_dbname = $params["connInfo"][4]; 
 	}
 
 	/**
@@ -59,23 +59,11 @@ class MySQLiConnection extends Connection
 	 */
 	public function connect()
 	{
-		global $cMySQLNames;
 
 		if( !trim( $this->port ) )
 			$this->port = 3306;
 
 		$hosts = array();
-/*
-		//	no need to do this anymore	
-		//	fix IPv6 slow connection issue
-		if( $this->host == "localhost" )
-		{
-			if( @$_SESSION["myqsladdress"] )
-				$hosts[] = @$_SESSION["myqsladdress"];
-			else
-				$hosts[] = "127.0.0.1";
-		}
-*/		
 		$hosts[] = $this->host;
 
 		$flags = 0;
@@ -97,15 +85,12 @@ class MySQLiConnection extends Connection
 			}
 
 			if ($this->conn) {
-				if ($this->host == "localhost")
-					$_SESSION["myqsladdress"] = $h;
 				break;
 			}
 		}
 
 		if (!$this->conn)
 		{
-			unset( $_SESSION["myqsladdress"] );
 			$this->triggerError( mysqli_connect_error() );
 			return null;
 		}
@@ -113,8 +98,9 @@ class MySQLiConnection extends Connection
 		if( !mysqli_select_db($this->conn, $this->sys_dbname) )
 			$this->triggerError( mysqli_error($this->conn) );
 
-		if( $cMySQLNames != "" )
-			@mysqli_query($this->conn, "set names ".$cMySQLNames);
+		$mysqlCharset = ProjectSettings::getProjectValue( 'mysqlCharsetName' );
+		if( $mysqlCharset != "" )
+			@mysqli_query($this->conn, "set names " . $mysqlCharset );
 
 		$this->mysqlVersion = "4";
 		$res = @mysqli_query($this->conn, "SHOW VARIABLES LIKE 'version'");

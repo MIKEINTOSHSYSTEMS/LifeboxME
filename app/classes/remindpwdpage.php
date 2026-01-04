@@ -86,9 +86,9 @@ class RemindPasswordPage extends RunnerPage
 	 * @return String
 	 */
 	protected function getNotRegisteredMessage() {
-		return "User"." "
+		return mlang_message('USER_NOREG1')." "
 				.runner_htmlspecialchars( $this->userEmail )
-					." "."is not registered.";
+					." ".mlang_message('USER_NOREG2');
 	}
 
 	/**
@@ -98,7 +98,7 @@ class RemindPasswordPage extends RunnerPage
 		global $globalEvents;
 
 		if( !$this->checkCaptcha() ) {
-			$this->message = "Invalid security code.";
+			$this->message = mlang_message('SEC_INVALID_CAPTCHA_CODE');
 			return false;
 		}
 		
@@ -133,7 +133,7 @@ class RemindPasswordPage extends RunnerPage
 			$token = generatePassword(20);
 			$this->dataSource->updateSingle( $this->getUpdateTokenCommand( $token ), false );
 			
-		} else if( GetGlobalData( "bEncryptPasswords" ) ) {
+		} else if( ProjectSettings::getSecurityValue( 'registration', 'hashPassword' ) ) {
 			if( !$this->cipherer->isFieldEncrypted( Security::passwordField() ) ) {
 				$password = generatePassword(10);
 				$dbPassword = Security::hashPassword( $password );
@@ -187,7 +187,7 @@ class RemindPasswordPage extends RunnerPage
 	 * @return Number
 	 */
 	protected function remindMethod() {
-		$option = getSecurityOption("registration");
+		$option = ProjectSettings::getSecurityValue("registration");
 		return $option["remindMethod"];
 	}
 
@@ -215,10 +215,10 @@ class RemindPasswordPage extends RunnerPage
 			$data["reseturl"] = str_replace("/remind", "/changepwd", $url)."?token=".$token;
 		} else {
 			$template = "remindpassword";
-			if( GetGlobalData( "userRequireActivation" ) ) {
-				if( !@$userData[ GetGlobalData("userActivationField") ] ) {
+			if( ProjectSettings::getSecurityValue( 'registration', 'sendActivationLink' ) ) {
+				if( !@$userData[ ProjectSettings::getSecurityValue( 'dbProvider', 'activationField' ) ] ) {
 					// user is not activated
-					if( !GetGlobalData( "bEncryptPasswords" ) )
+					if( !ProjectSettings::getSecurityValue( 'registration', 'hashPassword' ) )
 						$dbPassword = md5( $dbPassword );
 					
 					$data["activateurl"] = str_replace("/remind", "/register", $url);
@@ -337,14 +337,16 @@ class RemindPasswordPage extends RunnerPage
 		$this->fillSetCntrlMaps();
 		echo "</form>";
 		echo "<script>
-			window.controlsMap = ".my_json_encode($this->controlsHTMLMap).";
-			window.viewControlsMap = ".my_json_encode($this->viewControlsHTMLMap).";
-			Runner.applyPagesData( ".my_json_encode( $pagesData )." );
-			window.settings = ".my_json_encode($this->jsSettings).";
-			</script>\r\n";
+			window.controlsMap = ".runner_json_encode( $this->controlsHTMLMap).";
+			window.viewControlsMap = ".runner_json_encode( $this->viewControlsHTMLMap).";
+			Runner.applyPagesData( ".runner_json_encode( $pagesData )." );
+			window.settings = ".runner_json_encode( $this->jsSettings).";
+			</script>";
 
-		echo "<script language=\"JavaScript\" src=\""
-			.GetRootPathForResources("include/runnerJS/RunnerAll.js?41974")."\"></script>\r\n";
+		$projectBuildKey = ProjectSettings::getProjectValue('projectBuild');
+		$wizardBuildKey = ProjectSettings::getProjectValue('wizardBuild');
+		echo '<script language="JavaScript" src="settings/project.js?'. $projectBuildKey .'"></script>';
+		echo '<script language="JavaScript" src="include/runnerJS/RunnerAll.js?'. $wizardBuildKey .'"></script>';
 
 		echo "<script>".$this->PrepareJS()."</script>";
 	}

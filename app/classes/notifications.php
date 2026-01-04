@@ -299,7 +299,7 @@ class RunnerNotifications {
 		$dc = new DsCommand;
 		$dc->values["title"] = $messageId;
 		$dc->values["type"] = ntPERMISSIONS;
-		$dc->values["message"] = my_json_encode( $permissions );
+		$dc->values["message"] = runner_json_encode( $permissions );
 		return $dc;
 	}
 
@@ -338,7 +338,7 @@ class RunnerNotifications {
 		$msgPermissionsMap = array();
 		foreach( $permissionsRecordsList as $permissionsRecord ) {
 			$messageId = $permissionsRecord["title"];
-			$permissions = my_json_decode( $permissionsRecord["message"] );
+			$permissions = runner_json_decode( $permissionsRecord["message"] );
 			$msgPermissionsMap[$messageId] = $permissions;
 		}
 

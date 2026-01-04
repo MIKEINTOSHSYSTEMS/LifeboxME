@@ -35,7 +35,7 @@ class RestConnection {
 
 	function __construct( $params ) {
 		$this->dbType = nDATABASE_REST;
-		$this->connId = $params["connId"];
+		$this->connId = $params["id"];
 		$this->url = $params["url"];
 		$this->authType = $params["authType"];
 	
@@ -43,7 +43,7 @@ class RestConnection {
 		$this->username = $params["username"];
 		$this->password = $params["password"];
 	
-		$this->apiKey = $params["apiKey"];
+		$this->apiKey = $params["APIkey"];
 		$this->keyLocation = $params["keyLocation"];
 		$this->keyParameter = $params["keyParameter"];
 	
@@ -151,7 +151,7 @@ class RestConnection {
 		if( !$token ) {
 			unset( $_SESSION[ $sessionKey ] );
 		} else {
-			$_SESSION[ $sessionKey ] = my_json_encode( $token );
+			$_SESSION[ $sessionKey ] = runner_json_encode( $token );
 		}
 	}
 
@@ -160,7 +160,7 @@ class RestConnection {
 		if( !$_SESSION[ $sessionKey ] ) {
 			return false;
 		}
-		return my_json_decode( $_SESSION[ $sessionKey ] );
+		return runner_json_decode( $_SESSION[ $sessionKey ] );
 	}
 
 	/**
@@ -183,10 +183,10 @@ class RestConnection {
 			$request->addBasicAuthorization( $this->username, $this->password );
 		}
 		else if( $this->authType === "api" ) { //	API key
-			if( $this->keyLocation == 1 ) {
+			if( $this->keyLocation == rklHEADER ) {
 				$request->headers[ $this->keyParameter ] = $this->apiKey;
 			}
-			else if( $this->keyLocation == 0 ){
+			else if( $this->keyLocation == rklURL ){
 				$request->urlParams[ $this->keyParameter ] = $this->apiKey;
 			}
 			else {
@@ -415,12 +415,12 @@ class RestConnection {
 	 */
 	public function setAuthorizationRequest( $request ) {
 		$this->authorizationRequest = $request;
-		if( $request->urlParams["state"] )
-
-		if( !$_SESSION[ 'oauth2statemap' ] ) {
-			$_SESSION[ 'oauth2statemap' ] = array();
+		if( $request->urlParams["state"] ) {
+			if( !$_SESSION[ 'oauth2statemap' ] ) {
+				$_SESSION[ 'oauth2statemap' ] = array();
+			}
+			$_SESSION[ 'oauth2statemap' ][ $request->urlParams["state"] ] = $this->connId;
 		}
-		$_SESSION[ 'oauth2statemap' ][ $request->urlParams["state"] ] = $this->connId;
 	}
 
 	public function getAuthorizationRequest() {

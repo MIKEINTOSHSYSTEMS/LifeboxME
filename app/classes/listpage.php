@@ -1,4 +1,5 @@
 <?php
+require_once(getabspath('classes/runnerpage.php'));
 require_once(getabspath('classes/orderclause.php'));
 require_once(getabspath("classes/sql.php"));
 require_once(getabspath("classes/projectsettings.php"));
@@ -119,12 +120,6 @@ class ListPage extends RunnerPage
 	public $printFriendly = false;
 
 	/**
-	 * Create login page or not
-	 * @type bool
-	 */
-	public $createLoginPage = false;
-
-	/**
 	 * Searchpanel class builder
 	 * @type object
 	 */
@@ -198,6 +193,8 @@ class ListPage extends RunnerPage
 	 * goto field value from the request
 	 */
 	public $requestGoto = null;
+
+	protected $lockRecIds = array();
 	
 	
 	/**
@@ -236,72 +233,32 @@ class ListPage extends RunnerPage
 		//	Before Process event
 		$this->beforeProcessEvent();
 
+		for($i=0;$i<count($this->listFields);$i++)
+		{
+			if ($this->listFields[$i]['viewFormat'] == FORMAT_MAP)
+				$this->gMapFields[] = $i;
+		}
 
 
 		// Set language params, if have more than one language
 		$this->setLangParams();
 
-		if($this->searchClauseObj) //for asp & .net
-			$this->jsSettings['tableSettings'][$this->tName]['simpleSearchActive'] = $this->searchClauseObj->simpleSearchActive;
-
-		if( $this->pSet->reorderRows() && Security::userCan('E', $this->tName) ) {
-			$this->jsSettings['tableSettings'][ $this->tName ]['reorderRows'] = true;
-		}
-		$this->jsSettings['tableSettings'][ $this->tName ]['addToBottom'] = $this->pSet->inlineAddBottom();
-
-
-	
-
-		for($i = 0; $i < count($this->allDetailsTablesArr); $i ++)
-		{
+		foreach( $this->pSet->getDetailsTables() as $details ) {
 			// get perm for det tables
-			$this->permis[$this->allDetailsTablesArr[$i]['dDataSourceTable']]= $this->getPermissions($this->allDetailsTablesArr[$i]['dDataSourceTable']);
-
-			// field names of detail keys of passed detail table, when current is master
-			$this->detailKeysByD[$i] = $this->pSet->getDetailKeysByDetailTable($this->allDetailsTablesArr[$i]['dDataSourceTable']);
+			$this->permis[ $details ] = $this->getPermissions( $details );
 		}
 
 		$this->genId();
 
 
 		// fill span val indicator for totals
-		$this->jsSettings['tableSettings'][$this->tName]['totalFields'] = array();
 		foreach( $this->totalsFields as $tField ) {
-			$totalFieldData = array('type'=> $tField['totalsType'], 'fName'=> $tField['fName'], 'format'=> $tField['viewFormat']);
-			$totalFieldData['formatSettings'] = getFormatSettings( $tField['viewFormat'], $this->pSet, $tField['fName'] );
-
-			$this->jsSettings['tableSettings'][ $this->tName ]['totalFields'][] = $totalFieldData;
-
 			if ( $tField['totalsType'] == 'COUNT' ) {
 				$this->outputFieldValue($tField['fName'], 1);
 			} else {
 				$this->outputFieldValue($tField['fName'], 2);
 			}
 		}
-
-		//if scroll body of grid
-		$this->jsSettings['tableSettings'][$this->tName]['scrollGridBody'] = (( $this->listGridLayout == gltHORIZONTAL || $this->listGridLayout == gltFLEXIBLE )&& $this->isScrollGridBody);
-
-		$this->jsSettings['tableSettings'][$this->tName]['permissions'] = $this->permis[$this->tName];
-		if($this->pSet->getAdvancedSecurityType() == ADVSECURITY_EDIT_OWN) {
-			$this->jsSettings['tableSettings'][$this->tName]['isEditOwn'] = $this->permis[$this->tName];
-		}
-
-		$this->settingsMap["tableSettings"]['inlineEdit'] = array("default"=>false,"jsName"=>"isInlineEdit", "option" => array("list", "inlineEdit") );
-		$this->settingsMap["tableSettings"]['inlineAdd'] = array("default"=>false,"jsName"=>"isInlineAdd", "option" => array("list", "inlineAdd"));
-		$this->settingsMap["tableSettings"]['copy'] = array("default"=>false,"jsName"=>"copy");
-		$this->settingsMap["tableSettings"]['view'] = array("default"=>false,"jsName"=>"view");
-
-		$this->jsSettings['tableSettings'][$this->tName]['listFields'] = array();
-		for($i=0;$i<count($this->listFields);$i++)
-		{
-			$this->jsSettings['tableSettings'][$this->tName]['listFields'][] = $this->listFields[$i]['fName'];
-			// call addGoogleMapData before call proccessRecordValue!!!
-			if ($this->listFields[$i]['viewFormat'] == FORMAT_MAP)
-				$this->gMapFields[] = $i;
-		}
-
-		$this->processClickAction();
 
 		$this->createOrderByObject();
 
@@ -311,12 +268,8 @@ class ListPage extends RunnerPage
 			$this->pageData['urlParams'] = $this->getUrlParams();
 		}
 
-		// RunnerPage fillTableSettings doesn't work well with listGridLayout key
-		$this->jsSettings['tableSettings'][ $this->tName ]['listGridLayout'] = $this->listGridLayout;
-		
 		if( $this->spreadsheetGridApplicable() ) {
 			$this->pageData['spreadsheet'] = true;
-			$this->jsSettings['tableSettings'][ $this->tName ]['autoAddNewRecord'] = $this->pSet->addNewRecordAutomatically();
 			$this->setupRelatedInlineEditPage();
 		}
 	}
@@ -326,27 +279,23 @@ class ListPage extends RunnerPage
 		$this->orderClause = OrderClause::createFromPage( $this, true );
 	}
 
-	function processClickAction()
+	function buildClickActionSettings()
 	{
 		if( strtoupper($this->tName) == "ADMIN_MEMBERS" || strtoupper($this->tName) == "ADMIN_ADMEMBERS" )
 			return;
 
-		$clickActionJSON = $this->pSet->getClickActionJSONString();
-		if( $clickActionJSON != "" )
+		$clickAction = $this->pSet->getClickActions();
+
+		foreach ( $clickAction["fields"] as $field => $fSetting )
 		{
-			$clickAction = my_json_decode( $clickActionJSON );
+			if ( !$this->checkAllowClickAction($fSetting) )
+				$clickAction["fields"][$field]["action"] = "noaction";
+		}
 
-			foreach ( $clickAction["fields"] as $field => $fSetting )
-			{
-				if ( !$this->checkAllowClickAction($fSetting) )
-					$clickAction["fields"][$field]["action"] = "noaction";
-			}
+		if ( !$this->checkAllowClickAction($clickAction["row"]) )
+			$clickAction["row"]["action"] = "noaction";
 
-			if ( !$this->checkAllowClickAction($clickAction["row"]) )
-				$clickAction["row"]["action"] = "noaction";
-
-			$this->jsSettings['tableSettings'][$this->tName]["clickActions"] = $clickAction;
- 		}
+		return $clickAction;
  	}
 
  	function checkAllowClickAction( $actionSet )
@@ -457,14 +406,14 @@ class ListPage extends RunnerPage
 	 */
 	function addCommonHtml()
 	{
-		if ( !$this->isDashboardElement() && !$this->mobileTemplateMode() && !$this->pdfJsonMode() )
+		if ( !$this->isDashboardElement() && !$this->pdfJsonMode() )
 			$this->body["begin"].= "<div id=\"search_suggest\" class=\"search_suggest\"></div>";
 
 		if($this->is508) {
-			$this->body["begin"].= "<a href=\"#skipdata\" title=\""."Skip to table data"."\" class=\"".$this->makeClassName("s508")."\">"."Skip to table data"."</a>";
-			$this->body["begin"].= "<a href=\"#skipmenu\" title=\""."Skip to menu"."\" class=\"".$this->makeClassName("s508")."\">"."Skip to menu"."</a>";
-			$this->body["begin"].= "<a href=\"#skipsearch\" title=\""."Skip to search"."\" class=\"".$this->makeClassName("s508")."\">"."Skip to search"."</a>";
-			$this->body["begin"].= "<a href=\"templates/helpshortcut.htm\" title=\""."Hotkeys reference"."\" class=\"".$this->makeClassName("s508")."\">"."Hotkeys reference"."</a>";
+			$this->body["begin"].= "<a href=\"#skipdata\" title=\"".mlang_message('508_SKIP_DATA')."\" class=\"".$this->makeClassName("s508")."\">".mlang_message('508_SKIP_DATA')."</a>";
+			$this->body["begin"].= "<a href=\"#skipmenu\" title=\"".mlang_message('508_SKIP_MENU')."\" class=\"".$this->makeClassName("s508")."\">".mlang_message('508_SKIP_MENU')."</a>";
+			$this->body["begin"].= "<a href=\"#skipsearch\" title=\"".mlang_message('508_SKIP_SEARCH')."\" class=\"".$this->makeClassName("s508")."\">".mlang_message('508_SKIP_SEARCH')."</a>";
+			$this->body["begin"].= "<a href=\"templates/helpshortcut.htm\" title=\"".mlang_message('508_HELP')."\" class=\"".$this->makeClassName("s508")."\">".mlang_message('508_HELP')."</a>";
 		}
 
 		//prepare for dispaly master table info on details table
@@ -482,13 +431,29 @@ class ListPage extends RunnerPage
 
 		// add button events if exist
 		$this->addButtonHandlers();
-
 		
 		if( $this->spreadsheetGridApplicable() ) {
 			$this->editPage->addControlsJSAndCSS();
 			$this->includes_js = array_merge( $this->includes_js, $this->editPage->includes_js );
 		}
 	}
+
+	protected function useRichText() {
+		if( !ProjectSettings::richTextEnabled() ) {
+			return false;
+		}
+		$pSet = $this->pSet;
+		$addPSet = new ProjectSettings($this->tName, PAGE_ADD);
+		$editPSet = new ProjectSettings($this->tName, PAGE_EDIT);
+		foreach( $pSet->getFieldsList() as $f ) {
+			if( $pSet->appearOnInlineAdd( $f ) && $addPSet->getEditFormat( $f ) === EDIT_FORMAT_TEXT_AREA && $addPSet->isUseRTE( $f ) 
+				|| $pSet->appearOnInlineEdit( $f ) && $editPSet->getEditFormat( $f ) === EDIT_FORMAT_TEXT_AREA && $editPSet->isUseRTE( $f ) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 
 	/**
 	 * Add javascript code for grid
@@ -498,12 +463,9 @@ class ListPage extends RunnerPage
 		if( $this->isResizeColumns )
 			$this->prepareForResizeColumns();
 
-		if( $this->reorderFieldsFeatureEnabled() )
-		{
+		if( $this->reorderFieldsFeatureEnabled() ) {
 			$this->AddJSFile( 'include/jquery.dragtable.js' );
 		}
-
-		$this->jsSettings['tableSettings'][$this->tName]['showRows'] = ($this->numRowsFromSQL ? true : false);
 
 		$this->initGmaps();
 	}
@@ -554,33 +516,33 @@ class ListPage extends RunnerPage
 			if( $this->searchClauseObj->isSearchFunctionalityActivated() )
 			{
 				// if search used serialize clause object
-				$_SESSION[$this->sessionPrefix.'_advsearch'] = serialize($this->searchClauseObj);
+				storageSet( $this->sessionPrefix.'_advsearch', serialize($this->searchClauseObj) );
 			}
 			else
 			{
 				// Unset session for search if search not used
-				unset($_SESSION[$this->sessionPrefix.'_advsearch']);
+				storageDelete( $this->sessionPrefix.'_advsearch' );
 			}
 
 			// Unset session for filters if filters  not activated
 			if(!$this->searchClauseObj->filtersActivated)
-				unset($_SESSION[$this->sessionPrefix.'_filters']);
+				storageDelete( $this->sessionPrefix.'_filters' );
 		}
 		else
 		{
-			unset($_SESSION[$this->sessionPrefix.'_advsearch']);
-			unset($_SESSION[$this->sessionPrefix.'_filters']);
+			storageDelete( $this->sessionPrefix.'_advsearch' );
+			storageDelete( $this->sessionPrefix.'_filters' );
 		}
 
 
 		//set session goto
 		if( $this->requestGoto )
-			$_SESSION[$this->sessionPrefix."_pagenumber"]= $this->requestGoto;
+			storageSet( $this->sessionPrefix."_pagenumber", $this->requestGoto );
 
 
 
 		//	page number
-		$this->myPage =(integer) $_SESSION[$this->sessionPrefix."_pagenumber"];
+		$this->myPage =(integer) storageGet( $this->sessionPrefix."_pagenumber" );
 		if(! $this->myPage)
 			$this->myPage = 1;
 
@@ -1170,17 +1132,16 @@ class ListPage extends RunnerPage
 	/**
 	 * Check if its possible to add to the main table query a subquery that contes the number of details. #9875
 	 * @param String dDataSourceTable	The detail datasource table name
-	 * @param Number dTableIndex	The detail table index in the allDetailsTablesArr prop
 	 * @return Boolean
 	 */
-	protected function isDetailTableSubquerySupported( $dDataSourceTName, $dTableIndex )
+	protected function isDetailTableSubquerySupported( $details )
 	{
 		global $cman, $bSubqueriesSupported;
 
 		return $bSubqueriesSupported
 			&& $this->connection->checkDBSubqueriesSupport()
-			&& $cman->checkTablesSubqueriesSupport( $this->tName, $dDataSourceTName )
-			&& $this->checkfDMLinkFieldsOfTheSameType( $dDataSourceTName, $dTableIndex )
+			&& $cman->checkTablesSubqueriesSupport( $this->tName, $details )
+			&& $this->checkfDMLinkFieldsOfTheSameType( $details )
 			&& !$this->gQuery->HasJoinInFromClause();
 	}
 
@@ -1202,7 +1163,7 @@ class ListPage extends RunnerPage
 			$manyPages = false;
 		}
 
-		return count($this->allDetailsTablesArr) > 0 &&
+		return count( $this->pSet->getDetailsTables() ) > 0 &&
 			( max($this->pageSize, $this->numRowsFromSQL) <= 20
 			|| $manyPages )
 			&& !$this->eventExists("BeforeQueryList")
@@ -1226,25 +1187,20 @@ class ListPage extends RunnerPage
 	 * to add a subquery counting the number of detais for each record.
 	 *
 	 * @param String dDataSourceTable	The detail datasource table name
-	 * @param Number dTableIndex	The detail table index in the allDetailsTablesArr prop
 	 * @return Boolean
 	 */
-	protected function checkfDMLinkFieldsOfTheSameType( $dDataSourceTName, $dTableIndex )
+	protected function checkfDMLinkFieldsOfTheSameType( $details /* $dDataSourceTName, $dTableIndex*/ )
 	{
-		if( $this->allDetailsTablesArr[ $dTableIndex ]['dDataSourceTable'] != $dDataSourceTName )
-			return false;
-
 		if( $this->connection->dbType == nDATABASE_MySQL )
 			return true;
 
-		foreach($this->masterKeysByD[ $dTableIndex ] as $idx => $val)
-		{
-			// get field types
-			$masterLinkFieldType = $this->pSet->getFieldType( $this->masterKeysByD[ $dTableIndex ][ $idx ] );
-			$detailLinkFieldType = $this->pSet->getFieldType( $this->detailKeysByD[ $dTableIndex ][ $idx ] );
-			// if different data types we can't use subQ
-			if( $masterLinkFieldType != $detailLinkFieldType )
+		$detailsKeys = $this->pSet->getDetailsKeys( $details );
+		$detailsPSet = new ProjectSettings( $details );
+		foreach( $detailsKeys['masterKeys'] as $idx => $mKey ) {
+			$dKey = $detailsKeys['detailsKeys'][ $idx ];
+			if( $this->pSet->getFieldType( $mKey ) !== $detailsPSet->getFieldType( $dKey ) ) {
 				return false;
+			}
 		}
 
 		return true;
@@ -1308,17 +1264,15 @@ class ListPage extends RunnerPage
 			$record["dtables_link"] = true;
 
 		$hideDPLink = false;
-		for($i = 0; $i < count($this->allDetailsTablesArr); $i ++)
-		{
+		foreach( $this->pSet->getDetailsTables() as $details ) {
 			//detail tables
-			$dDataSourceTable = $this->allDetailsTablesArr[$i]['dDataSourceTable'];
-			$dShortTable = $this->allDetailsTablesArr[$i]['dShortTable'];
+			$dShortTable = GetTableURL( $details );
 
-			if( $this->detailInGridAvailable( $this->allDetailsTablesArr[$i] ) ) {
-				$record[$dShortTable."_dtable_link"] = ($this->permis[$dDataSourceTable]['add'] || $this->permis[$dDataSourceTable]['search']);
+			if( $this->detailInGridAvailable( $details ) ) {
+				$record[$dShortTable."_dtable_link"] = ($this->permis[ $details ]['add'] || $this->permis[$details]['search']);
 			}
 
-			if( $this->pSet->detailsShowCount( $dDataSourceTable ) )
+			if( $this->pSet->detailsShowCount( $details ) )
 			{
 				$record[ $dShortTable."_childnumber_attr" ] = " id='cntDet_".$dShortTable."_'";
 				$record[ $dShortTable."_childcount" ] = true;
@@ -1334,17 +1288,17 @@ class ListPage extends RunnerPage
 			if( $this->detailsHrefAvailable() ) {
 				$htmlAttributes["href"] = GetTableLink($dShortTable, "list")."?";
 			}
-			if( $this->pSet->detailsPreview( $dDataSourceTable ) == DP_INLINE )
+			if( $this->pSet->detailsPreview( $details ) == DP_INLINE )
 			{
-				$htmlAttributes["caption"] = GetTableCaption(GoodFieldName($dDataSourceTable));
-				$htmlAttributes["data-pagetype"] = $this->allDetailsTablesArr[$i]['dType'];
+				$htmlAttributes["caption"] = Labels::getTableCaption( $details );
+				$htmlAttributes["data-pagetype"] = ProjectSettings::defaultPageType( GetEntityType( $details ) );
 			}
 			foreach ($htmlAttributes as $attr => $value)
 			{
 				$record[$indXTtag] .= $attr . "=\"" . $value . "\" ";
 			}
 
-			if( $this->pSet->detailsHideEmpty( $dDataSourceTable ) && !$hideDPLink )
+			if( $this->pSet->detailsHideEmpty( $details ) && !$hideDPLink )
 				$hideDPLink = true;
 		}
 		$record["dtables_link_attrs"] = " href=\"#\" id=\"details_add".$this->id."\" ";
@@ -1449,7 +1403,7 @@ class ListPage extends RunnerPage
 		//	add grid data
 		$data = $this->beforeProccessRow();
 		$prewData = false;
-		$lockRecIds = array();
+		$this->lockRecIds = array();
 
 		$tKeys = $this->pSet->getTableKeys();
 
@@ -1508,18 +1462,19 @@ class ListPage extends RunnerPage
 			//	deprecated??
 			$currentRow['contextRowId'] = $this->recId;
 			
-			$isEditable = Security::userCan('E', $this->tName, $data[$this->mainTableOwnerID] )
-				|| Security::userCan('D', $this->tName, $data[$this->mainTableOwnerID] );
+			$isEditable = Security::userCan('E', $this->tName, true, $data[$this->mainTableOwnerID] );
+			$isDeletable = Security::userCan('D', $this->tName, true, $data[$this->mainTableOwnerID] );
 
 			if($globalEvents->exists("IsRecordEditable", $this->tName)) {
 				$isEditable = $globalEvents->IsRecordEditable($data, $isEditable, $this->tName);
+				$isDeletable = $isDeletable && $isEditable;
 			}
 
 			//	for compatibility only, use canEditRecord, canDeleteRecord instead
 			$currentRow['isEditOwnRow'] = $isEditable;
 			
 			$currentRow['canEditRecord'] = $isEditable;
-			$currentRow['canDeleteRecord'] = $isEditable;
+			$currentRow['canDeleteRecord'] = $isDeletable;
 			if( $this->tName == ADMIN_USERS && Security::dynamicPermissions() ) {
 				
 				if( Security::currentUserRecord( $data ) ) {
@@ -1563,7 +1518,7 @@ class ListPage extends RunnerPage
 					}
 					if($lockDelRec)
 					{
-						$lockRecIds[] = $this->recId;
+						$this->lockRecIds[] = $this->recId;
 						break;
 					}
 				}
@@ -1612,14 +1567,6 @@ class ListPage extends RunnerPage
 			$record["inlinerevertlink_attrs"]= "id=\"revertLink".$this->recId."\" href=#";
 
 			$record["ieditbuttonsholder_attrs"]= "id=\"ieditbuttonsholder".$this->recId."\" ";
-
-			if( $this->mobileTemplateMode() )
-			{
-				if( $this->displayViewLink() )
-					$record["recordattrs"] .= " data-viewlink='".GetTableLink($this->shortTableName, "view", $editlink)."'";
-				if( $this->editAvailable() && $isEditable )
-					$record["recordattrs"] .= " data-editlink='".GetTableLink($this->shortTableName, "edit", $editlink)."'";
-			}
 
 			$this->fillCheckAttr($record, $data, $keyblock);
 
@@ -1706,9 +1653,6 @@ class ListPage extends RunnerPage
 				$this->numRowsFromSQL += $this->pageSize * ($this->myPage - 1 );
 			}
 		}
-		
-		if( $this->lockingObj )
-			$this->jsSettings['tableSettings'][$this->tName]['lockRecIds'] = $lockRecIds;
 
 		if(count($rowinfo["data"]))
 		{
@@ -2051,7 +1995,7 @@ class ListPage extends RunnerPage
 		$record["checkbox_attrs"]= "name=\"selection[]\" ".
 			"value=\"".runner_htmlspecialchars($keyblock)."\" ".
 			"id=\"check".$this->id."_".$this->recId."\" ";
-			//"data-keys=\"".runner_htmlspecialchars(my_json_encode( $keyValues ))."\"";
+			//"data-keys=\"".runner_htmlspecialchars(runner_json_encode( $keyValues ))."\"";
 	
 	}
 
@@ -2181,9 +2125,6 @@ class ListPage extends RunnerPage
 		//	prepare maps
 		loadMaps( $this->pSet );
 
-		// build column hiding CSS
-		$this->buildMobileCssRules();
-
 		//Sorting fields
 		$this->buildOrderParams();
 
@@ -2280,8 +2221,9 @@ class ListPage extends RunnerPage
 			}
 
 			//	add icon
+			$directionIcon = $of["dir"] == 'ASC' ? 'glyphicon-arrow-up' : 'glyphicon-arrow-down';
 			$this->xt->assign( "arrow_icon_" . GoodFieldname( $of['column'] ),
-				"<span data-icon=\"".( $of["dir"] == "ASC" ? "sortasc" : "sortdesc")."\"></span>" );		
+				'<span class="glyphicon ' .$directionIcon. '"></span>' );		
 		}
 
 		foreach( $this->listFields as $f )
@@ -2361,7 +2303,7 @@ class ListPage extends RunnerPage
 		if( $showLabelOnly )
 			return $fName;
 
-		return $fName." ". ($desc ? "High to Low" : "Low to High");
+		return $fName." ". ($desc ? mlang_message('SORT_HIGH_TO_LOW') : mlang_message('SORT_LOW_TO_HIGH'));
 	}
 
 	/**
@@ -2395,13 +2337,14 @@ class ListPage extends RunnerPage
 
 		foreach( $sortSettings as $idx => $sData )
 		{
-			$label = $sData["label"];
+			$label = Labels::multilangString( @$sData["label"] );
+
 			if( !$label )
 			{
 				$labelParts = array();
-				foreach( $sData["fields"] as $fData )
+				foreach( @$sData["fields"] as $fData )
 				{
-					$labelParts[] = $this->orderFieldLabelString( $fData["field"], $fData["desc"], $fData["labelOnly"] );
+					$labelParts[] = $this->orderFieldLabelString( @$fData["field"], @$fData["desc"], @$fData["labelOnly"] );
 				}
 				$label = implode( "; ", $labelParts );
 			}
@@ -2433,7 +2376,7 @@ class ListPage extends RunnerPage
 	 * @param String strTableName
 	 * @param Array options
 	 */
-	static function & createListPage($strTableName, $options)
+	static function & createListPage( $strTableName, $options)
 	{
 		$gSettings = new ProjectSettings($strTableName, $options['pageType'], $options['pageName']);
 
@@ -2452,15 +2395,13 @@ class ListPage extends RunnerPage
 		$params['arrKeyFields'] = $gSettings->getTableKeys();
 		$params["panelSearchFields"] = $gSettings->getPanelSearchFields();
 		$params['listGridLayout'] = $gSettings->getListGridLayout();
-		$params['createLoginPage'] = GetGlobalData("createLoginPage",false);
 		$params['noRecordsFirstPage'] = $gSettings->noRecordsOnFirstPage();
 		$params['totalsFields'] = $gSettings->getTotalsFields();
 		$params['listAjax'] = $gSettings->ajaxBasedListPage();
 		$params['arrRecsPerPage'] = $gSettings->getRecordsPerPageArray();
 		$params['isScrollGridBody'] = $gSettings->getScrollGridBody();
-		$params['viewPDF'] = $gSettings->isViewPagePDF() || $gSettings->isPrinterPagePDF();
 
-		$params['audit'] = GetAuditObject($strTableName);
+		$params['audit'] = GetAuditObject( $strTableName );
 
 
 		// choose class by mode
@@ -2517,46 +2458,6 @@ class ListPage extends RunnerPage
 	}
 
 	/**
-	 * Build CSS rules to hide particular columnns on specific screen sizes
-	 */
-	protected function buildMobileCssRules()
-	{
-		if( $this->pSet->isAllowShowHideFields() )
-			return;
-		$cssBlocks = array();
-		$columnsToHide = $this->getColumnsToHide();
-
-		$devices = array(  SMARTPHONE_PORTRAIT, DESKTOP );
-
-		//	build CSS code
-		foreach( $this->listFields as $f )
-		{
-			$gFieldName = GoodFieldName( $f['fName'] );
-			$fieldMentioned = false;
-			$field = $f['fName'];
-			foreach( $devices as $d )
-			{
-				if( in_array($gFieldName, $columnsToHide[ $d ]) )
-				{
-					$this->hiddenColumnClasses[$gFieldName] = "column".GoodFieldName( $field );
-					$cssBlocks[$d] .= "." . $this->hiddenColumnClasses[$gFieldName] . ":not([data-forced-visible-column]) { display: none !important;; }\n";
-					$fieldMentioned = true;
-				}
-			}
-		}
-
-		$this->mobile_css_rules = "";
-		foreach( $devices as $d )
-		{
-			if($cssBlocks[$d])
-			{
-				$this->mobile_css_rules .= ProjectSettings::getDeviceMediaClause($d)."\n{\n".$cssBlocks[$d]."\n}\n";
-			}
-		}
-
-	}
-
-	/**
 	 * Get indices of the not list page's blob fields
 	 * @return Array
 	 */
@@ -2599,10 +2500,13 @@ class ListPage extends RunnerPage
 
 	protected static function readMainTableSettingsFromRequest( $table )
 	{
-		if( postvalue("pageType") == "register" && postvalue("table") == "public.users" )
-			return new ProjectSettings( "public.users", PAGE_REGISTER, "", GLOBAL_PAGES);
+		if( Security::registerPage() ) {
+			if( postvalue("pageType") == "register" && postvalue("table") == Security::loginTable() )
+				return new ProjectSettings( Security::loginTable(), PAGE_REGISTER, "", GLOBAL_PAGES);
+		}
 		$mainTableShortName = GetTableURL( postvalue("table") );
-		return getLookupMainTableSettings($table, $mainTableShortName, postvalue("field"));
+		$pSet = new ProjectSettings( $table, 'list' );
+		return $pSet->getLookupMainTableSettings( $mainTableShortName, postvalue("field"));
 	}
 
 	protected static function checkLookupPermissions( $table )
@@ -2611,17 +2515,19 @@ class ListPage extends RunnerPage
 		if( !$lookupMainSettings )
 			return false;
 
-		$mainTable = $lookupMainSettings->getTableName();
+		$mainTable = $lookupMainSettings->table();
 
 		//	page called for List page with search lookup and the user has permissions on the main table
 		if( CheckTablePermissions($mainTable, "S") || CheckTablePermissions($mainTable, "E") || CheckTablePermissions($mainTable, "A"))
 			return true;
 
 		//	otherwise check if the page is called from the register page
-		if( $mainTable == "public.users" )
-		{
-			if( $lookupMainSettings->appearOnPage( postvalue("field") ) !== FALSE )
-				return true;
+		if( Security::registerPage() ) {
+			if( $mainTable == Security::loginTable() )
+			{
+				if( $lookupMainSettings->appearOnPage( postvalue("field") ) !== FALSE )
+					return true;
+			}
 		}
 		return false;
 	}
@@ -2677,7 +2583,7 @@ class ListPage extends RunnerPage
 		if( postvalue("saveParam") )
 		{
 			$paramType = intval( postvalue("saveParam") );
-			$paramData = my_json_decode(postvalue("data"));
+			$paramData = runner_json_decode(postvalue("data"));
 
 			include_once getabspath("classes/paramsLogger.php");
 
@@ -2686,7 +2592,7 @@ class ListPage extends RunnerPage
 			else
 				$paramsLogger = new paramsLogger( $table, $paramType );
 
-			if( $paramType == SHFIELDS_PARAMS_TYPE )
+			if( $paramType == NEWSHFIELDS_PARAMS_TYPE )
 			{
 				$macroDeviceClass = RunnerPage::deviceClassToMacro( postvalue("deviceClass") );
 				$ps = new ProjectSettings($table);
@@ -2755,8 +2661,7 @@ class ListPage extends RunnerPage
 				$this->fieldsWithRawValues[ $field ] = $this->addRawFieldValues
 					|| @$this->arrFieldSpanVal[ $field ] == 2
 					|| @$this->arrFieldSpanVal[ $field ] == 1
-					|| $this->pSet->hasAjaxSnippet()
-					|| $this->pSet->hasButtonsAdded();
+					|| $this->pSet->hasJsEvents();
 			}
 		}
 		return $this->fieldsWithRawValues[ $field ];
@@ -2857,17 +2762,65 @@ class ListPage extends RunnerPage
 		$this->editPage = $this->getRelatedInlineEditPage( $this->pageName );
 	}
 	
-	/**
-	 * Fill field settings for current table
-	 * @intellisense
-	 */
-	function fillFieldSettings()
-	{
-		parent::fillFieldSettings();
+	protected function buildJsTableSettings( $table, $pSet ) {
+		$settings = parent::buildJsTableSettings( $table, $pSet );
 		if( $this->spreadsheetGridApplicable() && $this->editPage ) {
-			$this->addFieldsSettings( $this->pSet->getInlineEditFields(), $this->editPage->pSet, PAGE_EDIT );
+			foreach( $this->pSet->getInlineEditFields() as $field ) {
+				$settings[ 'fieldSettings' ][ $field ][ PAGE_EDIT ] = $this->buildJsFieldSettings( $this->editPage->pSet, $field, PAGE_EDIT );
+			}
 		}
-	}	
+
+		$settings['isInlineEdit'] = $this->pSet->getPageOption( "list", "inlineEdit" );
+		$settings['isInlineAdd'] = $this->pSet->getPageOption( "list", "inlineAdd" );
+//		$settings['copy'] = array("default"=>false,"jsName"=>"copy");
+		$settings['view'] = !!$this->pSet->getDefaultPage( PAGE_VIEW );
+
+		$settings['listFields'] = $this->pSet->getPageFields();
+		for($i=0;$i<count($this->listFields);$i++)
+		{
+			if ($this->listFields[$i]['viewFormat'] == FORMAT_MAP)
+				$this->gMapFields[] = $i;
+		}
+
+		if($this->searchClauseObj) //for asp & .net
+			$settings['simpleSearchActive'] = $this->searchClauseObj->simpleSearchActive;
+
+		if( $this->pSet->reorderRows() && Security::userCan('E', $this->tName) ) {
+			$settings['reorderRows'] = true;
+		}
+		$settings['addToBottom'] = $this->pSet->inlineAddBottom();
+
+		$settings['totalFields'] = array();
+		foreach( $this->totalsFields as $tField ) {
+			$totalFieldData = array('type'=> $tField['totalsType'], 'fName'=> $tField['fName'], 'format'=> $tField['viewFormat']);
+			$totalFieldData['formatSettings'] = getFormatSettings( $tField['viewFormat'], $this->pSet, $tField['fName'] );
+			$settings['totalFields'][] = $totalFieldData;
+		}
+
+		$settings['scrollGridBody'] = (( $this->listGridLayout == gltHORIZONTAL || $this->listGridLayout == gltFLEXIBLE )&& $this->isScrollGridBody);
+
+		$settings['permissions'] = $this->permis[$this->tName];
+		if($this->pSet->getAdvancedSecurityType() == ADVSECURITY_EDIT_OWN) {
+			$settings['isEditOwn'] = $this->permis[$this->tName];
+		}
+
+		$settings['clickActions'] = $this->buildClickActionSettings();
+
+		$settings['listGridLayout'] = $this->listGridLayout;
+		
+		if( $this->spreadsheetGridApplicable() ) {
+			$settings['autoAddNewRecord'] = $this->pSet->addNewRecordAutomatically();
+		}
+
+		$settings['showRows'] = ($this->numRowsFromSQL ? true : false);
+
+		if( $this->lockingObj )
+			$settings['lockRecIds'] = $this->lockRecIds;
+
+
+		return $settings;
+	}
+
 
 	public function updateRowOrder()
 	{
@@ -2978,10 +2931,9 @@ class ListPage extends RunnerPage
 	 */
 	public function getEditFormat( $field, $pSet = null ) {
 		if( $this->spreadsheetGridApplicable() ) {
-			$isDetKeyField = in_array( $field, $this->detailKeysByM );
-			
-			if( $isDetKeyField )
+			if( $this->detailsKeyField( $field ) ) {
 				return EDIT_FORMAT_READONLY;
+			}
 		}
 		return parent::getEditFormat( $field, $pSet );
 	}	
@@ -3025,7 +2977,7 @@ class ListPage extends RunnerPage
 					$this );
 			}
 			
-			echo my_json_encode( $totals );
+			echo runner_json_encode( $totals );
 			return true;
 		}
 		return false;

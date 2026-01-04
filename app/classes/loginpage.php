@@ -103,8 +103,7 @@ class LoginPage extends RunnerPage
 	/**
 	 * Set the 'cipherer' property
 	 */
-	protected function assignCipherer()
-	{
+	protected function assignCipherer() {
 		$this->cipherer = RunnerCipherer::getForLogin();
 	}
 
@@ -120,7 +119,7 @@ class LoginPage extends RunnerPage
 
 
 		$twoFactorSettings =& Security::twoFactorSettings();
-		if ( !GetGlobalData( "keepLoggedIn" ) || $twoFactorSettings["available"] )
+		if ( !ProjectSettings::getProjectValue( 'keepLoggedIn' ) || $twoFactorSettings["available"] )
 		{
 			$this->hideItemType("remember_password");
 		}
@@ -393,14 +392,14 @@ class LoginPage extends RunnerPage
 		$destination = Security::twoFactorDeliveryInfo( Security::provisionalUserData(), $method );
 		$twofMessage = "";
 		if( $destination["method"] == TWOFACTOR_PHONE ) {
-			$twofMessage = str_replace( "%phone%", $destination["address"], "A text message with your code has been sent to: %phone%" );
+			$twofMessage = str_replace( "%phone%", $destination["address"], mlang_message('MESSAGE_SENT_TO_PNONE') );
 		} else if( $destination["method"] == TWOFACTOR_EMAIL ) {
-			$twofMessage = str_replace( "%email%", $destination["address"], "An email with your code has been sent to: %email%." );
+			$twofMessage = str_replace( "%email%", $destination["address"], mlang_message('MESSAGE_SENT_TO_EMAIL') );
 		} else if( $destination["method"] == TWOFACTOR_APP ) {
 			$twofMessage = str_replace(
 				array( "%username%", "%site%" ),
 				array( "<br><b>".Security::provisionalUsername()."</b>", "<b>".$destination["address"]."</b>" ),
-				"Enter the code from your authentication app corresponding to %username% at %site%."
+				mlang_message('ENTER_TOTP_CODE')
 			);
 			$this->hideItemType("resend_button");
 		}
@@ -416,7 +415,7 @@ class LoginPage extends RunnerPage
 		}
 		if( !$ret["success"] )
 		{
-			$this->message = "Error sending message"." ".$ret["message"];
+			$this->message = mlang_message('ERR_SENDING_CODE')." ".$ret["message"];
 			$this->messageType = MESSAGE_ERROR;
 			return false;
 		}
@@ -451,7 +450,7 @@ class LoginPage extends RunnerPage
 		} else {
 
 			$this->setRememberMachineCookie( false );
-			$this->message = "Wrong code";
+			$this->message = mlang_message('WRONG_CODE');
 		}
 	}
 
@@ -483,9 +482,9 @@ class LoginPage extends RunnerPage
 	protected function refineMessage()
 	{
 		if( $this->message == "expired" )
-			$this->message = "Your session has expired." . " " . "Please login again.";
+			$this->message = mlang_message('SESSION_EXPIRED1') . " " . mlang_message('SESSION_EXPIRED2');
 		elseif( $this->message == "invalidlogin" )
-			$this->message = "Invalid Login";
+			$this->message = mlang_message('INVALID_LOGIN');
 		elseif( $this->message == "loginblocked" && strlen( $_SESSION["loginBlockMessage"] ) )
 			$this->message = $_SESSION["loginBlockMessage"];
 
@@ -510,8 +509,7 @@ class LoginPage extends RunnerPage
 		else
 		{
 			//	discard. Go to menu.php after login
-			//$this->myurl = "";
-			$this->myurl = "dashboard_dashboard.php?menuItemId=72";
+			$this->myurl = "";
 		}
 	}
 
@@ -558,7 +556,7 @@ class LoginPage extends RunnerPage
 			$globalEvents->AfterUnsuccessfulLogin( $username, $password, $message, $this, $this->controlsData );
 
 		if( $message == "" && !$this->message )
-			$this->message = "Invalid Login";
+			$this->message = mlang_message('INVALID_LOGIN');
 		else if( $message )
 			$this->message = $message;
 	}
@@ -574,7 +572,7 @@ class LoginPage extends RunnerPage
 		if( !$this->auditObj->LoginAccess() )
 			return true;
 
-		$this->message = mysprintf( "Access denied for %s minutes", array($this->auditObj->LoginAccess()) );
+		$this->message = mysprintf( mlang_message('LOGIN_BLOCKED'), array($this->auditObj->LoginAccess()) );
 		$_SESSION["loginBlockMessage"] = $this->message;
 
 		return false;
@@ -650,8 +648,8 @@ class LoginPage extends RunnerPage
 		}
 
 		//	verify activation status
-		if( GetGlobalData( "userRequireActivation" ) ) {
-			if( $data[ GetGlobalData( "userActivationField" ) ] != 1 ) {
+		if( ProjectSettings::getSecurityValue( 'registration', 'sendActivationLink' ) ) {
+			if( $data[ ProjectSettings::getSecurityValue( 'dbProvider', 'activationField' ) ] != 1 ) {
 				Security::createProvisionalSession( $provider, LOGGED_ACTIVATION_PENDING, $username, $displayName, $data );
 				return true;
 			}
@@ -907,6 +905,11 @@ class LoginPage extends RunnerPage
 	 */
 	public function setLangParams()
 	{
+		if( count( ProjectSettings::getProjectValue( 'languages' ) ) > 1 ) {
+			if( $this->mode == LOGIN_SIMPLE ) {
+				SetLangVars($this->xt, "login");
+			}
+		}
 	}
 
 	/**
@@ -922,12 +925,16 @@ class LoginPage extends RunnerPage
 		$this->body["end"] .= "</form>";
 
 		$this->body['end'] .= '<script>';
-		$this->body['end'] .= "window.controlsMap = ".my_json_encode($this->controlsHTMLMap).";";
-		$this->body['end'] .= "window.viewControlsMap = ".my_json_encode($this->viewControlsHTMLMap).";";
-		$this->body['end'] .= "Runner.applyPagesData( ".my_json_encode( $pagesData )." );";
-		$this->body['end'] .= "window.settings = ".my_json_encode($this->jsSettings).";</script>";
+		$this->body['end'] .= "window.controlsMap = ".runner_json_encode( $this->controlsHTMLMap).";";
+		$this->body['end'] .= "window.viewControlsMap = ".runner_json_encode( $this->viewControlsHTMLMap).";";
+		$this->body['end'] .= "Runner.applyPagesData( ".runner_json_encode( $pagesData )." );";
+		$this->body['end'] .= "window.settings = ".runner_json_encode( $this->jsSettings).";</script>";
 
-		$this->body["end"] .= "<script type=\"text/javascript\" src=\"".GetRootPathForResources("include/runnerJS/RunnerAll.js?41974")."\"></script>";
+		$projectBuildKey = ProjectSettings::getProjectValue('projectBuild');
+		$wizardBuildKey = ProjectSettings::getProjectValue('wizardBuild');
+		$this->body["end"] .= '<script language="JavaScript" src="settings/project.js?'. $projectBuildKey .'"></script>' . "\r\n";
+		$this->body["end"] .= '<script language="JavaScript" src="include/runnerJS/RunnerAll.js?'. $wizardBuildKey .'"></script>' . "\r\n";
+		
 		$this->body["end"] .= '<script>'.$this->PrepareJS()."</script>";
 
 		$this->xt->assignbyref("body", $this->body);
@@ -991,9 +998,6 @@ class LoginPage extends RunnerPage
 			if( $this->restore && Security::userSessionLevel() === LOGGED_FULL && !Security::isGuest() ) {
 				$continuebutton_attrs = 'href="#" id="continueButton"';
 
-				if ( $this->getLayoutVersion() !== PD_BS_LAYOUT )
-					$continuebutton_attrs .= 'style="display:none"';
-
 				$this->xt->assign("continuebutton_attrs", $continuebutton_attrs);
 				$this->xt->assign("continue_button", true);
 
@@ -1017,8 +1021,7 @@ class LoginPage extends RunnerPage
 			$this->xt->assign("message_block", true);
 			$this->xt->assign("message",  $this->message );
 
-			if( $this->isBootstrap() )
-				$this->xt->assign("message_class", $this->messageType == MESSAGE_INFO ? "alert-success" : "alert-danger" );
+			$this->xt->assign("message_class", $this->messageType == MESSAGE_INFO ? "alert-success" : "alert-danger" );
 
 			if( !$this->message )
 				$this->hideElement("message");
@@ -1132,7 +1135,19 @@ class LoginPage extends RunnerPage
 			$parameters["value"] = $defvalues[ $fName ];
 			$parameters["pageObj"] = $this;
 
-			$this->xt->assign_function( GoodFieldName( $fName )."_editcontrol", "xt_buildeditcontrol", $parameters );
+			$gf = GoodFieldName( $fName );
+			if( $this->pSet->getEditFormat( $fName ) == EDIT_FORMAT_CHECKBOX ) {
+				$parameters[ "xt" ] = $this->xt;
+				$parameters[ "clearVar" ] = $gf . "_forward_control";
+			}
+			$this->xt->assign_function( $gf . "_editcontrol", "xt_buildeditcontrol", $parameters );
+			if( $this->pSet->getEditFormat( $fName ) == EDIT_FORMAT_CHECKBOX ) {
+				$parameters[ "xt" ] = $this->xt;
+				$parameters[ "clearVar" ] = $gf . "_editcontrol";
+				$this->xt->assign_function( $gf . "_forward_control", "xt_buildforwardcontrol", $parameters );
+				
+				$this->xt->assign( $gf . '_label_class' , 'r-checkbox-label' );
+			}
 
 			if( $this->pSet->isUseRTE( $fName ) )
 				$_SESSION[ $this->sessionPrefix."_".$fName."_rte" ] = $defvalues[ $fName ];
@@ -1160,9 +1175,6 @@ class LoginPage extends RunnerPage
 			$this->fillControlsMap( $controls );
 			$this->fillControlFlags( $fName );
 
-			// fill special settings for a time picker
-			if( $this->pSet->getEditFormat( $fName ) == "Time" )
-				$this->fillTimePickSettings( $fName, $defvalues[ $fName ] );
 		}
 	}
 
@@ -1208,25 +1220,23 @@ class LoginPage extends RunnerPage
 		return " and " . implode( " and ", $controlsWhereParts );
 	}
 
+	
 	/**
 	 * Remove excessive validation for page.
 	 * Unset "DenyDuplicated" for login controls
 	 */
-	protected function refineVaidationData( &$fData )
-	{
-		if( $fData && $fData["basicValidate"] )
-		{
-			$denyPos = array_search( "DenyDuplicated", $fData["basicValidate"] );
-			if( $denyPos !== FALSE )
-				array_splice( $fData["basicValidate"], $denyPos, 1 );
+	protected function buildJsValidationData( $pSet, $field ) {
+		$settings = parent::buildJsValidationData( $pSet, $field );
+
+		$denyPos = array_search( "DenyDuplicated", $settings['validationArr'] );
+		if( $denyPos !== FALSE ) {
+			array_splice( $settings['validationArr'], $denyPos, 1 );
 		}
+		unset( $settings["customMessages"]["DenyDuplicated"] );
 
-		if( $fData && $fData["customMessages"] )
-			unset( $fData["customMessages"]["DenyDuplicated"] );
-
-		return $fData;
+		return $settings;
 	}
-
+	
 	protected function hasProvisionalSession() {
 		$sessionLevel = Security::userSessionLevel();
 		return $sessionLevel == LOGGED_2F_PENDING || $sessionLevel == LOGGED_ACTIVATION_PENDING;

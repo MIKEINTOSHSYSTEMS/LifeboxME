@@ -1,8 +1,6 @@
 <?php
 class ChangePasswordPage extends RunnerPage
 {
-	protected $pwdStrong = false;
-
 	public $token = "";
 
 	public $action;
@@ -15,6 +13,8 @@ class ChangePasswordPage extends RunnerPage
 	protected $changePwdFields;
 
 	protected $changedSuccess = false;
+
+	protected $userPwdMessage = '';
 
 	/**
 	 *
@@ -43,18 +43,6 @@ class ChangePasswordPage extends RunnerPage
 		}
 		else
 			$this->changePwdFields = array("oldpass", "newpass", "confirm");
-
-		// fill global password settings
-		$this->pwdStrong = GetGlobalData("pwdStrong", false);
-
-		if( $this->pwdStrong )
-		{
-			$this->settingsMap["globalSettings"]["pwdStrong"] = true;
-			$this->settingsMap["globalSettings"]["pwdLen"] = GetGlobalData("pwdLen", 0);
-			$this->settingsMap["globalSettings"]["pwdUnique"] = GetGlobalData("pwdUnique", 0);
-			$this->settingsMap["globalSettings"]["pwdDigits"] = GetGlobalData("pwdDigits", 0);
-			$this->settingsMap["globalSettings"]["pwdUpperLower"] = GetGlobalData("pwdUpperLower", false);
-		}
 
 		$this->headerForms = array( "top" );
 		$this->footerForms = array( "footer" );
@@ -107,7 +95,7 @@ class ChangePasswordPage extends RunnerPage
 	 * @return DsCondition
 	 */
 	protected function getTokenCondition() {
-		return DataCondition::FieldEquals( "reset_token", $this->token );
+		return DataCondition::FieldEquals( ProjectSettings::getSecurityValue( 'dbProvider', 'resetTokenField' ), $this->token );
 	}
 
 	/**
@@ -129,7 +117,7 @@ class ChangePasswordPage extends RunnerPage
 	protected function getUpdateCommand( $newpass ) {
 		$dc = new DsCommand();
 
-		if( GetGlobalData( "bEncryptPasswords" ) ) {
+		if( ProjectSettings::getSecurityValue( 'registration', 'hashPassword' ) ) {
 			if( !$this->cipherer->isFieldEncrypted( $this->passwordField ) )
 				$newpass = Security::hashPassword( $newpass );
 		}
@@ -137,10 +125,10 @@ class ChangePasswordPage extends RunnerPage
 		$values = array();
 		$values[ $this->passwordField ] = $newpass;
 		if( $this->token ) {
-			$values[ "reset_token" ] = "";
-			$values[ "reset_date" ] = NULL;
-			if( GetGlobalData( "userRequireActivation" ) ) {
-				$values[  GetGlobalData( "userActivationField" ) ] = "1";
+			$values[ ProjectSettings::getSecurityValue( 'dbProvider', 'resetTokenField' ) ] = "";
+			$values[ ProjectSettings::getSecurityValue( 'dbProvider', 'resetDateField' ) ] = NULL;
+			if( ProjectSettings::getSecurityValue( 'registration', 'sendActivationLink' ) ) {
+				$values[  ProjectSettings::getSecurityValue( 'dbProvider', 'activationField' ) ] = "1";
 			}
 		}
 
@@ -189,7 +177,7 @@ class ChangePasswordPage extends RunnerPage
 
 		$dbOldPass = "";
 		if( !$row ) {
-			$this->message = "Invalid password";
+			$this->message = mlang_message('INVALID_PASSWORD');
 			return false;
 		}
 
@@ -198,7 +186,7 @@ class ChangePasswordPage extends RunnerPage
 
 		if( !$this->token && $this->pSet->hasOldPassField() ) {
 			if( !Security::verifyPassword( $values["oldpass"], $dbOldPass ) ) {
-				$this->message = "Invalid password";
+				$this->message = mlang_message('INVALID_PASSWORD');
 				return false;
 			}
 		}
@@ -206,9 +194,9 @@ class ChangePasswordPage extends RunnerPage
 		$oldPass = $dbOldPass;
 
 		$newPass = $values["newpass"];
-		if( $this->pwdStrong && !checkpassword( $newPass ) ) {
+		if( ProjectSettings::passwordValidationValue( 'strong' ) && !checkpassword( $newPass ) ) {
 			$this->message = $this->getPwdStrongFailedMessage();
-			$this->jsSettings["tableSettings"][ $this->tName ]["msg_passwordError"] = $this->message;
+			$this->userPwdMessage = $this->message;
 			return false;
 		}
 
@@ -231,44 +219,6 @@ class ChangePasswordPage extends RunnerPage
 		return $retval;
 	}
 
-	/**
-	 * @return String
-	 */
-	protected function getPwdStrongFailedMessage()
-	{
-		$msg = "";
-		$pwdLen = GetGlobalData("pwdLen", 0);
-		if($pwdLen)
-		{
-			$fmt = "Password must be at least %% characters length.";
-			$fmt = str_replace("%%", "".$pwdLen, $fmt);
-			$msg.= "<br>".$fmt;
-		}
-		$pwdUnique = GetGlobalData("pwdUnique", 0);
-		if($pwdUnique)
-		{
-			$fmt = "Password must contain %% unique characters.";
-			$fmt = str_replace("%%", "".$pwdUnique, $fmt);
-			$msg.= "<br>".$fmt;
-		}
-		$pwdDigits = GetGlobalData("pwdDigits", 0);
-		if($pwdDigits)
-		{
-			$fmt = "Password must contain %% digits or symbols.";
-			$fmt = str_replace("%%", "".$pwdDigits, $fmt);
-			$msg.= "<br>".$fmt;
-		}
-		if(GetGlobalData("pwdUpperLower", false))
-		{
-			$fmt = "Password must contain letters in upper and lower case.";
-			$msg.= "<br>".$fmt;
-		}
-
-		if($msg)
-			$msg = substr($msg, 4);
-
-		return $msg;
-	}
 
 	/**
 	 *
@@ -309,7 +259,10 @@ class ChangePasswordPage extends RunnerPage
 
 			$this->pageData["buttons"] = array_merge( $this->pageData["buttons"], $this->pSet->buttons() );
 			foreach( $this->pSet->buttons() as $b ) {
-				$this->AddJSFile( "include/button_".$b.".js" );
+				if( !$b ) {
+					continue;
+				}
+				$this->AddJSFile( "usercode/button_".$b.".js" );
 			}
 		}
 
@@ -464,7 +417,7 @@ class ChangePasswordPage extends RunnerPage
 		
 		$data = $this->cipherer->DecryptFetchedArray( $qResult->fetchAssoc() );
 		if( $data )
-			return secondsPassedFrom( $data["reset_date"] ) < 86400;
+			return secondsPassedFrom( $data[ ProjectSettings::getSecurityValue( 'dbProvider', 'resetDateField' ) ] ) < 86400;
 
 		return false;
 	}
@@ -486,5 +439,16 @@ class ChangePasswordPage extends RunnerPage
 		}
 		return parent::element2Item( $name );
 	}	
+
+	protected function buildJsTableSettings( $table, $pSet ) {
+		$settings = parent::buildJsTableSettings( $table, $pSet );
+		
+		if( $this->userPwdMessage ) {
+			$settings['msg_passwordError'] = $this->userPwdMessage;
+		}
+		
+		return $settings;
+	}
+
 }
 ?>

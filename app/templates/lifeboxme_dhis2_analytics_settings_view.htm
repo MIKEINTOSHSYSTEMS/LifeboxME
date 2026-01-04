@@ -1,7 +1,7 @@
 <!doctype html>
 <html  {$html_attrs}>
 	<head>
-				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+						<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{$pagetitle}</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -10,13 +10,9 @@
     <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
     <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
     <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
-    		<link REL="stylesheet" href="styles/default.css?{$wizardBuildKey}" type="text/css">
-	{BEGIN rtlCSS}
-	<link REL="stylesheet" href="styles/defaultRTL.css?{$wizardBuildKey}" type="text/css">
-	{END rtlCSS}
-	{BEGIN styleCSSFiles}
-	<link REL="stylesheet" href="{$stylepath}" type="text/css">
-	{END styleCSSFiles}
+    		{BEGIN styleCSSFiles}
+<link REL="stylesheet" href="{$stylepath}" type="text/css">
+{END styleCSSFiles}
 			
 	</head>
 
@@ -50,7 +46,7 @@
 
 			<div class="clearfix " data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell data-itemid="expand_button" {$item_expand_button} data-topcell-item-type="expand_button" >
 				<span data-itemtype="expand_button" data-itemid="expand_button" {$item_expand_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Expand" class="btn btn-link   
+	<a type="button" title="{mlang_message EXPAND}" class="btn btn-link   
 	" href="#" >
 					<span class="glyphicon glyphicon-triangle-right"></span>
 										</a>
@@ -218,7 +214,7 @@
 							 
 				<span class="navbar-form  navbar-header" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="expand_menu_button" {$item_expand_menu_button} data-topcell-item-type="expand_menu_button" >
 				<span data-itemtype="expand_menu_button" data-itemid="expand_menu_button" {$item_expand_menu_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Show menu" class="btn-link   
+	<a type="button" title="{mlang_message SHOW_MENU}" class="btn-link   
 	 glyphicon glyphicon-menu-hamburger" href="#" >		
 				
 								</a>
@@ -227,7 +223,7 @@
 		 
 				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="collapse_button" {$item_collapse_button} data-topcell-item-type="collapse_button" >
 				<span data-itemtype="collapse_button" data-itemid="collapse_button" {$item_collapse_button} data-pageid="{$pageid}" data-small data-button-item>
-	<a type="button" title="Collapse" class="btn-link   
+	<a type="button" title="{mlang_message COLLAPSE}" class="btn-link   
 	 glyphicon glyphicon-triangle-left" href="#" >		
 				
 								</a>
@@ -240,7 +236,7 @@
 <span data-itemtype="loginform_login" data-itemid="loginform_login" {$item_loginform_login} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-primary   
 	" href="#" {$guestloginlink_attrs} >
-							Login			</a>
+							{mlang_message LOGIN}			</a>
 </span>
 {END guestloginbutton}
 			</span>
@@ -251,14 +247,14 @@
 	<span class="dropdown ">
 		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
 			{BEGIN userbutton_icon}							<span class="glyphicon glyphicon-user"></span>
-						{END userbutton_icon}{$userbutton_image}			{$username}			<span class="caret"></span>
+						{END userbutton_icon}{$userbutton_image}			{$mlp_push}{$mlparam username var username}{$mltext %username%}{$mlp_pop}			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu">
 							{BEGIN userinfo_link}
 	<li data-itemtype="userinfo_link" data-itemid="userinfo_link" {$item_userinfo_link} data-pageid="{$pageid}" data-small >
 				<a  href="userinfo.php"  title="" >
 				
-		User Profile		
+		{mlang_message USERINFO}		
 		</a>
 	</li>
 {END userinfo_link}
@@ -266,7 +262,7 @@
 	<li data-itemtype="logout_link" data-itemid="logout_link" {$item_logout_link} data-pageid="{$pageid}" data-small >
 				<a  href="#" {$logoutlink_attrs}  title="" >
 				
-		Log out		
+		{mlang_message LOG_OUT}		
 		</a>
 	</li>
 {END logoutbutton}
@@ -274,7 +270,7 @@
 	<li data-itemtype="adminarea_link" data-itemid="adminarea_link" {$item_adminarea_link} data-pageid="{$pageid}" data-small >
 				<a  href="admin_rights_list.php"  title="" >
 				
-		Admin Area		
+		{mlang_message AA_ADMINAREA}		
 		</a>
 	</li>
 {END adminarea_link}
@@ -282,7 +278,7 @@
 	<li data-itemtype="changepassword_link" data-itemid="changepassword_link" {$item_changepassword_link} data-pageid="{$pageid}" data-small >
 				<a  href="changepwd.php" {$changepwdlink_attrs} id="changePasswordButton{$id}"  title="" >
 				
-		Change password		
+		{mlang_message CHANGE_PASSWORD}		
 		</a>
 	</li>
 {END changepwd_link}
@@ -337,7 +333,7 @@
 	
 ">
 		 
-		<span data-itemtype="text" data-itemid="text" {$item_text} data-pageid="{$pageid}" data-small > 
+		<span data-itemtype="text" data-itemid="text" {$item_text} data-pageid="{$pageid}" > 
 	<iframe src="/api/dhis2/analytics/fetch_analytics.php"    style="width: 100%; height: 200vh; border: none;"    title="DHIS2 Data Items"></iframe><style>    iframe {        max-width: 100%;        min-width: 320px;        /* Minimum width for mobile devices */        height: 80vh;        /* Adjust height as per your needs */    }    @media (max-width: 600px) {        iframe {            height: 60vh;            /* Adjust for smaller screens */        }    }    @media (min-width: 600px) {        iframe {            height: 80vh;            /* Adjust for larger screens */        }    }</style></span>
 		</div>					</div>
 			</div>		
@@ -385,18 +381,19 @@
 {BEGIN id_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_id}  r-vertical-field" data-fieldname="id" data-signal-error-for="id{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="id" data-fieldname="id" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_id}  r-vertical-field" 
+	data-signal-error-for="id{$id}" {$required_attr_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="id" data-fieldname="id" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_id}">
-		
-		{BEGIN id_label}{$label public_lifeboxme_dhis2_analytics_settings id }{END id_label}
+	<label class="r-edit-label control-label {$id_label_class}" for="{$labelfor_id}">
+		{BEGIN id_label}
+			{$id_forward_control}
+			{$label public_lifeboxme_dhis2_analytics_settings id }			{END id_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$id_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END id_fieldblock}
@@ -404,18 +401,19 @@
 {BEGIN name_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_name}  r-vertical-field" data-fieldname="name" data-signal-error-for="name{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="name" data-fieldname="name" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_name}  r-vertical-field" 
+	data-signal-error-for="name{$id}" {$required_attr_name}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="name" data-fieldname="name" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_name}">
-		
-		{BEGIN name_label}{$label public_lifeboxme_dhis2_analytics_settings name }{END name_label}
+	<label class="r-edit-label control-label {$name_label_class}" for="{$labelfor_name}">
+		{BEGIN name_label}
+			{$name_forward_control}
+			{$label public_lifeboxme_dhis2_analytics_settings name }			{END name_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$name_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END name_fieldblock}
@@ -423,18 +421,19 @@
 {BEGIN dx_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_dx}  r-vertical-field" data-fieldname="dx" data-signal-error-for="dx{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="dx" data-fieldname="dx" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_dx}  r-vertical-field" 
+	data-signal-error-for="dx{$id}" {$required_attr_dx}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="dx" data-fieldname="dx" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_dx}">
-		
-		{BEGIN dx_label}{$label public_lifeboxme_dhis2_analytics_settings dx }{END dx_label}
+	<label class="r-edit-label control-label {$dx_label_class}" for="{$labelfor_dx}">
+		{BEGIN dx_label}
+			{$dx_forward_control}
+			{$label public_lifeboxme_dhis2_analytics_settings dx }			{END dx_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$dx_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END dx_fieldblock}
@@ -442,18 +441,19 @@
 {BEGIN ou_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_ou}  r-vertical-field" data-fieldname="ou" data-signal-error-for="ou{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="ou" data-fieldname="ou" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_ou}  r-vertical-field" 
+	data-signal-error-for="ou{$id}" {$required_attr_ou}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="ou" data-fieldname="ou" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_ou}">
-		
-		{BEGIN ou_label}{$label public_lifeboxme_dhis2_analytics_settings ou }{END ou_label}
+	<label class="r-edit-label control-label {$ou_label_class}" for="{$labelfor_ou}">
+		{BEGIN ou_label}
+			{$ou_forward_control}
+			{$label public_lifeboxme_dhis2_analytics_settings ou }			{END ou_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$ou_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END ou_fieldblock}
@@ -461,18 +461,19 @@
 {BEGIN pe_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_pe}  r-vertical-field" data-fieldname="pe" data-signal-error-for="pe{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="pe" data-fieldname="pe" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_pe}  r-vertical-field" 
+	data-signal-error-for="pe{$id}" {$required_attr_pe}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="pe" data-fieldname="pe" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_pe}">
-		
-		{BEGIN pe_label}{$label public_lifeboxme_dhis2_analytics_settings pe }{END pe_label}
+	<label class="r-edit-label control-label {$pe_label_class}" for="{$labelfor_pe}">
+		{BEGIN pe_label}
+			{$pe_forward_control}
+			{$label public_lifeboxme_dhis2_analytics_settings pe }			{END pe_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$pe_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END pe_fieldblock}
@@ -480,18 +481,19 @@
 {BEGIN display_property_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_display_property}  r-vertical-field" data-fieldname="display_property" data-signal-error-for="display_property{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="display_property" data-fieldname="display_property" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_display_property}  r-vertical-field" 
+	data-signal-error-for="display_property{$id}" {$required_attr_display_property}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="display_property" data-fieldname="display_property" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_display_property}">
-		
-		{BEGIN display_property_label}{$label public_lifeboxme_dhis2_analytics_settings display_property }{END display_property_label}
+	<label class="r-edit-label control-label {$display_property_label_class}" for="{$labelfor_display_property}">
+		{BEGIN display_property_label}
+			{$display_property_forward_control}
+			{$label public_lifeboxme_dhis2_analytics_settings display_property }			{END display_property_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$display_property_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END display_property_fieldblock}
@@ -499,18 +501,19 @@
 {BEGIN include_num_den_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_include_num_den}  r-vertical-field" data-fieldname="include_num_den" data-signal-error-for="include_num_den{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="include_num_den" data-fieldname="include_num_den" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_include_num_den}  r-vertical-field" 
+	data-signal-error-for="include_num_den{$id}" {$required_attr_include_num_den}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="include_num_den" data-fieldname="include_num_den" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_include_num_den}">
-		
-		{BEGIN include_num_den_label}{$label public_lifeboxme_dhis2_analytics_settings include_num_den }{END include_num_den_label}
+	<label class="r-edit-label control-label {$include_num_den_label_class}" for="{$labelfor_include_num_den}">
+		{BEGIN include_num_den_label}
+			{$include_num_den_forward_control}
+			{$label public_lifeboxme_dhis2_analytics_settings include_num_den }			{END include_num_den_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$include_num_den_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END include_num_den_fieldblock}
@@ -518,18 +521,19 @@
 {BEGIN skip_meta_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_skip_meta}  r-vertical-field" data-fieldname="skip_meta" data-signal-error-for="skip_meta{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="skip_meta" data-fieldname="skip_meta" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_skip_meta}  r-vertical-field" 
+	data-signal-error-for="skip_meta{$id}" {$required_attr_skip_meta}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="skip_meta" data-fieldname="skip_meta" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_skip_meta}">
-		
-		{BEGIN skip_meta_label}{$label public_lifeboxme_dhis2_analytics_settings skip_meta }{END skip_meta_label}
+	<label class="r-edit-label control-label {$skip_meta_label_class}" for="{$labelfor_skip_meta}">
+		{BEGIN skip_meta_label}
+			{$skip_meta_forward_control}
+			{$label public_lifeboxme_dhis2_analytics_settings skip_meta }			{END skip_meta_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$skip_meta_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END skip_meta_fieldblock}
@@ -537,18 +541,19 @@
 {BEGIN skip_data_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_skip_data}  r-vertical-field" data-fieldname="skip_data" data-signal-error-for="skip_data{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="skip_data" data-fieldname="skip_data" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_skip_data}  r-vertical-field" 
+	data-signal-error-for="skip_data{$id}" {$required_attr_skip_data}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="skip_data" data-fieldname="skip_data" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_skip_data}">
-		
-		{BEGIN skip_data_label}{$label public_lifeboxme_dhis2_analytics_settings skip_data }{END skip_data_label}
+	<label class="r-edit-label control-label {$skip_data_label_class}" for="{$labelfor_skip_data}">
+		{BEGIN skip_data_label}
+			{$skip_data_forward_control}
+			{$label public_lifeboxme_dhis2_analytics_settings skip_data }			{END skip_data_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$skip_data_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END skip_data_fieldblock}
@@ -556,18 +561,19 @@
 {BEGIN paging_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_paging}  r-vertical-field" data-fieldname="paging" data-signal-error-for="paging{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="paging" data-fieldname="paging" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_paging}  r-vertical-field" 
+	data-signal-error-for="paging{$id}" {$required_attr_paging}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="paging" data-fieldname="paging" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_paging}">
-		
-		{BEGIN paging_label}{$label public_lifeboxme_dhis2_analytics_settings paging }{END paging_label}
+	<label class="r-edit-label control-label {$paging_label_class}" for="{$labelfor_paging}">
+		{BEGIN paging_label}
+			{$paging_forward_control}
+			{$label public_lifeboxme_dhis2_analytics_settings paging }			{END paging_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$paging_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END paging_fieldblock}
@@ -575,18 +581,19 @@
 {BEGIN page_size_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_page_size}  r-vertical-field" data-fieldname="page_size" data-signal-error-for="page_size{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="page_size" data-fieldname="page_size" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_page_size}  r-vertical-field" 
+	data-signal-error-for="page_size{$id}" {$required_attr_page_size}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="page_size" data-fieldname="page_size" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_page_size}">
-		
-		{BEGIN page_size_label}{$label public_lifeboxme_dhis2_analytics_settings page_size }{END page_size_label}
+	<label class="r-edit-label control-label {$page_size_label_class}" for="{$labelfor_page_size}">
+		{BEGIN page_size_label}
+			{$page_size_forward_control}
+			{$label public_lifeboxme_dhis2_analytics_settings page_size }			{END page_size_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$page_size_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END page_size_fieldblock}
@@ -594,18 +601,19 @@
 {BEGIN created_at_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_created_at}  r-vertical-field" data-fieldname="created_at" data-signal-error-for="created_at{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="created_at" data-fieldname="created_at" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_created_at}  r-vertical-field" 
+	data-signal-error-for="created_at{$id}" {$required_attr_created_at}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="created_at" data-fieldname="created_at" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_created_at}">
-		
-		{BEGIN created_at_label}{$label public_lifeboxme_dhis2_analytics_settings created_at }{END created_at_label}
+	<label class="r-edit-label control-label {$created_at_label_class}" for="{$labelfor_created_at}">
+		{BEGIN created_at_label}
+			{$created_at_forward_control}
+			{$label public_lifeboxme_dhis2_analytics_settings created_at }			{END created_at_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$created_at_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END created_at_fieldblock}
@@ -613,18 +621,19 @@
 {BEGIN updated_at_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_updated_at}  r-vertical-field" data-fieldname="updated_at" data-signal-error-for="updated_at{$id}" data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="updated_at" data-fieldname="updated_at" data-compact >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_updated_at}  r-vertical-field" 
+	data-signal-error-for="updated_at{$id}" {$required_attr_updated_at}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="updated_at" data-fieldname="updated_at" >
 
-	
-	<label class="col-md-offset-3 col-md-6" for="{$labelfor_updated_at}">
-		
-		{BEGIN updated_at_label}{$label public_lifeboxme_dhis2_analytics_settings updated_at }{END updated_at_label}
+	<label class="r-edit-label control-label {$updated_at_label_class}" for="{$labelfor_updated_at}">
+		{BEGIN updated_at_label}
+			{$updated_at_forward_control}
+			{$label public_lifeboxme_dhis2_analytics_settings updated_at }			{END updated_at_label}
+		<span class="icon-required"></span>
 	</label>
-	<div class="col-md-offset-3 col-md-6" >
+	<div class="r-edit-field">
 		{$updated_at_value}	</div>
-
-		
-</div>
+	</div>
 
 
 {END updated_at_fieldblock}
@@ -651,7 +660,7 @@
 <span data-itemtype="view_back_list" data-itemid="view_back_list" {$item_view_back_list} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-default   
 	" {$backbutton_attrs} >
-							Back to list			</a>
+							{mlang_message BACK_TO_LIST}			</a>
 </span>
 {END back_button}
 	 
@@ -659,7 +668,7 @@
 <span data-itemtype="view_close" data-itemid="view_close" {$item_view_close} data-pageid="{$pageid}" data-small data-button-item>
 	<a type="button" title="" class="btn btn-default   
 	" href="#" {$closebutton_attrs} >
-							Close window			</a>
+							{mlang_message CLOSE_WINDOW}			</a>
 </span>
 {END close_button}
 		</div>			 
@@ -680,7 +689,7 @@
 	<li data-itemtype="view_edit" data-itemid="view_edit" {$item_view_edit} data-pageid="{$pageid}" data-small >
 				<a  href="lifeboxme_dhis2_analytics_settings_edit.php?{$editlink}" {$edit_page_button_attrs}  title="" >
 				
-		Edit		
+		{mlang_message EDIT}		
 		</a>
 	</li>
 {END edit_page_button}

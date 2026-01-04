@@ -93,13 +93,9 @@ class ListPage_Lookup extends ListPage_Embed
 		$this->showAddInPopup = true;
 		
 		$this->permis[ $this->tName ]["search"] = 1;
-		$this->jsSettings['tableSettings'][$this->tName]['permissions'] = $this->permis[$this->tName];
 		
 		$this->showSearchPanel = false;
 		
-		/* // turn off ajax suggest
-		$this->jsSettings["tableSettings"][ $this->tName ]["ajaxSuggest"] = false;
-		$this->isUseAjaxSuggest = false;*/
 	}
 
 	/**
@@ -125,7 +121,7 @@ class ListPage_Lookup extends ListPage_Embed
 
 		if( $this->mainPSet->getCustomDisplay( $this->mainField ) )
 		{
-			$this->dispFieldAlias = generateAlias(); /*GetGlobalData("dispFieldAlias", "rrdf1")*/;
+			$this->dispFieldAlias = generateAlias();
 
 			$this->customField = $this->linkField;
 		}
@@ -282,7 +278,7 @@ class ListPage_Lookup extends ListPage_Embed
 	 * build simple search control
 	 */
 	protected function assignSearchControl() {
-		$searchforAttrs = 'placeholder="'. "search".'"';
+		$searchforAttrs = 'placeholder="'. mlang_message('SEARCH_TIP').'"';
 		
 		$params = $this->searchClauseObj->getSearchGlobalParams();
 		if( $this->searchClauseObj->searchStarted() ) {
@@ -347,8 +343,17 @@ class ListPage_Lookup extends ListPage_Embed
 
 				$dispVal = $viewContainer->getControl( $this->mainField )->getTextValue( $ctrlData );
 			}
-
-			$this->lookupValuesArr[] = array('linkVal' => $data[$this->linkField], 'dispVal' => $dispVal);
+			
+			if( $this->mainPSet->isAllowToEdit($this->mainField) ) {
+				$keys = array();
+				foreach( $this->pSetEdit->getTableKeys() as $kf ) {
+					$keys[] = $data[ $kf ];
+				}
+				$this->lookupValuesArr[] = array('linkVal' => $data[$this->linkField], 'dispVal' => $dispVal, 'keys'=> $keys);
+			
+			} else {
+				$this->lookupValuesArr[] = array('linkVal' => $data[$this->linkField], 'dispVal' => $dispVal);
+			}
 		}
 	}
 
@@ -413,7 +418,7 @@ class ListPage_Lookup extends ListPage_Embed
 		$this->xt->assign("footer",false);
 		// popup header shows PD items only
 		
-		$returnJSON["headerCont"] = '<h3 data-itemtype="lookupheader" data-itemid="lookupheader">' . $this->getPageTitle( $this->pageType, GoodFieldName($this->tName) ) . "</h3>";
+		$returnJSON["headerCont"] = '<h3 data-itemtype="lookupheader" data-itemid="lookupheader">' . $this->getPageTitle( $this->pageType, $this->tName ) . "</h3>";
 		
 		$superTopHtml = $this->xt->fetch_loaded("supertop_block");
 		$footerHtml = $this->xt->fetch_loaded("below-grid_block");
@@ -521,6 +526,11 @@ class ListPage_Lookup extends ListPage_Embed
 		}
 
 		return parent::getSecurityCondition();
+	}
+	protected function buildJsTableSettings( $table, $pSet ) {
+		$settings = parent::buildJsTableSettings( $table, $pSet );
+		$settings['permissions'] = $this->permis[$this->tName];
+		return $settings;
 	}
 }
 ?>

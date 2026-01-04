@@ -429,7 +429,7 @@ class FilterValuesList extends FilterControl
 		if( !$this->dependent || is_null($parentFiltersData) )
 			return '';
 
-		return ' data-parent-filters-values="'.runner_htmlspecialchars( my_json_encode( $parentFiltersData ) ).'" ';
+		return ' data-parent-filters-values="'.runner_htmlspecialchars( runner_json_encode( $parentFiltersData ) ).'" ';
 	}
 
 	/**
@@ -663,7 +663,7 @@ class FilterValuesList extends FilterControl
 				}
 
 
-				$mFilterBlocks[ $key ]["show_n_more_".$dgName] = str_replace( "%n%", $visibleItemsCounter - $numberOfdItemsToShow, "Show %n% more" );
+				$mFilterBlocks[ $key ]["show_n_more_".$dgName] = str_replace( "%n%", $visibleItemsCounter - $numberOfdItemsToShow, mlang_message('SHOW_N_MORE') );
 				$mFilterBlocks[ $key ][ $showMoreBlockName ] = $numberOfdItemsToShow && $numberOfdItemsToShow < $visibleItemsCounter;
 			}
 		}

@@ -31,7 +31,7 @@ class MySQLConnection extends Connection
 		$this->host = $params["connInfo"][0];  //strConnectInfo1
 		$this->user = $params["connInfo"][1];  //strConnectInfo2
 		$this->pwd = $params["connInfo"][2];   //strConnectInfo3
-		$this->port = $params["connInfo"][3]; //strConnectInfo4
+	$this->port = $params["connInfo"][3]; //strConnectInfo4
 		$this->sys_dbname = $params["connInfo"][4]; //strConnectInfo5
 	}
 
@@ -51,18 +51,13 @@ class MySQLConnection extends Connection
 	 */
 	public function connect()
 	{
-		global $cMySQLNames;
-
 		if( !$this->port )
 			$this->port = 3306;
 		$hosts = array();
 		//	fix IPv6 slow connection issue
 		if( $this->host == "localhost" )
 		{
-			if( $_SESSION["myqsladdress"] )
-				$hosts[] = $_SESSION["myqsladdress"];
-			else
-				$hosts[] = "127.0.0.1";
+			$hosts[] = "127.0.0.1";
 		}
 		$hosts[] = $this->host;
 
@@ -71,23 +66,21 @@ class MySQLConnection extends Connection
 			$this->conn = @mysql_connect($h.":".$this->port, $this->user, $this->pwd);
 			if( $this->conn )
 			{
-				if( $this->host == "localhost" )
-					$_SESSION["myqsladdress"] = $h;
 				break;
 			}
 		}
 
 		if (!$this->conn || !mysql_select_db($this->sys_dbname, $this->conn))
 		{
-			unset( $_SESSION["myqsladdress"] );
 			$this->triggerError( mysql_error() );
 		}
 
-		if( $cMySQLNames != "" )
-			@mysql_query("set names ".$cMySQLNames);
+		$mysqlCharset = ProjectSettings::getProjectValue( 'mysqlCharsetName' );
+		if( $mysqlCharset != "" )
+			@mysql_query( "set names " . $mysqlCharset, $this->conn );
 
 		$this->mysqlVersion = "4";
-		$res = @mysql_query("SHOW VARIABLES LIKE 'version'", $this->conn);
+		$res = @mysql_query( "SHOW VARIABLES LIKE 'version'", $this->conn );
 		if( $row = @mysql_fetch_array($res, MYSQL_ASSOC) )
 			$this->mysqlVersion = $row["Value"];
 

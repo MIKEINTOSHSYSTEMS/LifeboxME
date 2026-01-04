@@ -30,7 +30,7 @@ class ChartPage_Master extends ChartPage
 		$this->xt->assign("chart_block", true);		
 		$this->assignChartElement();
 
-		$this->xt->assign("pagetitlelabel", $this->getPageTitle( $this->pageType, GoodFieldName($this->tName), $this->masterRecordData ));	
+		$this->xt->assign("pagetitlelabel", $this->getPageTitle( $this->pageType, $this->tName, $this->masterRecordData ));	
 
 		$tKeys = $this->pSet->getTableKeys();
 		$keylink = "";
@@ -49,11 +49,9 @@ class ChartPage_Master extends ChartPage
 			$this->xt->assign( GoodFieldName( $f ) . "_class", $fieldClassStr); // add class for field header as field value
 		}
 			
-		if( $this->pageLayout )
+		if( $this->pageLayout ) {
 			$this->xt->assign("pageattrs", 'class="'.$this->pageLayout->style." page-".$this->pageLayout->name.'"');
-		
-		if( $this->pageLayout )
-			$this->xt->assign("pageattrs", 'class="'.$this->pageLayout->style." page-".$this->pageLayout->name.'"');
+		}
 	}
 
 	public function showMaster( $params ) 

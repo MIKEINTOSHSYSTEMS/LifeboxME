@@ -1,5 +1,25 @@
 <?php
-
+// Base class for DB field classes. The class implements interface and several methods for
+// simple type fields (numbers and strings for example).
+// Objects are created using 'create' fabric method.
+// Main properties of a field include:
+//  - Field type. A subclass for each type is present.
+//  - Interval. Has the same meaning as in wizard.
+//  - Name. The same as is in the original SQL report query.
+//  - Alias. Internal alias for the field in generated sql query.
+//  It may be the same for many fields in a query.
+//  - Start. Sequential field number in a query. It is used together with alias.
+//  One field may generate several entries in select clause of a query.
+//
+//  The following classes are implemented:
+//
+//      ReportField
+//      ^    ^    ^
+//      |    |    +-- ReportCharField
+//      |    |
+//      |    +-- ReportNumericField
+//      |
+//      +-- ReportDateField
 
 function create_reportfield($name, $type, $interval, $alias, $table, $connection, $cipherer)
 {
@@ -56,22 +76,26 @@ class ReportField
 	}
 
 
-	
+	// Returns formatted or not formatted group header. Must be overriden in a child class.
 	function getFieldName($fieldValue, $data = null, $pageObject = null ) { die; }
 
-	
+	// Returns group id from row of query resultset.
+	// Group id is passed to getWhereSql() later.
+	// There is no limitations on type of returned value.
+	// It may be scalar or PHP array.
 	function getGroup($data)
 	{
 		return $data[$this->alias()];
 	}
 
-	
+	// Helper function which returns key for data row.
 	function getKey($data)
 	{
 		return $data[$this->alias()];
 	}
 
-	
+	// Setter for 'start' property of the field.
+	// Returns start value for next field in a query.
 	function setStart($start)
 	{
 		$this->_start = $start;
@@ -79,19 +103,19 @@ class ReportField
 		return $start + 1;
 	}
 
-	
+	// Name property getter.
 	function name()
 	{
 		return $this->_name;
 	}
 
-	
+	// Alias property getter. Start number is automatically added to alias property.
 	function alias()
 	{
 		return $this->_alias . $this->_start;
 	}
 
-	
+	// Returns true if getFieldName() function returns formatted value.
 	function overrideFormat()
 	{
 		return false;

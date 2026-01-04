@@ -48,7 +48,7 @@ class PrintPage_Master extends PrintPage
 		{
 			$pageTypeTitle = "masterprint";
 		}
-		$this->xt->assign("pagetitlelabel", $this->getPageTitle( $pageTypeTitle, GoodFieldName($this->tName), $this->masterRecordData ));	
+		$this->xt->assign("pagetitlelabel", $this->getPageTitle( $pageTypeTitle, $this->tName, $this->masterRecordData ));	
 
 		$tKeys = $this->pSet->getTableKeys();
 		$keylink = "";

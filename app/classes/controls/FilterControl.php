@@ -541,7 +541,7 @@ class FilterControl
 	protected function getDelButtonHtml($gfName, $id, $deleteValue) 
 	{
 		$deleteValue = runner_htmlspecialchars($deleteValue);
-		$html = '<a class="delFilterCtrlButt_'.$gfName.'_'.$id.' delete-button" data-delete="'.$deleteValue.'" data-icon="remove" href="#"></a>';
+		$html = '<a class="delFilterCtrlButt_'.$gfName.'_'.$id.' delete-button fa fa-remove" data-delete="'.$deleteValue.'" href="#"></a>';
 		return $html;
 	}
 	

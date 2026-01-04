@@ -52,11 +52,14 @@ class ViewHyperlinkField extends ViewControl
 		// display word
 		if($type == 1)
 		{
+			//	display multilang string
+			$title = GetMLString( $this->getContainer()->pSet->getLinkDisplayText( $this->field ) );
+			/*
 			if($this->getContainer()->pSet->getLinkWordNameType($this->field) === "Text")
 				$title = $this->getContainer()->pSet->getLinkWordText($this->field);
 			else
 				$title = GetCustomLabel($this->getContainer()->pSet->getLinkWordText($this->field));
-			
+			*/
 			if($isExactMatched)
 				$title = $this->addHighlightingSpan($title);
 		}
@@ -138,7 +141,7 @@ class ViewHyperlinkField extends ViewControl
 		if ( !$linkData )
 			return "''";
 
-		return my_json_encode( array(
+		return runner_json_encode( array(
 			"text" => $linkData['title'],
 			"link" => $linkData['link']
 		) );

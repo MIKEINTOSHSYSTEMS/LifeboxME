@@ -32,10 +32,10 @@ class OracleConnection extends Connection
 	 */
 	public function connect()
 	{
-##if @BUILDER.strCharset == "utf-8"##
-		if( !getenv( "NLS_LANG" ) )
-			putenv( "NLS_LANG=AMERICAN_AMERICA.UTF8");
-##endif##
+		if( ProjectSettings::getProjectValue( 'charset' ) === 'utf-8' ) {
+			if( !getenv( "NLS_LANG" ) )
+				putenv( "NLS_LANG=AMERICAN_AMERICA.UTF8");
+		}
 		global $useUTF8;
 
 		$this->conn = @oci_pconnect($this->user, $this->pwd, $this->sid, $useUTF8 ? 'AL32UTF8' : '' );

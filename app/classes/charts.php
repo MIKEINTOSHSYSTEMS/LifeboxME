@@ -5,25 +5,21 @@ class Chart
 	protected $footer;
 
 	protected $y_axis_label;
-
 	protected $strLabel;
 
 	protected $arrDataLabels = array();
 	protected $arrDataSeries = array();
 
-	protected $chrt_array = array();
 	public $webchart;
 	protected $cname;
 
-	protected $table_type;
+	protected $tableType;
 
 	protected $cipherer = null;
 	protected $pSet = null;
 	protected $searchClauseObj = null;
 
 	protected $sessionPrefix = "";
-
-	protected $detailTablesData = array();
 
 	protected $pageId;
 
@@ -92,55 +88,40 @@ class Chart
 	protected $dataSource = null;
 	protected $tName = "";
 
+	protected $chartSettings;
 
-	function __construct( &$ch_array, $param )
-	{
-		global $strTableName;
+	protected $webChartColors = array();
 
+	function __construct( $param, &$chartSettings ) {
+		$this->chartSettings = $chartSettings;
+		
 		$this->webchart = $param["webchart"];
+		if( $this->webchart ) {
+			$this->webChartColors = $chartSettings["webColors"];
+		}
 
-		if( $this->webchart )
-			$this->chrt_array = Convert_Old_Chart($ch_array);
-		else
-			$this->chrt_array = $ch_array;
-
-		$this->tName = $this->chrt_array['tables'][0];
+		$this->tName = $param["tName"];
+		$this->tableType = $param["tableType"]; // db, project, custom
+		
+		$this->sessionPrefix = $param["tName"];
+		$this->pSet = new ProjectSettings( $this->tName, PAGE_CHART );
 
 		// #10461, $this->setConnection(); needs to be called after value is assigned to $this->webchart
 		$this->setConnection();
 
-		$this->pSet = new ProjectSettings( $this->tName, PAGE_CHART );
-		$this->showDetails = $param['showDetails'];
-		if( $this->showDetails )
-		{
-			$this->detailTablesData = $this->pSet->getDetailTablesArr();
-			for($i = 0; $i < count($this->detailTablesData); $i ++)
-			{
-				$strPerm = GetUserPermissions($this->detailTablesData[$i]['dDataSourceTable']);
-				if ( strpos($strPerm, "S") === false )
-					unset($this->detailTablesData[$i]);
-			}
-		}
 
-		$this->table_type = $this->chrt_array["table_type"];
-		if( !$this->table_type )
-			$this->table_type = "project";
-
-		if( $this->table_type == "project" ) {
+		if( $this->tableType == "project" ) {
 			//	project table
 			$this->dataSource = getDataSource( $this->tName, $this->pSet, $this->connection );
 		} else {
 			//	db-table-based webchart
-			$this->dataSource = getWebDataSource( $this->chrt_array );
+			$this->dataSource = getWebDataSource( $chartSettings["webSql"], $this->tableType, $this->tName );
 		}
 
+		$this->showDetails = $param["showDetails"];
+		
 		$this->pageId = $param["pageId"];
-		$this->chrt_array["appearance"]["autoupdate"] = false;
-
-
 		$this->cname = $param["cname"];
-
-		$this->sessionPrefix = $this->chrt_array['tables'][0];
 
 		$this->masterTable = $param["masterTable"];
 		$this->masterKeysReq = $param["masterKeysReq"];
@@ -149,8 +130,7 @@ class Chart
 		$this->chartPreview = $param["chartPreview"];
 		$this->dashChart = $param["dashChart"];
 
-		if( $this->dashChart )
-		{
+		if( $this->dashChart ) {
 			$this->dashTName = $param["dashTName"];
 			$this->dashElementName = $param["dashElementName"];
 			$this->sessionPrefix = $this->dashTName."_".$this->sessionPrefix;
@@ -163,96 +143,50 @@ class Chart
 			RunnerContext::pushSearchContext( $this->searchClauseObj );
 
 		if( $this->isProjectDB() ) {
-			$this->cipherer = new RunnerCipherer( $this->tName );	
+			$this->cipherer = new RunnerCipherer( $this->tName );
 		}
 
 		$this->setBasicChartProp();
 
-		if( tableEventExists("UpdateChartSettings", $strTableName) )
-		{
-			$eventObj = getEventObject( $strTableName );
+		$eventObj = getEventObject( $this->pSet );
+		if( $eventObj->exists( 'UpdateChartSettings' ) ) {
 			$eventObj->UpdateChartSettings( $this );
-		}
-	}
-
-	/**
-	 * @param Array params
-	 */
-	protected function setSpecParams( $params )
-	{
-		if( $params['name'] == "" )
-			return;
-
-		if( $this->table_type != "db" )
-			$this->arrDataSeries[] = $params['agr_func'] ? $params['label'] : $params['name'];
-		else {
-			$this->arrDataSeries[] = $params['table']."_".$params['name'];
-//			$this->arrDataSeries[] = $params['name'];
-		}
-	}
-
-	/**
-	 * @param Array params
-	 * @param String gTableName
-	 */
-	protected function setDataLabels( $params, $gTableName )
-	{
-		$chartType = $this->chrt_array["chart_type"]["type"];
-		if( $this->table_type == "project" && !$this->webchart )
-		{
-			if( $chartType != "candlestick" && $chartType != "ohlc" )
-				$this->arrDataLabels[] = GetFieldLabel( $gTableName, GoodFieldName($params['name']) );
-			else
-				$this->arrDataLabels[] = GetFieldLabel( $gTableName, GoodFieldName($params['ohlcOpen']) ) ;
-		}
-		else
-		{
-			if( !$params['label'] )
-			{
-				if( $chartType != "candlestick" && $chartType != "ohlc" )
-					$this->arrDataLabels[] = $params['name'];
-				else
-					$this->arrDataLabels[] = $params['ohlcOpen'];
-			}
-			else
-				$this->arrDataLabels[] = $params['label'];
 		}
 	}
 
 	/**
 	 *
 	 */
-	protected function setBasicChartProp()
-	{
-		$this->header = $this->chrt_array['appearance']['head'];
-		$this->header = $this->header ? $this->header : '';
+	protected function setBasicChartProp() {
+		$this->header = GetMLString( $this->chartSettings['header'] );
+		$this->footer = GetMLString( $this->chartSettings['footer'] );
 
-		$this->footer = $this->chrt_array['appearance']['foot'];
-		$this->footer = $this->footer ? $this->footer : '';
+		$this->arrDataSeries = $this->chartSettings["dataSeries"];
 
-		for ( $i = 0; $i<count($this->chrt_array['parameters']) - 1; $i++)
-		{
-			$this->setSpecParams( $this->chrt_array['parameters'][$i] );
-			$this->setDataLabels( $this->chrt_array['parameters'][$i], GoodFieldName( $this->chrt_array['tables'][0] ) );
-		}
-
-		if( $this->chrt_array["chart_type"]["type"] != "gauge" )
-		{
-			$chartParams = $this->chrt_array['parameters'];
-			$params = $chartParams[ count($chartParams) - 1 ];
-
-			if( $this->table_type != "db" )
-				$this->strLabel = $params['name'];
-			else {
-//				$this->strLabel = $params['name'];
-				$this->strLabel = $params['agr_func'] ? $params['agr_func']."_".$params['table']."_".$params['name']: $params['table']."_".$params['name'];
+		foreach( $this->arrDataSeries as $series ) {
+			if( !$this->webchart ) {
+				$fieldName = $series["dataField"];
+				if( $this->chartSettings["type"] == "Candle" || $this->chartSettings["type"] == "OHLC" )
+					$fieldName = $series["open"];
+				
+				$this->arrDataLabels[] = GetFieldLabel( GoodFieldName( $this->tName ), GoodFieldName( $fieldName ) );
+			} else {
+				// add webchart series settings
+				if(  $series["label"] )
+					$this->arrDataLabels[] = $series["label"];
+				
+				if( $this->chartSettings["type"] == "Candle" || $this->chartSettings["type"] == "OHLC" )
+					$fieldName = $series["open"];
 			}
-		}
+		}		
+		
+		$this->strLabel = $this->chartSettings["labelField"]; // GetFieldLabel?
 
-		if( count( $this->arrDataLabels ) == 1 )
+		if( count( $this->arrDataLabels ) == 1 ) {
 			$this->y_axis_label = $this->arrDataLabels[0];
-		else
-			$this->y_axis_label = $this->chrt_array['appearance']['y_axis_label'];
+		} else {
+			$this->y_axis_label = GetMLString( $this->chartSettings["yAxisLabel"] );
+		}
 	}
 
 
@@ -260,13 +194,14 @@ class Chart
 		if( $this->dashChart )
 			return null;
 
-		$detailKeysByM = $this->pSet->getDetailKeysByMasterTable( $this->masterTable );
-		if( !$detailKeysByM )
+		$detailKeys = $this->pSet->getMasterKeys( $this->masterTable );
+		if( !$detailKeys['detailsKeys'] )
 			return null;
 
 		$conditions = array();
-		for( $i = 0; $i < count( $detailKeysByM ); ++$i ) {
-			$conditions[] = DataCondition::FieldEquals( $detailKeysByM[ $i ], $this->masterKeysReq[ $i + 1 ] );
+
+		foreach( $detailKeys['detailsKeys'] as $i => $field ) {
+			$conditions[] = DataCondition::FieldEquals( $field, $this->masterKeysReq[ $i + 1 ] );
 		}
 
 		return DataCondition::_And( $conditions );
@@ -329,8 +264,8 @@ class Chart
 		$series = $this->pSet->chartSeries();
 		foreach( $series as $s ) {
 			$totals[] = array(
-				"alias" => $s["field"],
-				"field" => $s["field"],
+				"alias" => $s["dataField"],
+				"field" => $s["dataField"],
 				"total" => strtolower( $s["total"] )
 			);
 		}
@@ -377,225 +312,19 @@ class Chart
 	{
 		if( !$this->webchart )
 			return true;
-
-		if("public.antibiotics" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.case_antibiotics" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.clean_cut_implementations" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.countries" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.device_distributions" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.diagnoses" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.facilities" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.follow_ups" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.languages" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lifebox_staff" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.partners" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.procedures" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.regions" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.surgical_cases" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.trainers" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.training_courses" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.training_languages" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.training_leads" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.training_partners" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.training_sessions" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.training_trainers" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.ward_antibiotics" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.ward_rounds" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.clean_cut_implementation_summary_view" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.device_distribution_summary_view" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.surgical_case_summary_view" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.training_summary_view" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.programs" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.training_approaches" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.training_types" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.quarters" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.participant_role" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.sex" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.training_participants" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.venues" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.training_attendance" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.participant_attendance_detail" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.participant_attendance_summary" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.training_participation" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.daily_attendance_view" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.users" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lifeboxme_ugrights" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lifeboxme_ugmembers" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.users" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lifeboxme__audit" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lifeboxme__locking" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.months" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.devices" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.payment_methods" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.transaction_types" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.donors" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.device_distribution_log" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.device_inventory_changes" == $this->chrt_array['tables'][0])
-			return true;
-		if("" == $this->chrt_array['tables'][0])
-			return true;
-		if("" == $this->chrt_array['tables'][0])
-			return true;
-		if("" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lifeboxme_dhis2_orgunits" == $this->chrt_array['tables'][0])
-			return true;
-		if("" == $this->chrt_array['tables'][0])
-			return true;
-		if("" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lifeboxme_dhis2_dataitems" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lifeboxme_dhis2_analytics_settings" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lifeboxme_dhis2_analytics_data" == $this->chrt_array['tables'][0])
-			return true;
-		if("aio_training_tracking" == $this->chrt_array['tables'][0])
-			return true;
-		if("aio_training_tracking" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.smtp" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbapt_annual_plan_tracker" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbapt_beginnings_fund" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbapt_communications" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbapt_cri" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbapt_dashboard_summary" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbapt_development" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbapt_elma" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbapt_governance" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbapt_kpis_on_track" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbapt_operations" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbapt_programs" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbapt_sample_workflow" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbapt_status" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbapt_strategic_areas" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbapt_all_activities_view" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbapt_dashboard_summary_view" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbapt_kpis_tracking_view" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbapt_unified_activities" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.years" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbapt_finance" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbapt_hr" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbapt_cathedral" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbapt_izumi" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbapt_st" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbapt_whi" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbpmi_calculation_log" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbpmi_data_elements" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbpmi_datasets" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbpmi_indicator_actuals" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbpmi_indicator_targets" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbpmi_indicators" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbpmi_summary" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.period_types" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.unit_of_measurement" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbpmi_calculation_jobs" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbpmi_data_values" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbpmi_aggregation_type" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbpmi_domain_type" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbpmi_indicator_types" == $this->chrt_array['tables'][0])
-			return true;
-		if("public.lbpmi_indicator_groups" == $this->chrt_array['tables'][0])
-			return true;
+		
+		foreach( ProjectSettings::getProjectTables() as $t ) {
+			if( $t[ 'originalTable' ] == $this->tName ) {
+				return true;
+			}
+		}
 		return false;
 	}
 
 	/**
 	 * Set the 'connection' property #9875
 	 */
-	protected function setConnection()
-	{
+	protected function setConnection() {
 		global $cman;
 
 		if($this->isProjectDB())
@@ -639,7 +368,7 @@ class Chart
 	 */
 	protected function getDetailedTooltipMessage()
 	{
-		if( !$this->showDetails || !$this->detailTablesData )
+		if( !$this->showDetails )
 			return "";
 
 		$showClickHere = true;
@@ -652,17 +381,18 @@ class Chart
 			$arrDElem = $pDSet->getDashboardElements();
 			foreach($arrDElem as $elem)
 			{
-				if( $elem["table"] == $this->chrt_array['tables'][0] && !!$elem["details"] )
+				if( $elem["table"] == $this->tName && !!$elem["details"] )
 					$showClickHere = true;
 			}
 		}
 
-		if( $showClickHere )
+		$details = $this->pSet->getAvailableDetailsTables();
+		if( $showClickHere && count($details) )
 		{
-			$tableCaption = GetTableCaption( $this->detailTablesData[0]['dDataSourceTable'] );
-			$tableCaption = $tableCaption ? $tableCaption : $this->detailTablesData[0]['dDataSourceTable'];
+			$tableCaption = Labels::getTableCaption( $details[0] );
+			$tableCaption = $tableCaption ? $tableCaption : $details[0];
 
-			 return "\nClick here to see ".$tableCaption." details";
+			 return "\nClick here to see " . $tableCaption . " details";
 		}
 
 		return "";
@@ -677,12 +407,12 @@ class Chart
 			return "";
 
 		if( !$this->searchClauseObj )
-			return "No data yet.";
+			return mlang_message('NO_DATA_YET');
 
 		if( $this->searchClauseObj->isSearchFunctionalityActivated() )
-			return "No results found.";
+			return mlang_message('NO_RECORDS');
 
-		return "No data yet.";
+		return mlang_message('NO_DATA_YET');
 	}
 
 	/**
@@ -694,27 +424,28 @@ class Chart
 		$chart = array();
 
 		$this->setTypeSpecChartSettings( $chart );
-		if ( @$this->chrt_array["appearance"]["color71"] != "" || @$this->chrt_array["appearance"]["color91"] != "" )
+		
+		if ( $this->webChartColors["color71"] != "" || $this->webChartColors["color91"] != "" )
 			$chart["background"] = array();
-		if ( @$this->chrt_array["appearance"]["color71"] != "" )
-			$chart["background"]["fill"] = "#".$this->chrt_array["appearance"]["color71"];
+		
+		if ( $this->webChartColors["color71"] != "" )
+			$chart["background"]["fill"] = "#".$this->webChartColors["color71"];
 
-		if ( @$this->chrt_array["appearance"]["color91"] != "" )
-			$chart["background"]["stroke"] = "#".$this->chrt_array["appearance"]["color91"];
+		if ( $this->webChartColors["color91"] != "" )
+			$chart["background"]["stroke"] = "#".$this->webChartColors["color91"];
 
-		if( $this->noRecordsFound )
-		{
+		if( $this->noRecordsFound ) {
 			$data["noDataMessage"] = $this->getNoDataMessage();
-			echo my_json_encode( $data );
+			echo runner_json_encode( $data );
 			return;
 		}
 
 		// animation
-		if( $this->chrt_array["appearance"]["sanim"] == "true" && $this->chrt_array["appearance"]["autoupdate"] != "true" ) // update?
+		if( $this->chartSettings["animation"] )
 			$chart["animation"] = array("enabled" => "true", "duration" => 1000);
 
 		// legend
-		if( $this->chrt_array['appearance']['slegend'] == "true" && !$this->chartPreview )
+		if( $this->chartSettings["legend"] == "true" && !$this->chartPreview )
 			$chart["legend"] = array("enabled" => "true");
 		else
 			$chart["legend"] = array("enabled" => false);
@@ -722,12 +453,12 @@ class Chart
 		$chart["credits"] = false;
 		// title/header
 		$chart["title"]	= array("enabled" => "true", "text" => $this->header);
-		if ( @$this->chrt_array["appearance"]["color101"] != "" )
-			$chart["title"]["fontColor"] = "#".$this->chrt_array["appearance"]["color101"];
+		if( $this->webChartColors["color101"] != "" )
+			$chart["title"]["fontColor"] = "#".$this->webChartColors["color101"];
 
 		// assign and display
 		$data["chart"] = $chart;
-		echo my_json_encode( $data );
+		echo runner_json_encode( $data );
 	}
 
 	/**
@@ -745,9 +476,10 @@ class Chart
 	{
 		$grids = array();
 
-		if($this->chrt_array["appearance"]["sgrid"] == "true")
-		{
-			$stroke = @$this->chrt_array["appearance"]["color121"] != "" ? "#" . $this->chrt_array["appearance"]["color121"] : "#ddd";
+		if( $this->chartSettings["grid"] ) {
+			$stroke = $this->webChartColors["color121"] != "" 
+				? "#" . $this->webChartColors["color121"] 
+				: "#ddd";
 
 			$grid0 = array(
 				"enabled" => true,
@@ -757,15 +489,12 @@ class Chart
 				"axis" => 0
 			);
 
-			if ( @$this->chrt_array["appearance"]["color81"] != "" )
-			{
-				$dataPlotBackgroundColor = "#" . $this->chrt_array["appearance"]["color81"];
-				$grid0["oddFill"] = $dataPlotBackgroundColor;
-				$grid0["evenFill"] = $dataPlotBackgroundColor;
+			if ( $this->webChartColors["color81"] != "" ) {
+				$grid0["oddFill"] = "#".$this->webChartColors["color81"];
+				$grid0["evenFill"] = "#".$this->webChartColors["color81"];
 			}
 
 			$grids[] = $grid0;
-
 			$grids[] = array(
 				"enabled" => true,
 				"drawLastLine" => false,
@@ -782,13 +511,12 @@ class Chart
 	 * @param Array data
 	 * @return String
 	 */
-	protected function labelFormat($fieldName, $data, $truncated = true)
-	{
+	protected function labelFormat($fieldName, $data, $truncated = true) {
 		if( !$fieldName )
 			return "";
 		
-		if( $this->table_type == "db" && !!$this->chrt_array['customLabels'] )
-			$fieldName = $this->chrt_array['customLabels'][ $fieldName ];
+		if( $this->tableType == "db" && !!$this->chartSettings["webCustomLabels"] )
+			$fieldName = $this->chartSettings["webCustomLabels"][ $fieldName ];
 
 		include_once getabspath('classes/controls/ViewControlsContainer.php');
 		$viewControls = new ViewControlsContainer( $this->pSet, PAGE_CHART );
@@ -808,7 +536,7 @@ class Chart
 	}
 
 	protected function beforeQueryEvent( &$dc ) {
-		$eventsObject = getEventObject( $this->pSet->getTableName() );
+		$eventsObject = getEventObject( $this->pSet );
 
 		//	ASP conversion requires these checks be separate
 		if( !$eventsObject )
@@ -900,15 +628,19 @@ class Chart
 		$strLabelFormat = $this->labelFormat( $this->strLabel, $row );
 		
 		include_once getabspath('classes/controls/ViewControlsContainer.php');
-		$viewControls = new ViewControlsContainer( $this->pSet, PAGE_CHART );		
+		$viewControls = new ViewControlsContainer( $this->pSet, PAGE_CHART );
+
+		$strDataSeries = $row[ $this->arrDataSeries[ $seriesNumber ]["dataField"] ];
+		$fieldName = $this->arrDataSeries[ $seriesNumber ]["dataField"];
+		$formattedValue = $viewControls->showDBValue( $fieldName, $row, "", "", false );
 		
-		if( $this->table_type != "db" || !$this->chrt_array['customLabels'] ) {
-			$strDataSeries = $row[ $this->arrDataSeries[ $seriesNumber ] ];
-			$fieldName = $this->arrDataSeries[ $seriesNumber ];
+		if( $this->tableType != "db" || !$this->chartSettings["webCustomLabels"] ) {
+			$strDataSeries = $row[ $this->arrDataSeries[ $seriesNumber ]["dataField"] ];
+			$fieldName = $this->arrDataSeries[ $seriesNumber ]["dataField"];
 			$formattedValue = $viewControls->showDBValue( $fieldName, $row, "", "", false );
 		} else {
-			$strDataSeries = $row[ $this->chrt_array['customLabels'][ $this->arrDataSeries[ $seriesNumber ] ] ];
-			$fieldName = $this->chrt_array['customLabels'][ $this->arrDataSeries[ $seriesNumber ] ];
+			$strDataSeries = $row[ $this->chartSettings["webCustomLabels"][ $this->arrDataSeries[ $seriesNumber ]["dataField"] ] ];
+			$fieldName = $this->chartSettings["webCustomLabels"][ $this->arrDataSeries[ $seriesNumber ]["dataField"] ];
 			$formattedValue = $viewControls->showDBValue( $fieldName, $row, "", "", false );
 		}
 		
@@ -938,14 +670,14 @@ class Chart
 		);
 
 		$data["labels"] = array( 
-			"enabled" => $this->chrt_array["appearance"]["sval"] == "true", 
+			"enabled" => $this->chartSettings["values"], 
 			"format" => "{%viewAsValue}"  
 		);
 
-		if ( @$this->chrt_array["appearance"]["color61"] != "" )
-			$data["labels"]["fontColor"] = "#".$this->chrt_array["appearance"]["color61"];
+		if ( $this->webChartColors["color61"] != "" )
+			$data["labels"]["fontColor"] = "#".$this->webChartColors["color61"];
 
-		if( $clickData && $this->detailTablesData )
+		if( $clickData && $this->pSet->getDetailsTables() )
 			$data["clickData"] = $clickData;
 
 		$data["tooltip"] = $this->getSeriesTooltip( $multiSeries );
@@ -957,7 +689,7 @@ class Chart
 	 * @param Boolean $multiSeries
 	 * @return Array
 	 */
-	protected function getSeriesTooltip( $multiSeries ) {		
+	protected function getSeriesTooltip( $multiSeries ) {
 		return array(
 			"enabled" => true,
 			"format" => "{%seriesName}: {%viewAsValue}".  $this->getDetailedTooltipMessage(),
@@ -973,16 +705,6 @@ class Chart
 	}
 
 	/**
-	 * @deprecated
-	 * @param String str
-	 * @return String
-	 */
-	protected function chart_xmlencode($str)
-	{
-		return str_replace(array("&","<",">","\""),array("&amp;","&lt;","&gt;","&quot;"),$str);
-	}
-
-	/**
 	 * Get a 'point click' action data
 	 * @param Array data
 	 * @param Number seriesId
@@ -993,45 +715,41 @@ class Chart
 	{
 		global $strTableName;
 
-		if( !$this->detailTablesData )
+		$detailsTables = $this->pSet->getAvailableDetailsTables();
+		if( !count( $detailsTables ) )
 			return null;
 
 		if ( $this->dashChart )
 		{
 			$masterKeysArr = array();
-			foreach ( $this->detailTablesData as $detailId => $detail )
+			foreach ( $detailsTables as $details )
 			{
-				foreach( $detail['masterKeys'] as $idx => $mk )
+				$detailsKeys = $this->pSet->getDetailsKeys( $details );
+				foreach( $detailsKeys['masterKeys'] as $idx => $mk )
 				{
-					$masterKeysArr[ $detail['dDataSourceTable'] ] = array( 'masterkey'.($idx + 1) => $data[ $mk ] );
+					$masterKeysArr[ $details ] = array( 'masterkey'.($idx + 1) => $data[ $mk ] );
 				}
 			}
 
 			if (!$this->dashChartFirstPointSelected)
 			{
 				$this->dashChartFirstPointSelected = true;
-				$this->detailMasterKeys = my_json_encode( $masterKeysArr );
+				$this->detailMasterKeys = runner_json_encode( $masterKeysArr );
 			}
 
 			return array( "masterKeys" => $masterKeysArr, "seriesId" => $seriesId, "pointId" => $pointId );
 		}
 
 		// The one detail table is allowed for a chart page only
-		$detailTableData = $this->detailTablesData[0];
+		$details = $detailsTables[0];
+		$detailsKeys = $this->pSet->getDetailsKeys( $details );
 		$masterquery = "mastertable=".rawurlencode( $strTableName );
-		foreach( $detailTableData['masterKeys'] as $idx => $mk )
+		foreach( $detailsKeys['masterKeys'] as $idx => $mk )
 		{
 			$masterquery.= "&masterkey".($idx + 1)."=".rawurlencode( $data[ $mk ] );
 		}
 
-		return array( "url" => GetTableLink( $detailTableData['dShortTable'], $detailTableData['dType'], $masterquery ) );
-	}
-
-	protected function getLogarithm()
-	{
-		if( $this->chrt_array["appearance"]["slog"] == "true" )
-			return true;
-		return false;
+		return array( "url" => GetTableLink( GetTableUrl( $details ), ProjectSettings::defaultPageType( GetEntityType( $details ) ), $masterquery ) );
 	}
 }
 
@@ -1041,9 +759,9 @@ class Chart_Bar extends Chart
 	protected $stacked;
 	protected $bar;
 
-	function __construct( &$ch_array, $param )
+	function __construct( $param, $chartSettings )
 	{
-		parent::__construct( $ch_array, $param );
+		parent::__construct( $param, $chartSettings );
 
 		$this->stacked = $param["stacked"];
 		$this->_2d = $param["2d"];
@@ -1053,7 +771,7 @@ class Chart_Bar extends Chart
 	/**
 	 * @return String
 	 */
-	protected function getSeriesType($seriesNumber)
+	protected function getSeriesType( $seriesNumber )
 	{
 		if($this->bar)
 			return "bar";
@@ -1069,7 +787,7 @@ class Chart_Bar extends Chart
 		$chart["series"] = $this->get_data();
 
 		$chart["scales"] = $this->getScales();
-		$chart["logarithm"] = parent::getLogarithm();
+		$chart["logarithm"] = $this->chartSettings["logarithm"];
 
 		if( $this->bar )
 			$chart["type"] = "bar";
@@ -1098,20 +816,20 @@ class Chart_Bar extends Chart
 			array(
 				"enabled" => "true",
 				"title" => array( 'text' => $this->footer ),
-				"labels" => array( "enabled" => $this->chrt_array["appearance"]["sname"] == "true" )
+				"labels" => array( "enabled" => $this->chartSettings["names"] )
 			));
 
-		if ( @$this->chrt_array["appearance"]["color51"] != "" )
-			$chart["xAxes"][0]["labels"]["fontColor"] = "#".$this->chrt_array["appearance"]["color51"];
+		if ( $this->webChartColors["color51"] != "" )
+			$chart["xAxes"][0]["labels"]["fontColor"] = "#".$this->webChartColors["color51"];
 
-		if ( @$this->chrt_array["appearance"]["color111"] != "" )
-			$chart["xAxes"][0]["title"]["fontColor"] = "#".$this->chrt_array["appearance"]["color111"];
+		if ( $this->webChartColors["color111"] != "" )
+			$chart["xAxes"][0]["title"]["fontColor"] = "#".$this->webChartColors["color111"];
 
-		if ( @$this->chrt_array["appearance"]["color131"] != "" )
-			$chart["xAxes"][0]["stroke"] = "#".$this->chrt_array["appearance"]["color131"];
+		if ( $this->webChartColors["color131"] != "" )
+			$chart["xAxes"][0]["stroke"] = "#".$this->webChartColors["color131"];
 
-		if ( @$this->chrt_array["appearance"]["color141"] != "" )
-			$chart["yAxes"][0]["stroke"] = "#".$this->chrt_array["appearance"]["color141"];
+		if ( $this->webChartColors["color141"] != "" )
+			$chart["yAxes"][0]["stroke"] = "#".$this->webChartColors["color141"];
 	}
 
 	/**
@@ -1120,14 +838,12 @@ class Chart_Bar extends Chart
 	 */
 	protected function getScales()
 	{
-		if($this->stacked || $this->chrt_array["appearance"]["slog"] == "true")
-		{
+		if( $this->stacked || $this->chartSettings["logarithmic"] ) {
 			$arr = array();
 			if( $this->stacked )
 				$arr["stackMode"] = "value";
 
-			if( $this->chrt_array["appearance"]["slog"] == "true" )
-			{
+			if( $this->chartSettings["logarithmic"] ) {
 				$arr["logBase"] = 10;
 				$arr["type"] = "log";
 			};
@@ -1147,9 +863,16 @@ class Chart_Line extends Chart
 	protected $type_line;
 
 
-	function __construct( &$ch_array, $param )
+	function __construct( $param, $chartSettings )
 	{
-		parent::__construct( $ch_array, $param );
+		parent::__construct( $param, $chartSettings );
+
+		if( $chartSettings["linestyle"] == 0 )
+			$this->type_line = "line";
+		elseif( $chartSettings["linestyle"] == 2 )
+			$this->type_line = "step_line";
+		else
+			$this->type_line = "spline";
 
 		$this->type_line = $param["type_line"];
 	}
@@ -1165,7 +888,7 @@ class Chart_Line extends Chart
 		$chart["xScale"] = 0;
 		$chart["yScale"] = 1;
 		$chart["grids"] = $this->getGrids();
-		$chart["logarithm"] = parent::getLogarithm();
+		$chart["logarithm"] = $this->chartSettings["logarithm"];
 		$chart["tooltip"] = array("displayMode" => "single");
 
 		$chart["yAxes"]	= array(
@@ -1176,20 +899,20 @@ class Chart_Line extends Chart
 			array(
 				"enabled" => "true",
 				"title" => array( 'text' => $this->footer ),
-				"labels" => array( "enabled" => $this->chrt_array["appearance"]["sname"] == "true" )
+				"labels" => array( "enabled" => $this->chartSettings["names"] )
 			));
 
-		if ( @$this->chrt_array["appearance"]["color51"] != "" )
-			$chart["xAxes"][0]["labels"]["fontColor"] = "#".$this->chrt_array["appearance"]["color51"];
+		if ( $this->webChartColors["color51"] != "" )
+			$chart["xAxes"][0]["labels"]["fontColor"] = "#".$this->webChartColors["color51"];
 
-		if ( @$this->chrt_array["appearance"]["color111"] != "" )
-			$chart["xAxes"][0]["title"]["fontColor"] = "#".$this->chrt_array["appearance"]["color111"];
+		if ( $this->webChartColors["color111"] != "" )
+			$chart["xAxes"][0]["title"]["fontColor"] = "#".$this->webChartColors["color111"];
 
-		if ( @$this->chrt_array["appearance"]["color131"] != "" )
-			$chart["xAxes"][0]["stroke"] = "#".$this->chrt_array["appearance"]["color131"];
+		if ( $this->webChartColors["color131"] != "" )
+			$chart["xAxes"][0]["stroke"] = "#".$this->webChartColors["color131"];
 
-		if ( @$this->chrt_array["appearance"]["color141"] != "" )
-			$chart["yAxes"][0]["stroke"] = "#".$this->chrt_array["appearance"]["color141"];
+		if ( $this->webChartColors["color141"] != "" )
+			$chart["yAxes"][0]["stroke"] = "#".$this->webChartColors["color141"];
 	}
 
 	/**
@@ -1216,9 +939,9 @@ class Chart_Area extends Chart
 	protected $stacked;
 
 
-	function __construct( &$ch_array, $param )
+	function __construct( $param, $chartSettings )
 	{
-		parent::__construct( $ch_array, $param );
+		parent::__construct( $param, $chartSettings );
 
 		$this->stacked = $param["stacked"];
 	}
@@ -1235,7 +958,7 @@ class Chart_Area extends Chart
 		$chart["type"] = "area";
 		$chart["xScale"] = 0;
 		$chart["yScale"] = 1;
-		$chart["logarithm"] = parent::getLogarithm();
+		$chart["logarithm"] = $this->chartSettings["logarithm"];
 		$chart["grids"] = $this->getGrids();
 
 		$chart["tooltip"] = array("displayMode" => "single");
@@ -1247,21 +970,21 @@ class Chart_Area extends Chart
 		$chart["xAxes"]	= array(
 			array(
 				"enabled" => "true",
-				"title" => array( 'text' => $this->footer ),
-				"labels" => array( "enabled" => $this->chrt_array["appearance"]["sname"] == "true" )
+				"title" => array( "text" => $this->footer ),
+				"labels" => array( "enabled" => $this->chartSettings["appearance"]["names"]  )
 			));
 
-		if ( @$this->chrt_array["appearance"]["color51"] != "" )
-			$chart["xAxes"][0]["labels"]["fontColor"] = "#".$this->chrt_array["appearance"]["color51"];
+		if ( $this->webChartColors["color51"] != "" )
+			$chart["xAxes"][0]["labels"]["fontColor"] = "#".$this->webChartColors["color51"];
 
-		if ( @$this->chrt_array["appearance"]["color111"] != "" )
-			$chart["xAxes"][0]["title"]["fontColor"] = "#".$this->chrt_array["appearance"]["color111"];
+		if ( $this->webChartColors["color111"] != "" )
+			$chart["xAxes"][0]["title"]["fontColor"] = "#".$this->webChartColors["color111"];
 
-		if ( @$this->chrt_array["appearance"]["color131"] != "" )
-			$chart["xAxes"][0]["stroke"] = "#".$this->chrt_array["appearance"]["color131"];
+		if ( $this->webChartColors["color131"] != "" )
+			$chart["xAxes"][0]["stroke"] = "#".$this->webChartColors["color131"];
 
-		if ( @$this->chrt_array["appearance"]["color141"] != "" )
-			$chart["yAxes"][0]["stroke"] = "#".$this->chrt_array["appearance"]["color141"];
+		if ( $this->webChartColors["color141"] != "" )
+			$chart["yAxes"][0]["stroke"] = "#".$this->webChartColors["color141"];
 	}
 
 	/**
@@ -1278,13 +1001,11 @@ class Chart_Area extends Chart
 	 */
 	protected function getScales()
 	{
-		if( $this->stacked )
-		{
+		if( $this->stacked ) {
 			$arr = array();
 			$arr["stackMode"] = "value";
 
-			if( $this->chrt_array["appearance"]["sstacked"] == "true" )
-			{
+			if( $this->chartSettings["stacked"] ) {
 				$arr["stackMode"] = "percent";
 				$arr["maximumGap"] = "10";
 				$arr["maximum"] = "100";
@@ -1308,9 +1029,9 @@ class Chart_Pie extends Chart
 	protected $pie;
 
 
-	function __construct( &$ch_array, $param )
+	function __construct( $param, $chartSettings )
 	{
-		parent::__construct( $ch_array, $param );
+		parent::__construct( $param, $chartSettings );
 
 		$this->pie = $param["pie"];
 		$this->_2d = $param["2d"];
@@ -1337,22 +1058,17 @@ class Chart_Pie extends Chart
 		if( !$this->pie )
 			$chart["innerRadius"] = "30%";
 
-		if( $this->chrt_array['appearance']['slegend'] == "true" && !$this->chartPreview )
-		{
+		if( $this->chartSettings["legend"] && !$this->chartPreview ) {
 			$chart["legend"] = array("enabled" => "true");
 		}
 
-		$chart["labels"] = array( "enabled" => $this->chrt_array["appearance"]["sval"] == "true" || $this->chrt_array["appearance"]["sname"] == "true" );
+		$chart["labels"] = array( "enabled" => $this->chartSettings["values"] || $this->chartSettings["names"] );
 
-		if ( @$this->chrt_array["appearance"]["color51"] != "" )
-		{
-			if ( $this->chrt_array["appearance"]["sval"] )
-			{
-				$chart["labels"]["fontColor"] = "#".$this->chrt_array["appearance"]["color61"];
-			}
-			else if ( $this->chrt_array["appearance"]["sname"] )
-			{
-				$chart["labels"]["fontColor"] = "#".$this->chrt_array["appearance"]["color51"];
+		if ( $this->webChartColors["color51"] != "" ) {
+			if ( $this->chartSettings["values"] ) {
+				$chart["labels"]["fontColor"] = "#".$this->webChartColors["color61"];
+			} else if ( $this->chartSettings["names"] ) {
+				$chart["labels"]["fontColor"] = "#".$this->webChartColors["color51"];
 			}
 		}
 
@@ -1361,9 +1077,9 @@ class Chart_Pie extends Chart
 
 class Chart_Combined extends Chart
 {
-	function __construct( &$ch_array, $param )
+	function __construct( $param, $chartSettings )
 	{
-		parent::__construct( $ch_array, $param );
+		parent::__construct( $param, $chartSettings );
 	}
 
 	/**
@@ -1373,7 +1089,7 @@ class Chart_Combined extends Chart
 	{
 		$chart["series"] = $this->get_data();
 		$chart["type"] = "column";
-		$chart["logarithm"] = parent::getLogarithm();
+		$chart["logarithm"] = $this->chartSettings["logarithm"];
 		$chart["xScale"] = 0;
 		$chart["yScale"] = 1;
 		$chart["grids"] = $this->getGrids();
@@ -1385,20 +1101,20 @@ class Chart_Combined extends Chart
 			array(
 				"enabled" => "true",
 				"title" => array( 'text' => $this->footer ),
-				"labels" => array( "enabled" => $this->chrt_array["appearance"]["sname"] == "true" )
+				"labels" => array( "enabled" => $this->chartSettings["names"] )
 			));
 
-		if ( @$this->chrt_array["appearance"]["color51"] != "" )
-			$chart["xAxes"][0]["labels"]["fontColor"] = "#".$this->chrt_array["appearance"]["color51"];
+		if ( $this->webChartColors["color51"] != "" )
+			$chart["xAxes"][0]["labels"]["fontColor"] = "#".$this->webChartColors["color51"];
 
-		if ( @$this->chrt_array["appearance"]["color111"] != "" )
-			$chart["xAxes"][0]["title"]["fontColor"] = "#".$this->chrt_array["appearance"]["color111"];
+		if ( $this->webChartColors["color111"] != "" )
+			$chart["xAxes"][0]["title"]["fontColor"] = "#".$this->webChartColors["color111"];
 
-		if ( @$this->chrt_array["appearance"]["color131"] != "" )
-			$chart["xAxes"][0]["stroke"] = "#".$this->chrt_array["appearance"]["color131"];
+		if ( $this->webChartColors["color131"] != "" )
+			$chart["xAxes"][0]["stroke"] = "#".$this->webChartColors["color131"];
 
-		if ( @$this->chrt_array["appearance"]["color141"] != "" )
-			$chart["yAxes"][0]["stroke"] = "#".$this->chrt_array["appearance"]["color141"];
+		if ( $this->webChartColors["color141"] != "" )
+			$chart["yAxes"][0]["stroke"] = "#".$this->webChartColors["color141"];
 	}
 
 	/**
@@ -1406,7 +1122,7 @@ class Chart_Combined extends Chart
 	 */
 	protected function getSeriesType($seriesNumber)
 	{
-		switch ($seriesNumber) {
+		switch( $seriesNumber ) {
 			case 0:
 				return "spline";
 				break;
@@ -1416,12 +1132,6 @@ class Chart_Combined extends Chart
 			default:
 				return "column";
 		}
-	}
-	protected function getLogarithm()
-	{
-		if( $this->chrt_array["appearance"]["slog"] == "true" )
-			return true;
-		return false;
 	}
 }
 
@@ -1433,9 +1143,9 @@ class Chart_Funnel extends Chart
 	protected $inver;
 
 
-	function __construct( &$ch_array, $param )
+	function __construct( $param, $chartSettings )
 	{
-		parent::__construct( $ch_array, $param );
+		parent::__construct( $param, $chartSettings );
 
 		$this->inver = $param["funnel_inv"];
 		$this->singleSeries = true;
@@ -1457,40 +1167,21 @@ class Chart_Funnel extends Chart
 		if( $this->inver )
 			$chart["reversed"] = true;
 
-		$chart["labels"] = array( "enabled" => $this->chrt_array["appearance"]["sname"] == "true" );
+		$chart["labels"] = array( "enabled" => $this->chartSettings["names"] );
 
-		if ( @$this->chrt_array["appearance"]["color51"] != "" )
-			$chart["labels"]["fontColor"] = "#".$this->chrt_array["appearance"]["color51"];
+		if( $this->webChartColors["color51"] != "" )
+			$chart["labels"]["fontColor"] = "#".$this->webChartColors["color51"];
 	}
 }
 
-class Chart_Bubble extends Chart
-{
-	protected $arrDataSize = array();
+class Chart_Bubble extends Chart {
 
-
-	function __construct( &$ch_array, $param )
-	{
-		parent::__construct( $ch_array, $param );
+	function __construct( $param, $chartSettings ) {
+		parent::__construct( $param, $chartSettings );
 
 		$this->_2d = $param["2d"];
 	}
 
-	/**
-	 * @param Array params
-	 */
-	protected function setSpecParams( $params )
-	{
-		parent::setSpecParams( $params );
-
-		if( $params['name'] != "" )
-		{
-			if( $this->table_type != "db" )
-				$this->arrDataSize[] = $params['size'];
-			else
-				$this->arrDataSize[] = $params['table']."_".$params['size'];
-		}
-	}
 
 	/**
 	 * @param &Array chart
@@ -1500,42 +1191,41 @@ class Chart_Bubble extends Chart
 		$chart["series"] = $this->get_data();
 		$chart["type"] = "cartesian";
 		$chart["grids"] = $this->getGrids();
-		$chart["logarithm"] = parent::getLogarithm();
+		$chart["logarithm"] = $this->chartSettings["logarithm"];
 		$chart["yAxes"]	= array(
 			array(
 				"enabled" => true,
 				"title" => $this->y_axis_label,
-				"labels" => array( "enabled" => $this->chrt_array["appearance"]["sval"] == "true" )
+				"labels" => array( "enabled" => $this->chartSettings["values"] )
 			));
 
-		if ( @$this->chrt_array["appearance"]["color61"] != "" )
-			$chart["yAxes"][0]["labels"]["fontColor"] = "#".$this->chrt_array["appearance"]["color61"];
+		if ( $this->webChartColors["color61"] != "" )
+			$chart["yAxes"][0]["labels"]["fontColor"] = "#".$this->webChartColors["color61"];
 
 		$chart["xAxes"]	= array(
 			array(
 				"enabled" => "true",
-				"title" => array( 'text' => $this->footer ),
-				"labels" => array( "enabled" => $this->chrt_array["appearance"]["sname"] == "true" )
+				"title" => array( "text" => $this->footer ),
+				"labels" => array( "enabled" => $this->chartSettings["names"] )
 			));
 
-		if ( @$this->chrt_array["appearance"]["color51"] != "" )
-			$chart["xAxes"][0]["labels"]["fontColor"] = "#".$this->chrt_array["appearance"]["color51"];
+		if ( $this->webChartColors["color51"] != "" )
+			$chart["xAxes"][0]["labels"]["fontColor"] = "#".$this->webChartColors["color51"];
 
-		if ( @$this->chrt_array["appearance"]["color111"] != "" )
-			$chart["xAxes"][0]["title"]["fontColor"] = "#".$this->chrt_array["appearance"]["color111"];
+		if ( $this->webChartColors["color111"] != "" )
+			$chart["xAxes"][0]["title"]["fontColor"] = "#".$this->webChartColors["color111"];
 
-		if ( @$this->chrt_array["appearance"]["color131"] != "" )
-			$chart["xAxes"][0]["stroke"] = "#".$this->chrt_array["appearance"]["color131"];
+		if ( $this->webChartColors["color131"] != "" )
+			$chart["xAxes"][0]["stroke"] = "#".$this->webChartColors["color131"];
 
-		if ( @$this->chrt_array["appearance"]["color141"] != "" )
-			$chart["yAxes"][0]["stroke"] = "#".$this->chrt_array["appearance"]["color141"];
+		if ( $this->webChartColors["color141"] != "" )
+			$chart["yAxes"][0]["stroke"] = "#".$this->webChartColors["color141"];
 	}
 
 	/**
 	 * @return String
 	 */
-	protected function getSeriesType($seriesNumber)
-	{
+	protected function getSeriesType( $seriesNumber ) {
 		return "bubble";
 	}
 
@@ -1544,47 +1234,24 @@ class Chart_Bubble extends Chart
 	 * @param Array row
 	 * @return Array
 	 */
-	protected function getPoint( $seriesNumber, $row )
-	{
+	protected function getPoint( $seriesNumber, $row ) {
 		$pointData = parent::getPoint( $seriesNumber, $row );
-		$pointData["size"] = (double)str_replace(",", ".", $row[ $this->arrDataSize[ $seriesNumber ] ]);
+		$pointData["size"] = (double)str_replace(",", ".", $row[ $this->arrDataSeries[ $seriesNumber ]["bubbleSize"] ]);
 
 		return $pointData;
 	}
 }
 
-class Chart_Gauge extends Chart
-{
-	protected $arrGaugeColor = array();
+class Chart_Gauge extends Chart {
+
 	protected $gaugeType = "";
 	protected $layout = "";
 
-	function __construct( &$ch_array, $param )
-	{
-		parent::__construct( $ch_array, $param );
+	function __construct( $param, $chartSettings ) {
+		parent::__construct( $param, $chartSettings );
 
 		$this->gaugeType = $param["gaugeType"];
 		$this->layout = $param["layout"];
-	}
-
-	/**
-	 * @param Array params
-	 */
-	protected function setSpecParams( $params )
-	{
-		parent::setSpecParams( $params );
-
-		if ( $params['name'] != "" )
-		{
-			for ($k = 0; is_array( $params["gaugeColorZone"] ) && $k < count( $params["gaugeColorZone"] ); $k++ )
-			{
-				$beginColor = (float)@$params["gaugeColorZone"][ $k ]["gaugeBeginColor"];
-				$endColor = (float)@$params["gaugeColorZone"][ $k ]["gaugeEndColor"];
-				$gColor = "#".@$params["gaugeColorZone"][ $k ]["gaugeColor"];
-
-				$this->arrGaugeColor[ count($this->arrDataSeries) - 1 ][] = array($beginColor, $endColor, $gColor);
-			}
-		}
 	}
 
 	/**
@@ -1594,34 +1261,34 @@ class Chart_Gauge extends Chart
 	{
 		$data = array();
 
-		for($i = 0; $i < count($this->arrDataSeries); $i++)
+		for($i = count( $this->arrDataSeries ) - 1; $i >= 0 ; --$i)
 		{
 			$chart = array();
 
-			if( $this->chrt_array["appearance"]["sanim"] == "true" )
+			if( $this->chartSettings["animation"] )
 				$chart["animation"] = array("enabled" => "true", "duration" => 1000);
 
 			$this->setGaugeSpecChartSettings( $chart, $i );
 
-			if ( @$this->chrt_array["appearance"]["color71"] != "" || @$this->chrt_array["appearance"]["color91"] != "" )
+			if( $this->webChartColors["color71"] != "" || $this->webChartColors["color91"] != "" )
 				$chart["background"] = array();
-			if ( @$this->chrt_array["appearance"]["color71"] != "" )
-				$chart["background"]["fill"] = "#".$this->chrt_array["appearance"]["color71"];
+			
+			if( $this->webChartColors["color71"] != "" )
+				$chart["background"]["fill"] = "#".$this->webChartColors["color71"];
 
-			if ( @$this->chrt_array["appearance"]["color91"] != "" )
-				$chart["background"]["stroke"] = "#".$this->chrt_array["appearance"]["color91"];
+			if( $this->webChartColors["color91"] != "" )
+				$chart["background"]["stroke"] = "#".$this->webChartColors["color91"];
 
-			if( $this->noRecordsFound )
-			{
+			if( $this->noRecordsFound ) {
 				$data["noDataMessage"] = $this->getNoDataMessage();
-				echo my_json_encode( $data );
+				echo runner_json_encode( $data );
 				return;
 			}
 
 			$data[] = array( "gauge" => $chart );
 		}
 
-		echo my_json_encode( array( "gauge" => $data, "header" => $this->header, "footer" => $this->footer ) );
+		echo runner_json_encode( array( "gauge" => $data, "header" => $this->header, "footer" => $this->footer ) );
 	}
 
 	/**
@@ -1638,15 +1305,23 @@ class Chart_Gauge extends Chart
 		$chart["axes"] = array( $this->getAxesSettings( $seriesNumber ) );
 		$chart["credits"] = false;
 		$chart["chartLabels"] = $this->getCircularGaugeLabel( $seriesNumber, $chart["data"][0] );
-		if( $this->gaugeType == "circular-gauge" )
-		{
+		
+		if( $this->gaugeType == "circular-gauge" ) {
 			$chart["needles"] = array( array("enabled" => true) );
-			$chart["ranges"] = $this->getColorRanges( $seriesNumber );
-		}
-		else
-		{
-			$hasColorZones = count( $this->arrGaugeColor ) > 0 && array_key_exists($seriesNumber, $this->arrGaugeColor );
-
+			
+			$chart["ranges"] = array();
+			foreach( $this->arrDataSeries[ $seriesNumber ]["gaugeColorZones"] as $ind => $colorZone ) {
+				$chart["ranges"][] = array(
+					"radius" => 70,
+					"from" => $colorZone["begin"],
+					"to" => $colorZone["end"],
+					"fill" => '#' . $colorZone["color"],
+					"endSize" => "10%",
+					"startSize" => "10%"
+				);
+			}
+			
+		} else {
 			$chart["pointers"] = array(
 				array(
 					"enabled" => true,
@@ -1658,21 +1333,17 @@ class Chart_Gauge extends Chart
 				)
 			);
 
-			if( $hasColorZones )
-			{
-				foreach( $this->arrGaugeColor[ $seriesNumber ] as $ind => $val )
-				{
-					$chart["pointers"][] = array(
-						"enabled" => true,
-						"pointerType" => "rangeBar",
-						"name" => "",
-						"offset" => "10%",
-						"dataIndex" => $ind + 1, // 0 is an index of the db point then range bars coords go
-						"color" => $val[2]
-					);
-				}
+			foreach(  $this->arrDataSeries[ $seriesNumber ]["gaugeColorZones"] as $ind => $colorZone ) {
+				$chart["pointers"][] = array(
+					"enabled" => true,
+					"pointerType" => "rangeBar",
+					"name" => "",
+					"offset" => "10%",
+					"dataIndex" => $ind + 1, // 0 is an index of the db point then range bars coords go
+					"color" => '#' . $colorZone["color"]
+				);
 			}
-
+		
 			$scalesData = $this->getGaugeScales( $seriesNumber );
 
 			$chart["scale"] = 0;
@@ -1724,30 +1395,6 @@ class Chart_Gauge extends Chart
 		return array( $label );
 	}
 
-	/**
-	 * @param Number seriesNumber
-	 * @return Array
-	 */
-	protected function getColorRanges( $seriesNumber )
-	{
-		$ranges = array();
-		if( count( $this->arrGaugeColor ) > 0 && array_key_exists($seriesNumber, $this->arrGaugeColor ) )
-		{
-			foreach( $this->arrGaugeColor[ $seriesNumber ] as $ind => $val )
-			{
-				$ranges[] = array(
-					"radius" => 70,
-					"from" => $val[0],
-					"to" => $val[1],
-					"fill" => $val[2],
-					"endSize" => "10%",
-					"startSize" => "10%"
-				);
-			}
-		}
-
-		return $ranges;
-	}
 
 	/**
 	 * @param Number seriesNumber
@@ -1781,15 +1428,15 @@ class Chart_Gauge extends Chart
 				"length" => 2
 			);
 
-			if ( @$this->chrt_array["appearance"]["color131"] != "" )
-				$axes["fill"] = "#".$this->chrt_array["appearance"]["color131"];
+			if( $this->webChartColors["color131"] != "" )
+				$axes["fill"] = "#".$this->webChartColors["color131"];
 		}
 
 		$axes["enabled"] = true;
-		$axes["labels"] = array( "enabled" => $this->chrt_array["appearance"]["sval"] == "true" );
+		$axes["labels"] = array( "enabled" => $this->chartSettings["values"] );
 
-		if ( @$this->chrt_array["appearance"]["color61"] != "" )
-			$axes["labels"]["fontColor"] = "#".$this->chrt_array["appearance"]["color61"];
+		if( $this->webChartColors["color61"] != "" )
+			$axes["labels"]["fontColor"] = "#".$this->webChartColors["color61"];
 
 		return $axes;
 	}
@@ -1800,8 +1447,8 @@ class Chart_Gauge extends Chart
 	 */
 	protected function getGaugeScales( $seriesNumber )
 	{
-		$min = $this->chrt_array["parameters"][ $seriesNumber ]["gaugeMinValue"];
-		$max = $this->chrt_array["parameters"][ $seriesNumber ]["gaugeMaxValue"];
+		$min = $this->arrDataSeries[ $seriesNumber ]["minValue"];
+		$max = $this->arrDataSeries[ $seriesNumber ]["maxValue"];
 
 		if( !is_numeric( $min ) )
 			$min = 0;
@@ -1841,7 +1488,7 @@ class Chart_Gauge extends Chart
 	public function getSubsetDataCommand( $ignoreFilterField = "" ) {
 		$dc = parent::getSubsetDataCommand();
 
-		if( $this->table_type == "project" ) {
+		if( $this->tableType == "project" ) {
 			require_once( getabspath('classes/orderclause.php') );
 
 			$orderObject = new OrderClause( $this->pSet, $this->cipherer, $this->sessionPrefix, $this->connection );
@@ -1911,13 +1558,11 @@ class Chart_Gauge extends Chart
 	 */
 	protected function getSeriesData( $name, $pointsData, $clickData, $seriesNumber, $multiSeries = true )
 	{
-		if( $this->gaugeType == "linearGauge" && count( $this->arrGaugeColor ) > 0 && array_key_exists( $seriesNumber, $this->arrGaugeColor ) )
-		{
-			foreach( $this->arrGaugeColor[ $seriesNumber ] as $ind => $val )
-			{
+		if( $this->gaugeType == "linearGauge" ) {
+			foreach( $this->arrDataSeries[ $seriesNumber ]["gaugeColorZones"] as $ind => $colorZone ) {
 				$pointsData[] = array(
-					"low" => $val[0],
-					"high" => $val[1]
+					"low" => $colorZone["begin"],
+					"high" => $colorZone["end"]
 				);
 			}
 		}
@@ -1933,11 +1578,9 @@ class Chart_Gauge extends Chart
 	 * @param String value
 	 * @return String
 	 */
-	protected function getChartLabelText( $seriesNumber, $value )
-	{
-		if( $this->table_type == "project" && !$this->webchart )
-		{
-			$fieldName = $this->arrDataSeries[ $seriesNumber ];
+	protected function getChartLabelText( $seriesNumber, $value ) {
+		if( $this->tableType == "project" && !$this->webchart ) {
+			$fieldName = $this->arrDataSeries[ $seriesNumber ]["dataField"];
 
 			include_once getabspath('classes/controls/ViewControlsContainer.php');
 			$viewControls = new ViewControlsContainer($this->pSet, PAGE_CHART);
@@ -1956,46 +1599,10 @@ class Chart_Ohlc extends Chart
 {
 	protected $ohcl_type;
 
-	protected $arrOHLC_high = array();
-	protected $arrOHLC_low = array();
-	protected $arrOHLC_open = array();
-	protected $arrOHLC_close = array();
-
-	function __construct( &$ch_array, $param )
-	{
-		parent::__construct( $ch_array, $param );
+	function __construct( $param, $chartSettings ) {
+		parent::__construct( $param, $chartSettings );
 
 		$this->ohcl_type = $param["ohcl_type"];
-	}
-
-	/**
-	 * @param Array params
-	 */
-	protected function setSpecParams( $params )
-	{
-		if($this->table_type != "db")
-		{
-			$this->arrOHLC_open[] = $params['ohlcOpen'];
-			$this->arrOHLC_high[] = $params['ohlcHigh'];
-			$this->arrOHLC_low[] = $params['ohlcLow'];
-			$this->arrOHLC_close[] = $params['ohlcClose'];
-			return;
-		}
-
-		if( $params['agr_func'] )
-		{
-			$this->arrOHLC_open[] = $params['agr_func']."_".$params['table']."_".$params['ohlcOpen'];
-			$this->arrOHLC_high[] = $params['agr_func']."_".$params['table']."_".$params['ohlcHigh'];
-			$this->arrOHLC_low[] = $params['agr_func']."_".$params['table']."_".$params['ohlcLow'];
-			$this->arrOHLC_close[] = $params['agr_func']."_".$params['table']."_".$params['ohlcClose'];
-		}
-		else
-		{
-			$this->arrOHLC_open[] = $params['table']."_".$params['ohlcOpen'];
-			$this->arrOHLC_high[] = $params['table']."_".$params['ohlcHigh'];
-			$this->arrOHLC_low[] = $params['table']."_".$params['ohlcLow'];
-			$this->arrOHLC_close[] = $params['table']."_".$params['ohlcClose'];
-		}
 	}
 
 	/**
@@ -2007,24 +1614,26 @@ class Chart_Ohlc extends Chart
 		$chart = array();
 
 		$this->setTypeSpecChartSettings( $chart );
-		if ( @$this->chrt_array["appearance"]["color71"] != "" || @$this->chrt_array["appearance"]["color91"] != "" )
+		if( $this->webChartColors["color71"] != "" || $this->webChartColors["color91"] != "" )
 			$chart["background"] = array();
-		if ( @$this->chrt_array["appearance"]["color71"] != "" )
-			$chart["background"]["fill"] = "#".$this->chrt_array["appearance"]["color71"];
+		
+		if( $this->webChartColors["color71"] != "" )
+			$chart["background"]["fill"] = "#".$this->webChartColors["color71"];
 
-		if ( @$this->chrt_array["appearance"]["color91"] != "" )
-			$chart["background"]["stroke"] = "#".$this->chrt_array["appearance"]["color91"];
-
+		if( $this->webChartColors["color91"] != "" )
+			$chart["background"]["stroke"] = "#".$this->webChartColors["color91"];
+		
 		$chart["credits"] = false;
+		
 		$chart["title"]	= array("enabled" => "true", "text" => $this->header);
-		if ( @$this->chrt_array["appearance"]["color101"] != "" )
-			$chart["title"]["fontColor"] = "#".$this->chrt_array["appearance"]["color101"];
+		if ( $this->webChartColors["color101"] != "" )
+			$chart["title"]["fontColor"] = "#".$this->webChartColors["color101"];
 
-		if( $this->chrt_array['appearance']['slegend'] == "true" && !$this->chartPreview )
+		if( $this->chartSettings['legend'] && !$this->chartPreview )
 			$chart["legend"] = array("enabled" => "true");
 
 		$data["chart"] = $chart;
-		echo my_json_encode( $data );
+		echo runner_json_encode( $data );
 	}
 
 	/**
@@ -2033,26 +1642,27 @@ class Chart_Ohlc extends Chart
 	protected function setTypeSpecChartSettings( &$chart )
 	{
 		$chart["series"] = $this->get_data();
-		foreach ($this->chrt_array["parameters"] as $seriesNum => $params) {
-			if ( @$params["ohlcColor"] != "" )
-			{
-				$chart["series"][$seriesNum]["fallingStroke"] = "#".$params["ohlcColor"];
-				$chart["series"][$seriesNum]["fallingFill"] = "#".$params["ohlcColor"];
-				if ( $this->ohcl_type == "ohcl" )
-				{
-					$chart["series"][$seriesNum]["risingStroke"] = "#".$params["ohlcColor"];
-					$chart["series"][$seriesNum]["risingFill"] = "#".$params["ohlcColor"];
+		
+		if( $this->webchart ) {
+			foreach( $this->arrDataSeries as $seriesNum => $series ) {
+				if ( $series["ohlcColor"] != "" ) {
+					$chart["series"][$seriesNum]["fallingStroke"] = "#".$series["ohlcColor"];
+					$chart["series"][$seriesNum]["fallingFill"] = "#".$series["ohlcColor"];
+				
+					if ( $this->ohcl_type == "ohcl" ) {
+						$chart["series"][$seriesNum]["risingStroke"] = "#".$series["ohlcColor"];
+						$chart["series"][$seriesNum]["risingFill"] = "#".$series["ohlcColor"];
+					}
 				}
-			}
-			if ( @$params["ohlcCandleColor"] != "" && $this->ohcl_type != "ohcl" )
-			{
-				$chart["series"][$seriesNum]["risingStroke"] = "#".$params["ohlcCandleColor"];
-				$chart["series"][$seriesNum]["risingFill"] = "#".$params["ohlcCandleColor"];
+				if ( $series["ohlcCandleColor"] != "" && $this->ohcl_type == "candlestick" ) {
+					$chart["series"][$seriesNum]["risingStroke"] = "#".$series["ohlcCandleColor"];
+					$chart["series"][$seriesNum]["risingFill"] = "#".$series["ohlcCandleColor"];
+				}
 			}
 		}
 
 		$chart["grids"] = $this->getGrids();
-		$chart["logarithm"] = parent::getLogarithm();
+		$chart["logarithm"] = $this->chartSettings["logarithm"];
 		$chart["type"] = "financial";
 		$chart["xScale"] = 0;
 		$chart["yScale"] = 1;
@@ -2061,33 +1671,32 @@ class Chart_Ohlc extends Chart
 			array(
 				"enabled" => "true",
 				"title" => $this->y_axis_label,
-				"labels" => array("enabled" => $this->chrt_array["appearance"]["sval"] == "true")
+				"labels" => array("enabled" => $this->chartSettings["values"])
 			));
 
-		if ( @$this->chrt_array["appearance"]["color61"] != "" )
-			$chart["yAxes"][0]["labels"]["fontColor"] = "#".$this->chrt_array["appearance"]["color61"];
+		if( $this->webChartColors["color61"] != "" )
+			$chart["yAxes"][0]["labels"]["fontColor"] = "#".$this->webChartColors["color61"];
 
 		$chart["xAxes"]	= array(
 			array(
 				"enabled" => "true",
 				"title" => array( 'text' => $this->footer ),
-				"labels" => array("enabled" => $this->chrt_array["appearance"]["sname"] == "true" )
+				"labels" => array("enabled" => $this->chartSettings["names"] )
 			));
 
-		if ( @$this->chrt_array["appearance"]["color51"] != "" )
-			$chart["xAxes"][0]["labels"]["fontColor"] = "#".$this->chrt_array["appearance"]["color51"];
+		if( $this->webChartColors["color51"] != "" )
+			$chart["xAxes"][0]["labels"]["fontColor"] = "#".$this->webChartColors["color51"];
 
-		if ( @$this->chrt_array["appearance"]["color111"] != "" )
-			$chart["xAxes"][0]["title"]["fontColor"] = "#".$this->chrt_array["appearance"]["color111"];
+		if( $this->webChartColors["color111"] != "" )
+			$chart["xAxes"][0]["title"]["fontColor"] = "#".$this->webChartColors["color111"];
 
-		if ( @$this->chrt_array["appearance"]["color131"] != "" )
-			$chart["xAxes"][0]["stroke"] = "#".$this->chrt_array["appearance"]["color131"];
+		if( $this->webChartColors["color131"] != "" )
+			$chart["xAxes"][0]["stroke"] = "#".$this->webChartColors["color131"];
 
-		if ( @$this->chrt_array["appearance"]["color141"] != "" )
-			$chart["yAxes"][0]["stroke"] = "#".$this->chrt_array["appearance"]["color141"];
+		if( $this->webChartColors["color141"] != "" )
+			$chart["yAxes"][0]["stroke"] = "#".$this->webChartColors["color141"];
 
-		if( $this->chrt_array["appearance"]["slog"] == "true" )
-		{
+		if( $this->chartSettings["logarithm"] ) {
 			$chart["scales"] = array(
 				array( "names" => array() ),
 				array( "logBase" => 10, "type" => "log" )
@@ -2103,7 +1712,7 @@ class Chart_Ohlc extends Chart
 		$data = array();
 		$clickdata = array();
 
-		for ( $i = 0; $i < count( $this->arrOHLC_open ); $i++ )
+		for ( $i = 0; $i < count( $this->arrDataSeries ); $i++ )
 		{
 			$data[$i] = array();
 			$clickdata[$i] = array();
@@ -2126,7 +1735,7 @@ class Chart_Ohlc extends Chart
 
 		while( $row )
 		{
-			for ( $i = 0; $i < count( $this->arrOHLC_open ); $i++ )
+			for ( $i = 0; $i < count( $this->arrDataSeries ); $i++ )
 			{
 				$data[$i][] = $this->getPoint( $i, $row );
 
@@ -2140,7 +1749,7 @@ class Chart_Ohlc extends Chart
 		}
 
 		$series = array();
-		for ( $i = 0; $i < count( $this->arrOHLC_open ); $i++ )
+		for ( $i = 0; $i < count( $this->arrDataSeries ); $i++ )
 		{
 			$series[] = $this->getSeriesData( $this->arrDataLabels[$i], $data[$i], $clickdata[$i], $i );
 		}
@@ -2176,21 +1785,24 @@ class Chart_Ohlc extends Chart
 	 * @param Array row
 	 * @return Array
 	 */
-	protected function getPoint( $seriesNumber, $row )
-	{
-		if( $this->table_type!="db" || !$this->chrt_array['customLabels'] )
-		{
-			$high = $row[ $this->arrOHLC_high[ $seriesNumber ] ];
-			$low = $row[ $this->arrOHLC_low[ $seriesNumber ] ];
-			$open = $row[ $this->arrOHLC_open[ $seriesNumber ] ];
-			$close = $row[ $this->arrOHLC_close[ $seriesNumber ] ];
-		}
-		else
-		{
-			$high = $row[ $this->chrt_array['customLabels'][ $this->arrOHLC_high[ $seriesNumber ] ] ];
-			$low = $row[ $this->chrt_array['customLabels'][ $this->arrOHLC_low[ $seriesNumber ] ] ];
-			$open = $row[ $this->chrt_array['customLabels'][ $this->arrOHLC_open[ $seriesNumber ] ] ];
-			$close = $row[ $this->chrt_array['customLabels'][ $this->arrOHLC_close[ $seriesNumber ] ] ];
+	protected function getPoint( $seriesNumber, $row ) {
+		$dataSeries = $this->arrDataSeries[ $seriesNumber ];
+		
+		$high = $row[ $dataSeries["high"] ];
+		$low = $row[ $dataSeries["low"] ];
+		$open = $row[ $dataSeries["open"] ];
+		$close = $row[ $dataSeries["close"] ];
+		
+		if( $this->tableType!="db" || !$this->chartSettings["webCustomLabels"] ) {
+			$high = $row[ $dataSeries["high"] ];
+			$low = $row[ $dataSeries["low"] ];
+			$open = $row[ $dataSeries["open"] ];
+			$close = $row[ $dataSeries["close"] ];
+		} else {
+			$high = $row[ $this->chartSettings["webCustomLabels"][ $dataSeries["high"] ] ];
+			$low = $row[ $this->chartSettings["webCustomLabels"][ $dataSeries["low"] ] ];
+			$open = $row[ $this->chartSettings["webCustomLabels"][ $dataSeries["open"] ] ];
+			$close = $row[ $this->chartSettings["webCustomLabels"][ $dataSeries["close"] ] ];
 		}
 
 		return array(

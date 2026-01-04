@@ -1,4 +1,7 @@
 <?php
+require_once( getabspath('classes/edit_calendar.php' ) );
+require_once( getabspath('classes/edit_gantt.php' ) );
+
 class EditPage extends RunnerPage
 {
 	protected $cachedRecord = null;
@@ -74,6 +77,12 @@ class EditPage extends RunnerPage
 	
 	public $listPage = "";
 
+	public $lookupTable = "";
+	public $lookupField = "";
+	public $lookupPageType = "";
+	public $parentCtrlsData;
+
+
 	/**
 	 * @constructor
 	 */
@@ -97,40 +106,58 @@ class EditPage extends RunnerPage
 		$this->addPageSettings();
 	}
 
+	
+	protected function buildJsTableSettings( $table, $pSet ) {
+		$settings = parent::buildJsTableSettings( $table, $pSet );
+		$this->buildAfterEditActionSettings( $settings );
+		if( isset($this->prevKeys) && !is_null($this->prevKeys)) {
+			$settings['prevKeys'] = $this->prevKeys;
+		}
+		if( isset($this->nextKeys) && !is_null($this->nextKeys)) {
+			$settings['nextKeys'] = $this->nextKeys;
+		}
+
+		$settings["keys"] = $this->jsKeys;
+		$settings['keyFields'] = $this->pSet->getTableKeys();
+
+		if( $this->lockingObj ) {
+			// $keys, $savedKeys could not be set properly if editid params were not passed, so use $this->keys instead
+			$escapedKeys = array();
+			foreach( $this->keys as $k ) {
+				$escapedKeys[] = rawurlencode( $k );
+			}
+			$settings["sKeys"] = implode("&", $escapedKeys );
+			$settings["confirmTime"] = $this->lockingObj->ConfirmTime;
+		}
+
+		return $settings;
+	}
+
+	protected function buildAfterEditActionSettings( &$settings ) {
+		if( !$this->isPopupMode() && !$this->isSimpleMode() )
+			return;
+
+		$afterEditAction = $this->getAfterEditAction();
+		$settings["afterEditAction"] = $afterEditAction;
+
+		if ( $afterEditAction == AE_TO_DETAIL_LIST )
+		$settings["afterEditActionDetTable"] = GetTableURL( $this->pSet->getAEDetailTable() );
+
+		if ( $this->mode == EDIT_POPUP )
+		{
+			if ( $afterEditAction == AE_TO_NEXT_EDIT )
+				$settings["nextKeys"] = $this->getNextKeys();
+
+			if ( $afterEditAction == AE_TO_PREV_EDIT )
+				$settings["prevKeys"] = $this->getPrevKeys();
+		}
+	}
 	/**
 	 * Add js page settings
 	 */
 	protected function addPageSettings()
 	{
-		if( $_SESSION[ $this->sessionPrefix . "_recordUpdated" ] )
-		{
-			$this->setProxyValue( $this->shortTableName."_recordUpdated", true );
-			unset( $_SESSION[ $this->sessionPrefix . "_recordUpdated" ] );
-		}
-		else
-			$this->setProxyValue( $this->shortTableName."_recordUpdated", false );
 
-		if( !$this->isPopupMode() && !$this->isSimpleMode() )
-			return;
-
-		$afterEditAction = $this->getAfterEditAction();
-		$this->jsSettings["tableSettings"][ $this->tName ]["afterEditAction"] = $afterEditAction;
-
-		if ( $afterEditAction == AE_TO_DETAIL_LIST )
-			$this->jsSettings["tableSettings"][ $this->tName ]["afterEditActionDetTable"] = GetTableURL( $this->pSet->getAEDetailTable() );
-
-		if ( $this->mode == EDIT_POPUP )
-		{
-			if ( $afterEditAction == AE_TO_NEXT_EDIT )
-				$this->jsSettings["tableSettings"][ $this->tName ]["nextKeys"] = $this->getNextKeys();
-
-			if ( $afterEditAction == AE_TO_PREV_EDIT )
-				$this->jsSettings["tableSettings"][ $this->tName ]["prevKeys"] = $this->getPrevKeys();
-		}
-		
-		if( $this->listPage && $afterEditAction == AE_TO_LIST ) {
-			$this->pageData["listPage"] = $this->listPage;
-		}
 	}
 
 	/**
@@ -355,18 +382,17 @@ class EditPage extends RunnerPage
 	protected function prepareJsSettings()
 	{
 		$this->pageData['detailsMasterKeys'] = $this->getDetailTablesMasterKeys( $this->getCurrentRecordInternal() );
+		
+		if( $_SESSION[ $this->sessionPrefix . "_recordUpdated" ] )
+		{
+			$this->setProxyValue( $this->shortTableName."_recordUpdated", true );
+			unset( $_SESSION[ $this->sessionPrefix . "_recordUpdated" ] );
+		}
+		else
+			$this->setProxyValue( $this->shortTableName."_recordUpdated", false );
 
-		$this->jsSettings['tableSettings'][ $this->tName ]["keys"] = $this->jsKeys;
-		$this->jsSettings['tableSettings'][ $this->tName ]['keyFields'] = $this->pSet->getTableKeys();
-
-		if( $this->lockingObj ) {
-			// $keys, $savedKeys could not be set properly if editid params were not passed, so use $this->keys instead
-			$escapedKeys = array();
-			foreach( $this->keys as $k ) {
-				$escapedKeys[] = rawurlencode( $k );
-			}
-			$this->jsSettings['tableSettings'][ $this->tName ]["sKeys"] = implode("&", $escapedKeys );
-			$this->jsSettings['tableSettings'][ $this->tName ]["confirmTime"] = $this->lockingObj->ConfirmTime;
+		if( $this->listPage && $this->getAfterEditAction() == AE_TO_LIST ) {
+			$this->pageData["listPage"] = $this->listPage;
 		}
 	}
 
@@ -425,7 +451,7 @@ class EditPage extends RunnerPage
 		if( $this->eventsObject->exists("BeforeShowEdit") )
 			$this->eventsObject->BeforeShowEdit($this->xt, $templateFile, $this->getCurrentrecordInternal(), $this);
 
-		if( $this->mode != EDIT_INLINE )
+		if( $this->mode != EDIT_INLINE && $this->mode != EDIT_ONTHEFLY )
 			$this->displayMasterTableInfo();
 		// invoked after displayMasterTableInfo to add master viewcontrols maps
 		$this->fillSetCntrlMaps();
@@ -436,7 +462,7 @@ class EditPage extends RunnerPage
 			return;
 		}
 
-		if( $this->isPopupMode() || $this->mode == EDIT_DASHBOARD )
+		if( $this->isPopupMode() || $this->mode == EDIT_DASHBOARD || $this->mode == EDIT_ONTHEFLY )
 		{
 			$this->xt->assign("footer", false);
 			$this->xt->assign("header", false);
@@ -494,11 +520,10 @@ class EditPage extends RunnerPage
 	 */
 	protected function prepareDetailsTables()
 	{
-		if( !$this->isShowDetailTables /*|| $this->mode == EDIT_DASHBOARD*/ || $this->mode == EDIT_INLINE )
+		if( $this->mode == EDIT_INLINE )
 			return;
 
 		$dpParams = $this->getDetailsParams( $this->id );
-		$this->jsSettings['tableSettings'][ $this->tName ]['dpParams'] = array('tableNames' => $dpParams['strTableNames'], 'ids' => $dpParams['ids']);
 
 		if( !$dpParams['ids'] )
 			return;
@@ -556,7 +581,9 @@ class EditPage extends RunnerPage
 		if( $this->mode == EDIT_INLINE )
 			return;
 
-		$this->prepareNextPrevButtons();
+		if( $this->mode !== EDIT_ONTHEFLY ) {
+			$this->prepareNextPrevButtons();
+		}
 
 		if( $this->isPopupMode() )
 		{
@@ -603,8 +630,7 @@ class EditPage extends RunnerPage
 			}
 		}
 
-		if( $this->viewAvailable() )
-		{
+		if( $this->viewAvailable() && $this->mode !== EDIT_ONTHEFLY ) {
 			$this->xt->assign("view_page_button", true);
 			$this->xt->assign("view_page_button_attrs", "id=\"viewPageButton".$this->id."\"");
 			if( $_SESSION["successfulEdit"] ) {
@@ -624,12 +650,11 @@ class EditPage extends RunnerPage
 		}
 
 		$nextPrev = $this->getNextPrevRecordKeys( $this->getCurrentRecordInternal() );
+		$this->prevKeys = $nextPrev['prev'];
+		$this->nextKeys = $nextPrev['next'];
 
 		//show Prev/Next buttons
 		$this->assignPrevNextButtons( !!$nextPrev["next"], !!$nextPrev["prev"], $this->mode == EDIT_DASHBOARD && ($this->hasTableDashGridElement() || $this->hasDashMapElement()) ); // TODO: haMajorDashElem
-
-		$this->jsSettings["tableSettings"][ $this->tName] ["prevKeys"] = $nextPrev["prev"];
-		$this->jsSettings["tableSettings"][ $this->tName ]["nextKeys"] = $nextPrev["next"];
 	}
 
 	protected function readRecord()
@@ -757,15 +782,16 @@ class EditPage extends RunnerPage
 
 		//	details tables keys
 		$returnJSON['detKeys'] = array();
-		foreach( $this->pSet->getDetailTablesArr() as $dt )
+		foreach( $this->pSet->getAvailableDetailsTables() as $dt )
 		{
 			$dkeys = array();
-			foreach( $dt["masterKeys"] as $idx => $mk )
+			$detailsKeys = $this->pSet->getDetailsKeys( $dt );
+			foreach( $detailsKeys["masterKeys"] as $idx => $mk )
 			{
 				$dkeys[ "masterkey".($idx + 1) ] = $data[ $mk ];
 			}
-			$returnJSON['detKeys'][ $dt['dDataSourceTable'] ] = $dkeys;
-		}
+			$returnJSON['detKeys'][ $dt ] = $dkeys;
+		}	
 
 		//	prepare field values
 		//	keys
@@ -775,6 +801,7 @@ class EditPage extends RunnerPage
 			$keyParams[] = "key" . ($i + 1) . "=" . runner_htmlspecialchars( rawurlencode( $this->keys[ $k ] ) );
 		}
 		$keylink = "&" . implode("&", $keyParams);
+
 
 		//	values
 		$values = array();
@@ -807,8 +834,18 @@ class EditPage extends RunnerPage
 		{
 			$returnJSON['oldKeys'][ $i++ ] = $value;
 		}
+		
+		if( $this->mode == EDIT_ONTHEFLY )
+		{
+			$lokupData = $this->getLookupData( $this->lookupTable, $this->lookupField, $this->lookupPageType, $this->newRecordData );
+			$returnJSON['linkValue'] = $lokupData['linkValue'];
+			$returnJSON['displayValue'] = $lokupData['displayValue'];
+			$returnJSON['vals'] = $lokupData['vals'];
 
-		$returnJSON['controlValues'] = $controlValues;		
+			return $returnJSON;
+		}
+
+		$returnJSON['controlValues'] = $controlValues;
 		
 		$returnJSON['vals'] = $values;
 		$returnJSON['fields'] = $this->pSet->getFieldsList();
@@ -895,7 +932,8 @@ class EditPage extends RunnerPage
 		$data = $this->getCurrentRecordInternal();
 
 		$mKeys = array();
-		foreach($this->pSet->getMasterKeysByDetailTable( $dTName ) as $i => $mk)
+		$detailsKeys = $this->pSet->getDetailsKeys( $dTName );
+		foreach( $detailsKeys['masterKeys'] as $i => $mk)
 		{
 			$mKeys[] = "masterkey". ($i + 1) . "=" .$data[ $mk ];
 		}
@@ -1109,8 +1147,7 @@ class EditPage extends RunnerPage
 	}
 
 	public function getEditFormat( $field, $pSet = null ) {
-		$isDetKeyField = in_array( $field, $this->detailKeysByM );
-		if( $isDetKeyField ) {
+		if( $this->detailsKeyField( $field ) ) {
 			return EDIT_FORMAT_READONLY;
 		}
 		return parent::getEditFormat( $field, $pSet );
@@ -1118,12 +1155,17 @@ class EditPage extends RunnerPage
 
 
 	protected function prepareEditControl( $fName, &$data ) {
+		$gf = GoodFieldName( $fName );
 		$firstElementId = $this->getControl( $fName, $this->id )->getFirstElementId();
 		if( $firstElementId )
-			$this->xt->assign( "labelfor_" . GoodFieldName( $fName ), $firstElementId );
+			$this->xt->assign( "labelfor_" . $gf, $firstElementId );
 
 		$parameters = $this->getEditContolParams( $fName, $this->id, $data );
-		$this->xt->assign_function( GoodFieldName( $fName )."_editcontrol", "xt_buildeditcontrol", $parameters );
+		if( $this->pSet->getEditFormat( $fName ) == EDIT_FORMAT_CHECKBOX ) {
+			$parameters[ "xt" ] = $this->xt;
+			$parameters[ "clearVar" ] = $gf . "_forward_control";
+		}
+		$this->xt->assign_function( $gf . "_editcontrol", "xt_buildeditcontrol", $parameters );
 
 		$controls = $this->getContolMapData( $fName, $this->id, $data, $this->editFields );
 		if ( in_array( $fName, $this->errorFields ) )
@@ -1131,11 +1173,17 @@ class EditPage extends RunnerPage
 
 		$this->fillControlsMap( $controls );
 
-		$this->fillControlFlags( $fName );
+		if( $this->pSet->getEditFormat( $fName ) == EDIT_FORMAT_CHECKBOX ) {
+			$parameters[ "xt" ] = $this->xt;
+			$parameters[ "clearVar" ] = $gf . "_editcontrol";
+			$this->xt->assign_function( $gf . "_forward_control", "xt_buildforwardcontrol", $parameters );
 
-		// fill special settings for timepicker
-		if( $this->getEditFormat($fName) == 'Time' )
-			$this->fillTimePickSettings( $fName, $data[ $fName ] );
+			$this->xt->assign( $gf . '_label_class' , 'r-checkbox-label' );
+
+		}
+
+
+		$this->fillControlFlags( $fName );
 
 		if( $this->pSet->getViewFormat($fName) == FORMAT_MAP )
 			$this->googleMapCfg['isUseGoogleMap'] = true;
@@ -1145,14 +1193,6 @@ class EditPage extends RunnerPage
 	 * Prepare edit controls
 	 */
 	public function prepareEditControls() {
-		if( $this->mode == EDIT_INLINE ) {
-			$this->editFields = $this->removeHiddenColumnsFromInlineFields(
-					$this->editFields,
-					$this->screenWidth,
-					$this->screenHeight,
-					$this->orientation
-				);
-		}
 
 		//	prepare values
 		$data = $this->getFieldControlValues();
@@ -1163,14 +1203,18 @@ class EditPage extends RunnerPage
 	}
 
 
-	public static function readEditModeFromRequest()
-	{
-		if(postvalue("editType") == "inline")
+	public static function readEditModeFromRequest() {
+		$editType = postvalue("editType");
+		$mode = postvalue("mode");
+
+		if($editType == "inline")
 			return EDIT_INLINE;
-		elseif(postvalue("editType") == EDIT_POPUP)
+		elseif($editType == EDIT_POPUP)
 			return EDIT_POPUP;
-		elseif(postvalue("mode") == "dashrecord")
+		elseif($mode == "dashrecord")
 			return EDIT_DASHBOARD;
+		elseif( $editType == EDIT_ONTHEFLY )
+			return EDIT_ONTHEFLY;
 		else
 			return EDIT_SIMPLE;
 	}
@@ -1194,7 +1238,7 @@ class EditPage extends RunnerPage
 		{
 			$messageLink = "";
 			if( !isLogged() || Security::isGuest() )
-				$messageLink = " <a href='#' id='loginButtonContinue'>". "Login" . "</a>";
+				$messageLink = " <a href='#' id='loginButtonContinue'>". mlang_message('SESSION_EXPIRED3') . "</a>";
 			Security::sendPermissionError( $messageLink );
 			return false;
 		}
@@ -1233,7 +1277,7 @@ class EditPage extends RunnerPage
 		{
 			$returnJSON = array();
 			$returnJSON['success'] = false;
-			$returnJSON['message'] = "Error occurred";
+			$returnJSON['message'] = mlang_message('INLINE_ERROR');
 			$returnJSON['fatalError'] = true;
 			echo printJSON($returnJSON);
 			exit();
@@ -1246,7 +1290,7 @@ class EditPage extends RunnerPage
 				exit();
 			}
 			else
-				$_SESSION["message_edit"] = "<< "."Error occurred"." >>";
+				$_SESSION["message_edit"] = "<< ".mlang_message('INLINE_ERROR')." >>";
 		}
 	}
 
@@ -1381,7 +1425,7 @@ class EditPage extends RunnerPage
 			$_SESSION["successfulEdit"] = $this->updatedSuccessfully;
 		}
 			
-		$this->setMessage( "<strong>&lt;&lt;&lt; "."Record updated". " &gt;&gt;&gt;</strong>" );
+		$this->setMessage( "<strong>&lt;&lt;&lt; ".mlang_message('RECORD_UPDATED'). " &gt;&gt;&gt;</strong>" );
 	}
 
 	/**
@@ -1490,6 +1534,7 @@ class EditPage extends RunnerPage
 			$this->setMessage( $usermessage );
 
 		return $ret;
+		
 	}
 
 	/**
@@ -1531,7 +1576,7 @@ class EditPage extends RunnerPage
 	 */
 	function captchaExists()
 	{
-		if ( $this->mode == ADD_ONTHEFLY || $this->mode == ADD_INLINE || $this->mode == EDIT_INLINE )
+		if ( $this->mode == ADD_ONTHEFLY || $this->mode == ADD_INLINE || $this->mode == EDIT_INLINE || $this->mode == EDIT_ONTHEFLY )
 		{
 			return false;
 		}
@@ -1613,7 +1658,7 @@ class EditPage extends RunnerPage
 	{
 		if($this->mode == EDIT_INLINE)
 		{
-			echo printJSON(array("success" => false, "message" => "The record is not editable"));
+			echo printJSON(array("success" => false, "message" => mlang_message('RECORD_ISNOT_EDITABLE')));
 			exit();
 		}
 		Security::redirectToList( $this->tName );
@@ -1632,7 +1677,6 @@ class EditPage extends RunnerPage
 			if( !$globalEvents->IsRecordEditable($useOldData ? $this->getOldRecordData() : $this->getCurrentRecordInternal(), true, $this->tName) )
 				return false;
 		}
-
 		return true;
 	}
 
@@ -1688,10 +1732,10 @@ class EditPage extends RunnerPage
 	{
 		if( $this->mode != EDIT_INLINE )
 		{
-			$this->message = "<strong>&lt;&lt;&lt; "."Record was NOT edited"."</strong> &gt;&gt;&gt;<br><br>".$message;
+			$this->message = "<strong>&lt;&lt;&lt; ".mlang_message('RECORD_NOT_UPDATED')."</strong> &gt;&gt;&gt;<br><br>".$message;
 		}
 		else
-			$this->message = "Record was NOT edited".". ".$message;
+			$this->message = mlang_message('RECORD_NOT_UPDATED').". ".$message;
 
 		$this->messageType = MESSAGE_ERROR;
 	}
@@ -1718,6 +1762,7 @@ class EditPage extends RunnerPage
 			return $this->recordValuesToEdit;
 
 		$editValues = $this->getCurrentRecordInternal();
+
 		if( $this->eventsObject->exists("ProcessValuesEdit") )
 			$this->eventsObject->ProcessValuesEdit($editValues, $this);
 		$this->recordValuesToEdit = $editValues;
@@ -1777,6 +1822,12 @@ class EditPage extends RunnerPage
 				require_once( getabspath("classes/editselectedpage.php") );
 				return new EditSelectedPage( $params );
 			}
+		}
+		if( $params['pageName'] == 'edit_calendar' ) {
+			return new EditCalendarPage( $params );
+		}
+		if( $params['gantt'] ) {
+			return new EditGanttPage( $params );
 		}
 
 		return new EditPage($params);

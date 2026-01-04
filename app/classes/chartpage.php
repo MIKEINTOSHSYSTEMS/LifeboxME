@@ -15,8 +15,6 @@ class ChartPage extends RunnerPage
 	
 		$this->bodyForms = array( "grid" );
 	
-		$this->jsSettings['tableSettings'][ $this->tName ]['simpleSearchActive'] = $this->searchClauseObj->simpleSearchActive;
-		
 		if( $this->mode == CHART_DASHBOARD ) {
 			$this->pageData['detailsMasterKeys'] = $this->getStartMasterKeys();
 		}
@@ -106,8 +104,8 @@ class ChartPage extends RunnerPage
 	 */
 	public function getStartMasterKeys()
 	{		
-		$detailTablesData = $this->pSet->getDetailTablesArr();
-		if( !$detailTablesData ) {
+		$detailsTables = $this->pSet->getDetailsTables();
+		if( count( $detailsTables ) == 0 ) {
 			return array();
 		}
 		
@@ -122,9 +120,10 @@ class ChartPage extends RunnerPage
 		$data = $this->cipherer->DecryptFetchedArray( $rs->fetchAssoc() );
 		
 		$masterKeysArr = array();
-		foreach ( $detailTablesData as $detailId => $detail ) {
-			foreach( $detail['masterKeys'] as $idx => $mk ) {
-				$masterKeysArr[ $detail['dDataSourceTable'] ] = array( 'masterkey'.($idx + 1) => $data[$mk] );
+		foreach ( $detailsTables as $details ) {
+			$detailsKeys = $this->pSet->getDetailsKeys( $details );
+			foreach( $detailsKeys['masterKeys'] as $idx => $mk ) {
+				$masterKeysArr[ $details ] = array( 'masterkey'.($idx + 1) => $data[$mk] );
 			}
 		}
 
@@ -150,9 +149,6 @@ class ChartPage extends RunnerPage
 		$this->xt->assign("exportpdflink_attrs", "onclick='chart.saveAsPDF();'");
 		$this->xt->assign("advsearchlink_attrs", "id=\"advButton".$this->id."\"");
 
-		if( !GetChartXML( $this->shortTableName ) )
-			$this->xt->assign("chart_block", false);			
-		
 		$this->xt->assign("message_block", true);
 		
 		if( ($this->mode == CHART_SIMPLE || $this->mode == CHART_DASHBOARD) && $this->pSet->noRecordsOnFirstPage() && !$this->searchClauseObj->isSearchFunctionalityActivated() )
@@ -168,14 +164,11 @@ class ChartPage extends RunnerPage
 		if( !$this->show_message_block )
 			$this->hideElement("message");
 
-		if( $this->mobileTemplateMode() )
-			$this->xt->assign('tableinfomobile_block', true);
-
 		
 		$this->assignChartElement();
 		
 		$this->body['begin'].= GetBaseScriptsForPage( $this->isDisplayLoading );
-		if( !$this->isDashboardElement() && !$this->mobileTemplateMode() )
+		if( !$this->isDashboardElement()  )
 			$this->body['begin'].= "<div id=\"search_suggest\" class=\"search_suggest\"></div>";
 
 		// assign body end
@@ -197,6 +190,7 @@ class ChartPage extends RunnerPage
 	public function prepareDetailsForEditViewPage()
 	{
 		$this->addButtonHandlers();
+		$this->AddJSFile( 'usercode/pageevents_' . GLOBAL_PAGES_SHORT . '.js' );
 		
 		$this->xt->assign("body", $this->body);
 		$this->xt->assign("chart_block", true);
@@ -208,13 +202,13 @@ class ChartPage extends RunnerPage
 		$returnJSON = array();
 		if( $this->mode == REPORT_DETAILS )
 		{		
-			$returnJSON['headerCont'] = $this->getProceedLink()	. $returnJSON['headerCont'];
+			$returnJSON['headerCont'] = $returnJSON['headerCont'];
 		}		
 		
 		return $returnJSON;
 	}
 	
-	public function beforeShowChart()
+	public function beforeShowEvent()
 	{
 		if( $this->eventsObject->exists("BeforeShowChart") )
 			$this->eventsObject->BeforeShowChart($this->xt, $this->templatefile, $this);	
@@ -222,7 +216,7 @@ class ChartPage extends RunnerPage
 	
 	public function showPage()
 	{
-		$this->beforeShowChart();
+		$this->beforeShowEvent();
 	
 		if( $this->mode == CHART_DETAILS || $this->mode == CHART_DASHBOARD || $this->mode == CHART_DASHDETAILS )
 		{
@@ -342,7 +336,8 @@ class ChartPage extends RunnerPage
 			"id" => $this->id,
 			// it shows if chart show details
 			"chartPreview" => $this->mode !== CHART_SIMPLE && $this->mode != CHART_DASHBOARD,
-			"stateLink" => $this->getStateUrlParams()
+			"stateLink" => $this->getStateUrlParams(),
+			"stateParams" => $this->getStateParams()
 		);
 		
 		if( $this->dashTName && $this->mode == CHART_DASHBOARD )
@@ -370,5 +365,13 @@ class ChartPage extends RunnerPage
 		else
 			return CHART_SIMPLE;
 	}
+
+	protected function buildJsTableSettings( $table, $pSet ) {
+		$settings = parent::buildJsTableSettings( $table, $pSet );
+		$settings['simpleSearchActive'] = $this->searchClauseObj->simpleSearchActive;
+		return $settings;
+	}
+
 }
+
 ?>

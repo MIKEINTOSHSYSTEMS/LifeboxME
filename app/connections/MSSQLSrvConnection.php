@@ -25,18 +25,22 @@ class MSSQLSrvConnection extends Connection
 	{
 		parent::assignConnectionParams( $params );
 
-		$this->host = $params["connInfo"][0]; //strConnectInfo1
+		$this->ODBCString = $params["ODBCString"];
+		$this->host = $params["connInfo"][0]; 
 
-		if( $params["connInfo"][2] == "SSPI" )
+		//	port number
+		$this->host = str_replace( ':', ',', $this->host );
+
+		$this->dbname = $params["connInfo"][3]; 
+
+		if( $params["connInfo"][4] )
 		{
-			$this->dbname = $params["connInfo"][1];  //strConnectInfo2
-			$this->options = $params["connInfo"][2];  //strConnectInfo3
+			$this->options = 'SSPI';
 		}
 		else
 		{
-			$this->user = $params["connInfo"][1];  //strConnectInfo2
-			$this->pwd = $params["connInfo"][2]; //strConnectInfo3
-			$this->dbname = $params["connInfo"][3];  //strConnectInfo4
+			$this->user = $params["connInfo"][1];
+			$this->pwd = $params["connInfo"][2]; 
 		}
 	}
 
@@ -60,7 +64,6 @@ class MSSQLSrvConnection extends Connection
 		$connectionInfo = array("Database" => $this->dbname, "PWD" => $this->pwd, "UID" => $this->user);
 		if( $this->options == "SSPI" )
 			$connectionInfo = array("Database" => $this->dbname );
-		$connectionInfo["TrustServerCertificate"] = true;
 		$this->conn = sqlsrv_connect($this->host, $connectionInfo);
 
 		if( !$this->conn )

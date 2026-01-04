@@ -27,7 +27,7 @@ $control = $editControls->getControl( $mainField );
 
 
 $contextParams = array();
-$contextParams["data"] = my_json_decode( postvalue('data') );
+$contextParams["data"] = runner_json_decode( postvalue('data') );
 
 $masterTable = postvalue('masterTable');
 if ( $masterTable != "" && isset($_SESSION[ $masterTable . "_masterRecordData" ]) )

@@ -1,7 +1,10 @@
 <?php 
 function runner_sms($number, $message, $parameters = array())
 {
-	global $twilioSID, $twilioAuth, $twilioNumber;
+	
+	$twilioSID = ProjectSettings::getProjectValue( 'smsSettings', 'twilioSID' );
+	$twilioAuth = ProjectSettings::getProjectValue( 'smsSettings', 'twilioAuth' );
+	$twilioNumber = ProjectSettings::getProjectValue( 'smsSettings', 'twilioNumber' );
 
 	if ( !isset($parameters["To"]) )
 		$parameters["To"] = $number;
@@ -28,7 +31,7 @@ function runner_sms($number, $message, $parameters = array())
 	$response = runner_post_request($url, $parameters, $headers, $certPath);
 	if ( !$response["error"] )
 	{
-	    $result["response"] = my_json_decode($response["content"]);
+	    $result["response"] = runner_json_decode($response["content"]);
 	    if ( $result["response"]["status"] == "queued" )
 	    	$result["success"] = true;
 	    else

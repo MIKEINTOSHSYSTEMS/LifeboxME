@@ -73,6 +73,8 @@ class RightsPage extends ListPage
 	{
 		// copy properties to object
 		RunnerPage::__construct($params);
+		global $cman;
+		$this->connection = $cman->getForUserGroups();
 
 		$this->permissionNames["A"] = true;
 		$this->permissionNames["D"] = true;
@@ -128,9 +130,9 @@ class RightsPage extends ListPage
 		global $cman;
 		$grConnection = $cman->getForUserGroups();
 
-		$this->groups[-1] = array( "label" => "<"."Admin".">" );
-		$this->groups[-2] = array( "label" => "<"."Default".">" );
-		$this->groups[-3] = array( "label" => "<"."Guest".">" );
+		$this->groups[-1] = array( "label" => "<".mlang_message('AA_GROUP_ADMIN').">" );
+		$this->groups[-2] = array( "label" => "<".mlang_message('AA_GROUP_DEFAULT').">" );
+		$this->groups[-3] = array( "label" => "<".mlang_message('AA_GROUP_GUEST').">" );
 
 		$groupIdField = "GroupID";
 		$groupLabelField = "Label";
@@ -197,7 +199,7 @@ class RightsPage extends ListPage
 			.", ". $this->connection->addFieldWrappers( "TableName" )
 			.", ". $this->connection->addFieldWrappers( "AccessMask" )
 			.", ". $this->connection->addFieldWrappers( "Page" )
-			." from ". $this->connection->addTableWrappers( "public.lifeboxme_ugrights" )
+			." from ". $this->connection->addTableWrappers( ProjectSettings::getSecurityValue( 'dpTablePrefix' ) . 'ugrights' )
 			." order by ". $this->connection->addFieldWrappers( "GroupID" );
 
 		$qResult = $this->connection->query( $sql );
@@ -210,7 +212,7 @@ class RightsPage extends ListPage
 
 			$pages = array();
 			if( $strPages )
-				$pages = my_json_decode( $strPages );
+				$pages = runner_json_decode( $strPages );
 
 			// check whether the table exists in the project
 			if( !isset($this->tables[ $table ]) )
@@ -250,15 +252,6 @@ class RightsPage extends ListPage
 	 */
 	function addJsGroupsAndRights()
 	{
-		$this->jsSettings['tableSettings'][$this->tName]['warnOnLeaving'] = true;
-		$this->jsSettings['tableSettings'][$this->tName]['rights'] = $this->rights;
-		$this->jsSettings['tableSettings'][$this->tName]['pageRestrictions'] = $this->pageRestrictions;
-		$this->jsSettings['tableSettings'][$this->tName]['groups'] = $this->groups;
-		$this->jsSettings['tableSettings'][$this->tName]['tables'] = $this->tables;
-		$this->jsSettings['tableSettings'][$this->tName]['allPages'] = $this->pages;
-		$this->jsSettings['tableSettings'][$this->tName]['pageMasks'] = $this->pageMasks;
-		$this->jsSettings['tableSettings'][$this->tName]['menuOrderedTables'] = $this->menuOrderedTables;
-		$this->jsSettings['tableSettings'][$this->tName]['alphaOrderedTables'] = $this->alphaOrderedTables;
 	}
 
 	function commonAssign()
@@ -295,8 +288,7 @@ class RightsPage extends ListPage
 		// assign user settings
 		// The user might rewrite $_SESSION["UserName"] value with HTML code in an event, so no encoding will be performed while printing this value.
 		$this->xt->assign("username", $_SESSION["UserName"]);
-		if ($this->createLoginPage)
-			$this->xt->assign("userid", runner_htmlspecialchars( Security::getUserName() ));
+		$this->xt->assign("userid", runner_htmlspecialchars( Security::getUserName() ));
 
 		$this->hideElement("message");
 	}
@@ -350,7 +342,7 @@ class RightsPage extends ListPage
 			$parentNodeId = $mNode->parentItem ? $mNode->parentItem->id : 0;
 
 			$arr = array();
-			if( $pageType == "webreports" || $nodeType == "Separator" ) {
+			if( $pageType == "webreports" || $nodeType == menuItemTypeSeparator ) {
 				continue;
 			}
 
@@ -364,11 +356,11 @@ class RightsPage extends ListPage
 				$this->menuOrderedTables[ $arr["parent"] ]["items"][] = count($this->menuOrderedTables);
 			}
 
-			if( $nodeType == "Group" ) {
+			if( $nodeType == menuItemTypeGroup ) {
 				$arr["groupId"] = count($this->menuOrderedTables);
 			}
 
-			if( $nodeType == "Group" ) {
+			if( $nodeType == menuItemTypeGroup ) {
 				$groupsMap[ $nodeId ] = count($this->menuOrderedTables);
 				//	add all groups
 				$arr["title"] = $title;
@@ -384,7 +376,7 @@ class RightsPage extends ListPage
 			$unlistedId = count($this->menuOrderedTables);
 			$arr = array();
 			$arr["collapsed"] = true;
-			$arr["title"] = "Unlisted tables";
+			$arr["title"] = mlang_message('UNLISTED');
 			$arr["items"] = array();
 			$this->menuOrderedTables[] = $arr;
 			foreach( $this->alphaOrderedTables as $table)
@@ -676,7 +668,7 @@ class RightsPage extends ListPage
 				$this->updateTablePermissions( $table, $group, $tableRights );
 			}
 		}
-		echo my_json_encode(array( 'success' => true ));
+		echo runner_json_encode( array( 'success' => true ));
 	}
 
 	/**
@@ -692,7 +684,7 @@ class RightsPage extends ListPage
 	function updateTablePermissions( $table, $group, $tableRights )
 	{
 		$mask = $tableRights["permissions"];
-		$rightWTableName = $this->connection->addTableWrappers( "public.lifeboxme_ugrights" );
+		$rightWTableName = $this->connection->addTableWrappers( ProjectSettings::getSecurityValue( 'dpTablePrefix' ) . 'ugrights' );
 		$accessMaskWFieldName = $this->connection->addFieldWrappers( "AccessMask" );
 		$groupisWFieldName = $this->connection->addFieldWrappers( "GroupID" );
 		$pageWFieldName = $this->connection->addFieldWrappers( "Page" );
@@ -703,7 +695,7 @@ class RightsPage extends ListPage
 		$strPages = "";
 		$pages = $tableRights["pages"];
 		if( $pages ) {
-			$strPages = my_json_encode( $pages );
+			$strPages = runner_json_encode( $pages );
 		}
 		// It's expected that $this->tName is equal to 'admin_right' so the page's db connection is used #9875
 		$sql = "select ". $accessMaskWFieldName ." from ". $rightWTableName. " where " . $groupWhere;
@@ -763,6 +755,26 @@ class RightsPage extends ListPage
 	 */
 	function buildSearchPanel() {}
 	public function assignSimpleSearch() {}
+
+	protected function buildJsTableSettings( $table, $pSet ) {
+		$settings = parent::buildJsTableSettings( $table, $pSet );
+		$settings['warnOnLeaving'] = true;
+		$settings['rights'] = $this->rights;
+		$settings['pageRestrictions'] = $this->pageRestrictions;
+		$settings['groups'] = $this->groups;
+		$settings['tables'] = $this->tables;
+		$settings['allPages'] = $this->pages;
+		$settings['pageMasks'] = $this->pageMasks;
+		$settings['menuOrderedTables'] = $this->menuOrderedTables;
+		$settings['alphaOrderedTables'] = $this->alphaOrderedTables;
+		return $settings;
+	}
+
+	function isAdminTable() {
+		return true;
+	}
+
+
 }
 
 function rightsSortFunc($a, $b)

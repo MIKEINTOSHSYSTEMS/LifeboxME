@@ -183,7 +183,7 @@ class DataSourceREST extends DataSource {
 		$conn = $this->getConnection();
 		RunnerContext::pushDataCommandContext( $dc );
 		$request = new HttpRequest( RunnerContext::PrepareRest( $conn->url . $desc["request"] ), $desc["method"] );
-		$payload = $this->preparePayload( my_json_decode( $this->opDescriptors[ $op ]["payload"] ), !!$this->opDescriptors[ $op ]["rawPayload"] );
+		$payload = $this->preparePayload( $this->opDescriptors[ $op ]["payload"], !!$this->opDescriptors[ $op ]["rawPayload"] );
 		$request->headers = $payload["header"];
 		$request->urlParams = $payload["url"];
 		if( $this->opDescriptors[ $op ]["rawPayload"] ) {
@@ -221,7 +221,7 @@ class DataSourceREST extends DataSource {
 			if( !IsDateFieldType( $type ) )
 				continue;
 
-			$format = $this->pSet->getFieldDateFormat( $f );
+			$format = $this->pSet->getRestDateFormat( $f );
 			if( !$format )
 				continue;
 
@@ -269,7 +269,7 @@ class DataSourceREST extends DataSource {
 		$flatten = new FlattenObject( $data, $this->getFieldPaths( $listRequest ) );
 		$ret = $flatten->flatten();
 		if( $ret === null ) {
-			$this->setError( my_json_encode( $data ) );
+			$this->setError( runner_json_encode( $data ) );
 			return false;
 		}
 		$ret = $this->normalizeDateValues( $ret );
@@ -321,7 +321,7 @@ class DataSourceREST extends DataSource {
 			}
 		}
 		if( !$foundAny ) {
-			$this->setError( my_json_encode( $data ) );
+			$this->setError( runner_json_encode( $data ) );
 			return false;
 		}
 		return new ArrayResult( $ret );

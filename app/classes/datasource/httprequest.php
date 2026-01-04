@@ -99,7 +99,7 @@ class HttpRequest {
 			return prepareUrlQuery( $this->postPayload );
 		}
 		if( $type == "application/json" || $type == "application/json-patch+json" ) {
-			return my_json_encode( $this->postPayload );
+			return runner_json_encode( $this->postPayload );
 		}
 		if( $type == "multipart/form-data" ) {
 			//	ignore specified boundary and generate a new one

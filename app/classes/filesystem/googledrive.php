@@ -145,7 +145,7 @@ class GoogleDriveFileSystem extends OAuthFileSystem {
 			$this->setLastError( $result["errorMessage"] );
 			return null;
 		}
-		$data = my_json_decode( $result[ "content" ] );
+		$data = runner_json_decode( $result[ "content" ] );
 		
 		if( !$data[ "id" ] ) {
 			//	service returned error

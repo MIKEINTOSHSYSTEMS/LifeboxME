@@ -9,7 +9,7 @@ require_once("classes/button.php");
 if( !isPostRequest() )
 	return;
 
-$params = (array)my_json_decode(postvalue('params'));
+$params = (array)runner_json_decode(postvalue('params'));
 
 if( $params["_base64fields"] ) {
 	foreach( $params["_base64fields"] as $f ) {
@@ -20,15 +20,27 @@ if( $params["_base64fields"] ) {
 $buttId = $params['buttId'];
 $eventId = postvalue('event');
 $table = $params['table'];
-if( !GetTableURL( $table ) ) {
+$pageTable = $params['pageTable'];
+if( !$pageTable ) {
+	$pageTable = $table;
+}
+if( !GetTableURL( $table ) || !GetTableURL( $pageTable ) ) {
 	exit;
 }
 $page = $params['page'];
-if( !Security::userCanSeePage($table, $page ) ) {
+
+
+if( !Security::userCanSeePage( $pageTable, $page ) ) {
 	exit;
 }
 
-$pSet = new ProjectSettings( $table, "", $page );
+$field = $params['field'];
+
+
+$pSet = new ProjectSettings( $table, "", $page, $pageTable );
+$cipherer = new RunnerCipherer( $table );
+
+//	check button or ajax snippet permissions
 if( $buttId ) {
 	$pageButtons = $pSet->customButtons();
 	if( array_search( $buttId , $pageButtons ) === false ) {
@@ -36,101 +48,37 @@ if( $buttId ) {
 	}
 }
 
+if( $eventId ) {
+	if( !verifyAjaxSnippet( $eventId, $field, $pSet ) ) {
+		exit;
+	}
+}
+
+
 $params["masterTable"] = postValue("masterTable");;
 $params["masterKeys"] = array();
-// RunnerPage::readMasterKeysFromRequest
-$i = 1;
-while( isset( $_REQUEST["masterkey".$i] ) ) {
-	$params["masterKeys"][ $i ] = $_REQUEST["masterkey".$i];
-	$i++;
+$params["masterKeys"] = RunnerPage::readMasterKeysFromRequest();
+
+if( $buttId ) {
+	$method = 'buttonHandler_'. $buttId;
+	$globalEvents->$method( $params );
+	exit();
+}
+
+if( $eventId && !$field ) {
+	$method = 'ajaxHandler_'. $eventId;
+	$params[ 'location' ] = 'grid';
+	$globalEvents->$method( $params );
+	exit();
+}
+
+if( $eventId && $field ) {
+	$method = 'fieldEvent_'. $eventId;
+	$params[ 'location' ] = postvalue( 'pageType' );
+	$globalEvents->$method( $params );
+	exit();
 }
 
 
-if($buttId=='process_calculation_jobs')
-{
-	//  for login page users table can be turned off
-	if( $table != GLOBAL_PAGES )
-	{
-		require_once("include/". GetTableURL( $table ) ."_variables.php");
-		$cipherer = new RunnerCipherer( $table );
-	}
-	buttonHandler_process_calculation_jobs($params);
-}
 
-
-
-
-
-// create table and non table handlers
-function buttonHandler_process_calculation_jobs($params)
-{
-	global $strTableName;
-	$result = array();
-
-	// create new button object for get record data
-	$params["keys"] = (array)my_json_decode(postvalue('keys'));
-	$params["isManyKeys"] = postvalue('isManyKeys');
-	$params["location"] = postvalue('location');
-
-	$button = new Button($params);
-	$ajax = $button; // for examle from HELP
-	$keys = $button->getKeys();
-
-	$masterData = false;
-	if ( isset($params['masterData']) && count($params['masterData']) > 0 )
-	{
-		$masterData = $params['masterData'];
-	}
-	else if ( isset($params["masterTable"]) )
-	{
-		$masterData = $button->getMasterData($params["masterTable"]);
-	}
-	
-	$contextParams = array();
-	if ( $params["location"] == PAGE_VIEW )
-	{
-		$contextParams["data"] = $button->getRecordData();
-		$contextParams["masterData"] = $masterData;
-	}
-	else if ( $params["location"] == PAGE_EDIT )
-	{
-		$contextParams["data"] = $button->getRecordData();
-		$contextParams["newData"] = $params['fieldsData'];
-		$contextParams["masterData"] = $masterData;
-	}
-	else if ( $params["location"] == "grid" )
-	{	
-		$params["location"] = "list";
-		$contextParams["data"] = $button->getRecordData();
-		$contextParams["newData"] = $params['fieldsData'];
-		$contextParams["masterData"] = $masterData;
-	}
-	else 
-	{
-		$contextParams["masterData"] = $masterData;
-	}
-
-	RunnerContext::push( new RunnerContextItem( $params["location"], $contextParams));
-	// Server-side: Handle AJAX Request
-if (isset($_POST['action']) && $_POST['action'] == 'run_calculation_job') {
-    global $conn;
-
-    // Run your PostgreSQL function (public.process_calculation_jobs())
-    $sql = "SELECT public.process_calculation_jobs();";
-    db_exec($sql, $conn);
-
-    // Send a JSON response back to the client (you can include any message or data you want)
-    echo json_encode(array("message" => "Calculation job completed successfully."));
-
-    // Ensure the script stops here and doesn't proceed further
-    exit;
-}
-;
-	RunnerContext::pop();
-	echo my_json_encode($result);
-	$button->deleteTempFiles();
-}
-
-
-		
 ?>

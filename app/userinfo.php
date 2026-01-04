@@ -9,10 +9,8 @@ require_once('classes/userinfopage.php');
 
 add_nocache_headers();
 
-if( !UserInfoPage::processUserInfoPageSecurity( $strTableName ) )
+if( !UserInfoPage::processUserInfoPageSecurity() )
 	return;
-
-//	render all necessary layouts
 
 
 $xt = new Xtempl();	
@@ -29,10 +27,8 @@ $params["pageName"] = postvalue("page");
 $params["tName"] = Security::loginTable();
 $params["pageTable"] = GLOBAL_PAGES;
 $params["action"] = postvalue("a");
-		
-;
-$params["captchaName"] = "captcha_1209xre";
-$params["captchaValue"] = postvalue("value_captcha_1209xre_" . $id);
+$params["captchaName"] = CaptchaId;
+$params["captchaValue"] = postvalue( 'value_'. CaptchaId . '_' . $id );
 $params["mode"] = UserInfoPage::readPageModeFromRequest();
 
 $pageObject = new UserInfoPage($params);
