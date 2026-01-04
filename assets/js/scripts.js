@@ -80,7 +80,7 @@ var swiper = new Swiper(".mySwiper", {
 
 // Countdown Timer
 function updateCountdown() {
-    const launchDate = new Date('October 7, 2025 00:00:00').getTime();
+    const launchDate = new Date('April 1, 2026 00:00:00').getTime();
     const now = new Date().getTime();
     const distance = launchDate - now;
 
