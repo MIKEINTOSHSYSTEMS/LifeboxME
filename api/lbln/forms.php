@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 // Load environment variables from .env file
 function loadEnv() {
-    $envFile = __DIR__ . '../../../.env.dev';
+    $envFile = '../../.env.dev';
     
     if (!file_exists($envFile)) {
         // Try parent directory
