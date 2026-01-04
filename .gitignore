@@ -45,6 +45,8 @@ api/dev/api/
 api/dev/assets/
 api/dev/db/db.php
 api/dev/docker/
+api/lbln/tests
+#api/lbln/
 modules/srcs/
 modules/quiz/
 modules/test/exam
