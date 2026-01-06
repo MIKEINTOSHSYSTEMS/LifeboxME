@@ -1138,7 +1138,7 @@ function cancelUserFetchSession($sessionId) {
 // ORIGINAL FUNCTIONS (with minor improvements)
 // ============================================
 
-// Fetch all courses (original, unchanged except for optimization)
+// SAFE VERSION - fetchAllCourses
 function fetchAllCourses() {
     $logId = logFetchOperation('lbln_courses', 'fetch_courses', [
         'endpoint' => 'courses.php',
@@ -1171,8 +1171,39 @@ function fetchAllCourses() {
     if ($totalCourses > 0) {
         $db = getDbConnection();
         
-        // Use transaction for batch processing
-        $db->beginTransaction();
+        // Prepare both statements
+        $updateStmt = $db->prepare("
+            UPDATE lbln_courses SET
+                course_title = ?,
+                categories = ?::JSONB,
+                description = ?,
+                name = ?,
+                image = ?,
+                course_image = ?,
+                original_price = ?,
+                discount_price = ?,
+                final_price = ?,
+                access = ?,
+                expires = ?,
+                expires_type = ?,
+                drip_feed = ?,
+                identifiers = ?::JSONB,
+                after_purchase = ?::JSONB,
+                author = ?::JSONB,
+                created = ?,
+                modified = ?,
+                is_active = TRUE
+            WHERE course_id = ?
+        ");
+        
+        $insertStmt = $db->prepare("
+            INSERT INTO lbln_courses (
+                course_id, course_title, categories, description, name,
+                image, course_image, original_price, discount_price,
+                final_price, access, expires, expires_type, drip_feed,
+                identifiers, after_purchase, author, created, modified
+            ) VALUES (?, ?, ?::JSONB, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?::JSONB, ?::JSONB, ?::JSONB, ?, ?)
+        ");
         
         foreach ($courses as $course) {
             try {
@@ -1181,103 +1212,102 @@ function fetchAllCourses() {
                 $checkStmt->execute([$course['id']]);
                 $exists = $checkStmt->fetch();
                 
-                // Prepare categories as JSON
+                // Prepare all values safely
+                $courseId = $course['id'];
+                $courseTitle = $course['title'] ?? '';
+                $description = $course['description'] ?? '';
+                
+                // Handle categories
                 $categories = !empty($course['categories']) ? json_encode($course['categories']) : json_encode([]);
+                
+                // Handle author safely
+                $authorName = null;
+                $authorImage = null;
+                if (isset($course['author']) && is_array($course['author'])) {
+                    $authorName = $course['author']['name'] ?? null;
+                    $authorImage = $course['author']['image'] ?? null;
+                }
+                $author = !empty($course['author']) ? json_encode($course['author']) : json_encode([]);
+                
+                $courseImage = $course['courseImage'] ?? null;
+                $originalPrice = $course['original_price'] ?? 0;
+                $discountPrice = $course['discount_price'] ?? 0;
+                $finalPrice = $course['final_price'] ?? 0;
+                $access = $course['access'] ?? 'free';
+                
+                // Handle expires
+                $expires = null;
+                if (!empty($course['expires'])) {
+                    $expires = date('Y-m-d H:i:s', $course['expires']);
+                }
+                
+                $expiresType = $course['expiresType'] ?? null;
+                $dripFeed = $course['dripFeed'] ?? 'none';
+                
+                // Handle other JSON fields
                 $identifiers = !empty($course['identifiers']) ? json_encode($course['identifiers']) : json_encode([]);
                 $afterPurchase = !empty($course['afterPurchase']) ? json_encode($course['afterPurchase']) : json_encode([]);
-                $author = !empty($course['author']) ? json_encode($course['author']) : json_encode([]);
+                
+                $created = $course['created'] ?? null;
+                $modified = $course['modified'] ?? null;
                 
                 if ($exists) {
                     // Update existing course
-                    $stmt = $db->prepare("
-                        UPDATE lbln_courses SET
-                            course_title = ?,
-                            categories = ?::JSONB,
-                            description = ?,
-                            name = ?,
-                            image = ?,
-                            course_image = ?,
-                            original_price = ?,
-                            discount_price = ?,
-                            final_price = ?,
-                            access = ?,
-                            expires = ?,
-                            expires_type = ?,
-                            drip_feed = ?,
-                            identifiers = ?::JSONB,
-                            after_purchase = ?::JSONB,
-                            author = ?::JSONB,
-                            created = ?,
-                            modified = ?,
-                            is_active = TRUE
-                        WHERE course_id = ?
-                    ");
-                    
-                    $stmt->execute([
-                        $course['title'] ?? '',
+                    $updateStmt->execute([
+                        $courseTitle,
                         $categories,
-                        $course['description'] ?? '',
-                        $course['author']['name'] ?? null,
-                        $course['author']['image'] ?? null,
-                        $course['courseImage'] ?? null,
-                        $course['original_price'] ?? 0,
-                        $course['discount_price'] ?? 0,
-                        $course['final_price'] ?? 0,
-                        $course['access'] ?? 'free',
-                        !empty($course['expires']) ? date('Y-m-d H:i:s', $course['expires']) : null,
-                        $course['expiresType'] ?? null,
-                        $course['dripFeed'] ?? 'none',
+                        $description,
+                        $authorName,
+                        $authorImage,
+                        $courseImage,
+                        $originalPrice,
+                        $discountPrice,
+                        $finalPrice,
+                        $access,
+                        $expires,
+                        $expiresType,
+                        $dripFeed,
                         $identifiers,
                         $afterPurchase,
                         $author,
-                        $course['created'] ?? null,
-                        $course['modified'] ?? null,
-                        $course['id']
+                        $created,
+                        $modified,
+                        $courseId
                     ]);
                     
                     $updated++;
                 } else {
                     // Insert new course
-                    $stmt = $db->prepare("
-                        INSERT INTO lbln_courses (
-                            course_id, course_title, categories, description, name,
-                            image, course_image, original_price, discount_price,
-                            final_price, access, expires, expires_type, drip_feed,
-                            identifiers, after_purchase, author, created, modified
-                        ) VALUES (?, ?, ?::JSONB, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?::JSONB, ?::JSONB, ?::JSONB, ?, ?)
-                    ");
-                    
-                    $stmt->execute([
-                        $course['id'],
-                        $course['title'] ?? '',
+                    $insertStmt->execute([
+                        $courseId,
+                        $courseTitle,
                         $categories,
-                        $course['description'] ?? '',
-                        $course['author']['name'] ?? null,
-                        $course['author']['image'] => null,
-                        $course['courseImage'] ?? null,
-                        $course['original_price'] ?? 0,
-                        $course['discount_price'] ?? 0,
-                        $course['final_price'] ?? 0,
-                        $course['access'] ?? 'free',
-                        !empty($course['expires']) ? date('Y-m-d H:i:s', $course['expires']) : null,
-                        $course['expiresType'] ?? null,
-                        $course['dripFeed'] ?? 'none',
+                        $description,
+                        $authorName,
+                        $authorImage,
+                        $courseImage,
+                        $originalPrice,
+                        $discountPrice,
+                        $finalPrice,
+                        $access,
+                        $expires,
+                        $expiresType,
+                        $dripFeed,
                         $identifiers,
                         $afterPurchase,
                         $author,
-                        $course['created'] ?? null,
-                        $course['modified'] ?? null
+                        $created,
+                        $modified
                     ]);
                     
                     $inserted++;
                 }
             } catch (Exception $e) {
                 $errors[] = "Course {$course['id']}: " . $e->getMessage();
+                error_log("Error processing course {$course['id']}: " . $e->getMessage());
                 $skipped++;
             }
         }
-        
-        $db->commit();
     }
     
     updateFetchLog($logId, [
