@@ -840,6 +840,7 @@ input:checked+.theme-toggle-slider:before {
     z-index: 2000;
     align-items: center;
     justify-content: center;
+    -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
 }
 
@@ -1138,3 +1139,10 @@ input:checked+.theme-toggle-slider:before {
         border: 1px solid #ddd;
     }
 }
+
+/* Fetcher Styles */
+
+
+
+
+/* Fetcher Styles */
