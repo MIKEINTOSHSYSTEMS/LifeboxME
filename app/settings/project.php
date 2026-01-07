@@ -337,9 +337,6 @@ $runnerProjectSettings = array(
 		'public.lbpmi_indicator_groups' => array(
 			'table' => 4799 
 		),
-		'LBLN_Courses' => array(
-			'table' => 9883 
-		),
 		'public.lbln_course_analytics' => array(
 			'table' => 9999 
 		),
@@ -2970,18 +2967,6 @@ $runnerProjectSettings = array(
 			'color' => 'CD853F',
 			'originalTable' => 'public.lbpmi_indicator_groups' 
 		),
-		'LBLN_Courses' => array(
-			'gid' => 9883,
-			'name' => 'LBLN_Courses',
-			'shortName' => 'LBLN_Courses',
-			'type' => 7,
-			'caption' => array(
-				'English' => 'LBLN_Courses' 
-			),
-			'connId' => 'rest1',
-			'color' => 'dc143c',
-			'originalTable' => '' 
-		),
 		'public.lbln_course_analytics' => array(
 			'gid' => 9999,
 			'name' => 'public.lbln_course_analytics',
@@ -3161,7 +3146,6 @@ $runnerProjectSettings = array(
 		'lbpmi_domain_type' => 'public.lbpmi_domain_type',
 		'lbpmi_indicator_types' => 'public.lbpmi_indicator_types',
 		'lbpmi_indicator_groups' => 'public.lbpmi_indicator_groups',
-		'LBLN_Courses' => 'LBLN_Courses',
 		'lbln_course_analytics' => 'public.lbln_course_analytics',
 		'lbln_course_users' => 'public.lbln_course_users',
 		'lbln_courses' => 'public.lbln_courses',
@@ -3275,7 +3259,6 @@ $runnerProjectSettings = array(
 		'public_lbpmi_domain_type' => 'public.lbpmi_domain_type',
 		'public_lbpmi_indicator_types' => 'public.lbpmi_indicator_types',
 		'public_lbpmi_indicator_groups' => 'public.lbpmi_indicator_groups',
-		'LBLN_Courses' => 'LBLN_Courses',
 		'public_lbln_course_analytics' => 'public.lbln_course_analytics',
 		'public_lbln_course_users' => 'public.lbln_course_users',
 		'public_lbln_courses' => 'public.lbln_courses',
@@ -3317,7 +3300,7 @@ $runnerProjectSettings = array(
 		'table' => 'public.lifeboxme_settings' 
 	),
 	'wizardBuild' => '43785',
-	'projectBuild' => 'ksYXKZysZoxC',
+	'projectBuild' => 's1NHUXLxXBZT',
 	'projectTheme' => 'flatly',
 	'projectSize' => 'normal',
 	'customErrorMsg' => array(
