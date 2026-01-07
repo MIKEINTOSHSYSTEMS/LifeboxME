@@ -72,7 +72,8 @@ $runnerTableSettings['public.unit_of_measurement'] = array(
 	'sql' => 'SELECT
 	uom_id,
 	uom_name
-FROM "public".unit_of_measurement',
+FROM
+	"public".unit_of_measurement',
 	'keyFields' => array( 
 		'uom_id' 
 	),
@@ -162,7 +163,8 @@ FROM "public".unit_of_measurement',
 		'sql' => 'SELECT
 	uom_id,
 	uom_name
-FROM "public".unit_of_measurement',
+FROM
+	"public".unit_of_measurement',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -281,7 +283,8 @@ FROM "public".unit_of_measurement',
 		'headSql' => 'SELECT',
 		'fieldListSql' => 'uom_id,
 	uom_name',
-		'fromListSql' => 'FROM "public".unit_of_measurement',
+		'fromListSql' => 'FROM
+	"public".unit_of_measurement',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

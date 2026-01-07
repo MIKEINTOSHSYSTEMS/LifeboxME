@@ -65,7 +65,8 @@ $runnerTableSettings['public.lifeboxme_dhis2_dataitems'] = array(
 	display_short_name,
 	dimension_item_type,
 	last_updated
-FROM "public".lifeboxme_dhis2_dataitems',
+FROM
+	"public".lifeboxme_dhis2_dataitems',
 	'keyFields' => array( 
 		'id' 
 	),
@@ -401,7 +402,8 @@ FROM "public".lifeboxme_dhis2_dataitems',
 	display_short_name,
 	dimension_item_type,
 	last_updated
-FROM "public".lifeboxme_dhis2_dataitems',
+FROM
+	"public".lifeboxme_dhis2_dataitems',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -664,7 +666,8 @@ FROM "public".lifeboxme_dhis2_dataitems',
 	display_short_name,
 	dimension_item_type,
 	last_updated',
-		'fromListSql' => 'FROM "public".lifeboxme_dhis2_dataitems',
+		'fromListSql' => 'FROM
+	"public".lifeboxme_dhis2_dataitems',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

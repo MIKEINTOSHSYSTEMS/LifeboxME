@@ -79,7 +79,8 @@ $runnerTableSettings['public.device_distribution_log'] = array(
 	new_quantity,
 	performed_by,
 	created_at
-FROM "public".device_distribution_log',
+FROM
+	"public".device_distribution_log',
 	'keyFields' => array( 
 		'log_id' 
 	),
@@ -415,7 +416,8 @@ FROM "public".device_distribution_log',
 	new_quantity,
 	performed_by,
 	created_at
-FROM "public".device_distribution_log',
+FROM
+	"public".device_distribution_log',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -678,7 +680,8 @@ FROM "public".device_distribution_log',
 	new_quantity,
 	performed_by,
 	created_at',
-		'fromListSql' => 'FROM "public".device_distribution_log',
+		'fromListSql' => 'FROM
+	"public".device_distribution_log',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

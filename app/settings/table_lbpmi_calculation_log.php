@@ -72,7 +72,8 @@ $runnerTableSettings['public.lbpmi_calculation_log'] = array(
 	status,
 	error_message,
 	execution_time_ms
-FROM "public".lbpmi_calculation_log',
+FROM
+	"public".lbpmi_calculation_log',
 	'keyFields' => array( 
 		'log_id' 
 	),
@@ -722,7 +723,8 @@ FROM "public".lbpmi_calculation_log',
 	status,
 	error_message,
 	execution_time_ms
-FROM "public".lbpmi_calculation_log',
+FROM
+	"public".lbpmi_calculation_log',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -1177,7 +1179,8 @@ FROM "public".lbpmi_calculation_log',
 	status,
 	error_message,
 	execution_time_ms',
-		'fromListSql' => 'FROM "public".lbpmi_calculation_log',
+		'fromListSql' => 'FROM
+	"public".lbpmi_calculation_log',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

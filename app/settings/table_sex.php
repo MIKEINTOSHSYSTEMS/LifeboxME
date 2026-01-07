@@ -87,7 +87,8 @@ $runnerTableSettings['public.sex'] = array(
 	is_active,
 	created_at,
 	updated_at
-FROM "public".sex',
+FROM
+	"public".sex',
 	'keyFields' => array( 
 		'sex_id' 
 	),
@@ -326,7 +327,8 @@ FROM "public".sex',
 	is_active,
 	created_at,
 	updated_at
-FROM "public".sex',
+FROM
+	"public".sex',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -541,7 +543,8 @@ FROM "public".sex',
 	is_active,
 	created_at,
 	updated_at',
-		'fromListSql' => 'FROM "public".sex',
+		'fromListSql' => 'FROM
+	"public".sex',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

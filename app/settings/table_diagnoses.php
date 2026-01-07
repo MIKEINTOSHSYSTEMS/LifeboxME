@@ -86,7 +86,8 @@ $runnerTableSettings['public.diagnoses'] = array(
 	diagnosis_category,
 	description,
 	created_at
-FROM "public".diagnoses',
+FROM
+	"public".diagnoses',
 	'keyFields' => array( 
 		'diagnosis_id' 
 	),
@@ -289,7 +290,8 @@ FROM "public".diagnoses',
 	diagnosis_category,
 	description,
 	created_at
-FROM "public".diagnoses',
+FROM
+	"public".diagnoses',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -480,7 +482,8 @@ FROM "public".diagnoses',
 	diagnosis_category,
 	description,
 	created_at',
-		'fromListSql' => 'FROM "public".diagnoses',
+		'fromListSql' => 'FROM
+	"public".diagnoses',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

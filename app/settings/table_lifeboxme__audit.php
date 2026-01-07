@@ -63,7 +63,8 @@ $runnerTableSettings['public.lifeboxme__audit'] = array(
 	"table",
 	"action",
 	description
-FROM "public".lifeboxme__audit',
+FROM
+	"public".lifeboxme__audit',
 	'keyFields' => array( 
 		'id' 
 	),
@@ -327,7 +328,8 @@ FROM "public".lifeboxme__audit',
 	"table",
 	"action",
 	description
-FROM "public".lifeboxme__audit',
+FROM
+	"public".lifeboxme__audit',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -566,7 +568,8 @@ FROM "public".lifeboxme__audit',
 	"table",
 	"action",
 	description',
-		'fromListSql' => 'FROM "public".lifeboxme__audit',
+		'fromListSql' => 'FROM
+	"public".lifeboxme__audit',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

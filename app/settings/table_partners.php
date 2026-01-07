@@ -89,7 +89,8 @@ $runnerTableSettings['public.partners'] = array(
 	is_active,
 	created_at,
 	updated_at
-FROM "public".partners',
+FROM
+	"public".partners',
 	'keyFields' => array( 
 		'partner_id' 
 	),
@@ -400,7 +401,8 @@ FROM "public".partners',
 	is_active,
 	created_at,
 	updated_at
-FROM "public".partners',
+FROM
+	"public".partners',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -663,7 +665,8 @@ FROM "public".partners',
 	is_active,
 	created_at,
 	updated_at',
-		'fromListSql' => 'FROM "public".partners',
+		'fromListSql' => 'FROM
+	"public".partners',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

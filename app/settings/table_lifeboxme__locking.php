@@ -64,7 +64,8 @@ $runnerTableSettings['public.lifeboxme__locking'] = array(
 	sessionid,
 	userid,
 	"action"
-FROM "public".lifeboxme__locking',
+FROM
+	"public".lifeboxme__locking',
 	'keyFields' => array( 
 		'id' 
 	),
@@ -368,7 +369,8 @@ FROM "public".lifeboxme__locking',
 	sessionid,
 	userid,
 	"action"
-FROM "public".lifeboxme__locking',
+FROM
+	"public".lifeboxme__locking',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -631,7 +633,8 @@ FROM "public".lifeboxme__locking',
 	sessionid,
 	userid,
 	"action"',
-		'fromListSql' => 'FROM "public".lifeboxme__locking',
+		'fromListSql' => 'FROM
+	"public".lifeboxme__locking',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

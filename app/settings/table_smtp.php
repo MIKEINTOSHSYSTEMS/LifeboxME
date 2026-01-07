@@ -80,7 +80,8 @@ $runnerTableSettings['public.smtp'] = array(
 	secure,
 	created_at,
 	updated_at
-FROM "public".smtp',
+FROM
+	"public".smtp',
 	'keyFields' => array( 
 		'id' 
 	),
@@ -423,7 +424,8 @@ FROM "public".smtp',
 	secure,
 	created_at,
 	updated_at
-FROM "public".smtp',
+FROM
+	"public".smtp',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -710,7 +712,8 @@ FROM "public".smtp',
 	secure,
 	created_at,
 	updated_at',
-		'fromListSql' => 'FROM "public".smtp',
+		'fromListSql' => 'FROM
+	"public".smtp',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

@@ -73,7 +73,8 @@ $runnerTableSettings['public.lbpmi_calculation_jobs'] = array(
 	error_message,
 	attempts,
 	next_retry
-FROM "public".lbpmi_calculation_jobs',
+FROM
+	"public".lbpmi_calculation_jobs',
 	'keyFields' => array( 
 		'job_id' 
 	),
@@ -750,7 +751,8 @@ FROM "public".lbpmi_calculation_jobs',
 	error_message,
 	attempts,
 	next_retry
-FROM "public".lbpmi_calculation_jobs',
+FROM
+	"public".lbpmi_calculation_jobs',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -1229,7 +1231,8 @@ FROM "public".lbpmi_calculation_jobs',
 	error_message,
 	attempts,
 	next_retry',
-		'fromListSql' => 'FROM "public".lbpmi_calculation_jobs',
+		'fromListSql' => 'FROM
+	"public".lbpmi_calculation_jobs',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

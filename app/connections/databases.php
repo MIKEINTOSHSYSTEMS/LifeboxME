@@ -14,7 +14,7 @@ $runnerDatabases = array(
 			'lifebox_mesystem',
 			'',
 			'1',
-			'{}' 
+			'{"ssl":false}' 
 		) 
 	) 
 );
@@ -37,6 +37,14 @@ $runnerRestConnections = array(
 		'clientId' => '',
 		'clientSecret' => '',
 		'scope' => '' 
+	),
+	'rest1' => array(
+		'authType' => 'none',
+		'outputLanguage' => 0,
+		'id' => 'rest1',
+		'name' => 'LifeboxLN_Rest-API',
+		'url' => 'https://lifebox.merqconsultancy.org/api/lbln/',
+		'clientCredentials' => false 
 	) 
 );
 

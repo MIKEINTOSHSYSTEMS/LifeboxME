@@ -85,7 +85,8 @@ $runnerTableSettings['public.languages'] = array(
 	language_name,
 	iso_code,
 	created_at
-FROM "public".languages',
+FROM
+	"public".languages',
 	'keyFields' => array( 
 		'language_id' 
 	),
@@ -250,7 +251,8 @@ FROM "public".languages',
 	language_name,
 	iso_code,
 	created_at
-FROM "public".languages',
+FROM
+	"public".languages',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -417,7 +419,8 @@ FROM "public".languages',
 	language_name,
 	iso_code,
 	created_at',
-		'fromListSql' => 'FROM "public".languages',
+		'fromListSql' => 'FROM
+	"public".languages',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

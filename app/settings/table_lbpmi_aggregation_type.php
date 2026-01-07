@@ -72,7 +72,8 @@ $runnerTableSettings['public.lbpmi_aggregation_type'] = array(
 	'sql' => 'SELECT
 	agg_id,
 	aggregation_type
-FROM "public".lbpmi_aggregation_type',
+FROM
+	"public".lbpmi_aggregation_type',
 	'keyFields' => array( 
 		'agg_id' 
 	),
@@ -162,7 +163,8 @@ FROM "public".lbpmi_aggregation_type',
 		'sql' => 'SELECT
 	agg_id,
 	aggregation_type
-FROM "public".lbpmi_aggregation_type',
+FROM
+	"public".lbpmi_aggregation_type',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -281,7 +283,8 @@ FROM "public".lbpmi_aggregation_type',
 		'headSql' => 'SELECT',
 		'fieldListSql' => 'agg_id,
 	aggregation_type',
-		'fromListSql' => 'FROM "public".lbpmi_aggregation_type',
+		'fromListSql' => 'FROM
+	"public".lbpmi_aggregation_type',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

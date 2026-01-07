@@ -84,7 +84,8 @@ $runnerTableSettings['public.lbpmi_indicator_actuals'] = array(
 	calculation_timestamp,
 	created_at,
 	updated_at
-FROM "public".lbpmi_indicator_actuals',
+FROM
+	"public".lbpmi_indicator_actuals',
 	'keyFields' => array( 
 		'actual_id' 
 	),
@@ -652,7 +653,8 @@ FROM "public".lbpmi_indicator_actuals',
 	calculation_timestamp,
 	created_at,
 	updated_at
-FROM "public".lbpmi_indicator_actuals',
+FROM
+	"public".lbpmi_indicator_actuals',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -1059,7 +1061,8 @@ FROM "public".lbpmi_indicator_actuals',
 	calculation_timestamp,
 	created_at,
 	updated_at',
-		'fromListSql' => 'FROM "public".lbpmi_indicator_actuals',
+		'fromListSql' => 'FROM
+	"public".lbpmi_indicator_actuals',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

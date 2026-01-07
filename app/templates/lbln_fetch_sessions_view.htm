@@ -1,0 +1,386 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+						<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+    <LINK rel="shortcut icon" type="image/png" href="/assets/img/lb_favicon.ico"/>
+    <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
+    <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
+    <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
+    		{BEGIN styleCSSFiles}
+<link REL="stylesheet" href="{$stylepath}" type="text/css">
+{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-view" >
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		{$locking}
+		<div class="r-small-page" 
+			data-body-align="center"
+			data-body-width="standard"
+		>
+							{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="small" {$form_top} data-pageid="{$pageid}"
+		data-v-width="4"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="top_c1" data-pageid="{$pageid}"	{$cell_top_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	 
+		<h2 data-itemtype="view_header" data-itemid="view_header" {$item_view_header} data-pageid="{$pageid}" >{$pagetitlelabel public_lbln_fetch_sessions view}</h2>
+	</div>					</div>
+	</div>		
+{END top_block}
+									{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="small" {$form_above-grid} data-pageid="{$pageid}"
+		data-v-width="4"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	</div>					</div>
+	</div>		
+{END above-grid_block}
+									{BEGIN grid_block}
+
+
+
+
+ 
+	 
+												<table 
+	data-body-align="center"
+	data-location="grid" id="form_grid_{$pageid}" data-makeup="small" {$form_grid} data-pageid="{$pageid}" 
+	class="r-edit-form" cellpadding="0" cellspacing="0" 
+	{$grid_hiddenattr} 
+		data-form-width="1"
+		
+		data-v-width="4"
+	>
+	<tbody>
+										<tr {$row_grid_0} >
+										
+
+{BEGIN cellblock_grid_c3}
+<td
+	{$cell_grid_c3}
+	class=" r-ori-vert"
+	
+				data-fullwidth
+		
+			data-cellId="grid_c3" data-pageid="{$pageid}"
+		data-v-cell="4"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_id}  r-vertical-field" 
+	data-signal-error-for="id{$id}" {$required_attr_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="id" data-fieldname="id" >
+
+	<label class="r-edit-label control-label {$id_label_class}" for="{$labelfor_id}">
+		{BEGIN id_label}
+			{$id_forward_control}
+			{$label public_lbln_fetch_sessions id }			{END id_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$id_value}	</div>
+	</div>
+
+
+{END id_fieldblock}
+											
+{BEGIN session_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_session_id}  r-vertical-field" 
+	data-signal-error-for="session_id{$id}" {$required_attr_session_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="session_id" data-fieldname="session_id" >
+
+	<label class="r-edit-label control-label {$session_id_label_class}" for="{$labelfor_session_id}">
+		{BEGIN session_id_label}
+			{$session_id_forward_control}
+			{$label public_lbln_fetch_sessions session_id }			{END session_id_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$session_id_value}	</div>
+	</div>
+
+
+{END session_id_fieldblock}
+											
+{BEGIN session_type_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_session_type}  r-vertical-field" 
+	data-signal-error-for="session_type{$id}" {$required_attr_session_type}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="session_type" data-fieldname="session_type" >
+
+	<label class="r-edit-label control-label {$session_type_label_class}" for="{$labelfor_session_type}">
+		{BEGIN session_type_label}
+			{$session_type_forward_control}
+			{$label public_lbln_fetch_sessions session_type }			{END session_type_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$session_type_value}	</div>
+	</div>
+
+
+{END session_type_fieldblock}
+											
+{BEGIN target_table_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_target_table}  r-vertical-field" 
+	data-signal-error-for="target_table{$id}" {$required_attr_target_table}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="target_table" data-fieldname="target_table" >
+
+	<label class="r-edit-label control-label {$target_table_label_class}" for="{$labelfor_target_table}">
+		{BEGIN target_table_label}
+			{$target_table_forward_control}
+			{$label public_lbln_fetch_sessions target_table }			{END target_table_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$target_table_value}	</div>
+	</div>
+
+
+{END target_table_fieldblock}
+											
+{BEGIN selected_courses_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_selected_courses}  r-vertical-field" 
+	data-signal-error-for="selected_courses{$id}" {$required_attr_selected_courses}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="selected_courses" data-fieldname="selected_courses" >
+
+	<label class="r-edit-label control-label {$selected_courses_label_class}" for="{$labelfor_selected_courses}">
+		{BEGIN selected_courses_label}
+			{$selected_courses_forward_control}
+			{$label public_lbln_fetch_sessions selected_courses }			{END selected_courses_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$selected_courses_value}	</div>
+	</div>
+
+
+{END selected_courses_fieldblock}
+											
+{BEGIN course_progress_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_course_progress}  r-vertical-field" 
+	data-signal-error-for="course_progress{$id}" {$required_attr_course_progress}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="course_progress" data-fieldname="course_progress" >
+
+	<label class="r-edit-label control-label {$course_progress_label_class}" for="{$labelfor_course_progress}">
+		{BEGIN course_progress_label}
+			{$course_progress_forward_control}
+			{$label public_lbln_fetch_sessions course_progress }			{END course_progress_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$course_progress_value}	</div>
+	</div>
+
+
+{END course_progress_fieldblock}
+											
+{BEGIN total_courses_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_total_courses}  r-vertical-field" 
+	data-signal-error-for="total_courses{$id}" {$required_attr_total_courses}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="total_courses" data-fieldname="total_courses" >
+
+	<label class="r-edit-label control-label {$total_courses_label_class}" for="{$labelfor_total_courses}">
+		{BEGIN total_courses_label}
+			{$total_courses_forward_control}
+			{$label public_lbln_fetch_sessions total_courses }			{END total_courses_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$total_courses_value}	</div>
+	</div>
+
+
+{END total_courses_fieldblock}
+											
+{BEGIN options_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_options}  r-vertical-field" 
+	data-signal-error-for="options{$id}" {$required_attr_options}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="options" data-fieldname="options" >
+
+	<label class="r-edit-label control-label {$options_label_class}" for="{$labelfor_options}">
+		{BEGIN options_label}
+			{$options_forward_control}
+			{$label public_lbln_fetch_sessions options }			{END options_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$options_value}	</div>
+	</div>
+
+
+{END options_fieldblock}
+											
+{BEGIN status_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_status}  r-vertical-field" 
+	data-signal-error-for="status{$id}" {$required_attr_status}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="status" data-fieldname="status" >
+
+	<label class="r-edit-label control-label {$status_label_class}" for="{$labelfor_status}">
+		{BEGIN status_label}
+			{$status_forward_control}
+			{$label public_lbln_fetch_sessions status }			{END status_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$status_value}	</div>
+	</div>
+
+
+{END status_fieldblock}
+											
+{BEGIN created_at_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_created_at}  r-vertical-field" 
+	data-signal-error-for="created_at{$id}" {$required_attr_created_at}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="created_at" data-fieldname="created_at" >
+
+	<label class="r-edit-label control-label {$created_at_label_class}" for="{$labelfor_created_at}">
+		{BEGIN created_at_label}
+			{$created_at_forward_control}
+			{$label public_lbln_fetch_sessions created_at }			{END created_at_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$created_at_value}	</div>
+	</div>
+
+
+{END created_at_fieldblock}
+											
+{BEGIN updated_at_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_updated_at}  r-vertical-field" 
+	data-signal-error-for="updated_at{$id}" {$required_attr_updated_at}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="updated_at" data-fieldname="updated_at" >
+
+	<label class="r-edit-label control-label {$updated_at_label_class}" for="{$labelfor_updated_at}">
+		{BEGIN updated_at_label}
+			{$updated_at_forward_control}
+			{$label public_lbln_fetch_sessions updated_at }			{END updated_at_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$updated_at_value}	</div>
+	</div>
+
+
+{END updated_at_fieldblock}
+											
+{BEGIN completed_at_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_completed_at}  r-vertical-field" 
+	data-signal-error-for="completed_at{$id}" {$required_attr_completed_at}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="completed_at" data-fieldname="completed_at" >
+
+	<label class="r-edit-label control-label {$completed_at_label_class}" for="{$labelfor_completed_at}">
+		{BEGIN completed_at_label}
+			{$completed_at_forward_control}
+			{$label public_lbln_fetch_sessions completed_at }			{END completed_at_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$completed_at_value}	</div>
+	</div>
+
+
+{END completed_at_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c3}
+								</tr>
+			</tbody></table>
+{END grid_block}
+									{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="small" {$form_below-grid} data-pageid="{$pageid}"
+		data-v-width="4"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class="			col-md-6
+	">
+	 
+		{BEGIN back_button}
+<span data-itemtype="view_back_list" data-itemid="view_back_list" {$item_view_back_list} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$backbutton_attrs} >
+							{mlang_message BACK_TO_LIST}			</a>
+</span>
+{END back_button}
+	 
+		{BEGIN close_button}
+<span data-itemtype="view_close" data-itemid="view_close" {$item_view_close} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" href="#" {$closebutton_attrs} >
+							{mlang_message CLOSE_WINDOW}			</a>
+</span>
+{END close_button}
+	</div>			 
+				<div 
+	data-cellId="below-grid_c2" data-pageid="{$pageid}"	{$cell_below-grid_c2}
+	class="r-align-right r-ori-vert			col-md-6
+	">
+	 
+		<span data-itemtype="hamburger" data-itemid="hamburger" {$item_hamburger} data-pageid="{$pageid}" data-small data-button-item>
+</span>
+	</div>					</div>
+	</div>		
+{END below-grid_block}
+			</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

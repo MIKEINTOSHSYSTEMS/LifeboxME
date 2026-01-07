@@ -1,0 +1,426 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+						<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+    <LINK rel="shortcut icon" type="image/png" href="/assets/img/lb_favicon.ico"/>
+    <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
+    <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
+    <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
+    		{BEGIN styleCSSFiles}
+<link REL="stylesheet" href="{$stylepath}" type="text/css">
+{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-view" >
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		{$locking}
+		<div class="r-small-page" 
+			data-body-align="center"
+			data-body-width="standard"
+		>
+							{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="small" {$form_top} data-pageid="{$pageid}"
+		data-v-width="4"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="top_c1" data-pageid="{$pageid}"	{$cell_top_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	 
+		<h2 data-itemtype="view_header" data-itemid="view_header" {$item_view_header} data-pageid="{$pageid}" >{$pagetitlelabel public_lbln_fetch_logs view}</h2>
+	</div>					</div>
+	</div>		
+{END top_block}
+									{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="small" {$form_above-grid} data-pageid="{$pageid}"
+		data-v-width="4"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	</div>					</div>
+	</div>		
+{END above-grid_block}
+									{BEGIN grid_block}
+
+
+
+
+ 
+	 
+												<table 
+	data-body-align="center"
+	data-location="grid" id="form_grid_{$pageid}" data-makeup="small" {$form_grid} data-pageid="{$pageid}" 
+	class="r-edit-form" cellpadding="0" cellspacing="0" 
+	{$grid_hiddenattr} 
+		data-form-width="1"
+		
+		data-v-width="4"
+	>
+	<tbody>
+										<tr {$row_grid_0} >
+										
+
+{BEGIN cellblock_grid_c3}
+<td
+	{$cell_grid_c3}
+	class=" r-ori-vert"
+	
+				data-fullwidth
+		
+			data-cellId="grid_c3" data-pageid="{$pageid}"
+		data-v-cell="4"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN log_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_log_id}  r-vertical-field" 
+	data-signal-error-for="log_id{$id}" {$required_attr_log_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="log_id" data-fieldname="log_id" >
+
+	<label class="r-edit-label control-label {$log_id_label_class}" for="{$labelfor_log_id}">
+		{BEGIN log_id_label}
+			{$log_id_forward_control}
+			{$label public_lbln_fetch_logs log_id }			{END log_id_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$log_id_value}	</div>
+	</div>
+
+
+{END log_id_fieldblock}
+											
+{BEGIN operation_type_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_operation_type}  r-vertical-field" 
+	data-signal-error-for="operation_type{$id}" {$required_attr_operation_type}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="operation_type" data-fieldname="operation_type" >
+
+	<label class="r-edit-label control-label {$operation_type_label_class}" for="{$labelfor_operation_type}">
+		{BEGIN operation_type_label}
+			{$operation_type_forward_control}
+			{$label public_lbln_fetch_logs operation_type }			{END operation_type_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$operation_type_value}	</div>
+	</div>
+
+
+{END operation_type_fieldblock}
+											
+{BEGIN table_name_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_table_name}  r-vertical-field" 
+	data-signal-error-for="table_name{$id}" {$required_attr_table_name}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="table_name" data-fieldname="table_name" >
+
+	<label class="r-edit-label control-label {$table_name_label_class}" for="{$labelfor_table_name}">
+		{BEGIN table_name_label}
+			{$table_name_forward_control}
+			{$label public_lbln_fetch_logs table_name }			{END table_name_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$table_name_value}	</div>
+	</div>
+
+
+{END table_name_fieldblock}
+											
+{BEGIN items_processed_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_items_processed}  r-vertical-field" 
+	data-signal-error-for="items_processed{$id}" {$required_attr_items_processed}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="items_processed" data-fieldname="items_processed" >
+
+	<label class="r-edit-label control-label {$items_processed_label_class}" for="{$labelfor_items_processed}">
+		{BEGIN items_processed_label}
+			{$items_processed_forward_control}
+			{$label public_lbln_fetch_logs items_processed }			{END items_processed_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$items_processed_value}	</div>
+	</div>
+
+
+{END items_processed_fieldblock}
+											
+{BEGIN items_inserted_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_items_inserted}  r-vertical-field" 
+	data-signal-error-for="items_inserted{$id}" {$required_attr_items_inserted}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="items_inserted" data-fieldname="items_inserted" >
+
+	<label class="r-edit-label control-label {$items_inserted_label_class}" for="{$labelfor_items_inserted}">
+		{BEGIN items_inserted_label}
+			{$items_inserted_forward_control}
+			{$label public_lbln_fetch_logs items_inserted }			{END items_inserted_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$items_inserted_value}	</div>
+	</div>
+
+
+{END items_inserted_fieldblock}
+											
+{BEGIN items_updated_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_items_updated}  r-vertical-field" 
+	data-signal-error-for="items_updated{$id}" {$required_attr_items_updated}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="items_updated" data-fieldname="items_updated" >
+
+	<label class="r-edit-label control-label {$items_updated_label_class}" for="{$labelfor_items_updated}">
+		{BEGIN items_updated_label}
+			{$items_updated_forward_control}
+			{$label public_lbln_fetch_logs items_updated }			{END items_updated_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$items_updated_value}	</div>
+	</div>
+
+
+{END items_updated_fieldblock}
+											
+{BEGIN items_skipped_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_items_skipped}  r-vertical-field" 
+	data-signal-error-for="items_skipped{$id}" {$required_attr_items_skipped}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="items_skipped" data-fieldname="items_skipped" >
+
+	<label class="r-edit-label control-label {$items_skipped_label_class}" for="{$labelfor_items_skipped}">
+		{BEGIN items_skipped_label}
+			{$items_skipped_forward_control}
+			{$label public_lbln_fetch_logs items_skipped }			{END items_skipped_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$items_skipped_value}	</div>
+	</div>
+
+
+{END items_skipped_fieldblock}
+											
+{BEGIN errors_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_errors}  r-vertical-field" 
+	data-signal-error-for="errors{$id}" {$required_attr_errors}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="errors" data-fieldname="errors" >
+
+	<label class="r-edit-label control-label {$errors_label_class}" for="{$labelfor_errors}">
+		{BEGIN errors_label}
+			{$errors_forward_control}
+			{$label public_lbln_fetch_logs errors }			{END errors_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$errors_value}	</div>
+	</div>
+
+
+{END errors_fieldblock}
+											
+{BEGIN start_time_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_start_time}  r-vertical-field" 
+	data-signal-error-for="start_time{$id}" {$required_attr_start_time}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="start_time" data-fieldname="start_time" >
+
+	<label class="r-edit-label control-label {$start_time_label_class}" for="{$labelfor_start_time}">
+		{BEGIN start_time_label}
+			{$start_time_forward_control}
+			{$label public_lbln_fetch_logs start_time }			{END start_time_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$start_time_value}	</div>
+	</div>
+
+
+{END start_time_fieldblock}
+											
+{BEGIN end_time_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_end_time}  r-vertical-field" 
+	data-signal-error-for="end_time{$id}" {$required_attr_end_time}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="end_time" data-fieldname="end_time" >
+
+	<label class="r-edit-label control-label {$end_time_label_class}" for="{$labelfor_end_time}">
+		{BEGIN end_time_label}
+			{$end_time_forward_control}
+			{$label public_lbln_fetch_logs end_time }			{END end_time_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$end_time_value}	</div>
+	</div>
+
+
+{END end_time_fieldblock}
+											
+{BEGIN duration_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_duration}  r-vertical-field" 
+	data-signal-error-for="duration{$id}" {$required_attr_duration}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="duration" data-fieldname="duration" >
+
+	<label class="r-edit-label control-label {$duration_label_class}" for="{$labelfor_duration}">
+		{BEGIN duration_label}
+			{$duration_forward_control}
+			{$label public_lbln_fetch_logs duration }			{END duration_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$duration_value}	</div>
+	</div>
+
+
+{END duration_fieldblock}
+											
+{BEGIN status_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_status}  r-vertical-field" 
+	data-signal-error-for="status{$id}" {$required_attr_status}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="status" data-fieldname="status" >
+
+	<label class="r-edit-label control-label {$status_label_class}" for="{$labelfor_status}">
+		{BEGIN status_label}
+			{$status_forward_control}
+			{$label public_lbln_fetch_logs status }			{END status_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$status_value}	</div>
+	</div>
+
+
+{END status_fieldblock}
+											
+{BEGIN message_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_message}  r-vertical-field" 
+	data-signal-error-for="message{$id}" {$required_attr_message}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="message" data-fieldname="message" >
+
+	<label class="r-edit-label control-label {$message_label_class}" for="{$labelfor_message}">
+		{BEGIN message_label}
+			{$message_forward_control}
+			{$label public_lbln_fetch_logs message }			{END message_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$message_value}	</div>
+	</div>
+
+
+{END message_fieldblock}
+											
+{BEGIN parameters_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_parameters}  r-vertical-field" 
+	data-signal-error-for="parameters{$id}" {$required_attr_parameters}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field13" {$item_integrated_edit_field13} data-pageid="{$pageid}" data-field="parameters" data-fieldname="parameters" >
+
+	<label class="r-edit-label control-label {$parameters_label_class}" for="{$labelfor_parameters}">
+		{BEGIN parameters_label}
+			{$parameters_forward_control}
+			{$label public_lbln_fetch_logs parameters }			{END parameters_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$parameters_value}	</div>
+	</div>
+
+
+{END parameters_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c3}
+								</tr>
+			</tbody></table>
+{END grid_block}
+									{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="small" {$form_below-grid} data-pageid="{$pageid}"
+		data-v-width="4"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class="			col-md-6
+	">
+	 
+		{BEGIN back_button}
+<span data-itemtype="view_back_list" data-itemid="view_back_list" {$item_view_back_list} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$backbutton_attrs} >
+							{mlang_message BACK_TO_LIST}			</a>
+</span>
+{END back_button}
+	 
+		{BEGIN close_button}
+<span data-itemtype="view_close" data-itemid="view_close" {$item_view_close} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" href="#" {$closebutton_attrs} >
+							{mlang_message CLOSE_WINDOW}			</a>
+</span>
+{END close_button}
+	</div>			 
+				<div 
+	data-cellId="below-grid_c2" data-pageid="{$pageid}"	{$cell_below-grid_c2}
+	class="r-align-right r-ori-vert			col-md-6
+	">
+	 
+		<span data-itemtype="hamburger" data-itemid="hamburger" {$item_hamburger} data-pageid="{$pageid}" data-small data-button-item>
+</span>
+	</div>					</div>
+	</div>		
+{END below-grid_block}
+			</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

@@ -158,7 +158,8 @@ $runnerTableSettings['public.surgical_cases'] = array(
 	fetal_death,
 	created_at,
 	updated_at
-FROM "public".surgical_cases',
+FROM
+	"public".surgical_cases',
 	'keyFields' => array( 
 		'case_id' 
 	),
@@ -3076,7 +3077,8 @@ FROM "public".surgical_cases',
 	fetal_death,
 	created_at,
 	updated_at
-FROM "public".surgical_cases',
+FROM
+	"public".surgical_cases',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -4995,7 +4997,8 @@ FROM "public".surgical_cases',
 	fetal_death,
 	created_at,
 	updated_at',
-		'fromListSql' => 'FROM "public".surgical_cases',
+		'fromListSql' => 'FROM
+	"public".surgical_cases',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

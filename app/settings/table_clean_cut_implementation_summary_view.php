@@ -72,7 +72,8 @@ $runnerTableSettings['public.clean_cut_implementation_summary_view'] = array(
 	ortho_volume,
 	total_volume,
 	remarks
-FROM "public".clean_cut_implementation_summary_view',
+FROM
+	"public".clean_cut_implementation_summary_view',
 	'deviceHideFields' => array(
 		'1' => array( 
 			 
@@ -677,7 +678,8 @@ FROM "public".clean_cut_implementation_summary_view',
 	ortho_volume,
 	total_volume,
 	remarks
-FROM "public".clean_cut_implementation_summary_view',
+FROM
+	"public".clean_cut_implementation_summary_view',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -1132,7 +1134,8 @@ FROM "public".clean_cut_implementation_summary_view',
 	ortho_volume,
 	total_volume,
 	remarks',
-		'fromListSql' => 'FROM "public".clean_cut_implementation_summary_view',
+		'fromListSql' => 'FROM
+	"public".clean_cut_implementation_summary_view',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

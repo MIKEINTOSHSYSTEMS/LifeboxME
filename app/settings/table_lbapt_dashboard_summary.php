@@ -80,7 +80,8 @@ $runnerTableSettings['public.lbapt_dashboard_summary'] = array(
 	on_track_percentage,
 	created_at,
 	updated_at
-FROM "public".lbapt_dashboard_summary',
+FROM
+	"public".lbapt_dashboard_summary',
 	'keyFields' => array( 
 		'summary_id' 
 	),
@@ -444,7 +445,8 @@ FROM "public".lbapt_dashboard_summary',
 	on_track_percentage,
 	created_at,
 	updated_at
-FROM "public".lbapt_dashboard_summary',
+FROM
+	"public".lbapt_dashboard_summary',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -731,7 +733,8 @@ FROM "public".lbapt_dashboard_summary',
 	on_track_percentage,
 	created_at,
 	updated_at',
-		'fromListSql' => 'FROM "public".lbapt_dashboard_summary',
+		'fromListSql' => 'FROM
+	"public".lbapt_dashboard_summary',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

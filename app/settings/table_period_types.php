@@ -72,7 +72,8 @@ $runnerTableSettings['public.period_types'] = array(
 	'sql' => 'SELECT
 	period_id,
 	period_name
-FROM "public".period_types',
+FROM
+	"public".period_types',
 	'keyFields' => array( 
 		'period_id' 
 	),
@@ -162,7 +163,8 @@ FROM "public".period_types',
 		'sql' => 'SELECT
 	period_id,
 	period_name
-FROM "public".period_types',
+FROM
+	"public".period_types',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -281,7 +283,8 @@ FROM "public".period_types',
 		'headSql' => 'SELECT',
 		'fieldListSql' => 'period_id,
 	period_name',
-		'fromListSql' => 'FROM "public".period_types',
+		'fromListSql' => 'FROM
+	"public".period_types',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

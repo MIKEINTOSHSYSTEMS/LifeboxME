@@ -845,6 +845,62 @@
 				'items' => null,
 				'table' => 'public.lbpmi_indicator_groups',
 				'page' => 'list' 
+			),
+			'welcome_item102' => array(
+				'menutItem' => true,
+				'group' => false,
+				'linkType' => 0,
+				'items' => null,
+				'table' => 'LBLN_Courses',
+				'page' => 'list' 
+			),
+			'welcome_item103' => array(
+				'menutItem' => true,
+				'group' => false,
+				'linkType' => 0,
+				'items' => null,
+				'table' => 'public.lbln_course_analytics',
+				'page' => 'list' 
+			),
+			'welcome_item104' => array(
+				'menutItem' => true,
+				'group' => false,
+				'linkType' => 0,
+				'items' => null,
+				'table' => 'public.lbln_course_users',
+				'page' => 'list' 
+			),
+			'welcome_item105' => array(
+				'menutItem' => true,
+				'group' => false,
+				'linkType' => 0,
+				'items' => null,
+				'table' => 'public.lbln_courses',
+				'page' => 'list' 
+			),
+			'welcome_item106' => array(
+				'menutItem' => true,
+				'group' => false,
+				'linkType' => 0,
+				'items' => null,
+				'table' => 'public.lbln_fetch_logs',
+				'page' => 'list' 
+			),
+			'welcome_item107' => array(
+				'menutItem' => true,
+				'group' => false,
+				'linkType' => 0,
+				'items' => null,
+				'table' => 'public.lbln_fetch_sessions',
+				'page' => 'list' 
+			),
+			'welcome_item108' => array(
+				'menutItem' => true,
+				'group' => false,
+				'linkType' => 0,
+				'items' => null,
+				'table' => 'Lifbox_Learning_Network_API_Fetcher',
+				'page' => 'list' 
 			) 
 		) 
 	),
@@ -982,6 +1038,13 @@
 					'welcome_item99',
 					'welcome_item100',
 					'welcome_item101',
+					'welcome_item102',
+					'welcome_item103',
+					'welcome_item104',
+					'welcome_item105',
+					'welcome_item106',
+					'welcome_item107',
+					'welcome_item108',
 					'welcome_item51' 
 				) 
 			),
@@ -1099,6 +1162,13 @@
 				'welcome_item99' => 'grid',
 				'welcome_item100' => 'grid',
 				'welcome_item101' => 'grid',
+				'welcome_item102' => 'grid',
+				'welcome_item103' => 'grid',
+				'welcome_item104' => 'grid',
+				'welcome_item105' => 'grid',
+				'welcome_item106' => 'grid',
+				'welcome_item107' => 'grid',
+				'welcome_item108' => 'grid',
 				'welcome_item51' => 'grid' 
 			),
 			'itemLocations' => array(
@@ -1212,7 +1282,14 @@
 				'welcome_item98',
 				'welcome_item99',
 				'welcome_item100',
-				'welcome_item101' 
+				'welcome_item101',
+				'welcome_item102',
+				'welcome_item103',
+				'welcome_item104',
+				'welcome_item105',
+				'welcome_item106',
+				'welcome_item107',
+				'welcome_item108' 
 			),
 			'logo' => array( 
 				'logo' 
@@ -1569,7 +1646,14 @@
 						'welcome_item98',
 						'welcome_item99',
 						'welcome_item100',
-						'welcome_item101' 
+						'welcome_item101',
+						'welcome_item102',
+						'welcome_item103',
+						'welcome_item104',
+						'welcome_item105',
+						'welcome_item106',
+						'welcome_item107',
+						'welcome_item108' 
 					) 
 				),
 				'c' => array(
@@ -2915,6 +2999,90 @@
 				'type' => 6 
 			),
 			'background' => '#CD853F',
+			'linkType' => 0 
+		),
+		'welcome_item102' => array(
+			'type' => 'welcome_item',
+			'linkUrl' => '',
+			'linkTable' => 'LBLN_Courses',
+			'linkPage' => 'list',
+			'linkText' => array(
+				'table' => 'LBLN_Courses',
+				'type' => 6 
+			),
+			'background' => '#dc143c',
+			'linkType' => 0 
+		),
+		'welcome_item103' => array(
+			'type' => 'welcome_item',
+			'linkUrl' => '',
+			'linkTable' => 'public.lbln_course_analytics',
+			'linkPage' => 'list',
+			'linkText' => array(
+				'table' => 'public.lbln_course_analytics',
+				'type' => 6 
+			),
+			'background' => '#3cb371',
+			'linkType' => 0 
+		),
+		'welcome_item104' => array(
+			'type' => 'welcome_item',
+			'linkUrl' => '',
+			'linkTable' => 'public.lbln_course_users',
+			'linkPage' => 'list',
+			'linkText' => array(
+				'table' => 'public.lbln_course_users',
+				'type' => 6 
+			),
+			'background' => '#9acd32',
+			'linkType' => 0 
+		),
+		'welcome_item105' => array(
+			'type' => 'welcome_item',
+			'linkUrl' => '',
+			'linkTable' => 'public.lbln_courses',
+			'linkPage' => 'list',
+			'linkText' => array(
+				'table' => 'public.lbln_courses',
+				'type' => 6 
+			),
+			'background' => '#4682b4',
+			'linkType' => 0 
+		),
+		'welcome_item106' => array(
+			'type' => 'welcome_item',
+			'linkUrl' => '',
+			'linkTable' => 'public.lbln_fetch_logs',
+			'linkPage' => 'list',
+			'linkText' => array(
+				'table' => 'public.lbln_fetch_logs',
+				'type' => 6 
+			),
+			'background' => '#778899',
+			'linkType' => 0 
+		),
+		'welcome_item107' => array(
+			'type' => 'welcome_item',
+			'linkUrl' => '',
+			'linkTable' => 'public.lbln_fetch_sessions',
+			'linkPage' => 'list',
+			'linkText' => array(
+				'table' => 'public.lbln_fetch_sessions',
+				'type' => 6 
+			),
+			'background' => '#d2af80',
+			'linkType' => 0 
+		),
+		'welcome_item108' => array(
+			'type' => 'welcome_item',
+			'linkUrl' => '',
+			'linkTable' => 'Lifbox_Learning_Network_API_Fetcher',
+			'linkPage' => 'list',
+			'linkText' => array(
+				'table' => 'Lifbox_Learning_Network_API_Fetcher',
+				'type' => 6 
+			),
+			'background' => '#9acd32',
 			'linkType' => 0 
 		),
 		'expand_button' => array(

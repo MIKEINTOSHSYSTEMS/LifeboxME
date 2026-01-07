@@ -90,7 +90,8 @@ $runnerTableSettings['public.lbpmi_datasets'] = array(
 	created_by,
 	created_at,
 	updated_at
-FROM "public".lbpmi_datasets',
+FROM
+	"public".lbpmi_datasets',
 	'keyFields' => array( 
 		'dataset_id' 
 	),
@@ -462,7 +463,8 @@ FROM "public".lbpmi_datasets',
 	created_by,
 	created_at,
 	updated_at
-FROM "public".lbpmi_datasets',
+FROM
+	"public".lbpmi_datasets',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -773,7 +775,8 @@ FROM "public".lbpmi_datasets',
 	created_by,
 	created_at,
 	updated_at',
-		'fromListSql' => 'FROM "public".lbpmi_datasets',
+		'fromListSql' => 'FROM
+	"public".lbpmi_datasets',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

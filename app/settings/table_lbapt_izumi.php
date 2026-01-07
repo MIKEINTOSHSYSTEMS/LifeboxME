@@ -87,7 +87,8 @@ $runnerTableSettings['public.lbapt_izumi'] = array(
 	notes,
 	created_at,
 	updated_at
-FROM "public".lbapt_izumi',
+FROM
+	"public".lbapt_izumi',
 	'keyFields' => array( 
 		'izumi_id' 
 	),
@@ -767,7 +768,8 @@ FROM "public".lbapt_izumi',
 	notes,
 	created_at,
 	updated_at
-FROM "public".lbapt_izumi',
+FROM
+	"public".lbapt_izumi',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -1246,7 +1248,8 @@ FROM "public".lbapt_izumi',
 	notes,
 	created_at,
 	updated_at',
-		'fromListSql' => 'FROM "public".lbapt_izumi',
+		'fromListSql' => 'FROM
+	"public".lbapt_izumi',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

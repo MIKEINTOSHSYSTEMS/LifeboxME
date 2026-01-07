@@ -40,7 +40,8 @@ $runnerTableSettings['admin_members'] = array(
 	"UserName",
 	"GroupID",
 	"Provider"
-FROM "public".lifeboxme_ugmembers',
+FROM
+	"public".lifeboxme_ugmembers',
 	'keyFields' => array( 
 		'UserName',
 		'GroupID',
@@ -166,7 +167,8 @@ FROM "public".lifeboxme_ugmembers',
 	"UserName",
 	"GroupID",
 	"Provider"
-FROM "public".lifeboxme_ugmembers',
+FROM
+	"public".lifeboxme_ugmembers',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -309,7 +311,8 @@ FROM "public".lifeboxme_ugmembers',
 		'fieldListSql' => '"UserName",
 	"GroupID",
 	"Provider"',
-		'fromListSql' => 'FROM "public".lifeboxme_ugmembers',
+		'fromListSql' => 'FROM
+	"public".lifeboxme_ugmembers',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

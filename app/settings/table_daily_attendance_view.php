@@ -66,7 +66,8 @@ $runnerTableSettings['public.daily_attendance_view'] = array(
 	total_participants,
 	participants_present,
 	attendance_percentage
-FROM "public".daily_attendance_view',
+FROM
+	"public".daily_attendance_view',
 	'deviceHideFields' => array(
 		'1' => array( 
 			 
@@ -454,7 +455,8 @@ FROM "public".daily_attendance_view',
 	total_participants,
 	participants_present,
 	attendance_percentage
-FROM "public".daily_attendance_view',
+FROM
+	"public".daily_attendance_view',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -765,7 +767,8 @@ FROM "public".daily_attendance_view',
 	total_participants,
 	participants_present,
 	attendance_percentage',
-		'fromListSql' => 'FROM "public".daily_attendance_view',
+		'fromListSql' => 'FROM
+	"public".daily_attendance_view',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

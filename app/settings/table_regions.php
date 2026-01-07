@@ -86,7 +86,8 @@ $runnerTableSettings['public.regions'] = array(
 	description,
 	created_at,
 	updated_at
-FROM "public".regions',
+FROM
+	"public".regions',
 	'keyFields' => array( 
 		'region_id' 
 	),
@@ -291,7 +292,8 @@ FROM "public".regions',
 	description,
 	created_at,
 	updated_at
-FROM "public".regions',
+FROM
+	"public".regions',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -482,7 +484,8 @@ FROM "public".regions',
 	description,
 	created_at,
 	updated_at',
-		'fromListSql' => 'FROM "public".regions',
+		'fromListSql' => 'FROM
+	"public".regions',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

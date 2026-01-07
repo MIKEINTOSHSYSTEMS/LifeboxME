@@ -63,7 +63,8 @@ $runnerTableSettings['public.lbapt_all_activities_view'] = array(
 	status,
 	created_at,
 	updated_at
-FROM "public".lbapt_all_activities_view',
+FROM
+	"public".lbapt_all_activities_view',
 	'deviceHideFields' => array(
 		'1' => array( 
 			 
@@ -339,7 +340,8 @@ FROM "public".lbapt_all_activities_view',
 	status,
 	created_at,
 	updated_at
-FROM "public".lbapt_all_activities_view',
+FROM
+	"public".lbapt_all_activities_view',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -578,7 +580,8 @@ FROM "public".lbapt_all_activities_view',
 	status,
 	created_at,
 	updated_at',
-		'fromListSql' => 'FROM "public".lbapt_all_activities_view',
+		'fromListSql' => 'FROM
+	"public".lbapt_all_activities_view',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

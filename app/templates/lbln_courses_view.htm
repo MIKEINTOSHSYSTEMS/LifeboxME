@@ -1,0 +1,626 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+						<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+    <LINK rel="shortcut icon" type="image/png" href="/assets/img/lb_favicon.ico"/>
+    <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
+    <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
+    <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
+    		{BEGIN styleCSSFiles}
+<link REL="stylesheet" href="{$stylepath}" type="text/css">
+{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-view" >
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		{$locking}
+		<div class="r-small-page" 
+			data-body-align="center"
+			data-body-width="standard"
+		>
+							{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="small" {$form_top} data-pageid="{$pageid}"
+		data-v-width="4"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="top_c1" data-pageid="{$pageid}"	{$cell_top_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	 
+		<h2 data-itemtype="view_header" data-itemid="view_header" {$item_view_header} data-pageid="{$pageid}" >{$pagetitlelabel public_lbln_courses view}</h2>
+	</div>					</div>
+	</div>		
+{END top_block}
+									{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="small" {$form_above-grid} data-pageid="{$pageid}"
+		data-v-width="4"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	</div>					</div>
+	</div>		
+{END above-grid_block}
+									{BEGIN grid_block}
+
+
+
+
+ 
+	 
+												<table 
+	data-body-align="center"
+	data-location="grid" id="form_grid_{$pageid}" data-makeup="small" {$form_grid} data-pageid="{$pageid}" 
+	class="r-edit-form" cellpadding="0" cellspacing="0" 
+	{$grid_hiddenattr} 
+		data-form-width="1"
+		
+		data-v-width="4"
+	>
+	<tbody>
+										<tr {$row_grid_0} >
+										
+
+{BEGIN cellblock_grid_c3}
+<td
+	{$cell_grid_c3}
+	class=" r-ori-vert"
+	
+				data-fullwidth
+		
+			data-cellId="grid_c3" data-pageid="{$pageid}"
+		data-v-cell="4"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN data_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_data_id}  r-vertical-field" 
+	data-signal-error-for="data_id{$id}" {$required_attr_data_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="data_id" data-fieldname="data_id" >
+
+	<label class="r-edit-label control-label {$data_id_label_class}" for="{$labelfor_data_id}">
+		{BEGIN data_id_label}
+			{$data_id_forward_control}
+			{$label public_lbln_courses data_id }			{END data_id_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$data_id_value}	</div>
+	</div>
+
+
+{END data_id_fieldblock}
+											
+{BEGIN course_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_course_id}  r-vertical-field" 
+	data-signal-error-for="course_id{$id}" {$required_attr_course_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="course_id" data-fieldname="course_id" >
+
+	<label class="r-edit-label control-label {$course_id_label_class}" for="{$labelfor_course_id}">
+		{BEGIN course_id_label}
+			{$course_id_forward_control}
+			{$label public_lbln_courses course_id }			{END course_id_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$course_id_value}	</div>
+	</div>
+
+
+{END course_id_fieldblock}
+											
+{BEGIN course_title_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_course_title}  r-vertical-field" 
+	data-signal-error-for="course_title{$id}" {$required_attr_course_title}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="course_title" data-fieldname="course_title" >
+
+	<label class="r-edit-label control-label {$course_title_label_class}" for="{$labelfor_course_title}">
+		{BEGIN course_title_label}
+			{$course_title_forward_control}
+			{$label public_lbln_courses course_title }			{END course_title_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$course_title_value}	</div>
+	</div>
+
+
+{END course_title_fieldblock}
+											
+{BEGIN type_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_type}  r-vertical-field" 
+	data-signal-error-for="type{$id}" {$required_attr_type}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="type" data-fieldname="type" >
+
+	<label class="r-edit-label control-label {$type_label_class}" for="{$labelfor_type}">
+		{BEGIN type_label}
+			{$type_forward_control}
+			{$label public_lbln_courses type }			{END type_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$type_value}	</div>
+	</div>
+
+
+{END type_fieldblock}
+											
+{BEGIN categories_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_categories}  r-vertical-field" 
+	data-signal-error-for="categories{$id}" {$required_attr_categories}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="categories" data-fieldname="categories" >
+
+	<label class="r-edit-label control-label {$categories_label_class}" for="{$labelfor_categories}">
+		{BEGIN categories_label}
+			{$categories_forward_control}
+			{$label public_lbln_courses categories }			{END categories_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$categories_value}	</div>
+	</div>
+
+
+{END categories_fieldblock}
+											
+{BEGIN description_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_description}  r-vertical-field" 
+	data-signal-error-for="description{$id}" {$required_attr_description}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="description" data-fieldname="description" >
+
+	<label class="r-edit-label control-label {$description_label_class}" for="{$labelfor_description}">
+		{BEGIN description_label}
+			{$description_forward_control}
+			{$label public_lbln_courses description }			{END description_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$description_value}	</div>
+	</div>
+
+
+{END description_fieldblock}
+											
+{BEGIN name_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_name}  r-vertical-field" 
+	data-signal-error-for="name{$id}" {$required_attr_name}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="name" data-fieldname="name" >
+
+	<label class="r-edit-label control-label {$name_label_class}" for="{$labelfor_name}">
+		{BEGIN name_label}
+			{$name_forward_control}
+			{$label public_lbln_courses name }			{END name_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$name_value}	</div>
+	</div>
+
+
+{END name_fieldblock}
+											
+{BEGIN image_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_image}  r-vertical-field" 
+	data-signal-error-for="image{$id}" {$required_attr_image}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="image" data-fieldname="image" >
+
+	<label class="r-edit-label control-label {$image_label_class}" for="{$labelfor_image}">
+		{BEGIN image_label}
+			{$image_forward_control}
+			{$label public_lbln_courses image }			{END image_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$image_value}	</div>
+	</div>
+
+
+{END image_fieldblock}
+											
+{BEGIN course_image_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_course_image}  r-vertical-field" 
+	data-signal-error-for="course_image{$id}" {$required_attr_course_image}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="course_image" data-fieldname="course_image" >
+
+	<label class="r-edit-label control-label {$course_image_label_class}" for="{$labelfor_course_image}">
+		{BEGIN course_image_label}
+			{$course_image_forward_control}
+			{$label public_lbln_courses course_image }			{END course_image_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$course_image_value}	</div>
+	</div>
+
+
+{END course_image_fieldblock}
+											
+{BEGIN original_price_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_original_price}  r-vertical-field" 
+	data-signal-error-for="original_price{$id}" {$required_attr_original_price}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="original_price" data-fieldname="original_price" >
+
+	<label class="r-edit-label control-label {$original_price_label_class}" for="{$labelfor_original_price}">
+		{BEGIN original_price_label}
+			{$original_price_forward_control}
+			{$label public_lbln_courses original_price }			{END original_price_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$original_price_value}	</div>
+	</div>
+
+
+{END original_price_fieldblock}
+											
+{BEGIN discount_price_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_discount_price}  r-vertical-field" 
+	data-signal-error-for="discount_price{$id}" {$required_attr_discount_price}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="discount_price" data-fieldname="discount_price" >
+
+	<label class="r-edit-label control-label {$discount_price_label_class}" for="{$labelfor_discount_price}">
+		{BEGIN discount_price_label}
+			{$discount_price_forward_control}
+			{$label public_lbln_courses discount_price }			{END discount_price_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$discount_price_value}	</div>
+	</div>
+
+
+{END discount_price_fieldblock}
+											
+{BEGIN final_price_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_final_price}  r-vertical-field" 
+	data-signal-error-for="final_price{$id}" {$required_attr_final_price}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="final_price" data-fieldname="final_price" >
+
+	<label class="r-edit-label control-label {$final_price_label_class}" for="{$labelfor_final_price}">
+		{BEGIN final_price_label}
+			{$final_price_forward_control}
+			{$label public_lbln_courses final_price }			{END final_price_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$final_price_value}	</div>
+	</div>
+
+
+{END final_price_fieldblock}
+											
+{BEGIN access_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_access}  r-vertical-field" 
+	data-signal-error-for="access{$id}" {$required_attr_access}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="access" data-fieldname="access" >
+
+	<label class="r-edit-label control-label {$access_label_class}" for="{$labelfor_access}">
+		{BEGIN access_label}
+			{$access_forward_control}
+			{$label public_lbln_courses access }			{END access_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$access_value}	</div>
+	</div>
+
+
+{END access_fieldblock}
+											
+{BEGIN expires_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_expires}  r-vertical-field" 
+	data-signal-error-for="expires{$id}" {$required_attr_expires}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field13" {$item_integrated_edit_field13} data-pageid="{$pageid}" data-field="expires" data-fieldname="expires" >
+
+	<label class="r-edit-label control-label {$expires_label_class}" for="{$labelfor_expires}">
+		{BEGIN expires_label}
+			{$expires_forward_control}
+			{$label public_lbln_courses expires }			{END expires_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$expires_value}	</div>
+	</div>
+
+
+{END expires_fieldblock}
+											
+{BEGIN expires_type_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_expires_type}  r-vertical-field" 
+	data-signal-error-for="expires_type{$id}" {$required_attr_expires_type}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field14" {$item_integrated_edit_field14} data-pageid="{$pageid}" data-field="expires_type" data-fieldname="expires_type" >
+
+	<label class="r-edit-label control-label {$expires_type_label_class}" for="{$labelfor_expires_type}">
+		{BEGIN expires_type_label}
+			{$expires_type_forward_control}
+			{$label public_lbln_courses expires_type }			{END expires_type_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$expires_type_value}	</div>
+	</div>
+
+
+{END expires_type_fieldblock}
+											
+{BEGIN drip_feed_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_drip_feed}  r-vertical-field" 
+	data-signal-error-for="drip_feed{$id}" {$required_attr_drip_feed}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field15" {$item_integrated_edit_field15} data-pageid="{$pageid}" data-field="drip_feed" data-fieldname="drip_feed" >
+
+	<label class="r-edit-label control-label {$drip_feed_label_class}" for="{$labelfor_drip_feed}">
+		{BEGIN drip_feed_label}
+			{$drip_feed_forward_control}
+			{$label public_lbln_courses drip_feed }			{END drip_feed_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$drip_feed_value}	</div>
+	</div>
+
+
+{END drip_feed_fieldblock}
+											
+{BEGIN identifiers_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_identifiers}  r-vertical-field" 
+	data-signal-error-for="identifiers{$id}" {$required_attr_identifiers}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field16" {$item_integrated_edit_field16} data-pageid="{$pageid}" data-field="identifiers" data-fieldname="identifiers" >
+
+	<label class="r-edit-label control-label {$identifiers_label_class}" for="{$labelfor_identifiers}">
+		{BEGIN identifiers_label}
+			{$identifiers_forward_control}
+			{$label public_lbln_courses identifiers }			{END identifiers_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$identifiers_value}	</div>
+	</div>
+
+
+{END identifiers_fieldblock}
+											
+{BEGIN after_purchase_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_after_purchase}  r-vertical-field" 
+	data-signal-error-for="after_purchase{$id}" {$required_attr_after_purchase}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field17" {$item_integrated_edit_field17} data-pageid="{$pageid}" data-field="after_purchase" data-fieldname="after_purchase" >
+
+	<label class="r-edit-label control-label {$after_purchase_label_class}" for="{$labelfor_after_purchase}">
+		{BEGIN after_purchase_label}
+			{$after_purchase_forward_control}
+			{$label public_lbln_courses after_purchase }			{END after_purchase_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$after_purchase_value}	</div>
+	</div>
+
+
+{END after_purchase_fieldblock}
+											
+{BEGIN author_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_author}  r-vertical-field" 
+	data-signal-error-for="author{$id}" {$required_attr_author}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field18" {$item_integrated_edit_field18} data-pageid="{$pageid}" data-field="author" data-fieldname="author" >
+
+	<label class="r-edit-label control-label {$author_label_class}" for="{$labelfor_author}">
+		{BEGIN author_label}
+			{$author_forward_control}
+			{$label public_lbln_courses author }			{END author_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$author_value}	</div>
+	</div>
+
+
+{END author_fieldblock}
+											
+{BEGIN created_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_created}  r-vertical-field" 
+	data-signal-error-for="created{$id}" {$required_attr_created}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field19" {$item_integrated_edit_field19} data-pageid="{$pageid}" data-field="created" data-fieldname="created" >
+
+	<label class="r-edit-label control-label {$created_label_class}" for="{$labelfor_created}">
+		{BEGIN created_label}
+			{$created_forward_control}
+			{$label public_lbln_courses created }			{END created_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$created_value}	</div>
+	</div>
+
+
+{END created_fieldblock}
+											
+{BEGIN modified_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_modified}  r-vertical-field" 
+	data-signal-error-for="modified{$id}" {$required_attr_modified}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field20" {$item_integrated_edit_field20} data-pageid="{$pageid}" data-field="modified" data-fieldname="modified" >
+
+	<label class="r-edit-label control-label {$modified_label_class}" for="{$labelfor_modified}">
+		{BEGIN modified_label}
+			{$modified_forward_control}
+			{$label public_lbln_courses modified }			{END modified_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$modified_value}	</div>
+	</div>
+
+
+{END modified_fieldblock}
+											
+{BEGIN fetched_at_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_fetched_at}  r-vertical-field" 
+	data-signal-error-for="fetched_at{$id}" {$required_attr_fetched_at}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field21" {$item_integrated_edit_field21} data-pageid="{$pageid}" data-field="fetched_at" data-fieldname="fetched_at" >
+
+	<label class="r-edit-label control-label {$fetched_at_label_class}" for="{$labelfor_fetched_at}">
+		{BEGIN fetched_at_label}
+			{$fetched_at_forward_control}
+			{$label public_lbln_courses fetched_at }			{END fetched_at_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$fetched_at_value}	</div>
+	</div>
+
+
+{END fetched_at_fieldblock}
+											
+{BEGIN last_updated_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_last_updated}  r-vertical-field" 
+	data-signal-error-for="last_updated{$id}" {$required_attr_last_updated}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field22" {$item_integrated_edit_field22} data-pageid="{$pageid}" data-field="last_updated" data-fieldname="last_updated" >
+
+	<label class="r-edit-label control-label {$last_updated_label_class}" for="{$labelfor_last_updated}">
+		{BEGIN last_updated_label}
+			{$last_updated_forward_control}
+			{$label public_lbln_courses last_updated }			{END last_updated_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$last_updated_value}	</div>
+	</div>
+
+
+{END last_updated_fieldblock}
+											
+{BEGIN is_active_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_is_active}  r-vertical-field" 
+	data-signal-error-for="is_active{$id}" {$required_attr_is_active}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field23" {$item_integrated_edit_field23} data-pageid="{$pageid}" data-field="is_active" data-fieldname="is_active" >
+
+	<label class="r-edit-label control-label {$is_active_label_class}" for="{$labelfor_is_active}">
+		{BEGIN is_active_label}
+			{$is_active_forward_control}
+			{$label public_lbln_courses is_active }			{END is_active_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$is_active_value}	</div>
+	</div>
+
+
+{END is_active_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c3}
+								</tr>
+			</tbody></table>
+{END grid_block}
+									{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="small" {$form_below-grid} data-pageid="{$pageid}"
+		data-v-width="4"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class="			col-md-6
+	">
+	 
+		{BEGIN back_button}
+<span data-itemtype="view_back_list" data-itemid="view_back_list" {$item_view_back_list} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$backbutton_attrs} >
+							{mlang_message BACK_TO_LIST}			</a>
+</span>
+{END back_button}
+	 
+		{BEGIN close_button}
+<span data-itemtype="view_close" data-itemid="view_close" {$item_view_close} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" href="#" {$closebutton_attrs} >
+							{mlang_message CLOSE_WINDOW}			</a>
+</span>
+{END close_button}
+	</div>			 
+				<div 
+	data-cellId="below-grid_c2" data-pageid="{$pageid}"	{$cell_below-grid_c2}
+	class="r-align-right r-ori-vert			col-md-6
+	">
+	 
+		<span data-itemtype="hamburger" data-itemid="hamburger" {$item_hamburger} data-pageid="{$pageid}" data-small data-button-item>
+</span>
+	</div>					</div>
+	</div>		
+{END below-grid_block}
+			</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

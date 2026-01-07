@@ -120,7 +120,8 @@ $runnerTableSettings['public.ward_rounds'] = array(
 	neonatal_death,
 	created_at,
 	updated_at
-FROM "public".ward_rounds',
+FROM
+	"public".ward_rounds',
 	'keyFields' => array( 
 		'ward_round_id' 
 	),
@@ -1610,7 +1611,8 @@ FROM "public".ward_rounds',
 	neonatal_death,
 	created_at,
 	updated_at
-FROM "public".ward_rounds',
+FROM
+	"public".ward_rounds',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -2617,7 +2619,8 @@ FROM "public".ward_rounds',
 	neonatal_death,
 	created_at,
 	updated_at',
-		'fromListSql' => 'FROM "public".ward_rounds',
+		'fromListSql' => 'FROM
+	"public".ward_rounds',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

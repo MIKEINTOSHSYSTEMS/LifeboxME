@@ -72,7 +72,8 @@ $runnerTableSettings['public.lbpmi_indicator_types'] = array(
 	'sql' => 'SELECT
 	indtype_id,
 	indicator_type
-FROM "public".lbpmi_indicator_types',
+FROM
+	"public".lbpmi_indicator_types',
 	'keyFields' => array( 
 		'indtype_id' 
 	),
@@ -162,7 +163,8 @@ FROM "public".lbpmi_indicator_types',
 		'sql' => 'SELECT
 	indtype_id,
 	indicator_type
-FROM "public".lbpmi_indicator_types',
+FROM
+	"public".lbpmi_indicator_types',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -281,7 +283,8 @@ FROM "public".lbpmi_indicator_types',
 		'headSql' => 'SELECT',
 		'fieldListSql' => 'indtype_id,
 	indicator_type',
-		'fromListSql' => 'FROM "public".lbpmi_indicator_types',
+		'fromListSql' => 'FROM
+	"public".lbpmi_indicator_types',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

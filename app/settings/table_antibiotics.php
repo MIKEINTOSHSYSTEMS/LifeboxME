@@ -86,8 +86,7 @@ $runnerTableSettings['public.antibiotics'] = array(
 	description,
 	created_at
 FROM
-	"public".antibiotics
-',
+	"public".antibiotics',
 	'keyFields' => array( 
 		'antibiotic_id' 
 	),
@@ -256,8 +255,7 @@ FROM
 	description,
 	created_at
 FROM
-	"public".antibiotics
-',
+	"public".antibiotics',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 

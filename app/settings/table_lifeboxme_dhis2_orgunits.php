@@ -68,7 +68,8 @@ $runnerTableSettings['public.lifeboxme_dhis2_orgunits'] = array(
 	hospital_facility,
 	"level",
 	last_updated
-FROM "public".lifeboxme_dhis2_orgunits',
+FROM
+	"public".lifeboxme_dhis2_orgunits',
 	'keyFields' => array( 
 		'id' 
 	),
@@ -503,7 +504,8 @@ FROM "public".lifeboxme_dhis2_orgunits',
 	hospital_facility,
 	"level",
 	last_updated
-FROM "public".lifeboxme_dhis2_orgunits',
+FROM
+	"public".lifeboxme_dhis2_orgunits',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -838,7 +840,8 @@ FROM "public".lifeboxme_dhis2_orgunits',
 	hospital_facility,
 	"level",
 	last_updated',
-		'fromListSql' => 'FROM "public".lifeboxme_dhis2_orgunits',
+		'fromListSql' => 'FROM
+	"public".lifeboxme_dhis2_orgunits',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

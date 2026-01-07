@@ -95,7 +95,8 @@ $runnerTableSettings['public.lifeboxme_dhis2_analytics_settings'] = array(
 	page_size,
 	created_at,
 	updated_at
-FROM "public".lifeboxme_dhis2_analytics_settings',
+FROM
+	"public".lifeboxme_dhis2_analytics_settings',
 	'keyFields' => array( 
 		'id' 
 	),
@@ -598,7 +599,8 @@ FROM "public".lifeboxme_dhis2_analytics_settings',
 	page_size,
 	created_at,
 	updated_at
-FROM "public".lifeboxme_dhis2_analytics_settings',
+FROM
+	"public".lifeboxme_dhis2_analytics_settings',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -981,7 +983,8 @@ FROM "public".lifeboxme_dhis2_analytics_settings',
 	page_size,
 	created_at,
 	updated_at',
-		'fromListSql' => 'FROM "public".lifeboxme_dhis2_analytics_settings',
+		'fromListSql' => 'FROM
+	"public".lifeboxme_dhis2_analytics_settings',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

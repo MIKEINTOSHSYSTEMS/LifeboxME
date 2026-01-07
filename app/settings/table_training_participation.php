@@ -89,7 +89,8 @@ $runnerTableSettings['public.training_participation'] = array(
 	pre_test_score,
 	post_test_score,
 	ceu_points
-FROM "public".training_participation',
+FROM
+	"public".training_participation',
 	'keyFields' => array( 
 		'participation_id' 
 	),
@@ -402,7 +403,8 @@ FROM "public".training_participation',
 	pre_test_score,
 	post_test_score,
 	ceu_points
-FROM "public".training_participation',
+FROM
+	"public".training_participation',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -641,7 +643,8 @@ FROM "public".training_participation',
 	pre_test_score,
 	post_test_score,
 	ceu_points',
-		'fromListSql' => 'FROM "public".training_participation',
+		'fromListSql' => 'FROM
+	"public".training_participation',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

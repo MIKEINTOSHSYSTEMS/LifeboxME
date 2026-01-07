@@ -88,7 +88,8 @@ $runnerTableSettings['public.lbapt_beginnings_fund'] = array(
 	notes,
 	created_at,
 	updated_at
-FROM "public".lbapt_beginnings_fund',
+FROM
+	"public".lbapt_beginnings_fund',
 	'keyFields' => array( 
 		'bf_id' 
 	),
@@ -787,7 +788,8 @@ FROM "public".lbapt_beginnings_fund',
 	notes,
 	created_at,
 	updated_at
-FROM "public".lbapt_beginnings_fund',
+FROM
+	"public".lbapt_beginnings_fund',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -1266,7 +1268,8 @@ FROM "public".lbapt_beginnings_fund',
 	notes,
 	created_at,
 	updated_at',
-		'fromListSql' => 'FROM "public".lbapt_beginnings_fund',
+		'fromListSql' => 'FROM
+	"public".lbapt_beginnings_fund',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

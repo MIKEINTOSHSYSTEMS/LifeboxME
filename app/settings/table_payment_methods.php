@@ -73,7 +73,8 @@ $runnerTableSettings['public.payment_methods'] = array(
 	'sql' => 'SELECT
 	id,
 	method
-FROM "public".payment_methods',
+FROM
+	"public".payment_methods',
 	'keyFields' => array( 
 		'id' 
 	),
@@ -163,7 +164,8 @@ FROM "public".payment_methods',
 		'sql' => 'SELECT
 	id,
 	method
-FROM "public".payment_methods',
+FROM
+	"public".payment_methods',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -282,7 +284,8 @@ FROM "public".payment_methods',
 		'headSql' => 'SELECT',
 		'fieldListSql' => 'id,
 	method',
-		'fromListSql' => 'FROM "public".payment_methods',
+		'fromListSql' => 'FROM
+	"public".payment_methods',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

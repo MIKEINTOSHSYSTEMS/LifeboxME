@@ -81,7 +81,8 @@ $runnerTableSettings['public.donors'] = array(
 	donor_status,
 	donor_type,
 	notes
-FROM "public".donors',
+FROM
+	"public".donors',
 	'keyFields' => array( 
 		'id' 
 	),
@@ -441,7 +442,8 @@ $this->settings["preferredCountries"] = "us";           // Preferred Country'
 	donor_status,
 	donor_type,
 	notes
-FROM "public".donors',
+FROM
+	"public".donors',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -752,7 +754,8 @@ FROM "public".donors',
 	donor_status,
 	donor_type,
 	notes',
-		'fromListSql' => 'FROM "public".donors',
+		'fromListSql' => 'FROM
+	"public".donors',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

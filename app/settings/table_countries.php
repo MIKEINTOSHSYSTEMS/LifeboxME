@@ -87,7 +87,8 @@ $runnerTableSettings['public.countries'] = array(
 	iso_code,
 	created_at,
 	updated_at
-FROM "public".countries',
+FROM
+	"public".countries',
 	'keyFields' => array( 
 		'country_id' 
 	),
@@ -348,7 +349,8 @@ FROM "public".countries',
 	iso_code,
 	created_at,
 	updated_at
-FROM "public".countries',
+FROM
+	"public".countries',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -563,7 +565,8 @@ FROM "public".countries',
 	iso_code,
 	created_at,
 	updated_at',
-		'fromListSql' => 'FROM "public".countries',
+		'fromListSql' => 'FROM
+	"public".countries',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

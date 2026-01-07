@@ -84,7 +84,8 @@ $runnerTableSettings['public.lbpmi_indicator_targets'] = array(
 	created_by,
 	created_at,
 	updated_at
-FROM "public".lbpmi_indicator_targets',
+FROM
+	"public".lbpmi_indicator_targets',
 	'keyFields' => array( 
 		'target_id' 
 	),
@@ -652,7 +653,8 @@ FROM "public".lbpmi_indicator_targets',
 	created_by,
 	created_at,
 	updated_at
-FROM "public".lbpmi_indicator_targets',
+FROM
+	"public".lbpmi_indicator_targets',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -1059,7 +1061,8 @@ FROM "public".lbpmi_indicator_targets',
 	created_by,
 	created_at,
 	updated_at',
-		'fromListSql' => 'FROM "public".lbpmi_indicator_targets',
+		'fromListSql' => 'FROM
+	"public".lbpmi_indicator_targets',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

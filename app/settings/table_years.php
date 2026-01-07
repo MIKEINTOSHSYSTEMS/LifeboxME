@@ -74,7 +74,8 @@ $runnerTableSettings['public.years'] = array(
 	id,
 	"year",
 	is_active
-FROM "public".years',
+FROM
+	"public".years',
 	'keyFields' => array( 
 		'id' 
 	),
@@ -204,7 +205,8 @@ FROM "public".years',
 	id,
 	"year",
 	is_active
-FROM "public".years',
+FROM
+	"public".years',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -347,7 +349,8 @@ FROM "public".years',
 		'fieldListSql' => 'id,
 	"year",
 	is_active',
-		'fromListSql' => 'FROM "public".years',
+		'fromListSql' => 'FROM
+	"public".years',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

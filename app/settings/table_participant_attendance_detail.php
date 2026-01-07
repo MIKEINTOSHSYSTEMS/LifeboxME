@@ -65,7 +65,8 @@ $runnerTableSettings['public.participant_attendance_detail'] = array(
 	attended,
 	notes,
 	recorded_at
-FROM "public".participant_attendance_detail',
+FROM
+	"public".participant_attendance_detail',
 	'deviceHideFields' => array(
 		'1' => array( 
 			 
@@ -415,7 +416,8 @@ FROM "public".participant_attendance_detail',
 	attended,
 	notes,
 	recorded_at
-FROM "public".participant_attendance_detail',
+FROM
+	"public".participant_attendance_detail',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -702,7 +704,8 @@ FROM "public".participant_attendance_detail',
 	attended,
 	notes,
 	recorded_at',
-		'fromListSql' => 'FROM "public".participant_attendance_detail',
+		'fromListSql' => 'FROM
+	"public".participant_attendance_detail',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

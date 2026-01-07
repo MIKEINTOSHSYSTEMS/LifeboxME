@@ -73,7 +73,8 @@ $runnerTableSettings['public.quarters'] = array(
 	'sql' => 'SELECT
 	quarter_id,
 	quarter_name
-FROM "public".quarters',
+FROM
+	"public".quarters',
 	'keyFields' => array( 
 		'quarter_id' 
 	),
@@ -163,7 +164,8 @@ FROM "public".quarters',
 		'sql' => 'SELECT
 	quarter_id,
 	quarter_name
-FROM "public".quarters',
+FROM
+	"public".quarters',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -282,7 +284,8 @@ FROM "public".quarters',
 		'headSql' => 'SELECT',
 		'fieldListSql' => 'quarter_id,
 	quarter_name',
-		'fromListSql' => 'FROM "public".quarters',
+		'fromListSql' => 'FROM
+	"public".quarters',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

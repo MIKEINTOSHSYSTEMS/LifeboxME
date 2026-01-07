@@ -104,7 +104,8 @@ $runnerTableSettings['public.device_distributions'] = array(
 	receiving_date,
 	started_using,
 	date_started_using
-FROM "public".device_distributions',
+FROM
+	"public".device_distributions',
 	'keyFields' => array( 
 		'distribution_id' 
 	),
@@ -984,7 +985,8 @@ FROM "public".device_distributions',
 	receiving_date,
 	started_using,
 	date_started_using
-FROM "public".device_distributions',
+FROM
+	"public".device_distributions',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -1583,7 +1585,8 @@ FROM "public".device_distributions',
 	receiving_date,
 	started_using,
 	date_started_using',
-		'fromListSql' => 'FROM "public".device_distributions',
+		'fromListSql' => 'FROM
+	"public".device_distributions',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

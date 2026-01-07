@@ -54,9 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 }
 
 // Database connection
-function getDbConnection() {
+function getDbConnection()
+{
     static $connection = null;
-    
+
     if ($connection === null) {
         try {
             $dsn = "pgsql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME;
@@ -71,7 +72,7 @@ function getDbConnection() {
             ]));
         }
     }
-    
+
     return $connection;
 }
 
@@ -136,9 +137,10 @@ function makeApiRequest($endpoint, $params = [])
 }
 
 // Log fetch operation
-function logFetchOperation($tableName, $operationType, $parameters = []) {
+function logFetchOperation($tableName, $operationType, $parameters = [])
+{
     $db = getDbConnection();
-    
+
     try {
         $stmt = $db->prepare("
             INSERT INTO lbln_fetch_logs 
@@ -146,13 +148,13 @@ function logFetchOperation($tableName, $operationType, $parameters = []) {
             VALUES (?, ?, ?::JSONB, CURRENT_TIMESTAMP, 'running')
             RETURNING log_id
         ");
-        
+
         $stmt->execute([
             $operationType,
             $tableName,
             json_encode($parameters)
         ]);
-        
+
         return $stmt->fetchColumn();
     } catch (Exception $e) {
         error_log("Failed to log fetch operation: " . $e->getMessage());
@@ -161,14 +163,15 @@ function logFetchOperation($tableName, $operationType, $parameters = []) {
 }
 
 // Update fetch log
-function updateFetchLog($logId, $data) {
+function updateFetchLog($logId, $data)
+{
     $db = getDbConnection();
-    
+
     try {
         $setParts = [];
         $params = [];
         $paramIndex = 1;
-        
+
         foreach ($data as $key => $value) {
             if ($key === 'errors' && is_array($value)) {
                 $setParts[] = "$key = ?::JSONB";
@@ -178,13 +181,13 @@ function updateFetchLog($logId, $data) {
                 $params[] = $value;
             }
         }
-        
+
         $params[] = $logId;
-        
+
         $sql = "UPDATE lbln_fetch_logs SET " . implode(', ', $setParts) . " WHERE log_id = ?";
         $stmt = $db->prepare($sql);
         $stmt->execute($params);
-        
+
         return true;
     } catch (Exception $e) {
         error_log("Failed to update fetch log: " . $e->getMessage());
@@ -197,9 +200,10 @@ function updateFetchLog($logId, $data) {
 // ============================================
 
 // Get course analytics summary (students count per course) - FIXED VERSION
-function getCourseAnalyticsSummary() {
+function getCourseAnalyticsSummary()
+{
     $db = getDbConnection();
-    
+
     try {
         // First, let's debug what data we have
         $debugStmt = $db->prepare("
@@ -214,7 +218,7 @@ function getCourseAnalyticsSummary() {
         $debugStmt->execute();
         $debugData = $debugStmt->fetchAll();
         error_log("Analytics debug data: " . json_encode($debugData));
-        
+
         // Get the most recent analytics for each course
         $stmt = $db->prepare("
             WITH latest_analytics AS (
@@ -243,16 +247,16 @@ function getCourseAnalyticsSummary() {
                      la.students, la.analytics_date, la.fetched_at
             ORDER BY c.course_title
         ");
-        
+
         $stmt->execute();
         $data = $stmt->fetchAll();
-        
+
         // Debug the results
         error_log("Course analytics summary count: " . count($data));
         if (!empty($data)) {
             error_log("Sample course data: " . json_encode($data[0]));
         }
-        
+
         return [
             'success' => true,
             'data' => $data,
@@ -268,52 +272,53 @@ function getCourseAnalyticsSummary() {
 }
 
 // Force refresh analytics for specific courses
-function refreshCourseAnalytics($courseIds = []) {
+function refreshCourseAnalytics($courseIds = [])
+{
     $db = getDbConnection();
-    
+
     if (empty($courseIds)) {
         return ['success' => false, 'error' => 'No course IDs provided'];
     }
-    
+
     $logId = logFetchOperation('lbln_course_analytics', 'refresh_analytics', [
         'course_ids' => $courseIds
     ]);
-    
+
     $processed = 0;
     $inserted = 0;
     $errors = [];
-    
+
     foreach ($courseIds as $courseId) {
         $processed++;
-        
+
         try {
             // Get course info
             $stmt = $db->prepare("SELECT course_id, course_title FROM lbln_courses WHERE course_id = ?");
             $stmt->execute([$courseId]);
             $course = $stmt->fetch();
-            
+
             if (!$course) {
                 $errors[] = "Course $courseId not found";
                 continue;
             }
-            
+
             // Fetch analytics
             $response = makeApiRequest('courses.php', [
                 'id' => $courseId,
                 'action' => 'analytics'
             ]);
-            
+
             if (!$response['success'] || !isset($response['data'])) {
                 $errors[] = "Course $courseId: " . ($response['error'] ?? 'No analytics data');
                 continue;
             }
-            
+
             $analytics = $response['data'];
-            
+
             // Fix numeric values
             $avgScoreRate = min($analytics['avg_score_rate'] ?? 0, 999.999);
             $successRate = min($analytics['success_rate'] ?? 0, 999.999);
-            
+
             // Insert or update
             $stmt = $db->prepare("
                 INSERT INTO lbln_course_analytics (
@@ -336,7 +341,7 @@ function refreshCourseAnalytics($courseIds = []) {
                     video_viewing_time = EXCLUDED.video_viewing_time,
                     fetched_at = CURRENT_TIMESTAMP
             ");
-            
+
             $stmt->execute([
                 $courseId,
                 $course['course_title'],
@@ -352,17 +357,16 @@ function refreshCourseAnalytics($courseIds = []) {
                 $analytics['certificates_issued'] ?? 0,
                 $analytics['video_viewing_time'] ?? 0
             ]);
-            
+
             $inserted++;
-            
         } catch (Exception $e) {
             $errors[] = "Course $courseId: " . $e->getMessage();
             error_log("Error refreshing analytics for $courseId: " . $e->getMessage());
         }
-        
+
         usleep(100000); // 0.1 second delay
     }
-    
+
     updateFetchLog($logId, [
         'items_processed' => $processed,
         'items_inserted' => $inserted,
@@ -371,7 +375,7 @@ function refreshCourseAnalytics($courseIds = []) {
         'message' => "Refreshed analytics for $processed courses ($inserted updated)",
         'end_time' => date('Y-m-d H:i:s')
     ]);
-    
+
     return [
         'success' => true,
         'processed' => $processed,
@@ -381,20 +385,21 @@ function refreshCourseAnalytics($courseIds = []) {
 }
 
 // Create user fetch session for progress tracking
-function createUserFetchSession($courseIds = [], $options = []) {
+function createUserFetchSession($courseIds = [], $options = [])
+{
     $db = getDbConnection();
-    
+
     try {
         $sessionId = 'user_fetch_' . uniqid('', true);
         $selectedCourses = is_array($courseIds) ? $courseIds : [];
-        
+
         // If no courses specified, fetch all active courses
         if (empty($selectedCourses)) {
             $stmt = $db->prepare("SELECT course_id FROM lbln_courses WHERE is_active = TRUE");
             $stmt->execute();
             $selectedCourses = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
         }
-        
+
         // Initialize progress tracking for each course
         $courseProgress = [];
         foreach ($selectedCourses as $courseId) {
@@ -408,7 +413,7 @@ function createUserFetchSession($courseIds = [], $options = []) {
                 'errors' => []
             ];
         }
-        
+
         $stmt = $db->prepare("
             INSERT INTO lbln_fetch_sessions 
             (session_id, session_type, target_table, selected_courses, 
@@ -417,7 +422,7 @@ function createUserFetchSession($courseIds = [], $options = []) {
                     ?::JSONB, ?, ?::JSONB, ?, CURRENT_TIMESTAMP)
             RETURNING session_id
         ");
-        
+
         $stmt->execute([
             $sessionId,
             json_encode($selectedCourses),
@@ -426,7 +431,7 @@ function createUserFetchSession($courseIds = [], $options = []) {
             json_encode($options),
             FETCH_STATUS_PENDING
         ]);
-        
+
         return [
             'success' => true,
             'session_id' => $sessionId,
@@ -443,32 +448,33 @@ function createUserFetchSession($courseIds = [], $options = []) {
 }
 
 // Get user fetch session status
-function getUserFetchSessionStatus($sessionId) {
+function getUserFetchSessionStatus($sessionId)
+{
     $db = getDbConnection();
-    
+
     try {
         $stmt = $db->prepare("
             SELECT * FROM lbln_fetch_sessions 
             WHERE session_id = ? AND session_type = 'user_fetch'
         ");
-        
+
         $stmt->execute([$sessionId]);
         $session = $stmt->fetch();
-        
+
         if (!$session) {
             return [
                 'success' => false,
                 'error' => 'Session not found'
             ];
         }
-        
+
         // Calculate overall progress
         $progress = json_decode($session['course_progress'], true);
         $totalCourses = $session['total_courses'];
         $completedCourses = 0;
         $totalUsers = 0;
         $fetchedUsers = 0;
-        
+
         foreach ($progress as $courseProgress) {
             if ($courseProgress['status'] === FETCH_STATUS_COMPLETED) {
                 $completedCourses++;
@@ -476,9 +482,9 @@ function getUserFetchSessionStatus($sessionId) {
             $totalUsers += $courseProgress['total_users'];
             $fetchedUsers += $courseProgress['fetched_users'];
         }
-        
+
         $overallProgress = $totalCourses > 0 ? ($completedCourses / $totalCourses) * 100 : 0;
-        
+
         return [
             'success' => true,
             'session' => $session,
@@ -499,40 +505,41 @@ function getUserFetchSessionStatus($sessionId) {
 }
 
 // Update course progress in session - IMPROVED VERSION
-function updateCourseProgress($sessionId, $courseId, $progressData) {
+function updateCourseProgress($sessionId, $courseId, $progressData)
+{
     $db = getDbConnection();
-    
+
     try {
         // Get current session
         $stmt = $db->prepare("SELECT course_progress FROM lbln_fetch_sessions WHERE session_id = ?");
         $stmt->execute([$sessionId]);
         $session = $stmt->fetch();
-        
+
         if (!$session) {
             error_log("Session not found: $sessionId");
             return false;
         }
-        
+
         // Update specific course progress
         $progress = json_decode($session['course_progress'], true);
-        
+
         if (isset($progress[$courseId])) {
             $progress[$courseId] = array_merge($progress[$courseId], $progressData);
-            
+
             // Update session
             $stmt = $db->prepare("
                 UPDATE lbln_fetch_sessions 
                 SET course_progress = ?::JSONB, updated_at = CURRENT_TIMESTAMP 
                 WHERE session_id = ?
             ");
-            
+
             $result = $stmt->execute([json_encode($progress), $sessionId]);
-            
+
             if (!$result) {
                 error_log("Failed to update course progress for session $sessionId");
                 return false;
             }
-            
+
             return true;
         } else {
             error_log("Course $courseId not found in session $sessionId");
@@ -545,9 +552,10 @@ function updateCourseProgress($sessionId, $courseId, $progressData) {
 }
 
 // Mark course as completed in session
-function markCourseAsCompleted($sessionId, $courseId, $totalUsers) {
+function markCourseAsCompleted($sessionId, $courseId, $totalUsers)
+{
     $db = getDbConnection();
-    
+
     try {
         $progressData = [
             'status' => FETCH_STATUS_COMPLETED,
@@ -555,7 +563,7 @@ function markCourseAsCompleted($sessionId, $courseId, $totalUsers) {
             'total_users' => $totalUsers,
             'completed_at' => date('Y-m-d H:i:s')
         ];
-        
+
         return updateCourseProgress($sessionId, $courseId, $progressData);
     } catch (Exception $e) {
         error_log("Error marking course as completed: " . $e->getMessage());
@@ -565,9 +573,10 @@ function markCourseAsCompleted($sessionId, $courseId, $totalUsers) {
 
 
 // Debug function to check table structure
-function debugTableStructure($tableName) {
+function debugTableStructure($tableName)
+{
     $db = getDbConnection();
-    
+
     try {
         $stmt = $db->prepare("
             SELECT column_name, data_type, is_nullable 
@@ -575,15 +584,15 @@ function debugTableStructure($tableName) {
             WHERE table_name = ?
             ORDER BY ordinal_position
         ");
-        
+
         $stmt->execute([$tableName]);
         $columns = $stmt->fetchAll();
-        
+
         error_log("Table structure for $tableName:");
         foreach ($columns as $col) {
             error_log("  {$col['column_name']} - {$col['data_type']} - Nullable: {$col['is_nullable']}");
         }
-        
+
         return $columns;
     } catch (Exception $e) {
         error_log("Error getting table structure: " . $e->getMessage());
@@ -593,24 +602,25 @@ function debugTableStructure($tableName) {
 
 
 // Fetch users for specific course (with pagination) - FIXED VERSION
-function fetchUsersForCourse($courseId, $sessionId = null, $startPage = 1) {
+function fetchUsersForCourse($courseId, $sessionId = null, $startPage = 1)
+{
     // Debug table structure
     debugTableStructure('lbln_course_users');
 
     $db = getDbConnection();
-    
+
     // Get course info
     $stmt = $db->prepare("SELECT course_id, course_title FROM lbln_courses WHERE course_id = ?");
     $stmt->execute([$courseId]);
     $course = $stmt->fetch();
-    
+
     if (!$course) {
         return [
             'success' => false,
             'error' => 'Course not found'
         ];
     }
-    
+
     $inserted = 0;
     $updated = 0;
     $skipped = 0;
@@ -619,7 +629,7 @@ function fetchUsersForCourse($courseId, $sessionId = null, $startPage = 1) {
     $currentPage = $startPage;
     $hasMorePages = true;
     $batchCount = 0;
-    
+
     // If session exists, update status to running
     if ($sessionId) {
         updateCourseProgress($sessionId, $courseId, [
@@ -627,7 +637,7 @@ function fetchUsersForCourse($courseId, $sessionId = null, $startPage = 1) {
             'current_page' => $currentPage
         ]);
     }
-    
+
     while ($hasMorePages && $batchCount < USER_FETCH_BATCH_SIZE) {
         $response = makeApiRequest('courses.php', [
             'id' => $courseId,
@@ -635,11 +645,11 @@ function fetchUsersForCourse($courseId, $sessionId = null, $startPage = 1) {
             'single_page' => 0,
             'page' => $currentPage
         ]);
-        
+
         if (!$response['success'] || !isset($response['data'])) {
             $errorMsg = $response['error'] ?? 'No user data received';
             $errors[] = "Page $currentPage: $errorMsg";
-            
+
             // If session exists, record error
             if ($sessionId) {
                 $currentErrors = [];
@@ -650,11 +660,11 @@ function fetchUsersForCourse($courseId, $sessionId = null, $startPage = 1) {
                     ");
                     $progressStmt->execute([$courseId, $sessionId]);
                     $errorData = $progressStmt->fetch();
-                    
+
                     if ($errorData && $errorData['errors']) {
                         $currentErrors = json_decode($errorData['errors'], true) ?? [];
                     }
-                    
+
                     $currentErrors[] = $errorMsg;
                     updateCourseProgress($sessionId, $courseId, [
                         'errors' => $currentErrors,
@@ -664,21 +674,21 @@ function fetchUsersForCourse($courseId, $sessionId = null, $startPage = 1) {
                     error_log("Error updating course errors: " . $e->getMessage());
                 }
             }
-            
+
             break;
         }
-        
+
         $users = $response['data'] ?? [];
         $meta = $response['meta'] ?? [];
-        
+
         // Update total pages if available
         if (isset($meta['totalPagesAvailable'])) {
             $totalPages = $meta['totalPagesAvailable'];
         }
-        
+
         // Process users in smaller batches for memory efficiency
         $userBatch = array_chunk($users, 50);
-        
+
         foreach ($userBatch as $batch) {
             try {
                 // Process each user individually instead of batch transaction
@@ -689,13 +699,13 @@ function fetchUsersForCourse($courseId, $sessionId = null, $startPage = 1) {
                         $tags = !empty($user['tags']) ? json_encode($user['tags']) : json_encode([]);
                         $utms = !empty($user['utms']) ? json_encode($user['utms']) : json_encode([]);
                         $billingInfo = !empty($user['billing_info']) ? json_encode($user['billing_info']) : json_encode([]);
-                        
+
                         // Extract UTM data
                         $fcCountry = $user['utms']['fc_country'] ?? null;
                         $fcReferrer = $user['utms']['fc_referrer'] ?? null;
                         $lcReferrer = $user['utms']['lc_referrer'] ?? null;
                         $lcCountry = $user['utms']['lc_country'] ?? null;
-                        
+
                         // Check if user already exists for this course
                         $checkStmt = $db->prepare("
                             SELECT data_id FROM lbln_course_users 
@@ -703,7 +713,7 @@ function fetchUsersForCourse($courseId, $sessionId = null, $startPage = 1) {
                         ");
                         $checkStmt->execute([$courseId, $user['id']]);
                         $exists = $checkStmt->fetch();
-                        
+
                         if ($exists) {
                             // Update existing user - FIXED to match table structure
                             $stmt = $db->prepare("
@@ -739,7 +749,7 @@ function fetchUsersForCourse($courseId, $sessionId = null, $startPage = 1) {
                                     last_seen = CURRENT_TIMESTAMP
                                 WHERE course_id = ? AND user_id = ?
                             ");
-                            
+
                             $stmt->execute([
                                 $user['email'] ?? '',
                                 $user['username'] ?? null,
@@ -772,7 +782,7 @@ function fetchUsersForCourse($courseId, $sessionId = null, $startPage = 1) {
                                 $courseId,
                                 $user['id']
                             ]);
-                            
+
                             if ($stmt->rowCount() > 0) {
                                 $updated++;
                             }
@@ -791,10 +801,10 @@ function fetchUsersForCourse($courseId, $sessionId = null, $startPage = 1) {
                                     fc_referrer, lc_referrer, lc_country
                                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?::JSONB, ?::JSONB, ?::JSONB, ?::JSONB, ?, ?, ?, ?, ?, ?, ?)
                             ");
-                            
+
                             // Debug: Log the values being inserted
                             error_log("Inserting user: " . $user['id'] . " for course: " . $courseId);
-                            
+
                             $stmt->execute([
                                 $courseId,
                                 $course['course_title'],
@@ -828,14 +838,14 @@ function fetchUsersForCourse($courseId, $sessionId = null, $startPage = 1) {
                                 $lcReferrer,
                                 $lcCountry
                             ]);
-                            
+
                             $inserted++;
                         }
                     } catch (Exception $e) {
                         $errors[] = "User {$user['id']}: " . $e->getMessage();
                         error_log("Error inserting user {$user['id']}: " . $e->getMessage());
                         $skipped++;
-                        
+
                         // If it's a syntax error, try a simplified insert
                         if (strpos($e->getMessage(), 'INSERT has more expressions than target columns') !== false) {
                             error_log("Trying simplified insert for user {$user['id']}");
@@ -847,7 +857,7 @@ function fetchUsersForCourse($courseId, $sessionId = null, $startPage = 1) {
                                         first_name, last_name, created
                                     ) VALUES (?, ?, ?, ?, ?, ?, ?)
                                 ");
-                                
+
                                 $simpleStmt->execute([
                                     $courseId,
                                     $course['course_title'],
@@ -857,7 +867,7 @@ function fetchUsersForCourse($courseId, $sessionId = null, $startPage = 1) {
                                     $user['last_name'] ?? null,
                                     $user['created'] ?? null
                                 ]);
-                                
+
                                 $inserted++;
                                 // Remove the error since we succeeded
                                 array_pop($errors);
@@ -869,9 +879,9 @@ function fetchUsersForCourse($courseId, $sessionId = null, $startPage = 1) {
                         }
                     }
                 }
-                
+
                 $batchCount++;
-                
+
                 // Update progress if session exists
                 if ($sessionId) {
                     updateCourseProgress($sessionId, $courseId, [
@@ -880,27 +890,26 @@ function fetchUsersForCourse($courseId, $sessionId = null, $startPage = 1) {
                         'current_page' => $currentPage
                     ]);
                 }
-                
             } catch (Exception $e) {
                 $errors[] = "Batch processing failed: " . $e->getMessage();
                 error_log("Batch processing error: " . $e->getMessage());
                 $skipped += count($batch);
             }
-            
+
             // Small delay to prevent overwhelming the API
             usleep(100000); // 0.1 second
         }
-        
+
         // Check if there are more pages
         $fetchedPages = $meta['totalPagesFetched'] ?? $currentPage;
-        
+
         if ($currentPage >= $totalPages || $currentPage >= $fetchedPages || empty($users)) {
             $hasMorePages = false;
         } else {
             $currentPage++;
         }
     }
-    
+
     // If session exists, update final status
     if ($sessionId) {
         if (!$hasMorePages) {
@@ -915,7 +924,7 @@ function fetchUsersForCourse($courseId, $sessionId = null, $startPage = 1) {
             ]);
         }
     }
-    
+
     return [
         'success' => true,
         'course_id' => $courseId,
@@ -928,14 +937,16 @@ function fetchUsersForCourse($courseId, $sessionId = null, $startPage = 1) {
         'updated' => $updated,
         'skipped' => $skipped,
         'total_users' => $inserted + $updated,
-        'errors' => $errors
+        'errors' => $errors,
+        'real_time_logs' => generateRealtimeLogs($courseId, $course['course_title'], $currentPage - 1, $totalPages, $inserted + $updated) // ADD THIS
     ];
 }
 
 // Fetch users for multiple courses with progress tracking
-function fetchCourseUsersWithProgress($sessionId = null, $batchSize = COURSES_PER_BATCH) {
+function fetchCourseUsersWithProgress($sessionId = null, $batchSize = COURSES_PER_BATCH)
+{
     $db = getDbConnection();
-    
+
     if (!$sessionId) {
         // Create new session
         $sessionResult = createUserFetchSession();
@@ -944,28 +955,28 @@ function fetchCourseUsersWithProgress($sessionId = null, $batchSize = COURSES_PE
         }
         $sessionId = $sessionResult['session_id'];
     }
-    
+
     // Get session details
     $sessionStatus = getUserFetchSessionStatus($sessionId);
     if (!$sessionStatus['success']) {
         return $sessionStatus;
     }
-    
+
     $session = $sessionStatus['session'];
     $progress = $sessionStatus['progress'];
     $selectedCourses = json_decode($session['selected_courses'], true);
-    
+
     $logId = logFetchOperation('lbln_course_users', 'fetch_users_progress', [
         'session_id' => $sessionId,
         'courses_count' => count($selectedCourses),
         'batch_size' => $batchSize
     ]);
-    
+
     $totalProcessed = 0;
     $batchProcessed = 0;
     $results = [];
     $errors = [];
-    
+
     // Get pending or paused courses
     $coursesToProcess = [];
     foreach ($progress as $courseId => $courseProgress) {
@@ -977,34 +988,34 @@ function fetchCourseUsersWithProgress($sessionId = null, $batchSize = COURSES_PE
             ];
         }
     }
-    
+
     // Process courses in batches
     $batchCourses = array_slice($coursesToProcess, 0, $batchSize);
-    
+
     foreach ($batchCourses as $courseInfo) {
         $totalProcessed++;
         $batchProcessed++;
-        
-        $startPage = $courseInfo['status'] === FETCH_STATUS_PAUSED 
-            ? ($courseInfo['last_page'] + 1) 
+
+        $startPage = $courseInfo['status'] === FETCH_STATUS_PAUSED
+            ? ($courseInfo['last_page'] + 1)
             : 1;
-        
+
         $result = fetchUsersForCourse($courseInfo['course_id'], $sessionId, $startPage);
         $results[] = $result;
-        
+
         if (!empty($result['errors'])) {
             $errors = array_merge($errors, $result['errors']);
         }
-        
+
         // Small delay between courses
         usleep(200000); // 0.2 second
-        
+
         // Break if we've processed enough for this batch
         if ($batchProcessed >= $batchSize) {
             break;
         }
     }
-    
+
     // Check if all courses are completed
     $sessionStatus = getUserFetchSessionStatus($sessionId);
     $allCompleted = true;
@@ -1014,7 +1025,7 @@ function fetchCourseUsersWithProgress($sessionId = null, $batchSize = COURSES_PE
             break;
         }
     }
-    
+
     // Update session status
     $sessionStatusUpdate = $allCompleted ? FETCH_STATUS_COMPLETED : FETCH_STATUS_RUNNING;
     $db->prepare("
@@ -1022,13 +1033,13 @@ function fetchCourseUsersWithProgress($sessionId = null, $batchSize = COURSES_PE
         SET status = ?, updated_at = CURRENT_TIMESTAMP 
         WHERE session_id = ?
     ")->execute([$sessionStatusUpdate, $sessionId]);
-    
+
     // Calculate totals
     $totalUsers = 0;
     $totalInserted = 0;
     $totalUpdated = 0;
     $totalSkipped = 0;
-    
+
     foreach ($results as $result) {
         if ($result['success']) {
             $totalUsers += $result['total_users'];
@@ -1037,7 +1048,7 @@ function fetchCourseUsersWithProgress($sessionId = null, $batchSize = COURSES_PE
             $totalSkipped += $result['skipped'];
         }
     }
-    
+
     updateFetchLog($logId, [
         'items_processed' => $totalProcessed,
         'items_inserted' => $totalInserted,
@@ -1048,7 +1059,7 @@ function fetchCourseUsersWithProgress($sessionId = null, $batchSize = COURSES_PE
         'message' => "Processed $batchProcessed courses in batch ($totalUsers users, $totalInserted inserted, $totalUpdated updated)",
         'end_time' => date('Y-m-d H:i:s')
     ]);
-    
+
     return [
         'success' => true,
         'session_id' => $sessionId,
@@ -1062,14 +1073,87 @@ function fetchCourseUsersWithProgress($sessionId = null, $batchSize = COURSES_PE
         'skipped' => $totalSkipped,
         'errors' => $errors,
         'session_status' => $sessionStatusUpdate,
-        'progress' => $sessionStatus
+        'progress' => $sessionStatus,
+        'detailed_results' => $results, // ADD THIS LINE - includes per-course details
+        'log_entries' => generateLogEntries($results)
     ];
 }
 
+
+// Add this function after the fetchCourseUsersWithProgress() function:
+function generateLogEntries($results)
+{
+    $logs = [];
+
+    foreach ($results as $result) {
+        if ($result['success']) {
+            $logs[] = [
+                'type' => 'info',
+                'message' => "Course '{$result['course_title']}' ({$result['course_id']}): " .
+                    "Pages processed: {$result['processed_pages']}/{$result['total_pages']}, " .
+                    "Users: {$result['total_users']} (Inserted: {$result['inserted']}, Updated: {$result['updated']}, Skipped: {$result['skipped']})"
+            ];
+
+            if ($result['has_more_pages']) {
+                $logs[] = [
+                    'type' => 'warning',
+                    'message' => "Course '{$result['course_title']}' has more pages to fetch. Will continue from page {$result['next_page']}"
+                ];
+            } else {
+                $logs[] = [
+                    'type' => 'success',
+                    'message' => "Course '{$result['course_title']}' completed!"
+                ];
+            }
+
+            if (!empty($result['errors'])) {
+                foreach ($result['errors'] as $error) {
+                    $logs[] = [
+                        'type' => 'error',
+                        'message' => "Error in '{$result['course_title']}': $error"
+                    ];
+                }
+            }
+        } else {
+            $logs[] = [
+                'type' => 'error',
+                'message' => "Failed to fetch '{$result['course_title']}': {$result['error']}"
+            ];
+        }
+    }
+
+    return $logs;
+}
+
+
+// Add this function after generateLogEntries():
+function generateRealtimeLogs($courseId, $courseTitle, $currentPage, $totalPages, $totalUsers)
+{
+    $timestamp = date('H:i:s');
+    $logs = [];
+
+    $logs[] = [
+        'type' => 'info',
+        'timestamp' => $timestamp,
+        'message' => "Processing '$courseTitle' - Page $currentPage/$totalPages"
+    ];
+
+    if ($totalUsers > 0) {
+        $logs[] = [
+            'type' => 'success',
+            'timestamp' => $timestamp,
+            'message' => "Fetched $totalUsers users from '$courseTitle'"
+        ];
+    }
+
+    return $logs;
+}
+
 // Get active user fetch sessions
-function getActiveUserFetchSessions() {
+function getActiveUserFetchSessions()
+{
     $db = getDbConnection();
-    
+
     try {
         $stmt = $db->prepare("
             SELECT * FROM lbln_fetch_sessions 
@@ -1077,10 +1161,10 @@ function getActiveUserFetchSessions() {
             AND status IN ('pending', 'running', 'paused')
             ORDER BY created_at DESC
         ");
-        
+
         $stmt->execute();
         $sessions = $stmt->fetchAll();
-        
+
         // Enhance sessions with progress details
         foreach ($sessions as &$session) {
             $progress = getUserFetchSessionStatus($session['session_id']);
@@ -1091,7 +1175,7 @@ function getActiveUserFetchSessions() {
                 $session['fetched_users'] = $progress['fetched_users'];
             }
         }
-        
+
         return [
             'success' => true,
             'sessions' => $sessions,
@@ -1106,22 +1190,24 @@ function getActiveUserFetchSessions() {
 }
 
 // Resume specific user fetch session
-function resumeUserFetchSession($sessionId, $batchSize = COURSES_PER_BATCH) {
+function resumeUserFetchSession($sessionId, $batchSize = COURSES_PER_BATCH)
+{
     return fetchCourseUsersWithProgress($sessionId, $batchSize);
 }
 
 // Cancel/delete user fetch session
-function cancelUserFetchSession($sessionId) {
+function cancelUserFetchSession($sessionId)
+{
     $db = getDbConnection();
-    
+
     try {
         $stmt = $db->prepare("
             DELETE FROM lbln_fetch_sessions 
             WHERE session_id = ? AND session_type = 'user_fetch'
         ");
-        
+
         $stmt->execute([$sessionId]);
-        
+
         return [
             'success' => true,
             'message' => 'Session cancelled successfully'
@@ -1139,17 +1225,18 @@ function cancelUserFetchSession($sessionId) {
 // ============================================
 
 // SAFE VERSION - fetchAllCourses
-function fetchAllCourses() {
+function fetchAllCourses()
+{
     $logId = logFetchOperation('lbln_courses', 'fetch_courses', [
         'endpoint' => 'courses.php',
         'params' => ['single_page' => 0, 'page' => 1]
     ]);
-    
+
     $response = makeApiRequest('courses.php', [
         'single_page' => 0,
         'page' => 1
     ]);
-    
+
     if (!$response['success']) {
         updateFetchLog($logId, [
             'status' => 'failed',
@@ -1157,20 +1244,20 @@ function fetchAllCourses() {
             'errors' => [$response['error']],
             'end_time' => date('Y-m-d H:i:s')
         ]);
-        
+
         return $response;
     }
-    
+
     $courses = $response['data'] ?? [];
     $totalCourses = count($courses);
     $inserted = 0;
     $updated = 0;
     $skipped = 0;
     $errors = [];
-    
+
     if ($totalCourses > 0) {
         $db = getDbConnection();
-        
+
         // Prepare both statements
         $updateStmt = $db->prepare("
             UPDATE lbln_courses SET
@@ -1195,7 +1282,7 @@ function fetchAllCourses() {
                 is_active = TRUE
             WHERE course_id = ?
         ");
-        
+
         $insertStmt = $db->prepare("
             INSERT INTO lbln_courses (
                 course_id, course_title, categories, description, name,
@@ -1204,22 +1291,22 @@ function fetchAllCourses() {
                 identifiers, after_purchase, author, created, modified
             ) VALUES (?, ?, ?::JSONB, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?::JSONB, ?::JSONB, ?::JSONB, ?, ?)
         ");
-        
+
         foreach ($courses as $course) {
             try {
                 // Check if course exists
                 $checkStmt = $db->prepare("SELECT data_id FROM lbln_courses WHERE course_id = ?");
                 $checkStmt->execute([$course['id']]);
                 $exists = $checkStmt->fetch();
-                
+
                 // Prepare all values safely
                 $courseId = $course['id'];
                 $courseTitle = $course['title'] ?? '';
                 $description = $course['description'] ?? '';
-                
+
                 // Handle categories
                 $categories = !empty($course['categories']) ? json_encode($course['categories']) : json_encode([]);
-                
+
                 // Handle author safely
                 $authorName = null;
                 $authorImage = null;
@@ -1228,29 +1315,29 @@ function fetchAllCourses() {
                     $authorImage = $course['author']['image'] ?? null;
                 }
                 $author = !empty($course['author']) ? json_encode($course['author']) : json_encode([]);
-                
+
                 $courseImage = $course['courseImage'] ?? null;
                 $originalPrice = $course['original_price'] ?? 0;
                 $discountPrice = $course['discount_price'] ?? 0;
                 $finalPrice = $course['final_price'] ?? 0;
                 $access = $course['access'] ?? 'free';
-                
+
                 // Handle expires
                 $expires = null;
                 if (!empty($course['expires'])) {
                     $expires = date('Y-m-d H:i:s', $course['expires']);
                 }
-                
+
                 $expiresType = $course['expiresType'] ?? null;
                 $dripFeed = $course['dripFeed'] ?? 'none';
-                
+
                 // Handle other JSON fields
                 $identifiers = !empty($course['identifiers']) ? json_encode($course['identifiers']) : json_encode([]);
                 $afterPurchase = !empty($course['afterPurchase']) ? json_encode($course['afterPurchase']) : json_encode([]);
-                
+
                 $created = $course['created'] ?? null;
                 $modified = $course['modified'] ?? null;
-                
+
                 if ($exists) {
                     // Update existing course
                     $updateStmt->execute([
@@ -1274,7 +1361,7 @@ function fetchAllCourses() {
                         $modified,
                         $courseId
                     ]);
-                    
+
                     $updated++;
                 } else {
                     // Insert new course
@@ -1299,7 +1386,7 @@ function fetchAllCourses() {
                         $created,
                         $modified
                     ]);
-                    
+
                     $inserted++;
                 }
             } catch (Exception $e) {
@@ -1309,7 +1396,7 @@ function fetchAllCourses() {
             }
         }
     }
-    
+
     updateFetchLog($logId, [
         'items_processed' => $totalCourses,
         'items_inserted' => $inserted,
@@ -1320,7 +1407,7 @@ function fetchAllCourses() {
         'message' => "Processed $totalCourses courses ($inserted inserted, $updated updated, $skipped skipped)",
         'end_time' => date('Y-m-d H:i:s')
     ]);
-    
+
     return [
         'success' => true,
         'total' => $totalCourses,
@@ -1332,55 +1419,56 @@ function fetchAllCourses() {
 }
 
 // Fetch course analytics - FIXED VERSION
-function fetchCourseAnalytics() {
+function fetchCourseAnalytics()
+{
     $db = getDbConnection();
-    
+
     // Get all active courses
     $stmt = $db->prepare("SELECT course_id, course_title FROM lbln_courses WHERE is_active = TRUE");
     $stmt->execute();
     $courses = $stmt->fetchAll();
-    
+
     $logId = logFetchOperation('lbln_course_analytics', 'fetch_analytics', [
         'courses_count' => count($courses)
     ]);
-    
+
     $totalProcessed = 0;
     $inserted = 0;
     $skipped = 0;
     $errors = [];
-    
+
     foreach ($courses as $course) {
         $totalProcessed++;
-        
+
         try {
             $response = makeApiRequest('courses.php', [
                 'id' => $course['course_id'],
                 'action' => 'analytics'
             ]);
-            
+
             if (!$response['success'] || !isset($response['data'])) {
                 $errors[] = "Course {$course['course_id']}: " . ($response['error'] ?? 'No analytics data');
                 $skipped++;
                 continue;
             }
-            
+
             $analytics = $response['data'];
-            
+
             // Fix numeric values to prevent overflow
             $avgScoreRate = $analytics['avg_score_rate'] ?? 0;
             $successRate = $analytics['success_rate'] ?? 0;
-            
+
             // Cap values at 999.999 if they're too high
             if ($avgScoreRate > 999.999) {
                 $avgScoreRate = 999.999;
                 error_log("Capped avg_score_rate for course {$course['course_id']} from {$analytics['avg_score_rate']} to 999.999");
             }
-            
+
             if ($successRate > 999.999) {
                 $successRate = 999.999;
                 error_log("Capped success_rate for course {$course['course_id']} from {$analytics['success_rate']} to 999.999");
             }
-            
+
             // Insert analytics data
             $stmt = $db->prepare("
                 INSERT INTO lbln_course_analytics (
@@ -1403,7 +1491,7 @@ function fetchCourseAnalytics() {
                     video_viewing_time = EXCLUDED.video_viewing_time,
                     fetched_at = CURRENT_TIMESTAMP
             ");
-            
+
             $stmt->execute([
                 $course['course_id'],
                 $course['course_title'],
@@ -1419,19 +1507,18 @@ function fetchCourseAnalytics() {
                 $analytics['certificates_issued'] ?? 0,
                 $analytics['video_viewing_time'] ?? 0
             ]);
-            
+
             $inserted++;
-            
         } catch (Exception $e) {
             $errors[] = "Course {$course['course_id']}: " . $e->getMessage();
             error_log("Error fetching analytics for course {$course['course_id']}: " . $e->getMessage());
             $skipped++;
         }
-        
+
         // Small delay to avoid rate limiting
         usleep(100000); // 0.1 second
     }
-    
+
     updateFetchLog($logId, [
         'items_processed' => $totalProcessed,
         'items_inserted' => $inserted,
@@ -1441,7 +1528,7 @@ function fetchCourseAnalytics() {
         'message' => "Processed analytics for $totalProcessed courses ($inserted inserted, $skipped skipped)",
         'end_time' => date('Y-m-d H:i:s')
     ]);
-    
+
     return [
         'success' => true,
         'total' => $totalProcessed,
@@ -1452,29 +1539,31 @@ function fetchCourseAnalytics() {
 }
 
 // OLD fetchCourseUsers function - kept for backward compatibility
-function fetchCourseUsers() {
+function fetchCourseUsers()
+{
     return fetchCourseUsersWithProgress();
 }
 
 // Clear table data
-function clearTableData($tableName) {
+function clearTableData($tableName)
+{
     $db = getDbConnection();
-    
+
     try {
         $logId = logFetchOperation($tableName, 'clear_data', []);
-        
+
         // Call the PostgreSQL function
         $stmt = $db->prepare("SELECT clear_table_data(?)");
         $stmt->execute([$tableName]);
         $rowsDeleted = $stmt->fetchColumn();
-        
+
         updateFetchLog($logId, [
             'items_processed' => $rowsDeleted,
             'status' => 'completed',
             'message' => "Cleared $rowsDeleted records from $tableName",
             'end_time' => date('Y-m-d H:i:s')
         ]);
-        
+
         return [
             'success' => true,
             'rows_deleted' => $rowsDeleted,
@@ -1489,15 +1578,16 @@ function clearTableData($tableName) {
 }
 
 // Get table statistics
-function getTableStats($tableName = null) {
+function getTableStats($tableName = null)
+{
     $db = getDbConnection();
-    
+
     try {
         if ($tableName) {
             $stmt = $db->prepare("SELECT COUNT(*) FROM $tableName");
             $stmt->execute();
             $count = $stmt->fetchColumn();
-            
+
             $stmt = $db->prepare("
                 SELECT MAX(fetched_at) as last_fetch 
                 FROM $tableName 
@@ -1505,7 +1595,7 @@ function getTableStats($tableName = null) {
             ");
             $stmt->execute();
             $lastFetch = $stmt->fetchColumn();
-            
+
             return [
                 'success' => true,
                 'table' => $tableName,
@@ -1516,12 +1606,12 @@ function getTableStats($tableName = null) {
             // Get all table stats
             $tables = ['lbln_courses', 'lbln_course_analytics', 'lbln_course_users'];
             $stats = [];
-            
+
             foreach ($tables as $table) {
                 $stmt = $db->prepare("SELECT COUNT(*) FROM $table");
                 $stmt->execute();
                 $count = $stmt->fetchColumn();
-                
+
                 $stmt = $db->prepare("
                     SELECT MAX(fetched_at) as last_fetch 
                     FROM $table 
@@ -1529,13 +1619,13 @@ function getTableStats($tableName = null) {
                 ");
                 $stmt->execute();
                 $lastFetch = $stmt->fetchColumn();
-                
+
                 $stats[$table] = [
                     'count' => $count,
                     'last_fetch' => $lastFetch
                 ];
             }
-            
+
             return [
                 'success' => true,
                 'stats' => $stats
@@ -1550,9 +1640,10 @@ function getTableStats($tableName = null) {
 }
 
 // Get recent fetch logs
-function getRecentLogs($limit = 20) {
+function getRecentLogs($limit = 20)
+{
     $db = getDbConnection();
-    
+
     try {
         $stmt = $db->prepare("
             SELECT 
@@ -1563,10 +1654,10 @@ function getRecentLogs($limit = 20) {
             ORDER BY start_time DESC
             LIMIT ?
         ");
-        
+
         $stmt->execute([$limit]);
         $logs = $stmt->fetchAll();
-        
+
         return [
             'success' => true,
             'logs' => $logs
@@ -1580,14 +1671,15 @@ function getRecentLogs($limit = 20) {
 }
 
 // Preview table data
-function previewTableData($tableName, $limit = 10) {
+function previewTableData($tableName, $limit = 10)
+{
     $db = getDbConnection();
-    
+
     try {
         $stmt = $db->prepare("SELECT * FROM $tableName ORDER BY fetched_at DESC LIMIT ?");
         $stmt->execute([$limit]);
         $data = $stmt->fetchAll();
-        
+
         return [
             'success' => true,
             'table' => $tableName,
@@ -1603,29 +1695,30 @@ function previewTableData($tableName, $limit = 10) {
 }
 
 // Handle AJAX requests with new actions
-function handleAjaxRequest() {
+function handleAjaxRequest()
+{
     $action = $_POST['action'] ?? '';
     $data = [];
-    
+
     switch ($action) {
         case 'fetch_courses':
             $data = fetchAllCourses();
             break;
-            
+
         case 'fetch_analytics':
             $data = fetchCourseAnalytics();
             break;
-            
+
         case 'fetch_users':
             $data = fetchCourseUsers();
             break;
-            
+
         case 'fetch_users_progress':
             $sessionId = $_POST['session_id'] ?? null;
             $batchSize = $_POST['batch_size'] ?? COURSES_PER_BATCH;
             $data = fetchCourseUsersWithProgress($sessionId, $batchSize);
             break;
-            
+
         case 'get_course_analytics_summary':
             $data = getCourseAnalyticsSummary();
             break;
@@ -1649,27 +1742,27 @@ function handleAjaxRequest() {
             }
             $data = createUserFetchSession($courseIds, $options);
             break;
-            
+
         case 'get_user_fetch_session_status':
             $sessionId = $_POST['session_id'] ?? '';
             $data = getUserFetchSessionStatus($sessionId);
             break;
-            
+
         case 'get_active_user_fetch_sessions':
             $data = getActiveUserFetchSessions();
             break;
-            
+
         case 'resume_user_fetch_session':
             $sessionId = $_POST['session_id'] ?? '';
             $batchSize = $_POST['batch_size'] ?? COURSES_PER_BATCH;
             $data = resumeUserFetchSession($sessionId, $batchSize);
             break;
-            
+
         case 'cancel_user_fetch_session':
             $sessionId = $_POST['session_id'] ?? '';
             $data = cancelUserFetchSession($sessionId);
             break;
-            
+
         case 'clear_table':
             $tableName = $_POST['table'] ?? '';
             if (in_array($tableName, ['lbln_courses', 'lbln_course_analytics', 'lbln_course_users'])) {
@@ -1678,17 +1771,17 @@ function handleAjaxRequest() {
                 $data = ['success' => false, 'error' => 'Invalid table name'];
             }
             break;
-            
+
         case 'get_stats':
             $tableName = $_POST['table'] ?? null;
             $data = getTableStats($tableName);
             break;
-            
+
         case 'get_logs':
             $limit = $_POST['limit'] ?? 20;
             $data = getRecentLogs($limit);
             break;
-            
+
         case 'preview_data':
             $tableName = $_POST['table'] ?? '';
             $limit = $_POST['limit'] ?? 10;
@@ -1698,20 +1791,21 @@ function handleAjaxRequest() {
                 $data = ['success' => false, 'error' => 'Invalid table name'];
             }
             break;
-            
+
         default:
             $data = ['success' => false, 'error' => 'Unknown action'];
     }
-    
+
     header('Content-Type: application/json');
     echo json_encode($data);
     exit;
 }
 
 // Create fetch_sessions table if not exists
-function createFetchSessionsTable() {
+function createFetchSessionsTable()
+{
     $db = getDbConnection();
-    
+
     try {
         $db->exec("
         CREATE TABLE IF NOT EXISTS lbln_fetch_sessions (
@@ -1734,7 +1828,7 @@ function createFetchSessionsTable() {
         CREATE INDEX idx_fetch_sessions_created ON lbln_fetch_sessions (created_at);
                     )
         ");
-        
+
         return true;
     } catch (Exception $e) {
         error_log("Failed to create fetch_sessions table: " . $e->getMessage());
@@ -1753,6 +1847,7 @@ $courseAnalytics = getCourseAnalyticsSummary();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1775,9 +1870,9 @@ $courseAnalytics = getCourseAnalyticsSummary();
             --border: #DEE2E6;
             --radius: 8px;
             --radius-sm: 4px;
-            --shadow: 0 2px 10px rgba(0,0,0,0.1);
-            --shadow-lg: 0 5px 20px rgba(0,0,0,0.15);
-            --shadow-xl: 0 10px 40px rgba(0,0,0,0.2);
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 5px 20px rgba(0, 0, 0, 0.15);
+            --shadow-xl: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
 
         * {
@@ -1849,9 +1944,17 @@ $courseAnalytics = getCourseAnalyticsSummary();
             box-shadow: var(--shadow-lg);
         }
 
-        .stat-card.courses { border-top-color: #4CAF50; }
-        .stat-card.analytics { border-top-color: #2196F3; }
-        .stat-card.users { border-top-color: #FF9800; }
+        .stat-card.courses {
+            border-top-color: #4CAF50;
+        }
+
+        .stat-card.analytics {
+            border-top-color: #2196F3;
+        }
+
+        .stat-card.users {
+            border-top-color: #FF9800;
+        }
 
         .stat-card h3 {
             color: var(--dark);
@@ -2037,10 +2140,21 @@ $courseAnalytics = getCourseAnalyticsSummary();
             font-size: 0.9rem;
         }
 
-        .log-entry.success { border-left-color: var(--success); }
-        .log-entry.error { border-left-color: var(--danger); }
-        .log-entry.warning { border-left-color: var(--warning); }
-        .log-entry.info { border-left-color: var(--info); }
+        .log-entry.success {
+            border-left-color: var(--success);
+        }
+
+        .log-entry.error {
+            border-left-color: var(--danger);
+        }
+
+        .log-entry.warning {
+            border-left-color: var(--warning);
+        }
+
+        .log-entry.info {
+            border-left-color: var(--info);
+        }
 
         .log-time {
             color: var(--secondary);
@@ -2060,7 +2174,7 @@ $courseAnalytics = getCourseAnalyticsSummary();
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0, 0, 0, 0.7);
             z-index: 1000;
             align-items: center;
             justify-content: center;
@@ -2087,6 +2201,7 @@ $courseAnalytics = getCourseAnalyticsSummary();
                 opacity: 0;
                 transform: translateY(-50px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -2163,23 +2278,26 @@ $courseAnalytics = getCourseAnalyticsSummary();
             left: 0;
             bottom: 0;
             right: 0;
-            background-image: linear-gradient(
-                -45deg,
-                rgba(255, 255, 255, 0.2) 25%,
-                transparent 25%,
-                transparent 50%,
-                rgba(255, 255, 255, 0.2) 50%,
-                rgba(255, 255, 255, 0.2) 75%,
-                transparent 75%,
-                transparent
-            );
+            background-image: linear-gradient(-45deg,
+                    rgba(255, 255, 255, 0.2) 25%,
+                    transparent 25%,
+                    transparent 50%,
+                    rgba(255, 255, 255, 0.2) 50%,
+                    rgba(255, 255, 255, 0.2) 75%,
+                    transparent 75%,
+                    transparent);
             background-size: 50px 50px;
             animation: moveStripes 2s linear infinite;
         }
 
         @keyframes moveStripes {
-            0% { background-position: 0 0; }
-            100% { background-position: 50px 50px; }
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 50px 50px;
+            }
         }
 
         .progress-text {
@@ -2210,6 +2328,22 @@ $courseAnalytics = getCourseAnalyticsSummary();
 
         .log-line:last-child {
             border-bottom: none;
+        }
+
+        .log-line.success {
+            color: #28a745;
+        }
+
+        .log-line.error {
+            color: #dc3545;
+        }
+
+        .log-line.warning {
+            color: #ffc107;
+        }
+
+        .log-line.info {
+            color: #17a2b8;
         }
 
         .data-preview {
@@ -2642,9 +2776,17 @@ $courseAnalytics = getCourseAnalyticsSummary();
         }
 
         @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+
+            100% {
+                opacity: 1;
+            }
         }
 
         /* Batch controls */
@@ -2676,7 +2818,7 @@ $courseAnalytics = getCourseAnalyticsSummary();
             .container {
                 max-width: 95%;
             }
-            
+
             .modal-content {
                 width: 95%;
                 margin: 10px;
@@ -2687,36 +2829,36 @@ $courseAnalytics = getCourseAnalyticsSummary();
             .header h1 {
                 font-size: 2rem;
             }
-            
+
             .stats-grid,
             .actions-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .btn-group {
                 flex-direction: column;
             }
-            
+
             .btn {
                 width: 100%;
                 justify-content: center;
             }
-            
+
             .modal-body {
                 padding: 20px;
             }
-            
+
             .session-header {
                 flex-direction: column;
                 gap: 10px;
             }
-            
+
             .course-checkbox-item {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 10px;
             }
-            
+
             .course-stats {
                 margin-left: 0;
                 width: 100%;
@@ -2728,19 +2870,19 @@ $courseAnalytics = getCourseAnalyticsSummary();
             .header {
                 padding: 20px;
             }
-            
+
             .stat-card {
                 padding: 20px;
             }
-            
+
             .stat-value {
                 font-size: 2rem;
             }
-            
+
             .tabs {
                 overflow-x: auto;
             }
-            
+
             .tab {
                 padding: 10px 15px;
                 font-size: 0.9rem;
@@ -2772,14 +2914,16 @@ $courseAnalytics = getCourseAnalyticsSummary();
             display: inline-block;
             width: 20px;
             height: 20px;
-            border: 3px solid rgba(0,0,0,0.1);
+            border: 3px solid rgba(0, 0, 0, 0.1);
             border-radius: 50%;
             border-top-color: var(--primary);
             animation: spin 1s ease-in-out infinite;
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         /* Tooltip */
@@ -2901,6 +3045,7 @@ $courseAnalytics = getCourseAnalyticsSummary();
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <!-- Header -->
@@ -2927,7 +3072,7 @@ $courseAnalytics = getCourseAnalyticsSummary();
                 </button>
                 <button class="btn btn-info" onclick="refreshSelectedCourseAnalytics()">
                     <i class="fas fa-sync-alt"></i> Refresh Selected Course Analytics
-                </button>                
+                </button>
             </div>
         </div>
 
@@ -3058,8 +3203,8 @@ $courseAnalytics = getCourseAnalyticsSummary();
                                 <?php endif; ?>
                             </div>
                             <div class="log-message">
-                                <strong><?php echo $log['operation_type']; ?></strong> - 
-                                <?php echo $log['table_name']; ?>: 
+                                <strong><?php echo $log['operation_type']; ?></strong> -
+                                <?php echo $log['table_name']; ?>:
                                 <?php echo $log['message'] ?? 'Completed'; ?>
                                 <?php if ($log['items_processed'] > 0): ?>
                                     (Processed: <?php echo $log['items_processed']; ?>,
@@ -3079,8 +3224,8 @@ $courseAnalytics = getCourseAnalyticsSummary();
 
         <!-- Footer -->
         <div class="footer">
-            <p>Lifebox Learning Network Advanced Data Fetcher v2.0 | 
-                <a href="#" onclick="showModal('about-modal')">About</a> | 
+            <p>Lifebox Learning Network Advanced Data Fetcher v2.0 |
+                <a href="#" onclick="showModal('about-modal')">About</a> |
                 <a href="#" onclick="showModal('help-modal')">Help</a>
             </p>
             <p>Database: <?php echo DB_NAME; ?> | Connected to: <?php echo DB_HOST; ?>:<?php echo DB_PORT; ?></p>
@@ -3088,7 +3233,7 @@ $courseAnalytics = getCourseAnalyticsSummary();
     </div>
 
     <!-- Modals -->
-    
+
     <!-- Fetch All Modal -->
     <div class="modal" id="fetch-all-modal">
         <div class="modal-content">
@@ -3103,7 +3248,7 @@ $courseAnalytics = getCourseAnalyticsSummary();
                     <i class="fas fa-info-circle"></i> This will fetch all data from all three endpoints sequentially.
                     Estimated time: 2-5 minutes depending on data size.
                 </div>
-                
+
                 <div class="progress-container">
                     <div class="progress-bar">
                         <div class="progress-fill" id="fetch-all-progress"></div>
@@ -3150,7 +3295,7 @@ $courseAnalytics = getCourseAnalyticsSummary();
                 <!-- Course Selection Tab -->
                 <div id="users-select" class="tab-content active">
                     <div class="alert alert-info">
-                        <i class="fas fa-info-circle"></i> Select specific courses to fetch users from. 
+                        <i class="fas fa-info-circle"></i> Select specific courses to fetch users from.
                         You can see how many students are enrolled per course before fetching.
                     </div>
 
@@ -3358,7 +3503,7 @@ $courseAnalytics = getCourseAnalyticsSummary();
                     <div class="alert alert-info">
                         <i class="fas fa-info-circle"></i> Fetch all courses from the API and store them in the database.
                     </div>
-                    
+
                     <div class="real-time-log" id="courses-fetch-log" style="height: 200px;">
                         <!-- Real-time logs will appear here -->
                     </div>
@@ -3422,7 +3567,7 @@ $courseAnalytics = getCourseAnalyticsSummary();
                     <div class="alert alert-info">
                         <i class="fas fa-info-circle"></i> Fetch analytics for all courses currently in the database.
                     </div>
-                    
+
                     <div class="real-time-log" id="analytics-fetch-log" style="height: 200px;">
                         <!-- Real-time logs will appear here -->
                     </div>
@@ -3484,10 +3629,10 @@ $courseAnalytics = getCourseAnalyticsSummary();
 
                 <div id="users-fetch" class="tab-content active">
                     <div class="alert alert-info">
-                        <i class="fas fa-info-circle"></i> Fetch users for all courses currently in the database. 
+                        <i class="fas fa-info-circle"></i> Fetch users for all courses currently in the database.
                         This may take several minutes depending on the number of courses and users.
                     </div>
-                    
+
                     <div class="real-time-log" id="users-fetch-log" style="height: 200px;">
                         <!-- Real-time logs will appear here -->
                     </div>
@@ -3571,7 +3716,7 @@ $courseAnalytics = getCourseAnalyticsSummary();
                     <li><strong>Session Management:</strong> Save and resume fetch sessions at any time.</li>
                     <li><strong>Student Count Preview:</strong> See how many students are in each course before fetching.</li>
                 </ol>
-                
+
                 <h4>How to Use Advanced Features</h4>
                 <ol>
                     <li>Click "Advanced User Fetch" button to open the advanced interface</li>
@@ -3581,7 +3726,7 @@ $courseAnalytics = getCourseAnalyticsSummary();
                     <li>Pause and resume at any time</li>
                     <li>View all sessions and their status</li>
                 </ol>
-                
+
                 <h4>Performance Tips</h4>
                 <ul>
                     <li>Start with a small batch size if you have slow internet</li>
@@ -3607,7 +3752,7 @@ $courseAnalytics = getCourseAnalyticsSummary();
                 <h4>Lifebox Learning Network Advanced Data Fetcher</h4>
                 <p>Version: 2.0.0</p>
                 <p>Enhanced version with advanced user fetching capabilities including progress tracking, selective fetching, and session management.</p>
-                
+
                 <h4>New Features</h4>
                 <ul>
                     <li>Selective course user fetching</li>
@@ -3617,7 +3762,7 @@ $courseAnalytics = getCourseAnalyticsSummary();
                     <li>Student count preview before fetching</li>
                     <li>Enhanced UI with live updates</li>
                 </ul>
-                
+
                 <h4>Technical Improvements</h4>
                 <ul>
                     <li>Optimized for large datasets (10k+ users)</li>
@@ -3644,322 +3789,325 @@ $courseAnalytics = getCourseAnalyticsSummary();
         </div>
     </div>
 
-<script>
-    // Global variables
-    let currentFetch = null;
-    let currentSession = null;
-    let progressInterval = null;
-    let refreshInterval = null;
-    let isFetching = false;
-    let userFetchSettings = {
-        batchSize: 3,
-        refreshInterval: 5,
-        usersPerBatch: 100,
-        autoResume: true,
-        notifications: true
-    };
-
-    // Initialize
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('DOM loaded, initializing...');
-        
-        // Load user settings from localStorage
-        loadUserSettings();
-        
-        // Load course analytics summary
-        loadCourseAnalyticsSummary();
-        
-        // Load active sessions
-        loadActiveSessions();
-        
-        // Set up modals
-        document.querySelectorAll('.modal').forEach(modal => {
-            modal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    hideModal(this.id);
-                }
-            });
-        });
-        
-        // Close modals with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                document.querySelectorAll('.modal.active').forEach(modal => {
-                    hideModal(modal.id);
-                });
-            }
-        });
-        
-        // Initialize notifications if enabled
-        if (userFetchSettings.notifications && 'Notification' in window) {
-            if (Notification.permission === 'default') {
-                Notification.requestPermission();
-            }
-        }
-        
-        // Setup event listeners for course checkboxes
-        document.addEventListener('change', function(e) {
-            if (e.target.type === 'checkbox' && e.target.closest('.course-checkbox-item')) {
-                const item = e.target.closest('.course-checkbox-item');
-                if (e.target.checked) {
-                    item.classList.add('selected');
-                } else {
-                    item.classList.remove('selected');
-                }
-            }
-        });
-        
-        console.log('Initialization complete');
-    });
-
-    // Load user settings from localStorage
-    function loadUserSettings() {
-        console.log('Loading user settings...');
-        const savedSettings = localStorage.getItem('userFetchSettings');
-        if (savedSettings) {
-            try {
-                const parsedSettings = JSON.parse(savedSettings);
-                userFetchSettings = { ...userFetchSettings, ...parsedSettings };
-                console.log('Loaded settings:', userFetchSettings);
-            } catch (e) {
-                console.error('Error parsing saved settings:', e);
-            }
-        }
-        
-        // Update UI elements if they exist
-        const defaultBatchSize = document.getElementById('default-batch-size');
-        const refreshIntervalElem = document.getElementById('refresh-interval');
-        const usersPerBatch = document.getElementById('users-per-batch');
-        const autoResume = document.getElementById('auto-resume');
-        const notifications = document.getElementById('notifications');
-        const batchSize = document.getElementById('batch-size');
-        
-        if (defaultBatchSize) defaultBatchSize.value = userFetchSettings.batchSize;
-        if (refreshIntervalElem) refreshIntervalElem.value = userFetchSettings.refreshInterval;
-        if (usersPerBatch) usersPerBatch.value = userFetchSettings.usersPerBatch;
-        if (autoResume) autoResume.checked = userFetchSettings.autoResume;
-        if (notifications) notifications.checked = userFetchSettings.notifications;
-        if (batchSize) batchSize.value = userFetchSettings.batchSize;
-        
-        console.log('Settings loaded and UI updated');
-    }
-
-    // Save user settings to localStorage
-    function saveUserFetchSettings() {
-        console.log('Saving user settings...');
-        
-        const defaultBatchSize = document.getElementById('default-batch-size');
-        const refreshIntervalElem = document.getElementById('refresh-interval');
-        const usersPerBatch = document.getElementById('users-per-batch');
-        const autoResume = document.getElementById('auto-resume');
-        const notifications = document.getElementById('notifications');
-        
-        if (defaultBatchSize) userFetchSettings.batchSize = parseInt(defaultBatchSize.value);
-        if (refreshIntervalElem) userFetchSettings.refreshInterval = parseInt(refreshIntervalElem.value);
-        if (usersPerBatch) userFetchSettings.usersPerBatch = parseInt(usersPerBatch.value);
-        if (autoResume) userFetchSettings.autoResume = autoResume.checked;
-        if (notifications) userFetchSettings.notifications = notifications.checked;
-        
-        localStorage.setItem('userFetchSettings', JSON.stringify(userFetchSettings));
-        
-        showAlert('success', 'Settings saved successfully!', 'users-progress');
-        
-        // Update batch size in selection
-        const batchSize = document.getElementById('batch-size');
-        if (batchSize) batchSize.value = userFetchSettings.batchSize;
-        
-        console.log('Settings saved:', userFetchSettings);
-    }
-
-    // Reset user settings to defaults
-    function resetUserFetchSettings() {
-        console.log('Resetting user settings to defaults...');
-        userFetchSettings = {
+    <script>
+        // Global variables
+        let currentFetch = null;
+        let currentSession = null;
+        let progressInterval = null;
+        let refreshInterval = null;
+        let isFetching = false;
+        let userFetchSettings = {
             batchSize: 3,
             refreshInterval: 5,
             usersPerBatch: 100,
             autoResume: true,
             notifications: true
         };
-        
-        localStorage.setItem('userFetchSettings', JSON.stringify(userFetchSettings));
-        loadUserSettings();
-        
-        showAlert('success', 'Settings reset to defaults!', 'users-progress');
-    }
 
-    // Show modal
-    function showModal(modalId) {
-        console.log('Showing modal:', modalId);
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        } else {
-            console.error('Modal not found:', modalId);
-        }
-    }
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing...');
 
-    // Hide modal
-    function hideModal(modalId) {
-        console.log('Hiding modal:', modalId);
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    }
+            // Load user settings from localStorage
+            loadUserSettings();
 
-    // Show confirmation dialog
-    function showConfirmation(title, message, confirmCallback) {
-        console.log('Showing confirmation dialog:', title);
-        const confirmationTitle = document.getElementById('confirmation-title');
-        const confirmationMessage = document.getElementById('confirmation-message');
-        
-        if (confirmationTitle && confirmationMessage) {
-            confirmationTitle.textContent = title;
-            confirmationMessage.textContent = message;
-            
-            const confirmBtn = document.getElementById('confirmation-confirm');
-            if (confirmBtn) {
-                // Remove existing listeners
-                const newConfirmBtn = confirmBtn.cloneNode(true);
-                confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
-                
-                // Add new listener
-                newConfirmBtn.onclick = function() {
-                    console.log('Confirmation confirmed');
-                    confirmCallback();
-                    hideModal('confirmation-modal');
-                };
-                
-                showModal('confirmation-modal');
-            }
-        }
-    }
+            // Load course analytics summary
+            loadCourseAnalyticsSummary();
 
-    // Switch tabs
-    function switchTab(tabId) {
-        console.log('Switching to tab:', tabId);
-        
-        // Hide all tabs in the current context
-        const tabContent = document.getElementById(tabId);
-        if (!tabContent) {
-            console.error('Tab content not found:', tabId);
-            return;
-        }
-        
-        const parent = tabContent.closest('.modal-body') || tabContent.closest('.tab-container');
-        if (parent) {
-            // Hide all tabs in this container
-            parent.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
+            // Load active sessions
+            loadActiveSessions();
+
+            // Set up modals
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        hideModal(this.id);
+                    }
+                });
             });
-            
-            // Show selected tab
-            tabContent.classList.add('active');
-            
-            // Update tab buttons
-            parent.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            const tabButton = parent.querySelector(`.tab[onclick*="${tabId}"]`);
-            if (tabButton) {
-                tabButton.classList.add('active');
-            }
-        }
-    }
 
-    // Refresh statistics
-    function refreshStats() {
-        console.log('Refreshing statistics...');
-        showAlert('info', 'Refreshing statistics...', 'courses-status');
-        
-        fetch('', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'action=get_stats'
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Update courses stats
-                const coursesCount = document.getElementById('courses-count');
-                const coursesLast = document.getElementById('courses-last');
-                const analyticsCount = document.getElementById('analytics-count');
-                const analyticsLast = document.getElementById('analytics-last');
-                const usersCount = document.getElementById('users-count');
-                const usersLast = document.getElementById('users-last');
-                
-                if (coursesCount && coursesLast) {
-                    coursesCount.textContent = data.stats.lbln_courses.count;
-                    coursesLast.textContent = data.stats.lbln_courses.last_fetch 
-                        ? new Date(data.stats.lbln_courses.last_fetch).toLocaleString() 
-                        : 'Never';
+            // Close modals with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    document.querySelectorAll('.modal.active').forEach(modal => {
+                        hideModal(modal.id);
+                    });
                 }
-                
-                if (analyticsCount && analyticsLast) {
-                    analyticsCount.textContent = data.stats.lbln_course_analytics.count;
-                    analyticsLast.textContent = data.stats.lbln_course_analytics.last_fetch 
-                        ? new Date(data.stats.lbln_course_analytics.last_fetch).toLocaleString() 
-                        : 'Never';
+            });
+
+            // Initialize notifications if enabled
+            if (userFetchSettings.notifications && 'Notification' in window) {
+                if (Notification.permission === 'default') {
+                    Notification.requestPermission();
                 }
-                
-                if (usersCount && usersLast) {
-                    usersCount.textContent = data.stats.lbln_course_users.count;
-                    usersLast.textContent = data.stats.lbln_course_users.last_fetch 
-                        ? new Date(data.stats.lbln_course_users.last_fetch).toLocaleString() 
-                        : 'Never';
-                }
-                
-                showAlert('success', 'Statistics refreshed successfully!', 'courses-status');
-            } else {
-                showAlert('error', 'Failed to refresh statistics: ' + (data.error || 'Unknown error'), 'courses-status');
             }
-        })
-        .catch(error => {
-            console.error('Error refreshing stats:', error);
-            showAlert('error', 'Error refreshing statistics: ' + error.message, 'courses-status');
+
+            // Setup event listeners for course checkboxes
+            document.addEventListener('change', function(e) {
+                if (e.target.type === 'checkbox' && e.target.closest('.course-checkbox-item')) {
+                    const item = e.target.closest('.course-checkbox-item');
+                    if (e.target.checked) {
+                        item.classList.add('selected');
+                    } else {
+                        item.classList.remove('selected');
+                    }
+                }
+            });
+
+            console.log('Initialization complete');
         });
-    }
 
-    // Load course analytics summary
-    function loadCourseAnalyticsSummary() {
-        console.log('Loading course analytics summary...');
-        const container = document.getElementById('courses-selection-list');
-        if (!container) {
-            console.log('Courses selection list container not found');
-            return;
-        }
-        
-        container.innerHTML = '<p><i class="fas fa-spinner loading"></i> Loading courses...</p>';
-        
-        fetch('', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'action=get_course_analytics_summary'
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+        // Load user settings from localStorage
+        function loadUserSettings() {
+            console.log('Loading user settings...');
+            const savedSettings = localStorage.getItem('userFetchSettings');
+            if (savedSettings) {
+                try {
+                    const parsedSettings = JSON.parse(savedSettings);
+                    userFetchSettings = {
+                        ...userFetchSettings,
+                        ...parsedSettings
+                    };
+                    console.log('Loaded settings:', userFetchSettings);
+                } catch (e) {
+                    console.error('Error parsing saved settings:', e);
+                }
             }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Course analytics data received:', data);
-            if (data.success && data.data && data.data.length > 0) {
-                let html = '';
-                data.data.forEach(course => {
-                    const fetchedPercentage = course.total_students > 0 
-                        ? Math.round((course.fetched_users / course.total_students) * 100)
-                        : 0;
-                    
-                    html += `
+
+            // Update UI elements if they exist
+            const defaultBatchSize = document.getElementById('default-batch-size');
+            const refreshIntervalElem = document.getElementById('refresh-interval');
+            const usersPerBatch = document.getElementById('users-per-batch');
+            const autoResume = document.getElementById('auto-resume');
+            const notifications = document.getElementById('notifications');
+            const batchSize = document.getElementById('batch-size');
+
+            if (defaultBatchSize) defaultBatchSize.value = userFetchSettings.batchSize;
+            if (refreshIntervalElem) refreshIntervalElem.value = userFetchSettings.refreshInterval;
+            if (usersPerBatch) usersPerBatch.value = userFetchSettings.usersPerBatch;
+            if (autoResume) autoResume.checked = userFetchSettings.autoResume;
+            if (notifications) notifications.checked = userFetchSettings.notifications;
+            if (batchSize) batchSize.value = userFetchSettings.batchSize;
+
+            console.log('Settings loaded and UI updated');
+        }
+
+        // Save user settings to localStorage
+        function saveUserFetchSettings() {
+            console.log('Saving user settings...');
+
+            const defaultBatchSize = document.getElementById('default-batch-size');
+            const refreshIntervalElem = document.getElementById('refresh-interval');
+            const usersPerBatch = document.getElementById('users-per-batch');
+            const autoResume = document.getElementById('auto-resume');
+            const notifications = document.getElementById('notifications');
+
+            if (defaultBatchSize) userFetchSettings.batchSize = parseInt(defaultBatchSize.value);
+            if (refreshIntervalElem) userFetchSettings.refreshInterval = parseInt(refreshIntervalElem.value);
+            if (usersPerBatch) userFetchSettings.usersPerBatch = parseInt(usersPerBatch.value);
+            if (autoResume) userFetchSettings.autoResume = autoResume.checked;
+            if (notifications) userFetchSettings.notifications = notifications.checked;
+
+            localStorage.setItem('userFetchSettings', JSON.stringify(userFetchSettings));
+
+            showAlert('success', 'Settings saved successfully!', 'users-progress');
+
+            // Update batch size in selection
+            const batchSize = document.getElementById('batch-size');
+            if (batchSize) batchSize.value = userFetchSettings.batchSize;
+
+            console.log('Settings saved:', userFetchSettings);
+        }
+
+        // Reset user settings to defaults
+        function resetUserFetchSettings() {
+            console.log('Resetting user settings to defaults...');
+            userFetchSettings = {
+                batchSize: 3,
+                refreshInterval: 5,
+                usersPerBatch: 100,
+                autoResume: true,
+                notifications: true
+            };
+
+            localStorage.setItem('userFetchSettings', JSON.stringify(userFetchSettings));
+            loadUserSettings();
+
+            showAlert('success', 'Settings reset to defaults!', 'users-progress');
+        }
+
+        // Show modal
+        function showModal(modalId) {
+            console.log('Showing modal:', modalId);
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                console.error('Modal not found:', modalId);
+            }
+        }
+
+        // Hide modal
+        function hideModal(modalId) {
+            console.log('Hiding modal:', modalId);
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Show confirmation dialog
+        function showConfirmation(title, message, confirmCallback) {
+            console.log('Showing confirmation dialog:', title);
+            const confirmationTitle = document.getElementById('confirmation-title');
+            const confirmationMessage = document.getElementById('confirmation-message');
+
+            if (confirmationTitle && confirmationMessage) {
+                confirmationTitle.textContent = title;
+                confirmationMessage.textContent = message;
+
+                const confirmBtn = document.getElementById('confirmation-confirm');
+                if (confirmBtn) {
+                    // Remove existing listeners
+                    const newConfirmBtn = confirmBtn.cloneNode(true);
+                    confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+
+                    // Add new listener
+                    newConfirmBtn.onclick = function() {
+                        console.log('Confirmation confirmed');
+                        confirmCallback();
+                        hideModal('confirmation-modal');
+                    };
+
+                    showModal('confirmation-modal');
+                }
+            }
+        }
+
+        // Switch tabs
+        function switchTab(tabId) {
+            console.log('Switching to tab:', tabId);
+
+            // Hide all tabs in the current context
+            const tabContent = document.getElementById(tabId);
+            if (!tabContent) {
+                console.error('Tab content not found:', tabId);
+                return;
+            }
+
+            const parent = tabContent.closest('.modal-body') || tabContent.closest('.tab-container');
+            if (parent) {
+                // Hide all tabs in this container
+                parent.querySelectorAll('.tab-content').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+
+                // Show selected tab
+                tabContent.classList.add('active');
+
+                // Update tab buttons
+                parent.querySelectorAll('.tab').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+
+                const tabButton = parent.querySelector(`.tab[onclick*="${tabId}"]`);
+                if (tabButton) {
+                    tabButton.classList.add('active');
+                }
+            }
+        }
+
+        // Refresh statistics
+        function refreshStats() {
+            console.log('Refreshing statistics...');
+            showAlert('info', 'Refreshing statistics...', 'courses-status');
+
+            fetch('', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'action=get_stats'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Update courses stats
+                        const coursesCount = document.getElementById('courses-count');
+                        const coursesLast = document.getElementById('courses-last');
+                        const analyticsCount = document.getElementById('analytics-count');
+                        const analyticsLast = document.getElementById('analytics-last');
+                        const usersCount = document.getElementById('users-count');
+                        const usersLast = document.getElementById('users-last');
+
+                        if (coursesCount && coursesLast) {
+                            coursesCount.textContent = data.stats.lbln_courses.count;
+                            coursesLast.textContent = data.stats.lbln_courses.last_fetch ?
+                                new Date(data.stats.lbln_courses.last_fetch).toLocaleString() :
+                                'Never';
+                        }
+
+                        if (analyticsCount && analyticsLast) {
+                            analyticsCount.textContent = data.stats.lbln_course_analytics.count;
+                            analyticsLast.textContent = data.stats.lbln_course_analytics.last_fetch ?
+                                new Date(data.stats.lbln_course_analytics.last_fetch).toLocaleString() :
+                                'Never';
+                        }
+
+                        if (usersCount && usersLast) {
+                            usersCount.textContent = data.stats.lbln_course_users.count;
+                            usersLast.textContent = data.stats.lbln_course_users.last_fetch ?
+                                new Date(data.stats.lbln_course_users.last_fetch).toLocaleString() :
+                                'Never';
+                        }
+
+                        showAlert('success', 'Statistics refreshed successfully!', 'courses-status');
+                    } else {
+                        showAlert('error', 'Failed to refresh statistics: ' + (data.error || 'Unknown error'), 'courses-status');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error refreshing stats:', error);
+                    showAlert('error', 'Error refreshing statistics: ' + error.message, 'courses-status');
+                });
+        }
+
+        // Load course analytics summary
+        function loadCourseAnalyticsSummary() {
+            console.log('Loading course analytics summary...');
+            const container = document.getElementById('courses-selection-list');
+            if (!container) {
+                console.log('Courses selection list container not found');
+                return;
+            }
+
+            container.innerHTML = '<p><i class="fas fa-spinner loading"></i> Loading courses...</p>';
+
+            fetch('', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'action=get_course_analytics_summary'
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Course analytics data received:', data);
+                    if (data.success && data.data && data.data.length > 0) {
+                        let html = '';
+                        data.data.forEach(course => {
+                            const fetchedPercentage = course.total_students > 0 ?
+                                Math.round((course.fetched_users / course.total_students) * 100) :
+                                0;
+
+                            html += `
                         <div class="course-checkbox-item" data-course-id="${course.course_id}">
                             <input type="checkbox" id="course-${course.course_id}" value="${course.course_id}">
                             <div class="course-info">
@@ -3982,354 +4130,80 @@ $courseAnalytics = getCourseAnalyticsSummary();
                             </div>
                         </div>
                     `;
-                });
-                container.innerHTML = html;
-            } else {
-                container.innerHTML = '<div class="empty-state"><i class="fas fa-graduation-cap"></i><h4>No courses found</h4><p>Fetch courses first to see them here</p></div>';
-            }
-        })
-        .catch(error => {
-            console.error('Error loading courses:', error);
-            container.innerHTML = `<p class="error">Error loading courses: ${error.message}</p>`;
-        });
-    }
-
-    // Select all courses
-    function selectAllCourses() {
-        console.log('Selecting all courses');
-        document.querySelectorAll('.course-checkbox-item input[type="checkbox"]').forEach(checkbox => {
-            checkbox.checked = true;
-            checkbox.closest('.course-checkbox-item').classList.add('selected');
-        });
-    }
-
-    // Deselect all courses
-    function deselectAllCourses() {
-        console.log('Deselecting all courses');
-        document.querySelectorAll('.course-checkbox-item input[type="checkbox"]').forEach(checkbox => {
-            checkbox.checked = false;
-            checkbox.closest('.course-checkbox-item').classList.remove('selected');
-        });
-    }
-
-    // Get selected course IDs
-    function getSelectedCourseIds() {
-        const selectedIds = [];
-        document.querySelectorAll('.course-checkbox-item input[type="checkbox"]:checked').forEach(checkbox => {
-            selectedIds.push(checkbox.value);
-        });
-        console.log('Selected course IDs:', selectedIds);
-        return selectedIds;
-    }
-
-    // Start advanced user fetch
-    function startAdvancedUserFetch() {
-        console.log('Starting advanced user fetch...');
-        const selectedIds = getSelectedCourseIds();
-        
-        if (selectedIds.length === 0) {
-            showAlert('warning', 'Please select at least one course to fetch users from.', 'users-progress');
-            return;
-        }
-        
-        if (isFetching) {
-            showAlert('warning', 'Another fetch operation is already in progress.', 'users-progress');
-            return;
-        }
-        
-        isFetching = true;
-        const batchSize = parseInt(document.getElementById('batch-size')?.value || userFetchSettings.batchSize);
-        
-        // Switch to progress tab
-        switchTab('users-progress');
-        
-        // Clear previous logs
-        const progressLog = document.getElementById('users-progress-log');
-        if (progressLog) {
-            progressLog.innerHTML = '<div class="log-line">Starting advanced user fetch...</div>';
-        }
-        
-        // Create new session
-        fetch('', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'action=create_user_fetch_session&course_ids=' + JSON.stringify(selectedIds)
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Session creation response:', data);
-            if (data.success) {
-                currentSession = data.session_id;
-                showAlert('success', `Created session for ${data.total_courses} courses`, 'users-progress');
-                
-                // Start the actual fetch
-                startBatchFetch(batchSize);
-            } else {
-                showAlert('error', 'Failed to create session: ' + (data.error || 'Unknown error'), 'users-progress');
-                isFetching = false;
-            }
-        })
-        .catch(error => {
-            console.error('Error creating session:', error);
-            showAlert('error', 'Error creating session: ' + error.message, 'users-progress');
-            isFetching = false;
-        });
-    }
-
-    // Start batch fetch
-    function startBatchFetch(batchSize) {
-        console.log('Starting batch fetch, session:', currentSession, 'batch size:', batchSize);
-        
-        if (!currentSession) {
-            console.error('No current session');
-            showAlert('error', 'No active session', 'users-progress');
-            isFetching = false;
-            return;
-        }
-        
-        // Enable progress tracking buttons
-        const startBtn = document.getElementById('start-progress-btn');
-        const pauseBtn = document.getElementById('pause-progress-btn');
-        const stopBtn = document.getElementById('stop-progress-btn');
-        
-        if (startBtn) startBtn.disabled = true;
-        if (pauseBtn) pauseBtn.disabled = false;
-        if (stopBtn) stopBtn.disabled = false;
-        
-        // Start progress tracking
-        if (progressInterval) {
-            clearInterval(progressInterval);
-        }
-        progressInterval = setInterval(updateProgress, userFetchSettings.refreshInterval * 1000);
-        
-        // Start the fetch
-        fetch('', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'action=fetch_users_progress&session_id=' + currentSession + '&batch_size=' + batchSize
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Batch fetch response:', data);
-            if (data.success) {
-                updateProgressDisplay(data);
-                
-                if (!data.all_completed && data.session_status !== 'completed') {
-                    // Continue fetching after delay
-                    console.log('Continuing fetch, not completed yet');
-                    setTimeout(() => startBatchFetch(batchSize), 2000);
-                } else {
-                    // All completed
-                    console.log('Fetch completed');
-                    showAlert('success', 'User fetch completed successfully!', 'users-progress');
-                    isFetching = false;
-                    
-                    // Update buttons
-                    if (startBtn) startBtn.disabled = false;
-                    if (pauseBtn) pauseBtn.disabled = true;
-                    if (stopBtn) stopBtn.disabled = true;
-                    
-                    // Clear interval
-                    if (progressInterval) {
-                        clearInterval(progressInterval);
-                        progressInterval = null;
-                    }
-                    
-                    // Refresh stats
-                    refreshStats();
-                    
-                    // Load active sessions
-                    loadActiveSessions();
-                    
-                    // Show notification
-                    if (userFetchSettings.notifications && 'Notification' in window && Notification.permission === 'granted') {
-                        new Notification('User Fetch Completed', {
-                            body: `Successfully fetched ${data.total_users || 0} users from ${data.total_processed || 0} courses`
                         });
+                        container.innerHTML = html;
+                    } else {
+                        container.innerHTML = '<div class="empty-state"><i class="fas fa-graduation-cap"></i><h4>No courses found</h4><p>Fetch courses first to see them here</p></div>';
                     }
-                }
-            } else {
-                console.error('Fetch error:', data.error);
-                showAlert('error', 'Fetch error: ' + (data.error || 'Unknown error'), 'users-progress');
-                isFetching = false;
-                
-                // Update buttons
-                if (startBtn) startBtn.disabled = false;
-                if (pauseBtn) pauseBtn.disabled = true;
-                if (stopBtn) stopBtn.disabled = true;
-            }
-        })
-        .catch(error => {
-            console.error('Network error in batch fetch:', error);
-            showAlert('error', 'Network error: ' + error.message, 'users-progress');
-            isFetching = false;
-            
-            // Update buttons
-            if (startBtn) startBtn.disabled = false;
-            if (pauseBtn) pauseBtn.disabled = true;
-            if (stopBtn) stopBtn.disabled = true;
-        });
-    }
-
-    // Start progress tracking (manual)
-    function startProgressTracking() {
-        console.log('Starting progress tracking');
-        if (!currentSession) {
-            showAlert('warning', 'No active session. Start a fetch first.', 'users-progress');
-            return;
+                })
+                .catch(error => {
+                    console.error('Error loading courses:', error);
+                    container.innerHTML = `<p class="error">Error loading courses: ${error.message}</p>`;
+                });
         }
-        
-        // Enable buttons
-        const startBtn = document.getElementById('start-progress-btn');
-        const pauseBtn = document.getElementById('pause-progress-btn');
-        const stopBtn = document.getElementById('stop-progress-btn');
-        
-        if (startBtn) startBtn.disabled = true;
-        if (pauseBtn) pauseBtn.disabled = false;
-        if (stopBtn) stopBtn.disabled = false;
-        
-        // Start interval for progress updates
-        if (progressInterval) {
-            clearInterval(progressInterval);
-        }
-        
-        progressInterval = setInterval(updateProgress, userFetchSettings.refreshInterval * 1000);
-        updateProgress();
-    }
 
-    // Update progress display
-    function updateProgress() {
-        console.log('Updating progress...');
-        if (!currentSession) {
-            console.log('No current session for progress update');
-            return;
-        }
-        
-        fetch('', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'action=get_user_fetch_session_status&session_id=' + currentSession
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Progress update response:', data);
-            if (data.success) {
-                updateProgressDisplay(data);
-            } else {
-                console.error('Error in progress update:', data.error);
-            }
-        })
-        .catch(error => {
-            console.error('Error updating progress:', error);
-        });
-    }
-
-    // Update progress display with data
-    function updateProgressDisplay(data) {
-        console.log('Updating progress display with data:', data);
-        
-        // Update progress bar
-        const progressPercent = data.overall_progress || 0;
-        const progressBar = document.getElementById('users-progress-bar');
-        const progressPercentElem = document.getElementById('users-progress-percent');
-        const progressStatus = document.getElementById('users-progress-status');
-        
-        if (progressBar) progressBar.style.width = progressPercent + '%';
-        if (progressPercentElem) progressPercentElem.textContent = progressPercent.toFixed(1) + '%';
-        if (progressStatus) progressStatus.textContent = data.status || 'Unknown';
-        
-        // Update progress details
-        const detailsContainer = document.getElementById('users-progress-details');
-        if (detailsContainer && data.progress) {
-            let html = '';
-            Object.entries(data.progress).forEach(([courseId, progress]) => {
-                const courseProgress = progress.fetched_users && progress.total_users 
-                    ? Math.round((progress.fetched_users / progress.total_users) * 100)
-                    : (progress.status === 'completed' ? 100 : 0);
-                
-                html += `
-                    <div class="progress-item">
-                        <div class="progress-item-header">
-                            <span class="progress-item-title">${courseId}</span>
-                            <span class="progress-item-status status-${progress.status}">${progress.status}</span>
-                        </div>
-                        <div class="mini-progress-bar">
-                            <div class="mini-progress-fill" style="width: ${courseProgress}%"></div>
-                        </div>
-                        <div style="font-size: 0.8rem; color: var(--secondary); margin-top: 5px;">
-                            ${progress.fetched_users || 0} / ${progress.total_users || '?'} users
-                            ${progress.processed_pages ? `(Page ${progress.processed_pages})` : ''}
-                        </div>
-                    </div>
-                `;
+        // Select all courses
+        function selectAllCourses() {
+            console.log('Selecting all courses');
+            document.querySelectorAll('.course-checkbox-item input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = true;
+                checkbox.closest('.course-checkbox-item').classList.add('selected');
             });
-            detailsContainer.innerHTML = html;
         }
-        
-        // Update log
-        const logContainer = document.getElementById('users-progress-log');
-        if (logContainer && data.session_status) {
-            const timestamp = new Date().toLocaleTimeString();
-            logContainer.innerHTML += `<div class="log-line">[${timestamp}] Status: ${data.session_status}, Progress: ${progressPercent.toFixed(1)}%</div>`;
-            logContainer.scrollTop = logContainer.scrollHeight;
-        }
-    }
 
-    // Pause progress tracking
-    function pauseProgressTracking() {
-        console.log('Pausing progress tracking');
-        if (progressInterval) {
-            clearInterval(progressInterval);
-            progressInterval = null;
-            showAlert('warning', 'Progress tracking paused', 'users-progress');
-            
-            // Update buttons
-            const startBtn = document.getElementById('start-progress-btn');
-            const pauseBtn = document.getElementById('pause-progress-btn');
-            
-            if (startBtn) startBtn.disabled = false;
-            if (pauseBtn) pauseBtn.disabled = true;
+        // Deselect all courses
+        function deselectAllCourses() {
+            console.log('Deselecting all courses');
+            document.querySelectorAll('.course-checkbox-item input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = false;
+                checkbox.closest('.course-checkbox-item').classList.remove('selected');
+            });
         }
-    }
 
-    // Stop progress tracking
-    function stopProgressTracking() {
-        console.log('Stopping progress tracking');
-        showConfirmation('Stop Fetch Session', 'Are you sure you want to stop this fetch session?', function() {
-            if (progressInterval) {
-                clearInterval(progressInterval);
-                progressInterval = null;
+        // Get selected course IDs
+        function getSelectedCourseIds() {
+            const selectedIds = [];
+            document.querySelectorAll('.course-checkbox-item input[type="checkbox"]:checked').forEach(checkbox => {
+                selectedIds.push(checkbox.value);
+            });
+            console.log('Selected course IDs:', selectedIds);
+            return selectedIds;
+        }
+
+        // Start advanced user fetch
+        function startAdvancedUserFetch() {
+            console.log('Starting advanced user fetch...');
+            const selectedIds = getSelectedCourseIds();
+
+            if (selectedIds.length === 0) {
+                showAlert('warning', 'Please select at least one course to fetch users from.', 'users-progress');
+                return;
             }
-            
-            if (currentSession) {
-                // Cancel the session
-                fetch('', {
+
+            if (isFetching) {
+                showAlert('warning', 'Another fetch operation is already in progress.', 'users-progress');
+                return;
+            }
+
+            isFetching = true;
+            const batchSize = parseInt(document.getElementById('batch-size')?.value || userFetchSettings.batchSize);
+
+            // Switch to progress tab
+            switchTab('users-progress');
+
+            // Clear previous logs
+            const progressLog = document.getElementById('users-progress-log');
+            if (progressLog) {
+                progressLog.innerHTML = '<div class="log-line">Starting advanced user fetch...</div>';
+            }
+
+            // Create new session
+            fetch('', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
                     },
-                    body: 'action=cancel_user_fetch_session&session_id=' + currentSession
+                    body: 'action=create_user_fetch_session&course_ids=' + JSON.stringify(selectedIds)
                 })
                 .then(response => {
                     if (!response.ok) {
@@ -4338,31 +4212,385 @@ $courseAnalytics = getCourseAnalyticsSummary();
                     return response.json();
                 })
                 .then(data => {
+                    console.log('Session creation response:', data);
                     if (data.success) {
-                        showAlert('success', 'Session cancelled successfully', 'users-progress');
-                        currentSession = null;
+                        currentSession = data.session_id;
+                        showAlert('success', `Created session for ${data.total_courses} courses`, 'users-progress');
+
+                        // Start the actual fetch
+                        startBatchFetch(batchSize);
+                    } else {
+                        showAlert('error', 'Failed to create session: ' + (data.error || 'Unknown error'), 'users-progress');
                         isFetching = false;
-                        
+                    }
+                })
+                .catch(error => {
+                    console.error('Error creating session:', error);
+                    showAlert('error', 'Error creating session: ' + error.message, 'users-progress');
+                    isFetching = false;
+                });
+        }
+
+        // Start batch fetch
+        function startBatchFetch(batchSize) {
+            console.log('Starting batch fetch, session:', currentSession, 'batch size:', batchSize);
+
+            if (!currentSession) {
+                console.error('No current session');
+                showAlert('error', 'No active session', 'users-progress');
+                isFetching = false;
+                return;
+            }
+
+            // Enable progress tracking buttons
+            const startBtn = document.getElementById('start-progress-btn');
+            const pauseBtn = document.getElementById('pause-progress-btn');
+            const stopBtn = document.getElementById('stop-progress-btn');
+
+            if (startBtn) startBtn.disabled = true;
+            if (pauseBtn) pauseBtn.disabled = false;
+            if (stopBtn) stopBtn.disabled = false;
+
+            // Clear and show initial log
+            const logContainer = document.getElementById('users-progress-log');
+            if (logContainer) {
+                const timestamp = new Date().toLocaleTimeString();
+                logContainer.innerHTML = `<div class="log-line">[${timestamp}] Starting batch fetch for session: ${currentSession}</div>`;
+                logContainer.innerHTML += `<div class="log-line">[${timestamp}] Batch size: ${batchSize} courses</div>`;
+            }
+
+            // Start progress tracking
+            if (progressInterval) {
+                clearInterval(progressInterval);
+            }
+            progressInterval = setInterval(updateProgress, userFetchSettings.refreshInterval * 1000);
+
+            // Start the fetch
+            fetch('', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'action=fetch_users_progress&session_id=' + currentSession + '&batch_size=' + batchSize
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Batch fetch response:', data);
+                    if (data.success) {
+                        updateProgressDisplay(data);
+
+                        if (!data.all_completed && data.session_status !== 'completed') {
+                            // Show continuation message
+                            if (logContainer) {
+                                const timestamp = new Date().toLocaleTimeString();
+                                logContainer.innerHTML += `<div class="log-line info">[${timestamp}] Continuing fetch... ${data.courses_to_process || 0} courses remaining</div>`;
+                                logContainer.scrollTop = logContainer.scrollHeight;
+                            }
+
+                            // Continue fetching after delay
+                            console.log('Continuing fetch, not completed yet');
+                            setTimeout(() => startBatchFetch(batchSize), 2000);
+                        } else {
+                            // All completed
+                            console.log('Fetch completed');
+                            showAlert('success', 'User fetch completed successfully!', 'users-progress');
+                            isFetching = false;
+
+                            // Update buttons
+                            if (startBtn) startBtn.disabled = false;
+                            if (pauseBtn) pauseBtn.disabled = true;
+                            if (stopBtn) stopBtn.disabled = true;
+
+                            // Clear interval
+                            if (progressInterval) {
+                                clearInterval(progressInterval);
+                                progressInterval = null;
+                            }
+
+                            // Add completion message to log
+                            if (logContainer) {
+                                const timestamp = new Date().toLocaleTimeString();
+                                logContainer.innerHTML += `<div class="log-line success">[${timestamp}] Fetch completed! Total users: ${data.total_users || 0}</div>`;
+                                logContainer.scrollTop = logContainer.scrollHeight;
+                            }
+
+                            // Refresh stats
+                            refreshStats();
+
+                            // Load active sessions
+                            loadActiveSessions();
+
+                            // Show notification
+                            if (userFetchSettings.notifications && 'Notification' in window && Notification.permission === 'granted') {
+                                new Notification('User Fetch Completed', {
+                                    body: `Successfully fetched ${data.total_users || 0} users from ${data.total_processed || 0} courses`
+                                });
+                            }
+                        }
+                    } else {
+                        console.error('Fetch error:', data.error);
+
+                        // Show error in log
+                        if (logContainer) {
+                            const timestamp = new Date().toLocaleTimeString();
+                            logContainer.innerHTML += `<div class="log-line error">[${timestamp}] Fetch error: ${data.error || 'Unknown error'}</div>`;
+                            logContainer.scrollTop = logContainer.scrollHeight;
+                        }
+
+                        showAlert('error', 'Fetch error: ' + (data.error || 'Unknown error'), 'users-progress');
+                        isFetching = false;
+
                         // Update buttons
-                        const startBtn = document.getElementById('start-progress-btn');
-                        const pauseBtn = document.getElementById('pause-progress-btn');
-                        const stopBtn = document.getElementById('stop-progress-btn');
-                        
                         if (startBtn) startBtn.disabled = false;
                         if (pauseBtn) pauseBtn.disabled = true;
                         if (stopBtn) stopBtn.disabled = true;
-                        
-                        // Clear display
-                        const progressBar = document.getElementById('users-progress-bar');
-                        const progressPercentElem = document.getElementById('users-progress-percent');
-                        const progressStatus = document.getElementById('users-progress-status');
-                        const detailsContainer = document.getElementById('users-progress-details');
-                        
-                        if (progressBar) progressBar.style.width = '0%';
-                        if (progressPercentElem) progressPercentElem.textContent = '0%';
-                        if (progressStatus) progressStatus.textContent = 'Idle';
-                        if (detailsContainer) {
-                            detailsContainer.innerHTML = `
+                    }
+                })
+                .catch(error => {
+                    console.error('Network error in batch fetch:', error);
+
+                    // Show network error in log
+                    if (logContainer) {
+                        const timestamp = new Date().toLocaleTimeString();
+                        logContainer.innerHTML += `<div class="log-line error">[${timestamp}] Network error: ${error.message}</div>`;
+                        logContainer.scrollTop = logContainer.scrollHeight;
+                    }
+
+                    showAlert('error', 'Network error: ' + error.message, 'users-progress');
+                    isFetching = false;
+
+                    // Update buttons
+                    if (startBtn) startBtn.disabled = false;
+                    if (pauseBtn) pauseBtn.disabled = true;
+                    if (stopBtn) stopBtn.disabled = true;
+                });
+        }
+
+        // Start progress tracking (manual)
+        function startProgressTracking() {
+            console.log('Starting progress tracking');
+            if (!currentSession) {
+                showAlert('warning', 'No active session. Start a fetch first.', 'users-progress');
+                return;
+            }
+
+            // Enable buttons
+            const startBtn = document.getElementById('start-progress-btn');
+            const pauseBtn = document.getElementById('pause-progress-btn');
+            const stopBtn = document.getElementById('stop-progress-btn');
+
+            if (startBtn) startBtn.disabled = true;
+            if (pauseBtn) pauseBtn.disabled = false;
+            if (stopBtn) stopBtn.disabled = false;
+
+            // Start interval for progress updates
+            if (progressInterval) {
+                clearInterval(progressInterval);
+            }
+
+            progressInterval = setInterval(updateProgress, userFetchSettings.refreshInterval * 1000);
+            updateProgress();
+        }
+
+        // Update progress display
+        function updateProgress() {
+            console.log('Updating progress...');
+            if (!currentSession) {
+                console.log('No current session for progress update');
+                return;
+            }
+
+            fetch('', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'action=get_user_fetch_session_status&session_id=' + currentSession
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Progress update response:', data);
+                    if (data.success) {
+                        updateProgressDisplay(data);
+                    } else {
+                        console.error('Error in progress update:', data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error updating progress:', error);
+                });
+        }
+
+        // Update progress display with data
+        function updateProgressDisplay(data) {
+            console.log('Updating progress display with data:', data);
+
+            // Update progress bar
+            const progressPercent = data.overall_progress || 0;
+            const progressBar = document.getElementById('users-progress-bar');
+            const progressPercentElem = document.getElementById('users-progress-percent');
+            const progressStatus = document.getElementById('users-progress-status');
+
+            if (progressBar) progressBar.style.width = progressPercent + '%';
+            if (progressPercentElem) progressPercentElem.textContent = progressPercent.toFixed(1) + '%';
+            if (progressStatus) progressStatus.textContent = data.status || 'Unknown';
+
+            // Update progress details
+            const detailsContainer = document.getElementById('users-progress-details');
+            if (detailsContainer && data.progress) {
+                let html = '';
+                Object.entries(data.progress).forEach(([courseId, progress]) => {
+                    const courseProgress = progress.fetched_users && progress.total_users ?
+                        Math.round((progress.fetched_users / progress.total_users) * 100) :
+                        (progress.status === 'completed' ? 100 : 0);
+
+                    html += `
+                <div class="progress-item">
+                    <div class="progress-item-header">
+                        <span class="progress-item-title">${courseId}</span>
+                        <span class="progress-item-status status-${progress.status}">${progress.status}</span>
+                    </div>
+                    <div class="mini-progress-bar">
+                        <div class="mini-progress-fill" style="width: ${courseProgress}%"></div>
+                    </div>
+                    <div style="font-size: 0.8rem; color: var(--secondary); margin-top: 5px;">
+                        ${progress.fetched_users || 0} / ${progress.total_users || '?'} users
+                        ${progress.processed_pages ? `(Page ${progress.processed_pages})` : ''}
+                    </div>
+                </div>
+            `;
+                });
+                detailsContainer.innerHTML = html;
+            }
+
+            // Update log with detailed information
+            const logContainer = document.getElementById('users-progress-log');
+            if (logContainer) {
+                const timestamp = new Date().toLocaleTimeString();
+
+                // Add session status update
+                logContainer.innerHTML += `<div class="log-line">[${timestamp}] Status: ${data.session_status || 'unknown'}, Progress: ${progressPercent.toFixed(1)}%</div>`;
+
+                // Add batch results if available
+                if (data.detailed_results) {
+                    data.detailed_results.forEach(result => {
+                        if (result.success) {
+                            logContainer.innerHTML += `<div class="log-line success">[${timestamp}] ${result.course_title}: Page ${result.processed_pages}/${result.total_pages}, Users: ${result.total_users} (${result.inserted} new, ${result.updated} updated)</div>`;
+
+                            if (result.errors && result.errors.length > 0) {
+                                result.errors.forEach(error => {
+                                    logContainer.innerHTML += `<div class="log-line error">[${timestamp}] Error: ${error}</div>`;
+                                });
+                            }
+                        }
+                    });
+                }
+
+                // Add log entries if available
+                if (data.log_entries) {
+                    data.log_entries.forEach(entry => {
+                        const logType = entry.type || 'info';
+                        const logMessage = entry.message || '';
+                        const logTime = entry.timestamp || timestamp;
+
+                        logContainer.innerHTML += `<div class="log-line ${logType}">[${logTime}] ${logMessage}</div>`;
+                    });
+                }
+
+                // Add basic info if no detailed logs
+                if (!data.detailed_results && !data.log_entries) {
+                    logContainer.innerHTML += `<div class="log-line info">[${timestamp}] Processed: ${data.batch_processed || 0} courses, Total users: ${data.total_users || 0}</div>`;
+                }
+
+                // Keep only last 50 lines to prevent memory issues
+                const lines = logContainer.querySelectorAll('.log-line');
+                if (lines.length > 50) {
+                    for (let i = 0; i < lines.length - 50; i++) {
+                        lines[i].remove();
+                    }
+                }
+
+                logContainer.scrollTop = logContainer.scrollHeight;
+            }
+        }
+
+        // Pause progress tracking
+        function pauseProgressTracking() {
+            console.log('Pausing progress tracking');
+            if (progressInterval) {
+                clearInterval(progressInterval);
+                progressInterval = null;
+                showAlert('warning', 'Progress tracking paused', 'users-progress');
+
+                // Update buttons
+                const startBtn = document.getElementById('start-progress-btn');
+                const pauseBtn = document.getElementById('pause-progress-btn');
+
+                if (startBtn) startBtn.disabled = false;
+                if (pauseBtn) pauseBtn.disabled = true;
+            }
+        }
+
+        // Stop progress tracking
+        function stopProgressTracking() {
+            console.log('Stopping progress tracking');
+            showConfirmation('Stop Fetch Session', 'Are you sure you want to stop this fetch session?', function() {
+                if (progressInterval) {
+                    clearInterval(progressInterval);
+                    progressInterval = null;
+                }
+
+                if (currentSession) {
+                    // Cancel the session
+                    fetch('', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: 'action=cancel_user_fetch_session&session_id=' + currentSession
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.success) {
+                                showAlert('success', 'Session cancelled successfully', 'users-progress');
+                                currentSession = null;
+                                isFetching = false;
+
+                                // Update buttons
+                                const startBtn = document.getElementById('start-progress-btn');
+                                const pauseBtn = document.getElementById('pause-progress-btn');
+                                const stopBtn = document.getElementById('stop-progress-btn');
+
+                                if (startBtn) startBtn.disabled = false;
+                                if (pauseBtn) pauseBtn.disabled = true;
+                                if (stopBtn) stopBtn.disabled = true;
+
+                                // Clear display
+                                const progressBar = document.getElementById('users-progress-bar');
+                                const progressPercentElem = document.getElementById('users-progress-percent');
+                                const progressStatus = document.getElementById('users-progress-status');
+                                const detailsContainer = document.getElementById('users-progress-details');
+
+                                if (progressBar) progressBar.style.width = '0%';
+                                if (progressPercentElem) progressPercentElem.textContent = '0%';
+                                if (progressStatus) progressStatus.textContent = 'Idle';
+                                if (detailsContainer) {
+                                    detailsContainer.innerHTML = `
                                 <div class="progress-item">
                                     <div class="progress-item-header">
                                         <span class="progress-item-title">Waiting for session to start</span>
@@ -4373,157 +4601,157 @@ $courseAnalytics = getCourseAnalyticsSummary();
                                     </div>
                                 </div>
                             `;
-                        }
-                        
-                        // Load active sessions
-                        loadActiveSessions();
+                                }
+
+                                // Load active sessions
+                                loadActiveSessions();
+                            } else {
+                                showAlert('error', 'Error cancelling session: ' + (data.error || 'Unknown error'), 'users-progress');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error cancelling session:', error);
+                            showAlert('error', 'Network error: ' + error.message, 'users-progress');
+                        });
+                }
+            });
+        }
+
+        // Start resumable user fetch
+        function startResumableUserFetch() {
+            console.log('Starting resumable user fetch...');
+            // Load active sessions and resume the first one
+            fetch('', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'action=get_active_user_fetch_sessions'
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Active sessions response:', data);
+                    if (data.success && data.sessions && data.sessions.length > 0) {
+                        // Find the most recent session that can be resumed
+                        const resumeSession = data.sessions.find(s =>
+                            s.status === 'paused' || s.status === 'running'
+                        ) || data.sessions[0];
+
+                        currentSession = resumeSession.session_id;
+                        showAlert('info', `Resuming session ${currentSession}`, 'users-progress');
+
+                        // Switch to progress tab
+                        switchTab('users-progress');
+
+                        // Start batch fetch
+                        const batchSize = userFetchSettings.batchSize;
+                        startBatchFetch(batchSize);
                     } else {
-                        showAlert('error', 'Error cancelling session: ' + (data.error || 'Unknown error'), 'users-progress');
+                        showAlert('warning', 'No active sessions found to resume', 'users-progress');
                     }
                 })
                 .catch(error => {
-                    console.error('Error cancelling session:', error);
-                    showAlert('error', 'Network error: ' + error.message, 'users-progress');
+                    console.error('Error loading sessions:', error);
+                    showAlert('error', 'Error loading sessions: ' + error.message, 'users-progress');
                 });
-            }
-        });
-    }
-
-    // Start resumable user fetch
-    function startResumableUserFetch() {
-        console.log('Starting resumable user fetch...');
-        // Load active sessions and resume the first one
-        fetch('', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'action=get_active_user_fetch_sessions'
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Active sessions response:', data);
-            if (data.success && data.sessions && data.sessions.length > 0) {
-                // Find the most recent session that can be resumed
-                const resumeSession = data.sessions.find(s => 
-                    s.status === 'paused' || s.status === 'running'
-                ) || data.sessions[0];
-                
-                currentSession = resumeSession.session_id;
-                showAlert('info', `Resuming session ${currentSession}`, 'users-progress');
-                
-                // Switch to progress tab
-                switchTab('users-progress');
-                
-                // Start batch fetch
-                const batchSize = userFetchSettings.batchSize;
-                startBatchFetch(batchSize);
-            } else {
-                showAlert('warning', 'No active sessions found to resume', 'users-progress');
-            }
-        })
-        .catch(error => {
-            console.error('Error loading sessions:', error);
-            showAlert('error', 'Error loading sessions: ' + error.message, 'users-progress');
-        });
-    }
-
-    // Load active sessions
-    function loadActiveSessions() {
-        console.log('Loading active sessions...');
-        const container = document.getElementById('active-sessions');
-        if (!container) {
-            console.log('Active sessions container not found');
-            return;
         }
-        
-        container.innerHTML = '<p><i class="fas fa-spinner loading"></i> Loading sessions...</p>';
-        
-        fetch('', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'action=get_active_user_fetch_sessions'
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Active sessions data:', data);
-            if (data.success && data.sessions && data.sessions.length > 0) {
-                let html = '';
-                data.sessions.forEach(session => {
-                    html += createSessionCard(session);
-                });
-                container.innerHTML = html;
-            } else {
-                container.innerHTML = '<div class="empty-state"><i class="fas fa-hourglass-half"></i><h4>No active sessions</h4><p>Start a new fetch session to see it here</p></div>';
-            }
-        })
-        .catch(error => {
-            console.error('Error loading active sessions:', error);
-            container.innerHTML = `<p class="error">Error loading sessions: ${error.message}</p>`;
-        });
-    }
 
-    // Load all sessions
-    function loadAllSessions() {
-        console.log('Loading all sessions...');
-        const container = document.getElementById('advanced-sessions-list');
-        if (!container) {
-            console.log('Advanced sessions list container not found');
-            return;
+        // Load active sessions
+        function loadActiveSessions() {
+            console.log('Loading active sessions...');
+            const container = document.getElementById('active-sessions');
+            if (!container) {
+                console.log('Active sessions container not found');
+                return;
+            }
+
+            container.innerHTML = '<p><i class="fas fa-spinner loading"></i> Loading sessions...</p>';
+
+            fetch('', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'action=get_active_user_fetch_sessions'
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Active sessions data:', data);
+                    if (data.success && data.sessions && data.sessions.length > 0) {
+                        let html = '';
+                        data.sessions.forEach(session => {
+                            html += createSessionCard(session);
+                        });
+                        container.innerHTML = html;
+                    } else {
+                        container.innerHTML = '<div class="empty-state"><i class="fas fa-hourglass-half"></i><h4>No active sessions</h4><p>Start a new fetch session to see it here</p></div>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading active sessions:', error);
+                    container.innerHTML = `<p class="error">Error loading sessions: ${error.message}</p>`;
+                });
         }
-        
-        container.innerHTML = '<p><i class="fas fa-spinner loading"></i> Loading sessions...</p>';
-        
-        fetch('', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'action=get_active_user_fetch_sessions'
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('All sessions data:', data);
-            if (data.success && data.sessions && data.sessions.length > 0) {
-                let html = '';
-                data.sessions.forEach(session => {
-                    html += createSessionCard(session);
-                });
-                container.innerHTML = html;
-            } else {
-                container.innerHTML = '<div class="empty-state"><i class="fas fa-hourglass-half"></i><h4>No sessions found</h4><p>Start a new fetch session to see it here</p></div>';
-            }
-        })
-        .catch(error => {
-            console.error('Error loading all sessions:', error);
-            container.innerHTML = `<p class="error">Error loading sessions: ${error.message}</p>`;
-        });
-    }
 
-    // Create session card HTML
-    function createSessionCard(session) {
-        console.log('Creating session card for:', session.session_id);
-        const created = new Date(session.created_at).toLocaleString();
-        const statusClass = session.status || 'pending';
-        
-        return `
+        // Load all sessions
+        function loadAllSessions() {
+            console.log('Loading all sessions...');
+            const container = document.getElementById('advanced-sessions-list');
+            if (!container) {
+                console.log('Advanced sessions list container not found');
+                return;
+            }
+
+            container.innerHTML = '<p><i class="fas fa-spinner loading"></i> Loading sessions...</p>';
+
+            fetch('', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'action=get_active_user_fetch_sessions'
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('All sessions data:', data);
+                    if (data.success && data.sessions && data.sessions.length > 0) {
+                        let html = '';
+                        data.sessions.forEach(session => {
+                            html += createSessionCard(session);
+                        });
+                        container.innerHTML = html;
+                    } else {
+                        container.innerHTML = '<div class="empty-state"><i class="fas fa-hourglass-half"></i><h4>No sessions found</h4><p>Start a new fetch session to see it here</p></div>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading all sessions:', error);
+                    container.innerHTML = `<p class="error">Error loading sessions: ${error.message}</p>`;
+                });
+        }
+
+        // Create session card HTML
+        function createSessionCard(session) {
+            console.log('Creating session card for:', session.session_id);
+            const created = new Date(session.created_at).toLocaleString();
+            const statusClass = session.status || 'pending';
+
+            return `
             <div class="session-card ${statusClass}">
                 <div class="session-header">
                     <div>
@@ -4564,418 +4792,429 @@ $courseAnalytics = getCourseAnalyticsSummary();
                 </div>
             </div>
         `;
-    }
-
-    // Resume session
-    function resumeSession(sessionId) {
-        console.log('Resuming session:', sessionId);
-        currentSession = sessionId;
-        showAlert('info', `Resuming session ${sessionId}`, 'users-progress');
-        
-        // Switch to progress tab in advanced modal
-        showModal('users-advanced-modal');
-        switchTab('users-progress');
-        
-        // Start batch fetch
-        const batchSize = userFetchSettings.batchSize;
-        startBatchFetch(batchSize);
-    }
-
-    // Pause session
-    function pauseSession(sessionId) {
-        console.log('Pausing session:', sessionId);
-        // In a real implementation, you would have a pause endpoint
-        // For now, we'll just stop the current fetch
-        if (currentSession === sessionId) {
-            pauseProgressTracking();
-            showAlert('warning', 'Session paused', 'users-progress');
         }
-    }
 
-    // Cancel session
-    function cancelSession(sessionId) {
-        console.log('Cancelling session:', sessionId);
-        showConfirmation('Cancel Session', 'Are you sure you want to cancel this session?', function() {
-            fetch('', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'action=cancel_user_fetch_session&session_id=' + sessionId
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.success) {
-                    showAlert('success', 'Session cancelled', 'users-progress');
-                    if (currentSession === sessionId) {
-                        currentSession = null;
-                        isFetching = false;
-                    }
-                    loadActiveSessions();
-                } else {
-                    showAlert('error', 'Error cancelling session: ' + (data.error || 'Unknown error'), 'users-progress');
-                }
-            })
-            .catch(error => {
-                console.error('Error cancelling session:', error);
-                showAlert('error', 'Network error: ' + error.message, 'users-progress');
-            });
-        });
-    }
+        // Resume session
+        function resumeSession(sessionId) {
+            console.log('Resuming session:', sessionId);
+            currentSession = sessionId;
+            showAlert('info', `Resuming session ${sessionId}`, 'users-progress');
 
-    // Clear all sessions
-    function clearAllSessions() {
-        console.log('Clearing all sessions');
-        showConfirmation('Clear All Sessions', 'Are you sure you want to clear all sessions? This cannot be undone.', function() {
-            // In a real implementation, you would have an endpoint to clear all sessions
-            // For now, we'll show a message
-            showAlert('info', 'This feature would clear all sessions in a full implementation.', 'users-progress');
-        });
-    }
+            // Switch to progress tab in advanced modal
+            showModal('users-advanced-modal');
+            switchTab('users-progress');
 
-    // Original fetch functions (kept for compatibility)
-    function startFetch(type) {
-        console.log('Starting fetch for:', type);
-        if (isFetching) {
-            showAlert('warning', 'Another fetch operation is already in progress.', type + '-status');
-            return;
+            // Start batch fetch
+            const batchSize = userFetchSettings.batchSize;
+            startBatchFetch(batchSize);
         }
-        
-        isFetching = true;
-        const modalId = type + '-modal';
-        const logId = type + '-fetch-log';
-        
-        showModal(modalId);
-        const logDiv = document.getElementById(logId);
-        if (logDiv) {
-            logDiv.innerHTML = '<div class="log-line">Starting fetch operation...</div>';
-        }
-        
-        fetch('', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'action=fetch_' + type
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+
+        // Pause session
+        function pauseSession(sessionId) {
+            console.log('Pausing session:', sessionId);
+            // In a real implementation, you would have a pause endpoint
+            // For now, we'll just stop the current fetch
+            if (currentSession === sessionId) {
+                pauseProgressTracking();
+                showAlert('warning', 'Session paused', 'users-progress');
             }
-            return response.json();
-        })
-        .then(data => {
-            if (logDiv) {
-                if (data.success) {
-                    let message = `${type.charAt(0).toUpperCase() + type.slice(1)} fetch completed! `;
-                    
-                    if (type === 'courses') {
-                        message += `Total: ${data.total}, Inserted: ${data.inserted}, Updated: ${data.updated}, Skipped: ${data.skipped}`;
-                    } else if (type === 'analytics') {
-                        message += `Courses processed: ${data.total}, Inserted: ${data.inserted}, Skipped: ${data.skipped}`;
-                    } else if (type === 'users') {
-                        message += `Courses processed: ${data.courses_processed}, Total users: ${data.total_users}, Inserted: ${data.inserted}, Updated: ${data.updated}, Skipped: ${data.skipped}`;
-                    }
-                    
-                    logDiv.innerHTML += `<div class="log-line success">${message}</div>`;
-                    showAlert('success', message, type + '-status');
-                    
-                    // Update statistics
-                    refreshStats();
-                    
-                    // Refresh course list if it's courses or users
-                    if (type === 'courses' || type === 'users') {
-                        loadCourseAnalyticsSummary();
-                    }
-                } else {
-                    logDiv.innerHTML += `<div class="log-line error">Error: ${data.error}</div>`;
-                    showAlert('error', 'Fetch failed: ' + data.error, type + '-status');
-                }
-                
-                if (data.errors && data.errors.length > 0) {
-                    logDiv.innerHTML += `<div class="log-line warning">Errors (${data.errors.length}):</div>`;
-                    data.errors.forEach(error => {
-                        logDiv.innerHTML += `<div class="log-line warning">- ${error}</div>`;
+        }
+
+        // Cancel session
+        function cancelSession(sessionId) {
+            console.log('Cancelling session:', sessionId);
+            showConfirmation('Cancel Session', 'Are you sure you want to cancel this session?', function() {
+                fetch('', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: 'action=cancel_user_fetch_session&session_id=' + sessionId
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.success) {
+                            showAlert('success', 'Session cancelled', 'users-progress');
+                            if (currentSession === sessionId) {
+                                currentSession = null;
+                                isFetching = false;
+                            }
+                            loadActiveSessions();
+                        } else {
+                            showAlert('error', 'Error cancelling session: ' + (data.error || 'Unknown error'), 'users-progress');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error cancelling session:', error);
+                        showAlert('error', 'Network error: ' + error.message, 'users-progress');
                     });
-                }
-                
-                logDiv.scrollTop = logDiv.scrollHeight;
-            }
-        })
-        .catch(error => {
-            console.error('Fetch error:', error);
-            if (logDiv) {
-                logDiv.innerHTML += `<div class="log-line error">Network error: ${error.message}</div>`;
-                showAlert('error', 'Network error: ' + error.message, type + '-status');
-                logDiv.scrollTop = logDiv.scrollHeight;
-            }
-        })
-        .finally(() => {
-            isFetching = false;
-        });
-    }
-
-    // Start fetch all operation
-    function startFetchAll() {
-        console.log('Starting fetch all operation...');
-        if (isFetching) {
-            alert('Another fetch operation is already in progress.');
-            return;
+            });
         }
-        
-        isFetching = true;
-        const progressBar = document.getElementById('fetch-all-progress');
-        const progressPercent = document.getElementById('fetch-all-percent');
-        const progressStep = document.getElementById('fetch-all-step');
-        const logDiv = document.getElementById('fetch-all-log');
-        
-        if (progressBar) progressBar.style.width = '0%';
-        if (progressPercent) progressPercent.textContent = '0%';
-        if (progressStep) progressStep.textContent = 'Not started';
-        if (logDiv) logDiv.innerHTML = '<div class="log-line">Starting fetch all operation...</div>';
-        
-        // Define the steps
-        const steps = [
-            { name: 'courses', label: 'Fetching Courses', percent: 33 },
-            { name: 'analytics', label: 'Fetching Analytics', percent: 66 },
-            { name: 'users', label: 'Fetching Users', percent: 100 }
-        ];
-        
-        let currentStep = 0;
-        
-        function executeStep(stepIndex) {
-            if (stepIndex >= steps.length) {
-                // All steps completed
-                if (progressBar) progressBar.style.width = '100%';
-                if (progressPercent) progressPercent.textContent = '100%';
-                if (progressStep) progressStep.textContent = 'All steps completed';
-                if (logDiv) {
-                    logDiv.innerHTML += '<div class="log-line success">All fetch operations completed successfully!</div>';
-                    logDiv.scrollTop = logDiv.scrollHeight;
-                }
-                isFetching = false;
-                
-                // Update statistics
-                refreshStats();
+
+        // Clear all sessions
+        function clearAllSessions() {
+            console.log('Clearing all sessions');
+            showConfirmation('Clear All Sessions', 'Are you sure you want to clear all sessions? This cannot be undone.', function() {
+                // In a real implementation, you would have an endpoint to clear all sessions
+                // For now, we'll show a message
+                showAlert('info', 'This feature would clear all sessions in a full implementation.', 'users-progress');
+            });
+        }
+
+        // Original fetch functions (kept for compatibility)
+        function startFetch(type) {
+            console.log('Starting fetch for:', type);
+            if (isFetching) {
+                showAlert('warning', 'Another fetch operation is already in progress.', type + '-status');
                 return;
             }
-            
-            const step = steps[stepIndex];
-            if (progressStep) progressStep.textContent = step.label;
+
+            isFetching = true;
+            const modalId = type + '-modal';
+            const logId = type + '-fetch-log';
+
+            showModal(modalId);
+            const logDiv = document.getElementById(logId);
             if (logDiv) {
-                logDiv.innerHTML += `<div class="log-line info">${step.label}...</div>`;
-                logDiv.scrollTop = logDiv.scrollHeight;
+                logDiv.innerHTML = '<div class="log-line">Starting fetch operation...</div>';
             }
-            
+
             fetch('', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'action=fetch_' + step.name
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.success) {
-                    if (progressBar) progressBar.style.width = step.percent + '%';
-                    if (progressPercent) progressPercent.textContent = step.percent + '%';
-                    
-                    let message = `${step.label} completed: `;
-                    if (step.name === 'courses') {
-                        message += `${data.total} courses processed (${data.inserted} inserted, ${data.updated} updated)`;
-                    } else if (step.name === 'analytics') {
-                        message += `${data.total} analytics records inserted`;
-                    } else if (step.name === 'users') {
-                        message += `${data.courses_processed} courses, ${data.total_users} users processed`;
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'action=fetch_' + type
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
                     }
-                    
+                    return response.json();
+                })
+                .then(data => {
                     if (logDiv) {
-                        logDiv.innerHTML += `<div class="log-line success">${message}</div>`;
-                        
+                        if (data.success) {
+                            let message = `${type.charAt(0).toUpperCase() + type.slice(1)} fetch completed! `;
+
+                            if (type === 'courses') {
+                                message += `Total: ${data.total}, Inserted: ${data.inserted}, Updated: ${data.updated}, Skipped: ${data.skipped}`;
+                            } else if (type === 'analytics') {
+                                message += `Courses processed: ${data.total}, Inserted: ${data.inserted}, Skipped: ${data.skipped}`;
+                            } else if (type === 'users') {
+                                message += `Courses processed: ${data.courses_processed}, Total users: ${data.total_users}, Inserted: ${data.inserted}, Updated: ${data.updated}, Skipped: ${data.skipped}`;
+                            }
+
+                            logDiv.innerHTML += `<div class="log-line success">${message}</div>`;
+                            showAlert('success', message, type + '-status');
+
+                            // Update statistics
+                            refreshStats();
+
+                            // Refresh course list if it's courses or users
+                            if (type === 'courses' || type === 'users') {
+                                loadCourseAnalyticsSummary();
+                            }
+                        } else {
+                            logDiv.innerHTML += `<div class="log-line error">Error: ${data.error}</div>`;
+                            showAlert('error', 'Fetch failed: ' + data.error, type + '-status');
+                        }
+
                         if (data.errors && data.errors.length > 0) {
                             logDiv.innerHTML += `<div class="log-line warning">Errors (${data.errors.length}):</div>`;
                             data.errors.forEach(error => {
                                 logDiv.innerHTML += `<div class="log-line warning">- ${error}</div>`;
                             });
                         }
-                        
+
                         logDiv.scrollTop = logDiv.scrollHeight;
                     }
-                    
-                    // Execute next step
-                    setTimeout(() => executeStep(stepIndex + 1), 1000);
-                } else {
+                })
+                .catch(error => {
+                    console.error('Fetch error:', error);
                     if (logDiv) {
-                        logDiv.innerHTML += `<div class="log-line error">${step.label} failed: ${data.error}</div>`;
+                        logDiv.innerHTML += `<div class="log-line error">Network error: ${error.message}</div>`;
+                        showAlert('error', 'Network error: ' + error.message, type + '-status');
+                        logDiv.scrollTop = logDiv.scrollHeight;
+                    }
+                })
+                .finally(() => {
+                    isFetching = false;
+                });
+        }
+
+        // Start fetch all operation
+        function startFetchAll() {
+            console.log('Starting fetch all operation...');
+            if (isFetching) {
+                alert('Another fetch operation is already in progress.');
+                return;
+            }
+
+            isFetching = true;
+            const progressBar = document.getElementById('fetch-all-progress');
+            const progressPercent = document.getElementById('fetch-all-percent');
+            const progressStep = document.getElementById('fetch-all-step');
+            const logDiv = document.getElementById('fetch-all-log');
+
+            if (progressBar) progressBar.style.width = '0%';
+            if (progressPercent) progressPercent.textContent = '0%';
+            if (progressStep) progressStep.textContent = 'Not started';
+            if (logDiv) logDiv.innerHTML = '<div class="log-line">Starting fetch all operation...</div>';
+
+            // Define the steps
+            const steps = [{
+                    name: 'courses',
+                    label: 'Fetching Courses',
+                    percent: 33
+                },
+                {
+                    name: 'analytics',
+                    label: 'Fetching Analytics',
+                    percent: 66
+                },
+                {
+                    name: 'users',
+                    label: 'Fetching Users',
+                    percent: 100
+                }
+            ];
+
+            let currentStep = 0;
+
+            function executeStep(stepIndex) {
+                if (stepIndex >= steps.length) {
+                    // All steps completed
+                    if (progressBar) progressBar.style.width = '100%';
+                    if (progressPercent) progressPercent.textContent = '100%';
+                    if (progressStep) progressStep.textContent = 'All steps completed';
+                    if (logDiv) {
+                        logDiv.innerHTML += '<div class="log-line success">All fetch operations completed successfully!</div>';
                         logDiv.scrollTop = logDiv.scrollHeight;
                     }
                     isFetching = false;
+
+                    // Update statistics
+                    refreshStats();
+                    return;
                 }
-            })
-            .catch(error => {
-                console.error('Step error:', error);
+
+                const step = steps[stepIndex];
+                if (progressStep) progressStep.textContent = step.label;
                 if (logDiv) {
-                    logDiv.innerHTML += `<div class="log-line error">${step.label} network error: ${error.message}</div>`;
+                    logDiv.innerHTML += `<div class="log-line info">${step.label}...</div>`;
                     logDiv.scrollTop = logDiv.scrollHeight;
                 }
-                isFetching = false;
-            });
-        }
-        
-        // Start with first step
-        executeStep(0);
-    }
 
-    // Clear table data
-    function clearTable(tableName) {
-        console.log('Clearing table:', tableName);
-        showConfirmation('Clear Table', `Are you sure you want to clear all data from ${tableName}? This action cannot be undone.`, function() {
-            const tableLabel = tableName.replace('lbln_', '').replace(/_/g, ' ');
-            showAlert('warning', `Clearing ${tableLabel}...`, 'courses-status');
-            
-            fetch('', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'action=clear_table&table=' + tableName
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.success) {
-                    showAlert('success', data.message, 'courses-status');
-                    refreshStats();
-                } else {
-                    showAlert('error', 'Failed to clear table: ' + (data.error || 'Unknown error'), 'courses-status');
-                }
-            })
-            .catch(error => {
-                console.error('Error clearing table:', error);
-                showAlert('error', 'Error clearing table: ' + error.message, 'courses-status');
-            });
-        });
-    }
-
-    // Preview table data
-    function previewTable(tableName) {
-        console.log('Previewing table:', tableName);
-        const modalId = tableName.replace('lbln_', '') + '-modal';
-        showModal(modalId);
-        switchTab(tableName.replace('lbln_', '') + '-preview');
-        loadPreview(tableName, tableName.replace('lbln_', '') + '-preview-data');
-    }
-
-    // Load preview data
-    function loadPreview(tableName, containerId) {
-        console.log('Loading preview for table:', tableName);
-        const container = document.getElementById(containerId);
-        if (!container) {
-            console.error('Container not found:', containerId);
-            return;
-        }
-        
-        container.innerHTML = '<p>Loading data...</p>';
-        
-        fetch('', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'action=preview_data&table=' + tableName + '&limit=10'
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.success && data.data.length > 0) {
-                // Create table
-                let html = '<table class="preview-table">';
-                
-                // Headers
-                html += '<tr>';
-                Object.keys(data.data[0]).forEach(key => {
-                    html += `<th>${key}</th>`;
-                });
-                html += '</tr>';
-                
-                // Rows
-                data.data.forEach(row => {
-                    html += '<tr>';
-                    Object.values(row).forEach(value => {
-                        if (value === null || value === undefined) {
-                            html += '<td><em>null</em></td>';
-                        } else if (typeof value === 'object') {
-                            html += '<td><code>JSON</code></td>';
-                        } else if (typeof value === 'boolean') {
-                            html += `<td>${value ? '✓' : '✗'}</td>`;
-                        } else {
-                            html += `<td>${String(value).substring(0, 50)}${String(value).length > 50 ? '...' : ''}</td>`;
+                fetch('', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: 'action=fetch_' + step.name
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
                         }
-                    });
-                    html += '</tr>';
-                });
-                
-                html += '</table>';
-                container.innerHTML = html;
-            } else if (data.success) {
-                container.innerHTML = '<p>No data found in the table.</p>';
-            } else {
-                container.innerHTML = `<p class="error">Error: ${data.error}</p>`;
-            }
-        })
-        .catch(error => {
-            console.error('Error loading preview:', error);
-            container.innerHTML = `<p class="error">Error loading data: ${error.message}</p>`;
-        });
-    }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.success) {
+                            if (progressBar) progressBar.style.width = step.percent + '%';
+                            if (progressPercent) progressPercent.textContent = step.percent + '%';
 
-    // Load all logs
-    function loadAllLogs() {
-        console.log('Loading all logs...');
-        const container = document.getElementById('all-logs');
-        if (!container) {
-            console.error('All logs container not found');
-            return;
-        }
-        
-        container.innerHTML = '<p>Loading logs...</p>';
-        
-        fetch('', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'action=get_logs&limit=50'
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+                            let message = `${step.label} completed: `;
+                            if (step.name === 'courses') {
+                                message += `${data.total} courses processed (${data.inserted} inserted, ${data.updated} updated)`;
+                            } else if (step.name === 'analytics') {
+                                message += `${data.total} analytics records inserted`;
+                            } else if (step.name === 'users') {
+                                message += `${data.courses_processed} courses, ${data.total_users} users processed`;
+                            }
+
+                            if (logDiv) {
+                                logDiv.innerHTML += `<div class="log-line success">${message}</div>`;
+
+                                if (data.errors && data.errors.length > 0) {
+                                    logDiv.innerHTML += `<div class="log-line warning">Errors (${data.errors.length}):</div>`;
+                                    data.errors.forEach(error => {
+                                        logDiv.innerHTML += `<div class="log-line warning">- ${error}</div>`;
+                                    });
+                                }
+
+                                logDiv.scrollTop = logDiv.scrollHeight;
+                            }
+
+                            // Execute next step
+                            setTimeout(() => executeStep(stepIndex + 1), 1000);
+                        } else {
+                            if (logDiv) {
+                                logDiv.innerHTML += `<div class="log-line error">${step.label} failed: ${data.error}</div>`;
+                                logDiv.scrollTop = logDiv.scrollHeight;
+                            }
+                            isFetching = false;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Step error:', error);
+                        if (logDiv) {
+                            logDiv.innerHTML += `<div class="log-line error">${step.label} network error: ${error.message}</div>`;
+                            logDiv.scrollTop = logDiv.scrollHeight;
+                        }
+                        isFetching = false;
+                    });
             }
-            return response.json();
-        })
-        .then(data => {
-            if (data.success && data.logs.length > 0) {
-                let html = '';
-                data.logs.forEach(log => {
-                    html += `<div class="log-entry ${log.status}">
+
+            // Start with first step
+            executeStep(0);
+        }
+
+        // Clear table data
+        function clearTable(tableName) {
+            console.log('Clearing table:', tableName);
+            showConfirmation('Clear Table', `Are you sure you want to clear all data from ${tableName}? This action cannot be undone.`, function() {
+                const tableLabel = tableName.replace('lbln_', '').replace(/_/g, ' ');
+                showAlert('warning', `Clearing ${tableLabel}...`, 'courses-status');
+
+                fetch('', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: 'action=clear_table&table=' + tableName
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.success) {
+                            showAlert('success', data.message, 'courses-status');
+                            refreshStats();
+                        } else {
+                            showAlert('error', 'Failed to clear table: ' + (data.error || 'Unknown error'), 'courses-status');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error clearing table:', error);
+                        showAlert('error', 'Error clearing table: ' + error.message, 'courses-status');
+                    });
+            });
+        }
+
+        // Preview table data
+        function previewTable(tableName) {
+            console.log('Previewing table:', tableName);
+            const modalId = tableName.replace('lbln_', '') + '-modal';
+            showModal(modalId);
+            switchTab(tableName.replace('lbln_', '') + '-preview');
+            loadPreview(tableName, tableName.replace('lbln_', '') + '-preview-data');
+        }
+
+        // Load preview data
+        function loadPreview(tableName, containerId) {
+            console.log('Loading preview for table:', tableName);
+            const container = document.getElementById(containerId);
+            if (!container) {
+                console.error('Container not found:', containerId);
+                return;
+            }
+
+            container.innerHTML = '<p>Loading data...</p>';
+
+            fetch('', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'action=preview_data&table=' + tableName + '&limit=10'
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success && data.data.length > 0) {
+                        // Create table
+                        let html = '<table class="preview-table">';
+
+                        // Headers
+                        html += '<tr>';
+                        Object.keys(data.data[0]).forEach(key => {
+                            html += `<th>${key}</th>`;
+                        });
+                        html += '</tr>';
+
+                        // Rows
+                        data.data.forEach(row => {
+                            html += '<tr>';
+                            Object.values(row).forEach(value => {
+                                if (value === null || value === undefined) {
+                                    html += '<td><em>null</em></td>';
+                                } else if (typeof value === 'object') {
+                                    html += '<td><code>JSON</code></td>';
+                                } else if (typeof value === 'boolean') {
+                                    html += `<td>${value ? '✓' : '✗'}</td>`;
+                                } else {
+                                    html += `<td>${String(value).substring(0, 50)}${String(value).length > 50 ? '...' : ''}</td>`;
+                                }
+                            });
+                            html += '</tr>';
+                        });
+
+                        html += '</table>';
+                        container.innerHTML = html;
+                    } else if (data.success) {
+                        container.innerHTML = '<p>No data found in the table.</p>';
+                    } else {
+                        container.innerHTML = `<p class="error">Error: ${data.error}</p>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading preview:', error);
+                    container.innerHTML = `<p class="error">Error loading data: ${error.message}</p>`;
+                });
+        }
+
+        // Load all logs
+        function loadAllLogs() {
+            console.log('Loading all logs...');
+            const container = document.getElementById('all-logs');
+            if (!container) {
+                console.error('All logs container not found');
+                return;
+            }
+
+            container.innerHTML = '<p>Loading logs...</p>';
+
+            fetch('', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'action=get_logs&limit=50'
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success && data.logs.length > 0) {
+                        let html = '';
+                        data.logs.forEach(log => {
+                            html += `<div class="log-entry ${log.status}">
                         <div class="log-time">
                             ${new Date(log.start_time).toLocaleString()}
                             ${log.end_time ? `(Duration: ${log.duration})` : ''}
@@ -4987,98 +5226,96 @@ $courseAnalytics = getCourseAnalyticsSummary();
                             ${log.items_processed > 0 ? `(Processed: ${log.items_processed}, Inserted: ${log.items_inserted}, Updated: ${log.items_updated})` : ''}
                         </div>
                     </div>`;
+                        });
+                        container.innerHTML = html;
+                    } else if (data.success) {
+                        container.innerHTML = '<div class="log-entry info"><div class="log-message">No logs found.</div></div>';
+                    } else {
+                        container.innerHTML = `<div class="log-entry error"><div class="log-message">Error: ${data.error}</div></div>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading logs:', error);
+                    container.innerHTML = `<div class="log-entry error"><div class="log-message">Error loading logs: ${error.message}</div></div>`;
                 });
-                container.innerHTML = html;
-            } else if (data.success) {
-                container.innerHTML = '<div class="log-entry info"><div class="log-message">No logs found.</div></div>';
-            } else {
-                container.innerHTML = `<div class="log-entry error"><div class="log-message">Error: ${data.error}</div></div>`;
-            }
-        })
-        .catch(error => {
-            console.error('Error loading logs:', error);
-            container.innerHTML = `<div class="log-entry error"><div class="log-message">Error loading logs: ${error.message}</div></div>`;
-        });
-    }
+        }
 
-    // Show alert
-    function showAlert(type, message, containerId = null) {
-        console.log('Showing alert:', type, message);
-        const alertClass = {
-            'success': 'alert-success',
-            'error': 'alert-error',
-            'warning': 'alert-warning',
-            'info': 'alert-info'
-        }[type] || 'alert-info';
-        
-        const icon = {
-            'success': 'fa-check-circle',
-            'error': 'fa-exclamation-circle',
-            'warning': 'fa-exclamation-triangle',
-            'info': 'fa-info-circle'
-        }[type] || 'fa-info-circle';
-        
-        const alertHtml = `
+        // Show alert
+        function showAlert(type, message, containerId = null) {
+            console.log('Showing alert:', type, message);
+            const alertClass = {
+                'success': 'alert-success',
+                'error': 'alert-error',
+                'warning': 'alert-warning',
+                'info': 'alert-info'
+            } [type] || 'alert-info';
+
+            const icon = {
+                'success': 'fa-check-circle',
+                'error': 'fa-exclamation-circle',
+                'warning': 'fa-exclamation-triangle',
+                'info': 'fa-info-circle'
+            } [type] || 'fa-info-circle';
+
+            const alertHtml = `
             <div class="alert ${alertClass}">
                 <i class="fas ${icon}"></i>
                 <div>${message}</div>
             </div>
         `;
-        
-        if (containerId) {
-            const container = document.getElementById(containerId);
-            if (container) {
-                container.innerHTML = alertHtml;
-                
-                // Auto-remove after 5 seconds
-                setTimeout(() => {
-                    if (container.innerHTML === alertHtml) {
-                        container.innerHTML = '';
+
+            if (containerId) {
+                const container = document.getElementById(containerId);
+                if (container) {
+                    container.innerHTML = alertHtml;
+
+                    // Auto-remove after 5 seconds
+                    setTimeout(() => {
+                        if (container.innerHTML === alertHtml) {
+                            container.innerHTML = '';
+                        }
+                    }, 5000);
+                }
+            }
+
+            return alertHtml;
+        }
+
+        // Refresh analytics for selected courses
+        function refreshSelectedCourseAnalytics() {
+            const selectedIds = getSelectedCourseIds();
+
+            if (selectedIds.length === 0) {
+                showAlert('warning', 'Please select at least one course to refresh analytics for.', 'users-progress');
+                return;
+            }
+
+            showAlert('info', `Refreshing analytics for ${selectedIds.length} courses...`, 'users-progress');
+
+            // Create a simple form to submit
+            const formData = new FormData();
+            formData.append('action', 'refresh_course_analytics');
+            formData.append('course_ids', JSON.stringify(selectedIds));
+
+            fetch('', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showAlert('success', `Successfully refreshed analytics for ${data.inserted} courses`, 'users-progress');
+                        // Reload the course list
+                        loadCourseAnalyticsSummary();
+                    } else {
+                        showAlert('error', 'Failed to refresh analytics: ' + (data.error || 'Unknown error'), 'users-progress');
                     }
-                }, 5000);
-            }
+                })
+                .catch(error => {
+                    showAlert('error', 'Error refreshing analytics: ' + error.message, 'users-progress');
+                });
         }
-        
-        return alertHtml;
-    }
-
-    // Refresh analytics for selected courses
-    function refreshSelectedCourseAnalytics() {
-        const selectedIds = getSelectedCourseIds();
-        
-        if (selectedIds.length === 0) {
-            showAlert('warning', 'Please select at least one course to refresh analytics for.', 'users-progress');
-            return;
-        }
-        
-        showAlert('info', `Refreshing analytics for ${selectedIds.length} courses...`, 'users-progress');
-        
-        // Create a simple form to submit
-        const formData = new FormData();
-        formData.append('action', 'refresh_course_analytics');
-        formData.append('course_ids', JSON.stringify(selectedIds));
-        
-        fetch('', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                showAlert('success', `Successfully refreshed analytics for ${data.inserted} courses`, 'users-progress');
-                // Reload the course list
-                loadCourseAnalyticsSummary();
-            } else {
-                showAlert('error', 'Failed to refresh analytics: ' + (data.error || 'Unknown error'), 'users-progress');
-            }
-        })
-        .catch(error => {
-            showAlert('error', 'Error refreshing analytics: ' + error.message, 'users-progress');
-        });
-    }
-
-
-
-</script>
+    </script>
 </body>
+
 </html>

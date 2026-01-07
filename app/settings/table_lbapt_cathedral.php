@@ -87,7 +87,8 @@ $runnerTableSettings['public.lbapt_cathedral'] = array(
 	notes,
 	created_at,
 	updated_at
-FROM "public".lbapt_cathedral',
+FROM
+	"public".lbapt_cathedral',
 	'keyFields' => array( 
 		'cathedral_id' 
 	),
@@ -765,7 +766,8 @@ FROM "public".lbapt_cathedral',
 	notes,
 	created_at,
 	updated_at
-FROM "public".lbapt_cathedral',
+FROM
+	"public".lbapt_cathedral',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -1244,7 +1246,8 @@ FROM "public".lbapt_cathedral',
 	notes,
 	created_at,
 	updated_at',
-		'fromListSql' => 'FROM "public".lbapt_cathedral',
+		'fromListSql' => 'FROM
+	"public".lbapt_cathedral',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

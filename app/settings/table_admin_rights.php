@@ -30,7 +30,8 @@ $runnerTableSettings['admin_rights'] = array(
 	"GroupID",
 	"AccessMask",
 	"Page"
-FROM "public".lifeboxme_ugrights',
+FROM
+	"public".lifeboxme_ugrights',
 	'keyFields' => array( 
 		'TableName',
 		'GroupID' 
@@ -193,7 +194,8 @@ FROM "public".lifeboxme_ugrights',
 	"GroupID",
 	"AccessMask",
 	"Page"
-FROM "public".lifeboxme_ugrights',
+FROM
+	"public".lifeboxme_ugrights',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -360,7 +362,8 @@ FROM "public".lifeboxme_ugrights',
 	"GroupID",
 	"AccessMask",
 	"Page"',
-		'fromListSql' => 'FROM "public".lifeboxme_ugrights',
+		'fromListSql' => 'FROM
+	"public".lifeboxme_ugrights',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

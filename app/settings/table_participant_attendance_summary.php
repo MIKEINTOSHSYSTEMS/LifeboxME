@@ -72,7 +72,8 @@ $runnerTableSettings['public.participant_attendance_summary'] = array(
 	pre_test_score,
 	post_test_score,
 	ceu_points
-FROM "public".participant_attendance_summary',
+FROM
+	"public".participant_attendance_summary',
 	'deviceHideFields' => array(
 		'1' => array( 
 			 
@@ -664,7 +665,8 @@ FROM "public".participant_attendance_summary',
 	pre_test_score,
 	post_test_score,
 	ceu_points
-FROM "public".participant_attendance_summary',
+FROM
+	"public".participant_attendance_summary',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -1119,7 +1121,8 @@ FROM "public".participant_attendance_summary',
 	pre_test_score,
 	post_test_score,
 	ceu_points',
-		'fromListSql' => 'FROM "public".participant_attendance_summary',
+		'fromListSql' => 'FROM
+	"public".participant_attendance_summary',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

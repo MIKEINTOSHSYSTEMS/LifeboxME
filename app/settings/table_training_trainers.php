@@ -75,7 +75,8 @@ $runnerTableSettings['public.training_trainers'] = array(
 	training_id,
 	trainer_id,
 	created_at
-FROM "public".training_trainers',
+FROM
+	"public".training_trainers',
 	'keyFields' => array( 
 		'training_trainer_id' 
 	),
@@ -276,7 +277,8 @@ FROM "public".training_trainers',
 	training_id,
 	trainer_id,
 	created_at
-FROM "public".training_trainers',
+FROM
+	"public".training_trainers',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -443,7 +445,8 @@ FROM "public".training_trainers',
 	training_id,
 	trainer_id,
 	created_at',
-		'fromListSql' => 'FROM "public".training_trainers',
+		'fromListSql' => 'FROM
+	"public".training_trainers',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

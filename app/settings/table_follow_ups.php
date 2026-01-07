@@ -90,7 +90,8 @@ $runnerTableSettings['public.follow_ups'] = array(
 	missed_visit_reason,
 	created_at,
 	updated_at
-FROM "public".follow_ups',
+FROM
+	"public".follow_ups',
 	'keyFields' => array( 
 		'follow_up_id' 
 	),
@@ -837,7 +838,8 @@ FROM "public".follow_ups',
 	missed_visit_reason,
 	created_at,
 	updated_at
-FROM "public".follow_ups',
+FROM
+	"public".follow_ups',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -1364,7 +1366,8 @@ FROM "public".follow_ups',
 	missed_visit_reason,
 	created_at,
 	updated_at',
-		'fromListSql' => 'FROM "public".follow_ups',
+		'fromListSql' => 'FROM
+	"public".follow_ups',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

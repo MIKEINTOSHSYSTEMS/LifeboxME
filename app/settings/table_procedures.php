@@ -86,7 +86,8 @@ $runnerTableSettings['public.procedures'] = array(
 	procedure_category,
 	description,
 	created_at
-FROM "public".procedures',
+FROM
+	"public".procedures',
 	'keyFields' => array( 
 		'procedure_id' 
 	),
@@ -289,7 +290,8 @@ FROM "public".procedures',
 	procedure_category,
 	description,
 	created_at
-FROM "public".procedures',
+FROM
+	"public".procedures',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -480,7 +482,8 @@ FROM "public".procedures',
 	procedure_category,
 	description,
 	created_at',
-		'fromListSql' => 'FROM "public".procedures',
+		'fromListSql' => 'FROM
+	"public".procedures',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

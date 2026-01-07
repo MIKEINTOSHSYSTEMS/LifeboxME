@@ -70,7 +70,8 @@ $runnerTableSettings['public.device_distribution_summary_view'] = array(
 	payment_method,
 	quantity,
 	notes
-FROM "public".device_distribution_summary_view',
+FROM
+	"public".device_distribution_summary_view',
 	'deviceHideFields' => array(
 		'1' => array( 
 			 
@@ -590,7 +591,8 @@ FROM "public".device_distribution_summary_view',
 	payment_method,
 	quantity,
 	notes
-FROM "public".device_distribution_summary_view',
+FROM
+	"public".device_distribution_summary_view',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -997,7 +999,8 @@ FROM "public".device_distribution_summary_view',
 	payment_method,
 	quantity,
 	notes',
-		'fromListSql' => 'FROM "public".device_distribution_summary_view',
+		'fromListSql' => 'FROM
+	"public".device_distribution_summary_view',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

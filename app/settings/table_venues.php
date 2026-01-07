@@ -96,7 +96,8 @@ $runnerTableSettings['public.venues'] = array(
 	is_active,
 	created_at,
 	updated_at
-FROM "public".venues',
+FROM
+	"public".venues',
 	'keyFields' => array( 
 		'venue_id' 
 	),
@@ -694,7 +695,8 @@ FROM "public".venues',
 	is_active,
 	created_at,
 	updated_at
-FROM "public".venues',
+FROM
+	"public".venues',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -1125,7 +1127,8 @@ FROM "public".venues',
 	is_active,
 	created_at,
 	updated_at',
-		'fromListSql' => 'FROM "public".venues',
+		'fromListSql' => 'FROM
+	"public".venues',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

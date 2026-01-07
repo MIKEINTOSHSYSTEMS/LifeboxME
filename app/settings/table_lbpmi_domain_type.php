@@ -72,7 +72,8 @@ $runnerTableSettings['public.lbpmi_domain_type'] = array(
 	'sql' => 'SELECT
 	dom_id,
 	domain_type
-FROM "public".lbpmi_domain_type',
+FROM
+	"public".lbpmi_domain_type',
 	'keyFields' => array( 
 		'dom_id' 
 	),
@@ -162,7 +163,8 @@ FROM "public".lbpmi_domain_type',
 		'sql' => 'SELECT
 	dom_id,
 	domain_type
-FROM "public".lbpmi_domain_type',
+FROM
+	"public".lbpmi_domain_type',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -281,7 +283,8 @@ FROM "public".lbpmi_domain_type',
 		'headSql' => 'SELECT',
 		'fieldListSql' => 'dom_id,
 	domain_type',
-		'fromListSql' => 'FROM "public".lbpmi_domain_type',
+		'fromListSql' => 'FROM
+	"public".lbpmi_domain_type',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

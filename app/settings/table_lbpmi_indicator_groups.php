@@ -84,7 +84,8 @@ $runnerTableSettings['public.lbpmi_indicator_groups'] = array(
 	indicator_group_name,
 	indicator_group_description,
 	indicator_group_code
-FROM "public".lbpmi_indicator_groups',
+FROM
+	"public".lbpmi_indicator_groups',
 	'keyFields' => array( 
 		'indicator_group_id' 
 	),
@@ -240,7 +241,8 @@ FROM "public".lbpmi_indicator_groups',
 	indicator_group_name,
 	indicator_group_description,
 	indicator_group_code
-FROM "public".lbpmi_indicator_groups',
+FROM
+	"public".lbpmi_indicator_groups',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -407,7 +409,8 @@ FROM "public".lbpmi_indicator_groups',
 	indicator_group_name,
 	indicator_group_description,
 	indicator_group_code',
-		'fromListSql' => 'FROM "public".lbpmi_indicator_groups',
+		'fromListSql' => 'FROM
+	"public".lbpmi_indicator_groups',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

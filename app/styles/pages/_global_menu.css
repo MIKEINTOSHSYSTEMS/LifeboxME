@@ -301,6 +301,27 @@
 [data-page="_global_menu"][data-itemid="welcome_item101"] > .bs-welcome-header {
   background-color: #CD853F;
 }
+[data-page="_global_menu"][data-itemid="welcome_item102"] > .bs-welcome-header {
+  background-color: #dc143c;
+}
+[data-page="_global_menu"][data-itemid="welcome_item103"] > .bs-welcome-header {
+  background-color: #3cb371;
+}
+[data-page="_global_menu"][data-itemid="welcome_item104"] > .bs-welcome-header {
+  background-color: #9acd32;
+}
+[data-page="_global_menu"][data-itemid="welcome_item105"] > .bs-welcome-header {
+  background-color: #4682b4;
+}
+[data-page="_global_menu"][data-itemid="welcome_item106"] > .bs-welcome-header {
+  background-color: #778899;
+}
+[data-page="_global_menu"][data-itemid="welcome_item107"] > .bs-welcome-header {
+  background-color: #d2af80;
+}
+[data-page="_global_menu"][data-itemid="welcome_item108"] > .bs-welcome-header {
+  background-color: #9acd32;
+}
 [data-page="_global_menu"][data-itemid="page_image_ash8f23hr"] {
   width: 400px;
 }

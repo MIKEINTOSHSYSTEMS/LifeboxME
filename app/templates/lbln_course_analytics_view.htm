@@ -1,0 +1,466 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+						<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+    <LINK rel="shortcut icon" type="image/png" href="/assets/img/lb_favicon.ico"/>
+    <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
+    <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
+    <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
+    		{BEGIN styleCSSFiles}
+<link REL="stylesheet" href="{$stylepath}" type="text/css">
+{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-view" >
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		{$locking}
+		<div class="r-small-page" 
+			data-body-align="center"
+			data-body-width="standard"
+		>
+							{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="small" {$form_top} data-pageid="{$pageid}"
+		data-v-width="4"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="top_c1" data-pageid="{$pageid}"	{$cell_top_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	 
+		<h2 data-itemtype="view_header" data-itemid="view_header" {$item_view_header} data-pageid="{$pageid}" >{$pagetitlelabel public_lbln_course_analytics view}</h2>
+	</div>					</div>
+	</div>		
+{END top_block}
+									{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="small" {$form_above-grid} data-pageid="{$pageid}"
+		data-v-width="4"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	</div>					</div>
+	</div>		
+{END above-grid_block}
+									{BEGIN grid_block}
+
+
+
+
+ 
+	 
+												<table 
+	data-body-align="center"
+	data-location="grid" id="form_grid_{$pageid}" data-makeup="small" {$form_grid} data-pageid="{$pageid}" 
+	class="r-edit-form" cellpadding="0" cellspacing="0" 
+	{$grid_hiddenattr} 
+		data-form-width="1"
+		
+		data-v-width="4"
+	>
+	<tbody>
+										<tr {$row_grid_0} >
+										
+
+{BEGIN cellblock_grid_c3}
+<td
+	{$cell_grid_c3}
+	class=" r-ori-vert"
+	
+				data-fullwidth
+		
+			data-cellId="grid_c3" data-pageid="{$pageid}"
+		data-v-cell="4"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN data_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_data_id}  r-vertical-field" 
+	data-signal-error-for="data_id{$id}" {$required_attr_data_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="data_id" data-fieldname="data_id" >
+
+	<label class="r-edit-label control-label {$data_id_label_class}" for="{$labelfor_data_id}">
+		{BEGIN data_id_label}
+			{$data_id_forward_control}
+			{$label public_lbln_course_analytics data_id }			{END data_id_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$data_id_value}	</div>
+	</div>
+
+
+{END data_id_fieldblock}
+											
+{BEGIN course_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_course_id}  r-vertical-field" 
+	data-signal-error-for="course_id{$id}" {$required_attr_course_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="course_id" data-fieldname="course_id" >
+
+	<label class="r-edit-label control-label {$course_id_label_class}" for="{$labelfor_course_id}">
+		{BEGIN course_id_label}
+			{$course_id_forward_control}
+			{$label public_lbln_course_analytics course_id }			{END course_id_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$course_id_value}	</div>
+	</div>
+
+
+{END course_id_fieldblock}
+											
+{BEGIN course_title_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_course_title}  r-vertical-field" 
+	data-signal-error-for="course_title{$id}" {$required_attr_course_title}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="course_title" data-fieldname="course_title" >
+
+	<label class="r-edit-label control-label {$course_title_label_class}" for="{$labelfor_course_title}">
+		{BEGIN course_title_label}
+			{$course_title_forward_control}
+			{$label public_lbln_course_analytics course_title }			{END course_title_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$course_title_value}	</div>
+	</div>
+
+
+{END course_title_fieldblock}
+											
+{BEGIN students_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_students}  r-vertical-field" 
+	data-signal-error-for="students{$id}" {$required_attr_students}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="students" data-fieldname="students" >
+
+	<label class="r-edit-label control-label {$students_label_class}" for="{$labelfor_students}">
+		{BEGIN students_label}
+			{$students_forward_control}
+			{$label public_lbln_course_analytics students }			{END students_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$students_value}	</div>
+	</div>
+
+
+{END students_fieldblock}
+											
+{BEGIN videos_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_videos}  r-vertical-field" 
+	data-signal-error-for="videos{$id}" {$required_attr_videos}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="videos" data-fieldname="videos" >
+
+	<label class="r-edit-label control-label {$videos_label_class}" for="{$labelfor_videos}">
+		{BEGIN videos_label}
+			{$videos_forward_control}
+			{$label public_lbln_course_analytics videos }			{END videos_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$videos_value}	</div>
+	</div>
+
+
+{END videos_fieldblock}
+											
+{BEGIN learning_units_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_learning_units}  r-vertical-field" 
+	data-signal-error-for="learning_units{$id}" {$required_attr_learning_units}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="learning_units" data-fieldname="learning_units" >
+
+	<label class="r-edit-label control-label {$learning_units_label_class}" for="{$labelfor_learning_units}">
+		{BEGIN learning_units_label}
+			{$learning_units_forward_control}
+			{$label public_lbln_course_analytics learning_units }			{END learning_units_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$learning_units_value}	</div>
+	</div>
+
+
+{END learning_units_fieldblock}
+											
+{BEGIN video_time_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_video_time}  r-vertical-field" 
+	data-signal-error-for="video_time{$id}" {$required_attr_video_time}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="video_time" data-fieldname="video_time" >
+
+	<label class="r-edit-label control-label {$video_time_label_class}" for="{$labelfor_video_time}">
+		{BEGIN video_time_label}
+			{$video_time_forward_control}
+			{$label public_lbln_course_analytics video_time }			{END video_time_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$video_time_value}	</div>
+	</div>
+
+
+{END video_time_fieldblock}
+											
+{BEGIN avg_score_rate_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_avg_score_rate}  r-vertical-field" 
+	data-signal-error-for="avg_score_rate{$id}" {$required_attr_avg_score_rate}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="avg_score_rate" data-fieldname="avg_score_rate" >
+
+	<label class="r-edit-label control-label {$avg_score_rate_label_class}" for="{$labelfor_avg_score_rate}">
+		{BEGIN avg_score_rate_label}
+			{$avg_score_rate_forward_control}
+			{$label public_lbln_course_analytics avg_score_rate }			{END avg_score_rate_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$avg_score_rate_value}	</div>
+	</div>
+
+
+{END avg_score_rate_fieldblock}
+											
+{BEGIN success_rate_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_success_rate}  r-vertical-field" 
+	data-signal-error-for="success_rate{$id}" {$required_attr_success_rate}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="success_rate" data-fieldname="success_rate" >
+
+	<label class="r-edit-label control-label {$success_rate_label_class}" for="{$labelfor_success_rate}">
+		{BEGIN success_rate_label}
+			{$success_rate_forward_control}
+			{$label public_lbln_course_analytics success_rate }			{END success_rate_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$success_rate_value}	</div>
+	</div>
+
+
+{END success_rate_fieldblock}
+											
+{BEGIN total_study_time_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_total_study_time}  r-vertical-field" 
+	data-signal-error-for="total_study_time{$id}" {$required_attr_total_study_time}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="total_study_time" data-fieldname="total_study_time" >
+
+	<label class="r-edit-label control-label {$total_study_time_label_class}" for="{$labelfor_total_study_time}">
+		{BEGIN total_study_time_label}
+			{$total_study_time_forward_control}
+			{$label public_lbln_course_analytics total_study_time }			{END total_study_time_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$total_study_time_value}	</div>
+	</div>
+
+
+{END total_study_time_fieldblock}
+											
+{BEGIN avg_time_to_finish_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_avg_time_to_finish}  r-vertical-field" 
+	data-signal-error-for="avg_time_to_finish{$id}" {$required_attr_avg_time_to_finish}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="avg_time_to_finish" data-fieldname="avg_time_to_finish" >
+
+	<label class="r-edit-label control-label {$avg_time_to_finish_label_class}" for="{$labelfor_avg_time_to_finish}">
+		{BEGIN avg_time_to_finish_label}
+			{$avg_time_to_finish_forward_control}
+			{$label public_lbln_course_analytics avg_time_to_finish }			{END avg_time_to_finish_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$avg_time_to_finish_value}	</div>
+	</div>
+
+
+{END avg_time_to_finish_fieldblock}
+											
+{BEGIN social_interactions_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_social_interactions}  r-vertical-field" 
+	data-signal-error-for="social_interactions{$id}" {$required_attr_social_interactions}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="social_interactions" data-fieldname="social_interactions" >
+
+	<label class="r-edit-label control-label {$social_interactions_label_class}" for="{$labelfor_social_interactions}">
+		{BEGIN social_interactions_label}
+			{$social_interactions_forward_control}
+			{$label public_lbln_course_analytics social_interactions }			{END social_interactions_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$social_interactions_value}	</div>
+	</div>
+
+
+{END social_interactions_fieldblock}
+											
+{BEGIN certificates_issued_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_certificates_issued}  r-vertical-field" 
+	data-signal-error-for="certificates_issued{$id}" {$required_attr_certificates_issued}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="certificates_issued" data-fieldname="certificates_issued" >
+
+	<label class="r-edit-label control-label {$certificates_issued_label_class}" for="{$labelfor_certificates_issued}">
+		{BEGIN certificates_issued_label}
+			{$certificates_issued_forward_control}
+			{$label public_lbln_course_analytics certificates_issued }			{END certificates_issued_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$certificates_issued_value}	</div>
+	</div>
+
+
+{END certificates_issued_fieldblock}
+											
+{BEGIN video_viewing_time_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_video_viewing_time}  r-vertical-field" 
+	data-signal-error-for="video_viewing_time{$id}" {$required_attr_video_viewing_time}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field13" {$item_integrated_edit_field13} data-pageid="{$pageid}" data-field="video_viewing_time" data-fieldname="video_viewing_time" >
+
+	<label class="r-edit-label control-label {$video_viewing_time_label_class}" for="{$labelfor_video_viewing_time}">
+		{BEGIN video_viewing_time_label}
+			{$video_viewing_time_forward_control}
+			{$label public_lbln_course_analytics video_viewing_time }			{END video_viewing_time_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$video_viewing_time_value}	</div>
+	</div>
+
+
+{END video_viewing_time_fieldblock}
+											
+{BEGIN fetched_at_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_fetched_at}  r-vertical-field" 
+	data-signal-error-for="fetched_at{$id}" {$required_attr_fetched_at}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field14" {$item_integrated_edit_field14} data-pageid="{$pageid}" data-field="fetched_at" data-fieldname="fetched_at" >
+
+	<label class="r-edit-label control-label {$fetched_at_label_class}" for="{$labelfor_fetched_at}">
+		{BEGIN fetched_at_label}
+			{$fetched_at_forward_control}
+			{$label public_lbln_course_analytics fetched_at }			{END fetched_at_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$fetched_at_value}	</div>
+	</div>
+
+
+{END fetched_at_fieldblock}
+											
+{BEGIN analytics_date_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_analytics_date}  r-vertical-field" 
+	data-signal-error-for="analytics_date{$id}" {$required_attr_analytics_date}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field15" {$item_integrated_edit_field15} data-pageid="{$pageid}" data-field="analytics_date" data-fieldname="analytics_date" >
+
+	<label class="r-edit-label control-label {$analytics_date_label_class}" for="{$labelfor_analytics_date}">
+		{BEGIN analytics_date_label}
+			{$analytics_date_forward_control}
+			{$label public_lbln_course_analytics analytics_date }			{END analytics_date_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$analytics_date_value}	</div>
+	</div>
+
+
+{END analytics_date_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c3}
+								</tr>
+			</tbody></table>
+{END grid_block}
+									{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="small" {$form_below-grid} data-pageid="{$pageid}"
+		data-v-width="4"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class="			col-md-6
+	">
+	 
+		{BEGIN back_button}
+<span data-itemtype="view_back_list" data-itemid="view_back_list" {$item_view_back_list} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$backbutton_attrs} >
+							{mlang_message BACK_TO_LIST}			</a>
+</span>
+{END back_button}
+	 
+		{BEGIN close_button}
+<span data-itemtype="view_close" data-itemid="view_close" {$item_view_close} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" href="#" {$closebutton_attrs} >
+							{mlang_message CLOSE_WINDOW}			</a>
+</span>
+{END close_button}
+	</div>			 
+				<div 
+	data-cellId="below-grid_c2" data-pageid="{$pageid}"	{$cell_below-grid_c2}
+	class="r-align-right r-ori-vert			col-md-6
+	">
+	 
+		<span data-itemtype="hamburger" data-itemid="hamburger" {$item_hamburger} data-pageid="{$pageid}" data-small data-button-item>
+</span>
+	</div>					</div>
+	</div>		
+{END below-grid_block}
+			</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

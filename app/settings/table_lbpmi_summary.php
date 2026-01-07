@@ -95,7 +95,8 @@ $runnerTableSettings['public.lbpmi_summary'] = array(
 	org_unit_validity,
 	period_validity,
 	legacy_performance_status
-FROM "public".lbpmi_summary',
+FROM
+	"public".lbpmi_summary',
 	'deviceHideFields' => array(
 		'1' => array( 
 			 
@@ -1781,7 +1782,8 @@ FROM "public".lbpmi_summary',
 	org_unit_validity,
 	period_validity,
 	legacy_performance_status
-FROM "public".lbpmi_summary',
+FROM
+	"public".lbpmi_summary',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -2932,7 +2934,8 @@ FROM "public".lbpmi_summary',
 	org_unit_validity,
 	period_validity,
 	legacy_performance_status',
-		'fromListSql' => 'FROM "public".lbpmi_summary',
+		'fromListSql' => 'FROM
+	"public".lbpmi_summary',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

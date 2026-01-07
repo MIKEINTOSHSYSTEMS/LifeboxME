@@ -73,7 +73,8 @@ $runnerTableSettings['public.transaction_types'] = array(
 	'sql' => 'SELECT
 	id,
 	transaction_name
-FROM "public".transaction_types',
+FROM
+	"public".transaction_types',
 	'keyFields' => array( 
 		'id' 
 	),
@@ -163,7 +164,8 @@ FROM "public".transaction_types',
 		'sql' => 'SELECT
 	id,
 	transaction_name
-FROM "public".transaction_types',
+FROM
+	"public".transaction_types',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -282,7 +284,8 @@ FROM "public".transaction_types',
 		'headSql' => 'SELECT',
 		'fieldListSql' => 'id,
 	transaction_name',
-		'fromListSql' => 'FROM "public".transaction_types',
+		'fromListSql' => 'FROM
+	"public".transaction_types',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

@@ -1,0 +1,502 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+						<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+    <LINK rel="shortcut icon" type="image/png" href="/assets/img/lb_favicon.ico"/>
+    <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
+    <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
+    <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
+    		{BEGIN styleCSSFiles}
+<link REL="stylesheet" href="{$stylepath}" type="text/css">
+{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-search" >
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		{$locking}
+		<div class="r-small-page" 
+			data-body-align="center"
+			data-body-width="standard"
+		>
+							{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="small" {$form_top} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="top_c1" data-pageid="{$pageid}"	{$cell_top_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	 
+		<h2 data-itemtype="search_header" data-itemid="search_header" {$item_search_header} data-pageid="{$pageid}" >{$pagetitlelabel public_lbln_course_analytics search}</h2>
+	</div>					</div>
+	</div>		
+{END top_block}
+									{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="small" {$form_above-grid} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	</div>					</div>
+	</div>		
+{END above-grid_block}
+									{BEGIN grid_block}
+
+
+
+
+ 
+	 
+												<table 
+	data-body-align="center"
+	data-location="grid" id="form_grid_{$pageid}" data-makeup="small" {$form_grid} data-pageid="{$pageid}" 
+	class="r-edit-form" cellpadding="0" cellspacing="0" 
+	{$grid_hiddenattr} 
+		data-form-width="1"
+		
+		data-v-width="6"
+	>
+	<tbody>
+										<tr {$row_grid_0} >
+										
+
+{BEGIN cellblock_grid_c3}
+<td
+	{$cell_grid_c3}
+	class=" r-ori-vert"
+	
+				data-fullwidth
+		
+			data-cellId="grid_c3" data-pageid="{$pageid}"
+		data-v-cell="6"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN data_id_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_data_id}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="data_id{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field" {$item_integrated_search_field} data-pageid="{$pageid}" data-field="data_id" data-fieldname="data_id" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_data_id}">
+		{$label public_lbln_course_analytics data_id }	</label>
+	<div class="r-search-option">
+		{$searchtype_data_id}
+	</div>
+	<div class="r-search-field">
+		{$data_id_editcontrol}	</div>
+	<div class="r-search-field">
+		{$data_id_editcontrol1}
+	</div>
+	
+</div>
+
+{END data_id_fieldblock}
+											
+{BEGIN course_id_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_course_id}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="course_id{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field1" {$item_integrated_search_field1} data-pageid="{$pageid}" data-field="course_id" data-fieldname="course_id" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_course_id}">
+		{$label public_lbln_course_analytics course_id }	</label>
+	<div class="r-search-option">
+		{$searchtype_course_id}
+	</div>
+	<div class="r-search-field">
+		{$course_id_editcontrol}	</div>
+	<div class="r-search-field">
+		{$course_id_editcontrol1}
+	</div>
+	
+</div>
+
+{END course_id_fieldblock}
+											
+{BEGIN course_title_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_course_title}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="course_title{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field2" {$item_integrated_search_field2} data-pageid="{$pageid}" data-field="course_title" data-fieldname="course_title" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_course_title}">
+		{$label public_lbln_course_analytics course_title }	</label>
+	<div class="r-search-option">
+		{$searchtype_course_title}
+	</div>
+	<div class="r-search-field">
+		{$course_title_editcontrol}	</div>
+	<div class="r-search-field">
+		{$course_title_editcontrol1}
+	</div>
+	
+</div>
+
+{END course_title_fieldblock}
+											
+{BEGIN students_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_students}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="students{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field3" {$item_integrated_search_field3} data-pageid="{$pageid}" data-field="students" data-fieldname="students" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_students}">
+		{$label public_lbln_course_analytics students }	</label>
+	<div class="r-search-option">
+		{$searchtype_students}
+	</div>
+	<div class="r-search-field">
+		{$students_editcontrol}	</div>
+	<div class="r-search-field">
+		{$students_editcontrol1}
+	</div>
+	
+</div>
+
+{END students_fieldblock}
+											
+{BEGIN videos_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_videos}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="videos{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field4" {$item_integrated_search_field4} data-pageid="{$pageid}" data-field="videos" data-fieldname="videos" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_videos}">
+		{$label public_lbln_course_analytics videos }	</label>
+	<div class="r-search-option">
+		{$searchtype_videos}
+	</div>
+	<div class="r-search-field">
+		{$videos_editcontrol}	</div>
+	<div class="r-search-field">
+		{$videos_editcontrol1}
+	</div>
+	
+</div>
+
+{END videos_fieldblock}
+											
+{BEGIN learning_units_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_learning_units}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="learning_units{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field5" {$item_integrated_search_field5} data-pageid="{$pageid}" data-field="learning_units" data-fieldname="learning_units" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_learning_units}">
+		{$label public_lbln_course_analytics learning_units }	</label>
+	<div class="r-search-option">
+		{$searchtype_learning_units}
+	</div>
+	<div class="r-search-field">
+		{$learning_units_editcontrol}	</div>
+	<div class="r-search-field">
+		{$learning_units_editcontrol1}
+	</div>
+	
+</div>
+
+{END learning_units_fieldblock}
+											
+{BEGIN video_time_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_video_time}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="video_time{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field6" {$item_integrated_search_field6} data-pageid="{$pageid}" data-field="video_time" data-fieldname="video_time" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_video_time}">
+		{$label public_lbln_course_analytics video_time }	</label>
+	<div class="r-search-option">
+		{$searchtype_video_time}
+	</div>
+	<div class="r-search-field">
+		{$video_time_editcontrol}	</div>
+	<div class="r-search-field">
+		{$video_time_editcontrol1}
+	</div>
+	
+</div>
+
+{END video_time_fieldblock}
+											
+{BEGIN avg_score_rate_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_avg_score_rate}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="avg_score_rate{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field7" {$item_integrated_search_field7} data-pageid="{$pageid}" data-field="avg_score_rate" data-fieldname="avg_score_rate" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_avg_score_rate}">
+		{$label public_lbln_course_analytics avg_score_rate }	</label>
+	<div class="r-search-option">
+		{$searchtype_avg_score_rate}
+	</div>
+	<div class="r-search-field">
+		{$avg_score_rate_editcontrol}	</div>
+	<div class="r-search-field">
+		{$avg_score_rate_editcontrol1}
+	</div>
+	
+</div>
+
+{END avg_score_rate_fieldblock}
+											
+{BEGIN success_rate_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_success_rate}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="success_rate{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field8" {$item_integrated_search_field8} data-pageid="{$pageid}" data-field="success_rate" data-fieldname="success_rate" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_success_rate}">
+		{$label public_lbln_course_analytics success_rate }	</label>
+	<div class="r-search-option">
+		{$searchtype_success_rate}
+	</div>
+	<div class="r-search-field">
+		{$success_rate_editcontrol}	</div>
+	<div class="r-search-field">
+		{$success_rate_editcontrol1}
+	</div>
+	
+</div>
+
+{END success_rate_fieldblock}
+											
+{BEGIN total_study_time_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_total_study_time}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="total_study_time{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field9" {$item_integrated_search_field9} data-pageid="{$pageid}" data-field="total_study_time" data-fieldname="total_study_time" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_total_study_time}">
+		{$label public_lbln_course_analytics total_study_time }	</label>
+	<div class="r-search-option">
+		{$searchtype_total_study_time}
+	</div>
+	<div class="r-search-field">
+		{$total_study_time_editcontrol}	</div>
+	<div class="r-search-field">
+		{$total_study_time_editcontrol1}
+	</div>
+	
+</div>
+
+{END total_study_time_fieldblock}
+											
+{BEGIN avg_time_to_finish_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_avg_time_to_finish}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="avg_time_to_finish{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field10" {$item_integrated_search_field10} data-pageid="{$pageid}" data-field="avg_time_to_finish" data-fieldname="avg_time_to_finish" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_avg_time_to_finish}">
+		{$label public_lbln_course_analytics avg_time_to_finish }	</label>
+	<div class="r-search-option">
+		{$searchtype_avg_time_to_finish}
+	</div>
+	<div class="r-search-field">
+		{$avg_time_to_finish_editcontrol}	</div>
+	<div class="r-search-field">
+		{$avg_time_to_finish_editcontrol1}
+	</div>
+	
+</div>
+
+{END avg_time_to_finish_fieldblock}
+											
+{BEGIN social_interactions_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_social_interactions}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="social_interactions{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field11" {$item_integrated_search_field11} data-pageid="{$pageid}" data-field="social_interactions" data-fieldname="social_interactions" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_social_interactions}">
+		{$label public_lbln_course_analytics social_interactions }	</label>
+	<div class="r-search-option">
+		{$searchtype_social_interactions}
+	</div>
+	<div class="r-search-field">
+		{$social_interactions_editcontrol}	</div>
+	<div class="r-search-field">
+		{$social_interactions_editcontrol1}
+	</div>
+	
+</div>
+
+{END social_interactions_fieldblock}
+											
+{BEGIN certificates_issued_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_certificates_issued}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="certificates_issued{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field12" {$item_integrated_search_field12} data-pageid="{$pageid}" data-field="certificates_issued" data-fieldname="certificates_issued" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_certificates_issued}">
+		{$label public_lbln_course_analytics certificates_issued }	</label>
+	<div class="r-search-option">
+		{$searchtype_certificates_issued}
+	</div>
+	<div class="r-search-field">
+		{$certificates_issued_editcontrol}	</div>
+	<div class="r-search-field">
+		{$certificates_issued_editcontrol1}
+	</div>
+	
+</div>
+
+{END certificates_issued_fieldblock}
+											
+{BEGIN video_viewing_time_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_video_viewing_time}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="video_viewing_time{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field13" {$item_integrated_search_field13} data-pageid="{$pageid}" data-field="video_viewing_time" data-fieldname="video_viewing_time" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_video_viewing_time}">
+		{$label public_lbln_course_analytics video_viewing_time }	</label>
+	<div class="r-search-option">
+		{$searchtype_video_viewing_time}
+	</div>
+	<div class="r-search-field">
+		{$video_viewing_time_editcontrol}	</div>
+	<div class="r-search-field">
+		{$video_viewing_time_editcontrol1}
+	</div>
+	
+</div>
+
+{END video_viewing_time_fieldblock}
+											
+{BEGIN fetched_at_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_fetched_at}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="fetched_at{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field14" {$item_integrated_search_field14} data-pageid="{$pageid}" data-field="fetched_at" data-fieldname="fetched_at" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_fetched_at}">
+		{$label public_lbln_course_analytics fetched_at }	</label>
+	<div class="r-search-option">
+		{$searchtype_fetched_at}
+	</div>
+	<div class="r-search-field">
+		{$fetched_at_editcontrol}	</div>
+	<div class="r-search-field">
+		{$fetched_at_editcontrol1}
+	</div>
+	
+</div>
+
+{END fetched_at_fieldblock}
+											
+{BEGIN analytics_date_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_analytics_date}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="analytics_date{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field15" {$item_integrated_search_field15} data-pageid="{$pageid}" data-field="analytics_date" data-fieldname="analytics_date" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_analytics_date}">
+		{$label public_lbln_course_analytics analytics_date }	</label>
+	<div class="r-search-option">
+		{$searchtype_analytics_date}
+	</div>
+	<div class="r-search-field">
+		{$analytics_date_editcontrol}	</div>
+	<div class="r-search-field">
+		{$analytics_date_editcontrol1}
+	</div>
+	
+</div>
+
+{END analytics_date_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c3}
+								</tr>
+			</tbody></table>
+{END grid_block}
+									{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="small" {$form_below-grid} data-pageid="{$pageid}"
+		data-v-width="6"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class="			col-md-12
+	">
+	 
+		<span data-itemtype="search_search" data-itemid="search_search" {$item_search_search} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" {$searchbutton_attrs} data-page=undefined >
+							{mlang_message SEARCH}			</a>
+</span>
+	 
+		<span data-itemtype="search_reset" data-itemid="search_reset" {$item_search_reset} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$resetbutton_attrs} >
+							{mlang_message RESET}			</a>
+</span>
+	 
+		{BEGIN back_button}
+<span data-itemtype="search_back_list" data-itemid="search_back_list" {$item_search_back_list} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$backbutton_attrs} >
+							{mlang_message BACK_TO_LIST}			</a>
+</span>
+{END back_button}
+	 
+		{BEGIN cancel_button}
+<span data-itemtype="search_cancel" data-itemid="search_cancel" {$item_search_cancel} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" id="cancelButton{$id}" >
+							{mlang_message CANCEL}			</a>
+</span>
+{END cancel_button}
+	</div>					</div>
+	</div>		
+{END below-grid_block}
+			</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

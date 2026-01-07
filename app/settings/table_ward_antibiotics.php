@@ -75,7 +75,8 @@ $runnerTableSettings['public.ward_antibiotics'] = array(
 	ward_round_id,
 	antibiotic_id,
 	created_at
-FROM "public".ward_antibiotics',
+FROM
+	"public".ward_antibiotics',
 	'keyFields' => array( 
 		'ward_antibiotic_id' 
 	),
@@ -271,7 +272,8 @@ FROM "public".ward_antibiotics',
 	ward_round_id,
 	antibiotic_id,
 	created_at
-FROM "public".ward_antibiotics',
+FROM
+	"public".ward_antibiotics',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -438,7 +440,8 @@ FROM "public".ward_antibiotics',
 	ward_round_id,
 	antibiotic_id,
 	created_at',
-		'fromListSql' => 'FROM "public".ward_antibiotics',
+		'fromListSql' => 'FROM
+	"public".ward_antibiotics',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

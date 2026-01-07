@@ -73,7 +73,8 @@ $runnerTableSettings['public.months'] = array(
 	'sql' => 'SELECT
 	id,
 	"month"
-FROM "public".months',
+FROM
+	"public".months',
 	'keyFields' => array( 
 		'id' 
 	),
@@ -163,7 +164,8 @@ FROM "public".months',
 		'sql' => 'SELECT
 	id,
 	"month"
-FROM "public".months',
+FROM
+	"public".months',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -282,7 +284,8 @@ FROM "public".months',
 		'headSql' => 'SELECT',
 		'fieldListSql' => 'id,
 	"month"',
-		'fromListSql' => 'FROM "public".months',
+		'fromListSql' => 'FROM
+	"public".months',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

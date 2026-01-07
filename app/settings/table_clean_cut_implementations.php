@@ -88,7 +88,8 @@ $runnerTableSettings['public.clean_cut_implementations'] = array(
 	remarks,
 	created_at,
 	updated_at
-FROM "public".clean_cut_implementations',
+FROM
+	"public".clean_cut_implementations',
 	'keyFields' => array( 
 		'implementation_id' 
 	),
@@ -768,7 +769,8 @@ FROM "public".clean_cut_implementations',
 	remarks,
 	created_at,
 	updated_at
-FROM "public".clean_cut_implementations',
+FROM
+	"public".clean_cut_implementations',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -1247,7 +1249,8 @@ FROM "public".clean_cut_implementations',
 	remarks,
 	created_at,
 	updated_at',
-		'fromListSql' => 'FROM "public".clean_cut_implementations',
+		'fromListSql' => 'FROM
+	"public".clean_cut_implementations',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

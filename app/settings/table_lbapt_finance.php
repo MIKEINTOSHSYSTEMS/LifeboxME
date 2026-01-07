@@ -89,7 +89,8 @@ $runnerTableSettings['public.lbapt_finance'] = array(
 	notes,
 	created_at,
 	updated_at
-FROM "public".lbapt_finance',
+FROM
+	"public".lbapt_finance',
 	'keyFields' => array( 
 		'finance_id' 
 	),
@@ -796,7 +797,8 @@ FROM "public".lbapt_finance',
 	notes,
 	created_at,
 	updated_at
-FROM "public".lbapt_finance',
+FROM
+	"public".lbapt_finance',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -1275,7 +1277,8 @@ FROM "public".lbapt_finance',
 	notes,
 	created_at,
 	updated_at',
-		'fromListSql' => 'FROM "public".lbapt_finance',
+		'fromListSql' => 'FROM
+	"public".lbapt_finance',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),

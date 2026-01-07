@@ -336,6 +336,27 @@ $runnerProjectSettings = array(
 		),
 		'public.lbpmi_indicator_groups' => array(
 			'table' => 4799 
+		),
+		'LBLN_Courses' => array(
+			'table' => 9883 
+		),
+		'public.lbln_course_analytics' => array(
+			'table' => 9999 
+		),
+		'public.lbln_course_users' => array(
+			'table' => 10062 
+		),
+		'public.lbln_courses' => array(
+			'table' => 10184 
+		),
+		'public.lbln_fetch_logs' => array(
+			'table' => 10283 
+		),
+		'public.lbln_fetch_sessions' => array(
+			'table' => 10340 
+		),
+		'Lifbox_Learning_Network_API_Fetcher' => array(
+			'table' => 10452 
 		) 
 	),
 	'customTemplates' => array( 
@@ -2948,6 +2969,90 @@ $runnerProjectSettings = array(
 			'connId' => 'lifebox_mesystem_at_localhost',
 			'color' => 'CD853F',
 			'originalTable' => 'public.lbpmi_indicator_groups' 
+		),
+		'LBLN_Courses' => array(
+			'gid' => 9883,
+			'name' => 'LBLN_Courses',
+			'shortName' => 'LBLN_Courses',
+			'type' => 7,
+			'caption' => array(
+				'English' => 'LBLN_Courses' 
+			),
+			'connId' => 'rest1',
+			'color' => 'dc143c',
+			'originalTable' => '' 
+		),
+		'public.lbln_course_analytics' => array(
+			'gid' => 9999,
+			'name' => 'public.lbln_course_analytics',
+			'shortName' => 'lbln_course_analytics',
+			'type' => 0,
+			'caption' => array(
+				'English' => 'Lbln Course Analytics' 
+			),
+			'connId' => 'lifebox_mesystem_at_localhost',
+			'color' => '3cb371',
+			'originalTable' => 'public.lbln_course_analytics' 
+		),
+		'public.lbln_course_users' => array(
+			'gid' => 10062,
+			'name' => 'public.lbln_course_users',
+			'shortName' => 'lbln_course_users',
+			'type' => 0,
+			'caption' => array(
+				'English' => 'Lbln Course Users' 
+			),
+			'connId' => 'lifebox_mesystem_at_localhost',
+			'color' => '9acd32',
+			'originalTable' => 'public.lbln_course_users' 
+		),
+		'public.lbln_courses' => array(
+			'gid' => 10184,
+			'name' => 'public.lbln_courses',
+			'shortName' => 'lbln_courses',
+			'type' => 0,
+			'caption' => array(
+				'English' => 'Lbln Courses' 
+			),
+			'connId' => 'lifebox_mesystem_at_localhost',
+			'color' => '4682b4',
+			'originalTable' => 'public.lbln_courses' 
+		),
+		'public.lbln_fetch_logs' => array(
+			'gid' => 10283,
+			'name' => 'public.lbln_fetch_logs',
+			'shortName' => 'lbln_fetch_logs',
+			'type' => 0,
+			'caption' => array(
+				'English' => 'Lbln Fetch Logs' 
+			),
+			'connId' => 'lifebox_mesystem_at_localhost',
+			'color' => '778899',
+			'originalTable' => 'public.lbln_fetch_logs' 
+		),
+		'public.lbln_fetch_sessions' => array(
+			'gid' => 10340,
+			'name' => 'public.lbln_fetch_sessions',
+			'shortName' => 'lbln_fetch_sessions',
+			'type' => 0,
+			'caption' => array(
+				'English' => 'Lbln Fetch Sessions' 
+			),
+			'connId' => 'lifebox_mesystem_at_localhost',
+			'color' => 'd2af80',
+			'originalTable' => 'public.lbln_fetch_sessions' 
+		),
+		'Lifbox_Learning_Network_API_Fetcher' => array(
+			'gid' => 10452,
+			'name' => 'Lifbox_Learning_Network_API_Fetcher',
+			'shortName' => 'Lifbox_Learning_Network_API_Fetcher',
+			'type' => 6,
+			'caption' => array(
+				'English' => 'Lifbox_Learning_Network_API_Fetcher' 
+			),
+			'connId' => 'lifebox_mesystem_at_localhost',
+			'color' => '9acd32',
+			'originalTable' => '' 
 		) 
 	),
 	'tablesByShort' => array(
@@ -3055,7 +3160,14 @@ $runnerProjectSettings = array(
 		'lbpmi_aggregation_type' => 'public.lbpmi_aggregation_type',
 		'lbpmi_domain_type' => 'public.lbpmi_domain_type',
 		'lbpmi_indicator_types' => 'public.lbpmi_indicator_types',
-		'lbpmi_indicator_groups' => 'public.lbpmi_indicator_groups' 
+		'lbpmi_indicator_groups' => 'public.lbpmi_indicator_groups',
+		'LBLN_Courses' => 'LBLN_Courses',
+		'lbln_course_analytics' => 'public.lbln_course_analytics',
+		'lbln_course_users' => 'public.lbln_course_users',
+		'lbln_courses' => 'public.lbln_courses',
+		'lbln_fetch_logs' => 'public.lbln_fetch_logs',
+		'lbln_fetch_sessions' => 'public.lbln_fetch_sessions',
+		'Lifbox_Learning_Network_API_Fetcher' => 'Lifbox_Learning_Network_API_Fetcher' 
 	),
 	'tablesByGood' => array(
 		'public_antibiotics' => 'public.antibiotics',
@@ -3162,7 +3274,14 @@ $runnerProjectSettings = array(
 		'public_lbpmi_aggregation_type' => 'public.lbpmi_aggregation_type',
 		'public_lbpmi_domain_type' => 'public.lbpmi_domain_type',
 		'public_lbpmi_indicator_types' => 'public.lbpmi_indicator_types',
-		'public_lbpmi_indicator_groups' => 'public.lbpmi_indicator_groups' 
+		'public_lbpmi_indicator_groups' => 'public.lbpmi_indicator_groups',
+		'LBLN_Courses' => 'LBLN_Courses',
+		'public_lbln_course_analytics' => 'public.lbln_course_analytics',
+		'public_lbln_course_users' => 'public.lbln_course_users',
+		'public_lbln_courses' => 'public.lbln_courses',
+		'public_lbln_fetch_logs' => 'public.lbln_fetch_logs',
+		'public_lbln_fetch_sessions' => 'public.lbln_fetch_sessions',
+		'Lifbox_Learning_Network_API_Fetcher' => 'Lifbox_Learning_Network_API_Fetcher' 
 	),
 	'events' => array( 
 		array(
@@ -3198,7 +3317,7 @@ $runnerProjectSettings = array(
 		'table' => 'public.lifeboxme_settings' 
 	),
 	'wizardBuild' => '43785',
-	'projectBuild' => 'aFN1hwVzGdn5',
+	'projectBuild' => 'ksYXKZysZoxC',
 	'projectTheme' => 'flatly',
 	'projectSize' => 'normal',
 	'customErrorMsg' => array(

@@ -89,7 +89,8 @@ $runnerTableSettings['public.lbapt_hr'] = array(
 	notes,
 	created_at,
 	updated_at
-FROM "public".lbapt_hr',
+FROM
+	"public".lbapt_hr',
 	'keyFields' => array( 
 		'hr_id' 
 	),
@@ -796,7 +797,8 @@ FROM "public".lbapt_hr',
 	notes,
 	created_at,
 	updated_at
-FROM "public".lbapt_hr',
+FROM
+	"public".lbapt_hr',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -1275,7 +1277,8 @@ FROM "public".lbapt_hr',
 	notes,
 	created_at,
 	updated_at',
-		'fromListSql' => 'FROM "public".lbapt_hr',
+		'fromListSql' => 'FROM
+	"public".lbapt_hr',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),
