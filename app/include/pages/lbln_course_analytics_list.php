@@ -1636,10 +1636,19 @@
 					'section' => '',
 					'cells' => array( 
 						array(
-							'cell' => 'c4' 
+							'cell' => 'c3' 
 						),
 						array(
 							'cell' => 'c5' 
+						) 
+					) 
+				),
+				array(
+					'section' => '',
+					'cells' => array( 
+						array(
+							'cell' => 'c4',
+							'colspan' => 2 
 						) 
 					) 
 				) 
@@ -1669,6 +1678,12 @@
 					'model' => 'c1',
 					'items' => array( 
 						'filter_panel' 
+					) 
+				),
+				'c3' => array(
+					'model' => 'c1',
+					'items' => array( 
+						 
 					) 
 				),
 				'c5' => array(

@@ -287,6 +287,12 @@ pdfDocument = {
 			"text": [
 		
 				
+			{"text":"","hidden":"{$item_hide_prev}"},
+				
+				
+			{"text":"","hidden":"{$item_hide_next}"},
+				
+				
 			{"text":""},
 				
 		  ],

@@ -1889,7 +1889,7 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'middle_name' => 'Middle Name',
 		'last_name' => 'Last Name',
 		'subscribed_for_marketing_emails' => 'Subscribed For Marketing Emails',
-		'eu_customer' => 'Eu Customer',
+		'eu_customer' => 'EU Customer',
 		'is_admin' => 'Is Admin',
 		'is_instructor' => 'Is Instructor',
 		'is_suspended' => 'Is Suspended',

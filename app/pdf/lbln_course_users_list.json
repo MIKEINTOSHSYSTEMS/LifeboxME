@@ -352,7 +352,7 @@ pdfDocument = {
 											],
 						[
 																{
-	cellId: 'c',
+	cellId: 'c3',
 	col:0,
 	row:0,
 			
@@ -364,10 +364,8 @@ pdfDocument = {
 	
 			"text": [
 		
-				
-			{"text":"","hidden":"{$item_hide_filter_panel}"},
-				
-		  ],
+				'',
+	  ],
   "border": [ false, false, false, false ],
               "alignment": 'left',
      
@@ -375,7 +373,7 @@ pdfDocument = {
       },
 
 																							{
-	cellId: 'c3',
+	cellId: 'c5',
 	col:0,
 	row:0,
 			
@@ -396,6 +394,39 @@ pdfDocument = {
       },
 
 											],
+						[
+																{
+	cellId: 'c',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+					colSpan: 2,
+		
+			
+			
+	
+			"text": [
+		
+				
+			{"text":"","hidden":"{$item_hide_filter_panel}"},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+																		{ 
+				cellId: 'c',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+							],
 		
 		]
 	}

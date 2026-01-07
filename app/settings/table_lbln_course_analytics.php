@@ -1006,7 +1006,7 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'videos' => 'Videos',
 		'learning_units' => 'Learning Units',
 		'video_time' => 'Video Time',
-		'avg_score_rate' => 'Avg Score Rate',
+		'avg_score_rate' => 'Avg Score Rate (%)',
 		'success_rate' => 'Success Rate',
 		'total_study_time' => 'Total Study Time',
 		'avg_time_to_finish' => 'Avg Time To Finish',

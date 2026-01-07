@@ -99,6 +99,8 @@
 				'below-grid' => array( 
 					'view_back_list',
 					'view_close',
+					'prev',
+					'next',
 					'hamburger' 
 				),
 				'top' => array( 
@@ -131,6 +133,8 @@
 			'itemForms' => array(
 				'view_back_list' => 'below-grid',
 				'view_close' => 'below-grid',
+				'prev' => 'below-grid',
+				'next' => 'below-grid',
 				'hamburger' => 'below-grid',
 				'view_header' => 'top',
 				'integrated_edit_field' => 'grid',
@@ -250,6 +254,12 @@
 			),
 			'hamburger' => array( 
 				'hamburger' 
+			),
+			'next' => array( 
+				'next' 
+			),
+			'prev' => array( 
+				'prev' 
 			) 
 		),
 		'cellMaps' => array(
@@ -331,7 +341,7 @@
 	'misc' => array(
 		'type' => 'view',
 		'breadcrumb' => false,
-		'nextPrev' => false 
+		'nextPrev' => true 
 	),
 	'events' => array(
 		'maps' => array( 
@@ -404,6 +414,8 @@
 				'c2' => array(
 					'model' => 'c2',
 					'items' => array( 
+						'prev',
+						'next',
 						'hamburger' 
 					) 
 				) 
@@ -576,6 +588,12 @@
 			'items' => array( 
 				 
 			) 
+		),
+		'next' => array(
+			'type' => 'next' 
+		),
+		'prev' => array(
+			'type' => 'prev' 
 		) 
 	),
 	'dbProps' => array(

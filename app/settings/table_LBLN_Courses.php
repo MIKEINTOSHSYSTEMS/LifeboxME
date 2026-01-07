@@ -47,6 +47,7 @@ $runnerTableSettings['public.lbln_courses'] = array(
 	'afterEditDetails' => 'public.lbln_courses',
 	'afterAddDetail' => 'public.lbln_courses',
 	'detailsBadgeColor' => '4682b4',
+	'displayLoading' => true,
 	'sql' => 'SELECT
 	data_id,
 	course_id,
@@ -73,7 +74,8 @@ $runnerTableSettings['public.lbln_courses'] = array(
 	last_updated,
 	is_active
 FROM
-	"public".lbln_courses',
+	"public".lbln_courses
+',
 	'keyFields' => array( 
 		'data_id' 
 	),
@@ -592,7 +594,8 @@ FROM
 	last_updated,
 	is_active
 FROM
-	"public".lbln_courses',
+	"public".lbln_courses
+',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -1397,7 +1400,7 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'type' => 'Type',
 		'categories' => 'Categories',
 		'description' => 'Description',
-		'name' => 'Language',
+		'name' => 'Languages',
 		'image' => 'Image',
 		'course_image' => 'Course Image',
 		'original_price' => 'Original Price',

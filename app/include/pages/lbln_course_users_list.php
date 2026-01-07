@@ -3004,10 +3004,19 @@
 					'section' => '',
 					'cells' => array( 
 						array(
-							'cell' => 'c' 
+							'cell' => 'c3' 
 						),
 						array(
-							'cell' => 'c3' 
+							'cell' => 'c5' 
+						) 
+					) 
+				),
+				array(
+					'section' => '',
+					'cells' => array( 
+						array(
+							'cell' => 'c',
+							'colspan' => 2 
 						) 
 					) 
 				) 
@@ -3033,16 +3042,22 @@
 						'filter_panel' 
 					) 
 				),
-				'c3' => array(
-					'model' => 'c2',
-					'items' => array( 
-						 
-					) 
-				),
 				'c4' => array(
 					'model' => 'c1',
 					'items' => array( 
 						'search_panel' 
+					) 
+				),
+				'c3' => array(
+					'model' => 'c1',
+					'items' => array( 
+						 
+					) 
+				),
+				'c5' => array(
+					'model' => 'c2',
+					'items' => array( 
+						 
 					) 
 				) 
 			),

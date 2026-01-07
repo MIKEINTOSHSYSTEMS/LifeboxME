@@ -2331,6 +2331,15 @@
 			'modelId' => 'list-above-grid',
 			'grid' => array( 
 				array(
+					'section' => '',
+					'cells' => array( 
+						array(
+							'cell' => 'c3',
+							'colspan' => 2 
+						) 
+					) 
+				),
+				array(
 					'cells' => array( 
 						array(
 							'cell' => 'c1' 
@@ -2345,8 +2354,10 @@
 					'section' => '',
 					'cells' => array( 
 						array(
-							'cell' => 'c4',
-							'colspan' => 2 
+							'cell' => 'c4' 
+						),
+						array(
+							'cell' => 'c6' 
 						) 
 					) 
 				),
@@ -2381,10 +2392,22 @@
 						'filter_panel' 
 					) 
 				),
-				'c4' => array(
+				'c3' => array(
 					'model' => 'c1',
 					'items' => array( 
 						'search_panel' 
+					) 
+				),
+				'c4' => array(
+					'model' => 'c1',
+					'items' => array( 
+						 
+					) 
+				),
+				'c6' => array(
+					'model' => 'c2',
+					'items' => array( 
+						 
 					) 
 				) 
 			),
