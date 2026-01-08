@@ -3070,9 +3070,11 @@ $courseAnalytics = getCourseAnalyticsSummary();
                 <button class="btn btn-secondary" onclick="showModal('logs-modal')">
                     <i class="fas fa-history"></i> View All Logs
                 </button>
+                <!--
                 <button class="btn btn-info" onclick="refreshSelectedCourseAnalytics()">
                     <i class="fas fa-sync-alt"></i> Refresh Selected Course Analytics
                 </button>
+                -->
             </div>
         </div>
 
@@ -3294,6 +3296,9 @@ $courseAnalytics = getCourseAnalyticsSummary();
 
                 <!-- Course Selection Tab -->
                 <div id="users-select" class="tab-content active">
+                    <button class="btn btn-info" onclick="refreshSelectedCourseAnalytics()">
+                        <i class="fas fa-sync-alt"></i> Refresh Selected Course Analytics
+                    </button>
                     <div class="alert alert-info">
                         <i class="fas fa-info-circle"></i> Select specific courses to fetch users from.
                         You can see how many students are enrolled per course before fetching.
