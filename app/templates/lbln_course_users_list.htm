@@ -470,7 +470,33 @@
 				<span class="rnr-searchcontrol">{$searchcontrol1}</span>
 		</div>
 		{END searchCtrlBlock}
-																		{BEGIN searchCtrlBlock_data_id}
+																		{BEGIN searchCtrlBlock_course_title}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_course_title}" {$filterRow_attrs_course_title}>
+			<label>{$label public_lbln_course_users course_title }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_course_title}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_course_title}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_course_title}</span>
+						</div>
+		{END searchCtrlBlock_course_title}
+																{BEGIN searchCtrlBlock_username}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_username}" {$filterRow_attrs_username}>
+			<label>{$label public_lbln_course_users username }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_username}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_username}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_username}</span>
+						</div>
+		{END searchCtrlBlock_username}
+																{BEGIN searchCtrlBlock_data_id}
 
 
 		<div class="form-group srchPanelRow {$filterRow_class_data_id}" {$filterRow_attrs_data_id}>
@@ -860,19 +886,6 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_first_name}</span>
 						</div>
 		{END searchCtrlBlock_first_name}
-																{BEGIN searchCtrlBlock_username}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_username}" {$filterRow_attrs_username}>
-			<label>{$label public_lbln_course_users username }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_username}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_username}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_username}</span>
-						</div>
-		{END searchCtrlBlock_username}
 																{BEGIN searchCtrlBlock_email}
 
 
@@ -899,19 +912,6 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_user_id}</span>
 						</div>
 		{END searchCtrlBlock_user_id}
-																{BEGIN searchCtrlBlock_course_title}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_course_title}" {$filterRow_attrs_course_title}>
-			<label>{$label public_lbln_course_users course_title }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_course_title}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_course_title}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_course_title}</span>
-						</div>
-		{END searchCtrlBlock_course_title}
 																{BEGIN searchCtrlBlock_course_id}
 
 
@@ -1101,6 +1101,14 @@
 		<li class=" filter-values filter-values-course_title  {$visibilityClass_course_title}">
 			{$course_title_filter}
 						
+					
+					
+					
+					
+					
+					
+					
+					
 					</li>
 		{END filterCtrlBlock_course_title}
 
@@ -1123,6 +1131,428 @@
 	</div>
 
 {END filter_control_course_title}
+
+
+
+
+
+
+{BEGIN filter_control_role_name}
+
+	<div class="dropdown filter-field filter-role_name-container" {BEGIN filter_selected_role_name} data-selected {END filter_selected_role_name}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-role_name" type="checkbox" name="selectAll" {$selectAll_attrs_role_name} />
+						{BEGIN clearLink_role_name}
+			<a href="#" class="filter-clear filter-clear-role_name" title="{mlang_message FILTER_CLEAR}">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_role_name}
+			<span class="r-filter-field">{$label public_lbln_course_users role_name }				{BEGIN filter_selected_role_name}:{END filter_selected_role_name}
+			</span>
+			{BEGIN filter_selected_role_name}
+			<span class="r-filter-value">{$filtervalue_role_name}</span>
+			{END filter_selected_role_name}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_role_name}
+		<li class=" filter-values filter-values-role_name  {$visibilityClass_role_name}">
+			{$role_name_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_role_name}
+
+			{BEGIN filter_button_showmore_role_name}
+		<li class=" filter-show-more {$collapsedClass_role_name} {$showMoreBtnClass_role_name}">
+			<a class="filter-show-more-link filterShowMore_role_name" href="#">{$show_n_more_role_name}</a>
+		</li>
+		{END filter_button_showmore_role_name}
+	
+
+
+	
+
+			{BEGIN filter_button_multiselect_role_name}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_role_name}">
+			<a href="#" class="filter-role_name-btn-multiselect filter-apply-role_name" {$filterbutton_attrs_role_name}>{mlang_message FILTER_MULTISELECT}</a>
+		</li>
+		{END filter_button_multiselect_role_name}
+			</ul>
+	</div>
+
+{END filter_control_role_name}
+
+
+
+
+
+
+{BEGIN filter_control_is_suspended}
+
+	<div class="dropdown filter-field filter-is_suspended-container" {BEGIN filter_selected_is_suspended} data-selected {END filter_selected_is_suspended}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_is_suspended}
+			<a href="#" class="filter-clear filter-clear-is_suspended" title="{mlang_message FILTER_CLEAR}">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_is_suspended}
+			<span class="r-filter-field">{$label public_lbln_course_users is_suspended }				{BEGIN filter_selected_is_suspended}:{END filter_selected_is_suspended}
+			</span>
+			{BEGIN filter_selected_is_suspended}
+			<span class="r-filter-value">{$filtervalue_is_suspended}</span>
+			{END filter_selected_is_suspended}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_is_suspended}
+		<li class=" filter-values filter-values-is_suspended  {$visibilityClass_is_suspended}">
+			{$is_suspended_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_is_suspended}
+
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_is_suspended}
+
+
+
+
+
+
+{BEGIN filter_control_is_instructor}
+
+	<div class="dropdown filter-field filter-is_instructor-container" {BEGIN filter_selected_is_instructor} data-selected {END filter_selected_is_instructor}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_is_instructor}
+			<a href="#" class="filter-clear filter-clear-is_instructor" title="{mlang_message FILTER_CLEAR}">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_is_instructor}
+			<span class="r-filter-field">{$label public_lbln_course_users is_instructor }				{BEGIN filter_selected_is_instructor}:{END filter_selected_is_instructor}
+			</span>
+			{BEGIN filter_selected_is_instructor}
+			<span class="r-filter-value">{$filtervalue_is_instructor}</span>
+			{END filter_selected_is_instructor}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_is_instructor}
+		<li class=" filter-values filter-values-is_instructor  {$visibilityClass_is_instructor}">
+			{$is_instructor_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_is_instructor}
+
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_is_instructor}
+
+
+
+
+
+
+{BEGIN filter_control_is_admin}
+
+	<div class="dropdown filter-field filter-is_admin-container" {BEGIN filter_selected_is_admin} data-selected {END filter_selected_is_admin}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_is_admin}
+			<a href="#" class="filter-clear filter-clear-is_admin" title="{mlang_message FILTER_CLEAR}">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_is_admin}
+			<span class="r-filter-field">{$label public_lbln_course_users is_admin }				{BEGIN filter_selected_is_admin}:{END filter_selected_is_admin}
+			</span>
+			{BEGIN filter_selected_is_admin}
+			<span class="r-filter-value">{$filtervalue_is_admin}</span>
+			{END filter_selected_is_admin}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_is_admin}
+		<li class=" filter-values filter-values-is_admin  {$visibilityClass_is_admin}">
+			{$is_admin_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_is_admin}
+
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_is_admin}
+
+
+
+
+
+
+{BEGIN filter_control_fc_country}
+
+	<div class="dropdown filter-field filter-fc_country-container" {BEGIN filter_selected_fc_country} data-selected {END filter_selected_fc_country}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-fc_country" type="checkbox" name="selectAll" {$selectAll_attrs_fc_country} />
+						{BEGIN clearLink_fc_country}
+			<a href="#" class="filter-clear filter-clear-fc_country" title="{mlang_message FILTER_CLEAR}">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_fc_country}
+			<span class="r-filter-field">{$label public_lbln_course_users fc_country }				{BEGIN filter_selected_fc_country}:{END filter_selected_fc_country}
+			</span>
+			{BEGIN filter_selected_fc_country}
+			<span class="r-filter-value">{$filtervalue_fc_country}</span>
+			{END filter_selected_fc_country}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_fc_country}
+		<li class=" filter-values filter-values-fc_country  {$visibilityClass_fc_country}">
+			{$fc_country_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_fc_country}
+
+			{BEGIN filter_button_showmore_fc_country}
+		<li class=" filter-show-more {$collapsedClass_fc_country} {$showMoreBtnClass_fc_country}">
+			<a class="filter-show-more-link filterShowMore_fc_country" href="#">{$show_n_more_fc_country}</a>
+		</li>
+		{END filter_button_showmore_fc_country}
+	
+
+
+	
+
+			{BEGIN filter_button_multiselect_fc_country}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_fc_country}">
+			<a href="#" class="filter-fc_country-btn-multiselect filter-apply-fc_country" {$filterbutton_attrs_fc_country}>{mlang_message FILTER_MULTISELECT}</a>
+		</li>
+		{END filter_button_multiselect_fc_country}
+			</ul>
+	</div>
+
+{END filter_control_fc_country}
+
+
+
+
+
+
+{BEGIN filter_control_lc_country}
+
+	<div class="dropdown filter-field filter-lc_country-container" {BEGIN filter_selected_lc_country} data-selected {END filter_selected_lc_country}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-lc_country" type="checkbox" name="selectAll" {$selectAll_attrs_lc_country} />
+						{BEGIN clearLink_lc_country}
+			<a href="#" class="filter-clear filter-clear-lc_country" title="{mlang_message FILTER_CLEAR}">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_lc_country}
+			<span class="r-filter-field">{$label public_lbln_course_users lc_country }				{BEGIN filter_selected_lc_country}:{END filter_selected_lc_country}
+			</span>
+			{BEGIN filter_selected_lc_country}
+			<span class="r-filter-value">{$filtervalue_lc_country}</span>
+			{END filter_selected_lc_country}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_lc_country}
+		<li class=" filter-values filter-values-lc_country  {$visibilityClass_lc_country}">
+			{$lc_country_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_lc_country}
+
+			{BEGIN filter_button_showmore_lc_country}
+		<li class=" filter-show-more {$collapsedClass_lc_country} {$showMoreBtnClass_lc_country}">
+			<a class="filter-show-more-link filterShowMore_lc_country" href="#">{$show_n_more_lc_country}</a>
+		</li>
+		{END filter_button_showmore_lc_country}
+	
+
+
+	
+
+			{BEGIN filter_button_multiselect_lc_country}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_lc_country}">
+			<a href="#" class="filter-lc_country-btn-multiselect filter-apply-lc_country" {$filterbutton_attrs_lc_country}>{mlang_message FILTER_MULTISELECT}</a>
+		</li>
+		{END filter_button_multiselect_lc_country}
+			</ul>
+	</div>
+
+{END filter_control_lc_country}
+
+
+
+
+
+
+{BEGIN filter_control_eu_customer}
+
+	<div class="dropdown filter-field filter-eu_customer-container" {BEGIN filter_selected_eu_customer} data-selected {END filter_selected_eu_customer}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_eu_customer}
+			<a href="#" class="filter-clear filter-clear-eu_customer" title="{mlang_message FILTER_CLEAR}">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_eu_customer}
+			<span class="r-filter-field">{$label public_lbln_course_users eu_customer }				{BEGIN filter_selected_eu_customer}:{END filter_selected_eu_customer}
+			</span>
+			{BEGIN filter_selected_eu_customer}
+			<span class="r-filter-value">{$filtervalue_eu_customer}</span>
+			{END filter_selected_eu_customer}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_eu_customer}
+		<li class=" filter-values filter-values-eu_customer  {$visibilityClass_eu_customer}">
+			{$eu_customer_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_eu_customer}
+
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_eu_customer}
+
+
+
+
+
+
+{BEGIN filter_control_email_verification_status}
+
+	<div class="dropdown filter-field filter-email_verification_status-container" {BEGIN filter_selected_email_verification_status} data-selected {END filter_selected_email_verification_status}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_email_verification_status}
+			<a href="#" class="filter-clear filter-clear-email_verification_status" title="{mlang_message FILTER_CLEAR}">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_email_verification_status}
+			<span class="r-filter-field">{$label public_lbln_course_users email_verification_status }				{BEGIN filter_selected_email_verification_status}:{END filter_selected_email_verification_status}
+			</span>
+			{BEGIN filter_selected_email_verification_status}
+			<span class="r-filter-value">{$filtervalue_email_verification_status}</span>
+			{END filter_selected_email_verification_status}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_email_verification_status}
+		<li class=" filter-values filter-values-email_verification_status  {$visibilityClass_email_verification_status}">
+			{$email_verification_status_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_email_verification_status}
+
+			{BEGIN filter_button_showmore_email_verification_status}
+		<li class=" filter-show-more {$collapsedClass_email_verification_status} {$showMoreBtnClass_email_verification_status}">
+			<a class="filter-show-more-link filterShowMore_email_verification_status" href="#">{$show_n_more_email_verification_status}</a>
+		</li>
+		{END filter_button_showmore_email_verification_status}
+	
+
+
+	
+
+			</ul>
+	</div>
+
+{END filter_control_email_verification_status}
 
 
 

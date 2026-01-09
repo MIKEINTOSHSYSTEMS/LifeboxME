@@ -18,6 +18,9 @@
 		),
 		'updated_at' => array(
 			'totalsType' => '' 
+		),
+		'country_code' => array(
+			'totalsType' => '' 
 		) 
 	),
 	'fields' => array(
@@ -27,7 +30,8 @@
 			'region_id',
 			'iso_code',
 			'created_at',
-			'updated_at' 
+			'updated_at',
+			'country_code' 
 		),
 		'exportFields' => array( 
 			'country_id',
@@ -35,7 +39,8 @@
 			'region_id',
 			'iso_code',
 			'created_at',
-			'updated_at' 
+			'updated_at',
+			'country_code' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -61,6 +66,9 @@
 			),
 			'updated_at' => array( 
 				'export_field5' 
+			),
+			'country_code' => array( 
+				'export_field6' 
 			) 
 		) 
 	),
@@ -85,7 +93,8 @@
 					'export_field2',
 					'export_field3',
 					'export_field4',
-					'export_field5' 
+					'export_field5',
+					'export_field6' 
 				),
 				'footer' => array( 
 					'export_export',
@@ -105,6 +114,7 @@
 				'export_field3' => 'grid',
 				'export_field4' => 'grid',
 				'export_field5' => 'grid',
+				'export_field6' => 'grid',
 				'export_export' => 'footer',
 				'export_cancel' => 'footer' 
 			),
@@ -131,7 +141,8 @@
 				'export_field2',
 				'export_field3',
 				'export_field4',
-				'export_field5' 
+				'export_field5',
+				'export_field6' 
 			) 
 		),
 		'cellMaps' => array(
@@ -276,7 +287,8 @@
 						'export_field2',
 						'export_field3',
 						'export_field4',
-						'export_field5' 
+						'export_field5',
+						'export_field6' 
 					) 
 				) 
 			),
@@ -353,6 +365,10 @@
 		),
 		'export_field5' => array(
 			'field' => 'updated_at',
+			'type' => 'export_field' 
+		),
+		'export_field6' => array(
+			'field' => 'country_code',
 			'type' => 'export_field' 
 		) 
 	),

@@ -23,7 +23,11 @@
 	),
 	'listSearch' => array(
 		'alwaysOnPanelFields' => array( 
-			'course_title' 
+			'course_title',
+			'username',
+			'role_name',
+			'fc_country',
+			'lc_country' 
 		),
 		'searchPanel' => true,
 		'fixedSearchPanel' => false,
@@ -179,6 +183,8 @@
 			 
 		),
 		'searchPanelFields' => array( 
+			'course_title',
+			'username',
 			'data_id',
 			'last_seen',
 			'fetched_at',
@@ -209,14 +215,20 @@
 			'last_name',
 			'middle_name',
 			'first_name',
-			'username',
 			'email',
 			'user_id',
-			'course_title',
 			'course_id' 
 		),
 		'filterFields' => array( 
-			'course_title' 
+			'course_title',
+			'is_admin',
+			'is_instructor',
+			'is_suspended',
+			'role_name',
+			'fc_country',
+			'lc_country',
+			'email_verification_status',
+			'eu_customer' 
 		),
 		'inlineAddFields' => array( 
 			 
@@ -1020,7 +1032,15 @@
 				'filter_panel' 
 			),
 			'filter_panel_field' => array( 
-				'filter_panel_field' 
+				'filter_panel_field',
+				'filter_panel_field1',
+				'filter_panel_field2',
+				'filter_panel_field3',
+				'filter_panel_field4',
+				'filter_panel_field5',
+				'filter_panel_field6',
+				'filter_panel_field7',
+				'filter_panel_field8' 
 			),
 			'advsearch_link' => array( 
 				'advsearch_link' 
@@ -4387,6 +4407,8 @@
 		'search_panel' => array(
 			'type' => 'search_panel',
 			'items' => array( 
+				'search_panel_field2',
+				'search_panel_field5',
 				'search_panel_field',
 				'search_panel_field34',
 				'search_panel_field33',
@@ -4417,10 +4439,8 @@
 				'search_panel_field8',
 				'search_panel_field7',
 				'search_panel_field6',
-				'search_panel_field5',
 				'search_panel_field4',
 				'search_panel_field3',
-				'search_panel_field2',
 				'search_panel_field1' 
 			),
 			'_flexiblePanel' => true 
@@ -4477,7 +4497,7 @@
 		'search_panel_field5' => array(
 			'field' => 'username',
 			'type' => 'search_panel_field',
-			'alwaysOnPanel' => false,
+			'alwaysOnPanel' => true,
 			'required' => false 
 		),
 		'search_panel_field6' => array(
@@ -4549,7 +4569,7 @@
 		'search_panel_field17' => array(
 			'field' => 'role_name',
 			'type' => 'search_panel_field',
-			'alwaysOnPanel' => false,
+			'alwaysOnPanel' => true,
 			'required' => false 
 		),
 		'search_panel_field18' => array(
@@ -4621,7 +4641,7 @@
 		'search_panel_field29' => array(
 			'field' => 'fc_country',
 			'type' => 'search_panel_field',
-			'alwaysOnPanel' => false,
+			'alwaysOnPanel' => true,
 			'required' => false 
 		),
 		'search_panel_field30' => array(
@@ -4639,7 +4659,7 @@
 		'search_panel_field32' => array(
 			'field' => 'lc_country',
 			'type' => 'search_panel_field',
-			'alwaysOnPanel' => false,
+			'alwaysOnPanel' => true,
 			'required' => false 
 		),
 		'search_panel_field33' => array(
@@ -4726,7 +4746,15 @@
 		'filter_panel' => array(
 			'type' => 'filter_panel',
 			'items' => array( 
-				'filter_panel_field' 
+				'filter_panel_field',
+				'filter_panel_field4',
+				'filter_panel_field3',
+				'filter_panel_field2',
+				'filter_panel_field1',
+				'filter_panel_field5',
+				'filter_panel_field6',
+				'filter_panel_field8',
+				'filter_panel_field7' 
 			) 
 		),
 		'filter_panel_field' => array(
@@ -4738,6 +4766,38 @@
 		),
 		'-3' => array(
 			'type' => '-' 
+		),
+		'filter_panel_field1' => array(
+			'field' => 'is_admin',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field2' => array(
+			'field' => 'is_instructor',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field3' => array(
+			'field' => 'is_suspended',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field4' => array(
+			'field' => 'role_name',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field5' => array(
+			'field' => 'fc_country',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field6' => array(
+			'field' => 'lc_country',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field7' => array(
+			'field' => 'email_verification_status',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field8' => array(
+			'field' => 'eu_customer',
+			'type' => 'filter_panel_field' 
 		),
 		'simple_grid_field' => array(
 			'field' => 'data_id',

@@ -314,7 +314,7 @@
 	'id' => 'add',
 	'type' => 'add',
 	'layoutId' => 'leftbar',
-	'disabled' => 0,
+	'disabled' => false,
 	'default' => 0,
 	'forms' => array(
 		'above-grid' => array(

@@ -485,6 +485,26 @@
 
 
 {END updated_at_fieldblock}
+											
+{BEGIN country_code_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_country_code}  r-vertical-field" 
+	data-signal-error-for="country_code{$id}" {$required_attr_country_code}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="country_code" data-fieldname="country_code" >
+
+	<label class="r-edit-label control-label {$country_code_label_class}" for="{$labelfor_country_code}">
+		{BEGIN country_code_label}
+			{$country_code_forward_control}
+			{$label public_countries country_code }			{END country_code_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$country_code_value}	</div>
+	</div>
+
+
+{END country_code_fieldblock}
 	
 								</td>
 			{END cellblock_grid_c3}

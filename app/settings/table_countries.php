@@ -68,7 +68,7 @@ $runnerTableSettings['public.countries'] = array(
 		'50',
 		'100',
 		'500',
-		'-1' 
+		'1' 
 	),
 	'pageSizeSelectorGroups' => array( 
 		'1',
@@ -77,7 +77,7 @@ $runnerTableSettings['public.countries'] = array(
 		'10',
 		'50',
 		'100',
-		'-1' 
+		'1' 
 	),
 	'warnLeavingEdit' => true,
 	'sql' => 'SELECT
@@ -85,10 +85,12 @@ $runnerTableSettings['public.countries'] = array(
 	country_name,
 	region_id,
 	iso_code,
+	UPPER(SUBSTRING(iso_code FROM 1 FOR 2)) AS country_code,
 	created_at,
 	updated_at
 FROM
-	"public".countries',
+	"public".countries
+',
 	'keyFields' => array( 
 		'country_id' 
 	),
@@ -256,7 +258,7 @@ FROM
 			'goodName' => 'created_at',
 			'strField' => 'created_at',
 			'sourceSingle' => 'created_at',
-			'index' => 5,
+			'index' => 6,
 			'type' => 135,
 			'sqlExpression' => 'created_at',
 			'viewFormats' => array(
@@ -290,7 +292,7 @@ FROM
 			'goodName' => 'updated_at',
 			'strField' => 'updated_at',
 			'sourceSingle' => 'updated_at',
-			'index' => 6,
+			'index' => 7,
 			'type' => 135,
 			'sqlExpression' => 'updated_at',
 			'viewFormats' => array(
@@ -318,6 +320,25 @@ FROM
 				'format' => 'Values list' 
 			),
 			'tableName' => 'public.countries' 
+		),
+		'country_code' => array(
+			'name' => 'country_code',
+			'goodName' => 'country_code',
+			'strField' => 'country_code',
+			'index' => 5,
+			'type' => 201,
+			'sqlExpression' => 'UPPER(SUBSTRING(iso_code FROM 1 FOR 2))',
+			'viewFormats' => array(
+				'view' => array(
+					 
+				) 
+			),
+			'editFormats' => array(
+				'edit' => array(
+					'format' => 'Text area' 
+				) 
+			),
+			'tableName' => '' 
 		) 
 	),
 	'masterTables' => array( 
@@ -347,10 +368,12 @@ FROM
 	country_name,
 	region_id,
 	iso_code,
+	UPPER(SUBSTRING(iso_code FROM 1 FOR 2)) AS country_code,
 	created_at,
 	updated_at
 FROM
-	"public".countries',
+	"public".countries
+',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -413,6 +436,28 @@ FROM
 				),
 				'encrypted' => false,
 				'columnName' => 'iso_code' 
+			),
+			array(
+				'sql' => 'UPPER(SUBSTRING(iso_code FROM 1 FOR 2))',
+				'parsed' => true,
+				'type' => 'FieldListItem',
+				'alias' => 'country_code',
+				'expression' => array(
+					'sql' => 'UPPER(SUBSTRING(iso_code FROM 1 FOR 2))',
+					'parsed' => true,
+					'type' => 'FunctionCall',
+					'arguments' => array( 
+						array(
+							'sql' => 'SUBSTRING(iso_code FROM 1 FOR 2)',
+							'parsed' => true,
+							'type' => 'NonParsedEntity' 
+						) 
+					),
+					'functionName' => 'UPPER',
+					'functionType' => 5 
+				),
+				'encrypted' => false,
+				'columnName' => 'country_code' 
 			),
 			array(
 				'sql' => 'created_at',
@@ -556,6 +601,13 @@ FROM
 				'groupByIndex' => -1,
 				'whereIndex' => -1,
 				'havingIndex' => -1 
+			),
+			array(
+				'fieldIndex' => 6,
+				'orderByIndex' => -1,
+				'groupByIndex' => -1,
+				'whereIndex' => -1,
+				'havingIndex' => -1 
 			) 
 		),
 		'headSql' => 'SELECT',
@@ -563,6 +615,7 @@ FROM
 	country_name,
 	region_id,
 	iso_code,
+	UPPER(SUBSTRING(iso_code FROM 1 FOR 2)) AS country_code,
 	created_at,
 	updated_at',
 		'fromListSql' => 'FROM
@@ -635,7 +688,8 @@ FROM
 			'region_id',
 			'iso_code',
 			'created_at',
-			'updated_at' 
+			'updated_at',
+			'country_code' 
 		),
 		'searchSuggest' => true,
 		'highlightSearchResults' => true,
@@ -647,7 +701,8 @@ FROM
 			'region_id',
 			'iso_code',
 			'created_at',
-			'updated_at' 
+			'updated_at',
+			'country_code' 
 		) 
 	),
 	'connId' => 'lifebox_mesystem_at_localhost',
@@ -704,9 +759,10 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'country_id' => 'Country Id',
 		'country_name' => 'Country Name',
 		'region_id' => 'Region Id',
-		'iso_code' => 'Iso Code',
+		'iso_code' => 'ISO Code',
 		'created_at' => 'Created At',
-		'updated_at' => 'Updated At' 
+		'updated_at' => 'Updated At',
+		'country_code' => 'Country Code' 
 	),
 	'fieldTooltips' => array(
 		'country_id' => '',
@@ -714,7 +770,8 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'region_id' => '',
 		'iso_code' => '',
 		'created_at' => '',
-		'updated_at' => '' 
+		'updated_at' => '',
+		'country_code' => '' 
 	),
 	'fieldPlaceholders' => array(
 		'country_id' => '',
@@ -722,7 +779,8 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'region_id' => '',
 		'iso_code' => '',
 		'created_at' => '',
-		'updated_at' => '' 
+		'updated_at' => '',
+		'country_code' => '' 
 	),
 	'pageTitles' => array(
 		 

@@ -7,7 +7,8 @@
 			'region_id',
 			'iso_code',
 			'created_at',
-			'updated_at' 
+			'updated_at',
+			'country_code' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -33,6 +34,9 @@
 			),
 			'updated_at' => array( 
 				'integrated_search_field5' 
+			),
+			'country_code' => array( 
+				'integrated_search_field6' 
 			) 
 		) 
 	),
@@ -63,7 +67,8 @@
 					'integrated_search_field2',
 					'integrated_search_field3',
 					'integrated_search_field4',
-					'integrated_search_field5' 
+					'integrated_search_field5',
+					'integrated_search_field6' 
 				) 
 			),
 			'formXtTags' => array(
@@ -82,7 +87,8 @@
 				'integrated_search_field2' => 'grid',
 				'integrated_search_field3' => 'grid',
 				'integrated_search_field4' => 'grid',
-				'integrated_search_field5' => 'grid' 
+				'integrated_search_field5' => 'grid',
+				'integrated_search_field6' => 'grid' 
 			),
 			'itemLocations' => array(
 				'integrated_search_field' => array(
@@ -106,6 +112,10 @@
 					'cellId' => 'c3' 
 				),
 				'integrated_search_field5' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field6' => array(
 					'location' => 'grid',
 					'cellId' => 'c3' 
 				) 
@@ -136,7 +146,8 @@
 				'integrated_search_field2',
 				'integrated_search_field3',
 				'integrated_search_field4',
-				'integrated_search_field5' 
+				'integrated_search_field5',
+				'integrated_search_field6' 
 			) 
 		),
 		'cellMaps' => array(
@@ -158,7 +169,8 @@
 							'integrated_search_field2',
 							'integrated_search_field3',
 							'integrated_search_field4',
-							'integrated_search_field5' 
+							'integrated_search_field5',
+							'integrated_search_field6' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
@@ -328,7 +340,8 @@
 						'integrated_search_field2',
 						'integrated_search_field3',
 						'integrated_search_field4',
-						'integrated_search_field5' 
+						'integrated_search_field5',
+						'integrated_search_field6' 
 					) 
 				) 
 			),
@@ -389,6 +402,11 @@
 			'type' => 'integrated_search_field',
 			'orientation' => 0,
 			'required' => false 
+		),
+		'integrated_search_field6' => array(
+			'field' => 'country_code',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
 		) 
 	),
 	'dbProps' => array(

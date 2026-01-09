@@ -91,6 +91,9 @@ pdfDocument = {
 										{BEGIN col_grid_8}
 					"%",
 					{END col_grid_8}
+										{BEGIN col_grid_9}
+					"%",
+					{END col_grid_9}
 															],
 											heights: [ // first height for header part
 					"%",
@@ -356,7 +359,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_countries country_id }","hidden":"{$item_hide_simple_grid_field6}","bold":true},
+			{"text":"{$jslabel public_countries country_id }","hidden":"{$item_hide_simple_grid_field7}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -385,7 +388,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_countries country_name }","hidden":"{$item_hide_simple_grid_field7}","bold":true},
+			{"text":"{$jslabel public_countries country_name }","hidden":"{$item_hide_simple_grid_field8}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -414,7 +417,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_countries region_id }","hidden":"{$item_hide_simple_grid_field8}","bold":true},
+			{"text":"{$jslabel public_countries region_id }","hidden":"{$item_hide_simple_grid_field9}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -443,7 +446,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_countries iso_code }","hidden":"{$item_hide_simple_grid_field9}","bold":true},
+			{"text":"{$jslabel public_countries iso_code }","hidden":"{$item_hide_simple_grid_field10}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -456,6 +459,35 @@ pdfDocument = {
 																							{BEGIN cellblock_grid_headcell_field4}
 {
 	cellId: 'headcell_field4',
+	col:0,
+	row:0,
+			fieldName: 'country_code',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_countries country_code }","hidden":"{$item_hide_simple_grid_field11}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$country_code_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field4}
+																							{BEGIN cellblock_grid_headcell_field5}
+{
+	cellId: 'headcell_field5',
 	col:0,
 	row:0,
 			fieldName: 'created_at',
@@ -472,7 +504,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_countries created_at }","hidden":"{$item_hide_simple_grid_field10}","bold":true},
+			{"text":"{$jslabel public_countries created_at }","hidden":"{$item_hide_simple_grid_field12}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -481,10 +513,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field4}
-																							{BEGIN cellblock_grid_headcell_field5}
+{END cellblock_grid_headcell_field5}
+																							{BEGIN cellblock_grid_headcell_field6}
 {
-	cellId: 'headcell_field5',
+	cellId: 'headcell_field6',
 	col:0,
 	row:0,
 			fieldName: 'updated_at',
@@ -501,7 +533,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_countries updated_at }","hidden":"{$item_hide_simple_grid_field11}","bold":true},
+			{"text":"{$jslabel public_countries updated_at }","hidden":"{$item_hide_simple_grid_field13}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -510,7 +542,7 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field5}
+{END cellblock_grid_headcell_field6}
 											],
 				{END row_grid_0}
 		
@@ -755,6 +787,35 @@ pdfDocument = {
 	cellId: 'cell_field4',
 	col:0,
 	row:0,
+			fieldName: 'country_code',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$country_code_pdfvalue},"hidden":"{$item_hide_simple_grid_field6}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$country_code_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field4}
+																							{BEGIN cellblock_grid_cell_field5}
+{
+	cellId: 'cell_field5',
+	col:0,
+	row:0,
 			fieldName: 'created_at',
 				style: 'bodycell',
 		
@@ -778,10 +839,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field4}
-																							{BEGIN cellblock_grid_cell_field5}
+{END cellblock_grid_cell_field5}
+																							{BEGIN cellblock_grid_cell_field6}
 {
-	cellId: 'cell_field5',
+	cellId: 'cell_field6',
 	col:0,
 	row:0,
 			fieldName: 'updated_at',
@@ -807,7 +868,7 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field5}
+{END cellblock_grid_cell_field6}
 											],
 				{END row_grid_1}
 						{BEGIN row_grid_2}
@@ -933,6 +994,13 @@ pdfDocument = {
 				cellId: 'cell_dpreview',
 				row:  0,
 				col:  8,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  9,
 				text: '',
 				compensateColspan: true
 			},
@@ -1179,6 +1247,32 @@ pdfDocument = {
       },
 
 {END cellblock_grid_footcell_field5}
+																							{BEGIN cellblock_grid_footcell_field6}
+{
+	cellId: 'footcell_field6',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field6}
 											],
 				{END row_grid_3}
 		

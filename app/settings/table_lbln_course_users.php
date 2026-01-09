@@ -58,8 +58,8 @@ $runnerTableSettings['public.lbln_course_users'] = array(
 	role_level,
 	role_name,
 	referrer_id,
-	created,
-	last_login,
+    to_timestamp(created)    AT TIME ZONE \'UTC\' AS created,
+    to_timestamp(last_login) AT TIME ZONE \'UTC\' AS last_login,
 	signup_approval_status,
 	email_verification_status,
 	fields,
@@ -146,7 +146,13 @@ FROM
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'format' => 'Text area' 
+					'format' => 'Lookup wizard',
+					'lookupType' => 2,
+					'lookupTable' => 'public.lbln_course_users',
+					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
+					'lookupLinkField' => 'course_title',
+					'lookupDisplayField' => 'course_title',
+					'lookupUnique' => true 
 				) 
 			),
 			'filterFormat' => array(
@@ -208,6 +214,7 @@ FROM
 					 
 				) 
 			),
+			'defaultSearchOption' => 'Contains',
 			'tableName' => 'public.lbln_course_users' 
 		),
 		'first_name' => array(
@@ -300,6 +307,18 @@ FROM
 					'format' => 'Checkbox' 
 				) 
 			),
+			'filterFormat' => array(
+				'format' => 'Options list',
+				'filterTotals' => 1,
+				'multilangCheckedMessage' => array(
+					'text' => 'True',
+					'type' => 0 
+				),
+				'multilangUncheckedMessage' => array(
+					'text' => 'False',
+					'type' => 0 
+				) 
+			),
 			'tableName' => 'public.lbln_course_users' 
 		),
 		'is_admin' => array(
@@ -317,6 +336,19 @@ FROM
 			'editFormats' => array(
 				'edit' => array(
 					'format' => 'Checkbox' 
+				) 
+			),
+			'filterFormat' => array(
+				'format' => 'Options list',
+				'filterTotals' => 1,
+				'filterMultiselect' => 1,
+				'multilangCheckedMessage' => array(
+					'text' => 'True',
+					'type' => 0 
+				),
+				'multilangUncheckedMessage' => array(
+					'text' => 'False',
+					'type' => 0 
 				) 
 			),
 			'tableName' => 'public.lbln_course_users' 
@@ -338,6 +370,19 @@ FROM
 					'format' => 'Checkbox' 
 				) 
 			),
+			'filterFormat' => array(
+				'format' => 'Options list',
+				'filterTotals' => 1,
+				'filterMultiselect' => 1,
+				'multilangCheckedMessage' => array(
+					'text' => 'True',
+					'type' => 0 
+				),
+				'multilangUncheckedMessage' => array(
+					'text' => 'False',
+					'type' => 0 
+				) 
+			),
 			'tableName' => 'public.lbln_course_users' 
 		),
 		'is_suspended' => array(
@@ -355,6 +400,19 @@ FROM
 			'editFormats' => array(
 				'edit' => array(
 					'format' => 'Checkbox' 
+				) 
+			),
+			'filterFormat' => array(
+				'format' => 'Options list',
+				'filterTotals' => 1,
+				'filterMultiselect' => 1,
+				'multilangCheckedMessage' => array(
+					'text' => 'True',
+					'type' => 0 
+				),
+				'multilangUncheckedMessage' => array(
+					'text' => 'False',
+					'type' => 0 
 				) 
 			),
 			'tableName' => 'public.lbln_course_users' 
@@ -428,8 +486,20 @@ FROM
 			),
 			'editFormats' => array(
 				'edit' => array(
-					 
+					'format' => 'Lookup wizard',
+					'lookupType' => 2,
+					'lookupTable' => 'public.lbln_course_users',
+					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
+					'lookupLinkField' => 'role_name',
+					'lookupDisplayField' => 'role_name',
+					'lookupOrderBy' => 'role_name',
+					'lookupUnique' => true 
 				) 
+			),
+			'filterFormat' => array(
+				'format' => 'Values list',
+				'filterTotals' => 1,
+				'filterMultiselect' => 1 
 			),
 			'tableName' => 'public.lbln_course_users' 
 		),
@@ -456,8 +526,8 @@ FROM
 			'goodName' => 'created',
 			'strField' => 'created',
 			'index' => 20,
-			'type' => 5,
-			'sqlExpression' => 'created',
+			'type' => 135,
+			'sqlExpression' => 'to_timestamp(created)    AT TIME ZONE \'UTC\'',
 			'viewFormats' => array(
 				'view' => array(
 					'format' => 'Number' 
@@ -468,15 +538,15 @@ FROM
 					 
 				) 
 			),
-			'tableName' => 'public.lbln_course_users' 
+			'tableName' => '' 
 		),
 		'last_login' => array(
 			'name' => 'last_login',
 			'goodName' => 'last_login',
 			'strField' => 'last_login',
 			'index' => 21,
-			'type' => 5,
-			'sqlExpression' => 'last_login',
+			'type' => 135,
+			'sqlExpression' => 'to_timestamp(last_login) AT TIME ZONE \'UTC\'',
 			'viewFormats' => array(
 				'view' => array(
 					'format' => 'Number' 
@@ -487,7 +557,7 @@ FROM
 					 
 				) 
 			),
-			'tableName' => 'public.lbln_course_users' 
+			'tableName' => '' 
 		),
 		'signup_approval_status' => array(
 			'name' => 'signup_approval_status',
@@ -652,8 +722,21 @@ FROM
 			),
 			'editFormats' => array(
 				'edit' => array(
-					 
+					'format' => 'Lookup wizard',
+					'lookupType' => 2,
+					'lookupTable' => 'public.lbln_course_users',
+					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
+					'lookupLinkField' => 'fc_country',
+					'lookupDisplayField' => 'fc_country',
+					'lookupOrderBy' => 'fc_country',
+					'lookupUnique' => true 
 				) 
+			),
+			'defaultSearchOption' => 'Contains',
+			'filterFormat' => array(
+				'format' => 'Values list',
+				'filterTotals' => 1,
+				'filterMultiselect' => 1 
 			),
 			'tableName' => 'public.lbln_course_users' 
 		),
@@ -708,8 +791,20 @@ FROM
 			),
 			'editFormats' => array(
 				'edit' => array(
-					 
+					'format' => 'Lookup wizard',
+					'lookupType' => 2,
+					'lookupTable' => 'public.lbln_course_users',
+					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
+					'lookupLinkField' => 'lc_country',
+					'lookupDisplayField' => 'lc_country',
+					'lookupOrderBy' => 'lc_country',
+					'lookupUnique' => true 
 				) 
+			),
+			'filterFormat' => array(
+				'format' => 'Values list',
+				'filterTotals' => 1,
+				'filterMultiselect' => 1 
 			),
 			'tableName' => 'public.lbln_course_users' 
 		),
@@ -786,8 +881,8 @@ FROM
 	role_level,
 	role_name,
 	referrer_id,
-	created,
-	last_login,
+    to_timestamp(created)    AT TIME ZONE \'UTC\' AS created,
+    to_timestamp(last_login) AT TIME ZONE \'UTC\' AS last_login,
 	signup_approval_status,
 	email_verification_status,
 	fields,
@@ -1094,31 +1189,27 @@ FROM
 				'columnName' => 'referrer_id' 
 			),
 			array(
-				'sql' => 'created',
+				'sql' => 'to_timestamp(created)    AT TIME ZONE \'UTC\'',
 				'parsed' => true,
 				'type' => 'FieldListItem',
-				'alias' => '',
+				'alias' => 'created',
 				'expression' => array(
-					'sql' => '',
+					'sql' => 'to_timestamp(created)    AT TIME ZONE \'UTC\'',
 					'parsed' => true,
-					'type' => 'SQLField',
-					'table' => 'public.lbln_course_users',
-					'name' => 'created' 
+					'type' => 'NonParsedEntity' 
 				),
 				'encrypted' => false,
 				'columnName' => 'created' 
 			),
 			array(
-				'sql' => 'last_login',
+				'sql' => 'to_timestamp(last_login) AT TIME ZONE \'UTC\'',
 				'parsed' => true,
 				'type' => 'FieldListItem',
-				'alias' => '',
+				'alias' => 'last_login',
 				'expression' => array(
-					'sql' => '',
+					'sql' => 'to_timestamp(last_login) AT TIME ZONE \'UTC\'',
 					'parsed' => true,
-					'type' => 'SQLField',
-					'table' => 'public.lbln_course_users',
-					'name' => 'last_login' 
+					'type' => 'NonParsedEntity' 
 				),
 				'encrypted' => false,
 				'columnName' => 'last_login' 
@@ -1699,8 +1790,8 @@ FROM
 	role_level,
 	role_name,
 	referrer_id,
-	created,
-	last_login,
+    to_timestamp(created)    AT TIME ZONE \'UTC\' AS created,
+    to_timestamp(last_login) AT TIME ZONE \'UTC\' AS last_login,
 	signup_approval_status,
 	email_verification_status,
 	fields,
@@ -1896,7 +1987,7 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'is_reporter' => 'Is Reporter',
 		'is_affiliate' => 'Is Affiliate',
 		'role_level' => 'Role Level',
-		'role_name' => 'Role Name',
+		'role_name' => 'Role',
 		'referrer_id' => 'Referrer Id',
 		'created' => 'Created',
 		'last_login' => 'Last Login',
@@ -1904,7 +1995,7 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'email_verification_status' => 'Email Verification Status',
 		'fields' => 'Fields',
 		'tags' => 'Tags',
-		'utms' => 'Utms',
+		'utms' => 'UTMS',
 		'billing_info' => 'Billing Info',
 		'nps_score' => 'Nps Score',
 		'nps_comment' => 'Nps Comment',

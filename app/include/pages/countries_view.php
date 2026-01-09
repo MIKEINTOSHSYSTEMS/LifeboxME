@@ -49,7 +49,8 @@
 			'region_id',
 			'iso_code',
 			'created_at',
-			'updated_at' 
+			'updated_at',
+			'country_code' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -75,6 +76,9 @@
 			),
 			'updated_at' => array( 
 				'integrated_edit_field5' 
+			),
+			'country_code' => array( 
+				'integrated_edit_field6' 
 			) 
 		) 
 	),
@@ -115,7 +119,8 @@
 					'integrated_edit_field2',
 					'integrated_edit_field3',
 					'integrated_edit_field4',
-					'integrated_edit_field5' 
+					'integrated_edit_field5',
+					'integrated_edit_field6' 
 				) 
 			),
 			'formXtTags' => array(
@@ -140,7 +145,8 @@
 				'integrated_edit_field2' => 'grid',
 				'integrated_edit_field3' => 'grid',
 				'integrated_edit_field4' => 'grid',
-				'integrated_edit_field5' => 'grid' 
+				'integrated_edit_field5' => 'grid',
+				'integrated_edit_field6' => 'grid' 
 			),
 			'itemLocations' => array(
 				'integrated_edit_field' => array(
@@ -164,6 +170,10 @@
 					'cellId' => 'c3' 
 				),
 				'integrated_edit_field5' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_edit_field6' => array(
 					'location' => 'grid',
 					'cellId' => 'c3' 
 				) 
@@ -195,7 +205,8 @@
 				'integrated_edit_field2',
 				'integrated_edit_field3',
 				'integrated_edit_field4',
-				'integrated_edit_field5' 
+				'integrated_edit_field5',
+				'integrated_edit_field6' 
 			),
 			'logo' => array( 
 				'logo' 
@@ -250,7 +261,8 @@
 							'integrated_edit_field2',
 							'integrated_edit_field3',
 							'integrated_edit_field4',
-							'integrated_edit_field5' 
+							'integrated_edit_field5',
+							'integrated_edit_field6' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
@@ -507,7 +519,8 @@
 						'integrated_edit_field2',
 						'integrated_edit_field3',
 						'integrated_edit_field4',
-						'integrated_edit_field5' 
+						'integrated_edit_field5',
+						'integrated_edit_field6' 
 					) 
 				) 
 			),
@@ -604,6 +617,11 @@
 		),
 		'logout_link' => array(
 			'type' => 'logout_link' 
+		),
+		'integrated_edit_field6' => array(
+			'field' => 'country_code',
+			'type' => 'integrated_edit_field',
+			'orientation' => 0 
 		),
 		'expand_button' => array(
 			'type' => 'expand_button' 
