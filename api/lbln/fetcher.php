@@ -601,7 +601,7 @@ function debugTableStructure($tableName)
 }
 
 
-// Fetch users for specific course (with pagination) - FIXED VERSION
+// Fetch users for specific course (with pagination) - UTM VALUES FIXED VERSION
 function fetchUsersForCourse($courseId, $sessionId = null, $startPage = 1)
 {
     // Debug table structure
@@ -691,36 +691,90 @@ function fetchUsersForCourse($courseId, $sessionId = null, $startPage = 1)
 
         foreach ($userBatch as $batch) {
             try {
-                // Process each user individually instead of batch transaction
+                // Process each user individually
                 foreach ($batch as $user) {
                     try {
-                        // Prepare JSON fields
-                        $fields = !empty($user['fields']) ? json_encode($user['fields']) : json_encode([]);
-                        $tags = !empty($user['tags']) ? json_encode($user['tags']) : json_encode([]);
-                        $utms = !empty($user['utms']) ? json_encode($user['utms']) : json_encode([]);
-                        $billingInfo = !empty($user['billing_info']) ? json_encode($user['billing_info']) : json_encode([]);
+                        // Extract all fields with proper defaults
+                        $userId = $user['id'] ?? '';
+                        $email = $user['email'] ?? '';
+                        $username = $user['username'] ?? null;
+                        $firstName = $user['first_name'] ?? null;
+                        $middleName = null; // API doesn't provide middle name
+                        $lastName = $user['last_name'] ?? null;
 
-                        // Extract UTM data
-                        $fcCountry = $user['utms']['fc_country'] ?? null;
-                        $fcReferrer = $user['utms']['fc_referrer'] ?? null;
-                        $lcReferrer = $user['utms']['lc_referrer'] ?? null;
-                        $lcCountry = $user['utms']['lc_country'] ?? null;
+                        // Convert boolean fields to PostgreSQL format
+                        $subscribedMarketing = isset($user['subscribed_for_marketing_emails']) && $user['subscribed_for_marketing_emails'] ? 't' : 'f';
+                        $euCustomer = isset($user['eu_customer']) && $user['eu_customer'] ? 't' : 'f';
+                        $isAdmin = isset($user['is_admin']) && $user['is_admin'] ? 't' : 'f';
+                        $isInstructor = isset($user['is_instructor']) && $user['is_instructor'] ? 't' : 'f';
+                        $isSuspended = isset($user['is_suspended']) && $user['is_suspended'] ? 't' : 'f';
+                        $isReporter = isset($user['is_reporter']) && $user['is_reporter'] ? 't' : 'f';
+                        $isAffiliate = isset($user['is_affiliate']) && $user['is_affiliate'] ? 't' : 'f';
+
+                        // Extract role data
+                        $roleLevel = isset($user['role']['level']) ? $user['role']['level'] : null;
+                        $roleName = isset($user['role']['name']) ? $user['role']['name'] : null;
+
+                        $referrerId = $user['referrer_id'] ?? null;
+                        $created = $user['created'] ?? null;
+                        $lastLogin = $user['last_login'] ?? null;
+                        $signupApprovalStatus = $user['signup_approval_status'] ?? null;
+                        $emailVerificationStatus = $user['email_verification_status'] ?? null;
+
+                        // Prepare JSON fields with proper null handling
+                        $fieldsJson = !empty($user['fields']) && is_array($user['fields']) ?
+                            json_encode($user['fields']) :
+                            json_encode([]);
+
+                        $tagsJson = !empty($user['tags']) && is_array($user['tags']) ?
+                            json_encode($user['tags']) :
+                            json_encode([]);
+
+                        $utmsJson = !empty($user['utms']) && is_array($user['utms']) ?
+                            json_encode($user['utms']) :
+                            json_encode([]);
+
+                        $billingInfoJson = !empty($user['billing_info']) && (is_array($user['billing_info']) || $user['billing_info'] === null) ?
+                            json_encode($user['billing_info']) :
+                            json_encode([]);
+
+                        // Extract specific UTM data for dedicated columns - FIXED VERSION
+                        // Check if utms exists and is an array before accessing its keys
+                        $fcCountry = null;
+                        $fcReferrer = null;
+                        $lcReferrer = null;
+                        $lcCountry = null;
+
+                        if (isset($user['utms']) && is_array($user['utms'])) {
+                            $fcCountry = $user['utms']['fc_country'] ?? null;
+                            $fcReferrer = $user['utms']['fc_referrer'] ?? null;
+                            $lcReferrer = $user['utms']['lc_referrer'] ?? null;
+                            $lcCountry = $user['utms']['lc_country'] ?? null;
+                        }
+
+                        $npsScore = isset($user['nps_score']) ? $user['nps_score'] : null;
+                        $npsComment = isset($user['nps_comment']) ? $user['nps_comment'] : null;
+
+                        // Debug: Log extracted values including UTM
+                        error_log("Processing user {$userId}: username='{$username}', roleLevel='{$roleLevel}', roleName='{$roleName}'");
+                        error_log("UTM values - fc_country='{$fcCountry}', fc_referrer='{$fcReferrer}', lc_referrer='{$lcReferrer}', lc_country='{$lcCountry}'");
 
                         // Check if user already exists for this course
                         $checkStmt = $db->prepare("
                             SELECT data_id FROM lbln_course_users 
                             WHERE course_id = ? AND user_id = ?
                         ");
-                        $checkStmt->execute([$courseId, $user['id']]);
+                        $checkStmt->execute([$courseId, $userId]);
                         $exists = $checkStmt->fetch();
 
                         if ($exists) {
-                            // Update existing user - FIXED to match table structure
+                            // Update existing user with ALL fields
                             $stmt = $db->prepare("
                                 UPDATE lbln_course_users SET
                                     email = ?,
                                     username = ?,
                                     first_name = ?,
+                                    middle_name = ?,
                                     last_name = ?,
                                     subscribed_for_marketing_emails = ?,
                                     eu_customer = ?,
@@ -750,132 +804,167 @@ function fetchUsersForCourse($courseId, $sessionId = null, $startPage = 1)
                                 WHERE course_id = ? AND user_id = ?
                             ");
 
-                            $stmt->execute([
-                                $user['email'] ?? '',
-                                $user['username'] ?? null,
-                                $user['first_name'] ?? null,
-                                $user['last_name'] ?? null,
-                                $user['subscribed_for_marketing_emails'] ?? false,
-                                $user['eu_customer'] ?? false,
-                                $user['is_admin'] ?? false,
-                                $user['is_instructor'] ?? false,
-                                $user['is_suspended'] ?? false,
-                                $user['is_reporter'] ?? false,
-                                $user['is_affiliate'] ?? false,
-                                $user['role']['level'] ?? null,
-                                $user['role']['name'] ?? null,
-                                $user['referrer_id'] ?? null,
-                                $user['created'] ?? null,
-                                $user['last_login'] ?? null,
-                                $user['signup_approval_status'] ?? null,
-                                $user['email_verification_status'] ?? null,
-                                $fields,
-                                $tags,
-                                $utms,
-                                $billingInfo,
-                                $user['nps_score'] ?? null,
-                                $user['nps_comment'] ?? null,
+                            $result = $stmt->execute([
+                                $email,
+                                $username,
+                                $firstName,
+                                $middleName,
+                                $lastName,
+                                $subscribedMarketing,
+                                $euCustomer,
+                                $isAdmin,
+                                $isInstructor,
+                                $isSuspended,
+                                $isReporter,
+                                $isAffiliate,
+                                $roleLevel,
+                                $roleName,
+                                $referrerId,
+                                $created,
+                                $lastLogin,
+                                $signupApprovalStatus,
+                                $emailVerificationStatus,
+                                $fieldsJson,
+                                $tagsJson,
+                                $utmsJson,
+                                $billingInfoJson,
+                                $npsScore,
+                                $npsComment,
                                 $fcCountry,
                                 $fcReferrer,
                                 $lcReferrer,
                                 $lcCountry,
                                 $courseId,
-                                $user['id']
+                                $userId
                             ]);
 
-                            if ($stmt->rowCount() > 0) {
+                            if ($result && $stmt->rowCount() > 0) {
                                 $updated++;
+                                error_log("Updated user {$userId} for course {$courseId}");
+                            } else {
+                                error_log("User {$userId} exists but no update needed or update failed");
                             }
                         } else {
-                            // Insert new user - FIXED to match table structure
-                            // Check how many columns we have in the table
+                            // Insert new user with ALL fields
                             $stmt = $db->prepare("
                                 INSERT INTO lbln_course_users (
                                     course_id, course_title, user_id, email, username,
-                                    first_name, last_name, subscribed_for_marketing_emails,
+                                    first_name, middle_name, last_name, subscribed_for_marketing_emails,
                                     eu_customer, is_admin, is_instructor, is_suspended,
                                     is_reporter, is_affiliate, role_level, role_name,
                                     referrer_id, created, last_login, signup_approval_status,
                                     email_verification_status, fields, tags, utms,
                                     billing_info, nps_score, nps_comment, fc_country,
-                                    fc_referrer, lc_referrer, lc_country
-                                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?::JSONB, ?::JSONB, ?::JSONB, ?::JSONB, ?, ?, ?, ?, ?, ?, ?)
+                                    fc_referrer, lc_referrer, lc_country, fetched_at, last_seen
+                                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?::JSONB, ?::JSONB, ?::JSONB, ?::JSONB, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
                             ");
 
                             // Debug: Log the values being inserted
-                            error_log("Inserting user: " . $user['id'] . " for course: " . $courseId);
+                            error_log("Inserting user: {$userId} for course: {$courseId}");
 
-                            $stmt->execute([
+                            $result = $stmt->execute([
                                 $courseId,
                                 $course['course_title'],
-                                $user['id'],
-                                $user['email'] ?? '',
-                                $user['username'] ?? null,
-                                $user['first_name'] ?? null,
-                                $user['last_name'] ?? null,
-                                $user['subscribed_for_marketing_emails'] ?? false,
-                                $user['eu_customer'] ?? false,
-                                $user['is_admin'] ?? false,
-                                $user['is_instructor'] ?? false,
-                                $user['is_suspended'] ?? false,
-                                $user['is_reporter'] ?? false,
-                                $user['is_affiliate'] ?? false,
-                                $user['role']['level'] ?? null,
-                                $user['role']['name'] ?? null,
-                                $user['referrer_id'] ?? null,
-                                $user['created'] ?? null,
-                                $user['last_login'] ?? null,
-                                $user['signup_approval_status'] ?? null,
-                                $user['email_verification_status'] ?? null,
-                                $fields,
-                                $tags,
-                                $utms,
-                                $billingInfo,
-                                $user['nps_score'] ?? null,
-                                $user['nps_comment'] ?? null,
+                                $userId,
+                                $email,
+                                $username,
+                                $firstName,
+                                $middleName,
+                                $lastName,
+                                $subscribedMarketing,
+                                $euCustomer,
+                                $isAdmin,
+                                $isInstructor,
+                                $isSuspended,
+                                $isReporter,
+                                $isAffiliate,
+                                $roleLevel,
+                                $roleName,
+                                $referrerId,
+                                $created,
+                                $lastLogin,
+                                $signupApprovalStatus,
+                                $emailVerificationStatus,
+                                $fieldsJson,
+                                $tagsJson,
+                                $utmsJson,
+                                $billingInfoJson,
+                                $npsScore,
+                                $npsComment,
                                 $fcCountry,
                                 $fcReferrer,
                                 $lcReferrer,
                                 $lcCountry
                             ]);
 
-                            $inserted++;
+                            if ($result) {
+                                $inserted++;
+                                error_log("Successfully inserted user {$userId} for course {$courseId}");
+                                error_log("UTM saved: fc_country={$fcCountry}, fc_referrer={$fcReferrer}, lc_referrer={$lcReferrer}, lc_country={$lcCountry}");
+                            } else {
+                                $errorInfo = $stmt->errorInfo();
+                                throw new Exception("Insert failed: " . ($errorInfo[2] ?? 'Unknown error'));
+                            }
                         }
                     } catch (Exception $e) {
                         $errors[] = "User {$user['id']}: " . $e->getMessage();
-                        error_log("Error inserting user {$user['id']}: " . $e->getMessage());
+                        error_log("Error inserting/updating user {$user['id']}: " . $e->getMessage());
                         $skipped++;
 
-                        // If it's a syntax error, try a simplified insert
-                        if (strpos($e->getMessage(), 'INSERT has more expressions than target columns') !== false) {
-                            error_log("Trying simplified insert for user {$user['id']}");
-                            try {
-                                // Try a minimal insert with just essential fields
-                                $simpleStmt = $db->prepare("
-                                    INSERT INTO lbln_course_users (
-                                        course_id, course_title, user_id, email,
-                                        first_name, last_name, created
-                                    ) VALUES (?, ?, ?, ?, ?, ?, ?)
-                                ");
+                        // Try a simplified insert with essential fields including UTM
+                        error_log("Trying simplified insert for user {$user['id']}");
+                        try {
+                            // Try a minimal insert with just essential fields including UTM
+                            $simpleStmt = $db->prepare("
+                                INSERT INTO lbln_course_users (
+                                    course_id, course_title, user_id, email, username,
+                                    first_name, last_name, created, last_login,
+                                    subscribed_for_marketing_emails, eu_customer,
+                                    is_admin, is_instructor, is_suspended,
+                                    is_reporter, is_affiliate, role_level, role_name,
+                                    email_verification_status,
+                                    fc_country, fc_referrer, lc_referrer, lc_country
+                                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                            ");
 
-                                $simpleStmt->execute([
-                                    $courseId,
-                                    $course['course_title'],
-                                    $user['id'],
-                                    $user['email'] ?? '',
-                                    $user['first_name'] ?? null,
-                                    $user['last_name'] ?? null,
-                                    $user['created'] ?? null
-                                ]);
+                            $simpleResult = $simpleStmt->execute([
+                                $courseId,
+                                $course['course_title'],
+                                $userId,
+                                $email,
+                                $username,
+                                $firstName,
+                                $lastName,
+                                $created,
+                                $lastLogin,
+                                $subscribedMarketing,
+                                $euCustomer,
+                                $isAdmin,
+                                $isInstructor,
+                                $isSuspended,
+                                $isReporter,
+                                $isAffiliate,
+                                $roleLevel,
+                                $roleName,
+                                $emailVerificationStatus,
+                                $fcCountry,
+                                $fcReferrer,
+                                $lcReferrer,
+                                $lcCountry
+                            ]);
 
+                            if ($simpleResult) {
                                 $inserted++;
                                 // Remove the error since we succeeded
                                 array_pop($errors);
                                 $skipped--;
                                 error_log("Simplified insert succeeded for user {$user['id']}");
-                            } catch (Exception $e2) {
-                                error_log("Simplified insert also failed: " . $e2->getMessage());
+                                error_log("UTM in simplified insert: fc_country={$fcCountry}, fc_referrer={$fcReferrer}, lc_referrer={$lcReferrer}, lc_country={$lcCountry}");
+                            } else {
+                                throw new Exception("Simplified insert failed");
                             }
+                        } catch (Exception $e2) {
+                            error_log("Simplified insert also failed: " . $e2->getMessage());
                         }
                     }
                 }
@@ -938,7 +1027,7 @@ function fetchUsersForCourse($courseId, $sessionId = null, $startPage = 1)
         'skipped' => $skipped,
         'total_users' => $inserted + $updated,
         'errors' => $errors,
-        'real_time_logs' => generateRealtimeLogs($courseId, $course['course_title'], $currentPage - 1, $totalPages, $inserted + $updated) // ADD THIS
+        'real_time_logs' => generateRealtimeLogs($courseId, $course['course_title'], $currentPage - 1, $totalPages, $inserted + $updated)
     ];
 }
 
@@ -3070,9 +3159,11 @@ $courseAnalytics = getCourseAnalyticsSummary();
                 <button class="btn btn-secondary" onclick="showModal('logs-modal')">
                     <i class="fas fa-history"></i> View All Logs
                 </button>
+                <!--
                 <button class="btn btn-info" onclick="refreshSelectedCourseAnalytics()">
                     <i class="fas fa-sync-alt"></i> Refresh Selected Course Analytics
                 </button>
+                -->
             </div>
         </div>
 
@@ -3294,6 +3385,9 @@ $courseAnalytics = getCourseAnalyticsSummary();
 
                 <!-- Course Selection Tab -->
                 <div id="users-select" class="tab-content active">
+                    <button class="btn btn-info" onclick="refreshSelectedCourseAnalytics()">
+                        <i class="fas fa-sync-alt"></i> Refresh Selected Course Analytics
+                    </button>
                     <div class="alert alert-info">
                         <i class="fas fa-info-circle"></i> Select specific courses to fetch users from.
                         You can see how many students are enrolled per course before fetching.
