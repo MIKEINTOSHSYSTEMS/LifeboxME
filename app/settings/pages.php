@@ -85,71 +85,7 @@ $runnerPageInfo = array(
 				'view' 
 			) 
 		),
-		'public.device_distributions' => array(
-			'add' => array( 
-				'add' 
-			),
-			'edit' => array( 
-				'edit' 
-			),
-			'export' => array( 
-				'export' 
-			),
-			'import' => array( 
-				'import' 
-			),
-			'list' => array( 
-				'list' 
-			),
-			'masterlist' => array( 
-				'masterlist' 
-			),
-			'masterprint' => array( 
-				'masterprint' 
-			),
-			'print' => array( 
-				'print' 
-			),
-			'search' => array( 
-				'search' 
-			),
-			'view' => array( 
-				'view' 
-			) 
-		),
 		'public.diagnoses' => array(
-			'add' => array( 
-				'add' 
-			),
-			'edit' => array( 
-				'edit' 
-			),
-			'export' => array( 
-				'export' 
-			),
-			'import' => array( 
-				'import' 
-			),
-			'list' => array( 
-				'list' 
-			),
-			'masterlist' => array( 
-				'masterlist' 
-			),
-			'masterprint' => array( 
-				'masterprint' 
-			),
-			'print' => array( 
-				'print' 
-			),
-			'search' => array( 
-				'search' 
-			),
-			'view' => array( 
-				'view' 
-			) 
-		),
-		'public.facilities' => array(
 			'add' => array( 
 				'add' 
 			),
@@ -2671,6 +2607,23 @@ $runnerPageInfo = array(
 				'search' 
 			) 
 		),
+		'public.lbln_course_users' => array(
+			'export' => array( 
+				'export' 
+			),
+			'view' => array( 
+				'view' 
+			),
+			'list' => array( 
+				'list' 
+			),
+			'print' => array( 
+				'print' 
+			),
+			'search' => array( 
+				'search' 
+			) 
+		),
 		'public.lbln_courses' => array(
 			'export' => array( 
 				'export' 
@@ -2689,23 +2642,6 @@ $runnerPageInfo = array(
 			),
 			'masterprint' => array( 
 				'masterprint' 
-			),
-			'search' => array( 
-				'search' 
-			) 
-		),
-		'public.lbln_course_users' => array(
-			'export' => array( 
-				'export' 
-			),
-			'view' => array( 
-				'view' 
-			),
-			'list' => array( 
-				'list' 
-			),
-			'print' => array( 
-				'print' 
 			),
 			'search' => array( 
 				'search' 
@@ -2742,120 +2678,184 @@ $runnerPageInfo = array(
 			'view' => array( 
 				'view' 
 			) 
+		),
+		'public.facilities' => array(
+			'add' => array( 
+				'add' 
+			),
+			'edit' => array( 
+				'edit' 
+			),
+			'export' => array( 
+				'export' 
+			),
+			'import' => array( 
+				'import' 
+			),
+			'list' => array( 
+				'list' 
+			),
+			'masterlist' => array( 
+				'masterlist' 
+			),
+			'masterprint' => array( 
+				'masterprint' 
+			),
+			'print' => array( 
+				'print' 
+			),
+			'search' => array( 
+				'search' 
+			),
+			'view' => array( 
+				'view' 
+			) 
+		),
+		'public.device_distributions' => array(
+			'add' => array( 
+				'add' 
+			),
+			'edit' => array( 
+				'edit' 
+			),
+			'export' => array( 
+				'export' 
+			),
+			'import' => array( 
+				'import' 
+			),
+			'list' => array( 
+				'list' 
+			),
+			'masterlist' => array( 
+				'masterlist' 
+			),
+			'masterprint' => array( 
+				'masterprint' 
+			),
+			'print' => array( 
+				'print' 
+			),
+			'search' => array( 
+				'search' 
+			),
+			'view' => array( 
+				'view' 
+			) 
 		) 
 	),
 	'tableMasks' => array(
 		'public.antibiotics' => 'ADESPI',
 		'public.regions' => 'ADESPI',
-		'public.follow_ups' => 'ADESPI',
-		'public.procedures' => 'ADESPI',
 		'public.clean_cut_implementations' => 'ADESPI',
-		'public.device_distributions' => 'ADESPI',
 		'public.partners' => 'ADESPI',
+		'public.follow_ups' => 'ADESPI',
 		'public.diagnoses' => 'ADESPI',
+		'public.device_distributions' => 'ADESPI',
 		'public.facilities' => 'ADESPI',
+		'public.procedures' => 'ADESPI',
 		'public.countries' => 'ADESPI',
 		'public.case_antibiotics' => 'ADESPI',
 		'public.languages' => 'ADESPI',
-		'public.trainers' => 'ADESPI',
-		'public.surgical_cases' => 'ADESPI',
 		'public.lifebox_staff' => 'ADESPI',
 		'public.training_courses' => 'ADESPI',
-		'public.training_sessions' => 'ADESPI',
+		'public.surgical_cases' => 'ADESPI',
 		'public.training_leads' => 'ADESPI',
+		'public.trainers' => 'ADESPI',
 		'public.training_languages' => 'ADESPI',
 		'public.training_trainers' => 'ADESPI',
+		'public.training_sessions' => 'ADESPI',
 		'public.training_partners' => 'ADESPI',
 		'public.ward_antibiotics' => 'ADESPI',
-		'public.clean_cut_implementation_summary_view' => 'ADSPI',
-		'public.training_summary_view' => 'ADSPI',
-		'public.device_distribution_summary_view' => 'ADSPI',
 		'public.ward_rounds' => 'ADESPI',
+		'public.surgical_case_summary_view' => 'ADSPI',
+		'public.training_summary_view' => 'ADSPI',
+		'public.clean_cut_implementation_summary_view' => 'ADSPI',
+		'public.device_distribution_summary_view' => 'ADSPI',
+		'public.training_approaches' => 'ADESPI',
 		'public.training_types' => 'ADESPI',
 		'public.programs' => 'ADESPI',
-		'public.surgical_case_summary_view' => 'ADSPI',
 		'public.quarters' => 'ADESPI',
-		'public.training_approaches' => 'ADESPI',
 		'public.participant_role' => 'ADESPI',
 		'public.venues' => 'ADESPI',
-		'public.participant_attendance_detail' => 'ADSPI',
-		'public.sex' => 'ADESPI',
 		'public.training_participants' => 'ADESPI',
+		'public.sex' => 'ADESPI',
+		'public.participant_attendance_detail' => 'ADSPI',
 		'public.training_participation' => 'ADESPI',
 		'public.participant_attendance_summary' => 'ADSPI',
-		'public.users' => '',
 		'public.training_attendance' => 'ADESPI',
 		'public.daily_attendance_view' => 'ADSPI',
+		'public.users' => '',
 		'admin_rights' => '',
-		'public.months' => 'ADESPI',
 		'admin_users' => 'ADESPI',
 		'admin_members' => '',
 		'public.lifeboxme__audit' => 'ADESP',
-		'public.devices' => 'ADESPI',
 		'public.lifeboxme__locking' => 'ADESP',
-		'public.transaction_types' => 'ADESPI',
+		'public.months' => 'ADESPI',
 		'public.payment_methods' => 'ADESPI',
+		'public.devices' => 'ADESPI',
+		'public.transaction_types' => 'ADESPI',
 		'public.donors' => 'ADESPI',
 		'public.device_distribution_log' => 'ADESPI',
+		'public.device_inventory_changes' => 'ADSPI',
 		'Dashboard' => 'S',
 		'Lifebox_DHIS2_OrgUnits' => 'ADSPI',
-		'public.device_inventory_changes' => 'ADSPI',
+		'Lifebox_DHIS2_Settings' => 'ADSPI',
 		'public.lifeboxme_dhis2_orgunits' => 'ADESP',
 		'aio_training_tracking' => 'ADSPI',
-		'Lifebox_DHIS2_Settings' => 'ADSPI',
 		'Lifebox_DHIS2_dataItems' => 'ADESPI',
 		'public.lifeboxme_dhis2_analytics_settings' => 'ADESPI',
 		'public.lifeboxme_dhis2_dataitems' => 'ADESP',
-		'public.smtp' => 'ADESPI',
-		'public.lbapt_beginnings_fund' => 'ADESPI',
-		'public.lbapt_annual_plan_tracker' => 'ADESPI',
 		'public.lifeboxme_dhis2_analytics_data' => 'ADESP',
+		'public.lbapt_beginnings_fund' => 'ADESPI',
+		'public.smtp' => 'ADESPI',
 		'aio_training_tracking Chart' => 'S',
 		'aio_training_tracking Chart by sex' => 'S',
+		'public.lbapt_annual_plan_tracker' => 'ADESPI',
 		'public.lbapt_cri' => 'ADESPI',
 		'public.lbapt_dashboard_summary' => 'ADESPI',
 		'public.lbapt_communications' => 'ADESPI',
 		'public.lbapt_development' => 'ADESPI',
-		'public.lbapt_sample_workflow' => 'ADESPI',
-		'public.lbapt_kpis_on_track' => 'ADESPI',
 		'public.lbapt_elma' => 'ADESPI',
-		'public.lbapt_operations' => 'ADESPI',
 		'public.lbapt_governance' => 'ADESPI',
+		'public.lbapt_operations' => 'ADESPI',
+		'public.lbapt_kpis_on_track' => 'ADESPI',
+		'public.lbapt_sample_workflow' => 'ADESPI',
 		'public.lbapt_programs' => 'ADESPI',
 		'public.lbapt_status' => 'ADESPI',
 		'public.lbapt_strategic_areas' => 'ADESPI',
 		'public.lbapt_dashboard_summary_view' => 'ADSPI',
-		'public.lbapt_unified_activities' => 'ADSPI',
 		'public.lbapt_all_activities_view' => 'ADSPI',
-		'public.years' => 'ADESPI',
 		'public.lbapt_kpis_tracking_view' => 'ADSPI',
-		'public.lbapt_cathedral' => 'ADESPI',
-		'public.lbapt_hr' => 'ADESPI',
+		'public.lbapt_unified_activities' => 'ADSPI',
 		'public.lbapt_finance' => 'ADESPI',
+		'public.lbapt_hr' => 'ADESPI',
+		'public.years' => 'ADESPI',
+		'public.lbapt_cathedral' => 'ADESPI',
 		'public.lbapt_izumi' => 'ADESPI',
 		'public.lbapt_whi' => 'ADESPI',
 		'public.lbapt_st' => 'ADESPI',
 		'public.lbpmi_calculation_log' => 'ADESP',
-		'public.lbpmi_data_elements' => 'ADESPI',
-		'public.lbpmi_indicator_actuals' => 'ADESPI',
-		'public.lbpmi_indicators' => 'ADESPI',
 		'public.lbpmi_datasets' => 'ADESPI',
+		'public.lbpmi_data_elements' => 'ADESPI',
 		'public.lbpmi_indicator_targets' => 'ADESPI',
 		'public.lbpmi_summary' => 'ADSP',
+		'public.lbpmi_indicator_actuals' => 'ADESPI',
+		'public.lbpmi_indicators' => 'ADESPI',
 		'public.period_types' => 'ADESPI',
-		'public.lbpmi_calculation_jobs' => 'ADESP',
 		'public.unit_of_measurement' => 'ADESPI',
 		'public.lbpmi_data_values' => 'ADESPI',
+		'public.lbpmi_calculation_jobs' => 'ADESP',
 		'public.lbpmi_domain_type' => 'ADESPI',
-		'public.lbpmi_indicator_types' => 'ADESPI',
-		'public.lbln_course_analytics' => 'ADESP',
 		'public.lbpmi_indicator_groups' => 'ADESPI',
+		'public.lbpmi_indicator_types' => 'ADESPI',
 		'public.lbpmi_aggregation_type' => 'ADESPI',
 		'public.lbln_course_users' => 'ADESP',
+		'public.lbln_course_analytics' => 'ADESP',
 		'public.lbln_courses' => 'ADESP',
-		'public.lbln_fetch_logs' => 'ADESP',
 		'public.lbln_fetch_sessions' => 'ADESP',
 		'Lifbox_Learning_Network_API_Fetcher' => 'ADSP',
+		'public.lbln_fetch_logs' => 'ADESP',
 		'<global>' => 'S' 
 	) 
 );

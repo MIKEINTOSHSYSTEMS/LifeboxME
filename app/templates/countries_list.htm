@@ -615,6 +615,14 @@
 							{mlang_message DELETE}			</a>
 </span>
 {END deleteselected_link}
+	 
+		{BEGIN updateselected_link}
+<span data-itemtype="update_selected" data-itemid="update_selected" {$item_update_selected} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" href="countries_edit.php{$stateLink_full}" {$updateselectedlink_attrs} disabled >
+							{mlang_message UPDATE_SELECTED}			</a>
+</span>
+{END updateselected_link}
 			{END firstAboveGridCell}	
 	</div>			 
 				<div 

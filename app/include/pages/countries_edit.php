@@ -57,7 +57,11 @@
 			 
 		),
 		'updateOnEditFields' => array( 
-			 
+			'country_name',
+			'region_id',
+			'iso_code',
+			'created_at',
+			'updated_at' 
 		),
 		'fieldItems' => array(
 			'country_name' => array( 
@@ -91,6 +95,7 @@
 				),
 				'below-grid' => array( 
 					'edit_save',
+					'update_records',
 					'edit_back_list',
 					'edit_close',
 					'hamburger' 
@@ -125,6 +130,7 @@
 			'itemForms' => array(
 				'edit_message' => 'above-grid',
 				'edit_save' => 'below-grid',
+				'update_records' => 'below-grid',
 				'edit_back_list' => 'below-grid',
 				'edit_close' => 'below-grid',
 				'hamburger' => 'below-grid',
@@ -231,6 +237,9 @@
 			'logout_link' => array( 
 				'logout_link' 
 			),
+			'update_records' => array( 
+				'update_records' 
+			),
 			'expand_button' => array( 
 				'expand_button' 
 			) 
@@ -271,7 +280,10 @@
 		'verticalBar' => true,
 		'labeledButtons' => array(
 			'update_records' => array(
-				 
+				'update_records' => array(
+					'tag' => 'UPDATE_N_RECORDS',
+					'type' => 2 
+				) 
 			),
 			'print_pages' => array(
 				 
@@ -320,7 +332,7 @@
 		) 
 	),
 	'edit' => array(
-		'updateSelected' => false 
+		'updateSelected' => true 
 	) 
 );
 			$pageArray = array(
@@ -375,6 +387,7 @@
 					'model' => 'c1',
 					'items' => array( 
 						'edit_save',
+						'update_records',
 						'edit_back_list',
 						'edit_close' 
 					) 
@@ -557,31 +570,31 @@
 			'field' => 'country_name',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
-			'updateOnEdit' => false 
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field1' => array(
 			'field' => 'region_id',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
-			'updateOnEdit' => false 
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field2' => array(
 			'field' => 'iso_code',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
-			'updateOnEdit' => false 
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field3' => array(
 			'field' => 'created_at',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
-			'updateOnEdit' => false 
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field4' => array(
 			'field' => 'updated_at',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
-			'updateOnEdit' => false 
+			'updateOnEdit' => true 
 		),
 		'logo' => array(
 			'type' => 'logo' 
@@ -619,6 +632,9 @@
 		),
 		'logout_link' => array(
 			'type' => 'logout_link' 
+		),
+		'update_records' => array(
+			'type' => 'update_records' 
 		),
 		'expand_button' => array(
 			'type' => 'expand_button' 

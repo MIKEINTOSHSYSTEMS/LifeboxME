@@ -68,7 +68,7 @@ $runnerTableSettings['public.device_distributions'] = array(
 		'50',
 		'100',
 		'500',
-		'-1' 
+		'1' 
 	),
 	'pageSizeSelectorGroups' => array( 
 		'1',
@@ -77,7 +77,7 @@ $runnerTableSettings['public.device_distributions'] = array(
 		'10',
 		'50',
 		'100',
-		'-1' 
+		'1' 
 	),
 	'displayLoading' => true,
 	'warnLeavingEdit' => true,
@@ -187,6 +187,10 @@ FROM
 					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
 					'lookupLinkField' => 'region_id',
 					'lookupDisplayField' => 'region_name',
+					'lookupAllowAdd' => true,
+					'lookupAllowEdit' => true,
+					'lookupAddPage' => 'add',
+					'lookupEditPage' => 'edit',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
 					'timeConvention' => 1 
@@ -230,6 +234,10 @@ FROM
 					'lookupLinkField' => 'country_id',
 					'lookupDisplayField' => 'country_name',
 					'lookupOrderBy' => 'country_name',
+					'lookupAllowAdd' => true,
+					'lookupAllowEdit' => true,
+					'lookupAddPage' => 'add',
+					'lookupEditPage' => 'edit',
 					'lookupDependent' => true,
 					'lookupDependentFields' => array( 
 						array(
@@ -315,9 +323,11 @@ FROM
 					'lookupDisplayField' => 'facility_name',
 					'lookupOrderBy' => 'facility_name',
 					'lookupAllowAdd' => true,
+					'lookupAllowEdit' => true,
 					'lookupControlType' => 2,
 					'lookupListPage' => 'list',
 					'lookupAddPage' => 'add',
+					'lookupEditPage' => 'edit',
 					'lookupDependent' => true,
 					'lookupDependentFields' => array( 
 						array(
@@ -359,7 +369,7 @@ FROM
 						'text' => '',
 						'type' => 0 
 					),
-					'textHTML5Input' => '0',
+					'textHTML5Input' => 'Number',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
 					'timeConvention' => 1 
@@ -415,6 +425,7 @@ FROM
 			'sqlExpression' => 'contact_email',
 			'viewFormats' => array(
 				'view' => array(
+					'format' => 'Email Hyperlink',
 					'numberFractionalDigits' => 0 
 				) 
 			),
@@ -524,7 +535,7 @@ FROM
 						'text' => '',
 						'type' => 0 
 					),
-					'textHTML5Input' => '0',
+					'textHTML5Input' => 'Number',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
 					'timeConvention' => 1 
@@ -700,6 +711,8 @@ FROM
 					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
 					'lookupLinkField' => 'id',
 					'lookupDisplayField' => 'method',
+					'lookupAllowAdd' => true,
+					'lookupAddPage' => 'add',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
 					'timeConvention' => 1 
@@ -734,6 +747,8 @@ FROM
 					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
 					'lookupLinkField' => 'id',
 					'lookupDisplayField' => 'transaction_name',
+					'lookupAllowAdd' => true,
+					'lookupAddPage' => 'add',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
 					'timeConvention' => 1 
@@ -767,6 +782,10 @@ FROM
 					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
 					'lookupLinkField' => 'id',
 					'lookupDisplayField' => 'organization_name',
+					'lookupAllowAdd' => true,
+					'lookupAllowEdit' => true,
+					'lookupAddPage' => 'add',
+					'lookupEditPage' => 'edit',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
 					'timeConvention' => 1 

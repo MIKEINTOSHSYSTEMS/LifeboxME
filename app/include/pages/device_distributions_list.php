@@ -173,7 +173,15 @@
 			'contact_name' 
 		),
 		'filterFields' => array( 
-			 
+			'region_id',
+			'country_id',
+			'facility_id',
+			'device_type',
+			'distribution_month',
+			'distribution_year',
+			'transaction_type',
+			'payment_method',
+			'donor' 
 		),
 		'inlineAddFields' => array( 
 			'region_id',
@@ -336,7 +344,8 @@
 					'update_selected',
 					'details_found',
 					'page_size',
-					'print_panel' 
+					'print_panel',
+					'filter_panel' 
 				),
 				'below-grid' => array( 
 					'pagination' 
@@ -417,17 +426,6 @@
 				) 
 			),
 			'formXtTags' => array(
-				'above-grid' => array( 
-					'add_link',
-					'inlineadd_link',
-					'saveall_link',
-					'cancelall_link',
-					'deleteselected_link',
-					'updateselected_link',
-					'details_found',
-					'recsPerPage',
-					'print_friendly' 
-				),
 				'below-grid' => array( 
 					'pagination' 
 				),
@@ -445,6 +443,7 @@
 				'details_found' => 'above-grid',
 				'page_size' => 'above-grid',
 				'print_panel' => 'above-grid',
+				'filter_panel' => 'above-grid',
 				'pagination' => 'below-grid',
 				'logo' => 'left',
 				'expand_button' => 'left',
@@ -879,6 +878,20 @@
 			),
 			'print_details' => array( 
 				'print_details' 
+			),
+			'filter_panel' => array( 
+				'filter_panel' 
+			),
+			'filter_panel_field' => array( 
+				'filter_panel_field',
+				'filter_panel_field1',
+				'filter_panel_field2',
+				'filter_panel_field3',
+				'filter_panel_field4',
+				'filter_panel_field5',
+				'filter_panel_field6',
+				'filter_panel_field7',
+				'filter_panel_field8' 
 			),
 			'grid_field' => array( 
 				'simple_grid_field',
@@ -2296,6 +2309,15 @@
 			'modelId' => 'list-above-grid',
 			'grid' => array( 
 				array(
+					'section' => '',
+					'cells' => array( 
+						array(
+							'cell' => 'c',
+							'colspan' => 2 
+						) 
+					) 
+				),
+				array(
 					'cells' => array( 
 						array(
 							'cell' => 'c1' 
@@ -2325,6 +2347,12 @@
 						'details_found',
 						'page_size',
 						'print_panel' 
+					) 
+				),
+				'c' => array(
+					'model' => 'c1',
+					'items' => array( 
+						'filter_panel' 
 					) 
 				) 
 			),
@@ -3580,6 +3608,56 @@
 			'type' => 'search_panel_field',
 			'required' => false,
 			'alwaysOnPanel' => false 
+		),
+		'filter_panel' => array(
+			'type' => 'filter_panel',
+			'items' => array( 
+				'filter_panel_field',
+				'filter_panel_field1',
+				'filter_panel_field2',
+				'filter_panel_field8',
+				'filter_panel_field3',
+				'filter_panel_field7',
+				'filter_panel_field6',
+				'filter_panel_field5',
+				'filter_panel_field4' 
+			) 
+		),
+		'filter_panel_field' => array(
+			'field' => 'region_id',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field1' => array(
+			'field' => 'country_id',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field2' => array(
+			'field' => 'facility_id',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field3' => array(
+			'field' => 'device_type',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field4' => array(
+			'field' => 'distribution_month',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field5' => array(
+			'field' => 'distribution_year',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field6' => array(
+			'field' => 'transaction_type',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field7' => array(
+			'field' => 'payment_method',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field8' => array(
+			'field' => 'donor',
+			'type' => 'filter_panel_field' 
 		),
 		'simple_grid_field' => array(
 			'field' => 'distribution_id',

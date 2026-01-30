@@ -93,6 +93,7 @@
 		),
 		'public.lbpmi_data_values' => array(
 			'displayPreview' => 1,
+			'previewPageId' => 'list',
 			'showCount' => true,
 			'hideEmptyChild' => false,
 			'hideEmptyPreview' => false,
@@ -2946,7 +2947,8 @@
 			),
 			'popup' => false,
 			'proceedLink' => true,
-			'hideEmptyPreview' => false 
+			'hideEmptyPreview' => false,
+			'pageId' => 'list' 
 		),
 		'grid_checkbox' => array(
 			'type' => 'grid_checkbox' 

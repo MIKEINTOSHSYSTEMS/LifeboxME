@@ -7,7 +7,7 @@
 		'spreadsheetMode' => false,
 		'addToBottom' => false,
 		'delete' => true,
-		'updateSelected' => false,
+		'updateSelected' => true,
 		'clickSort' => true,
 		'sortDropdown' => false,
 		'showHideFields' => false,
@@ -210,6 +210,7 @@
 					'add',
 					'inline_add',
 					'delete',
+					'update_selected',
 					'details_found',
 					'page_size',
 					'print_panel' 
@@ -279,6 +280,7 @@
 					'add_link',
 					'inlineadd_link',
 					'deleteselected_link',
+					'updateselected_link',
 					'details_found',
 					'recsPerPage',
 					'print_friendly' 
@@ -294,6 +296,7 @@
 				'add' => 'above-grid',
 				'inline_add' => 'above-grid',
 				'delete' => 'above-grid',
+				'update_selected' => 'above-grid',
 				'details_found' => 'above-grid',
 				'page_size' => 'above-grid',
 				'print_panel' => 'above-grid',
@@ -611,6 +614,9 @@
 			),
 			'add' => array( 
 				'add' 
+			),
+			'update_selected' => array( 
+				'update_selected' 
 			),
 			'grid_field' => array( 
 				'simple_grid_field',
@@ -1301,7 +1307,8 @@
 					'items' => array( 
 						'add',
 						'inline_add',
-						'delete' 
+						'delete',
+						'update_selected' 
 					) 
 				),
 				'c2' => array(
@@ -1996,6 +2003,9 @@
 		),
 		'add' => array(
 			'type' => 'add' 
+		),
+		'update_selected' => array(
+			'type' => 'update_selected' 
 		),
 		'simple_grid_field' => array(
 			'field' => 'country_id',
