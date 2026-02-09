@@ -204,6 +204,8 @@ FROM
 					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
 					'lookupLinkField' => 'period_name',
 					'lookupDisplayField' => 'period_name',
+					'lookupOrderBy' => 'period_name',
+					'lookupOrderByDesc' => true,
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
 					'timeConvention' => 1 
@@ -231,6 +233,7 @@ FROM
 				'edit' => array(
 					'format' => 'Lookup wizard',
 					'required' => true,
+					'defaultValue' => 'date("Y")',
 					'validateAs' => 'Number',
 					'textHTML5Input' => '0',
 					'lookupType' => 2,
@@ -297,6 +300,7 @@ FROM
 			'editFormats' => array(
 				'edit' => array(
 					'format' => 'Lookup wizard',
+					'defaultValue' => 'date("m")',
 					'validateAs' => 'Number',
 					'textHTML5Input' => '0',
 					'lookupType' => 2,
@@ -367,6 +371,7 @@ FROM
 			'editFormats' => array(
 				'edit' => array(
 					'format' => 'Date',
+					'defaultValue' => 'date("Y-m-d")',
 					'validateRegexMessage' => array(
 						'text' => '',
 						'type' => 0 
@@ -1222,6 +1227,7 @@ FROM
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),
+	'hasJsEvents' => true,
 	'originalTable' => 'public.lbpmi_data_values',
 	'originalPagesByType' => array(
 		'add' => array( 

@@ -264,6 +264,9 @@ pdfDocument = {
 				
 			{"hidden":"{$item_hide_integrated_edit_field2}","stack":[{"text":"{$jslabel public_lbpmi_data_values period_year }","bold":true},{"text":{$period_year_pdfvalue}}],"margin":[0,0,0,15]},
 				
+				
+			{"hidden":"{$item_hide_integrated_edit_field6}","stack":[{"text":"{$jslabel public_lbpmi_data_values period_day }","bold":true},{"text":{$period_day_pdfvalue}}],"margin":[0,0,0,15]},
+				
 		  ],
   "border": [ false, false, false, false ],
               "alignment": 'left',
@@ -317,13 +320,8 @@ pdfDocument = {
 	
 			"stack": [
 		
-				
-			{"hidden":"{$item_hide_integrated_edit_field3}","stack":[{"text":"{$jslabel public_lbpmi_data_values period_quarter }","bold":true},{"text":{$period_quarter_pdfvalue}}],"margin":[0,0,0,15]},
-				
-				
-			{"hidden":"{$item_hide_integrated_edit_field5}","stack":[{"text":"{$jslabel public_lbpmi_data_values period_week }","bold":true},{"text":{$period_week_pdfvalue}}],"margin":[0,0,0,15]},
-				
-		  ],
+				'',
+	  ],
   "border": [ false, false, false, false ],
               "alignment": 'left',
      
@@ -348,10 +346,13 @@ pdfDocument = {
 			"stack": [
 		
 				
+			{"hidden":"{$item_hide_integrated_edit_field3}","stack":[{"text":"{$jslabel public_lbpmi_data_values period_quarter }","bold":true},{"text":{$period_quarter_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
 			{"hidden":"{$item_hide_integrated_edit_field4}","stack":[{"text":"{$jslabel public_lbpmi_data_values period_month }","bold":true},{"text":{$period_month_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
-			{"hidden":"{$item_hide_integrated_edit_field6}","stack":[{"text":"{$jslabel public_lbpmi_data_values period_day }","bold":true},{"text":{$period_day_pdfvalue}}],"margin":[0,0,0,15]},
+			{"hidden":"{$item_hide_integrated_edit_field5}","stack":[{"text":"{$jslabel public_lbpmi_data_values period_week }","bold":true},{"text":{$period_week_pdfvalue}}],"margin":[0,0,0,15]},
 				
 		  ],
   "border": [ false, false, false, false ],
