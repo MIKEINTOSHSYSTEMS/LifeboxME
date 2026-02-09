@@ -33,8 +33,7 @@
 			'facility_id',
 			'stored_by',
 			'created',
-			'last_updated',
-			'value_type' 
+			'last_updated' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -87,9 +86,6 @@
 			),
 			'last_updated' => array( 
 				'integrated_edit_field13' 
-			),
-			'value_type' => array( 
-				'integrated_edit_field15' 
 			) 
 		) 
 	),
@@ -136,7 +132,6 @@
 					'integrated_edit_field5',
 					'integrated_edit_field14',
 					'integrated_edit_field1',
-					'integrated_edit_field15',
 					'integrated_edit_field7',
 					'integrated_edit_field8',
 					'integrated_edit_field9',
@@ -173,7 +168,6 @@
 				'integrated_edit_field5' => 'grid',
 				'integrated_edit_field14' => 'grid',
 				'integrated_edit_field1' => 'grid',
-				'integrated_edit_field15' => 'grid',
 				'integrated_edit_field7' => 'grid',
 				'integrated_edit_field8' => 'grid',
 				'integrated_edit_field9' => 'grid',
@@ -217,10 +211,6 @@
 				'integrated_edit_field1' => array(
 					'location' => 'grid',
 					'cellId' => 'c10' 
-				),
-				'integrated_edit_field15' => array(
-					'location' => 'grid',
-					'cellId' => 'c14' 
 				),
 				'integrated_edit_field7' => array(
 					'location' => 'grid',
@@ -319,8 +309,7 @@
 				'integrated_edit_field9',
 				'integrated_edit_field11',
 				'integrated_edit_field12',
-				'integrated_edit_field13',
-				'integrated_edit_field15' 
+				'integrated_edit_field13' 
 			),
 			'expand_button' => array( 
 				'expand_button' 
@@ -695,9 +684,9 @@
 							 
 						),
 						'items' => array( 
-							'integrated_edit_field15' 
+							 
 						),
-						'fixedAtServer' => true,
+						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
 					'c9' => array(
@@ -1156,7 +1145,7 @@
 				'c14' => array(
 					'model' => 'c3',
 					'items' => array( 
-						'integrated_edit_field15' 
+						 
 					) 
 				),
 				'c15' => array(
@@ -1373,11 +1362,6 @@
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
 			'updateOnEdit' => false 
-		),
-		'integrated_edit_field15' => array(
-			'field' => 'value_type',
-			'type' => 'integrated_edit_field',
-			'orientation' => 0 
 		),
 		'expand_button' => array(
 			'type' => 'expand_button' 

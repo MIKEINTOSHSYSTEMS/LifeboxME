@@ -48,9 +48,6 @@
 		),
 		'deleted' => array(
 			'totalsType' => '' 
-		),
-		'value_type' => array(
-			'totalsType' => '' 
 		) 
 	),
 	'fields' => array(
@@ -70,8 +67,7 @@
 			'stored_by',
 			'created',
 			'last_updated',
-			'deleted',
-			'value_type' 
+			'deleted' 
 		),
 		'exportFields' => array( 
 			'data_value_id',
@@ -86,7 +82,6 @@
 			'country_id',
 			'facility_id',
 			'value',
-			'value_type',
 			'stored_by',
 			'created',
 			'last_updated',
@@ -146,9 +141,6 @@
 			),
 			'deleted' => array( 
 				'export_field15' 
-			),
-			'value_type' => array( 
-				'export_field16' 
 			) 
 		) 
 	),
@@ -180,7 +172,6 @@
 					'export_field9',
 					'export_field10',
 					'export_field11',
-					'export_field16',
 					'export_field12',
 					'export_field13',
 					'export_field14',
@@ -210,7 +201,6 @@
 				'export_field9' => 'grid',
 				'export_field10' => 'grid',
 				'export_field11' => 'grid',
-				'export_field16' => 'grid',
 				'export_field12' => 'grid',
 				'export_field13' => 'grid',
 				'export_field14' => 'grid',
@@ -251,8 +241,7 @@
 				'export_field12',
 				'export_field13',
 				'export_field14',
-				'export_field15',
-				'export_field16' 
+				'export_field15' 
 			) 
 		),
 		'cellMaps' => array(
@@ -404,7 +393,6 @@
 						'export_field9',
 						'export_field10',
 						'export_field11',
-						'export_field16',
 						'export_field12',
 						'export_field13',
 						'export_field14',
@@ -525,10 +513,6 @@
 		),
 		'export_field15' => array(
 			'field' => 'deleted',
-			'type' => 'export_field' 
-		),
-		'export_field16' => array(
-			'field' => 'value_type',
 			'type' => 'export_field' 
 		) 
 	),

@@ -693,7 +693,8 @@
 		'integrated_edit_field5' => array(
 			'field' => 'region_id',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => false 
 		),
 		'integrated_edit_field6' => array(
 			'field' => 'country_id',
@@ -722,7 +723,8 @@
 		'integrated_edit_field10' => array(
 			'field' => 'target_value',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => false 
 		),
 		'integrated_edit_field11' => array(
 			'field' => 'is_annual_target',
@@ -733,7 +735,8 @@
 		'integrated_edit_field12' => array(
 			'field' => 'created_by',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => false 
 		),
 		'expand_button' => array(
 			'type' => 'expand_button' 

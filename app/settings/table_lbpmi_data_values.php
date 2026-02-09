@@ -71,27 +71,24 @@ $runnerTableSettings['public.lbpmi_data_values'] = array(
 	'displayLoading' => true,
 	'warnLeavingEdit' => true,
 	'sql' => 'SELECT
-	dv.data_value_id,
-	dv.data_element_id,
-	dv.period_type,
-	dv.period_year,
-	dv.period_quarter,
-	dv.period_month,
-	dv.period_week,
-	dv.period_day,
-	dv.region_id,
-	dv.country_id,
-	dv.facility_id,
-	dv."value",
-	de.value_type AS value_type,
-	dv.stored_by,
-	dv.created,
-	dv.last_updated,
-	dv.deleted
+	data_value_id,
+	data_element_id,
+	period_type,
+	period_year,
+	period_quarter,
+	period_month,
+	period_week,
+	period_day,
+	region_id,
+	country_id,
+	facility_id,
+	"value",
+	stored_by,
+	created,
+	last_updated,
+	deleted
 FROM
-	"public".lbpmi_data_values AS dv
-	LEFT OUTER JOIN "public".lbpmi_data_elements AS de ON de.data_element_id = dv.data_element_id
-',
+	"public".lbpmi_data_values',
 	'keyFields' => array( 
 		'data_value_id' 
 	),
@@ -112,7 +109,7 @@ FROM
 			'index' => 1,
 			'type' => 3,
 			'autoinc' => true,
-			'sqlExpression' => 'dv.data_value_id',
+			'sqlExpression' => 'data_value_id',
 			'viewFormats' => array(
 				'view' => array(
 					'numberFractionalDigits' => 0 
@@ -149,7 +146,7 @@ FROM
 			'sourceSingle' => 'data_element_id',
 			'index' => 2,
 			'type' => 3,
-			'sqlExpression' => 'dv.data_element_id',
+			'sqlExpression' => 'data_element_id',
 			'viewFormats' => array(
 				'view' => array(
 					'numberFractionalDigits' => 0 
@@ -198,7 +195,7 @@ FROM
 			'strField' => 'period_type',
 			'sourceSingle' => 'period_type',
 			'index' => 3,
-			'sqlExpression' => 'dv.period_type',
+			'sqlExpression' => 'period_type',
 			'viewFormats' => array(
 				'view' => array(
 					'numberFractionalDigits' => 0 
@@ -233,7 +230,7 @@ FROM
 			'sourceSingle' => 'period_year',
 			'index' => 4,
 			'type' => 3,
-			'sqlExpression' => 'dv.period_year',
+			'sqlExpression' => 'period_year',
 			'viewFormats' => array(
 				'view' => array(
 					'numberFractionalDigits' => 0 
@@ -268,7 +265,7 @@ FROM
 			'sourceSingle' => 'period_quarter',
 			'index' => 5,
 			'type' => 3,
-			'sqlExpression' => 'dv.period_quarter',
+			'sqlExpression' => 'period_quarter',
 			'viewFormats' => array(
 				'view' => array(
 					'numberFractionalDigits' => 0 
@@ -301,7 +298,7 @@ FROM
 			'sourceSingle' => 'period_month',
 			'index' => 6,
 			'type' => 3,
-			'sqlExpression' => 'dv.period_month',
+			'sqlExpression' => 'period_month',
 			'viewFormats' => array(
 				'view' => array(
 					'numberFractionalDigits' => 0 
@@ -335,7 +332,7 @@ FROM
 			'sourceSingle' => 'period_week',
 			'index' => 7,
 			'type' => 3,
-			'sqlExpression' => 'dv.period_week',
+			'sqlExpression' => 'period_week',
 			'viewFormats' => array(
 				'view' => array(
 					'numberFractionalDigits' => 0 
@@ -371,7 +368,7 @@ FROM
 			'sourceSingle' => 'period_day',
 			'index' => 8,
 			'type' => 7,
-			'sqlExpression' => 'dv.period_day',
+			'sqlExpression' => 'period_day',
 			'viewFormats' => array(
 				'view' => array(
 					'format' => 'Short Date',
@@ -409,7 +406,7 @@ FROM
 			'sourceSingle' => 'region_id',
 			'index' => 9,
 			'type' => 3,
-			'sqlExpression' => 'dv.region_id',
+			'sqlExpression' => 'region_id',
 			'viewFormats' => array(
 				'view' => array(
 					'numberFractionalDigits' => 0 
@@ -451,7 +448,7 @@ FROM
 			'sourceSingle' => 'country_id',
 			'index' => 10,
 			'type' => 3,
-			'sqlExpression' => 'dv.country_id',
+			'sqlExpression' => 'country_id',
 			'viewFormats' => array(
 				'view' => array(
 					'numberFractionalDigits' => 0 
@@ -499,7 +496,7 @@ FROM
 			'sourceSingle' => 'facility_id',
 			'index' => 11,
 			'type' => 3,
-			'sqlExpression' => 'dv.facility_id',
+			'sqlExpression' => 'facility_id',
 			'viewFormats' => array(
 				'view' => array(
 					'numberFractionalDigits' => 0 
@@ -547,7 +544,7 @@ FROM
 			'sourceSingle' => 'value',
 			'index' => 12,
 			'type' => 14,
-			'sqlExpression' => 'dv."value"',
+			'sqlExpression' => '"value"',
 			'viewFormats' => array(
 				'view' => array(
 					'format' => 'Number',
@@ -582,8 +579,8 @@ FROM
 			'goodName' => 'stored_by',
 			'strField' => 'stored_by',
 			'sourceSingle' => 'stored_by',
-			'index' => 14,
-			'sqlExpression' => 'dv.stored_by',
+			'index' => 13,
+			'sqlExpression' => 'stored_by',
 			'viewFormats' => array(
 				'view' => array(
 					'numberFractionalDigits' => 0 
@@ -620,9 +617,9 @@ FROM
 			'goodName' => 'created',
 			'strField' => 'created',
 			'sourceSingle' => 'created',
-			'index' => 15,
+			'index' => 14,
 			'type' => 135,
-			'sqlExpression' => 'dv.created',
+			'sqlExpression' => 'created',
 			'viewFormats' => array(
 				'view' => array(
 					'format' => 'Short Date',
@@ -654,9 +651,9 @@ FROM
 			'goodName' => 'last_updated',
 			'strField' => 'last_updated',
 			'sourceSingle' => 'last_updated',
-			'index' => 16,
+			'index' => 15,
 			'type' => 135,
-			'sqlExpression' => 'dv.last_updated',
+			'sqlExpression' => 'last_updated',
 			'viewFormats' => array(
 				'view' => array(
 					'format' => 'Short Date',
@@ -688,9 +685,9 @@ FROM
 			'goodName' => 'deleted',
 			'strField' => 'deleted',
 			'sourceSingle' => 'deleted',
-			'index' => 17,
+			'index' => 16,
 			'type' => 11,
-			'sqlExpression' => 'dv.deleted',
+			'sqlExpression' => 'deleted',
 			'viewFormats' => array(
 				'view' => array(
 					'format' => 'Checkbox',
@@ -718,24 +715,6 @@ FROM
 				'format' => 'Options list' 
 			),
 			'tableName' => 'public.lbpmi_data_values' 
-		),
-		'value_type' => array(
-			'name' => 'value_type',
-			'goodName' => 'value_type',
-			'strField' => 'value_type',
-			'index' => 13,
-			'sqlExpression' => 'de.value_type',
-			'viewFormats' => array(
-				'view' => array(
-					 
-				) 
-			),
-			'editFormats' => array(
-				'edit' => array(
-					 
-				) 
-			),
-			'tableName' => 'public.lbpmi_data_elements' 
 		) 
 	),
 	'masterTables' => array( 
@@ -778,32 +757,29 @@ FROM
 	),
 	'query' => array(
 		'sql' => 'SELECT
-	dv.data_value_id,
-	dv.data_element_id,
-	dv.period_type,
-	dv.period_year,
-	dv.period_quarter,
-	dv.period_month,
-	dv.period_week,
-	dv.period_day,
-	dv.region_id,
-	dv.country_id,
-	dv.facility_id,
-	dv."value",
-	de.value_type AS value_type,
-	dv.stored_by,
-	dv.created,
-	dv.last_updated,
-	dv.deleted
+	data_value_id,
+	data_element_id,
+	period_type,
+	period_year,
+	period_quarter,
+	period_month,
+	period_week,
+	period_day,
+	region_id,
+	country_id,
+	facility_id,
+	"value",
+	stored_by,
+	created,
+	last_updated,
+	deleted
 FROM
-	"public".lbpmi_data_values AS dv
-	LEFT OUTER JOIN "public".lbpmi_data_elements AS de ON de.data_element_id = dv.data_element_id
-',
+	"public".lbpmi_data_values',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
 			array(
-				'sql' => 'dv.data_value_id',
+				'sql' => 'data_value_id',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => '',
@@ -811,14 +787,14 @@ FROM
 					'sql' => '',
 					'parsed' => true,
 					'type' => 'SQLField',
-					'table' => 'dv',
+					'table' => 'public.lbpmi_data_values',
 					'name' => 'data_value_id' 
 				),
 				'encrypted' => false,
 				'columnName' => 'data_value_id' 
 			),
 			array(
-				'sql' => 'dv.data_element_id',
+				'sql' => 'data_element_id',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => '',
@@ -826,14 +802,14 @@ FROM
 					'sql' => '',
 					'parsed' => true,
 					'type' => 'SQLField',
-					'table' => 'dv',
+					'table' => 'public.lbpmi_data_values',
 					'name' => 'data_element_id' 
 				),
 				'encrypted' => false,
 				'columnName' => 'data_element_id' 
 			),
 			array(
-				'sql' => 'dv.period_type',
+				'sql' => 'period_type',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => '',
@@ -841,14 +817,14 @@ FROM
 					'sql' => '',
 					'parsed' => true,
 					'type' => 'SQLField',
-					'table' => 'dv',
+					'table' => 'public.lbpmi_data_values',
 					'name' => 'period_type' 
 				),
 				'encrypted' => false,
 				'columnName' => 'period_type' 
 			),
 			array(
-				'sql' => 'dv.period_year',
+				'sql' => 'period_year',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => '',
@@ -856,14 +832,14 @@ FROM
 					'sql' => '',
 					'parsed' => true,
 					'type' => 'SQLField',
-					'table' => 'dv',
+					'table' => 'public.lbpmi_data_values',
 					'name' => 'period_year' 
 				),
 				'encrypted' => false,
 				'columnName' => 'period_year' 
 			),
 			array(
-				'sql' => 'dv.period_quarter',
+				'sql' => 'period_quarter',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => '',
@@ -871,14 +847,14 @@ FROM
 					'sql' => '',
 					'parsed' => true,
 					'type' => 'SQLField',
-					'table' => 'dv',
+					'table' => 'public.lbpmi_data_values',
 					'name' => 'period_quarter' 
 				),
 				'encrypted' => false,
 				'columnName' => 'period_quarter' 
 			),
 			array(
-				'sql' => 'dv.period_month',
+				'sql' => 'period_month',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => '',
@@ -886,14 +862,14 @@ FROM
 					'sql' => '',
 					'parsed' => true,
 					'type' => 'SQLField',
-					'table' => 'dv',
+					'table' => 'public.lbpmi_data_values',
 					'name' => 'period_month' 
 				),
 				'encrypted' => false,
 				'columnName' => 'period_month' 
 			),
 			array(
-				'sql' => 'dv.period_week',
+				'sql' => 'period_week',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => '',
@@ -901,14 +877,14 @@ FROM
 					'sql' => '',
 					'parsed' => true,
 					'type' => 'SQLField',
-					'table' => 'dv',
+					'table' => 'public.lbpmi_data_values',
 					'name' => 'period_week' 
 				),
 				'encrypted' => false,
 				'columnName' => 'period_week' 
 			),
 			array(
-				'sql' => 'dv.period_day',
+				'sql' => 'period_day',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => '',
@@ -916,14 +892,14 @@ FROM
 					'sql' => '',
 					'parsed' => true,
 					'type' => 'SQLField',
-					'table' => 'dv',
+					'table' => 'public.lbpmi_data_values',
 					'name' => 'period_day' 
 				),
 				'encrypted' => false,
 				'columnName' => 'period_day' 
 			),
 			array(
-				'sql' => 'dv.region_id',
+				'sql' => 'region_id',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => '',
@@ -931,14 +907,14 @@ FROM
 					'sql' => '',
 					'parsed' => true,
 					'type' => 'SQLField',
-					'table' => 'dv',
+					'table' => 'public.lbpmi_data_values',
 					'name' => 'region_id' 
 				),
 				'encrypted' => false,
 				'columnName' => 'region_id' 
 			),
 			array(
-				'sql' => 'dv.country_id',
+				'sql' => 'country_id',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => '',
@@ -946,14 +922,14 @@ FROM
 					'sql' => '',
 					'parsed' => true,
 					'type' => 'SQLField',
-					'table' => 'dv',
+					'table' => 'public.lbpmi_data_values',
 					'name' => 'country_id' 
 				),
 				'encrypted' => false,
 				'columnName' => 'country_id' 
 			),
 			array(
-				'sql' => 'dv.facility_id',
+				'sql' => 'facility_id',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => '',
@@ -961,14 +937,14 @@ FROM
 					'sql' => '',
 					'parsed' => true,
 					'type' => 'SQLField',
-					'table' => 'dv',
+					'table' => 'public.lbpmi_data_values',
 					'name' => 'facility_id' 
 				),
 				'encrypted' => false,
 				'columnName' => 'facility_id' 
 			),
 			array(
-				'sql' => 'dv."value"',
+				'sql' => '"value"',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => '',
@@ -976,29 +952,14 @@ FROM
 					'sql' => '',
 					'parsed' => true,
 					'type' => 'SQLField',
-					'table' => 'dv',
+					'table' => 'public.lbpmi_data_values',
 					'name' => 'value' 
 				),
 				'encrypted' => false,
 				'columnName' => 'value' 
 			),
 			array(
-				'sql' => 'de.value_type',
-				'parsed' => true,
-				'type' => 'FieldListItem',
-				'alias' => 'value_type',
-				'expression' => array(
-					'sql' => '',
-					'parsed' => true,
-					'type' => 'SQLField',
-					'table' => 'de',
-					'name' => 'value_type' 
-				),
-				'encrypted' => false,
-				'columnName' => 'value_type' 
-			),
-			array(
-				'sql' => 'dv.stored_by',
+				'sql' => 'stored_by',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => '',
@@ -1006,14 +967,14 @@ FROM
 					'sql' => '',
 					'parsed' => true,
 					'type' => 'SQLField',
-					'table' => 'dv',
+					'table' => 'public.lbpmi_data_values',
 					'name' => 'stored_by' 
 				),
 				'encrypted' => false,
 				'columnName' => 'stored_by' 
 			),
 			array(
-				'sql' => 'dv.created',
+				'sql' => 'created',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => '',
@@ -1021,14 +982,14 @@ FROM
 					'sql' => '',
 					'parsed' => true,
 					'type' => 'SQLField',
-					'table' => 'dv',
+					'table' => 'public.lbpmi_data_values',
 					'name' => 'created' 
 				),
 				'encrypted' => false,
 				'columnName' => 'created' 
 			),
 			array(
-				'sql' => 'dv.last_updated',
+				'sql' => 'last_updated',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => '',
@@ -1036,14 +997,14 @@ FROM
 					'sql' => '',
 					'parsed' => true,
 					'type' => 'SQLField',
-					'table' => 'dv',
+					'table' => 'public.lbpmi_data_values',
 					'name' => 'last_updated' 
 				),
 				'encrypted' => false,
 				'columnName' => 'last_updated' 
 			),
 			array(
-				'sql' => 'dv.deleted',
+				'sql' => 'deleted',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => '',
@@ -1051,7 +1012,7 @@ FROM
 					'sql' => '',
 					'parsed' => true,
 					'type' => 'SQLField',
-					'table' => 'dv',
+					'table' => 'public.lbpmi_data_values',
 					'name' => 'deleted' 
 				),
 				'encrypted' => false,
@@ -1060,7 +1021,7 @@ FROM
 		),
 		'fromList' => array( 
 			array(
-				'sql' => '"public".lbpmi_data_values AS dv',
+				'sql' => '"public".lbpmi_data_values',
 				'parsed' => true,
 				'type' => 'FromListItem',
 				'table' => array(
@@ -1108,76 +1069,7 @@ FROM
 						 
 					) 
 				),
-				'alias' => 'dv',
 				'link' => 0 
-			),
-			array(
-				'sql' => 'LEFT OUTER JOIN "public".lbpmi_data_elements AS de ON de.data_element_id = dv.data_element_id',
-				'parsed' => true,
-				'type' => 'FromListItem',
-				'table' => array(
-					'sql' => '"public".lbpmi_data_elements',
-					'parsed' => true,
-					'type' => 'SQLTable',
-					'columns' => array( 
-						'data_element_id',
-						'data_element_name',
-						'data_element_description',
-						'data_element_code',
-						'value_type',
-						'aggregation_type',
-						'domain_type',
-						'category_combo_id',
-						'is_active',
-						'created_by',
-						'created_at',
-						'updated_at' 
-					),
-					'name' => 'public.lbpmi_data_elements' 
-				),
-				'joinOn' => array(
-					'sql' => 'de.data_element_id = dv.data_element_id',
-					'parsed' => true,
-					'type' => 'LogicalExpression',
-					'contained' => array( 
-						 
-					),
-					'unionType' => 0,
-					'column' => array(
-						'sql' => '',
-						'parsed' => true,
-						'type' => 'SQLField',
-						'table' => 'de',
-						'name' => 'data_element_id' 
-					),
-					'case' => '= dv.data_element_id',
-					'useAlias' => false 
-				),
-				'joinList' => array(
-					'sql' => 'de.data_element_id = dv.data_element_id',
-					'parsed' => true,
-					'type' => 'JoinOn',
-					'field1' => array( 
-						array(
-							'sql' => '',
-							'parsed' => true,
-							'type' => 'SQLField',
-							'table' => 'de',
-							'name' => 'data_element_id' 
-						) 
-					),
-					'field2' => array( 
-						array(
-							'sql' => '',
-							'parsed' => true,
-							'type' => 'SQLField',
-							'table' => 'dv',
-							'name' => 'data_element_id' 
-						) 
-					) 
-				),
-				'alias' => 'de',
-				'link' => 3 
 			) 
 		),
 		'where' => array(
@@ -1318,36 +1210,27 @@ FROM
 				'groupByIndex' => -1,
 				'whereIndex' => -1,
 				'havingIndex' => -1 
-			),
-			array(
-				'fieldIndex' => 16,
-				'orderByIndex' => -1,
-				'groupByIndex' => -1,
-				'whereIndex' => -1,
-				'havingIndex' => -1 
 			) 
 		),
 		'headSql' => 'SELECT',
-		'fieldListSql' => 'dv.data_value_id,
-	dv.data_element_id,
-	dv.period_type,
-	dv.period_year,
-	dv.period_quarter,
-	dv.period_month,
-	dv.period_week,
-	dv.period_day,
-	dv.region_id,
-	dv.country_id,
-	dv.facility_id,
-	dv."value",
-	de.value_type AS value_type,
-	dv.stored_by,
-	dv.created,
-	dv.last_updated,
-	dv.deleted',
+		'fieldListSql' => 'data_value_id,
+	data_element_id,
+	period_type,
+	period_year,
+	period_quarter,
+	period_month,
+	period_week,
+	period_day,
+	region_id,
+	country_id,
+	facility_id,
+	"value",
+	stored_by,
+	created,
+	last_updated,
+	deleted',
 		'fromListSql' => 'FROM
-	"public".lbpmi_data_values AS dv
-	LEFT OUTER JOIN "public".lbpmi_data_elements AS de ON de.data_element_id = dv.data_element_id',
+	"public".lbpmi_data_values',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),
@@ -1417,8 +1300,7 @@ FROM
 			'stored_by',
 			'created',
 			'last_updated',
-			'deleted',
-			'value_type' 
+			'deleted' 
 		),
 		'searchSuggest' => true,
 		'highlightSearchResults' => true,
@@ -1440,8 +1322,7 @@ FROM
 			'stored_by',
 			'created',
 			'last_updated',
-			'deleted',
-			'value_type' 
+			'deleted' 
 		) 
 	),
 	'connId' => 'lifebox_mesystem_at_localhost',
@@ -1510,8 +1391,7 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'stored_by' => 'Stored By',
 		'created' => 'Created',
 		'last_updated' => 'Last Updated',
-		'deleted' => 'Deleted',
-		'value_type' => 'Value Type' 
+		'deleted' => 'Deleted' 
 	),
 	'fieldTooltips' => array(
 		'data_value_id' => '',
@@ -1529,8 +1409,7 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'stored_by' => '',
 		'created' => '',
 		'last_updated' => '',
-		'deleted' => '',
-		'value_type' => '' 
+		'deleted' => '' 
 	),
 	'fieldPlaceholders' => array(
 		'data_value_id' => '',
@@ -1548,8 +1427,7 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'stored_by' => '',
 		'created' => '',
 		'last_updated' => '',
-		'deleted' => '',
-		'value_type' => '' 
+		'deleted' => '' 
 	),
 	'pageTitles' => array(
 		 

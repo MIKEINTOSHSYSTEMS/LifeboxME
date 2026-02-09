@@ -17,8 +17,7 @@
 			'stored_by',
 			'created',
 			'last_updated',
-			'deleted',
-			'value_type' 
+			'deleted' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -74,9 +73,6 @@
 			),
 			'deleted' => array( 
 				'integrated_search_field15' 
-			),
-			'value_type' => array( 
-				'integrated_search_field16' 
 			) 
 		) 
 	),
@@ -114,7 +110,6 @@
 					'integrated_search_field9',
 					'integrated_search_field10',
 					'integrated_search_field11',
-					'integrated_search_field16',
 					'integrated_search_field12',
 					'integrated_search_field13',
 					'integrated_search_field14',
@@ -144,7 +139,6 @@
 				'integrated_search_field9' => 'grid',
 				'integrated_search_field10' => 'grid',
 				'integrated_search_field11' => 'grid',
-				'integrated_search_field16' => 'grid',
 				'integrated_search_field12' => 'grid',
 				'integrated_search_field13' => 'grid',
 				'integrated_search_field14' => 'grid',
@@ -196,10 +190,6 @@
 					'cellId' => 'c3' 
 				),
 				'integrated_search_field11' => array(
-					'location' => 'grid',
-					'cellId' => 'c3' 
-				),
-				'integrated_search_field16' => array(
 					'location' => 'grid',
 					'cellId' => 'c3' 
 				),
@@ -256,8 +246,7 @@
 				'integrated_search_field12',
 				'integrated_search_field13',
 				'integrated_search_field14',
-				'integrated_search_field15',
-				'integrated_search_field16' 
+				'integrated_search_field15' 
 			) 
 		),
 		'cellMaps' => array(
@@ -286,7 +275,6 @@
 							'integrated_search_field9',
 							'integrated_search_field10',
 							'integrated_search_field11',
-							'integrated_search_field16',
 							'integrated_search_field12',
 							'integrated_search_field13',
 							'integrated_search_field14',
@@ -467,7 +455,6 @@
 						'integrated_search_field9',
 						'integrated_search_field10',
 						'integrated_search_field11',
-						'integrated_search_field16',
 						'integrated_search_field12',
 						'integrated_search_field13',
 						'integrated_search_field14',
@@ -592,11 +579,6 @@
 			'type' => 'integrated_search_field',
 			'orientation' => 0,
 			'required' => false 
-		),
-		'integrated_search_field16' => array(
-			'field' => 'value_type',
-			'type' => 'integrated_search_field',
-			'orientation' => 0 
 		) 
 	),
 	'dbProps' => array(
