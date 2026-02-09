@@ -51,9 +51,9 @@ $runnerDbTables = array(
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'partners',
+		'table' => 'regions',
 		'schema' => 'public',
-		'filename' => 'public_partners' 
+		'filename' => 'public_regions' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
@@ -63,15 +63,9 @@ $runnerDbTables = array(
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'regions',
+		'table' => 'diagnoses',
 		'schema' => 'public',
-		'filename' => 'public_regions' 
-	),
-	array(
-		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'lifebox_staff',
-		'schema' => 'public',
-		'filename' => 'public_lifebox_staff' 
+		'filename' => 'public_diagnoses' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
@@ -81,27 +75,9 @@ $runnerDbTables = array(
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'facilities',
+		'table' => 'partners',
 		'schema' => 'public',
-		'filename' => 'public_facilities' 
-	),
-	array(
-		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'countries',
-		'schema' => 'public',
-		'filename' => 'public_countries' 
-	),
-	array(
-		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'diagnoses',
-		'schema' => 'public',
-		'filename' => 'public_diagnoses' 
-	),
-	array(
-		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'procedures',
-		'schema' => 'public',
-		'filename' => 'public_procedures' 
+		'filename' => 'public_partners' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
@@ -111,15 +87,33 @@ $runnerDbTables = array(
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
+		'table' => 'countries',
+		'schema' => 'public',
+		'filename' => 'public_countries' 
+	),
+	array(
+		'connId' => 'lifebox_mesystem_at_localhost',
+		'table' => 'facilities',
+		'schema' => 'public',
+		'filename' => 'public_facilities' 
+	),
+	array(
+		'connId' => 'lifebox_mesystem_at_localhost',
+		'table' => 'procedures',
+		'schema' => 'public',
+		'filename' => 'public_procedures' 
+	),
+	array(
+		'connId' => 'lifebox_mesystem_at_localhost',
 		'table' => 'device_distributions',
 		'schema' => 'public',
 		'filename' => 'public_device_distributions' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'trainers',
+		'table' => 'lifebox_staff',
 		'schema' => 'public',
-		'filename' => 'public_trainers' 
+		'filename' => 'public_lifebox_staff' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
@@ -132,6 +126,12 @@ $runnerDbTables = array(
 		'table' => 'training_courses',
 		'schema' => 'public',
 		'filename' => 'public_training_courses' 
+	),
+	array(
+		'connId' => 'lifebox_mesystem_at_localhost',
+		'table' => 'training_partners',
+		'schema' => 'public',
+		'filename' => 'public_training_partners' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
@@ -153,15 +153,9 @@ $runnerDbTables = array(
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'ward_rounds',
+		'table' => 'trainers',
 		'schema' => 'public',
-		'filename' => 'public_ward_rounds' 
-	),
-	array(
-		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'training_partners',
-		'schema' => 'public',
-		'filename' => 'public_training_partners' 
+		'filename' => 'public_trainers' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
@@ -177,15 +171,21 @@ $runnerDbTables = array(
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'device_distribution_summary_view',
+		'table' => 'ward_rounds',
 		'schema' => 'public',
-		'filename' => 'public_device_distribution_summary_view' 
+		'filename' => 'public_ward_rounds' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
 		'table' => 'clean_cut_implementation_summary_view',
 		'schema' => 'public',
 		'filename' => 'public_clean_cut_implementation_summary_view' 
+	),
+	array(
+		'connId' => 'lifebox_mesystem_at_localhost',
+		'table' => 'device_distribution_summary_view',
+		'schema' => 'public',
+		'filename' => 'public_device_distribution_summary_view' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
@@ -225,15 +225,21 @@ $runnerDbTables = array(
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
+		'table' => 'participant_role',
+		'schema' => 'public',
+		'filename' => 'public_participant_role' 
+	),
+	array(
+		'connId' => 'lifebox_mesystem_at_localhost',
 		'table' => 'sex',
 		'schema' => 'public',
 		'filename' => 'public_sex' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'participant_role',
+		'table' => 'training_participants',
 		'schema' => 'public',
-		'filename' => 'public_participant_role' 
+		'filename' => 'public_training_participants' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
@@ -249,21 +255,9 @@ $runnerDbTables = array(
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'training_participants',
+		'table' => 'daily_attendance_view',
 		'schema' => 'public',
-		'filename' => 'public_training_participants' 
-	),
-	array(
-		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'training_attendance',
-		'schema' => 'public',
-		'filename' => 'public_training_attendance' 
-	),
-	array(
-		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'participant_attendance_summary',
-		'schema' => 'public',
-		'filename' => 'public_participant_attendance_summary' 
+		'filename' => 'public_daily_attendance_view' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
@@ -273,15 +267,21 @@ $runnerDbTables = array(
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'daily_attendance_view',
+		'table' => 'participant_attendance_summary',
 		'schema' => 'public',
-		'filename' => 'public_daily_attendance_view' 
+		'filename' => 'public_participant_attendance_summary' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
 		'table' => 'users',
 		'schema' => 'public',
 		'filename' => 'public_users' 
+	),
+	array(
+		'connId' => 'lifebox_mesystem_at_localhost',
+		'table' => 'training_attendance',
+		'schema' => 'public',
+		'filename' => 'public_training_attendance' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
@@ -303,27 +303,27 @@ $runnerDbTables = array(
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'transaction_types',
-		'schema' => 'public',
-		'filename' => 'public_transaction_types' 
-	),
-	array(
-		'connId' => 'lifebox_mesystem_at_localhost',
 		'table' => 'donors',
 		'schema' => 'public',
 		'filename' => 'public_donors' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'device_inventory_changes',
-		'schema' => 'public',
-		'filename' => 'public_device_inventory_changes' 
-	),
-	array(
-		'connId' => 'lifebox_mesystem_at_localhost',
 		'table' => 'device_distribution_log',
 		'schema' => 'public',
 		'filename' => 'public_device_distribution_log' 
+	),
+	array(
+		'connId' => 'lifebox_mesystem_at_localhost',
+		'table' => 'transaction_types',
+		'schema' => 'public',
+		'filename' => 'public_transaction_types' 
+	),
+	array(
+		'connId' => 'lifebox_mesystem_at_localhost',
+		'table' => 'device_inventory_changes',
+		'schema' => 'public',
+		'filename' => 'public_device_inventory_changes' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
@@ -363,21 +363,9 @@ $runnerDbTables = array(
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'lbapt_annual_plan_tracker',
+		'table' => 'lbapt_elma',
 		'schema' => 'public',
-		'filename' => 'public_lbapt_annual_plan_tracker' 
-	),
-	array(
-		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'lbapt_cri',
-		'schema' => 'public',
-		'filename' => 'public_lbapt_cri' 
-	),
-	array(
-		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'lbapt_communications',
-		'schema' => 'public',
-		'filename' => 'public_lbapt_communications' 
+		'filename' => 'public_lbapt_elma' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
@@ -387,9 +375,27 @@ $runnerDbTables = array(
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
+		'table' => 'lbapt_communications',
+		'schema' => 'public',
+		'filename' => 'public_lbapt_communications' 
+	),
+	array(
+		'connId' => 'lifebox_mesystem_at_localhost',
 		'table' => 'lbapt_development',
 		'schema' => 'public',
 		'filename' => 'public_lbapt_development' 
+	),
+	array(
+		'connId' => 'lifebox_mesystem_at_localhost',
+		'table' => 'lbapt_cri',
+		'schema' => 'public',
+		'filename' => 'public_lbapt_cri' 
+	),
+	array(
+		'connId' => 'lifebox_mesystem_at_localhost',
+		'table' => 'lbapt_annual_plan_tracker',
+		'schema' => 'public',
+		'filename' => 'public_lbapt_annual_plan_tracker' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
@@ -399,27 +405,9 @@ $runnerDbTables = array(
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'lbapt_elma',
-		'schema' => 'public',
-		'filename' => 'public_lbapt_elma' 
-	),
-	array(
-		'connId' => 'lifebox_mesystem_at_localhost',
 		'table' => 'lbapt_kpis_on_track',
 		'schema' => 'public',
 		'filename' => 'public_lbapt_kpis_on_track' 
-	),
-	array(
-		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'lbapt_operations',
-		'schema' => 'public',
-		'filename' => 'public_lbapt_operations' 
-	),
-	array(
-		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'lbapt_programs',
-		'schema' => 'public',
-		'filename' => 'public_lbapt_programs' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
@@ -429,9 +417,9 @@ $runnerDbTables = array(
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'lbapt_strategic_areas',
+		'table' => 'lbapt_programs',
 		'schema' => 'public',
-		'filename' => 'public_lbapt_strategic_areas' 
+		'filename' => 'public_lbapt_programs' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
@@ -441,9 +429,9 @@ $runnerDbTables = array(
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'lbapt_dashboard_summary_view',
+		'table' => 'lbapt_strategic_areas',
 		'schema' => 'public',
-		'filename' => 'public_lbapt_dashboard_summary_view' 
+		'filename' => 'public_lbapt_strategic_areas' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
@@ -453,9 +441,21 @@ $runnerDbTables = array(
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
+		'table' => 'lbapt_dashboard_summary_view',
+		'schema' => 'public',
+		'filename' => 'public_lbapt_dashboard_summary_view' 
+	),
+	array(
+		'connId' => 'lifebox_mesystem_at_localhost',
 		'table' => 'lbapt_kpis_tracking_view',
 		'schema' => 'public',
 		'filename' => 'public_lbapt_kpis_tracking_view' 
+	),
+	array(
+		'connId' => 'lifebox_mesystem_at_localhost',
+		'table' => 'lbapt_operations',
+		'schema' => 'public',
+		'filename' => 'public_lbapt_operations' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
@@ -465,21 +465,15 @@ $runnerDbTables = array(
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'years',
+		'table' => 'lbpmi_data_elements',
 		'schema' => 'public',
-		'filename' => 'public_years' 
+		'filename' => 'public_lbpmi_data_elements' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'lbapt_finance',
+		'table' => 'lbapt_whi',
 		'schema' => 'public',
-		'filename' => 'public_lbapt_finance' 
-	),
-	array(
-		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'lbapt_hr',
-		'schema' => 'public',
-		'filename' => 'public_lbapt_hr' 
+		'filename' => 'public_lbapt_whi' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
@@ -495,15 +489,27 @@ $runnerDbTables = array(
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
+		'table' => 'lbapt_finance',
+		'schema' => 'public',
+		'filename' => 'public_lbapt_finance' 
+	),
+	array(
+		'connId' => 'lifebox_mesystem_at_localhost',
 		'table' => 'lbapt_st',
 		'schema' => 'public',
 		'filename' => 'public_lbapt_st' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'lbapt_whi',
+		'table' => 'lbapt_hr',
 		'schema' => 'public',
-		'filename' => 'public_lbapt_whi' 
+		'filename' => 'public_lbapt_hr' 
+	),
+	array(
+		'connId' => 'lifebox_mesystem_at_localhost',
+		'table' => 'years',
+		'schema' => 'public',
+		'filename' => 'public_years' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
@@ -513,21 +519,9 @@ $runnerDbTables = array(
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'lbpmi_data_elements',
+		'table' => 'lbpmi_datasets',
 		'schema' => 'public',
-		'filename' => 'public_lbpmi_data_elements' 
-	),
-	array(
-		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'lbpmi_indicators',
-		'schema' => 'public',
-		'filename' => 'public_lbpmi_indicators' 
-	),
-	array(
-		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'lbpmi_indicator_targets',
-		'schema' => 'public',
-		'filename' => 'public_lbpmi_indicator_targets' 
+		'filename' => 'public_lbpmi_datasets' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
@@ -537,15 +531,9 @@ $runnerDbTables = array(
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'lbpmi_datasets',
+		'table' => 'lbpmi_indicators',
 		'schema' => 'public',
-		'filename' => 'public_lbpmi_datasets' 
-	),
-	array(
-		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'unit_of_measurement',
-		'schema' => 'public',
-		'filename' => 'public_unit_of_measurement' 
+		'filename' => 'public_lbpmi_indicators' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
@@ -561,6 +549,18 @@ $runnerDbTables = array(
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
+		'table' => 'lbpmi_indicator_targets',
+		'schema' => 'public',
+		'filename' => 'public_lbpmi_indicator_targets' 
+	),
+	array(
+		'connId' => 'lifebox_mesystem_at_localhost',
+		'table' => 'unit_of_measurement',
+		'schema' => 'public',
+		'filename' => 'public_unit_of_measurement' 
+	),
+	array(
+		'connId' => 'lifebox_mesystem_at_localhost',
 		'table' => 'lbpmi_summary',
 		'schema' => 'public',
 		'filename' => 'public_lbpmi_summary' 
@@ -570,6 +570,18 @@ $runnerDbTables = array(
 		'table' => 'lbpmi_data_values',
 		'schema' => 'public',
 		'filename' => 'public_lbpmi_data_values' 
+	),
+	array(
+		'connId' => 'lifebox_mesystem_at_localhost',
+		'table' => 'lbpmi_aggregation_type',
+		'schema' => 'public',
+		'filename' => 'public_lbpmi_aggregation_type' 
+	),
+	array(
+		'connId' => 'lifebox_mesystem_at_localhost',
+		'table' => 'lbpmi_domain_type',
+		'schema' => 'public',
+		'filename' => 'public_lbpmi_domain_type' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
@@ -585,33 +597,15 @@ $runnerDbTables = array(
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'lbpmi_domain_type',
-		'schema' => 'public',
-		'filename' => 'public_lbpmi_domain_type' 
-	),
-	array(
-		'connId' => 'lifebox_mesystem_at_localhost',
 		'table' => 'lbpmi_indicator_groups',
 		'schema' => 'public',
 		'filename' => 'public_lbpmi_indicator_groups' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'lbpmi_aggregation_type',
+		'table' => 'lbln_courses',
 		'schema' => 'public',
-		'filename' => 'public_lbpmi_aggregation_type' 
-	),
-	array(
-		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'lbln_course_users',
-		'schema' => 'public',
-		'filename' => 'public_lbln_course_users' 
-	),
-	array(
-		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'lbln_fetch_sessions',
-		'schema' => 'public',
-		'filename' => 'public_lbln_fetch_sessions' 
+		'filename' => 'public_lbln_courses' 
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
@@ -621,9 +615,15 @@ $runnerDbTables = array(
 	),
 	array(
 		'connId' => 'lifebox_mesystem_at_localhost',
-		'table' => 'lbln_courses',
+		'table' => 'lbln_fetch_sessions',
 		'schema' => 'public',
-		'filename' => 'public_lbln_courses' 
+		'filename' => 'public_lbln_fetch_sessions' 
+	),
+	array(
+		'connId' => 'lifebox_mesystem_at_localhost',
+		'table' => 'lbln_course_users',
+		'schema' => 'public',
+		'filename' => 'public_lbln_course_users' 
 	) 
 );
 ?>
