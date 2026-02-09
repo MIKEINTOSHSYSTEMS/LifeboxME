@@ -57,7 +57,7 @@ $runnerTableSettings['public.lbpmi_data_values'] = array(
 		'50',
 		'100',
 		'500',
-		'-1' 
+		'1' 
 	),
 	'pageSizeSelectorGroups' => array( 
 		'1',
@@ -66,8 +66,9 @@ $runnerTableSettings['public.lbpmi_data_values'] = array(
 		'10',
 		'50',
 		'100',
-		'-1' 
+		'1' 
 	),
+	'displayLoading' => true,
 	'warnLeavingEdit' => true,
 	'sql' => 'SELECT
 	data_value_id,
@@ -575,6 +576,9 @@ FROM
 			),
 			'editFormats' => array(
 				'edit' => array(
+					'format' => 'Readonly',
+					'defaultValue' => '$_SESSION["UserName"]',
+					'autoUpdateValue' => '$_SESSION["UserName"]',
 					'validateRegexMessage' => array(
 						'text' => '',
 						'type' => 0 
@@ -612,7 +616,7 @@ FROM
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'format' => 'Date',
+					'format' => 'Readonly',
 					'defaultValue' => 'strftime("%Y-%m-%d %H:%M:%S")',
 					'validateRegexMessage' => array(
 						'text' => '',
@@ -646,7 +650,7 @@ FROM
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'format' => 'Date',
+					'format' => 'Readonly',
 					'autoUpdateValue' => 'strftime("%Y-%m-%d %H:%M:%S")',
 					'validateRegexMessage' => array(
 						'text' => '',

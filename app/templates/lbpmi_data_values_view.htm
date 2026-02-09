@@ -345,53 +345,33 @@
 	data-location="grid" id="form_grid_{$pageid}" data-makeup="leftbar" {$form_grid} data-pageid="{$pageid}" 
 	class="r-edit-form" cellpadding="0" cellspacing="0" 
 	{$grid_hiddenattr} 
-		data-form-width="1"
+		data-form-width="3"
 		
-		data-v-width="4"
+		data-v-width="6"
 	>
 	<tbody>
 										<tr {$row_grid_0} >
 										
 
-{BEGIN cellblock_grid_c3}
+{BEGIN cellblock_grid_c}
 <td
-	{$cell_grid_c3}
+	{$cell_grid_c}
 	class=" r-ori-vert"
 	
-				data-fullwidth
-		
-			data-cellId="grid_c3" data-pageid="{$pageid}"
-		data-v-cell="4"
+			data-single
+			
+			data-cellId="grid_c" data-pageid="{$pageid}"
+		data-v-cell="2"
 		
 >
 	<div edit-form-cell class="clearfix">
 				
-{BEGIN data_value_id_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_data_value_id}  r-vertical-field" 
-	data-signal-error-for="data_value_id{$id}" {$required_attr_data_value_id}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="data_value_id" data-fieldname="data_value_id" >
-
-	<label class="r-edit-label control-label {$data_value_id_label_class}" for="{$labelfor_data_value_id}">
-		{BEGIN data_value_id_label}
-			{$data_value_id_forward_control}
-			{$label public_lbpmi_data_values data_value_id }			{END data_value_id_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$data_value_id_value}	</div>
-	</div>
-
-
-{END data_value_id_fieldblock}
-											
 {BEGIN data_element_id_fieldblock}
 
 
 <div class="r-integrated-field form-group clearfix {$fielddispclass_data_element_id}  r-vertical-field" 
 	data-signal-error-for="data_element_id{$id}" {$required_attr_data_element_id}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="data_element_id" data-fieldname="data_element_id" >
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="data_element_id" data-fieldname="data_element_id" >
 
 	<label class="r-edit-label control-label {$data_element_id_label_class}" for="{$labelfor_data_element_id}">
 		{BEGIN data_element_id_label}
@@ -405,13 +385,31 @@
 
 
 {END data_element_id_fieldblock}
-											
+	
+								</td>
+			{END cellblock_grid_c}
+			 
+																
+
+{BEGIN cellblock_grid_c10}
+<td
+	{$cell_grid_c10}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c10" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
 {BEGIN period_type_fieldblock}
 
 
 <div class="r-integrated-field form-group clearfix {$fielddispclass_period_type}  r-vertical-field" 
 	data-signal-error-for="period_type{$id}" {$required_attr_period_type}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="period_type" data-fieldname="period_type" >
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="period_type" data-fieldname="period_type" >
 
 	<label class="r-edit-label control-label {$period_type_label_class}" for="{$labelfor_period_type}">
 		{BEGIN period_type_label}
@@ -425,13 +423,31 @@
 
 
 {END period_type_fieldblock}
-											
+	
+								</td>
+			{END cellblock_grid_c10}
+			 
+																
+
+{BEGIN cellblock_grid_c1}
+<td
+	{$cell_grid_c1}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c1" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
 {BEGIN period_year_fieldblock}
 
 
 <div class="r-integrated-field form-group clearfix {$fielddispclass_period_year}  r-vertical-field" 
 	data-signal-error-for="period_year{$id}" {$required_attr_period_year}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="period_year" data-fieldname="period_year" >
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="period_year" data-fieldname="period_year" >
 
 	<label class="r-edit-label control-label {$period_year_label_class}" for="{$labelfor_period_year}">
 		{BEGIN period_year_label}
@@ -445,13 +461,51 @@
 
 
 {END period_year_fieldblock}
-											
+	
+								</td>
+			{END cellblock_grid_c1}
+								</tr>
+	 
+	 
+		
+						<tr>
+						
+
+{BEGIN cellblock_grid_c4}
+<td
+	{$cell_grid_c4}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c4" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c4}
+			 
+																
+
+{BEGIN cellblock_grid_c11}
+<td
+	{$cell_grid_c11}
+	class=" r-ori-vert"
+	
+			
+			data-cellId="grid_c11" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
 {BEGIN period_quarter_fieldblock}
 
 
 <div class="r-integrated-field form-group clearfix {$fielddispclass_period_quarter}  r-vertical-field" 
 	data-signal-error-for="period_quarter{$id}" {$required_attr_period_quarter}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="period_quarter" data-fieldname="period_quarter" >
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="period_quarter" data-fieldname="period_quarter" >
 
 	<label class="r-edit-label control-label {$period_quarter_label_class}" for="{$labelfor_period_quarter}">
 		{BEGIN period_quarter_label}
@@ -466,12 +520,49 @@
 
 {END period_quarter_fieldblock}
 											
+{BEGIN period_week_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_period_week}  r-vertical-field" 
+	data-signal-error-for="period_week{$id}" {$required_attr_period_week}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="period_week" data-fieldname="period_week" >
+
+	<label class="r-edit-label control-label {$period_week_label_class}" for="{$labelfor_period_week}">
+		{BEGIN period_week_label}
+			{$period_week_forward_control}
+			{$label public_lbpmi_data_values period_week }			{END period_week_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$period_week_value}	</div>
+	</div>
+
+
+{END period_week_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c11}
+			 
+																
+
+{BEGIN cellblock_grid_c2}
+<td
+	{$cell_grid_c2}
+	class=" r-ori-vert"
+	
+			
+			data-cellId="grid_c2" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
 {BEGIN period_month_fieldblock}
 
 
 <div class="r-integrated-field form-group clearfix {$fielddispclass_period_month}  r-vertical-field" 
 	data-signal-error-for="period_month{$id}" {$required_attr_period_month}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="period_month" data-fieldname="period_month" >
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="period_month" data-fieldname="period_month" >
 
 	<label class="r-edit-label control-label {$period_month_label_class}" for="{$labelfor_period_month}">
 		{BEGIN period_month_label}
@@ -486,32 +577,12 @@
 
 {END period_month_fieldblock}
 											
-{BEGIN period_week_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_period_week}  r-vertical-field" 
-	data-signal-error-for="period_week{$id}" {$required_attr_period_week}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="period_week" data-fieldname="period_week" >
-
-	<label class="r-edit-label control-label {$period_week_label_class}" for="{$labelfor_period_week}">
-		{BEGIN period_week_label}
-			{$period_week_forward_control}
-			{$label public_lbpmi_data_values period_week }			{END period_week_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$period_week_value}	</div>
-	</div>
-
-
-{END period_week_fieldblock}
-											
 {BEGIN period_day_fieldblock}
 
 
 <div class="r-integrated-field form-group clearfix {$fielddispclass_period_day}  r-vertical-field" 
 	data-signal-error-for="period_day{$id}" {$required_attr_period_day}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="period_day" data-fieldname="period_day" >
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="period_day" data-fieldname="period_day" >
 
 	<label class="r-edit-label control-label {$period_day_label_class}" for="{$labelfor_period_day}">
 		{BEGIN period_day_label}
@@ -525,13 +596,91 @@
 
 
 {END period_day_fieldblock}
-											
+	
+								</td>
+			{END cellblock_grid_c2}
+								</tr>
+	 
+	 
+		
+						<tr>
+						
+
+{BEGIN cellblock_grid_c5}
+<td
+	{$cell_grid_c5}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c5" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c5}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c12}
+<td
+	{$cell_grid_c12}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c12" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c12}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c7}
+<td
+	{$cell_grid_c7}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c7" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c7}
+								</tr>
+	 
+	 
+														<tr {$row_grid_3} >
+										
+
+{BEGIN cellblock_grid_c15}
+<td
+	{$cell_grid_c15}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c15" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
 {BEGIN region_id_fieldblock}
 
 
 <div class="r-integrated-field form-group clearfix {$fielddispclass_region_id}  r-vertical-field" 
 	data-signal-error-for="region_id{$id}" {$required_attr_region_id}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="region_id" data-fieldname="region_id" >
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="region_id" data-fieldname="region_id" >
 
 	<label class="r-edit-label control-label {$region_id_label_class}" for="{$labelfor_region_id}">
 		{BEGIN region_id_label}
@@ -545,13 +694,31 @@
 
 
 {END region_id_fieldblock}
-											
+	
+								</td>
+			{END cellblock_grid_c15}
+			 
+																
+
+{BEGIN cellblock_grid_c16}
+<td
+	{$cell_grid_c16}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c16" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
 {BEGIN country_id_fieldblock}
 
 
 <div class="r-integrated-field form-group clearfix {$fielddispclass_country_id}  r-vertical-field" 
 	data-signal-error-for="country_id{$id}" {$required_attr_country_id}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="country_id" data-fieldname="country_id" >
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="country_id" data-fieldname="country_id" >
 
 	<label class="r-edit-label control-label {$country_id_label_class}" for="{$labelfor_country_id}">
 		{BEGIN country_id_label}
@@ -565,13 +732,31 @@
 
 
 {END country_id_fieldblock}
-											
+	
+								</td>
+			{END cellblock_grid_c16}
+			 
+																
+
+{BEGIN cellblock_grid_c17}
+<td
+	{$cell_grid_c17}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c17" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
 {BEGIN facility_id_fieldblock}
 
 
 <div class="r-integrated-field form-group clearfix {$fielddispclass_facility_id}  r-vertical-field" 
 	data-signal-error-for="facility_id{$id}" {$required_attr_facility_id}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="facility_id" data-fieldname="facility_id" >
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="facility_id" data-fieldname="facility_id" >
 
 	<label class="r-edit-label control-label {$facility_id_label_class}" for="{$labelfor_facility_id}">
 		{BEGIN facility_id_label}
@@ -585,13 +770,52 @@
 
 
 {END facility_id_fieldblock}
-											
+	
+								</td>
+			{END cellblock_grid_c17}
+								</tr>
+	 
+	 
+		
+						<tr>
+						
+
+{BEGIN cellblock_grid_c6}
+<td
+	{$cell_grid_c6}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c6" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c6}
+			 
+																
+
+{BEGIN cellblock_grid_c13}
+<td
+	{$cell_grid_c13}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c13" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
 {BEGIN value_fieldblock}
 
 
 <div class="r-integrated-field form-group clearfix {$fielddispclass_value}  r-vertical-field" 
 	data-signal-error-for="value{$id}" {$required_attr_value}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="value" data-fieldname="value" >
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="value" data-fieldname="value" >
 
 	<label class="r-edit-label control-label {$value_label_class}" for="{$labelfor_value}">
 		{BEGIN value_label}
@@ -605,13 +829,109 @@
 
 
 {END value_fieldblock}
-											
+	
+								</td>
+			{END cellblock_grid_c13}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c8}
+<td
+	{$cell_grid_c8}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c8" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c8}
+								</tr>
+	 
+	 
+		
+						<tr>
+						
+
+{BEGIN cellblock_grid_c21}
+<td
+	{$cell_grid_c21}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c21" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c21}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c22}
+<td
+	{$cell_grid_c22}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c22" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c22}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c23}
+<td
+	{$cell_grid_c23}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c23" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c23}
+								</tr>
+	 
+	 
+														<tr {$row_grid_6} >
+										
+
+{BEGIN cellblock_grid_c18}
+<td
+	{$cell_grid_c18}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c18" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
 {BEGIN stored_by_fieldblock}
 
 
 <div class="r-integrated-field form-group clearfix {$fielddispclass_stored_by}  r-vertical-field" 
 	data-signal-error-for="stored_by{$id}" {$required_attr_stored_by}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="stored_by" data-fieldname="stored_by" >
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="stored_by" data-fieldname="stored_by" >
 
 	<label class="r-edit-label control-label {$stored_by_label_class}" for="{$labelfor_stored_by}">
 		{BEGIN stored_by_label}
@@ -625,13 +945,31 @@
 
 
 {END stored_by_fieldblock}
-											
+	
+								</td>
+			{END cellblock_grid_c18}
+			 
+																
+
+{BEGIN cellblock_grid_c19}
+<td
+	{$cell_grid_c19}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c19" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
 {BEGIN created_fieldblock}
 
 
 <div class="r-integrated-field form-group clearfix {$fielddispclass_created}  r-vertical-field" 
 	data-signal-error-for="created{$id}" {$required_attr_created}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field13" {$item_integrated_edit_field13} data-pageid="{$pageid}" data-field="created" data-fieldname="created" >
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="created" data-fieldname="created" >
 
 	<label class="r-edit-label control-label {$created_label_class}" for="{$labelfor_created}">
 		{BEGIN created_label}
@@ -645,13 +983,31 @@
 
 
 {END created_fieldblock}
-											
+	
+								</td>
+			{END cellblock_grid_c19}
+			 
+																
+
+{BEGIN cellblock_grid_c20}
+<td
+	{$cell_grid_c20}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c20" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
 {BEGIN last_updated_fieldblock}
 
 
 <div class="r-integrated-field form-group clearfix {$fielddispclass_last_updated}  r-vertical-field" 
 	data-signal-error-for="last_updated{$id}" {$required_attr_last_updated}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field14" {$item_integrated_edit_field14} data-pageid="{$pageid}" data-field="last_updated" data-fieldname="last_updated" >
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field13" {$item_integrated_edit_field13} data-pageid="{$pageid}" data-field="last_updated" data-fieldname="last_updated" >
 
 	<label class="r-edit-label control-label {$last_updated_label_class}" for="{$labelfor_last_updated}">
 		{BEGIN last_updated_label}
@@ -665,13 +1021,70 @@
 
 
 {END last_updated_fieldblock}
-											
+	
+								</td>
+			{END cellblock_grid_c20}
+								</tr>
+	 
+	 
+		
+						<tr>
+						
+
+{BEGIN cellblock_grid_c3}
+<td
+	{$cell_grid_c3}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c3" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c3}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c14}
+<td
+	{$cell_grid_c14}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c14" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c14}
+			 
+																
+
+{BEGIN cellblock_grid_c9}
+<td
+	{$cell_grid_c9}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c9" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
 {BEGIN deleted_fieldblock}
 
 
 <div class="r-integrated-field form-group clearfix {$fielddispclass_deleted}  r-vertical-field" 
 	data-signal-error-for="deleted{$id}" {$required_attr_deleted}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field15" {$item_integrated_edit_field15} data-pageid="{$pageid}" data-field="deleted" data-fieldname="deleted" >
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field14" {$item_integrated_edit_field14} data-pageid="{$pageid}" data-field="deleted" data-fieldname="deleted" >
 
 	<label class="r-edit-label control-label {$deleted_label_class}" for="{$labelfor_deleted}">
 		{BEGIN deleted_label}
@@ -687,7 +1100,7 @@
 {END deleted_fieldblock}
 	
 								</td>
-			{END cellblock_grid_c3}
+			{END cellblock_grid_c9}
 								</tr>
 			</tbody></table>
 {END grid_block}
@@ -722,10 +1135,28 @@
 		</div>			 
 				<div 
 	data-cellId="below-grid_c2" data-pageid="{$pageid}"	{$cell_below-grid_c2}
-	class="r-align-right r-ori-vert			col-md-6
+	class="r-align-right			col-md-6
 	
 ">
 		 
+		{BEGIN prev_button}
+<span data-itemtype="prev" data-itemid="prev" {$item_prev} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	{$prevbutton_class}" {$prevbutton_attrs} >
+					<span class="glyphicon glyphicon-menu-left"></span>
+										</a>
+</span>
+{END prev_button}
+	 
+		{BEGIN next_button}
+<span data-itemtype="next" data-itemid="next" {$item_next} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	{$nextbutton_class}" {$nextbutton_attrs} >
+					<span class="glyphicon glyphicon-menu-right"></span>
+										</a>
+</span>
+{END next_button}
+	 
 		<span data-itemtype="hamburger" data-itemid="hamburger" {$item_hamburger} data-pageid="{$pageid}" data-small data-button-item>
 	<span class="dropdown dropup">
 		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		

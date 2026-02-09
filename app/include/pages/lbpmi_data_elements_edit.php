@@ -638,12 +638,14 @@
 		'integrated_edit_field' => array(
 			'field' => 'data_element_name',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => false 
 		),
 		'integrated_edit_field1' => array(
 			'field' => 'data_element_description',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => false 
 		),
 		'integrated_edit_field2' => array(
 			'field' => 'created_at',
@@ -690,12 +692,14 @@
 		'integrated_edit_field9' => array(
 			'field' => 'is_active',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => false 
 		),
 		'integrated_edit_field10' => array(
 			'field' => 'created_by',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => false 
 		),
 		'expand_button' => array(
 			'type' => 'expand_button' 
