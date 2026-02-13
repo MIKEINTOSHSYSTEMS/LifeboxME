@@ -1,0 +1,1895 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+						<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+    <LINK rel="shortcut icon" type="image/png" href="/assets/img/lb_favicon.ico"/>
+    <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
+    <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
+    <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
+    		{BEGIN styleCSSFiles}
+<link REL="stylesheet" href="{$stylepath}" type="text/css">
+{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-report"   
+			data-panel-bg
+		>
+	{BEGIN body}
+		<style>
+		{$containerCss}
+		</style>
+		<div class="r-vbar-page">
+			<div data-width="300px" data-fixed class="r-left clearfix {$leftbar_class}" >
+								<div data-location="left" id="form_left_{$pageid}" data-makeup="leftbar" {$form_left} data-pageid="{$pageid}">
+{BEGIN left_block}
+ 
+     
+         
+
+			<div data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell class="clearfix " data-itemid="logo" {$item_logo}>
+				{BEGIN logo_block}
+	<A data-itemtype="logo" data-itemid="logo" {$item_logo} data-pageid="{$pageid}" class="navbar-brand" href="{$home_link}" data-pageid="{$pageid}" {$logo_hiddenattr}>
+		{$logo}
+	</A>
+{END logo_block}
+				<button data-pageid="1" type="button" class="navbar-toggle collapsed" data-runner-toggle="collapse" data-target="[data-mobile-controlled]">	
+					<span class="sr-only">Toggle navigation</span>	
+					<span class="icon-bar"></span>					
+				</button>				
+			</div>
+		
+ 
+
+			<div class="clearfix " data-cellId="left_c0" data-pageid="{$pageid}" data-logo-cell data-itemid="expand_button" {$item_expand_button} data-topcell-item-type="expand_button" >
+				<span data-itemtype="expand_button" data-itemid="expand_button" {$item_expand_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="{mlang_message EXPAND}" class="btn btn-link   
+	" href="#" >
+					<span class="glyphicon glyphicon-triangle-right"></span>
+										</a>
+</span>
+			</div>
+		
+     
+     
+         
+
+			<div data-cellId="left_c1" data-pageid="{$pageid}" class="clearfix  r-ori-vert " data-itemtype="menu" data-itemid="menu" {$item_menu} data-pageid="{$pageid}">
+				{BEGIN menuitems_main}
+<ul data-itemtype="menu" data-itemid="menu" {$item_menu} data-pageid="{$pageid}"	class="r-menu nav menu-treelike" 
+	data-menulevel="1"
+>
+
+{BEGIN item_children1}
+<li class="
+	{$item_current}">
+<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline data-menu-top >
+	{$item_separator}
+	<span class="r-menu-link r-menu-expanded "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren2}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren2}
+	</span>
+		<span class="r-menu-collapsed">{$item_collicon}{$item_firstcap}</span>
+	</a>
+{BEGIN item_showchildren2}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="2">
+	{BEGIN item_children2}
+		{BEGIN item_menulink2}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren2}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren2}
+	</span>
+	</a>
+			{BEGIN item_showchildren3}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="3">
+	{BEGIN item_children3}
+		{BEGIN item_menulink3}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren3}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren3}
+	</span>
+	</a>
+			{BEGIN item_showchildren4}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="4">
+	{BEGIN item_children4}
+		{BEGIN item_menulink4}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren4}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren4}
+	</span>
+	</a>
+			{BEGIN item_showchildren5}
+<ul class="
+			nav collapse 
+			{$submenu_class}" 
+		id="submenu{$item_id}" data-menulevel="5">
+	{BEGIN item_children5}
+		{BEGIN item_menulink5}
+		<li class="
+						{$item_current}"
+		>
+			<a {$item_attrs} title="{$item_tooltip}" data-menu-link data-menu-v data-menu-inline >
+	{$item_separator}
+	<span class="r-menu-link  "> 
+		<span class="r-menu-title">
+		{$item_icon} {$item_title}
+		</span>
+		{BEGIN item_haschildren5}
+		{BEGIN item_expand_icon}
+		<span class="r-menu-expand-icon fa fa-angle-left"></span>
+		<span class="r-menu-mobile-expand-icon fa fa-angle-left"></span>
+		{END item_expand_icon}
+		{END item_haschildren5}
+	</span>
+	</a>
+					</li>
+		{END item_menulink5}
+	{END item_children5}
+</ul>
+{END item_showchildren5}
+		</li>
+		{END item_menulink4}
+	{END item_children4}
+</ul>
+{END item_showchildren4}
+		</li>
+		{END item_menulink3}
+	{END item_children3}
+</ul>
+{END item_showchildren3}
+		</li>
+		{END item_menulink2}
+	{END item_children2}
+</ul>
+{END item_showchildren2}
+</li>
+{END item_children1}
+</ul>
+{END menuitems_main}
+			</div>
+		
+    {END left_block}
+</div>				</div>
+			<div class="r-content-col" data-resize-left="leftbar">
+				<div data-resize-left="leftbar"  data-fixed class="r-topheader" data-resize-name="topbar">
+									{BEGIN supertop_block}
+<nav class="navbar navbar-default" 
+	data-location="supertop" id="form_supertop_{$pageid}" data-makeup="leftbar" {$form_supertop} data-pageid="{$pageid}" >
+			 
+							 
+				<span class="navbar-form  navbar-header" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="expand_menu_button" {$item_expand_menu_button} data-topcell-item-type="expand_menu_button" >
+				<span data-itemtype="expand_menu_button" data-itemid="expand_menu_button" {$item_expand_menu_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="{mlang_message SHOW_MENU}" class="btn-link   
+	 glyphicon glyphicon-menu-hamburger" href="#" >		
+				
+								</a>
+</span>
+			</span>
+		 
+				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="collapse_button" {$item_collapse_button} data-topcell-item-type="collapse_button" >
+				<span data-itemtype="collapse_button" data-itemid="collapse_button" {$item_collapse_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="{mlang_message COLLAPSE}" class="btn-link   
+	 glyphicon glyphicon-triangle-left" href="#" >		
+				
+								</a>
+</span>
+			</span>
+		 
+				<span class="navbar-form  navbar-collapse" data-cellId="supertop_c1" data-pageid="{$pageid}" data-itemid="breadcrumb" {$item_breadcrumb} data-topcell-item-type="breadcrumb" >
+				{BEGIN breadcrumb}
+<ol class="breadcrumb" data-itemtype="breadcrumb" data-itemid="breadcrumb" {$item_breadcrumb} data-pageid="{$pageid}">
+<li ><a href="{$crumb_home_link}"><span class="glyphicon glyphicon-home"></span></a>{$crumb_dropdown}</li>
+{BEGIN crumb}
+  <li class="{$crumb_item_class}">
+{BEGIN crumb_title_link}
+	<a {$crumb_attrs}>{$crumb_title}</a>
+{END crumb_title_link}
+{BEGIN crumb_title_span}
+	<span {$crumb_attrs}>{$crumb_title}</span>
+{END crumb_title_span}	
+	{$crumb_dropdown}
+  </li>
+{END crumb}
+</ol>
+{END breadcrumb}			</span>
+							 
+							 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="simple_search" {$item_simple_search} data-topcell-item-type="simple_search" >
+				<span data-itemtype="simple_search" data-itemid="simple_search" {$item_simple_search} data-pageid="{$pageid}" class="form-group">
+
+<div  class="input-group">
+{BEGIN searchform_text}
+	<input type="search" class="form-control" {$searchfor_attrs} size="25">
+{END searchform_text}
+	<span class="input-group-btn">
+	{BEGIN searchform_showall}
+				<button class="btn btn-default" {$showAllCont_attrs} {$showallbutton_attrs} title="{mlang_message SHOW_ALL}">
+			<span class="glyphicon glyphicon-remove"></span>
+		</button>
+	{END searchform_showall}
+
+	{BEGIN searchform_search}
+	<button {$searchbutton_attrs} class="btn btn-primary" >
+		<span class="glyphicon glyphicon-search"></span>
+	</button>
+	{END searchform_search}
+	</span>
+</div>
+		
+</span>			</span>
+		 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="list_options" {$item_list_options} data-topcell-item-type="list_options" >
+				<span data-itemtype="list_options" data-itemid="list_options" {$item_list_options} data-pageid="{$pageid}" data-small data-button-item>
+	<span class="dropdown ">
+		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
+										<span class="glyphicon glyphicon-cog"></span>
+												<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+							{BEGIN searchPanelTopButtons}
+	<li data-itemtype="show_search_panel" data-itemid="show_search_panel" {$item_show_search_panel} data-pageid="{$pageid}" data-small >
+				<a  id="showOptPanel{$id}"  title="" >
+				
+		{mlang_message SHOW_SEARCH_PANEL}		
+		</a>
+	</li>
+{END searchPanelTopButtons}
+							{BEGIN searchPanelTopButtons}
+	<li data-itemtype="hide_search_panel" data-itemid="hide_search_panel" {$item_hide_search_panel} data-pageid="{$pageid}" data-small >
+				<a  id="hideOptPanel{$id}"  title="" >
+				
+		{mlang_message HIDE_SEARCH_PANEL}		
+		</a>
+	</li>
+{END searchPanelTopButtons}
+							<li role="separator" class="divider"></li>							{BEGIN export_link}
+	<li data-itemtype="export_report_excel" data-itemid="export_report_excel" {$item_export_report_excel} data-pageid="{$pageid}" data-small >
+				<a  href="device_distributions1_print.php?all=1&amp;format=excel{$stateLink}" {$excellink_attrs}  title="" >
+				
+		{mlang_message EXPORT_TO_EXCEL}		
+		</a>
+	</li>
+{END export_link}
+							{BEGIN export_link}
+	<li data-itemtype="export_report_word" data-itemid="export_report_word" {$item_export_report_word} data-pageid="{$pageid}" data-small >
+				<a  href="device_distributions1_print.php?all=1&amp;format=word{$stateLink}" {$wordlink_attrs}  title="" >
+				
+		{mlang_message EXPORT_TO_WORD}		
+		</a>
+	</li>
+{END export_link}
+					</ul>
+	</span>
+</span>
+			</span>
+		 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="notifications" {$item_notifications} data-topcell-item-type="notifications" >
+				<div class="dropdown" data-itemtype="notifications" data-itemid="notifications" {$item_notifications} data-pageid="{$pageid}" id="notifications{$id}">
+	<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">
+		<i class="fa fa-bell"></i>
+		<span class="badge badge-warning" ></span>
+	</button>
+	<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+		<div class="r-noti-header">
+			<span class="r-noti-h-text">
+				{mlang_message NOTIFICATIONS}			</span>
+			<!--
+			<a class="r-noti-all">
+				see all
+			</a>
+			-->
+			<a class="r-noti-close" href="#">
+				<i class="fa fa-times"></i>
+			</a>
+		</div>
+		<div class="r-noti-messages">
+		</div>
+	</div>
+	
+<script type="text/x-tmpl" id="noti-message">
+	<a draggable="false" class="r-noti-message" 
+		{% if (o.url ) { %} 
+			href="{%=o.url%}" 
+		{% } %}
+		{% if (o.newWindow ) { %} 
+			target="_blank"
+		{% } %}
+		>
+		<span class="r-noti-img">
+			{% if (o.iconType == 'fa') { %}
+			<span class="fa {%=o.icon%}"></span>
+			{% } else if (o.iconType == 'bs') { %}
+			<span class="glyphicon {%=o.icon%}"></span>
+			{% } else if (o.icon) { %}
+			<img src="{%=o.icon%}">
+			{% } %}
+		</span>
+		<span class="r-noti-text">
+			<span class="r-noti-title">
+				{% if (o.title) { %}
+					<span class="r-noti-title-text">
+						{%=o.title%}
+					</span>
+				{% } %}
+				<span class="r-noti-when">
+					{%=o.time%}
+				</span>
+			</span>
+			<span class="r-noti-body">
+				{%=o.message%}
+			</span>
+		</span>
+		{% if (o.new) { %}
+		<span class="r-noti-new">
+			<span class="fa fa-circle"></span>
+		</span>
+		{% } %}
+	</a>
+</script>	
+
+</div>
+			</span>
+		 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="loginform_login" {$item_loginform_login} data-topcell-item-type="loginform_login" >
+				{BEGIN guestloginbutton}
+<span data-itemtype="loginform_login" data-itemid="loginform_login" {$item_loginform_login} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" href="#" {$guestloginlink_attrs} >
+							{mlang_message LOGIN}			</a>
+</span>
+{END guestloginbutton}
+			</span>
+		 
+				<span class="navbar-form r-align-right navbar-collapse" data-cellId="supertop_c2" data-pageid="{$pageid}" data-itemid="username_button" {$item_username_button} data-topcell-item-type="username_button" >
+				{BEGIN loggedas_message}
+<span data-itemtype="username_button" data-itemid="username_button" {$item_username_button} data-pageid="{$pageid}" data-small data-button-item>
+	<span class="dropdown ">
+		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
+			{BEGIN userbutton_icon}							<span class="glyphicon glyphicon-user"></span>
+						{END userbutton_icon}{$userbutton_image}			{$mlp_push}{$mlparam username var username}{$mltext %username%}{$mlp_pop}			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+							{BEGIN userinfo_link}
+	<li data-itemtype="userinfo_link" data-itemid="userinfo_link" {$item_userinfo_link} data-pageid="{$pageid}" data-small >
+				<a  href="userinfo.php"  title="" >
+				
+		{mlang_message USERINFO}		
+		</a>
+	</li>
+{END userinfo_link}
+							{BEGIN logoutbutton}
+	<li data-itemtype="logout_link" data-itemid="logout_link" {$item_logout_link} data-pageid="{$pageid}" data-small >
+				<a  href="#" {$logoutlink_attrs}  title="" >
+				
+		{mlang_message LOG_OUT}		
+		</a>
+	</li>
+{END logoutbutton}
+							{BEGIN adminarea_link}
+	<li data-itemtype="adminarea_link" data-itemid="adminarea_link" {$item_adminarea_link} data-pageid="{$pageid}" data-small >
+				<a  href="admin_rights_list.php"  title="" >
+				
+		{mlang_message AA_ADMINAREA}		
+		</a>
+	</li>
+{END adminarea_link}
+							{BEGIN changepwd_link}
+	<li data-itemtype="changepassword_link" data-itemid="changepassword_link" {$item_changepassword_link} data-pageid="{$pageid}" data-small >
+				<a  href="changepwd.php" {$changepwdlink_attrs} id="changePasswordButton{$id}"  title="" >
+				
+		{mlang_message CHANGE_PASSWORD}		
+		</a>
+	</li>
+{END changepwd_link}
+					</ul>
+	</span>
+</span>
+{END loggedas_message}
+			</span>
+								</nav>
+{END supertop_block}
+						{$locking}
+				</div>
+				<div class="r-body" data-resize-top="topbar" data-body-width="standard">
+					{$header}
+					<div class="r-top">
+									{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="leftbar" {$form_top} data-pageid="{$pageid}" >		
+	</div>		
+{END top_block}
+						</div>
+											<div class="r-grid"
+	>
+	{BEGIN grid_tabs}
+  <ul class="nav nav-tabs bsgrid_tabs">
+	{$grid_tabs_content}
+  </ul>
+{END grid_tabs}
+	<div class="panel panel-default"
+	>
+		<div class="panel-heading">
+							{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="leftbar" {$form_above-grid} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c6" data-pageid="{$pageid}"	{$cell_above-grid_c6}
+	class=" r-ori-vert			col-md-6
+	
+">
+		{BEGIN firstAboveGridCell}
+				{END firstAboveGridCell}	
+	</div>			 
+				<div 
+	data-cellId="above-grid_c7" data-pageid="{$pageid}"	{$cell_above-grid_c7}
+	class="r-align-right r-ori-vert			col-md-6
+	
+">
+			</div>					</div>
+			 
+				<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c" data-pageid="{$pageid}"	{$cell_above-grid_c}
+	class=" r-ori-vert			col-md-12
+	
+">
+		 
+		<div data-itemtype="filter_panel" data-itemid="filter_panel" {$item_filter_panel} data-pageid="{$pageid}">
+	<div class="filterPanelContainer {$filterPanelStateClass}" 
+					data-horizontal
+			>
+	<!-- Begin Filter panel content -->
+
+
+
+
+
+
+{BEGIN filter_control_region_name}
+
+	<div class="dropdown filter-field filter-region_name-container" {BEGIN filter_selected_region_name} data-selected {END filter_selected_region_name}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-region_name" type="checkbox" name="selectAll" {$selectAll_attrs_region_name} />
+						{BEGIN clearLink_region_name}
+			<a href="#" class="filter-clear filter-clear-region_name" title="{mlang_message FILTER_CLEAR}">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_region_name}
+			<span class="r-filter-field">{$label device_distributions_report region_name }				{BEGIN filter_selected_region_name}:{END filter_selected_region_name}
+			</span>
+			{BEGIN filter_selected_region_name}
+			<span class="r-filter-value">{$filtervalue_region_name}</span>
+			{END filter_selected_region_name}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_region_name}
+		<li class=" filter-values filter-values-region_name  {$visibilityClass_region_name}">
+			{$region_name_filter}
+						
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_region_name}
+
+			{BEGIN filter_button_showmore_region_name}
+		<li class=" filter-show-more {$collapsedClass_region_name} {$showMoreBtnClass_region_name}">
+			<a class="filter-show-more-link filterShowMore_region_name" href="#">{$show_n_more_region_name}</a>
+		</li>
+		{END filter_button_showmore_region_name}
+	
+
+
+	
+
+			{BEGIN filter_button_multiselect_region_name}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_region_name}">
+			<a href="#" class="filter-region_name-btn-multiselect filter-apply-region_name" {$filterbutton_attrs_region_name}>{mlang_message FILTER_MULTISELECT}</a>
+		</li>
+		{END filter_button_multiselect_region_name}
+			</ul>
+	</div>
+
+{END filter_control_region_name}
+
+
+
+
+
+
+{BEGIN filter_control_distribution_date}
+
+	<div class="dropdown filter-field filter-distribution_date-container" {BEGIN filter_selected_distribution_date} data-selected {END filter_selected_distribution_date}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_distribution_date}
+			<a href="#" class="filter-clear filter-clear-distribution_date" title="{mlang_message FILTER_CLEAR}">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_distribution_date}
+			<span class="r-filter-field">{$label device_distributions_report distribution_date }				{BEGIN filter_selected_distribution_date}:{END filter_selected_distribution_date}
+			</span>
+			{BEGIN filter_selected_distribution_date}
+			<span class="r-filter-value">{$filtervalue_distribution_date}</span>
+			{END filter_selected_distribution_date}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_distribution_date}
+		<li class=" filter-values filter-values-distribution_date  {$visibilityClass_distribution_date}">
+			{$distribution_date_filter}
+						
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_distribution_date}
+
+	
+
+
+			{BEGIN filter_button_apply_distribution_date}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_distribution_date}">
+			<a href="#" class="filter-btn-apply filter-apply-distribution_date" {$filterbutton_attrs_distribution_date}>{mlang_message FILTER_APPLY}</a>
+		</li>
+		{END filter_button_apply_distribution_date}
+	
+
+			</ul>
+	</div>
+
+{END filter_control_distribution_date}
+
+
+
+
+
+
+{BEGIN filter_control_country_name}
+
+	<div class="dropdown filter-field filter-country_name-container" {BEGIN filter_selected_country_name} data-selected {END filter_selected_country_name}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-country_name" type="checkbox" name="selectAll" {$selectAll_attrs_country_name} />
+						{BEGIN clearLink_country_name}
+			<a href="#" class="filter-clear filter-clear-country_name" title="{mlang_message FILTER_CLEAR}">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_country_name}
+			<span class="r-filter-field">{$label device_distributions_report country_name }				{BEGIN filter_selected_country_name}:{END filter_selected_country_name}
+			</span>
+			{BEGIN filter_selected_country_name}
+			<span class="r-filter-value">{$filtervalue_country_name}</span>
+			{END filter_selected_country_name}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_country_name}
+		<li class=" filter-values filter-values-country_name  {$visibilityClass_country_name}">
+			{$country_name_filter}
+						
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_country_name}
+
+			{BEGIN filter_button_showmore_country_name}
+		<li class=" filter-show-more {$collapsedClass_country_name} {$showMoreBtnClass_country_name}">
+			<a class="filter-show-more-link filterShowMore_country_name" href="#">{$show_n_more_country_name}</a>
+		</li>
+		{END filter_button_showmore_country_name}
+	
+
+
+	
+
+			{BEGIN filter_button_multiselect_country_name}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_country_name}">
+			<a href="#" class="filter-country_name-btn-multiselect filter-apply-country_name" {$filterbutton_attrs_country_name}>{mlang_message FILTER_MULTISELECT}</a>
+		</li>
+		{END filter_button_multiselect_country_name}
+			</ul>
+	</div>
+
+{END filter_control_country_name}
+
+
+
+
+
+
+{BEGIN filter_control_device_type}
+
+	<div class="dropdown filter-field filter-device_type-container" {BEGIN filter_selected_device_type} data-selected {END filter_selected_device_type}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-device_type" type="checkbox" name="selectAll" {$selectAll_attrs_device_type} />
+						{BEGIN clearLink_device_type}
+			<a href="#" class="filter-clear filter-clear-device_type" title="{mlang_message FILTER_CLEAR}">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_device_type}
+			<span class="r-filter-field">{$label device_distributions_report device_type }				{BEGIN filter_selected_device_type}:{END filter_selected_device_type}
+			</span>
+			{BEGIN filter_selected_device_type}
+			<span class="r-filter-value">{$filtervalue_device_type}</span>
+			{END filter_selected_device_type}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_device_type}
+		<li class=" filter-values filter-values-device_type  {$visibilityClass_device_type}">
+			{$device_type_filter}
+						
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_device_type}
+
+			{BEGIN filter_button_showmore_device_type}
+		<li class=" filter-show-more {$collapsedClass_device_type} {$showMoreBtnClass_device_type}">
+			<a class="filter-show-more-link filterShowMore_device_type" href="#">{$show_n_more_device_type}</a>
+		</li>
+		{END filter_button_showmore_device_type}
+	
+
+
+	
+
+			{BEGIN filter_button_multiselect_device_type}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_device_type}">
+			<a href="#" class="filter-device_type-btn-multiselect filter-apply-device_type" {$filterbutton_attrs_device_type}>{mlang_message FILTER_MULTISELECT}</a>
+		</li>
+		{END filter_button_multiselect_device_type}
+			</ul>
+	</div>
+
+{END filter_control_device_type}
+
+
+
+
+
+
+{BEGIN filter_control_transaction_type}
+
+	<div class="dropdown filter-field filter-transaction_type-container" {BEGIN filter_selected_transaction_type} data-selected {END filter_selected_transaction_type}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-transaction_type" type="checkbox" name="selectAll" {$selectAll_attrs_transaction_type} />
+						{BEGIN clearLink_transaction_type}
+			<a href="#" class="filter-clear filter-clear-transaction_type" title="{mlang_message FILTER_CLEAR}">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_transaction_type}
+			<span class="r-filter-field">{$label device_distributions_report transaction_type }				{BEGIN filter_selected_transaction_type}:{END filter_selected_transaction_type}
+			</span>
+			{BEGIN filter_selected_transaction_type}
+			<span class="r-filter-value">{$filtervalue_transaction_type}</span>
+			{END filter_selected_transaction_type}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_transaction_type}
+		<li class=" filter-values filter-values-transaction_type  {$visibilityClass_transaction_type}">
+			{$transaction_type_filter}
+						
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_transaction_type}
+
+			{BEGIN filter_button_showmore_transaction_type}
+		<li class=" filter-show-more {$collapsedClass_transaction_type} {$showMoreBtnClass_transaction_type}">
+			<a class="filter-show-more-link filterShowMore_transaction_type" href="#">{$show_n_more_transaction_type}</a>
+		</li>
+		{END filter_button_showmore_transaction_type}
+	
+
+
+	
+
+			{BEGIN filter_button_multiselect_transaction_type}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_transaction_type}">
+			<a href="#" class="filter-transaction_type-btn-multiselect filter-apply-transaction_type" {$filterbutton_attrs_transaction_type}>{mlang_message FILTER_MULTISELECT}</a>
+		</li>
+		{END filter_button_multiselect_transaction_type}
+			</ul>
+	</div>
+
+{END filter_control_transaction_type}
+
+
+
+
+
+
+{BEGIN filter_control_payment_method}
+
+	<div class="dropdown filter-field filter-payment_method-container" {BEGIN filter_selected_payment_method} data-selected {END filter_selected_payment_method}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-payment_method" type="checkbox" name="selectAll" {$selectAll_attrs_payment_method} />
+						{BEGIN clearLink_payment_method}
+			<a href="#" class="filter-clear filter-clear-payment_method" title="{mlang_message FILTER_CLEAR}">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_payment_method}
+			<span class="r-filter-field">{$label device_distributions_report payment_method }				{BEGIN filter_selected_payment_method}:{END filter_selected_payment_method}
+			</span>
+			{BEGIN filter_selected_payment_method}
+			<span class="r-filter-value">{$filtervalue_payment_method}</span>
+			{END filter_selected_payment_method}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_payment_method}
+		<li class=" filter-values filter-values-payment_method  {$visibilityClass_payment_method}">
+			{$payment_method_filter}
+						
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_payment_method}
+
+			{BEGIN filter_button_showmore_payment_method}
+		<li class=" filter-show-more {$collapsedClass_payment_method} {$showMoreBtnClass_payment_method}">
+			<a class="filter-show-more-link filterShowMore_payment_method" href="#">{$show_n_more_payment_method}</a>
+		</li>
+		{END filter_button_showmore_payment_method}
+	
+
+
+	
+
+			{BEGIN filter_button_multiselect_payment_method}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_payment_method}">
+			<a href="#" class="filter-payment_method-btn-multiselect filter-apply-payment_method" {$filterbutton_attrs_payment_method}>{mlang_message FILTER_MULTISELECT}</a>
+		</li>
+		{END filter_button_multiselect_payment_method}
+			</ul>
+	</div>
+
+{END filter_control_payment_method}
+
+
+
+
+
+
+{BEGIN filter_control_donor}
+
+	<div class="dropdown filter-field filter-donor-container" {BEGIN filter_selected_donor} data-selected {END filter_selected_donor}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-donor" type="checkbox" name="selectAll" {$selectAll_attrs_donor} />
+						{BEGIN clearLink_donor}
+			<a href="#" class="filter-clear filter-clear-donor" title="{mlang_message FILTER_CLEAR}">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_donor}
+			<span class="r-filter-field">{$label device_distributions_report donor }				{BEGIN filter_selected_donor}:{END filter_selected_donor}
+			</span>
+			{BEGIN filter_selected_donor}
+			<span class="r-filter-value">{$filtervalue_donor}</span>
+			{END filter_selected_donor}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_donor}
+		<li class=" filter-values filter-values-donor  {$visibilityClass_donor}">
+			{$donor_filter}
+						
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_donor}
+
+			{BEGIN filter_button_showmore_donor}
+		<li class=" filter-show-more {$collapsedClass_donor} {$showMoreBtnClass_donor}">
+			<a class="filter-show-more-link filterShowMore_donor" href="#">{$show_n_more_donor}</a>
+		</li>
+		{END filter_button_showmore_donor}
+	
+
+
+	
+
+			{BEGIN filter_button_multiselect_donor}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_donor}">
+			<a href="#" class="filter-donor-btn-multiselect filter-apply-donor" {$filterbutton_attrs_donor}>{mlang_message FILTER_MULTISELECT}</a>
+		</li>
+		{END filter_button_multiselect_donor}
+			</ul>
+	</div>
+
+{END filter_control_donor}
+
+
+
+	<!-- End Filter panel content -->
+	</div>
+</div>		</div>					</div>
+			 
+				<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-6
+	
+">
+			</div>			 
+				<div 
+	data-cellId="above-grid_c2" data-pageid="{$pageid}"	{$cell_above-grid_c2}
+	class="r-align-right			col-md-6
+	
+">
+		 
+		<span data-itemtype="details_found" data-itemid="details_found" {$item_details_found} data-pageid="{$pageid}" >
+{$mlp_push}{$mlparam first var first_shown}{$mlparam last var last_shown}{$mlparam total var records_found}{mlang_message DISPLAYING}{$mlp_pop}</span>	 
+		<span data-itemtype="page_size" data-itemid="page_size" {$item_page_size} data-pageid="{$pageid}" >
+		{$grpsPerPage}
+</span>	 
+		{BEGIN print_friendly}
+<span id="printpanelblock{$id}"  data-pageid="{$pageid}" {$printpanel_hiddenattr} data-itemtype="print_panel" data-itemid="print_panel" {$item_print_panel} data-pageid="{$pageid}">
+	<button title="{mlang_message WR_PRINT_FRIENDLY}" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					<span class="glyphicon glyphicon-print"></span>
+				<span class="caret"></span>
+	</button>
+	<ul class="dropdown-menu pull-right">
+										 
+				 
+					<li class="container-fluid 
+										">
+									<div id="print_friendly_scope{$id}">
+	<div class="row">
+		<div class="col-md-4">
+			{mlang_message PPANEL_SCOPE}		</div>
+
+			 
+		{BEGIN print_friendly_all}
+		<div class="col-md-8">
+			<label for="printAll{$id}">
+				<input type="radio" id="printAll{$id}" data-href="_print.php?all=1&amp;{$crosstable_attrs}" name="printScope" >
+									{mlang_message PPANEL_WHOLE_REPORT}							</label>
+		</div>
+		{END print_friendly_all}
+		</div>
+		<div class="row">
+		<div class="col-md-4">&nbsp;</div>
+		<div class="col-md-8">
+			<label for="printPage{$id}">
+				<input name="printScope" id="printPage{$id}" type="radio" checked data-href="device_distributions1_print.php?{$crosstable_attrs}">
+				{mlang_message PPANEL_THIS_PAGE}			</label>
+		</div>
+	</div>
+		
+	</div>
+				 
+					</li>
+											<li class="divider" role="separator"></li>
+																				 
+				 
+					<li class="container-fluid 
+										">
+									<div>
+	<label for="printPerPage{$id}">
+					{mlang_message GROUPS_PP}							
+	</label>
+	<input type="number" id="printPerPage{$id}" value="{$print_recspp}" class="rnr-printrecspp">		
+</div>
+				 
+					</li>
+											<li class="divider" role="separator"></li>
+																				 
+				 
+					<li class="container-fluid 
+					 text-center 					">
+									<span data-itemtype="print_button" data-itemid="print_button" {$item_print_button} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" id="print_friendly_button{$id}" >
+							{mlang_message PPANEL_PRINT}			</a>
+</span>
+				 
+					</li>
+															</ul>
+</span>
+{END print_friendly}
+		</div>					</div>
+			 
+				<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c4" data-pageid="{$pageid}"	{$cell_above-grid_c4}
+	class=" r-ori-vert			col-md-12
+	
+">
+		 
+		<!-- Begin Search panel content -->
+<div class="searchOptions panel panel-primary searchPanelContainer " {$srchOpt_attrs} data-itemtype="search_panel" data-itemid="search_panel" {$item_search_panel} data-pageid="{$pageid}"			data-horizontal
+	 >
+
+	<div class="panel-heading">
+		<div class="btn-group r-sp-addfield" id="addSearchFieldButton{$id}">
+			<button id="showHideControlChooseMenu{$id}" type="button" class="btn btn-default dropdown-toggle btn-sm )" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			{mlang_message SEARCH_IN}			<span class="caret"></span>
+			</button>
+		</div>
+
+
+		<div class="btn-group r-sp-options" id="searchPanelOptions{$id}">
+			<button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<span class="glyphicon glyphicon glyphicon-option-vertical"></span>
+			</button>
+			<ul class="dropdown-menu dropdown-left">
+				<li id="showHideSearchType{$id}" {$showHideCtrlsOpt_attrs}><a>{mlang_message SEARCH_SHOW_OPTIONS_BUTTON}</a></li>
+				<li role="separator" class="divider"></li>
+				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAll" {$all_checkbox}><label for="radioAll"><span class="glyphicon">&nbsp;</span>{mlang_message SEARCH_ALL_CONDITIONS}</label></a></li>
+				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAny" {$any_checkbox}><label for="radioAny"><span class="glyphicon">&nbsp;</span>{mlang_message SEARCH_ANY_CONDITIONS}</label></a></li>
+				<li role="separator" class="divider"></li>
+				<li><a class="close-button"><span class="glyphicon glyphicon-remove">&nbsp;</span>{mlang_message HIDE}</a></li>
+			</ul>
+		</div>
+
+
+		</div>
+	<div class="panel-body controlsBlock" {$bottomSearchButt_attrs} >
+
+
+		
+		{BEGIN searchCtrlBlock}
+		<div class="srchPanelRow form-group" {$filterRow_attrs}>
+			<label>{$fLabel}</label>	{$delCtrlButt}
+				<span class="rnr-searchtype">{$searchtype}</span>
+				<span class="rnr-searchcontrol">{$searchcontrol}</span>
+				<span class="rnr-searchcontrol">{$searchcontrol1}</span>
+		</div>
+		{END searchCtrlBlock}
+																		{BEGIN searchCtrlBlock_distribution_id}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_distribution_id}" {$filterRow_attrs_distribution_id}>
+			<label>{$label device_distributions_report distribution_id }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_distribution_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_distribution_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_distribution_id}</span>
+						</div>
+		{END searchCtrlBlock_distribution_id}
+																{BEGIN searchCtrlBlock_region_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_region_name}" {$filterRow_attrs_region_name}>
+			<label>{$label device_distributions_report region_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_region_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_region_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_region_name}</span>
+						</div>
+		{END searchCtrlBlock_region_name}
+																{BEGIN searchCtrlBlock_country_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_country_name}" {$filterRow_attrs_country_name}>
+			<label>{$label device_distributions_report country_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_country_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_country_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_country_name}</span>
+						</div>
+		{END searchCtrlBlock_country_name}
+																{BEGIN searchCtrlBlock_facility_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_facility_name}" {$filterRow_attrs_facility_name}>
+			<label>{$label device_distributions_report facility_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_facility_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_facility_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_facility_name}</span>
+						</div>
+		{END searchCtrlBlock_facility_name}
+																{BEGIN searchCtrlBlock_distribution_date}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_distribution_date}" {$filterRow_attrs_distribution_date}>
+			<label>{$label device_distributions_report distribution_date }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_distribution_date}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_distribution_date}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_distribution_date}</span>
+						</div>
+		{END searchCtrlBlock_distribution_date}
+																{BEGIN searchCtrlBlock_device_type}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_device_type}" {$filterRow_attrs_device_type}>
+			<label>{$label device_distributions_report device_type }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_device_type}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_device_type}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_device_type}</span>
+						</div>
+		{END searchCtrlBlock_device_type}
+																{BEGIN searchCtrlBlock_transaction_type}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_transaction_type}" {$filterRow_attrs_transaction_type}>
+			<label>{$label device_distributions_report transaction_type }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_transaction_type}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_transaction_type}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_transaction_type}</span>
+						</div>
+		{END searchCtrlBlock_transaction_type}
+																{BEGIN searchCtrlBlock_payment_method}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_payment_method}" {$filterRow_attrs_payment_method}>
+			<label>{$label device_distributions_report payment_method }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_payment_method}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_payment_method}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_payment_method}</span>
+						</div>
+		{END searchCtrlBlock_payment_method}
+																{BEGIN searchCtrlBlock_donor}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_donor}" {$filterRow_attrs_donor}>
+			<label>{$label device_distributions_report donor }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_donor}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_donor}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_donor}</span>
+						</div>
+		{END searchCtrlBlock_donor}
+																{BEGIN searchCtrlBlock_notes}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_notes}" {$filterRow_attrs_notes}>
+			<label>{$label device_distributions_report notes }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_notes}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_notes}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_notes}</span>
+						</div>
+		{END searchCtrlBlock_notes}
+																{BEGIN searchCtrlBlock_quantity}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_quantity}" {$filterRow_attrs_quantity}>
+			<label>{$label device_distributions_report quantity }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_quantity}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_quantity}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_quantity}</span>
+						</div>
+		{END searchCtrlBlock_quantity}
+																{BEGIN searchCtrlBlock_contact_email}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_contact_email}" {$filterRow_attrs_contact_email}>
+			<label>{$label device_distributions_report contact_email }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_contact_email}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_contact_email}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_contact_email}</span>
+						</div>
+		{END searchCtrlBlock_contact_email}
+																{BEGIN searchCtrlBlock_contact_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_contact_name}" {$filterRow_attrs_contact_name}>
+			<label>{$label device_distributions_report contact_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_contact_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_contact_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_contact_name}</span>
+						</div>
+		{END searchCtrlBlock_contact_name}
+																{BEGIN searchCtrlBlock_monthly_surgical_volume}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_monthly_surgical_volume}" {$filterRow_attrs_monthly_surgical_volume}>
+			<label>{$label device_distributions_report monthly_surgical_volume }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_monthly_surgical_volume}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_monthly_surgical_volume}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_monthly_surgical_volume}</span>
+						</div>
+		{END searchCtrlBlock_monthly_surgical_volume}
+																{BEGIN searchCtrlBlock_order_reference}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_order_reference}" {$filterRow_attrs_order_reference}>
+			<label>{$label device_distributions_report order_reference }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_order_reference}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_order_reference}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_order_reference}</span>
+						</div>
+		{END searchCtrlBlock_order_reference}
+		
+
+	</div>
+
+	<div class="panel-footer bottomSearchButt" {$bottomSearchButt_attrs}>
+		<button class="btn btn-primary btn-sm" id="searchButton{$id}" {$searchbutton_attrs}>{mlang_message SEARCH}</button>
+
+				<button class="btn btn-default btn-sm" {$showAllCont_attrs} {$showallbutton_attrs}>{mlang_message SHOW_ALL}</button>
+	</div>
+</div>
+<!-- End Search panel content -->
+		</div>					</div>
+			 
+				<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c8" data-pageid="{$pageid}"	{$cell_above-grid_c8}
+	class=" r-ori-vert			col-md-6
+	
+">
+			</div>			 
+				<div 
+	data-cellId="above-grid_c9" data-pageid="{$pageid}"	{$cell_above-grid_c9}
+	class="r-align-right r-ori-vert			col-md-6
+	
+">
+			</div>					</div>
+			</div>		
+{END above-grid_block}
+			</div>
+
+					{BEGIN grid_block}
+{BEGIN message_block}
+<div data-grid-message data-pageid="{$pageid}" class="alert {$message_class}" role="alert" {$grid_message_attrs}>{$message}</div>
+{END message_block}<style>
+	td.pagesummary.pagesummary.pagesummary.pagesummary.pagesummary.pagesummary.pagesummary.pagesummary {
+		background-color: #ffffbb;
+	}
+	td.globalsummary.globalsummary.globalsummary.globalsummary.globalsummary.globalsummary.globalsummary.globalsummary {background-color: #ffe0b0;
+	}
+	.rnr-report {
+		width: 100%;
+	}
+			td.group_1{
+			background-color: #7fffd4;
+		}
+		td.nbgroup_1{
+			background-color: #7fffd4;
+		}
+		td.header_1 {
+			background-color: #7fffd4; 
+			font-size: 120%;
+			padding: 2px 8px;
+			font-weight: bold;
+		}
+			td.group_2{
+			background-color: #add8e6;
+		}
+		td.nbgroup_2{
+			background-color: #add8e6;
+		}
+		td.header_2 {
+			background-color: #add8e6; 
+			font-size: 120%;
+			padding: 2px 8px;
+			font-weight: bold;
+		}
+			td.group_3{
+			background-color: #e0ffff;
+		}
+		td.nbgroup_3{
+			background-color: #e0ffff;
+		}
+		td.header_3 {
+			background-color: #e0ffff; 
+			font-size: 120%;
+			padding: 2px 8px;
+			font-weight: bold;
+		}
+		td.blackshade {
+		font-size: 120%;
+	}
+	.summaryrow > * {
+		border:solid #808080 1px; 
+		border-left: none; 
+		border-right: none;
+	}
+		.grouptotalsrow + :not(.grouptotalsrow) > * {
+		border-top:solid #808080 1px; 
+	}
+	</style>
+
+<div class="rnr-cw-grid rnr-s-2 asbuttons {$pageStyleName}" data-location="grid" id="form_grid_{$pageid}" data-makeup="leftbar" {$form_grid} data-pageid="{$pageid}" >
+					
+
+
+<table class="table table-condensed table-striped table-hover table-bordered rnr-b-grid rnr-gridtable" cellpadding="0" >
+	<tbody>
+	{BEGIN grid_row}
+				<!--  group headers -->
+			{BEGIN region_name_firstnewgroup}
+				<tr class="group-headers">
+										<td class="blackshade {$fieldclass_region_name}">{$label device_distributions_report region_name }</td>
+														<td class="blackshade {$fieldclass_country_name}">{$label device_distributions_report country_name }</td>
+														<td class="blackshade {$fieldclass_facility_name}">{$label device_distributions_report facility_name }</td>
+																																																	
+																															<td class="blackshade {$fieldclass_quantity}">{$label device_distributions_report quantity }</td>
+														<td class="blackshade {$fieldclass_payment_method}">{$label device_distributions_report payment_method }</td>
+														<td class="blackshade {$fieldclass_transaction_type}">{$label device_distributions_report transaction_type }</td>
+														<td class="blackshade {$fieldclass_donor}">{$label device_distributions_report donor }</td>
+														<td class="blackshade {$fieldclass_device_type}">{$label device_distributions_report device_type }</td>
+														<td class="blackshade {$fieldclass_distribution_date}">{$label device_distributions_report distribution_date }</td>
+									</tr>
+		
+																<tr class="group-spliter-1 group-spliter-2 group-spliter-3 " {$rowattrs}>
+													<td class="header_1">
+				{$xregion_name_grval}
+								<span data-itemtype="report_group_field" data-itemid="report_group_field" {$item_report_group_field} data-pageid="{$pageid}" data-field="region_name" data-fieldname="region_name" >
+{$region_name_grval}
+</span>							</td>
+															<td class="header_2">
+				{$xcountry_name_grval}
+								<span data-itemtype="report_group_field" data-itemid="report_group_field1" {$item_report_group_field1} data-pageid="{$pageid}" data-field="country_name" data-fieldname="country_name" >
+{$country_name_grval}
+</span>							</td>
+															<td class="header_3">
+				{$xfacility_name_grval}
+								<span data-itemtype="report_group_field" data-itemid="report_group_field2" {$item_report_group_field2} data-pageid="{$pageid}" data-field="facility_name" data-fieldname="facility_name" >
+{$facility_name_grval}
+</span>							</td>
+								<!-- data -->
+
+																																			<td class="data {$fieldclass_quantity}">
+								{$xquantity_value}
+								<span data-itemtype="report_grid_field" data-itemid="report_grid_field10" {$item_report_grid_field10} data-pageid="{$pageid}" data-field="quantity" data-fieldname="quantity" >
+{$quantity_value}
+</span>
+
+				
+							</td>
+														<td class="data {$fieldclass_payment_method}">
+								{$xpayment_method_value}
+								<span data-itemtype="report_grid_field" data-itemid="report_grid_field15" {$item_report_grid_field15} data-pageid="{$pageid}" data-field="payment_method" data-fieldname="payment_method" >
+{$payment_method_value}
+</span>
+
+				
+							</td>
+														<td class="data {$fieldclass_transaction_type}">
+								{$xtransaction_type_value}
+								<span data-itemtype="report_grid_field" data-itemid="report_grid_field16" {$item_report_grid_field16} data-pageid="{$pageid}" data-field="transaction_type" data-fieldname="transaction_type" >
+{$transaction_type_value}
+</span>
+
+				
+							</td>
+														<td class="data {$fieldclass_donor}">
+								{$xdonor_value}
+								<span data-itemtype="report_grid_field" data-itemid="report_grid_field17" {$item_report_grid_field17} data-pageid="{$pageid}" data-field="donor" data-fieldname="donor" >
+{$donor_value}
+</span>
+
+				
+							</td>
+														<td class="data {$fieldclass_device_type}">
+								{$xdevice_type_value}
+								<span data-itemtype="report_grid_field" data-itemid="report_grid_field" {$item_report_grid_field} data-pageid="{$pageid}" data-field="device_type" data-fieldname="device_type" >
+{$device_type_value}
+</span>
+
+				
+							</td>
+														<td class="data {$fieldclass_distribution_date}">
+								{$xdistribution_date_value}
+								<span data-itemtype="report_grid_field" data-itemid="report_grid_field1" {$item_report_grid_field1} data-pageid="{$pageid}" data-field="distribution_date" data-fieldname="distribution_date" >
+{$distribution_date_value}
+</span>
+
+				
+							</td>
+					
+		</tr>
+		{END region_name_firstnewgroup}
+			{BEGIN country_name_firstnewgroup}
+		
+											<tr class="group-spliter-2 group-spliter-3 " {$rowattrs}>
+													<td class="group_1">
+									&nbsp;
+							</td>
+															<td class="header_2">
+				{$xcountry_name_grval}
+								<span data-itemtype="report_group_field" data-itemid="report_group_field1" {$item_report_group_field1} data-pageid="{$pageid}" data-field="country_name" data-fieldname="country_name" >
+{$country_name_grval}
+</span>							</td>
+															<td class="header_3">
+				{$xfacility_name_grval}
+								<span data-itemtype="report_group_field" data-itemid="report_group_field2" {$item_report_group_field2} data-pageid="{$pageid}" data-field="facility_name" data-fieldname="facility_name" >
+{$facility_name_grval}
+</span>							</td>
+								<!-- data -->
+
+																																			<td class="data {$fieldclass_quantity}">
+								{$xquantity_value}
+								<span data-itemtype="report_grid_field" data-itemid="report_grid_field10" {$item_report_grid_field10} data-pageid="{$pageid}" data-field="quantity" data-fieldname="quantity" >
+{$quantity_value}
+</span>
+
+				
+							</td>
+														<td class="data {$fieldclass_payment_method}">
+								{$xpayment_method_value}
+								<span data-itemtype="report_grid_field" data-itemid="report_grid_field15" {$item_report_grid_field15} data-pageid="{$pageid}" data-field="payment_method" data-fieldname="payment_method" >
+{$payment_method_value}
+</span>
+
+				
+							</td>
+														<td class="data {$fieldclass_transaction_type}">
+								{$xtransaction_type_value}
+								<span data-itemtype="report_grid_field" data-itemid="report_grid_field16" {$item_report_grid_field16} data-pageid="{$pageid}" data-field="transaction_type" data-fieldname="transaction_type" >
+{$transaction_type_value}
+</span>
+
+				
+							</td>
+														<td class="data {$fieldclass_donor}">
+								{$xdonor_value}
+								<span data-itemtype="report_grid_field" data-itemid="report_grid_field17" {$item_report_grid_field17} data-pageid="{$pageid}" data-field="donor" data-fieldname="donor" >
+{$donor_value}
+</span>
+
+				
+							</td>
+														<td class="data {$fieldclass_device_type}">
+								{$xdevice_type_value}
+								<span data-itemtype="report_grid_field" data-itemid="report_grid_field" {$item_report_grid_field} data-pageid="{$pageid}" data-field="device_type" data-fieldname="device_type" >
+{$device_type_value}
+</span>
+
+				
+							</td>
+														<td class="data {$fieldclass_distribution_date}">
+								{$xdistribution_date_value}
+								<span data-itemtype="report_grid_field" data-itemid="report_grid_field1" {$item_report_grid_field1} data-pageid="{$pageid}" data-field="distribution_date" data-fieldname="distribution_date" >
+{$distribution_date_value}
+</span>
+
+				
+							</td>
+					
+		</tr>
+		{END country_name_firstnewgroup}
+			{BEGIN facility_name_firstnewgroup}
+		
+						<tr class="group-spliter-3 " {$rowattrs}>
+													<td class="group_1">
+									&nbsp;
+							</td>
+															<td class="group_2">
+									&nbsp;
+							</td>
+															<td class="header_3">
+				{$xfacility_name_grval}
+								<span data-itemtype="report_group_field" data-itemid="report_group_field2" {$item_report_group_field2} data-pageid="{$pageid}" data-field="facility_name" data-fieldname="facility_name" >
+{$facility_name_grval}
+</span>							</td>
+								<!-- data -->
+
+																																			<td class="data {$fieldclass_quantity}">
+								{$xquantity_value}
+								<span data-itemtype="report_grid_field" data-itemid="report_grid_field10" {$item_report_grid_field10} data-pageid="{$pageid}" data-field="quantity" data-fieldname="quantity" >
+{$quantity_value}
+</span>
+
+				
+							</td>
+														<td class="data {$fieldclass_payment_method}">
+								{$xpayment_method_value}
+								<span data-itemtype="report_grid_field" data-itemid="report_grid_field15" {$item_report_grid_field15} data-pageid="{$pageid}" data-field="payment_method" data-fieldname="payment_method" >
+{$payment_method_value}
+</span>
+
+				
+							</td>
+														<td class="data {$fieldclass_transaction_type}">
+								{$xtransaction_type_value}
+								<span data-itemtype="report_grid_field" data-itemid="report_grid_field16" {$item_report_grid_field16} data-pageid="{$pageid}" data-field="transaction_type" data-fieldname="transaction_type" >
+{$transaction_type_value}
+</span>
+
+				
+							</td>
+														<td class="data {$fieldclass_donor}">
+								{$xdonor_value}
+								<span data-itemtype="report_grid_field" data-itemid="report_grid_field17" {$item_report_grid_field17} data-pageid="{$pageid}" data-field="donor" data-fieldname="donor" >
+{$donor_value}
+</span>
+
+				
+							</td>
+														<td class="data {$fieldclass_device_type}">
+								{$xdevice_type_value}
+								<span data-itemtype="report_grid_field" data-itemid="report_grid_field" {$item_report_grid_field} data-pageid="{$pageid}" data-field="device_type" data-fieldname="device_type" >
+{$device_type_value}
+</span>
+
+				
+							</td>
+														<td class="data {$fieldclass_distribution_date}">
+								{$xdistribution_date_value}
+								<span data-itemtype="report_grid_field" data-itemid="report_grid_field1" {$item_report_grid_field1} data-pageid="{$pageid}" data-field="distribution_date" data-fieldname="distribution_date" >
+{$distribution_date_value}
+</span>
+
+				
+							</td>
+					
+		</tr>
+		{END facility_name_firstnewgroup}
+	
+		{BEGIN nonewgroup}
+		<tr>
+											<td class="group_1">
+					&nbsp;
+					</td>
+											<td class="group_2">
+					&nbsp;
+					</td>
+											<td class="group_3">
+					&nbsp;
+					</td>
+		
+																																		<td class="data {$fieldclass_quantity}">
+		{$xquantity_value}
+				<span data-itemtype="report_grid_field" data-itemid="report_grid_field10" {$item_report_grid_field10} data-pageid="{$pageid}" data-field="quantity" data-fieldname="quantity" >
+{$quantity_value}
+</span>
+
+		
+		</td>
+													<td class="data {$fieldclass_payment_method}">
+		{$xpayment_method_value}
+				<span data-itemtype="report_grid_field" data-itemid="report_grid_field15" {$item_report_grid_field15} data-pageid="{$pageid}" data-field="payment_method" data-fieldname="payment_method" >
+{$payment_method_value}
+</span>
+
+		
+		</td>
+													<td class="data {$fieldclass_transaction_type}">
+		{$xtransaction_type_value}
+				<span data-itemtype="report_grid_field" data-itemid="report_grid_field16" {$item_report_grid_field16} data-pageid="{$pageid}" data-field="transaction_type" data-fieldname="transaction_type" >
+{$transaction_type_value}
+</span>
+
+		
+		</td>
+													<td class="data {$fieldclass_donor}">
+		{$xdonor_value}
+				<span data-itemtype="report_grid_field" data-itemid="report_grid_field17" {$item_report_grid_field17} data-pageid="{$pageid}" data-field="donor" data-fieldname="donor" >
+{$donor_value}
+</span>
+
+		
+		</td>
+													<td class="data {$fieldclass_device_type}">
+		{$xdevice_type_value}
+				<span data-itemtype="report_grid_field" data-itemid="report_grid_field" {$item_report_grid_field} data-pageid="{$pageid}" data-field="device_type" data-fieldname="device_type" >
+{$device_type_value}
+</span>
+
+		
+		</td>
+													<td class="data {$fieldclass_distribution_date}">
+		{$xdistribution_date_value}
+				<span data-itemtype="report_grid_field" data-itemid="report_grid_field1" {$item_report_grid_field1} data-pageid="{$pageid}" data-field="distribution_date" data-fieldname="distribution_date" >
+{$distribution_date_value}
+</span>
+
+		
+		</td>
+							</tr>
+	{END nonewgroup}
+	
+							<!--  group summary -->
+
+	{BEGIN facility_name_endgroup}
+		<tr class="summaryrow"  >
+										<td class="group_1" style="border-top: none;"></td>
+							<td class="group_2" style="border-top: none;"></td>
+							
+																								<td  class="group_3" colspan=7 >
+				{mlang_message SUMMARY_FOR}&nbsp;{$label device_distributions_report facility_name }&nbsp;{$facility_name_grval}
+					- <span class="summary-3" data-type="summary">{$groupfacility_name_total_cnt}
+					</span> {mlang_message RECORDS_TOTAL}			</td>
+																																																			</tr>
+
+					<!--  Sum -->
+		<tr class="grouptotalsrow"  >
+														<td class="group_3">{mlang_message SUM}</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="group_3">&nbsp;</td>
+																		<td class="{$fieldclass_quantity} group_3">
+				<span class="summary-3" data-type="sum" data-field="quantity">
+					{$groupfacility_name_totalquantity_sum}
+				</span>
+			</td>
+																		<td class="group_3">&nbsp;</td>
+																		<td class="group_3">&nbsp;</td>
+																		<td class="group_3">&nbsp;</td>
+																		<td class="group_3">&nbsp;</td>
+																		<td class="group_3">&nbsp;</td>
+									</tr>
+	
+			<!--  Avg -->
+		<tr class="grouptotalsrow"  >
+														<td class="group_3">{mlang_message AVERAGE}</td>
+																		<td class="group_2" >&nbsp;</td>
+																		<td class="group_3">&nbsp;</td>
+																		<td class="{$fieldclass_quantity} group_3">
+				<span class="summary-3" data-type="avg" data-field="quantity">{$groupfacility_name_totalquantity_avg}
+				</span>
+			</td>
+																		<td class="group_3">&nbsp;</td>
+																		<td class="group_3">&nbsp;</td>
+																		<td class="group_3">&nbsp;</td>
+																		<td class="group_3">&nbsp;</td>
+																		<td class="group_3">&nbsp;</td>
+									</tr>
+	
+			<!--  Min -->
+		<tr class="grouptotalsrow" >
+														<td class="group_3">{mlang_message MIN}</td>
+																		<td class="group_2" >&nbsp;</td>
+																		<td class="group_3">&nbsp;</td>
+																		<td class="{$fieldclass_quantity} group_3">
+				<span class="summary-3" data-type="min" data-field="quantity">{$groupfacility_name_totalquantity_min}</span>
+			</td>
+																		<td class="group_3">&nbsp;</td>
+																		<td class="group_3">&nbsp;</td>
+																		<td class="group_3">&nbsp;</td>
+																		<td class="group_3">&nbsp;</td>
+																		<td class="group_3">&nbsp;</td>
+									</tr>
+	
+					<!--  Max -->
+		<tr class="grouptotalsrow" >
+														<td class="group_3">{mlang_message MAX}</td>
+																		<td class="group_2" >&nbsp;</td>
+																		<td class="group_3">&nbsp;</td>
+																		<td class="{$fieldclass_quantity} group_3">
+				<span class="summary-3" data-type="max" data-field="quantity">{$groupfacility_name_totalquantity_max}
+				</span>
+			</td>
+																		<td class="group_3">&nbsp;</td>
+																		<td class="group_3">&nbsp;</td>
+																		<td class="group_3">&nbsp;</td>
+																		<td class="group_3">&nbsp;</td>
+																		<td class="group_3">&nbsp;</td>
+									</tr>
+	
+	{END facility_name_endgroup}
+									<!--  group summary -->
+
+	{BEGIN country_name_endgroup}
+		<tr class="summaryrow"  >
+										<td class="group_1" style="border-top: none;"></td>
+							
+																	<td  class="group_2" colspan=8 >
+				{mlang_message SUMMARY_FOR}&nbsp;{$label device_distributions_report country_name }&nbsp;{$country_name_grval}
+					- <span class="summary-2" data-type="summary">{$groupcountry_name_total_cnt}
+					</span> {mlang_message RECORDS_TOTAL}			</td>
+																																																										</tr>
+
+					<!--  Sum -->
+		<tr class="grouptotalsrow"  >
+														<td class="group_2">{mlang_message SUM}</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="{$fieldclass_quantity} group_2">
+				<span class="summary-2" data-type="sum" data-field="quantity">
+					{$groupcountry_name_totalquantity_sum}
+				</span>
+			</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="group_2">&nbsp;</td>
+									</tr>
+	
+			<!--  Avg -->
+		<tr class="grouptotalsrow"  >
+														<td class="group_2">{mlang_message AVERAGE}</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="{$fieldclass_quantity} group_2">
+				<span class="summary-2" data-type="avg" data-field="quantity">{$groupcountry_name_totalquantity_avg}
+				</span>
+			</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="group_2">&nbsp;</td>
+									</tr>
+	
+			<!--  Min -->
+		<tr class="grouptotalsrow" >
+														<td class="group_2">{mlang_message MIN}</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="{$fieldclass_quantity} group_2">
+				<span class="summary-2" data-type="min" data-field="quantity">{$groupcountry_name_totalquantity_min}</span>
+			</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="group_2">&nbsp;</td>
+									</tr>
+	
+					<!--  Max -->
+		<tr class="grouptotalsrow" >
+														<td class="group_2">{mlang_message MAX}</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="{$fieldclass_quantity} group_2">
+				<span class="summary-2" data-type="max" data-field="quantity">{$groupcountry_name_totalquantity_max}
+				</span>
+			</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="group_2">&nbsp;</td>
+																		<td class="group_2">&nbsp;</td>
+									</tr>
+	
+	{END country_name_endgroup}
+									<!--  group summary -->
+
+	{BEGIN region_name_endgroup}
+		<tr class="summaryrow"  >
+			
+										<td  class="group_1" colspan=9 >
+				{mlang_message SUMMARY_FOR}&nbsp;{$label device_distributions_report region_name }&nbsp;{$region_name_grval}
+					- <span class="summary-1" data-type="summary">{$groupregion_name_total_cnt}
+					</span> {mlang_message RECORDS_TOTAL}			</td>
+																																																																	</tr>
+
+					<!--  Sum -->
+		<tr class="grouptotalsrow"  >
+														<td class="group_1">{mlang_message SUM}</td>
+																		<td class="group_1">&nbsp;</td>
+																		<td class="group_1">&nbsp;</td>
+																		<td class="{$fieldclass_quantity} group_1">
+				<span class="summary-1" data-type="sum" data-field="quantity">
+					{$groupregion_name_totalquantity_sum}
+				</span>
+			</td>
+																		<td class="group_1">&nbsp;</td>
+																		<td class="group_1">&nbsp;</td>
+																		<td class="group_1">&nbsp;</td>
+																		<td class="group_1">&nbsp;</td>
+																		<td class="group_1">&nbsp;</td>
+									</tr>
+	
+			<!--  Avg -->
+		<tr class="grouptotalsrow"  >
+														<td class="group_1">{mlang_message AVERAGE}</td>
+																		<td class="group_1">&nbsp;</td>
+																		<td class="group_1">&nbsp;</td>
+																		<td class="{$fieldclass_quantity} group_1">
+				<span class="summary-1" data-type="avg" data-field="quantity">{$groupregion_name_totalquantity_avg}
+				</span>
+			</td>
+																		<td class="group_1">&nbsp;</td>
+																		<td class="group_1">&nbsp;</td>
+																		<td class="group_1">&nbsp;</td>
+																		<td class="group_1">&nbsp;</td>
+																		<td class="group_1">&nbsp;</td>
+									</tr>
+	
+			<!--  Min -->
+		<tr class="grouptotalsrow" >
+														<td class="group_1">{mlang_message MIN}</td>
+																		<td class="group_1">&nbsp;</td>
+																		<td class="group_1">&nbsp;</td>
+																		<td class="{$fieldclass_quantity} group_1">
+				<span class="summary-1" data-type="min" data-field="quantity">{$groupregion_name_totalquantity_min}</span>
+			</td>
+																		<td class="group_1">&nbsp;</td>
+																		<td class="group_1">&nbsp;</td>
+																		<td class="group_1">&nbsp;</td>
+																		<td class="group_1">&nbsp;</td>
+																		<td class="group_1">&nbsp;</td>
+									</tr>
+	
+					<!--  Max -->
+		<tr class="grouptotalsrow" >
+														<td class="group_1">{mlang_message MAX}</td>
+																		<td class="group_1">&nbsp;</td>
+																		<td class="group_1">&nbsp;</td>
+																		<td class="{$fieldclass_quantity} group_1">
+				<span class="summary-1" data-type="max" data-field="quantity">{$groupregion_name_totalquantity_max}
+				</span>
+			</td>
+																		<td class="group_1">&nbsp;</td>
+																		<td class="group_1">&nbsp;</td>
+																		<td class="group_1">&nbsp;</td>
+																		<td class="group_1">&nbsp;</td>
+																		<td class="group_1">&nbsp;</td>
+									</tr>
+	
+	{END region_name_endgroup}
+				{END grid_row}
+
+
+	
+	
+
+
+    
+
+	
+
+	</tbody>
+</table>		</div>
+	{END grid_block}	
+			{BEGIN below-grid_outerblock}
+		<div class="panel-footer">
+			{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="leftbar" {$form_below-grid} data-pageid="{$pageid}" >		
+	 
+				<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class="r-align-center r-ori-vert			col-md-12
+	
+">
+		 
+		{BEGIN pagination_block}
+<span data-itemtype="pagination" data-itemid="pagination" {$item_pagination} data-pageid="{$pageid}" >
+{$pagination}
+</span>
+{END pagination_block}
+		</div>					</div>
+			</div>		
+{END below-grid_block}
+		</div>
+	{END below-grid_outerblock}
+		</div>
+
+</div>
+
+
+
+
+										{$footer}
+				</div>
+			</div>
+			<div class="r-body-shadow">
+			</div>
+		</div>
+	{END body}
+	</body>
+</html>

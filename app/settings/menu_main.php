@@ -137,6 +137,37 @@ $runnerMenus['main'] = array(
 						) 
 					),
 					array(
+						'id' => '165',
+						'parent' => '37',
+						'children' => array( 
+							 
+						),
+						'data' => array(
+							'name' => array(
+								'table' => 'device_distributions_report',
+								'type' => 6 
+							),
+							'comments' => array(
+								'text' => '',
+								'type' => 0 
+							),
+							'style' => '',
+							'href' => '',
+							'params' => '',
+							'pageId' => '',
+							'itemType' => 2,
+							'linkType' => 0,
+							'openType' => 0,
+							'iconType' => 3,
+							'iconName' => 'fa-th-list',
+							'iconStyle' => 0,
+							'showIconType' => 1,
+							'linkToAnotherApp' => false,
+							'table' => 19091,
+							'pageType' => 'report' 
+						) 
+					),
+					array(
 						'id' => '26',
 						'parent' => '37',
 						'children' => array( 

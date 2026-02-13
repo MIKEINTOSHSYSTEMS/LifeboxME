@@ -354,6 +354,9 @@ $runnerProjectSettings = array(
 		),
 		'Lifbox_Learning_Network_API_Fetcher' => array(
 			'table' => 10452 
+		),
+		'device_distributions_report' => array(
+			'table' => 19091 
 		) 
 	),
 	'customTemplates' => array( 
@@ -3138,6 +3141,18 @@ $runnerProjectSettings = array(
 			'connId' => 'lifebox_mesystem_at_localhost',
 			'color' => '9acd32',
 			'originalTable' => '' 
+		),
+		'device_distributions_report' => array(
+			'gid' => 19091,
+			'name' => 'device_distributions_report',
+			'shortName' => 'device_distributions1',
+			'type' => 2,
+			'caption' => array(
+				'English' => 'Device Distributions Report' 
+			),
+			'connId' => 'lifebox_mesystem_at_localhost',
+			'color' => '22b1ce',
+			'originalTable' => 'public.device_distributions' 
 		) 
 	),
 	'tablesByShort' => array(
@@ -3251,7 +3266,8 @@ $runnerProjectSettings = array(
 		'lbln_courses' => 'public.lbln_courses',
 		'lbln_fetch_logs' => 'public.lbln_fetch_logs',
 		'lbln_fetch_sessions' => 'public.lbln_fetch_sessions',
-		'Lifbox_Learning_Network_API_Fetcher' => 'Lifbox_Learning_Network_API_Fetcher' 
+		'Lifbox_Learning_Network_API_Fetcher' => 'Lifbox_Learning_Network_API_Fetcher',
+		'device_distributions1' => 'device_distributions_report' 
 	),
 	'tablesByGood' => array(
 		'public_antibiotics' => 'public.antibiotics',
@@ -3364,7 +3380,8 @@ $runnerProjectSettings = array(
 		'public_lbln_courses' => 'public.lbln_courses',
 		'public_lbln_fetch_logs' => 'public.lbln_fetch_logs',
 		'public_lbln_fetch_sessions' => 'public.lbln_fetch_sessions',
-		'Lifbox_Learning_Network_API_Fetcher' => 'Lifbox_Learning_Network_API_Fetcher' 
+		'Lifbox_Learning_Network_API_Fetcher' => 'Lifbox_Learning_Network_API_Fetcher',
+		'device_distributions_report' => 'device_distributions_report' 
 	),
 	'events' => array( 
 		array(
@@ -3400,7 +3417,7 @@ $runnerProjectSettings = array(
 		'table' => 'public.lifeboxme_settings' 
 	),
 	'wizardBuild' => '43785',
-	'projectBuild' => '9LcXAuXhFBYt',
+	'projectBuild' => 'sxvaKEdcVddb',
 	'projectTheme' => 'flatly',
 	'projectSize' => 'normal',
 	'customErrorMsg' => array(

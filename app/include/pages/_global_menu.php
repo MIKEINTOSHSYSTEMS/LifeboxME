@@ -896,6 +896,14 @@
 				'items' => null,
 				'table' => 'Lifbox_Learning_Network_API_Fetcher',
 				'page' => 'list' 
+			),
+			'welcome_item102' => array(
+				'menutItem' => true,
+				'group' => false,
+				'linkType' => 0,
+				'items' => null,
+				'table' => 'device_distributions_report',
+				'page' => 'report' 
 			) 
 		) 
 	),
@@ -1040,6 +1048,7 @@
 					'welcome_item106',
 					'welcome_item107',
 					'welcome_item108',
+					'welcome_item102',
 					'welcome_item51' 
 				) 
 			),
@@ -1164,6 +1173,7 @@
 				'welcome_item106' => 'grid',
 				'welcome_item107' => 'grid',
 				'welcome_item108' => 'grid',
+				'welcome_item102' => 'grid',
 				'welcome_item51' => 'grid' 
 			),
 			'itemLocations' => array(
@@ -1283,7 +1293,8 @@
 				'welcome_item105',
 				'welcome_item106',
 				'welcome_item107',
-				'welcome_item108' 
+				'welcome_item108',
+				'welcome_item102' 
 			),
 			'logo' => array( 
 				'logo' 
@@ -1650,7 +1661,8 @@
 						'welcome_item105',
 						'welcome_item106',
 						'welcome_item107',
-						'welcome_item108' 
+						'welcome_item108',
+						'welcome_item102' 
 					) 
 				),
 				'c' => array(
@@ -3072,6 +3084,18 @@
 		),
 		'notifications' => array(
 			'type' => 'notifications' 
+		),
+		'welcome_item102' => array(
+			'type' => 'welcome_item',
+			'linkUrl' => '',
+			'linkTable' => 'device_distributions_report',
+			'linkPage' => 'report',
+			'linkText' => array(
+				'table' => 'device_distributions_report',
+				'type' => 6 
+			),
+			'background' => '#22b1ce',
+			'linkType' => 0 
 		),
 		'expand_button' => array(
 			'type' => 'expand_button' 

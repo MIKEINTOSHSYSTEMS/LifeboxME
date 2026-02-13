@@ -4,19 +4,7 @@
 		'distribution_id' => array(
 			'totalsType' => '' 
 		),
-		'device_type' => array(
-			'totalsType' => '' 
-		),
 		'order_reference' => array(
-			'totalsType' => '' 
-		),
-		'facility_name' => array(
-			'totalsType' => '' 
-		),
-		'country_name' => array(
-			'totalsType' => '' 
-		),
-		'region_name' => array(
 			'totalsType' => '' 
 		),
 		'monthly_surgical_volume' => array(
@@ -28,54 +16,63 @@
 		'contact_email' => array(
 			'totalsType' => '' 
 		),
-		'payment_method' => array(
-			'totalsType' => '' 
-		),
 		'quantity' => array(
 			'totalsType' => '' 
 		),
 		'notes' => array(
 			'totalsType' => '' 
 		),
-		'distribution_month' => array(
+		'device_type' => array(
 			'totalsType' => '' 
 		),
-		'distribution_year' => array(
+		'payment_method' => array(
+			'totalsType' => '' 
+		),
+		'transaction_type' => array(
+			'totalsType' => '' 
+		),
+		'donor' => array(
+			'totalsType' => '' 
+		),
+		'region_name' => array(
+			'totalsType' => '' 
+		),
+		'country_name' => array(
+			'totalsType' => '' 
+		),
+		'facility_name' => array(
+			'totalsType' => '' 
+		),
+		'distribution_date' => array(
 			'totalsType' => '' 
 		) 
 	),
 	'fields' => array(
 		'gridFields' => array( 
 			'distribution_id',
-			'device_type',
 			'order_reference',
-			'facility_name',
-			'country_name',
-			'region_name',
 			'monthly_surgical_volume',
 			'contact_name',
 			'contact_email',
-			'payment_method',
 			'quantity',
 			'notes',
-			'distribution_month',
-			'distribution_year' 
+			'device_type',
+			'payment_method',
+			'transaction_type',
+			'donor' 
 		),
 		'exportFields' => array( 
 			'distribution_id',
-			'device_type',
 			'order_reference',
-			'facility_name',
-			'country_name',
-			'region_name',
 			'monthly_surgical_volume',
 			'contact_name',
 			'contact_email',
-			'payment_method',
 			'quantity',
 			'notes',
-			'distribution_month',
-			'distribution_year' 
+			'device_type',
+			'payment_method',
+			'transaction_type',
+			'donor' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -87,44 +84,35 @@
 			'distribution_id' => array( 
 				'export_field' 
 			),
-			'device_type' => array( 
-				'export_field1' 
-			),
 			'order_reference' => array( 
-				'export_field2' 
-			),
-			'facility_name' => array( 
 				'export_field3' 
 			),
-			'country_name' => array( 
-				'export_field4' 
-			),
-			'region_name' => array( 
+			'monthly_surgical_volume' => array( 
 				'export_field5' 
 			),
-			'monthly_surgical_volume' => array( 
+			'contact_name' => array( 
 				'export_field6' 
 			),
-			'contact_name' => array( 
+			'contact_email' => array( 
 				'export_field7' 
 			),
-			'contact_email' => array( 
-				'export_field8' 
-			),
-			'payment_method' => array( 
-				'export_field11' 
-			),
 			'quantity' => array( 
-				'export_field12' 
+				'export_field10' 
 			),
 			'notes' => array( 
-				'export_field13' 
+				'export_field11' 
 			),
-			'distribution_month' => array( 
-				'export_field9' 
+			'device_type' => array( 
+				'export_field14' 
 			),
-			'distribution_year' => array( 
-				'export_field10' 
+			'payment_method' => array( 
+				'export_field15' 
+			),
+			'transaction_type' => array( 
+				'export_field16' 
+			),
+			'donor' => array( 
+				'export_field17' 
 			) 
 		) 
 	),
@@ -145,19 +133,16 @@
 				),
 				'grid' => array( 
 					'export_field',
-					'export_field1',
-					'export_field2',
 					'export_field3',
-					'export_field4',
 					'export_field5',
 					'export_field6',
 					'export_field7',
-					'export_field8',
+					'export_field10',
 					'export_field11',
-					'export_field12',
-					'export_field13',
-					'export_field9',
-					'export_field10' 
+					'export_field14',
+					'export_field15',
+					'export_field16',
+					'export_field17' 
 				),
 				'footer' => array( 
 					'export_export',
@@ -172,19 +157,16 @@
 			'itemForms' => array(
 				'export_header' => 'top',
 				'export_field' => 'grid',
-				'export_field1' => 'grid',
-				'export_field2' => 'grid',
 				'export_field3' => 'grid',
-				'export_field4' => 'grid',
 				'export_field5' => 'grid',
 				'export_field6' => 'grid',
 				'export_field7' => 'grid',
-				'export_field8' => 'grid',
-				'export_field11' => 'grid',
-				'export_field12' => 'grid',
-				'export_field13' => 'grid',
-				'export_field9' => 'grid',
 				'export_field10' => 'grid',
+				'export_field11' => 'grid',
+				'export_field14' => 'grid',
+				'export_field15' => 'grid',
+				'export_field16' => 'grid',
+				'export_field17' => 'grid',
 				'export_export' => 'footer',
 				'export_cancel' => 'footer' 
 			),
@@ -207,19 +189,16 @@
 			),
 			'export_field' => array( 
 				'export_field',
-				'export_field1',
-				'export_field2',
 				'export_field3',
-				'export_field4',
 				'export_field5',
 				'export_field6',
 				'export_field7',
-				'export_field8',
+				'export_field10',
 				'export_field11',
-				'export_field12',
-				'export_field13',
-				'export_field9',
-				'export_field10' 
+				'export_field14',
+				'export_field15',
+				'export_field16',
+				'export_field17' 
 			) 
 		),
 		'cellMaps' => array(
@@ -290,7 +269,7 @@
 	'id' => 'export',
 	'type' => 'export',
 	'layoutId' => 'first',
-	'disabled' => 0,
+	'disabled' => false,
 	'default' => 0,
 	'forms' => array(
 		'supertop' => array(
@@ -360,19 +339,16 @@
 					'model' => 'c1',
 					'items' => array( 
 						'export_field',
-						'export_field1',
-						'export_field2',
 						'export_field3',
-						'export_field4',
 						'export_field5',
 						'export_field6',
 						'export_field7',
-						'export_field8',
+						'export_field10',
 						'export_field11',
-						'export_field12',
-						'export_field13',
-						'export_field9',
-						'export_field10' 
+						'export_field14',
+						'export_field15',
+						'export_field16',
+						'export_field17' 
 					) 
 				) 
 			),
@@ -431,63 +407,51 @@
 			'field' => 'distribution_id',
 			'type' => 'export_field' 
 		),
-		'export_field1' => array(
-			'field' => 'device_type',
-			'type' => 'export_field' 
-		),
-		'export_field2' => array(
+		'export_field3' => array(
 			'field' => 'order_reference',
 			'type' => 'export_field' 
 		),
-		'export_field3' => array(
-			'field' => 'facility_name',
-			'type' => 'export_field' 
-		),
-		'export_field4' => array(
-			'field' => 'country_name',
-			'type' => 'export_field' 
-		),
 		'export_field5' => array(
-			'field' => 'region_name',
-			'type' => 'export_field' 
-		),
-		'export_field6' => array(
 			'field' => 'monthly_surgical_volume',
 			'type' => 'export_field' 
 		),
-		'export_field7' => array(
+		'export_field6' => array(
 			'field' => 'contact_name',
 			'type' => 'export_field' 
 		),
-		'export_field8' => array(
+		'export_field7' => array(
 			'field' => 'contact_email',
 			'type' => 'export_field' 
 		),
-		'export_field11' => array(
-			'field' => 'payment_method',
-			'type' => 'export_field' 
-		),
-		'export_field12' => array(
+		'export_field10' => array(
 			'field' => 'quantity',
 			'type' => 'export_field' 
 		),
-		'export_field13' => array(
+		'export_field11' => array(
 			'field' => 'notes',
 			'type' => 'export_field' 
 		),
-		'export_field9' => array(
-			'field' => 'distribution_month',
+		'export_field14' => array(
+			'field' => 'device_type',
 			'type' => 'export_field' 
 		),
-		'export_field10' => array(
-			'field' => 'distribution_year',
+		'export_field15' => array(
+			'field' => 'payment_method',
+			'type' => 'export_field' 
+		),
+		'export_field16' => array(
+			'field' => 'transaction_type',
+			'type' => 'export_field' 
+		),
+		'export_field17' => array(
+			'field' => 'donor',
 			'type' => 'export_field' 
 		) 
 	),
 	'dbProps' => array(
 		 
 	),
-	'version' => 14,
+	'version' => 13,
 	'imageItem' => array(
 		'type' => 'page_image' 
 	),

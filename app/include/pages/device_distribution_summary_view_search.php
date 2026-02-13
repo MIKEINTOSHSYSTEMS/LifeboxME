@@ -11,11 +11,11 @@
 			'monthly_surgical_volume',
 			'contact_name',
 			'contact_email',
-			'distribution_month',
-			'distribution_year',
 			'payment_method',
 			'quantity',
-			'notes' 
+			'notes',
+			'distribution_month',
+			'distribution_year' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -51,12 +51,6 @@
 			'contact_email' => array( 
 				'integrated_search_field8' 
 			),
-			'distribution_month' => array( 
-				'integrated_search_field9' 
-			),
-			'distribution_year' => array( 
-				'integrated_search_field10' 
-			),
 			'payment_method' => array( 
 				'integrated_search_field11' 
 			),
@@ -65,6 +59,12 @@
 			),
 			'notes' => array( 
 				'integrated_search_field13' 
+			),
+			'distribution_month' => array( 
+				'integrated_search_field9' 
+			),
+			'distribution_year' => array( 
+				'integrated_search_field10' 
 			) 
 		) 
 	),
@@ -99,11 +99,11 @@
 					'integrated_search_field6',
 					'integrated_search_field7',
 					'integrated_search_field8',
-					'integrated_search_field9',
-					'integrated_search_field10',
 					'integrated_search_field11',
 					'integrated_search_field12',
-					'integrated_search_field13' 
+					'integrated_search_field13',
+					'integrated_search_field9',
+					'integrated_search_field10' 
 				) 
 			),
 			'formXtTags' => array(
@@ -126,11 +126,11 @@
 				'integrated_search_field6' => 'grid',
 				'integrated_search_field7' => 'grid',
 				'integrated_search_field8' => 'grid',
-				'integrated_search_field9' => 'grid',
-				'integrated_search_field10' => 'grid',
 				'integrated_search_field11' => 'grid',
 				'integrated_search_field12' => 'grid',
-				'integrated_search_field13' => 'grid' 
+				'integrated_search_field13' => 'grid',
+				'integrated_search_field9' => 'grid',
+				'integrated_search_field10' => 'grid' 
 			),
 			'itemLocations' => array(
 				'integrated_search_field' => array(
@@ -169,14 +169,6 @@
 					'location' => 'grid',
 					'cellId' => 'c3' 
 				),
-				'integrated_search_field9' => array(
-					'location' => 'grid',
-					'cellId' => 'c3' 
-				),
-				'integrated_search_field10' => array(
-					'location' => 'grid',
-					'cellId' => 'c3' 
-				),
 				'integrated_search_field11' => array(
 					'location' => 'grid',
 					'cellId' => 'c3' 
@@ -186,6 +178,14 @@
 					'cellId' => 'c3' 
 				),
 				'integrated_search_field13' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field9' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field10' => array(
 					'location' => 'grid',
 					'cellId' => 'c3' 
 				) 
@@ -220,11 +220,11 @@
 				'integrated_search_field6',
 				'integrated_search_field7',
 				'integrated_search_field8',
-				'integrated_search_field9',
-				'integrated_search_field10',
 				'integrated_search_field11',
 				'integrated_search_field12',
-				'integrated_search_field13' 
+				'integrated_search_field13',
+				'integrated_search_field9',
+				'integrated_search_field10' 
 			) 
 		),
 		'cellMaps' => array(
@@ -250,11 +250,11 @@
 							'integrated_search_field6',
 							'integrated_search_field7',
 							'integrated_search_field8',
-							'integrated_search_field9',
-							'integrated_search_field10',
 							'integrated_search_field11',
 							'integrated_search_field12',
-							'integrated_search_field13' 
+							'integrated_search_field13',
+							'integrated_search_field9',
+							'integrated_search_field10' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
@@ -428,11 +428,11 @@
 						'integrated_search_field6',
 						'integrated_search_field7',
 						'integrated_search_field8',
-						'integrated_search_field9',
-						'integrated_search_field10',
 						'integrated_search_field11',
 						'integrated_search_field12',
-						'integrated_search_field13' 
+						'integrated_search_field13',
+						'integrated_search_field9',
+						'integrated_search_field10' 
 					) 
 				) 
 			),
@@ -512,18 +512,6 @@
 			'orientation' => 0,
 			'required' => false 
 		),
-		'integrated_search_field9' => array(
-			'field' => 'distribution_month',
-			'type' => 'integrated_search_field',
-			'orientation' => 0,
-			'required' => false 
-		),
-		'integrated_search_field10' => array(
-			'field' => 'distribution_year',
-			'type' => 'integrated_search_field',
-			'orientation' => 0,
-			'required' => false 
-		),
 		'integrated_search_field11' => array(
 			'field' => 'payment_method',
 			'type' => 'integrated_search_field',
@@ -541,6 +529,16 @@
 			'type' => 'integrated_search_field',
 			'orientation' => 0,
 			'required' => false 
+		),
+		'integrated_search_field9' => array(
+			'field' => 'distribution_month',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
+		),
+		'integrated_search_field10' => array(
+			'field' => 'distribution_year',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
 		) 
 	),
 	'dbProps' => array(

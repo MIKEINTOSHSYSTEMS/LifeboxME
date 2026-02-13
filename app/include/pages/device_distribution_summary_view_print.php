@@ -31,12 +31,6 @@
 		'contact_email' => array(
 			'totalsType' => '' 
 		),
-		'distribution_month' => array(
-			'totalsType' => '' 
-		),
-		'distribution_year' => array(
-			'totalsType' => '' 
-		),
 		'payment_method' => array(
 			'totalsType' => '' 
 		),
@@ -44,6 +38,12 @@
 			'totalsType' => '' 
 		),
 		'notes' => array(
+			'totalsType' => '' 
+		),
+		'distribution_month' => array(
+			'totalsType' => '' 
+		),
+		'distribution_year' => array(
 			'totalsType' => '' 
 		) 
 	),
@@ -58,11 +58,11 @@
 			'monthly_surgical_volume',
 			'contact_name',
 			'contact_email',
-			'distribution_month',
-			'distribution_year',
 			'payment_method',
 			'quantity',
-			'notes' 
+			'notes',
+			'distribution_month',
+			'distribution_year' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -107,24 +107,24 @@
 				'simple_grid_field8',
 				'simple_grid_field22' 
 			),
-			'distribution_month' => array( 
-				'simple_grid_field9',
-				'simple_grid_field23' 
-			),
-			'distribution_year' => array( 
-				'simple_grid_field10',
-				'simple_grid_field24' 
-			),
 			'payment_method' => array( 
 				'simple_grid_field11',
-				'simple_grid_field25' 
+				'simple_grid_field23' 
 			),
 			'quantity' => array( 
 				'simple_grid_field12',
-				'simple_grid_field26' 
+				'simple_grid_field24' 
 			),
 			'notes' => array( 
 				'simple_grid_field13',
+				'simple_grid_field25' 
+			),
+			'distribution_month' => array( 
+				'simple_grid_field9',
+				'simple_grid_field26' 
+			),
+			'distribution_year' => array( 
+				'simple_grid_field10',
 				'simple_grid_field27' 
 			) 
 		),
@@ -171,15 +171,15 @@
 					'simple_grid_field22',
 					'simple_grid_field8',
 					'simple_grid_field23',
-					'simple_grid_field9',
-					'simple_grid_field24',
-					'simple_grid_field10',
-					'simple_grid_field25',
 					'simple_grid_field11',
-					'simple_grid_field26',
+					'simple_grid_field24',
 					'simple_grid_field12',
+					'simple_grid_field25',
+					'simple_grid_field13',
+					'simple_grid_field26',
+					'simple_grid_field9',
 					'simple_grid_field27',
-					'simple_grid_field13' 
+					'simple_grid_field10' 
 				) 
 			),
 			'formXtTags' => array(
@@ -213,15 +213,15 @@
 				'simple_grid_field22' => 'grid',
 				'simple_grid_field8' => 'grid',
 				'simple_grid_field23' => 'grid',
-				'simple_grid_field9' => 'grid',
-				'simple_grid_field24' => 'grid',
-				'simple_grid_field10' => 'grid',
-				'simple_grid_field25' => 'grid',
 				'simple_grid_field11' => 'grid',
-				'simple_grid_field26' => 'grid',
+				'simple_grid_field24' => 'grid',
 				'simple_grid_field12' => 'grid',
+				'simple_grid_field25' => 'grid',
+				'simple_grid_field13' => 'grid',
+				'simple_grid_field26' => 'grid',
+				'simple_grid_field9' => 'grid',
 				'simple_grid_field27' => 'grid',
-				'simple_grid_field13' => 'grid' 
+				'simple_grid_field10' => 'grid' 
 			),
 			'itemLocations' => array(
 				'simple_grid_field14' => array(
@@ -300,7 +300,7 @@
 					'location' => 'grid',
 					'cellId' => 'headcell_field9' 
 				),
-				'simple_grid_field9' => array(
+				'simple_grid_field11' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_field9' 
 				),
@@ -308,7 +308,7 @@
 					'location' => 'grid',
 					'cellId' => 'headcell_field10' 
 				),
-				'simple_grid_field10' => array(
+				'simple_grid_field12' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_field10' 
 				),
@@ -316,7 +316,7 @@
 					'location' => 'grid',
 					'cellId' => 'headcell_field11' 
 				),
-				'simple_grid_field11' => array(
+				'simple_grid_field13' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_field11' 
 				),
@@ -324,7 +324,7 @@
 					'location' => 'grid',
 					'cellId' => 'headcell_field12' 
 				),
-				'simple_grid_field12' => array(
+				'simple_grid_field9' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_field12' 
 				),
@@ -332,7 +332,7 @@
 					'location' => 'grid',
 					'cellId' => 'headcell_field13' 
 				),
-				'simple_grid_field13' => array(
+				'simple_grid_field10' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_field13' 
 				) 
@@ -361,11 +361,11 @@
 				'simple_grid_field6',
 				'simple_grid_field7',
 				'simple_grid_field8',
-				'simple_grid_field9',
-				'simple_grid_field10',
 				'simple_grid_field11',
 				'simple_grid_field12',
-				'simple_grid_field13' 
+				'simple_grid_field13',
+				'simple_grid_field9',
+				'simple_grid_field10' 
 			),
 			'grid_field_label' => array( 
 				'simple_grid_field14',
@@ -539,7 +539,7 @@
 							0 
 						),
 						'tags' => array( 
-							'distribution_month_fieldheadercolumn' 
+							'payment_method_fieldheadercolumn' 
 						),
 						'items' => array( 
 							'simple_grid_field23' 
@@ -555,7 +555,7 @@
 							0 
 						),
 						'tags' => array( 
-							'distribution_year_fieldheadercolumn' 
+							'quantity_fieldheadercolumn' 
 						),
 						'items' => array( 
 							'simple_grid_field24' 
@@ -571,7 +571,7 @@
 							0 
 						),
 						'tags' => array( 
-							'payment_method_fieldheadercolumn' 
+							'notes_fieldheadercolumn' 
 						),
 						'items' => array( 
 							'simple_grid_field25' 
@@ -587,7 +587,7 @@
 							0 
 						),
 						'tags' => array( 
-							'quantity_fieldheadercolumn' 
+							'distribution_month_fieldheadercolumn' 
 						),
 						'items' => array( 
 							'simple_grid_field26' 
@@ -603,7 +603,7 @@
 							0 
 						),
 						'tags' => array( 
-							'notes_fieldheadercolumn' 
+							'distribution_year_fieldheadercolumn' 
 						),
 						'items' => array( 
 							'simple_grid_field27' 
@@ -763,38 +763,6 @@
 							1 
 						),
 						'tags' => array( 
-							'distribution_month_fieldcolumn' 
-						),
-						'items' => array( 
-							'simple_grid_field9' 
-						),
-						'fixedAtServer' => false,
-						'fixedAtClient' => false 
-					),
-					'cell_field10' => array(
-						'cols' => array( 
-							10 
-						),
-						'rows' => array( 
-							1 
-						),
-						'tags' => array( 
-							'distribution_year_fieldcolumn' 
-						),
-						'items' => array( 
-							'simple_grid_field10' 
-						),
-						'fixedAtServer' => false,
-						'fixedAtClient' => false 
-					),
-					'cell_field11' => array(
-						'cols' => array( 
-							11 
-						),
-						'rows' => array( 
-							1 
-						),
-						'tags' => array( 
 							'payment_method_fieldcolumn' 
 						),
 						'items' => array( 
@@ -803,9 +771,9 @@
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
-					'cell_field12' => array(
+					'cell_field10' => array(
 						'cols' => array( 
-							12 
+							10 
 						),
 						'rows' => array( 
 							1 
@@ -819,9 +787,9 @@
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
-					'cell_field13' => array(
+					'cell_field11' => array(
 						'cols' => array( 
-							13 
+							11 
 						),
 						'rows' => array( 
 							1 
@@ -831,6 +799,38 @@
 						),
 						'items' => array( 
 							'simple_grid_field13' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field12' => array(
+						'cols' => array( 
+							12 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'distribution_month_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field9' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field13' => array(
+						'cols' => array( 
+							13 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'distribution_year_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field10' 
 						),
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
@@ -1559,15 +1559,15 @@
 					'items' => array( 
 						'simple_grid_field23' 
 					),
-					'field' => 'distribution_month',
+					'field' => 'payment_method',
 					'columnName' => 'field' 
 				),
 				'cell_field9' => array(
 					'model' => 'cell_field',
 					'items' => array( 
-						'simple_grid_field9' 
+						'simple_grid_field11' 
 					),
-					'field' => 'distribution_month',
+					'field' => 'payment_method',
 					'columnName' => 'field' 
 				),
 				'footcell_field9' => array(
@@ -1581,15 +1581,15 @@
 					'items' => array( 
 						'simple_grid_field24' 
 					),
-					'field' => 'distribution_year',
+					'field' => 'quantity',
 					'columnName' => 'field' 
 				),
 				'cell_field10' => array(
 					'model' => 'cell_field',
 					'items' => array( 
-						'simple_grid_field10' 
+						'simple_grid_field12' 
 					),
-					'field' => 'distribution_year',
+					'field' => 'quantity',
 					'columnName' => 'field' 
 				),
 				'footcell_field10' => array(
@@ -1603,15 +1603,15 @@
 					'items' => array( 
 						'simple_grid_field25' 
 					),
-					'field' => 'payment_method',
+					'field' => 'notes',
 					'columnName' => 'field' 
 				),
 				'cell_field11' => array(
 					'model' => 'cell_field',
 					'items' => array( 
-						'simple_grid_field11' 
+						'simple_grid_field13' 
 					),
-					'field' => 'payment_method',
+					'field' => 'notes',
 					'columnName' => 'field' 
 				),
 				'footcell_field11' => array(
@@ -1625,15 +1625,15 @@
 					'items' => array( 
 						'simple_grid_field26' 
 					),
-					'field' => 'quantity',
+					'field' => 'distribution_month',
 					'columnName' => 'field' 
 				),
 				'cell_field12' => array(
 					'model' => 'cell_field',
 					'items' => array( 
-						'simple_grid_field12' 
+						'simple_grid_field9' 
 					),
-					'field' => 'quantity',
+					'field' => 'distribution_month',
 					'columnName' => 'field' 
 				),
 				'footcell_field12' => array(
@@ -1647,15 +1647,15 @@
 					'items' => array( 
 						'simple_grid_field27' 
 					),
-					'field' => 'notes',
+					'field' => 'distribution_year',
 					'columnName' => 'field' 
 				),
 				'cell_field13' => array(
 					'model' => 'cell_field',
 					'items' => array( 
-						'simple_grid_field13' 
+						'simple_grid_field10' 
 					),
-					'field' => 'notes',
+					'field' => 'distribution_year',
 					'columnName' => 'field' 
 				),
 				'footcell_field13' => array(
@@ -1753,27 +1753,11 @@
 			'type' => 'grid_field_label',
 			'field' => 'contact_email' 
 		),
-		'simple_grid_field9' => array(
-			'field' => 'distribution_month',
-			'type' => 'grid_field' 
-		),
-		'simple_grid_field23' => array(
-			'type' => 'grid_field_label',
-			'field' => 'distribution_month' 
-		),
-		'simple_grid_field10' => array(
-			'field' => 'distribution_year',
-			'type' => 'grid_field' 
-		),
-		'simple_grid_field24' => array(
-			'type' => 'grid_field_label',
-			'field' => 'distribution_year' 
-		),
 		'simple_grid_field11' => array(
 			'field' => 'payment_method',
 			'type' => 'grid_field' 
 		),
-		'simple_grid_field25' => array(
+		'simple_grid_field23' => array(
 			'type' => 'grid_field_label',
 			'field' => 'payment_method' 
 		),
@@ -1781,7 +1765,7 @@
 			'field' => 'quantity',
 			'type' => 'grid_field' 
 		),
-		'simple_grid_field26' => array(
+		'simple_grid_field24' => array(
 			'type' => 'grid_field_label',
 			'field' => 'quantity' 
 		),
@@ -1789,9 +1773,25 @@
 			'field' => 'notes',
 			'type' => 'grid_field' 
 		),
-		'simple_grid_field27' => array(
+		'simple_grid_field25' => array(
 			'type' => 'grid_field_label',
 			'field' => 'notes' 
+		),
+		'simple_grid_field9' => array(
+			'field' => 'distribution_month',
+			'type' => 'grid_field' 
+		),
+		'simple_grid_field26' => array(
+			'type' => 'grid_field_label',
+			'field' => 'distribution_month' 
+		),
+		'simple_grid_field10' => array(
+			'field' => 'distribution_year',
+			'type' => 'grid_field' 
+		),
+		'simple_grid_field27' => array(
+			'type' => 'grid_field_label',
+			'field' => 'distribution_year' 
 		) 
 	),
 	'dbProps' => array(

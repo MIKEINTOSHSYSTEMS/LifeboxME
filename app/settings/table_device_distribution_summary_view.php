@@ -43,7 +43,7 @@ $runnerTableSettings['public.device_distribution_summary_view'] = array(
 		'50',
 		'100',
 		'500',
-		'-1' 
+		'1' 
 	),
 	'pageSizeSelectorGroups' => array( 
 		'1',
@@ -52,8 +52,9 @@ $runnerTableSettings['public.device_distribution_summary_view'] = array(
 		'10',
 		'50',
 		'100',
-		'-1' 
+		'1' 
 	),
+	'displayLoading' => true,
 	'warnLeavingEdit' => true,
 	'sql' => 'SELECT
 	distribution_id,
@@ -71,7 +72,8 @@ $runnerTableSettings['public.device_distribution_summary_view'] = array(
 	quantity,
 	notes
 FROM
-	"public".device_distribution_summary_view',
+	"public".device_distribution_summary_view
+',
 	'deviceHideFields' => array(
 		'1' => array( 
 			 
@@ -396,75 +398,6 @@ FROM
 			),
 			'tableName' => 'public.device_distribution_summary_view' 
 		),
-		'distribution_month' => array(
-			'name' => 'distribution_month',
-			'goodName' => 'distribution_month',
-			'strField' => 'distribution_month',
-			'sourceSingle' => 'distribution_month',
-			'index' => 10,
-			'type' => 3,
-			'sqlExpression' => 'distribution_month',
-			'viewFormats' => array(
-				'view' => array(
-					'numberFractionalDigits' => 0 
-				) 
-			),
-			'editFormats' => array(
-				'edit' => array(
-					'format' => 'Lookup wizard',
-					'validateAs' => 'Number',
-					'textHTML5Input' => '0',
-					'lookupType' => 2,
-					'lookupTable' => 'public.months',
-					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
-					'lookupLinkField' => 'id',
-					'lookupDisplayField' => 'month',
-					'fileMaxNumber' => 1,
-					'fileThumbnailField' => 'th',
-					'timeConvention' => 1 
-				) 
-			),
-			'filterFormat' => array(
-				'format' => 'Values list' 
-			),
-			'tableName' => 'public.device_distribution_summary_view' 
-		),
-		'distribution_year' => array(
-			'name' => 'distribution_year',
-			'goodName' => 'distribution_year',
-			'strField' => 'distribution_year',
-			'sourceSingle' => 'distribution_year',
-			'index' => 11,
-			'type' => 3,
-			'sqlExpression' => 'distribution_year',
-			'viewFormats' => array(
-				'view' => array(
-					'numberFractionalDigits' => 0 
-				) 
-			),
-			'editFormats' => array(
-				'edit' => array(
-					'validateAs' => 'Number',
-					'validateRegexMessage' => array(
-						'text' => '',
-						'type' => 0 
-					),
-					'denyDuplicateMessage' => array(
-						'text' => '',
-						'type' => 0 
-					),
-					'textHTML5Input' => '0',
-					'fileMaxNumber' => 1,
-					'fileThumbnailField' => 'th',
-					'timeConvention' => 1 
-				) 
-			),
-			'defaultSearchOption' => 'Contains',
-			'filterFormat' => array(
-				'format' => 'Values list' 
-			),
-			'tableName' => 'public.device_distribution_summary_view' 
-		),
 		'payment_method' => array(
 			'name' => 'payment_method',
 			'goodName' => 'payment_method',
@@ -475,30 +408,15 @@ FROM
 			'sqlExpression' => 'payment_method',
 			'viewFormats' => array(
 				'view' => array(
-					'numberFractionalDigits' => 0 
+					 
 				) 
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'validateAs' => 'Number',
-					'validateRegexMessage' => array(
-						'text' => '',
-						'type' => 0 
-					),
-					'denyDuplicateMessage' => array(
-						'text' => '',
-						'type' => 0 
-					),
-					'textHTML5Input' => '0',
-					'fileMaxNumber' => 1,
-					'fileThumbnailField' => 'th',
-					'timeConvention' => 1 
+					 
 				) 
 			),
 			'defaultSearchOption' => 'Contains',
-			'filterFormat' => array(
-				'format' => 'Values list' 
-			),
 			'tableName' => 'public.device_distribution_summary_view' 
 		),
 		'quantity' => array(
@@ -573,6 +491,44 @@ FROM
 				'format' => 'Values list' 
 			),
 			'tableName' => 'public.device_distribution_summary_view' 
+		),
+		'distribution_month' => array(
+			'name' => 'distribution_month',
+			'goodName' => 'distribution_month',
+			'strField' => 'distribution_month',
+			'index' => 10,
+			'type' => 3,
+			'sqlExpression' => 'distribution_month',
+			'viewFormats' => array(
+				'view' => array(
+					 
+				) 
+			),
+			'editFormats' => array(
+				'edit' => array(
+					 
+				) 
+			),
+			'tableName' => 'public.device_distribution_summary_view' 
+		),
+		'distribution_year' => array(
+			'name' => 'distribution_year',
+			'goodName' => 'distribution_year',
+			'strField' => 'distribution_year',
+			'index' => 11,
+			'type' => 3,
+			'sqlExpression' => 'distribution_year',
+			'viewFormats' => array(
+				'view' => array(
+					 
+				) 
+			),
+			'editFormats' => array(
+				'edit' => array(
+					 
+				) 
+			),
+			'tableName' => 'public.device_distribution_summary_view' 
 		) 
 	),
 	'query' => array(
@@ -592,7 +548,8 @@ FROM
 	quantity,
 	notes
 FROM
-	"public".device_distribution_summary_view',
+	"public".device_distribution_summary_view
+',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -1048,11 +1005,11 @@ FROM
 			'monthly_surgical_volume',
 			'contact_name',
 			'contact_email',
-			'distribution_month',
-			'distribution_year',
 			'payment_method',
 			'quantity',
-			'notes' 
+			'notes',
+			'distribution_month',
+			'distribution_year' 
 		),
 		'searchSuggest' => true,
 		'highlightSearchResults' => true,
@@ -1068,11 +1025,11 @@ FROM
 			'monthly_surgical_volume',
 			'contact_name',
 			'contact_email',
-			'distribution_month',
-			'distribution_year',
 			'payment_method',
 			'quantity',
-			'notes' 
+			'notes',
+			'distribution_month',
+			'distribution_year' 
 		) 
 	),
 	'connId' => 'lifebox_mesystem_at_localhost',
@@ -1135,11 +1092,11 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'monthly_surgical_volume' => 'Monthly Surgical Volume',
 		'contact_name' => 'Contact Name',
 		'contact_email' => 'Contact Email',
-		'distribution_month' => 'Distribution Month',
-		'distribution_year' => 'Distribution Year',
 		'payment_method' => 'Payment Method',
 		'quantity' => 'Quantity',
-		'notes' => 'Notes' 
+		'notes' => 'Notes',
+		'distribution_month' => 'Distribution Month',
+		'distribution_year' => 'Distribution Year' 
 	),
 	'fieldTooltips' => array(
 		'distribution_id' => '',
@@ -1151,11 +1108,11 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'monthly_surgical_volume' => '',
 		'contact_name' => '',
 		'contact_email' => '',
-		'distribution_month' => '',
-		'distribution_year' => '',
 		'payment_method' => '',
 		'quantity' => '',
-		'notes' => '' 
+		'notes' => '',
+		'distribution_month' => '',
+		'distribution_year' => '' 
 	),
 	'fieldPlaceholders' => array(
 		'distribution_id' => '',
@@ -1167,11 +1124,11 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'monthly_surgical_volume' => '',
 		'contact_name' => '',
 		'contact_email' => '',
-		'distribution_month' => '',
-		'distribution_year' => '',
 		'payment_method' => '',
 		'quantity' => '',
-		'notes' => '' 
+		'notes' => '',
+		'distribution_month' => '',
+		'distribution_year' => '' 
 	),
 	'pageTitles' => array(
 		 

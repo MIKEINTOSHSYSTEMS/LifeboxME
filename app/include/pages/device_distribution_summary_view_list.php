@@ -56,12 +56,6 @@
 		'contact_email' => array(
 			'totalsType' => '' 
 		),
-		'distribution_month' => array(
-			'totalsType' => '' 
-		),
-		'distribution_year' => array(
-			'totalsType' => '' 
-		),
 		'payment_method' => array(
 			'totalsType' => '' 
 		),
@@ -69,6 +63,12 @@
 			'totalsType' => '' 
 		),
 		'notes' => array(
+			'totalsType' => '' 
+		),
+		'distribution_month' => array(
+			'totalsType' => '' 
+		),
+		'distribution_year' => array(
 			'totalsType' => '' 
 		) 
 	),
@@ -94,6 +94,8 @@
 		),
 		'searchPanelFields' => array( 
 			'contact_email',
+			'distribution_year',
+			'distribution_month',
 			'region_name',
 			'quantity',
 			'payment_method',
@@ -101,8 +103,6 @@
 			'notes',
 			'monthly_surgical_volume',
 			'facility_name',
-			'distribution_year',
-			'distribution_month',
 			'distribution_id',
 			'device_type',
 			'country_name',
@@ -481,15 +481,15 @@
 				'search_panel_field2',
 				'search_panel_field3',
 				'search_panel_field4',
-				'search_panel_field5',
-				'search_panel_field6',
 				'search_panel_field7',
 				'search_panel_field8',
 				'search_panel_field9',
 				'search_panel_field10',
 				'search_panel_field11',
 				'search_panel_field12',
-				'search_panel_field13' 
+				'search_panel_field13',
+				'search_panel_field5',
+				'search_panel_field6' 
 			),
 			'expand_menu_button' => array( 
 				'expand_menu_button' 
@@ -2056,6 +2056,8 @@
 			'type' => 'search_panel',
 			'items' => array( 
 				'search_panel_field',
+				'search_panel_field6',
+				'search_panel_field5',
 				'search_panel_field13',
 				'search_panel_field12',
 				'search_panel_field11',
@@ -2063,8 +2065,6 @@
 				'search_panel_field9',
 				'search_panel_field8',
 				'search_panel_field7',
-				'search_panel_field6',
-				'search_panel_field5',
 				'search_panel_field4',
 				'search_panel_field3',
 				'search_panel_field2',
@@ -2112,17 +2112,6 @@
 		),
 		'search_panel_field4' => array(
 			'field' => 'distribution_id',
-			'type' => 'search_panel_field',
-			'required' => false 
-		),
-		'search_panel_field5' => array(
-			'field' => 'distribution_month',
-			'type' => 'search_panel_field',
-			'required' => false,
-			'alwaysOnPanel' => false 
-		),
-		'search_panel_field6' => array(
-			'field' => 'distribution_year',
 			'type' => 'search_panel_field',
 			'required' => false 
 		),
@@ -2230,6 +2219,14 @@
 		),
 		'notifications' => array(
 			'type' => 'notifications' 
+		),
+		'search_panel_field5' => array(
+			'field' => 'distribution_month',
+			'type' => 'search_panel_field' 
+		),
+		'search_panel_field6' => array(
+			'field' => 'distribution_year',
+			'type' => 'search_panel_field' 
 		),
 		'simple_grid_field' => array(
 			'field' => 'distribution_id',

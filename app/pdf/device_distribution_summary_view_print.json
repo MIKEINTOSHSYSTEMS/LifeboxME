@@ -500,64 +500,6 @@ pdfDocument = {
 	cellId: 'headcell_field9',
 	col:0,
 	row:0,
-			fieldName: 'distribution_month',
-				style: 'headcell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":"{$jslabel public_device_distribution_summary_view distribution_month }","hidden":"{$item_hide_simple_grid_field23}","bold":true},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$distribution_month_align}',
-     
-      
-      },
-
-{END cellblock_grid_headcell_field9}
-																							{BEGIN cellblock_grid_headcell_field10}
-{
-	cellId: 'headcell_field10',
-	col:0,
-	row:0,
-			fieldName: 'distribution_year',
-				style: 'headcell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":"{$jslabel public_device_distribution_summary_view distribution_year }","hidden":"{$item_hide_simple_grid_field24}","bold":true},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$distribution_year_align}',
-     
-      
-      },
-
-{END cellblock_grid_headcell_field10}
-																							{BEGIN cellblock_grid_headcell_field11}
-{
-	cellId: 'headcell_field11',
-	col:0,
-	row:0,
 			fieldName: 'payment_method',
 				style: 'headcell',
 		
@@ -572,7 +514,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distribution_summary_view payment_method }","hidden":"{$item_hide_simple_grid_field25}","bold":true},
+			{"text":"{$jslabel public_device_distribution_summary_view payment_method }","hidden":"{$item_hide_simple_grid_field23}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -581,10 +523,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field11}
-																							{BEGIN cellblock_grid_headcell_field12}
+{END cellblock_grid_headcell_field9}
+																							{BEGIN cellblock_grid_headcell_field10}
 {
-	cellId: 'headcell_field12',
+	cellId: 'headcell_field10',
 	col:0,
 	row:0,
 			fieldName: 'quantity',
@@ -601,7 +543,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distribution_summary_view quantity }","hidden":"{$item_hide_simple_grid_field26}","bold":true},
+			{"text":"{$jslabel public_device_distribution_summary_view quantity }","hidden":"{$item_hide_simple_grid_field24}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -610,10 +552,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field12}
-																							{BEGIN cellblock_grid_headcell_field13}
+{END cellblock_grid_headcell_field10}
+																							{BEGIN cellblock_grid_headcell_field11}
 {
-	cellId: 'headcell_field13',
+	cellId: 'headcell_field11',
 	col:0,
 	row:0,
 			fieldName: 'notes',
@@ -630,11 +572,69 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distribution_summary_view notes }","hidden":"{$item_hide_simple_grid_field27}","bold":true},
+			{"text":"{$jslabel public_device_distribution_summary_view notes }","hidden":"{$item_hide_simple_grid_field25}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
               "alignment": '{$notes_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field11}
+																							{BEGIN cellblock_grid_headcell_field12}
+{
+	cellId: 'headcell_field12',
+	col:0,
+	row:0,
+			fieldName: 'distribution_month',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_device_distribution_summary_view distribution_month }","hidden":"{$item_hide_simple_grid_field26}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$distribution_month_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field12}
+																							{BEGIN cellblock_grid_headcell_field13}
+{
+	cellId: 'headcell_field13',
+	col:0,
+	row:0,
+			fieldName: 'distribution_year',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_device_distribution_summary_view distribution_year }","hidden":"{$item_hide_simple_grid_field27}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$distribution_year_align}',
      
       
       },
@@ -915,64 +915,6 @@ pdfDocument = {
 	cellId: 'cell_field9',
 	col:0,
 	row:0,
-			fieldName: 'distribution_month',
-				style: 'bodycell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":{$distribution_month_pdfvalue},"hidden":"{$item_hide_simple_grid_field9}"},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$distribution_month_align}',
-     
-      
-      },
-
-{END cellblock_grid_cell_field9}
-																							{BEGIN cellblock_grid_cell_field10}
-{
-	cellId: 'cell_field10',
-	col:0,
-	row:0,
-			fieldName: 'distribution_year',
-				style: 'bodycell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":{$distribution_year_pdfvalue},"hidden":"{$item_hide_simple_grid_field10}"},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$distribution_year_align}',
-     
-      
-      },
-
-{END cellblock_grid_cell_field10}
-																							{BEGIN cellblock_grid_cell_field11}
-{
-	cellId: 'cell_field11',
-	col:0,
-	row:0,
 			fieldName: 'payment_method',
 				style: 'bodycell',
 		
@@ -996,10 +938,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field11}
-																							{BEGIN cellblock_grid_cell_field12}
+{END cellblock_grid_cell_field9}
+																							{BEGIN cellblock_grid_cell_field10}
 {
-	cellId: 'cell_field12',
+	cellId: 'cell_field10',
 	col:0,
 	row:0,
 			fieldName: 'quantity',
@@ -1025,10 +967,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field12}
-																							{BEGIN cellblock_grid_cell_field13}
+{END cellblock_grid_cell_field10}
+																							{BEGIN cellblock_grid_cell_field11}
 {
-	cellId: 'cell_field13',
+	cellId: 'cell_field11',
 	col:0,
 	row:0,
 			fieldName: 'notes',
@@ -1050,6 +992,64 @@ pdfDocument = {
 		  ],
   "border": [ true, true, true, true ],
               "alignment": '{$notes_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field11}
+																							{BEGIN cellblock_grid_cell_field12}
+{
+	cellId: 'cell_field12',
+	col:0,
+	row:0,
+			fieldName: 'distribution_month',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$distribution_month_pdfvalue},"hidden":"{$item_hide_simple_grid_field9}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$distribution_month_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field12}
+																							{BEGIN cellblock_grid_cell_field13}
+{
+	cellId: 'cell_field13',
+	col:0,
+	row:0,
+			fieldName: 'distribution_year',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$distribution_year_pdfvalue},"hidden":"{$item_hide_simple_grid_field10}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$distribution_year_align}',
      
       
       },

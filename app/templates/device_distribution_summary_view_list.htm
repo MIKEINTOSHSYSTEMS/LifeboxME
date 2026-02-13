@@ -259,6 +259,32 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_contact_email}</span>
 						</div>
 		{END searchCtrlBlock_contact_email}
+																{BEGIN searchCtrlBlock_distribution_year}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_distribution_year}" {$filterRow_attrs_distribution_year}>
+			<label>{$label public_device_distribution_summary_view distribution_year }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_distribution_year}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_distribution_year}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_distribution_year}</span>
+						</div>
+		{END searchCtrlBlock_distribution_year}
+																{BEGIN searchCtrlBlock_distribution_month}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_distribution_month}" {$filterRow_attrs_distribution_month}>
+			<label>{$label public_device_distribution_summary_view distribution_month }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_distribution_month}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_distribution_month}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_distribution_month}</span>
+						</div>
+		{END searchCtrlBlock_distribution_month}
 																{BEGIN searchCtrlBlock_region_name}
 
 
@@ -350,32 +376,6 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_facility_name}</span>
 						</div>
 		{END searchCtrlBlock_facility_name}
-																{BEGIN searchCtrlBlock_distribution_year}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_distribution_year}" {$filterRow_attrs_distribution_year}>
-			<label>{$label public_device_distribution_summary_view distribution_year }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_distribution_year}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_distribution_year}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_distribution_year}</span>
-						</div>
-		{END searchCtrlBlock_distribution_year}
-																{BEGIN searchCtrlBlock_distribution_month}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_distribution_month}" {$filterRow_attrs_distribution_month}>
-			<label>{$label public_device_distribution_summary_view distribution_month }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_distribution_month}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_distribution_month}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_distribution_month}</span>
-						</div>
-		{END searchCtrlBlock_distribution_month}
 																{BEGIN searchCtrlBlock_distribution_id}
 
 
@@ -834,12 +834,6 @@
 			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="contact_email"]:before {
 		content: "{$label public_device_distribution_summary_view contact_email}";
 	}
-			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="distribution_month"]:before {
-		content: "{$label public_device_distribution_summary_view distribution_month}";
-	}
-			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="distribution_year"]:before {
-		content: "{$label public_device_distribution_summary_view distribution_year}";
-	}
 			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="payment_method"]:before {
 		content: "{$label public_device_distribution_summary_view payment_method}";
 	}
@@ -848,6 +842,12 @@
 	}
 			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="notes"]:before {
 		content: "{$label public_device_distribution_summary_view notes}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="distribution_month"]:before {
+		content: "{$label public_device_distribution_summary_view distribution_month}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="distribution_year"]:before {
+		content: "{$label public_device_distribution_summary_view distribution_year}";
 	}
 	}
 </style>

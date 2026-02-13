@@ -11,11 +11,11 @@
 			'monthly_surgical_volume',
 			'contact_name',
 			'contact_email',
-			'distribution_month',
-			'distribution_year',
 			'payment_method',
 			'quantity',
-			'notes' 
+			'notes',
+			'distribution_month',
+			'distribution_year' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -51,12 +51,6 @@
 			'contact_email' => array( 
 				'import_field8' 
 			),
-			'distribution_month' => array( 
-				'import_field9' 
-			),
-			'distribution_year' => array( 
-				'import_field10' 
-			),
 			'payment_method' => array( 
 				'import_field11' 
 			),
@@ -65,6 +59,12 @@
 			),
 			'notes' => array( 
 				'import_field13' 
+			),
+			'distribution_month' => array( 
+				'import_field9' 
+			),
+			'distribution_year' => array( 
+				'import_field10' 
 			) 
 		) 
 	),
@@ -93,11 +93,11 @@
 					'import_field6',
 					'import_field7',
 					'import_field8',
-					'import_field9',
-					'import_field10',
 					'import_field11',
 					'import_field12',
-					'import_field13' 
+					'import_field13',
+					'import_field9',
+					'import_field10' 
 				) 
 			),
 			'formXtTags' => array(
@@ -116,11 +116,11 @@
 				'import_field6' => 'grid',
 				'import_field7' => 'grid',
 				'import_field8' => 'grid',
-				'import_field9' => 'grid',
-				'import_field10' => 'grid',
 				'import_field11' => 'grid',
 				'import_field12' => 'grid',
-				'import_field13' => 'grid' 
+				'import_field13' => 'grid',
+				'import_field9' => 'grid',
+				'import_field10' => 'grid' 
 			),
 			'itemLocations' => array(
 				 
@@ -143,11 +143,11 @@
 				'import_field6',
 				'import_field7',
 				'import_field8',
-				'import_field9',
-				'import_field10',
 				'import_field11',
 				'import_field12',
-				'import_field13' 
+				'import_field13',
+				'import_field9',
+				'import_field10' 
 			) 
 		),
 		'cellMaps' => array(
@@ -284,11 +284,11 @@
 						'import_field6',
 						'import_field7',
 						'import_field8',
-						'import_field9',
-						'import_field10',
 						'import_field11',
 						'import_field12',
-						'import_field13' 
+						'import_field13',
+						'import_field9',
+						'import_field10' 
 					) 
 				) 
 			),
@@ -338,14 +338,6 @@
 			'field' => 'contact_email',
 			'type' => 'import_field' 
 		),
-		'import_field9' => array(
-			'field' => 'distribution_month',
-			'type' => 'import_field' 
-		),
-		'import_field10' => array(
-			'field' => 'distribution_year',
-			'type' => 'import_field' 
-		),
 		'import_field11' => array(
 			'field' => 'payment_method',
 			'type' => 'import_field' 
@@ -356,6 +348,14 @@
 		),
 		'import_field13' => array(
 			'field' => 'notes',
+			'type' => 'import_field' 
+		),
+		'import_field9' => array(
+			'field' => 'distribution_month',
+			'type' => 'import_field' 
+		),
+		'import_field10' => array(
+			'field' => 'distribution_year',
 			'type' => 'import_field' 
 		) 
 	),

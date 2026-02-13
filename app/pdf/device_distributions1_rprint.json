@@ -1,0 +1,1596 @@
+
+pdfDocument = {
+{BEGIN backgroundImage}
+	background: {
+		image: {$backgroundImage},
+		{BEGIN bgWidth}
+		imgWidth: {$bgWidth},
+		imgHeight: {$bgHeight},
+		{END bgWidth}
+	},
+{END backgroundImage}
+	styles: {
+				bodycell: {
+			fontSize:12,
+		},
+		headcell: {
+			fontSize:12,
+			bold: true
+		},
+
+	
+						pagesummary: {
+		fillColor: '#ffffbb',
+	},
+	globalsummary: {
+		fillColor: '#ffe0b0',
+	},
+			group_1: {
+			fillColor: '#7fffd4'
+		},
+		nbgroup_1: {
+			fillColor: '#7fffd4'
+		},
+		header_1: {
+			fillColor: '#7fffd4',
+			fontSize: 15,
+			bold: true
+		},
+		/* new style styles */
+		header_region_name: {
+			fillColor: '#7fffd4',
+			fontSize: 15,
+			bold: true
+		},
+		group_region_name: {
+			fillColor: '#7fffd4'
+		},
+
+			group_2: {
+			fillColor: '#add8e6'
+		},
+		nbgroup_2: {
+			fillColor: '#add8e6'
+		},
+		header_2: {
+			fillColor: '#add8e6',
+			fontSize: 15,
+			bold: true
+		},
+		/* new style styles */
+		header_country_name: {
+			fillColor: '#add8e6',
+			fontSize: 15,
+			bold: true
+		},
+		group_country_name: {
+			fillColor: '#add8e6'
+		},
+
+			group_3: {
+			fillColor: '#e0ffff'
+		},
+		nbgroup_3: {
+			fillColor: '#e0ffff'
+		},
+		header_3: {
+			fillColor: '#e0ffff',
+			fontSize: 15,
+			bold: true
+		},
+		/* new style styles */
+		header_facility_name: {
+			fillColor: '#e0ffff',
+			fontSize: 15,
+			bold: true
+		},
+		group_facility_name: {
+			fillColor: '#e0ffff'
+		},
+
+		
+	blackshade: {
+		fontSize: 15,
+	},
+	summarycell: {
+		border:[false, true, false, true ]
+	},
+/*
+		.grouptotalsrow + :not(.grouptotalsrow) > * {
+		border-top:solid #808080 1px; 
+	}
+	*/	
+			},
+	defaultStyle: {
+		fontSize: 14,
+	},
+	"content": [
+		{BEGIN body}
+		{BEGIN embedded_grid_caption}
+			{
+				text: '{$jscaption device_distributions_report}',
+			},
+		{END embedded_grid_caption}
+		{BEGIN embedded_page_title}
+			{
+				text: '{$jspagetitlelabel device_distributions_report rprint}',
+			},
+		{END embedded_page_title}		
+		{ 
+			{BEGIN standalone_page}
+			pageBreak: 'before',
+			standAlonePage: true,
+			{END standalone_page}
+			{BEGIN embedded_grid}
+			embeddedPage: true,
+			{END embedded_grid}
+			layout: {
+				hLineWidth: function(i, node) { return 0.1; },
+				vLineWidth: function(i, node) { 
+					return 0.1; 
+				},
+				hLineColor: function(i, node) { return 'lightgray'; },
+				vLineColor: function(i, node) { return 'lightgray'; },
+			},
+			table: {
+				{BEGIN embedded_grid}
+				embeddedPage: true,
+				{END embedded_grid}
+				
+				tableForm: true,
+				headerRows: 1 
+								{BEGIN embedded_grid} -1 {END embedded_grid} ,
+
+				widths: [
+														"%",
+										"%",
+										"%",
+										"%",
+										"%",
+										"%",
+										"%",
+										"%",
+										"%",
+															],
+							
+				body: [
+				{BEGIN standalone_page}
+					[
+						{
+							colSpan: 9,
+							border:[false, false,false,false],
+							stack: [
+
+																										
+{
+	table: {
+	
+				
+		location: 'top',
+		
+		
+		widths: [
+								"*", 
+					 ],	
+		
+	
+		body: [
+				
+				[
+																{
+	cellId: 'c2',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+		
+			
+			
+	
+			"stack": [
+		
+				
+			{"text":"{$jspagetitlelabel device_distributions_report rprint}","hidden":"{$item_hide_print_header}","fontSize":30},
+				
+				
+			{"text":"{$printtabheader_text}","hidden":"{$item_hide_print_subheader}"},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+											],
+		
+		]
+	}
+}
+,
+								
+																										
+{
+	table: {
+	
+				
+		location: 'above-grid',
+		
+		
+		widths: [
+								"*", 
+					 ],	
+		
+	
+		body: [
+				
+				[
+																{
+	cellId: 'c1',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+		
+			
+			
+	
+			"text": [
+		
+				
+			{"text":"{mlang_message PRINT_PAGES}","hidden":"{$item_hide_print_pages}","isHtml":true,"page_indicator":true},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+											],
+		
+		]
+	}
+}
+,
+															]
+						},
+					],
+				{END standalone_page}
+
+																
+
+
+{BEGIN grid_row}
+	{BEGIN region_name_firstnewgroup}
+		[
+								{
+				text: '{$jslabel device_distributions_report region_name }',
+				style: 'blackshade',
+				alignment: '{$region_name_align}',
+			},
+											{
+				text: '{$jslabel device_distributions_report country_name }',
+				style: 'blackshade',
+				alignment: '{$country_name_align}',
+			},
+											{
+				text: '{$jslabel device_distributions_report facility_name }',
+				style: 'blackshade',
+				alignment: '{$facility_name_align}',
+			},
+																																			
+																							{
+				text: '{$jslabel device_distributions_report quantity }',
+				style: 'blackshade',
+				alignment: '{$quantity_align}',
+			},
+											{
+				text: '{$jslabel device_distributions_report payment_method }',
+				style: 'blackshade',
+				alignment: '{$payment_method_align}',
+			},
+											{
+				text: '{$jslabel device_distributions_report transaction_type }',
+				style: 'blackshade',
+				alignment: '{$transaction_type_align}',
+			},
+											{
+				text: '{$jslabel device_distributions_report donor }',
+				style: 'blackshade',
+				alignment: '{$donor_align}',
+			},
+											{
+				text: '{$jslabel device_distributions_report device_type }',
+				style: 'blackshade',
+				alignment: '{$device_type_align}',
+			},
+											{
+				text: '{$jslabel device_distributions_report distribution_date }',
+				style: 'blackshade',
+				alignment: '{$distribution_date_align}',
+			},
+						],
+		
+	[
+								{
+				stack: [
+					{$region_name_value},
+									],
+				style: "header_1"
+			},
+					
+											{
+				stack: [
+					{$country_name_value},
+									],
+				style: "header_2"
+			},
+					
+											{
+				stack: [
+					{$facility_name_value},
+									],
+				style: "header_3"
+			},
+					
+							
+																							{
+				text: [
+										{$quantity_value}
+									],
+				alignment: '{$quantity_align}',
+			},
+											{
+				text: [
+										{$payment_method_value}
+									],
+				alignment: '{$payment_method_align}',
+			},
+											{
+				text: [
+										{$transaction_type_value}
+									],
+				alignment: '{$transaction_type_align}',
+			},
+											{
+				text: [
+										{$donor_value}
+									],
+				alignment: '{$donor_align}',
+			},
+											{
+				text: [
+										{$device_type_value}
+									],
+				alignment: '{$device_type_align}',
+			},
+											{
+				text: [
+										{$distribution_date_value}
+									],
+				alignment: '{$distribution_date_align}',
+			},
+					
+	],
+	{END region_name_firstnewgroup}
+	{BEGIN country_name_firstnewgroup}
+		
+	[
+								{
+				text: [
+											''
+									],
+				style: "group_1"
+			},
+
+											{
+				stack: [
+					{$country_name_value},
+									],
+				style: "header_2"
+			},
+					
+											{
+				stack: [
+					{$facility_name_value},
+									],
+				style: "header_3"
+			},
+					
+							
+																							{
+				text: [
+										{$quantity_value}
+									],
+				alignment: '{$quantity_align}',
+			},
+											{
+				text: [
+										{$payment_method_value}
+									],
+				alignment: '{$payment_method_align}',
+			},
+											{
+				text: [
+										{$transaction_type_value}
+									],
+				alignment: '{$transaction_type_align}',
+			},
+											{
+				text: [
+										{$donor_value}
+									],
+				alignment: '{$donor_align}',
+			},
+											{
+				text: [
+										{$device_type_value}
+									],
+				alignment: '{$device_type_align}',
+			},
+											{
+				text: [
+										{$distribution_date_value}
+									],
+				alignment: '{$distribution_date_align}',
+			},
+					
+	],
+	{END country_name_firstnewgroup}
+	{BEGIN facility_name_firstnewgroup}
+		
+	[
+								{
+				text: [
+											''
+									],
+				style: "group_1"
+			},
+
+											{
+				text: [
+											''
+									],
+				style: "group_2"
+			},
+
+											{
+				stack: [
+					{$facility_name_value},
+									],
+				style: "header_3"
+			},
+					
+							
+																							{
+				text: [
+										{$quantity_value}
+									],
+				alignment: '{$quantity_align}',
+			},
+											{
+				text: [
+										{$payment_method_value}
+									],
+				alignment: '{$payment_method_align}',
+			},
+											{
+				text: [
+										{$transaction_type_value}
+									],
+				alignment: '{$transaction_type_align}',
+			},
+											{
+				text: [
+										{$donor_value}
+									],
+				alignment: '{$donor_align}',
+			},
+											{
+				text: [
+										{$device_type_value}
+									],
+				alignment: '{$device_type_align}',
+			},
+											{
+				text: [
+										{$distribution_date_value}
+									],
+				alignment: '{$distribution_date_align}',
+			},
+					
+	],
+	{END facility_name_firstnewgroup}
+
+{BEGIN nonewgroup}
+	[
+				{
+						text: '',
+						style: 'group_1',
+		},
+				{
+						text: '',
+						style: 'group_2',
+		},
+				{
+						text: '',
+						style: 'group_3',
+		},
+		
+																							{
+				text: {$quantity_value},
+				alignment: '{$quantity_align}',
+			},
+											{
+				text: {$payment_method_value},
+				alignment: '{$payment_method_align}',
+			},
+											{
+				text: {$transaction_type_value},
+				alignment: '{$transaction_type_align}',
+			},
+											{
+				text: {$donor_value},
+				alignment: '{$donor_align}',
+			},
+											{
+				text: {$device_type_value},
+				alignment: '{$device_type_align}',
+			},
+											{
+				text: {$distribution_date_value},
+				alignment: '{$distribution_date_align}',
+			},
+						],
+{END nonewgroup}
+
+
+			{BEGIN facility_name_endgroup}
+
+				[
+											{
+					text: [''],
+					style: 'group_1',
+				},
+								{
+					text: [''],
+					style: 'group_2',
+				},
+							
+																									{
+					text: ['{mlang_message SUMMARY_FOR} {$jslabel device_distributions_report facility_name } ', 
+						{$facility_name_grval},
+						' - ', 
+						{$groupfacility_name_total_cnt}, 
+						' {mlang_message RECORDS_TOTAL}'
+					],
+					style: 'group_3',
+					colSpan: 7				},
+																																																			],
+		
+				[
+											{
+					text: [
+													'{mlang_message SUM} ',
+											],
+					style: 'group_3',
+
+									},
+											{
+					text: [
+													''	
+											],
+					style: 'group_3',
+
+									},
+											{
+					text: [
+													''	
+											],
+					style: 'group_3',
+
+									},
+											{
+					text: [
+													{$groupfacility_name_totalquantity_sum},
+											],
+					style: 'group_3',
+
+										alignment: '{$quantity_align}',
+									},
+											{
+					text: [
+													''	
+											],
+					style: 'group_3',
+
+									},
+											{
+					text: [
+													''	
+											],
+					style: 'group_3',
+
+									},
+											{
+					text: [
+													''	
+											],
+					style: 'group_3',
+
+									},
+											{
+					text: [
+													''	
+											],
+					style: 'group_3',
+
+									},
+											{
+					text: [
+													''	
+											],
+					style: 'group_3',
+
+									},
+					],
+		
+				[
+											{
+					text: [
+													'{mlang_message AVERAGE} ',
+									
+					],
+					style: 'group_3',
+										
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_3',
+										
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_3',
+										
+				},
+											{
+					text: [
+													{$groupfacility_name_totalquantity_avg},
+									
+					],
+					style: 'group_3',
+										alignment: '{$quantity_align}',
+										
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_3',
+										
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_3',
+										
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_3',
+										
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_3',
+										
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_3',
+										
+				},
+					],
+		
+				[
+											{
+					text: [
+													'{mlang_message MIN} ',
+									
+					],
+					style: 'group_3',
+
+											
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_3',
+
+											
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_3',
+
+											
+				},
+											{
+					text: [
+													{$groupfacility_name_totalquantity_min},
+									
+					],
+					style: 'group_3',
+
+										alignment: '{$quantity_align}',
+											
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_3',
+
+											
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_3',
+
+											
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_3',
+
+											
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_3',
+
+											
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_3',
+
+											
+				},
+					],
+		
+				[
+											{
+					text: [
+													'{mlang_message MAX} ',
+									
+					],
+					style: 'group_3',
+
+									},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_3',
+
+									},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_3',
+
+									},
+											{
+					text: [
+													{$groupfacility_name_totalquantity_max},
+									
+					],
+					style: 'group_3',
+
+										alignment: '{$quantity_align}',
+									},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_3',
+
+									},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_3',
+
+									},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_3',
+
+									},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_3',
+
+									},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_3',
+
+									},
+					],
+			
+
+		{END facility_name_endgroup}
+	
+			{BEGIN country_name_endgroup}
+
+				[
+											{
+					text: [''],
+					style: 'group_1',
+				},
+							
+																		{
+					text: ['{mlang_message SUMMARY_FOR} {$jslabel device_distributions_report country_name } ', 
+						{$country_name_grval},
+						' - ', 
+						{$groupcountry_name_total_cnt}, 
+						' {mlang_message RECORDS_TOTAL}'
+					],
+					style: 'group_2',
+					colSpan: 8				},
+																																																										],
+		
+				[
+											{
+					text: [
+													'{mlang_message SUM} ',
+											],
+					style: 'group_2',
+
+									},
+											{
+					text: [
+													''	
+											],
+					style: 'group_2',
+
+									},
+											{
+					text: [
+													''	
+											],
+					style: 'group_2',
+
+									},
+											{
+					text: [
+													{$groupcountry_name_totalquantity_sum},
+											],
+					style: 'group_2',
+
+										alignment: '{$quantity_align}',
+									},
+											{
+					text: [
+													''	
+											],
+					style: 'group_2',
+
+									},
+											{
+					text: [
+													''	
+											],
+					style: 'group_2',
+
+									},
+											{
+					text: [
+													''	
+											],
+					style: 'group_2',
+
+									},
+											{
+					text: [
+													''	
+											],
+					style: 'group_2',
+
+									},
+											{
+					text: [
+													''	
+											],
+					style: 'group_2',
+
+									},
+					],
+		
+				[
+											{
+					text: [
+													'{mlang_message AVERAGE} ',
+									
+					],
+					style: 'group_2',
+										
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_2',
+										
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_2',
+										
+				},
+											{
+					text: [
+													{$groupcountry_name_totalquantity_avg},
+									
+					],
+					style: 'group_2',
+										alignment: '{$quantity_align}',
+										
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_2',
+										
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_2',
+										
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_2',
+										
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_2',
+										
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_2',
+										
+				},
+					],
+		
+				[
+											{
+					text: [
+													'{mlang_message MIN} ',
+									
+					],
+					style: 'group_2',
+
+											
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_2',
+
+											
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_2',
+
+											
+				},
+											{
+					text: [
+													{$groupcountry_name_totalquantity_min},
+									
+					],
+					style: 'group_2',
+
+										alignment: '{$quantity_align}',
+											
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_2',
+
+											
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_2',
+
+											
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_2',
+
+											
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_2',
+
+											
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_2',
+
+											
+				},
+					],
+		
+				[
+											{
+					text: [
+													'{mlang_message MAX} ',
+									
+					],
+					style: 'group_2',
+
+									},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_2',
+
+									},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_2',
+
+									},
+											{
+					text: [
+													{$groupcountry_name_totalquantity_max},
+									
+					],
+					style: 'group_2',
+
+										alignment: '{$quantity_align}',
+									},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_2',
+
+									},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_2',
+
+									},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_2',
+
+									},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_2',
+
+									},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_2',
+
+									},
+					],
+			
+
+		{END country_name_endgroup}
+	
+			{BEGIN region_name_endgroup}
+
+				[
+			
+											{
+					text: ['{mlang_message SUMMARY_FOR} {$jslabel device_distributions_report region_name } ', 
+						{$region_name_grval},
+						' - ', 
+						{$groupregion_name_total_cnt}, 
+						' {mlang_message RECORDS_TOTAL}'
+					],
+					style: 'group_1',
+					colSpan: 9				},
+																																																																	],
+		
+				[
+											{
+					text: [
+													'{mlang_message SUM} ',
+											],
+					style: 'group_1',
+
+									},
+											{
+					text: [
+													''	
+											],
+					style: 'group_1',
+
+									},
+											{
+					text: [
+													''	
+											],
+					style: 'group_1',
+
+									},
+											{
+					text: [
+													{$groupregion_name_totalquantity_sum},
+											],
+					style: 'group_1',
+
+										alignment: '{$quantity_align}',
+									},
+											{
+					text: [
+													''	
+											],
+					style: 'group_1',
+
+									},
+											{
+					text: [
+													''	
+											],
+					style: 'group_1',
+
+									},
+											{
+					text: [
+													''	
+											],
+					style: 'group_1',
+
+									},
+											{
+					text: [
+													''	
+											],
+					style: 'group_1',
+
+									},
+											{
+					text: [
+													''	
+											],
+					style: 'group_1',
+
+									},
+					],
+		
+				[
+											{
+					text: [
+													'{mlang_message AVERAGE} ',
+									
+					],
+					style: 'group_1',
+										
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_1',
+										
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_1',
+										
+				},
+											{
+					text: [
+													{$groupregion_name_totalquantity_avg},
+									
+					],
+					style: 'group_1',
+										alignment: '{$quantity_align}',
+										
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_1',
+										
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_1',
+										
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_1',
+										
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_1',
+										
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_1',
+										
+				},
+					],
+		
+				[
+											{
+					text: [
+													'{mlang_message MIN} ',
+									
+					],
+					style: 'group_1',
+
+											
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_1',
+
+											
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_1',
+
+											
+				},
+											{
+					text: [
+													{$groupregion_name_totalquantity_min},
+									
+					],
+					style: 'group_1',
+
+										alignment: '{$quantity_align}',
+											
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_1',
+
+											
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_1',
+
+											
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_1',
+
+											
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_1',
+
+											
+				},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_1',
+
+											
+				},
+					],
+		
+				[
+											{
+					text: [
+													'{mlang_message MAX} ',
+									
+					],
+					style: 'group_1',
+
+									},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_1',
+
+									},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_1',
+
+									},
+											{
+					text: [
+													{$groupregion_name_totalquantity_max},
+									
+					],
+					style: 'group_1',
+
+										alignment: '{$quantity_align}',
+									},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_1',
+
+									},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_1',
+
+									},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_1',
+
+									},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_1',
+
+									},
+											{
+					text: [
+													''	
+									
+					],
+					style: 'group_1',
+
+									},
+					],
+			
+
+		{END region_name_endgroup}
+	
+{END grid_row}
+
+
+
+
+
+
+
+
+
+
+
+
+
+									]
+			
+			}
+		},
+		{END body}
+	],
+	footer: [
+								
+{
+	table: {
+	
+				
+		location: 'below-grid',
+		
+		
+		widths: [
+								"*", 
+					 ],	
+		
+	
+		body: [
+				
+				[
+																{
+	cellId: 'c1',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+		
+			
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+											],
+		
+		]
+	}
+}
+			],
+	};
+
+
+pdfFonts = {$pdfFonts};
