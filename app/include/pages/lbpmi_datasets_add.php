@@ -78,6 +78,7 @@
 				'supertop' => array( 
 					'expand_menu_button',
 					'collapse_button',
+					'notifications',
 					'loginform_login',
 					'username_button' 
 				),
@@ -114,6 +115,7 @@
 				'add_cancel' => 'below-grid',
 				'expand_menu_button' => 'supertop',
 				'collapse_button' => 'supertop',
+				'notifications' => 'supertop',
 				'loginform_login' => 'supertop',
 				'username_button' => 'supertop',
 				'logo' => 'left',
@@ -233,6 +235,9 @@
 				'integrated_edit_field8',
 				'integrated_edit_field9' 
 			),
+			'notifications' => array( 
+				'notifications' 
+			),
 			'expand_button' => array( 
 				'expand_button' 
 			) 
@@ -299,7 +304,7 @@
 		'clickHandlerSnippets' => array( 
 			 
 		),
-		'hasNotifications' => false,
+		'hasNotifications' => true,
 		'menus' => array( 
 			array(
 				'id' => 'main',
@@ -411,6 +416,7 @@
 				'c2' => array(
 					'model' => 'c2',
 					'items' => array( 
+						'notifications',
 						'loginform_login',
 						'username_button' 
 					) 
@@ -622,6 +628,9 @@
 			'field' => 'updated_at',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0 
+		),
+		'notifications' => array(
+			'type' => 'notifications' 
 		),
 		'expand_button' => array(
 			'type' => 'expand_button' 

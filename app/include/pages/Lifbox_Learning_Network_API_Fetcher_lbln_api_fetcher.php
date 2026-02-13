@@ -78,6 +78,7 @@
 					'expand_menu_button',
 					'collapse_button',
 					'breadcrumb',
+					'notifications',
 					'loginform_login',
 					'username_button' 
 				),
@@ -104,6 +105,7 @@
 				'expand_menu_button' => 'supertop',
 				'collapse_button' => 'supertop',
 				'breadcrumb' => 'supertop',
+				'notifications' => 'supertop',
 				'loginform_login' => 'supertop',
 				'username_button' => 'supertop',
 				'grid_checkbox_head' => 'grid',
@@ -164,6 +166,9 @@
 			),
 			'text' => array( 
 				'text' 
+			),
+			'notifications' => array( 
+				'notifications' 
 			),
 			'grid_checkbox' => array( 
 				'grid_checkbox' 
@@ -260,7 +265,7 @@
 		'clickHandlerSnippets' => array( 
 			 
 		),
-		'hasNotifications' => false,
+		'hasNotifications' => true,
 		'menus' => array( 
 			array(
 				'id' => 'main',
@@ -445,6 +450,7 @@
 				'c2' => array(
 					'model' => 'c2',
 					'items' => array( 
+						'notifications',
 						'loginform_login',
 						'username_button' 
 					) 
@@ -579,6 +585,9 @@
 				'type' => 0 
 			),
 			'editedByRte' => false 
+		),
+		'notifications' => array(
+			'type' => 'notifications' 
 		),
 		'grid_checkbox' => array(
 			'type' => 'grid_checkbox' 

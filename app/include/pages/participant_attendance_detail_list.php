@@ -164,6 +164,7 @@
 					'breadcrumb',
 					'simple_search',
 					'list_options',
+					'notifications',
 					'loginform_login',
 					'username_button' 
 				),
@@ -220,6 +221,7 @@
 				'breadcrumb' => 'supertop',
 				'simple_search' => 'supertop',
 				'list_options' => 'supertop',
+				'notifications' => 'supertop',
 				'loginform_login' => 'supertop',
 				'username_button' => 'supertop',
 				'simple_grid_field9' => 'grid',
@@ -426,6 +428,9 @@
 			),
 			'logout_link' => array( 
 				'logout_link' 
+			),
+			'notifications' => array( 
+				'notifications' 
 			),
 			'grid_field' => array( 
 				'simple_grid_field',
@@ -982,7 +987,7 @@
 		'clickHandlerSnippets' => array( 
 			 
 		),
-		'hasNotifications' => false,
+		'hasNotifications' => true,
 		'menus' => array( 
 			array(
 				'id' => 'main',
@@ -1151,6 +1156,7 @@
 					'items' => array( 
 						'simple_search',
 						'list_options',
+						'notifications',
 						'loginform_login',
 						'username_button' 
 					) 
@@ -1675,6 +1681,9 @@
 		),
 		'logout_link' => array(
 			'type' => 'logout_link' 
+		),
+		'notifications' => array(
+			'type' => 'notifications' 
 		),
 		'simple_grid_field' => array(
 			'field' => 'participant_id',

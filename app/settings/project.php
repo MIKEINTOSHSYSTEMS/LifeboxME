@@ -1700,10 +1700,10 @@ $runnerProjectSettings = array(
 		) 
 	),
 	'notifications' => array(
-		'enabled' => false,
+		'enabled' => true,
 		'table' => array(
-			'connId' => '',
-			'table' => '' 
+			'connId' => 'lifebox_mesystem_at_localhost',
+			'table' => 'public.lifeboxme_noti' 
 		) 
 	),
 	'allTables' => array(
@@ -3300,7 +3300,7 @@ $runnerProjectSettings = array(
 		'table' => 'public.lifeboxme_settings' 
 	),
 	'wizardBuild' => '43785',
-	'projectBuild' => 'T1jeVqGV6xhD',
+	'projectBuild' => '14rBuRPhYZke',
 	'projectTheme' => 'flatly',
 	'projectSize' => 'normal',
 	'customErrorMsg' => array(

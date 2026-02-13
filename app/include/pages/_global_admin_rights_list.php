@@ -34,6 +34,7 @@
 				'supertop' => array( 
 					'expand_menu_button',
 					'collapse_button',
+					'notifications',
 					'username_button' 
 				),
 				'left' => array( 
@@ -102,6 +103,7 @@
 				'text1' => 'below-grid',
 				'expand_menu_button' => 'supertop',
 				'collapse_button' => 'supertop',
+				'notifications' => 'supertop',
 				'username_button' => 'supertop',
 				'logo' => 'left',
 				'expand_button' => 'left',
@@ -319,6 +321,9 @@
 				'text',
 				'text1' 
 			),
+			'notifications' => array( 
+				'notifications' 
+			),
 			'expand_button' => array( 
 				'expand_button' 
 			) 
@@ -353,7 +358,7 @@
 		'clickHandlerSnippets' => array( 
 			 
 		),
-		'hasNotifications' => false,
+		'hasNotifications' => true,
 		'menus' => array( 
 			array(
 				'id' => 'main',
@@ -517,6 +522,7 @@
 				'c2' => array(
 					'model' => 'c2',
 					'items' => array( 
+						'notifications',
 						'username_button' 
 					) 
 				) 
@@ -1127,6 +1133,9 @@
 				'type' => 0 
 			),
 			'editedByRte' => false 
+		),
+		'notifications' => array(
+			'type' => 'notifications' 
 		),
 		'expand_button' => array(
 			'type' => 'expand_button' 

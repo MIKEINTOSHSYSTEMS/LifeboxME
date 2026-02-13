@@ -261,6 +261,7 @@
 					'breadcrumb',
 					'simple_search',
 					'list_options',
+					'notifications',
 					'username_button' 
 				),
 				'top' => array( 
@@ -344,6 +345,7 @@
 				'breadcrumb' => 'supertop',
 				'simple_search' => 'supertop',
 				'list_options' => 'supertop',
+				'notifications' => 'supertop',
 				'username_button' => 'supertop',
 				'simple_grid_field20' => 'grid',
 				'simple_grid_field' => 'grid',
@@ -689,6 +691,9 @@
 			),
 			'advsearch_link' => array( 
 				'advsearch_link' 
+			),
+			'notifications' => array( 
+				'notifications' 
 			),
 			'grid_field' => array( 
 				'simple_grid_field',
@@ -1851,7 +1856,7 @@
 		'clickHandlerSnippets' => array( 
 			 
 		),
-		'hasNotifications' => false,
+		'hasNotifications' => true,
 		'menus' => array( 
 			array(
 				'id' => 'main',
@@ -2021,6 +2026,7 @@
 					'items' => array( 
 						'simple_search',
 						'list_options',
+						'notifications',
 						'username_button' 
 					) 
 				) 
@@ -2997,6 +3003,9 @@
 			'field' => 'prefix_title',
 			'type' => 'search_panel_field',
 			'required' => false 
+		),
+		'notifications' => array(
+			'type' => 'notifications' 
 		),
 		'simple_grid_field' => array(
 			'field' => 'ID',

@@ -40,6 +40,7 @@
 					'breadcrumb',
 					'simple_search',
 					'list_options',
+					'notifications',
 					'username_button' 
 				),
 				'top' => array( 
@@ -64,6 +65,7 @@
 				'breadcrumb' => 'supertop',
 				'simple_search' => 'supertop',
 				'list_options' => 'supertop',
+				'notifications' => 'supertop',
 				'username_button' => 'supertop' 
 			),
 			'itemLocations' => array(
@@ -123,6 +125,9 @@
 			'advsearch_link' => array( 
 				'advsearch_link' 
 			),
+			'notifications' => array( 
+				'notifications' 
+			),
 			'expand_button' => array( 
 				'expand_button' 
 			) 
@@ -160,7 +165,7 @@
 		'clickHandlerSnippets' => array( 
 			 
 		),
-		'hasNotifications' => false,
+		'hasNotifications' => true,
 		'menus' => array( 
 			array(
 				'id' => 'main',
@@ -525,6 +530,7 @@
 					'items' => array( 
 						'simple_search',
 						'list_options',
+						'notifications',
 						'username_button' 
 					) 
 				) 
@@ -709,6 +715,9 @@
 				'text' => 'Dashboard Grid Search' 
 			),
 			'tabLeaveSpace' => true 
+		),
+		'notifications' => array(
+			'type' => 'notifications' 
 		),
 		'expand_button' => array(
 			'type' => 'expand_button' 
