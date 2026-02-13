@@ -1,7 +1,9 @@
 <?php
 			$optionsArray = array(
 	'pdf' => array(
-		'pdfView' => false 
+		'pdfView' => true,
+		'orientation' => 'portrait',
+		'scale' => 100 
 	),
 	'fields' => array(
 		'gridFields' => array( 
@@ -65,7 +67,8 @@
 				),
 				'top' => array( 
 					'print_header',
-					'print_subheader' 
+					'print_subheader',
+					'print_pdf' 
 				),
 				'grid' => array( 
 					'report_group_field',
@@ -91,6 +94,7 @@
 				'print_pages' => 'above-grid',
 				'print_header' => 'top',
 				'print_subheader' => 'top',
+				'print_pdf' => 'top',
 				'report_group_field' => 'grid',
 				'report_group_field1' => 'grid',
 				'report_group_field2' => 'grid',
@@ -130,6 +134,9 @@
 				'report_group_field',
 				'report_group_field1',
 				'report_group_field2' 
+			),
+			'print_pdf' => array( 
+				'print_pdf' 
 			) 
 		),
 		'cellMaps' => array(
@@ -197,31 +204,31 @@
 					'interval' => 0,
 					'summary' => true,
 					'field' => 'region_name',
+					'axis' => 0,
 					'color' => array(
 						'header' => '6cd9b4',
 						'summary' => '7fffd4' 
-					),
-					'axis' => 0 
+					) 
 				),
 				array(
 					'interval' => 0,
 					'summary' => true,
 					'field' => 'country_name',
+					'axis' => 0,
 					'color' => array(
 						'header' => '93b8c4',
 						'summary' => 'add8e6' 
-					),
-					'axis' => 0 
+					) 
 				),
 				array(
 					'interval' => 0,
 					'summary' => true,
 					'field' => 'facility_name',
+					'axis' => 0,
 					'color' => array(
 						'header' => 'bed9d9',
 						'summary' => 'e0ffff' 
-					),
-					'axis' => 0 
+					) 
 				) 
 			),
 			'fields' => array( 
@@ -345,6 +352,14 @@
 				array(
 					'cells' => array( 
 						array(
+							'cell' => 'c1' 
+						) 
+					),
+					'section' => '' 
+				),
+				array(
+					'cells' => array( 
+						array(
 							'cell' => 'c2' 
 						) 
 					),
@@ -357,6 +372,12 @@
 					'items' => array( 
 						'print_header',
 						'print_subheader' 
+					) 
+				),
+				'c1' => array(
+					'model' => 'c1',
+					'items' => array( 
+						'print_pdf' 
 					) 
 				) 
 			),
@@ -411,31 +432,31 @@
 						'interval' => 0,
 						'summary' => true,
 						'field' => 'region_name',
+						'axis' => 0,
 						'color' => array(
 							'header' => '6cd9b4',
 							'summary' => '7fffd4' 
-						),
-						'axis' => 0 
+						) 
 					),
 					array(
 						'interval' => 0,
 						'summary' => true,
 						'field' => 'country_name',
+						'axis' => 0,
 						'color' => array(
 							'header' => '93b8c4',
 							'summary' => 'add8e6' 
-						),
-						'axis' => 0 
+						) 
 					),
 					array(
 						'interval' => 0,
 						'summary' => true,
 						'field' => 'facility_name',
+						'axis' => 0,
 						'color' => array(
 							'header' => 'bed9d9',
 							'summary' => 'e0ffff' 
-						),
-						'axis' => 0 
+						) 
 					) 
 				),
 				'fields' => array( 
@@ -574,6 +595,18 @@
 			'reportMin' => false,
 			'reportMax' => false,
 			'reportSum' => false 
+		),
+		'print_pdf' => array(
+			'type' => 'print_pdf',
+			'targetPages' => array( 
+				 
+			),
+			'splitModes' => array( 
+				 
+			),
+			'scopes' => array( 
+				 
+			) 
 		) 
 	),
 	'dbProps' => array(

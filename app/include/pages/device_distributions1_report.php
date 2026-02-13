@@ -55,7 +55,8 @@
 			'donor',
 			'region_name',
 			'country_name',
-			'distribution_date' 
+			'distribution_date',
+			'facility_name' 
 		),
 		'fieldItems' => array(
 			'quantity' => array( 
@@ -304,7 +305,8 @@
 				'filter_panel_field3',
 				'filter_panel_field4',
 				'filter_panel_field5',
-				'filter_panel_field6' 
+				'filter_panel_field6',
+				'filter_panel_field7' 
 			),
 			'expand_button' => array( 
 				'expand_button' 
@@ -378,31 +380,31 @@
 					'interval' => 0,
 					'summary' => true,
 					'field' => 'region_name',
+					'axis' => 0,
 					'color' => array(
 						'header' => '6cd9b4',
 						'summary' => '7fffd4' 
-					),
-					'axis' => 0 
+					) 
 				),
 				array(
 					'interval' => 0,
 					'summary' => true,
 					'field' => 'country_name',
+					'axis' => 0,
 					'color' => array(
 						'header' => '93b8c4',
 						'summary' => 'add8e6' 
-					),
-					'axis' => 0 
+					) 
 				),
 				array(
 					'interval' => 0,
 					'summary' => true,
 					'field' => 'facility_name',
+					'axis' => 0,
 					'color' => array(
 						'header' => 'bed9d9',
 						'summary' => 'e0ffff' 
-					),
-					'axis' => 0 
+					) 
 				) 
 			),
 			'fields' => array( 
@@ -733,31 +735,31 @@
 						'interval' => 0,
 						'summary' => true,
 						'field' => 'region_name',
+						'axis' => 0,
 						'color' => array(
 							'header' => '6cd9b4',
 							'summary' => '7fffd4' 
-						),
-						'axis' => 0 
+						) 
 					),
 					array(
 						'interval' => 0,
 						'summary' => true,
 						'field' => 'country_name',
+						'axis' => 0,
 						'color' => array(
 							'header' => '93b8c4',
 							'summary' => 'add8e6' 
-						),
-						'axis' => 0 
+						) 
 					),
 					array(
 						'interval' => 0,
 						'summary' => true,
 						'field' => 'facility_name',
+						'axis' => 0,
 						'color' => array(
 							'header' => 'bed9d9',
 							'summary' => 'e0ffff' 
-						),
-						'axis' => 0 
+						) 
 					) 
 				),
 				'fields' => array( 
@@ -875,7 +877,8 @@
 			'reportAvg' => true,
 			'reportMin' => true,
 			'reportMax' => true,
-			'reportSum' => true 
+			'reportSum' => true,
+			'bold' => true 
 		),
 		'report_grid_field15' => array(
 			'field' => 'payment_method',
@@ -1113,12 +1116,13 @@
 			'type' => 'filter_panel',
 			'items' => array( 
 				'filter_panel_field4',
-				'filter_panel_field6',
 				'filter_panel_field5',
+				'filter_panel_field7',
 				'filter_panel_field',
 				'filter_panel_field2',
 				'filter_panel_field1',
-				'filter_panel_field3' 
+				'filter_panel_field3',
+				'filter_panel_field6' 
 			) 
 		),
 		'filter_panel_field' => array(
@@ -1147,6 +1151,10 @@
 		),
 		'filter_panel_field6' => array(
 			'field' => 'distribution_date',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field7' => array(
+			'field' => 'facility_name',
 			'type' => 'filter_panel_field' 
 		),
 		'expand_button' => array(

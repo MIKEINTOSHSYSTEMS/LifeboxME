@@ -532,6 +532,7 @@
 					
 					
 					
+					
 					</li>
 		{END filterCtrlBlock_region_name}
 
@@ -554,57 +555,6 @@
 	</div>
 
 {END filter_control_region_name}
-
-
-
-
-
-
-{BEGIN filter_control_distribution_date}
-
-	<div class="dropdown filter-field filter-distribution_date-container" {BEGIN filter_selected_distribution_date} data-selected {END filter_selected_distribution_date}>
-		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
-						{BEGIN clearLink_distribution_date}
-			<a href="#" class="filter-clear filter-clear-distribution_date" title="{mlang_message FILTER_CLEAR}">
-				<span class="glyphicon glyphicon-remove"></span>
-			</a>
-			{END clearLink_distribution_date}
-			<span class="r-filter-field">{$label device_distributions_report distribution_date }				{BEGIN filter_selected_distribution_date}:{END filter_selected_distribution_date}
-			</span>
-			{BEGIN filter_selected_distribution_date}
-			<span class="r-filter-value">{$filtervalue_distribution_date}</span>
-			{END filter_selected_distribution_date}
-			
-			<span class="caret"></span>
-		</div>
-		<ul class="dropdown-menu">
-					{BEGIN filterCtrlBlock_distribution_date}
-		<li class=" filter-values filter-values-distribution_date  {$visibilityClass_distribution_date}">
-			{$distribution_date_filter}
-						
-					
-					
-					
-					
-					
-					
-					</li>
-		{END filterCtrlBlock_distribution_date}
-
-	
-
-
-			{BEGIN filter_button_apply_distribution_date}
-		<li class="filter-multiselect  filter-field-btn {$collapsedClass_distribution_date}">
-			<a href="#" class="filter-btn-apply filter-apply-distribution_date" {$filterbutton_attrs_distribution_date}>{mlang_message FILTER_APPLY}</a>
-		</li>
-		{END filter_button_apply_distribution_date}
-	
-
-			</ul>
-	</div>
-
-{END filter_control_distribution_date}
 
 
 
@@ -640,6 +590,7 @@
 					
 					
 					
+					
 					</li>
 		{END filterCtrlBlock_country_name}
 
@@ -662,6 +613,64 @@
 	</div>
 
 {END filter_control_country_name}
+
+
+
+
+
+
+{BEGIN filter_control_facility_name}
+
+	<div class="dropdown filter-field filter-facility_name-container" {BEGIN filter_selected_facility_name} data-selected {END filter_selected_facility_name}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-facility_name" type="checkbox" name="selectAll" {$selectAll_attrs_facility_name} />
+						{BEGIN clearLink_facility_name}
+			<a href="#" class="filter-clear filter-clear-facility_name" title="{mlang_message FILTER_CLEAR}">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_facility_name}
+			<span class="r-filter-field">{$label device_distributions_report facility_name }				{BEGIN filter_selected_facility_name}:{END filter_selected_facility_name}
+			</span>
+			{BEGIN filter_selected_facility_name}
+			<span class="r-filter-value">{$filtervalue_facility_name}</span>
+			{END filter_selected_facility_name}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_facility_name}
+		<li class=" filter-values filter-values-facility_name  {$visibilityClass_facility_name}">
+			{$facility_name_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_facility_name}
+
+			{BEGIN filter_button_showmore_facility_name}
+		<li class=" filter-show-more {$collapsedClass_facility_name} {$showMoreBtnClass_facility_name}">
+			<a class="filter-show-more-link filterShowMore_facility_name" href="#">{$show_n_more_facility_name}</a>
+		</li>
+		{END filter_button_showmore_facility_name}
+	
+
+
+	
+
+			{BEGIN filter_button_multiselect_facility_name}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_facility_name}">
+			<a href="#" class="filter-facility_name-btn-multiselect filter-apply-facility_name" {$filterbutton_attrs_facility_name}>{mlang_message FILTER_MULTISELECT}</a>
+		</li>
+		{END filter_button_multiselect_facility_name}
+			</ul>
+	</div>
+
+{END filter_control_facility_name}
 
 
 
@@ -691,6 +700,7 @@
 		<li class=" filter-values filter-values-device_type  {$visibilityClass_device_type}">
 			{$device_type_filter}
 						
+					
 					
 					
 					
@@ -754,6 +764,7 @@
 					
 					
 					
+					
 					</li>
 		{END filterCtrlBlock_transaction_type}
 
@@ -805,6 +816,7 @@
 		<li class=" filter-values filter-values-payment_method  {$visibilityClass_payment_method}">
 			{$payment_method_filter}
 						
+					
 					
 					
 					
@@ -868,6 +880,7 @@
 					
 					
 					
+					
 					</li>
 		{END filterCtrlBlock_donor}
 
@@ -890,6 +903,58 @@
 	</div>
 
 {END filter_control_donor}
+
+
+
+
+
+
+{BEGIN filter_control_distribution_date}
+
+	<div class="dropdown filter-field filter-distribution_date-container" {BEGIN filter_selected_distribution_date} data-selected {END filter_selected_distribution_date}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_distribution_date}
+			<a href="#" class="filter-clear filter-clear-distribution_date" title="{mlang_message FILTER_CLEAR}">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_distribution_date}
+			<span class="r-filter-field">{$label device_distributions_report distribution_date }				{BEGIN filter_selected_distribution_date}:{END filter_selected_distribution_date}
+			</span>
+			{BEGIN filter_selected_distribution_date}
+			<span class="r-filter-value">{$filtervalue_distribution_date}</span>
+			{END filter_selected_distribution_date}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_distribution_date}
+		<li class=" filter-values filter-values-distribution_date  {$visibilityClass_distribution_date}">
+			{$distribution_date_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_distribution_date}
+
+	
+
+
+			{BEGIN filter_button_apply_distribution_date}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_distribution_date}">
+			<a href="#" class="filter-btn-apply filter-apply-distribution_date" {$filterbutton_attrs_distribution_date}>{mlang_message FILTER_APPLY}</a>
+		</li>
+		{END filter_button_apply_distribution_date}
+	
+
+			</ul>
+	</div>
+
+{END filter_control_distribution_date}
 
 
 
@@ -1360,7 +1425,7 @@
 
 																																			<td class="data {$fieldclass_quantity}">
 								{$xquantity_value}
-								<span data-itemtype="report_grid_field" data-itemid="report_grid_field10" {$item_report_grid_field10} data-pageid="{$pageid}" data-field="quantity" data-fieldname="quantity" >
+								<span data-itemtype="report_grid_field" data-itemid="report_grid_field10" {$item_report_grid_field10} data-pageid="{$pageid}" data-page="device_distributions1_report" data-field="quantity" data-fieldname="quantity" >
 {$quantity_value}
 </span>
 
@@ -1429,7 +1494,7 @@
 
 																																			<td class="data {$fieldclass_quantity}">
 								{$xquantity_value}
-								<span data-itemtype="report_grid_field" data-itemid="report_grid_field10" {$item_report_grid_field10} data-pageid="{$pageid}" data-field="quantity" data-fieldname="quantity" >
+								<span data-itemtype="report_grid_field" data-itemid="report_grid_field10" {$item_report_grid_field10} data-pageid="{$pageid}" data-page="device_distributions1_report" data-field="quantity" data-fieldname="quantity" >
 {$quantity_value}
 </span>
 
@@ -1496,7 +1561,7 @@
 
 																																			<td class="data {$fieldclass_quantity}">
 								{$xquantity_value}
-								<span data-itemtype="report_grid_field" data-itemid="report_grid_field10" {$item_report_grid_field10} data-pageid="{$pageid}" data-field="quantity" data-fieldname="quantity" >
+								<span data-itemtype="report_grid_field" data-itemid="report_grid_field10" {$item_report_grid_field10} data-pageid="{$pageid}" data-page="device_distributions1_report" data-field="quantity" data-fieldname="quantity" >
 {$quantity_value}
 </span>
 
@@ -1560,7 +1625,7 @@
 		
 																																		<td class="data {$fieldclass_quantity}">
 		{$xquantity_value}
-				<span data-itemtype="report_grid_field" data-itemid="report_grid_field10" {$item_report_grid_field10} data-pageid="{$pageid}" data-field="quantity" data-fieldname="quantity" >
+				<span data-itemtype="report_grid_field" data-itemid="report_grid_field10" {$item_report_grid_field10} data-pageid="{$pageid}" data-page="device_distributions1_report" data-field="quantity" data-fieldname="quantity" >
 {$quantity_value}
 </span>
 

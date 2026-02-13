@@ -32,6 +32,7 @@ $runnerTableSettings['device_distributions_report'] = array(
 	),
 	'detailsBadgeColor' => '22b1ce',
 	'pageSizeGroups' => 1,
+	'pageSizePrintGroups' => 1,
 	'pageSizeSelectorRecords' => array( 
 		'10',
 		'20',
@@ -591,6 +592,11 @@ ORDER BY
 					) 
 				) 
 			),
+			'filterFormat' => array(
+				'format' => 'Values list',
+				'filterTotals' => 1,
+				'filterMultiselect' => 1 
+			),
 			'tableName' => 'facilities' 
 		),
 		'distribution_date' => array(
@@ -611,9 +617,18 @@ ORDER BY
 					'dateEditType' => 11 
 				) 
 			),
+			'defaultSearchOption' => 'Contains',
+			'searchOptions' => array( 
+				'More than',
+				'Less than',
+				'Between',
+				'Empty',
+				'NOT Empty',
+				'Contains',
+				'Starts with' 
+			),
 			'filterFormat' => array(
 				'format' => 'Interval slider',
-				'hideControl' => true,
 				'sliderStepType' => 4,
 				'addApplyButton' => true 
 			),

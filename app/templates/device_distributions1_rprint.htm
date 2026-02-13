@@ -33,6 +33,32 @@
 				<div class="row">
 			 
 				<div 
+	data-cellId="top_c1" data-pageid="{$pageid}"	{$cell_top_c1}
+	class=" r-ori-vert			col-md-12
+	
+">
+		 
+		{BEGIN pdflink_block}
+<span data-itemtype="print_pdf" data-itemid="print_pdf" {$item_print_pdf} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	pdflink" data-pdfpage="rprint" 
+data-scope="0" 
+data-split="0" 
+data-records="10" 
+data-orientation="portrait" 
+data-scale="100" 
+data-filename="Device Distributions Report.pdf" 
+data-pagesize="LETTER" 
+data-pagetype="rprint" 
+{$pdflink_attrs} >
+							{mlang_message PDF_VIEW}			</a>
+</span>
+{END pdflink_block}
+		</div>					</div>
+			 
+				<div class="row">
+			 
+				<div 
 	data-cellId="top_c2" data-pageid="{$pageid}"	{$cell_top_c2}
 	class=" r-ori-vert			col-md-12
 	
