@@ -2693,6 +2693,37 @@ $runnerMenus['main'] = array(
 						) 
 					),
 					array(
+						'id' => '137',
+						'parent' => '141',
+						'children' => array( 
+							 
+						),
+						'data' => array(
+							'name' => array(
+								'text' => 'Indicator Actuals',
+								'type' => 0 
+							),
+							'comments' => array(
+								'text' => '',
+								'type' => 0 
+							),
+							'style' => '',
+							'href' => 'mypage.htm',
+							'params' => '',
+							'pageId' => '',
+							'itemType' => 2,
+							'linkType' => 0,
+							'openType' => 0,
+							'iconType' => 3,
+							'iconName' => 'fa-info',
+							'iconStyle' => 0,
+							'showIconType' => 1,
+							'linkToAnotherApp' => false,
+							'pageType' => 'list',
+							'table' => 4778 
+						) 
+					),
+					array(
 						'id' => '142',
 						'parent' => '141',
 						'children' => array( 
@@ -2718,9 +2749,9 @@ $runnerMenus['main'] = array(
 									'itemType' => 2,
 									'linkType' => 0,
 									'openType' => 0,
-									'iconType' => 0,
-									'iconName' => '',
-									'iconStyle' => 0,
+									'iconType' => 3,
+									'iconName' => 'fa-elementor',
+									'iconStyle' => 2,
 									'showIconType' => 1,
 									'linkToAnotherApp' => false,
 									'pageType' => 'list',
@@ -2749,9 +2780,9 @@ $runnerMenus['main'] = array(
 									'itemType' => 2,
 									'linkType' => 0,
 									'openType' => 0,
-									'iconType' => 0,
-									'iconName' => '',
-									'iconStyle' => 0,
+									'iconType' => 3,
+									'iconName' => 'fa-dailymotion',
+									'iconStyle' => 2,
 									'showIconType' => 1,
 									'linkToAnotherApp' => false,
 									'pageType' => 'list',
@@ -2780,8 +2811,8 @@ $runnerMenus['main'] = array(
 									'itemType' => 2,
 									'linkType' => 0,
 									'openType' => 0,
-									'iconType' => 0,
-									'iconName' => '',
+									'iconType' => 3,
+									'iconName' => 'fa-info-circle',
 									'iconStyle' => 0,
 									'showIconType' => 1,
 									'linkToAnotherApp' => false,
@@ -2811,44 +2842,13 @@ $runnerMenus['main'] = array(
 									'itemType' => 2,
 									'linkType' => 0,
 									'openType' => 0,
-									'iconType' => 0,
-									'iconName' => '',
+									'iconType' => 3,
+									'iconName' => 'fa-layer-group',
 									'iconStyle' => 0,
 									'showIconType' => 1,
 									'linkToAnotherApp' => false,
 									'pageType' => 'list',
 									'table' => 4799 
-								) 
-							),
-							array(
-								'id' => '137',
-								'parent' => '142',
-								'children' => array( 
-									 
-								),
-								'data' => array(
-									'name' => array(
-										'text' => 'Indicator Actuals',
-										'type' => 0 
-									),
-									'comments' => array(
-										'text' => '',
-										'type' => 0 
-									),
-									'style' => '',
-									'href' => 'mypage.htm',
-									'params' => '',
-									'pageId' => '',
-									'itemType' => 2,
-									'linkType' => 0,
-									'openType' => 0,
-									'iconType' => 0,
-									'iconName' => '',
-									'iconStyle' => 0,
-									'showIconType' => 1,
-									'linkToAnotherApp' => false,
-									'pageType' => 'list',
-									'table' => 4778 
 								) 
 							),
 							array(
@@ -2873,8 +2873,8 @@ $runnerMenus['main'] = array(
 									'itemType' => 2,
 									'linkType' => 0,
 									'openType' => 0,
-									'iconType' => 0,
-									'iconName' => '',
+									'iconType' => 3,
+									'iconName' => 'fa-bullseye',
 									'iconStyle' => 0,
 									'showIconType' => 1,
 									'linkToAnotherApp' => false,
@@ -2935,8 +2935,8 @@ $runnerMenus['main'] = array(
 									'itemType' => 2,
 									'linkType' => 0,
 									'openType' => 0,
-									'iconType' => 0,
-									'iconName' => '',
+									'iconType' => 3,
+									'iconName' => 'fa-campground',
 									'iconStyle' => 0,
 									'showIconType' => 1,
 									'linkToAnotherApp' => false,
@@ -2966,8 +2966,8 @@ $runnerMenus['main'] = array(
 									'itemType' => 2,
 									'linkType' => 0,
 									'openType' => 0,
-									'iconType' => 0,
-									'iconName' => '',
+									'iconType' => 3,
+									'iconName' => 'fa-stream',
 									'iconStyle' => 0,
 									'showIconType' => 1,
 									'linkToAnotherApp' => false,
@@ -2997,9 +2997,9 @@ $runnerMenus['main'] = array(
 									'itemType' => 2,
 									'linkType' => 0,
 									'openType' => 0,
-									'iconType' => 0,
-									'iconName' => '',
-									'iconStyle' => 0,
+									'iconType' => 3,
+									'iconName' => 'fa-dochub',
+									'iconStyle' => 2,
 									'showIconType' => 1,
 									'linkToAnotherApp' => false,
 									'pageType' => 'list',
