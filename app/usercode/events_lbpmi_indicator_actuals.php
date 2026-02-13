@@ -22,6 +22,9 @@ class eventclass_lbpmi_indicator_actuals  extends TableEventsBase {
 		 
 	),
 	'defaultValue' => array(
+		'period_year' => array(
+			'edit' => true 
+		),
 		'created_at' => array(
 			'edit' => true 
 		) 
@@ -43,7 +46,12 @@ class eventclass_lbpmi_indicator_actuals  extends TableEventsBase {
 );
 			}
 	
-	public function default_created_at_efedit(  ) {
+	public function default_period_year_efedit(  ) {
+	$defaultValue = date("Y");
+return $defaultValue;
+}
+
+public function default_created_at_efedit(  ) {
 	$defaultValue = strftime("%Y-%m-%d %H:%M:%S");
 return $defaultValue;
 }

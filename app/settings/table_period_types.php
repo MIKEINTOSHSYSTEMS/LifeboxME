@@ -49,6 +49,7 @@ $runnerTableSettings['public.period_types'] = array(
 		'search' => 'search',
 		'view' => 'view' 
 	),
+	'audit' => true,
 	'detailsBadgeColor' => 'CD853F',
 	'pageSizeSelectorRecords' => array( 
 		'10',

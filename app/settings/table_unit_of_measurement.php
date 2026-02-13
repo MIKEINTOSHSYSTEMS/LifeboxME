@@ -49,6 +49,7 @@ $runnerTableSettings['public.unit_of_measurement'] = array(
 		'search' => 'search',
 		'view' => 'view' 
 	),
+	'audit' => true,
 	'detailsBadgeColor' => 'D2AF80',
 	'pageSizeSelectorRecords' => array( 
 		'10',

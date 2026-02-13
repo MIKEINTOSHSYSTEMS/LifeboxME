@@ -49,6 +49,7 @@ $runnerTableSettings['public.lbapt_cathedral'] = array(
 		'search' => 'search',
 		'view' => 'view' 
 	),
+	'audit' => true,
 	'detailsBadgeColor' => '00c2c5',
 	'pageSizeSelectorRecords' => array( 
 		'10',

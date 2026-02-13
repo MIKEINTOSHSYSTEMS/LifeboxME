@@ -49,6 +49,7 @@ $runnerTableSettings['public.lbpmi_indicator_targets'] = array(
 		'search' => 'search',
 		'view' => 'view' 
 	),
+	'audit' => true,
 	'detailsBadgeColor' => '6493EA',
 	'pageSizeSelectorRecords' => array( 
 		'10',

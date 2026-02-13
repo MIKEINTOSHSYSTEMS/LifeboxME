@@ -49,6 +49,7 @@ $runnerTableSettings['public.lbpmi_aggregation_type'] = array(
 		'search' => 'search',
 		'view' => 'view' 
 	),
+	'audit' => true,
 	'detailsBadgeColor' => 'DAA520',
 	'pageSizeSelectorRecords' => array( 
 		'10',

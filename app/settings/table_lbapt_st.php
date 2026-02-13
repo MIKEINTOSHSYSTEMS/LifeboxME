@@ -49,6 +49,7 @@ $runnerTableSettings['public.lbapt_st'] = array(
 		'search' => 'search',
 		'view' => 'view' 
 	),
+	'audit' => true,
 	'detailsBadgeColor' => 'db7093',
 	'pageSizeSelectorRecords' => array( 
 		'10',

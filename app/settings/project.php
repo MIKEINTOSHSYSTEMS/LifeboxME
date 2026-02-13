@@ -773,6 +773,9 @@ $runnerProjectSettings = array(
 					'logModifications' => true,
 					'recordLocking' => false 
 				),
+				'Dashboard' => array(
+					 
+				),
 				'public.lifeboxme_dhis2_orgunits' => array(
 					'logFieldValues' => true,
 					'logModifications' => true,
@@ -807,6 +810,12 @@ $runnerProjectSettings = array(
 					'logFieldValues' => true,
 					'logModifications' => true,
 					'recordLocking' => false 
+				),
+				'aio_training_tracking Chart' => array(
+					 
+				),
+				'aio_training_tracking Chart by sex' => array(
+					 
 				),
 				'public.smtp' => array(
 					'logFieldValues' => true,
@@ -917,6 +926,97 @@ $runnerProjectSettings = array(
 					'logFieldValues' => true,
 					'logModifications' => true,
 					'recordLocking' => false 
+				),
+				'public.lbapt_cathedral' => array(
+					'logModifications' => true,
+					'logFieldValues' => true 
+				),
+				'public.lbapt_izumi' => array(
+					'logModifications' => true,
+					'logFieldValues' => true 
+				),
+				'public.lbapt_st' => array(
+					'logModifications' => true,
+					'logFieldValues' => true 
+				),
+				'public.lbapt_whi' => array(
+					'logModifications' => true,
+					'logFieldValues' => true 
+				),
+				'public.lbpmi_calculation_log' => array(
+					 
+				),
+				'public.lbpmi_data_elements' => array(
+					'logModifications' => true,
+					'logFieldValues' => true 
+				),
+				'public.lbpmi_datasets' => array(
+					'logModifications' => true,
+					'logFieldValues' => true 
+				),
+				'public.lbpmi_indicator_actuals' => array(
+					'logModifications' => false,
+					'logFieldValues' => false 
+				),
+				'public.lbpmi_indicator_targets' => array(
+					'logModifications' => true,
+					'logFieldValues' => true 
+				),
+				'public.lbpmi_indicators' => array(
+					'logModifications' => true,
+					'logFieldValues' => true 
+				),
+				'public.lbpmi_summary' => array(
+					 
+				),
+				'public.period_types' => array(
+					'logModifications' => true,
+					'logFieldValues' => true 
+				),
+				'public.lbpmi_calculation_jobs' => array(
+					 
+				),
+				'public.unit_of_measurement' => array(
+					'logModifications' => true,
+					'logFieldValues' => true 
+				),
+				'public.lbpmi_data_values' => array(
+					'logModifications' => true,
+					'logFieldValues' => true 
+				),
+				'public.lbpmi_aggregation_type' => array(
+					'logModifications' => true,
+					'logFieldValues' => true 
+				),
+				'public.lbpmi_domain_type' => array(
+					'logModifications' => true,
+					'logFieldValues' => true 
+				),
+				'public.lbpmi_indicator_types' => array(
+					'logModifications' => true,
+					'logFieldValues' => true 
+				),
+				'public.lbpmi_indicator_groups' => array(
+					'logModifications' => true,
+					'logFieldValues' => true 
+				),
+				'public.lbln_course_analytics' => array(
+					 
+				),
+				'public.lbln_course_users' => array(
+					'logModifications' => false 
+				),
+				'public.lbln_courses' => array(
+					'logModifications' => false 
+				),
+				'public.lbln_fetch_logs' => array(
+					 
+				),
+				'public.lbln_fetch_sessions' => array(
+					 
+				),
+				'Lifbox_Learning_Network_API_Fetcher' => array(
+					 
 				) 
 			) 
 		),
@@ -3300,7 +3400,7 @@ $runnerProjectSettings = array(
 		'table' => 'public.lifeboxme_settings' 
 	),
 	'wizardBuild' => '43785',
-	'projectBuild' => '14rBuRPhYZke',
+	'projectBuild' => 'hX959ht12gfQ',
 	'projectTheme' => 'flatly',
 	'projectSize' => 'normal',
 	'customErrorMsg' => array(

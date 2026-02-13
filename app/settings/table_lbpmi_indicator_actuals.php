@@ -57,7 +57,7 @@ $runnerTableSettings['public.lbpmi_indicator_actuals'] = array(
 		'50',
 		'100',
 		'500',
-		'-1' 
+		'1' 
 	),
 	'pageSizeSelectorGroups' => array( 
 		'1',
@@ -66,7 +66,7 @@ $runnerTableSettings['public.lbpmi_indicator_actuals'] = array(
 		'10',
 		'50',
 		'100',
-		'-1' 
+		'1' 
 	),
 	'warnLeavingEdit' => true,
 	'sql' => 'SELECT
@@ -227,6 +227,7 @@ FROM
 				'edit' => array(
 					'format' => 'Lookup wizard',
 					'required' => true,
+					'defaultValue' => 'date("Y")',
 					'validateAs' => 'Number',
 					'textHTML5Input' => '0',
 					'lookupType' => 2,

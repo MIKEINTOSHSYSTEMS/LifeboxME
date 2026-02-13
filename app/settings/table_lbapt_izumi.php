@@ -49,6 +49,7 @@ $runnerTableSettings['public.lbapt_izumi'] = array(
 		'search' => 'search',
 		'view' => 'view' 
 	),
+	'audit' => true,
 	'detailsBadgeColor' => 'bc8f8f',
 	'pageSizeSelectorRecords' => array( 
 		'10',
