@@ -68,6 +68,7 @@ $runnerTableSettings['public.lbpmi_indicator_actuals'] = array(
 		'100',
 		'1' 
 	),
+	'displayLoading' => true,
 	'warnLeavingEdit' => true,
 	'sql' => 'SELECT
 	actual_id,
@@ -294,6 +295,7 @@ FROM
 			'editFormats' => array(
 				'edit' => array(
 					'format' => 'Lookup wizard',
+					'defaultValue' => 'date("m")',
 					'validateAs' => 'Number',
 					'textHTML5Input' => '0',
 					'lookupType' => 2,
@@ -473,7 +475,8 @@ FROM
 						'text' => '',
 						'type' => 0 
 					),
-					'textHTML5Input' => '0',
+					'textInsertNull' => true,
+					'textHTML5Input' => 'Number',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
 					'timeConvention' => 1 
@@ -537,7 +540,8 @@ FROM
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'format' => 'Date',
+					'format' => 'Readonly',
+					'defaultValue' => 'strftime("%Y-%m-%d %H:%M:%S")',
 					'validateRegexMessage' => array(
 						'text' => '',
 						'type' => 0 
@@ -574,7 +578,7 @@ FROM
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'format' => 'Date',
+					'format' => 'Readonly',
 					'defaultValue' => 'strftime("%Y-%m-%d %H:%M:%S")',
 					'validateRegexMessage' => array(
 						'text' => '',
@@ -608,7 +612,7 @@ FROM
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'format' => 'Date',
+					'format' => 'Readonly',
 					'autoUpdateValue' => 'strftime("%Y-%m-%d %H:%M:%S")',
 					'validateRegexMessage' => array(
 						'text' => '',
@@ -1067,6 +1071,7 @@ FROM
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),
+	'hasJsEvents' => true,
 	'originalTable' => 'public.lbpmi_indicator_actuals',
 	'originalPagesByType' => array(
 		'add' => array( 
@@ -1204,15 +1209,15 @@ if( mlang_getcurrentlang() === 'English' ) {
 	$runnerTableLabels['public.lbpmi_indicator_actuals'] = array(
 	'tableCaption' => 'Lbpmi Indicator Actuals',
 	'fieldLabels' => array(
-		'actual_id' => 'Actual Id',
+		'actual_id' => 'Act-ID',
 		'indicator_id' => 'Indicator',
 		'period_type' => 'Period Type',
-		'period_year' => 'Period Year',
-		'period_quarter' => 'Period Quarter',
-		'period_month' => 'Period Month',
-		'region_id' => 'Region Id',
-		'country_id' => 'Country Id',
-		'facility_id' => 'Facility Id',
+		'period_year' => 'Year',
+		'period_quarter' => 'Quarter',
+		'period_month' => 'Month',
+		'region_id' => 'Region',
+		'country_id' => 'Country',
+		'facility_id' => 'Facility',
 		'actual_value' => 'Actual Value',
 		'is_calculated' => 'Is Calculated',
 		'calculation_timestamp' => 'Calculation Timestamp',

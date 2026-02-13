@@ -3,7 +3,7 @@ class eventclass_lbpmi_indicator_actuals  extends TableEventsBase {
 	
 	function init() {
 		$this->events = array(
-	 
+	'OnPageLoad' => true 
 );
 		$this->fieldValues = array(
 	'filterLimit' => array(
@@ -23,6 +23,12 @@ class eventclass_lbpmi_indicator_actuals  extends TableEventsBase {
 	),
 	'defaultValue' => array(
 		'period_year' => array(
+			'edit' => true 
+		),
+		'period_month' => array(
+			'edit' => true 
+		),
+		'calculation_timestamp' => array(
 			'edit' => true 
 		),
 		'created_at' => array(
@@ -48,6 +54,16 @@ class eventclass_lbpmi_indicator_actuals  extends TableEventsBase {
 	
 	public function default_period_year_efedit(  ) {
 	$defaultValue = date("Y");
+return $defaultValue;
+}
+
+public function default_period_month_efedit(  ) {
+	$defaultValue = date("m");
+return $defaultValue;
+}
+
+public function default_calculation_timestamp_efedit(  ) {
+	$defaultValue = strftime("%Y-%m-%d %H:%M:%S");
 return $defaultValue;
 }
 

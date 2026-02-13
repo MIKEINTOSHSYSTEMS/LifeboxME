@@ -198,7 +198,7 @@
 				),
 				'integrated_edit_field6' => array(
 					'location' => 'grid',
-					'cellId' => 'c24' 
+					'cellId' => 'c23' 
 				),
 				'integrated_edit_field12' => array(
 					'location' => 'grid',
@@ -385,12 +385,60 @@
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
 					),
-					'c11' => array(
+					'c26' => array(
 						'cols' => array( 
 							0 
 						),
 						'rows' => array( 
 							2 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'c27' => array(
+						'cols' => array( 
+							1 
+						),
+						'rows' => array( 
+							2 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'c28' => array(
+						'cols' => array( 
+							2 
+						),
+						'rows' => array( 
+							2 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'c11' => array(
+						'cols' => array( 
+							0 
+						),
+						'rows' => array( 
+							3 
 						),
 						'tags' => array( 
 							 
@@ -406,7 +454,7 @@
 							1 
 						),
 						'rows' => array( 
-							2 
+							3 
 						),
 						'tags' => array( 
 							 
@@ -422,7 +470,7 @@
 							2 
 						),
 						'rows' => array( 
-							2 
+							3 
 						),
 						'tags' => array( 
 							 
@@ -438,7 +486,7 @@
 							0 
 						),
 						'rows' => array( 
-							3 
+							4 
 						),
 						'tags' => array( 
 							 
@@ -454,7 +502,7 @@
 							1 
 						),
 						'rows' => array( 
-							3 
+							4 
 						),
 						'tags' => array( 
 							 
@@ -470,7 +518,7 @@
 							2 
 						),
 						'rows' => array( 
-							3 
+							4 
 						),
 						'tags' => array( 
 							 
@@ -486,7 +534,7 @@
 							0 
 						),
 						'rows' => array( 
-							4 
+							5 
 						),
 						'tags' => array( 
 							 
@@ -502,7 +550,7 @@
 							1 
 						),
 						'rows' => array( 
-							4 
+							5 
 						),
 						'tags' => array( 
 							 
@@ -518,7 +566,7 @@
 							2 
 						),
 						'rows' => array( 
-							4 
+							5 
 						),
 						'tags' => array( 
 							 
@@ -534,7 +582,7 @@
 							0 
 						),
 						'rows' => array( 
-							5 
+							6 
 						),
 						'tags' => array( 
 							 
@@ -550,7 +598,7 @@
 							1 
 						),
 						'rows' => array( 
-							5 
+							6 
 						),
 						'tags' => array( 
 							 
@@ -566,7 +614,7 @@
 							2 
 						),
 						'rows' => array( 
-							5 
+							6 
 						),
 						'tags' => array( 
 							 
@@ -582,15 +630,15 @@
 							0 
 						),
 						'rows' => array( 
-							6 
+							7 
 						),
 						'tags' => array( 
 							 
 						),
 						'items' => array( 
-							 
+							'integrated_edit_field6' 
 						),
-						'fixedAtServer' => false,
+						'fixedAtServer' => true,
 						'fixedAtClient' => false 
 					),
 					'c24' => array(
@@ -598,13 +646,12 @@
 							1 
 						),
 						'rows' => array( 
-							6 
+							7 
 						),
 						'tags' => array( 
 							 
 						),
 						'items' => array( 
-							'integrated_edit_field6',
 							'integrated_edit_field12' 
 						),
 						'fixedAtServer' => true,
@@ -615,7 +662,7 @@
 							2 
 						),
 						'rows' => array( 
-							6 
+							7 
 						),
 						'tags' => array( 
 							 
@@ -631,7 +678,7 @@
 							0 
 						),
 						'rows' => array( 
-							7 
+							8 
 						),
 						'tags' => array( 
 							 
@@ -647,7 +694,7 @@
 							1 
 						),
 						'rows' => array( 
-							7 
+							8 
 						),
 						'tags' => array( 
 							 
@@ -663,7 +710,7 @@
 							2 
 						),
 						'rows' => array( 
-							7 
+							8 
 						),
 						'tags' => array( 
 							 
@@ -676,7 +723,7 @@
 					) 
 				),
 				'width' => 3,
-				'height' => 8 
+				'height' => 9 
 			) 
 		) 
 	),
@@ -932,6 +979,20 @@
 					'section' => '',
 					'cells' => array( 
 						array(
+							'cell' => 'c26' 
+						),
+						array(
+							'cell' => 'c27' 
+						),
+						array(
+							'cell' => 'c28' 
+						) 
+					) 
+				),
+				array(
+					'section' => '',
+					'cells' => array( 
+						array(
 							'cell' => 'c11' 
 						),
 						array(
@@ -1144,13 +1205,12 @@
 				'c23' => array(
 					'model' => 'c3',
 					'items' => array( 
-						 
+						'integrated_edit_field6' 
 					) 
 				),
 				'c24' => array(
 					'model' => 'c3',
 					'items' => array( 
-						'integrated_edit_field6',
 						'integrated_edit_field12' 
 					) 
 				),
@@ -1158,6 +1218,24 @@
 					'model' => 'c3',
 					'items' => array( 
 						'integrated_edit_field7' 
+					) 
+				),
+				'c26' => array(
+					'model' => 'c3',
+					'items' => array( 
+						 
+					) 
+				),
+				'c27' => array(
+					'model' => 'c3',
+					'items' => array( 
+						 
+					) 
+				),
+				'c28' => array(
+					'model' => 'c3',
+					'items' => array( 
+						 
 					) 
 				) 
 			),
@@ -1278,7 +1356,8 @@
 		'integrated_edit_field10' => array(
 			'field' => 'actual_value',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'bold' => true 
 		),
 		'integrated_edit_field11' => array(
 			'field' => 'is_calculated',
