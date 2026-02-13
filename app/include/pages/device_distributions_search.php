@@ -23,7 +23,8 @@
 			'is_received',
 			'receiving_date',
 			'started_using',
-			'date_started_using' 
+			'date_started_using',
+			'qr_data' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -97,6 +98,9 @@
 			),
 			'date_started_using' => array( 
 				'integrated_search_field21' 
+			),
+			'qr_data' => array( 
+				'integrated_search_field22' 
 			) 
 		) 
 	),
@@ -143,7 +147,8 @@
 					'integrated_search_field21',
 					'integrated_search_field13',
 					'integrated_search_field14',
-					'integrated_search_field15' 
+					'integrated_search_field15',
+					'integrated_search_field22' 
 				) 
 			),
 			'formXtTags' => array(
@@ -178,7 +183,8 @@
 				'integrated_search_field21' => 'grid',
 				'integrated_search_field13' => 'grid',
 				'integrated_search_field14' => 'grid',
-				'integrated_search_field15' => 'grid' 
+				'integrated_search_field15' => 'grid',
+				'integrated_search_field22' => 'grid' 
 			),
 			'itemLocations' => array(
 				'integrated_search_field' => array(
@@ -268,6 +274,10 @@
 				'integrated_search_field15' => array(
 					'location' => 'grid',
 					'cellId' => 'c3' 
+				),
+				'integrated_search_field22' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
 				) 
 			),
 			'itemVisiblity' => array(
@@ -312,7 +322,8 @@
 				'integrated_search_field18',
 				'integrated_search_field19',
 				'integrated_search_field20',
-				'integrated_search_field21' 
+				'integrated_search_field21',
+				'integrated_search_field22' 
 			) 
 		),
 		'cellMaps' => array(
@@ -350,7 +361,8 @@
 							'integrated_search_field21',
 							'integrated_search_field13',
 							'integrated_search_field14',
-							'integrated_search_field15' 
+							'integrated_search_field15',
+							'integrated_search_field22' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
@@ -536,7 +548,8 @@
 						'integrated_search_field21',
 						'integrated_search_field13',
 						'integrated_search_field14',
-						'integrated_search_field15' 
+						'integrated_search_field15',
+						'integrated_search_field22' 
 					) 
 				) 
 			),
@@ -693,6 +706,11 @@
 			'type' => 'integrated_search_field',
 			'orientation' => 0,
 			'required' => false 
+		),
+		'integrated_search_field22' => array(
+			'field' => 'qr_data',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
 		) 
 	),
 	'dbProps' => array(

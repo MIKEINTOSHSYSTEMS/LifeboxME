@@ -546,93 +546,6 @@ pdfDocument = {
 	cellId: 'headcell_field6',
 	col:0,
 	row:0,
-			fieldName: 'formula',
-				style: 'headcell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":"{$jslabel public_lbpmi_indicators formula }","hidden":"{$item_hide_simple_grid_field22}","bold":true},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$formula_align}',
-     
-      
-      },
-
-{END cellblock_grid_headcell_field6}
-																							{BEGIN cellblock_grid_headcell_field7}
-{
-	cellId: 'headcell_field7',
-	col:0,
-	row:0,
-			fieldName: 'created_at',
-				style: 'headcell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":"{$jslabel public_lbpmi_indicators created_at }","hidden":"{$item_hide_simple_grid_field23}","bold":true},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$created_at_align}',
-     
-      
-      },
-
-{END cellblock_grid_headcell_field7}
-																							{BEGIN cellblock_grid_headcell_field8}
-{
-	cellId: 'headcell_field8',
-	col:0,
-	row:0,
-			fieldName: 'updated_at',
-				style: 'headcell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":"{$jslabel public_lbpmi_indicators updated_at }","hidden":"{$item_hide_simple_grid_field24}","bold":true},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$updated_at_align}',
-     
-      
-      },
-
-{END cellblock_grid_headcell_field8}
-																							{BEGIN cellblock_grid_headcell_field9}
-{
-	cellId: 'headcell_field9',
-	col:0,
-	row:0,
 			fieldName: 'indicator_code',
 				style: 'headcell',
 		
@@ -647,7 +560,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_indicators indicator_code }","hidden":"{$item_hide_simple_grid_field25}","bold":true},
+			{"text":"{$jslabel public_lbpmi_indicators indicator_code }","hidden":"{$item_hide_simple_grid_field22}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -656,10 +569,39 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field9}
-																							{BEGIN cellblock_grid_headcell_field10}
+{END cellblock_grid_headcell_field6}
+																							{BEGIN cellblock_grid_headcell_field7}
 {
-	cellId: 'headcell_field10',
+	cellId: 'headcell_field7',
+	col:0,
+	row:0,
+			fieldName: 'formula',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_lbpmi_indicators formula }","hidden":"{$item_hide_simple_grid_field23}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$formula_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field7}
+																							{BEGIN cellblock_grid_headcell_field8}
+{
+	cellId: 'headcell_field8',
 	col:0,
 	row:0,
 			fieldName: 'numerator_description',
@@ -676,7 +618,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_indicators numerator_description }","hidden":"{$item_hide_simple_grid_field26}","bold":true},
+			{"text":"{$jslabel public_lbpmi_indicators numerator_description }","hidden":"{$item_hide_simple_grid_field24}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -685,10 +627,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field10}
-																							{BEGIN cellblock_grid_headcell_field11}
+{END cellblock_grid_headcell_field8}
+																							{BEGIN cellblock_grid_headcell_field9}
 {
-	cellId: 'headcell_field11',
+	cellId: 'headcell_field9',
 	col:0,
 	row:0,
 			fieldName: 'denominator_description',
@@ -705,7 +647,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_indicators denominator_description }","hidden":"{$item_hide_simple_grid_field27}","bold":true},
+			{"text":"{$jslabel public_lbpmi_indicators denominator_description }","hidden":"{$item_hide_simple_grid_field25}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -714,39 +656,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field11}
-																							{BEGIN cellblock_grid_headcell_field12}
+{END cellblock_grid_headcell_field9}
+																							{BEGIN cellblock_grid_headcell_field10}
 {
-	cellId: 'headcell_field12',
-	col:0,
-	row:0,
-			fieldName: 'annualized',
-				style: 'headcell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":"{$jslabel public_lbpmi_indicators annualized }","hidden":"{$item_hide_simple_grid_field28}","bold":true},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$annualized_align}',
-     
-      
-      },
-
-{END cellblock_grid_headcell_field12}
-																							{BEGIN cellblock_grid_headcell_field13}
-{
-	cellId: 'headcell_field13',
+	cellId: 'headcell_field10',
 	col:0,
 	row:0,
 			fieldName: 'decimals',
@@ -763,7 +676,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_indicators decimals }","hidden":"{$item_hide_simple_grid_field29}","bold":true},
+			{"text":"{$jslabel public_lbpmi_indicators decimals }","hidden":"{$item_hide_simple_grid_field26}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -772,10 +685,39 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field13}
-																							{BEGIN cellblock_grid_headcell_field14}
+{END cellblock_grid_headcell_field10}
+																							{BEGIN cellblock_grid_headcell_field11}
 {
-	cellId: 'headcell_field14',
+	cellId: 'headcell_field11',
+	col:0,
+	row:0,
+			fieldName: 'annualized',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_lbpmi_indicators annualized }","hidden":"{$item_hide_simple_grid_field27}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$annualized_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field11}
+																							{BEGIN cellblock_grid_headcell_field12}
+{
+	cellId: 'headcell_field12',
 	col:0,
 	row:0,
 			fieldName: 'is_active',
@@ -792,7 +734,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_indicators is_active }","hidden":"{$item_hide_simple_grid_field30}","bold":true},
+			{"text":"{$jslabel public_lbpmi_indicators is_active }","hidden":"{$item_hide_simple_grid_field28}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -801,10 +743,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field14}
-																							{BEGIN cellblock_grid_headcell_field15}
+{END cellblock_grid_headcell_field12}
+																							{BEGIN cellblock_grid_headcell_field13}
 {
-	cellId: 'headcell_field15',
+	cellId: 'headcell_field13',
 	col:0,
 	row:0,
 			fieldName: 'created_by',
@@ -821,11 +763,69 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_indicators created_by }","hidden":"{$item_hide_simple_grid_field31}","bold":true},
+			{"text":"{$jslabel public_lbpmi_indicators created_by }","hidden":"{$item_hide_simple_grid_field29}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
               "alignment": '{$created_by_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field13}
+																							{BEGIN cellblock_grid_headcell_field14}
+{
+	cellId: 'headcell_field14',
+	col:0,
+	row:0,
+			fieldName: 'created_at',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_lbpmi_indicators created_at }","hidden":"{$item_hide_simple_grid_field30}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$created_at_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field14}
+																							{BEGIN cellblock_grid_headcell_field15}
+{
+	cellId: 'headcell_field15',
+	col:0,
+	row:0,
+			fieldName: 'updated_at',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_lbpmi_indicators updated_at }","hidden":"{$item_hide_simple_grid_field31}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$updated_at_align}',
      
       
       },
@@ -1118,93 +1118,6 @@ pdfDocument = {
 	cellId: 'cell_field6',
 	col:0,
 	row:0,
-			fieldName: 'formula',
-				style: 'bodycell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":{$formula_pdfvalue},"hidden":"{$item_hide_simple_grid_field6}"},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$formula_align}',
-     
-      
-      },
-
-{END cellblock_grid_cell_field6}
-																							{BEGIN cellblock_grid_cell_field7}
-{
-	cellId: 'cell_field7',
-	col:0,
-	row:0,
-			fieldName: 'created_at',
-				style: 'bodycell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":{$created_at_pdfvalue},"hidden":"{$item_hide_simple_grid_field8}"},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$created_at_align}',
-     
-      
-      },
-
-{END cellblock_grid_cell_field7}
-																							{BEGIN cellblock_grid_cell_field8}
-{
-	cellId: 'cell_field8',
-	col:0,
-	row:0,
-			fieldName: 'updated_at',
-				style: 'bodycell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":{$updated_at_pdfvalue},"hidden":"{$item_hide_simple_grid_field9}"},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$updated_at_align}',
-     
-      
-      },
-
-{END cellblock_grid_cell_field8}
-																							{BEGIN cellblock_grid_cell_field9}
-{
-	cellId: 'cell_field9',
-	col:0,
-	row:0,
 			fieldName: 'indicator_code',
 				style: 'bodycell',
 		
@@ -1228,10 +1141,39 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field9}
-																							{BEGIN cellblock_grid_cell_field10}
+{END cellblock_grid_cell_field6}
+																							{BEGIN cellblock_grid_cell_field7}
 {
-	cellId: 'cell_field10',
+	cellId: 'cell_field7',
+	col:0,
+	row:0,
+			fieldName: 'formula',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$formula_pdfvalue},"hidden":"{$item_hide_simple_grid_field6}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$formula_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field7}
+																							{BEGIN cellblock_grid_cell_field8}
+{
+	cellId: 'cell_field8',
 	col:0,
 	row:0,
 			fieldName: 'numerator_description',
@@ -1257,10 +1199,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field10}
-																							{BEGIN cellblock_grid_cell_field11}
+{END cellblock_grid_cell_field8}
+																							{BEGIN cellblock_grid_cell_field9}
 {
-	cellId: 'cell_field11',
+	cellId: 'cell_field9',
 	col:0,
 	row:0,
 			fieldName: 'denominator_description',
@@ -1286,39 +1228,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field11}
-																							{BEGIN cellblock_grid_cell_field12}
+{END cellblock_grid_cell_field9}
+																							{BEGIN cellblock_grid_cell_field10}
 {
-	cellId: 'cell_field12',
-	col:0,
-	row:0,
-			fieldName: 'annualized',
-				style: 'bodycell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":{$annualized_pdfvalue},"hidden":"{$item_hide_simple_grid_field10}"},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$annualized_align}',
-     
-      
-      },
-
-{END cellblock_grid_cell_field12}
-																							{BEGIN cellblock_grid_cell_field13}
-{
-	cellId: 'cell_field13',
+	cellId: 'cell_field10',
 	col:0,
 	row:0,
 			fieldName: 'decimals',
@@ -1344,10 +1257,39 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field13}
-																							{BEGIN cellblock_grid_cell_field14}
+{END cellblock_grid_cell_field10}
+																							{BEGIN cellblock_grid_cell_field11}
 {
-	cellId: 'cell_field14',
+	cellId: 'cell_field11',
+	col:0,
+	row:0,
+			fieldName: 'annualized',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$annualized_pdfvalue},"hidden":"{$item_hide_simple_grid_field10}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$annualized_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field11}
+																							{BEGIN cellblock_grid_cell_field12}
+{
+	cellId: 'cell_field12',
 	col:0,
 	row:0,
 			fieldName: 'is_active',
@@ -1373,10 +1315,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field14}
-																							{BEGIN cellblock_grid_cell_field15}
+{END cellblock_grid_cell_field12}
+																							{BEGIN cellblock_grid_cell_field13}
 {
-	cellId: 'cell_field15',
+	cellId: 'cell_field13',
 	col:0,
 	row:0,
 			fieldName: 'created_by',
@@ -1398,6 +1340,64 @@ pdfDocument = {
 		  ],
   "border": [ true, true, true, true ],
               "alignment": '{$created_by_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field13}
+																							{BEGIN cellblock_grid_cell_field14}
+{
+	cellId: 'cell_field14',
+	col:0,
+	row:0,
+			fieldName: 'created_at',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$created_at_pdfvalue},"hidden":"{$item_hide_simple_grid_field8}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$created_at_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field14}
+																							{BEGIN cellblock_grid_cell_field15}
+{
+	cellId: 'cell_field15',
+	col:0,
+	row:0,
+			fieldName: 'updated_at',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$updated_at_pdfvalue},"hidden":"{$item_hide_simple_grid_field9}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$updated_at_align}',
      
       
       },

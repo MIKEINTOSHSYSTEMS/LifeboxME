@@ -133,6 +133,9 @@ pdfDocument = {
 										{BEGIN col_grid_22}
 					"%",
 					{END col_grid_22}
+										{BEGIN col_grid_23}
+					"%",
+					{END col_grid_23}
 															],
 											heights: [ // first height for header part
 					"%",
@@ -303,7 +306,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions distribution_id }","hidden":"{$item_hide_simple_grid_field22}","bold":true},
+			{"text":"{$jslabel public_device_distributions distribution_id }","hidden":"{$item_hide_simple_grid_field23}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -332,7 +335,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions region_id }","hidden":"{$item_hide_simple_grid_field23}","bold":true},
+			{"text":"{$jslabel public_device_distributions region_id }","hidden":"{$item_hide_simple_grid_field24}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -361,7 +364,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions country_id }","hidden":"{$item_hide_simple_grid_field24}","bold":true},
+			{"text":"{$jslabel public_device_distributions country_id }","hidden":"{$item_hide_simple_grid_field25}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -390,7 +393,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions order_reference }","hidden":"{$item_hide_simple_grid_field25}","bold":true},
+			{"text":"{$jslabel public_device_distributions order_reference }","hidden":"{$item_hide_simple_grid_field26}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -419,7 +422,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions facility_id }","hidden":"{$item_hide_simple_grid_field26}","bold":true},
+			{"text":"{$jslabel public_device_distributions facility_id }","hidden":"{$item_hide_simple_grid_field27}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -448,7 +451,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions device_type }","hidden":"{$item_hide_simple_grid_field27}","bold":true},
+			{"text":"{$jslabel public_device_distributions device_type }","hidden":"{$item_hide_simple_grid_field28}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -477,7 +480,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions monthly_surgical_volume }","hidden":"{$item_hide_simple_grid_field28}","bold":true},
+			{"text":"{$jslabel public_device_distributions monthly_surgical_volume }","hidden":"{$item_hide_simple_grid_field29}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -506,7 +509,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions contact_name }","hidden":"{$item_hide_simple_grid_field29}","bold":true},
+			{"text":"{$jslabel public_device_distributions contact_name }","hidden":"{$item_hide_simple_grid_field30}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -535,7 +538,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions contact_email }","hidden":"{$item_hide_simple_grid_field30}","bold":true},
+			{"text":"{$jslabel public_device_distributions contact_email }","hidden":"{$item_hide_simple_grid_field31}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -564,7 +567,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions distribution_month }","hidden":"{$item_hide_simple_grid_field31}","bold":true},
+			{"text":"{$jslabel public_device_distributions distribution_month }","hidden":"{$item_hide_simple_grid_field32}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -593,7 +596,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions distribution_year }","hidden":"{$item_hide_simple_grid_field32}","bold":true},
+			{"text":"{$jslabel public_device_distributions distribution_year }","hidden":"{$item_hide_simple_grid_field33}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -622,7 +625,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions quantity }","hidden":"{$item_hide_simple_grid_field33}","bold":true},
+			{"text":"{$jslabel public_device_distributions quantity }","hidden":"{$item_hide_simple_grid_field34}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -651,7 +654,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions payment_method }","hidden":"{$item_hide_simple_grid_field34}","bold":true},
+			{"text":"{$jslabel public_device_distributions payment_method }","hidden":"{$item_hide_simple_grid_field35}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -680,7 +683,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions transaction_type }","hidden":"{$item_hide_simple_grid_field35}","bold":true},
+			{"text":"{$jslabel public_device_distributions transaction_type }","hidden":"{$item_hide_simple_grid_field36}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -709,7 +712,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions donor }","hidden":"{$item_hide_simple_grid_field36}","bold":true},
+			{"text":"{$jslabel public_device_distributions donor }","hidden":"{$item_hide_simple_grid_field37}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -738,7 +741,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions is_received }","hidden":"{$item_hide_simple_grid_field37}","bold":true},
+			{"text":"{$jslabel public_device_distributions is_received }","hidden":"{$item_hide_simple_grid_field38}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -767,7 +770,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions receiving_date }","hidden":"{$item_hide_simple_grid_field38}","bold":true},
+			{"text":"{$jslabel public_device_distributions receiving_date }","hidden":"{$item_hide_simple_grid_field39}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -796,7 +799,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions started_using }","hidden":"{$item_hide_simple_grid_field39}","bold":true},
+			{"text":"{$jslabel public_device_distributions started_using }","hidden":"{$item_hide_simple_grid_field40}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -825,7 +828,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions date_started_using }","hidden":"{$item_hide_simple_grid_field40}","bold":true},
+			{"text":"{$jslabel public_device_distributions date_started_using }","hidden":"{$item_hide_simple_grid_field41}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -854,7 +857,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions notes }","hidden":"{$item_hide_simple_grid_field41}","bold":true},
+			{"text":"{$jslabel public_device_distributions notes }","hidden":"{$item_hide_simple_grid_field42}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -883,7 +886,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions created_at }","hidden":"{$item_hide_simple_grid_field42}","bold":true},
+			{"text":"{$jslabel public_device_distributions created_at }","hidden":"{$item_hide_simple_grid_field43}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -912,7 +915,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_device_distributions updated_at }","hidden":"{$item_hide_simple_grid_field43}","bold":true},
+			{"text":"{$jslabel public_device_distributions updated_at }","hidden":"{$item_hide_simple_grid_field44}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -922,6 +925,35 @@ pdfDocument = {
       },
 
 {END cellblock_grid_headcell_field21}
+																							{BEGIN cellblock_grid_headcell_field22}
+{
+	cellId: 'headcell_field22',
+	col:0,
+	row:0,
+			fieldName: 'qr_data',
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"{$jslabel public_device_distributions qr_data }","hidden":"{$item_hide_simple_grid_field45}","bold":true},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$qr_data_align}',
+     
+      
+      },
+
+{END cellblock_grid_headcell_field22}
 											],
 				{END row_grid_0}
 		
@@ -1597,6 +1629,35 @@ pdfDocument = {
       },
 
 {END cellblock_grid_cell_field21}
+																							{BEGIN cellblock_grid_cell_field22}
+{
+	cellId: 'cell_field22',
+	col:0,
+	row:0,
+			fieldName: 'qr_data',
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":{$qr_data_pdfvalue},"hidden":"{$item_hide_simple_grid_field22}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": '{$qr_data_align}',
+     
+      
+      },
+
+{END cellblock_grid_cell_field22}
 											],
 				{END row_grid_1}
 		
@@ -2204,6 +2265,32 @@ pdfDocument = {
       },
 
 {END cellblock_grid_footcell_field21}
+																							{BEGIN cellblock_grid_footcell_field22}
+{
+	cellId: 'footcell_field22',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_field22}
 											],
 				{END row_grid_2}
 		

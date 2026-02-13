@@ -2759,6 +2759,37 @@ $runnerMenus['main'] = array(
 						'parent' => '141',
 						'children' => array( 
 							array(
+								'id' => '153',
+								'parent' => '142',
+								'children' => array( 
+									 
+								),
+								'data' => array(
+									'name' => array(
+										'text' => 'Indicator Groups',
+										'type' => 0 
+									),
+									'comments' => array(
+										'text' => '',
+										'type' => 0 
+									),
+									'style' => '',
+									'href' => 'mypage.htm',
+									'params' => '',
+									'pageId' => '',
+									'itemType' => 2,
+									'linkType' => 0,
+									'openType' => 0,
+									'iconType' => 3,
+									'iconName' => 'fa-layer-group',
+									'iconStyle' => 0,
+									'showIconType' => 1,
+									'linkToAnotherApp' => false,
+									'pageType' => 'list',
+									'table' => 4799 
+								) 
+							),
+							array(
 								'id' => '135',
 								'parent' => '142',
 								'children' => array( 
@@ -2821,68 +2852,6 @@ $runnerMenus['main'] = array(
 								) 
 							),
 							array(
-								'id' => '139',
-								'parent' => '142',
-								'children' => array( 
-									 
-								),
-								'data' => array(
-									'name' => array(
-										'text' => 'Indicators',
-										'type' => 0 
-									),
-									'comments' => array(
-										'text' => '',
-										'type' => 0 
-									),
-									'style' => '',
-									'href' => 'mypage.htm',
-									'params' => '',
-									'pageId' => '',
-									'itemType' => 2,
-									'linkType' => 0,
-									'openType' => 0,
-									'iconType' => 3,
-									'iconName' => 'fa-info-circle',
-									'iconStyle' => 0,
-									'showIconType' => 1,
-									'linkToAnotherApp' => false,
-									'pageType' => 'list',
-									'table' => 4782 
-								) 
-							),
-							array(
-								'id' => '153',
-								'parent' => '142',
-								'children' => array( 
-									 
-								),
-								'data' => array(
-									'name' => array(
-										'text' => 'Indicator Groups',
-										'type' => 0 
-									),
-									'comments' => array(
-										'text' => '',
-										'type' => 0 
-									),
-									'style' => '',
-									'href' => 'mypage.htm',
-									'params' => '',
-									'pageId' => '',
-									'itemType' => 2,
-									'linkType' => 0,
-									'openType' => 0,
-									'iconType' => 3,
-									'iconName' => 'fa-layer-group',
-									'iconStyle' => 0,
-									'showIconType' => 1,
-									'linkToAnotherApp' => false,
-									'pageType' => 'list',
-									'table' => 4799 
-								) 
-							),
-							array(
 								'id' => '138',
 								'parent' => '142',
 								'children' => array( 
@@ -2911,6 +2880,37 @@ $runnerMenus['main'] = array(
 									'linkToAnotherApp' => false,
 									'pageType' => 'list',
 									'table' => 4779 
+								) 
+							),
+							array(
+								'id' => '139',
+								'parent' => '142',
+								'children' => array( 
+									 
+								),
+								'data' => array(
+									'name' => array(
+										'text' => 'Indicators',
+										'type' => 0 
+									),
+									'comments' => array(
+										'text' => '',
+										'type' => 0 
+									),
+									'style' => '',
+									'href' => 'mypage.htm',
+									'params' => '',
+									'pageId' => '',
+									'itemType' => 2,
+									'linkType' => 0,
+									'openType' => 0,
+									'iconType' => 3,
+									'iconName' => 'fa-info-circle',
+									'iconStyle' => 0,
+									'showIconType' => 1,
+									'linkToAnotherApp' => false,
+									'pageType' => 'list',
+									'table' => 4782 
 								) 
 							),
 							array(

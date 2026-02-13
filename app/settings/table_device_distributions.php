@@ -103,9 +103,41 @@ $runnerTableSettings['public.device_distributions'] = array(
 	is_received,
 	receiving_date,
 	started_using,
-	date_started_using
+	date_started_using,
+
+	(
+		\'Distribution ID: \' || COALESCE(distribution_id::text, \'\') || E\'\\n\' ||
+		\'Region ID: \' || COALESCE(region_id::text, \'\') || E\'\\n\' ||
+		\'Country ID: \' || COALESCE(country_id::text, \'\') || E\'\\n\' ||
+		\'Order Reference: \' || COALESCE(order_reference, \'\') || E\'\\n\' ||
+		\'Facility ID: \' || COALESCE(facility_id::text, \'\') || E\'\\n\' ||
+		\'Monthly Surgical Volume: \' || COALESCE(monthly_surgical_volume::text, \'\') || E\'\\n\' ||
+		\'Contact Name: \' || COALESCE(contact_name, \'\') || E\'\\n\' ||
+		\'Contact Email: \' || COALESCE(contact_email, \'\') || E\'\\n\' ||
+		\'Distribution Month: \' || COALESCE(distribution_month::text, \'\') || E\'\\n\' ||
+		\'Distribution Year: \' || COALESCE(distribution_year::text, \'\') || E\'\\n\' ||
+		\'Quantity: \' || COALESCE(quantity::text, \'\') || E\'\\n\' ||
+		\'Notes: \' || COALESCE(notes, \'\') || E\'\\n\' ||
+		\'Created At: \' || COALESCE(created_at::text, \'\') || E\'\\n\' ||
+		\'Updated At: \' || COALESCE(updated_at::text, \'\') || E\'\\n\' ||
+		\'Device Type: \' || COALESCE(device_type::text, \'\') || E\'\\n\' ||
+		\'Payment Method: \' || COALESCE(payment_method::text, \'\') || E\'\\n\' ||
+		\'Transaction Type: \' || COALESCE(transaction_type::text, \'\') || E\'\\n\' ||
+		\'Donor: \' || COALESCE(donor::text, \'\') || E\'\\n\' ||
+		\'Is Received: \' || 
+			CASE 
+				WHEN is_received = \'t\' THEN \'Yes\'
+				WHEN is_received = \'f\' THEN \'No\'
+				ELSE \'\'
+			END || E\'\\n\' ||
+		\'Receiving Date: \' || COALESCE(receiving_date::text, \'\') || E\'\\n\' ||
+		\'Started Using: \' || COALESCE(started_using::text, \'\') || E\'\\n\' ||
+		\'Date Started Using: \' || COALESCE(date_started_using::text, \'\')
+	) AS qr_data
+
 FROM
-	"public".device_distributions',
+	"public".device_distributions;
+',
 	'keyFields' => array( 
 		'distribution_id' 
 	),
@@ -324,7 +356,6 @@ FROM
 					'lookupOrderBy' => 'facility_name',
 					'lookupAllowAdd' => true,
 					'lookupAllowEdit' => true,
-					'lookupControlType' => 2,
 					'lookupListPage' => 'list',
 					'lookupAddPage' => 'add',
 					'lookupEditPage' => 'edit',
@@ -937,6 +968,53 @@ FROM
 				'format' => 'Values list' 
 			),
 			'tableName' => 'public.device_distributions' 
+		),
+		'qr_data' => array(
+			'name' => 'qr_data',
+			'goodName' => 'qr_data',
+			'strField' => 'qr_data',
+			'index' => 23,
+			'type' => 201,
+			'sqlExpression' => '(
+		\'Distribution ID: \' || COALESCE(distribution_id::text, \'\') || E\'\\n\' ||
+		\'Region ID: \' || COALESCE(region_id::text, \'\') || E\'\\n\' ||
+		\'Country ID: \' || COALESCE(country_id::text, \'\') || E\'\\n\' ||
+		\'Order Reference: \' || COALESCE(order_reference, \'\') || E\'\\n\' ||
+		\'Facility ID: \' || COALESCE(facility_id::text, \'\') || E\'\\n\' ||
+		\'Monthly Surgical Volume: \' || COALESCE(monthly_surgical_volume::text, \'\') || E\'\\n\' ||
+		\'Contact Name: \' || COALESCE(contact_name, \'\') || E\'\\n\' ||
+		\'Contact Email: \' || COALESCE(contact_email, \'\') || E\'\\n\' ||
+		\'Distribution Month: \' || COALESCE(distribution_month::text, \'\') || E\'\\n\' ||
+		\'Distribution Year: \' || COALESCE(distribution_year::text, \'\') || E\'\\n\' ||
+		\'Quantity: \' || COALESCE(quantity::text, \'\') || E\'\\n\' ||
+		\'Notes: \' || COALESCE(notes, \'\') || E\'\\n\' ||
+		\'Created At: \' || COALESCE(created_at::text, \'\') || E\'\\n\' ||
+		\'Updated At: \' || COALESCE(updated_at::text, \'\') || E\'\\n\' ||
+		\'Device Type: \' || COALESCE(device_type::text, \'\') || E\'\\n\' ||
+		\'Payment Method: \' || COALESCE(payment_method::text, \'\') || E\'\\n\' ||
+		\'Transaction Type: \' || COALESCE(transaction_type::text, \'\') || E\'\\n\' ||
+		\'Donor: \' || COALESCE(donor::text, \'\') || E\'\\n\' ||
+		\'Is Received: \' || 
+			CASE 
+				WHEN is_received = \'t\' THEN \'Yes\'
+				WHEN is_received = \'f\' THEN \'No\'
+				ELSE \'\'
+			END || E\'\\n\' ||
+		\'Receiving Date: \' || COALESCE(receiving_date::text, \'\') || E\'\\n\' ||
+		\'Started Using: \' || COALESCE(started_using::text, \'\') || E\'\\n\' ||
+		\'Date Started Using: \' || COALESCE(date_started_using::text, \'\')
+	)',
+			'viewFormats' => array(
+				'view' => array(
+					'format' => 'QRCode' 
+				) 
+			),
+			'editFormats' => array(
+				'edit' => array(
+					'format' => 'Readonly' 
+				) 
+			),
+			'tableName' => '' 
 		) 
 	),
 	'masterTables' => array( 
@@ -1003,9 +1081,41 @@ FROM
 	is_received,
 	receiving_date,
 	started_using,
-	date_started_using
+	date_started_using,
+
+	(
+		\'Distribution ID: \' || COALESCE(distribution_id::text, \'\') || E\'\\n\' ||
+		\'Region ID: \' || COALESCE(region_id::text, \'\') || E\'\\n\' ||
+		\'Country ID: \' || COALESCE(country_id::text, \'\') || E\'\\n\' ||
+		\'Order Reference: \' || COALESCE(order_reference, \'\') || E\'\\n\' ||
+		\'Facility ID: \' || COALESCE(facility_id::text, \'\') || E\'\\n\' ||
+		\'Monthly Surgical Volume: \' || COALESCE(monthly_surgical_volume::text, \'\') || E\'\\n\' ||
+		\'Contact Name: \' || COALESCE(contact_name, \'\') || E\'\\n\' ||
+		\'Contact Email: \' || COALESCE(contact_email, \'\') || E\'\\n\' ||
+		\'Distribution Month: \' || COALESCE(distribution_month::text, \'\') || E\'\\n\' ||
+		\'Distribution Year: \' || COALESCE(distribution_year::text, \'\') || E\'\\n\' ||
+		\'Quantity: \' || COALESCE(quantity::text, \'\') || E\'\\n\' ||
+		\'Notes: \' || COALESCE(notes, \'\') || E\'\\n\' ||
+		\'Created At: \' || COALESCE(created_at::text, \'\') || E\'\\n\' ||
+		\'Updated At: \' || COALESCE(updated_at::text, \'\') || E\'\\n\' ||
+		\'Device Type: \' || COALESCE(device_type::text, \'\') || E\'\\n\' ||
+		\'Payment Method: \' || COALESCE(payment_method::text, \'\') || E\'\\n\' ||
+		\'Transaction Type: \' || COALESCE(transaction_type::text, \'\') || E\'\\n\' ||
+		\'Donor: \' || COALESCE(donor::text, \'\') || E\'\\n\' ||
+		\'Is Received: \' || 
+			CASE 
+				WHEN is_received = \'t\' THEN \'Yes\'
+				WHEN is_received = \'f\' THEN \'No\'
+				ELSE \'\'
+			END || E\'\\n\' ||
+		\'Receiving Date: \' || COALESCE(receiving_date::text, \'\') || E\'\\n\' ||
+		\'Started Using: \' || COALESCE(started_using::text, \'\') || E\'\\n\' ||
+		\'Date Started Using: \' || COALESCE(date_started_using::text, \'\')
+	) AS qr_data
+
 FROM
-	"public".device_distributions',
+	"public".device_distributions;
+',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -1338,6 +1448,75 @@ FROM
 				),
 				'encrypted' => false,
 				'columnName' => 'date_started_using' 
+			),
+			array(
+				'sql' => '(
+		\'Distribution ID: \' || COALESCE(distribution_id::text, \'\') || E\'\\n\' ||
+		\'Region ID: \' || COALESCE(region_id::text, \'\') || E\'\\n\' ||
+		\'Country ID: \' || COALESCE(country_id::text, \'\') || E\'\\n\' ||
+		\'Order Reference: \' || COALESCE(order_reference, \'\') || E\'\\n\' ||
+		\'Facility ID: \' || COALESCE(facility_id::text, \'\') || E\'\\n\' ||
+		\'Monthly Surgical Volume: \' || COALESCE(monthly_surgical_volume::text, \'\') || E\'\\n\' ||
+		\'Contact Name: \' || COALESCE(contact_name, \'\') || E\'\\n\' ||
+		\'Contact Email: \' || COALESCE(contact_email, \'\') || E\'\\n\' ||
+		\'Distribution Month: \' || COALESCE(distribution_month::text, \'\') || E\'\\n\' ||
+		\'Distribution Year: \' || COALESCE(distribution_year::text, \'\') || E\'\\n\' ||
+		\'Quantity: \' || COALESCE(quantity::text, \'\') || E\'\\n\' ||
+		\'Notes: \' || COALESCE(notes, \'\') || E\'\\n\' ||
+		\'Created At: \' || COALESCE(created_at::text, \'\') || E\'\\n\' ||
+		\'Updated At: \' || COALESCE(updated_at::text, \'\') || E\'\\n\' ||
+		\'Device Type: \' || COALESCE(device_type::text, \'\') || E\'\\n\' ||
+		\'Payment Method: \' || COALESCE(payment_method::text, \'\') || E\'\\n\' ||
+		\'Transaction Type: \' || COALESCE(transaction_type::text, \'\') || E\'\\n\' ||
+		\'Donor: \' || COALESCE(donor::text, \'\') || E\'\\n\' ||
+		\'Is Received: \' || 
+			CASE 
+				WHEN is_received = \'t\' THEN \'Yes\'
+				WHEN is_received = \'f\' THEN \'No\'
+				ELSE \'\'
+			END || E\'\\n\' ||
+		\'Receiving Date: \' || COALESCE(receiving_date::text, \'\') || E\'\\n\' ||
+		\'Started Using: \' || COALESCE(started_using::text, \'\') || E\'\\n\' ||
+		\'Date Started Using: \' || COALESCE(date_started_using::text, \'\')
+	)',
+				'parsed' => true,
+				'type' => 'FieldListItem',
+				'alias' => 'qr_data',
+				'expression' => array(
+					'sql' => '(
+		\'Distribution ID: \' || COALESCE(distribution_id::text, \'\') || E\'\\n\' ||
+		\'Region ID: \' || COALESCE(region_id::text, \'\') || E\'\\n\' ||
+		\'Country ID: \' || COALESCE(country_id::text, \'\') || E\'\\n\' ||
+		\'Order Reference: \' || COALESCE(order_reference, \'\') || E\'\\n\' ||
+		\'Facility ID: \' || COALESCE(facility_id::text, \'\') || E\'\\n\' ||
+		\'Monthly Surgical Volume: \' || COALESCE(monthly_surgical_volume::text, \'\') || E\'\\n\' ||
+		\'Contact Name: \' || COALESCE(contact_name, \'\') || E\'\\n\' ||
+		\'Contact Email: \' || COALESCE(contact_email, \'\') || E\'\\n\' ||
+		\'Distribution Month: \' || COALESCE(distribution_month::text, \'\') || E\'\\n\' ||
+		\'Distribution Year: \' || COALESCE(distribution_year::text, \'\') || E\'\\n\' ||
+		\'Quantity: \' || COALESCE(quantity::text, \'\') || E\'\\n\' ||
+		\'Notes: \' || COALESCE(notes, \'\') || E\'\\n\' ||
+		\'Created At: \' || COALESCE(created_at::text, \'\') || E\'\\n\' ||
+		\'Updated At: \' || COALESCE(updated_at::text, \'\') || E\'\\n\' ||
+		\'Device Type: \' || COALESCE(device_type::text, \'\') || E\'\\n\' ||
+		\'Payment Method: \' || COALESCE(payment_method::text, \'\') || E\'\\n\' ||
+		\'Transaction Type: \' || COALESCE(transaction_type::text, \'\') || E\'\\n\' ||
+		\'Donor: \' || COALESCE(donor::text, \'\') || E\'\\n\' ||
+		\'Is Received: \' || 
+			CASE 
+				WHEN is_received = \'t\' THEN \'Yes\'
+				WHEN is_received = \'f\' THEN \'No\'
+				ELSE \'\'
+			END || E\'\\n\' ||
+		\'Receiving Date: \' || COALESCE(receiving_date::text, \'\') || E\'\\n\' ||
+		\'Started Using: \' || COALESCE(started_using::text, \'\') || E\'\\n\' ||
+		\'Date Started Using: \' || COALESCE(date_started_using::text, \'\')
+	)',
+					'parsed' => true,
+					'type' => 'NonParsedEntity' 
+				),
+				'encrypted' => false,
+				'columnName' => 'qr_data' 
 			) 
 		),
 		'fromList' => array( 
@@ -1579,6 +1758,13 @@ FROM
 				'groupByIndex' => -1,
 				'whereIndex' => -1,
 				'havingIndex' => -1 
+			),
+			array(
+				'fieldIndex' => 22,
+				'orderByIndex' => -1,
+				'groupByIndex' => -1,
+				'whereIndex' => -1,
+				'havingIndex' => -1 
 			) 
 		),
 		'headSql' => 'SELECT',
@@ -1603,12 +1789,43 @@ FROM
 	is_received,
 	receiving_date,
 	started_using,
-	date_started_using',
+	date_started_using,
+
+	(
+		\'Distribution ID: \' || COALESCE(distribution_id::text, \'\') || E\'\\n\' ||
+		\'Region ID: \' || COALESCE(region_id::text, \'\') || E\'\\n\' ||
+		\'Country ID: \' || COALESCE(country_id::text, \'\') || E\'\\n\' ||
+		\'Order Reference: \' || COALESCE(order_reference, \'\') || E\'\\n\' ||
+		\'Facility ID: \' || COALESCE(facility_id::text, \'\') || E\'\\n\' ||
+		\'Monthly Surgical Volume: \' || COALESCE(monthly_surgical_volume::text, \'\') || E\'\\n\' ||
+		\'Contact Name: \' || COALESCE(contact_name, \'\') || E\'\\n\' ||
+		\'Contact Email: \' || COALESCE(contact_email, \'\') || E\'\\n\' ||
+		\'Distribution Month: \' || COALESCE(distribution_month::text, \'\') || E\'\\n\' ||
+		\'Distribution Year: \' || COALESCE(distribution_year::text, \'\') || E\'\\n\' ||
+		\'Quantity: \' || COALESCE(quantity::text, \'\') || E\'\\n\' ||
+		\'Notes: \' || COALESCE(notes, \'\') || E\'\\n\' ||
+		\'Created At: \' || COALESCE(created_at::text, \'\') || E\'\\n\' ||
+		\'Updated At: \' || COALESCE(updated_at::text, \'\') || E\'\\n\' ||
+		\'Device Type: \' || COALESCE(device_type::text, \'\') || E\'\\n\' ||
+		\'Payment Method: \' || COALESCE(payment_method::text, \'\') || E\'\\n\' ||
+		\'Transaction Type: \' || COALESCE(transaction_type::text, \'\') || E\'\\n\' ||
+		\'Donor: \' || COALESCE(donor::text, \'\') || E\'\\n\' ||
+		\'Is Received: \' || 
+			CASE 
+				WHEN is_received = \'t\' THEN \'Yes\'
+				WHEN is_received = \'f\' THEN \'No\'
+				ELSE \'\'
+			END || E\'\\n\' ||
+		\'Receiving Date: \' || COALESCE(receiving_date::text, \'\') || E\'\\n\' ||
+		\'Started Using: \' || COALESCE(started_using::text, \'\') || E\'\\n\' ||
+		\'Date Started Using: \' || COALESCE(date_started_using::text, \'\')
+	) AS qr_data',
 		'fromListSql' => 'FROM
 	"public".device_distributions',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),
+	'hasEvents' => true,
 	'originalTable' => 'public.device_distributions',
 	'originalPagesByType' => array(
 		'add' => array( 
@@ -1690,7 +1907,8 @@ FROM
 			'is_received',
 			'receiving_date',
 			'started_using',
-			'date_started_using' 
+			'date_started_using',
+			'qr_data' 
 		),
 		'searchSuggest' => true,
 		'highlightSearchResults' => true,
@@ -1718,7 +1936,8 @@ FROM
 			'is_received',
 			'receiving_date',
 			'started_using',
-			'date_started_using' 
+			'date_started_using',
+			'qr_data' 
 		) 
 	),
 	'connId' => 'lifebox_mesystem_at_localhost',
@@ -1793,7 +2012,8 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'is_received' => 'Is Received',
 		'receiving_date' => 'Receiving Date',
 		'started_using' => 'Started Using',
-		'date_started_using' => 'Date Started Using' 
+		'date_started_using' => 'Date Started Using',
+		'qr_data' => 'QR-Data' 
 	),
 	'fieldTooltips' => array(
 		'distribution_id' => '',
@@ -1817,7 +2037,8 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'is_received' => '',
 		'receiving_date' => '',
 		'started_using' => '',
-		'date_started_using' => '' 
+		'date_started_using' => '',
+		'qr_data' => '' 
 	),
 	'fieldPlaceholders' => array(
 		'distribution_id' => '',
@@ -1841,7 +2062,8 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'is_received' => '',
 		'receiving_date' => '',
 		'started_using' => '',
-		'date_started_using' => '' 
+		'date_started_using' => '',
+		'qr_data' => '' 
 	),
 	'pageTitles' => array(
 		 

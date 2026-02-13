@@ -540,12 +540,14 @@
 		'integrated_edit_field' => array(
 			'field' => 'indicator_group_name',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => false 
 		),
 		'integrated_edit_field1' => array(
 			'field' => 'indicator_group_description',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => false 
 		),
 		'integrated_edit_field2' => array(
 			'field' => 'indicator_group_code',

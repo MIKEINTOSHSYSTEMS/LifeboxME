@@ -3417,7 +3417,7 @@ $runnerProjectSettings = array(
 		'table' => 'public.lifeboxme_settings' 
 	),
 	'wizardBuild' => '43785',
-	'projectBuild' => 'QcNsc9jIptvQ',
+	'projectBuild' => 'ergrxsLPu5WE',
 	'projectTheme' => 'flatly',
 	'projectSize' => 'normal',
 	'customErrorMsg' => array(
@@ -3449,7 +3449,7 @@ $runnerProjectSettings = array(
 		'apikey' => '' 
 	),
 	'viewPluginsWithJS' => array( 
-		 
+		'QRCode' 
 	),
 	'rtlLanguages' => array(
 		'English' => false 

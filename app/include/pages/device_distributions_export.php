@@ -66,6 +66,9 @@
 		),
 		'date_started_using' => array(
 			'totalsType' => '' 
+		),
+		'qr_data' => array(
+			'totalsType' => '' 
 		) 
 	),
 	'fields' => array(
@@ -91,7 +94,8 @@
 			'is_received',
 			'receiving_date',
 			'started_using',
-			'date_started_using' 
+			'date_started_using',
+			'qr_data' 
 		),
 		'exportFields' => array( 
 			'distribution_id',
@@ -115,7 +119,8 @@
 			'date_started_using',
 			'notes',
 			'created_at',
-			'updated_at' 
+			'updated_at',
+			'qr_data' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -189,6 +194,9 @@
 			),
 			'date_started_using' => array( 
 				'export_field21' 
+			),
+			'qr_data' => array( 
+				'export_field22' 
 			) 
 		) 
 	),
@@ -229,7 +237,8 @@
 					'export_field21',
 					'export_field13',
 					'export_field14',
-					'export_field15' 
+					'export_field15',
+					'export_field22' 
 				),
 				'footer' => array( 
 					'export_export',
@@ -265,6 +274,7 @@
 				'export_field13' => 'grid',
 				'export_field14' => 'grid',
 				'export_field15' => 'grid',
+				'export_field22' => 'grid',
 				'export_export' => 'footer',
 				'export_cancel' => 'footer' 
 			),
@@ -307,7 +317,8 @@
 				'export_field18',
 				'export_field19',
 				'export_field20',
-				'export_field21' 
+				'export_field21',
+				'export_field22' 
 			) 
 		),
 		'cellMaps' => array(
@@ -468,7 +479,8 @@
 						'export_field21',
 						'export_field13',
 						'export_field14',
-						'export_field15' 
+						'export_field15',
+						'export_field22' 
 					) 
 				) 
 			),
@@ -609,6 +621,10 @@
 		),
 		'export_field21' => array(
 			'field' => 'date_started_using',
+			'type' => 'export_field' 
+		),
+		'export_field22' => array(
+			'field' => 'qr_data',
 			'type' => 'export_field' 
 		) 
 	),

@@ -1235,6 +1235,7 @@ FROM
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),
+	'hasEvents' => true,
 	'hasJsEvents' => true,
 	'originalTable' => 'public.lbpmi_data_values',
 	'originalPagesByType' => array(

@@ -68,7 +68,7 @@ $runnerTableSettings['public.lbpmi_indicator_groups'] = array(
 		'50',
 		'100',
 		'500',
-		'-1' 
+		'1' 
 	),
 	'pageSizeSelectorGroups' => array( 
 		'1',
@@ -77,7 +77,7 @@ $runnerTableSettings['public.lbpmi_indicator_groups'] = array(
 		'10',
 		'50',
 		'100',
-		'-1' 
+		'1' 
 	),
 	'warnLeavingEdit' => true,
 	'sql' => 'SELECT

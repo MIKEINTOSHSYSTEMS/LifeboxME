@@ -22,7 +22,14 @@
 	),
 	'listSearch' => array(
 		'alwaysOnPanelFields' => array( 
-			 
+			'indicator_id',
+			'period_type',
+			'period_year',
+			'period_quarter',
+			'period_month',
+			'region_id',
+			'country_id',
+			'facility_id' 
 		),
 		'searchPanel' => true,
 		'fixedSearchPanel' => false,
@@ -95,22 +102,29 @@
 		),
 		'searchPanelFields' => array( 
 			'actual_id',
+			'indicator_id',
+			'region_id',
+			'country_id',
+			'facility_id',
+			'period_type',
+			'period_year',
+			'period_quarter',
+			'period_month',
 			'calculation_timestamp',
 			'is_calculated',
 			'actual_value',
-			'facility_id',
-			'country_id',
-			'region_id',
-			'period_month',
-			'period_quarter',
-			'period_year',
-			'period_type',
 			'updated_at',
-			'indicator_id',
 			'created_at' 
 		),
 		'filterFields' => array( 
-			 
+			'indicator_id',
+			'period_type',
+			'period_year',
+			'period_quarter',
+			'period_month',
+			'region_id',
+			'country_id',
+			'facility_id' 
 		),
 		'inlineAddFields' => array( 
 			 
@@ -198,7 +212,9 @@
 					'delete',
 					'details_found',
 					'page_size',
-					'print_panel' 
+					'print_panel',
+					'search_panel',
+					'filter_panel' 
 				),
 				'below-grid' => array( 
 					'pagination' 
@@ -206,8 +222,7 @@
 				'left' => array( 
 					'logo',
 					'expand_button',
-					'menu',
-					'search_panel' 
+					'menu' 
 				),
 				'supertop' => array( 
 					'expand_menu_button',
@@ -259,14 +274,6 @@
 				) 
 			),
 			'formXtTags' => array(
-				'above-grid' => array( 
-					'add_link',
-					'inlineadd_link',
-					'deleteselected_link',
-					'details_found',
-					'recsPerPage',
-					'print_friendly' 
-				),
 				'below-grid' => array( 
 					'pagination' 
 				),
@@ -281,11 +288,12 @@
 				'details_found' => 'above-grid',
 				'page_size' => 'above-grid',
 				'print_panel' => 'above-grid',
+				'search_panel' => 'above-grid',
+				'filter_panel' => 'above-grid',
 				'pagination' => 'below-grid',
 				'logo' => 'left',
 				'expand_button' => 'left',
 				'menu' => 'left',
-				'search_panel' => 'left',
 				'expand_menu_button' => 'supertop',
 				'collapse_button' => 'supertop',
 				'breadcrumb' => 'supertop',
@@ -588,6 +596,19 @@
 			),
 			'notifications' => array( 
 				'notifications' 
+			),
+			'filter_panel' => array( 
+				'filter_panel' 
+			),
+			'filter_panel_field' => array( 
+				'filter_panel_field',
+				'filter_panel_field1',
+				'filter_panel_field2',
+				'filter_panel_field3',
+				'filter_panel_field4',
+				'filter_panel_field5',
+				'filter_panel_field6',
+				'filter_panel_field7' 
 			),
 			'grid_field' => array( 
 				'simple_grid_field',
@@ -1500,6 +1521,15 @@
 			'modelId' => 'list-above-grid',
 			'grid' => array( 
 				array(
+					'section' => '',
+					'cells' => array( 
+						array(
+							'cell' => 'c',
+							'colspan' => 2 
+						) 
+					) 
+				),
+				array(
 					'cells' => array( 
 						array(
 							'cell' => 'c1' 
@@ -1509,6 +1539,15 @@
 						) 
 					),
 					'section' => '' 
+				),
+				array(
+					'section' => '',
+					'cells' => array( 
+						array(
+							'cell' => 'c4',
+							'colspan' => 2 
+						) 
+					) 
 				) 
 			),
 			'cells' => array(
@@ -1526,6 +1565,18 @@
 						'details_found',
 						'page_size',
 						'print_panel' 
+					) 
+				),
+				'c' => array(
+					'model' => 'c1',
+					'items' => array( 
+						'search_panel' 
+					) 
+				),
+				'c4' => array(
+					'model' => 'c1',
+					'items' => array( 
+						'filter_panel' 
 					) 
 				) 
 			),
@@ -1590,8 +1641,7 @@
 				'c1' => array(
 					'model' => 'c1',
 					'items' => array( 
-						'menu',
-						'search_panel' 
+						'menu' 
 					) 
 				) 
 			),
@@ -2208,20 +2258,21 @@
 			'type' => 'search_panel',
 			'items' => array( 
 				'search_panel_field',
+				'search_panel_field2',
+				'search_panel_field8',
+				'search_panel_field9',
+				'search_panel_field10',
+				'search_panel_field3',
+				'search_panel_field4',
+				'search_panel_field5',
+				'search_panel_field6',
 				'search_panel_field13',
 				'search_panel_field12',
 				'search_panel_field11',
-				'search_panel_field10',
-				'search_panel_field9',
-				'search_panel_field8',
-				'search_panel_field6',
-				'search_panel_field5',
-				'search_panel_field4',
-				'search_panel_field3',
 				'search_panel_field7',
-				'search_panel_field2',
 				'search_panel_field1' 
-			) 
+			),
+			'_flexiblePanel' => true 
 		),
 		'list_options' => array(
 			'type' => 'list_options',
@@ -2247,7 +2298,8 @@
 		'search_panel_field' => array(
 			'field' => 'actual_id',
 			'type' => 'search_panel_field',
-			'required' => false 
+			'required' => false,
+			'alwaysOnPanel' => false 
 		),
 		'search_panel_field1' => array(
 			'field' => 'created_at',
@@ -2259,31 +2311,31 @@
 			'field' => 'indicator_id',
 			'type' => 'search_panel_field',
 			'required' => false,
-			'alwaysOnPanel' => false 
+			'alwaysOnPanel' => true 
 		),
 		'search_panel_field3' => array(
 			'field' => 'period_type',
 			'type' => 'search_panel_field',
 			'required' => false,
-			'alwaysOnPanel' => false 
+			'alwaysOnPanel' => true 
 		),
 		'search_panel_field4' => array(
 			'field' => 'period_year',
 			'type' => 'search_panel_field',
 			'required' => false,
-			'alwaysOnPanel' => false 
+			'alwaysOnPanel' => true 
 		),
 		'search_panel_field5' => array(
 			'field' => 'period_quarter',
 			'type' => 'search_panel_field',
 			'required' => false,
-			'alwaysOnPanel' => false 
+			'alwaysOnPanel' => true 
 		),
 		'search_panel_field6' => array(
 			'field' => 'period_month',
 			'type' => 'search_panel_field',
 			'required' => false,
-			'alwaysOnPanel' => false 
+			'alwaysOnPanel' => true 
 		),
 		'search_panel_field7' => array(
 			'field' => 'updated_at',
@@ -2295,7 +2347,7 @@
 			'field' => 'region_id',
 			'type' => 'search_panel_field',
 			'required' => false,
-			'alwaysOnPanel' => false 
+			'alwaysOnPanel' => true 
 		),
 		'username_button' => array(
 			'type' => 'username_button',
@@ -2388,31 +2440,79 @@
 			'field' => 'country_id',
 			'type' => 'search_panel_field',
 			'required' => false,
-			'alwaysOnPanel' => false 
+			'alwaysOnPanel' => true 
 		),
 		'search_panel_field10' => array(
 			'field' => 'facility_id',
 			'type' => 'search_panel_field',
 			'required' => false,
-			'alwaysOnPanel' => false 
+			'alwaysOnPanel' => true 
 		),
 		'search_panel_field11' => array(
 			'field' => 'actual_value',
 			'type' => 'search_panel_field',
-			'required' => false 
+			'required' => false,
+			'alwaysOnPanel' => false 
 		),
 		'search_panel_field12' => array(
 			'field' => 'is_calculated',
 			'type' => 'search_panel_field',
-			'required' => false 
+			'required' => false,
+			'alwaysOnPanel' => false 
 		),
 		'search_panel_field13' => array(
 			'field' => 'calculation_timestamp',
 			'type' => 'search_panel_field',
-			'required' => false 
+			'required' => false,
+			'alwaysOnPanel' => false 
 		),
 		'notifications' => array(
 			'type' => 'notifications' 
+		),
+		'filter_panel' => array(
+			'type' => 'filter_panel',
+			'items' => array( 
+				'filter_panel_field',
+				'filter_panel_field5',
+				'filter_panel_field6',
+				'filter_panel_field7',
+				'filter_panel_field1',
+				'filter_panel_field2',
+				'filter_panel_field3',
+				'filter_panel_field4' 
+			) 
+		),
+		'filter_panel_field' => array(
+			'field' => 'indicator_id',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field1' => array(
+			'field' => 'period_type',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field2' => array(
+			'field' => 'period_year',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field3' => array(
+			'field' => 'period_quarter',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field4' => array(
+			'field' => 'period_month',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field5' => array(
+			'field' => 'region_id',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field6' => array(
+			'field' => 'country_id',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field7' => array(
+			'field' => 'facility_id',
+			'type' => 'filter_panel_field' 
 		),
 		'simple_grid_field' => array(
 			'field' => 'actual_id',

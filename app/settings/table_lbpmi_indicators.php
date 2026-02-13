@@ -68,7 +68,7 @@ $runnerTableSettings['public.lbpmi_indicators'] = array(
 		'50',
 		'100',
 		'500',
-		'-1' 
+		'1' 
 	),
 	'pageSizeSelectorGroups' => array( 
 		'1',
@@ -77,8 +77,9 @@ $runnerTableSettings['public.lbpmi_indicators'] = array(
 		'10',
 		'50',
 		'100',
-		'-1' 
+		'1' 
 	),
+	'displayLoading' => true,
 	'warnLeavingEdit' => true,
 	'sql' => 'SELECT
 indicator_id,
@@ -338,6 +339,7 @@ FROM "public".lbpmi_indicators',
 					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
 					'lookupLinkField' => 'indicator_type',
 					'lookupDisplayField' => 'indicator_type',
+					'lookupOrderBy' => 'indtype_id',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
 					'timeConvention' => 1 
@@ -569,7 +571,6 @@ FROM "public".lbpmi_indicators',
 			'strField' => 'created_by',
 			'sourceSingle' => 'created_by',
 			'index' => 14,
-			'type' => 3,
 			'sqlExpression' => 'created_by',
 			'viewFormats' => array(
 				'view' => array(
@@ -578,7 +579,9 @@ FROM "public".lbpmi_indicators',
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'validateAs' => 'Number',
+					'format' => 'Readonly',
+					'defaultValue' => '$_SESSION["UserName"]',
+					'autoUpdateValue' => '$_SESSION["UserName"]',
 					'validateRegexMessage' => array(
 						'text' => '',
 						'type' => 0 
@@ -615,7 +618,7 @@ FROM "public".lbpmi_indicators',
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'format' => 'Date',
+					'format' => 'Readonly',
 					'defaultValue' => 'strftime("%Y-%m-%d %H:%M:%S")',
 					'validateRegexMessage' => array(
 						'text' => '',
@@ -649,7 +652,7 @@ FROM "public".lbpmi_indicators',
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'format' => 'Date',
+					'format' => 'Readonly',
 					'autoUpdateValue' => 'strftime("%Y-%m-%d %H:%M:%S")',
 					'validateRegexMessage' => array(
 						'text' => '',
@@ -1171,6 +1174,7 @@ updated_at',
 		'tailSql' => '' 
 	),
 	'hasEvents' => true,
+	'hasJsEvents' => true,
 	'originalTable' => 'public.lbpmi_indicators',
 	'originalPagesByType' => array(
 		'add' => array( 
@@ -1327,7 +1331,7 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'indicator_group_id' => 'Indicator Group',
 		'indicator_name' => 'Indicator Name',
 		'indicator_description' => 'Indicator Description',
-		'indicator_code' => 'Indicator Code',
+		'indicator_code' => 'Indicator Code (Auto Generated)',
 		'indicator_type' => 'Indicator Type',
 		'numerator_description' => 'Numerator Description',
 		'denominator_description' => 'Denominator Description',
