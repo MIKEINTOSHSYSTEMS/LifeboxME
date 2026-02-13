@@ -78,7 +78,31 @@ dataSourceCtrl.on("change", function () {
 
 
 
+// Indicators to determine calculated value and checkbox Validation
 
+var dataSourceCtrl = Runner.getControl(pageid, "is_calculated");
+var genderSexCtrl = Runner.getControl(pageid, "actual_value");
+
+// On page load: Check if the checkbox is checked
+if (dataSourceCtrl.getValue()) { 
+    // If checked, show the actual_value field
+    pageObj.hideField("actual_value");
+} else {
+    // If unchecked, hide the actual_value field
+    pageObj.showField("actual_value");
+}
+
+// Event listener when the checkbox value changes
+dataSourceCtrl.on('change', function() {
+    // Check if checkbox is checked (truthy value)
+    if (this.getValue()) {
+        // If checked, show the actual_value field
+        pageObj.hideField("actual_value");
+    } else {
+        // If unchecked, hide the actual_value field
+        pageObj.showField("actual_value");
+    }  
+});
 
 
 });
@@ -164,6 +188,32 @@ dataSourceCtrl.on("change", function () {
 
 
 
+
+// Indicators to determine calculated value and checkbox Validation
+
+var dataSourceCtrl = Runner.getControl(pageid, "is_calculated");
+var genderSexCtrl = Runner.getControl(pageid, "actual_value");
+
+// On page load: Check if the checkbox is checked
+if (dataSourceCtrl.getValue()) { 
+    // If checked, show the actual_value field
+    pageObj.hideField("actual_value");
+} else {
+    // If unchecked, hide the actual_value field
+    pageObj.showField("actual_value");
+}
+
+// Event listener when the checkbox value changes
+dataSourceCtrl.on('change', function() {
+    // Check if checkbox is checked (truthy value)
+    if (this.getValue()) {
+        // If checked, show the actual_value field
+        pageObj.hideField("actual_value");
+    } else {
+        // If unchecked, hide the actual_value field
+        pageObj.showField("actual_value");
+    }  
+});
 
 
 });
