@@ -8,6 +8,8 @@
 		'addToBottom' => false,
 		'delete' => true,
 		'updateSelected' => true,
+		'editInPopup' => true,
+		'viewInPopup' => true,
 		'clickSort' => true,
 		'sortDropdown' => false,
 		'showHideFields' => false,
@@ -2580,7 +2582,8 @@
 			'type' => 'edit_selected' 
 		),
 		'update_selected' => array(
-			'type' => 'update_selected' 
+			'type' => 'update_selected',
+			'popup' => true 
 		),
 		'text' => array(
 			'type' => 'text',
@@ -2738,10 +2741,12 @@
 			'type' => 'grid_checkbox_head' 
 		),
 		'grid_edit' => array(
-			'type' => 'grid_edit' 
+			'type' => 'grid_edit',
+			'popup' => true 
 		),
 		'grid_view' => array(
-			'type' => 'grid_view' 
+			'type' => 'grid_view',
+			'popup' => true 
 		),
 		'grid_alldetails_link' => array(
 			'type' => 'grid_alldetails_link' 

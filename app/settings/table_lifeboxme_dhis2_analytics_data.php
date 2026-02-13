@@ -43,7 +43,7 @@ $runnerTableSettings['public.lifeboxme_dhis2_analytics_data'] = array(
 		'50',
 		'100',
 		'500',
-		'-1' 
+		'1' 
 	),
 	'pageSizeSelectorGroups' => array( 
 		'1',
@@ -52,7 +52,7 @@ $runnerTableSettings['public.lifeboxme_dhis2_analytics_data'] = array(
 		'10',
 		'50',
 		'100',
-		'-1' 
+		'1' 
 	),
 	'displayLoading' => true,
 	'warnLeavingEdit' => true,
@@ -258,7 +258,9 @@ ORDER BY id, ou_level_id',
 				) 
 			),
 			'filterFormat' => array(
-				'format' => 'Values list' 
+				'format' => 'Values list',
+				'filterTotals' => 1,
+				'filterMultiselect' => 1 
 			),
 			'tableName' => 'public.lifeboxme_dhis2_analytics_data' 
 		),
@@ -354,6 +356,7 @@ ORDER BY id, ou_level_id',
 					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
 					'lookupLinkField' => 'dx_dimensiontype',
 					'lookupDisplayField' => 'dx_dimensiontype',
+					'lookupOrderBy' => 'dx_dimensiontype',
 					'lookupUnique' => true,
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
@@ -361,7 +364,9 @@ ORDER BY id, ou_level_id',
 				) 
 			),
 			'filterFormat' => array(
-				'format' => 'Values list' 
+				'format' => 'Values list',
+				'filterTotals' => 1,
+				'filterMultiselect' => 1 
 			),
 			'tableName' => 'public.lifeboxme_dhis2_analytics_data' 
 		),

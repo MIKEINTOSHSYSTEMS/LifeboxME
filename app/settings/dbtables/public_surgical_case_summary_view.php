@@ -20,7 +20,7 @@ $runnerDbTableInfo['public_surgical_case_summary_view'] = array(
 		array(
 			'name' => 'facility_name',
 			'typeName' => 'character varying',
-			'size' => 200,
+			'size' => 500,
 			'scale' => null,
 			'type' => 200,
 			'autoinc' => false,

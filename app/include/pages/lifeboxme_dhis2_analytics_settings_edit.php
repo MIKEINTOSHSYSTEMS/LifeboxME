@@ -100,6 +100,8 @@
 					'update_records',
 					'edit_back_list',
 					'edit_close',
+					'prev',
+					'next',
 					'hamburger' 
 				),
 				'supertop' => array( 
@@ -142,6 +144,8 @@
 				'update_records' => 'below-grid',
 				'edit_back_list' => 'below-grid',
 				'edit_close' => 'below-grid',
+				'prev' => 'below-grid',
+				'next' => 'below-grid',
 				'hamburger' => 'below-grid',
 				'expand_menu_button' => 'supertop',
 				'collapse_button' => 'supertop',
@@ -291,6 +295,12 @@
 			'update_records' => array( 
 				'update_records' 
 			),
+			'next' => array( 
+				'next' 
+			),
+			'prev' => array( 
+				'prev' 
+			),
 			'expand_button' => array( 
 				'expand_button' 
 			) 
@@ -376,7 +386,7 @@
 	'misc' => array(
 		'type' => 'edit',
 		'breadcrumb' => false,
-		'nextPrev' => false 
+		'nextPrev' => true 
 	),
 	'events' => array(
 		'maps' => array( 
@@ -453,6 +463,8 @@
 				'c2' => array(
 					'model' => 'c2',
 					'items' => array( 
+						'prev',
+						'next',
 						'hamburger' 
 					) 
 				) 
@@ -742,6 +754,12 @@
 		),
 		'update_records' => array(
 			'type' => 'update_records' 
+		),
+		'next' => array(
+			'type' => 'next' 
+		),
+		'prev' => array(
+			'type' => 'prev' 
 		),
 		'expand_button' => array(
 			'type' => 'expand_button' 

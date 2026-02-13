@@ -54,7 +54,27 @@
 			 
 		),
 		'updateOnEditFields' => array( 
-			 
+			'updated_at',
+			'created_at',
+			'region_id',
+			'country_id',
+			'facility_id',
+			'device_type',
+			'order_reference',
+			'monthly_surgical_volume',
+			'contact_name',
+			'contact_email',
+			'distribution_month',
+			'distribution_year',
+			'transaction_type',
+			'payment_method',
+			'donor',
+			'quantity',
+			'is_received',
+			'receiving_date',
+			'notes',
+			'started_using',
+			'date_started_using' 
 		),
 		'fieldItems' => array(
 			'updated_at' => array( 
@@ -1599,107 +1619,128 @@
 		'integrated_edit_field14' => array(
 			'field' => 'updated_at',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field13' => array(
 			'field' => 'created_at',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field' => array(
 			'field' => 'region_id',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field1' => array(
 			'field' => 'country_id',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field4' => array(
 			'field' => 'facility_id',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field2' => array(
 			'field' => 'device_type',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field3' => array(
 			'field' => 'order_reference',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field5' => array(
 			'field' => 'monthly_surgical_volume',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field6' => array(
 			'field' => 'contact_name',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field7' => array(
 			'field' => 'contact_email',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field8' => array(
 			'field' => 'distribution_month',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field9' => array(
 			'field' => 'distribution_year',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field15' => array(
 			'field' => 'transaction_type',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field10' => array(
 			'field' => 'payment_method',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field16' => array(
 			'field' => 'donor',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field11' => array(
 			'field' => 'quantity',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field17' => array(
 			'field' => 'is_received',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field18' => array(
 			'field' => 'receiving_date',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field12' => array(
 			'field' => 'notes',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field19' => array(
 			'field' => 'started_using',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field20' => array(
 			'field' => 'date_started_using',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => true 
 		),
 		'expand_button' => array(
 			'type' => 'expand_button' 

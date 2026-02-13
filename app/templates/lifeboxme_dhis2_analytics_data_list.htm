@@ -496,6 +496,19 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_setting_id}</span>
 						</div>
 		{END searchCtrlBlock_setting_id}
+																{BEGIN searchCtrlBlock_dx_shortname}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_dx_shortname}" {$filterRow_attrs_dx_shortname}>
+			<label>{$label public_lifeboxme_dhis2_analytics_data dx_shortname }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_dx_shortname}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_dx_shortname}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_dx_shortname}</span>
+						</div>
+		{END searchCtrlBlock_dx_shortname}
 																{BEGIN searchCtrlBlock_dx_dimensiontype}
 
 
@@ -535,19 +548,6 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_dx_name}</span>
 						</div>
 		{END searchCtrlBlock_dx_name}
-																{BEGIN searchCtrlBlock_dx_shortname}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_dx_shortname}" {$filterRow_attrs_dx_shortname}>
-			<label>{$label public_lifeboxme_dhis2_analytics_data dx_shortname }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_dx_shortname}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_dx_shortname}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_dx_shortname}</span>
-						</div>
-		{END searchCtrlBlock_dx_shortname}
 																{BEGIN searchCtrlBlock_dx_displayname}
 
 
@@ -1118,6 +1118,120 @@
 
 
 
+{BEGIN filter_control_dx_dimensiontype}
+
+	<div class="dropdown filter-field filter-dx_dimensiontype-container" {BEGIN filter_selected_dx_dimensiontype} data-selected {END filter_selected_dx_dimensiontype}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-dx_dimensiontype" type="checkbox" name="selectAll" {$selectAll_attrs_dx_dimensiontype} />
+						{BEGIN clearLink_dx_dimensiontype}
+			<a href="#" class="filter-clear filter-clear-dx_dimensiontype" title="{mlang_message FILTER_CLEAR}">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_dx_dimensiontype}
+			<span class="r-filter-field">{$label public_lifeboxme_dhis2_analytics_data dx_dimensiontype }				{BEGIN filter_selected_dx_dimensiontype}:{END filter_selected_dx_dimensiontype}
+			</span>
+			{BEGIN filter_selected_dx_dimensiontype}
+			<span class="r-filter-value">{$filtervalue_dx_dimensiontype}</span>
+			{END filter_selected_dx_dimensiontype}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_dx_dimensiontype}
+		<li class=" filter-values filter-values-dx_dimensiontype  {$visibilityClass_dx_dimensiontype}">
+			{$dx_dimensiontype_filter}
+						
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_dx_dimensiontype}
+
+			{BEGIN filter_button_showmore_dx_dimensiontype}
+		<li class=" filter-show-more {$collapsedClass_dx_dimensiontype} {$showMoreBtnClass_dx_dimensiontype}">
+			<a class="filter-show-more-link filterShowMore_dx_dimensiontype" href="#">{$show_n_more_dx_dimensiontype}</a>
+		</li>
+		{END filter_button_showmore_dx_dimensiontype}
+	
+
+
+	
+
+			{BEGIN filter_button_multiselect_dx_dimensiontype}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_dx_dimensiontype}">
+			<a href="#" class="filter-dx_dimensiontype-btn-multiselect filter-apply-dx_dimensiontype" {$filterbutton_attrs_dx_dimensiontype}>{mlang_message FILTER_MULTISELECT}</a>
+		</li>
+		{END filter_button_multiselect_dx_dimensiontype}
+			</ul>
+	</div>
+
+{END filter_control_dx_dimensiontype}
+
+
+
+
+
+
+{BEGIN filter_control_dx_name}
+
+	<div class="dropdown filter-field filter-dx_name-container" {BEGIN filter_selected_dx_name} data-selected {END filter_selected_dx_name}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+							<input class="filter-selectAll-dx_name" type="checkbox" name="selectAll" {$selectAll_attrs_dx_name} />
+						{BEGIN clearLink_dx_name}
+			<a href="#" class="filter-clear filter-clear-dx_name" title="{mlang_message FILTER_CLEAR}">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_dx_name}
+			<span class="r-filter-field">{$label public_lifeboxme_dhis2_analytics_data dx_name }				{BEGIN filter_selected_dx_name}:{END filter_selected_dx_name}
+			</span>
+			{BEGIN filter_selected_dx_name}
+			<span class="r-filter-value">{$filtervalue_dx_name}</span>
+			{END filter_selected_dx_name}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_dx_name}
+		<li class=" filter-values filter-values-dx_name  {$visibilityClass_dx_name}">
+			{$dx_name_filter}
+						
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_dx_name}
+
+			{BEGIN filter_button_showmore_dx_name}
+		<li class=" filter-show-more {$collapsedClass_dx_name} {$showMoreBtnClass_dx_name}">
+			<a class="filter-show-more-link filterShowMore_dx_name" href="#">{$show_n_more_dx_name}</a>
+		</li>
+		{END filter_button_showmore_dx_name}
+	
+
+
+	
+
+			{BEGIN filter_button_multiselect_dx_name}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_dx_name}">
+			<a href="#" class="filter-dx_name-btn-multiselect filter-apply-dx_name" {$filterbutton_attrs_dx_name}>{mlang_message FILTER_MULTISELECT}</a>
+		</li>
+		{END filter_button_multiselect_dx_name}
+			</ul>
+	</div>
+
+{END filter_control_dx_name}
+
+
+
+
+
+
 {BEGIN filter_control_ou_level_name}
 
 	<div class="dropdown filter-field filter-ou_level_name-container" {BEGIN filter_selected_ou_level_name} data-selected {END filter_selected_ou_level_name}>
@@ -1141,6 +1255,8 @@
 		<li class=" filter-values filter-values-ou_level_name  {$visibilityClass_ou_level_name}">
 			{$ou_level_name_filter}
 						
+					
+					
 					
 					
 					
@@ -1200,6 +1316,8 @@
 					
 					
 					
+					
+					
 					</li>
 		{END filterCtrlBlock_ou_parent_name}
 
@@ -1251,6 +1369,8 @@
 		<li class=" filter-values filter-values-ou_name  {$visibilityClass_ou_name}">
 			{$ou_name_filter}
 						
+					
+					
 					
 					
 					
@@ -1310,6 +1430,8 @@
 					
 					
 					
+					
+					
 					</li>
 		{END filterCtrlBlock_pe_relativeperiod}
 
@@ -1361,6 +1483,8 @@
 		<li class=" filter-values filter-values-period_display_name  {$visibilityClass_period_display_name}">
 			{$period_display_name_filter}
 						
+					
+					
 					
 					
 					

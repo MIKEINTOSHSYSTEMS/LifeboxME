@@ -25,6 +25,7 @@
 	'listSearch' => array(
 		'alwaysOnPanelFields' => array( 
 			'dx_name',
+			'dx_shortname',
 			'dx_dimensiontype',
 			'ou_name',
 			'ou_parent_name',
@@ -132,10 +133,10 @@
 		'searchPanelFields' => array( 
 			'id',
 			'setting_id',
+			'dx_shortname',
 			'dx_dimensiontype',
 			'dx_id',
 			'dx_name',
-			'dx_shortname',
 			'dx_displayname',
 			'ou_level_id',
 			'ou_level_name',
@@ -157,7 +158,9 @@
 			'ou_name',
 			'ou_level_name',
 			'period_display_name',
-			'pe_relativeperiod' 
+			'pe_relativeperiod',
+			'dx_name',
+			'dx_dimensiontype' 
 		),
 		'inlineAddFields' => array( 
 			 
@@ -734,7 +737,9 @@
 				'filter_panel_field5',
 				'filter_panel_field6',
 				'filter_panel_field',
-				'filter_panel_field1' 
+				'filter_panel_field1',
+				'filter_panel_field2',
+				'filter_panel_field3' 
 			),
 			'columns_control' => array( 
 				'columns_control' 
@@ -2981,10 +2986,10 @@
 			'items' => array( 
 				'search_panel_field7',
 				'search_panel_field14',
+				'search_panel_field5',
 				'search_panel_field1',
 				'search_panel_field3',
 				'search_panel_field4',
-				'search_panel_field5',
 				'search_panel_field2',
 				'search_panel_field19',
 				'search_panel_field20',
@@ -3055,7 +3060,7 @@
 			'field' => 'dx_shortname',
 			'type' => 'search_panel_field',
 			'required' => false,
-			'alwaysOnPanel' => false 
+			'alwaysOnPanel' => true 
 		),
 		'search_panel_field6' => array(
 			'field' => 'fetched_at',
@@ -3201,6 +3206,8 @@
 		'filter_panel' => array(
 			'type' => 'filter_panel',
 			'items' => array( 
+				'filter_panel_field3',
+				'filter_panel_field2',
 				'filter_panel_field6',
 				'filter_panel_field4',
 				'filter_panel_field5',
@@ -3259,6 +3266,14 @@
 		),
 		'sort_dropdown' => array(
 			'type' => 'sort_dropdown' 
+		),
+		'filter_panel_field2' => array(
+			'field' => 'dx_name',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field3' => array(
+			'field' => 'dx_dimensiontype',
+			'type' => 'filter_panel_field' 
 		),
 		'simple_grid_field' => array(
 			'field' => 'id',

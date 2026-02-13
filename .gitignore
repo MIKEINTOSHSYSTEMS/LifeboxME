@@ -21,6 +21,10 @@ data/postgres-data/
 data/postgres-init/
 data/pgadmin-init/
 api/gen
+api/data/
+api/data/vendor/
+api/data/uploads/
+api/data/exports/
 api/dhis2/orgunits/test/
 api/dhis2/orgunits/fetch.php
 api/dhis2/orgunits/test.php
