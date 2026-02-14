@@ -206,6 +206,12 @@ pdfDocument = {
 			{"hidden":"{$item_hide_integrated_edit_field12}","stack":[{"text":"{$jslabel public_lbpmi_indicator_targets is_annual_target }","bold":true},{"text":{$is_annual_target_pdfvalue}}],"margin":[0,0,0,15]},
 				
 				
+			{"hidden":"{$item_hide_integrated_edit_field14}","stack":[{"text":"{$jslabel public_lbpmi_indicator_targets baseline_period }","bold":true},{"text":{$baseline_period_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
+			{"hidden":"{$item_hide_integrated_edit_field15}","stack":[{"text":"{$jslabel public_lbpmi_indicator_targets baseline_value }","bold":true},{"text":{$baseline_value_pdfvalue}}],"margin":[0,0,0,15]},
+				
+				
 			{"hidden":"{$item_hide_integrated_edit_field13}","stack":[{"text":"{$jslabel public_lbpmi_indicator_targets created_by }","bold":true},{"text":{$created_by_pdfvalue}}],"margin":[0,0,0,15]},
 				
 		  ],
@@ -280,6 +286,12 @@ pdfDocument = {
 	
 			"text": [
 		
+				
+			{"text":"","hidden":"{$item_hide_prev}"},
+				
+				
+			{"text":"","hidden":"{$item_hide_next}"},
+				
 				
 			{"text":""},
 				

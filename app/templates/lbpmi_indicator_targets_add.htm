@@ -738,6 +738,54 @@
 
 {END is_annual_target_fieldblock}
 											
+{BEGIN baseline_period_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_baseline_period}  r-vertical-field" 
+	data-signal-error-for="baseline_period{$id}" {$required_attr_baseline_period}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field13" {$item_integrated_edit_field13} data-pageid="{$pageid}" data-field="baseline_period" data-fieldname="baseline_period" >
+
+	<label class="r-edit-label control-label {$baseline_period_label_class}" for="{$labelfor_baseline_period}">
+		{BEGIN baseline_period_label}
+			{$baseline_period_forward_control}
+			{$label public_lbpmi_indicator_targets baseline_period }			{END baseline_period_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$baseline_period_editcontrol}	</div>
+		<div class="r-edit-tooltip" data-helpfor="baseline_period" {$tooltipAttr public_lbpmi_indicator_targets baseline_period } >
+		<div class="text-muted" >
+		{$tooltip public_lbpmi_indicator_targets baseline_period }		</div>
+	</div>
+	</div>
+
+
+{END baseline_period_fieldblock}
+											
+{BEGIN baseline_value_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_baseline_value}  r-vertical-field" 
+	data-signal-error-for="baseline_value{$id}" {$required_attr_baseline_value}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field14" {$item_integrated_edit_field14} data-pageid="{$pageid}" data-field="baseline_value" data-fieldname="baseline_value" >
+
+	<label class="r-edit-label control-label {$baseline_value_label_class}" for="{$labelfor_baseline_value}">
+		{BEGIN baseline_value_label}
+			{$baseline_value_forward_control}
+			{$label public_lbpmi_indicator_targets baseline_value }			{END baseline_value_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$baseline_value_editcontrol}	</div>
+		<div class="r-edit-tooltip" data-helpfor="baseline_value" {$tooltipAttr public_lbpmi_indicator_targets baseline_value } >
+		<div class="text-muted" >
+		{$tooltip public_lbpmi_indicator_targets baseline_value }		</div>
+	</div>
+	</div>
+
+
+{END baseline_value_fieldblock}
+											
 {BEGIN created_by_fieldblock}
 
 

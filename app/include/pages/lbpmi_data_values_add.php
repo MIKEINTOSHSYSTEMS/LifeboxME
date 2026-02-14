@@ -33,7 +33,10 @@
 			'facility_id',
 			'stored_by',
 			'created',
-			'last_updated' 
+			'last_updated',
+			'data_source',
+			'source_detail',
+			'value_type' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -86,6 +89,15 @@
 			),
 			'last_updated' => array( 
 				'integrated_edit_field13' 
+			),
+			'data_source' => array( 
+				'integrated_edit_field15' 
+			),
+			'source_detail' => array( 
+				'integrated_edit_field16' 
+			),
+			'value_type' => array( 
+				'integrated_edit_field17' 
 			) 
 		) 
 	),
@@ -124,7 +136,7 @@
 				),
 				'grid' => array( 
 					'integrated_edit_field',
-					'integrated_edit_field10',
+					'integrated_edit_field15',
 					'integrated_edit_field2',
 					'integrated_edit_field6',
 					'integrated_edit_field3',
@@ -132,9 +144,12 @@
 					'integrated_edit_field5',
 					'integrated_edit_field14',
 					'integrated_edit_field1',
+					'integrated_edit_field16',
 					'integrated_edit_field7',
 					'integrated_edit_field8',
 					'integrated_edit_field9',
+					'integrated_edit_field10',
+					'integrated_edit_field17',
 					'integrated_edit_field11',
 					'integrated_edit_field12',
 					'integrated_edit_field13' 
@@ -161,7 +176,7 @@
 				'menu' => 'left',
 				'add_header' => 'top',
 				'integrated_edit_field' => 'grid',
-				'integrated_edit_field10' => 'grid',
+				'integrated_edit_field15' => 'grid',
 				'integrated_edit_field2' => 'grid',
 				'integrated_edit_field6' => 'grid',
 				'integrated_edit_field3' => 'grid',
@@ -169,9 +184,12 @@
 				'integrated_edit_field5' => 'grid',
 				'integrated_edit_field14' => 'grid',
 				'integrated_edit_field1' => 'grid',
+				'integrated_edit_field16' => 'grid',
 				'integrated_edit_field7' => 'grid',
 				'integrated_edit_field8' => 'grid',
 				'integrated_edit_field9' => 'grid',
+				'integrated_edit_field10' => 'grid',
+				'integrated_edit_field17' => 'grid',
 				'integrated_edit_field11' => 'grid',
 				'integrated_edit_field12' => 'grid',
 				'integrated_edit_field13' => 'grid' 
@@ -181,7 +199,7 @@
 					'location' => 'grid',
 					'cellId' => 'c' 
 				),
-				'integrated_edit_field10' => array(
+				'integrated_edit_field15' => array(
 					'location' => 'grid',
 					'cellId' => 'c6' 
 				),
@@ -213,6 +231,10 @@
 					'location' => 'grid',
 					'cellId' => 'c10' 
 				),
+				'integrated_edit_field16' => array(
+					'location' => 'grid',
+					'cellId' => 'c13' 
+				),
 				'integrated_edit_field7' => array(
 					'location' => 'grid',
 					'cellId' => 'c15' 
@@ -224,6 +246,14 @@
 				'integrated_edit_field9' => array(
 					'location' => 'grid',
 					'cellId' => 'c17' 
+				),
+				'integrated_edit_field10' => array(
+					'location' => 'grid',
+					'cellId' => 'c18' 
+				),
+				'integrated_edit_field17' => array(
+					'location' => 'grid',
+					'cellId' => 'c19' 
 				),
 				'integrated_edit_field11' => array(
 					'location' => 'grid',
@@ -307,7 +337,10 @@
 				'integrated_edit_field9',
 				'integrated_edit_field11',
 				'integrated_edit_field12',
-				'integrated_edit_field13' 
+				'integrated_edit_field13',
+				'integrated_edit_field15',
+				'integrated_edit_field16',
+				'integrated_edit_field17' 
 			),
 			'notifications' => array( 
 				'notifications' 
@@ -525,7 +558,7 @@
 							 
 						),
 						'items' => array( 
-							'integrated_edit_field10' 
+							'integrated_edit_field15' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
@@ -541,9 +574,9 @@
 							 
 						),
 						'items' => array( 
-							 
+							'integrated_edit_field16' 
 						),
-						'fixedAtServer' => false,
+						'fixedAtServer' => true,
 						'fixedAtClient' => false 
 					),
 					'c8' => array(
@@ -621,9 +654,9 @@
 							 
 						),
 						'items' => array( 
-							 
+							'integrated_edit_field10' 
 						),
-						'fixedAtServer' => false,
+						'fixedAtServer' => true,
 						'fixedAtClient' => false 
 					),
 					'c19' => array(
@@ -637,9 +670,9 @@
 							 
 						),
 						'items' => array( 
-							 
+							'integrated_edit_field17' 
 						),
-						'fixedAtServer' => false,
+						'fixedAtServer' => true,
 						'fixedAtClient' => false 
 					),
 					'c20' => array(
@@ -1075,7 +1108,7 @@
 				'c6' => array(
 					'model' => 'c3',
 					'items' => array( 
-						'integrated_edit_field10' 
+						'integrated_edit_field15' 
 					) 
 				),
 				'c1' => array(
@@ -1132,7 +1165,7 @@
 				'c13' => array(
 					'model' => 'c3',
 					'items' => array( 
-						 
+						'integrated_edit_field16' 
 					) 
 				),
 				'c14' => array(
@@ -1162,13 +1195,13 @@
 				'c18' => array(
 					'model' => 'c3',
 					'items' => array( 
-						 
+						'integrated_edit_field10' 
 					) 
 				),
 				'c19' => array(
 					'model' => 'c3',
 					'items' => array( 
-						 
+						'integrated_edit_field17' 
 					) 
 				),
 				'c20' => array(
@@ -1354,6 +1387,21 @@
 		),
 		'notifications' => array(
 			'type' => 'notifications' 
+		),
+		'integrated_edit_field15' => array(
+			'field' => 'data_source',
+			'type' => 'integrated_edit_field',
+			'orientation' => 0 
+		),
+		'integrated_edit_field16' => array(
+			'field' => 'source_detail',
+			'type' => 'integrated_edit_field',
+			'orientation' => 0 
+		),
+		'integrated_edit_field17' => array(
+			'field' => 'value_type',
+			'type' => 'integrated_edit_field',
+			'orientation' => 0 
 		),
 		'expand_button' => array(
 			'type' => 'expand_button' 

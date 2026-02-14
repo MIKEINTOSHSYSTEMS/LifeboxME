@@ -22,7 +22,9 @@
 			'facility_id',
 			'target_value',
 			'is_annual_target',
-			'created_by' 
+			'created_by',
+			'baseline_period',
+			'baseline_value' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -72,6 +74,12 @@
 			),
 			'created_by' => array( 
 				'integrated_edit_field12' 
+			),
+			'baseline_period' => array( 
+				'integrated_edit_field13' 
+			),
+			'baseline_value' => array( 
+				'integrated_edit_field14' 
 			) 
 		) 
 	),
@@ -91,6 +99,8 @@
 					'edit_save',
 					'edit_back_list',
 					'edit_close',
+					'prev',
+					'next',
 					'hamburger' 
 				),
 				'supertop' => array( 
@@ -121,6 +131,8 @@
 					'integrated_edit_field9',
 					'integrated_edit_field10',
 					'integrated_edit_field11',
+					'integrated_edit_field13',
+					'integrated_edit_field14',
 					'integrated_edit_field12' 
 				) 
 			),
@@ -134,6 +146,8 @@
 				'edit_save' => 'below-grid',
 				'edit_back_list' => 'below-grid',
 				'edit_close' => 'below-grid',
+				'prev' => 'below-grid',
+				'next' => 'below-grid',
 				'hamburger' => 'below-grid',
 				'expand_menu_button' => 'supertop',
 				'collapse_button' => 'supertop',
@@ -156,6 +170,8 @@
 				'integrated_edit_field9' => 'grid',
 				'integrated_edit_field10' => 'grid',
 				'integrated_edit_field11' => 'grid',
+				'integrated_edit_field13' => 'grid',
+				'integrated_edit_field14' => 'grid',
 				'integrated_edit_field12' => 'grid' 
 			),
 			'itemLocations' => array(
@@ -204,6 +220,14 @@
 					'cellId' => 'c3' 
 				),
 				'integrated_edit_field11' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_edit_field13' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_edit_field14' => array(
 					'location' => 'grid',
 					'cellId' => 'c3' 
 				),
@@ -285,10 +309,18 @@
 				'integrated_edit_field9',
 				'integrated_edit_field10',
 				'integrated_edit_field11',
-				'integrated_edit_field12' 
+				'integrated_edit_field12',
+				'integrated_edit_field13',
+				'integrated_edit_field14' 
 			),
 			'notifications' => array( 
 				'notifications' 
+			),
+			'next' => array( 
+				'next' 
+			),
+			'prev' => array( 
+				'prev' 
 			),
 			'expand_button' => array( 
 				'expand_button' 
@@ -320,6 +352,8 @@
 							'integrated_edit_field9',
 							'integrated_edit_field10',
 							'integrated_edit_field11',
+							'integrated_edit_field13',
+							'integrated_edit_field14',
 							'integrated_edit_field12' 
 						),
 						'fixedAtServer' => true,
@@ -373,7 +407,7 @@
 	'misc' => array(
 		'type' => 'edit',
 		'breadcrumb' => false,
-		'nextPrev' => false 
+		'nextPrev' => true 
 	),
 	'events' => array(
 		'maps' => array( 
@@ -449,6 +483,8 @@
 				'c2' => array(
 					'model' => 'c2',
 					'items' => array( 
+						'prev',
+						'next',
 						'hamburger' 
 					) 
 				) 
@@ -588,6 +624,8 @@
 						'integrated_edit_field9',
 						'integrated_edit_field10',
 						'integrated_edit_field11',
+						'integrated_edit_field13',
+						'integrated_edit_field14',
 						'integrated_edit_field12' 
 					) 
 				) 
@@ -746,6 +784,24 @@
 		),
 		'notifications' => array(
 			'type' => 'notifications' 
+		),
+		'integrated_edit_field13' => array(
+			'field' => 'baseline_period',
+			'type' => 'integrated_edit_field',
+			'orientation' => 0,
+			'updateOnEdit' => false 
+		),
+		'integrated_edit_field14' => array(
+			'field' => 'baseline_value',
+			'type' => 'integrated_edit_field',
+			'orientation' => 0,
+			'updateOnEdit' => false 
+		),
+		'next' => array(
+			'type' => 'next' 
+		),
+		'prev' => array(
+			'type' => 'prev' 
 		),
 		'expand_button' => array(
 			'type' => 'expand_button' 

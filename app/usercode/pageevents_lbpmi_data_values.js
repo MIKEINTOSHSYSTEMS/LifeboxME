@@ -80,7 +80,82 @@ dataSourceCtrl.on("change", function () {
 
 
 
+// Get controls For Add Page
+var dataElementCtrl = Runner.getControl(pageid, "data_element_id");
+var valueTypeCtrl = Runner.getControl(pageid, "value_type");
 
+// Make value_type read-only (already set in properties, but just in case)
+if (valueTypeCtrl) {
+    valueTypeCtrl.makeReadonly();
+    
+    // Style it as informational
+    if (valueTypeCtrl.input) {
+        valueTypeCtrl.input.style.backgroundColor = "#f8f9fa";
+        valueTypeCtrl.input.style.color = "#495057";
+        valueTypeCtrl.input.style.fontWeight = "bold";
+        valueTypeCtrl.input.style.borderLeft = "3px solid #0d6efd";
+    }
+}
+
+// When data element changes, automatically fetch and set value_type
+if (dataElementCtrl) {
+    dataElementCtrl.on("change", function() {
+        var selectedId = this.getValue();
+        
+        if (!selectedId) {
+            valueTypeCtrl.setValue("");
+            return;
+        }
+        
+        // Show loading
+        valueTypeCtrl.setValue("Loading...");
+        
+        // Use PHPRunner's built-in lookup (this is the only "API" call we need)
+        ajaxCall({
+            data: {
+                t: 'lbpmi_data_elements',
+                a: 'lookup',
+                field: 'value_type',
+                key: selectedId
+            },
+            success: function(response) {
+                if (response && response.value) {
+                    // Set the value_type field - this will be saved to database!
+                    valueTypeCtrl.setValue(response.value);
+                    
+                    // Add hint to value field
+                    var valueField = Runner.getControl(pageid, "value");
+                    if (valueField && valueField.input) {
+                        valueField.input.title = "Expected type: " + response.value;
+                        valueField.input.placeholder = getPlaceholder(response.value);
+                    }
+                }
+            },
+            error: function() {
+                valueTypeCtrl.setValue("ERROR");
+            }
+        });
+    });
+    
+    // Trigger on page load if data_element already selected
+    if (dataElementCtrl.getValue()) {
+        dataElementCtrl.trigger("change");
+    }
+}
+
+// Helper function for placeholders
+function getPlaceholder(valueType) {
+    var type = (valueType || '').toUpperCase();
+    switch(type) {
+        case 'NUMBER': return "Enter number (e.g., 123.45)";
+        case 'PERCENTAGE': return "Enter percentage (e.g., 25.5)";
+        case 'INTEGER': return "Enter whole number";
+        case 'TEXT': return "Enter text";
+        case 'BOOLEAN': return "Enter 0/1 or true/false";
+        case 'DATE': return "Enter date (YYYY-MM-DD)";
+        default: return "Enter value";
+    }
+}
 });
 
 
@@ -165,7 +240,82 @@ dataSourceCtrl.on("change", function () {
 
 
 
+// Get controls For Edit Page
+var dataElementCtrl = Runner.getControl(pageid, "data_element_id");
+var valueTypeCtrl = Runner.getControl(pageid, "value_type");
 
+// Make value_type read-only (already set in properties, but just in case)
+if (valueTypeCtrl) {
+    valueTypeCtrl.makeReadonly();
+    
+    // Style it as informational
+    if (valueTypeCtrl.input) {
+        valueTypeCtrl.input.style.backgroundColor = "#f8f9fa";
+        valueTypeCtrl.input.style.color = "#495057";
+        valueTypeCtrl.input.style.fontWeight = "bold";
+        valueTypeCtrl.input.style.borderLeft = "3px solid #0d6efd";
+    }
+}
+
+// When data element changes, automatically fetch and set value_type
+if (dataElementCtrl) {
+    dataElementCtrl.on("change", function() {
+        var selectedId = this.getValue();
+        
+        if (!selectedId) {
+            valueTypeCtrl.setValue("");
+            return;
+        }
+        
+        // Show loading
+        valueTypeCtrl.setValue("Loading...");
+        
+        // Use PHPRunner's built-in lookup (this is the only "API" call we need)
+        ajaxCall({
+            data: {
+                t: 'lbpmi_data_elements',
+                a: 'lookup',
+                field: 'value_type',
+                key: selectedId
+            },
+            success: function(response) {
+                if (response && response.value) {
+                    // Set the value_type field - this will be saved to database!
+                    valueTypeCtrl.setValue(response.value);
+                    
+                    // Add hint to value field
+                    var valueField = Runner.getControl(pageid, "value");
+                    if (valueField && valueField.input) {
+                        valueField.input.title = "Expected type: " + response.value;
+                        valueField.input.placeholder = getPlaceholder(response.value);
+                    }
+                }
+            },
+            error: function() {
+                valueTypeCtrl.setValue("ERROR");
+            }
+        });
+    });
+    
+    // Trigger on page load if data_element already selected
+    if (dataElementCtrl.getValue()) {
+        dataElementCtrl.trigger("change");
+    }
+}
+
+// Helper function for placeholders
+function getPlaceholder(valueType) {
+    var type = (valueType || '').toUpperCase();
+    switch(type) {
+        case 'NUMBER': return "Enter number (e.g., 123.45)";
+        case 'PERCENTAGE': return "Enter percentage (e.g., 25.5)";
+        case 'INTEGER': return "Enter whole number";
+        case 'TEXT': return "Enter text";
+        case 'BOOLEAN': return "Enter 0/1 or true/false";
+        case 'DATE': return "Enter date (YYYY-MM-DD)";
+        default: return "Enter value";
+    }
+}
 });
 
 

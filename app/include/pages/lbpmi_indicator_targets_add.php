@@ -22,7 +22,9 @@
 			'facility_id',
 			'target_value',
 			'is_annual_target',
-			'created_by' 
+			'created_by',
+			'baseline_period',
+			'baseline_value' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -69,6 +71,12 @@
 			),
 			'created_by' => array( 
 				'integrated_edit_field12' 
+			),
+			'baseline_period' => array( 
+				'integrated_edit_field13' 
+			),
+			'baseline_value' => array( 
+				'integrated_edit_field14' 
 			) 
 		) 
 	),
@@ -118,6 +126,8 @@
 					'integrated_edit_field9',
 					'integrated_edit_field10',
 					'integrated_edit_field11',
+					'integrated_edit_field13',
+					'integrated_edit_field14',
 					'integrated_edit_field12' 
 				) 
 			),
@@ -153,6 +163,8 @@
 				'integrated_edit_field9' => 'grid',
 				'integrated_edit_field10' => 'grid',
 				'integrated_edit_field11' => 'grid',
+				'integrated_edit_field13' => 'grid',
+				'integrated_edit_field14' => 'grid',
 				'integrated_edit_field12' => 'grid' 
 			),
 			'itemLocations' => array(
@@ -201,6 +213,14 @@
 					'cellId' => 'c3' 
 				),
 				'integrated_edit_field11' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_edit_field13' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_edit_field14' => array(
 					'location' => 'grid',
 					'cellId' => 'c3' 
 				),
@@ -276,7 +296,9 @@
 				'integrated_edit_field9',
 				'integrated_edit_field10',
 				'integrated_edit_field11',
-				'integrated_edit_field12' 
+				'integrated_edit_field12',
+				'integrated_edit_field13',
+				'integrated_edit_field14' 
 			),
 			'notifications' => array( 
 				'notifications' 
@@ -311,6 +333,8 @@
 							'integrated_edit_field9',
 							'integrated_edit_field10',
 							'integrated_edit_field11',
+							'integrated_edit_field13',
+							'integrated_edit_field14',
 							'integrated_edit_field12' 
 						),
 						'fixedAtServer' => true,
@@ -567,6 +591,8 @@
 						'integrated_edit_field9',
 						'integrated_edit_field10',
 						'integrated_edit_field11',
+						'integrated_edit_field13',
+						'integrated_edit_field14',
 						'integrated_edit_field12' 
 					) 
 				) 
@@ -702,6 +728,16 @@
 		),
 		'notifications' => array(
 			'type' => 'notifications' 
+		),
+		'integrated_edit_field13' => array(
+			'field' => 'baseline_period',
+			'type' => 'integrated_edit_field',
+			'orientation' => 0 
+		),
+		'integrated_edit_field14' => array(
+			'field' => 'baseline_value',
+			'type' => 'integrated_edit_field',
+			'orientation' => 0 
 		),
 		'expand_button' => array(
 			'type' => 'expand_button' 

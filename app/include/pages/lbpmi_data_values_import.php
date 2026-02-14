@@ -13,7 +13,10 @@
 			'region_id',
 			'country_id',
 			'facility_id',
+			'data_source',
+			'source_detail',
 			'value',
+			'value_type',
 			'stored_by',
 			'created',
 			'last_updated',
@@ -73,6 +76,15 @@
 			),
 			'deleted' => array( 
 				'import_field15' 
+			),
+			'data_source' => array( 
+				'import_field16' 
+			),
+			'source_detail' => array( 
+				'import_field17' 
+			),
+			'value_type' => array( 
+				'import_field18' 
 			) 
 		) 
 	),
@@ -103,7 +115,10 @@
 					'import_field8',
 					'import_field9',
 					'import_field10',
+					'import_field16',
+					'import_field17',
 					'import_field11',
+					'import_field18',
 					'import_field12',
 					'import_field13',
 					'import_field14',
@@ -128,7 +143,10 @@
 				'import_field8' => 'grid',
 				'import_field9' => 'grid',
 				'import_field10' => 'grid',
+				'import_field16' => 'grid',
+				'import_field17' => 'grid',
 				'import_field11' => 'grid',
+				'import_field18' => 'grid',
 				'import_field12' => 'grid',
 				'import_field13' => 'grid',
 				'import_field14' => 'grid',
@@ -161,7 +179,10 @@
 				'import_field12',
 				'import_field13',
 				'import_field14',
-				'import_field15' 
+				'import_field15',
+				'import_field16',
+				'import_field17',
+				'import_field18' 
 			) 
 		),
 		'cellMaps' => array(
@@ -300,7 +321,10 @@
 						'import_field8',
 						'import_field9',
 						'import_field10',
+						'import_field16',
+						'import_field17',
 						'import_field11',
+						'import_field18',
 						'import_field12',
 						'import_field13',
 						'import_field14',
@@ -380,6 +404,18 @@
 		),
 		'import_field15' => array(
 			'field' => 'deleted',
+			'type' => 'import_field' 
+		),
+		'import_field16' => array(
+			'field' => 'data_source',
+			'type' => 'import_field' 
+		),
+		'import_field17' => array(
+			'field' => 'source_detail',
+			'type' => 'import_field' 
+		),
+		'import_field18' => array(
+			'field' => 'value_type',
 			'type' => 'import_field' 
 		) 
 	),

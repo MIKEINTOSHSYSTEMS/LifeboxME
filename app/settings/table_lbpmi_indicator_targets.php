@@ -58,7 +58,7 @@ $runnerTableSettings['public.lbpmi_indicator_targets'] = array(
 		'50',
 		'100',
 		'500',
-		'-1' 
+		'1' 
 	),
 	'pageSizeSelectorGroups' => array( 
 		'1',
@@ -67,8 +67,9 @@ $runnerTableSettings['public.lbpmi_indicator_targets'] = array(
 		'10',
 		'50',
 		'100',
-		'-1' 
+		'1' 
 	),
+	'displayLoading' => true,
 	'warnLeavingEdit' => true,
 	'sql' => 'SELECT
 	target_id,
@@ -84,7 +85,9 @@ $runnerTableSettings['public.lbpmi_indicator_targets'] = array(
 	is_annual_target,
 	created_by,
 	created_at,
-	updated_at
+	updated_at,
+	baseline_period,
+	baseline_value
 FROM
 	"public".lbpmi_indicator_targets',
 	'keyFields' => array( 
@@ -528,7 +531,6 @@ FROM
 			'strField' => 'created_by',
 			'sourceSingle' => 'created_by',
 			'index' => 12,
-			'type' => 3,
 			'sqlExpression' => 'created_by',
 			'viewFormats' => array(
 				'view' => array(
@@ -537,6 +539,9 @@ FROM
 			),
 			'editFormats' => array(
 				'edit' => array(
+					'format' => 'Readonly',
+					'defaultValue' => '$_SESSION["UserName"]',
+					'autoUpdateValue' => '$_SESSION["UserName"]',
 					'validateAs' => 'Number',
 					'validateRegexMessage' => array(
 						'text' => '',
@@ -574,7 +579,7 @@ FROM
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'format' => 'Date',
+					'format' => 'Readonly',
 					'defaultValue' => 'strftime("%Y-%m-%d %H:%M:%S")',
 					'validateRegexMessage' => array(
 						'text' => '',
@@ -608,7 +613,7 @@ FROM
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'format' => 'Date',
+					'format' => 'Readonly',
 					'autoUpdateValue' => 'strftime("%Y-%m-%d %H:%M:%S")',
 					'validateRegexMessage' => array(
 						'text' => '',
@@ -623,6 +628,50 @@ FROM
 			),
 			'filterFormat' => array(
 				'format' => 'Values list' 
+			),
+			'tableName' => 'public.lbpmi_indicator_targets' 
+		),
+		'baseline_period' => array(
+			'name' => 'baseline_period',
+			'goodName' => 'baseline_period',
+			'strField' => 'baseline_period',
+			'index' => 15,
+			'sqlExpression' => 'baseline_period',
+			'viewFormats' => array(
+				'view' => array(
+					 
+				) 
+			),
+			'editFormats' => array(
+				'edit' => array(
+					'format' => 'Lookup wizard',
+					'defaultValue' => 'date("Y")',
+					'textInsertNull' => true,
+					'lookupType' => 2,
+					'lookupTable' => 'public.years',
+					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
+					'lookupLinkField' => 'year',
+					'lookupDisplayField' => 'year' 
+				) 
+			),
+			'tableName' => 'public.lbpmi_indicator_targets' 
+		),
+		'baseline_value' => array(
+			'name' => 'baseline_value',
+			'goodName' => 'baseline_value',
+			'strField' => 'baseline_value',
+			'index' => 16,
+			'sqlExpression' => 'baseline_value',
+			'viewFormats' => array(
+				'view' => array(
+					 
+				) 
+			),
+			'editFormats' => array(
+				'edit' => array(
+					'validateAs' => 'Number',
+					'textInsertNull' => true 
+				) 
 			),
 			'tableName' => 'public.lbpmi_indicator_targets' 
 		) 
@@ -653,7 +702,9 @@ FROM
 	is_annual_target,
 	created_by,
 	created_at,
-	updated_at
+	updated_at,
+	baseline_period,
+	baseline_value
 FROM
 	"public".lbpmi_indicator_targets',
 		'parsed' => true,
@@ -868,6 +919,36 @@ FROM
 				),
 				'encrypted' => false,
 				'columnName' => 'updated_at' 
+			),
+			array(
+				'sql' => 'baseline_period',
+				'parsed' => true,
+				'type' => 'FieldListItem',
+				'alias' => '',
+				'expression' => array(
+					'sql' => '',
+					'parsed' => true,
+					'type' => 'SQLField',
+					'table' => 'public.lbpmi_indicator_targets',
+					'name' => 'baseline_period' 
+				),
+				'encrypted' => false,
+				'columnName' => 'baseline_period' 
+			),
+			array(
+				'sql' => 'baseline_value',
+				'parsed' => true,
+				'type' => 'FieldListItem',
+				'alias' => '',
+				'expression' => array(
+					'sql' => '',
+					'parsed' => true,
+					'type' => 'SQLField',
+					'table' => 'public.lbpmi_indicator_targets',
+					'name' => 'baseline_value' 
+				),
+				'encrypted' => false,
+				'columnName' => 'baseline_value' 
 			) 
 		),
 		'fromList' => array( 
@@ -893,7 +974,9 @@ FROM
 						'is_annual_target',
 						'created_by',
 						'created_at',
-						'updated_at' 
+						'updated_at',
+						'baseline_period',
+						'baseline_value' 
 					),
 					'name' => 'public.lbpmi_indicator_targets' 
 				),
@@ -1045,6 +1128,20 @@ FROM
 				'groupByIndex' => -1,
 				'whereIndex' => -1,
 				'havingIndex' => -1 
+			),
+			array(
+				'fieldIndex' => 14,
+				'orderByIndex' => -1,
+				'groupByIndex' => -1,
+				'whereIndex' => -1,
+				'havingIndex' => -1 
+			),
+			array(
+				'fieldIndex' => 15,
+				'orderByIndex' => -1,
+				'groupByIndex' => -1,
+				'whereIndex' => -1,
+				'havingIndex' => -1 
 			) 
 		),
 		'headSql' => 'SELECT',
@@ -1061,7 +1158,9 @@ FROM
 	is_annual_target,
 	created_by,
 	created_at,
-	updated_at',
+	updated_at,
+	baseline_period,
+	baseline_value',
 		'fromListSql' => 'FROM
 	"public".lbpmi_indicator_targets',
 		'orderBySql' => '',
@@ -1130,7 +1229,9 @@ FROM
 			'is_annual_target',
 			'created_by',
 			'created_at',
-			'updated_at' 
+			'updated_at',
+			'baseline_period',
+			'baseline_value' 
 		),
 		'searchSuggest' => true,
 		'highlightSearchResults' => true,
@@ -1150,7 +1251,9 @@ FROM
 			'is_annual_target',
 			'created_by',
 			'created_at',
-			'updated_at' 
+			'updated_at',
+			'baseline_period',
+			'baseline_value' 
 		) 
 	),
 	'connId' => 'lifebox_mesystem_at_localhost',
@@ -1217,7 +1320,9 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'is_annual_target' => 'Is Annual Target',
 		'created_by' => 'Created By',
 		'created_at' => 'Created At',
-		'updated_at' => 'Updated At' 
+		'updated_at' => 'Updated At',
+		'baseline_period' => 'Baseline Period',
+		'baseline_value' => 'Baseline Value' 
 	),
 	'fieldTooltips' => array(
 		'target_id' => '',
@@ -1233,7 +1338,9 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'is_annual_target' => '',
 		'created_by' => '',
 		'created_at' => '',
-		'updated_at' => '' 
+		'updated_at' => '',
+		'baseline_period' => '',
+		'baseline_value' => '' 
 	),
 	'fieldPlaceholders' => array(
 		'target_id' => '',
@@ -1249,7 +1356,9 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'is_annual_target' => '',
 		'created_by' => '',
 		'created_at' => '',
-		'updated_at' => '' 
+		'updated_at' => '',
+		'baseline_period' => '',
+		'baseline_value' => '' 
 	),
 	'pageTitles' => array(
 		 

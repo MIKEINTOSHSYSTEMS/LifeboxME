@@ -6,6 +6,9 @@
 	'details' => array(
 		'public.lbpmi_data_values' => array(
 			'displayPreview' => 1 
+		),
+		'public.lbpmi_datasets' => array(
+			'displayPreview' => 1 
 		) 
 	),
 	'totals' => array(

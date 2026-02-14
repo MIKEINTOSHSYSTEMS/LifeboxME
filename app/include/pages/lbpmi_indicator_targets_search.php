@@ -15,7 +15,9 @@
 			'facility_id',
 			'target_value',
 			'is_annual_target',
-			'created_by' 
+			'created_by',
+			'baseline_period',
+			'baseline_value' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -65,6 +67,12 @@
 			),
 			'created_by' => array( 
 				'integrated_search_field13' 
+			),
+			'baseline_period' => array( 
+				'integrated_search_field14' 
+			),
+			'baseline_value' => array( 
+				'integrated_search_field15' 
 			) 
 		) 
 	),
@@ -103,7 +111,9 @@
 					'integrated_search_field10',
 					'integrated_search_field11',
 					'integrated_search_field12',
-					'integrated_search_field13' 
+					'integrated_search_field13',
+					'integrated_search_field14',
+					'integrated_search_field15' 
 				) 
 			),
 			'formXtTags' => array(
@@ -130,7 +140,9 @@
 				'integrated_search_field10' => 'grid',
 				'integrated_search_field11' => 'grid',
 				'integrated_search_field12' => 'grid',
-				'integrated_search_field13' => 'grid' 
+				'integrated_search_field13' => 'grid',
+				'integrated_search_field14' => 'grid',
+				'integrated_search_field15' => 'grid' 
 			),
 			'itemLocations' => array(
 				'integrated_search_field' => array(
@@ -188,6 +200,14 @@
 				'integrated_search_field13' => array(
 					'location' => 'grid',
 					'cellId' => 'c3' 
+				),
+				'integrated_search_field14' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field15' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
 				) 
 			),
 			'itemVisiblity' => array(
@@ -224,7 +244,9 @@
 				'integrated_search_field10',
 				'integrated_search_field11',
 				'integrated_search_field12',
-				'integrated_search_field13' 
+				'integrated_search_field13',
+				'integrated_search_field14',
+				'integrated_search_field15' 
 			) 
 		),
 		'cellMaps' => array(
@@ -254,7 +276,9 @@
 							'integrated_search_field10',
 							'integrated_search_field11',
 							'integrated_search_field12',
-							'integrated_search_field13' 
+							'integrated_search_field13',
+							'integrated_search_field14',
+							'integrated_search_field15' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
@@ -432,7 +456,9 @@
 						'integrated_search_field10',
 						'integrated_search_field11',
 						'integrated_search_field12',
-						'integrated_search_field13' 
+						'integrated_search_field13',
+						'integrated_search_field14',
+						'integrated_search_field15' 
 					) 
 				) 
 			),
@@ -541,6 +567,16 @@
 			'type' => 'integrated_search_field',
 			'orientation' => 0,
 			'required' => false 
+		),
+		'integrated_search_field14' => array(
+			'field' => 'baseline_period',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
+		),
+		'integrated_search_field15' => array(
+			'field' => 'baseline_value',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
 		) 
 	),
 	'dbProps' => array(

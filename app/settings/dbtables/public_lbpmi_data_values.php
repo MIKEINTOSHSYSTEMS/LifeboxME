@@ -179,6 +179,39 @@ $runnerDbTableInfo['public_lbpmi_data_values'] = array(
 			'defaultValueSQL' => 'false',
 			'defaultValue' => '0',
 			'nullable' => true 
+		),
+		array(
+			'name' => 'data_source',
+			'typeName' => 'text',
+			'size' => null,
+			'scale' => null,
+			'type' => 201,
+			'autoinc' => false,
+			'defaultValueSQL' => null,
+			'defaultValue' => '',
+			'nullable' => true 
+		),
+		array(
+			'name' => 'source_detail',
+			'typeName' => 'text',
+			'size' => null,
+			'scale' => null,
+			'type' => 201,
+			'autoinc' => false,
+			'defaultValueSQL' => null,
+			'defaultValue' => '',
+			'nullable' => true 
+		),
+		array(
+			'name' => 'value_type',
+			'typeName' => 'character varying',
+			'size' => 50,
+			'scale' => null,
+			'type' => 200,
+			'autoinc' => false,
+			'defaultValueSQL' => null,
+			'defaultValue' => '',
+			'nullable' => true 
 		) 
 	),
 	'primaryKeys' => array( 

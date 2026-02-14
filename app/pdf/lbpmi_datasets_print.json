@@ -229,6 +229,12 @@ pdfDocument = {
 				
 			{"text":"{mlang_message PRINT_PAGES}","hidden":"{$item_hide_print_pages}","isHtml":true,"page_indicator":true},
 				
+				
+			{"text":"","hidden":"{$item_hide_grid_inline_cancel}"},
+				
+				
+			{"text":"","hidden":"{$item_hide_inline_add}"},
+				
 		  ],
   "border": [ false, false, false, false ],
               "alignment": 'left',

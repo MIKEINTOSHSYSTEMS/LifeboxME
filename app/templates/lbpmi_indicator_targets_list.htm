@@ -259,6 +259,32 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_updated_at}</span>
 						</div>
 		{END searchCtrlBlock_updated_at}
+																{BEGIN searchCtrlBlock_baseline_value}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_baseline_value}" {$filterRow_attrs_baseline_value}>
+			<label>{$label public_lbpmi_indicator_targets baseline_value }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_baseline_value}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_baseline_value}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_baseline_value}</span>
+						</div>
+		{END searchCtrlBlock_baseline_value}
+																{BEGIN searchCtrlBlock_baseline_period}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_baseline_period}" {$filterRow_attrs_baseline_period}>
+			<label>{$label public_lbpmi_indicator_targets baseline_period }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_baseline_period}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_baseline_period}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_baseline_period}</span>
+						</div>
+		{END searchCtrlBlock_baseline_period}
 																{BEGIN searchCtrlBlock_created_by}
 
 
@@ -914,6 +940,12 @@
 			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="updated_at"]:before {
 		content: "{$label public_lbpmi_indicator_targets updated_at}";
 	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="baseline_period"]:before {
+		content: "{$label public_lbpmi_indicator_targets baseline_period}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="baseline_value"]:before {
+		content: "{$label public_lbpmi_indicator_targets baseline_value}";
+	}
 	}
 </style>
 <table data-location="grid" id="form_grid_{$pageid}" data-makeup="leftbar" {$form_grid} data-pageid="{$pageid}" class=" table table-condensed table-striped table-hover table-bordered r-horizontal-grid  r-flexgrid rnr-b-grid rnr-gridtable"
@@ -983,7 +1015,7 @@
 		{BEGIN target_id_fieldheadercolumn}
 	{BEGIN target_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field14" {$item_simple_grid_field14} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="target_id" data-fieldname="target_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field16" {$item_simple_grid_field16} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="target_id" data-fieldname="target_id" 
 
 			{$target_id_orderlinkattrs}
 	
@@ -1017,7 +1049,7 @@
 		{BEGIN indicator_id_fieldheadercolumn}
 	{BEGIN indicator_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field15" {$item_simple_grid_field15} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="indicator_id" data-fieldname="indicator_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field17" {$item_simple_grid_field17} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="indicator_id" data-fieldname="indicator_id" 
 
 			{$indicator_id_orderlinkattrs}
 	
@@ -1051,7 +1083,7 @@
 		{BEGIN created_at_fieldheadercolumn}
 	{BEGIN created_at_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field16" {$item_simple_grid_field16} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="created_at" data-fieldname="created_at" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field18" {$item_simple_grid_field18} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="created_at" data-fieldname="created_at" 
 
 			{$created_at_orderlinkattrs}
 	
@@ -1085,7 +1117,7 @@
 		{BEGIN updated_at_fieldheadercolumn}
 	{BEGIN updated_at_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field17" {$item_simple_grid_field17} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="updated_at" data-fieldname="updated_at" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field19" {$item_simple_grid_field19} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="updated_at" data-fieldname="updated_at" 
 
 			{$updated_at_orderlinkattrs}
 	
@@ -1119,7 +1151,7 @@
 		{BEGIN period_type_fieldheadercolumn}
 	{BEGIN period_type_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field18" {$item_simple_grid_field18} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="period_type" data-fieldname="period_type" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field20" {$item_simple_grid_field20} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="period_type" data-fieldname="period_type" 
 
 			{$period_type_orderlinkattrs}
 	
@@ -1153,7 +1185,7 @@
 		{BEGIN period_year_fieldheadercolumn}
 	{BEGIN period_year_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field19" {$item_simple_grid_field19} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="period_year" data-fieldname="period_year" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field21" {$item_simple_grid_field21} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="period_year" data-fieldname="period_year" 
 
 			{$period_year_orderlinkattrs}
 	
@@ -1187,7 +1219,7 @@
 		{BEGIN period_quarter_fieldheadercolumn}
 	{BEGIN period_quarter_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field20" {$item_simple_grid_field20} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="period_quarter" data-fieldname="period_quarter" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field22" {$item_simple_grid_field22} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="period_quarter" data-fieldname="period_quarter" 
 
 			{$period_quarter_orderlinkattrs}
 	
@@ -1221,7 +1253,7 @@
 		{BEGIN period_month_fieldheadercolumn}
 	{BEGIN period_month_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field21" {$item_simple_grid_field21} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="period_month" data-fieldname="period_month" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field23" {$item_simple_grid_field23} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="period_month" data-fieldname="period_month" 
 
 			{$period_month_orderlinkattrs}
 	
@@ -1255,7 +1287,7 @@
 		{BEGIN region_id_fieldheadercolumn}
 	{BEGIN region_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field22" {$item_simple_grid_field22} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="region_id" data-fieldname="region_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field24" {$item_simple_grid_field24} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="region_id" data-fieldname="region_id" 
 
 			{$region_id_orderlinkattrs}
 	
@@ -1289,7 +1321,7 @@
 		{BEGIN country_id_fieldheadercolumn}
 	{BEGIN country_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field23" {$item_simple_grid_field23} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="country_id" data-fieldname="country_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field25" {$item_simple_grid_field25} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="country_id" data-fieldname="country_id" 
 
 			{$country_id_orderlinkattrs}
 	
@@ -1323,7 +1355,7 @@
 		{BEGIN facility_id_fieldheadercolumn}
 	{BEGIN facility_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field24" {$item_simple_grid_field24} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="facility_id" data-fieldname="facility_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field26" {$item_simple_grid_field26} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="facility_id" data-fieldname="facility_id" 
 
 			{$facility_id_orderlinkattrs}
 	
@@ -1357,7 +1389,7 @@
 		{BEGIN target_value_fieldheadercolumn}
 	{BEGIN target_value_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field25" {$item_simple_grid_field25} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="target_value" data-fieldname="target_value" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field27" {$item_simple_grid_field27} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="target_value" data-fieldname="target_value" 
 
 			{$target_value_orderlinkattrs}
 	
@@ -1391,7 +1423,7 @@
 		{BEGIN is_annual_target_fieldheadercolumn}
 	{BEGIN is_annual_target_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field26" {$item_simple_grid_field26} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="is_annual_target" data-fieldname="is_annual_target" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field28" {$item_simple_grid_field28} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="is_annual_target" data-fieldname="is_annual_target" 
 
 			{$is_annual_target_orderlinkattrs}
 	
@@ -1414,18 +1446,86 @@
 	{$cell_grid_headcell_field13}
 	{$recordattrs}
 	class="
+		 r-ori-vert		 {$baseline_period_class}	"
+
+			data-field="baseline_period"
+	
+	data-cellId="grid_headcell_field13" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN baseline_period_fieldheadercolumn}
+	{BEGIN baseline_period_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field29" {$item_simple_grid_field29} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="baseline_period" data-fieldname="baseline_period" 
+
+			{$baseline_period_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_lbpmi_indicator_targets baseline_period }</span>
+					{$arrow_icon_baseline_period}
+			</span>
+	</span>
+	{END baseline_period_fieldheader}
+{END baseline_period_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field13}
+									{BEGIN cellblock_grid_headcell_field14}
+	<th
+	
+	{$cell_grid_headcell_field14}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$baseline_value_class}	"
+
+			data-field="baseline_value"
+	
+	data-cellId="grid_headcell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN baseline_value_fieldheadercolumn}
+	{BEGIN baseline_value_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field30" {$item_simple_grid_field30} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="baseline_value" data-fieldname="baseline_value" 
+
+			{$baseline_value_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_lbpmi_indicator_targets baseline_value }</span>
+					{$arrow_icon_baseline_value}
+			</span>
+	</span>
+	{END baseline_value_fieldheader}
+{END baseline_value_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field14}
+									{BEGIN cellblock_grid_headcell_field15}
+	<th
+	
+	{$cell_grid_headcell_field15}
+	{$recordattrs}
+	class="
 		 r-ori-vert		 {$created_by_class}	"
 
 			data-field="created_by"
 	
-	data-cellId="grid_headcell_field13" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_headcell_field15" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
 		{BEGIN created_by_fieldheadercolumn}
 	{BEGIN created_by_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field27" {$item_simple_grid_field27} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="created_by" data-fieldname="created_by" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field31" {$item_simple_grid_field31} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="created_by" data-fieldname="created_by" 
 
 			{$created_by_orderlinkattrs}
 	
@@ -1441,7 +1541,7 @@
 
 	
 	</th>
-	{END cellblock_grid_headcell_field13}
+	{END cellblock_grid_headcell_field15}
 							</tr>
 															
 					{END grid_header}
@@ -1803,11 +1903,53 @@
 	{$cell_grid_cell_field13}
 	{$recordattrs}
 	class="
+		 r-ori-vert		 {$baseline_period_class}	"
+
+			data-field="baseline_period"
+	
+	data-cellId="grid_cell_field13" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN baseline_period_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field14" {$item_simple_grid_field14} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="baseline_period" data-fieldname="baseline_period" data-default-width >
+{$baseline_period_value}
+</span>
+{END baseline_period_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field13}
+									{BEGIN cellblock_grid_cell_field14}
+	<td
+	
+	{$cell_grid_cell_field14}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$baseline_value_class}	"
+
+			data-field="baseline_value"
+	
+	data-cellId="grid_cell_field14" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN baseline_value_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field15" {$item_simple_grid_field15} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="baseline_value" data-fieldname="baseline_value" data-default-width >
+{$baseline_value_value}
+</span>
+{END baseline_value_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field14}
+									{BEGIN cellblock_grid_cell_field15}
+	<td
+	
+	{$cell_grid_cell_field15}
+	{$recordattrs}
+	class="
 		 r-ori-vert		 {$created_by_class}	"
 
 			data-field="created_by"
 	
-	data-cellId="grid_cell_field13" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	data-cellId="grid_cell_field15" data-pageid="{$pageid}" data-record-id="{$recId}"	
 	>
 
 	 
@@ -1817,7 +1959,7 @@
 </span>
 {END created_by_fieldcolumn}	
 	</td>
-	{END cellblock_grid_cell_field13}
+	{END cellblock_grid_cell_field15}
 							</tr>
 										
 											{END grid_row}
@@ -2060,7 +2202,7 @@
 	{$cell_grid_footcell_field13}
 	{$recordattrs}
 	class="
-		 r-ori-vert		 {$created_by_class}	"
+		 r-ori-vert		 {$baseline_period_class}	"
 
 	
 	data-cellId="grid_footcell_field13" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lbpmi_indicator_targets_list"	
@@ -2069,6 +2211,36 @@
 	
 	</td>
 	{END cellblock_grid_footcell_field13}
+									{BEGIN cellblock_grid_footcell_field14}
+	<td
+	
+	{$cell_grid_footcell_field14}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$baseline_value_class}	"
+
+	
+	data-cellId="grid_footcell_field14" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lbpmi_indicator_targets_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field14}
+									{BEGIN cellblock_grid_footcell_field15}
+	<td
+	
+	{$cell_grid_footcell_field15}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$created_by_class}	"
+
+	
+	data-cellId="grid_footcell_field15" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lbpmi_indicator_targets_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field15}
 							</tr>
 					
 					</tfoot>

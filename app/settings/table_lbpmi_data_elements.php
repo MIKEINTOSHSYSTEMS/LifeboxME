@@ -68,7 +68,7 @@ $runnerTableSettings['public.lbpmi_data_elements'] = array(
 		'50',
 		'100',
 		'500',
-		'-1' 
+		'1' 
 	),
 	'pageSizeSelectorGroups' => array( 
 		'1',
@@ -77,7 +77,7 @@ $runnerTableSettings['public.lbpmi_data_elements'] = array(
 		'10',
 		'50',
 		'100',
-		'-1' 
+		'1' 
 	),
 	'warnLeavingEdit' => true,
 	'sql' => 'SELECT
@@ -416,7 +416,6 @@ FROM
 			'strField' => 'created_by',
 			'sourceSingle' => 'created_by',
 			'index' => 10,
-			'type' => 3,
 			'sqlExpression' => 'created_by',
 			'viewFormats' => array(
 				'view' => array(
@@ -425,6 +424,9 @@ FROM
 			),
 			'editFormats' => array(
 				'edit' => array(
+					'format' => 'Readonly',
+					'defaultValue' => '$_SESSION["UserName"]',
+					'autoUpdateValue' => '$_SESSION["UserName"]',
 					'validateAs' => 'Number',
 					'validateRegexMessage' => array(
 						'text' => '',
@@ -462,7 +464,7 @@ FROM
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'format' => 'Date',
+					'format' => 'Readonly',
 					'defaultValue' => 'strftime("%Y-%m-%d %H:%M:%S")',
 					'validateRegexMessage' => array(
 						'text' => '',
@@ -496,7 +498,7 @@ FROM
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'format' => 'Date',
+					'format' => 'Readonly',
 					'autoUpdateValue' => 'strftime("%Y-%m-%d %H:%M:%S")',
 					'validateRegexMessage' => array(
 						'text' => '',
@@ -516,7 +518,8 @@ FROM
 		) 
 	),
 	'detailsTables' => array( 
-		'public.lbpmi_data_values' 
+		'public.lbpmi_data_values',
+		'public.lbpmi_datasets' 
 	),
 	'query' => array(
 		'sql' => 'SELECT

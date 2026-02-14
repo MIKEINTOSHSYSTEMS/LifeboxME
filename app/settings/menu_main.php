@@ -2914,6 +2914,68 @@ $runnerMenus['main'] = array(
 								) 
 							),
 							array(
+								'id' => '166',
+								'parent' => '142',
+								'children' => array( 
+									 
+								),
+								'data' => array(
+									'name' => array(
+										'text' => 'Data Sources',
+										'type' => 0 
+									),
+									'comments' => array(
+										'text' => '',
+										'type' => 0 
+									),
+									'style' => '',
+									'href' => '',
+									'params' => '',
+									'pageId' => '',
+									'itemType' => 2,
+									'linkType' => 0,
+									'openType' => 0,
+									'iconType' => 3,
+									'iconName' => 'fa-sourcetree',
+									'iconStyle' => 2,
+									'showIconType' => 1,
+									'linkToAnotherApp' => false,
+									'table' => 19319,
+									'pageType' => 'list' 
+								) 
+							),
+							array(
+								'id' => '167',
+								'parent' => '142',
+								'children' => array( 
+									 
+								),
+								'data' => array(
+									'name' => array(
+										'text' => 'Data Source Details',
+										'type' => 0 
+									),
+									'comments' => array(
+										'text' => '',
+										'type' => 0 
+									),
+									'style' => '',
+									'href' => '',
+									'params' => '',
+									'pageId' => '',
+									'itemType' => 2,
+									'linkType' => 0,
+									'openType' => 0,
+									'iconType' => 3,
+									'iconName' => 'fa-sort-amount-desc',
+									'iconStyle' => 3,
+									'showIconType' => 1,
+									'linkToAnotherApp' => false,
+									'table' => 19341,
+									'pageType' => 'list' 
+								) 
+							),
+							array(
 								'id' => '151',
 								'parent' => '142',
 								'children' => array( 

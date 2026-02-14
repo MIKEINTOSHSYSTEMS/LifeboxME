@@ -127,10 +127,10 @@ $runnerDbTableInfo['public_lbpmi_indicator_targets'] = array(
 		),
 		array(
 			'name' => 'created_by',
-			'typeName' => 'integer',
-			'size' => 32,
-			'scale' => 0,
-			'type' => 3,
+			'typeName' => 'character varying',
+			'size' => 250,
+			'scale' => null,
+			'type' => 200,
 			'autoinc' => false,
 			'defaultValueSQL' => null,
 			'defaultValue' => '',
@@ -156,6 +156,28 @@ $runnerDbTableInfo['public_lbpmi_indicator_targets'] = array(
 			'autoinc' => false,
 			'defaultValueSQL' => 'CURRENT_TIMESTAMP',
 			'defaultValue' => 'CURRENT_TIMESTAMP',
+			'nullable' => true 
+		),
+		array(
+			'name' => 'baseline_period',
+			'typeName' => 'character varying',
+			'size' => 255,
+			'scale' => null,
+			'type' => 200,
+			'autoinc' => false,
+			'defaultValueSQL' => null,
+			'defaultValue' => '',
+			'nullable' => true 
+		),
+		array(
+			'name' => 'baseline_value',
+			'typeName' => 'character varying',
+			'size' => 255,
+			'scale' => null,
+			'type' => 200,
+			'autoinc' => false,
+			'defaultValueSQL' => null,
+			'defaultValue' => '',
 			'nullable' => true 
 		) 
 	),

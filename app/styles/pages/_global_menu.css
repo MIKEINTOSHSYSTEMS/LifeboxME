@@ -322,6 +322,12 @@
 [data-page="_global_menu"][data-itemid="welcome_item102"] > .bs-welcome-header {
   background-color: #22b1ce;
 }
+[data-page="_global_menu"][data-itemid="welcome_item109"] > .bs-welcome-header {
+  background-color: #b22222;
+}
+[data-page="_global_menu"][data-itemid="welcome_item110"] > .bs-welcome-header {
+  background-color: #3cb371;
+}
 [data-page="_global_menu"][data-itemid="page_image_ash8f23hr"] {
   width: 400px;
 }

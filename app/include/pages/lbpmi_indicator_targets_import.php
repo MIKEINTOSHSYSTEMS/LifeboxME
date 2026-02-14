@@ -15,7 +15,9 @@
 			'facility_id',
 			'target_value',
 			'is_annual_target',
-			'created_by' 
+			'created_by',
+			'baseline_period',
+			'baseline_value' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -65,6 +67,12 @@
 			),
 			'created_by' => array( 
 				'import_field13' 
+			),
+			'baseline_period' => array( 
+				'import_field14' 
+			),
+			'baseline_value' => array( 
+				'import_field15' 
 			) 
 		) 
 	),
@@ -97,7 +105,9 @@
 					'import_field10',
 					'import_field11',
 					'import_field12',
-					'import_field13' 
+					'import_field13',
+					'import_field14',
+					'import_field15' 
 				) 
 			),
 			'formXtTags' => array(
@@ -120,7 +130,9 @@
 				'import_field10' => 'grid',
 				'import_field11' => 'grid',
 				'import_field12' => 'grid',
-				'import_field13' => 'grid' 
+				'import_field13' => 'grid',
+				'import_field14' => 'grid',
+				'import_field15' => 'grid' 
 			),
 			'itemLocations' => array(
 				 
@@ -147,7 +159,9 @@
 				'import_field10',
 				'import_field11',
 				'import_field12',
-				'import_field13' 
+				'import_field13',
+				'import_field14',
+				'import_field15' 
 			) 
 		),
 		'cellMaps' => array(
@@ -288,7 +302,9 @@
 						'import_field10',
 						'import_field11',
 						'import_field12',
-						'import_field13' 
+						'import_field13',
+						'import_field14',
+						'import_field15' 
 					) 
 				) 
 			),
@@ -356,6 +372,14 @@
 		),
 		'import_field13' => array(
 			'field' => 'created_by',
+			'type' => 'import_field' 
+		),
+		'import_field14' => array(
+			'field' => 'baseline_period',
+			'type' => 'import_field' 
+		),
+		'import_field15' => array(
+			'field' => 'baseline_value',
 			'type' => 'import_field' 
 		) 
 	),

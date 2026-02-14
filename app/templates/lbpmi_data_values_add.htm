@@ -916,35 +916,34 @@
 >
 	<div edit-form-cell class="clearfix">
 				
-{BEGIN value_fieldblock}
+{BEGIN data_source_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_value}  r-vertical-field" 
-	data-signal-error-for="value{$id}" {$required_attr_value}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="value" data-fieldname="value" >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_data_source}  r-vertical-field" 
+	data-signal-error-for="data_source{$id}" {$required_attr_data_source}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field15" {$item_integrated_edit_field15} data-pageid="{$pageid}" data-field="data_source" data-fieldname="data_source" >
 
-	<label class="r-edit-label control-label {$value_label_class}" for="{$labelfor_value}">
-		{BEGIN value_label}
-			{$value_forward_control}
-			{$label public_lbpmi_data_values value }			{END value_label}
+	<label class="r-edit-label control-label {$data_source_label_class}" for="{$labelfor_data_source}">
+		{BEGIN data_source_label}
+			{$data_source_forward_control}
+			{$label public_lbpmi_data_values data_source }			{END data_source_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
-		{$value_editcontrol}	</div>
-		<div class="r-edit-tooltip" data-helpfor="value" {$tooltipAttr public_lbpmi_data_values value } >
+		{$data_source_editcontrol}	</div>
+		<div class="r-edit-tooltip" data-helpfor="data_source" {$tooltipAttr public_lbpmi_data_values data_source } >
 		<div class="text-muted" >
-		{$tooltip public_lbpmi_data_values value }		</div>
+		{$tooltip public_lbpmi_data_values data_source }		</div>
 	</div>
 	</div>
 
 
-{END value_fieldblock}
+{END data_source_fieldblock}
 	
 								</td>
 			{END cellblock_grid_c6}
 			 
-		
-							
+																
 
 {BEGIN cellblock_grid_c13}
 <td
@@ -958,7 +957,32 @@
 		
 >
 	<div edit-form-cell class="clearfix">
-									</td>
+				
+{BEGIN source_detail_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_source_detail}  r-vertical-field" 
+	data-signal-error-for="source_detail{$id}" {$required_attr_source_detail}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field16" {$item_integrated_edit_field16} data-pageid="{$pageid}" data-field="source_detail" data-fieldname="source_detail" >
+
+	<label class="r-edit-label control-label {$source_detail_label_class}" for="{$labelfor_source_detail}">
+		{BEGIN source_detail_label}
+			{$source_detail_forward_control}
+			{$label public_lbpmi_data_values source_detail }			{END source_detail_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$source_detail_editcontrol}	</div>
+		<div class="r-edit-tooltip" data-helpfor="source_detail" {$tooltipAttr public_lbpmi_data_values source_detail } >
+		<div class="text-muted" >
+		{$tooltip public_lbpmi_data_values source_detail }		</div>
+	</div>
+	</div>
+
+
+{END source_detail_fieldblock}
+	
+								</td>
 			{END cellblock_grid_c13}
 			 
 		
@@ -1038,9 +1062,8 @@
 								</tr>
 	 
 	 
-		
-						<tr>
-						
+														<tr {$row_grid_6} >
+										
 
 {BEGIN cellblock_grid_c18}
 <td
@@ -1054,11 +1077,35 @@
 		
 >
 	<div edit-form-cell class="clearfix">
-									</td>
+				
+{BEGIN value_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_value}  r-vertical-field" 
+	data-signal-error-for="value{$id}" {$required_attr_value}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="value" data-fieldname="value" >
+
+	<label class="r-edit-label control-label {$value_label_class}" for="{$labelfor_value}">
+		{BEGIN value_label}
+			{$value_forward_control}
+			{$label public_lbpmi_data_values value }			{END value_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$value_editcontrol}	</div>
+		<div class="r-edit-tooltip" data-helpfor="value" {$tooltipAttr public_lbpmi_data_values value } >
+		<div class="text-muted" >
+		{$tooltip public_lbpmi_data_values value }		</div>
+	</div>
+	</div>
+
+
+{END value_fieldblock}
+	
+								</td>
 			{END cellblock_grid_c18}
 			 
-		
-							
+																
 
 {BEGIN cellblock_grid_c19}
 <td
@@ -1072,7 +1119,32 @@
 		
 >
 	<div edit-form-cell class="clearfix">
-									</td>
+				
+{BEGIN value_type_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_value_type}  r-vertical-field" 
+	data-signal-error-for="value_type{$id}" {$required_attr_value_type}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field17" {$item_integrated_edit_field17} data-pageid="{$pageid}" data-field="value_type" data-fieldname="value_type" >
+
+	<label class="r-edit-label control-label {$value_type_label_class}" for="{$labelfor_value_type}">
+		{BEGIN value_type_label}
+			{$value_type_forward_control}
+			{$label public_lbpmi_data_values value_type }			{END value_type_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$value_type_editcontrol}	</div>
+		<div class="r-edit-tooltip" data-helpfor="value_type" {$tooltipAttr public_lbpmi_data_values value_type } >
+		<div class="text-muted" >
+		{$tooltip public_lbpmi_data_values value_type }		</div>
+	</div>
+	</div>
+
+
+{END value_type_fieldblock}
+	
+								</td>
 			{END cellblock_grid_c19}
 			 
 																

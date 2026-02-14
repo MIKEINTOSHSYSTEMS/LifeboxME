@@ -87,7 +87,10 @@ $runnerTableSettings['public.lbpmi_data_values'] = array(
 	stored_by,
 	created,
 	last_updated,
-	deleted
+	deleted,
+	data_source,
+	source_detail,
+	value_type
 FROM
 	"public".lbpmi_data_values',
 	'keyFields' => array( 
@@ -548,31 +551,15 @@ FROM
 			'sqlExpression' => '"value"',
 			'viewFormats' => array(
 				'view' => array(
-					'format' => 'Number',
-					'numberFractionalDigits' => 0 
+					'format' => 'Number' 
 				) 
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'validateAs' => 'Number',
-					'validateRegexMessage' => array(
-						'text' => '',
-						'type' => 0 
-					),
-					'denyDuplicateMessage' => array(
-						'text' => '',
-						'type' => 0 
-					),
-					'textHTML5Input' => '0',
-					'fileMaxNumber' => 1,
-					'fileThumbnailField' => 'th',
-					'timeConvention' => 1 
+					'validateAs' => 'Number' 
 				) 
 			),
 			'defaultSearchOption' => 'Contains',
-			'filterFormat' => array(
-				'format' => 'Values list' 
-			),
 			'tableName' => 'public.lbpmi_data_values' 
 		),
 		'stored_by' => array(
@@ -716,6 +703,84 @@ FROM
 				'format' => 'Options list' 
 			),
 			'tableName' => 'public.lbpmi_data_values' 
+		),
+		'data_source' => array(
+			'name' => 'data_source',
+			'goodName' => 'data_source',
+			'strField' => 'data_source',
+			'index' => 17,
+			'type' => 201,
+			'sqlExpression' => 'data_source',
+			'viewFormats' => array(
+				'view' => array(
+					 
+				) 
+			),
+			'editFormats' => array(
+				'edit' => array(
+					'format' => 'Lookup wizard',
+					'lookupType' => 2,
+					'lookupTable' => 'public.lbpmi_data_sources',
+					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
+					'lookupLinkField' => 'source_id',
+					'lookupDisplayField' => 'data_source_name' 
+				) 
+			),
+			'tableName' => 'public.lbpmi_data_values' 
+		),
+		'source_detail' => array(
+			'name' => 'source_detail',
+			'goodName' => 'source_detail',
+			'strField' => 'source_detail',
+			'index' => 18,
+			'type' => 201,
+			'sqlExpression' => 'source_detail',
+			'viewFormats' => array(
+				'view' => array(
+					 
+				) 
+			),
+			'editFormats' => array(
+				'edit' => array(
+					'format' => 'Lookup wizard',
+					'lookupType' => 2,
+					'lookupTable' => 'public.lbpmi_source_details',
+					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
+					'lookupLinkField' => 'detail_id',
+					'lookupDisplayField' => 'source_detail',
+					'lookupDependent' => true,
+					'lookupDependentFields' => array( 
+						array(
+							'masterField' => 'data_source',
+							'lookupField' => 'source_id' 
+						) 
+					) 
+				) 
+			),
+			'tableName' => 'public.lbpmi_data_values' 
+		),
+		'value_type' => array(
+			'name' => 'value_type',
+			'goodName' => 'value_type',
+			'strField' => 'value_type',
+			'index' => 19,
+			'sqlExpression' => 'value_type',
+			'viewFormats' => array(
+				'view' => array(
+					 
+				) 
+			),
+			'editFormats' => array(
+				'edit' => array(
+					'format' => 'Readonly',
+					'lookupType' => 2,
+					'lookupTable' => 'public.lbpmi_data_elements',
+					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
+					'lookupLinkField' => 'data_element_id',
+					'lookupDisplayField' => 'value_type' 
+				) 
+			),
+			'tableName' => 'public.lbpmi_data_values' 
 		) 
 	),
 	'masterTables' => array( 
@@ -773,7 +838,10 @@ FROM
 	stored_by,
 	created,
 	last_updated,
-	deleted
+	deleted,
+	data_source,
+	source_detail,
+	value_type
 FROM
 	"public".lbpmi_data_values',
 		'parsed' => true,
@@ -1018,6 +1086,51 @@ FROM
 				),
 				'encrypted' => false,
 				'columnName' => 'deleted' 
+			),
+			array(
+				'sql' => 'data_source',
+				'parsed' => true,
+				'type' => 'FieldListItem',
+				'alias' => '',
+				'expression' => array(
+					'sql' => '',
+					'parsed' => true,
+					'type' => 'SQLField',
+					'table' => 'public.lbpmi_data_values',
+					'name' => 'data_source' 
+				),
+				'encrypted' => false,
+				'columnName' => 'data_source' 
+			),
+			array(
+				'sql' => 'source_detail',
+				'parsed' => true,
+				'type' => 'FieldListItem',
+				'alias' => '',
+				'expression' => array(
+					'sql' => '',
+					'parsed' => true,
+					'type' => 'SQLField',
+					'table' => 'public.lbpmi_data_values',
+					'name' => 'source_detail' 
+				),
+				'encrypted' => false,
+				'columnName' => 'source_detail' 
+			),
+			array(
+				'sql' => 'value_type',
+				'parsed' => true,
+				'type' => 'FieldListItem',
+				'alias' => '',
+				'expression' => array(
+					'sql' => '',
+					'parsed' => true,
+					'type' => 'SQLField',
+					'table' => 'public.lbpmi_data_values',
+					'name' => 'value_type' 
+				),
+				'encrypted' => false,
+				'columnName' => 'value_type' 
 			) 
 		),
 		'fromList' => array( 
@@ -1045,7 +1158,10 @@ FROM
 						'stored_by',
 						'created',
 						'last_updated',
-						'deleted' 
+						'deleted',
+						'data_source',
+						'source_detail',
+						'value_type' 
 					),
 					'name' => 'public.lbpmi_data_values' 
 				),
@@ -1211,6 +1327,27 @@ FROM
 				'groupByIndex' => -1,
 				'whereIndex' => -1,
 				'havingIndex' => -1 
+			),
+			array(
+				'fieldIndex' => 16,
+				'orderByIndex' => -1,
+				'groupByIndex' => -1,
+				'whereIndex' => -1,
+				'havingIndex' => -1 
+			),
+			array(
+				'fieldIndex' => 17,
+				'orderByIndex' => -1,
+				'groupByIndex' => -1,
+				'whereIndex' => -1,
+				'havingIndex' => -1 
+			),
+			array(
+				'fieldIndex' => 18,
+				'orderByIndex' => -1,
+				'groupByIndex' => -1,
+				'whereIndex' => -1,
+				'havingIndex' => -1 
 			) 
 		),
 		'headSql' => 'SELECT',
@@ -1229,7 +1366,10 @@ FROM
 	stored_by,
 	created,
 	last_updated,
-	deleted',
+	deleted,
+	data_source,
+	source_detail,
+	value_type',
 		'fromListSql' => 'FROM
 	"public".lbpmi_data_values',
 		'orderBySql' => '',
@@ -1302,7 +1442,10 @@ FROM
 			'stored_by',
 			'created',
 			'last_updated',
-			'deleted' 
+			'deleted',
+			'data_source',
+			'source_detail',
+			'value_type' 
 		),
 		'searchSuggest' => true,
 		'highlightSearchResults' => true,
@@ -1324,7 +1467,10 @@ FROM
 			'stored_by',
 			'created',
 			'last_updated',
-			'deleted' 
+			'deleted',
+			'data_source',
+			'source_detail',
+			'value_type' 
 		) 
 	),
 	'connId' => 'lifebox_mesystem_at_localhost',
@@ -1393,7 +1539,10 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'stored_by' => 'Stored By',
 		'created' => 'Created',
 		'last_updated' => 'Last Updated',
-		'deleted' => 'Deleted' 
+		'deleted' => 'Deleted',
+		'data_source' => 'Data Source',
+		'source_detail' => 'Source Detail',
+		'value_type' => 'Value Type' 
 	),
 	'fieldTooltips' => array(
 		'data_value_id' => '',
@@ -1411,7 +1560,10 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'stored_by' => '',
 		'created' => '',
 		'last_updated' => '',
-		'deleted' => '' 
+		'deleted' => '',
+		'data_source' => '',
+		'source_detail' => '',
+		'value_type' => '' 
 	),
 	'fieldPlaceholders' => array(
 		'data_value_id' => '',
@@ -1429,7 +1581,10 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'stored_by' => '',
 		'created' => '',
 		'last_updated' => '',
-		'deleted' => '' 
+		'deleted' => '',
+		'data_source' => '',
+		'source_detail' => '',
+		'value_type' => '' 
 	),
 	'pageTitles' => array(
 		 

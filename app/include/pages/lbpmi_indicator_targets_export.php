@@ -42,6 +42,12 @@
 		),
 		'updated_at' => array(
 			'totalsType' => '' 
+		),
+		'baseline_period' => array(
+			'totalsType' => '' 
+		),
+		'baseline_value' => array(
+			'totalsType' => '' 
 		) 
 	),
 	'fields' => array(
@@ -59,7 +65,9 @@
 			'facility_id',
 			'target_value',
 			'is_annual_target',
-			'created_by' 
+			'created_by',
+			'baseline_period',
+			'baseline_value' 
 		),
 		'exportFields' => array( 
 			'target_id',
@@ -75,7 +83,9 @@
 			'facility_id',
 			'target_value',
 			'is_annual_target',
-			'created_by' 
+			'created_by',
+			'baseline_period',
+			'baseline_value' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -125,6 +135,12 @@
 			),
 			'created_by' => array( 
 				'export_field13' 
+			),
+			'baseline_period' => array( 
+				'export_field14' 
+			),
+			'baseline_value' => array( 
+				'export_field15' 
 			) 
 		) 
 	),
@@ -157,7 +173,9 @@
 					'export_field10',
 					'export_field11',
 					'export_field12',
-					'export_field13' 
+					'export_field13',
+					'export_field14',
+					'export_field15' 
 				),
 				'footer' => array( 
 					'export_export',
@@ -185,6 +203,8 @@
 				'export_field11' => 'grid',
 				'export_field12' => 'grid',
 				'export_field13' => 'grid',
+				'export_field14' => 'grid',
+				'export_field15' => 'grid',
 				'export_export' => 'footer',
 				'export_cancel' => 'footer' 
 			),
@@ -219,7 +239,9 @@
 				'export_field10',
 				'export_field11',
 				'export_field12',
-				'export_field13' 
+				'export_field13',
+				'export_field14',
+				'export_field15' 
 			) 
 		),
 		'cellMaps' => array(
@@ -372,7 +394,9 @@
 						'export_field10',
 						'export_field11',
 						'export_field12',
-						'export_field13' 
+						'export_field13',
+						'export_field14',
+						'export_field15' 
 					) 
 				) 
 			),
@@ -481,6 +505,14 @@
 		),
 		'export_field13' => array(
 			'field' => 'created_by',
+			'type' => 'export_field' 
+		),
+		'export_field14' => array(
+			'field' => 'baseline_period',
+			'type' => 'export_field' 
+		),
+		'export_field15' => array(
+			'field' => 'baseline_value',
 			'type' => 'export_field' 
 		) 
 	),

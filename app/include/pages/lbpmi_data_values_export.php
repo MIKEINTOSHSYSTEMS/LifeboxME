@@ -48,6 +48,15 @@
 		),
 		'deleted' => array(
 			'totalsType' => '' 
+		),
+		'data_source' => array(
+			'totalsType' => '' 
+		),
+		'source_detail' => array(
+			'totalsType' => '' 
+		),
+		'value_type' => array(
+			'totalsType' => '' 
 		) 
 	),
 	'fields' => array(
@@ -67,7 +76,10 @@
 			'stored_by',
 			'created',
 			'last_updated',
-			'deleted' 
+			'deleted',
+			'data_source',
+			'source_detail',
+			'value_type' 
 		),
 		'exportFields' => array( 
 			'data_value_id',
@@ -81,7 +93,10 @@
 			'region_id',
 			'country_id',
 			'facility_id',
+			'data_source',
+			'source_detail',
 			'value',
+			'value_type',
 			'stored_by',
 			'created',
 			'last_updated',
@@ -141,6 +156,15 @@
 			),
 			'deleted' => array( 
 				'export_field15' 
+			),
+			'data_source' => array( 
+				'export_field16' 
+			),
+			'source_detail' => array( 
+				'export_field17' 
+			),
+			'value_type' => array( 
+				'export_field18' 
 			) 
 		) 
 	),
@@ -171,7 +195,10 @@
 					'export_field8',
 					'export_field9',
 					'export_field10',
+					'export_field16',
+					'export_field17',
 					'export_field11',
+					'export_field18',
 					'export_field12',
 					'export_field13',
 					'export_field14',
@@ -200,7 +227,10 @@
 				'export_field8' => 'grid',
 				'export_field9' => 'grid',
 				'export_field10' => 'grid',
+				'export_field16' => 'grid',
+				'export_field17' => 'grid',
 				'export_field11' => 'grid',
+				'export_field18' => 'grid',
 				'export_field12' => 'grid',
 				'export_field13' => 'grid',
 				'export_field14' => 'grid',
@@ -241,7 +271,10 @@
 				'export_field12',
 				'export_field13',
 				'export_field14',
-				'export_field15' 
+				'export_field15',
+				'export_field16',
+				'export_field17',
+				'export_field18' 
 			) 
 		),
 		'cellMaps' => array(
@@ -392,7 +425,10 @@
 						'export_field8',
 						'export_field9',
 						'export_field10',
+						'export_field16',
+						'export_field17',
 						'export_field11',
+						'export_field18',
 						'export_field12',
 						'export_field13',
 						'export_field14',
@@ -513,6 +549,18 @@
 		),
 		'export_field15' => array(
 			'field' => 'deleted',
+			'type' => 'export_field' 
+		),
+		'export_field16' => array(
+			'field' => 'data_source',
+			'type' => 'export_field' 
+		),
+		'export_field17' => array(
+			'field' => 'source_detail',
+			'type' => 'export_field' 
+		),
+		'export_field18' => array(
+			'field' => 'value_type',
 			'type' => 'export_field' 
 		) 
 	),

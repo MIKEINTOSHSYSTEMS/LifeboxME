@@ -904,6 +904,22 @@
 				'items' => null,
 				'table' => 'device_distributions_report',
 				'page' => 'report' 
+			),
+			'welcome_item109' => array(
+				'menutItem' => true,
+				'group' => false,
+				'linkType' => 0,
+				'items' => null,
+				'table' => 'public.lbpmi_data_sources',
+				'page' => 'list' 
+			),
+			'welcome_item110' => array(
+				'menutItem' => true,
+				'group' => false,
+				'linkType' => 0,
+				'items' => null,
+				'table' => 'public.lbpmi_source_details',
+				'page' => 'list' 
 			) 
 		) 
 	),
@@ -1049,6 +1065,8 @@
 					'welcome_item107',
 					'welcome_item108',
 					'welcome_item102',
+					'welcome_item109',
+					'welcome_item110',
 					'welcome_item51' 
 				) 
 			),
@@ -1174,6 +1192,8 @@
 				'welcome_item107' => 'grid',
 				'welcome_item108' => 'grid',
 				'welcome_item102' => 'grid',
+				'welcome_item109' => 'grid',
+				'welcome_item110' => 'grid',
 				'welcome_item51' => 'grid' 
 			),
 			'itemLocations' => array(
@@ -1294,7 +1314,9 @@
 				'welcome_item106',
 				'welcome_item107',
 				'welcome_item108',
-				'welcome_item102' 
+				'welcome_item102',
+				'welcome_item109',
+				'welcome_item110' 
 			),
 			'logo' => array( 
 				'logo' 
@@ -1662,7 +1684,9 @@
 						'welcome_item106',
 						'welcome_item107',
 						'welcome_item108',
-						'welcome_item102' 
+						'welcome_item102',
+						'welcome_item109',
+						'welcome_item110' 
 					) 
 				),
 				'c' => array(
@@ -3095,6 +3119,30 @@
 				'type' => 6 
 			),
 			'background' => '#22b1ce',
+			'linkType' => 0 
+		),
+		'welcome_item109' => array(
+			'type' => 'welcome_item',
+			'linkUrl' => '',
+			'linkTable' => 'public.lbpmi_data_sources',
+			'linkPage' => 'list',
+			'linkText' => array(
+				'table' => 'public.lbpmi_data_sources',
+				'type' => 6 
+			),
+			'background' => '#b22222',
+			'linkType' => 0 
+		),
+		'welcome_item110' => array(
+			'type' => 'welcome_item',
+			'linkUrl' => '',
+			'linkTable' => 'public.lbpmi_source_details',
+			'linkPage' => 'list',
+			'linkText' => array(
+				'table' => 'public.lbpmi_source_details',
+				'type' => 6 
+			),
+			'background' => '#3cb371',
 			'linkType' => 0 
 		),
 		'expand_button' => array(

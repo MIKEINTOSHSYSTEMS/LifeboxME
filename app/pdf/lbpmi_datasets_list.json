@@ -103,15 +103,6 @@ pdfDocument = {
 										{BEGIN col_grid_12}
 					"%",
 					{END col_grid_12}
-										{BEGIN col_grid_13}
-					"%",
-					{END col_grid_13}
-										{BEGIN col_grid_14}
-					"%",
-					{END col_grid_14}
-										{BEGIN col_grid_15}
-					"%",
-					{END col_grid_15}
 															],
 											heights: [ // first height for header part
 					"%",
@@ -122,10 +113,13 @@ pdfDocument = {
 													{BEGIN row_grid_1}
 							"%",
 							{END row_grid_1}
-													{END grid_row}
 																								{BEGIN row_grid_2}
 							"%",
 							{END row_grid_2}
+													{END grid_row}
+																								{BEGIN row_grid_3}
+							"%",
+							{END row_grid_3}
 															],
 							
 				body: [
@@ -244,7 +238,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"Displaying %first% - %last% of %total%","hidden":"{$item_hide_details_found}","isHtml":true,"page_indicator":true},
+			{"text":"{mlang_message DISPLAYING}","hidden":"{$item_hide_details_found}","isHtml":true,"page_indicator":true},
 				
 				
 			{"text":"","hidden":"{$item_hide_page_size}"},
@@ -329,6 +323,32 @@ pdfDocument = {
       },
 
 {END cellblock_grid_headcell_checkbox}
+																							{BEGIN cellblock_grid_headcell_details}
+{
+	cellId: 'headcell_details',
+	col:0,
+	row:0,
+				style: 'headcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_headcell_details}
 																							{BEGIN cellblock_grid_headcell_field}
 {
 	cellId: 'headcell_field',
@@ -348,7 +368,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_datasets dataset_id }","hidden":"{$item_hide_simple_grid_field14}","bold":true},
+			{"text":"{$jslabel public_lbpmi_datasets dataset_id }","hidden":"{$item_hide_simple_grid_field8}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -363,7 +383,7 @@ pdfDocument = {
 	cellId: 'headcell_field1',
 	col:0,
 	row:0,
-			fieldName: 'data_element_id',
+			fieldName: 'dataset_name',
 				style: 'headcell',
 		
 		
@@ -377,11 +397,11 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_datasets data_element_id }","hidden":"{$item_hide_simple_grid_field15}","bold":true},
+			{"text":"{$jslabel public_lbpmi_datasets dataset_name }","hidden":"{$item_hide_simple_grid_field11}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$data_element_id_align}',
+              "alignment": '{$dataset_name_align}',
      
       
       },
@@ -392,7 +412,7 @@ pdfDocument = {
 	cellId: 'headcell_field2',
 	col:0,
 	row:0,
-			fieldName: 'dataset_period_type',
+			fieldName: 'dataset_description',
 				style: 'headcell',
 		
 		
@@ -406,11 +426,11 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_datasets dataset_period_type }","hidden":"{$item_hide_simple_grid_field16}","bold":true},
+			{"text":"{$jslabel public_lbpmi_datasets dataset_description }","hidden":"{$item_hide_simple_grid_field12}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$dataset_period_type_align}',
+              "alignment": '{$dataset_description_align}',
      
       
       },
@@ -421,7 +441,7 @@ pdfDocument = {
 	cellId: 'headcell_field3',
 	col:0,
 	row:0,
-			fieldName: 'dataset_month',
+			fieldName: 'dataset_code',
 				style: 'headcell',
 		
 		
@@ -435,11 +455,11 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_datasets dataset_month }","hidden":"{$item_hide_simple_grid_field17}","bold":true},
+			{"text":"{$jslabel public_lbpmi_datasets dataset_code }","hidden":"{$item_hide_simple_grid_field13}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$dataset_month_align}',
+              "alignment": '{$dataset_code_align}',
      
       
       },
@@ -450,7 +470,7 @@ pdfDocument = {
 	cellId: 'headcell_field4',
 	col:0,
 	row:0,
-			fieldName: 'dataset_quarter',
+			fieldName: 'period_type',
 				style: 'headcell',
 		
 		
@@ -464,11 +484,11 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_datasets dataset_quarter }","hidden":"{$item_hide_simple_grid_field18}","bold":true},
+			{"text":"{$jslabel public_lbpmi_datasets period_type }","hidden":"{$item_hide_simple_grid_field14}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$dataset_quarter_align}',
+              "alignment": '{$period_type_align}',
      
       
       },
@@ -479,7 +499,7 @@ pdfDocument = {
 	cellId: 'headcell_field5',
 	col:0,
 	row:0,
-			fieldName: 'dataset_year',
+			fieldName: 'data_elements',
 				style: 'headcell',
 		
 		
@@ -493,11 +513,11 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_datasets dataset_year }","hidden":"{$item_hide_simple_grid_field19}","bold":true},
+			{"text":"{$jslabel public_lbpmi_datasets data_elements }","hidden":"{$item_hide_simple_grid_field15}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$dataset_year_align}',
+              "alignment": '{$data_elements_align}',
      
       
       },
@@ -508,7 +528,7 @@ pdfDocument = {
 	cellId: 'headcell_field6',
 	col:0,
 	row:0,
-			fieldName: 'region_id',
+			fieldName: 'is_active',
 				style: 'headcell',
 		
 		
@@ -522,11 +542,11 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_datasets region_id }","hidden":"{$item_hide_simple_grid_field20}","bold":true},
+			{"text":"{$jslabel public_lbpmi_datasets is_active }","hidden":"{$item_hide_simple_grid_field16}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$region_id_align}',
+              "alignment": '{$is_active_align}',
      
       
       },
@@ -537,7 +557,7 @@ pdfDocument = {
 	cellId: 'headcell_field7',
 	col:0,
 	row:0,
-			fieldName: 'country_id',
+			fieldName: 'created_by',
 				style: 'headcell',
 		
 		
@@ -551,11 +571,11 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_datasets country_id }","hidden":"{$item_hide_simple_grid_field21}","bold":true},
+			{"text":"{$jslabel public_lbpmi_datasets created_by }","hidden":"{$item_hide_simple_grid_field17}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$country_id_align}',
+              "alignment": '{$created_by_align}',
      
       
       },
@@ -564,122 +584,6 @@ pdfDocument = {
 																							{BEGIN cellblock_grid_headcell_field8}
 {
 	cellId: 'headcell_field8',
-	col:0,
-	row:0,
-			fieldName: 'facility_id',
-				style: 'headcell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":"{$jslabel public_lbpmi_datasets facility_id }","hidden":"{$item_hide_simple_grid_field22}","bold":true},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$facility_id_align}',
-     
-      
-      },
-
-{END cellblock_grid_headcell_field8}
-																							{BEGIN cellblock_grid_headcell_field9}
-{
-	cellId: 'headcell_field9',
-	col:0,
-	row:0,
-			fieldName: 'dataset_query',
-				style: 'headcell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":"{$jslabel public_lbpmi_datasets dataset_query }","hidden":"{$item_hide_simple_grid_field23}","bold":true},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$dataset_query_align}',
-     
-      
-      },
-
-{END cellblock_grid_headcell_field9}
-																							{BEGIN cellblock_grid_headcell_field10}
-{
-	cellId: 'headcell_field10',
-	col:0,
-	row:0,
-			fieldName: 'dataset_value',
-				style: 'headcell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":"{$jslabel public_lbpmi_datasets dataset_value }","hidden":"{$item_hide_simple_grid_field24}","bold":true},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$dataset_value_align}',
-     
-      
-      },
-
-{END cellblock_grid_headcell_field10}
-																							{BEGIN cellblock_grid_headcell_field11}
-{
-	cellId: 'headcell_field11',
-	col:0,
-	row:0,
-			fieldName: 'notes',
-				style: 'headcell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":"{$jslabel public_lbpmi_datasets notes }","hidden":"{$item_hide_simple_grid_field25}","bold":true},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$notes_align}',
-     
-      
-      },
-
-{END cellblock_grid_headcell_field11}
-																							{BEGIN cellblock_grid_headcell_field12}
-{
-	cellId: 'headcell_field12',
 	col:0,
 	row:0,
 			fieldName: 'created_at',
@@ -696,7 +600,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_datasets created_at }","hidden":"{$item_hide_simple_grid_field26}","bold":true},
+			{"text":"{$jslabel public_lbpmi_datasets created_at }","hidden":"{$item_hide_simple_grid_field18}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -705,10 +609,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field12}
-																							{BEGIN cellblock_grid_headcell_field13}
+{END cellblock_grid_headcell_field8}
+																							{BEGIN cellblock_grid_headcell_field9}
 {
-	cellId: 'headcell_field13',
+	cellId: 'headcell_field9',
 	col:0,
 	row:0,
 			fieldName: 'updated_at',
@@ -725,7 +629,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"{$jslabel public_lbpmi_datasets updated_at }","hidden":"{$item_hide_simple_grid_field27}","bold":true},
+			{"text":"{$jslabel public_lbpmi_datasets updated_at }","hidden":"{$item_hide_simple_grid_field19}","bold":true},
 				
 		  ],
   "border": [ true, true, true, true ],
@@ -734,7 +638,7 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_headcell_field13}
+{END cellblock_grid_headcell_field9}
 											],
 				{END row_grid_0}
 		
@@ -806,6 +710,37 @@ pdfDocument = {
       },
 
 {END cellblock_grid_cell_checkbox}
+																							{BEGIN cellblock_grid_cell_details}
+{
+	cellId: 'cell_details',
+	col:0,
+	row:0,
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				
+			{"text":"","hidden":"{$item_hide_grid_alldetails_link}"},
+				
+				
+			{"text":"","hidden":"{$item_hide_grid_details_link}"},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_cell_details}
 																							{BEGIN cellblock_grid_cell_field}
 {
 	cellId: 'cell_field',
@@ -840,7 +775,7 @@ pdfDocument = {
 	cellId: 'cell_field1',
 	col:0,
 	row:0,
-			fieldName: 'data_element_id',
+			fieldName: 'dataset_name',
 				style: 'bodycell',
 		
 		
@@ -854,11 +789,11 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":{$data_element_id_pdfvalue},"hidden":"{$item_hide_simple_grid_field1}"},
+			{"text":{$dataset_name_pdfvalue},"hidden":"{$item_hide_simple_grid_field1}"},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$data_element_id_align}',
+              "alignment": '{$dataset_name_align}',
      
       
       },
@@ -869,7 +804,7 @@ pdfDocument = {
 	cellId: 'cell_field2',
 	col:0,
 	row:0,
-			fieldName: 'dataset_period_type',
+			fieldName: 'dataset_description',
 				style: 'bodycell',
 		
 		
@@ -883,11 +818,11 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":{$dataset_period_type_pdfvalue},"hidden":"{$item_hide_simple_grid_field2}"},
+			{"text":{$dataset_description_pdfvalue},"hidden":"{$item_hide_simple_grid_field2}"},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$dataset_period_type_align}',
+              "alignment": '{$dataset_description_align}',
      
       
       },
@@ -898,7 +833,7 @@ pdfDocument = {
 	cellId: 'cell_field3',
 	col:0,
 	row:0,
-			fieldName: 'dataset_month',
+			fieldName: 'dataset_code',
 				style: 'bodycell',
 		
 		
@@ -912,11 +847,11 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":{$dataset_month_pdfvalue},"hidden":"{$item_hide_simple_grid_field3}"},
+			{"text":{$dataset_code_pdfvalue},"hidden":"{$item_hide_simple_grid_field3}"},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$dataset_month_align}',
+              "alignment": '{$dataset_code_align}',
      
       
       },
@@ -927,7 +862,7 @@ pdfDocument = {
 	cellId: 'cell_field4',
 	col:0,
 	row:0,
-			fieldName: 'dataset_quarter',
+			fieldName: 'period_type',
 				style: 'bodycell',
 		
 		
@@ -941,11 +876,11 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":{$dataset_quarter_pdfvalue},"hidden":"{$item_hide_simple_grid_field4}"},
+			{"text":{$period_type_pdfvalue},"hidden":"{$item_hide_simple_grid_field4}"},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$dataset_quarter_align}',
+              "alignment": '{$period_type_align}',
      
       
       },
@@ -956,7 +891,7 @@ pdfDocument = {
 	cellId: 'cell_field5',
 	col:0,
 	row:0,
-			fieldName: 'dataset_year',
+			fieldName: 'data_elements',
 				style: 'bodycell',
 		
 		
@@ -970,11 +905,11 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":{$dataset_year_pdfvalue},"hidden":"{$item_hide_simple_grid_field5}"},
+			{"text":{$data_elements_pdfvalue},"hidden":"{$item_hide_simple_grid_field5}"},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$dataset_year_align}',
+              "alignment": '{$data_elements_align}',
      
       
       },
@@ -985,7 +920,7 @@ pdfDocument = {
 	cellId: 'cell_field6',
 	col:0,
 	row:0,
-			fieldName: 'region_id',
+			fieldName: 'is_active',
 				style: 'bodycell',
 		
 		
@@ -999,11 +934,11 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":{$region_id_pdfvalue},"hidden":"{$item_hide_simple_grid_field11}"},
+			{"text":{$is_active_pdfvalue},"hidden":"{$item_hide_simple_grid_field6}"},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$region_id_align}',
+              "alignment": '{$is_active_align}',
      
       
       },
@@ -1014,7 +949,7 @@ pdfDocument = {
 	cellId: 'cell_field7',
 	col:0,
 	row:0,
-			fieldName: 'country_id',
+			fieldName: 'created_by',
 				style: 'bodycell',
 		
 		
@@ -1028,11 +963,11 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":{$country_id_pdfvalue},"hidden":"{$item_hide_simple_grid_field12}"},
+			{"text":{$created_by_pdfvalue},"hidden":"{$item_hide_simple_grid_field7}"},
 				
 		  ],
   "border": [ true, true, true, true ],
-              "alignment": '{$country_id_align}',
+              "alignment": '{$created_by_align}',
      
       
       },
@@ -1041,122 +976,6 @@ pdfDocument = {
 																							{BEGIN cellblock_grid_cell_field8}
 {
 	cellId: 'cell_field8',
-	col:0,
-	row:0,
-			fieldName: 'facility_id',
-				style: 'bodycell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":{$facility_id_pdfvalue},"hidden":"{$item_hide_simple_grid_field13}"},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$facility_id_align}',
-     
-      
-      },
-
-{END cellblock_grid_cell_field8}
-																							{BEGIN cellblock_grid_cell_field9}
-{
-	cellId: 'cell_field9',
-	col:0,
-	row:0,
-			fieldName: 'dataset_query',
-				style: 'bodycell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":{$dataset_query_pdfvalue},"hidden":"{$item_hide_simple_grid_field6}"},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$dataset_query_align}',
-     
-      
-      },
-
-{END cellblock_grid_cell_field9}
-																							{BEGIN cellblock_grid_cell_field10}
-{
-	cellId: 'cell_field10',
-	col:0,
-	row:0,
-			fieldName: 'dataset_value',
-				style: 'bodycell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":{$dataset_value_pdfvalue},"hidden":"{$item_hide_simple_grid_field7}"},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$dataset_value_align}',
-     
-      
-      },
-
-{END cellblock_grid_cell_field10}
-																							{BEGIN cellblock_grid_cell_field11}
-{
-	cellId: 'cell_field11',
-	col:0,
-	row:0,
-			fieldName: 'notes',
-				style: 'bodycell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				
-			{"text":{$notes_pdfvalue},"hidden":"{$item_hide_simple_grid_field8}"},
-				
-		  ],
-  "border": [ true, true, true, true ],
-              "alignment": '{$notes_align}',
-     
-      
-      },
-
-{END cellblock_grid_cell_field11}
-																							{BEGIN cellblock_grid_cell_field12}
-{
-	cellId: 'cell_field12',
 	col:0,
 	row:0,
 			fieldName: 'created_at',
@@ -1182,10 +1001,10 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field12}
-																							{BEGIN cellblock_grid_cell_field13}
+{END cellblock_grid_cell_field8}
+																							{BEGIN cellblock_grid_cell_field9}
 {
-	cellId: 'cell_field13',
+	cellId: 'cell_field9',
 	col:0,
 	row:0,
 			fieldName: 'updated_at',
@@ -1211,15 +1030,136 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_cell_field13}
+{END cellblock_grid_cell_field9}
 											],
 				{END row_grid_1}
+						{BEGIN row_grid_2}
+				[
+																{BEGIN cellblock_grid_cell_dpreview}
+{
+	cellId: 'cell_dpreview',
+	col:0,
+	row:0,
+				style: 'bodycell',
+		
+		
+	//	dynamic colspan/rowspan
+
+					{BEGIN colspan_grid_cell_dpreview}
+			colSpan: {$colspan_grid_cell_dpreview},
+			{END colspan_grid_cell_dpreview}
+		
+		
+	
+			
+	
+			"stack": [
+		
+				
+			 {BEGIN details_lbpmi_indicators}
+			{$displayDetailTable_lbpmi_indicators }
+		{END details_lbpmi_indicators},
+				
+		  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_cell_dpreview}
+																		{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  2,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  3,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  4,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  5,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  6,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  7,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  8,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  9,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  10,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  11,
+				text: '',
+				compensateColspan: true
+			},
+														{ 
+				cellId: 'cell_dpreview',
+				row:  0,
+				col:  12,
+				text: '',
+				compensateColspan: true
+			},
+							],
+				{END row_grid_2}
 		
 		{END grid_record}
 	{END grid_row}
 			
 					
-				{BEGIN row_grid_2}
+				{BEGIN row_grid_3}
 				[
 																{BEGIN cellblock_grid_footcell_icons}
 {
@@ -1273,6 +1213,32 @@ pdfDocument = {
       },
 
 {END cellblock_grid_footcell_checkbox}
+																							{BEGIN cellblock_grid_footcell_details}
+{
+	cellId: 'footcell_details',
+	col:0,
+	row:0,
+				style: 'footcell',
+		
+		
+	//	dynamic colspan/rowspan
+
+		
+		
+	
+			
+	
+			"text": [
+		
+				'',
+	  ],
+  "border": [ true, true, true, true ],
+              "alignment": 'left',
+     
+      
+      },
+
+{END cellblock_grid_footcell_details}
 																							{BEGIN cellblock_grid_footcell_field}
 {
 	cellId: 'footcell_field',
@@ -1533,112 +1499,8 @@ pdfDocument = {
       },
 
 {END cellblock_grid_footcell_field9}
-																							{BEGIN cellblock_grid_footcell_field10}
-{
-	cellId: 'footcell_field10',
-	col:0,
-	row:0,
-				style: 'footcell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				'',
-	  ],
-  "border": [ true, true, true, true ],
-              "alignment": 'left',
-     
-      
-      },
-
-{END cellblock_grid_footcell_field10}
-																							{BEGIN cellblock_grid_footcell_field11}
-{
-	cellId: 'footcell_field11',
-	col:0,
-	row:0,
-				style: 'footcell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				'',
-	  ],
-  "border": [ true, true, true, true ],
-              "alignment": 'left',
-     
-      
-      },
-
-{END cellblock_grid_footcell_field11}
-																							{BEGIN cellblock_grid_footcell_field12}
-{
-	cellId: 'footcell_field12',
-	col:0,
-	row:0,
-				style: 'footcell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				'',
-	  ],
-  "border": [ true, true, true, true ],
-              "alignment": 'left',
-     
-      
-      },
-
-{END cellblock_grid_footcell_field12}
-																							{BEGIN cellblock_grid_footcell_field13}
-{
-	cellId: 'footcell_field13',
-	col:0,
-	row:0,
-				style: 'footcell',
-		
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"text": [
-		
-				'',
-	  ],
-  "border": [ true, true, true, true ],
-              "alignment": 'left',
-     
-      
-      },
-
-{END cellblock_grid_footcell_field13}
 											],
-				{END row_grid_2}
+				{END row_grid_3}
 		
 				
 									]

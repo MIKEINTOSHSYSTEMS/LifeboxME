@@ -8,6 +8,11 @@
 			'displayPreview' => 1 
 		) 
 	),
+	'master' => array(
+		'public.lbpmi_data_elements' => array(
+			'preview' => true 
+		) 
+	),
 	'totals' => array(
 		'dataset_id' => array(
 			'totalsType' => '' 
@@ -115,7 +120,9 @@
 		'formItems' => array(
 			'formItems' => array(
 				'above-grid' => array( 
-					'print_pages' 
+					'print_pages',
+					'grid_inline_cancel',
+					'inline_add' 
 				),
 				'below-grid' => array( 
 					 
@@ -151,7 +158,9 @@
 			),
 			'formXtTags' => array(
 				'above-grid' => array( 
-					'print_pages' 
+					'print_pages',
+					'inline_cancel',
+					'inlineadd_link' 
 				),
 				'below-grid' => array( 
 					 
@@ -159,6 +168,8 @@
 			),
 			'itemForms' => array(
 				'print_pages' => 'above-grid',
+				'grid_inline_cancel' => 'above-grid',
+				'inline_add' => 'above-grid',
 				'print_header' => 'top',
 				'print_subheader' => 'top',
 				'master_info' => 'top',
@@ -313,6 +324,12 @@
 			),
 			'details_preview' => array( 
 				'details_preview' 
+			),
+			'inline_add' => array( 
+				'inline_add' 
+			),
+			'grid_inline_cancel' => array( 
+				'grid_inline_cancel' 
 			) 
 		),
 		'cellMaps' => array(
@@ -914,7 +931,9 @@
 				'c1' => array(
 					'model' => 'c1',
 					'items' => array( 
-						'print_pages' 
+						'print_pages',
+						'grid_inline_cancel',
+						'inline_add' 
 					) 
 				) 
 			),
@@ -1443,6 +1462,13 @@
 				 
 			),
 			'popup' => false 
+		),
+		'inline_add' => array(
+			'type' => 'inline_add',
+			'detailsOnly' => true 
+		),
+		'grid_inline_cancel' => array(
+			'type' => 'grid_inline_cancel' 
 		) 
 	),
 	'dbProps' => array(
