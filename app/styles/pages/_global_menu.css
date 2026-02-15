@@ -328,6 +328,15 @@
 [data-page="_global_menu"][data-itemid="welcome_item110"] > .bs-welcome-header {
   background-color: #3cb371;
 }
+[data-page="_global_menu"][data-itemid="welcome_item111"] > .bs-welcome-header {
+  background-color: #7b68ee;
+}
+[data-page="_global_menu"][data-itemid="welcome_item112"] > .bs-welcome-header {
+  background-color: #00c2c5;
+}
+[data-page="_global_menu"][data-itemid="welcome_item113"] > .bs-welcome-header {
+  background-color: #e8926f;
+}
 [data-page="_global_menu"][data-itemid="page_image_ash8f23hr"] {
   width: 400px;
 }

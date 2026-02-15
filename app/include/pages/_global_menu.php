@@ -920,6 +920,30 @@
 				'items' => null,
 				'table' => 'public.lbpmi_source_details',
 				'page' => 'list' 
+			),
+			'welcome_item111' => array(
+				'menutItem' => true,
+				'group' => false,
+				'linkType' => 0,
+				'items' => null,
+				'table' => 'public.system_notifications',
+				'page' => 'list' 
+			),
+			'welcome_item112' => array(
+				'menutItem' => true,
+				'group' => false,
+				'linkType' => 0,
+				'items' => null,
+				'table' => 'public.notification_reads',
+				'page' => 'list' 
+			),
+			'welcome_item113' => array(
+				'menutItem' => true,
+				'group' => false,
+				'linkType' => 0,
+				'items' => null,
+				'table' => 'public.lifeboxme_noti',
+				'page' => 'list' 
 			) 
 		) 
 	),
@@ -1067,6 +1091,9 @@
 					'welcome_item102',
 					'welcome_item109',
 					'welcome_item110',
+					'welcome_item111',
+					'welcome_item112',
+					'welcome_item113',
 					'welcome_item51' 
 				) 
 			),
@@ -1194,6 +1221,9 @@
 				'welcome_item102' => 'grid',
 				'welcome_item109' => 'grid',
 				'welcome_item110' => 'grid',
+				'welcome_item111' => 'grid',
+				'welcome_item112' => 'grid',
+				'welcome_item113' => 'grid',
 				'welcome_item51' => 'grid' 
 			),
 			'itemLocations' => array(
@@ -1316,7 +1346,10 @@
 				'welcome_item108',
 				'welcome_item102',
 				'welcome_item109',
-				'welcome_item110' 
+				'welcome_item110',
+				'welcome_item111',
+				'welcome_item112',
+				'welcome_item113' 
 			),
 			'logo' => array( 
 				'logo' 
@@ -1686,7 +1719,10 @@
 						'welcome_item108',
 						'welcome_item102',
 						'welcome_item109',
-						'welcome_item110' 
+						'welcome_item110',
+						'welcome_item111',
+						'welcome_item112',
+						'welcome_item113' 
 					) 
 				),
 				'c' => array(
@@ -3143,6 +3179,42 @@
 				'type' => 6 
 			),
 			'background' => '#3cb371',
+			'linkType' => 0 
+		),
+		'welcome_item111' => array(
+			'type' => 'welcome_item',
+			'linkUrl' => '',
+			'linkTable' => 'public.system_notifications',
+			'linkPage' => 'list',
+			'linkText' => array(
+				'table' => 'public.system_notifications',
+				'type' => 6 
+			),
+			'background' => '#7b68ee',
+			'linkType' => 0 
+		),
+		'welcome_item112' => array(
+			'type' => 'welcome_item',
+			'linkUrl' => '',
+			'linkTable' => 'public.notification_reads',
+			'linkPage' => 'list',
+			'linkText' => array(
+				'table' => 'public.notification_reads',
+				'type' => 6 
+			),
+			'background' => '#00c2c5',
+			'linkType' => 0 
+		),
+		'welcome_item113' => array(
+			'type' => 'welcome_item',
+			'linkUrl' => '',
+			'linkTable' => 'public.lifeboxme_noti',
+			'linkPage' => 'list',
+			'linkText' => array(
+				'table' => 'public.lifeboxme_noti',
+				'type' => 6 
+			),
+			'background' => '#e8926f',
 			'linkType' => 0 
 		),
 		'expand_button' => array(

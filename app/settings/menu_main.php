@@ -4882,6 +4882,185 @@ $runnerMenus['main'] = array(
 				'parent' => '0',
 				'children' => array( 
 					array(
+						'id' => '170',
+						'parent' => '61',
+						'children' => array( 
+							array(
+								'id' => '168',
+								'parent' => '170',
+								'children' => array( 
+									 
+								),
+								'data' => array(
+									'name' => array(
+										'table' => 'public.system_notifications',
+										'type' => 6 
+									),
+									'comments' => array(
+										'text' => '',
+										'type' => 0 
+									),
+									'style' => '',
+									'href' => '',
+									'params' => '',
+									'pageId' => '',
+									'itemType' => 2,
+									'linkType' => 0,
+									'openType' => 0,
+									'iconType' => 3,
+									'iconName' => 'fa-concierge-bell',
+									'iconStyle' => 0,
+									'showIconType' => 1,
+									'linkToAnotherApp' => false,
+									'table' => 19533,
+									'pageType' => 'list' 
+								) 
+							),
+							array(
+								'id' => '171',
+								'parent' => '170',
+								'children' => array( 
+									 
+								),
+								'data' => array(
+									'name' => array(
+										'text' => '---------',
+										'type' => 0 
+									),
+									'comments' => array(
+										'text' => '',
+										'type' => 0 
+									),
+									'style' => '',
+									'href' => '',
+									'params' => '',
+									'pageId' => '',
+									'itemType' => 1,
+									'linkType' => 2,
+									'openType' => 0,
+									'iconType' => 0,
+									'iconName' => '',
+									'iconStyle' => 0,
+									'showIconType' => 1,
+									'linkToAnotherApp' => false 
+								) 
+							),
+							array(
+								'id' => '169',
+								'parent' => '170',
+								'children' => array( 
+									 
+								),
+								'data' => array(
+									'name' => array(
+										'table' => 'public.notification_reads',
+										'type' => 6 
+									),
+									'comments' => array(
+										'text' => '',
+										'type' => 0 
+									),
+									'style' => '',
+									'href' => '',
+									'params' => '',
+									'pageId' => '',
+									'itemType' => 2,
+									'linkType' => 0,
+									'openType' => 0,
+									'iconType' => 3,
+									'iconName' => 'fa-facebook-messenger',
+									'iconStyle' => 2,
+									'showIconType' => 1,
+									'linkToAnotherApp' => false,
+									'table' => 19583,
+									'pageType' => 'list' 
+								) 
+							),
+							array(
+								'id' => '173',
+								'parent' => '170',
+								'children' => array( 
+									 
+								),
+								'data' => array(
+									'name' => array(
+										'text' => 'Users Notifications Actions',
+										'type' => 0 
+									),
+									'comments' => array(
+										'text' => '',
+										'type' => 0 
+									),
+									'style' => '',
+									'href' => '',
+									'params' => '',
+									'pageId' => '',
+									'itemType' => 2,
+									'linkType' => 0,
+									'openType' => 0,
+									'iconType' => 3,
+									'iconName' => 'fa-bell-slash',
+									'iconStyle' => 0,
+									'showIconType' => 1,
+									'linkToAnotherApp' => false,
+									'table' => 19611,
+									'pageType' => 'list' 
+								) 
+							) 
+						),
+						'data' => array(
+							'name' => array(
+								'text' => 'Notifications',
+								'type' => 0 
+							),
+							'comments' => array(
+								'text' => '',
+								'type' => 0 
+							),
+							'style' => '',
+							'href' => '',
+							'params' => '',
+							'pageId' => '',
+							'itemType' => 0,
+							'linkType' => 2,
+							'openType' => 0,
+							'iconType' => 3,
+							'iconName' => 'fa-bell',
+							'iconStyle' => 0,
+							'showIconType' => 1,
+							'linkToAnotherApp' => false 
+						) 
+					),
+					array(
+						'id' => '172',
+						'parent' => '61',
+						'children' => array( 
+							 
+						),
+						'data' => array(
+							'name' => array(
+								'text' => '---------',
+								'type' => 0 
+							),
+							'comments' => array(
+								'text' => '',
+								'type' => 0 
+							),
+							'style' => '',
+							'href' => '',
+							'params' => '',
+							'pageId' => '',
+							'itemType' => 1,
+							'linkType' => 2,
+							'openType' => 0,
+							'iconType' => 0,
+							'iconName' => '',
+							'iconStyle' => 0,
+							'showIconType' => 1,
+							'linkToAnotherApp' => false 
+						) 
+					),
+					array(
 						'id' => '59',
 						'parent' => '61',
 						'children' => array( 

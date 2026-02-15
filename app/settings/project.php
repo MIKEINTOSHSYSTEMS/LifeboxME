@@ -16,6 +16,7 @@ $runnerProjectSettings = array(
 		'page' => 'menu',
 		'url' => 'dashboard_dashboard.php?menuItemId=72' 
 	),
+	'richTextEnabled' => true,
 	'menuIds' => array( 
 		'main',
 		'secondary',
@@ -363,6 +364,15 @@ $runnerProjectSettings = array(
 		),
 		'public.lbpmi_source_details' => array(
 			'table' => 19341 
+		),
+		'public.system_notifications' => array(
+			'table' => 19533 
+		),
+		'public.notification_reads' => array(
+			'table' => 19583 
+		),
+		'public.lifeboxme_noti' => array(
+			'table' => 19611 
 		) 
 	),
 	'customTemplates' => array( 
@@ -3183,6 +3193,42 @@ $runnerProjectSettings = array(
 			'connId' => 'lifebox_mesystem_at_localhost',
 			'color' => '3cb371',
 			'originalTable' => 'public.lbpmi_source_details' 
+		),
+		'public.system_notifications' => array(
+			'gid' => 19533,
+			'name' => 'public.system_notifications',
+			'shortName' => 'system_notifications',
+			'type' => 0,
+			'caption' => array(
+				'English' => 'System Notifications' 
+			),
+			'connId' => 'lifebox_mesystem_at_localhost',
+			'color' => '7b68ee',
+			'originalTable' => 'public.system_notifications' 
+		),
+		'public.notification_reads' => array(
+			'gid' => 19583,
+			'name' => 'public.notification_reads',
+			'shortName' => 'notification_reads',
+			'type' => 0,
+			'caption' => array(
+				'English' => 'Notification Reads' 
+			),
+			'connId' => 'lifebox_mesystem_at_localhost',
+			'color' => '00c2c5',
+			'originalTable' => 'public.notification_reads' 
+		),
+		'public.lifeboxme_noti' => array(
+			'gid' => 19611,
+			'name' => 'public.lifeboxme_noti',
+			'shortName' => 'lifeboxme_noti',
+			'type' => 0,
+			'caption' => array(
+				'English' => 'Lifeboxme Noti' 
+			),
+			'connId' => 'lifebox_mesystem_at_localhost',
+			'color' => 'e8926f',
+			'originalTable' => 'public.lifeboxme_noti' 
 		) 
 	),
 	'tablesByShort' => array(
@@ -3299,7 +3345,10 @@ $runnerProjectSettings = array(
 		'Lifbox_Learning_Network_API_Fetcher' => 'Lifbox_Learning_Network_API_Fetcher',
 		'device_distributions1' => 'device_distributions_report',
 		'lbpmi_data_sources' => 'public.lbpmi_data_sources',
-		'lbpmi_source_details' => 'public.lbpmi_source_details' 
+		'lbpmi_source_details' => 'public.lbpmi_source_details',
+		'system_notifications' => 'public.system_notifications',
+		'notification_reads' => 'public.notification_reads',
+		'lifeboxme_noti' => 'public.lifeboxme_noti' 
 	),
 	'tablesByGood' => array(
 		'public_antibiotics' => 'public.antibiotics',
@@ -3415,7 +3464,10 @@ $runnerProjectSettings = array(
 		'Lifbox_Learning_Network_API_Fetcher' => 'Lifbox_Learning_Network_API_Fetcher',
 		'device_distributions_report' => 'device_distributions_report',
 		'public_lbpmi_data_sources' => 'public.lbpmi_data_sources',
-		'public_lbpmi_source_details' => 'public.lbpmi_source_details' 
+		'public_lbpmi_source_details' => 'public.lbpmi_source_details',
+		'public_system_notifications' => 'public.system_notifications',
+		'public_notification_reads' => 'public.notification_reads',
+		'public_lifeboxme_noti' => 'public.lifeboxme_noti' 
 	),
 	'events' => array( 
 		array(
@@ -3451,7 +3503,7 @@ $runnerProjectSettings = array(
 		'table' => 'public.lifeboxme_settings' 
 	),
 	'wizardBuild' => '43785',
-	'projectBuild' => 'yxBayqQklTZf',
+	'projectBuild' => 'tFhau7zDOM9A',
 	'projectTheme' => 'flatly',
 	'projectSize' => 'normal',
 	'customErrorMsg' => array(

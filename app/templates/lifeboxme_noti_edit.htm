@@ -1,0 +1,430 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+						<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+    <LINK rel="shortcut icon" type="image/png" href="/assets/img/lb_favicon.ico"/>
+    <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
+    <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
+    <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
+    		{BEGIN styleCSSFiles}
+<link REL="stylesheet" href="{$stylepath}" type="text/css">
+{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-edit" >
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		{$locking}
+		<div class="r-small-page" 
+			data-body-align="center"
+			data-body-width="standard"
+		>
+							{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="small" {$form_top} data-pageid="{$pageid}"
+		data-v-width="4"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="top_c1" data-pageid="{$pageid}"	{$cell_top_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	 
+		<h2 data-itemtype="edit_header" data-itemid="edit_header" {$item_edit_header} data-pageid="{$pageid}" >{$pagetitlelabel public_lifeboxme_noti edit}</h2>
+	</div>					</div>
+	</div>		
+{END top_block}
+									{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="small" {$form_above-grid} data-pageid="{$pageid}"
+		data-v-width="4"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	 
+		<div data-itemtype="edit_message" data-itemid="edit_message" {$item_edit_message} data-pageid="{$pageid}" class="alert {$message_class}" role="alert">
+<h5>{$message}</h5>
+<div>
+{BEGIN message_back_button}
+			<button class="btn btn-sm btn-default" {$backbutton_attrs}>{mlang_message BACK_TO_LIST}</button>
+	{END message_back_button}
+{BEGIN message_view_page_button}
+		<a class="btn btn-sm btn-default" href="lifeboxme_noti_view.php?{$editlink}" {$view_page_button_attrs}>{mlang_message VIEW}</a>
+{END message_view_page_button}
+</div>
+</div>
+	</div>					</div>
+	</div>		
+{END above-grid_block}
+									{BEGIN grid_block}
+
+
+
+
+ 
+	 
+												<table 
+	data-body-align="center"
+	data-location="grid" id="form_grid_{$pageid}" data-makeup="small" {$form_grid} data-pageid="{$pageid}" 
+	class="r-edit-form" cellpadding="0" cellspacing="0" 
+	{$grid_hiddenattr} 
+		data-form-width="1"
+		
+		data-v-width="4"
+	>
+	<tbody>
+										<tr {$row_grid_0} >
+										
+
+{BEGIN cellblock_grid_c3}
+<td
+	{$cell_grid_c3}
+	class=" r-ori-vert"
+	
+				data-fullwidth
+		
+			data-cellId="grid_c3" data-pageid="{$pageid}"
+		data-v-cell="4"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN message_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_message}  r-vertical-field" 
+	data-signal-error-for="message{$id}" {$required_attr_message}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="message" data-fieldname="message" >
+
+	<label class="r-edit-label control-label {$message_label_class}" for="{$labelfor_message}">
+		{BEGIN message_label}
+			{$message_forward_control}
+			{$label public_lifeboxme_noti message }			{END message_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$message_editcontrol}	</div>
+		<div class="r-edit-tooltip" data-helpfor="message" {$tooltipAttr public_lifeboxme_noti message } >
+		<div class="text-muted" >
+		{$tooltip public_lifeboxme_noti message }		</div>
+	</div>
+	</div>
+
+
+{END message_fieldblock}
+											
+{BEGIN user_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_user}  r-vertical-field" 
+	data-signal-error-for="user{$id}" {$required_attr_user}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="user" data-fieldname="user" >
+
+	<label class="r-edit-label control-label {$user_label_class}" for="{$labelfor_user}">
+		{BEGIN user_label}
+			{$user_forward_control}
+			{$label public_lifeboxme_noti user }			{END user_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$user_editcontrol}	</div>
+		<div class="r-edit-tooltip" data-helpfor="user" {$tooltipAttr public_lifeboxme_noti user } >
+		<div class="text-muted" >
+		{$tooltip public_lifeboxme_noti user }		</div>
+	</div>
+	</div>
+
+
+{END user_fieldblock}
+											
+{BEGIN provider_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_provider}  r-vertical-field" 
+	data-signal-error-for="provider{$id}" {$required_attr_provider}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="provider" data-fieldname="provider" >
+
+	<label class="r-edit-label control-label {$provider_label_class}" for="{$labelfor_provider}">
+		{BEGIN provider_label}
+			{$provider_forward_control}
+			{$label public_lifeboxme_noti provider }			{END provider_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$provider_editcontrol}	</div>
+		<div class="r-edit-tooltip" data-helpfor="provider" {$tooltipAttr public_lifeboxme_noti provider } >
+		<div class="text-muted" >
+		{$tooltip public_lifeboxme_noti provider }		</div>
+	</div>
+	</div>
+
+
+{END provider_fieldblock}
+											
+{BEGIN title_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_title}  r-vertical-field" 
+	data-signal-error-for="title{$id}" {$required_attr_title}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="title" data-fieldname="title" >
+
+	<label class="r-edit-label control-label {$title_label_class}" for="{$labelfor_title}">
+		{BEGIN title_label}
+			{$title_forward_control}
+			{$label public_lifeboxme_noti title }			{END title_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$title_editcontrol}	</div>
+		<div class="r-edit-tooltip" data-helpfor="title" {$tooltipAttr public_lifeboxme_noti title } >
+		<div class="text-muted" >
+		{$tooltip public_lifeboxme_noti title }		</div>
+	</div>
+	</div>
+
+
+{END title_fieldblock}
+											
+{BEGIN url_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_url}  r-vertical-field" 
+	data-signal-error-for="url{$id}" {$required_attr_url}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="url" data-fieldname="url" >
+
+	<label class="r-edit-label control-label {$url_label_class}" for="{$labelfor_url}">
+		{BEGIN url_label}
+			{$url_forward_control}
+			{$label public_lifeboxme_noti url }			{END url_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$url_editcontrol}	</div>
+		<div class="r-edit-tooltip" data-helpfor="url" {$tooltipAttr public_lifeboxme_noti url } >
+		<div class="text-muted" >
+		{$tooltip public_lifeboxme_noti url }		</div>
+	</div>
+	</div>
+
+
+{END url_fieldblock}
+											
+{BEGIN icon_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_icon}  r-vertical-field" 
+	data-signal-error-for="icon{$id}" {$required_attr_icon}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="icon" data-fieldname="icon" >
+
+	<label class="r-edit-label control-label {$icon_label_class}" for="{$labelfor_icon}">
+		{BEGIN icon_label}
+			{$icon_forward_control}
+			{$label public_lifeboxme_noti icon }			{END icon_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$icon_editcontrol}	</div>
+		<div class="r-edit-tooltip" data-helpfor="icon" {$tooltipAttr public_lifeboxme_noti icon } >
+		<div class="text-muted" >
+		{$tooltip public_lifeboxme_noti icon }		</div>
+	</div>
+	</div>
+
+
+{END icon_fieldblock}
+											
+{BEGIN created_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_created}  r-vertical-field" 
+	data-signal-error-for="created{$id}" {$required_attr_created}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="created" data-fieldname="created" >
+
+	<label class="r-edit-label control-label {$created_label_class}" for="{$labelfor_created}">
+		{BEGIN created_label}
+			{$created_forward_control}
+			{$label public_lifeboxme_noti created }			{END created_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$created_editcontrol}	</div>
+		<div class="r-edit-tooltip" data-helpfor="created" {$tooltipAttr public_lifeboxme_noti created } >
+		<div class="text-muted" >
+		{$tooltip public_lifeboxme_noti created }		</div>
+	</div>
+	</div>
+
+
+{END created_fieldblock}
+											
+{BEGIN expire_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_expire}  r-vertical-field" 
+	data-signal-error-for="expire{$id}" {$required_attr_expire}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="expire" data-fieldname="expire" >
+
+	<label class="r-edit-label control-label {$expire_label_class}" for="{$labelfor_expire}">
+		{BEGIN expire_label}
+			{$expire_forward_control}
+			{$label public_lifeboxme_noti expire }			{END expire_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$expire_editcontrol}	</div>
+		<div class="r-edit-tooltip" data-helpfor="expire" {$tooltipAttr public_lifeboxme_noti expire } >
+		<div class="text-muted" >
+		{$tooltip public_lifeboxme_noti expire }		</div>
+	</div>
+	</div>
+
+
+{END expire_fieldblock}
+											
+{BEGIN type_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_type}  r-vertical-field" 
+	data-signal-error-for="type{$id}" {$required_attr_type}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="type" data-fieldname="type" >
+
+	<label class="r-edit-label control-label {$type_label_class}" for="{$labelfor_type}">
+		{BEGIN type_label}
+			{$type_forward_control}
+			{$label public_lifeboxme_noti type }			{END type_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$type_editcontrol}	</div>
+		<div class="r-edit-tooltip" data-helpfor="type" {$tooltipAttr public_lifeboxme_noti type } >
+		<div class="text-muted" >
+		{$tooltip public_lifeboxme_noti type }		</div>
+	</div>
+	</div>
+
+
+{END type_fieldblock}
+											
+{BEGIN group_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_group}  r-vertical-field" 
+	data-signal-error-for="group{$id}" {$required_attr_group}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="group" data-fieldname="group" >
+
+	<label class="r-edit-label control-label {$group_label_class}" for="{$labelfor_group}">
+		{BEGIN group_label}
+			{$group_forward_control}
+			{$label public_lifeboxme_noti group }			{END group_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$group_editcontrol}	</div>
+		<div class="r-edit-tooltip" data-helpfor="group" {$tooltipAttr public_lifeboxme_noti group } >
+		<div class="text-muted" >
+		{$tooltip public_lifeboxme_noti group }		</div>
+	</div>
+	</div>
+
+
+{END group_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c3}
+								</tr>
+			</tbody></table>
+{END grid_block}
+									{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="small" {$form_below-grid} data-pageid="{$pageid}"
+		data-v-width="4"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class="			col-md-6
+	">
+	 
+		{BEGIN save_edit}
+<span data-itemtype="edit_save" data-itemid="edit_save" {$item_edit_save} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-primary   
+	" {$savebutton_attrs} >
+							{mlang_message SAVE}			</a>
+</span>
+{END save_edit}
+	 
+		{BEGIN back_button}
+<span data-itemtype="edit_back_list" data-itemid="edit_back_list" {$item_edit_back_list} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$backbutton_attrs} >
+							{mlang_message BACK_TO_LIST}			</a>
+</span>
+{END back_button}
+	 
+		{BEGIN close_button}
+<span data-itemtype="edit_close" data-itemid="edit_close" {$item_edit_close} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$closebutton_attrs} >
+							{mlang_message CANCEL}			</a>
+</span>
+{END close_button}
+	</div>			 
+				<div 
+	data-cellId="below-grid_c2" data-pageid="{$pageid}"	{$cell_below-grid_c2}
+	class="r-align-right r-ori-vert			col-md-6
+	">
+	 
+		<span data-itemtype="hamburger" data-itemid="hamburger" {$item_hamburger} data-pageid="{$pageid}" data-small data-button-item>
+	<span class="dropdown dropup">
+		<button type="button" title="" class="btn btn-default   dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">		
+										<span class="glyphicon glyphicon-menu-hamburger"></span>
+												<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+							{BEGIN reset_button}
+	<li data-itemtype="edit_reset" data-itemid="edit_reset" {$item_edit_reset} data-pageid="{$pageid}" data-small >
+				<a  {$resetbutton_attrs}  title="" >
+				
+		{mlang_message RESET}		
+		</a>
+	</li>
+{END reset_button}
+							{BEGIN view_page_button}
+	<li data-itemtype="edit_view" data-itemid="edit_view" {$item_edit_view} data-pageid="{$pageid}" data-small >
+				<a  href="lifeboxme_noti_view.php?{$editlink}" {$view_page_button_attrs}  title="" >
+				
+		{mlang_message VIEW}		
+		</a>
+	</li>
+{END view_page_button}
+					</ul>
+	</span>
+</span>
+	</div>					</div>
+	</div>		
+{END below-grid_block}
+			</div>
+		{$footer}
+	{END body}
+	</body>
+</html>
