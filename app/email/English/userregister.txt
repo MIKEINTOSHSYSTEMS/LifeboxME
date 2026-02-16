@@ -1,6 +1,8 @@
 Notification on registering
-You have registered as a user at %url%
-
-Click this link to confirm your account and finish the registration:
-%activateurl%
-If you are unable to click on the link, copy and paste it into your browser window.
+<p>
+You have registered as a user at <a href="%url%"> %url% </a>
+</p>
+<p>
+Click this link to confirm your account and finish the registration: <br/>
+<a href="%activateurl%"> %activateurl% </a> <br/>
+If you are unable to click on the link, copy and paste it into your browser window.</p>

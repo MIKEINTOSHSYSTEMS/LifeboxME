@@ -160,6 +160,9 @@
 			'notifications' => array( 
 				'notifications' 
 			),
+			'changepassword_link' => array( 
+				'changepassword_link' 
+			),
 			'expand_button' => array( 
 				'expand_button' 
 			) 
@@ -491,7 +494,8 @@
 			'type' => 'username_button',
 			'items' => array( 
 				'userinfo_link',
-				'logout_link' 
+				'logout_link',
+				'changepassword_link' 
 			) 
 		),
 		'loginform_login' => array(
@@ -511,6 +515,9 @@
 		),
 		'notifications' => array(
 			'type' => 'notifications' 
+		),
+		'changepassword_link' => array(
+			'type' => 'changepassword_link' 
 		),
 		'expand_button' => array(
 			'type' => 'expand_button' 

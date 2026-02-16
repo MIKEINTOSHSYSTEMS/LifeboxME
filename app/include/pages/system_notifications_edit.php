@@ -287,6 +287,9 @@
 			'text' => array( 
 				'text' 
 			),
+			'changepassword_link' => array( 
+				'changepassword_link' 
+			),
 			'expand_button' => array( 
 				'expand_button' 
 			) 
@@ -1310,7 +1313,8 @@
 			'type' => 'username_button',
 			'items' => array( 
 				'userinfo_link',
-				'logout_link' 
+				'logout_link',
+				'changepassword_link' 
 			) 
 		),
 		'loginform_login' => array(
@@ -1398,6 +1402,9 @@
 				'type' => 0 
 			),
 			'editedByRte' => true 
+		),
+		'changepassword_link' => array(
+			'type' => 'changepassword_link' 
 		),
 		'expand_button' => array(
 			'type' => 'expand_button' 

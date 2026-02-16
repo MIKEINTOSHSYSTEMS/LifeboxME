@@ -6,7 +6,36 @@ $runnerProjectSettings = array(
 	'restAPIKeyField' => 'api_key',
 	'emailTemplates' => array(
 		'English' => array(
-			 
+			'resetpassword' => array(
+				'name' => 'resetpassword',
+				'template' => '',
+				'useDefault' => true,
+				'useHTML' => true 
+			),
+			'adminregister' => array(
+				'name' => 'adminregister',
+				'template' => '',
+				'useDefault' => true,
+				'useHTML' => true 
+			),
+			'userregister' => array(
+				'name' => 'userregister',
+				'template' => '',
+				'useDefault' => true,
+				'useHTML' => true 
+			),
+			'remindpassword' => array(
+				'name' => 'remindpassword',
+				'template' => '',
+				'useDefault' => true,
+				'useHTML' => true 
+			),
+			'twofactoremail' => array(
+				'name' => 'twofactoremail',
+				'template' => '',
+				'useDefault' => true,
+				'useHTML' => true 
+			) 
 		) 
 	),
 	'landingSettings' => array(
@@ -495,13 +524,13 @@ $runnerProjectSettings = array(
 			'passesCount' => 5 
 		),
 		'emailSettings' => array(
-			'fromEmail' => '',
+			'fromEmail' => 'mne@lifebox.org',
 			'usePHPDefinedSMTP' => false,
 			'useBuiltInMailer' => false,
-			'SMTPServer' => '',
+			'SMTPServer' => 'smtp-mail.outlook.com',
 			'SMTPPort' => 587,
-			'SMTPUser' => '',
-			'SMTPPassword' => '',
+			'SMTPUser' => 'mne@lifebox.org',
+			'SMTPPassword' => 'G.817939771353uk',
 			'securityProtocol' => 2 
 		),
 		'advancedSecurity' => array(
@@ -3503,7 +3532,7 @@ $runnerProjectSettings = array(
 		'table' => 'public.lifeboxme_settings' 
 	),
 	'wizardBuild' => '43785',
-	'projectBuild' => 'tFhau7zDOM9A',
+	'projectBuild' => 'NuXE3ajMJPyq',
 	'projectTheme' => 'flatly',
 	'projectSize' => 'normal',
 	'customErrorMsg' => array(

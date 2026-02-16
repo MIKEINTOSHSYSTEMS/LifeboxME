@@ -1,21 +1,41 @@
-Notification on registering 
+Notification on registering
+<p>
+User registered at&nbsp;<a href="%url%"> %url% </a>
+</p>
+<p>
 
-User registered at %url%
-
-ID: %ID_value%
-Username: %username_value%
-Email: %email_value%
-Full Name: %fullname_value%
-Groupid: %groupid_value%
-Ext Security Id: %ext_security_id_value%
-Userpic: %userpic_value%
-First Name: %first_name_value%
-Middle Name: %middle_name_value%
-Last Name: %last_name_value%
-Sex: %sex_value%
-Designation Role: %designation_role_value%
-Region: %region_value%
-Country: %country_value%
-Phone: %phone_value%
-Prefix Title: %prefix_title_value%
-API Key: %api_key_value%
+ 
+ID: <b> %ID_value% </b> <br/> 
+ 
+Username: <b> %username_value% </b> <br/> 
+ 
+Email: <b> %email_value% </b> <br/> 
+ 
+Full Name: <b> %fullname_value% </b> <br/> 
+ 
+Groupid: <b> %groupid_value% </b> <br/> 
+ 
+Ext Security Id: <b> %ext_security_id_value% </b> <br/> 
+ 
+Userpic: <b> %userpic_value% </b> <br/> 
+ 
+First Name: <b> %first_name_value% </b> <br/> 
+ 
+Middle Name: <b> %middle_name_value% </b> <br/> 
+ 
+Last Name: <b> %last_name_value% </b> <br/> 
+ 
+Sex: <b> %sex_value% </b> <br/> 
+ 
+Designation Role: <b> %designation_role_value% </b> <br/> 
+ 
+Region: <b> %region_value% </b> <br/> 
+ 
+Country: <b> %country_value% </b> <br/> 
+ 
+Phone: <b> %phone_value% </b> <br/> 
+ 
+Prefix Title: <b> %prefix_title_value% </b> <br/> 
+ 
+API Key: <b> %api_key_value% </b> <br/> 
+</p>

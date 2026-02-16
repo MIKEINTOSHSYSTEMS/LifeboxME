@@ -58,7 +58,7 @@ $runnerTableSettings['public.smtp'] = array(
 		'50',
 		'100',
 		'500',
-		'-1' 
+		'1' 
 	),
 	'pageSizeSelectorGroups' => array( 
 		'1',
@@ -67,8 +67,9 @@ $runnerTableSettings['public.smtp'] = array(
 		'10',
 		'50',
 		'100',
-		'-1' 
+		'1' 
 	),
+	'displayLoading' => true,
 	'warnLeavingEdit' => true,
 	'sql' => 'SELECT
 	id,
