@@ -34,7 +34,7 @@ $runnerTableSettings['Dashboard'] = array(
 		'50',
 		'100',
 		'500',
-		'-1' 
+		'1' 
 	),
 	'pageSizeSelectorGroups' => array( 
 		'1',
@@ -43,7 +43,7 @@ $runnerTableSettings['Dashboard'] = array(
 		'10',
 		'50',
 		'100',
-		'-1' 
+		'1' 
 	),
 	'displayLoading' => true,
 	'warnLeavingEdit' => true,

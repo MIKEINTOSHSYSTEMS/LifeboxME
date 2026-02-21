@@ -572,6 +572,7 @@ FROM "public".users',
 			),
 			'editFormats' => array(
 				'edit' => array(
+					'format' => 'Readonly',
 					'textHTML5Input' => '0',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
