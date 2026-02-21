@@ -454,13 +454,13 @@
     <section class="tabs-section">
         <ul class="nav nav-tabs justify-content-center" id="tabs" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button" role="tab">
-                    <i class="fa-solid fa-info-circle"></i> Info
+                <button class="nav-link active" id="embed-tab" data-bs-toggle="tab" data-bs-target="#embed" type="button" role="tab">
+                    <i class="fa-solid fa-gauge"></i> Dashboard
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="embed-tab" data-bs-toggle="tab" data-bs-target="#embed" type="button" role="tab">
-                    <i class="fa-solid fa-gauge"></i> Dashboard
+                <button class="nav-link" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button" role="tab">
+                    <i class="fa-solid fa-info-circle"></i> Info
                 </button>
             </li>
             <li class="nav-item" role="presentation">
@@ -472,8 +472,22 @@
 
         <!-- Tab Content -->
         <div class="tab-content" id="tabsContent">
-            <!-- Info Tab -->
-            <div class="tab-pane fade show active" id="info" role="tabpanel">
+            <!-- Embed Tab (Now first and active by default) -->
+            <div class="tab-pane fade show active" id="embed" role="tabpanel">
+                <div class="dashboard-container">
+                    <div class="iframe-loading">Loading</div>
+                    <iframe
+                        src="../meta/index.php"
+                        class="dashboard-iframe"
+                        allowtransparency="true"
+                        allowfullscreen
+                        onload="document.querySelector('.iframe-loading').style.display = 'none';">
+                    </iframe>
+                </div>
+            </div>
+
+            <!-- Info Tab (Now second) -->
+            <div class="tab-pane fade" id="info" role="tabpanel">
 
                 <!-- System Components Section -->
                 <section class="components" id="components">
@@ -936,20 +950,6 @@
 
             </div>
 
-            <!-- Embed Tab -->
-            <div class="tab-pane fade" id="embed" role="tabpanel">
-                <div class="dashboard-container">
-                    <div class="iframe-loading">Loading</div>
-                    <iframe
-                        src="../meta/index.php"
-                        class="dashboard-iframe"
-                        allowtransparency="true"
-                        allowfullscreen
-                        onload="document.querySelector('.iframe-loading').style.display = 'none';">
-                    </iframe>
-                </div>
-            </div>
-
             <!-- Help Tab -->
             <div class="tab-pane fade" id="help" role="tabpanel">
                 <div class="dashboard-container">
@@ -1041,6 +1041,15 @@
                     }
                 });
             });
+
+            // Ensure the dashboard iframe is properly loaded when page opens
+            const dashboardIframe = document.querySelector('#embed iframe');
+            if (dashboardIframe) {
+                // Check if iframe is already loaded
+                if (dashboardIframe.contentWindow && dashboardIframe.contentWindow.document.readyState === 'complete') {
+                    document.querySelector('#embed .iframe-loading').style.display = 'none';
+                }
+            }
         });
     </script>
 
