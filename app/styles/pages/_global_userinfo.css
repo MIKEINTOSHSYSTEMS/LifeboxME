@@ -7,6 +7,15 @@
 [data-page="_global_userinfo"][data-itemid="user_fields_title"] {
   font-size: 24px;
 }
+[data-page="_global_userinfo"][data-itemid="integrated_edit_field11"][data-page="_global_userinfo"][data-itemid="integrated_edit_field11"][data-page="_global_userinfo"][data-itemid="integrated_edit_field11"][data-page="_global_userinfo"][data-itemid="integrated_edit_field11"] > * > label,
+[data-page="_global_userinfo"][data-itemid="integrated_edit_field11"][data-page="_global_userinfo"][data-itemid="integrated_edit_field11"][data-page="_global_userinfo"][data-itemid="integrated_edit_field11"][data-page="_global_userinfo"][data-itemid="integrated_edit_field11"] > * > * > input,
+[data-page="_global_userinfo"][data-itemid="integrated_edit_field11"][data-page="_global_userinfo"][data-itemid="integrated_edit_field11"][data-page="_global_userinfo"][data-itemid="integrated_edit_field11"][data-page="_global_userinfo"][data-itemid="integrated_edit_field11"] > * > * > textarea,
+[data-page="_global_userinfo"][data-itemid="integrated_edit_field11"][data-page="_global_userinfo"][data-itemid="integrated_edit_field11"][data-page="_global_userinfo"][data-itemid="integrated_edit_field11"][data-page="_global_userinfo"][data-itemid="integrated_edit_field11"] > * > * > select,
+[data-page="_global_userinfo"][data-itemid="integrated_edit_field11"][data-page="_global_userinfo"][data-itemid="integrated_edit_field11"][data-page="_global_userinfo"][data-itemid="integrated_edit_field11"][data-page="_global_userinfo"][data-itemid="integrated_edit_field11"] > * > * > .r-readonly-control,
+[data-page="_global_userinfo"][data-itemid="integrated_edit_field11"][data-page="_global_userinfo"][data-itemid="integrated_edit_field11"][data-page="_global_userinfo"][data-itemid="integrated_edit_field11"][data-page="_global_userinfo"][data-itemid="integrated_edit_field11"] > * > * > * > select {
+  color: #079ca7;
+  font-weight: bold;
+}
 [data-page="_global_userinfo"][data-itemid="section"] > .panel-heading {
   background-color: #00b3c7;
   background-image: none;

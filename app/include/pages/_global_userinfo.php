@@ -1416,7 +1416,9 @@
 		'integrated_edit_field11' => array(
 			'field' => 'designation_role',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'bold' => true,
+			'color' => '#079ca7' 
 		),
 		'integrated_edit_field12' => array(
 			'field' => 'prefix_title',

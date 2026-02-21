@@ -394,23 +394,118 @@
 	data-location="grid" id="form_grid_{$pageid}" data-makeup="leftbar" {$form_grid} data-pageid="{$pageid}" 
 	class="r-edit-form" cellpadding="0" cellspacing="0" 
 	{$grid_hiddenattr} 
-		data-form-width="1"
+		data-form-width="4"
 		
-		data-v-width="4"
+		data-v-width="8"
 	>
 	<tbody>
 										<tr {$row_grid_0} >
 										
 
-{BEGIN cellblock_grid_c3}
+{BEGIN cellblock_grid_c5}
 <td
-	{$cell_grid_c3}
+	{$cell_grid_c5}
 	class=" r-ori-vert"
 	
-				data-fullwidth
+			data-single
+			
+			data-cellId="grid_c5" data-pageid="{$pageid}"
+		data-v-cell="2"
 		
-			data-cellId="grid_c3" data-pageid="{$pageid}"
-		data-v-cell="4"
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN userpic_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_userpic}  r-vertical-field" 
+	data-signal-error-for="userpic{$id}" {$required_attr_userpic}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="userpic" data-fieldname="userpic" >
+
+	<label class="r-edit-label control-label {$userpic_label_class}" for="{$labelfor_userpic}">
+		{BEGIN userpic_label}
+			{$userpic_forward_control}
+			{$label admin_users userpic }			{END userpic_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$userpic_value}	</div>
+	</div>
+
+
+{END userpic_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c5}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c6}
+<td
+	{$cell_grid_c6}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c6" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c6}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c26}
+<td
+	{$cell_grid_c26}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c26" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c26}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c7}
+<td
+	{$cell_grid_c7}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c7" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c7}
+								</tr>
+	 
+	 
+														<tr {$row_grid_1} >
+										
+
+{BEGIN cellblock_grid_c8}
+<td
+	{$cell_grid_c8}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c8" data-pageid="{$pageid}"
+		data-v-cell="2"
 		
 >
 	<div edit-form-cell class="clearfix">
@@ -434,27 +529,25 @@
 
 
 {END username_fieldblock}
-											
-{BEGIN prefix_title_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c8}
+			 
+																
 
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_prefix_title}  r-vertical-field" 
-	data-signal-error-for="prefix_title{$id}" {$required_attr_prefix_title}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field18" {$item_integrated_edit_field18} data-pageid="{$pageid}" data-field="prefix_title" data-fieldname="prefix_title" >
-
-	<label class="r-edit-label control-label {$prefix_title_label_class}" for="{$labelfor_prefix_title}">
-		{BEGIN prefix_title_label}
-			{$prefix_title_forward_control}
-			{$label admin_users prefix_title }			{END prefix_title_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$prefix_title_value}	</div>
-	</div>
-
-
-{END prefix_title_fieldblock}
-											
+{BEGIN cellblock_grid_c9}
+<td
+	{$cell_grid_c9}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c9" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
 {BEGIN fullname_fieldblock}
 
 
@@ -474,167 +567,43 @@
 
 
 {END fullname_fieldblock}
-											
-{BEGIN first_name_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c9}
+			 
+		
+							
 
+{BEGIN cellblock_grid_c27}
+<td
+	{$cell_grid_c27}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c27" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c27}
+			 
+																
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_first_name}  r-vertical-field" 
-	data-signal-error-for="first_name{$id}" {$required_attr_first_name}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="first_name" data-fieldname="first_name" >
-
-	<label class="r-edit-label control-label {$first_name_label_class}" for="{$labelfor_first_name}">
-		{BEGIN first_name_label}
-			{$first_name_forward_control}
-			{$label admin_users first_name }			{END first_name_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$first_name_value}	</div>
-	</div>
-
-
-{END first_name_fieldblock}
-											
-{BEGIN middle_name_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_middle_name}  r-vertical-field" 
-	data-signal-error-for="middle_name{$id}" {$required_attr_middle_name}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="middle_name" data-fieldname="middle_name" >
-
-	<label class="r-edit-label control-label {$middle_name_label_class}" for="{$labelfor_middle_name}">
-		{BEGIN middle_name_label}
-			{$middle_name_forward_control}
-			{$label admin_users middle_name }			{END middle_name_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$middle_name_value}	</div>
-	</div>
-
-
-{END middle_name_fieldblock}
-											
-{BEGIN last_name_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_last_name}  r-vertical-field" 
-	data-signal-error-for="last_name{$id}" {$required_attr_last_name}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="last_name" data-fieldname="last_name" >
-
-	<label class="r-edit-label control-label {$last_name_label_class}" for="{$labelfor_last_name}">
-		{BEGIN last_name_label}
-			{$last_name_forward_control}
-			{$label admin_users last_name }			{END last_name_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$last_name_value}	</div>
-	</div>
-
-
-{END last_name_fieldblock}
-											
-{BEGIN sex_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_sex}  r-vertical-field" 
-	data-signal-error-for="sex{$id}" {$required_attr_sex}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field13" {$item_integrated_edit_field13} data-pageid="{$pageid}" data-field="sex" data-fieldname="sex" >
-
-	<label class="r-edit-label control-label {$sex_label_class}" for="{$labelfor_sex}">
-		{BEGIN sex_label}
-			{$sex_forward_control}
-			{$label admin_users sex }			{END sex_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$sex_value}	</div>
-	</div>
-
-
-{END sex_fieldblock}
-											
-{BEGIN region_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_region}  r-vertical-field" 
-	data-signal-error-for="region{$id}" {$required_attr_region}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field15" {$item_integrated_edit_field15} data-pageid="{$pageid}" data-field="region" data-fieldname="region" >
-
-	<label class="r-edit-label control-label {$region_label_class}" for="{$labelfor_region}">
-		{BEGIN region_label}
-			{$region_forward_control}
-			{$label admin_users region }			{END region_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$region_value}	</div>
-	</div>
-
-
-{END region_fieldblock}
-											
-{BEGIN country_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_country}  r-vertical-field" 
-	data-signal-error-for="country{$id}" {$required_attr_country}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field16" {$item_integrated_edit_field16} data-pageid="{$pageid}" data-field="country" data-fieldname="country" >
-
-	<label class="r-edit-label control-label {$country_label_class}" for="{$labelfor_country}">
-		{BEGIN country_label}
-			{$country_forward_control}
-			{$label admin_users country }			{END country_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$country_value}	</div>
-	</div>
-
-
-{END country_fieldblock}
-											
-{BEGIN email_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_email}  r-vertical-field" 
-	data-signal-error-for="email{$id}" {$required_attr_email}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="email" data-fieldname="email" >
-
-	<label class="r-edit-label control-label {$email_label_class}" for="{$labelfor_email}">
-		{BEGIN email_label}
-			{$email_forward_control}
-			{$label admin_users email }			{END email_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$email_value}	</div>
-	</div>
-
-
-{END email_fieldblock}
-											
-{BEGIN phone_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_phone}  r-vertical-field" 
-	data-signal-error-for="phone{$id}" {$required_attr_phone}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field17" {$item_integrated_edit_field17} data-pageid="{$pageid}" data-field="phone" data-fieldname="phone" >
-
-	<label class="r-edit-label control-label {$phone_label_class}" for="{$labelfor_phone}">
-		{BEGIN phone_label}
-			{$phone_forward_control}
-			{$label admin_users phone }			{END phone_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$phone_value}	</div>
-	</div>
-
-
-{END phone_fieldblock}
-											
+{BEGIN cellblock_grid_c10}
+<td
+	{$cell_grid_c10}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c10" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
 {BEGIN designation_role_fieldblock}
 
 
@@ -654,127 +623,297 @@
 
 
 {END designation_role_fieldblock}
-											
-{BEGIN groupid_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c10}
+								</tr>
+	 
+	 
+														<tr {$row_grid_2} >
+										
+
+{BEGIN cellblock_grid_c11}
+<td
+	{$cell_grid_c11}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c11" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN prefix_title_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_groupid}  r-vertical-field" 
-	data-signal-error-for="groupid{$id}" {$required_attr_groupid}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="groupid" data-fieldname="groupid" >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_prefix_title}  r-vertical-field" 
+	data-signal-error-for="prefix_title{$id}" {$required_attr_prefix_title}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field18" {$item_integrated_edit_field18} data-pageid="{$pageid}" data-field="prefix_title" data-fieldname="prefix_title" >
 
-	<label class="r-edit-label control-label {$groupid_label_class}" for="{$labelfor_groupid}">
-		{BEGIN groupid_label}
-			{$groupid_forward_control}
-			{$label admin_users groupid }			{END groupid_label}
+	<label class="r-edit-label control-label {$prefix_title_label_class}" for="{$labelfor_prefix_title}">
+		{BEGIN prefix_title_label}
+			{$prefix_title_forward_control}
+			{$label admin_users prefix_title }			{END prefix_title_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
-		{$groupid_value}	</div>
+		{$prefix_title_value}	</div>
 	</div>
 
 
-{END groupid_fieldblock}
-											
-{BEGIN active_fieldblock}
+{END prefix_title_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c11}
+			 
+																
+
+{BEGIN cellblock_grid_c12}
+<td
+	{$cell_grid_c12}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c12" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN first_name_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_active}  r-vertical-field" 
-	data-signal-error-for="active{$id}" {$required_attr_active}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="active" data-fieldname="active" >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_first_name}  r-vertical-field" 
+	data-signal-error-for="first_name{$id}" {$required_attr_first_name}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="first_name" data-fieldname="first_name" >
 
-	<label class="r-edit-label control-label {$active_label_class}" for="{$labelfor_active}">
-		{BEGIN active_label}
-			{$active_forward_control}
-			{$label admin_users active }			{END active_label}
+	<label class="r-edit-label control-label {$first_name_label_class}" for="{$labelfor_first_name}">
+		{BEGIN first_name_label}
+			{$first_name_forward_control}
+			{$label admin_users first_name }			{END first_name_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
-		{$active_value}	</div>
+		{$first_name_value}	</div>
 	</div>
 
 
-{END active_fieldblock}
-											
-{BEGIN ext_security_id_fieldblock}
+{END first_name_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c12}
+			 
+																
+
+{BEGIN cellblock_grid_c28}
+<td
+	{$cell_grid_c28}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c28" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN middle_name_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_ext_security_id}  r-vertical-field" 
-	data-signal-error-for="ext_security_id{$id}" {$required_attr_ext_security_id}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="ext_security_id" data-fieldname="ext_security_id" >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_middle_name}  r-vertical-field" 
+	data-signal-error-for="middle_name{$id}" {$required_attr_middle_name}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="middle_name" data-fieldname="middle_name" >
 
-	<label class="r-edit-label control-label {$ext_security_id_label_class}" for="{$labelfor_ext_security_id}">
-		{BEGIN ext_security_id_label}
-			{$ext_security_id_forward_control}
-			{$label admin_users ext_security_id }			{END ext_security_id_label}
+	<label class="r-edit-label control-label {$middle_name_label_class}" for="{$labelfor_middle_name}">
+		{BEGIN middle_name_label}
+			{$middle_name_forward_control}
+			{$label admin_users middle_name }			{END middle_name_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
-		{$ext_security_id_value}	</div>
+		{$middle_name_value}	</div>
 	</div>
 
 
-{END ext_security_id_fieldblock}
-											
-{BEGIN userpic_fieldblock}
+{END middle_name_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c28}
+			 
+																
+
+{BEGIN cellblock_grid_c13}
+<td
+	{$cell_grid_c13}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c13" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN last_name_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_userpic}  r-vertical-field" 
-	data-signal-error-for="userpic{$id}" {$required_attr_userpic}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="userpic" data-fieldname="userpic" >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_last_name}  r-vertical-field" 
+	data-signal-error-for="last_name{$id}" {$required_attr_last_name}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="last_name" data-fieldname="last_name" >
 
-	<label class="r-edit-label control-label {$userpic_label_class}" for="{$labelfor_userpic}">
-		{BEGIN userpic_label}
-			{$userpic_forward_control}
-			{$label admin_users userpic }			{END userpic_label}
+	<label class="r-edit-label control-label {$last_name_label_class}" for="{$labelfor_last_name}">
+		{BEGIN last_name_label}
+			{$last_name_forward_control}
+			{$label admin_users last_name }			{END last_name_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
-		{$userpic_value}	</div>
+		{$last_name_value}	</div>
 	</div>
 
 
-{END userpic_fieldblock}
-											
-{BEGIN reset_date_fieldblock}
+{END last_name_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c13}
+								</tr>
+	 
+	 
+														<tr {$row_grid_3} >
+										
+
+{BEGIN cellblock_grid_c14}
+<td
+	{$cell_grid_c14}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c14" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN sex_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_reset_date}  r-vertical-field" 
-	data-signal-error-for="reset_date{$id}" {$required_attr_reset_date}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="reset_date" data-fieldname="reset_date" >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_sex}  r-vertical-field" 
+	data-signal-error-for="sex{$id}" {$required_attr_sex}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field13" {$item_integrated_edit_field13} data-pageid="{$pageid}" data-field="sex" data-fieldname="sex" >
 
-	<label class="r-edit-label control-label {$reset_date_label_class}" for="{$labelfor_reset_date}">
-		{BEGIN reset_date_label}
-			{$reset_date_forward_control}
-			{$label admin_users reset_date }			{END reset_date_label}
+	<label class="r-edit-label control-label {$sex_label_class}" for="{$labelfor_sex}">
+		{BEGIN sex_label}
+			{$sex_forward_control}
+			{$label admin_users sex }			{END sex_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
-		{$reset_date_value}	</div>
+		{$sex_value}	</div>
 	</div>
 
 
-{END reset_date_fieldblock}
-											
-{BEGIN reset_token_fieldblock}
+{END sex_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c14}
+			 
+																
+
+{BEGIN cellblock_grid_c15}
+<td
+	{$cell_grid_c15}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c15" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN email_fieldblock}
 
 
-<div class="r-integrated-field form-group clearfix {$fielddispclass_reset_token}  r-vertical-field" 
-	data-signal-error-for="reset_token{$id}" {$required_attr_reset_token}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="reset_token" data-fieldname="reset_token" >
+<div class="r-integrated-field form-group clearfix {$fielddispclass_email}  r-vertical-field" 
+	data-signal-error-for="email{$id}" {$required_attr_email}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="email" data-fieldname="email" >
 
-	<label class="r-edit-label control-label {$reset_token_label_class}" for="{$labelfor_reset_token}">
-		{BEGIN reset_token_label}
-			{$reset_token_forward_control}
-			{$label admin_users reset_token }			{END reset_token_label}
+	<label class="r-edit-label control-label {$email_label_class}" for="{$labelfor_email}">
+		{BEGIN email_label}
+			{$email_forward_control}
+			{$label admin_users email }			{END email_label}
 		<span class="icon-required"></span>
 	</label>
 	<div class="r-edit-field">
-		{$reset_token_value}	</div>
+		{$email_value}	</div>
 	</div>
 
 
-{END reset_token_fieldblock}
-											
+{END email_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c15}
+			 
+																
+
+{BEGIN cellblock_grid_c29}
+<td
+	{$cell_grid_c29}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c29" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN phone_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_phone}  r-vertical-field" 
+	data-signal-error-for="phone{$id}" {$required_attr_phone}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field17" {$item_integrated_edit_field17} data-pageid="{$pageid}" data-field="phone" data-fieldname="phone" >
+
+	<label class="r-edit-label control-label {$phone_label_class}" for="{$labelfor_phone}">
+		{BEGIN phone_label}
+			{$phone_forward_control}
+			{$label admin_users phone }			{END phone_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$phone_value}	</div>
+	</div>
+
+
+{END phone_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c29}
+			 
+																
+
+{BEGIN cellblock_grid_c16}
+<td
+	{$cell_grid_c16}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c16" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
 {BEGIN password_fieldblock}
 
 
@@ -796,7 +935,747 @@
 {END password_fieldblock}
 	
 								</td>
+			{END cellblock_grid_c16}
+								</tr>
+	 
+	 
+														<tr {$row_grid_4} >
+										
+
+{BEGIN cellblock_grid_c17}
+<td
+	{$cell_grid_c17}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c17" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN region_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_region}  r-vertical-field" 
+	data-signal-error-for="region{$id}" {$required_attr_region}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field15" {$item_integrated_edit_field15} data-pageid="{$pageid}" data-field="region" data-fieldname="region" >
+
+	<label class="r-edit-label control-label {$region_label_class}" for="{$labelfor_region}">
+		{BEGIN region_label}
+			{$region_forward_control}
+			{$label admin_users region }			{END region_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$region_value}	</div>
+	</div>
+
+
+{END region_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c17}
+			 
+																
+
+{BEGIN cellblock_grid_c18}
+<td
+	{$cell_grid_c18}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c18" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN country_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_country}  r-vertical-field" 
+	data-signal-error-for="country{$id}" {$required_attr_country}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field16" {$item_integrated_edit_field16} data-pageid="{$pageid}" data-field="country" data-fieldname="country" >
+
+	<label class="r-edit-label control-label {$country_label_class}" for="{$labelfor_country}">
+		{BEGIN country_label}
+			{$country_forward_control}
+			{$label admin_users country }			{END country_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$country_value}	</div>
+	</div>
+
+
+{END country_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c18}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c30}
+<td
+	{$cell_grid_c30}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c30" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c30}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c19}
+<td
+	{$cell_grid_c19}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c19" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c19}
+								</tr>
+	 
+	 
+		
+						<tr>
+						
+
+{BEGIN cellblock_grid_c20}
+<td
+	{$cell_grid_c20}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c20" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c20}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c21}
+<td
+	{$cell_grid_c21}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c21" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c21}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c31}
+<td
+	{$cell_grid_c31}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c31" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c31}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c22}
+<td
+	{$cell_grid_c22}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c22" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c22}
+								</tr>
+	 
+	 
+		
+						<tr>
+						
+
+{BEGIN cellblock_grid_c46}
+<td
+	{$cell_grid_c46}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c46" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c46}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c47}
+<td
+	{$cell_grid_c47}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c47" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c47}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c48}
+<td
+	{$cell_grid_c48}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c48" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c48}
+			 
+																
+
+{BEGIN cellblock_grid_c49}
+<td
+	{$cell_grid_c49}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c49" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN ext_security_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_ext_security_id}  r-vertical-field" 
+	data-signal-error-for="ext_security_id{$id}" {$required_attr_ext_security_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="ext_security_id" data-fieldname="ext_security_id" >
+
+	<label class="r-edit-label control-label {$ext_security_id_label_class}" for="{$labelfor_ext_security_id}">
+		{BEGIN ext_security_id_label}
+			{$ext_security_id_forward_control}
+			{$label admin_users ext_security_id }			{END ext_security_id_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$ext_security_id_value}	</div>
+	</div>
+
+
+{END ext_security_id_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c49}
+								</tr>
+	 
+	 
+														<tr {$row_grid_7} >
+										
+
+{BEGIN cellblock_grid_c42}
+<td
+	{$cell_grid_c42}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c42" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN active_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_active}  r-vertical-field" 
+	data-signal-error-for="active{$id}" {$required_attr_active}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="active" data-fieldname="active" >
+
+	<label class="r-edit-label control-label {$active_label_class}" for="{$labelfor_active}">
+		{BEGIN active_label}
+			{$active_forward_control}
+			{$label admin_users active }			{END active_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$active_value}	</div>
+	</div>
+
+
+{END active_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c42}
+			 
+																
+
+{BEGIN cellblock_grid_c43}
+<td
+	{$cell_grid_c43}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c43" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN groupid_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_groupid}  r-vertical-field" 
+	data-signal-error-for="groupid{$id}" {$required_attr_groupid}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="groupid" data-fieldname="groupid" >
+
+	<label class="r-edit-label control-label {$groupid_label_class}" for="{$labelfor_groupid}">
+		{BEGIN groupid_label}
+			{$groupid_forward_control}
+			{$label admin_users groupid }			{END groupid_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$groupid_value}	</div>
+	</div>
+
+
+{END groupid_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c43}
+			 
+																
+
+{BEGIN cellblock_grid_c44}
+<td
+	{$cell_grid_c44}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c44" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN reset_date_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_reset_date}  r-vertical-field" 
+	data-signal-error-for="reset_date{$id}" {$required_attr_reset_date}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="reset_date" data-fieldname="reset_date" >
+
+	<label class="r-edit-label control-label {$reset_date_label_class}" for="{$labelfor_reset_date}">
+		{BEGIN reset_date_label}
+			{$reset_date_forward_control}
+			{$label admin_users reset_date }			{END reset_date_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$reset_date_value}	</div>
+	</div>
+
+
+{END reset_date_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c44}
+			 
+																
+
+{BEGIN cellblock_grid_c45}
+<td
+	{$cell_grid_c45}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c45" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN reset_token_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_reset_token}  r-vertical-field" 
+	data-signal-error-for="reset_token{$id}" {$required_attr_reset_token}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="reset_token" data-fieldname="reset_token" >
+
+	<label class="r-edit-label control-label {$reset_token_label_class}" for="{$labelfor_reset_token}">
+		{BEGIN reset_token_label}
+			{$reset_token_forward_control}
+			{$label admin_users reset_token }			{END reset_token_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$reset_token_value}	</div>
+	</div>
+
+
+{END reset_token_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c45}
+								</tr>
+	 
+	 
+		
+						<tr>
+						
+
+{BEGIN cellblock_grid_c38}
+<td
+	{$cell_grid_c38}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c38" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c38}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c39}
+<td
+	{$cell_grid_c39}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c39" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c39}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c40}
+<td
+	{$cell_grid_c40}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c40" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c40}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c41}
+<td
+	{$cell_grid_c41}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c41" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c41}
+								</tr>
+	 
+	 
+		
+						<tr>
+						
+
+{BEGIN cellblock_grid_c34}
+<td
+	{$cell_grid_c34}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c34" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c34}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c35}
+<td
+	{$cell_grid_c35}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c35" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c35}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c36}
+<td
+	{$cell_grid_c36}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c36" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c36}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c37}
+<td
+	{$cell_grid_c37}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c37" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c37}
+								</tr>
+	 
+	 
+		
+						<tr>
+						
+
+{BEGIN cellblock_grid_c23}
+<td
+	{$cell_grid_c23}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c23" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c23}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c24}
+<td
+	{$cell_grid_c24}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c24" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c24}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c32}
+<td
+	{$cell_grid_c32}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c32" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c32}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c25}
+<td
+	{$cell_grid_c25}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c25" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c25}
+								</tr>
+	 
+	 
+		
+						<tr>
+						
+
+{BEGIN cellblock_grid_c3}
+<td
+	{$cell_grid_c3}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c3" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
 			{END cellblock_grid_c3}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c4}
+<td
+	{$cell_grid_c4}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c4" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c4}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c33}
+<td
+	{$cell_grid_c33}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c33" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c33}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c}
+<td
+	{$cell_grid_c}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c}
 								</tr>
 			</tbody></table>
 {END grid_block}

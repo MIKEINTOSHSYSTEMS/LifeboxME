@@ -71,28 +71,40 @@ $runnerTableSettings['admin_users'] = array(
 		'1' 
 	),
 	'warnLeavingEdit' => true,
+	'hideEmptyFieldsOnView' => true,
 	'sql' => 'SELECT
-	"ID",
-	username,
-	password,
-	email,
-	fullname,
-	groupid,
-	active,
-	ext_security_id,
-	userpic,
-	reset_token,
-	reset_date,
-	first_name,
-	middle_name,
-	last_name,
-	sex,
-	designation_role,
-	region,
-	country,
-	phone,
-	prefix_title
-FROM "public".users',
+    "ID",
+    username,
+    password,
+    email,
+    fullname || 
+        CASE 
+            WHEN COALESCE(prefix_title, \'\') <> \'\' THEN \' (\' || prefix_title || \')\' 
+            ELSE \'\' 
+        END AS fullname,
+    groupid,
+    active,
+    ext_security_id,
+    userpic,
+    reset_token,
+    reset_date,
+    first_name,
+    middle_name,
+    last_name,
+    sex,
+    (
+        SELECT g."Label"
+        FROM lifeboxme_ugmembers m
+        JOIN lifeboxme_uggroups g ON g."GroupID" = m."GroupID"
+        WHERE m."UserName" = users.username
+        ORDER BY g."Label"
+        LIMIT 1
+    ) AS designation_role,
+    region,
+    country,
+    phone,
+    prefix_title
+FROM "public".users;',
 	'keyFields' => array( 
 		'ID' 
 	),
@@ -191,6 +203,8 @@ FROM "public".users',
 			),
 			'editFormats' => array(
 				'edit' => array(
+					'format' => 'Password',
+					'validateAs' => 'Password',
 					'validateRegexMessage' => array(
 						'text' => '',
 						'type' => 0 
@@ -199,6 +213,7 @@ FROM "public".users',
 						'text' => '',
 						'type' => 0 
 					),
+					'textInsertNull' => true,
 					'textHTML5Input' => '0',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
@@ -220,11 +235,13 @@ FROM "public".users',
 			'sqlExpression' => 'email',
 			'viewFormats' => array(
 				'view' => array(
+					'format' => 'Email Hyperlink',
 					'numberFractionalDigits' => 0 
 				) 
 			),
 			'editFormats' => array(
 				'edit' => array(
+					'validateAs' => 'Email',
 					'validateRegexMessage' => array(
 						'text' => '',
 						'type' => 0 
@@ -233,7 +250,7 @@ FROM "public".users',
 						'text' => '',
 						'type' => 0 
 					),
-					'textHTML5Input' => '0',
+					'textHTML5Input' => 'Email',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
 					'timeConvention' => 1 
@@ -251,7 +268,12 @@ FROM "public".users',
 			'strField' => 'fullname',
 			'sourceSingle' => 'fullname',
 			'index' => 5,
-			'sqlExpression' => 'fullname',
+			'type' => 201,
+			'sqlExpression' => 'fullname || 
+        CASE 
+            WHEN COALESCE(prefix_title, \'\') <> \'\' THEN \' (\' || prefix_title || \')\' 
+            ELSE \'\' 
+        END',
 			'viewFormats' => array(
 				'view' => array(
 					'numberFractionalDigits' => 0 
@@ -269,7 +291,7 @@ FROM "public".users',
 			'filterFormat' => array(
 				'format' => 'Values list' 
 			),
-			'tableName' => 'public.users' 
+			'tableName' => '' 
 		),
 		'groupid' => array(
 			'name' => 'groupid',
@@ -349,6 +371,7 @@ FROM "public".users',
 			),
 			'editFormats' => array(
 				'edit' => array(
+					'format' => 'Readonly',
 					'validateRegexMessage' => array(
 						'text' => '',
 						'type' => 0 
@@ -620,7 +643,14 @@ FROM "public".users',
 			'strField' => 'designation_role',
 			'sourceSingle' => 'designation_role',
 			'index' => 16,
-			'sqlExpression' => 'designation_role',
+			'sqlExpression' => '(
+        SELECT g."Label"
+        FROM lifeboxme_ugmembers m
+        JOIN lifeboxme_uggroups g ON g."GroupID" = m."GroupID"
+        WHERE m."UserName" = users.username
+        ORDER BY g."Label"
+        LIMIT 1
+    )',
 			'viewFormats' => array(
 				'view' => array(
 					'numberFractionalDigits' => 0 
@@ -646,7 +676,7 @@ FROM "public".users',
 			'filterFormat' => array(
 				'format' => 'Values list' 
 			),
-			'tableName' => 'public.users' 
+			'tableName' => '' 
 		),
 		'region' => array(
 			'name' => 'region',
@@ -669,6 +699,8 @@ FROM "public".users',
 					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
 					'lookupLinkField' => 'region_id',
 					'lookupDisplayField' => 'region_name',
+					'lookupOrderBy' => 'region_name',
+					'lookupWhere' => 'region_id != 8',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
 					'timeConvention' => 1 
@@ -698,8 +730,9 @@ FROM "public".users',
 					'lookupType' => 2,
 					'lookupTable' => 'public.countries',
 					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
-					'lookupLinkField' => 'region_id',
+					'lookupLinkField' => 'country_id',
 					'lookupDisplayField' => 'country_name',
+					'lookupOrderBy' => 'country_name',
 					'lookupDependent' => true,
 					'lookupDependentFields' => array( 
 						array(
@@ -726,6 +759,7 @@ FROM "public".users',
 			'sqlExpression' => 'phone',
 			'viewFormats' => array(
 				'view' => array(
+					'format' => 'Phone Number',
 					'numberFractionalDigits' => 0 
 				) 
 			),
@@ -784,27 +818,38 @@ $this->settings["preferredCountries"] = "et";           // Preferred Country'
 	),
 	'query' => array(
 		'sql' => 'SELECT
-	"ID",
-	username,
-	password,
-	email,
-	fullname,
-	groupid,
-	active,
-	ext_security_id,
-	userpic,
-	reset_token,
-	reset_date,
-	first_name,
-	middle_name,
-	last_name,
-	sex,
-	designation_role,
-	region,
-	country,
-	phone,
-	prefix_title
-FROM "public".users',
+    "ID",
+    username,
+    password,
+    email,
+    fullname || 
+        CASE 
+            WHEN COALESCE(prefix_title, \'\') <> \'\' THEN \' (\' || prefix_title || \')\' 
+            ELSE \'\' 
+        END AS fullname,
+    groupid,
+    active,
+    ext_security_id,
+    userpic,
+    reset_token,
+    reset_date,
+    first_name,
+    middle_name,
+    last_name,
+    sex,
+    (
+        SELECT g."Label"
+        FROM lifeboxme_ugmembers m
+        JOIN lifeboxme_uggroups g ON g."GroupID" = m."GroupID"
+        WHERE m."UserName" = users.username
+        ORDER BY g."Label"
+        LIMIT 1
+    ) AS designation_role,
+    region,
+    country,
+    phone,
+    prefix_title
+FROM "public".users;',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -869,16 +914,22 @@ FROM "public".users',
 				'columnName' => 'email' 
 			),
 			array(
-				'sql' => 'fullname',
+				'sql' => 'fullname || 
+        CASE 
+            WHEN COALESCE(prefix_title, \'\') <> \'\' THEN \' (\' || prefix_title || \')\' 
+            ELSE \'\' 
+        END',
 				'parsed' => true,
 				'type' => 'FieldListItem',
-				'alias' => '',
+				'alias' => 'fullname',
 				'expression' => array(
-					'sql' => '',
+					'sql' => 'fullname || 
+        CASE 
+            WHEN COALESCE(prefix_title, \'\') <> \'\' THEN \' (\' || prefix_title || \')\' 
+            ELSE \'\' 
+        END',
 					'parsed' => true,
-					'type' => 'SQLField',
-					'table' => 'public.users',
-					'name' => 'fullname' 
+					'type' => 'NonParsedEntity' 
 				),
 				'encrypted' => false,
 				'columnName' => 'fullname' 
@@ -1034,16 +1085,28 @@ FROM "public".users',
 				'columnName' => 'sex' 
 			),
 			array(
-				'sql' => 'designation_role',
+				'sql' => '(
+        SELECT g."Label"
+        FROM lifeboxme_ugmembers m
+        JOIN lifeboxme_uggroups g ON g."GroupID" = m."GroupID"
+        WHERE m."UserName" = users.username
+        ORDER BY g."Label"
+        LIMIT 1
+    )',
 				'parsed' => true,
 				'type' => 'FieldListItem',
-				'alias' => '',
+				'alias' => 'designation_role',
 				'expression' => array(
-					'sql' => '',
+					'sql' => '(
+        SELECT g."Label"
+        FROM lifeboxme_ugmembers m
+        JOIN lifeboxme_uggroups g ON g."GroupID" = m."GroupID"
+        WHERE m."UserName" = users.username
+        ORDER BY g."Label"
+        LIMIT 1
+    )',
 					'parsed' => true,
-					'type' => 'SQLField',
-					'table' => 'public.users',
-					'name' => 'designation_role' 
+					'type' => 'NonParsedEntity' 
 				),
 				'encrypted' => false,
 				'columnName' => 'designation_role' 
@@ -1337,25 +1400,36 @@ FROM "public".users',
 		),
 		'headSql' => 'SELECT',
 		'fieldListSql' => '"ID",
-	username,
-	password,
-	email,
-	fullname,
-	groupid,
-	active,
-	ext_security_id,
-	userpic,
-	reset_token,
-	reset_date,
-	first_name,
-	middle_name,
-	last_name,
-	sex,
-	designation_role,
-	region,
-	country,
-	phone,
-	prefix_title',
+    username,
+    password,
+    email,
+    fullname || 
+        CASE 
+            WHEN COALESCE(prefix_title, \'\') <> \'\' THEN \' (\' || prefix_title || \')\' 
+            ELSE \'\' 
+        END AS fullname,
+    groupid,
+    active,
+    ext_security_id,
+    userpic,
+    reset_token,
+    reset_date,
+    first_name,
+    middle_name,
+    last_name,
+    sex,
+    (
+        SELECT g."Label"
+        FROM lifeboxme_ugmembers m
+        JOIN lifeboxme_uggroups g ON g."GroupID" = m."GroupID"
+        WHERE m."UserName" = users.username
+        ORDER BY g."Label"
+        LIMIT 1
+    ) AS designation_role,
+    region,
+    country,
+    phone,
+    prefix_title',
 		'fromListSql' => 'FROM "public".users',
 		'orderBySql' => '',
 		'tailSql' => '' 
@@ -1514,7 +1588,7 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'fullname' => 'Full Name',
 		'groupid' => 'Groupid',
 		'active' => 'Active',
-		'ext_security_id' => 'Ext Security Id',
+		'ext_security_id' => 'Ext Security ID',
 		'userpic' => 'Userpic',
 		'reset_token' => 'Reset Token',
 		'reset_date' => 'Reset Date',

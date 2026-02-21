@@ -103,10 +103,10 @@
 			'designation_role',
 			'groupid',
 			'active',
-			'ext_security_id',
 			'reset_token',
 			'reset_date',
-			'password' 
+			'password',
+			'ext_security_id' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -206,20 +206,20 @@
 				'simple_grid_field6',
 				'simple_grid_field35' 
 			),
-			'ext_security_id' => array( 
-				'simple_grid_field7',
-				'simple_grid_field36' 
-			),
 			'reset_token' => array( 
 				'simple_grid_field9',
-				'simple_grid_field37' 
+				'simple_grid_field36' 
 			),
 			'reset_date' => array( 
 				'simple_grid_field10',
-				'simple_grid_field38' 
+				'simple_grid_field37' 
 			),
 			'password' => array( 
 				'simple_grid_field2',
+				'simple_grid_field38' 
+			),
+			'ext_security_id' => array( 
+				'simple_grid_field7',
 				'simple_grid_field39' 
 			) 
 		),
@@ -301,13 +301,13 @@
 					'simple_grid_field35',
 					'simple_grid_field6',
 					'simple_grid_field36',
-					'simple_grid_field7',
-					'simple_grid_field37',
 					'simple_grid_field9',
-					'simple_grid_field38',
+					'simple_grid_field37',
 					'simple_grid_field10',
-					'simple_grid_field39',
+					'simple_grid_field38',
 					'simple_grid_field2',
+					'simple_grid_field39',
+					'simple_grid_field7',
 					'grid_checkbox_head',
 					'grid_checkbox',
 					'grid_edit',
@@ -380,13 +380,13 @@
 				'simple_grid_field35' => 'grid',
 				'simple_grid_field6' => 'grid',
 				'simple_grid_field36' => 'grid',
-				'simple_grid_field7' => 'grid',
-				'simple_grid_field37' => 'grid',
 				'simple_grid_field9' => 'grid',
-				'simple_grid_field38' => 'grid',
+				'simple_grid_field37' => 'grid',
 				'simple_grid_field10' => 'grid',
-				'simple_grid_field39' => 'grid',
+				'simple_grid_field38' => 'grid',
 				'simple_grid_field2' => 'grid',
+				'simple_grid_field39' => 'grid',
+				'simple_grid_field7' => 'grid',
 				'grid_checkbox_head' => 'grid',
 				'grid_checkbox' => 'grid',
 				'grid_edit' => 'grid',
@@ -525,7 +525,7 @@
 					'location' => 'grid',
 					'cellId' => 'headcell_field16' 
 				),
-				'simple_grid_field7' => array(
+				'simple_grid_field9' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_field16' 
 				),
@@ -533,7 +533,7 @@
 					'location' => 'grid',
 					'cellId' => 'headcell_field17' 
 				),
-				'simple_grid_field9' => array(
+				'simple_grid_field10' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_field17' 
 				),
@@ -541,7 +541,7 @@
 					'location' => 'grid',
 					'cellId' => 'headcell_field18' 
 				),
-				'simple_grid_field10' => array(
+				'simple_grid_field2' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_field18' 
 				),
@@ -549,7 +549,7 @@
 					'location' => 'grid',
 					'cellId' => 'headcell_field19' 
 				),
-				'simple_grid_field2' => array(
+				'simple_grid_field7' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_field19' 
 				),
@@ -712,10 +712,10 @@
 				'simple_grid_field15',
 				'simple_grid_field5',
 				'simple_grid_field6',
-				'simple_grid_field7',
 				'simple_grid_field9',
 				'simple_grid_field10',
-				'simple_grid_field2' 
+				'simple_grid_field2',
+				'simple_grid_field7' 
 			),
 			'grid_field_label' => array( 
 				'simple_grid_field20',
@@ -1054,7 +1054,7 @@
 							0 
 						),
 						'tags' => array( 
-							'ext_security_id_fieldheadercolumn' 
+							'reset_token_fieldheadercolumn' 
 						),
 						'items' => array( 
 							'simple_grid_field36' 
@@ -1070,7 +1070,7 @@
 							0 
 						),
 						'tags' => array( 
-							'reset_token_fieldheadercolumn' 
+							'reset_date_fieldheadercolumn' 
 						),
 						'items' => array( 
 							'simple_grid_field37' 
@@ -1086,7 +1086,7 @@
 							0 
 						),
 						'tags' => array( 
-							'reset_date_fieldheadercolumn' 
+							'password_fieldheadercolumn' 
 						),
 						'items' => array( 
 							'simple_grid_field38' 
@@ -1102,7 +1102,7 @@
 							0 
 						),
 						'tags' => array( 
-							'password_fieldheadercolumn' 
+							'ext_security_id_fieldheadercolumn' 
 						),
 						'items' => array( 
 							'simple_grid_field39' 
@@ -1408,22 +1408,6 @@
 							1 
 						),
 						'tags' => array( 
-							'ext_security_id_fieldcolumn' 
-						),
-						'items' => array( 
-							'simple_grid_field7' 
-						),
-						'fixedAtServer' => false,
-						'fixedAtClient' => false 
-					),
-					'cell_field17' => array(
-						'cols' => array( 
-							19 
-						),
-						'rows' => array( 
-							1 
-						),
-						'tags' => array( 
 							'reset_token_fieldcolumn' 
 						),
 						'items' => array( 
@@ -1432,9 +1416,9 @@
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
-					'cell_field18' => array(
+					'cell_field17' => array(
 						'cols' => array( 
-							20 
+							19 
 						),
 						'rows' => array( 
 							1 
@@ -1448,9 +1432,9 @@
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
-					'cell_field19' => array(
+					'cell_field18' => array(
 						'cols' => array( 
-							21 
+							20 
 						),
 						'rows' => array( 
 							1 
@@ -1460,6 +1444,22 @@
 						),
 						'items' => array( 
 							'simple_grid_field2' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field19' => array(
+						'cols' => array( 
+							21 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'ext_security_id_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field7' 
 						),
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
@@ -2624,15 +2624,15 @@
 					'items' => array( 
 						'simple_grid_field36' 
 					),
-					'field' => 'ext_security_id',
+					'field' => 'reset_token',
 					'columnName' => 'field' 
 				),
 				'cell_field16' => array(
 					'model' => 'cell_field',
 					'items' => array( 
-						'simple_grid_field7' 
+						'simple_grid_field9' 
 					),
-					'field' => 'ext_security_id',
+					'field' => 'reset_token',
 					'columnName' => 'field' 
 				),
 				'footcell_field16' => array(
@@ -2646,15 +2646,15 @@
 					'items' => array( 
 						'simple_grid_field37' 
 					),
-					'field' => 'reset_token',
+					'field' => 'reset_date',
 					'columnName' => 'field' 
 				),
 				'cell_field17' => array(
 					'model' => 'cell_field',
 					'items' => array( 
-						'simple_grid_field9' 
+						'simple_grid_field10' 
 					),
-					'field' => 'reset_token',
+					'field' => 'reset_date',
 					'columnName' => 'field' 
 				),
 				'footcell_field17' => array(
@@ -2668,15 +2668,15 @@
 					'items' => array( 
 						'simple_grid_field38' 
 					),
-					'field' => 'reset_date',
+					'field' => 'password',
 					'columnName' => 'field' 
 				),
 				'cell_field18' => array(
 					'model' => 'cell_field',
 					'items' => array( 
-						'simple_grid_field10' 
+						'simple_grid_field2' 
 					),
-					'field' => 'reset_date',
+					'field' => 'password',
 					'columnName' => 'field' 
 				),
 				'footcell_field18' => array(
@@ -2690,15 +2690,15 @@
 					'items' => array( 
 						'simple_grid_field39' 
 					),
-					'field' => 'password',
+					'field' => 'ext_security_id',
 					'columnName' => 'field' 
 				),
 				'cell_field19' => array(
 					'model' => 'cell_field',
 					'items' => array( 
-						'simple_grid_field2' 
+						'simple_grid_field7' 
 					),
-					'field' => 'password',
+					'field' => 'ext_security_id',
 					'columnName' => 'field' 
 				),
 				'footcell_field19' => array(
@@ -3167,23 +3167,13 @@
 			'type' => 'grid_field_label',
 			'field' => 'active' 
 		),
-		'simple_grid_field7' => array(
-			'field' => 'ext_security_id',
-			'type' => 'grid_field',
-			'inlineAdd' => false,
-			'inlineEdit' => false 
-		),
-		'simple_grid_field36' => array(
-			'type' => 'grid_field_label',
-			'field' => 'ext_security_id' 
-		),
 		'simple_grid_field9' => array(
 			'field' => 'reset_token',
 			'type' => 'grid_field',
 			'inlineAdd' => false,
 			'inlineEdit' => false 
 		),
-		'simple_grid_field37' => array(
+		'simple_grid_field36' => array(
 			'type' => 'grid_field_label',
 			'field' => 'reset_token' 
 		),
@@ -3193,7 +3183,7 @@
 			'inlineAdd' => false,
 			'inlineEdit' => false 
 		),
-		'simple_grid_field38' => array(
+		'simple_grid_field37' => array(
 			'type' => 'grid_field_label',
 			'field' => 'reset_date' 
 		),
@@ -3203,9 +3193,19 @@
 			'inlineAdd' => false,
 			'inlineEdit' => false 
 		),
-		'simple_grid_field39' => array(
+		'simple_grid_field38' => array(
 			'type' => 'grid_field_label',
 			'field' => 'password' 
+		),
+		'simple_grid_field7' => array(
+			'field' => 'ext_security_id',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field39' => array(
+			'type' => 'grid_field_label',
+			'field' => 'ext_security_id' 
 		),
 		'grid_checkbox' => array(
 			'type' => 'grid_checkbox' 
