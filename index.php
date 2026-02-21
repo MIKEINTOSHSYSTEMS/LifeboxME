@@ -1,15 +1,180 @@
 <?php
-// index.php
+// ===============================
+// index.php - Clean Full Version
+// ===============================
 
 require_once 'res/database.php';
 require_once 'res/session_helper.php';
 require_once 'res/notifications.php';
 
+    // DEBUGS (Uncomment to see all session variables and permissions)
+ // echo '<pre>';
+ // print_r($_SESSION);
+ // echo '</pre>';
+ // exit;
+
+
+// ===============================
+// Load notifications
+// ===============================
 try {
     $notificationManager = new NotificationManager($pdo);
     $activeNotifications = $notificationManager->getActiveNotifications();
 } catch (Exception $e) {
     $activeNotifications = [];
+}
+
+// ===============================
+// Initialize variables
+// ===============================
+$userPermissions = [];
+$userRole = 'Guest';
+$functionalGroups = [];
+$displayName = 'Guest';
+
+// ===============================
+// Check login (PHPRunner session)
+// ===============================
+if (isset($_SESSION['UserData']['username'])) {
+
+    $username = $_SESSION['UserData']['username'];
+    $displayName = $_SESSION['UserName'] ?? $username;
+
+    try {
+        // ===============================
+        // Get user role
+        // ===============================
+        $roleStmt = $pdo->prepare("
+            SELECT DISTINCT g.\"Label\" as role, g.\"Comment\"
+            FROM users u
+            JOIN lifeboxme_ugmembers m ON m.\"UserName\" = u.username
+            JOIN lifeboxme_uggroups g ON g.\"GroupID\" = m.\"GroupID\"
+            WHERE u.username = ?
+            ORDER BY g.\"Label\"
+        ");
+        $roleStmt->execute([$username]);
+        $roles = $roleStmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if (!empty($roles)) {
+            $primaryRole = $roles[0];
+            $userRole = !empty($primaryRole['Comment']) ? $primaryRole['Comment'] : $primaryRole['role'];
+            if (empty($userRole)) $userRole = 'System User';
+        }
+
+        // ===============================
+        // Check if system administrator
+        // ===============================
+        $adminStmt = $pdo->prepare("
+            SELECT COUNT(*) as is_admin
+            FROM lifeboxme_ugmembers
+            WHERE \"UserName\" = ? AND \"GroupID\" = -1
+        ");
+        $adminStmt->execute([$username]);
+        $adminCheck = $adminStmt->fetch(PDO::FETCH_ASSOC);
+        if ($adminCheck && $adminCheck['is_admin'] > 0) {
+            $userRole = 'System Administrator';
+        }
+
+        // ===============================
+        // Load user permissions
+        // ===============================
+        $permStmt = $pdo->prepare("
+            WITH permission_data AS (
+                SELECT DISTINCT
+                    r.\"TableName\",
+                    r.\"AccessMask\",
+                    CASE 
+                        WHEN r.\"TableName\" ILIKE 'public.training_%' THEN '🎓 Training Management'
+                        WHEN r.\"TableName\" ILIKE 'public.device_%' THEN '📱 Device Management'
+                        WHEN r.\"TableName\" ILIKE 'public.lbapt_%' THEN '📊 Annual Planning'
+                        WHEN r.\"TableName\" ILIKE 'public.lbpmi_%' THEN '📈 Performance Monitoring'
+                        WHEN r.\"TableName\" ILIKE 'public.lifeboxme_dhis2_%' THEN '🔄 DHIS2 Integration'
+                        WHEN r.\"TableName\" IN (
+                            'public.countries','public.regions','public.facilities',
+                            'public.languages','public.partners','public.donors','public.programs'
+                        ) THEN '🌍 Geographic & Partner Setup'
+                        WHEN r.\"TableName\" IN ('public.months','public.quarters','public.years') THEN '⏱️ Time Configuration'
+                        WHEN r.\"TableName\" = 'Dashboard' OR r.\"TableName\" ILIKE '%summary_view%' OR r.\"TableName\" ILIKE '%report%' THEN '📋 Dashboard & Reporting'
+                        ELSE '🔧 Other Modules'
+                    END AS functional_group,
+                    INITCAP(REPLACE(REPLACE(r.\"TableName\", 'public.', ''),'_',' ')) AS module_name,
+                    TRIM(
+                        CASE WHEN POSITION('S' IN r.\"AccessMask\") > 0 THEN 'View, ' ELSE '' END ||
+                        CASE WHEN POSITION('A' IN r.\"AccessMask\") > 0 THEN 'Add, ' ELSE '' END ||
+                        CASE WHEN POSITION('E' IN r.\"AccessMask\") > 0 THEN 'Edit, ' ELSE '' END ||
+                        CASE WHEN POSITION('D' IN r.\"AccessMask\") > 0 THEN 'Delete, ' ELSE '' END ||
+                        CASE WHEN POSITION('P' IN r.\"AccessMask\") > 0 THEN 'Export/Print, ' ELSE '' END ||
+                        CASE WHEN POSITION('I' IN r.\"AccessMask\") > 0 THEN 'Import, ' ELSE '' END
+                    , ', ') AS permissions,
+                    CASE 
+                        WHEN POSITION('A' IN r.\"AccessMask\") > 0 AND POSITION('E' IN r.\"AccessMask\") > 0 AND POSITION('D' IN r.\"AccessMask\") > 0 THEN 'full_access'
+                        WHEN POSITION('S' IN r.\"AccessMask\") > 0 AND POSITION('A' IN r.\"AccessMask\") = 0 THEN 'view_only'
+                        WHEN POSITION('A' IN r.\"AccessMask\") > 0 THEN 'can_add'
+                        WHEN POSITION('E' IN r.\"AccessMask\") > 0 THEN 'can_edit'
+                        ELSE 'limited'
+                    END AS access_type
+                FROM users u
+                JOIN lifeboxme_ugmembers m ON m.\"UserName\" = u.username
+                JOIN lifeboxme_uggroups g ON g.\"GroupID\" = m.\"GroupID\"
+                JOIN lifeboxme_ugrights r ON r.\"GroupID\" = g.\"GroupID\"
+                WHERE u.username = ?
+            )
+            SELECT * FROM permission_data
+            WHERE module_name NOT ILIKE '%seq%' AND module_name NOT ILIKE '%pkey%' AND module_name NOT ILIKE '%view%'
+            ORDER BY functional_group, module_name
+        ");
+        $permStmt->execute([$username]);
+        $userPermissions = $permStmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Group permissions
+        foreach ($userPermissions as $perm) {
+            $group = $perm['functional_group'];
+            if (!isset($functionalGroups[$group])) {
+                $functionalGroups[$group] = ['modules' => [], 'permissions_summary' => []];
+            }
+            $functionalGroups[$group]['modules'][] = $perm;
+            if (!in_array($perm['access_type'], $functionalGroups[$group]['permissions_summary'])) {
+                $functionalGroups[$group]['permissions_summary'][] = $perm['access_type'];
+            }
+        }
+    } catch (Exception $e) {
+        error_log("Error fetching user permissions: " . $e->getMessage());
+    }
+}
+
+// ===============================
+// Helper functions
+// ===============================
+function getAccessTypeIcon($accessType)
+{
+    switch ($accessType) {
+        case 'full_access':
+            return 'fa-check-circle text-success';
+        case 'view_only':
+            return 'fa-eye text-info';
+        case 'can_add':
+            return 'fa-plus-circle text-primary';
+        case 'can_edit':
+            return 'fa-edit text-warning';
+        default:
+            return 'fa-lock text-secondary';
+    }
+}
+
+function getActionIcon($action)
+{
+    $icons = ['View' => 'fa-eye', 'Add' => 'fa-plus-circle', 'Edit' => 'fa-edit', 'Delete' => 'fa-trash-alt', 'Export' => 'fa-file-export', 'Print' => 'fa-print', 'Import' => 'fa-file-import'];
+    foreach ($icons as $key => $icon) {
+        if (strpos($action, $key) !== false) return $icon;
+    }
+    return 'fa-check';
+}
+
+function getRoleDisplay($role)
+{
+    if ($role === 'System Administrator') return '<span class="badge bg-danger"><i class="fas fa-shield-alt me-1"></i>System Administrator</span>';
+    elseif ($role === 'Guest') return '<span class="badge bg-secondary"><i class="fas fa-user me-1"></i>Guest</span>';
+    else return '<span class="badge bg-primary"><i class="fas fa-user-tie me-1"></i>' . htmlspecialchars($role) . '</span>';
 }
 
 // Initialize shared session with PHPRunner
@@ -1106,11 +1271,56 @@ function getNotificationIcon($type)
                             <?php if (is_logged_in()): ?>
                                 <div class="dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                        <i class="fas fa-user me-1"></i> <?= htmlspecialchars($_SESSION['username'] ?? 'User') ?>
+                                        <i class="fas fa-user me-1"></i> <?= htmlspecialchars($_SESSION['username'] ?? 'User') ?> (<?= getRoleDisplay($userRole); ?>)
                                     </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
-                                    </ul>
+                                    <br>
+                                    <a href="logout.php" class="btn btn-primary btn-sm">
+                                            <i class="fas fa-sign-out-alt me-1"></i> Logout
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-end p-3" style="min-width: 350px; max-height: 400px; overflow-y: auto;">
+
+                                            <!-- Role Display -->
+                                            <li class="mb-2">
+                                                <strong>Role:</strong><br>
+                                                <?= getRoleDisplay($userRole); ?>
+                                            </li>
+
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+
+                                            <?php if (!empty($functionalGroups)): ?>
+                                                <?php foreach ($functionalGroups as $groupName => $groupData): ?>
+                                                    <li class="mb-2">
+                                                        <strong><?= htmlspecialchars($groupName); ?></strong>
+                                                        <ul class="list-unstyled ms-2 small">
+                                                            <?php foreach ($groupData['modules'] as $module): ?>
+                                                                <li class="mb-1">
+                                                                    <i class="fas <?= getAccessTypeIcon($module['access_type']); ?> me-1"></i>
+                                                                    <?= htmlspecialchars($module['module_name']); ?>
+                                                                    <br>
+                                                                    <span class="text-muted small">
+                                                                        <?= htmlspecialchars($module['permissions']); ?>
+                                                                    </span>
+                                                                </li>
+                                                            <?php endforeach; ?>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        <hr class="dropdown-divider">
+                                                    </li>
+                                                <?php endforeach; ?>
+                                            <?php else: ?>
+                                                <li><span class="text-muted">No permissions assigned.</span></li>
+                                            <?php endif; ?>
+
+                                            <li>
+                                                <a class="dropdown-item text-danger" href="logout.php">
+                                                    <i class="fas fa-sign-out-alt me-1"></i> Logout
+                                                </a>
+                                            </li>
+
+                                        </ul>
                                 </div>
                             <?php else: ?>
                                 <a class="nav-link btn btn-primary btn-sm text-white ms-2"

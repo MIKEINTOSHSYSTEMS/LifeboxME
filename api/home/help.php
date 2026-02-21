@@ -362,7 +362,9 @@
     <div class="container">
         <header>
             <h1><i class="fas fa-life-ring"></i> Lifebox M&E Dashboard Help Guide</h1>
+            <i class="fa-duotone fa-solid fa-road-barrier"></i>
             <small>Currently Under Development</small>
+            <i class="fa-duotone fa-solid fa-road-barrier"></i>
             <p>Your comprehensive guide to using the Lifebox Monitoring & Evaluation Dashboard</p>
         </header>
 

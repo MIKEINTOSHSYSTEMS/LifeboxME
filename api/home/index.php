@@ -1,3 +1,208 @@
+<?php
+// ===============================
+// index.php - Clean Full Version
+// ===============================
+
+require_once '../../res/database.php';
+require_once '../../res/session_helper.php';
+require_once '../../res/notifications.php';
+
+// DEBUGS (Uncomment to see all session variables and permissions)
+// echo '<pre>';
+// print_r($_SESSION);
+// echo '</pre>';
+// exit;
+
+
+// ===============================
+// Load notifications
+// ===============================
+try {
+    $notificationManager = new NotificationManager($pdo);
+    $activeNotifications = $notificationManager->getActiveNotifications();
+} catch (Exception $e) {
+    $activeNotifications = [];
+}
+
+// ===============================
+// Initialize variables
+// ===============================
+$userPermissions = [];
+$userRole = 'Guest';
+$functionalGroups = [];
+$displayName = 'Guest';
+
+// ===============================
+// Check login (PHPRunner session)
+// ===============================
+if (isset($_SESSION['UserData']['username'])) {
+
+    $username = $_SESSION['UserData']['username'];
+    $displayName = $_SESSION['UserName'] ?? $username;
+
+    try {
+        // ===============================
+        // Get user role
+        // ===============================
+        $roleStmt = $pdo->prepare("
+            SELECT DISTINCT g.\"Label\" as role, g.\"Comment\"
+            FROM users u
+            JOIN lifeboxme_ugmembers m ON m.\"UserName\" = u.username
+            JOIN lifeboxme_uggroups g ON g.\"GroupID\" = m.\"GroupID\"
+            WHERE u.username = ?
+            ORDER BY g.\"Label\"
+        ");
+        $roleStmt->execute([$username]);
+        $roles = $roleStmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if (!empty($roles)) {
+            $primaryRole = $roles[0];
+            $userRole = !empty($primaryRole['Comment']) ? $primaryRole['Comment'] : $primaryRole['role'];
+            if (empty($userRole)) $userRole = 'System User';
+        }
+
+        // ===============================
+        // Check if system administrator
+        // ===============================
+        $adminStmt = $pdo->prepare("
+            SELECT COUNT(*) as is_admin
+            FROM lifeboxme_ugmembers
+            WHERE \"UserName\" = ? AND \"GroupID\" = -1
+        ");
+        $adminStmt->execute([$username]);
+        $adminCheck = $adminStmt->fetch(PDO::FETCH_ASSOC);
+        if ($adminCheck && $adminCheck['is_admin'] > 0) {
+            $userRole = 'System Administrator';
+        }
+
+        // ===============================
+        // Load user permissions
+        // ===============================
+        $permStmt = $pdo->prepare("
+            WITH permission_data AS (
+                SELECT DISTINCT
+                    r.\"TableName\",
+                    r.\"AccessMask\",
+                    CASE 
+                        WHEN r.\"TableName\" ILIKE 'public.training_%' THEN '🎓 Training Management'
+                        WHEN r.\"TableName\" ILIKE 'public.device_%' THEN '📱 Device Management'
+                        WHEN r.\"TableName\" ILIKE 'public.lbapt_%' THEN '📊 Annual Planning'
+                        WHEN r.\"TableName\" ILIKE 'public.lbpmi_%' THEN '📈 Performance Monitoring'
+                        WHEN r.\"TableName\" ILIKE 'public.lifeboxme_dhis2_%' THEN '🔄 DHIS2 Integration'
+                        WHEN r.\"TableName\" IN (
+                            'public.countries','public.regions','public.facilities',
+                            'public.languages','public.partners','public.donors','public.programs'
+                        ) THEN '🌍 Geographic & Partner Setup'
+                        WHEN r.\"TableName\" IN ('public.months','public.quarters','public.years') THEN '⏱️ Time Configuration'
+                        WHEN r.\"TableName\" = 'Dashboard' OR r.\"TableName\" ILIKE '%summary_view%' OR r.\"TableName\" ILIKE '%report%' THEN '📋 Dashboard & Reporting'
+                        ELSE '🔧 Other Modules'
+                    END AS functional_group,
+                    INITCAP(REPLACE(REPLACE(r.\"TableName\", 'public.', ''),'_',' ')) AS module_name,
+                    TRIM(
+                        CASE WHEN POSITION('S' IN r.\"AccessMask\") > 0 THEN 'View, ' ELSE '' END ||
+                        CASE WHEN POSITION('A' IN r.\"AccessMask\") > 0 THEN 'Add, ' ELSE '' END ||
+                        CASE WHEN POSITION('E' IN r.\"AccessMask\") > 0 THEN 'Edit, ' ELSE '' END ||
+                        CASE WHEN POSITION('D' IN r.\"AccessMask\") > 0 THEN 'Delete, ' ELSE '' END ||
+                        CASE WHEN POSITION('P' IN r.\"AccessMask\") > 0 THEN 'Export/Print, ' ELSE '' END ||
+                        CASE WHEN POSITION('I' IN r.\"AccessMask\") > 0 THEN 'Import, ' ELSE '' END
+                    , ', ') AS permissions,
+                    CASE 
+                        WHEN POSITION('A' IN r.\"AccessMask\") > 0 AND POSITION('E' IN r.\"AccessMask\") > 0 AND POSITION('D' IN r.\"AccessMask\") > 0 THEN 'full_access'
+                        WHEN POSITION('S' IN r.\"AccessMask\") > 0 AND POSITION('A' IN r.\"AccessMask\") = 0 THEN 'view_only'
+                        WHEN POSITION('A' IN r.\"AccessMask\") > 0 THEN 'can_add'
+                        WHEN POSITION('E' IN r.\"AccessMask\") > 0 THEN 'can_edit'
+                        ELSE 'limited'
+                    END AS access_type
+                FROM users u
+                JOIN lifeboxme_ugmembers m ON m.\"UserName\" = u.username
+                JOIN lifeboxme_uggroups g ON g.\"GroupID\" = m.\"GroupID\"
+                JOIN lifeboxme_ugrights r ON r.\"GroupID\" = g.\"GroupID\"
+                WHERE u.username = ?
+            )
+            SELECT * FROM permission_data
+            WHERE module_name NOT ILIKE '%seq%' AND module_name NOT ILIKE '%pkey%' AND module_name NOT ILIKE '%view%'
+            ORDER BY functional_group, module_name
+        ");
+        $permStmt->execute([$username]);
+        $userPermissions = $permStmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Group permissions
+        foreach ($userPermissions as $perm) {
+            $group = $perm['functional_group'];
+            if (!isset($functionalGroups[$group])) {
+                $functionalGroups[$group] = ['modules' => [], 'permissions_summary' => []];
+            }
+            $functionalGroups[$group]['modules'][] = $perm;
+            if (!in_array($perm['access_type'], $functionalGroups[$group]['permissions_summary'])) {
+                $functionalGroups[$group]['permissions_summary'][] = $perm['access_type'];
+            }
+        }
+    } catch (Exception $e) {
+        error_log("Error fetching user permissions: " . $e->getMessage());
+    }
+}
+
+// ===============================
+// Helper functions
+// ===============================
+function getAccessTypeIcon($accessType)
+{
+    switch ($accessType) {
+        case 'full_access':
+            return 'fa-check-circle text-success';
+        case 'view_only':
+            return 'fa-eye text-info';
+        case 'can_add':
+            return 'fa-plus-circle text-primary';
+        case 'can_edit':
+            return 'fa-edit text-warning';
+        default:
+            return 'fa-lock text-secondary';
+    }
+}
+
+function getActionIcon($action)
+{
+    $icons = ['View' => 'fa-eye', 'Add' => 'fa-plus-circle', 'Edit' => 'fa-edit', 'Delete' => 'fa-trash-alt', 'Export' => 'fa-file-export', 'Print' => 'fa-print', 'Import' => 'fa-file-import'];
+    foreach ($icons as $key => $icon) {
+        if (strpos($action, $key) !== false) return $icon;
+    }
+    return 'fa-check';
+}
+
+function getRoleDisplay($role)
+{
+    if ($role === 'System Administrator') return '<span class="badge bg-danger"><i class="fas fa-shield-alt me-1"></i>System Administrator</span>';
+    elseif ($role === 'Guest') return '<span class="badge bg-secondary"><i class="fas fa-user me-1"></i>Guest</span>';
+    else return '<span class="badge bg-info">' . htmlspecialchars($role) . '</span>';
+}
+
+// Initialize shared session with PHPRunner
+//initializeSharedSession();
+
+?>
+
+<?php
+// Helper function to get appropriate icon for notification type
+function getNotificationIcon($type)
+{
+    switch ($type) {
+        case 'info':
+            return 'info-circle';
+        case 'warning':
+            return 'exclamation-triangle';
+        case 'primary':
+            return 'bullhorn';
+        case 'danger':
+            return 'exclamation-circle';
+        case 'success':
+            return 'check-circle';
+        default:
+            return 'info-circle';
+    }
+}
+?>
+
 <html lang="en">
 
 <head>
@@ -77,7 +282,7 @@
         /* Gradient background for the section title */
         .section-title {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            padding: 20px;
+            padding: 0.5px;
             color: white;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -172,6 +377,7 @@
         body {
             height: 100%;
             overflow: hidden;
+            /*overflow: scroll;*/
         }
 
         #tabsContent {
@@ -459,6 +665,11 @@
                 </button>
             </li>
             <li class="nav-item" role="presentation">
+                <button class="nav-link" id="report-tab" data-bs-toggle="tab" data-bs-target="#report" type="button" role="tab">
+                    <i class="fa-solid fa-chart-line"></i> Reports
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
                 <button class="nav-link" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button" role="tab">
                     <i class="fa-solid fa-info-circle"></i> Info
                 </button>
@@ -475,9 +686,22 @@
             <!-- Embed Tab (Now first and active by default) -->
             <div class="tab-pane fade show active" id="embed" role="tabpanel">
                 <div class="dashboard-container">
-                    <div class="iframe-loading">Loading</div>
+                    <div class="iframe-loading">Loading Dashboards</div>
                     <iframe
                         src="../meta/index.php"
+                        class="dashboard-iframe"
+                        allowtransparency="true"
+                        allowfullscreen
+                        onload="document.querySelector('.iframe-loading').style.display = 'none';">
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="tab-pane fade show active" id="report" role="tabpanel">
+                <div class="dashboard-container">
+                    <div class="iframe-loading">Loading Reports</div>
+                    <iframe
+                        src="../meta/reports.php"
                         class="dashboard-iframe"
                         allowtransparency="true"
                         allowfullscreen
@@ -504,12 +728,15 @@
                                         <span class="m-letter">M</span>
                                         <span class="ampersand">&amp;</span>
                                         <span class="e-letter">E</span>
+                                        <span class="ampersand"> Learning</span>
                                         <span class="system-text"> System</span>
                                     </div>
                                 </div>
                             </h2>
                             <!--<p class="typing-animation">Explore the comprehensive modules that make up the Lifebox M&E System.</p>-->
-                            <p>Explore the comprehensive modules that make up the Lifebox M&E System.</p>
+                            <i class="fa-duotone fa-solid fa-circle-info fa-3x"></i>
+                            <p>This platform supports Lifebox programs by tracking training, devices, implementation quality, and surgical outcomes. It is designed to help teams monitor performance, identify gaps, learn from data, and take action to improve surgical safety.</p>
+                            <!--<p>Explore the comprehensive modules that make up the Lifebox M&E System.</p>-->
                         </div>
 
                         <style>
@@ -672,11 +899,224 @@
                             }
                         </style>
 
+
+                        <style>
+                            :root {
+                                --primary: #1282ad;
+                                --secondary: #00bcd7;
+                                --accent: #ff5722;
+                                --light: #f8f9fa;
+                                --dark: #2c3e50;
+                                --success: #28a745;
+                                --warning: #ffc107;
+                                --info: #17a2b8;
+                                --transition: all 0.3s ease;
+                            }
+
+                            /* Container for hex flow */
+                            .hex-flow-container {
+                                display: flex;
+                                flex-wrap: wrap;
+                                justify-content: center;
+                                align-items: center;
+                                gap: 2rem;
+                                margin: 2rem 0;
+                            }
+
+                            /* Hexagon wrapper */
+                            .hex {
+                                position: relative;
+                                width: 177px;
+                                /* width of hex */
+                                height: 177px;
+                                /* height = width * sqrt(3)/2 */
+                                padding: 21px;
+                                background-color: var(--primary);
+                                margin: 34.64px 0;
+                                /* half height for proper spacing */
+                                color: var(--light);
+                                font-weight: bold;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                text-align: center;
+                                transition: var(--transition);
+                                cursor: default;
+                                clip-path: polygon(50% 0%,
+                                        93% 25%,
+                                        93% 75%,
+                                        50% 100%,
+                                        7% 75%,
+                                        7% 25%);
+                                /* true hexagon shape */
+                            }
+
+                            /* Rotation on hover */
+                            .hex:hover {
+                                transform: rotate(360deg);
+                            }
+
+                            /* Assign colors to each hex individually */
+                            .hex.step-1 {
+                                background-color: var(--primary);
+                            }
+
+                            .hex.step-2 {
+                                background-color: var(--success);
+                            }
+
+                            .hex.step-3 {
+                                background-color: var(--warning);
+                            }
+
+                            .hex.step-4 {
+                                background-color: var(--info);
+                            }
+
+                            .hex.step-5 {
+                                background-color: var(--accent);
+                            }
+
+                            /* Arrow between hexes */
+                            .hex-arrow {
+                                font-size: 2rem;
+                                font-weight: bold;
+                                color: #ff0000;
+                                /* fallback red */
+                                background: linear-gradient(45deg, red, yellow);
+                                -webkit-background-clip: text;
+                                -webkit-text-fill-color: transparent;
+                                text-shadow: 0 0 10px rgba(255, 0, 0, 0.5), 0 0 20px rgba(255, 255, 0, 0.3);
+                                animation: bounce 2s infinite alternate;
+                            }
+
+                            /* Bounce animation for arrows */
+                            @keyframes bounce {
+                                0% {
+                                    transform: translateY(0);
+                                }
+
+                                100% {
+                                    transform: translateY(-5px);
+                                }
+                            }
+
+                            /* Responsive adjustments */
+                            @media(max-width: 768px) {
+                                .hex {
+                                    width: 80px;
+                                    height: 46.19px;
+                                    margin: 23.09px 0;
+                                }
+
+                                .hex-arrow {
+                                    font-size: 1.5rem;
+                                }
+                            }
+                        </style>
+
+                        <div class="hex-flow-container">
+                            <!-- Step 1 -->
+                            <div class="hex step-1">Training, System Strengthening Programs & Devices</div>
+                            <div class="hex-arrow">→</div>
+
+                            <!-- Step 2 -->
+                            <div class="hex step-2">Safe Practice</div>
+                            <div class="hex-arrow">→</div>
+
+                            <!-- Step 3 -->
+                            <div class="hex step-3">Better Outcomes</div>
+                            <div class="hex-arrow">→</div>
+
+                            <!-- Step 4 -->
+                            <div class="hex step-4">Learning & Scale Up</div>
+                            <div class="hex-arrow">→</div>
+
+                            <!-- Step 5 -->
+                            <div class="hex step-5">Sustainability</div>
+                        </div>
+
+                        <div class="container my-4">
+                            <!-- Header Card -->
+                            <div class="card shadow-sm mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold">Where Can I Go From Here?</h5>
+                                    <p class="fw-semibold text-secondary mb-3">
+                                        Dear
+                                        <a href="/app/userinfo.php"><?= htmlspecialchars($_SESSION['username'] ?? 'User') ?></a>,
+                                        based on your role as <?= getRoleDisplay($userRole); ?>,
+                                        you will be able to access:
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Functional Groups Grid -->
+                            <div class="row g-3">
+                                <?php if (!empty($functionalGroups)): ?>
+                                    <?php foreach ($functionalGroups as $groupName => $groupData): ?>
+                                        <?php
+                                        // Create a unique modal ID for each group
+                                        $modalId = 'modal_' . preg_replace('/[^a-zA-Z0-9]/', '_', $groupName);
+                                        ?>
+                                        <div class="col-12 col-md-6 col-lg-3">
+                                            <!-- Group Card -->
+                                            <div class="card h-100 shadow-sm clickable" data-bs-toggle="modal" data-bs-target="#<?= $modalId ?>" style="cursor:pointer;">
+                                                <div class="card-body d-flex align-items-center justify-content-center">
+                                                    <h6 class="card-title fw-bold text-center mb-0"><?= htmlspecialchars($groupName); ?></h6>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Modal for Permissions -->
+                                        <div class="modal fade" id="<?= $modalId ?>" tabindex="-1" aria-labelledby="<?= $modalId ?>Label" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="<?= $modalId ?>Label"><?= htmlspecialchars($groupName); ?> Permissions</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <?php if (!empty($groupData['modules'])): ?>
+                                                            <ul class="list-unstyled mb-0">
+                                                                <?php foreach ($groupData['modules'] as $module): ?>
+                                                                    <li class="mb-2">
+                                                                        <i class="fas <?= getAccessTypeIcon($module['access_type']); ?> me-1"></i>
+                                                                        <?= htmlspecialchars($module['module_name']); ?>
+                                                                        <br>
+                                                                        <span class="text-muted small"><?= htmlspecialchars($module['permissions']); ?></span>
+                                                                    </li>
+                                                                <?php endforeach; ?>
+                                                            </ul>
+                                                        <?php else: ?>
+                                                            <span class="text-muted">No permissions assigned for this group.</span>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <div class="col-12">
+                                        <span class="text-muted">No permissions assigned.</span>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+
+                        <br></br>
+                        <!-- Search Box -->
+                        <!--
                         <div class="search-box">
                             <input type="text" id="searchInput" placeholder="Search for system modules...">
                             <i class="fas fa-search"></i>
                         </div>
+                                -->
 
+                        <!-- Search Tabs -->
+                        <!--
                         <ul class="nav nav-pills component-tabs justify-content-center" id="components-tab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="tracking-tab" data-bs-toggle="pill" data-bs-target="#tracking" type="button" role="tab">Tracking Modules</button>
@@ -692,6 +1132,10 @@
                             </li>
                         </ul>
 
+                                -->
+
+                        <!-- Component Tabs Content -->
+                        <!--
                         <div class="tab-content" id="components-tabContent">
                             <div class="tab-pane fade show active" id="tracking" role="tabpanel">
                                 <div class="row">
@@ -945,6 +1389,7 @@
                                 </div>
                             </div>
                         </div>
+                                -->
                     </div>
                 </section>
 
@@ -991,7 +1436,7 @@
                     document.getElementById('tabsContent').style.height = calculateAvailableHeight() + 'px';
 
                     // Show loading indicator for iframe tabs
-                    if (this.id === 'embed-tab' || this.id === 'help-tab') {
+                    if (this.id === 'embed-tab' || this.id === 'report-tab' || this.id === 'help-tab') {
                         const iframeContainers = document.querySelectorAll('.dashboard-container');
                         iframeContainers.forEach(container => {
                             const loadingIndicator = container.querySelector('.iframe-loading');
