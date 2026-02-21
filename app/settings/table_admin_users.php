@@ -77,11 +77,45 @@ $runnerTableSettings['admin_users'] = array(
     username,
     password,
     email,
-    fullname || 
+
+    (
+        -- PREFIX PRIORITY LOGIC
         CASE 
-            WHEN COALESCE(prefix_title, \'\') <> \'\' THEN \' (\' || prefix_title || \')\' 
-            ELSE \'\' 
-        END AS fullname,
+            -- If sex = \'1\', always force Mr.
+            WHEN sex = \'1\'
+                THEN \'Mr. \'
+
+            -- If sex is not \'1\' and prefix is Mr, ignore it
+            WHEN sex <> \'1\' AND LOWER(COALESCE(prefix_title, \'\')) = \'mr\'
+                THEN \'\'
+
+            -- Otherwise use existing prefix if present
+            WHEN COALESCE(prefix_title, \'\') <> \'\'
+                THEN prefix_title || \'. \'
+
+            ELSE \'\'
+        END ||
+
+        -- NAME LOGIC
+        CASE 
+            WHEN COALESCE(TRIM(fullname), \'\') <> \'\' 
+                THEN fullname
+            ELSE TRIM(
+                COALESCE(first_name, \'\') || \' \' ||
+                COALESCE(middle_name || \' \', \'\') ||
+                COALESCE(last_name, \'\')
+            )
+        END ||
+
+        -- ROLE LOGIC
+        CASE 
+            WHEN role_label IS NOT NULL 
+                THEN \' (\' || role_label || \')\'
+            ELSE \'\'
+        END
+
+    ) AS fullname,
+
     groupid,
     active,
     ext_security_id,
@@ -92,19 +126,27 @@ $runnerTableSettings['admin_users'] = array(
     middle_name,
     last_name,
     sex,
-    (
-        SELECT g."Label"
-        FROM lifeboxme_ugmembers m
-        JOIN lifeboxme_uggroups g ON g."GroupID" = m."GroupID"
-        WHERE m."UserName" = users.username
-        ORDER BY g."Label"
-        LIMIT 1
-    ) AS designation_role,
+
+    role_label AS designation_role,
+
     region,
     country,
     phone,
     prefix_title
-FROM "public".users;',
+
+FROM (
+    SELECT 
+        u.*,
+        (
+            SELECT g."Label"
+            FROM lifeboxme_ugmembers m
+            JOIN lifeboxme_uggroups g ON g."GroupID" = m."GroupID"
+            WHERE m."UserName" = u.username
+            ORDER BY g."Label"
+            LIMIT 1
+        ) AS role_label
+    FROM "public".users u
+) users;',
 	'keyFields' => array( 
 		'ID' 
 	),
@@ -153,7 +195,7 @@ FROM "public".users;',
 			'filterFormat' => array(
 				'format' => 'Values list' 
 			),
-			'tableName' => 'public.users' 
+			'tableName' => '' 
 		),
 		'username' => array(
 			'name' => 'username',
@@ -187,7 +229,7 @@ FROM "public".users;',
 			'filterFormat' => array(
 				'format' => 'Values list' 
 			),
-			'tableName' => 'public.users' 
+			'tableName' => '' 
 		),
 		'password' => array(
 			'name' => 'password',
@@ -224,7 +266,7 @@ FROM "public".users;',
 			'filterFormat' => array(
 				'format' => 'Values list' 
 			),
-			'tableName' => 'public.users' 
+			'tableName' => '' 
 		),
 		'email' => array(
 			'name' => 'email',
@@ -260,7 +302,7 @@ FROM "public".users;',
 			'filterFormat' => array(
 				'format' => 'Values list' 
 			),
-			'tableName' => 'public.users' 
+			'tableName' => '' 
 		),
 		'fullname' => array(
 			'name' => 'fullname',
@@ -269,11 +311,43 @@ FROM "public".users;',
 			'sourceSingle' => 'fullname',
 			'index' => 5,
 			'type' => 201,
-			'sqlExpression' => 'fullname || 
+			'sqlExpression' => '(
+        -- PREFIX PRIORITY LOGIC
         CASE 
-            WHEN COALESCE(prefix_title, \'\') <> \'\' THEN \' (\' || prefix_title || \')\' 
-            ELSE \'\' 
-        END',
+            -- If sex = \'1\', always force Mr.
+            WHEN sex = \'1\'
+                THEN \'Mr. \'
+
+            -- If sex is not \'1\' and prefix is Mr, ignore it
+            WHEN sex <> \'1\' AND LOWER(COALESCE(prefix_title, \'\')) = \'mr\'
+                THEN \'\'
+
+            -- Otherwise use existing prefix if present
+            WHEN COALESCE(prefix_title, \'\') <> \'\'
+                THEN prefix_title || \'. \'
+
+            ELSE \'\'
+        END ||
+
+        -- NAME LOGIC
+        CASE 
+            WHEN COALESCE(TRIM(fullname), \'\') <> \'\' 
+                THEN fullname
+            ELSE TRIM(
+                COALESCE(first_name, \'\') || \' \' ||
+                COALESCE(middle_name || \' \', \'\') ||
+                COALESCE(last_name, \'\')
+            )
+        END ||
+
+        -- ROLE LOGIC
+        CASE 
+            WHEN role_label IS NOT NULL 
+                THEN \' (\' || role_label || \')\'
+            ELSE \'\'
+        END
+
+    )',
 			'viewFormats' => array(
 				'view' => array(
 					'numberFractionalDigits' => 0 
@@ -325,7 +399,7 @@ FROM "public".users;',
 			'filterFormat' => array(
 				'format' => 'Values list' 
 			),
-			'tableName' => 'public.users' 
+			'tableName' => '' 
 		),
 		'active' => array(
 			'name' => 'active',
@@ -355,7 +429,7 @@ FROM "public".users;',
 				'format' => 'Values list',
 				'filterTotalsField' => 'ID' 
 			),
-			'tableName' => 'public.users' 
+			'tableName' => '' 
 		),
 		'ext_security_id' => array(
 			'name' => 'ext_security_id',
@@ -390,7 +464,7 @@ FROM "public".users;',
 			'filterFormat' => array(
 				'format' => 'Values list' 
 			),
-			'tableName' => 'public.users' 
+			'tableName' => '' 
 		),
 		'userpic' => array(
 			'name' => 'userpic',
@@ -428,7 +502,7 @@ FROM "public".users;',
 			'filterFormat' => array(
 				'format' => 'Values list' 
 			),
-			'tableName' => 'public.users' 
+			'tableName' => '' 
 		),
 		'reset_token' => array(
 			'name' => 'reset_token',
@@ -465,7 +539,7 @@ FROM "public".users;',
 			'filterFormat' => array(
 				'format' => 'Values list' 
 			),
-			'tableName' => 'public.users' 
+			'tableName' => '' 
 		),
 		'reset_date' => array(
 			'name' => 'reset_date',
@@ -502,7 +576,7 @@ FROM "public".users;',
 			'filterFormat' => array(
 				'format' => 'Values list' 
 			),
-			'tableName' => 'public.users' 
+			'tableName' => '' 
 		),
 		'first_name' => array(
 			'name' => 'first_name',
@@ -536,7 +610,7 @@ FROM "public".users;',
 			'filterFormat' => array(
 				'format' => 'Values list' 
 			),
-			'tableName' => 'public.users' 
+			'tableName' => '' 
 		),
 		'middle_name' => array(
 			'name' => 'middle_name',
@@ -570,7 +644,7 @@ FROM "public".users;',
 			'filterFormat' => array(
 				'format' => 'Values list' 
 			),
-			'tableName' => 'public.users' 
+			'tableName' => '' 
 		),
 		'last_name' => array(
 			'name' => 'last_name',
@@ -604,7 +678,7 @@ FROM "public".users;',
 			'filterFormat' => array(
 				'format' => 'Values list' 
 			),
-			'tableName' => 'public.users' 
+			'tableName' => '' 
 		),
 		'sex' => array(
 			'name' => 'sex',
@@ -635,22 +709,15 @@ FROM "public".users;',
 			'filterFormat' => array(
 				'format' => 'Values list' 
 			),
-			'tableName' => 'public.users' 
+			'tableName' => '' 
 		),
 		'designation_role' => array(
 			'name' => 'designation_role',
 			'goodName' => 'designation_role',
-			'strField' => 'designation_role',
+			'strField' => 'role_label',
 			'sourceSingle' => 'designation_role',
 			'index' => 16,
-			'sqlExpression' => '(
-        SELECT g."Label"
-        FROM lifeboxme_ugmembers m
-        JOIN lifeboxme_uggroups g ON g."GroupID" = m."GroupID"
-        WHERE m."UserName" = users.username
-        ORDER BY g."Label"
-        LIMIT 1
-    )',
+			'sqlExpression' => 'role_label',
 			'viewFormats' => array(
 				'view' => array(
 					'numberFractionalDigits' => 0 
@@ -709,7 +776,7 @@ FROM "public".users;',
 			'filterFormat' => array(
 				'format' => 'Values list' 
 			),
-			'tableName' => 'public.users' 
+			'tableName' => '' 
 		),
 		'country' => array(
 			'name' => 'country',
@@ -748,7 +815,7 @@ FROM "public".users;',
 			'filterFormat' => array(
 				'format' => 'Values list' 
 			),
-			'tableName' => 'public.users' 
+			'tableName' => '' 
 		),
 		'phone' => array(
 			'name' => 'phone',
@@ -779,7 +846,7 @@ $this->settings["preferredCountries"] = "et";           // Preferred Country'
 			'filterFormat' => array(
 				'format' => 'Values list' 
 			),
-			'tableName' => 'public.users' 
+			'tableName' => '' 
 		),
 		'prefix_title' => array(
 			'name' => 'prefix_title',
@@ -813,7 +880,7 @@ $this->settings["preferredCountries"] = "et";           // Preferred Country'
 			'filterFormat' => array(
 				'format' => 'Values list' 
 			),
-			'tableName' => 'public.users' 
+			'tableName' => '' 
 		) 
 	),
 	'query' => array(
@@ -822,11 +889,45 @@ $this->settings["preferredCountries"] = "et";           // Preferred Country'
     username,
     password,
     email,
-    fullname || 
+
+    (
+        -- PREFIX PRIORITY LOGIC
         CASE 
-            WHEN COALESCE(prefix_title, \'\') <> \'\' THEN \' (\' || prefix_title || \')\' 
-            ELSE \'\' 
-        END AS fullname,
+            -- If sex = \'1\', always force Mr.
+            WHEN sex = \'1\'
+                THEN \'Mr. \'
+
+            -- If sex is not \'1\' and prefix is Mr, ignore it
+            WHEN sex <> \'1\' AND LOWER(COALESCE(prefix_title, \'\')) = \'mr\'
+                THEN \'\'
+
+            -- Otherwise use existing prefix if present
+            WHEN COALESCE(prefix_title, \'\') <> \'\'
+                THEN prefix_title || \'. \'
+
+            ELSE \'\'
+        END ||
+
+        -- NAME LOGIC
+        CASE 
+            WHEN COALESCE(TRIM(fullname), \'\') <> \'\' 
+                THEN fullname
+            ELSE TRIM(
+                COALESCE(first_name, \'\') || \' \' ||
+                COALESCE(middle_name || \' \', \'\') ||
+                COALESCE(last_name, \'\')
+            )
+        END ||
+
+        -- ROLE LOGIC
+        CASE 
+            WHEN role_label IS NOT NULL 
+                THEN \' (\' || role_label || \')\'
+            ELSE \'\'
+        END
+
+    ) AS fullname,
+
     groupid,
     active,
     ext_security_id,
@@ -837,19 +938,27 @@ $this->settings["preferredCountries"] = "et";           // Preferred Country'
     middle_name,
     last_name,
     sex,
-    (
-        SELECT g."Label"
-        FROM lifeboxme_ugmembers m
-        JOIN lifeboxme_uggroups g ON g."GroupID" = m."GroupID"
-        WHERE m."UserName" = users.username
-        ORDER BY g."Label"
-        LIMIT 1
-    ) AS designation_role,
+
+    role_label AS designation_role,
+
     region,
     country,
     phone,
     prefix_title
-FROM "public".users;',
+
+FROM (
+    SELECT 
+        u.*,
+        (
+            SELECT g."Label"
+            FROM lifeboxme_ugmembers m
+            JOIN lifeboxme_uggroups g ON g."GroupID" = m."GroupID"
+            WHERE m."UserName" = u.username
+            ORDER BY g."Label"
+            LIMIT 1
+        ) AS role_label
+    FROM "public".users u
+) users;',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
@@ -859,11 +968,9 @@ FROM "public".users;',
 				'type' => 'FieldListItem',
 				'alias' => '',
 				'expression' => array(
-					'sql' => '',
+					'sql' => '"ID"',
 					'parsed' => true,
-					'type' => 'SQLField',
-					'table' => 'public.users',
-					'name' => 'ID' 
+					'type' => 'NonParsedEntity' 
 				),
 				'encrypted' => false,
 				'columnName' => 'ID' 
@@ -874,11 +981,9 @@ FROM "public".users;',
 				'type' => 'FieldListItem',
 				'alias' => '',
 				'expression' => array(
-					'sql' => '',
+					'sql' => 'username',
 					'parsed' => true,
-					'type' => 'SQLField',
-					'table' => 'public.users',
-					'name' => 'username' 
+					'type' => 'NonParsedEntity' 
 				),
 				'encrypted' => false,
 				'columnName' => 'username' 
@@ -889,11 +994,9 @@ FROM "public".users;',
 				'type' => 'FieldListItem',
 				'alias' => '',
 				'expression' => array(
-					'sql' => '',
+					'sql' => 'password',
 					'parsed' => true,
-					'type' => 'SQLField',
-					'table' => 'public.users',
-					'name' => 'password' 
+					'type' => 'NonParsedEntity' 
 				),
 				'encrypted' => false,
 				'columnName' => 'password' 
@@ -904,30 +1007,92 @@ FROM "public".users;',
 				'type' => 'FieldListItem',
 				'alias' => '',
 				'expression' => array(
-					'sql' => '',
+					'sql' => 'email',
 					'parsed' => true,
-					'type' => 'SQLField',
-					'table' => 'public.users',
-					'name' => 'email' 
+					'type' => 'NonParsedEntity' 
 				),
 				'encrypted' => false,
 				'columnName' => 'email' 
 			),
 			array(
-				'sql' => 'fullname || 
+				'sql' => '(
+        -- PREFIX PRIORITY LOGIC
         CASE 
-            WHEN COALESCE(prefix_title, \'\') <> \'\' THEN \' (\' || prefix_title || \')\' 
-            ELSE \'\' 
-        END',
+            -- If sex = \'1\', always force Mr.
+            WHEN sex = \'1\'
+                THEN \'Mr. \'
+
+            -- If sex is not \'1\' and prefix is Mr, ignore it
+            WHEN sex <> \'1\' AND LOWER(COALESCE(prefix_title, \'\')) = \'mr\'
+                THEN \'\'
+
+            -- Otherwise use existing prefix if present
+            WHEN COALESCE(prefix_title, \'\') <> \'\'
+                THEN prefix_title || \'. \'
+
+            ELSE \'\'
+        END ||
+
+        -- NAME LOGIC
+        CASE 
+            WHEN COALESCE(TRIM(fullname), \'\') <> \'\' 
+                THEN fullname
+            ELSE TRIM(
+                COALESCE(first_name, \'\') || \' \' ||
+                COALESCE(middle_name || \' \', \'\') ||
+                COALESCE(last_name, \'\')
+            )
+        END ||
+
+        -- ROLE LOGIC
+        CASE 
+            WHEN role_label IS NOT NULL 
+                THEN \' (\' || role_label || \')\'
+            ELSE \'\'
+        END
+
+    )',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => 'fullname',
 				'expression' => array(
-					'sql' => 'fullname || 
+					'sql' => '(
+        -- PREFIX PRIORITY LOGIC
         CASE 
-            WHEN COALESCE(prefix_title, \'\') <> \'\' THEN \' (\' || prefix_title || \')\' 
-            ELSE \'\' 
-        END',
+            -- If sex = \'1\', always force Mr.
+            WHEN sex = \'1\'
+                THEN \'Mr. \'
+
+            -- If sex is not \'1\' and prefix is Mr, ignore it
+            WHEN sex <> \'1\' AND LOWER(COALESCE(prefix_title, \'\')) = \'mr\'
+                THEN \'\'
+
+            -- Otherwise use existing prefix if present
+            WHEN COALESCE(prefix_title, \'\') <> \'\'
+                THEN prefix_title || \'. \'
+
+            ELSE \'\'
+        END ||
+
+        -- NAME LOGIC
+        CASE 
+            WHEN COALESCE(TRIM(fullname), \'\') <> \'\' 
+                THEN fullname
+            ELSE TRIM(
+                COALESCE(first_name, \'\') || \' \' ||
+                COALESCE(middle_name || \' \', \'\') ||
+                COALESCE(last_name, \'\')
+            )
+        END ||
+
+        -- ROLE LOGIC
+        CASE 
+            WHEN role_label IS NOT NULL 
+                THEN \' (\' || role_label || \')\'
+            ELSE \'\'
+        END
+
+    )',
 					'parsed' => true,
 					'type' => 'NonParsedEntity' 
 				),
@@ -940,11 +1105,9 @@ FROM "public".users;',
 				'type' => 'FieldListItem',
 				'alias' => '',
 				'expression' => array(
-					'sql' => '',
+					'sql' => 'groupid',
 					'parsed' => true,
-					'type' => 'SQLField',
-					'table' => 'public.users',
-					'name' => 'groupid' 
+					'type' => 'NonParsedEntity' 
 				),
 				'encrypted' => false,
 				'columnName' => 'groupid' 
@@ -955,11 +1118,9 @@ FROM "public".users;',
 				'type' => 'FieldListItem',
 				'alias' => '',
 				'expression' => array(
-					'sql' => '',
+					'sql' => 'active',
 					'parsed' => true,
-					'type' => 'SQLField',
-					'table' => 'public.users',
-					'name' => 'active' 
+					'type' => 'NonParsedEntity' 
 				),
 				'encrypted' => false,
 				'columnName' => 'active' 
@@ -970,11 +1131,9 @@ FROM "public".users;',
 				'type' => 'FieldListItem',
 				'alias' => '',
 				'expression' => array(
-					'sql' => '',
+					'sql' => 'ext_security_id',
 					'parsed' => true,
-					'type' => 'SQLField',
-					'table' => 'public.users',
-					'name' => 'ext_security_id' 
+					'type' => 'NonParsedEntity' 
 				),
 				'encrypted' => false,
 				'columnName' => 'ext_security_id' 
@@ -985,11 +1144,9 @@ FROM "public".users;',
 				'type' => 'FieldListItem',
 				'alias' => '',
 				'expression' => array(
-					'sql' => '',
+					'sql' => 'userpic',
 					'parsed' => true,
-					'type' => 'SQLField',
-					'table' => 'public.users',
-					'name' => 'userpic' 
+					'type' => 'NonParsedEntity' 
 				),
 				'encrypted' => false,
 				'columnName' => 'userpic' 
@@ -1000,11 +1157,9 @@ FROM "public".users;',
 				'type' => 'FieldListItem',
 				'alias' => '',
 				'expression' => array(
-					'sql' => '',
+					'sql' => 'reset_token',
 					'parsed' => true,
-					'type' => 'SQLField',
-					'table' => 'public.users',
-					'name' => 'reset_token' 
+					'type' => 'NonParsedEntity' 
 				),
 				'encrypted' => false,
 				'columnName' => 'reset_token' 
@@ -1015,11 +1170,9 @@ FROM "public".users;',
 				'type' => 'FieldListItem',
 				'alias' => '',
 				'expression' => array(
-					'sql' => '',
+					'sql' => 'reset_date',
 					'parsed' => true,
-					'type' => 'SQLField',
-					'table' => 'public.users',
-					'name' => 'reset_date' 
+					'type' => 'NonParsedEntity' 
 				),
 				'encrypted' => false,
 				'columnName' => 'reset_date' 
@@ -1030,11 +1183,9 @@ FROM "public".users;',
 				'type' => 'FieldListItem',
 				'alias' => '',
 				'expression' => array(
-					'sql' => '',
+					'sql' => 'first_name',
 					'parsed' => true,
-					'type' => 'SQLField',
-					'table' => 'public.users',
-					'name' => 'first_name' 
+					'type' => 'NonParsedEntity' 
 				),
 				'encrypted' => false,
 				'columnName' => 'first_name' 
@@ -1045,11 +1196,9 @@ FROM "public".users;',
 				'type' => 'FieldListItem',
 				'alias' => '',
 				'expression' => array(
-					'sql' => '',
+					'sql' => 'middle_name',
 					'parsed' => true,
-					'type' => 'SQLField',
-					'table' => 'public.users',
-					'name' => 'middle_name' 
+					'type' => 'NonParsedEntity' 
 				),
 				'encrypted' => false,
 				'columnName' => 'middle_name' 
@@ -1060,11 +1209,9 @@ FROM "public".users;',
 				'type' => 'FieldListItem',
 				'alias' => '',
 				'expression' => array(
-					'sql' => '',
+					'sql' => 'last_name',
 					'parsed' => true,
-					'type' => 'SQLField',
-					'table' => 'public.users',
-					'name' => 'last_name' 
+					'type' => 'NonParsedEntity' 
 				),
 				'encrypted' => false,
 				'columnName' => 'last_name' 
@@ -1075,38 +1222,24 @@ FROM "public".users;',
 				'type' => 'FieldListItem',
 				'alias' => '',
 				'expression' => array(
-					'sql' => '',
+					'sql' => 'sex',
 					'parsed' => true,
-					'type' => 'SQLField',
-					'table' => 'public.users',
-					'name' => 'sex' 
+					'type' => 'NonParsedEntity' 
 				),
 				'encrypted' => false,
 				'columnName' => 'sex' 
 			),
 			array(
-				'sql' => '(
-        SELECT g."Label"
-        FROM lifeboxme_ugmembers m
-        JOIN lifeboxme_uggroups g ON g."GroupID" = m."GroupID"
-        WHERE m."UserName" = users.username
-        ORDER BY g."Label"
-        LIMIT 1
-    )',
+				'sql' => 'role_label',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => 'designation_role',
 				'expression' => array(
-					'sql' => '(
-        SELECT g."Label"
-        FROM lifeboxme_ugmembers m
-        JOIN lifeboxme_uggroups g ON g."GroupID" = m."GroupID"
-        WHERE m."UserName" = users.username
-        ORDER BY g."Label"
-        LIMIT 1
-    )',
+					'sql' => '',
 					'parsed' => true,
-					'type' => 'NonParsedEntity' 
+					'type' => 'SQLField',
+					'table' => 'users',
+					'name' => 'role_label' 
 				),
 				'encrypted' => false,
 				'columnName' => 'designation_role' 
@@ -1117,11 +1250,9 @@ FROM "public".users;',
 				'type' => 'FieldListItem',
 				'alias' => '',
 				'expression' => array(
-					'sql' => '',
+					'sql' => 'region',
 					'parsed' => true,
-					'type' => 'SQLField',
-					'table' => 'public.users',
-					'name' => 'region' 
+					'type' => 'NonParsedEntity' 
 				),
 				'encrypted' => false,
 				'columnName' => 'region' 
@@ -1132,11 +1263,9 @@ FROM "public".users;',
 				'type' => 'FieldListItem',
 				'alias' => '',
 				'expression' => array(
-					'sql' => '',
+					'sql' => 'country',
 					'parsed' => true,
-					'type' => 'SQLField',
-					'table' => 'public.users',
-					'name' => 'country' 
+					'type' => 'NonParsedEntity' 
 				),
 				'encrypted' => false,
 				'columnName' => 'country' 
@@ -1147,11 +1276,9 @@ FROM "public".users;',
 				'type' => 'FieldListItem',
 				'alias' => '',
 				'expression' => array(
-					'sql' => '',
+					'sql' => 'phone',
 					'parsed' => true,
-					'type' => 'SQLField',
-					'table' => 'public.users',
-					'name' => 'phone' 
+					'type' => 'NonParsedEntity' 
 				),
 				'encrypted' => false,
 				'columnName' => 'phone' 
@@ -1162,11 +1289,9 @@ FROM "public".users;',
 				'type' => 'FieldListItem',
 				'alias' => '',
 				'expression' => array(
-					'sql' => '',
+					'sql' => 'prefix_title',
 					'parsed' => true,
-					'type' => 'SQLField',
-					'table' => 'public.users',
-					'name' => 'prefix_title' 
+					'type' => 'NonParsedEntity' 
 				),
 				'encrypted' => false,
 				'columnName' => 'prefix_title' 
@@ -1174,37 +1299,160 @@ FROM "public".users;',
 		),
 		'fromList' => array( 
 			array(
-				'sql' => '"public".users',
+				'sql' => '(
+    SELECT 
+        u.*,
+        (
+            SELECT g."Label"
+            FROM lifeboxme_ugmembers m
+            JOIN lifeboxme_uggroups g ON g."GroupID" = m."GroupID"
+            WHERE m."UserName" = u.username
+            ORDER BY g."Label"
+            LIMIT 1
+        ) AS role_label
+    FROM "public".users u
+) users',
 				'parsed' => true,
 				'type' => 'FromListItem',
 				'table' => array(
-					'sql' => '"public".users',
+					'sql' => '
+    SELECT 
+        u.*,
+        (
+            SELECT g."Label"
+            FROM lifeboxme_ugmembers m
+            JOIN lifeboxme_uggroups g ON g."GroupID" = m."GroupID"
+            WHERE m."UserName" = u.username
+            ORDER BY g."Label"
+            LIMIT 1
+        ) AS role_label
+    FROM "public".users u
+',
 					'parsed' => true,
-					'type' => 'SQLTable',
-					'columns' => array( 
-						'ID',
-						'username',
-						'password',
-						'email',
-						'fullname',
-						'groupid',
-						'active',
-						'ext_security_id',
-						'userpic',
-						'reset_token',
-						'reset_date',
-						'first_name',
-						'middle_name',
-						'last_name',
-						'sex',
-						'designation_role',
-						'region',
-						'country',
-						'phone',
-						'prefix_title',
-						'api_key' 
+					'type' => 'SQLQuery',
+					'fieldList' => array( 
+						array(
+							'sql' => '(
+            SELECT g."Label"
+            FROM lifeboxme_ugmembers m
+            JOIN lifeboxme_uggroups g ON g."GroupID" = m."GroupID"
+            WHERE m."UserName" = u.username
+            ORDER BY g."Label"
+            LIMIT 1
+        )',
+							'parsed' => false,
+							'type' => 'FieldListItem',
+							'alias' => 'role_label',
+							'expression' => null 
+						) 
 					),
-					'name' => 'public.users' 
+					'fromList' => array( 
+						array(
+							'sql' => '"public".users u',
+							'parsed' => true,
+							'type' => 'FromListItem',
+							'table' => array(
+								'sql' => '"public".users',
+								'parsed' => true,
+								'type' => 'SQLTable',
+								'columns' => array( 
+									'ID',
+									'username',
+									'password',
+									'email',
+									'fullname',
+									'groupid',
+									'active',
+									'ext_security_id',
+									'userpic',
+									'reset_token',
+									'reset_date',
+									'first_name',
+									'middle_name',
+									'last_name',
+									'sex',
+									'designation_role',
+									'region',
+									'country',
+									'phone',
+									'prefix_title',
+									'api_key' 
+								),
+								'name' => 'public.users' 
+							),
+							'joinOn' => array(
+								'sql' => '',
+								'parsed' => false,
+								'type' => 'LogicalExpression',
+								'contained' => array( 
+									 
+								),
+								'unionType' => 0,
+								'column' => null 
+							),
+							'joinList' => array(
+								'sql' => '',
+								'parsed' => true,
+								'type' => 'JoinOn',
+								'field1' => array( 
+									 
+								),
+								'field2' => array( 
+									 
+								) 
+							),
+							'alias' => 'u',
+							'link' => 0 
+						) 
+					),
+					'where' => array(
+						'sql' => '',
+						'parsed' => false,
+						'type' => 'LogicalExpression',
+						'contained' => array( 
+							 
+						),
+						'unionType' => 0,
+						'column' => null 
+					),
+					'groupBy' => array( 
+						 
+					),
+					'having' => array(
+						'sql' => '',
+						'parsed' => false,
+						'type' => 'LogicalExpression',
+						'contained' => array( 
+							 
+						),
+						'unionType' => 0,
+						'column' => null 
+					),
+					'orderBy' => array( 
+						 
+					),
+					'colsIndex' => array( 
+						array(
+							'fieldIndex' => 0,
+							'orderByIndex' => -1,
+							'groupByIndex' => -1,
+							'whereIndex' => -1,
+							'havingIndex' => -1 
+						) 
+					),
+					'headSql' => 'SELECT',
+					'fieldListSql' => 'u.*,
+        (
+            SELECT g."Label"
+            FROM lifeboxme_ugmembers m
+            JOIN lifeboxme_uggroups g ON g."GroupID" = m."GroupID"
+            WHERE m."UserName" = u.username
+            ORDER BY g."Label"
+            LIMIT 1
+        ) AS role_label',
+					'fromListSql' => 'FROM "public".users u',
+					'orderBySql' => '',
+					'tailSql' => '' 
 				),
 				'joinOn' => array(
 					'sql' => '',
@@ -1227,7 +1475,7 @@ FROM "public".users;',
 						 
 					) 
 				),
-				'link' => 0 
+				'alias' => 'users' 
 			) 
 		),
 		'where' => array(
@@ -1403,11 +1651,45 @@ FROM "public".users;',
     username,
     password,
     email,
-    fullname || 
+
+    (
+        -- PREFIX PRIORITY LOGIC
         CASE 
-            WHEN COALESCE(prefix_title, \'\') <> \'\' THEN \' (\' || prefix_title || \')\' 
-            ELSE \'\' 
-        END AS fullname,
+            -- If sex = \'1\', always force Mr.
+            WHEN sex = \'1\'
+                THEN \'Mr. \'
+
+            -- If sex is not \'1\' and prefix is Mr, ignore it
+            WHEN sex <> \'1\' AND LOWER(COALESCE(prefix_title, \'\')) = \'mr\'
+                THEN \'\'
+
+            -- Otherwise use existing prefix if present
+            WHEN COALESCE(prefix_title, \'\') <> \'\'
+                THEN prefix_title || \'. \'
+
+            ELSE \'\'
+        END ||
+
+        -- NAME LOGIC
+        CASE 
+            WHEN COALESCE(TRIM(fullname), \'\') <> \'\' 
+                THEN fullname
+            ELSE TRIM(
+                COALESCE(first_name, \'\') || \' \' ||
+                COALESCE(middle_name || \' \', \'\') ||
+                COALESCE(last_name, \'\')
+            )
+        END ||
+
+        -- ROLE LOGIC
+        CASE 
+            WHEN role_label IS NOT NULL 
+                THEN \' (\' || role_label || \')\'
+            ELSE \'\'
+        END
+
+    ) AS fullname,
+
     groupid,
     active,
     ext_security_id,
@@ -1418,19 +1700,26 @@ FROM "public".users;',
     middle_name,
     last_name,
     sex,
-    (
-        SELECT g."Label"
-        FROM lifeboxme_ugmembers m
-        JOIN lifeboxme_uggroups g ON g."GroupID" = m."GroupID"
-        WHERE m."UserName" = users.username
-        ORDER BY g."Label"
-        LIMIT 1
-    ) AS designation_role,
+
+    role_label AS designation_role,
+
     region,
     country,
     phone,
     prefix_title',
-		'fromListSql' => 'FROM "public".users',
+		'fromListSql' => 'FROM (
+    SELECT 
+        u.*,
+        (
+            SELECT g."Label"
+            FROM lifeboxme_ugmembers m
+            JOIN lifeboxme_uggroups g ON g."GroupID" = m."GroupID"
+            WHERE m."UserName" = u.username
+            ORDER BY g."Label"
+            LIMIT 1
+        ) AS role_label
+    FROM "public".users u
+) users',
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),
