@@ -1043,7 +1043,7 @@ function getNotificationIcon($type)
                                     <h5 class="card-title fw-bold">Where Can I Go From Here?</h5>
                                     <p class="fw-semibold text-secondary mb-3">
                                         Dear
-                                        <a href="/app/userinfo.php"><?= htmlspecialchars($_SESSION['username'] ?? 'User') ?></a>,
+                                        <a href="/app/userinfo.php" target="_blank"><?= htmlspecialchars($_SESSION['username'] ?? 'User') ?></a>,
                                         based on your role as <?= getRoleDisplay($userRole); ?>,
                                         you will be able to access:
                                     </p>
