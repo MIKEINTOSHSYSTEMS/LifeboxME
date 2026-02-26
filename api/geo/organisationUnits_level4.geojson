@@ -1,0 +1,452 @@
+{
+    "organisationUnits": [
+        {
+            "parent": {
+                "name": "India"
+            },
+            "displayName": "AIIMS Jodhpur",
+            "id": "JZi8XgLlZjg"
+        },
+        {
+            "parent": {
+                "name": "India"
+            },
+            "displayName": "AIIMS Rishikesh",
+            "id": "TG6a2IdgV3V"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.743653,
+                    9.040251
+                ]
+            },
+            "displayName": "AaBET",
+            "id": "uP4KKX5uROS"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "displayName": "Adare General Hospital",
+            "id": "arG4xUPu2C9"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "displayName": "Aleret Hospital",
+            "id": "AhulizzWhJF"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "displayName": "Ambo University Referral Hospital",
+            "id": "iwvjFIRY0Xy"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "displayName": "Assela University Hospital",
+            "id": "Sh6qAx15hHI"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "displayName": "Attat Hospital",
+            "id": "tFEF784RBMO"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "displayName": "Ayder Referral Hospital",
+            "id": "XXBeojaZd9V"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.742536,
+                    9.015443
+                ]
+            },
+            "displayName": "Black Lion",
+            "id": "BBblDs1Cn0s"
+        },
+        {
+            "parent": {
+                "name": "Congo (DRC)"
+            },
+            "displayName": "Bukavu Hospital",
+            "id": "YBAiuvZDbzt"
+        },
+        {
+            "parent": {
+                "name": "Liberia"
+            },
+            "displayName": "C. B. Dunbar Maternity Hospital",
+            "id": "OR1a3uqmJDH"
+        },
+        {
+            "parent": {
+                "name": "Madagascar"
+            },
+            "displayName": "CHRD Faratsiho",
+            "id": "yQtgUWjspwd"
+        },
+        {
+            "parent": {
+                "name": "Madagascar"
+            },
+            "displayName": "CHRR Antsirabe",
+            "id": "yTaanOnvj12"
+        },
+        {
+            "parent": {
+                "name": "Cote d'Ivoire"
+            },
+            "displayName": "CHU Treichville",
+            "id": "Dd9sDuLZktz"
+        },
+        {
+            "parent": {
+                "name": "Sierra Leone"
+            },
+            "displayName": "Connaught Hospital",
+            "id": "GPiFhvuFZOM"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.893101,
+                    13.142022
+                ]
+            },
+            "displayName": "Debark Hospital",
+            "id": "S3kHpvvCcea"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    39.535179,
+                    9.679229
+                ]
+            },
+            "displayName": "Debre Birhan",
+            "id": "u0pU4BRVhvQ"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "displayName": "Dil Chora Referral Hospital",
+            "id": "vhzjgkJK8OI"
+        },
+        {
+            "parent": {
+                "name": "Liberia"
+            },
+            "displayName": "ELWA Hospital",
+            "id": "jaYZ3y1L3JM"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.731459,
+                    9.780581
+                ]
+            },
+            "displayName": "Fitche General Hospital",
+            "id": "c4cX2cU14Vo"
+        },
+        {
+            "parent": {
+                "name": "India"
+            },
+            "displayName": "GS memorial",
+            "id": "rnGpMO6nUxz"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.755525,
+                    9.015419
+                ]
+            },
+            "displayName": "Gandhi Memorial Hospital",
+            "id": "fG1Y5rrlv7H"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.451416,
+                    12.617057
+                ]
+            },
+            "displayName": "Gondar University Hospital",
+            "id": "iAg53twOO2k"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "displayName": "Hawassa Hospital",
+            "id": "nwtXLgBRb1P"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "displayName": "Hiwot Fana Hospital",
+            "id": "t1vpf6TaVau"
+        },
+        {
+            "parent": {
+                "name": "Honduras"
+            },
+            "displayName": "Hospital Mario Catarino Rivas",
+            "id": "tlleqORDFVY"
+        },
+        {
+            "parent": {
+                "name": "Rwanda"
+            },
+            "displayName": "Hospital X",
+            "id": "RhzUbYEm4p5"
+        },
+        {
+            "parent": {
+                "name": "Bolivia"
+            },
+            "displayName": "Instituto Oncológico del Oriente Boliviano (IOOB)",
+            "id": "YxLxFj4XrU7"
+        },
+        {
+            "parent": {
+                "name": "Honduras"
+            },
+            "displayName": "Instituto hondureño de seguridad social (IHSS)",
+            "id": "cQF7VJJHzc5"
+        },
+        {
+            "parent": {
+                "name": "Liberia"
+            },
+            "displayName": "JFK Hospital",
+            "id": "SvGzt57YDNb"
+        },
+        {
+            "parent": {
+                "name": "Liberia"
+            },
+            "displayName": "JJ Dossen Hospitals",
+            "id": "WIeDPInmJDz"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "displayName": "Jimma University Hospital",
+            "id": "B1mpCiil9HJ"
+        },
+        {
+            "parent": {
+                "name": "Liberia"
+            },
+            "displayName": "LGH-Bomi hospital",
+            "id": "Ps0Ri71Jaeg"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "displayName": "Menelik II",
+            "id": "ztDNJoisBsF"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.775097,
+                    9.03892
+                ]
+            },
+            "displayName": "Menelik II Hospital",
+            "id": "P8p1OKgILTn"
+        },
+        {
+            "parent": {
+                "name": "Malawi"
+            },
+            "displayName": "Mzuzu central hospital",
+            "id": "pOUNS64Bxth"
+        },
+        {
+            "parent": {
+                "name": "Malawi"
+            },
+            "displayName": "Ntcheu district hospital",
+            "id": "djN1bREvjNW"
+        },
+        {
+            "parent": {
+                "name": "Malawi"
+            },
+            "displayName": "Queen Elizabeth Central Hospital",
+            "id": "gIT3AWjibsm"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "displayName": "Ras Desta Hospital",
+            "id": "cX6rkGvLiBB"
+        },
+        {
+            "parent": {
+                "name": "Liberia"
+            },
+            "displayName": "Redemption hospital",
+            "id": "CXVqD8AqkRN"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.728242,
+                    9.046966
+                ]
+            },
+            "displayName": "St. Paul Millennium Hospital",
+            "id": "ruqPKaWdDVA"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.757113,
+                    9.074166
+                ]
+            },
+            "displayName": "St. Peter's Specialized Hospital",
+            "id": "vi0XjRviFVQ"
+        },
+        {
+            "parent": {
+                "name": "India"
+            },
+            "displayName": "TATA ACTREC",
+            "id": "Tdc9cQocZpY"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "displayName": "Tibebe Ghion Hospital",
+            "id": "tXpOChBKYt6"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.743653,
+                    9.040251
+                ]
+            },
+            "displayName": "Werabe Comprehensive Specialized Hospital",
+            "id": "H6qrUqFJ0Iv"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "displayName": "Wolaita Sodo University Hospital",
+            "id": "TrAzvA22iH5"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "displayName": "Wolkite University Specialized Hospital",
+            "id": "i4t8kaQYduS"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.760346,
+                    9.043506
+                ]
+            },
+            "displayName": "Yekatit 12",
+            "id": "gYF69P4aFXV"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "displayName": "Yirgalem General Hospital",
+            "id": "Xd8pbsEPFvd"
+        },
+        {
+            "parent": {
+                "name": "Ethiopia"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.756253,
+                    9.018676
+                ]
+            },
+            "displayName": "Zewditu Memorial Hospital",
+            "id": "C3WGFkGWDfN"
+        }
+    ]
+}

@@ -1,0 +1,294 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "id": "uP4KKX5uROS",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.743653,
+                    9.040251
+                ]
+            },
+            "properties": {
+                "code": "AaBET",
+                "name": "AaBET",
+                "level": "4",
+                "parent": "Zz1OfbNGoFR",
+                "parentGraph": "z6VZwVMwK4d/OplNRf8dtgg/Zz1OfbNGoFR",
+                "groups": [
+                    "PQ2q21YlVxu",
+                    "ZK9s9cDGptb"
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "BBblDs1Cn0s",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.742536,
+                    9.015443
+                ]
+            },
+            "properties": {
+                "code": null,
+                "name": "Black Lion",
+                "level": "4",
+                "parent": "Zz1OfbNGoFR",
+                "parentGraph": "z6VZwVMwK4d/OplNRf8dtgg/Zz1OfbNGoFR",
+                "groups": [
+                    "PQ2q21YlVxu",
+                    "ZK9s9cDGptb"
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "S3kHpvvCcea",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.893101,
+                    13.142022
+                ]
+            },
+            "properties": {
+                "code": null,
+                "name": "Debark Hospital",
+                "level": "4",
+                "parent": "Zz1OfbNGoFR",
+                "parentGraph": "z6VZwVMwK4d/OplNRf8dtgg/Zz1OfbNGoFR",
+                "groups": [
+                    "PQ2q21YlVxu",
+                    "ZK9s9cDGptb"
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "u0pU4BRVhvQ",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    39.535179,
+                    9.679229
+                ]
+            },
+            "properties": {
+                "code": null,
+                "name": "Debre Birhan",
+                "level": "4",
+                "parent": "Zz1OfbNGoFR",
+                "parentGraph": "z6VZwVMwK4d/OplNRf8dtgg/Zz1OfbNGoFR",
+                "groups": [
+                    "PQ2q21YlVxu",
+                    "ZK9s9cDGptb"
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "c4cX2cU14Vo",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.731459,
+                    9.780581
+                ]
+            },
+            "properties": {
+                "code": null,
+                "name": "Fitche General Hospital",
+                "level": "4",
+                "parent": "Zz1OfbNGoFR",
+                "parentGraph": "z6VZwVMwK4d/OplNRf8dtgg/Zz1OfbNGoFR",
+                "groups": [
+                    "PQ2q21YlVxu",
+                    "ZK9s9cDGptb"
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "fG1Y5rrlv7H",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.755525,
+                    9.015419
+                ]
+            },
+            "properties": {
+                "code": null,
+                "name": "Gandhi Memorial Hospital",
+                "level": "4",
+                "parent": "Zz1OfbNGoFR",
+                "parentGraph": "z6VZwVMwK4d/OplNRf8dtgg/Zz1OfbNGoFR",
+                "groups": [
+                    "PQ2q21YlVxu",
+                    "ZK9s9cDGptb"
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "iAg53twOO2k",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    37.451416,
+                    12.617057
+                ]
+            },
+            "properties": {
+                "code": null,
+                "name": "Gondar University Hospital",
+                "level": "4",
+                "parent": "Zz1OfbNGoFR",
+                "parentGraph": "z6VZwVMwK4d/OplNRf8dtgg/Zz1OfbNGoFR",
+                "groups": [
+                    "PQ2q21YlVxu",
+                    "ZK9s9cDGptb"
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "P8p1OKgILTn",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.775097,
+                    9.03892
+                ]
+            },
+            "properties": {
+                "code": null,
+                "name": "Menelik II Hospital",
+                "level": "4",
+                "parent": "Zz1OfbNGoFR",
+                "parentGraph": "z6VZwVMwK4d/OplNRf8dtgg/Zz1OfbNGoFR",
+                "groups": [
+                    "PQ2q21YlVxu",
+                    "ZK9s9cDGptb"
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "ruqPKaWdDVA",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.728242,
+                    9.046966
+                ]
+            },
+            "properties": {
+                "code": null,
+                "name": "St. Paul Millennium Hospital",
+                "level": "4",
+                "parent": "Zz1OfbNGoFR",
+                "parentGraph": "z6VZwVMwK4d/OplNRf8dtgg/Zz1OfbNGoFR",
+                "groups": [
+                    "PQ2q21YlVxu",
+                    "ZK9s9cDGptb"
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "vi0XjRviFVQ",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.757113,
+                    9.074166
+                ]
+            },
+            "properties": {
+                "code": null,
+                "name": "St. Peter's Specialized Hospital",
+                "level": "4",
+                "parent": "Zz1OfbNGoFR",
+                "parentGraph": "z6VZwVMwK4d/OplNRf8dtgg/Zz1OfbNGoFR",
+                "groups": [
+                    "PQ2q21YlVxu",
+                    "ZK9s9cDGptb"
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "H6qrUqFJ0Iv",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.743653,
+                    9.040251
+                ]
+            },
+            "properties": {
+                "code": null,
+                "name": "Werabe Comprehensive Specialized Hospital",
+                "level": "4",
+                "parent": "Zz1OfbNGoFR",
+                "parentGraph": "z6VZwVMwK4d/OplNRf8dtgg/Zz1OfbNGoFR",
+                "groups": [
+                    "PQ2q21YlVxu",
+                    "ZK9s9cDGptb",
+                    "Y0yQKNl5XiS"
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "gYF69P4aFXV",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.760346,
+                    9.043506
+                ]
+            },
+            "properties": {
+                "code": "Yekatit 12",
+                "name": "Yekatit 12",
+                "level": "4",
+                "parent": "Zz1OfbNGoFR",
+                "parentGraph": "z6VZwVMwK4d/OplNRf8dtgg/Zz1OfbNGoFR",
+                "groups": [
+                    "PQ2q21YlVxu",
+                    "ZK9s9cDGptb",
+                    "AiC4mfDsdhK",
+                    "fmKVk2uARGp"
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "C3WGFkGWDfN",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    38.756253,
+                    9.018676
+                ]
+            },
+            "properties": {
+                "code": null,
+                "name": "Zewditu Memorial Hospital",
+                "level": "4",
+                "parent": "Zz1OfbNGoFR",
+                "parentGraph": "z6VZwVMwK4d/OplNRf8dtgg/Zz1OfbNGoFR",
+                "groups": [
+                    "PQ2q21YlVxu",
+                    "ZK9s9cDGptb"
+                ]
+            }
+        }
+    ]
+}
