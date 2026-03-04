@@ -200,7 +200,7 @@ http_response_code(404); // Set HTTP response to 404
     <div class="container">
         <div class="error-wrapper">
             <div class="error-logo">
-                <img src="./assets/img/lblogo-white.svg" alt="Lifebox Logo">
+                <img src="/assets/img/lblogo-white.svg" alt="Lifebox Logo">
             </div>
             <div class="error-text">
                 <h1>Oops! 404</h1>

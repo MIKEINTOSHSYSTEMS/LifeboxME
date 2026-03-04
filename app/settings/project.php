@@ -506,7 +506,7 @@ $runnerProjectSettings = array(
 			'notifyAdmin' => true,
 			'notifyUser' => true,
 			'registerPage' => true,
-			'remindPage' => false,
+			'remindPage' => true,
 			'remindPasswordPage' => true,
 			'sendActivationLink' => true,
 			'passwordValidation' => array(
@@ -2344,7 +2344,7 @@ $runnerProjectSettings = array(
 				'English' => 'Users' 
 			),
 			'connId' => 'lifebox_mesystem_at_localhost',
-			'color' => 'CD853F',
+			'color' => '000',
 			'originalTable' => 'public.users' 
 		),
 		'admin_rights' => array(
@@ -3532,7 +3532,7 @@ $runnerProjectSettings = array(
 		'table' => 'public.lifeboxme_settings' 
 	),
 	'wizardBuild' => '43785',
-	'projectBuild' => 'vRYAJBMpUGLt',
+	'projectBuild' => 'YNu2pDgnN07o',
 	'projectTheme' => 'flatly',
 	'projectSize' => 'normal',
 	'customErrorMsg' => array(
