@@ -41,11 +41,14 @@
 					'username_button' 
 				),
 				'top' => array( 
-					'text' 
+					 
 				) 
 			),
 			'formXtTags' => array(
 				'grid' => array( 
+					 
+				),
+				'top' => array( 
 					 
 				) 
 			),
@@ -59,8 +62,7 @@
 				'simple_search' => 'supertop',
 				'list_options' => 'supertop',
 				'notifications' => 'supertop',
-				'username_button' => 'supertop',
-				'text' => 'top' 
+				'username_button' => 'supertop' 
 			),
 			'itemLocations' => array(
 				 
@@ -87,17 +89,17 @@
 			'username_button' => array( 
 				'username_button' 
 			),
-			'userinfo_link' => array( 
-				'userinfo_link' 
-			),
-			'logout_link' => array( 
-				'logout_link' 
-			),
 			'adminarea_link' => array( 
 				'adminarea_link' 
 			),
 			'changepassword_link' => array( 
 				'changepassword_link' 
+			),
+			'userinfo_link' => array( 
+				'userinfo_link' 
+			),
+			'logout_link' => array( 
+				'logout_link' 
 			),
 			'expand_menu_button' => array( 
 				'expand_menu_button' 
@@ -105,17 +107,14 @@
 			'collapse_button' => array( 
 				'collapse_button' 
 			),
-			'text' => array( 
-				'text' 
+			'notifications' => array( 
+				'notifications' 
 			),
 			'list_options' => array( 
 				'list_options' 
 			),
 			'advsearch_link' => array( 
 				'advsearch_link' 
-			),
-			'notifications' => array( 
-				'notifications' 
 			),
 			'expand_button' => array( 
 				'expand_button' 
@@ -197,24 +196,15 @@
 	) 
 );
 			$pageArray = array(
-	'id' => 'dashboard',
+	'id' => 'impact',
 	'type' => 'dashboard',
 	'layoutId' => 'leftbar',
-	'disabled' => 0,
-	'default' => 2,
+	'disabled' => false,
+	'default' => 0,
 	'forms' => array(
 		'grid' => array(
 			'modelId' => 'dashboard-grid',
 			'grid' => array( 
-				array(
-					'section' => '',
-					'cells' => array( 
-						array(
-							'cell' => 'c5',
-							'colspan' => 2 
-						) 
-					) 
-				),
 				array(
 					'cells' => array( 
 						array(
@@ -258,12 +248,6 @@
 					) 
 				),
 				'c3' => array(
-					'model' => 'c1',
-					'items' => array( 
-						 
-					) 
-				),
-				'c5' => array(
 					'model' => 'c1',
 					'items' => array( 
 						 
@@ -328,17 +312,6 @@
 						) 
 					),
 					'section' => '' 
-				),
-				array(
-					'section' => '',
-					'cells' => array( 
-						array(
-							'cell' => 'c' 
-						),
-						array(
-							'cell' => 'c3' 
-						) 
-					) 
 				) 
 			),
 			'cells' => array(
@@ -358,18 +331,6 @@
 						'notifications',
 						'username_button' 
 					) 
-				),
-				'c' => array(
-					'model' => 'c1',
-					'items' => array( 
-						 
-					) 
-				),
-				'c3' => array(
-					'model' => 'c2',
-					'items' => array( 
-						 
-					) 
 				) 
 			),
 			'deferredItems' => array( 
@@ -380,23 +341,10 @@
 		'top' => array(
 			'modelId' => 'dashboard-top',
 			'grid' => array( 
-				array(
-					'cells' => array( 
-						array(
-							'cell' => 'c4' 
-						) 
-					),
-					'section' => '' 
-				) 
+				 
 			),
 			'cells' => array(
-				'c4' => array(
-					'model' => 'c4',
-					'items' => array( 
-						'text' 
-					),
-					'align' => 'center' 
-				) 
+				 
 			),
 			'deferredItems' => array( 
 				 
@@ -426,17 +374,17 @@
 				'changepassword_link' 
 			) 
 		),
-		'userinfo_link' => array(
-			'type' => 'userinfo_link' 
-		),
-		'logout_link' => array(
-			'type' => 'logout_link' 
-		),
 		'adminarea_link' => array(
 			'type' => 'adminarea_link' 
 		),
 		'changepassword_link' => array(
 			'type' => 'changepassword_link' 
+		),
+		'userinfo_link' => array(
+			'type' => 'userinfo_link' 
+		),
+		'logout_link' => array(
+			'type' => 'logout_link' 
 		),
 		'expand_menu_button' => array(
 			'type' => 'expand_menu_button' 
@@ -444,30 +392,8 @@
 		'collapse_button' => array(
 			'type' => 'collapse_button' 
 		),
-		'text' => array(
-			'type' => 'text',
-			'label' => array(
-				'text' => '<html>
-
-<head>
-    <title>Dashboard</title>
-</head>
-<body>
-<h6>.</h6>
-    <iframe
-        src="../api/home/index.php"
-        frameborder="0"
-        width="100%"
-        height="1900px"
-        allowtransparency>
-    </iframe>
-</body>
-<h6>.</h6>
-
-</html>',
-				'type' => 0 
-			),
-			'editedByRte' => false 
+		'notifications' => array(
+			'type' => 'notifications' 
 		),
 		'list_options' => array(
 			'type' => 'list_options',
@@ -478,9 +404,6 @@
 		'advsearch_link' => array(
 			'type' => 'advsearch_link' 
 		),
-		'notifications' => array(
-			'type' => 'notifications' 
-		),
 		'expand_button' => array(
 			'type' => 'expand_button' 
 		) 
@@ -488,7 +411,7 @@
 	'dbProps' => array(
 		 
 	),
-	'version' => 14,
+	'version' => 13,
 	'imageItem' => array(
 		'type' => 'page_image' 
 	),

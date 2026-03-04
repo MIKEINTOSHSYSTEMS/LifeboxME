@@ -524,14 +524,14 @@ $runnerProjectSettings = array(
 			'passesCount' => 5 
 		),
 		'emailSettings' => array(
-			'fromEmail' => 'mne@lifebox.org',
+			'fromEmail' => 'lifebox@cloud.merqconsultancy.org',
 			'usePHPDefinedSMTP' => false,
 			'useBuiltInMailer' => false,
-			'SMTPServer' => 'smtp-mail.outlook.com',
+			'SMTPServer' => 'cloud.merqconsultancy.org',
 			'SMTPPort' => 587,
-			'SMTPUser' => 'mne@lifebox.org',
-			'SMTPPassword' => 'G.817939771353uk',
-			'securityProtocol' => 2 
+			'SMTPUser' => 'lifebox@cloud.merqconsultancy.org',
+			'SMTPPassword' => 'LifeboxCloud',
+			'securityProtocol' => 0 
 		),
 		'advancedSecurity' => array(
 			'allowGuestLogin' => false 
@@ -3532,7 +3532,7 @@ $runnerProjectSettings = array(
 		'table' => 'public.lifeboxme_settings' 
 	),
 	'wizardBuild' => '43785',
-	'projectBuild' => 'CdfXYVzgc8vH',
+	'projectBuild' => 'CsLf6DNoGzHS',
 	'projectTheme' => 'flatly',
 	'projectSize' => 'normal',
 	'customErrorMsg' => array(

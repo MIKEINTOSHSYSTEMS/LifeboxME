@@ -106,7 +106,7 @@ $runnerDbTableInfo['public_smtp'] = array(
 		) 
 	),
 	'primaryKeys' => array( 
-		 
+		'id' 
 	),
 	'uniqueFields' => array( 
 		 

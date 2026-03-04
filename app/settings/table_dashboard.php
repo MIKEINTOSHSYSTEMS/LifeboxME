@@ -9,7 +9,8 @@ $runnerTableSettings['Dashboard'] = array(
 			'all_in_one_training',
 			'dashboard',
 			'lifebox_test_center',
-			'lifebox_visitors_analytics' 
+			'lifebox_visitors_analytics',
+			'impact' 
 		),
 		'search' => array( 
 			'search' 
@@ -20,7 +21,8 @@ $runnerTableSettings['Dashboard'] = array(
 		'dashboard' => 'dashboard',
 		'lifebox_test_center' => 'dashboard',
 		'lifebox_visitors_analytics' => 'dashboard',
-		'search' => 'search' 
+		'search' => 'search',
+		'impact' => 'dashboard' 
 	),
 	'defaultPages' => array(
 		'dashboard' => 'dashboard',
@@ -61,7 +63,8 @@ $runnerTableSettings['Dashboard'] = array(
 			'all_in_one_training',
 			'dashboard',
 			'lifebox_test_center',
-			'lifebox_visitors_analytics' 
+			'lifebox_visitors_analytics',
+			'impact' 
 		),
 		'search' => array( 
 			'search' 
@@ -72,7 +75,8 @@ $runnerTableSettings['Dashboard'] = array(
 		'dashboard' => 'dashboard',
 		'lifebox_test_center' => 'dashboard',
 		'lifebox_visitors_analytics' => 'dashboard',
-		'search' => 'search' 
+		'search' => 'search',
+		'impact' => 'dashboard' 
 	),
 	'originalDefaultPages' => array(
 		'dashboard' => 'dashboard',
