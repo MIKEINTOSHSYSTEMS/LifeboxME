@@ -188,12 +188,28 @@
 			'modelId' => 'panel-top',
 			'grid' => array( 
 				array(
+					'section' => '',
+					'cells' => array( 
+						array(
+							'cell' => 'c' 
+						) 
+					) 
+				),
+				array(
 					'cells' => array( 
 						array(
 							'cell' => 'c1' 
 						) 
 					),
 					'section' => '' 
+				),
+				array(
+					'section' => '',
+					'cells' => array( 
+						array(
+							'cell' => 'c2' 
+						) 
+					) 
 				) 
 			),
 			'cells' => array(
@@ -201,6 +217,18 @@
 					'model' => 'c1',
 					'items' => array( 
 						'image' 
+					) 
+				),
+				'c' => array(
+					'model' => 'c1',
+					'items' => array( 
+						 
+					) 
+				),
+				'c2' => array(
+					'model' => 'c1',
+					'items' => array( 
+						 
 					) 
 				) 
 			),

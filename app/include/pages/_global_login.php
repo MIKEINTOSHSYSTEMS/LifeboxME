@@ -109,9 +109,6 @@
 			'loginform_register_link' => array( 
 				'loginform_register_link' 
 			),
-			'login_remind' => array( 
-				'login_remind' 
-			),
 			'captcha' => array( 
 				'captcha' 
 			),
@@ -120,6 +117,9 @@
 			),
 			'text' => array( 
 				'text' 
+			),
+			'login_remind' => array( 
+				'login_remind' 
 			) 
 		),
 		'cellMaps' => array(
@@ -508,13 +508,6 @@
 				'fa' => 'user-plus' 
 			) 
 		),
-		'login_remind' => array(
-			'type' => 'login_remind',
-			'buttonStyle' => 'info',
-			'icon' => array(
-				'fa' => 'key' 
-			) 
-		),
 		'captcha' => array(
 			'type' => 'captcha' 
 		),
@@ -538,6 +531,9 @@
 				'type' => 0 
 			),
 			'editedByRte' => false 
+		),
+		'login_remind' => array(
+			'type' => 'login_remind' 
 		) 
 	),
 	'dbProps' => array(

@@ -138,7 +138,7 @@
 	'id' => 'remind',
 	'type' => 'remind',
 	'layoutId' => 'first',
-	'disabled' => 0,
+	'disabled' => false,
 	'default' => 0,
 	'forms' => array(
 		'above-grid' => array(

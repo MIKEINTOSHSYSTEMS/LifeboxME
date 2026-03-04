@@ -506,7 +506,7 @@ $runnerProjectSettings = array(
 			'notifyAdmin' => true,
 			'notifyUser' => true,
 			'registerPage' => true,
-			'remindPage' => true,
+			'remindPage' => false,
 			'remindPasswordPage' => true,
 			'sendActivationLink' => true,
 			'passwordValidation' => array(
@@ -3532,7 +3532,7 @@ $runnerProjectSettings = array(
 		'table' => 'public.lifeboxme_settings' 
 	),
 	'wizardBuild' => '43785',
-	'projectBuild' => 'CsLf6DNoGzHS',
+	'projectBuild' => 'vRYAJBMpUGLt',
 	'projectTheme' => 'flatly',
 	'projectSize' => 'normal',
 	'customErrorMsg' => array(

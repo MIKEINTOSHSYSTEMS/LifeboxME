@@ -113,7 +113,7 @@
 	'id' => 'remind_success',
 	'type' => 'remind_success',
 	'layoutId' => 'first',
-	'disabled' => 0,
+	'disabled' => false,
 	'default' => 0,
 	'forms' => array(
 		'supertop' => array(
