@@ -697,7 +697,7 @@ function getNotificationIcon($type)
                 </div>
             </div>
 
-            <div class="tab-pane fade show active" id="report" role="tabpanel">
+            <div class="tab-pane fade" id="report" role="tabpanel">
                 <div class="dashboard-container">
                     <div class="iframe-loading">Loading Reports</div>
                     <iframe
@@ -1025,11 +1025,11 @@ function getNotificationIcon($type)
                             <div class="hex-arrow">→</div>
 
                             <!-- Step 3 -->
-                            <div class="hex step-3">Better Outcomes</div>
+                            <div class="hex step-3">Learning & Scale Up</div>
                             <div class="hex-arrow">→</div>
 
                             <!-- Step 4 -->
-                            <div class="hex step-4">Learning & Scale Up</div>
+                            <div class="hex step-4">Better Outcomes</div>
                             <div class="hex-arrow">→</div>
 
                             <!-- Step 5 -->
@@ -1436,7 +1436,7 @@ function getNotificationIcon($type)
                     document.getElementById('tabsContent').style.height = calculateAvailableHeight() + 'px';
 
                     // Show loading indicator for iframe tabs
-                    if (this.id === 'embed-tab' || this.id === 'report-tab' || this.id === 'help-tab') {
+                    if (this.id === 'embed-tab' || this.id === 'report-tab' || this.id === 'info-tab' || this.id === 'help-tab') {
                         const iframeContainers = document.querySelectorAll('.dashboard-container');
                         iframeContainers.forEach(container => {
                             const loadingIndicator = container.querySelector('.iframe-loading');
