@@ -368,7 +368,7 @@ if ($action) {
                     CURLOPT_SSL_VERIFYPEER => false,
                     CURLOPT_SSL_VERIFYHOST => false,
                     CURLOPT_HTTPHEADER => ['Accept: application/json'],
-                    CURLOPT_TIMEOUT => 60 // Increased timeout
+                    CURLOPT_TIMEOUT => 180 // Increased timeout from 60 to 180 seconds for large queries
                 ]);
 
                 $apiResponse = curl_exec($ch);
