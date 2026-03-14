@@ -13,7 +13,7 @@ session_start();
 // Database configuration - Update these with your actual credentials
 define('DB_HOST', 'localhost');
 define('DB_PORT', '5432');
-define('DB_NAME', 'lifebox_mesystem'); // lifebox_mesystem // Production DB name
+define('DB_NAME', 'lifebox_mesystem'); // lifebox_mesystem // Production DB name lifebox_me_db // development db name
 define('DB_USER', 'postgres'); // Make sure you use the correct database user and password
 define('DB_PASS', 'mikeintosh');
 
@@ -1358,11 +1358,17 @@ function deduplicateActuals($pdo, $params)
 }
 
 /**
- * Check calculation coverage
+ * Check calculation coverage with pagination and filters
  */
 function checkCoverage($pdo, $params)
 {
     $year = isset($params['year']) && !empty($params['year']) ? intval($params['year']) : date('Y');
+    $level = $params['level'] ?? 'all'; // all, region, country, facility
+    $search = $params['search'] ?? '';
+    $parent_id = $params['parent_id'] ?? null; // For drill-down: region_id, country_id
+    $parent_type = $params['parent_type'] ?? null; // 'region', 'country'
+    $limit = min(intval($params['limit'] ?? 50), 500);
+    $offset = intval($params['offset'] ?? 0);
 
     // Ensure year is valid
     if ($year < 2000 || $year > 2100) {
@@ -1370,19 +1376,11 @@ function checkCoverage($pdo, $params)
     }
 
     try {
-        $stmt = $pdo->prepare("SELECT * FROM public.check_calculation_coverage(?)");
-        $stmt->execute([$year]);
-        $coverage = $stmt->fetchAll();
-
         // Get indicator count
         $stmt = $pdo->query("SELECT COUNT(*) FROM public.lbpmi_indicators WHERE is_active = true");
-        $indicator_count = $stmt->fetchColumn();
+        $indicator_count = intval($stmt->fetchColumn());
 
-        // Get org unit count
-        $stmt = $pdo->query("SELECT COUNT(*) FROM public.get_all_org_unit_combinations()");
-        $org_unit_count = $stmt->fetchColumn();
-
-        // Calculate expected totals based on year
+        // Calculate periods per indicator based on year
         $current_year = date('Y');
         $current_month = date('n');
 
@@ -1392,15 +1390,215 @@ function checkCoverage($pdo, $params)
             $periods_per_indicator = 1 + 4 + 12; // Yearly + 4 quarters + 12 months = 17
         }
 
-        $total_expected = $indicator_count * $org_unit_count * $periods_per_indicator;
+        // Build the base query for coverage data
+        $sql = "
+            WITH org_units AS (
+                -- Regions
+                SELECT 
+                    'region' as level,
+                    region_id as id,
+                    region_name as name,
+                    NULL::integer as parent_id,
+                    NULL::text as parent_type
+                FROM public.regions
+                
+                UNION ALL
+                
+                -- Countries with parent region
+                SELECT 
+                    'country' as level,
+                    c.country_id as id,
+                    c.country_name as name,
+                    c.region_id::integer as parent_id,
+                    'region'::text as parent_type
+                FROM public.countries c
+                
+                UNION ALL
+                
+                -- Facilities with parent country
+                SELECT 
+                    'facility' as level,
+                    f.facility_id as id,
+                    f.facility_name as name,
+                    f.country_id::integer as parent_id,
+                    'country'::text as parent_type
+                FROM public.facilities f
+                WHERE f.is_active = true
+            ),
+            calculation_counts AS (
+                SELECT 
+                    COALESCE(region_id, country_id, facility_id) as org_id,
+                    CASE 
+                        WHEN region_id IS NOT NULL THEN 'region'
+                        WHEN country_id IS NOT NULL THEN 'country'
+                        WHEN facility_id IS NOT NULL THEN 'facility'
+                        ELSE 'global'
+                    END as org_level,
+                    COUNT(CASE WHEN period_type = 'Yearly' THEN 1 END) as yearly_count,
+                    COUNT(CASE WHEN period_type = 'Quarterly' THEN 1 END) as quarterly_count,
+                    COUNT(CASE WHEN period_type = 'Monthly' THEN 1 END) as monthly_count,
+                    COUNT(*) as total_count
+                FROM public.lbpmi_indicator_actuals
+                WHERE period_year = :year
+                GROUP BY org_id, org_level
+            )
+            SELECT 
+                ou.*,
+                COALESCE(cc.yearly_count, 0) as yearly_count,
+                COALESCE(cc.quarterly_count, 0) as quarterly_count,
+                COALESCE(cc.monthly_count, 0) as monthly_count,
+                COALESCE(cc.total_count, 0) as total_count,
+                {$indicator_count} as indicator_count,
+                {$periods_per_indicator} as periods_per_indicator,
+                ({$indicator_count} * {$periods_per_indicator}) as expected_per_org,
+                CASE 
+                    WHEN {$indicator_count} > 0 AND {$periods_per_indicator} > 0
+                    THEN ROUND((COALESCE(cc.total_count, 0)::numeric / ({$indicator_count} * {$periods_per_indicator}) * 100), 2)
+                    ELSE 0 
+                END as coverage_percentage
+            FROM org_units ou
+            LEFT JOIN calculation_counts cc ON ou.id = cc.org_id AND ou.level = cc.org_level
+            WHERE 1=1
+        ";
 
-        // Calculate actual totals
-        $total_actual = 0;
-        foreach ($coverage as $row) {
-            $total_actual += ($row['yearly_count'] ?? 0) + ($row['quarterly_count'] ?? 0) + ($row['monthly_count'] ?? 0);
+        // Initialize parameters array
+        $params = [];
+        $whereClauses = [];
+
+        // Always add year parameter
+        $params['year'] = $year;
+
+        // Apply level filter
+        if ($level !== 'all') {
+            $sql .= " AND ou.level = :level";
+            $params['level'] = $level;
         }
 
+        // Apply parent filter for drill-down
+        if ($parent_id && $parent_type) {
+            if ($parent_type === 'region') {
+                $sql .= " AND (ou.parent_type = 'region' AND ou.parent_id = :parent_id)";
+                $params['parent_id'] = intval($parent_id);
+            } elseif ($parent_type === 'country') {
+                $sql .= " AND (ou.parent_type = 'country' AND ou.parent_id = :parent_id)";
+                $params['parent_id'] = intval($parent_id);
+            }
+        }
+
+        // Apply search filter
+        if (!empty($search)) {
+            $sql .= " AND ou.name ILIKE :search";
+            $params['search'] = '%' . $search . '%';
+        }
+
+        // Build count query separately to avoid parameter confusion
+        $countSql = "
+            SELECT COUNT(*) as total
+            FROM (
+                SELECT ou.id
+                FROM (
+                    SELECT 
+                        'region' as level,
+                        region_id as id,
+                        region_name as name,
+                        NULL::integer as parent_id,
+                        NULL::text as parent_type
+                    FROM public.regions
+                    
+                    UNION ALL
+                    
+                    SELECT 
+                        'country' as level,
+                        c.country_id as id,
+                        c.country_name as name,
+                        c.region_id::integer as parent_id,
+                        'region'::text as parent_type
+                    FROM public.countries c
+                    
+                    UNION ALL
+                    
+                    SELECT 
+                        'facility' as level,
+                        f.facility_id as id,
+                        f.facility_name as name,
+                        f.country_id::integer as parent_id,
+                        'country'::text as parent_type
+                    FROM public.facilities f
+                    WHERE f.is_active = true
+                ) ou
+                WHERE 1=1
+        ";
+
+        // Add the same filters to count query
+        if ($level !== 'all') {
+            $countSql .= " AND ou.level = :level";
+        }
+        if ($parent_id && $parent_type) {
+            if ($parent_type === 'region') {
+                $countSql .= " AND (ou.parent_type = 'region' AND ou.parent_id = :parent_id)";
+            } elseif ($parent_type === 'country') {
+                $countSql .= " AND (ou.parent_type = 'country' AND ou.parent_id = :parent_id)";
+            }
+        }
+        if (!empty($search)) {
+            $countSql .= " AND ou.name ILIKE :search";
+        }
+
+        $countSql .= ") as subquery";
+
+        // Get total count for pagination
+        $countStmt = $pdo->prepare($countSql);
+
+        // Bind count query parameters
+        if (isset($params['level'])) {
+            $countStmt->bindValue(':level', $params['level'], PDO::PARAM_STR);
+        }
+        if (isset($params['parent_id'])) {
+            $countStmt->bindValue(':parent_id', $params['parent_id'], PDO::PARAM_INT);
+        }
+        if (isset($params['search'])) {
+            $countStmt->bindValue(':search', $params['search'], PDO::PARAM_STR);
+        }
+
+        $countStmt->execute();
+        $total = $countStmt->fetchColumn();
+        $total = $total ? intval($total) : 0;
+
+        // Add ordering and pagination to main query
+        $sql .= " ORDER BY ou.level, ou.name LIMIT :limit OFFSET :offset";
+
+        $stmt = $pdo->prepare($sql);
+
+        // Bind main query parameters including year
+        $stmt->bindValue(':year', $params['year'], PDO::PARAM_INT);
+
+        if (isset($params['level'])) {
+            $stmt->bindValue(':level', $params['level'], PDO::PARAM_STR);
+        }
+        if (isset($params['parent_id'])) {
+            $stmt->bindValue(':parent_id', $params['parent_id'], PDO::PARAM_INT);
+        }
+        if (isset($params['search'])) {
+            $stmt->bindValue(':search', $params['search'], PDO::PARAM_STR);
+        }
+
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+
+        $stmt->execute();
+        $coverage = $stmt->fetchAll();
+
+        // Calculate summary statistics
+        $org_unit_count = getOrgUnitCount2($pdo, $level, $parent_id, $parent_type);
+        $total_expected = $indicator_count * $org_unit_count * $periods_per_indicator;
+        $total_actual = array_sum(array_column($coverage, 'total_count'));
         $overall_coverage = $total_expected > 0 ? round(($total_actual / $total_expected) * 100, 2) : 0;
+
+        // Get breadcrumb trail for drill-down
+        $breadcrumbs = [];
+        if ($parent_id && $parent_type) {
+            $breadcrumbs = getBreadcrumbs2($pdo, $parent_id, $parent_type);
+        }
 
         return [
             'coverage' => $coverage,
@@ -1410,11 +1608,138 @@ function checkCoverage($pdo, $params)
             'year' => $year,
             'indicator_count' => $indicator_count,
             'org_unit_count' => $org_unit_count,
-            'periods_per_indicator' => $periods_per_indicator
+            'periods_per_indicator' => $periods_per_indicator,
+            'level' => $level,
+            'search' => $search,
+            'parent_id' => $parent_id,
+            'parent_type' => $parent_type,
+            'breadcrumbs' => $breadcrumbs,
+            'pagination' => [
+                'total' => $total,
+                'limit' => $limit,
+                'offset' => $offset,
+                'pages' => $total > 0 ? ceil($total / $limit) : 1
+            ]
         ];
     } catch (PDOException $e) {
+        // Log the error for debugging
+        error_log("Coverage query error: " . $e->getMessage());
+        error_log("SQL: " . ($sql ?? 'No SQL'));
+        error_log("Params: " . print_r($params ?? [], true));
         throw new Exception("Database error: " . $e->getMessage());
     }
+}
+
+/**
+ * Get count of organization units based on filters - simplified version
+ */
+function getOrgUnitCount2($pdo, $level = 'all', $parent_id = null, $parent_type = null)
+{
+    try {
+        if ($level === 'region' || $level === 'all') {
+            $sql = "SELECT COUNT(*) FROM public.regions";
+            $stmt = $pdo->query($sql);
+            return intval($stmt->fetchColumn());
+        } elseif ($level === 'country') {
+            $sql = "SELECT COUNT(*) FROM public.countries";
+            if ($parent_id && $parent_type === 'region') {
+                $sql .= " WHERE region_id = " . intval($parent_id);
+            }
+            $stmt = $pdo->query($sql);
+            return intval($stmt->fetchColumn());
+        } elseif ($level === 'facility') {
+            $sql = "SELECT COUNT(*) FROM public.facilities WHERE is_active = true";
+            if ($parent_id && $parent_type === 'country') {
+                $sql .= " AND country_id = " . intval($parent_id);
+            }
+            $stmt = $pdo->query($sql);
+            return intval($stmt->fetchColumn());
+        }
+
+        // If 'all', sum all counts
+        $regionCount = intval($pdo->query("SELECT COUNT(*) FROM public.regions")->fetchColumn());
+        $countryCount = intval($pdo->query("SELECT COUNT(*) FROM public.countries")->fetchColumn());
+        $facilityCount = intval($pdo->query("SELECT COUNT(*) FROM public.facilities WHERE is_active = true")->fetchColumn());
+
+        return $regionCount + $countryCount + $facilityCount;
+    } catch (Exception $e) {
+        error_log("Error in getOrgUnitCount2: " . $e->getMessage());
+        return 0;
+    }
+}
+
+/**
+ * Get breadcrumb trail for drill-down navigation - simplified version
+ */
+function getBreadcrumbs2($pdo, $id, $type)
+{
+    $breadcrumbs = [];
+
+    try {
+        if ($type === 'country') {
+            // Get country and its region
+            $stmt = $pdo->prepare("
+                SELECT c.country_id, c.country_name, c.region_id, r.region_name 
+                FROM public.countries c
+                LEFT JOIN public.regions r ON c.region_id = r.region_id
+                WHERE c.country_id = ?
+            ");
+            $stmt->execute([$id]);
+            $country = $stmt->fetch();
+
+            if ($country && !empty($country)) {
+                if (!empty($country['region_id'])) {
+                    $breadcrumbs[] = [
+                        'id' => intval($country['region_id']),
+                        'name' => $country['region_name'] ?? 'Unknown Region',
+                        'type' => 'region'
+                    ];
+                }
+                $breadcrumbs[] = [
+                    'id' => intval($country['country_id']),
+                    'name' => $country['country_name'] ?? 'Unknown Country',
+                    'type' => 'country'
+                ];
+            }
+        } elseif ($type === 'facility') {
+            // Get facility, its country, and region
+            $stmt = $pdo->prepare("
+                SELECT f.facility_id, f.facility_name, f.country_id, c.country_name, c.region_id, r.region_name
+                FROM public.facilities f
+                LEFT JOIN public.countries c ON f.country_id = c.country_id
+                LEFT JOIN public.regions r ON c.region_id = r.region_id
+                WHERE f.facility_id = ?
+            ");
+            $stmt->execute([$id]);
+            $facility = $stmt->fetch();
+
+            if ($facility && !empty($facility)) {
+                if (!empty($facility['region_id'])) {
+                    $breadcrumbs[] = [
+                        'id' => intval($facility['region_id']),
+                        'name' => $facility['region_name'] ?? 'Unknown Region',
+                        'type' => 'region'
+                    ];
+                }
+                if (!empty($facility['country_id'])) {
+                    $breadcrumbs[] = [
+                        'id' => intval($facility['country_id']),
+                        'name' => $facility['country_name'] ?? 'Unknown Country',
+                        'type' => 'country'
+                    ];
+                }
+                $breadcrumbs[] = [
+                    'id' => intval($facility['facility_id']),
+                    'name' => $facility['facility_name'] ?? 'Unknown Facility',
+                    'type' => 'facility'
+                ];
+            }
+        }
+    } catch (Exception $e) {
+        error_log("Error in getBreadcrumbs2: " . $e->getMessage());
+    }
+
+    return $breadcrumbs;
 }
 
 ?>
@@ -1724,6 +2049,126 @@ function checkCoverage($pdo, $params)
         .stat-footer span {
             color: var(--success-color);
         }
+
+
+        /* Breadcrumb Navigation */
+        .breadcrumb {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            background-color: var(--bg-light);
+            border-radius: 0.5rem;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb-item {
+            display: flex;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .breadcrumb-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .breadcrumb-item a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb-item i {
+            margin: 0 0.5rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .breadcrumb-item:last-child {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Drill-down buttons */
+        .drill-down-btn {
+            color: var(--primary-color);
+            cursor: pointer;
+            margin-right: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .drill-down-btn:hover {
+            color: var(--primary-hover);
+        }
+
+        /* Coverage stats badges */
+        .coverage-excellent {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: var(--success-color);
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-weight: 500;
+        }
+
+        .coverage-good {
+            background-color: rgba(245, 158, 11, 0.2);
+            color: var(--warning-color);
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-weight: 500;
+        }
+
+        .coverage-poor {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: var(--danger-color);
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-weight: 500;
+        }
+
+        /* Search input with icon */
+        .search-wrapper {
+            position: relative;
+            flex: 1;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+
+        .search-input {
+            padding-left: 35px;
+            width: 100%;
+        }
+
+        /* Filter tags */
+        .filter-tag {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .filter-tag i {
+            margin-left: 0.5rem;
+            cursor: pointer;
+        }
+
+        .filter-tag i:hover {
+            opacity: 0.8;
+        }
+
+
 
         /* Tables */
         .table-container {
@@ -2792,20 +3237,31 @@ function checkCoverage($pdo, $params)
         <!-- Coverage Tab -->
         <div id="coverageTab" class="tab-content hidden">
             <div class="page-header">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
                     <div>
                         <h1 class="page-title">Calculation Coverage</h1>
                         <p class="page-subtitle">Monitor calculation coverage across organization units</p>
                     </div>
-                    <div style="display: flex; gap: 0.5rem;">
-                        <select id="coverageYear" class="form-control" style="width: auto;">
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <select id="coverageYear" class="form-control" style="width: auto;" onchange="loadCoverage()">
                             <!-- Will be populated by JS -->
+                        </select>
+                        <select id="coverageLevel" class="form-control" style="width: auto;" onchange="loadCoverage()">
+                            <option value="all">All Levels</option>
+                            <option value="region">Regions Only</option>
+                            <option value="country">Countries Only</option>
+                            <option value="facility">Facilities Only</option>
                         </select>
                         <button onclick="loadCoverage()" class="btn btn-primary">
                             <i class="fas fa-sync-alt"></i> Refresh
                         </button>
                     </div>
                 </div>
+            </div>
+
+            <!-- Breadcrumb Navigation -->
+            <div id="breadcrumbContainer" class="breadcrumb" style="margin-bottom: 1rem; display: none;">
+                <!-- Will be populated by JS -->
             </div>
 
             <!-- Summary Cards -->
@@ -2836,6 +3292,39 @@ function checkCoverage($pdo, $params)
                 </div>
             </div>
 
+            <!-- Search and Filter Bar -->
+            <div class="card" style="margin-bottom: 1.5rem;">
+                <div class="card-body">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+                        <div style="flex: 1; min-width: 250px;">
+                            <div style="position: relative;">
+                                <i class="fas fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"></i>
+                                <input type="text" id="coverageSearch" class="form-control"
+                                    placeholder="Search by name..."
+                                    style="padding-left: 35px;"
+                                    onkeyup="if(event.key === 'Enter') loadCoverage()">
+                            </div>
+                        </div>
+                        <div>
+                            <button onclick="loadCoverage()" class="btn btn-primary">
+                                <i class="fas fa-search"></i> Search
+                            </button>
+                            <button onclick="clearCoverageFilters()" class="btn btn-outline">
+                                <i class="fas fa-times"></i> Clear
+                            </button>
+                        </div>
+                        <div style="margin-left: auto;">
+                            <select id="coveragePageSize" class="form-control" style="width: auto;" onchange="loadCoverage()">
+                                <option value="25">25 per page</option>
+                                <option value="50" selected>50 per page</option>
+                                <option value="100">100 per page</option>
+                                <option value="250">250 per page</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Coverage Table -->
             <div class="card">
                 <div class="table-container">
@@ -2849,14 +3338,25 @@ function checkCoverage($pdo, $params)
                                 <th>Monthly</th>
                                 <th>Total</th>
                                 <th>Coverage</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody id="coverageTableBody">
                             <tr>
-                                <td colspan="7" style="text-align: center;">Loading...</td>
+                                <td colspan="8" style="text-align: center;">Loading...</td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <div class="pagination-info" id="coveragePaginationInfo"></div>
+                    <div class="pagination-buttons">
+                        <button onclick="loadCoverage('prev')" class="btn btn-outline btn-sm" id="coveragePrevBtn">Previous</button>
+                        <span id="coveragePageInfo" style="margin: 0 1rem;"></span>
+                        <button onclick="loadCoverage('next')" class="btn btn-outline btn-sm" id="coverageNextBtn">Next</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -4593,22 +5093,50 @@ function checkCoverage($pdo, $params)
                 });
         }
 
-        // Load coverage data
-        function loadCoverage() {
-            const yearSelect = document.getElementById('coverageYear');
-            const year = yearSelect ? yearSelect.value : new Date().getFullYear();
+        // Coverage state variables
+        let coverageOffset = 0;
+        let coverageLimit = 50;
+        let currentParentId = null;
+        let currentParentType = null;
+
+        // Load coverage data with filters and pagination
+        function loadCoverage(direction = null) {
+            if (direction === 'prev') {
+                coverageOffset = Math.max(0, coverageOffset - coverageLimit);
+            } else if (direction === 'next') {
+                coverageOffset = coverageOffset + coverageLimit;
+            }
+
+            const year = document.getElementById('coverageYear').value;
+            const level = document.getElementById('coverageLevel').value;
+            const search = document.getElementById('coverageSearch').value;
+            const limit = parseInt(document.getElementById('coveragePageSize').value);
+
+            coverageLimit = limit;
 
             showLoading('Loading coverage data...');
+
+            const params = new URLSearchParams({
+                action: 'check_coverage',
+                year: year,
+                level: level,
+                search: search,
+                limit: limit,
+                offset: coverageOffset
+            });
+
+            // Add parent filters if drilling down
+            if (currentParentId && currentParentType) {
+                params.append('parent_id', currentParentId);
+                params.append('parent_type', currentParentType);
+            }
 
             fetch('', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
-                    body: new URLSearchParams({
-                        action: 'check_coverage',
-                        year: year
-                    })
+                    body: params
                 })
                 .then(res => {
                     if (!res.ok) {
@@ -4620,7 +5148,7 @@ function checkCoverage($pdo, $params)
                     hideLoading();
 
                     if (data.success) {
-                        displayCoverage(data.data);
+                        displayEnhancedCoverage(data.data);
                     } else {
                         showToast('error', 'Error', data.error || 'Unknown error occurred');
                     }
@@ -4632,19 +5160,23 @@ function checkCoverage($pdo, $params)
                 });
         }
 
-        // Display coverage data
-        function displayCoverage(data) {
+        // Display enhanced coverage with drill-down
+        function displayEnhancedCoverage(data) {
             // Update summary
             document.getElementById('coverageYearDisplay').textContent = data.year || '-';
             document.getElementById('totalExpected').textContent = data.total_expected ? data.total_expected.toLocaleString() : '0';
             document.getElementById('totalActual').textContent = data.total_actual ? data.total_actual.toLocaleString() : '0';
             document.getElementById('overallCoverage').textContent = (data.overall_coverage || 0) + '%';
 
+            // Update breadcrumbs
+            updateBreadcrumbs(data.breadcrumbs);
+
             // Update table
             const tbody = document.getElementById('coverageTableBody');
 
             if (!data.coverage || data.coverage.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center;">No coverage data found</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align: center;">No coverage data found</td></tr>';
+                updateCoveragePagination(data.pagination);
                 return;
             }
 
@@ -4656,28 +5188,171 @@ function checkCoverage($pdo, $params)
                 const total = yearly + quarterly + monthly;
                 const coverage = row.coverage_percentage || 0;
 
-                const coverageClass = coverage >= 90 ? 'text-success' :
-                    coverage >= 50 ? 'text-warning' : 'text-danger';
+                let coverageClass = 'coverage-poor';
+                let coverageBadge = 'Poor';
+                if (coverage >= 90) {
+                    coverageClass = 'coverage-excellent';
+                    coverageBadge = 'Excellent';
+                } else if (coverage >= 50) {
+                    coverageClass = 'coverage-good';
+                    coverageBadge = 'Good';
+                }
+
+                // Determine if we can drill down further
+                const canDrillDown = row.level === 'region' || row.level === 'country';
+                const drillDownIcon = canDrillDown ?
+                    `<i class="fas fa-chevron-right drill-down-btn" onclick="drillDown('${row.level}', ${row.id}, '${row.name}')" title="View ${row.level === 'region' ? 'countries' : 'facilities'}"></i>` :
+                    '';
 
                 html += `
-                    <tr>
-                        <td>${row.org_level || '-'}</td>
-                        <td>${row.org_name || '-'}</td>
-                        <td>${yearly}</td>
-                        <td>${quarterly}</td>
-                        <td>${monthly}</td>
-                        <td style="font-weight: 500;">${total}</td>
-                        <td class="${coverageClass}">${coverage}%</td>
-                    </tr>
-                `;
+            <tr>
+                <td>
+                    ${drillDownIcon}
+                    <span class="badge ${row.level === 'region' ? 'badge-info' : row.level === 'country' ? 'badge-success' : 'badge-secondary'}">
+                        ${row.level.charAt(0).toUpperCase() + row.level.slice(1)}
+                    </span>
+                </td>
+                <td>
+                    <strong>${row.name}</strong>
+                </td>
+                <td>${yearly}</td>
+                <td>${quarterly}</td>
+                <td>${monthly}</td>
+                <td style="font-weight: 500;">${total}</td>
+                <td>
+                    <span class="${coverageClass}">${coverage}%</span>
+                </td>
+                <td>
+                    <button onclick="viewOrgUnitDetails('${row.level}', ${row.id})" class="btn btn-sm btn-outline" title="View details">
+                        <i class="fas fa-chart-bar"></i>
+                    </button>
+                </td>
+            </tr>
+        `;
             });
 
             tbody.innerHTML = html;
+
+            // Update pagination
+            updateCoveragePagination(data.pagination);
         }
 
-        // Initialize coverage tab
+        // Update breadcrumb navigation
+        function updateBreadcrumbs(breadcrumbs) {
+            const container = document.getElementById('breadcrumbContainer');
+
+            if (!breadcrumbs || breadcrumbs.length === 0) {
+                container.style.display = 'none';
+                container.innerHTML = '';
+                return;
+            }
+
+            let html = '<div class="breadcrumb">';
+
+            // Add "All Levels" home button
+            html += `
+        <span class="breadcrumb-item">
+            <a onclick="resetDrillDown()"><i class="fas fa-home"></i> All Levels</a>
+        </span>
+    `;
+
+            breadcrumbs.forEach((item, index) => {
+                html += `<span class="breadcrumb-item"><i class="fas fa-chevron-right"></i>`;
+
+                if (index === breadcrumbs.length - 1) {
+                    // Current item (not clickable)
+                    html += `${item.name}`;
+                } else {
+                    // Parent items (clickable)
+                    html += `<a onclick="drillDown('${item.type}', ${item.id}, '${item.name}')">${item.name}</a>`;
+                }
+
+                html += `</span>`;
+            });
+
+            html += '</div>';
+
+            container.innerHTML = html;
+            container.style.display = 'block';
+        }
+
+        // Drill down into a specific org unit
+        function drillDown(level, id, name) {
+            if (level === 'region') {
+                currentParentId = id;
+                currentParentType = 'region';
+            } else if (level === 'country') {
+                currentParentId = id;
+                currentParentType = 'country';
+            }
+
+            // Reset to first page
+            coverageOffset = 0;
+
+            // Update level filter to show appropriate child level
+            if (level === 'region') {
+                document.getElementById('coverageLevel').value = 'country';
+            } else if (level === 'country') {
+                document.getElementById('coverageLevel').value = 'facility';
+            }
+
+            // Clear search when drilling down
+            document.getElementById('coverageSearch').value = '';
+
+            // Reload data
+            loadCoverage();
+
+            showToast('info', 'Drilling Down', `Viewing ${level === 'region' ? 'countries in' : 'facilities in'} ${name}`);
+        }
+
+        // Reset drill-down to top level
+        function resetDrillDown() {
+            currentParentId = null;
+            currentParentType = null;
+            coverageOffset = 0;
+            document.getElementById('coverageLevel').value = 'all';
+            document.getElementById('coverageSearch').value = '';
+            loadCoverage();
+        }
+
+        // View detailed statistics for an org unit
+        function viewOrgUnitDetails(level, id) {
+            // This could open a modal with detailed charts and statistics
+            // For now, we'll show a toast
+            showToast('info', 'Details', `Viewing details for ${level} ID: ${id} - Feature coming soon`);
+        }
+
+        // Clear all filters
+        function clearCoverageFilters() {
+            document.getElementById('coverageSearch').value = '';
+            document.getElementById('coverageLevel').value = 'all';
+            document.getElementById('coverageYear').value = new Date().getFullYear();
+            resetDrillDown();
+        }
+
+        // Update pagination controls
+        function updateCoveragePagination(pagination) {
+            if (!pagination) return;
+
+            const info = document.getElementById('coveragePaginationInfo');
+            const pageInfo = document.getElementById('coveragePageInfo');
+            const prevBtn = document.getElementById('coveragePrevBtn');
+            const nextBtn = document.getElementById('coverageNextBtn');
+
+            const start = pagination.offset + 1;
+            const end = Math.min(pagination.offset + pagination.limit, pagination.total);
+            const currentPage = Math.floor(pagination.offset / pagination.limit) + 1;
+
+            info.textContent = `Showing ${start}-${end} of ${pagination.total} items`;
+            pageInfo.textContent = `Page ${currentPage} of ${pagination.pages}`;
+
+            prevBtn.disabled = pagination.offset <= 0;
+            nextBtn.disabled = pagination.offset + pagination.limit >= pagination.total;
+        }
+
+        // Initialize coverage tab with all features
         function initCoverageTab() {
-            // Populate year select if not already done
+            // Populate year select
             const yearSelect = document.getElementById('coverageYear');
             if (yearSelect && yearSelect.options.length === 0) {
                 const currentYear = new Date().getFullYear();
@@ -4691,6 +5366,11 @@ function checkCoverage($pdo, $params)
                     yearSelect.appendChild(option);
                 }
             }
+
+            // Reset drill-down state
+            currentParentId = null;
+            currentParentType = null;
+            coverageOffset = 0;
 
             // Load coverage data
             loadCoverage();
