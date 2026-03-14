@@ -181,15 +181,17 @@ FROM
 			),
 			'editFormats' => array(
 				'edit' => array(
+					'validateAs' => 'Regular expression',
+					'validateRegex' => '^[a-z0-9.]+$',
 					'validateRegexMessage' => array(
-						'text' => '',
+						'text' => 'Username can contain only small letters, numbers, and periods. No spaces or special characters are allowed.',
 						'type' => 0 
 					),
 					'denyDuplicateMessage' => array(
 						'text' => '',
 						'type' => 0 
 					),
-					'textHTML5Input' => '0',
+					'textHTML5Input' => 'Text',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
 					'timeConvention' => 1 
@@ -558,7 +560,13 @@ FROM
 			'editFormats' => array(
 				'edit' => array(
 					'required' => true,
-					'textHTML5Input' => '0',
+					'validateAs' => 'Regular expression',
+					'validateRegex' => '^[A-Za-zÀ-ÖØ-öø-ÿ\\s.]+$',
+					'validateRegexMessage' => array(
+						'text' => 'Please Enter a valid Name',
+						'type' => 0 
+					),
+					'textHTML5Input' => 'Text',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
 					'timeConvention' => 1 
@@ -584,7 +592,13 @@ FROM
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'textHTML5Input' => '0',
+					'validateAs' => 'Regular expression',
+					'validateRegex' => '^[A-Za-zÀ-ÖØ-öø-ÿ\\s.]+$',
+					'validateRegexMessage' => array(
+						'text' => 'Please enter a valid Name',
+						'type' => 0 
+					),
+					'textHTML5Input' => 'Text',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
 					'timeConvention' => 1 
@@ -610,7 +624,13 @@ FROM
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'textHTML5Input' => '0',
+					'validateAs' => 'Regular expression',
+					'validateRegex' => '^[A-Za-zÀ-ÖØ-öø-ÿ\\s.]+$',
+					'validateRegexMessage' => array(
+						'text' => 'Please enter a valid Name',
+						'type' => 0 
+					),
+					'textHTML5Input' => 'Text',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
 					'timeConvention' => 1 

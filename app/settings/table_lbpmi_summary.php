@@ -37,7 +37,7 @@ $runnerTableSettings['public.lbpmi_summary'] = array(
 		'50',
 		'100',
 		'500',
-		'-1' 
+		'1' 
 	),
 	'pageSizeSelectorGroups' => array( 
 		'1',
@@ -46,7 +46,7 @@ $runnerTableSettings['public.lbpmi_summary'] = array(
 		'10',
 		'50',
 		'100',
-		'-1' 
+		'1' 
 	),
 	'warnLeavingEdit' => true,
 	'sql' => 'SELECT
@@ -96,7 +96,8 @@ $runnerTableSettings['public.lbpmi_summary'] = array(
 	period_validity,
 	legacy_performance_status
 FROM
-	"public".lbpmi_summary',
+	"public".lbpmi_summary
+',
 	'deviceHideFields' => array(
 		'1' => array( 
 			 
@@ -1783,7 +1784,8 @@ FROM
 	period_validity,
 	legacy_performance_status
 FROM
-	"public".lbpmi_summary',
+	"public".lbpmi_summary
+',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
