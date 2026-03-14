@@ -955,6 +955,7 @@ if ($action) {
             <div class="col-12 text-center">
                 <h1 class="mb-3"><i class="fas fa-chart-line me-2"></i>DHIS2 Analytics Fetcher</h1>
                 <p class="lead">Manage and fetch analytics data from DHIS2</p>
+                <p class="lead">Please <b>DO NOT</b> Leave this page when Data Fetching is in Progress!</p>
             </div>
         </div>
 
