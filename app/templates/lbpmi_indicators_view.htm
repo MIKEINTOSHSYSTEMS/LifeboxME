@@ -414,7 +414,7 @@
 	{$grid_hiddenattr} 
 		data-form-width="3"
 		
-		data-v-width="6"
+		data-v-width="5"
 	>
 	<tbody>
 										<tr {$row_grid_0} >
@@ -485,7 +485,7 @@
 			data-single
 			
 			data-cellId="grid_c25" data-pageid="{$pageid}"
-		data-v-cell="2"
+		data-v-cell="1"
 		
 >
 	<div edit-form-cell class="clearfix">
@@ -582,7 +582,7 @@
 			data-single
 			
 			data-cellId="grid_c7" data-pageid="{$pageid}"
-		data-v-cell="2"
+		data-v-cell="1"
 		
 >
 	<div edit-form-cell class="clearfix">
@@ -679,7 +679,7 @@
 			data-single
 			
 			data-cellId="grid_c10" data-pageid="{$pageid}"
-		data-v-cell="2"
+		data-v-cell="1"
 		
 >
 	<div edit-form-cell class="clearfix">
@@ -696,7 +696,6 @@
 	{$cell_grid_c11}
 	class=" r-ori-vert"
 	
-			data-single
 			
 			data-cellId="grid_c11" data-pageid="{$pageid}"
 		data-v-cell="2"
@@ -723,6 +722,26 @@
 
 
 {END indicator_type_fieldblock}
+											
+{BEGIN annualized_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_annualized}  r-vertical-field" 
+	data-signal-error-for="annualized{$id}" {$required_attr_annualized}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="annualized" data-fieldname="annualized" >
+
+	<label class="r-edit-label control-label {$annualized_label_class}" for="{$labelfor_annualized}">
+		{BEGIN annualized_label}
+			{$annualized_forward_control}
+			{$label public_lbpmi_indicators annualized }			{END annualized_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$annualized_value}	</div>
+	</div>
+
+
+{END annualized_fieldblock}
 	
 								</td>
 			{END cellblock_grid_c11}
@@ -734,46 +753,8 @@
 	{$cell_grid_c12}
 	class=" r-ori-vert"
 	
-			data-single
 			
 			data-cellId="grid_c12" data-pageid="{$pageid}"
-		data-v-cell="2"
-		
->
-	<div edit-form-cell class="clearfix">
-				
-{BEGIN formula_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_formula}  r-vertical-field" 
-	data-signal-error-for="formula{$id}" {$required_attr_formula}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="formula" data-fieldname="formula" >
-
-	<label class="r-edit-label control-label {$formula_label_class}" for="{$labelfor_formula}">
-		{BEGIN formula_label}
-			{$formula_forward_control}
-			{$label public_lbpmi_indicators formula }			{END formula_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$formula_value}	</div>
-	</div>
-
-
-{END formula_fieldblock}
-	
-								</td>
-			{END cellblock_grid_c12}
-			 
-																
-
-{BEGIN cellblock_grid_c13}
-<td
-	{$cell_grid_c13}
-	class=" r-ori-vert"
-	
-			
-			data-cellId="grid_c13" data-pageid="{$pageid}"
 		data-v-cell="2"
 		
 >
@@ -820,13 +801,30 @@
 {END denominator_description_fieldblock}
 	
 								</td>
+			{END cellblock_grid_c12}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c13}
+<td
+	{$cell_grid_c13}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c13" data-pageid="{$pageid}"
+		data-v-cell="1"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
 			{END cellblock_grid_c13}
 								</tr>
 	 
 	 
-		
-						<tr>
-						
+														<tr {$row_grid_4} >
+										
 
 {BEGIN cellblock_grid_c14}
 <td
@@ -840,11 +838,31 @@
 		
 >
 	<div edit-form-cell class="clearfix">
-									</td>
+				
+{BEGIN formula_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_formula}  r-vertical-field" 
+	data-signal-error-for="formula{$id}" {$required_attr_formula}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="formula" data-fieldname="formula" >
+
+	<label class="r-edit-label control-label {$formula_label_class}" for="{$labelfor_formula}">
+		{BEGIN formula_label}
+			{$formula_forward_control}
+			{$label public_lbpmi_indicators formula }			{END formula_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$formula_value}	</div>
+	</div>
+
+
+{END formula_fieldblock}
+	
+								</td>
 			{END cellblock_grid_c14}
 			 
-		
-							
+																
 
 {BEGIN cellblock_grid_c15}
 <td
@@ -854,44 +872,6 @@
 			data-single
 			
 			data-cellId="grid_c15" data-pageid="{$pageid}"
-		data-v-cell="2"
-		
->
-	<div edit-form-cell class="clearfix">
-									</td>
-			{END cellblock_grid_c15}
-			 
-		
-							
-
-{BEGIN cellblock_grid_c16}
-<td
-	{$cell_grid_c16}
-	class=" r-ori-vert"
-	
-			data-single
-			
-			data-cellId="grid_c16" data-pageid="{$pageid}"
-		data-v-cell="2"
-		
->
-	<div edit-form-cell class="clearfix">
-									</td>
-			{END cellblock_grid_c16}
-								</tr>
-	 
-	 
-														<tr {$row_grid_5} >
-										
-
-{BEGIN cellblock_grid_c26}
-<td
-	{$cell_grid_c26}
-	class=" r-ori-vert"
-	
-			data-single
-			
-			data-cellId="grid_c26" data-pageid="{$pageid}"
 		data-v-cell="2"
 		
 >
@@ -918,9 +898,49 @@
 {END decimals_fieldblock}
 	
 								</td>
+			{END cellblock_grid_c15}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c16}
+<td
+	{$cell_grid_c16}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c16" data-pageid="{$pageid}"
+		data-v-cell="1"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c16}
+								</tr>
+	 
+	 
+		
+						<tr>
+						
+
+{BEGIN cellblock_grid_c26}
+<td
+	{$cell_grid_c26}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c26" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
 			{END cellblock_grid_c26}
 			 
-																
+		
+							
 
 {BEGIN cellblock_grid_c27}
 <td
@@ -934,31 +954,11 @@
 		
 >
 	<div edit-form-cell class="clearfix">
-				
-{BEGIN annualized_fieldblock}
-
-
-<div class="r-integrated-field form-group clearfix {$fielddispclass_annualized}  r-vertical-field" 
-	data-signal-error-for="annualized{$id}" {$required_attr_annualized}
-	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="annualized" data-fieldname="annualized" >
-
-	<label class="r-edit-label control-label {$annualized_label_class}" for="{$labelfor_annualized}">
-		{BEGIN annualized_label}
-			{$annualized_forward_control}
-			{$label public_lbpmi_indicators annualized }			{END annualized_label}
-		<span class="icon-required"></span>
-	</label>
-	<div class="r-edit-field">
-		{$annualized_value}	</div>
-	</div>
-
-
-{END annualized_fieldblock}
-	
-								</td>
+									</td>
 			{END cellblock_grid_c27}
 			 
-																
+		
+							
 
 {BEGIN cellblock_grid_c28}
 <td
@@ -968,6 +968,26 @@
 			data-single
 			
 			data-cellId="grid_c28" data-pageid="{$pageid}"
+		data-v-cell="1"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c28}
+								</tr>
+	 
+	 
+														<tr {$row_grid_6} >
+										
+
+{BEGIN cellblock_grid_c29}
+<td
+	{$cell_grid_c29}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c29" data-pageid="{$pageid}"
 		data-v-cell="2"
 		
 >
@@ -994,31 +1014,9 @@
 {END is_active_fieldblock}
 	
 								</td>
-			{END cellblock_grid_c28}
-								</tr>
-	 
-	 
-		
-						<tr>
-						
-
-{BEGIN cellblock_grid_c29}
-<td
-	{$cell_grid_c29}
-	class=" r-ori-vert"
-	
-			data-single
-			
-			data-cellId="grid_c29" data-pageid="{$pageid}"
-		data-v-cell="2"
-		
->
-	<div edit-form-cell class="clearfix">
-									</td>
 			{END cellblock_grid_c29}
 			 
-		
-							
+																
 
 {BEGIN cellblock_grid_c30}
 <td
@@ -1028,44 +1026,6 @@
 			data-single
 			
 			data-cellId="grid_c30" data-pageid="{$pageid}"
-		data-v-cell="2"
-		
->
-	<div edit-form-cell class="clearfix">
-									</td>
-			{END cellblock_grid_c30}
-			 
-		
-							
-
-{BEGIN cellblock_grid_c31}
-<td
-	{$cell_grid_c31}
-	class=" r-ori-vert"
-	
-			data-single
-			
-			data-cellId="grid_c31" data-pageid="{$pageid}"
-		data-v-cell="2"
-		
->
-	<div edit-form-cell class="clearfix">
-									</td>
-			{END cellblock_grid_c31}
-								</tr>
-	 
-	 
-														<tr {$row_grid_7} >
-										
-
-{BEGIN cellblock_grid_c20}
-<td
-	{$cell_grid_c20}
-	class=" r-ori-vert"
-	
-			data-single
-			
-			data-cellId="grid_c20" data-pageid="{$pageid}"
 		data-v-cell="2"
 		
 >
@@ -1092,18 +1052,39 @@
 {END created_by_fieldblock}
 	
 								</td>
-			{END cellblock_grid_c20}
+			{END cellblock_grid_c30}
 			 
-																
+		
+							
 
-{BEGIN cellblock_grid_c21}
+{BEGIN cellblock_grid_c31}
 <td
-	{$cell_grid_c21}
+	{$cell_grid_c31}
 	class=" r-ori-vert"
 	
 			data-single
 			
-			data-cellId="grid_c21" data-pageid="{$pageid}"
+			data-cellId="grid_c31" data-pageid="{$pageid}"
+		data-v-cell="1"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c31}
+								</tr>
+	 
+	 
+														<tr {$row_grid_7} >
+										
+
+{BEGIN cellblock_grid_c20}
+<td
+	{$cell_grid_c20}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c20" data-pageid="{$pageid}"
 		data-v-cell="2"
 		
 >
@@ -1130,18 +1111,18 @@
 {END created_at_fieldblock}
 	
 								</td>
-			{END cellblock_grid_c21}
+			{END cellblock_grid_c20}
 			 
 																
 
-{BEGIN cellblock_grid_c22}
+{BEGIN cellblock_grid_c21}
 <td
-	{$cell_grid_c22}
+	{$cell_grid_c21}
 	class=" r-ori-vert"
 	
 			data-single
 			
-			data-cellId="grid_c22" data-pageid="{$pageid}"
+			data-cellId="grid_c21" data-pageid="{$pageid}"
 		data-v-cell="2"
 		
 >
@@ -1168,6 +1149,24 @@
 {END updated_at_fieldblock}
 	
 								</td>
+			{END cellblock_grid_c21}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c22}
+<td
+	{$cell_grid_c22}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c22" data-pageid="{$pageid}"
+		data-v-cell="1"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
 			{END cellblock_grid_c22}
 								</tr>
 	 
@@ -1220,7 +1219,7 @@
 			data-single
 			
 			data-cellId="grid_c" data-pageid="{$pageid}"
-		data-v-cell="2"
+		data-v-cell="1"
 		
 >
 	<div edit-form-cell class="clearfix">

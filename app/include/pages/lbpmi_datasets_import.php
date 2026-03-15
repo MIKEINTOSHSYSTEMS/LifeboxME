@@ -9,7 +9,6 @@
 			'dataset_description',
 			'dataset_code',
 			'period_type',
-			'data_elements',
 			'is_active',
 			'created_by' 
 		),
@@ -34,9 +33,6 @@
 			),
 			'period_type' => array( 
 				'import_field4' 
-			),
-			'data_elements' => array( 
-				'import_field5' 
 			),
 			'is_active' => array( 
 				'import_field6' 
@@ -75,7 +71,6 @@
 					'import_field2',
 					'import_field3',
 					'import_field4',
-					'import_field5',
 					'import_field6',
 					'import_field7' 
 				) 
@@ -94,7 +89,6 @@
 				'import_field2' => 'grid',
 				'import_field3' => 'grid',
 				'import_field4' => 'grid',
-				'import_field5' => 'grid',
 				'import_field6' => 'grid',
 				'import_field7' => 'grid' 
 			),
@@ -115,7 +109,6 @@
 				'import_field2',
 				'import_field3',
 				'import_field4',
-				'import_field5',
 				'import_field6',
 				'import_field7',
 				'import_field9',
@@ -254,7 +247,6 @@
 						'import_field2',
 						'import_field3',
 						'import_field4',
-						'import_field5',
 						'import_field6',
 						'import_field7' 
 					) 
@@ -288,10 +280,6 @@
 		),
 		'import_field4' => array(
 			'field' => 'period_type',
-			'type' => 'import_field' 
-		),
-		'import_field5' => array(
-			'field' => 'data_elements',
 			'type' => 'import_field' 
 		),
 		'import_field6' => array(

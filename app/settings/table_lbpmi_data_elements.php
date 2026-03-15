@@ -60,7 +60,7 @@ $runnerTableSettings['public.lbpmi_data_elements'] = array(
 		'view' => 'view' 
 	),
 	'audit' => true,
-	'detailsBadgeColor' => '9ACD32',
+	'detailsBadgeColor' => '00c5ff',
 	'pageSizeSelectorRecords' => array( 
 		'10',
 		'20',
@@ -92,7 +92,8 @@ $runnerTableSettings['public.lbpmi_data_elements'] = array(
 	is_active,
 	created_by,
 	created_at,
-	updated_at
+	updated_at,
+	dataset_id
 FROM
 	"public".lbpmi_data_elements',
 	'keyFields' => array( 
@@ -176,7 +177,9 @@ FROM
 			),
 			'defaultSearchOption' => 'Contains',
 			'filterFormat' => array(
-				'format' => 'Values list' 
+				'format' => 'Values list',
+				'filterTotals' => 1,
+				'filterMultiselect' => 2 
 			),
 			'tableName' => 'public.lbpmi_data_elements' 
 		),
@@ -273,7 +276,9 @@ FROM
 				) 
 			),
 			'filterFormat' => array(
-				'format' => 'Values list' 
+				'format' => 'Values list',
+				'filterTotals' => 1,
+				'filterMultiselect' => 2 
 			),
 			'tableName' => 'public.lbpmi_data_elements' 
 		),
@@ -305,7 +310,9 @@ FROM
 				) 
 			),
 			'filterFormat' => array(
-				'format' => 'Values list' 
+				'format' => 'Values list',
+				'filterTotals' => 1,
+				'filterMultiselect' => 2 
 			),
 			'tableName' => 'public.lbpmi_data_elements' 
 		),
@@ -337,7 +344,9 @@ FROM
 				) 
 			),
 			'filterFormat' => array(
-				'format' => 'Values list' 
+				'format' => 'Values list',
+				'filterTotals' => 1,
+				'filterMultiselect' => 2 
 			),
 			'tableName' => 'public.lbpmi_data_elements' 
 		),
@@ -370,7 +379,9 @@ FROM
 				) 
 			),
 			'filterFormat' => array(
-				'format' => 'Values list' 
+				'format' => 'Values list',
+				'filterTotals' => 1,
+				'filterMultiselect' => 2 
 			),
 			'tableName' => 'public.lbpmi_data_elements' 
 		),
@@ -515,11 +526,45 @@ FROM
 				'format' => 'Values list' 
 			),
 			'tableName' => 'public.lbpmi_data_elements' 
+		),
+		'dataset_id' => array(
+			'name' => 'dataset_id',
+			'goodName' => 'dataset_id',
+			'strField' => 'dataset_id',
+			'index' => 13,
+			'type' => 3,
+			'sqlExpression' => 'dataset_id',
+			'viewFormats' => array(
+				'view' => array(
+					 
+				) 
+			),
+			'editFormats' => array(
+				'edit' => array(
+					'format' => 'Lookup wizard',
+					'lookupType' => 2,
+					'lookupTable' => 'public.lbpmi_datasets',
+					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
+					'lookupLinkField' => 'dataset_id',
+					'lookupDisplayField' => 'dataset_name' 
+				) 
+			),
+			'tableName' => 'public.lbpmi_data_elements' 
+		) 
+	),
+	'masterTables' => array( 
+		array(
+			'table' => 'public.lbpmi_datasets',
+			'detailsKeys' => array( 
+				'dataset_id' 
+			),
+			'masterKeys' => array( 
+				'dataset_id' 
+			) 
 		) 
 	),
 	'detailsTables' => array( 
-		'public.lbpmi_data_values',
-		'public.lbpmi_datasets' 
+		'public.lbpmi_data_values' 
 	),
 	'query' => array(
 		'sql' => 'SELECT
@@ -534,7 +579,8 @@ FROM
 	is_active,
 	created_by,
 	created_at,
-	updated_at
+	updated_at,
+	dataset_id
 FROM
 	"public".lbpmi_data_elements',
 		'parsed' => true,
@@ -719,6 +765,21 @@ FROM
 				),
 				'encrypted' => false,
 				'columnName' => 'updated_at' 
+			),
+			array(
+				'sql' => 'dataset_id',
+				'parsed' => true,
+				'type' => 'FieldListItem',
+				'alias' => '',
+				'expression' => array(
+					'sql' => '',
+					'parsed' => true,
+					'type' => 'SQLField',
+					'table' => 'public.lbpmi_data_elements',
+					'name' => 'dataset_id' 
+				),
+				'encrypted' => false,
+				'columnName' => 'dataset_id' 
 			) 
 		),
 		'fromList' => array( 
@@ -742,7 +803,8 @@ FROM
 						'is_active',
 						'created_by',
 						'created_at',
-						'updated_at' 
+						'updated_at',
+						'dataset_id' 
 					),
 					'name' => 'public.lbpmi_data_elements' 
 				),
@@ -880,6 +942,13 @@ FROM
 				'groupByIndex' => -1,
 				'whereIndex' => -1,
 				'havingIndex' => -1 
+			),
+			array(
+				'fieldIndex' => 12,
+				'orderByIndex' => -1,
+				'groupByIndex' => -1,
+				'whereIndex' => -1,
+				'havingIndex' => -1 
 			) 
 		),
 		'headSql' => 'SELECT',
@@ -894,7 +963,8 @@ FROM
 	is_active,
 	created_by,
 	created_at,
-	updated_at',
+	updated_at,
+	dataset_id',
 		'fromListSql' => 'FROM
 	"public".lbpmi_data_elements',
 		'orderBySql' => '',
@@ -972,7 +1042,8 @@ FROM
 			'is_active',
 			'created_by',
 			'created_at',
-			'updated_at' 
+			'updated_at',
+			'dataset_id' 
 		),
 		'searchSuggest' => true,
 		'highlightSearchResults' => true,
@@ -990,7 +1061,8 @@ FROM
 			'is_active',
 			'created_by',
 			'created_at',
-			'updated_at' 
+			'updated_at',
+			'dataset_id' 
 		) 
 	),
 	'connId' => 'lifebox_mesystem_at_localhost',
@@ -1055,7 +1127,8 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'is_active' => 'Is Active',
 		'created_by' => 'Created By',
 		'created_at' => 'Created At',
-		'updated_at' => 'Updated At' 
+		'updated_at' => 'Updated At',
+		'dataset_id' => 'Dataset Id' 
 	),
 	'fieldTooltips' => array(
 		'data_element_id' => '',
@@ -1069,7 +1142,8 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'is_active' => '',
 		'created_by' => '',
 		'created_at' => '',
-		'updated_at' => '' 
+		'updated_at' => '',
+		'dataset_id' => '' 
 	),
 	'fieldPlaceholders' => array(
 		'data_element_id' => '',
@@ -1083,7 +1157,8 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'is_active' => '',
 		'created_by' => '',
 		'created_at' => '',
-		'updated_at' => '' 
+		'updated_at' => '',
+		'dataset_id' => '' 
 	),
 	'pageTitles' => array(
 		 

@@ -6,16 +6,26 @@
 		),
 		'indicator_type' => array(
 			'totalsType' => '' 
+		),
+		'indicator_factor' => array(
+			'totalsType' => '' 
+		),
+		'indicator_type_description' => array(
+			'totalsType' => '' 
 		) 
 	),
 	'fields' => array(
 		'gridFields' => array( 
 			'indtype_id',
-			'indicator_type' 
+			'indicator_type',
+			'indicator_factor',
+			'indicator_type_description' 
 		),
 		'exportFields' => array( 
 			'indtype_id',
-			'indicator_type' 
+			'indicator_type',
+			'indicator_factor',
+			'indicator_type_description' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -29,6 +39,12 @@
 			),
 			'indicator_type' => array( 
 				'export_field1' 
+			),
+			'indicator_factor' => array( 
+				'export_field2' 
+			),
+			'indicator_type_description' => array( 
+				'export_field3' 
 			) 
 		) 
 	),
@@ -49,7 +65,9 @@
 				),
 				'grid' => array( 
 					'export_field',
-					'export_field1' 
+					'export_field1',
+					'export_field2',
+					'export_field3' 
 				),
 				'footer' => array( 
 					'export_export',
@@ -65,6 +83,8 @@
 				'export_header' => 'top',
 				'export_field' => 'grid',
 				'export_field1' => 'grid',
+				'export_field2' => 'grid',
+				'export_field3' => 'grid',
 				'export_export' => 'footer',
 				'export_cancel' => 'footer' 
 			),
@@ -87,7 +107,9 @@
 			),
 			'export_field' => array( 
 				'export_field',
-				'export_field1' 
+				'export_field1',
+				'export_field2',
+				'export_field3' 
 			) 
 		),
 		'cellMaps' => array(
@@ -228,7 +250,9 @@
 					'model' => 'c1',
 					'items' => array( 
 						'export_field',
-						'export_field1' 
+						'export_field1',
+						'export_field2',
+						'export_field3' 
 					) 
 				) 
 			),
@@ -289,6 +313,14 @@
 		),
 		'export_field1' => array(
 			'field' => 'indicator_type',
+			'type' => 'export_field' 
+		),
+		'export_field2' => array(
+			'field' => 'indicator_factor',
+			'type' => 'export_field' 
+		),
+		'export_field3' => array(
+			'field' => 'indicator_type_description',
 			'type' => 'export_field' 
 		) 
 	),

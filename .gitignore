@@ -70,3 +70,8 @@ modules/ocr/assets/
 prod.docker-compose.yml
 .env.prod
 .htaccess
+
+# File Management
+modules/filemanagers
+# Documents uploaded
+documents

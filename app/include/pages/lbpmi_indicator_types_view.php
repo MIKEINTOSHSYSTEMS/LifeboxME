@@ -6,7 +6,9 @@
 	'fields' => array(
 		'gridFields' => array( 
 			'indtype_id',
-			'indicator_type' 
+			'indicator_type',
+			'indicator_factor',
+			'indicator_type_description' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -20,6 +22,12 @@
 			),
 			'indicator_type' => array( 
 				'integrated_edit_field1' 
+			),
+			'indicator_factor' => array( 
+				'integrated_edit_field2' 
+			),
+			'indicator_type_description' => array( 
+				'integrated_edit_field3' 
 			) 
 		) 
 	),
@@ -57,7 +65,9 @@
 				),
 				'grid' => array( 
 					'integrated_edit_field',
-					'integrated_edit_field1' 
+					'integrated_edit_field1',
+					'integrated_edit_field2',
+					'integrated_edit_field3' 
 				) 
 			),
 			'formXtTags' => array(
@@ -79,7 +89,9 @@
 				'menu' => 'left',
 				'view_header' => 'top',
 				'integrated_edit_field' => 'grid',
-				'integrated_edit_field1' => 'grid' 
+				'integrated_edit_field1' => 'grid',
+				'integrated_edit_field2' => 'grid',
+				'integrated_edit_field3' => 'grid' 
 			),
 			'itemLocations' => array(
 				'integrated_edit_field' => array(
@@ -87,6 +99,14 @@
 					'cellId' => 'c3' 
 				),
 				'integrated_edit_field1' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_edit_field2' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_edit_field3' => array(
 					'location' => 'grid',
 					'cellId' => 'c3' 
 				) 
@@ -144,7 +164,9 @@
 			),
 			'integrated_edit_field' => array( 
 				'integrated_edit_field',
-				'integrated_edit_field1' 
+				'integrated_edit_field1',
+				'integrated_edit_field2',
+				'integrated_edit_field3' 
 			),
 			'notifications' => array( 
 				'notifications' 
@@ -168,7 +190,9 @@
 						),
 						'items' => array( 
 							'integrated_edit_field',
-							'integrated_edit_field1' 
+							'integrated_edit_field1',
+							'integrated_edit_field2',
+							'integrated_edit_field3' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
@@ -422,7 +446,9 @@
 					'model' => 'c3',
 					'items' => array( 
 						'integrated_edit_field',
-						'integrated_edit_field1' 
+						'integrated_edit_field1',
+						'integrated_edit_field2',
+						'integrated_edit_field3' 
 					) 
 				) 
 			),
@@ -502,6 +528,16 @@
 		),
 		'notifications' => array(
 			'type' => 'notifications' 
+		),
+		'integrated_edit_field2' => array(
+			'field' => 'indicator_factor',
+			'type' => 'integrated_edit_field',
+			'orientation' => 0 
+		),
+		'integrated_edit_field3' => array(
+			'field' => 'indicator_type_description',
+			'type' => 'integrated_edit_field',
+			'orientation' => 0 
 		),
 		'expand_button' => array(
 			'type' => 'expand_button' 

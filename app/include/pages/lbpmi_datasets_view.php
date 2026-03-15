@@ -4,26 +4,24 @@
 		'pdfView' => false 
 	),
 	'details' => array(
+		'public.lbpmi_data_elements' => array(
+			'displayPreview' => 2,
+			'previewPageId' => '' 
+		),
 		'public.lbpmi_indicators' => array(
 			'displayPreview' => 2,
 			'previewPageId' => '' 
-		) 
-	),
-	'master' => array(
-		'public.lbpmi_data_elements' => array(
-			'preview' => false 
 		) 
 	),
 	'fields' => array(
 		'gridFields' => array( 
 			'dataset_name',
 			'dataset_description',
-			'data_elements',
 			'is_active',
-			'created_by',
 			'created_at',
 			'dataset_code',
 			'period_type',
+			'created_by',
 			'updated_at' 
 		),
 		'searchRequiredFields' => array( 
@@ -39,14 +37,8 @@
 			'dataset_description' => array( 
 				'integrated_edit_field1' 
 			),
-			'data_elements' => array( 
-				'integrated_edit_field4' 
-			),
 			'is_active' => array( 
 				'integrated_edit_field5' 
-			),
-			'created_by' => array( 
-				'integrated_edit_field6' 
 			),
 			'created_at' => array( 
 				'integrated_edit_field8' 
@@ -56,6 +48,9 @@
 			),
 			'period_type' => array( 
 				'integrated_edit_field3' 
+			),
+			'created_by' => array( 
+				'integrated_edit_field6' 
 			),
 			'updated_at' => array( 
 				'integrated_edit_field9' 
@@ -77,6 +72,8 @@
 				'below-grid' => array( 
 					'view_back_list',
 					'view_close',
+					'prev',
+					'next',
 					'hamburger' 
 				),
 				'supertop' => array( 
@@ -97,12 +94,11 @@
 				'grid' => array( 
 					'integrated_edit_field',
 					'integrated_edit_field1',
-					'integrated_edit_field4',
 					'integrated_edit_field5',
-					'integrated_edit_field6',
 					'integrated_edit_field8',
 					'integrated_edit_field2',
 					'integrated_edit_field3',
+					'integrated_edit_field6',
 					'integrated_edit_field9' 
 				) 
 			),
@@ -114,6 +110,8 @@
 			'itemForms' => array(
 				'view_back_list' => 'below-grid',
 				'view_close' => 'below-grid',
+				'prev' => 'below-grid',
+				'next' => 'below-grid',
 				'hamburger' => 'below-grid',
 				'expand_menu_button' => 'supertop',
 				'collapse_button' => 'supertop',
@@ -126,12 +124,11 @@
 				'view_header' => 'top',
 				'integrated_edit_field' => 'grid',
 				'integrated_edit_field1' => 'grid',
-				'integrated_edit_field4' => 'grid',
 				'integrated_edit_field5' => 'grid',
-				'integrated_edit_field6' => 'grid',
 				'integrated_edit_field8' => 'grid',
 				'integrated_edit_field2' => 'grid',
 				'integrated_edit_field3' => 'grid',
+				'integrated_edit_field6' => 'grid',
 				'integrated_edit_field9' => 'grid' 
 			),
 			'itemLocations' => array(
@@ -143,33 +140,29 @@
 					'location' => 'grid',
 					'cellId' => 'c4' 
 				),
-				'integrated_edit_field4' => array(
-					'location' => 'grid',
-					'cellId' => 'c10' 
-				),
 				'integrated_edit_field5' => array(
 					'location' => 'grid',
-					'cellId' => 'c11' 
-				),
-				'integrated_edit_field6' => array(
-					'location' => 'grid',
-					'cellId' => 'c13' 
+					'cellId' => 'c6' 
 				),
 				'integrated_edit_field8' => array(
 					'location' => 'grid',
-					'cellId' => 'c13' 
+					'cellId' => 'c7' 
 				),
 				'integrated_edit_field2' => array(
 					'location' => 'grid',
-					'cellId' => 'c16' 
+					'cellId' => 'c9' 
 				),
 				'integrated_edit_field3' => array(
 					'location' => 'grid',
-					'cellId' => 'c17' 
+					'cellId' => 'c10' 
+				),
+				'integrated_edit_field6' => array(
+					'location' => 'grid',
+					'cellId' => 'c12' 
 				),
 				'integrated_edit_field9' => array(
 					'location' => 'grid',
-					'cellId' => 'c20' 
+					'cellId' => 'c13' 
 				) 
 			),
 			'itemVisiblity' => array(
@@ -226,15 +219,20 @@
 			'notifications' => array( 
 				'notifications' 
 			),
+			'next' => array( 
+				'next' 
+			),
+			'prev' => array( 
+				'prev' 
+			),
 			'integrated_edit_field' => array( 
 				'integrated_edit_field',
 				'integrated_edit_field1',
-				'integrated_edit_field4',
 				'integrated_edit_field5',
-				'integrated_edit_field6',
 				'integrated_edit_field8',
 				'integrated_edit_field2',
 				'integrated_edit_field3',
+				'integrated_edit_field6',
 				'integrated_edit_field9' 
 			),
 			'expand_button' => array( 
@@ -263,22 +261,6 @@
 					'c9' => array(
 						'cols' => array( 
 							1 
-						),
-						'rows' => array( 
-							0 
-						),
-						'tags' => array( 
-							 
-						),
-						'items' => array( 
-							 
-						),
-						'fixedAtServer' => false,
-						'fixedAtClient' => false 
-					),
-					'c16' => array(
-						'cols' => array( 
-							2 
 						),
 						'rows' => array( 
 							0 
@@ -319,22 +301,6 @@
 							 
 						),
 						'items' => array( 
-							'integrated_edit_field4' 
-						),
-						'fixedAtServer' => true,
-						'fixedAtClient' => false 
-					),
-					'c17' => array(
-						'cols' => array( 
-							2 
-						),
-						'rows' => array( 
-							1 
-						),
-						'tags' => array( 
-							 
-						),
-						'items' => array( 
 							'integrated_edit_field3' 
 						),
 						'fixedAtServer' => true,
@@ -367,22 +333,6 @@
 							 
 						),
 						'items' => array( 
-							'integrated_edit_field5' 
-						),
-						'fixedAtServer' => true,
-						'fixedAtClient' => false 
-					),
-					'c18' => array(
-						'cols' => array( 
-							2 
-						),
-						'rows' => array( 
-							2 
-						),
-						'tags' => array( 
-							 
-						),
-						'items' => array( 
 							 
 						),
 						'fixedAtServer' => false,
@@ -399,9 +349,9 @@
 							 
 						),
 						'items' => array( 
-							 
+							'integrated_edit_field5' 
 						),
-						'fixedAtServer' => false,
+						'fixedAtServer' => true,
 						'fixedAtClient' => false 
 					),
 					'c12' => array(
@@ -415,25 +365,9 @@
 							 
 						),
 						'items' => array( 
-							 
+							'integrated_edit_field6' 
 						),
-						'fixedAtServer' => false,
-						'fixedAtClient' => false 
-					),
-					'c19' => array(
-						'cols' => array( 
-							2 
-						),
-						'rows' => array( 
-							3 
-						),
-						'tags' => array( 
-							 
-						),
-						'items' => array( 
-							 
-						),
-						'fixedAtServer' => false,
+						'fixedAtServer' => true,
 						'fixedAtClient' => false 
 					),
 					'c7' => array(
@@ -447,31 +381,14 @@
 							 
 						),
 						'items' => array( 
-							 
-						),
-						'fixedAtServer' => false,
-						'fixedAtClient' => false 
-					),
-					'c13' => array(
-						'cols' => array( 
-							1 
-						),
-						'rows' => array( 
-							4 
-						),
-						'tags' => array( 
-							 
-						),
-						'items' => array( 
-							'integrated_edit_field6',
 							'integrated_edit_field8' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
 					),
-					'c20' => array(
+					'c13' => array(
 						'cols' => array( 
-							2 
+							1 
 						),
 						'rows' => array( 
 							4 
@@ -517,22 +434,6 @@
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
-					'c21' => array(
-						'cols' => array( 
-							2 
-						),
-						'rows' => array( 
-							5 
-						),
-						'tags' => array( 
-							 
-						),
-						'items' => array( 
-							 
-						),
-						'fixedAtServer' => false,
-						'fixedAtClient' => false 
-					),
 					'c3' => array(
 						'cols' => array( 
 							0 
@@ -564,25 +465,9 @@
 						),
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
-					),
-					'c22' => array(
-						'cols' => array( 
-							2 
-						),
-						'rows' => array( 
-							6 
-						),
-						'tags' => array( 
-							 
-						),
-						'items' => array( 
-							 
-						),
-						'fixedAtServer' => false,
-						'fixedAtClient' => false 
 					) 
 				),
-				'width' => 3,
+				'width' => 2,
 				'height' => 7 
 			) 
 		) 
@@ -629,7 +514,7 @@
 	'misc' => array(
 		'type' => 'view',
 		'breadcrumb' => false,
-		'nextPrev' => false 
+		'nextPrev' => true 
 	),
 	'events' => array(
 		'maps' => array( 
@@ -702,6 +587,8 @@
 				'c2' => array(
 					'model' => 'c2',
 					'items' => array( 
+						'prev',
+						'next',
 						'hamburger' 
 					) 
 				) 
@@ -824,9 +711,6 @@
 						),
 						array(
 							'cell' => 'c9' 
-						),
-						array(
-							'cell' => 'c16' 
 						) 
 					) 
 				),
@@ -838,9 +722,6 @@
 						),
 						array(
 							'cell' => 'c10' 
-						),
-						array(
-							'cell' => 'c17' 
 						) 
 					) 
 				),
@@ -852,9 +733,6 @@
 						),
 						array(
 							'cell' => 'c11' 
-						),
-						array(
-							'cell' => 'c18' 
 						) 
 					) 
 				),
@@ -866,9 +744,6 @@
 						),
 						array(
 							'cell' => 'c12' 
-						),
-						array(
-							'cell' => 'c19' 
 						) 
 					) 
 				),
@@ -880,9 +755,6 @@
 						),
 						array(
 							'cell' => 'c13' 
-						),
-						array(
-							'cell' => 'c20' 
 						) 
 					) 
 				),
@@ -894,9 +766,6 @@
 						),
 						array(
 							'cell' => 'c14' 
-						),
-						array(
-							'cell' => 'c21' 
 						) 
 					) 
 				),
@@ -907,9 +776,6 @@
 						),
 						array(
 							'cell' => 'c15' 
-						),
-						array(
-							'cell' => 'c22' 
 						) 
 					),
 					'section' => '' 
@@ -943,13 +809,13 @@
 				'c6' => array(
 					'model' => 'c3',
 					'items' => array( 
-						 
+						'integrated_edit_field5' 
 					) 
 				),
 				'c7' => array(
 					'model' => 'c3',
 					'items' => array( 
-						 
+						'integrated_edit_field8' 
 					) 
 				),
 				'c8' => array(
@@ -961,32 +827,31 @@
 				'c9' => array(
 					'model' => 'c3',
 					'items' => array( 
-						 
+						'integrated_edit_field2' 
 					) 
 				),
 				'c10' => array(
 					'model' => 'c3',
 					'items' => array( 
-						'integrated_edit_field4' 
+						'integrated_edit_field3' 
 					) 
 				),
 				'c11' => array(
 					'model' => 'c3',
 					'items' => array( 
-						'integrated_edit_field5' 
+						 
 					) 
 				),
 				'c12' => array(
 					'model' => 'c3',
 					'items' => array( 
-						 
+						'integrated_edit_field6' 
 					) 
 				),
 				'c13' => array(
 					'model' => 'c3',
 					'items' => array( 
-						'integrated_edit_field6',
-						'integrated_edit_field8' 
+						'integrated_edit_field9' 
 					) 
 				),
 				'c14' => array(
@@ -996,48 +861,6 @@
 					) 
 				),
 				'c15' => array(
-					'model' => 'c3',
-					'items' => array( 
-						 
-					) 
-				),
-				'c16' => array(
-					'model' => 'c3',
-					'items' => array( 
-						'integrated_edit_field2' 
-					) 
-				),
-				'c17' => array(
-					'model' => 'c3',
-					'items' => array( 
-						'integrated_edit_field3' 
-					) 
-				),
-				'c18' => array(
-					'model' => 'c3',
-					'items' => array( 
-						 
-					) 
-				),
-				'c19' => array(
-					'model' => 'c3',
-					'items' => array( 
-						 
-					) 
-				),
-				'c20' => array(
-					'model' => 'c3',
-					'items' => array( 
-						'integrated_edit_field9' 
-					) 
-				),
-				'c21' => array(
-					'model' => 'c3',
-					'items' => array( 
-						 
-					) 
-				),
-				'c22' => array(
 					'model' => 'c3',
 					'items' => array( 
 						 
@@ -1111,6 +934,12 @@
 		'notifications' => array(
 			'type' => 'notifications' 
 		),
+		'next' => array(
+			'type' => 'next' 
+		),
+		'prev' => array(
+			'type' => 'prev' 
+		),
 		'integrated_edit_field' => array(
 			'field' => 'dataset_name',
 			'type' => 'integrated_edit_field',
@@ -1121,18 +950,8 @@
 			'type' => 'integrated_edit_field',
 			'orientation' => 0 
 		),
-		'integrated_edit_field4' => array(
-			'field' => 'data_elements',
-			'type' => 'integrated_edit_field',
-			'orientation' => 0 
-		),
 		'integrated_edit_field5' => array(
 			'field' => 'is_active',
-			'type' => 'integrated_edit_field',
-			'orientation' => 0 
-		),
-		'integrated_edit_field6' => array(
-			'field' => 'created_by',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0 
 		),
@@ -1148,6 +967,11 @@
 		),
 		'integrated_edit_field3' => array(
 			'field' => 'period_type',
+			'type' => 'integrated_edit_field',
+			'orientation' => 0 
+		),
+		'integrated_edit_field6' => array(
+			'field' => 'created_by',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0 
 		),

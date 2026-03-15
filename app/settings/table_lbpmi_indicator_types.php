@@ -58,7 +58,7 @@ $runnerTableSettings['public.lbpmi_indicator_types'] = array(
 		'50',
 		'100',
 		'500',
-		'-1' 
+		'1' 
 	),
 	'pageSizeSelectorGroups' => array( 
 		'1',
@@ -67,12 +67,15 @@ $runnerTableSettings['public.lbpmi_indicator_types'] = array(
 		'10',
 		'50',
 		'100',
-		'-1' 
+		'1' 
 	),
+	'displayLoading' => true,
 	'warnLeavingEdit' => true,
 	'sql' => 'SELECT
 	indtype_id,
-	indicator_type
+	indicator_type,
+	indicator_factor,
+	indicator_type_description
 FROM
 	"public".lbpmi_indicator_types',
 	'keyFields' => array( 
@@ -158,12 +161,53 @@ FROM
 				'format' => 'Values list' 
 			),
 			'tableName' => 'public.lbpmi_indicator_types' 
+		),
+		'indicator_factor' => array(
+			'name' => 'indicator_factor',
+			'goodName' => 'indicator_factor',
+			'strField' => 'indicator_factor',
+			'index' => 3,
+			'type' => 14,
+			'sqlExpression' => 'indicator_factor',
+			'viewFormats' => array(
+				'view' => array(
+					'format' => 'Number' 
+				) 
+			),
+			'editFormats' => array(
+				'edit' => array(
+					'validateAs' => 'Number',
+					'textInsertNull' => true,
+					'textHTML5Input' => 'Number' 
+				) 
+			),
+			'tableName' => 'public.lbpmi_indicator_types' 
+		),
+		'indicator_type_description' => array(
+			'name' => 'indicator_type_description',
+			'goodName' => 'indicator_type_description',
+			'strField' => 'indicator_type_description',
+			'index' => 4,
+			'sqlExpression' => 'indicator_type_description',
+			'viewFormats' => array(
+				'view' => array(
+					 
+				) 
+			),
+			'editFormats' => array(
+				'edit' => array(
+					'format' => 'Text area' 
+				) 
+			),
+			'tableName' => 'public.lbpmi_indicator_types' 
 		) 
 	),
 	'query' => array(
 		'sql' => 'SELECT
 	indtype_id,
-	indicator_type
+	indicator_type,
+	indicator_factor,
+	indicator_type_description
 FROM
 	"public".lbpmi_indicator_types',
 		'parsed' => true,
@@ -198,6 +242,36 @@ FROM
 				),
 				'encrypted' => false,
 				'columnName' => 'indicator_type' 
+			),
+			array(
+				'sql' => 'indicator_factor',
+				'parsed' => true,
+				'type' => 'FieldListItem',
+				'alias' => '',
+				'expression' => array(
+					'sql' => '',
+					'parsed' => true,
+					'type' => 'SQLField',
+					'table' => 'public.lbpmi_indicator_types',
+					'name' => 'indicator_factor' 
+				),
+				'encrypted' => false,
+				'columnName' => 'indicator_factor' 
+			),
+			array(
+				'sql' => 'indicator_type_description',
+				'parsed' => true,
+				'type' => 'FieldListItem',
+				'alias' => '',
+				'expression' => array(
+					'sql' => '',
+					'parsed' => true,
+					'type' => 'SQLField',
+					'table' => 'public.lbpmi_indicator_types',
+					'name' => 'indicator_type_description' 
+				),
+				'encrypted' => false,
+				'columnName' => 'indicator_type_description' 
 			) 
 		),
 		'fromList' => array( 
@@ -211,7 +285,9 @@ FROM
 					'type' => 'SQLTable',
 					'columns' => array( 
 						'indtype_id',
-						'indicator_type' 
+						'indicator_type',
+						'indicator_factor',
+						'indicator_type_description' 
 					),
 					'name' => 'public.lbpmi_indicator_types' 
 				),
@@ -279,11 +355,27 @@ FROM
 				'groupByIndex' => -1,
 				'whereIndex' => -1,
 				'havingIndex' => -1 
+			),
+			array(
+				'fieldIndex' => 2,
+				'orderByIndex' => -1,
+				'groupByIndex' => -1,
+				'whereIndex' => -1,
+				'havingIndex' => -1 
+			),
+			array(
+				'fieldIndex' => 3,
+				'orderByIndex' => -1,
+				'groupByIndex' => -1,
+				'whereIndex' => -1,
+				'havingIndex' => -1 
 			) 
 		),
 		'headSql' => 'SELECT',
 		'fieldListSql' => 'indtype_id,
-	indicator_type',
+	indicator_type,
+	indicator_factor,
+	indicator_type_description',
 		'fromListSql' => 'FROM
 	"public".lbpmi_indicator_types',
 		'orderBySql' => '',
@@ -340,7 +432,9 @@ FROM
 		'caseSensitiveSearch' => '',
 		'searchableFields' => array( 
 			'indtype_id',
-			'indicator_type' 
+			'indicator_type',
+			'indicator_factor',
+			'indicator_type_description' 
 		),
 		'searchSuggest' => true,
 		'highlightSearchResults' => true,
@@ -348,7 +442,9 @@ FROM
 		'hideFilterUntilSearch' => false,
 		'googleLikeSearchFields' => array( 
 			'indtype_id',
-			'indicator_type' 
+			'indicator_type',
+			'indicator_factor',
+			'indicator_type_description' 
 		) 
 	),
 	'connId' => 'lifebox_mesystem_at_localhost',
@@ -402,16 +498,22 @@ if( mlang_getcurrentlang() === 'English' ) {
 	$runnerTableLabels['public.lbpmi_indicator_types'] = array(
 	'tableCaption' => 'Lbpmi Indicator Types',
 	'fieldLabels' => array(
-		'indtype_id' => 'Indtype Id',
-		'indicator_type' => 'Indicator Type' 
+		'indtype_id' => 'Type ID',
+		'indicator_type' => 'Indicator Type',
+		'indicator_factor' => 'Indicator Factor',
+		'indicator_type_description' => 'Indicator Type Description' 
 	),
 	'fieldTooltips' => array(
 		'indtype_id' => '',
-		'indicator_type' => '' 
+		'indicator_type' => '',
+		'indicator_factor' => '',
+		'indicator_type_description' => '' 
 	),
 	'fieldPlaceholders' => array(
 		'indtype_id' => '',
-		'indicator_type' => '' 
+		'indicator_type' => '',
+		'indicator_factor' => '',
+		'indicator_type_description' => '' 
 	),
 	'pageTitles' => array(
 		 

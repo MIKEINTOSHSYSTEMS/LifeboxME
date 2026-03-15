@@ -137,6 +137,17 @@ $runnerDbTableInfo['public_lbpmi_data_elements'] = array(
 			'defaultValueSQL' => 'CURRENT_TIMESTAMP',
 			'defaultValue' => 'CURRENT_TIMESTAMP',
 			'nullable' => true 
+		),
+		array(
+			'name' => 'dataset_id',
+			'typeName' => 'integer',
+			'size' => 32,
+			'scale' => 0,
+			'type' => 3,
+			'autoinc' => false,
+			'defaultValueSQL' => null,
+			'defaultValue' => '',
+			'nullable' => true 
 		) 
 	),
 	'primaryKeys' => array( 

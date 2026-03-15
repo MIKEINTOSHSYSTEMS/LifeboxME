@@ -340,6 +340,8 @@ FROM "public".lbpmi_indicators',
 					'lookupLinkField' => 'indicator_type',
 					'lookupDisplayField' => 'indicator_type',
 					'lookupOrderBy' => 'indtype_id',
+					'lookupAllowAdd' => true,
+					'lookupAddPage' => 'add',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
 					'timeConvention' => 1 
@@ -365,7 +367,7 @@ FROM "public".lbpmi_indicators',
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'format' => 'Text area',
+					'format' => 'Lookup wizard',
 					'validateRegexMessage' => array(
 						'text' => '',
 						'type' => 0 
@@ -375,6 +377,18 @@ FROM "public".lbpmi_indicators',
 						'type' => 0 
 					),
 					'textHTML5Input' => '0',
+					'lookupType' => 2,
+					'lookupTable' => 'public.lbpmi_data_elements',
+					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
+					'lookupLinkField' => 'data_element_id',
+					'lookupDisplayField' => 'data_element_name',
+					'lookupDependent' => true,
+					'lookupDependentFields' => array( 
+						array(
+							'masterField' => 'dataset_id',
+							'lookupField' => 'dataset_id' 
+						) 
+					),
 					'fileResizeSize' => 1920,
 					'fileCreateThumbnail' => true,
 					'fileThumbnailField' => 'th',
@@ -402,7 +416,7 @@ FROM "public".lbpmi_indicators',
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'format' => 'Text area',
+					'format' => 'Lookup wizard',
 					'validateRegexMessage' => array(
 						'text' => '',
 						'type' => 0 
@@ -412,6 +426,18 @@ FROM "public".lbpmi_indicators',
 						'type' => 0 
 					),
 					'textHTML5Input' => '0',
+					'lookupType' => 2,
+					'lookupTable' => 'public.lbpmi_data_elements',
+					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
+					'lookupLinkField' => 'data_element_id',
+					'lookupDisplayField' => 'data_element_name',
+					'lookupDependent' => true,
+					'lookupDependentFields' => array( 
+						array(
+							'masterField' => 'dataset_id',
+							'lookupField' => 'dataset_id' 
+						) 
+					),
 					'fileResizeSize' => 1920,
 					'fileCreateThumbnail' => true,
 					'fileThumbnailField' => 'th',

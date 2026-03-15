@@ -13,7 +13,8 @@
 			'domain_type',
 			'category_combo_id',
 			'is_active',
-			'created_by' 
+			'created_by',
+			'dataset_id' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -57,6 +58,9 @@
 			),
 			'created_by' => array( 
 				'integrated_search_field11' 
+			),
+			'dataset_id' => array( 
+				'integrated_search_field12' 
 			) 
 		) 
 	),
@@ -83,6 +87,7 @@
 				),
 				'grid' => array( 
 					'integrated_search_field',
+					'integrated_search_field12',
 					'integrated_search_field1',
 					'integrated_search_field2',
 					'integrated_search_field3',
@@ -108,6 +113,7 @@
 				'search_cancel' => 'below-grid',
 				'search_header' => 'top',
 				'integrated_search_field' => 'grid',
+				'integrated_search_field12' => 'grid',
 				'integrated_search_field1' => 'grid',
 				'integrated_search_field2' => 'grid',
 				'integrated_search_field3' => 'grid',
@@ -122,6 +128,10 @@
 			),
 			'itemLocations' => array(
 				'integrated_search_field' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field12' => array(
 					'location' => 'grid',
 					'cellId' => 'c3' 
 				),
@@ -202,7 +212,8 @@
 				'integrated_search_field8',
 				'integrated_search_field9',
 				'integrated_search_field10',
-				'integrated_search_field11' 
+				'integrated_search_field11',
+				'integrated_search_field12' 
 			) 
 		),
 		'cellMaps' => array(
@@ -220,6 +231,7 @@
 						),
 						'items' => array( 
 							'integrated_search_field',
+							'integrated_search_field12',
 							'integrated_search_field1',
 							'integrated_search_field2',
 							'integrated_search_field3',
@@ -396,6 +408,7 @@
 					'model' => 'c3',
 					'items' => array( 
 						'integrated_search_field',
+						'integrated_search_field12',
 						'integrated_search_field1',
 						'integrated_search_field2',
 						'integrated_search_field3',
@@ -503,6 +516,11 @@
 			'type' => 'integrated_search_field',
 			'orientation' => 0,
 			'required' => false 
+		),
+		'integrated_search_field12' => array(
+			'field' => 'dataset_id',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
 		) 
 	),
 	'dbProps' => array(

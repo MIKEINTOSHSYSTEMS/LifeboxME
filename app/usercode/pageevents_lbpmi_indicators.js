@@ -8,16 +8,19 @@ Runner.pages.PageSettings.addPageEvent(
 // Place event code here.
 // Use "Add Action" button to add code snippets.
 // Get control once
-var dataSourceCtrl = Runner.getControl(pageid, "indicator_type");
+//var dataSourceCtrl = Runner.getControl(pageid, "indicator_type");
 
 // Helper: hide all period fields
+/*
 function hideAllPeriods() {
     pageObj.hideField("formula");
     pageObj.hideField("numerator_description");
     pageObj.hideField("denominator_description");
 }
+*/
 
 // Initial state
+/*
 hideAllPeriods();
 
 switch (dataSourceCtrl.getValue()) {
@@ -34,8 +37,9 @@ switch (dataSourceCtrl.getValue()) {
         break;
 
 }
-
+*/
 // One change handler
+/*
 dataSourceCtrl.on("change", function () {
     hideAllPeriods();
 
@@ -55,7 +59,7 @@ dataSourceCtrl.on("change", function () {
     }
 });
 
-
+*/
 
 
 
@@ -72,16 +76,19 @@ Runner.pages.PageSettings.addPageEvent(
 // Place event code here.
 // Use "Add Action" button to add code snippets.
 // Get control once
-var dataSourceCtrl = Runner.getControl(pageid, "indicator_type");
+//var dataSourceCtrl = Runner.getControl(pageid, "indicator_type");
 
 // Helper: hide all period fields
+/*
 function hideAllPeriods() {
     pageObj.hideField("formula");
     pageObj.hideField("numerator_description");
     pageObj.hideField("denominator_description");
 }
+*/
 
 // Initial state
+/*
 hideAllPeriods();
 
 switch (dataSourceCtrl.getValue()) {
@@ -98,8 +105,9 @@ switch (dataSourceCtrl.getValue()) {
         break;
 
 }
-
+*/
 // One change handler
+/*
 dataSourceCtrl.on("change", function () {
     hideAllPeriods();
 
@@ -119,7 +127,7 @@ dataSourceCtrl.on("change", function () {
     }
 });
 
-
+*/
 
 
 

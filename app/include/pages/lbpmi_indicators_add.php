@@ -136,16 +136,16 @@
 					'integrated_edit_field1',
 					'integrated_edit_field2',
 					'integrated_edit_field3',
-					'integrated_edit_field5',
+					'integrated_edit_field9',
 					'integrated_edit_field4',
 					'integrated_edit_field6',
-					'integrated_edit_field12',
+					'integrated_edit_field5',
+					'integrated_edit_field10',
 					'integrated_edit_field7',
 					'integrated_edit_field8',
 					'integrated_edit_field',
-					'integrated_edit_field10',
-					'integrated_edit_field9',
-					'integrated_edit_field11' 
+					'integrated_edit_field11',
+					'integrated_edit_field12' 
 				) 
 			),
 			'formXtTags' => array(
@@ -173,16 +173,16 @@
 				'integrated_edit_field1' => 'grid',
 				'integrated_edit_field2' => 'grid',
 				'integrated_edit_field3' => 'grid',
-				'integrated_edit_field5' => 'grid',
+				'integrated_edit_field9' => 'grid',
 				'integrated_edit_field4' => 'grid',
 				'integrated_edit_field6' => 'grid',
-				'integrated_edit_field12' => 'grid',
+				'integrated_edit_field5' => 'grid',
+				'integrated_edit_field10' => 'grid',
 				'integrated_edit_field7' => 'grid',
 				'integrated_edit_field8' => 'grid',
 				'integrated_edit_field' => 'grid',
-				'integrated_edit_field10' => 'grid',
-				'integrated_edit_field9' => 'grid',
-				'integrated_edit_field11' => 'grid' 
+				'integrated_edit_field11' => 'grid',
+				'integrated_edit_field12' => 'grid' 
 			),
 			'itemLocations' => array(
 				'integrated_edit_field14' => array(
@@ -205,45 +205,45 @@
 					'location' => 'grid',
 					'cellId' => 'c11' 
 				),
-				'integrated_edit_field5' => array(
+				'integrated_edit_field9' => array(
 					'location' => 'grid',
-					'cellId' => 'c12' 
+					'cellId' => 'c11' 
 				),
 				'integrated_edit_field4' => array(
 					'location' => 'grid',
-					'cellId' => 'c13' 
+					'cellId' => 'c12' 
 				),
 				'integrated_edit_field6' => array(
 					'location' => 'grid',
-					'cellId' => 'c13' 
+					'cellId' => 'c12' 
 				),
-				'integrated_edit_field12' => array(
+				'integrated_edit_field5' => array(
 					'location' => 'grid',
-					'cellId' => 'c20' 
+					'cellId' => 'c14' 
+				),
+				'integrated_edit_field10' => array(
+					'location' => 'grid',
+					'cellId' => 'c15' 
 				),
 				'integrated_edit_field7' => array(
 					'location' => 'grid',
-					'cellId' => 'c21' 
+					'cellId' => 'c20' 
 				),
 				'integrated_edit_field8' => array(
 					'location' => 'grid',
-					'cellId' => 'c22' 
+					'cellId' => 'c21' 
 				),
 				'integrated_edit_field' => array(
 					'location' => 'grid',
 					'cellId' => 'c23' 
 				),
-				'integrated_edit_field10' => array(
-					'location' => 'grid',
-					'cellId' => 'c26' 
-				),
-				'integrated_edit_field9' => array(
-					'location' => 'grid',
-					'cellId' => 'c27' 
-				),
 				'integrated_edit_field11' => array(
 					'location' => 'grid',
-					'cellId' => 'c28' 
+					'cellId' => 'c29' 
+				),
+				'integrated_edit_field12' => array(
+					'location' => 'grid',
+					'cellId' => 'c30' 
 				) 
 			),
 			'itemVisiblity' => array(
@@ -482,7 +482,8 @@
 							 
 						),
 						'items' => array( 
-							'integrated_edit_field3' 
+							'integrated_edit_field3',
+							'integrated_edit_field9' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
@@ -498,7 +499,8 @@
 							 
 						),
 						'items' => array( 
-							'integrated_edit_field5' 
+							'integrated_edit_field4',
+							'integrated_edit_field6' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
@@ -514,10 +516,9 @@
 							 
 						),
 						'items' => array( 
-							'integrated_edit_field4',
-							'integrated_edit_field6' 
+							 
 						),
-						'fixedAtServer' => true,
+						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
 					'c14' => array(
@@ -531,9 +532,9 @@
 							 
 						),
 						'items' => array( 
-							 
+							'integrated_edit_field5' 
 						),
-						'fixedAtServer' => false,
+						'fixedAtServer' => true,
 						'fixedAtClient' => false 
 					),
 					'c15' => array(
@@ -547,9 +548,9 @@
 							 
 						),
 						'items' => array( 
-							 
+							'integrated_edit_field10' 
 						),
-						'fixedAtServer' => false,
+						'fixedAtServer' => true,
 						'fixedAtClient' => false 
 					),
 					'c16' => array(
@@ -579,9 +580,9 @@
 							 
 						),
 						'items' => array( 
-							'integrated_edit_field10' 
+							 
 						),
-						'fixedAtServer' => true,
+						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
 					'c27' => array(
@@ -595,9 +596,9 @@
 							 
 						),
 						'items' => array( 
-							'integrated_edit_field9' 
+							 
 						),
-						'fixedAtServer' => true,
+						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
 					'c28' => array(
@@ -611,9 +612,9 @@
 							 
 						),
 						'items' => array( 
-							'integrated_edit_field11' 
+							 
 						),
-						'fixedAtServer' => true,
+						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
 					'c29' => array(
@@ -627,9 +628,9 @@
 							 
 						),
 						'items' => array( 
-							 
+							'integrated_edit_field11' 
 						),
-						'fixedAtServer' => false,
+						'fixedAtServer' => true,
 						'fixedAtClient' => false 
 					),
 					'c30' => array(
@@ -643,9 +644,9 @@
 							 
 						),
 						'items' => array( 
-							 
+							'integrated_edit_field12' 
 						),
-						'fixedAtServer' => false,
+						'fixedAtServer' => true,
 						'fixedAtClient' => false 
 					),
 					'c31' => array(
@@ -675,7 +676,7 @@
 							 
 						),
 						'items' => array( 
-							'integrated_edit_field12' 
+							'integrated_edit_field7' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
@@ -691,7 +692,7 @@
 							 
 						),
 						'items' => array( 
-							'integrated_edit_field7' 
+							'integrated_edit_field8' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
@@ -707,9 +708,9 @@
 							 
 						),
 						'items' => array( 
-							'integrated_edit_field8' 
+							 
 						),
-						'fixedAtServer' => true,
+						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
 					'c3' => array(
@@ -1171,32 +1172,33 @@
 				'c11' => array(
 					'model' => 'c3',
 					'items' => array( 
-						'integrated_edit_field3' 
+						'integrated_edit_field3',
+						'integrated_edit_field9' 
 					) 
 				),
 				'c12' => array(
-					'model' => 'c3',
-					'items' => array( 
-						'integrated_edit_field5' 
-					) 
-				),
-				'c13' => array(
 					'model' => 'c3',
 					'items' => array( 
 						'integrated_edit_field4',
 						'integrated_edit_field6' 
 					) 
 				),
-				'c14' => array(
+				'c13' => array(
 					'model' => 'c3',
 					'items' => array( 
 						 
 					) 
 				),
+				'c14' => array(
+					'model' => 'c3',
+					'items' => array( 
+						'integrated_edit_field5' 
+					) 
+				),
 				'c15' => array(
 					'model' => 'c3',
 					'items' => array( 
-						 
+						'integrated_edit_field10' 
 					) 
 				),
 				'c16' => array(
@@ -1208,19 +1210,19 @@
 				'c20' => array(
 					'model' => 'c3',
 					'items' => array( 
-						'integrated_edit_field12' 
+						'integrated_edit_field7' 
 					) 
 				),
 				'c21' => array(
 					'model' => 'c3',
 					'items' => array( 
-						'integrated_edit_field7' 
+						'integrated_edit_field8' 
 					) 
 				),
 				'c22' => array(
 					'model' => 'c3',
 					'items' => array( 
-						'integrated_edit_field8' 
+						 
 					) 
 				),
 				'c23' => array(
@@ -1244,31 +1246,31 @@
 				'c26' => array(
 					'model' => 'c3',
 					'items' => array( 
-						'integrated_edit_field10' 
+						 
 					) 
 				),
 				'c27' => array(
 					'model' => 'c3',
 					'items' => array( 
-						'integrated_edit_field9' 
+						 
 					) 
 				),
 				'c28' => array(
 					'model' => 'c3',
 					'items' => array( 
-						'integrated_edit_field11' 
+						 
 					) 
 				),
 				'c29' => array(
 					'model' => 'c3',
 					'items' => array( 
-						 
+						'integrated_edit_field11' 
 					) 
 				),
 				'c30' => array(
 					'model' => 'c3',
 					'items' => array( 
-						 
+						'integrated_edit_field12' 
 					) 
 				),
 				'c31' => array(

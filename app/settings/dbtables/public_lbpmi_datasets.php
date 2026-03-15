@@ -63,14 +63,14 @@ $runnerDbTableInfo['public_lbpmi_datasets'] = array(
 		),
 		array(
 			'name' => 'data_elements',
-			'typeName' => 'jsonb',
+			'typeName' => 'text',
 			'size' => null,
 			'scale' => null,
-			'type' => 13,
+			'type' => 201,
 			'autoinc' => false,
 			'defaultValueSQL' => null,
 			'defaultValue' => '',
-			'nullable' => false 
+			'nullable' => true 
 		),
 		array(
 			'name' => 'is_active',

@@ -27,6 +27,28 @@ $runnerDbTableInfo['public_lbpmi_indicator_types'] = array(
 			'defaultValueSQL' => null,
 			'defaultValue' => '',
 			'nullable' => true 
+		),
+		array(
+			'name' => 'indicator_factor',
+			'typeName' => 'numeric',
+			'size' => 12,
+			'scale' => 4,
+			'type' => 14,
+			'autoinc' => false,
+			'defaultValueSQL' => null,
+			'defaultValue' => '',
+			'nullable' => true 
+		),
+		array(
+			'name' => 'indicator_type_description',
+			'typeName' => 'character varying',
+			'size' => 255,
+			'scale' => null,
+			'type' => 200,
+			'autoinc' => false,
+			'defaultValueSQL' => null,
+			'defaultValue' => '',
+			'nullable' => true 
 		) 
 	),
 	'primaryKeys' => array( 

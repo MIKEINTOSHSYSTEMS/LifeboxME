@@ -3,7 +3,9 @@
 	'fields' => array(
 		'gridFields' => array( 
 			'indtype_id',
-			'indicator_type' 
+			'indicator_type',
+			'indicator_factor',
+			'indicator_type_description' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -17,6 +19,12 @@
 			),
 			'indicator_type' => array( 
 				'integrated_search_field1' 
+			),
+			'indicator_factor' => array( 
+				'integrated_search_field2' 
+			),
+			'indicator_type_description' => array( 
+				'integrated_search_field3' 
 			) 
 		) 
 	),
@@ -43,7 +51,9 @@
 				),
 				'grid' => array( 
 					'integrated_search_field',
-					'integrated_search_field1' 
+					'integrated_search_field1',
+					'integrated_search_field2',
+					'integrated_search_field3' 
 				) 
 			),
 			'formXtTags' => array(
@@ -58,7 +68,9 @@
 				'search_cancel' => 'below-grid',
 				'search_header' => 'top',
 				'integrated_search_field' => 'grid',
-				'integrated_search_field1' => 'grid' 
+				'integrated_search_field1' => 'grid',
+				'integrated_search_field2' => 'grid',
+				'integrated_search_field3' => 'grid' 
 			),
 			'itemLocations' => array(
 				'integrated_search_field' => array(
@@ -66,6 +78,14 @@
 					'cellId' => 'c3' 
 				),
 				'integrated_search_field1' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field2' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field3' => array(
 					'location' => 'grid',
 					'cellId' => 'c3' 
 				) 
@@ -92,7 +112,9 @@
 			),
 			'integrated_search_field' => array( 
 				'integrated_search_field',
-				'integrated_search_field1' 
+				'integrated_search_field1',
+				'integrated_search_field2',
+				'integrated_search_field3' 
 			) 
 		),
 		'cellMaps' => array(
@@ -110,7 +132,9 @@
 						),
 						'items' => array( 
 							'integrated_search_field',
-							'integrated_search_field1' 
+							'integrated_search_field1',
+							'integrated_search_field2',
+							'integrated_search_field3' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
@@ -276,7 +300,9 @@
 					'model' => 'c3',
 					'items' => array( 
 						'integrated_search_field',
-						'integrated_search_field1' 
+						'integrated_search_field1',
+						'integrated_search_field2',
+						'integrated_search_field3' 
 					) 
 				) 
 			),
@@ -313,6 +339,16 @@
 			'type' => 'integrated_search_field',
 			'orientation' => 0,
 			'required' => false 
+		),
+		'integrated_search_field2' => array(
+			'field' => 'indicator_factor',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
+		),
+		'integrated_search_field3' => array(
+			'field' => 'indicator_type_description',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
 		) 
 	),
 	'dbProps' => array(

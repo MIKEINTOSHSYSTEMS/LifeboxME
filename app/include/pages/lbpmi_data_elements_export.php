@@ -36,6 +36,9 @@
 		),
 		'updated_at' => array(
 			'totalsType' => '' 
+		),
+		'dataset_id' => array(
+			'totalsType' => '' 
 		) 
 	),
 	'fields' => array(
@@ -51,10 +54,12 @@
 			'domain_type',
 			'category_combo_id',
 			'is_active',
-			'created_by' 
+			'created_by',
+			'dataset_id' 
 		),
 		'exportFields' => array( 
 			'data_element_id',
+			'dataset_id',
 			'data_element_name',
 			'data_element_description',
 			'created_at',
@@ -109,6 +114,9 @@
 			),
 			'created_by' => array( 
 				'export_field11' 
+			),
+			'dataset_id' => array( 
+				'export_field12' 
 			) 
 		) 
 	),
@@ -129,6 +137,7 @@
 				),
 				'grid' => array( 
 					'export_field',
+					'export_field12',
 					'export_field1',
 					'export_field2',
 					'export_field3',
@@ -154,6 +163,7 @@
 			'itemForms' => array(
 				'export_header' => 'top',
 				'export_field' => 'grid',
+				'export_field12' => 'grid',
 				'export_field1' => 'grid',
 				'export_field2' => 'grid',
 				'export_field3' => 'grid',
@@ -197,7 +207,8 @@
 				'export_field8',
 				'export_field9',
 				'export_field10',
-				'export_field11' 
+				'export_field11',
+				'export_field12' 
 			) 
 		),
 		'cellMaps' => array(
@@ -338,6 +349,7 @@
 					'model' => 'c1',
 					'items' => array( 
 						'export_field',
+						'export_field12',
 						'export_field1',
 						'export_field2',
 						'export_field3',
@@ -449,6 +461,10 @@
 		),
 		'export_field11' => array(
 			'field' => 'created_by',
+			'type' => 'export_field' 
+		),
+		'export_field12' => array(
+			'field' => 'dataset_id',
 			'type' => 'export_field' 
 		) 
 	),

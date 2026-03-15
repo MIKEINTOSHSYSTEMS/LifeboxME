@@ -3,7 +3,9 @@
 	'fields' => array(
 		'gridFields' => array( 
 			'indtype_id',
-			'indicator_type' 
+			'indicator_type',
+			'indicator_factor',
+			'indicator_type_description' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -17,6 +19,12 @@
 			),
 			'indicator_type' => array( 
 				'import_field1' 
+			),
+			'indicator_factor' => array( 
+				'import_field2' 
+			),
+			'indicator_type_description' => array( 
+				'import_field3' 
 			) 
 		) 
 	),
@@ -37,7 +45,9 @@
 				),
 				'grid' => array( 
 					'import_field',
-					'import_field1' 
+					'import_field1',
+					'import_field2',
+					'import_field3' 
 				) 
 			),
 			'formXtTags' => array(
@@ -48,7 +58,9 @@
 			'itemForms' => array(
 				'import_header' => 'top',
 				'import_field' => 'grid',
-				'import_field1' => 'grid' 
+				'import_field1' => 'grid',
+				'import_field2' => 'grid',
+				'import_field3' => 'grid' 
 			),
 			'itemLocations' => array(
 				 
@@ -63,7 +75,9 @@
 			),
 			'import_field' => array( 
 				'import_field',
-				'import_field1' 
+				'import_field1',
+				'import_field2',
+				'import_field3' 
 			) 
 		),
 		'cellMaps' => array(
@@ -192,7 +206,9 @@
 					'model' => 'c1',
 					'items' => array( 
 						'import_field',
-						'import_field1' 
+						'import_field1',
+						'import_field2',
+						'import_field3' 
 					) 
 				) 
 			),
@@ -212,6 +228,14 @@
 		),
 		'import_field1' => array(
 			'field' => 'indicator_type',
+			'type' => 'import_field' 
+		),
+		'import_field2' => array(
+			'field' => 'indicator_factor',
+			'type' => 'import_field' 
+		),
+		'import_field3' => array(
+			'field' => 'indicator_type_description',
 			'type' => 'import_field' 
 		) 
 	),

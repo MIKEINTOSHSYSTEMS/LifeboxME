@@ -196,6 +196,39 @@ pdfDocument = {
 				
 				[
 																{
+	cellId: 'c',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+					colSpan: 2,
+		
+			
+			
+	
+			"text": [
+		
+				
+			{"text":"","hidden":"{$item_hide_search_panel}"},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+																		{ 
+				cellId: 'c',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+							],
+						[
+																{
 	cellId: 'c1',
 	col:0,
 	row:0,
@@ -254,6 +287,39 @@ pdfDocument = {
       },
 
 											],
+						[
+																{
+	cellId: 'c4',
+	col:0,
+	row:0,
+			
+		
+	//	static colspan/rowspan
+					colSpan: 2,
+		
+			
+			
+	
+			"text": [
+		
+				
+			{"text":"","hidden":"{$item_hide_filter_panel}"},
+				
+		  ],
+  "border": [ false, false, false, false ],
+              "alignment": 'left',
+     
+      
+      },
+
+																		{ 
+				cellId: 'c4',
+				row:  0,
+				col:  1,
+				text: '',
+				compensateColspan: true
+			},
+							],
 		
 		]
 	}
@@ -731,6 +797,9 @@ pdfDocument = {
 			{"text":"","hidden":"{$item_hide_grid_alldetails_link}"},
 				
 				
+			{"text":"","hidden":"{$item_hide_grid_details_link1}"},
+				
+				
 			{"text":"","hidden":"{$item_hide_grid_details_link}"},
 				
 		  ],
@@ -1055,6 +1124,11 @@ pdfDocument = {
 	
 			"stack": [
 		
+				
+			 {BEGIN details_lbpmi_data_elements}
+			{$displayDetailTable_lbpmi_data_elements }
+		{END details_lbpmi_data_elements},
+				
 				
 			 {BEGIN details_lbpmi_indicators}
 			{$displayDetailTable_lbpmi_indicators }

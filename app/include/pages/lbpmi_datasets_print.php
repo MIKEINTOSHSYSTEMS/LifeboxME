@@ -4,13 +4,13 @@
 		'pdfView' => false 
 	),
 	'details' => array(
-		'public.lbpmi_indicators' => array(
-			'displayPreview' => 1 
-		) 
-	),
-	'master' => array(
 		'public.lbpmi_data_elements' => array(
-			'preview' => true 
+			'displayPreview' => 1,
+			'previewPageId' => 'list' 
+		),
+		'public.lbpmi_indicators' => array(
+			'displayPreview' => 1,
+			'previewPageId' => 'list' 
 		) 
 	),
 	'totals' => array(
@@ -120,17 +120,14 @@
 		'formItems' => array(
 			'formItems' => array(
 				'above-grid' => array( 
-					'print_pages',
-					'grid_inline_cancel',
-					'inline_add' 
+					'print_pages' 
 				),
 				'below-grid' => array( 
 					 
 				),
 				'top' => array( 
 					'print_header',
-					'print_subheader',
-					'master_info' 
+					'print_subheader' 
 				),
 				'grid' => array( 
 					'simple_grid_field8',
@@ -153,14 +150,13 @@
 					'simple_grid_field6',
 					'simple_grid_field19',
 					'simple_grid_field7',
-					'details_preview' 
+					'details_preview',
+					'details_preview1' 
 				) 
 			),
 			'formXtTags' => array(
 				'above-grid' => array( 
-					'print_pages',
-					'inline_cancel',
-					'inlineadd_link' 
+					'print_pages' 
 				),
 				'below-grid' => array( 
 					 
@@ -168,11 +164,8 @@
 			),
 			'itemForms' => array(
 				'print_pages' => 'above-grid',
-				'grid_inline_cancel' => 'above-grid',
-				'inline_add' => 'above-grid',
 				'print_header' => 'top',
 				'print_subheader' => 'top',
-				'master_info' => 'top',
 				'simple_grid_field8' => 'grid',
 				'simple_grid_field' => 'grid',
 				'simple_grid_field11' => 'grid',
@@ -193,7 +186,8 @@
 				'simple_grid_field6' => 'grid',
 				'simple_grid_field19' => 'grid',
 				'simple_grid_field7' => 'grid',
-				'details_preview' => 'grid' 
+				'details_preview' => 'grid',
+				'details_preview1' => 'grid' 
 			),
 			'itemLocations' => array(
 				'simple_grid_field8' => array(
@@ -279,6 +273,10 @@
 				'details_preview' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_dpreview' 
+				),
+				'details_preview1' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_dpreview' 
 				) 
 			),
 			'itemVisiblity' => array(
@@ -294,9 +292,6 @@
 			),
 			'print_pages' => array( 
 				'print_pages' 
-			),
-			'master_info' => array( 
-				'master_info' 
 			),
 			'grid_field' => array( 
 				'simple_grid_field',
@@ -323,13 +318,8 @@
 				'simple_grid_field19' 
 			),
 			'details_preview' => array( 
-				'details_preview' 
-			),
-			'inline_add' => array( 
-				'inline_add' 
-			),
-			'grid_inline_cancel' => array( 
-				'grid_inline_cancel' 
+				'details_preview',
+				'details_preview1' 
 			) 
 		),
 		'cellMaps' => array(
@@ -675,7 +665,8 @@
 							 
 						),
 						'items' => array( 
-							'details_preview' 
+							'details_preview',
+							'details_preview1' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
@@ -931,9 +922,7 @@
 				'c1' => array(
 					'model' => 'c1',
 					'items' => array( 
-						'print_pages',
-						'grid_inline_cancel',
-						'inline_add' 
+						'print_pages' 
 					) 
 				) 
 			),
@@ -998,7 +987,7 @@
 				'c4' => array(
 					'model' => 'c4',
 					'items' => array( 
-						'master_info' 
+						 
 					) 
 				) 
 			),
@@ -1349,7 +1338,8 @@
 				'cell_dpreview' => array(
 					'model' => 'cell_dpreview',
 					'items' => array( 
-						'details_preview' 
+						'details_preview',
+						'details_preview1' 
 					) 
 				) 
 			),
@@ -1368,12 +1358,6 @@
 		),
 		'print_pages' => array(
 			'type' => 'print_pages' 
-		),
-		'master_info' => array(
-			'type' => 'master_info',
-			'tables' => array(
-				'4776' => 'true' 
-			) 
 		),
 		'simple_grid_field' => array(
 			'field' => 'dataset_id',
@@ -1461,14 +1445,17 @@
 			'items' => array( 
 				 
 			),
-			'popup' => false 
+			'popup' => false,
+			'pageId' => 'list' 
 		),
-		'inline_add' => array(
-			'type' => 'inline_add',
-			'detailsOnly' => true 
-		),
-		'grid_inline_cancel' => array(
-			'type' => 'grid_inline_cancel' 
+		'details_preview1' => array(
+			'type' => 'details_preview',
+			'table' => 4776,
+			'items' => array( 
+				 
+			),
+			'popup' => false,
+			'pageId' => 'list' 
 		) 
 	),
 	'dbProps' => array(

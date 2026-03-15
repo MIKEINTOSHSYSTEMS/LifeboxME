@@ -178,12 +178,8 @@ pdfDocument = {
 	
 			"stack": [
 		
-				
-			{BEGIN mastertable_block}
-			{$showmasterfile}
-		{END mastertable_block},
-				
-		  ],
+				'',
+	  ],
   "border": [ false, false, false, false ],
               "alignment": 'left',
      
@@ -228,12 +224,6 @@ pdfDocument = {
 		
 				
 			{"text":"{mlang_message PRINT_PAGES}","hidden":"{$item_hide_print_pages}","isHtml":true,"page_indicator":true},
-				
-				
-			{"text":"","hidden":"{$item_hide_grid_inline_cancel}"},
-				
-				
-			{"text":"","hidden":"{$item_hide_inline_add}"},
 				
 		  ],
   "border": [ false, false, false, false ],
@@ -875,6 +865,11 @@ pdfDocument = {
 			 {BEGIN details_lbpmi_indicators}
 			{$displayDetailTable_lbpmi_indicators }
 		{END details_lbpmi_indicators},
+				
+				
+			 {BEGIN details_lbpmi_data_elements}
+			{$displayDetailTable_lbpmi_data_elements }
+		{END details_lbpmi_data_elements},
 				
 		  ],
   "border": [ true, true, true, true ],

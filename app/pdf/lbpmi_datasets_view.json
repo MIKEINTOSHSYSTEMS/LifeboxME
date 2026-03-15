@@ -139,9 +139,6 @@ pdfDocument = {
 												{BEGIN col_grid_1}
 						"*", 
 							{END col_grid_1}
-												{BEGIN col_grid_2}
-						"*", 
-							{END col_grid_2}
 					 ],	
 		
 			heights: [
@@ -229,31 +226,6 @@ pdfDocument = {
 	
 			"stack": [
 		
-				'',
-	  ],
-  "border": [ false, false, false, false ],
-              "alignment": 'left',
-     
-      
-      },
-
-{END cellblock_grid_c9}
-																							{BEGIN cellblock_grid_c16}
-{
-	cellId: 'c16',
-	col:0,
-	row:0,
-			
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"stack": [
-		
 				
 			{"hidden":"{$item_hide_integrated_edit_field2}","stack":[{"text":"{$jslabel public_lbpmi_datasets dataset_code }","bold":true},{"text":{$dataset_code_pdfvalue}}],"margin":[0,0,0,15]},
 				
@@ -264,7 +236,7 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_c16}
+{END cellblock_grid_c9}
 											],
 				{END row_grid_0}
 						{BEGIN row_grid_1}
@@ -313,33 +285,6 @@ pdfDocument = {
 			"stack": [
 		
 				
-			{"hidden":"{$item_hide_integrated_edit_field4}","stack":[{"text":"{$jslabel public_lbpmi_datasets data_elements }","bold":true},{"text":{$data_elements_pdfvalue}}],"margin":[0,0,0,15]},
-				
-		  ],
-  "border": [ false, false, false, false ],
-              "alignment": 'left',
-     
-      
-      },
-
-{END cellblock_grid_c10}
-																							{BEGIN cellblock_grid_c17}
-{
-	cellId: 'c17',
-	col:0,
-	row:0,
-			
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"stack": [
-		
-				
 			{"hidden":"{$item_hide_integrated_edit_field3}","stack":[{"text":"{$jslabel public_lbpmi_datasets period_type }","bold":true},{"text":{$period_type_pdfvalue}}],"margin":[0,0,0,15]},
 				
 		  ],
@@ -349,7 +294,7 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_c17}
+{END cellblock_grid_c10}
 											],
 				{END row_grid_1}
 						{BEGIN row_grid_2}
@@ -395,33 +340,6 @@ pdfDocument = {
 	
 			"stack": [
 		
-				
-			{"hidden":"{$item_hide_integrated_edit_field5}","stack":[{"text":"{$jslabel public_lbpmi_datasets is_active }","bold":true},{"text":{$is_active_pdfvalue}}],"margin":[0,0,0,15]},
-				
-		  ],
-  "border": [ false, false, false, false ],
-              "alignment": 'left',
-     
-      
-      },
-
-{END cellblock_grid_c11}
-																							{BEGIN cellblock_grid_c18}
-{
-	cellId: 'c18',
-	col:0,
-	row:0,
-			
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"stack": [
-		
 				'',
 	  ],
   "border": [ false, false, false, false ],
@@ -430,7 +348,7 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_c18}
+{END cellblock_grid_c11}
 											],
 				{END row_grid_2}
 						{BEGIN row_grid_3}
@@ -451,8 +369,10 @@ pdfDocument = {
 	
 			"stack": [
 		
-				'',
-	  ],
+				
+			{"hidden":"{$item_hide_integrated_edit_field5}","stack":[{"text":"{$jslabel public_lbpmi_datasets is_active }","bold":true},{"text":{$is_active_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
   "border": [ false, false, false, false ],
               "alignment": 'left',
      
@@ -476,8 +396,10 @@ pdfDocument = {
 	
 			"stack": [
 		
-				'',
-	  ],
+				
+			{"hidden":"{$item_hide_integrated_edit_field6}","stack":[{"text":"{$jslabel public_lbpmi_datasets created_by }","bold":true},{"text":{$created_by_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
   "border": [ false, false, false, false ],
               "alignment": 'left',
      
@@ -485,31 +407,6 @@ pdfDocument = {
       },
 
 {END cellblock_grid_c12}
-																							{BEGIN cellblock_grid_c19}
-{
-	cellId: 'c19',
-	col:0,
-	row:0,
-			
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"stack": [
-		
-				'',
-	  ],
-  "border": [ false, false, false, false ],
-              "alignment": 'left',
-     
-      
-      },
-
-{END cellblock_grid_c19}
 											],
 				{END row_grid_3}
 						{BEGIN row_grid_4}
@@ -530,8 +427,10 @@ pdfDocument = {
 	
 			"stack": [
 		
-				'',
-	  ],
+				
+			{"hidden":"{$item_hide_integrated_edit_field8}","stack":[{"text":"{$jslabel public_lbpmi_datasets created_at }","bold":true},{"text":{$created_at_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
   "border": [ false, false, false, false ],
               "alignment": 'left',
      
@@ -556,36 +455,6 @@ pdfDocument = {
 			"stack": [
 		
 				
-			{"hidden":"{$item_hide_integrated_edit_field6}","stack":[{"text":"{$jslabel public_lbpmi_datasets created_by }","bold":true},{"text":{$created_by_pdfvalue}}],"margin":[0,0,0,15]},
-				
-				
-			{"hidden":"{$item_hide_integrated_edit_field8}","stack":[{"text":"{$jslabel public_lbpmi_datasets created_at }","bold":true},{"text":{$created_at_pdfvalue}}],"margin":[0,0,0,15]},
-				
-		  ],
-  "border": [ false, false, false, false ],
-              "alignment": 'left',
-     
-      
-      },
-
-{END cellblock_grid_c13}
-																							{BEGIN cellblock_grid_c20}
-{
-	cellId: 'c20',
-	col:0,
-	row:0,
-			
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"stack": [
-		
-				
 			{"hidden":"{$item_hide_integrated_edit_field9}","stack":[{"text":"{$jslabel public_lbpmi_datasets updated_at }","bold":true},{"text":{$updated_at_pdfvalue}}],"margin":[0,0,0,15]},
 				
 		  ],
@@ -595,7 +464,7 @@ pdfDocument = {
       
       },
 
-{END cellblock_grid_c20}
+{END cellblock_grid_c13}
 											],
 				{END row_grid_4}
 						{BEGIN row_grid_5}
@@ -650,31 +519,6 @@ pdfDocument = {
       },
 
 {END cellblock_grid_c14}
-																							{BEGIN cellblock_grid_c21}
-{
-	cellId: 'c21',
-	col:0,
-	row:0,
-			
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"stack": [
-		
-				'',
-	  ],
-  "border": [ false, false, false, false ],
-              "alignment": 'left',
-     
-      
-      },
-
-{END cellblock_grid_c21}
 											],
 				{END row_grid_5}
 						{BEGIN row_grid_6}
@@ -729,31 +573,6 @@ pdfDocument = {
       },
 
 {END cellblock_grid_c15}
-																							{BEGIN cellblock_grid_c22}
-{
-	cellId: 'c22',
-	col:0,
-	row:0,
-			
-		
-	//	dynamic colspan/rowspan
-
-		
-		
-	
-			
-	
-			"stack": [
-		
-				'',
-	  ],
-  "border": [ false, false, false, false ],
-              "alignment": 'left',
-     
-      
-      },
-
-{END cellblock_grid_c22}
 											],
 				{END row_grid_6}
 		
@@ -818,6 +637,12 @@ pdfDocument = {
 	
 			"text": [
 		
+				
+			{"text":"","hidden":"{$item_hide_prev}"},
+				
+				
+			{"text":"","hidden":"{$item_hide_next}"},
+				
 				
 			{"text":""},
 				

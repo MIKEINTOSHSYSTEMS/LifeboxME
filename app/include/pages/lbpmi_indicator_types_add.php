@@ -5,7 +5,9 @@
 	),
 	'fields' => array(
 		'gridFields' => array( 
-			'indicator_type' 
+			'indicator_type',
+			'indicator_factor',
+			'indicator_type_description' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -16,6 +18,12 @@
 		'fieldItems' => array(
 			'indicator_type' => array( 
 				'integrated_edit_field' 
+			),
+			'indicator_factor' => array( 
+				'integrated_edit_field1' 
+			),
+			'indicator_type_description' => array( 
+				'integrated_edit_field2' 
 			) 
 		) 
 	),
@@ -53,7 +61,9 @@
 					'add_header' 
 				),
 				'grid' => array( 
-					'integrated_edit_field' 
+					'integrated_edit_field',
+					'integrated_edit_field1',
+					'integrated_edit_field2' 
 				) 
 			),
 			'formXtTags' => array(
@@ -76,10 +86,20 @@
 				'expand_button' => 'left',
 				'menu' => 'left',
 				'add_header' => 'top',
-				'integrated_edit_field' => 'grid' 
+				'integrated_edit_field' => 'grid',
+				'integrated_edit_field1' => 'grid',
+				'integrated_edit_field2' => 'grid' 
 			),
 			'itemLocations' => array(
 				'integrated_edit_field' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_edit_field1' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_edit_field2' => array(
 					'location' => 'grid',
 					'cellId' => 'c3' 
 				) 
@@ -139,7 +159,9 @@
 				'collapse_button' 
 			),
 			'integrated_edit_field' => array( 
-				'integrated_edit_field' 
+				'integrated_edit_field',
+				'integrated_edit_field1',
+				'integrated_edit_field2' 
 			),
 			'notifications' => array( 
 				'notifications' 
@@ -162,7 +184,9 @@
 							 
 						),
 						'items' => array( 
-							'integrated_edit_field' 
+							'integrated_edit_field',
+							'integrated_edit_field1',
+							'integrated_edit_field2' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
@@ -406,7 +430,9 @@
 				'c3' => array(
 					'model' => 'c3',
 					'items' => array( 
-						'integrated_edit_field' 
+						'integrated_edit_field',
+						'integrated_edit_field1',
+						'integrated_edit_field2' 
 					) 
 				) 
 			),
@@ -481,6 +507,16 @@
 		),
 		'notifications' => array(
 			'type' => 'notifications' 
+		),
+		'integrated_edit_field1' => array(
+			'field' => 'indicator_factor',
+			'type' => 'integrated_edit_field',
+			'orientation' => 0 
+		),
+		'integrated_edit_field2' => array(
+			'field' => 'indicator_type_description',
+			'type' => 'integrated_edit_field',
+			'orientation' => 0 
 		),
 		'expand_button' => array(
 			'type' => 'expand_button' 

@@ -3,6 +3,7 @@
 	'fields' => array(
 		'gridFields' => array( 
 			'data_element_id',
+			'dataset_id',
 			'data_element_name',
 			'data_element_description',
 			'created_at',
@@ -57,6 +58,9 @@
 			),
 			'created_by' => array( 
 				'import_field11' 
+			),
+			'dataset_id' => array( 
+				'import_field12' 
 			) 
 		) 
 	),
@@ -77,6 +81,7 @@
 				),
 				'grid' => array( 
 					'import_field',
+					'import_field12',
 					'import_field1',
 					'import_field2',
 					'import_field3',
@@ -98,6 +103,7 @@
 			'itemForms' => array(
 				'import_header' => 'top',
 				'import_field' => 'grid',
+				'import_field12' => 'grid',
 				'import_field1' => 'grid',
 				'import_field2' => 'grid',
 				'import_field3' => 'grid',
@@ -133,7 +139,8 @@
 				'import_field8',
 				'import_field9',
 				'import_field10',
-				'import_field11' 
+				'import_field11',
+				'import_field12' 
 			) 
 		),
 		'cellMaps' => array(
@@ -262,6 +269,7 @@
 					'model' => 'c1',
 					'items' => array( 
 						'import_field',
+						'import_field12',
 						'import_field1',
 						'import_field2',
 						'import_field3',
@@ -332,6 +340,10 @@
 		),
 		'import_field11' => array(
 			'field' => 'created_by',
+			'type' => 'import_field' 
+		),
+		'import_field12' => array(
+			'field' => 'dataset_id',
 			'type' => 'import_field' 
 		) 
 	),

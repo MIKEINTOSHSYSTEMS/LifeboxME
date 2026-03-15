@@ -259,6 +259,32 @@
 								<span class="rnr-searchcontrol">{$searchcontrol1_indicator_type}</span>
 						</div>
 		{END searchCtrlBlock_indicator_type}
+																{BEGIN searchCtrlBlock_indicator_type_description}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_indicator_type_description}" {$filterRow_attrs_indicator_type_description}>
+			<label>{$label public_lbpmi_indicator_types indicator_type_description }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_indicator_type_description}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_indicator_type_description}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_indicator_type_description}</span>
+						</div>
+		{END searchCtrlBlock_indicator_type_description}
+																{BEGIN searchCtrlBlock_indicator_factor}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_indicator_factor}" {$filterRow_attrs_indicator_factor}>
+			<label>{$label public_lbpmi_indicator_types indicator_factor }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_indicator_factor}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_indicator_factor}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_indicator_factor}</span>
+						</div>
+		{END searchCtrlBlock_indicator_factor}
 																{BEGIN searchCtrlBlock_indtype_id}
 
 
@@ -700,6 +726,12 @@
 			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="indicator_type"]:before {
 		content: "{$label public_lbpmi_indicator_types indicator_type}";
 	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="indicator_factor"]:before {
+		content: "{$label public_lbpmi_indicator_types indicator_factor}";
+	}
+			[data-pageid="{$pageid}"][data-itemtype="grid_field"][data-field="indicator_type_description"]:before {
+		content: "{$label public_lbpmi_indicator_types indicator_type_description}";
+	}
 	}
 </style>
 <table data-location="grid" id="form_grid_{$pageid}" data-makeup="leftbar" {$form_grid} data-pageid="{$pageid}" class=" table table-condensed table-striped table-hover table-bordered r-horizontal-grid  r-flexgrid rnr-b-grid rnr-gridtable"
@@ -769,7 +801,7 @@
 		{BEGIN indtype_id_fieldheadercolumn}
 	{BEGIN indtype_id_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field2" {$item_simple_grid_field2} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="indtype_id" data-fieldname="indtype_id" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field4" {$item_simple_grid_field4} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="indtype_id" data-fieldname="indtype_id" 
 
 			{$indtype_id_orderlinkattrs}
 	
@@ -803,7 +835,7 @@
 		{BEGIN indicator_type_fieldheadercolumn}
 	{BEGIN indicator_type_fieldheader}
 <span 
-	data-itemtype="grid_field_label" data-itemid="simple_grid_field3" {$item_simple_grid_field3} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="indicator_type" data-fieldname="indicator_type" 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field5" {$item_simple_grid_field5} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="indicator_type" data-fieldname="indicator_type" 
 
 			{$indicator_type_orderlinkattrs}
 	
@@ -820,6 +852,74 @@
 	
 	</th>
 	{END cellblock_grid_headcell_field1}
+									{BEGIN cellblock_grid_headcell_field2}
+	<th
+	
+	{$cell_grid_headcell_field2}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$indicator_factor_class}	"
+
+			data-field="indicator_factor"
+	
+	data-cellId="grid_headcell_field2" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN indicator_factor_fieldheadercolumn}
+	{BEGIN indicator_factor_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field6" {$item_simple_grid_field6} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="indicator_factor" data-fieldname="indicator_factor" 
+
+			{$indicator_factor_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_lbpmi_indicator_types indicator_factor }</span>
+					{$arrow_icon_indicator_factor}
+			</span>
+	</span>
+	{END indicator_factor_fieldheader}
+{END indicator_factor_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field2}
+									{BEGIN cellblock_grid_headcell_field3}
+	<th
+	
+	{$cell_grid_headcell_field3}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$indicator_type_description_class}	"
+
+			data-field="indicator_type_description"
+	
+	data-cellId="grid_headcell_field3" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN indicator_type_description_fieldheadercolumn}
+	{BEGIN indicator_type_description_fieldheader}
+<span 
+	data-itemtype="grid_field_label" data-itemid="simple_grid_field7" {$item_simple_grid_field7} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="indicator_type_description" data-fieldname="indicator_type_description" 
+
+			{$indicator_type_description_orderlinkattrs}
+	
+	
+	>
+	<span class="text-label">
+		<span>{$label public_lbpmi_indicator_types indicator_type_description }</span>
+					{$arrow_icon_indicator_type_description}
+			</span>
+	</span>
+	{END indicator_type_description_fieldheader}
+{END indicator_type_description_fieldheadercolumn}
+
+	
+	</th>
+	{END cellblock_grid_headcell_field3}
 							</tr>
 															
 					{END grid_header}
@@ -935,6 +1035,48 @@
 {END indicator_type_fieldcolumn}	
 	</td>
 	{END cellblock_grid_cell_field1}
+									{BEGIN cellblock_grid_cell_field2}
+	<td
+	
+	{$cell_grid_cell_field2}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$indicator_factor_class}	"
+
+			data-field="indicator_factor"
+	
+	data-cellId="grid_cell_field2" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN indicator_factor_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field2" {$item_simple_grid_field2} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="indicator_factor" data-fieldname="indicator_factor" data-default-width >
+{$indicator_factor_value}
+</span>
+{END indicator_factor_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field2}
+									{BEGIN cellblock_grid_cell_field3}
+	<td
+	
+	{$cell_grid_cell_field3}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$indicator_type_description_class}	"
+
+			data-field="indicator_type_description"
+	
+	data-cellId="grid_cell_field3" data-pageid="{$pageid}" data-record-id="{$recId}"	
+	>
+
+	 
+		{BEGIN indicator_type_description_fieldcolumn}
+<span data-itemtype="grid_field" data-itemid="simple_grid_field3" {$item_simple_grid_field3} data-pageid="{$pageid}" data-record-id="{$recId}" data-field="indicator_type_description" data-fieldname="indicator_type_description" data-default-width >
+{$indicator_type_description_value}
+</span>
+{END indicator_type_description_fieldcolumn}	
+	</td>
+	{END cellblock_grid_cell_field3}
 							</tr>
 										
 											{END grid_row}
@@ -1006,6 +1148,36 @@
 	
 	</td>
 	{END cellblock_grid_footcell_field1}
+									{BEGIN cellblock_grid_footcell_field2}
+	<td
+	
+	{$cell_grid_footcell_field2}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$indicator_factor_class}	"
+
+	
+	data-cellId="grid_footcell_field2" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lbpmi_indicator_types_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field2}
+									{BEGIN cellblock_grid_footcell_field3}
+	<td
+	
+	{$cell_grid_footcell_field3}
+	{$recordattrs}
+	class="
+		 r-ori-vert		 {$indicator_type_description_class}	"
+
+	
+	data-cellId="grid_footcell_field3" data-pageid="{$pageid}" data-record-id="{$recId}" data-page="lbpmi_indicator_types_list"	
+	>
+
+	
+	</td>
+	{END cellblock_grid_footcell_field3}
 							</tr>
 					
 					</tfoot>

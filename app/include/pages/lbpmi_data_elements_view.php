@@ -7,21 +7,23 @@
 		'public.lbpmi_data_values' => array(
 			'displayPreview' => 2,
 			'previewPageId' => '' 
-		),
+		) 
+	),
+	'master' => array(
 		'public.lbpmi_datasets' => array(
-			'displayPreview' => 2,
-			'previewPageId' => '' 
+			'preview' => false 
 		) 
 	),
 	'fields' => array(
 		'gridFields' => array( 
-			'data_element_name',
-			'aggregation_type',
+			'dataset_id',
 			'data_element_code',
-			'data_element_description',
-			'value_type',
+			'data_element_name',
 			'category_combo_id',
+			'value_type',
 			'domain_type',
+			'aggregation_type',
+			'data_element_description',
 			'is_active',
 			'created_by',
 			'created_at',
@@ -34,26 +36,29 @@
 			 
 		),
 		'fieldItems' => array(
-			'data_element_name' => array( 
-				'integrated_edit_field' 
-			),
-			'aggregation_type' => array( 
-				'integrated_edit_field6' 
+			'dataset_id' => array( 
+				'integrated_edit_field11' 
 			),
 			'data_element_code' => array( 
 				'integrated_edit_field4' 
 			),
-			'data_element_description' => array( 
-				'integrated_edit_field1' 
-			),
-			'value_type' => array( 
-				'integrated_edit_field5' 
+			'data_element_name' => array( 
+				'integrated_edit_field' 
 			),
 			'category_combo_id' => array( 
 				'integrated_edit_field8' 
 			),
+			'value_type' => array( 
+				'integrated_edit_field5' 
+			),
 			'domain_type' => array( 
 				'integrated_edit_field7' 
+			),
+			'aggregation_type' => array( 
+				'integrated_edit_field6' 
+			),
+			'data_element_description' => array( 
+				'integrated_edit_field1' 
 			),
 			'is_active' => array( 
 				'integrated_edit_field9' 
@@ -102,13 +107,14 @@
 					'view_header' 
 				),
 				'grid' => array( 
-					'integrated_edit_field',
-					'integrated_edit_field6',
+					'integrated_edit_field11',
 					'integrated_edit_field4',
-					'integrated_edit_field1',
-					'integrated_edit_field5',
+					'integrated_edit_field',
 					'integrated_edit_field8',
+					'integrated_edit_field5',
 					'integrated_edit_field7',
+					'integrated_edit_field6',
+					'integrated_edit_field1',
 					'integrated_edit_field9',
 					'integrated_edit_field10',
 					'integrated_edit_field2',
@@ -133,54 +139,59 @@
 				'expand_button' => 'left',
 				'menu' => 'left',
 				'view_header' => 'top',
-				'integrated_edit_field' => 'grid',
-				'integrated_edit_field6' => 'grid',
+				'integrated_edit_field11' => 'grid',
 				'integrated_edit_field4' => 'grid',
-				'integrated_edit_field1' => 'grid',
-				'integrated_edit_field5' => 'grid',
+				'integrated_edit_field' => 'grid',
 				'integrated_edit_field8' => 'grid',
+				'integrated_edit_field5' => 'grid',
 				'integrated_edit_field7' => 'grid',
+				'integrated_edit_field6' => 'grid',
+				'integrated_edit_field1' => 'grid',
 				'integrated_edit_field9' => 'grid',
 				'integrated_edit_field10' => 'grid',
 				'integrated_edit_field2' => 'grid',
 				'integrated_edit_field3' => 'grid' 
 			),
 			'itemLocations' => array(
+				'integrated_edit_field11' => array(
+					'location' => 'grid',
+					'cellId' => 'c5' 
+				),
+				'integrated_edit_field4' => array(
+					'location' => 'grid',
+					'cellId' => 'c7' 
+				),
 				'integrated_edit_field' => array(
 					'location' => 'grid',
 					'cellId' => 'c8' 
 				),
-				'integrated_edit_field6' => array(
+				'integrated_edit_field8' => array(
 					'location' => 'grid',
 					'cellId' => 'c9' 
 				),
-				'integrated_edit_field4' => array(
-					'location' => 'grid',
-					'cellId' => 'c10' 
-				),
-				'integrated_edit_field1' => array(
+				'integrated_edit_field5' => array(
 					'location' => 'grid',
 					'cellId' => 'c1' 
 				),
-				'integrated_edit_field5' => array(
+				'integrated_edit_field7' => array(
 					'location' => 'grid',
 					'cellId' => 'c2' 
 				),
-				'integrated_edit_field8' => array(
+				'integrated_edit_field6' => array(
 					'location' => 'grid',
 					'cellId' => 'c11' 
 				),
-				'integrated_edit_field7' => array(
+				'integrated_edit_field1' => array(
 					'location' => 'grid',
-					'cellId' => 'c13' 
+					'cellId' => 'c12' 
 				),
 				'integrated_edit_field9' => array(
 					'location' => 'grid',
-					'cellId' => 'c14' 
+					'cellId' => 'c13' 
 				),
 				'integrated_edit_field10' => array(
 					'location' => 'grid',
-					'cellId' => 'c19' 
+					'cellId' => 'c18' 
 				),
 				'integrated_edit_field2' => array(
 					'location' => 'grid',
@@ -246,13 +257,14 @@
 				'notifications' 
 			),
 			'integrated_edit_field' => array( 
-				'integrated_edit_field',
-				'integrated_edit_field6',
+				'integrated_edit_field11',
 				'integrated_edit_field4',
-				'integrated_edit_field1',
-				'integrated_edit_field5',
+				'integrated_edit_field',
 				'integrated_edit_field8',
+				'integrated_edit_field5',
 				'integrated_edit_field7',
+				'integrated_edit_field6',
+				'integrated_edit_field1',
 				'integrated_edit_field9',
 				'integrated_edit_field10',
 				'integrated_edit_field2',
@@ -276,9 +288,9 @@
 							 
 						),
 						'items' => array( 
-							 
+							'integrated_edit_field11' 
 						),
-						'fixedAtServer' => false,
+						'fixedAtServer' => true,
 						'fixedAtClient' => false 
 					),
 					'c6' => array(
@@ -308,9 +320,9 @@
 							 
 						),
 						'items' => array( 
-							 
+							'integrated_edit_field4' 
 						),
-						'fixedAtServer' => false,
+						'fixedAtServer' => true,
 						'fixedAtClient' => false 
 					),
 					'c8' => array(
@@ -340,7 +352,7 @@
 							 
 						),
 						'items' => array( 
-							'integrated_edit_field6' 
+							'integrated_edit_field8' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
@@ -356,9 +368,9 @@
 							 
 						),
 						'items' => array( 
-							'integrated_edit_field4' 
+							 
 						),
-						'fixedAtServer' => true,
+						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
 					'c1' => array(
@@ -372,7 +384,7 @@
 							 
 						),
 						'items' => array( 
-							'integrated_edit_field1' 
+							'integrated_edit_field5' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
@@ -388,7 +400,7 @@
 							 
 						),
 						'items' => array( 
-							'integrated_edit_field5' 
+							'integrated_edit_field7' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
@@ -404,7 +416,7 @@
 							 
 						),
 						'items' => array( 
-							'integrated_edit_field8' 
+							'integrated_edit_field6' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
@@ -420,9 +432,9 @@
 							 
 						),
 						'items' => array( 
-							 
+							'integrated_edit_field1' 
 						),
-						'fixedAtServer' => false,
+						'fixedAtServer' => true,
 						'fixedAtClient' => false 
 					),
 					'c13' => array(
@@ -436,7 +448,7 @@
 							 
 						),
 						'items' => array( 
-							'integrated_edit_field7' 
+							'integrated_edit_field9' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
@@ -452,9 +464,9 @@
 							 
 						),
 						'items' => array( 
-							'integrated_edit_field9' 
+							 
 						),
-						'fixedAtServer' => true,
+						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
 					'c15' => array(
@@ -516,9 +528,9 @@
 							 
 						),
 						'items' => array( 
-							 
+							'integrated_edit_field10' 
 						),
-						'fixedAtServer' => false,
+						'fixedAtServer' => true,
 						'fixedAtClient' => false 
 					),
 					'c19' => array(
@@ -532,7 +544,6 @@
 							 
 						),
 						'items' => array( 
-							'integrated_edit_field10',
 							'integrated_edit_field2' 
 						),
 						'fixedAtServer' => true,
@@ -958,7 +969,7 @@
 				'c5' => array(
 					'model' => 'c3',
 					'items' => array( 
-						 
+						'integrated_edit_field11' 
 					) 
 				),
 				'c6' => array(
@@ -970,7 +981,7 @@
 				'c7' => array(
 					'model' => 'c3',
 					'items' => array( 
-						 
+						'integrated_edit_field4' 
 					) 
 				),
 				'c8' => array(
@@ -982,49 +993,49 @@
 				'c9' => array(
 					'model' => 'c3',
 					'items' => array( 
-						'integrated_edit_field6' 
+						'integrated_edit_field8' 
 					) 
 				),
 				'c10' => array(
 					'model' => 'c3',
 					'items' => array( 
-						'integrated_edit_field4' 
+						 
 					) 
 				),
 				'c1' => array(
 					'model' => 'c3',
 					'items' => array( 
-						'integrated_edit_field1' 
+						'integrated_edit_field5' 
 					) 
 				),
 				'c2' => array(
 					'model' => 'c3',
 					'items' => array( 
-						'integrated_edit_field5' 
+						'integrated_edit_field7' 
 					) 
 				),
 				'c11' => array(
 					'model' => 'c3',
 					'items' => array( 
-						'integrated_edit_field8' 
+						'integrated_edit_field6' 
 					) 
 				),
 				'c12' => array(
 					'model' => 'c3',
 					'items' => array( 
-						 
+						'integrated_edit_field1' 
 					) 
 				),
 				'c13' => array(
 					'model' => 'c3',
 					'items' => array( 
-						'integrated_edit_field7' 
+						'integrated_edit_field9' 
 					) 
 				),
 				'c14' => array(
 					'model' => 'c3',
 					'items' => array( 
-						'integrated_edit_field9' 
+						 
 					) 
 				),
 				'c15' => array(
@@ -1048,13 +1059,12 @@
 				'c18' => array(
 					'model' => 'c3',
 					'items' => array( 
-						 
+						'integrated_edit_field10' 
 					) 
 				),
 				'c19' => array(
 					'model' => 'c3',
 					'items' => array( 
-						'integrated_edit_field10',
 						'integrated_edit_field2' 
 					) 
 				),
@@ -1132,13 +1142,8 @@
 		'notifications' => array(
 			'type' => 'notifications' 
 		),
-		'integrated_edit_field' => array(
-			'field' => 'data_element_name',
-			'type' => 'integrated_edit_field',
-			'orientation' => 0 
-		),
-		'integrated_edit_field6' => array(
-			'field' => 'aggregation_type',
+		'integrated_edit_field11' => array(
+			'field' => 'dataset_id',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0 
 		),
@@ -1147,13 +1152,8 @@
 			'type' => 'integrated_edit_field',
 			'orientation' => 0 
 		),
-		'integrated_edit_field1' => array(
-			'field' => 'data_element_description',
-			'type' => 'integrated_edit_field',
-			'orientation' => 0 
-		),
-		'integrated_edit_field5' => array(
-			'field' => 'value_type',
+		'integrated_edit_field' => array(
+			'field' => 'data_element_name',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0 
 		),
@@ -1162,8 +1162,23 @@
 			'type' => 'integrated_edit_field',
 			'orientation' => 0 
 		),
+		'integrated_edit_field5' => array(
+			'field' => 'value_type',
+			'type' => 'integrated_edit_field',
+			'orientation' => 0 
+		),
 		'integrated_edit_field7' => array(
 			'field' => 'domain_type',
+			'type' => 'integrated_edit_field',
+			'orientation' => 0 
+		),
+		'integrated_edit_field6' => array(
+			'field' => 'aggregation_type',
+			'type' => 'integrated_edit_field',
+			'orientation' => 0 
+		),
+		'integrated_edit_field1' => array(
+			'field' => 'data_element_description',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0 
 		),

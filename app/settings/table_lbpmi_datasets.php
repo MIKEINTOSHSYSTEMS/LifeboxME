@@ -68,7 +68,7 @@ $runnerTableSettings['public.lbpmi_datasets'] = array(
 		'50',
 		'100',
 		'500',
-		'-1' 
+		'1' 
 	),
 	'pageSizeSelectorGroups' => array( 
 		'1',
@@ -77,8 +77,9 @@ $runnerTableSettings['public.lbpmi_datasets'] = array(
 		'10',
 		'50',
 		'100',
-		'-1' 
+		'1' 
 	),
+	'displayLoading' => true,
 	'warnLeavingEdit' => true,
 	'sql' => 'SELECT
 	dataset_id,
@@ -174,7 +175,9 @@ FROM
 			),
 			'defaultSearchOption' => 'Contains',
 			'filterFormat' => array(
-				'format' => 'Values list' 
+				'format' => 'Values list',
+				'filterTotals' => 1,
+				'filterMultiselect' => 2 
 			),
 			'tableName' => 'public.lbpmi_datasets' 
 		),
@@ -271,7 +274,9 @@ FROM
 				) 
 			),
 			'filterFormat' => array(
-				'format' => 'Values list' 
+				'format' => 'Values list',
+				'filterTotals' => 1,
+				'filterMultiselect' => 2 
 			),
 			'tableName' => 'public.lbpmi_datasets' 
 		),
@@ -281,7 +286,7 @@ FROM
 			'strField' => 'data_elements',
 			'sourceSingle' => 'data_elements',
 			'index' => 6,
-			'type' => 13,
+			'type' => 201,
 			'sqlExpression' => 'data_elements',
 			'viewFormats' => array(
 				'view' => array(
@@ -290,14 +295,16 @@ FROM
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'format' => 'Lookup wizard',
-					'required' => true,
+					'format' => 'Readonly',
+					'textInsertNull' => true,
 					'textHTML5Input' => '0',
+					'lookupMultiselect' => true,
 					'lookupType' => 2,
 					'lookupTable' => 'public.lbpmi_data_elements',
 					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
 					'lookupLinkField' => 'data_element_id',
 					'lookupDisplayField' => 'data_element_name',
+					'lookupOrderBy' => 'data_element_name',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
 					'timeConvention' => 1 
@@ -451,18 +458,8 @@ FROM
 			'tableName' => 'public.lbpmi_datasets' 
 		) 
 	),
-	'masterTables' => array( 
-		array(
-			'table' => 'public.lbpmi_data_elements',
-			'detailsKeys' => array( 
-				'data_elements' 
-			),
-			'masterKeys' => array( 
-				'data_element_id' 
-			) 
-		) 
-	),
 	'detailsTables' => array( 
+		'public.lbpmi_data_elements',
 		'public.lbpmi_indicators' 
 	),
 	'query' => array(
@@ -939,7 +936,7 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'dataset_description' => 'Dataset Description',
 		'dataset_code' => 'Dataset Code',
 		'period_type' => 'Period Type',
-		'data_elements' => 'Data Elements',
+		'data_elements' => 'Data Elements(NA)',
 		'is_active' => 'Is Active',
 		'created_by' => 'Created By',
 		'created_at' => 'Created At',
