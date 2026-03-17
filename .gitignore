@@ -54,6 +54,8 @@ api/events/
 api/base/vendor
 api/base/composer.lock
 api/base/.fm_config.json
+api/base/test
+api/base/lab
 #api/lbln/
 modules/srcs/
 modules/quiz/
