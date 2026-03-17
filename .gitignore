@@ -51,6 +51,9 @@ api/dev/db/db.php
 api/dev/docker/
 api/lbln/tests
 api/events/
+api/base/vendor
+api/base/composer.lock
+api/base/.fm_config.json
 #api/lbln/
 modules/srcs/
 modules/quiz/
