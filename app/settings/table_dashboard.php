@@ -10,7 +10,9 @@ $runnerTableSettings['Dashboard'] = array(
 			'dashboard',
 			'lifebox_test_center',
 			'lifebox_visitors_analytics',
-			'impact' 
+			'impact',
+			'lifebox_file_manager',
+			'lifebox_pmi_analytics_manager' 
 		),
 		'search' => array( 
 			'search' 
@@ -22,7 +24,9 @@ $runnerTableSettings['Dashboard'] = array(
 		'lifebox_test_center' => 'dashboard',
 		'lifebox_visitors_analytics' => 'dashboard',
 		'search' => 'search',
-		'impact' => 'dashboard' 
+		'impact' => 'dashboard',
+		'lifebox_file_manager' => 'dashboard',
+		'lifebox_pmi_analytics_manager' => 'dashboard' 
 	),
 	'defaultPages' => array(
 		'dashboard' => 'dashboard',
@@ -64,7 +68,9 @@ $runnerTableSettings['Dashboard'] = array(
 			'dashboard',
 			'lifebox_test_center',
 			'lifebox_visitors_analytics',
-			'impact' 
+			'impact',
+			'lifebox_file_manager',
+			'lifebox_pmi_analytics_manager' 
 		),
 		'search' => array( 
 			'search' 
@@ -76,7 +82,9 @@ $runnerTableSettings['Dashboard'] = array(
 		'lifebox_test_center' => 'dashboard',
 		'lifebox_visitors_analytics' => 'dashboard',
 		'search' => 'search',
-		'impact' => 'dashboard' 
+		'impact' => 'dashboard',
+		'lifebox_file_manager' => 'dashboard',
+		'lifebox_pmi_analytics_manager' => 'dashboard' 
 	),
 	'originalDefaultPages' => array(
 		'dashboard' => 'dashboard',

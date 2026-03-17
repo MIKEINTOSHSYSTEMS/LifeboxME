@@ -3860,9 +3860,128 @@ $runnerMenus['main'] = array(
 				) 
 			),
 			array(
+				'id' => '174',
+				'parent' => '0',
+				'children' => array( 
+					array(
+						'id' => '176',
+						'parent' => '174',
+						'children' => array( 
+							 
+						),
+						'data' => array(
+							'name' => array(
+								'text' => 'File Manager',
+								'type' => 0 
+							),
+							'comments' => array(
+								'text' => '',
+								'type' => 0 
+							),
+							'style' => '',
+							'href' => '',
+							'params' => '',
+							'pageId' => 'lifebox_file_manager',
+							'itemType' => 2,
+							'linkType' => 0,
+							'openType' => 0,
+							'iconType' => 3,
+							'iconName' => 'fa-box-open',
+							'iconStyle' => 0,
+							'showIconType' => 1,
+							'linkToAnotherApp' => false,
+							'table' => 4701,
+							'pageType' => 'dashboard' 
+						) 
+					) 
+				),
+				'data' => array(
+					'name' => array(
+						'text' => 'Utilities',
+						'type' => 0 
+					),
+					'comments' => array(
+						'text' => '',
+						'type' => 0 
+					),
+					'style' => '',
+					'href' => '',
+					'params' => '',
+					'pageId' => '',
+					'itemType' => 0,
+					'linkType' => 2,
+					'openType' => 0,
+					'iconType' => 3,
+					'iconName' => 'fa-toolbox',
+					'iconStyle' => 0,
+					'showIconType' => 1,
+					'linkToAnotherApp' => false 
+				) 
+			),
+			array(
+				'id' => '175',
+				'parent' => '0',
+				'children' => array( 
+					 
+				),
+				'data' => array(
+					'name' => array(
+						'text' => '---------',
+						'type' => 0 
+					),
+					'comments' => array(
+						'text' => '',
+						'type' => 0 
+					),
+					'style' => '',
+					'href' => '',
+					'params' => '',
+					'pageId' => '',
+					'itemType' => 1,
+					'linkType' => 2,
+					'openType' => 0,
+					'iconType' => 0,
+					'iconName' => '',
+					'iconStyle' => 0,
+					'showIconType' => 1,
+					'linkToAnotherApp' => false 
+				) 
+			),
+			array(
 				'id' => '54',
 				'parent' => '0',
 				'children' => array( 
+					array(
+						'id' => '177',
+						'parent' => '54',
+						'children' => array( 
+							 
+						),
+						'data' => array(
+							'name' => array(
+								'text' => 'PMI Analytics Manager',
+								'type' => 0 
+							),
+							'comments' => array(
+								'text' => '',
+								'type' => 0 
+							),
+							'style' => '',
+							'href' => '',
+							'params' => '',
+							'pageId' => 'lifebox_pmi_analytics_manager',
+							'itemType' => 2,
+							'linkType' => 0,
+							'openType' => 0,
+							'iconType' => 3,
+							'iconName' => 'fa-boxes',
+							'iconStyle' => 0,
+							'showIconType' => 1,
+							'linkToAnotherApp' => false,
+							'table' => 4701,
+							'pageType' => 'dashboard' 
+						) 
+					),
 					array(
 						'id' => '79',
 						'parent' => '54',
