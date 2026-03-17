@@ -84,10 +84,11 @@ $datetime_format = 'm/d/Y g:i A';
 $path_display_mode = 'full';
 
 // Allowed file extensions for create and rename files
-$allowed_file_extensions = '';
+$allowed_file_extensions = 'txt,pdf,xlsx,xls,xlsm,docx,doc,pptx,ppt';
 
 // Allowed file extensions for upload files
-$allowed_upload_extensions = 'xlsx,xlsm,xlsb,xltx,xltm,xls,xlt,xml,xlam,xla,xlw,xlr,xlsx,docx,docm,dotx,dotm,doc,dot,pptx,pptm,potx,potm,ppam,ppsx,ppsm,sldx,sldm,ppsm,ppt,pot,pps,pdf';
+//$allowed_upload_extensions = 'xlsx,xlsm,xlsb,xltx,xltm,xls,xlt,xml,xlam,xla,xlw,xlr,xlsx,docx,docm,dotx,dotm,doc,dot,pptx,pptm,potx,potm,ppam,ppsx,ppsm,sldx,sldm,ppsm,ppt,pot,pps,pdf';
+$allowed_upload_extensions = 'txt,pdf,xlsx,xls,xlsm,docx,doc,pptx,ppt';
 
 // Favicon path
 $favicon_path = '/app/images/lifebox.svg';
