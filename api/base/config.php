@@ -76,11 +76,11 @@ $datetime_format = 'd.m.y H:i:s';
 //$allowed_upload_extensions = '';
 
 // Allowed file extensions for create and rename files
-$allowed_file_extensions = 'txt,png,jpg,pdf,xlsx,xls,xlsm,docx,doc,pptx,ppt,mp4';
+$allowed_file_extensions = 'txt,gif,png,jpg,pdf,xlsx,xls,xlsm,docx,doc,pptx,ppt,mp4';
 
 // Allowed file extensions for upload files
 //$allowed_upload_extensions = 'xlsx,xlsm,xlsb,xltx,xltm,xls,xlt,xml,xlam,xla,xlw,xlr,xlsx,docx,docm,dotx,dotm,doc,dot,pptx,pptm,potx,potm,ppam,ppsx,ppsm,sldx,sldm,ppsm,ppt,pot,pps,pdf';
-$allowed_upload_extensions = 'txt,png,jpg,pdf,xlsx,xls,xlsm,docx,doc,pptx,ppt,mp4';
+$allowed_upload_extensions = 'txt,gif,png,jpg,pdf,xlsx,xls,xlsm,docx,doc,pptx,ppt,mp4';
 
 
 // Favicon path. This can be either a full url to an .PNG image, or a path based on the document root.
