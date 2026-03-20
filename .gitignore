@@ -43,6 +43,7 @@ api/database/forms/backup
 api/database/analytics/backup
 api/database/main/test.php
 api/database/test/
+api/database/assets/
 api/mail/PHPMailer/
 api/users/test.php
 api/dev/api/
@@ -75,6 +76,12 @@ modules/ocr/assets/
 prod.docker-compose.yml
 .env.prod
 .htaccess
+
+# Support and Maintenance
+maintenance.flag
+maintenance.php
+maintenance.config
+maintenance-check.php
 
 # File Management
 modules/filemanagers
