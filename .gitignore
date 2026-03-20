@@ -50,6 +50,7 @@ api/dev/api/
 api/dev/assets/
 api/dev/db/db.php
 api/dev/docker/
+api/dev/gen/
 api/lbln/tests
 api/events/
 api/base/vendor

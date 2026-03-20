@@ -19,7 +19,7 @@ else
 fi
 
 echo "Stopping and cleaning Docker containers, volumes, and images..."
-docker-compose -p lifebox -f dev.docker-compose.yml --env-file "$ENV_FILE" down --volumes --rmi all
+docker compose -p lifebox -f dev.docker-compose.yml --env-file "$ENV_FILE" down --volumes --rmi all
 
 echo "Removing data directories..."
 sudo rm -rf ./data/pgadmin-data ./data/postgres-data ./data/postgres-init ./data/mariadb-data
@@ -31,4 +31,4 @@ echo "Pulling latest changes from Git..."
 git pull
 
 echo "Full cleanup completed. Current container status:"
-docker-compose -p lifebox -f dev.docker-compose.yml ps
+docker compose -p lifebox -f dev.docker-compose.yml ps

@@ -41,9 +41,9 @@ EOF
 fi
 
 # Start the containers
-docker-compose -p lifebox -f dev.docker-compose.yml up -d
+docker compose -p lifebox -f dev.docker-compose.yml up -d
 
 # Show status
 echo "Containers started. Running containers:"
-docker-compose -p lifebox -f dev.docker-compose.yml ps
+docker compose -p lifebox -f dev.docker-compose.yml ps
 echo "Services are now running. You can access the application at '${BASE_URL}'."
