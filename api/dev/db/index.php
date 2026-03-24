@@ -245,20 +245,239 @@ $erdData = generateErdData($schema);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lifebox M&E System Database Schema Documentation</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/fontawesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!--<link rel="stylesheet" href="../assets/css/dbdb.css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/api.css">
 
     <!-- Vis.js for ER Diagram -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/10.0.1/standalone/umd/vis-network.min.js"></script>
-    <!--<script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>-->
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/10.0.1/dist/dist/vis-network.min.css" rel="stylesheet">
-    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/vis-network.min.css" rel="stylesheet">-->
 
     <!-- jsPDF for PDF Export -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <style>
+        /* Login Modal Styles */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            backdrop-filter: blur(8px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .login-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 3px;
+            border-radius: 20px;
+            animation: slideUp 0.4s ease;
+            max-width: 450px;
+            width: 90%;
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 18px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .login-icon {
+            font-size: 70px;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .login-card h2 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .login-card p {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .input-group input.error {
+            border-color: #f44336;
+            animation: shake 0.5s;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            left: auto !important;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+
+        .password-toggle:hover {
+            color: #667eea;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-bottom: 15px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .error-message {
+            color: #f44336;
+            font-size: 13px;
+            margin-top: -15px;
+            margin-bottom: 15px;
+            text-align: left;
+            padding-left: 10px;
+        }
+
+        .timer-message {
+            color: #ff9800;
+            font-size: 13px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .attempts-left {
+            color: #666;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        .security-note {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-5px);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(5px);
+            }
+        }
+
+        /* Main content visibility */
+        .main-content,
+        .container {
+            display: none;
+        }
+
+        .main-content.visible,
+        .container.visible {
+            display: block;
+        }
+
         :root {
             --primary-color: #2c6e9b;
             --secondary-color: #3da58a;
@@ -294,7 +513,6 @@ $erdData = generateErdData($schema);
             z-index: 1000;
         }
 
-        /* Sidebar Header */
         .sidebar-header {
             display: flex;
             align-items: center;
@@ -302,45 +520,35 @@ $erdData = generateErdData($schema);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Link inside sidebar header (logo + text) */
         .sidebar-header a {
             display: flex;
             align-items: center;
             text-decoration: none;
-            /* Remove underline */
             color: white;
-            /* Set text color to white */
         }
 
-        /* Logo styling */
         .sidebar-header img {
             width: 40px;
-            /* Adjust logo size */
             height: auto;
             margin-right: 10px;
-            /* Space between logo and title */
         }
 
-        /* Sidebar header text styling */
         .sidebar-header h3 {
             margin: 0;
             font-size: 1.3rem;
             font-weight: bold;
         }
 
-        /* Sidebar Menu */
         .sidebar-menu {
             list-style: none;
             padding: 15px 0;
             margin: 0;
         }
 
-        /* Menu item styling */
         .sidebar-menu li {
             margin: 5px 0;
         }
 
-        /* Link inside the menu */
         .sidebar-menu a {
             color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
@@ -352,13 +560,11 @@ $erdData = generateErdData($schema);
             gap: 10px;
         }
 
-        /* Hover state for menu links */
         .sidebar-menu a:hover {
             background: rgba(255, 255, 255, 0.1);
             color: white;
         }
 
-        /* Icon styling within menu links */
         .sidebar-menu a i {
             width: 24px;
             text-align: center;
@@ -524,159 +730,47 @@ $erdData = generateErdData($schema);
             margin-top: 3px;
         }
 
-        /* Button Styles*/
-        /* Modern Button Styles for Bootstrap Compatibility */
+        /* Button Styles */
         button.btn {
             background-color: #ff3000;
-            appearance: none;
-            /* Remove any default button styling */
             border: none;
-            /* Remove border */
             outline: none;
-            /* Remove outline on focus (customize focus styles instead) */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* Modern sans-serif font */
             font-size: 1rem;
-            /* Slightly larger font */
             font-weight: 600;
-            /* Bold font weight for visibility */
             text-transform: uppercase;
-            /* Uppercase text for a modern touch */
             letter-spacing: 1px;
-            /* Slight letter-spacing for clarity */
             padding: 12px 24px;
-            /* Adequate padding for comfort */
             border-radius: 6px;
-            /* Rounded corners for a modern, soft look */
             cursor: pointer;
-            /* Pointer cursor on hover */
             transition: all 0.3s ease;
-            /* Smooth transition for hover effects */
             box-sizing: border-box;
-            /* Ensures padding doesn't mess with the width */
             box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
-            /* Subtle shadow for depth */
         }
 
-        /* Hover Effects */
-        button.btn:hover {
-            background-color: #0056b3;
-            /* Darker shade of blue on hover */
-            box-shadow: 0 6px 12px rgba(0, 123, 255, 0.4);
-            /* Slightly more prominent shadow */
-        }
-
-        /* Focus Effects */
-        button.btn:focus {
-            outline: 2px solid #ffcc00;
-            /* Yellow outline to indicate focus */
-            outline-offset: 2px;
-            /* Offset the outline a little */
-        }
-
-        /* Active Effects */
-        button.btn:active {
-            background-color: #004085;
-            /* Even darker shade when clicked */
-            box-shadow: 0 3px 6px rgba(0, 123, 255, 0.2);
-            /* Lighter shadow when pressed */
-        }
-
-        /* Disabled Button */
-        button.btn:disabled {
-            background-color: #ccc;
-            /* Light grey background */
-            color: #666;
-            /* Darker grey text */
-            cursor: not-allowed;
-            /* Not-allowed cursor */
-            box-shadow: none;
-            /* Remove shadow */
-        }
-
-        /* Bootstrap Color Classes Compatibility */
         button.btn-primary {
             background-color: #FF7700FF;
-            /* Primary Blue */
             color: #fff;
         }
 
         button.btn-secondary {
             background-color: #6c757d;
-            /* Secondary Grey */
             color: #fff;
         }
 
         button.btn-info {
             background-color: #17a2b8;
-            /* Info Cyan */
             color: #fff;
         }
 
         button.btn-success {
             background-color: #28a745;
-            /* Success Green */
             color: #fff;
         }
 
-        button.btn-warn {
-            background-color: #ff7000;
-            /* Info Cyan */
+        button.btn-danger {
+            background-color: #dc3545;
             color: #fff;
-        }
-
-
-        /* Custom hover states for different button types */
-        button.btn-primary:hover {
-            background-color: #B90047FF;
-        }
-
-        button.btn-secondary:hover {
-            background-color: #5a6268;
-        }
-
-        button.btn-info:hover {
-            background-color: #138496;
-        }
-
-        .btn-danger {
-            --bs-btn-color: #fff;
-            --bs-btn-bg: #dc3545;
-            --bs-btn-border-color: #dc3545;
-            --bs-btn-hover-color: #fff;
-            --bs-btn-hover-bg: #bb2d3b;
-            --bs-btn-hover-border-color: #b02a37;
-            --bs-btn-focus-shadow-rgb: 225, 83, 97;
-            --bs-btn-active-color: #fff;
-            --bs-btn-active-bg: #b02a37;
-            --bs-btn-active-border-color: #a52834;
-            --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-            --bs-btn-disabled-color: #fff;
-            --bs-btn-disabled-bg: #dc3545;
-            --bs-btn-disabled-border-color: #dc3545;
-        }
-
-        /* Add spacing between buttons if needed (e.g., for `.mr-2` Bootstrap utility class) */
-        button+button {
-            margin-left: 10px;
-        }
-
-        .rounded {
-            border-radius: var(--bs-border-radius) !important;
-        }
-
-        .py-1 {
-            padding-top: .25rem !important;
-            padding-bottom: .25rem !important;
-        }
-
-        .px-2 {
-            padding-right: .5rem !important;
-            padding-left: .5rem !important;
-        }
-
-        .w-auto {
-            width: auto !important;
         }
 
         .mobile-search-btn,
@@ -707,7 +801,6 @@ $erdData = generateErdData($schema);
 
         /* Content Styles */
         .content {
-            /*padding: 25px;*/
             padding: 0px;
         }
 
@@ -958,58 +1051,6 @@ $erdData = generateErdData($schema);
             color: #718096;
         }
 
-        /* Dark Mode */
-        .dark-mode {
-            background-color: var(--dark-bg);
-            color: var(--text-light);
-        }
-
-        .dark-mode .header,
-        .dark-mode .card,
-        .dark-mode .section,
-        .dark-mode .section-body {
-            background-color: #2d3748;
-            color: var(--text-light);
-        }
-
-        .dark-mode .card-header,
-        .dark-mode .tabs {
-            background-color: #1a202c;
-            border-color: #2d3748;
-        }
-
-        .dark-mode .data-table th {
-            background-color: #1a202c;
-            border-color: #2d3748;
-        }
-
-        .dark-mode .data-table td {
-            border-color: #2d3748;
-        }
-
-        .dark-mode .data-table tr:hover td {
-            background-color: #2d3748;
-        }
-
-        .dark-mode .tab {
-            background-color: #1a202c;
-            border-color: #2d3748;
-            color: var(--text-light);
-        }
-
-        .dark-mode .tab.active {
-            background-color: #2d3748;
-            color: white;
-        }
-
-        .dark-mode .search-container {
-            background-color: #c7cedc;
-        }
-
-        .dark-mode .search-container input {
-            color: var(--text-light);
-        }
-
         /* Responsive Design */
         @media (max-width: 992px) {
             .sidebar {
@@ -1038,24 +1079,18 @@ $erdData = generateErdData($schema);
             }
 
             .mobile-visible {
+                width: 100%;
+                margin-top: 22px;
+                margin-bottom: 20px;
                 display: flex !important;
             }
         }
 
-        .mobile-visible {
-            width: 100%;
-            margin-top: 22px;
-            margin-bottom: 20px;
-            display: flex !important;
-        }
-
-        /* Hide .mobile-search-btn on mobile devices */
         @media (max-width: 767px) {
             .mobile-search-btn {
                 display: none !important;
             }
         }
-
 
         @media (max-width: 768px) {
             .header {
@@ -1103,11 +1138,92 @@ $erdData = generateErdData($schema);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             z-index: 100;
         }
+
+        /* Dark Mode */
+        .dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+        }
+
+        .dark-mode .header,
+        .dark-mode .card,
+        .dark-mode .section,
+        .dark-mode .section-body {
+            background-color: #2d3748;
+            color: var(--text-light);
+        }
+
+        .dark-mode .card-header,
+        .dark-mode .tabs {
+            background-color: #1a202c;
+            border-color: #2d3748;
+        }
+
+        .dark-mode .data-table th {
+            background-color: #1a202c;
+            border-color: #2d3748;
+        }
+
+        .dark-mode .data-table td {
+            border-color: #2d3748;
+        }
+
+        .dark-mode .data-table tr:hover td {
+            background-color: #2d3748;
+        }
+
+        .dark-mode .tab {
+            background-color: #1a202c;
+            border-color: #2d3748;
+            color: var(--text-light);
+        }
+
+        .dark-mode .tab.active {
+            background-color: #2d3748;
+            color: white;
+        }
+
+        .dark-mode .search-container {
+            background-color: #c7cedc;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container">
+    <!-- Login Modal -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h2>Secure Database Access</h2>
+                <p>Please enter the master password to access the Lifebox M&E Database Documentation</p>
+
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="masterPassword" placeholder="Enter Master Password" autocomplete="off">
+                    <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                </div>
+
+                <button class="login-btn" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i> Access Documentation
+                </button>
+
+                <div id="errorMessage" class="error-message"></div>
+                <div id="timerMessage" class="timer-message"></div>
+                <div id="attemptsLeft" class="attempts-left"></div>
+
+                <div class="security-note">
+                    <i class="fas fa-info-circle"></i>
+                    This is a secure area. Unauthorized access attempts will be logged and may result in temporary lockout.
+                </div>
+                <p>The Credential Is Found on The Lifebox System Administration Playbook!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="mainContainer">
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
@@ -1155,7 +1271,7 @@ $erdData = generateErdData($schema);
         </aside>
 
         <!-- Main Content -->
-        <main class="main-content">
+        <main class="main-content" id="mainContent">
             <header class="header">
                 <div class="header-left">
                     <button class="go-to-start-btn" onclick="window.location.href='../';">
@@ -1219,27 +1335,21 @@ $erdData = generateErdData($schema);
                                 <div class="table-responsive">
                                     <table class="data-table">
                                         <thead>
-                                            <tr>
-                                                <th>Statistic</th>
-                                                <th>Value</th>
-                                            </tr>
+                                            32<th>Statistic</th>
+                                            <th>Value</th>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Total Tables</td>
-                                                <td><?php echo count($schema); ?></td>
+                                            32<td>Total Tables</td>
+                                            <td><?php echo count($schema); ?></td>
                                             </tr>
-                                            <tr>
-                                                <td>Primary Tables</td>
-                                                <td>projects, indicators, beneficiaries, evaluations</td>
+                                            32<td>Primary Tables</td>
+                                            <td>projects, indicators, beneficiaries, evaluations</td>
                                             </tr>
-                                            <tr>
-                                                <td>Reference Tables</td>
-                                                <td>locations, organizations, indicator_types, etc.</td>
+                                            32<td>Reference Tables</td>
+                                            <td>locations, organizations, indicator_types, etc.</td>
                                             </tr>
-                                            <tr>
-                                                <td>System Tables</td>
-                                                <td>users, roles, permissions, audit_logs</td>
+                                            32<td>System Tables</td>
+                                            <td>users, roles, permissions, audit_logs</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -1279,53 +1389,30 @@ try {
                         <div class="table-responsive">
                             <table class="data-table">
                                 <thead>
-                                    <tr>
-                                        <th>Entity</th>
-                                        <th>Description</th>
-                                        <th>Related Tables</th>
+                                    32<th>Entity</th>
+                                    <th>Description</th>
+                                    <th>Related Tables</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Projects</td>
-                                        <td>Core entity storing all project information</td>
-                                        <td>projects, project_indicators, project_beneficiaries</td>
+                                    32<td>Projects</td>
+                                    <td>Core entity storing all project information</td>
+                                    <td>projects, project_indicators, project_beneficiaries</td>
                                     </tr>
-                                    <tr>
-                                        <td>Indicators</td>
-                                        <td>Performance indicators and targets</td>
-                                        <td>indicators, indicator_values, indicator_types</td>
+                                    32<td>Indicators</td>
+                                    <td>Performance indicators and targets</td>
+                                    <td>indicators, indicator_values, indicator_types</td>
                                     </tr>
-                                    <tr>
-                                        <td>Beneficiaries</td>
-                                        <td>Beneficiary information and participation</td>
-                                        <td>beneficiaries, beneficiary_projects, beneficiary_evaluations</td>
+                                    32<td>Beneficiaries</td>
+                                    <td>Beneficiary information and participation</td>
+                                    <td>beneficiaries, beneficiary_projects, beneficiary_evaluations</td>
                                     </tr>
-                                    <tr>
-                                        <td>Evaluations</td>
-                                        <td>Evaluation data and results</td>
-                                        <td>evaluations, evaluation_indicators, evaluation_participants</td>
+                                    32<td>Evaluations</td>
+                                    <td>Evaluation data and results</td>
+                                    <td>evaluations, evaluation_indicators, evaluation_participants</td>
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
-
-                        <h3 class="mt-4 mb-2">Table Relationships</h3>
-                        <p>The database maintains referential integrity through foreign key relationships:</p>
-
-                        <div class="card mt-3">
-                            <div class="card-header">
-                                <h3 class="mb-0">Key Relationships</h3>
-                            </div>
-                            <div class="card-body">
-                                <ul>
-                                    <li><strong>projects ↔ project_indicators:</strong> One-to-many (One project can have multiple indicators)</li>
-                                    <li><strong>indicators ↔ indicator_values:</strong> One-to-many (One indicator can have multiple values over time)</li>
-                                    <li><strong>projects ↔ project_beneficiaries:</strong> One-to-many (One project can have many beneficiaries)</li>
-                                    <li><strong>beneficiaries ↔ beneficiary_evaluations:</strong> One-to-many (One beneficiary can participate in multiple evaluations)</li>
-                                    <li><strong>evaluations ↔ evaluation_indicators:</strong> One-to-many (One evaluation can measure multiple indicators)</li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </section>
@@ -1362,52 +1449,11 @@ try {
                         </div>
 
                         <div class="erd-diagram" id="erdDiagram"></div>
-
-                        <div class="mt-4">
-                            <h3>Key Entities and Relationships</h3>
-                            <div class="table-responsive">
-                                <table class="data-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Entity</th>
-                                            <th>Description</th>
-                                            <th>Relationships</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>projects</td>
-                                            <td>Main table storing project information</td>
-                                            <td>Related to indicators, beneficiaries and evaluations</td>
-                                        </tr>
-                                        <tr>
-                                            <td>indicators</td>
-                                            <td>Performance measurement indicators</td>
-                                            <td>Related to projects and indicator values</td>
-                                        </tr>
-                                        <tr>
-                                            <td>beneficiaries</td>
-                                            <td>Beneficiary information</td>
-                                            <td>Related to projects and evaluations</td>
-                                        </tr>
-                                        <tr>
-                                            <td>evaluations</td>
-                                            <td>Evaluation data collection</td>
-                                            <td>Related to projects, indicators and beneficiaries</td>
-                                        </tr>
-                                        <tr>
-                                            <td>users</td>
-                                            <td>System users and administrators</td>
-                                            <td>Related to roles and permissions</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
                     </div>
                 </section>
 
-                <!-- Tables Documentation -->
+                <!-- Rest of your sections remain the same -->
+                <!-- Tables Documentation Section -->
                 <section class="section fade-in" id="tables-documentation">
                     <div class="section-header">
                         <h2><i class="fas fa-table mr-2"></i> Tables Documentation</h2>
@@ -1424,9 +1470,6 @@ try {
                                         <?php if (!empty($tableData['foreign_keys'])): ?>
                                             <span class="badge badge-success"><?php echo count($tableData['foreign_keys']); ?> relationships</span>
                                         <?php endif; ?>
-                                        <?php if (!empty($tableData['comment'])): ?>
-                                            <span class="badge badge-info" title="<?php echo htmlspecialchars($tableData['comment']); ?>">Description</span>
-                                        <?php endif; ?>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -1434,57 +1477,34 @@ try {
                                         <div class="tab active" data-tab="structure">Structure</div>
                                         <div class="tab" data-tab="relationships">Relationships</div>
                                         <div class="tab" data-tab="sample-data">Sample Data</div>
-                                        <?php if (!empty($tableData['comment'])): ?>
-                                            <div class="tab" data-tab="description">Description</div>
-                                        <?php endif; ?>
                                     </div>
 
                                     <div class="tab-content active" id="structure-<?php echo $tableName; ?>">
                                         <div class="table-responsive">
                                             <table class="data-table">
                                                 <thead>
-                                                    <tr>
-                                                        <th>Column</th>
-                                                        <th>Type</th>
-                                                        <th>Nullable</th>
-                                                        <th>Default</th>
-                                                        <th>Key</th>
-                                                        <th>Description</th>
+                                                    32<th>Column</th>
+                                                    <th>Type</th>
+                                                    <th>Nullable</th>
+                                                    <th>Default</th>
+                                                    <th>Key</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php foreach ($tableData['columns'] as $column): ?>
-                                                        <tr>
-                                                            <td class="field-name"><?php echo $column['Field']; ?></td>
-                                                            <td class="field-type"><?php echo $column['Type']; ?></td>
-                                                            <td><?php echo $column['Null'] === 'YES' ? 'Yes' : 'No'; ?></td>
-                                                            <td><?php echo $column['Default'] ?? 'NULL'; ?></td>
-                                                            <td>
-                                                                <?php if ($column['Key'] === 'PRI'): ?>
-                                                                    <span class="field-key PRI">PRIMARY</span>
-                                                                <?php elseif ($column['Key'] === 'MUL'): ?>
-                                                                    <span class="field-key MUL">FOREIGN</span>
-                                                                <?php elseif ($column['Key'] === 'UNI'): ?>
-                                                                    <span class="field-key UNI">UNIQUE</span>
-                                                                <?php endif; ?>
-                                                            </td>
-                                                            <td>
-                                                                <?php
-                                                                $desc = '';
-                                                                if (strpos($column['Field'], 'id') !== false) {
-                                                                    $desc = 'Identifier field';
-                                                                } elseif (strpos($column['Field'], 'name') !== false) {
-                                                                    $desc = 'Name or title field';
-                                                                } elseif (strpos($column['Field'], 'date') !== false || strpos($column['Field'], 'created') !== false) {
-                                                                    $desc = 'Date/time field';
-                                                                } elseif (strpos($column['Field'], 'email') !== false) {
-                                                                    $desc = 'Email address field';
-                                                                } elseif (strpos($column['Field'], 'phone') !== false) {
-                                                                    $desc = 'Phone number field';
-                                                                }
-                                                                echo $desc;
-                                                                ?>
-                                                            </td>
+                                                        32<td class="field-name"><?php echo $column['Field']; ?></td>
+                                                        <td class="field-type"><?php echo $column['Type']; ?></td>
+                                                        <td><?php echo $column['Null'] === 'YES' ? 'Yes' : 'No'; ?></td>
+                                                        <td><?php echo $column['Default'] ?? 'NULL'; ?></td>
+                                                        <td>
+                                                            <?php if ($column['Key'] === 'PRI'): ?>
+                                                                <span class="field-key PRI">PRIMARY</span>
+                                                            <?php elseif ($column['Key'] === 'MUL'): ?>
+                                                                <span class="field-key MUL">FOREIGN</span>
+                                                            <?php elseif ($column['Key'] === 'UNI'): ?>
+                                                                <span class="field-key UNI">UNIQUE</span>
+                                                            <?php endif; ?>
+                                                        </td>
                                                         </tr>
                                                     <?php endforeach; ?>
                                                 </tbody>
@@ -1496,19 +1516,16 @@ try {
                                         <?php if (!empty($tableData['foreign_keys'])): ?>
                                             <div class="table-responsive">
                                                 <table class="data-table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Column</th>
-                                                            <th>References</th>
-                                                            <th>Relationship</th>
+                                                    <thead>32<th>Column</th>
+                                                        <th>References</th>
+                                                        <th>Relationship</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <?php foreach ($tableData['foreign_keys'] as $fk): ?>
-                                                            <tr>
-                                                                <td class="field-name"><?php echo $fk['COLUMN_NAME']; ?></td>
-                                                                <td><?php echo $fk['REFERENCED_TABLE_NAME']; ?> (<?php echo $fk['REFERENCED_COLUMN_NAME']; ?>)</td>
-                                                                <td>Many <?php echo $tableName; ?> belong to one <?php echo $fk['REFERENCED_TABLE_NAME']; ?></td>
+                                                            32<td class="field-name"><?php echo $fk['COLUMN_NAME']; ?></td>
+                                                            <td><?php echo $fk['REFERENCED_TABLE_NAME']; ?> (<?php echo $fk['REFERENCED_COLUMN_NAME']; ?>)</td>
+                                                            <td>Many <?php echo $tableName; ?> belong to one <?php echo $fk['REFERENCED_TABLE_NAME']; ?></td>
                                                             </tr>
                                                         <?php endforeach; ?>
                                                     </tbody>
@@ -1516,48 +1533,6 @@ try {
                                             </div>
                                         <?php else: ?>
                                             <p class="text-muted">This table has no foreign key relationships.</p>
-                                        <?php endif; ?>
-
-                                        <?php
-                                        // Find tables that reference this table
-                                        $referencedBy = [];
-                                        foreach ($schema as $otherTable => $otherData) {
-                                            foreach ($otherData['foreign_keys'] as $fk) {
-                                                if ($fk['REFERENCED_TABLE_NAME'] === $tableName) {
-                                                    $referencedBy[] = [
-                                                        'table' => $otherTable,
-                                                        'column' => $fk['COLUMN_NAME'],
-                                                        'ref_column' => $fk['REFERENCED_COLUMN_NAME']
-                                                    ];
-                                                }
-                                            }
-                                        }
-                                        ?>
-
-                                        <?php if (!empty($referencedBy)): ?>
-                                            <h4 class="mt-4">Referenced By</h4>
-                                            <div class="table-responsive">
-                                                <table class="data-table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Table</th>
-                                                            <th>Column</th>
-                                                            <th>References</th>
-                                                            <th>Relationship</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php foreach ($referencedBy as $ref): ?>
-                                                            <tr>
-                                                                <td><?php echo $ref['table']; ?></td>
-                                                                <td class="field-name"><?php echo $ref['column']; ?></td>
-                                                                <td><?php echo $tableName; ?> (<?php echo $ref['ref_column']; ?>)</td>
-                                                                <td>One <?php echo $tableName; ?> has many <?php echo $ref['table']; ?></td>
-                                                            </tr>
-                                                        <?php endforeach; ?>
-                                                    </tbody>
-                                                </table>
-                                            </div>
                                         <?php endif; ?>
                                     </div>
 
@@ -1567,41 +1542,30 @@ try {
                                             <div class="table-responsive">
                                                 <table class="data-table sample-data-table">
                                                     <thead>
-                                                        <tr>
-                                                            <?php foreach (array_keys($sampleData[0]) as $column): ?>
-                                                                <th><?php echo $column; ?></th>
-                                                            <?php endforeach; ?>
+                                                        32
+                                                        <?php foreach (array_keys($sampleData[0]) as $column): ?>
+                                                            <th><?php echo $column; ?></th>
+                                                        <?php endforeach; ?>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <?php foreach ($sampleData as $row): ?>
-                                                            <tr>
-                                                                <?php foreach ($row as $value): ?>
-                                                                    <td title="<?php echo htmlspecialchars((string) $value ?? ''); ?>">
-                                                                        <?php echo htmlspecialchars((string) $value ?? ''); ?>
-                                                                    </td>
-                                                                <?php endforeach; ?>
+                                                            32
+                                                            <?php foreach ($row as $value): ?>
+                                                                <td title="<?php echo htmlspecialchars((string) $value ?? ''); ?>">
+                                                                    <?php echo htmlspecialchars((string) $value ?? ''); ?>
+                                                                </td>
+                                                            <?php endforeach; ?>
                                                             </tr>
                                                         <?php endforeach; ?>
                                                     </tbody>
                                                 </table>
                                             </div>
-                                            <p class="text-muted mt-2">Showing <?php echo count($sampleData); ?> sample records. Hover over cells to see full content.</p>
+                                            <p class="text-muted mt-2">Showing <?php echo count($sampleData); ?> sample records.</p>
                                         <?php else: ?>
                                             <p class="text-muted">No sample data available for this table.</p>
                                         <?php endif; ?>
                                     </div>
-
-                                    <?php if (!empty($tableData['comment'])): ?>
-                                        <div class="tab-content" id="description-<?php echo $tableName; ?>">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h4>Table Description</h4>
-                                                    <p><?php echo htmlspecialchars($tableData['comment']); ?></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php endif; ?>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -1614,114 +1578,23 @@ try {
                         <h2><i class="fas fa-code mr-2"></i> Sample Queries</h2>
                     </div>
                     <div class="section-body">
-                        <p>This section provides practical SQL query examples for common operations with the database.</p>
-
-                        <div class="card mt-3">
+                        <div class="card">
                             <div class="card-header">
-                                <h3 class="mb-0">Basic CRUD Operations</h3>
+                                <h3>Basic CRUD Operations</h3>
                             </div>
                             <div class="card-body">
-                                <h4>Create (Insert)</h4>
                                 <pre><code>-- Insert a new project
-INSERT INTO projects (
-    project_name, start_date, end_date, budget
-) VALUES (
-    'Community Health Initiative', '2023-06-01', '2024-05-31', 500000
-);
+INSERT INTO projects (project_name, start_date, end_date, budget) 
+VALUES ('Community Health Initiative', '2023-06-01', '2024-05-31', 500000);
 
--- Insert a new indicator
-INSERT INTO indicators (
-    indicator_name, indicator_type, target_value, unit
-) VALUES (
-    'Number of trained health workers', 'Output', 50, 'persons'
-);</code></pre>
+-- Get all active projects
+SELECT * FROM projects WHERE end_date > CURRENT_DATE ORDER BY start_date;
 
-                                <h4 class="mt-4">Read (Select)</h4>
-                                <pre><code>-- Get all active projects
-SELECT * FROM projects
-WHERE end_date > CURRENT_DATE
-ORDER BY start_date;
+-- Update a project's end date
+UPDATE projects SET end_date = '2024-08-31' WHERE project_id = 123;
 
--- Get beneficiaries with their project details
-SELECT b.first_name, b.last_name, p.project_name, p.start_date
-FROM beneficiaries b
-JOIN project_beneficiaries pb ON b.beneficiary_id = pb.beneficiary_id
-JOIN projects p ON pb.project_id = p.project_id
-WHERE p.project_id = 5;</code></pre>
-
-                                <h4 class="mt-4">Update</h4>
-                                <pre><code>-- Update a project's end date
-UPDATE projects
-SET end_date = '2024-08-31'
-WHERE project_id = 123;
-
--- Update indicator target
-UPDATE indicators
-SET target_value = 75
-WHERE indicator_id = 10;</code></pre>
-
-                                <h4 class="mt-4">Delete</h4>
-                                <pre><code>-- Delete a beneficiary
-DELETE FROM beneficiaries
-WHERE beneficiary_id = 456;
-
--- Delete an evaluation (with cascade if configured)
-DELETE FROM evaluations
-WHERE evaluation_id = 20;</code></pre>
-                            </div>
-                        </div>
-                        <div class="card mt-4">
-                            <div class="card-header">
-                                <h3 class="mb-0">Advanced Queries</h3>
-                            </div>
-                            <div class="card-body">
-                                <h4>Project Performance</h4>
-                                <pre><code>-- Project progress against targets
-SELECT 
-    p.project_name,
-    i.indicator_name,
-    i.target_value,
-    COALESCE(MAX(iv.value), 0) AS current_value,
-    ROUND(COALESCE(MAX(iv.value), 0) * 100.0 / i.target_value, 2) AS progress_percent
-FROM projects p
-JOIN project_indicators pi ON p.project_id = pi.project_id
-JOIN indicators i ON pi.indicator_id = i.indicator_id
-LEFT JOIN indicator_values iv ON i.indicator_id = iv.indicator_id
-GROUP BY p.project_name, i.indicator_name, i.target_value
-ORDER BY progress_percent DESC;
-
--- Beneficiaries by location
-SELECT 
-    l.location_name,
-    COUNT(DISTINCT b.beneficiary_id) AS beneficiary_count
-FROM beneficiaries b
-JOIN locations l ON b.location_id = l.location_id
-GROUP BY l.location_name
-ORDER BY beneficiary_count DESC;</code></pre>
-
-                                <h4 class="mt-4">Evaluation Analysis</h4>
-                                <pre><code>-- Evaluation results by indicator
-SELECT 
-    e.evaluation_name,
-    i.indicator_name,
-    AVG(ei.result_value) AS average_result,
-    MIN(ei.result_value) AS min_result,
-    MAX(ei.result_value) AS max_result
-FROM evaluations e
-JOIN evaluation_indicators ei ON e.evaluation_id = ei.evaluation_id
-JOIN indicators i ON ei.indicator_id = i.indicator_id
-GROUP BY e.evaluation_name, i.indicator_name;
-
--- Beneficiaries participating in multiple evaluations
-SELECT 
-    b.first_name, 
-    b.last_name,
-    COUNT(DISTINCT ep.evaluation_id) AS evaluations_attended
-FROM beneficiaries b
-JOIN evaluation_participants ep ON b.beneficiary_id = ep.beneficiary_id
-GROUP BY b.first_name, b.last_name
-HAVING COUNT(DISTINCT ep.evaluation_id) > 1
-ORDER BY evaluations_attended DESC;</code></pre>
+-- Delete a beneficiary
+DELETE FROM beneficiaries WHERE beneficiary_id = 456;</code></pre>
                             </div>
                         </div>
                     </div>
@@ -1735,40 +1608,16 @@ ORDER BY evaluations_attended DESC;</code></pre>
                     <div class="section-body">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="mb-0">Database Usage Guidelines</h3>
+                                <h3>Database Usage Guidelines</h3>
                             </div>
                             <div class="card-body">
-                                <h4>General Guidelines</h4>
                                 <ul>
                                     <li>Always use parameterized queries to prevent SQL injection</li>
                                     <li>Create appropriate indexes for frequently queried columns</li>
                                     <li>Regularly backup the database using pg_dump</li>
                                     <li>Use transactions for operations that modify multiple related tables</li>
-                                    <li>Follow the established naming conventions for consistency</li>
-                                </ul>
-
-                                <h4 class="mt-4">Performance Tips</h4>
-                                <ul>
                                     <li>Use EXPLAIN ANALYZE to optimize query performance</li>
-                                    <li>Consider using materialized views for complex reports</li>
-                                    <li>Use partial indexes for filtered queries</li>
-                                    <li>Regularly analyze and vacuum the database</li>
-                                </ul>
-
-                                <h4 class="mt-4">Data Integrity</h4>
-                                <ul>
-                                    <li>Use foreign key constraints to maintain referential integrity</li>
-                                    <li>Use CHECK constraints for domain integrity</li>
-                                    <li>Use appropriate data types for each column</li>
-                                    <li>Implement triggers for complex validation rules</li>
-                                </ul>
-
-                                <h4 class="mt-4">Security Considerations</h4>
-                                <ul>
                                     <li>Follow the principle of least privilege for database users</li>
-                                    <li>Encrypt sensitive data using pgcrypto</li>
-                                    <li>Use SSL for database connections</li>
-                                    <li>Regularly review and audit user permissions</li>
                                 </ul>
                             </div>
                         </div>
@@ -1783,6 +1632,203 @@ ORDER BY evaluations_attended DESC;</code></pre>
     </div>
 
     <script>
+        // Password protection system
+        const MASTER_PASSWORD = "Lifebox@Mne7";
+        const MAX_ATTEMPTS = 3;
+        const LOCKOUT_DURATION = 5 * 60 * 1000;
+        let failedAttempts = 0;
+        let lockoutUntil = null;
+
+        function isAuthenticated() {
+            const authTime = sessionStorage.getItem('lifebox_db_auth_time');
+            if (authTime && (Date.now() - parseInt(authTime) < 24 * 60 * 60 * 1000)) {
+                return true;
+            }
+            return false;
+        }
+
+        function setAuthenticated() {
+            sessionStorage.setItem('lifebox_db_auth_time', Date.now().toString());
+        }
+
+        function isLockedOut() {
+            return lockoutUntil && Date.now() < lockoutUntil;
+        }
+
+        function getRemainingLockoutSeconds() {
+            if (lockoutUntil) {
+                return Math.ceil((lockoutUntil - Date.now()) / 1000);
+            }
+            return 0;
+        }
+
+        function updateLockoutUI() {
+            const loginBtn = document.getElementById('loginBtn');
+            const passwordInput = document.getElementById('masterPassword');
+            const timerMessage = document.getElementById('timerMessage');
+            const attemptsLeft = document.getElementById('attemptsLeft');
+
+            if (isLockedOut()) {
+                const remainingSeconds = getRemainingLockoutSeconds();
+                const minutes = Math.floor(remainingSeconds / 60);
+                const seconds = remainingSeconds % 60;
+
+                loginBtn.disabled = true;
+                loginBtn.classList.add('disabled');
+                passwordInput.disabled = true;
+                timerMessage.innerHTML = `<i class="fas fa-hourglass-half"></i> Too many failed attempts. Please wait ${minutes}:${seconds.toString().padStart(2, '0')} before trying again.`;
+                timerMessage.style.display = 'block';
+
+                if (window.lockoutInterval) clearInterval(window.lockoutInterval);
+                window.lockoutInterval = setInterval(() => {
+                    if (isLockedOut()) {
+                        const remaining = getRemainingLockoutSeconds();
+                        const mins = Math.floor(remaining / 60);
+                        const secs = remaining % 60;
+                        timerMessage.innerHTML = `<i class="fas fa-hourglass-half"></i> Please wait ${mins}:${secs.toString().padStart(2, '0')}`;
+                    } else {
+                        clearInterval(window.lockoutInterval);
+                        resetLoginState();
+                    }
+                }, 1000);
+            } else {
+                if (window.lockoutInterval) clearInterval(window.lockoutInterval);
+                loginBtn.disabled = false;
+                loginBtn.classList.remove('disabled');
+                passwordInput.disabled = false;
+                timerMessage.style.display = 'none';
+                attemptsLeft.style.display = 'block';
+                attemptsLeft.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${MAX_ATTEMPTS - failedAttempts} attempt(s) remaining before 5-minute lockout`;
+            }
+        }
+
+        function resetLoginState() {
+            const loginBtn = document.getElementById('loginBtn');
+            const passwordInput = document.getElementById('masterPassword');
+            const timerMessage = document.getElementById('timerMessage');
+            const errorMessage = document.getElementById('errorMessage');
+
+            loginBtn.disabled = false;
+            loginBtn.classList.remove('disabled');
+            passwordInput.disabled = false;
+            timerMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            passwordInput.value = '';
+            passwordInput.classList.remove('error');
+        }
+
+        function showError(message) {
+            const errorMessage = document.getElementById('errorMessage');
+            const passwordInput = document.getElementById('masterPassword');
+
+            errorMessage.innerHTML = `<i class="fas fa-times-circle"></i> ${message}`;
+            errorMessage.style.display = 'block';
+            passwordInput.classList.add('error');
+
+            setTimeout(() => {
+                passwordInput.classList.remove('error');
+            }, 500);
+        }
+
+        function attemptLogin() {
+            if (isLockedOut()) {
+                showError('Account is temporarily locked. Please wait.');
+                updateLockoutUI();
+                return;
+            }
+
+            const passwordInput = document.getElementById('masterPassword');
+            const enteredPassword = passwordInput.value;
+
+            if (enteredPassword === MASTER_PASSWORD) {
+                setAuthenticated();
+                document.getElementById('loginModal').classList.remove('active');
+                document.getElementById('mainContainer').classList.add('visible');
+                document.getElementById('mainContent').classList.add('visible');
+                failedAttempts = 0;
+                sessionStorage.setItem('lifebox_db_failed_attempts', '0');
+            } else {
+                failedAttempts++;
+                sessionStorage.setItem('lifebox_db_failed_attempts', failedAttempts.toString());
+
+                const remainingAttempts = MAX_ATTEMPTS - failedAttempts;
+
+                if (failedAttempts >= MAX_ATTEMPTS) {
+                    lockoutUntil = Date.now() + LOCKOUT_DURATION;
+                    sessionStorage.setItem('lifebox_db_lockout_until', lockoutUntil.toString());
+                    sessionStorage.setItem('lifebox_db_failed_attempts', '0');
+                    showError(`Too many failed attempts! Access locked for 5 minutes.`);
+                    updateLockoutUI();
+                } else {
+                    showError(`Incorrect password. ${remainingAttempts} attempt(s) remaining.`);
+                    const attemptsLeft = document.getElementById('attemptsLeft');
+                    attemptsLeft.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${remainingAttempts} attempt(s) remaining before 5-minute lockout`;
+                }
+
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        }
+
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('masterPassword');
+            const toggleIcon = document.getElementById('togglePassword');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+
+        function initProtection() {
+            const savedFailedAttempts = sessionStorage.getItem('lifebox_db_failed_attempts');
+            const savedLockoutUntil = sessionStorage.getItem('lifebox_db_lockout_until');
+
+            if (savedFailedAttempts) {
+                failedAttempts = parseInt(savedFailedAttempts);
+            }
+
+            if (savedLockoutUntil) {
+                const savedTime = parseInt(savedLockoutUntil);
+                if (Date.now() < savedTime) {
+                    lockoutUntil = savedTime;
+                } else {
+                    sessionStorage.removeItem('lifebox_db_lockout_until');
+                }
+            }
+
+            if (isAuthenticated()) {
+                document.getElementById('loginModal').classList.remove('active');
+                document.getElementById('mainContainer').classList.add('visible');
+                document.getElementById('mainContent').classList.add('visible');
+                return;
+            }
+
+            document.getElementById('loginModal').classList.add('active');
+            document.getElementById('mainContainer').classList.remove('visible');
+            document.getElementById('mainContent').classList.remove('visible');
+
+            if (isLockedOut()) {
+                updateLockoutUI();
+            } else {
+                const attemptsLeft = document.getElementById('attemptsLeft');
+                attemptsLeft.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${MAX_ATTEMPTS - failedAttempts} attempt(s) remaining before 5-minute lockout`;
+            }
+
+            document.getElementById('loginBtn').addEventListener('click', attemptLogin);
+            document.getElementById('togglePassword').addEventListener('click', togglePasswordVisibility);
+            document.getElementById('masterPassword').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    attemptLogin();
+                }
+            });
+        }
+
         // Mobile menu toggle
         document.getElementById('mobileMenuBtn').addEventListener('click', function() {
             document.getElementById('sidebar').classList.toggle('show');
@@ -1799,18 +1845,11 @@ ORDER BY evaluations_attended DESC;</code></pre>
                 const tabId = this.getAttribute('data-tab');
                 const parentCard = this.closest('.card');
 
-                // Remove active class from all tabs in this card
                 parentCard.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-
-                // Add active class to clicked tab
                 this.classList.add('active');
-
-                // Hide all tab contents in this card
                 parentCard.querySelectorAll('.tab-content').forEach(content => {
                     content.classList.remove('active');
                 });
-
-                // Show the selected tab content
                 parentCard.querySelector(`#${tabId}-${parentCard.id.split('-')[1]}`).classList.add('active');
             });
         });
@@ -1824,185 +1863,94 @@ ORDER BY evaluations_attended DESC;</code></pre>
             });
         });
 
-        // Table of contents navigation
-        document.querySelectorAll('.sidebar-menu a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                if (this.getAttribute('href').startsWith('#')) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href').substring(1);
-                    const targetElement = document.getElementById(targetId);
-
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 20,
-                            behavior: 'smooth'
-                        });
-
-                        // Close mobile menu if open
-                        document.getElementById('sidebar').classList.remove('show');
-                    }
-                }
-            });
-        });
-
         // Search functionality
         function setupSearch(inputId, resultsId) {
             const searchInput = document.getElementById(inputId);
             const searchResults = document.getElementById(resultsId);
-
             if (!searchInput || !searchResults) return;
 
-            // Create search index
-            const searchIndex = [];
-
-            // Index tables
-            <?php foreach ($schema as $tableName => $tableData): ?>
-                searchIndex.push({
-                    type: 'Table',
-                    name: '<?php echo $tableName; ?>',
-                    id: 'table-<?php echo str_replace('_', '-', $tableName); ?>',
-                    context: 'Database table',
-                    columns: <?php echo json_encode(array_column($tableData['columns'], 'Field')); ?>
-                });
-
-                // Index columns
-                <?php foreach ($tableData['columns'] as $column): ?>
-                    searchIndex.push({
-                        type: 'Column',
-                        name: '<?php echo $column['Field']; ?>',
-                        id: 'table-<?php echo str_replace('_', '-', $tableName); ?>',
-                        context: 'Column in <?php echo $tableName; ?> table',
-                        table: '<?php echo $tableName; ?>'
-                    });
-                <?php endforeach; ?>
-            <?php endforeach; ?>
-
-            // Index sections
-            const sections = [{
+            const searchIndex = [{
                     type: 'Section',
                     name: 'Introduction',
-                    id: 'introduction',
-                    context: 'Documentation section'
+                    id: 'introduction'
                 },
                 {
                     type: 'Section',
                     name: 'Getting Started',
-                    id: 'getting-started',
-                    context: 'Documentation section'
+                    id: 'getting-started'
                 },
                 {
                     type: 'Section',
                     name: 'ER Diagram',
-                    id: 'erd',
-                    context: 'Documentation section'
+                    id: 'erd'
                 },
                 {
                     type: 'Section',
                     name: 'Sample Queries',
-                    id: 'sample-queries',
-                    context: 'Documentation section'
+                    id: 'sample-queries'
                 },
                 {
                     type: 'Section',
                     name: 'Best Practices',
-                    id: 'best-practices',
-                    context: 'Documentation section'
+                    id: 'best-practices'
                 }
             ];
 
-            searchIndex.push(...sections);
+            <?php foreach ($schema as $tableName => $tableData): ?>
+                searchIndex.push({
+                    type: 'Table',
+                    name: '<?php echo $tableName; ?>',
+                    id: 'table-<?php echo str_replace('_', '-', $tableName); ?>'
+                });
+                <?php foreach ($tableData['columns'] as $column): ?>
+                    searchIndex.push({
+                        type: 'Column',
+                        name: '<?php echo $column['Field']; ?>',
+                        id: 'table-<?php echo str_replace('_', '-', $tableName); ?>'
+                    });
+                <?php endforeach; ?>
+            <?php endforeach; ?>
 
             searchInput.addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase();
-
-                if (searchTerm.length < 2) {
+                const term = this.value.toLowerCase();
+                searchResults.innerHTML = '';
+                if (term.length < 2) {
                     searchResults.classList.remove('show');
                     return;
                 }
 
-                const results = searchIndex.filter(item =>
-                    item.name.toLowerCase().includes(searchTerm) ||
-                    (item.context && item.context.toLowerCase().includes(searchTerm)) ||
-                    (item.columns && item.columns.some(col => col.toLowerCase().includes(searchTerm)))
-                );
-
-                displayResults(results);
-            });
-
-            function displayResults(results) {
-                searchResults.innerHTML = '';
-
+                const results = searchIndex.filter(item => item.name.toLowerCase().includes(term));
                 if (results.length === 0) {
-                    searchResults.classList.add('show');
-                    searchResults.innerHTML = '<div class="search-result-item">No results found</div>';
-                    return;
+                    searchResults.innerHTML = '<div class="search-result-item">No results</div>';
                 }
 
                 results.slice(0, 10).forEach(result => {
-                    const item = document.createElement('div');
-                    item.className = 'search-result-item';
-
-                    let html = `
-                    <div>
-                        <span class="result-type">${result.type}</span>
-                        <span class="result-name">${result.name}</span>
-                        <div class="result-context">${result.context}</div>
-                `;
-
-                    if (result.columns) {
-                        const matchingColumns = result.columns.filter(col =>
-                            col.toLowerCase().includes(searchInput.value.toLowerCase())
-                        );
-
-                        if (matchingColumns.length > 0) {
-                            html += `<div class="result-context">Matching columns: ${matchingColumns.join(', ')}</div>`;
-                        }
-                    }
-
-                    html += `</div>`;
-                    item.innerHTML = html;
-
-                    item.addEventListener('click', function() {
-                        const targetElement = document.getElementById(result.id);
-                        if (targetElement) {
-                            window.scrollTo({
-                                top: targetElement.offsetTop - 20,
-                                behavior: 'smooth'
-                            });
-
-                            // Highlight the target section
-                            targetElement.style.animation = 'none';
-                            void targetElement.offsetWidth; // Trigger reflow
-                            targetElement.style.animation = 'fadeIn 0.3s ease-out forwards';
-
-                            // Close search results
-                            searchResults.classList.remove('show');
-                            searchInput.value = '';
-
-                            // Close mobile search if open
-                            document.getElementById('mobileSearchContainer').classList.add('d-none');
-                        }
-                    });
-
-                    searchResults.appendChild(item);
+                    const div = document.createElement('div');
+                    div.className = 'search-result-item';
+                    div.innerHTML = `<span class="result-type">${result.type}</span> ${result.name}`;
+                    div.onclick = () => {
+                        document.getElementById(result.id).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                        searchResults.classList.remove('show');
+                        searchInput.value = '';
+                    };
+                    searchResults.appendChild(div);
                 });
-
                 searchResults.classList.add('show');
-            }
+            });
 
-            // Close search results when clicking outside
-            document.addEventListener('click', function(e) {
+            document.addEventListener('click', (e) => {
                 if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
                     searchResults.classList.remove('show');
                 }
             });
         }
 
-        // Initialize search for both desktop and mobile
         setupSearch('searchInput', 'searchResults');
         setupSearch('mobileSearchInput', 'mobileSearchResults');
 
-        // Theme toggle functionality
+        // Theme toggle
         const themeToggle = document.getElementById('themeToggle');
         themeToggle.addEventListener('click', function() {
             document.body.classList.toggle('dark-mode');
@@ -2033,98 +1981,40 @@ ORDER BY evaluations_attended DESC;</code></pre>
                 return palette[Math.floor(Math.random() * palette.length)];
             }
 
-            function generateStyledNodes(rawNodes, theme) {
-                return rawNodes.map(node => {
-                    const bgColor = getRandomColorFromTheme(theme);
-                    const borderColor = getRandomColorFromTheme(theme);
-                    return {
-                        ...node,
-                        color: {
-                            background: bgColor,
-                            border: borderColor,
-                            highlight: {
-                                background: borderColor,
-                                border: bgColor
-                            },
-                            hover: {
-                                background: borderColor,
-                                border: bgColor
-                            }
-                        },
-                        font: {
-                            color: theme === 'dark' ? '#ffffff' : '#000000'
-                        }
-                    };
-                });
-            }
-
-            function generateStyledEdges(rawEdges, theme) {
-                return rawEdges.map(edge => ({
-                    ...edge,
-                    color: {
-                        color: getRandomColorFromTheme(theme),
-                        highlight: getRandomColorFromTheme(theme),
-                        hover: getRandomColorFromTheme(theme),
-                        inherit: false
-                    }
-                }));
-            }
-
             const rawNodes = <?php echo json_encode($erdData['nodes']); ?>;
             const rawEdges = <?php echo json_encode($erdData['edges']); ?>;
 
-            let nodes = new vis.DataSet(generateStyledNodes(rawNodes, currentTheme));
-            let edges = new vis.DataSet(generateStyledEdges(rawEdges, currentTheme));
+            let nodes = new vis.DataSet(rawNodes.map(node => ({
+                ...node,
+                color: {
+                    background: getRandomColorFromTheme(currentTheme),
+                    border: getRandomColorFromTheme(currentTheme)
+                }
+            })));
+            let edges = new vis.DataSet(rawEdges.map(edge => ({
+                ...edge,
+                color: {
+                    color: getRandomColorFromTheme(currentTheme)
+                }
+            })));
 
             const data = {
                 nodes,
                 edges
             };
-
             const options = {
                 layout: {
-                    improvedLayout: true,
-                    hierarchical: {
-                        enabled: false,
-                        direction: 'UD',
-                        sortMethod: 'directed'
-                    }
+                    improvedLayout: true
                 },
                 physics: {
                     enabled: true,
-                    solver: 'forceAtlas2Based',
-                    forceAtlas2Based: {
-                        theta: 0.5,
-                        gravitationalConstant: -50,
-                        centralGravity: 0.01,
-                        springConstant: 0.08,
-                        springLength: 100,
-                        damping: 0.4,
-                        avoidOverlap: 0
-                    },
-                    maxVelocity: 50,
-                    minVelocity: 0.1,
-                    stabilization: {
-                        enabled: true,
-                        iterations: 1000,
-                        updateInterval: 100,
-                        onlyDynamicEdges: false,
-                        fit: true
-                    },
-                    timestep: 0.5,
-                    adaptiveTimestep: true,
-                    wind: {
-                        x: 0,
-                        y: 0
-                    }
+                    solver: 'forceAtlas2Based'
                 },
                 nodes: {
                     shape: 'box',
                     margin: 10,
                     font: {
-                        size: 14,
-                        face: 'Roboto',
-                        multi: true
+                        size: 14
                     },
                     borderWidth: 1,
                     shadow: true
@@ -2133,78 +2023,30 @@ ORDER BY evaluations_attended DESC;</code></pre>
                     smooth: true,
                     arrows: {
                         to: {
-                            enabled: true,
-                            scaleFactor: 0.6
+                            enabled: true
                         }
                     },
                     font: {
-                        size: 11,
-                        face: 'Roboto',
-                        align: 'middle'
-                    },
-                    width: 1
+                        size: 11
+                    }
                 },
                 interaction: {
                     hover: true,
-                    tooltipDelay: 300,
-                    hideEdgesOnDrag: false
+                    tooltipDelay: 300
                 }
             };
 
             const network = new vis.Network(container, data, options);
 
-            network.on("hoverNode", function(params) {
-                const node = nodes.get(params.node);
-                const tooltip = document.createElement('div');
-                tooltip.className = 'vis-tooltip';
-                let html = `<strong>${node.label}</strong>`;
-                if (node.columns) {
-                    html += '<ul>' + node.columns.map(col => `<li>${col}</li>`).join('') + '</ul>';
-                }
+            document.getElementById('fitDiagram').addEventListener('click', () => network.fit({
+                animation: true
+            }));
+            document.getElementById('centerDiagram').addEventListener('click', () => network.focus(0, {
+                scale: 1,
+                animation: true
+            }));
 
-                tooltip.innerHTML = html;
-                tooltip.style.position = 'absolute';
-                tooltip.style.background = '#333';
-                tooltip.style.color = '#fff';
-                tooltip.style.padding = '10px';
-                tooltip.style.borderRadius = '6px';
-                tooltip.style.zIndex = 9999;
-
-                document.body.appendChild(tooltip);
-
-                network.on('mousemove', function(event) {
-                    tooltip.style.left = event.pointer.DOM.x + 10 + 'px';
-                    tooltip.style.top = event.pointer.DOM.y + 10 + 'px';
-                });
-            });
-
-            network.on("blurNode", function() {
-                const tooltip = document.querySelector('.vis-tooltip');
-                if (tooltip) tooltip.remove();
-            });
-
-            network.once("stabilizationIterationsDone", function() {
-                network.fit({
-                    animation: {
-                        duration: 800
-                    }
-                });
-            });
-
-            document.getElementById('fitDiagram').addEventListener('click', () => {
-                network.fit({
-                    animation: true
-                });
-            });
-
-            document.getElementById('centerDiagram').addEventListener('click', () => {
-                network.focus(0, {
-                    scale: 1,
-                    animation: true
-                });
-            });
-
-            let physicsEnabled = false;
+            let physicsEnabled = true;
             document.getElementById('togglePhysics').addEventListener('click', function() {
                 physicsEnabled = !physicsEnabled;
                 network.setOptions({
@@ -2215,7 +2057,6 @@ ORDER BY evaluations_attended DESC;</code></pre>
                 this.textContent = physicsEnabled ? 'Disable Physics' : 'Enable Physics';
             });
 
-            // Export as PNG
             document.getElementById('exportImage').addEventListener('click', function() {
                 html2canvas(container).then(canvas => {
                     const link = document.createElement('a');
@@ -2225,7 +2066,6 @@ ORDER BY evaluations_attended DESC;</code></pre>
                 });
             });
 
-            // Export as PDF
             document.getElementById('exportPDF').addEventListener('click', function() {
                 html2canvas(container).then(canvas => {
                     const imgData = canvas.toDataURL('image/png');
@@ -2242,13 +2082,23 @@ ORDER BY evaluations_attended DESC;</code></pre>
                 });
             });
 
-            // Theme switcher
             document.getElementById('themeSelector').addEventListener('change', function() {
                 currentTheme = this.value;
                 nodes.clear();
                 edges.clear();
-                nodes.add(generateStyledNodes(rawNodes, currentTheme));
-                edges.add(generateStyledEdges(rawEdges, currentTheme));
+                nodes.add(rawNodes.map(node => ({
+                    ...node,
+                    color: {
+                        background: getRandomColorFromTheme(currentTheme),
+                        border: getRandomColorFromTheme(currentTheme)
+                    }
+                })));
+                edges.add(rawEdges.map(edge => ({
+                    ...edge,
+                    color: {
+                        color: getRandomColorFromTheme(currentTheme)
+                    }
+                })));
                 network.setData({
                     nodes,
                     edges
@@ -2260,25 +2110,22 @@ ORDER BY evaluations_attended DESC;</code></pre>
         window.addEventListener('scroll', function() {
             const sections = document.querySelectorAll('.section');
             let currentSection = '';
-
             sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-
-                if (window.scrollY >= sectionTop - 200 && window.scrollY < sectionTop + sectionHeight - 200) {
+                if (window.scrollY >= section.offsetTop - 200) {
                     currentSection = section.getAttribute('id');
                 }
             });
-
             document.querySelectorAll('.sidebar-menu li').forEach(item => {
                 item.classList.remove('active');
-
                 const link = item.querySelector('a');
                 if (link && link.getAttribute('href') === `#${currentSection}`) {
                     item.classList.add('active');
                 }
             });
         });
+
+        // Initialize protection
+        initProtection();
     </script>
 </body>
 

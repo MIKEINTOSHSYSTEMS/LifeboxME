@@ -310,7 +310,7 @@
                     <i class="fas fa-shield-alt"></i>
                 </div>
                 <h2>Secure Access Required</h2>
-                <p>Please enter the master password to access the Lifebox M&E API Documentation</p>
+                <p>Please enter the master password to access the Lifebox M&E Database Documentation</p>
 
                 <div class="input-group">
                     <i class="fas fa-lock"></i>
