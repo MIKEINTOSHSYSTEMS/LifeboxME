@@ -47,10 +47,10 @@ api/database/test/
 api/database/assets/
 api/mail/PHPMailer/
 api/users/test.php
-api/dev/api/
+#api/dev/api/
 #api/dev/assets/
 api/dev/db/db.php
-api/dev/docker/
+#api/dev/docker/
 api/dev/gen/
 api/lbln/tests
 api/events/

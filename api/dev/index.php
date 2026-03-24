@@ -25,8 +25,8 @@
         <div class="header-container">
             <div class="logo">
                 <a href="#">
-                    <img src="/assets/img/lblogo-dark.svg" width="100%" alt="Lifebox M&E Logo">
-                    <!--<i class="fas fa-code fa-2x" style="color: #ff7a00;"></i>-->
+                    <img src="/assets/img/lblogo-white.svg" width="100%" alt="Lifebox M&E Logo">
+                    <!--<i class="fas fa-code fa-2x" style="color: #f2ea77;"></i>-->
                     <!--<h1>M&E System Developers Documentation</h1>-->
                 </a>
             </div>
@@ -36,7 +36,7 @@
                     <li><a href="#overview">Overview</a></li>
                     <li><a href="/documentation/">Main Documentation</a></li>
                     <li><a href="#">GitHub</a></li>
-                    <li><a href="https://merqconsultancy/contact">Contact</a></li>
+                    <li><a href="https://merqconsultancy.org/contact">Contact</a></li>
                 </ul>
                 <button class="mobile-menu-btn" id="mobileMenuBtn">
                     <i class="fas fa-bars"></i>
@@ -188,7 +188,7 @@
             <div class="footer-logo">
                 <h3>Lifebox M&E System</h3>
                 <p>Comprehensive monitoring and evaluation platform for development programs. Robust, scalable, and developer-friendly.</p>
-                <p>© 2025 Lifebox M&E System. All rights reserved.</p>
+                <p>© <?php echo date('Y'); ?> Lifebox M&E System. All rights reserved.</p>
             </div>
 
             <div class="footer-links">
