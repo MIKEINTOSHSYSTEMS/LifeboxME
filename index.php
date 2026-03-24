@@ -7,11 +7,11 @@ require_once 'res/database.php';
 require_once 'res/session_helper.php';
 require_once 'res/notifications.php';
 
-    // DEBUGS (Uncomment to see all session variables and permissions)
- // echo '<pre>';
- // print_r($_SESSION);
- // echo '</pre>';
- // exit;
+// DEBUGS (Uncomment to see all session variables and permissions)
+// echo '<pre>';
+// print_r($_SESSION);
+// echo '</pre>';
+// exit;
 
 
 // ===============================
@@ -1276,52 +1276,52 @@ function getNotificationIcon($type)
                                     </a>
                                     <br>
                                     <a href="logout.php" class="btn btn-primary btn-sm">
-                                            <i class="fas fa-sign-out-alt me-1"></i> Logout
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-menu-end p-3" style="min-width: 350px; max-height: 400px; overflow-y: auto;">
+                                        <i class="fas fa-sign-out-alt me-1"></i> Logout
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end p-3" style="min-width: 350px; max-height: 400px; overflow-y: auto;">
 
-                                            <!-- Role Display -->
-                                            <li class="mb-2">
-                                                <strong>Role:</strong><br>
-                                                <?= getRoleDisplay($userRole); ?>
-                                            </li>
+                                        <!-- Role Display -->
+                                        <li class="mb-2">
+                                            <strong>Role:</strong><br>
+                                            <?= getRoleDisplay($userRole); ?>
+                                        </li>
 
-                                            <li>
-                                                <hr class="dropdown-divider">
-                                            </li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
 
-                                            <?php if (!empty($functionalGroups)): ?>
-                                                <?php foreach ($functionalGroups as $groupName => $groupData): ?>
-                                                    <li class="mb-2">
-                                                        <strong><?= htmlspecialchars($groupName); ?></strong>
-                                                        <ul class="list-unstyled ms-2 small">
-                                                            <?php foreach ($groupData['modules'] as $module): ?>
-                                                                <li class="mb-1">
-                                                                    <i class="fas <?= getAccessTypeIcon($module['access_type']); ?> me-1"></i>
-                                                                    <?= htmlspecialchars($module['module_name']); ?>
-                                                                    <br>
-                                                                    <span class="text-muted small">
-                                                                        <?= htmlspecialchars($module['permissions']); ?>
-                                                                    </span>
-                                                                </li>
-                                                            <?php endforeach; ?>
-                                                        </ul>
-                                                    </li>
-                                                    <li>
-                                                        <hr class="dropdown-divider">
-                                                    </li>
-                                                <?php endforeach; ?>
-                                            <?php else: ?>
-                                                <li><span class="text-muted">No permissions assigned.</span></li>
-                                            <?php endif; ?>
+                                        <?php if (!empty($functionalGroups)): ?>
+                                            <?php foreach ($functionalGroups as $groupName => $groupData): ?>
+                                                <li class="mb-2">
+                                                    <strong><?= htmlspecialchars($groupName); ?></strong>
+                                                    <ul class="list-unstyled ms-2 small">
+                                                        <?php foreach ($groupData['modules'] as $module): ?>
+                                                            <li class="mb-1">
+                                                                <i class="fas <?= getAccessTypeIcon($module['access_type']); ?> me-1"></i>
+                                                                <?= htmlspecialchars($module['module_name']); ?>
+                                                                <br>
+                                                                <span class="text-muted small">
+                                                                    <?= htmlspecialchars($module['permissions']); ?>
+                                                                </span>
+                                                            </li>
+                                                        <?php endforeach; ?>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <li><span class="text-muted">No permissions assigned.</span></li>
+                                        <?php endif; ?>
 
-                                            <li>
-                                                <a class="dropdown-item text-danger" href="logout.php">
-                                                    <i class="fas fa-sign-out-alt me-1"></i> Logout
-                                                </a>
-                                            </li>
+                                        <li>
+                                            <a class="dropdown-item text-danger" href="logout.php">
+                                                <i class="fas fa-sign-out-alt me-1"></i> Logout
+                                            </a>
+                                        </li>
 
-                                        </ul>
+                                    </ul>
                                 </div>
                             <?php else: ?>
                                 <a class="nav-link btn btn-primary btn-sm text-white ms-2"
@@ -1375,11 +1375,11 @@ function getNotificationIcon($type)
                     <div class="footer-links">
                         <h4>Resources</h4>
                         <ul>
-                            <li><a href="#">Documentation</a></li>
-                            <li><a href="#">User Guides</a></li>
-                            <li><a href="#">API Documentation</a></li>
-                            <li><a href="#">Release Notes</a></li>
-                            <li><a href="#">Help Center</a></li>
+                            <li><a href="/documentation/">Documentation</a></li>
+                            <li><a href="/documentation/introduction.html">User Guides</a></li>
+                            <li><a href="/api/dev/">API Documentation</a></li>
+                            <li><a href="#about">Release Notes</a></li>
+                            <li><a href="https://merqconsultancy.org/contact">Help Center</a></li>
                         </ul>
                     </div>
                 </div>
