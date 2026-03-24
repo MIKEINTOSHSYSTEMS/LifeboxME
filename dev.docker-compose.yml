@@ -190,6 +190,29 @@ services:
       lifeboxme_db:
         condition: service_healthy
 
+  mkdocs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: mkdocs_app
+    container_name: lifeboxme_docs
+    ports:
+      - "8558:8558"
+#    volumes:
+#      - ./docs:/docs  # Only mount the docs directory (optional)
+    restart: unless-stopped
+    environment:
+      - MKDOCS_CONFIG=/docs/mkdocs.yml  # Point to the copied file
+    healthcheck:
+      test: ["CMD", "nc", "-z", "0.0.0.0", "8558"]
+      interval: 30s
+      retries: 3
+      start_period: 10s
+      timeout: 5s
+    networks:
+      lifeboxnet:
+        ipv4_address: ${MKDOCS_IP}
+
   lifeboxme_matomo:
     container_name: lifeboxme_matomo
     image: matomo:latest

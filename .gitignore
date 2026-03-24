@@ -6,6 +6,7 @@ settings.xml
 *.sql
 *.exe
 *.tar.gz
+/docs
 /schema
 /analytics/js/
 /analytics/config/config.ini.php
