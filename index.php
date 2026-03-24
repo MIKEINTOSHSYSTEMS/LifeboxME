@@ -616,6 +616,7 @@ function getNotificationIcon($type)
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/documentation/">Documentation</a></li>
                     <li class="nav-item"><a class="nav-link" href="/modules/test/lbq/public/">Tests</a></li>
                     <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
                     <li class="nav-item"><a class="nav-link" href="#components">Components</a></li>
