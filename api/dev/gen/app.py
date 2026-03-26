@@ -485,7 +485,7 @@ def generate_openapi_spec(schemas: Dict[str, List[Dict]]) -> str:
                 "You can modify the API Spec whether it's by making changes to the definition itself or to the code using the python app.py!\n\n"
                 "That way, with time, we can improve the API in general, and expose some of the new features in OAS3.\n\n"
                 "Some useful links:\n"
-                "- [The Lifebox System Repository](https://github.com/MIKEINTOSHSYSTEMS/LifeboxME\n"
+                "- [The Lifebox System Repository](https://github.com/MIKEINTOSHSYSTEMS/LifeboxME)\n"
                 "- [The source API definition for Lifebox System YAML](https://mne.lifebox.org/api/dev/gen/lifeboxme_dynamic.yaml)\n"
                 "- [The source API definition for Lifebox System JSON](https://mne.lifebox.org/api/dev/gen/output/openapi.json)\n"
                 "- To Get Your API Key Please go to [Lifebox System Users](https://mne.lifebox.org/app/userinfo.php) and Login Using Your Account\n"
