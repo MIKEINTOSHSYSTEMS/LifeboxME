@@ -51,7 +51,10 @@ api/users/test.php
 #api/dev/assets/
 api/dev/db/db.php
 #api/dev/docker/
-api/dev/gen/
+#/api/dev/gen/
+/api/dev/gen/*.yaml
+/api/dev/gen/output/*.json
+/api/dev/gen/venv/
 api/lbln/tests
 api/events/
 api/base/vendor

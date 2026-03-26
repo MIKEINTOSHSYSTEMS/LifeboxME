@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h2>OpenAPI Data Explorer</h2>
+        
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header">
+                        Database Tables
+                    </div>
+                    <div class="card-body">
+                        <div id="tables-list" class="list-group">
+                            <!-- Tables will be loaded here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <span>Table Data: </span>
+                            <select id="table-select" class="form-select form-select-sm ms-2" style="width: auto;">
+                                <!-- Tables will be populated by JavaScript -->
+                            </select>
+                        </div>
+                        <button id="refresh-btn" class="btn btn-sm btn-outline-primary">Refresh</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="data-table" class="table table-striped">
+                                <thead>
+                                    <tr id="table-headers"></tr>
+                                </thead>
+                                <tbody id="table-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

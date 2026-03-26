@@ -198,8 +198,8 @@ services:
     container_name: lifeboxme_docs
     ports:
       - "8558:8558"
-#    volumes:
-#      - ./docs:/docs  # Only mount the docs directory (optional)
+    volumes:
+      - ./docs:/docs  # Only mount the docs directory (optional)
     restart: unless-stopped
     environment:
       - MKDOCS_CONFIG=/docs/mkdocs.yml  # Point to the copied file
@@ -240,6 +240,85 @@ services:
         condition: service_healthy
     command: /bin/bash -c "chmod -R 777 /var/www/html/tmp && apache2-foreground"
 
+
+  lifeboxme_databasement:
+    container_name: lifeboxme_databasement
+    image: davidcrty/databasement:latest
+    restart: unless-stopped
+    ports:
+      - "2226:2226"
+    environment:
+      - DB_CONNECTION=sqlite
+      - DB_DATABASE=/data/database.sqlite
+      - ENABLE_QUEUE_WORKER=true
+    volumes:
+      - lifeboxme_databasement_data:/data
+    networks:
+      lifeboxnet:
+        ipv4_address: 192.168.47.9   
+
+
+  # OpenAPI Generator Service
+  openapigen:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: openapi_gen
+    container_name: lifeboxme_openapigen
+    restart: unless-stopped
+    volumes:
+      - ./api/dev/gen:/app
+    ports:
+      - "5000:5000"
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER:-postgres}
+      - DB_PASSWORD=${DB_PASSWORD:-mikeintosh}
+      - DB_NAME=${DB_NAME:-lifebox_mesystem}
+      - FLASK_HOST=0.0.0.0
+      - FLASK_PORT=5000
+      - FLASK_DEBUG=${FLASK_DEBUG:-False}
+    depends_on:
+      - lifeboxme_db
+    networks:
+      lifeboxnet:
+        ipv4_address: 192.168.47.23
+    healthcheck:
+      # test: ["CMD", "nc", "-z", "localhost", "5000"]  # Health check for the openapigen service    
+      test: ["CMD", "curl", "--fail", "http://localhost:5000/"]
+      #test: ["CMD", "curl", "--fail", "http://localhost:5000/_stcore/health"]
+      #test: ["CMD", "curl", "-f", "http://localhost:5000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+# Swagger Editor Service
+  lifeboxme_swagger_editor:
+    image: docker.swagger.io/swaggerapi/swagger-editor:latest
+    container_name: lifeboxme_swagger_editor
+    environment:
+      - URL=https://mne.lifebox.org/api/dev/gen/lifeboxme_dynamic.yaml
+    ports:
+      - "8080:8080"
+    networks:
+      lifeboxnet:
+        ipv4_address: 192.168.47.24
+    restart: unless-stopped   
+
+  # Swagger UI Service
+  lifeboxme_swagger_ui:
+    image: swaggerapi/swagger-ui
+    container_name: lifeboxme_swagger_ui
+    environment:
+      - SWAGGER_JSON_URL=https://mne.lifebox.org/api/dev/gen/output/openapi.json
+    ports:
+      - "5055:8080"
+    networks:
+      lifeboxnet:
+        ipv4_address: 192.168.47.25
+    restart: unless-stopped  
+
 networks:
   lifeboxnet:
     driver: bridge
@@ -267,3 +346,5 @@ volumes:
       type: none
       o: bind
       device: ./data/mariadb_data
+  lifeboxme_databasement_data:
+    driver: local

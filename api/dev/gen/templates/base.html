@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lifebox</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!--    <link href="/static/css/styles.css" rel="stylesheet">-->
+</head>
+<style>
+body {
+    padding-top: 20px;
+    background-color: #d7eeff;
+}
+
+.bg-primary {
+    --bs-bg-opacity: 1;
+    background-color: #1F77B4 !important;
+}
+
+.list-group-item.active {
+    z-index: 2;
+    color: var(--bs-list-group-active-color);
+    background-color: #4A7D9EFF;
+    border-color: #1EC6F4FF;
+}
+
+.card {
+    margin-bottom: 20px;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+#tables-list {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+#data-table {
+    font-size: 0.9rem;
+}
+
+.table-responsive {
+    max-height: 75vh;
+    overflow-y: auto;
+}
+
+.navbar {
+    margin-top: -20px;
+    margin-bottom: -20px;
+}
+
+#spec-status {
+    transition: all 0.3s ease;
+}
+
+#generate-spec,
+#view-spec {
+    min-width: 150px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#generate-spec i,
+#view-spec i {
+    margin-right: 5px;
+}
+
+#spec-url {
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.9rem;
+}
+</style>
+
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/openapigen/"><img src="/api/dev/gen/templates/lblogo.svg" width="17%"></img>  Lifebox | OpenAPI Spec Generator</a>
+            <div class="navbar-nav">
+                <a class="nav-link" href="/openapigen/">Home</a>
+                <a class="nav-link" href="/openapigen/explorer">Data Explorer</a>
+                <a class="nav-link" href="/openapigen/docs">API Docs</a>
+                <a class="nav-link" href="/openapigen/swaggertest">Swagger API Tester</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        {% block content %}{% endblock %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Load tables list
+    fetch('/openapigen/api/tables')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const tablesList = document.getElementById('tables-list');
+                const tableSelect = document.getElementById('table-select');
+
+                data.tables.forEach(table => {
+                    // Add to buttons list
+                    const item = document.createElement('button');
+                    item.className = 'list-group-item list-group-item-action';
+                    item.textContent = table;
+                    item.addEventListener('click', () => loadTableData(table));
+                    tablesList.appendChild(item);
+
+                    // Add to dropdown
+                    const option = document.createElement('option');
+                    option.value = table;
+                    option.textContent = table;
+                    tableSelect.appendChild(option);
+                });
+
+                // Load first table by default
+                if (data.tables.length > 0) {
+                    loadTableData(data.tables[0]);
+                    tableSelect.value = data.tables[0];
+                }
+            }
+        });
+
+    // Refresh button
+    document.getElementById('refresh-btn')?.addEventListener('click', function () {
+        const activeTable = document.querySelector('#tables-list .active');
+        if (activeTable) {
+            loadTableData(activeTable.textContent);
+        }
+    });
+
+    // Table select dropdown
+    document.getElementById('table-select')?.addEventListener('change', function () {
+        loadTableData(this.value);
+    });
+});
+
+function loadTableData(tableName) {
+    // Highlight selected table
+    document.querySelectorAll('#tables-list button').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.textContent === tableName) {
+            btn.classList.add('active');
+        }
+    });
+
+    // Update dropdown selection
+    const tableSelect = document.getElementById('table-select');
+    if (tableSelect) {
+        tableSelect.value = tableName;
+    }
+
+    // Fetch table data
+    fetch(`/openapigen/api/${tableName}?action=list&records=100`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && data.data.length > 0) {
+                renderTable(data.data);
+            }
+        });
+
+    // Fetch table schema
+    fetch(`/openapigen/api/${tableName}/schema`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log('Schema:', data.schema);
+            }
+        });
+}
+
+function renderTable(data) {
+    const headers = document.getElementById('table-headers');
+    const body = document.getElementById('table-body');
+
+    // Clear existing content
+    headers.innerHTML = '';
+    body.innerHTML = '';
+
+    // Create headers
+    Object.keys(data[0]).forEach(key => {
+        const th = document.createElement('th');
+        th.textContent = key;
+        headers.appendChild(th);
+    });
+
+    // Create rows
+    data.forEach(row => {
+        const tr = document.createElement('tr');
+        Object.values(row).forEach(value => {
+            const td = document.createElement('td');
+            td.textContent = value !== null ? value : 'NULL';
+            tr.appendChild(td);
+        });
+        body.appendChild(tr);
+    });
+}
+
+</script>
+
+<script>
+// Global configuration for API base URL
+const API_BASE_URL = (function() {
+    // Get the current path and remove any trailing slashes
+    //const path = window.location.pathname.replace(/\/+$/, '');
+    
+    // If we're at the root, just use '/api'
+    if (path === '') return '/openapigen/api';
+    
+    // Otherwise use the current path + '/api'
+    return path + '/api';
+})();
+
+// Helper function to make API requests with the correct base URL
+function apiFetch(endpoint, options = {}) {
+    // Ensure endpoint starts with a slash
+    if (!endpoint.startsWith('/')) {
+        endpoint = '/' + endpoint;
+    }
+    
+    // Remove any duplicate slashes
+    const fullUrl = (API_BASE_URL + endpoint).replace(/([^:]\/)\/+/g, '$1');
+    
+    return fetch(fullUrl, options);
+}
+
+// Override the global fetch function to automatically handle API paths
+const originalFetch = window.fetch;
+window.fetch = function(input, init) {
+    // Only modify requests that start with /api
+    if (typeof input === 'string' && input.startsWith('/api')) {
+        return apiFetch(input, init);
+    }
+    return originalFetch(input, init);
+};
+</script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+# docker-compose -p lifebox -f swagger.docker-compose.yml up -d
+
+version: '3.8'
+
+services:
+  # Swagger Editor Service
+  lifebox_swagger_editor:
+    image: docker.swagger.io/swaggerapi/swagger-editor:latest
+    container_name: lifebox_swagger_editor
+    environment:
+      - URL=https://mne.lifebox.org/api/dev/gen/lifeboxme_dynamic.yaml
+    ports:
+      - "8080:8080"
+    networks:
+      lifeboxapinet:
+        ipv4_address: 192.168.47.11
+    restart: unless-stopped   
+
+  # Swagger UI Service
+  lifebox_swagger_ui:
+    image: swaggerapi/swagger-ui
+    container_name: lifebox_swagger_ui
+    environment:
+      - SWAGGER_JSON_URL=https://mne.lifebox.org/api/dev/gen/output/openapi.json
+    ports:
+      - "5055:8080"
+    networks:
+      lifeboxapinet:
+        ipv4_address: 192.168.47.12
+    restart: unless-stopped  
+
+networks:
+  lifeboxapinet:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.47.0/24

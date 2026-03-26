@@ -1,0 +1,61 @@
+body {
+    padding-top: 20px;
+    background-color: #f8f9fa;
+}
+
+.card {
+    margin-bottom: 20px;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+#tables-list {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+#data-table {
+    font-size: 0.9rem;
+}
+
+.table-responsive {
+    max-height: 75vh;
+    overflow-y: auto;
+}
+
+.navbar {
+    margin-bottom: -20px;
+}
+
+.list-group-item.active {
+    z-index: 2;
+    color: var(--bs-list-group-active-color);
+    background-color: #D81B60;
+    border-color: #F4511E;
+}
+
+#spec-status {
+    transition: all 0.3s ease;
+}
+
+#generate-spec,
+#view-spec {
+    min-width: 150px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#generate-spec i,
+#view-spec i {
+    margin-right: 5px;
+}
+
+#spec-url {
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.9rem;
+}
+
+.bg-primary {
+    --bs-bg-opacity: 1;
+    background-color: #ff7000 !important;
+}

@@ -1,0 +1,568 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h2>API Documentation</h2>
+        
+        <!-- OpenAPI Spec Controls -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h4>OpenAPI Specification</h4>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <p>Manage your OpenAPI specification:</p>
+                    </div>
+                    <div>
+                        <button id="generate-spec" class="btn btn-primary me-2">
+                            <i class="bi bi-gear"></i> Generate Spec
+                        </button>
+                        <a id="view-spec" href="/api/dev/gen/lifeboxme_dynamic.yaml" target="_blank" class="btn btn-success me-2">
+                            <i class="bi bi-eye"></i> View Spec
+                        </a>
+                        <a href="/openapigen/api/spec/download" class="btn btn-info">
+                            <i class="bi bi-download"></i> Download YAML
+                        </a>
+                        <a href="/api/dev/gen/output/openapi.json" class="btn btn-info">
+                            <i class="bi bi-download"></i> Download OpenAPI.json
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="mt-3">
+                    <p class="mb-1"><strong>OpenAPI Spec URL:</strong></p>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="spec-url" value="{{ request.host_url }}api/spec" readonly>
+                        <!--<input type="text" class="form-control" id="spec-url" value="" readonly>-->
+                        <button class="btn btn-outline-secondary" onclick="copySpecUrl()">
+                            <i class="bi bi-clipboard"></i> Copy
+                        </button>
+                    </div>
+                    <small class="text-muted">Use this URL in Swagger UI or other OpenAPI tools</small>
+                </div>
+
+                <div id="spec-status" class="mt-3 alert alert-info d-none">
+                    <div class="d-flex align-items-center">
+                        <div class="spinner-border spinner-border-sm me-2" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <span id="spec-message">Generating OpenAPI specification...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Authentication Documentation -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h4>Authentication</h4>
+            </div>
+            <div class="card-body">
+                <p>All API endpoints require authentication via API key. Include your key as a query parameter:</p>
+                <pre><code>?apikey=YOUR_API_KEY</code></pre>
+                
+                <div class="alert alert-warning mt-3">
+                    <strong>Note:</strong> Keep your API key secure and never expose it in client-side code.
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Codes -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h4>Error Codes</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Code</th>
+                                <th>Message</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>400</td>
+                                <td>Bad Request</td>
+                                <td>Invalid request parameters or malformed data</td>
+                            </tr>
+                            <tr>
+                                <td>401</td>
+                                <td>Unauthorized</td>
+                                <td>Missing or invalid API key</td>
+                            </tr>
+                            <tr>
+                                <td>403</td>
+                                <td>Forbidden</td>
+                                <td>Insufficient permissions</td>
+                            </tr>
+                            <tr>
+                                <td>404</td>
+                                <td>Not Found</td>
+                                <td>Requested resource doesn't exist</td>
+                            </tr>
+                            <tr>
+                                <td>500</td>
+                                <td>Internal Server Error</td>
+                                <td>Server encountered an unexpected condition</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Available Endpoints -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h4>Available Endpoints</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Endpoint</th>
+                                <th>Method</th>
+                                <th>Description</th>
+                                <th>Parameters</th>
+                                <th>Try It</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>/api/tables</code></td>
+                                <td><span class="badge bg-primary">GET</span></td>
+                                <td>List all available tables in the database</td>
+                                <td>None</td>
+                                <td><button class="btn btn-sm btn-outline-primary try-endpoint" data-endpoint="/openapigen/api/tables">Try it</button></td>
+                            </tr>
+                            <tr>
+                                <td><code>/api/&lt;table&gt;</code></td>
+                                <td>
+                                    <span class="badge bg-primary">GET</span>
+                                    <span class="badge bg-success">POST</span>
+                                    <span class="badge bg-warning">PUT</span>
+                                    <span class="badge bg-danger">DELETE</span>
+                                </td>
+                                <td>Full CRUD operations for any table</td>
+                                <td>
+                                    <ul>
+                                        <li><code>action</code> (required): list, view, insert, update, delete</li>
+                                        <li><code>editid1</code> (required for view, update, delete)</li>
+                                        <li><code>records</code> (for list): Number of records (default: 100)</li>
+                                        <li><code>skip</code> (for list): Skip records (default: 0)</li>
+                                        <li><code>q</code> (for list): Advanced filter</li>
+                                        <li><code>qs</code> (for list): Full-text search</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" class="form-control form-control-sm table-name-input" placeholder="table_name">
+                                        <button class="btn btn-outline-primary try-endpoint" data-endpoint-prefix="/openapigen/api/">Try it</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><code>/api/&lt;table&gt;/schema</code></td>
+                                <td><span class="badge bg-primary">GET</span></td>
+                                <td>Get schema information for specified table</td>
+                                <td>None</td>
+                                <td>
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" class="form-control form-control-sm table-name-input" placeholder="table_name">
+                                        <button class="btn btn-outline-primary try-endpoint" data-endpoint-prefix="/openapigen/api/" data-endpoint-suffix="/schema">Try it</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Response Schemas -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h4>Response Schemas</h4>
+            </div>
+            <div class="card-body">
+                <div class="accordion" id="schemasAccordion">
+                    <!-- Tables List Response -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tablesListSchema">
+                                GET /api/tables
+                            </button>
+                        </h2>
+                        <div id="tablesListSchema" class="accordion-collapse collapse show" data-bs-parent="#schemasAccordion">
+                            <div class="accordion-body">
+                                <pre><code>{
+  "success": boolean,
+  "tables": [string]
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Table Data Response -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tableDataSchema">
+                                GET /api/&lt;table&gt;
+                            </button>
+                        </h2>
+                        <div id="tableDataSchema" class="accordion-collapse collapse" data-bs-parent="#schemasAccordion">
+                            <div class="accordion-body">
+                                <pre><code>{
+  "success": boolean,
+  "data": [
+    {
+      "field1": value1,
+      "field2": value2,
+      ...
+    }
+  ]
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Table Schema Response -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tableSchemaSchema">
+                                GET /api/&lt;table&gt;/schema
+                            </button>
+                        </h2>
+                        <div id="tableSchemaSchema" class="accordion-collapse collapse" data-bs-parent="#schemasAccordion">
+                            <div class="accordion-body">
+                                <pre><code>{
+  "success": boolean,
+  "schema": [
+    {
+      "field": string,
+      "type": string,
+      "null": "YES"|"NO",
+      "key": string,
+      "default": string|null,
+      "description": string
+    }
+  ]
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive API Console -->
+        <div class="card mt-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">API Console</h4>
+                <div>
+                    <span id="response-time" class="badge bg-info d-none">0ms</span>
+                    <div id="api-loading" class="spinner-border spinner-border-sm d-none" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">GET</span>
+                            <input type="text" class="form-control" id="api-endpoint" placeholder="/openapigen/api/tables">
+                            <button id="send-request" class="btn btn-primary">Send</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Params</span>
+                            <input type="text" class="form-control" id="query-params" placeholder="limit=5">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h5>Response</h5>
+                        <button id="copy-response" class="btn btn-sm btn-outline-secondary">
+                            <i class="bi bi-clipboard"></i> Copy
+                        </button>
+                    </div>
+                    <div class="card bg-light">
+                        <div class="card-body p-2">
+                            <pre id="api-response" style="min-height: 200px; margin-bottom: 0;">{ "message": "Make a request to see the response..." }</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+<script>
+// Update spec URL based on current host
+//document.getElementById('spec-url').value = window.location.origin + API_BASE_URL + '/spec';    
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Elements
+    const apiEndpoint = document.getElementById('api-endpoint');
+    const queryParams = document.getElementById('query-params');
+    const sendRequestBtn = document.getElementById('send-request');
+    const apiResponse = document.getElementById('api-response');
+    const copyBtn = document.getElementById('copy-response');
+    const loadingIndicator = document.getElementById('api-loading');
+    const responseTimeBadge = document.getElementById('response-time');
+    
+    // Generate Spec button functionality
+    document.getElementById('generate-spec').addEventListener('click', function() {
+        const statusElement = document.getElementById('spec-status');
+        const messageElement = document.getElementById('spec-message');
+        
+        statusElement.classList.remove('d-none', 'alert-danger', 'alert-success');
+        statusElement.classList.add('alert-info');
+        messageElement.textContent = 'Generating OpenAPI specification...';
+        
+        fetch('/openapigen/api/generate-spec', {
+            method: 'POST'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to generate specification');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                statusElement.classList.remove('alert-info');
+                statusElement.classList.add('alert-success');
+                messageElement.textContent = 'OpenAPI specification generated successfully!';
+                
+                // Update the view spec link with timestamp to prevent caching
+                const viewSpecLink = document.getElementById('view-spec');
+                viewSpecLink.href = `/openapigen/api/spec?t=${new Date().getTime()}`;
+            } else {
+                throw new Error(data.error || 'Unknown error occurred');
+            }
+        })
+        .catch(error => {
+            statusElement.classList.remove('alert-info');
+            statusElement.classList.add('alert-danger');
+            messageElement.textContent = error.message;
+        })
+        .finally(() => {
+            setTimeout(() => {
+                statusElement.classList.add('d-none');
+            }, 5000);
+        });
+    });
+
+    // Update spec URL based on current host
+    function updateSpecUrl() {
+        const specUrl = document.getElementById('spec-url');
+        specUrl.value = window.location.origin + '/openapigen/api/spec/download';
+    }
+
+    // Initialize and update on potential host changes
+    updateSpecUrl();
+    window.addEventListener('popstate', updateSpecUrl);
+    
+// Try-it buttons in the table
+document.querySelectorAll('.try-endpoint').forEach(btn => {
+    btn.addEventListener('click', function() {
+        let endpoint = '';
+        
+        if (this.dataset.endpoint) {
+            // For simple endpoints like /api/tables
+            endpoint = this.dataset.endpoint;
+        } else {
+            // For endpoints that need a table name
+            const tableName = this.closest('td').querySelector('.table-name-input').value;
+            
+            if (!tableName) {
+                alert('Please enter a table name');
+                return;
+            }
+            
+            if (this.dataset.endpointPrefix && this.dataset.endpointSuffix) {
+                endpoint = `${this.dataset.endpointPrefix}${tableName}${this.dataset.endpointSuffix}`;
+            } else if (this.dataset.endpointPrefix) {
+                endpoint = `${this.dataset.endpointPrefix}${tableName}`;
+            } else if (this.dataset.endpointSuffix) {
+                endpoint = `${tableName}${this.dataset.endpointSuffix}`;
+            }
+        }
+        
+        apiEndpoint.value = endpoint;
+        
+        // Auto-add common params for certain endpoints
+        if (endpoint.includes('/schema')) {
+            queryParams.value = '';
+        } else if (endpoint.startsWith('/api/') && !endpoint.includes('/tables')) {
+            queryParams.value = 'action=list&records=5';
+        }
+        
+        sendRequest();
+    });
+});
+    
+    // Send API request
+    function sendRequest() {
+        const endpoint = apiEndpoint.value;
+        const params = queryParams.value ? `?${queryParams.value}` : '';
+        
+        if (!endpoint) return;
+        
+        // Show loading state
+        loadingIndicator.classList.remove('d-none');
+        responseTimeBadge.classList.add('d-none');
+        apiResponse.textContent = '{ "status": "Loading..." }';
+        
+        const startTime = performance.now();
+        
+        fetch(`${endpoint}${params}`)
+            .then(response => {
+                const endTime = performance.now();
+                const duration = Math.round(endTime - startTime);
+                
+                responseTimeBadge.textContent = `${duration}ms`;
+                responseTimeBadge.classList.remove('d-none');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                apiResponse.textContent = JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                apiResponse.textContent = JSON.stringify({
+                    error: error.message
+                }, null, 2);
+            })
+            .finally(() => {
+                loadingIndicator.classList.add('d-none');
+            });
+    }
+    
+    // Send request on button click or Enter key
+    sendRequestBtn.addEventListener('click', sendRequest);
+    apiEndpoint.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') sendRequest();
+    });
+    queryParams.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') sendRequest();
+    });
+    
+    // Copy response to clipboard
+    copyBtn.addEventListener('click', function() {
+        navigator.clipboard.writeText(apiResponse.textContent)
+            .then(() => {
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="bi bi-check"></i> Copied!';
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                }, 2000);
+            })
+            .catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+    });
+    
+    // Pretty print JSON on page load
+    try {
+        const initialResponse = JSON.parse(apiResponse.textContent);
+        apiResponse.textContent = JSON.stringify(initialResponse, null, 2);
+    } catch (e) {
+        // Not valid JSON, leave as is
+    }
+});
+
+function copySpecUrl() {
+    const specUrl = document.getElementById('spec-url');
+    specUrl.select();
+    document.execCommand('copy');
+    
+    // Show tooltip or temporary message
+    const button = event.target.closest('button');
+    const originalHtml = button.innerHTML;
+    button.innerHTML = '<i class="bi bi-check"></i> Copied!';
+    
+    setTimeout(() => {
+        button.innerHTML = originalHtml;
+    }, 2000);
+}
+</script>
+
+<style>
+#api-response {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+pre {
+    margin: 0;
+}
+
+.card {
+    margin-bottom: 20px;
+}
+
+.try-endpoint {
+    white-space: nowrap;
+}
+
+.table-name-input {
+    max-width: 120px;
+}
+
+.input-group-text {
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.875rem;
+}
+
+.accordion-button {
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-weight: bold;
+}
+
+#response-time {
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+#spec-status {
+    transition: all 0.3s ease;
+}
+
+#generate-spec, #view-spec {
+    min-width: 150px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#generate-spec i, #view-spec i {
+    margin-right: 5px;
+}
+
+#spec-url {
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.9rem;
+}
+</style>
+{% endblock %}

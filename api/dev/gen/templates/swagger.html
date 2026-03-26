@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lifebox OpenAPI Documentation</title>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/swagger-ui-dist@3/swagger-ui.css">
+</head>
+<body>
+    <div id="swagger-ui"></div>
+    <script src="https://unpkg.com/swagger-ui-dist@3/swagger-ui-bundle.js"></script>
+    <script>
+        const ui = SwaggerUIBundle({
+            url: '/openapigen/api/spec', // Production Sub DIR
+//            url: '/api/spec',
+            dom_id: '#swagger-ui',
+            presets: [
+                SwaggerUIBundle.presets.apis,
+                SwaggerUIBundle.presets.standalone
+            ],
+            requestInterceptor: (req) => {
+                // Custom request interceptor to prevent URL encoding
+                if (req.url.includes('apikey=')) {
+                    // Manually handle the API key to prevent encoding
+                    const url = new URL(req.url);
+                    const apikey = url.searchParams.get('apikey');
+                    if (apikey && apikey.includes('%24')) {
+                        // Replace %24 with $ in the URL
+                        req.url = req.url.replace(/%24/g, '$');
+                    }
+                }
+                return req;
+            }
+        });
+    </script>
+</body>
+</html>

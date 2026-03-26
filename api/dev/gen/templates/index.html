@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto text-center">
+        <h1 class="mb-4">Lifebox</h1>
+        <h3 class="mb-4">OpenAPI Spec Generator</h3>
+        <p class="lead">Interactive API and Data Explorer</p>
+        
+        <div class="card mt-5">
+            <div class="card-body">
+                <h5 class="card-title">Quick Access</h5>
+                <div class="d-grid gap-2 d-md-block">
+                    <a href="/openapigen/explorer" class="btn btn-primary me-md-2">Data Explorer</a>
+                    <a href="/openapigen/docs" class="btn btn-secondary"> OpenAPI Documentation</a>
+                    <br></br>
+                    <a href="/swagger/" class="btn btn-success"> {...}Swagger</a>
+                    <a href="/swagger_editor/" class="btn btn-info">{...}Swagger Editor</a>
+                    <a href="/openapigen/swaggertest" class="btn btn-danger">{...}Swagger Test For DEV</a>
+                    <br></br>
+                    <a href="/documentation/" class="btn btn-secondary"> System Documentation</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
