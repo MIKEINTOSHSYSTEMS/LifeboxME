@@ -309,7 +309,7 @@ function sendConfirmationEmail($data, $fullPhone, $pdo)
     }
 
     // Email content
-    $subject = "Registration Confirmation - Lifebox Training";
+    $subject = "Registration Confirmation - Lifebox Training & Test Center";
 
     // HTML email body
     $body = '<!DOCTYPE html>
@@ -353,6 +353,62 @@ function sendConfirmationEmail($data, $fullPhone, $pdo)
         </div>
         <div class="footer">
             <p>This is an automated message. Please do not reply.</p>
+            <br></br>
+            <a href="https://mne.lifebox.org/modules/test/lbq/public/"><img src="https://mne.lifebox.org/Lifebox_logo.png" alt="Lifebox Logo"></a>
+
+            <div id="m_-288898943795117245Signature">
+            <table cellspacing="1" cellpadding="1" style="text-align:left;background-color:rgb(255,255,255);max-width:550px;color:rgb(36,36,36);box-sizing:border-box;border-collapse:collapse;border-spacing:0px">
+            <tbody>
+            <tr>
+            <td colspan="3" style="text-align:left;width:1008.8px;height:22px">
+            <div style="text-align:left;font-family:Arial,Helvetica,sans-serif;font-size:14px;color:rgb(3,141,169)">
+            <span style="line-height:1"><b>Lifebox |Training & Test Center</b></span></div>
+            </td>
+            </tr>
+            <tr>
+            <td colspan="3" style="text-align:left;width:1008.8px;height:22px">
+            <div style="text-align:left;font-family:Arial,Helvetica,sans-serif;font-size:12px">
+            <span style="line-height:1">Lifebox M&E System</span></div>
+            </td>
+            </tr>
+            <tr>
+            <td style="text-align:left;width:228.57px;height:79px"><span style="font-family:Arial,Helvetica,sans-serif;font-size:15px;color:rgb(36,36,36)"><img width="200" height="77" style="width:200px;height:77px;margin:0px;float:left" src="https://ci3.googleusercontent.com/meips/ADKq_NawqA66wsx2GjJAcWoMeaDg0m1PubLvR-8xDLjiQOo9nrD4omXUTocRL9s5-wE_PdeIAsuYntyKVJqCZws-ITelumPfoglqAz2BrG0DJEBJbLodKo20yY0Qs_AXkcAn904bhQ=s0-d-e1-ft#https://www.lifebox.org/wp-content/uploads/2025/01/Lifebox_Logo_Email_Sig.png" class="CToWUd" data-bit="iit"></span></td>
+            <td colspan="2" style="text-align:left;width:780.24px;height:79px">
+            <div style="text-align:left"><span style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:rgb(3,141,169)">web:
+            <a href="https://www.lifebox.org/" title="https://www.lifebox.org" rel="noopener noreferrer" style="color:rgb(3,141,169);margin:0px" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://www.lifebox.org/&amp;source=gmail&amp;ust=1775401621720000&amp;usg=AOvVaw2qiK2vLDgVhihrceuekRjh">
+            <u>www.lifebox.org</u></a></span><span style="font-family:&quot;Segoe UI&quot;,&quot;Segoe UI Web (West European)&quot;,-apple-system,BlinkMacSystemFont,Roboto,&quot;Helvetica Neue&quot;,sans-serif;font-size:15px;color:rgb(36,36,36)">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;</span></div>
+            <p style="direction:ltr;text-align:left;margin-top:0px;margin-bottom:0px">
+            <span style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:rgb(36,36,36)">Support Lifebox with a
+            </span><span style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:rgb(3,141,169)"><a href="https://donate.lifebox.org/give/423146/#!/donation/checkout" title="https://donate.lifebox.org/give/423146/#!/donation/checkout" rel="noopener noreferrer" style="color:rgb(3,141,169);margin:0px" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://donate.lifebox.org/give/423146/%23!/donation/checkout&amp;source=gmail&amp;ust=1775401621720000&amp;usg=AOvVaw3jo2K-i9uTIQKeKBc3Bz5J"><u>donation</u></a></span><span style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:rgb(36,36,36)">&nbsp;or
+            sign up for </span><span style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:rgb(3,141,169)"><a href="https://lifebox.us18.list-manage.com/subscribe?u=7888d221cd0ab255ba02e0ae6&amp;id=de39e843fc" title="https://lifebox.us18.list-manage.com/subscribe?u=7888d221cd0ab255ba02e0ae6&amp;id=de39e843fc" rel="noopener noreferrer" style="color:rgb(3,141,169);margin:0px" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://lifebox.us18.list-manage.com/subscribe?u%3D7888d221cd0ab255ba02e0ae6%26id%3Dde39e843fc&amp;source=gmail&amp;ust=1775401621720000&amp;usg=AOvVaw3iwq7iKjtNADT6GVwwvsxR"><u>updates</u></a></span><span style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:rgb(36,36,36)"><br>
+            <a href="https://twitter.com/safersurgery" title="https://twitter.com/safersurgery" rel="noopener noreferrer" style="margin:0px" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://twitter.com/safersurgery&amp;source=gmail&amp;ust=1775401621720000&amp;usg=AOvVaw0W4JbObvn_eShjhxQFmhR_"><img alt="twitter" width="25" height="25" style="width:25px;height:25px;margin:0px" src="https://lh4.googleusercontent.com/_fV2LJyZlPFXSEMGbtXbYUpHTa7WowWBegk8gFCNns_OMydqTRaY8cz70dbvyKJd8A6brCiF482OdoW3L-uf161gk9w8Q7UsnGQ9pIT4W-Mb6QogAouIeerXXiPjiCeomUQoP0WYvJgSaeaKHQ" crossorigin="" class="CToWUd" data-bit="iit"></a>&nbsp;
+            <a href="https://www.facebook.com/lifeboxfoundation" title="https://www.facebook.com/lifeboxfoundation" rel="noopener noreferrer" style="margin:0px" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://www.facebook.com/lifeboxfoundation&amp;source=gmail&amp;ust=1775401621720000&amp;usg=AOvVaw2zDS598bS7Bg5oWh_coXK4">
+            <img alt="facebook" width="25" height="25" style="width:25px;height:25px;margin:0px" src="https://lh5.googleusercontent.com/wgNaoQI6tJZvVngUwkO8tLnnHDaXd_GnFEpaOcoEt409JcYF5qwaCzNRmwRNFJCS44u3np3YceeqVjOA7Ow5kiSPT1a4RTNhiNRxMlFUHCeIB9Yc9eLBTpvIVMZy85b1Ijhzkeryw5l4x6Ev3w" crossorigin="" class="CToWUd" data-bit="iit"></a>&nbsp;
+            <a href="https://www.instagram.com/safersurgery/" title="https://www.instagram.com/safersurgery/" rel="noopener noreferrer" style="margin:0px" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://www.instagram.com/safersurgery/&amp;source=gmail&amp;ust=1775401621720000&amp;usg=AOvVaw0Q_ZAAm51Xx4nPcSEggzex">
+            <img alt="instagram" width="25" height="26" style="width:25px;height:26px;margin:0px" src="https://lh4.googleusercontent.com/Jfb1--XL1puuiBxg5dd5KsDTL5SN-gPBKBR5J46lSehvT-EOjIUiM7tWT8G6clYs7GCFdIviP7K_1UyEBtBzZ0tQecuZ3GkrYSZcZE_oIYHUJK7_moXXF6o12TpH3lguUrx-mZ41rWiTyj0a2w" crossorigin="" class="CToWUd" data-bit="iit"></a>&nbsp;
+            <a href="https://www.youtube.com/c/LifeboxFoundation" title="https://www.youtube.com/c/LifeboxFoundation" rel="noopener noreferrer" style="margin:0px" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://www.youtube.com/c/LifeboxFoundation&amp;source=gmail&amp;ust=1775401621720000&amp;usg=AOvVaw2z8zhUxhoCMTaTWB79xgjy">
+            <img alt="youtube" width="25" height="25" style="width:25px;height:25px;margin:0px" src="https://lh4.googleusercontent.com/YkIglYdLkXMjiyVb-JZpt3SLdHF2UeJVUO3teqyyxNENrbBkJAw4rWqW3Vr3PrK8pO3SM6x85fp0usKpJrohaH8jggR1HDjW7neLl4NMuWjpMeT2S7QPF6fAkguC-SsoNxc3D3fqw08J0eA1hw" crossorigin="" class="CToWUd" data-bit="iit"></a>&nbsp;</span></p>
+            </td>
+            </tr>
+            <tr>
+            <td colspan="3" style="text-align:left;width:1008.8px;height:86px">
+            <div style="text-align:left;font-family:Arial,Helvetica,sans-serif;font-size:11px">
+            <span style="color:rgb(189,195,199)"><b>Registered as a charity in England &amp; Wales (</b></span><span style="color:rgb(3,141,169)"><b>1143018</b></span><span style="color:rgb(189,195,199)"><b>) and a 501(c)(3) non-profit in&nbsp;the US (EIN
+            </b></span><span style="color:rgb(3,141,169)"><b>46-2266526</b></span><span style="color:rgb(189,195,199)"><b>).</b></span></div>
+            <p style="direction:ltr;text-align:left;margin-top:0px;margin-bottom:0px">
+            <span style="font-family:Arial,Helvetica,sans-serif;font-size:11px;color:rgb(189,195,199)">This email and any files transmitted with it are confidential and intended solely for the use of the individual to whom it is addressed.
+            </span><span style="font-family:Arial,Helvetica,sans-serif;font-size:11px;color:rgb(3,141,169)"><a href="https://www.lifebox.org/" title="https://www.lifebox.org/" rel="noopener noreferrer" style="color:rgb(3,141,169);margin:0px" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://www.lifebox.org/&amp;source=gmail&amp;ust=1775401621720000&amp;usg=AOvVaw2qiK2vLDgVhihrceuekRjh"><u>Read
+            More</u></a></span></p>
+            </td>
+            </tr>
+            </tbody>
+            </table>
+            <div style="font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Calibri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+            <br>
+            </div>
+            </div>
+
+
             <p>&copy; ' . date('Y') . ' Lifebox M&E System</p>
         </div>
     </div>
