@@ -38,14 +38,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Handle answers
     if ($question_id && in_array($qtype, [1, 2, 3])) {
         $answer_texts = $_POST['answer_text'] ?? [];
-        $answer_correct = $_POST['answer_correct'] ?? [];
         $answer_ids = $_POST['answer_id'] ?? [];
+
+        if ($qtype == 1) {
+            // Single choice
+            $answer_correct = $_POST['answer_correct'] ?? '';
+            $new_answer_correct = $_POST['new_answer_correct'] ?? '';
+        } else {
+            // Multiple choice
+            $answer_correct = $_POST['answer_correct'] ?? [];
+            $new_answer_correct = $_POST['new_answer_correct'] ?? [];
+        }
 
         // Update existing answers
         foreach ($answer_ids as $index => $answer_id) {
             if ($answer_id) {
                 $text = trim($answer_texts[$index]);
-                $correct = isset($answer_correct[$index]);
+                $correct = $qtype == 1 ? ($answer_correct == $index) : isset($answer_correct[$index]);
 
                 if (!empty($text)) {
                     $quiz->updateAnswer($answer_id, $text, $correct);
@@ -57,12 +66,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Add new answers
         $new_answer_texts = $_POST['new_answer_text'] ?? [];
-        $new_answer_correct = $_POST['new_answer_correct'] ?? [];
 
         foreach ($new_answer_texts as $index => $text) {
             $text = trim($text);
             if (!empty($text)) {
-                $correct = isset($new_answer_correct[$index]);
+                $correct = $qtype == 1 ? ($new_answer_correct == $index) : isset($new_answer_correct[$index]);
                 $quiz->addAnswer($question_id, $text, $correct);
             }
         }
@@ -178,31 +186,31 @@ if ($question_id && !$question) {
                                     <i class="bi bi-info-circle"></i> Check the box next to answers that are correct.
                                 </div>
                                 <div id="answers-container" class="mb-3">
-                                    <?php if ($question && in_array($question['qtype'], [1, 2])): ?>
-                                        <?php foreach ($answers as $index => $answer): ?>
-                                            <div class="answer-row" data-index="<?= $index ?>">
-                                                <input type="hidden" name="answer_id[]" value="<?= $answer['id'] ?>">
-                                                <div class="row align-items-center">
-                                                    <div class="col-md-7">
-                                                        <input type="text" class="form-control" name="answer_text[]"
-                                                            value="<?= htmlspecialchars($answer['text']) ?>" placeholder="Answer text" required>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox" name="answer_correct[]"
-                                                                value="<?= $index ?>" <?= $answer['correct'] ? 'checked' : '' ?>>
-                                                            <label class="form-check-label">Correct Answer</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <button type="button" class="btn btn-danger btn-sm remove-answer">
-                                                            <i class="bi bi-trash"></i> Remove
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
+                                     <?php if ($question && in_array($question['qtype'], [1, 2])): ?>
+                                         <?php foreach ($answers as $index => $answer): ?>
+                                             <div class="answer-row" data-index="<?= $index ?>">
+                                                 <input type="hidden" name="answer_id[]" value="<?= $answer['id'] ?>">
+                                                 <div class="row align-items-center">
+                                                     <div class="col-md-7">
+                                                         <input type="text" class="form-control" name="answer_text[]"
+                                                             value="<?= htmlspecialchars($answer['text']) ?>" placeholder="Answer text" required>
+                                                     </div>
+                                                     <div class="col-md-3">
+                                                         <div class="form-check form-switch">
+                                                             <input class="form-check-input" type="<?= $question['qtype'] == 1 ? 'radio' : 'checkbox' ?>" name="<?= $question['qtype'] == 1 ? 'answer_correct' : 'answer_correct[]' ?>"
+                                                                 value="<?= $index ?>" <?= $answer['correct'] ? 'checked' : '' ?>>
+                                                             <label class="form-check-label">Correct Answer</label>
+                                                         </div>
+                                                     </div>
+                                                     <div class="col-md-2">
+                                                         <button type="button" class="btn btn-danger btn-sm remove-answer">
+                                                             <i class="bi bi-trash"></i> Remove
+                                                         </button>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                         <?php endforeach; ?>
+                                     <?php endif; ?>
                                 </div>
                                 <button type="button" id="add-answer" class="btn btn-sm btn-outline-primary mb-3">
                                     <i class="bi bi-plus-circle"></i> Add Answer
@@ -246,14 +254,28 @@ if ($question_id && !$question) {
                 matrixSection.classList.toggle('d-none', selectedType !== 3);
             }
 
-            qtypeSelect.addEventListener('change', toggleSections);
+            qtypeSelect.addEventListener('change', function() {
+                toggleSections();
+                // Update existing answer inputs based on new qtype
+                const selectedType = parseInt(this.value);
+                const isSingle = selectedType === 1;
+                const inputType = isSingle ? 'radio' : 'checkbox';
+                const name = isSingle ? 'answer_correct' : 'answer_correct[]';
+                document.querySelectorAll('.answer-row input[name^="answer_correct"]').forEach(input => {
+                    input.type = inputType;
+                    input.name = name;
+                });
+            });
             toggleSections();
 
             // Add answer row
+            let newAnswerCount = 0;
             document.getElementById('add-answer').addEventListener('click', function() {
                 const container = document.getElementById('answers-container');
-                const index = container.children.length;
-                const newIndex = Date.now(); // Unique index
+                const qtype = parseInt(document.getElementById('qtype').value);
+                const isSingle = qtype === 1;
+                const inputType = isSingle ? 'radio' : 'checkbox';
+                const name = isSingle ? 'new_answer_correct' : 'new_answer_correct[]';
 
                 const row = document.createElement('div');
                 row.className = 'answer-row';
@@ -265,7 +287,7 @@ if ($question_id && !$question) {
                         </div>
                         <div class="col-md-3">
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" name="new_answer_correct[]" value="${newIndex}">
+                                <input class="form-check-input" type="${inputType}" name="${name}" value="${newAnswerCount}">
                                 <label class="form-check-label">Correct Answer</label>
                             </div>
                         </div>
@@ -278,6 +300,7 @@ if ($question_id && !$question) {
                 `;
 
                 container.appendChild(row);
+                newAnswerCount++;
 
                 // Add event listener to remove button
                 row.querySelector('.remove-answer').addEventListener('click', function() {
