@@ -350,16 +350,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="col-md-6 mb-4">
                   <div class="p-3 bg-light rounded">
                     <h6 class="mb-3">Pre Test Average</h6>
-                    <div class="position-relative" style="height: 120px;">
-                      <div class="position-absolute top-0 start-50 translate-middle-x">
-                        <span class="display-4 fw-bold text-info"><?= round($stats['avg_pre_test'] ?? 0, 1) ?>%</span>
-                      </div>
-                      <div class="progress position-absolute bottom-0 w-100" style="height: 8px;">
-                        <div class="progress-bar bg-info progress-bar-animated"
-                          style="--final-width: <?= ($stats['avg_pre_test'] ?? 0) ?>%; width: <?= ($stats['avg_pre_test'] ?? 0) ?>%;"
-                          role="progressbar"></div>
-                      </div>
-                    </div>
+                     <div class="position-relative" style="height: 120px;">
+                       <div class="position-absolute top-0 start-50 translate-middle-x">
+                         <span class="display-4 fw-bold text-success"><?= round($stats['avg_pre_test'] ?? 0, 1) ?>%</span>
+                       </div>
+                       <div class="progress position-absolute bottom-0 w-100" style="height: 8px;">
+                         <div class="progress-bar bg-success progress-bar-animated"
+                           style="--final-width: <?= ($stats['avg_pre_test'] ?? 0) ?>%; width: <?= ($stats['avg_pre_test'] ?? 0) ?>%;"
+                           role="progressbar"></div>
+                       </div>
+                     </div>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4">
@@ -459,9 +459,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <?= $t['is_active'] ? 'Active' : 'Inactive' ?>
                           </span>
                           <br>
-                          <span class="badge bg-<?= $t['is_pretest'] ? 'info' : 'primary' ?>">
-                            <?= $t['is_pretest'] ? 'Pre Test' : 'Post Test' ?>
-                          </span>
+                           <span class="badge bg-<?= $t['is_pretest'] ? 'success' : 'primary' ?>">
+                             <?= $t['is_pretest'] ? 'Pre Test' : 'Post Test' ?>
+                           </span>
                         </td>
                         <td>
                           <a href="test_edit.php?id=<?= $t['id'] ?>" class="btn btn-sm btn-outline-primary">

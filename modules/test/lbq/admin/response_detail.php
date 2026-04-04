@@ -270,7 +270,7 @@ $qtypes = [
                                     <div class="col-md-6">
                                         <strong>Test:</strong> <?= htmlspecialchars($response['test_title']) ?><br>
                                         <strong>Type:</strong>
-                                        <span class="badge bg-<?= $response['is_pretest'] ? 'info' : 'primary' ?>">
+                                        <span class="badge bg-<?= $response['is_pretest'] ? 'success' : 'primary' ?>">
                                             <?= $response['is_pretest'] ? 'Pre Test' : 'Post Test' ?>
                                         </span><br>
                                         <strong>Course:</strong> <?= htmlspecialchars($response['course_name'] ?? 'N/A') ?><br>

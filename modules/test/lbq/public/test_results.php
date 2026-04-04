@@ -315,7 +315,7 @@ foreach ($response_details as $detail) {
                     <div class="card-body">
                         <div class="mb-3">
                             <strong>Test Type:</strong>
-                            <span class="badge bg-<?= $test['is_pretest'] ? 'info' : 'success' ?>">
+                            <span class="badge bg-<?= $test['is_pretest'] ? 'success' : 'primary' ?>">
                                 <?= $test['is_pretest'] ? 'Pre-test' : 'Post-test' ?>
                             </span>
                         </div>

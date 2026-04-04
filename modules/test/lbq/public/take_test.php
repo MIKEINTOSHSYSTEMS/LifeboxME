@@ -84,7 +84,7 @@ if (!$test_id) {
                         <div class="card-body">
                           <div class="d-flex justify-content-between align-items-start mb-2">
                             <h5 class="card-title"><?= htmlspecialchars($test['title']) ?></h5>
-                            <span class="badge bg-<?= $test['is_pretest'] ? 'info' : 'primary' ?>">
+                             <span class="badge bg-<?= $test['is_pretest'] ? 'success' : 'primary' ?>">
                               <?= $test['is_pretest'] ? 'Pretest' : 'Posttest' ?>
                             </span>
                           </div>

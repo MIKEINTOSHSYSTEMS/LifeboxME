@@ -63,7 +63,8 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 170vh;
+    margin-top: 77px;
+    width: 147%;
     color: var(--bs-modal-color);
     pointer-events: auto;
     background-color: var(--bs-modal-bg);

@@ -332,7 +332,7 @@ $stats = $stmt->fetch();
                             <div class="list-group-item border-0 px-0 result-item <?= $result['is_pretest'] ? 'pretest' : 'posttest' ?>">
                                 <div class="d-flex justify-content-between align-items-start mb-2">
                                     <h6 class="mb-0"><?= htmlspecialchars($result['test_title']) ?></h6>
-                                    <span class="badge bg-<?= $result['is_pretest'] ? 'info' : 'success' ?>">
+                                    <span class="badge bg-<?= $result['is_pretest'] ? 'success' : 'primary' ?>">
                                         <?= $result['is_pretest'] ? 'Pre-test' : 'Post-test' ?>
                                     </span>
                                 </div>

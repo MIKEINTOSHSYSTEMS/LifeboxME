@@ -233,9 +233,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                     </span>
                                                 </td>
                                                 <td>
-                                                    <span class="badge bg-<?= $t['is_pretest'] ? 'info' : 'primary' ?>">
-                                                        <?= $t['is_pretest'] ? 'Pre Test' : 'Post Test' ?>
-                                                    </span>
+                                                     <span class="badge bg-<?= $t['is_pretest'] ? 'success' : 'primary' ?>">
+                                                         <?= $t['is_pretest'] ? 'Pre Test' : 'Post Test' ?>
+                                                     </span>
                                                 </td>
                                                 <td>
                                                     <a href="test_edit.php?id=<?= $t['id'] ?>" class="btn btn-sm btn-outline-primary">
@@ -263,7 +263,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- Create Test Modal -->
     <div class="modal fade" id="createTestModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Create New Test</h5>
@@ -272,11 +272,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <form method="post">
                     <div class="modal-body">
                         <div class="row mb-3">
-                            <div class="col-md-8">
+                            <div class="col-md-4">
                                 <label for="title" class="form-label">Test Title</label>
                                 <input type="text" class="form-control" id="title" name="title" required>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-8">
                                 <label for="training_id" class="form-label">Training Session</label>
                                 <select class="form-select" id="training_id" name="training_id" required>
                                     <option value="">Select Training Session</option>
@@ -291,7 +291,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
 
                         <div class="row mb-3">
-                            <div class="col-md-8">
+                            <div class="col-md-4">
                                 <label for="description" class="form-label">Description</label>
                                 <textarea class="form-control" id="description" name="description" rows="2"></textarea>
                             </div>

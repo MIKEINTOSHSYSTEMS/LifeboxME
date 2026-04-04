@@ -247,7 +247,7 @@ $qtypes = [
             </div>
           </div>
           <div class="col-md-3">
-            <div class="stats-card" style="background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);">
+            <div class="stats-card" style="background: linear-gradient(135deg, #277c99 0%, #44a08d 100%);">
               <h6>Test Type</h6>
               <h4>
                 <span class="badge bg-<?= $test['is_pretest'] ? 'info' : 'primary' ?>">

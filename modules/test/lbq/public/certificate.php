@@ -745,7 +745,7 @@ if ($selected_border === 'custom' && isset($_GET['custom_img'])) {
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <strong>Test Type:</strong><br>
-                                    <span class="badge bg-<?= $test['is_pretest'] ? 'info' : 'success' ?>">
+                                    <span class="badge bg-<?= $test['is_pretest'] ? 'success' : 'primary' ?>">
                                         <?= $test['is_pretest'] ? 'Pre-test' : 'Post-test' ?>
                                     </span>
                                 </div>
@@ -756,8 +756,8 @@ if ($selected_border === 'custom' && isset($_GET['custom_img'])) {
                                     <div class="col-12">
                                         <strong>Performance Summary:</strong>
                                         <div class="mt-2">
-                                            <span class="badge bg-info me-2">Pre-test Average: <?= $score_data['avg_pretest'] !== null ? round($score_data['avg_pretest'], 1) : 'N/A' ?>%</span>
-                                            <span class="badge bg-success">Post-test Average: <?= $score_data['avg_posttest'] !== null ? round($score_data['avg_posttest'], 1) : 'N/A' ?>%</span>
+                                            <span class="badge bg-success me-2">Pre-test Average: <?= $score_data['avg_pretest'] !== null ? round($score_data['avg_pretest'], 1) : 'N/A' ?>%</span>
+                                            <span class="badge bg-primary">Post-test Average: <?= $score_data['avg_posttest'] !== null ? round($score_data['avg_posttest'], 1) : 'N/A' ?>%</span>
                                         </div>
                                     </div>
                                 </div>
