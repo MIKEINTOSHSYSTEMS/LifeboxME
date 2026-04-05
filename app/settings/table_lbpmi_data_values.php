@@ -90,7 +90,8 @@ $runnerTableSettings['public.lbpmi_data_values'] = array(
 	deleted,
 	data_source,
 	source_detail,
-	value_type
+	value_type,
+	scope_level
 FROM
 	"public".lbpmi_data_values',
 	'keyFields' => array( 
@@ -781,6 +782,30 @@ FROM
 				) 
 			),
 			'tableName' => 'public.lbpmi_data_values' 
+		),
+		'scope_level' => array(
+			'name' => 'scope_level',
+			'goodName' => 'scope_level',
+			'strField' => 'scope_level',
+			'index' => 20,
+			'sqlExpression' => 'scope_level',
+			'viewFormats' => array(
+				'view' => array(
+					 
+				) 
+			),
+			'editFormats' => array(
+				'edit' => array(
+					'format' => 'Lookup wizard',
+					'lookupType' => 0,
+					'lookupValues' => array( 
+						'Regional',
+						'Country',
+						'Facility' 
+					) 
+				) 
+			),
+			'tableName' => 'public.lbpmi_data_values' 
 		) 
 	),
 	'masterTables' => array( 
@@ -841,7 +866,8 @@ FROM
 	deleted,
 	data_source,
 	source_detail,
-	value_type
+	value_type,
+	scope_level
 FROM
 	"public".lbpmi_data_values',
 		'parsed' => true,
@@ -1131,6 +1157,21 @@ FROM
 				),
 				'encrypted' => false,
 				'columnName' => 'value_type' 
+			),
+			array(
+				'sql' => 'scope_level',
+				'parsed' => true,
+				'type' => 'FieldListItem',
+				'alias' => '',
+				'expression' => array(
+					'sql' => '',
+					'parsed' => true,
+					'type' => 'SQLField',
+					'table' => 'public.lbpmi_data_values',
+					'name' => 'scope_level' 
+				),
+				'encrypted' => false,
+				'columnName' => 'scope_level' 
 			) 
 		),
 		'fromList' => array( 
@@ -1161,7 +1202,8 @@ FROM
 						'deleted',
 						'data_source',
 						'source_detail',
-						'value_type' 
+						'value_type',
+						'scope_level' 
 					),
 					'name' => 'public.lbpmi_data_values' 
 				),
@@ -1348,6 +1390,13 @@ FROM
 				'groupByIndex' => -1,
 				'whereIndex' => -1,
 				'havingIndex' => -1 
+			),
+			array(
+				'fieldIndex' => 19,
+				'orderByIndex' => -1,
+				'groupByIndex' => -1,
+				'whereIndex' => -1,
+				'havingIndex' => -1 
 			) 
 		),
 		'headSql' => 'SELECT',
@@ -1369,7 +1418,8 @@ FROM
 	deleted,
 	data_source,
 	source_detail,
-	value_type',
+	value_type,
+	scope_level',
 		'fromListSql' => 'FROM
 	"public".lbpmi_data_values',
 		'orderBySql' => '',
@@ -1445,7 +1495,8 @@ FROM
 			'deleted',
 			'data_source',
 			'source_detail',
-			'value_type' 
+			'value_type',
+			'scope_level' 
 		),
 		'searchSuggest' => true,
 		'highlightSearchResults' => true,
@@ -1470,7 +1521,8 @@ FROM
 			'deleted',
 			'data_source',
 			'source_detail',
-			'value_type' 
+			'value_type',
+			'scope_level' 
 		) 
 	),
 	'connId' => 'lifebox_mesystem_at_localhost',
@@ -1542,7 +1594,8 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'deleted' => 'Deleted',
 		'data_source' => 'Data Source',
 		'source_detail' => 'Source Detail',
-		'value_type' => 'Value Type' 
+		'value_type' => 'Value Type',
+		'scope_level' => 'Scope Level' 
 	),
 	'fieldTooltips' => array(
 		'data_value_id' => '',
@@ -1563,7 +1616,8 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'deleted' => '',
 		'data_source' => '',
 		'source_detail' => '',
-		'value_type' => '' 
+		'value_type' => '',
+		'scope_level' => '' 
 	),
 	'fieldPlaceholders' => array(
 		'data_value_id' => '',
@@ -1584,7 +1638,8 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'deleted' => '',
 		'data_source' => '',
 		'source_detail' => '',
-		'value_type' => '' 
+		'value_type' => '',
+		'scope_level' => '' 
 	),
 	'pageTitles' => array(
 		 

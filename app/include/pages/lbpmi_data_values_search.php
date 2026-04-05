@@ -20,7 +20,8 @@
 			'deleted',
 			'data_source',
 			'source_detail',
-			'value_type' 
+			'value_type',
+			'scope_level' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -85,6 +86,9 @@
 			),
 			'value_type' => array( 
 				'integrated_search_field18' 
+			),
+			'scope_level' => array( 
+				'integrated_search_field19' 
 			) 
 		) 
 	),
@@ -118,17 +122,18 @@
 					'integrated_search_field5',
 					'integrated_search_field6',
 					'integrated_search_field7',
+					'integrated_search_field19',
 					'integrated_search_field8',
 					'integrated_search_field9',
 					'integrated_search_field10',
 					'integrated_search_field11',
+					'integrated_search_field18',
 					'integrated_search_field12',
 					'integrated_search_field13',
 					'integrated_search_field14',
 					'integrated_search_field15',
 					'integrated_search_field16',
-					'integrated_search_field17',
-					'integrated_search_field18' 
+					'integrated_search_field17' 
 				) 
 			),
 			'formXtTags' => array(
@@ -150,17 +155,18 @@
 				'integrated_search_field5' => 'grid',
 				'integrated_search_field6' => 'grid',
 				'integrated_search_field7' => 'grid',
+				'integrated_search_field19' => 'grid',
 				'integrated_search_field8' => 'grid',
 				'integrated_search_field9' => 'grid',
 				'integrated_search_field10' => 'grid',
 				'integrated_search_field11' => 'grid',
+				'integrated_search_field18' => 'grid',
 				'integrated_search_field12' => 'grid',
 				'integrated_search_field13' => 'grid',
 				'integrated_search_field14' => 'grid',
 				'integrated_search_field15' => 'grid',
 				'integrated_search_field16' => 'grid',
-				'integrated_search_field17' => 'grid',
-				'integrated_search_field18' => 'grid' 
+				'integrated_search_field17' => 'grid' 
 			),
 			'itemLocations' => array(
 				'integrated_search_field' => array(
@@ -195,6 +201,10 @@
 					'location' => 'grid',
 					'cellId' => 'c3' 
 				),
+				'integrated_search_field19' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
 				'integrated_search_field8' => array(
 					'location' => 'grid',
 					'cellId' => 'c3' 
@@ -208,6 +218,10 @@
 					'cellId' => 'c3' 
 				),
 				'integrated_search_field11' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field18' => array(
 					'location' => 'grid',
 					'cellId' => 'c3' 
 				),
@@ -232,10 +246,6 @@
 					'cellId' => 'c3' 
 				),
 				'integrated_search_field17' => array(
-					'location' => 'grid',
-					'cellId' => 'c3' 
-				),
-				'integrated_search_field18' => array(
 					'location' => 'grid',
 					'cellId' => 'c3' 
 				) 
@@ -279,7 +289,8 @@
 				'integrated_search_field15',
 				'integrated_search_field16',
 				'integrated_search_field17',
-				'integrated_search_field18' 
+				'integrated_search_field18',
+				'integrated_search_field19' 
 			) 
 		),
 		'cellMaps' => array(
@@ -304,17 +315,18 @@
 							'integrated_search_field5',
 							'integrated_search_field6',
 							'integrated_search_field7',
+							'integrated_search_field19',
 							'integrated_search_field8',
 							'integrated_search_field9',
 							'integrated_search_field10',
 							'integrated_search_field11',
+							'integrated_search_field18',
 							'integrated_search_field12',
 							'integrated_search_field13',
 							'integrated_search_field14',
 							'integrated_search_field15',
 							'integrated_search_field16',
-							'integrated_search_field17',
-							'integrated_search_field18' 
+							'integrated_search_field17' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
@@ -487,17 +499,18 @@
 						'integrated_search_field5',
 						'integrated_search_field6',
 						'integrated_search_field7',
+						'integrated_search_field19',
 						'integrated_search_field8',
 						'integrated_search_field9',
 						'integrated_search_field10',
 						'integrated_search_field11',
+						'integrated_search_field18',
 						'integrated_search_field12',
 						'integrated_search_field13',
 						'integrated_search_field14',
 						'integrated_search_field15',
 						'integrated_search_field16',
-						'integrated_search_field17',
-						'integrated_search_field18' 
+						'integrated_search_field17' 
 					) 
 				) 
 			),
@@ -631,6 +644,11 @@
 		),
 		'integrated_search_field18' => array(
 			'field' => 'value_type',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
+		),
+		'integrated_search_field19' => array(
+			'field' => 'scope_level',
 			'type' => 'integrated_search_field',
 			'orientation' => 0 
 		) 

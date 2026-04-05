@@ -382,8 +382,10 @@ pdfDocument = {
 	
 			"stack": [
 		
-				'',
-	  ],
+				
+			{"hidden":"{$item_hide_integrated_edit_field18}","stack":[{"text":"{$jslabel public_lbpmi_data_values scope_level }","bold":true},{"text":{$scope_level_pdfvalue}}],"margin":[0,0,0,15]},
+				
+		  ],
   "border": [ false, false, false, false ],
               "alignment": 'left',
      

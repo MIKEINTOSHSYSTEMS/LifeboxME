@@ -10,6 +10,7 @@
 			'period_month',
 			'period_week',
 			'period_day',
+			'scope_level',
 			'region_id',
 			'country_id',
 			'facility_id',
@@ -85,6 +86,9 @@
 			),
 			'value_type' => array( 
 				'import_field18' 
+			),
+			'scope_level' => array( 
+				'import_field19' 
 			) 
 		) 
 	),
@@ -112,6 +116,7 @@
 					'import_field5',
 					'import_field6',
 					'import_field7',
+					'import_field19',
 					'import_field8',
 					'import_field9',
 					'import_field10',
@@ -140,6 +145,7 @@
 				'import_field5' => 'grid',
 				'import_field6' => 'grid',
 				'import_field7' => 'grid',
+				'import_field19' => 'grid',
 				'import_field8' => 'grid',
 				'import_field9' => 'grid',
 				'import_field10' => 'grid',
@@ -182,7 +188,8 @@
 				'import_field15',
 				'import_field16',
 				'import_field17',
-				'import_field18' 
+				'import_field18',
+				'import_field19' 
 			) 
 		),
 		'cellMaps' => array(
@@ -318,6 +325,7 @@
 						'import_field5',
 						'import_field6',
 						'import_field7',
+						'import_field19',
 						'import_field8',
 						'import_field9',
 						'import_field10',
@@ -416,6 +424,10 @@
 		),
 		'import_field18' => array(
 			'field' => 'value_type',
+			'type' => 'import_field' 
+		),
+		'import_field19' => array(
+			'field' => 'scope_level',
 			'type' => 'import_field' 
 		) 
 	),

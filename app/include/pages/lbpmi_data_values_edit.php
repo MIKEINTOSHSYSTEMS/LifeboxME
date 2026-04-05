@@ -36,7 +36,8 @@
 			'stored_by',
 			'created',
 			'last_updated',
-			'value_type' 
+			'value_type',
+			'scope_level' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -101,6 +102,9 @@
 			),
 			'value_type' => array( 
 				'integrated_edit_field17' 
+			),
+			'scope_level' => array( 
+				'integrated_edit_field18' 
 			) 
 		) 
 	),
@@ -141,6 +145,7 @@
 				),
 				'grid' => array( 
 					'integrated_edit_field',
+					'integrated_edit_field18',
 					'integrated_edit_field15',
 					'integrated_edit_field2',
 					'integrated_edit_field6',
@@ -183,6 +188,7 @@
 				'menu' => 'left',
 				'edit_header' => 'top',
 				'integrated_edit_field' => 'grid',
+				'integrated_edit_field18' => 'grid',
 				'integrated_edit_field15' => 'grid',
 				'integrated_edit_field2' => 'grid',
 				'integrated_edit_field6' => 'grid',
@@ -205,6 +211,10 @@
 				'integrated_edit_field' => array(
 					'location' => 'grid',
 					'cellId' => 'c' 
+				),
+				'integrated_edit_field18' => array(
+					'location' => 'grid',
+					'cellId' => 'c5' 
 				),
 				'integrated_edit_field15' => array(
 					'location' => 'grid',
@@ -362,7 +372,8 @@
 				'integrated_edit_field11',
 				'integrated_edit_field12',
 				'integrated_edit_field13',
-				'integrated_edit_field17' 
+				'integrated_edit_field17',
+				'integrated_edit_field18' 
 			),
 			'expand_button' => array( 
 				'expand_button' 
@@ -481,9 +492,9 @@
 							 
 						),
 						'items' => array( 
-							 
+							'integrated_edit_field18' 
 						),
-						'fixedAtServer' => false,
+						'fixedAtServer' => true,
 						'fixedAtClient' => false 
 					),
 					'c12' => array(
@@ -1135,7 +1146,7 @@
 				'c5' => array(
 					'model' => 'c3',
 					'items' => array( 
-						 
+						'integrated_edit_field18' 
 					) 
 				),
 				'c6' => array(
@@ -1451,6 +1462,12 @@
 		),
 		'integrated_edit_field17' => array(
 			'field' => 'value_type',
+			'type' => 'integrated_edit_field',
+			'orientation' => 0,
+			'updateOnEdit' => false 
+		),
+		'integrated_edit_field18' => array(
+			'field' => 'scope_level',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
 			'updateOnEdit' => false 

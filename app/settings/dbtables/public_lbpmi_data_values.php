@@ -3,7 +3,58 @@ global $runnerDbTableInfo;
 $runnerDbTableInfo['public_lbpmi_data_values'] = array(
 	'type' => 0,
 	'foreignKeys' => array( 
-		 
+		array(
+			'name' => 'lbpmi_data_values_country_id_fkey',
+			'refSchema' => 'public',
+			'refTable' => 'countries',
+			'del_rule' => 0,
+			'upd_rule' => 0,
+			'columns' => array( 
+				array(
+					'column' => 'country_id',
+					'ref_column' => 'country_id' 
+				) 
+			) 
+		),
+		array(
+			'name' => 'lbpmi_data_values_data_element_id_fkey',
+			'refSchema' => 'public',
+			'refTable' => 'lbpmi_data_elements',
+			'del_rule' => 0,
+			'upd_rule' => 0,
+			'columns' => array( 
+				array(
+					'column' => 'data_element_id',
+					'ref_column' => 'data_element_id' 
+				) 
+			) 
+		),
+		array(
+			'name' => 'lbpmi_data_values_facility_id_fkey',
+			'refSchema' => 'public',
+			'refTable' => 'facilities',
+			'del_rule' => 0,
+			'upd_rule' => 0,
+			'columns' => array( 
+				array(
+					'column' => 'facility_id',
+					'ref_column' => 'facility_id' 
+				) 
+			) 
+		),
+		array(
+			'name' => 'lbpmi_data_values_region_id_fkey',
+			'refSchema' => 'public',
+			'refTable' => 'regions',
+			'del_rule' => 0,
+			'upd_rule' => 0,
+			'columns' => array( 
+				array(
+					'column' => 'region_id',
+					'ref_column' => 'region_id' 
+				) 
+			) 
+		) 
 	),
 	'fields' => array( 
 		array(
@@ -204,6 +255,17 @@ $runnerDbTableInfo['public_lbpmi_data_values'] = array(
 		),
 		array(
 			'name' => 'value_type',
+			'typeName' => 'character varying',
+			'size' => 50,
+			'scale' => null,
+			'type' => 200,
+			'autoinc' => false,
+			'defaultValueSQL' => null,
+			'defaultValue' => '',
+			'nullable' => true 
+		),
+		array(
+			'name' => 'scope_level',
 			'typeName' => 'character varying',
 			'size' => 50,
 			'scale' => null,

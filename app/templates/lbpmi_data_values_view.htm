@@ -669,9 +669,8 @@
 								</tr>
 	 
 	 
-		
-						<tr>
-						
+														<tr {$row_grid_2} >
+										
 
 {BEGIN cellblock_grid_c5}
 <td
@@ -685,7 +684,28 @@
 		
 >
 	<div edit-form-cell class="clearfix">
-									</td>
+				
+{BEGIN scope_level_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_scope_level}  r-vertical-field" 
+	data-signal-error-for="scope_level{$id}" {$required_attr_scope_level}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field18" {$item_integrated_edit_field18} data-pageid="{$pageid}" data-field="scope_level" data-fieldname="scope_level" >
+
+	<label class="r-edit-label control-label {$scope_level_label_class}" for="{$labelfor_scope_level}">
+		{BEGIN scope_level_label}
+			{$scope_level_forward_control}
+			{$label public_lbpmi_data_values scope_level }			{END scope_level_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$scope_level_value}	</div>
+	</div>
+
+
+{END scope_level_fieldblock}
+	
+								</td>
 			{END cellblock_grid_c5}
 			 
 		

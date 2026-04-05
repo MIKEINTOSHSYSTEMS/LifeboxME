@@ -3,7 +3,19 @@ global $runnerDbTableInfo;
 $runnerDbTableInfo['public_ward_rounds'] = array(
 	'type' => 0,
 	'foreignKeys' => array( 
-		 
+		array(
+			'name' => 'ward_rounds_facility_id_fkey',
+			'refSchema' => 'public',
+			'refTable' => 'facilities',
+			'del_rule' => 0,
+			'upd_rule' => 0,
+			'columns' => array( 
+				array(
+					'column' => 'facility_id',
+					'ref_column' => 'facility_id' 
+				) 
+			) 
+		) 
 	),
 	'fields' => array( 
 		array(

@@ -3,7 +3,71 @@ global $runnerDbTableInfo;
 $runnerDbTableInfo['public_lbpmi_calculation_jobs'] = array(
 	'type' => 0,
 	'foreignKeys' => array( 
-		 
+		array(
+			'name' => 'lbpmi_calculation_jobs_country_id_fkey',
+			'refSchema' => 'public',
+			'refTable' => 'countries',
+			'del_rule' => 0,
+			'upd_rule' => 0,
+			'columns' => array( 
+				array(
+					'column' => 'country_id',
+					'ref_column' => 'country_id' 
+				) 
+			) 
+		),
+		array(
+			'name' => 'lbpmi_calculation_jobs_data_element_id_fkey',
+			'refSchema' => 'public',
+			'refTable' => 'lbpmi_data_elements',
+			'del_rule' => 0,
+			'upd_rule' => 0,
+			'columns' => array( 
+				array(
+					'column' => 'data_element_id',
+					'ref_column' => 'data_element_id' 
+				) 
+			) 
+		),
+		array(
+			'name' => 'lbpmi_calculation_jobs_facility_id_fkey',
+			'refSchema' => 'public',
+			'refTable' => 'facilities',
+			'del_rule' => 0,
+			'upd_rule' => 0,
+			'columns' => array( 
+				array(
+					'column' => 'facility_id',
+					'ref_column' => 'facility_id' 
+				) 
+			) 
+		),
+		array(
+			'name' => 'lbpmi_calculation_jobs_indicator_id_fkey',
+			'refSchema' => 'public',
+			'refTable' => 'lbpmi_indicators',
+			'del_rule' => 0,
+			'upd_rule' => 0,
+			'columns' => array( 
+				array(
+					'column' => 'indicator_id',
+					'ref_column' => 'indicator_id' 
+				) 
+			) 
+		),
+		array(
+			'name' => 'lbpmi_calculation_jobs_region_id_fkey',
+			'refSchema' => 'public',
+			'refTable' => 'regions',
+			'del_rule' => 0,
+			'upd_rule' => 0,
+			'columns' => array( 
+				array(
+					'column' => 'region_id',
+					'ref_column' => 'region_id' 
+				) 
+			) 
+		) 
 	),
 	'fields' => array( 
 		array(

@@ -477,7 +477,8 @@
 								</td>
 			{END cellblock_grid_c}
 			 
-																
+		
+							
 
 {BEGIN cellblock_grid_c10}
 <td
@@ -487,6 +488,44 @@
 			data-single
 			
 			data-cellId="grid_c10" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c10}
+			 
+		
+							
+
+{BEGIN cellblock_grid_c1}
+<td
+	{$cell_grid_c1}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c1" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c1}
+								</tr>
+	 
+	 
+														<tr {$row_grid_1} >
+										
+
+{BEGIN cellblock_grid_c27}
+<td
+	{$cell_grid_c27}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c27" data-pageid="{$pageid}"
 		data-v-cell="2"
 		
 >
@@ -517,17 +556,17 @@
 {END period_type_fieldblock}
 	
 								</td>
-			{END cellblock_grid_c10}
+			{END cellblock_grid_c27}
 			 
 																
 
-{BEGIN cellblock_grid_c1}
+{BEGIN cellblock_grid_c28}
 <td
-	{$cell_grid_c1}
+	{$cell_grid_c28}
 	class=" r-ori-vert"
 	
 			
-			data-cellId="grid_c1" data-pageid="{$pageid}"
+			data-cellId="grid_c28" data-pageid="{$pageid}"
 		data-v-cell="2"
 		
 >
@@ -582,56 +621,17 @@
 {END period_day_fieldblock}
 	
 								</td>
-			{END cellblock_grid_c1}
-								</tr>
-	 
-	 
-		
-						<tr>
-						
-
-{BEGIN cellblock_grid_c4}
-<td
-	{$cell_grid_c4}
-	class=" r-ori-vert"
-	
-			data-single
-			
-			data-cellId="grid_c4" data-pageid="{$pageid}"
-		data-v-cell="2"
-		
->
-	<div edit-form-cell class="clearfix">
-									</td>
-			{END cellblock_grid_c4}
-			 
-		
-							
-
-{BEGIN cellblock_grid_c11}
-<td
-	{$cell_grid_c11}
-	class=" r-ori-vert"
-	
-			data-single
-			
-			data-cellId="grid_c11" data-pageid="{$pageid}"
-		data-v-cell="2"
-		
->
-	<div edit-form-cell class="clearfix">
-									</td>
-			{END cellblock_grid_c11}
+			{END cellblock_grid_c28}
 			 
 																
 
-{BEGIN cellblock_grid_c2}
+{BEGIN cellblock_grid_c29}
 <td
-	{$cell_grid_c2}
+	{$cell_grid_c29}
 	class=" r-ori-vert"
 	
 			
-			data-cellId="grid_c2" data-pageid="{$pageid}"
+			data-cellId="grid_c29" data-pageid="{$pageid}"
 		data-v-cell="2"
 		
 >
@@ -710,64 +710,88 @@
 {END period_week_fieldblock}
 	
 								</td>
-			{END cellblock_grid_c2}
+			{END cellblock_grid_c29}
 								</tr>
 	 
 	 
-		
-						<tr>
-						
+														<tr {$row_grid_2} >
+										
 
-{BEGIN cellblock_grid_c5}
+{BEGIN cellblock_grid_c4}
 <td
-	{$cell_grid_c5}
+	{$cell_grid_c4}
 	class=" r-ori-vert"
 	
 			data-single
 			
-			data-cellId="grid_c5" data-pageid="{$pageid}"
+			data-cellId="grid_c4" data-pageid="{$pageid}"
 		data-v-cell="2"
 		
 >
 	<div edit-form-cell class="clearfix">
-									</td>
-			{END cellblock_grid_c5}
+				
+{BEGIN scope_level_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_scope_level}  r-vertical-field" 
+	data-signal-error-for="scope_level{$id}" {$required_attr_scope_level}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field18" {$item_integrated_edit_field18} data-pageid="{$pageid}" data-field="scope_level" data-fieldname="scope_level" >
+
+	<label class="r-edit-label control-label {$scope_level_label_class}" for="{$labelfor_scope_level}">
+		{BEGIN scope_level_label}
+			{$scope_level_forward_control}
+			{$label public_lbpmi_data_values scope_level }			{END scope_level_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$scope_level_editcontrol}	</div>
+		<div class="r-edit-tooltip" data-helpfor="scope_level" {$tooltipAttr public_lbpmi_data_values scope_level } >
+		<div class="text-muted" >
+		{$tooltip public_lbpmi_data_values scope_level }		</div>
+	</div>
+	</div>
+
+
+{END scope_level_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c4}
 			 
 		
 							
 
-{BEGIN cellblock_grid_c12}
+{BEGIN cellblock_grid_c11}
 <td
-	{$cell_grid_c12}
+	{$cell_grid_c11}
 	class=" r-ori-vert"
 	
 			data-single
 			
-			data-cellId="grid_c12" data-pageid="{$pageid}"
+			data-cellId="grid_c11" data-pageid="{$pageid}"
 		data-v-cell="2"
 		
 >
 	<div edit-form-cell class="clearfix">
 									</td>
-			{END cellblock_grid_c12}
+			{END cellblock_grid_c11}
 			 
 		
 							
 
-{BEGIN cellblock_grid_c7}
+{BEGIN cellblock_grid_c2}
 <td
-	{$cell_grid_c7}
+	{$cell_grid_c2}
 	class=" r-ori-vert"
 	
 			data-single
 			
-			data-cellId="grid_c7" data-pageid="{$pageid}"
+			data-cellId="grid_c2" data-pageid="{$pageid}"
 		data-v-cell="2"
 		
 >
 	<div edit-form-cell class="clearfix">
 									</td>
-			{END cellblock_grid_c7}
+			{END cellblock_grid_c2}
 								</tr>
 	 
 	 
@@ -1147,15 +1171,37 @@
 								</td>
 			{END cellblock_grid_c19}
 			 
-																
+		
+							
 
 {BEGIN cellblock_grid_c20}
 <td
 	{$cell_grid_c20}
 	class=" r-ori-vert"
 	
+			data-single
 			
 			data-cellId="grid_c20" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+									</td>
+			{END cellblock_grid_c20}
+								</tr>
+	 
+	 
+														<tr {$row_grid_7} >
+										
+
+{BEGIN cellblock_grid_c24}
+<td
+	{$cell_grid_c24}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c24" data-pageid="{$pageid}"
 		data-v-cell="2"
 		
 >
@@ -1184,7 +1230,25 @@
 
 
 {END stored_by_fieldblock}
-											
+	
+								</td>
+			{END cellblock_grid_c24}
+			 
+																
+
+{BEGIN cellblock_grid_c25}
+<td
+	{$cell_grid_c25}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c25" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
 {BEGIN created_fieldblock}
 
 
@@ -1208,7 +1272,25 @@
 
 
 {END created_fieldblock}
-											
+	
+								</td>
+			{END cellblock_grid_c25}
+			 
+																
+
+{BEGIN cellblock_grid_c26}
+<td
+	{$cell_grid_c26}
+	class=" r-ori-vert"
+	
+			data-single
+			
+			data-cellId="grid_c26" data-pageid="{$pageid}"
+		data-v-cell="2"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
 {BEGIN last_updated_fieldblock}
 
 
@@ -1234,7 +1316,7 @@
 {END last_updated_fieldblock}
 	
 								</td>
-			{END cellblock_grid_c20}
+			{END cellblock_grid_c26}
 								</tr>
 	 
 	 

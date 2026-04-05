@@ -3,7 +3,58 @@ global $runnerDbTableInfo;
 $runnerDbTableInfo['public_surgical_cases'] = array(
 	'type' => 0,
 	'foreignKeys' => array( 
-		 
+		array(
+			'name' => 'surgical_cases_country_id_fkey',
+			'refSchema' => 'public',
+			'refTable' => 'countries',
+			'del_rule' => 0,
+			'upd_rule' => 0,
+			'columns' => array( 
+				array(
+					'column' => 'country_id',
+					'ref_column' => 'country_id' 
+				) 
+			) 
+		),
+		array(
+			'name' => 'surgical_cases_facility_id_fkey',
+			'refSchema' => 'public',
+			'refTable' => 'facilities',
+			'del_rule' => 0,
+			'upd_rule' => 0,
+			'columns' => array( 
+				array(
+					'column' => 'facility_id',
+					'ref_column' => 'facility_id' 
+				) 
+			) 
+		),
+		array(
+			'name' => 'surgical_cases_preoperative_diagnosis_id_fkey',
+			'refSchema' => 'public',
+			'refTable' => 'diagnoses',
+			'del_rule' => 0,
+			'upd_rule' => 0,
+			'columns' => array( 
+				array(
+					'column' => 'preoperative_diagnosis_id',
+					'ref_column' => 'diagnosis_id' 
+				) 
+			) 
+		),
+		array(
+			'name' => 'surgical_cases_procedure_id_fkey',
+			'refSchema' => 'public',
+			'refTable' => 'procedures',
+			'del_rule' => 0,
+			'upd_rule' => 0,
+			'columns' => array( 
+				array(
+					'column' => 'procedure_id',
+					'ref_column' => 'procedure_id' 
+				) 
+			) 
+		) 
 	),
 	'fields' => array( 
 		array(

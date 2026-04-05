@@ -104,6 +104,9 @@
 		),
 		'value_type' => array(
 			'totalsType' => '' 
+		),
+		'scope_level' => array(
+			'totalsType' => '' 
 		) 
 	),
 	'fields' => array(
@@ -116,6 +119,7 @@
 			'period_month',
 			'period_week',
 			'period_day',
+			'scope_level',
 			'region_id',
 			'country_id',
 			'facility_id',
@@ -133,6 +137,7 @@
 		),
 		'searchPanelFields' => array( 
 			'data_element_id',
+			'scope_level',
 			'period_type',
 			'period_year',
 			'period_month',
@@ -164,79 +169,83 @@
 		'fieldItems' => array(
 			'data_value_id' => array( 
 				'simple_grid_field',
-				'simple_grid_field19' 
+				'simple_grid_field20' 
 			),
 			'data_element_id' => array( 
 				'simple_grid_field1',
-				'simple_grid_field20' 
+				'simple_grid_field21' 
 			),
 			'period_type' => array( 
 				'simple_grid_field2',
-				'simple_grid_field21' 
+				'simple_grid_field22' 
 			),
 			'period_year' => array( 
 				'simple_grid_field3',
-				'simple_grid_field22' 
+				'simple_grid_field23' 
 			),
 			'period_quarter' => array( 
 				'simple_grid_field4',
-				'simple_grid_field23' 
+				'simple_grid_field24' 
 			),
 			'period_month' => array( 
 				'simple_grid_field5',
-				'simple_grid_field24' 
+				'simple_grid_field25' 
 			),
 			'period_week' => array( 
 				'simple_grid_field6',
-				'simple_grid_field25' 
+				'simple_grid_field26' 
 			),
 			'period_day' => array( 
 				'simple_grid_field7',
-				'simple_grid_field26' 
+				'simple_grid_field27' 
+			),
+			'scope_level' => array( 
+				'simple_grid_field19',
+				'simple_grid_field28' 
 			),
 			'region_id' => array( 
 				'simple_grid_field8',
-				'simple_grid_field27' 
+				'simple_grid_field29' 
 			),
 			'country_id' => array( 
 				'simple_grid_field9',
-				'simple_grid_field28' 
+				'simple_grid_field30' 
 			),
 			'facility_id' => array( 
 				'simple_grid_field10',
-				'simple_grid_field29' 
+				'simple_grid_field31' 
 			),
 			'data_source' => array( 
 				'simple_grid_field16',
-				'simple_grid_field30' 
+				'simple_grid_field32' 
 			),
 			'source_detail' => array( 
 				'simple_grid_field17',
-				'simple_grid_field31' 
+				'simple_grid_field33' 
 			),
 			'value' => array( 
 				'simple_grid_field11',
-				'simple_grid_field32' 
+				'simple_grid_field34' 
 			),
 			'value_type' => array( 
 				'simple_grid_field18',
-				'simple_grid_field33' 
+				'simple_grid_field35' 
 			),
 			'stored_by' => array( 
 				'simple_grid_field12',
-				'simple_grid_field34' 
+				'simple_grid_field36' 
 			),
 			'created' => array( 
 				'simple_grid_field13',
-				'simple_grid_field35' 
+				'simple_grid_field37' 
 			),
 			'last_updated' => array( 
 				'simple_grid_field14',
-				'simple_grid_field36' 
+				'simple_grid_field38' 
 			),
 			'deleted' => array( 
 				'simple_grid_field15',
-				'simple_grid_field37' 
+				'simple_grid_field39' 
 			) 
 		),
 		'hideEmptyFields' => array( 
@@ -286,43 +295,45 @@
 					'master_info' 
 				),
 				'grid' => array( 
-					'simple_grid_field19',
-					'simple_grid_field',
 					'simple_grid_field20',
-					'simple_grid_field1',
+					'simple_grid_field',
 					'simple_grid_field21',
-					'simple_grid_field2',
+					'simple_grid_field1',
 					'simple_grid_field22',
-					'simple_grid_field3',
+					'simple_grid_field2',
 					'simple_grid_field23',
-					'simple_grid_field4',
+					'simple_grid_field3',
 					'simple_grid_field24',
-					'simple_grid_field5',
+					'simple_grid_field4',
 					'simple_grid_field25',
-					'simple_grid_field6',
+					'simple_grid_field5',
 					'simple_grid_field26',
-					'simple_grid_field7',
+					'simple_grid_field6',
 					'simple_grid_field27',
-					'simple_grid_field8',
+					'simple_grid_field7',
 					'simple_grid_field28',
-					'simple_grid_field9',
+					'simple_grid_field19',
 					'simple_grid_field29',
-					'simple_grid_field10',
+					'simple_grid_field8',
 					'simple_grid_field30',
-					'simple_grid_field16',
+					'simple_grid_field9',
 					'simple_grid_field31',
-					'simple_grid_field17',
+					'simple_grid_field10',
 					'simple_grid_field32',
-					'simple_grid_field11',
+					'simple_grid_field16',
 					'simple_grid_field33',
-					'simple_grid_field18',
+					'simple_grid_field17',
 					'simple_grid_field34',
-					'simple_grid_field12',
+					'simple_grid_field11',
 					'simple_grid_field35',
-					'simple_grid_field13',
+					'simple_grid_field18',
 					'simple_grid_field36',
-					'simple_grid_field14',
+					'simple_grid_field12',
 					'simple_grid_field37',
+					'simple_grid_field13',
+					'simple_grid_field38',
+					'simple_grid_field14',
+					'simple_grid_field39',
 					'simple_grid_field15',
 					'grid_checkbox_head',
 					'grid_checkbox',
@@ -360,43 +371,45 @@
 				'loginform_login' => 'supertop',
 				'username_button' => 'supertop',
 				'master_info' => 'top',
-				'simple_grid_field19' => 'grid',
-				'simple_grid_field' => 'grid',
 				'simple_grid_field20' => 'grid',
-				'simple_grid_field1' => 'grid',
+				'simple_grid_field' => 'grid',
 				'simple_grid_field21' => 'grid',
-				'simple_grid_field2' => 'grid',
+				'simple_grid_field1' => 'grid',
 				'simple_grid_field22' => 'grid',
-				'simple_grid_field3' => 'grid',
+				'simple_grid_field2' => 'grid',
 				'simple_grid_field23' => 'grid',
-				'simple_grid_field4' => 'grid',
+				'simple_grid_field3' => 'grid',
 				'simple_grid_field24' => 'grid',
-				'simple_grid_field5' => 'grid',
+				'simple_grid_field4' => 'grid',
 				'simple_grid_field25' => 'grid',
-				'simple_grid_field6' => 'grid',
+				'simple_grid_field5' => 'grid',
 				'simple_grid_field26' => 'grid',
-				'simple_grid_field7' => 'grid',
+				'simple_grid_field6' => 'grid',
 				'simple_grid_field27' => 'grid',
-				'simple_grid_field8' => 'grid',
+				'simple_grid_field7' => 'grid',
 				'simple_grid_field28' => 'grid',
-				'simple_grid_field9' => 'grid',
+				'simple_grid_field19' => 'grid',
 				'simple_grid_field29' => 'grid',
-				'simple_grid_field10' => 'grid',
+				'simple_grid_field8' => 'grid',
 				'simple_grid_field30' => 'grid',
-				'simple_grid_field16' => 'grid',
+				'simple_grid_field9' => 'grid',
 				'simple_grid_field31' => 'grid',
-				'simple_grid_field17' => 'grid',
+				'simple_grid_field10' => 'grid',
 				'simple_grid_field32' => 'grid',
-				'simple_grid_field11' => 'grid',
+				'simple_grid_field16' => 'grid',
 				'simple_grid_field33' => 'grid',
-				'simple_grid_field18' => 'grid',
+				'simple_grid_field17' => 'grid',
 				'simple_grid_field34' => 'grid',
-				'simple_grid_field12' => 'grid',
+				'simple_grid_field11' => 'grid',
 				'simple_grid_field35' => 'grid',
-				'simple_grid_field13' => 'grid',
+				'simple_grid_field18' => 'grid',
 				'simple_grid_field36' => 'grid',
-				'simple_grid_field14' => 'grid',
+				'simple_grid_field12' => 'grid',
 				'simple_grid_field37' => 'grid',
+				'simple_grid_field13' => 'grid',
+				'simple_grid_field38' => 'grid',
+				'simple_grid_field14' => 'grid',
+				'simple_grid_field39' => 'grid',
 				'simple_grid_field15' => 'grid',
 				'grid_checkbox_head' => 'grid',
 				'grid_checkbox' => 'grid',
@@ -405,7 +418,7 @@
 				'grid_view' => 'grid' 
 			),
 			'itemLocations' => array(
-				'simple_grid_field19' => array(
+				'simple_grid_field20' => array(
 					'location' => 'grid',
 					'cellId' => 'headcell_field' 
 				),
@@ -413,7 +426,7 @@
 					'location' => 'grid',
 					'cellId' => 'cell_field' 
 				),
-				'simple_grid_field20' => array(
+				'simple_grid_field21' => array(
 					'location' => 'grid',
 					'cellId' => 'headcell_field1' 
 				),
@@ -421,7 +434,7 @@
 					'location' => 'grid',
 					'cellId' => 'cell_field1' 
 				),
-				'simple_grid_field21' => array(
+				'simple_grid_field22' => array(
 					'location' => 'grid',
 					'cellId' => 'headcell_field2' 
 				),
@@ -429,7 +442,7 @@
 					'location' => 'grid',
 					'cellId' => 'cell_field2' 
 				),
-				'simple_grid_field22' => array(
+				'simple_grid_field23' => array(
 					'location' => 'grid',
 					'cellId' => 'headcell_field3' 
 				),
@@ -437,7 +450,7 @@
 					'location' => 'grid',
 					'cellId' => 'cell_field3' 
 				),
-				'simple_grid_field23' => array(
+				'simple_grid_field24' => array(
 					'location' => 'grid',
 					'cellId' => 'headcell_field4' 
 				),
@@ -445,7 +458,7 @@
 					'location' => 'grid',
 					'cellId' => 'cell_field4' 
 				),
-				'simple_grid_field24' => array(
+				'simple_grid_field25' => array(
 					'location' => 'grid',
 					'cellId' => 'headcell_field5' 
 				),
@@ -453,7 +466,7 @@
 					'location' => 'grid',
 					'cellId' => 'cell_field5' 
 				),
-				'simple_grid_field25' => array(
+				'simple_grid_field26' => array(
 					'location' => 'grid',
 					'cellId' => 'headcell_field6' 
 				),
@@ -461,7 +474,7 @@
 					'location' => 'grid',
 					'cellId' => 'cell_field6' 
 				),
-				'simple_grid_field26' => array(
+				'simple_grid_field27' => array(
 					'location' => 'grid',
 					'cellId' => 'headcell_field7' 
 				),
@@ -469,93 +482,101 @@
 					'location' => 'grid',
 					'cellId' => 'cell_field7' 
 				),
-				'simple_grid_field27' => array(
+				'simple_grid_field28' => array(
 					'location' => 'grid',
 					'cellId' => 'headcell_field8' 
 				),
-				'simple_grid_field8' => array(
+				'simple_grid_field19' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_field8' 
 				),
-				'simple_grid_field28' => array(
+				'simple_grid_field29' => array(
 					'location' => 'grid',
 					'cellId' => 'headcell_field9' 
 				),
-				'simple_grid_field9' => array(
+				'simple_grid_field8' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_field9' 
 				),
-				'simple_grid_field29' => array(
+				'simple_grid_field30' => array(
 					'location' => 'grid',
 					'cellId' => 'headcell_field10' 
 				),
-				'simple_grid_field10' => array(
+				'simple_grid_field9' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_field10' 
 				),
-				'simple_grid_field30' => array(
+				'simple_grid_field31' => array(
 					'location' => 'grid',
 					'cellId' => 'headcell_field11' 
 				),
-				'simple_grid_field16' => array(
+				'simple_grid_field10' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_field11' 
 				),
-				'simple_grid_field31' => array(
+				'simple_grid_field32' => array(
 					'location' => 'grid',
 					'cellId' => 'headcell_field12' 
 				),
-				'simple_grid_field17' => array(
+				'simple_grid_field16' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_field12' 
 				),
-				'simple_grid_field32' => array(
+				'simple_grid_field33' => array(
 					'location' => 'grid',
 					'cellId' => 'headcell_field13' 
 				),
-				'simple_grid_field11' => array(
+				'simple_grid_field17' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_field13' 
 				),
-				'simple_grid_field33' => array(
+				'simple_grid_field34' => array(
 					'location' => 'grid',
 					'cellId' => 'headcell_field14' 
 				),
-				'simple_grid_field18' => array(
+				'simple_grid_field11' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_field14' 
 				),
-				'simple_grid_field34' => array(
+				'simple_grid_field35' => array(
 					'location' => 'grid',
 					'cellId' => 'headcell_field15' 
 				),
-				'simple_grid_field12' => array(
+				'simple_grid_field18' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_field15' 
 				),
-				'simple_grid_field35' => array(
+				'simple_grid_field36' => array(
 					'location' => 'grid',
 					'cellId' => 'headcell_field16' 
 				),
-				'simple_grid_field13' => array(
+				'simple_grid_field12' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_field16' 
 				),
-				'simple_grid_field36' => array(
+				'simple_grid_field37' => array(
 					'location' => 'grid',
 					'cellId' => 'headcell_field17' 
 				),
-				'simple_grid_field14' => array(
+				'simple_grid_field13' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_field17' 
 				),
-				'simple_grid_field37' => array(
+				'simple_grid_field38' => array(
 					'location' => 'grid',
 					'cellId' => 'headcell_field18' 
 				),
-				'simple_grid_field15' => array(
+				'simple_grid_field14' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_field18' 
+				),
+				'simple_grid_field39' => array(
+					'location' => 'grid',
+					'cellId' => 'headcell_field19' 
+				),
+				'simple_grid_field15' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_field19' 
 				),
 				'grid_checkbox_head' => array(
 					'location' => 'grid',
@@ -638,7 +659,8 @@
 				'search_panel_field15',
 				'search_panel_field16',
 				'search_panel_field17',
-				'search_panel_field18' 
+				'search_panel_field18',
+				'search_panel_field19' 
 			),
 			'username_button' => array( 
 				'username_button' 
@@ -718,6 +740,7 @@
 				'simple_grid_field5',
 				'simple_grid_field6',
 				'simple_grid_field7',
+				'simple_grid_field19',
 				'simple_grid_field8',
 				'simple_grid_field9',
 				'simple_grid_field10',
@@ -731,7 +754,6 @@
 				'simple_grid_field15' 
 			),
 			'grid_field_label' => array( 
-				'simple_grid_field19',
 				'simple_grid_field20',
 				'simple_grid_field21',
 				'simple_grid_field22',
@@ -749,7 +771,9 @@
 				'simple_grid_field34',
 				'simple_grid_field35',
 				'simple_grid_field36',
-				'simple_grid_field37' 
+				'simple_grid_field37',
+				'simple_grid_field38',
+				'simple_grid_field39' 
 			),
 			'grid_checkbox' => array( 
 				'grid_checkbox' 
@@ -819,7 +843,7 @@
 							'data_value_id_fieldheadercolumn' 
 						),
 						'items' => array( 
-							'simple_grid_field19' 
+							'simple_grid_field20' 
 						),
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
@@ -835,7 +859,7 @@
 							'data_element_id_fieldheadercolumn' 
 						),
 						'items' => array( 
-							'simple_grid_field20' 
+							'simple_grid_field21' 
 						),
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
@@ -851,7 +875,7 @@
 							'period_type_fieldheadercolumn' 
 						),
 						'items' => array( 
-							'simple_grid_field21' 
+							'simple_grid_field22' 
 						),
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
@@ -867,7 +891,7 @@
 							'period_year_fieldheadercolumn' 
 						),
 						'items' => array( 
-							'simple_grid_field22' 
+							'simple_grid_field23' 
 						),
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
@@ -883,7 +907,7 @@
 							'period_quarter_fieldheadercolumn' 
 						),
 						'items' => array( 
-							'simple_grid_field23' 
+							'simple_grid_field24' 
 						),
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
@@ -899,7 +923,7 @@
 							'period_month_fieldheadercolumn' 
 						),
 						'items' => array( 
-							'simple_grid_field24' 
+							'simple_grid_field25' 
 						),
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
@@ -915,7 +939,7 @@
 							'period_week_fieldheadercolumn' 
 						),
 						'items' => array( 
-							'simple_grid_field25' 
+							'simple_grid_field26' 
 						),
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
@@ -931,7 +955,7 @@
 							'period_day_fieldheadercolumn' 
 						),
 						'items' => array( 
-							'simple_grid_field26' 
+							'simple_grid_field27' 
 						),
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
@@ -944,10 +968,10 @@
 							0 
 						),
 						'tags' => array( 
-							'region_id_fieldheadercolumn' 
+							'scope_level_fieldheadercolumn' 
 						),
 						'items' => array( 
-							'simple_grid_field27' 
+							'simple_grid_field28' 
 						),
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
@@ -960,10 +984,10 @@
 							0 
 						),
 						'tags' => array( 
-							'country_id_fieldheadercolumn' 
+							'region_id_fieldheadercolumn' 
 						),
 						'items' => array( 
-							'simple_grid_field28' 
+							'simple_grid_field29' 
 						),
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
@@ -976,10 +1000,10 @@
 							0 
 						),
 						'tags' => array( 
-							'facility_id_fieldheadercolumn' 
+							'country_id_fieldheadercolumn' 
 						),
 						'items' => array( 
-							'simple_grid_field29' 
+							'simple_grid_field30' 
 						),
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
@@ -992,10 +1016,10 @@
 							0 
 						),
 						'tags' => array( 
-							'data_source_fieldheadercolumn' 
+							'facility_id_fieldheadercolumn' 
 						),
 						'items' => array( 
-							'simple_grid_field30' 
+							'simple_grid_field31' 
 						),
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
@@ -1008,10 +1032,10 @@
 							0 
 						),
 						'tags' => array( 
-							'source_detail_fieldheadercolumn' 
+							'data_source_fieldheadercolumn' 
 						),
 						'items' => array( 
-							'simple_grid_field31' 
+							'simple_grid_field32' 
 						),
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
@@ -1024,10 +1048,10 @@
 							0 
 						),
 						'tags' => array( 
-							'value_fieldheadercolumn' 
+							'source_detail_fieldheadercolumn' 
 						),
 						'items' => array( 
-							'simple_grid_field32' 
+							'simple_grid_field33' 
 						),
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
@@ -1040,10 +1064,10 @@
 							0 
 						),
 						'tags' => array( 
-							'value_type_fieldheadercolumn' 
+							'value_fieldheadercolumn' 
 						),
 						'items' => array( 
-							'simple_grid_field33' 
+							'simple_grid_field34' 
 						),
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
@@ -1056,10 +1080,10 @@
 							0 
 						),
 						'tags' => array( 
-							'stored_by_fieldheadercolumn' 
+							'value_type_fieldheadercolumn' 
 						),
 						'items' => array( 
-							'simple_grid_field34' 
+							'simple_grid_field35' 
 						),
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
@@ -1072,10 +1096,10 @@
 							0 
 						),
 						'tags' => array( 
-							'created_fieldheadercolumn' 
+							'stored_by_fieldheadercolumn' 
 						),
 						'items' => array( 
-							'simple_grid_field35' 
+							'simple_grid_field36' 
 						),
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
@@ -1088,10 +1112,10 @@
 							0 
 						),
 						'tags' => array( 
-							'last_updated_fieldheadercolumn' 
+							'created_fieldheadercolumn' 
 						),
 						'items' => array( 
-							'simple_grid_field36' 
+							'simple_grid_field37' 
 						),
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
@@ -1104,10 +1128,26 @@
 							0 
 						),
 						'tags' => array( 
+							'last_updated_fieldheadercolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field38' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'headcell_field19' => array(
+						'cols' => array( 
+							21 
+						),
+						'rows' => array( 
+							0 
+						),
+						'tags' => array( 
 							'deleted_fieldheadercolumn' 
 						),
 						'items' => array( 
-							'simple_grid_field37' 
+							'simple_grid_field39' 
 						),
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
@@ -1284,6 +1324,22 @@
 							1 
 						),
 						'tags' => array( 
+							'scope_level_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field19' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field9' => array(
+						'cols' => array( 
+							11 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
 							'region_id_fieldcolumn' 
 						),
 						'items' => array( 
@@ -1292,9 +1348,9 @@
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
-					'cell_field9' => array(
+					'cell_field10' => array(
 						'cols' => array( 
-							11 
+							12 
 						),
 						'rows' => array( 
 							1 
@@ -1308,9 +1364,9 @@
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
-					'cell_field10' => array(
+					'cell_field11' => array(
 						'cols' => array( 
-							12 
+							13 
 						),
 						'rows' => array( 
 							1 
@@ -1324,9 +1380,9 @@
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
-					'cell_field11' => array(
+					'cell_field12' => array(
 						'cols' => array( 
-							13 
+							14 
 						),
 						'rows' => array( 
 							1 
@@ -1340,9 +1396,9 @@
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
-					'cell_field12' => array(
+					'cell_field13' => array(
 						'cols' => array( 
-							14 
+							15 
 						),
 						'rows' => array( 
 							1 
@@ -1356,9 +1412,9 @@
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
-					'cell_field13' => array(
+					'cell_field14' => array(
 						'cols' => array( 
-							15 
+							16 
 						),
 						'rows' => array( 
 							1 
@@ -1372,9 +1428,9 @@
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
-					'cell_field14' => array(
+					'cell_field15' => array(
 						'cols' => array( 
-							16 
+							17 
 						),
 						'rows' => array( 
 							1 
@@ -1388,9 +1444,9 @@
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
-					'cell_field15' => array(
+					'cell_field16' => array(
 						'cols' => array( 
-							17 
+							18 
 						),
 						'rows' => array( 
 							1 
@@ -1404,9 +1460,9 @@
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
-					'cell_field16' => array(
+					'cell_field17' => array(
 						'cols' => array( 
-							18 
+							19 
 						),
 						'rows' => array( 
 							1 
@@ -1420,9 +1476,9 @@
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
-					'cell_field17' => array(
+					'cell_field18' => array(
 						'cols' => array( 
-							19 
+							20 
 						),
 						'rows' => array( 
 							1 
@@ -1436,9 +1492,9 @@
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
-					'cell_field18' => array(
+					'cell_field19' => array(
 						'cols' => array( 
-							20 
+							21 
 						),
 						'rows' => array( 
 							1 
@@ -1787,9 +1843,25 @@
 						),
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
+					),
+					'footcell_field19' => array(
+						'cols' => array( 
+							21 
+						),
+						'rows' => array( 
+							2 
+						),
+						'tags' => array( 
+							 
+						),
+						'items' => array( 
+							 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
 					) 
 				),
-				'width' => 21,
+				'width' => 22,
 				'height' => 3 
 			) 
 		) 
@@ -2163,6 +2235,9 @@
 						),
 						array(
 							'cell' => 'headcell_field18' 
+						),
+						array(
+							'cell' => 'headcell_field19' 
 						) 
 					) 
 				),
@@ -2231,6 +2306,9 @@
 						),
 						array(
 							'cell' => 'cell_field18' 
+						),
+						array(
+							'cell' => 'cell_field19' 
 						) 
 					) 
 				),
@@ -2299,6 +2377,9 @@
 						),
 						array(
 							'cell' => 'footcell_field18' 
+						),
+						array(
+							'cell' => 'footcell_field19' 
 						) 
 					) 
 				) 
@@ -2307,7 +2388,7 @@
 				'headcell_field' => array(
 					'model' => 'headcell_field',
 					'items' => array( 
-						'simple_grid_field19' 
+						'simple_grid_field20' 
 					),
 					'field' => 'data_value_id',
 					'columnName' => 'field' 
@@ -2329,7 +2410,7 @@
 				'headcell_field1' => array(
 					'model' => 'headcell_field',
 					'items' => array( 
-						'simple_grid_field20' 
+						'simple_grid_field21' 
 					),
 					'field' => 'data_element_id',
 					'columnName' => 'field' 
@@ -2351,7 +2432,7 @@
 				'headcell_field2' => array(
 					'model' => 'headcell_field',
 					'items' => array( 
-						'simple_grid_field21' 
+						'simple_grid_field22' 
 					),
 					'field' => 'period_type',
 					'columnName' => 'field' 
@@ -2373,7 +2454,7 @@
 				'headcell_field3' => array(
 					'model' => 'headcell_field',
 					'items' => array( 
-						'simple_grid_field22' 
+						'simple_grid_field23' 
 					),
 					'field' => 'period_year',
 					'columnName' => 'field' 
@@ -2395,7 +2476,7 @@
 				'headcell_field4' => array(
 					'model' => 'headcell_field',
 					'items' => array( 
-						'simple_grid_field23' 
+						'simple_grid_field24' 
 					),
 					'field' => 'period_quarter',
 					'columnName' => 'field' 
@@ -2417,7 +2498,7 @@
 				'headcell_field5' => array(
 					'model' => 'headcell_field',
 					'items' => array( 
-						'simple_grid_field24' 
+						'simple_grid_field25' 
 					),
 					'field' => 'period_month',
 					'columnName' => 'field' 
@@ -2439,7 +2520,7 @@
 				'headcell_field6' => array(
 					'model' => 'headcell_field',
 					'items' => array( 
-						'simple_grid_field25' 
+						'simple_grid_field26' 
 					),
 					'field' => 'period_week',
 					'columnName' => 'field' 
@@ -2461,7 +2542,7 @@
 				'headcell_field7' => array(
 					'model' => 'headcell_field',
 					'items' => array( 
-						'simple_grid_field26' 
+						'simple_grid_field27' 
 					),
 					'field' => 'period_day',
 					'columnName' => 'field' 
@@ -2483,17 +2564,17 @@
 				'headcell_field8' => array(
 					'model' => 'headcell_field',
 					'items' => array( 
-						'simple_grid_field27' 
+						'simple_grid_field28' 
 					),
-					'field' => 'region_id',
+					'field' => 'scope_level',
 					'columnName' => 'field' 
 				),
 				'cell_field8' => array(
 					'model' => 'cell_field',
 					'items' => array( 
-						'simple_grid_field8' 
+						'simple_grid_field19' 
 					),
-					'field' => 'region_id',
+					'field' => 'scope_level',
 					'columnName' => 'field' 
 				),
 				'footcell_field8' => array(
@@ -2505,17 +2586,17 @@
 				'headcell_field9' => array(
 					'model' => 'headcell_field',
 					'items' => array( 
-						'simple_grid_field28' 
+						'simple_grid_field29' 
 					),
-					'field' => 'country_id',
+					'field' => 'region_id',
 					'columnName' => 'field' 
 				),
 				'cell_field9' => array(
 					'model' => 'cell_field',
 					'items' => array( 
-						'simple_grid_field9' 
+						'simple_grid_field8' 
 					),
-					'field' => 'country_id',
+					'field' => 'region_id',
 					'columnName' => 'field' 
 				),
 				'footcell_field9' => array(
@@ -2527,17 +2608,17 @@
 				'headcell_field10' => array(
 					'model' => 'headcell_field',
 					'items' => array( 
-						'simple_grid_field29' 
+						'simple_grid_field30' 
 					),
-					'field' => 'facility_id',
+					'field' => 'country_id',
 					'columnName' => 'field' 
 				),
 				'cell_field10' => array(
 					'model' => 'cell_field',
 					'items' => array( 
-						'simple_grid_field10' 
+						'simple_grid_field9' 
 					),
-					'field' => 'facility_id',
+					'field' => 'country_id',
 					'columnName' => 'field' 
 				),
 				'footcell_field10' => array(
@@ -2549,17 +2630,17 @@
 				'headcell_field11' => array(
 					'model' => 'headcell_field',
 					'items' => array( 
-						'simple_grid_field30' 
+						'simple_grid_field31' 
 					),
-					'field' => 'data_source',
+					'field' => 'facility_id',
 					'columnName' => 'field' 
 				),
 				'cell_field11' => array(
 					'model' => 'cell_field',
 					'items' => array( 
-						'simple_grid_field16' 
+						'simple_grid_field10' 
 					),
-					'field' => 'data_source',
+					'field' => 'facility_id',
 					'columnName' => 'field' 
 				),
 				'footcell_field11' => array(
@@ -2571,17 +2652,17 @@
 				'headcell_field12' => array(
 					'model' => 'headcell_field',
 					'items' => array( 
-						'simple_grid_field31' 
+						'simple_grid_field32' 
 					),
-					'field' => 'source_detail',
+					'field' => 'data_source',
 					'columnName' => 'field' 
 				),
 				'cell_field12' => array(
 					'model' => 'cell_field',
 					'items' => array( 
-						'simple_grid_field17' 
+						'simple_grid_field16' 
 					),
-					'field' => 'source_detail',
+					'field' => 'data_source',
 					'columnName' => 'field' 
 				),
 				'footcell_field12' => array(
@@ -2593,17 +2674,17 @@
 				'headcell_field13' => array(
 					'model' => 'headcell_field',
 					'items' => array( 
-						'simple_grid_field32' 
+						'simple_grid_field33' 
 					),
-					'field' => 'value',
+					'field' => 'source_detail',
 					'columnName' => 'field' 
 				),
 				'cell_field13' => array(
 					'model' => 'cell_field',
 					'items' => array( 
-						'simple_grid_field11' 
+						'simple_grid_field17' 
 					),
-					'field' => 'value',
+					'field' => 'source_detail',
 					'columnName' => 'field' 
 				),
 				'footcell_field13' => array(
@@ -2615,17 +2696,17 @@
 				'headcell_field14' => array(
 					'model' => 'headcell_field',
 					'items' => array( 
-						'simple_grid_field33' 
+						'simple_grid_field34' 
 					),
-					'field' => 'value_type',
+					'field' => 'value',
 					'columnName' => 'field' 
 				),
 				'cell_field14' => array(
 					'model' => 'cell_field',
 					'items' => array( 
-						'simple_grid_field18' 
+						'simple_grid_field11' 
 					),
-					'field' => 'value_type',
+					'field' => 'value',
 					'columnName' => 'field' 
 				),
 				'footcell_field14' => array(
@@ -2637,17 +2718,17 @@
 				'headcell_field15' => array(
 					'model' => 'headcell_field',
 					'items' => array( 
-						'simple_grid_field34' 
+						'simple_grid_field35' 
 					),
-					'field' => 'stored_by',
+					'field' => 'value_type',
 					'columnName' => 'field' 
 				),
 				'cell_field15' => array(
 					'model' => 'cell_field',
 					'items' => array( 
-						'simple_grid_field12' 
+						'simple_grid_field18' 
 					),
-					'field' => 'stored_by',
+					'field' => 'value_type',
 					'columnName' => 'field' 
 				),
 				'footcell_field15' => array(
@@ -2659,17 +2740,17 @@
 				'headcell_field16' => array(
 					'model' => 'headcell_field',
 					'items' => array( 
-						'simple_grid_field35' 
+						'simple_grid_field36' 
 					),
-					'field' => 'created',
+					'field' => 'stored_by',
 					'columnName' => 'field' 
 				),
 				'cell_field16' => array(
 					'model' => 'cell_field',
 					'items' => array( 
-						'simple_grid_field13' 
+						'simple_grid_field12' 
 					),
-					'field' => 'created',
+					'field' => 'stored_by',
 					'columnName' => 'field' 
 				),
 				'footcell_field16' => array(
@@ -2681,17 +2762,17 @@
 				'headcell_field17' => array(
 					'model' => 'headcell_field',
 					'items' => array( 
-						'simple_grid_field36' 
+						'simple_grid_field37' 
 					),
-					'field' => 'last_updated',
+					'field' => 'created',
 					'columnName' => 'field' 
 				),
 				'cell_field17' => array(
 					'model' => 'cell_field',
 					'items' => array( 
-						'simple_grid_field14' 
+						'simple_grid_field13' 
 					),
-					'field' => 'last_updated',
+					'field' => 'created',
 					'columnName' => 'field' 
 				),
 				'footcell_field17' => array(
@@ -2703,12 +2784,34 @@
 				'headcell_field18' => array(
 					'model' => 'headcell_field',
 					'items' => array( 
-						'simple_grid_field37' 
+						'simple_grid_field38' 
+					),
+					'field' => 'last_updated',
+					'columnName' => 'field' 
+				),
+				'cell_field18' => array(
+					'model' => 'cell_field',
+					'items' => array( 
+						'simple_grid_field14' 
+					),
+					'field' => 'last_updated',
+					'columnName' => 'field' 
+				),
+				'footcell_field18' => array(
+					'model' => 'footcell_field',
+					'items' => array( 
+						 
+					) 
+				),
+				'headcell_field19' => array(
+					'model' => 'headcell_field',
+					'items' => array( 
+						'simple_grid_field39' 
 					),
 					'field' => 'deleted',
 					'columnName' => 'field' 
 				),
-				'cell_field18' => array(
+				'cell_field19' => array(
 					'model' => 'cell_field',
 					'items' => array( 
 						'simple_grid_field15' 
@@ -2716,7 +2819,7 @@
 					'field' => 'deleted',
 					'columnName' => 'field' 
 				),
-				'footcell_field18' => array(
+				'footcell_field19' => array(
 					'model' => 'footcell_field',
 					'items' => array( 
 						 
@@ -2793,6 +2896,7 @@
 			'type' => 'search_panel',
 			'items' => array( 
 				'search_panel_field2',
+				'search_panel_field19',
 				'search_panel_field10',
 				'search_panel_field12',
 				'search_panel_field8',
@@ -3042,13 +3146,17 @@
 			'alwaysOnPanel' => false,
 			'required' => false 
 		),
+		'search_panel_field19' => array(
+			'field' => 'scope_level',
+			'type' => 'search_panel_field' 
+		),
 		'simple_grid_field' => array(
 			'field' => 'data_value_id',
 			'type' => 'grid_field',
 			'inlineAdd' => false,
 			'inlineEdit' => false 
 		),
-		'simple_grid_field19' => array(
+		'simple_grid_field20' => array(
 			'type' => 'grid_field_label',
 			'field' => 'data_value_id' 
 		),
@@ -3058,7 +3166,7 @@
 			'inlineAdd' => false,
 			'inlineEdit' => false 
 		),
-		'simple_grid_field20' => array(
+		'simple_grid_field21' => array(
 			'type' => 'grid_field_label',
 			'field' => 'data_element_id' 
 		),
@@ -3068,7 +3176,7 @@
 			'inlineAdd' => false,
 			'inlineEdit' => false 
 		),
-		'simple_grid_field21' => array(
+		'simple_grid_field22' => array(
 			'type' => 'grid_field_label',
 			'field' => 'period_type' 
 		),
@@ -3078,7 +3186,7 @@
 			'inlineAdd' => false,
 			'inlineEdit' => false 
 		),
-		'simple_grid_field22' => array(
+		'simple_grid_field23' => array(
 			'type' => 'grid_field_label',
 			'field' => 'period_year' 
 		),
@@ -3088,7 +3196,7 @@
 			'inlineAdd' => false,
 			'inlineEdit' => false 
 		),
-		'simple_grid_field23' => array(
+		'simple_grid_field24' => array(
 			'type' => 'grid_field_label',
 			'field' => 'period_quarter' 
 		),
@@ -3098,7 +3206,7 @@
 			'inlineAdd' => false,
 			'inlineEdit' => false 
 		),
-		'simple_grid_field24' => array(
+		'simple_grid_field25' => array(
 			'type' => 'grid_field_label',
 			'field' => 'period_month' 
 		),
@@ -3108,7 +3216,7 @@
 			'inlineAdd' => false,
 			'inlineEdit' => false 
 		),
-		'simple_grid_field25' => array(
+		'simple_grid_field26' => array(
 			'type' => 'grid_field_label',
 			'field' => 'period_week' 
 		),
@@ -3118,9 +3226,19 @@
 			'inlineAdd' => false,
 			'inlineEdit' => false 
 		),
-		'simple_grid_field26' => array(
+		'simple_grid_field27' => array(
 			'type' => 'grid_field_label',
 			'field' => 'period_day' 
+		),
+		'simple_grid_field19' => array(
+			'field' => 'scope_level',
+			'type' => 'grid_field',
+			'inlineAdd' => false,
+			'inlineEdit' => false 
+		),
+		'simple_grid_field28' => array(
+			'type' => 'grid_field_label',
+			'field' => 'scope_level' 
 		),
 		'simple_grid_field8' => array(
 			'field' => 'region_id',
@@ -3128,7 +3246,7 @@
 			'inlineAdd' => false,
 			'inlineEdit' => false 
 		),
-		'simple_grid_field27' => array(
+		'simple_grid_field29' => array(
 			'type' => 'grid_field_label',
 			'field' => 'region_id' 
 		),
@@ -3138,7 +3256,7 @@
 			'inlineAdd' => false,
 			'inlineEdit' => false 
 		),
-		'simple_grid_field28' => array(
+		'simple_grid_field30' => array(
 			'type' => 'grid_field_label',
 			'field' => 'country_id' 
 		),
@@ -3148,7 +3266,7 @@
 			'inlineAdd' => false,
 			'inlineEdit' => false 
 		),
-		'simple_grid_field29' => array(
+		'simple_grid_field31' => array(
 			'type' => 'grid_field_label',
 			'field' => 'facility_id' 
 		),
@@ -3158,7 +3276,7 @@
 			'inlineAdd' => false,
 			'inlineEdit' => false 
 		),
-		'simple_grid_field30' => array(
+		'simple_grid_field32' => array(
 			'type' => 'grid_field_label',
 			'field' => 'data_source' 
 		),
@@ -3168,7 +3286,7 @@
 			'inlineAdd' => false,
 			'inlineEdit' => false 
 		),
-		'simple_grid_field31' => array(
+		'simple_grid_field33' => array(
 			'type' => 'grid_field_label',
 			'field' => 'source_detail' 
 		),
@@ -3178,7 +3296,7 @@
 			'inlineAdd' => false,
 			'inlineEdit' => false 
 		),
-		'simple_grid_field32' => array(
+		'simple_grid_field34' => array(
 			'type' => 'grid_field_label',
 			'field' => 'value' 
 		),
@@ -3188,7 +3306,7 @@
 			'inlineAdd' => false,
 			'inlineEdit' => false 
 		),
-		'simple_grid_field33' => array(
+		'simple_grid_field35' => array(
 			'type' => 'grid_field_label',
 			'field' => 'value_type' 
 		),
@@ -3198,7 +3316,7 @@
 			'inlineAdd' => false,
 			'inlineEdit' => false 
 		),
-		'simple_grid_field34' => array(
+		'simple_grid_field36' => array(
 			'type' => 'grid_field_label',
 			'field' => 'stored_by' 
 		),
@@ -3208,7 +3326,7 @@
 			'inlineAdd' => false,
 			'inlineEdit' => false 
 		),
-		'simple_grid_field35' => array(
+		'simple_grid_field37' => array(
 			'type' => 'grid_field_label',
 			'field' => 'created' 
 		),
@@ -3218,7 +3336,7 @@
 			'inlineAdd' => false,
 			'inlineEdit' => false 
 		),
-		'simple_grid_field36' => array(
+		'simple_grid_field38' => array(
 			'type' => 'grid_field_label',
 			'field' => 'last_updated' 
 		),
@@ -3228,7 +3346,7 @@
 			'inlineAdd' => false,
 			'inlineEdit' => false 
 		),
-		'simple_grid_field37' => array(
+		'simple_grid_field39' => array(
 			'type' => 'grid_field_label',
 			'field' => 'deleted' 
 		),

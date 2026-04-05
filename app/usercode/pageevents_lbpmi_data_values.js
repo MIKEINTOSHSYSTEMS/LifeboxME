@@ -4,7 +4,9 @@ Runner.pages.PageSettings.addPageEvent(
 	"add", 
 	"afterPageReady", 
 	function(pageObj, proxy, pageid, inlineRow, inlineObject, row ) {
-		// Place event code here.
+		// OLDER VERSION
+
+// Place event code here.
 // Use "Add Action" button to add code snippets.
 // Get control once
 var dataSourceCtrl = Runner.getControl(pageid, "period_type");
@@ -76,6 +78,58 @@ dataSourceCtrl.on("change", function () {
     }
 });
 
+
+
+var scopeLevelCtrl = Runner.getControl(pageid, "scope_level");
+
+// Helper: hide all scope fields
+function hideAllScopes() {
+    pageObj.hideField("region_id");
+    pageObj.hideField("country_id");
+    pageObj.hideField("facility_id");
+}
+
+// Initial state
+hideAllScopes();
+
+switch (scopeLevelCtrl.getValue()) {
+    case "Regional":
+        pageObj.showField("region_id");
+        break;
+
+    case "Country":
+        pageObj.showField("region_id");
+        pageObj.showField("country_id");
+        break;
+
+    case "Facility":
+        pageObj.showField("region_id");
+        pageObj.showField("country_id");
+        pageObj.showField("facility_id");
+        break;
+}
+
+// One change handler
+scopeLevelCtrl.on("change", function () {
+    hideAllScopes();
+
+    switch (this.getValue()) {
+        case "Regional":
+            pageObj.showField("region_id");
+            break;
+
+        case "Country":
+            pageObj.showField("region_id");
+            pageObj.showField("country_id");
+            break;
+
+        case "Facility":
+            pageObj.showField("region_id");
+            pageObj.showField("country_id");
+            pageObj.showField("facility_id");
+            break;
+    }
+});
 
 
 
@@ -232,6 +286,61 @@ dataSourceCtrl.on("change", function () {
 
         case "Daily":
             pageObj.showField("period_day");
+            break;
+    }
+});
+
+
+
+
+
+var scopeLevelCtrl = Runner.getControl(pageid, "scope_level");
+
+// Helper: hide all scope fields
+function hideAllScopes() {
+    pageObj.hideField("region_id");
+    pageObj.hideField("country_id");
+    pageObj.hideField("facility_id");
+}
+
+// Initial state
+hideAllScopes();
+
+switch (scopeLevelCtrl.getValue()) {
+    case "Regional":
+        pageObj.showField("region_id");
+        break;
+
+    case "Country":
+        pageObj.showField("region_id");
+        pageObj.showField("country_id");
+        break;
+
+    case "Facility":
+        pageObj.showField("region_id");
+        pageObj.showField("country_id");
+        pageObj.showField("facility_id");
+        break;
+}
+
+// One change handler
+scopeLevelCtrl.on("change", function () {
+    hideAllScopes();
+
+    switch (this.getValue()) {
+        case "Regional":
+            pageObj.showField("region_id");
+            break;
+
+        case "Country":
+            pageObj.showField("region_id");
+            pageObj.showField("country_id");
+            break;
+
+        case "Facility":
+            pageObj.showField("region_id");
+            pageObj.showField("country_id");
+            pageObj.showField("facility_id");
             break;
     }
 });

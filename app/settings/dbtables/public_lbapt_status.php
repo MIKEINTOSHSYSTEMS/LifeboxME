@@ -63,7 +63,7 @@ $runnerDbTableInfo['public_lbapt_status'] = array(
 		) 
 	),
 	'primaryKeys' => array( 
-		 
+		'status_id' 
 	),
 	'uniqueFields' => array( 
 		 

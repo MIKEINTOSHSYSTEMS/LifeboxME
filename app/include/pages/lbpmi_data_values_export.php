@@ -57,6 +57,9 @@
 		),
 		'value_type' => array(
 			'totalsType' => '' 
+		),
+		'scope_level' => array(
+			'totalsType' => '' 
 		) 
 	),
 	'fields' => array(
@@ -79,7 +82,8 @@
 			'deleted',
 			'data_source',
 			'source_detail',
-			'value_type' 
+			'value_type',
+			'scope_level' 
 		),
 		'exportFields' => array( 
 			'data_value_id',
@@ -90,6 +94,7 @@
 			'period_month',
 			'period_week',
 			'period_day',
+			'scope_level',
 			'region_id',
 			'country_id',
 			'facility_id',
@@ -165,6 +170,9 @@
 			),
 			'value_type' => array( 
 				'export_field18' 
+			),
+			'scope_level' => array( 
+				'export_field19' 
 			) 
 		) 
 	),
@@ -192,6 +200,7 @@
 					'export_field5',
 					'export_field6',
 					'export_field7',
+					'export_field19',
 					'export_field8',
 					'export_field9',
 					'export_field10',
@@ -224,6 +233,7 @@
 				'export_field5' => 'grid',
 				'export_field6' => 'grid',
 				'export_field7' => 'grid',
+				'export_field19' => 'grid',
 				'export_field8' => 'grid',
 				'export_field9' => 'grid',
 				'export_field10' => 'grid',
@@ -274,7 +284,8 @@
 				'export_field15',
 				'export_field16',
 				'export_field17',
-				'export_field18' 
+				'export_field18',
+				'export_field19' 
 			) 
 		),
 		'cellMaps' => array(
@@ -422,6 +433,7 @@
 						'export_field5',
 						'export_field6',
 						'export_field7',
+						'export_field19',
 						'export_field8',
 						'export_field9',
 						'export_field10',
@@ -561,6 +573,10 @@
 		),
 		'export_field18' => array(
 			'field' => 'value_type',
+			'type' => 'export_field' 
+		),
+		'export_field19' => array(
+			'field' => 'scope_level',
 			'type' => 'export_field' 
 		) 
 	),

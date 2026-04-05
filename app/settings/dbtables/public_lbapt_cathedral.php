@@ -3,7 +3,32 @@ global $runnerDbTableInfo;
 $runnerDbTableInfo['public_lbapt_cathedral'] = array(
 	'type' => 0,
 	'foreignKeys' => array( 
-		 
+		array(
+			'name' => 'lbapt_cathedral_status_id_fkey',
+			'refSchema' => 'public',
+			'refTable' => 'lbapt_status',
+			'del_rule' => 2,
+			'upd_rule' => 1,
+			'columns' => array( 
+				array(
+					'column' => 'status_id',
+					'ref_column' => 'status_id' 
+				) 
+			) 
+		),
+		array(
+			'name' => 'lbapt_cathedral_strategic_area_id_fkey',
+			'refSchema' => 'public',
+			'refTable' => 'lbapt_strategic_areas',
+			'del_rule' => 2,
+			'upd_rule' => 1,
+			'columns' => array( 
+				array(
+					'column' => 'strategic_area_id',
+					'ref_column' => 'strategic_area_id' 
+				) 
+			) 
+		) 
 	),
 	'fields' => array( 
 		array(
