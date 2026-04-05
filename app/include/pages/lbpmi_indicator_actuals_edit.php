@@ -1450,7 +1450,7 @@
 	'imagePosition' => 'right',
 	'listTotals' => 1,
 	'title' => array(
-		 
+		'English' => 'PMI Indicator Actuals, Edit [{%actual_id}]' 
 	) 
 );
 		?>

@@ -26,7 +26,6 @@
 			'period_quarter',
 			'period_month',
 			'period_week',
-			'deleted',
 			'period_type',
 			'region_id',
 			'country_id',
@@ -66,9 +65,6 @@
 			),
 			'period_week' => array( 
 				'integrated_edit_field5' 
-			),
-			'deleted' => array( 
-				'integrated_edit_field14' 
 			),
 			'period_type' => array( 
 				'integrated_edit_field1' 
@@ -142,7 +138,6 @@
 					'integrated_edit_field',
 					'integrated_edit_field18',
 					'integrated_edit_field15',
-					'integrated_edit_field14',
 					'integrated_edit_field16',
 					'integrated_edit_field7',
 					'integrated_edit_field8',
@@ -183,7 +178,6 @@
 				'integrated_edit_field' => 'grid',
 				'integrated_edit_field18' => 'grid',
 				'integrated_edit_field15' => 'grid',
-				'integrated_edit_field14' => 'grid',
 				'integrated_edit_field16' => 'grid',
 				'integrated_edit_field7' => 'grid',
 				'integrated_edit_field8' => 'grid',
@@ -212,10 +206,6 @@
 				'integrated_edit_field15' => array(
 					'location' => 'grid',
 					'cellId' => 'c6' 
-				),
-				'integrated_edit_field14' => array(
-					'location' => 'grid',
-					'cellId' => 'c9' 
 				),
 				'integrated_edit_field16' => array(
 					'location' => 'grid',
@@ -340,7 +330,6 @@
 				'integrated_edit_field3',
 				'integrated_edit_field4',
 				'integrated_edit_field5',
-				'integrated_edit_field14',
 				'integrated_edit_field1',
 				'integrated_edit_field7',
 				'integrated_edit_field8',
@@ -749,58 +738,10 @@
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
-					),
-					'c3' => array(
-						'cols' => array( 
-							0 
-						),
-						'rows' => array( 
-							8 
-						),
-						'tags' => array( 
-							 
-						),
-						'items' => array( 
-							 
-						),
-						'fixedAtServer' => false,
-						'fixedAtClient' => false 
-					),
-					'c14' => array(
-						'cols' => array( 
-							1 
-						),
-						'rows' => array( 
-							8 
-						),
-						'tags' => array( 
-							 
-						),
-						'items' => array( 
-							 
-						),
-						'fixedAtServer' => false,
-						'fixedAtClient' => false 
-					),
-					'c9' => array(
-						'cols' => array( 
-							2 
-						),
-						'rows' => array( 
-							8 
-						),
-						'tags' => array( 
-							 
-						),
-						'items' => array( 
-							'integrated_edit_field14' 
-						),
-						'fixedAtServer' => true,
-						'fixedAtClient' => false 
 					) 
 				),
 				'width' => 3,
-				'height' => 9 
+				'height' => 8 
 			) 
 		) 
 	),
@@ -1135,29 +1076,9 @@
 							'cell' => 'c26' 
 						) 
 					) 
-				),
-				array(
-					'cells' => array( 
-						array(
-							'cell' => 'c3' 
-						),
-						array(
-							'cell' => 'c14' 
-						),
-						array(
-							'cell' => 'c9' 
-						) 
-					),
-					'section' => '' 
 				) 
 			),
 			'cells' => array(
-				'c3' => array(
-					'model' => 'c3',
-					'items' => array( 
-						 
-					) 
-				),
 				'c' => array(
 					'model' => 'c3',
 					'items' => array( 
@@ -1194,12 +1115,6 @@
 						 
 					) 
 				),
-				'c9' => array(
-					'model' => 'c3',
-					'items' => array( 
-						'integrated_edit_field14' 
-					) 
-				),
 				'c10' => array(
 					'model' => 'c3',
 					'items' => array( 
@@ -1216,12 +1131,6 @@
 					'model' => 'c3',
 					'items' => array( 
 						'integrated_edit_field16' 
-					) 
-				),
-				'c14' => array(
-					'model' => 'c3',
-					'items' => array( 
-						 
 					) 
 				),
 				'c15' => array(
@@ -1424,12 +1333,6 @@
 			'orientation' => 0,
 			'updateOnEdit' => false 
 		),
-		'integrated_edit_field14' => array(
-			'field' => 'deleted',
-			'type' => 'integrated_edit_field',
-			'orientation' => 0,
-			'updateOnEdit' => false 
-		),
 		'integrated_edit_field1' => array(
 			'field' => 'period_type',
 			'type' => 'integrated_edit_field',
@@ -1511,7 +1414,7 @@
 	'imagePosition' => 'right',
 	'listTotals' => 1,
 	'title' => array(
-		 
+		'English' => 'PMI Data Values, Add new' 
 	) 
 );
 		?>

@@ -40,7 +40,8 @@
 			'country_id',
 			'facility_id',
 			'data_source',
-			'source_detail' 
+			'source_detail',
+			'scope_level' 
 		),
 		'searchPanel' => true,
 		'fixedSearchPanel' => false,
@@ -137,13 +138,13 @@
 		),
 		'searchPanelFields' => array( 
 			'data_element_id',
-			'scope_level',
 			'period_type',
 			'period_year',
 			'period_month',
 			'period_quarter',
 			'period_week',
 			'period_day',
+			'scope_level',
 			'region_id',
 			'country_id',
 			'facility_id',
@@ -2896,13 +2897,13 @@
 			'type' => 'search_panel',
 			'items' => array( 
 				'search_panel_field2',
-				'search_panel_field19',
 				'search_panel_field10',
 				'search_panel_field12',
 				'search_panel_field8',
 				'search_panel_field9',
 				'search_panel_field11',
 				'search_panel_field7',
+				'search_panel_field19',
 				'search_panel_field13',
 				'search_panel_field',
 				'search_panel_field5',
@@ -3148,7 +3149,9 @@
 		),
 		'search_panel_field19' => array(
 			'field' => 'scope_level',
-			'type' => 'search_panel_field' 
+			'type' => 'search_panel_field',
+			'alwaysOnPanel' => true,
+			'required' => false 
 		),
 		'simple_grid_field' => array(
 			'field' => 'data_value_id',
@@ -3386,7 +3389,7 @@
 	'imagePosition' => 'right',
 	'listTotals' => 1,
 	'title' => array(
-		 
+		'English' => 'PMI Data Values' 
 	) 
 );
 		?>

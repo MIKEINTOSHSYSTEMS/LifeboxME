@@ -1207,7 +1207,7 @@ FROM
 global $runnerTableLabels;
 if( mlang_getcurrentlang() === 'English' ) {
 	$runnerTableLabels['public.lbpmi_indicator_actuals'] = array(
-	'tableCaption' => 'Lbpmi Indicator Actuals',
+	'tableCaption' => 'PMI Indicator Actuals',
 	'fieldLabels' => array(
 		'actual_id' => 'Act-ID',
 		'indicator_id' => 'Indicator',
@@ -1257,7 +1257,13 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'updated_at' => '' 
 	),
 	'pageTitles' => array(
-		 
+		'add' => 'PMI Indicator Actuals, Add new',
+		'edit' => 'PMI Indicator Actuals, Edit [{%actual_id}]',
+		'import' => 'PMI Indicator Actuals, Import',
+		'list' => 'PMI Indicator Actuals',
+		'print' => 'PMI Indicator Actuals',
+		'search' => 'PMI Indicator Actuals, Advanced search',
+		'view' => 'PMI Indicator Actuals {%actual_id}' 
 	) 
 );
 }

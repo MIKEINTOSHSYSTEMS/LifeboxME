@@ -2523,7 +2523,7 @@
 	'imagePosition' => 'right',
 	'listTotals' => 1,
 	'title' => array(
-		 
+		'English' => 'PMI Data Values' 
 	) 
 );
 		?>

@@ -209,6 +209,7 @@ FROM
 			'editFormats' => array(
 				'edit' => array(
 					'format' => 'Lookup wizard',
+					'required' => true,
 					'textboxMaxLenth' => 20,
 					'textHTML5Input' => '0',
 					'lookupType' => 2,
@@ -420,6 +421,7 @@ FROM
 			'editFormats' => array(
 				'edit' => array(
 					'format' => 'Lookup wizard',
+					'required' => true,
 					'validateAs' => 'Number',
 					'validateRegexMessage' => array(
 						'text' => '',
@@ -797,6 +799,7 @@ FROM
 			'editFormats' => array(
 				'edit' => array(
 					'format' => 'Lookup wizard',
+					'required' => true,
 					'lookupType' => 0,
 					'lookupValues' => array( 
 						'Regional',
@@ -1574,7 +1577,7 @@ FROM
 global $runnerTableLabels;
 if( mlang_getcurrentlang() === 'English' ) {
 	$runnerTableLabels['public.lbpmi_data_values'] = array(
-	'tableCaption' => 'Lbpmi Data Values',
+	'tableCaption' => 'PMI Data Values',
 	'fieldLabels' => array(
 		'data_value_id' => 'DV-ID',
 		'data_element_id' => 'Data Element',
@@ -1642,7 +1645,13 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'scope_level' => '' 
 	),
 	'pageTitles' => array(
-		 
+		'add' => 'PMI Data Values, Add new',
+		'edit' => 'PMI Data Values, Edit [{%data_value_id}]',
+		'import' => 'PMI Data Values, Import',
+		'list' => 'PMI Data Values',
+		'print' => 'PMI Data Values',
+		'search' => 'PMI Data Values, Advanced search',
+		'view' => 'PMI Data Values {%data_value_id}' 
 	) 
 );
 }

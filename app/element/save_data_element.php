@@ -1,4 +1,5 @@
 <?php
+// app/element/save_data_element.php
 require_once("../include/dbcommon.php");
 
 function sqlValue($val)
@@ -42,6 +43,8 @@ foreach ($data['values'] as $v) {
         "region_id"       => $v['region_id'] ?? null,
         "country_id"      => $v['country_id'] ?? null,
         "facility_id"     => $v['facility_id'] ?? null,
+        "scope_level"     => $v['scope_level'] ?? null,
+        "value_type"      => $v['value_type'] ?? null,
         "value"           => $value,
         "stored_by"       => $v['stored_by'] ?? null,
         "data_source"     => $v['data_source'] ?? null,
@@ -68,7 +71,9 @@ foreach ($data['values'] as $v) {
         'period_day',
         'region_id',
         'country_id',
-        'facility_id'
+        'facility_id',
+        'scope_level',
+        'value_type'
     ];
 
     foreach ($requiredKeys as $key) {
@@ -94,6 +99,8 @@ foreach ($data['values'] as $v) {
       AND (region_id = " . sqlValue($fields['region_id']) . " OR (" . sqlValue($fields['region_id']) . " IS NULL AND region_id IS NULL))
       AND (country_id = " . sqlValue($fields['country_id']) . " OR (" . sqlValue($fields['country_id']) . " IS NULL AND country_id IS NULL))
       AND (facility_id = " . sqlValue($fields['facility_id']) . " OR (" . sqlValue($fields['facility_id']) . " IS NULL AND facility_id IS NULL))
+      AND (scope_level = " . sqlValue($fields['scope_level']) . " OR (" . sqlValue($fields['scope_level']) . " IS NULL AND scope_level IS NULL))
+      AND (value_type = " . sqlValue($fields['value_type']) . " OR (" . sqlValue($fields['value_type']) . " IS NULL AND value_type IS NULL))
       AND (deleted = false OR deleted IS NULL)
 ";
 
@@ -110,20 +117,22 @@ foreach ($data['values'] as $v) {
     if ($row) {
         $sql = DB::PrepareSQL("
             UPDATE lbpmi_data_values
-            SET value=%value%, stored_by=%stored_by%, last_updated=NOW()
+            SET value=%value%, stored_by=%stored_by%, scope_level=%scope_level%, value_type=%value_type%, last_updated=NOW()
             WHERE data_value_id=%id%
         ", [
             "value" => $fields['value'],
             "stored_by" => $fields['stored_by'],
+            "scope_level" => $fields['scope_level'],
+            "value_type" => $fields['value_type'],
             "id" => $row['data_value_id']
         ]);
     } else {
-            $sql = "
+        $sql = "
             INSERT INTO lbpmi_data_values
             (
                 data_element_id, period_type, period_year, period_quarter,
                 period_month, period_week, period_day,
-                region_id, country_id, facility_id,
+                region_id, country_id, facility_id, scope_level, value_type,
                 value, stored_by, data_source, source_detail,
                 created, last_updated
             )
@@ -139,6 +148,8 @@ foreach ($data['values'] as $v) {
                 " . sqlValue($fields['region_id']) . ",
                 " . sqlValue($fields['country_id']) . ",
                 " . sqlValue($fields['facility_id']) . ",
+                " . sqlValue($fields['scope_level']) . ",
+                " . sqlValue($fields['value_type']) . ",
                 " . sqlValue($fields['value']) . ",
                 " . sqlValue($fields['stored_by']) . ",
                 " . sqlValue($fields['data_source']) . ",

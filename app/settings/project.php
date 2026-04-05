@@ -2977,7 +2977,7 @@ $runnerProjectSettings = array(
 			'shortName' => 'lbpmi_indicator_actuals',
 			'type' => 0,
 			'caption' => array(
-				'English' => 'Lbpmi Indicator Actuals' 
+				'English' => 'PMI Indicator Actuals' 
 			),
 			'connId' => 'lifebox_mesystem_at_localhost',
 			'color' => '7B68EE',
@@ -3061,7 +3061,7 @@ $runnerProjectSettings = array(
 			'shortName' => 'lbpmi_data_values',
 			'type' => 0,
 			'caption' => array(
-				'English' => 'Lbpmi Data Values' 
+				'English' => 'PMI Data Values' 
 			),
 			'connId' => 'lifebox_mesystem_at_localhost',
 			'color' => '3CB371',
@@ -3532,7 +3532,7 @@ $runnerProjectSettings = array(
 		'table' => 'public.lifeboxme_settings' 
 	),
 	'wizardBuild' => '43785',
-	'projectBuild' => 'VBEWOc93cMyN',
+	'projectBuild' => '2sNTQpeBajMb',
 	'projectTheme' => 'flatly',
 	'projectSize' => 'normal',
 	'customErrorMsg' => array(
