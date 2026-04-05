@@ -46,7 +46,25 @@
 			 
 		),
 		'updateOnEditFields' => array( 
-			 
+			'data_element_id',
+			'data_source',
+			'period_year',
+			'period_day',
+			'period_quarter',
+			'period_month',
+			'period_week',
+			'deleted',
+			'period_type',
+			'source_detail',
+			'region_id',
+			'country_id',
+			'facility_id',
+			'value',
+			'stored_by',
+			'created',
+			'last_updated',
+			'value_type',
+			'scope_level' 
 		),
 		'fieldItems' => array(
 			'data_element_id' => array( 
@@ -122,6 +140,7 @@
 				),
 				'below-grid' => array( 
 					'edit_save',
+					'update_records',
 					'edit_back_list',
 					'edit_close',
 					'prev',
@@ -173,6 +192,7 @@
 			'itemForms' => array(
 				'edit_message' => 'above-grid',
 				'edit_save' => 'below-grid',
+				'update_records' => 'below-grid',
 				'edit_back_list' => 'below-grid',
 				'edit_close' => 'below-grid',
 				'prev' => 'below-grid',
@@ -374,6 +394,9 @@
 				'integrated_edit_field13',
 				'integrated_edit_field17',
 				'integrated_edit_field18' 
+			),
+			'update_records' => array( 
+				'update_records' 
 			),
 			'expand_button' => array( 
 				'expand_button' 
@@ -784,7 +807,10 @@
 		'verticalBar' => true,
 		'labeledButtons' => array(
 			'update_records' => array(
-				 
+				'update_records' => array(
+					'tag' => 'UPDATE_N_RECORDS',
+					'type' => 2 
+				) 
 			),
 			'print_pages' => array(
 				 
@@ -833,7 +859,7 @@
 		) 
 	),
 	'edit' => array(
-		'updateSelected' => false 
+		'updateSelected' => true 
 	) 
 );
 			$pageArray = array(
@@ -888,6 +914,7 @@
 					'model' => 'c1',
 					'items' => array( 
 						'edit_save',
+						'update_records',
 						'edit_back_list',
 						'edit_close' 
 					) 
@@ -1362,115 +1389,118 @@
 			'field' => 'data_element_id',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
-			'updateOnEdit' => false 
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field15' => array(
 			'field' => 'data_source',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
-			'updateOnEdit' => false 
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field2' => array(
 			'field' => 'period_year',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
-			'updateOnEdit' => false 
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field6' => array(
 			'field' => 'period_day',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
-			'updateOnEdit' => false 
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field3' => array(
 			'field' => 'period_quarter',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
-			'updateOnEdit' => false 
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field4' => array(
 			'field' => 'period_month',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
-			'updateOnEdit' => false 
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field5' => array(
 			'field' => 'period_week',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
-			'updateOnEdit' => false 
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field14' => array(
 			'field' => 'deleted',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
-			'updateOnEdit' => false 
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field1' => array(
 			'field' => 'period_type',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
-			'updateOnEdit' => false 
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field16' => array(
 			'field' => 'source_detail',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
-			'updateOnEdit' => false 
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field7' => array(
 			'field' => 'region_id',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
-			'updateOnEdit' => false 
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field8' => array(
 			'field' => 'country_id',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
-			'updateOnEdit' => false 
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field9' => array(
 			'field' => 'facility_id',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
-			'updateOnEdit' => false 
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field10' => array(
 			'field' => 'value',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
-			'updateOnEdit' => false 
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field11' => array(
 			'field' => 'stored_by',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
-			'updateOnEdit' => false 
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field12' => array(
 			'field' => 'created',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
-			'updateOnEdit' => false 
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field13' => array(
 			'field' => 'last_updated',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
-			'updateOnEdit' => false 
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field17' => array(
 			'field' => 'value_type',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
-			'updateOnEdit' => false 
+			'updateOnEdit' => true 
 		),
 		'integrated_edit_field18' => array(
 			'field' => 'scope_level',
 			'type' => 'integrated_edit_field',
 			'orientation' => 0,
-			'updateOnEdit' => false 
+			'updateOnEdit' => true 
+		),
+		'update_records' => array(
+			'type' => 'update_records' 
 		),
 		'expand_button' => array(
 			'type' => 'expand_button' 

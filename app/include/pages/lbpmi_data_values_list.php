@@ -3,11 +3,11 @@
 	'list' => array(
 		'inlineAdd' => false,
 		'detailsAdd' => true,
-		'inlineEdit' => false,
+		'inlineEdit' => true,
 		'spreadsheetMode' => false,
 		'addToBottom' => false,
 		'delete' => true,
-		'updateSelected' => false,
+		'updateSelected' => true,
 		'clickSort' => true,
 		'sortDropdown' => false,
 		'showHideFields' => false,
@@ -165,7 +165,25 @@
 			 
 		),
 		'inlineEditFields' => array( 
-			 
+			'data_element_id',
+			'period_type',
+			'period_year',
+			'period_quarter',
+			'period_month',
+			'period_week',
+			'period_day',
+			'scope_level',
+			'region_id',
+			'country_id',
+			'facility_id',
+			'data_source',
+			'source_detail',
+			'value',
+			'value_type',
+			'stored_by',
+			'created',
+			'last_updated',
+			'deleted' 
 		),
 		'fieldItems' => array(
 			'data_value_id' => array( 
@@ -268,7 +286,10 @@
 				'above-grid' => array( 
 					'add',
 					'inline_add',
+					'inline_save_all',
+					'inline_cancel_all',
 					'delete',
+					'update_selected',
 					'details_found',
 					'page_size',
 					'print_panel',
@@ -339,6 +360,8 @@
 					'grid_checkbox_head',
 					'grid_checkbox',
 					'grid_edit',
+					'grid_inline_edit',
+					'grid_inline_save',
 					'grid_inline_cancel',
 					'grid_view' 
 				) 
@@ -354,7 +377,10 @@
 			'itemForms' => array(
 				'add' => 'above-grid',
 				'inline_add' => 'above-grid',
+				'inline_save_all' => 'above-grid',
+				'inline_cancel_all' => 'above-grid',
 				'delete' => 'above-grid',
+				'update_selected' => 'above-grid',
 				'details_found' => 'above-grid',
 				'page_size' => 'above-grid',
 				'print_panel' => 'above-grid',
@@ -415,6 +441,8 @@
 				'grid_checkbox_head' => 'grid',
 				'grid_checkbox' => 'grid',
 				'grid_edit' => 'grid',
+				'grid_inline_edit' => 'grid',
+				'grid_inline_save' => 'grid',
 				'grid_inline_cancel' => 'grid',
 				'grid_view' => 'grid' 
 			),
@@ -591,6 +619,14 @@
 					'location' => 'grid',
 					'cellId' => 'cell_icons' 
 				),
+				'grid_inline_edit' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_icons' 
+				),
+				'grid_inline_save' => array(
+					'location' => 'grid',
+					'cellId' => 'cell_icons' 
+				),
 				'grid_inline_cancel' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_icons' 
@@ -732,6 +768,18 @@
 			'notifications' => array( 
 				'notifications' 
 			),
+			'update_selected' => array( 
+				'update_selected' 
+			),
+			'edit_selected' => array( 
+				'edit_selected' 
+			),
+			'inline_save_all' => array( 
+				'inline_save_all' 
+			),
+			'inline_cancel_all' => array( 
+				'inline_cancel_all' 
+			),
 			'grid_field' => array( 
 				'simple_grid_field',
 				'simple_grid_field1',
@@ -788,14 +836,20 @@
 			'grid_view' => array( 
 				'grid_view' 
 			),
+			'grid_inline_edit' => array( 
+				'grid_inline_edit' 
+			),
+			'grid_inline_save' => array( 
+				'grid_inline_save' 
+			),
+			'grid_inline_cancel' => array( 
+				'grid_inline_cancel' 
+			),
 			'expand_button' => array( 
 				'expand_button' 
 			),
 			'inline_add' => array( 
 				'inline_add' 
-			),
-			'grid_inline_cancel' => array( 
-				'grid_inline_cancel' 
 			) 
 		),
 		'cellMaps' => array(
@@ -1162,11 +1216,15 @@
 						),
 						'tags' => array( 
 							'edit_column',
+							'inlineedit_column',
+							'inline_save',
 							'inline_cancel',
 							'view_column' 
 						),
 						'items' => array( 
 							'grid_edit',
+							'grid_inline_edit',
+							'grid_inline_save',
 							'grid_inline_cancel',
 							'grid_view' 
 						),
@@ -1946,10 +2004,19 @@
 					'section' => '',
 					'cells' => array( 
 						array(
-							'cell' => 'c' 
+							'cell' => 'c5' 
 						),
 						array(
-							'cell' => 'c3' 
+							'cell' => 'c8' 
+						) 
+					) 
+				),
+				array(
+					'section' => '',
+					'cells' => array( 
+						array(
+							'cell' => 'c',
+							'colspan' => 2 
 						) 
 					) 
 				),
@@ -1974,15 +2041,6 @@
 							'cell' => 'c7' 
 						) 
 					) 
-				),
-				array(
-					'section' => '',
-					'cells' => array( 
-						array(
-							'cell' => 'c4',
-							'colspan' => 2 
-						) 
-					) 
 				) 
 			),
 			'cells' => array(
@@ -1991,7 +2049,10 @@
 					'items' => array( 
 						'add',
 						'inline_add',
-						'delete' 
+						'inline_save_all',
+						'inline_cancel_all',
+						'delete',
+						'update_selected' 
 					) 
 				),
 				'c2' => array(
@@ -2005,18 +2066,6 @@
 				'c' => array(
 					'model' => 'c1',
 					'items' => array( 
-						 
-					) 
-				),
-				'c3' => array(
-					'model' => 'c2',
-					'items' => array( 
-						 
-					) 
-				),
-				'c4' => array(
-					'model' => 'c1',
-					'items' => array( 
 						'search_panel' 
 					) 
 				),
@@ -2027,6 +2076,18 @@
 					) 
 				),
 				'c7' => array(
+					'model' => 'c2',
+					'items' => array( 
+						 
+					) 
+				),
+				'c5' => array(
+					'model' => 'c1',
+					'items' => array( 
+						 
+					) 
+				),
+				'c8' => array(
 					'model' => 'c2',
 					'items' => array( 
 						 
@@ -2854,6 +2915,8 @@
 					'model' => 'cell_icons',
 					'items' => array( 
 						'grid_edit',
+						'grid_inline_edit',
+						'grid_inline_save',
 						'grid_inline_cancel',
 						'grid_view' 
 					) 
@@ -2922,6 +2985,7 @@
 		'list_options' => array(
 			'type' => 'list_options',
 			'items' => array( 
+				'edit_selected',
 				'export_selected',
 				'delete_selected',
 				'-3',
@@ -3153,6 +3217,18 @@
 			'alwaysOnPanel' => true,
 			'required' => false 
 		),
+		'update_selected' => array(
+			'type' => 'update_selected' 
+		),
+		'edit_selected' => array(
+			'type' => 'edit_selected' 
+		),
+		'inline_save_all' => array(
+			'type' => 'inline_save_all' 
+		),
+		'inline_cancel_all' => array(
+			'type' => 'inline_cancel_all' 
+		),
 		'simple_grid_field' => array(
 			'field' => 'data_value_id',
 			'type' => 'grid_field',
@@ -3167,7 +3243,7 @@
 			'field' => 'data_element_id',
 			'type' => 'grid_field',
 			'inlineAdd' => false,
-			'inlineEdit' => false 
+			'inlineEdit' => true 
 		),
 		'simple_grid_field21' => array(
 			'type' => 'grid_field_label',
@@ -3177,7 +3253,7 @@
 			'field' => 'period_type',
 			'type' => 'grid_field',
 			'inlineAdd' => false,
-			'inlineEdit' => false 
+			'inlineEdit' => true 
 		),
 		'simple_grid_field22' => array(
 			'type' => 'grid_field_label',
@@ -3187,7 +3263,7 @@
 			'field' => 'period_year',
 			'type' => 'grid_field',
 			'inlineAdd' => false,
-			'inlineEdit' => false 
+			'inlineEdit' => true 
 		),
 		'simple_grid_field23' => array(
 			'type' => 'grid_field_label',
@@ -3197,7 +3273,7 @@
 			'field' => 'period_quarter',
 			'type' => 'grid_field',
 			'inlineAdd' => false,
-			'inlineEdit' => false 
+			'inlineEdit' => true 
 		),
 		'simple_grid_field24' => array(
 			'type' => 'grid_field_label',
@@ -3207,7 +3283,7 @@
 			'field' => 'period_month',
 			'type' => 'grid_field',
 			'inlineAdd' => false,
-			'inlineEdit' => false 
+			'inlineEdit' => true 
 		),
 		'simple_grid_field25' => array(
 			'type' => 'grid_field_label',
@@ -3217,7 +3293,7 @@
 			'field' => 'period_week',
 			'type' => 'grid_field',
 			'inlineAdd' => false,
-			'inlineEdit' => false 
+			'inlineEdit' => true 
 		),
 		'simple_grid_field26' => array(
 			'type' => 'grid_field_label',
@@ -3227,7 +3303,7 @@
 			'field' => 'period_day',
 			'type' => 'grid_field',
 			'inlineAdd' => false,
-			'inlineEdit' => false 
+			'inlineEdit' => true 
 		),
 		'simple_grid_field27' => array(
 			'type' => 'grid_field_label',
@@ -3237,7 +3313,7 @@
 			'field' => 'scope_level',
 			'type' => 'grid_field',
 			'inlineAdd' => false,
-			'inlineEdit' => false 
+			'inlineEdit' => true 
 		),
 		'simple_grid_field28' => array(
 			'type' => 'grid_field_label',
@@ -3247,7 +3323,7 @@
 			'field' => 'region_id',
 			'type' => 'grid_field',
 			'inlineAdd' => false,
-			'inlineEdit' => false 
+			'inlineEdit' => true 
 		),
 		'simple_grid_field29' => array(
 			'type' => 'grid_field_label',
@@ -3257,7 +3333,7 @@
 			'field' => 'country_id',
 			'type' => 'grid_field',
 			'inlineAdd' => false,
-			'inlineEdit' => false 
+			'inlineEdit' => true 
 		),
 		'simple_grid_field30' => array(
 			'type' => 'grid_field_label',
@@ -3267,7 +3343,7 @@
 			'field' => 'facility_id',
 			'type' => 'grid_field',
 			'inlineAdd' => false,
-			'inlineEdit' => false 
+			'inlineEdit' => true 
 		),
 		'simple_grid_field31' => array(
 			'type' => 'grid_field_label',
@@ -3277,7 +3353,7 @@
 			'field' => 'data_source',
 			'type' => 'grid_field',
 			'inlineAdd' => false,
-			'inlineEdit' => false 
+			'inlineEdit' => true 
 		),
 		'simple_grid_field32' => array(
 			'type' => 'grid_field_label',
@@ -3287,7 +3363,7 @@
 			'field' => 'source_detail',
 			'type' => 'grid_field',
 			'inlineAdd' => false,
-			'inlineEdit' => false 
+			'inlineEdit' => true 
 		),
 		'simple_grid_field33' => array(
 			'type' => 'grid_field_label',
@@ -3297,7 +3373,7 @@
 			'field' => 'value',
 			'type' => 'grid_field',
 			'inlineAdd' => false,
-			'inlineEdit' => false 
+			'inlineEdit' => true 
 		),
 		'simple_grid_field34' => array(
 			'type' => 'grid_field_label',
@@ -3307,7 +3383,7 @@
 			'field' => 'value_type',
 			'type' => 'grid_field',
 			'inlineAdd' => false,
-			'inlineEdit' => false 
+			'inlineEdit' => true 
 		),
 		'simple_grid_field35' => array(
 			'type' => 'grid_field_label',
@@ -3317,7 +3393,7 @@
 			'field' => 'stored_by',
 			'type' => 'grid_field',
 			'inlineAdd' => false,
-			'inlineEdit' => false 
+			'inlineEdit' => true 
 		),
 		'simple_grid_field36' => array(
 			'type' => 'grid_field_label',
@@ -3327,7 +3403,7 @@
 			'field' => 'created',
 			'type' => 'grid_field',
 			'inlineAdd' => false,
-			'inlineEdit' => false 
+			'inlineEdit' => true 
 		),
 		'simple_grid_field37' => array(
 			'type' => 'grid_field_label',
@@ -3337,7 +3413,7 @@
 			'field' => 'last_updated',
 			'type' => 'grid_field',
 			'inlineAdd' => false,
-			'inlineEdit' => false 
+			'inlineEdit' => true 
 		),
 		'simple_grid_field38' => array(
 			'type' => 'grid_field_label',
@@ -3347,7 +3423,7 @@
 			'field' => 'deleted',
 			'type' => 'grid_field',
 			'inlineAdd' => false,
-			'inlineEdit' => false 
+			'inlineEdit' => true 
 		),
 		'simple_grid_field39' => array(
 			'type' => 'grid_field_label',
@@ -3365,15 +3441,21 @@
 		'grid_view' => array(
 			'type' => 'grid_view' 
 		),
+		'grid_inline_edit' => array(
+			'type' => 'grid_inline_edit' 
+		),
+		'grid_inline_save' => array(
+			'type' => 'grid_inline_save' 
+		),
+		'grid_inline_cancel' => array(
+			'type' => 'grid_inline_cancel' 
+		),
 		'expand_button' => array(
 			'type' => 'expand_button' 
 		),
 		'inline_add' => array(
 			'type' => 'inline_add',
 			'detailsOnly' => true 
-		),
-		'grid_inline_cancel' => array(
-			'type' => 'grid_inline_cancel' 
 		) 
 	),
 	'dbProps' => array(
