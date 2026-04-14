@@ -66,6 +66,9 @@ api/base/lab
 modules/srcs/
 modules/quiz/
 modules/test/exam
+modules/test/lbq/composer.lock
+modules/test/lbq/vendor/
+modules/test/lbq/uploads/
 modules/test/lbq/public/regdevtests/
 #modules/forms
 !modules/ocr/app/

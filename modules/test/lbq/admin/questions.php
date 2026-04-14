@@ -142,9 +142,9 @@ $qtypes = [
                         <span class="badge bg-info"><?= $qtypes[$r['qtype']] ?? 'Unknown' ?></span>
                       </small>
                     </div>
-                    <p class="mb-1 preview-text">
-                      <strong>Answers:</strong> <?= htmlspecialchars($r['answer_preview'] ?? 'No answers') ?>
-                    </p>
+                     <p class="mb-1 preview-text">
+                       <strong>Answers:</strong> <?= htmlspecialchars_decode($r['answer_preview'] ?? 'No answers') ?>
+                     </p>
                     <small class="text-muted">
                       ID: <?= $r['id'] ?> |
                       Answers: <?= $r['answer_count'] ?> |

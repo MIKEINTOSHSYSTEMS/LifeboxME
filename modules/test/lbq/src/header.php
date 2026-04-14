@@ -9,7 +9,7 @@
         _paq.push(['trackPageView']);
         _paq.push(['enableLinkTracking']);
         (function() {
-            var u = "https://lifebox.merqconsultancy.org/analytics/";
+            var u = "https://mne.lifebox.org/analytics/";
             _paq.push(['setTrackerUrl', u + 'matomo.php']);
             _paq.push(['setSiteId', '1']);
             var d = document,
@@ -23,7 +23,7 @@
     <!-- End Matomo Code -->
 
     <!-- Matomo Image Tracker-->
-    <img referrerpolicy="no-referrer-when-downgrade" src="https://lifebox.merqconsultancy.org/analytics/matomo.php?idsite=1&amp;rec=1" style="border:0" alt="" />
+    <img referrerpolicy="no-referrer-when-downgrade" src="https://mne.lifebox.org/analytics/matomo.php?idsite=1&amp;rec=1" style="border:0" alt="" />
     <!-- End Matomo -->
 
     <!-- Matomo -->
@@ -58,7 +58,7 @@
                 g = d.createElement('script'),
                 s = d.getElementsByTagName('script')[0];
             g.async = true;
-            g.src = 'https://lifebox.merqconsultancy.org/analytics/js/container_DPKCUiEL.js';
+            g.src = 'https://mne.lifebox.org/analytics/js/container_DPKCUiEL.js';
             s.parentNode.insertBefore(g, s);
         })();
     </script>

@@ -3,6 +3,7 @@
 class Quiz
 {
     protected $pdo;
+
     public function __construct(PDO $pdo)
     {
         $this->pdo = $pdo;
@@ -10,10 +11,10 @@ class Quiz
 
     public function listTests($limit = 100, $active_only = false)
     {
-        $sql = "SELECT t.*, s.*, 
+        $sql = "SELECT t.*, s.*,
                 (SELECT COUNT(*) FROM lbquiz_test_questions tq WHERE tq.test_id = t.id) as question_count
-                FROM lbquiz_tests t 
-                LEFT JOIN public.training_sessions s ON s.training_id = t.training_id 
+                FROM lbquiz_tests t
+                LEFT JOIN training_sessions s ON s.training_id = t.training_id
                 WHERE 1=1";
 
         if ($active_only) {
@@ -38,8 +39,8 @@ class Quiz
     public function createTest($training_id, $title, $description = null, $time_limit = null, $is_pretest = false, $is_active = true)
     {
         $stmt = $this->pdo->prepare(
-            "INSERT INTO lbquiz_tests 
-        (training_id, title, description, time_limit_minutes, is_pretest, is_active) 
+            "INSERT INTO lbquiz_tests
+        (training_id, title, description, time_limit_minutes, is_pretest, is_active)
         VALUES (:tid, :title, :desc, :time, :pre, :active) RETURNING id"
         );
 
@@ -48,14 +49,15 @@ class Quiz
         $stmt->bindValue(':desc', $description, PDO::PARAM_STR);
 
         // Handle null time limit
-        if ($time_limit === null) {
+        if ($time_limit === null || $time_limit === '') {
             $stmt->bindValue(':time', null, PDO::PARAM_NULL);
         } else {
-            $stmt->bindValue(':time', $time_limit, PDO::PARAM_INT);
+            $stmt->bindValue(':time', (int)$time_limit, PDO::PARAM_INT);
         }
 
-        $stmt->bindValue(':pre', (bool)$is_pretest, PDO::PARAM_BOOL);
-        $stmt->bindValue(':active', (bool)$is_active, PDO::PARAM_BOOL);
+        // Use proper PostgreSQL boolean casting
+        $stmt->bindValue(':pre', $is_pretest ? 'true' : 'false', PDO::PARAM_STR);
+        $stmt->bindValue(':active', $is_active ? 'true' : 'false', PDO::PARAM_STR);
 
         $stmt->execute();
         $row = $stmt->fetch();
@@ -64,32 +66,33 @@ class Quiz
 
     public function updateTest($id, $title, $description, $time_limit, $is_active, $is_pretest, $training_id = null)
     {
-        $sql = "UPDATE lbquiz_tests 
-            SET title = :title, description = :desc, time_limit_minutes = :time, 
-            is_active = :active, is_pretest = :pre";
+        // Build the SQL dynamically based on what's provided
+        $sql = "UPDATE lbquiz_tests SET 
+                title = :title, 
+                description = :desc, 
+                time_limit_minutes = :time,
+                is_active = :active, 
+                is_pretest = :pre";
 
-        if ($training_id !== null) {
+        $params = [
+            ':title' => $title,
+            ':desc' => $description,
+            ':time' => ($time_limit === null || $time_limit === '') ? null : (int)$time_limit,
+            ':active' => $is_active ? 'true' : 'false',
+            ':pre' => $is_pretest ? 'true' : 'false',
+            ':id' => (int)$id
+        ];
+
+        if ($training_id !== null && $training_id > 0) {
             $sql .= ", training_id = :tid";
+            $params[':tid'] = (int)$training_id;
         }
 
         $sql .= " WHERE id = :id";
 
         $stmt = $this->pdo->prepare($sql);
+        $result = $stmt->execute($params);
 
-        $params = [
-            ':title' => $title,
-            ':desc' => $description,
-            ':time' => $time_limit,
-            ':active' => $is_active,
-            ':pre' => $is_pretest,
-            ':id' => $id
-        ];
-
-        if ($training_id !== null) {
-            $params[':tid'] = $training_id;
-        }
-
-        $stmt->execute($params);
         return $stmt->rowCount();
     }
 
@@ -104,7 +107,7 @@ class Quiz
     {
         $sql = "SELECT tq.*, q.question, q.qtype, q.videolink
                 FROM lbquiz_test_questions tq
-                JOIN public.quiz_questions q ON q.id = tq.quiz_question_id
+                JOIN quiz_questions q ON q.id = tq.quiz_question_id
                 WHERE tq.test_id = :test_id
                 ORDER BY tq.position ASC";
         $stmt = $this->pdo->prepare($sql);
@@ -120,9 +123,9 @@ class Quiz
 
     public function listQuestionsNotInTest($test_id, $filters = [])
     {
-        $sql = "SELECT q.*, 
-                (SELECT string_agg(text, ', ') FROM public.quiz_answers WHERE questionid = q.id) as answer_preview
-                FROM public.quiz_questions q 
+        $sql = "SELECT q.*,
+                (SELECT string_agg(text, ', ') FROM quiz_answers WHERE questionid = q.id) as answer_preview
+                FROM quiz_questions q
                 WHERE q.id NOT IN (SELECT quiz_question_id FROM lbquiz_test_questions WHERE test_id = :test_id)";
 
         // Add filters if provided
@@ -140,7 +143,7 @@ class Quiz
         $params = [':test_id' => $test_id];
 
         if (!empty($filters['qtype'])) {
-            $params[':qtype'] = $filters['qtype'];
+            $params[':qtype'] = (int)$filters['qtype'];
         }
 
         if (!empty($filters['search'])) {
@@ -151,39 +154,56 @@ class Quiz
         return $stmt->fetchAll();
     }
 
-    public function addQuestionToTest($test_id, $quiz_question_id, $weight = 1.0, $position = 9999)
+    public function addQuestionToTest($test_id, $quiz_question_id, $weight = 1.0, $position = null)
     {
-        // First get the max position for this test
-        $stmt = $this->pdo->prepare("SELECT COALESCE(MAX(position), 0) + 1 as new_position 
-                                    FROM lbquiz_test_questions WHERE test_id = :t");
-        $stmt->execute([':t' => $test_id]);
-        $row = $stmt->fetch();
-        $position = $row['new_position'];
+        // Check if already exists
+        $stmt = $this->pdo->prepare("SELECT id FROM lbquiz_test_questions WHERE test_id = :t AND quiz_question_id = :q");
+        $stmt->execute([':t' => $test_id, ':q' => $quiz_question_id]);
+        $exists = $stmt->fetch();
 
-        $stmt = $this->pdo->prepare("INSERT INTO lbquiz_test_questions (test_id, quiz_question_id, weight, position) 
-                                    VALUES (:t, :q, :w, :p) ON CONFLICT DO NOTHING");
-        $stmt->execute([':t' => $test_id, ':q' => $quiz_question_id, ':w' => $weight, ':p' => $position]);
+        if ($exists) {
+            // Update existing
+            $stmt = $this->pdo->prepare("UPDATE lbquiz_test_questions SET weight = :w WHERE test_id = :t AND quiz_question_id = :q");
+            $stmt->execute([':w' => $weight, ':t' => $test_id, ':q' => $quiz_question_id]);
+            return true;
+        } else {
+            // Insert new - use provided position or calculate next position
+            if ($position === null) {
+                $stmt = $this->pdo->prepare("SELECT COALESCE(MAX(position), 0) + 1 as new_position
+                                            FROM lbquiz_test_questions WHERE test_id = :t");
+                $stmt->execute([':t' => $test_id]);
+                $row = $stmt->fetch();
+                $position = $row ? $row['new_position'] : 1;
+            }
+
+            $stmt = $this->pdo->prepare("INSERT INTO lbquiz_test_questions (test_id, quiz_question_id, weight, position)
+                                        VALUES (:t, :q, :w, :p)");
+            $stmt->execute([':t' => $test_id, ':q' => $quiz_question_id, ':w' => $weight, ':p' => $position]);
+            return true;
+        }
     }
 
     public function removeQuestionFromTest($test_id, $quiz_question_id)
     {
         $stmt = $this->pdo->prepare("DELETE FROM lbquiz_test_questions WHERE test_id = :t AND quiz_question_id = :q");
         $stmt->execute([':t' => $test_id, ':q' => $quiz_question_id]);
+        return $stmt->rowCount();
     }
 
     public function updateQuestionPosition($test_id, $quiz_question_id, $new_position)
     {
-        $stmt = $this->pdo->prepare("UPDATE lbquiz_test_questions SET position = :pos 
+        $stmt = $this->pdo->prepare("UPDATE lbquiz_test_questions SET position = :pos
                                     WHERE test_id = :t AND quiz_question_id = :q");
         $stmt->execute([':pos' => $new_position, ':t' => $test_id, ':q' => $quiz_question_id]);
+        return $stmt->rowCount();
     }
 
     public function createResponse($participation_id, $test_id, $raw_answers_json, $userid = null)
     {
         $checksum = hash('sha256', $participation_id . '|' . $test_id . '|' . microtime(true));
 
-        $stmt = $this->pdo->prepare("INSERT INTO lbquiz_responses 
-                                (participation_id, test_id, userid, raw_answers, checksum) 
+        $stmt = $this->pdo->prepare("INSERT INTO lbquiz_responses
+                                (participation_id, test_id, userid, raw_answers, checksum)
                                 VALUES (:pid, :tid, :uid, :raw, :ck) RETURNING id");
 
         $params = [
@@ -205,11 +225,10 @@ class Quiz
         return $resp ? $resp['id'] : null;
     }
 
-
     public function insertResponseDetails($response_id, $details)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO lbquiz_response_details 
-                                    (response_id, quiz_question_id, answer_ids, answer_text, points_awarded) 
+        $stmt = $this->pdo->prepare("INSERT INTO lbquiz_response_details
+                                    (response_id, quiz_question_id, answer_ids, answer_text, points_awarded)
                                     VALUES (:rid, :qid, :aids, :atext, 0)");
         foreach ($details as $d) {
             // answer_ids in Postgres array literal form
@@ -229,9 +248,9 @@ class Quiz
 
     public function getResponse($response_id)
     {
-        $stmt = $this->pdo->prepare("SELECT r.*, t.title as test_title 
-                                    FROM lbquiz_responses r 
-                                    LEFT JOIN lbquiz_tests t ON t.id = r.test_id 
+        $stmt = $this->pdo->prepare("SELECT r.*, t.title as test_title
+                                    FROM lbquiz_responses r
+                                    LEFT JOIN lbquiz_tests t ON t.id = r.test_id
                                     WHERE r.id = :id");
         $stmt->execute([':id' => $response_id]);
         return $stmt->fetch();
@@ -239,8 +258,8 @@ class Quiz
 
     public function listResponses($test_id = null, $limit = 200)
     {
-        $sql = "SELECT r.*, t.title as test_title 
-                FROM lbquiz_responses r 
+        $sql = "SELECT r.*, t.title as test_title
+                FROM lbquiz_responses r
                 LEFT JOIN lbquiz_tests t ON t.id = r.test_id";
 
         if ($test_id) {
@@ -344,9 +363,9 @@ class Quiz
 
     public function getResponseDetails($response_id)
     {
-        $stmt = $this->pdo->prepare("SELECT rd.*, q.question, q.qtype 
+        $stmt = $this->pdo->prepare("SELECT rd.*, q.question, q.qtype
                                     FROM lbquiz_response_details rd
-                                    JOIN public.quiz_questions q ON q.id = rd.quiz_question_id
+                                    JOIN quiz_questions q ON q.id = rd.quiz_question_id
                                     WHERE rd.response_id = :rid
                                     ORDER BY rd.id");
         $stmt->execute([':rid' => $response_id]);

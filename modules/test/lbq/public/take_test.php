@@ -471,10 +471,10 @@ shuffle($questions);
         <?php foreach ($questions as $index => $q): ?>
           <div class="question-container" id="question-<?= $index ?>">
             <div class="d-flex justify-content-between align-items-start mb-3">
-              <h5>
-                <span class="question-number">Q<?= $index + 1 ?></span>
-                <?= strip_tags($q['question']) ?>
-              </h5>
+               <h5>
+                 <span class="question-number">Q<?= $index + 1 ?></span>
+                 <?= htmlspecialchars_decode($q['question']) ?>
+               </h5>
               <span class="badge bg-secondary"><?= $q['weight'] ?> points</span>
             </div>
 
@@ -501,7 +501,7 @@ shuffle($questions);
                         id="q<?= $index ?>_a<?= $a['id'] ?>"
                         value="<?= $a['id'] ?>">
                       <label class="form-check-label w-100" for="q<?= $index ?>_a<?= $a['id'] ?>">
-                        <?= htmlspecialchars($a['text']) ?>
+                        <?= htmlspecialchars_decode($a['text']) ?>
                       </label>
                     </div>
                   </div>
@@ -519,7 +519,7 @@ shuffle($questions);
                         id="q<?= $index ?>_a<?= $a['id'] ?>"
                         value="<?= $a['id'] ?>">
                       <label class="form-check-label w-100" for="q<?= $index ?>_a<?= $a['id'] ?>">
-                        <?= htmlspecialchars($a['text']) ?>
+                        <?= htmlspecialchars_decode($a['text']) ?>
                       </label>
                     </div>
                   </div>

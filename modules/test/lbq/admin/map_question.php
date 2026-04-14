@@ -1,10 +1,9 @@
 <?php
-/*
 session_start();
 if (empty($_SESSION['admin'])) {
   header('Location: login.php');
   exit;
-}*/
+}
 require __DIR__ . '/../src/db.php';
 require __DIR__ . '/../src/model/Quiz.php';
 require __DIR__ . '/session_helper.php';
@@ -42,14 +41,27 @@ $tests = $pdo->query("
     ORDER BY ts.start_date DESC, t.created_at DESC
 ")->fetchAll();
 
+$message = '';
+$message_type = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $test_id = intval($_POST['test_id'] ?? 0);
   $weight = floatval($_POST['weight'] ?? 1.0);
 
   if ($test_id) {
-    $quiz->addQuestionToTest($test_id, $qid, $weight);
-    header('Location: test_edit.php?id=' . $test_id);
-    exit;
+    try {
+      $quiz->addQuestionToTest($test_id, $qid, $weight);
+      $_SESSION['flash_message'] = "Question successfully mapped to test!";
+      $_SESSION['flash_type'] = "success";
+      header('Location: test_edit.php?id=' . $test_id);
+      exit;
+    } catch (Exception $e) {
+      $message = "Error mapping question: " . $e->getMessage();
+      $message_type = "danger";
+    }
+  } else {
+    $message = "Please select a test to map this question to.";
+    $message_type = "warning";
   }
 }
 
@@ -139,6 +151,13 @@ $qtypes = [
           </div>
         </div>
 
+        <?php if ($message): ?>
+          <div class="alert alert-<?= htmlspecialchars($message_type) ?> alert-dismissible fade show" role="alert">
+            <?= htmlspecialchars($message) ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <?php endif; ?>
+
         <div class="row">
           <!-- Question Details -->
           <div class="col-md-5 mb-4">
@@ -148,7 +167,7 @@ $qtypes = [
               </div>
               <div class="card-body">
                 <h6>Question Text:</h6>
-                <p class="mb-3"><?= nl2br(htmlspecialchars($question['question'])) ?></p>
+                <div class="mb-3"><?= htmlspecialchars_decode($question['question']) ?></div>
 
                 <div class="row mb-3">
                   <div class="col-md-6">
@@ -174,7 +193,7 @@ $qtypes = [
                   <div class="answers-container">
                     <?php foreach ($answers as $answer): ?>
                       <div class="answer-item <?= $answer['correct'] ? 'correct' : '' ?>">
-                        <?= nl2br(htmlspecialchars($answer['text'])) ?>
+                        <?= htmlspecialchars_decode($answer['text']) ?>
                         <?php if ($answer['correct']): ?>
                           <span class="badge bg-success float-end">Correct</span>
                         <?php endif; ?>
@@ -231,7 +250,7 @@ $qtypes = [
                 <div class="tests-list" style="max-height: 300px; overflow-y: auto;">
                   <?php if (count($tests) > 0): ?>
                     <?php foreach ($tests as $t): ?>
-                      <div class="test-card" onclick="document.getElementById('test_id').value='<?= $t['id'] ?>'; highlightCard(this)">
+                      <div class="test-card" onclick="selectTest('<?= $t['id'] ?>', this)">
                         <div class="d-flex justify-content-between align-items-start">
                           <div class="flex-grow-1">
                             <h6 class="mb-1"><?= htmlspecialchars($t['title'] ?? '', ENT_QUOTES, 'UTF-8') ?></h6>
@@ -275,11 +294,15 @@ $qtypes = [
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    function highlightCard(card) {
+    function selectTest(testId, card) {
+      // Update select value
+      document.getElementById('test_id').value = testId;
+
       // Remove highlight from all cards
       document.querySelectorAll('.test-card').forEach(c => {
         c.classList.remove('selected');
       });
+
       // Add highlight to clicked card
       card.classList.add('selected');
 
@@ -293,15 +316,18 @@ $qtypes = [
     document.getElementById('test_id').addEventListener('change', function() {
       const testId = this.value;
       document.querySelectorAll('.test-card').forEach(card => {
-        const cardTestId = card.getAttribute('onclick').match(/'(\d+)'/)[1];
-        if (cardTestId === testId) {
-          card.classList.add('selected');
-          card.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center'
-          });
-        } else {
-          card.classList.remove('selected');
+        const onclickAttr = card.getAttribute('onclick');
+        if (onclickAttr) {
+          const match = onclickAttr.match(/selectTest\('(\d+)'/);
+          if (match && match[1] === testId) {
+            card.classList.add('selected');
+            card.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center'
+            });
+          } else {
+            card.classList.remove('selected');
+          }
         }
       });
     });
@@ -322,6 +348,20 @@ $qtypes = [
         alert('Please enter a valid weight (greater than 0).');
         return false;
       }
+
+      // Show loading state
+      const submitBtn = this.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> Mapping...';
+    });
+
+    // Auto-hide alerts after 5 seconds
+    const alerts = document.querySelectorAll('.alert');
+    alerts.forEach(alert => {
+      setTimeout(() => {
+        const bsAlert = new bootstrap.Alert(alert);
+        bsAlert.close();
+      }, 5000);
     });
   </script>
 </body>

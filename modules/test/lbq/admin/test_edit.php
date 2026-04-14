@@ -24,9 +24,9 @@ if (!$test) {
 
 // Get training session details
 $training = $pdo->prepare("
-    SELECT ts.*, tc.course_name 
-    FROM training_sessions ts 
-    LEFT JOIN training_courses tc ON tc.course_id = ts.course_id 
+    SELECT ts.*, tc.course_name
+    FROM public.training_sessions ts
+    LEFT JOIN public.training_courses tc ON tc.course_id = ts.course_id
     WHERE ts.training_id = :tid
 ");
 $training->execute([':tid' => $test['training_id']]);
@@ -36,10 +36,10 @@ $mapped = $quiz->getTestQuestions($test_id);
 
 // Get available questions with filters
 $filters = [];
-if (isset($_GET['qtype_filter'])) {
+if (isset($_GET['qtype_filter']) && !empty($_GET['qtype_filter'])) {
   $filters['qtype'] = intval($_GET['qtype_filter']);
 }
-if (isset($_GET['search_questions'])) {
+if (isset($_GET['search_questions']) && !empty($_GET['search_questions'])) {
   $filters['search'] = trim($_GET['search_questions']);
 }
 $not_mapped = $quiz->listQuestionsNotInTest($test_id, $filters);
@@ -47,99 +47,317 @@ $not_mapped = $quiz->listQuestionsNotInTest($test_id, $filters);
 // Get trainings for dropdown
 $trainings = $pdo->query("
     SELECT ts.training_id, tc.course_name, ts.training_type, ts.quarter, ts.start_date, ts.end_date
-    FROM training_sessions ts
-    LEFT JOIN training_courses tc ON tc.course_id = ts.course_id
+    FROM public.training_sessions ts
+    LEFT JOIN public.training_courses tc ON tc.course_id = ts.course_id
     ORDER BY tc.course_name ASC, ts.training_id ASC, ts.quarter ASC, ts.start_date DESC
-")->fetchAll();
+");
+
+// Initialize debug array
+$debug_messages = [];
+$message = '';
+$message_type = '';
 
 // Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $debug_messages[] = "=== POST REQUEST DETECTED ===";
+  $debug_messages[] = "POST keys: " . implode(', ', array_keys($_POST));
+
+  // UPDATE TEST - DIRECT DATABASE UPDATE
+  if (isset($_POST['update_test'])) {
+    $debug_messages[] = "=== UPDATE TEST TRIGGERED ===";
+
+    $title = trim($_POST['title'] ?? '');
+    $training_id = !empty($_POST['training_id']) ? intval($_POST['training_id']) : null;
+    $description = trim($_POST['description'] ?? '');
+    $time_limit = !empty($_POST['time_limit_minutes']) ? intval($_POST['time_limit_minutes']) : null;
+    $is_pretest = isset($_POST['is_pretest']) && $_POST['is_pretest'] === 'on';
+    $is_active = isset($_POST['is_active']) && $_POST['is_active'] === 'on';
+
+    $debug_messages[] = "Test ID: $test_id";
+    $debug_messages[] = "Title: $title";
+    $debug_messages[] = "Training ID: " . ($training_id ?? 'null');
+    $debug_messages[] = "Description: $description";
+    $debug_messages[] = "Time Limit: " . ($time_limit ?? 'null');
+    $debug_messages[] = "Is Pretest: " . ($is_pretest ? 'TRUE' : 'FALSE');
+    $debug_messages[] = "Is Active: " . ($is_active ? 'TRUE' : 'FALSE');
+
+    try {
+      // DIRECT UPDATE - Bypass the model
+      $updateSql = "UPDATE lbquiz_tests SET 
+                      title = :title, 
+                      description = :desc, 
+                      time_limit_minutes = :time_limit,
+                      is_pretest = :is_pretest, 
+                      is_active = :is_active";
+
+      $params = [
+        ':title' => $title,
+        ':desc' => $description,
+        ':time_limit' => $time_limit,
+        ':is_pretest' => $is_pretest ? 't' : 'f',
+        ':is_active' => $is_active ? 't' : 'f',
+        ':id' => $test_id
+      ];
+
+      if ($training_id !== null && $training_id > 0) {
+        $updateSql .= ", training_id = :training_id";
+        $params[':training_id'] = $training_id;
+      }
+
+      $updateSql .= " WHERE id = :id";
+
+      $debug_messages[] = "SQL: " . $updateSql;
+      $debug_messages[] = "Params: " . print_r($params, true);
+
+      $stmt = $pdo->prepare($updateSql);
+      $result = $stmt->execute($params);
+
+      $rowCount = $stmt->rowCount();
+      $debug_messages[] = "Execute result: " . ($result ? 'TRUE' : 'FALSE');
+      $debug_messages[] = "Rows affected: $rowCount";
+
+      if ($rowCount > 0) {
+        $message = "✅ Test updated successfully!";
+        $message_type = "success";
+
+        // Refresh test data
+        $test = $quiz->getTest($test_id);
+        $debug_messages[] = "Updated test data: " . print_r($test, true);
+      } else {
+        $message = "⚠️ No changes were made to the test.";
+        $message_type = "warning";
+
+        // Check if the record exists
+        $checkStmt = $pdo->prepare("SELECT * FROM lbquiz_tests WHERE id = ?");
+        $checkStmt->execute([$test_id]);
+        $currentData = $checkStmt->fetch();
+        $debug_messages[] = "Current data in database: " . print_r($currentData, true);
+      }
+    } catch (PDOException $e) {
+      $debug_messages[] = "❌ PDO ERROR: " . $e->getMessage();
+      $message = "❌ Database error: " . $e->getMessage();
+      $message_type = "danger";
+    } catch (Exception $e) {
+      $debug_messages[] = "❌ ERROR: " . $e->getMessage();
+      $message = "❌ Error: " . $e->getMessage();
+      $message_type = "danger";
+    }
+
+    $_SESSION['debug_messages'] = $debug_messages;
+    $_SESSION['flash_message'] = $message;
+    $_SESSION['flash_type'] = $message_type;
+    header("Location: test_edit.php?id=$test_id");
+    exit;
+  }
+
+  // BULK ADD QUESTIONS
+  if (isset($_POST['bulk_add_questions'])) {
+    $debug_messages[] = "BULK ADD BUTTON CLICKED";
+
+    $question_ids = $_POST['bulk_question_ids'] ?? [];
+    $weight = floatval($_POST['bulk_weight'] ?? 1.0);
+
+    $debug_messages[] = "Test ID: " . $test_id;
+    $debug_messages[] = "Question IDs: " . implode(', ', $question_ids);
+    $debug_messages[] = "Weight: " . $weight;
+
+    $added_count = 0;
+    $errors = [];
+
+    if (empty($question_ids)) {
+      $message = "No questions selected to add.";
+      $message_type = "warning";
+      $debug_messages[] = "ERROR: No questions selected";
+    } else {
+      $debug_messages[] = "Processing " . count($question_ids) . " questions...";
+
+      foreach ($question_ids as $qid) {
+        $qid_int = intval($qid);
+        $debug_messages[] = "--- Processing question ID: $qid_int ---";
+
+        if ($qid_int > 0) {
+          try {
+            // Check if question exists
+            $qCheck = $pdo->prepare("SELECT id FROM quiz_questions WHERE id = ?");
+            $qCheck->execute([$qid_int]);
+            if (!$qCheck->fetch()) {
+              $debug_messages[] = "ERROR: Question $qid_int does not exist";
+              $errors[] = "Question ID $qid_int does not exist";
+              continue;
+            }
+            $debug_messages[] = "Question exists";
+
+            // Check if already mapped
+            $checkStmt = $pdo->prepare("SELECT id FROM lbquiz_test_questions WHERE test_id = ? AND quiz_question_id = ?");
+            $checkStmt->execute([$test_id, $qid_int]);
+            $exists = $checkStmt->fetch();
+
+            if ($exists) {
+              $debug_messages[] = "Already mapped (ID: {$exists['id']})";
+              $errors[] = "Question ID $qid_int already exists in this test";
+            } else {
+              // Get next position
+              $posStmt = $pdo->prepare("SELECT COALESCE(MAX(position), 0) + 1 as new_position FROM lbquiz_test_questions WHERE test_id = ?");
+              $posStmt->execute([$test_id]);
+              $posRow = $posStmt->fetch();
+              $position = $posRow ? $posRow['new_position'] : 1;
+
+              $debug_messages[] = "Position: $position";
+
+              // INSERT
+              $insertStmt = $pdo->prepare("
+                  INSERT INTO lbquiz_test_questions (test_id, quiz_question_id, weight, position) 
+                  VALUES (?, ?, ?, ?)
+                  RETURNING id
+              ");
+              $insertStmt->execute([$test_id, $qid_int, $weight, $position]);
+              $newRow = $insertStmt->fetch();
+
+              if ($newRow) {
+                $debug_messages[] = "✅ SUCCESS: Added with ID: {$newRow['id']}";
+                $added_count++;
+              } else {
+                $debug_messages[] = "❌ FAILED: No ID returned";
+                $errors[] = "Failed to add question ID $qid_int";
+              }
+            }
+          } catch (PDOException $e) {
+            $debug_messages[] = "❌ PDO ERROR: " . $e->getMessage();
+            $errors[] = "Database error: " . $e->getMessage();
+          } catch (Exception $e) {
+            $debug_messages[] = "❌ ERROR: " . $e->getMessage();
+            $errors[] = "Error: " . $e->getMessage();
+          }
+        }
+      }
+
+      $debug_messages[] = "=== SUMMARY ===";
+      $debug_messages[] = "Added: $added_count";
+      $debug_messages[] = "Errors: " . count($errors);
+
+      if ($added_count > 0) {
+        $message = "✅ Successfully added $added_count question(s)!";
+        $message_type = "success";
+        if (!empty($errors)) {
+          $message .= " Errors: " . implode("; ", $errors);
+          $message_type = "warning";
+        }
+      } else {
+        $message = "❌ No questions added. " . implode("; ", $errors);
+        $message_type = "danger";
+      }
+    }
+
+    $_SESSION['debug_messages'] = $debug_messages;
+    $_SESSION['flash_message'] = $message;
+    $_SESSION['flash_type'] = $message_type;
+    header("Location: test_edit.php?id=$test_id");
+    exit;
+  }
+
+  // Handle other POST actions
   if (!empty($_POST['add_question'])) {
     $qid = intval($_POST['question_id']);
     $weight = floatval($_POST['weight'] ?? 1.0);
-    $quiz->addQuestionToTest($test_id, $qid, $weight);
-    header("Location: test_edit.php?id=$test_id");
-    exit;
-  } elseif (!empty($_POST['remove_question'])) {
-    $qid = intval($_POST['question_id']);
-    $quiz->removeQuestionFromTest($test_id, $qid);
-    header("Location: test_edit.php?id=$test_id");
-    exit;
-  } elseif (!empty($_POST['update_test'])) {
-    $title = trim($_POST['title'] ?? '');
-    $training_id = intval($_POST['training_id'] ?? 0);
-    $description = trim($_POST['description'] ?? '');
-    $time_limit = !empty($_POST['time_limit_minutes']) ? intval($_POST['time_limit_minutes']) : null;
-    $is_pretest = !empty($_POST['is_pretest']);
-    $is_active = !empty($_POST['is_active']);
+    try {
+      $posStmt = $pdo->prepare("SELECT COALESCE(MAX(position), 0) + 1 as new_position FROM lbquiz_test_questions WHERE test_id = ?");
+      $posStmt->execute([$test_id]);
+      $posRow = $posStmt->fetch();
+      $position = $posRow ? $posRow['new_position'] : 1;
 
-    $quiz->updateTest($test_id, $title, $description, $time_limit, $is_active, $is_pretest, $training_id);
-    header("Location: test_edit.php?id=$test_id");
-    exit;
-  } elseif (!empty($_POST['bulk_update_weights'])) {
-    $operation = $_POST['bulk_operation'] ?? 'set';
-    $value = floatval($_POST['bulk_update_value'] ?? 1.0);
+      $checkStmt = $pdo->prepare("SELECT id FROM lbquiz_test_questions WHERE test_id = ? AND quiz_question_id = ?");
+      $checkStmt->execute([$test_id, $qid]);
 
-    foreach ($mapped as $question) {
-      $current_weight = floatval($question['weight']);
-      $new_weight = 1.0;
-
-      switch ($operation) {
-        case 'set':
-          $new_weight = $value;
-          break;
-        case 'multiply':
-          $new_weight = $current_weight * $value;
-          break;
-        case 'add':
-          $new_weight = $current_weight + $value;
-          break;
+      if ($checkStmt->fetch()) {
+        $_SESSION['flash_message'] = "Question already in test!";
+        $_SESSION['flash_type'] = "warning";
+      } else {
+        $insertStmt = $pdo->prepare("INSERT INTO lbquiz_test_questions (test_id, quiz_question_id, weight, position) VALUES (?, ?, ?, ?)");
+        $insertStmt->execute([$test_id, $qid, $weight, $position]);
+        $_SESSION['flash_message'] = "Question added successfully!";
+        $_SESSION['flash_type'] = "success";
       }
-
-      // Ensure minimum weight
-      $new_weight = max(0.1, $new_weight);
-
-      $stmt = $pdo->prepare("
-            UPDATE lbquiz_test_questions 
-            SET weight = :weight 
-            WHERE test_id = :test_id AND quiz_question_id = :question_id
-        ");
-      $stmt->execute([
-        ':weight' => $new_weight,
-        ':test_id' => $test_id,
-        ':question_id' => $question['quiz_question_id']
-      ]);
+    } catch (Exception $e) {
+      $_SESSION['flash_message'] = "Error: " . $e->getMessage();
+      $_SESSION['flash_type'] = "danger";
     }
     header("Location: test_edit.php?id=$test_id");
     exit;
-  } elseif (!empty($_POST['update_question_weight'])) {
+  }
+
+  if (!empty($_POST['remove_question'])) {
+    $qid = intval($_POST['question_id']);
+    try {
+      $stmt = $pdo->prepare("DELETE FROM lbquiz_test_questions WHERE test_id = ? AND quiz_question_id = ?");
+      $stmt->execute([$test_id, $qid]);
+      $_SESSION['flash_message'] = "Question removed!";
+      $_SESSION['flash_type'] = "success";
+    } catch (Exception $e) {
+      $_SESSION['flash_message'] = "Error: " . $e->getMessage();
+      $_SESSION['flash_type'] = "danger";
+    }
+    header("Location: test_edit.php?id=$test_id");
+    exit;
+  }
+
+  if (!empty($_POST['update_question_weight'])) {
     $qid = intval($_POST['question_id']);
     $weight = floatval($_POST['weight'] ?? 1.0);
     $position = intval($_POST['position'] ?? 9999);
 
-    // Update the question weight and position directly
-    $stmt = $pdo->prepare("
-            UPDATE lbquiz_test_questions 
-            SET weight = :weight, position = :position 
-            WHERE test_id = :test_id AND quiz_question_id = :question_id
-        ");
-    $stmt->execute([
-      ':weight' => $weight,
-      ':position' => $position,
-      ':test_id' => $test_id,
-      ':question_id' => $qid
-    ]);
+    try {
+      $stmt = $pdo->prepare("UPDATE lbquiz_test_questions SET weight = ?, position = ? WHERE test_id = ? AND quiz_question_id = ?");
+      $stmt->execute([$weight, $position, $test_id, $qid]);
+      $_SESSION['flash_message'] = "Question updated!";
+      $_SESSION['flash_type'] = "success";
+    } catch (Exception $e) {
+      $_SESSION['flash_message'] = "Error: " . $e->getMessage();
+      $_SESSION['flash_type'] = "danger";
+    }
     header("Location: test_edit.php?id=$test_id");
     exit;
-  } elseif (!empty($_POST['bulk_add_questions'])) {
-    $question_ids = $_POST['bulk_question_ids'] ?? [];
-    foreach ($question_ids as $qid) {
-      $quiz->addQuestionToTest($test_id, intval($qid));
+  }
+
+  if (!empty($_POST['bulk_update_weights'])) {
+    $operation = $_POST['bulk_operation'] ?? 'set';
+    $value = floatval($_POST['bulk_update_value'] ?? 1.0);
+    $updated_count = 0;
+
+    try {
+      foreach ($mapped as $question) {
+        $current_weight = floatval($question['weight']);
+        $new_weight = $current_weight;
+
+        if ($operation === 'set') $new_weight = $value;
+        elseif ($operation === 'multiply') $new_weight = $current_weight * $value;
+        elseif ($operation === 'add') $new_weight = $current_weight + $value;
+
+        $new_weight = max(0.1, $new_weight);
+
+        $stmt = $pdo->prepare("UPDATE lbquiz_test_questions SET weight = ? WHERE test_id = ? AND quiz_question_id = ?");
+        $stmt->execute([$new_weight, $test_id, $question['quiz_question_id']]);
+        $updated_count++;
+      }
+      $_SESSION['flash_message'] = "Updated $updated_count questions!";
+      $_SESSION['flash_type'] = "success";
+    } catch (Exception $e) {
+      $_SESSION['flash_message'] = "Error: " . $e->getMessage();
+      $_SESSION['flash_type'] = "danger";
     }
     header("Location: test_edit.php?id=$test_id");
     exit;
   }
 }
+
+// Check for flash messages
+$flash_message = $_SESSION['flash_message'] ?? '';
+$flash_type = $_SESSION['flash_type'] ?? 'info';
+$debug_output = $_SESSION['debug_messages'] ?? []; // uncomment if you want to see debug messages on the page
+unset($_SESSION['flash_message'], $_SESSION['flash_type'], $_SESSION['debug_messages']);
+
+// Refresh test data and mapped questions after potential changes
+$test = $quiz->getTest($test_id);
+$mapped = $quiz->getTestQuestions($test_id);
 
 $qtypes = [
   1 => 'Single choice',
@@ -158,20 +376,11 @@ $qtypes = [
   <link href="../assets/css/styles.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-
   <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
-  <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
-  <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
-
   <style>
     .question-item {
       border-left: 4px solid #0d6efd;
       margin-bottom: 10px;
-      transition: all 0.3s ease;
-    }
-
-    .question-item:hover {
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .stats-card {
@@ -179,18 +388,20 @@ $qtypes = [
       color: white;
       border-radius: 10px;
       padding: 20px;
+    }
+
+    .debug-panel {
+      background-color: #1e1e1e;
+      color: #d4d4d4;
+      border-radius: 5px;
+      padding: 15px;
       margin-bottom: 20px;
+      font-family: monospace;
+      font-size: 12px;
+      max-height: 400px;
+      overflow-y: auto;
     }
 
-    .modal-backdrop {
-      z-index: 1040 !important;
-    }
-
-    .modal {
-      z-index: 1050 !important;
-    }
-  </style>
-  <style>
     @media (min-width: 768px) {
       .px-md-4 {
         padding-right: 7.5rem !important;
@@ -224,20 +435,33 @@ $qtypes = [
           </div>
         </div>
 
+        <?php if ($flash_message): ?>
+          <div class="alert alert-<?= htmlspecialchars($flash_type) ?> alert-dismissible fade show" role="alert">
+            <?= htmlspecialchars($flash_message) ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <?php endif; ?>
+
+        <?php if (!empty($debug_output)): ?>
+          <div class="debug-panel">
+            <h6 style="color: #fff;">🔍 Debug Output:</h6>
+            <pre><?php foreach ($debug_output as $line): ?><?= htmlspecialchars($line) . "\n" ?><?php endforeach; ?></pre>
+          </div>
+        <?php endif; ?>
+
         <!-- Test Stats -->
         <div class="row mb-4">
           <div class="col-md-3">
             <div class="stats-card">
               <h6>Total Questions</h6>
               <h3><?= count($mapped) ?></h3>
-              <small>Points: <?= array_sum(array_column($mapped, 'weight')) ?></small>
             </div>
           </div>
           <div class="col-md-3">
             <div class="stats-card" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
-              <h6>Training Session</h6>
-              <h5><?= htmlspecialchars($training['course_name'] ?? 'N/A') ?></h5>
-              <small><?= htmlspecialchars($training['training_id'] ?? 'N/A') ?></small>
+              <h6>Training ID</h6>
+              <h5><?= htmlspecialchars($test['training_id'] ?? 'N/A') ?></h5>
+              <small><?= htmlspecialchars($training['course_name'] ?? 'N/A') ?></small>
             </div>
           </div>
           <div class="col-md-3">
@@ -248,12 +472,8 @@ $qtypes = [
           </div>
           <div class="col-md-3">
             <div class="stats-card" style="background: linear-gradient(135deg, #277c99 0%, #44a08d 100%);">
-              <h6>Test Type</h6>
-              <h4>
-                <span class="badge bg-<?= $test['is_pretest'] ? 'info' : 'primary' ?>">
-                  <?= $test['is_pretest'] ? 'Pre Test' : 'Post Test' ?>
-                </span>
-              </h4>
+              <h6>Type</h6>
+              <h4><span class="badge bg-<?= $test['is_pretest'] ? 'info' : 'primary' ?>"><?= $test['is_pretest'] ? 'Pre Test' : 'Post Test' ?></span></h4>
               <small>Status: <?= $test['is_active'] ? 'Active' : 'Inactive' ?></small>
             </div>
           </div>
@@ -269,57 +489,45 @@ $qtypes = [
               <div class="row mb-3">
                 <div class="col-md-8">
                   <label for="title" class="form-label">Test Title</label>
-                  <input type="text" class="form-control" id="title" name="title"
-                    value="<?= htmlspecialchars($test['title']) ?>" required>
+                  <input type="text" class="form-control" id="title" name="title" value="<?= htmlspecialchars($test['title']) ?>" required>
                 </div>
                 <div class="col-md-4">
                   <label for="training_id" class="form-label">Training Session</label>
-                  <select class="form-select" id="training_id" name="training_id" required>
+                  <select class="form-select" id="training_id" name="training_id">
                     <option value="">Select Training</option>
                     <?php foreach ($trainings as $tr): ?>
-                      <option value="<?= $tr['training_id'] ?>"
-                        <?= $test['training_id'] == $tr['training_id'] ? 'selected' : '' ?>>
-                        <?= htmlspecialchars($tr['course_name'] ?? 'Training', ENT_QUOTES, 'UTF-8') ?> - Session
-                        <?= htmlspecialchars($tr['training_id'] ?? '', ENT_QUOTES, 'UTF-8') ?> - Quarter
-                        <?= htmlspecialchars($tr['quarter'] ?? '', ENT_QUOTES, 'UTF-8') ?>
-                        (<?= $tr['start_date'] ? date('M Y', strtotime($tr['start_date'])) : 'N/A' ?>)
+                      <option value="<?= $tr['training_id'] ?>" <?= $test['training_id'] == $tr['training_id'] ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($tr['course_name'] ?? 'Training') ?> - Session <?= $tr['training_id'] ?>
                       </option>
                     <?php endforeach; ?>
                   </select>
                 </div>
               </div>
-
               <div class="row mb-3">
                 <div class="col-md-8">
                   <label for="description" class="form-label">Description</label>
-                  <textarea class="form-control" id="description" name="description"
-                    rows="2"><?= htmlspecialchars($test['description'] ?? '') ?></textarea>
+                  <textarea class="form-control" id="description" name="description" rows="2"><?= htmlspecialchars($test['description'] ?? '') ?></textarea>
                 </div>
                 <div class="col-md-4">
                   <label for="time_limit_minutes" class="form-label">Time Limit (minutes)</label>
-                  <input type="number" class="form-control" id="time_limit_minutes" name="time_limit_minutes"
-                    value="<?= $test['time_limit_minutes'] ?? '' ?>" min="0"
-                    placeholder="0 for no time limit">
+                  <input type="number" class="form-control" id="time_limit_minutes" name="time_limit_minutes" value="<?= $test['time_limit_minutes'] ?? '' ?>" min="0" placeholder="0 for no limit">
                 </div>
               </div>
-
               <div class="row mb-3">
                 <div class="col-md-4">
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="is_pretest" name="is_pretest"
-                      <?= $test['is_pretest'] ? 'checked' : '' ?>>
+                    <input class="form-check-input" type="checkbox" id="is_pretest" name="is_pretest" <?= $test['is_pretest'] ? 'checked' : '' ?>>
                     <label class="form-check-label" for="is_pretest">This is a Pre Test</label>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="is_active" name="is_active"
-                      <?= $test['is_active'] ? 'checked' : '' ?>>
+                    <input class="form-check-input" type="checkbox" id="is_active" name="is_active" <?= $test['is_active'] ? 'checked' : '' ?>>
                     <label class="form-check-label" for="is_active">Active</label>
                   </div>
                 </div>
                 <div class="col-md-4">
-                  <button type="submit" name="update_test" class="btn btn-primary w-100">
+                  <button type="submit" name="update_test" value="1" class="btn btn-primary w-100">
                     <i class="bi bi-check-circle"></i> Update Test
                   </button>
                 </div>
@@ -338,39 +546,90 @@ $qtypes = [
               </div>
               <div class="card-body">
                 <?php if (count($mapped) > 0): ?>
-                  <div id="mapped-questions">
-                    <?php foreach ($mapped as $index => $m): ?>
-                      <div class="card question-item mb-2">
-                        <div class="card-body py-2">
-                          <div class="d-flex justify-content-between align-items-start">
-                            <div class="flex-grow-1">
-                              <h6 class="card-title mb-1"><?= strip_tags($m['question']) ?></h6>
-                              <p class="card-text mb-1 small">
-                                <span class="badge bg-info"><?= $qtypes[$m['qtype']] ?? 'Unknown' ?></span>
-                                <span class="badge bg-secondary">Weight: <?= $m['weight'] ?></span>
-                                <span class="badge bg-light text-dark">Position: <?= $m['position'] ?></span>
-                              </p>
-                            </div>
-                            <div class="btn-group">
-                              <button type="button" class="btn btn-sm btn-outline-primary"
-                                data-bs-toggle="modal" data-bs-target="#editWeightModal<?= $index ?>">
-                                <i class="bi bi-pencil"></i>
+                  <?php foreach ($mapped as $index => $m): ?>
+                    <div class="card question-item mb-2">
+                      <div class="card-body py-2">
+                        <div class="d-flex justify-content-between align-items-start">
+                          <div class="flex-grow-1">
+                            <h6 class="card-title mb-1"><strong>ID: <?= $m['quiz_question_id'] ?></strong> - <?= strip_tags($m['question']) ?></h6>
+                            <p class="card-text mb-1 small">
+                              <span class="badge bg-info"><?= $qtypes[$m['qtype']] ?? 'Unknown' ?></span>
+                              <span class="badge bg-secondary">Weight: <?= $m['weight'] ?></span>
+                              <span class="badge bg-light text-dark">Position: <?= $m['position'] ?></span>
+                            </p>
+                          </div>
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editWeightModal<?= $index ?>">
+                              <i class="bi bi-pencil"></i>
+                            </button>
+                            <form method="post" class="d-inline" onsubmit="return confirm('Remove this question?');">
+                              <input type="hidden" name="question_id" value="<?= $m['quiz_question_id'] ?>">
+                              <button type="submit" name="remove_question" class="btn btn-sm btn-outline-danger">
+                                <i class="bi bi-trash"></i>
                               </button>
-                              <form method="post" class="d-inline">
-                                <input type="hidden" name="question_id" value="<?= $m['quiz_question_id'] ?>">
-                                <button type="submit" name="remove_question" class="btn btn-sm btn-outline-danger">
-                                  <i class="bi bi-trash"></i>
-                                </button>
-                              </form>
-                            </div>
+                            </form>
                           </div>
                         </div>
                       </div>
-                    <?php endforeach; ?>
-                  </div>
+                    </div>
+
+                    <!-- Edit Modal -->
+                    <div class="modal fade" id="editWeightModal<?= $index ?>" tabindex="-1" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Edit Question Settings</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <form method="post">
+                            <div class="modal-body">
+                              <p class="mb-2"><strong>ID: <?= $m['quiz_question_id'] ?></strong> - <?= strip_tags($m['question']) ?></p>
+                              <div class="mb-3">
+                                <label class="form-label">Weight</label>
+                                <input type="number" class="form-control" name="weight" value="<?= $m['weight'] ?>" step="0.1" min="0.1" required>
+                              </div>
+                              <div class="mb-3">
+                                <label class="form-label">Position</label>
+                                <input type="number" class="form-control" name="position" value="<?= $m['position'] ?>" min="1" required>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <input type="hidden" name="question_id" value="<?= $m['quiz_question_id'] ?>">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                              <button type="submit" name="update_question_weight" class="btn btn-primary">Save Changes</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  <?php endforeach; ?>
                 <?php else: ?>
-                  <div class="alert alert-info">
-                    No questions mapped to this test yet. Add questions from the available questions section.
+                  <div class="alert alert-info">No questions mapped yet.</div>
+                <?php endif; ?>
+
+                <!-- Bulk Update Weights -->
+                <?php if (count($mapped) > 0): ?>
+                  <div class="card mt-3">
+                    <div class="card-header bg-light">
+                      <h6 class="card-title mb-0">Bulk Update Weights</h6>
+                    </div>
+                    <div class="card-body">
+                      <form method="post">
+                        <div class="mb-3">
+                          <select class="form-select" name="bulk_operation">
+                            <option value="set">Set all weights to</option>
+                            <option value="multiply">Multiply all weights by</option>
+                            <option value="add">Add to all weights</option>
+                          </select>
+                        </div>
+                        <div class="mb-3">
+                          <input type="number" class="form-control" name="bulk_update_value" value="1.0" step="0.1" required>
+                        </div>
+                        <button type="submit" name="bulk_update_weights" value="1" class="btn btn-warning w-100">
+                          <i class="bi bi-gear"></i> Update All Weights
+                        </button>
+                      </form>
+                    </div>
                   </div>
                 <?php endif; ?>
               </div>
@@ -381,142 +640,86 @@ $qtypes = [
           <div class="col-md-6 mb-4">
             <div class="card">
               <div class="card-header bg-white">
-                <h5 class="card-title mb-0">Available Questions</h5>
+                <h5 class="card-title mb-0">Available Questions (<?= count($not_mapped) ?>)</h5>
               </div>
               <div class="card-body">
-                <!-- Question Filters -->
+                <!-- Filters -->
                 <form method="get" class="row g-2 mb-3">
                   <input type="hidden" name="id" value="<?= $test_id ?>">
                   <div class="col-md-6">
                     <select class="form-select" name="qtype_filter">
                       <option value="">All Types</option>
                       <?php foreach ($qtypes as $id => $name): ?>
-                        <option value="<?= $id ?>" <?= ($filters['qtype'] ?? '') == $id ? 'selected' : '' ?>>
-                          <?= $name ?>
-                        </option>
+                        <option value="<?= $id ?>" <?= ($filters['qtype'] ?? '') == $id ? 'selected' : '' ?>><?= $name ?></option>
                       <?php endforeach; ?>
                     </select>
                   </div>
                   <div class="col-md-6">
                     <div class="input-group">
-                      <input type="text" class="form-control" name="search_questions"
-                        placeholder="Search questions..." value="<?= $filters['search'] ?? '' ?>">
-                      <button class="btn btn-outline-secondary" type="submit">
-                        <i class="bi bi-search"></i>
-                      </button>
+                      <input type="text" class="form-control" name="search_questions" placeholder="Search..." value="<?= htmlspecialchars($filters['search'] ?? '') ?>">
+                      <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
+                      <?php if (!empty($filters)): ?>
+                        <a href="test_edit.php?id=<?= $test_id ?>" class="btn btn-outline-secondary"><i class="bi bi-x-circle"></i></a>
+                      <?php endif; ?>
                     </div>
                   </div>
                 </form>
 
-                <!-- Bulk Add Form -->
-                <!-- Bulk Operations Section -->
-                <div class="card mb-4">
-                  <div class="card-header bg-white">
-                    <h5 class="card-title mb-0">Bulk Operations</h5>
+                <!-- BULK ADD FORM -->
+                <div class="card mb-4 border-success">
+                  <div class="card-header bg-success text-white">
+                    <h6 class="card-title mb-0">Bulk Add Questions</h6>
                   </div>
                   <div class="card-body">
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="card">
-                          <div class="card-header bg-light">
-                            <h6 class="card-title mb-0">Bulk Add Questions</h6>
-                          </div>
-                          <div class="card-body">
-                            <form method="post" id="bulkAddForm">
-                              <div class="mb-3">
-                                <label class="form-label">Select questions to add:</label>
-                                <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" id="selectAllQuestions">
-                                  <label class="form-check-label" for="selectAllQuestions">
-                                    Select All Questions
-                                  </label>
-                                </div>
-                                <div class="questions-list" style="max-height: 200px; overflow-y: auto; margin-top: 10px;">
-                                  <?php if (count($not_mapped) > 0): ?>
-                                    <?php foreach ($not_mapped as $n): ?>
-                                      <div class="form-check">
-                                        <input class="form-check-input question-checkbox" type="checkbox"
-                                          name="bulk_question_ids[]" value="<?= $n['id'] ?>"
-                                          id="bulk_q<?= $n['id'] ?>">
-                                        <label class="form-check-label" for="bulk_q<?= $n['id'] ?>">
-                                          <?= substr(strip_tags($n['question']), 0, 80) ?>...
-                                          <span class="badge bg-info"><?= $qtypes[$n['qtype']] ?? 'Unknown' ?></span>
-                                        </label>
-                                      </div>
-                                    <?php endforeach; ?>
-                                  <?php else: ?>
-                                    <div class="alert alert-info">
-                                      No available questions found.
-                                    </div>
-                                  <?php endif; ?>
-                                </div>
+                    <form method="post" id="bulkAddForm">
+                      <div class="mb-3">
+                        <div class="form-check mb-2">
+                          <input class="form-check-input" type="checkbox" id="selectAllQuestions">
+                          <label class="form-check-label" for="selectAllQuestions"><strong>Select All</strong></label>
+                        </div>
+                        <div class="border rounded p-2" style="max-height: 250px; overflow-y: auto;">
+                          <?php if (count($not_mapped) > 0): ?>
+                            <?php foreach ($not_mapped as $n): ?>
+                              <div class="form-check">
+                                <input class="form-check-input question-checkbox" type="checkbox" name="bulk_question_ids[]" value="<?= $n['id'] ?>" id="bulk_q<?= $n['id'] ?>">
+                                <label class="form-check-label" for="bulk_q<?= $n['id'] ?>">
+                                  <strong>ID: <?= $n['id'] ?></strong> - <?= substr(strip_tags($n['question']), 0, 60) ?>...
+                                  <span class="badge bg-info"><?= $qtypes[$n['qtype']] ?? 'Unknown' ?></span>
+                                </label>
                               </div>
-                              <div class="mb-3">
-                                <label for="bulk_weight" class="form-label">Weight for all selected questions</label>
-                                <input type="number" class="form-control" id="bulk_weight" name="bulk_weight"
-                                  value="1.0" step="0.1" min="0.1" required>
-                              </div>
-                              <button type="submit" name="bulk_add_questions" class="btn btn-success w-100">
-                                <i class="bi bi-plus-circle"></i> Add Selected Questions
-                              </button>
-                            </form>
-                          </div>
+                            <?php endforeach; ?>
+                          <?php else: ?>
+                            <div class="alert alert-info mb-0">No available questions.</div>
+                          <?php endif; ?>
                         </div>
                       </div>
-                      <br></br>
-                      <div class="col-md-12">
-                        <div class="card">
-                          <div class="card-header bg-light">
-                            <h6 class="card-title mb-0">Bulk Update Weights</h6>
-                          </div>
-                          <div class="card-body">
-                            <form method="post" id="bulkUpdateForm">
-                              <div class="mb-3">
-                                <label class="form-label">Select operation:</label>
-                                <select class="form-select" name="bulk_operation">
-                                  <option value="set">Set all weights to</option>
-                                  <option value="multiply">Multiply all weights by</option>
-                                  <option value="add">Add to all weights</option>
-                                </select>
-                              </div>
-                              <div class="mb-3">
-                                <label for="bulk_update_value" class="form-label">Value</label>
-                                <input type="number" class="form-control" id="bulk_update_value" name="bulk_update_value"
-                                  value="1.0" step="0.1" required>
-                              </div>
-                              <button type="submit" name="bulk_update_weights" class="btn btn-warning w-100">
-                                <i class="bi bi-gear"></i> Update All Weights
-                              </button>
-                            </form>
-                          </div>
-                        </div>
+                      <div class="mb-3">
+                        <label class="form-label">Weight:</label>
+                        <input type="number" class="form-control" name="bulk_weight" value="1.0" step="0.1" min="0.1" required>
                       </div>
-                    </div>
+                      <button type="submit" name="bulk_add_questions" value="1" class="btn btn-success w-100">
+                        <i class="bi bi-plus-circle"></i> Add Selected Questions
+                      </button>
+                    </form>
                   </div>
                 </div>
 
-                <hr>
-
                 <!-- Single Add Form -->
-                <h6 class="mb-2">Add specific question:</h6>
+                <h6>Add single question:</h6>
                 <form method="post" class="row g-2">
                   <div class="col-md-7">
                     <select class="form-select" name="question_id" required>
                       <option value="">Select Question</option>
                       <?php foreach ($not_mapped as $n): ?>
-                        <option value="<?= $n['id'] ?>">
-                          <?= substr(strip_tags($n['question']), 0, 50) ?>...
-                          (<?= $qtypes[$n['qtype']] ?? 'Unknown' ?>)
-                        </option>
+                        <option value="<?= $n['id'] ?>">ID: <?= $n['id'] ?> - <?= substr(strip_tags($n['question']), 0, 40) ?>...</option>
                       <?php endforeach; ?>
                     </select>
                   </div>
                   <div class="col-md-3">
-                    <input type="number" class="form-control" name="weight" value="1.0" step="0.1" min="0.1"
-                      placeholder="Weight" required>
+                    <input type="number" class="form-control" name="weight" value="1.0" step="0.1" min="0.1" required>
                   </div>
                   <div class="col-md-2">
-                    <button type="submit" name="add_question" class="btn btn-primary w-100">
+                    <button type="submit" name="add_question" value="1" class="btn btn-primary w-100">
                       <i class="bi bi-plus"></i> Add
                     </button>
                   </div>
@@ -529,81 +732,30 @@ $qtypes = [
     </div>
   </div>
 
-  <!-- Modals for each question (placed at the end of body) -->
-  <?php foreach ($mapped as $index => $m): ?>
-    <div class="modal fade" id="editWeightModal<?= $index ?>" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Edit Question Settings</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <form method="post">
-            <div class="modal-body">
-              <p class="mb-2"><?= strip_tags($m['question']) ?></p>
-              <div class="mb-3">
-                <label for="weight<?= $index ?>" class="form-label">Weight</label>
-                <input type="number" class="form-control" id="weight<?= $index ?>"
-                  name="weight" value="<?= $m['weight'] ?>" step="0.1" min="0.1" required>
-              </div>
-              <div class="mb-3">
-                <label for="position<?= $index ?>" class="form-label">Position</label>
-                <input type="number" class="form-control" id="position<?= $index ?>"
-                  name="position" value="<?= $m['position'] ?>" min="1" required>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <input type="hidden" name="question_id" value="<?= $m['quiz_question_id'] ?>">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-              <button type="submit" name="update_question_weight" class="btn btn-primary">Save Changes</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  <?php endforeach; ?>
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Add some interactivity
-      const mappedQuestions = document.getElementById('mapped-questions');
+      const selectAll = document.getElementById('selectAllQuestions');
+      const checkboxes = document.querySelectorAll('.question-checkbox');
 
-      if (mappedQuestions) {
-        mappedQuestions.addEventListener('click', function(e) {
-          if (e.target.classList.contains('remove-answer') ||
-            e.target.parentElement.classList.contains('remove-answer')) {
-            if (!confirm('Are you sure you want to remove this question from the test?')) {
-              e.preventDefault();
-            }
-          }
+      if (selectAll) {
+        selectAll.addEventListener('change', function() {
+          checkboxes.forEach(cb => cb.checked = this.checked);
+        });
+
+        checkboxes.forEach(cb => {
+          cb.addEventListener('change', function() {
+            selectAll.checked = Array.from(checkboxes).every(c => c.checked);
+          });
         });
       }
 
-      // Filter form submission
-      document.querySelectorAll('form[method="get"]').forEach(form => {
-        form.addEventListener('submit', function() {
-          const button = this.querySelector('button[type="submit"]');
-          button.disabled = true;
-          button.innerHTML = '<i class="bi bi-hourglass-split"></i> Loading...';
-        });
-      });
-
-      // Prevent modal flickering by ensuring only one modal is open at a time
-      const modals = document.querySelectorAll('.modal');
-      modals.forEach(modal => {
-        modal.addEventListener('show.bs.modal', function() {
-          // Close any other open modals
-          const openModals = document.querySelectorAll('.modal.show');
-          openModals.forEach(openModal => {
-            if (openModal !== modal) {
-              const bsModal = bootstrap.Modal.getInstance(openModal);
-              if (bsModal) {
-                bsModal.hide();
-              }
-            }
-          });
-        });
+      document.getElementById('bulkAddForm')?.addEventListener('submit', function(e) {
+        const selected = document.querySelectorAll('.question-checkbox:checked').length;
+        if (selected === 0) {
+          e.preventDefault();
+          alert('Please select at least one question to add.');
+        }
       });
     });
   </script>

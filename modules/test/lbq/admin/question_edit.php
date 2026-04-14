@@ -33,6 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         // Create new question
         $question_id = $quiz->createQuestion($question_text, $qtype, $videolink);
+        if (!$question_id) {
+            echo "Failed to create question. Please check the database connection and try again.";
+            exit;
+        }
     }
 
     // Handle answers
@@ -156,7 +160,7 @@ if ($question_id && !$question) {
                         <form method="post" id="questionForm">
                             <div class="mb-3">
                                 <label for="question" class="form-label">Question Text</label>
-                                <textarea class="form-control" id="question" name="question" rows="3" required><?= $question ? htmlspecialchars($question['question']) : '' ?></textarea>
+                                <textarea class="form-control tinymce-editor" id="question" name="question" rows="3"><?= $question ? htmlspecialchars($question['question']) : '' ?></textarea>
                             </div>
 
                             <div class="row mb-3">
@@ -186,31 +190,30 @@ if ($question_id && !$question) {
                                     <i class="bi bi-info-circle"></i> Check the box next to answers that are correct.
                                 </div>
                                 <div id="answers-container" class="mb-3">
-                                     <?php if ($question && in_array($question['qtype'], [1, 2])): ?>
-                                         <?php foreach ($answers as $index => $answer): ?>
-                                             <div class="answer-row" data-index="<?= $index ?>">
-                                                 <input type="hidden" name="answer_id[]" value="<?= $answer['id'] ?>">
-                                                 <div class="row align-items-center">
-                                                     <div class="col-md-7">
-                                                         <input type="text" class="form-control" name="answer_text[]"
-                                                             value="<?= htmlspecialchars($answer['text']) ?>" placeholder="Answer text" required>
-                                                     </div>
-                                                     <div class="col-md-3">
-                                                         <div class="form-check form-switch">
-                                                             <input class="form-check-input" type="<?= $question['qtype'] == 1 ? 'radio' : 'checkbox' ?>" name="<?= $question['qtype'] == 1 ? 'answer_correct' : 'answer_correct[]' ?>"
-                                                                 value="<?= $index ?>" <?= $answer['correct'] ? 'checked' : '' ?>>
-                                                             <label class="form-check-label">Correct Answer</label>
-                                                         </div>
-                                                     </div>
-                                                     <div class="col-md-2">
-                                                         <button type="button" class="btn btn-danger btn-sm remove-answer">
-                                                             <i class="bi bi-trash"></i> Remove
-                                                         </button>
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                         <?php endforeach; ?>
-                                     <?php endif; ?>
+                                    <?php if ($question && in_array($question['qtype'], [1, 2])): ?>
+                                        <?php foreach ($answers as $index => $answer): ?>
+                                            <div class="answer-row" data-index="<?= $index ?>">
+                                                <input type="hidden" name="answer_id[]" value="<?= $answer['id'] ?>">
+                                                <div class="row align-items-center">
+                                                    <div class="col-md-7">
+                                                        <textarea class="form-control tinymce-editor" name="answer_text[]" rows="2" placeholder="Answer text"><?= htmlspecialchars($answer['text']) ?></textarea>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input" type="<?= $question['qtype'] == 1 ? 'radio' : 'checkbox' ?>" name="<?= $question['qtype'] == 1 ? 'answer_correct' : 'answer_correct[]' ?>"
+                                                                value="<?= $index ?>" <?= $answer['correct'] ? 'checked' : '' ?>>
+                                                            <label class="form-check-label">Correct Answer</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <button type="button" class="btn btn-danger btn-sm remove-answer">
+                                                            <i class="bi bi-trash"></i> Remove
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
                                 </div>
                                 <button type="button" id="add-answer" class="btn btn-sm btn-outline-primary mb-3">
                                     <i class="bi bi-plus-circle"></i> Add Answer
@@ -242,6 +245,27 @@ if ($question_id && !$question) {
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!--<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/vvo6yyevs4j1f4dzck6arfsw00zocvjgom0bqiqpd2dnkxyw/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/8.1.2/tinymce.min.js" integrity="sha512-t6rAWTkTP6kPQfG/mJ6ZojKT7kyJxw6//GQrS2QhYZoGW6oMWSWm7v/ur+sxoHDq1WaZqlOiZwI0D0HU7lgoeQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    -->
+    <script src="../vendor/tinymce/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+        tinymce.init({
+            selector: '.tinymce-editor',
+            license_key: 'gpl',
+            height: 400,
+            menubar: false,
+            plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount',
+            toolbar: 'undo redo | blocks | bold italic underline strikethrough | link image media table | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+            images_upload_url: 'upload_handler.php',
+            automatic_uploads: true,
+            file_picker_types: 'image',
+            paste_data_images: true
+        });
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const qtypeSelect = document.getElementById('qtype');
@@ -282,9 +306,9 @@ if ($question_id && !$question) {
                 row.innerHTML = `
                     <input type="hidden" name="answer_id[]" value="">
                     <div class="row align-items-center">
-                        <div class="col-md-7">
-                            <input type="text" class="form-control" name="new_answer_text[]" placeholder="Answer text" required>
-                        </div>
+                         <div class="col-md-7">
+                              <textarea class="form-control tinymce-editor" name="new_answer_text[]" rows="2" placeholder="Answer text"></textarea>
+                         </div>
                         <div class="col-md-3">
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="${inputType}" name="${name}" value="${newAnswerCount}">
@@ -302,8 +326,31 @@ if ($question_id && !$question) {
                 container.appendChild(row);
                 newAnswerCount++;
 
+                // Initialize TinyMCE on the new textarea
+                const textarea = row.querySelector('textarea');
+                if (textarea && typeof tinymce !== 'undefined') {
+                    tinymce.init({
+                        target: textarea,
+                        license_key: 'gpl',
+                        height: 200,
+                        menubar: false,
+                        plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount',
+                        toolbar: 'undo redo | blocks | bold italic underline strikethrough | link image media table | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+                        images_upload_url: 'upload_handler.php',
+                        automatic_uploads: true,
+                        file_picker_types: 'image',
+                        paste_data_images: true
+                    });
+                }
+
                 // Add event listener to remove button
                 row.querySelector('.remove-answer').addEventListener('click', function() {
+                    // Remove TinyMCE instance
+                    const textarea = row.querySelector('textarea');
+                    if (textarea && typeof tinymce !== 'undefined' && tinymce.get(textarea.id)) {
+                        tinymce.remove('#' + textarea.id);
+                    }
                     row.remove();
                 });
             });
@@ -317,6 +364,19 @@ if ($question_id && !$question) {
 
             // Form validation
             document.getElementById('questionForm').addEventListener('submit', function(e) {
+                // Ensure TinyMCE content is saved
+                if (typeof tinymce !== 'undefined') {
+                    tinymce.triggerSave();
+                }
+
+                // Check if question is empty
+                const questionTextarea = document.getElementById('question');
+                if (!questionTextarea.value.trim()) {
+                    e.preventDefault();
+                    alert('Please enter the question text.');
+                    return false;
+                }
+
                 const qtype = parseInt(qtypeSelect.value);
                 const answerCount = document.querySelectorAll('#answers-container .answer-row').length;
 
@@ -324,6 +384,23 @@ if ($question_id && !$question) {
                     e.preventDefault();
                     alert('Please add at least one answer for this question type.');
                     return false;
+                }
+
+                // Check if answers are empty for required types
+                if (qtype === 1 || qtype === 2) {
+                    const answerRows = document.querySelectorAll('#answers-container .answer-row');
+                    let hasEmptyAnswer = false;
+                    answerRows.forEach(row => {
+                        const textarea = row.querySelector('textarea[name^="answer_text"]');
+                        if (textarea && !textarea.value.trim()) {
+                            hasEmptyAnswer = true;
+                        }
+                    });
+                    if (hasEmptyAnswer) {
+                        e.preventDefault();
+                        alert('Please fill in all answer texts.');
+                        return false;
+                    }
                 }
             });
         });

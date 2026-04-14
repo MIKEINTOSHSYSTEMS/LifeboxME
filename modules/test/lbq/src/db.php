@@ -4,6 +4,7 @@ $config = require __DIR__ . '/config.php';
 
 try {
     $pdo = new PDO($config['db']['dsn'], $config['db']['user'], $config['db']['pass'], $config['db']['options']);
+    $pdo->exec("SET search_path TO lbquiz, public");
 } catch (PDOException $e) {
     error_log("Database connection failed: " . $e->getMessage());
 
