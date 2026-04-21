@@ -61,6 +61,7 @@ $message_type = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $debug_messages[] = "=== POST REQUEST DETECTED ===";
   $debug_messages[] = "POST keys: " . implode(', ', array_keys($_POST));
+  $debug_messages[] = "POST data: " . print_r($_POST, true);
 
   // UPDATE TEST - DIRECT DATABASE UPDATE
   if (isset($_POST['update_test'])) {
@@ -300,44 +301,84 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
   }
 
-  if (!empty($_POST['update_question_weight'])) {
-    $qid = intval($_POST['question_id']);
+  // FIXED: Update question weight and position - check for button presence, not value
+  if (isset($_POST['update_question_weight'])) {
+    $debug_messages[] = "=== UPDATE QUESTION WEIGHT TRIGGERED ===";
+    $debug_messages[] = "Button was clicked!";
+    $qid = intval($_POST['question_id'] ?? 0);
     $weight = floatval($_POST['weight'] ?? 1.0);
-    $position = intval($_POST['position'] ?? 9999);
+    $position = intval($_POST['position'] ?? 0);
 
-    try {
-      $stmt = $pdo->prepare("UPDATE lbquiz_test_questions SET weight = ?, position = ? WHERE test_id = ? AND quiz_question_id = ?");
-      $stmt->execute([$weight, $position, $test_id, $qid]);
-      $_SESSION['flash_message'] = "Question updated!";
-      $_SESSION['flash_type'] = "success";
-    } catch (Exception $e) {
-      $_SESSION['flash_message'] = "Error: " . $e->getMessage();
+    $debug_messages[] = "Test ID: $test_id";
+    $debug_messages[] = "Question ID: $qid";
+    $debug_messages[] = "Weight: $weight";
+    $debug_messages[] = "Position: $position";
+
+    if ($qid <= 0) {
+      $debug_messages[] = "❌ ERROR: Invalid question ID";
+      $_SESSION['flash_message'] = "Error: Invalid question ID!";
       $_SESSION['flash_type'] = "danger";
+    } else {
+      try {
+        // DIRECT UPDATE with simple query
+        $updateSql = "UPDATE lbquiz_test_questions SET weight = ?, position = ? WHERE test_id = ? AND quiz_question_id = ?";
+        $debug_messages[] = "SQL: " . $updateSql;
+        $debug_messages[] = "Params: [$weight, $position, $test_id, $qid]";
+
+        $stmt = $pdo->prepare($updateSql);
+        $result = $stmt->execute([$weight, $position, $test_id, $qid]);
+
+        $rowCount = $stmt->rowCount();
+        $debug_messages[] = "Execute result: " . ($result ? 'TRUE' : 'FALSE');
+        $debug_messages[] = "Rows affected: $rowCount";
+
+        if ($rowCount > 0) {
+          $_SESSION['flash_message'] = "✅ Question updated! Weight: $weight, Position: $position";
+          $_SESSION['flash_type'] = "success";
+        } else {
+          // Check if the record exists
+          $checkStmt = $pdo->prepare("SELECT weight, position FROM lbquiz_test_questions WHERE test_id = ? AND quiz_question_id = ?");
+          $checkStmt->execute([$test_id, $qid]);
+          $current = $checkStmt->fetch();
+
+          if (!$current) {
+            $debug_messages[] = "❌ Record not found!";
+            $_SESSION['flash_message'] = "Error: Question not found in this test!";
+            $_SESSION['flash_type'] = "danger";
+          } else {
+            $debug_messages[] = "Current values: weight={$current['weight']}, position={$current['position']}";
+            if ($current['weight'] == $weight && $current['position'] == $position) {
+              $_SESSION['flash_message'] = "⚠️ No changes made - values are the same.";
+              $_SESSION['flash_type'] = "warning";
+            } else {
+              $_SESSION['flash_message'] = "❌ Failed to update. No rows affected.";
+              $_SESSION['flash_type'] = "danger";
+            }
+          }
+        }
+      } catch (PDOException $e) {
+        $debug_messages[] = "❌ PDO ERROR: " . $e->getMessage();
+        $debug_messages[] = "Error info: " . print_r($e->errorInfo, true);
+        $_SESSION['flash_message'] = "❌ Database error: " . $e->getMessage();
+        $_SESSION['flash_type'] = "danger";
+      } catch (Exception $e) {
+        $debug_messages[] = "❌ ERROR: " . $e->getMessage();
+        $_SESSION['flash_message'] = "❌ Error: " . $e->getMessage();
+        $_SESSION['flash_type'] = "danger";
+      }
     }
+
+    $_SESSION['debug_messages'] = $debug_messages;
     header("Location: test_edit.php?id=$test_id");
     exit;
   }
 
-  if (!empty($_POST['bulk_update_weights'])) {
+  if (isset($_POST['bulk_update_weights'])) {
     $operation = $_POST['bulk_operation'] ?? 'set';
     $value = floatval($_POST['bulk_update_value'] ?? 1.0);
-    $updated_count = 0;
 
     try {
-      foreach ($mapped as $question) {
-        $current_weight = floatval($question['weight']);
-        $new_weight = $current_weight;
-
-        if ($operation === 'set') $new_weight = $value;
-        elseif ($operation === 'multiply') $new_weight = $current_weight * $value;
-        elseif ($operation === 'add') $new_weight = $current_weight + $value;
-
-        $new_weight = max(0.1, $new_weight);
-
-        $stmt = $pdo->prepare("UPDATE lbquiz_test_questions SET weight = ? WHERE test_id = ? AND quiz_question_id = ?");
-        $stmt->execute([$new_weight, $test_id, $question['quiz_question_id']]);
-        $updated_count++;
-      }
+      $updated_count = $quiz->bulkUpdateWeights($test_id, $operation, $value);
       $_SESSION['flash_message'] = "Updated $updated_count questions!";
       $_SESSION['flash_type'] = "success";
     } catch (Exception $e) {
@@ -352,7 +393,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Check for flash messages
 $flash_message = $_SESSION['flash_message'] ?? '';
 $flash_type = $_SESSION['flash_type'] ?? 'info';
-$debug_output = $_SESSION['debug_messages'] ?? []; // uncomment if you want to see debug messages on the page
+// FORCE DEBUG DISPLAY
+$debug_output = $_SESSION['debug_messages'] ?? [];
 unset($_SESSION['flash_message'], $_SESSION['flash_type'], $_SESSION['debug_messages']);
 
 // Refresh test data and mapped questions after potential changes
@@ -400,6 +442,16 @@ $qtypes = [
       font-size: 12px;
       max-height: 400px;
       overflow-y: auto;
+      display: none !important; /* Hidden by default, can be toggled on for debugging use display: block */
+    }
+
+    /* Modal fix - prevent flickering */
+    .modal {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-backdrop {
+      opacity: 0.5 !important;
     }
 
     @media (min-width: 768px) {
@@ -559,46 +611,16 @@ $qtypes = [
                             </p>
                           </div>
                           <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editWeightModal<?= $index ?>">
+                            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editModal<?= $m['quiz_question_id'] ?>">
                               <i class="bi bi-pencil"></i>
                             </button>
                             <form method="post" class="d-inline" onsubmit="return confirm('Remove this question?');">
                               <input type="hidden" name="question_id" value="<?= $m['quiz_question_id'] ?>">
-                              <button type="submit" name="remove_question" class="btn btn-sm btn-outline-danger">
+                              <button type="submit" name="remove_question" value="1" class="btn btn-sm btn-outline-danger">
                                 <i class="bi bi-trash"></i>
                               </button>
                             </form>
                           </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Edit Modal -->
-                    <div class="modal fade" id="editWeightModal<?= $index ?>" tabindex="-1" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title">Edit Question Settings</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <form method="post">
-                            <div class="modal-body">
-                              <p class="mb-2"><strong>ID: <?= $m['quiz_question_id'] ?></strong> - <?= strip_tags($m['question']) ?></p>
-                              <div class="mb-3">
-                                <label class="form-label">Weight</label>
-                                <input type="number" class="form-control" name="weight" value="<?= $m['weight'] ?>" step="0.1" min="0.1" required>
-                              </div>
-                              <div class="mb-3">
-                                <label class="form-label">Position</label>
-                                <input type="number" class="form-control" name="position" value="<?= $m['position'] ?>" min="1" required>
-                              </div>
-                            </div>
-                            <div class="modal-footer">
-                              <input type="hidden" name="question_id" value="<?= $m['quiz_question_id'] ?>">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                              <button type="submit" name="update_question_weight" class="btn btn-primary">Save Changes</button>
-                            </div>
-                          </form>
                         </div>
                       </div>
                     </div>
@@ -732,9 +754,86 @@ $qtypes = [
     </div>
   </div>
 
+  <!-- Single Modal Container - Rendered once for all questions -->
+  <div id="modalContainer"></div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
+    // Store question data for modals
+    const mappedQuestions = <?= json_encode($mapped) ?>;
+
+    // Function to create modal HTML
+    function createModalHTML(question) {
+      return `
+        <div class="modal fade" id="editModal${question.quiz_question_id}" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Edit Question Settings</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <form method="post">
+                <div class="modal-body">
+                  <p class="mb-2"><strong>ID: ${question.quiz_question_id}</strong> - ${stripTags(question.question)}</p>
+                  <div class="mb-3">
+                    <label class="form-label">Weight</label>
+                    <input type="number" class="form-control" name="weight" value="${question.weight}" step="0.1" min="0.1" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Position</label>
+                    <input type="number" class="form-control" name="position" value="${question.position}" min="1" required>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <input type="hidden" name="question_id" value="${question.quiz_question_id}">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <button type="submit" name="update_question_weight" value="1" class="btn btn-primary">Save Changes</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Helper function to strip HTML tags
+    function stripTags(html) {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || '';
+    }
+
+    // Initialize modals
     document.addEventListener('DOMContentLoaded', function() {
+      const modalContainer = document.getElementById('modalContainer');
+
+      // Create all modals
+      mappedQuestions.forEach(question => {
+        modalContainer.insertAdjacentHTML('beforeend', createModalHTML(question));
+      });
+
+      // Initialize all modals
+      const modals = document.querySelectorAll('.modal');
+      modals.forEach(modal => {
+        new bootstrap.Modal(modal, {
+          backdrop: true,
+          keyboard: true,
+          focus: true
+        });
+      });
+
+      // Prevent modal flickering by ensuring backdrop is properly managed
+      document.addEventListener('show.bs.modal', function(e) {
+        // Remove any existing modal backdrops
+        const backdrops = document.querySelectorAll('.modal-backdrop');
+        if (backdrops.length > 1) {
+          for (let i = 1; i < backdrops.length; i++) {
+            backdrops[i].remove();
+          }
+        }
+      });
+
+      // Select all functionality
       const selectAll = document.getElementById('selectAllQuestions');
       const checkboxes = document.querySelectorAll('.question-checkbox');
 
@@ -750,6 +849,7 @@ $qtypes = [
         });
       }
 
+      // Bulk add form validation
       document.getElementById('bulkAddForm')?.addEventListener('submit', function(e) {
         const selected = document.querySelectorAll('.question-checkbox:checked').length;
         if (selected === 0) {

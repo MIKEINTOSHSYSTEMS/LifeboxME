@@ -73,6 +73,23 @@ foreach ($response_details as $detail) {
         $incorrect_answers++;
     }
 }
+
+// Helper function to safely display HTML content
+function renderHtmlContent($content)
+{
+    // Remove script tags for security but allow other HTML
+    $content = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $content);
+    $content = preg_replace('/on\w+="[^"]*"/i', '', $content);
+    return $content;
+}
+
+// Helper function to strip HTML for plain text display
+function stripHtmlTags($html)
+{
+    $text = strip_tags($html);
+    $text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    return trim($text);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -115,7 +132,6 @@ foreach ($response_details as $detail) {
         }
 
         .bg-primary {
-
             background-color: #0079a7ed !important;
         }
 
@@ -199,6 +215,26 @@ foreach ($response_details as $detail) {
             max-height: 300px;
         }
 
+        .question-content {
+            margin-bottom: 1rem;
+        }
+
+        .question-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.25rem;
+        }
+
+        .answer-text {
+            word-wrap: break-word;
+        }
+
+        .answer-text img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.25rem;
+        }
+
         @media (max-width: 768px) {
             .result-header {
                 padding: 1.5rem;
@@ -222,7 +258,7 @@ foreach ($response_details as $detail) {
                 <span class="navbar-text text-white me-3 d-none d-md-block">
                     <a class="nav-link" href="profile.php">
                         <i class="bi bi-person-circle me-1"></i>
-                        <?= htmlspecialchars($participant['title_salutation'] . $participant['first_name'] . ' ' . $participant['last_name'] ?? '') ?>
+                        <?= htmlspecialchars($participant['title_salutation'] . ' ' . $participant['first_name'] . ' ' . $participant['last_name'] ?? '') ?>
                     </a>
                 </span>
                 <a href="logout.php" class="btn btn-outline-light btn-sm">Logout</a>
@@ -365,22 +401,25 @@ foreach ($response_details as $detail) {
                     // Determine if the answer was correct
                     $is_correct = $detail['points_awarded'] > 0;
                     $is_answered = !empty($detail['answer_ids']) || !empty($detail['answer_text']);
+
+                    // Clean the question content for safe display
+                    $question_text = renderHtmlContent($question['question']);
                 ?>
                     <div class="question-card card <?= $is_correct ? 'correct' : ($is_answered ? 'incorrect' : 'unanswered') ?>">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-start mb-3">
-                                <h5>
-                                    <span class="question-number">Q<?= $index + 1 ?></span>
-                                    <?= strip_tags($question['question']) ?>
+                                <h5 class="d-flex align-items-start">
+                                    <span class="question-number me-2">Q<?= $index + 1 ?>.</span>
+                                    <span class="question-content"><?= $question_text ?></span>
                                 </h5>
-                                <span class="badge bg-<?= $is_correct ? 'success' : ($is_answered ? 'danger' : 'warning') ?>">
+                                <span class="badge bg-<?= $is_correct ? 'success' : ($is_answered ? 'danger' : 'warning') ?> ms-2">
                                     <?= $is_correct ? 'Correct' : ($is_answered ? 'Incorrect' : 'Unanswered') ?>
                                 </span>
                             </div>
 
                             <?php if (!empty($question['videolink'])): ?>
                                 <div class="mb-3">
-                                    <video controls width="100%">
+                                    <video controls width="100%" style="max-width: 100%;">
                                         <source src="<?= htmlspecialchars($question['videolink']) ?>" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
@@ -395,37 +434,55 @@ foreach ($response_details as $detail) {
                                     <?php
                                     $selected_answers = [];
                                     if (!empty($detail['answer_ids'])) {
-                                        // Convert PostgreSQL array to PHP array
-                                        $selected_answers = str_replace(['{', '}'], '', $detail['answer_ids']);
-                                        $selected_answers = explode(',', $selected_answers);
+                                        // Handle PostgreSQL array format
+                                        $answer_str = trim($detail['answer_ids'], '{}');
+                                        if (!empty($answer_str)) {
+                                            $selected_answers = explode(',', $answer_str);
+                                        }
                                     }
                                     ?>
 
-                                    <?php foreach ($answers as $answer): ?>
-                                        <?php $is_selected = in_array($answer['id'], $selected_answers); ?>
-                                        <?php $is_correct_answer = $answer['correct'] == 't' || $answer['correct'] === true; ?>
-
+                                    <?php foreach ($answers as $answer):
+                                        $is_selected = in_array((string)$answer['id'], $selected_answers);
+                                        $is_correct_answer = $answer['correct'] == 't' || $answer['correct'] === true;
+                                        $answer_text = renderHtmlContent($answer['text']);
+                                    ?>
                                         <div class="answer-option <?= $is_correct_answer ? 'correct' : ($is_selected ? 'incorrect' : '') ?> <?= $is_selected ? 'selected' : '' ?>">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="<?= $question['qtype'] == 1 ? 'radio' : 'checkbox' ?>"
-                                                    <?= $is_selected ? 'checked' : '' ?> disabled>
-                                                <label class="form-check-label w-100">
-                                                    <?= htmlspecialchars($answer['text']) ?>
+                                            <div class="d-flex align-items-start">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="<?= $question['qtype'] == 1 ? 'radio' : 'checkbox' ?>"
+                                                        <?= $is_selected ? 'checked' : '' ?> disabled>
+                                                </div>
+                                                <div class="ms-2 flex-grow-1 answer-text">
+                                                    <?= $answer_text ?>
                                                     <?php if ($is_correct_answer): ?>
-                                                        <span class="badge bg-success ms-2">Correct</span>
+                                                        <span class="badge bg-success ms-2">✓ Correct</span>
                                                     <?php endif; ?>
                                                     <?php if ($is_selected && !$is_correct_answer): ?>
-                                                        <span class="badge bg-danger ms-2">Your choice</span>
+                                                        <span class="badge bg-danger ms-2">✗ Your choice</span>
                                                     <?php endif; ?>
-                                                </label>
+                                                </div>
                                             </div>
                                         </div>
                                     <?php endforeach; ?>
 
+                                <?php elseif ($question['qtype'] == 3): ?>
+                                    <!-- Decision Matrix -->
+                                    <div class="form-group">
+                                        <div class="answer-text">
+                                            <?= nl2br(htmlspecialchars($detail['answer_text'] ?? 'No answer provided')) ?>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <span class="badge bg-info">Matrix response - manually graded</span>
+                                    </div>
+
                                 <?php elseif ($question['qtype'] == 4): ?>
                                     <!-- Fill in the blank -->
                                     <div class="form-group">
-                                        <textarea class="form-control" rows="4" disabled><?= htmlspecialchars($detail['answer_text'] ?? 'No answer provided') ?></textarea>
+                                        <div class="answer-text">
+                                            <?= nl2br(htmlspecialchars($detail['answer_text'] ?? 'No answer provided')) ?>
+                                        </div>
                                     </div>
                                     <div class="mt-2">
                                         <span class="badge bg-info">Text response - manually graded</span>
@@ -433,7 +490,7 @@ foreach ($response_details as $detail) {
                                 <?php endif; ?>
 
                                 <div class="mt-3">
-                                    <strong>Points awarded:</strong> <?= $detail['points_awarded'] ?> / <?= $detail['points_awarded'] > 0 ? $detail['points_awarded'] : '?' ?>
+                                    <strong>Points awarded:</strong> <?= number_format($detail['points_awarded'], 2) ?>
                                 </div>
                             </div>
                         </div>

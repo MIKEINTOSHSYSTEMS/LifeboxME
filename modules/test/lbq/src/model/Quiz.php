@@ -109,14 +109,20 @@ class Quiz
                 FROM lbquiz_test_questions tq
                 JOIN quiz_questions q ON q.id = tq.quiz_question_id
                 WHERE tq.test_id = :test_id
-                ORDER BY tq.position ASC";
+                ORDER BY tq.position ASC, tq.id ASC";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([':test_id' => $test_id]);
         $rows = $stmt->fetchAll();
+
         foreach ($rows as &$r) {
             $s = $this->pdo->prepare("SELECT id, text, picture, correct FROM public.quiz_answers WHERE questionid = :qid ORDER BY id");
             $s->execute([':qid' => $r['quiz_question_id']]);
             $r['answers'] = $s->fetchAll();
+
+            // Ensure weight is float
+            $r['weight'] = floatval($r['weight']);
+            // Ensure position is int
+            $r['position'] = intval($r['position']);
         }
         return $rows;
     }
@@ -164,7 +170,7 @@ class Quiz
         if ($exists) {
             // Update existing
             $stmt = $this->pdo->prepare("UPDATE lbquiz_test_questions SET weight = :w WHERE test_id = :t AND quiz_question_id = :q");
-            $stmt->execute([':w' => $weight, ':t' => $test_id, ':q' => $quiz_question_id]);
+            $stmt->execute([':w' => (float)$weight, ':t' => $test_id, ':q' => $quiz_question_id]);
             return true;
         } else {
             // Insert new - use provided position or calculate next position
@@ -173,12 +179,17 @@ class Quiz
                                             FROM lbquiz_test_questions WHERE test_id = :t");
                 $stmt->execute([':t' => $test_id]);
                 $row = $stmt->fetch();
-                $position = $row ? $row['new_position'] : 1;
+                $position = $row ? (int)$row['new_position'] : 1;
             }
 
             $stmt = $this->pdo->prepare("INSERT INTO lbquiz_test_questions (test_id, quiz_question_id, weight, position)
                                         VALUES (:t, :q, :w, :p)");
-            $stmt->execute([':t' => $test_id, ':q' => $quiz_question_id, ':w' => $weight, ':p' => $position]);
+            $stmt->execute([
+                ':t' => $test_id,
+                ':q' => $quiz_question_id,
+                ':w' => (float)$weight,
+                ':p' => (int)$position
+            ]);
             return true;
         }
     }
@@ -187,15 +198,149 @@ class Quiz
     {
         $stmt = $this->pdo->prepare("DELETE FROM lbquiz_test_questions WHERE test_id = :t AND quiz_question_id = :q");
         $stmt->execute([':t' => $test_id, ':q' => $quiz_question_id]);
+
+        // Reorder remaining questions to ensure no gaps
+        $this->reorderTestQuestions($test_id);
+
         return $stmt->rowCount();
+    }
+
+    public function updateQuestionWeight($test_id, $quiz_question_id, $weight, $position = null)
+    {
+        try {
+            $this->pdo->beginTransaction();
+
+            $sql = "UPDATE lbquiz_test_questions SET weight = :w";
+            $params = [
+                ':w' => $weight,
+                ':t' => $test_id,
+                ':q' => $quiz_question_id
+            ];
+
+            if ($position !== null) {
+                $sql .= ", position = :p";
+                $params[':p'] = $position;
+            }
+
+            $sql .= " WHERE test_id = :t AND quiz_question_id = :q";
+
+            $stmt = $this->pdo->prepare($sql);
+            $result = $stmt->execute($params);
+            $rowCount = $stmt->rowCount();
+
+            // Log the update for debugging
+            error_log("Update weight/position - SQL: $sql, Params: " . json_encode($params) . ", Rows affected: $rowCount");
+
+            // If position was updated, reorder to ensure consistency
+            if ($position !== null) {
+                $this->reorderTestQuestions($test_id);
+            }
+
+            $this->pdo->commit();
+            return $rowCount;
+        } catch (PDOException $e) {
+            $this->pdo->rollBack();
+            error_log("Error updating question weight/position: " . $e->getMessage());
+            throw $e; // Re-throw to be caught by the caller
+        }
     }
 
     public function updateQuestionPosition($test_id, $quiz_question_id, $new_position)
     {
         $stmt = $this->pdo->prepare("UPDATE lbquiz_test_questions SET position = :pos
                                     WHERE test_id = :t AND quiz_question_id = :q");
-        $stmt->execute([':pos' => $new_position, ':t' => $test_id, ':q' => $quiz_question_id]);
+        $stmt->execute([':pos' => (int)$new_position, ':t' => $test_id, ':q' => $quiz_question_id]);
+
+        // Reorder to ensure no gaps
+        $this->reorderTestQuestions($test_id);
+
         return $stmt->rowCount();
+    }
+
+    public function reorderTestQuestions($test_id)
+    {
+        // Get all questions for this test ordered by current position
+        $stmt = $this->pdo->prepare("
+            SELECT id, position 
+            FROM lbquiz_test_questions 
+            WHERE test_id = :test_id 
+            ORDER BY position ASC, id ASC
+        ");
+        $stmt->execute([':test_id' => $test_id]);
+        $questions = $stmt->fetchAll();
+
+        // Update positions to be sequential starting from 1
+        $updateStmt = $this->pdo->prepare("
+            UPDATE lbquiz_test_questions 
+            SET position = :new_pos 
+            WHERE id = :id
+        ");
+
+        foreach ($questions as $index => $question) {
+            $newPosition = $index + 1;
+            if ($question['position'] != $newPosition) {
+                $updateStmt->execute([
+                    ':new_pos' => $newPosition,
+                    ':id' => $question['id']
+                ]);
+            }
+        }
+
+        return true;
+    }
+
+    public function bulkUpdateWeights($test_id, $operation, $value)
+    {
+        try {
+            // Get all questions for this test
+            $stmt = $this->pdo->prepare("
+                SELECT quiz_question_id, weight 
+                FROM lbquiz_test_questions 
+                WHERE test_id = :test_id
+            ");
+            $stmt->execute([':test_id' => $test_id]);
+            $questions = $stmt->fetchAll();
+
+            $updateStmt = $this->pdo->prepare("
+                UPDATE lbquiz_test_questions 
+                SET weight = :new_weight 
+                WHERE test_id = :test_id AND quiz_question_id = :qid
+            ");
+
+            $updated = 0;
+            foreach ($questions as $question) {
+                $currentWeight = floatval($question['weight']);
+                $newWeight = $currentWeight;
+
+                switch ($operation) {
+                    case 'set':
+                        $newWeight = floatval($value);
+                        break;
+                    case 'multiply':
+                        $newWeight = $currentWeight * floatval($value);
+                        break;
+                    case 'add':
+                        $newWeight = $currentWeight + floatval($value);
+                        break;
+                }
+
+                // Ensure weight is not negative or zero
+                $newWeight = max(0.1, $newWeight);
+
+                $updateStmt->execute([
+                    ':new_weight' => $newWeight,
+                    ':test_id' => $test_id,
+                    ':qid' => $question['quiz_question_id']
+                ]);
+
+                $updated += $updateStmt->rowCount();
+            }
+
+            return $updated;
+        } catch (PDOException $e) {
+            error_log("Error in bulk weight update: " . $e->getMessage());
+            return 0;
+        }
     }
 
     public function createResponse($participation_id, $test_id, $raw_answers_json, $userid = null)
