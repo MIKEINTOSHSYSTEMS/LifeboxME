@@ -61,6 +61,24 @@ $stmt = $pdo->prepare("
 $stmt->execute([':id' => $response_id, ':test_id' => $response['test_id']]);
 $response_details = $stmt->fetchAll();
 
+// Helper function to safely render HTML content
+function renderHtmlContent($content)
+{
+    if (empty($content)) return '';
+    // Remove script tags for security but allow other HTML
+    $content = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', '', $content);
+    $content = preg_replace('/on\w+="[^"]*"/i', '', $content);
+    return $content;
+}
+
+// Helper function to strip HTML for plain text display
+function stripHtmlTags($html)
+{
+    $text = strip_tags($html);
+    $text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    return trim($text);
+}
+
 // Process the answers and calculate scores
 $total_possible = 0;
 $total_earned = 0;
@@ -70,9 +88,10 @@ foreach ($response_details as &$detail) {
     $detail['all_answers'] = json_decode($detail['all_answers'] ?? '[]', true) ?: [];
 
     // Process selected answer IDs
-    if (!empty($detail['selected_answer_ids']) && $detail['selected_answer_ids'][0] === '{') {
+    if (!empty($detail['selected_answer_ids']) && is_string($detail['selected_answer_ids']) && $detail['selected_answer_ids'][0] === '{') {
         // PostgreSQL array format: {1,2,3}
-        $detail['selected_answer_ids'] = array_map('intval', explode(',', trim($detail['selected_answer_ids'], '{}')));
+        $trimmed = trim($detail['selected_answer_ids'], '{}');
+        $detail['selected_answer_ids'] = !empty($trimmed) ? array_map('intval', explode(',', $trimmed)) : [];
     } elseif (!empty($detail['selected_answer_ids'])) {
         // Single value or already array
         $detail['selected_answer_ids'] = is_array($detail['selected_answer_ids']) ?
@@ -87,15 +106,15 @@ foreach ($response_details as &$detail) {
 
     if (!empty($detail['selected_answer_ids']) && !empty($detail['all_answers'])) {
         $correct_answers = array_filter($detail['all_answers'], function ($a) {
-            return $a['correct'];
+            return $a['correct'] == 't' || $a['correct'] === true;
         });
 
         $selected_correct = array_filter($detail['all_answers'], function ($a) use ($detail) {
-            return $a['correct'] && in_array($a['id'], $detail['selected_answer_ids']);
+            return ($a['correct'] == 't' || $a['correct'] === true) && in_array($a['id'], $detail['selected_answer_ids']);
         });
 
         $selected_incorrect = array_filter($detail['all_answers'], function ($a) use ($detail) {
-            return !$a['correct'] && in_array($a['id'], $detail['selected_answer_ids']);
+            return !($a['correct'] == 't' || $a['correct'] === true) && in_array($a['id'], $detail['selected_answer_ids']);
         });
 
         // Scoring logic
@@ -222,6 +241,47 @@ $qtypes = [
             border-radius: 10px;
             padding: 20px;
             margin-bottom: 20px;
+        }
+
+        .question-content {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .question-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.25rem;
+            margin: 0.5rem 0;
+        }
+
+        .question-content p {
+            margin-bottom: 0.5rem;
+        }
+
+        .answer-content {
+            word-wrap: break-word;
+            line-height: 1.5;
+        }
+
+        .answer-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.25rem;
+            margin: 0.25rem 0;
+        }
+
+        .answer-content p {
+            margin-bottom: 0.25rem;
+        }
+
+        .answer-text-display {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.375rem;
+            border: 1px solid #dee2e6;
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
     </style>
     <style>
@@ -410,13 +470,16 @@ $qtypes = [
                                 $is_correct = $points >= $detail['weight'];
                                 $is_partial = $points > 0 && $points < $detail['weight'];
                                 $card_class = $is_correct ? 'correct' : ($is_partial ? 'partial' : 'incorrect');
+
+                                // Render question HTML safely
+                                $question_html = renderHtmlContent($detail['question']);
                             ?>
                                 <div class="card question-card mb-4 <?= $card_class ?>">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-start mb-3">
                                             <h6 class="card-title mb-0">
                                                 Question #<?= $index + 1 ?>
-                                                <span class="badge bg-info"><?= $qtypes[$detail['qtype']] ?? 'Unknown' ?></span>
+                                                <span class="badge bg-info ms-2"><?= $qtypes[$detail['qtype']] ?? 'Unknown' ?></span>
                                             </h6>
                                             <div class="text-end">
                                                 <span class="badge bg-<?=
@@ -430,25 +493,51 @@ $qtypes = [
                                             </div>
                                         </div>
 
-                                        <p class="card-text mb-3"><?= nl2br(htmlspecialchars($detail['question'])) ?></p>
+                                        <div class="question-content">
+                                            <?= $question_html ?>
+                                        </div>
+
+                                        <?php if (!empty($detail['videolink'])): ?>
+                                            <div class="mb-3">
+                                                <video controls width="100%" style="max-width: 100%; max-height: 300px;">
+                                                    <source src="<?= htmlspecialchars($detail['videolink']) ?>" type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                            </div>
+                                        <?php endif; ?>
 
                                         <?php if (!empty($detail['all_answers'])): ?>
                                             <div class="mb-3">
                                                 <strong>Answers:</strong>
                                                 <?php foreach ($detail['all_answers'] as $answer):
                                                     $is_selected = in_array($answer['id'], $detail['selected_answer_ids']);
+                                                    $is_correct_answer = $answer['correct'] == 't' || $answer['correct'] === true;
                                                     $answer_class = '';
-                                                    if ($answer['correct']) $answer_class = 'correct';
-                                                    if ($is_selected && !$answer['correct']) $answer_class = 'selected-incorrect';
-                                                    if ($is_selected && $answer['correct']) $answer_class = 'selected';
+                                                    if ($is_correct_answer) $answer_class = 'correct';
+                                                    if ($is_selected && !$is_correct_answer) $answer_class = 'selected-incorrect';
+                                                    if ($is_selected && $is_correct_answer) $answer_class = 'selected';
+
+                                                    // Render answer HTML safely
+                                                    $answer_html = renderHtmlContent($answer['text']);
                                                 ?>
                                                     <div class="answer-item <?= $answer_class ?>">
-                                                        <?= nl2br(htmlspecialchars($answer['text'])) ?>
-                                                        <?php if ($answer['correct']): ?>
-                                                            <span class="badge bg-success ms-2">Correct Answer</span>
-                                                        <?php endif; ?>
-                                                        <?php if ($is_selected): ?>
-                                                            <span class="badge bg-primary ms-2">Selected</span>
+                                                        <div class="d-flex align-items-start">
+                                                            <div class="flex-grow-1 answer-content">
+                                                                <?= $answer_html ?>
+                                                            </div>
+                                                            <div class="ms-2">
+                                                                <?php if ($is_correct_answer): ?>
+                                                                    <span class="badge bg-success">✓ Correct</span>
+                                                                <?php endif; ?>
+                                                                <?php if ($is_selected): ?>
+                                                                    <span class="badge bg-primary ms-1">Selected</span>
+                                                                <?php endif; ?>
+                                                            </div>
+                                                        </div>
+                                                        <?php if (!empty($answer['picture'])): ?>
+                                                            <div class="mt-2">
+                                                                <img src="<?= htmlspecialchars($answer['picture']) ?>" alt="Answer image" style="max-width: 100%; max-height: 150px;">
+                                                            </div>
                                                         <?php endif; ?>
                                                     </div>
                                                 <?php endforeach; ?>
@@ -457,16 +546,18 @@ $qtypes = [
                                             <div class="mb-3">
                                                 <strong>Participant's Answer:</strong>
                                                 <div class="answer-item selected">
-                                                    <?= nl2br(htmlspecialchars($detail['answer_text'])) ?>
+                                                    <div class="answer-text-display">
+                                                        <?= nl2br(htmlspecialchars($detail['answer_text'])) ?>
+                                                    </div>
                                                 </div>
                                             </div>
                                         <?php else: ?>
                                             <div class="alert alert-warning">
-                                                No answer provided or question format not recognized
+                                                <i class="bi bi-exclamation-circle"></i> No answer provided
                                             </div>
                                         <?php endif; ?>
 
-                                        <div class="mt-3">
+                                        <div class="mt-3 p-2 bg-light rounded">
                                             <strong>Points Awarded:</strong>
                                             <?= round($points, 2) ?> of <?= $detail['weight'] ?>
                                             <?php if ($points > 0): ?>
@@ -475,6 +566,9 @@ $qtypes = [
                                                                         ?>">
                                                     <?= round(($points / $detail['weight']) * 100, 1) ?>%
                                                 </span>
+                                            <?php endif; ?>
+                                            <?php if ($detail['qtype'] == 4): ?>
+                                                <span class="badge bg-info ms-2">Text Response</span>
                                             <?php endif; ?>
                                         </div>
                                     </div>

@@ -1,4 +1,5 @@
 <?php
+/* modules/test/lbq/admin/tests.php*/
 /*
 session_start();
 if (empty($_SESSION['admin'])) {
@@ -13,16 +14,16 @@ $quiz = new Quiz($pdo);
 // Get trainings for dropdown
 $trainings = $pdo->query("
     SELECT ts.training_id, tc.course_name, ts.training_type, ts.quarter, ts.start_date, ts.end_date
-    FROM training_sessions ts
-    LEFT JOIN training_courses tc ON tc.course_id = ts.course_id
+    FROM public.training_sessions ts
+    LEFT JOIN public.training_courses tc ON tc.course_id = ts.course_id
     ORDER BY tc.course_name ASC, ts.training_id ASC, ts.quarter ASC, ts.start_date DESC
 ")->fetchAll();
 
 // Get all course names for dropdown
 $courses = $pdo->query("
     SELECT DISTINCT tc.course_name
-    FROM training_courses tc
-    JOIN training_sessions ts ON ts.course_id = tc.course_id
+    FROM public.training_courses tc
+    JOIN public.training_sessions ts ON ts.course_id = tc.course_id
     JOIN lbquiz_tests t ON t.training_id = ts.training_id
     ORDER BY tc.course_name
 ")->fetchAll(PDO::FETCH_COLUMN);
@@ -55,25 +56,42 @@ if (!empty($_GET['time_limit'])) {
     }
 }
 
-// Build SQL query with filters
+// Build SQL query with filters - FIXED: Use proper table references and count
 $sql = "
     SELECT t.*, ts.training_type, ts.start_date, ts.end_date, tc.course_name,
            (SELECT COUNT(*) FROM lbquiz_test_questions tq WHERE tq.test_id = t.id) as question_count,
            (SELECT COUNT(*) FROM lbquiz_responses r WHERE r.test_id = t.id) as response_count
     FROM lbquiz_tests t
-    LEFT JOIN training_sessions ts ON ts.training_id = t.training_id
-    LEFT JOIN training_courses tc ON tc.course_id = ts.course_id
+    LEFT JOIN public.training_sessions ts ON ts.training_id = t.training_id
+    LEFT JOIN public.training_courses tc ON tc.course_id = ts.course_id
 ";
 
 if (!empty($where)) {
     $sql .= " WHERE " . implode(" AND ", $where);
 }
 
-$sql .= " ORDER BY t.created_at ASC";
+$sql .= " ORDER BY t.created_at DESC";
 
 $stmt = $pdo->prepare($sql);
-$stmt->execute($filters);
+
+// Bind parameters with proper types
+foreach ($filters as $key => $value) {
+    if ($key === 'is_active' || $key === 'is_pretest') {
+        $stmt->bindValue(":$key", $value, PDO::PARAM_INT);
+    } else {
+        $stmt->bindValue(":$key", $value, PDO::PARAM_STR);
+    }
+}
+
+$stmt->execute();
 $tests = $stmt->fetchAll();
+
+// Ensure question_count is always an integer
+foreach ($tests as &$test) {
+    $test['question_count'] = intval($test['question_count']);
+    $test['response_count'] = intval($test['response_count']);
+}
+unset($test);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['title'] ?? '');
@@ -107,15 +125,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
     <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
 
-</head>
-<style>
-    @media (min-width: 768px) {
-        .px-md-4 {
-            padding-right: 7.5rem !important;
-            padding-left: 1.5rem !important;
+    <style>
+        @media (min-width: 768px) {
+            .px-md-4 {
+                padding-right: 7.5rem !important;
+                padding-left: 1.5rem !important;
+            }
         }
-    }
-</style>
+
+        .question-count-badge {
+            font-weight: 600;
+        }
+
+        .table td {
+            vertical-align: middle;
+        }
+    </style>
+</head>
 
 <body>
     <div class="container-fluid">
@@ -224,8 +250,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                     </small>
                                                 </td>
                                                 <td><?= htmlspecialchars($t['course_name'] ?? 'N/A') ?></td>
-                                                <td><?= $t['question_count'] ?></td>
-                                                <td><?= $t['response_count'] ?></td>
+                                                <td class="text-center">
+                                                    <span class="badge bg-info question-count-badge"><?= $t['question_count'] ?></span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="badge bg-secondary"><?= $t['response_count'] ?></span>
+                                                </td>
                                                 <td><?= $t['time_limit_minutes'] ? $t['time_limit_minutes'] . ' min' : 'No limit' ?></td>
                                                 <td>
                                                     <span class="badge bg-<?= $t['is_active'] ? 'success' : 'secondary' ?>">
@@ -233,17 +263,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                     </span>
                                                 </td>
                                                 <td>
-                                                     <span class="badge bg-<?= $t['is_pretest'] ? 'success' : 'primary' ?>">
-                                                         <?= $t['is_pretest'] ? 'Pre Test' : 'Post Test' ?>
-                                                     </span>
+                                                    <span class="badge bg-<?= $t['is_pretest'] ? 'info' : 'primary' ?>">
+                                                        <?= $t['is_pretest'] ? 'Pre Test' : 'Post Test' ?>
+                                                    </span>
                                                 </td>
                                                 <td>
-                                                    <a href="test_edit.php?id=<?= $t['id'] ?>" class="btn btn-sm btn-outline-primary">
-                                                        <i class="bi bi-pencil"></i> Edit
-                                                    </a>
-                                                    <a href="responses.php?test_id=<?= $t['id'] ?>" class="btn btn-sm btn-outline-secondary">
-                                                        <i class="bi bi-clipboard-data"></i> Responses
-                                                    </a>
+                                                    <div class="btn-group" role="group">
+                                                        <a href="test_edit.php?id=<?= $t['id'] ?>" class="btn btn-sm btn-outline-primary" title="Edit Test">
+                                                            <i class="bi bi-pencil"></i>
+                                                        </a>
+                                                        <a href="responses.php?test_id=<?= $t['id'] ?>" class="btn btn-sm btn-outline-secondary" title="View Responses">
+                                                            <i class="bi bi-clipboard-data"></i>
+                                                        </a>
+                                                        <?php if ($t['question_count'] > 0): ?>
+                                                            <a href="../public/take_test.php?test_id=<?= $t['id'] ?>" class="btn btn-sm btn-outline-success" target="_blank" title="Preview Test">
+                                                                <i class="bi bi-eye"></i>
+                                                            </a>
+                                                        <?php endif; ?>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -263,7 +300,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- Create Test Modal -->
     <div class="modal fade" id="createTestModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Create New Test</h5>
@@ -272,11 +309,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <form method="post">
                     <div class="modal-body">
                         <div class="row mb-3">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label for="title" class="form-label">Test Title</label>
                                 <input type="text" class="form-control" id="title" name="title" required>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <label for="training_id" class="form-label">Training Session</label>
                                 <select class="form-select" id="training_id" name="training_id" required>
                                     <option value="">Select Training Session</option>
@@ -291,26 +328,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
 
                         <div class="row mb-3">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <label for="description" class="form-label">Description</label>
                                 <textarea class="form-control" id="description" name="description" rows="2"></textarea>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="time_limit_minutes" class="form-label">Time Limit (minutes)</label>
-                                <input type="number" class="form-control" id="time_limit_minutes" name="time_limit_minutes"
-                                    min="0" placeholder="0 for no time limit">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-4">
-                                <div class="form-check form-switch">
+                                <label for="time_limit_minutes" class="form-label">Time Limit (minutes)</label>
+                                <input type="number" class="form-control" id="time_limit_minutes" name="time_limit_minutes"
+                                    min="0" placeholder="0 for no time limit">
+                                <small class="text-muted">Leave empty or 0 for no time limit</small>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-switch mt-4">
                                     <input class="form-check-input" type="checkbox" id="is_pretest" name="is_pretest">
                                     <label class="form-check-label" for="is_pretest">This is a Pre Test</label>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="form-check form-switch">
+                                <div class="form-check form-switch mt-4">
                                     <input class="form-check-input" type="checkbox" id="is_active" name="is_active" checked>
                                     <label class="form-check-label" for="is_active">Active</label>
                                 </div>
