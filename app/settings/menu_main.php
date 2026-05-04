@@ -2790,37 +2790,6 @@ $runnerMenus['main'] = array(
 								) 
 							),
 							array(
-								'id' => '135',
-								'parent' => '142',
-								'children' => array( 
-									 
-								),
-								'data' => array(
-									'name' => array(
-										'text' => 'Data Elements',
-										'type' => 0 
-									),
-									'comments' => array(
-										'text' => '',
-										'type' => 0 
-									),
-									'style' => '',
-									'href' => 'mypage.htm',
-									'params' => '',
-									'pageId' => '',
-									'itemType' => 2,
-									'linkType' => 0,
-									'openType' => 0,
-									'iconType' => 3,
-									'iconName' => 'fa-elementor',
-									'iconStyle' => 2,
-									'showIconType' => 1,
-									'linkToAnotherApp' => false,
-									'pageType' => 'list',
-									'table' => 4776 
-								) 
-							),
-							array(
 								'id' => '136',
 								'parent' => '142',
 								'children' => array( 
@@ -2852,14 +2821,14 @@ $runnerMenus['main'] = array(
 								) 
 							),
 							array(
-								'id' => '138',
+								'id' => '135',
 								'parent' => '142',
 								'children' => array( 
 									 
 								),
 								'data' => array(
 									'name' => array(
-										'text' => 'Indicator Targets',
+										'text' => 'Data Elements',
 										'type' => 0 
 									),
 									'comments' => array(
@@ -2874,12 +2843,12 @@ $runnerMenus['main'] = array(
 									'linkType' => 0,
 									'openType' => 0,
 									'iconType' => 3,
-									'iconName' => 'fa-bullseye',
-									'iconStyle' => 0,
+									'iconName' => 'fa-elementor',
+									'iconStyle' => 2,
 									'showIconType' => 1,
 									'linkToAnotherApp' => false,
 									'pageType' => 'list',
-									'table' => 4779 
+									'table' => 4776 
 								) 
 							),
 							array(
@@ -2973,6 +2942,37 @@ $runnerMenus['main'] = array(
 									'linkToAnotherApp' => false,
 									'table' => 19341,
 									'pageType' => 'list' 
+								) 
+							),
+							array(
+								'id' => '138',
+								'parent' => '142',
+								'children' => array( 
+									 
+								),
+								'data' => array(
+									'name' => array(
+										'text' => 'Indicator Targets',
+										'type' => 0 
+									),
+									'comments' => array(
+										'text' => '',
+										'type' => 0 
+									),
+									'style' => '',
+									'href' => 'mypage.htm',
+									'params' => '',
+									'pageId' => '',
+									'itemType' => 2,
+									'linkType' => 0,
+									'openType' => 0,
+									'iconType' => 3,
+									'iconName' => 'fa-bullseye',
+									'iconStyle' => 0,
+									'showIconType' => 1,
+									'linkToAnotherApp' => false,
+									'pageType' => 'list',
+									'table' => 4779 
 								) 
 							),
 							array(
