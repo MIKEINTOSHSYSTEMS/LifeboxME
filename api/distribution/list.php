@@ -12,8 +12,14 @@
  * that Salesforce returns (e.g. /services/data/v60.0/query/01gXX...) by
  * building the absolute URL from the instance host, NOT appending the API base.
  *
- * @version 4.0
- * @date 2026-05-14
+ * ENV SUPPORT: Reads Salesforce credentials from .env file.
+ * TOKEN REFRESH: Automatically handles 401 errors by refreshing the token.
+ * EXTERNAL ASSETS: CSS and JS loaded from assets/styles/ and assets/scripts/.
+ *
+ * @package  LifeboxME
+ * @author   @MIKEINTOSHSYSTEMS
+ * @version  5.0
+ * @date     2026-05-15
  */
 
 // ============================================================================
@@ -27,19 +33,62 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-define('SF_CLIENT_ID',     '3MVG9KI2HHAq33Rzc5Pj4yAje0Gv3KziV4Di7JXqP6EQQxHfszUtvUTWlmENSpJFF_rMIw.pSTmcUmxdMYL07');
-define('SF_CLIENT_SECRET', '79E5A031CAB542FEAFA039FB6E05810EE8069568E914C086A9CDA6E669D192DA');
-define('SF_INSTANCE',      'https://lifebox.my.salesforce.com');
+/**
+ * Load environment variables from .env file.
+ * Searches multiple possible locations for flexibility.
+ * Falls back to hardcoded values if file not found (development only).
+ *
+ * @return array Environment variables
+ */
+function loadEnvConfig(): array
+{
+    // Possible locations for .env (from deepest to root)
+    $possiblePaths = [
+        __DIR__ . '/../../.env',            // api/distribution/ → ../../ = project root
+        __DIR__ . '/../../../.env',         // Extra level up
+        dirname(__DIR__, 3) . '/.env',      // 3 directories up
+        __DIR__ . '/.env',                  // Same directory (fallback)
+    ];
+
+    foreach ($possiblePaths as $path) {
+        if (file_exists($path)) {
+            $env = @parse_ini_file($path, false, INI_SCANNER_RAW);
+            if ($env && !empty($env['SF_CLIENT_ID'])) {
+                error_log("[ENV] Loaded configuration from: " . $path);
+                return $env;
+            }
+        }
+    }
+
+    // Fallback to hardcoded values for development
+    error_log("[ENV] WARNING: .env not found, using hardcoded fallback values!");
+    return [
+        'SF_CLIENT_ID'     => '',
+        'SF_CLIENT_SECRET' => '',
+        'SF_INSTANCE'      => 'https://lifebox.my.salesforce.com',
+        'SF_API_VERSION'   => 'v60.0',
+        'SF_CACHE_TTL'     => '300',
+        'SF_MAX_RECORDS'   => '50000',
+    ];
+}
+
+// Load and define constants
+$env = loadEnvConfig();
+
+define('SF_CLIENT_ID',     $env['SF_CLIENT_ID']);
+define('SF_CLIENT_SECRET', $env['SF_CLIENT_SECRET']);
+define('SF_INSTANCE',      rtrim($env['SF_INSTANCE'] ?? 'https://lifebox.my.salesforce.com', '/'));
 define('SF_TOKEN_URL',     SF_INSTANCE . '/services/oauth2/token');
-define('SF_API_VERSION',   'v60.0');
+define('SF_API_VERSION',   $env['SF_API_VERSION'] ?? 'v60.0');
 define('SF_API_BASE',      SF_INSTANCE . '/services/data/' . SF_API_VERSION);
-define('CACHE_TTL',        300);   // 5 min
-define('MAX_RECORDS',      50000); // safety cap
+define('CACHE_TTL',        (int)($env['SF_CACHE_TTL'] ?? 300));   // 5 min default
+define('MAX_RECORDS',      (int)($env['SF_MAX_RECORDS'] ?? 50000)); // safety cap
 
 /**
  * All known fields on Distribution_List__c.
  * Using explicit fields instead of FIELDS(ALL) removes the 200-row hard cap
  * that Salesforce imposes on FIELDS(ALL) queries.
+ * This is also used as fallback when dynamic field discovery fails.
  */
 define('DL_FIELDS', implode(',', [
     'Id',
@@ -72,8 +121,13 @@ define('DL_FIELDS', implode(',', [
 ]));
 
 // ============================================================================
-// SSL MANAGER
+// SSL CERTIFICATE MANAGER
 // ============================================================================
+
+/**
+ * Manages SSL CA certificates for Windows/WAMP environments.
+ * Automatically downloads and caches the CA bundle if missing.
+ */
 class SSLCertificateManager
 {
     private string $certPath;
@@ -84,6 +138,9 @@ class SSLCertificateManager
         $this->init();
     }
 
+    /**
+     * Initialize SSL certificate: validate existing or download new.
+     */
     private function init(): void
     {
         if (!$this->isValid()) {
@@ -95,6 +152,9 @@ class SSLCertificateManager
         }
     }
 
+    /**
+     * Check if the cached certificate is valid (size > 100KB, less than 30 days old).
+     */
     private function isValid(): bool
     {
         return file_exists($this->certPath)
@@ -102,6 +162,9 @@ class SSLCertificateManager
             && filemtime($this->certPath) > strtotime('-30 days');
     }
 
+    /**
+     * Download CA certificate bundle from multiple fallback URLs.
+     */
     private function download(): void
     {
         $urls = [
@@ -112,11 +175,16 @@ class SSLCertificateManager
             $data = $this->fetch($url);
             if ($data && strlen($data) > 100_000) {
                 file_put_contents($this->certPath, $data);
+                error_log("[SSL] Certificate downloaded from: $url");
                 return;
             }
         }
+        error_log("[SSL] WARNING: Failed to download CA certificate!");
     }
 
+    /**
+     * Fetch content from URL with SSL verification disabled (for initial download).
+     */
     private function fetch(string $url): string|false
     {
         if (!function_exists('curl_init')) return false;
@@ -127,7 +195,7 @@ class SSLCertificateManager
             CURLOPT_SSL_VERIFYHOST => 0,
             CURLOPT_TIMEOUT        => 30,
             CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_USERAGENT      => 'LifeboxSSL/4.0',
+            CURLOPT_USERAGENT      => 'LifeboxSSL/5.0',
         ]);
         $body = curl_exec($ch);
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -135,6 +203,9 @@ class SSLCertificateManager
         return ($code === 200 && $body) ? $body : false;
     }
 
+    /**
+     * Get the path to the CA certificate file, or null if not found.
+     */
     public function certPath(): ?string
     {
         return file_exists($this->certPath) ? $this->certPath : null;
@@ -142,12 +213,20 @@ class SSLCertificateManager
 }
 
 // ============================================================================
-// SALESFORCE CLIENT
+// SALESFORCE API CLIENT
 // ============================================================================
+
+/**
+ * Handles all communication with the Salesforce REST API.
+ * Features: OAuth 2.0 client credentials flow, automatic pagination,
+ * dynamic field discovery, and automatic 401 token refresh.
+ */
 class SalesforceClient
 {
-    private ?string $token    = null;
-    private int     $tokenExp = 0;
+    private ?string $token      = null;
+    private int     $tokenExp   = 0;
+    private int     $retryCount = 0;
+    private const   MAX_RETRIES = 2;  // Max retries on 401 errors
     private SSLCertificateManager $ssl;
 
     public function __construct()
@@ -157,43 +236,132 @@ class SalesforceClient
 
     // ── Authentication ────────────────────────────────────────────────────────
 
+    /**
+     * Get a valid OAuth 2.0 access token.
+     * Checks memory cache → session cache → requests new token.
+     * Token is cached with 60-second expiry buffer.
+     *
+     * @return string Access token
+     * @throws RuntimeException If authentication fails
+     */
     private function token(): string
     {
-        if ($this->token && time() < $this->tokenExp) return $this->token;
-
-        if (!empty($_SESSION['sf_token']) && time() < ($_SESSION['sf_token_exp'] ?? 0)) {
-            $this->token    = $_SESSION['sf_token'];
-            $this->tokenExp = $_SESSION['sf_token_exp'];
+        // 1. Memory cache (fastest)
+        if ($this->token && time() < $this->tokenExp) {
+            error_log("[AUTH] Using in-memory token (expires in " . ($this->tokenExp - time()) . "s)");
             return $this->token;
         }
 
-        $resp = $this->curl(SF_TOKEN_URL, [
-            CURLOPT_POST       => true,
-            CURLOPT_POSTFIELDS => http_build_query([
-                'grant_type'    => 'client_credentials',
-                'client_id'     => SF_CLIENT_ID,
-                'client_secret' => SF_CLIENT_SECRET,
-            ]),
-            CURLOPT_HTTPHEADER => [
+        // 2. Session cache
+        if (!empty($_SESSION['sf_token']) && !empty($_SESSION['sf_token_exp'])) {
+            if (time() < $_SESSION['sf_token_exp']) {
+                $this->token    = $_SESSION['sf_token'];
+                $this->tokenExp = $_SESSION['sf_token_exp'];
+                error_log("[AUTH] Using session token (expires in " . ($this->tokenExp - time()) . "s)");
+                return $this->token;
+            }
+            error_log("[AUTH] Session token expired at " . date('Y-m-d H:i:s', $_SESSION['sf_token_exp']));
+        }
+
+        // 3. Request new token
+        return $this->requestNewToken();
+    }
+
+    /**
+     * Request a fresh OAuth token from Salesforce using client credentials flow.
+     *
+     * @return string New access token
+     * @throws RuntimeException If token request fails
+     */
+    private function requestNewToken(): string
+    {
+        error_log("[AUTH] Requesting new OAuth token from " . SF_TOKEN_URL);
+        error_log("[AUTH] Client ID: " . substr(SF_CLIENT_ID, 0, 15) . "...");
+
+        $ch = curl_init(SF_TOKEN_URL);
+
+        $postFields = http_build_query([
+            'grant_type'    => 'client_credentials',
+            'client_id'     => SF_CLIENT_ID,
+            'client_secret' => SF_CLIENT_SECRET,
+        ]);
+
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST           => true,
+            CURLOPT_POSTFIELDS     => $postFields,
+            CURLOPT_TIMEOUT        => 30,
+            CURLOPT_CONNECTTIMEOUT => 15,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_USERAGENT      => 'LifeboxSF/5.0',
+            CURLOPT_HTTPHEADER     => [
                 'Content-Type: application/x-www-form-urlencoded',
                 'Accept: application/json',
             ],
         ]);
 
-        if (empty($resp['access_token'])) {
-            $msg = $resp['error_description'] ?? $resp['error'] ?? 'unknown';
-            throw new RuntimeException("SF auth failed: $msg");
+        // SSL configuration
+        $cert = $this->ssl->certPath();
+        if ($cert) {
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+            curl_setopt($ch, CURLOPT_CAINFO, $cert);
+        } else {
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
         }
 
-        $this->token    = $resp['access_token'];
-        $this->tokenExp = time() + (int)($resp['expires_in'] ?? 3600) - 60;
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $error    = curl_error($ch);
+        $errorNo  = curl_errno($ch);
+        curl_close($ch);
+
+        if ($error) {
+            error_log("[AUTH] cURL error ($errorNo): $error");
+            throw new RuntimeException("Failed to connect to Salesforce: $error");
+        }
+
+        $data = json_decode($response, true);
+
+        if ($httpCode !== 200 || empty($data['access_token'])) {
+            $errorMsg = $data['error_description'] ?? $data['error'] ?? "HTTP $httpCode";
+            error_log("[AUTH] Token request failed ($httpCode): $errorMsg");
+
+            if ($httpCode === 401 || stripos($errorMsg, 'invalid_client') !== false) {
+                throw new RuntimeException(
+                    "Salesforce authentication failed: $errorMsg\n\n" .
+                        "Please verify SF_CLIENT_ID and SF_CLIENT_SECRET in your .env.dev file.\n" .
+                        "Also ensure your Connected App allows 'client_credentials' grant type."
+                );
+            }
+
+            throw new RuntimeException("Salesforce auth failed ($httpCode): $errorMsg");
+        }
+
+        // Cache the new token (with 60-second buffer)
+        $this->token    = $data['access_token'];
+        $expiresIn      = (int)($data['expires_in'] ?? 3600);
+        $this->tokenExp = time() + $expiresIn - 60;
+
         $_SESSION['sf_token']     = $this->token;
         $_SESSION['sf_token_exp'] = $this->tokenExp;
+
+        error_log("[AUTH] New token obtained! Expires in {$expiresIn}s");
         return $this->token;
     }
 
     // ── Core HTTP ─────────────────────────────────────────────────────────────
 
+    /**
+     * Execute a cURL request with SSL and authentication headers.
+     * Automatically retries on 401 errors with a fresh token.
+     *
+     * @param string $url   Full URL to request
+     * @param array  $extra Additional CURLOPT_* options
+     * @return array Decoded JSON response
+     * @throws RuntimeException On HTTP or cURL errors
+     */
     private function curl(string $url, array $extra = []): array
     {
         $ch = curl_init($url);
@@ -203,8 +371,9 @@ class SalesforceClient
             CURLOPT_CONNECTTIMEOUT => 20,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_ENCODING       => '',
-            CURLOPT_USERAGENT      => 'LifeboxSF/4.0',
+            CURLOPT_USERAGENT      => 'LifeboxSF/5.0',
         ];
+
         $cert = $this->ssl->certPath();
         if ($cert) {
             $defaults[CURLOPT_SSL_VERIFYPEER] = true;
@@ -214,6 +383,7 @@ class SalesforceClient
             $defaults[CURLOPT_SSL_VERIFYPEER] = false;
             $defaults[CURLOPT_SSL_VERIFYHOST] = 0;
         }
+
         curl_setopt_array($ch, $extra + $defaults);
         $body = curl_exec($ch);
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -224,13 +394,58 @@ class SalesforceClient
 
         $data = json_decode($body, true) ?? [];
 
+        // Auto-retry on 401 (Session expired or invalid)
+        if ($code === 401 && $this->retryCount < self::MAX_RETRIES) {
+            error_log("[HTTP] 401 error, refreshing token (attempt " . ($this->retryCount + 1) . ")");
+
+            // Clear cached tokens
+            $this->token    = null;
+            $this->tokenExp = 0;
+            unset($_SESSION['sf_token'], $_SESSION['sf_token_exp']);
+
+            $this->retryCount++;
+
+            // Retry with fresh token
+            $retryOptions = $extra + $defaults;
+            $retryOptions[CURLOPT_HTTPHEADER] = [
+                'Authorization: Bearer ' . $this->token(),
+                'Accept: application/json',
+            ];
+
+            $ch2 = curl_init($url);
+            curl_setopt_array($ch2, $retryOptions);
+            $body = curl_exec($ch2);
+            $code = curl_getinfo($ch2, CURLINFO_HTTP_CODE);
+            curl_close($ch2);
+
+            $this->retryCount = 0;
+
+            if ($code >= 400) {
+                $data = json_decode($body, true) ?? [];
+                $msg  = $data[0]['message'] ?? $data['error'] ?? "HTTP $code";
+                throw new RuntimeException("Salesforce error after token refresh ($code): $msg");
+            }
+
+            return json_decode($body, true) ?? [];
+        }
+
+        $this->retryCount = 0;
+
         if ($code >= 400) {
             $msg = $data[0]['message'] ?? $data['error_description'] ?? $data['error'] ?? "HTTP $code";
             throw new RuntimeException("Salesforce error ($code): $msg");
         }
+
         return $data;
     }
 
+    /**
+     * Authenticated GET request to Salesforce API.
+     * Handles relative URLs by prepending SF_INSTANCE.
+     *
+     * @param string $url Absolute or relative URL
+     * @return array Decoded JSON response
+     */
     private function get(string $url): array
     {
         if (str_starts_with($url, '/')) {
@@ -249,7 +464,11 @@ class SalesforceClient
 
     /**
      * Dynamically discover all queryable fields for a Salesforce object.
-     * With fallback to hardcoded list if discovery fails.
+     * Results are cached in session for CACHE_TTL seconds.
+     * Falls back to hardcoded list if describe API fails.
+     *
+     * @param string $objectName Salesforce object API name
+     * @return array List of field names
      */
     private function getObjectFields(string $objectName): array
     {
@@ -261,105 +480,56 @@ class SalesforceClient
             !empty($_SESSION[$cacheKey . '_t']) &&
             (time() - $_SESSION[$cacheKey . '_t']) < CACHE_TTL
         ) {
-            error_log("Using cached fields for {$objectName}: " . count($_SESSION[$cacheKey]) . " fields");
             return $_SESSION[$cacheKey];
         }
 
         try {
-            // Call Salesforce describe endpoint
             $describeUrl = SF_API_BASE . "/sobjects/{$objectName}/describe";
-            error_log("Discovering fields for {$objectName} from: {$describeUrl}");
-
             $resp = $this->get($describeUrl);
 
             $fields = [];
             if (!empty($resp['fields']) && is_array($resp['fields'])) {
                 foreach ($resp['fields'] as $field) {
-                    // Include all fields that have a name (even if not queryable, 
-                    // as custom fields are usually queryable)
                     if (!empty($field['name'])) {
                         $fields[] = $field['name'];
                     }
                 }
             }
 
-            // If we got fields, cache them
             if (!empty($fields)) {
                 sort($fields);
-                $_SESSION[$cacheKey] = $fields;
+                $_SESSION[$cacheKey]    = $fields;
                 $_SESSION[$cacheKey . '_t'] = time();
-                error_log("Discovered " . count($fields) . " fields for {$objectName}");
+                error_log("[FIELDS] Discovered " . count($fields) . " fields for {$objectName}");
                 return $fields;
             }
 
-            // If describe returned no fields, use fallback
-            throw new RuntimeException("Describe returned no fields for {$objectName}");
+            throw new RuntimeException("Describe returned no fields");
         } catch (Throwable $e) {
-            error_log("Field discovery failed for {$objectName}: " . $e->getMessage());
-            error_log("Using fallback fields for {$objectName}");
-
+            error_log("[FIELDS] Discovery failed: " . $e->getMessage());
             $fallback = $this->getFallbackFields($objectName);
-
-            // Cache the fallback so we don't keep failing
-            $_SESSION[$cacheKey] = $fallback;
+            $_SESSION[$cacheKey]    = $fallback;
             $_SESSION[$cacheKey . '_t'] = time();
-
             return $fallback;
         }
     }
 
     /**
-     * Fallback field list if dynamic discovery fails.
+     * Get hardcoded fallback fields when dynamic discovery fails.
      */
     private function getFallbackFields(string $objectName): array
     {
         $fallbacks = [
-            'Distribution_List__c' => [
-                'Id',
-                'OwnerId',
-                'IsDeleted',
-                'Name',
-                'CurrencyIsoCode',
-                'CreatedDate',
-                'CreatedById',
-                'LastModifiedDate',
-                'LastModifiedById',
-                'SystemModstamp',
-                'LastViewedDate',
-                'LastReferencedDate',
-                'Recipient_First_Name__c',
-                'Recipient_Last_Name__c',
-                'Units__c',
-                'Type_of_Device__c',
-                'Device_Type__c',
-                'Hospital_Name__c',
-                'Email_Address__c',
-                'Contact_Number__c',
-                'Country__c',
-                'Region__c',
-                'Product_Code__c',
-                'Order_Reference__c',
-                'Contact_Name__c',
-                'Payment__c',
-                'Date__c',
-            ],
-            'Device_Request__c' => [
-                'Id',
-                'Name',
-                'CreatedDate',
-                'LastModifiedDate',
-            ],
-            'Device_Procurement__c' => [
-                'Id',
-                'Name',
-                'CreatedDate',
-                'LastModifiedDate',
-            ],
+            'Distribution_List__c' => explode(',', DL_FIELDS),
+            'Device_Request__c'    => ['Id', 'Name', 'CreatedDate', 'LastModifiedDate'],
+            'Device_Procurement__c' => ['Id', 'Name', 'CreatedDate', 'LastModifiedDate'],
         ];
-
         return $fallbacks[$objectName] ?? ['Id', 'Name'];
     }
 
+    /**
+     * Force refresh the cached field list for an object.
+     */
     public function refreshObjectFields(string $objectName): array
     {
         $cacheKey = "sf_fields_{$objectName}";
@@ -369,11 +539,17 @@ class SalesforceClient
 
     // ── Query / Pagination ────────────────────────────────────────────────────
 
+    /**
+     * Execute a SOQL query and automatically follow nextRecordsUrl for all pages.
+     *
+     * @param string $soql SOQL query string
+     * @return array All records
+     */
     public function queryAll(string $soql): array
     {
-        $all   = [];
-        $url   = SF_API_BASE . '/query/?q=' . urlencode($soql);
-        $page  = 0;
+        $all  = [];
+        $url  = SF_API_BASE . '/query/?q=' . urlencode($soql);
+        $page = 0;
 
         while ($url && count($all) < MAX_RECORDS) {
             $page++;
@@ -382,18 +558,20 @@ class SalesforceClient
             if (!empty($resp['records'])) {
                 $batchCount = count($resp['records']);
                 $all = array_merge($all, $resp['records']);
-                error_log("SF page $page: +{$batchCount} records (total " . count($all) . ")");
+                error_log("[QUERY] Page $page: +{$batchCount} records (total: " . count($all) . ")");
             }
 
-            if (!empty($resp['done']) || empty($resp['nextRecordsUrl'])) {
-                break;
-            }
+            if (!empty($resp['done']) || empty($resp['nextRecordsUrl'])) break;
             $url = $resp['nextRecordsUrl'];
         }
 
+        error_log("[QUERY] Complete: " . count($all) . " records in $page pages");
         return $all;
     }
 
+    /**
+     * Execute a SOQL query returning only the first page.
+     */
     public function queryFirst(string $soql): array
     {
         return $this->get(SF_API_BASE . '/query/?q=' . urlencode($soql));
@@ -401,6 +579,12 @@ class SalesforceClient
 
     // ── Business Methods ──────────────────────────────────────────────────────
 
+    /**
+     * Get device distribution records with optional filters.
+     *
+     * @param array $f Filter criteria
+     * @return array Matching records
+     */
     public function getDistributions(array $f = []): array
     {
         $where = [];
@@ -441,27 +625,19 @@ class SalesforceClient
             $where[] = "Device_Type__c != NULL";
         }
 
-        // Get fields dynamically
-        $fields = $this->getObjectFields('Distribution_List__c');
-
-        // Safety check: ensure we have fields
-        if (empty($fields)) {
-            throw new RuntimeException("No fields found for Distribution_List__c");
-        }
-
+        $fields    = $this->getObjectFields('Distribution_List__c');
         $fieldList = implode(',', $fields);
 
-        error_log("Building query with " . count($fields) . " fields");
-
-        $soql  = "SELECT " . $fieldList . " FROM Distribution_List__c";
+        $soql = "SELECT " . $fieldList . " FROM Distribution_List__c";
         if ($where) $soql .= " WHERE " . implode(' AND ', $where);
         $soql .= " ORDER BY CreatedDate DESC";
-
-        error_log("SOQL Query: " . substr($soql, 0, 200) . "...");
 
         return $this->queryAll($soql);
     }
 
+    /**
+     * Get distinct device types for filter dropdown.
+     */
     public function getDeviceTypes(): array
     {
         $key = 'sf_device_types';
@@ -476,6 +652,9 @@ class SalesforceClient
         return $_SESSION[$key];
     }
 
+    /**
+     * Get distinct values for any field (for filter dropdowns).
+     */
     public function getDistinctValues(string $field): array
     {
         $key = "sf_distinct_$field";
@@ -490,6 +669,9 @@ class SalesforceClient
         return $_SESSION[$key];
     }
 
+    /**
+     * Get statistics about Distribution_List__c records.
+     */
     public function getStats(): array
     {
         $key = 'sf_stats';
@@ -521,7 +703,7 @@ class SalesforceClient
 }
 
 // ============================================================================
-// EXPORT
+// EXPORT FUNCTIONS
 // ============================================================================
 function getExportColumns(): array
 {
@@ -552,7 +734,7 @@ function exportCSV(array $records): void
     header('Content-Type: text/csv; charset=utf-8');
     header('Content-Disposition: attachment; filename="distribution_' . date('Ymd_His') . '.csv"');
     $out = fopen('php://output', 'w');
-    fprintf($out, chr(0xEF) . chr(0xBB) . chr(0xBF));
+    fprintf($out, chr(0xEF) . chr(0xBB) . chr(0xBF)); // BOM for Excel UTF-8
     fputcsv($out, $cols);
     foreach ($records as $r) {
         $row = [];
@@ -603,7 +785,7 @@ function exportJSON(array $records): void
 }
 
 // ============================================================================
-// HELPERS
+// HELPER FUNCTIONS
 // ============================================================================
 function fv($value, string $col = ''): string
 {
@@ -613,27 +795,17 @@ function fv($value, string $col = ''): string
         : '<span class="badge-no">✗ No</span>';
 
     if (is_array($value)) {
-        $json = htmlspecialchars(json_encode($value, JSON_PRETTY_PRINT));
-        return '<span class="badge-arr" title="' . $json . '">[ ' . count($value) . ' ]</span>';
+        return '<span class="badge-arr">[ ' . count($value) . ' ]</span>';
     }
 
     $str = (string)$value;
 
-    // ISO datetime
     if (preg_match('/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/', $str)) {
-        $ts  = strtotime($str);
-        $fmt = date('d M Y', $ts) . '<br><small>' . date('H:i:s', $ts) . ' UTC</small>';
-        return '<span class="cell-date">' . $fmt . '</span>';
+        return '<span class="cell-date">' . date('d M Y', strtotime($str)) . '<br><small>' . date('H:i:s', strtotime($str)) . ' UTC</small></span>';
     }
 
-    // Plain date
     if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $str)) {
         return '<span class="cell-date">' . date('d M Y', strtotime($str)) . '</span>';
-    }
-
-    // Salesforce ID (15/18 chars)
-    if (preg_match('/^[a-zA-Z0-9]{15,18}$/', $str) && !str_contains($str, ' ')) {
-        return '<code class="sf-id" title="' . htmlspecialchars($str) . '">' . substr($str, 0, 6) . '…</code>';
     }
 
     $disp = htmlspecialchars($str);
@@ -672,14 +844,14 @@ if (isset($_GET['api'])) {
         switch ($action) {
             case 'records':
                 $f = [
-                    'device_type' => $_GET['device_type'] ?? '',
-                    'status'      => $_GET['status']      ?? '',
-                    'region'      => $_GET['region']      ?? '',
-                    'country'     => $_GET['country']     ?? '',
-                    'payment'     => $_GET['payment']     ?? '',
-                    'date_from'   => $_GET['date_from']   ?? '',
-                    'date_to'     => $_GET['date_to']     ?? '',
-                    'search'      => $_GET['search']      ?? '',
+                    'device_type'  => $_GET['device_type'] ?? '',
+                    'status'       => $_GET['status']      ?? '',
+                    'region'       => $_GET['region']      ?? '',
+                    'country'      => $_GET['country']     ?? '',
+                    'payment'      => $_GET['payment']     ?? '',
+                    'date_from'    => $_GET['date_from']   ?? '',
+                    'date_to'      => $_GET['date_to']     ?? '',
+                    'search'       => $_GET['search']      ?? '',
                     'only_devices' => !empty($_GET['only_devices']),
                 ];
                 $records = $sf->getDistributions($f);
@@ -689,13 +861,13 @@ if (isset($_GET['api'])) {
                 $paged   = array_slice($records, $offset, $limit);
 
                 echo json_encode([
-                    'success'      => true,
+                    'success'       => true,
                     'total_records' => count($records),
-                    'page'         => $page,
-                    'limit'        => $limit,
-                    'pages'        => (int)ceil(count($records) / $limit),
-                    'returned'     => count($paged),
-                    'records'      => $paged,
+                    'page'          => $page,
+                    'limit'         => $limit,
+                    'pages'         => (int)ceil(count($records) / $limit),
+                    'returned'      => count($paged),
+                    'records'       => $paged,
                 ], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
                 break;
 
@@ -719,6 +891,18 @@ if (isset($_GET['api'])) {
                 echo json_encode(['success' => true, 'statistics' => $sf->getStats()]);
                 break;
 
+            case 'token_status':
+                echo json_encode([
+                    'success'              => true,
+                    'has_token'            => !empty($_SESSION['sf_token']),
+                    'token_expiry'         => $_SESSION['sf_token_exp'] ?? null,
+                    'token_expiry_formatted' => isset($_SESSION['sf_token_exp'])
+                        ? date('Y-m-d H:i:s', $_SESSION['sf_token_exp']) : null,
+                    'is_valid'             => !empty($_SESSION['sf_token'])
+                        && time() < ($_SESSION['sf_token_exp'] ?? 0),
+                ]);
+                break;
+
             default:
                 http_response_code(400);
                 echo json_encode(['success' => false, 'error' => "Unknown action: $action"]);
@@ -735,7 +919,7 @@ if (isset($_GET['api'])) {
 // ============================================================================
 if (isset($_GET['export'])) {
     try {
-        $sf      = new SalesforceClient();
+        $sf = new SalesforceClient();
         $f = [
             'device_type'  => $_GET['device_type'] ?? '',
             'region'       => $_GET['region']       ?? '',
@@ -762,14 +946,14 @@ if (isset($_GET['export'])) {
 // ============================================================================
 // PAGE MODE
 // ============================================================================
-$error     = null;
-$records   = [];
-$stats     = [];
+$error       = null;
+$records     = [];
+$stats       = [];
 $deviceTypes = [];
-$regions   = [];
-$countries = [];
-$payments  = [];
-$fetchTime = 0;
+$regions     = [];
+$countries   = [];
+$payments    = [];
+$fetchTime   = 0;
 
 $f = [
     'device_type'  => trim($_GET['device_type'] ?? ''),
@@ -783,8 +967,8 @@ $f = [
 ];
 
 try {
-    $t0  = microtime(true);
-    $sf  = new SalesforceClient();
+    $t0 = microtime(true);
+    $sf = new SalesforceClient();
 
     $records     = $sf->getDistributions($f);
     $stats       = $sf->getStats();
@@ -818,6 +1002,10 @@ $displayCols = [
 ];
 
 $qs = http_build_query(array_filter($f, fn($v) => $v !== '' && $v !== false));
+
+// Asset paths
+$stylePath  = __DIR__ . '/assets/styles/style.css';
+$scriptPath = __DIR__ . '/assets/scripts/script.js';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -837,757 +1025,17 @@ $qs = http_build_query(array_filter($f, fn($v) => $v !== '' && $v !== false));
     <link href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.bootstrap5.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-    <style>
-        /* ── TOKENS ────────────────────────────────────────────────────────────────── */
-        :root {
-            --ink: #004769ed !important;
-            --ink2: #3a3e4a;
-            --ink3: #7a7f8e;
-            --bg: #f5f6fa;
-            --surface: #ffffff;
-            --border: #e3e5ec;
-
-            --brand: #00B7FFED;
-            --brand-light: #e9eefb;
-            --brand-dark: #0e35b3;
-
-            --green: #12b76a;
-            --amber: #f59e0b;
-            --red: #ef4444;
-            --teal: #0ea5e9;
-
-            --radius: 12px;
-            --shadow: 0 2px 12px rgba(0, 0, 0, .07);
-            --shadow-md: 0 6px 24px rgba(0, 0, 0, .10);
-
-            --font: 'DM Sans', sans-serif;
-            --mono: 'DM Mono', monospace;
-        }
-
-        /* ── RESET / BASE ──────────────────────────────────────────────────────────── */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background: var(--bg);
-            font-family: var(--font);
-            color: var(--ink);
-            font-size: 14px;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* ── TOPBAR ────────────────────────────────────────────────────────────────── */
-        .topbar {
-            background: var(--ink);
-            padding: .55rem 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .topbar-brand {
-            display: flex;
-            align-items: center;
-            gap: .75rem;
-            text-decoration: none;
-        }
-
-        .topbar-logo {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            background: var(--brand);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 16px;
-            font-weight: 700;
-        }
-
-        .topbar-name {
-            color: #fff;
-            font-weight: 600;
-            font-size: 15px;
-            letter-spacing: -.02em;
-        }
-
-        .topbar-name span {
-            color: var(--brand);
-            font-size: 10px;
-            font-weight: 500;
-            letter-spacing: .06em;
-            display: block;
-            text-transform: uppercase;
-        }
-
-        .topbar-actions {
-            display: flex;
-            gap: .5rem;
-        }
-
-        .topbar-btn {
-            background: rgba(255, 255, 255, .08);
-            border: none;
-            color: #fff;
-            padding: .35rem .8rem;
-            border-radius: 6px;
-            font-size: 12px;
-            font-family: var(--font);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: .4rem;
-            transition: background .15s;
-        }
-
-        .topbar-btn:hover {
-            background: rgba(255, 255, 255, .16);
-        }
-
-        .topbar-btn.primary {
-            background: var(--brand);
-        }
-
-        .topbar-btn.primary:hover {
-            background: var(--brand-dark);
-        }
-
-        /* ── HERO ──────────────────────────────────────────────────────────────────── */
-        .hero {
-            background: var(--ink);
-            padding: 2.5rem 1.5rem 4rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(20, 71, 230, .35) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            align-items: center;
-            gap: 1rem;
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-title {
-            color: #fff;
-            font-size: clamp(1.6rem, 3vw, 2.4rem);
-            font-weight: 700;
-            letter-spacing: -.03em;
-            line-height: 1.2;
-        }
-
-        .hero-title em {
-            color: var(--brand);
-            font-style: normal;
-        }
-
-        .hero-sub {
-            color: rgba(255, 255, 255, .55);
-            margin-top: .35rem;
-            font-size: .9rem;
-        }
-
-        .hero-meta {
-            color: rgba(255, 255, 255, .4);
-            font-size: .75rem;
-            font-family: var(--mono);
-            white-space: nowrap;
-            text-align: right;
-        }
-
-        .hero-meta strong {
-            color: rgba(255, 255, 255, .7);
-        }
-
-        /* ── LAYOUT ────────────────────────────────────────────────────────────────── */
-        .page-wrap {
-            /* max-width: 1400px; */
-            margin: 0 auto;
-            padding: 0 1.25rem 2rem;
-            margin-top: -1.5rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* ── STAT CARDS ────────────────────────────────────────────────────────────── */
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1.25rem;
-        }
-
-        .stat-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 1.1rem 1.25rem;
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            transition: transform .2s, box-shadow .2s;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .stat-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
-
-        .stat-icon.blue {
-            background: var(--brand-light);
-            color: var(--brand);
-        }
-
-        .stat-icon.green {
-            background: #d1fae5;
-            color: var(--green);
-        }
-
-        .stat-icon.amber {
-            background: #fef3c7;
-            color: var(--amber);
-        }
-
-        .stat-icon.teal {
-            background: #e0f2fe;
-            color: var(--teal);
-        }
-
-        .stat-val {
-            font-size: 1.6rem;
-            font-weight: 700;
-            line-height: 1;
-            letter-spacing: -.03em;
-        }
-
-        .stat-lbl {
-            font-size: .72rem;
-            color: var(--ink3);
-            text-transform: uppercase;
-            letter-spacing: .05em;
-            margin-top: .15rem;
-        }
-
-        /* ── PANEL ─────────────────────────────────────────────────────────────────── */
-        .panel {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 1.25rem;
-        }
-
-        .panel-head {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1rem 1.25rem;
-            border-bottom: 1px solid var(--border);
-            gap: .75rem;
-            flex-wrap: wrap;
-        }
-
-        .panel-title {
-            font-weight: 600;
-            font-size: .95rem;
-            display: flex;
-            align-items: center;
-            gap: .5rem;
-        }
-
-        .panel-title i {
-            color: var(--brand);
-        }
-
-        .panel-body {
-            padding: 1.25rem;
-        }
-
-        /* ── FILTER GRID ───────────────────────────────────────────────────────────── */
-        .filter-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: .75rem;
-        }
-
-        .filter-group label {
-            font-size: .72rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: .05em;
-            color: var(--ink3);
-            margin-bottom: .3rem;
-            display: block;
-        }
-
-        .filter-group input,
-        .filter-group select {
-            width: 100%;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: .45rem .75rem;
-            font-size: .85rem;
-            font-family: var(--font);
-            background: var(--bg);
-            color: var(--ink);
-            transition: border-color .15s, box-shadow .15s;
-            outline: none;
-            appearance: none;
-        }
-
-        .filter-group input:focus,
-        .filter-group select:focus {
-            border-color: var(--brand);
-            box-shadow: 0 0 0 3px rgba(20, 71, 230, .1);
-            background: #fff;
-        }
-
-        .filter-group.search-group {
-            position: relative;
-        }
-
-        .filter-group.search-group input {
-            padding-left: 2.1rem;
-        }
-
-        .filter-group.search-group i {
-            position: absolute;
-            left: .7rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--ink3);
-            font-size: .8rem;
-            pointer-events: none;
-        }
-
-        .filter-actions {
-            display: flex;
-            gap: .6rem;
-            flex-wrap: wrap;
-            align-items: center;
-            padding-top: .75rem;
-            border-top: 1px solid var(--border);
-            margin-top: .75rem;
-        }
-
-        .btn-lb {
-            padding: .45rem 1rem;
-            border-radius: 8px;
-            font-size: .8rem;
-            font-weight: 500;
-            font-family: var(--font);
-            cursor: pointer;
-            border: 1px solid transparent;
-            display: inline-flex;
-            align-items: center;
-            gap: .4rem;
-            transition: all .15s;
-            white-space: nowrap;
-        }
-
-        .btn-lb.primary {
-            background: var(--brand);
-            color: #fff;
-            border-color: var(--brand);
-        }
-
-        .btn-lb.primary:hover {
-            background: var(--brand-dark);
-        }
-
-        .btn-lb.ghost {
-            background: transparent;
-            color: var(--ink2);
-            border-color: var(--border);
-        }
-
-        .btn-lb.ghost:hover {
-            background: var(--bg);
-            border-color: var(--ink3);
-        }
-
-        .btn-lb.green {
-            background: #ecfdf5;
-            color: var(--green);
-            border-color: #a7f3d0;
-        }
-
-        .btn-lb.green:hover {
-            background: #d1fae5;
-        }
-
-        .btn-lb.amber {
-            background: #fffbeb;
-            color: #92400e;
-            border-color: #fde68a;
-        }
-
-        .btn-lb.amber:hover {
-            background: #fef3c7;
-        }
-
-        .btn-lb.teal {
-            background: #f0f9ff;
-            color: #0369a1;
-            border-color: #bae6fd;
-        }
-
-        .btn-lb.teal:hover {
-            background: #e0f2fe;
-        }
-
-        /* active filter chips */
-        .chip-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: .4rem;
-            margin-top: .6rem;
-        }
-
-        .chip {
-            background: var(--brand-light);
-            color: var(--brand);
-            border-radius: 20px;
-            padding: .2rem .65rem;
-            font-size: .72rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: .35rem;
-        }
-
-        .chip-x {
-            cursor: pointer;
-            opacity: .6;
-        }
-
-        .chip-x:hover {
-            opacity: 1;
-        }
-
-        /* ── TABLE PANEL ───────────────────────────────────────────────────────────── */
-        .tbl-count {
-            background: var(--brand);
-            color: #fff;
-            border-radius: 20px;
-            padding: .1rem .6rem;
-            font-size: .72rem;
-            font-weight: 600;
-        }
-
-        .tbl-wrap {
-            overflow-x: auto;
-        }
-
-        #distTable {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: .8rem;
-        }
-
-        #distTable thead th {
-            background: #1a1d27;
-            color: rgba(255, 255, 255, .85);
-            font-size: .68rem;
-            font-weight: 600;
-            letter-spacing: .06em;
-            text-transform: uppercase;
-            padding: .6rem .8rem;
-            white-space: nowrap;
-            position: sticky;
-            top: 0;
-            border-right: 1px solid rgba(255, 255, 255, .07);
-        }
-
-        #distTable thead th:first-child {
-            border-radius: 0;
-        }
-
-        #distTable tbody tr {
-            border-bottom: 1px solid var(--border);
-            transition: background .1s;
-        }
-
-        #distTable tbody tr:hover {
-            background: #f8f9ff;
-        }
-
-        #distTable tbody td {
-            padding: .5rem .8rem;
-            vertical-align: middle;
-        }
-
-        #distTable tbody td:first-child {
-            color: var(--ink3);
-            font-size: .72rem;
-            font-family: var(--mono);
-            font-weight: 500;
-            white-space: nowrap;
-        }
-
-        /* cell helpers */
-        .null-val {
-            color: #ccc;
-        }
-
-        .sf-id {
-            font-family: var(--mono);
-            font-size: .7rem;
-            color: var(--ink3);
-            background: var(--bg);
-            padding: .1rem .4rem;
-            border-radius: 4px;
-        }
-
-        .cell-date {
-            font-size: .75rem;
-            color: var(--ink2);
-            line-height: 1.3;
-        }
-
-        .cell-long {
-            max-width: 180px;
-            display: inline-block;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            vertical-align: middle;
-            cursor: help;
-        }
-
-        .badge-yes {
-            color: var(--green);
-            font-weight: 600;
-        }
-
-        .badge-no {
-            color: var(--ink3);
-        }
-
-        .badge-arr {
-            color: var(--teal);
-            font-family: var(--mono);
-            font-size: .75rem;
-        }
-
-        /* ── DataTables overrides ──────────────────────────────────────────────────── */
-        .dataTables_wrapper .dataTables_length select,
-        .dataTables_wrapper .dataTables_filter input {
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: .35rem .65rem;
-            font-family: var(--font);
-            font-size: .8rem;
-            background: var(--bg);
-            color: var(--ink);
-            outline: none;
-        }
-
-        .dataTables_wrapper .dataTables_filter input:focus {
-            border-color: var(--brand);
-            box-shadow: 0 0 0 3px rgba(20, 71, 230, .1);
-        }
-
-        .dataTables_wrapper .dataTables_info,
-        .dataTables_wrapper .dataTables_length,
-        .dataTables_wrapper .dataTables_filter {
-            font-size: .78rem;
-            color: var(--ink3);
-        }
-
-        .dataTables_wrapper .dt-buttons .btn {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            color: var(--ink2);
-            font-size: .72rem;
-            border-radius: 6px;
-            padding: .3rem .7rem;
-            font-family: var(--font);
-        }
-
-        .dataTables_wrapper .dt-buttons .btn:hover {
-            background: var(--border);
-        }
-
-        .dataTables_paginate .paginate_button {
-            border-radius: 6px !important;
-            font-size: .75rem !important;
-        }
-
-        .dataTables_paginate .paginate_button.current {
-            background: var(--brand) !important;
-            color: #fff !important;
-            border-color: var(--brand) !important;
-        }
-
-        /* ── LOADING OVERLAY ───────────────────────────────────────────────────────── */
-        #loadOverlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(13, 15, 20, .6);
-            display: none;
-            place-items: center;
-            z-index: 9999;
-        }
-
-        #loadOverlay.on {
-            display: grid;
-        }
-
-        .spin-box {
-            background: #fff;
-            border-radius: 16px;
-            padding: 2rem 2.5rem;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, .3);
-        }
-
-        .spin {
-            width: 40px;
-            height: 40px;
-            border: 3px solid var(--border);
-            border-top-color: var(--brand);
-            border-radius: 50%;
-            animation: spin .7s linear infinite;
-            margin: 0 auto 1rem;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg)
-            }
-        }
-
-        .spin-text {
-            font-size: .85rem;
-            color: var(--ink3);
-        }
-
-        /* ── TOAST ─────────────────────────────────────────────────────────────────── */
-        .toast-shelf {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            z-index: 10000;
-            display: flex;
-            flex-direction: column;
-            gap: .5rem;
-        }
-
-        .toast-msg {
-            background: #fff;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: .7rem 1rem;
-            font-size: .8rem;
-            box-shadow: var(--shadow-md);
-            display: flex;
-            align-items: center;
-            gap: .5rem;
-            animation: slideIn .25s ease;
-            max-width: 300px;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(20px)
-            }
-
-            to {
-                opacity: 1;
-                transform: none
-            }
-        }
-
-        .toast-msg.ok i {
-            color: var(--green);
-        }
-
-        .toast-msg.err i {
-            color: var(--red);
-        }
-
-        /* ── RESPONSIVE ────────────────────────────────────────────────────────────── */
-        @media(max-width:768px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-meta {
-                display: none;
-            }
-
-            .filter-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .stats-row {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media(max-width:480px) {
-            .filter-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-row {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media print {
-
-            .topbar,
-            .hero,
-            .panel-head .filter-actions,
-            .btn-lb {
-                display: none !important;
-            }
-
-            .panel {
-                box-shadow: none;
-                border: none;
-            }
-        }
-    </style>
+    <!-- Custom Styles -->
+    <?php if (file_exists($stylePath)): ?>
+        <style>
+            <?php include $stylePath; ?>
+        </style>
+    <?php endif; ?>
 </head>
 
 <body>
 
-    <!-- Loading -->
+    <!-- Loading Overlay -->
     <div id="loadOverlay">
         <div class="spin-box">
             <div class="spin"></div>
@@ -1595,7 +1043,7 @@ $qs = http_build_query(array_filter($f, fn($v) => $v !== '' && $v !== false));
         </div>
     </div>
 
-    <!-- Toast shelf -->
+    <!-- Toast Shelf -->
     <div class="toast-shelf" id="toastShelf"></div>
 
     <!-- ── TOPBAR ── -->
@@ -1606,6 +1054,7 @@ $qs = http_build_query(array_filter($f, fn($v) => $v !== '' && $v !== false));
         </a>
         <div class="topbar-actions">
             <button class="topbar-btn" onclick="location.reload()"><i class="fas fa-sync-alt"></i> Refresh</button>
+            <!-- <a href="device_fetch.php" class="topbar-btn"><i class="fas fa-database"></i> Sync DB</a> -->
             <button class="topbar-btn primary" onclick="window.open('?api=1&action=records','_blank')"><i class="fas fa-code"></i> API</button>
         </div>
     </header>
@@ -1615,14 +1064,15 @@ $qs = http_build_query(array_filter($f, fn($v) => $v !== '' && $v !== false));
         <div class="hero-grid">
             <div>
                 <h1 class="hero-title">Device <em>Distribution</em> List</h1>
-                <p class="hero-sub"><i class="fas fa-cloud me-1" style="color:var(--brand)"></i>
-                    Live sync · Salesforce <strong style="color:#fff">v60.0</strong>
+                <p class="hero-sub">
+                    <i class="fas fa-cloud me-1" style="color:var(--brand)"></i>
+                    Live sync · Salesforce <strong style="color:#fff"><?= SF_API_VERSION ?></strong>
                     <?php if ($fetchTime): ?> · loaded in <strong style="color:#fff"><?= $fetchTime ?>s</strong><?php endif; ?>
                 </p>
             </div>
             <div class="hero-meta">
                 <strong><?= date('d M Y, H:i') ?></strong><br>
-                Addis Ababa · EAT
+                UTC Timezone<br>
             </div>
         </div>
     </section>
@@ -1676,80 +1126,56 @@ $qs = http_build_query(array_filter($f, fn($v) => $v !== '' && $v !== false));
             <div class="panel-body">
                 <form method="GET" id="filterForm">
                     <div class="filter-grid">
-
-                        <!-- Search -->
                         <div class="filter-group search-group" style="grid-column:span 2;">
                             <label>Search</label>
                             <i class="fas fa-search"></i>
                             <input type="text" name="search" placeholder="Name, contact, email, country, order ref…"
                                 value="<?= htmlspecialchars($f['search']) ?>">
                         </div>
-
-                        <!-- Device Type -->
                         <div class="filter-group">
                             <label>Device Type</label>
                             <select name="device_type">
                                 <option value="">All Types</option>
                                 <?php foreach ($deviceTypes as $t): ?>
-                                    <option value="<?= htmlspecialchars($t) ?>" <?= $f['device_type'] === $t ? 'selected' : '' ?>>
-                                        <?= htmlspecialchars($t) ?>
-                                    </option>
+                                    <option value="<?= htmlspecialchars($t) ?>" <?= $f['device_type'] === $t ? 'selected' : '' ?>><?= htmlspecialchars($t) ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
-
-                        <!-- Region -->
                         <div class="filter-group">
                             <label>Region</label>
                             <select name="region">
                                 <option value="">All Regions</option>
                                 <?php foreach ($regions as $r): ?>
-                                    <option value="<?= htmlspecialchars($r) ?>" <?= $f['region'] === $r ? 'selected' : '' ?>>
-                                        <?= htmlspecialchars($r) ?>
-                                    </option>
+                                    <option value="<?= htmlspecialchars($r) ?>" <?= $f['region'] === $r ? 'selected' : '' ?>><?= htmlspecialchars($r) ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
-
-                        <!-- Country -->
                         <div class="filter-group">
                             <label>Country</label>
                             <select name="country">
                                 <option value="">All Countries</option>
                                 <?php foreach ($countries as $c): ?>
-                                    <option value="<?= htmlspecialchars($c) ?>" <?= $f['country'] === $c ? 'selected' : '' ?>>
-                                        <?= htmlspecialchars($c) ?>
-                                    </option>
+                                    <option value="<?= htmlspecialchars($c) ?>" <?= $f['country'] === $c ? 'selected' : '' ?>><?= htmlspecialchars($c) ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
-
-                        <!-- Payment -->
                         <div class="filter-group">
                             <label>Payment</label>
                             <select name="payment">
                                 <option value="">All Payments</option>
                                 <?php foreach ($payments as $p): ?>
-                                    <option value="<?= htmlspecialchars($p) ?>" <?= $f['payment'] === $p ? 'selected' : '' ?>>
-                                        <?= htmlspecialchars($p) ?>
-                                    </option>
+                                    <option value="<?= htmlspecialchars($p) ?>" <?= $f['payment'] === $p ? 'selected' : '' ?>><?= htmlspecialchars($p) ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
-
-                        <!-- Date From -->
                         <div class="filter-group">
                             <label>Date From</label>
                             <input type="date" name="date_from" value="<?= htmlspecialchars($f['date_from']) ?>">
                         </div>
-
-                        <!-- Date To -->
                         <div class="filter-group">
                             <label>Date To</label>
                             <input type="date" name="date_to" value="<?= htmlspecialchars($f['date_to']) ?>">
                         </div>
-
-                        <!-- Only devices checkbox -->
                         <div class="filter-group" style="display:flex;align-items:flex-end;">
                             <label style="display:flex;align-items:center;gap:.5rem;text-transform:none;font-size:.82rem;cursor:pointer;">
                                 <input type="checkbox" name="only_devices" value="1" <?= $f['only_devices'] ? 'checked' : '' ?>
@@ -1757,20 +1183,10 @@ $qs = http_build_query(array_filter($f, fn($v) => $v !== '' && $v !== false));
                                 Only with device type
                             </label>
                         </div>
-
                     </div>
 
-                    <!-- Active chips -->
                     <?php
-                    $chipLabels = [
-                        'search' => 'Search',
-                        'device_type' => 'Device',
-                        'region' => 'Region',
-                        'country' => 'Country',
-                        'payment' => 'Payment',
-                        'date_from' => 'From',
-                        'date_to' => 'To'
-                    ];
+                    $chipLabels = ['search' => 'Search', 'device_type' => 'Device', 'region' => 'Region', 'country' => 'Country', 'payment' => 'Payment', 'date_from' => 'From', 'date_to' => 'To'];
                     $hasFilters = false;
                     foreach ($f as $k => $v) if ($v !== '' && $v !== false) {
                         $hasFilters = true;
@@ -1784,10 +1200,7 @@ $qs = http_build_query(array_filter($f, fn($v) => $v !== '' && $v !== false));
                                 $lbl = $chipLabels[$k] ?? $k;
                                 $disp = is_bool($v) ? 'Yes' : htmlspecialchars($v);
                             ?>
-                                <span class="chip">
-                                    <?= $lbl ?>: <?= $disp ?>
-                                    <span class="chip-x" onclick="removeFilter('<?= $k ?>')">✕</span>
-                                </span>
+                                <span class="chip"><?= $lbl ?>: <?= $disp ?><span class="chip-x" onclick="removeFilter('<?= $k ?>')">✕</span></span>
                             <?php endforeach; ?>
                         </div>
                     <?php endif; ?>
@@ -1820,15 +1233,10 @@ $qs = http_build_query(array_filter($f, fn($v) => $v !== '' && $v !== false));
         <div class="panel">
             <div class="panel-head">
                 <div class="panel-title">
-                    <i class="fas fa-table"></i>
-                    Distribution Records
-                    <?php if ($records): ?>
-                        <span class="tbl-count"><?= number_format(count($records)) ?></span>
-                    <?php endif; ?>
+                    <i class="fas fa-table"></i> Distribution Records
+                    <?php if ($records): ?><span class="tbl-count"><?= number_format(count($records)) ?></span><?php endif; ?>
                 </div>
-                <div style="font-size:.75rem;color:var(--ink3);">
-                    Scroll horizontally to see all columns &rarr;
-                </div>
+                <div style="font-size:.75rem;color:var(--ink3);">Scroll horizontally to see all columns &rarr;</div>
             </div>
 
             <?php if ($records): ?>
@@ -1867,10 +1275,9 @@ $qs = http_build_query(array_filter($f, fn($v) => $v !== '' && $v !== false));
         <footer style="text-align:center;color:var(--ink3);font-size:.72rem;padding:.5rem 0 1rem;">
             Lifebox ME · Salesforce <?= SF_API_VERSION ?> · <?= date('Y-m-d H:i:s') ?> EAT
         </footer>
+    </div>
 
-    </div><!-- /page-wrap -->
-
-    <!-- Scripts -->
+    <!-- External Scripts -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
@@ -1883,127 +1290,12 @@ $qs = http_build_query(array_filter($f, fn($v) => $v !== '' && $v !== false));
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
 
-    <script>
-        $(function() {
-            if (!$('#distTable tbody tr').length) return;
-
-            $('#distTable').DataTable({
-                pageLength: 10,
-                lengthMenu: [
-                    [5, 10, 15, 25, 50, 100, 250, 500, -1],
-                    ['5', '10', '15', '25', '50', '100', '250', '500', 'All']
-                ],
-                order: [
-                    [0, 'asc']
-                ],
-                scrollX: true,
-                scrollY: '62vh',
-                scrollCollapse: true,
-                dom: '<"dt-top-row"lf>rtip<"dt-btn-row"B>',
-                buttons: [{
-                        extend: 'copy',
-                        text: '<i class="fas fa-copy"></i> Copy',
-                        className: 'btn btn-sm btn-outline-secondary',
-                        exportOptions: {
-                            columns: ':visible'
-                        }
-                    },
-                    {
-                        extend: 'csv',
-                        text: '<i class="fas fa-file-csv"></i> CSV',
-                        className: 'btn btn-sm btn-outline-secondary',
-                        exportOptions: {
-                            columns: ':visible'
-                        }
-                    },
-                    {
-                        extend: 'excel',
-                        text: '<i class="fas fa-file-excel"></i> Excel',
-                        className: 'btn btn-sm btn-outline-secondary',
-                        exportOptions: {
-                            columns: ':visible'
-                        }
-                    },
-                    {
-                        extend: 'pdf',
-                        text: '<i class="fas fa-file-pdf"></i> PDF',
-                        className: 'btn btn-sm btn-outline-secondary',
-                        orientation: 'landscape',
-                        pageSize: 'A3',
-                        exportOptions: {
-                            columns: ':visible'
-                        }
-                    },
-                    {
-                        extend: 'print',
-                        text: '<i class="fas fa-print"></i> Print',
-                        className: 'btn btn-sm btn-outline-secondary',
-                        exportOptions: {
-                            columns: ':visible'
-                        }
-                    },
-                ],
-                language: {
-                    search: '',
-                    searchPlaceholder: 'Quick search…',
-                    lengthMenu: 'Show _MENU_',
-                    info: '_START_–_END_ of _TOTAL_',
-                    infoFiltered: '(from _MAX_)',
-                    zeroRecords: 'No matching records',
-                    paginate: {
-                        first: '«',
-                        last: '»',
-                        next: '›',
-                        previous: '‹'
-                    },
-                },
-                initComplete() {
-                    // move buttons into the top bar area for visual grouping
-                    $('.dt-btn-row').hide();
-                }
-            });
-
-            // Hide overlay when done
-            $('#loadOverlay').removeClass('on');
-        });
-
-        function clearFilters() {
-            window.location.href = window.location.pathname;
-        }
-
-        function removeFilter(key) {
-            const p = new URLSearchParams(window.location.search);
-            p.delete(key);
-            const s = p.toString();
-            window.location.href = window.location.pathname + (s ? '?' + s : '');
-        }
-
-        function exportData(fmt) {
-            const qs = new URLSearchParams($('#filterForm').serialize()).toString();
-            window.location.href = '?' + qs + '&export=' + fmt;
-        }
-
-        function copyAPI() {
-            const qs = new URLSearchParams($('#filterForm').serialize()).toString();
-            const url = location.origin + location.pathname + '?api=1&action=records' + (qs ? '&' + qs : '');
-            navigator.clipboard.writeText(url)
-                .then(() => toast('API URL copied to clipboard', 'ok'))
-                .catch(() => {
-                    prompt('Copy this URL:', url);
-                });
-        }
-
-        function toast(msg, type = 'ok') {
-            const el = document.createElement('div');
-            el.className = 'toast-msg ' + type;
-            el.innerHTML = `<i class="fas fa-${type==='ok'?'check-circle':'exclamation-circle'}"></i> ${msg}`;
-            document.getElementById('toastShelf').appendChild(el);
-            setTimeout(() => el.remove(), 3500);
-        }
-
-        // Hide overlay if already loaded (no-op if not shown)
-        window.addEventListener('load', () => document.getElementById('loadOverlay').classList.remove('on'));
-    </script>
+    <!-- Custom Scripts -->
+    <?php if (file_exists($scriptPath)): ?>
+        <script>
+            <?php include $scriptPath; ?>
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>
