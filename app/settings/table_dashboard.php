@@ -12,7 +12,9 @@ $runnerTableSettings['Dashboard'] = array(
 			'lifebox_visitors_analytics',
 			'impact',
 			'lifebox_file_manager',
-			'lifebox_pmi_analytics_manager' 
+			'lifebox_pmi_analytics_manager',
+			'lifebox_salesforce_devices',
+			'lifebox_salesforce_distribution_fetch_sync' 
 		),
 		'search' => array( 
 			'search' 
@@ -26,7 +28,9 @@ $runnerTableSettings['Dashboard'] = array(
 		'search' => 'search',
 		'impact' => 'dashboard',
 		'lifebox_file_manager' => 'dashboard',
-		'lifebox_pmi_analytics_manager' => 'dashboard' 
+		'lifebox_pmi_analytics_manager' => 'dashboard',
+		'lifebox_salesforce_devices' => 'dashboard',
+		'lifebox_salesforce_distribution_fetch_sync' => 'dashboard' 
 	),
 	'defaultPages' => array(
 		'dashboard' => 'dashboard',
@@ -70,7 +74,9 @@ $runnerTableSettings['Dashboard'] = array(
 			'lifebox_visitors_analytics',
 			'impact',
 			'lifebox_file_manager',
-			'lifebox_pmi_analytics_manager' 
+			'lifebox_pmi_analytics_manager',
+			'lifebox_salesforce_devices',
+			'lifebox_salesforce_distribution_fetch_sync' 
 		),
 		'search' => array( 
 			'search' 
@@ -84,7 +90,9 @@ $runnerTableSettings['Dashboard'] = array(
 		'search' => 'search',
 		'impact' => 'dashboard',
 		'lifebox_file_manager' => 'dashboard',
-		'lifebox_pmi_analytics_manager' => 'dashboard' 
+		'lifebox_pmi_analytics_manager' => 'dashboard',
+		'lifebox_salesforce_devices' => 'dashboard',
+		'lifebox_salesforce_distribution_fetch_sync' => 'dashboard' 
 	),
 	'originalDefaultPages' => array(
 		'dashboard' => 'dashboard',

@@ -47,6 +47,9 @@ api/database/test/
 api/database/assets/
 api/mail/PHPMailer/
 api/users/test.php
+api/distribution/test/
+api/distribution/postman/
+api/distribution/cacert.pem
 #api/dev/api/
 #api/dev/assets/
 api/dev/db/db.php

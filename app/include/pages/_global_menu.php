@@ -944,6 +944,14 @@
 				'items' => null,
 				'table' => 'public.lifeboxme_noti',
 				'page' => 'list' 
+			),
+			'welcome_item114' => array(
+				'menutItem' => true,
+				'group' => false,
+				'linkType' => 0,
+				'items' => null,
+				'table' => 'public.salesforce_device_distribution',
+				'page' => 'list' 
 			) 
 		) 
 	),
@@ -1094,6 +1102,7 @@
 					'welcome_item111',
 					'welcome_item112',
 					'welcome_item113',
+					'welcome_item114',
 					'welcome_item51' 
 				) 
 			),
@@ -1224,6 +1233,7 @@
 				'welcome_item111' => 'grid',
 				'welcome_item112' => 'grid',
 				'welcome_item113' => 'grid',
+				'welcome_item114' => 'grid',
 				'welcome_item51' => 'grid' 
 			),
 			'itemLocations' => array(
@@ -1349,7 +1359,8 @@
 				'welcome_item110',
 				'welcome_item111',
 				'welcome_item112',
-				'welcome_item113' 
+				'welcome_item113',
+				'welcome_item114' 
 			),
 			'logo' => array( 
 				'logo' 
@@ -1722,7 +1733,8 @@
 						'welcome_item110',
 						'welcome_item111',
 						'welcome_item112',
-						'welcome_item113' 
+						'welcome_item113',
+						'welcome_item114' 
 					) 
 				),
 				'c' => array(
@@ -3215,6 +3227,18 @@
 				'type' => 6 
 			),
 			'background' => '#e8926f',
+			'linkType' => 0 
+		),
+		'welcome_item114' => array(
+			'type' => 'welcome_item',
+			'linkUrl' => '',
+			'linkTable' => 'public.salesforce_device_distribution',
+			'linkPage' => 'list',
+			'linkText' => array(
+				'table' => 'public.salesforce_device_distribution',
+				'type' => 6 
+			),
+			'background' => '#6b8e23',
 			'linkType' => 0 
 		),
 		'expand_button' => array(

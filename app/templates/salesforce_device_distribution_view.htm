@@ -1,0 +1,846 @@
+<!doctype html>
+<html  {$html_attrs}>
+	<head>
+						<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{$pagetitle}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<base href="{$projectPath}">
+    <LINK rel="shortcut icon" type="image/png" href="/assets/img/lb_favicon.ico"/>
+    <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
+    <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
+    <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
+    		{BEGIN styleCSSFiles}
+<link REL="stylesheet" href="{$stylepath}" type="text/css">
+{END styleCSSFiles}
+			
+	</head>
+
+	<body class="{$stylename} function-view" >
+	{BEGIN body}
+		{$header}
+		<style>
+			{$containerCss}
+		</style>
+		{$locking}
+		<div class="r-small-page" 
+			data-body-align="center"
+			data-body-width="standard"
+		>
+							{BEGIN top_block}
+<div class="r-form" data-location="top" id="form_top_{$pageid}" data-makeup="small" {$form_top} data-pageid="{$pageid}"
+		data-v-width="4"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="top_c1" data-pageid="{$pageid}"	{$cell_top_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	 
+		<h2 data-itemtype="view_header" data-itemid="view_header" {$item_view_header} data-pageid="{$pageid}" >{$pagetitlelabel public_salesforce_device_distribution view}</h2>
+	</div>					</div>
+	</div>		
+{END top_block}
+									{BEGIN above-grid_block}
+<div class="r-form" data-location="above-grid" id="form_above-grid_{$pageid}" data-makeup="small" {$form_above-grid} data-pageid="{$pageid}"
+		data-v-width="4"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c1" data-pageid="{$pageid}"	{$cell_above-grid_c1}
+	class=" r-ori-vert			col-md-12
+	">
+	</div>					</div>
+	</div>		
+{END above-grid_block}
+									{BEGIN grid_block}
+
+
+
+
+ 
+	 
+												<table 
+	data-body-align="center"
+	data-location="grid" id="form_grid_{$pageid}" data-makeup="small" {$form_grid} data-pageid="{$pageid}" 
+	class="r-edit-form" cellpadding="0" cellspacing="0" 
+	{$grid_hiddenattr} 
+		data-form-width="1"
+		
+		data-v-width="4"
+	>
+	<tbody>
+										<tr {$row_grid_0} >
+										
+
+{BEGIN cellblock_grid_c3}
+<td
+	{$cell_grid_c3}
+	class=" r-ori-vert"
+	
+				data-fullwidth
+		
+			data-cellId="grid_c3" data-pageid="{$pageid}"
+		data-v-cell="4"
+		
+>
+	<div edit-form-cell class="clearfix">
+				
+{BEGIN id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_id}  r-vertical-field" 
+	data-signal-error-for="id{$id}" {$required_attr_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field" {$item_integrated_edit_field} data-pageid="{$pageid}" data-field="id" data-fieldname="id" >
+
+	<label class="r-edit-label control-label {$id_label_class}" for="{$labelfor_id}">
+		{BEGIN id_label}
+			{$id_forward_control}
+			{$label public_salesforce_device_distribution id }			{END id_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$id_value}	</div>
+	</div>
+
+
+{END id_fieldblock}
+											
+{BEGIN sf_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_sf_id}  r-vertical-field" 
+	data-signal-error-for="sf_id{$id}" {$required_attr_sf_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field1" {$item_integrated_edit_field1} data-pageid="{$pageid}" data-field="sf_id" data-fieldname="sf_id" >
+
+	<label class="r-edit-label control-label {$sf_id_label_class}" for="{$labelfor_sf_id}">
+		{BEGIN sf_id_label}
+			{$sf_id_forward_control}
+			{$label public_salesforce_device_distribution sf_id }			{END sf_id_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$sf_id_value}	</div>
+	</div>
+
+
+{END sf_id_fieldblock}
+											
+{BEGIN sf_name_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_sf_name}  r-vertical-field" 
+	data-signal-error-for="sf_name{$id}" {$required_attr_sf_name}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field2" {$item_integrated_edit_field2} data-pageid="{$pageid}" data-field="sf_name" data-fieldname="sf_name" >
+
+	<label class="r-edit-label control-label {$sf_name_label_class}" for="{$labelfor_sf_name}">
+		{BEGIN sf_name_label}
+			{$sf_name_forward_control}
+			{$label public_salesforce_device_distribution sf_name }			{END sf_name_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$sf_name_value}	</div>
+	</div>
+
+
+{END sf_name_fieldblock}
+											
+{BEGIN owner_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_owner_id}  r-vertical-field" 
+	data-signal-error-for="owner_id{$id}" {$required_attr_owner_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field3" {$item_integrated_edit_field3} data-pageid="{$pageid}" data-field="owner_id" data-fieldname="owner_id" >
+
+	<label class="r-edit-label control-label {$owner_id_label_class}" for="{$labelfor_owner_id}">
+		{BEGIN owner_id_label}
+			{$owner_id_forward_control}
+			{$label public_salesforce_device_distribution owner_id }			{END owner_id_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$owner_id_value}	</div>
+	</div>
+
+
+{END owner_id_fieldblock}
+											
+{BEGIN is_deleted_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_is_deleted}  r-vertical-field" 
+	data-signal-error-for="is_deleted{$id}" {$required_attr_is_deleted}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field4" {$item_integrated_edit_field4} data-pageid="{$pageid}" data-field="is_deleted" data-fieldname="is_deleted" >
+
+	<label class="r-edit-label control-label {$is_deleted_label_class}" for="{$labelfor_is_deleted}">
+		{BEGIN is_deleted_label}
+			{$is_deleted_forward_control}
+			{$label public_salesforce_device_distribution is_deleted }			{END is_deleted_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$is_deleted_value}	</div>
+	</div>
+
+
+{END is_deleted_fieldblock}
+											
+{BEGIN currency_iso_code_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_currency_iso_code}  r-vertical-field" 
+	data-signal-error-for="currency_iso_code{$id}" {$required_attr_currency_iso_code}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field5" {$item_integrated_edit_field5} data-pageid="{$pageid}" data-field="currency_iso_code" data-fieldname="currency_iso_code" >
+
+	<label class="r-edit-label control-label {$currency_iso_code_label_class}" for="{$labelfor_currency_iso_code}">
+		{BEGIN currency_iso_code_label}
+			{$currency_iso_code_forward_control}
+			{$label public_salesforce_device_distribution currency_iso_code }			{END currency_iso_code_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$currency_iso_code_value}	</div>
+	</div>
+
+
+{END currency_iso_code_fieldblock}
+											
+{BEGIN created_date_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_created_date}  r-vertical-field" 
+	data-signal-error-for="created_date{$id}" {$required_attr_created_date}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field6" {$item_integrated_edit_field6} data-pageid="{$pageid}" data-field="created_date" data-fieldname="created_date" >
+
+	<label class="r-edit-label control-label {$created_date_label_class}" for="{$labelfor_created_date}">
+		{BEGIN created_date_label}
+			{$created_date_forward_control}
+			{$label public_salesforce_device_distribution created_date }			{END created_date_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$created_date_value}	</div>
+	</div>
+
+
+{END created_date_fieldblock}
+											
+{BEGIN created_by_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_created_by_id}  r-vertical-field" 
+	data-signal-error-for="created_by_id{$id}" {$required_attr_created_by_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="created_by_id" data-fieldname="created_by_id" >
+
+	<label class="r-edit-label control-label {$created_by_id_label_class}" for="{$labelfor_created_by_id}">
+		{BEGIN created_by_id_label}
+			{$created_by_id_forward_control}
+			{$label public_salesforce_device_distribution created_by_id }			{END created_by_id_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$created_by_id_value}	</div>
+	</div>
+
+
+{END created_by_id_fieldblock}
+											
+{BEGIN last_modified_date_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_last_modified_date}  r-vertical-field" 
+	data-signal-error-for="last_modified_date{$id}" {$required_attr_last_modified_date}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field8" {$item_integrated_edit_field8} data-pageid="{$pageid}" data-field="last_modified_date" data-fieldname="last_modified_date" >
+
+	<label class="r-edit-label control-label {$last_modified_date_label_class}" for="{$labelfor_last_modified_date}">
+		{BEGIN last_modified_date_label}
+			{$last_modified_date_forward_control}
+			{$label public_salesforce_device_distribution last_modified_date }			{END last_modified_date_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$last_modified_date_value}	</div>
+	</div>
+
+
+{END last_modified_date_fieldblock}
+											
+{BEGIN last_modified_by_id_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_last_modified_by_id}  r-vertical-field" 
+	data-signal-error-for="last_modified_by_id{$id}" {$required_attr_last_modified_by_id}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field9" {$item_integrated_edit_field9} data-pageid="{$pageid}" data-field="last_modified_by_id" data-fieldname="last_modified_by_id" >
+
+	<label class="r-edit-label control-label {$last_modified_by_id_label_class}" for="{$labelfor_last_modified_by_id}">
+		{BEGIN last_modified_by_id_label}
+			{$last_modified_by_id_forward_control}
+			{$label public_salesforce_device_distribution last_modified_by_id }			{END last_modified_by_id_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$last_modified_by_id_value}	</div>
+	</div>
+
+
+{END last_modified_by_id_fieldblock}
+											
+{BEGIN system_modstamp_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_system_modstamp}  r-vertical-field" 
+	data-signal-error-for="system_modstamp{$id}" {$required_attr_system_modstamp}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field10" {$item_integrated_edit_field10} data-pageid="{$pageid}" data-field="system_modstamp" data-fieldname="system_modstamp" >
+
+	<label class="r-edit-label control-label {$system_modstamp_label_class}" for="{$labelfor_system_modstamp}">
+		{BEGIN system_modstamp_label}
+			{$system_modstamp_forward_control}
+			{$label public_salesforce_device_distribution system_modstamp }			{END system_modstamp_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$system_modstamp_value}	</div>
+	</div>
+
+
+{END system_modstamp_fieldblock}
+											
+{BEGIN last_viewed_date_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_last_viewed_date}  r-vertical-field" 
+	data-signal-error-for="last_viewed_date{$id}" {$required_attr_last_viewed_date}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field11" {$item_integrated_edit_field11} data-pageid="{$pageid}" data-field="last_viewed_date" data-fieldname="last_viewed_date" >
+
+	<label class="r-edit-label control-label {$last_viewed_date_label_class}" for="{$labelfor_last_viewed_date}">
+		{BEGIN last_viewed_date_label}
+			{$last_viewed_date_forward_control}
+			{$label public_salesforce_device_distribution last_viewed_date }			{END last_viewed_date_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$last_viewed_date_value}	</div>
+	</div>
+
+
+{END last_viewed_date_fieldblock}
+											
+{BEGIN last_referenced_date_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_last_referenced_date}  r-vertical-field" 
+	data-signal-error-for="last_referenced_date{$id}" {$required_attr_last_referenced_date}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field12" {$item_integrated_edit_field12} data-pageid="{$pageid}" data-field="last_referenced_date" data-fieldname="last_referenced_date" >
+
+	<label class="r-edit-label control-label {$last_referenced_date_label_class}" for="{$labelfor_last_referenced_date}">
+		{BEGIN last_referenced_date_label}
+			{$last_referenced_date_forward_control}
+			{$label public_salesforce_device_distribution last_referenced_date }			{END last_referenced_date_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$last_referenced_date_value}	</div>
+	</div>
+
+
+{END last_referenced_date_fieldblock}
+											
+{BEGIN contact_name_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_contact_name}  r-vertical-field" 
+	data-signal-error-for="contact_name{$id}" {$required_attr_contact_name}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field13" {$item_integrated_edit_field13} data-pageid="{$pageid}" data-field="contact_name" data-fieldname="contact_name" >
+
+	<label class="r-edit-label control-label {$contact_name_label_class}" for="{$labelfor_contact_name}">
+		{BEGIN contact_name_label}
+			{$contact_name_forward_control}
+			{$label public_salesforce_device_distribution contact_name }			{END contact_name_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$contact_name_value}	</div>
+	</div>
+
+
+{END contact_name_fieldblock}
+											
+{BEGIN email_address_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_email_address}  r-vertical-field" 
+	data-signal-error-for="email_address{$id}" {$required_attr_email_address}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field14" {$item_integrated_edit_field14} data-pageid="{$pageid}" data-field="email_address" data-fieldname="email_address" >
+
+	<label class="r-edit-label control-label {$email_address_label_class}" for="{$labelfor_email_address}">
+		{BEGIN email_address_label}
+			{$email_address_forward_control}
+			{$label public_salesforce_device_distribution email_address }			{END email_address_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$email_address_value}	</div>
+	</div>
+
+
+{END email_address_fieldblock}
+											
+{BEGIN contact_number_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_contact_number}  r-vertical-field" 
+	data-signal-error-for="contact_number{$id}" {$required_attr_contact_number}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field15" {$item_integrated_edit_field15} data-pageid="{$pageid}" data-field="contact_number" data-fieldname="contact_number" >
+
+	<label class="r-edit-label control-label {$contact_number_label_class}" for="{$labelfor_contact_number}">
+		{BEGIN contact_number_label}
+			{$contact_number_forward_control}
+			{$label public_salesforce_device_distribution contact_number }			{END contact_number_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$contact_number_value}	</div>
+	</div>
+
+
+{END contact_number_fieldblock}
+											
+{BEGIN recipient_first_name_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_recipient_first_name}  r-vertical-field" 
+	data-signal-error-for="recipient_first_name{$id}" {$required_attr_recipient_first_name}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field16" {$item_integrated_edit_field16} data-pageid="{$pageid}" data-field="recipient_first_name" data-fieldname="recipient_first_name" >
+
+	<label class="r-edit-label control-label {$recipient_first_name_label_class}" for="{$labelfor_recipient_first_name}">
+		{BEGIN recipient_first_name_label}
+			{$recipient_first_name_forward_control}
+			{$label public_salesforce_device_distribution recipient_first_name }			{END recipient_first_name_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$recipient_first_name_value}	</div>
+	</div>
+
+
+{END recipient_first_name_fieldblock}
+											
+{BEGIN recipient_last_name_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_recipient_last_name}  r-vertical-field" 
+	data-signal-error-for="recipient_last_name{$id}" {$required_attr_recipient_last_name}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field17" {$item_integrated_edit_field17} data-pageid="{$pageid}" data-field="recipient_last_name" data-fieldname="recipient_last_name" >
+
+	<label class="r-edit-label control-label {$recipient_last_name_label_class}" for="{$labelfor_recipient_last_name}">
+		{BEGIN recipient_last_name_label}
+			{$recipient_last_name_forward_control}
+			{$label public_salesforce_device_distribution recipient_last_name }			{END recipient_last_name_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$recipient_last_name_value}	</div>
+	</div>
+
+
+{END recipient_last_name_fieldblock}
+											
+{BEGIN device_type_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_device_type}  r-vertical-field" 
+	data-signal-error-for="device_type{$id}" {$required_attr_device_type}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field18" {$item_integrated_edit_field18} data-pageid="{$pageid}" data-field="device_type" data-fieldname="device_type" >
+
+	<label class="r-edit-label control-label {$device_type_label_class}" for="{$labelfor_device_type}">
+		{BEGIN device_type_label}
+			{$device_type_forward_control}
+			{$label public_salesforce_device_distribution device_type }			{END device_type_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$device_type_value}	</div>
+	</div>
+
+
+{END device_type_fieldblock}
+											
+{BEGIN type_of_device_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_type_of_device}  r-vertical-field" 
+	data-signal-error-for="type_of_device{$id}" {$required_attr_type_of_device}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field19" {$item_integrated_edit_field19} data-pageid="{$pageid}" data-field="type_of_device" data-fieldname="type_of_device" >
+
+	<label class="r-edit-label control-label {$type_of_device_label_class}" for="{$labelfor_type_of_device}">
+		{BEGIN type_of_device_label}
+			{$type_of_device_forward_control}
+			{$label public_salesforce_device_distribution type_of_device }			{END type_of_device_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$type_of_device_value}	</div>
+	</div>
+
+
+{END type_of_device_fieldblock}
+											
+{BEGIN units_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_units}  r-vertical-field" 
+	data-signal-error-for="units{$id}" {$required_attr_units}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field20" {$item_integrated_edit_field20} data-pageid="{$pageid}" data-field="units" data-fieldname="units" >
+
+	<label class="r-edit-label control-label {$units_label_class}" for="{$labelfor_units}">
+		{BEGIN units_label}
+			{$units_forward_control}
+			{$label public_salesforce_device_distribution units }			{END units_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$units_value}	</div>
+	</div>
+
+
+{END units_fieldblock}
+											
+{BEGIN country_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_country}  r-vertical-field" 
+	data-signal-error-for="country{$id}" {$required_attr_country}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field21" {$item_integrated_edit_field21} data-pageid="{$pageid}" data-field="country" data-fieldname="country" >
+
+	<label class="r-edit-label control-label {$country_label_class}" for="{$labelfor_country}">
+		{BEGIN country_label}
+			{$country_forward_control}
+			{$label public_salesforce_device_distribution country }			{END country_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$country_value}	</div>
+	</div>
+
+
+{END country_fieldblock}
+											
+{BEGIN region_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_region}  r-vertical-field" 
+	data-signal-error-for="region{$id}" {$required_attr_region}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field22" {$item_integrated_edit_field22} data-pageid="{$pageid}" data-field="region" data-fieldname="region" >
+
+	<label class="r-edit-label control-label {$region_label_class}" for="{$labelfor_region}">
+		{BEGIN region_label}
+			{$region_forward_control}
+			{$label public_salesforce_device_distribution region }			{END region_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$region_value}	</div>
+	</div>
+
+
+{END region_fieldblock}
+											
+{BEGIN hospital_name_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_hospital_name}  r-vertical-field" 
+	data-signal-error-for="hospital_name{$id}" {$required_attr_hospital_name}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field23" {$item_integrated_edit_field23} data-pageid="{$pageid}" data-field="hospital_name" data-fieldname="hospital_name" >
+
+	<label class="r-edit-label control-label {$hospital_name_label_class}" for="{$labelfor_hospital_name}">
+		{BEGIN hospital_name_label}
+			{$hospital_name_forward_control}
+			{$label public_salesforce_device_distribution hospital_name }			{END hospital_name_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$hospital_name_value}	</div>
+	</div>
+
+
+{END hospital_name_fieldblock}
+											
+{BEGIN order_reference_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_order_reference}  r-vertical-field" 
+	data-signal-error-for="order_reference{$id}" {$required_attr_order_reference}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field24" {$item_integrated_edit_field24} data-pageid="{$pageid}" data-field="order_reference" data-fieldname="order_reference" >
+
+	<label class="r-edit-label control-label {$order_reference_label_class}" for="{$labelfor_order_reference}">
+		{BEGIN order_reference_label}
+			{$order_reference_forward_control}
+			{$label public_salesforce_device_distribution order_reference }			{END order_reference_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$order_reference_value}	</div>
+	</div>
+
+
+{END order_reference_fieldblock}
+											
+{BEGIN product_code_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_product_code}  r-vertical-field" 
+	data-signal-error-for="product_code{$id}" {$required_attr_product_code}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field25" {$item_integrated_edit_field25} data-pageid="{$pageid}" data-field="product_code" data-fieldname="product_code" >
+
+	<label class="r-edit-label control-label {$product_code_label_class}" for="{$labelfor_product_code}">
+		{BEGIN product_code_label}
+			{$product_code_forward_control}
+			{$label public_salesforce_device_distribution product_code }			{END product_code_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$product_code_value}	</div>
+	</div>
+
+
+{END product_code_fieldblock}
+											
+{BEGIN payment_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_payment}  r-vertical-field" 
+	data-signal-error-for="payment{$id}" {$required_attr_payment}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field26" {$item_integrated_edit_field26} data-pageid="{$pageid}" data-field="payment" data-fieldname="payment" >
+
+	<label class="r-edit-label control-label {$payment_label_class}" for="{$labelfor_payment}">
+		{BEGIN payment_label}
+			{$payment_forward_control}
+			{$label public_salesforce_device_distribution payment }			{END payment_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$payment_value}	</div>
+	</div>
+
+
+{END payment_fieldblock}
+											
+{BEGIN date_field_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_date_field}  r-vertical-field" 
+	data-signal-error-for="date_field{$id}" {$required_attr_date_field}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field27" {$item_integrated_edit_field27} data-pageid="{$pageid}" data-field="date_field" data-fieldname="date_field" >
+
+	<label class="r-edit-label control-label {$date_field_label_class}" for="{$labelfor_date_field}">
+		{BEGIN date_field_label}
+			{$date_field_forward_control}
+			{$label public_salesforce_device_distribution date_field }			{END date_field_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$date_field_value}	</div>
+	</div>
+
+
+{END date_field_fieldblock}
+											
+{BEGIN attributes_type_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_attributes_type}  r-vertical-field" 
+	data-signal-error-for="attributes_type{$id}" {$required_attr_attributes_type}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field28" {$item_integrated_edit_field28} data-pageid="{$pageid}" data-field="attributes_type" data-fieldname="attributes_type" >
+
+	<label class="r-edit-label control-label {$attributes_type_label_class}" for="{$labelfor_attributes_type}">
+		{BEGIN attributes_type_label}
+			{$attributes_type_forward_control}
+			{$label public_salesforce_device_distribution attributes_type }			{END attributes_type_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$attributes_type_value}	</div>
+	</div>
+
+
+{END attributes_type_fieldblock}
+											
+{BEGIN attributes_url_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_attributes_url}  r-vertical-field" 
+	data-signal-error-for="attributes_url{$id}" {$required_attr_attributes_url}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field29" {$item_integrated_edit_field29} data-pageid="{$pageid}" data-field="attributes_url" data-fieldname="attributes_url" >
+
+	<label class="r-edit-label control-label {$attributes_url_label_class}" for="{$labelfor_attributes_url}">
+		{BEGIN attributes_url_label}
+			{$attributes_url_forward_control}
+			{$label public_salesforce_device_distribution attributes_url }			{END attributes_url_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$attributes_url_value}	</div>
+	</div>
+
+
+{END attributes_url_fieldblock}
+											
+{BEGIN raw_json_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_raw_json}  r-vertical-field" 
+	data-signal-error-for="raw_json{$id}" {$required_attr_raw_json}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field30" {$item_integrated_edit_field30} data-pageid="{$pageid}" data-field="raw_json" data-fieldname="raw_json" >
+
+	<label class="r-edit-label control-label {$raw_json_label_class}" for="{$labelfor_raw_json}">
+		{BEGIN raw_json_label}
+			{$raw_json_forward_control}
+			{$label public_salesforce_device_distribution raw_json }			{END raw_json_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$raw_json_value}	</div>
+	</div>
+
+
+{END raw_json_fieldblock}
+											
+{BEGIN created_at_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_created_at}  r-vertical-field" 
+	data-signal-error-for="created_at{$id}" {$required_attr_created_at}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field31" {$item_integrated_edit_field31} data-pageid="{$pageid}" data-field="created_at" data-fieldname="created_at" >
+
+	<label class="r-edit-label control-label {$created_at_label_class}" for="{$labelfor_created_at}">
+		{BEGIN created_at_label}
+			{$created_at_forward_control}
+			{$label public_salesforce_device_distribution created_at }			{END created_at_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$created_at_value}	</div>
+	</div>
+
+
+{END created_at_fieldblock}
+											
+{BEGIN updated_at_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_updated_at}  r-vertical-field" 
+	data-signal-error-for="updated_at{$id}" {$required_attr_updated_at}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field32" {$item_integrated_edit_field32} data-pageid="{$pageid}" data-field="updated_at" data-fieldname="updated_at" >
+
+	<label class="r-edit-label control-label {$updated_at_label_class}" for="{$labelfor_updated_at}">
+		{BEGIN updated_at_label}
+			{$updated_at_forward_control}
+			{$label public_salesforce_device_distribution updated_at }			{END updated_at_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$updated_at_value}	</div>
+	</div>
+
+
+{END updated_at_fieldblock}
+											
+{BEGIN last_synced_at_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_last_synced_at}  r-vertical-field" 
+	data-signal-error-for="last_synced_at{$id}" {$required_attr_last_synced_at}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field33" {$item_integrated_edit_field33} data-pageid="{$pageid}" data-field="last_synced_at" data-fieldname="last_synced_at" >
+
+	<label class="r-edit-label control-label {$last_synced_at_label_class}" for="{$labelfor_last_synced_at}">
+		{BEGIN last_synced_at_label}
+			{$last_synced_at_forward_control}
+			{$label public_salesforce_device_distribution last_synced_at }			{END last_synced_at_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$last_synced_at_value}	</div>
+	</div>
+
+
+{END last_synced_at_fieldblock}
+											
+{BEGIN sync_version_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_sync_version}  r-vertical-field" 
+	data-signal-error-for="sync_version{$id}" {$required_attr_sync_version}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field34" {$item_integrated_edit_field34} data-pageid="{$pageid}" data-field="sync_version" data-fieldname="sync_version" >
+
+	<label class="r-edit-label control-label {$sync_version_label_class}" for="{$labelfor_sync_version}">
+		{BEGIN sync_version_label}
+			{$sync_version_forward_control}
+			{$label public_salesforce_device_distribution sync_version }			{END sync_version_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$sync_version_value}	</div>
+	</div>
+
+
+{END sync_version_fieldblock}
+	
+								</td>
+			{END cellblock_grid_c3}
+								</tr>
+			</tbody></table>
+{END grid_block}
+									{BEGIN below-grid_block}
+<div class="r-form" data-location="below-grid" id="form_below-grid_{$pageid}" data-makeup="small" {$form_below-grid} data-pageid="{$pageid}"
+		data-v-width="4"
+	data-v-margin="1"
+	
+>		
+	 
+		<div class="row">
+			 
+				<div 
+	data-cellId="below-grid_c1" data-pageid="{$pageid}"	{$cell_below-grid_c1}
+	class="			col-md-6
+	">
+	 
+		{BEGIN back_button}
+<span data-itemtype="view_back_list" data-itemid="view_back_list" {$item_view_back_list} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" {$backbutton_attrs} >
+							{mlang_message BACK_TO_LIST}			</a>
+</span>
+{END back_button}
+	 
+		{BEGIN close_button}
+<span data-itemtype="view_close" data-itemid="view_close" {$item_view_close} data-pageid="{$pageid}" data-small data-button-item>
+	<a type="button" title="" class="btn btn-default   
+	" href="#" {$closebutton_attrs} >
+							{mlang_message CLOSE_WINDOW}			</a>
+</span>
+{END close_button}
+	</div>			 
+				<div 
+	data-cellId="below-grid_c2" data-pageid="{$pageid}"	{$cell_below-grid_c2}
+	class="r-align-right r-ori-vert			col-md-6
+	">
+	 
+		<span data-itemtype="hamburger" data-itemid="hamburger" {$item_hamburger} data-pageid="{$pageid}" data-small data-button-item>
+</span>
+	</div>					</div>
+	</div>		
+{END below-grid_block}
+			</div>
+		{$footer}
+	{END body}
+	</body>
+</html>

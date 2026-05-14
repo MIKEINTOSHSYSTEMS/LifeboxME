@@ -1521,6 +1521,37 @@ $runnerMenus['main'] = array(
 						) 
 					),
 					array(
+						'id' => '180',
+						'parent' => '67',
+						'children' => array( 
+							 
+						),
+						'data' => array(
+							'name' => array(
+								'text' => 'Sf Device Distribution',
+								'type' => 0 
+							),
+							'comments' => array(
+								'text' => '',
+								'type' => 0 
+							),
+							'style' => '',
+							'href' => '',
+							'params' => '',
+							'pageId' => '',
+							'itemType' => 2,
+							'linkType' => 0,
+							'openType' => 0,
+							'iconType' => 3,
+							'iconName' => 'fa-salesforce',
+							'iconStyle' => 2,
+							'showIconType' => 1,
+							'linkToAnotherApp' => false,
+							'table' => 21653,
+							'pageType' => 'list' 
+						) 
+					),
+					array(
 						'id' => '63',
 						'parent' => '67',
 						'children' => array( 
@@ -4108,6 +4139,97 @@ $runnerMenus['main'] = array(
 									'linkToAnotherApp' => false,
 									'table' => 10340,
 									'pageType' => 'list' 
+								) 
+							),
+							array(
+								'id' => '179',
+								'parent' => '79',
+								'children' => array( 
+									 
+								),
+								'data' => array(
+									'name' => array(
+										'text' => '---------',
+										'type' => 0 
+									),
+									'comments' => array(
+										'text' => '',
+										'type' => 0 
+									),
+									'style' => '',
+									'href' => '',
+									'params' => '',
+									'pageId' => '',
+									'itemType' => 1,
+									'linkType' => 2,
+									'openType' => 0,
+									'iconType' => 0,
+									'iconName' => '',
+									'iconStyle' => 0,
+									'showIconType' => 1,
+									'linkToAnotherApp' => false 
+								) 
+							),
+							array(
+								'id' => '178',
+								'parent' => '79',
+								'children' => array( 
+									 
+								),
+								'data' => array(
+									'name' => array(
+										'text' => 'Distribution List',
+										'type' => 0 
+									),
+									'comments' => array(
+										'text' => '',
+										'type' => 0 
+									),
+									'style' => '',
+									'href' => '',
+									'params' => '',
+									'pageId' => 'lifebox_salesforce_devices',
+									'itemType' => 2,
+									'linkType' => 0,
+									'openType' => 0,
+									'iconType' => 3,
+									'iconName' => 'fa-salesforce',
+									'iconStyle' => 2,
+									'showIconType' => 1,
+									'linkToAnotherApp' => false,
+									'table' => 4701,
+									'pageType' => 'dashboard' 
+								) 
+							),
+							array(
+								'id' => '181',
+								'parent' => '79',
+								'children' => array( 
+									 
+								),
+								'data' => array(
+									'name' => array(
+										'text' => 'Fetch Distribution',
+										'type' => 0 
+									),
+									'comments' => array(
+										'text' => '',
+										'type' => 0 
+									),
+									'style' => '',
+									'href' => '',
+									'params' => '',
+									'pageId' => 'lifebox_salesforce_distribution_fetch_sync',
+									'itemType' => 2,
+									'linkType' => 0,
+									'openType' => 0,
+									'iconType' => 3,
+									'iconName' => 'fa-salesforce',
+									'iconStyle' => 2,
+									'showIconType' => 1,
+									'linkToAnotherApp' => false,
+									'table' => 4701,
+									'pageType' => 'dashboard' 
 								) 
 							),
 							array(

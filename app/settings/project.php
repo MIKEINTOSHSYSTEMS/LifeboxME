@@ -402,6 +402,9 @@ $runnerProjectSettings = array(
 		),
 		'public.lifeboxme_noti' => array(
 			'table' => 19611 
+		),
+		'public.salesforce_device_distribution' => array(
+			'table' => 21653 
 		) 
 	),
 	'customTemplates' => array( 
@@ -3258,6 +3261,18 @@ $runnerProjectSettings = array(
 			'connId' => 'lifebox_mesystem_at_localhost',
 			'color' => 'e8926f',
 			'originalTable' => 'public.lifeboxme_noti' 
+		),
+		'public.salesforce_device_distribution' => array(
+			'gid' => 21653,
+			'name' => 'public.salesforce_device_distribution',
+			'shortName' => 'salesforce_device_distribution',
+			'type' => 0,
+			'caption' => array(
+				'English' => 'Salesforce Device Distribution' 
+			),
+			'connId' => 'lifebox_mesystem_at_localhost',
+			'color' => '6b8e23',
+			'originalTable' => 'public.salesforce_device_distribution' 
 		) 
 	),
 	'tablesByShort' => array(
@@ -3377,7 +3392,8 @@ $runnerProjectSettings = array(
 		'lbpmi_source_details' => 'public.lbpmi_source_details',
 		'system_notifications' => 'public.system_notifications',
 		'notification_reads' => 'public.notification_reads',
-		'lifeboxme_noti' => 'public.lifeboxme_noti' 
+		'lifeboxme_noti' => 'public.lifeboxme_noti',
+		'salesforce_device_distribution' => 'public.salesforce_device_distribution' 
 	),
 	'tablesByGood' => array(
 		'public_antibiotics' => 'public.antibiotics',
@@ -3496,7 +3512,8 @@ $runnerProjectSettings = array(
 		'public_lbpmi_source_details' => 'public.lbpmi_source_details',
 		'public_system_notifications' => 'public.system_notifications',
 		'public_notification_reads' => 'public.notification_reads',
-		'public_lifeboxme_noti' => 'public.lifeboxme_noti' 
+		'public_lifeboxme_noti' => 'public.lifeboxme_noti',
+		'public_salesforce_device_distribution' => 'public.salesforce_device_distribution' 
 	),
 	'events' => array( 
 		array(
@@ -3532,7 +3549,7 @@ $runnerProjectSettings = array(
 		'table' => 'public.lifeboxme_settings' 
 	),
 	'wizardBuild' => '43785',
-	'projectBuild' => '1e4KXkynjFxC',
+	'projectBuild' => 'Zv6X7XBBTRTV',
 	'projectTheme' => 'flatly',
 	'projectSize' => 'normal',
 	'customErrorMsg' => array(
