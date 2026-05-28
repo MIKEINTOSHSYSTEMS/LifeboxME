@@ -414,7 +414,6 @@ FROM
 			),
 			'filterFormat' => array(
 				'format' => 'Interval slider',
-				'filterMultiselect' => 1,
 				'sliderStepType' => 5,
 				'addApplyButton' => true 
 			),
@@ -455,7 +454,6 @@ FROM
 			),
 			'filterFormat' => array(
 				'format' => 'Interval slider',
-				'filterMultiselect' => 1,
 				'sliderStepType' => 5,
 				'addApplyButton' => true 
 			),
