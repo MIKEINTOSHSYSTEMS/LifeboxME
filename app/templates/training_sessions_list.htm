@@ -870,6 +870,8 @@
 					
 					
 					
+					
+					
 					</li>
 		{END filterCtrlBlock_course_id}
 
@@ -921,6 +923,8 @@
 		<li class=" filter-values filter-values-training_type_id  {$visibilityClass_training_type_id}">
 			{$training_type_id_filter}
 						
+					
+					
 					
 					
 					
@@ -986,6 +990,8 @@
 					
 					
 					
+					
+					
 					</li>
 		{END filterCtrlBlock_approach_id}
 
@@ -1037,6 +1043,8 @@
 		<li class=" filter-values filter-values-program_id  {$visibilityClass_program_id}">
 			{$program_id_filter}
 						
+					
+					
 					
 					
 					
@@ -1102,6 +1110,8 @@
 					
 					
 					
+					
+					
 					</li>
 		{END filterCtrlBlock_facility_id}
 
@@ -1153,6 +1163,8 @@
 		<li class=" filter-values filter-values-venue_id  {$visibilityClass_venue_id}">
 			{$venue_id_filter}
 						
+					
+					
 					
 					
 					
@@ -1218,6 +1230,8 @@
 					
 					
 					
+					
+					
 					</li>
 		{END filterCtrlBlock_host_country_id}
 
@@ -1276,6 +1290,8 @@
 					
 					
 					
+					
+					
 					</li>
 		{END filterCtrlBlock_quarter}
 
@@ -1298,6 +1314,124 @@
 	</div>
 
 {END filter_control_quarter}
+
+
+
+
+
+
+{BEGIN filter_control_start_date}
+
+	<div class="dropdown filter-field filter-start_date-container" {BEGIN filter_selected_start_date} data-selected {END filter_selected_start_date}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_start_date}
+			<a href="#" class="filter-clear filter-clear-start_date" title="{mlang_message FILTER_CLEAR}">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_start_date}
+			<span class="r-filter-field">{$label public_training_sessions start_date }				{BEGIN filter_selected_start_date}:{END filter_selected_start_date}
+			</span>
+			{BEGIN filter_selected_start_date}
+			<span class="r-filter-value">{$filtervalue_start_date}</span>
+			{END filter_selected_start_date}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_start_date}
+		<li class=" filter-values filter-values-start_date  {$visibilityClass_start_date}">
+			{$start_date_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_start_date}
+
+	
+
+
+			{BEGIN filter_button_apply_start_date}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_start_date}">
+			<a href="#" class="filter-btn-apply filter-apply-start_date" {$filterbutton_attrs_start_date}>{mlang_message FILTER_APPLY}</a>
+		</li>
+		{END filter_button_apply_start_date}
+	
+
+			{BEGIN filter_button_multiselect_start_date}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_start_date}">
+			<a href="#" class="filter-start_date-btn-multiselect filter-apply-start_date" {$filterbutton_attrs_start_date}>{mlang_message FILTER_MULTISELECT}</a>
+		</li>
+		{END filter_button_multiselect_start_date}
+			</ul>
+	</div>
+
+{END filter_control_start_date}
+
+
+
+
+
+
+{BEGIN filter_control_end_date}
+
+	<div class="dropdown filter-field filter-end_date-container" {BEGIN filter_selected_end_date} data-selected {END filter_selected_end_date}>
+		<div class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+						{BEGIN clearLink_end_date}
+			<a href="#" class="filter-clear filter-clear-end_date" title="{mlang_message FILTER_CLEAR}">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+			{END clearLink_end_date}
+			<span class="r-filter-field">{$label public_training_sessions end_date }				{BEGIN filter_selected_end_date}:{END filter_selected_end_date}
+			</span>
+			{BEGIN filter_selected_end_date}
+			<span class="r-filter-value">{$filtervalue_end_date}</span>
+			{END filter_selected_end_date}
+			
+			<span class="caret"></span>
+		</div>
+		<ul class="dropdown-menu">
+					{BEGIN filterCtrlBlock_end_date}
+		<li class=" filter-values filter-values-end_date  {$visibilityClass_end_date}">
+			{$end_date_filter}
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</li>
+		{END filterCtrlBlock_end_date}
+
+	
+
+
+			{BEGIN filter_button_apply_end_date}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_end_date}">
+			<a href="#" class="filter-btn-apply filter-apply-end_date" {$filterbutton_attrs_end_date}>{mlang_message FILTER_APPLY}</a>
+		</li>
+		{END filter_button_apply_end_date}
+	
+
+			{BEGIN filter_button_multiselect_end_date}
+		<li class="filter-multiselect  filter-field-btn {$collapsedClass_end_date}">
+			<a href="#" class="filter-end_date-btn-multiselect filter-apply-end_date" {$filterbutton_attrs_end_date}>{mlang_message FILTER_MULTISELECT}</a>
+		</li>
+		{END filter_button_multiselect_end_date}
+			</ul>
+	</div>
+
+{END filter_control_end_date}
 
 
 

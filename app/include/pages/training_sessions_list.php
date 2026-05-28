@@ -92,6 +92,8 @@
 			'approach_id',
 			'program_id',
 			'quarter',
+			'start_date',
+			'end_date',
 			'facility_id',
 			'host_country_id',
 			'venue_id' 
@@ -214,7 +216,9 @@
 			'quarter',
 			'facility_id',
 			'host_country_id',
-			'venue_id' 
+			'venue_id',
+			'start_date',
+			'end_date' 
 		),
 		'inlineAddFields' => array( 
 			'training_details',
@@ -924,7 +928,9 @@
 				'filter_panel_field4',
 				'filter_panel_field5',
 				'filter_panel_field6',
-				'filter_panel_field7' 
+				'filter_panel_field7',
+				'filter_panel_field8',
+				'filter_panel_field9' 
 			),
 			'notifications' => array( 
 				'notifications' 
@@ -3238,7 +3244,7 @@
 			'field' => 'end_date',
 			'type' => 'search_panel_field',
 			'required' => false,
-			'alwaysOnPanel' => false 
+			'alwaysOnPanel' => true 
 		),
 		'search_panel_field6' => array(
 			'field' => 'facility_id',
@@ -3274,7 +3280,7 @@
 			'field' => 'start_date',
 			'type' => 'search_panel_field',
 			'required' => false,
-			'alwaysOnPanel' => false 
+			'alwaysOnPanel' => true 
 		),
 		'search_panel_field14' => array(
 			'field' => 'training_id',
@@ -3447,7 +3453,9 @@
 				'filter_panel_field5',
 				'filter_panel_field7',
 				'filter_panel_field6',
-				'filter_panel_field4' 
+				'filter_panel_field4',
+				'filter_panel_field8',
+				'filter_panel_field9' 
 			) 
 		),
 		'filter_panel_field' => array(
@@ -3484,6 +3492,14 @@
 		),
 		'notifications' => array(
 			'type' => 'notifications' 
+		),
+		'filter_panel_field8' => array(
+			'field' => 'start_date',
+			'type' => 'filter_panel_field' 
+		),
+		'filter_panel_field9' => array(
+			'field' => 'end_date',
+			'type' => 'filter_panel_field' 
 		),
 		'simple_grid_field' => array(
 			'field' => 'training_id',

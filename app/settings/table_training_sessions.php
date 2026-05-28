@@ -413,7 +413,10 @@ FROM
 				) 
 			),
 			'filterFormat' => array(
-				'format' => 'Values list' 
+				'format' => 'Interval slider',
+				'filterMultiselect' => 1,
+				'sliderStepType' => 5,
+				'addApplyButton' => true 
 			),
 			'tableName' => 'public.training_sessions' 
 		),
@@ -451,7 +454,10 @@ FROM
 				) 
 			),
 			'filterFormat' => array(
-				'format' => 'Values list' 
+				'format' => 'Interval slider',
+				'filterMultiselect' => 1,
+				'sliderStepType' => 5,
+				'addApplyButton' => true 
 			),
 			'tableName' => 'public.training_sessions' 
 		),
