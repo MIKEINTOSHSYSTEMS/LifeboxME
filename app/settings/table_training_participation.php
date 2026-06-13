@@ -68,7 +68,7 @@ $runnerTableSettings['public.training_participation'] = array(
 		'50',
 		'100',
 		'500',
-		'-1' 
+		'1' 
 	),
 	'pageSizeSelectorGroups' => array( 
 		'1',
@@ -77,7 +77,7 @@ $runnerTableSettings['public.training_participation'] = array(
 		'10',
 		'50',
 		'100',
-		'-1' 
+		'1' 
 	),
 	'displayLoading' => true,
 	'warnLeavingEdit' => true,
@@ -172,8 +172,11 @@ FROM
 					'lookupTable' => 'public.training_participants',
 					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
 					'lookupLinkField' => 'participant_id',
-					'lookupDisplayField' => 'first_name',
+					'lookupDisplayField' => 'first_name || \' \' || middle_name || \' \' || last_name',
+					'lookupCustomDisplay' => true,
+					'lookupOrderBy' => 'first_name',
 					'lookupAllowAdd' => true,
+					'lookupWhere' => 'NULLIF(TRIM(first_name), \'\') IS NOT NULL',
 					'lookupAddPage' => 'add',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',

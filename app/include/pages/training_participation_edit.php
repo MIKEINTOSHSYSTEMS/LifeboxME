@@ -605,17 +605,20 @@
 		'integrated_edit_field3' => array(
 			'field' => 'pre_test_score',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => false 
 		),
 		'integrated_edit_field4' => array(
 			'field' => 'post_test_score',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => false 
 		),
 		'integrated_edit_field5' => array(
 			'field' => 'ceu_points',
 			'type' => 'integrated_edit_field',
-			'orientation' => 0 
+			'orientation' => 0,
+			'updateOnEdit' => false 
 		),
 		'notifications' => array(
 			'type' => 'notifications' 

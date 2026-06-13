@@ -3549,7 +3549,7 @@ $runnerProjectSettings = array(
 		'table' => 'public.lifeboxme_settings' 
 	),
 	'wizardBuild' => '43785',
-	'projectBuild' => 'Njwd0vJHRVV9',
+	'projectBuild' => 'XqD4zJTC1uoB',
 	'projectTheme' => 'flatly',
 	'projectSize' => 'normal',
 	'customErrorMsg' => array(
