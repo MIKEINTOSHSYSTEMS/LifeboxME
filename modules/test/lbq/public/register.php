@@ -257,21 +257,11 @@ if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
-// Function to send confirmation email using SMTP
+// Function to send confirmation email using SMTP (matches send_otp_email pattern)
 function sendConfirmationEmail($data, $fullPhone, $pdo)
 {
-    // Get SMTP settings from database (default to ID 2)
-    $smtpConfig = get_smtp_config($pdo, 2);
+    require_once __DIR__ . '/../src/smtp_functions.php';
 
-    if (!$smtpConfig) {
-        error_log("No SMTP configuration found");
-        return false; // No SMTP settings configured
-    }
-
-    // Force plain authentication since TLS is not working
-    $smtpConfig['secure'] = 'plain';
-
-    // Get additional data for email
     $countryName = '';
     $facilityName = '';
     $roleName = '';
@@ -308,10 +298,8 @@ function sendConfirmationEmail($data, $fullPhone, $pdo)
         $sexName = $stmt->fetchColumn() ?: 'Not specified';
     }
 
-    // Email content
     $subject = "Registration Confirmation - Lifebox Training & Test Center";
 
-    // HTML email body
     $body = '<!DOCTYPE html>
 <html>
 <head>
@@ -415,18 +403,32 @@ function sendConfirmationEmail($data, $fullPhone, $pdo)
 </body>
 </html>';
 
-    // Send email using SMTP
-    $result = send_smtp_email($smtpConfig, $data['email'], $subject, $body);
+    $smtpConfig = [
+        'host'     => 'cloud.merqconsultancy.org',
+        'port'     => 587,
+        'secure'   => 'tls',
+        'username' => 'lifebox@cloud.merqconsultancy.org',
+        'password' => 'LifeboxCloud',
+        'smtpfrom' => 'lifebox@cloud.merqconsultancy.org',
+    ];
 
-    if ($result['ok']) {
-        error_log("Confirmation email sent successfully to " . $data['email']);
-        return true;
-    } else {
-        error_log("Failed to send confirmation email: " . $result['log']);
+    $protocols = ['tls', 'plain'];
 
-        // Fallback to PHP mail() function if SMTP fails
-        return send_email_fallback($data, $fullPhone, $subject, $body);
+    foreach ($protocols as $protocol) {
+        $smtpConfig['secure'] = $protocol;
+        $result = send_smtp_email($smtpConfig, $data['email'], $subject, $body);
+
+        if ($result['ok']) {
+            error_log("Registration confirmation email sent successfully to " . $data['email']);
+            return true;
+        }
+
+        error_log("Registration email {$protocol} FAILED: " . $result['log']);
     }
+
+    error_log("Registration email ALL ATTEMPTS FAILED for " . $data['email']);
+
+    return send_email_fallback($data, $fullPhone, $subject, $body);
 }
 
 // Fallback function using PHP's mail()

@@ -185,24 +185,11 @@ function nullIfEmpty($value)
     return ($value === '' || $value === null) ? null : $value;
 }
 
-// Function to send confirmation email using SMTP
+// Function to send confirmation email using SMTP (matches send_otp_email pattern)
 function sendConfirmationEmail($data, $phone, $pdo)
 {
-    // Include the SMTP functions
     require_once __DIR__ . '/../src/smtp_functions.php';
 
-    // Get SMTP settings from database (default to ID 2)
-    $smtpConfig = get_smtp_config($pdo, 2);
-
-    if (!$smtpConfig) {
-        error_log("No SMTP configuration found");
-        return false; // No SMTP settings configured
-    }
-
-    // Force plain authentication since TLS is not working
-    $smtpConfig['secure'] = 'plain';
-
-    // Get additional data for email
     $countryName = '';
     $facilityName = '';
     $roleName = '';
@@ -239,17 +226,15 @@ function sendConfirmationEmail($data, $phone, $pdo)
         $sexName = $stmt->fetchColumn() ?: 'Not specified';
     }
 
-    // Email content
     $subject = "Your Profile Confirmation - Lifebox Training & Test Center";
 
-    // HTML email body
     $body = '<!DOCTYPE html>
 <html>
 <head>
     <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
-        .header { background-color: #0078d4; color: white; padding: 10px; text-align: center; border-radius: 5px 5px 0 0; }
+        .header { background-color: #0079a5; color: white; padding: 10px; text-align: center; border-radius: 5px 5px 0 0; }
         .content { padding: 20px; }
         .footer { margin-top: 20px; padding-top: 10px; border-top: 1px solid #eee; font-size: 0.9em; color: #777; }
         table { width: 100%; border-collapse: collapse; margin: 10px 0; }
@@ -347,18 +332,32 @@ function sendConfirmationEmail($data, $phone, $pdo)
 </body>
 </html>';
 
-    // Send email using SMTP
-    $result = send_smtp_email($smtpConfig, $data['email'], $subject, $body);
+    $smtpConfig = [
+        'host'     => 'cloud.merqconsultancy.org',
+        'port'     => 587,
+        'secure'   => 'tls',
+        'username' => 'lifebox@cloud.merqconsultancy.org',
+        'password' => 'LifeboxCloud',
+        'smtpfrom' => 'lifebox@cloud.merqconsultancy.org',
+    ];
 
-    if ($result['ok']) {
-        error_log("Profile confirmation email sent successfully to " . $data['email']);
-        return true;
-    } else {
-        error_log("Failed to send profile confirmation email: " . $result['log']);
+    $protocols = ['tls', 'plain'];
 
-        // Fallback to PHP mail() function if SMTP fails
-        return send_email_fallback($data, $phone, $subject, $body);
+    foreach ($protocols as $protocol) {
+        $smtpConfig['secure'] = $protocol;
+        $result = send_smtp_email($smtpConfig, $data['email'], $subject, $body);
+
+        if ($result['ok']) {
+            error_log("Profile confirmation email sent successfully to " . $data['email']);
+            return true;
+        }
+
+        error_log("Profile email {$protocol} FAILED: " . $result['log']);
     }
+
+    error_log("Profile email ALL ATTEMPTS FAILED for " . $data['email']);
+
+    return send_email_fallback($data, $phone, $subject, $body);
 }
 
 // Fallback function using PHP's mail()

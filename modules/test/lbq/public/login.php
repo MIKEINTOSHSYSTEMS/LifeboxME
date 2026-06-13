@@ -54,8 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($otpId === false) {
                     $error = "Failed to generate login code. Please try again.";
                 } else {
-                    $firstName  = $participant['first_name'] ?? 'User';
-                    $emailSent  = send_otp_email($pdo, $email, $firstName, $otpCode);
+                    $firstName = $participant['first_name'] ?? 'User';
+                    $emailSent = send_otp_email($pdo, $email, $firstName, $otpCode);
 
                     // Store session state regardless of email success
                     $_SESSION['otp_pending']          = true;

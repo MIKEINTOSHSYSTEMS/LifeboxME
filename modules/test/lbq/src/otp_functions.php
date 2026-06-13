@@ -225,7 +225,7 @@ function can_send_otp(PDO $pdo, string $email, string $purpose = 'login', int $c
  * @param string $otpCode   The OTP code to send
  * @return bool True if sent successfully
  */
-function send_otp_email(PDO $pdo, string $email, string $firstName, string $otpCode): bool
+function send_otp_email(PDO $pdo, string $email, string $firstName, string $otpCode, array $context = []): bool
 {
     // ------------------------------------------------------------------
     // Detect local / development environment
@@ -282,63 +282,56 @@ function send_otp_email(PDO $pdo, string $email, string $firstName, string $otpC
     // ------------------------------------------------------------------
     // Build email body
     // ------------------------------------------------------------------
-    $subject    = 'Your Login Code (OTP) - Lifebox Test Center';
     $expiryTime = date('g:i A', time() + (15 * 60));
-
     $safeFirst  = htmlspecialchars($firstName, ENT_QUOTES, 'UTF-8');
     $safeOtp    = htmlspecialchars($otpCode,   ENT_QUOTES, 'UTF-8');
     $safeExpiry = htmlspecialchars($expiryTime, ENT_QUOTES, 'UTF-8');
+    $subject    = 'Your Login Code (OTP) ' . $safeOtp . ' - Lifebox Test Center';
     $year       = date('Y');
 
+    // Context
+    $ctxUrl  = htmlspecialchars($context['request_url'] ?? '', ENT_QUOTES, 'UTF-8');
+    $ctxIp   = htmlspecialchars($context['ip_address']  ?? '', ENT_QUOTES, 'UTF-8');
+    $ctxUa   = htmlspecialchars($context['user_agent']  ?? '', ENT_QUOTES, 'UTF-8');
+    $ctxTime = htmlspecialchars($context['time']        ?? '', ENT_QUOTES, 'UTF-8');
+
+    $htmlCtx = '';
+    if ($ctxUrl || $ctxIp || $ctxUa) {
+        $htmlCtx = '<div style="background:#fafafa;border-left:3px solid #0079a5;padding:12px 16px;margin-top:20px">'
+            . '<p style="margin:0 0 4px;color:#333;font-size:13px;font-weight:bold;line-height:1.5">Login Request Details</p>'
+            . '<p style="margin:0;color:#555;font-size:12px;line-height:1.6">';
+        if ($ctxUrl)  $htmlCtx .= "URL: {$ctxUrl}<br>";
+        if ($ctxIp)   $htmlCtx .= "IP: {$ctxIp}<br>";
+        if ($ctxUa)   $htmlCtx .= "Browser: {$ctxUa}<br>";
+        if ($ctxTime) $htmlCtx .= "Time: {$ctxTime}";
+        $htmlCtx .= '</p></div>';
+    }
+
     $body = <<<HTML
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<style>
-  body      { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f8f9fa; }
-  .wrap     { max-width: 600px; margin: 0 auto; padding: 20px; }
-  .header   { background-color: #0079a5; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0; }
-  .content  { background-color: white; padding: 30px; border-left: 1px solid #ddd; border-right: 1px solid #ddd; }
-  .otp-box  { background-color: #f0f8ff; border: 2px dashed #0079a5; border-radius: 8px; padding: 20px; text-align: center; margin: 20px 0; }
-  .otp-code { font-size: 32px; font-weight: bold; color: #0079a5; letter-spacing: 8px; font-family: "Courier New", monospace; }
-  .expiry   { color: #e74c3c; font-size: 0.9em; margin-top: 10px; }
-  .footer   { background-color: #f8f9fa; padding: 20px; text-align: center; border: 1px solid #ddd; border-top: none; border-radius: 0 0 8px 8px; font-size: 0.85em; color: #777; }
-</style>
-</head>
-<body>
-<div class="wrap">
-  <div class="header">
-    <h1>Lifebox Test Center</h1>
-    <p>Your One-Time Login Code</p>
-  </div>
-  <div class="content">
-    <p>Hello {$safeFirst},</p>
-    <p>Use the code below to sign in to the <strong>Lifebox Test Center</strong>:</p>
-    <div class="otp-box">
-      <p style="margin:0;color:#666;font-size:0.9em;">YOUR LOGIN CODE</p>
-      <div class="otp-code">{$safeOtp}</div>
-      <p class="expiry">This code expires at {$safeExpiry} (15 minutes)</p>
-    </div>
-    <p><strong>Security Tips:</strong></p>
-    <ul>
-      <li>Do not share this code with anyone.</li>
-      <li>If you did not request this code, please ignore this email.</li>
-    </ul>
-  </div>
-  <div class="footer">
-    <p><strong>Lifebox | Training &amp; Test Center</strong></p>
-    <p>web: <a href="https://www.lifebox.org/" style="color:#A59D00;">www.lifebox.org</a></p>
-    <p>M&E Portal: <a href="https://www.mne.lifebox.org/" style="color:#0079a5;">www.mne.lifebox.org</a></p>
-    <p>Testing Center : <a href="https://www.mne.lifebox.org/modules/test/lbq/public/dashboard.php" style="color:#A54500;">www.mne.lifebox.org/</a></p>
-    <p style="font-size:0.75em;color:#999;">
-      Registered charity in England &amp; Wales (1143018) and 501(c)(3) non-profit in the US (EIN 46-2266526).<br>
-      This is an automated message. &copy; {$year} Lifebox M&amp;E System
-    </p>
-  </div>
+<div style="font-family:Arial,Helvetica,sans-serif;max-width:560px;margin:0 auto">
+<div style="background:#0079a5;color:white;padding:20px 24px;text-align:center">
+<h2 style="margin:0;font-size:18px;font-weight:bold">Lifebox Test Center</h2>
+<p style="margin:4px 0 0;font-size:13px;color:#cce6f0">Your One-Time Login Code</p>
+<h3 style="margin:4px 0 0;font-size:14px;color:#FFBF00;font-weight:bold">OTP</h3>
 </div>
-</body>
-</html>
+<div style="padding:24px;background:white;border:1px solid #e0e0e0;border-top:none">
+<p style="margin:0 0 16px;font-size:15px;color:#333;line-height:1.5">Hello {$safeFirst},</p>
+<p style="margin:0 0 16px;font-size:15px;color:#333;line-height:1.5">Use the code below to sign in to the <a href="https://mne.lifebox.org/test/" style="color:#0079a5;text-decoration:underline">Lifebox Test Center</a>:</p>
+<div style="background:#f0f8ff;border:2px dashed #0079a5;padding:16px;text-align:center">
+<p style="margin:0 0 8px;color:#666;font-size:11px;text-transform:uppercase;letter-spacing:1px">Your Login Code</p>
+<p style="margin:0;font-size:28px;font-weight:bold;color:#0079a5;letter-spacing:8px;font-family:'Courier New',Courier,monospace">{$safeOtp}</p>
+<p style="margin:10px 0 0;color:#e74c3c;font-size:12px">Expires at {$safeExpiry} (15 minutes)</p>
+</div>
+{$htmlCtx}
+<div style="background:#fafafa;border-left:3px solid #e74c3c;padding:12px 16px;margin-top:12px">
+<p style="margin:0 0 4px;color:#333;font-size:13px;font-weight:bold;line-height:1.5">Security Tips</p>
+<p style="margin:0;color:#555;font-size:13px;line-height:1.5">• Never share your code with anyone<br>• If you did not request this code, please ignore this email</p>
+</div>
+</div>
+<div style="background:#f8f9fa;padding:14px 24px;text-align:center;border:1px solid #e0e0e0;border-top:none;font-size:11px;color:#999;line-height:1.5">
+&copy; {$year} Lifebox &mdash; this is an automated message
+</div>
+</div>
 HTML;
 
     // ------------------------------------------------------------------
