@@ -1,5 +1,5 @@
 <?php
-// src/config.php
+// modules/test/lbq/src/config.php
 return [
     'db' => [
         // change DSN to your DB name; example below uses database 'lifeboxme_quiz'

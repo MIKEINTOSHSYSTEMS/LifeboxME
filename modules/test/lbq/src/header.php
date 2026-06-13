@@ -1,3 +1,6 @@
+<?php
+// modules/test/lbq/src/header.php
+?>
 <html>
 
 <head>

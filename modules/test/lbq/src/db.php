@@ -1,5 +1,5 @@
 <?php
-// src/db.php
+// modules/test/lbq/src/db.php
 $config = require __DIR__ . '/config.php';
 
 try {

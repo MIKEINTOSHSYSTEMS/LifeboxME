@@ -1,4 +1,6 @@
 <?php
+// modules/test/lbq/public/register_success.php
+
 session_start();
 
 if (!isset($_SESSION['registration_success']) || !$_SESSION['registration_success']) {

@@ -168,7 +168,7 @@ class QRGenerator
     public function generateQRImage($url = null, $alt = "QR Code", $color = '079ca7', $bgcolor = 'f2ea47')
     {
         $qrUrl = $this->generateQRCode($url, $color, $bgcolor);
-        return "<img src=\"{$qrUrl}\" alt=\"{$alt}\" title=\"Scan this QR code to visit this location\" class=\"qr-image\" style=\"border: 3px solid #ec7654; border-radius: 12px; padding: 8px; background: #ff4700; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: transform 0.3s ease;\">";
+        return "<img src=\"{$qrUrl}\" alt=\"{$alt}\" title=\"Scan this QR code to visit this location\" class=\"qr-image\" style=\"border: 3px solid #ec7654; border-radius: 12px; padding: 8px; background: #ff4700; box-shadow: 0 27px 27px rgba(0,0,0,0.15); transition: transform 0.3s ease;\">";
     }
 
     /**

@@ -1,5 +1,5 @@
 <?php
-
+// modules/test/lbq/src/smtp.php
 /**
  * ──────────────────────────────────────────────────────────────
  *  SMTP Test Utility – all‑in‑one PHP file
