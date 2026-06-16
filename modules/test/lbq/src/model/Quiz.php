@@ -11,10 +11,18 @@ class Quiz
 
     public function listTests($limit = 100, $active_only = false)
     {
-        $sql = "SELECT t.*, s.*,
-                (SELECT COUNT(*) FROM lbquiz_test_questions tq WHERE tq.test_id = t.id) as question_count
+        $sql = "SELECT t.*,
+                (SELECT COUNT(*) FROM lbquiz_test_questions tq WHERE tq.test_id = t.id) as question_count,
+                (SELECT string_agg(DISTINCT tc.course_name || ' - Session ' || u.tid, '; ')
+                 FROM (
+                     SELECT t.training_id AS tid
+                     UNION
+                     SELECT ts2.training_id FROM lbquiz_test_sessions ts2 WHERE ts2.test_id = t.id
+                 ) u
+                 JOIN training_sessions ts3 ON ts3.training_id = u.tid
+                 LEFT JOIN training_courses tc ON tc.course_id = ts3.course_id
+                ) as session_names
                 FROM lbquiz_tests t
-                LEFT JOIN training_sessions s ON s.training_id = t.training_id
                 WHERE 1=1";
 
         if ($active_only) {
@@ -36,37 +44,49 @@ class Quiz
         return $stmt->fetch();
     }
 
-    public function createTest($training_id, $title, $description = null, $time_limit = null, $is_pretest = false, $is_active = true)
+    public function createTest($training_ids, $title, $description = null, $time_limit = null, $is_pretest = false, $is_active = true)
     {
+        if (is_array($training_ids)) {
+            $training_ids = array_values(array_map('intval', $training_ids));
+            $training_ids = array_filter($training_ids, fn($v) => $v > 0);
+            $primary_id = !empty($training_ids) ? $training_ids[0] : 0;
+        } else {
+            $primary_id = intval($training_ids);
+            $training_ids = $primary_id > 0 ? [$primary_id] : [];
+        }
+
         $stmt = $this->pdo->prepare(
             "INSERT INTO lbquiz_tests
         (training_id, title, description, time_limit_minutes, is_pretest, is_active)
         VALUES (:tid, :title, :desc, :time, :pre, :active) RETURNING id"
         );
 
-        $stmt->bindValue(':tid', $training_id, PDO::PARAM_INT);
+        $stmt->bindValue(':tid', $primary_id, PDO::PARAM_INT);
         $stmt->bindValue(':title', $title, PDO::PARAM_STR);
         $stmt->bindValue(':desc', $description, PDO::PARAM_STR);
 
-        // Handle null time limit
         if ($time_limit === null || $time_limit === '') {
             $stmt->bindValue(':time', null, PDO::PARAM_NULL);
         } else {
             $stmt->bindValue(':time', (int)$time_limit, PDO::PARAM_INT);
         }
 
-        // Use proper PostgreSQL boolean casting
         $stmt->bindValue(':pre', $is_pretest ? 'true' : 'false', PDO::PARAM_STR);
         $stmt->bindValue(':active', $is_active ? 'true' : 'false', PDO::PARAM_STR);
 
         $stmt->execute();
         $row = $stmt->fetch();
-        return $row ? $row['id'] : null;
+        $test_id = $row ? $row['id'] : null;
+
+        if ($test_id && !empty($training_ids)) {
+            $this->syncTestSessions($test_id, $training_ids);
+        }
+
+        return $test_id;
     }
 
-    public function updateTest($id, $title, $description, $time_limit, $is_active, $is_pretest, $training_id = null)
+    public function updateTest($id, $title, $description, $time_limit, $is_active, $is_pretest, $training_ids = null)
     {
-        // Build the SQL dynamically based on what's provided
         $sql = "UPDATE lbquiz_tests SET 
                 title = :title, 
                 description = :desc, 
@@ -83,17 +103,122 @@ class Quiz
             ':id' => (int)$id
         ];
 
-        if ($training_id !== null && $training_id > 0) {
+        $primary_id = 0;
+        if (is_array($training_ids)) {
+            $training_ids = array_values(array_map('intval', $training_ids));
+            $training_ids = array_filter($training_ids, fn($v) => $v > 0);
+            $primary_id = !empty($training_ids) ? $training_ids[0] : 0;
+        } else {
+            $primary_id = intval($training_ids ?? 0);
+            $training_ids = $primary_id > 0 ? [$primary_id] : [];
+        }
+
+        if ($primary_id > 0) {
             $sql .= ", training_id = :tid";
-            $params[':tid'] = (int)$training_id;
+            $params[':tid'] = $primary_id;
         }
 
         $sql .= " WHERE id = :id";
 
         $stmt = $this->pdo->prepare($sql);
         $result = $stmt->execute($params);
+        $rowCount = $stmt->rowCount();
 
-        return $stmt->rowCount();
+        if (!empty($training_ids)) {
+            $this->syncTestSessions($id, $training_ids);
+        }
+
+        return $rowCount;
+    }
+
+    public function syncTestSessions($test_id, array $training_ids)
+    {
+        $stmt = $this->pdo->prepare("DELETE FROM lbquiz_test_sessions WHERE test_id = :test_id");
+        $stmt->execute([':test_id' => $test_id]);
+
+        $insertStmt = $this->pdo->prepare(
+            "INSERT INTO lbquiz_test_sessions (test_id, training_id) VALUES (:test_id, :training_id) ON CONFLICT DO NOTHING"
+        );
+
+        foreach ($training_ids as $tid) {
+            $tid = intval($tid);
+            if ($tid > 0) {
+                $insertStmt->execute([':test_id' => $test_id, ':training_id' => $tid]);
+            }
+        }
+    }
+
+    public function getTestSessions($test_id)
+    {
+        $sql = "SELECT DISTINCT ts.*, tc.course_name
+                FROM public.training_sessions ts
+                LEFT JOIN public.training_courses tc ON tc.course_id = ts.course_id
+                WHERE ts.training_id = (SELECT training_id FROM lbquiz_tests WHERE id = :test_id1)
+                   OR ts.training_id IN (SELECT training_id FROM lbquiz_test_sessions WHERE test_id = :test_id2)
+                ORDER BY ts.training_id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':test_id1' => $test_id, ':test_id2' => $test_id]);
+        return $stmt->fetchAll();
+    }
+
+    public function getTestSessionIds($test_id)
+    {
+        $sql = "SELECT training_id FROM lbquiz_tests WHERE id = :id1
+                UNION
+                SELECT training_id FROM lbquiz_test_sessions WHERE test_id = :id2
+                ORDER BY training_id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':id1' => $test_id, ':id2' => $test_id]);
+        return array_column($stmt->fetchAll(), 'training_id');
+    }
+
+    public function getTestSessionNames($test_id)
+    {
+        $sessions = $this->getTestSessions($test_id);
+        $names = [];
+        foreach ($sessions as $s) {
+            $names[] = htmlspecialchars($s['course_name'] ?? 'Training') . ' - Session ' . $s['training_id'];
+        }
+        return implode('<br>', $names);
+    }
+
+    public function duplicateTest($test_id)
+    {
+        $source = $this->getTest($test_id);
+        if (!$source) return null;
+
+        $training_ids = $this->getTestSessionIds($test_id);
+
+        $new_id = $this->createTest(
+            $training_ids,
+            $source['title'] . ' (Copy)',
+            $source['description'],
+            $source['time_limit_minutes'],
+            $source['is_pretest'],
+            $source['is_active']
+        );
+
+        if (!$new_id) return null;
+
+        $questions = $this->pdo->prepare(
+            "SELECT quiz_question_id, weight, position FROM lbquiz_test_questions WHERE test_id = :test_id ORDER BY position, id"
+        );
+        $questions->execute([':test_id' => $test_id]);
+        $rows = $questions->fetchAll();
+
+        $insertQ = $this->pdo->prepare(
+            "INSERT INTO lbquiz_test_questions (test_id, quiz_question_id, weight, position) VALUES (:test_id, :qid, :weight, :pos)"
+        );
+        foreach ($rows as $q) {
+            $insertQ->execute([
+                ':test_id' => $new_id,
+                ':qid' => $q['quiz_question_id'],
+                ':weight' => $q['weight'],
+                ':pos' => $q['position']
+            ]);
+        }
+
+        return $new_id;
     }
 
     public function deleteTest($id)

@@ -24,7 +24,11 @@ $courses = $pdo->query("
     SELECT DISTINCT tc.course_name
     FROM public.training_courses tc
     JOIN public.training_sessions ts ON ts.course_id = tc.course_id
-    JOIN lbquiz_tests t ON t.training_id = ts.training_id
+    WHERE ts.training_id IN (
+        SELECT training_id FROM lbquiz_tests WHERE training_id IS NOT NULL
+        UNION
+        SELECT training_id FROM lbquiz_test_sessions
+    )
     ORDER BY tc.course_name
 ")->fetchAll(PDO::FETCH_COLUMN);
 
@@ -34,11 +38,17 @@ $where = [];
 
 if (!empty($_GET['course_name'])) {
     $filters['course_name'] = $_GET['course_name'];
-    $where[] = "tc.course_name = :course_name";
+    $where[] = "EXISTS (
+        SELECT 1 FROM public.training_sessions ts_f
+        JOIN public.training_courses tc_f ON tc_f.course_id = ts_f.course_id
+        WHERE (ts_f.training_id = t.training_id OR ts_f.training_id IN (SELECT ts5.training_id FROM lbquiz_test_sessions ts5 WHERE ts5.test_id = t.id))
+        AND tc_f.course_name = :course_name
+    )";
 }
 if (!empty($_GET['training_id'])) {
     $filters['training_id'] = $_GET['training_id'];
-    $where[] = "ts.training_id = :training_id";
+    $where[] = "(t.training_id = :training_id OR EXISTS (SELECT 1 FROM lbquiz_test_sessions ts2 WHERE ts2.test_id = t.id AND ts2.training_id = :training_id2))";
+    $filters['training_id2'] = $_GET['training_id'];
 }
 if (isset($_GET['is_active']) && $_GET['is_active'] !== '') {
     $filters['is_active'] = (int)$_GET['is_active'];
@@ -56,14 +66,21 @@ if (!empty($_GET['time_limit'])) {
     }
 }
 
-// Build SQL query with filters - FIXED: Use proper table references and count
+// Build SQL query with filters
 $sql = "
-    SELECT t.*, ts.training_type, ts.start_date, ts.end_date, tc.course_name,
+    SELECT t.*,
            (SELECT COUNT(*) FROM lbquiz_test_questions tq WHERE tq.test_id = t.id) as question_count,
-           (SELECT COUNT(*) FROM lbquiz_responses r WHERE r.test_id = t.id) as response_count
+           (SELECT COUNT(*) FROM lbquiz_responses r WHERE r.test_id = t.id) as response_count,
+           (SELECT string_agg(DISTINCT tc2.course_name || ' - Session ' || u.tid || ' - Q' || COALESCE(ts3.quarter, '') || ' (' || COALESCE(to_char(ts3.start_date, 'Mon YYYY'), 'N/A') || ')', '; ')
+            FROM (
+                SELECT t.training_id AS tid
+                UNION
+                SELECT ts4.training_id FROM lbquiz_test_sessions ts4 WHERE ts4.test_id = t.id
+            ) u
+            JOIN public.training_sessions ts3 ON ts3.training_id = u.tid
+            LEFT JOIN public.training_courses tc2 ON tc2.course_id = ts3.course_id
+           ) as session_info
     FROM lbquiz_tests t
-    LEFT JOIN public.training_sessions ts ON ts.training_id = t.training_id
-    LEFT JOIN public.training_courses tc ON tc.course_id = ts.course_id
 ";
 
 if (!empty($where)) {
@@ -95,20 +112,41 @@ unset($test);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['title'] ?? '');
-    $training_id = intval($_POST['training_id'] ?? 0);
+    $training_ids = $_POST['training_ids'] ?? [];
     $description = trim($_POST['description'] ?? '');
     $time_limit = !empty($_POST['time_limit_minutes']) ? intval($_POST['time_limit_minutes']) : null;
     $is_pretest = !empty($_POST['is_pretest']);
     $is_active = !empty($_POST['is_active']);
 
-    if ($title && $training_id) {
-        $test_id = $quiz->createTest($training_id, $title, $description, $time_limit, $is_pretest, $is_active);
+    if ($title && !empty($training_ids)) {
+        $test_id = $quiz->createTest($training_ids, $title, $description, $time_limit, $is_pretest, $is_active);
         if ($test_id) {
             header("Location: test_edit.php?id=$test_id");
             exit;
         }
     }
 }
+
+// Handle duplicate test request
+if (isset($_GET['duplicate'])) {
+    $source_id = intval($_GET['duplicate']);
+    $new_id = $quiz->duplicateTest($source_id);
+    if ($new_id) {
+        $_SESSION['flash_message'] = "Test duplicated successfully!";
+        $_SESSION['flash_type'] = "success";
+        header("Location: test_edit.php?id=$new_id");
+    } else {
+        $_SESSION['flash_message'] = "Failed to duplicate test.";
+        $_SESSION['flash_type'] = "danger";
+        header("Location: tests.php");
+    }
+    exit;
+}
+
+// Flash messages
+$flash_message = $_SESSION['flash_message'] ?? '';
+$flash_type = $_SESSION['flash_type'] ?? 'info';
+unset($_SESSION['flash_message'], $_SESSION['flash_type']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -149,6 +187,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php include 'sidebar.php'; ?>
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+                <?php if ($flash_message): ?>
+                    <div class="alert alert-<?= htmlspecialchars($flash_type) ?> alert-dismissible fade show" role="alert">
+                        <?= htmlspecialchars($flash_message) ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif; ?>
+
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Tests Management</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
@@ -227,8 +272,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <tr>
                                             <th>ID</th>
                                             <th>Title</th>
-                                            <th>Training Session</th>
-                                            <th>Course</th>
+                                            <th>Training Sessions</th>
                                             <th>Questions</th>
                                             <th>Responses</th>
                                             <th>Time Limit</th>
@@ -243,13 +287,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 <td><?= $t['id'] ?></td>
                                                 <td><?= htmlspecialchars($t['title']) ?></td>
                                                 <td>
-                                                    Session: <?= htmlspecialchars($t['training_id'] ?? 'N/A') ?><br>
-                                                    <small class="text-muted">
-                                                        <?= $t['start_date'] ? date('M j, Y', strtotime($t['start_date'])) : 'N/A' ?> -
-                                                        <?= $t['end_date'] ? date('M j, Y', strtotime($t['end_date'])) : 'N/A' ?>
-                                                    </small>
+                                                    <?php if (!empty($t['session_info'])): ?>
+                                                        <?php foreach (explode('; ', $t['session_info']) as $si): ?>
+                                                            <div><?= htmlspecialchars($si) ?></div>
+                                                        <?php endforeach; ?>
+                                                    <?php else: ?>
+                                                        Session: <?= htmlspecialchars($t['training_id'] ?? 'N/A') ?>
+                                                    <?php endif; ?>
                                                 </td>
-                                                <td><?= htmlspecialchars($t['course_name'] ?? 'N/A') ?></td>
                                                 <td class="text-center">
                                                     <span class="badge bg-info question-count-badge"><?= $t['question_count'] ?></span>
                                                 </td>
@@ -271,6 +316,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                     <div class="btn-group" role="group">
                                                         <a href="test_edit.php?id=<?= $t['id'] ?>" class="btn btn-sm btn-outline-primary" title="Edit Test">
                                                             <i class="bi bi-pencil"></i>
+                                                        </a>
+                                                        <a href="tests.php?duplicate=<?= $t['id'] ?>" class="btn btn-sm btn-outline-info" title="Duplicate Test" onclick="return confirm('Duplicate this test with all questions?');">
+                                                            <i class="bi bi-files"></i>
                                                         </a>
                                                         <a href="responses.php?test_id=<?= $t['id'] ?>" class="btn btn-sm btn-outline-secondary" title="View Responses">
                                                             <i class="bi bi-clipboard-data"></i>
@@ -314,9 +362,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <input type="text" class="form-control" id="title" name="title" required>
                             </div>
                             <div class="col-md-6">
-                                <label for="training_id" class="form-label">Training Session</label>
-                                <select class="form-select" id="training_id" name="training_id" required>
-                                    <option value="">Select Training Session</option>
+                                <label for="training_ids" class="form-label">Training Sessions</label>
+                                <select class="form-select" id="training_ids" name="training_ids[]" multiple required style="min-height: 120px;">
                                     <?php foreach ($trainings as $tr): ?>
                                         <option value="<?= $tr['training_id'] ?>">
                                             <?= htmlspecialchars($tr['course_name'] ?? 'Training') ?> - Session <?= $tr['training_id'] ?> - Quarter <?= htmlspecialchars($tr['quarter'] ?? '') ?>
@@ -324,6 +371,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         </option>
                                     <?php endforeach; ?>
                                 </select>
+                                <small class="text-muted">Hold Ctrl (or Cmd) to select multiple sessions</small>
                             </div>
                         </div>
 

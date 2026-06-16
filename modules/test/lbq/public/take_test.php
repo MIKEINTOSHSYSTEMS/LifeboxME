@@ -20,9 +20,12 @@ $participation_id = isset($_GET['participation_id']) ? intval($_GET['participati
 if (!$test_id) {
   // Get participant's available tests
   $stmt = $pdo->prepare("
-        SELECT t.*, p.participation_id, t.title as training_title
+        SELECT DISTINCT t.*, p.participation_id, t.title as training_title
         FROM lbquiz_tests t
-        JOIN training_participation p ON p.training_id = t.training_id
+        JOIN training_participation p ON (
+            p.training_id = t.training_id
+            OR EXISTS (SELECT 1 FROM lbquiz_test_sessions ts WHERE ts.test_id = t.id AND ts.training_id = p.training_id)
+        )
         WHERE p.participant_id = :pid AND t.is_active = true
         ORDER BY t.created_at DESC
     ");
@@ -150,7 +153,10 @@ if (!$test || !$test['is_active']) {
 $stmt = $pdo->prepare("
     SELECT COUNT(*) 
     FROM training_participation p
-    JOIN lbquiz_tests t ON t.training_id = p.training_id
+    JOIN lbquiz_tests t ON (
+        t.training_id = p.training_id
+        OR EXISTS (SELECT 1 FROM lbquiz_test_sessions ts WHERE ts.test_id = t.id AND ts.training_id = p.training_id)
+    )
     WHERE p.participant_id = :pid AND p.participation_id = :part_id AND t.id = :test_id
 ");
 $stmt->execute([
@@ -169,7 +175,10 @@ $stmt = $pdo->prepare("
     SELECT tp.*, t.training_id, t.title as training_title
     FROM training_participants tp
     JOIN training_participation tpp ON tpp.participant_id = tp.participant_id
-    JOIN lbquiz_tests t ON t.training_id = tpp.training_id
+    JOIN lbquiz_tests t ON (
+        t.training_id = tpp.training_id
+        OR EXISTS (SELECT 1 FROM lbquiz_test_sessions ts WHERE ts.test_id = t.id AND ts.training_id = tpp.training_id)
+    )
     WHERE tp.participant_id = :pid AND tpp.participation_id = :part_id AND t.id = :test_id
 ");
 $stmt->execute([

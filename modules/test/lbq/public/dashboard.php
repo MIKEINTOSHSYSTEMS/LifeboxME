@@ -17,9 +17,12 @@ $participant = $stmt->fetch();
 
 // Get participant's training sessions
 $stmt = $pdo->prepare("
-    SELECT p.*, t.title as training_title, t.description as training_description
+    SELECT DISTINCT p.*, t.title as training_title, t.description as training_description
     FROM training_participation p
-    LEFT JOIN lbquiz_tests t ON t.training_id = p.training_id
+    LEFT JOIN lbquiz_tests t ON (
+        t.training_id = p.training_id
+        OR EXISTS (SELECT 1 FROM lbquiz_test_sessions ts WHERE ts.test_id = t.id AND ts.training_id = p.training_id)
+    )
     WHERE p.participant_id = :id
     ORDER BY p.created_at DESC
 ");

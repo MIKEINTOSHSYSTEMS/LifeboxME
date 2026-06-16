@@ -48,14 +48,14 @@ $trainings = $pdo->query("
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $title = trim($_POST['title'] ?? '');
-  $training_id = intval($_POST['training_id'] ?? 0);
+  $training_ids = $_POST['training_ids'] ?? [];
   $description = trim($_POST['description'] ?? '');
   $time_limit = !empty($_POST['time_limit_minutes']) ? intval($_POST['time_limit_minutes']) : null;
   $is_pretest = !empty($_POST['is_pretest']);
   $is_active = !empty($_POST['is_active']);
 
-  if ($title && $training_id) {
-    $test_id = $quiz->createTest($training_id, $title, $description, $time_limit, $is_pretest, $is_active);
+  if ($title && !empty($training_ids)) {
+    $test_id = $quiz->createTest($training_ids, $title, $description, $time_limit, $is_pretest, $is_active);
     if ($test_id) {
       header("Location: test_edit.php?id=$test_id");
       exit;
@@ -485,9 +485,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   <input type="text" class="form-control" id="title" name="title" required>
                 </div>
                 <div class="mb-3">
-                  <label for="training_id" class="form-label">Training Session</label>
-                  <select class="form-select" id="training_id" name="training_id" required>
-                    <option value="">Select Training Session</option>
+                  <label for="training_ids" class="form-label">Training Sessions</label>
+                  <select class="form-select" id="training_ids" name="training_ids[]" multiple required style="min-height: 100px;">
                     <?php foreach ($trainings as $tr): ?>
                       <option value="<?= $tr['training_id'] ?>">
                         <?= htmlspecialchars($tr['course_name'] ?? 'Training') ?> -
@@ -495,6 +494,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                       </option>
                     <?php endforeach; ?>
                   </select>
+                  <small class="text-muted">Hold Ctrl (or Cmd) to select multiple</small>
                 </div>
                 <div class="mb-3">
                   <label for="description" class="form-label">Description</label>

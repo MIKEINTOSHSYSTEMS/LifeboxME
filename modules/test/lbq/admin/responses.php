@@ -37,8 +37,9 @@ if ($test_id) {
 }
 
 if ($training_id) {
-  $sql .= " AND t.training_id = :training_id";
+  $sql .= " AND (t.training_id = :training_id OR EXISTS (SELECT 1 FROM lbquiz_test_sessions ts WHERE ts.test_id = t.id AND ts.training_id = :training_id2))";
   $params[':training_id'] = $training_id;
+  $params[':training_id2'] = $training_id;
 }
 
 if ($participant_id) {

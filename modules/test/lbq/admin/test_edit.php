@@ -22,15 +22,9 @@ if (!$test) {
   exit;
 }
 
-// Get training session details
-$training = $pdo->prepare("
-    SELECT ts.*, tc.course_name
-    FROM public.training_sessions ts
-    LEFT JOIN public.training_courses tc ON tc.course_id = ts.course_id
-    WHERE ts.training_id = :tid
-");
-$training->execute([':tid' => $test['training_id']]);
-$training = $training->fetch();
+// Get training session details (all sessions via pivot)
+$test_sessions = $quiz->getTestSessions($test_id);
+$test_session_ids = $quiz->getTestSessionIds($test_id);
 
 $mapped = $quiz->getTestQuestions($test_id);
 
@@ -68,22 +62,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $debug_messages[] = "=== UPDATE TEST TRIGGERED ===";
 
     $title = trim($_POST['title'] ?? '');
-    $training_id = !empty($_POST['training_id']) ? intval($_POST['training_id']) : null;
+    $training_ids = $_POST['training_ids'] ?? [];
     $description = trim($_POST['description'] ?? '');
     $time_limit = !empty($_POST['time_limit_minutes']) ? intval($_POST['time_limit_minutes']) : null;
     $is_pretest = isset($_POST['is_pretest']) && $_POST['is_pretest'] === 'on';
     $is_active = isset($_POST['is_active']) && $_POST['is_active'] === 'on';
 
+    $training_ids = array_values(array_map('intval', $training_ids));
+    $training_ids = array_filter($training_ids, fn($v) => $v > 0);
+    $primary_id = !empty($training_ids) ? $training_ids[0] : 0;
+
     $debug_messages[] = "Test ID: $test_id";
     $debug_messages[] = "Title: $title";
-    $debug_messages[] = "Training ID: " . ($training_id ?? 'null');
+    $debug_messages[] = "Training IDs: " . implode(', ', $training_ids);
+    $debug_messages[] = "Primary ID: $primary_id";
     $debug_messages[] = "Description: $description";
     $debug_messages[] = "Time Limit: " . ($time_limit ?? 'null');
     $debug_messages[] = "Is Pretest: " . ($is_pretest ? 'TRUE' : 'FALSE');
     $debug_messages[] = "Is Active: " . ($is_active ? 'TRUE' : 'FALSE');
 
     try {
-      // DIRECT UPDATE - Bypass the model
       $updateSql = "UPDATE lbquiz_tests SET 
                       title = :title, 
                       description = :desc, 
@@ -100,9 +98,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ':id' => $test_id
       ];
 
-      if ($training_id !== null && $training_id > 0) {
+      if ($primary_id > 0) {
         $updateSql .= ", training_id = :training_id";
-        $params[':training_id'] = $training_id;
+        $params[':training_id'] = $primary_id;
       }
 
       $updateSql .= " WHERE id = :id";
@@ -117,18 +115,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $debug_messages[] = "Execute result: " . ($result ? 'TRUE' : 'FALSE');
       $debug_messages[] = "Rows affected: $rowCount";
 
+      // Sync pivot table
+      if (!empty($training_ids)) {
+        $quiz->syncTestSessions($test_id, $training_ids);
+        $debug_messages[] = "Pivot table synced with IDs: " . implode(', ', $training_ids);
+      }
+
       if ($rowCount > 0) {
         $message = "✅ Test updated successfully!";
         $message_type = "success";
 
-        // Refresh test data
         $test = $quiz->getTest($test_id);
         $debug_messages[] = "Updated test data: " . print_r($test, true);
       } else {
         $message = "⚠️ No changes were made to the test.";
         $message_type = "warning";
 
-        // Check if the record exists
         $checkStmt = $pdo->prepare("SELECT * FROM lbquiz_tests WHERE id = ?");
         $checkStmt->execute([$test_id]);
         $currentData = $checkStmt->fetch();
@@ -511,9 +513,14 @@ $qtypes = [
           </div>
           <div class="col-md-3">
             <div class="stats-card" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
-              <h6>Training ID</h6>
-              <h5><?= htmlspecialchars($test['training_id'] ?? 'N/A') ?></h5>
-              <small><?= htmlspecialchars($training['course_name'] ?? 'N/A') ?></small>
+              <h6>Training Sessions</h6>
+              <?php if (!empty($test_sessions)): ?>
+                <?php foreach ($test_sessions as $s): ?>
+                  <div><small><?= htmlspecialchars($s['course_name'] ?? 'Training') ?> - Session <?= $s['training_id'] ?></small></div>
+                <?php endforeach; ?>
+              <?php else: ?>
+                <h5><?= htmlspecialchars($test['training_id'] ?? 'N/A') ?></h5>
+              <?php endif; ?>
             </div>
           </div>
           <div class="col-md-3">
@@ -544,15 +551,15 @@ $qtypes = [
                   <input type="text" class="form-control" id="title" name="title" value="<?= htmlspecialchars($test['title']) ?>" required>
                 </div>
                 <div class="col-md-4">
-                  <label for="training_id" class="form-label">Training Session</label>
-                  <select class="form-select" id="training_id" name="training_id">
-                    <option value="">Select Training</option>
+                  <label for="training_ids" class="form-label">Training Sessions</label>
+                  <select class="form-select" id="training_ids" name="training_ids[]" multiple style="min-height: 120px;">
                     <?php foreach ($trainings as $tr): ?>
-                      <option value="<?= $tr['training_id'] ?>" <?= $test['training_id'] == $tr['training_id'] ? 'selected' : '' ?>>
+                      <option value="<?= $tr['training_id'] ?>" <?= in_array($tr['training_id'], $test_session_ids) ? 'selected' : '' ?>>
                         <?= htmlspecialchars($tr['course_name'] ?? 'Training') ?> - Session <?= $tr['training_id'] ?>
                       </option>
                     <?php endforeach; ?>
                   </select>
+                  <small class="text-muted">Hold Ctrl (or Cmd) to select multiple sessions</small>
                 </div>
               </div>
               <div class="row mb-3">
