@@ -10,6 +10,13 @@ require __DIR__ . '/../src/model/Quiz.php';
 require __DIR__ . '/session_helper.php';
 $quiz = new Quiz($pdo);
 
+// AJAX endpoint: get training sessions for a test
+if (isset($_GET['ajax']) && $_GET['ajax'] === 'get_test_sessions' && isset($_GET['test_id'])) {
+    header('Content-Type: application/json');
+    echo json_encode($quiz->getTestSessions(intval($_GET['test_id'])));
+    exit;
+}
+
 // Get filters
 $test_id = intval($_GET['test_id'] ?? 0);
 $training_id = intval($_GET['training_id'] ?? 0);
@@ -77,14 +84,16 @@ $rows = $stmt->fetchAll();
 $tests = $quiz->listTests(100);
 
 // Get trainings for filter dropdown
-$trainings = $pdo->query("
-    SELECT ts.training_id, tc.course_name, ts.training_type, ts.quarter, ts.start_date, ts.end_date
-    FROM training_sessions ts
-    LEFT JOIN training_courses tc ON tc.course_id = ts.course_id
-    -- WHERE ts.start_date >= CURRENT_DATE - INTERVAL '1 year'
-    ORDER BY tc.course_name ASC, ts.training_id ASC,  ts.start_date ASC
-    -- ORDER BY ts.start_date DESC
-")->fetchAll();
+if ($test_id) {
+    $trainings = $quiz->getTestSessions($test_id);
+} else {
+    $trainings = $pdo->query("
+        SELECT ts.training_id, tc.course_name, ts.training_type, ts.quarter, ts.start_date, ts.end_date
+        FROM training_sessions ts
+        LEFT JOIN training_courses tc ON tc.course_id = ts.course_id
+        ORDER BY tc.course_name ASC, ts.training_id ASC, ts.start_date ASC
+    ")->fetchAll();
+}
 
 /*
 $trainings = $pdo->query("
@@ -316,6 +325,30 @@ $participants = $pdo->query("
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
+    document.getElementById('test_id').addEventListener('change', function() {
+      var testId = this.value;
+      var trainingSelect = document.getElementById('training_id');
+      var currentTraining = trainingSelect.value;
+
+      if (!testId) {
+        window.location.href = 'responses.php';
+        return;
+      }
+
+      fetch('responses.php?ajax=get_test_sessions&test_id=' + testId)
+        .then(function(r) { return r.json(); })
+        .then(function(sessions) {
+          trainingSelect.innerHTML = '<option value="">All Trainings</option>';
+          sessions.forEach(function(s) {
+            var opt = document.createElement('option');
+            opt.value = s.training_id;
+            opt.textContent = (s.course_name || 'Training') + ' - Session ' + s.training_id + ' - Quarter ' + (s.quarter || '') + ' (' + (s.start_date ? new Date(s.start_date).toLocaleString('default', { month: 'short', year: 'numeric' }) : 'N/A') + ')';
+            if (s.training_id == currentTraining) opt.selected = true;
+            trainingSelect.appendChild(opt);
+          });
+        });
+    });
+
     function exportToCSV() {
       // Simple CSV export implementation
       let csv = [];
