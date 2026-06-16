@@ -449,7 +449,7 @@ function sortLink($col, $label, $current_col, $current_dir, $qs) {
 
     <!-- Create Test Modal -->
     <div class="modal fade" id="createTestModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable modal-fullscreen-lg-down">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Create New Test</h5>

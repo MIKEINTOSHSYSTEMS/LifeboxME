@@ -74,6 +74,13 @@ body {
     outline: 0;
 }
 
+.modal-fullscreen-lg-down .modal-content {
+    height: 100%;
+    border: 0;
+    border-radius: 0;
+    width: fit-content !important;
+}
+
 .dropdown-menu-dark {
     --bs-dropdown-color: #dee2e6;
     --bs-dropdown-bg: #47abab !important;
