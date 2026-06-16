@@ -232,10 +232,9 @@ function sortLink($col, $label, $current_col, $current_dir, $qs) {
     </style>
 </head>
 <body>
+<?php include 'sidebar.php'; ?>
     <div class="container-fluid">
-        <div class="row">
-            <?php include 'sidebar.php'; ?>
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+            <main class="px-md-4 py-4">
                 <?php if ($flash_message): ?>
                     <div class="alert alert-<?= htmlspecialchars($flash_type) ?> alert-dismissible fade show" role="alert">
                         <?= htmlspecialchars($flash_message) ?>
@@ -446,7 +445,6 @@ function sortLink($col, $label, $current_col, $current_dir, $qs) {
                     </div>
                 </div>
             </main>
-        </div>
     </div>
 
     <!-- Create Test Modal -->

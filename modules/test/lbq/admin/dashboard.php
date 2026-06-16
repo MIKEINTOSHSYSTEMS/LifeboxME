@@ -11,30 +11,59 @@ if (!is_logged_in()) {
 
 $quiz = new Quiz($pdo);
 
-// Get stats for dashboard with better queries
+// Get stats for dashboard
 $stats = $pdo->query("
-    SELECT 
+    SELECT
         (SELECT COUNT(*) FROM lbquiz_tests) as total_tests,
+        (SELECT COUNT(*) FROM lbquiz_tests WHERE is_active = true) as active_tests,
+        (SELECT COUNT(*) FROM lbquiz_tests WHERE is_active = false) as inactive_tests,
         (SELECT COUNT(*) FROM public.quiz_questions) as total_questions,
         (SELECT COUNT(*) FROM lbquiz_responses) as total_responses,
-        (SELECT COUNT(*) FROM lbquiz_responses WHERE submitted_at IS NOT NULL) as completed_tests,
+        (SELECT COUNT(*) FROM lbquiz_responses WHERE submitted_at IS NOT NULL) as completed_responses,
         (SELECT COUNT(*) FROM training_participants) as total_participants,
+        (SELECT COUNT(DISTINCT r.participation_id) FROM lbquiz_responses r) as participants_tested,
         (SELECT AVG(CASE WHEN t.is_pretest = true THEN r.score END) FROM lbquiz_responses r JOIN lbquiz_tests t ON t.id = r.test_id WHERE r.submitted_at IS NOT NULL) as avg_pre_test,
         (SELECT AVG(CASE WHEN t.is_pretest = false THEN r.score END) FROM lbquiz_responses r JOIN lbquiz_tests t ON t.id = r.test_id WHERE r.submitted_at IS NOT NULL) as avg_post_test,
-        (SELECT COUNT(DISTINCT r.id) FROM lbquiz_responses r WHERE r.submitted_at IS NOT NULL) as total_scored_responses
+        (SELECT COUNT(*) FROM lbquiz_tests t WHERE (SELECT COUNT(*) FROM lbquiz_test_questions tq JOIN quiz_questions q ON q.id = tq.quiz_question_id WHERE tq.test_id = t.id) = 0) as tests_without_questions,
+        (SELECT COUNT(DISTINCT t.id) FROM lbquiz_tests t JOIN lbquiz_responses r ON r.test_id = t.id) as tests_with_responses
 ")->fetch();
 
-// Get recent tests with course information
+// Get recent tests with session info from pivot table
 $tests = $pdo->query("
-    SELECT t.*, ts.training_type, tc.course_name, ts.start_date, ts.end_date,
-           (SELECT COUNT(*) FROM lbquiz_test_questions tq WHERE tq.test_id = t.id) as question_count,
+    SELECT t.*,
+           (SELECT string_agg(DISTINCT tc2.course_name, '; ')
+            FROM (SELECT t.training_id AS tid UNION SELECT training_id FROM lbquiz_test_sessions WHERE test_id = t.id) u
+            JOIN training_sessions ts3 ON ts3.training_id = u.tid
+            JOIN training_courses tc2 ON tc2.course_id = ts3.course_id) as course_names,
+           (SELECT COUNT(*) FROM lbquiz_test_questions tq JOIN quiz_questions q ON q.id = tq.quiz_question_id WHERE tq.test_id = t.id) as question_count,
            (SELECT COUNT(*) FROM lbquiz_responses r WHERE r.test_id = t.id) as response_count
     FROM lbquiz_tests t
-    LEFT JOIN training_sessions ts ON ts.training_id = t.training_id
-    LEFT JOIN training_courses tc ON tc.course_id = ts.course_id
     ORDER BY t.created_at DESC
     LIMIT 8
 ")->fetchAll();
+
+// Get recent responses for activity feed
+$recent_responses = $pdo->query("
+    SELECT r.id, r.score, r.submitted_at, r.created_at, t.title as test_title,
+           tp.participant_id, part.first_name, part.last_name,
+           t.is_pretest
+    FROM lbquiz_responses r
+    JOIN lbquiz_tests t ON t.id = r.test_id
+    LEFT JOIN training_participation tp ON tp.participation_id = r.participation_id
+    LEFT JOIN training_participants part ON part.participant_id = tp.participant_id
+    ORDER BY COALESCE(r.submitted_at, r.created_at) DESC
+    LIMIT 8
+")->fetchAll();
+
+// Get score distribution
+$score_dist = $pdo->query("
+    SELECT
+        COUNT(*) FILTER (WHERE r.score >= 80 AND r.submitted_at IS NOT NULL) as excellent,
+        COUNT(*) FILTER (WHERE r.score >= 60 AND r.score < 80 AND r.submitted_at IS NOT NULL) as good,
+        COUNT(*) FILTER (WHERE r.score >= 40 AND r.score < 60 AND r.submitted_at IS NOT NULL) as fair,
+        COUNT(*) FILTER (WHERE r.score < 40 AND r.submitted_at IS NOT NULL) as poor
+    FROM lbquiz_responses r
+")->fetch();
 
 // Get trainings for dropdown
 $trainings = $pdo->query("
@@ -264,270 +293,365 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
+  <?php include 'sidebar.php'; ?>
   <div class="container-fluid">
-    <div class="row">
-      <?php //include 'navbar.php'; 
-      ?>
-      <?php include 'sidebar.php'; ?>
+    <main class="px-md-4 py-4">
+      <!-- Header -->
+      <div class="d-flex justify-content-between align-items-center pt-3 pb-4 mb-4">
+        <div>
 
-      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
-        <!-- Header -->
-        <div class="d-flex justify-content-between align-items-center pt-3 pb-4 mb-4">
-          <div>
-            <br></br>
-            <!--<h1 class="h2 mb-1 fw-bold text-dark animate-fade-in">Dashboard Overview</h1>-->
+          <!--<h1 class="h2 mb-1 fw-bold text-dark animate-fade-in">Dashboard Overview</h1>
+                    <br></br>
             <h1 class="h2 mb-1 fw-bold animate-fade-in">Overview Dashboard</h1>
-            <p class="text-muted">Welcome back! <strong class="d-block"><?= htmlspecialchars($display_name) ?></strong> <br></br> Here's what's happening with Lifebox Tests today.</p>
-          </div>
-          <div class="btn-toolbar">
-            <button class="btn btn-primary pulse" onclick="window.location.reload()">
-              <i class="bi bi-arrow-clockwise me-2"></i>Refresh
-            </button>
+            -->
+
+          <p class="text-muted">Welcome back! <strong class="d-block"><?= htmlspecialchars($display_name) ?></strong> <br></br> Here's what's happening with Lifebox Tests today.</p>
+        </div>
+        <div class="btn-toolbar">
+          <button class="btn btn-primary pulse" onclick="window.location.reload()">
+            <i class="bi bi-arrow-clockwise me-2"></i>Refresh
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="row mb-4 animate-fade-in">
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="stat-card" style="background: var(--primary-gradient);">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <div class="stat-number"><?= $stats['total_tests'] ?></div>
+                <div class="stat-label">Total Tests</div>
+                <small><?= $stats['active_tests'] ?> active / <?= $stats['inactive_tests'] ?> inactive</small>
+              </div>
+              <i class="bi bi-journal-text stat-icon"></i>
+            </div>
+            <a href="tests.php" class="stretched-link text-white text-decoration-none"></a>
           </div>
         </div>
 
-        <!-- Stats Cards -->
-        <div class="row mb-4 animate-fade-in">
-          <div class="col-xl-3 col-md-6 mb-4">
-            <div class="stat-card" style="background: var(--primary-gradient);">
-              <div class="d-flex justify-content-between align-items-center">
-                <div>
-                  <div class="stat-number"><?= $stats['total_tests'] ?></div>
-                  <div class="stat-label">Total Tests</div>
-                </div>
-                <i class="bi bi-journal-text stat-icon"></i>
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="stat-card" style="background: var(--success-gradient);">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <div class="stat-number"><?= $stats['total_questions'] ?></div>
+                <div class="stat-label">Total Questions</div>
               </div>
-              <a href="tests.php" class="stretched-link text-white text-decoration-none"></a>
+              <i class="bi bi-question-circle stat-icon"></i>
             </div>
-          </div>
-
-          <div class="col-xl-3 col-md-6 mb-4">
-            <div class="stat-card" style="background: var(--success-gradient);">
-              <div class="d-flex justify-content-between align-items-center">
-                <div>
-                  <div class="stat-number"><?= $stats['total_questions'] ?></div>
-                  <div class="stat-label">Total Questions</div>
-                </div>
-                <i class="bi bi-question-circle stat-icon"></i>
-              </div>
-              <a href="questions.php" class="stretched-link text-white text-decoration-none"></a>
-            </div>
-          </div>
-
-          <div class="col-xl-3 col-md-6 mb-4">
-            <div class="stat-card" style="background: var(--info-gradient);">
-              <div class="d-flex justify-content-between align-items-center">
-                <div>
-                  <div class="stat-number"><?= $stats['total_participants'] ?></div>
-                  <div class="stat-label">Participants</div>
-                </div>
-                <i class="bi bi-people stat-icon"></i>
-              </div>
-              <a href="participants.php" class="stretched-link text-white text-decoration-none"></a>
-            </div>
-          </div>
-
-          <div class="col-xl-3 col-md-6 mb-4">
-            <div class="stat-card" style="background: var(--warning-gradient);">
-              <div class="d-flex justify-content-between align-items-center">
-                <div>
-                  <div class="stat-number"><?= $stats['completed_tests'] ?></div>
-                  <div class="stat-label">Completed Tests</div>
-                </div>
-                <i class="bi bi-check-circle stat-icon"></i>
-              </div>
-              <a href="responses.php" class="stretched-link text-white text-decoration-none"></a>
-            </div>
+            <a href="questions.php" class="stretched-link text-white text-decoration-none"></a>
           </div>
         </div>
 
-        <!-- Charts and Quick Actions -->
-        <div class="row mb-4 animate-fade-in">
-          <div class="col-lg-8 mb-4">
-            <div class="chart-container">
-              <h5 class="card-title mb-3">Performance Overview</h5>
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="stat-card" style="background: var(--info-gradient);">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <div class="stat-number"><?= $stats['total_participants'] ?></div>
+                <div class="stat-label">Participants</div>
+                <small><?= $stats['participants_tested'] ?> have taken tests</small>
+              </div>
+              <i class="bi bi-people stat-icon"></i>
+            </div>
+            <a href="participants.php" class="stretched-link text-white text-decoration-none"></a>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="stat-card" style="background: var(--warning-gradient);">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <div class="stat-number"><?= $stats['completed_responses'] ?></div>
+                <div class="stat-label">Completed Tests</div>
+                <small>out of <?= $stats['total_responses'] ?> total responses</small>
+              </div>
+              <i class="bi bi-check-circle stat-icon"></i>
+            </div>
+            <a href="responses.php" class="stretched-link text-white text-decoration-none"></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Secondary Stats -->
+      <div class="row mb-4 animate-fade-in">
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="stat-card" style="background: linear-gradient(135deg, #6c63ff 0%, #3f3d9e 100%);">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <div class="stat-number"><?= $stats['tests_with_responses'] ?></div>
+                <div class="stat-label">Tests With Responses</div>
+              </div>
+              <i class="bi bi-bar-chart stat-icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="stat-card" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <div class="stat-number"><?= $stats['tests_without_questions'] ?></div>
+                <div class="stat-label">Tests w/o Questions</div>
+                <small>need attention</small>
+              </div>
+              <i class="bi bi-exclamation-triangle stat-icon"></i>
+            </div>
+            <a href="tests.php" class="stretched-link text-white text-decoration-none"></a>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="stat-card" style="background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%);">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <div class="stat-number"><?= $stats['avg_pre_test'] ? round($stats['avg_pre_test'], 1) . '%' : 'N/A' ?></div>
+                <div class="stat-label">Avg Pre-Test Score</div>
+              </div>
+              <i class="bi bi-graph-up-arrow stat-icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="stat-card" style="background: linear-gradient(135deg, #2980b9 0%, #1a5276 100%);">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <div class="stat-number"><?= $stats['avg_post_test'] ? round($stats['avg_post_test'], 1) . '%' : 'N/A' ?></div>
+                <div class="stat-label">Avg Post-Test Score</div>
+              </div>
+              <i class="bi bi-graph-up-arrow stat-icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts and Quick Actions -->
+      <div class="row mb-4 animate-fade-in">
+        <div class="col-lg-8 mb-4">
+          <div class="chart-container">
+            <h5 class="card-title mb-3">Score Distribution</h5>
+            <?php $total_scored = $score_dist['excellent'] + $score_dist['good'] + $score_dist['fair'] + $score_dist['poor']; ?>
+            <?php if ($total_scored > 0): ?>
               <div class="row text-center">
-                <div class="col-md-6 mb-4">
-                  <div class="p-3 bg-light rounded">
-                    <h6 class="mb-3">Pre Test Average</h6>
-                     <div class="position-relative" style="height: 120px;">
-                       <div class="position-absolute top-0 start-50 translate-middle-x">
-                         <span class="display-4 fw-bold text-success"><?= round($stats['avg_pre_test'] ?? 0, 1) ?>%</span>
-                       </div>
-                       <div class="progress position-absolute bottom-0 w-100" style="height: 8px;">
-                         <div class="progress-bar bg-success progress-bar-animated"
-                           style="--final-width: <?= ($stats['avg_pre_test'] ?? 0) ?>%; width: <?= ($stats['avg_pre_test'] ?? 0) ?>%;"
-                           role="progressbar"></div>
-                       </div>
-                     </div>
+                <div class="col-3 mb-3">
+                  <div class="p-3 rounded" style="background: #d4edda;">
+                    <div class="fs-2 fw-bold text-success"><?= $score_dist['excellent'] ?></div>
+                    <small class="text-muted">Excellent (≥80%)</small>
+                    <div class="progress mt-2" style="height: 6px;">
+                      <div class="progress-bar bg-success" style="width: <?= round($score_dist['excellent'] / $total_scored * 100) ?>%;"></div>
+                    </div>
                   </div>
                 </div>
-                <div class="col-md-6 mb-4">
-                  <div class="p-3 bg-light rounded">
-                    <h6 class="mb-3">Post Test Average</h6>
-                    <div class="position-relative" style="height: 120px;">
-                      <div class="position-absolute top-0 start-50 translate-middle-x">
-                        <span class="display-4 fw-bold text-primary"><?= round($stats['avg_post_test'] ?? 0, 1) ?>%</span>
-                      </div>
-                      <div class="progress position-absolute bottom-0 w-100" style="height: 8px;">
-                        <div class="progress-bar bg-primary progress-bar-animated"
-                          style="--final-width: <?= ($stats['avg_post_test'] ?? 0) ?>%; width: <?= ($stats['avg_post_test'] ?? 0) ?>%;"
-                          role="progressbar"></div>
-                      </div>
+                <div class="col-3 mb-3">
+                  <div class="p-3 rounded" style="background: #fff3cd;">
+                    <div class="fs-2 fw-bold text-warning"><?= $score_dist['good'] ?></div>
+                    <small class="text-muted">Good (60-79%)</small>
+                    <div class="progress mt-2" style="height: 6px;">
+                      <div class="progress-bar bg-warning" style="width: <?= round($score_dist['good'] / $total_scored * 100) ?>%;"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-3 mb-3">
+                  <div class="p-3 rounded" style="background: #f8d7da;">
+                    <div class="fs-2 fw-bold text-danger"><?= $score_dist['fair'] ?></div>
+                    <small class="text-muted">Fair (40-59%)</small>
+                    <div class="progress mt-2" style="height: 6px;">
+                      <div class="progress-bar bg-danger" style="width: <?= round($score_dist['fair'] / $total_scored * 100) ?>%;"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-3 mb-3">
+                  <div class="p-3 rounded" style="background: #e2e3e5;">
+                    <div class="fs-2 fw-bold text-secondary"><?= $score_dist['poor'] ?></div>
+                    <small class="text-muted">Poor (&lt;40%)</small>
+                    <div class="progress mt-2" style="height: 6px;">
+                      <div class="progress-bar bg-secondary" style="width: <?= round($score_dist['poor'] / $total_scored * 100) ?>%;"></div>
                     </div>
                   </div>
                 </div>
               </div>
-              <?php if ($stats['total_scored_responses'] > 0): ?>
-                <div class="text-center mt-2">
-                  <small class="text-muted">
-                    Based on <?= $stats['total_scored_responses'] ?> test responses
-                  </small>
-                </div>
-              <?php endif; ?>
-            </div>
-          </div>
-
-          <div class="col-lg-4 mb-4">
-            <div class="chart-container">
-              <h5 class="card-title mb-3">Quick Actions</h5>
-              <div class="row g-3">
-                <div class="col-6">
-                  <a href="questions.php" class="quick-action-btn d-block" style="background: var(--primary-gradient);">
-                    <i class="bi bi-question-circle d-block mb-2" style="font-size: 1.5rem;"></i>
-                    Questions
-                  </a>
-                </div>
-                <div class="col-6">
-                  <a href="tests.php" class="quick-action-btn d-block" style="background: var(--success-gradient);">
-                    <i class="bi bi-journal-text d-block mb-2" style="font-size: 1.5rem;"></i>
-                    Tests
-                  </a>
-                </div>
-                <div class="col-6">
-                  <a href="responses.php" class="quick-action-btn d-block" style="background: var(--info-gradient);">
-                    <i class="bi bi-clipboard-data d-block mb-2" style="font-size: 1.5rem;"></i>
-                    Responses
-                  </a>
-                </div>
-                <div class="col-6">
-                  <a href="participants.php" class="quick-action-btn d-block" style="background: var(--warning-gradient);">
-                    <i class="bi bi-people d-block mb-2" style="font-size: 1.5rem;"></i>
-                    Participants
-                  </a>
-                </div>
+              <div class="text-center mt-2">
+                <small class="text-muted">Based on <?= $total_scored ?> scored responses</small>
               </div>
-            </div>
+            <?php else: ?>
+              <p class="text-muted text-center">No scored responses yet.</p>
+            <?php endif; ?>
           </div>
         </div>
 
-        <!-- Recent Tests and Create Test Form -->
-        <div class="row animate-fade-in">
-          <div class="col-lg-8 mb-4">
-            <div class="chart-container">
-              <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5 class="card-title mb-0">Recent Tests</h5>
-                <a href="tests.php" class="btn btn-sm btn-outline-primary">
-                  <i class="bi bi-eye me-1"></i>View All
+        <div class="col-lg-4 mb-4">
+          <div class="chart-container">
+            <h5 class="card-title mb-3">Quick Actions</h5>
+            <div class="row g-3">
+              <div class="col-6">
+                <a href="questions.php" class="quick-action-btn d-block" style="background: var(--primary-gradient);">
+                  <i class="bi bi-question-circle d-block mb-2" style="font-size: 1.5rem;"></i>
+                  Questions
                 </a>
               </div>
-              <div class="table-responsive">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th>Test</th>
-                      <th>Course</th>
-                      <th>Questions</th>
-                      <th>Responses</th>
-                      <th>Status</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php foreach ($tests as $t): ?>
-                      <tr class="test-card">
-                        <td>
-                          <strong><?= htmlspecialchars($t['title']) ?></strong>
-                          <br>
-                          <small class="text-muted">ID: <?= $t['id'] ?></small>
-                        </td>
-                        <td><?= htmlspecialchars($t['course_name'] ?? 'N/A') ?></td>
-                        <td><span class="badge bg-secondary"><?= $t['question_count'] ?></span></td>
-                        <td><span class="badge bg-info"><?= $t['response_count'] ?></span></td>
-                        <td>
-                          <span class="badge bg-<?= $t['is_active'] ? 'success' : 'secondary' ?>">
-                            <?= $t['is_active'] ? 'Active' : 'Inactive' ?>
-                          </span>
-                          <br>
-                           <span class="badge bg-<?= $t['is_pretest'] ? 'success' : 'primary' ?>">
-                             <?= $t['is_pretest'] ? 'Pre Test' : 'Post Test' ?>
-                           </span>
-                        </td>
-                        <td>
-                          <a href="test_edit.php?id=<?= $t['id'] ?>" class="btn btn-sm btn-outline-primary">
-                            <i class="bi bi-pencil"></i>
-                          </a>
-                        </td>
-                      </tr>
-                    <?php endforeach; ?>
-                  </tbody>
-                </table>
+              <div class="col-6">
+                <a href="tests.php" class="quick-action-btn d-block" style="background: var(--success-gradient);">
+                  <i class="bi bi-journal-text d-block mb-2" style="font-size: 1.5rem;"></i>
+                  Tests
+                </a>
+              </div>
+              <div class="col-6">
+                <a href="responses.php" class="quick-action-btn d-block" style="background: var(--info-gradient);">
+                  <i class="bi bi-clipboard-data d-block mb-2" style="font-size: 1.5rem;"></i>
+                  Responses
+                </a>
+              </div>
+              <div class="col-6">
+                <a href="participants.php" class="quick-action-btn d-block" style="background: var(--warning-gradient);">
+                  <i class="bi bi-people d-block mb-2" style="font-size: 1.5rem;"></i>
+                  Participants
+                </a>
               </div>
             </div>
           </div>
+        </div>
+      </div>
 
-          <div class="col-lg-4 mb-4">
-            <div class="create-test-form">
-              <h5 class="card-title mb-3">Create New Test</h5>
-              <form method="post">
-                <div class="mb-3">
-                  <label for="title" class="form-label">Test Title</label>
-                  <input type="text" class="form-control" id="title" name="title" required>
-                </div>
-                <div class="mb-3">
-                  <label for="training_ids" class="form-label">Training Sessions</label>
-                  <select class="form-select" id="training_ids" name="training_ids[]" multiple required style="min-height: 100px;">
-                    <?php foreach ($trainings as $tr): ?>
-                      <option value="<?= $tr['training_id'] ?>">
-                        <?= htmlspecialchars($tr['course_name'] ?? 'Training') ?> -
-                        Session <?= htmlspecialchars($tr['training_id'] ?? '') ?>
-                      </option>
-                    <?php endforeach; ?>
-                  </select>
-                  <small class="text-muted">Hold Ctrl (or Cmd) to select multiple</small>
-                </div>
-                <div class="mb-3">
-                  <label for="description" class="form-label">Description</label>
-                  <textarea class="form-control" id="description" name="description" rows="2"></textarea>
-                </div>
-                <div class="mb-3">
-                  <label for="time_limit_minutes" class="form-label">Time Limit (minutes)</label>
-                  <input type="number" class="form-control" id="time_limit_minutes" name="time_limit_minutes"
-                    min="0" placeholder="0 for no time limit">
-                </div>
-                <div class="row mb-3">
-                  <div class="col-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="is_pretest" name="is_pretest">
-                      <label class="form-check-label" for="is_pretest">Pre Test</label>
-                    </div>
-                  </div>
-                  <div class="col-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="is_active" name="is_active" checked>
-                      <label class="form-check-label" for="is_active">Active</label>
-                    </div>
-                  </div>
-                </div>
-                <button type="submit" class="btn btn-primary w-100">
-                  <i class="bi bi-plus-circle me-2"></i>Create Test
-                </button>
-              </form>
+      <!-- Recent Tests and Recent Responses -->
+      <div class="row animate-fade-in">
+        <div class="col-lg-8 mb-4">
+          <div class="chart-container">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="card-title mb-0">Recent Tests</h5>
+              <a href="tests.php" class="btn btn-sm btn-outline-primary">
+                <i class="bi bi-eye me-1"></i>View All
+              </a>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Test</th>
+                    <th>Course(s)</th>
+                    <th>Questions</th>
+                    <th>Responses</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php foreach ($tests as $t): ?>
+                    <tr class="test-card">
+                      <td>
+                        <a href="test_edit.php?id=<?= $t['id'] ?>" class="text-decoration-none fw-bold">
+                          <?= htmlspecialchars($t['title']) ?>
+                        </a>
+                        <br>
+                        <small class="text-muted">ID: <?= $t['id'] ?></small>
+                      </td>
+                      <td><small><?= htmlspecialchars($t['course_names'] ?? 'N/A') ?></small></td>
+                      <td><span class="badge bg-<?= $t['question_count'] > 0 ? 'info' : 'secondary' ?>"><?= $t['question_count'] ?></span></td>
+                      <td><span class="badge bg-<?= $t['response_count'] > 0 ? 'success' : 'secondary' ?>"><?= $t['response_count'] ?></span></td>
+                      <td>
+                        <span class="badge bg-<?= $t['is_active'] ? 'success' : 'secondary' ?>">
+                          <?= $t['is_active'] ? 'Active' : 'Inactive' ?>
+                        </span>
+                        <br>
+                        <span class="badge bg-<?= $t['is_pretest'] ? 'info' : 'primary' ?>">
+                          <?= $t['is_pretest'] ? 'Pre' : 'Post' ?>
+                        </span>
+                      </td>
+                      <td><small><?= $t['created_at'] ? date('M j, Y', strtotime($t['created_at'])) : 'N/A' ?></small></td>
+                    </tr>
+                  <?php endforeach; ?>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-      </main>
-    </div>
+
+        <div class="col-lg-4 mb-4">
+          <div class="chart-container">
+            <h5 class="card-title mb-3">Recent Activity</h5>
+            <?php if (count($recent_responses) > 0): ?>
+              <div class="list-group list-group-flush">
+                <?php foreach ($recent_responses as $r): ?>
+                  <div class="list-group-item px-0 border-start-0 border-end-0">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <div class="me-2">
+                        <small class="fw-bold"><?= htmlspecialchars($r['test_title']) ?></small>
+                        <br>
+                        <small class="text-muted">
+                          <?= htmlspecialchars($r['first_name'] . ' ' . $r['last_name']) ?>
+                          <span class="badge bg-<?= $r['is_pretest'] === 't' ? 'info' : 'primary' ?>" style="font-size:0.6rem;">
+                            <?= $r['is_pretest'] === 't' ? 'Pre' : 'Post' ?>
+                          </span>
+                        </small>
+                      </div>
+                      <div class="text-end">
+                        <?php if ($r['submitted_at']): ?>
+                          <span class="badge bg-<?= $r['score'] >= 60 ? 'success' : ($r['score'] >= 40 ? 'warning' : 'danger') ?>">
+                            <?= $r['score'] ?>%
+                          </span>
+                          <br>
+                          <small class="text-muted"><?= date('M j', strtotime($r['submitted_at'])) ?></small>
+                        <?php else: ?>
+                          <span class="badge bg-secondary">In Progress</span>
+                        <?php endif; ?>
+                      </div>
+                    </div>
+                  </div>
+                <?php endforeach; ?>
+              </div>
+              <div class="text-center mt-3">
+                <a href="responses.php" class="btn btn-sm btn-outline-primary">View All Responses</a>
+              </div>
+            <?php else: ?>
+              <p class="text-muted text-center">No responses yet.</p>
+            <?php endif; ?>
+          </div>
+          <div class="chart-container mt-3">
+            <h5 class="card-title mb-3">Create New Test</h5>
+            <form method="post">
+              <div class="mb-3">
+                <label for="title" class="form-label">Test Title</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+              </div>
+              <div class="mb-3">
+                <label for="training_ids" class="form-label">Training Sessions</label>
+                <select class="form-select" id="training_ids" name="training_ids[]" multiple required style="min-height: 100px;">
+                  <?php foreach ($trainings as $tr): ?>
+                    <option value="<?= $tr['training_id'] ?>">
+                      <?= htmlspecialchars($tr['course_name'] ?? 'Training') ?> -
+                      Session <?= htmlspecialchars($tr['training_id'] ?? '') ?>
+                    </option>
+                  <?php endforeach; ?>
+                </select>
+                <small class="text-muted">Hold Ctrl (or Cmd) to select multiple</small>
+              </div>
+              <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="2"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="time_limit_minutes" class="form-label">Time Limit (minutes)</label>
+                <input type="number" class="form-control" id="time_limit_minutes" name="time_limit_minutes"
+                  min="0" placeholder="0 for no time limit">
+              </div>
+              <div class="row mb-3">
+                <div class="col-6">
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="is_pretest" name="is_pretest">
+                    <label class="form-check-label" for="is_pretest">Pre Test</label>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="is_active" name="is_active" checked>
+                    <label class="form-check-label" for="is_active">Active</label>
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">
+                <i class="bi bi-plus-circle me-2"></i>Create Test
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

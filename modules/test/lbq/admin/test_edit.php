@@ -466,11 +466,9 @@ $qtypes = [
 </head>
 
 <body>
+<?php include 'sidebar.php'; ?>
   <div class="container-fluid">
-    <div class="row">
-      <?php include 'sidebar.php'; ?>
-
-      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+      <main class="px-md-4 py-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <div>
             <h1 class="h2">Edit Test: <?= htmlspecialchars($test['title']) ?></h1>
@@ -758,7 +756,6 @@ $qtypes = [
           </div>
         </div>
       </main>
-    </div>
   </div>
 
   <!-- Single Modal Container - Rendered once for all questions -->
