@@ -12,7 +12,7 @@ class Quiz
     public function listTests($limit = 100, $active_only = false)
     {
         $sql = "SELECT t.*,
-                (SELECT COUNT(*) FROM lbquiz_test_questions tq WHERE tq.test_id = t.id) as question_count,
+                (SELECT COUNT(*) FROM lbquiz_test_questions tq JOIN quiz_questions q ON q.id = tq.quiz_question_id WHERE tq.test_id = t.id) as question_count,
                 (SELECT string_agg(DISTINCT tc.course_name || ' - Session ' || u.tid, '; ')
                  FROM (
                      SELECT t.training_id AS tid
