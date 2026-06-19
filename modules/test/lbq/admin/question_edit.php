@@ -237,11 +237,15 @@ if ($question_id && !$question) {
                                     </div>
                                     <div id="answers-container" class="mb-3">
                                         <?php if ($question && in_array($question['qtype'], [1, 2])): ?>
+                                            <?php $letterLabels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']; ?>
                                             <?php foreach ($answers as $index => $answer): ?>
                                                 <div class="answer-row" data-index="<?= $index ?>">
                                                     <input type="hidden" name="answer_id[]" value="<?= $answer['id'] ?>">
                                                     <div class="row align-items-center">
-                                                        <div class="col-md-7">
+                                                        <div class="col-md-1 text-center">
+                                                            <span class="answer-letter badge bg-secondary"><?= $letterLabels[$index] ?? '?' ?></span>
+                                                        </div>
+                                                        <div class="col-md-6">
                                                             <textarea class="form-control tinymce-editor" name="answer_text[]" rows="2" placeholder="Answer text"><?= htmlspecialchars($answer['text']) ?></textarea>
                                                         </div>
                                                         <div class="col-md-3">
@@ -375,26 +379,51 @@ if ($question_id && !$question) {
             });
             toggleSections();
 
+            const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+            function reindexLetters() {
+                const rows = document.querySelectorAll('#answers-container .answer-row');
+                rows.forEach(function(row, idx) {
+                    const badge = row.querySelector('.answer-letter');
+                    if (badge) {
+                        badge.textContent = letters[idx] || '?';
+                    }
+                    const radio = row.querySelector('input[type="radio"][name^="answer_correct"], input[type="radio"][name^="new_answer_correct"]');
+                    if (radio) {
+                        radio.value = idx;
+                    }
+                    // Update checkboxes too for multi-choice
+                    const checkboxes = row.querySelectorAll('input[type="checkbox"][name^="answer_correct"], input[type="checkbox"][name^="new_answer_correct"]');
+                    checkboxes.forEach(function(cb) {
+                        cb.value = idx;
+                    });
+                });
+            }
+
             // Add answer row
-            let newAnswerCount = 0;
             document.getElementById('add-answer').addEventListener('click', function() {
                 const container = document.getElementById('answers-container');
                 const qtype = parseInt(document.getElementById('qtype').value);
                 const isSingle = qtype === 1;
                 const inputType = isSingle ? 'radio' : 'checkbox';
                 const name = isSingle ? 'new_answer_correct' : 'new_answer_correct[]';
+                const rowCount = container.querySelectorAll('.answer-row').length;
+                const letter = letters[rowCount] || '?';
 
                 const row = document.createElement('div');
                 row.className = 'answer-row';
                 row.innerHTML = `
                     <input type="hidden" name="answer_id[]" value="">
                     <div class="row align-items-center">
-                        <div class="col-md-7">
+                        <div class="col-md-1 text-center">
+                            <span class="answer-letter badge bg-secondary">${letter}</span>
+                        </div>
+                        <div class="col-md-6">
                             <textarea class="form-control tinymce-editor" name="new_answer_text[]" rows="2" placeholder="Answer text"></textarea>
                         </div>
                         <div class="col-md-3">
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="${inputType}" name="${name}" value="${newAnswerCount}">
+                                <input class="form-check-input" type="${inputType}" name="${name}" value="${rowCount}">
                                 <label class="form-check-label">Correct</label>
                             </div>
                         </div>
@@ -404,7 +433,6 @@ if ($question_id && !$question) {
                     </div>
                 `;
                 container.appendChild(row);
-                newAnswerCount++;
 
                 const textarea = row.querySelector('textarea');
                 if (textarea && typeof tinymce !== 'undefined') {
@@ -429,12 +457,14 @@ if ($question_id && !$question) {
                         tinymce.remove('#' + ta.id);
                     }
                     row.remove();
+                    reindexLetters();
                 });
             });
 
             document.querySelectorAll('.remove-answer').forEach(button => {
                 button.addEventListener('click', function() {
                     this.closest('.answer-row').remove();
+                    reindexLetters();
                 });
             });
 

@@ -18,17 +18,30 @@ if (!$response_id) {
 
 // Get response details with complete information
 $stmt = $pdo->prepare("
-    SELECT r.*, t.title as test_title, t.training_id, t.description as test_description,
+    SELECT r.*, t.title as test_title, tp.training_id, t.description as test_description,
            t.time_limit_minutes, t.is_pretest, t.is_active,
-           ts.training_type, ts.start_date, ts.end_date, tc.course_name,
+           ts.training_type, ts.training_approach, ts.program, ts.quarter,
+           ts.start_date, ts.end_date, ts.ceu_points, ts.remarks,
+           ts.facility_id as training_facility_id, ts.host_country_id,
+           tc.course_name,
+           tt.type_name as training_type_name,
+           ta.approach_name,
+           p.program_name,
+           v.venue_name, v.facility_id as venue_facility_id,
+           tfac.facility_name as training_facility_name,
            tp.participant_id, part.first_name, part.last_name, part.email,
            part.phone, part.title_salutation, part.role_id, part.facility_id,
            f.facility_name, pr.role_name
     FROM lbquiz_responses r 
     JOIN lbquiz_tests t ON t.id = r.test_id
-    LEFT JOIN training_sessions ts ON ts.training_id = t.training_id
-    LEFT JOIN training_courses tc ON tc.course_id = ts.course_id
     LEFT JOIN training_participation tp ON tp.participation_id = r.participation_id
+    LEFT JOIN training_sessions ts ON ts.training_id = tp.training_id
+    LEFT JOIN training_courses tc ON tc.course_id = ts.course_id
+    LEFT JOIN training_types tt ON tt.training_type_id = ts.training_type_id
+    LEFT JOIN training_approaches ta ON ta.approach_id = ts.approach_id
+    LEFT JOIN programs p ON p.program_id = ts.program_id
+    LEFT JOIN venues v ON v.venue_id = ts.venue_id
+    LEFT JOIN facilities tfac ON tfac.facility_id = v.facility_id
     LEFT JOIN training_participants part ON part.participant_id = tp.participant_id
     LEFT JOIN facilities f ON f.facility_id = part.facility_id
     LEFT JOIN participant_role pr ON pr.role_id = part.role_id
@@ -332,7 +345,13 @@ $qtypes = [
                                             <?= $response['is_pretest'] ? 'Pre Test' : 'Post Test' ?>
                                         </span><br>
                                         <strong>Course:</strong> <?= htmlspecialchars($response['course_name'] ?? 'N/A') ?><br>
-                                        <strong>Training:</strong> <?= htmlspecialchars($response['training_type'] ?? 'N/A') ?>
+                                        <strong>Training Session ID:</strong> <?= htmlspecialchars($response['training_id'] ?? 'N/A') ?><br>
+                                        <strong>Training Type:</strong>
+                                        <?= htmlspecialchars($response['training_type_name'] ?: $response['training_type'] ?: 'N/A') ?><br>
+                                        <strong>Training Approach:</strong>
+                                        <?= htmlspecialchars($response['approach_name'] ?: $response['training_approach'] ?: 'N/A') ?><br>
+                                        <strong>Program:</strong>
+                                        <?= htmlspecialchars($response['program_name'] ?: $response['program'] ?: 'N/A') ?>
                                     </div>
                                     <div class="col-md-6">
                                         <strong>Time Limit:</strong>
@@ -341,16 +360,25 @@ $qtypes = [
                                         <span class="badge bg-<?= $response['is_active'] ? 'success' : 'secondary' ?>">
                                             <?= $response['is_active'] ? 'Active' : 'Inactive' ?>
                                         </span><br>
-                                        <strong>Test ID:</strong> <?= $response['test_id'] ?><br>
                                         <strong>Training Dates:</strong>
                                         <?= $response['start_date'] ? date('M j, Y', strtotime($response['start_date'])) : 'N/A' ?> -
-                                        <?= $response['end_date'] ? date('M j, Y', strtotime($response['end_date'])) : 'N/A' ?>
+                                        <?= $response['end_date'] ? date('M j, Y', strtotime($response['end_date'])) : 'N/A' ?><br>
+                                        <strong>Quarter:</strong> <?= htmlspecialchars($response['quarter'] ?? 'N/A') ?><br>
+                                        <strong>CEU Points:</strong> <?= htmlspecialchars($response['ceu_points'] ?? 'N/A') ?><br>
+                                        <strong>Venue:</strong> <?= htmlspecialchars($response['venue_name'] ?? 'N/A') ?><br>
+                                        <strong>Training Facility:</strong> <?= htmlspecialchars($response['training_facility_name'] ?? 'N/A') ?><br>
+                                        <strong>Test ID:</strong> <?= $response['test_id'] ?>
                                     </div>
                                 </div>
                                 <?php if ($response['test_description']): ?>
                                     <hr>
                                     <strong>Description:</strong><br>
                                     <?= nl2br(htmlspecialchars($response['test_description'])) ?>
+                                <?php endif; ?>
+                                <?php if ($response['remarks']): ?>
+                                    <hr>
+                                    <strong>Training Remarks:</strong><br>
+                                    <?= nl2br(htmlspecialchars($response['remarks'])) ?>
                                 <?php endif; ?>
                             </div>
                         </div>

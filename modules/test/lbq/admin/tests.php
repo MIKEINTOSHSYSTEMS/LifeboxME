@@ -4,7 +4,7 @@ require __DIR__ . '/../src/model/Quiz.php';
 require __DIR__ . '/session_helper.php';
 $quiz = new Quiz($pdo);
 
-$allow_sort = ['t.id', 't.title', 't.is_active', 't.is_pretest', 't.time_limit_minutes', 't.created_at', 'qcount', 'rcount'];
+$allow_sort = ['t.id', 't.title', 't.is_active', 't.is_pretest', 't.time_limit_minutes', 't.no_tries', 't.created_at', 'qcount', 'rcount'];
 
 // AJAX endpoints: get training sessions filtered by course
 if (isset($_GET['ajax']) && $_GET['ajax'] === 'get_trainings_by_course') {
@@ -185,20 +185,74 @@ foreach ($tests as &$test) {
 }
 unset($test);
 
-// POST: create test
+// POST: create test or bulk action
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $title = trim($_POST['title'] ?? '');
-    $training_ids = $_POST['training_ids'] ?? [];
-    $description = trim($_POST['description'] ?? '');
-    $time_limit = !empty($_POST['time_limit_minutes']) ? intval($_POST['time_limit_minutes']) : null;
-    $is_pretest = !empty($_POST['is_pretest']);
-    $is_active = !empty($_POST['is_active']);
-    if ($title && !empty($training_ids)) {
-        $test_id = $quiz->createTest($training_ids, $title, $description, $time_limit, $is_pretest, $is_active);
-        if ($test_id) {
-            header("Location: test_edit.php?id=$test_id");
-            exit;
+    // Create test
+    if (isset($_POST['create_test'])) {
+        $title = trim($_POST['title'] ?? '');
+        $training_ids = $_POST['training_ids'] ?? [];
+        $description = trim($_POST['description'] ?? '');
+        $time_limit = !empty($_POST['time_limit_minutes']) ? intval($_POST['time_limit_minutes']) : null;
+        $is_pretest = !empty($_POST['is_pretest']);
+        $is_active = !empty($_POST['is_active']);
+        $no_tries = isset($_POST['no_tries']) ? intval($_POST['no_tries']) : 0;
+        if ($title && !empty($training_ids)) {
+            $test_id = $quiz->createTest($training_ids, $title, $description, $time_limit, $is_pretest, $is_active, $no_tries);
+            if ($test_id) {
+                header("Location: test_edit.php?id=$test_id");
+                exit;
+            }
         }
+    }
+
+    // Bulk action
+    if (isset($_POST['bulk_action']) && isset($_POST['test_ids']) && is_array($_POST['test_ids'])) {
+        $test_ids = array_map('intval', $_POST['test_ids']);
+        $test_ids = array_filter($test_ids, fn($v) => $v > 0);
+        $action = $_POST['bulk_action'];
+        $affected = 0;
+        $errors = [];
+
+        foreach ($test_ids as $tid) {
+            try {
+                switch ($action) {
+                    case 'activate':
+                        $pdo->prepare("UPDATE lbquiz_tests SET is_active = true WHERE id = ?")->execute([$tid]);
+                        $affected++;
+                        break;
+                    case 'deactivate':
+                        $pdo->prepare("UPDATE lbquiz_tests SET is_active = false WHERE id = ?")->execute([$tid]);
+                        $affected++;
+                        break;
+                    case 'make_pretest':
+                        $pdo->prepare("UPDATE lbquiz_tests SET is_pretest = true WHERE id = ?")->execute([$tid]);
+                        $affected++;
+                        break;
+                    case 'make_posttest':
+                        $pdo->prepare("UPDATE lbquiz_tests SET is_pretest = false WHERE id = ?")->execute([$tid]);
+                        $affected++;
+                        break;
+                    case 'duplicate':
+                        $new_id = $quiz->duplicateTest($tid);
+                        if ($new_id) $affected++;
+                        else $errors[] = "Failed to duplicate test ID $tid";
+                        break;
+                    case 'delete':
+                        $quiz->deleteTest($tid);
+                        $affected++;
+                        break;
+                }
+            } catch (Exception $e) {
+                $errors[] = "Error on test ID $tid: " . $e->getMessage();
+            }
+        }
+
+        $msg = "Bulk action '$action' completed. $affected test(s) affected.";
+        if (!empty($errors)) $msg .= " Errors: " . implode('; ', $errors);
+        $_SESSION['flash_message'] = $msg;
+        $_SESSION['flash_type'] = empty($errors) ? 'success' : 'warning';
+        header("Location: tests.php");
+        exit;
     }
 }
 
@@ -215,6 +269,18 @@ if (isset($_GET['duplicate'])) {
         $_SESSION['flash_type'] = "danger";
         header("Location: tests.php");
     }
+    exit;
+}
+
+// Individual delete
+if (isset($_GET['delete'])) {
+    $del_id = intval($_GET['delete']);
+    if ($del_id > 0) {
+        $quiz->deleteTest($del_id);
+        $_SESSION['flash_message'] = "Test #$del_id deleted successfully.";
+        $_SESSION['flash_type'] = "success";
+    }
+    header("Location: tests.php");
     exit;
 }
 
@@ -359,85 +425,112 @@ function sortLink($col, $label, $current_col, $current_dir, $qs) {
                     </div>
                     <div class="card-body p-0">
                         <?php if (count($tests) > 0): ?>
-                            <div class="table-responsive">
-                                <table class="table table-hover mb-0">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th class="sortable"><?= sortLink('t.id', 'ID', $sort_col, $sort_dir, $query_string) ?></th>
-                                            <th class="sortable"><?= sortLink('t.title', 'Title', $sort_col, $sort_dir, $query_string) ?></th>
-                                            <th>Course</th>
-                                            <th>Training Sessions</th>
-                                            <th class="sortable"><?= sortLink('qcount', 'Questions', $sort_col, $sort_dir, $query_string) ?></th>
-                                            <th class="sortable"><?= sortLink('rcount', 'Responses', $sort_col, $sort_dir, $query_string) ?></th>
-                                            <th class="sortable"><?= sortLink('t.time_limit_minutes', 'Time Limit', $sort_col, $sort_dir, $query_string) ?></th>
-                                            <th class="sortable"><?= sortLink('t.is_active', 'Status', $sort_col, $sort_dir, $query_string) ?></th>
-                                            <th class="sortable"><?= sortLink('t.is_pretest', 'Type', $sort_col, $sort_dir, $query_string) ?></th>
-                                            <th class="sortable"><?= sortLink('t.created_at', 'Created At', $sort_col, $sort_dir, $query_string) ?></th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($tests as $t): ?>
+                            <form id="bulk-form" method="post">
+                                <div class="p-3 border-bottom bg-light d-flex align-items-center gap-3 flex-wrap">
+                                    <div class="form-check mb-0">
+                                        <input class="form-check-input" type="checkbox" id="select-all">
+                                        <label class="form-check-label small" for="select-all">Select All</label>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <select name="bulk_action" class="form-select form-select-sm" style="width: auto;" required>
+                                            <option value="">Bulk Action</option>
+                                            <option value="activate">Activate</option>
+                                            <option value="deactivate">Deactivate</option>
+                                            <option value="make_pretest">Make Pre Test</option>
+                                            <option value="make_posttest">Make Post Test</option>
+                                            <option value="duplicate">Duplicate</option>
+                                            <option value="delete">Delete</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary" onclick="return confirmBulkAction()">Apply</button>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover mb-0">
+                                        <thead class="table-light">
                                             <tr>
-                                                <td><?= $t['id'] ?></td>
-                                                <td><?= htmlspecialchars($t['title']) ?></td>
-                                                <td>
-                                                    <?php if (!empty($t['course_name'])): ?>
-                                                        <span class="badge bg-primary"><?= htmlspecialchars($t['course_name']) ?></span>
-                                                    <?php else: ?>
-                                                        <span class="badge bg-secondary">N/A</span>
-                                                    <?php endif; ?>
-                                                </td>
-                                                <td>
-                                                    <?php if (!empty($t['session_info'])): ?>
-                                                        <?php foreach (explode('; ', $t['session_info']) as $si): ?>
-                                                            <div><?= htmlspecialchars($si) ?></div>
-                                                        <?php endforeach; ?>
-                                                    <?php else: ?>
-                                                        Session: <?= htmlspecialchars($t['training_id'] ?? 'N/A') ?>
-                                                    <?php endif; ?>
-                                                </td>
-                                                <td class="text-center">
-                                                    <span class="badge bg-info question-count-badge"><?= $t['qcount'] ?></span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <span class="badge bg-secondary"><?= $t['rcount'] ?></span>
-                                                </td>
-                                                <td><?= $t['time_limit_minutes'] ? $t['time_limit_minutes'] . ' min' : 'No limit' ?></td>
-                                                <td>
-                                                    <span class="badge bg-<?= $t['is_active'] ? 'success' : 'secondary' ?>">
-                                                        <?= $t['is_active'] ? 'Active' : 'Inactive' ?>
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span class="badge bg-<?= $t['is_pretest'] ? 'info' : 'primary' ?>">
-                                                        <?= $t['is_pretest'] ? 'Pre Test' : 'Post Test' ?>
-                                                    </span>
-                                                </td>
-                                                <td><?= $t['created_at'] ? date('M j, Y g:i A', strtotime($t['created_at'])) : 'N/A' ?></td>
-                                                <td>
-                                                    <div class="btn-group" role="group">
-                                                        <a href="test_edit.php?id=<?= $t['id'] ?>" class="btn btn-sm btn-outline-primary" title="Edit Test">
-                                                            <i class="bi bi-pencil"></i>
-                                                        </a>
-                                                        <a href="tests.php?duplicate=<?= $t['id'] ?>" class="btn btn-sm btn-outline-info" title="Duplicate Test" onclick="return confirm('Duplicate this test with all questions?');">
-                                                            <i class="bi bi-files"></i>
-                                                        </a>
-                                                        <a href="responses.php?test_id=<?= $t['id'] ?>" class="btn btn-sm btn-outline-secondary" title="View Responses">
-                                                            <i class="bi bi-clipboard-data"></i>
-                                                        </a>
-                                                        <?php if ($t['qcount'] > 0): ?>
-                                                            <a href="../public/take_test.php?test_id=<?= $t['id'] ?>" class="btn btn-sm btn-outline-success" target="_blank" title="Preview Test">
-                                                                <i class="bi bi-eye"></i>
-                                                            </a>
-                                                        <?php endif; ?>
-                                                    </div>
-                                                </td>
+                                                <th style="width:40px"><input class="form-check-input" type="checkbox" id="select-all-2" onchange="toggleAll(this)"></th>
+                                                <th class="sortable"><?= sortLink('t.id', 'ID', $sort_col, $sort_dir, $query_string) ?></th>
+                                                <th class="sortable"><?= sortLink('t.title', 'Title', $sort_col, $sort_dir, $query_string) ?></th>
+                                                <th>Course</th>
+                                                <th>Training Sessions</th>
+                                                <th class="sortable"><?= sortLink('qcount', 'Questions', $sort_col, $sort_dir, $query_string) ?></th>
+                                                <th class="sortable"><?= sortLink('rcount', 'Responses', $sort_col, $sort_dir, $query_string) ?></th>
+                                                <th class="sortable"><?= sortLink('t.time_limit_minutes', 'Time Limit', $sort_col, $sort_dir, $query_string) ?></th>
+                                                <th class="sortable"><?= sortLink('t.no_tries', 'Max Attempts', $sort_col, $sort_dir, $query_string) ?></th>
+                                                <th class="sortable"><?= sortLink('t.is_active', 'Status', $sort_col, $sort_dir, $query_string) ?></th>
+                                                <th class="sortable"><?= sortLink('t.is_pretest', 'Type', $sort_col, $sort_dir, $query_string) ?></th>
+                                                <th class="sortable"><?= sortLink('t.created_at', 'Created At', $sort_col, $sort_dir, $query_string) ?></th>
+                                                <th>Actions</th>
                                             </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($tests as $t): ?>
+                                                <tr>
+                                                    <td><input class="form-check-input test-checkbox" type="checkbox" name="test_ids[]" value="<?= $t['id'] ?>"></td>
+                                                    <td><?= $t['id'] ?></td>
+                                                    <td><?= htmlspecialchars($t['title']) ?></td>
+                                                    <td>
+                                                        <?php if (!empty($t['course_name'])): ?>
+                                                            <span class="badge bg-primary"><?= htmlspecialchars($t['course_name']) ?></span>
+                                                        <?php else: ?>
+                                                            <span class="badge bg-secondary">N/A</span>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php if (!empty($t['session_info'])): ?>
+                                                            <?php foreach (explode('; ', $t['session_info']) as $si): ?>
+                                                                <div><?= htmlspecialchars($si) ?></div>
+                                                            <?php endforeach; ?>
+                                                        <?php else: ?>
+                                                            Session: <?= htmlspecialchars($t['training_id'] ?? 'N/A') ?>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <span class="badge bg-info question-count-badge"><?= $t['qcount'] ?></span>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <span class="badge bg-secondary"><?= $t['rcount'] ?></span>
+                                                    </td>
+                                                    <td><?= $t['time_limit_minutes'] ? $t['time_limit_minutes'] . ' min' : 'No limit' ?></td>
+                                                    <td><?= ($t['no_tries'] ?? 0) > 0 ? $t['no_tries'] : 'Unlimited' ?></td>
+                                                    <td>
+                                                        <span class="badge bg-<?= $t['is_active'] ? 'success' : 'secondary' ?>">
+                                                            <?= $t['is_active'] ? 'Active' : 'Inactive' ?>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge bg-<?= $t['is_pretest'] ? 'info' : 'primary' ?>">
+                                                            <?= $t['is_pretest'] ? 'Pre Test' : 'Post Test' ?>
+                                                        </span>
+                                                    </td>
+                                                    <td><?= $t['created_at'] ? date('M j, Y g:i A', strtotime($t['created_at'])) : 'N/A' ?></td>
+                                                    <td>
+                                                        <div class="btn-group" role="group">
+                                                            <a href="test_edit.php?id=<?= $t['id'] ?>" class="btn btn-sm btn-outline-primary" title="Edit Test">
+                                                                <i class="bi bi-pencil"></i>
+                                                            </a>
+                                                            <a href="tests.php?duplicate=<?= $t['id'] ?>" class="btn btn-sm btn-outline-info" title="Duplicate Test" onclick="return confirm('Duplicate this test with all questions?');">
+                                                                <i class="bi bi-files"></i>
+                                                            </a>
+                                                            <a href="responses.php?test_id=<?= $t['id'] ?>" class="btn btn-sm btn-outline-secondary" title="View Responses">
+                                                                <i class="bi bi-clipboard-data"></i>
+                                                            </a>
+                                                            <?php if ($t['qcount'] > 0): ?>
+                                                                <a href="preview_test.php?id=<?= $t['id'] ?>" class="btn btn-sm btn-outline-success" target="" title="Preview Test">
+                                                                    <i class="bi bi-eye"></i>
+                                                                </a>
+                                                            <?php endif; ?>
+                                                            <a href="tests.php?delete=<?= $t['id'] ?>" class="btn btn-sm btn-outline-danger" title="Delete Test" onclick="return confirm('Delete test #<?= $t['id'] ?>? This cannot be undone.');">
+                                                                <i class="bi bi-trash"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
 
                             <?php if ($total_pages > 1): ?>
                             <div class="d-flex justify-content-between align-items-center p-3 border-top">
@@ -536,6 +629,12 @@ function sortLink($col, $label, $current_col, $current_dir, $qs) {
                                 <small class="text-muted">Leave empty or 0 for no time limit</small>
                             </div>
                             <div class="col-md-4">
+                                <label for="no_tries" class="form-label">Max Attempts</label>
+                                <input type="number" class="form-control" id="no_tries" name="no_tries"
+                                    min="0" value="0" placeholder="0 = unlimited">
+                                <small class="text-muted">0 means unlimited attempts</small>
+                            </div>
+                            <div class="col-md-4">
                                 <div class="form-check form-switch mt-4">
                                     <input class="form-check-input" type="checkbox" id="is_pretest" name="is_pretest">
                                     <label class="form-check-label" for="is_pretest">This is a Pre Test</label>
@@ -623,6 +722,35 @@ function sortLink($col, $label, $current_col, $current_dir, $qs) {
                     });
                 });
         });
+
+        // Bulk action helpers
+        function toggleAll(master) {
+            document.querySelectorAll('.test-checkbox').forEach(function(cb) {
+                cb.checked = master.checked;
+            });
+            var s = document.getElementById('select-all');
+            if (s) s.checked = master.checked;
+        }
+        document.getElementById('select-all')?.addEventListener('change', function() {
+            toggleAll(this);
+        });
+
+        function confirmBulkAction() {
+            var checked = document.querySelectorAll('.test-checkbox:checked').length;
+            if (checked === 0) {
+                alert('No tests selected.');
+                return false;
+            }
+            var action = document.querySelector('[name="bulk_action"]').value;
+            if (!action) {
+                alert('Please select a bulk action.');
+                return false;
+            }
+            if (action === 'delete') {
+                return confirm('Delete ' + checked + ' test(s)? This cannot be undone.');
+            }
+            return true;
+        }
     </script>
 </body>
 </html>

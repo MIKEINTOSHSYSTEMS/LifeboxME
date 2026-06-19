@@ -44,7 +44,7 @@ class Quiz
         return $stmt->fetch();
     }
 
-    public function createTest($training_ids, $title, $description = null, $time_limit = null, $is_pretest = false, $is_active = true)
+    public function createTest($training_ids, $title, $description = null, $time_limit = null, $is_pretest = false, $is_active = true, $no_tries = 0)
     {
         if (is_array($training_ids)) {
             $training_ids = array_values(array_map('intval', $training_ids));
@@ -57,8 +57,8 @@ class Quiz
 
         $stmt = $this->pdo->prepare(
             "INSERT INTO lbquiz_tests
-        (training_id, title, description, time_limit_minutes, is_pretest, is_active)
-        VALUES (:tid, :title, :desc, :time, :pre, :active) RETURNING id"
+        (training_id, title, description, time_limit_minutes, is_pretest, is_active, no_tries)
+        VALUES (:tid, :title, :desc, :time, :pre, :active, :tries) RETURNING id"
         );
 
         $stmt->bindValue(':tid', $primary_id, PDO::PARAM_INT);
@@ -73,6 +73,7 @@ class Quiz
 
         $stmt->bindValue(':pre', $is_pretest ? 'true' : 'false', PDO::PARAM_STR);
         $stmt->bindValue(':active', $is_active ? 'true' : 'false', PDO::PARAM_STR);
+        $stmt->bindValue(':tries', max(0, (int)$no_tries), PDO::PARAM_INT);
 
         $stmt->execute();
         $row = $stmt->fetch();
@@ -85,14 +86,15 @@ class Quiz
         return $test_id;
     }
 
-    public function updateTest($id, $title, $description, $time_limit, $is_active, $is_pretest, $training_ids = null)
+    public function updateTest($id, $title, $description, $time_limit, $is_active, $is_pretest, $training_ids = null, $no_tries = 0)
     {
         $sql = "UPDATE lbquiz_tests SET 
                 title = :title, 
                 description = :desc, 
                 time_limit_minutes = :time,
                 is_active = :active, 
-                is_pretest = :pre";
+                is_pretest = :pre,
+                no_tries = :tries";
 
         $params = [
             ':title' => $title,
@@ -100,6 +102,7 @@ class Quiz
             ':time' => ($time_limit === null || $time_limit === '') ? null : (int)$time_limit,
             ':active' => $is_active ? 'true' : 'false',
             ':pre' => $is_pretest ? 'true' : 'false',
+            ':tries' => max(0, (int)$no_tries),
             ':id' => (int)$id
         ];
 
@@ -226,6 +229,17 @@ class Quiz
         $stmt = $this->pdo->prepare("DELETE FROM lbquiz_tests WHERE id = :id");
         $stmt->execute([':id' => $id]);
         return $stmt->rowCount();
+    }
+
+    public function getAttemptCount($test_id, $participant_id)
+    {
+        $stmt = $this->pdo->prepare("
+            SELECT COUNT(*) FROM lbquiz_responses r
+            JOIN training_participation tp ON tp.participation_id = r.participation_id
+            WHERE tp.participant_id = :pid AND r.test_id = :tid AND r.submitted_at IS NOT NULL
+        ");
+        $stmt->execute([':pid' => $participant_id, ':tid' => $test_id]);
+        return (int)$stmt->fetchColumn();
     }
 
     public function getTestQuestions($test_id)

@@ -15,26 +15,29 @@ $stmt = $pdo->prepare("SELECT * FROM training_participants WHERE participant_id 
 $stmt->execute([':id' => $participant_id]);
 $participant = $stmt->fetch();
 
-// Get participant's training sessions
+// Get participant's training sessions (no duplicates)
 $stmt = $pdo->prepare("
-    SELECT DISTINCT p.*, t.title as training_title, t.description as training_description
+    SELECT DISTINCT p.*, tc.course_name, ts.quarter,
+           ts.start_date, ts.end_date, tt.type_name as training_type
     FROM training_participation p
-    LEFT JOIN lbquiz_tests t ON (
-        t.training_id = p.training_id
-        OR EXISTS (SELECT 1 FROM lbquiz_test_sessions ts WHERE ts.test_id = t.id AND ts.training_id = p.training_id)
-    )
+    LEFT JOIN training_sessions ts ON ts.training_id = p.training_id
+    LEFT JOIN training_courses tc ON tc.course_id = ts.course_id
+    LEFT JOIN training_types tt ON tt.training_type_id = ts.training_type_id
     WHERE p.participant_id = :id
     ORDER BY p.created_at DESC
 ");
 $stmt->execute([':id' => $participant_id]);
 $trainings = $stmt->fetchAll();
 
-// Get test results
+// Get test results with course info
 $stmt = $pdo->prepare("
-    SELECT r.*, t.title as test_title, t.is_pretest, t.training_id
+    SELECT r.*, t.title as test_title, t.is_pretest, t.training_id,
+           tc.course_name, ts.quarter
     FROM lbquiz_responses r
     LEFT JOIN lbquiz_tests t ON t.id = r.test_id
-    WHERE r.userid = :id OR r.participation_id IN (
+    LEFT JOIN training_sessions ts ON ts.training_id = COALESCE(t.training_id, (SELECT MIN(ts2.training_id) FROM lbquiz_test_sessions ts2 WHERE ts2.test_id = t.id))
+    LEFT JOIN training_courses tc ON tc.course_id = ts.course_id
+    WHERE r.participation_id IN (
         SELECT participation_id FROM training_participation WHERE participant_id = :id
     )
     ORDER BY r.submitted_at DESC
@@ -64,6 +67,25 @@ foreach ($trainings as $training) {
         'test_count' => $score_data['test_count'] ?? 0
     ];
 }
+
+// Aggregate scores by course
+$course_perf = $pdo->prepare("
+    SELECT tc.course_name,
+           AVG(CASE WHEN t.is_pretest = true THEN r.score END) as avg_pretest,
+           AVG(CASE WHEN t.is_pretest = false THEN r.score END) as avg_posttest,
+           COUNT(r.id) as total_tests
+    FROM lbquiz_responses r
+    LEFT JOIN lbquiz_tests t ON t.id = r.test_id
+    LEFT JOIN training_sessions ts ON ts.training_id = COALESCE(t.training_id, (SELECT MIN(ts2.training_id) FROM lbquiz_test_sessions ts2 WHERE ts2.test_id = t.id))
+    LEFT JOIN training_courses tc ON tc.course_id = ts.course_id
+    WHERE r.participation_id IN (
+        SELECT participation_id FROM training_participation WHERE participant_id = :id
+    )
+    GROUP BY tc.course_name
+    ORDER BY tc.course_name
+");
+$course_perf->execute([':id' => $participant_id]);
+$course_performance = $course_perf->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -326,10 +348,10 @@ foreach ($trainings as $training) {
                                 ?>
                                     <div class="list-group-item border-0 px-0">
                                         <div class="d-flex justify-content-between align-items-start mb-2">
-                                            <h6 class="mb-1"><?= htmlspecialchars($training['training_title'] ?? 'Training #' . $training['training_id']) ?></h6>
-                                            <span class="badge bg-primary">Training</span>
+                                            <h6 class="mb-1"><?= htmlspecialchars($training['course_name'] ?? 'Training #' . $training['training_id']) ?></h6>
+                                            <span class="badge bg-primary"><?= htmlspecialchars($training['training_type'] ?? 'Session') ?> &middot; Q<?= htmlspecialchars($training['quarter'] ?? '?') ?></span>
                                         </div>
-                                        <p class="text-muted small mb-2"><?= htmlspecialchars($training['training_description'] ?? '') ?></p>
+                                        <p class="text-muted small mb-2"><?= $training['start_date'] ? date('M j, Y', strtotime($training['start_date'])) . ' — ' . date('M j, Y', strtotime($training['end_date'])) : '' ?></p>
 
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div>
@@ -450,10 +472,10 @@ foreach ($trainings as $training) {
                     </div>
                     <div class="card-body">
                         <?php if (count($results) > 0): ?>
-                            <canvas id="performanceChart" height="250"></canvas>
-                            <div class="mt-3 text-center">
+                            <!-- Overall Average -->
+                            <div class="text-center mb-3">
                                 <p class="mb-1">Overall Average: <strong><?= $avg_score ?>%</strong></p>
-                                <div class="progress mb-3">
+                                <div class="progress mb-2">
                                     <div class="progress-bar bg-<?= $avg_score >= 70 ? 'success' : ($avg_score >= 50 ? 'warning' : 'danger') ?>"
                                         role="progressbar"
                                         style="width: <?= $avg_score ?>%;"
@@ -463,6 +485,36 @@ foreach ($trainings as $training) {
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Pre vs Post by Course Chart -->
+                            <?php if (count($course_performance) > 0): ?>
+                                <canvas id="coursePerfChart" height="200"></canvas>
+                                <div class="mt-3">
+                                    <h6 class="small fw-bold text-muted mb-2">By Course</h6>
+                                    <table class="table table-sm table-borderless mb-0">
+                                        <thead>
+                                            <tr class="small text-muted">
+                                                <th>Course</th>
+                                                <th class="text-center">Pre</th>
+                                                <th class="text-center">Post</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($course_performance as $cp): ?>
+                                                <tr>
+                                                    <td class="small"><?= htmlspecialchars(mb_strimwidth($cp['course_name'] ?? 'N/A', 0, 22, '...')) ?></td>
+                                                    <td class="text-center small">
+                                                        <span class="badge bg-info"><?= round($cp['avg_pretest'] ?? 0) ?>%</span>
+                                                    </td>
+                                                    <td class="text-center small">
+                                                        <span class="badge bg-success"><?= round($cp['avg_posttest'] ?? 0) ?>%</span>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            <?php endif; ?>
                         <?php else: ?>
                             <div class="alert alert-info">
                                 <i class="bi bi-info-circle me-2"></i>
@@ -471,6 +523,17 @@ foreach ($trainings as $training) {
                         <?php endif; ?>
                     </div>
                 </div>
+
+                <?php if (count($course_performance) > 0): ?>
+                <div class="card dashboard-card mt-4">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title mb-0">Pre vs Post Comparison</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="prePostChart" height="250"></canvas>
+                    </div>
+                </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -479,63 +542,70 @@ foreach ($trainings as $training) {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        // Initialize performance chart if results exist
-        <?php if (count($results) > 0): ?>
-            const ctx = document.getElementById('performanceChart').getContext('2d');
-            const performanceChart = new Chart(ctx, {
+        <?php if (count($course_performance) > 0): ?>
+            // Course Performance Chart (horizontal bar)
+            const ctx1 = document.getElementById('coursePerfChart').getContext('2d');
+            new Chart(ctx1, {
                 type: 'bar',
                 data: {
-                    labels: <?= json_encode(array_map(function ($r) {
-                                return substr($r['test_title'], 0, 20) . (strlen($r['test_title']) > 20 ? '...' : '');
-                            }, $results)) ?>,
-                    datasets: [{
-                        label: 'Test Scores (%)',
-                        data: <?= json_encode(array_column($results, 'score')) ?>,
-                        backgroundColor: [
-                            'rgba(13, 110, 253, 0.7)',
-                            'rgba(25, 135, 84, 0.7)',
-                            'rgba(255, 193, 7, 0.7)',
-                            'rgba(220, 53, 69, 0.7)',
-                            'rgba(13, 202, 240, 0.7)',
-                            'rgba(108, 117, 125, 0.7)',
-                            'rgba(111, 66, 193, 0.7)',
-                            'rgba(253, 126, 20, 0.7)',
-                            'rgba(32, 201, 151, 0.7)',
-                            'rgba(214, 51, 132, 0.7)'
-                        ],
-                        borderColor: [
-                            'rgb(13, 110, 253)',
-                            'rgb(25, 135, 84)',
-                            'rgb(255, 193, 7)',
-                            'rgb(220, 53, 69)',
-                            'rgb(13, 202, 240)',
-                            'rgb(108, 117, 125)',
-                            'rgb(111, 66, 193)',
-                            'rgb(253, 126, 20)',
-                            'rgb(32, 201, 151)',
-                            'rgb(214, 51, 132)'
-                        ],
-                        borderWidth: 1
-                    }]
+                    labels: <?= json_encode(array_map(function($c) { return mb_strimwidth($c['course_name'] ?? 'N/A', 0, 18, '..'); }, $course_performance)) ?>,
+                    datasets: [
+                        {
+                            label: 'Pre Test',
+                            data: <?= json_encode(array_map(function($c) { return round($c['avg_pretest'] ?? 0); }, $course_performance)) ?>,
+                            backgroundColor: 'rgba(13, 202, 240, 0.7)',
+                            borderColor: 'rgb(13, 202, 240)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Post Test',
+                            data: <?= json_encode(array_map(function($c) { return round($c['avg_posttest'] ?? 0); }, $course_performance)) ?>,
+                            backgroundColor: 'rgba(25, 135, 84, 0.7)',
+                            borderColor: 'rgb(25, 135, 84)',
+                            borderWidth: 1
+                        }
+                    ]
                 },
                 options: {
                     indexAxis: 'y',
                     responsive: true,
                     plugins: {
-                        legend: {
-                            display: false
-                        },
-                        title: {
-                            display: false
-                        }
+                        legend: { display: false },
+                        title: { display: false }
                     },
                     scales: {
                         x: {
                             beginAtZero: true,
                             max: 100,
-                            ticks: {
-                                callback: function(value) {
-                                    return value + '%';
+                            ticks: { callback: function(v) { return v + '%'; } }
+                        }
+                    }
+                }
+            });
+
+            // Pre vs Post Comparison Chart (doughnut per course - aggregate)
+            const preTotal = <?= round(array_sum(array_column($course_performance, 'avg_pretest')) / max(count($course_performance), 1), 1) ?>;
+            const postTotal = <?= round(array_sum(array_column($course_performance, 'avg_posttest')) / max(count($course_performance), 1), 1) ?>;
+            const ctx2 = document.getElementById('prePostChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Pre Test Avg', 'Post Test Avg'],
+                    datasets: [{
+                        data: [preTotal, postTotal],
+                        backgroundColor: ['rgba(13, 202, 240, 0.8)', 'rgba(25, 135, 84, 0.8)'],
+                        borderColor: ['rgb(13, 202, 240)', 'rgb(25, 135, 84)'],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(ctx) {
+                                    return ctx.label + ': ' + ctx.parsed + '%';
                                 }
                             }
                         }

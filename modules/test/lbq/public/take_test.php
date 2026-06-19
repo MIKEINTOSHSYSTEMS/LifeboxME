@@ -20,17 +20,35 @@ $participation_id = isset($_GET['participation_id']) ? intval($_GET['participati
 if (!$test_id) {
   // Get participant's available tests
   $stmt = $pdo->prepare("
-        SELECT DISTINCT t.*, p.participation_id, t.title as training_title
+        SELECT DISTINCT ON (t.id) t.*, p.participation_id, t.title as training_title
         FROM lbquiz_tests t
         JOIN training_participation p ON (
             p.training_id = t.training_id
             OR EXISTS (SELECT 1 FROM lbquiz_test_sessions ts WHERE ts.test_id = t.id AND ts.training_id = p.training_id)
         )
         WHERE p.participant_id = :pid AND t.is_active = true
-        ORDER BY t.created_at DESC
+        ORDER BY t.id, p.participation_id, t.created_at DESC
     ");
   $stmt->execute([':pid' => $participant_id]);
   $available_tests = $stmt->fetchAll();
+
+  // Get attempt counts for all tests
+  $attempt_counts = [];
+  if (!empty($available_tests)) {
+      $test_ids = array_column($available_tests, 'id');
+      $placeholders = implode(',', array_fill(0, count($test_ids), '?'));
+      $acStmt = $pdo->prepare("
+          SELECT r.test_id, COUNT(*) as cnt
+          FROM lbquiz_responses r
+          JOIN training_participation tp ON tp.participation_id = r.participation_id
+          WHERE tp.participant_id = ? AND r.test_id IN ($placeholders) AND r.submitted_at IS NOT NULL
+          GROUP BY r.test_id
+      ");
+      $acStmt->execute(array_merge([$participant_id], $test_ids));
+      foreach ($acStmt->fetchAll() as $ac) {
+          $attempt_counts[$ac['test_id']] = (int)$ac['cnt'];
+      }
+  }
 
   // Show test selection page
 ?>
@@ -104,12 +122,28 @@ if (!$test_id) {
                               Time limit: <?= $test['time_limit_minutes'] ? $test['time_limit_minutes'] . ' minutes' : 'None' ?>
                             </small>
                           </div>
+                          <?php $noTries = (int)($test['no_tries'] ?? 0); ?>
+                          <?php if ($noTries > 0): ?>
+                            <div class="mb-2">
+                              <small class="text-muted">
+                                <i class="bi bi-arrow-repeat me-1"></i>
+                                Attempts: <?= ($attempt_counts[$test['id']] ?? 0) ?> / <?= $noTries ?>
+                              </small>
+                            </div>
+                          <?php endif; ?>
                         </div>
                         <div class="card-footer bg-transparent">
-                          <a href="take_test.php?test_id=<?= $test['id'] ?>&participation_id=<?= $test['participation_id'] ?>"
-                            class="btn btn-success w-100">
-                            Start Test
-                          </a>
+                          <?php $triesLeft = $noTries > 0 ? $noTries - ($attempt_counts[$test['id']] ?? 0) : 1; ?>
+                          <?php if ($triesLeft > 0): ?>
+                            <a href="take_test.php?test_id=<?= $test['id'] ?>&participation_id=<?= $test['participation_id'] ?>"
+                              class="btn btn-success w-100">
+                              Start Test
+                            </a>
+                          <?php else: ?>
+                            <button class="btn btn-secondary w-100" disabled>
+                              <i class="bi bi-x-circle"></i> Max Attempts Reached
+                            </button>
+                          <?php endif; ?>
                         </div>
                       </div>
                     </div>
@@ -168,6 +202,27 @@ $stmt->execute([
 if ($stmt->fetchColumn() == 0) {
   echo "You don't have access to this test.";
   exit;
+}
+
+// Check max attempts
+$no_tries = isset($test['no_tries']) ? (int)$test['no_tries'] : 0;
+if ($no_tries > 0) {
+    $attempt_count = $quiz->getAttemptCount($test_id, $participant_id);
+    if ($attempt_count >= $no_tries) {
+        echo "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"><title>Attempts Exceeded</title>";
+        echo "<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css\" rel=\"stylesheet\">";
+        echo "<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css\">";
+        echo "</head><body class=\"bg-light\"><div class=\"container py-5\">";
+        echo "<div class=\"row justify-content-center\"><div class=\"col-md-6\">";
+        echo "<div class=\"card shadow\"><div class=\"card-body text-center py-5\">";
+        echo "<i class=\"bi bi-exclamation-triangle text-warning\" style=\"font-size:4rem\"></i>";
+        echo "<h3 class=\"mt-3\">Maximum Attempts Reached</h3>";
+        echo "<p class=\"text-muted\">You have reached the maximum of <strong>$no_tries</strong> attempt(s) for this test.</p>";
+        echo "<p class=\"text-muted\">This test allows only $no_tries attempt(s) per participant.</p>";
+        echo "<a href=\"dashboard.php\" class=\"btn btn-primary\"><i class=\"bi bi-arrow-left\"></i> Back to Dashboard</a>";
+        echo "</div></div></div></div></div></body></html>";
+        exit;
+    }
 }
 
 // Get participant details
@@ -294,6 +349,9 @@ shuffle($questions);
       border-radius: 0.5rem;
       cursor: pointer;
       transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
     }
 
     .answer-option:hover {
@@ -304,6 +362,24 @@ shuffle($questions);
     .answer-option.selected {
       background-color: #e7f1ff;
       border-color: var(--primary);
+    }
+
+    .answer-letter-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #e9ecef;
+      color: #495057;
+      font-size: 0.8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .answer-option.selected .answer-letter-badge {
+      background: var(--primary);
+      color: #fff;
     }
 
     .navigation-buttons {
@@ -499,12 +575,15 @@ shuffle($questions);
             <input type="hidden" name="questions[<?= $index ?>][id]" value="<?= $q['quiz_question_id'] ?>">
             <input type="hidden" name="questions[<?= $index ?>][type]" value="<?= $q['qtype'] ?>">
 
+            <?php $letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']; ?>
+
             <!-- Question Type 1: Single Choice -->
             <?php if ($q['qtype'] == 1): ?>
               <div class="answer-options">
-                <?php foreach ($q['answers'] as $a): ?>
+                <?php foreach ($q['answers'] as $ai => $a): ?>
                   <div class="answer-option" onclick="selectSingleOption(this, <?= $index ?>, <?= $a['id'] ?>)">
-                    <div class="form-check">
+                    <span class="answer-letter-badge"><?= $letters[$ai] ?? '?' ?></span>
+                    <div class="form-check flex-grow-1">
                       <input class="form-check-input" type="radio"
                         name="questions[<?= $index ?>][answer]"
                         id="q<?= $index ?>_a<?= $a['id'] ?>"
@@ -520,9 +599,10 @@ shuffle($questions);
               <!-- Question Type 2: Multiple Choice -->
             <?php elseif ($q['qtype'] == 2): ?>
               <div class="answer-options">
-                <?php foreach ($q['answers'] as $a): ?>
+                <?php foreach ($q['answers'] as $ai => $a): ?>
                   <div class="answer-option" onclick="toggleMultiOption(this, <?= $index ?>, <?= $a['id'] ?>)">
-                    <div class="form-check">
+                    <span class="answer-letter-badge"><?= $letters[$ai] ?? '?' ?></span>
+                    <div class="form-check flex-grow-1">
                       <input class="form-check-input" type="checkbox"
                         name="questions[<?= $index ?>][answers][]"
                         id="q<?= $index ?>_a<?= $a['id'] ?>"

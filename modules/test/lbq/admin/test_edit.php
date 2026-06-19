@@ -115,6 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $time_limit = !empty($_POST['time_limit_minutes']) ? intval($_POST['time_limit_minutes']) : null;
     $is_pretest = isset($_POST['is_pretest']) && $_POST['is_pretest'] === 'on';
     $is_active = isset($_POST['is_active']) && $_POST['is_active'] === 'on';
+    $no_tries = isset($_POST['no_tries']) ? intval($_POST['no_tries']) : 0;
 
     $training_ids = array_values(array_map('intval', $training_ids));
     $training_ids = array_filter($training_ids, fn($v) => $v > 0);
@@ -128,6 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $debug_messages[] = "Time Limit: " . ($time_limit ?? 'null');
     $debug_messages[] = "Is Pretest: " . ($is_pretest ? 'TRUE' : 'FALSE');
     $debug_messages[] = "Is Active: " . ($is_active ? 'TRUE' : 'FALSE');
+    $debug_messages[] = "No Tries: " . $no_tries;
 
     try {
       $updateSql = "UPDATE lbquiz_tests SET 
@@ -135,7 +137,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                       description = :desc, 
                       time_limit_minutes = :time_limit,
                       is_pretest = :is_pretest, 
-                      is_active = :is_active";
+                      is_active = :is_active,
+                      no_tries = :no_tries";
 
       $params = [
         ':title' => $title,
@@ -143,6 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ':time_limit' => $time_limit,
         ':is_pretest' => $is_pretest ? 't' : 'f',
         ':is_active' => $is_active ? 't' : 'f',
+        ':no_tries' => max(0, $no_tries),
         ':id' => $test_id
       ];
 
@@ -579,7 +583,7 @@ $qtypes = [
             <div class="stats-card" style="background: linear-gradient(135deg, #277c99 0%, #44a08d 100%);">
               <h6>Type</h6>
               <h4><span class="badge bg-<?= $test['is_pretest'] ? 'info' : 'primary' ?>"><?= $test['is_pretest'] ? 'Pre Test' : 'Post Test' ?></span></h4>
-              <small>Status: <?= $test['is_active'] ? 'Active' : 'Inactive' ?></small>
+              <small>Status: <?= $test['is_active'] ? 'Active' : 'Inactive' ?> &middot; Max attempts: <?= ($test['no_tries'] ?? 0) > 0 ? $test['no_tries'] : 'Unlimited' ?></small>
             </div>
           </div>
         </div>
@@ -625,6 +629,11 @@ $qtypes = [
                 <div class="col-md-4">
                   <label for="time_limit_minutes" class="form-label">Time Limit (minutes)</label>
                   <input type="number" class="form-control" id="time_limit_minutes" name="time_limit_minutes" value="<?= $test['time_limit_minutes'] ?? '' ?>" min="0" placeholder="0 for no limit">
+                </div>
+                <div class="col-md-4">
+                  <label for="no_tries" class="form-label">Max Attempts</label>
+                  <input type="number" class="form-control" id="no_tries" name="no_tries" value="<?= $test['no_tries'] ?? 0 ?>" min="0" placeholder="0 = unlimited">
+                  <small class="text-muted">0 means unlimited attempts</small>
                 </div>
               </div>
               <div class="row mb-3">

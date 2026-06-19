@@ -9,9 +9,42 @@ $search_filter = $_GET['search'] ?? '';
 $course_filter = $_GET['course_id'] ?? '';
 $test_filter = $_GET['test_id'] ?? '';
 
+// Pagination
+$page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+$per_page = isset($_GET['per_page']) && $_GET['per_page'] === 'all' ? 'all' : max(5, min(200, intval($_GET['per_page'] ?? 20)));
+
+// Count query
+$count_sql = "SELECT COUNT(*) FROM public.quiz_questions q WHERE 1=1";
+$count_params = [];
+if (!empty($qtype_filter)) {
+    $count_sql .= " AND q.qtype = :qtype";
+    $count_params[':qtype'] = $qtype_filter;
+}
+if (!empty($search_filter)) {
+    $count_sql .= " AND q.question ILIKE :search";
+    $count_params[':search'] = '%' . $search_filter . '%';
+}
+if (!empty($course_filter)) {
+    $count_sql .= " AND q.course_id = :course_id";
+    $count_params[':course_id'] = $course_filter;
+}
+if (!empty($test_filter)) {
+    $count_sql .= " AND EXISTS (SELECT 1 FROM lbquiz_test_questions tq WHERE tq.quiz_question_id = q.id AND tq.test_id = :test_id)";
+    $count_params[':test_id'] = $test_filter;
+}
+$count_stmt = $pdo->prepare($count_sql);
+$count_stmt->execute($count_params);
+$total_rows = (int)$count_stmt->fetchColumn();
+
+// Pagination vars
+$total_pages = $per_page === 'all' ? 1 : max(1, (int)ceil($total_rows / $per_page));
+$page = min($page, $total_pages);
+$offset = $per_page === 'all' ? 0 : ($page - 1) * $per_page;
+$limit = $per_page === 'all' ? $total_rows : $per_page;
+
+// Main query
 $sql = "SELECT q.*, c.course_name,
         (SELECT COUNT(*) FROM public.quiz_answers WHERE questionid = q.id) as answer_count,
-        (SELECT string_agg(text, ', ') FROM public.quiz_answers WHERE questionid = q.id) as answer_preview,
         (SELECT string_agg(DISTINCT t.title || ' (' || COALESCE(tc2.course_name, 'No Course') || ')', '; ')
          FROM lbquiz_test_questions tq
          JOIN lbquiz_tests t ON t.id = tq.test_id
@@ -40,11 +73,23 @@ if (!empty($test_filter)) {
   $sql .= " AND EXISTS (SELECT 1 FROM lbquiz_test_questions tq WHERE tq.quiz_question_id = q.id AND tq.test_id = :test_id)";
   $params[':test_id'] = $test_filter;
 }
-$sql .= " ORDER BY q.id DESC LIMIT 200";
+$sql .= " ORDER BY q.id DESC LIMIT $limit OFFSET $offset";
 
 $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
 $rows = $stmt->fetchAll();
+
+// Batch fetch all answers for displayed questions
+$answers_by_qid = [];
+if (!empty($rows)) {
+    $qids = array_column($rows, 'id');
+    $placeholders = implode(',', array_fill(0, count($qids), '?'));
+    $aStmt = $pdo->prepare("SELECT id, questionid, text, correct FROM public.quiz_answers WHERE questionid IN ($placeholders) ORDER BY id");
+    $aStmt->execute($qids);
+    foreach ($aStmt->fetchAll() as $a) {
+        $answers_by_qid[$a['questionid']][] = $a;
+    }
+}
 
 $qtypes = [
   1 => 'Single choice',
@@ -52,6 +97,8 @@ $qtypes = [
   3 => 'Decision matrix',
   4 => 'Fill in blanks'
 ];
+
+$letter_labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
 $courses_filter = $pdo->query("SELECT course_id, course_name FROM public.training_courses ORDER BY course_name")->fetchAll();
 $tests_filter = $pdo->query("SELECT id, title FROM lbquiz_tests ORDER BY title")->fetchAll();
@@ -73,6 +120,11 @@ $tests_filter = $pdo->query("SELECT id, title FROM lbquiz_tests ORDER BY title")
     .question-card { border-left: 4px solid #0d6efd; }
     .preview-text { font-size: 0.9rem; color: #6c757d; }
     .course-badge { font-size: 0.75rem; }
+    .answer-item { font-size: 0.88rem; padding: 2px 0; }
+    .answer-item.correct { color: #198754; font-weight: 600; }
+    .answer-item .letter-badge { display: inline-block; width: 22px; height: 22px; line-height: 22px; text-align: center; border-radius: 50%; font-size: 0.75rem; font-weight: 700; margin-right: 6px; }
+    .answer-item.correct .letter-badge { background: #198754; color: #fff; }
+    .answer-item:not(.correct) .letter-badge { background: #e9ecef; color: #495057; }
   </style>
 </head>
 
@@ -139,17 +191,28 @@ $tests_filter = $pdo->query("SELECT id, title FROM lbquiz_tests ORDER BY title")
 
         <!-- Questions List -->
         <div class="card">
-          <div class="card-header bg-white d-flex justify-content-between align-items-center">
-            <h5 class="card-title mb-0">Questions (<?= count($rows) ?>)</h5>
+          <div class="card-header bg-white d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <h5 class="card-title mb-0">Questions (<?= $total_rows ?>)</h5>
+            <div class="d-flex align-items-center gap-2">
+              <span class="text-muted small">Show</span>
+              <select id="per_page" class="form-select form-select-sm" style="width: auto;" onchange="changePerPage(this.value)">
+                <?php foreach ([5, 10, 15, 20, 50, 100] as $pp): ?>
+                  <option value="<?= $pp ?>" <?= $per_page !== 'all' && (int)$per_page === $pp ? 'selected' : '' ?>><?= $pp ?></option>
+                <?php endforeach; ?>
+                <option value="all" <?= $per_page === 'all' ? 'selected' : '' ?>>All</option>
+              </select>
+              <span class="text-muted small">per page</span>
+            </div>
           </div>
           <div class="card-body">
             <?php if (count($rows) > 0): ?>
               <div class="list-group">
                 <?php foreach ($rows as $r): ?>
+                  <?php $qAnswers = $answers_by_qid[$r['id']] ?? []; ?>
                   <div class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
                       <h5 class="mb-1"><?= strip_tags($r['question']) ?></h5>
-                      <div class="text-end">
+                      <div class="text-end text-nowrap ms-2">
                         <span class="badge bg-info"><?= $qtypes[$r['qtype']] ?? 'Unknown' ?></span>
                         <?php if (!empty($r['course_name'])): ?>
                           <span class="badge bg-primary course-badge"><?= htmlspecialchars($r['course_name']) ?></span>
@@ -158,11 +221,38 @@ $tests_filter = $pdo->query("SELECT id, title FROM lbquiz_tests ORDER BY title")
                         <?php endif; ?>
                       </div>
                     </div>
-                    <p class="mb-1 preview-text">
-                      <strong>Answers:</strong> <?= htmlspecialchars_decode($r['answer_preview'] ?? 'No answers') ?>
-                    </p>
+                    <?php if (in_array($r['qtype'], [1, 2]) && !empty($qAnswers)): ?>
+                      <div class="mb-1 preview-text">
+                        <strong>Choices:</strong>
+                        <div class="mt-1">
+                          <?php foreach ($qAnswers as $ai => $a): ?>
+                            <?php $letter = $letter_labels[$ai] ?? '?'; ?>
+                            <div class="answer-item <?= $a['correct'] ? 'correct' : '' ?>">
+                              <span class="letter-badge"><?= $letter ?></span>
+                              <?= htmlspecialchars_decode(strip_tags($a['text'])) ?>
+                              <?php if ($a['correct']): ?>
+                                <i class="bi bi-check-circle-fill text-success ms-1" style="font-size:0.75rem"></i>
+                              <?php endif; ?>
+                            </div>
+                          <?php endforeach; ?>
+                        </div>
+                      </div>
+                    <?php elseif ($r['qtype'] == 4): ?>
+                      <div class="mb-1 preview-text">
+                        <strong>Answers:</strong>
+                        <?php if (!empty($qAnswers)): ?>
+                          <?php foreach ($qAnswers as $ai => $a): ?>
+                            <span class="badge bg-<?= $a['correct'] ? 'success' : 'secondary' ?> me-1">
+                              <?= mb_strimwidth(strip_tags($a['text']), 0, 50, '...') ?>
+                            </span>
+                          <?php endforeach; ?>
+                        <?php else: ?>
+                          <em class="text-muted">No answers configured</em>
+                        <?php endif; ?>
+                      </div>
+                    <?php endif; ?>
                     <small class="text-muted">
-                      ID: <?= $r['id'] ?> | Answers: <?= $r['answer_count'] ?> |
+                      ID: <?= $r['id'] ?> | Answers: <?= count($qAnswers) ?> |
                       Created: <?= date('M j, Y', strtotime($r['created_at'])) ?>
                     </small>
                     <?php if (!empty($r['test_info'])): ?>
@@ -211,6 +301,41 @@ $tests_filter = $pdo->query("SELECT id, title FROM lbquiz_tests ORDER BY title")
                   </div>
                 <?php endforeach; ?>
               </div>
+
+              <?php if ($total_pages > 1): ?>
+              <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top">
+                <small class="text-muted">
+                  Page <?= $page ?> of <?= $total_pages ?>
+                  (<?= $total_rows ?> total questions)
+                </small>
+                <nav>
+                  <ul class="pagination pagination-sm mb-0">
+                    <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
+                      <a class="page-link" href="?<?= http_build_query(array_merge($_GET, ['page' => 1])) ?>">&laquo;</a>
+                    </li>
+                    <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
+                      <a class="page-link" href="?<?= http_build_query(array_merge($_GET, ['page' => $page - 1])) ?>">&lsaquo;</a>
+                    </li>
+                    <?php
+                    $start = max(1, $page - 2);
+                    $end = min($total_pages, $page + 2);
+                    for ($i = $start; $i <= $end; $i++):
+                    ?>
+                      <li class="page-item <?= $i === $page ? 'active' : '' ?>">
+                        <a class="page-link" href="?<?= http_build_query(array_merge($_GET, ['page' => $i])) ?>"><?= $i ?></a>
+                      </li>
+                    <?php endfor; ?>
+                    <li class="page-item <?= $page >= $total_pages ? 'disabled' : '' ?>">
+                      <a class="page-link" href="?<?= http_build_query(array_merge($_GET, ['page' => $page + 1])) ?>">&rsaquo;</a>
+                    </li>
+                    <li class="page-item <?= $page >= $total_pages ? 'disabled' : '' ?>">
+                      <a class="page-link" href="?<?= http_build_query(array_merge($_GET, ['page' => $total_pages])) ?>">&raquo;</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+              <?php endif; ?>
+
             <?php else: ?>
               <div class="alert alert-info">
                 No questions found. <a href="question_edit.php">Create your first question</a>.
@@ -222,6 +347,14 @@ $tests_filter = $pdo->query("SELECT id, title FROM lbquiz_tests ORDER BY title")
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function changePerPage(val) {
+      var params = new URLSearchParams(window.location.search);
+      params.set('per_page', val);
+      params.delete('page');
+      window.location.search = params.toString();
+    }
+  </script>
 </body>
 
 </html>

@@ -5,7 +5,7 @@ require __DIR__ . '/session_helper.php';
 $quiz = new Quiz($pdo);
 
 $allow_sort = [
-    'r.id', 't.title', 'r.score', 'r.points_raw',
+    'r.id', 't.title', 't.is_pretest', 'r.score', 'r.points_raw',
     'r.started_at', 'r.submitted_at', 'part.first_name', 'part.last_name'
 ];
 
@@ -22,7 +22,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] === 'get_participants') {
     $t = intval($_GET['test_id'] ?? 0);
     $tr = intval($_GET['training_id'] ?? 0);
     if (!$t) { echo '[]'; exit; }
-    $sql = "SELECT DISTINCT part.participant_id, part.first_name, part.last_name, part.email
+    $sql = "SELECT DISTINCT part.participant_id, part.first_name, part.middle_name, part.last_name, part.email
             FROM training_participants part
             JOIN training_participation tp ON tp.participant_id = part.participant_id
             JOIN lbquiz_responses r ON r.participation_id = tp.participation_id
@@ -43,6 +43,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] === 'get_participants') {
 $test_id       = intval($_GET['test_id'] ?? 0);
 $training_id   = intval($_GET['training_id'] ?? 0);
 $participant_id= intval($_GET['participant_id'] ?? 0);
+$course_id     = intval($_GET['course_id'] ?? 0);
 $score_min     = floatval($_GET['score_min'] ?? 0);
 $score_max     = floatval($_GET['score_max'] ?? 100);
 $date_from     = $_GET['date_from'] ?? '';
@@ -60,12 +61,18 @@ $count_sql = "SELECT COUNT(*) FROM lbquiz_responses r
               JOIN lbquiz_tests t ON t.id = r.test_id
               LEFT JOIN training_participation tp ON tp.participation_id = r.participation_id
               LEFT JOIN training_participants part ON part.participant_id = tp.participant_id
+              LEFT JOIN training_sessions ts ON ts.training_id = tp.training_id
+              LEFT JOIN training_courses tc ON tc.course_id = ts.course_id
               WHERE 1=1";
 $count_params = [];
 
 if ($test_id) {
     $count_sql .= " AND r.test_id = :test_id";
     $count_params[':test_id'] = $test_id;
+}
+if ($course_id) {
+    $count_sql .= " AND tc.course_id = :course_id";
+    $count_params[':course_id'] = $course_id;
 }
 if ($training_id) {
     $count_sql .= " AND (t.training_id = :training_id OR EXISTS (SELECT 1 FROM lbquiz_test_sessions ts WHERE ts.test_id = t.id AND ts.training_id = :training_id2))";
@@ -99,7 +106,7 @@ if ($is_pretest !== '') {
 if ($search !== '') {
     $count_sql .= " AND (r.id::text ILIKE :search
                     OR t.title ILIKE :search2
-                    OR (part.first_name || ' ' || part.last_name) ILIKE :search3
+                    OR (part.first_name || ' ' || COALESCE(part.middle_name || ' ', '') || part.last_name) ILIKE :search3
                     OR part.email ILIKE :search4
                     OR r.score::text ILIKE :search5)";
     $search_term = '%' . $search . '%';
@@ -117,7 +124,7 @@ $total_rows = (int)$count_stmt->fetchColumn();
 // --- Data query ---
 $sql = "SELECT r.*, t.title as test_title, t.is_pretest, t.training_id as test_primary_training,
                tp.participant_id, tp.training_id as response_training_id,
-               part.first_name, part.last_name, part.email,
+               part.first_name, part.middle_name, part.last_name, part.email,
                ts.training_type, ts.quarter, ts.start_date, ts.end_date,
                tc.course_name
         FROM lbquiz_responses r
@@ -132,6 +139,10 @@ $params = [];
 if ($test_id) {
     $sql .= " AND r.test_id = :test_id";
     $params[':test_id'] = $test_id;
+}
+if ($course_id) {
+    $sql .= " AND tc.course_id = :course_id";
+    $params[':course_id'] = $course_id;
 }
 if ($training_id) {
     $sql .= " AND (t.training_id = :training_id OR EXISTS (SELECT 1 FROM lbquiz_test_sessions ts WHERE ts.test_id = t.id AND ts.training_id = :training_id2))";
@@ -165,7 +176,7 @@ if ($is_pretest !== '') {
 if ($search !== '') {
     $sql .= " AND (r.id::text ILIKE :search
                     OR t.title ILIKE :search2
-                    OR (part.first_name || ' ' || part.last_name) ILIKE :search3
+                    OR (part.first_name || ' ' || COALESCE(part.middle_name || ' ', '') || part.last_name) ILIKE :search3
                     OR part.email ILIKE :search4
                     OR r.score::text ILIKE :search5)";
     $search_term = '%' . $search . '%';
@@ -209,7 +220,7 @@ if ($test_id) {
 }
 
 // Participants filtered by test (+ training) for dropdown
-$part_sql = "SELECT DISTINCT part.participant_id, part.first_name, part.last_name, part.email
+$part_sql = "SELECT DISTINCT part.participant_id, part.first_name, part.middle_name, part.last_name, part.email
              FROM training_participants part
              JOIN training_participation tp ON tp.participant_id = part.participant_id
              JOIN lbquiz_responses r ON r.participation_id = tp.participation_id
@@ -227,6 +238,9 @@ $part_sql .= " ORDER BY part.first_name, part.last_name";
 $part_stmt = $pdo->prepare($part_sql);
 $part_stmt->execute($part_params);
 $participants = $part_stmt->fetchAll();
+
+// Courses for filter
+$courses = $pdo->query("SELECT course_id, course_name FROM public.training_courses ORDER BY course_name")->fetchAll();
 
 // Build query string for pagination links (exclude page)
 $query_params = $_GET;
@@ -317,12 +331,24 @@ function sortLink($col, $label, $current_col, $current_dir, $qs) {
                 </select>
               </div>
               <div class="col-md-3">
+                <label for="course_id" class="form-label">Course</label>
+                <select class="form-select" id="course_id" name="course_id">
+                  <option value="">All Courses</option>
+                  <?php foreach ($courses as $c): ?>
+                    <option value="<?= $c['course_id'] ?>" <?= $course_id == $c['course_id'] ? 'selected' : '' ?>>
+                      <?= htmlspecialchars($c['course_name']) ?>
+                    </option>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+              <div class="col-md-3">
                 <label for="participant_id" class="form-label">Participant</label>
                 <select class="form-select" id="participant_id" name="participant_id">
                   <option value="">All Participants</option>
                   <?php foreach ($participants as $p): ?>
                     <option value="<?= $p['participant_id'] ?>" <?= $participant_id == $p['participant_id'] ? 'selected' : '' ?>>
-                      <?= htmlspecialchars($p['first_name'] . ' ' . $p['last_name'] . ' (' . $p['email'] . ')') ?>
+                      <?php $full_name = trim($p['first_name'] . ' ' . ($p['middle_name'] ?? '') . ' ' . $p['last_name']); ?>
+                      <?= htmlspecialchars($full_name . ' (' . $p['email'] . ')') ?>
                     </option>
                   <?php endforeach; ?>
                 </select>
@@ -392,6 +418,8 @@ function sortLink($col, $label, $current_col, $current_dir, $qs) {
                     <tr>
                       <th class="sortable"><?= sortLink('r.id', 'ID', $sort_col, $sort_dir, $query_string) ?></th>
                       <th class="sortable"><?= sortLink('t.title', 'Test', $sort_col, $sort_dir, $query_string) ?></th>
+                      <th>Course</th>
+                      <th class="sortable"><?= sortLink('t.is_pretest', 'Type', $sort_col, $sort_dir, $query_string) ?></th>
                       <th>Training</th>
                       <th class="sortable"><?= sortLink('part.first_name', 'Participant', $sort_col, $sort_dir, $query_string) ?></th>
                       <th class="sortable"><?= sortLink('r.score', 'Score', $sort_col, $sort_dir, $query_string) ?></th>
@@ -403,15 +431,17 @@ function sortLink($col, $label, $current_col, $current_dir, $qs) {
                   </thead>
                   <tbody>
                     <?php foreach ($rows as $r): ?>
-                      <tr class="response-row">
+                      <tr class="response-row" onclick="window.location='response_detail.php?id=<?= $r['id'] ?>'" style="cursor: pointer;">
                         <td><?= htmlspecialchars($r['id']) ?></td>
+                        <td><a href="response_detail.php?id=<?= $r['id'] ?>" class="text-decoration-none"><?= htmlspecialchars($r['test_title']) ?></a><br>
+                          <small class="text-muted">ID: <?= $r['test_id'] ?></small>
+                        </td>
+                        <td><?= htmlspecialchars($r['course_name'] ?? 'N/A') ?></td>
                         <td>
-                          <?= htmlspecialchars($r['test_title']) ?><br>
-                          <small class="text-muted">ID: <?= $r['test_id'] ?>
-                            <span class="badge bg-<?= $r['is_pretest'] === 't' ? 'info' : 'primary' ?>" style="font-size:0.65rem;">
-                              <?= $r['is_pretest'] === 't' ? 'Pre' : 'Post' ?>
-                            </span>
-                          </small>
+                          <?php $is_pre = ($r['is_pretest'] === 't' || $r['is_pretest'] === true || $r['is_pretest'] === 1); ?>
+                          <span class="badge bg-<?= $is_pre ? 'info' : 'primary' ?>">
+                            <?= $is_pre ? 'Pre Test' : 'Post Test' ?>
+                          </span>
                         </td>
                         <td>
                           <?php if ($r['response_training_id']): ?>
@@ -426,7 +456,8 @@ function sortLink($col, $label, $current_col, $current_dir, $qs) {
                         </td>
                         <td>
                           <?php if ($r['participant_id']): ?>
-                            <?= htmlspecialchars($r['first_name'] . ' ' . $r['last_name']) ?><br>
+                            <?php $full_name = trim($r['first_name'] . ' ' . ($r['middle_name'] ?? '') . ' ' . $r['last_name']); ?>
+                            <?= htmlspecialchars($full_name) ?><br>
                             <small class="text-muted"><?= htmlspecialchars($r['email']) ?></small>
                           <?php else: ?>
                             <span class="text-muted">N/A</span>
@@ -551,7 +582,8 @@ function sortLink($col, $label, $current_col, $current_dir, $qs) {
           participants.forEach(function(p) {
             var opt = document.createElement('option');
             opt.value = p.participant_id;
-            opt.textContent = p.first_name + ' ' + p.last_name + ' (' + p.email + ')';
+            var fullName = (p.first_name || '') + (p.middle_name ? ' ' + p.middle_name : '') + ' ' + (p.last_name || '');
+            opt.textContent = fullName + ' (' + p.email + ')';
             if (p.participant_id == <?= $participant_id ?>) opt.selected = true;
             sel.appendChild(opt);
           });
@@ -574,7 +606,7 @@ function sortLink($col, $label, $current_col, $current_dir, $qs) {
       var encodedUri = encodeURI(csvContent);
       var link = document.createElement("a");
       link.setAttribute("href", encodedUri);
-      link.setAttribute("download", "test_responses_<?= date('Y-m-d') ?>.csv");
+      link.setAttribute("download", "test_responses_<?= date('Y-m-d-H-i-s') ?>.csv");
       document.body.appendChild(link);
       link.click();
     }
