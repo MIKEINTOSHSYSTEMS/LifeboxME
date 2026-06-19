@@ -1,16 +1,13 @@
 <?php
-/*
-session_start();
-if (empty($_SESSION['admin'])) {
-    header('Location: login.php');
-    exit;
-}*/
 require __DIR__ . '/../src/db.php';
 require __DIR__ . '/../src/model/Quiz.php';
 require __DIR__ . '/session_helper.php';
 $quiz = new Quiz($pdo);
 
 $question_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+$preselected_course_id = isset($_GET['course_id']) ? intval($_GET['course_id']) : 0;
+$saved_success = isset($_GET['saved']) ? intval($_GET['saved']) : 0;
+
 $question = $question_id ? $quiz->getQuestion($question_id) : null;
 $answers = $question_id ? $quiz->getQuestionAnswers($question_id) : [];
 
@@ -21,45 +18,52 @@ $qtypes = [
     4 => 'Fill in blanks'
 ];
 
+$courses = $quiz->listCourses();
+
+// Get test info for existing questions
+$question_tests = $question_id ? $quiz->getQuestionTests($question_id) : [];
+
+// Recently added questions for inline display
+$inline_course_id = $question ? $question['course_id'] : $preselected_course_id;
+$recent_questions = $inline_course_id ? $quiz->getQuestionsByCourse($inline_course_id, 10) : [];
+
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $question_text = trim($_POST['question']);
     $qtype = intval($_POST['qtype']);
     $videolink = trim($_POST['videolink']) ?: null;
+    $course_id = isset($_POST['course_id']) ? intval($_POST['course_id']) : 0;
+    $save_another = isset($_POST['save_another']);
+    $is_new_question = !$question_id;
 
-    if ($question_id) {
-        // Update existing question
-        $quiz->updateQuestion($question_id, $question_text, $qtype, $videolink);
+    if (!$course_id) {
+        $error = "Please select a training course.";
+    } elseif ($question_id) {
+        $quiz->updateQuestion($question_id, $question_text, $qtype, $videolink, $course_id);
     } else {
-        // Create new question
-        $question_id = $quiz->createQuestion($question_text, $qtype, $videolink);
+        $question_id = $quiz->createQuestion($question_text, $qtype, $videolink, $course_id);
         if (!$question_id) {
-            echo "Failed to create question. Please check the database connection and try again.";
+            echo "Failed to create question.";
             exit;
         }
     }
 
-    // Handle answers
-    if ($question_id && in_array($qtype, [1, 2, 3])) {
+    if (empty($error) && $question_id && in_array($qtype, [1, 2, 3])) {
         $answer_texts = $_POST['answer_text'] ?? [];
         $answer_ids = $_POST['answer_id'] ?? [];
 
         if ($qtype == 1) {
-            // Single choice
             $answer_correct = $_POST['answer_correct'] ?? '';
             $new_answer_correct = $_POST['new_answer_correct'] ?? '';
         } else {
-            // Multiple choice
             $answer_correct = $_POST['answer_correct'] ?? [];
             $new_answer_correct = $_POST['new_answer_correct'] ?? [];
         }
 
-        // Update existing answers
         foreach ($answer_ids as $index => $answer_id) {
             if ($answer_id) {
                 $text = trim($answer_texts[$index]);
                 $correct = $qtype == 1 ? ($answer_correct == $index) : isset($answer_correct[$index]);
-
                 if (!empty($text)) {
                     $quiz->updateAnswer($answer_id, $text, $correct);
                 } else {
@@ -68,9 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // Add new answers
         $new_answer_texts = $_POST['new_answer_text'] ?? [];
-
         foreach ($new_answer_texts as $index => $text) {
             $text = trim($text);
             if (!empty($text)) {
@@ -80,11 +82,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    header("Location: question_edit.php?id=" . $question_id);
-    exit;
+    if (empty($error) && $save_another && $is_new_question) {
+        $redirect = 'question_edit.php?saved=1';
+        if ($course_id > 0) {
+            $redirect .= '&course_id=' . $course_id;
+        }
+        header("Location: $redirect");
+        exit;
+    }
+
+    if (empty($error)) {
+        header("Location: question_edit.php?id=" . $question_id);
+        exit;
+    }
 }
 
-// If no question ID but we're editing, redirect to create mode
 if ($question_id && !$question) {
     header("Location: question_edit.php");
     exit;
@@ -100,7 +112,6 @@ if ($question_id && !$question) {
     <link href="../assets/css/styles.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-
     <link rel="icon" type="image/svg+xml" href="/assets/img/lb_favicon.svg">
     <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
     <link rel="mask-icon" href="/assets/img/lb_favicon.svg" color="#038DA9">
@@ -113,20 +124,22 @@ if ($question_id && !$question) {
             border-radius: 5px;
             background-color: #f8f9fa;
         }
-
         .answer-row:hover {
             background-color: #e9ecef;
         }
-
         .sortable-ghost {
             opacity: 0.5;
         }
-
         .matrix-section {
             display: none;
         }
-    </style>
-    <style>
+        .inline-question-item {
+            border-left: 3px solid #0d6efd;
+            transition: background 0.2s;
+        }
+        .inline-question-item:hover {
+            background: #f0f4ff;
+        }
         @media (min-width: 768px) {
             .px-md-4 {
                 padding-right: 7.5rem !important;
@@ -139,113 +152,186 @@ if ($question_id && !$question) {
 <body>
 <?php include 'sidebar.php'; ?>
     <div class="container-fluid">
-            <main class="px-md-4 py-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2"><?= $question_id ? 'Edit' : 'Create' ?> Question</h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                        <a href="questions.php" class="btn btn-sm btn-outline-secondary">
-                            <i class="bi bi-arrow-left"></i> Back to Questions
-                        </a>
-                    </div>
+        <main class="px-md-4 py-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2"><?= $question_id ? 'Edit' : 'Create' ?> Question</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <a href="questions.php" class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to Questions
+                    </a>
                 </div>
+            </div>
 
-                <?php if (isset($error)): ?>
-                    <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
-                <?php endif; ?>
+            <?php if (isset($error)): ?>
+                <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
+            <?php endif; ?>
+            <?php if ($saved_success): ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="bi bi-check-circle-fill"></i> Question saved! Add another one below.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif; ?>
 
-                <div class="card">
-                    <div class="card-body">
-                        <form method="post" id="questionForm">
-                            <div class="mb-3">
-                                <label for="question" class="form-label">Question Text</label>
-                                <textarea class="form-control tinymce-editor" id="question" name="question" rows="3"><?= $question ? htmlspecialchars($question['question']) : '' ?></textarea>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="qtype" class="form-label">Question Type</label>
-                                    <select class="form-select" id="qtype" name="qtype" required>
-                                        <option value="">Select Question Type</option>
-                                        <?php foreach ($qtypes as $id => $name): ?>
-                                            <option value="<?= $id ?>" <?= ($question && $question['qtype'] == $id) ? 'selected' : '' ?>>
-                                                <?= $name ?>
-                                            </option>
-                                        <?php endforeach; ?>
-                                    </select>
+            <div class="row">
+                <!-- Main Form -->
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <form method="post" id="questionForm">
+                                <!-- Course Selection -->
+                                <div class="card mb-4 border-primary">
+                                    <div class="card-header bg-primary text-white py-2">
+                                        <h6 class="mb-0"><i class="bi bi-bookmarks"></i> Training Course</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <select class="form-select form-select-lg" id="course_id" name="course_id" required>
+                                            <option value="">-- Select Training Course --</option>
+                                            <?php foreach ($courses as $c): ?>
+                                                <option value="<?= $c['course_id'] ?>"
+                                                    <?= ($question && $question['course_id'] == $c['course_id']) || ($preselected_course_id == $c['course_id']) ? 'selected' : '' ?>>
+                                                    <?= htmlspecialchars($c['course_name']) ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                        <?php if (!empty($question_tests)): ?>
+                                            <div class="mt-2 small text-muted">
+                                                <i class="bi bi-info-circle"></i> Mapped to tests:
+                                                <?php foreach ($question_tests as $qt): ?>
+                                                    <span class="badge bg-secondary me-1"><?= htmlspecialchars($qt['course_name'] ?? 'N/A') ?> - <?= htmlspecialchars($qt['title']) ?></span>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="videolink" class="form-label">Video Link (Optional)</label>
-                                    <input type="url" class="form-control" id="videolink" name="videolink"
-                                        value="<?= $question ? htmlspecialchars($question['videolink'] ?? '') : '' ?>"
-                                        placeholder="https://example.com/video.mp4">
-                                </div>
-                            </div>
 
-                            <!-- Answers Section -->
-                            <div id="answers-section" class="<?= ($question && in_array($question['qtype'], [1, 2])) ? '' : 'd-none' ?>">
-                                <h5>Answers</h5>
-                                <div class="alert alert-info">
-                                    <i class="bi bi-info-circle"></i> Check the box next to answers that are correct.
+                                <div class="mb-3">
+                                    <label for="question" class="form-label">Question Text</label>
+                                    <textarea class="form-control tinymce-editor" id="question" name="question" rows="3"><?= $question ? htmlspecialchars($question['question']) : '' ?></textarea>
                                 </div>
-                                <div id="answers-container" class="mb-3">
-                                    <?php if ($question && in_array($question['qtype'], [1, 2])): ?>
-                                        <?php foreach ($answers as $index => $answer): ?>
-                                            <div class="answer-row" data-index="<?= $index ?>">
-                                                <input type="hidden" name="answer_id[]" value="<?= $answer['id'] ?>">
-                                                <div class="row align-items-center">
-                                                    <div class="col-md-7">
-                                                        <textarea class="form-control tinymce-editor" name="answer_text[]" rows="2" placeholder="Answer text"><?= htmlspecialchars($answer['text']) ?></textarea>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="<?= $question['qtype'] == 1 ? 'radio' : 'checkbox' ?>" name="<?= $question['qtype'] == 1 ? 'answer_correct' : 'answer_correct[]' ?>"
-                                                                value="<?= $index ?>" <?= $answer['correct'] ? 'checked' : '' ?>>
-                                                            <label class="form-check-label">Correct Answer</label>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="qtype" class="form-label">Question Type</label>
+                                        <select class="form-select" id="qtype" name="qtype" required>
+                                            <option value="">Select Question Type</option>
+                                            <?php foreach ($qtypes as $id => $name): ?>
+                                                <option value="<?= $id ?>" <?= ($question && $question['qtype'] == $id) ? 'selected' : '' ?>>
+                                                    <?= $name ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="videolink" class="form-label">Video Link (Optional)</label>
+                                        <input type="url" class="form-control" id="videolink" name="videolink"
+                                            value="<?= $question ? htmlspecialchars($question['videolink'] ?? '') : '' ?>"
+                                            placeholder="https://example.com/video.mp4">
+                                    </div>
+                                </div>
+
+                                <!-- Answers Section -->
+                                <div id="answers-section" class="<?= ($question && in_array($question['qtype'], [1, 2])) ? '' : 'd-none' ?>">
+                                    <h5>Answers</h5>
+                                    <div class="alert alert-info">
+                                        <i class="bi bi-info-circle"></i> Check the box next to answers that are correct.
+                                    </div>
+                                    <div id="answers-container" class="mb-3">
+                                        <?php if ($question && in_array($question['qtype'], [1, 2])): ?>
+                                            <?php foreach ($answers as $index => $answer): ?>
+                                                <div class="answer-row" data-index="<?= $index ?>">
+                                                    <input type="hidden" name="answer_id[]" value="<?= $answer['id'] ?>">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-md-7">
+                                                            <textarea class="form-control tinymce-editor" name="answer_text[]" rows="2" placeholder="Answer text"><?= htmlspecialchars($answer['text']) ?></textarea>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-check form-switch">
+                                                                <input class="form-check-input" type="<?= $question['qtype'] == 1 ? 'radio' : 'checkbox' ?>" name="<?= $question['qtype'] == 1 ? 'answer_correct' : 'answer_correct[]' ?>"
+                                                                    value="<?= $index ?>" <?= $answer['correct'] ? 'checked' : '' ?>>
+                                                                <label class="form-check-label">Correct</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <button type="button" class="btn btn-danger btn-sm remove-answer">
+                                                                <i class="bi bi-trash"></i>
+                                                            </button>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        <button type="button" class="btn btn-danger btn-sm remove-answer">
-                                                            <i class="bi bi-trash"></i> Remove
-                                                        </button>
-                                                    </div>
                                                 </div>
-                                            </div>
-                                        <?php endforeach; ?>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </div>
+                                    <button type="button" id="add-answer" class="btn btn-sm btn-outline-primary mb-3">
+                                        <i class="bi bi-plus-circle"></i> Add Answer
+                                    </button>
+                                </div>
+
+                                <!-- Matrix Section -->
+                                <div id="matrix-section" class="d-none">
+                                    <h5>Matrix Configuration</h5>
+                                    <div class="alert alert-info">
+                                        <i class="bi bi-info-circle"></i> Matrix questions require special configuration. Contact support.
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 d-flex gap-2">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="bi bi-check-circle"></i> <?= $question_id ? 'Update' : 'Create' ?> Question
+                                    </button>
+                                    <?php if (!$question_id): ?>
+                                    <button type="submit" name="save_another" value="1" class="btn btn-success">
+                                        <i class="bi bi-plus-circle"></i> Save & Add Another
+                                    </button>
                                     <?php endif; ?>
+                                    <a href="questions.php" class="btn btn-secondary">
+                                        <i class="bi bi-x-circle"></i> Cancel
+                                    </a>
                                 </div>
-                                <button type="button" id="add-answer" class="btn btn-sm btn-outline-primary mb-3">
-                                    <i class="bi bi-plus-circle"></i> Add Answer
-                                </button>
-                            </div>
-
-                            <!-- Matrix Section -->
-                            <div id="matrix-section" class="<?= ($question && $question['qtype'] == 3) ? '' : 'd-none' ?>">
-                                <h5>Matrix Configuration</h5>
-                                <div class="alert alert-info">
-                                    <i class="bi bi-info-circle"></i> Matrix questions require special configuration.
-                                    Please contact support for matrix question setup.
-                                </div>
-                            </div>
-
-                            <div class="mt-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="bi bi-check-circle"></i> <?= $question_id ? 'Update' : 'Create' ?> Question
-                                </button>
-                                <a href="questions.php" class="btn btn-secondary">
-                                    <i class="bi bi-x-circle"></i> Cancel
-                                </a>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </main>
+
+                <!-- Inline Recently Added Questions -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header bg-light">
+                            <h6 class="mb-0"><i class="bi bi-list-check"></i> Questions for this Course</h6>
+                        </div>
+                        <div class="card-body p-2" id="recent-questions-list">
+                            <?php if ($inline_course_id && !empty($recent_questions)): ?>
+                                <?php foreach ($recent_questions as $rq): ?>
+                                    <div class="card inline-question-item mb-2">
+                                        <div class="card-body py-2 px-3">
+                                            <div class="d-flex justify-content-between align-items-start">
+                                                <small class="text-truncate" style="max-width: 85%;">
+                                                    <a href="question_edit.php?id=<?= $rq['id'] ?>" class="text-decoration-none">
+                                                        <strong>#<?= $rq['id'] ?></strong> <?= mb_strimwidth(strip_tags($rq['question']), 0, 50, '...') ?>
+                                                    </a>
+                                                </small>
+                                                <span class="badge bg-info" style="font-size: 0.6rem;"><?= $qtypes[$rq['qtype']] ?? '?' ?></span>
+                                            </div>
+                                            <small class="text-muted">Answers: <?= $rq['answer_count'] ?></small>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <p class="text-muted small text-center my-3" id="no-questions-msg">
+                                    <?= $inline_course_id ? 'No questions yet for this course.' : 'Select a course to see questions.' ?>
+                                </p>
+                            <?php endif; ?>
+                            <div id="recent-loading" class="text-center py-3 d-none">
+                                <div class="spinner-border spinner-border-sm text-primary" role="status"></div>
+                                <small class="text-muted">Loading...</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!--<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-    <script src="https://cdn.tiny.cloud/1/vvo6yyevs4j1f4dzck6arfsw00zocvjgom0bqiqpd2dnkxyw/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/8.1.2/tinymce.min.js" integrity="sha512-t6rAWTkTP6kPQfG/mJ6ZojKT7kyJxw6//GQrS2QhYZoGW6oMWSWm7v/ur+sxoHDq1WaZqlOiZwI0D0HU7lgoeQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    -->
     <script src="../vendor/tinymce/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
 
     <script>
@@ -268,6 +354,7 @@ if ($question_id && !$question) {
             const qtypeSelect = document.getElementById('qtype');
             const answersSection = document.getElementById('answers-section');
             const matrixSection = document.getElementById('matrix-section');
+            const courseSelect = document.getElementById('course_id');
 
             function toggleSections() {
                 const selectedType = parseInt(qtypeSelect.value);
@@ -277,7 +364,6 @@ if ($question_id && !$question) {
 
             qtypeSelect.addEventListener('change', function() {
                 toggleSections();
-                // Update existing answer inputs based on new qtype
                 const selectedType = parseInt(this.value);
                 const isSingle = selectedType === 1;
                 const inputType = isSingle ? 'radio' : 'checkbox';
@@ -303,27 +389,23 @@ if ($question_id && !$question) {
                 row.innerHTML = `
                     <input type="hidden" name="answer_id[]" value="">
                     <div class="row align-items-center">
-                         <div class="col-md-7">
-                              <textarea class="form-control tinymce-editor" name="new_answer_text[]" rows="2" placeholder="Answer text"></textarea>
-                         </div>
+                        <div class="col-md-7">
+                            <textarea class="form-control tinymce-editor" name="new_answer_text[]" rows="2" placeholder="Answer text"></textarea>
+                        </div>
                         <div class="col-md-3">
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="${inputType}" name="${name}" value="${newAnswerCount}">
-                                <label class="form-check-label">Correct Answer</label>
+                                <label class="form-check-label">Correct</label>
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <button type="button" class="btn btn-danger btn-sm remove-answer">
-                                <i class="bi bi-trash"></i> Remove
-                            </button>
+                            <button type="button" class="btn btn-danger btn-sm remove-answer"><i class="bi bi-trash"></i></button>
                         </div>
                     </div>
                 `;
-
                 container.appendChild(row);
                 newAnswerCount++;
 
-                // Initialize TinyMCE on the new textarea
                 const textarea = row.querySelector('textarea');
                 if (textarea && typeof tinymce !== 'undefined') {
                     tinymce.init({
@@ -341,32 +423,65 @@ if ($question_id && !$question) {
                     });
                 }
 
-                // Add event listener to remove button
                 row.querySelector('.remove-answer').addEventListener('click', function() {
-                    // Remove TinyMCE instance
-                    const textarea = row.querySelector('textarea');
-                    if (textarea && typeof tinymce !== 'undefined' && tinymce.get(textarea.id)) {
-                        tinymce.remove('#' + textarea.id);
+                    const ta = row.querySelector('textarea');
+                    if (ta && typeof tinymce !== 'undefined' && tinymce.get(ta.id)) {
+                        tinymce.remove('#' + ta.id);
                     }
                     row.remove();
                 });
             });
 
-            // Add event listeners to existing remove buttons
             document.querySelectorAll('.remove-answer').forEach(button => {
                 button.addEventListener('click', function() {
                     this.closest('.answer-row').remove();
                 });
             });
 
+            // Inline question list refresher on course change
+            const recentList = document.getElementById('recent-questions-list');
+            const loadingEl = document.getElementById('recent-loading');
+            const noMsg = document.getElementById('no-questions-msg');
+
+            function refreshQuestions(courseId) {
+                if (!courseId) {
+                    recentList.innerHTML = '<p class="text-muted small text-center my-3">Select a course to see questions.</p>';
+                    return;
+                }
+                loadingEl.classList.remove('d-none');
+                fetch('questions_ajax.php?course_id=' + courseId)
+                    .then(function(r) { return r.text(); })
+                    .then(function(html) {
+                        loadingEl.classList.add('d-none');
+                        var existing = recentList.querySelector('#recent-loading');
+                        var msgEl = recentList.querySelector('#no-questions-msg');
+                        // Replace content but keep loading indicator
+                        var loader = recentList.querySelector('#recent-loading');
+                        recentList.innerHTML = html;
+                        if (loader) recentList.appendChild(loader);
+                    })
+                    .catch(function() {
+                        loadingEl.classList.add('d-none');
+                    });
+            }
+
+            courseSelect.addEventListener('change', function() {
+                refreshQuestions(this.value);
+            });
+
             // Form validation
             document.getElementById('questionForm').addEventListener('submit', function(e) {
-                // Ensure TinyMCE content is saved
                 if (typeof tinymce !== 'undefined') {
                     tinymce.triggerSave();
                 }
 
-                // Check if question is empty
+                const courseId = document.getElementById('course_id').value;
+                if (!courseId) {
+                    e.preventDefault();
+                    alert('Please select a training course.');
+                    return false;
+                }
+
                 const questionTextarea = document.getElementById('question');
                 if (!questionTextarea.value.trim()) {
                     e.preventDefault();
@@ -383,13 +498,12 @@ if ($question_id && !$question) {
                     return false;
                 }
 
-                // Check if answers are empty for required types
                 if (qtype === 1 || qtype === 2) {
                     const answerRows = document.querySelectorAll('#answers-container .answer-row');
                     let hasEmptyAnswer = false;
                     answerRows.forEach(row => {
-                        const textarea = row.querySelector('textarea[name^="answer_text"]');
-                        if (textarea && !textarea.value.trim()) {
+                        const ta = row.querySelector('textarea[name^="answer_text"]');
+                        if (ta && !ta.value.trim()) {
                             hasEmptyAnswer = true;
                         }
                     });

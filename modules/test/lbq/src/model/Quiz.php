@@ -255,17 +255,22 @@ class Quiz
     public function listQuestionsNotInTest($test_id, $filters = [])
     {
         $sql = "SELECT q.*,
-                (SELECT string_agg(text, ', ') FROM quiz_answers WHERE questionid = q.id) as answer_preview
+                (SELECT string_agg(text, ', ') FROM quiz_answers WHERE questionid = q.id) as answer_preview,
+                c.course_name
                 FROM quiz_questions q
+                LEFT JOIN public.training_courses c ON c.course_id = q.course_id
                 WHERE q.id NOT IN (SELECT quiz_question_id FROM lbquiz_test_questions WHERE test_id = :test_id)";
 
-        // Add filters if provided
         if (!empty($filters['qtype'])) {
             $sql .= " AND q.qtype = :qtype";
         }
 
         if (!empty($filters['search'])) {
             $sql .= " AND q.question ILIKE :search";
+        }
+
+        if (!empty($filters['course_id'])) {
+            $sql .= " AND q.course_id = :course_id";
         }
 
         $sql .= " ORDER BY q.id DESC";
@@ -279,6 +284,10 @@ class Quiz
 
         if (!empty($filters['search'])) {
             $params[':search'] = '%' . $filters['search'] . '%';
+        }
+
+        if (!empty($filters['course_id'])) {
+            $params[':course_id'] = (int)$filters['course_id'];
         }
 
         $stmt->execute($params);
@@ -551,27 +560,60 @@ class Quiz
 
     public function getQuestion($question_id)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM public.quiz_questions WHERE id = :id");
+        $stmt = $this->pdo->prepare("
+            SELECT q.*, c.course_name 
+            FROM public.quiz_questions q
+            LEFT JOIN public.training_courses c ON c.course_id = q.course_id
+            WHERE q.id = :id
+        ");
         $stmt->execute([':id' => $question_id]);
         return $stmt->fetch();
     }
 
-    public function createQuestion($question, $qtype, $videolink = null)
+    public function createQuestion($question, $qtype, $videolink = null, $course_id = null)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO public.quiz_questions (question, qtype, videolink) 
-                                    VALUES (:q, :t, :v) RETURNING id");
-        $stmt->execute([':q' => $question, ':t' => $qtype, ':v' => $videolink]);
+        $stmt = $this->pdo->prepare("INSERT INTO public.quiz_questions (question, qtype, videolink, course_id) 
+                                    VALUES (:q, :t, :v, :c) RETURNING id");
+        $stmt->execute([
+            ':q' => $question,
+            ':t' => $qtype,
+            ':v' => $videolink,
+            ':c' => $course_id ? intval($course_id) : null
+        ]);
         $row = $stmt->fetch();
         return $row ? $row['id'] : null;
     }
 
-    public function updateQuestion($id, $question, $qtype, $videolink = null)
+    public function updateQuestion($id, $question, $qtype, $videolink = null, $course_id = null)
     {
         $stmt = $this->pdo->prepare("UPDATE public.quiz_questions 
-                                    SET question = :q, qtype = :t, videolink = :v 
+                                    SET question = :q, qtype = :t, videolink = :v, course_id = :c
                                     WHERE id = :id");
-        $stmt->execute([':q' => $question, ':t' => $qtype, ':v' => $videolink, ':id' => $id]);
+        $stmt->execute([
+            ':q' => $question,
+            ':t' => $qtype,
+            ':v' => $videolink,
+            ':c' => $course_id ? intval($course_id) : null,
+            ':id' => $id
+        ]);
         return $stmt->rowCount();
+    }
+
+    public function getQuestionsByCourse($course_id, $limit = 20)
+    {
+        $stmt = $this->pdo->prepare("
+            SELECT q.*, c.course_name,
+                (SELECT COUNT(*) FROM public.quiz_answers WHERE questionid = q.id) as answer_count
+            FROM public.quiz_questions q
+            LEFT JOIN public.training_courses c ON c.course_id = q.course_id
+            WHERE q.course_id = :cid
+            ORDER BY q.id DESC
+            LIMIT :lim
+        ");
+        $stmt->bindValue(':cid', intval($course_id), PDO::PARAM_INT);
+        $stmt->bindValue(':lim', intval($limit), PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 
     public function deleteQuestion($id)
@@ -639,6 +681,48 @@ class Quiz
                                     WHERE rd.response_id = :rid
                                     ORDER BY rd.id");
         $stmt->execute([':rid' => $response_id]);
+        return $stmt->fetchAll();
+    }
+
+    public function listCourses()
+    {
+        return $this->pdo->query("SELECT course_id, course_name FROM public.training_courses ORDER BY course_name")->fetchAll();
+    }
+
+    public function getSessionsByCourse($course_id)
+    {
+        $stmt = $this->pdo->prepare("
+            SELECT * FROM public.training_sessions
+            WHERE course_id = :cid
+            ORDER BY start_date DESC
+        ");
+        $stmt->execute([':cid' => $course_id]);
+        return $stmt->fetchAll();
+    }
+
+    public function getTestsBySession($training_id)
+    {
+        $stmt = $this->pdo->prepare("
+            SELECT t.* FROM lbquiz_tests t
+            WHERE t.training_id = :tid
+               OR t.id IN (SELECT test_id FROM lbquiz_test_sessions WHERE training_id = :tid2)
+            ORDER BY t.title
+        ");
+        $stmt->execute([':tid' => $training_id, ':tid2' => $training_id]);
+        return $stmt->fetchAll();
+    }
+
+    public function getQuestionTests($question_id)
+    {
+        $sql = "SELECT t.id, t.title, tc.course_name, ts.quarter, ts.start_date
+                FROM lbquiz_tests t
+                JOIN lbquiz_test_questions tq ON tq.test_id = t.id
+                LEFT JOIN training_sessions ts ON ts.training_id = t.training_id
+                LEFT JOIN training_courses tc ON tc.course_id = ts.course_id
+                WHERE tq.quiz_question_id = :qid
+                ORDER BY t.title";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':qid' => $question_id]);
         return $stmt->fetchAll();
     }
 }

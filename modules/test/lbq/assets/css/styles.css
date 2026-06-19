@@ -75,7 +75,8 @@ body {
 }
 
 .modal-fullscreen-lg-down .modal-content {
-    height: 100%;
+    overflow: scroll;
+    /* height: 100%; */
     border: 0;
     border-radius: 0;
     width: fit-content !important;

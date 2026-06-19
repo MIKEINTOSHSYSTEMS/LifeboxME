@@ -6,39 +6,64 @@ $quiz = new Quiz($pdo);
 
 $allow_sort = ['t.id', 't.title', 't.is_active', 't.is_pretest', 't.time_limit_minutes', 't.created_at', 'qcount', 'rcount'];
 
-// AJAX endpoint: get training sessions filtered by course
-if (isset($_GET['ajax']) && $_GET['ajax'] === 'get_trainings_by_course' && isset($_GET['course_name'])) {
+// AJAX endpoints: get training sessions filtered by course
+if (isset($_GET['ajax']) && $_GET['ajax'] === 'get_trainings_by_course') {
     header('Content-Type: application/json');
+    $aj_params = [];
+    $aj_where = [];
+    if (!empty($_GET['course_name'])) {
+        $aj_where[] = "tc.course_name = :c";
+        $aj_params[':c'] = $_GET['course_name'];
+    }
+    if (!empty($_GET['course_id'])) {
+        $aj_where[] = "ts.course_id = :cid";
+        $aj_params[':cid'] = intval($_GET['course_id']);
+    }
+    $aj_where_sql = $aj_where ? 'WHERE ' . implode(' AND ', $aj_where) : '';
     $stmt = $pdo->prepare("
         SELECT ts.training_id, tc.course_name, ts.training_type, ts.quarter, ts.start_date, ts.end_date
         FROM training_sessions ts
         LEFT JOIN training_courses tc ON tc.course_id = ts.course_id
-        WHERE tc.course_name = :c
+        $aj_where_sql
         ORDER BY ts.start_date DESC
     ");
-    $stmt->execute([':c' => $_GET['course_name']]);
+    $stmt->execute($aj_params);
     echo json_encode($stmt->fetchAll());
     exit;
 }
 
-// Get trainings for dropdown
-$trainings = $pdo->query("
+// Get all courses for filter and create modal
+$courses_filter_data = $pdo->query("SELECT course_id, course_name FROM public.training_courses ORDER BY course_name")->fetchAll();
+
+// Get all trainings for main filter dropdown
+$all_trainings = $pdo->query("
     SELECT ts.training_id, tc.course_name, ts.training_type, ts.quarter, ts.start_date, ts.end_date
     FROM training_sessions ts
     LEFT JOIN training_courses tc ON tc.course_id = ts.course_id
     ORDER BY tc.course_name ASC, ts.training_id ASC, ts.quarter ASC, ts.start_date DESC
 ")->fetchAll();
 
-// Get all course names for dropdown
+// Get trainings filtered by course for main filter's training dropdown visibility
+$create_course_filter = isset($_GET['create_course_filter']) ? intval($_GET['create_course_filter']) : 0;
+$trainings_sql = "
+    SELECT ts.training_id, tc.course_name, ts.training_type, ts.quarter, ts.start_date, ts.end_date
+    FROM training_sessions ts
+    LEFT JOIN training_courses tc ON tc.course_id = ts.course_id
+";
+$trainings_params = [];
+if ($create_course_filter > 0) {
+    $trainings_sql .= " WHERE ts.course_id = :cid";
+    $trainings_params[':cid'] = $create_course_filter;
+}
+$trainings_sql .= " ORDER BY tc.course_name ASC, ts.training_id ASC, ts.quarter ASC, ts.start_date DESC";
+$trainings_stmt = $pdo->prepare($trainings_sql);
+$trainings_stmt->execute($trainings_params);
+$trainings = $trainings_stmt->fetchAll();
+
+// Get all courses for filter dropdown (including those without tests yet)
 $courses = $pdo->query("
     SELECT DISTINCT tc.course_name
     FROM training_courses tc
-    JOIN training_sessions ts ON ts.course_id = tc.course_id
-    WHERE ts.training_id IN (
-        SELECT training_id FROM lbquiz_tests WHERE training_id IS NOT NULL
-        UNION
-        SELECT training_id FROM lbquiz_test_sessions
-    )
     ORDER BY tc.course_name
 ")->fetchAll(PDO::FETCH_COLUMN);
 
@@ -119,7 +144,12 @@ $sql = "
             ) u
             JOIN training_sessions ts3 ON ts3.training_id = u.tid
             LEFT JOIN training_courses tc2 ON tc2.course_id = ts3.course_id
-           ) as session_info
+           ) as session_info,
+           (SELECT tc3.course_name
+            FROM training_sessions ts6
+            LEFT JOIN training_courses tc3 ON tc3.course_id = ts6.course_id
+            WHERE ts6.training_id = t.training_id
+            LIMIT 1) as course_name
     FROM lbquiz_tests t
 ";
 
@@ -335,6 +365,7 @@ function sortLink($col, $label, $current_col, $current_dir, $qs) {
                                         <tr>
                                             <th class="sortable"><?= sortLink('t.id', 'ID', $sort_col, $sort_dir, $query_string) ?></th>
                                             <th class="sortable"><?= sortLink('t.title', 'Title', $sort_col, $sort_dir, $query_string) ?></th>
+                                            <th>Course</th>
                                             <th>Training Sessions</th>
                                             <th class="sortable"><?= sortLink('qcount', 'Questions', $sort_col, $sort_dir, $query_string) ?></th>
                                             <th class="sortable"><?= sortLink('rcount', 'Responses', $sort_col, $sort_dir, $query_string) ?></th>
@@ -350,6 +381,13 @@ function sortLink($col, $label, $current_col, $current_dir, $qs) {
                                             <tr>
                                                 <td><?= $t['id'] ?></td>
                                                 <td><?= htmlspecialchars($t['title']) ?></td>
+                                                <td>
+                                                    <?php if (!empty($t['course_name'])): ?>
+                                                        <span class="badge bg-primary"><?= htmlspecialchars($t['course_name']) ?></span>
+                                                    <?php else: ?>
+                                                        <span class="badge bg-secondary">N/A</span>
+                                                    <?php endif; ?>
+                                                </td>
                                                 <td>
                                                     <?php if (!empty($t['session_info'])): ?>
                                                         <?php foreach (explode('; ', $t['session_info']) as $si): ?>
@@ -463,9 +501,18 @@ function sortLink($col, $label, $current_col, $current_dir, $qs) {
                                 <input type="text" class="form-control" id="title" name="title" required>
                             </div>
                             <div class="col-md-6">
+                                <label for="create_course_filter" class="form-label">Filter by Course</label>
+                                <select class="form-select mb-2" id="create_course_filter">
+                                    <option value="">All Courses</option>
+                                    <?php foreach ($courses_filter_data as $cf): ?>
+                                        <option value="<?= $cf['course_id'] ?>">
+                                            <?= htmlspecialchars($cf['course_name']) ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
                                 <label for="training_ids" class="form-label">Training Sessions</label>
                                 <select class="form-select" id="training_ids" name="training_ids[]" multiple required style="min-height: 120px;">
-                                    <?php foreach ($trainings as $tr): ?>
+                                    <?php foreach ($all_trainings as $tr): ?>
                                         <option value="<?= $tr['training_id'] ?>">
                                             <?= htmlspecialchars($tr['course_name'] ?? 'Training') ?> - Session <?= $tr['training_id'] ?> - Quarter <?= htmlspecialchars($tr['quarter'] ?? '') ?>
                                             (<?= $tr['start_date'] ? date('M Y', strtotime($tr['start_date'])) : 'N/A' ?>)
@@ -513,6 +560,33 @@ function sortLink($col, $label, $current_col, $current_dir, $qs) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // --- Create Modal: Inline course filter (no page reload) ---
+        document.getElementById('create_course_filter')?.addEventListener('change', function() {
+            var courseId = this.value;
+            var trainingSelect = document.getElementById('training_ids');
+            var url = 'tests.php?ajax=get_trainings_by_course&course_id=' + encodeURIComponent(courseId);
+            fetch(url)
+                .then(function(r) { return r.json(); })
+                .then(function(sessions) {
+                    trainingSelect.innerHTML = '';
+                    sessions.forEach(function(s) {
+                        var opt = document.createElement('option');
+                        opt.value = s.training_id;
+                        opt.textContent = (s.course_name || 'Training') + ' - Session ' + s.training_id + ' - Q' + (s.quarter || '') + ' (' + formatDate(s.start_date) + ')';
+                        trainingSelect.appendChild(opt);
+                    });
+                    if (sessions.length === 0) {
+                        trainingSelect.innerHTML = '<option value="" disabled>No sessions for this course</option>';
+                    }
+                });
+        });
+
+        function formatDate(dateStr) {
+            if (!dateStr) return 'N/A';
+            var d = new Date(dateStr);
+            return d.toLocaleString('default', { month: 'short', year: 'numeric' });
+        }
+
         function changePerPage(val) {
             var params = new URLSearchParams(window.location.search);
             params.set('per_page', val);
@@ -520,7 +594,7 @@ function sortLink($col, $label, $current_col, $current_dir, $qs) {
             window.location.search = params.toString();
         }
 
-        // Cascade training dropdown on course change
+        // Main filter: cascade training dropdown on course change
         document.getElementById('filter_course').addEventListener('change', function() {
             var course = this.value;
             var trainingSelect = document.getElementById('filter_training');

@@ -10,6 +10,31 @@ require __DIR__ . '/../src/model/Quiz.php';
 require __DIR__ . '/session_helper.php';
 $quiz = new Quiz($pdo);
 
+// AJAX endpoint: get training sessions by course_id
+if (isset($_GET['ajax']) && $_GET['ajax'] === 'get_trainings_by_course' && isset($_GET['course_id'])) {
+    header('Content-Type: application/json');
+    $cid = intval($_GET['course_id']);
+    if ($cid > 0) {
+        $stmt = $pdo->prepare("
+            SELECT ts.training_id, tc.course_name, ts.training_type, ts.quarter, ts.start_date, ts.end_date
+            FROM training_sessions ts
+            LEFT JOIN training_courses tc ON tc.course_id = ts.course_id
+            WHERE ts.course_id = :cid
+            ORDER BY ts.start_date DESC
+        ");
+        $stmt->execute([':cid' => $cid]);
+    } else {
+        $stmt = $pdo->query("
+            SELECT ts.training_id, tc.course_name, ts.training_type, ts.quarter, ts.start_date, ts.end_date
+            FROM training_sessions ts
+            LEFT JOIN training_courses tc ON tc.course_id = ts.course_id
+            ORDER BY tc.course_name ASC, ts.training_id ASC, ts.quarter ASC, ts.start_date DESC
+        ");
+    }
+    echo json_encode($stmt->fetchAll());
+    exit;
+}
+
 $test_id = intval($_GET['id'] ?? 0);
 if (!$test_id) {
   header('Location: tests.php');
@@ -36,15 +61,38 @@ if (isset($_GET['qtype_filter']) && !empty($_GET['qtype_filter'])) {
 if (isset($_GET['search_questions']) && !empty($_GET['search_questions'])) {
   $filters['search'] = trim($_GET['search_questions']);
 }
+if (isset($_GET['course_questions_filter']) && !empty($_GET['course_questions_filter'])) {
+  $filters['course_id'] = intval($_GET['course_questions_filter']);
+}
 $not_mapped = $quiz->listQuestionsNotInTest($test_id, $filters);
 
-// Get trainings for dropdown
-$trainings = $pdo->query("
+// Get courses for filter
+$test_courses = $pdo->query("SELECT course_id, course_name FROM public.training_courses ORDER BY course_name")->fetchAll();
+
+// Get trainings for dropdown (filtered by course if specified)
+$test_course_filter = isset($_GET['course_filter']) ? intval($_GET['course_filter']) : 0;
+// Auto-detect course from test's existing sessions if no explicit filter
+if ($test_course_filter === 0 && !empty($test_session_ids)) {
+    $ids = array_map('intval', $test_session_ids);
+    $placeholders = implode(',', $ids);
+    $detected = $pdo->query("SELECT DISTINCT course_id FROM training_sessions WHERE training_id IN ($placeholders)")->fetchAll(PDO::FETCH_COLUMN);
+    if (count($detected) === 1) {
+        $test_course_filter = (int)$detected[0];
+    }
+}
+$trainings_sql = "
     SELECT ts.training_id, tc.course_name, ts.training_type, ts.quarter, ts.start_date, ts.end_date
     FROM public.training_sessions ts
     LEFT JOIN public.training_courses tc ON tc.course_id = ts.course_id
-    ORDER BY tc.course_name ASC, ts.training_id ASC, ts.quarter ASC, ts.start_date DESC
-");
+";
+$trainings_params = [];
+if ($test_course_filter > 0) {
+    $trainings_sql .= " WHERE ts.course_id = :cid";
+    $trainings_params[':cid'] = $test_course_filter;
+}
+$trainings_sql .= " ORDER BY tc.course_name ASC, ts.training_id ASC, ts.quarter ASC, ts.start_date DESC";
+$trainings = $pdo->prepare($trainings_sql);
+$trainings->execute($trainings_params);
 
 // Initialize debug array
 $debug_messages = [];
@@ -549,6 +597,15 @@ $qtypes = [
                   <input type="text" class="form-control" id="title" name="title" value="<?= htmlspecialchars($test['title']) ?>" required>
                 </div>
                 <div class="col-md-4">
+                  <label for="course_filter" class="form-label">Filter by Course</label>
+                  <select class="form-select mb-2" id="course_filter" onchange="filterByCourse(this.value)">
+                    <option value="">All Courses</option>
+                    <?php foreach ($test_courses as $tc): ?>
+                      <option value="<?= $tc['course_id'] ?>" <?= $test_course_filter == $tc['course_id'] ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($tc['course_name']) ?>
+                      </option>
+                    <?php endforeach; ?>
+                  </select>
                   <label for="training_ids" class="form-label">Training Sessions</label>
                   <select class="form-select" id="training_ids" name="training_ids[]" multiple style="min-height: 120px;">
                     <?php foreach ($trainings as $tr): ?>
@@ -673,7 +730,7 @@ $qtypes = [
                 <!-- Filters -->
                 <form method="get" class="row g-2 mb-3">
                   <input type="hidden" name="id" value="<?= $test_id ?>">
-                  <div class="col-md-6">
+                  <div class="col-md-4">
                     <select class="form-select" name="qtype_filter">
                       <option value="">All Types</option>
                       <?php foreach ($qtypes as $id => $name): ?>
@@ -681,11 +738,21 @@ $qtypes = [
                       <?php endforeach; ?>
                     </select>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-4">
+                    <select class="form-select" name="course_questions_filter">
+                      <option value="">All Courses</option>
+                      <?php foreach ($test_courses as $tc): ?>
+                        <option value="<?= $tc['course_id'] ?>" <?= ($filters['course_id'] ?? '') == $tc['course_id'] ? 'selected' : '' ?>>
+                          <?= htmlspecialchars($tc['course_name']) ?>
+                        </option>
+                      <?php endforeach; ?>
+                    </select>
+                  </div>
+                  <div class="col-md-4">
                     <div class="input-group">
                       <input type="text" class="form-control" name="search_questions" placeholder="Search..." value="<?= htmlspecialchars($filters['search'] ?? '') ?>">
                       <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
-                      <?php if (!empty($filters)): ?>
+                      <?php if (!empty($filters['qtype']) || !empty($filters['search']) || !empty($filters['course_id'])): ?>
                         <a href="test_edit.php?id=<?= $test_id ?>" class="btn btn-outline-secondary"><i class="bi bi-x-circle"></i></a>
                       <?php endif; ?>
                     </div>
@@ -712,6 +779,9 @@ $qtypes = [
                                 <label class="form-check-label" for="bulk_q<?= $n['id'] ?>">
                                   <strong>ID: <?= $n['id'] ?></strong> - <?= substr(strip_tags($n['question']), 0, 60) ?>...
                                   <span class="badge bg-info"><?= $qtypes[$n['qtype']] ?? 'Unknown' ?></span>
+                                  <?php if (!empty($n['course_name'])): ?>
+                                    <span class="badge bg-primary course-badge"><?= htmlspecialchars($n['course_name']) ?></span>
+                                  <?php endif; ?>
                                 </label>
                               </div>
                             <?php endforeach; ?>
@@ -735,12 +805,12 @@ $qtypes = [
                 <h6>Add single question:</h6>
                 <form method="post" class="row g-2">
                   <div class="col-md-7">
-                    <select class="form-select" name="question_id" required>
-                      <option value="">Select Question</option>
-                      <?php foreach ($not_mapped as $n): ?>
-                        <option value="<?= $n['id'] ?>">ID: <?= $n['id'] ?> - <?= substr(strip_tags($n['question']), 0, 40) ?>...</option>
-                      <?php endforeach; ?>
-                    </select>
+                      <select class="form-select" name="question_id" required>
+                        <option value="">Select Question</option>
+                        <?php foreach ($not_mapped as $n): ?>
+                          <option value="<?= $n['id'] ?>">ID: <?= $n['id'] ?> - <?= substr(strip_tags($n['question']), 0, 40) ?>... <?= !empty($n['course_name']) ? '[' . $n['course_name'] . ']' : '' ?></option>
+                        <?php endforeach; ?>
+                      </select>
                   </div>
                   <div class="col-md-3">
                     <input type="number" class="form-control" name="weight" value="1.0" step="0.1" min="0.1" required>
@@ -861,6 +931,29 @@ $qtypes = [
           alert('Please select at least one question to add.');
         }
       });
+
+      // Course filter for training sessions (inline AJAX, no page reload)
+      <?php $test_session_ids_json = json_encode(array_map('intval', $test_session_ids)); ?>
+      var currentTestSessionIds = <?= $test_session_ids_json ?>;
+
+      window.filterByCourse = function(courseId) {
+        var trainingSelect = document.getElementById('training_ids');
+        var url = 'test_edit.php?id=<?= $test_id ?>&ajax=get_trainings_by_course&course_id=' + encodeURIComponent(courseId);
+        fetch(url)
+          .then(function(r) { return r.json(); })
+          .then(function(sessions) {
+            trainingSelect.innerHTML = '';
+            sessions.forEach(function(s) {
+              var opt = document.createElement('option');
+              opt.value = s.training_id;
+              opt.textContent = (s.course_name || 'Training') + ' - Session ' + s.training_id;
+              if (currentTestSessionIds.indexOf(s.training_id) !== -1) {
+                opt.selected = true;
+              }
+              trainingSelect.appendChild(opt);
+            });
+          });
+      };
     });
   </script>
 </body>
