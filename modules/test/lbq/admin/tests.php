@@ -199,7 +199,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($test_id) {
                 header("Location: test_edit.php?id=$test_id");
                 exit;
+            } else {
+                $_SESSION['flash_message'] = "Failed to create test. Check that the migration has been run (migration_add_cert_pass.sql) and that cert_enabled / pass_mark columns exist.";
+                $_SESSION['flash_type'] = "danger";
             }
+        } else {
+            $_SESSION['flash_message'] = "Please provide a title and select at least one training session.";
+            $_SESSION['flash_type'] = "warning";
         }
     }
 
@@ -662,7 +668,7 @@ function sortLink($col, $label, $current_col, $current_dir, $qs) {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Create Test</button>
+                        <button type="submit" name="create_test" value="1" class="btn btn-primary">Create Test</button>
                     </div>
                 </form>
             </div>

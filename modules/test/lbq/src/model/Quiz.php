@@ -75,9 +75,14 @@ class Quiz
         $stmt->bindValue(':active', $is_active ? 'true' : 'false', PDO::PARAM_STR);
         $stmt->bindValue(':tries', max(0, (int)$no_tries), PDO::PARAM_INT);
         $stmt->bindValue(':cert', $cert_enabled ? 'true' : 'false', PDO::PARAM_STR);
-        $stmt->bindValue(':pass', max(0, (float)$pass_mark));
+        $stmt->bindValue(':pass', number_format(max(0, (float)$pass_mark), 2, '.', ''), PDO::PARAM_STR);
 
-        $stmt->execute();
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Quiz::createTest failed: " . $e->getMessage());
+            return null;
+        }
         $row = $stmt->fetch();
         $test_id = $row ? $row['id'] : null;
 
@@ -108,7 +113,7 @@ class Quiz
             ':pre' => $is_pretest ? 'true' : 'false',
             ':tries' => max(0, (int)$no_tries),
             ':cert' => $cert_enabled ? 'true' : 'false',
-            ':pass' => max(0, (float)$pass_mark),
+            ':pass' => number_format(max(0, (float)$pass_mark), 2, '.', ''),
             ':id' => (int)$id
         ];
 
