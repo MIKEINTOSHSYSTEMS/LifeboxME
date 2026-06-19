@@ -570,13 +570,7 @@ $qtypes = [
           <div class="col-md-3">
             <div class="stats-card" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
               <h6>Training Sessions</h6>
-              <?php if (!empty($test_sessions)): ?>
-                <?php foreach ($test_sessions as $s): ?>
-                  <div><small><?= htmlspecialchars($s['course_name'] ?? 'Training') ?> - Session <?= $s['training_id'] ?></small></div>
-                <?php endforeach; ?>
-              <?php else: ?>
-                <h5><?= htmlspecialchars($test['training_id'] ?? 'N/A') ?></h5>
-              <?php endif; ?>
+              <h3><?= count($test_sessions) ?></h3>
             </div>
           </div>
           <div class="col-md-3">

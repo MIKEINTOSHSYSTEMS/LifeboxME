@@ -136,15 +136,11 @@ $sql = "
     SELECT t.*,
            (SELECT COUNT(*) FROM lbquiz_test_questions tq JOIN quiz_questions q ON q.id = tq.quiz_question_id WHERE tq.test_id = t.id) as qcount,
            (SELECT COUNT(*) FROM lbquiz_responses r WHERE r.test_id = t.id) as rcount,
-           (SELECT string_agg(DISTINCT tc2.course_name || ' - Session ' || u.tid || ' - Q' || COALESCE(ts3.quarter, '') || ' (' || COALESCE(to_char(ts3.start_date, 'Mon YYYY'), 'N/A') || ')', '; ')
-            FROM (
+           (SELECT COUNT(*) FROM (
                 SELECT t.training_id AS tid
                 UNION
                 SELECT ts4.training_id FROM lbquiz_test_sessions ts4 WHERE ts4.test_id = t.id
-            ) u
-            JOIN training_sessions ts3 ON ts3.training_id = u.tid
-            LEFT JOIN training_courses tc2 ON tc2.course_id = ts3.course_id
-           ) as session_info,
+           ) u) as session_count,
            (SELECT tc3.course_name
             FROM training_sessions ts6
             LEFT JOIN training_courses tc3 ON tc3.course_id = ts6.course_id
@@ -454,7 +450,7 @@ function sortLink($col, $label, $current_col, $current_dir, $qs) {
                                                 <th class="sortable"><?= sortLink('t.id', 'ID', $sort_col, $sort_dir, $query_string) ?></th>
                                                 <th class="sortable"><?= sortLink('t.title', 'Title', $sort_col, $sort_dir, $query_string) ?></th>
                                                 <th>Course</th>
-                                                <th>Training Sessions</th>
+                                                <th>Sessions</th>
                                                 <th class="sortable"><?= sortLink('qcount', 'Questions', $sort_col, $sort_dir, $query_string) ?></th>
                                                 <th class="sortable"><?= sortLink('rcount', 'Responses', $sort_col, $sort_dir, $query_string) ?></th>
                                                 <th class="sortable"><?= sortLink('t.time_limit_minutes', 'Time Limit', $sort_col, $sort_dir, $query_string) ?></th>
@@ -480,14 +476,8 @@ function sortLink($col, $label, $current_col, $current_dir, $qs) {
                                                             <span class="badge bg-secondary">N/A</span>
                                                         <?php endif; ?>
                                                     </td>
-                                                    <td>
-                                                        <?php if (!empty($t['session_info'])): ?>
-                                                            <?php foreach (explode('; ', $t['session_info']) as $si): ?>
-                                                                <div><?= htmlspecialchars($si) ?></div>
-                                                            <?php endforeach; ?>
-                                                        <?php else: ?>
-                                                            Session: <?= htmlspecialchars($t['training_id'] ?? 'N/A') ?>
-                                                        <?php endif; ?>
+                                                    <td class="text-center">
+                                                        <span class="badge bg-primary"><?= (int)($t['session_count'] ?? 0) ?></span>
                                                     </td>
                                                     <td class="text-center">
                                                         <span class="badge bg-info question-count-badge"><?= $t['qcount'] ?></span>
