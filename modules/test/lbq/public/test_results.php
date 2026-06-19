@@ -378,11 +378,16 @@ function stripHtmlTags($html)
                             }
                             ?>
                         </div>
+                        <?php
+                        $can_cert = !empty($test['cert_enabled']) && ($test['pass_mark'] ?? 0) > 0 && ($response['score'] ?? 0) >= $test['pass_mark'];
+                        ?>
+                        <?php if ($can_cert): ?>
                         <div class="text-center mt-4">
                             <a href="certificate.php?response_id=<?= $response_id ?>" class="certificate-btn">
                                 <i class="bi bi-award me-2"></i> View Certificate
                             </a>
                         </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -447,8 +452,13 @@ function stripHtmlTags($html)
                                         $is_correct_answer = $answer['correct'] == 't' || $answer['correct'] === true;
                                         $answer_text = renderHtmlContent($answer['text']);
                                     ?>
+                                        <?php
+                                        $letter_index = array_search($answer, $answers);
+                                        $letter = $letter_index !== false ? chr(65 + $letter_index) : '?';
+                                        ?>
                                         <div class="answer-option <?= $is_correct_answer ? 'correct' : ($is_selected ? 'incorrect' : '') ?> <?= $is_selected ? 'selected' : '' ?>">
                                             <div class="d-flex align-items-start">
+                                                <span class="badge bg-<?= $is_selected ? 'primary' : ($is_correct_answer ? 'success' : 'secondary') ?> me-2" style="min-width: 28px;"><?= $letter ?></span>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="<?= $question['qtype'] == 1 ? 'radio' : 'checkbox' ?>"
                                                         <?= $is_selected ? 'checked' : '' ?> disabled>
@@ -504,9 +514,11 @@ function stripHtmlTags($html)
             <a href="take_test.php?test_id=<?= $test['id'] ?>&participation_id=<?= $response['participation_id'] ?>" class="btn btn-info me-2">
                 <i class="bi bi-arrow-repeat me-1"></i> Retake Test
             </a>
+            <?php if ($can_cert): ?>
             <a href="certificate.php?response_id=<?= $response_id ?>" class="btn btn-success me-2">
                 <i class="bi bi-award me-1"></i> View Certificate
             </a>
+            <?php endif; ?>
             <a href="all_results.php" class="btn btn-outline-primary">
                 <i class="bi bi-list-ul me-1"></i> View All Results
             </a>

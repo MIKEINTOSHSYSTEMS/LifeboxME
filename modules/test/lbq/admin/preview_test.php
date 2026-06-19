@@ -146,6 +146,8 @@ $questions = $quiz->getTestQuestions($test_id);
         <div class="stat"><i class="bi bi-question-circle"></i> <?= count($questions) ?> question(s)</div>
         <div class="stat"><i class="bi bi-clock"></i> <?= $test['time_limit_minutes'] ? $test['time_limit_minutes'] . ' min limit' : 'No time limit' ?></div>
         <div class="stat"><i class="bi bi-arrow-repeat"></i> <?= ($test['no_tries'] ?? 0) > 0 ? $test['no_tries'] . ' attempts max' : 'Unlimited attempts' ?></div>
+        <div class="stat"><i class="bi bi-award"></i> Pass mark: <?= ($test['pass_mark'] ?? 0) > 0 ? $test['pass_mark'] . '%' : 'N/A' ?></div>
+        <div class="stat"><i class="bi bi-shield-check"></i> Certificate: <?= !empty($test['cert_enabled']) ? 'Enabled' : 'Disabled' ?></div>
         <div class="stat">
             <i class="bi bi-toggle-on"></i>
             <span class="badge bg-<?= $test['is_active'] ? 'success' : 'secondary' ?>"><?= $test['is_active'] ? 'Active' : 'Inactive' ?></span>

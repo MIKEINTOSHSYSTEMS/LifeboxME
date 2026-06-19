@@ -116,6 +116,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $is_pretest = isset($_POST['is_pretest']) && $_POST['is_pretest'] === 'on';
     $is_active = isset($_POST['is_active']) && $_POST['is_active'] === 'on';
     $no_tries = isset($_POST['no_tries']) ? intval($_POST['no_tries']) : 0;
+    $cert_enabled = !empty($_POST['cert_enabled']);
+    $pass_mark = isset($_POST['pass_mark']) ? floatval($_POST['pass_mark']) : 0;
 
     $training_ids = array_values(array_map('intval', $training_ids));
     $training_ids = array_filter($training_ids, fn($v) => $v > 0);
@@ -138,7 +140,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                       time_limit_minutes = :time_limit,
                       is_pretest = :is_pretest, 
                       is_active = :is_active,
-                      no_tries = :no_tries";
+                      no_tries = :no_tries,
+                      cert_enabled = :cert_enabled,
+                      pass_mark = :pass_mark";
 
       $params = [
         ':title' => $title,
@@ -147,6 +151,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ':is_pretest' => $is_pretest ? 't' : 'f',
         ':is_active' => $is_active ? 't' : 'f',
         ':no_tries' => max(0, $no_tries),
+        ':cert_enabled' => $cert_enabled ? 't' : 'f',
+        ':pass_mark' => max(0, $pass_mark),
         ':id' => $test_id
       ];
 
@@ -583,7 +589,7 @@ $qtypes = [
             <div class="stats-card" style="background: linear-gradient(135deg, #277c99 0%, #44a08d 100%);">
               <h6>Type</h6>
               <h4><span class="badge bg-<?= $test['is_pretest'] ? 'info' : 'primary' ?>"><?= $test['is_pretest'] ? 'Pre Test' : 'Post Test' ?></span></h4>
-              <small>Status: <?= $test['is_active'] ? 'Active' : 'Inactive' ?> &middot; Max attempts: <?= ($test['no_tries'] ?? 0) > 0 ? $test['no_tries'] : 'Unlimited' ?></small>
+              <small>Status: <?= $test['is_active'] ? 'Active' : 'Inactive' ?> &middot; Max attempts: <?= ($test['no_tries'] ?? 0) > 0 ? $test['no_tries'] : 'Unlimited' ?> &middot; Pass mark: <?= ($test['pass_mark'] ?? 0) > 0 ? $test['pass_mark'] . '%' : 'N/A' ?> &middot; Cert: <?= !empty($test['cert_enabled']) ? 'Yes' : 'No' ?></small>
             </div>
           </div>
         </div>
@@ -630,20 +636,31 @@ $qtypes = [
                   <label for="time_limit_minutes" class="form-label">Time Limit (minutes)</label>
                   <input type="number" class="form-control" id="time_limit_minutes" name="time_limit_minutes" value="<?= $test['time_limit_minutes'] ?? '' ?>" min="0" placeholder="0 for no limit">
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <label for="no_tries" class="form-label">Max Attempts</label>
                   <input type="number" class="form-control" id="no_tries" name="no_tries" value="<?= $test['no_tries'] ?? 0 ?>" min="0" placeholder="0 = unlimited">
                   <small class="text-muted">0 means unlimited attempts</small>
                 </div>
+                <div class="col-md-3">
+                  <label for="pass_mark" class="form-label">Pass Mark (%)</label>
+                  <input type="number" class="form-control" id="pass_mark" name="pass_mark" value="<?= $test['pass_mark'] ?? 0 ?>" min="0" max="100" step="0.01">
+                  <small class="text-muted">0 means no minimum</small>
+                </div>
               </div>
               <div class="row mb-3">
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="is_pretest" name="is_pretest" <?= $test['is_pretest'] ? 'checked' : '' ?>>
                     <label class="form-check-label" for="is_pretest">This is a Pre Test</label>
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="cert_enabled" name="cert_enabled" <?= !empty($test['cert_enabled']) ? 'checked' : '' ?>>
+                    <label class="form-check-label" for="cert_enabled">Certificate Enabled</label>
+                  </div>
+                </div>
+                <div class="col-md-3">
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="is_active" name="is_active" <?= $test['is_active'] ? 'checked' : '' ?>>
                     <label class="form-check-label" for="is_active">Active</label>

@@ -123,6 +123,14 @@ if (!$test_id) {
                             </small>
                           </div>
                           <?php $noTries = (int)($test['no_tries'] ?? 0); ?>
+                          <?php if (!empty($test['cert_enabled']) && ($test['pass_mark'] ?? 0) > 0): ?>
+                            <div class="mb-2">
+                              <small class="text-muted">
+                                <i class="bi bi-award me-1"></i>
+                                Pass mark: <?= $test['pass_mark'] ?>%
+                              </small>
+                            </div>
+                          <?php endif; ?>
                           <?php if ($noTries > 0): ?>
                             <div class="mb-2">
                               <small class="text-muted">

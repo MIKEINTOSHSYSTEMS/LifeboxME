@@ -32,6 +32,7 @@ $trainings = $stmt->fetchAll();
 // Get test results with course info
 $stmt = $pdo->prepare("
     SELECT r.*, t.title as test_title, t.is_pretest, t.training_id,
+           t.cert_enabled, t.pass_mark,
            tc.course_name, ts.quarter
     FROM lbquiz_responses r
     LEFT JOIN lbquiz_tests t ON t.id = r.test_id
@@ -424,9 +425,14 @@ $course_performance = $course_perf->fetchAll();
                                             <a href="test_results.php?response_id=<?= $result['id'] ?>" class="btn btn-sm btn-outline-primary me-2">
                                                 <i class="bi bi-eye me-1"></i> View Details
                                             </a>
-                                            <a href="certificate.php?response_id=<?= $result['id'] ?>" class="btn btn-sm certificate-btn">
-                                                <i class="bi bi-award me-1"></i> Certificate
-                                            </a>
+                                            <?php
+                                            $can_cert = !empty($result['cert_enabled']) && ($result['pass_mark'] ?? 0) > 0 && ($result['score'] ?? 0) >= $result['pass_mark'];
+                                            ?>
+                                            <?php if ($can_cert): ?>
+                                                <a href="certificate.php?response_id=<?= $result['id'] ?>" class="btn btn-sm certificate-btn">
+                                                    <i class="bi bi-award me-1"></i> Certificate
+                                                </a>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 <?php endforeach; ?>

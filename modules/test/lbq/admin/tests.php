@@ -4,7 +4,7 @@ require __DIR__ . '/../src/model/Quiz.php';
 require __DIR__ . '/session_helper.php';
 $quiz = new Quiz($pdo);
 
-$allow_sort = ['t.id', 't.title', 't.is_active', 't.is_pretest', 't.time_limit_minutes', 't.no_tries', 't.created_at', 'qcount', 'rcount'];
+$allow_sort = ['t.id', 't.title', 't.is_active', 't.is_pretest', 't.time_limit_minutes', 't.no_tries', 't.pass_mark', 't.cert_enabled', 't.created_at', 'qcount', 'rcount'];
 
 // AJAX endpoints: get training sessions filtered by course
 if (isset($_GET['ajax']) && $_GET['ajax'] === 'get_trainings_by_course') {
@@ -196,8 +196,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $is_pretest = !empty($_POST['is_pretest']);
         $is_active = !empty($_POST['is_active']);
         $no_tries = isset($_POST['no_tries']) ? intval($_POST['no_tries']) : 0;
+        $cert_enabled = !empty($_POST['cert_enabled']);
+        $pass_mark = isset($_POST['pass_mark']) ? floatval($_POST['pass_mark']) : 0;
         if ($title && !empty($training_ids)) {
-            $test_id = $quiz->createTest($training_ids, $title, $description, $time_limit, $is_pretest, $is_active, $no_tries);
+            $test_id = $quiz->createTest($training_ids, $title, $description, $time_limit, $is_pretest, $is_active, $no_tries, $cert_enabled, $pass_mark);
             if ($test_id) {
                 header("Location: test_edit.php?id=$test_id");
                 exit;
@@ -457,6 +459,8 @@ function sortLink($col, $label, $current_col, $current_dir, $qs) {
                                                 <th class="sortable"><?= sortLink('rcount', 'Responses', $sort_col, $sort_dir, $query_string) ?></th>
                                                 <th class="sortable"><?= sortLink('t.time_limit_minutes', 'Time Limit', $sort_col, $sort_dir, $query_string) ?></th>
                                                 <th class="sortable"><?= sortLink('t.no_tries', 'Max Attempts', $sort_col, $sort_dir, $query_string) ?></th>
+                                                <th class="sortable"><?= sortLink('t.pass_mark', 'Pass Mark', $sort_col, $sort_dir, $query_string) ?></th>
+                                                <th class="sortable"><?= sortLink('t.cert_enabled', 'Cert', $sort_col, $sort_dir, $query_string) ?></th>
                                                 <th class="sortable"><?= sortLink('t.is_active', 'Status', $sort_col, $sort_dir, $query_string) ?></th>
                                                 <th class="sortable"><?= sortLink('t.is_pretest', 'Type', $sort_col, $sort_dir, $query_string) ?></th>
                                                 <th class="sortable"><?= sortLink('t.created_at', 'Created At', $sort_col, $sort_dir, $query_string) ?></th>
@@ -493,6 +497,12 @@ function sortLink($col, $label, $current_col, $current_dir, $qs) {
                                                     </td>
                                                     <td><?= $t['time_limit_minutes'] ? $t['time_limit_minutes'] . ' min' : 'No limit' ?></td>
                                                     <td><?= ($t['no_tries'] ?? 0) > 0 ? $t['no_tries'] : 'Unlimited' ?></td>
+                                                    <td><?= ($t['pass_mark'] ?? 0) > 0 ? $t['pass_mark'] . '%' : '—' ?></td>
+                                                    <td>
+                                                        <span class="badge bg-<?= !empty($t['cert_enabled']) ? 'success' : 'secondary' ?>">
+                                                            <?= !empty($t['cert_enabled']) ? 'Yes' : 'No' ?>
+                                                        </span>
+                                                    </td>
                                                     <td>
                                                         <span class="badge bg-<?= $t['is_active'] ? 'success' : 'secondary' ?>">
                                                             <?= $t['is_active'] ? 'Active' : 'Inactive' ?>
@@ -634,13 +644,25 @@ function sortLink($col, $label, $current_col, $current_dir, $qs) {
                                     min="0" value="0" placeholder="0 = unlimited">
                                 <small class="text-muted">0 means unlimited attempts</small>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <label for="pass_mark" class="form-label">Pass Mark (%)</label>
+                                <input type="number" class="form-control" id="pass_mark" name="pass_mark"
+                                    min="0" max="100" value="0" step="0.01">
+                                <small class="text-muted">0 means no minimum</small>
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-check form-switch mt-4">
-                                    <input class="form-check-input" type="checkbox" id="is_pretest" name="is_pretest">
+                                    <input class="form-check-input" type="checkbox" id="is_pretest" name="is_pretest" checked>
                                     <label class="form-check-label" for="is_pretest">This is a Pre Test</label>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <div class="form-check form-switch mt-4">
+                                    <input class="form-check-input" type="checkbox" id="cert_enabled" name="cert_enabled">
+                                    <label class="form-check-label" for="cert_enabled">Certificate Enabled</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-check form-switch mt-4">
                                     <input class="form-check-input" type="checkbox" id="is_active" name="is_active" checked>
                                     <label class="form-check-label" for="is_active">Active</label>

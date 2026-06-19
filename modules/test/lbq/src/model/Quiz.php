@@ -44,7 +44,7 @@ class Quiz
         return $stmt->fetch();
     }
 
-    public function createTest($training_ids, $title, $description = null, $time_limit = null, $is_pretest = false, $is_active = true, $no_tries = 0)
+    public function createTest($training_ids, $title, $description = null, $time_limit = null, $is_pretest = false, $is_active = true, $no_tries = 0, $cert_enabled = false, $pass_mark = 0)
     {
         if (is_array($training_ids)) {
             $training_ids = array_values(array_map('intval', $training_ids));
@@ -57,8 +57,8 @@ class Quiz
 
         $stmt = $this->pdo->prepare(
             "INSERT INTO lbquiz_tests
-        (training_id, title, description, time_limit_minutes, is_pretest, is_active, no_tries)
-        VALUES (:tid, :title, :desc, :time, :pre, :active, :tries) RETURNING id"
+        (training_id, title, description, time_limit_minutes, is_pretest, is_active, no_tries, cert_enabled, pass_mark)
+        VALUES (:tid, :title, :desc, :time, :pre, :active, :tries, :cert, :pass) RETURNING id"
         );
 
         $stmt->bindValue(':tid', $primary_id, PDO::PARAM_INT);
@@ -74,6 +74,8 @@ class Quiz
         $stmt->bindValue(':pre', $is_pretest ? 'true' : 'false', PDO::PARAM_STR);
         $stmt->bindValue(':active', $is_active ? 'true' : 'false', PDO::PARAM_STR);
         $stmt->bindValue(':tries', max(0, (int)$no_tries), PDO::PARAM_INT);
+        $stmt->bindValue(':cert', $cert_enabled ? 'true' : 'false', PDO::PARAM_STR);
+        $stmt->bindValue(':pass', max(0, (float)$pass_mark));
 
         $stmt->execute();
         $row = $stmt->fetch();
@@ -86,7 +88,7 @@ class Quiz
         return $test_id;
     }
 
-    public function updateTest($id, $title, $description, $time_limit, $is_active, $is_pretest, $training_ids = null, $no_tries = 0)
+    public function updateTest($id, $title, $description, $time_limit, $is_active, $is_pretest, $training_ids = null, $no_tries = 0, $cert_enabled = false, $pass_mark = 0)
     {
         $sql = "UPDATE lbquiz_tests SET 
                 title = :title, 
@@ -94,7 +96,9 @@ class Quiz
                 time_limit_minutes = :time,
                 is_active = :active, 
                 is_pretest = :pre,
-                no_tries = :tries";
+                no_tries = :tries,
+                cert_enabled = :cert,
+                pass_mark = :pass";
 
         $params = [
             ':title' => $title,
@@ -103,6 +107,8 @@ class Quiz
             ':active' => $is_active ? 'true' : 'false',
             ':pre' => $is_pretest ? 'true' : 'false',
             ':tries' => max(0, (int)$no_tries),
+            ':cert' => $cert_enabled ? 'true' : 'false',
+            ':pass' => max(0, (float)$pass_mark),
             ':id' => (int)$id
         ];
 

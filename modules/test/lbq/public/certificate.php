@@ -45,6 +45,17 @@ if ($stmt->fetchColumn() == 0) {
 // Get test information
 $test = $quiz->getTest($response['test_id']);
 
+// Enforce cert_enabled + pass_mark
+if (empty($test['cert_enabled'])) {
+    echo "Certificate is not available for this test.";
+    exit;
+}
+$pass_mark = $test['pass_mark'] ?? 0;
+if ($pass_mark > 0 && ($response['score'] ?? 0) < $pass_mark) {
+    echo "You did not meet the passing mark of {$pass_mark}% required for a certificate.";
+    exit;
+}
+
 // Get participant information
 $stmt = $pdo->prepare("
     SELECT tp.*, p.training_id
