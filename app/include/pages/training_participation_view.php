@@ -93,10 +93,10 @@
 					'integrated_edit_field',
 					'integrated_edit_field1',
 					'integrated_edit_field2',
-					'integrated_edit_field3',
 					'integrated_edit_field4',
 					'integrated_edit_field5',
-					'integrated_edit_field6' 
+					'integrated_edit_field6',
+					'integrated_edit_field3' 
 				) 
 			),
 			'formXtTags' => array(
@@ -120,10 +120,10 @@
 				'integrated_edit_field' => 'grid',
 				'integrated_edit_field1' => 'grid',
 				'integrated_edit_field2' => 'grid',
-				'integrated_edit_field3' => 'grid',
 				'integrated_edit_field4' => 'grid',
 				'integrated_edit_field5' => 'grid',
-				'integrated_edit_field6' => 'grid' 
+				'integrated_edit_field6' => 'grid',
+				'integrated_edit_field3' => 'grid' 
 			),
 			'itemLocations' => array(
 				'integrated_edit_field' => array(
@@ -138,10 +138,6 @@
 					'location' => 'grid',
 					'cellId' => 'c3' 
 				),
-				'integrated_edit_field3' => array(
-					'location' => 'grid',
-					'cellId' => 'c3' 
-				),
 				'integrated_edit_field4' => array(
 					'location' => 'grid',
 					'cellId' => 'c3' 
@@ -151,6 +147,10 @@
 					'cellId' => 'c3' 
 				),
 				'integrated_edit_field6' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_edit_field3' => array(
 					'location' => 'grid',
 					'cellId' => 'c3' 
 				) 
@@ -239,10 +239,10 @@
 							'integrated_edit_field',
 							'integrated_edit_field1',
 							'integrated_edit_field2',
-							'integrated_edit_field3',
 							'integrated_edit_field4',
 							'integrated_edit_field5',
-							'integrated_edit_field6' 
+							'integrated_edit_field6',
+							'integrated_edit_field3' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
@@ -498,10 +498,10 @@
 						'integrated_edit_field',
 						'integrated_edit_field1',
 						'integrated_edit_field2',
-						'integrated_edit_field3',
 						'integrated_edit_field4',
 						'integrated_edit_field5',
-						'integrated_edit_field6' 
+						'integrated_edit_field6',
+						'integrated_edit_field3' 
 					) 
 				) 
 			),

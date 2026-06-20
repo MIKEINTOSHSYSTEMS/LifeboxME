@@ -42,7 +42,7 @@ class eventclass_training_participation  extends TableEventsBase {
 			}
 	
 	public function default_created_at_efedit(  ) {
-	$defaultValue = strftime("%Y-%m-%d");
+	$defaultValue = date("Y-m-d H:i:s");
 return $defaultValue;
 }	
 

@@ -445,40 +445,40 @@ $runnerMenus['main'] = array(
 						) 
 					),
 					array(
+						'id' => '46',
+						'parent' => '33',
+						'children' => array( 
+							 
+						),
+						'data' => array(
+							'name' => array(
+								'table' => 'public.training_attendance',
+								'type' => 6 
+							),
+							'comments' => array(
+								'text' => '',
+								'type' => 0 
+							),
+							'style' => '',
+							'href' => 'mypage.htm',
+							'params' => '',
+							'pageId' => '',
+							'itemType' => 2,
+							'linkType' => 0,
+							'openType' => 0,
+							'iconType' => 3,
+							'iconName' => 'fa-check-square',
+							'iconStyle' => 1,
+							'showIconType' => 1,
+							'linkToAnotherApp' => false,
+							'pageType' => 'list',
+							'table' => 4665 
+						) 
+					),
+					array(
 						'id' => '50',
 						'parent' => '33',
 						'children' => array( 
-							array(
-								'id' => '46',
-								'parent' => '50',
-								'children' => array( 
-									 
-								),
-								'data' => array(
-									'name' => array(
-										'table' => 'public.training_attendance',
-										'type' => 6 
-									),
-									'comments' => array(
-										'text' => '',
-										'type' => 0 
-									),
-									'style' => '',
-									'href' => 'mypage.htm',
-									'params' => '',
-									'pageId' => '',
-									'itemType' => 2,
-									'linkType' => 0,
-									'openType' => 0,
-									'iconType' => 3,
-									'iconName' => 'fa-check-square',
-									'iconStyle' => 1,
-									'showIconType' => 1,
-									'linkToAnotherApp' => false,
-									'pageType' => 'list',
-									'table' => 4665 
-								) 
-							),
 							array(
 								'id' => '71',
 								'parent' => '50',
@@ -606,7 +606,7 @@ $runnerMenus['main'] = array(
 						),
 						'data' => array(
 							'name' => array(
-								'text' => 'Attendance',
+								'text' => 'Attendance Reports',
 								'type' => 0 
 							),
 							'comments' => array(

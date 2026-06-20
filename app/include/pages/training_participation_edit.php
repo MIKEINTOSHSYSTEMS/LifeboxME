@@ -92,10 +92,10 @@
 				'grid' => array( 
 					'integrated_edit_field',
 					'integrated_edit_field1',
-					'integrated_edit_field2',
 					'integrated_edit_field3',
 					'integrated_edit_field4',
-					'integrated_edit_field5' 
+					'integrated_edit_field5',
+					'integrated_edit_field2' 
 				) 
 			),
 			'formXtTags' => array(
@@ -120,10 +120,10 @@
 				'edit_header' => 'top',
 				'integrated_edit_field' => 'grid',
 				'integrated_edit_field1' => 'grid',
-				'integrated_edit_field2' => 'grid',
 				'integrated_edit_field3' => 'grid',
 				'integrated_edit_field4' => 'grid',
-				'integrated_edit_field5' => 'grid' 
+				'integrated_edit_field5' => 'grid',
+				'integrated_edit_field2' => 'grid' 
 			),
 			'itemLocations' => array(
 				'integrated_edit_field' => array(
@@ -131,10 +131,6 @@
 					'cellId' => 'c3' 
 				),
 				'integrated_edit_field1' => array(
-					'location' => 'grid',
-					'cellId' => 'c3' 
-				),
-				'integrated_edit_field2' => array(
 					'location' => 'grid',
 					'cellId' => 'c3' 
 				),
@@ -147,6 +143,10 @@
 					'cellId' => 'c3' 
 				),
 				'integrated_edit_field5' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_edit_field2' => array(
 					'location' => 'grid',
 					'cellId' => 'c3' 
 				) 
@@ -242,10 +242,10 @@
 						'items' => array( 
 							'integrated_edit_field',
 							'integrated_edit_field1',
-							'integrated_edit_field2',
 							'integrated_edit_field3',
 							'integrated_edit_field4',
-							'integrated_edit_field5' 
+							'integrated_edit_field5',
+							'integrated_edit_field2' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
@@ -503,10 +503,10 @@
 					'items' => array( 
 						'integrated_edit_field',
 						'integrated_edit_field1',
-						'integrated_edit_field2',
 						'integrated_edit_field3',
 						'integrated_edit_field4',
-						'integrated_edit_field5' 
+						'integrated_edit_field5',
+						'integrated_edit_field2' 
 					) 
 				) 
 			),

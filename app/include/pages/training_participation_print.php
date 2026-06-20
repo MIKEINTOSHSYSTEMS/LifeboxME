@@ -5,7 +5,8 @@
 	),
 	'details' => array(
 		'public.training_attendance' => array(
-			'displayPreview' => 1 
+			'displayPreview' => 1,
+			'previewPageId' => 'list' 
 		) 
 	),
 	'master' => array(
@@ -44,10 +45,10 @@
 			'participation_id',
 			'participant_id',
 			'training_id',
-			'created_at',
 			'pre_test_score',
 			'post_test_score',
-			'ceu_points' 
+			'ceu_points',
+			'created_at' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -68,20 +69,20 @@
 				'simple_grid_field2',
 				'simple_grid_field9' 
 			),
-			'created_at' => array( 
-				'simple_grid_field3',
-				'simple_grid_field10' 
-			),
 			'pre_test_score' => array( 
 				'simple_grid_field4',
-				'simple_grid_field11' 
+				'simple_grid_field10' 
 			),
 			'post_test_score' => array( 
 				'simple_grid_field5',
-				'simple_grid_field12' 
+				'simple_grid_field11' 
 			),
 			'ceu_points' => array( 
 				'simple_grid_field6',
+				'simple_grid_field12' 
+			),
+			'created_at' => array( 
+				'simple_grid_field3',
 				'simple_grid_field13' 
 			) 
 		),
@@ -119,13 +120,13 @@
 					'simple_grid_field9',
 					'simple_grid_field2',
 					'simple_grid_field10',
-					'simple_grid_field3',
-					'simple_grid_field11',
 					'simple_grid_field4',
-					'simple_grid_field12',
+					'simple_grid_field11',
 					'simple_grid_field5',
-					'simple_grid_field13',
+					'simple_grid_field12',
 					'simple_grid_field6',
+					'simple_grid_field13',
+					'simple_grid_field3',
 					'details_preview' 
 				) 
 			),
@@ -153,13 +154,13 @@
 				'simple_grid_field9' => 'grid',
 				'simple_grid_field2' => 'grid',
 				'simple_grid_field10' => 'grid',
-				'simple_grid_field3' => 'grid',
-				'simple_grid_field11' => 'grid',
 				'simple_grid_field4' => 'grid',
-				'simple_grid_field12' => 'grid',
+				'simple_grid_field11' => 'grid',
 				'simple_grid_field5' => 'grid',
-				'simple_grid_field13' => 'grid',
+				'simple_grid_field12' => 'grid',
 				'simple_grid_field6' => 'grid',
+				'simple_grid_field13' => 'grid',
+				'simple_grid_field3' => 'grid',
 				'details_preview' => 'grid' 
 			),
 			'itemLocations' => array(
@@ -191,7 +192,7 @@
 					'location' => 'grid',
 					'cellId' => 'headcell_field3' 
 				),
-				'simple_grid_field3' => array(
+				'simple_grid_field4' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_field3' 
 				),
@@ -199,7 +200,7 @@
 					'location' => 'grid',
 					'cellId' => 'headcell_field4' 
 				),
-				'simple_grid_field4' => array(
+				'simple_grid_field5' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_field4' 
 				),
@@ -207,7 +208,7 @@
 					'location' => 'grid',
 					'cellId' => 'headcell_field5' 
 				),
-				'simple_grid_field5' => array(
+				'simple_grid_field6' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_field5' 
 				),
@@ -215,7 +216,7 @@
 					'location' => 'grid',
 					'cellId' => 'headcell_field6' 
 				),
-				'simple_grid_field6' => array(
+				'simple_grid_field3' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_field6' 
 				),
@@ -245,10 +246,10 @@
 				'simple_grid_field',
 				'simple_grid_field1',
 				'simple_grid_field2',
-				'simple_grid_field3',
 				'simple_grid_field4',
 				'simple_grid_field5',
-				'simple_grid_field6' 
+				'simple_grid_field6',
+				'simple_grid_field3' 
 			),
 			'grid_field_label' => array( 
 				'simple_grid_field7',
@@ -328,7 +329,7 @@
 							0 
 						),
 						'tags' => array( 
-							'created_at_fieldheadercolumn' 
+							'pre_test_score_fieldheadercolumn' 
 						),
 						'items' => array( 
 							'simple_grid_field10' 
@@ -344,7 +345,7 @@
 							0 
 						),
 						'tags' => array( 
-							'pre_test_score_fieldheadercolumn' 
+							'post_test_score_fieldheadercolumn' 
 						),
 						'items' => array( 
 							'simple_grid_field11' 
@@ -360,7 +361,7 @@
 							0 
 						),
 						'tags' => array( 
-							'post_test_score_fieldheadercolumn' 
+							'ceu_points_fieldheadercolumn' 
 						),
 						'items' => array( 
 							'simple_grid_field12' 
@@ -376,7 +377,7 @@
 							0 
 						),
 						'tags' => array( 
-							'ceu_points_fieldheadercolumn' 
+							'created_at_fieldheadercolumn' 
 						),
 						'items' => array( 
 							'simple_grid_field13' 
@@ -440,22 +441,6 @@
 							1 
 						),
 						'tags' => array( 
-							'created_at_fieldcolumn' 
-						),
-						'items' => array( 
-							'simple_grid_field3' 
-						),
-						'fixedAtServer' => false,
-						'fixedAtClient' => false 
-					),
-					'cell_field4' => array(
-						'cols' => array( 
-							4 
-						),
-						'rows' => array( 
-							1 
-						),
-						'tags' => array( 
 							'pre_test_score_fieldcolumn' 
 						),
 						'items' => array( 
@@ -464,9 +449,9 @@
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
-					'cell_field5' => array(
+					'cell_field4' => array(
 						'cols' => array( 
-							5 
+							4 
 						),
 						'rows' => array( 
 							1 
@@ -480,9 +465,9 @@
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
 					),
-					'cell_field6' => array(
+					'cell_field5' => array(
 						'cols' => array( 
-							6 
+							5 
 						),
 						'rows' => array( 
 							1 
@@ -492,6 +477,22 @@
 						),
 						'items' => array( 
 							'simple_grid_field6' 
+						),
+						'fixedAtServer' => false,
+						'fixedAtClient' => false 
+					),
+					'cell_field6' => array(
+						'cols' => array( 
+							6 
+						),
+						'rows' => array( 
+							1 
+						),
+						'tags' => array( 
+							'created_at_fieldcolumn' 
+						),
+						'items' => array( 
+							'simple_grid_field3' 
 						),
 						'fixedAtServer' => false,
 						'fixedAtClient' => false 
@@ -960,15 +961,15 @@
 					'items' => array( 
 						'simple_grid_field10' 
 					),
-					'field' => 'created_at',
+					'field' => 'pre_test_score',
 					'columnName' => 'field' 
 				),
 				'cell_field3' => array(
 					'model' => 'cell_field',
 					'items' => array( 
-						'simple_grid_field3' 
+						'simple_grid_field4' 
 					),
-					'field' => 'created_at',
+					'field' => 'pre_test_score',
 					'columnName' => 'field' 
 				),
 				'footcell_field3' => array(
@@ -982,15 +983,15 @@
 					'items' => array( 
 						'simple_grid_field11' 
 					),
-					'field' => 'pre_test_score',
+					'field' => 'post_test_score',
 					'columnName' => 'field' 
 				),
 				'cell_field4' => array(
 					'model' => 'cell_field',
 					'items' => array( 
-						'simple_grid_field4' 
+						'simple_grid_field5' 
 					),
-					'field' => 'pre_test_score',
+					'field' => 'post_test_score',
 					'columnName' => 'field' 
 				),
 				'footcell_field4' => array(
@@ -1004,15 +1005,15 @@
 					'items' => array( 
 						'simple_grid_field12' 
 					),
-					'field' => 'post_test_score',
+					'field' => 'ceu_points',
 					'columnName' => 'field' 
 				),
 				'cell_field5' => array(
 					'model' => 'cell_field',
 					'items' => array( 
-						'simple_grid_field5' 
+						'simple_grid_field6' 
 					),
-					'field' => 'post_test_score',
+					'field' => 'ceu_points',
 					'columnName' => 'field' 
 				),
 				'footcell_field5' => array(
@@ -1026,15 +1027,15 @@
 					'items' => array( 
 						'simple_grid_field13' 
 					),
-					'field' => 'ceu_points',
+					'field' => 'created_at',
 					'columnName' => 'field' 
 				),
 				'cell_field6' => array(
 					'model' => 'cell_field',
 					'items' => array( 
-						'simple_grid_field6' 
+						'simple_grid_field3' 
 					),
-					'field' => 'ceu_points',
+					'field' => 'created_at',
 					'columnName' => 'field' 
 				),
 				'footcell_field6' => array(
@@ -1097,19 +1098,11 @@
 			'type' => 'grid_field_label',
 			'field' => 'training_id' 
 		),
-		'simple_grid_field3' => array(
-			'field' => 'created_at',
-			'type' => 'grid_field' 
-		),
-		'simple_grid_field10' => array(
-			'type' => 'grid_field_label',
-			'field' => 'created_at' 
-		),
 		'simple_grid_field4' => array(
 			'field' => 'pre_test_score',
 			'type' => 'grid_field' 
 		),
-		'simple_grid_field11' => array(
+		'simple_grid_field10' => array(
 			'type' => 'grid_field_label',
 			'field' => 'pre_test_score' 
 		),
@@ -1117,7 +1110,7 @@
 			'field' => 'post_test_score',
 			'type' => 'grid_field' 
 		),
-		'simple_grid_field12' => array(
+		'simple_grid_field11' => array(
 			'type' => 'grid_field_label',
 			'field' => 'post_test_score' 
 		),
@@ -1125,9 +1118,17 @@
 			'field' => 'ceu_points',
 			'type' => 'grid_field' 
 		),
-		'simple_grid_field13' => array(
+		'simple_grid_field12' => array(
 			'type' => 'grid_field_label',
 			'field' => 'ceu_points' 
+		),
+		'simple_grid_field3' => array(
+			'field' => 'created_at',
+			'type' => 'grid_field' 
+		),
+		'simple_grid_field13' => array(
+			'type' => 'grid_field_label',
+			'field' => 'created_at' 
 		),
 		'details_preview' => array(
 			'type' => 'details_preview',
@@ -1135,7 +1136,8 @@
 			'items' => array( 
 				 
 			),
-			'popup' => false 
+			'popup' => false,
+			'pageId' => 'list' 
 		),
 		'inline_add' => array(
 			'type' => 'inline_add',

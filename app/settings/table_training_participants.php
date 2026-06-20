@@ -197,6 +197,7 @@ FROM "public".training_participants',
 			),
 			'editFormats' => array(
 				'edit' => array(
+					'required' => true,
 					'validateRegexMessage' => array(
 						'text' => '',
 						'type' => 0 
@@ -434,11 +435,17 @@ FROM "public".training_participants',
 			),
 			'editFormats' => array(
 				'edit' => array(
+					'format' => 'Telephone',
+					'required' => true,
 					'textboxMaxLenth' => 50,
 					'textHTML5Input' => '2',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
-					'timeConvention' => 1 
+					'timeConvention' => 1,
+					'pluginInitString' => '$this->settings["required"] = true;                    // Wether is mandatory
+$this->settings["tooltip"] = "Click here to enter telephone"; // Information tooltip
+$this->settings["initialCountry"] = "et";               // Country default
+$this->settings["preferredCountries"] = "et";           // Preferred Country' 
 				) 
 			),
 			'defaultSearchOption' => 'Contains',
@@ -462,8 +469,10 @@ FROM "public".training_participants',
 			),
 			'editFormats' => array(
 				'edit' => array(
+					'required' => true,
+					'validateAs' => 'Email',
 					'textboxMaxLenth' => 100,
-					'textHTML5Input' => '3',
+					'textHTML5Input' => 'Email',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
 					'timeConvention' => 1 
@@ -578,7 +587,7 @@ FROM "public".training_participants',
 			'editFormats' => array(
 				'edit' => array(
 					'format' => 'Date',
-					'defaultValue' => 'strftime("%Y-%m-%d")',
+					'defaultValue' => 'date("Y-m-d H:i:s")',
 					'validateRegexMessage' => array(
 						'text' => '',
 						'type' => 0 
@@ -611,8 +620,8 @@ FROM "public".training_participants',
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'format' => 'Date',
-					'defaultValue' => 'strftime("%Y-%m-%d")',
+					'format' => 'Readonly',
+					'defaultValue' => 'date("Y-m-d H:i:s")',
 					'validateRegexMessage' => array(
 						'text' => '',
 						'type' => 0 
@@ -645,8 +654,8 @@ FROM "public".training_participants',
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'format' => 'Date',
-					'autoUpdateValue' => 'strftime("%Y-%m-%d")',
+					'format' => 'Readonly',
+					'autoUpdateValue' => 'date("Y-m-d H:i:s")',
 					'validateRegexMessage' => array(
 						'text' => '',
 						'type' => 0 

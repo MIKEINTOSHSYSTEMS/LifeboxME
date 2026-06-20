@@ -172,12 +172,16 @@ FROM
 					'lookupTable' => 'public.training_participants',
 					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
 					'lookupLinkField' => 'participant_id',
-					'lookupDisplayField' => 'first_name || \' \' || middle_name || \' \' || last_name',
+					'lookupDisplayField' => 'title_salutation || \' \' || first_name || \' \' || middle_name || \' \' || last_name || \' - \' || email || \' - \' || phone',
 					'lookupCustomDisplay' => true,
 					'lookupOrderBy' => 'first_name',
 					'lookupAllowAdd' => true,
+					'lookupAllowEdit' => true,
+					'lookupControlType' => 2,
 					'lookupWhere' => 'NULLIF(TRIM(first_name), \'\') IS NOT NULL',
+					'lookupListPage' => 'list',
 					'lookupAddPage' => 'add',
+					'lookupEditPage' => 'edit',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
 					'timeConvention' => 1 
@@ -247,8 +251,8 @@ FROM
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'format' => 'Date',
-					'defaultValue' => 'strftime("%Y-%m-%d")',
+					'format' => 'Readonly',
+					'defaultValue' => 'date("Y-m-d H:i:s")',
 					'validateRegexMessage' => array(
 						'text' => '',
 						'type' => 0 
@@ -784,13 +788,13 @@ if( mlang_getcurrentlang() === 'English' ) {
 	$runnerTableLabels['public.training_participation'] = array(
 	'tableCaption' => 'Training Participation',
 	'fieldLabels' => array(
-		'participation_id' => 'Participation Id',
-		'participant_id' => 'Participant',
+		'participation_id' => 'PID',
+		'participant_id' => 'Training Participant',
 		'training_id' => 'Training Session',
-		'created_at' => 'Created At',
+		'created_at' => 'Enrolled at',
 		'pre_test_score' => 'Pre Test Score',
 		'post_test_score' => 'Post Test Score',
-		'ceu_points' => 'Ceu Points' 
+		'ceu_points' => 'CEU Points' 
 	),
 	'fieldTooltips' => array(
 		'participation_id' => '',
