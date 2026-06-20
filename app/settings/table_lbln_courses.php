@@ -243,7 +243,10 @@ FROM
 			'sqlExpression' => 'image',
 			'viewFormats' => array(
 				'view' => array(
-					 
+					'format' => 'File-based Image',
+					'imageWidth' => 150,
+					'imageHeight' => 100,
+					'imageUrl' => true 
 				) 
 			),
 			'editFormats' => array(
@@ -262,7 +265,10 @@ FROM
 			'sqlExpression' => 'course_image',
 			'viewFormats' => array(
 				'view' => array(
-					 
+					'format' => 'File-based Image',
+					'imageWidth' => 300,
+					'imageHeight' => 200,
+					'imageUrl' => true 
 				) 
 			),
 			'editFormats' => array(
