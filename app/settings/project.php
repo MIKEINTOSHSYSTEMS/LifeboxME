@@ -492,7 +492,7 @@ $runnerProjectSettings = array(
 		'defaultProviderCode' => '00',
 		'adOnlyLogin' => false,
 		'sessionControl' => array(
-			'lifeTime' => 15,
+			'lifeTime' => 30,
 			'sessionName' => 'LifeboxSA7lVH6MEdvwh',
 			'JWTSecret' => 'KgDg763op72JzHiH0yQY',
 			'forceExpire' => true,
@@ -3549,7 +3549,7 @@ $runnerProjectSettings = array(
 		'table' => 'public.lifeboxme_settings' 
 	),
 	'wizardBuild' => '43785',
-	'projectBuild' => 'A9vy2ZGkkjQs',
+	'projectBuild' => 'udLTM9ChNV3K',
 	'projectTheme' => 'flatly',
 	'projectSize' => 'normal',
 	'customErrorMsg' => array(
