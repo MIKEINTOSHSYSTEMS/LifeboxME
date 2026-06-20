@@ -522,8 +522,8 @@ $runnerProjectSettings = array(
 		),
 		'captchaSettings' => array(
 			'captchaType' => 1,
-			'siteKey' => '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
-			'secretKey' => '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe',
+			'siteKey' => '6LeRAbcpAAAAAPy9LHXavzB-h0Ve7HSt7VY8R6EV',
+			'secretKey' => '6LeRAbcpAAAAAJFYeJQ-QO6BGTJvZpOiNgvxDdhH',
 			'passesCount' => 5 
 		),
 		'emailSettings' => array(
