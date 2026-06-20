@@ -81,16 +81,50 @@ $runnerTableSettings['public.training_participation'] = array(
 	),
 	'displayLoading' => true,
 	'warnLeavingEdit' => true,
+	'orderInfo' => array( 
+		array(
+			'index' => 0,
+			'dir' => 'ASC',
+			'field' => '' 
+		),
+		array(
+			'index' => 0,
+			'dir' => 'ASC',
+			'field' => '' 
+		) 
+	),
 	'sql' => 'SELECT
-	participation_id,
-	participant_id,
-	training_id,
-	created_at,
-	pre_test_score,
-	post_test_score,
-	ceu_points
-FROM
-	"public".training_participation',
+    tp.participation_id,
+    tp.participant_id,
+    tp.training_id,
+    tp.created_at,
+    tp.pre_test_score,
+    tp.post_test_score,
+    tp.ceu_points,
+    CONCAT(
+        tpp.title_salutation, \' \',
+        tpp.first_name, \' \',
+        COALESCE(tpp.middle_name || \' \', \'\'),
+        tpp.last_name,
+        \' - \',
+        tc.course_name,
+        \' - Session # \',
+        ts.training_id,
+        \' (\',
+        TO_CHAR(ts.start_date, \'DD Mon YYYY\'),
+        \' to \',
+        TO_CHAR(ts.end_date, \'DD Mon YYYY\'),
+        \') EnrollmentPID \',
+        tp.participation_id
+    ) AS participant_display
+FROM "public".training_participation tp
+INNER JOIN "public".training_participants tpp 
+    ON tp.participant_id = tpp.participant_id
+INNER JOIN "public".training_sessions ts 
+    ON tp.training_id = ts.training_id
+INNER JOIN "public".training_courses tc 
+    ON ts.course_id = tc.course_id
+ORDER BY tpp.first_name, tpp.last_name;',
 	'keyFields' => array( 
 		'participation_id' 
 	),
@@ -111,7 +145,7 @@ FROM
 			'index' => 1,
 			'type' => 3,
 			'autoinc' => true,
-			'sqlExpression' => 'participation_id',
+			'sqlExpression' => 'tp.participation_id',
 			'viewFormats' => array(
 				'view' => array(
 					'numberFractionalDigits' => 0 
@@ -148,7 +182,7 @@ FROM
 			'sourceSingle' => 'participant_id',
 			'index' => 2,
 			'type' => 3,
-			'sqlExpression' => 'participant_id',
+			'sqlExpression' => 'tp.participant_id',
 			'viewFormats' => array(
 				'view' => array(
 					'numberFractionalDigits' => 0 
@@ -199,7 +233,7 @@ FROM
 			'sourceSingle' => 'training_id',
 			'index' => 3,
 			'type' => 3,
-			'sqlExpression' => 'training_id',
+			'sqlExpression' => 'tp.training_id',
 			'viewFormats' => array(
 				'view' => array(
 					'numberFractionalDigits' => 0,
@@ -242,7 +276,7 @@ FROM
 			'sourceSingle' => 'created_at',
 			'index' => 4,
 			'type' => 135,
-			'sqlExpression' => 'created_at',
+			'sqlExpression' => 'tp.created_at',
 			'viewFormats' => array(
 				'view' => array(
 					'format' => 'Short Date',
@@ -276,7 +310,7 @@ FROM
 			'sourceSingle' => 'pre_test_score',
 			'index' => 5,
 			'type' => 14,
-			'sqlExpression' => 'pre_test_score',
+			'sqlExpression' => 'tp.pre_test_score',
 			'viewFormats' => array(
 				'view' => array(
 					'format' => 'Number' 
@@ -312,7 +346,7 @@ FROM
 			'sourceSingle' => 'post_test_score',
 			'index' => 6,
 			'type' => 14,
-			'sqlExpression' => 'post_test_score',
+			'sqlExpression' => 'tp.post_test_score',
 			'viewFormats' => array(
 				'view' => array(
 					'format' => 'Number' 
@@ -348,7 +382,7 @@ FROM
 			'sourceSingle' => 'ceu_points',
 			'index' => 7,
 			'type' => 14,
-			'sqlExpression' => 'ceu_points',
+			'sqlExpression' => 'tp.ceu_points',
 			'viewFormats' => array(
 				'view' => array(
 					'format' => 'Number' 
@@ -376,6 +410,40 @@ FROM
 				'format' => 'Values list' 
 			),
 			'tableName' => 'public.training_participation' 
+		),
+		'participant_display' => array(
+			'name' => 'participant_display',
+			'goodName' => 'participant_display',
+			'strField' => 'participant_display',
+			'index' => 8,
+			'type' => 201,
+			'sqlExpression' => 'CONCAT(
+        tpp.title_salutation, \' \',
+        tpp.first_name, \' \',
+        COALESCE(tpp.middle_name || \' \', \'\'),
+        tpp.last_name,
+        \' - \',
+        tc.course_name,
+        \' - Session # \',
+        ts.training_id,
+        \' (\',
+        TO_CHAR(ts.start_date, \'DD Mon YYYY\'),
+        \' to \',
+        TO_CHAR(ts.end_date, \'DD Mon YYYY\'),
+        \') EnrollmentPID \',
+        tp.participation_id
+    )',
+			'viewFormats' => array(
+				'view' => array(
+					 
+				) 
+			),
+			'editFormats' => array(
+				'edit' => array(
+					'format' => 'Text area' 
+				) 
+			),
+			'tableName' => '' 
 		) 
 	),
 	'masterTables' => array( 
@@ -403,20 +471,42 @@ FROM
 	),
 	'query' => array(
 		'sql' => 'SELECT
-	participation_id,
-	participant_id,
-	training_id,
-	created_at,
-	pre_test_score,
-	post_test_score,
-	ceu_points
-FROM
-	"public".training_participation',
+    tp.participation_id,
+    tp.participant_id,
+    tp.training_id,
+    tp.created_at,
+    tp.pre_test_score,
+    tp.post_test_score,
+    tp.ceu_points,
+    CONCAT(
+        tpp.title_salutation, \' \',
+        tpp.first_name, \' \',
+        COALESCE(tpp.middle_name || \' \', \'\'),
+        tpp.last_name,
+        \' - \',
+        tc.course_name,
+        \' - Session # \',
+        ts.training_id,
+        \' (\',
+        TO_CHAR(ts.start_date, \'DD Mon YYYY\'),
+        \' to \',
+        TO_CHAR(ts.end_date, \'DD Mon YYYY\'),
+        \') EnrollmentPID \',
+        tp.participation_id
+    ) AS participant_display
+FROM "public".training_participation tp
+INNER JOIN "public".training_participants tpp 
+    ON tp.participant_id = tpp.participant_id
+INNER JOIN "public".training_sessions ts 
+    ON tp.training_id = ts.training_id
+INNER JOIN "public".training_courses tc 
+    ON ts.course_id = tc.course_id
+ORDER BY tpp.first_name, tpp.last_name;',
 		'parsed' => true,
 		'type' => 'SQLQuery',
 		'fieldList' => array( 
 			array(
-				'sql' => 'participation_id',
+				'sql' => 'tp.participation_id',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => '',
@@ -424,14 +514,14 @@ FROM
 					'sql' => '',
 					'parsed' => true,
 					'type' => 'SQLField',
-					'table' => 'public.training_participation',
+					'table' => 'tp',
 					'name' => 'participation_id' 
 				),
 				'encrypted' => false,
 				'columnName' => 'participation_id' 
 			),
 			array(
-				'sql' => 'participant_id',
+				'sql' => 'tp.participant_id',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => '',
@@ -439,14 +529,14 @@ FROM
 					'sql' => '',
 					'parsed' => true,
 					'type' => 'SQLField',
-					'table' => 'public.training_participation',
+					'table' => 'tp',
 					'name' => 'participant_id' 
 				),
 				'encrypted' => false,
 				'columnName' => 'participant_id' 
 			),
 			array(
-				'sql' => 'training_id',
+				'sql' => 'tp.training_id',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => '',
@@ -454,14 +544,14 @@ FROM
 					'sql' => '',
 					'parsed' => true,
 					'type' => 'SQLField',
-					'table' => 'public.training_participation',
+					'table' => 'tp',
 					'name' => 'training_id' 
 				),
 				'encrypted' => false,
 				'columnName' => 'training_id' 
 			),
 			array(
-				'sql' => 'created_at',
+				'sql' => 'tp.created_at',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => '',
@@ -469,14 +559,14 @@ FROM
 					'sql' => '',
 					'parsed' => true,
 					'type' => 'SQLField',
-					'table' => 'public.training_participation',
+					'table' => 'tp',
 					'name' => 'created_at' 
 				),
 				'encrypted' => false,
 				'columnName' => 'created_at' 
 			),
 			array(
-				'sql' => 'pre_test_score',
+				'sql' => 'tp.pre_test_score',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => '',
@@ -484,14 +574,14 @@ FROM
 					'sql' => '',
 					'parsed' => true,
 					'type' => 'SQLField',
-					'table' => 'public.training_participation',
+					'table' => 'tp',
 					'name' => 'pre_test_score' 
 				),
 				'encrypted' => false,
 				'columnName' => 'pre_test_score' 
 			),
 			array(
-				'sql' => 'post_test_score',
+				'sql' => 'tp.post_test_score',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => '',
@@ -499,14 +589,14 @@ FROM
 					'sql' => '',
 					'parsed' => true,
 					'type' => 'SQLField',
-					'table' => 'public.training_participation',
+					'table' => 'tp',
 					'name' => 'post_test_score' 
 				),
 				'encrypted' => false,
 				'columnName' => 'post_test_score' 
 			),
 			array(
-				'sql' => 'ceu_points',
+				'sql' => 'tp.ceu_points',
 				'parsed' => true,
 				'type' => 'FieldListItem',
 				'alias' => '',
@@ -514,16 +604,143 @@ FROM
 					'sql' => '',
 					'parsed' => true,
 					'type' => 'SQLField',
-					'table' => 'public.training_participation',
+					'table' => 'tp',
 					'name' => 'ceu_points' 
 				),
 				'encrypted' => false,
 				'columnName' => 'ceu_points' 
+			),
+			array(
+				'sql' => 'CONCAT(
+        tpp.title_salutation, \' \',
+        tpp.first_name, \' \',
+        COALESCE(tpp.middle_name || \' \', \'\'),
+        tpp.last_name,
+        \' - \',
+        tc.course_name,
+        \' - Session # \',
+        ts.training_id,
+        \' (\',
+        TO_CHAR(ts.start_date, \'DD Mon YYYY\'),
+        \' to \',
+        TO_CHAR(ts.end_date, \'DD Mon YYYY\'),
+        \') EnrollmentPID \',
+        tp.participation_id
+    )',
+				'parsed' => true,
+				'type' => 'FieldListItem',
+				'alias' => 'participant_display',
+				'expression' => array(
+					'sql' => 'CONCAT(
+        tpp.title_salutation, \' \',
+        tpp.first_name, \' \',
+        COALESCE(tpp.middle_name || \' \', \'\'),
+        tpp.last_name,
+        \' - \',
+        tc.course_name,
+        \' - Session # \',
+        ts.training_id,
+        \' (\',
+        TO_CHAR(ts.start_date, \'DD Mon YYYY\'),
+        \' to \',
+        TO_CHAR(ts.end_date, \'DD Mon YYYY\'),
+        \') EnrollmentPID \',
+        tp.participation_id
+    )',
+					'parsed' => true,
+					'type' => 'FunctionCall',
+					'arguments' => array( 
+						array(
+							'sql' => 'tpp.title_salutation',
+							'parsed' => true,
+							'type' => 'NonParsedEntity' 
+						),
+						array(
+							'sql' => '\' \'',
+							'parsed' => true,
+							'type' => 'NonParsedEntity' 
+						),
+						array(
+							'sql' => 'tpp.first_name',
+							'parsed' => true,
+							'type' => 'NonParsedEntity' 
+						),
+						array(
+							'sql' => '\' \'',
+							'parsed' => true,
+							'type' => 'NonParsedEntity' 
+						),
+						array(
+							'sql' => 'COALESCE(tpp.middle_name || \' \', \'\')',
+							'parsed' => true,
+							'type' => 'NonParsedEntity' 
+						),
+						array(
+							'sql' => 'tpp.last_name',
+							'parsed' => true,
+							'type' => 'NonParsedEntity' 
+						),
+						array(
+							'sql' => '\' - \'',
+							'parsed' => true,
+							'type' => 'NonParsedEntity' 
+						),
+						array(
+							'sql' => 'tc.course_name',
+							'parsed' => true,
+							'type' => 'NonParsedEntity' 
+						),
+						array(
+							'sql' => '\' - Session # \'',
+							'parsed' => true,
+							'type' => 'NonParsedEntity' 
+						),
+						array(
+							'sql' => 'ts.training_id',
+							'parsed' => true,
+							'type' => 'NonParsedEntity' 
+						),
+						array(
+							'sql' => '\' (\'',
+							'parsed' => true,
+							'type' => 'NonParsedEntity' 
+						),
+						array(
+							'sql' => 'TO_CHAR(ts.start_date, \'DD Mon YYYY\')',
+							'parsed' => true,
+							'type' => 'NonParsedEntity' 
+						),
+						array(
+							'sql' => '\' to \'',
+							'parsed' => true,
+							'type' => 'NonParsedEntity' 
+						),
+						array(
+							'sql' => 'TO_CHAR(ts.end_date, \'DD Mon YYYY\')',
+							'parsed' => true,
+							'type' => 'NonParsedEntity' 
+						),
+						array(
+							'sql' => '\') EnrollmentPID \'',
+							'parsed' => true,
+							'type' => 'NonParsedEntity' 
+						),
+						array(
+							'sql' => 'tp.participation_id',
+							'parsed' => true,
+							'type' => 'NonParsedEntity' 
+						) 
+					),
+					'functionName' => 'CONCAT',
+					'functionType' => 5 
+				),
+				'encrypted' => false,
+				'columnName' => 'participant_display' 
 			) 
 		),
 		'fromList' => array( 
 			array(
-				'sql' => '"public".training_participation',
+				'sql' => '"public".training_participation tp',
 				'parsed' => true,
 				'type' => 'FromListItem',
 				'table' => array(
@@ -562,7 +779,222 @@ FROM
 						 
 					) 
 				),
+				'alias' => 'tp',
 				'link' => 0 
+			),
+			array(
+				'sql' => 'INNER JOIN "public".training_participants tpp 
+    ON tp.participant_id = tpp.participant_id',
+				'parsed' => true,
+				'type' => 'FromListItem',
+				'table' => array(
+					'sql' => '"public".training_participants',
+					'parsed' => true,
+					'type' => 'SQLTable',
+					'columns' => array( 
+						'participant_id',
+						'first_name',
+						'last_name',
+						'sex_id',
+						'role_id',
+						'facility_id',
+						'phone',
+						'email',
+						'country_id',
+						'training_date',
+						'created_at',
+						'updated_at',
+						'venue_id',
+						'title_salutation',
+						'middle_name' 
+					),
+					'name' => 'public.training_participants' 
+				),
+				'joinOn' => array(
+					'sql' => 'tpp.participant_id = tp.participant_id',
+					'parsed' => true,
+					'type' => 'LogicalExpression',
+					'contained' => array( 
+						 
+					),
+					'unionType' => 0,
+					'column' => array(
+						'sql' => '',
+						'parsed' => true,
+						'type' => 'SQLField',
+						'table' => 'tpp',
+						'name' => 'participant_id' 
+					),
+					'case' => '= tp.participant_id',
+					'useAlias' => false 
+				),
+				'joinList' => array(
+					'sql' => 'tp.participant_id = tpp.participant_id',
+					'parsed' => true,
+					'type' => 'JoinOn',
+					'field1' => array( 
+						array(
+							'sql' => '',
+							'parsed' => true,
+							'type' => 'SQLField',
+							'table' => 'tpp',
+							'name' => 'participant_id' 
+						) 
+					),
+					'field2' => array( 
+						array(
+							'sql' => '',
+							'parsed' => true,
+							'type' => 'SQLField',
+							'table' => 'tp',
+							'name' => 'participant_id' 
+						) 
+					) 
+				),
+				'alias' => 'tpp',
+				'link' => 1 
+			),
+			array(
+				'sql' => 'INNER JOIN "public".training_sessions ts 
+    ON tp.training_id = ts.training_id',
+				'parsed' => true,
+				'type' => 'FromListItem',
+				'table' => array(
+					'sql' => '"public".training_sessions',
+					'parsed' => true,
+					'type' => 'SQLTable',
+					'columns' => array( 
+						'training_id',
+						'course_id',
+						'training_type',
+						'training_approach',
+						'program',
+						'quarter',
+						'start_date',
+						'end_date',
+						'facility_id',
+						'host_country_id',
+						'ceu_points',
+						'num_participants',
+						'avg_pre_test_score',
+						'avg_post_test_score',
+						'remarks',
+						'created_at',
+						'updated_at',
+						'training_type_id',
+						'approach_id',
+						'program_id',
+						'venue_id' 
+					),
+					'name' => 'public.training_sessions' 
+				),
+				'joinOn' => array(
+					'sql' => 'ts.training_id = tp.training_id',
+					'parsed' => true,
+					'type' => 'LogicalExpression',
+					'contained' => array( 
+						 
+					),
+					'unionType' => 0,
+					'column' => array(
+						'sql' => '',
+						'parsed' => true,
+						'type' => 'SQLField',
+						'table' => 'ts',
+						'name' => 'training_id' 
+					),
+					'case' => '= tp.training_id',
+					'useAlias' => false 
+				),
+				'joinList' => array(
+					'sql' => 'tp.training_id = ts.training_id',
+					'parsed' => true,
+					'type' => 'JoinOn',
+					'field1' => array( 
+						array(
+							'sql' => '',
+							'parsed' => true,
+							'type' => 'SQLField',
+							'table' => 'ts',
+							'name' => 'training_id' 
+						) 
+					),
+					'field2' => array( 
+						array(
+							'sql' => '',
+							'parsed' => true,
+							'type' => 'SQLField',
+							'table' => 'tp',
+							'name' => 'training_id' 
+						) 
+					) 
+				),
+				'alias' => 'ts',
+				'link' => 1 
+			),
+			array(
+				'sql' => 'INNER JOIN "public".training_courses tc 
+    ON ts.course_id = tc.course_id',
+				'parsed' => true,
+				'type' => 'FromListItem',
+				'table' => array(
+					'sql' => '"public".training_courses',
+					'parsed' => true,
+					'type' => 'SQLTable',
+					'columns' => array( 
+						'course_id',
+						'course_name',
+						'description',
+						'duration_hours',
+						'is_active',
+						'created_at',
+						'updated_at' 
+					),
+					'name' => 'public.training_courses' 
+				),
+				'joinOn' => array(
+					'sql' => 'tc.course_id = ts.course_id',
+					'parsed' => true,
+					'type' => 'LogicalExpression',
+					'contained' => array( 
+						 
+					),
+					'unionType' => 0,
+					'column' => array(
+						'sql' => '',
+						'parsed' => true,
+						'type' => 'SQLField',
+						'table' => 'tc',
+						'name' => 'course_id' 
+					),
+					'case' => '= ts.course_id',
+					'useAlias' => false 
+				),
+				'joinList' => array(
+					'sql' => 'ts.course_id = tc.course_id',
+					'parsed' => true,
+					'type' => 'JoinOn',
+					'field1' => array( 
+						array(
+							'sql' => '',
+							'parsed' => true,
+							'type' => 'SQLField',
+							'table' => 'tc',
+							'name' => 'course_id' 
+						) 
+					),
+					'field2' => array( 
+						array(
+							'sql' => '',
+							'parsed' => true,
+							'type' => 'SQLField',
+							'table' => 'ts',
+							'name' => 'course_id' 
+						) 
+					) 
+				),
+				'alias' => 'tc',
+				'link' => 1 
 			) 
 		),
 		'where' => array(
@@ -589,7 +1021,34 @@ FROM
 			'column' => null 
 		),
 		'orderBy' => array( 
-			 
+			array(
+				'sql' => 'tpp.first_name',
+				'parsed' => true,
+				'type' => 'OrderByListItem',
+				'column' => array(
+					'sql' => '',
+					'parsed' => true,
+					'type' => 'SQLField',
+					'table' => 'tpp',
+					'name' => 'first_name' 
+				),
+				'asc' => true,
+				'columnNumber' => 0 
+			),
+			array(
+				'sql' => 'tpp.last_name',
+				'parsed' => true,
+				'type' => 'OrderByListItem',
+				'column' => array(
+					'sql' => '',
+					'parsed' => true,
+					'type' => 'SQLField',
+					'table' => 'tpp',
+					'name' => 'last_name' 
+				),
+				'asc' => true,
+				'columnNumber' => 0 
+			) 
 		),
 		'colsIndex' => array( 
 			array(
@@ -640,19 +1099,61 @@ FROM
 				'groupByIndex' => -1,
 				'whereIndex' => -1,
 				'havingIndex' => -1 
+			),
+			array(
+				'fieldIndex' => 7,
+				'orderByIndex' => -1,
+				'groupByIndex' => -1,
+				'whereIndex' => -1,
+				'havingIndex' => -1 
+			),
+			array(
+				'fieldIndex' => -1,
+				'orderByIndex' => 0,
+				'groupByIndex' => -1,
+				'whereIndex' => -1,
+				'havingIndex' => -1 
+			),
+			array(
+				'fieldIndex' => -1,
+				'orderByIndex' => 1,
+				'groupByIndex' => -1,
+				'whereIndex' => -1,
+				'havingIndex' => -1 
 			) 
 		),
 		'headSql' => 'SELECT',
-		'fieldListSql' => 'participation_id,
-	participant_id,
-	training_id,
-	created_at,
-	pre_test_score,
-	post_test_score,
-	ceu_points',
-		'fromListSql' => 'FROM
-	"public".training_participation',
-		'orderBySql' => '',
+		'fieldListSql' => 'tp.participation_id,
+    tp.participant_id,
+    tp.training_id,
+    tp.created_at,
+    tp.pre_test_score,
+    tp.post_test_score,
+    tp.ceu_points,
+    CONCAT(
+        tpp.title_salutation, \' \',
+        tpp.first_name, \' \',
+        COALESCE(tpp.middle_name || \' \', \'\'),
+        tpp.last_name,
+        \' - \',
+        tc.course_name,
+        \' - Session # \',
+        ts.training_id,
+        \' (\',
+        TO_CHAR(ts.start_date, \'DD Mon YYYY\'),
+        \' to \',
+        TO_CHAR(ts.end_date, \'DD Mon YYYY\'),
+        \') EnrollmentPID \',
+        tp.participation_id
+    ) AS participant_display',
+		'fromListSql' => 'FROM "public".training_participation tp
+INNER JOIN "public".training_participants tpp 
+    ON tp.participant_id = tpp.participant_id
+INNER JOIN "public".training_sessions ts 
+    ON tp.training_id = ts.training_id
+INNER JOIN "public".training_courses tc 
+    ON ts.course_id = tc.course_id',
+		'orderBySql' => 'ORDER BY tpp.first_name, tpp.last_name',
 		'tailSql' => '' 
 	),
 	'originalTable' => 'public.training_participation',
@@ -721,7 +1222,8 @@ FROM
 			'created_at',
 			'pre_test_score',
 			'post_test_score',
-			'ceu_points' 
+			'ceu_points',
+			'participant_display' 
 		),
 		'searchSuggest' => true,
 		'highlightSearchResults' => true,
@@ -734,7 +1236,8 @@ FROM
 			'created_at',
 			'pre_test_score',
 			'post_test_score',
-			'ceu_points' 
+			'ceu_points',
+			'participant_display' 
 		) 
 	),
 	'connId' => 'lifebox_mesystem_at_localhost',
@@ -794,7 +1297,8 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'created_at' => 'Enrolled at',
 		'pre_test_score' => 'Pre Test Score',
 		'post_test_score' => 'Post Test Score',
-		'ceu_points' => 'CEU Points' 
+		'ceu_points' => 'CEU Points',
+		'participant_display' => 'Participant Display' 
 	),
 	'fieldTooltips' => array(
 		'participation_id' => '',
@@ -803,7 +1307,8 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'created_at' => '',
 		'pre_test_score' => '',
 		'post_test_score' => '',
-		'ceu_points' => '' 
+		'ceu_points' => '',
+		'participant_display' => '' 
 	),
 	'fieldPlaceholders' => array(
 		'participation_id' => '',
@@ -812,7 +1317,8 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'created_at' => '',
 		'pre_test_score' => '',
 		'post_test_score' => '',
-		'ceu_points' => '' 
+		'ceu_points' => '',
+		'participant_display' => '' 
 	),
 	'pageTitles' => array(
 		 

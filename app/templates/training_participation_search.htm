@@ -247,6 +247,28 @@
 </div>
 
 {END ceu_points_fieldblock}
+											
+{BEGIN participant_display_fieldblock}
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_participant_display}  r-horizontal-field form-horizontal" 	
+	data-signal-error-for="participant_display{$id}" 
+	data-itemtype="integrated_search_field" data-itemid="integrated_search_field7" {$item_integrated_search_field7} data-pageid="{$pageid}" data-field="participant_display" data-fieldname="participant_display" >
+
+
+	<label class="r-search-label control-label" for="{$labelfor_participant_display}">
+		{$label public_training_participation participant_display }	</label>
+	<div class="r-search-option">
+		{$searchtype_participant_display}
+	</div>
+	<div class="r-search-field">
+		{$participant_display_editcontrol}	</div>
+	<div class="r-search-field">
+		{$participant_display_editcontrol1}
+	</div>
+	
+</div>
+
+{END participant_display_fieldblock}
 	
 								</td>
 			{END cellblock_grid_c3}

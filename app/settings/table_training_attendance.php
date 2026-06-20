@@ -58,7 +58,7 @@ $runnerTableSettings['public.training_attendance'] = array(
 		'50',
 		'100',
 		'500',
-		'-1' 
+		'1' 
 	),
 	'pageSizeSelectorGroups' => array( 
 		'1',
@@ -67,7 +67,7 @@ $runnerTableSettings['public.training_attendance'] = array(
 		'10',
 		'50',
 		'100',
-		'-1' 
+		'1' 
 	),
 	'displayLoading' => true,
 	'warnLeavingEdit' => true,
@@ -183,7 +183,7 @@ LEFT OUTER JOIN "public".lifebox_staff AS ls ON tl.staff_id = ls.staff_id',
 				'edit' => array(
 					'required' => true,
 					'validateAs' => 'Number',
-					'textHTML5Input' => '0',
+					'textHTML5Input' => 'Number',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
 					'timeConvention' => 1 
@@ -327,8 +327,9 @@ LEFT OUTER JOIN "public".lifebox_staff AS ls ON tl.staff_id = ls.staff_id',
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'format' => 'Date',
-					'defaultValue' => 'strftime("%Y-%m-%d")',
+					'format' => 'Readonly',
+					'defaultValue' => 'date("Y-m-d H:i:s")',
+					'autoUpdateValue' => 'date("Y-m-d H:i:s")',
 					'validateRegexMessage' => array(
 						'text' => '',
 						'type' => 0 
@@ -351,7 +352,6 @@ LEFT OUTER JOIN "public".lifebox_staff AS ls ON tl.staff_id = ls.staff_id',
 			'strField' => 'recorded_by',
 			'sourceSingle' => 'recorded_by',
 			'index' => 7,
-			'type' => 3,
 			'sqlExpression' => 'ta.recorded_by',
 			'viewFormats' => array(
 				'view' => array(
@@ -360,6 +360,9 @@ LEFT OUTER JOIN "public".lifebox_staff AS ls ON tl.staff_id = ls.staff_id',
 			),
 			'editFormats' => array(
 				'edit' => array(
+					'format' => 'Readonly',
+					'defaultValue' => '$_SESSION["UserName"]',
+					'autoUpdateValue' => '$_SESSION["UserName"]',
 					'validateAs' => 'Number',
 					'validateRegexMessage' => array(
 						'text' => '',
@@ -412,7 +415,7 @@ LEFT OUTER JOIN "public".lifebox_staff AS ls ON tl.staff_id = ls.staff_id',
 					'lookupTable' => 'public.training_participation',
 					'lookupTableConnection' => 'lifebox_mesystem_at_localhost',
 					'lookupLinkField' => 'participation_id',
-					'lookupDisplayField' => 'participant_id',
+					'lookupDisplayField' => 'participant_display',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
 					'timeConvention' => 1 
@@ -3129,7 +3132,7 @@ if( mlang_getcurrentlang() === 'English' ) {
 		'notes' => 'Notes',
 		'recorded_at' => 'Recorded At',
 		'recorded_by' => 'Recorded By',
-		'participation_id' => 'Participation Id',
+		'participation_id' => 'Enrolled Participant',
 		'participant_full_name' => 'Training Participant Name',
 		'sex_name' => 'Sex',
 		'facility_name' => 'Facility',

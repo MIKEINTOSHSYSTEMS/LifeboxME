@@ -8,7 +8,8 @@
 			'created_at',
 			'pre_test_score',
 			'post_test_score',
-			'ceu_points' 
+			'ceu_points',
+			'participant_display' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -37,6 +38,9 @@
 			),
 			'ceu_points' => array( 
 				'integrated_search_field6' 
+			),
+			'participant_display' => array( 
+				'integrated_search_field7' 
 			) 
 		) 
 	),
@@ -68,7 +72,8 @@
 					'integrated_search_field3',
 					'integrated_search_field4',
 					'integrated_search_field5',
-					'integrated_search_field6' 
+					'integrated_search_field6',
+					'integrated_search_field7' 
 				) 
 			),
 			'formXtTags' => array(
@@ -88,7 +93,8 @@
 				'integrated_search_field3' => 'grid',
 				'integrated_search_field4' => 'grid',
 				'integrated_search_field5' => 'grid',
-				'integrated_search_field6' => 'grid' 
+				'integrated_search_field6' => 'grid',
+				'integrated_search_field7' => 'grid' 
 			),
 			'itemLocations' => array(
 				'integrated_search_field' => array(
@@ -116,6 +122,10 @@
 					'cellId' => 'c3' 
 				),
 				'integrated_search_field6' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_search_field7' => array(
 					'location' => 'grid',
 					'cellId' => 'c3' 
 				) 
@@ -147,7 +157,8 @@
 				'integrated_search_field3',
 				'integrated_search_field4',
 				'integrated_search_field5',
-				'integrated_search_field6' 
+				'integrated_search_field6',
+				'integrated_search_field7' 
 			) 
 		),
 		'cellMaps' => array(
@@ -170,7 +181,8 @@
 							'integrated_search_field3',
 							'integrated_search_field4',
 							'integrated_search_field5',
-							'integrated_search_field6' 
+							'integrated_search_field6',
+							'integrated_search_field7' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
@@ -341,7 +353,8 @@
 						'integrated_search_field3',
 						'integrated_search_field4',
 						'integrated_search_field5',
-						'integrated_search_field6' 
+						'integrated_search_field6',
+						'integrated_search_field7' 
 					) 
 				) 
 			),
@@ -408,6 +421,11 @@
 			'type' => 'integrated_search_field',
 			'orientation' => 0,
 			'required' => false 
+		),
+		'integrated_search_field7' => array(
+			'field' => 'participant_display',
+			'type' => 'integrated_search_field',
+			'orientation' => 0 
 		) 
 	),
 	'dbProps' => array(

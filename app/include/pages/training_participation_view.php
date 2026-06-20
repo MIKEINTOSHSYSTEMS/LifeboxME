@@ -25,7 +25,8 @@
 			'created_at',
 			'pre_test_score',
 			'post_test_score',
-			'ceu_points' 
+			'ceu_points',
+			'participant_display' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -54,6 +55,9 @@
 			),
 			'ceu_points' => array( 
 				'integrated_edit_field6' 
+			),
+			'participant_display' => array( 
+				'integrated_edit_field7' 
 			) 
 		) 
 	),
@@ -96,7 +100,8 @@
 					'integrated_edit_field4',
 					'integrated_edit_field5',
 					'integrated_edit_field6',
-					'integrated_edit_field3' 
+					'integrated_edit_field3',
+					'integrated_edit_field7' 
 				) 
 			),
 			'formXtTags' => array(
@@ -123,7 +128,8 @@
 				'integrated_edit_field4' => 'grid',
 				'integrated_edit_field5' => 'grid',
 				'integrated_edit_field6' => 'grid',
-				'integrated_edit_field3' => 'grid' 
+				'integrated_edit_field3' => 'grid',
+				'integrated_edit_field7' => 'grid' 
 			),
 			'itemLocations' => array(
 				'integrated_edit_field' => array(
@@ -151,6 +157,10 @@
 					'cellId' => 'c3' 
 				),
 				'integrated_edit_field3' => array(
+					'location' => 'grid',
+					'cellId' => 'c3' 
+				),
+				'integrated_edit_field7' => array(
 					'location' => 'grid',
 					'cellId' => 'c3' 
 				) 
@@ -195,7 +205,8 @@
 				'integrated_edit_field3',
 				'integrated_edit_field4',
 				'integrated_edit_field5',
-				'integrated_edit_field6' 
+				'integrated_edit_field6',
+				'integrated_edit_field7' 
 			),
 			'username_button' => array( 
 				'username_button' 
@@ -242,7 +253,8 @@
 							'integrated_edit_field4',
 							'integrated_edit_field5',
 							'integrated_edit_field6',
-							'integrated_edit_field3' 
+							'integrated_edit_field3',
+							'integrated_edit_field7' 
 						),
 						'fixedAtServer' => true,
 						'fixedAtClient' => false 
@@ -501,7 +513,8 @@
 						'integrated_edit_field4',
 						'integrated_edit_field5',
 						'integrated_edit_field6',
-						'integrated_edit_field3' 
+						'integrated_edit_field3',
+						'integrated_edit_field7' 
 					) 
 				) 
 			),
@@ -606,6 +619,11 @@
 		),
 		'notifications' => array(
 			'type' => 'notifications' 
+		),
+		'integrated_edit_field7' => array(
+			'field' => 'participant_display',
+			'type' => 'integrated_edit_field',
+			'orientation' => 0 
 		),
 		'expand_button' => array(
 			'type' => 'expand_button' 

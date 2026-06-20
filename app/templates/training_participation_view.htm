@@ -572,6 +572,26 @@
 
 
 {END created_at_fieldblock}
+											
+{BEGIN participant_display_fieldblock}
+
+
+<div class="r-integrated-field form-group clearfix {$fielddispclass_participant_display}  r-vertical-field" 
+	data-signal-error-for="participant_display{$id}" {$required_attr_participant_display}
+	data-itemtype="integrated_edit_field" data-itemid="integrated_edit_field7" {$item_integrated_edit_field7} data-pageid="{$pageid}" data-field="participant_display" data-fieldname="participant_display" >
+
+	<label class="r-edit-label control-label {$participant_display_label_class}" for="{$labelfor_participant_display}">
+		{BEGIN participant_display_label}
+			{$participant_display_forward_control}
+			{$label public_training_participation participant_display }			{END participant_display_label}
+		<span class="icon-required"></span>
+	</label>
+	<div class="r-edit-field">
+		{$participant_display_value}	</div>
+	</div>
+
+
+{END participant_display_fieldblock}
 	
 								</td>
 			{END cellblock_grid_c3}

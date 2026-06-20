@@ -783,37 +783,6 @@ $runnerMenus['main'] = array(
 						) 
 					),
 					array(
-						'id' => '58',
-						'parent' => '33',
-						'children' => array( 
-							 
-						),
-						'data' => array(
-							'name' => array(
-								'text' => '-------',
-								'type' => 0 
-							),
-							'comments' => array(
-								'text' => '',
-								'type' => 0 
-							),
-							'style' => '',
-							'href' => '',
-							'params' => '',
-							'pageId' => '',
-							'itemType' => 1,
-							'linkType' => 2,
-							'openType' => 0,
-							'iconType' => 0,
-							'iconName' => '',
-							'iconStyle' => 0,
-							'showIconType' => 1,
-							'linkToAnotherApp' => false,
-							'pageType' => '',
-							'table' => null 
-						) 
-					),
-					array(
 						'id' => '160',
 						'parent' => '33',
 						'children' => array( 
@@ -1081,6 +1050,37 @@ $runnerMenus['main'] = array(
 							'openType' => 0,
 							'iconType' => 3,
 							'iconName' => 'fa-newspaper',
+							'iconStyle' => 0,
+							'showIconType' => 1,
+							'linkToAnotherApp' => false,
+							'pageType' => '',
+							'table' => null 
+						) 
+					),
+					array(
+						'id' => '58',
+						'parent' => '33',
+						'children' => array( 
+							 
+						),
+						'data' => array(
+							'name' => array(
+								'text' => '-------',
+								'type' => 0 
+							),
+							'comments' => array(
+								'text' => '',
+								'type' => 0 
+							),
+							'style' => '',
+							'href' => '',
+							'params' => '',
+							'pageId' => '',
+							'itemType' => 1,
+							'linkType' => 2,
+							'openType' => 0,
+							'iconType' => 0,
+							'iconName' => '',
 							'iconStyle' => 0,
 							'showIconType' => 1,
 							'linkToAnotherApp' => false,

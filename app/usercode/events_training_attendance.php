@@ -27,10 +27,18 @@ class eventclass_training_attendance  extends TableEventsBase {
 		),
 		'recorded_at' => array(
 			'edit' => true 
+		),
+		'recorded_by' => array(
+			'edit' => true 
 		) 
 	),
 	'autoUpdateValue' => array(
-		 
+		'recorded_at' => array(
+			'edit' => true 
+		),
+		'recorded_by' => array(
+			'edit' => true 
+		) 
 	),
 	'uploadFolder' => array(
 		 
@@ -50,7 +58,22 @@ return $defaultValue;
 }
 
 public function default_recorded_at_efedit(  ) {
-	$defaultValue = strftime("%Y-%m-%d");
+	$defaultValue = date("Y-m-d H:i:s");
+return $defaultValue;
+}
+
+public function autoupdate_recorded_at_efedit(  ) {
+	$defaultValue = date("Y-m-d H:i:s");
+return $defaultValue;
+}
+
+public function default_recorded_by_efedit(  ) {
+	$defaultValue = $_SESSION["UserName"];
+return $defaultValue;
+}
+
+public function autoupdate_recorded_by_efedit(  ) {
+	$defaultValue = $_SESSION["UserName"];
 return $defaultValue;
 }	
 

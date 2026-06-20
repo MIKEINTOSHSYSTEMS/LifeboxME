@@ -21,6 +21,9 @@
 		),
 		'ceu_points' => array(
 			'totalsType' => '' 
+		),
+		'participant_display' => array(
+			'totalsType' => '' 
 		) 
 	),
 	'fields' => array(
@@ -31,7 +34,8 @@
 			'created_at',
 			'pre_test_score',
 			'post_test_score',
-			'ceu_points' 
+			'ceu_points',
+			'participant_display' 
 		),
 		'exportFields' => array( 
 			'participation_id',
@@ -40,7 +44,8 @@
 			'created_at',
 			'pre_test_score',
 			'post_test_score',
-			'ceu_points' 
+			'ceu_points',
+			'participant_display' 
 		),
 		'searchRequiredFields' => array( 
 			 
@@ -69,6 +74,9 @@
 			),
 			'ceu_points' => array( 
 				'export_field6' 
+			),
+			'participant_display' => array( 
+				'export_field7' 
 			) 
 		) 
 	),
@@ -94,7 +102,8 @@
 					'export_field3',
 					'export_field4',
 					'export_field5',
-					'export_field6' 
+					'export_field6',
+					'export_field7' 
 				),
 				'footer' => array( 
 					'export_export',
@@ -115,6 +124,7 @@
 				'export_field4' => 'grid',
 				'export_field5' => 'grid',
 				'export_field6' => 'grid',
+				'export_field7' => 'grid',
 				'export_export' => 'footer',
 				'export_cancel' => 'footer' 
 			),
@@ -142,7 +152,8 @@
 				'export_field3',
 				'export_field4',
 				'export_field5',
-				'export_field6' 
+				'export_field6',
+				'export_field7' 
 			) 
 		),
 		'cellMaps' => array(
@@ -288,7 +299,8 @@
 						'export_field3',
 						'export_field4',
 						'export_field5',
-						'export_field6' 
+						'export_field6',
+						'export_field7' 
 					) 
 				) 
 			),
@@ -369,6 +381,10 @@
 		),
 		'export_field6' => array(
 			'field' => 'ceu_points',
+			'type' => 'export_field' 
+		),
+		'export_field7' => array(
+			'field' => 'participant_display',
 			'type' => 'export_field' 
 		) 
 	),
