@@ -44,12 +44,12 @@ class eventclass_training_sessions  extends TableEventsBase {
 			}
 	
 	public function default_created_at_efedit(  ) {
-	$defaultValue = strftime("%Y-%m-%d");
+	$defaultValue = date("Y-m-d H:i:s");
 return $defaultValue;
 }
 
 public function autoupdate_updated_at_efedit(  ) {
-	$defaultValue = strftime("%Y-%m-%d");
+	$defaultValue = date("Y-m-d H:i:s");
 return $defaultValue;
 }	
 

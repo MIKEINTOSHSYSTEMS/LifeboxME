@@ -182,6 +182,7 @@ FROM
 			'editFormats' => array(
 				'edit' => array(
 					'format' => 'Lookup wizard',
+					'required' => true,
 					'validateAs' => 'Number',
 					'validateRegexMessage' => array(
 						'text' => '',
@@ -226,6 +227,7 @@ FROM
 			'editFormats' => array(
 				'edit' => array(
 					'format' => 'Lookup wizard',
+					'required' => true,
 					'validateAs' => 'Number',
 					'validateRegexMessage' => array(
 						'text' => '',
@@ -270,6 +272,7 @@ FROM
 			'editFormats' => array(
 				'edit' => array(
 					'format' => 'Lookup wizard',
+					'required' => true,
 					'validateAs' => 'Number',
 					'validateRegexMessage' => array(
 						'text' => '',
@@ -314,6 +317,7 @@ FROM
 			'editFormats' => array(
 				'edit' => array(
 					'format' => 'Lookup wizard',
+					'required' => true,
 					'validateAs' => 'Number',
 					'validateRegexMessage' => array(
 						'text' => '',
@@ -652,7 +656,7 @@ FROM
 			'editFormats' => array(
 				'edit' => array(
 					'validateAs' => 'Number',
-					'textHTML5Input' => '0',
+					'textHTML5Input' => 'Number',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
 					'timeConvention' => 1 
@@ -683,7 +687,7 @@ FROM
 			'editFormats' => array(
 				'edit' => array(
 					'validateAs' => 'Number',
-					'textHTML5Input' => '0',
+					'textHTML5Input' => 'Number',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
 					'timeConvention' => 1 
@@ -714,7 +718,7 @@ FROM
 			'editFormats' => array(
 				'edit' => array(
 					'validateAs' => 'Number',
-					'textHTML5Input' => '0',
+					'textHTML5Input' => 'Number',
 					'fileMaxNumber' => 1,
 					'fileThumbnailField' => 'th',
 					'timeConvention' => 1 
@@ -814,8 +818,8 @@ FROM
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'format' => 'Date',
-					'defaultValue' => 'strftime("%Y-%m-%d")',
+					'format' => 'Readonly',
+					'defaultValue' => 'date("Y-m-d H:i:s")',
 					'validateRegexMessage' => array(
 						'text' => '',
 						'type' => 0 
@@ -848,8 +852,8 @@ FROM
 			),
 			'editFormats' => array(
 				'edit' => array(
-					'format' => 'Date',
-					'autoUpdateValue' => 'strftime("%Y-%m-%d")',
+					'format' => 'Readonly',
+					'autoUpdateValue' => 'date("Y-m-d H:i:s")',
 					'validateRegexMessage' => array(
 						'text' => '',
 						'type' => 0 

@@ -85,7 +85,7 @@ $runnerDbTableInfo['public_training_courses'] = array(
 		) 
 	),
 	'primaryKeys' => array( 
-		 
+		'course_id' 
 	),
 	'uniqueFields' => array( 
 		 

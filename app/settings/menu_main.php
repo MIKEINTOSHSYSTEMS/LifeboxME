@@ -383,6 +383,253 @@ $runnerMenus['main'] = array(
 						) 
 					),
 					array(
+						'id' => '44',
+						'parent' => '33',
+						'children' => array( 
+							 
+						),
+						'data' => array(
+							'name' => array(
+								'table' => 'public.training_participants',
+								'type' => 6 
+							),
+							'comments' => array(
+								'text' => '',
+								'type' => 0 
+							),
+							'style' => '',
+							'href' => 'mypage.htm',
+							'params' => '',
+							'pageId' => '',
+							'itemType' => 2,
+							'linkType' => 0,
+							'openType' => 0,
+							'iconType' => 3,
+							'iconName' => 'fa-street-view',
+							'iconStyle' => 0,
+							'showIconType' => 1,
+							'linkToAnotherApp' => false,
+							'pageType' => 'list',
+							'table' => 4659 
+						) 
+					),
+					array(
+						'id' => '51',
+						'parent' => '33',
+						'children' => array( 
+							 
+						),
+						'data' => array(
+							'name' => array(
+								'text' => 'Training Participation (Enroll)',
+								'type' => 0 
+							),
+							'comments' => array(
+								'text' => '',
+								'type' => 0 
+							),
+							'style' => '',
+							'href' => 'mypage.htm',
+							'params' => '',
+							'pageId' => '',
+							'itemType' => 2,
+							'linkType' => 0,
+							'openType' => 0,
+							'iconType' => 3,
+							'iconName' => 'fa-check-circle',
+							'iconStyle' => 0,
+							'showIconType' => 1,
+							'linkToAnotherApp' => false,
+							'pageType' => 'list',
+							'table' => 4668 
+						) 
+					),
+					array(
+						'id' => '50',
+						'parent' => '33',
+						'children' => array( 
+							array(
+								'id' => '46',
+								'parent' => '50',
+								'children' => array( 
+									 
+								),
+								'data' => array(
+									'name' => array(
+										'table' => 'public.training_attendance',
+										'type' => 6 
+									),
+									'comments' => array(
+										'text' => '',
+										'type' => 0 
+									),
+									'style' => '',
+									'href' => 'mypage.htm',
+									'params' => '',
+									'pageId' => '',
+									'itemType' => 2,
+									'linkType' => 0,
+									'openType' => 0,
+									'iconType' => 3,
+									'iconName' => 'fa-check-square',
+									'iconStyle' => 1,
+									'showIconType' => 1,
+									'linkToAnotherApp' => false,
+									'pageType' => 'list',
+									'table' => 4665 
+								) 
+							),
+							array(
+								'id' => '71',
+								'parent' => '50',
+								'children' => array( 
+									 
+								),
+								'data' => array(
+									'name' => array(
+										'text' => 'AIO Training Tracking',
+										'type' => 0 
+									),
+									'comments' => array(
+										'text' => '',
+										'type' => 0 
+									),
+									'style' => '',
+									'href' => 'mypage.htm',
+									'params' => '',
+									'pageId' => '',
+									'itemType' => 2,
+									'linkType' => 0,
+									'openType' => 0,
+									'iconType' => 3,
+									'iconName' => 'fa-dedent',
+									'iconStyle' => 3,
+									'showIconType' => 1,
+									'linkToAnotherApp' => false,
+									'pageType' => 'list',
+									'table' => 4700 
+								) 
+							),
+							array(
+								'id' => '49',
+								'parent' => '50',
+								'children' => array( 
+									 
+								),
+								'data' => array(
+									'name' => array(
+										'table' => 'public.participant_attendance_summary',
+										'type' => 6 
+									),
+									'comments' => array(
+										'text' => '',
+										'type' => 0 
+									),
+									'style' => '',
+									'href' => 'mypage.htm',
+									'params' => '',
+									'pageId' => '',
+									'itemType' => 2,
+									'linkType' => 0,
+									'openType' => 0,
+									'iconType' => 3,
+									'iconName' => 'fa-align-justify',
+									'iconStyle' => 0,
+									'showIconType' => 1,
+									'linkToAnotherApp' => false,
+									'pageType' => 'list',
+									'table' => 4667 
+								) 
+							),
+							array(
+								'id' => '48',
+								'parent' => '50',
+								'children' => array( 
+									 
+								),
+								'data' => array(
+									'name' => array(
+										'table' => 'public.participant_attendance_detail',
+										'type' => 6 
+									),
+									'comments' => array(
+										'text' => '',
+										'type' => 0 
+									),
+									'style' => '',
+									'href' => 'mypage.htm',
+									'params' => '',
+									'pageId' => '',
+									'itemType' => 2,
+									'linkType' => 0,
+									'openType' => 0,
+									'iconType' => 3,
+									'iconName' => 'fa-calendar',
+									'iconStyle' => 0,
+									'showIconType' => 1,
+									'linkToAnotherApp' => false,
+									'pageType' => 'list',
+									'table' => 4664 
+								) 
+							),
+							array(
+								'id' => '52',
+								'parent' => '50',
+								'children' => array( 
+									 
+								),
+								'data' => array(
+									'name' => array(
+										'text' => 'Training Daily Attendance Detail',
+										'type' => 0 
+									),
+									'comments' => array(
+										'text' => '',
+										'type' => 0 
+									),
+									'style' => '',
+									'href' => 'mypage.htm',
+									'params' => '',
+									'pageId' => '',
+									'itemType' => 2,
+									'linkType' => 0,
+									'openType' => 0,
+									'iconType' => 3,
+									'iconName' => 'fa-clock',
+									'iconStyle' => 1,
+									'showIconType' => 1,
+									'linkToAnotherApp' => false,
+									'pageType' => 'list',
+									'table' => 4669 
+								) 
+							) 
+						),
+						'data' => array(
+							'name' => array(
+								'text' => 'Attendance',
+								'type' => 0 
+							),
+							'comments' => array(
+								'text' => '',
+								'type' => 0 
+							),
+							'style' => '',
+							'href' => '',
+							'params' => '',
+							'pageId' => '',
+							'itemType' => 0,
+							'linkType' => 2,
+							'openType' => 0,
+							'iconType' => 3,
+							'iconName' => 'fa-calendar-check',
+							'iconStyle' => 0,
+							'showIconType' => 1,
+							'linkToAnotherApp' => false,
+							'pageType' => '',
+							'table' => null 
+						) 
+					),
+					array(
 						'id' => '90',
 						'parent' => '33',
 						'children' => array( 
@@ -536,68 +783,6 @@ $runnerMenus['main'] = array(
 						) 
 					),
 					array(
-						'id' => '44',
-						'parent' => '33',
-						'children' => array( 
-							 
-						),
-						'data' => array(
-							'name' => array(
-								'table' => 'public.training_participants',
-								'type' => 6 
-							),
-							'comments' => array(
-								'text' => '',
-								'type' => 0 
-							),
-							'style' => '',
-							'href' => 'mypage.htm',
-							'params' => '',
-							'pageId' => '',
-							'itemType' => 2,
-							'linkType' => 0,
-							'openType' => 0,
-							'iconType' => 3,
-							'iconName' => 'fa-street-view',
-							'iconStyle' => 0,
-							'showIconType' => 1,
-							'linkToAnotherApp' => false,
-							'pageType' => 'list',
-							'table' => 4659 
-						) 
-					),
-					array(
-						'id' => '71',
-						'parent' => '33',
-						'children' => array( 
-							 
-						),
-						'data' => array(
-							'name' => array(
-								'text' => 'AIO Training Tracking',
-								'type' => 0 
-							),
-							'comments' => array(
-								'text' => '',
-								'type' => 0 
-							),
-							'style' => '',
-							'href' => 'mypage.htm',
-							'params' => '',
-							'pageId' => '',
-							'itemType' => 2,
-							'linkType' => 0,
-							'openType' => 0,
-							'iconType' => 3,
-							'iconName' => 'fa-dedent',
-							'iconStyle' => 3,
-							'showIconType' => 1,
-							'linkToAnotherApp' => false,
-							'pageType' => 'list',
-							'table' => 4700 
-						) 
-					),
-					array(
 						'id' => '58',
 						'parent' => '33',
 						'children' => array( 
@@ -747,191 +932,6 @@ $runnerMenus['main'] = array(
 							'iconStyle' => 2,
 							'showIconType' => 1,
 							'linkToAnotherApp' => false 
-						) 
-					),
-					array(
-						'id' => '50',
-						'parent' => '33',
-						'children' => array( 
-							array(
-								'id' => '46',
-								'parent' => '50',
-								'children' => array( 
-									 
-								),
-								'data' => array(
-									'name' => array(
-										'table' => 'public.training_attendance',
-										'type' => 6 
-									),
-									'comments' => array(
-										'text' => '',
-										'type' => 0 
-									),
-									'style' => '',
-									'href' => 'mypage.htm',
-									'params' => '',
-									'pageId' => '',
-									'itemType' => 2,
-									'linkType' => 0,
-									'openType' => 0,
-									'iconType' => 3,
-									'iconName' => 'fa-check-square',
-									'iconStyle' => 1,
-									'showIconType' => 1,
-									'linkToAnotherApp' => false,
-									'pageType' => 'list',
-									'table' => 4665 
-								) 
-							),
-							array(
-								'id' => '51',
-								'parent' => '50',
-								'children' => array( 
-									 
-								),
-								'data' => array(
-									'name' => array(
-										'table' => 'public.training_participation',
-										'type' => 6 
-									),
-									'comments' => array(
-										'text' => '',
-										'type' => 0 
-									),
-									'style' => '',
-									'href' => 'mypage.htm',
-									'params' => '',
-									'pageId' => '',
-									'itemType' => 2,
-									'linkType' => 0,
-									'openType' => 0,
-									'iconType' => 3,
-									'iconName' => 'fa-check-circle',
-									'iconStyle' => 0,
-									'showIconType' => 1,
-									'linkToAnotherApp' => false,
-									'pageType' => 'list',
-									'table' => 4668 
-								) 
-							),
-							array(
-								'id' => '49',
-								'parent' => '50',
-								'children' => array( 
-									 
-								),
-								'data' => array(
-									'name' => array(
-										'table' => 'public.participant_attendance_summary',
-										'type' => 6 
-									),
-									'comments' => array(
-										'text' => '',
-										'type' => 0 
-									),
-									'style' => '',
-									'href' => 'mypage.htm',
-									'params' => '',
-									'pageId' => '',
-									'itemType' => 2,
-									'linkType' => 0,
-									'openType' => 0,
-									'iconType' => 3,
-									'iconName' => 'fa-align-justify',
-									'iconStyle' => 0,
-									'showIconType' => 1,
-									'linkToAnotherApp' => false,
-									'pageType' => 'list',
-									'table' => 4667 
-								) 
-							),
-							array(
-								'id' => '48',
-								'parent' => '50',
-								'children' => array( 
-									 
-								),
-								'data' => array(
-									'name' => array(
-										'table' => 'public.participant_attendance_detail',
-										'type' => 6 
-									),
-									'comments' => array(
-										'text' => '',
-										'type' => 0 
-									),
-									'style' => '',
-									'href' => 'mypage.htm',
-									'params' => '',
-									'pageId' => '',
-									'itemType' => 2,
-									'linkType' => 0,
-									'openType' => 0,
-									'iconType' => 3,
-									'iconName' => 'fa-calendar',
-									'iconStyle' => 0,
-									'showIconType' => 1,
-									'linkToAnotherApp' => false,
-									'pageType' => 'list',
-									'table' => 4664 
-								) 
-							),
-							array(
-								'id' => '52',
-								'parent' => '50',
-								'children' => array( 
-									 
-								),
-								'data' => array(
-									'name' => array(
-										'text' => 'Training Daily Attendance Detail',
-										'type' => 0 
-									),
-									'comments' => array(
-										'text' => '',
-										'type' => 0 
-									),
-									'style' => '',
-									'href' => 'mypage.htm',
-									'params' => '',
-									'pageId' => '',
-									'itemType' => 2,
-									'linkType' => 0,
-									'openType' => 0,
-									'iconType' => 3,
-									'iconName' => 'fa-clock',
-									'iconStyle' => 1,
-									'showIconType' => 1,
-									'linkToAnotherApp' => false,
-									'pageType' => 'list',
-									'table' => 4669 
-								) 
-							) 
-						),
-						'data' => array(
-							'name' => array(
-								'text' => 'Attendance',
-								'type' => 0 
-							),
-							'comments' => array(
-								'text' => '',
-								'type' => 0 
-							),
-							'style' => '',
-							'href' => '',
-							'params' => '',
-							'pageId' => '',
-							'itemType' => 0,
-							'linkType' => 2,
-							'openType' => 0,
-							'iconType' => 3,
-							'iconName' => 'fa-calendar-check',
-							'iconStyle' => 0,
-							'showIconType' => 1,
-							'linkToAnotherApp' => false,
-							'pageType' => '',
-							'table' => null 
 						) 
 					),
 					array(
