@@ -283,11 +283,11 @@ function getNotificationIcon($type)
     <script>
         var _paq = window._paq = window._paq || [];
         /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-        _paq.push(["setCookieDomain", "*.lifebox.merqconsultancy.org"]);
+        _paq.push(["setCookieDomain", "*mne.lifebox.org"]);
         _paq.push(['trackPageView']);
         _paq.push(['enableLinkTracking']);
         (function() {
-            var u = "https://lifebox.merqconsultancy.org/analytics/";
+            var u = "https://mne.lifebox.org/analytics/";
             _paq.push(['setTrackerUrl', u + 'matomo.php']);
             _paq.push(['setSiteId', '1']);
             var d = document,
@@ -301,7 +301,7 @@ function getNotificationIcon($type)
     <!-- End Matomo Code -->
 
     <!-- Matomo Image Tracker-->
-    <img referrerpolicy="no-referrer-when-downgrade" src="https://lifebox.merqconsultancy.org/analytics/matomo.php?idsite=1&amp;rec=1" style="border:0" alt="" />
+    <img referrerpolicy="no-referrer-when-downgrade" src="https://mne.lifebox.org/analytics/matomo.php?idsite=1&amp;rec=1" style="border:0" alt="" />
     <!-- End Matomo -->
 
     <!-- Matomo -->
@@ -311,7 +311,7 @@ function getNotificationIcon($type)
         _paq.push(['trackPageView']);
         _paq.push(['enableLinkTracking']);
         (function() {
-            var u = "//lifebox.merqconsultancy.org/analytics/";
+            var u = "//mne.lifebox.org/analytics/";
             _paq.push(['setTrackerUrl', u + 'matomo.php']);
             _paq.push(['setSiteId', '1']);
             var d = document,
@@ -336,7 +336,7 @@ function getNotificationIcon($type)
                 g = d.createElement('script'),
                 s = d.getElementsByTagName('script')[0];
             g.async = true;
-            g.src = 'https://lifebox.merqconsultancy.org/analytics/js/container_DPKCUiEL.js';
+            g.src = 'https://mne.lifebox.org/analytics/js/container_DPKCUiEL.js';
             s.parentNode.insertBefore(g, s);
         })();
     </script>
@@ -1156,9 +1156,13 @@ function getNotificationIcon($type)
     <section class="countdown-section" id="launch">
         <div class="container">
             <div class="section-title text-white">
-                <h2>New Features Coming Soon</h2>
-                <p>We're continuously improving our platform. Check out what's coming in our next update!</p>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <xl class="fa-solid fa-head-side-mask fa-2x">We take surgical safety seriously!!!</xl>
             </div>
+            <!--
             <div class="countdown">
                 <div class="countdown-item">
                     <div class="countdown-number" id="days">00</div>
@@ -1177,7 +1181,12 @@ function getNotificationIcon($type)
                     <div class="countdown-label">Seconds</div>
                 </div>
             </div>
+                        -->
             <a href="#features" class="btn btn-light btn-lg mt-4"><i class="fa-solid fa-compass"></i> Explore Current Features</a>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
         </div>
     </section>
 

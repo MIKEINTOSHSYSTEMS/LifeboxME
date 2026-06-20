@@ -25,7 +25,7 @@ $runnerRestConnections = array(
 		'authType' => 'none',
 		'id' => 'rest',
 		'name' => 'LifeboxME_REST-API',
-		'url' => 'https://lifebox.merqconsultancy.org',
+		'url' => 'https://mne.lifebox.org',
 		'clientCredentials' => false,
 		'username' => '',
 		'password' => '',
@@ -43,7 +43,7 @@ $runnerRestConnections = array(
 		'outputLanguage' => 0,
 		'id' => 'rest1',
 		'name' => 'LifeboxLN_Rest-API',
-		'url' => 'https://lifebox.merqconsultancy.org/api/lbln/',
+		'url' => 'https://mne.lifebox.org/api/lbln/',
 		'clientCredentials' => false 
 	) 
 );

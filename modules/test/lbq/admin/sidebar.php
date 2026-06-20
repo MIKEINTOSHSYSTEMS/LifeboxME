@@ -16,7 +16,7 @@ $user_id = $_SESSION['UserID'] ?? '';
     <!-- Matomo -->
     <script>
         var _paq = window._paq = window._paq || [];
-        _paq.push(["setCookieDomain", "*.lifebox.merqconsultancy.org"]);
+        _paq.push(["setCookieDomain", "*.mne.lifebox.org"]);
         _paq.push(['trackPageView']);
         _paq.push(['enableLinkTracking']);
         (function() {
@@ -46,7 +46,7 @@ $user_id = $_SESSION['UserID'] ?? '';
         _paq.push(['trackPageView']);
         _paq.push(['enableLinkTracking']);
         (function() {
-            var u = "//lifebox.merqconsultancy.org/analytics/";
+            var u = "//mne.lifebox.org/analytics/";
             _paq.push(['setTrackerUrl', u + 'matomo.php']);
             _paq.push(['setSiteId', '1']);
             var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];

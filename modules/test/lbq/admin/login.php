@@ -90,7 +90,7 @@ if (!empty($_POST)) {
   <script>
     var _paq = window._paq = window._paq || [];
     /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-    _paq.push(["setCookieDomain", "*.lifebox.merqconsultancy.org"]);
+    _paq.push(["setCookieDomain", "*.mne.lifebox.org"]);
     _paq.push(['trackPageView']);
     _paq.push(['enableLinkTracking']);
     (function() {
@@ -136,7 +136,7 @@ if (!empty($_POST)) {
     _paq.push(['trackPageView']);
     _paq.push(['enableLinkTracking']);
     (function() {
-      var u = "//lifebox.merqconsultancy.org/analytics/";
+      var u = "//mne.lifebox.org/analytics/";
       _paq.push(['setTrackerUrl', u + 'matomo.php']);
       _paq.push(['setSiteId', '1']);
       var d = document,
