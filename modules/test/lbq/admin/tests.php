@@ -598,6 +598,19 @@ function sortLink($col, $label, $current_col, $current_dir, $qs) {
                             <div class="col-md-6">
                                 <label for="title" class="form-label">Test Title</label>
                                 <input type="text" class="form-control" id="title" name="title" required>
+                                <div class="mt-2 p-2 bg-info bg-opacity-10 border border-info rounded small">
+                                    <strong><i class="bi bi-info-circle"></i> How to Create a Test</strong>
+                                    <ul class="mb-0 ps-3 mt-1">
+                                        <li>Enter a <strong>Test Title</strong> — this will appear for participants</li>
+                                        <li>Choose a <strong>Course</strong> to filter the training sessions list</li>
+                                        <li>Select one or more <strong>Training Sessions</strong> to attach the test to</li>
+                                        <li>Add an optional <strong>Description</strong></li>
+                                        <li>Set a <strong>Time Limit</strong> and <strong>Max Attempts</strong> if needed</li>
+                                        <li>Set a <strong>Pass Mark (%)</strong> if certificate is required</li>
+                                        <li>Toggle <strong>Pre Test / Active / Certificate</strong> switches as needed</li>
+                                        <li>After creating, you will be taken to <strong>add questions</strong> to the test</li>
+                                    </ul>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <label for="create_course_filter" class="form-label">Filter by Course</label>

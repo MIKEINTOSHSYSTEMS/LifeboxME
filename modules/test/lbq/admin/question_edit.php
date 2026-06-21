@@ -125,22 +125,28 @@ if ($question_id && !$question) {
             border-radius: 5px;
             background-color: #f8f9fa;
         }
+
         .answer-row:hover {
             background-color: #e9ecef;
         }
+
         .sortable-ghost {
             opacity: 0.5;
         }
+
         .matrix-section {
             display: none;
         }
+
         .inline-question-item {
             border-left: 3px solid #0d6efd;
             transition: background 0.2s;
         }
+
         .inline-question-item:hover {
             background: #f0f4ff;
         }
+
         @media (min-width: 768px) {
             .px-md-4 {
                 padding-right: 7.5rem !important;
@@ -151,7 +157,7 @@ if ($question_id && !$question) {
 </head>
 
 <body>
-<?php include 'sidebar.php'; ?>
+    <?php include 'sidebar.php'; ?>
     <div class="container-fluid">
         <main class="px-md-4 py-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -247,7 +253,7 @@ if ($question_id && !$question) {
                                                             <span class="answer-letter badge bg-secondary"><?= $letterLabels[$index] ?? '?' ?></span>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <textarea class="form-control tinymce-editor" name="answer_text[]" rows="2" placeholder="Answer text"><?= htmlspecialchars($answer['text']) ?></textarea>
+                                                            <textarea class="form-control tinymce-answer" name="answer_text[]" rows="2" placeholder="Answer text"><?= htmlspecialchars($answer['text']) ?></textarea>
                                                         </div>
                                                         <div class="col-md-3">
                                                             <div class="form-check form-switch">
@@ -284,9 +290,9 @@ if ($question_id && !$question) {
                                         <i class="bi bi-check-circle"></i> <?= $question_id ? 'Update' : 'Create' ?> Question
                                     </button>
                                     <?php if (!$question_id): ?>
-                                    <button type="submit" name="save_another" value="1" class="btn btn-success">
-                                        <i class="bi bi-plus-circle"></i> Save & Add Another
-                                    </button>
+                                        <button type="submit" name="save_another" value="1" class="btn btn-success">
+                                            <i class="bi bi-plus-circle"></i> Save & Add Another
+                                        </button>
                                     <?php endif; ?>
                                     <a href="questions.php" class="btn btn-secondary">
                                         <i class="bi bi-x-circle"></i> Cancel
@@ -331,6 +337,37 @@ if ($question_id && !$question) {
                             </div>
                         </div>
                     </div>
+
+                    <!-- Help Tooltips -->
+                    <div class="card mt-3">
+                        <div class="card-header bg-light d-flex align-items-center gap-2">
+                            <i class="bi bi-question-circle text-info"></i>
+                            <h6 class="mb-0">Tips &amp; Shortcuts</h6>
+                        </div>
+                        <div class="card-body p-3">
+                            <p class="small text-muted mb-2"><strong><i class="bi bi-pencil"></i> Adding &amp; Editing</strong></p>
+                            <ul class="small mb-3 ps-3">
+                                <li>Select a <strong>Training Course</strong> first</li>
+                                <li>Write the question in the editor above</li>
+                                <li>Choose the <strong>Question Type</strong></li>
+                                <li>Add answer choices and mark the <strong>Correct</strong> one(s)</li>
+                            </ul>
+
+                            <p class="small text-muted mb-2"><strong><i class="bi bi-clipboard"></i> Pasting Content</strong></p>
+                            <ul class="small mb-3 ps-3">
+                                <li><kbd>Ctrl</kbd>+<kbd>V</kbd> &mdash; keeps formatting (bold, links, etc.)</li>
+                                <li><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd> &mdash; pastes as plain text only (Recommended when pasting answers)</li>
+                            </ul>
+
+                            <p class="small text-muted mb-2"><strong><i class="bi bi-images"></i> Images &amp; Video</strong></p>
+                            <ul class="small mb-0 ps-3">
+                                <li>Paste an image &mdash; it auto-uploads to the server</li>
+                                <li>Use the <strong>Insert/Edit Image</strong> toolbar button</li>
+                                <li>Click a pasted image to <strong>resize</strong> with drag handles</li>
+                                <li>Video links can be added via the <strong>Video Link</strong> field or embedded in the editor</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
@@ -340,10 +377,8 @@ if ($question_id && !$question) {
     <script src="../vendor/tinymce/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
 
     <script>
-        tinymce.init({
-            selector: '.tinymce-editor',
+        var baseConfig = {
             license_key: 'gpl',
-            height: 400,
             menubar: false,
             plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount',
             toolbar: 'undo redo | blocks | bold italic underline strikethrough | link image media table | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
@@ -352,7 +387,17 @@ if ($question_id && !$question) {
             automatic_uploads: true,
             file_picker_types: 'image',
             paste_data_images: true
-        });
+        };
+
+        tinymce.init(Object.assign({}, baseConfig, {
+            selector: '#question',
+            height: 400
+        }));
+
+        tinymce.init(Object.assign({}, baseConfig, {
+            selector: '.tinymce-answer',
+            height: 144
+        }));
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -420,7 +465,7 @@ if ($question_id && !$question) {
                             <span class="answer-letter badge bg-secondary">${letter}</span>
                         </div>
                         <div class="col-md-6">
-                            <textarea class="form-control tinymce-editor" name="new_answer_text[]" rows="2" placeholder="Answer text"></textarea>
+                            <textarea class="form-control tinymce-answer" name="new_answer_text[]" rows="2" placeholder="Answer text"></textarea>
                         </div>
                         <div class="col-md-3">
                             <div class="form-check form-switch">
@@ -437,19 +482,10 @@ if ($question_id && !$question) {
 
                 const textarea = row.querySelector('textarea');
                 if (textarea && typeof tinymce !== 'undefined') {
-                    tinymce.init({
+                    tinymce.init(Object.assign({}, baseConfig, {
                         target: textarea,
-                        license_key: 'gpl',
-                        height: 200,
-                        menubar: false,
-                        plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount',
-                        toolbar: 'undo redo | blocks | bold italic underline strikethrough | link image media table | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-                        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
-                        images_upload_url: 'upload_handler.php',
-                        automatic_uploads: true,
-                        file_picker_types: 'image',
-                        paste_data_images: true
-                    });
+                        height: 144
+                    }));
                 }
 
                 row.querySelector('.remove-answer').addEventListener('click', function() {
@@ -481,7 +517,9 @@ if ($question_id && !$question) {
                 }
                 loadingEl.classList.remove('d-none');
                 fetch('questions_ajax.php?course_id=' + courseId)
-                    .then(function(r) { return r.text(); })
+                    .then(function(r) {
+                        return r.text();
+                    })
                     .then(function(html) {
                         loadingEl.classList.add('d-none');
                         var existing = recentList.querySelector('#recent-loading');

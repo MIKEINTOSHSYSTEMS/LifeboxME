@@ -599,6 +599,18 @@ $qtypes = [
                 <div class="col-md-8">
                   <label for="title" class="form-label">Test Title</label>
                   <input type="text" class="form-control" id="title" name="title" value="<?= htmlspecialchars($test['title']) ?>" required>
+                  <div class="mt-2 p-2 bg-info bg-opacity-10 border border-info rounded small">
+                    <strong><i class="bi bi-info-circle"></i> How to Edit a Test</strong>
+                    <ul class="mb-0 ps-3 mt-1">
+                      <li>Modify the <strong>Test Title</strong> or any fields below</li>
+                      <li>Use <strong>Filter by Course</strong> to narrow the training sessions list</li>
+                      <li>Select one or more <strong>Training Sessions</strong> — hold <kbd>Ctrl</kbd> (or <kbd>Cmd</kbd>) for multiple</li>
+                      <li>Update <strong>Time Limit</strong>, <strong>Max Attempts</strong>, <strong>Pass Mark</strong> as needed</li>
+                      <li>Toggle <strong>Pre Test / Certificate / Active</strong> switches</li>
+                      <li>Click <strong>Update Test</strong> to save changes</li>
+                      <li>Use the <strong>Available Questions</strong> panel on the right to add questions</li>
+                    </ul>
+                  </div>
                 </div>
                 <div class="col-md-4">
                   <label for="course_filter" class="form-label">Filter by Course</label>

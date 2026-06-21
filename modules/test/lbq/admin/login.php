@@ -200,16 +200,29 @@ if (!empty($_POST)) {
                 Enter your credentials to access the admin panel
               </small>
             </div>
+            <div class="d-flex justify-content-center mt-3">
+              <button class="btn btn-secondary btn-sm ms-2" onclick="window.location.href='/app/login.php'">
+                <i class="bi bi-house me-1"></i> Go to Main Application
+              </button>
+              <button class="btn btn-warning btn-sm" onclick="window.location.href='../public/login.php'">
+                <i class="bi bi-box-arrow-up-right ms-2"></i> Go to Test Takers Portal
+              </button>
+            </div>
+            <small class="text-muted" style="display: block; text-align: center; margin-top: 15px;">
+              <i class="bi bi-shield-lock me-1"></i>
+              All activities are monitored for security purposes
+            </small>
           </div>
         </div>
+      </div>
 
-        <div class="text-center mt-3">
-          <small class="text-white">
-            &copy; <?= date('Y') ?> LifeBox Test Center. All rights reserved.
-          </small>
-        </div>
+      <div class="text-center mt-3">
+        <small class="text-white">
+          &copy; <?= date('Y') ?> LifeBox Test Center. All rights reserved.
+        </small>
       </div>
     </div>
+  </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
