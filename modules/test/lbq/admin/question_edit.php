@@ -92,7 +92,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($error)) {
-        header("Location: question_edit.php?id=" . $question_id);
+        $_SESSION['flash_message'] = $is_new_question ? 'Question created successfully!' : 'Question updated successfully!';
+        header("Location: questions.php");
         exit;
     }
 }

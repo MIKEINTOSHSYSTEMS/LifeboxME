@@ -103,6 +103,10 @@ $letter_labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M
 
 $courses_filter = $pdo->query("SELECT course_id, course_name FROM public.training_courses ORDER BY course_name")->fetchAll();
 $tests_filter = $pdo->query("SELECT id, title FROM lbquiz_tests ORDER BY title")->fetchAll();
+
+$flash_message = $_SESSION['flash_message'] ?? '';
+$flash_type = $_SESSION['flash_type'] ?? 'success';
+unset($_SESSION['flash_message'], $_SESSION['flash_type']);
 ?>
 <!doctype html>
 <html lang="en">
@@ -188,8 +192,15 @@ $tests_filter = $pdo->query("SELECT id, title FROM lbquiz_tests ORDER BY title")
         </div>
       </div>
 
-      <!-- Filters -->
-      <div class="card mb-4">
+        <?php if ($flash_message): ?>
+        <div class="alert alert-<?= $flash_type ?> alert-dismissible fade show" role="alert">
+          <i class="bi bi-check-circle-fill"></i> <?= htmlspecialchars($flash_message) ?>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php endif; ?>
+
+        <!-- Filters -->
+        <div class="card mb-4">
         <div class="card-body">
           <form method="get" class="row g-3">
             <div class="col-md-3">
