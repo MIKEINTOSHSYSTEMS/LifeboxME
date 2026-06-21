@@ -4,10 +4,10 @@ require __DIR__ . '/../src/db.php';
 require __DIR__ . '/../src/model/Quiz.php';
 
 // Check if user is logged in
-if (!is_logged_in()) {
-  header('Location: login.php');
-  exit;
-}
+//if (!is_logged_in()) {
+//  header('Location: login.php');
+//  exit;
+//}
 
 $quiz = new Quiz($pdo);
 

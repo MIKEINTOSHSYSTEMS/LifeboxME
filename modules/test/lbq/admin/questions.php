@@ -1,4 +1,5 @@
 <?php
+// MIKEINTOSH
 require __DIR__ . '/../src/db.php';
 require __DIR__ . '/../src/model/Quiz.php';
 require __DIR__ . '/session_helper.php';
@@ -17,20 +18,20 @@ $per_page = isset($_GET['per_page']) && $_GET['per_page'] === 'all' ? 'all' : ma
 $count_sql = "SELECT COUNT(*) FROM public.quiz_questions q WHERE 1=1";
 $count_params = [];
 if (!empty($qtype_filter)) {
-    $count_sql .= " AND q.qtype = :qtype";
-    $count_params[':qtype'] = $qtype_filter;
+  $count_sql .= " AND q.qtype = :qtype";
+  $count_params[':qtype'] = $qtype_filter;
 }
 if (!empty($search_filter)) {
-    $count_sql .= " AND q.question ILIKE :search";
-    $count_params[':search'] = '%' . $search_filter . '%';
+  $count_sql .= " AND q.question ILIKE :search";
+  $count_params[':search'] = '%' . $search_filter . '%';
 }
 if (!empty($course_filter)) {
-    $count_sql .= " AND q.course_id = :course_id";
-    $count_params[':course_id'] = $course_filter;
+  $count_sql .= " AND q.course_id = :course_id";
+  $count_params[':course_id'] = $course_filter;
 }
 if (!empty($test_filter)) {
-    $count_sql .= " AND EXISTS (SELECT 1 FROM lbquiz_test_questions tq WHERE tq.quiz_question_id = q.id AND tq.test_id = :test_id)";
-    $count_params[':test_id'] = $test_filter;
+  $count_sql .= " AND EXISTS (SELECT 1 FROM lbquiz_test_questions tq WHERE tq.quiz_question_id = q.id AND tq.test_id = :test_id)";
+  $count_params[':test_id'] = $test_filter;
 }
 $count_stmt = $pdo->prepare($count_sql);
 $count_stmt->execute($count_params);
@@ -82,13 +83,13 @@ $rows = $stmt->fetchAll();
 // Batch fetch all answers for displayed questions
 $answers_by_qid = [];
 if (!empty($rows)) {
-    $qids = array_column($rows, 'id');
-    $placeholders = implode(',', array_fill(0, count($qids), '?'));
-    $aStmt = $pdo->prepare("SELECT id, questionid, text, correct FROM public.quiz_answers WHERE questionid IN ($placeholders) ORDER BY id");
-    $aStmt->execute($qids);
-    foreach ($aStmt->fetchAll() as $a) {
-        $answers_by_qid[$a['questionid']][] = $a;
-    }
+  $qids = array_column($rows, 'id');
+  $placeholders = implode(',', array_fill(0, count($qids), '?'));
+  $aStmt = $pdo->prepare("SELECT id, questionid, text, correct FROM public.quiz_answers WHERE questionid IN ($placeholders) ORDER BY id");
+  $aStmt->execute($qids);
+  foreach ($aStmt->fetchAll() as $a) {
+    $answers_by_qid[$a['questionid']][] = $a;
+  }
 }
 
 $qtypes = [
@@ -117,192 +118,216 @@ $tests_filter = $pdo->query("SELECT id, title FROM lbquiz_tests ORDER BY title")
   <link rel="alternate icon" href="/assets/img/lb_favicon.ico">
 
   <style>
-    .question-card { border-left: 4px solid #0d6efd; }
-    .preview-text { font-size: 0.9rem; color: #6c757d; }
-    .course-badge { font-size: 0.75rem; }
-    .answer-item { font-size: 0.88rem; padding: 2px 0; }
-    .answer-item.correct { color: #198754; font-weight: 600; }
-    .answer-item .letter-badge { display: inline-block; width: 22px; height: 22px; line-height: 22px; text-align: center; border-radius: 50%; font-size: 0.75rem; font-weight: 700; margin-right: 6px; }
-    .answer-item.correct .letter-badge { background: #198754; color: #fff; }
-    .answer-item:not(.correct) .letter-badge { background: #e9ecef; color: #495057; }
+    .question-card {
+      border-left: 4px solid #0d6efd;
+    }
+
+    .preview-text {
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+
+    .course-badge {
+      font-size: 0.75rem;
+    }
+
+    .answer-item {
+      font-size: 0.88rem;
+      padding: 2px 0;
+    }
+
+    .answer-item.correct {
+      color: #198754;
+      font-weight: 600;
+    }
+
+    .answer-item .letter-badge {
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      line-height: 22px;
+      text-align: center;
+      border-radius: 50%;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-right: 6px;
+    }
+
+    .answer-item.correct .letter-badge {
+      background: #198754;
+      color: #fff;
+    }
+
+    .answer-item:not(.correct) .letter-badge {
+      background: #e9ecef;
+      color: #495057;
+    }
+
+    .question-item-deleting {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    /* Fix for modal flicker */
+    .modal {
+      background: rgba(0, 0, 0, 0.5);
+    }
   </style>
 </head>
 
 <body>
-<?php include 'sidebar.php'; ?>
+  <?php include 'sidebar.php'; ?>
   <div class="container-fluid">
-      <main class="px-md-4 py-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Questions Management</h1>
-          <div class="btn-toolbar mb-2 mb-md-0">
-            <a href="question_edit.php" class="btn btn-sm btn-primary">
-              <i class="bi bi-plus-circle"></i> Add New Question
-            </a>
-          </div>
+    <main class="px-md-4 py-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Questions Management</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <a href="question_edit.php" class="btn btn-sm btn-primary">
+            <i class="bi bi-plus-circle"></i> Add New Question
+          </a>
         </div>
+      </div>
 
-        <!-- Filters -->
-        <div class="card mb-4">
-          <div class="card-body">
-            <form method="get" class="row g-3">
-              <div class="col-md-3">
-                <label for="qtype" class="form-label">Type</label>
-                <select class="form-select" id="qtype" name="qtype">
-                  <option value="">All Types</option>
-                  <?php foreach ($qtypes as $id => $name): ?>
-                    <option value="<?= $id ?>" <?= $qtype_filter == $id ? 'selected' : '' ?>><?= $name ?></option>
-                  <?php endforeach; ?>
-                </select>
-              </div>
-              <div class="col-md-3">
-                <label for="course_id" class="form-label">Course</label>
-                <select class="form-select" id="course_id" name="course_id">
-                  <option value="">All Courses</option>
-                  <?php foreach ($courses_filter as $c): ?>
-                    <option value="<?= $c['course_id'] ?>" <?= $course_filter == $c['course_id'] ? 'selected' : '' ?>>
-                      <?= htmlspecialchars($c['course_name']) ?>
-                    </option>
-                  <?php endforeach; ?>
-                </select>
-              </div>
-              <div class="col-md-3">
-                <label for="test_id" class="form-label">Test</label>
-                <select class="form-select" id="test_id" name="test_id">
-                  <option value="">All Tests</option>
-                  <?php foreach ($tests_filter as $t): ?>
-                    <option value="<?= $t['id'] ?>" <?= $test_filter == $t['id'] ? 'selected' : '' ?>>
-                      <?= htmlspecialchars($t['title']) ?>
-                    </option>
-                  <?php endforeach; ?>
-                </select>
-              </div>
-              <div class="col-md-3">
-                <label for="search" class="form-label">Search</label>
-                <input type="text" class="form-control" id="search" name="search"
-                  value="<?= htmlspecialchars($search_filter) ?>" placeholder="Search question text...">
-              </div>
-              <div class="col-12 d-flex gap-2">
-                <button type="submit" class="btn btn-primary"><i class="bi bi-filter"></i> Filter</button>
-                <a href="questions.php" class="btn btn-outline-secondary">Reset</a>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        <!-- Questions List -->
-        <div class="card">
-          <div class="card-header bg-white d-flex justify-content-between align-items-center flex-wrap gap-2">
-            <h5 class="card-title mb-0">Questions (<?= $total_rows ?>)</h5>
-            <div class="d-flex align-items-center gap-2">
-              <span class="text-muted small">Show</span>
-              <select id="per_page" class="form-select form-select-sm" style="width: auto;" onchange="changePerPage(this.value)">
-                <?php foreach ([5, 10, 15, 20, 50, 100] as $pp): ?>
-                  <option value="<?= $pp ?>" <?= $per_page !== 'all' && (int)$per_page === $pp ? 'selected' : '' ?>><?= $pp ?></option>
+      <!-- Filters -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <form method="get" class="row g-3">
+            <div class="col-md-3">
+              <label for="qtype" class="form-label">Type</label>
+              <select class="form-select" id="qtype" name="qtype">
+                <option value="">All Types</option>
+                <?php foreach ($qtypes as $id => $name): ?>
+                  <option value="<?= $id ?>" <?= $qtype_filter == $id ? 'selected' : '' ?>><?= $name ?></option>
                 <?php endforeach; ?>
-                <option value="all" <?= $per_page === 'all' ? 'selected' : '' ?>>All</option>
               </select>
-              <span class="text-muted small">per page</span>
             </div>
-          </div>
-          <div class="card-body">
-            <?php if (count($rows) > 0): ?>
-              <div class="list-group">
-                <?php foreach ($rows as $r): ?>
-                  <?php $qAnswers = $answers_by_qid[$r['id']] ?? []; ?>
-                  <div class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                      <h5 class="mb-1"><?= strip_tags($r['question']) ?></h5>
-                      <div class="text-end text-nowrap ms-2">
-                        <span class="badge bg-info"><?= $qtypes[$r['qtype']] ?? 'Unknown' ?></span>
-                        <?php if (!empty($r['course_name'])): ?>
-                          <span class="badge bg-primary course-badge"><?= htmlspecialchars($r['course_name']) ?></span>
-                        <?php else: ?>
-                          <span class="badge bg-secondary course-badge">No Course</span>
-                        <?php endif; ?>
-                      </div>
-                    </div>
-                    <?php if (in_array($r['qtype'], [1, 2]) && !empty($qAnswers)): ?>
-                      <div class="mb-1 preview-text">
-                        <strong>Choices:</strong>
-                        <div class="mt-1">
-                          <?php foreach ($qAnswers as $ai => $a): ?>
-                            <?php $letter = $letter_labels[$ai] ?? '?'; ?>
-                            <div class="answer-item <?= $a['correct'] ? 'correct' : '' ?>">
-                              <span class="letter-badge"><?= $letter ?></span>
-                              <?= htmlspecialchars_decode(strip_tags($a['text'])) ?>
-                              <?php if ($a['correct']): ?>
-                                <i class="bi bi-check-circle-fill text-success ms-1" style="font-size:0.75rem"></i>
-                              <?php endif; ?>
-                            </div>
-                          <?php endforeach; ?>
-                        </div>
-                      </div>
-                    <?php elseif ($r['qtype'] == 4): ?>
-                      <div class="mb-1 preview-text">
-                        <strong>Answers:</strong>
-                        <?php if (!empty($qAnswers)): ?>
-                          <?php foreach ($qAnswers as $ai => $a): ?>
-                            <span class="badge bg-<?= $a['correct'] ? 'success' : 'secondary' ?> me-1">
-                              <?= mb_strimwidth(strip_tags($a['text']), 0, 50, '...') ?>
-                            </span>
-                          <?php endforeach; ?>
-                        <?php else: ?>
-                          <em class="text-muted">No answers configured</em>
-                        <?php endif; ?>
-                      </div>
-                    <?php endif; ?>
-                    <small class="text-muted">
-                      ID: <?= $r['id'] ?> | Answers: <?= count($qAnswers) ?> |
-                      Created: <?= date('M j, Y', strtotime($r['created_at'])) ?>
-                    </small>
-                    <?php if (!empty($r['test_info'])): ?>
-                      <div class="mt-1">
-                        <small class="text-muted">
-                          <i class="bi bi-link-45deg"></i> Tests:
-                          <?php foreach (explode('; ', $r['test_info']) as $ti): ?>
-                            <span class="badge bg-light text-dark me-1"><?= htmlspecialchars($ti) ?></span>
-                          <?php endforeach; ?>
-                        </small>
-                      </div>
-                    <?php endif; ?>
-                    <div class="mt-2">
-                      <a href="question_edit.php?id=<?= urlencode($r['id']) ?>" class="btn btn-sm btn-outline-primary">
-                        <i class="bi bi-pencil"></i> Edit
-                      </a>
-                      <a href="map_question.php?qid=<?= urlencode($r['id']) ?>" class="btn btn-sm btn-outline-success">
-                        <i class="bi bi-link"></i> Map to Test
-                      </a>
-                      <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?= $r['id'] ?>">
-                        <i class="bi bi-trash"></i> Delete
-                      </button>
-                    </div>
-                  </div>
-
-                  <!-- Delete Confirmation Modal -->
-                  <div class="modal fade" id="deleteModal<?= $r['id'] ?>" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">Confirm Delete</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                          Are you sure you want to delete this question? This action cannot be undone.
-                          <div class="alert alert-warning mt-2">
-                            <strong>Warning:</strong> Deleting this question will also remove it from any tests it's currently mapped to.
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                          <a href="question_delete.php?id=<?= urlencode($r['id']) ?>" class="btn btn-danger">Delete</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+            <div class="col-md-3">
+              <label for="course_id" class="form-label">Course</label>
+              <select class="form-select" id="course_id" name="course_id">
+                <option value="">All Courses</option>
+                <?php foreach ($courses_filter as $c): ?>
+                  <option value="<?= $c['course_id'] ?>" <?= $course_filter == $c['course_id'] ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($c['course_name']) ?>
+                  </option>
                 <?php endforeach; ?>
-              </div>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label for="test_id" class="form-label">Test</label>
+              <select class="form-select" id="test_id" name="test_id">
+                <option value="">All Tests</option>
+                <?php foreach ($tests_filter as $t): ?>
+                  <option value="<?= $t['id'] ?>" <?= $test_filter == $t['id'] ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($t['title']) ?>
+                  </option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label for="search" class="form-label">Search</label>
+              <input type="text" class="form-control" id="search" name="search"
+                value="<?= htmlspecialchars($search_filter) ?>" placeholder="Search question text...">
+            </div>
+            <div class="col-12 d-flex gap-2">
+              <button type="submit" class="btn btn-primary"><i class="bi bi-filter"></i> Filter</button>
+              <a href="questions.php" class="btn btn-outline-secondary">Reset</a>
+            </div>
+          </form>
+        </div>
+      </div>
 
-              <?php if ($total_pages > 1): ?>
+      <!-- Questions List -->
+      <div class="card">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center flex-wrap gap-2">
+          <h5 class="card-title mb-0">Questions (<span id="questionCount"><?= $total_rows ?></span>)</h5>
+          <div class="d-flex align-items-center gap-2">
+            <span class="text-muted small">Show</span>
+            <select id="per_page" class="form-select form-select-sm" style="width: auto;" onchange="changePerPage(this.value)">
+              <?php foreach ([5, 10, 15, 20, 50, 100] as $pp): ?>
+                <option value="<?= $pp ?>" <?= $per_page !== 'all' && (int)$per_page === $pp ? 'selected' : '' ?>><?= $pp ?></option>
+              <?php endforeach; ?>
+              <option value="all" <?= $per_page === 'all' ? 'selected' : '' ?>>All</option>
+            </select>
+            <span class="text-muted small">per page</span>
+          </div>
+        </div>
+        <div class="card-body" id="questionsList">
+          <?php if (count($rows) > 0): ?>
+            <div class="list-group">
+              <?php foreach ($rows as $r): ?>
+                <?php $qAnswers = $answers_by_qid[$r['id']] ?? []; ?>
+                <div class="list-group-item list-group-item-action question-item" data-question-id="<?= $r['id'] ?>">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1"><?= strip_tags($r['question']) ?></h5>
+                    <div class="text-end text-nowrap ms-2">
+                      <span class="badge bg-info"><?= $qtypes[$r['qtype']] ?? 'Unknown' ?></span>
+                      <?php if (!empty($r['course_name'])): ?>
+                        <span class="badge bg-primary course-badge"><?= htmlspecialchars($r['course_name']) ?></span>
+                      <?php else: ?>
+                        <span class="badge bg-secondary course-badge">No Course</span>
+                      <?php endif; ?>
+                    </div>
+                  </div>
+                  <?php if (in_array($r['qtype'], [1, 2]) && !empty($qAnswers)): ?>
+                    <div class="mb-1 preview-text">
+                      <strong>Choices:</strong>
+                      <div class="mt-1">
+                        <?php foreach ($qAnswers as $ai => $a): ?>
+                          <?php $letter = $letter_labels[$ai] ?? '?'; ?>
+                          <div class="answer-item <?= $a['correct'] ? 'correct' : '' ?>">
+                            <span class="letter-badge"><?= $letter ?></span>
+                            <?= htmlspecialchars_decode(strip_tags($a['text'])) ?>
+                            <?php if ($a['correct']): ?>
+                              <i class="bi bi-check-circle-fill text-success ms-1" style="font-size:0.75rem"></i>
+                            <?php endif; ?>
+                          </div>
+                        <?php endforeach; ?>
+                      </div>
+                    </div>
+                  <?php elseif ($r['qtype'] == 4): ?>
+                    <div class="mb-1 preview-text">
+                      <strong>Answers:</strong>
+                      <?php if (!empty($qAnswers)): ?>
+                        <?php foreach ($qAnswers as $ai => $a): ?>
+                          <span class="badge bg-<?= $a['correct'] ? 'success' : 'secondary' ?> me-1">
+                            <?= mb_strimwidth(strip_tags($a['text']), 0, 50, '...') ?>
+                          </span>
+                        <?php endforeach; ?>
+                      <?php else: ?>
+                        <em class="text-muted">No answers configured</em>
+                      <?php endif; ?>
+                    </div>
+                  <?php endif; ?>
+                  <small class="text-muted">
+                    ID: <?= $r['id'] ?> | Answers: <?= count($qAnswers) ?> |
+                    Created: <?= date('M j, Y', strtotime($r['created_at'])) ?>
+                  </small>
+                  <?php if (!empty($r['test_info'])): ?>
+                    <div class="mt-1">
+                      <small class="text-muted">
+                        <i class="bi bi-link-45deg"></i> Tests:
+                        <?php foreach (explode('; ', $r['test_info']) as $ti): ?>
+                          <span class="badge bg-light text-dark me-1"><?= htmlspecialchars($ti) ?></span>
+                        <?php endforeach; ?>
+                      </small>
+                    </div>
+                  <?php endif; ?>
+                  <div class="mt-2">
+                    <a href="question_edit.php?id=<?= urlencode($r['id']) ?>" class="btn btn-sm btn-outline-primary">
+                      <i class="bi bi-pencil"></i> Edit
+                    </a>
+                    <a href="map_question.php?qid=<?= urlencode($r['id']) ?>" class="btn btn-sm btn-outline-success">
+                      <i class="bi bi-link"></i> Map to Test
+                    </a>
+                    <button type="button" class="btn btn-sm btn-outline-danger delete-question-btn" data-question-id="<?= $r['id'] ?>" data-question-text="<?= htmlspecialchars(strip_tags($r['question'])) ?>">
+                      <i class="bi bi-trash"></i> Delete
+                    </button>
+                  </div>
+                </div>
+              <?php endforeach; ?>
+            </div>
+
+            <?php if ($total_pages > 1): ?>
               <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top">
                 <small class="text-muted">
                   Page <?= $page ?> of <?= $total_pages ?>
@@ -334,16 +359,41 @@ $tests_filter = $pdo->query("SELECT id, title FROM lbquiz_tests ORDER BY title")
                   </ul>
                 </nav>
               </div>
-              <?php endif; ?>
-
-            <?php else: ?>
-              <div class="alert alert-info">
-                No questions found. <a href="question_edit.php">Create your first question</a>.
-              </div>
             <?php endif; ?>
+
+          <?php else: ?>
+            <div class="alert alert-info">
+              No questions found. <a href="question_edit.php">Create your first question</a>.
+            </div>
+          <?php endif; ?>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Single Delete Confirmation Modal - Moved outside the main content -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirm Delete</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete this question?</p>
+          <p class="text-muted" id="deleteQuestionPreview"></p>
+          <div class="alert alert-warning mt-2">
+            <strong>Warning:</strong> Deleting this question will also remove it from any tests it's currently mapped to.
           </div>
         </div>
-      </main>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" id="deleteConfirmBtn">
+            <i class="bi bi-trash"></i> Delete
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -354,6 +404,178 @@ $tests_filter = $pdo->query("SELECT id, title FROM lbquiz_tests ORDER BY title")
       params.delete('page');
       window.location.search = params.toString();
     }
+
+    // Delete functionality with single modal - FIXED
+    (function() {
+      'use strict';
+
+      // Initialize modal only once
+      var modalElement = document.getElementById('deleteModal');
+      var deleteModal = new bootstrap.Modal(modalElement, {
+        backdrop: 'static',
+        keyboard: true
+      });
+
+      var deleteQuestionId = null;
+      var deleteQuestionElement = null;
+
+      // Handle delete button clicks - use event delegation
+      document.addEventListener('click', function(e) {
+        var btn = e.target.closest('.delete-question-btn');
+        if (!btn) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        var id = btn.getAttribute('data-question-id');
+        var text = btn.getAttribute('data-question-text') || 'Question #' + id;
+
+        // Store the question ID and element for deletion
+        deleteQuestionId = id;
+        deleteQuestionElement = btn.closest('.question-item');
+
+        // Update modal with question preview
+        document.getElementById('deleteQuestionPreview').textContent = text;
+
+        // Show the modal
+        deleteModal.show();
+      });
+
+      // Handle confirm delete - use event delegation
+      document.addEventListener('click', function(e) {
+        var confirmBtn = e.target.closest('#deleteConfirmBtn');
+        if (!confirmBtn) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        var id = deleteQuestionId;
+        var element = deleteQuestionElement;
+
+        if (!id) {
+          alert('No question selected for deletion.');
+          return;
+        }
+
+        // Disable the delete button and show loading state
+        confirmBtn.disabled = true;
+        confirmBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Deleting...';
+
+        // Add deleting class to the question element
+        if (element) {
+          element.classList.add('question-item-deleting');
+        }
+
+        // Send AJAX request
+        fetch('question_delete.php?id=' + encodeURIComponent(id) + '&ajax=1', {
+            method: 'GET',
+            headers: {
+              'X-Requested-With': 'XMLHttpRequest'
+            }
+          })
+          .then(function(response) {
+            if (!response.ok) {
+              return response.text().then(function(text) {
+                throw new Error('Server error: ' + response.status + ' - ' + text);
+              });
+            }
+            return response.json();
+          })
+          .then(function(data) {
+            if (!data.success) {
+              throw new Error(data.error || 'Delete failed');
+            }
+
+            // Success - remove the question from the DOM
+            if (element) {
+              element.style.transition = 'opacity 0.3s';
+              element.style.opacity = '0';
+              setTimeout(function() {
+                element.remove();
+
+                // Update question count
+                var countEl = document.getElementById('questionCount');
+                if (countEl) {
+                  var currentCount = parseInt(countEl.textContent);
+                  if (!isNaN(currentCount) && currentCount > 0) {
+                    countEl.textContent = currentCount - 1;
+                  }
+                }
+
+                // If no questions left, show empty message
+                var listGroup = document.querySelector('.list-group');
+                if (listGroup && listGroup.children.length === 0) {
+                  var cardBody = document.getElementById('questionsList');
+                  if (cardBody) {
+                    cardBody.innerHTML = '<div class="alert alert-info">No questions found. <a href="question_edit.php">Create your first question</a>.</div>';
+                  }
+                }
+              }, 300);
+            }
+
+            // Hide modal
+            deleteModal.hide();
+
+            // Show success message
+            showAlert('Question deleted successfully!', 'success');
+          })
+          .catch(function(error) {
+            console.error('Error:', error);
+            alert('Failed to delete question: ' + error.message);
+
+            // Remove deleting class from element
+            if (element) {
+              element.classList.remove('question-item-deleting');
+            }
+
+            // Reset button
+            confirmBtn.disabled = false;
+            confirmBtn.innerHTML = '<i class="bi bi-trash"></i> Delete';
+
+            deleteModal.hide();
+          });
+      });
+
+      // Reset modal state when hidden
+      modalElement.addEventListener('hidden.bs.modal', function() {
+        var confirmBtn = document.getElementById('deleteConfirmBtn');
+        confirmBtn.disabled = false;
+        confirmBtn.innerHTML = '<i class="bi bi-trash"></i> Delete';
+
+        // Remove deleting class from any elements
+        document.querySelectorAll('.question-item-deleting').forEach(function(el) {
+          el.classList.remove('question-item-deleting');
+        });
+
+        deleteQuestionId = null;
+        deleteQuestionElement = null;
+      });
+
+      // Helper function to show alerts
+      function showAlert(message, type) {
+        // Remove any existing alerts
+        var existingAlerts = document.querySelectorAll('.alert-dismissible');
+        existingAlerts.forEach(function(el) {
+          el.remove();
+        });
+
+        var alertDiv = document.createElement('div');
+        alertDiv.className = 'alert alert-' + type + ' alert-dismissible fade show';
+        alertDiv.innerHTML = message + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button>';
+
+        var cardBody = document.getElementById('questionsList');
+        if (cardBody) {
+          cardBody.prepend(alertDiv);
+
+          // Auto-dismiss after 5 seconds
+          setTimeout(function() {
+            if (alertDiv.parentNode) {
+              alertDiv.remove();
+            }
+          }, 5000);
+        }
+      }
+    })();
   </script>
 </body>
 

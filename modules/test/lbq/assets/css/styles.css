@@ -64,7 +64,7 @@ body {
     display: flex;
     flex-direction: column;
     margin-top: 77px;
-    width: 147%;
+    width: 100%;
     color: var(--bs-modal-color);
     pointer-events: auto;
     background-color: var(--bs-modal-bg);

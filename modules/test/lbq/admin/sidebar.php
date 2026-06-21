@@ -8,6 +8,12 @@ $first_name = $user_details['first_name'] ?? '';
 $last_name = $user_details['last_name'] ?? '';
 $display_name = trim("$first_name $last_name") ?: $username;
 $user_id = $_SESSION['UserID'] ?? '';
+
+// Check if user is logged in
+if (!is_logged_in()) {
+  header('Location: login.php');
+  exit;
+}
 ?>
 <head>
     <link rel="stylesheet" href="../assets/css/app.css">
