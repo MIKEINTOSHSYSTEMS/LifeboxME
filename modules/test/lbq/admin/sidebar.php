@@ -67,7 +67,7 @@ if (!is_logged_in()) {
     <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center" href="dashboard.php">
             <img src="../lblogo-white.svg" alt="Logo" height="32" class="me-2">
-            <span class="fw-bold">Test Administration Portal</span>
+            <span class="fw-semibold">Test Administration</span>
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -104,7 +104,7 @@ if (!is_logged_in()) {
             </ul>
 
             <div class="d-flex align-items-center gap-2">
-                <a href="../public/login.php" class="btn btn-outline-light btn-sm">
+                <a href="../public/login.php" class="btn btn-outline-light btn-sm" target="_blank" style="padding: 5px 10px; border-radius: 8px;">
                     <i class="bi bi-box-arrow-up-right me-1"></i> Test Takers Portal
                 </a>
 

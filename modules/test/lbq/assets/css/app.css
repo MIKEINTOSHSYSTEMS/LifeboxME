@@ -728,7 +728,8 @@ a:hover {
 .chart-container {
     flex: 1;
     width: 100%;
-    min-height: 300px;
+    height: auto;
+    /*min-height: 300px;*/
     position: relative;
 }
 
@@ -993,6 +994,7 @@ a:hover {
 
 .badge.bg-secondary {
     background: var(--secondary-color) !important;
+    color: var(--text-light) !important;
 }
 
 /* Pagination */

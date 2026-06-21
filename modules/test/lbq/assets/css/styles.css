@@ -54,8 +54,8 @@ body {
 
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link.active {
-    color: white !important;
-    background-color: rgba(255, 255, 255, 0.1);
+    color: #004747 !important;
+    background-color: #ffc107;
     border-radius: 4px;
 }
 
@@ -356,6 +356,7 @@ tr {
 
 .badge.bg-info {
     background: linear-gradient(135deg, var(--info-color), #138496) !important;
+    color: rgb(222, 222, 222) !important;
 }
 
 /* Forms */
@@ -419,6 +420,7 @@ tr {
 .pagination .page-item.active .page-link {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     border-color: var(--primary-color);
+    color: antiquewhite;
 }
 
 .pagination .page-link:hover {
