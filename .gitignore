@@ -71,7 +71,6 @@ modules/quiz/
 modules/test/exam
 modules/test/lbq/composer.lock
 modules/test/lbq/vendor/
-modules/test/lbq/uploads/
 modules/test/lbq/public/regdevtests/
 #modules/forms
 !modules/ocr/app/
@@ -98,3 +97,8 @@ maintenance-check.php
 modules/filemanagers
 # Documents uploaded
 documents
+
+# Temporary upload files
+documents.bak/
+modules/test/lbq/uploads
+modules/test/lbq/uploads.bak/
