@@ -253,6 +253,7 @@ services:
       - ENABLE_QUEUE_WORKER=true
     volumes:
       - lifeboxme_databasement_data:/data
+      - /data/backups:/backups
     networks:
       lifeboxnet:
         ipv4_address: 192.168.47.9   
