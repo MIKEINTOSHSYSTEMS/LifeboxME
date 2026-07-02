@@ -4,17 +4,8 @@ $runnerTableSettings['public.device_distribution_log'] = array(
 	'name' => 'public.device_distribution_log',
 	'shortName' => 'device_distribution_log',
 	'pagesByType' => array(
-		'add' => array( 
-			'add' 
-		),
-		'edit' => array( 
-			'edit' 
-		),
 		'export' => array( 
 			'export' 
-		),
-		'import' => array( 
-			'import' 
 		),
 		'list' => array( 
 			'list' 
@@ -30,20 +21,14 @@ $runnerTableSettings['public.device_distribution_log'] = array(
 		) 
 	),
 	'pageTypes' => array(
-		'add' => 'add',
-		'edit' => 'edit',
 		'export' => 'export',
-		'import' => 'import',
 		'list' => 'list',
 		'print' => 'print',
 		'search' => 'search',
 		'view' => 'view' 
 	),
 	'defaultPages' => array(
-		'add' => 'add',
-		'edit' => 'edit',
 		'export' => 'export',
-		'import' => 'import',
 		'list' => 'list',
 		'print' => 'print',
 		'search' => 'search',
@@ -58,7 +43,7 @@ $runnerTableSettings['public.device_distribution_log'] = array(
 		'50',
 		'100',
 		'500',
-		'-1' 
+		'1' 
 	),
 	'pageSizeSelectorGroups' => array( 
 		'1',
@@ -67,7 +52,7 @@ $runnerTableSettings['public.device_distribution_log'] = array(
 		'10',
 		'50',
 		'100',
-		'-1' 
+		'1' 
 	),
 	'warnLeavingEdit' => true,
 	'sql' => 'SELECT
@@ -687,17 +672,8 @@ FROM
 	),
 	'originalTable' => 'public.device_distribution_log',
 	'originalPagesByType' => array(
-		'add' => array( 
-			'add' 
-		),
-		'edit' => array( 
-			'edit' 
-		),
 		'export' => array( 
 			'export' 
-		),
-		'import' => array( 
-			'import' 
 		),
 		'list' => array( 
 			'list' 
@@ -713,20 +689,14 @@ FROM
 		) 
 	),
 	'originalPageTypes' => array(
-		'add' => 'add',
-		'edit' => 'edit',
 		'export' => 'export',
-		'import' => 'import',
 		'list' => 'list',
 		'print' => 'print',
 		'search' => 'search',
 		'view' => 'view' 
 	),
 	'originalDefaultPages' => array(
-		'add' => 'add',
-		'edit' => 'edit',
 		'export' => 'export',
-		'import' => 'import',
 		'list' => 'list',
 		'print' => 'print',
 		'search' => 'search',

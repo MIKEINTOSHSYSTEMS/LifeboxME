@@ -8,9 +8,6 @@ $runnerTableSettings['aio_training_tracking'] = array(
 		'export' => array( 
 			'export' 
 		),
-		'import' => array( 
-			'import' 
-		),
 		'list' => array( 
 			'list' 
 		),
@@ -29,7 +26,6 @@ $runnerTableSettings['aio_training_tracking'] = array(
 	),
 	'pageTypes' => array(
 		'export' => 'export',
-		'import' => 'import',
 		'list' => 'list',
 		'masterlist' => 'masterlist',
 		'masterprint' => 'masterprint',
@@ -38,7 +34,6 @@ $runnerTableSettings['aio_training_tracking'] = array(
 	),
 	'defaultPages' => array(
 		'export' => 'export',
-		'import' => 'import',
 		'list' => 'list',
 		'masterlist' => 'masterlist',
 		'masterprint' => 'masterprint',
@@ -54,7 +49,7 @@ $runnerTableSettings['aio_training_tracking'] = array(
 		'50',
 		'100',
 		'500',
-		'-1' 
+		'1' 
 	),
 	'pageSizeSelectorGroups' => array( 
 		'1',
@@ -63,7 +58,7 @@ $runnerTableSettings['aio_training_tracking'] = array(
 		'10',
 		'50',
 		'100',
-		'-1' 
+		'1' 
 	),
 	'displayLoading' => true,
 	'warnLeavingEdit' => true,
@@ -1083,9 +1078,6 @@ $runnerTableSettings['aio_training_tracking'] = array(
 		'export' => array( 
 			'export' 
 		),
-		'import' => array( 
-			'import' 
-		),
 		'list' => array( 
 			'list' 
 		),
@@ -1104,7 +1096,6 @@ $runnerTableSettings['aio_training_tracking'] = array(
 	),
 	'originalPageTypes' => array(
 		'export' => 'export',
-		'import' => 'import',
 		'list' => 'list',
 		'masterlist' => 'masterlist',
 		'masterprint' => 'masterprint',
@@ -1113,7 +1104,6 @@ $runnerTableSettings['aio_training_tracking'] = array(
 	),
 	'originalDefaultPages' => array(
 		'export' => 'export',
-		'import' => 'import',
 		'list' => 'list',
 		'masterlist' => 'masterlist',
 		'masterprint' => 'masterprint',

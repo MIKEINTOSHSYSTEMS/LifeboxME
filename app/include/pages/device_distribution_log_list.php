@@ -6,8 +6,10 @@
 		'inlineEdit' => false,
 		'spreadsheetMode' => false,
 		'addToBottom' => false,
-		'delete' => true,
+		'delete' => false,
 		'updateSelected' => false,
+		'addInPopup' => null,
+		'editInPopup' => null,
 		'clickSort' => true,
 		'sortDropdown' => false,
 		'showHideFields' => false,
@@ -130,8 +132,8 @@
 		) 
 	),
 	'pageLinks' => array(
-		'edit' => true,
-		'add' => true,
+		'edit' => false,
+		'add' => false,
 		'view' => true,
 		'print' => true 
 	),
@@ -139,9 +141,7 @@
 		'formItems' => array(
 			'formItems' => array(
 				'above-grid' => array( 
-					'add',
 					'inline_add',
-					'delete',
 					'details_found',
 					'page_size',
 					'print_panel' 
@@ -187,16 +187,13 @@
 					'simple_grid_field7',
 					'grid_checkbox_head',
 					'grid_checkbox',
-					'grid_edit',
 					'grid_inline_cancel',
 					'grid_view' 
 				) 
 			),
 			'formXtTags' => array(
 				'above-grid' => array( 
-					'add_link',
 					'inlineadd_link',
-					'deleteselected_link',
 					'details_found',
 					'recsPerPage',
 					'print_friendly' 
@@ -209,9 +206,7 @@
 				) 
 			),
 			'itemForms' => array(
-				'add' => 'above-grid',
 				'inline_add' => 'above-grid',
-				'delete' => 'above-grid',
 				'details_found' => 'above-grid',
 				'page_size' => 'above-grid',
 				'print_panel' => 'above-grid',
@@ -247,7 +242,6 @@
 				'simple_grid_field7' => 'grid',
 				'grid_checkbox_head' => 'grid',
 				'grid_checkbox' => 'grid',
-				'grid_edit' => 'grid',
 				'grid_inline_cancel' => 'grid',
 				'grid_view' => 'grid' 
 			),
@@ -323,10 +317,6 @@
 				'grid_checkbox' => array(
 					'location' => 'grid',
 					'cellId' => 'cell_checkbox' 
-				),
-				'grid_edit' => array(
-					'location' => 'grid',
-					'cellId' => 'cell_icons' 
 				),
 				'grid_inline_cancel' => array(
 					'location' => 'grid',
@@ -412,9 +402,6 @@
 			'collapse_button' => array( 
 				'collapse_button' 
 			),
-			'add' => array( 
-				'add' 
-			),
 			'print_panel' => array( 
 				'print_panel' 
 			),
@@ -438,15 +425,6 @@
 			),
 			'export_selected' => array( 
 				'export_selected' 
-			),
-			'import' => array( 
-				'import' 
-			),
-			'delete' => array( 
-				'delete' 
-			),
-			'delete_selected' => array( 
-				'delete_selected' 
 			),
 			'advsearch_link' => array( 
 				'advsearch_link' 
@@ -482,9 +460,6 @@
 			),
 			'grid_checkbox_head' => array( 
 				'grid_checkbox_head' 
-			),
-			'grid_edit' => array( 
-				'grid_edit' 
 			),
 			'grid_view' => array( 
 				'grid_view' 
@@ -670,12 +645,10 @@
 							1 
 						),
 						'tags' => array( 
-							'edit_column',
 							'inline_cancel',
 							'view_column' 
 						),
 						'items' => array( 
-							'grid_edit',
 							'grid_inline_cancel',
 							'grid_view' 
 						),
@@ -1083,9 +1056,7 @@
 				'c1' => array(
 					'model' => 'c1',
 					'items' => array( 
-						'add',
-						'inline_add',
-						'delete' 
+						'inline_add' 
 					) 
 				),
 				'c2' => array(
@@ -1546,7 +1517,6 @@
 				'cell_icons' => array(
 					'model' => 'cell_icons',
 					'items' => array( 
-						'grid_edit',
 						'grid_inline_cancel',
 						'grid_view' 
 					) 
@@ -1603,15 +1573,12 @@
 			'type' => 'list_options',
 			'items' => array( 
 				'export_selected',
-				'delete_selected',
 				'-3',
 				'advsearch_link',
 				'show_search_panel',
 				'hide_search_panel',
 				'-1',
-				'export',
-				'-2',
-				'import' 
+				'export' 
 			) 
 		),
 		'show_search_panel' => array(
@@ -1696,9 +1663,6 @@
 		'collapse_button' => array(
 			'type' => 'collapse_button' 
 		),
-		'add' => array(
-			'type' => 'add' 
-		),
 		'print_panel' => array(
 			'type' => 'print_panel',
 			'items' => array( 
@@ -1728,17 +1692,8 @@
 		'-1' => array(
 			'type' => '-' 
 		),
-		'import' => array(
-			'type' => 'import' 
-		),
 		'-2' => array(
 			'type' => '-' 
-		),
-		'delete' => array(
-			'type' => 'delete' 
-		),
-		'delete_selected' => array(
-			'type' => 'delete_selected' 
 		),
 		'advsearch_link' => array(
 			'type' => 'advsearch_link' 
@@ -1840,9 +1795,6 @@
 		),
 		'grid_checkbox_head' => array(
 			'type' => 'grid_checkbox_head' 
-		),
-		'grid_edit' => array(
-			'type' => 'grid_edit' 
 		),
 		'grid_view' => array(
 			'type' => 'grid_view' 

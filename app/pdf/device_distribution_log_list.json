@@ -197,13 +197,7 @@ pdfDocument = {
 			"text": [
 		
 				
-			{"text":"","hidden":"{$item_hide_add}"},
-				
-				
 			{"text":"","hidden":"{$item_hide_inline_add}"},
-				
-				
-			{"text":"","hidden":"{$item_hide_delete}"},
 				
 		  ],
   "border": [ false, false, false, false ],
@@ -569,9 +563,6 @@ pdfDocument = {
 	
 			"text": [
 		
-				
-			{"text":"","hidden":"{$item_hide_grid_edit}"},
-				
 				
 			{"text":"","hidden":"{$item_hide_grid_inline_cancel}"},
 				

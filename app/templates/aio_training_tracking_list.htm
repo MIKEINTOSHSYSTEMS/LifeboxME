@@ -56,452 +56,7 @@
 		
      
      
-         
-
-			<div class="clearfix  r-ori-vert" data-cellId="left_c" data-pageid="{$pageid}" data-itemid="search_panel" {$item_search_panel} data-topcell-item-type="search_panel" >
-				<!-- Begin Search panel content -->
-<div class="searchOptions panel panel-primary searchPanelContainer " {$srchOpt_attrs} data-itemtype="search_panel" data-itemid="search_panel" {$item_search_panel} data-pageid="{$pageid}"	 >
-
-	<div class="panel-heading">
-		<div class="btn-group r-sp-addfield" id="addSearchFieldButton{$id}">
-			<button id="showHideControlChooseMenu{$id}" type="button" class="btn btn-default dropdown-toggle btn-sm )" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			{mlang_message SEARCH_IN}			<span class="caret"></span>
-			</button>
-		</div>
-
-
-		<div class="btn-group r-sp-options" id="searchPanelOptions{$id}">
-			<button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<span class="glyphicon glyphicon glyphicon-option-vertical"></span>
-			</button>
-			<ul class="dropdown-menu dropdown-left">
-				<li id="showHideSearchType{$id}" {$showHideCtrlsOpt_attrs}><a>{mlang_message SEARCH_SHOW_OPTIONS_BUTTON}</a></li>
-				<li role="separator" class="divider"></li>
-				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAll" {$all_checkbox}><label for="radioAll"><span class="glyphicon">&nbsp;</span>{mlang_message SEARCH_ALL_CONDITIONS}</label></a></li>
-				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAny" {$any_checkbox}><label for="radioAny"><span class="glyphicon">&nbsp;</span>{mlang_message SEARCH_ANY_CONDITIONS}</label></a></li>
-				<li role="separator" class="divider"></li>
-				<li><a class="close-button"><span class="glyphicon glyphicon-remove">&nbsp;</span>{mlang_message HIDE}</a></li>
-			</ul>
-		</div>
-
-
-		</div>
-	<div class="panel-body controlsBlock" {$bottomSearchButt_attrs} >
-
-
-		
-		{BEGIN searchCtrlBlock}
-		<div class="srchPanelRow form-group" {$filterRow_attrs}>
-			<label>{$fLabel}</label>	{$delCtrlButt}
-				<span class="rnr-searchtype">{$searchtype}</span>
-				<span class="rnr-searchcontrol">{$searchcontrol}</span>
-				<span class="rnr-searchcontrol">{$searchcontrol1}</span>
-		</div>
-		{END searchCtrlBlock}
-																		{BEGIN searchCtrlBlock_participant_id}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_participant_id}" {$filterRow_attrs_participant_id}>
-			<label>{$label aio_training_tracking participant_id }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_participant_id}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_participant_id}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_participant_id}</span>
-						</div>
-		{END searchCtrlBlock_participant_id}
-																{BEGIN searchCtrlBlock_title}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_title}" {$filterRow_attrs_title}>
-			<label>{$label aio_training_tracking title }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_title}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_title}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_title}</span>
-						</div>
-		{END searchCtrlBlock_title}
-																{BEGIN searchCtrlBlock_first_name}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_first_name}" {$filterRow_attrs_first_name}>
-			<label>{$label aio_training_tracking first_name }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_first_name}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_first_name}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_first_name}</span>
-						</div>
-		{END searchCtrlBlock_first_name}
-																{BEGIN searchCtrlBlock_middle_name}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_middle_name}" {$filterRow_attrs_middle_name}>
-			<label>{$label aio_training_tracking middle_name }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_middle_name}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_middle_name}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_middle_name}</span>
-						</div>
-		{END searchCtrlBlock_middle_name}
-																{BEGIN searchCtrlBlock_last_name}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_last_name}" {$filterRow_attrs_last_name}>
-			<label>{$label aio_training_tracking last_name }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_last_name}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_last_name}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_last_name}</span>
-						</div>
-		{END searchCtrlBlock_last_name}
-																{BEGIN searchCtrlBlock_gender}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_gender}" {$filterRow_attrs_gender}>
-			<label>{$label aio_training_tracking gender }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_gender}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_gender}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_gender}</span>
-						</div>
-		{END searchCtrlBlock_gender}
-																{BEGIN searchCtrlBlock_participant_role}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_participant_role}" {$filterRow_attrs_participant_role}>
-			<label>{$label aio_training_tracking participant_role }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_participant_role}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_participant_role}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_participant_role}</span>
-						</div>
-		{END searchCtrlBlock_participant_role}
-																{BEGIN searchCtrlBlock_country}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_country}" {$filterRow_attrs_country}>
-			<label>{$label aio_training_tracking country }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_country}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_country}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_country}</span>
-						</div>
-		{END searchCtrlBlock_country}
-																{BEGIN searchCtrlBlock_facility}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_facility}" {$filterRow_attrs_facility}>
-			<label>{$label aio_training_tracking facility }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_facility}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_facility}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_facility}</span>
-						</div>
-		{END searchCtrlBlock_facility}
-																{BEGIN searchCtrlBlock_phone}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_phone}" {$filterRow_attrs_phone}>
-			<label>{$label aio_training_tracking phone }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_phone}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_phone}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_phone}</span>
-						</div>
-		{END searchCtrlBlock_phone}
-																{BEGIN searchCtrlBlock_email}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_email}" {$filterRow_attrs_email}>
-			<label>{$label aio_training_tracking email }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_email}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_email}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_email}</span>
-						</div>
-		{END searchCtrlBlock_email}
-																{BEGIN searchCtrlBlock_training_id}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_training_id}" {$filterRow_attrs_training_id}>
-			<label>{$label aio_training_tracking training_id }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_training_id}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_training_id}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_training_id}</span>
-						</div>
-		{END searchCtrlBlock_training_id}
-																{BEGIN searchCtrlBlock_training_name}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_training_name}" {$filterRow_attrs_training_name}>
-			<label>{$label aio_training_tracking training_name }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_training_name}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_training_name}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_training_name}</span>
-						</div>
-		{END searchCtrlBlock_training_name}
-																{BEGIN searchCtrlBlock_program}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_program}" {$filterRow_attrs_program}>
-			<label>{$label aio_training_tracking program }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_program}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_program}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_program}</span>
-						</div>
-		{END searchCtrlBlock_program}
-																{BEGIN searchCtrlBlock_partners}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_partners}" {$filterRow_attrs_partners}>
-			<label>{$label aio_training_tracking partners }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_partners}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_partners}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_partners}</span>
-						</div>
-		{END searchCtrlBlock_partners}
-																{BEGIN searchCtrlBlock_training_type}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_training_type}" {$filterRow_attrs_training_type}>
-			<label>{$label aio_training_tracking training_type }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_training_type}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_training_type}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_training_type}</span>
-						</div>
-		{END searchCtrlBlock_training_type}
-																{BEGIN searchCtrlBlock_training_approach}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_training_approach}" {$filterRow_attrs_training_approach}>
-			<label>{$label aio_training_tracking training_approach }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_training_approach}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_training_approach}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_training_approach}</span>
-						</div>
-		{END searchCtrlBlock_training_approach}
-																{BEGIN searchCtrlBlock_training_language}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_training_language}" {$filterRow_attrs_training_language}>
-			<label>{$label aio_training_tracking training_language }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_training_language}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_training_language}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_training_language}</span>
-						</div>
-		{END searchCtrlBlock_training_language}
-																{BEGIN searchCtrlBlock_training_lead}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_training_lead}" {$filterRow_attrs_training_lead}>
-			<label>{$label aio_training_tracking training_lead }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_training_lead}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_training_lead}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_training_lead}</span>
-						</div>
-		{END searchCtrlBlock_training_lead}
-																{BEGIN searchCtrlBlock_quarter}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_quarter}" {$filterRow_attrs_quarter}>
-			<label>{$label aio_training_tracking quarter }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_quarter}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_quarter}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_quarter}</span>
-						</div>
-		{END searchCtrlBlock_quarter}
-																{BEGIN searchCtrlBlock_start_date}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_start_date}" {$filterRow_attrs_start_date}>
-			<label>{$label aio_training_tracking start_date }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_start_date}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_start_date}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_start_date}</span>
-						</div>
-		{END searchCtrlBlock_start_date}
-																{BEGIN searchCtrlBlock_end_date}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_end_date}" {$filterRow_attrs_end_date}>
-			<label>{$label aio_training_tracking end_date }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_end_date}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_end_date}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_end_date}</span>
-						</div>
-		{END searchCtrlBlock_end_date}
-																{BEGIN searchCtrlBlock_total_days}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_total_days}" {$filterRow_attrs_total_days}>
-			<label>{$label aio_training_tracking total_days }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_total_days}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_total_days}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_total_days}</span>
-						</div>
-		{END searchCtrlBlock_total_days}
-																{BEGIN searchCtrlBlock_days_recorded}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_days_recorded}" {$filterRow_attrs_days_recorded}>
-			<label>{$label aio_training_tracking days_recorded }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_days_recorded}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_days_recorded}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_days_recorded}</span>
-						</div>
-		{END searchCtrlBlock_days_recorded}
-																{BEGIN searchCtrlBlock_days_attended}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_days_attended}" {$filterRow_attrs_days_attended}>
-			<label>{$label aio_training_tracking days_attended }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_days_attended}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_days_attended}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_days_attended}</span>
-						</div>
-		{END searchCtrlBlock_days_attended}
-																{BEGIN searchCtrlBlock_attendance_percentage}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_attendance_percentage}" {$filterRow_attrs_attendance_percentage}>
-			<label>{$label aio_training_tracking attendance_percentage }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_attendance_percentage}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_attendance_percentage}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_attendance_percentage}</span>
-						</div>
-		{END searchCtrlBlock_attendance_percentage}
-																{BEGIN searchCtrlBlock_attendance_status}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_attendance_status}" {$filterRow_attrs_attendance_status}>
-			<label>{$label aio_training_tracking attendance_status }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_attendance_status}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_attendance_status}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_attendance_status}</span>
-						</div>
-		{END searchCtrlBlock_attendance_status}
-																{BEGIN searchCtrlBlock_pre_test_score}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_pre_test_score}" {$filterRow_attrs_pre_test_score}>
-			<label>{$label aio_training_tracking pre_test_score }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_pre_test_score}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_pre_test_score}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_pre_test_score}</span>
-						</div>
-		{END searchCtrlBlock_pre_test_score}
-																{BEGIN searchCtrlBlock_post_test_score}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_post_test_score}" {$filterRow_attrs_post_test_score}>
-			<label>{$label aio_training_tracking post_test_score }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_post_test_score}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_post_test_score}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_post_test_score}</span>
-						</div>
-		{END searchCtrlBlock_post_test_score}
-																{BEGIN searchCtrlBlock_ceu_points}
-
-
-		<div class="form-group srchPanelRow {$filterRow_class_ceu_points}" {$filterRow_attrs_ceu_points}>
-			<label>{$label aio_training_tracking ceu_points }</label>
-
-							{$delCtrlButt}
-			
-								<span class="rnr-searchtype">{$searchtype_ceu_points}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol_ceu_points}</span>
-								<span class="rnr-searchcontrol">{$searchcontrol1_ceu_points}</span>
-						</div>
-		{END searchCtrlBlock_ceu_points}
-		
-
-	</div>
-
-	<div class="panel-footer bottomSearchButt" {$bottomSearchButt_attrs}>
-		<button class="btn btn-primary btn-sm" id="searchButton{$id}" {$searchbutton_attrs}>{mlang_message SEARCH}</button>
-
-				<button class="btn btn-default btn-sm" {$showAllCont_attrs} {$showallbutton_attrs}>{mlang_message SHOW_ALL}</button>
-	</div>
-</div>
-<!-- End Search panel content -->
-			</div>
-		
-     
+             
      
          
 
@@ -773,14 +328,6 @@
 		</a>
 	</li>
 {END export_link}
-							<li role="separator" class="divider"></li>							{BEGIN import_link}
-	<li data-itemtype="import" data-itemid="import" {$item_import} data-pageid="{$pageid}" data-small >
-				<a  {$importlink_attrs} href="aio_training_tracking_import.php{$stateLink_full}"  title="" >
-				
-		{mlang_message IMPORT}		
-		</a>
-	</li>
-{END import_link}
 					</ul>
 	</span>
 </span>
@@ -1393,6 +940,457 @@
 		</li>
 			</ul>
 </div>
+		</div>					</div>
+			 
+				<div class="row">
+			 
+				<div 
+	data-cellId="above-grid_c7" data-pageid="{$pageid}"	{$cell_above-grid_c7}
+	class=" r-ori-vert			col-md-12
+	
+">
+		 
+		<!-- Begin Search panel content -->
+<div class="searchOptions panel panel-primary searchPanelContainer " {$srchOpt_attrs} data-itemtype="search_panel" data-itemid="search_panel" {$item_search_panel} data-pageid="{$pageid}"			data-horizontal
+	 >
+
+	<div class="panel-heading">
+		<div class="btn-group r-sp-addfield" id="addSearchFieldButton{$id}">
+			<button id="showHideControlChooseMenu{$id}" type="button" class="btn btn-default dropdown-toggle btn-sm )" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			{mlang_message SEARCH_IN}			<span class="caret"></span>
+			</button>
+		</div>
+
+
+		<div class="btn-group r-sp-options" id="searchPanelOptions{$id}">
+			<button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<span class="glyphicon glyphicon glyphicon-option-vertical"></span>
+			</button>
+			<ul class="dropdown-menu dropdown-left">
+				<li id="showHideSearchType{$id}" {$showHideCtrlsOpt_attrs}><a>{mlang_message SEARCH_SHOW_OPTIONS_BUTTON}</a></li>
+				<li role="separator" class="divider"></li>
+				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAll" {$all_checkbox}><label for="radioAll"><span class="glyphicon">&nbsp;</span>{mlang_message SEARCH_ALL_CONDITIONS}</label></a></li>
+				<li class="srchCritTop" style="display: none;"><a><input type="radio" name="srchType{$id}" id="radioAny" {$any_checkbox}><label for="radioAny"><span class="glyphicon">&nbsp;</span>{mlang_message SEARCH_ANY_CONDITIONS}</label></a></li>
+				<li role="separator" class="divider"></li>
+				<li><a class="close-button"><span class="glyphicon glyphicon-remove">&nbsp;</span>{mlang_message HIDE}</a></li>
+			</ul>
+		</div>
+
+
+		</div>
+	<div class="panel-body controlsBlock" {$bottomSearchButt_attrs} >
+
+
+		
+		{BEGIN searchCtrlBlock}
+		<div class="srchPanelRow form-group" {$filterRow_attrs}>
+			<label>{$fLabel}</label>	{$delCtrlButt}
+				<span class="rnr-searchtype">{$searchtype}</span>
+				<span class="rnr-searchcontrol">{$searchcontrol}</span>
+				<span class="rnr-searchcontrol">{$searchcontrol1}</span>
+		</div>
+		{END searchCtrlBlock}
+																		{BEGIN searchCtrlBlock_participant_id}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_participant_id}" {$filterRow_attrs_participant_id}>
+			<label>{$label aio_training_tracking participant_id }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_participant_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_participant_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_participant_id}</span>
+						</div>
+		{END searchCtrlBlock_participant_id}
+																{BEGIN searchCtrlBlock_title}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_title}" {$filterRow_attrs_title}>
+			<label>{$label aio_training_tracking title }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_title}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_title}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_title}</span>
+						</div>
+		{END searchCtrlBlock_title}
+																{BEGIN searchCtrlBlock_first_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_first_name}" {$filterRow_attrs_first_name}>
+			<label>{$label aio_training_tracking first_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_first_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_first_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_first_name}</span>
+						</div>
+		{END searchCtrlBlock_first_name}
+																{BEGIN searchCtrlBlock_middle_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_middle_name}" {$filterRow_attrs_middle_name}>
+			<label>{$label aio_training_tracking middle_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_middle_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_middle_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_middle_name}</span>
+						</div>
+		{END searchCtrlBlock_middle_name}
+																{BEGIN searchCtrlBlock_last_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_last_name}" {$filterRow_attrs_last_name}>
+			<label>{$label aio_training_tracking last_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_last_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_last_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_last_name}</span>
+						</div>
+		{END searchCtrlBlock_last_name}
+																{BEGIN searchCtrlBlock_gender}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_gender}" {$filterRow_attrs_gender}>
+			<label>{$label aio_training_tracking gender }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_gender}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_gender}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_gender}</span>
+						</div>
+		{END searchCtrlBlock_gender}
+																{BEGIN searchCtrlBlock_participant_role}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_participant_role}" {$filterRow_attrs_participant_role}>
+			<label>{$label aio_training_tracking participant_role }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_participant_role}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_participant_role}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_participant_role}</span>
+						</div>
+		{END searchCtrlBlock_participant_role}
+																{BEGIN searchCtrlBlock_country}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_country}" {$filterRow_attrs_country}>
+			<label>{$label aio_training_tracking country }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_country}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_country}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_country}</span>
+						</div>
+		{END searchCtrlBlock_country}
+																{BEGIN searchCtrlBlock_facility}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_facility}" {$filterRow_attrs_facility}>
+			<label>{$label aio_training_tracking facility }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_facility}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_facility}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_facility}</span>
+						</div>
+		{END searchCtrlBlock_facility}
+																{BEGIN searchCtrlBlock_phone}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_phone}" {$filterRow_attrs_phone}>
+			<label>{$label aio_training_tracking phone }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_phone}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_phone}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_phone}</span>
+						</div>
+		{END searchCtrlBlock_phone}
+																{BEGIN searchCtrlBlock_email}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_email}" {$filterRow_attrs_email}>
+			<label>{$label aio_training_tracking email }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_email}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_email}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_email}</span>
+						</div>
+		{END searchCtrlBlock_email}
+																{BEGIN searchCtrlBlock_training_id}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_training_id}" {$filterRow_attrs_training_id}>
+			<label>{$label aio_training_tracking training_id }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_training_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_training_id}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_training_id}</span>
+						</div>
+		{END searchCtrlBlock_training_id}
+																{BEGIN searchCtrlBlock_training_name}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_training_name}" {$filterRow_attrs_training_name}>
+			<label>{$label aio_training_tracking training_name }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_training_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_training_name}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_training_name}</span>
+						</div>
+		{END searchCtrlBlock_training_name}
+																{BEGIN searchCtrlBlock_program}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_program}" {$filterRow_attrs_program}>
+			<label>{$label aio_training_tracking program }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_program}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_program}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_program}</span>
+						</div>
+		{END searchCtrlBlock_program}
+																{BEGIN searchCtrlBlock_partners}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_partners}" {$filterRow_attrs_partners}>
+			<label>{$label aio_training_tracking partners }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_partners}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_partners}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_partners}</span>
+						</div>
+		{END searchCtrlBlock_partners}
+																{BEGIN searchCtrlBlock_training_type}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_training_type}" {$filterRow_attrs_training_type}>
+			<label>{$label aio_training_tracking training_type }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_training_type}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_training_type}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_training_type}</span>
+						</div>
+		{END searchCtrlBlock_training_type}
+																{BEGIN searchCtrlBlock_training_approach}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_training_approach}" {$filterRow_attrs_training_approach}>
+			<label>{$label aio_training_tracking training_approach }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_training_approach}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_training_approach}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_training_approach}</span>
+						</div>
+		{END searchCtrlBlock_training_approach}
+																{BEGIN searchCtrlBlock_training_language}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_training_language}" {$filterRow_attrs_training_language}>
+			<label>{$label aio_training_tracking training_language }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_training_language}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_training_language}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_training_language}</span>
+						</div>
+		{END searchCtrlBlock_training_language}
+																{BEGIN searchCtrlBlock_training_lead}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_training_lead}" {$filterRow_attrs_training_lead}>
+			<label>{$label aio_training_tracking training_lead }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_training_lead}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_training_lead}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_training_lead}</span>
+						</div>
+		{END searchCtrlBlock_training_lead}
+																{BEGIN searchCtrlBlock_quarter}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_quarter}" {$filterRow_attrs_quarter}>
+			<label>{$label aio_training_tracking quarter }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_quarter}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_quarter}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_quarter}</span>
+						</div>
+		{END searchCtrlBlock_quarter}
+																{BEGIN searchCtrlBlock_start_date}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_start_date}" {$filterRow_attrs_start_date}>
+			<label>{$label aio_training_tracking start_date }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_start_date}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_start_date}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_start_date}</span>
+						</div>
+		{END searchCtrlBlock_start_date}
+																{BEGIN searchCtrlBlock_end_date}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_end_date}" {$filterRow_attrs_end_date}>
+			<label>{$label aio_training_tracking end_date }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_end_date}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_end_date}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_end_date}</span>
+						</div>
+		{END searchCtrlBlock_end_date}
+																{BEGIN searchCtrlBlock_total_days}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_total_days}" {$filterRow_attrs_total_days}>
+			<label>{$label aio_training_tracking total_days }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_total_days}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_total_days}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_total_days}</span>
+						</div>
+		{END searchCtrlBlock_total_days}
+																{BEGIN searchCtrlBlock_days_recorded}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_days_recorded}" {$filterRow_attrs_days_recorded}>
+			<label>{$label aio_training_tracking days_recorded }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_days_recorded}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_days_recorded}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_days_recorded}</span>
+						</div>
+		{END searchCtrlBlock_days_recorded}
+																{BEGIN searchCtrlBlock_days_attended}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_days_attended}" {$filterRow_attrs_days_attended}>
+			<label>{$label aio_training_tracking days_attended }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_days_attended}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_days_attended}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_days_attended}</span>
+						</div>
+		{END searchCtrlBlock_days_attended}
+																{BEGIN searchCtrlBlock_attendance_percentage}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_attendance_percentage}" {$filterRow_attrs_attendance_percentage}>
+			<label>{$label aio_training_tracking attendance_percentage }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_attendance_percentage}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_attendance_percentage}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_attendance_percentage}</span>
+						</div>
+		{END searchCtrlBlock_attendance_percentage}
+																{BEGIN searchCtrlBlock_attendance_status}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_attendance_status}" {$filterRow_attrs_attendance_status}>
+			<label>{$label aio_training_tracking attendance_status }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_attendance_status}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_attendance_status}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_attendance_status}</span>
+						</div>
+		{END searchCtrlBlock_attendance_status}
+																{BEGIN searchCtrlBlock_pre_test_score}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_pre_test_score}" {$filterRow_attrs_pre_test_score}>
+			<label>{$label aio_training_tracking pre_test_score }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_pre_test_score}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_pre_test_score}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_pre_test_score}</span>
+						</div>
+		{END searchCtrlBlock_pre_test_score}
+																{BEGIN searchCtrlBlock_post_test_score}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_post_test_score}" {$filterRow_attrs_post_test_score}>
+			<label>{$label aio_training_tracking post_test_score }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_post_test_score}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_post_test_score}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_post_test_score}</span>
+						</div>
+		{END searchCtrlBlock_post_test_score}
+																{BEGIN searchCtrlBlock_ceu_points}
+
+
+		<div class="form-group srchPanelRow {$filterRow_class_ceu_points}" {$filterRow_attrs_ceu_points}>
+			<label>{$label aio_training_tracking ceu_points }</label>
+
+							{$delCtrlButt}
+			
+								<span class="rnr-searchtype">{$searchtype_ceu_points}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol_ceu_points}</span>
+								<span class="rnr-searchcontrol">{$searchcontrol1_ceu_points}</span>
+						</div>
+		{END searchCtrlBlock_ceu_points}
+		
+
+	</div>
+
+	<div class="panel-footer bottomSearchButt" {$bottomSearchButt_attrs}>
+		<button class="btn btn-primary btn-sm" id="searchButton{$id}" {$searchbutton_attrs}>{mlang_message SEARCH}</button>
+
+				<button class="btn btn-default btn-sm" {$showAllCont_attrs} {$showallbutton_attrs}>{mlang_message SHOW_ALL}</button>
+	</div>
+</div>
+<!-- End Search panel content -->
 		</div>					</div>
 			 
 				<div class="row">

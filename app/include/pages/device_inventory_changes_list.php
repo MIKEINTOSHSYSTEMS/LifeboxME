@@ -403,9 +403,6 @@
 				'-1',
 				'-2' 
 			),
-			'import' => array( 
-				'import' 
-			),
 			'advsearch_link' => array( 
 				'advsearch_link' 
 			),
@@ -1454,9 +1451,7 @@
 				'show_search_panel',
 				'hide_search_panel',
 				'-2',
-				'export',
-				'-1',
-				'import' 
+				'export' 
 			) 
 		),
 		'show_search_panel' => array(
@@ -1560,9 +1555,6 @@
 		),
 		'-' => array(
 			'type' => '-' 
-		),
-		'import' => array(
-			'type' => 'import' 
 		),
 		'-1' => array(
 			'type' => '-' 

@@ -7,9 +7,6 @@ $runnerTableSettings['public.device_inventory_changes'] = array(
 		'export' => array( 
 			'export' 
 		),
-		'import' => array( 
-			'import' 
-		),
 		'list' => array( 
 			'list' 
 		),
@@ -22,14 +19,12 @@ $runnerTableSettings['public.device_inventory_changes'] = array(
 	),
 	'pageTypes' => array(
 		'export' => 'export',
-		'import' => 'import',
 		'list' => 'list',
 		'print' => 'print',
 		'search' => 'search' 
 	),
 	'defaultPages' => array(
 		'export' => 'export',
-		'import' => 'import',
 		'list' => 'list',
 		'print' => 'print',
 		'search' => 'search' 
@@ -647,9 +642,6 @@ FROM
 		'export' => array( 
 			'export' 
 		),
-		'import' => array( 
-			'import' 
-		),
 		'list' => array( 
 			'list' 
 		),
@@ -662,14 +654,12 @@ FROM
 	),
 	'originalPageTypes' => array(
 		'export' => 'export',
-		'import' => 'import',
 		'list' => 'list',
 		'print' => 'print',
 		'search' => 'search' 
 	),
 	'originalDefaultPages' => array(
 		'export' => 'export',
-		'import' => 'import',
 		'list' => 'list',
 		'print' => 'print',
 		'search' => 'search' 

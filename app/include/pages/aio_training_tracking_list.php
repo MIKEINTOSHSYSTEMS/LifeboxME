@@ -396,7 +396,8 @@
 					'print_panel',
 					'columns_control',
 					'filter_panel',
-					'sort_dropdown' 
+					'sort_dropdown',
+					'search_panel' 
 				),
 				'below-grid' => array( 
 					'pagination' 
@@ -404,8 +405,7 @@
 				'left' => array( 
 					'logo',
 					'expand_button',
-					'menu',
-					'search_panel' 
+					'menu' 
 				),
 				'supertop' => array( 
 					'expand_menu_button',
@@ -500,11 +500,11 @@
 				'columns_control' => 'above-grid',
 				'filter_panel' => 'above-grid',
 				'sort_dropdown' => 'above-grid',
+				'search_panel' => 'above-grid',
 				'pagination' => 'below-grid',
 				'logo' => 'left',
 				'expand_button' => 'left',
 				'menu' => 'left',
-				'search_panel' => 'left',
 				'expand_menu_button' => 'supertop',
 				'collapse_button' => 'supertop',
 				'breadcrumb' => 'supertop',
@@ -919,9 +919,6 @@
 				'-2',
 				'-3',
 				'-4' 
-			),
-			'import' => array( 
-				'import' 
 			),
 			'grid_field' => array( 
 				'simple_grid_field',
@@ -2677,6 +2674,15 @@
 					'section' => '',
 					'cells' => array( 
 						array(
+							'cell' => 'c7',
+							'colspan' => 2 
+						) 
+					) 
+				),
+				array(
+					'section' => '',
+					'cells' => array( 
+						array(
 							'cell' => 'c4',
 							'colspan' => 2 
 						) 
@@ -2727,6 +2733,12 @@
 					'model' => 'c4',
 					'items' => array( 
 						'sort_dropdown' 
+					) 
+				),
+				'c7' => array(
+					'model' => 'c1',
+					'items' => array( 
+						'search_panel' 
 					) 
 				) 
 			),
@@ -2805,7 +2817,7 @@
 				'c' => array(
 					'model' => 'c1',
 					'items' => array( 
-						'search_panel' 
+						 
 					) 
 				) 
 			),
@@ -3938,9 +3950,7 @@
 				'-4',
 				'saved_searches',
 				'-2',
-				'export',
-				'-1',
-				'import' 
+				'export' 
 			) 
 		),
 		'show_search_panel' => array(
@@ -4003,9 +4013,6 @@
 		),
 		'-' => array(
 			'type' => '-' 
-		),
-		'import' => array(
-			'type' => 'import' 
 		),
 		'-1' => array(
 			'type' => '-' 

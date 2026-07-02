@@ -168,37 +168,6 @@ $runnerMenus['main'] = array(
 						) 
 					),
 					array(
-						'id' => '26',
-						'parent' => '37',
-						'children' => array( 
-							 
-						),
-						'data' => array(
-							'name' => array(
-								'text' => 'Surgical Case Summary',
-								'type' => 0 
-							),
-							'comments' => array(
-								'text' => '',
-								'type' => 0 
-							),
-							'style' => '',
-							'href' => 'mypage.htm',
-							'params' => '',
-							'pageId' => '',
-							'itemType' => 2,
-							'linkType' => 0,
-							'openType' => 0,
-							'iconType' => 3,
-							'iconName' => 'fa-scribd',
-							'iconStyle' => 2,
-							'showIconType' => 1,
-							'linkToAnotherApp' => false,
-							'pageType' => 'list',
-							'table' => 4644 
-						) 
-					),
-					array(
 						'id' => '25',
 						'parent' => '37',
 						'children' => array( 
@@ -227,6 +196,66 @@ $runnerMenus['main'] = array(
 							'linkToAnotherApp' => false,
 							'pageType' => 'list',
 							'table' => 4643 
+						) 
+					),
+					array(
+						'id' => '182',
+						'parent' => '37',
+						'children' => array( 
+							 
+						),
+						'data' => array(
+							'name' => array(
+								'text' => '---------',
+								'type' => 0 
+							),
+							'comments' => array(
+								'text' => '',
+								'type' => 0 
+							),
+							'style' => '',
+							'href' => '',
+							'params' => '',
+							'pageId' => '',
+							'itemType' => 1,
+							'linkType' => 2,
+							'openType' => 0,
+							'iconType' => 0,
+							'iconName' => '',
+							'iconStyle' => 0,
+							'showIconType' => 1,
+							'linkToAnotherApp' => false 
+						) 
+					),
+					array(
+						'id' => '26',
+						'parent' => '37',
+						'children' => array( 
+							 
+						),
+						'data' => array(
+							'name' => array(
+								'text' => 'Surgical Case Summary',
+								'type' => 0 
+							),
+							'comments' => array(
+								'text' => '',
+								'type' => 0 
+							),
+							'style' => '',
+							'href' => 'mypage.htm',
+							'params' => '',
+							'pageId' => '',
+							'itemType' => 2,
+							'linkType' => 0,
+							'openType' => 0,
+							'iconType' => 3,
+							'iconName' => 'fa-scribd',
+							'iconStyle' => 2,
+							'showIconType' => 1,
+							'linkToAnotherApp' => false,
+							'pageType' => 'list',
+							'table' => 4644 
 						) 
 					),
 					array(
@@ -606,7 +635,7 @@ $runnerMenus['main'] = array(
 						),
 						'data' => array(
 							'name' => array(
-								'text' => 'Attendance Reports',
+								'text' => 'Training Reports',
 								'type' => 0 
 							),
 							'comments' => array(
@@ -621,7 +650,7 @@ $runnerMenus['main'] = array(
 							'linkType' => 2,
 							'openType' => 0,
 							'iconType' => 3,
-							'iconName' => 'fa-calendar-check',
+							'iconName' => 'fa-th-list',
 							'iconStyle' => 0,
 							'showIconType' => 1,
 							'linkToAnotherApp' => false,
@@ -1490,68 +1519,6 @@ $runnerMenus['main'] = array(
 				'parent' => '0',
 				'children' => array( 
 					array(
-						'id' => '5',
-						'parent' => '67',
-						'children' => array( 
-							 
-						),
-						'data' => array(
-							'name' => array(
-								'table' => 'public.device_distributions',
-								'type' => 6 
-							),
-							'comments' => array(
-								'text' => '',
-								'type' => 0 
-							),
-							'style' => '',
-							'href' => 'mypage.htm',
-							'params' => '',
-							'pageId' => '',
-							'itemType' => 2,
-							'linkType' => 0,
-							'openType' => 0,
-							'iconType' => 3,
-							'iconName' => 'fa-medkit',
-							'iconStyle' => 0,
-							'showIconType' => 1,
-							'linkToAnotherApp' => false,
-							'pageType' => 'list',
-							'table' => 4605 
-						) 
-					),
-					array(
-						'id' => '180',
-						'parent' => '67',
-						'children' => array( 
-							 
-						),
-						'data' => array(
-							'name' => array(
-								'text' => 'Sf Device Distribution',
-								'type' => 0 
-							),
-							'comments' => array(
-								'text' => '',
-								'type' => 0 
-							),
-							'style' => '',
-							'href' => '',
-							'params' => '',
-							'pageId' => '',
-							'itemType' => 2,
-							'linkType' => 0,
-							'openType' => 0,
-							'iconType' => 3,
-							'iconName' => 'fa-salesforce',
-							'iconStyle' => 2,
-							'showIconType' => 1,
-							'linkToAnotherApp' => false,
-							'table' => 21653,
-							'pageType' => 'list' 
-						) 
-					),
-					array(
 						'id' => '63',
 						'parent' => '67',
 						'children' => array( 
@@ -1580,6 +1547,37 @@ $runnerMenus['main'] = array(
 							'linkToAnotherApp' => false,
 							'pageType' => 'list',
 							'table' => 4687 
+						) 
+					),
+					array(
+						'id' => '5',
+						'parent' => '67',
+						'children' => array( 
+							 
+						),
+						'data' => array(
+							'name' => array(
+								'table' => 'public.device_distributions',
+								'type' => 6 
+							),
+							'comments' => array(
+								'text' => '',
+								'type' => 0 
+							),
+							'style' => '',
+							'href' => 'mypage.htm',
+							'params' => '',
+							'pageId' => '',
+							'itemType' => 2,
+							'linkType' => 0,
+							'openType' => 0,
+							'iconType' => 3,
+							'iconName' => 'fa-medkit',
+							'iconStyle' => 0,
+							'showIconType' => 1,
+							'linkToAnotherApp' => false,
+							'pageType' => 'list',
+							'table' => 4605 
 						) 
 					),
 					array(
@@ -1642,6 +1640,37 @@ $runnerMenus['main'] = array(
 							'linkToAnotherApp' => false,
 							'pageType' => 'list',
 							'table' => 4698 
+						) 
+					),
+					array(
+						'id' => '180',
+						'parent' => '67',
+						'children' => array( 
+							 
+						),
+						'data' => array(
+							'name' => array(
+								'text' => 'Sf Device Distribution',
+								'type' => 0 
+							),
+							'comments' => array(
+								'text' => '',
+								'type' => 0 
+							),
+							'style' => '',
+							'href' => '',
+							'params' => '',
+							'pageId' => '',
+							'itemType' => 2,
+							'linkType' => 0,
+							'openType' => 0,
+							'iconType' => 3,
+							'iconName' => 'fa-salesforce',
+							'iconStyle' => 2,
+							'showIconType' => 1,
+							'linkToAnotherApp' => false,
+							'table' => 21653,
+							'pageType' => 'list' 
 						) 
 					) 
 				),

@@ -53,7 +53,7 @@
 		) 
 	),
 	'pageLinks' => array(
-		'edit' => true,
+		'edit' => false,
 		'add' => false,
 		'view' => false,
 		'print' => false 
@@ -203,9 +203,6 @@
 			),
 			'hamburger' => array( 
 				'hamburger' 
-			),
-			'view_edit' => array( 
-				'view_edit' 
 			),
 			'integrated_edit_field' => array( 
 				'integrated_edit_field',
@@ -567,11 +564,8 @@
 		'hamburger' => array(
 			'type' => 'hamburger',
 			'items' => array( 
-				'view_edit' 
+				 
 			) 
-		),
-		'view_edit' => array(
-			'type' => 'view_edit' 
 		),
 		'integrated_edit_field' => array(
 			'field' => 'log_id',
