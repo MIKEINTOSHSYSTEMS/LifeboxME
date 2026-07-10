@@ -137,7 +137,7 @@ $runnerTableSettings[ GLOBAL_PAGES ] = array(
 		'session_expired' => 'session_expired',
 		'userinfo' => 'userinfo' 
 	),
-	'hasJsEvents' => false 
+	'hasJsEvents' => true 
 );
 
 global $runnerTableLabels;

@@ -6,7 +6,8 @@ class class_GlobalEvents extends GlobalEventsBase
 	'pageEvents' => array(
 		'BeforeRegister' => true,
 		'AfterAppInit' => true,
-		'BeforeLogin' => true 
+		'BeforeLogin' => true,
+		'OnPageLoad' => true 
 	),
 	'onScreenEvents' => array(
 		'4594' => true 
@@ -30,13 +31,48 @@ class class_GlobalEvents extends GlobalEventsBase
 	}
 
 		function BeforeRegister( &$userdata, &$sqlValues, &$message, $pageObject ) {
-		// Place event code here.
+		
+/**
+ * Event: BeforeRegister
+ * Context: Hardened domain validation + Core API Key assignment payload.
+ */
 
-$api_key = getPasswordHash ($userdata["id"].$userdata["username"]);
+$allowedDomains = ['lifebox.org', 'merqconsultancy.org', 'merqconsultancy.com'];
+$email = trim($userdata['email']); // Ensure 'email' matches the exact database/form field name
+
+// 1. Strict Domain Validation (Anti-Spoofing checks)
+if (empty($email) || strpos($email, '@') === false) {
+    $message = "Registration Denied: A valid organizational email is required.";
+    return false;
+}
+
+$emailParts = explode('@', $email);
+$domain = strtolower(trim(end($emailParts)));
+
+// 2. Block unauthorized insertions
+if (!in_array($domain, $allowedDomains)) {
+    $message = "Registration Denied: Accounts cannot be provisioned under the @{$domain} domain.";
+    return false;
+}
+
+// 3. Mandated Core API Key Generation (upon successful registration)
+$api_key = getPasswordHash($userdata["id"] . $userdata["username"]);
 $userdata["api_key"] = $api_key;
 $_SESSION["apikey"] = $api_key;
 
+// Proceed with database insertion
 return true;
+
+
+
+
+// Place event code here.
+
+//$api_key = getPasswordHash ($userdata["id"].$userdata["username"]);
+//$userdata["api_key"] = $api_key;
+//$_SESSION["apikey"] = $api_key;
+
+//return true;
 		;
 		return true;
 	}
@@ -44,8 +80,9 @@ return true;
 	function BeforeLogin( &$username, &$password, &$message, $pageObject, &$values ) {
 		
 /**
- * Event: BeforeLogin (V2 - Hardened)
+ * Event: BeforeLogin (V2.1 - Hardened & UI Enhanced)
  * Context: Validates user email domains with anti-spoofing constraints before core password validation.
+ * UI: Implements Bootstrap/HTML injection for the error message output.
  */
 
 // Update the allowed user email domains for login
@@ -65,8 +102,9 @@ $rs = DB::Query($sql);
 if ($rs && $data = $rs->fetchAssoc()) {
     $email = trim($data['email']);
     
+    // Email configuration check (Formatted Error)
     if (empty($email) || strpos($email, '@') === false) {
-        $message = "Access Denied: Invalid or missing email address configuration.";
+        $message = "<strong><i class='fa fa-exclamation-circle'></i> Access Denied:</strong> Invalid or missing email address configuration.";
         return false;
     }
 
@@ -79,8 +117,21 @@ if ($rs && $data = $rs->fetchAssoc()) {
     }
 }
 
-// 5. Unified Obfuscated Rejection (Prevents Username Enumeration)
-$message = "Access Denied: Invalid credentials or unauthorized organizational domain.";
+// 5. Unified Obfuscated Rejection (HTML/CSS Injected)
+// PHPRunner renders $message inside the DOM, allowing direct HTML/CSS formatting.
+$message = "
+    <div style='text-align: center; line-height: 1.4;'>
+        <strong style='font-size: 1.1em; display: block; margin-bottom: 6px;'>
+            <i class='fa fa-ban'></i> Access Denied
+        </strong>
+        Invalid credentials or unauthorized organizational domain.<br><br>
+        <span style='font-size: 1.05em;'>Only <b>Lifebox.org</b> and <b>Authorized</b> Users are Allowed to login!</span><br>
+        <span style='color: #f4eb60; font-size: 0.85em; font-weight: 700; margin-top: 10px; display: inline-block;'>
+            ⚠️ This incident will be reported. You have limited tries!
+        </span>
+    </div>
+";
+
 return false;
 
 
