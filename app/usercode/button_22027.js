@@ -8,6 +8,11 @@ Runner.buttonEvents['22027'] = function( pageObj, proxy, pageid ) {
 			var ajax = ctrl;
 			// Put your code here.
 
+/**
+ * Event: Client Before
+ * Context: Smooth State Tracking before delete on client.
+ */
+
 var keys = pageObj.getSelectedRecordKeys();
 if (keys.length === 0) {
     alert("System Notice: Please select at least one facility to delete.");

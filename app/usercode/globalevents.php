@@ -162,6 +162,11 @@ return false;
 
 		// Put your code here.
 
+/**
+ * Event: Server
+ * Context: The Cleaned Architecture.
+ */
+
 $selected_keys = $params["keys"];
 $action = $params["action"];
 $result["status"] = "error"; // Default fallback
