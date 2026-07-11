@@ -16,7 +16,8 @@ class class_GlobalEvents extends GlobalEventsBase
 		 
 	),
 	'buttons' => array(
-		'4596' => true 
+		'4596' => true,
+		'22027' => true 
 	),
 	'maps' => array(
 		 
@@ -146,6 +147,107 @@ return false;
 	}
 	
 	// custom buttons 
+		// custom button - CascadeDelete
+	function buttonHandler_22027( $_params )
+	{
+		$result = array();
+
+		$button = $this->prepareButtonContext( $_params );
+		$ajax = $button; 
+		$keys = $button->getKeys();
+
+		// .NET naming
+		$parameters = $_params;
+		$params = &$_params;
+
+		// Put your code here.
+
+$selected_keys = $params["keys"];
+$action = $params["action"];
+$result["status"] = "error"; // Default fallback
+
+$tables = [
+    'Calculation Jobs'      => 'lbpmi_calculation_jobs', 
+    'Calculation Logs'      => 'lbpmi_calculation_log', 
+    'Indicator Actuals'     => 'lbpmi_indicator_actuals', 
+    'Data Values'           => 'lbpmi_data_values', 
+    'Training Sessions'     => 'training_sessions', 
+    'Training Participants' => 'training_participants', 
+    'Device Distributions'  => 'device_distributions', 
+    'Venues'                => 'venues'
+];
+
+$facility_ids = [];
+foreach ($selected_keys as $key) {
+    $facility_ids[] = is_array($key) ? current($key) : $key;
+}
+
+// ==============================================================================
+// PASS 2: FORCED EXECUTION 
+// ==============================================================================
+if ($action === "force_delete") {
+    
+    foreach ($facility_ids as $facility_id) {
+        // Wipe dependencies
+        foreach ($tables as $tbl) {
+            DB::Exec(DB::PrepareSQL("DELETE FROM {$tbl} WHERE facility_id = :1", $facility_id));
+        }
+        // Wipe parent
+        DB::Exec(DB::PrepareSQL("DELETE FROM facilities WHERE facility_id = :1", $facility_id));
+    }
+    $result["status"] = "success";
+
+} 
+// ==============================================================================
+// PASS 1: IMPACT EVALUATION
+// ==============================================================================
+else {
+    $total_impact = [];
+    $total_count = 0;
+
+    foreach ($facility_ids as $fid) {
+        foreach ($tables as $label => $tbl) {
+            $rs = DB::Query(DB::PrepareSQL("SELECT count(*) as c FROM {$tbl} WHERE facility_id = :1", $fid));
+            if ($rs && $data = $rs->fetchAssoc()) {
+                if ($data['c'] > 0) {
+                    $total_impact[$label] = ($total_impact[$label] ?? 0) + $data['c'];
+                    $total_count += $data['c'];
+                }
+            }
+        }
+    }
+
+    if ($total_count > 0) {
+        $result["status"] = "warning";
+        
+        $msg = "WARNING: CASCADE DELETION REQUIRED\n";
+        $msg .= "========================================\n";
+        $msg .= "You have selected " . count($facility_ids) . " facility(s).\n";
+        $msg .= "This action will permanently destroy {$total_count} dependent records:\n\n";
+        
+        foreach ($total_impact as $label => $c) {
+            $msg .= "  • {$label}: {$c} record(s)\n";
+        }
+        
+        $msg .= "\nAre you absolutely sure you want to PERMANENTLY wipe these facilities and ALL related data above?";
+        
+        $result["message"] = $msg;
+    } else {
+        // No dependencies, safe to delete immediately
+        foreach ($facility_ids as $facility_id) {
+            DB::Exec(DB::PrepareSQL("DELETE FROM facilities WHERE facility_id = :1", $facility_id));
+        }
+        $result["status"] = "success";
+    }
+}
+
+//$result["txt"] = $params["txt"]." world!";;
+
+		RunnerContext::pop();
+		echo runner_json_encode( $result);
+		$button->deleteTempFiles();
+	}
+
 	
 	// ajax code snippets
 	
@@ -162,6 +264,7 @@ echo "Your API Key is: ".$_SESSION["apikey"];
 		;
 		
 	}
+
 
 
 }

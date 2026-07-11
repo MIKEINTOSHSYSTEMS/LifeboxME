@@ -3525,6 +3525,11 @@ $runnerProjectSettings = array(
 			'gid' => 4596,
 			'type' => 'EVENT_BUTTON',
 			'name' => 'process_calculation_jobs' 
+		),
+		array(
+			'gid' => 22027,
+			'type' => 'EVENT_BUTTON',
+			'name' => 'CascadeDelete' 
 		) 
 	),
 	'languages' => array( 
@@ -3549,7 +3554,7 @@ $runnerProjectSettings = array(
 		'table' => 'public.lifeboxme_settings' 
 	),
 	'wizardBuild' => '43785',
-	'projectBuild' => 'pcupli1E8VBL',
+	'projectBuild' => 'mH3zGmoigXl9',
 	'projectTheme' => 'flatly',
 	'projectSize' => 'normal',
 	'customErrorMsg' => array(

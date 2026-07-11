@@ -297,7 +297,8 @@
 					'page_size',
 					'print_panel',
 					'search_panel',
-					'filter_panel' 
+					'filter_panel',
+					'custom_button' 
 				),
 				'below-grid' => array( 
 					'pagination' 
@@ -393,6 +394,7 @@
 				'print_panel' => 'above-grid',
 				'search_panel' => 'above-grid',
 				'filter_panel' => 'above-grid',
+				'custom_button' => 'above-grid',
 				'pagination' => 'below-grid',
 				'logo' => 'left',
 				'expand_button' => 'left',
@@ -809,6 +811,9 @@
 			),
 			'notifications' => array( 
 				'notifications' 
+			),
+			'custom_button' => array( 
+				'custom_button' 
 			),
 			'grid_field' => array( 
 				'simple_grid_field',
@@ -1696,9 +1701,9 @@
 		),
 		'gridType' => 0,
 		'recsPerRow' => 1,
-		'hasCustomButtons' => false,
+		'hasCustomButtons' => true,
 		'customButtons' => array( 
-			 
+			22027 
 		),
 		'codeSnippets' => array( 
 			 
@@ -1728,7 +1733,7 @@
 			 
 		),
 		'buttons' => array( 
-			 
+			22027 
 		) 
 	),
 	'dataGrid' => array(
@@ -1763,6 +1768,17 @@
 						),
 						array(
 							'cell' => 'c2' 
+						) 
+					),
+					'section' => '' 
+				),
+				array(
+					'cells' => array( 
+						array(
+							'cell' => 'c3' 
+						),
+						array(
+							'cell' => 'c5' 
 						) 
 					),
 					'section' => '' 
@@ -1807,6 +1823,18 @@
 					'model' => 'c1',
 					'items' => array( 
 						'filter_panel' 
+					) 
+				),
+				'c3' => array(
+					'model' => 'c3',
+					'items' => array( 
+						'custom_button' 
+					) 
+				),
+				'c5' => array(
+					'model' => 'c4',
+					'items' => array( 
+						 
 					) 
 				) 
 			),
@@ -2635,7 +2663,10 @@
 			'type' => '-' 
 		),
 		'delete' => array(
-			'type' => 'delete' 
+			'type' => 'delete',
+			'icon' => array(
+				 
+			) 
 		),
 		'delete_selected' => array(
 			'type' => 'delete_selected' 
@@ -2739,6 +2770,17 @@
 		),
 		'notifications' => array(
 			'type' => 'notifications' 
+		),
+		'custom_button' => array(
+			'type' => 'custom_button',
+			'eventGid' => 22027,
+			'label' => array(
+				'text' => 'CascadeDelete',
+				'type' => 0 
+			),
+			'icon' => array(
+				'style' => 0 
+			) 
 		),
 		'simple_grid_field' => array(
 			'field' => 'facility_id',

@@ -969,6 +969,7 @@ FROM
 		'orderBySql' => '',
 		'tailSql' => '' 
 	),
+	'hasJsEvents' => true,
 	'originalTable' => 'public.facilities',
 	'originalPagesByType' => array(
 		'add' => array( 
